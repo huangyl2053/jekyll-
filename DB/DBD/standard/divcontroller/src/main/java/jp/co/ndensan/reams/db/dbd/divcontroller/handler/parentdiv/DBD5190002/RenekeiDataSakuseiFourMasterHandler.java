@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.kaigoninteihokaiseikanri.HokaiseiShikoYMDToKoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002_YokaigoNinteiKanrenDataSakuseiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190002.RenekeiDataSakuseiFourMasterDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5190001.RenkeiDataSakuseiShinseiJohoManager;
@@ -90,8 +90,8 @@ public class RenekeiDataSakuseiFourMasterHandler {
      *
      * @return バッチパラメータ
      */
-    public DBD519002Parameter createParameter() {
-        DBD519002Parameter paramter = new DBD519002Parameter();
+    public DBD519002_YokaigoNinteiKanrenDataSakuseiParameter createParameter() {
+        DBD519002_YokaigoNinteiKanrenDataSakuseiParameter paramter = new DBD519002_YokaigoNinteiKanrenDataSakuseiParameter();
         paramter.setKonkaishoriymdtime_from(div.getTxtkonkaishoriymdtime().getFromValue());
         paramter.setKonkaishoriymdtime_to(div.getTxtkonkaishoriymdtime().getToValue());
         paramter.setShikibetsucode(get法改正施行年月日と厚労省IF識別コード().get厚労省IF識別コード());

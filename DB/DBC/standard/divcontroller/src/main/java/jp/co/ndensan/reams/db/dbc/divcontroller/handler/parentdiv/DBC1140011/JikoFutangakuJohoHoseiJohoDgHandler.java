@@ -69,7 +69,6 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
     private static final RString KEY_ZERO = new RString("key0");
-    private static final RString 入力前の状態に戻る = new RString("btnReturn");
 
     /**
      * コンストラクタです。

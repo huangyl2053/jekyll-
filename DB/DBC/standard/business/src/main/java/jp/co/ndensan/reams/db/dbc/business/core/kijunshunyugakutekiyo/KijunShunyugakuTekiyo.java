@@ -798,10 +798,8 @@ public class KijunShunyugakuTekiyo {
         市町村コード(new RString("0016"), new RString(""), new RString("\"shichosonCode\"")),
         /**
          * 証記載保険者番号
-         *
-         * TODO QA1684 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"shoKisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"hihokenshaNo\"")),
         /**
          * 被保険者番号
          */
@@ -812,10 +810,8 @@ public class KijunShunyugakuTekiyo {
         要介護度(new RString("0403"), new RString(""), new RString("\"yokaigoJotaiKubunCode\"")),
         /**
          * 認定開始日
-         *
-         * TODO QA1684 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiKaishiYMD\""));
+        認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiYukoKikanKaishiYMD\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

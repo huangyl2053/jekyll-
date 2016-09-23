@@ -116,11 +116,11 @@ public class IchiranServicecodeRiyojokyoProcess
     @BatchWriter
     private BatchReportWriter<ServiceCodeBetsuRiyoJokyoSource> batchReportWriter;
     private ReportSourceWriter<ServiceCodeBetsuRiyoJokyoSource> reportSourceWriter;
-    private BatchDbReader reader;
+    private int count;
 
     @Override
     protected void initialize() {
-        super.initialize();
+        count = INT_0;
         parameter.set出力順(帳票出力順);
         //    QA#1533
 //        nissuKaisuSyukeichi_01 = Decimal.ZERO;
@@ -161,6 +161,7 @@ public class IchiranServicecodeRiyojokyoProcess
 
     @Override
     protected void usualProcess(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
+        count = count + INT_1;
         beforeEntity = getBefore();
         if (beforeEntity != null) {
             beforeサービス種類スコード = beforeEntity.getServiceRyakushou();
@@ -182,8 +183,11 @@ public class IchiranServicecodeRiyojokyoProcess
 
     @Override
     protected void afterExecute() {
-        ServicecodeRiyojokyoReport reportEntity = new ServicecodeRiyojokyoReport();
-        非集計(reportEntity, currentEntity, true);
+        if (count != INT_0) {
+            ServicecodeRiyojokyoReport reportEntity = new ServicecodeRiyojokyoReport();
+            非集計(reportEntity, currentEntity, true);
+        }
+
     }
 
     @Override

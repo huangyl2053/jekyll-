@@ -41,7 +41,6 @@ public class PostMainPanel {
     private static final RString STRING_1 = new RString("1");
     private static final RString STRING_2 = new RString("2");
     private static final RDate DATE = RDate.getNowDate();
-    private static RString 場合;
 
     /**
      * 画面初期化のメソッドます。
@@ -60,7 +59,7 @@ public class PostMainPanel {
             div.setTitle(後期資格異動情報取込);
             stateName = DBC0510011StateName.後期;
         }
-        場合 = getHandler(div).initialize();
+        RString 場合 = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.場合, 場合);
         return ResponseData.of(div).setState(stateName);
     }
@@ -84,7 +83,8 @@ public class PostMainPanel {
      */
     public ResponseData<PostMainPanelDiv> onBeforeOpenCheck(PostMainPanelDiv div) {
 
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate(場合);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate(ViewStateHolder.get(
+                ViewStateKeys.場合, RString.class));
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

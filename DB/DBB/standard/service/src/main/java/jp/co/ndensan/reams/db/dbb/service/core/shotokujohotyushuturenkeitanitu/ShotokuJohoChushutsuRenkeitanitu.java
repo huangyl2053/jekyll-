@@ -33,8 +33,6 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 遷移区分_1 = new RString("1");
     private static final RString 不可 = new RString("2");
     private static final RString 可 = new RString("1");
-    private static final RString 共有ファイル名 = new RString("BBKAIGO");
-    private static final RString 共有ファイルID = new RString("C:\\Users\\LDNS\\shared\\sharedFiles");
     private static final RString 当初_単一 = new RString("3");
     private static final RString 異動_単一 = new RString("4");
     private static final RString 枝番 = new RString("0001");

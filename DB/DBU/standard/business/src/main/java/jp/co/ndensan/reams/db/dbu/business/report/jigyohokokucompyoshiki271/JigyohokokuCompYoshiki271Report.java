@@ -61,6 +61,8 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
         }
         for (List<DbT7021JigyoHokokuTokeiDataEntity> key : data_map.values()) {
             for (JigyohokokuCompYoshiki271Change change : getData(key)) {
+                change.set保険者番号(key.get(0).getShichosonCode().value());
+                change.set保険者名(key.get(0).getShukeiKomokuMeisho());
                 IJigyohokokuCompYoshiki271Editor bodyeditor = new JigyohokokuCompYoshiki271BodyEditor(change);
                 IJigyohokokuCompYoshiki271Builder builder = new JigyohokokuCompYoshiki271Builder(bodyeditor);
                 writer.writeLine(builder);

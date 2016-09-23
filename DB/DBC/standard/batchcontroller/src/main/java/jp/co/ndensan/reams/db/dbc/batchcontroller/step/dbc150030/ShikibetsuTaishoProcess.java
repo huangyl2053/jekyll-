@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150030;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaichukanTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470shoriKekkaListTempEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -69,11 +71,16 @@ public class ShikibetsuTaishoProcess
         if (INT_0 == count) {
             DbWT3470shoriKekkaListTempEntity エラー結果 = new DbWT3470shoriKekkaListTempEntity();
             エラー結果.setErrorKubun(NUM);
+            エラー結果.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
+            エラー結果.setHihokenshaNo(HihokenshaNo.EMPTY);
             エラー結果.setKey1(parameter.get年月範囲開始());
             エラー結果.setKey2(parameter.get年月範囲終了());
             エラー結果.setKey3(parameter.get対象サービス種類());
             エラー結果.setKey4(parameter.get選択対象());
             エラー結果.setKey5(parameter.get市町村コード());
+            エラー結果.setHihokenshaKanaShimei(RString.EMPTY);
+            エラー結果.setHihokenshaShimei(RString.EMPTY);
+            エラー結果.setBiko(RString.EMPTY);
             処理結果リスト一時tableWriter.insert(エラー結果);
         }
     }

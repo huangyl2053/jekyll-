@@ -76,6 +76,7 @@ public class KogakuGassanShikyuShinseiToroku {
     private static final RString 広域市町村モード = new RString("広域市町村モード");
     private static final int INT_6 = 6;
     private static final int INT_2 = 2;
+    private static final RString RSTRING_1 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -256,18 +257,20 @@ public class KogakuGassanShikyuShinseiToroku {
                     entity.setTaishoNendo(画面項目.get対象年度());
                     entity.setSeiriNo(整理番号New);
                     RString 加入履歴番号 = getMaxKanyuRirekiNo(entity);
-                    entity.setKanyurekiNo(new RString(Integer.parseInt(加入履歴番号.toString()) + 1).padZeroToLeft(INT_2));
+                    entity.setKanyurekiNo(加入履歴番号 == null ? RSTRING_1.padZeroToLeft(INT_2)
+                            : new RString(Integer.parseInt(加入履歴番号.toString()) + 1).padZeroToLeft(INT_2));
                     entity.setState(EntityDataState.Added);
                     高額合算申請書加入歴Dac.save(entity);
                 } else if (修正.equals(item.get状態())) {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity entity = item.get高額合算申請書加入歴().toEntity();
                     高額合算申請書加入歴Dac.save(item.get高額合算申請書加入歴().deleted().toEntity());
-                    RString 加入履歴番号 = getMaxKanyuRirekiNo(entity);
                     entity.setHihokenshaNo(高額合算申請書保持.get被保険者番号());
                     entity.setTaishoNendo(高額合算申請書保持.get対象年度());
                     entity.setHokenshaNo(高額合算申請書保持.get保険者番号());
                     entity.setRirekiNo(高額合算申請書保持.get履歴番号().intValue());
-                    entity.setKanyurekiNo(new RString(Integer.parseInt(加入履歴番号.toString()) + 1).padZeroToLeft(INT_2));
+                    RString 加入履歴番号 = getMaxKanyuRirekiNo(entity);
+                    entity.setKanyurekiNo(加入履歴番号 == null ? RSTRING_1.padZeroToLeft(INT_2)
+                            : new RString(Integer.parseInt(加入履歴番号.toString()) + 1).padZeroToLeft(INT_2));
                     entity.setState(EntityDataState.Added);
                     高額合算申請書加入歴Dac.save(entity);
                 } else if (削除.equals(item.get状態())) {
@@ -375,11 +378,12 @@ public class KogakuGassanShikyuShinseiToroku {
     }
 
     private RString getMaxKanyuRirekiNo(DbT3069KogakuGassanShinseishoKanyurekiEntity entity) {
-        return 高額合算申請書加入歴Dac.selectMaxKanyuRirekiNo(
+        DbT3069KogakuGassanShinseishoKanyurekiEntity result = 高額合算申請書加入歴Dac.selectMaxKanyuRirekiNo(
                 entity.getHihokenshaNo(),
                 entity.getTaishoNendo(),
                 entity.getHokenshaNo(),
                 entity.getSeiriNo(),
-                entity.getRirekiNo()).getKanyurekiNo();
+                entity.getRirekiNo());
+        return result == null ? null : result.getKanyurekiNo();
     }
 }

@@ -15,13 +15,16 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyojyoho.DbWT1211
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0001HihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shikakushogohyojyoho.ShikakuShogohyoJyohoReadCsvFileService;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2890-013 wangxue
  */
-public class ShikakuShogohyoJyohoReadCsvFileProcess extends BatchProcessBase<RString> {
+public class ShikakuShogohyoJyohoReadCsvFileProcess extends BatchProcessBase<List<RString>> {
 
     private static final RString 帳票レコード種別_H1 = new RString("H1");
     private static final RString 帳票レコード種別_D1 = new RString("D1");
@@ -82,7 +85,8 @@ public class ShikakuShogohyoJyohoReadCsvFileProcess extends BatchProcessBase<RSt
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.get保存先フォルダ());
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(parameter.get保存先フォルダ())
+                .setDelimiter(カンマ).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -97,8 +101,7 @@ public class ShikakuShogohyoJyohoReadCsvFileProcess extends BatchProcessBase<RSt
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(カンマ.toString());
+    protected void process(List<RString> data) {
         if (!レコード種別_3.equals(data.get(INDEX_0))) {
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);

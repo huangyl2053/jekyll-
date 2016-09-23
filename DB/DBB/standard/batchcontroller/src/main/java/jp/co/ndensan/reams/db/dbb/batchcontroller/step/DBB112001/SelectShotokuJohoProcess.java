@@ -18,7 +18,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,6 +43,7 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
     private static final RString 異動_単一_4 = new RString("4");
 
     private RString csvReaderPath;
+    private RString path;
     private ShutokuJohoShuchutsuRenkeiProcessParameter parameter;
     private ToushoShotokuJohoChushutsuRenkeiCSVEntity csvEntity;
 
@@ -47,8 +52,10 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void initialize() {
-        csvReaderPath = new SharedFileEntryDescriptor(
-                FilesystemName.fromString(parameter.get共有ファイル名()), parameter.get共有ファイルID()).getDirectAccessPath();
+        path = Path.getTmpDirectoryPath();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(parameter.get共有ファイル名()),
+                parameter.get共有ファイルID()), new FilesystemPath(path));
+        csvReaderPath = Path.combinePath(path, parameter.get共有ファイル名());
     }
 
     @Override
@@ -79,7 +86,11 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
             DbTShotokuJohoTempTableEntity tempEntity = get所得情報entity(csvEntity);
             所得情報一時tableWriter.insert(tempEntity);
         }
+    }
 
+    @Override
+    protected void afterExecute() {
+        SharedFile.deleteEntry(new SharedFileEntryDescriptor(new FilesystemName(parameter.get共有ファイル名()), parameter.get共有ファイルID()));
     }
 
     private boolean 市町村コードチェック(RString 市町村コードcsv, LasdecCode 市町村コードentity) {

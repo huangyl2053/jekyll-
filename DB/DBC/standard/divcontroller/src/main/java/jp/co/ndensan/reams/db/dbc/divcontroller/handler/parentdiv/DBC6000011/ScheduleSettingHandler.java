@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -191,6 +192,7 @@ public class ScheduleSettingHandler {
                         .set抽出開始日時(new YMDHMS(RString.EMPTY))
                         .set抽出終了日時(new YMDHMS(RString.EMPTY))
                         .set再処理可能区分(再処理前.equals(画面_処理状況))
+                        .set処理実行回数(Decimal.ZERO)
                         .setファイル名称１(RString.EMPTY)
                         .setファイル名称２(RString.EMPTY)
                         .setファイル名称３(RString.EMPTY)
@@ -341,7 +343,7 @@ public class ScheduleSettingHandler {
                 sofuRow.setTxtSofuShoriMei(送付交換情報識別番号.get名称());
                 sofuRow.getTxtSofuShoriJokyo().setDataSource(初期状態dataSource);
                 sofuRow.getTxtSofuShoriJokyo().setSelectedValue(ShoriJotaiKubun.toValue(entity.get処理状態区分()).get名称());
-                sofuRow.getTxtSofuShoribi().setValue(送付処理実施日時 == null ? null : 送付処理実施日時.getDate());
+                sofuRow.getTxtSofuShoribi().setValue(送付処理実施日時 == null || 送付処理実施日時.isEmpty() ? null : 送付処理実施日時.getDate());
                 sofuRow.setTxtSofuChushutsuKaishiNitiji(
                         entity.get抽出開始日時() == null || entity.get抽出開始日時().isEmpty()
                         ? RString.EMPTY : entity.get抽出開始日時().getDate().getYearMonth().toDateString());
@@ -488,7 +490,7 @@ public class ScheduleSettingHandler {
                 toriRow.getTxtTorikomiShoriJokyo().setDataSource(初期状態dataSource);
                 toriRow.getTxtTorikomiShoriJokyo().setSelectedValue(
                         ShoriJotaiKubun.toValue(entity.get処理状態区分()).get名称());
-                toriRow.getTxtTorikomiShoribi().setValue(取込処理実施日時 == null ? null : 取込処理実施日時.getDate());
+                toriRow.getTxtTorikomiShoribi().setValue(取込処理実施日時 == null || 取込処理実施日時.isEmpty() ? null : 取込処理実施日時.getDate());
                 toriRow.setTxtKokanJohoSikibetsuBango(取込交換情報識別番号.getコード());
                 tList.add(toriRow);
             }

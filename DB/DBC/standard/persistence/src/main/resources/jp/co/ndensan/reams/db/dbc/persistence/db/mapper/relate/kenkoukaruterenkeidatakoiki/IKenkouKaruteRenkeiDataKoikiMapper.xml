@@ -98,7 +98,7 @@
         temp."ninteiYukoKikanShuryoYMD"
         FROM "KenkoKaruteRenkeiKoikiTempTable" temp
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" dbT7051
-        ON temp."shichosonCode" = dbT7051."shichosonMeisho"
+        ON temp."shichosonCode" = dbT7051."shichosonCode"
         AND dbT7051."gappeiKyuShichosonKubun" = '0'
         ORDER BY
         temp."shichosonCode"

@@ -28,8 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class HokenshaSofuListPanel {
 
     private FlexibleYearMonth 処理年月;
-    private final int 定数_0 = 0;
-    private final int 定数_3 = 3;
+    private static final int 定数_0 = 0;
+    private static final int 定数_3 = 3;
 
     /**
      * 初期化のンメソッドます。
@@ -91,12 +91,6 @@ public class HokenshaSofuListPanel {
         return ResponseData.of(div).forwardWithEventName(DBC0200011TransitionEventName.スケジュール設定へ).respond();
     }
 
-    /**
-     * 保険者情報送付データ作成のHandlerクラスを取得のンメソッドます。
-     *
-     * @param div HokenshaSofuListPanelHandler
-     * @return HokenshaSofuListPanelHandler
-     */
     private HokenshaSofuListPanelHandler getHandler(HokenshaSofuListPanelDiv div) {
         return new HokenshaSofuListPanelHandler(div);
     }

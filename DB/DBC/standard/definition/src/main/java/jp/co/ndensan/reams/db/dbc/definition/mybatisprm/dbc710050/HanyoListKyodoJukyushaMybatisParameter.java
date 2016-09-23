@@ -42,8 +42,6 @@ public class HanyoListKyodoJukyushaMybatisParameter extends UaFt200FindShikibets
      * @param 処理対象年月FROM 処理対象年月FROM
      * @param 処理対象年月TO 処理対象年月TO
      * @param 日付抽出区分 日付抽出区分
-     * @param 範囲指定 範囲指定
-     * @param 直近のみ 直近のみ
      * @param 異動年月From 異動年月From
      * @param 異動年月To 異動年月To
      * @param 各異動月の最新のみ 各異動月の最新のみ
@@ -52,7 +50,7 @@ public class HanyoListKyodoJukyushaMybatisParameter extends UaFt200FindShikibets
      * @param 異動区分S List<RString>
      */
     public HanyoListKyodoJukyushaMybatisParameter(FlexibleYearMonth 処理対象年月FROM, FlexibleYearMonth 処理対象年月TO,
-            RString 日付抽出区分, RString 範囲指定, RString 直近のみ, FlexibleYearMonth 異動年月From,
+            RString 日付抽出区分, FlexibleYearMonth 異動年月From,
             FlexibleYearMonth 異動年月To, boolean 削除含める, boolean 各異動月の最新のみ,
             IShikibetsuTaishoPSMSearchKey searchKey, List<RString> 異動区分S) {
         super(searchKey);

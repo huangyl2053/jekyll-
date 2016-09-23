@@ -123,7 +123,9 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
     protected void process(SaishinsaMoshitateRelateEntity entity) {
         flag = true;
         eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity(entity, 連番++, processParameter, 市町村名MasterMap, association));
-        personalDataList.add(toPersonalData(entity));
+        if (!RString.isNullOrEmpty(nullToEmpty(entity.get被保険者番号()))) {
+            personalDataList.add(toPersonalData(entity));
+        }
     }
 
     @Override
@@ -132,8 +134,10 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
             eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity());
         }
         eucCsvWriter.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(eucFilePath, log);
+        if (!personalDataList.isEmpty()) {
+            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(eucFilePath, log);
+        }
         outputJokenhyoFactory();
     }
 
