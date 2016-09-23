@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
+public class DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
 
