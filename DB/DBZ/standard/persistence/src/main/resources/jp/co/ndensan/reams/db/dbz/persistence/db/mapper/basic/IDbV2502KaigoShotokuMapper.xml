@@ -9,7 +9,7 @@
     <sql id="allColumns_DbV2502">
         "DbV2502"."shotokuNendo" as "DbV2502_shotokuNendo",
         "DbV2502"."shikibetsuCode" as "DbV2502_shikibetsuCode",
-        "DbV2502"."rirekino" as "DbV2502_rirekino",
+        "DbV2502"."rirekiNo" as "DbV2502_rirekino",
         "DbV2502"."kazeiKubun" as "DbV2502_kazeiKubun",
         "DbV2502"."kazeiKubunGemmenGo" as "DbV2502_kazeiKubunGemmenGo",
         "DbV2502"."gokeiShotokuGaku" as "DbV2502_gokeiShotokuGaku",
@@ -27,7 +27,7 @@
     <resultMap id="ResultMap_DbV2502KaigoShotokuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity" autoMapping="true">
         <result property="shotokuNendo" column="DbV2502_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="shikibetsuCode" column="DbV2502_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="rirekino" column="DbV2502_rirekino" typeHandler="org.apache.ibatis.type.LongTypeHandler"/>
+        <result property="rirekiNo" column="DbV2502_rirekino" typeHandler="org.apache.ibatis.type.LongTypeHandler"/>
         <result property="kazeiKubun" column="DbV2502_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kazeiKubunGemmenGo" column="DbV2502_kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gokeiShotokuGaku" column="DbV2502_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

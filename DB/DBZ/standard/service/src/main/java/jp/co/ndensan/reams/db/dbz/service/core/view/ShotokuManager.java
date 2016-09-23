@@ -79,6 +79,31 @@ public class ShotokuManager {
         entity.initializeMd5();
         return new KaigoShotokuAlive(entity);
     }
+    
+    /**
+     * 主キーに合致する賦課Aliveを全件返します。
+     *
+     * @param 識別コード 識別コード
+     * @param 所得年度 所得年度
+     * @param 所得基準年月日 所得基準年月日
+     * @return KaigoShotokuAlive
+     */
+    @Transaction
+    public List<KaigoShotokuAlive> get介護所得AliveAll(ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+        if (所得基準年月日 == null) {
+            所得基準年月日 = YMDHMS.now();
+        }
+        List<DbV2502KaigoShotokuEntity> result = dac.selectAllByshoriTimeStamp(識別コード, 所得年度, 所得基準年月日);
+        
+        List<KaigoShotokuAlive> businessList = new ArrayList<>();
+        for (DbV2502KaigoShotokuEntity entity : result) {
+            entity.initializeMd5();
+            businessList.add(new KaigoShotokuAlive(entity));
+        }
+        return businessList;
+    }
 
     /**
      * 主キーに合致する賦課Aliveを返します。

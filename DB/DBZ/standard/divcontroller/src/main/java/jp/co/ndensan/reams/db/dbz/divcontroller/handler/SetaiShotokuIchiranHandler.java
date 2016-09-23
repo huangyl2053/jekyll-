@@ -482,15 +482,10 @@ public class SetaiShotokuIchiranHandler {
      */
     public List<KaigoShotokuAlive> get所得情報履歴(ShikibetsuCode 識別コード) {
         ShotokuManager 介護所得Finder = ShotokuManager.createInstance();
-        KaigoShotokuAlive shotokuAlive = 介護所得Finder.get介護所得Alive(識別コード,
-                new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
-                        .getYear().toDateString()));
-
-        return shotokuAlive == null
-               ? Collections.<KaigoShotokuAlive>emptyList()
-               : ItemList.of(shotokuAlive).sorted(ShotokuRirekiIchiranComparators.orderBy履歴番号.desc()).toList();
+        return 介護所得Finder.get介護所得AliveAll(識別コード, new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
+                        .getYear().toDateString()), YMDHMS.now());
     }
-
+    
     /**
      * {@link SetaiinShotoku}情報を取得し{@link SetaiShotokuIchiranDiv}にセットします。
      *
@@ -591,15 +586,16 @@ public class SetaiShotokuIchiranHandler {
         RString selectedIndex = new RString("key0");
         FlexibleYear 日付関連_所得年度
                 = new FlexibleYear(DbBusinessConfig.get(ConfigKeysHizuke.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-        for (FlexibleYear 年度 = 日付関連_所得年度; 基準年度.isBefore(年度); 年度 = 年度.minusYear(1)) {
+      
+        for (FlexibleYear 年度 = 日付関連_所得年度; 基準年度.isBefore(年度); 年度=年度.minusYear(1)) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(new RString("key" + index));
             keyValue.setValue(new RString(年度.wareki().getYear().toString()));
-            index++;
             kazeiNendoList.add(keyValue);
             if (年度.equals(所得年度)) {
                 selectedIndex = new RString("key" + index);
             }
+            index++;
         }
         div.getDdlSetaiIchiranKazeiNendo().setDataSource(kazeiNendoList);
         div.getDdlSetaiIchiranKazeiNendo().setSelectedKey(selectedIndex);
