@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710210.DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7210001.ZigyoubunkougakugassanshikyuuketteJouhouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7210001.HanyoListBachParamHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -94,7 +95,9 @@ public class ZigyoubunkougakugassanshikyuuketteJouhou {
         }
         div.getChkCsvHenshuHoho().setSelectedItems(dataSource);
         RString 保険者コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"));
-        if (!RString.isNullOrEmpty(保険者コード)) {
+        if (保険者コード.equals(new RString("000000"))) {
+            div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
+        } else {
             div.getCcdHokenshaList().setSelectedShichosonIfExist(new LasdecCode(保険者コード));
         }
         List<Object> 支給区分List = restoreBatchParameterMap.getParameterValue(List.class, new RString("支給区分List"));
