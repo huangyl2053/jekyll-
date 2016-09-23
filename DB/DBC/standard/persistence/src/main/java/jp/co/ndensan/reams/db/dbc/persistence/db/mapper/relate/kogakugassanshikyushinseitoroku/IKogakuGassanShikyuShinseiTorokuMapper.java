@@ -52,4 +52,12 @@ public interface IKogakuGassanShikyuShinseiTorokuMapper {
      * @return List<DbT3069KogakuGassanShinseishoKanyurekiEntity>
      */
     List<DbT3069KogakuGassanShinseishoKanyurekiEntity> select高額合算申請書加入歴(Map<String, Object> parameter);
+
+    /**
+     * Max加入歴番号を取得します。
+     *
+     * @param parameter Map
+     * @return DbT3069KogakuGassanShinseishoKanyurekiEntity
+     */
+    DbT3069KogakuGassanShinseishoKanyurekiEntity selectMax加入履歴番号(Map<String, Object> parameter);
 }

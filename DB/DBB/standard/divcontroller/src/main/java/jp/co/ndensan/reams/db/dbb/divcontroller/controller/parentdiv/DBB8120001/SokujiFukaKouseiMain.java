@@ -310,7 +310,6 @@ public class SokujiFukaKouseiMain {
     public ResponseData<SokujiFukaKouseiMainDiv> onChange_ddlKoseigoTsuchishoNo(SokujiFukaKouseiMainDiv div) {
         KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
         List<KoseiZengoFuka> 更正前後賦課のリスト = ViewStateHolder.get(ViewStateKeys.更正前後賦課のリスト, List.class);
-        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         boolean is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
@@ -417,7 +416,6 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnYokunendoHyoji(SokujiFukaKouseiMainDiv div) {
-        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
         boolean isChange = set画面入力項目を反映(div, 更正後);
@@ -957,11 +955,9 @@ public class SokujiFukaKouseiMain {
         }
         Decimal 期別金額 = textBoxNum.getValue() == null ? Decimal.ZERO : textBoxNum.getValue();
         List<Kibetsu> 介護期別List = new ArrayList<>(賦課の情報.getKibetsuList());
-        Boolean is介護期別ない = Boolean.TRUE;
         for (Kibetsu 介護期別 : 介護期別List) {
             if (徴収方法期別.equals(介護期別.get徴収方法())
                     && 期 == 介護期別.get期()) {
-                is介護期別ない = Boolean.FALSE;
                 ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
                 ChoteiKyotsuBuilder choteiKyotsuBuilder = 介護期別.getChoteiKyotsu(identifier).createBuilderForEdit();
                 boolean isChange = Boolean.FALSE;
@@ -984,7 +980,7 @@ public class SokujiFukaKouseiMain {
                 return is差異がある;
             }
         }
-        if (is介護期別ない && Decimal.ZERO.compareTo(textBoxNum.getValue()) < 0) {
+        if (Decimal.ZERO.compareTo(textBoxNum.getValue()) < 0) {
             ChoteiKyotsu 調定共通 = new ChoteiKyotsu(0L).createBuilderForEdit().
                     set収納ID(0L).
                     set会計年度(new RYear(賦課の情報.get賦課年度().getYearValue())).

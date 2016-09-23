@@ -52,11 +52,24 @@ public class ServiceTypeInputCommonChildDiv {
         KaigoServiceShuruiMapperParameter param = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
                 new ServiceShuruiCode(div.getTxtServiceType().getValue()),
                 new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
-        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceModel(), ServiceTypeModel.class);
-        model.setサービス種類コード(div.getTxtServiceType().getValue());
-        div.setHdnServiceModel(DataPassingConverter.serialize(model));
         SearchResult<KaigoServiceShurui> focusServiceTypeList = service.getFocusServiceTypeList(param);
         getHandler(div).setServiceTypeName(focusServiceTypeList.records());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * サービス種類コードのボタンを押します。
+     *
+     * @param div ServiceTypeInputCommonChildDivDiv
+     * @return ResponseData<ServiceTypeInputCommonChildDivDiv>
+     */
+    public ResponseData<ServiceTypeInputCommonChildDivDiv> onBeforeDialg(ServiceTypeInputCommonChildDivDiv div) {
+        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceModel(), ServiceTypeModel.class);
+        if (model == null) {
+            model = new ServiceTypeModel();
+        }
+        model.setサービス種類コード(div.getTxtServiceType().getValue());
+        div.setHdnServiceModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
 
