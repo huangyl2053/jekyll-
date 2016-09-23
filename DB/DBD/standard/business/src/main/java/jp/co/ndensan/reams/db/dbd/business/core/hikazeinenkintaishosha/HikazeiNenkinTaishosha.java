@@ -297,7 +297,7 @@ public class HikazeiNenkinTaishosha {
         }
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set年度(get年度(entity.get年度()));
-        //TODO 処理区分  Enum存在しない
+        //TODO 処理区分  Enum存在しない QA1722
         eucEntity.set対象月(entity.get対象月());
         eucEntity.set基礎年金番号(entity.get基礎年金番号());
         eucEntity.set現基礎年金番号(entity.get現基礎年金番号());
@@ -489,7 +489,7 @@ public class HikazeiNenkinTaishosha {
         }
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set年度(get年度(entity.get年度()));
-        //TODO 処理区分  Enum存在しない
+        //TODO 処理区分  Enum存在しない QA1722
         eucEntity.set対象月(entity.get対象月());
         eucEntity.set基礎年金番号(entity.get基礎年金番号());
         eucEntity.set現基礎年金番号(entity.get現基礎年金番号());
@@ -619,7 +619,8 @@ public class HikazeiNenkinTaishosha {
         RStringBuilder jokenBuilder = new RStringBuilder();
         jokenBuilder.append(抽出対象者);
         出力条件List.add(jokenBuilder.toRString());
-        if (!LasdecCode.EMPTY.equals(processParameter.get宛名抽出条件().getShichoson_Code())
+        if (processParameter.get宛名抽出条件().getShichoson_Code() != null
+                && !processParameter.get宛名抽出条件().getShichoson_Code().isEmpty()
                 && !市町村コード.equals(processParameter.get宛名抽出条件().getShichoson_Code())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(保険者);
