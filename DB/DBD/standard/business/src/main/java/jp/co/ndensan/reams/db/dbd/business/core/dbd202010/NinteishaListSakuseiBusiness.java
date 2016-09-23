@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 訪問介護利用者負担額減額認定者リス発行ビジネスクラスです。
@@ -124,7 +125,8 @@ public class NinteishaListSakuseiBusiness {
         }
 
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
-            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
+            Decimal 給付率Value = t.get訪問介護利用者負担額減額().getKyufuritsu().value();
+            eucCsvEntity.set給付率(new RString(給付率Value.toString()));
         }
     }
 

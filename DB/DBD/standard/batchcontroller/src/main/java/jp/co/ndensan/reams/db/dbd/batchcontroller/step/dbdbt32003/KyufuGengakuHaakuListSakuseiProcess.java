@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 給付額減額滞納者把握情報の取得_Process処理クラスです．
  *
- * @reamsid_L DBD-3610-050 x_lilh
+ * @reamsid_L DBD-3610-050 x_miaocl
  */
 public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuGengakuHaakuListSakuseiEntity> {
 

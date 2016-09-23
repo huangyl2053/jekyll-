@@ -75,6 +75,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
     private static final RString 帳票作成日時 = new RString("【作成日時】 ");
     private static final RString TRUE = new RString("true");
     private static final RString FALSE = new RString("false");
+    private static final int TWL = 12;
     private Map<RString, Decimal> 調定額年度Map;
     private Map<RString, Decimal> 収入額Map;
     private Map<RString, Decimal> 未納額Map;
@@ -177,7 +178,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
         給付額減額期間 = Decimal.ZERO;
         給付額減額期間 = 徴収権消滅期間の合計.multiply(徴収権消滅期間の合計
                 .divide(徴収権消滅期間の合計.add(納付済み期間の合計)))
-                .multiply(1).divide(2).multiply(12);
+                .multiply(1).divide(2).multiply(TWL);
 
         /**
          * HokenshaNo.EMPTY, RString.EMPTY:QA TODO
@@ -192,7 +193,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
         バッチ出力条件リストの出力();
     }
 
-    public KyufuGengakuHaakuIchiranEntity 帳票印字用データを取得(KyufuGakuGengakuTainoShaEntity entity) {
+    private KyufuGengakuHaakuIchiranEntity 帳票印字用データを取得(KyufuGakuGengakuTainoShaEntity entity) {
         KyufuGengakuHaakuIchiranEntity t = new KyufuGengakuHaakuIchiranEntity();
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
         t.get被保険者情報Entity().set被保険者番号(entity.get対象者情報一時Entity().getHihokenshaNo().getColumnValue());
@@ -275,20 +276,20 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
         出力条件.add(基準日.concat(processParameter.get基準日().toString()));
         出力条件.add(対象区分.concat(processParameter.get対象区分().get名称()));
         if (TaishoKubun.全登録者以外.getコード().equals(processParameter.get対象区分().getコード())) {
-            if (processParameter.is通知書未発行者抽出() == true) {
+            if (processParameter.is通知書未発行者抽出()) {
                 出力条件.add(通知書未発行者);
             }
-            if (processParameter.is減額適用中者抽出() == true) {
+            if (processParameter.is減額適用中者抽出()) {
                 出力条件.add(減額適用中者.concat(processParameter.get減額適用中者抽出基準日().toString())
                         .concat(時点で減額適用中の被保険者));
             }
-            if (processParameter.is減額終了日抽出() == true) {
+            if (processParameter.is減額終了日抽出()) {
                 出力条件.add(減額終了日抽出.concat(processParameter.get減額終了日範囲From().toString())
                         .concat(終了)
                         .concat(processParameter.get減額終了日範囲To().toString()));
             }
         }
-        if (processParameter.is保険料完納者出力() == true) {
+        if (processParameter.is保険料完納者出力()) {
             出力条件.add(保険料完納者出力.concat(TRUE));
         } else {
             出力条件.add(保険料完納者出力.concat(FALSE));
