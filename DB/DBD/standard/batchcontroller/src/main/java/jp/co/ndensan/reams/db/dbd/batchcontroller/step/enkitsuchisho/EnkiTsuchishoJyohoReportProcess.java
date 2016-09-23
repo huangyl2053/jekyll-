@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.enkitsuchisho.EnkiTsuchi
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.enkitsuchisho.YokaigoNinteiEnkiTshuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd522001.YokaigoNinteiEnkiTshuchishoReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -161,8 +160,8 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
             出力条件.add(new RString(parameter.get処理見込み日From().toString()));
         }
         if (parameter.get申請書管理番号リスト() != null) {
-            for (ShinseishoKanriNo 申請書管理番号 : parameter.get申請書管理番号リスト()) {
-                出力条件.add(申請書管理番号.getColumnValue());
+            for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {
+                出力条件.add(申請書管理番号);
             }
         }
         return 出力条件;
