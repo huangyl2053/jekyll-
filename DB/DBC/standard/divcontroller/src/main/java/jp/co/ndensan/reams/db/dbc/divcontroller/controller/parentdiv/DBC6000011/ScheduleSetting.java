@@ -131,6 +131,7 @@ public class ScheduleSetting {
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     送付新規Flag = true;
                     List<dgDataSofu_Row> sList = getHandler(div).スケジュール履歴情報処理_送付(new ArrayList<KokuhorenInterfaceKanri>());
+                    sList = getHandler(div).set送付処理状況(sList, 送付List);
                     div.getDgDataSofu().setDataSource(sList);
                 }
             } else {
@@ -163,6 +164,7 @@ public class ScheduleSetting {
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     取込新規Flag = true;
                     List<dgDataTorikomi_Row> tList = getHandler(div).スケジュール履歴情報処理_取込(new ArrayList<KokuhorenInterfaceKanri>());
+                    tList = getHandler(div).set取込処理状況(tList, 取込List);
                     div.getDgDataTorikomi().setDataSource(tList);
                 }
             } else {
