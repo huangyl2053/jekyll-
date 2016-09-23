@@ -66,7 +66,7 @@ public class HihokenshaTaihoTemp extends DbTableEntityBase<HihokenshaTaihoTemp> 
     @TempTableColumnOrder(19)
     private FlexibleDate jushochitokureiTekiyoYMD;
     @TempTableColumnOrder(20)
-    private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
+    private FlexibleDate tokureiTekiyoTodokedeYMD;
     @TempTableColumnOrder(21)
     private RString jushochitokureiKaijoJiyuCode;
     @TempTableColumnOrder(22)
@@ -78,7 +78,7 @@ public class HihokenshaTaihoTemp extends DbTableEntityBase<HihokenshaTaihoTemp> 
     @TempTableColumnOrder(25)
     private RString koikinaiJushochiTokureiFlag;
     @TempTableColumnOrder(26)
-    private LasdecCode koikinaiTokureiSochimotoShichosonCode;
+    private LasdecCode tokureiSochimotoShichosonCode;
     @TempTableColumnOrder(27)
     private LasdecCode kyuShichosonCode;
     @TempTableColumnOrder(28)

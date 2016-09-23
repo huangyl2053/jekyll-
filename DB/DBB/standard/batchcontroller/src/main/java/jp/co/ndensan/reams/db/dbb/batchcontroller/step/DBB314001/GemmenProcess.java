@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb314001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB314001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenfukajoho.FukaJohoTempResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoSakuseiKubun;
