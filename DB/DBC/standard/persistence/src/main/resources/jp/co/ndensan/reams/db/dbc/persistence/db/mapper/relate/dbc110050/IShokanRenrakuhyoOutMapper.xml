@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2570-030 wangxue -->
+
+<!-- <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper">
+    <select resultOrdered="true" id="get償還払支給申請データ" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500">
+        SELECT
+            dbt3034.*
+        FROM rgdb."DbT3034ShokanShinsei" AS dbt3034
+        WHERE
+        <if test="再処理区分 != 1">
+            (dbt3034."sofuYM" IS NULL OR dbt3034."sofuYM" = ''
+            OR dbt3034."kokuhorenSaisofuFlag" = true)
+            AND (((dbt3034."kaishuShinseiKubun" IS NULL OR dbt3034."kaishuShinseiKubun" = '')
+            AND dbt3034."shinseiYMD" IS NOT NULL 
+            AND dbt3034."shinseiYMD" <![CDATA[<>]]> '')
+            OR dbt3034."kaishuShinseiKubun" = '2')
+            AND dbt3034."serviceTeikyoYM" <![CDATA[<]]> #{処理年月}
+        </if>
+        <if test="再処理区分 == 1">
+            (dbt3034."sofuYM" IS NULL OR dbt3034."sofuYM" = ''
+            OR dbt3034."kokuhorenSaisofuFlag" = true
+            OR dbt3034."sofuYM" = #{処理年月})
+            AND (((dbt3034."kaishuShinseiKubun" IS NULL OR dbt3034."kaishuShinseiKubun" = '')
+            AND dbt3034."shinseiYMD" IS NOT NULL 
+            AND dbt3034."shinseiYMD" <![CDATA[<>]]> '')
+            OR dbt3034."kaishuShinseiKubun" = '2')
+            AND dbt3034."serviceTeikyoYM" <![CDATA[<]]> #{処理年月}
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get被保険者がないのデータ"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity">
+        SELECT 
+            申請.*
+        FROM "DbWT2111ShokanShinsei" AS 申請
+        WHERE NOT EXISTS(
+                SELECT 'X'
+                FROM rgdb."DbT1001HihokenshaDaicho" AS 被保険者
+                WHERE 被保険者."logicalDeletedFlag" = false
+                AND 被保険者."hihokenshaNo" = 申請."hiHokenshaNo"
+                AND 被保険者."shikakuShutokuYMD" <![CDATA[<=]]> CONCAT(申請."serviceTeikyoYM",'01')
+                AND (被保険者."shikakuSoshitsuYMD" IS NULL OR 被保険者."shikakuSoshitsuYMD" = ''
+                OR CONCAT(申請."serviceTeikyoYM",'01') <![CDATA[<]]> 被保険者."shikakuSoshitsuYMD"
+                )
+        )
+    </select>
+</mapper> -->
