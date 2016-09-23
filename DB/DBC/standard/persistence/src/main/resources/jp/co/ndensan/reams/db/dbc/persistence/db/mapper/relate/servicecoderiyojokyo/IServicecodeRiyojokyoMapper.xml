@@ -600,6 +600,16 @@
         <result property="サービス項目コード" column="T2_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
     </resultMap>
     
+    <resultMap id="resultMap_chohyouShutsuryokuyouEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity" autoMapping="true">
+        <result property="renban" column="renban"/>
+        <result property="serviceShuruiCode" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortYouKomokuCode" column="sortYouKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoKaigoJotaiKubunCode" column="yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nissuKaisuSyukeichi" column="nissuKaisuSyukeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="taniSuSyukeichi" column="taniSuSyukeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="serviceRyakushou" column="serviceRyakushou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
     <resultMap id="resultMap_HihokenshaShikibetsuTaishoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.HihokenshaShikibetsuTaishoEntity" autoMapping="true">
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
         <id column="dbT1001HihokenshaDaicho_idoYMD"/>
@@ -649,7 +659,7 @@
     
     <resultMap id="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.ChohyouShutsuryokuyouTempEntity" autoMapping="true">
         <result property="サービス名称" column="DbT7119ServiceCode_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="帳票出力" resultMap="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity"/>
+        <association property="帳票出力" resultMap="resultMap_chohyouShutsuryokuyouEntity"/>
     </resultMap>
     
 </mapper>
