@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -76,6 +77,13 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
             source.listLower_4 = doカンマ編集(対象者.get利用者負担額合計());
             source.listLower_5 = doカンマ編集(対象者.get支払済金額合計());
         }
+        if (!RString.isNullOrEmpty(被保険者一時.get識別コード())) {
+            source.shikibetuCode = new ShikibetsuCode(被保険者一時.get識別コード());
+        }
+        source.yubinNo = getNotNull(被保険者一時.get郵便番号());
+        source.choikiCode = getNotNull(被保険者一時.get町域コード());
+        source.gyoseikuCode = getNotNull(被保険者一時.get行政区コード());
+        source.shimei50onKana = getNotNull(被保険者一時.get氏名50音カナ());
         return source;
     }
 
@@ -106,6 +114,13 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private RString getNotNull(RString str) {
+        if (RString.isNullOrEmpty(str)) {
+            return RString.EMPTY;
+        }
+        return str;
     }
 
 }
