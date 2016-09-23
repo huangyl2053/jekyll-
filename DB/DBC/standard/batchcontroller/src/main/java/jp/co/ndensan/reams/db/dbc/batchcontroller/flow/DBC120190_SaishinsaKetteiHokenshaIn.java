@@ -70,7 +70,7 @@ public class DBC120190_SaishinsaKetteiHokenshaIn extends BatchFlowBase<DBC120190
             executeStep(CSVファイル取込);
             flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                     SaishinsaKetteiReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-            if (flowEntity.get明細データ登録件数() == 0) {
+            if (flowEntity.get明細データ登録件数() == 0 && 0 == flowEntity.get集計データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
