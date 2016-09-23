@@ -45,10 +45,10 @@ public class tplShinseijohoDiv extends TabPanel {
     private CheckBoxList chkJohoTeikyoDoi;
     @JsonProperty("ccdKaigoNinteiShinseiKihon")
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
-    @JsonProperty("ccdNinteiInput")
-    private NinteiInputDiv ccdNinteiInput;
     @JsonProperty("ccdShinseiTodokedesha")
     private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
+    @JsonProperty("ccdNinteiInput")
+    private NinteiInputDiv ccdNinteiInput;
     @JsonProperty("ccdShinseiSonotaJohoInput")
     private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
@@ -142,21 +142,21 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdNinteiInput
-     * @return ccdNinteiInput
-     */
-    @JsonProperty("ccdNinteiInput")
-    public INinteiInputDiv getCcdNinteiInput() {
-        return ccdNinteiInput;
-    }
-
-    /*
      * getccdShinseiTodokedesha
      * @return ccdShinseiTodokedesha
      */
     @JsonProperty("ccdShinseiTodokedesha")
     public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
         return ccdShinseiTodokedesha;
+    }
+
+    /*
+     * getccdNinteiInput
+     * @return ccdNinteiInput
+     */
+    @JsonProperty("ccdNinteiInput")
+    public INinteiInputDiv getCcdNinteiInput() {
+        return ccdNinteiInput;
     }
 
     /*

@@ -46,19 +46,7 @@ public class JyukyushaDaicho {
      */
     public ResponseData<JyukyushaDaichoDiv> radChushutsuJyouken_onChange(JyukyushaDaichoDiv div) {
         creatJyukyushaDaichoHandler(div).radChushutsuJyouken_onChange();
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (対象期間.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
-            getValidationHandler().validateFor今回抽出対象終了日付が開始日付以前チェック(pairs, div);
-            getValidationHandler().validateFor出力順未指定チェック(pairs, div);
-        } else if (対象者.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
-            getValidationHandler().validateFor被保険者番号非空チェック(pairs, div);
-            getValidationHandler().validateFor出力順未指定チェック(pairs, div);
-            getValidationHandler().validateFor被保険者番号ToがFrom以前チェック(pairs, div);
-        }
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        return ResponseData.of(div).setState(DBD5710001StateName.初期表示);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -71,7 +59,12 @@ public class JyukyushaDaicho {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         if (対象期間.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
             getValidationHandler().validateFor今回抽出対象期間今回の日付が非空(pairs, div);
+            getValidationHandler().validateFor今回抽出対象終了日付が開始日付以前チェック(pairs, div);
+        } else {
+            getValidationHandler().validateFor被保険者番号非空チェック(pairs, div);
+            getValidationHandler().validateFor被保険者番号ToがFrom以前チェック(pairs, div);
         }
+        getValidationHandler().validateFor出力順未指定チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

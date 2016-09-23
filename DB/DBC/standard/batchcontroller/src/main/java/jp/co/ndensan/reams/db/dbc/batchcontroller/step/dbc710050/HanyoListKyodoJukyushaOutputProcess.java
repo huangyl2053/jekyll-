@@ -78,6 +78,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     private static final RString 変更_白 = new RString("□変更");
     private static final RString 終了_黒 = new RString("■終了");
     private static final RString 終了_白 = new RString("□終了");
+    private static final RString 空白 = new RString("   ");
     private static final RString TILDE = new RString("～");
     private static final LasdecCode 全市町村_CODE = new LasdecCode("000000");
     private static final RString 全市町村 = new RString("00000 全市町村");
@@ -230,15 +231,15 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
         RString 新規;
         if (parameter.get異動区分S() != null && !parameter.get異動区分S().isEmpty()) {
             if (parameter.get異動区分S().contains(INDEX_1)) {
-                新規 = 新規_黒.concat("   ");
+                新規 = 新規_黒.concat(空白);
             } else {
-                新規 = 新規_白.concat("   ");
+                新規 = 新規_白.concat(空白);
             }
             RString 変更;
             if (parameter.get異動区分S().contains(INDEX_2)) {
-                変更 = 変更_黒.concat("   ");
+                変更 = 変更_黒.concat(空白);
             } else {
-                変更 = 変更_白.concat("   ");
+                変更 = 変更_白.concat(空白);
             }
             RString 終了;
             if (parameter.get異動区分S().contains(INDEX_3)) {

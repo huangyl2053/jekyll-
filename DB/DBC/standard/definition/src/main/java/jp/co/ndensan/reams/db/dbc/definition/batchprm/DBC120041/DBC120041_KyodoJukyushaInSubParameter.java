@@ -28,7 +28,7 @@ public class DBC120041_KyodoJukyushaInSubParameter extends BatchParameterBase {
 
     @BatchParameter(key = HOZONSAKIFOLDER, name = "保存先フォルダ")
     private RString 保存先フォルダ;
-    @BatchParameter(key = ENTRYJYOHOU_LIST, name = "保存先フォルダ")
+    @BatchParameter(key = ENTRYJYOHOU_LIST, name = "エントリ情報List")
     private List<RString> エントリ情報List;
 
     /**

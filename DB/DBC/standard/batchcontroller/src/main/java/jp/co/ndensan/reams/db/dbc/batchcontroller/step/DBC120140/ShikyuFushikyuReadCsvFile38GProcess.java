@@ -16,12 +16,15 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38G1Kette
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38G1KetteishaIchiranTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -32,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2690-010 zhangrui
  */
-public class ShikyuFushikyuReadCsvFile38GProcess extends BatchProcessBase<RString> {
+public class ShikyuFushikyuReadCsvFile38GProcess extends BatchProcessBase<List<RString>> {
 
     /**
      * returnEntity
@@ -86,7 +89,8 @@ public class ShikyuFushikyuReadCsvFile38GProcess extends BatchProcessBase<RStrin
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.get保存先パース());
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(parameter.get保存先パース())
+                .setDelimiter(区切り文字).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -102,8 +106,7 @@ public class ShikyuFushikyuReadCsvFile38GProcess extends BatchProcessBase<RStrin
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(区切り文字.toString());
+    protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
             if (レコード種別_エンド.equals(data.get(INDEX_0))) {
                 return;
