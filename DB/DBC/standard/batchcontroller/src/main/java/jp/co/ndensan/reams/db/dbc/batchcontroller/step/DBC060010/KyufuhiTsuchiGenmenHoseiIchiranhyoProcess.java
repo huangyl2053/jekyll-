@@ -176,10 +176,6 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
     }
 
     private boolean is広域の全市町村() {
-        if (広域の全市町村_KEY.equals(市町村コードList.get(0))) {
-            return true;
-        } else {
-            return false;
-        }
+        return 広域の全市町村_KEY.equals(市町村コードList.get(0));
     }
 }

@@ -306,7 +306,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                     .concat(edit日期(parameter.get対象年度の終了年月日())));
             出力条件.add(課税判定等基準日.concat(edit日期(parameter.get課税判定等基準日())));
         } else if (TaishoKikan.基準日.getコード().equals(parameter.get対象期間指定().getコード())) {
-            出力条件.add(基準日.concat(parameter.get基準日().toString()));
+            出力条件.add(基準日.concat(edit日期(parameter.get基準日())));
         }
         出力条件.add(所得年度.concat(edit年度(parameter.get所得年度())));
         出力条件.add(旧措置者区分.concat(parameter.get旧措置者区分().get名称()));
@@ -366,7 +366,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             出力条件.add(対象年度.concat(edit日期(parameter.get対象年度の開始年月日()))
                     .concat(EUC_WRITER_LIAN)
                     .concat(edit日期(parameter.get対象年度の終了年月日())));
-            出力条件.add(課税判定等基準日.concat(parameter.get課税判定等基準日().toString()));
+            出力条件.add(課税判定等基準日.concat(edit日期(parameter.get課税判定等基準日())));
         } else if (TaishoKikan.基準日.getコード().equals(parameter.get対象期間指定().getコード())) {
             出力条件.add(基準日.concat(edit日期(parameter.get基準日())));
         }
