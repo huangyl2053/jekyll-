@@ -120,7 +120,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
     private int 様式連番 = 0;
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter ShoriKekkaKakuninListTempTable;
+    private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
     private BatchReportWriter<FurikomiMeisaiIchiranDetailReportSource> batchReportWriter_明細一覧表;
     private ReportSourceWriter<FurikomiMeisaiIchiranDetailReportSource> reportSourceWriter_明細一覧表;
     private BatchReportWriter<FurikomiMeisaiIchiranGokeiReportSource> batchReportWriter_合計一覧表;
@@ -225,7 +225,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @Override
     protected void createWriter() {
-        ShoriKekkaKakuninListTempTable
+        shoriKekkaKakuninListTempTable
                 = new BatchEntityCreatedTempTableWriter(処理結果確認リスト一時TBL, ShoriKekkaKakuninListTempTableEntity.class);
         batchReportWriter_明細一覧表 = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200101_明細.getReportId().value(), SubGyomuCode.DBC介護給付).create();
@@ -298,9 +298,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
     @Override
     protected void afterExecute() {
         if (parameter.get処理区分().getコード().equals(処理区分3)) {
-            ShoriKekkaKakuninListTempTableEntity ShoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();
-            ShoriKekkaKakuninList.setBiko(処理区分3);
-            ShoriKekkaKakuninListTempTable.insert(ShoriKekkaKakuninList);
+            ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();
+            shoriKekkaKakuninList.setBiko(処理区分3);
+            shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
         }
         for (int i = 0; i < NUM11; i++) {
             振込明細一覧表合計.get(NUM11).setその他件数(振込明細一覧表合計.get(i).getその他件数().add(振込明細一覧表合計.get(NUM11).getその他件数()));
