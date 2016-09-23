@@ -37,49 +37,59 @@ public class NinteishaListSakuseiBusiness {
      * @param eucCsvEntity CSV出力情報
      * @param t SQL取得情報
      * @param 連番 連番
+     * @param is日付スラッシュ編集 is日付スラッシュ編集
+     * @param has世帯員以外情報 has世帯員以外情報
+     * @param has世帯員情報 has世帯員情報
+     * @param 世帯員情報Index 世帯員情報Index
      */
-    public void setEucCsvEntity(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集) {
-        eucCsvEntity.set連番(new RString(連番));
-        IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
-        SetaiInRisutoEntity setaEntity = new SetaiInRisutoEntity();
-        eucCsvEntity.set被保険者番号(t.get被保険者番号().getColumnValue());
-        eucCsvEntity.set識別コード(kojin.get識別コード().value());
-        eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().value());
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShoKisaiHokenshaNo() != null) {
-            eucCsvEntity.set証保険者番号(t.get訪問介護利用者負担額減額().getShoKisaiHokenshaNo().value());
+    public void setEucCsvEntity(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集,
+            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index) {
+        if (has世帯員以外情報) {
+            eucCsvEntity.set連番(new RString(連番));
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
+            eucCsvEntity.set被保険者番号(t.get被保険者番号().getColumnValue());
+            eucCsvEntity.set識別コード(kojin.get識別コード().value());
+            eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().value());
+            if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShoKisaiHokenshaNo() != null) {
+                eucCsvEntity.set証保険者番号(t.get訪問介護利用者負担額減額().getShoKisaiHokenshaNo().value());
+            }
+
+            eucCsvEntity.set氏名(kojin.get名称().getName().value());
+            eucCsvEntity.setカナ氏名(kojin.get名称().getKana().value());
+            eucCsvEntity.set年齢(kojin.get年齢算出().get年齢());
+            eucCsvEntity.set住民種別(kojin.get住民状態().住民状態略称());
+            eucCsvEntity.set郵便番号(kojin.get住所().get郵便番号().value());
+            eucCsvEntity.set住所(kojin.get住所().get住所());
+            eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
+            eucCsvEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
+            edit出力情報_訪問介護利用者負担額減額(eucCsvEntity, t, is日付スラッシュ編集);
+            edit出力情報_受給者について(eucCsvEntity, t);
+            if (t.get認定情報Entity() != null
+                    && t.get認定情報Entity().get認定情報_要介護状態区分コード() != null
+                    && t.get要介護認定申請情報_厚労省IF識別コード() != null) {
+                eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get認定情報Entity().get認定情報_要介護状態区分コード()),
+                        t.get要介護認定申請情報_厚労省IF識別コード()).getName());
+            }
+            eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
+            eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日(), is日付スラッシュ編集));
+            eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日(), is日付スラッシュ編集));
         }
 
-        eucCsvEntity.set氏名(kojin.get名称().getName().value());
-        eucCsvEntity.setカナ氏名(kojin.get名称().getKana().value());
-        eucCsvEntity.set年齢(kojin.get年齢算出().get年齢());
-        eucCsvEntity.set住民種別(kojin.get住民状態().住民状態略称());
-        eucCsvEntity.set郵便番号(kojin.get住所().get郵便番号().value());
-        eucCsvEntity.set住所(kojin.get住所().get住所());
-        eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
-        eucCsvEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-        edit出力情報_訪問介護利用者負担額減額(eucCsvEntity, t, is日付スラッシュ編集);
-        edit出力情報_受給者について(eucCsvEntity, t);
-        if (t.get認定情報Entity() != null
-                && t.get認定情報Entity().get認定情報_要介護状態区分コード() != null
-                && t.get要介護認定申請情報_厚労省IF識別コード() != null) {
-            eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get認定情報Entity().get認定情報_要介護状態区分コード()),
-                    t.get要介護認定申請情報_厚労省IF識別コード()).getName());
-        }
-        eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
-        eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日(), is日付スラッシュ編集));
-        eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日(), is日付スラッシュ編集));
-
-        eucCsvEntity.set世帯員氏名(kojin.get名称().getName().value());
-        eucCsvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
-        if (setaEntity.get課税区分() != null && !setaEntity.get課税区分().isEmpty() && setaEntity.get課税区分().equals(new RString("1"))) {
-            eucCsvEntity.set世帯員課税区分(KE);
-        } else {
-            eucCsvEntity.set世帯員課税区分(SPACE);
-        }
-        if (setaEntity.get課税所得額() != null && setaEntity.get課税所得額().intValue() > 0) {
-            eucCsvEntity.set世帯員所得税課税区分(KE);
-        } else {
-            eucCsvEntity.set世帯員所得税課税区分(SPACE);
+        if (has世帯員情報) {
+            SetaiInRisutoEntity setaEntity = t.get世帯員リスト().get(世帯員情報Index);
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員リスト().get(世帯員情報Index).get世帯員宛名());
+            eucCsvEntity.set世帯員氏名(kojin.get名称().getName().value());
+            eucCsvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+            if (setaEntity.get課税区分() != null && !setaEntity.get課税区分().isEmpty() && setaEntity.get課税区分().equals(new RString("1"))) {
+                eucCsvEntity.set世帯員課税区分(KE);
+            } else {
+                eucCsvEntity.set世帯員課税区分(SPACE);
+            }
+            if (setaEntity.get課税所得額() != null && setaEntity.get課税所得額().intValue() > 0) {
+                eucCsvEntity.set世帯員所得税課税区分(KE);
+            } else {
+                eucCsvEntity.set世帯員所得税課税区分(SPACE);
+            }
         }
     }
 
