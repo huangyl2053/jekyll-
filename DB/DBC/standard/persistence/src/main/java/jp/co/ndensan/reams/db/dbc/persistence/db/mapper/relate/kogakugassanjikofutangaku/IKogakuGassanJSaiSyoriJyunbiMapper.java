@@ -40,7 +40,7 @@ public interface IKogakuGassanJSaiSyoriJyunbiMapper {
     List<DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity> select連番();
 
     /**
-     * 高額合算自己負担額のselect連番です。
+     * 高額合算自己負担額のget帳票出力対象データです。
      *
      * @return List<KogakuGassanJikofutangakuShomeishoDateEntity>
      */

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc010030.JuryoIninJigyoshaIchiranProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC010030.JuryoIninJigyoshaIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010030.DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.juryoininjigyoshaichiran.JuryoIninJigyoshaIchiranGetIdProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

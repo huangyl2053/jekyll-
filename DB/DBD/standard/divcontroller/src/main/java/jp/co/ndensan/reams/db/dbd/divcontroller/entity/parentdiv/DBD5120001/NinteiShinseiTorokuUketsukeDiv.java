@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
@@ -35,6 +37,8 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("btnIryohokenGuide")
     private ButtonDialog btnIryohokenGuide;
     @JsonProperty("btnRenrakusaki")
@@ -111,6 +115,15 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
  /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
+    }
+
+    /*
      * getbtnIryohokenGuide
      * @return btnIryohokenGuide
      */
@@ -773,13 +786,13 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
+    public INinteiInputDiv getCcdNinteiInput() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
     }
 
     @JsonIgnore
-    public INinteiInputDiv getCcdNinteiInput() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
     }
 
     @JsonIgnore

@@ -17,19 +17,19 @@ public enum KaigoGassan_ErrorListType {
     /**
      * コード:0000 名称:リストタイプ0 略称:定義なし
      */
-    リストタイプ0("0000", null, null, null, null, null),
+    リストタイプ0("0000", null, null, null, null, null, "被保険者情報取得エラー"),
     /**
      * コード:0010 名称:リストタイプ1 略称:定義なし
      */
-    リストタイプ1("0010", "被保険者番号", null, null, null, null),
+    リストタイプ1("0010", "被保険者番号", null, null, null, null, "宛名取得エラー"),
     /**
      * コード:0020 名称:リストタイプ2 略称:定義なし
      */
-    リストタイプ2("0020", "被保険者番号", null, null, null, null),
+    リストタイプ2("0020", "被保険者番号", "対象年度", null, null, null, "高額支給額集計エラー"),
     /**
      * コード:0030 名称:リストタイプ3 略称:定義なし
      */
-    リストタイプ3("0030", "被保険者番号", null, null, null, null);
+    リストタイプ3("0030", "被保険者番号", null, null, null, null, "資格期間エラー");
 
     private final RString code;
     private final RString キー1;
@@ -37,14 +37,17 @@ public enum KaigoGassan_ErrorListType {
     private final RString キー3;
     private final RString キー4;
     private final RString キー5;
+    private final RString 表示名称;
 
-    private KaigoGassan_ErrorListType(String code, String キー1, String キー2, String キー3, String キー4, String キー5) {
+    private KaigoGassan_ErrorListType(
+            String code, String キー1, String キー2, String キー3, String キー4, String キー5, String 表示名称) {
         this.code = new RString(code);
         this.キー1 = getNotNull(キー1);
         this.キー2 = getNotNull(キー2);
         this.キー3 = getNotNull(キー3);
         this.キー4 = getNotNull(キー4);
         this.キー5 = getNotNull(キー5);
+        this.表示名称 = getNotNull(表示名称);
     }
 
     private RString getNotNull(String キー) {
@@ -103,6 +106,15 @@ public enum KaigoGassan_ErrorListType {
      */
     public RString getキー5() {
         return キー5;
+    }
+
+    /**
+     * 表示名称を返します。
+     *
+     * @return 表示名称
+     */
+    public RString get表示名称() {
+        return 表示名称;
     }
 
 }

@@ -35,10 +35,14 @@ public class NinteishaListSakuseiManager {
      * @param t SQL取得情報
      * @param 連番 連番
      * @param is日付スラッシュ編集 is日付スラッシュ編集
+     * @param has世帯員以外情報 has世帯員以外情報
+     * @param has世帯員情報 has世帯員情報
+     * @param 世帯員情報Index 世帯員情報Index
      */
-    public void 連番ありCSV情報設定(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集) {
+    public void 連番ありCSV情報設定(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集,
+            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index) {
         NinteishaListSakuseiBusiness bus = new NinteishaListSakuseiBusiness();
-        bus.setEucCsvEntity(eucCsvEntity, t, 連番, is日付スラッシュ編集);
+        bus.setEucCsvEntity(eucCsvEntity, t, 連番, is日付スラッシュ編集, has世帯員以外情報, has世帯員情報, 世帯員情報Index);
     }
 
     /**
@@ -47,9 +51,13 @@ public class NinteishaListSakuseiManager {
      * @param eucCsvEntity 出力CSV情報
      * @param t SQL取得情報
      * @param is日付スラッシュ編集 is日付スラッシュ編集
+     * @param has世帯員以外情報 has世帯員以外情報
+     * @param has世帯員情報 has世帯員情報
+     * @param 世帯員情報Index 世帯員情報Index
      */
-    public void 連番なしCSV情報設定(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {
+    public void 連番なしCSV情報設定(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集,
+            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index) {
         NinteishaListSakuseiNoRenbaBusiness bus = new NinteishaListSakuseiNoRenbaBusiness();
-        bus.setEucCsvEntity(eucCsvEntity, t, is日付スラッシュ編集);
+        bus.setEucCsvEntity(eucCsvEntity, t, is日付スラッシュ編集, has世帯員以外情報, has世帯員情報, 世帯員情報Index);
     }
 }

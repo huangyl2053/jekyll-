@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120150.KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120150.KogakuGassanKyufuJissekiInDoMasterTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120150.KogakuGassanKyufuJissekiInDoMasterTorokuSaiShoriProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120150.KogakuGassanKyufuJissekiInDoMasterTorokuUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120150.KogakuGassanKyufuJissekiInGetFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120150.KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120150.KogakuGassanKyufuJissekiInDoMasterTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120150.KogakuGassanKyufuJissekiInDoMasterTorokuSaiShoriProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120150.KogakuGassanKyufuJissekiInDoMasterTorokuUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120150.KogakuGassanKyufuJissekiInGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;

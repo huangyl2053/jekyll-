@@ -69,8 +69,7 @@ public class KaigoHihokenshaInfoPanelManger {
         if (宛名PSMlist == null || 宛名PSMlist.isEmpty()) {
             return null;
         } else {
-            IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(0));
-            return 宛名情報;
+            return ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(0));
         }
     }
 }

@@ -6,92 +6,92 @@
     <select resultOrdered="true" id="get認定調査員情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ChosainEntity" fetchSize="500">
         SELECT
-        "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" as "DbT5913ChosainJoho_ninteiChosaItakusakiCode",
-        "DbT5913ChosainJoho"."ninteiChosainCode" as "DbT5913ChosainJoho_ninteiChosainCode",
-        "DbT5913ChosainJoho"."chosainShimei" as "DbT5913ChosainJoho_chosainShimei_chosainShimei",
-        "DbT5913ChosainJoho"."chosainKanaShimei" as "DbT5913ChosainJoho_chosainKanaShimei",
-        "DbT5913ChosainJoho"."chosainShikaku" as "DbT5913ChosainJoho_chosainShikaku",
-        "DbT5913ChosainJoho"."jokyoFlag" as "DbT5913ChosainJoho_jokyoFlag"
+        "DbT4913ChosainJoho"."ninteiChosaItakusakiCode" as "DbT4913ChosainJoho_ninteiChosaItakusakiCode",
+        "DbT4913ChosainJoho"."ninteiChosainCode" as "DbT4913ChosainJoho_ninteiChosainCode",
+        "DbT4913ChosainJoho"."chosainShimei" as "DbT4913ChosainJoho_chosainShimei_chosainShimei",
+        "DbT4913ChosainJoho"."chosainKanaShimei" as "DbT4913ChosainJoho_chosainKanaShimei",
+        "DbT4913ChosainJoho"."chosainShikaku" as "DbT4913ChosainJoho_chosainShikaku",
+        "DbT4913ChosainJoho"."jokyoFlag" as "DbT4913ChosainJoho_jokyoFlag"
         FROM
-        rgdb."DbT5913ChosainJoho"
+        rgdb."DbT4913ChosainJoho"
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" 
-            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT5913ChosainJoho"."shichosonCode"
+            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT4913ChosainJoho"."shichosonCode"
         WHERE
-            "DbT5913ChosainJoho"."jokyoFlag"=true 
+            "DbT4913ChosainJoho"."jokyoFlag"=true 
         <if test="今回処理日時開始日時の年月日時分秒!=null">
-            AND "DbT5913ChosainJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
+            AND "DbT4913ChosainJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
         </if> 
         <if test="今回処理日時終了日時の年月日時分秒!=null">
-            AND "DbT5913ChosainJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
+            AND "DbT4913ChosainJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
         </if>    
     </select>
     <select resultOrdered="true" id="get調査委託先情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ChosaitakusakiEntity" fetchSize="500">
         SElECT
-        "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" as "DbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
-        "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeisho" as "DbT5910NinteichosaItakusakiJoho_jigyoshaMeisho",
-        "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeishoKana" as "DbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana",
-        "DbT5910NinteichosaItakusakiJoho"."yubinNo" as "DbT5910NinteichosaItakusakiJoho_yubinNo",
-        "DbT5910NinteichosaItakusakiJoho"."jusho" as "DbT5910NinteichosaItakusakiJoho_jusho",
-        "DbT5910NinteichosaItakusakiJoho"."telNo" as "DbT5910NinteichosaItakusakiJoho_telNo",
-        "DbT5910NinteichosaItakusakiJoho"."chosaItakuKubun" as "DbT5910NinteichosaItakusakiJoho_chosaItakuKubun",
-        "DbT5910NinteichosaItakusakiJoho"."jokyoFlag" as "DbT5910NinteichosaItakusakiJoho_jokyoFlag"
+        "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" as "DbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
+        "DbT4910NinteichosaItakusakiJoho"."jigyoshaMeisho" as "DbT4910NinteichosaItakusakiJoho_jigyoshaMeisho",
+        "DbT4910NinteichosaItakusakiJoho"."jigyoshaMeishoKana" as "DbT4910NinteichosaItakusakiJoho_jigyoshaMeishoKana",
+        "DbT4910NinteichosaItakusakiJoho"."yubinNo" as "DbT4910NinteichosaItakusakiJoho_yubinNo",
+        "DbT4910NinteichosaItakusakiJoho"."jusho" as "DbT4910NinteichosaItakusakiJoho_jusho",
+        "DbT4910NinteichosaItakusakiJoho"."telNo" as "DbT4910NinteichosaItakusakiJoho_telNo",
+        "DbT4910NinteichosaItakusakiJoho"."chosaItakuKubun" as "DbT4910NinteichosaItakusakiJoho_chosaItakuKubun",
+        "DbT4910NinteichosaItakusakiJoho"."jokyoFlag" as "DbT4910NinteichosaItakusakiJoho_jokyoFlag"
         FROM
-            rgdb."DbT5910NinteichosaItakusakiJoho"
+            rgdb."DbT4910NinteichosaItakusakiJoho"
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" 
-            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT5910NinteichosaItakusakiJoho"."shichosonCode"
+            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT4910NinteichosaItakusakiJoho"."shichosonCode"
         WHERE
-            "DbT5910NinteichosaItakusakiJoho"."jokyoFlag" =true
+            "DbT4910NinteichosaItakusakiJoho"."jokyoFlag" =true
         <if test="今回処理日時開始日時の年月日時分秒!=null">
-            AND "DbT5910NinteichosaItakusakiJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
+            AND "DbT4910NinteichosaItakusakiJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
         </if>
         <if test="今回処理日時終了日時の年月日時分秒!=null">
-            AND "DbT5910NinteichosaItakusakiJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
+            AND "DbT4910NinteichosaItakusakiJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
         </if> 
     </select>
     <select resultOrdered="true" id="get主治医医療機関情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ShujiiIryokikanEntity" fetchSize="500">
         SElECT
-        "DbT5911ShujiiIryoKikanJoho"."iryokikanCode" as "DbT5911ShujiiIryoKikanJoho_iryokikanCode",
-        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" as "DbT5911ShujiiIryoKikanJoho_iryoKikanMeisho",
-        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeishoKana" as "DbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana",
-        "DbT5911ShujiiIryoKikanJoho"."yubinNo" as "DbT5911ShujiiIryoKikanJoho_yubinNo",
-        "DbT5911ShujiiIryoKikanJoho"."jusho" as "DbT5911ShujiiIryoKikanJoho_jusho",
-        "DbT5911ShujiiIryoKikanJoho"."telNo" as "DbT5911ShujiiIryoKikanJoho_telNo",
-        "DbT5911ShujiiIryoKikanJoho"."jokyoFlag" as "DbT5911ShujiiIryoKikanJoho_jokyoFlag"
+        "DbT4911ShujiiIryoKikanJoho"."iryokikanCode" as "DbT4911ShujiiIryoKikanJoho_iryokikanCode",
+        "DbT4911ShujiiIryoKikanJoho"."iryoKikanMeisho" as "DbT4911ShujiiIryoKikanJoho_iryoKikanMeisho",
+        "DbT4911ShujiiIryoKikanJoho"."iryoKikanMeishoKana" as "DbT4911ShujiiIryoKikanJoho_iryoKikanMeishoKana",
+        "DbT4911ShujiiIryoKikanJoho"."yubinNo" as "DbT4911ShujiiIryoKikanJoho_yubinNo",
+        "DbT4911ShujiiIryoKikanJoho"."jusho" as "DbT4911ShujiiIryoKikanJoho_jusho",
+        "DbT4911ShujiiIryoKikanJoho"."telNo" as "DbT4911ShujiiIryoKikanJoho_telNo",
+        "DbT4911ShujiiIryoKikanJoho"."jokyoFlag" as "DbT4911ShujiiIryoKikanJoho_jokyoFlag"
         FROM
-            rgdb."DbT5911ShujiiIryoKikanJoho"
+            rgdb."DbT4911ShujiiIryoKikanJoho"
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" 
-            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT4911ShujiiIryoKikanJoho"."shichosonCode"
         WHERE
-            "DbT5911ShujiiIryoKikanJoho"."jokyoFlag" =true
+            "DbT4911ShujiiIryoKikanJoho"."jokyoFlag" =true
         <if test="今回処理日時開始日時の年月日時分秒!=null">
-            AND "DbT5911ShujiiIryoKikanJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
+            AND "DbT4911ShujiiIryoKikanJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
         </if>
         <if test="今回処理日時終了日時の年月日時分秒!=null">
-            AND "DbT5911ShujiiIryoKikanJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
+            AND "DbT4911ShujiiIryoKikanJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
         </if> 
         
     </select>
     <select resultOrdered="true" id="get主治医情報情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ShujiiEntity" fetchSize="500">
         SElECT
-        "DbT5912ShujiiJoho"."shujiiIryokikanCode" as "DbT5912ShujiiJoho_shujiiIryokikanCode",
-        "DbT5912ShujiiJoho"."shujiiCode" as "DbT5912ShujiiJoho_shujiiCode",
-        "DbT5912ShujiiJoho"."shujiiName" as "DbT5912ShujiiJoho_shujiiName",
-        "DbT5912ShujiiJoho"."shujiiKana" as "DbT5912ShujiiJoho_shujiiKana",
-        "DbT5912ShujiiJoho"."jokyoFlag" as "DbT5912ShujiiJoho_jokyoFlag"
+        "DbT4912ShujiiJoho"."shujiiIryokikanCode" as "DbT4912ShujiiJoho_shujiiIryokikanCode",
+        "DbT4912ShujiiJoho"."shujiiCode" as "DbT4912ShujiiJoho_shujiiCode",
+        "DbT4912ShujiiJoho"."shujiiName" as "DbT4912ShujiiJoho_shujiiName",
+        "DbT4912ShujiiJoho"."shujiiKana" as "DbT4912ShujiiJoho_shujiiKana",
+        "DbT4912ShujiiJoho"."jokyoFlag" as "DbT4912ShujiiJoho_jokyoFlag"
         FROM
-            rgdb."DbT5912ShujiiJoho"
+            rgdb."DbT4912ShujiiJoho"
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" 
-            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT5912ShujiiJoho"."shichosonCode"
+            ON "DbT7051KoseiShichosonMaster"."shichosonCode"="DbT4912ShujiiJoho"."shichosonCode"
         WHERE
-            "DbT5912ShujiiJoho"."jokyoFlag" =true
+            "DbT4912ShujiiJoho"."jokyoFlag" =true
         <if test="今回処理日時開始日時の年月日時分秒!=null">
-            AND "DbT5912ShujiiJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
+            AND "DbT4912ShujiiJoho"."insertTimestamp" <![CDATA[>=]]> #{今回処理日時開始日時の年月日時分秒}
         </if>
         <if test="今回処理日時終了日時の年月日時分秒!=null">
-            AND "DbT5912ShujiiJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
+            AND "DbT4912ShujiiJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
         </if>   
     </select>
     <select resultOrdered="true" id="get要介護認定外部データ出力履歴" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
@@ -103,37 +103,37 @@
             "DbT7204YokaigoNinteiGaibuDataOutputHistory"."dataKubun"=#{外部出力データ区分}   
     </select>
      <resultMap id="ResultMap_ChosaitakusakiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519002.ChosaitakusakiEntity" autoMapping="true">
-        <result property="認定調査委託先コード" column="DbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/> 
-        <result property="事業者名称" column="DbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="事業者名称カナ" column="DbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="郵便番号" column="DbT5910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>       
-        <result property="住所" column="DbT5910NinteichosaItakusakiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="電話番号" column="DbT5910NinteichosaItakusakiJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/> 
-        <result property="調査委託区分" column="DbT5910NinteichosaItakusakiJoho_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>      
-        <result property="状況フラグ" column="DbT5910NinteichosaItakusakiJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
+        <result property="認定調査委託先コード" column="DbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/> 
+        <result property="事業者名称" column="DbT4910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="事業者名称カナ" column="DbT4910NinteichosaItakusakiJoho_jigyoshaMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="郵便番号" column="DbT4910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>       
+        <result property="住所" column="DbT4910NinteichosaItakusakiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="電話番号" column="DbT4910NinteichosaItakusakiJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/> 
+        <result property="調査委託区分" column="DbT4910NinteichosaItakusakiJoho_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>      
+        <result property="状況フラグ" column="DbT4910NinteichosaItakusakiJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
     </resultMap>
     <resultMap id="ResultMap_ChosainEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519002.ChosainEntity" autoMapping="true">
-        <result property="認定調査委託先コード" column="DbT5913ChosainJoho_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/> 
-        <result property="認定調査員コード" column="DbT5913ChosainJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/> 
-        <result property="調査員氏名" column="DbT5913ChosainJoho_chosainShimei_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="調査員氏名カナ" column="DbT5913ChosainJoho_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="調査員資格" column="DbT5913ChosainJoho_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="状況フラグ" column="DbT5913ChosainJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
+        <result property="認定調査委託先コード" column="DbT4913ChosainJoho_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/> 
+        <result property="認定調査員コード" column="DbT4913ChosainJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/> 
+        <result property="調査員氏名" column="DbT4913ChosainJoho_chosainShimei_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="調査員氏名カナ" column="DbT4913ChosainJoho_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="調査員資格" column="DbT4913ChosainJoho_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="状況フラグ" column="DbT4913ChosainJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
     </resultMap>
     <resultMap id="ResultMap_ShujiiIryokikanEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519002.ShujiiIryokikanEntity" autoMapping="true">
-        <result property="医療機関コード" column="DbT5911ShujiiIryoKikanJoho_iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler"/> 
-        <result property="医療機関名称" column="DbT5911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="医療機関名称カナ" column="DbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="郵便番号" column="DbT5911ShujiiIryoKikanJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>       
-        <result property="住所" column="DbT5911ShujiiIryoKikanJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="電話番号" column="DbT5911ShujiiIryoKikanJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/> 
-        <result property="状況フラグ" column="DbT5911ShujiiIryoKikanJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
+        <result property="医療機関コード" column="DbT4911ShujiiIryoKikanJoho_iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler"/> 
+        <result property="医療機関名称" column="DbT4911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="医療機関名称カナ" column="DbT4911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="郵便番号" column="DbT4911ShujiiIryoKikanJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>       
+        <result property="住所" column="DbT4911ShujiiIryoKikanJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="電話番号" column="DbT4911ShujiiIryoKikanJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/> 
+        <result property="状況フラグ" column="DbT4911ShujiiIryoKikanJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
     </resultMap>
      <resultMap id="ResultMap_ShujiiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519002.ShujiiEntity" autoMapping="true">
-        <result property="主治医医療機関コード" column="DbT5912ShujiiJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiIryokikanCodeTypeHandler"/> 
-        <result property="主治医コード" column="DbT5912ShujiiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiCodeTypeHandler"/> 
-        <result property="主治医氏名" column="DbT5912ShujiiJoho_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="主治医カナ" column="DbT5912ShujiiJoho_shujiiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>       
-        <result property="状況フラグ" column="DbT5912ShujiiJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
+        <result property="主治医医療機関コード" column="DbT4912ShujiiJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiIryokikanCodeTypeHandler"/> 
+        <result property="主治医コード" column="DbT4912ShujiiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiCodeTypeHandler"/> 
+        <result property="主治医氏名" column="DbT4912ShujiiJoho_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医カナ" column="DbT4912ShujiiJoho_shujiiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>       
+        <result property="状況フラグ" column="DbT4912ShujiiJoho_jokyoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
     </resultMap>
 </mapper>

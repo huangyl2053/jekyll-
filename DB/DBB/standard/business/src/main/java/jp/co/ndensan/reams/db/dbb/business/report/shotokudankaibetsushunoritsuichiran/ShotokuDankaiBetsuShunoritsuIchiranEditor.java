@@ -82,7 +82,7 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
         source.list_15 = new RString(パラメータ.get不納欠損額_件数());
         source.list_16 = get金額Formatter(パラメータ.get不納欠損額());
         source.list_17 = パラメータ.get収納率();
-        source.KamokuCode = パラメータ.get科目コード();
+        source.kamokuCode = パラメータ.get科目コード();
         source.isPageBreaker = getIsPageBreaker(パラメータ);
         return source;
     }

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301010.SeinenngappiCsv
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301010.SyoriHidukeKanriMasterUpdateProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301010.TorikomiProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100202.HikazeNenkinTaishoshaDouteiBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301030_HikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -173,9 +173,9 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
                 .define();
     }
 
-    private HikazeNenkinTaishoshaDouteiBatchParameter createHikazeNenkinTaishoshaDouteiBatchParameter() {
+    private DBD301030_HikazeiNenkinTaishoshaDoteiParameter createHikazeNenkinTaishoshaDouteiBatchParameter() {
         DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter batchParameter = getParameter();
-        HikazeNenkinTaishoshaDouteiBatchParameter subParameter = new HikazeNenkinTaishoshaDouteiBatchParameter();
+        DBD301030_HikazeiNenkinTaishoshaDoteiParameter subParameter = new DBD301030_HikazeiNenkinTaishoshaDoteiParameter();
         subParameter.set年度(batchParameter.get処理年度());
         subParameter.set対象月(batchParameter.get対象月());
         subParameter.set処理区分(batchParameter.get処理区分());

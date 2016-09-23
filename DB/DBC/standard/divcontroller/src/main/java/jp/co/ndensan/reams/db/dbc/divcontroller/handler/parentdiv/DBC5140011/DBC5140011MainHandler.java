@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5140011;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc5140011main.DBC5140011MainResult;
@@ -29,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class DBC5140011MainHandler {
 
-    private static DBC5140011MainDiv div;
+    private DBC5140011MainDiv div;
     private static final RString アンだライン = new RString("_");
     private static final int 一 = 1;
     private static final int 二 = 2;
@@ -82,6 +84,9 @@ public class DBC5140011MainHandler {
     public DBC150050_ServicecodeTaniMeisaiIchiranParameter pamaHozon() {
 
         DBC150050_ServicecodeTaniMeisaiIchiranParameter parameter = new DBC150050_ServicecodeTaniMeisaiIchiranParameter();
+        if (div.getCcdChohyoShutsuryokujun().getSelected出力順() != null) {
+            parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
+        }
         if (div.getRadTaishoYM().getSelectedValue() != null && !div.getRadTaishoYM().getSelectedValue().isEmpty()) {
             parameter.set対象年月(div.getRadTaishoYM().getSelectedValue());
         }
@@ -132,7 +137,14 @@ public class DBC5140011MainHandler {
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果().isEmpty()) {
-            parameter.set選択地区リスト(div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果());
+            Map<RString, RString> map = div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果();
+            List<RString> list = new ArrayList<>();
+            if (null != map && !map.isEmpty()) {
+                for (RString key : map.keySet()) {
+                    list.add(key);
+                }
+            }
+            parameter.set選択地区リスト(sort昇順ByKey(list));
         } else {
             parameter.set選択地区リスト(null);
         }
@@ -168,6 +180,21 @@ public class DBC5140011MainHandler {
         }
     }
 
+    private List<RString> sort昇順ByKey(List<RString> list) {
+        if (list.isEmpty()) {
+            return list;
+        }
+        Collections.sort(list,
+                new Comparator<RString>() {
+                    @Override
+                    public int compare(RString arg0, RString arg1) {
+                        return arg0.compareTo(arg1);
+                    }
+                }
+        );
+        return list;
+    }
+
     /**
      * 条件を復元するボタンのメソッドです。
      */
@@ -181,16 +208,18 @@ public class DBC5140011MainHandler {
         }
         List<RString> サービス種類コードリスト
                 = restoreBatchParameterMap.getParameterListValue(RString.class, new RString("サービス種類コードリスト"));
+        List<dgServiceShuruiList_Row> rowListMoto = div.getChushutsuJoken2().getDgServiceShuruiList().getDataSource();
         List<dgServiceShuruiList_Row> rowList = new ArrayList();
         if (サービス種類コードリスト != null && !サービス種類コードリスト.isEmpty()) {
             for (RString serviceShuruiCode : サービス種類コードリスト) {
-                dgServiceShuruiList_Row row = new dgServiceShuruiList_Row();
-                row.setServiceShuruiCode(serviceShuruiCode);
-//                row.setServiceShuruiName(serviceShuruiCode.getColumnValue());
-                rowList.add(row);
+                for (dgServiceShuruiList_Row row : rowListMoto) {
+                    if (row.getServiceShuruiCode().equals(serviceShuruiCode)) {
+                        rowList.add(row);
+                    }
+                }
             }
         }
-        div.getChushutsuJoken2().getDgServiceShuruiList().setDataSource(rowList);
+        div.getChushutsuJoken2().getDgServiceShuruiList().setSelectedItems(rowList);
         RString サービス項目コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("サービス項目コード"));
         if (サービス項目コード != null && !サービス項目コード.isEmpty()) {
             List<RString> rstringList = サービス項目コード.toRStringList();

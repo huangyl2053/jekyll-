@@ -92,7 +92,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
             + ".keikakutodokedejokyoichiran.IKeikakuTodokedeJokyoIchiranMapper.getデータを抽出");
     private static final RString ORDER_BY = new RString("order by");
-    private static final RString 仕切る = new RString("~");
+    private static final RString 仕切る = new RString("～");
     private static final RString 仕切る_2 = new RString(":");
     private static final RString MESSAGE_1 = new RString("計画届出状況抽出処理");
     private static final RString 定値_届出なし = new RString("届出なし");
@@ -128,12 +128,16 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         システム日付 = RDateTime.now();
 
         if (processParameter.getJyukyuushinseibiFrom() != null) {
-            受給申請日From = new RString(processParameter.getJyukyuushinseibiFrom().toString());
+            受給申請日From = processParameter.getJyukyuushinseibiFrom().wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else {
             受給申請日From = RString.EMPTY;
         }
         if (processParameter.getJyukyuushinseibiTo() != null) {
-            受給申請日To = new RString(processParameter.getJyukyuushinseibiTo().toString());
+            受給申請日To = processParameter.getJyukyuushinseibiTo().wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else {
             受給申請日To = RString.EMPTY;
         }
@@ -318,7 +322,9 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         reportList.set事業者名称(entity.get事業者名称());
         if (entity.get対象年月() == null) {
             reportList.set備考1(定値_届出なし);
-        } else if (entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
+        } else if (entity.get適用終了年月日() != null
+                && !entity.get適用終了年月日().isEmpty()
+                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
             reportList.set備考1(定値_有効なし);
         }
         if (!RS_3.equals(entity.get作成区分コード())
