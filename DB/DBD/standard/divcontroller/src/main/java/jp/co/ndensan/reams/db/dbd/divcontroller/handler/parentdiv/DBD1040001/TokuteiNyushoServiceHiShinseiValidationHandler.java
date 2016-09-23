@@ -194,7 +194,7 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.減免減額_確認番号が重複のチェック)
                 .thenAdd(TokuteiNyushoServiceHiShinseiMessages.減免減額_確認番号が既に存在).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                TokuteiNyushoServiceHiShinseiMessages.減免減額_確認番号が既に存在, div.getShinseiDetail().getTxtYukoKigenYMD()).build().check(messages));
+                TokuteiNyushoServiceHiShinseiMessages.減免減額_確認番号が既に存在, div.getShinseiDetail().getTxtKakuninNo()).build().check(messages));
         return pairs;
     }
 
@@ -233,6 +233,24 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
         return pairs;
     }
 
+    /**
+     * 適用期間重複なしのチェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div TokuteiNyushoServiceHiShinseiDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor適用期間重複なし(ValidationMessageControlPairs pairs,
+            TokuteiNyushoServiceHiShinseiDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.適用期間重複なしのチェック)
+                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.減免減額_適用期間重複).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                TokuteiNyushoServiceHiShinseiMessages.減免減額_適用期間重複, div.getShinseiList().getDgShinseiList()).build().check(messages));
+        return pairs;
+    }
+
     private static enum TokuteiNyushoServiceHiShinseiMessages implements IValidationMessage {
 
         申請日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "申請日"),
@@ -246,8 +264,8 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
         減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
         減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),
         減免減額_確認番号が既に存在(DbdErrorMessages.減免減額_確認番号が既に存在),
-        受給共通_受給者_事業対象者登録なし(DbdErrorMessages.受給共通_受給者_事業対象者登録なし);
-//        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複);
+        受給共通_受給者_事業対象者登録なし(DbdErrorMessages.受給共通_受給者_事業対象者登録なし),
+        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複);
 
         private final Message message;
 

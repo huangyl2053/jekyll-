@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikik
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4020TokubetsuchiikiKasanGemmenDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.tokubetsuchikikasangemmen.ITokubetsuchiikiKasanGemmenMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -130,5 +131,26 @@ public class TokubetsuchiikiKasanGemmenManager {
         TokubetsuchiikiKasanGemmenEntity relateEntity = mapper.select特別地域加算減免(検索条件);
         relateEntity.initializeMd5ToEntities();
         return new TokubetsuchiikiKasanGemmen(relateEntity);
+    }
+
+    /**
+     * 特別地域加算減免{@link TokubetsuchiikiKasanGemmen}を保存します。
+     *
+     * @param 特別地域加算減免 {@link TokubetsuchiikiKasanGemmen}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean delete特別地域加算減免(TokubetsuchiikiKasanGemmen 特別地域加算減免) {
+        requireNonNull(特別地域加算減免, UrSystemErrorMessages.値がnull.getReplacedMessage("特別地域加算減免"));
+        delete減免減額申請リストBy減免減額種類(特別地域加算減免.getGemmenGengakuShinseiList(), GemmenGengakuShurui.特別地域加算減免.getコード());
+        return 1 == 特別地域加算減免Dac.delete(特別地域加算減免.toEntity());
+    }
+
+    private void delete減免減額申請リストBy減免減額種類(List<GemmenGengakuShinsei> 減免減額申請List, RString 減免減額種類) {
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
+            if (減免減額種類.equals(減免減額申請.get減免減額種類())) {
+                減免減額申請Manager.delete減免減額申請(減免減額申請);
+            }
+        }
     }
 }

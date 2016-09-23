@@ -481,7 +481,11 @@ public enum ReportIdDBB {
     /**
      * 特別徴収依頼情報件数表の帳票ID
      */
-    DBB200020(new ReportId("DBB200020_TokubetsuChoshuIraiJohoKensuhyo"), new RString("特別徴収依頼情報件数表"));
+    DBB200020(new ReportId("DBB200020_TokubetsuChoshuIraiJohoKensuhyo"), new RString("特別徴収依頼情報件数表")),
+    /**
+     * 特別徴収異動情報一覧表の帳票ID
+     */
+    DBB200021(new ReportId("DBB200021_TokubetsuChoshuIdojohoIchiran"), new RString("特別徴収異動情報一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;
