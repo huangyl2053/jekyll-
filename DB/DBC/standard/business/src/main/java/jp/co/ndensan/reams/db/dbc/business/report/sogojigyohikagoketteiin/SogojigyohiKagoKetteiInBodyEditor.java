@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
+package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInSource;
@@ -67,6 +67,7 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
         source.listLower_2 = getColumnValue(帳票出力対象データ.get過誤申立事由コード());
         source.listLower_3 = 帳票出力対象データ.get過誤申立事由();
         source.listLower_4 = decimalFormatter(帳票出力対象データ.get保険者負担額(), 0);
+        source.shikibetuCode = 帳票出力対象データ.get識別コード();
     }
 
     private void edit集計(SogojigyohiKagoKetteiInSource source) {
