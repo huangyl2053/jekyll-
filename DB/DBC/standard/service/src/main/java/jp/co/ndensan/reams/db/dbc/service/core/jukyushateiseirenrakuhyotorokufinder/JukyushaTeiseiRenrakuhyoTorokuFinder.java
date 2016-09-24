@@ -129,6 +129,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                 JukyushaIdoRenrakuhyo 変更後Entity = 変更後受給者訂正情報Entity.get受給者異動送付entity();
                 出力用受給者訂正情報Entity.set受給者異動送付entity(get変更後受給者訂正情報修正Entity(
                         変更前受給者訂正情報Entity.get受給者異動送付entity(), 変更後Entity));
+                setFlag(出力用受給者訂正情報Entity, 変更後Entity, 変更前受給者訂正情報Entity);
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
                 出力用受給者訂正情報Entity.set作成年月日(変更後受給者訂正情報Entity.get作成年月日());
@@ -153,25 +154,32 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                         .set訂正年月日(FlexibleDate.getNowDate()).build();
                 出力用受給者訂正情報Entity.set受給者異動送付entity(get変更後受給者訂正情報修正Entity(
                         変更前受給者訂正情報Entity.get受給者異動送付entity(), 変更後Entity));
-                if (変更前受給者訂正情報Entity.get受給者異動送付entity().is公費負担上限額減額有フラグ()
-                        != 変更後Entity.is公費負担上限額減額有フラグ()) {
-                    出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(変更後Entity.is公費負担上限額減額有フラグ());
-                } else {
-                    出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(null);
-                }
-                if (変更前受給者訂正情報Entity.get受給者異動送付entity().is小多機能居宅介護利用開始月利用有フラグ()
-                        != 変更後Entity.is小多機能居宅介護利用開始月利用有フラグ()) {
-                    出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(
-                            変更後Entity.is小多機能居宅介護利用開始月利用有フラグ());
-                } else {
-                    出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(null);
-                }
+                setFlag(出力用受給者訂正情報Entity, 変更後Entity, 変更前受給者訂正情報Entity);
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
                 出力用受給者訂正情報Entity.set作成年月日(変更後受給者訂正情報Entity.get作成年月日());
             }
         }
         return 出力用受給者訂正情報Entity;
+    }
+
+    private void setFlag(
+            JukyushaTeiseiRenrakuhyoTorokuFinderResult 出力用受給者訂正情報Entity,
+            JukyushaIdoRenrakuhyo 変更後Entity,
+            JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更前受給者訂正情報Entity) {
+        if (変更前受給者訂正情報Entity.get受給者異動送付entity().is公費負担上限額減額有フラグ()
+                != 変更後Entity.is公費負担上限額減額有フラグ()) {
+            出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(変更後Entity.is公費負担上限額減額有フラグ());
+        } else {
+            出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(null);
+        }
+        if (変更前受給者訂正情報Entity.get受給者異動送付entity().is小多機能居宅介護利用開始月利用有フラグ()
+                != 変更後Entity.is小多機能居宅介護利用開始月利用有フラグ()) {
+            出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(
+                    変更後Entity.is小多機能居宅介護利用開始月利用有フラグ());
+        } else {
+            出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(null);
+        }
     }
 
     private JukyushaIdoRenrakuhyo get変更後受給者訂正情報修正Entity(
