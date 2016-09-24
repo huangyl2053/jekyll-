@@ -48,7 +48,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
     private static final int NUM_7 = 7;
 
     private static final RString 前正符号 = new RString("+");
-    private static final RString 前负符号 = new RString("-");
+    private static final RString 前符号 = new RString("-");
     private static final RString INDEX_0 = new RString("0");
     private static final RString 年分タイトル = new RString("年分");
     private static final RString 確定申告用タイトル = new RString("確定申告用");
@@ -268,7 +268,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
                 return 前正符号.concat(string.padZeroToLeft(num));
             } else {
 
-                return 前负符号.concat(string.substring(NUM_1).padZeroToLeft(num));
+                return 前符号.concat(string.substring(NUM_1).padZeroToLeft(num));
             }
 
         }

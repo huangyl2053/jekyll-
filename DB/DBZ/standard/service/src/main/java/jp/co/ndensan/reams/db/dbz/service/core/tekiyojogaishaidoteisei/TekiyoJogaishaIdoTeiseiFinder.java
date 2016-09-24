@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TekiyoJogaishaIdoTeiseiFinder {
 
     private static final RString DELETE = new RString("delete");
-    private static final RString Modified = new RString("Modified");
+    private static final RString MODIFIED = new RString("Modified");
     private static final RString 枝番_1 = new RString("0001");
     private static final int 枝番_桁 = 4;
 
@@ -44,7 +44,7 @@ public class TekiyoJogaishaIdoTeiseiFinder {
             if (DELETE.equals(informationEntity.get状態())) {
                 continue;
             }
-             if (Modified.equals(informationEntity.get状態())&&informationEntity.get解除日().isEmpty()) {
+            if (MODIFIED.equals(informationEntity.get状態()) && informationEntity.get解除日().isEmpty()) {
                 continue;
             }
             List<DbT1004ShisetsuNyutaishoEntity> dbT1004EntityLst

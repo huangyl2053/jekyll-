@@ -59,7 +59,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     public DbT1004ShisetsuNyutaishoEntity selectByKey(
             ShikibetsuCode 識別コード,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -137,6 +137,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      *
      * @return 最大履歴番号
      */
+    @Transaction
     public DbT1004ShisetsuNyutaishoEntity selectRirekiNoMax() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(rirekiNo)).
@@ -149,7 +150,9 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      * @param 識別コード ShikibetsuCode
      * @return 最大履歴番号
      */
+    @Transaction
     public DbT1004ShisetsuNyutaishoEntity get最大履歴番号(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(rirekiNo)).
                 table(DbT1004ShisetsuNyutaisho.class).
@@ -189,9 +192,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     public List<DbT1004ShisetsuNyutaishoEntity> selectFor施設入退所データ(
             ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
         return accessor.select().
                 table(DbT1004ShisetsuNyutaisho.class).
                 where(and(
@@ -210,6 +211,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      * @return DbT1004ShisetsuNyutaishoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
+    @Transaction
     public DbT1004ShisetsuNyutaishoEntity get施設入退所Order(ShikibetsuCode 識別コード,
             RString 台帳種別) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
@@ -230,6 +232,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      * @param 識別コード ShikibetsuCode
      * @return 介護保険施設入退所
      */
+    @Transaction
     public List<DbT1004ShisetsuNyutaishoEntity> get介護保険施設入退所(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

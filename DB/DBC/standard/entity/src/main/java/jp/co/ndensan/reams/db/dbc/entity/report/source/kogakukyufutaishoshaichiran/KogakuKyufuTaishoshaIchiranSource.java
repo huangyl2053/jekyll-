@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票Source
@@ -48,6 +50,8 @@ public class KogakuKyufuTaishoshaIchiranSource implements IReportSource {
     public RString kaipage5;
     @ReportItem(name = "listUpper_1", length = 6, order = 15)
     public RString listUpper_1;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 10, order = 16)
     public RString listUpper_2;
@@ -77,6 +81,16 @@ public class KogakuKyufuTaishoshaIchiranSource implements IReportSource {
     public RString listLower_4;
     @ReportItem(name = "listLower_5", length = 11, order = 29)
     public RString listLower_5;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 69)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 70)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 10, order = 72)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -118,6 +132,11 @@ public class KogakuKyufuTaishoshaIchiranSource implements IReportSource {
         listLower_2,
         listLower_3,
         listLower_4,
-        listLower_5
+        listLower_5,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 }

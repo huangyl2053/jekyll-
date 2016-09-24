@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinsaHoh
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.Taishosha;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030.DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -55,7 +55,6 @@ public class DvKogakuServiceJohoHandler {
     private static final RString RSTRING_5 = new RString("5");
     private static final RString モード１ = new RString("DBCMN23001");
     private static final RString モード２ = new RString("DBCMN23019");
-//    private static final RString モード１ = new RString("高額サービス費状況");
 
     /**
      * コンストラクタです。
@@ -173,8 +172,8 @@ public class DvKogakuServiceJohoHandler {
      * @param 市町村判定 RString
      * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
-    public HanyoListKogakuKaigoBatchParameter getBatchParamter(RString 市町村判定) {
-        HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
+    public DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter getBatchParamter(RString 市町村判定) {
+        DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter batchparam = new DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter();
         batchparam.setModo(ViewStateHolder.get(ViewStateKeys.モード, int.class));
         if (div.getTxtShinsaNengetsu().getValue() == null) {
             batchparam.setShinsaYM(null);
@@ -287,7 +286,7 @@ public class DvKogakuServiceJohoHandler {
         return pairs;
     }
 
-    private void batchParamterHandleParentAdd(HanyoListKogakuKaigoBatchParameter batchparam) {
+    private void batchParamterHandleParentAdd(DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter batchparam) {
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate().getFromValue() == null) {
             batchparam.setShisehiFrom(null);
         } else {
@@ -333,7 +332,7 @@ public class DvKogakuServiceJohoHandler {
 
     }
 
-    private void batchParamterHandleSubAdd(HanyoListKogakuKaigoBatchParameter batchparam) {
+    private void batchParamterHandleSubAdd(DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter batchparam) {
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenSofuYM().getFromValue() == null) {
             batchparam.setKokuhoreSofuYMFrom(null);
         } else {
@@ -371,13 +370,13 @@ public class DvKogakuServiceJohoHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShoriJokyo 処理状況 : ShoriJokyo.values()) {
             if (state.equals(モード１)) {
-                KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
+                KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get略称());
                 dataSourceList.add(dataSource);
             }
             if (state.equals(モード２)) {
                 RString コード = 処理状況.getコード();
                 if (!コード.equals(RSTRING_4) && !コード.equals(RSTRING_5)) {
-                    KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
+                    KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get略称());
                     dataSourceList.add(dataSource);
                 }
             }

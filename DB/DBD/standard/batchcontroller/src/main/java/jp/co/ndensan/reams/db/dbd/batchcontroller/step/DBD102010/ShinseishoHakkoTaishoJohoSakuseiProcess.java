@@ -71,6 +71,7 @@ public class ShinseishoHakkoTaishoJohoSakuseiProcess extends BatchProcessBase<Sh
     protected void initialize() {
         終了日 = ZenNendoResearcher.createIntance(processParamter.get減免減額種類(), processParamter.get基準日()).get終了日();
         開始日 = ZenNendoResearcher.createIntance(processParamter.get減免減額種類(), processParamter.get基準日()).get開始日();
+        uuid = UUID.randomUUID();
     }
 
     @Override
@@ -94,14 +95,17 @@ public class ShinseishoHakkoTaishoJohoSakuseiProcess extends BatchProcessBase<Sh
 
     @Override
     protected void process(ShinseishoHakkoTaishoJohoSakuseiEntity list) {
-        uuid = UUID.randomUUID();
+        DbT4031ShinseishoHakkoKohoshasEntity dbT4031Entity = new DbT4031ShinseishoHakkoKohoshasEntity();
+        setDbT4031Entity(dbT4031Entity, list, uuid);
+        dbT4031Writer.insert(dbT4031Entity);
+    }
+
+    @Override
+    protected void afterExecute() {
         DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity dbT4030BatchEntity
                 = new DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity();
-        DbT4031ShinseishoHakkoKohoshasEntity dbT4031Entity = new DbT4031ShinseishoHakkoKohoshasEntity();
         setDbT4030Entity(dbT4030BatchEntity, uuid);
-        setDbT4031Entity(dbT4031Entity, list, uuid);
         dbT4030BatchWriter.insert(dbT4030BatchEntity);
-        dbT4031Writer.insert(dbT4031Entity);
         uuId.setValue(uuid);
     }
 

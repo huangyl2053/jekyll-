@@ -97,8 +97,8 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     public void initializeDisplay(TaishoshaKey 対象者) {
         div.getKogakuGassanShikyuShinseiTorokuKihon().initialize(対象者.get識別コード());
         div.getKogakuGassanShikyuShinseiTorokuKaigoKihon().initialize(対象者.get被保険者番号());
-        div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(Collections.EMPTY_LIST);
-        div.getJikoFutangakuHoseiList().getDgJohoIchiran().init();
+        div.getChkRirekiHyouji().setSelectedItemsByKey(Collections.EMPTY_LIST);
+        div.getDgJohoIchiran().init();
     }
 
     /**
@@ -133,7 +133,7 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                     : result.getデータ作成区分());
             rowList.add(row);
         }
-        div.getJikoFutangakuHoseiList().getDgJohoIchiran().setDataSource(rowList);
+        div.getDgJohoIchiran().setDataSource(rowList);
     }
 
     /**
@@ -173,7 +173,7 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             PersonalData personalData = PersonalData.of(識別コード, expandedInfo);
             personalDataList.add(personalData);
         }
-        div.getJikoFutangakuHoseiList().getDgJohoIchiran().setDataSource(rowList);
+        div.getDgJohoIchiran().setDataSource(rowList);
         AccessLogger.log(AccessLogType.照会, personalDataList);
     }
 

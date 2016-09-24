@@ -59,6 +59,10 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final int NUM5 = 5;
+    private static final RString 全市町村NAME = new RString("全市町村");
+    private static final RString 全市町村CODE = new RString("000000");
+    private static final RString FILENAMEKANJI = new RString("汎用リスト　国保連受給者情報CSV");
+    private static final RString FILENAME = new RString("HanyoList_KokuhorenJukyusha.csv");
     private int 連番 = 1;
     private HanyoListKokuhorenJukyushaProcessParameter processParameter;
     private FileSpoolManager manager;
@@ -128,12 +132,12 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                FILENAMEKANJI,
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト　国保連受給者情報CSV"),
-                new RString("HanyoList_KokuhorenJukyusha.csv"),
+                FILENAME,
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 business.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();
@@ -150,8 +154,8 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
 
     private void get市町村名() {
         RString 保険者コード = processParameter.get保険者コード();
-        if (new RString("000000").equals(保険者コード)) {
-            市町村名 = new RString("全市町村");
+        if (全市町村CODE.equals(保険者コード)) {
+            市町村名 = 全市町村NAME;
         } else if (!RString.isNullOrEmpty(保険者コード)) {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             市町村名 = finder.getAssociation(new LasdecCode(保険者コード)).get市町村名();

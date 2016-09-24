@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者・宛名情報_振込明細一時データをエラー登録する。
  *
- * @reamsid_L DBC-5010-030 donghj
+ * @reamsid_L DBC-2830-030 donghj
  */
 public class EraTourokuProcess extends BatchProcessBase<EraTourokuEntity> {
 

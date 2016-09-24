@@ -7,10 +7,15 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_SaishoriShitei;
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.KanendoUpdateFutanwariaiHanteProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -37,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 処理日付管理マスタの更新処理クラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
 
@@ -52,7 +57,6 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
     private static final RString 処理区分_明細一覧表作成 = new RString("3");
 
     private static final ReportId REPORTID = ReportIdDBC.DBC200101_明細.getReportId();
-    private static final RString 日本語ファイル名 = new RString("汎用リスト　過誤申立情報CSV");
     private static final RString 出力有無 = new RString("なし");
     private static final RString 処理対象 = new RString("【処理対象】");
     private static final RString 処理区分 = new RString("【処理区分】");
@@ -82,7 +86,10 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toKanendoUpdateFutanwariaiHanteMybatisParameter());
+        if (!Furikomi_ShoriKubun.明細一覧表作成.equals(parameter.get処理区分())) {
+            return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toKanendoUpdateFutanwariaiHanteMybatisParameter());
+        }
+        return null;
     }
 
     @Override
@@ -102,23 +109,26 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
 
     @Override
     protected void afterExecute() {
-        if (検索件数_0 == count) {
-            DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-            entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-            entity.setShichosonCode(new LasdecCode("000000"));
-            entity.setShoriName(parameter.get処理名().get名称());
-            entity.setShoriEdaban(連番);
-            entity.setNendo(年度);
-            entity.setNendoNaiRenban(年度内連番);
-            entity.setKijunYMD(FlexibleDate.EMPTY);
-            entity.setKijunTimestamp(new YMDHMS(RString.EMPTY));
-            entity.setTaishoKaishiYMD(parameter.get開始年月日());
-            entity.setTaishoShuryoYMD(parameter.get終了年月日());
-            entity.setTaishoKaishiTimestamp(new YMDHMS(RString.EMPTY));
-            entity.setTaishoShuryoTimestamp(new YMDHMS(RString.EMPTY));
-            dbWriter.insert(entity);
+        if (!Furikomi_ShoriKubun.明細一覧表作成.equals(parameter.get処理区分())) {
+            if (検索件数_0 == count) {
+                DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
+                entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
+                entity.setShichosonCode(new LasdecCode("000000"));
+                if (parameter.get処理名() != null) {
+                    entity.setShoriName(parameter.get処理名().get名称());
+                }
+                entity.setShoriEdaban(連番);
+                entity.setNendo(年度);
+                entity.setNendoNaiRenban(年度内連番);
+                entity.setKijunYMD(FlexibleDate.EMPTY);
+                entity.setKijunTimestamp(new YMDHMS(RString.EMPTY));
+                entity.setTaishoKaishiYMD(parameter.get開始年月日());
+                entity.setTaishoShuryoYMD(parameter.get終了年月日());
+                entity.setTaishoKaishiTimestamp(new YMDHMS(RString.EMPTY));
+                entity.setTaishoShuryoTimestamp(new YMDHMS(RString.EMPTY));
+                dbWriter.insert(entity);
+            }
         }
-
         eucFileOutputJohoFactory();
     }
 
@@ -128,7 +138,7 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
                 Association.getLasdecCode().value(),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                日本語ファイル名,
+                get設定値(),
                 new RString("0"),
                 出力有無,
                 RString.EMPTY,
@@ -136,6 +146,24 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
 
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private RString get設定値() {
+        ChohyoSeigyoHanyo hanyoResult = null;
+        RString 設定値 = RString.EMPTY;
+
+        if (Furikomi_ShihraiHohoShitei.口座.equals(parameter.get支払方法())) {
+            hanyoResult = ChohyoSeigyoHanyoManager.createInstance()
+                    .get帳票制御汎用(SubGyomuCode.DBC介護給付, REPORTID, FlexibleYear.MIN, ChohyoSeigyoHanyoKomokuMei.帳票タイトル_口座.get名称());
+        } else {
+            hanyoResult = ChohyoSeigyoHanyoManager.createInstance()
+                    .get帳票制御汎用(SubGyomuCode.DBC介護給付, REPORTID, FlexibleYear.MIN, ChohyoSeigyoHanyoKomokuMei.帳票タイトル_窓口.get名称());
+        }
+
+        if (hanyoResult != null) {
+            設定値 = hanyoResult.get設定値();
+        }
+        return 設定値;
     }
 
     private List<RString> get出力条件表() {

@@ -14,11 +14,16 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 
 /**
  *
- * 事業報告月報_一般状況のMapperクラスです。-
+ * 事業報告月報_一般状況のMapperクラスです。
  *
  * @reamsid_L DBU-5550-030 suguangjun
  */
 public interface IJigyoHokokuGeppoIppanShokanMapper {
+
+    /**
+     * temp事業報告償還分決定年月統計元データの作成処理です。
+     */
+    void createtempJigyoHokokuShokanbunKetteiYMTokeiMotoData();
 
     /**
      * temp事業報告償還分決定年月統計元データの取得処理です。

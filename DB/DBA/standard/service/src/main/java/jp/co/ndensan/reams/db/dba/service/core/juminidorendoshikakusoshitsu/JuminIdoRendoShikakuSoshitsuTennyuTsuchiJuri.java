@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsu
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -83,7 +81,14 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         return InstanceProvider.create(JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri.class);
     }
 
-    private void tenshutsuHihodaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
+    /**
+     * 被保台帳の転出処理を行う。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param storeConfigParamter StoreConfigParamter
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     */
+    public void tenshutsuHihodaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             StoreConfigParamter storeConfigParamter, JuminIdoRendoShikakuTorokuEntity entity) {
 
         NaiBushoRyouParamter paramter = new NaiBushoRyouParamter();
@@ -109,7 +114,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             JuminIdoRendoShikakuTorokuEntity entity,
             NaiBushoRyouParamter naiBushoRyouParamter) {
         TemParamter temparamter = new TemParamter();
-        getMaxKaijoYmd(entity, 住民異動情報, temparamter);
+        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().getMaxKaijoYmd(entity, 住民異動情報, temparamter);
         if (!temparamter.get登録届出日().isEmpty()
                 && nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(temparamter.get登録異動日()))) {
             住民異動情報.setTorokuIdoYMD(temparamter.get登録異動日());
@@ -345,7 +350,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                 return;
             }
         }
-        getMaxKaijoYmd(entity, 住民異動情報, temparamter);
+        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().getMaxKaijoYmd(entity, 住民異動情報, temparamter);
         if (!temparamter.get登録届出日().isEmpty()
                 && nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(temparamter.get登録異動日()))) {
             住民異動情報.setTorokuIdoYMD(temparamter.get登録異動日());
@@ -713,7 +718,15 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         return entityEntity;
     }
 
-    private JuminIdoRendoShikakuTorokuEntity tennyuTsuchiJuriHihodaicho(
+    /**
+     * 被保台帳の転入通知受理処理を行うです。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param storeConfigParamter StoreConfigParamter
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @return JuminIdoRendoShikakuTorokuEntity
+     */
+    public JuminIdoRendoShikakuTorokuEntity tennyuTsuchiJuriHihodaicho(
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             StoreConfigParamter storeConfigParamter,
             JuminIdoRendoShikakuTorokuEntity entity) {
@@ -760,7 +773,14 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         return entity;
     }
 
-    private JuminIdoRendoShikakuTorokuEntity tennyuTsuchiJuriHihodaichoTennyuJyuri(
+    /**
+     * 被保台帳の転入通知受理処理を行うです。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @return JuminIdoRendoShikakuTorokuEntity
+     */
+    public JuminIdoRendoShikakuTorokuEntity tennyuTsuchiJuriHihodaichoTennyuJyuri(
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity) {
         searchHihodaicho(entity, 転出);
@@ -908,7 +928,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
      * @param entity JuminIdoRendoShikakuTorokuEntity
      * @return entity
      */
-    private JuminIdoRendoShikakuTorokuEntity tennyuTsuchiJuriHihodaichoTenshutsu(
+    public JuminIdoRendoShikakuTorokuEntity tennyuTsuchiJuriHihodaichoTenshutsu(
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             StoreConfigParamter storeConfigParamter,
             JuminIdoRendoShikakuTorokuEntity entity) {
@@ -1024,113 +1044,13 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         return false;
     }
 
-    private void getMaxKaijoYmd(
-            JuminIdoRendoShikakuTorokuEntity entity,
-            UaFt200FindShikibetsuTaishoEntity 住民異動情報,
-            TemParamter paramter) {
-
-        FlexibleDate tmp除外解除日 = FlexibleDate.EMPTY;
-        FlexibleDate 資格喪失日 = FlexibleDate.EMPTY;
-        FlexibleDate 資格喪失届出日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp除外解除届出日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp他特解除日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp他特解除届出日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付01 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付02 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付11 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付12 = FlexibleDate.EMPTY;
-        if (entity.get適用除外者台帳EntityList() != null) {
-            DbT1002TekiyoJogaishaEntity dbT1002Entity = entity.get適用除外者台帳EntityList().get(0);
-            if (dbT1002Entity != null) {
-                tmp除外解除日 = nullToMin(dbT1002Entity.getKaijoYMD());
-                tmp除外解除届出日 = nullToMin(dbT1002Entity.getKaijoTodokedeYMD());
-            }
-        }
-        if (entity.get他市町村住所地特例EntityList() != null) {
-            DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = entity.get他市町村住所地特例EntityList().get(0);
-            if (dbT1003Entity != null) {
-                tmp他特解除日 = dbT1003Entity.getKaijoYMD();
-                tmp他特解除届出日 = dbT1003Entity.getKaijoTodokedeYMD();
-            }
-        }
-        if (entity.get被保険者台帳EntityList() != null) {
-
-            DbT1001HihokenshaDaichoEntity dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
-            if (dbT1001Entity != null) {
-                資格喪失日 = dbT1001Entity.getShikakuSoshitsuYMD();
-                資格喪失届出日 = dbT1001Entity.getShikakuSoshitsuTodokedeYMD();
-            }
-        }
-        FlexibleDate 異動年月日 = 住民異動情報.getIdoYMD();
-        FlexibleDate 異動届出年月日 = 住民異動情報.getTodokedeYMD();
-        if (tmp除外解除日.isBeforeOrEquals(tmp他特解除日)) {
-
-            tmp日付01 = tmp他特解除日;
-            tmp日付02 = tmp他特解除届出日;
-        }
-        if (tmp他特解除日.isBefore(tmp除外解除日)) {
-
-            tmp日付01 = tmp除外解除日;
-            tmp日付02 = tmp除外解除届出日;
-        }
-        if (nullToMin(異動年月日).isBefore(nullToMin(資格喪失日))) {
-
-            tmp日付11 = 資格喪失日;
-            tmp日付12 = 資格喪失届出日;
-        }
-        if (nullToMin(資格喪失日).isBeforeOrEquals(異動年月日)) {
-            tmp日付11 = 異動年月日;
-            tmp日付12 = 異動届出年月日;
-        }
-        if (tmp日付01.isBefore(tmp日付11)) {
-            paramter.set登録異動日(tmp日付11);
-            paramter.set登録届出日(tmp日付11);
-        }
-        if (nullToMin(tmp日付11).isBefore(tmp日付01)) {
-            paramter.set登録異動日(tmp日付01);
-            paramter.set登録届出日(tmp日付01);
-        }
-        getMaxKaijoYmd_tmp日付02_tmp日付01(paramter, tmp日付02, tmp日付01,
-                tmp日付12, tmp除外解除届出日, tmp他特解除届出日, 異動届出年月日, 資格喪失届出日);
-    }
-
-    private void getMaxKaijoYmd_tmp日付02_tmp日付01(
-            TemParamter paramter,
-            FlexibleDate tmp日付02,
-            FlexibleDate tmp日付01,
-            FlexibleDate tmp日付12,
-            FlexibleDate tmp除外解除届出日,
-            FlexibleDate tmp他特解除届出日,
-            FlexibleDate 異動届出年月日,
-            FlexibleDate 資格喪失届出日) {
-        if (nullToMin(tmp日付02).equals(nullToMin(tmp日付01))) {
-            paramter.set登録異動日(tmp日付01);
-            if (tmp除外解除届出日.isBefore(tmp他特解除届出日)) {
-
-                tmp日付02 = tmp他特解除届出日;
-            }
-            if (tmp他特解除届出日.isBeforeOrEquals(tmp除外解除届出日)) {
-
-                tmp日付02 = tmp除外解除届出日;
-            }
-            if (nullToMin(異動届出年月日).isBefore(nullToMin(資格喪失届出日))) {
-                tmp日付12 = 資格喪失届出日;
-            }
-            if (nullToMin(資格喪失届出日).isBeforeOrEquals(異動届出年月日)) {
-                tmp日付12 = 異動届出年月日;
-            }
-            if (nullToMin(tmp日付02).isBefore(nullToMin(tmp日付12))) {
-
-                paramter.set登録届出日(tmp日付12);
-            }
-            if (nullToMin(tmp日付12).isBeforeOrEquals(nullToMin(tmp日付02))) {
-
-                paramter.set登録届出日(tmp日付02);
-            }
-        }
-    }
-
-    private void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
+    /**
+     * 取得した被保険者台帳データから、異動日、枝番が最大のデータを取得する。
+     *
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param データ抽出ＰＴＮ RString
+     */
+    public void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
 
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
         List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
@@ -1163,7 +1083,15 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         entity.set転出保留作成事由コード(転出保留作成事由コード);
     }
 
-    private RString getHihokensyadaichoEdaNo(JuminIdoRendoShikakuTorokuEntity entity,
+    /**
+     * 処理対象の識別コードを保有する被保険者台帳のデータを取得する。
+     *
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param 識別コード ShikibetsuCode
+     * @param 異動日 FlexibleDate
+     * @return 枝番
+     */
+    public RString getHihokensyadaichoEdaNo(JuminIdoRendoShikakuTorokuEntity entity,
             ShikibetsuCode 識別コード,
             FlexibleDate 異動日) {
         RString 枝番;

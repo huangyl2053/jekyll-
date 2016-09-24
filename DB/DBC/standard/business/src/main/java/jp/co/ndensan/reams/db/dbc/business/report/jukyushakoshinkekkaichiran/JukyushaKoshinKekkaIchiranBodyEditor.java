@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichira
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -72,10 +73,10 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     public JukyushaKoshinKekkaIchiranSource edit(JukyushaKoshinKekkaIchiranSource source) {
         DbWT5331JukyushaJohoCsvEntity 受給者情報 = 帳票出力対象データ.get受給者情報明細一時();
         DbWT0001HihokenshaTempEntity 被保険者情報 = 帳票出力対象データ.get被保険者一時();
-         if (帳票DBC200006.equals(帳票ID) || 帳票DBC200055.equals(帳票ID)) {
-             source.listList1_1 = date_to_string(受給者情報.get訂正年月日());
+        if (帳票DBC200006.equals(帳票ID) || 帳票DBC200055.equals(帳票ID)) {
+            source.listList1_1 = date_to_string(受給者情報.get訂正年月日());
         } else if (帳票DBC200058.equals(帳票ID)) {
-           RString 突合結果名称 = JukyushaIF_TsugoKekkaKubun.toValue(受給者情報.get突合結果区分()).get名称();
+            RString 突合結果名称 = JukyushaIF_TsugoKekkaKubun.toValue(受給者情報.get突合結果区分()).get名称();
             source.listList1_1 = 受給者情報.get突合結果区分().concat(コロン).concat(突合結果名称);
         }
         source.listList1_4 = 被保険者情報.get登録被保険者番号().getColumnValue();
@@ -107,11 +108,14 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
         source.shichosonCode = 被保険者情報.get市町村コード();
         source.listList8_11 = 受給者情報.get被保険者番号_後期_();
         source.listList8_12 = 受給者情報.get被保険者証番号_国保_();
-        source.yubinNo = 被保険者情報.get郵便番号();
-        source.choikiCode = 被保険者情報.get町域コード();
-        source.gyoseikuCode = 被保険者情報.get行政区コード();
-        source.shimei50onKana = 被保険者情報.get氏名50音カナ();
+        source.yubinNo = getNotNull(被保険者情報.get郵便番号());
+        source.choikiCode = getNotNull(被保険者情報.get町域コード());
+        source.gyoseikuCode = getNotNull(被保険者情報.get行政区コード());
+        source.shimei50onKana = getNotNull(被保険者情報.get氏名50音カナ());
         source.shichosonCode = 被保険者情報.get市町村コード();
+        if (!RString.isNullOrEmpty(被保険者情報.get識別コード())) {
+            source.shikibetuCode = new ShikibetsuCode(被保険者情報.get識別コード());
+        }
         this.コード項目設定1(source);
         this.コード項目設定2(source);
         this.日付項目設定(source);
@@ -336,5 +340,12 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
             return RString.EMPTY;
         }
         return DecimalFormatter.toRString(number, 0).concat(パーセント);
+    }
+
+    private RString getNotNull(RString str) {
+        if (RString.isNullOrEmpty(str)) {
+            return RString.EMPTY;
+        }
+        return str;
     }
 }

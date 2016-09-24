@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021021.InsDankaibetsuShunoritsuTmpProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021021.PrtDankaibetsuShunoritsuIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021021.InsDankaibetsuShunoritsuTmpProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021021.PrtDankaibetsuShunoritsuIchiranhyoProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021021.DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.InsDankaibetsuShunoritsuTmpProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.PrtDankaibetsuShunoritsuIchiranhyoParameter;
@@ -27,15 +27,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
         BatchFlowBase<DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter> {
 
-    private static final String INS_DANKAIBETSU_SHUNORITSU = "insDankaibetsuShunoritsuTmpProcess";
-    private static final String PRT_DANKAIBETSU_SHUNORITSU_ICHIRANHYO = "prtDankaibetsuShunoritsuIchiranhyoProcess";
+    private static final String INS_DANKAIBETSU = "insDankaibetsuShunoritsuTmpProcess";
+    private static final String PRT_DANKAIBETSU_ICHIRANHYO = "prtDankaibetsuShunoritsuIchiranhyoProcess";
     private static final RString 生年月日年齢区分_生年月日 = new RString("生年月日");
     private static final RString 生年月日年齢区分_年齢 = new RString("年齢");
+    private static final int ZERO = 0;
 
     @Override
     protected void defineFlow() {
-        executeStep(INS_DANKAIBETSU_SHUNORITSU);
-        executeStep(PRT_DANKAIBETSU_SHUNORITSU_ICHIRANHYO);
+        executeStep(INS_DANKAIBETSU);
+        executeStep(PRT_DANKAIBETSU_ICHIRANHYO);
     }
 
     /**
@@ -43,7 +44,7 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
      *
      * @return バッチコマンド
      */
-    @Step(INS_DANKAIBETSU_SHUNORITSU)
+    @Step(INS_DANKAIBETSU)
     protected IBatchFlowCommand insDankaibetsuShunoritsuTmpProcess() {
         return loopBatch(InsDankaibetsuShunoritsuTmpProcess.class).
                 arguments(createInsProcessParameter()).define();
@@ -54,7 +55,7 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
      *
      * @return バッチコマンド
      */
-    @Step(PRT_DANKAIBETSU_SHUNORITSU_ICHIRANHYO)
+    @Step(PRT_DANKAIBETSU_ICHIRANHYO)
     protected IBatchFlowCommand prtDankaibetsuShunoritsuIchiranhyoProcess() {
         return loopBatch(PrtDankaibetsuShunoritsuIchiranhyoProcess.class).
                 arguments(createPrtProcessParameter()).define();
@@ -74,8 +75,8 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
             parameter.set開始生年月日(getParameter().get生年月日_開始());
             parameter.set終了生年月日(getParameter().get生年月日_終了());
         } else if (生年月日年齢区分_年齢.equals(getParameter().get生年月日年齢区分())) {
-            Decimal 開始年齢 = getParameter().get年齢_開始();
-            Decimal 終了年齢 = getParameter().get年齢_終了();
+            Decimal 開始年齢 = getParameter().get年齢_開始() == null ? Decimal.ZERO : getParameter().get年齢_開始();
+            Decimal 終了年齢 = getParameter().get年齢_終了() == null ? Decimal.ZERO : getParameter().get年齢_終了();
             parameter.set開始生年月日(getParameter().get年齢基準日());
             parameter.set終了生年月日(getParameter().get年齢基準日().plusYear(終了年齢.subtract(開始年齢).intValue()));
         }
@@ -111,8 +112,8 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
         parameter.set開始生年月日(getParameter().get生年月日_開始());
         parameter.set終了生年月日(getParameter().get生年月日_終了());
         parameter.set年齢基準日(getParameter().get年齢基準日());
-        parameter.set開始年齢(getParameter().get年齢_開始().intValue());
-        parameter.set終了年齢(getParameter().get年齢_終了().intValue());
+        parameter.set開始年齢(getParameter().get年齢_開始() == null ? ZERO : getParameter().get年齢_開始().intValue());
+        parameter.set終了年齢(getParameter().get年齢_終了() == null ? ZERO : getParameter().get年齢_開始().intValue());
         parameter.set広域判定区分(getParameter().get広域判定区分());
         parameter.set選択対象リスト(getParameter().get選択対象リスト());
         if (getParameter().get市町村情報() != null) {

@@ -152,6 +152,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         param.set市町村情報List(Collections.EMPTY_LIST);
         param.set共有ファイルID(共有ファイルID);
         param.set共有ファイル名(ファイル付箋);
+        param.setファイル名(div.getHiddenResult());
         return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112001Parameter(param);
     }
 
@@ -169,6 +170,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         param.set市町村情報List(Collections.EMPTY_LIST);
         param.set共有ファイルID(共有ファイルID);
         param.set共有ファイル名(ファイル付箋);
+        param.setファイル名(div.getHiddenResult());
         return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112003Parameter(param);
     }
 

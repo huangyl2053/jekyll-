@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShoriKekkaKakuninLi
 /**
  * 振込エラーリスト作成と処理結果確認リスト情報_データ取得のMapperクラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public interface IFurikomiErrorListCreateMapper {
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -96,19 +97,17 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
         try (ReportAssembler<JigyoKogakuKetteiTsuchishoYijiNashiSource> assembler = createAssembler(property, reportManager)) {
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
-//            RString 帳票イメージフォルダパス = assembler.getImageFolderPath();
-//            NinshoshaSource 認証者ソースデータ = NinshoshaSourceBuilderFactory.createInstance(
-//                    認証者,
-//                    地方公共団体,
-//                    帳票イメージフォルダパス,
-//                    発行日).buildSource();
-            NinshoshaSource 認証者ソースデータ = null;
+            RString 帳票イメージフォルダパス = assembler.getImageFolderPath();
+            NinshoshaSource 認証者ソースデータ = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    帳票イメージフォルダパス,
+                    発行日).buildSource();
 
             ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> reportSourceWriter;
             reportSourceWriter = new ReportSourceWriter(assembler);
 
-//            RString 設定値 = fetch設定値();
-            RString 設定値 = null;
+            RString 設定値 = fetch設定値();
 
             new JigyoKogakuKetteiTsuchishoYijiNashiReport(
                     設定値,
@@ -122,8 +121,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
     private RString fetch設定値() {
         DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
         DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名);
-        RString 設定値 = entity.getKomokuValue();
-        return 設定値;
+        return entity.getKomokuValue();
+
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

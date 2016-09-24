@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishocover;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.kyufuhitsuchishocover.KyufuhiTsuchishoCoverEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhitsuchishocover.KyufuhiTsuchishoCoverEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishocover.KyufuhiTsuchishoCoverReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

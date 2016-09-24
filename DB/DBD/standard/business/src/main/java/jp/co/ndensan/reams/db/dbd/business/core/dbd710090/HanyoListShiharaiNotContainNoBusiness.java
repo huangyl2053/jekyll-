@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.dbd710090;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
@@ -26,8 +25,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -152,7 +149,6 @@ public class HanyoListShiharaiNotContainNoBusiness {
 
     private void set宛名情報について(GeneralPurposeListOutputNotContainNoEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, Association 地方公共団体情報, boolean 日付スラッシュ付加) {
-        //宛名 を IKojin
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().getColumnValue());
@@ -227,10 +223,6 @@ public class HanyoListShiharaiNotContainNoBusiness {
 
     private void set被保険者台帳管理について(GeneralPurposeListOutputNotContainNoEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, HokenshaList 保険者リスト, boolean 日付スラッシュ付加) {
-        //被保険者台帳管理
-        if (entity.get被保険者台帳管理_市町村コード() != null && !entity.get被保険者台帳管理_市町村コード().isEmpty()) {
-            eucCsvEntity.set市町村名(edit市町村(new LasdecCode(entity.get被保険者台帳管理_市町村コード())));
-        }
 
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         eucCsvEntity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
@@ -714,25 +706,11 @@ public class HanyoListShiharaiNotContainNoBusiness {
         return RString.EMPTY;
     }
 
-    private RString edit抽出項目区分(RString 抽出項目区分) {
-        try {
-            return ChushutsuKomokuKubun.toValue(抽出項目区分).get名称();
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-    }
-
     private RString edit旧措置(boolean kyuSochishaFlag) {
         if (kyuSochishaFlag) {
             return 旧措置者;
         }
         return RString.EMPTY;
-    }
-
-    private RString edit市町村(LasdecCode 市町村コード) {
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association 地方公共団体 = finder.getAssociation(市町村コード);
-        return 地方公共団体.get市町村名();
     }
 
     private RString getコードマスタ(CodeShubetsu コード種別, Code コード) {

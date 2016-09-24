@@ -55,7 +55,8 @@ public class KyotakuServiceKeikakuSaHeaderEditor implements IKyotakuServiceKeika
         source.joken2 = target.get対象者();
         source.joken3 = target.get届出状況();
         if (target.get基準日() != null) {
-            source.kijunYmd = new RString(target.get基準日().toString());
+            source.kijunYmd = target.get基準日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
         }
 
     }

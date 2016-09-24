@@ -37,6 +37,9 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 異動_単一 = new RString("4");
     private static final RString 枝番 = new RString("0001");
 
+    /**
+     * コンストラクタです。
+     */
     ShotokuJohoChushutsuRenkeitanitu() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
@@ -74,7 +77,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         List<DbT7022ShoriDateKanriEntity> 処理日付管理異動情報EntityList
                 = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.当初所得引出.get名称(), 枝番, 年度, 枝番);
         if (遷移区分_0.equals(遷移区分)) {
-            if (0 == 処理日付管理異動情報EntityList.size()) {
+            if (処理日付管理異動情報EntityList == null || 処理日付管理異動情報EntityList.isEmpty()) {
                 処理区分 = 処理日付管理マスタ無し;
             } else {
                 基準日時 = 処理日付管理異動情報EntityList.get(0).getKijunTimestamp();
@@ -83,7 +86,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
             return 処理区分;
         }
         if (遷移区分_1.equals(遷移区分)) {
-            if (0 == 処理日付管理異動情報EntityList.size()) {
+            if (処理日付管理異動情報EntityList == null || 処理日付管理異動情報EntityList.isEmpty()) {
                 処理区分 = 不可;
                 return 処理区分;
             } else {
@@ -117,6 +120,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
         result.set共有ファイル名(parameter.get共有ファイル名());
+        result.setファイル名(parameter.getファイル名());
         result.set共有ファイルID(parameter.get共有ファイルID());
         result.set処理区分(当初_単一);
         return result;
@@ -135,6 +139,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
+        result.setファイル名(parameter.getファイル名());
         result.set共有ファイル名(parameter.get共有ファイル名());
         result.set共有ファイルID(parameter.get共有ファイルID());
         result.set処理区分(異動_単一);

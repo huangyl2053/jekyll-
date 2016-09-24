@@ -116,7 +116,7 @@
         <association property="宛名識別対象Entity"  resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
-    <resultMap  id="国保資格情報インポート用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuＪyohoYoResultEntity" autoMapping="true">
+    <resultMap  id="国保資格情報インポート用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoYoResultEntity" autoMapping="true">
         <association property="取込国保情報Entity" resultMap="ResultMap_取込国保情報"/>
         <association property="現在国保資格情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7123KokuhoShikakuInfoMapper.ResultMap_DbT7123KokuhoShikakuInfoEntity"/>
     </resultMap>

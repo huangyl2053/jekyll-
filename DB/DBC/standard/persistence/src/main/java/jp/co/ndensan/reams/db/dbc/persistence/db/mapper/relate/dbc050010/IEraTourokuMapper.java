@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.EraTourokuEntity;
 /**
  * エラー登録のバッチのDB操作です。
  *
- * @reamsid_L DBC-5010-030 donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 public interface IEraTourokuMapper {
 

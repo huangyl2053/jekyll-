@@ -18,7 +18,6 @@ and open the template in the editor.
         収納滞納状況一時テーブル."hihokenshaNo"
         FROM
         "ShunoTainoJokyoTemp" AS 収納滞納状況一時テーブル
-        <if test="is対象区分_全登録者以外">
             INNER JOIN rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
             ON 収納滞納状況一時テーブル."hihokenshaNo" = 支払方法変更."hihokenshaNo" AND
             支払方法変更."kanriKubun" = '3' AND
@@ -26,6 +25,10 @@ and open the template in the editor.
             支払方法変更."tekiyoShuryoYMD" <![CDATA[>=]]> #{システム日付} AND
             支払方法変更."logicalDeletedFlag" = 'false'
             
+        <if test="is対象区分_全登録者以外">
+            <if test="is通知書未発行者抽出">
+                AND 支払方法変更."gemmen_TsuchiHakkoYMD" = ''
+            </if>
             <if test="is減額適用中者抽出">
                 INNER JOIN rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
                 ON 支払方法変更."shoKisaiHokenshaNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."shoKisaiHokenshaNo" AND
@@ -47,13 +50,12 @@ and open the template in the editor.
             </if>
         </if>
         WHERE
-        収納滞納状況一時テーブル."jikoKisanYMD"(sysdate,24) > #{基準日} 
+        収納滞納状況一時テーブル."jikoKisanYMD" > #{基準日の2年前} 
         AND 収納滞納状況一時テーブル."minoKannoKubun" = #{未納完納区分_未納あり}
-        <if test="is対象区分_全登録者以外">
+        <if test="is対象区分_全登録者以外"> 
             AND 収納滞納状況一時テーブル."minogaku" > 0  
         </if>
 
-        <if test="is対象区分_全登録者以外">
             <if test="is通知書未発行者抽出">
                 AND (支払方法変更."gemmen_TsuchiHakkoYMD" is null or rgdb.支払方法変更."gemmen_TsuchiHakkoYMD"='')
             </if>
@@ -68,7 +70,6 @@ and open the template in the editor.
                 AND B."minoKannoKubun" = #{未納完納区分_未納あり}
                 )
             </if>
-        </if>
     </select>
 
     <resultMap id="resultMap_ShunoTainoJokyoTempTableEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoTainoJokyoTempTableEntity" autoMapping="true">
@@ -168,19 +169,38 @@ and open the template in the editor.
         収納滞納状況一時テーブル."tainoKubun" AS 収納滞納状況一時_滞納区分,
         
         対象者情報一時テーブル."hihokenshaNo",
-        <!--  QA： 支払方法変更減額表字段有问题-->
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.allColumns_DbT4025ShiharaiHohoHenkoGengaku" />
         FROM "ShunoTainoJokyoTemp" AS 収納滞納状況一時テーブル
         INNER JOIN "KyufuGengakuKanriListTaishoTokutei" AS 対象者情報一時テーブル
         ON 
         収納滞納状況一時テーブル."hihokenshaNo" = 対象者情報一時テーブル."hihokenshaNo"
-        <!--  QA： 支払方法変更減額表字段有问题-->
-        LEFT JOIN rgdb."DbT4025ShiharaiHohoHenkoGengaku"
-        ON  収納滞納状況一時テーブル."hihokenshaNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."hihokenshaNo" <!--AND
-        収納滞納状況一時_調定年度 = 支払方法変更減額.調定年度 AND
-        収納滞納状況一時_賦課年度 = 支払方法変更減額.賦課年度 AND
-        収納滞納状況一時_期別 = 支払方法変更減額.収納期月
-        ORDER BY
-        #{出力順}-->
+        LEFT JOIN
+             (
+               SELECT 支払方法変更.*
+               FROM (
+                    SELECT 
+                        支払方法変更."shoKisaiHokenshaNo",
+                        支払方法変更."hihokenshaNo",
+                        支払方法変更."kanriKubun",
+                        支払方法変更."rirekiNo"
+                   FROM
+                       "KyufuGengakuKanriListTaishoTokutei" 対象者情報一時
+                   INNER JOIN
+                        rgdb."DbT4021ShiharaiHohoHenko" 支払方法変更
+                   ON 対象者情報一時."hihokenshaNo" = 支払方法変更."hihokenshaNo"
+                   WHERE 支払方法変更."kanriKubun" = #{支払方法変更管理区分_１号給付額減額} 
+                     AND 支払方法変更."mukoKubun" = #{支払方法変更無効区分_有効} 
+                     AND 支払方法変更."logicalDeletedFlag" = FALSE
+                    ) AS １号給付額減額
+                INNER JOIN
+                    rgdb."DbT4025ShiharaiHohoHenkoGengaku" 支払方法変更
+                ON
+                    支払方法変更."hihokenshaNo" = １号給付額減額."hihokenshaNo"
+                    AND 支払方法変更."rirekiNo" = １号給付額減額."rirekiNo"
+                    AND 支払方法変更."kanriKubun" = １号給付額減額."kanriKubun"
+                ORDER BY １号給付額減額."rirekiNo" DESC
+             ) AS 支払方法変更減額
+        ON 支払方法変更減額."hihokenshaNo" = 対象者情報一時テーブル."hihokenshaNo"
+        #{出力順}
     </select>    
 </mapper>

@@ -375,9 +375,9 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         } else {
             item.setKetteiYMD(RString.EMPTY);
         }
-        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuUchiwakeRiyoshabun() != null) {
+        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuRiyoshabun() != null) {
             item.setHonninShiharaiGaku(DecimalFormatter.toコンマ区切りRString(償還払支給決定通知書.get償還払支給決定通知書().
-                    getShiharaiKingakuUchiwakeRiyoshabun(), 0));
+                    getShiharaiKingakuRiyoshabun(), 0));
         } else {
             item.setHonninShiharaiGaku(RString.EMPTY);
         }
@@ -511,9 +511,9 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         } else {
             item.setKetteiYMD(RString.EMPTY);
         }
-        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuUchiwakeRiyoshabun() != null) {
+        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuRiyoshabun() != null) {
             item.setHonninShiharaiGaku(DecimalFormatter.toコンマ区切りRString(償還払支給決定通知書.get償還払支給決定通知書().
-                    getShiharaiKingakuUchiwakeRiyoshabun(), 0));
+                    getShiharaiKingakuRiyoshabun(), 0));
         } else {
             item.setHonninShiharaiGaku(RString.EMPTY);
         }

@@ -31,17 +31,6 @@ public class DBC5150011Main {
     }
 
     /**
-     * 「サービス種類」ボタンのメソッドです。
-     *
-     * @param div DBC5150011MainDiv
-     * @return ResponseData
-     */
-    public ResponseData<DBC5150011MainDiv> onClick_btnServiceCode(DBC5150011MainDiv div) {
-        //QA1442
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 抽出条件区分RBTをonChangeです。
      *
      * @param div DBC5150011MainDiv

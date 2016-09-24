@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.GdaekomiDetaiResult
 /**
  * 高額データ取得のmapperです
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 public interface IGdaekomimeisaiFurikomiMapper {
 

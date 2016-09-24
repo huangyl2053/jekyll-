@@ -96,7 +96,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor implements ISho
         source.kouzaMeigi = item.getKouzaMeigi();
         source.torikeshiShiharaikikan = item.getTorikeshiShiharaikikan();
         source.shiharaiEndYMD = item.getShiharaiEndYMD();
-        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) && !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
+        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) || !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
             source.karaFugo = item.getKaraFugo();
         }
         source.shiharaiStartHMS = item.getShiharaiStartHMS();

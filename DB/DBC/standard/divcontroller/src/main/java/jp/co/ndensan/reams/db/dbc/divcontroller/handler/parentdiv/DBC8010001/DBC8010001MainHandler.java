@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8010001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.dbc8010001.DBC8010001;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC050010.DBC050010_FurikomimeisaiFurikomiDataParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIchiranChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_SaishoriShitei;
@@ -15,11 +16,10 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKub
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriTaisho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001.DBC8010001MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001.DBC8010001MainDivSpec;
-import jp.co.ndensan.reams.db.dbc.service.core.DBC8010001.DBC8010001MainManager;
+import jp.co.ndensan.reams.db.dbc.service.core.furikomidaitasakusai.DBC8010001MainManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -64,7 +64,7 @@ public class DBC8010001MainHandler {
     /**
      * 画面初期化。
      *
-     * @param pairs
+     * @param pairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs initialize(ValidationMessageControlPairs pairs) {
@@ -87,25 +87,25 @@ public class DBC8010001MainHandler {
 
         RString 処理名 = prepare処理名(メニューID, 振込単位);
         DBC8010001MainManager manager = new DBC8010001MainManager();
-        DbT7022ShoriDateKanriEntity dbtentity;
-        dbtentity = manager.get前回処理情報(SubGyomuCode.DBC介護給付, new LasdecCode("000000"), 処理名, new RString("0000"), new FlexibleYear("0000"), new RString("0001"));
+        DBC8010001 dbc;
+        dbc = manager.get前回処理情報(SubGyomuCode.DBC介護給付, new LasdecCode("000000"), 処理名, new RString("0000"), new FlexibleYear("0000"), new RString("0001"));
 
-        init画面表示内容(dbtentity);
-        init表示制御(メニューID, 振込単位, dbtentity);
+        init画面表示内容(dbc);
+        init表示制御(メニューID, 振込単位, dbc);
         return pairs;
     }
 
-    public void init画面表示内容(DbT7022ShoriDateKanriEntity entity) {
+    private void init画面表示内容(DBC8010001 dbc) {
         //TODO 1.13.0 ※委託者情報が取得できなかった場合、委託者情報の各項目にはEMPTYセット
         //        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList();
         //        FurikomiGroupItakushaRelateEntity fentity = list.get(0);
-        this.代表金融機関コード = new KinyuKikanCode("2323");//TODO
-        this.振込グループコード = new RString("54321");//TODO
-        div.getItakusha().getTxtItakushaCode().setValue(new RString("1234567890"));//TODO
-        div.getItakusha().getTxtItakushamei().setValue(new RString("劉偉"));//TODO
-        div.getItakusha().setItakushaId(new RString("0987654321"));//TODO
-        div.getItakusha().getTxtFurikomiGroupCode().setValue(new RString("9439239239no233242"));//TODO
-        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(new RString("abcd"));//TODO
+        this.代表金融機関コード = new KinyuKikanCode("2323");
+        this.振込グループコード = new RString("54321");
+        div.getItakusha().getTxtItakushaCode().setValue(new RString("1234567890"));
+        div.getItakusha().getTxtItakushamei().setValue(new RString("劉偉"));
+        div.getItakusha().setItakushaId(new RString("0987654321"));
+        div.getItakusha().getTxtFurikomiGroupCode().setValue(new RString("9439239239no233242"));
+        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(new RString("abcd"));
 
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
@@ -162,9 +162,9 @@ public class DBC8010001MainHandler {
         list6.add(source9);
         div.getRadSiharaihohou().setDataSource(list6);
 
-        if (null != entity) {
-            div.getTxtZenkaiTaishoYmdRange().setFromValue(entity.getTaishoKaishiYMD().toRDate());
-            div.getTxtZenkaiTaishoYmdRange().setToValue(entity.getTaishoShuryoYMD().toRDate());
+        if (null != dbc) {
+            div.getTxtZenkaiTaishoYmdRange().setFromValue(dbc.getEntity().getTaishoKaishiYMD().toRDate());
+            div.getTxtZenkaiTaishoYmdRange().setToValue(dbc.getEntity().getTaishoShuryoYMD().toRDate());
         }
 
         List<KeyValueDataSource> list7 = new ArrayList<>();
@@ -183,7 +183,7 @@ public class DBC8010001MainHandler {
         div.getRadChushutsuTaisho().setDataSource(list7);
     }
 
-    public void init表示制御(RString メニューID, RString 振込単位, DbT7022ShoriDateKanriEntity entity) {
+    private void init表示制御(RString メニューID, RString 振込単位, DBC8010001 dbc) {
         if (メニューID.equals(new RString("DBCMN43003"))) {
             if (振込単位.equals(new RString("1"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.償還高額.getコード());
@@ -217,15 +217,15 @@ public class DBC8010001MainHandler {
         div.getRadSiharaihohou().setSelectedKey(Furikomi_ShihraiHohoShitei.口座.getコード());
         div.getRadSiharaihohou().setDisabled(true);
 
-        if (null == entity) {
+        if (null == dbc) {
             div.getTxtZenkaiTaishoYmdRange().clearFromValue();
             div.getTxtZenkaiTaishoYmdRange().clearToValue();
             div.getTxtKonkaiTaishoYmdRange().clearFromValue();
             div.getTxtKonkaiTaishoYmdRange().setToValue(RDate.getNowDate());
         } else {
-            div.getTxtKonkaiTaishoYmdRange().setFromValue(entity.getTaishoShuryoYMD().toRDate().plusDay(1));
-            if (RDate.getNowDate().isBeforeOrEquals(entity.getTaishoShuryoYMD().toRDate())) {
-                div.getTxtKonkaiTaishoYmdRange().setToValue(entity.getTaishoShuryoYMD().toRDate().plusDay(1));
+            div.getTxtKonkaiTaishoYmdRange().setFromValue(dbc.getEntity().getTaishoShuryoYMD().toRDate().plusDay(1));
+            if (RDate.getNowDate().isBeforeOrEquals(dbc.getEntity().getTaishoShuryoYMD().toRDate())) {
+                div.getTxtKonkaiTaishoYmdRange().setToValue(dbc.getEntity().getTaishoShuryoYMD().toRDate().plusDay(1));
             } else {
                 div.getTxtKonkaiTaishoYmdRange().setToValue(RDate.getNowDate());
             }
@@ -241,9 +241,9 @@ public class DBC8010001MainHandler {
     }
 
     /**
-     * @param メニューID
-     * @param 振込単位
-     * @return
+     * @param メニューID RString
+     * @param 振込単位 RString
+     * @return RString
      */
     public RString prepare処理名(RString メニューID, RString 振込単位) {
         RString 処理名 = new RString("");
@@ -256,6 +256,8 @@ public class DBC8010001MainHandler {
                     case "2":
                         処理名 = ShoriName.給付振込データ作成_高額.get名称();
                         break;
+                    default:
+                        break;
                 }
                 break;
             case "DBCMN54002":
@@ -266,7 +268,11 @@ public class DBC8010001MainHandler {
                     case "2":
                         処理名 = ShoriName.給付振込データ作成_償還.get名称();
                         break;
+                    default:
+                        break;
                 }
+                break;
+            default:
                 break;
         }
         return 処理名;

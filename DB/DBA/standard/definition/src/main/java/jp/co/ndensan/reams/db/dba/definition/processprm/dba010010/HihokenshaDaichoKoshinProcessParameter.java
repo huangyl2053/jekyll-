@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dba.definition.processprm.dba010010;
 
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,5 +44,16 @@ public class HihokenshaDaichoKoshinProcessParameter implements IBatchProcessPara
         this.shikibetsuTaishoPSMSearchKey = shikibetsuTaishoPSMSearchKey;
 
         return new AtenaMybatisParameter(this.shikibetsuTaishoPSMSearchKey, this.開始日, this.終了日);
+    }
+
+    /**
+     * 判定SQL用のパラメータ作成を行います。
+     *
+     * @param 識別コード 識別コード
+     * @param 年齢到達日 年齢到達日
+     * @return 判定SQL用のパラメータ
+     */
+    public NenreiIdoHanteiMybatisParameter toNenreiIdoHanteiMybatisParameter(ShikibetsuCode 識別コード, FlexibleDate 年齢到達日) {
+        return new NenreiIdoHanteiMybatisParameter(識別コード, 年齢到達日);
     }
 }

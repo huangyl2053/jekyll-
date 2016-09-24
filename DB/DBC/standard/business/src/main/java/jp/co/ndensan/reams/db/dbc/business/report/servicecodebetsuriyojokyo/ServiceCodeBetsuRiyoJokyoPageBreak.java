@@ -38,7 +38,9 @@ public class ServiceCodeBetsuRiyoJokyoPageBreak extends PageBreaker<ServiceCodeB
     public boolean isBreak(ReportLineRecord<ServiceCodeBetsuRiyoJokyoSource> currentSource,
             ReportLineRecord<ServiceCodeBetsuRiyoJokyoSource> nextSource) {
         boolean flag = false;
-        if (!currentSource.getSource().List1_1.equals(nextSource.getSource().List1_1)) {
+        if (currentSource.getSource().List1_1 != null) {
+            flag = false;
+        } else if (!currentSource.getSource().List1_1.equals(nextSource.getSource().List1_1)) {
             flag = true;
         }
         return flag;

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotorokuman
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -55,9 +57,12 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString T_O_Z = new RString("E00210");
     private static final RString T_S_Z = new RString("E00360");
     private static final RString 履歴番号 = new RString("履歴番号");
+    private static final RString 保存確認 = new RString("保存確認");
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
     private static final RString 連絡票を = new RString("btnUpdate");
+    private static final RString 新規データを削除しようとしています = new RString("新規データを削除しようとしています");
+    private static final RString 終了データを削除しようとしています = new RString("終了データを削除しようとしています");
 
     /**
      * 画面初期化です。
@@ -111,6 +116,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        div.setDialogFlag(保存確認);
         KyodoJukyushaTaishoshaEntity 引き継ぎ情報 = ViewStateHolder.get(
                 ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
         JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div = div.getJukyushaIdoRenrakuhyo().get受給者異動送付();
@@ -120,12 +126,39 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         if (THREE.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
             ViewStateHolder.put(ViewStateKeys.利用モード, 照会モード);
         }
+        if (TWO.equals(result.get警告メッセージコード_新規())) {
+            if (!ResponseHolder.isReRequest()
+                    && !new RString(DbzWarningMessages.確認.getMessage().getCode()).
+                    equals(ResponseHolder.getMessageCode())
+                    && !new RString(UrQuestionMessages.保存の確認.getMessage().
+                            getCode()).equals(ResponseHolder.getMessageCode())) {
+                WarningMessage message = new WarningMessage(
+                        DbzWarningMessages.確認.getMessage().getCode(),
+                        DbzWarningMessages.確認.getMessage().
+                        replace(新規データを削除しようとしています.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            setエラー有無(div, result);
+        } else if (TWO.equals(result.get警告メッセージコード_終了())) {
+            if (!ResponseHolder.isReRequest() && !new RString(DbzWarningMessages.確認.getMessage().
+                    getCode()).equals(ResponseHolder.getMessageCode())
+                    && !new RString(UrQuestionMessages.保存の確認.getMessage().
+                            getCode()).equals(ResponseHolder.getMessageCode())) {
+                WarningMessage message = new WarningMessage(
+                        DbzWarningMessages.確認.getMessage().getCode(),
+                        DbzWarningMessages.確認.getMessage().
+                        replace(終了データを削除しようとしています.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            setエラー有無(div, result);
+        }
         if (0 == result.getエラー有無()) {
             div.getHdnFlag().setValue(起動);
         } else {
             div.getHdnFlag().setValue(停止);
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!new RString(UrQuestionMessages.保存の確認.getMessage().
+                getCode()).equals(ResponseHolder.getMessageCode()) && 保存確認.equals(div.getDialogFlag())) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -142,7 +175,21 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                 return ResponseData.of(div).respond();
             }
         } else {
+            div.setDialogFlag(RString.EMPTY);
             return ResponseData.of(div).respond();
+        }
+    }
+
+    private void setエラー有無(
+            JukyushaTeiseiRenrakuhyoTorokuPanelDiv div,
+            JukyushaTeiseiRenrakuhyoTorokuManagerResult result) {
+        if (new RString(DbzWarningMessages.確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            result.setエラー有無(1);
+            div.setDialogFlag(RString.EMPTY);
+        } else {
+            div.setDialogFlag(保存確認);
         }
     }
 

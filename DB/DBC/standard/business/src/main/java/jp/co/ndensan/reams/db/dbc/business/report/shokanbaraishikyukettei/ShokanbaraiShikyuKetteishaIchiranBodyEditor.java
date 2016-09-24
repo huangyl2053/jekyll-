@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanSh
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyuketteishaichiran.ShokanbaraiShikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -101,6 +102,13 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
         } else {
             source.listDBKoshinUmu_1 = RString.EMPTY;
         }
+        source.yubinNo = getNotNull(被保険者.get郵便番号());
+        source.choikiCode = getNotNull(被保険者.get町域コード());
+        source.gyoseikuCode = getNotNull(被保険者.get行政区コード());
+        source.shimei50onKana = getNotNull(被保険者.get氏名50音カナ());
+        if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
+            source.shikibetuCode = new ShikibetsuCode(被保険者.get識別コード());
+        }
         return source;
     }
 
@@ -109,6 +117,13 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private RString getNotNull(RString str) {
+        if (RString.isNullOrEmpty(str)) {
+            return RString.EMPTY;
+        }
+        return str;
     }
 
 }

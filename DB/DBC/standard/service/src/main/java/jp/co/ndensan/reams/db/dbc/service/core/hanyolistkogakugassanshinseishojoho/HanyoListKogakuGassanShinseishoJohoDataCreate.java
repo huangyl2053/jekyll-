@@ -524,7 +524,6 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
     }
 
     private RString get受給申請事由(HanyoListKogakuGassanShinseishoJohoEntity entity) {
-        RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = RString.EMPTY;
         if (entity.get受給者台帳_受給申請事由() != null) {
             受給申請事由コード = entity.get受給者台帳_受給申請事由();

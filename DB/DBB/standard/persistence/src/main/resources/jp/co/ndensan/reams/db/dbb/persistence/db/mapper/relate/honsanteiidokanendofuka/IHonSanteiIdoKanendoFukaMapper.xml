@@ -62,9 +62,9 @@
         ON
         宛名."setaiCode" = T."setaiCode"
         WHERE
-        (B."shikakuSoshitsuYMD" IS NOT NULL
-         AND  B."shikakuSoshitsuYMD" <![CDATA[<>]]> '')
-        OR  #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD" 
+            B."shikakuSoshitsuYMD" IS NOT NULL
+        AND  B."shikakuSoshitsuYMD" <![CDATA[<>]]> ''
+        AND  #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD" 
     </select>
     
     <!-- 異動情報抽出に本人の異動を「異動Temp」に追加する-->
@@ -150,9 +150,9 @@
         ON
         宛名."setaiCode" = T."setaiCode"
         WHERE
-        B."shikakuSoshitsuYMD" IS NULL 
-        OR B."shikakuSoshitsuYMD" = ''
-        OR #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD"
+            B."shikakuSoshitsuYMD" IS NOT NULL
+        AND  B."shikakuSoshitsuYMD" <![CDATA[<>]]> ''
+        AND #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 所得異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -477,11 +477,11 @@
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '過年度賦課'
         <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
         ${出力順},
-        "dbT2015KeisangoJoho_choteiNendo",
-        "dbT2015KeisangoJoho_fukaNendo",
-        "dbT2015KeisangoJoho_tsuchishoNo",
-        "dbT2015KeisangoJoho_koseiZengoKubun",
-        "dbT2015KeisangoJoho_sakuseiShoriName"
+        "DbT2015KeisangoJoho"."choteiNendo",
+        "DbT2015KeisangoJoho"."fukaNendo",
+        "DbT2015KeisangoJoho"."tsuchishoNo",
+        "DbT2015KeisangoJoho"."koseiZengoKubun",
+        "DbT2015KeisangoJoho"."sakuseiShoriName"
     </select>
     <resultMap id="resultMap_KeisangojohoToKozaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity" autoMapping="true">
         <id column="dbT2015KeisangoJoho_choteiNendo" />

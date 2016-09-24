@@ -12,8 +12,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInReport;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.DbWT1611SinsaKetteiSeikyuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.DbWT1612SinsaKetteiSeikyuKogakuEntity;
@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -213,6 +214,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
         do帳票のCSVファイル作成(lastEntity, false);
         do帳票のCSVファイル作成(lastEntity, true);
         sogojigyohiKagoKetteiInCsvWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private void do帳票のCSVファイル作成(SogojigyohiShinsaKetteiSeikyumeisaiInEntity entity, boolean 集計) {

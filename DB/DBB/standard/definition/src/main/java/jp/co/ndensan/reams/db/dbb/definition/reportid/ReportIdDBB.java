@@ -428,6 +428,10 @@ public enum ReportIdDBB {
      */
     DBB200017(new ReportId("DBB200017_HonsanteiKanendoIdoNonyutsuchishoHakkoIchiran"), new RString("保険料納入通知書（本算定過年度異動）発行一覧表")),
     /**
+     * 特別徴収依頼情報一覧表の帳票ID
+     */
+    DBB200019(new ReportId("DBB200019_TokubetsuChoshuIraiJohoIchiran"), new RString("特別徴収依頼情報一覧表")),
+    /**
      * 特別徴収依頼金額明細一覧表の帳票ID
      */
     DBB200023(new ReportId("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran"), new RString("特別徴収依頼金額明細一覧表")),
@@ -481,7 +485,11 @@ public enum ReportIdDBB {
     /**
      * 特別徴収依頼情報件数表の帳票ID
      */
-    DBB200020(new ReportId("DBB200020_TokubetsuChoshuIraiJohoKensuhyo"), new RString("特別徴収依頼情報件数表"));
+    DBB200020(new ReportId("DBB200020_TokubetsuChoshuIraiJohoKensuhyo"), new RString("特別徴収依頼情報件数表")),
+    /**
+     * 特別徴収異動情報一覧表の帳票ID
+     */
+    DBB200021(new ReportId("DBB200021_TokubetsuChoshuIdojohoIchiran"), new RString("特別徴収異動情報一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisthikazeinenkintaisho
 
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -35,7 +36,7 @@ public class HikazeiNenkinTaishoshaEntity {
     private RString if性別;
     private RString ifカナ氏名;
     private RString if漢字氏名;
-    private RString if郵便番号;
+    private YubinNo if郵便番号;
     private RString ifカナ住所;
     private RString if漢字住所;
     private RString if対象年;

@@ -48,7 +48,7 @@ public class NofugakuIchiranCodeFumeiEditor implements
     private static final int NUM_7 = 7;
 
     private static final RString 前正符号 = new RString("+");
-    private static final RString 前负符号 = new RString("-");
+    private static final RString 前符号 = new RString("-");
     private static final RString INDEX_0 = new RString("0");
     private static final RString 年分タイトル = new RString("年分");
     private static final RString 識別コード不明分タイトル = new RString("識別コード不明分");
@@ -262,7 +262,7 @@ public class NofugakuIchiranCodeFumeiEditor implements
                 return 前正符号.concat(string.padZeroToLeft(num));
             } else {
 
-                return 前负符号.concat(string.substring(NUM_1).padZeroToLeft(num));
+                return 前符号.concat(string.substring(NUM_1).padZeroToLeft(num));
             }
 
         }

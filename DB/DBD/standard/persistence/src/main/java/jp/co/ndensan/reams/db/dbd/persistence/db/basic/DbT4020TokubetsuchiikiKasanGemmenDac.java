@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -165,5 +166,18 @@ public class DbT4020TokubetsuchiikiKasanGemmenDac implements ISaveable<DbT4020To
                         leq(tekiyoShuryoYMD, 年度終了日),
                         eq(kakuninNo, 確認番号))).
                 toList(DbT4020TokubetsuchiikiKasanGemmenEntity.class);
+    }
+
+    /**
+     * DbT4020TokubetsuchiikiKasanGemmenEntityを物理削除します。
+     *
+     * @param entity entity
+     * @return 物理削除件数
+     */
+    @Transaction
+    public int delete(DbT4020TokubetsuchiikiKasanGemmenEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("特別地域加算減免エンティティ"));
+        entity.setState(EntityDataState.Deleted);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

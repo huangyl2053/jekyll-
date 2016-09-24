@@ -6,16 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5140011;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc5140011main.DBC5140011MainResult;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150050.DBC150050_ServicecodeTaniMeisaiIchiranParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.DBC5140011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.dgServiceShuruiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.dbc5140011main.DBC5140011MainFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -29,18 +31,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class DBC5140011MainHandler {
 
-    private static DBC5140011MainDiv div;
+    private DBC5140011MainDiv div;
     private static final RString アンだライン = new RString("_");
     private static final int 一 = 1;
     private static final int 二 = 2;
     private static final int 三 = 3;
     private static final int ゼロ = 0;
-    private static final ReportId 帳票ID = new ReportId("DBC200005_ServiceCodeTaniMeisaiIchiran");
 
     /**
      * コンストラクタです。
      *
-     * @param div KogakuGassanShikyuShinseiTorokuPanelHandler
+     * @param div DBC5140011MainDiv
      */
     public DBC5140011MainHandler(DBC5140011MainDiv div) {
         this.div = div;
@@ -54,8 +55,8 @@ public class DBC5140011MainHandler {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
         div.getChushutsuJoken1().getCcdJigyoshaNo().initialize();
         div.getChikuShitei().getCcdChikuShichosonSelect().initialize();
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
-        div.getCcdChohyoShutsuryokuKomoku().load(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200005.getReportId());
+        div.getCcdChohyoShutsuryokuKomoku().load(ReportIdDBC.DBC200005.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付);
 
         List<DBC5140011MainResult> resultList = DBC5140011MainFinder.createInstance().get介護サービス種類データ();
         if (resultList.isEmpty()) {
@@ -82,6 +83,9 @@ public class DBC5140011MainHandler {
     public DBC150050_ServicecodeTaniMeisaiIchiranParameter pamaHozon() {
 
         DBC150050_ServicecodeTaniMeisaiIchiranParameter parameter = new DBC150050_ServicecodeTaniMeisaiIchiranParameter();
+        if (div.getCcdChohyoShutsuryokujun().getSelected出力順() != null) {
+            parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
+        }
         if (div.getRadTaishoYM().getSelectedValue() != null && !div.getRadTaishoYM().getSelectedValue().isEmpty()) {
             parameter.set対象年月(div.getRadTaishoYM().getSelectedValue());
         }
@@ -132,7 +136,14 @@ public class DBC5140011MainHandler {
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果().isEmpty()) {
-            parameter.set選択地区リスト(div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果());
+            Map<RString, RString> map = div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果();
+            List<RString> list = new ArrayList<>();
+            if (null != map && !map.isEmpty()) {
+                for (RString key : map.keySet()) {
+                    list.add(key);
+                }
+            }
+            parameter.set選択地区リスト(sort昇順ByKey(list));
         } else {
             parameter.set選択地区リスト(null);
         }
@@ -168,6 +179,21 @@ public class DBC5140011MainHandler {
         }
     }
 
+    private List<RString> sort昇順ByKey(List<RString> list) {
+        if (list.isEmpty()) {
+            return list;
+        }
+        Collections.sort(list,
+                new Comparator<RString>() {
+                    @Override
+                    public int compare(RString arg0, RString arg1) {
+                        return arg0.compareTo(arg1);
+                    }
+                }
+        );
+        return list;
+    }
+
     /**
      * 条件を復元するボタンのメソッドです。
      */
@@ -181,16 +207,18 @@ public class DBC5140011MainHandler {
         }
         List<RString> サービス種類コードリスト
                 = restoreBatchParameterMap.getParameterListValue(RString.class, new RString("サービス種類コードリスト"));
+        List<dgServiceShuruiList_Row> rowListMoto = div.getChushutsuJoken2().getDgServiceShuruiList().getDataSource();
         List<dgServiceShuruiList_Row> rowList = new ArrayList();
         if (サービス種類コードリスト != null && !サービス種類コードリスト.isEmpty()) {
             for (RString serviceShuruiCode : サービス種類コードリスト) {
-                dgServiceShuruiList_Row row = new dgServiceShuruiList_Row();
-                row.setServiceShuruiCode(serviceShuruiCode);
-//                row.setServiceShuruiName(serviceShuruiCode.getColumnValue());
-                rowList.add(row);
+                for (dgServiceShuruiList_Row row : rowListMoto) {
+                    if (row.getServiceShuruiCode().equals(serviceShuruiCode)) {
+                        rowList.add(row);
+                    }
+                }
             }
         }
-        div.getChushutsuJoken2().getDgServiceShuruiList().setDataSource(rowList);
+        div.getChushutsuJoken2().getDgServiceShuruiList().setSelectedItems(rowList);
         RString サービス項目コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("サービス項目コード"));
         if (サービス項目コード != null && !サービス項目コード.isEmpty()) {
             List<RString> rstringList = サービス項目コード.toRStringList();
@@ -211,13 +239,10 @@ public class DBC5140011MainHandler {
         if (市町村コード != null && !市町村コード.isEmpty()) {
             div.getChikuShitei().getCcdChikuShichosonSelect().set市町村コード(市町村コード);
         }
-//        RString 市町村名称 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("KEY_市町村名称"));
         RString 旧市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("旧市町村コード"));
         if (旧市町村コード != null && !旧市町村コード.isEmpty()) {
             div.getChikuShitei().getCcdChikuShichosonSelect().set旧市町村コード(旧市町村コード);
         }
-//        RString 旧市町村名称 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("KEY_旧市町村名称"));
-//        RString 導入形態コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("KEY_導入形態コード"));
     }
 
     private void pamaRestore1(BatchParameterMap restoreBatchParameterMap) throws IllegalArgumentException {

@@ -124,4 +124,19 @@
         ORDER BY M."hihokenshaNo" DESC,
                  M."kanyurekiNo" DESC
     </select>
+    
+    <select id="selectMax加入履歴番号"
+     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3069KogakuGassanShinseishoKanyurekiMapper.ResultMap_DbT3069KogakuGassanShinseishoKanyurekiEntity" 
+     parameterType="java.util.Map" fetchSize="500"  resultOrdered="true">
+        SELECT  A.*
+        FROM rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS A
+        WHERE 
+        A."taishoNendo" = #{対象年度}
+        AND A."hokenshaNo" = #{保険者番号}
+        AND A."seiriNo" = #{整理番号}
+        AND A."hihokenshaNo" = #{被保険者番号}
+        AND A."rirekiNo" = #{履歴番号}
+        ORDER BY A."kanyurekiNo" DESC
+        FETCH FIRST 1 ROWS ONLY
+    </select>
 </mapper>

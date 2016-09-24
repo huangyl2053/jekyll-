@@ -36,21 +36,31 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KogakuGassanShikyuShinseiTorokuPanel {
 
-    private static Integer 申請状態;
-    private static Integer 申請状況;
+    private Integer 申請状態;
+    private Integer 申請状況;
     private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
+    private static final int ぜろ = 0;
     private static final int 十一 = 11;
     private static final int 十七 = 17;
     private static final RString 高額合算支給申請書訂正2 = new RString("DBCMN61004");
     private static final RString 照会 = new RString("照会");
+    private static final RString 高額合算支給申請書登録変更申請 = new RString("高額合算　支給申請書登録・変更");
+    private static final RString 高額合算支給申請書登録取下げ申請 = new RString("高額合算　支給申請書登録・取下げ");
+    private static final RString 高額合算支給申請書訂正 = new RString("高額合算　支給申請書・訂正");
+    private static final RString 高額合算支給申請書写登録変更申請 = new RString("高額合算　支給申請書（写）・変更");
+    private static final RString 高額合算支給申請書写登録取下げ申請 = new RString("高額合算　支給申請書（写）・取下げ");
+    private static final RString 高額合算支給申請書写訂正 = new RString("高額合算　支給申請書（写）・訂正");
+    private static final RString 自己負担額証明書交付申請書登録変更申請 = new RString("高額合算　自己負担額証明書交付申請書登録・変更");
+    private static final RString 自己負担額証明書交付申請書登録取下げ申請 = new RString("高額合算　自己負担額証明書交付申請書登録・取下げ");
+    private static final RString 自己負担額証明書交付申請書訂正 = new RString("高額合算　自己負担額証明書交付申請書登録・訂正");
 
     /**
      * get申請状態のメソッドです。
      *
      * @return 申請状態
      */
-    public static Integer get申請状態() {
+    public Integer get申請状態() {
         return 申請状態;
     }
 
@@ -59,8 +69,8 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      *
      * @param 申請状態 Integer
      */
-    public static void set申請状態(Integer 申請状態) {
-        KogakuGassanShikyuShinseiTorokuPanel.申請状態 = 申請状態;
+    public void set申請状態(Integer 申請状態) {
+        this.申請状態 = 申請状態;
     }
 
     /**
@@ -68,7 +78,7 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      *
      * @return 申請状況
      */
-    public static Integer get申請状況() {
+    public Integer get申請状況() {
         return 申請状況;
     }
 
@@ -77,8 +87,8 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      *
      * @param 申請状況 Integer
      */
-    public static void set申請状況(Integer 申請状況) {
-        KogakuGassanShikyuShinseiTorokuPanel.申請状況 = 申請状況;
+    public void set申請状況(Integer 申請状況) {
+        this.申請状況 = 申請状況;
     }
 
     /**
@@ -89,10 +99,10 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuPanelDiv> onLoad(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
 
-        申請状態 = 0;
-        申請状況 = 0;
+        set申請状態(ぜろ);
+        set申請状況(ぜろ);
         RString メニューID = UrControlDataFactory.createInstance().getMenuID();
-        RString タイトル = getHandler(div).switchFor(メニューID);
+        RString タイトル = switchFor(メニューID);
         getHandler(div).initialize();
         return ResponseData.of(div).rootTitle(タイトル).respond();
     }
@@ -176,7 +186,10 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuPanelDiv> onClick_btnKensaku(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-
+        set申請状態(ぜろ);
+        set申請状況(ぜろ);
+        RString メニューID = UrControlDataFactory.createInstance().getMenuID();
+        switchFor(メニューID);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validate();
         if (validPairs.iterator().hasNext()) {
             div.getKogakuGassanShikyuShinseiTorokuSearch().setIsOpen(true);
@@ -257,17 +270,33 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
     private KogakuGassanShinseishoDataResult session作成(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
         dgTorokuSearchResult_Row row = div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().getClickedItem();
         KogakuGassanShinseishoDataResult dataResult = new KogakuGassanShinseishoDataResult();
-        dataResult.set被保険者番号(new HihokenshaNo(row.getTxtHihokenshaNo()));
-        dataResult.set対象年度(new FlexibleYear(row.getTxtTaishoNendo()));
-        dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
+        if (row.getTxtHihokenshaNo() != null) {
+            dataResult.set被保険者番号(new HihokenshaNo(row.getTxtHihokenshaNo()));
+        }
+        if (row.getTxtTaishoNendo() != null) {
+            dataResult.set対象年度(new FlexibleYear(row.getTxtTaishoNendo()));
+        }
+        if (row.getTxtHokenshaNo() != null) {
+            dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
+        }
         if (row.getTxtShikyuShinseishoNo() != null) {
             dataResult.set整理番号(row.getTxtShikyuShinseishoNo().substring(十一, 十七));
         }
-        dataResult.set申請代表者氏名(new AtenaMeisho(row.getTxtShiseishimei()));
-        dataResult.set申請代表者郵便番号(new YubinNo(row.getTxtBango()));
-        dataResult.set申請代表者住所(row.getTxtSyusyou());
-        dataResult.set申請代表者電話番号(new TelNo(row.getTxtTelbanngo()));
-        dataResult.set履歴番号(new Decimal(row.getTxtRirekiNo().toString()));
+        if (row.getTxtShinseiDaihyoshaName() != null) {
+            dataResult.set申請代表者氏名(new AtenaMeisho(row.getTxtShinseiDaihyoshaName()));
+        }
+        if (row.getTxtBango() != null) {
+            dataResult.set申請代表者郵便番号(new YubinNo(row.getTxtBango()));
+        }
+        if (row.getTxtSyusyou() != null) {
+            dataResult.set申請代表者住所(row.getTxtSyusyou());
+        }
+        if (row.getTxtTelbanngo() != null) {
+            dataResult.set申請代表者電話番号(new TelNo(row.getTxtTelbanngo()));
+        }
+        if (row.getTxtRirekiNo().toString() != null) {
+            dataResult.set履歴番号(new Decimal(row.getTxtRirekiNo().toString()));
+        }
         return dataResult;
     }
 
@@ -277,5 +306,60 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
 
     private KogakuGassanShikyuShinseiTorokuPanelValidationHandler getValidationHandler(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
         return new KogakuGassanShikyuShinseiTorokuPanelValidationHandler(div);
+    }
+
+    private RString switchFor(RString メニューID) {
+        final Integer one = 1;
+        final Integer two = 2;
+        final Integer three = 3;
+        RString タイトル = new RString("");
+
+        switch (メニューID.toString()) {
+            case "DBCMN61002":
+                タイトル = 高額合算支給申請書登録変更申請;
+                set申請状態(two);
+                set申請状況(one);
+                break;
+            case "DBCMN61003":
+                タイトル = 高額合算支給申請書登録取下げ申請;
+                set申請状態(three);
+                set申請状況(one);
+                break;
+            case "DBCMN61004":
+                タイトル = 高額合算支給申請書訂正;
+                set申請状況(one);
+                break;
+            case "DBCMN61006":
+                タイトル = 高額合算支給申請書写登録変更申請;
+                set申請状態(two);
+                set申請状況(three);
+                break;
+            case "DBCMN61007":
+                タイトル = 高額合算支給申請書写登録取下げ申請;
+                set申請状態(three);
+                set申請状況(three);
+                break;
+            case "DBCMN61008":
+                タイトル = 高額合算支給申請書写訂正;
+                set申請状況(three);
+                break;
+            case "DBCMN61010":
+                タイトル = 自己負担額証明書交付申請書登録変更申請;
+                set申請状態(two);
+                set申請状況(two);
+                break;
+            case "DBCMN61011":
+                タイトル = 自己負担額証明書交付申請書登録取下げ申請;
+                set申請状態(three);
+                set申請状況(two);
+                break;
+            case "DBCMN61012":
+                タイトル = 自己負担額証明書交付申請書訂正;
+                set申請状況(two);
+                break;
+            default:
+                break;
+        }
+        return タイトル;
     }
 }

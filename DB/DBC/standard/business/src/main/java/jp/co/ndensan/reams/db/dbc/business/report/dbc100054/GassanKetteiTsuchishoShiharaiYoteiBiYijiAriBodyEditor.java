@@ -320,17 +320,17 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
             FlexibleDate shiharaiShuryoYMD, GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
         RString kaishiTime = entity.get支払期間開始時間();
         RString shuryoTime = entity.get支払期間終了時間();
-        if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty())
+        if ((!is空白(shiharaiKaishiYMD) || !is空白(shiharaiShuryoYMD))
                 && kaishiTime != null) {
             this.set支払期間時間(source, kaishiTime);
 
         }
-        if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty())
+        if ((!is空白(shiharaiKaishiYMD) || !is空白(shiharaiShuryoYMD))
                 && ((kaishiTime != null && !kaishiTime.isEmpty())
                 || (shuryoTime != null && !shuryoTime.isEmpty()))) {
             source.kara2 = 接続符;
         }
-        if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty()) && shuryoTime != null) {
+        if ((!is空白(shiharaiKaishiYMD) || !is空白(shiharaiShuryoYMD)) && shuryoTime != null) {
             this.set支払期間時間(source, shuryoTime);
         }
     }

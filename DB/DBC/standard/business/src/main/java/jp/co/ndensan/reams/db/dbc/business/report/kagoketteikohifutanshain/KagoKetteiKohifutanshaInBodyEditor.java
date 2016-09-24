@@ -44,6 +44,7 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
         if (集計Flag) {
             edit集計(source);
         }
+        source.shikibetuCode = 帳票出力対象データ.get識別コード();
         return source;
     }
 

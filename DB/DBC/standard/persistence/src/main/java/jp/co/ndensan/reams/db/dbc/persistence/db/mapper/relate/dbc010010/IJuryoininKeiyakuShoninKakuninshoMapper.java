@@ -22,6 +22,6 @@ public interface IJuryoininKeiyakuShoninKakuninshoMapper {
      * @param parameter JuryoininKeiyakuShoninKakuninshoMybatisParameter
      * @return List<JuryoininKeiyakuShoninKakuninshoEntity>
      */
-    public List<JuryoininKeiyakuShoninKakuninshoEntity> get受領委任データ(JuryoininKeiyakuShoninKakuninshoMybatisParameter parameter);
+    List<JuryoininKeiyakuShoninKakuninshoEntity> get受領委任データ(JuryoininKeiyakuShoninKakuninshoMybatisParameter parameter);
 
 }

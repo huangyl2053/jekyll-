@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaId
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -35,12 +36,14 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
      */
     @JsonProperty("OutputJukyushaIdoRenrakuhyo")
     private OutputJukyushaIdoRenrakuhyoDiv OutputJukyushaIdoRenrakuhyo;
+    @JsonProperty("hdnFlag")
+    private TextBox hdnFlag;
     @JsonProperty("JukyushaIdoRenrakuhyo")
     private JukyushaIdoRenrakuhyoDiv JukyushaIdoRenrakuhyo;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
-    @JsonProperty("hdnFlag")
-    private TextBox hdnFlag;
+    @JsonProperty("dialogFlag")
+    private RString dialogFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,6 +70,24 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     }
 
     /*
+     * gethdnFlag
+     * @return hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public TextBox getHdnFlag() {
+        return hdnFlag;
+    }
+
+    /*
+     * sethdnFlag
+     * @param hdnFlag hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public void setHdnFlag(TextBox hdnFlag) {
+        this.hdnFlag = hdnFlag;
+    }
+
+    /*
      * getJukyushaIdoRenrakuhyo
      * @return JukyushaIdoRenrakuhyo
      */
@@ -85,21 +106,21 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     }
 
     /*
-     * gethdnFlag
-     * @return hdnFlag
+     * getdialogFlag
+     * @return dialogFlag
      */
-    @JsonProperty("hdnFlag")
-    public TextBox getHdnFlag() {
-        return hdnFlag;
+    @JsonProperty("dialogFlag")
+    public RString getDialogFlag() {
+        return dialogFlag;
     }
 
     /*
-     * sethdnFlag
-     * @param hdnFlag hdnFlag
+     * setdialogFlag
+     * @param dialogFlag dialogFlag
      */
-    @JsonProperty("hdnFlag")
-    public void setHdnFlag(TextBox hdnFlag) {
-        this.hdnFlag = hdnFlag;
+    @JsonProperty("dialogFlag")
+    public void setDialogFlag(RString dialogFlag) {
+        this.dialogFlag = dialogFlag;
     }
 
     /*
@@ -126,13 +147,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonReportPublish getBtnHakkou() {
-        return this.getOutputJukyushaIdoRenrakuhyo().getBtnHakkou();
+    public ButtonReportPublish getBtnReportPublish() {
+        return this.getOutputJukyushaIdoRenrakuhyo().getBtnReportPublish();
     }
 
     @JsonIgnore
-    public void setBtnHakkou(ButtonReportPublish btnHakkou) {
-        this.getOutputJukyushaIdoRenrakuhyo().setBtnHakkou(btnHakkou);
+    public void setBtnReportPublish(ButtonReportPublish btnReportPublish) {
+        this.getOutputJukyushaIdoRenrakuhyo().setBtnReportPublish(btnReportPublish);
     }
 
     @JsonIgnore

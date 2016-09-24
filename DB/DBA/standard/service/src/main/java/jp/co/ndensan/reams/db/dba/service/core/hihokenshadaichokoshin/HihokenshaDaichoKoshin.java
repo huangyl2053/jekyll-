@@ -182,7 +182,8 @@ public class HihokenshaDaichoKoshin {
         return entity;
     }
 
-    private DbT1001HihokenshaDaichoEntity updateHihokenshaDaicho(ShikakuIdoTaishoshaEntity entity, SaishinIdohiDataEntity saishinIdohiDataEntity, FlexibleDate age) {
+    private DbT1001HihokenshaDaichoEntity updateHihokenshaDaicho(ShikakuIdoTaishoshaEntity entity,
+            SaishinIdohiDataEntity saishinIdohiDataEntity, FlexibleDate age) {
         枝番 = hihokenshaManager.getSaidaiEdaban(saishinIdohiDataEntity.get被保険者番号(), age);
         if (saishinIdohiDataEntity.get資格取得年月日() != null
                 && saishinIdohiDataEntity.get資格喪失年月日() != null && !saishinIdohiDataEntity.get資格喪失年月日().isEmpty()

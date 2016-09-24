@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1140001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001.DBB114001_ShotokuShokaihyoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.ShotokushokaihyoIkkatuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140001.ShotokushokaihyoIkkatuHandler;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
@@ -44,10 +44,10 @@ public class ShotokushokaihyoIkkatu {
      * @param div ShotokushokaihyoIkkatuDiv
      * @return ResponseData<SourceDataCollection>
      */
-    public ResponseData<ShotokuShokaihyoHakkoBatchParameter> onClick_Register(ShotokushokaihyoIkkatuDiv div) {
+    public ResponseData<DBB114001_ShotokuShokaihyoHakkoParameter> onClick_Register(ShotokushokaihyoIkkatuDiv div) {
         boolean テストプリント = getHandler(div).isテストプリント();
         boolean 再発行する = getHandler(div).is再発行する();
-        ShotokuShokaihyoHakkoBatchParameter parameter = getHandler(div).getParameter(div, テストプリント, 再発行する);
+        DBB114001_ShotokuShokaihyoHakkoParameter parameter = getHandler(div).getParameter(div, テストプリント, 再発行する);
         return ResponseData.of(parameter).respond();
     }
 

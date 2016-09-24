@@ -234,8 +234,8 @@ public class RenekeiDataSakuseiFourMasterCsvManager {
             RenekeiDataSakuseiFourMasterProcessParameter para) {
         DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity entity = new DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity();
         entity.setDataKubun(new Code(Datakubun.マスタ4.getコード()));
-        entity.setDataOutputKaishiYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_from().toString()));
-        entity.setDataOutputShuryoYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_to().toString()));
+        entity.setDataOutputKaishiYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_from()));
+        entity.setDataOutputShuryoYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_to()));
         return entity;
     }
 
@@ -249,8 +249,8 @@ public class RenekeiDataSakuseiFourMasterCsvManager {
     public DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity dbT7204YokaigoNinteiGaibuDataOutputHistoryUpdate(
             RenekeiDataSakuseiFourMasterProcessParameter para,
             DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity entity) {
-        entity.setDataOutputKaishiYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_from().toString()));
-        entity.setDataOutputShuryoYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_to().toString()));
+        entity.setDataOutputKaishiYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_from()));
+        entity.setDataOutputShuryoYMDHMS(new YMDHMS(para.getKonkaishoriymdtime_to()));
         return entity;
     }
 

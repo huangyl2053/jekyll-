@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.FurikomiDataTourokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaFurikomiTempTableEntity;
-import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.kozafurikomi.KozaFurikomiManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -17,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 振込データ登録_口座振込一時処理_Processクラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTempTableEntity> {
 
@@ -26,6 +25,9 @@ public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTem
 
     private OutputParameter<Integer> outputCount;
     private FurikomiDataTourokuProcessParameter parameter;
+    /**
+     * 検索件数を返却
+     */
     public static final RString PARAMETER_OUT_COUNT;
 
     private int count = 0;
@@ -38,15 +40,12 @@ public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTem
 
     @Override
     protected void beforeExecute() {
-        if (!処理区分_明細一覧表作成_3.equals(parameter.get処理区分())) {
-            if (処理区分_振込指定日修正_2.equals(parameter.get処理区分())) {
-                if (!parameter.is再処理フラグ()) {
-                    KozaFurikomiManager manager = new KozaFurikomiManager();
+        if (!処理区分_明細一覧表作成_3.equals(parameter.get処理区分())
+                && (処理区分_振込指定日修正_2.equals(parameter.get処理区分()) && !parameter.is再処理フラグ())) {
 
-                    // KozaFurikomiManager.createInstance().;
-                    // TODO 5.1　再処理準備
-                }
-            }
+//                    KozaFurikomiManager manager = new KozaFurikomiManager();
+            // KozaFurikomiManager.createInstance().;
+            // TODO 5.1　再処理準備
         }
     }
 

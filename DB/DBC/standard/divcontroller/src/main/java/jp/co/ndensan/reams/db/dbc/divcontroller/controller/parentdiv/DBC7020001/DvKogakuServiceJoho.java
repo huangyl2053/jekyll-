@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7020001;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030.DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001.DvKogakuServiceJohoHandler;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,14 +30,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class DvKogakuServiceJoho {
 
-    private static final ReportId 帳票ID = new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo");
     private static final RString 事務広域 = new RString("事務広域");
     private static final RString 事務単一 = new RString("事務単一");
     private static final RString モード１ = new RString("DBCMN23001");
     private static final RString モード２ = new RString("DBCMN23019");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
-    private static final ReportId 帳票IDDBC701019 = new ReportId("DBC701019_HanyoListJigyoKogakuServiceHiJokyo");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -69,8 +67,10 @@ public class DvKogakuServiceJoho {
         }
         if (state.equals(モード１)) {
             div.getTxtShinsaNengetsu().setVisible(false);
-            div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
-            div.getCcdKogakuShutsuryokuKomoku().load(new RString(帳票ID.toString()), SubGyomuCode.DBC介護給付);
+            div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC701003.getReportId());
+            div.getCcdKogakuShutsuryokuKomoku().load(new RString(ReportIdDBC.DBC701003.getReportId().toString()),
+                    SubGyomuCode.DBC介護給付);
             ViewStateHolder.put(ViewStateKeys.モード, NUM_1);
         }
         if (state.equals(モード２)) {
@@ -83,8 +83,10 @@ public class DvKogakuServiceJoho {
             div.getLblKogakuShiharai().setDisplayNone(true);
             div.getLblKogakuKetteiGaku().setDisplayNone(true);
             div.getTxtShinsaNengetsu().setVisible(true);
-            div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票IDDBC701019);
-            div.getCcdKogakuShutsuryokuKomoku().load(new RString(帳票IDDBC701019.toString()), SubGyomuCode.DBC介護給付);
+            div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC701019.getReportId());
+            div.getCcdKogakuShutsuryokuKomoku().load(new RString(ReportIdDBC.DBC701019.getReportId().toString()),
+                    SubGyomuCode.DBC介護給付);
             ViewStateHolder.put(ViewStateKeys.モード, NUM_2);
         }
         div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
@@ -126,10 +128,10 @@ public class DvKogakuServiceJoho {
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
-    public ResponseData<HanyoListKogakuKaigoBatchParameter> click_batchRegister(DvKogakuServiceJohoDiv div) {
+    public ResponseData<DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter> click_batchRegister(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
         RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
-        HanyoListKogakuKaigoBatchParameter parameter = handler.getBatchParamter(市町村判定);
+        DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter parameter = handler.getBatchParamter(市町村判定);
         return ResponseData.of(parameter).respond();
     }
 

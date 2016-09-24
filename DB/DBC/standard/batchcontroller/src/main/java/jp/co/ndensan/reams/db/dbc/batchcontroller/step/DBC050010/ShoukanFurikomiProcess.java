@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還データ取得情報_振込明細一時に登録処理_Processクラスです．
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 public class ShoukanFurikomiProcess extends BatchProcessBase<FurikomiDetaiResultEntity> {
 

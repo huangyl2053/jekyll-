@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakujiyushutoku.SikakuJiyuShutoku;
@@ -135,8 +136,9 @@ public class SikakuKanrenIdoFinder {
     public SearchResult<HenkoJiyu> getHenkoJiyuList() {
         List<HenkoJiyu> serviceShuruiList = new ArrayList<>();
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        CodeShubetsu 介護予防短期入所療養介護 = DBZCodeShubetsu.施設等の区分コード_介護予防短期入所療養介護_老健.getコード();
         List<ShikakuJiyuShutoku> 資格事由取得List = sikaku.
-                shikakuJiyuShutoku(new CodeShubetsu("0126"),
+                shikakuJiyuShutoku(介護予防短期入所療養介護,
                         FlexibleDate.getNowDate(), 市町村セキュリティ.get導入形態コード().getKey(),
                         DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         for (ShikakuJiyuShutoku entity : 資格事由取得List) {

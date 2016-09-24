@@ -122,6 +122,9 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
     protected void process(SaishinsaMoshitateRelateEntity entity) {
         flag = true;
         eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanashiEUCEntity(entity, processParameter, 市町村名MasterMap, association));
+        if (!RString.isNullOrEmpty(nullToEmpty(entity.get被保険者番号()))) {
+            personalDataList.add(toPersonalData(entity));
+        }
         personalDataList.add(toPersonalData(entity));
     }
 
@@ -129,21 +132,24 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
     protected void afterExecute() {
         if (!flag) {
             eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanashiEUCEntity());
+            manager.spool(eucFilePath);
+        } else {
+            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(eucFilePath, log);
         }
         eucCsvWriter.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(eucFilePath, log);
+
         outputJokenhyoFactory();
     }
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                BATCHCSV,
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                BATCHCSV,
                 FILENAME,
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new SaishinsaMoshitate().set出力条件(processParameter, 市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

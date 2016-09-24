@@ -100,7 +100,7 @@ public class HokenshaListDivHandler {
      *
      * @param 証記載保険者番号 証記載保険者番号
      */
-    void setSelectedShichsonIfExist(ShoKisaiHokenshaNo 証記載保険者番号) {
+    void setSelectedShoKisaiHokenshaNoIfExist(ShoKisaiHokenshaNo 証記載保険者番号) {
         if (!ShichosonListHolder.hasShichosonList(div)) {
             return;
         }

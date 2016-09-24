@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshaka
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter;
@@ -33,24 +35,29 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
 
     private final MapperProvider mapperProvider;
     private final DbT1004ShisetsuNyutaishoDac dac;
+    private final DbV1001HihokenshaDaichoAliveDac dbv1001Dac;
 
     /**
      * コンストラクタです。
      */
     public KaigoHohenShisetsuNyutaishoshaKanriManager() {
         dac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
+        dbv1001Dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
-    KaigoHohenShisetsuNyutaishoshaKanriManager(MapperProvider mapperProvider, DbT1004ShisetsuNyutaishoDac dac) {
+    KaigoHohenShisetsuNyutaishoshaKanriManager(MapperProvider mapperProvider,
+            DbT1004ShisetsuNyutaishoDac dac, DbV1001HihokenshaDaichoAliveDac dbv1001Dac) {
         this.dac = dac;
+        this.dbv1001Dac = dbv1001Dac;
         this.mapperProvider = mapperProvider;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoHohenShisetsuNyutaishoshaKanriManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KaigoHohenShisetsuNyutaishoshaKanriManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KaigoHohenShisetsuNyutaishoshaKanriManager}のインスタンス
      */
     public static KaigoHohenShisetsuNyutaishoshaKanriManager createInstance() {
         return InstanceProvider.create(KaigoHohenShisetsuNyutaishoshaKanriManager.class);
@@ -177,5 +184,21 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
         DbT1004ShisetsuNyutaishoEntity dbT1004Entity = 施設入退所履歴一覧情報.toEntity();
         dbT1004Entity.setState(EntityDataState.Modified);
         return 1 == dac.save(dbT1004Entity);
+    }
+
+    /**
+     * 住所地特例フラグを取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return 住所地特例フラグ
+     */
+    @Transaction
+    public RString get被保険者台帳管理の直近データ(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        List<DbV1001HihokenshaDaichoEntity> 被保険者台帳管理データ = dbv1001Dac.selectBy識別コード(識別コード);
+        if (被保険者台帳管理データ != null && !被保険者台帳管理データ.isEmpty()) {
+            return 被保険者台帳管理データ.get(0).getJushochiTokureiFlag();
+        }
+        return RString.EMPTY;
     }
 }

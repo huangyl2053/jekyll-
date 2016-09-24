@@ -9,10 +9,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer.KogakuKetteiTsuchiShoSealerSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）Editorするクラスです。
@@ -124,28 +129,28 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             source.hihokenshaNo = 帳票情報.get被保険者番号().value();
         }
 
-        source.ketteiYMD = get変換値年月日(帳票情報.get決定年月日());
-        source.shiharaiYoteiYMD = get変換値年月日(帳票情報.get支払予定日());
-        source.taishoYM1 = get変換値年月(帳票情報.get提供年月IDX1());
-        source.taishoYM2 = get変換値年月(帳票情報.get提供年月IDX2());
-        source.taishoYM3 = get変換値年月(帳票情報.get提供年月IDX3());
-        source.taishoYM4 = get変換値年月(帳票情報.get提供年月IDX4());
+        source.ketteiYMD = 年月日編集(帳票情報.get決定年月日());
+        source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
+        source.taishoYM1 = 年月編集(帳票情報.get提供年月IDX1());
+        source.taishoYM2 = 年月編集(帳票情報.get提供年月IDX2());
+        source.taishoYM3 = 年月編集(帳票情報.get提供年月IDX3());
+        source.taishoYM4 = 年月編集(帳票情報.get提供年月IDX4());
 
         source.shiharaiGaku = get変換値金額(帳票情報.get本人支払額());
 
         if (審査依頼.equals(帳票情報.get審査方法区分())) {
 
-            source.shikyuGaku1 = get変換値金額(帳票情報.get支給額IDX1());
-            source.shikyuGaku2 = get変換値金額(帳票情報.get支給額IDX2());
-            source.shikyuGaku3 = get変換値金額(帳票情報.get支給額IDX3());
-            source.shikyuGaku4 = get変換値金額(帳票情報.get支給額IDX4());
+            source.shikyuGaku1 = doカンマ編集(帳票情報.get支給額IDX1());
+            source.shikyuGaku2 = doカンマ編集(帳票情報.get支給額IDX2());
+            source.shikyuGaku3 = doカンマ編集(帳票情報.get支給額IDX3());
+            source.shikyuGaku4 = doカンマ編集(帳票情報.get支給額IDX4());
 
         } else if (審査済み.equals(帳票情報.get審査方法区分())) {
 
-            source.shikyuGaku1 = get変換値金額(帳票情報.get決定額IDX1());
-            source.shikyuGaku2 = get変換値金額(帳票情報.get決定額IDX2());
-            source.shikyuGaku3 = get変換値金額(帳票情報.get決定額IDX3());
-            source.shikyuGaku4 = get変換値金額(帳票情報.get決定額IDX4());
+            source.shikyuGaku1 = doカンマ編集(帳票情報.get決定額IDX1());
+            source.shikyuGaku2 = doカンマ編集(帳票情報.get決定額IDX2());
+            source.shikyuGaku3 = doカンマ編集(帳票情報.get決定額IDX3());
+            source.shikyuGaku4 = doカンマ編集(帳票情報.get決定額IDX4());
 
         }
 
@@ -232,16 +237,31 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
 
     }
 
+    private RString 年月日編集(FlexibleDate 年月日) {
+        if (年月日 != null) {
+            return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString 年月編集(FlexibleYearMonth 年月) {
+        if (年月 != null) {
+            return 年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
+        }
+        return RString.EMPTY;
+    }
+
     private RString get変換値金額(Decimal 金額) {
         return 金額 != null ? new RString(金額.toString()) : RString.EMPTY;
-    }
-
-    private RString get変換値年月日(FlexibleDate 年月日) {
-        return 年月日 != null ? new RString(年月日.toString()) : RString.EMPTY;
-    }
-
-    private RString get変換値年月(FlexibleYearMonth 年月) {
-        return 年月 != null ? 年月.toDateString() : RString.EMPTY;
     }
 
     private RString getインフォ(int index) {

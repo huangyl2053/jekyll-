@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki153old.J
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippanshokanketteiym.JigyoHokokuGeppoIppanShokanProcessParamter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JigyouHoukokuTokTyhyouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki153old.JigyohokokuCompYoshiki153OldData;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki153old.JigyohokokuCompYoshiki153OldReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -33,18 +33,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * @reamsid_L DBU-5550-030 suguangjun
  *
  */
-public class JigyoHokokuGeppoIppanShokanDBU300007Process extends BatchProcessBase<JigyoHokokuDataRelateEntity> {
+public class JigyoHokokuGeppoIppanShokanDBU300007Process extends BatchProcessBase<JigyouHoukokuTokTyhyouRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
             + "IJigyoHokokuGeppoIppanShokanMapper.getJigyouHoukokuTokeiTyouhyou");
-    private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
-
     private static final ReportId REPORT_DBU300007 = ReportIdDBU.DBU300007.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");
     private static final RString 年報月報区分 = new RString("月報");
-    private static final int 数値_10 = 10;
+    private static final int 数値_100 = 100;
     private static final Decimal 数値_101 = new Decimal(101);
     private static final Decimal 数値_102 = new Decimal(102);
     private static final Decimal 数値_103 = new Decimal(103);
@@ -98,6 +96,7 @@ public class JigyoHokokuGeppoIppanShokanDBU300007Process extends BatchProcessBas
     private Map<Decimal, Decimal> syukeiNo1391;
     private Map<Decimal, Decimal> syukeiNo1392;
     private Map<Decimal, Decimal> syukeiNo1393;
+    private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
 
     @BatchWriter
     private BatchReportWriter<JigyohokokuCompYoshiki153OldReportSource> batchWrite;
@@ -130,13 +129,13 @@ public class JigyoHokokuGeppoIppanShokanDBU300007Process extends BatchProcessBas
     }
 
     @Override
-    protected void process(JigyoHokokuDataRelateEntity entity) {
+    protected void process(JigyouHoukokuTokTyhyouRelateEntity entity) {
         if (ShukeiNo.一般状況_14_施設介護サービス受給者数_介護老人福祉施設.getコード().equals(entity.getSyukeiNo().value())) {
-            syukeiNo1391.put(entity.getTateNo().multiply(数値_10).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
+            syukeiNo1391.put(entity.getTateNo().multiply(数値_100).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
         } else if (ShukeiNo.一般状況_15_施設介護サービス受給者数_介護老人保健施設.getコード().equals(entity.getSyukeiNo().value())) {
-            syukeiNo1392.put(entity.getTateNo().multiply(数値_10).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
+            syukeiNo1392.put(entity.getTateNo().multiply(数値_100).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
         } else if (ShukeiNo.一般状況_16_施設介護サービス受給者数_介護療養型医療施設_総数含む.getコード().equals(entity.getSyukeiNo().value())) {
-            syukeiNo1393.put(entity.getTateNo().multiply(数値_10).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
+            syukeiNo1393.put(entity.getTateNo().multiply(数値_100).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
         }
     }
 

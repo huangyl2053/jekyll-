@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3067KyufuhiTuchiHoseiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -23,10 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付費通知補正を管理するクラスです。
  */
-public class KyufuhiTuchiHosei 
-extends ModelBase<KyufuhiTuchiHoseiIdentifier, 
-        DbT3067KyufuhiTuchiHoseiEntity, 
-        KyufuhiTuchiHosei> implements Serializable {
+public class KyufuhiTuchiHosei
+        extends ModelBase<KyufuhiTuchiHoseiIdentifier, DbT3067KyufuhiTuchiHoseiEntity, KyufuhiTuchiHosei> implements Serializable {
 
     private final DbT3067KyufuhiTuchiHoseiEntity entity;
     private final KyufuhiTuchiHoseiIdentifier id;
@@ -195,9 +193,17 @@ extends ModelBase<KyufuhiTuchiHoseiIdentifier,
         return this.id;
     }
 
+    public KyufuhiTuchiHosei modifiedModel() {
+        DbT3067KyufuhiTuchiHoseiEntity modifiedEntity = this.toEntity();
+        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KyufuhiTuchiHosei(
+                modifiedEntity, id);
+    }
+
     /**
-     * 保持する給付費通知補正を削除対象とします。<br/>
-     * {@link DbT3067KyufuhiTuchiHoseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する給付費通知補正を削除対象とします。<br/> {@link DbT3067KyufuhiTuchiHoseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyufuhiTuchiHosei}
      */
@@ -225,7 +231,7 @@ extends ModelBase<KyufuhiTuchiHoseiIdentifier,
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

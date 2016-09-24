@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC21102",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特徴送付情報ダウンロード",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB2110002",
+     "toLayoutTitle": "特徴送付情報ダウンロード",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2110002",
+     "layoutTitle": "特徴送付情報ダウンロード",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 汎用リスト出力(非課税年金対象者)のMybatis用パラメータクラスです。
@@ -26,6 +25,8 @@ public final class HikazeiNenkinTaishoshaMybatisParameter implements IMyBatisPar
     private static final RString 年指定_年 = new RString("12");
     private static final RString 被保険者抽出_被保険者のみ = new RString("1");
     private static final RString 被保険者抽出_被保険者以外のみ = new RString("2");
+    private static final RString 年齢 = new RString("年齢");
+    private static final LasdecCode 市町村コード = new LasdecCode("000000");
     private final boolean is年度;
     private final boolean is対象年;
     private final boolean is被保険者のみ;
@@ -113,7 +114,11 @@ public final class HikazeiNenkinTaishoshaMybatisParameter implements IMyBatisPar
      * @param is最新情報 is最新情報
      * @param 年度BP 年度BP
      * @param date date
+     * @param 年齢From 年齢From
+     * @param 年齢To 年齢To
+     * @param 年齢From逆算 年齢From逆算
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param 年齢To逆算 年齢To逆算
      * @param psmAtesaki psmAtesaki
      * @return HikazeiNenkinTaishoshaMybatisParameter
      */
@@ -124,6 +129,10 @@ public final class HikazeiNenkinTaishoshaMybatisParameter implements IMyBatisPar
             boolean is最新情報,
             RString 年度BP,
             RDate date,
+            int 年齢From,
+            int 年齢To,
+            RString 年齢From逆算,
+            RString 年齢To逆算,
             RString psmShikibetsuTaisho,
             RString psmAtesaki) {
         boolean is年度 = false;
@@ -135,8 +144,6 @@ public final class HikazeiNenkinTaishoshaMybatisParameter implements IMyBatisPar
         boolean has生年月日From = false;
         boolean has生年月日To = false;
         boolean has保険者コード = false;
-        int 年齢From = get年齢(宛名抽出条件.getNenreiRange().getFrom());
-        int 年齢To = get年齢(宛名抽出条件.getNenreiRange().getTo());
         RString 生年月日From = get生年月日(宛名抽出条件.getSeinengappiRange().getFrom());
         RString 生年月日To = get生年月日(宛名抽出条件.getSeinengappiRange().getTo());
         if (!RString.isNullOrEmpty(年度BP)) {
@@ -153,28 +160,25 @@ public final class HikazeiNenkinTaishoshaMybatisParameter implements IMyBatisPar
         if (被保険者抽出_被保険者以外のみ.equals(被保険者抽出方法)) {
             is被保険者以外のみ = true;
         }
-        RDate 年齢基準日;
-        if (宛名抽出条件.getNenreiKijunbi() == null) {
-            年齢基準日 = date;
+        RString 年齢層抽出方法 = 宛名抽出条件.getAgeSelectKijun().get名称();
+        if (年齢.equals(年齢層抽出方法)) {
+            if (年齢From != 0) {
+                has年齢From = true;
+            }
+            if (年齢To != 0) {
+                has年齢To = true;
+            }
         } else {
-            年齢基準日 = 宛名抽出条件.getNenreiKijunbi();
-        }
-        RString 年齢From逆算 = 年齢基準日.minusYear(年齢From).toDateString();
-        RString 年齢To逆算 = 年齢基準日.minusYear(年齢To).toDateString();
-        if (年齢From != 0) {
-            has年齢From = true;
-        }
-        if (年齢To != 0) {
-            has年齢To = true;
-        }
-        if (!RString.isNullOrEmpty(生年月日From)) {
-            has生年月日From = true;
-        }
-        if (!RString.isNullOrEmpty(生年月日To)) {
-            has生年月日To = true;
+            if (!RString.isNullOrEmpty(生年月日From)) {
+                has生年月日From = true;
+            }
+            if (!RString.isNullOrEmpty(生年月日To)) {
+                has生年月日To = true;
+            }
         }
         LasdecCode 保険者コード = 宛名抽出条件.getShichoson_Code();
-        if (!保険者コード.isEmpty()) {
+        if (!保険者コード.isEmpty()
+                && !市町村コード.equals(保険者コード)) {
             has保険者コード = true;
         }
         return new HikazeiNenkinTaishoshaMybatisParameter(
@@ -196,14 +200,6 @@ public final class HikazeiNenkinTaishoshaMybatisParameter implements IMyBatisPar
                 保険者コード,
                 psmShikibetsuTaisho,
                 psmAtesaki);
-    }
-
-    private static int get年齢(Decimal value) {
-        if (value == null) {
-            return 0;
-        } else {
-            return value.intValue();
-        }
     }
 
     private static RString get生年月日(RDate value) {

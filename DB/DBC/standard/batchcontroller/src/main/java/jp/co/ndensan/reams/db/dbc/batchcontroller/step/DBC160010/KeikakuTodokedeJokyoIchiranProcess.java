@@ -92,7 +92,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
             + ".keikakutodokedejokyoichiran.IKeikakuTodokedeJokyoIchiranMapper.getデータを抽出");
     private static final RString ORDER_BY = new RString("order by");
-    private static final RString 仕切る = new RString("~");
+    private static final RString 仕切る = new RString("～");
     private static final RString 仕切る_2 = new RString(":");
     private static final RString MESSAGE_1 = new RString("計画届出状況抽出処理");
     private static final RString 定値_届出なし = new RString("届出なし");
@@ -104,8 +104,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final RString RS_0000 = new RString("0000");
     private static final RString RS_1 = new RString("1");
     private static final RString RS_3 = new RString("3");
-    private static final RString 受給者申請中者のみ = new RString("受給者申請中者のみ");
-    private static final RString 全受給者_施設含む = new RString("全受給者・施設含む");
+    private static final RString 受給者申請中者のみ = new RString("受給申請中者のみ");
+    private static final RString 全受給者_施設含む = new RString("全受給者（施設含む）");
     private static final RString 未提出者のみ = new RString("未提出者のみ");
     private static final RString 提出者のみ = new RString("提出者のみ");
     private static final int INDEX_0 = 0;
@@ -128,12 +128,16 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         システム日付 = RDateTime.now();
 
         if (processParameter.getJyukyuushinseibiFrom() != null) {
-            受給申請日From = new RString(processParameter.getJyukyuushinseibiFrom().toString());
+            受給申請日From = processParameter.getJyukyuushinseibiFrom().wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else {
             受給申請日From = RString.EMPTY;
         }
         if (processParameter.getJyukyuushinseibiTo() != null) {
-            受給申請日To = new RString(processParameter.getJyukyuushinseibiTo().toString());
+            受給申請日To = processParameter.getJyukyuushinseibiTo().wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else {
             受給申請日To = RString.EMPTY;
         }
@@ -316,62 +320,73 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         reportList.set電話番号(entity.get電話番号());
         reportList.set変更年月日(entity.get変更年月日());
         reportList.set事業者名称(entity.get事業者名称());
-        if (entity.get対象年月() == null) {
+        if (entity.get対象年月() == null
+                || entity.get対象年月().isEmpty()) {
             reportList.set備考1(定値_届出なし);
-        } else if (entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
+        } else if (entity.get適用終了年月日() != null
+                && !entity.get適用終了年月日().isEmpty()
+                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
             reportList.set備考1(定値_有効なし);
         }
         if (!RS_3.equals(entity.get作成区分コード())
-                && entity.get事業者名称() == null) {
+                && (entity.get事業者名称() == null
+                || entity.get事業者名称().isEmpty())) {
             reportList.set備考2(定値_事業者無効);
         }
     }
 
     private boolean check(KeikakuTodokedeJokyoIchiranEntity entity) {
-        if (!(processParameter.getJyukyuushinseibiFrom() != null
+        if (processParameter.getJyukyuushinseibiFrom() != null
                 && !processParameter.getJyukyuushinseibiFrom().isEmpty()
                 && entity.get受給申請年月日() != null
                 && !entity.get受給申請年月日().isEmpty()
-                && entity.get受給申請年月日().isBefore(processParameter.getJyukyuushinseibiFrom()))) {
-            return false;
-        } else if (!(processParameter.getJyukyuushinseibiTo() != null
+                && entity.get受給申請年月日().isBefore(processParameter.getJyukyuushinseibiFrom())) {
+            return true;
+        }
+        if (processParameter.getJyukyuushinseibiTo() != null
                 && !processParameter.getJyukyuushinseibiTo().isEmpty()
                 && entity.get受給申請年月日() != null
                 && !entity.get受給申請年月日().isEmpty()
-                && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日()))) {
-            return false;
-        } else if (!(受給者申請中者のみ.equals(processParameter.getTaisyoushatyuusyutu())
-                && !RS_0000.equals(entity.get履歴番号()))) {
-            return false;
-        } else if (RS_1.equals(entity.get住所地特例フラグ())
-                && 全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu())
+                && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日())) {
+            return true;
+        }
+        if (受給者申請中者のみ.equals(processParameter.getTaisyoushatyuusyutu())
+                && !RS_0000.equals(entity.get履歴番号())) {
+            return true;
+        }
+        if (全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu())
+                && !(RS_1.equals(entity.get住所地特例フラグ())
                 && (entity.get資格喪失年月日() == null
-                || !entity.get資格取得年月日().equals(entity.get資格喪失年月日()))) {
-            return false;
-        } else if (!(entity.get施設フラウ() != null
-                && !(全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu())))) {
-            return false;
+                || entity.get資格喪失年月日().isEmpty()
+                || !entity.get資格取得年月日().equals(entity.get資格喪失年月日())))) {
+            return true;
         }
         return check2(entity);
     }
 
     private boolean check2(KeikakuTodokedeJokyoIchiranEntity entity) {
-        if (!(未提出者のみ.equals(processParameter.getTodokeidejyoukyou())
+        if (!全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu())
+                && !(entity.get施設フラウ() == null
+                || entity.get施設フラウ().isEmpty())) {
+            return true;
+        }
+        if (未提出者のみ.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用開始年月日() != null
                 && !entity.get適用開始年月日().isEmpty()
                 && processParameter.getKijyunbi() != null
                 && !processParameter.getKijyunbi().isEmpty()
                 && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi())
-                && (entity.get適用終了年月日() == null
-                || (!entity.get適用終了年月日().isEmpty()
-                && processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()))))) {
-            return false;
+                && ((entity.get適用終了年月日() == null
+                || entity.get適用終了年月日().isEmpty())
+                || processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()))) {
+            return true;
         }
-        return !(提出者のみ.equals(processParameter.getTodokeidejyoukyou())
+        return 提出者のみ.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用終了年月日() != null
+                && !entity.get適用終了年月日().isEmpty()
                 && processParameter.getKijyunbi() != null
                 && !processParameter.getKijyunbi().isEmpty()
-                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi()));
+                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi());
     }
 
 }

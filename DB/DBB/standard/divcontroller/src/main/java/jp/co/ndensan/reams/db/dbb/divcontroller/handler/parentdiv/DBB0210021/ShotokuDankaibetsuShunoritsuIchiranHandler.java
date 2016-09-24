@@ -42,7 +42,6 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
     private static final int 定数_13 = 13;
     private static final int 定数_1 = 1;
     private static final int 定数_2 = 2;
-    private static final RString KEY_0 = new RString("key0");
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
     private static final RString 月時点の認定者 = new RString("月時点の認定者");
@@ -258,13 +257,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
             parameter.set市町村情報(市町村情報);
             parameter.set旧市町村情報(旧市町村情報);
         }
-        RString 完納出力 = NUM_0;
-        for (RString string : 完納出力区分) {
-            if (string.equals(KEY_0)) {
-                完納出力 = NUM_1;
-            }
-        }
-        parameter.set完納出力区分(完納出力);
+        parameter.set完納出力区分(完納出力区分);
         return parameter;
     }
 

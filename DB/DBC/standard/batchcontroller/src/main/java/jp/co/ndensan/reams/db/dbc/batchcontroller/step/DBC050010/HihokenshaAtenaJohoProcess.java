@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 /**
  * 被保険者台帳・宛名情報の取得_Process処理クラスです．
  *
- * @reamsid_L DBC-5010-030 donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 public class HihokenshaAtenaJohoProcess extends BatchProcessBase<HihokenshaAtenaResultEntity> {
 
