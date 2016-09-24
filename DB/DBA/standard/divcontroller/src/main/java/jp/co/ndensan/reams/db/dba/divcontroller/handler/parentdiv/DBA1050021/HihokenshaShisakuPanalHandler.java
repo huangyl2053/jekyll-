@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishicho
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
