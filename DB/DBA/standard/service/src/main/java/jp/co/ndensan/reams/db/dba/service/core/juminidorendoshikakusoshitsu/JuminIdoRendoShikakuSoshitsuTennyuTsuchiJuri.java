@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.S
 import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.TemParamter;
 import jp.co.ndensan.reams.db.dba.definition.core.juminrendo.JuminRendoFuseigo;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendoshikakutoroku.JuminIdoRendoShikakuTorokuEntity;
-import jp.co.ndensan.reams.db.dba.service.core.juminidorendotennyu.JuminIdoRendoTennyuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
