@@ -114,7 +114,8 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
         if (entity.getShikakuSoshitsuJiyuCodeChohyo() != null) {
             source.listHakkoTaishosha_17 = 丸;
         }
-
+        source.サービス種類 = entity.getServiceShuruiCodeChohyo() == null ? RString.EMPTY : entity.getServiceShuruiCodeChohyo().value();
+        source.氏名カナ = entity.getShimeikanaChohyo() == null ? RString.EMPTY : entity.getShimeikanaChohyo().value();
     }
 
     private void editIOutputOrder(KogakuShikyuShinseishoHakkoIchiranSource source) {
