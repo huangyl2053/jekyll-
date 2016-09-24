@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010019;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -13,15 +14,17 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiJutakuKaishuhi
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiJutakuKaishuhiBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010019.JyutakuKayisyuHiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010019.dgJutakuKaishuhi_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 画面設計_DBCMN11002_給付実績照会_(DBC0010019)住宅改修費のHandlerです。
@@ -130,33 +133,34 @@ public class JyutakuKayisyuHiHandler {
      * @param 引き継ぎ情報 KyufuJissekiPrmBusiness
      */
     public void setデータグリッド(KyufuJissekiPrmBusiness 引き継ぎ情報) {
-//        List<KyufujissekiJutakuKaishuhi> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
-//        List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
-//        RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
-//        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-//        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-//        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-//        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-//        for (KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi : 給付実績住宅改修費List) {
-//            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()))
-//                    && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
-//                    && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
-//                    && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
-//                dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
-//                row.setTxtService(checkサービスコード(kyufujissekiJutakuKaishuhi.getサービスコード()));
-//                row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
-//                row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
-//                row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
-//                row.setTxtHiyo(DecimalFormatter.toコンマ区切りRString(kyufujissekiJutakuKaishuhi.get改修金額(), 0));
-//                row.setTxtShinsaYM(getパターン51(kyufujissekiJutakuKaishuhi.get審査年月()));
-//                rowList.add(row);
-//            }
-//        }
-//        div.getDgJutakuKaishuhi().setDataSource(rowList);
-//        set前月と次月の状態(給付実績住宅改修費List, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()));
-//        List<KyufuJissekiHedajyoho2> ヘッダ情報2 = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
-//        set前事業者と後事業者の状態(ヘッダ情報2, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()),
-//                事業者番号, 実績区分コード, 整理番号, 様式番号);
+        List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
+        List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
+        RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
+        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        for (KyufujissekiJutakuKaishuhiBusiness kyufujissekiJutakuKaishuhiBusiness : 給付実績住宅改修費List) {
+            KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = kyufujissekiJutakuKaishuhiBusiness.get給付実績住宅改修費情報();
+            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()))
+                    && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
+                    && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
+                    && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
+                dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
+                row.setTxtService(kyufujissekiJutakuKaishuhiBusiness.getサービス種類略称());
+                row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
+                row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
+                row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
+                row.setTxtHiyo(DecimalFormatter.toコンマ区切りRString(kyufujissekiJutakuKaishuhi.get改修金額(), 0));
+                row.setTxtShinsaYM(getパターン51(kyufujissekiJutakuKaishuhi.get審査年月()));
+                rowList.add(row);
+            }
+        }
+        div.getDgJutakuKaishuhi().setDataSource(rowList);
+        set前月と次月の状態(給付実績住宅改修費List, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()));
+        List<KyufuJissekiHedajyoho2> ヘッダ情報2 = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
+        set前事業者と後事業者の状態(ヘッダ情報2, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()),
+                事業者番号, 実績区分コード, 整理番号, 様式番号);
     }
 
     /**
@@ -203,26 +207,26 @@ public class JyutakuKayisyuHiHandler {
      * @return サービス提供年月
      */
     public FlexibleYearMonth get直近サービス提供年月(RString 月Flg, RDate サービス提供年月, KyufuJissekiPrmBusiness 引き継ぎ情報) {
-//        List<KyufujissekiJutakuKaishuhi> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
-//        Collections.sort(給付実績住宅改修費List, new DateComparatorServiceTeikyoYM());
-//        List<KyufujissekiJutakuKaishuhi> サービス提供年月前 = new ArrayList<>();
-//        List<KyufujissekiJutakuKaishuhi> サービス提供年月後 = new ArrayList<>();
-//        if (サービス提供年月 != null) {
-//            for (KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi : 給付実績住宅改修費List) {
-//                if (new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()).isBefore(kyufujissekiJutakuKaishuhi.getサービス提供年月())) {
-//                    サービス提供年月後.add(kyufujissekiJutakuKaishuhi);
-//                }
-//                if (kyufujissekiJutakuKaishuhi.getサービス提供年月().isBefore(new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()))) {
-//                    サービス提供年月前.add(kyufujissekiJutakuKaishuhi);
-//                }
-//            }
-//        }
-//        if (前月.equals(月Flg)) {
-//            return サービス提供年月前.get(0).getサービス提供年月();
-//        } else {
-//            return サービス提供年月後.get(サービス提供年月後.size() - 1).getサービス提供年月();
-//        }
-        return FlexibleYearMonth.EMPTY;
+        List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
+        Collections.sort(給付実績住宅改修費List, new DateComparatorServiceTeikyoYM());
+        List<KyufujissekiJutakuKaishuhi> サービス提供年月前 = new ArrayList<>();
+        List<KyufujissekiJutakuKaishuhi> サービス提供年月後 = new ArrayList<>();
+        if (サービス提供年月 != null) {
+            for (KyufujissekiJutakuKaishuhiBusiness kyufujissekiJutakuKaishuhiBusiness : 給付実績住宅改修費List) {
+                KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = kyufujissekiJutakuKaishuhiBusiness.get給付実績住宅改修費情報();
+                if (new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()).isBefore(kyufujissekiJutakuKaishuhi.getサービス提供年月())) {
+                    サービス提供年月後.add(kyufujissekiJutakuKaishuhi);
+                }
+                if (kyufujissekiJutakuKaishuhi.getサービス提供年月().isBefore(new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()))) {
+                    サービス提供年月前.add(kyufujissekiJutakuKaishuhi);
+                }
+            }
+        }
+        if (前月.equals(月Flg)) {
+            return サービス提供年月前.get(0).getサービス提供年月();
+        } else {
+            return サービス提供年月後.get(サービス提供年月後.size() - 1).getサービス提供年月();
+        }
     }
 
     private void set前事業者と後事業者の状態(List<KyufuJissekiHedajyoho2> ヘッダ情報2, FlexibleYearMonth サービス提供年月, RString 事業者番号,
@@ -238,14 +242,15 @@ public class JyutakuKayisyuHiHandler {
         }
     }
 
-    private void set前月と次月の状態(List<KyufujissekiJutakuKaishuhi> 給付実績住宅改修費List, FlexibleYearMonth サービス提供年月KEY) {
+    private void set前月と次月の状態(List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List, FlexibleYearMonth サービス提供年月KEY) {
         Collections.sort(給付実績住宅改修費List, new DateComparatorServiceTeikyoYM());
         div.getBtnZengetsu().setDisabled(true);
         div.getBtnJigetsu().setDisabled(true);
         if (給付実績住宅改修費List != null && !給付実績住宅改修費List.isEmpty()) {
             div.getBtnZengetsu().setDisabled(!給付実績住宅改修費List.
-                    get(給付実績住宅改修費List.size() - 1).getサービス提供年月().isBefore(サービス提供年月KEY));
-            div.getBtnJigetsu().setDisabled(!サービス提供年月KEY.isBefore(給付実績住宅改修費List.get(0).getサービス提供年月()));
+                    get(給付実績住宅改修費List.size() - 1).get給付実績住宅改修費情報().getサービス提供年月().isBefore(サービス提供年月KEY));
+            div.getBtnJigetsu().setDisabled(!サービス提供年月KEY.isBefore(
+                    給付実績住宅改修費List.get(0).get給付実績住宅改修費情報().getサービス提供年月()));
         }
     }
 
@@ -262,13 +267,13 @@ public class JyutakuKayisyuHiHandler {
         return 0;
     }
 
-    private static class DateComparatorServiceTeikyoYM implements Comparator<KyufujissekiJutakuKaishuhi>, Serializable {
+    private static class DateComparatorServiceTeikyoYM implements Comparator<KyufujissekiJutakuKaishuhiBusiness>, Serializable {
 
         private static final long serialVersionUID = -300796001015547240L;
 
         @Override
-        public int compare(KyufujissekiJutakuKaishuhi o1, KyufujissekiJutakuKaishuhi o2) {
-            return o2.getサービス提供年月().compareTo(o1.getサービス提供年月());
+        public int compare(KyufujissekiJutakuKaishuhiBusiness o1, KyufujissekiJutakuKaishuhiBusiness o2) {
+            return o2.get給付実績住宅改修費情報().getサービス提供年月().compareTo(o1.get給付実績住宅改修費情報().getサービス提供年月());
         }
     }
 
@@ -288,28 +293,29 @@ public class JyutakuKayisyuHiHandler {
 
     private void setDataGrid(KyufuJissekiPrmBusiness 引き継ぎ情報, FlexibleYearMonth サービス提供年月, RString 事業者番号, RString 整理番号,
             RString 実績区分コード, RString 様式番号) {
-//        List<KyufujissekiJutakuKaishuhi> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
-//        List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
-//        for (KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi : 給付実績住宅改修費List) {
-//            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(サービス提供年月)
-//                    && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
-//                    && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
-//                    && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
-//                dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
-//                row.setTxtService(checkサービスコード(kyufujissekiJutakuKaishuhi.getサービスコード()));
-//                row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
-//                row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
-//                row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
-//                row.setTxtHiyo(DecimalFormatter.toコンマ区切りRString(kyufujissekiJutakuKaishuhi.get改修金額(), 0));
-//                row.setTxtShinsaYM(getパターン51(kyufujissekiJutakuKaishuhi.get審査年月()));
-//                rowList.add(row);
-//            }
-//        }
-//        div.getDgJutakuKaishuhi().setDataSource(rowList);
-//        div.getDgJutakuKaishuhi().setDataSource(rowList);
-//        set前月と次月の状態(給付実績住宅改修費List, サービス提供年月);
-//        List<KyufuJissekiHedajyoho2> ヘッダ情報2 = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
-//        set前事業者と後事業者の状態(ヘッダ情報2, サービス提供年月, 事業者番号, 実績区分コード, 整理番号, 様式番号);
+        List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
+        List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
+        for (KyufujissekiJutakuKaishuhiBusiness kyufujissekiJutakuKaishuhiBusiness : 給付実績住宅改修費List) {
+            KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = kyufujissekiJutakuKaishuhiBusiness.get給付実績住宅改修費情報();
+            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(サービス提供年月)
+                    && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
+                    && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
+                    && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
+                dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
+                row.setTxtService(kyufujissekiJutakuKaishuhiBusiness.getサービス種類略称());
+                row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
+                row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
+                row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
+                row.setTxtHiyo(DecimalFormatter.toコンマ区切りRString(kyufujissekiJutakuKaishuhi.get改修金額(), 0));
+                row.setTxtShinsaYM(getパターン51(kyufujissekiJutakuKaishuhi.get審査年月()));
+                rowList.add(row);
+            }
+        }
+        div.getDgJutakuKaishuhi().setDataSource(rowList);
+        div.getDgJutakuKaishuhi().setDataSource(rowList);
+        set前月と次月の状態(給付実績住宅改修費List, サービス提供年月);
+        List<KyufuJissekiHedajyoho2> ヘッダ情報2 = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
+        set前事業者と後事業者の状態(ヘッダ情報2, サービス提供年月, 事業者番号, 実績区分コード, 整理番号, 様式番号);
     }
 
     private RString nullToEMPTY(RString 項目) {
@@ -329,13 +335,6 @@ public class JyutakuKayisyuHiHandler {
     private RString check入力識別番号Null(NyuryokuShikibetsuNo 入力識別番号) {
         if (入力識別番号 != null && !入力識別番号.isEmpty()) {
             return 入力識別番号.value();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString checkサービスコード(ServiceCode サービスコード) {
-        if (サービスコード != null && !サービスコード.isEmpty()) {
-            return サービスコード.value();
         }
         return RString.EMPTY;
     }
