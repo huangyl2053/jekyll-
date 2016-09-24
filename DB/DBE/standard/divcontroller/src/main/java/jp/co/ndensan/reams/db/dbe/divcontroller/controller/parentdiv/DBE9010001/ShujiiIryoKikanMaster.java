@@ -112,13 +112,32 @@ public class ShujiiIryoKikanMaster {
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
         }
+        
+        RString 主治医医療機関コードFrom = RString.EMPTY;
+        RString 主治医医療機関コードTo = RString.EMPTY;
+        
+        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isNullOrEmpty() 
+                && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchShujiiIryokikanCodeFrom().getValue().toString()) 
+                    > Long.valueOf(div.getTxtSearchShujiiIryokikanCodeTo().getValue().toString())) {
+                主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
+                主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
+            } else {
+                主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
+                主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
+            }
+        } else {
+            主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
+            主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
+        }
+
         KoseiShujiiIryoKikanMasterMapperParameter parameter = KoseiShujiiIryoKikanMasterMapperParameter.
                 createParam_SelectShujiiIryoKikanJohoList(div.getDdlKikanMeisho().getSelectedKey(),
                         div.getDdlKikanKanaMeisho().getSelectedKey(),
                         jokyoFlag,
                         div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
-                        div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
-                        div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
+                        主治医医療機関コードFrom,
+                        主治医医療機関コードTo,
                         div.getTxtSearchShujiiIryokikanMeisho().getValue(),
                         div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
                         div.getTxtSaidaiHyojiKensu().getValue()

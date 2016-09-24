@@ -86,8 +86,7 @@ public class ShujiiMaster {
     public ResponseData<ShujiiMasterDiv> onLoad(ShujiiMasterDiv div) {
         getHandler(div).load();
         getHandler(div).clearKensakuJoken();
-        RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(最大取得件数.toString()));
+
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeFrom().setValue(主治医医療機関コード);
@@ -169,17 +168,54 @@ public class ShujiiMaster {
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
         }
+        
+        RString 主治医医療機関コードFrom = RString.EMPTY;
+        RString 主治医医療機関コードTo = RString.EMPTY;
+        
+        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isNullOrEmpty() 
+                && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchShujiiIryokikanCodeFrom().getValue().toString()) 
+                    > Long.valueOf(div.getTxtSearchShujiiIryokikanCodeTo().getValue().toString())) {
+                主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
+                主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
+            } else {
+                主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
+                主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
+            }
+        } else {
+            主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
+            主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
+        }
+        
+        RString 主治医コードFrom = RString.EMPTY;
+        RString 主治医コードTo = RString.EMPTY;
+        
+        if (!div.getTxtSearchShujiiCodeFrom().getValue().isNullOrEmpty() 
+                && !div.getTxtSearchShujiiCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchShujiiCodeFrom().getValue().toString()) 
+                    > Long.valueOf(div.getTxtSearchShujiiCodeTo().getValue().toString())) {
+                主治医コードFrom = div.getTxtSearchShujiiCodeTo().getValue();
+                主治医コードTo = div.getTxtSearchShujiiCodeFrom().getValue();
+            } else {
+                主治医コードFrom = div.getTxtSearchShujiiCodeFrom().getValue();
+                主治医コードTo = div.getTxtSearchShujiiCodeTo().getValue();
+            }
+        } else {
+            主治医コードFrom = div.getTxtSearchShujiiCodeFrom().getValue();
+            主治医コードTo = div.getTxtSearchShujiiCodeTo().getValue();
+        }
+
         ShujiiMasterMapperParameter parameter = ShujiiMasterMapperParameter.createSelectByKeyParam(
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
                 jokyoFlag,
-                div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
-                div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
+                主治医医療機関コードFrom,
+                主治医医療機関コードTo,
                 div.getTxtSearchShujiiIryokikanMeisho().getValue(),
                 div.getDdlKikanMeisho().getSelectedKey(),
                 div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
                 div.getDdlKikanKanaMeisho().getSelectedKey(),
-                div.getTxtSearchShujiiCodeFrom().getValue(),
-                div.getTxtSearchShujiiCodeTo().getValue(),
+                主治医コードFrom,
+                主治医コードTo,
                 div.getTxtSearchShujiiShimei().getValue(),
                 div.getDdlShujiiMeisho().getSelectedKey(),
                 new AtenaKanaMeisho(div.getTxtSearchShujiiKanaShimei().getValue()),

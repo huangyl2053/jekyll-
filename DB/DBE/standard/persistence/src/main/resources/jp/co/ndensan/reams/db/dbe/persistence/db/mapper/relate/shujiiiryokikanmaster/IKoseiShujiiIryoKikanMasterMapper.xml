@@ -88,13 +88,13 @@
             </if>
             <if test="uses医療機関カナ名称">
                 <if test="医療機関カナ名称前方一致Flag">
-                    AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" LIKE #{医療機関名称} || '%'
+                    AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" LIKE #{医療機関カナ名称} || '%'
                 </if>
                 <if test="医療機関カナ名称後方一致Flag">
-                    AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" LIKE '%' ||  #{医療機関名称}
+                    AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" LIKE '%' ||  #{医療機関カナ名称}
                 </if>
                 <if test="医療機関カナ名称完全一致Flag">
-                    AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" = #{医療機関名称}
+                    AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" = #{医療機関カナ名称}
                 </if>
                 <if test="医療機関カナ名称部分一致Flag">
                     AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" LIKE '%' || #{医療機関カナ名称} || '%'
