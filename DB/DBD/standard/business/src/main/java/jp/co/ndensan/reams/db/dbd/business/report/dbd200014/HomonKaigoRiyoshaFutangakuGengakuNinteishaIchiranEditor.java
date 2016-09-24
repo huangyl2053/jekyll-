@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -55,8 +56,8 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private static final RString 課 = new RString("課");
     private static final RString 承認 = new RString("承認");
     private static final RString 却下 = new RString("却下");
-    private static final RString 認定者リスト = new RString("介護保険 訪問介護利用者負担額減額認定者リスト");
-    private static final RString 該当者リスト = new RString("介護保険 訪問介護利用者負担額減額該当者リスト");
+    private static final RString 認定者リスト = new RString("訪問介護利用者負担額減額認定者リスト");
+    private static final RString 該当者リスト = new RString("訪問介護利用者負担額減額該当者リスト");
     private final RDateTime 作成日時;
     private final TargetList 対象リスト;
     private final NinteishaListSakuseiEntity 訪問介護利用者負担額減額認定者Entity;
@@ -297,7 +298,10 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             }
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード()) {
-            source.listLower_7 = this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード();
+            source.listLower_7 = RString.isNullOrEmpty(this.訪問介護利用者負担額減額認定者Entity.
+                    get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
+                    : TokuteiShippei.toValue(this.訪問介護利用者負担額減額認定者Entity.
+                            get要介護認定申請情報_2号特定疾病コード()).get名称();
         }
         source.listLower_8 = RString.EMPTY;
         if (訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
