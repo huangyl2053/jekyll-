@@ -13,7 +13,7 @@ public class FutangendogakuNinteiShinseishoReportSource implements IReportSource
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "List1_1", length = 1, order = 1)
-    public RString List1_1;
+    public RString list1_1;
     @ReportItem(name = "ninshoshaYakushokuMei", length = 25, order = 2)
     public RString ninshoshaYakushokuMei;
     @ReportItem(name = "shiseibun", length = 100, order = 3)
@@ -47,7 +47,7 @@ public class FutangendogakuNinteiShinseishoReportSource implements IReportSource
     @ReportItem(name = "chuibun", order = 17)
     public RString chuibun;
     @ReportItem(name = "PageCnt", length = 4, order = 18)
-    public RString PageCnt;
+    public RString pageCnt;
     @ReportItem(name = "bun_1", length = 80, order = 19)
     public RString bun_1;
     @ReportItem(name = "bun_2", length = 80, order = 20)
