@@ -202,9 +202,9 @@
             AND	要介護認定完了情報."ninteiShinsakaiKanryoYMD" IS null
             AND	要介護認定完了情報."centerSoshinYMD" IS null
             AND	要介護認定申請情報."shinseishoKanriNo" IN (#{申請書管理番号})
-            AND	要介護認定申請情報."shoriJotaiKubun" IN ('0','3')
+            AND	要介護認定申請情報."shoriJotaiKubun" = #{処理状態区分}
             AND	要介護認定申請情報."logicalDeletedFlag" = FALSE
-        ORDER BY 被保険者氏名カナ, 認定申請年月日, 証記載保険者番号,
+        ORDER BY 被保険者氏名カナ, 認定申請年月日, 証記載保険者番号,	
                         サービスの状況連番, サービスの状況フラグ連番, 記入項目連番, 施設利用連番, 調査項目連番, 認定調査特記事項番号, 認定調査特記事項連番
     </select>
 

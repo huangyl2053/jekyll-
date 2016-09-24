@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200014;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
@@ -114,11 +115,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (null != this.導入団体.getShichosonName_()) {
             source.hokenshaName = this.導入団体.getShichosonName_();
         }
-        if (this.出力順 != null
-                && (this.出力順.get設定項目リスト() != null && !this.出力順.get設定項目リスト().isEmpty())) {
-            List<ISetSortItem> 設定項目リスト = this.出力順.get設定項目リスト();
-            set出力順改頁(source, 設定項目リスト);
-        }
+        set出力順改頁(source);
     }
 
     private void edit被保険者情報Upper1(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
@@ -413,37 +410,40 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     }
 
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource
-            set出力順改頁(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, List<ISetSortItem> 設定項目リスト) {
-
-        if (!設定項目リスト.isEmpty()) {
-            source.shutsuryokujun1 = 設定項目リスト.get(0).get項目名();
-            if (設定項目リスト.get(0).is改頁項目()) {
-                source.kaiPege1 = 設定項目リスト.get(0).get項目名();
-            }
+            set出力順改頁(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
+        List<ISetSortItem> list = new ArrayList<>();
+        if (出力順 != null && 出力順.get設定項目リスト() == null) {
+            list = 出力順.get設定項目リスト();
         }
-        if (設定項目リスト.size() > 1) {
-            source.shutsuryokujun2 = 設定項目リスト.get(1).get項目名();
-            if (設定項目リスト.get(1).is改頁項目()) {
-                source.kaiPege2 = 設定項目リスト.get(1).get項目名();
-            }
+        if (list.size() > LISTINDEX_0) {
+            source.shutsuryokujun1 = list.get(LISTINDEX_0).get項目名();
         }
-        if (設定項目リスト.size() > 2) {
-            source.shutsuryokujun3 = 設定項目リスト.get(2).get項目名();
-            if (設定項目リスト.get(2).is改頁項目()) {
-                source.kaiPege3 = 設定項目リスト.get(2).get項目名();
-            }
+        if (list.size() > LISTINDEX_1) {
+            source.shutsuryokujun2 = list.get(LISTINDEX_1).get項目名();
         }
-        if (設定項目リスト.size() > LISTINDEX_3) {
-            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-                source.kaiPege4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
+        if (list.size() > LISTINDEX_2) {
+            source.shutsuryokujun3 = list.get(LISTINDEX_2).get項目名();
         }
-        if (設定項目リスト.size() > LISTINDEX_4) {
-            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-                source.kaiPege5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
+        if (list.size() > LISTINDEX_3) {
+            source.shutsuryokujun4 = list.get(LISTINDEX_3).get項目名();
+        }
+        if (list.size() > LISTINDEX_4) {
+            source.shutsuryokujun5 = list.get(LISTINDEX_4).get項目名();
+        }
+        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
+            source.kaiPege1 = list.get(0).get項目名();
+        }
+        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
+            source.kaiPege2 = list.get(LISTINDEX_1).get項目名();
+        }
+        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
+            source.kaiPege3 = list.get(LISTINDEX_2).get項目名();
+        }
+        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
+            source.kaiPege4 = list.get(LISTINDEX_3).get項目名();
+        }
+        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
+            source.kaiPege5 = list.get(LISTINDEX_4).get項目名();
         }
         return source;
     }

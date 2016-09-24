@@ -245,7 +245,7 @@ public class DbT4301ShujiiIkenshoIraiJoho extends
      *
      * @return 認定情報提供希望フラグ
      */
-    public boolean get認定情報提供希望フラグ() {
+    public boolean is認定情報提供希望フラグ() {
         return entity.getNinteiJohoTeikyoKiboFlag();
     }
 
@@ -263,7 +263,7 @@ public class DbT4301ShujiiIkenshoIraiJoho extends
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
