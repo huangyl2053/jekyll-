@@ -37,6 +37,23 @@ public class HekinRiyoGakuTokehyo {
     private static final int 值十 = 10;
     private static final int 值九 = 9;
     private static final int 值一 = 1;
+    private static final RString 值11 = new RString("11");
+    private static final RString 值12 = new RString("12");
+    private static final RString 值13 = new RString("13");
+    private static final RString 值21 = new RString("21");
+    private static final RString 值22 = new RString("22");
+    private static final RString 值23 = new RString("23");
+    private static final RString 值24 = new RString("24");
+    private static final RString 值25 = new RString("25");
+    private static final RString 值41 = new RString("41");
+    private static final RString 值42 = new RString("42");
+    private static final RString 值43 = new RString("43");
+    private static final RString 值44 = new RString("44");
+    private static final RString 值45 = new RString("45");
+    private static final RString 值46 = new RString("46");
+    private static final RString 值59 = new RString("59");
+    private static final RString 人数 = new RString("人数");
+    private static final RString 費用総額 = new RString("費用総額");
     private RString 被保険者番号 = RString.EMPTY;
     private FlexibleYearMonth サービス提供年月 = FlexibleYearMonth.EMPTY;
     private RString 要介護状態区分コード = RString.EMPTY;
@@ -80,6 +97,7 @@ public class HekinRiyoGakuTokehyo {
      *
      */
     public void get給付実績データ取得処理() {
+
         mapper = mapperProvider.create(IHekinRiyoGakuTokehyoMapper.class);
         List<KyufujissekiTempTblEntity> entityList = mapper.get給付実績データ取得処理();
         List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList = new ArrayList<>();
@@ -88,20 +106,17 @@ public class HekinRiyoGakuTokehyo {
             サービス分類コード = entityList.get(0).getServiceBunrui();
         }
         for (int i = 0; i < entityList.size(); i++) {
+            edit対象レコード(shukeinaiyouEntityList, entityList.get(i), mapper);
             if (!サービス分類コード.equals(entityList.get(i).getServiceBunrui())) {
                 updateDB出力出力用一時TBL(shukeinaiyouEntityList, mapper);
                 shukeinaiyouEntityList = createntitylist();
                 サービス分類コード = entityList.get(i).getServiceBunrui();
-            }
-            if (!RString.isNullOrEmpty(entityList.get(i).getHiHokenshaNo())) {
-                edit対象レコード(shukeinaiyouEntityList, entityList.get(i), mapper);
             }
         }
     }
 
     private List<List<ShukeinaiyouEntity>> edit対象レコード(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList,
             KyufujissekiTempTblEntity レコード, IHekinRiyoGakuTokehyoMapper mapper) {
-
         int 人数 = get対象レコード人数(レコード);
         int 費用金額 = get費用金額(レコード);
         get対象レコード年齢の処理(shukeinaiyouEntityList, レコード, 人数, 費用金額, mapper);
@@ -109,12 +124,6 @@ public class HekinRiyoGakuTokehyo {
         return shukeinaiyouEntityList;
     }
 
-    /**
-     * get対象レコード人数
-     *
-     * @param レコード レコード
-     * @return count 人数
-     */
     private int get対象レコード人数(KyufujissekiTempTblEntity レコード) {
         int count = 0;
         if (!被保険者番号.equals(レコード.getHiHokenshaNo())
@@ -129,13 +138,6 @@ public class HekinRiyoGakuTokehyo {
         return count;
     }
 
-    /**
-     *
-     * @param shukeinaiyouEntityList
-     * @param レコード レコード
-     * @param 人数
-     * @param 費用金額
-     */
     private void get対象レコード年齢の処理(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList, KyufujissekiTempTblEntity レコード,
             int 人数, int 費用金額, IHekinRiyoGakuTokehyoMapper mapper) {
         AgeCalculator agecounter = new AgeCalculator(DateOfBirthFactory.createInstance(レコード.getUmareYMD()), 住民, FlexibleDate.EMPTY);
@@ -186,7 +188,7 @@ public class HekinRiyoGakuTokehyo {
             updatecreatentitylist(shukeinaiyouEntityList, レコード,
                     人数,
                     費用総額, 合計, レコード.getYoKaigoJotaiKubunCode());
-        } else if (new RString("10以上").equals(shotoku)) {
+        } else if (以上.equals(shotoku)) {
             updatecreatentitylist(shukeinaiyouEntityList,
                     レコード,
                     人数,
@@ -219,16 +221,16 @@ public class HekinRiyoGakuTokehyo {
         RString 保険単位単価数 = レコード.getHokenTanisuTani();
         RString 保険出来高点数 = レコード.getHokenDekidakaTanisu();
         int 費用金額 = 0;
-        if (new RString("41").equals(サービス種類コード) || new RString("42").equals(サービス種類コード)
-                || new RString("44").equals(サービス種類コード) || new RString("45").equals(サービス種類コード)) {
+        if (值41.equals(サービス種類コード) || 值42.equals(サービス種類コード)
+                || 值44.equals(サービス種類コード) || 值45.equals(サービス種類コード)) {
             if (!RString.isNullOrEmpty(保険請求額) && !RString.isNullOrEmpty(保険者利用負担額)) {
                 費用金額 = Integer.valueOf(保険請求額.toString()) + Integer.valueOf(保険者利用負担額.toString());
             }
-        } else if (new RString("43").equals(サービス種類コード) || new RString("46").equals(サービス種類コード)) {
+        } else if (值43.equals(サービス種類コード) || 值46.equals(サービス種類コード)) {
             if (!RString.isNullOrEmpty(保険請求額)) {
                 費用金額 = Integer.valueOf(保険請求額.toString());
             }
-        } else if (new RString("59").equals(サービス種類コード)) {
+        } else if (值59.equals(サービス種類コード)) {
             if (被保険者番号.equals(レコード.getHiHokenshaNo()) && サービス提供年月.equals(レコード.getServiceTeikyoYM())
                     && 要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode())) {
                 費用金額 = 費用金額 + Integer.valueOf(レコード.getHiyosogaku().toString());
@@ -284,56 +286,56 @@ public class HekinRiyoGakuTokehyo {
             要介護度別集計1.set費用総額(0);
             要介護度別集計1.set人数(值0);
             要介護度別集計1.set所得段階(shotokuList.get(i));
-            要介護度別集計1.set要介護状態区分コード(new RString("12"));
+            要介護度別集計1.set要介護状態区分コード(值12);
             所得段階別集計list.add(要介護度別集計1);
             ShukeinaiyouEntity 要介護度別集計2 = new ShukeinaiyouEntity();
             要介護度別集計2.setページNo(RString.EMPTY);
             要介護度別集計2.set費用総額(值0);
             要介護度別集計2.set人数(值0);
             要介護度別集計2.set所得段階(shotokuList.get(i));
-            要介護度別集計2.set要介護状態区分コード(new RString("13"));
+            要介護度別集計2.set要介護状態区分コード(值13);
             所得段階別集計list.add(要介護度別集計2);
             ShukeinaiyouEntity 要介護度別集計3 = new ShukeinaiyouEntity();
             要介護度別集計3.setページNo(RString.EMPTY);
             要介護度別集計3.set費用総額(值0);
             要介護度別集計3.set人数(值0);
             要介護度別集計3.set所得段階(shotokuList.get(i));
-            要介護度別集計3.set要介護状態区分コード(new RString("11"));
+            要介護度別集計3.set要介護状態区分コード(值11);
             所得段階別集計list.add(要介護度別集計3);
             ShukeinaiyouEntity 要介護度別集計4 = new ShukeinaiyouEntity();
             要介護度別集計4.setページNo(RString.EMPTY);
             要介護度別集計4.set費用総額(值0);
             要介護度別集計4.set人数(值0);
             要介護度別集計4.set所得段階(shotokuList.get(i));
-            要介護度別集計4.set要介護状態区分コード(new RString("21"));
+            要介護度別集計4.set要介護状態区分コード(值21);
             所得段階別集計list.add(要介護度別集計4);
             ShukeinaiyouEntity 要介護度別集計5 = new ShukeinaiyouEntity();
             要介護度別集計5.setページNo(RString.EMPTY);
             要介護度別集計5.set費用総額(值0);
             要介護度別集計5.set人数(值0);
             要介護度別集計5.set所得段階(shotokuList.get(i));
-            要介護度別集計5.set要介護状態区分コード(new RString("22"));
+            要介護度別集計5.set要介護状態区分コード(值22);
             所得段階別集計list.add(要介護度別集計5);
             ShukeinaiyouEntity 要介護度別集計6 = new ShukeinaiyouEntity();
             要介護度別集計6.setページNo(RString.EMPTY);
             要介護度別集計6.set費用総額(值0);
             要介護度別集計6.set人数(值0);
             要介護度別集計6.set所得段階(shotokuList.get(i));
-            要介護度別集計6.set要介護状態区分コード(new RString("23"));
+            要介護度別集計6.set要介護状態区分コード(值23);
             所得段階別集計list.add(要介護度別集計6);
             ShukeinaiyouEntity 要介護度別集計7 = new ShukeinaiyouEntity();
             要介護度別集計7.setページNo(RString.EMPTY);
             要介護度別集計7.set費用総額(值0);
             要介護度別集計7.set人数(值0);
             要介護度別集計7.set所得段階(shotokuList.get(i));
-            要介護度別集計7.set要介護状態区分コード(new RString("24"));
+            要介護度別集計7.set要介護状態区分コード(值24);
             所得段階別集計list.add(要介護度別集計7);
             ShukeinaiyouEntity 要介護度別集計8 = new ShukeinaiyouEntity();
             要介護度別集計8.setページNo(RString.EMPTY);
             要介護度別集計8.set費用総額(值0);
             要介護度別集計8.set人数(值0);
             要介護度別集計8.set所得段階(shotokuList.get(i));
-            要介護度別集計8.set要介護状態区分コード(new RString("25"));
+            要介護度別集計8.set要介護状態区分コード(值25);
             所得段階別集計list.add(要介護度別集計8);
             entitylist.add(所得段階別集計list);
         }
@@ -344,11 +346,11 @@ public class HekinRiyoGakuTokehyo {
         for (List<ShukeinaiyouEntity> list : shukeinaiyouEntityList) {
             for (ShukeinaiyouEntity shukeinaiyouEntity : list) {
                 if (shukeinaiyouEntity.get人数() > 0) {
-                    shukeinaiyouEntity.set集計内容(new RString("人数"));
+                    shukeinaiyouEntity.set集計内容(人数);
                     mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
                 }
                 if (shukeinaiyouEntity.get費用総額() > 0) {
-                    shukeinaiyouEntity.set集計内容(new RString("費用総額"));
+                    shukeinaiyouEntity.set集計内容(費用総額);
                     mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
                 }
             }

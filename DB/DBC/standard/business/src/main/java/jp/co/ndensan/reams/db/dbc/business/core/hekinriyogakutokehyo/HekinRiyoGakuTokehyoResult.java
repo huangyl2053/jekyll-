@@ -72,15 +72,6 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString 值7 = new RString("7");
     private static final RString 值8 = new RString("8");
     private static final RString 值9 = new RString("9");
-    private static final RString 值01 = new RString("01");
-    private static final RString 值02 = new RString("02");
-    private static final RString 值03 = new RString("03");
-    private static final RString 值04 = new RString("04");
-    private static final RString 值05 = new RString("05");
-    private static final RString 值06 = new RString("06");
-    private static final RString 值07 = new RString("07");
-    private static final RString 值08 = new RString("08");
-    private static final RString 值09 = new RString("09");
     private static final RString 值10 = new RString("10");
     private static final RString 值11 = new RString("11");
     private static final RString 值12 = new RString("12");
@@ -185,35 +176,35 @@ public class HekinRiyoGakuTokehyoResult {
     private void set給付実績データ一時Entity1(KyufujissekiTempTblEntity entity, KyufujissekiTempTblEntity 一時Entity) {
         if (ServiceCategoryShurui.訪問介護.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值01);
+            一時Entity.setServiceBunrui(值1);
         } else if (ServiceCategoryShurui.訪問入浴.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪入浴.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值02);
+            一時Entity.setServiceBunrui(值2);
         } else if (ServiceCategoryShurui.訪問看護.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪看護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值03);
+            一時Entity.setServiceBunrui(值3);
         } else if (ServiceCategoryShurui.訪問リハ.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪リハ.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值04);
+            一時Entity.setServiceBunrui(值4);
         } else if (ServiceCategoryShurui.通所介護.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予通介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值05);
+            一時Entity.setServiceBunrui(值5);
         } else if (ServiceCategoryShurui.通所リハ.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予通リハ.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值06);
+            一時Entity.setServiceBunrui(值6);
         } else if (ServiceCategoryShurui.用具貸与.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予用貸与.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值07);
+            一時Entity.setServiceBunrui(值7);
         }
     }
 
     private void set給付実績データ一時Entity2(KyufujissekiTempTblEntity entity, KyufujissekiTempTblEntity 一時Entity) {
         if (ServiceCategoryShurui.短期生活.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予短介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值08);
+            一時Entity.setServiceBunrui(值8);
         } else if (ServiceCategoryShurui.短期老健.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予短老健.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值09);
+            一時Entity.setServiceBunrui(值9);
         } else if (ServiceCategoryShurui.短期医療.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪看護.getコード().equals(entity.getServiceSyuruiCode())) {
             一時Entity.setServiceBunrui(值10);
