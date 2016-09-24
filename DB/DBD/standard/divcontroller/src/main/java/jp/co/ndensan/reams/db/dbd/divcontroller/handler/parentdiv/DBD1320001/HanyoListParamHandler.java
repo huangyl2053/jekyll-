@@ -98,7 +98,7 @@ public class HanyoListParamHandler {
 
     private static final RString 利用者負担額減額データ種別名 = new RString("利用者負担額減額");
     private static final RString 訪問介護利用者負担額減額データ種別名 = new RString("訪問介護利用者負担額減額");
-    private static final RString 社会福祉法人等利用者負担軽減データ種別名 = new RString("社会福祉法人等利用者負担軽減");
+    //private static final RString 社会福祉法人等利用者負担軽減データ種別名 = new RString("社会福祉法人等利用者負担軽減");
     private static final RString 特別地域加算減免データ種別名 = new RString("特別地域加算減免");
     private static final RString 介護保険負担限度額認定データ種別名 = new RString("介護保険負担限度額認定");
     private static final RString 年度KEY = new RString("key0");

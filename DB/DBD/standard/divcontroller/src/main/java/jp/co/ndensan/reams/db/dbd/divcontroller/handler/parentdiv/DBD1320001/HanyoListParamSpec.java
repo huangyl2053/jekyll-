@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1320001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1320001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,7 +23,7 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
     実行するボタンクリック1 {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
-                    if (SpecHelper.年度Rbが選択されている(div)) {
+                    if (SpecHelper.is年度Rbが選択されている(div)) {
                         return !RString.isNullOrEmpty(div.getDdlKijunNendo().getSelectedValue());
                     }
                     return true;
@@ -34,7 +35,7 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
     実行するボタンクリック2 {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
-                    if (SpecHelper.年度基準日Rbが選択されている(div)) {
+                    if (SpecHelper.is年度基準日Rbが選択されている(div)) {
                         return div.getTxtKijunDateA().getValue() != null;
                     }
                     return true;
@@ -46,7 +47,7 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
     実行するボタンクリック3 {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
-                    if (SpecHelper.基準日Rbが選択されている(div)) {
+                    if (SpecHelper.is基準日Rbが選択されている(div)) {
                         return div.getTxtKijunDateB().getValue() != null;
                     }
                     return true;
@@ -70,7 +71,9 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
     実行するボタンクリック7 {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
-                    //TODO
+                    if (SpecHelper.is年齢が選択されている(div)) {
+                        return div.getCcdHanyoListAtenaSelect().get年齢開始().compareTo(div.getCcdHanyoListAtenaSelect().get年齢終了()) <= 0;
+                    }
                     return true;
                 }
             },
@@ -80,7 +83,9 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
     実行するボタンクリック10 {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
-                    //TODO
+                    if (SpecHelper.is生年月日が選択されている(div)) {
+                        return div.getCcdHanyoListAtenaSelect().get生年月日開始().isBeforeOrEquals(div.getCcdHanyoListAtenaSelect().get生年月日終了());
+                    }
                     return true;
                 }
             },
@@ -119,16 +124,28 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
         static final RString 年度基準日RB_KEY = new RString("key1");
         static final RString 基準日RB_KEY = new RString("key0");
 
-        static boolean 年度Rbが選択されている(HanyoListParamDiv div) {
+        static boolean is年度Rbが選択されている(HanyoListParamDiv div) {
             return 年度RB_KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey());
         }
 
-        static boolean 年度基準日Rbが選択されている(HanyoListParamDiv div) {
+        static boolean is年度基準日Rbが選択されている(HanyoListParamDiv div) {
             return 年度基準日RB_KEY.equals(div.getRadChushutsuJokenA2().getSelectedKey());
         }
 
-        static boolean 基準日Rbが選択されている(HanyoListParamDiv div) {
+        static boolean is基準日Rbが選択されている(HanyoListParamDiv div) {
             return 基準日RB_KEY.equals(div.getRadChushutsuJokenB1().getSelectedKey());
+        }
+
+        static boolean is年齢が選択されている(HanyoListParamDiv div) {
+            return div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード().equals(NenreiSoChushutsuHoho.年齢範囲.getコード())
+                    && div.getCcdHanyoListAtenaSelect().get年齢開始() != null
+                    && div.getCcdHanyoListAtenaSelect().get年齢終了() != null;
+        }
+
+        static boolean is生年月日が選択されている(HanyoListParamDiv div) {
+            return div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード().equals(NenreiSoChushutsuHoho.生年月日範囲.getコード())
+                    && div.getCcdHanyoListAtenaSelect().get生年月日開始() != null
+                    && div.getCcdHanyoListAtenaSelect().get生年月日終了() != null;
         }
     }
 }
