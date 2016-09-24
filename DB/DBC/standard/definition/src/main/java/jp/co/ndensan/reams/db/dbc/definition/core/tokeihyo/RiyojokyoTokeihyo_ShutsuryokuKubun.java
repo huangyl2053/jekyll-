@@ -13,11 +13,11 @@ public enum RiyojokyoTokeihyo_ShutsuryokuKubun {
     /**
      * コード:1 名称:出力しない 略称:定義なし
      */
-    出力しない("1", "出力しない"),
+    出力しない("0", "出力しない"),
     /**
      * コード:2 名称:出力する 略称:定義なし
      */
-    出力する("2", "出力する");
+    出力する("1", "出力する");
 
     private final RString code;
     private final RString fullName;
