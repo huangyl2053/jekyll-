@@ -7,24 +7,13 @@
     
     <resultMap id="resultMap_KozaJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaJohoEntity" autoMapping="true">
         
-         <association property="振込明細一時Entity" resultMap="resultMap_FurikomiDetailTempTableEntity"/>
+        <association property="振込明細一時Entity" resultMap="resultMap_FurikomiDetailTempTableEntity"/>
         <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
-        <association property="受領委任契約事業者Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"/>
         
     </resultMap>
     
-    <select resultOrdered="true" id="get口座情報" resultMap="resultMap_KozaJohoEntity" fetchSize="500" 
+    <select resultOrdered="true" id="get償還口座払の口座情報" resultMap="resultMap_KozaJohoEntity" fetchSize="500" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KozaJohoMybatisParameter">
-        <if test="is口座払">
-            <include refid="償還OR高額口座" />
-        </if>
-        
-        <if test="is受領委任払">
-            <include refid="償還受領委任" />
-        </if>
-    </select>
-    
-    <sql id="償還OR高額口座">
         SELECT
             振込明細一時TBL.*,
             "koza".*
@@ -35,28 +24,27 @@
         ON
              振込明細一時TBL."kozaID" = "koza"."uaT0310Koza_kozaId"
         WHERE
-            振込明細一時TBL."dataKubun" = #{データ区分}
-            AND  振込明細一時TBL."shiharaiHohoKubunCode" = #{支払方法区分コード}
-    </sql>
+            振込明細一時TBL."dataKubun" = '1'
+            AND  振込明細一時TBL."shiharaiHohoKubunCode" = '2'
+        
+    </select>
     
-    <sql id="償還受領委任">
+    <select resultOrdered="true" id="get高額の口座情報" resultMap="resultMap_KozaJohoEntity" fetchSize="500" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KozaJohoMybatisParameter">
         SELECT
             振込明細一時TBL.*,
-            受領委任契約事業者TBL.*
+            "koza".*
         FROM
             "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
         INNER JOIN
-            rgdb."DbT3078ShokanJuryoininKeiyakusha" AS 償還受領委任契約者TBL
+             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
         ON
-            振込明細一時TBL."juryoininKeiyakuNo" = 償還受領委任契約者TBL."keiyakuNo"
-        INNER JOIN
-            rgdb."DbT3077JuryoininKeiyakuJigyosha" AS 受領委任契約事業者TBL
-        ON
-            償還受領委任契約者TBL."keiyakuJigyoshaNo" = 受領委任契約事業者TBL."keiyakuJigyoshaNo"
+             振込明細一時TBL."kozaID" = "koza"."uaT0310Koza_kozaId"
         WHERE
-            振込明細一時TBL."dataKubun" = #{データ区分}
-            AND  振込明細一時TBL."shiharaiHohoKubunCode" = #{支払方法区分コード}
-    </sql>
+            振込明細一時TBL."dataKubun" = '2'
+            AND  振込明細一時TBL."shiharaiHohoKubunCode" = '2'
+        
+    </select>
     
     
     <select id="get業務別主キー" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" 
@@ -67,21 +55,6 @@
         AND "subGyomuCode" = 'DBC'
         AND "kamokuCode" = #{科目コード}
     </select>
-    
-    <select id="getデータ区分" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="1" resultOrdered="true">
-        SELECT
-            "dataKubun" 
-        FROM 
-            "DbWT0510FurikomiMeisai"
-    </select>
-    
-    <select id="get支払方法区分コード" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="1" resultOrdered="true">
-        SELECT
-            "shiharaiHohoKubunCode" 
-        FROM 
-            "DbWT0510FurikomiMeisai"
-    </select>
-    
     
     <resultMap id="resultMap_FurikomiDetailTempTableEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity">

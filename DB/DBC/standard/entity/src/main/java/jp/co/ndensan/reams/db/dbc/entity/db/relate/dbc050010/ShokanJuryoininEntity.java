@@ -5,21 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010;
 
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 口座払の口座情報取得SQL検索結果クラスです．
+ * 償還受領委任払の口座情報SQL検索結果クラスです．
  *
  * @reamsid_L DBC-2180-030 donghj
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KozaJohoEntity {
+public class ShokanJuryoininEntity {
 
     private FurikomiDetailTempTableEntity 振込明細一時Entity;
-    private TokuteiKozaRelateEntity 口座;
+    private DbT3077JuryoininKeiyakuJigyoshaEntity 受領委任契約事業者Entity;
 
 }
