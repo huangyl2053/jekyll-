@@ -211,6 +211,13 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         }
         RString 前排他キー = 排他情報.concat(被保険者番号.getColumnValue());
         排他制御(前排他キー);
+        handler.申請登録状態初期表示に設定();
+        handler.onChange_ddlShinseiTaisyoNendo();
+        handler.onChange_ddlShokisaiHokenshaNo();
+        div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
+        div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
+        div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
+        div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
         handler.画面内共有子DIV初期化処理新規場合(対象者);
         handler.新規初期値取得設定();
         onChange_chkKofuShinseiUmu(div);
