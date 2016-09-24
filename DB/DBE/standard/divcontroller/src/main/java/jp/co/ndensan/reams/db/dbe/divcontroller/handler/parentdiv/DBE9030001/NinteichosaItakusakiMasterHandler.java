@@ -565,9 +565,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(row.getShichoson());
         div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().setValue(row.getChosaItakusakiCode() == null
                 ? RString.EMPTY : row.getChosaItakusakiCode().getValue());
-        div.getChosaitakusakiJohoInput().getTxtjigyoshano().setValue(
-                new Decimal(row.getJigyoshaNo() == null || row.getJigyoshaNo().isEmpty()
-                        ? new RString("0").toString() : row.getJigyoshaNo().toString()));
+        div.getChosaitakusakiJohoInput().getTxtjigyoshano().setValue(row.getJigyoshaNo());
         div.getChosaitakusakiJohoInput().getTxtChosaitakusakiname().setValue(row.getChosaItakusakiMeisho() == null
                 ? RString.EMPTY : row.getChosaItakusakiMeisho());
         div.getChosaitakusakiJohoInput().getTxtChosaitakusakiKananame().setValue(row.getChosaItakusakiKana());

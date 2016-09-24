@@ -390,7 +390,7 @@ public class NinteichosaItakusakiMaster {
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onOkClose_btnToSearchjigyosha(NinteichosaItakusakiMasterDiv div) {
         JigyoshaMode mode = DataPassingConverter.deserialize(div.getHdnJigyoshaMode(), JigyoshaMode.class);
-        div.getChosaitakusakiJohoInput().getTxtjigyoshano().setValue(new DecimalConverter().toObjectForCsv(mode.getJigyoshaNo().getColumnValue()));
+        div.getChosaitakusakiJohoInput().getTxtjigyoshano().setValue(mode.getJigyoshaNo().getColumnValue());
         return ResponseData.of(div).respond();
     }
 
