@@ -141,6 +141,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                         .createBuilderForEdit()
                         .set訂正区分コード(THREE)
                         .set訂正年月日(FlexibleDate.getNowDate()).build();
+                出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(変更前Entity.is公費負担上限額減額有フラグ());
+                出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(変更前Entity.is小多機能居宅介護利用開始月利用有フラグ());
                 出力用受給者訂正情報Entity.set受給者異動送付entity(変更前Entity);
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更前受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
