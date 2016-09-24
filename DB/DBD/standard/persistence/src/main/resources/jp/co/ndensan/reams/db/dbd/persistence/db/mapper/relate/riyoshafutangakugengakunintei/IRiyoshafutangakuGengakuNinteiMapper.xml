@@ -136,7 +136,7 @@
                     FROM (
                         SELECT
                         *,
-                        ROW_NUMBER() OVER (ORDER BY "ninteiYMD" DESC) AS 受給者台帳_番号
+                        ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo" ORDER BY "ninteiYMD" DESC) AS 受給者台帳_番号
                         FROM
                         rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
                         WHERE
