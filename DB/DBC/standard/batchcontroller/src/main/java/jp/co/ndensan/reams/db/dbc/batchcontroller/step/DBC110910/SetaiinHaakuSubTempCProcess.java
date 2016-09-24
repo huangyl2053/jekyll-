@@ -27,10 +27,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SetaiinHaakuSubTempCProcess extends BatchProcessBase<SetaiYinEntity> {
 
-    private static final RString 本人区分 = new RString("１：本人");
-    private static final RString 本人区分以外 = new RString("2：世帯員");
-    private static final RString 本人課税区分 = new RString("１:本人課税区分");
-    private static final RString 世帯課税区分 = new RString("１：世帯課税区分");
+    private static final RString 本人区分 = new RString("1");
+    private static final RString 本人区分以外 = new RString("2");
+    private static final RString 本人課税区分 = new RString("1");
+    private static final RString 世帯課税区分 = new RString("1");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper.select住所地特例以外の以外");
     private static final RString 世帯員所得情報一時 = new RString("SetaiYinShiyoTokuJyoHoTemp");
@@ -57,19 +57,26 @@ public class SetaiinHaakuSubTempCProcess extends BatchProcessBase<SetaiYinEntity
         ShikibetsuCode 識別コード = entity.getShikibetsuCode();
         for (IKojin コード : kojins) {
             entity.setShikibetsuCode(コード.get識別コード());
+            entity.setShotaishikibetsuCode(コード.get識別コード().getColumnValue());
             if (識別コード == コード.get識別コード()) {
                 entity.setHonninnkubun(本人区分);
             } else {
                 entity.setHonninnkubun(本人区分以外);
             }
         }
-        entity.setShotaishikibetsuCode(isetai.getSetaiCode().getColumnValue());
-        if (本人区分.equals(entity.getHonninnkubun())) {
-            entity.setShotaikazeikubun(本人課税区分);
+        if (isetai.getSetaiCode() != null) {
+            entity.setSetaiCode(isetai.getSetaiCode());
+        }
+        if (本人区分以外.equals(entity.getHonninnkubun())) {
+            entity.setShotaiinhihokenshaNo(entity.getJuushotitokureigaitou());
         }
         if (本人区分以外.equals(entity.getHonninnkubun())) {
             entity.setShotaikazeikubun(世帯課税区分);
         }
+        if (本人区分.equals(entity.getHonninnkubun())) {
+            entity.setHonninkazeikubnn(本人課税区分);
+        }
+
         世帯員所得一時.insert(entity);
     }
 }

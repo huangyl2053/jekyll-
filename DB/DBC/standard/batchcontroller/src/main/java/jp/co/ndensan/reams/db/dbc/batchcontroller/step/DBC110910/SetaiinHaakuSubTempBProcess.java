@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -54,6 +56,10 @@ public class SetaiinHaakuSubTempBProcess extends BatchProcessBase<SetaiYinEntity
 
     @Override
     protected void process(SetaiYinEntity entity) {
+        ShikibetsuCode 識別コード = new ShikibetsuCode(entity.getShotaishikibetsuCode());
+        entity.setShikibetsuCode(識別コード);
+        SetaiCode 世帯コード = new SetaiCode(entity.getJuushotitokureigaitou());
+        entity.setSetaiCode(世帯コード);
         世帯員所得一時.insert(entity);
     }
 }

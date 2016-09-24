@@ -101,9 +101,6 @@
         J."jukyuYMD",
         J."shotokuNendo",
         J."juushotitokureigaitou",
-        J."shotaiCode",
-        J."seinenngappiYMD",
-        J."zokugaraCode",
         J."shotaishikibetsuCode",
         J."shotaihaakujukyuYMD",
         J."honninnkubun",
@@ -121,7 +118,13 @@
         J."shoubokubun",
         J."roureifukusikubun",
         J."shotokukubunCode",
-        J."shotaishotokukubunCode"
+        J."shotaishotokukubunCode",
+        J."shotaiCode",
+        J."seinenngappiYMD",
+        J."zokugaraCode",
+        J."setaiCode",
+        J."seinengappiYMD",
+        J."kazokuNo"
         FROM
         "SetaiYinShiyoTokuJyoHoTemp"	AS J
         INNER JOIN  rgur."UrT0508SeikatsuHogoJukyusha" AS T508
@@ -143,9 +146,6 @@
         J."jukyuYMD",
         J."shotokuNendo",
         J."juushotitokureigaitou",
-        J."shotaiCode",
-        J."seinenngappiYMD",
-        J."zokugaraCode",
         J."shotaishikibetsuCode",
         J."shotaihaakujukyuYMD",
         J."honninnkubun",
@@ -163,7 +163,13 @@
         J."shoubokubun",
         J."roureifukusikubun",
         J."shotokukubunCode",
-        J."shotaishotokukubunCode"
+        J."shotaishotokukubunCode",
+        J."shotaiCode",
+        J."seinenngappiYMD",
+        J."zokugaraCode",
+        J."setaiCode",
+        J."seinengappiYMD",
+        J."kazokuNo"
         FROM
         "SetaiYinShiyoTokuJyoHoTemp"	AS J
         INNER JOIN  rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS T7006
