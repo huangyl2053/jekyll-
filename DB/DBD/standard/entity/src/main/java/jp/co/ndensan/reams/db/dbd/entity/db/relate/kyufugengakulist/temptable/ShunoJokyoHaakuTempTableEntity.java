@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
@@ -40,9 +43,10 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = (new RString("ShunoJokyoHaakuTemp"));
+        TABLE_NAME = (new RString("ShunoJokyoTemp"));
     }
 
+    @PrimaryKey
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(2)
@@ -60,9 +64,9 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     @TempTableColumnOrder(8)
     private ZenkokuJushoCode jushoCode;
     @TempTableColumnOrder(9)
-    private RString yubinNo;
+    private YubinNo yubinNo;
     @TempTableColumnOrder(10)
-    private RString jusho;
+    private AtenaJusho jusho;
     @TempTableColumnOrder(11)
     private FlexibleDate shikakuShutokuYMD;
     @TempTableColumnOrder(12)
@@ -70,7 +74,7 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     @TempTableColumnOrder(13)
     private RString shikakuSoshitsuJiyuCode;
     @TempTableColumnOrder(14)
-    private RString hihokennshaKubunCode;
+    private RString shikakuKubunCode;
     @TempTableColumnOrder(15)
     private RString koikinaiJushochiTokureiFlag;
     @TempTableColumnOrder(16)
@@ -90,14 +94,18 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     @TempTableColumnOrder(23)
     private FlexibleDate jukyuShinseiYMD;
     @TempTableColumnOrder(24)
+    @PrimaryKey
     private FlexibleYear choteiNendo;
     @TempTableColumnOrder(25)
+    @PrimaryKey
     private FlexibleYear fukaNendo;
     @TempTableColumnOrder(26)
     private RString tokucho_FuchoKubun;
     @TempTableColumnOrder(27)
+    @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @TempTableColumnOrder(28)
+    @PrimaryKey
     private RString kibetsu;
     @TempTableColumnOrder(29)
     private Decimal choteigaku;
@@ -106,15 +114,17 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     @TempTableColumnOrder(31)
     private Decimal minogaku;
     @TempTableColumnOrder(32)
-    private RDate shunyuYMD;
+    private RDate nokigen;
     @TempTableColumnOrder(33)
-    private RDate tokusokujoHakkoYMD;
+    private RDate shunyuYMD;
     @TempTableColumnOrder(34)
-    private FlexibleDate jikoKisanYMD;
+    private RDate tokusokujoHakkoYMD;
     @TempTableColumnOrder(35)
-    private RString jikoKisanJiyu;
+    private FlexibleDate jikoKisanYMD;
     @TempTableColumnOrder(36)
-    private RString minoKannoKubun;
+    private RString jikoKisanJiyu;
     @TempTableColumnOrder(37)
+    private RString minoKannoKubun;
+    @TempTableColumnOrder(38)
     private RString jikoKubun;
 }
