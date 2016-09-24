@@ -54,9 +54,9 @@ public class KyufujissekiTempTblUpdateProcess extends BatchProcessBase<Kyufujiss
     protected void process(KyufujissekiTempTblEntity entity) {
         if (!RString.isNullOrEmpty(entity.getHokenryoDankai2())) {
             entity.setShotoku(entity.getHokenryoDankai2());
-        } else if (RString.isNullOrEmpty(entity.getHokenryoDankai2())) {
+        } else if (!RString.isNullOrEmpty(entity.getHokenryoDankai1())) {
             entity.setShotoku(entity.getHokenryoDankai1());
-        } else if (RString.isNullOrEmpty(entity.getHokenryoDankai2()) && RString.isNullOrEmpty(entity.getHokenryoDankai2())) {
+        } else if (RString.isNullOrEmpty(entity.getHokenryoDankai2()) && RString.isNullOrEmpty(entity.getHokenryoDankai1())) {
             entity.setShotoku(RString.EMPTY);
         }
         給付実績データ一時TBL.update(entity);

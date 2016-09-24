@@ -59,13 +59,6 @@ public class HeikinriyogakuTokeihyoProcess extends BatchProcessBase<Kyufujisseki
     @Override
     protected void afterExecute() {
         HekinRiyoGakuTokehyoResult hekinRiyoGakuTokehyoResult = new HekinRiyoGakuTokehyoResult();
-        if (給付実績データ一時TBL.getInsertCount() > 0) {
-            List<ShikakutempTblEntity> 一時EntityList = hekinRiyoGakuTokehyoResult.set総合計();
-            for (ShikakutempTblEntity shikakutempTblEntity : 一時EntityList) {
-                出力用一時TBL.insert(shikakutempTblEntity);
-            }
-
-        }
         List<ShikakutempTblEntity> 一時EntityList = hekinRiyoGakuTokehyoResult.set出力用一時TBL();
         for (ShikakutempTblEntity shikakutempTblEntity : 一時EntityList) {
             出力用一時TBL.insert(shikakutempTblEntity);

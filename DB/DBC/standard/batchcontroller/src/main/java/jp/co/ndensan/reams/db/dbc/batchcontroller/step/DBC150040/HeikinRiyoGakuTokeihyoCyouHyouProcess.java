@@ -39,12 +39,27 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper."
             + "get平均利用額統計Entity");
+    private static final RString 值1 = new RString("1");
+    private static final RString 值2 = new RString("2");
+    private static final RString 值33 = new RString("3");
+    private static final RString 值4 = new RString("4");
+    private static final RString 值5 = new RString("5");
     private static final RString 值6 = new RString("6");
     private static final RString 值7 = new RString("7");
     private static final RString 值8 = new RString("8");
     private static final RString 值9 = new RString("9");
     private static final RString 值10 = new RString("10");
     private static final RString 人数 = new RString("人数");
+    private static final RString 提供月 = new RString("提供月");
+    private static final RString 審査月 = new RString("審査月");
+    private static final RString 值000000 = new RString("000000");
+    private static final RString 市町村名 = new RString("市町村名");
+    private static final RString 旧市町村名 = new RString("旧市町村名");
+    private static final RString 住所 = new RString("住所");
+    private static final RString 行政区 = new RString("行政区");
+    private static final RString 地区1 = new RString("地区1");
+    private static final RString 地区2 = new RString("地区2");
+    private static final RString 地区3 = new RString("地区3");
     private static final RString 費用総額 = new RString("費用総額");
     private static final RString 平均額 = new RString("平均額");
     private static final RString 以上 = new RString("10以上");
@@ -169,10 +184,10 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private void editHeikinRiyoGakuTokeihyoEntity(HeikinRiyoGakuTokeihyoEntity heikinRiyoGakuTokeihyoEntity) {
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (new RString("1").equals(paramter.getTaishoNendoYM())) {
+        if (值1.equals(paramter.getTaishoNendoYM())) {
             if (!paramter.getKaishiYM().equals(paramter.getShuryoYM())) {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("提供月"));
+                rb.append(提供月);
                 rb.append(":");
                 rb.append((setDateFormat(paramter.getKaishiYM())));
                 rb.append("-");
@@ -181,16 +196,16 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 heikinRiyoGakuTokeihyoEntity.set条件1(条件１);
             } else {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("提供月"));
+                rb.append(提供月);
                 rb.append(":");
                 rb.append((setDateFormat(paramter.getKaishiYM())));
                 RString 条件１ = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件1(条件１);
             }
-        } else if (new RString("2").equals(paramter.getTaishoNendoYM())) {
+        } else if (值2.equals(paramter.getTaishoNendoYM())) {
             if (!paramter.getKaishiYM().equals(paramter.getShuryoYM())) {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("審査月"));
+                rb.append(審査月);
                 rb.append(":");
                 rb.append((setDateFormat(paramter.getKaishiYM())));
                 rb.append("-");
@@ -199,68 +214,68 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 heikinRiyoGakuTokeihyoEntity.set条件1(条件１);
             } else {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("審査月"));
+                rb.append(審査月);
                 rb.append(":");
                 rb.append((setDateFormat(paramter.getKaishiYM())));
                 RString 条件１ = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件1(条件１);
             }
         }
-        if ((!RString.isNullOrEmpty(paramter.getShichosonCode()) && new RString("000000").equals(paramter.getShichosonCode()))
-                && (!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) || new RString("000000").equals(paramter.getKyuShichosonCode())) {
+        if ((!RString.isNullOrEmpty(paramter.getShichosonCode()) && 值000000.equals(paramter.getShichosonCode()))
+                && (!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) || 值000000.equals(paramter.getKyuShichosonCode())) {
             RStringBuilder rb = new RStringBuilder();
-            rb.append(new RString("市町村名"));
+            rb.append(市町村名);
             rb.append(":");
             rb.append(setDateFormat(paramter.getShichosonMei()));
             RString 条件2 = rb.toRString();
             heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
-        } else if ((!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) && new RString("000000").equals(paramter.getKyuShichosonCode())) {
+        } else if ((!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) && 值000000.equals(paramter.getKyuShichosonCode())) {
             RStringBuilder rb = new RStringBuilder();
-            rb.append(new RString("旧市町村名"));
+            rb.append(旧市町村名);
             rb.append(":");
             rb.append(setDateFormat(paramter.getKyuShichosonMei()));
             RString 条件2 = rb.toRString();
             heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
         } else if (paramter.getShichosonCode().isEmpty() && paramter.getKyuShichosonCode().isEmpty()) {
-            if (new RString("1").equals(paramter.getChikuShitei())) {
+            if (值1.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("住所"));
+                rb.append(住所);
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
-            } else if (new RString("2").equals(paramter.getChikuShitei())) {
+            } else if (值2.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("行政区"));
+                rb.append(行政区);
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
-            } else if (new RString("3").equals(paramter.getChikuShitei())) {
+            } else if (值33.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("地区１"));
+                rb.append(地区1);
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
-            } else if (new RString("4").equals(paramter.getChikuShitei())) {
+            } else if (值4.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("地区2"));
+                rb.append(地区2);
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
-            } else if (new RString("5").equals(paramter.getChikuShitei())) {
+            } else if (值5.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
-                rb.append(new RString("地区3"));
+                rb.append(地区3);
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");

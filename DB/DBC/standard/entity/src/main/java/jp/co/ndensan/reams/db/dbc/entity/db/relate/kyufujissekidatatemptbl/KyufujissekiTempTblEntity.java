@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class KyufujissekiTempTblEntity extends DbTableEntityBase<KyufujissekiTempTblEntity> implements IDbAccessable {
 
     @TempTableColumnOrder(1)
+    @PrimaryKey
     private RString hiHokenshaNo;
     @TempTableColumnOrder(2)
     private FlexibleYearMonth serviceTeikyoYM;

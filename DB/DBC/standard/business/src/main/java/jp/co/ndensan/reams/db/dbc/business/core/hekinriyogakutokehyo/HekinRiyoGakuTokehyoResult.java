@@ -261,55 +261,6 @@ public class HekinRiyoGakuTokehyoResult {
     }
 
     /**
-     * set総合計
-     *
-     * @return ShikakutempTblEntity ShikakutempTblEntity
-     */
-    public List<ShikakutempTblEntity> set総合計() {
-        List<ShikakutempTblEntity> shikakutempTblEntitylist = new ArrayList<>();
-        List<RString> shotokuList = new ArrayList<>();
-        shotokuList.add(值1);
-        shotokuList.add(值2);
-        shotokuList.add(值3);
-        shotokuList.add(值4);
-        shotokuList.add(值5);
-        shotokuList.add(值6);
-        shotokuList.add(值7);
-        shotokuList.add(值8);
-        shotokuList.add(值9);
-        shotokuList.add(以上);
-        shotokuList.add(その他);
-        shotokuList.add(号);
-        shotokuList.add(合計);
-        List<RString> shukeinaiyouList = new ArrayList<>();
-        shukeinaiyouList.add(人数);
-        shukeinaiyouList.add(費用総額);
-        shukeinaiyouList.add(平均額);
-        for (int i = 0; i < shotokuList.size(); i++) {
-            ShikakutempTblEntity 一時Entity = new ShikakutempTblEntity();
-            一時Entity.setPageNO(值36);
-            一時Entity.setServiceshurui(総合計);
-            一時Entity.setShotoku(shotokuList.get(i));
-            for (int j = 0; j < shukeinaiyouList.size(); j++) {
-                一時Entity.setShukeinaiyou(shukeinaiyouList.get(j));
-                一時Entity.setHokenseiteitoku(RString.EMPTY);
-                一時Entity.setYoshien1(Decimal.ZERO);
-                一時Entity.setYoshien2(Decimal.ZERO);
-                一時Entity.setKeikanoyokaigo(Decimal.ZERO);
-                一時Entity.setYokaigo1(Decimal.ZERO);
-                一時Entity.setYokaigo2(Decimal.ZERO);
-                一時Entity.setYokaigo3(Decimal.ZERO);
-                一時Entity.setYokaigo4(Decimal.ZERO);
-                一時Entity.setYokaigo5(Decimal.ZERO);
-                一時Entity.setGokeichi(Decimal.ZERO);
-                shikakutempTblEntitylist.add(一時Entity);
-            }
-        }
-
-        return shikakutempTblEntitylist;
-    }
-
-    /**
      * set出力用一時TBL
      *
      * @return ShikakutempTblEntity
@@ -370,6 +321,7 @@ public class HekinRiyoGakuTokehyoResult {
         serviceshuruiList.add(特定入所者介護サービス費食費);
         serviceshuruiList.add(特定入所者介護サービス費居住費);
         serviceshuruiList.add(市町村特別給付);
+        serviceshuruiList.add(総合計);
         for (int i = 0; i < serviceshuruiList.size(); i++) {
             ShikakutempTblEntity 一時Entity = new ShikakutempTblEntity();
             一時Entity.setPageNO(new RString(String.valueOf(i + 1)));
