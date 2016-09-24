@@ -45,9 +45,9 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
         source.birthYMD = item.getBirthYMD();
         source.hihokenshaTelNo = item.getHihokenshaTelNo();
         source.hihokenshaYubinNo = item.getHihokenshaYubinNo();
-        source.hihokenJusho = item.getHihokenJusho();
+        source.hihokenshaJusho = item.getHihokenJusho();
         source.chuibun = item.getChuibun();
-        source.remban = new RString("1");
+        source.PageCnt = new RString("1");
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         source.hihokenshaNo = item.getHihokenshaNo();
         return source;
