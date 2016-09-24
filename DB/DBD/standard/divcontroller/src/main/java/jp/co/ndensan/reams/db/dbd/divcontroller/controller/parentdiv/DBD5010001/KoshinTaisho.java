@@ -211,8 +211,7 @@ public class KoshinTaisho {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         new KoshinTaishoHandler().youKihoKoushiDb(div);
-        ResponseData<KoshinTaishoDiv> response = new ResponseData<>();
-        div.getCcdKanryoMessege().setMessage(new RString(response.getRootTitle() + "の保存処理が完了しました。"),
+        div.getCcdKanryoMessege().setMessage(new RString("完了処理・更新管理の保存処理が完了しました。"),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
         AccessLogger.log(AccessLogType.更新, new KoshinTaishoHandler().アクセスログ情報(div));
         return ResponseData.of(div).setState(DBD5010001StateName.完了);
