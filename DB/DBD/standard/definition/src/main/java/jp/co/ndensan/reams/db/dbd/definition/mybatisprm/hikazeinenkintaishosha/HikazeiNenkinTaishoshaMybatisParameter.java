@@ -178,7 +178,7 @@ public final class HikazeiNenkinTaishoshaMybatisParameter implements IMyBatisPar
         }
         LasdecCode 保険者コード = 宛名抽出条件.getShichoson_Code();
         if (!保険者コード.isEmpty()
-                || 市町村コード.equals(保険者コード)) {
+                && !市町村コード.equals(保険者コード)) {
             has保険者コード = true;
         }
         return new HikazeiNenkinTaishoshaMybatisParameter(

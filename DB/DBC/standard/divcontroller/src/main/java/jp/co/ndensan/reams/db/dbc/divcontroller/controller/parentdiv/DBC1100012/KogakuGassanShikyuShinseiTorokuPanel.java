@@ -186,7 +186,10 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuPanelDiv> onClick_btnKensaku(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-
+        set申請状態(ぜろ);
+        set申請状況(ぜろ);
+        RString メニューID = UrControlDataFactory.createInstance().getMenuID();
+        switchFor(メニューID);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validate();
         if (validPairs.iterator().hasNext()) {
             div.getKogakuGassanShikyuShinseiTorokuSearch().setIsOpen(true);
