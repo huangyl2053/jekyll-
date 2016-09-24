@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TaishoShaKanriJohoMybatisParameter implements IMyBatisParameter {
 
     private FlexibleDate 基準日;
+    private FlexibleDate 基準日の2年前;
     private boolean is通知書未発行者抽出;
     private boolean is減額適用中者抽出;
     private FlexibleDate 減額適用中者抽出基準日;
@@ -59,6 +60,11 @@ public class TaishoShaKanriJohoMybatisParameter implements IMyBatisParameter {
             boolean 保険料完納者出力,
             YMDHMS システム日付) {
         this.基準日 = 基準日;
+        if (基準日 != null && 基準日.isWareki()) {
+            this.基準日の2年前 = 基準日.plusYear(2);
+        } else {
+            this.基準日の2年前 = FlexibleDate.EMPTY;
+        }
         this.is通知書未発行者抽出 = 通知書未発行者抽出;
         this.is減額適用中者抽出 = 減額適用中者抽出;
         this.減額適用中者抽出基準日 = 減額適用中者抽出基準日;

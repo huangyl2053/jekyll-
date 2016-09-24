@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoJokyoHaakuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoTainoJokyoHaakuProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32004.KyufuGakuGengakuTainoShaProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32004.TaishoShaKanriJohoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209010.DBD209010_KyufuGakuGengakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoJokyoHaakuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoTainoJokyoHaakuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
  */
 public class DBD209010_KyufuGakuGengakuList extends BatchFlowBase<DBD209010_KyufuGakuGengakuListParameter> {
 
+    private static final String 収納状況把握情報の取得 = "shunoJokyoHaaku";
     private static final String 対象者管理情報の取得 = "KyufuGengakuKanriListTaishoTokutei";
+    private static final String 収納滞納状況把握情報の取得 = "shunoTainoJokyoHaaku";
     private static final String 給付額減額滞納者把握情報取得 = "KyufuGengakuKanriListSakusei";
 
     private YMDHMS systemTime;
@@ -36,9 +42,22 @@ public class DBD209010_KyufuGakuGengakuList extends BatchFlowBase<DBD209010_Kyuf
     @Override
     protected void defineFlow() {
 
+        executeStep(収納状況把握情報の取得);
         executeStep(対象者管理情報の取得);
+        executeStep(収納滞納状況把握情報の取得);
         executeStep(給付額減額滞納者把握情報取得);
 
+    }
+
+    /**
+     * 収納状況把握情報の取得を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(収納状況把握情報の取得)
+    protected IBatchFlowCommand shunoJokyoHaakuProcess() {
+        return loopBatch(ShunoJokyoHaakuProcess.class)
+                .arguments(new ShunoJokyoHaakuProcessParameter(getParameter().get基準日())).define();
     }
 
     /**
@@ -51,6 +70,17 @@ public class DBD209010_KyufuGakuGengakuList extends BatchFlowBase<DBD209010_Kyuf
         return loopBatch(TaishoShaKanriJohoProcess.class)
                 .arguments(getParameter().toTaishoshaIchijiTokuteiProcessParameter())
                 .define();
+    }
+
+    /**
+     * 収納滞納状況把握情報の取得を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(収納滞納状況把握情報の取得)
+    protected IBatchFlowCommand shunoTainoJokyoHaaku() {
+        return loopBatch(ShunoTainoJokyoHaakuProcess.class)
+                .arguments(new ShunoTainoJokyoHaakuProcessParameter(getParameter().get基準日())).define();
     }
 
     /**
