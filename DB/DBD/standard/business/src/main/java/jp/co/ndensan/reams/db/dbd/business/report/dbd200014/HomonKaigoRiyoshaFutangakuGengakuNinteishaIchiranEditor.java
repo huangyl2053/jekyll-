@@ -354,7 +354,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource
             set出力順改頁(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
         List<ISetSortItem> list = new ArrayList<>();
-        if (出力順 != null && 出力順.get設定項目リスト() == null) {
+        if (出力順 != null && 出力順.get設定項目リスト() != null && !出力順.get設定項目リスト().isEmpty()) {
             list = 出力順.get設定項目リスト();
         }
         if (list.size() > LISTINDEX_0) {
