@@ -71,12 +71,12 @@ public class RiyojokyoTokeihyoHandler {
             batchParamter.setNenreiSansyutuKijyubi(new FlexibleDate(div.getTasyoNengetu().getValue().toString()));
         }
 
-        if (DonyuKeitaiCode.事務単一.equals(div.getChikushichosonSelect().get導入形態コード())) {
+        if (DonyuKeitaiCode.事務単一.getCode().equals(div.getChikushichosonSelect().get導入形態コード())) {
             batchParamter.setSentakuTaisyoKubun(div.getChikushichosonSelect().get選択対象());
             batchParamter.setSentakuTaisyoList(div.getChikushichosonSelect().get選択結果());
         }
-        if (DonyuKeitaiCode.事務広域.equals(div.getChikushichosonSelect().get導入形態コード())
-                || DonyuKeitaiCode.事務構成市町村.equals(div.getChikushichosonSelect().get導入形態コード())) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(div.getChikushichosonSelect().get導入形態コード())
+                || DonyuKeitaiCode.事務構成市町村.getCode().equals(div.getChikushichosonSelect().get導入形態コード())) {
             batchParamter.setShichosonCode(new Code(div.getChikushichosonSelect().get市町村コード()));
             batchParamter.setShichosonMeisho(div.getChikushichosonSelect().get市町村名称());
             batchParamter.setKyoShichosonCode(new Code(div.getChikushichosonSelect().get旧市町村コード()));
