@@ -41,14 +41,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 償還口座払の口座情報取得_Process処理クラスです．
+ * 高額の口座情報取得_Process処理クラスです．
  *
  * @reamsid_L DBC-2180-030 donghj
  */
-public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
+public class KougakuKozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
-            + "relate.dbc050010.IKozaJohoMapper.get償還口座払の口座情報");
+            + "relate.dbc050010.IKozaJohoMapper.get高額の口座情報");
     private KozaJohoMybatisParameter mybatisParameter;
     private static final RString ゼロ1 = new RString("0");
     private static final RString ゼロ3 = new RString("000");
@@ -75,7 +75,7 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
     @Override
     protected void initialize() {
         IKozaJohoMapper mapper = getMapper(IKozaJohoMapper.class);
-        IShunoKamoku 介護給付 = ShunoKamokuFinder.createInstance().get科目(ShunoKamokuShubetsu.介護給付_償還);
+        IShunoKamoku 介護給付 = ShunoKamokuFinder.createInstance().get科目(ShunoKamokuShubetsu.介護給付_高額);
         GyomubetsuPrimaryKeyMybatisParameter mybatis = new GyomubetsuPrimaryKeyMybatisParameter();
         KamokuCode 科目コード;
         if (介護給付 != null) {
