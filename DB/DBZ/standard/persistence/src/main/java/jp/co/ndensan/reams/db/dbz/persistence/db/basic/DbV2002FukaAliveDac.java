@@ -43,6 +43,9 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
 
     @InjectSession
     private SqlSession session;
+    private final RString 調定年度_フィールド = new RString("調定年度");
+    private final RString 賦課年度_フィールド = new RString("賦課年度");
+    private final RString 被保険者番号_フィールド = new RString("被保険者番号");
 
     /**
      * 主キーで賦課Aliveを取得します。
@@ -60,8 +63,8 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_フィールド.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_フィールド.toString()));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
@@ -121,8 +124,8 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
             RString 保険料段階) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_フィールド.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_フィールド.toString()));
         requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
         requireNonNull(保険料段階, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階"));
 
@@ -149,8 +152,8 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
     public List<DbT2002FukaEntity> select賦課情報(
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度) throws NullPointerException {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_フィールド.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_フィールド.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -176,8 +179,8 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号) throws NullPointerException {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_フィールド.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_フィールド.toString()));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -199,7 +202,7 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
      */
     @Transaction
     public DbT2002FukaEntity select賦課年度と調定年度(HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_フィールド.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -224,9 +227,9 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_フィールド.toString()));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_フィールド.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_フィールド.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -251,8 +254,8 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
     @Transaction
     public DbT2002FukaEntity select前年の賦課年度と調定年度(HihokenshaNo 被保険者番号,
             FlexibleYear 調定年度) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_フィールド.toString()));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_フィールド.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -278,9 +281,9 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_フィールド.toString()));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_フィールド.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_フィールド.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
