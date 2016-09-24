@@ -141,7 +141,7 @@ public class AtenaSealCreateHandler {
         RString 抽出対象者 = new RString(j);
         RString 画面の基準年月 = new RString(div.getTxtKijyunnengatu().getValue().toString());
         FlexibleYearMonth 基準年月 = new FlexibleYearMonth(画面の基準年月.substring(NUM_0, NUM_6));
-        RString 資格区分 = 資格区分取得(div.getDdlShikakuKubun().getSelectedKey());
+        RString 資格区分 = get資格区分(div.getDdlShikakuKubun().getSelectedKey());
         RString 市町村指定 = div.getDdlShicyouson().getSelectedValue();
         RString 最優先住所 = div.getDdlSaiyusenJusho().getSelectedValue();
         RString 敬称 = div.getDdlKeisho().getSelectedValue();
@@ -201,7 +201,7 @@ public class AtenaSealCreateHandler {
         return dataSourceList;
     }
 
-    private RString 資格区分取得(RString 資格区分のkey) {
+    private RString get資格区分(RString 資格区分のkey) {
         switch (資格区分のkey.toString()) {
             case "nihonjin1go":
                 return 定数_1;
