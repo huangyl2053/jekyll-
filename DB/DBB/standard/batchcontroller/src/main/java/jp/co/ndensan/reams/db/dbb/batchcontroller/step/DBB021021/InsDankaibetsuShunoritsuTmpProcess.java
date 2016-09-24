@@ -46,6 +46,10 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
 
     private InsDankaibetsuShunoritsuTmpProcessParameter parameter;
     private CaFt702FindTotalShunyuFunction psmEntity;
+    private static final RString 未納分 = new RString("未納分");
+    private static final RString 完納分 = new RString("完納分");
+    private static final RString 完納出力区分_出力しない = new RString("0");
+    private static final RString 完納出力区分_出力する = new RString("1");
     private static final RString 認定者のみ = new RString("認定者のみ");
     private static final RString 認定者を除く１号被保険者 = new RString("認定者を除く１号被保険者");
     private static final RString 受給者のみ = new RString("受給者のみ");
@@ -96,12 +100,26 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         if (beforeEntity == null) {
             beforeEntity = 収納データ;
         }
+//        RString 完納区分 = 完納分;
+        // TODO 収納情報の調定年月日、収納情報．会計年度 QA#102469 確認中
+//        if (parameter.get会計年度().getYearValue()
+//                == 収納データ.get収入情報取得PSM().get収納キーRelateEntity().get収納管理Entity().getKazeiNendo().getYearValue()
+//                && parameter.get完納出力区分().contains(完納出力区分_出力しない)) {
+//            完納区分 = 未納分;
+//        } else if (収納データ.get収入情報取得PSM().get収納キーRelateEntity().get収納管理Entity().getKazeiNendo().getYearValue()
+//                < parameter.get会計年度().getYearValue()
+//                && parameter.get完納出力区分().contains(完納出力区分_出力する)) {
+//            完納区分 = 完納分;
+//        } else {
+//            return;
+//        }
         if (収納データ.get収入情報取得PSM().get収納キーRelateEntity().get収納管理Entity().getShunoId().compareTo(
                 beforeEntity.get収入情報取得PSM().get収納キーRelateEntity().get収納管理Entity().getShunoId()) == 0) {
             最新収入額内訳RelateEntityリスト.add(収納データ.get収入情報取得PSM().get最新収入額内訳RelateEntity());
             最新収入任意附帯金Entityリスト.add(収納データ.get収入情報取得PSM().get最新収入任意附帯金Entity());
         } else {
             DankaibetsuShunoritsuTempEntity entity = get保険料段階別収納率一時(収納データ);
+            entity.setKannnouKunbun(完納分);
             保険料段階別収納率一時tableWriter.insert(entity);
             最新収入額内訳RelateEntityリスト = new ArrayList<>();
             最新収入任意附帯金Entityリスト = new ArrayList<>();
@@ -154,7 +172,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setHihokenshaNo(収納データ.get介護賦課().getHihokenshaNo());
         // QA#99921確認中　被保険者番号、調定額、不納欠損額、収納データ区分、
         entity.setChoteigaku(Decimal.ONE);
-        entity.set不納欠損額(Decimal.ONE);
+        entity.setFunougaku(Decimal.ONE);
         entity.setShunyugaku(収納データ.get収入情報取得PSM().get最新収入Entity().getShunyugaku());
 //        entity.set収納データ区分(収納データ.get収入情報取得PSM().get収納キーRelateEntity().
 //        get収納科目枝番Entity().getShunoKamokuId());
