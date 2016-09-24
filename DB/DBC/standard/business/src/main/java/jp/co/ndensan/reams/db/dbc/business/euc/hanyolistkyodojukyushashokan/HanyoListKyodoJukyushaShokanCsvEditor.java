@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 汎用リスト_共同処理用受給者情報（償還）CSVデータの編集クラスです。
@@ -257,7 +258,10 @@ public class HanyoListKyodoJukyushaShokanCsvEditor {
         bodyList.add(format日付項目(共同処理用受給者異動償還送付Entity.getHokenKyufuIchijiSashitomeKaishiYMD(), processParameter));
         bodyList.add(format日付項目(共同処理用受給者異動償還送付Entity.getHokenKyufuIchijiSashitomeShuryoYMD(), processParameter));
         bodyList.add(edit差止区分(共同処理用受給者異動償還送付Entity.getHokenkyufuIchijiSashitomeKubunCode()));
-        bodyList.add(new RString(共同処理用受給者異動償還送付Entity.getHokenkyufuIchijiSashitomeKingaku().toString()));
+        Decimal 保険給付支払一時差止金額 = 共同処理用受給者異動償還送付Entity.getHokenkyufuIchijiSashitomeKingaku();
+        if (保険給付支払一時差止金額 != null) {
+            bodyList.add(new RString(保険給付支払一時差止金額.toString()));
+        }
         return bodyList;
     }
 
