@@ -43,7 +43,7 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
     private static final RString 設定値_不支給 = new RString("（不支給）");
     private static final RString 増減の理由 = new RString("増減の理由");
     private static final RString 不支給の理由 = new RString("不支給の理由");
-    private static final RString 窓口払い值 = new RString("1");
+    private static final RString 窓口払い値 = new RString("1");
     private static final RString 窓口払い = new RString("窓口払い");
     private static final RString 口座払いでゆうちょ = new RString("口座払いでゆうちょ");
     private static final RString 半角アスタリスク = new RString("************");
@@ -155,7 +155,7 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
         source.torikeshi2 = 帳票情報.get口座払();
         source.bankName = 帳票情報.get金融機関();
 
-        if (支給.equals(帳票情報.get支給不支給区分()) && !窓口払い值.equals(帳票情報.get支払方法区分())
+        if (支給.equals(帳票情報.get支給不支給区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
                 || 不支給.equals(帳票情報.get支給不支給区分())) {
             source.torikeshiMochimono1 = 半角アスタリスク;
             source.torikeshiMochimono2 = 半角アスタリスク;

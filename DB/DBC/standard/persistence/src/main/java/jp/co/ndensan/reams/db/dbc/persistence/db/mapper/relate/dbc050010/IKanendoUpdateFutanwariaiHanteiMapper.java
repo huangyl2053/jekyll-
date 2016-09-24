@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 /**
  * 処理日付管理マスタ更新のmapperです
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 public interface IKanendoUpdateFutanwariaiHanteiMapper {
 

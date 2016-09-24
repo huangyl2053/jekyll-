@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 処理日付管理マスタの更新処理クラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
 

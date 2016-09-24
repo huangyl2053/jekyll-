@@ -94,13 +94,13 @@ public class IdoChushutsuDaichoMybatisParameter implements IMyBatisParameter {
                 is施設入退所 = true;
             } else if (異動抽出対象.equals(new RString("資格"))) {
                 is資格 = true;
-            } else if (異動抽出対象.equals(new RString("訪問介護"))) {
+            } else if (異動抽出対象.equals(new RString("訪問介護(特別対策減免)"))) {
                 is訪問介護 = true;
             } else if (異動抽出対象.equals(new RString("居宅サービス計画"))) {
                 is居宅サービス計画 = true;
             } else if (異動抽出対象.equals(new RString("老齢福祉年金"))) {
                 is老齢福祉年金 = true;
-            } else if (異動抽出対象.equals(new RString("負担限度額"))) {
+            } else if (異動抽出対象.equals(new RString("負担限度額(特定入所者)"))) {
                 is負担限度額 = true;
             } else if (異動抽出対象.equals(new RString("社会福祉法人軽減"))) {
                 is社会福祉法人軽減 = true;

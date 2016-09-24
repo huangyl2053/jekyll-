@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.koseitaishojissekiichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.koseitaishojissekiichiran.KoseiTaishoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.koseitaishojissekiichiran.KoseiTaishoJissekiIchiranSource;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -42,7 +41,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
 
     private final int 連番;
     private final KoseiTaishoJissekiIchiranEntity entity;
-    private final IOutputOrder 出力順情報;
+    private final RString 出力順;
 
     /**
      * コンストラクタです
@@ -50,23 +49,23 @@ public class KoseiTaishoJissekiIchiranEditor implements
      * @param entity KoseiTaishoJissekiIchiranEntity
      * @param 開始日時 RDateTime
      * @param 終了日時 RDateTime
-     * @param 出力順情報 IOutputOrder
+     * @param 出力順 RString
      * @param 連番 int
      *
      */
     public KoseiTaishoJissekiIchiranEditor(KoseiTaishoJissekiIchiranEntity entity,
-            RDateTime 開始日時, RDateTime 終了日時, IOutputOrder 出力順情報, int 連番) {
+            RDateTime 開始日時, RDateTime 終了日時, RString 出力順, int 連番) {
         this.entity = entity;
         this.開始日時 = 開始日時;
         this.終了日時 = 終了日時;
-        this.出力順情報 = 出力順情報;
+        this.出力順 = 出力順;
         this.連番 = 連番;
     }
 
     @Override
     public KoseiTaishoJissekiIchiranSource edit(KoseiTaishoJissekiIchiranSource source) {
         source.title = タイトル;
-        source.printTimeStamp = getSakuseiYmhm(RDateTime.now()).concat(RString.FULL_SPACE).concat(日時作成);
+        source.printTimeStamp = getSakuseiYmhm(RDateTime.now()).concat(RString.HALF_SPACE).concat(日時作成);
         source.kaishiTimestamp = getSakuseiYmhm(開始日時);
         source.shuryoTimestamp = getSakuseiYmhm(終了日時);
         if (entity.get地方公共団体コード() != null) {
@@ -75,7 +74,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
 
         source.cityName = entity.get市町村名();
 
-        if (INDEX_1.equals(出力順情報)) {
+        if (出力順.equals(INDEX_1)) {
             source.sort1 = 年度タイトル;
             source.sort2 = 被保険者番号タイトル;
         } else {
@@ -116,7 +115,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
             if (!doカンマ編集(entity.get高額サービス費用額()).isEmpty()) {
                 source.listKyufuJisseki_12 = 前符号タイトル.concat(doカンマ編集(entity.get高額サービス費用額()));
             }
-
+            source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());
         }
 
         return source;

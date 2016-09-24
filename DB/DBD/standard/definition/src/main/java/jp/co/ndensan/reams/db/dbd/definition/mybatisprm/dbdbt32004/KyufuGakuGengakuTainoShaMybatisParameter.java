@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32004;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuGakuGengakuTainoShaMybatisParameter implements IMyBatisParameter {
 
     private RString 出力順;
+    private RString 支払方法変更管理区分_１号給付額減額;
+    private RString 支払方法変更無効区分_有効;
 
     /**
      * コンストラクタです。
@@ -27,6 +31,8 @@ public class KyufuGakuGengakuTainoShaMybatisParameter implements IMyBatisParamet
      */
     public KyufuGakuGengakuTainoShaMybatisParameter(RString 出力順) {
         this.出力順 = 出力順;
+        支払方法変更管理区分_１号給付額減額 = ShiharaiHenkoKanriKubun._１号給付額減額.getコード();
+        支払方法変更無効区分_有効 = ShiharaiHenkoMukoKubun.有効.getコード();
     }
 
 }

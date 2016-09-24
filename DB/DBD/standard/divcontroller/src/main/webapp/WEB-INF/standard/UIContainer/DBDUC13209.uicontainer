@@ -1,5 +1,5 @@
 ﻿{
- "uiContainerName": "DBDUC13200",
+ "uiContainerName": "DBDUC13209",
  "displayWizard": false,
  "subGyomuCode": "DBD",
  "steps": [
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD1320001",
      "toLayoutTitle": "汎用リスト",
-     "toState": ""
+     "toState": "利用者負担割合"
     },
     {
      "id": "2",

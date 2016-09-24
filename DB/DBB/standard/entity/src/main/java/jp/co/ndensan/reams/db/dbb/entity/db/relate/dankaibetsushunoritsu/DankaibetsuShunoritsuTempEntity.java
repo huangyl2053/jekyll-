@@ -34,12 +34,13 @@ public class DankaibetsuShunoritsuTempEntity extends DbTableEntityBase<Dankaibet
     private RString taishouKubun;
     private HihokenshaNo hihokenshaNo;
     private Decimal choteigaku;
-    private Decimal 不納欠損額;
+    private Decimal funougaku;
     private Decimal shunyugaku;
-    private int 収納データ区分;
+    private int shunoDataKubun;
     private FlexibleDate fukaYMD;
     private RString hokenryoDankai;
     private RString kamokuCode;
     private LasdecCode lasdecCode;
     private LasdecCode fukaLasdecCode;
+    private RString kannnouKunbun;
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 「DB出力(処理結果確認リスト一時)」の【振込データなし】のマッピング用XMLです。 -->
-<!-- @reamsid_L DBC-5010-030 x_lilh -->
+<!-- @reamsid_L DBC-2180-030 x_lilh -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShoriKekkaKakuninListDataNasiMapper">

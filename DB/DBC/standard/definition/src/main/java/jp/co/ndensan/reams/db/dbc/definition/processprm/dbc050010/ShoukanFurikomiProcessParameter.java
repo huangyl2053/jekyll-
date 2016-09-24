@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 償還のProcess用パラメータクラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter

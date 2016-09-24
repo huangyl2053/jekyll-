@@ -42,7 +42,6 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
     private static final int 定数_13 = 13;
     private static final int 定数_1 = 1;
     private static final int 定数_2 = 2;
-    private static final RString KEY_0 = new RString("key0");
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
     private static final RString 月時点の認定者 = new RString("月時点の認定者");

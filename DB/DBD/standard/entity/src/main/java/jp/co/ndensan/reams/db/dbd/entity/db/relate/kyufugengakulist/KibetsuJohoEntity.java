@@ -5,22 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4023JikoKisambiKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
 /**
- * 賦課NewestのRelateEntityクラスです。
+ * 期別情報のRelateEntityクラスです。
  *
- * @reamsid_L DBD-3610-050 wangchao
+ * @reamsid_L DBD-3610-050 xuyue
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KibetsuJohoEntity {
 
-    private DbT2003KibetsuEntity kibetsuEntity;
-    private UrT0705ChoteiKyotsuEntity choteiKyotsuEntity;
-    private List<DbT4023JikoKisambiKanriEntity> jikoKisambiKanriEntity;
+    private DbT2003KibetsuEntity 期別Entity;
+    private ChoteiRelateEntity 調定関連;
+    private DbT4023JikoKisambiKanriEntity 時効起算日管理Entity;
+
 }

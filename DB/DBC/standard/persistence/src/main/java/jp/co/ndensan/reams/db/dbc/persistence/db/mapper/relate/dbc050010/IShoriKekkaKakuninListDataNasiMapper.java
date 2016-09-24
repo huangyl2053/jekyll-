@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempT
 /**
  * 処理結果確認リスト一時_振込データなしのmapperです
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public interface IShoriKekkaKakuninListDataNasiMapper {
 

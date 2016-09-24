@@ -38,8 +38,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -155,13 +153,12 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
             tempTable.setKozaNayoseKey(set口座名寄せキー(口座, editorKoza, tempTable));
 
         } else if (RSTRING3.equals(支払方法区分コード)) {
-            FlexibleDate 依頼日 = new FlexibleDate(parameter.get振込指定年月日().toDateString());
-            //TODO QA553
+            FlexibleDate 振込指定年月日 = new FlexibleDate(parameter.get振込指定年月日().toDateString());
             KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
             KinyuKikan 金融機関情報 = null;
             DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity = entity.get受領委任契約事業者Entity();
             if (dbt3077Entity != null) {
-                金融機関情報 = set金融機関情報(dbt3077Entity, 金融機関情報, kinyuKikanManager, 依頼日);
+                set金融機関情報(dbt3077Entity, 金融機関情報, kinyuKikanManager, 振込指定年月日);
                 setsetTempTable2(dbt3077Entity, 金融機関情報, tempTable);
             }
             tempTable.setKozaDataFlag(true);
@@ -177,13 +174,12 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
 
     }
 
-    private KinyuKikan set金融機関情報(DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity, KinyuKikan 金融機関情報,
-            KinyuKikanManager kinyuKikanManager, FlexibleDate 依頼日) {
+    private void set金融機関情報(DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity, KinyuKikan 金融機関情報,
+            KinyuKikanManager kinyuKikanManager, FlexibleDate 振込指定年月日) {
         KinyuKikanCode kinyuKikanCode = dbt3077Entity.getKinyuKikanCode();
         if (kinyuKikanCode != null && !kinyuKikanCode.isEmpty()) {
-            金融機関情報 = kinyuKikanManager.getValidKinyuKikanOn(依頼日, kinyuKikanCode.value());
+            金融機関情報 = kinyuKikanManager.getValidKinyuKikanOn(振込指定年月日, kinyuKikanCode.value());
         }
-        return 金融機関情報;
     }
 
     private void setsetTempTable2(DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity, KinyuKikan 金融機関情報,
@@ -206,14 +202,8 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
         }
         tempTable.setYokinShubetsuCode(口座種別);
         tempTable.setKozaNo(dbt3077Entity.getKozaNo());
-        AtenaMeisho 口座名義人 = dbt3077Entity.getKozaMeiginin();
-        if (口座名義人 != null && !口座名義人.isEmpty()) {
-            tempTable.setKozaMeiginin(new AtenaKanaMeisho(口座名義人.value()));
-        }
-//        AtenaKanaMeisho 口座名義人漢字 = dbt3077Entity.getKozaMeigininKana();
-//        if (口座名義人漢字 != null && !口座名義人漢字.isEmpty()) {
-//            tempTable.setKozaMeigininKanji(new AtenaMeisho(口座名義人漢字.value()));
-//        }TODO QA553
+        tempTable.setKozaMeiginin(dbt3077Entity.getKozaMeigininKana());
+        tempTable.setKozaMeigininKanji(dbt3077Entity.getKozaMeiginin());
 
     }
 

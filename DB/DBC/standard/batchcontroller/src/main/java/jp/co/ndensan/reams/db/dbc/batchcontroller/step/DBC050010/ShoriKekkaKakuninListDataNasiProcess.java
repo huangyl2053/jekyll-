@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 処理結果確認リスト一時_振込データなし_Process処理クラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class ShoriKekkaKakuninListDataNasiProcess extends BatchProcessBase<ShoriKekkaKakuninListTempTableEntity> {
 

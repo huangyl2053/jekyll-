@@ -5,18 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 口座情報パラメタークラスです．
  *
- * @author LDNS donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class KozaJohoProcessParameter {
+public class KozaJohoProcessParameter implements IBatchProcessParameter {
 
     private RDate 振込指定年月日;
 

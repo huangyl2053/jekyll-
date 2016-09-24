@@ -14,7 +14,7 @@ import lombok.Setter;
 /**
  * 被保険者台帳と宛名情報SQL検索結果クラスです．
  *
- * @reamsid_L DBC-5010-030 donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 @Getter
 @Setter

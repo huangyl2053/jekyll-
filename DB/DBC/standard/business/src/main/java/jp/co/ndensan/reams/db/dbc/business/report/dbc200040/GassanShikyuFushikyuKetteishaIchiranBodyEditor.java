@@ -40,7 +40,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     private static final RString 件 = new RString("件");
     private static final RString アステリスク_15 = new RString("***************");
     private static final RString 対象データは存在しません = new RString("**　対象データは存在しません　**");
-    private static final int INT_15 = 15;
+    private static final int INT_34 = 34;
 
     /**
      * コンストラクタです
@@ -121,7 +121,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
             source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
         }
         if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
-            source.listUpper_1 = getColumnValue(entity.get被保険者氏名().getName()).substringReturnAsPossible(0, INT_15);
+            source.listUpper_1 = getColumnValue(entity.get被保険者氏名().getName()).substringReturnAsPossible(0, INT_34);
         } else {
             source.listUpper_1 = アステリスク_15;
         }
@@ -147,7 +147,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
 
     private RString get住所() {
         if (null != entity.get住所() && null != entity.get住所().get住所()) {
-            return entity.get住所().get住所().substringReturnAsPossible(0, INT_15);
+            return entity.get住所().get住所().substringReturnAsPossible(0, INT_34);
 
         }
         return RString.EMPTY;
