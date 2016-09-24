@@ -95,14 +95,9 @@ public class ShinseishoHakkoTaishoJohoSakuseiProcess extends BatchProcessBase<Sh
 
     @Override
     protected void process(ShinseishoHakkoTaishoJohoSakuseiEntity list) {
-        DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity dbT4030BatchEntity
-                = new DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity();
         DbT4031ShinseishoHakkoKohoshasEntity dbT4031Entity = new DbT4031ShinseishoHakkoKohoshasEntity();
-        setDbT4030Entity(dbT4030BatchEntity, uuid);
         setDbT4031Entity(dbT4031Entity, list, uuid);
-        dbT4030BatchWriter.insert(dbT4030BatchEntity);
         dbT4031Writer.insert(dbT4031Entity);
-
     }
 
     @Override

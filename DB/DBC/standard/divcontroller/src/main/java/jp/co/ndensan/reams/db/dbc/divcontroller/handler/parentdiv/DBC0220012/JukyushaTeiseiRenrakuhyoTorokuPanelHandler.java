@@ -41,6 +41,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     private static final RString 半角アスタリスク = new RString("*");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
     private static final Decimal NUM_ZERO = new Decimal(0);
     private static final RString 修正モード_TWO = new RString("修正モード2");
     private static final RString 修正モード_THREE = new RString("修正モード3");
@@ -131,7 +132,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                         set送付年月(new FlexibleYearMonth(システムタイム.getYearMonth().toDateString()))
                         .set訂正区分コード(訂正区分コード)
                         .set論理削除フラグ(true)
-                        .set訂正年月日(訂正年月日).build();
+                        .set訂正年月日(new FlexibleDate(システムタイム.toDateString())).build();
                 初期化データ = 初期化データ.modified();
                 return JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
                         insert受給者異動送付(初期化データ);
@@ -167,8 +168,12 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         }
         FlexibleDate 作成年月日 = new FlexibleDate(div.getOutputJukyushaIdoRenrakuhyo().
                 getJukyushaIdoRenrakuhyoHenkoPrintSetting().getIssueDate().toDateString());
+        int 変更前履歴番号 = 1;
+        if (TWO.equals(div.getOutputJukyushaIdoRenrakuhyo().getRadTeiseiKomokuHantei().getSelectedKey())) {
+            変更前履歴番号 = 履歴番号;
+        }
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更前の訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
-                createInstance().editHenkomaeTeiseiJoho(被保険者番号, 履歴番号,
+                createInstance().editHenkomaeTeiseiJoho(被保険者番号, 変更前履歴番号,
                         異動年月日, 作成年月日, 氏名_性別_生年月日を印字す);
         履歴番号 = get履歴番号(処理モード, 履歴番号);
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更後の訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
@@ -195,13 +200,15 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                     get軽減率());
             if (受給者訂正情報.get受給者異動送付entity().
                     get軽減率適用開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                    get軽減率適用開始年月日().isEmpty()) {
+                    get軽減率適用開始年月日().isEmpty() && !半角アスタリスク.equals(
+                            受給者訂正情報.get受給者異動送付entity().get軽減率適用開始年月日())) {
                 受給者訂正連絡票Entity.set軽減率適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                         get軽減率適用開始年月日()));
             }
             if (受給者訂正情報.get受給者異動送付entity().
                     get軽減率適用終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                    get軽減率適用終了年月日().isEmpty()) {
+                    get軽減率適用終了年月日().isEmpty() && !半角アスタリスク.equals(
+                            受給者訂正情報.get受給者異動送付entity().get軽減率適用終了年月日())) {
                 受給者訂正連絡票Entity.set軽減率適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                         get軽減率適用終了年月日()));
             }
@@ -233,28 +240,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             受給者訂正連絡票Entity.set住特施設所在保険者番号(受給者訂正情報.get受給者異動送付entity().
                     get施設所在保険者番号());
             if (受給者訂正情報.get受給者異動送付entity().
-                    get住所地特例適用開始日() != null && !受給者訂正情報.get受給者異動送付entity().
-                    get住所地特例適用開始日().isEmpty()) {
-                受給者訂正連絡票Entity.set住特適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
-                        get住所地特例適用開始日()));
-            }
-            if (受給者訂正情報.get受給者異動送付entity().
-                    get住所地特例適用終了日() != null && !受給者訂正情報.get受給者異動送付entity().
-                    get住所地特例適用終了日().isEmpty()) {
-                受給者訂正連絡票Entity.set住特適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
-                        get住所地特例適用終了日()));
-            }
-            受給者訂正連絡票Entity.set送付年月(受給者訂正情報.get受給者異動送付entity().
-                    get送付年月());
-            if (受給者訂正情報.get受給者異動送付entity().
-                    get利用者負担割合有効開始日() != null && !受給者訂正情報.get受給者異動送付entity().
-                    get利用者負担割合有効開始日().isEmpty()) {
-                受給者訂正連絡票Entity.set二割負担適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
-                        get利用者負担割合有効開始日()));
-            }
-            if (受給者訂正情報.get受給者異動送付entity().
                     get利用者負担割合有効終了日() != null && !受給者訂正情報.get受給者異動送付entity().
-                    get利用者負担割合有効終了日().isEmpty()) {
+                    get利用者負担割合有効終了日().isEmpty() && !半角アスタリスク.equals(
+                            受給者訂正情報.get受給者異動送付entity().get利用者負担割合有効終了日())) {
                 受給者訂正連絡票Entity.set二割負担適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                         get利用者負担割合有効終了日()));
             }
@@ -543,7 +531,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     private void get受給者訂正連絡票Entity(
             JukyushaIdoRenrakuhyoTorokuEntity 受給者訂正連絡票Entity,
             JukyushaTeiseiRenrakuhyoTorokuFinderResult 受給者訂正情報) {
-        受給者訂正連絡票Entity.set性別(受給者訂正情報.get受給者異動送付entity().get性別コード());
+        受給者訂正連絡票Entity.set性別コード(受給者訂正情報.get受給者異動送付entity().get性別コード());
         受給者訂正連絡票Entity.set作成年月日(受給者訂正情報.get作成年月日());
         受給者訂正連絡票Entity.set証記載保険者番号(受給者訂正情報.get受給者異動送付entity().get証記載保険者番号().value());
         受給者訂正連絡票Entity.set被保険者番号(受給者訂正情報.get受給者異動送付entity().get被保険者番号().value());
@@ -560,7 +548,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         受給者訂正連絡票Entity.set要介護状態区分(受給者訂正情報.get受給者異動送付entity().get要介護状態区分コード());
         受給者訂正連絡票Entity.set有効期間開始年月日(受給者訂正情報.get受給者異動送付entity().get認定有効期間開始年月日());
         if (受給者訂正情報.get受給者異動送付entity().get認定有効期間終了年月日() != null
-                && !受給者訂正情報.get受給者異動送付entity().get認定有効期間終了年月日().isEmpty()) {
+                && !受給者訂正情報.get受給者異動送付entity().get認定有効期間終了年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get認定有効期間終了年月日())) {
             受給者訂正連絡票Entity.set有効期間終了年月日(new FlexibleDate(受給者訂正情報.
                     get受給者異動送付entity().get認定有効期間終了年月日()));
         }
@@ -570,7 +559,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 get訪問通所サービス上限管理適用期間開始年月日());
         if (受給者訂正情報.get受給者異動送付entity().
                 get訪問通所サービス上限管理適用期間終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get訪問通所サービス上限管理適用期間終了年月日().isEmpty()) {
+                get訪問通所サービス上限管理適用期間終了年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get訪問通所サービス上限管理適用期間終了年月日())) {
             受給者訂正連絡票Entity.set上限管理終了年月日１(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get訪問通所サービス上限管理適用期間終了年月日()));
         }
@@ -581,21 +571,16 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         受給者訂正連絡票Entity.set上限管理適用開始年月日２(受給者訂正情報.get受給者異動送付entity().
                 get短期入所サービス上限管理適用期間開始年月日());
         if (受給者訂正情報.get受給者異動送付entity().
-                get償還払化終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get償還払化終了年月日().isEmpty()) {
-            受給者訂正連絡票Entity.set償還払化適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
-                    get償還払化終了年月日()));
-        }
-        get受給者訂正連絡票Entity_One(受給者訂正連絡票Entity, 受給者訂正情報);
-        if (受給者訂正情報.get受給者異動送付entity().
                 get給付率引下げ開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get給付率引下げ開始年月日().isEmpty()) {
+                get給付率引下げ開始年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get給付率引下げ開始年月日())) {
             受給者訂正連絡票Entity.set給付率引下げ適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get給付率引下げ開始年月日()));
         }
         if (受給者訂正情報.get受給者異動送付entity().
                 get給付率引下げ終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get給付率引下げ終了年月日().isEmpty()) {
+                get給付率引下げ終了年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get給付率引下げ終了年月日())) {
             受給者訂正連絡票Entity.set給付率引下げ適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get給付率引下げ終了年月日()));
         }
@@ -625,16 +610,19 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 get居宅費_新３_負担限度額());
         if (受給者訂正情報.get受給者異動送付entity().
                 get負担限度額適用開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get負担限度額適用開始年月日().isEmpty()) {
+                get負担限度額適用開始年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get負担限度額適用開始年月日())) {
             受給者訂正連絡票Entity.set特定入所者適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get負担限度額適用開始年月日()));
         }
         if (受給者訂正情報.get受給者異動送付entity().
                 get負担限度額適用終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get負担限度額適用終了年月日().isEmpty()) {
+                get負担限度額適用終了年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get負担限度額適用終了年月日())) {
             受給者訂正連絡票Entity.set特定入所者適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get負担限度額適用終了年月日()));
         }
+        get受給者訂正連絡票Entity_One(受給者訂正連絡票Entity, 受給者訂正情報);
     }
 
     private void get受給者訂正連絡票Entity_One(
@@ -650,7 +638,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                     get受給者異動送付entity().get居宅サービス計画適用開始年月日()));
         }
         if (受給者訂正情報.get受給者異動送付entity().get居宅サービス計画適用終了年月日() != null
-                && !受給者訂正情報.get受給者異動送付entity().get居宅サービス計画適用終了年月日().isEmpty()) {
+                && !受給者訂正情報.get受給者異動送付entity().get居宅サービス計画適用終了年月日().isEmpty()
+                && !半角アスタリスク.equals(受給者訂正情報.get受給者異動送付entity().get居宅サービス計画適用終了年月日())) {
             受給者訂正連絡票Entity.set居宅適用終了年月日(new FlexibleDate(受給者訂正情報.
                     get受給者異動送付entity().get居宅サービス計画適用終了年月日()));
         }
@@ -665,13 +654,15 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         }
         if (受給者訂正情報.get受給者異動送付entity().
                 get適用開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get適用開始年月日().isEmpty()) {
+                get適用開始年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get適用開始年月日())) {
             受給者訂正連絡票Entity.set利用適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get適用開始年月日()));
         }
         if (受給者訂正情報.get受給者異動送付entity().
                 get適用開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get適用開始年月日().isEmpty()) {
+                get適用開始年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get適用終了年月日())) {
             受給者訂正連絡票Entity.set利用適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get適用終了年月日()));
         }
@@ -683,21 +674,60 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                     get受給者異動送付entity().get負担額().toString()));
         }
         if (受給者訂正情報.get受給者異動送付entity().
+                get償還払化終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
+                get償還払化終了年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get償還払化終了年月日())) {
+            受給者訂正連絡票Entity.set償還払化適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
+                    get償還払化終了年月日()));
+        }
+        get受給者訂正連絡票Entity_Two(受給者訂正連絡票Entity, 受給者訂正情報);
+    }
+
+    private void get受給者訂正連絡票Entity_Two(
+            JukyushaIdoRenrakuhyoTorokuEntity 受給者訂正連絡票Entity,
+            JukyushaTeiseiRenrakuhyoTorokuFinderResult 受給者訂正情報) {
+        if (受給者訂正情報.get受給者異動送付entity().
+                get住所地特例適用開始日() != null && !受給者訂正情報.get受給者異動送付entity().
+                get住所地特例適用開始日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get住所地特例適用開始日())) {
+            受給者訂正連絡票Entity.set住特適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
+                    get住所地特例適用開始日()));
+        }
+        if (受給者訂正情報.get受給者異動送付entity().
+                get住所地特例適用終了日() != null && !受給者訂正情報.get受給者異動送付entity().
+                get住所地特例適用終了日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get住所地特例適用終了日())) {
+            受給者訂正連絡票Entity.set住特適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
+                    get住所地特例適用終了日()));
+        }
+        受給者訂正連絡票Entity.set送付年月(受給者訂正情報.get受給者異動送付entity().
+                get送付年月());
+        if (受給者訂正情報.get受給者異動送付entity().
+                get利用者負担割合有効開始日() != null && !受給者訂正情報.get受給者異動送付entity().
+                get利用者負担割合有効開始日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get利用者負担割合有効開始日())) {
+            受給者訂正連絡票Entity.set二割負担適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
+                    get利用者負担割合有効開始日()));
+        }
+        if (受給者訂正情報.get受給者異動送付entity().
                 get負担額適用開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get負担額適用開始年月日().isEmpty()) {
+                get負担額適用開始年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get負担額適用開始年月日())) {
             受給者訂正連絡票Entity.set標準適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get負担額適用開始年月日()));
         }
         if (受給者訂正情報.get受給者異動送付entity().
                 get負担額適用終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get負担額適用終了年月日().isEmpty()) {
+                get負担額適用終了年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get負担額適用終了年月日())) {
             受給者訂正連絡票Entity.set標準適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get負担額適用終了年月日()));
         }
         受給者訂正連絡票Entity.set公費負担上限額減額(受給者訂正情報.get公費負担上限額減額有フラグ());
         if (受給者訂正情報.get受給者異動送付entity().
                 get償還払化開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get償還払化開始年月日().isEmpty()) {
+                get償還払化開始年月日().isEmpty() && !半角アスタリスク.equals(
+                        受給者訂正情報.get受給者異動送付entity().get償還払化開始年月日())) {
             受給者訂正連絡票Entity.set償還払化適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
                     get償還払化開始年月日()));
         }
