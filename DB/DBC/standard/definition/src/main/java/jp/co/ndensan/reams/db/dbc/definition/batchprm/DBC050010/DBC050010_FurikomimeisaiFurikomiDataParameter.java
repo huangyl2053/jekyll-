@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC050010;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIchiranChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriTaisho;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.FurikomiDataProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.FurikomiDataTourokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.GdaekomimeisaiFurikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.HihokenshaAtenaProcessParameter;
@@ -160,5 +162,15 @@ public class DBC050010_FurikomimeisaiFurikomiDataParameter extends BatchParamete
      */
     public KozaJohoProcessParameter toKozaJohoProcessParameter() {
         return new KozaJohoProcessParameter(振込指定年月日);
+    }
+
+    /**
+     * 振込データ作成パラメターを取得します．
+     *
+     * @param 振込業務内区分 振込業務内区分
+     * @return 振込データ作成パラメター
+     */
+    public FurikomiDataProcessParameter toFurikomiDataProcessParameter(FurikomiGyomunaiKubun 振込業務内区分) {
+        return new FurikomiDataProcessParameter(振込指定年月日, 振込業務内区分);
     }
 }
