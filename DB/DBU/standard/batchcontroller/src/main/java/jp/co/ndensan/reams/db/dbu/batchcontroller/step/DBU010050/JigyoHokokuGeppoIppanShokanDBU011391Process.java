@@ -30,16 +30,17 @@ public class JigyoHokokuGeppoIppanShokanDBU011391Process extends BatchProcessBas
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
             + "IJigyoHokokuGeppoIppanShokanMapper.getJyukyushaJohoKonkyoCSV");
-    private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private RString eucFilePath;
     private JigyoHokokuGeppoIppanShokanBusiness business;
     @BatchWriter
     private CsvWriter<IJigyouHoukokuTokeiEUCEntity> eucCsvWriter;
+    private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
 
     @Override
     protected void initialize() {
+        business = new JigyoHokokuGeppoIppanShokanBusiness();
     }
 
     @Override

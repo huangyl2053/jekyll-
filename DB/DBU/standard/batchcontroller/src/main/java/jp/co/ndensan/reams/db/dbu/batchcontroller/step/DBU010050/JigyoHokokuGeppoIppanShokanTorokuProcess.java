@@ -29,12 +29,12 @@ public class JigyoHokokuGeppoIppanShokanTorokuProcess extends BatchProcessBase<J
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
             + "IJigyoHokokuGeppoIppanShokanMapper.getJyukyushaJigyouHoukokuTokei");
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_6 = 6;
     private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
     private IJigyoHokokuGeppoIppanShokanMapper mapper;
     @BatchWriter
     private BatchPermanentTableWriter<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityWriter;
-    private static final int INDEX_4 = 4;
-    private static final int INDEX_6 = 6;
 
     @Override
     protected void initialize() {
@@ -53,11 +53,6 @@ public class JigyoHokokuGeppoIppanShokanTorokuProcess extends BatchProcessBase<J
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void process(JigyouHoukokuTokeiRelateEntity entity) {
         DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity = new DbT7021JigyoHokokuTokeiDataEntity();
         dbT7021Entity.setHokokuYSeireki(new FlexibleYear(processParameter.get報告年月().substring(0, INDEX_4)));
@@ -71,6 +66,7 @@ public class JigyoHokokuGeppoIppanShokanTorokuProcess extends BatchProcessBase<J
         dbT7021Entity.setShukeiTani(entity.getShukeiTani());
         dbT7021Entity.setTateNo(entity.getTateNo());
         dbT7021Entity.setYokoNo(entity.getYokoNo());
+        dbT7021Entity.setShukeiKomokuMeisho(RString.EMPTY);
         dbT7021Entity.setShukeiKekkaAtai(entity.getShukeiKekkaAtai());
         dbT7021Entity.setTateKomokuCode(Code.EMPTY);
         dbT7021Entity.setYokoKomokuCode(Code.EMPTY);

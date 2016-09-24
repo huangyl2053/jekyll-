@@ -28,13 +28,13 @@ public class TempJigyoHokokuTokeiMotoDataProcess extends BatchProcessBase<JigyoH
             + "IJigyoHokokuGeppoIppanGenbutsuMapper.getJigyoHokokuTokeiMotoData");
     private JigyoHokokuGeppoIppanGenbutsuProcessParamter processParameter;
     IJigyoHokokuGeppoIppanGenbutsuMapper mapper;
-    private static final RString TABLE_事業報告統計元データ = new RString("tempJigyoHokokuTokeiMotoData");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 事業報告統計元データ一時ファイルB;
 
     @Override
     protected void initialize() {
         mapper = getMapper(IJigyoHokokuGeppoIppanGenbutsuMapper.class);
+        mapper.createtempJigyoHokokuTokeiMotoData();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class TempJigyoHokokuTokeiMotoDataProcess extends BatchProcessBase<JigyoH
 
     @Override
     protected void createWriter() {
-        事業報告統計元データ一時ファイルB = new BatchEntityCreatedTempTableWriter(TABLE_事業報告統計元データ,
+        事業報告統計元データ一時ファイルB = new BatchEntityCreatedTempTableWriter(JigyoHokokuIppanGenbutsuRelateEntity.TABLE_NAME,
                 JigyoHokokuIppanGenbutsuRelateEntity.class);
     }
 

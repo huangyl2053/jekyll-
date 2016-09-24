@@ -7,6 +7,13 @@ package jp.co.ndensan.reams.db.dbu.business.core.ippanshokanketteiym;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JigyouHoukokuTokeiEUCEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JyukyushaJohoKonkyoCSVRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +34,7 @@ public class JigyoHokokuGeppoIppanShokanBusiness {
      */
     public JigyouHoukokuTokeiEUCEntity set統計明細CSVデータ(JyukyushaJohoKonkyoCSVRelateEntity entity) {
         JigyouHoukokuTokeiEUCEntity eucEntity = new JigyouHoukokuTokeiEUCEntity();
+        getアクセスログ(entity.getHihokenshaNo().value());
         eucEntity.setデータ区分(entity.getDataTypeKubun());
         eucEntity.set集計区分(entity.getShukeiKubun());
         eucEntity.set表番号(entity.getHyouNo());
@@ -48,5 +56,19 @@ public class JigyoHokokuGeppoIppanShokanBusiness {
         eucEntity.set市町村コード(entity.getShichosonCode());
         eucEntity.set旧市町村コード(entity.getKyuShichosonCode());
         return eucEntity;
+    }
+
+    /**
+     * アクセスログを出力するメッソドです。
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    public void getアクセスログ(RString 被保険者番号) {
+        AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, toPersonalData(被保険者番号));
+    }
+
+    private PersonalData toPersonalData(RString 被保険者番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 }
