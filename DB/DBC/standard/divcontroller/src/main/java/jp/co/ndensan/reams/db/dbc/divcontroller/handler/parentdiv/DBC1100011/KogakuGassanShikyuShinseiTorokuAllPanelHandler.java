@@ -1271,7 +1271,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 国保後期資格情報TABデータで設定(KogakuGassanShinseisho 高額合算申請書) {
-        div.getTabShinseiTorokuPanel2().getTxtKokuhoHokenshaNo().setValue(高額合算申請書.get保険者番号().getColumnValue());
+        div.getTabShinseiTorokuPanel2().getTxtKokuhoHokenshaNo().setValue(高額合算申請書.get国保保険者番号());
         if (RString.isNullOrEmpty(高額合算申請書.get国保被保険者証記号())) {
             div.getTabShinseiTorokuPanel2().getTxtKokuhoHikonenshaShoKigo().clearValue();
         } else {

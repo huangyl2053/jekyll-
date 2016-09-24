@@ -53,10 +53,10 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     private static final int INT_EIGHT = 8;
     private static final int INT_NINE = 9;
     private static final int INT_TEN = 10;
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 仮算定異動通知書一括発行BATCHID = new RString("DBB015003_KarisanteiIdoTsuchishoHakko");
-    private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("DBB004001_FukaJohoToroku");
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 資格異動者抽出 = "getShikakuIdosha";

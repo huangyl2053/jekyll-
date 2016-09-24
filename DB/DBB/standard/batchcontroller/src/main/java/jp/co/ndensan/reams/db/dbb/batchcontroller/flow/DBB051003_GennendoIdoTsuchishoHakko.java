@@ -82,7 +82,7 @@ public class DBB051003_GennendoIdoTsuchishoHakko extends BatchFlowBase<DBB051003
     private static final String 納入通知書発行後異動者登録 = "insIdoTsuchishoHakkogoIdoshaNonyuProcess";
 
     private static final RString チェックボックス_出力 = new RString("1");
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private DBB051003_GennendoIdoTsuchishoHakkoParameter parameter;
     private RString バッチフロー_帳票分類ID;
     private HonsanteiIdoProcessParameter processParameter;

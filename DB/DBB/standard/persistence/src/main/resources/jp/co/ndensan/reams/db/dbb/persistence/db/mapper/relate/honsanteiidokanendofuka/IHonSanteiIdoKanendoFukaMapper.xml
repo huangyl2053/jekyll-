@@ -477,11 +477,11 @@
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '過年度賦課'
         <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
         ${出力順},
-        "dbT2015KeisangoJoho_choteiNendo",
-        "dbT2015KeisangoJoho_fukaNendo",
-        "dbT2015KeisangoJoho_tsuchishoNo",
-        "dbT2015KeisangoJoho_koseiZengoKubun",
-        "dbT2015KeisangoJoho_sakuseiShoriName"
+        "DbT2015KeisangoJoho"."choteiNendo",
+        "DbT2015KeisangoJoho"."fukaNendo",
+        "DbT2015KeisangoJoho"."tsuchishoNo",
+        "DbT2015KeisangoJoho"."koseiZengoKubun",
+        "DbT2015KeisangoJoho"."sakuseiShoriName"
     </select>
     <resultMap id="resultMap_KeisangojohoToKozaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity" autoMapping="true">
         <id column="dbT2015KeisangoJoho_choteiNendo" />
