@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 /**
  * 処理結果確認リスト一時_振込データなしProcess処理パラメタークラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 @lombok.Getter
 @lombok.Setter

@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * 一時テーブル作成_Process処理パラメタークラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

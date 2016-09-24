@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 口座情報パラメタークラスです．
  *
- * @author LDNS donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

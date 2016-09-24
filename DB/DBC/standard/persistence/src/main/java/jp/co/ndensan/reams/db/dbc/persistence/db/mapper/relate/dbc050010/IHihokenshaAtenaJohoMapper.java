@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.HihokenshaAtenaMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.HihokenshaAtenaResultEntity;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.HihokenshaAtenaResultEntity;
 
 /**
  * 被保険者台帳と宛名情報のMapperクラスです。
  *
- * @reamsid_L DBC-5010-030 donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 public interface IHihokenshaAtenaJohoMapper {
 
