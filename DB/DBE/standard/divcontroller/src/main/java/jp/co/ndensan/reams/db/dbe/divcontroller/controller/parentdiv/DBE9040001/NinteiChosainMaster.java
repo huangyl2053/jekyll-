@@ -162,16 +162,53 @@ public class NinteiChosainMaster {
         if (div.getRadSearchChosainJokyo().getSelectedIndex() == 0) {
             chosainJokyo = true;
         }
+        
+        RString 調査委託先コードFrom = RString.EMPTY;
+        RString 調査委託先コードTo = RString.EMPTY;
+        
+        if (!div.getTxtSearchChosaItakusakiCodeFrom().getValue().isNullOrEmpty() 
+                && !div.getTxtSearchChosaItakusakiCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchChosaItakusakiCodeFrom().getValue().toString()) 
+                    > Long.valueOf(div.getTxtSearchChosaItakusakiCodeTo().getValue().toString())) {
+                調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeTo().getValue();
+                調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
+            } else {
+                調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
+                調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeTo().getValue();
+            }
+        } else {
+            調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
+            調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeTo().getValue();
+        }
+        
+        RString 調査員コードFrom = RString.EMPTY;
+        RString 調査員コードTo = RString.EMPTY;
+        
+        if (!div.getTxtSearchChosainCodeFrom().getValue().isNullOrEmpty() 
+                && !div.getTxtSearchChosainCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchChosainCodeFrom().getValue().toString()) 
+                    > Long.valueOf(div.getTxtSearchChosainCodeTo().getValue().toString())) {
+                調査員コードFrom = div.getTxtSearchChosainCodeTo().getValue();
+                調査員コードTo = div.getTxtSearchChosainCodeFrom().getValue();
+            } else {
+                調査員コードFrom = div.getTxtSearchChosainCodeFrom().getValue();
+                調査員コードTo = div.getTxtSearchChosainCodeTo().getValue();
+            }
+        } else {
+            調査員コードFrom = div.getTxtSearchChosainCodeFrom().getValue();
+            調査員コードTo = div.getTxtSearchChosainCodeTo().getValue();
+        }
+        
         NinteiChosainMasterMapperParameter parameter = NinteiChosainMasterMapperParameter.createParamForSelectChosainJohoList(chosainJokyo,
                 div.getHokenshaList().getSelectedItem().get市町村コード(),
-                new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeFrom().getValue()),
-                new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeTo().getValue()),
+                new ChosaItakusakiCode(調査委託先コードFrom),
+                new ChosaItakusakiCode(調査委託先コードTo),
                 div.getTxtSearchChosaItakusakiMeisho().getValue(),
                 div.getDdlItakusakiMeisho().getSelectedKey(),
                 div.getTxtSearchChosaItakusakiKanaMeisho().getValue(),
                 div.getDdlItakusakiKanaMeisho().getSelectedKey(),
-                new ChosainCode(div.getTxtSearchChosainCodeFrom().getValue()),
-                new ChosainCode(div.getTxtSearchChosainCodeTo().getValue()),
+                new ChosainCode(調査員コードFrom),
+                new ChosainCode(調査員コードTo),
                 div.getTxtSearchChosainShimei().getValue(),
                 div.getDdlChosainMeisho().getSelectedKey(),
                 div.getTxtSearchChosainKanaShimei().getValue(),
