@@ -54,8 +54,8 @@ public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_Tok
     private static final String 特徴仮算定計算後賦課情報TEMPに登録_特徴停止分 = "InsTokuchoKarisanteiFUkaJohoTemp2";
     private static final String 一覧表作成 = "CrtIchiranhyo";
     private static final String 処理日付管理更新 = "UpdShoriDateKanri";
-    private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
-    private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("FukaJohoTorokuFlow");
+    private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("DBB003001_KeisangoJohoSakusei");
+    private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("DBB004001_FukaJohoToroku");
     private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
 
     private YMDHMS システム日時;

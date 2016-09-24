@@ -65,7 +65,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
     public List<JukyushaDaicho> get受給者台帳(HihokenshaNo 被保険者番号) {
         List<JukyushaDaicho> 受給者台帳List = new ArrayList<>();
         List<DbT4001JukyushaDaichoEntity> 受給者台帳EntityList = 受給者台帳Dac.get受給者台帳(被保険者番号);
-        if (!受給者台帳EntityList.isEmpty() && 受給者台帳EntityList != null) {
+        if (受給者台帳EntityList != null && !受給者台帳EntityList.isEmpty()) {
             for (DbT4001JukyushaDaichoEntity entity : 受給者台帳EntityList) {
                 entity.initializeMd5();
                 受給者台帳List.add(new JukyushaDaicho(entity));

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIchiranChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KogakuFurikomiMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110070.KogakugassanKeisankekkaRenrakuhyoOutMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -16,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 /**
  * 高額データ取得のProcess用パラメータクラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter

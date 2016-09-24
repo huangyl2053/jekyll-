@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7180001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.sougoujigyohijouhou.SougouJigyoHiJouhouBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710180.DBC710180_HanyoListSogoJigyoHiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -37,7 +39,9 @@ public class SougouJigyoHiJouhouHandler {
     private static final RString 作成区分_KEY2 = new RString("key2");
     private static final RString 作成区分_KEY3 = new RString("key3");
     private static final RString 全て市町村 = new RString("000000");
+    private static final RString DATADOURCE = new RString("DATADOURCE");
     private final SougouJigyoHiJouhouDiv div;
+    private static Map<RString, List<KeyValueDataSource>> map;
 
     /**
      * コンストラクタです。
@@ -133,8 +137,10 @@ public class SougouJigyoHiJouhouHandler {
         parameter.set項目名付加(is項目名付加);
         parameter.set連番付加(is連番付加);
         parameter.set日付スラッシュ付加(is日付スラッシュ編集);
-        parameter.set事業者コード(div.getCcdJigyoshaBango().getJpControlName());
+        parameter.set事業者コード(div.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
         parameter.setサービス種類コード(div.getDdlSabisuSyurui().getSelectedKey());
+        map = new HashMap<>();
+        map.put(DATADOURCE, div.getDdlSabisuSyurui().getDataSource());
         RString 市町村コード = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())
                 && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value().equals(全て市町村)) {
@@ -201,7 +207,10 @@ public class SougouJigyoHiJouhouHandler {
                 new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
         RString syuruicode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("サービス種類コード"));
         if (!RString.isNullOrEmpty(syuruicode)) {
-            div.getDdlSabisuSyurui().setSelectedKey(syuruicode);
+            if (map != null) {
+                div.getDdlSabisuSyurui().setDataSource(map.get(DATADOURCE));
+                div.getDdlSabisuSyurui().setSelectedKey(syuruicode);
+            }
         }
         RString jigyoshacode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("事業者コード"));
         div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(jigyoshacode);

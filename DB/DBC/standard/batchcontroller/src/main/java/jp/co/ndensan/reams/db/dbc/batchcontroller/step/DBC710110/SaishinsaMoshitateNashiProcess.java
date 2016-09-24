@@ -132,23 +132,24 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
     protected void afterExecute() {
         if (!flag) {
             eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanashiEUCEntity());
-        }
-        eucCsvWriter.close();
-        if (!personalDataList.isEmpty()) {
+            manager.spool(eucFilePath);
+        } else {
             AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, log);
         }
+        eucCsvWriter.close();
+
         outputJokenhyoFactory();
     }
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                BATCHCSV,
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                BATCHCSV,
                 FILENAME,
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new SaishinsaMoshitate().set出力条件(processParameter, 市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護賦課を管理するクラスです。
  *
- * @reamsid_L DBB-9999-022 xuxin
+ * @reamsid_L DBB-9999-022 三浦 凌
  */
 public class FukaManager {
 
@@ -241,8 +241,7 @@ public class FukaManager {
     }
 
     /**
-     * //<<<<<<< HEAD
-     * 指定の被保険者について、賦課年度に対する最新の介護賦課を返します。
+     * //<<<<<<< HEAD 指定の被保険者について、賦課年度に対する最新の介護賦課を返します。
      *
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号

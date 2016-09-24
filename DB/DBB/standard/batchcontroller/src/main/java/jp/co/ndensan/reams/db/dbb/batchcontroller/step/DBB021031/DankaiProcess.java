@@ -292,7 +292,6 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             老齢の情報 = new ArrayList<>();
             set老齢の情報(entity.get老齢の情報());
             月別Entity = entity.get月別Temp();
-            set被保険者番号(entity);
             set生活保護受給者Entity(entity.get生活保護受給者());
             生活保護扶助種類EntityList = new ArrayList<>();
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());

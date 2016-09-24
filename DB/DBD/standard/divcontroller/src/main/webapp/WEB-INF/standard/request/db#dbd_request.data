@@ -135,6 +135,12 @@ dbd/db/dbd/IchijiSashitome1Go/onOkClose_BtnTainoJokyo
 dbd/db/dbd/IchijiSashitome2Go/onClick_BtnKakutei
 dbd/db/dbd/IchijiSashitome2Go/onClick_BtnTorikeshi
 dbd/db/dbd/IchijiSashitome2Go/onLoad
+dbd/db/dbd/IkenshoKakuninsho/onClick_completePublish
+dbd/db/dbd/IkenshoKakuninsho/onChange_ddlTaishonen
+dbd/db/dbd/IkenshoKakuninsho/onCheck_btnReportPublishi
+dbd/db/dbd/IkenshoKakuninsho/onClick_btnReportPublishi
+dbd/db/dbd/IkenshoKakuninsho/onClick_btnResearch
+dbd/db/dbd/IkenshoKakuninsho/onLoad
 dbd/db/dbd/JigyoTaishoshaJoho/onClick_BtnClose
 dbd/db/dbd/JigyoTaishoshaJoho/onLoad
 dbd/db/dbd/JissiJyokyohyo/onBeforeCilck_btnBatchRegister

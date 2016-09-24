@@ -54,12 +54,4 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * @return 宛名情報
      */
     UaFt200FindShikibetsuTaishoEntity select宛名情報(ShikibetsuTaishoParameter param);
-
-    /**
-     * 主治医意見書確認書の編集に用いる宛先情報を取得する。
-     *
-     * @param param パラメータ
-     * @return 宛先情報
-     */
-    UaFt250FindAtesakiEntity select宛先情報(AtesakiParameter param);
 }

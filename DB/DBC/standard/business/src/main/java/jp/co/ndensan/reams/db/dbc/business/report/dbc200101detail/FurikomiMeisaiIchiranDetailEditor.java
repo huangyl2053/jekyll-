@@ -151,12 +151,12 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     }
 
     private void edit明細1(FurikomiMeisaiIchiranDetailReportSource source) {
-        if (null != this.一覧表用データ) {
-            if (null != this.一覧表用データ.get様式連番() && ONE.equals(this.一覧表用データ.get様式連番())) {
-                get振込明細一時TBL(source);
-                get一覧表用データ(source);
-
-            }
+        if (null != this.一覧表用データ
+                && null != this.一覧表用データ.get様式連番()
+                && ONE.equals(this.一覧表用データ.get様式連番())) {
+            get振込明細一時TBL1(source);
+            get振込明細一時TBL2(source);
+            get一覧表用データ(source);
         }
     }
 
@@ -174,20 +174,9 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             source.listUpper_9 = RString.EMPTY;
             source.listUpper_10 = RString.EMPTY;
             source.listUpper_11 = RString.EMPTY;
-            if (null != this.一覧表用データ.get印字様式名称()) {
-                if (this.一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
-                    source.listUpper_12 = this.一覧表用データ.get印字様式名称();
-                } else {
-                    source.listUpper_12 = this.一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
-                }
-            }
+            get印字様式(source);
             source.listUpper_13 = 左カッコ;
-            if (null != this.一覧表用データ.get振込明細一時TBL()) {
-                FurikomiDetailTempTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
-                if (null != 振込明細一時TBL.getFurikomiKingaku()) {
-                    source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.getFurikomiKingaku(), 0);
-                }
-            }
+            get振込明細(source);
             source.listUpper_15 = 右カッコ;
             source.listUpper_16 = RString.EMPTY;
             source.listUpper_17 = RString.EMPTY;
@@ -198,18 +187,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             source.listLower_5 = RString.EMPTY;
             source.listLower_6 = RString.EMPTY;
             if (!this.一覧表用データ.get様式連番().equals(ONE)) {
-                if (null != this.一覧表用データ.get印字様式名称()) {
-                    if (this.一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
-                        source.listLower_7 = this.一覧表用データ.get印字様式名称();
-                    } else {
-                        source.listLower_7 = this.一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
-                    }
-                }
-                source.listLower_8 = 左カッコ;
-                if (null != this.一覧表用データ.get様式別集計金額()) {
-                    source.listLower_9 = DecimalFormatter.toコンマ区切りRString(this.一覧表用データ.get様式別集計金額(), 0);
-                }
-                source.listLower_10 = 右カッコ;
+                get印字様式名称(source);
             } else {
                 source.listLower_7 = RString.EMPTY;
                 source.listLower_8 = RString.EMPTY;
@@ -225,7 +203,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
 //    private void editFuttaa(FurikomiMeisaiIchiranDetailReportSource source) {
 //    }
-    private void get振込明細一時TBL(FurikomiMeisaiIchiranDetailReportSource source) {
+    private void get振込明細一時TBL1(FurikomiMeisaiIchiranDetailReportSource source) {
         if (null != this.一覧表用データ.get振込明細一時TBL()) {
             FurikomiDetailTempTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
             if (null != 振込明細一時TBL.getHihokenshaNo()) {
@@ -273,6 +251,13 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                     && !new RString(振込明細一時TBL.getZenkaiShiharaiKingaku().toString()).equals(ZERO)) {
                 source.listUpper_16 = 丸;
             }
+
+        }
+    }
+
+    private void get振込明細一時TBL2(FurikomiMeisaiIchiranDetailReportSource source) {
+        if (null != this.一覧表用データ.get振込明細一時TBL()) {
+            FurikomiDetailTempTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
             get住所(source, 振込明細一時TBL);
             if (振込明細一時TBL.isShinseiDataFlag()) {
                 source.listLower_4 = 申請中;
@@ -365,7 +350,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
     private void get氏名漢字(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {
         if (null != 振込明細一時TBL.getShimei()) {
-            if (振込明細一時TBL.getShimei().value().length() <= 15) {
+            if (振込明細一時TBL.getShimei().value().length() <= LISTINDEX_15) {
                 source.listUpper_2 = 振込明細一時TBL.getShimei().value();
             } else {
                 source.listUpper_2 = 振込明細一時TBL.getShimei().value().substring(0, LISTINDEX_15);
@@ -405,5 +390,39 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         }
         source.listLower_10 = 右カッコ;
 
+    }
+
+    private void get印字様式(FurikomiMeisaiIchiranDetailReportSource source) {
+        if (null != this.一覧表用データ.get印字様式名称()) {
+            if (this.一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
+                source.listUpper_12 = this.一覧表用データ.get印字様式名称();
+            } else {
+                source.listUpper_12 = this.一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
+            }
+        }
+    }
+
+    private void get振込明細(FurikomiMeisaiIchiranDetailReportSource source) {
+        if (null != this.一覧表用データ.get振込明細一時TBL()) {
+            FurikomiDetailTempTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
+            if (null != 振込明細一時TBL.getFurikomiKingaku()) {
+                source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.getFurikomiKingaku(), 0);
+            }
+        }
+    }
+
+    private void get印字様式名称(FurikomiMeisaiIchiranDetailReportSource source) {
+        if (null != this.一覧表用データ.get印字様式名称()) {
+            if (this.一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
+                source.listLower_7 = this.一覧表用データ.get印字様式名称();
+            } else {
+                source.listLower_7 = this.一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
+            }
+        }
+        source.listLower_8 = 左カッコ;
+        if (null != this.一覧表用データ.get様式別集計金額()) {
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(this.一覧表用データ.get様式別集計金額(), 0);
+        }
+        source.listLower_10 = 右カッコ;
     }
 }

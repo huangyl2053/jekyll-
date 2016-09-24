@@ -24,7 +24,15 @@ public interface IKozaJohoMapper {
      * @param parameter KozaJohoMybatisParameter
      * @return List<KozaJohoEntity>
      */
-    List<KozaJohoEntity> get口座情報(KozaJohoMybatisParameter parameter);
+    List<KozaJohoEntity> get償還口座払の口座情報(KozaJohoMybatisParameter parameter);
+
+    /**
+     * 高額の口座情報取得
+     *
+     * @param parameter KozaJohoMybatisParameter
+     * @return List<KozaJohoEntity>
+     */
+    List<KozaJohoEntity> get高額の口座情報(KozaJohoMybatisParameter parameter);
 
     /**
      * 業務別主キーが業務別主キーTBLから取得する。
@@ -33,19 +41,5 @@ public interface IKozaJohoMapper {
      * @return RString
      */
     RString get業務別主キー(GyomubetsuPrimaryKeyMybatisParameter parameter);
-
-    /**
-     * データ区分取得する。
-     *
-     * @return RString
-     */
-    RString getデータ区分();
-
-    /**
-     * 支払方法区分コード取得する。
-     *
-     * @return RString
-     */
-    RString get支払方法区分コード();
 
 }

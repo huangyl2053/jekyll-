@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 処理日付管理マスタ更新のMyBatis用パラメータクラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter

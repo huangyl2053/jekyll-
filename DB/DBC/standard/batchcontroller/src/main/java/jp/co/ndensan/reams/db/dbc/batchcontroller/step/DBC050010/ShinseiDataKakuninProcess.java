@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 振込明細一覧表作成_申請データ有無確認_Process処理クラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class ShinseiDataKakuninProcess extends BatchProcessBase<FurikomiDetailTempTableEntity> {
 

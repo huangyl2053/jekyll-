@@ -103,9 +103,10 @@ public class GassanKyufujissekiSofuIchiranEditor implements
             if (帳票用データ.get支給額() != null) {
                 source.list_11 = DecimalFormatter.toコンマ区切りRString(帳票用データ.get支給額(), 0);
             }
+            if (帳票用データ.get識別コード() != null) {
+                source.shikibetsuCode = 帳票用データ.get識別コード().value();
+            }
         }
-
-        source.shikibetsuCode = 帳票用データ.get識別コード().value();
 
         return source;
 

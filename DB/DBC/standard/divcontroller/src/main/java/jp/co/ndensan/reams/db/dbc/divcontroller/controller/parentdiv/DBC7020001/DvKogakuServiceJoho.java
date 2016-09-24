@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7020001;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030.DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
@@ -128,10 +128,10 @@ public class DvKogakuServiceJoho {
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
-    public ResponseData<HanyoListKogakuKaigoBatchParameter> click_batchRegister(DvKogakuServiceJohoDiv div) {
+    public ResponseData<DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter> click_batchRegister(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
         RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
-        HanyoListKogakuKaigoBatchParameter parameter = handler.getBatchParamter(市町村判定);
+        DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter parameter = handler.getBatchParamter(市町村判定);
         return ResponseData.of(parameter).respond();
     }
 

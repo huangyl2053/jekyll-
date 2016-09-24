@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 振込明細・振込みデータ作成バッチフロークラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC050010_FurikomimeisaiFurikomiDataParameter> {
 
@@ -59,8 +59,8 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private static final RString 処理区分_明細一覧表作成 = new RString("3");
     private static final RString 支払方法_窓口 = new RString("2");
 
+    private FurikomiGyomunaiKubun 振込業務内区分;
     private static RString 振込単位;
-    private static FurikomiGyomunaiKubun 振込業務内区分;
     private static ShoriName 処理名;
     private int レコード件数 = 0;
     private int 振込明細レコード件数 = 0;
@@ -260,7 +260,8 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
      */
     @Step(還口座払の口座情報)
     protected IBatchFlowCommand kozaJoho() {
-        return loopBatch(KozaJohoProcess.class).define();
+        return loopBatch(KozaJohoProcess.class)
+                .arguments(getParameter().toKozaJohoProcessParameter()).define();
     }
 
     /**
@@ -270,7 +271,9 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
      */
     @Step(振込データ作成)
     protected IBatchFlowCommand furikomiData() {
-        return loopBatch(FurikomiDataProcess.class).define();
+        return loopBatch(FurikomiDataProcess.class)
+                .arguments(getParameter().toFurikomiDataProcessParameter(振込業務内区分))
+                .define();
     }
 
     /**

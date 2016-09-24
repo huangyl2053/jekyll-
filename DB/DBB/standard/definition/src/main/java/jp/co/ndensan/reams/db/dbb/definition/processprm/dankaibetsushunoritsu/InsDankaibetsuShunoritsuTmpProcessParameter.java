@@ -41,7 +41,7 @@ public class InsDankaibetsuShunoritsuTmpProcessParameter implements IBatchProces
     private List<RString> 選択対象リスト;
     private RString 市町村情報;
     private RString 旧市町村情報;
-    private RString 完納出力区分;
+    private List<RString> 完納出力区分;
 
     /**
      * MYBATIS用パラメータを作成します。

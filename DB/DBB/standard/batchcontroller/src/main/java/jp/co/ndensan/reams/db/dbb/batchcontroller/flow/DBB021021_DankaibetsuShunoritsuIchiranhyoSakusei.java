@@ -31,6 +31,7 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
     private static final String PRT_DANKAIBETSU_ICHIRANHYO = "prtDankaibetsuShunoritsuIchiranhyoProcess";
     private static final RString 生年月日年齢区分_生年月日 = new RString("生年月日");
     private static final RString 生年月日年齢区分_年齢 = new RString("年齢");
+    private static final int ZERO = 0;
 
     @Override
     protected void defineFlow() {
@@ -74,8 +75,8 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
             parameter.set開始生年月日(getParameter().get生年月日_開始());
             parameter.set終了生年月日(getParameter().get生年月日_終了());
         } else if (生年月日年齢区分_年齢.equals(getParameter().get生年月日年齢区分())) {
-            Decimal 開始年齢 = getParameter().get年齢_開始();
-            Decimal 終了年齢 = getParameter().get年齢_終了();
+            Decimal 開始年齢 = getParameter().get年齢_開始() == null ? Decimal.ZERO : getParameter().get年齢_開始();
+            Decimal 終了年齢 = getParameter().get年齢_終了() == null ? Decimal.ZERO : getParameter().get年齢_終了();
             parameter.set開始生年月日(getParameter().get年齢基準日());
             parameter.set終了生年月日(getParameter().get年齢基準日().plusYear(終了年齢.subtract(開始年齢).intValue()));
         }
@@ -111,8 +112,8 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
         parameter.set開始生年月日(getParameter().get生年月日_開始());
         parameter.set終了生年月日(getParameter().get生年月日_終了());
         parameter.set年齢基準日(getParameter().get年齢基準日());
-        parameter.set開始年齢(getParameter().get年齢_開始().intValue());
-        parameter.set終了年齢(getParameter().get年齢_終了().intValue());
+        parameter.set開始年齢(getParameter().get年齢_開始() == null ? ZERO : getParameter().get年齢_開始().intValue());
+        parameter.set終了年齢(getParameter().get年齢_終了() == null ? ZERO : getParameter().get年齢_開始().intValue());
         parameter.set広域判定区分(getParameter().get広域判定区分());
         parameter.set選択対象リスト(getParameter().get選択対象リスト());
         if (getParameter().get市町村情報() != null) {

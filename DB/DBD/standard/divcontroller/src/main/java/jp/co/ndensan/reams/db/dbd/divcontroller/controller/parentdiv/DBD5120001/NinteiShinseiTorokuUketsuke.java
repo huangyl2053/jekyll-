@@ -397,6 +397,7 @@ public class NinteiShinseiTorokuUketsuke {
 //            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
 //        }
         getHandler(div).onClick_btnUpdate();
+        getHandler(div).edit状態_完了();
         div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
                 UrInformationMessages.正常終了.getMessage().replace(要介護認定申請情報登録.toString()).evaluate()));
         RString 表示パターン = getHandler(div).get表示パターン();

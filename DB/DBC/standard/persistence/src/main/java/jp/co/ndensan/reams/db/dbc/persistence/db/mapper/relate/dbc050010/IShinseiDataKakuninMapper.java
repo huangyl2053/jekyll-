@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempT
 /**
  * 振込明細一覧表作成_受申請データ有無確認のMapperクラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public interface IShinseiDataKakuninMapper {
 

@@ -48,15 +48,14 @@ public class KaigoHokenFukaKonkyo {
 
         ShikibetsuCode 識別コード = DataPassingConverter.deserialize(div.get識別コード(), ShikibetsuCode.class);
         if (識別コード != null) {
-            List<FukaJohoRelateSearchResult> resultList = FukaJohoFinder.createInstance().
-                    find全ての賦課の情報(識別コード).records();     //1.1
             div.getTxtShikibetsuCode().setValue(識別コード.getColumnValue());
+            List<FukaJohoRelateSearchResult> resultList = FukaJohoFinder.createInstance().
+                    find全ての賦課の情報(識別コード).records();
             if (!resultList.isEmpty()) {
                 ViewStateHolder.put(ViewStateKeys.賦課根拠情報, (Serializable) resultList);
-                int listSize = resultList.size();
-                FukaJohoRelateSearchResult resultMax = resultList.get(listSize - 1);   //1.2
+                FukaJohoRelateSearchResult resultMax = resultList.get(resultList.size() - 1);
                 ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
-                        get最大基準日時(resultMax.get介護賦課Result().get賦課年度());  //1.3
+                        get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
                 getHandler(div).init(処理日付管理情報, resultMax, resultList);
             }
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(識別コード.getColumnValue()), ログコード,
@@ -73,8 +72,11 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onChange_ddlChoteiNendo(KaigoHokenFukaKonkyoDiv div) {
+
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
-        getHandler(div).setDDL再表示(賦課根拠情報List);
+        if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
+            getHandler(div).setDDL再表示(賦課根拠情報List);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -85,8 +87,11 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onChange_ddlFukaNendo(KaigoHokenFukaKonkyoDiv div) {
+
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
-        getHandler(div).set通知書番号DDL再表示(賦課根拠情報List);
+        if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
+            getHandler(div).set通知書番号DDL再表示(賦課根拠情報List);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -97,8 +102,14 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onClick_btnSearch(KaigoHokenFukaKonkyoDiv div) {
+
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
-        getHandler(div).get指定賦課情報(賦課根拠情報List);
+        if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
+            FukaJohoRelateSearchResult resultMax = 賦課根拠情報List.get(賦課根拠情報List.size() - 1);
+            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
+                    get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
+            getHandler(div).btnSearch(処理日付管理情報, resultMax, 賦課根拠情報List);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -109,8 +120,14 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onClick_btnBefore(KaigoHokenFukaKonkyoDiv div) {
+
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
-        getHandler(div).get指定賦課情報前へ(賦課根拠情報List);
+        if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
+            FukaJohoRelateSearchResult resultMax = 賦課根拠情報List.get(賦課根拠情報List.size() - 1);
+            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
+                    get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
+            getHandler(div).btnBefore(処理日付管理情報, resultMax, 賦課根拠情報List);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -121,8 +138,14 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onClick_btnAfter(KaigoHokenFukaKonkyoDiv div) {
+
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
-        getHandler(div).get指定賦課情報後へ(賦課根拠情報List);
+        if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
+            FukaJohoRelateSearchResult resultMax = 賦課根拠情報List.get(賦課根拠情報List.size() - 1);
+            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
+                    get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
+            getHandler(div).btnAfter(処理日付管理情報, resultMax, 賦課根拠情報List);
+        }
         return ResponseData.of(div).respond();
     }
 

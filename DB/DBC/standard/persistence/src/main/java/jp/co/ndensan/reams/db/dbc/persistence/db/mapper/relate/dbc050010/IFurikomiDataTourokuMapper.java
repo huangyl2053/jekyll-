@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity
 /**
  * 振込データ登録処理のmapperです
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public interface IFurikomiDataTourokuMapper {
 

@@ -5,6 +5,7 @@
     <select id="select介護サービス内容" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecodeichiran.ServicecodeIchiranMybatisParameter"
             resultMap="resultMap_ServicecodeIchiranEntity" fetchSize="500">
+        <if test="抽出条件区分=='サービス分類を指定'">
         WITH "TempKaigoServiceShurui" AS
         (SELECT 
             DISTINCT  "DbT7130KaigoServiceShurui"."serviceShuruiCd" as "serviceShuruiCd"          
@@ -21,6 +22,7 @@
             AND #{基準年月} <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM")
         </if>
         )
+        </if>
         SELECT  
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou" />
         FROM 

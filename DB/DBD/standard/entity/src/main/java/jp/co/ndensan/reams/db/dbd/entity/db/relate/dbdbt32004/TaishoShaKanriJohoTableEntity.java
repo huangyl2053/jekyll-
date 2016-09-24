@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TaishoShaKanriJohoTableEntity extends DbTableEntityBase<TaishoShaKanriJohoTableEntity> implements IDbAccessable {
 
+    /**
+     * テーブル名です。
+     */
     public static final RString TABLE_NAME;
 
     static {

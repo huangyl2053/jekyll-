@@ -17,14 +17,13 @@ import lombok.Setter;
 /**
  * 高額データ取得MybatisParameterクラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuFurikomiMybatisParameter implements IMyBatisParameter {
 
-    private Furikomi_ShihraiHohoShitei 支払方法;
     private Furikomi_MeisaiIchiranChushutsuTaisho 抽出対象;
     private boolean 再処理フラグ;
     private FlexibleDate 開始年月日;
@@ -98,42 +97,22 @@ public class KogakuFurikomiMybatisParameter implements IMyBatisParameter {
     }
 
     private void set再処理フラグ(boolean 再処理フラグ) {
-        if (再処理フラグ == true) {
-            再処理フラグT = true;
-        } else if (再処理フラグ == false) {
-            再処理フラグT = false;
-        }
+        再処理フラグT = 再処理フラグ;
     }
 
     private void set開始年月日(FlexibleDate 開始年月日) {
-        if (開始年月日 == null || 開始年月日.isEmpty()) {
-            開始年月日T = false;
-        } else {
-            開始年月日T = true;
-        }
+        開始年月日T = 開始年月日 != null && !開始年月日.isEmpty();
     }
 
     private void set終了年月日(FlexibleDate 終了年月日) {
-        if (終了年月日 == null || 終了年月日.isEmpty()) {
-            終了年月日T = false;
-        } else {
-            終了年月日T = true;
-        }
+        終了年月日T = 終了年月日 != null && !終了年月日.isEmpty();
     }
 
     private void set開始受取年月(FlexibleYearMonth 開始受取年月) {
-        if (開始受取年月 == null || 開始受取年月.isEmpty()) {
-            開始受取年月T = false;
-        } else {
-            開始受取年月T = true;
-        }
+        開始受取年月T = 開始受取年月 != null && !開始受取年月.isEmpty();
     }
 
     private void set終了受取年月(FlexibleYearMonth 終了受取年月) {
-        if (終了受取年月 == null || 終了受取年月.isEmpty()) {
-            終了受取年月T = false;
-        } else {
-            終了受取年月T = true;
-        }
+        終了受取年月T = 終了受取年月 != null && !終了受取年月.isEmpty();
     }
 }

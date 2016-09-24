@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.report.koseitaishojissekiichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.koseitaishojissekiichiran.KoseiTaishoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.koseitaishojissekiichiran.KoseiTaishoJissekiIchiranSource;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -24,7 +24,7 @@ public class KoseiTaishoJissekiIchiranReport extends Report<KoseiTaishoJissekiIc
 
     private final int 連番;
     private final KoseiTaishoJissekiIchiranEntity entity;
-    private final IOutputOrder 出力順情報;
+    private final RString 出力順;
 
     /**
      * コンストラクタです
@@ -32,21 +32,22 @@ public class KoseiTaishoJissekiIchiranReport extends Report<KoseiTaishoJissekiIc
      * @param entity KoseiTaishoJissekiIchiranEntity
      * @param 開始日時 RDateTime
      * @param 終了日時 RDateTime
+     * @param 出力順 RString
      * @param 連番 int
      */
     public KoseiTaishoJissekiIchiranReport(KoseiTaishoJissekiIchiranEntity entity,
-            RDateTime 開始日時, RDateTime 終了日時, IOutputOrder 出力順情報, int 連番) {
+            RDateTime 開始日時, RDateTime 終了日時, RString 出力順, int 連番) {
         this.entity = entity;
         this.開始日時 = 開始日時;
         this.終了日時 = 終了日時;
-        this.出力順情報 = 出力順情報;
+        this.出力順 = 出力順;
         this.連番 = 連番;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KoseiTaishoJissekiIchiranSource> writer) {
 
-        IKoseiTaishoJissekiIchiranEditor editor = new KoseiTaishoJissekiIchiranEditor(entity, 開始日時, 終了日時, 出力順情報, 連番);
+        IKoseiTaishoJissekiIchiranEditor editor = new KoseiTaishoJissekiIchiranEditor(entity, 開始日時, 終了日時, 出力順, 連番);
 
         IKoseiTaishoJissekiIchiranBuilder builder = new KoseiTaishoJissekiIchiranBuilder(editor);
 

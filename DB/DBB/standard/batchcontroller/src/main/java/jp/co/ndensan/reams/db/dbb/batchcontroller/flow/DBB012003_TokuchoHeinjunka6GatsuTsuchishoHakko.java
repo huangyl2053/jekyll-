@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.SystemTimeShuto
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoHakoA4TypeProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoHakoB5TypeProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoIdoshaTorokuProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
@@ -42,7 +42,7 @@ public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBas
     private static final String 通知書の発行 = "tsuchishoHako";
     private static final String 通知書発行後異動者の登録 = "tsuchishoIdoshaToroku";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString 帳票分類ID = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
 
     @Override

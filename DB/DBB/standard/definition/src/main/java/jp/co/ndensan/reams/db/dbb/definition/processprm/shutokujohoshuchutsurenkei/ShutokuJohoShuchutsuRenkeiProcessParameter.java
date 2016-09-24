@@ -28,6 +28,7 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
     private List<SichousonEntity> 市町村情報List;
     private RString 出力順ID;
     private ReportId 帳票ID;
+    private RString ファイル名;
     private RString 共有ファイル名;
     private RDateTime 共有ファイルID;
     private RString 処理区分;
@@ -40,18 +41,20 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
      * @param 市町村情報List List<SichousonEntity>
      * @param 出力順ID RString
      * @param 帳票ID ReportId
+     * @param ファイル名 RString
      * @param 共有ファイル名 RString
      * @param 共有ファイルID RDateTime
      * @param 処理区分 RString
      * @param 処理日時 YMDHMS
      */
     public ShutokuJohoShuchutsuRenkeiProcessParameter(FlexibleYear 処理年度,
-            List<SichousonEntity> 市町村情報List, RString 出力順ID, ReportId 帳票ID,
+            List<SichousonEntity> 市町村情報List, RString 出力順ID, ReportId 帳票ID, RString ファイル名,
             RString 共有ファイル名, RDateTime 共有ファイルID, RString 処理区分, YMDHMS 処理日時) {
         this.処理年度 = 処理年度;
         this.市町村情報List = 市町村情報List;
         this.出力順ID = 出力順ID;
         this.帳票ID = 帳票ID;
+        this.ファイル名 = ファイル名;
         this.共有ファイル名 = 共有ファイル名;
         this.共有ファイルID = 共有ファイルID;
         this.処理区分 = 処理区分;

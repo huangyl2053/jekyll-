@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-2180-030 donghj-->
+
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShokanJuryoininMapper">
+    
+    <resultMap id="resultMap_ShokanJuryoininEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShokanJuryoininEntity" autoMapping="true">
+        
+        <association property="振込明細一時Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IKozaJohoMapper.resultMap_FurikomiDetailTempTableEntity"/>
+        <association property="受領委任契約事業者Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"/>
+        
+    </resultMap>
+    
+    <select resultOrdered="true" id="get償還受領委任払の口座情報" resultMap="resultMap_ShokanJuryoininEntity" fetchSize="500" >
+    
+        SELECT
+            振込明細一時TBL.*,
+            受領委任契約事業者TBL.*
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
+        INNER JOIN
+            rgdb."DbT3078ShokanJuryoininKeiyakusha" AS 償還受領委任契約者TBL
+        ON
+            振込明細一時TBL."juryoininKeiyakuNo" = 償還受領委任契約者TBL."keiyakuNo"
+        INNER JOIN
+            rgdb."DbT3077JuryoininKeiyakuJigyosha" AS 受領委任契約事業者TBL
+        ON
+            償還受領委任契約者TBL."keiyakuJigyoshaNo" = 受領委任契約事業者TBL."keiyakuJigyoshaNo"
+        WHERE
+            振込明細一時TBL."dataKubun" = '1'
+            AND  振込明細一時TBL."shiharaiHohoKubunCode" = '3'
+        
+    </select>
+    
+</mapper>
