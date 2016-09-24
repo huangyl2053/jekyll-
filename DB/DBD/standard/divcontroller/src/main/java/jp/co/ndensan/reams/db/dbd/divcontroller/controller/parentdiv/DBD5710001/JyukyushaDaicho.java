@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class JyukyushaDaicho {
 
-    private static final RString 対象者 = new RString("0");
     private static final RString 対象期間 = new RString("1");
 
     /**
