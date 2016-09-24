@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -57,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -90,6 +92,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private static final RString 法別区分 = new RString("【法別区分】");
     private static final RString CSV出力設定 = new RString("【CSV出力設定】");
     private static final RString 世帯非課税等 = new RString("【世帯非課税等】");
+    private static final RString CSV出力設定出力順 = new RString("【出力順】");
     private static final RString CSV出力設定指定なし = new RString("【CSV出力設定】 指定なし");
     private static final RString 世帯非課税等指定なし = new RString("【世帯非課税等】 指定なし");
     private static final RString EUC_WRITER_LIAN = new RString("～");
@@ -289,12 +292,17 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     }
 
     private void 出力条件リスト_認定者() {
+        RString 出力ページ数;
         RString 帳票ID = new RString("DBD200014_HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran");
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString 帳票名 = new RString("訪問介護利用者負担額減額認定者リスト");
-        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
+        if (parameter.get出力設定().contains(CSVSettings.連番付加)) {
+            出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        } else {
+            出力ページ数 = new RString(String.valueOf(eucNoRenbanCsvWriter.getCount()));
+        }
         RString csv出力有無 = new RString("あり");
         RString csvファイル名 = new RString("HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran.csv");
 
@@ -317,6 +325,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         } else {
             edit出力条件_出力設定(出力条件);
         }
+        出力条件.add(edit出力条件_出力順().toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID,
                 導入団体コード,
@@ -351,12 +360,18 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     }
 
     private void 出力条件リスト_該当者() {
+        RString 出力ページ数;
+        RString 出力順 = RString.EMPTY;
         RString 帳票ID = new RString("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran");
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString 帳票名 = new RString("訪問介護利用者負担額減額該当者リスト");
-        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
+        if (parameter.get出力設定().contains(CSVSettings.連番付加)) {
+            出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        } else {
+            出力ページ数 = new RString(String.valueOf(eucNoRenbanCsvWriter.getCount()));
+        }
         RString csv出力有無 = new RString("あり");
         RString csvファイル名 = new RString("HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran.csv");
 
@@ -393,6 +408,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         } else {
             edit出力条件_出力設定(出力条件);
         }
+        出力条件.add(edit出力条件_出力順().toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID,
                 導入団体コード,
@@ -420,6 +436,18 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             }
             出力条件.add(CSV出力設定.concat(builder.toString()));
         }
+    }
+
+    private RStringBuilder edit出力条件_出力順() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(CSV出力設定出力順);
+        if (outputOrder != null) {
+            List<ISetSortItem> 改頁項目List = outputOrder.get設定項目リスト();
+            for (ISetSortItem sortItem : 改頁項目List) {
+                builder.append(sortItem.get項目名());
+            }
+        }
+        return builder;
     }
 
 }

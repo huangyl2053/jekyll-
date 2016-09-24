@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200004.ShakaiFukushiHojinKeigenReport;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
@@ -59,8 +60,11 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -127,6 +131,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private static final RString 受給者区分 = new RString("【受給者区分】");
     private static final RString 世帯非課税等 = new RString("【世帯非課税等】");
     private static final RString CSV出力設定 = new RString("【CSV出力設定】");
+    private static final RString 出力順 = new RString("【出力順】");
     private static final RString カラ = new RString("～");
     private static final RString POINT = new RString("、");
     private static final RString ASTERISK = new RString("*");
@@ -836,9 +841,14 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     }
 
     private void 認定者バッチ出力条件リストの出力() {
+        RString 出力ページ数;
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        if (連番_flag) {
+            出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        } else {
+            出力ページ数 = new RString(String.valueOf(noRennbanneucCsvWriter.getCount()));
+        }
         RString 帳票名 = new RString("社会福祉法人軽減認定者リスト");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString csv出力有無 = new RString("あり");
@@ -874,9 +884,14 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     }
 
     private void 該当者バッチ出力条件リストの出力() {
+        RString 出力ページ数;
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(noRennbanneucCsvWriter.getCount()));
+        if (連番_flag) {
+            出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        } else {
+            出力ページ数 = new RString(String.valueOf(noRennbanneucCsvWriter.getCount()));
+        }
         RString 帳票名 = new RString("社会福祉法人軽減該当者リスト");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString csv出力有無 = new RString("あり");
@@ -925,43 +940,50 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private void set出力条件(List<RString> 出力条件) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(対象期間指定);
-//        RString test = new RString("1");
         builder.append(TaishoKikan.toValue(processParameter.get対象期間指定()));
-//        builder.append(TaishoKikan.toValue(test));
         出力条件.add(builder.toRString());
         builder.delete(NO_0, builder.length());
         if (processParameter.get対象期間指定().equals(new RString("1"))) {
             builder.append(対象年度);
             if (null != processParameter.get対象年度の開始年月日()) {
-                builder.append(new RString(processParameter.get対象年度の開始年月日().toString()));
+                builder.append(edit日期(processParameter.get対象年度の開始年月日()));
             }
             builder.append(カラ);
             if (null != processParameter.get対象年度の終了年月日()) {
-                builder.append(new RString(processParameter.get対象年度の終了年月日().toString()));
+                builder.append(edit日期(processParameter.get対象年度の終了年月日()));
             }
             出力条件.add(builder.toRString());
             builder.delete(NO_0, builder.length());
             builder.append(課税判定等基準日);
-            builder.append(new RString(processParameter.get課税判定等基準日().toString()));
+            builder.append(edit日期(processParameter.get課税判定等基準日()));
             出力条件.add(builder.toRString());
             builder.delete(NO_0, builder.length());
         }
         if (processParameter.get対象期間指定().equals(new RString("2"))) {
             builder.append(基準日);
-            builder.append(new RString(processParameter.get基準日().toString()));
+            builder.append(edit日期(processParameter.get基準日()));
             出力条件.add(builder.toRString());
             builder.delete(NO_0, builder.length());
         }
         builder.append(所得年度);
-        builder.append(new RString(processParameter.get所得年度().toString()));
+        builder.append(edit年度(processParameter.get所得年度()));
         出力条件.add(builder.toRString());
         builder.delete(NO_0, builder.length());
         builder.append(旧措置者区分);
-        builder.append(processParameter.get旧措置者区分());
+        builder.append(KyusochishaJukyushaKubun.toValue(processParameter.get旧措置者区分()));
         出力条件.add(builder.toRString());
         builder.delete(NO_0, builder.length());
         builder.append(世帯表示);
         builder.append(SetaiHyoji.toValue(processParameter.get世帯表示()));
+        出力条件.add(builder.toRString());
+        builder.delete(NO_0, builder.length());
+        builder.append(出力順);
+        if (outputOrder != null) {
+            List<ISetSortItem> 改頁項目List = outputOrder.get設定項目リスト();
+            for (ISetSortItem sortItem : 改頁項目List) {
+                builder.append(sortItem.get項目名());
+            }
+        }
         出力条件.add(builder.toRString());
         builder.delete(NO_0, builder.length());
     }
@@ -1025,5 +1047,24 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             帳票物理名 = new RString("hokenshaNo");
         }
         return 帳票物理名;
+    }
+
+    private RString edit日期(FlexibleDate 日期) {
+
+        RString 変更後日期 = RString.EMPTY;
+        if (日期 != null) {
+            変更後日期 = 日期.wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        return 変更後日期;
+    }
+
+    private RString edit年度(FlexibleYear 所得年度) {
+        RString 変更後年度 = RString.EMPTY;
+        if (所得年度 != null) {
+            変更後年度 = 所得年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.NONE).toDateString();
+        }
+        return 変更後年度;
     }
 }
