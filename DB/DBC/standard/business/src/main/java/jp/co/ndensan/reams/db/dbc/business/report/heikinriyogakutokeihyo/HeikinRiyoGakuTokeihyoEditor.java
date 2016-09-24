@@ -114,7 +114,7 @@ public class HeikinRiyoGakuTokeihyoEditor implements IHeikinRiyoGakuTokeihyoEdit
             source.service1 = サービス種類名称;
         } else if (サービス種類名称.length() < INDEX_32) {
             source.service1 = サービス種類名称.substring(0, INDEX_16);
-            source.service2 = サービス種類名称.substring(INDEX_16, INDEX_32);
+            source.service2 = サービス種類名称.substring(INDEX_16);
         } else {
             source.service1 = サービス種類名称.substring(0, INDEX_16);
             source.service2 = サービス種類名称.substring(INDEX_16, INDEX_32);

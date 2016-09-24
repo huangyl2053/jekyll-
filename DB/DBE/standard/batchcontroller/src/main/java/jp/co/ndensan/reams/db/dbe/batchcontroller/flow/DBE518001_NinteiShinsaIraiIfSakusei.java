@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shinsataishodataoutput;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.DbT5501UpdateProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.NijihanteiKekkaTorokuMobileOutPutProcess;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1840-011 yaoyahui
  */
-public class ShinsaTaishoDataOutPutFlow extends BatchFlowBase<ShinsaTaishoDataOutPutBatchParammeter> {
+public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTaishoDataOutPutBatchParammeter> {
 
     private static final String SHINSATAISHODATAOUTPUT = "shinsataishodataoutput";
     private static final String NIJIHANTEIKEKKATOROK = "nijihanteikekkatorokumobileoutput";

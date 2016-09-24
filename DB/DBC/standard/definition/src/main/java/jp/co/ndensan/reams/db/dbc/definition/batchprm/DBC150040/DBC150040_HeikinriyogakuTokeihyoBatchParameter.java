@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.heikinriyogakuyokeihyo.HeikinriyogakuTokeihyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -42,7 +44,6 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     private static final String ISCHIKU1 = "ischiku1";
     private static final String ISCHIKU2 = "ischiku2";
     private static final String ISCHIKU3 = "ischiku3";
-
     @BatchParameter(key = TAISHONENDOYM, name = "対象年月")
     private RString taishoNendoYM;
     @BatchParameter(key = KAISHIYM, name = "開始年月")
@@ -96,7 +97,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
      * @param kaishiYM 開始年月
      * @param shuryoYM 終了年月
      * @param chikuShitei 地区指定
-     * @param 選択結果Map 選択地区リス
+     * @param 選択地区Map 選択地区Map
      * @param shichosonCode 市町村コード
      * @param shichosonMei 市町村名称
      * @param kyuShichosonCode 旧市町村コード
@@ -117,7 +118,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
             RString kaishiYM,
             RString shuryoYM,
             RString chikuShitei,
-            Map<RString, RString> 選択結果Map,
+            Map<RString, RString> 選択地区Map,
             RString shichosonCode,
             RString shichosonMei,
             RString kyuShichosonCode,
@@ -131,7 +132,8 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
             boolean isgyoseiku,
             boolean ischiku1,
             boolean ischiku2,
-            boolean ischiku3) {
+            boolean ischiku3
+    ) {
         this.taishoNendoYM = taishoNendoYM;
         this.kaishiYM = kaishiYM;
         this.shuryoYM = shuryoYM;
@@ -151,6 +153,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
         this.ischiku1 = ischiku1;
         this.ischiku2 = ischiku2;
         this.ischiku3 = ischiku3;
+
     }
 
     /**
@@ -164,7 +167,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
                 kaishiYM,
                 shuryoYM,
                 chikuShitei,
-                選択地区Map,
+                setselectorChikulist(),
                 shichosonCode,
                 shichosonMei,
                 kyuShichosonCode,
@@ -182,4 +185,11 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
         );
     }
 
+    private List<RString> setselectorChikulist() {
+        List<RString> selectorChikulist = new ArrayList<>();
+        for (RString 選択結果 : 選択地区Map.keySet()) {
+            selectorChikulist.add(選択結果);
+        }
+        return selectorChikulist;
+    }
 }
