@@ -192,7 +192,7 @@ public class JyukyushaDaichoHandler {
         parameter.set今回抽出開始時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getFromTimeValue());
         parameter.set今回抽出終了年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getToDateValue());
         parameter.set今回抽出終了時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getToTimeValue());
-        parameter.set異動抽出対象リスト(div.getTaishouKikan().getChkIdouChushutsuTaishou().getSelectedValues());
+        parameter.set異動抽出対象リスト(setparameter_異動抽出());
         if (div.getRadShutsuryokuOption().getSelectedKey().equals(全てのページを印刷する)) {
             parameter.set出力オプション区分(KEY0);
         } else {
@@ -221,5 +221,14 @@ public class JyukyushaDaichoHandler {
         div.getTaishouKikan().getTxtKonkaiymdtime().setToTimeValue(RDate.getNowDateTime().getTime());
         div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(true);
         div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(false);
+    }
+
+    private List<RString> setparameter_異動抽出() {
+        List<RString> list異動 = new ArrayList<>();
+        List<RString> 異動抽出list = div.getTaishouKikan().getChkIdouChushutsuTaishou().getSelectedValues();
+        for (RString list抽出 : 異動抽出list) {
+            list異動.add(list抽出.trim());
+        }
+        return list異動;
     }
 }
