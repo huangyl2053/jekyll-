@@ -27,6 +27,7 @@ public class KogakuServiceJyuryoKakuninShoBuilder implements IKogakuServiceJyury
         this.editor = editor;
     }
 
+    @Override
     public KogakuServiceJyuryoKakuninShoSource build() {
         return ReportEditorJoiner.from(new KogakuServiceJyuryoKakuninShoSource())
                 .join(editor).buildSource();
