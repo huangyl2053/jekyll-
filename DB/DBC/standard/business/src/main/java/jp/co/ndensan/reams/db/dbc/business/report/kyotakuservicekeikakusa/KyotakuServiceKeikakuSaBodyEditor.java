@@ -67,15 +67,18 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
             }
             source.listList3_3 = 帳票情報.get喪失事由();
 
+            if (帳票情報.get受給申請日() != null) {
+                FlexibleDate 申請日 = 帳票情報.get受給申請日();
+                source.listList1_6 = パターン4(申請日);
+
+            }
             if (帳票情報.get受給申請日() != null
                     && 帳票情報.get申請事由() != null) {
                 FlexibleDate 申請日 = 帳票情報.get受給申請日();
-                source.listList1_6 = パターン4(申請日);
-                source.listList3_4 = 帳票情報.get申請事由().concat(記号).concat(パターン4(申請日));
-            }
-            if (帳票情報.get申請事由() != null) {
                 source.listList1_7 = 帳票情報.get申請事由();
+                source.listList3_4 = パターン4(申請日).concat(記号).concat(帳票情報.get申請事由());
             }
+
             source.listList1_8 = 帳票情報.get要介護度();
             if (帳票情報.get認定有効開始日() != null) {
                 source.listList2_5 = パターン4(帳票情報.get認定有効開始日());
@@ -108,18 +111,23 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
             source.listList3_5 = 帳票情報.get事業者名称();
             source.listList1_12 = 帳票情報.get備考1();
             source.listList3_6 = 帳票情報.get備考2();
-
-            if (帳票情報.get被保険者番号() != null) {
-                HihokenshaNo 被保険者番号 = 帳票情報.get被保険者番号();
-                source.listList1_1 = 被保険者番号.getColumnValue();
-                PersonalData personalData = PersonalData.of(帳票情報.get住民コード(),
-                        new ExpandedInformation(new Code("003"), 文_被保険者番号, 被保険者番号.getColumnValue()));
-                AccessLogger.log(AccessLogType.照会, personalData);
-            }
+            editAccessLog(帳票情報, source);
 
         }
         return source;
 
+    }
+
+    private void editAccessLog(KyotakuServiceKeikakuSaList 帳票情報, KyotakuServiceKeikakuSakuseiSource source) throws NullPointerException, IllegalArgumentException {
+        if (帳票情報.get被保険者番号() != null) {
+            HihokenshaNo 被保険者番号 = 帳票情報.get被保険者番号();
+            source.listList1_1 = 被保険者番号.getColumnValue();
+            if (帳票情報.get住民コード() != null) {
+                PersonalData personalData = PersonalData.of(帳票情報.get住民コード(),
+                        new ExpandedInformation(new Code("003"), 文_被保険者番号, 被保険者番号.getColumnValue()));
+                AccessLogger.log(AccessLogType.照会, personalData);
+            }
+        }
     }
 
     private RString パターン4(FlexibleDate 年月日) {
