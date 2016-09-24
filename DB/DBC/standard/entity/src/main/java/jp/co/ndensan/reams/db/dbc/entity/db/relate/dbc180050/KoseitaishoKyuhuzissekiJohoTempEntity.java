@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
@@ -35,16 +37,16 @@ public class KoseitaishoKyuhuzissekiJohoTempEntity extends DbTableEntityBase<Kos
     private RString サービス種類コード;
     private RString 給付実績情報作成区分コード;
     private RString サービス種類;
-    private RString サービス費用額;
-    private RString 更正前保険給付率;
-    private RString 更正前請求額;
-    private RString 更正前自己負担額;
-    private RString 更正後保険給付率;
-    private RString 更正後請求額;
-    private RString 更正後自己負担額;
-    private RString 自己負担額差額;
-    private RString 軽減率;
-    private RString 軽減後自己負担額;
-    private RString 高額サービス費用額;
+    private Decimal サービス費用額;
+    private HokenKyufuRitsu 更正前保険給付率;
+    private Decimal 更正前請求額;
+    private Decimal 更正前自己負担額;
+    private HokenKyufuRitsu 更正後保険給付率;
+    private Decimal 更正後請求額;
+    private Decimal 更正後自己負担額;
+    private Decimal 自己負担額差額;
+    private Decimal 軽減率;
+    private Decimal 軽減後自己負担額;
+    private Decimal 高額サービス費用額;
 
 }
