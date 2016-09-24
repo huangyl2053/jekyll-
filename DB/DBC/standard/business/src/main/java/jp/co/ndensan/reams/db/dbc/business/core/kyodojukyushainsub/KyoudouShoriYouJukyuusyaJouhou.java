@@ -53,20 +53,20 @@ public class KyoudouShoriYouJukyuusyaJouhou {
         DbWT5C31KihonKyoudouShoriEntity entity = new DbWT5C31KihonKyoudouShoriEntity();
         entity.setHokenshaNo(保険者番号);
         entity.setHokenshaName(保険者名);
-        entity.setShikibetsuNo(csvData.get(2));
-        entity.setIdoYMD(csvData.get(INDEX_3));
-        entity.setIdoKubunCode(csvData.get(INDEX_4));
-        entity.setTeiseiYMD(csvData.get(INDEX_5));
-        entity.setTeiseiKubunCode(csvData.get(INDEX_6));
-        entity.setJukyushaIdoJiyu(csvData.get(INDEX_7));
-        entity.setShoKisaiHokenshaNo(csvData.get(INDEX_8));
-        entity.setHiHokenshaNo(csvData.get(INDEX_9));
-        entity.setHiHokenshaName(csvData.get(INDEX_10));
-        entity.setTelNo(csvData.get(INDEX_11));
-        entity.setYubinNo(csvData.get(INDEX_12));
-        entity.setDdressKana(csvData.get(INDEX_13));
-        entity.setAddress(csvData.get(INDEX_14));
-        entity.setChohyoOutputJunjyoCode(csvData.get(INDEX_15));
+        entity.setShikibetsuNo(get項目(csvData, 2));
+        entity.setIdoYMD(get項目(csvData, INDEX_3));
+        entity.setIdoKubunCode(get項目(csvData, INDEX_4));
+        entity.setTeiseiYMD(get項目(csvData, INDEX_5));
+        entity.setTeiseiKubunCode(get項目(csvData, INDEX_6));
+        entity.setJukyushaIdoJiyu(get項目(csvData, INDEX_7));
+        entity.setShoKisaiHokenshaNo(get項目(csvData, INDEX_8));
+        entity.setHiHokenshaNo(get項目(csvData, INDEX_9));
+        entity.setHiHokenshaName(get項目(csvData, INDEX_10));
+        entity.setTelNo(get項目(csvData, INDEX_11));
+        entity.setYubinNo(get項目(csvData, INDEX_12));
+        entity.setDdressKana(get項目(csvData, INDEX_13));
+        entity.setAddress(get項目(csvData, INDEX_14));
+        entity.setChohyoOutputJunjyoCode(get項目(csvData, INDEX_15));
         return entity;
     }
 
@@ -81,19 +81,19 @@ public class KyoudouShoriYouJukyuusyaJouhou {
         DbWT5C31KihonKyoudouShoriEntity entity = new DbWT5C31KihonKyoudouShoriEntity();
         entity.setHokenshaNo(保険者番号);
         entity.setHokenshaName(保険者名);
-        entity.setShikibetsuNo(csvData.get(2));
-        entity.setIdoYMD(csvData.get(INDEX_3));
-        entity.setTeiseiYMD(csvData.get(INDEX_4));
-        entity.setIdoKubunCode(csvData.get(INDEX_5));
-        entity.setJukyushaIdoJiyu(csvData.get(INDEX_6));
-        entity.setShoKisaiHokenshaNo(csvData.get(INDEX_7));
-        entity.setHiHokenshaNo(csvData.get(INDEX_8));
-        entity.setHiHokenshaName(csvData.get(INDEX_9));
-        entity.setYubinNo(csvData.get(INDEX_10));
-        entity.setDdressKana(csvData.get(INDEX_11));
-        entity.setAddress(csvData.get(INDEX_12));
-        entity.setTelNo(csvData.get(INDEX_13));
-        entity.setChohyoOutputJunjyoCode(csvData.get(INDEX_14));
+        entity.setShikibetsuNo(get項目(csvData, 2));
+        entity.setIdoYMD(get項目(csvData, INDEX_3));
+        entity.setTeiseiYMD(get項目(csvData, INDEX_4));
+        entity.setIdoKubunCode(get項目(csvData, INDEX_5));
+        entity.setJukyushaIdoJiyu(get項目(csvData, INDEX_6));
+        entity.setShoKisaiHokenshaNo(get項目(csvData, INDEX_7));
+        entity.setHiHokenshaNo(get項目(csvData, INDEX_8));
+        entity.setHiHokenshaName(get項目(csvData, INDEX_9));
+        entity.setYubinNo(get項目(csvData, INDEX_10));
+        entity.setDdressKana(get項目(csvData, INDEX_11));
+        entity.setAddress(get項目(csvData, INDEX_12));
+        entity.setTelNo(get項目(csvData, INDEX_13));
+        entity.setChohyoOutputJunjyoCode(get項目(csvData, INDEX_14));
         return entity;
     }
 
@@ -102,24 +102,24 @@ public class KyoudouShoriYouJukyuusyaJouhou {
      *
      * @param csvData List<RString>
      * @param 保険者名 保険者名
-     * @return 基本共同処理一時TBLのEntity
+     * @return 償還共同処理一時TBLのEntity
      */
     public DbWT5C32ShoukanKyoudouShoriEntity getDbWT5D31Entity(List<RString> csvData, RString 保険者名) {
         DbWT5C32ShoukanKyoudouShoriEntity entity = new DbWT5C32ShoukanKyoudouShoriEntity();
         entity.setHokenshaNo(保険者番号);
         entity.setHokenshaName(保険者名);
-        entity.setShikibetsuNo(csvData.get(2));
-        entity.setIdoYMD(csvData.get(INDEX_3));
-        entity.setIdoKubunCode(csvData.get(INDEX_4));
-        entity.setTeiseiYMD(csvData.get(INDEX_5));
-        entity.setTeiseiKubunCode(csvData.get(INDEX_6));
-        entity.setJukyushaIdoJiyu(csvData.get(INDEX_7));
-        entity.setShoKisaiHokenshaNo(csvData.get(INDEX_8));
-        entity.setHiHokenshaNo(csvData.get(INDEX_9));
-        entity.setHokenKyufuIchijiSashitomeKaishiYMD(csvData.get(INDEX_10));
-        entity.setHokenKyufuIchijiSashitomeShuryoYMD(csvData.get(INDEX_11));
-        entity.setHokenkyufuIchijiSashitomeKubunCode(csvData.get(INDEX_12));
-        entity.setHokenkyufuIchijiSashitomeKingaku(csvData.get(INDEX_13));
+        entity.setShikibetsuNo(get項目(csvData, 2));
+        entity.setIdoYMD(get項目(csvData, INDEX_3));
+        entity.setIdoKubunCode(get項目(csvData, INDEX_4));
+        entity.setTeiseiYMD(get項目(csvData, INDEX_5));
+        entity.setTeiseiKubunCode(get項目(csvData, INDEX_6));
+        entity.setJukyushaIdoJiyu(get項目(csvData, INDEX_7));
+        entity.setShoKisaiHokenshaNo(get項目(csvData, INDEX_8));
+        entity.setHiHokenshaNo(get項目(csvData, INDEX_9));
+        entity.setHokenKyufuIchijiSashitomeKaishiYMD(get項目(csvData, INDEX_10));
+        entity.setHokenKyufuIchijiSashitomeShuryoYMD(get項目(csvData, INDEX_11));
+        entity.setHokenkyufuIchijiSashitomeKubunCode(get項目(csvData, INDEX_12));
+        entity.setHokenkyufuIchijiSashitomeKingaku(get項目(csvData, INDEX_13));
         return entity;
     }
 
@@ -128,64 +128,85 @@ public class KyoudouShoriYouJukyuusyaJouhou {
      *
      * @param csvData List<RString>
      * @param 保険者名 保険者名
-     * @return 基本共同処理一時TBLのEntity
+     * @return 償還共同処理一時TBLのEntity
      */
     public DbWT5C32ShoukanKyoudouShoriEntity getDbWT5D41Entity(List<RString> csvData, RString 保険者名) {
         DbWT5C32ShoukanKyoudouShoriEntity entity = new DbWT5C32ShoukanKyoudouShoriEntity();
         entity.setHokenshaNo(保険者番号);
         entity.setHokenshaName(保険者名);
-        entity.setShikibetsuNo(csvData.get(2));
-        entity.setIdoYMD(csvData.get(INDEX_3));
-        entity.setTeiseiYMD(csvData.get(INDEX_4));
-        entity.setIdoKubunCode(csvData.get(INDEX_5));
-        entity.setJukyushaIdoJiyu(csvData.get(INDEX_6));
-        entity.setShoKisaiHokenshaNo(csvData.get(INDEX_7));
-        entity.setHiHokenshaNo(csvData.get(INDEX_8));
-        entity.setHokenKyufuIchijiSashitomeKaishiYMD(csvData.get(INDEX_9));
-        entity.setHokenKyufuIchijiSashitomeShuryoYMD(csvData.get(INDEX_10));
-        entity.setHokenkyufuIchijiSashitomeKubunCode(csvData.get(INDEX_11));
-        entity.setHokenkyufuIchijiSashitomeKingaku(csvData.get(INDEX_12));
+        entity.setShikibetsuNo(get項目(csvData, 2));
+        entity.setIdoYMD(get項目(csvData, INDEX_3));
+        entity.setTeiseiYMD(get項目(csvData, INDEX_4));
+        entity.setIdoKubunCode(get項目(csvData, INDEX_5));
+        entity.setJukyushaIdoJiyu(get項目(csvData, INDEX_6));
+        entity.setShoKisaiHokenshaNo(get項目(csvData, INDEX_7));
+        entity.setHiHokenshaNo(get項目(csvData, INDEX_8));
+        entity.setHokenKyufuIchijiSashitomeKaishiYMD(get項目(csvData, INDEX_9));
+        entity.setHokenKyufuIchijiSashitomeShuryoYMD(get項目(csvData, INDEX_10));
+        entity.setHokenkyufuIchijiSashitomeKubunCode(get項目(csvData, INDEX_11));
+        entity.setHokenkyufuIchijiSashitomeKingaku(get項目(csvData, INDEX_12));
         return entity;
     }
 
-    private DbWT5C33KougakuKyoudouShoriEntity getDbWT5E31Entity(List<RString> csvData, RString 保険者名) {
+    /**
+     * 高額共同処理一時TBLのEntityの設定処理です。
+     *
+     * @param csvData List<RString>
+     * @param 保険者名 保険者名
+     * @return 高額共同処理一時TBLのEntity
+     */
+    public DbWT5C33KougakuKyoudouShoriEntity getDbWT5E31Entity(List<RString> csvData, RString 保険者名) {
         DbWT5C33KougakuKyoudouShoriEntity entity = new DbWT5C33KougakuKyoudouShoriEntity();
         entity.setHokenshaNo(保険者番号);
         entity.setHokenshaName(保険者名);
-        entity.setShikibetsuNo(csvData.get(2));
-        entity.setIdoYMD(csvData.get(INDEX_3));
-        entity.setIdoKubunCode(csvData.get(INDEX_4));
-        entity.setTeiseiYMD(csvData.get(INDEX_5));
-        entity.setTeiseiKubunCode(csvData.get(INDEX_6));
-        entity.setJukyushaIdoJiyu(csvData.get(INDEX_7));
-        entity.setShoKisaiHokenshaNo(csvData.get(INDEX_8));
-        entity.setHiHokenshaNo(csvData.get(INDEX_9));
-        entity.setSetaiShuyakuNo(csvData.get(INDEX_10));
-        entity.setSetaiShotokuKubunCode(csvData.get(INDEX_11));
-        entity.setShotokuKubunCode(csvData.get(INDEX_12));
-        entity.setRoureiFukushiNenkinJukyuAriFlag(csvData.get(INDEX_13));
-        entity.setRiyoshaFutan2DankaiAriFlag(csvData.get(INDEX_14));
-        entity.setShikyuShinseishoOutputAriFlag(csvData.get(INDEX_15));
+        entity.setShikibetsuNo(get項目(csvData, 2));
+        entity.setIdoYMD(get項目(csvData, INDEX_3));
+        entity.setIdoKubunCode(get項目(csvData, INDEX_4));
+        entity.setTeiseiYMD(get項目(csvData, INDEX_5));
+        entity.setTeiseiKubunCode(get項目(csvData, INDEX_6));
+        entity.setJukyushaIdoJiyu(get項目(csvData, INDEX_7));
+        entity.setShoKisaiHokenshaNo(get項目(csvData, INDEX_8));
+        entity.setHiHokenshaNo(get項目(csvData, INDEX_9));
+        entity.setSetaiShuyakuNo(get項目(csvData, INDEX_10));
+        entity.setSetaiShotokuKubunCode(get項目(csvData, INDEX_11));
+        entity.setShotokuKubunCode(get項目(csvData, INDEX_12));
+        entity.setRoureiFukushiNenkinJukyuAriFlag(get項目(csvData, INDEX_13));
+        entity.setRiyoshaFutan2DankaiAriFlag(get項目(csvData, INDEX_14));
+        entity.setShikyuShinseishoOutputAriFlag(get項目(csvData, INDEX_15));
         return entity;
     }
 
-    private DbWT5C33KougakuKyoudouShoriEntity getDbWT5E41Entity(List<RString> csvData, RString 保険者名) {
+    /**
+     * 高額共同処理一時TBLのEntityの設定処理です。
+     *
+     * @param csvData List<RString>
+     * @param 保険者名 保険者名
+     * @return 高額共同処理一時TBLのEntity
+     */
+    public DbWT5C33KougakuKyoudouShoriEntity getDbWT5E41Entity(List<RString> csvData, RString 保険者名) {
         DbWT5C33KougakuKyoudouShoriEntity entity = new DbWT5C33KougakuKyoudouShoriEntity();
         entity.setHokenshaNo(保険者番号);
         entity.setHokenshaName(保険者名);
-        entity.setShikibetsuNo(csvData.get(2));
-        entity.setIdoYMD(csvData.get(INDEX_3));
-        entity.setTeiseiYMD(csvData.get(INDEX_4));
-        entity.setIdoKubunCode(csvData.get(INDEX_5));
-        entity.setJukyushaIdoJiyu(csvData.get(INDEX_6));
-        entity.setShoKisaiHokenshaNo(csvData.get(INDEX_7));
-        entity.setHiHokenshaNo(csvData.get(INDEX_8));
-        entity.setSetaiShuyakuNo(csvData.get(INDEX_9));
-        entity.setSetaiShotokuKubunCode(csvData.get(INDEX_10));
-        entity.setShotokuKubunCode(csvData.get(INDEX_11));
-        entity.setRoureiFukushiNenkinJukyuAriFlag(csvData.get(INDEX_12));
-        entity.setRiyoshaFutan2DankaiAriFlag(csvData.get(INDEX_13));
-        entity.setShikyuShinseishoOutputAriFlag(csvData.get(INDEX_14));
+        entity.setShikibetsuNo(get項目(csvData, 2));
+        entity.setIdoYMD(get項目(csvData, INDEX_3));
+        entity.setTeiseiYMD(get項目(csvData, INDEX_4));
+        entity.setIdoKubunCode(get項目(csvData, INDEX_5));
+        entity.setJukyushaIdoJiyu(get項目(csvData, INDEX_6));
+        entity.setShoKisaiHokenshaNo(get項目(csvData, INDEX_7));
+        entity.setHiHokenshaNo(get項目(csvData, INDEX_8));
+        entity.setSetaiShuyakuNo(get項目(csvData, INDEX_9));
+        entity.setSetaiShotokuKubunCode(get項目(csvData, INDEX_10));
+        entity.setShotokuKubunCode(get項目(csvData, INDEX_11));
+        entity.setRoureiFukushiNenkinJukyuAriFlag(get項目(csvData, INDEX_12));
+        entity.setRiyoshaFutan2DankaiAriFlag(get項目(csvData, INDEX_13));
+        entity.setShikyuShinseishoOutputAriFlag(get項目(csvData, INDEX_14));
         return entity;
+    }
+
+    private RString get項目(List<RString> data, int index) {
+        if (index < data.size()) {
+            return data.get(index);
+        }
+        return RString.EMPTY;
     }
 }

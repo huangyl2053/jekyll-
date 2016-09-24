@@ -94,12 +94,12 @@ public class CreateTmptableProcess extends BatchProcessBase<List<RString>> {
     @Override
     protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
-            if (レコード種別_コントロール.equals(data.get(0))) {
-                outDataKensu.setValue(Integer.valueOf(data.get(INDEX_3).toString()));
-                outDataNengetu.setValue(data.get(INDEX_10));
-                保険者番号 = data.get(INDEX_6);
+            if (レコード種別_コントロール.equals(get項目(data, 0))) {
+                outDataKensu.setValue(Integer.valueOf(get項目(data, INDEX_3).toString()));
+                outDataNengetu.setValue(get項目(data, INDEX_10));
+                保険者番号 = get項目(data, INDEX_6);
             }
-            if (レコード種別_データ.equals(data.get(0))) {
+            if (レコード種別_データ.equals(get項目(data, 0))) {
                 save共同処理用受給者情報(data);
             }
         }
@@ -112,17 +112,17 @@ public class CreateTmptableProcess extends BatchProcessBase<List<RString>> {
     private void save共同処理用受給者情報(List<RString> data) {
         KyoudouShoriYouJukyuusyaJouhou jouhou = new KyoudouShoriYouJukyuusyaJouhou(保険者番号);
         RString 保険者名 = get保険者名();
-        if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報更新結果情報_基本情報.getコード().equals(data.get(2))) {
+        if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報更新結果情報_基本情報.getコード().equals(get項目(data, 2))) {
             基本共同処理一時TBL.insert(jouhou.getDbWT5C31Entity(data, 保険者名));
-        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報更新結果情報_償還情報.getコード().equals(data.get(2))) {
+        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報更新結果情報_償還情報.getコード().equals(get項目(data, 2))) {
             償還共同処理一時TBL.insert(jouhou.getDbWT5D31Entity(data, 保険者名));
-        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報更新結果情報_高額情報.getコード().equals(data.get(2))) {
+        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報更新結果情報_高額情報.getコード().equals(get項目(data, 2))) {
             高額共同処理一時TBL.insert(jouhou.getDbWT5E31Entity(data, 保険者名));
-        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報_基本情報.getコード().equals(data.get(2))) {
+        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報_基本情報.getコード().equals(get項目(data, 2))) {
             基本共同処理一時TBL.insert(jouhou.getDbWT5C41Entity(data, 保険者名));
-        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報_償還情報.getコード().equals(data.get(2))) {
+        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報_償還情報.getコード().equals(get項目(data, 2))) {
             償還共同処理一時TBL.insert(jouhou.getDbWT5D41Entity(data, 保険者名));
-        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報_高額情報.getコード().equals(data.get(2))) {
+        } else if (KokuhorenTorikomiKokanJohoShikibetsuBango.共同処理用受給者情報_高額情報.getコード().equals(get項目(data, 2))) {
             高額共同処理一時TBL.insert(jouhou.getDbWT5E41Entity(data, 保険者名));
         }
     }
@@ -133,6 +133,13 @@ public class CreateTmptableProcess extends BatchProcessBase<List<RString>> {
             if (hokensha != null) {
                 return hokensha.get保険者名();
             }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get項目(List<RString> data, int index) {
+        if (index < data.size()) {
+            return data.get(index);
         }
         return RString.EMPTY;
     }
