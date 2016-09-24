@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd582001.ShukihyoHakkouProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD582001.DBD582001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD582001.DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1771-033 chenxin
  */
-public class DBD582001 extends BatchFlowBase<DBD582001Parameter> {
+public class DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyo extends BatchFlowBase<DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyoParameter> {
 
     private static final String 集計表の発行 = "shukihyoHakkou";
 
