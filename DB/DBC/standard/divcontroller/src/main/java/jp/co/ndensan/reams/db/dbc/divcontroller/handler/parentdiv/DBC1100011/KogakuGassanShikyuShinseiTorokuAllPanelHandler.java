@@ -263,6 +263,31 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     /**
+     * 申請登録状態初期設定のイベントです。
+     */
+    public void 申請登録状態初期設定() {
+        被保険者情報等TABクリア();
+        国保後期資格情報TABクリア();
+        保険者加入情報パネルクリア();
+        設定証記載保険者番号DDL();
+        RDate nowDate = RDate.getNowDate();
+        RString 保険者番号 = DbBusinessConfig.get(
+                ConfigNameDBU.保険者情報_保険者番号, nowDate, SubGyomuCode.DBU介護統計報告);
+        if (RString.isNullOrEmpty(保険者番号)) {
+            div.getTxtTeishutsuHokenshaNo().clearValue();
+        } else {
+            div.getTxtTeishutsuHokenshaNo().setValue(保険者番号);
+        }
+        div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
+        div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(RSTRING_99);
+        div.getTxtRirekiBango().setValue(Decimal.ONE);
+        div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
+        div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.新規.get名称());
+        div.getDdlShikyuShinseiKeitai().setSelectedIndex(INT_0);
+        div.getTxtShinseiYMD().setValue(nowDate);
+    }
+
+    /**
      * 申請対象年度DDLのイベントです。
      */
     public void onChange_ddlShinseiTaisyoNendo() {
