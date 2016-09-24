@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd581001.JissiJyokyohyoHakkouProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd581001.JissiJyokyohyoHakkouProcess2;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd581001.JissiJyokyohyoReportProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001.DBD581001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001.DBD581001_YokaigoNinteiJisshiJokyoHyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1771-020 chenxin
  */
-public class DBD581001 extends BatchFlowBase<DBD581001Parameter> {
+public class DBD581001_YokaigoNinteiJisshiJokyoHyo extends BatchFlowBase<DBD581001_YokaigoNinteiJisshiJokyoHyoParameter> {
 
     private static final String 実施状況表の作成 = "jissiJyokyohyoReport";
     private static final String 実施状況表の発行 = "jissiJyokyohyoHakkou";

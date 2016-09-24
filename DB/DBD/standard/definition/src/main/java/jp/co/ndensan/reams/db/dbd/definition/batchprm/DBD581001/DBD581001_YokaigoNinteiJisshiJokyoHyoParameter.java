@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD581001Parameter extends BatchParameterBase {
+public class DBD581001_YokaigoNinteiJisshiJokyoHyoParameter extends BatchParameterBase {
 
     @BatchParameter(key = "出力帳票", name = "出力帳票")
     private RString 出力帳票;

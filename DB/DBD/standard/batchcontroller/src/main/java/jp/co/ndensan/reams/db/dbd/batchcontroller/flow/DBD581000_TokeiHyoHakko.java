@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581000.DBD581000Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581000.DBD581000_TokeiHyoHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-1771-032 chenxin
  */
-public class DBD581000 extends BatchFlowBase<DBD581000Parameter> {
+public class DBD581000_TokeiHyoHakko extends BatchFlowBase<DBD581000_TokeiHyoHakkoParameter> {
 
     private static final String 実施状況表の発行 = "jissiJyokyohyoHakkou";
     private static final String 受給者数状況表の発行 = "ukeishaJyokyohyoHakkou";

@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -75,6 +76,12 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
     private static final RString より = new RString("＞");
     private RString 出力順;
 
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
+
     @Override
     protected void initialize() {
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
@@ -104,7 +111,10 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        List<RString> pageBreakKeys = new ArrayList<>();
+        set改頁Key(outputOrder, pageBreakKeys);
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(ID.value()).addBreak(
+                new BreakerCatalog<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
@@ -120,6 +130,67 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
     @Override
     protected void afterExecute() {
         バッチ出力条件リストの出力();
+    }
+
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
+    private RString to帳票物理名(RString 項目ID) {
+
+        RString 帳票物理名 = RString.EMPTY;
+
+        if (TokuchiJissekiKanriListSakuseiOrderKey.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("list_2");
+        } else if (TokuchiJissekiKanriListSakuseiOrderKey.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("list_1");
+        } else if (TokuchiJissekiKanriListSakuseiOrderKey.審査年月.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("list_4");
+        } else if (TokuchiJissekiKanriListSakuseiOrderKey.サービス年月.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("list_4");
+        }
+        return 帳票物理名;
     }
 
     private void バッチ出力条件リストの出力() {

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581000;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001.DBD581001Parameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD582001.DBD582001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001.DBD581001_YokaigoNinteiJisshiJokyoHyoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD582001.DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD581000Parameter extends BatchParameterBase {
+public class DBD581000_TokeiHyoHakkoParameter extends BatchParameterBase {
 
     @BatchParameter(key = "出力帳票", name = "出力帳票")
     private RString 出力帳票;
@@ -58,8 +58,8 @@ public class DBD581000Parameter extends BatchParameterBase {
      *
      * @return parameter YokaigoJissiJyokyohyoParameter
      */
-    public DBD581001Parameter toDBD581001Parameter() {
-        DBD581001Parameter parameter = new DBD581001Parameter();
+    public DBD581001_YokaigoNinteiJisshiJokyoHyoParameter toDBD581001Parameter() {
+        DBD581001_YokaigoNinteiJisshiJokyoHyoParameter parameter = new DBD581001_YokaigoNinteiJisshiJokyoHyoParameter();
         parameter.set出力帳票(出力帳票);
         parameter.set対象年度(対象年度);
         parameter.set集計単位(集計単位);
@@ -81,8 +81,8 @@ public class DBD581000Parameter extends BatchParameterBase {
      *
      * @return parameter DBD582001Parameter
      */
-    public DBD582001Parameter toDBD582001Parameter() {
-        DBD582001Parameter parameter = new DBD582001Parameter();
+    public DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyoParameter toDBD582001Parameter() {
+        DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyoParameter parameter = new DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyoParameter();
         parameter.set出力帳票(出力帳票);
         parameter.set対象年度(対象年度);
         parameter.set集計単位(集計単位);
