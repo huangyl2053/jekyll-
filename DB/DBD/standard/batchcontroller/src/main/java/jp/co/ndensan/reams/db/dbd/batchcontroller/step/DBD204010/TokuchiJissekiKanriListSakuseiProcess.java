@@ -182,13 +182,13 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
         RString 帳票物理名 = RString.EMPTY;
 
         if (TokuchiJissekiKanriListSakuseiOrderKey.行政区コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("list_2");
+            帳票物理名 = new RString("gyouseikuCode");
         } else if (TokuchiJissekiKanriListSakuseiOrderKey.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("list_1");
+            帳票物理名 = new RString("hiHokenshaNo");
         } else if (TokuchiJissekiKanriListSakuseiOrderKey.審査年月.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("list_4");
+            帳票物理名 = new RString("shinnsaYM");
         } else if (TokuchiJissekiKanriListSakuseiOrderKey.サービス年月.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("list_4");
+            帳票物理名 = new RString("serviceTeikyoYM");
         }
         return 帳票物理名;
     }
