@@ -612,12 +612,12 @@ public class KanendoKoseiKeisan {
         調定年度期別.set普徴期別額(普徴期別額List);
 
         List<Decimal> 特徴期別額List = new ArrayList<>();
-        普徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額01()));
-        普徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額02()));
-        普徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額03()));
-        普徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額04()));
-        普徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額05()));
-        普徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額06()));
+        特徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額01()));
+        特徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額02()));
+        特徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額03()));
+        特徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額04()));
+        特徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額05()));
+        特徴期別額List.add(金額NULL判定(賦課の情報.get特徴期別金額06()));
         調定年度期別.set特徴期別額(特徴期別額List);
 
         return 調定年度期別;
