@@ -69,8 +69,8 @@ public class NinteishaListSakuseiBusiness {
             if (t.get認定情報Entity() != null
                     && t.get認定情報Entity().get認定情報_要介護状態区分コード() != null
                     && t.get要介護認定申請情報_厚労省IF識別コード() != null) {
-                eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get認定情報Entity().get認定情報_要介護状態区分コード()),
-                        t.get要介護認定申請情報_厚労省IF識別コード()).getName());
+                eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get要介護認定申請情報_厚労省IF識別コード()),
+                        t.get認定情報Entity().get認定情報_要介護状態区分コード()).getName());
             }
             if (t.get認定情報Entity() != null) {
                 eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
