@@ -156,7 +156,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param 連番 連番
      * @return 通知書発行後異動者テーブルのエンティティ
      */
-    public DbT2017TsuchishoHakkogoIdoshaEntity insTsuchishoHakkogoIdosha(DbT2002FukaTempTableEntity fukaTemp, TsuchishoIdoshaTorokuProcessParameter param, int 連番) {
+    public DbT2017TsuchishoHakkogoIdoshaEntity insTsuchishoHakkogoIdosha(DbT2002FukaTempTableEntity fukaTemp,
+            TsuchishoIdoshaTorokuProcessParameter param, int 連番) {
 
         DbT2017TsuchishoHakkogoIdoshaEntity entity = new DbT2017TsuchishoHakkogoIdoshaEntity();
         entity.setReportID(new ReportId(param.get帳票ID()));
