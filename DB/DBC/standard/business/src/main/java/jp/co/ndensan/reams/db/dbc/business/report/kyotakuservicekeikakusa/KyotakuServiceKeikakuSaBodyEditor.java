@@ -67,15 +67,10 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
             }
             source.listList3_3 = 帳票情報.get喪失事由();
 
+            source.listList1_7 = 帳票情報.get申請事由();
             if (帳票情報.get受給申請日() != null) {
                 FlexibleDate 申請日 = 帳票情報.get受給申請日();
                 source.listList1_6 = パターン4(申請日);
-
-            }
-            if (帳票情報.get受給申請日() != null
-                    && 帳票情報.get申請事由() != null) {
-                FlexibleDate 申請日 = 帳票情報.get受給申請日();
-                source.listList1_7 = 帳票情報.get申請事由();
                 source.listList3_4 = パターン4(申請日).concat(記号).concat(帳票情報.get申請事由());
             }
 
