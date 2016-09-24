@@ -28,7 +28,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
     /**
      * 印字様式番号別集計。
      *
-     * @param inList
+     * @param inList List<YoushikiBangouBetuKingakuEntity>
      * @return List<InjiYoushikiBangouBetuKingaku>
      */
     public List<InjiYoushikiBangouBetuKingaku> sumKingakuBy印字様式番号(List<YoushikiBangouBetuKingakuEntity> inList) {
