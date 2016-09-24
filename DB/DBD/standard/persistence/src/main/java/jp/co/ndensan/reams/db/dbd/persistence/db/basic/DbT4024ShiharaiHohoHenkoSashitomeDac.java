@@ -145,6 +145,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
      * @return 支払方法変更差止
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT4024ShiharaiHohoHenkoSashitomeEntity> select支払方法変更差止(HihokenshaNo 被保険者番号,
