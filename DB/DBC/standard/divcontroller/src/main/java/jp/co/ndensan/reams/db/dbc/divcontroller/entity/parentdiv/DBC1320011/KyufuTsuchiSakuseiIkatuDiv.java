@@ -9,17 +9,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
  * KyufuTsuchiSakuseiIkatu のクラスファイル
@@ -103,6 +96,11 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     @JsonIgnore
     public void setChkServiceSyuruiSyuyaku(CheckBoxList chkServiceSyuruiSyuyaku) {
         this.getKyufuTsuchiSakusei().setChkServiceSyuruiSyuyaku(chkServiceSyuruiSyuyaku);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getKyufuTsuchiSakusei().getCcdHokenshaList();
     }
 
     @JsonIgnore
@@ -246,8 +244,8 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public IPrintContentsSettingDiv getKyufuTsuchiSakuseiSetting() {
-        return this.getKyufuTsuchiSakuseiPrint().getKyufuTsuchiSakuseiSetting();
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+        return this.getKyufuTsuchiSakuseiPrint().getCcdChohyoShutsuryokujun();
     }
 
     @JsonIgnore
@@ -256,8 +254,8 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return this.getKyufuTsuchiSakuseiPrint().getCcdChohyoShutsuryokujun();
+    public IPrintContentsSettingDiv getKyufuTsuchiSakuseiSetting() {
+        return this.getKyufuTsuchiSakuseiPrint().getKyufuTsuchiSakuseiSetting();
     }
 
     // </editor-fold>
