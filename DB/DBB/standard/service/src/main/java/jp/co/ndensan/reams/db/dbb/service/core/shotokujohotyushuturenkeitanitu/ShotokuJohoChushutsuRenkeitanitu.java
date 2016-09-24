@@ -37,6 +37,9 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 異動_単一 = new RString("4");
     private static final RString 枝番 = new RString("0001");
 
+    /**
+     * コンストラクタです。
+     */
     ShotokuJohoChushutsuRenkeitanitu() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
