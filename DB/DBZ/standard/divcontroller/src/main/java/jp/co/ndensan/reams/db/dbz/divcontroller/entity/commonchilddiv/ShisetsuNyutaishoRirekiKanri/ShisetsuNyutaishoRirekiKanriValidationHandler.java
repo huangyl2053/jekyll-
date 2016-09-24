@@ -31,6 +31,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
     private final RString 追加 = new RString("追加");
     private final RString 更新 = new RString("修正");
     private final RString RS_ICHI = new RString("1");
+    private final RString KEY = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -175,7 +176,8 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
     private ValidationMessageControlPairs check保険者番号(ValidationMessageControlPairs validPairs, RString 住所地特例フラグ) {
         if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())
                 && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())
-                && DaichoType.被保険者.getコード().equals(div.getCcdShisetsuJoho().getDaichoShubetsu())
+                && (DaichoType.被保険者.getコード().equals(div.getCcdShisetsuJoho().getDaichoShubetsu())
+                || KEY.equals(div.getCcdShisetsuJoho().getDaichoShubetsu()))
                 && (ShisetsuType.介護保険施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類())
                 || ShisetsuType.住所地特例対象施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類()))
                 && RString.isNullOrEmpty(div.getTxtHokensha().getValue()) && RS_ICHI.equals(住所地特例フラグ)) {
