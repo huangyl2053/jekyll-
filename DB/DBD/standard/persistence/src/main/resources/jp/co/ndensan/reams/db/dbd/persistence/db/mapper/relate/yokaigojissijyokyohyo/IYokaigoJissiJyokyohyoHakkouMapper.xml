@@ -3482,10 +3482,10 @@
     </sql>
     
     <sql id="条件A">
-        AND (A."dataKubun" IN ('31','32','33','34','35','36','37','39')
-            OR  A."dataKubun" IN ('41','42','43','44','45','49')
+        AND (A."dataKubun" = '00'
+            OR  A."dataKubun" IN ('31','32','33','34','35','36','37','39')
+            OR  A."dataKubun" IN ('41','42','43','44','45','49'))
             AND A."jukyuShinseiJiyu" != '7'
-        )
     </sql>
     <sql id="条件B">
         AND (A."dataKubun" IN ('41','42','43','44','45','49')
@@ -3498,25 +3498,24 @@
         )
     </sql>
     <sql id="条件D">
-        AND (A."dataKubun" IN ('11','12','13','14','15','19')
-            OR(A."dataKubun" IN ('21','22','23','24','25','29')
+        AND (A."dataKubun" = '00'
+            OR  A."dataKubun" IN ('21','22','23','24','25','29'))
             AND(A."yukoMukoKubun"='1' 
             OR (A."yukoMukoKubun"='2'
             AND A."yokaigoJotaiKubunCode"='01'
             AND A."shikakuSoshitsuYMD" IS NULL)))
-        )
     </sql>
     <sql id="条件E">
-        AND (A."dataKubun" IN ('11','12','13','14','15','19')
-            OR(A."dataKubun" IN ('21','22','23','24','25','29')
-            AND A."yukoMukoKubun"='1' )
-        )
+        AND (A."dataKubun" = '00'
+            OR  A."dataKubun" IN ('11','12','13','14','15','19')
+            OR  A."dataKubun" IN ('21','22','23','24','25','29'))
+            AND A."yukoMukoKubun"='1' 
     </sql>
     <sql id="条件F">
-        AND( A."dataKubun" IN ('11','12','13','14','15','19')
-            OR(A."dataKubun" IN ('21','22','23','24','25','29')
-            AND A."shikakuSoshitsuYMD" IS NULL)
-        )
+        AND (A."dataKubun" = '00'
+            OR  A."dataKubun" IN ('11','12','13','14','15','19')
+            OR  A."dataKubun" IN ('21','22','23','24','25','29'))
+            AND A."shikakuSoshitsuYMD" IS NULL
     </sql>
     <sql id="新規のデータ取得">
          AND((A."jukyuShinseiJiyu"='1'
@@ -3581,11 +3580,11 @@
     </sql>
     <sql id="転入のデータ取得2">
         AND A."jukyuShinseiJiyu"='7'
-        AND A."dataKubun" IS NULL
+        AND A."dataKubun" = '00'
     </sql>
     <sql id="転入旧措置のデータ取得2">
         AND A."jukyuShinseiJiyu"='7'
-        AND A."dataKubun" IS NULL
+        AND A."dataKubun" == '00'
         AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="職権他のデータ取得2">
