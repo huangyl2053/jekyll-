@@ -32,7 +32,7 @@ public class KogakuServiceJyuryoKakuninShoEditor implements
 
     @Override
     public KogakuServiceJyuryoKakuninShoSource edit(KogakuServiceJyuryoKakuninShoSource source) {
-//        source.bunshoNo = entity.get文書番号();
+        source.bunshoNo = entity.get文書番号();
 //        source.tsuchiBun1 = entity.get通知文１();
 //        source.hihokenshaNameKana = entity.get被保険者氏名フリガナ();
 //        source.hihokenshaName = entity.get被保険者氏名();
