@@ -199,8 +199,9 @@ public class JyukyushaDaichoHandler {
             parameter.set出力オプション区分(KEY1);
         }
         parameter.set出力順設定リスト(get画面出力順());
+        get画面初期();
         if (shoriDateKanri != null) {
-            parameter.set市町村コード(new RString(shoriDateKanri.get市町村コード().toString()));
+            parameter.set市町村コード(shoriDateKanri.get市町村コード().value());
         }
     }
 
