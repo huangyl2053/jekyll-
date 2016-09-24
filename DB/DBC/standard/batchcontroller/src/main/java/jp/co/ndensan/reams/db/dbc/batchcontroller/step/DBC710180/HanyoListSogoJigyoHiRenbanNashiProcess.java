@@ -64,9 +64,9 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 基本情報 = new RString("基本情報のみ");
-    private static final RString 基本明細情報 = new RString("基本情報+明細情報");
-    private static final RString 基本集計情報 = new RString("基本情報+集計情報");
-    private static final RString 基本ケアマネジメント情報 = new RString("基本情報+ケアマネジメント費情報");
+    private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
+    private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
+    private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
     private static final RString 被保険者番号 = new RString("0104");
     private static final RString サービス年月 = new RString("0301");
     private static final RString 整理番号 = new RString("0305");

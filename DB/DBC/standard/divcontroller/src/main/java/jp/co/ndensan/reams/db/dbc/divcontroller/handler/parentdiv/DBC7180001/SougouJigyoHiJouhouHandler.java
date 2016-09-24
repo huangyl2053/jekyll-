@@ -40,6 +40,7 @@ public class SougouJigyoHiJouhouHandler {
     private static final RString 作成区分_KEY3 = new RString("key3");
     private static final RString 全て市町村 = new RString("000000");
     private static final RString DATADOURCE = new RString("DATADOURCE");
+    private static final RString 基本情報 = new RString("基本情報のみ");
     private final SougouJigyoHiJouhouDiv div;
     private static Map<RString, List<KeyValueDataSource>> map;
 
@@ -201,8 +202,13 @@ public class SougouJigyoHiJouhouHandler {
                         new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
             }
         }
-        div.getRadSakuseiKubun().setSelectedValue(restoreBatchParameterMap.getParameterValue(
-                RString.class, new RString("抽出方法")));
+        RString 抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出方法"));
+        div.getRadSakuseiKubun().setSelectedValue(抽出方法);
+        if (基本情報.equals(抽出方法)) {
+            div.getDdlSabisuSyurui().setReadOnly(true);
+        } else {
+            div.getDdlSabisuSyurui().setReadOnly(false);
+        }
         div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
                 new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
         RString syuruicode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("サービス種類コード"));
