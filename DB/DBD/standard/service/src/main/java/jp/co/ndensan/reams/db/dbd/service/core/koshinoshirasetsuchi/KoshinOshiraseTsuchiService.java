@@ -358,9 +358,9 @@ public class KoshinOshiraseTsuchiService {
         }
         entity.set被保険者名称カナ(koshinOshiraseEn.getDbt4101Entity().getHihokenshaKana().getColumnValue());
         entity.set出生年YYYY(RString.EMPTY);
-        entity.set生まれYY(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getYear());
-        entity.set出生月MM(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getMonth());
-        entity.set出生日DD(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getDay());
+        entity.set生まれYY(deleteFirstZero(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getYear()));
+        entity.set出生月MM(deleteFirstZero(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getMonth()));
+        entity.set出生日DD(deleteFirstZero(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getDay()));
         entity.set被保険者名称(koshinOshiraseEn.getDbt4101Entity().getHihokenshaName().getColumnValue());
         if (Seibetsu.男.getコード().equals(koshinOshiraseEn.getDbt4101Entity().getSeibetsu().getColumnValue())) {
             entity.set性別男(まる);
@@ -395,6 +395,16 @@ public class KoshinOshiraseTsuchiService {
         entity.set有効終了日DD(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD().wareki().getDay());
 
         return entity;
+    }
+
+    private RString deleteFirstZero(RString rstr) {
+        if (rstr == null || rstr.isEmpty()) {
+            return RString.EMPTY;
+        }
+        if (rstr.startsWith(new RString("0"))) {
+            rstr = rstr.substring(1);
+        }
+        return rstr;
     }
 
     private void set通知書発行一覧(KoshinOshiraseHeaderEntity twonin, KoshinOshiraseTsuchiUpdateEntity koshinOshiraseEn, int index) {
