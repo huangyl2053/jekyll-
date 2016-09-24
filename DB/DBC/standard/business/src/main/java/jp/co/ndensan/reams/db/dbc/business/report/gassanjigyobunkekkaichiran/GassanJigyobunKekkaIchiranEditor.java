@@ -137,6 +137,12 @@ public class GassanJigyobunKekkaIchiranEditor implements
                 source.List1_15 = 証明書あり;
             }
 
+            source.gyoseiCode = 帳票用データ.getGyoseiCode();
+            source.jushoCode = 帳票用データ.getJushoCode();
+            source.shichosonCode = 帳票用データ.getShichosonCode();
+            source.yubinNo = 帳票用データ.getYubinNo();
+            source.taishoNendo = 帳票用データ.getTaishoNendo();
+            source.shoKisaiHokenshaNo = 帳票用データ.getShoKisaiHokenshaNo();
         }
 
         return source;
