@@ -591,12 +591,12 @@ public class KariSanteiIdoFuka {
      */
     public RString getIraikinKeisanShoriKubun(FlexibleYear 調定年度, RYearMonth 算定月) {
         List<DbT7022ShoriDateKanriEntity> 特徴対象者同定list
-                = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.特徴対象者同定.get名称(), 年度内連番_1);
+                = 処理日付管理Dac.select処理状況(調定年度, ShoriName.特徴対象者同定.get名称(), 年度内連番_1);
         if (特徴対象者同定list.isEmpty()) {
             return 特徴同定未完了;
         }
         List<DbT7022ShoriDateKanriEntity> 依頼金額計算list
-                = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.依頼金額計算.get名称(), 年度内連番_2);
+                = 処理日付管理Dac.select処理状況(調定年度, ShoriName.依頼金額計算.get名称(), 年度内連番_2);
         YMDHMS 基準日時1 = 特徴対象者同定list.get(0).getKijunTimestamp();
         if (基準日時1 == null || 基準日時1.isEmpty()) {
             return 特徴同定未完了;
