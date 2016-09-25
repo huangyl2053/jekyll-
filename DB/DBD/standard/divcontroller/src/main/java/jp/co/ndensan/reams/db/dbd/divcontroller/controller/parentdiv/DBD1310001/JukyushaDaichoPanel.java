@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1310001
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1300001.JukyushaDaichoPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+//import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 画面設計_DBDGM13003_汎用リスト出力(受給者台帳)
@@ -24,7 +24,7 @@ public class JukyushaDaichoPanel {
      * @return ResponseData<JukyushaDaichoPanelDiv>
      */
     public ResponseData<JukyushaDaichoPanelDiv> onLoad(JukyushaDaichoPanelDiv div) {
-        getHandler(div).onLoad(ResponseHolder.getMenuID());
+        // getHandler(div).onLoad(ResponseHolder.getMenuID());
         return ResponseData.of(div).respond();
     }
 }
