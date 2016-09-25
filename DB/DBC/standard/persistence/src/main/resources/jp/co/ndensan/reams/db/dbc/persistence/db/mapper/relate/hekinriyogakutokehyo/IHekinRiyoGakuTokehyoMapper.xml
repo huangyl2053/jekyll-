@@ -1,8 +1,8 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
- @reamsid_L DBC-3490-050 yaoyahui 
- どのマッパーインターフェースと対応するかを指定する 
+<!-- @reamsid_L DBC-3490-050 yaoyahui  -->
+<!-- どのマッパーインターフェースと対応するかを指定する  -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper">
     <resultMap id="resultMap_getEntityList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.KyufujissekiTempTblEntity" autoMapping="true">
         <result property="hiHokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -651,4 +651,4 @@
         "DbWTkyufujisTempTbl"."serviceBunrui" AS サービス分類 
         
     </sql>
-</mapper>-->
+</mapper>
