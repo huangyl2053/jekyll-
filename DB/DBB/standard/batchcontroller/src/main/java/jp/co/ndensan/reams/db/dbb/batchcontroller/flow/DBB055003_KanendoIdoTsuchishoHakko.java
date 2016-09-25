@@ -59,7 +59,7 @@ public class DBB055003_KanendoIdoTsuchishoHakko extends BatchFlowBase<DBB055003_
     private static final String PRINT_NONYUTSUCHISHO_PROCESS = "prtNonyuTsuchishoProcess";
     private static final String INSERT_NONYUTSUCHISHO_PROCESS = "insTsuchishoHakkogoIdoshaNonyuProcess";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString チェックする = new RString("1");
     private static final RString 回目１ = new RString("1");
     private static final RString 回目２ = new RString("2");

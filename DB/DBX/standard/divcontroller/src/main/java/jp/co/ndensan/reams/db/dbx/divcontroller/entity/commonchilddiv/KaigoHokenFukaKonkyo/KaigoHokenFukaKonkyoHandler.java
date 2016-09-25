@@ -53,7 +53,10 @@ public class KaigoHokenFukaKonkyoHandler {
     public void init(ShoriDateKanri 処理日付管理情報, FukaJohoRelateSearchResult resultMax,
             List<FukaJohoRelateSearchResult> resultList) {
 
-        if (処理日付管理情報 != null
+        div.getBtnBefore().setDisabled(true);
+        div.getBtnAfter().setDisabled(true);
+        if (処理日付管理情報 != null && 処理日付管理情報.get基準日時() != null
+                && resultMax.get介護賦課Result().get調定日時() != null
                 && 処理日付管理情報.get基準日時().isBeforeOrEquals(resultMax.get介護賦課Result().get調定日時())) {
             set本算定状態(resultMax);
         } else {
@@ -66,9 +69,9 @@ public class KaigoHokenFukaKonkyoHandler {
             }
             if (!resultList仮算定用.isEmpty()) {
                 FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
-                set仮算定状態(resultMax仮算定用);   //1.5
+                set仮算定状態(resultMax仮算定用);
             }
-        }   //1.4
+        }
         List<FlexibleYear> 調定年度List = new ArrayList<>();
         List<FlexibleYear> 賦課年度List = new ArrayList<>();
         List<TsuchishoNo> 通知書番号List = new ArrayList<>();
@@ -90,23 +93,34 @@ public class KaigoHokenFukaKonkyoHandler {
         List<KeyValueDataSource> dataSource調定年度 = new ArrayList<>();
         List<KeyValueDataSource> dataSource賦課年度 = new ArrayList<>();
         List<KeyValueDataSource> dataSource通知書番号 = new ArrayList<>();
-        for (FlexibleYear 調定年度 : 調定年度List) {
-            dataSource調定年度.add(new KeyValueDataSource(調定年度.seireki().toDateString(),
-                    調定年度.wareki().toDateString()));
+        if (!調定年度List.isEmpty()) {
+            for (FlexibleYear 調定年度 : 調定年度List) {
+                dataSource調定年度.add(new KeyValueDataSource(調定年度.seireki().toDateString(),
+                        調定年度.wareki().toDateString()));
+            }
+            div.getDdlChoteiNendo().setDataSource(sort降順ByKey(dataSource調定年度));
+            div.getDdlChoteiNendo().setSelectedIndex(0);
         }
-        div.getDdlChoteiNendo().setDataSource(dataSource調定年度);  // 1.6
-        for (FlexibleYear 賦課年度 : 賦課年度List) {
-            dataSource賦課年度.add(new KeyValueDataSource(賦課年度.seireki().toDateString(),
-                    賦課年度.wareki().toDateString()));
+        if (!賦課年度List.isEmpty()) {
+            for (FlexibleYear 賦課年度 : 賦課年度List) {
+                dataSource賦課年度.add(new KeyValueDataSource(賦課年度.seireki().toDateString(),
+                        賦課年度.wareki().toDateString()));
+            }
+            div.getDdlFukaNendo().setDataSource(sort降順ByKey(dataSource賦課年度));
+            div.getDdlFukaNendo().setSelectedIndex(0);
         }
-        div.getDdlFukaNendo().setDataSource(dataSource賦課年度);  // 1.7
-        for (TsuchishoNo 通知書番号 : 通知書番号List) {
-            dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(), 通知書番号.getColumnValue()));
+        if (!通知書番号List.isEmpty()) {
+            for (TsuchishoNo 通知書番号 : 通知書番号List) {
+                dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(), 通知書番号.getColumnValue()));
+            }
+            div.getDdlTsuchishoNo().setDataSource(sort降順ByKey(dataSource通知書番号));
+            div.getDdlTsuchishoNo().setSelectedIndex(0);
         }
-        div.getDdlTsuchishoNo().setDataSource(dataSource通知書番号);  // 1.8
     }
 
     private void set本算定状態(FukaJohoRelateSearchResult resultMax) {
+
+        init本算定状態();
         HihokenshaNo 被保険者番号 = resultMax.get介護賦課Result().get被保険者番号();
         div.getTxtHihokenshaNo().setValue(被保険者番号 == null ? null : 被保険者番号.getColumnValue());
         int 履歴番号 = resultMax.get介護賦課Result().get履歴番号();
@@ -127,40 +141,33 @@ public class KaigoHokenFukaKonkyoHandler {
         FlexibleDate 老年終了日 = resultMax.get介護賦課Result().get老年廃止日();
         div.getLblRonenShuryobiData().setText(老年終了日 == null ? null : 老年終了日.wareki().toDateString());
 
-        div.getLblMaenendoHokenryoDankai().setDisplayNone(true);
-        div.getLblHonninKazei().setDisplayNone(false);
-        div.getLblFukaKonkyoData1().setText(resultMax.get介護賦課Result().get課税区分().get名称());
-        div.getLblZennendoHokenryoRitsu().setDisplayNone(true);
-        div.getLblSetaiKazei().setDisplayNone(false);
-        div.getLblFukaKonkyoData2().setText(resultMax.get介護賦課Result().get世帯課税区分().get名称());
-        div.getLblZennendoNengakuHokenryo().setDisplayNone(true);
-        div.getLblGokeiShotokuKingaku().setDisplayNone(false);
+        div.getLblFukaKonkyoData1().setText(resultMax.get介護賦課Result().get課税区分名称());
+        div.getLblFukaKonkyoData2().setText(resultMax.get介護賦課Result().get世帯課税区分名称());
         div.getLblFukaKonkyoData3().setText(doカンマ編集(resultMax.get介護賦課Result().get合計所得金額()));
-        div.getLblNenkinShunyugaku().setDisplayNone(false);
         div.getLblFukaKonkyoData4().setText(doカンマ編集(resultMax.get介護賦課Result().get公的年金収入額()));
-        div.getLblHokenryoDankai().setDisplayNone(false);
+
         div.getLblFukaKonkyoData5().setText(RString.isNullOrEmpty(resultMax.get介護賦課Result().get保険料算定段階2())
                 ? resultMax.get介護賦課Result().get保険料算定段階1() : resultMax.get介護賦課Result().get保険料算定段階2());
-        div.getLblKarisanteiKeisanjoHokenryogaku().setDisplayNone(true);
-        div.getLblKeisanjoNenkanHokenryogaku().setDisplayNone(false);
+
         div.getLblFukaKonkyoData6().setText(doカンマ編集(resultMax.get介護賦課Result().get減免前介護保険料_年額()));
         div.getLblFukaKonkyoData7().setText(doカンマ編集(resultMax.get介護賦課Result().get減免額()));
-        div.getLblKarisanteiHokenryogaku().setDisplayNone(true);
-        div.getLblKakuteiNenkanHokenryogaku().setDisplayNone(false);
+
         div.getLblFukaKonkyoData8().setText(doカンマ編集(resultMax.get介護賦課Result().get確定介護保険料_年額()));
 
         FlexibleYearMonth 月割開始年月1 = resultMax.get介護賦課Result().get月割開始年月1();
         FlexibleYearMonth 月割終了年月1 = resultMax.get介護賦課Result().get月割終了年月1();
         div.getLblKikanData1().setText(月割開始年月1 != null && 月割終了年月1 != null
                 ? 月割開始年月1.wareki().toDateString().concat(符号).concat(月割終了年月1.wareki().toDateString()) : null);
-        if (月割開始年月1 != null && 月割終了年月1 != null) {
+        if (月割開始年月1 != null && !RString.isNullOrEmpty(月割開始年月1.toDateString())
+                && 月割終了年月1 != null && !RString.isNullOrEmpty(月割終了年月1.toDateString())) {
             int 月数1 = 月割終了年月1.getBetweenMonths(月割開始年月1);
             div.getLblGessuData1().setText(new RString(月数1));
         }
         div.getLblHokenryoDankaiKubunData1().setText(resultMax.get介護賦課Result().get保険料算定段階1());
         Decimal 保険料率1 = resultMax.get介護賦課Result().get算定年額保険料1();
         div.getLblHokenryoritsuData1().setText(doカンマ編集(保険料率1));
-        if (保険料率1 != null && 月割開始年月1 != null && 月割終了年月1 != null) {
+        if (保険料率1 != null && 月割開始年月1 != null && !RString.isNullOrEmpty(月割開始年月1.toDateString())
+                && 月割終了年月1 != null && !RString.isNullOrEmpty(月割終了年月1.toDateString())) {
             Decimal 保険料算出額1 = 保険料率1.multiply(月割終了年月1.getBetweenMonths(月割開始年月1)).
                     divide(INT_12).roundHalfUpTo(0);
             div.getLblHokenryoSanshutsugakuData1().setText(doカンマ編集(保険料算出額1));
@@ -169,14 +176,16 @@ public class KaigoHokenFukaKonkyoHandler {
         FlexibleYearMonth 月割終了年月2 = resultMax.get介護賦課Result().get月割終了年月2();
         div.getLblKikanData2().setText(月割開始年月2 != null && 月割終了年月2 != null
                 ? 月割開始年月2.wareki().toDateString().concat(符号).concat(月割終了年月2.wareki().toDateString()) : null);
-        if (月割開始年月2 != null && 月割終了年月2 != null) {
+        if (月割開始年月2 != null && !RString.isNullOrEmpty(月割開始年月2.toDateString())
+                && 月割終了年月2 != null && !RString.isNullOrEmpty(月割終了年月2.toDateString())) {
             int 月数2 = 月割終了年月2.getBetweenMonths(月割開始年月2);
             div.getLblGessuData2().setText(new RString(月数2));
         }
         div.getLblHokenryoDankaiKubunData2().setText(resultMax.get介護賦課Result().get保険料算定段階2());
         Decimal 保険料率2 = resultMax.get介護賦課Result().get算定年額保険料2();
         div.getLblHokenryoritsuData2().setText(doカンマ編集(保険料率2));
-        if (保険料率2 != null && 月割開始年月2 != null && 月割終了年月2 != null) {
+        if (保険料率2 != null && 月割開始年月2 != null && !RString.isNullOrEmpty(月割開始年月2.toDateString())
+                && 月割終了年月2 != null && !RString.isNullOrEmpty(月割終了年月2.toDateString())) {
             Decimal 保険料算出額2 = 保険料率2.multiply(月割終了年月2.getBetweenMonths(月割開始年月2)).
                     divide(INT_12).roundHalfUpTo(0);
             div.getLblHokenryoSanshutsugakuData2().setText(doカンマ編集(保険料算出額2));
@@ -193,6 +202,8 @@ public class KaigoHokenFukaKonkyoHandler {
     }
 
     private void set仮算定状態(FukaJohoRelateSearchResult resultMax仮算定用) {
+
+        init仮算定状態();
         HihokenshaNo 被保険者番号 = resultMax仮算定用.get介護賦課Result().get被保険者番号();
         div.getTxtHihokenshaNo().setValue(被保険者番号 == null ? null : 被保険者番号.getColumnValue());
         int 履歴番号 = resultMax仮算定用.get介護賦課Result().get履歴番号();
@@ -213,34 +224,22 @@ public class KaigoHokenFukaKonkyoHandler {
         FlexibleDate 老年終了日 = resultMax仮算定用.get介護賦課Result().get老年廃止日();
         div.getLblRonenShuryobiData().setText(老年終了日 == null ? null : 老年終了日.wareki().toDateString());
 
-        div.getLblMaenendoHokenryoDankai().setDisplayNone(false);
-        div.getLblHonninKazei().setDisplayNone(true);
         div.getLblFukaKonkyoData1().setText(
                 RString.isNullOrEmpty(resultMax仮算定用.get介護賦課Result().get保険料算定段階2())
                 ? resultMax仮算定用.get介護賦課Result().get保険料算定段階1()
                 : resultMax仮算定用.get介護賦課Result().get保険料算定段階2());
-        div.getLblZennendoHokenryoRitsu().setDisplayNone(false);
-        div.getLblSetaiKazei().setDisplayNone(true);
         div.getLblFukaKonkyoData2().setText(doカンマ編集(
                 resultMax仮算定用.get介護賦課Result().get算定年額保険料2() == null
                 ? resultMax仮算定用.get介護賦課Result().get算定年額保険料1()
                 : resultMax仮算定用.get介護賦課Result().get算定年額保険料2()));
-        div.getLblZennendoNengakuHokenryo().setDisplayNone(false);
-        div.getLblGokeiShotokuKingaku().setDisplayNone(true);
         Decimal 前年度年額保険料 = resultMax仮算定用.get介護賦課Result().get確定介護保険料_年額();
         div.getLblFukaKonkyoData3().setText(doカンマ編集(前年度年額保険料));
-        div.getLblNenkinShunyugaku().setDisplayNone(true);
-        div.getLblHokenryoDankai().setDisplayNone(true);
-        div.getLblKarisanteiKeisanjoHokenryogaku().setDisplayNone(false);
-        div.getLblKeisanjoNenkanHokenryogaku().setDisplayNone(true);
         Decimal 減免額 = resultMax仮算定用.get介護賦課Result().get減免額();
         Decimal 仮算定保険料額 = resultMax仮算定用.get調定額();
         if (減免額 != null && 仮算定保険料額 != null) {
             div.getLblFukaKonkyoData6().setText(doカンマ編集(仮算定保険料額.add(減免額)));
         }
         div.getLblFukaKonkyoData7().setText(doカンマ編集(減免額));
-        div.getLblKarisanteiHokenryogaku().setDisplayNone(false);
-        div.getLblKakuteiNenkanHokenryogaku().setDisplayNone(true);
         div.getLblFukaKonkyoData8().setText(doカンマ編集(仮算定保険料額));
 
         ChoteiJiyu 調定事由1 = resultMax仮算定用.get介護賦課Result().get調定事由1();
@@ -263,82 +262,119 @@ public class KaigoHokenFukaKonkyoHandler {
     /**
      * 賦課年度DDLと通知書番号DDLのDataSourceを再設定します。
      *
-     * @param 賦課根拠情報 List<FukaJohoRelateSearchResult>
+     * @param 賦課根拠情報List List<FukaJohoRelateSearchResult>
      */
-    public void setDDL再表示(List<FukaJohoRelateSearchResult> 賦課根拠情報) {
+    public void setDDL再表示(List<FukaJohoRelateSearchResult> 賦課根拠情報List) {
 
         div.getDdlFukaNendo().getDataSource().clear();
         div.getDdlTsuchishoNo().getDataSource().clear();
         List<FlexibleYear> 賦課年度List = new ArrayList<>();
         List<TsuchishoNo> 通知書番号List = new ArrayList<>();
         FlexibleYear 画面調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey());
-        for (FukaJohoRelateSearchResult result : 賦課根拠情報) {
+        for (FukaJohoRelateSearchResult result : 賦課根拠情報List) {
             if (画面調定年度.equals(result.get介護賦課Result().get調定年度())
                     && !賦課年度List.contains(result.get介護賦課Result().get賦課年度())) {
                 賦課年度List.add(result.get介護賦課Result().get賦課年度());
             }
         }
-        List<KeyValueDataSource> dataSource賦課年度 = new ArrayList<>();
-        for (FlexibleYear 賦課年度 : 賦課年度List) {
-            dataSource賦課年度.add(new KeyValueDataSource(賦課年度.seireki().toDateString(),
-                    賦課年度.wareki().toDateString()));
-        }
-        div.getDdlFukaNendo().setDataSource(sort降順ByKey(dataSource賦課年度));
-        if (!dataSource賦課年度.isEmpty()) {
+        if (!賦課年度List.isEmpty()) {
+            List<KeyValueDataSource> dataSource賦課年度 = new ArrayList<>();
+            for (FlexibleYear 賦課年度 : 賦課年度List) {
+                dataSource賦課年度.add(new KeyValueDataSource(賦課年度.seireki().toDateString(),
+                        賦課年度.wareki().toDateString()));
+            }
+            div.getDdlFukaNendo().setDataSource(sort降順ByKey(dataSource賦課年度));
+            div.getDdlFukaNendo().setSelectedIndex(0);
             List<KeyValueDataSource> dataSource通知書番号 = new ArrayList<>();
-            for (FukaJohoRelateSearchResult result : 賦課根拠情報) {
+            for (FukaJohoRelateSearchResult result : 賦課根拠情報List) {
                 if (画面調定年度.equals(result.get介護賦課Result().get調定年度())
-                        && sort降順ByKey(dataSource賦課年度).get(0).getKey().
+                        && div.getDdlFukaNendo().getSelectedKey().
                         equals(result.get介護賦課Result().get賦課年度().toDateString())
                         && !通知書番号List.contains(result.get介護賦課Result().get通知書番号())) {
                     通知書番号List.add(result.get介護賦課Result().get通知書番号());
                 }
             }
-            for (TsuchishoNo 通知書番号 : 通知書番号List) {
-                dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(), 通知書番号.getColumnValue()));
+            if (!通知書番号List.isEmpty()) {
+                for (TsuchishoNo 通知書番号 : 通知書番号List) {
+                    dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(), 通知書番号.getColumnValue()));
+                }
+                div.getDdlTsuchishoNo().setDataSource(sort降順ByKey(dataSource通知書番号));
+                div.getDdlTsuchishoNo().setSelectedIndex(0);
             }
-            div.getDdlTsuchishoNo().setDataSource(sort降順ByKey(dataSource通知書番号));
         }
     }
 
     /**
      * 通知書番号DDLのDataSourceを再設定します。
      *
-     * @param 賦課根拠情報 List<FukaJohoRelateSearchResult>
+     * @param 賦課根拠情報List List<FukaJohoRelateSearchResult>
      */
-    public void set通知書番号DDL再表示(List<FukaJohoRelateSearchResult> 賦課根拠情報) {
+    public void set通知書番号DDL再表示(List<FukaJohoRelateSearchResult> 賦課根拠情報List) {
 
         div.getDdlTsuchishoNo().getDataSource().clear();
         List<TsuchishoNo> 通知書番号List = new ArrayList<>();
         FlexibleYear 画面調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey());
         FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
-        for (FukaJohoRelateSearchResult result : 賦課根拠情報) {
+        for (FukaJohoRelateSearchResult result : 賦課根拠情報List) {
             if (画面調定年度.equals(result.get介護賦課Result().get調定年度())
                     && 画面賦課年度.equals(result.get介護賦課Result().get賦課年度())
                     && !通知書番号List.contains(result.get介護賦課Result().get通知書番号())) {
                 通知書番号List.add(result.get介護賦課Result().get通知書番号());
             }
         }
-        List<KeyValueDataSource> dataSource通知書番号 = new ArrayList<>();
-        for (TsuchishoNo 通知書番号 : 通知書番号List) {
-            dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(), 通知書番号.getColumnValue()));
+        if (!通知書番号List.isEmpty()) {
+            List<KeyValueDataSource> dataSource通知書番号 = new ArrayList<>();
+            for (TsuchishoNo 通知書番号 : 通知書番号List) {
+                dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(), 通知書番号.getColumnValue()));
+            }
+            div.getDdlTsuchishoNo().setDataSource(sort降順ByKey(dataSource通知書番号));
+            div.getDdlTsuchishoNo().setSelectedIndex(0);
         }
-        div.getDdlTsuchishoNo().setDataSource(sort降順ByKey(dataSource通知書番号));
+    }
+
+    /**
+     * 指定データの取得と画面の再表示です。
+     *
+     * @param 処理日付管理情報 ShoriDateKanri
+     * @param resultList List<FukaJohoRelateSearchResult>
+     */
+    public void btnSearch(ShoriDateKanri 処理日付管理情報, List<FukaJohoRelateSearchResult> resultList) {
+
+        FukaJohoRelateSearchResult 指定賦課情報 = get指定賦課情報(resultList);
+        if (指定賦課情報 != null) {
+            if (処理日付管理情報 != null && 処理日付管理情報.get基準日時() != null
+                    && 指定賦課情報.get介護賦課Result().get調定日時() != null
+                    && 処理日付管理情報.get基準日時().isBeforeOrEquals(指定賦課情報.get介護賦課Result().get調定日時())) {
+                set本算定状態(指定賦課情報);
+            } else {
+                List<FukaJohoRelateSearchResult> resultList仮算定用 = new ArrayList<>();
+                for (FukaJohoRelateSearchResult result : resultList) {
+                    if (指定賦課情報.get介護賦課Result().get賦課年度().minusYear(1).
+                            equals(result.get介護賦課Result().get賦課年度())) {
+                        resultList仮算定用.add(result);
+                    }
+                }
+                if (!resultList仮算定用.isEmpty()) {
+                    FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
+                    set仮算定状態(resultMax仮算定用);
+                }
+            }
+        }
     }
 
     /**
      * 指定された賦課の情報を取得します。
      *
-     * @param 賦課根拠情報 List<FukaJohoRelateSearchResult>
+     * @param 賦課根拠情報List List<FukaJohoRelateSearchResult>
      * @return FukaJohoRelateSearchResult
      */
-    public FukaJohoRelateSearchResult get指定賦課情報(List<FukaJohoRelateSearchResult> 賦課根拠情報) {
+    private FukaJohoRelateSearchResult get指定賦課情報(List<FukaJohoRelateSearchResult> 賦課根拠情報List) {
 
         List<FukaJohoRelateSearchResult> 指定賦課情報List = new ArrayList<>();
         FlexibleYear 画面調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey());
         FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
         TsuchishoNo 画面通知書番号 = new TsuchishoNo(div.getDdlTsuchishoNo().getSelectedKey());
-        for (FukaJohoRelateSearchResult result : 賦課根拠情報) {
+        for (FukaJohoRelateSearchResult result : 賦課根拠情報List) {
             if (画面調定年度.equals(result.get介護賦課Result().get調定年度())
                     && 画面賦課年度.equals(result.get介護賦課Result().get賦課年度())
                     && 画面通知書番号.equals(result.get介護賦課Result().get通知書番号())) {
@@ -347,10 +383,15 @@ public class KaigoHokenFukaKonkyoHandler {
         }
         if (!指定賦課情報List.isEmpty()) {
             FukaJohoRelateSearchResult 指定賦課情報;
+            div.getBtnBefore().setDisabled(false);
+            div.getBtnAfter().setDisabled(false);
             if (指定賦課情報List.size() == 1) {
                 指定賦課情報 = 指定賦課情報List.get(0);
+                div.getBtnBefore().setDisabled(true);
+                div.getBtnAfter().setDisabled(true);
             } else {
                 指定賦課情報 = sort降順By履歴番号(指定賦課情報List).get(0);
+                div.getBtnAfter().setDisabled(true);
             }
             return 指定賦課情報;
         }
@@ -358,51 +399,209 @@ public class KaigoHokenFukaKonkyoHandler {
     }
 
     /**
+     * 指定データの取得と画面の再表示です。（前へ）
+     *
+     * @param 処理日付管理情報 ShoriDateKanri
+     * @param resultList List<FukaJohoRelateSearchResult>
+     */
+    public void btnBefore(ShoriDateKanri 処理日付管理情報, List<FukaJohoRelateSearchResult> resultList) {
+
+        FukaJohoRelateSearchResult 指定賦課情報 = get指定賦課情報前へ(resultList);
+        if (処理日付管理情報 != null && 処理日付管理情報.get基準日時() != null
+                && 指定賦課情報.get介護賦課Result().get調定日時() != null
+                && 処理日付管理情報.get基準日時().isBeforeOrEquals(指定賦課情報.get介護賦課Result().get調定日時())) {
+            set本算定状態(指定賦課情報);
+        } else {
+            List<FukaJohoRelateSearchResult> resultList仮算定用 = new ArrayList<>();
+            for (FukaJohoRelateSearchResult result : resultList) {
+                if (指定賦課情報.get介護賦課Result().get賦課年度().minusYear(1).
+                        equals(result.get介護賦課Result().get賦課年度())) {
+                    resultList仮算定用.add(result);
+                }
+            }
+            if (!resultList仮算定用.isEmpty()) {
+                FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
+                set仮算定状態(resultMax仮算定用);
+            }
+        }
+    }
+
+    /**
      * 指定された賦課の情報を取得します。（前へ）
      *
-     * @param 賦課根拠情報 List<FukaJohoRelateSearchResult>
+     * @param 賦課根拠情報List List<FukaJohoRelateSearchResult>
      * @return FukaJohoRelateSearchResult
      */
-    public FukaJohoRelateSearchResult get指定賦課情報前へ(List<FukaJohoRelateSearchResult> 賦課根拠情報) {
+    private FukaJohoRelateSearchResult get指定賦課情報前へ(List<FukaJohoRelateSearchResult> 賦課根拠情報List) {
 
         FlexibleYear 画面調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey());
         FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
         TsuchishoNo 画面通知書番号 = new TsuchishoNo(div.getDdlTsuchishoNo().getSelectedKey());
-        RString 履歴番号 = div.getTxtRirekiNo().getValue();
-        for (int i = 0; i < 賦課根拠情報.size(); i++) {
-            if (画面調定年度.equals(賦課根拠情報.get(i).get介護賦課Result().get調定年度())
-                    && 画面賦課年度.equals(賦課根拠情報.get(i).get介護賦課Result().get賦課年度())
-                    && 画面通知書番号.equals(賦課根拠情報.get(i).get介護賦課Result().get通知書番号())
-                    && 履歴番号.equals(new RString(賦課根拠情報.get(i).get介護賦課Result().get履歴番号()))
-                    && i != 0) {
-                return 賦課根拠情報.get(i - 1);
+        RString 画面履歴番号 = div.getTxtRirekiNo().getValue();
+        List<FukaJohoRelateSearchResult> resultList = new ArrayList<>();
+        List<RString> 履歴番号List = new ArrayList<>();
+        for (FukaJohoRelateSearchResult result : 賦課根拠情報List) {
+            if (画面調定年度.equals(result.get介護賦課Result().get調定年度())
+                    && 画面賦課年度.equals(result.get介護賦課Result().get賦課年度())
+                    && 画面通知書番号.equals(result.get介護賦課Result().get通知書番号())) {
+                resultList.add(result);
+                履歴番号List.add(new RString(result.get介護賦課Result().get履歴番号()));
+            }
+        }
+        if (!履歴番号List.isEmpty() && 履歴番号List.size() > 1) {
+            if (画面履歴番号.equals(履歴番号List.get(1))) {
+                div.getBtnBefore().setDisabled(true);
+                div.getBtnAfter().setDisabled(false);
+                return resultList.get(0);
+            } else {
+                div.getBtnBefore().setDisabled(false);
+                div.getBtnAfter().setDisabled(false);
+                for (int i = 0; i < resultList.size(); i++) {
+                    if (画面履歴番号.equals(履歴番号List.get(i))) {
+                        div.getBtnBefore().setDisabled(false);
+                        div.getBtnAfter().setDisabled(false);
+                        return resultList.get(i - 1);
+                    }
+                }
             }
         }
         return null;
     }
 
     /**
+     * 指定データの取得と画面の再表示です。（後へ）
+     *
+     * @param 処理日付管理情報 ShoriDateKanri
+     * @param resultList List<FukaJohoRelateSearchResult>
+     */
+    public void btnAfter(ShoriDateKanri 処理日付管理情報, List<FukaJohoRelateSearchResult> resultList) {
+
+        FukaJohoRelateSearchResult 指定賦課情報 = get指定賦課情報後へ(resultList);
+        if (指定賦課情報 != null) {
+            if (処理日付管理情報 != null && 処理日付管理情報.get基準日時() != null
+                    && 指定賦課情報.get介護賦課Result().get調定日時() != null
+                    && 処理日付管理情報.get基準日時().isBeforeOrEquals(指定賦課情報.get介護賦課Result().get調定日時())) {
+                set本算定状態(指定賦課情報);
+            } else {
+                List<FukaJohoRelateSearchResult> resultList仮算定用 = new ArrayList<>();
+                for (FukaJohoRelateSearchResult result : resultList) {
+                    if (指定賦課情報.get介護賦課Result().get賦課年度().minusYear(1).
+                            equals(result.get介護賦課Result().get賦課年度())) {
+                        resultList仮算定用.add(result);
+                    }
+                }
+                if (!resultList仮算定用.isEmpty()) {
+                    FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
+                    set仮算定状態(resultMax仮算定用);
+                }
+            }
+        }
+    }
+
+    /**
      * 指定された賦課の情報を取得します。（後へ）
      *
-     * @param 賦課根拠情報 List<FukaJohoRelateSearchResult>
+     * @param 賦課根拠情報List List<FukaJohoRelateSearchResult>
      * @return FukaJohoRelateSearchResult
      */
-    public FukaJohoRelateSearchResult get指定賦課情報後へ(List<FukaJohoRelateSearchResult> 賦課根拠情報) {
+    private FukaJohoRelateSearchResult get指定賦課情報後へ(List<FukaJohoRelateSearchResult> 賦課根拠情報List) {
 
         FlexibleYear 画面調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey());
         FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
         TsuchishoNo 画面通知書番号 = new TsuchishoNo(div.getDdlTsuchishoNo().getSelectedKey());
         RString 履歴番号 = div.getTxtRirekiNo().getValue();
-        for (int i = 0; i < 賦課根拠情報.size(); i++) {
-            if (画面調定年度.equals(賦課根拠情報.get(i).get介護賦課Result().get調定年度())
-                    && 画面賦課年度.equals(賦課根拠情報.get(i).get介護賦課Result().get賦課年度())
-                    && 画面通知書番号.equals(賦課根拠情報.get(i).get介護賦課Result().get通知書番号())
-                    && 履歴番号.equals(new RString(賦課根拠情報.get(i).get介護賦課Result().get履歴番号()))
-                    && i != 賦課根拠情報.size() - 1) {
-                return 賦課根拠情報.get(i + 1);
+        for (int i = 0; i < 賦課根拠情報List.size(); i++) {
+            if (画面調定年度.equals(賦課根拠情報List.get(i).get介護賦課Result().get調定年度())
+                    && 画面賦課年度.equals(賦課根拠情報List.get(i).get介護賦課Result().get賦課年度())
+                    && 画面通知書番号.equals(賦課根拠情報List.get(i).get介護賦課Result().get通知書番号())
+                    && 履歴番号.equals(new RString(賦課根拠情報List.get(i).get介護賦課Result().get履歴番号()))
+                    && i != 賦課根拠情報List.size() - 1) {
+                return 賦課根拠情報List.get(i + 1);
             }
         }
         return null;
+    }
+
+    private void init本算定状態() {
+
+        div.getLblMaenendoHokenryoDankai().setDisplayNone(true);
+        div.getLblHonninKazei().setDisplayNone(false);
+        div.getLblZennendoHokenryoRitsu().setDisplayNone(true);
+        div.getLblSetaiKazei().setDisplayNone(false);
+        div.getLblZennendoNengakuHokenryo().setDisplayNone(true);
+        div.getLblGokeiShotokuKingaku().setDisplayNone(false);
+        div.getLblNenkinShunyugaku().setDisplayNone(false);
+        div.getLblHokenryoDankai().setDisplayNone(false);
+        div.getLblKarisanteiKeisanjoHokenryogaku().setDisplayNone(true);
+        div.getLblKeisanjoNenkanHokenryogaku().setDisplayNone(false);
+        div.getLblKarisanteiHokenryogaku().setDisplayNone(true);
+        div.getLblKakuteiNenkanHokenryogaku().setDisplayNone(false);
+        div.getTxtHihokenshaNo().clearValue();
+        div.getTxtRirekiNo().clearValue();
+        div.getLblFukaKijunbiData().setText(RString.EMPTY);
+        div.getLblShikakuShutokubiData().setText(RString.EMPTY);
+        div.getLblSoshitsubiData().setText(RString.EMPTY);
+        div.getLblSeihoKaishibiData().setText(RString.EMPTY);
+        div.getLblSeihoShuryobiData().setText(RString.EMPTY);
+        div.getLblronenKaishibiData().setText(RString.EMPTY);
+        div.getLblRonenShuryobiData().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData1().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData2().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData3().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData4().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData5().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData6().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData7().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData8().setText(RString.EMPTY);
+        div.getLblKikanData1().setText(RString.EMPTY);
+        div.getLblGessuData1().setText(RString.EMPTY);
+        div.getLblHokenryoDankaiKubunData1().setText(RString.EMPTY);
+        div.getLblHokenryoritsuData1().setText(RString.EMPTY);
+        div.getLblHokenryoSanshutsugakuData1().setText(RString.EMPTY);
+        div.getLblKikanData2().setText(RString.EMPTY);
+        div.getLblGessuData2().setText(RString.EMPTY);
+        div.getLblHokenryoDankaiKubunData2().setText(RString.EMPTY);
+        div.getLblHokenryoritsuData2().setText(RString.EMPTY);
+        div.getLblHokenryoSanshutsugakuData2().setText(RString.EMPTY);
+        div.getTxtChoteiJiyu1().clearValue();
+        div.getTxtChoteiJiyu2().clearValue();
+        div.getTxtChoteiJiyu3().clearValue();
+        div.getTxtChoteiJiyu4().clearValue();
+    }
+
+    private void init仮算定状態() {
+
+        div.getLblMaenendoHokenryoDankai().setDisplayNone(false);
+        div.getLblHonninKazei().setDisplayNone(true);
+        div.getLblZennendoHokenryoRitsu().setDisplayNone(false);
+        div.getLblSetaiKazei().setDisplayNone(true);
+        div.getLblZennendoNengakuHokenryo().setDisplayNone(false);
+        div.getLblGokeiShotokuKingaku().setDisplayNone(true);
+        div.getLblNenkinShunyugaku().setDisplayNone(true);
+        div.getLblHokenryoDankai().setDisplayNone(true);
+        div.getLblKarisanteiKeisanjoHokenryogaku().setDisplayNone(false);
+        div.getLblKeisanjoNenkanHokenryogaku().setDisplayNone(true);
+        div.getLblKarisanteiHokenryogaku().setDisplayNone(false);
+        div.getLblKakuteiNenkanHokenryogaku().setDisplayNone(true);
+        div.getTxtHihokenshaNo().clearValue();
+        div.getTxtRirekiNo().clearValue();
+        div.getLblFukaKijunbiData().setText(RString.EMPTY);
+        div.getLblShikakuShutokubiData().setText(RString.EMPTY);
+        div.getLblSoshitsubiData().setText(RString.EMPTY);
+        div.getLblSeihoKaishibiData().setText(RString.EMPTY);
+        div.getLblSeihoShuryobiData().setText(RString.EMPTY);
+        div.getLblronenKaishibiData().setText(RString.EMPTY);
+        div.getLblRonenShuryobiData().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData1().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData2().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData3().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData6().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData7().setText(RString.EMPTY);
+        div.getLblFukaKonkyoData8().setText(RString.EMPTY);
+        div.getTxtChoteiJiyu1().clearValue();
+        div.getTxtChoteiJiyu2().clearValue();
+        div.getTxtChoteiJiyu3().clearValue();
+        div.getTxtChoteiJiyu4().clearValue();
     }
 
     private List<KeyValueDataSource> sort降順ByKey(List<KeyValueDataSource> dataSource) {

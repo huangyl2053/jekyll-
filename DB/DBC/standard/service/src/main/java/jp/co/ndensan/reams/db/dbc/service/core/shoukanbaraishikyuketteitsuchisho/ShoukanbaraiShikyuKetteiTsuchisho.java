@@ -780,6 +780,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                 entity.setKaraFugo(KARA);
             }
         } else {
+            entity.setKaraFugo(RString.EMPTY);
             entity.setShiharaiStart(RString.EMPTY);
             entity.setShiharaiEnd(RString.EMPTY);
         }
@@ -848,13 +849,11 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                 給付の種類 = 給付の種類.concat(間)
                         .concat(複合型サービス);
             }
+        } else if (給付の種類.isEmpty()) {
+            給付の種類 = 給付の種類.concat(看護小規模多機能型居宅介護);
         } else {
-            if (給付の種類.isEmpty()) {
-                給付の種類 = 給付の種類.concat(看護小規模多機能型居宅介護);
-            } else {
-                給付の種類 = 給付の種類.concat(間)
-                        .concat(看護小規模多機能型居宅介護);
-            }
+            給付の種類 = 給付の種類.concat(間)
+                    .concat(看護小規模多機能型居宅介護);
         }
         return 給付の種類;
     }

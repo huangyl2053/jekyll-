@@ -235,7 +235,7 @@
                                     AND "hihokenshaNo" <![CDATA[<=]]> #{被保険者番号To}
                                 </if>   )   T
                         WHERE   T.rank_number =   1)  T1001
-        ON  "hihokenshaNo" = T1001."被保険者番号"
+        ON  "shikibetsuCode" = T1001."識別コード"
         <if test="抽出条件設定区分 == 0">
             <where>
                 AND "lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}

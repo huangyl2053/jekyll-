@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010100.DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParamter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030040.DBU030040_JigyoHokokuNenpo_IppanGenbutsuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030070.DBU030070_JigyoHokokuNenpo_HokenkyufuGenbutsuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030100.DBU030100_JigyoHokokuNenpo_HokenkyufuKogakuParameter;
@@ -92,8 +92,8 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
      *
      * @return 事業状況報告資料（年報）作成　一般状況（１～１１）のパラメータ
      */
-    public DBU030030_JigyoHokokuNenpo_IppanParamter toDBU030030Parameter() {
-        DBU030030_JigyoHokokuNenpo_IppanParamter parameter = new DBU030030_JigyoHokokuNenpo_IppanParamter();
+    public DBU030030_JigyoHokokuNenpo_IppanParameter toDBU030030Parameter() {
+        DBU030030_JigyoHokokuNenpo_IppanParameter parameter = new DBU030030_JigyoHokokuNenpo_IppanParameter();
         parameter.setプリントコントロール区分(プリントコントロール区分);
         parameter.set報告年度(報告年度);
         parameter.set報告開始年月(報告開始年月);

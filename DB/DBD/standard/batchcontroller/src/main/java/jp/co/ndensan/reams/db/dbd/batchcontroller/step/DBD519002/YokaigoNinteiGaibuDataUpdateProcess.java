@@ -24,9 +24,17 @@ public class YokaigoNinteiGaibuDataUpdateProcess extends BatchProcessBase<DbT720
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.")
             .concat("renekeidatasakuseifourmaster.IRenekeiDataSakuseiFourMasterMapper.get要介護認定外部データ出力履歴");
+    private boolean isEmpty;
     private RenekeiDataSakuseiFourMasterProcessParameter para;
+    RenekeiDataSakuseiFourMasterCsvManager manager;
     @BatchWriter
     private BatchPermanentTableWriter<DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity> tableWriter;
+
+    @Override
+    protected void initialize() {
+        manager = new RenekeiDataSakuseiFourMasterCsvManager();
+        isEmpty = true;
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -40,11 +48,14 @@ public class YokaigoNinteiGaibuDataUpdateProcess extends BatchProcessBase<DbT720
 
     @Override
     protected void process(DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity entity) {
-        RenekeiDataSakuseiFourMasterCsvManager manager = new RenekeiDataSakuseiFourMasterCsvManager();
-        if (entity == null) {
+        isEmpty = false;
+        tableWriter.update(manager.dbT7204YokaigoNinteiGaibuDataOutputHistoryUpdate(para, entity));
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (isEmpty) {
             tableWriter.insert(manager.dbT7204YokaigoNinteiGaibuDataOutputHistoryInsert(para));
-        } else {
-            tableWriter.update(manager.dbT7204YokaigoNinteiGaibuDataOutputHistoryUpdate(para, entity));
         }
     }
 }

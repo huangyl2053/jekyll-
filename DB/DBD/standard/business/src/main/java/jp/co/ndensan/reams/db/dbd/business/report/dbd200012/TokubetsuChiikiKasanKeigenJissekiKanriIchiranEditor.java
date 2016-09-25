@@ -96,6 +96,18 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
     private void setListStep1(TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source) {
 
         List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
+
+        if (宛名 != null) {
+            source.gyouseikuCode = 宛名.get行政区画().getGyoseiku().getコード().value();
+        }
+
+        if (給付実績被保険者リスト != null && !給付実績被保険者リスト.isEmpty()) {
+            KyuhuJissekiHihokensha 給付実績被保険者Entity = 給付実績被保険者リスト.get(該当給付実績被保険者情報Index);
+            source.hiHokenshaNo = 給付実績被保険者Entity.get被保険者番号().value();
+            source.serviceTeikyoYM = 給付実績被保険者Entity.getサービス提供年月().toDateString();
+            source.shinnsaYM = 給付実績被保険者Entity.get審査年月().toDateString();
+        }
+
         if (0 == 行数Index) {
             if (宛名 != null) {
                 source.list_2 = 宛名.get住所().get全国住所コード().value();

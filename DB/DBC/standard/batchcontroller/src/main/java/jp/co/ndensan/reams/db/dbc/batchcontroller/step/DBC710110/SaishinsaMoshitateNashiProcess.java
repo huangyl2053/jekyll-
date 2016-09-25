@@ -144,12 +144,12 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                BATCHCSV,
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                BATCHCSV,
                 FILENAME,
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new SaishinsaMoshitate().set出力条件(processParameter, 市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

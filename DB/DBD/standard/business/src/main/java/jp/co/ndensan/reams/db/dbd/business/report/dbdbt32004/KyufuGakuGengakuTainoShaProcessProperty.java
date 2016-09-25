@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuGakuGengakuTainoShaProcessProperty {
 
+    /**
+     * 帳票分類ID「DBD200009_KyufuGengakuKanriIchiran」(DBD介護受給) 出力順設定可能項目です。
+     */
     public enum DBD200009_KyufuGengakuKanriIchiran implements IReportItems {
 
         /**
@@ -51,7 +54,7 @@ public class KyufuGakuGengakuTainoShaProcessProperty {
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("")),;
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString(""));
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;

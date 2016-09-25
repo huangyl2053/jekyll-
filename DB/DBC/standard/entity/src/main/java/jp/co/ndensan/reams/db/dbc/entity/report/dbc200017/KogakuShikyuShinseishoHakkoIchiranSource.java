@@ -1,4 +1,3 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbc.entity.report.dbc200017;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -80,6 +79,10 @@ public class KogakuShikyuShinseishoHakkoIchiranSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "tsuchishoNo", length = 20, order = 31)
     public RString tsuchishoNo;
+    @ReportItem(name = "サービス種類", length = 20, order = 32)
+    public RString サービス種類;
+    @ReportItem(name = "氏名カナ", length = 20, order = 33)
+    public RString 氏名カナ;
 // </editor-fold>
 
     /**

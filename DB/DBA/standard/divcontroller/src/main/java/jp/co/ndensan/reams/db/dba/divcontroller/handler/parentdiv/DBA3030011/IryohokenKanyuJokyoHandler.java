@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -47,7 +45,7 @@ public class IryohokenKanyuJokyoHandler {
     public IryohokenKanyuJokyoBusiness onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(被保険者番号);
-        div.getIryoHokenIchiran().getCcdIryoHokenRireki().initialize(状態_登録, 識別コード.value(), 被保険者番号);//TODO 動作確認
+        div.getIryoHokenIchiran().getCcdIryoHokenRireki().initialize(状態_登録, 識別コード.value(), 被保険者番号); //TODO 動作確認
         IryohokenKanyuJokyoBusiness joho = new IryohokenKanyuJokyoBusiness();
         joho.setIryoHokenJohoList(get初期化時の医療保険情報());
         return joho;
@@ -75,14 +73,4 @@ public class IryohokenKanyuJokyoHandler {
         }
         return oldList;
     }
-
-    private FlexibleDate stringToFlexibleDate(RString date) {
-        FlexibleDate flexDate = FlexibleDate.EMPTY;
-        if (!RString.isNullOrEmpty(date)) {
-            RDate date_tmp = new RDate(date.toString());
-            flexDate = new FlexibleDate(date_tmp.toDateString());
-        }
-        return flexDate;
-    }
-
 }

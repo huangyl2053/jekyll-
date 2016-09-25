@@ -120,12 +120,12 @@ public class HanyoListHikazeiNenkinTaishoshaProcess extends BatchProcessBase<Hik
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                new RString("汎用リスト　非課税年金対象者CSV"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト　非課税年金対象者CSV"),
                 new RString("HanyoList_HikazeNenkinTaishosha.csv"),
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 business.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

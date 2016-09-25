@@ -260,7 +260,9 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
      */
     public YMDHMS get最新調定日時(FlexibleYear 調定年度) {
 
-        DbT7022ShoriDateKanriEntity dbt7022entity = 処理日付管理Dac.select最新調定日時_仮算定(調定年度);
+        List<RString> 処理名リスト = new ArrayList<>();
+        処理名リスト.add(ShoriName.仮算定異動賦課.get名称());
+        DbT7022ShoriDateKanriEntity dbt7022entity = 処理日付管理Dac.select最新の基準日(調定年度, 処理名リスト);
         if (dbt7022entity == null) {
             return null;
         }

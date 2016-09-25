@@ -973,7 +973,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     public RString getIraikinKeisanShoriKubun(FlexibleYear 調定年度, int 算定月) {
         DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         List<DbT7022ShoriDateKanriEntity> 処理日付管理List
-                = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.依頼金額計算.get名称(), new RString("0002"));
+                = 処理日付管理Dac.select処理状況(調定年度, ShoriName.依頼金額計算.get名称(), new RString("0002"));
         if (処理日付管理List == null || 処理日付管理List.isEmpty()) {
             return RSTRING_1;
         }

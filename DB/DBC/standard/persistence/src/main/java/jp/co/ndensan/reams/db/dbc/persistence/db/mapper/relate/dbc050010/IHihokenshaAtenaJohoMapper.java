@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.HihokenshaAtenaResu
 /**
  * 被保険者台帳と宛名情報のMapperクラスです。
  *
- * @reamsid_L DBC-5010-030 donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 public interface IHihokenshaAtenaJohoMapper {
 

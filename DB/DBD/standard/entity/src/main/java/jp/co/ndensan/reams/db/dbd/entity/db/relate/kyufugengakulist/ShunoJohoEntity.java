@@ -18,6 +18,10 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShunoJohoEntity {
 
-    private DbT2002FukaEntity fukaEntity;
-    private List<KibetsuJohoEntity> kibetsuJohoEntity;
+    private DbT2002FukaEntity 賦課Entity;
+    private List<KibetsuJohoEntity> 期別;
+
+//    private DbT2003KibetsuEntity kibetsuEntity;
+//    private UrT0705ChoteiKyotsuEntity choteiKyotsuEntity;
+//    private DbT4023JikoKisambiKanriEntity jikoKisambiKanriEntity;
 }

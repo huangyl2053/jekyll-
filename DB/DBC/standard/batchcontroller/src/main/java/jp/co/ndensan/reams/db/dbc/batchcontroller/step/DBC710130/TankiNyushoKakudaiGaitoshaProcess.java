@@ -128,12 +128,12 @@ public class TankiNyushoKakudaiGaitoshaProcess extends BatchProcessBase<TankiNyu
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                new RString("汎用リスト　短期入所拡大該当者CSV"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト　短期入所拡大該当者CSV"),
                 new RString("HanyoList_TankiNyushoKakudaiGaitosha.csv"),
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 business.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

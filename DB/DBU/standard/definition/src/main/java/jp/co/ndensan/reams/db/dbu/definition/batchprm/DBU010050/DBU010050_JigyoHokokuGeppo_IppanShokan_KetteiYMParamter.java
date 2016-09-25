@@ -82,6 +82,12 @@ public class DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter extends Bat
     private FileSpoolManager manager;
 
     /**
+     * コンストラクタです。
+     */
+    public DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter() {
+    }
+
+    /**
      * Process用のパラメータを生成します。
      *
      * @return JigyoHokokuGeppoIppanGenbutsuProcessParamter

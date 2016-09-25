@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 /**
  * 一時TBLに登録する_Process処理パラメタークラスです．
  *
- * @reamsid_L DBC-5010-030 donghj
+ * @reamsid_L DBC-2180-030 donghj
  */
 @lombok.Getter
 @lombok.Setter

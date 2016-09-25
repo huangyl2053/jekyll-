@@ -62,7 +62,7 @@
         AND (((SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
                 AND (#{サービス提供年月} <![CDATA[<=]]> SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD", 1, 6)))
         OR  ((SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
-                AND rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" IS NULL))
+                AND (rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" IS NULL OR rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" = '')))
     </select>
     
     <select resultOrdered="true" id="get介護事業者指定サービス情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" 
@@ -103,7 +103,7 @@
             SELECT	
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
-            FROM rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+            FROM rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon",
                  rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
             WHERE 
                  "DbT3033KyufujissekiShukei"."inputShikibetsuNo" NOT IN('3411')
@@ -240,7 +240,7 @@
                      WHERE  dbT7131."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7131."teikyoKaishiYM"
                      AND    (dbT7131."teikyoShuryoYM" IS NULL OR (dbT7131."teikyoShuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7131."teikyoShuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7131."teikyoShuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd",
                             dbT7131."serviceKoumokuCd",
@@ -408,7 +408,7 @@
                      WHERE  dbT7130."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    dbT7130."teikyoshuryoYM" IS NULL OR dbT7130."teikyoshuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd") AS A
             WHERE   DbT7130KaigoServiceShurui."teikyoKaishiYM" = A."teikyoKaishiYM"
@@ -450,7 +450,7 @@
                      WHERE  dbT7130."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    dbT7130."teikyoshuryoYM" IS NULL OR dbT7130."teikyoshuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd") AS A
             WHERE   DbT7130KaigoServiceShurui."teikyoKaishiYM" = A."teikyoKaishiYM"
@@ -492,7 +492,7 @@
                      WHERE  dbT7130."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    dbT7130."teikyoshuryoYM" IS NULL OR dbT7130."teikyoshuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd") AS A
             WHERE   DbT7130KaigoServiceShurui."teikyoKaishiYM" = A."teikyoKaishiYM"
@@ -556,7 +556,7 @@
                      WHERE  dbT7130."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    dbT7130."teikyoshuryoYM" IS NULL OR dbT7130."teikyoshuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd") AS A
             WHERE   DbT7130KaigoServiceShurui."teikyoKaishiYM" = A."teikyoKaishiYM"
@@ -598,7 +598,7 @@
                      WHERE  dbT7130."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    dbT7130."teikyoshuryoYM" IS NULL OR dbT7130."teikyoshuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd") AS A
             WHERE   DbT7130KaigoServiceShurui."teikyoKaishiYM" = A."teikyoKaishiYM"
@@ -640,7 +640,7 @@
                      WHERE  dbT7130."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    dbT7130."teikyoshuryoYM" IS NULL OR dbT7130."teikyoshuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd") AS A
             WHERE   DbT7130KaigoServiceShurui."teikyoKaishiYM" = A."teikyoKaishiYM"
@@ -682,7 +682,7 @@
                      WHERE  dbT7130."isDeleted"
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    dbT7130."teikyoshuryoYM" IS NULL OR dbT7130."teikyoshuryoYM" IS NOT NULL
-                                AND #{サービス提供年月} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
+                                AND #{サービス提供年月_終了} <![CDATA[<=]]> dbT7130."teikyoshuryoYM"))
                      GROUP BY 
                             dbT7131."serviceShuruiCd") AS A
             WHERE   DbT7130KaigoServiceShurui."teikyoKaishiYM" = A."teikyoKaishiYM"

@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki152old.J
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippanshokanketteiym.JigyoHokokuGeppoIppanShokanProcessParamter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JigyouHoukokuTokTyhyouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki152old.JigyohokokuCompYoshiki152OldData;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki152old.JigyohokokuCompYoshiki152OldReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -33,17 +33,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * @reamsid_L DBU-5550-030 suguangjun
  *
  */
-public class JigyoHokokuGeppoIppanShokanDBU300006Process extends BatchProcessBase<JigyoHokokuDataRelateEntity> {
+public class JigyoHokokuGeppoIppanShokanDBU300006Process extends BatchProcessBase<JigyouHoukokuTokTyhyouRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
             + "IJigyoHokokuGeppoIppanShokanMapper.getJigyouHoukokuTokeiTyouhyou");
-    private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
     private static final ReportId REPORT_DBU300006 = ReportIdDBU.DBU300006.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");
     private static final RString 年報月報区分 = new RString("月報");
-    private static final int 数値_10 = 10;
+    private static final int 数値_100 = 100;
     private static final Decimal 数値_101 = new Decimal(101);
     private static final Decimal 数値_102 = new Decimal(102);
     private static final Decimal 数値_103 = new Decimal(103);
@@ -84,6 +83,7 @@ public class JigyoHokokuGeppoIppanShokanDBU300006Process extends BatchProcessBas
     private RString 保険者名;
     private Map<Decimal, Decimal> syukeiNo1200;
     private Map<Decimal, Decimal> syukeiNo1400;
+    private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
 
     @BatchWriter
     private BatchReportWriter<JigyohokokuCompYoshiki152OldReportSource> batchWrite;
@@ -115,11 +115,11 @@ public class JigyoHokokuGeppoIppanShokanDBU300006Process extends BatchProcessBas
     }
 
     @Override
-    protected void process(JigyoHokokuDataRelateEntity entity) {
+    protected void process(JigyouHoukokuTokTyhyouRelateEntity entity) {
         if (ShukeiNo.一般状況_12_居宅介護_介護予防_サービス受給者数.getコード().equals(entity.getSyukeiNo().value())) {
-            syukeiNo1200.put(entity.getTateNo().multiply(数値_10).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
+            syukeiNo1200.put(entity.getTateNo().multiply(数値_100).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
         } else if (ShukeiNo.一般状況_13_地域密着型_介護予防_サービス受給者数.getコード().equals(entity.getSyukeiNo().value())) {
-            syukeiNo1400.put(entity.getTateNo().multiply(数値_10).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
+            syukeiNo1400.put(entity.getTateNo().multiply(数値_100).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
         }
     }
 
@@ -129,8 +129,8 @@ public class JigyoHokokuGeppoIppanShokanDBU300006Process extends BatchProcessBas
         reportData.setプリント日時(processParameter.get処理日時());
         reportData.set集計区分(年報月報区分);
         reportData.set集計範囲(processParameter.get決定年月());
-        reportData.set集計区分(保険者番号);
-        reportData.set集計区分(保険者名);
+        reportData.set保険者番号(保険者番号);
+        reportData.set保険者名(保険者名);
         reportData.set給付区分(processParameter.get給付集計区分());
         reportData.set予防給付_居宅介護_要支援1_1(getValue(syukeiNo1200, 数値_101));
         reportData.set予防給付_居宅介護_要支援1_2(getValue(syukeiNo1200, 数値_201));

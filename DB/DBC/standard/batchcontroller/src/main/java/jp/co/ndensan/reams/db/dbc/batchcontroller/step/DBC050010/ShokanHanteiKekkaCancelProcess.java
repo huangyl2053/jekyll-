@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 頼済の登録_償還払支給判定結果_依頼済取消更新_Process処理クラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class ShokanHanteiKekkaCancelProcess extends BatchProcessBase<DbT3036ShokanHanteiKekkaEntity> {
 

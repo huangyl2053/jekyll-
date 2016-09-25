@@ -68,10 +68,10 @@ import lombok.Setter;
 public class HanyoListSogoJigyoHi {
 
     private static final RString 基本情報 = new RString("基本情報のみ");
-    private static final RString 基本明細情報 = new RString("基本情報+明細情報");
-    private static final RString 基本集計情報 = new RString("基本情報+集計情報");
-    private static final RString 基本ケアマネジメント情報 = new RString("基本情報+ケアマネジメント費情報");
-    private static final RString 保険者_すべて = new RString("すべて");
+    private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
+    private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
+    private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
+    private static final RString 保険者_すべて = new RString("000000");
     private HanyoListSogoJigyoHiProcessParameter processParameter;
     private List<PersonalData> personalDataList;
 
@@ -721,22 +721,36 @@ public class HanyoListSogoJigyoHi {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出対象者】"));
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         if (!RString.isNullOrEmpty(processParameter.get保険者コード()) && !保険者_すべて.equals(processParameter.get保険者コード())) {
             jokenBuilder.append(new RString("保険者："));
             jokenBuilder.append(市町村名);
         }
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         jokenBuilder.append(set抽出方法());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         jokenBuilder.append(setサービス提供年月());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         jokenBuilder.append(set審査年月());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         jokenBuilder.append(set取込年月());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         if (!RString.isNullOrEmpty(processParameter.get事業者コード())) {
             jokenBuilder.append(new RString("事業者コード：("));
             jokenBuilder.append(processParameter.get事業者コード());
             jokenBuilder.append(new RString("） "));
             jokenBuilder.append(事業所名);
         }
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         if (!RString.isNullOrEmpty(processParameter.getサービス種類コード())) {
-            jokenBuilder.append(new RString("サービス種類コード："));
+            jokenBuilder.append(new RString("サービス種類コード：("));
             jokenBuilder.append(processParameter.getサービス種類コード());
             jokenBuilder.append(new RString("） "));
             jokenBuilder.append(サービス種類コード名称);
@@ -928,7 +942,7 @@ public class HanyoListSogoJigyoHi {
                 processParameter.get審査年月開始年月(),
                 processParameter.get審査年月終了年月(),
                 processParameter.get取込年月開始年月(),
-                processParameter.get審査年月終了年月(),
+                processParameter.get取込年月終了年月(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 出力順);
     }

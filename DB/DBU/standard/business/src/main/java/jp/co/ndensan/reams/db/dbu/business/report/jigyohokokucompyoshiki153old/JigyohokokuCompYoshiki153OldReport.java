@@ -77,7 +77,7 @@ public class JigyohokokuCompYoshiki153OldReport extends Report<JigyohokokuCompYo
                 data.get介護給付_要介護5_3(),
                 data.get介護給付_その他_3(),
                 data.get介護給付の計_3(),
-                data.getサービス受給者数合計_1()));
+                data.getサービス受給者数合計_3()));
         list.add(new JigyohokokuCompYoshiki153OldChange(data.get予防給付_要支援1_4(),
                 data.get予防給付_要支援2_4(),
                 data.get予防給付の計_4(),
@@ -89,7 +89,7 @@ public class JigyohokokuCompYoshiki153OldReport extends Report<JigyohokokuCompYo
                 data.get介護給付_要介護5_4(),
                 data.get介護給付_その他_4(),
                 data.get介護給付の計_4(),
-                data.getサービス受給者数合計_1()));
+                data.getサービス受給者数合計_4()));
         list.add(new JigyohokokuCompYoshiki153OldChange(data.get予防給付_要支援1_4(),
                 data.get予防給付_要支援2_5(),
                 data.get予防給付の計_5(),

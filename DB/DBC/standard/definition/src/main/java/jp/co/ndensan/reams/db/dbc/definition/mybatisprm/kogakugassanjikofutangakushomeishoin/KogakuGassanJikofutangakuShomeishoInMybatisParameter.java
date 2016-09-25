@@ -9,25 +9,28 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 高額合算自己負担額証明書情報取込のバッチ用パラメータクラスです。
  *
  * @reamsid_L DBC-2640-010 zhengshenlei
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
+@Setter
 public class KogakuGassanJikofutangakuShomeishoInMybatisParameter implements IMyBatisParameter {
 
-    private final FlexibleYearMonth shoriYm;
-    private final SaiShoriKubun saisyorikubunn;
-    private final Long syutsuryokuID;
+    private FlexibleYearMonth shoriYm;
+    private SaiShoriKubun saisyorikubunn;
+    private Long syutsuryokuID;
 
     /**
      * コンストラクタです。
      *
-     * @param shoriYm 処理年月
-     * @param syutsuryokuID 再処理区分
-     * @param saisyorikubunn 出力順ID
+     * @param shoriYm FlexibleYearMonth
+     * @param syutsuryokuID SaiShoriKubun
+     * @param saisyorikubunn Long
      */
     public KogakuGassanJikofutangakuShomeishoInMybatisParameter(FlexibleYearMonth shoriYm, SaiShoriKubun saisyorikubunn, Long syutsuryokuID) {
         this.shoriYm = shoriYm;

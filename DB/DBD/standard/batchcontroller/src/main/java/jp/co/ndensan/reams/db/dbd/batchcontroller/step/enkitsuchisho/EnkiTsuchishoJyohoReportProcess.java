@@ -150,15 +150,6 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        if (parameter.get処理見込み日From() != null) {
-            出力条件.add(new RString(parameter.get処理見込み日From().toString()));
-        }
-        if (parameter.get処理見込み日To() != null) {
-            出力条件.add(new RString(parameter.get処理見込み日From().toString()));
-        }
-        if (parameter.get通知書発行日() != null) {
-            出力条件.add(new RString(parameter.get処理見込み日From().toString()));
-        }
         if (parameter.get申請書管理番号リスト() != null) {
             for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {
                 出力条件.add(申請書管理番号);

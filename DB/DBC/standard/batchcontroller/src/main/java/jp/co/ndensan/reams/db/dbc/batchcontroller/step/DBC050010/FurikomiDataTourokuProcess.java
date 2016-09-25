@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 振込データ登録_口座振込一時処理_Processクラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTempTableEntity> {
 

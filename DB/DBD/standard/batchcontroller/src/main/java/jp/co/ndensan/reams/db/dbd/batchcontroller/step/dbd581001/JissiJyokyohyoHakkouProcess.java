@@ -508,11 +508,6 @@ public class JissiJyokyohyoHakkouProcess extends BatchKeyBreakBase<JissiJyokyohy
         出力条件.add(new RString("【地区区分】 " + parameter.get地区区分()));
         出力条件.add(new RString("【開始地区コード】 " + parameter.get開始地区コード()));
         出力条件.add(new RString("【終了地区コード】 " + parameter.get終了地区コード()));
-        if (parameter.get基準日() == null) {
-            出力条件.add(new RString("【基準日】 "));
-        } else {
-            出力条件.add(new RString("【基準日】 " + parameter.get基準日()));
-        }
         出力条件.add(new RString("【集計単位】 " + parameter.get集計単位()));
         出力条件.add(new RString("【年齢From】 " + parameter.get年齢From()));
         出力条件.add(new RString("【年齢To】 " + parameter.get年齢To()));

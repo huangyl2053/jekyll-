@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 振込データ登録_口座振込一時情報SQL用パラメタークラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 @lombok.Getter
 @lombok.Setter

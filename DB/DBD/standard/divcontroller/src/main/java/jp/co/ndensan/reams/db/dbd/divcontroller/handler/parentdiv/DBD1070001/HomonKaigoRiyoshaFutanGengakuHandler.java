@@ -612,8 +612,8 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         } else {
             div.getTxtKohiFutanshaNo().clearValue();
         }
-        if (情報.get公費受給者番号() != null) {
-            div.getTxtKohiJyukyshaNo().setValue(情報.get公費受給者番号());
+        if (!RString.isNullOrEmpty(情報.get公費受給者番号())) {
+            div.getTxtKohiJyukyshaNo().setValue(情報.get公費受給者番号().substring(0, 情報.get公費受給者番号().length()));
         } else {
             div.getTxtKohiJyukyshaNo().clearValue();
         }
@@ -764,7 +764,8 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
                     || !isEquals(div.getDdlHobetsuKubun().getSelectedKey(), 申請.get法別区分())
                     || !isEquals(div.getTxtKyufuRitsu().getValue(), 申請.get給付率())
                     || !isEquals(div.getTxtKohiFutanshaNo().getValue(), 申請.get公費負担者番号())
-                    || !isEquals(div.getTxtKohiJyukyshaNo().getValue(), 申請.get公費受給者番号());
+                    || !isEquals(div.getTxtKohiJyukyshaNo().getValue().concat(div.getTxtKohiJyukyushaNoCheckDigit().getValue()),
+                            申請.get公費受給者番号());
         } else {
             if (承認する.equals(申請.get決定区分())) {
                 return true;
@@ -904,7 +905,8 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             builder.set法別区分(div.getDdlHobetsuKubun().getSelectedKey());
             builder.set給付率(new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue()));
             builder.set公費負担者番号(div.getTxtKohiFutanshaNo().getValue());
-            builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getValue());
+            builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getValue()
+                    .concat(div.getTxtKohiJyukyushaNoCheckDigit().getValue()));
         }
         if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
             builder.set決定年月日(div.getTxtKettaiYmd().getValue());
@@ -1038,7 +1040,8 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
                 builder.set法別区分(div.getDdlHobetsuKubun().getSelectedKey());
                 builder.set給付率(new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue()));
                 builder.set公費負担者番号(div.getTxtKohiFutanshaNo().getValue());
-                builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getValue());
+                builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getValue()
+                        .concat(div.getTxtKohiJyukyushaNoCheckDigit().getValue()));
             } else {
                 builder.set決定区分(承認しない);
                 builder.set非承認理由(div.getTxtHiShoninRiyu().getValue());
