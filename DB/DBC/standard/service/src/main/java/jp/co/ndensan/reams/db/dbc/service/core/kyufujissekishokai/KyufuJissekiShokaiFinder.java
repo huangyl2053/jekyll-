@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuBusiness;
@@ -252,24 +254,25 @@ public class KyufuJissekiShokaiFinder {
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         DbT7060KaigoJigyoshaEntity 介護事業者情報 = mapper.get介護事業者情報(
                 KyufuJissekiHeaderJohoMapperParameter.createParameter_事業者名称(事業所番号, 基準年月));
-        if (介護事業者情報 == null) {
-            return RString.EMPTY;
-        } else if (介護事業者情報.getJigyoshaName() != null
+        if (介護事業者情報 != null && 介護事業者情報.getJigyoshaName() != null
                 && !介護事業者情報.getJigyoshaName().isEmpty()) {
             事業者名称_介護事業者 = 介護事業者情報.getJigyoshaName().value();
         }
         DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定サービス情報 = mapper.get介護事業者指定サービス情報(
                 KyufuJissekiHeaderJohoMapperParameter.createParameter_事業者名称(事業所番号, 基準年月));
-        if (介護事業者指定サービス情報 == null) {
-            return RString.EMPTY;
-        } else if (介護事業者指定サービス情報.getJigyoshaName() != null
-                && !介護事業者指定サービス情報.getJigyoshaName().isEmpty()) {
-            事業者名称_介護事業者指定サービス = 介護事業者指定サービス情報.getJigyoshaName().value();
-        }
-        if (準拠する.equals(介護事業者指定サービス情報.getKihonJohoJunkyoKubun())) {
+        if (介護事業者指定サービス情報 != null) {
+            if (介護事業者指定サービス情報.getJigyoshaName() != null
+                    && !介護事業者指定サービス情報.getJigyoshaName().isEmpty()) {
+                事業者名称_介護事業者指定サービス = 介護事業者指定サービス情報.getJigyoshaName().value();
+            }
+            RString 基本情報準拠区分 = 介護事業者指定サービス情報.getKihonJohoJunkyoKubun();
+            if (準拠する.equals(基本情報準拠区分)) {
+                return 事業者名称_介護事業者;
+            } else if (準拠しない.equals(基本情報準拠区分)) {
+                return 事業者名称_介護事業者指定サービス;
+            }
+        } else {
             return 事業者名称_介護事業者;
-        } else if (準拠しない.equals(介護事業者指定サービス情報.getKihonJohoJunkyoKubun())) {
-            return 事業者名称_介護事業者指定サービス;
         }
         return RString.EMPTY;
     }
@@ -310,9 +313,9 @@ public class KyufuJissekiShokaiFinder {
         requireNonNull(サービス提供年月_終了, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_終了文字列.toString()));
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         KyufuJissekiPrmBusiness 給付実績情報照会用データ = new KyufuJissekiPrmBusiness();
-        List<KyufuJissekiKihonShukeiRelateEntity> 給付実績基本集計表示対象データ = new ArrayList<>();
-        List<KyufuJissekiKihonKyotakuServiceRelateEntity> 給付実績基本居宅サービス計画費表示対象データ = new ArrayList<>();
-        List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> 給付実績基本高額介護サービス費表示対象データ = new ArrayList<>();
+        List<KyufuJissekiKihonShukeiBusiness> 給付実績基本集計表示対象データ = new ArrayList<>();
+        List<KyufuJissekiKihonKyotakuServiceBusiness> 給付実績基本居宅サービス計画費表示対象データ = new ArrayList<>();
+        List<KyufujissekiKogakuKaigoServicehi> 給付実績基本高額介護サービス費表示対象データ = new ArrayList<>();
         List<KyufujissekiKihon> 給付実績基本データリスト = new ArrayList<>();
         List<KyufujissekiShukei> 給付実績集計データリスト = new ArrayList<>();
         List<KyufujissekiMeisaiBusiness> 給付実績明細データリスト = new ArrayList<>();
@@ -345,7 +348,10 @@ public class KyufuJissekiShokaiFinder {
             JigyoshaNo 事業所番号_検索用 = entity.get給付実績集計データ().getJigyoshoNo();
             RString 整理番号_検索用 = entity.get給付実績集計データ().getSeiriNo();
             if (集計データ != null && check表示対象データ(集計データ.getShokisaiHokenshaNo())) {
-                給付実績基本集計表示対象データ.add(entity);
+                KyufuJissekiKihonShukeiBusiness 給付実績基本集計データ = new KyufuJissekiKihonShukeiBusiness();
+                給付実績基本集計データ.set給付実績基本データ(new KyufujissekiKihon(entity.get給付実績基本データ()));
+                給付実績基本集計データ.set給付実績集計データ(new KyufujissekiShukei(entity.get給付実績集計データ()));
+                給付実績基本集計表示対象データ.add(給付実績基本集計データ);
                 給付実績基本データリスト.add(new KyufujissekiKihon(entity.get給付実績基本データ()));
                 給付実績集計データリスト.addAll(get給付実績集計データ(入力識別番号, 被保険者番号, サービス提供年月_開始,
                         サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
@@ -379,13 +385,17 @@ public class KyufuJissekiShokaiFinder {
         }
         for (KyufuJissekiKihonKyotakuServiceRelateEntity entity : kihonKyotakuServiceList) {
             if (check表示対象データ(entity.get給付実績基本居宅サービス計画費データ().getShokisaiHokenshaNo())) {
-                給付実績基本居宅サービス計画費表示対象データ.add(entity);
+                KyufuJissekiKihonKyotakuServiceBusiness 給付実績基本居宅サービス計画費データ = new KyufuJissekiKihonKyotakuServiceBusiness();
+                給付実績基本居宅サービス計画費データ.set給付実績基本居宅サービス計画費データ(
+                        new KyufujissekiKyotakuService(entity.get給付実績基本居宅サービス計画費データ()));
+                給付実績基本居宅サービス計画費データ.set給付実績基本データ(new KyufujissekiKihon(entity.get給付実績基本データ()));
+                給付実績基本居宅サービス計画費表示対象データ.add(給付実績基本居宅サービス計画費データ);
                 給付実績基本データリスト.add(new KyufujissekiKihon(entity.get給付実績基本データ()));
             }
         }
         for (DbT3028KyufujissekiKogakuKaigoServicehiEntity entity : kihonKogakuKaigoServicehiList) {
             if (check表示対象データ(entity.getShokisaiHokenshaNo())) {
-                給付実績基本高額介護サービス費表示対象データ.add(entity);
+                給付実績基本高額介護サービス費表示対象データ.add(new KyufujissekiKogakuKaigoServicehi(entity));
             }
         }
         KyufuJissekiSearchDataBusiness 検索データ = new KyufuJissekiSearchDataBusiness();
@@ -940,15 +950,15 @@ public class KyufuJissekiShokaiFinder {
         return false;
     }
 
-    private List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> get高額介護サービス費表示対象データ(
-            List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> 給付実績基本高額介護サービス費データ) {
-        List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> 給付実績基本高額介護サービス費表示対象データ = new ArrayList<>();
+    private List<KyufujissekiKogakuKaigoServicehi> get高額介護サービス費表示対象データ(
+            List<KyufujissekiKogakuKaigoServicehi> 給付実績基本高額介護サービス費データ) {
+        List<KyufujissekiKogakuKaigoServicehi> 給付実績基本高額介護サービス費表示対象データ = new ArrayList<>();
         DbT3028KyufujissekiKogakuKaigoServicehiEntity 先頭レコード = new DbT3028KyufujissekiKogakuKaigoServicehiEntity();
-        List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> ストアデータ = new ArrayList<>();
+        List<KyufujissekiKogakuKaigoServicehi> ストアデータ = new ArrayList<>();
         boolean 共同処理あり = false;
         for (int i = 0; i < 給付実績基本高額介護サービス費データ.size(); i++) {
-            DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = 給付実績基本高額介護サービス費表示対象データ.get(i);
-            ストアデータ.add(entity);
+            DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = 給付実績基本高額介護サービス費表示対象データ.get(i).toEntity();
+            ストアデータ.add(new KyufujissekiKogakuKaigoServicehi(entity));
             if (i == 0) {
                 先頭レコード = entity;
             }
@@ -964,7 +974,7 @@ public class KyufuJissekiShokaiFinder {
             if (交換情報識別番号の先頭３桁.equals(entity.getKokanJohoShikibetsuNo().value().substring(0, INDEX_3))) {
                 共同処理あり = true;
                 if (!給付実績情報作成区分コード_削除.equals(先頭レコード.getKyufuSakuseiKubunCode())) {
-                    給付実績基本高額介護サービス費表示対象データ.add(先頭レコード);
+                    給付実績基本高額介護サービス費表示対象データ.add(new KyufujissekiKogakuKaigoServicehi(先頭レコード));
                 }
             }
         }
