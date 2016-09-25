@@ -8,20 +8,16 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150040;
 import jp.co.ndensan.reams.db.dbc.business.core.hekinriyogakutokehyo.HekinRiyoGakuTokehyoResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkaCyouHyouEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -43,11 +39,10 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
     private FileSpoolManager manager;
     @BatchWriter
     private CsvWriter<SyorikekkaCyouHyouEucCsvEntity> eucCsvWriter;
-    private RString 処理結果確認リストCSV;
+    private static final RString 処理結果確認リストCSV = new RString("DBU900002_ShoriKekkaKakuninList.csv");
 
     @Override
     protected void initialize() {
-        処理結果確認リストCSV = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 処理結果確認リストCSV);
     }
@@ -62,7 +57,7 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();

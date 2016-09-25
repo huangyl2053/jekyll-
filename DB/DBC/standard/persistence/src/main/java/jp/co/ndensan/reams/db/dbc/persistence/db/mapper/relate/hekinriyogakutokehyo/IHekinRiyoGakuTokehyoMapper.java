@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutok
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.heikinriyogakuyokeihyo.HeikinriyogakuTokeihyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.KyufujissekiTempTblEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShikakutempTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShukeinaiyouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity;
 
@@ -67,5 +68,11 @@ public interface IHekinRiyoGakuTokehyoMapper {
      * @param entity ShukeinaiyouEntity
      */
     void updateDB出力出力用一時TBL費用総額(ShukeinaiyouEntity entity);
+
+    /**
+     *
+     * @return ShikakutempTblEntityList
+     */
+    List<ShikakutempTblEntity> get平均利用額統計Entity();
 
 }
