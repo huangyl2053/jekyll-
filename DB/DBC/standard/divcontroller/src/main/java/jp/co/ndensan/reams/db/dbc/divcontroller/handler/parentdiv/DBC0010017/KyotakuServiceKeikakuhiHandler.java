@@ -119,8 +119,8 @@ public class KyotakuServiceKeikakuhiHandler {
         if (居宅サービス計画費.get居宅サービス計画作成依頼届出年月日() != null && !居宅サービス計画費.get居宅サービス計画作成依頼届出年月日().isEmpty()) {
             row.setTxtTodokedeYMD(new RString(居宅サービス計画費.get居宅サービス計画作成依頼届出年月日().toString()));
         }
-        if (RString.isNullOrEmpty(居宅サービス計画費.getサービス計画費明細行番号())) {
-            row.setTxtServiceName(居宅サービス計画費.getサービス計画費明細行番号());
+        if (RString.isNullOrEmpty(居宅サービス計画費.getサービスコード().value())) {
+            row.setTxtServiceName(business.getサービス種類略称());
         }
         if (居宅サービス計画費.get単位数単価() != null) {
             row.setTxtTaniTanka(new RString(居宅サービス計画費.get単位数単価().toString()));
