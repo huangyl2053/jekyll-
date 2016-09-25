@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBU030030_JigyoHokokuNenpo_IppanParamter extends BatchParameterBase {
+public class DBU030030_JigyoHokokuNenpo_IppanParameter extends BatchParameterBase {
 
     private static final String PRINTCONTROLKBN = "printControlKbn";
     private static final String HOKOKUNENDO = "hokokuNendo";
@@ -75,7 +75,7 @@ public class DBU030030_JigyoHokokuNenpo_IppanParamter extends BatchParameterBase
     /**
      * コンストラクタです。
      */
-    public DBU030030_JigyoHokokuNenpo_IppanParamter() {
+    public DBU030030_JigyoHokokuNenpo_IppanParameter() {
     }
 
     /**
