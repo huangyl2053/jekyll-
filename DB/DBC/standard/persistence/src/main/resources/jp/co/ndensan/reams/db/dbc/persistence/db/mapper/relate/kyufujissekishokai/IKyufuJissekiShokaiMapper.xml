@@ -62,7 +62,7 @@
         AND (((SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
                 AND (#{サービス提供年月} <![CDATA[<=]]> SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD", 1, 6)))
         OR  ((SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
-                AND rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" IS NULL))
+                AND (rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" IS NULL OR rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" = '')))
     </select>
     
     <select resultOrdered="true" id="get介護事業者指定サービス情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" 
