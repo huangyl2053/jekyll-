@@ -237,7 +237,7 @@
                             dbT7131."serviceKoumokuCd",
                             dbT7131."rirekiNo"
                      FROM   rgdb."DbT7131KaigoServiceNaiyou" AS dbT7131
-                     WHERE  dbT7131."isDeleted"
+                     WHERE  dbT7131."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7131."teikyoKaishiYM"
                      AND    (dbT7131."teikyoShuryoYM" IS NULL OR (dbT7131."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7131."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
@@ -405,7 +405,7 @@
                     (SELECT MAX(dbT7131."teikyoKaishiYM") AS "teikyoKaishiYM",
                             dbT7130."serviceShuruiCd"
                      FROM   rgdb."DbT7130KaigoServiceShurui" AS dbT7130
-                     WHERE  dbT7130."isDeleted"
+                     WHERE  dbT7130."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    (dbT7130."teikyoShuryoYM" IS NULL OR (dbT7130."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7130."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
@@ -447,7 +447,7 @@
                     (SELECT MAX(dbT7131."teikyoKaishiYM") AS "teikyoKaishiYM",
                             dbT7130."serviceShuruiCd"
                      FROM   rgdb."DbT7130KaigoServiceShurui" AS dbT7130
-                     WHERE  dbT7130."isDeleted"
+                     WHERE  dbT7130."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    (dbT7130."teikyoShuryoYM" IS NULL OR (dbT7130."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7130."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
@@ -489,7 +489,7 @@
                     (SELECT MAX(dbT7131."teikyoKaishiYM") AS "teikyoKaishiYM",
                             dbT7130."serviceShuruiCd"
                      FROM   rgdb."DbT7130KaigoServiceShurui" AS dbT7130
-                     WHERE  dbT7130."isDeleted"
+                     WHERE  dbT7130."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    (dbT7130."teikyoShuryoYM" IS NULL OR (dbT7130."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7130."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
@@ -553,7 +553,7 @@
                     (SELECT MAX(dbT7131."teikyoKaishiYM") AS "teikyoKaishiYM",
                             dbT7130."serviceShuruiCd"
                      FROM   rgdb."DbT7130KaigoServiceShurui" AS dbT7130
-                     WHERE  dbT7130."isDeleted"
+                     WHERE  dbT7130."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    (dbT7130."teikyoShuryoYM" IS NULL OR (dbT7130."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7130."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
@@ -595,7 +595,7 @@
                     (SELECT MAX(dbT7131."teikyoKaishiYM") AS "teikyoKaishiYM",
                             dbT7130."serviceShuruiCd"
                      FROM   rgdb."DbT7130KaigoServiceShurui" AS dbT7130
-                     WHERE  dbT7130."isDeleted"
+                     WHERE  dbT7130."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    (dbT7130."teikyoShuryoYM" IS NULL OR (dbT7130."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7130."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
@@ -637,7 +637,7 @@
                     (SELECT MAX(dbT7131."teikyoKaishiYM") AS "teikyoKaishiYM",
                             dbT7130."serviceShuruiCd"
                      FROM   rgdb."DbT7130KaigoServiceShurui" AS dbT7130
-                     WHERE  dbT7130."isDeleted"
+                     WHERE  dbT7130."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    (dbT7130."teikyoShuryoYM" IS NULL OR (dbT7130."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7130."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
@@ -679,7 +679,7 @@
                     (SELECT MAX(dbT7131."teikyoKaishiYM") AS "teikyoKaishiYM",
                             dbT7130."serviceShuruiCd"
                      FROM   rgdb."DbT7130KaigoServiceShurui" AS dbT7130
-                     WHERE  dbT7130."isDeleted"
+                     WHERE  dbT7130."isDeleted" = FALSE 
                      AND    #{サービス提供年月_開始} <![CDATA[<=]]> dbT7130."teikyoKaishiYM"
                      AND    (dbT7130."teikyoShuryoYM" IS NULL OR (dbT7130."teikyoShuryoYM" IS NOT NULL
                                 AND dbT7130."teikyoShuryoYM" <![CDATA[<=]]> #{サービス提供年月_終了}))
