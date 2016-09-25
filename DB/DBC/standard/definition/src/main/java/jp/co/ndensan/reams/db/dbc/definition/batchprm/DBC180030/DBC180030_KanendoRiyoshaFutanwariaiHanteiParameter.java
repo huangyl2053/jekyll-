@@ -124,8 +124,7 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
      */
     public int get最大ループ回数() {
         if (対象年度.compareTo(年度) < INT_5) {
-            int ループ回数 = 対象年度.getYearValue() - 年度.getYearValue();
-            return ループ回数;
+            return 対象年度.getYearValue() - 年度.getYearValue();
         }
         return INT_5;
     }
