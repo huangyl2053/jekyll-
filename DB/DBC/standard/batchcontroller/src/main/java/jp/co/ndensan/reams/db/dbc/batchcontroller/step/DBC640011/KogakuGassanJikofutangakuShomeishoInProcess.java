@@ -441,22 +441,16 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
         dbWT37J1TempEntity.setTaishoM(翌年六月分);
         dbWT37J1TempEntity.setJikoFutanGaku(getDecimal(csvEntity.get対象年度翌年6月分_自己負担額()));
-        dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity
-                .get対象年度翌年6月分_うち70_74歳の者に係る負担額()));
-        dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity
-                .get対象年度翌年6月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
-        dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity
-                .get対象年度翌年6月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
+        dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity.get対象年度翌年6月分_うち70_74歳の者に係る負担額()));
+        dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity.get対象年度翌年6月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
+        dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity.get対象年度翌年6月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
         dbWT37J1TempEntity.setTekiyo(csvEntity.get対象年度翌年6月分_摘要());
         高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
         dbWT37J1TempEntity.setTaishoM(翌年七月分);
         dbWT37J1TempEntity.setJikoFutanGaku(getDecimal(csvEntity.get対象年度翌年7月分_自己負担額()));
-        dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity
-                .get対象年度翌年7月分_うち70_74歳の者に係る負担額()));
-        dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity
-                .get対象年度翌年7月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
-        dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity
-                .get対象年度翌年7月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
+        dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity.get対象年度翌年7月分_うち70_74歳の者に係る負担額()));
+        dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity.get対象年度翌年7月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
+        dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity.get対象年度翌年7月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
         dbWT37J1TempEntity.setTekiyo(csvEntity.get対象年度翌年7月分_摘要());
         高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
         if (対象年度420.equals(csvEntity.get対象年度())) {
@@ -472,32 +466,23 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
             高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
             dbWT37J1TempEntity.setTaishoM(五月分);
             dbWT37J1TempEntity.setJikoFutanGaku(getDecimal(csvEntity.get対象年度5月分_自己負担額()));
-            dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity
-                    .get対象年度5月分_うち70_74歳の者に係る負担額()));
-            dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity
-                    .get対象年度5月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
-            dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity
-                    .get対象年度5月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
+            dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity.get対象年度5月分_うち70_74歳の者に係る負担額()));
+            dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity.get対象年度5月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
+            dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity.get対象年度5月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
             dbWT37J1TempEntity.setTekiyo(csvEntity.get対象年度5月分_摘要());
             高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
             dbWT37J1TempEntity.setTaishoM(六月分);
             dbWT37J1TempEntity.setJikoFutanGaku(getDecimal(csvEntity.get対象年度6月分_自己負担額()));
-            dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity
-                    .get対象年度6月分_うち70_74歳の者に係る負担額()));
-            dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity
-                    .get対象年度6月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
-            dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity
-                    .get対象年度6月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
+            dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity.get対象年度6月分_うち70_74歳の者に係る負担額()));
+            dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity.get対象年度6月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
+            dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity.get対象年度6月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
             dbWT37J1TempEntity.setTekiyo(csvEntity.get対象年度6月分_摘要());
             高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
             dbWT37J1TempEntity.setTaishoM(七月分);
             dbWT37J1TempEntity.setJikoFutanGaku(getDecimal(csvEntity.get対象年度7月分_自己負担額()));
-            dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity
-                    .get対象年度7月分_うち70_74歳の者に係る負担額()));
-            dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity
-                    .get対象年度7月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
-            dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity
-                    .get対象年度7月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
+            dbWT37J1TempEntity.setUchisu_70_74JikoFutanGaku(getDecimal(csvEntity.get対象年度7月分_うち70_74歳の者に係る負担額()));
+            dbWT37J1TempEntity.setUnder_70KogakuShikyuGaku(getDecimal(csvEntity.get対象年度7月分_高額療養費_高額介護_予防_サービス費_支給額_70歳未満()));
+            dbWT37J1TempEntity.setOver_70_74KogakuShikyuGaku(getDecimal(csvEntity.get対象年度7月分_高額療養費_高額介護_予防_サービス費_支給額_70_74歳()));
             dbWT37J1TempEntity.setTekiyo(csvEntity.get対象年度7月分_摘要());
             高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
         }
