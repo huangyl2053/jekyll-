@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.HchiJinoSyouriCreateMybatisprmParamter;
@@ -29,7 +29,7 @@ public class HchiJinoSyouriCreateProcessParamter implements IBatchProcessParamet
     // 基準日
     private FlexibleDate 基準日;
     // 旧措置区分
-    private KyusochishaKubun 旧措置区分;
+    private KyusochishaJukyushaKubun 旧措置区分;
     // 受給者区分
     private JukyushaKubun2 受給者区分;
 
@@ -42,7 +42,7 @@ public class HchiJinoSyouriCreateProcessParamter implements IBatchProcessParamet
      * @param 基準日 基準日
      */
     public HchiJinoSyouriCreateProcessParamter(TargetList 対象リスト,
-            JukyushaKubun2 受給者区分, KyusochishaKubun 旧措置区分, FlexibleDate 基準日) {
+            JukyushaKubun2 受給者区分, KyusochishaJukyushaKubun 旧措置区分, FlexibleDate 基準日) {
         this.対象リスト = 対象リスト;
         this.受給者区分 = 受給者区分;
         this.旧措置区分 = 旧措置区分;
