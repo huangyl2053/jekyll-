@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.gogitaijohosakusei;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE511001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.gogitaijohosakusei.GogitaiJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GogitaiJohoSakuseiBatchParamter extends BatchParameterBase {
+public class DBE511001_GogitaiIkkatuParameter extends BatchParameterBase {
 
     private static final String SHARED_FILE_ID = "sharedFileID";
     private static final String SHARED_FILE_NAME = "sharedFileName";

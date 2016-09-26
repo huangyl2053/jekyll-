@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.gogitaijohosakusei;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE511001;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.GogitaiJohoIkkatuSakuseiErrorMessage;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
