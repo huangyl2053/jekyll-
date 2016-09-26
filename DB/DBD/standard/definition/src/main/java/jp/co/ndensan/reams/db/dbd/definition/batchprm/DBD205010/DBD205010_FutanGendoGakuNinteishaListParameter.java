@@ -70,7 +70,7 @@ public class DBD205010_FutanGendoGakuNinteishaListParameter extends BatchParamet
     @BatchParameter(key = JUKYUSHAKUBUN, name = "受給者区分")
     private JukyushaKubun2 受給者区分;
     @BatchParameter(key = RIYOUSHAFUTANDANKAI, name = "利用者負担段階")
-    private List<RiyoshaFutanDankaiHanni> 利用者負担段階;
+    private RiyoshaFutanDankaiHanni 利用者負担段階;
     @BatchParameter(key = CSVSHUTSURYOKUSETEI, name = "CSV出力設定")
     private List<CSVSettings> csv出力設定;
     @BatchParameter(key = CHANGEPAGEID, name = "改頁出力順ID")
