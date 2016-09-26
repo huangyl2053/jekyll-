@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1510-020 x_xuliang -->
+<!-- バッチパラメータ．データリストより、変更したいデータを取得するxml -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.INinteiKekkaRenkeiDetaTorikomiMapper">
+    <select id="get変更したいデータを取得する" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.DBD205010.RendingJieguoLianxieMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.HenKouData" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        A.*
+        FROM
+        <if test="is一時デーブル_日次進捗">
+            "NichijiShinchokuIchijiTeburuTemp" AS A
+        </if>
+        <if test="is一時デーブル_認定結果">
+            "NinteiKekkaIchijiTeburuTemp" AS A
+        </if>
+        WHERE
+        A."hokenshabango" = #{保険者番号}
+        AND A."hihokenjabango" = #{被保番号}
+        AND A."ninteishinseibi" = #{認定申請日}
+        AND A."shinseikubunshinseiji" = #{申請区分_申請時}
+    </select>
+</mapper>
