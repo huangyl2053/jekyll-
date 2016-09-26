@@ -117,23 +117,23 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         レコード番号 = INT_0;
 
         if (コード_173.equals(processParameter.getコード())) {
-            出力ファイル名 = ファイル名_前.concat(コード_173)
-                    .concat(processParameter.get保険者番号().getColumnValue()).concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
+            出力ファイル名 = ファイル名_前.concat(コード_173).concat(processParameter.get保険者番号().getColumnValue())
+                    .concat(processParameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
             this.データ種別 = ConfigKeysKokuhorenSofu.過誤申立書情報.getコード();
             this.媒体区分 = DbBusinessConfig
                     .get(ConfigNameDBC.国保連送付媒体_過誤申立Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             this.交換情報識別番号 = KokuhorenSofuKokanJohoShikibetsuBango.介護給付過誤申立書情報.getコード();
         } else if (コード_176.equals(processParameter.getコード())) {
-            出力ファイル名 = ファイル名_前.concat(コード_176)
-                    .concat(processParameter.get保険者番号().getColumnValue()).concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
+            出力ファイル名 = ファイル名_前.concat(コード_176).concat(processParameter.get保険者番号().getColumnValue())
+                    .concat(processParameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
             データ種別 = ConfigKeysKokuhorenSofu.総合事業費経過措置過誤申立書情報.getコード();
             this.媒体区分 = DbBusinessConfig
                     .get(ConfigNameDBC.国保連送付媒体_過誤申立総合経措Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             this.交換情報識別番号 = KokuhorenSofuKokanJohoShikibetsuBango.総合事業費経過措置過誤申立書情報.getコード();
         }
         if (コード_179.equals(processParameter.getコード())) {
-            出力ファイル名 = ファイル名_前.concat(コード_179)
-                    .concat(processParameter.get保険者番号().getColumnValue()).concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
+            出力ファイル名 = ファイル名_前.concat(コード_179).concat(processParameter.get保険者番号().getColumnValue())
+                    .concat(processParameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
             データ種別 = ConfigKeysKokuhorenSofu.総合事業費過誤申立書情報.getコード();
             this.媒体区分 = DbBusinessConfig
                     .get(ConfigNameDBC.国保連送付媒体_過誤申立総合Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
@@ -154,7 +154,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
+                .setEncode(Encode.UTF_8)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false)
                 .build();
@@ -252,7 +252,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
     }
 
     private void do外字類似変換() {
-        try (FileReader reader = new FileReader(eucFilePath, Encode.UTF_8withBOM);
+        try (FileReader reader = new FileReader(eucFilePath, Encode.UTF_8);
                 ByteWriter writer = new ByteWriter(eucFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
             for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
                 BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(

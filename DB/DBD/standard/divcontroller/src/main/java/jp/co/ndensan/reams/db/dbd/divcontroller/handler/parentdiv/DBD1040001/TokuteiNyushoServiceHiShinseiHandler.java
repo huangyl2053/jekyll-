@@ -57,8 +57,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class TokuteiNyushoServiceHiShinseiHandler {
 
     private final TokuteiNyushoServiceHiShinseiDiv div;
-    //private final RString 申請メニュー = new RString("DBDMN21005");
-    private final RString 申請メニュー = new RString("menu1");
+    private final RString 申請メニュー = new RString("DBDMN21005");
+    //private final RString 申請メニュー = new RString("menu1");
     //private final RString 承認メニュー = new RString("menu1");
     private final RString 承認メニュー = new RString("DBDMN22005");
     private final RString 申請情報を追加する = new RString("申請情報を追加する");

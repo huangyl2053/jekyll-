@@ -406,7 +406,7 @@ public class ScheduleSettingHandler {
             for (RString 表示順_CODE : 取込表示順ソートList) {
                 識別番号 = 表示順_CODE.split(ダッシュ.toString()).get(INDEX_ONE);
                 取込交換情報識別番号 = ConfigKeysKokuhorenTorikomi.toValue(識別番号);
-                if (!取込交換情報識別番号.getスケジュール設定有無()) {
+                if (!取込交換情報識別番号.isスケジュール設定有無()) {
                     continue;
                 }
                 if ((ConfigKeysKokuhorenTorikomi.償還払支給決定者一覧情報.getコード().equals(識別番号)
@@ -455,7 +455,7 @@ public class ScheduleSettingHandler {
                 }
                 KokuhorenInterfaceKanri entity = 取込Map.get(識別番号);
                 取込交換情報識別番号 = ConfigKeysKokuhorenTorikomi.toValue(識別番号);
-                if (!取込交換情報識別番号.getスケジュール設定有無()) {
+                if (!取込交換情報識別番号.isスケジュール設定有無()) {
                     continue;
                 }
                 if ((ConfigKeysKokuhorenTorikomi.償還払支給決定者一覧情報.getコード().equals(識別番号)

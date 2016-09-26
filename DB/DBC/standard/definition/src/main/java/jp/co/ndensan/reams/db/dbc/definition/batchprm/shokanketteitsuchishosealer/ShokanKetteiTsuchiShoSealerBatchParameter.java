@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -56,7 +56,7 @@ public final class ShokanKetteiTsuchiShoSealerBatchParameter implements IBatchPr
      * @return Process用パラメータ
      */
     public static ShokanKetteiTsuchiShoSealerBatchParameter
-            createProcessParam(ShoukanBaraiSuuchiShoIkatsuBatchParamter batchParamter) {
+            createProcessParam(DBC030010_ShokanShikyuKetteiTsuchishoParameter batchParamter) {
 
         RDate dataFrom = null;
         RDate dataTo = null;
