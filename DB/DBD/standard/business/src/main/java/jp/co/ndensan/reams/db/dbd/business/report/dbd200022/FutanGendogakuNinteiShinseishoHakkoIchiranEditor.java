@@ -198,10 +198,12 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
                 世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
             }
             source.listLower_8 = 世帯課税名称;
-            if (KetteiKubun.承認する.getコード().equals(this.帳票情報.get決定区分().getコード())) {
+            if (this.帳票情報.get決定区分() != null && (KetteiKubun.承認する.getコード().equals(this.帳票情報.get決定区分().getコード()))) {
                 source.listLower_9 = new RString("承認");
-            } else {
+            } else if (this.帳票情報.get決定区分() != null) {
                 source.listLower_9 = new RString("非承認");
+            } else {
+                source.listLower_9 = RString.EMPTY;
             }
             if (this.帳票情報.get旧措置() != null) {
                 source.listLower_10 = this.帳票情報.get旧措置().get名称();
