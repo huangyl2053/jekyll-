@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbipanel;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE622001;
 
 import java.util.ArrayList;
 import java.util.List;

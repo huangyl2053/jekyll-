@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.hoshushiharaijunbipanel;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE622001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class HoshushiharaiJumbiBatchParameter extends BatchParameterBase {
+public class DBE622001_ShiharaidataSakuseiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 5507196526569627897L;
     private static final String JISSEKIDATERANGE_FROM = "jissekidaterangefrom";
@@ -47,7 +47,7 @@ public class HoshushiharaiJumbiBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public HoshushiharaiJumbiBatchParameter() {
+    public DBE622001_ShiharaidataSakuseiParameter() {
 
     }
 
@@ -61,7 +61,7 @@ public class HoshushiharaiJumbiBatchParameter extends BatchParameterBase {
      * @param chkshujii 作成データ対象_主治医意見書作成報酬対象
      * @param chkshinsakai 作成データ対象_審査会委員報酬対象
      */
-    public HoshushiharaiJumbiBatchParameter(
+    public DBE622001_ShiharaidataSakuseiParameter(
             FlexibleDate jissekidaterangefrom,
             FlexibleDate jissekidaterangeto,
             FlexibleDate furikomishiteiday,

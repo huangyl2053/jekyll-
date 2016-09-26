@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbipanel;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE622001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.hoshushiharaijunbipanel.HoshushiharaiJumbiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBatchRelateEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -48,20 +48,20 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBE-1990-020 lizhuoxuan
  */
-public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<HoshushiharaiJumbiPanelBatchRelateEntity> {
+public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<HoshushiharaiJumbiPanelBatchRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbipanel.IHoshuShiharaiJunbiPanelMapper"
-            + ".get主治医意見書作成報酬");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE622002");
+            + ".get審査会委員報酬");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE622001");
     private HoshushiharaiJumbiPanelProcessParamter processParameter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private int count = 0;
     private int kinkaku = 0;
+    private static final int MAXKEEPVERSIONS = 1;
     private static final int INT_ONE = 110;
     private static final int INT_NINE = 119;
-    private static final int MAXKEEPVERSIONS = 1;
     private OutputParameter<RString> outSharedFileName;
     private OutputParameter<RDateTime> outSharedFileID;
 
@@ -73,7 +73,7 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
         outSharedFileName = new OutputParameter<>();
         outSharedFileID = new OutputParameter<>();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HoshuShiharaiShujii.DAT"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HoshuShiharaiShinsakaiiin.DAT"));
 
     }
 
@@ -90,17 +90,15 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
     @Override
     protected void process(HoshushiharaiJumbiPanelBatchRelateEntity entity) {
         count++;
-        kinkaku = kinkaku + entity.getIkenshoSakuseiryo();
-        HoshushiharaiJumbiPanelBusiness business = new HoshushiharaiJumbiPanelBusiness();
-        List<RString> 業務固有キー = new ArrayList<>();
-        業務固有キー.add(entity.getShujiiIryoKikanCode());
-        batchsimplewriter.writeLine(business.setEucCsvEntity(entity, get口座情報(new KamokuCode("002"), 業務固有キー),
-                processParameter.getFurikomishiteiday(), new RString("2")));
+        kinkaku = kinkaku + entity.getShinsakaiHoshuGokei();
+        HoshushiharaiJumbiBusiness business = new HoshushiharaiJumbiBusiness();
+        batchsimplewriter.writeLine(business.setEucCsvEntity(entity, getKoza(entity),
+                processParameter.getFurikomishiteiday()));
     }
 
     @Override
     protected void afterExecute() {
-        FilesystemName ファイル名称 = new FilesystemName(new RString("HoshuShiharaiShujii.DAT"));
+        FilesystemName ファイル名称 = new FilesystemName(new RString("HoshuShiharaiShinsakaiiin.DAT"));
         setSharedFile(ファイル名称);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("8"));
@@ -124,6 +122,19 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
         outSharedFileID.setValue(fileId);
     }
 
+    private List<Koza> getKoza(HoshushiharaiJumbiPanelBatchRelateEntity entity) {
+        if (entity.getNinteichosaItakusakiCode() != null && !entity.getNinteichosaItakusakiCode().isEmpty()) {
+            return get口座情報(new KamokuCode("003"), entity.getNinteichosaItakusakiCode());
+        }
+        if (entity.getShujiiIryoKikanCode() != null && !entity.getShujiiIryoKikanCode().isEmpty()) {
+            return get口座情報(new KamokuCode("002"), entity.getShujiiIryoKikanCode());
+        }
+        if (entity.getSonotaKikanCode() != null && !entity.getSonotaKikanCode().isEmpty()) {
+            return get口座情報(new KamokuCode("004"), entity.getSonotaKikanCode());
+        }
+        return null;
+    }
+
     /**
      * 口座情報の編集処理です。
      *
@@ -131,33 +142,30 @@ public class HoshushiharaiJumbiIkenCsvProcess extends BatchProcessBase<Hoshushih
      * @param 業務固有キー 業務固有キー
      * @return ChosaHoshuShiharaiEntity
      */
-    public static Koza get口座情報(KamokuCode kamokuCode, List<RString> 業務固有キー) {
+    private List<Koza> get口座情報(KamokuCode kamokuCode, RString key) {
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.set業務コード(GyomuCode.DB介護保険);
         builder.setサブ業務コード(SubGyomuCode.DBE認定支援);
         builder.set科目コード(kamokuCode);
+        List<RString> 業務固有キー = new ArrayList<>();
+        業務固有キー.add(key);
         builder.set業務固有キーリスト(業務固有キー);
         builder.set用途区分(new KozaYotoKubunCodeValue(new RString("1")));
         IKozaSearchKey searchKey = builder.build();
-        List<Koza> kozaList = KozaManager.createInstance().get口座(searchKey);
-        Koza koza = null;
-        if (!kozaList.isEmpty()) {
-            koza = kozaList.get(0);
-        }
-        return koza;
+        return KozaManager.createInstance().get口座(searchKey);
     }
 
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("報酬支払いデータ（主治医意見書作成報酬）"),
+                new RString("報酬支払いデータ（審査会委員報酬）"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("HoshuShiharaiShujii.DAT"),
+                new RString("HoshuShiharaiShinsakaiiin.DAT"),
                 EUC_ENTITY_ID.toRString(),
-                new HoshushiharaiJumbiPanelBusiness().get出力件数(new Decimal(batchsimplewriter.getCount())),
-                new HoshushiharaiJumbiPanelBusiness().get出力条件(processParameter));
+                new HoshushiharaiJumbiBusiness().get出力件数(new Decimal(batchsimplewriter.getCount())),
+                new HoshushiharaiJumbiBusiness().get出力条件(processParameter));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 }

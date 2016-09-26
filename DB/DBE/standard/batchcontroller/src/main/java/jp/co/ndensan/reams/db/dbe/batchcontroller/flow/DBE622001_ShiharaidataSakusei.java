@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hoshushiharaijunbipanel;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbipanel.HoshushiharaiJumbiChousaCsvProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbipanel.HoshushiharaiJumbiIkenCsvProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbipanel.HoshushiharaiJumbiShinsaCsvProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hoshushiharaijunbipanel.HoshushiharaiJumbiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE622001.HoshushiharaiJumbiChousaCsvProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE622001.HoshushiharaiJumbiIkenCsvProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE622001.HoshushiharaiJumbiShinsaCsvProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE622001.DBE622001_ShiharaidataSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1990-020 lizhuoxuan
  */
-public class HoshushiharaiJumbiFlow extends BatchFlowBase<HoshushiharaiJumbiBatchParameter> {
+public class DBE622001_ShiharaidataSakusei extends BatchFlowBase<DBE622001_ShiharaidataSakuseiParameter> {
 
     private static final String HOSHUSHIHARAIJUMBICHOUSA = "hoshushiharaijumbichousa";
     private static final String HOSHUSHIHARAIJUMBIIKEN = "hoshushiharaijumbiiken";
