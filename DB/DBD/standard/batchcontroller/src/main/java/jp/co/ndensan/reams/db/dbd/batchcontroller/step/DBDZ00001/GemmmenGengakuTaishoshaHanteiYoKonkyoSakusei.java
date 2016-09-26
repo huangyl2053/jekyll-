@@ -139,30 +139,6 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         return entity;
     }
 
-//    private void setTaishouJohoEntityValues(TaishouJohoEntity entity) {
-//        if (entity.get課税区分_住民税減免前() == null || entity.get課税区分_住民税減免前().isEmpty()) {
-//            entity.set課税区分_住民税減免前(RString.EMPTY);
-//        }
-//        if (entity.get基準日() == null || entity.get基準日().isEmpty()) {
-//            entity.set基準日(FlexibleDate.EMPTY);
-//        }
-//        if (entity.get本人区分() == null || entity.get本人区分().isEmpty()) {
-//            entity.set本人区分(RString.EMPTY);
-//        }
-//        if (entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty()) {
-//            entity.set被保険者番号(HihokenshaNo.EMPTY);
-//        }
-//        if (entity.get識別コード() == null || entity.get識別コード().isEmpty()) {
-//            entity.set識別コード(ShikibetsuCode.EMPTY);
-//        }
-//        if (entity.get識別コード_生活保護受給者() == null || entity.get識別コード_生活保護受給者().isEmpty()) {
-//            entity.set識別コード_生活保護受給者(ShikibetsuCode.EMPTY);
-//        }
-//        if (entity.get識別コード_老齢福祉年金受給者() == null || entity.get識別コード_老齢福祉年金受給者().isEmpty()) {
-//            entity.set識別コード_老齢福祉年金受給者(ShikibetsuCode.EMPTY);
-//        }
-//
-//    }
     private void get合計金額(TaishouJohoEntity list) {
         if (!本人.equals(list.get本人区分())) {
             金額list.add(list.get合計所得金額().add(list.get年金収入額()).add(list.get非課税年金勘案額()));
