@@ -40,6 +40,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper."
             + "get平均利用額統計Entity");
+    private static final int 值0 = 0;
     private static final RString 值1 = new RString("1");
     private static final RString 值2 = new RString("2");
     private static final RString 值33 = new RString("3");
@@ -300,12 +301,12 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
 
     private RString toDecimal(RString obj1, RString obj2) {
 
-        if (RString.isNullOrEmpty(obj1) || RString.isNullOrEmpty(obj2)) {
+        if (RString.isNullOrEmpty(obj1) || RString.isNullOrEmpty(obj2)
+                || 值0 == Integer.valueOf(obj1.toString()) || 值0 == Integer.valueOf(obj2.toString())) {
             return RString.EMPTY;
         } else {
             return new RString((new Decimal(obj1.toString()).divide(new Decimal(obj2.toString()))).toString());
         }
-
     }
 
     private RString setDateFormat(RString date) {

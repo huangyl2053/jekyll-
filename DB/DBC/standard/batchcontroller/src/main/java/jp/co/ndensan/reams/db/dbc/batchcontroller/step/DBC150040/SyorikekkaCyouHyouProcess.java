@@ -70,7 +70,7 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
 
     @Override
     protected void afterExecute() {
-        manager.spool(eucFilePath);
         eucCsvWriter.close();
+        manager.spool(eucFilePath);
     }
 }
