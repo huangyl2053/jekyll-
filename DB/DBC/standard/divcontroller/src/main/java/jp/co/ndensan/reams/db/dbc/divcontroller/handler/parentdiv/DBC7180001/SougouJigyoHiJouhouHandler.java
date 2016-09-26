@@ -78,13 +78,8 @@ public class SougouJigyoHiJouhouHandler {
      * @param sougoujigyohijouhous List<SougouJigyoHiJouhouBusiness>
      */
     public void setサービス種類DDL(RString key, List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous) {
-        List<KeyValueDataSource> list = new ArrayList();
-        div.getDdlSabisuSyurui().getDataSource().clear();
-        KeyValueDataSource source = new KeyValueDataSource();
-        source.setKey(new RString("Empty"));
-        source.setValue(new RString("すべて"));
-        list.add(source);
-        setサービスソース(sougoujigyohijouhous, list);
+
+        setサービスソース(sougoujigyohijouhous);
         div.getDdlSabisuSyurui().setSelectedKey(new RString("Empty"));
         div.getDdlSabisuSyurui().setReadOnly(false);
         if (作成区分_KEY0.equals(key)) {
@@ -202,9 +197,8 @@ public class SougouJigyoHiJouhouHandler {
         div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
                 new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
         RString syuruicode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("サービス種類コード"));
-        List<KeyValueDataSource> list = new ArrayList();
         if (!RString.isNullOrEmpty(syuruicode)) {
-            div.getDdlSabisuSyurui().setDataSource(setサービスソース(sougoujigyohijouhous, list));
+            div.getDdlSabisuSyurui().setDataSource(setサービスソース(sougoujigyohijouhous));
             div.getDdlSabisuSyurui().setSelectedKey(syuruicode);
         }
         RString jigyoshacode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("事業者コード"));
@@ -242,7 +236,13 @@ public class SougouJigyoHiJouhouHandler {
         return 日付.toDateString();
     }
 
-    private List<KeyValueDataSource> setサービスソース(List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous, List<KeyValueDataSource> list) {
+    private List<KeyValueDataSource> setサービスソース(List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous) {
+        List<KeyValueDataSource> list = new ArrayList();
+        div.getDdlSabisuSyurui().getDataSource().clear();
+        KeyValueDataSource source = new KeyValueDataSource();
+        source.setKey(new RString("Empty"));
+        source.setValue(new RString("すべて"));
+        list.add(source);
         for (SougouJigyoHiJouhouBusiness sougoujigyohijouhou : sougoujigyohijouhous) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(sougoujigyohijouhou.getサービス種類コード());

@@ -31,6 +31,7 @@ public class SougouJigyoHiJouhou {
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
     private static final RString KEY3 = new RString("key3");
+    private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
 
     /**
      * 画面の初期化メソッドです。
@@ -55,7 +56,7 @@ public class SougouJigyoHiJouhou {
      * @return ResponseData<SougouJigyoHiJouhouDiv>
      */
     public ResponseData<SougouJigyoHiJouhouDiv> onChange_SakuseiKubun(SougouJigyoHiJouhouDiv div) {
-        set作成区分(div);
+        getHandler(div).setサービス種類DDL(div.getRadSakuseiKubun().getSelectedKey(), set作成区分(div));
         return ResponseData.of(div).respond();
     }
 
@@ -78,7 +79,17 @@ public class SougouJigyoHiJouhou {
      * @return ResponseData<SougouJigyoHiJouhouDiv>
      */
     public ResponseData<SougouJigyoHiJouhouDiv> onClick_btnBatchParameterRestore(SougouJigyoHiJouhouDiv div) {
-        getHandler(div).onClick_btnBatchParameterRestore(set作成区分(div));
+        BatchParameterMap restoreBatchParameterMap = div.getJokenFukugenHozonl().getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        RString 抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出方法"));
+        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = new ArrayList<>();
+        if (基本ケアマネジメント情報.equals(抽出方法)) {
+            sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
+                    creatParameter(ServiceBunrui.ケアマネジメント_経過措置.getコード(), ServiceBunrui.ケアマネジメント.getコード())).records();
+        } else {
+            sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
+                    creatParameter(ServiceBunrui.総合事業_経過措置.getコード(), ServiceBunrui.総合事業.getコード())).records();
+        }
+        getHandler(div).onClick_btnBatchParameterRestore(sougoujigyohijouhous);
         return ResponseData.of(div).respond();
     }
 
@@ -107,7 +118,6 @@ public class SougouJigyoHiJouhou {
             sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
                     creatParameter(ServiceBunrui.ケアマネジメント_経過措置.getコード(), ServiceBunrui.ケアマネジメント.getコード())).records();
         }
-        getHandler(div).setサービス種類DDL(div.getRadSakuseiKubun().getSelectedKey(), sougoujigyohijouhous);
         return sougoujigyohijouhous;
     }
 }
