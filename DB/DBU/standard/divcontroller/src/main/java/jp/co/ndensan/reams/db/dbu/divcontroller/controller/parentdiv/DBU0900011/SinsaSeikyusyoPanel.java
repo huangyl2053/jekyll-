@@ -99,7 +99,7 @@ public class SinsaSeikyusyoPanel {
             ViewStateHolder.put(ViewStateKeys.審査請求届出日,
                     new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
         }
-        if (getHandler(div).getUIContainerId().equals(弁明登録)){
+        if (getHandler(div).getUIContainerId().equals(弁明登録)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(発行ボタン, false);
         }        
         return ResponseData.of(div).respond();
