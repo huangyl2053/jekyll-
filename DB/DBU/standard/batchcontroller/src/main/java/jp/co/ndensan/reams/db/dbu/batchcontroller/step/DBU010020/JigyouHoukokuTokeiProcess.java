@@ -108,7 +108,7 @@ public class JigyouHoukokuTokeiProcess extends BatchProcessBase<IppanJokyoJigyou
             shichosoncodeList.addAll(processParameter.get構成市町村コードList());
         }
         if (選択する区分.equals(processParameter.get旧市町村区分())) {
-            shichosoncodeList.addAll(processParameter.get構成市町村コードList());
+            shichosoncodeList.addAll(processParameter.get旧市町村コードList());
         }
         return shichosoncodeList;
     }

@@ -56,6 +56,6 @@ public class JigyouHoukokuTokeiMybatisParameter implements IMyBatisParameter {
         this.kijunYMD = new FlexibleDate(処理日時.getYearValue(), 処理日時.getMonthValue(), 処理日時.getDayValue());
         this.shoriEdaban = new RString(集計年月.getMonthValue()).padZeroToLeft(処理枝番LENGTH);
         this.subGyomuCode = SubGyomuCode.DBU介護統計報告;
-        this.syoriName = Syorimei.年報報告一般状況１_１１.getコード();
+        this.syoriName = Syorimei.月報報告一般状況１_１１.get名称();
     }
 }
