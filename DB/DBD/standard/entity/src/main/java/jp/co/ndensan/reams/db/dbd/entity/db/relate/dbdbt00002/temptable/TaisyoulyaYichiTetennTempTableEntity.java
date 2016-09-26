@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TaisyoulyaYichiTetennTempTableEntity extends DbTableEntityBase<TaishoshaJohoTempTableEntity> implements IDbAccessable {
 
-    private RString 被保険者番号;
-    private FlexibleDate 基準年月日;
+    private RString hihokenshaNo;
+    private FlexibleDate kijunYMD;
 
     /**
      * 減免減額対象者判定用根拠作成対象者一時テーブルの引数を作成
@@ -31,7 +31,7 @@ public class TaisyoulyaYichiTetennTempTableEntity extends DbTableEntityBase<Tais
      * @param 基準年月日 基準年月日
      */
     public TaisyoulyaYichiTetennTempTableEntity(RString 被保険者番号, FlexibleDate 基準年月日) {
-        this.被保険者番号 = 被保険者番号;
-        this.基準年月日 = 基準年月日;
+        this.hihokenshaNo = 被保険者番号;
+        this.kijunYMD = 基準年月日;
     }
 }
