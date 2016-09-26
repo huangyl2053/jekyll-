@@ -30,6 +30,6 @@ public class ShokanShikyuKetteiTsuchishoHakkouEntity implements Serializable {
      */
     public void initializeMd5ToEntities() {
         this.dbT3034Entity.initializeMd5();
-        this.dbT3036Entity.initializeMd5();;
+        this.dbT3036Entity.initializeMd5();
     }
 }

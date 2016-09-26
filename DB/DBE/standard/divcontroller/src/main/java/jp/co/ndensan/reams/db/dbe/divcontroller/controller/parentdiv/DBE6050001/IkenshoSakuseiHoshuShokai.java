@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6050001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshohoshushokai.IkenHoshuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601004.DBE601004_IkenshosakuseiHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshohoshushokai.IkenshoHoshuShokaiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiHandler;
@@ -114,8 +114,8 @@ public class IkenshoSakuseiHoshuShokai {
      * @param div 画面情報
      * @return ResponseData<IkenHoshuIchiranBatchParameter>
      */
-    public ResponseData<IkenHoshuIchiranBatchParameter> onClick_BtnShutsutyoku(IkenshoSakuseiHoshuShokaiDiv div) {
-        IkenHoshuIchiranBatchParameter parameter = getHandler(div).createBatchParam(CSVを出力する);
+    public ResponseData<DBE601004_IkenshosakuseiHoshuParameter> onClick_BtnShutsutyoku(IkenshoSakuseiHoshuShokaiDiv div) {
+        DBE601004_IkenshosakuseiHoshuParameter parameter = getHandler(div).createBatchParam(CSVを出力する);
         return ResponseData.of(parameter).respond();
     }
 
@@ -125,8 +125,8 @@ public class IkenshoSakuseiHoshuShokai {
      * @param div 画面情報
      * @return ResponseData<IkenHoshuIchiranBatchParameter>
      */
-    public ResponseData<IkenHoshuIchiranBatchParameter> onClick_BtnPulish(IkenshoSakuseiHoshuShokaiDiv div) {
-        IkenHoshuIchiranBatchParameter parameter = getHandler(div).createBatchParam(一覧表を発行する);
+    public ResponseData<DBE601004_IkenshosakuseiHoshuParameter> onClick_BtnPulish(IkenshoSakuseiHoshuShokaiDiv div) {
+        DBE601004_IkenshosakuseiHoshuParameter parameter = getHandler(div).createBatchParam(一覧表を発行する);
         return ResponseData.of(parameter).respond();
     }
 

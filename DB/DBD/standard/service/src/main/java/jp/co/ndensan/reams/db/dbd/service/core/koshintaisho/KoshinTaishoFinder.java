@@ -110,7 +110,7 @@ public class KoshinTaishoFinder {
                         .canAppend(false)
                         .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                         .setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            if (調査データ情報List != null && 調査データ情報List.size() > 0) {
+            if (調査データ情報List != null && !調査データ情報List.isEmpty()) {
                 for (SelectSyuuShadeTaEntity entity : 調査データ情報List) {
                     csvdeTeWriter.writeLine(setdetaEntity(entity));
                 }
@@ -164,6 +164,7 @@ public class KoshinTaishoFinder {
      */
     private SelectSyuuShadeTaCsvEntity setdetaEntity(SelectSyuuShadeTaEntity sqlEntity) {
         SelectSyuuShadeTaCsvEntity entity = new SelectSyuuShadeTaCsvEntity();
+        entity.set被保険者番号(sqlEntity.get被保険者番号());
         if (sqlEntity.get厚労省IF識別コード() != null && !sqlEntity.get厚労省IF識別コード().isEmpty()) {
             entity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(sqlEntity.get厚労省IF識別コード()).get名称());
         }

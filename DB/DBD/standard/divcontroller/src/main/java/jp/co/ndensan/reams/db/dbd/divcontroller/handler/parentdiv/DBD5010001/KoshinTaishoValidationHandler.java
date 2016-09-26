@@ -69,8 +69,8 @@ public class KoshinTaishoValidationHandler {
     public ValidationMessageControlPairs 更新管理完了対象者一覧選択行の完了処理事前チェック(
             ValidationMessageControlPairs pairs, KoshinTaishoDiv div) {
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
-            if (row.getChosahyoDataNyuryokuDay().getValue() == null
-                    || "".equals(row.getChosahyoDataNyuryokuDay().getValue().toString())) {
+            if (row.getKoshinTsuchiYMD().getValue() == null
+                    || row.getKoshinTsuchiYMD().getValue().toString().isEmpty()) {
                 pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.更新不可_汎用, "通知年月日が未設定")));
             }
         }

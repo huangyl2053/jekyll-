@@ -1505,7 +1505,7 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             TemParamter temparamter) {
         if (資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())
                 || 資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
-            if (施設入退所_資格喪失事由_転出OR死亡(施設入退所Entity, entity, temparamter)) {
+            if (施設入退所_資格喪失事由_転出OR死亡(施設入退所Entity, entity, temparamter, 資格喪失事由)) {
                 return true;
             }
         } else if (資格喪失事由.equals(ShikakuSoshitsuJiyu.その他.getコード())
@@ -1527,18 +1527,32 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
 
     private boolean 施設入退所_資格喪失事由_転出OR死亡(DbT1004ShisetsuNyutaishoEntity 施設入退所Entity,
             JuminIdoRendoShikakuTorokuEntity entity,
-            TemParamter temparamter) {
+            TemParamter temparamter, RString 資格喪失事由) {
         FlexibleDate 退所年月日 = 施設入退所Entity.getTaishoYMD();
         if (退所年月日 != null && !退所年月日.isEmpty()) {
             if (!temparamter.getLc異動日().equals(施設入退所Entity.getTaishoYMD())
-                    && temparamter.getTmp異動日().isBefore(施設入退所Entity.getTaishoYMD())) {
-                戻り値の編集(entity, JuminRendoFuseigo.住特_訂正不能_転出不整合.getコード(), RString.EMPTY);
+                    && temparamter.getTmp異動日().isBefore(施設入退所Entity.getTaishoYMD())
+                    && 資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())) {
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY);
                 return true;
             }
-        } else if (退所年月日 != null && 退所年月日.isEmpty()
+            if (!temparamter.getLc異動日().equals(施設入退所Entity.getTaishoYMD())
+                    && temparamter.getTmp異動日().isBefore(施設入退所Entity.getTaishoYMD())
+                    && 資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+                return true;
+            }
+        }
+        if (退所年月日 == null || 退所年月日.isEmpty()
                 && temparamter.getTmp異動日().isBefore(施設入退所Entity.getNyushoYMD())) {
-            戻り値の編集(entity, JuminRendoFuseigo.住特_訂正不能_転出不整合.getコード(), RString.EMPTY);
-            return true;
+            if (資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())) {
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY);
+                return true;
+            }
+            if (資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+                return true;
+            }
         }
         return false;
     }
@@ -1592,7 +1606,7 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                 temparamter.setTmp異動日(temparamter.getLc異動日());
             }
             FlexibleDate 適用届出年月日 = 適用除外者台帳.getTekiyoTodokedeYMD();
-            if (適用届出年月日 != null && 適用届出年月日.isEmpty()) {
+            if (適用届出年月日 == null || 適用届出年月日.isEmpty()) {
                 temparamter.setTmp届出日(住民異動情報.getShojoTodokedeYMD());
             } else {
                 temparamter.setTmp届出日(適用除外者台帳.getTekiyoTodokedeYMD());

@@ -64,6 +64,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -98,6 +99,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private static final RString EUC_WRITER_LIAN = new RString("～");
     private static final RString EUC_WRITER_DIAN = new RString("、");
     private static final RString EUC_WRITER_KONG = new RString("　　　　　　　　 ");
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
 
     private Association association;
     private CsvWriter<KakuninListCsvEntity> eucCsvWriter;
@@ -144,9 +150,15 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).create();
+        List<RString> pageBreakKeys = new ArrayList<>();
+        set改頁Key(outputOrder, pageBreakKeys);
+        if (!pageBreakKeys.isEmpty()) {
+            batchReportWrite = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value(), SubGyomuCode.DBD介護受給).addBreak(
+                    new BreakerCatalog<HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        } else {
+            batchReportWrite = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value(), SubGyomuCode.DBD介護受給).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
-
         if (TargetList.認定者リスト.getコード().equals(parameter.get対象リスト().getコード())) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_認定者, UzUDE0831EucAccesslogFileType.Csv);
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran.csv"));
@@ -361,7 +373,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
 
     private void 出力条件リスト_該当者() {
         RString 出力ページ数;
-        RString 出力順 = RString.EMPTY;
         RString 帳票ID = new RString("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran");
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
@@ -448,6 +459,67 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             }
         }
         return builder;
+    }
+
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
+    private RString to帳票物理名(RString 項目ID) {
+
+        RString 帳票物理名 = RString.EMPTY;
+
+        if (NinteishaListSakuseiProcessProperty.DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listUpper_2");
+        } else if (NinteishaListSakuseiProcessProperty.DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran.行政区コード.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listLower_2");
+        } else if (NinteishaListSakuseiProcessProperty.DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran.被保険者番号.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listUpper_1");
+        }
+        return 帳票物理名;
     }
 
 }

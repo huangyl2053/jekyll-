@@ -150,6 +150,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             count = count + 1;
         }
         div.getDdlKakoHokokuYM().setDataSource(dataSourceList);
+        div.getDdlKakoHokokuYM().setDisabled(true);
     }
 
     /**

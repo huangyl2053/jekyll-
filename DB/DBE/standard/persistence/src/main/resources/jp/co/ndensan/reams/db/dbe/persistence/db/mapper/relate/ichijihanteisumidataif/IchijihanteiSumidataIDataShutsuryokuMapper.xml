@@ -473,7 +473,7 @@
                 LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102
                 ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" AS DbT5123
-                ON DbT5123."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
+                ON DbT5123."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 LEFT JOIN rgdb."DbT5120ShinseitodokedeJoho" AS DbT5120
                 ON DbT5120."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS DbT7060

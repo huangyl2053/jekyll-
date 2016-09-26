@@ -340,7 +340,7 @@ public class IchijihanteiSumidataIDataShutsuryokuRelateEntity {
     private RString 前回介護複合型サービス;
     private RString 前回住宅改修介護給付;
     private RString 前回識別コード;
-    private RString 審査会メモ;
+    private RString コメント等;
     private RString 審査会意見;
 
 }
