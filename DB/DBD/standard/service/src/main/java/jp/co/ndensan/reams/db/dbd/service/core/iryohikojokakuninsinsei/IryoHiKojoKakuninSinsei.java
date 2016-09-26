@@ -564,7 +564,7 @@ public class IryoHiKojoKakuninSinsei {
     }
 
     private MeishoFuyoType get敬称(RString 敬称) {
-        if (敬称 != null && MeishoFuyoTypeEnum.様.getCode().equals(敬称)) {
+        if (MeishoFuyoTypeEnum.様.getCode().equals(敬称)) {
             return MeishoFuyoTypeEnum.様.getMeishoFuyoType();
         }
         return MeishoFuyoTypeEnum.無し.getMeishoFuyoType();
