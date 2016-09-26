@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class YouKaigoNinteiIkatsuKoshinValidationHandler {
 
     private final YouKaigoNinteiIkatsuKoshinDiv div;
-    private final int days = 60;
+    private static final int days = 60;
 
     /**
      * コンストラクターです。

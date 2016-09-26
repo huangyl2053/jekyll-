@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class GemmenJisshiJokyoMain {
 
-    private final int length = 32;
+    private static final int length = 32;
 
     /**
      * 画面初期化処理です。
