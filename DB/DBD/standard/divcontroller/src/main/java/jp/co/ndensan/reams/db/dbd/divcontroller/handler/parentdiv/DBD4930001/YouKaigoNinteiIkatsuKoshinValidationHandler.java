@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class YouKaigoNinteiIkatsuKoshinValidationHandler {
 
     private final YouKaigoNinteiIkatsuKoshinDiv div;
-    private static final int days = 60;
+    private static final int DAYS = 60;
 
     /**
      * コンストラクターです。
@@ -45,7 +45,7 @@ public class YouKaigoNinteiIkatsuKoshinValidationHandler {
      */
     public ValidationMessageControlPairs validateFor認定日(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_未来日付不可, div.getTxtNinteibi().getValue().toString(), RDate.getNowDate().plusDay(days).toString());
+        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_未来日付不可, div.getTxtNinteibi().getValue().toString(), RDate.getNowDate().plusDay(DAYS).toString());
         messages.add(ValidateChain.validateStart(div).ifNot(YouKaigoNinteiIkatsuKoshinDivSpec.認定日チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
