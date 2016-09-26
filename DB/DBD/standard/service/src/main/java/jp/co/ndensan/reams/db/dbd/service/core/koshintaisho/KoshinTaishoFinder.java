@@ -115,7 +115,6 @@ public class KoshinTaishoFinder {
                     csvdeTeWriter.writeLine(setdetaEntity(entity));
                 }
             }
-            csvdeTeWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSV調査ファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
