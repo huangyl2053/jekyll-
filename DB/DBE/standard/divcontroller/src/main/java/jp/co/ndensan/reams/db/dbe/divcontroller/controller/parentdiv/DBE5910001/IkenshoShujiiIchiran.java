@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5910001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE591001.DBE591001_IryokikanShujiiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -73,7 +73,7 @@ public class IkenshoShujiiIchiran {
      * @param div IkenshoShujiiIchiranDiv
      * @return ResponseData
      */
-    public ResponseData<IkenshoShujiiIchiranParameter> onClick_btnReportPublish(IkenshoShujiiIchiranDiv div) {
+    public ResponseData<DBE591001_IryokikanShujiiParameter> onClick_btnReportPublish(IkenshoShujiiIchiranDiv div) {
         return ResponseData.of(createHandlerOf(div).onClick_btnReportPublish()).respond();
     }
 

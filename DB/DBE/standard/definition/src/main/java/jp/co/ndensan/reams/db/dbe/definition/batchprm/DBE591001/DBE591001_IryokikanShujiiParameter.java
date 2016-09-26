@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE591001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshoshujiiichiran.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -19,7 +19,8 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class IkenshoShujiiIchiranParameter extends BatchParameterBase {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class DBE591001_IryokikanShujiiParameter extends BatchParameterBase {
 
     /**
      * 市町村コード
