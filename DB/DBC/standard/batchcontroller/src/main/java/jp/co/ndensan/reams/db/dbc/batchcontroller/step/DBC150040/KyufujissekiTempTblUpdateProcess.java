@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150040;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.KyufujissekiTempTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShikakutempTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.hekinriyogakutokehyo.HekinRiyoGakuTokehyo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -54,18 +53,11 @@ public class KyufujissekiTempTblUpdateProcess extends BatchProcessBase<Kyufujiss
     protected void process(KyufujissekiTempTblEntity entity) {
         if (!RString.isNullOrEmpty(entity.getHokenryoDankai2())) {
             entity.setShotoku(entity.getHokenryoDankai2());
-        } else if (!RString.isNullOrEmpty(entity.getHokenryoDankai1())) {
+        } else if (RString.isNullOrEmpty(entity.getHokenryoDankai2()) && !RString.isNullOrEmpty(entity.getHokenryoDankai1())) {
             entity.setShotoku(entity.getHokenryoDankai1());
         } else if (RString.isNullOrEmpty(entity.getHokenryoDankai2()) && RString.isNullOrEmpty(entity.getHokenryoDankai1())) {
             entity.setShotoku(RString.EMPTY);
         }
         給付実績データ一時TBL.update(entity);
-    }
-
-    @Override
-    protected void afterExecute() {
-
-        HekinRiyoGakuTokehyo hekinRiyoGakuTokehyo = HekinRiyoGakuTokehyo.createInstance();
-        hekinRiyoGakuTokehyo.get給付実績データ取得処理();
     }
 }

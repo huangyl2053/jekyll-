@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -111,9 +110,9 @@ public class ShinseishoTorokuHandler {
      */
     public void set処理年度の初期値() {
         if (INDEX_101 < Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_5, INDEX_8))) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) < INDEX_731) {
-            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate().minusYear(1).wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
+            div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate().minusYear(1));
         } else if (INDEX_801 < Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_1231) {
-            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate().wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
+            div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate());
         }
     }
 
