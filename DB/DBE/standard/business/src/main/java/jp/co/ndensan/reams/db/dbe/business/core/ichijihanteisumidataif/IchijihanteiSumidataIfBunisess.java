@@ -143,7 +143,7 @@ public class IchijihanteiSumidataIfBunisess {
         set前回結果予防給付サービス(entity, eucEntity);
         eucEntity.set前回識別コード(entity.get前回識別コード());
         eucEntity.set認定審査会意見等(RString.EMPTY);
-        eucEntity.setコメント等(entity.get審査会メモ());
+        eucEntity.setコメント等(entity.getコメント等());
         return eucEntity;
     }
 
@@ -259,7 +259,7 @@ public class IchijihanteiSumidataIfBunisess {
         set前回結果予防給付サービス(entity, eucEntity);
         eucEntity.set前回識別コード(entity.get前回識別コード());
         eucEntity.set認定審査会意見等(RString.EMPTY);
-        eucEntity.setコメント等(entity.get審査会メモ());
+        eucEntity.setコメント等(entity.getコメント等());
         return eucEntity;
     }
 
