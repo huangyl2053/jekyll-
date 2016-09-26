@@ -684,7 +684,10 @@ public class KijunShunyugakuTekiyo {
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("対象年度："));
-        jokenBuilder.append(processParameter.get対象年度());
+        RString 年度 = processParameter.get対象年度();
+        if (!RString.isNullOrEmpty(年度)) {
+            jokenBuilder.append(new RDate(年度.toString()).getYear().wareki().eraType(EraType.KANJI).toDateString()).append("年度");
+        }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("削除された情報："));

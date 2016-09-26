@@ -832,7 +832,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("対象年度："));
         if (!RString.isNullOrEmpty(processParameter.get対象年度())) {
-            jokenBuilder.append(new FlexibleYear(processParameter.get対象年度()).wareki().eraType(EraType.KANJI).toDateString());
+            jokenBuilder.append(new FlexibleYear(processParameter.get対象年度()).wareki().eraType(EraType.KANJI).toDateString()).append("年度");
         }
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
