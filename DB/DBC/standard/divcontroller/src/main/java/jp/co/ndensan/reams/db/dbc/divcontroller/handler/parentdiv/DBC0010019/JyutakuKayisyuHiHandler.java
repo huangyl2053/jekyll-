@@ -140,14 +140,14 @@ public class JyutakuKayisyuHiHandler {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        for (KyufujissekiJutakuKaishuhiBusiness kyufujissekiJutakuKaishuhiBusiness : 給付実績住宅改修費List) {
-            KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = kyufujissekiJutakuKaishuhiBusiness.get給付実績住宅改修費情報();
+        for (KyufujissekiJutakuKaishuhiBusiness business : 給付実績住宅改修費List) {
+            KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = business.get給付実績住宅改修費情報();
             if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()))
                     && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
                     && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
                     && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
                 dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
-                row.setTxtService(kyufujissekiJutakuKaishuhiBusiness.getサービス種類略称());
+                row.setTxtService(business.getサービス種類略称());
                 row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
                 row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
                 row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
@@ -212,8 +212,8 @@ public class JyutakuKayisyuHiHandler {
         List<KyufujissekiJutakuKaishuhi> サービス提供年月前 = new ArrayList<>();
         List<KyufujissekiJutakuKaishuhi> サービス提供年月後 = new ArrayList<>();
         if (サービス提供年月 != null) {
-            for (KyufujissekiJutakuKaishuhiBusiness kyufujissekiJutakuKaishuhiBusiness : 給付実績住宅改修費List) {
-                KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = kyufujissekiJutakuKaishuhiBusiness.get給付実績住宅改修費情報();
+            for (KyufujissekiJutakuKaishuhiBusiness business : 給付実績住宅改修費List) {
+                KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = business.get給付実績住宅改修費情報();
                 if (new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()).isBefore(kyufujissekiJutakuKaishuhi.getサービス提供年月())) {
                     サービス提供年月後.add(kyufujissekiJutakuKaishuhi);
                 }
@@ -295,14 +295,14 @@ public class JyutakuKayisyuHiHandler {
             RString 実績区分コード, RString 様式番号) {
         List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
         List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
-        for (KyufujissekiJutakuKaishuhiBusiness kyufujissekiJutakuKaishuhiBusiness : 給付実績住宅改修費List) {
-            KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = kyufujissekiJutakuKaishuhiBusiness.get給付実績住宅改修費情報();
+        for (KyufujissekiJutakuKaishuhiBusiness business : 給付実績住宅改修費List) {
+            KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = business.get給付実績住宅改修費情報();
             if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(サービス提供年月)
                     && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
                     && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
                     && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
                 dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
-                row.setTxtService(kyufujissekiJutakuKaishuhiBusiness.getサービス種類略称());
+                row.setTxtService(business.getサービス種類略称());
                 row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
                 row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
                 row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
