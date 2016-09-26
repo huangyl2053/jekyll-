@@ -110,7 +110,12 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
     @Override
     protected void process(HanyoListSaishinsaKekkaRelateEntity entity) {
         flag = true;
-        eucCsvWriter.writeLine(business.setRenbanariEUCEntity(entity, 連番++, 市町村名MasterMap, association));
+        if (processParameter.isRenbanFuka()) {
+            eucCsvWriter.writeLine(business.setRenbanariEUCEntity(entity, 連番++, 市町村名MasterMap, association));
+        } else {
+            eucCsvWriter.writeLine(business.setRenbanashiEUCEntity(entity, 市町村名MasterMap, association));
+        }
+
     }
 
     @Override
@@ -145,12 +150,12 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                BATCHCSV,
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                BATCHCSV,
                 FILENAME,
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 business.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

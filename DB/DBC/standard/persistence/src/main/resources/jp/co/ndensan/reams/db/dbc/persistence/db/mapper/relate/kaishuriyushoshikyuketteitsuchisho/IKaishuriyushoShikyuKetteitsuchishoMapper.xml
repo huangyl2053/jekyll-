@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 住宅改修理由書作成手数料支給（不支給）決定通知書作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2850-030 chenxiangyu -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaishuriyushoshikyuketteitsuchisho.IKaishuriyushoShikyuKetteitsuchishoMapper">
+               
+    <resultMap id="resultMap_selectKetteiTimestamp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoRelateEntity" autoMapping="true">
+        <result property="temp_前回決定日_開始日" column="Temp_前回決定日_開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_前回決定日_終了日" column="Temp_前回決定日_終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="selectKetteiTimestamp" resultMap="resultMap_selectKetteiTimestamp" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoMybatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+          処理日付."taishoKaishiTimestamp" AS Temp_前回決定日_開始日
+          , 処理日付."taishoShuryoTimestamp" AS Temp_前回決定日_終了日 
+        FROM
+          rgdb."DbT7022ShoriDateKanri" AS 処理日付 
+        WHERE
+          処理日付."subGyomuCode" = #{サブ業務コード}
+          AND 処理日付."shichosonCode" = #{市町村コード}
+          AND 処理日付."shoriName" = #{処理名}
+          AND 処理日付."shoriEdaban" = ( 
+            SELECT
+              MAX(処理日付."shoriEdaban") 
+            FROM
+              rgdb."DbT7022ShoriDateKanri" AS 処理日付
+          ) 
+          AND 処理日付."nendo" = ( 
+            SELECT
+              MAX(処理日付."nendo") 
+            FROM
+              rgdb."DbT7022ShoriDateKanri" AS 処理日付
+          ) 
+          AND 処理日付."nendoNaiRenban" = ( 
+            SELECT
+              MAX(処理日付."nendoNaiRenban") 
+            FROM
+              rgdb."DbT7022ShoriDateKanri" AS 処理日付
+          ) 
+        ORDER BY
+          処理日付."nendo" DESC
+          , 処理日付."nendoNaiRenban" DESC 
+        LIMIT
+          1
+    </select>
+</mapper>

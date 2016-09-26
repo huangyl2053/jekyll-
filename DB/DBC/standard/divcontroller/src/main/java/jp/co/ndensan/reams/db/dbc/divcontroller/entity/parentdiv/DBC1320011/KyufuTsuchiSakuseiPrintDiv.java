@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
@@ -28,12 +27,12 @@ public class KyufuTsuchiSakuseiPrintDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KyufuTsuchiSakuseiSetting")
-    private PrintContentsSettingDiv KyufuTsuchiSakuseiSetting;
-    @JsonProperty("ccdBunsyobango")
-    private BunshoBangoInputDiv ccdBunsyobango;
     @JsonProperty("ccdChohyoShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    @JsonProperty("ccdBunsyobango")
+    private BunshoBangoInputDiv ccdBunsyobango;
+    @JsonProperty("KyufuTsuchiSakuseiSetting")
+    private IPrintContentsSettingDiv KyufuTsuchiSakuseiSetting;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,12 +41,12 @@ public class KyufuTsuchiSakuseiPrintDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getKyufuTsuchiSakuseiSetting
-     * @return KyufuTsuchiSakuseiSetting
+     * getccdChohyoShutsuryokujun
+     * @return ccdChohyoShutsuryokujun
      */
-    @JsonProperty("KyufuTsuchiSakuseiSetting")
-    public IPrintContentsSettingDiv getKyufuTsuchiSakuseiSetting() {
-        return KyufuTsuchiSakuseiSetting;
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+        return ccdChohyoShutsuryokujun;
     }
 
     /*
@@ -60,12 +59,12 @@ public class KyufuTsuchiSakuseiPrintDiv extends Panel {
     }
 
     /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
+     * getKyufuTsuchiSakuseiSetting
+     * @return KyufuTsuchiSakuseiSetting
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
+    @JsonProperty("KyufuTsuchiSakuseiSetting")
+    public IPrintContentsSettingDiv getKyufuTsuchiSakuseiSetting() {
+        return KyufuTsuchiSakuseiSetting;
     }
 
     // </editor-fold>

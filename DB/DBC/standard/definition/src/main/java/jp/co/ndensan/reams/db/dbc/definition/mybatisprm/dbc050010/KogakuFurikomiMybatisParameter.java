@@ -17,7 +17,7 @@ import lombok.Setter;
 /**
  * 高額データ取得MybatisParameterクラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 @Getter
 @Setter

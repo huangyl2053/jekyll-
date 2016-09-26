@@ -298,16 +298,14 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
         this.set支払場所(source);
         FlexibleDate shiharaiKaishiYMD = entity.get支払期間開始年月日();
         FlexibleDate shiharaiShuryoYMD = entity.get支払期間終了年月日();
-        if (shiharaiKaishiYMD == null || shiharaiShuryoYMD == null) {
-            return;
-        }
-        if (!shiharaiKaishiYMD.isEmpty()) {
+        if (!is空白(shiharaiKaishiYMD)) {
             RString 開始曜日 = new RString(shiharaiKaishiYMD.getDayOfWeek().getInFullParentheses());
             source.maStYmd = getパターン12(shiharaiKaishiYMD).concat(開始曜日).concat(接続符);
-        } else if (shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
-            source.maStYmd = 接続符;
+        } else if (!is空白(shiharaiShuryoYMD)) {
+            RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
+            source.maStYmd = 接続符.concat(getパターン12(shiharaiShuryoYMD)).concat(終了曜日);
         }
-        if (!shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
+        if (!is空白(shiharaiKaishiYMD) && !is空白(shiharaiShuryoYMD)) {
             RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
             source.maEdYmd = getパターン12(shiharaiShuryoYMD).concat(終了曜日);
         }
@@ -318,17 +316,17 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
             FlexibleDate shiharaiShuryoYMD, GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         RString kaishiTime = entity.get支払期間開始時間();
         RString shuryoTime = entity.get支払期間終了時間();
-        if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty())
+        if ((!is空白(shiharaiKaishiYMD) || !is空白(shiharaiShuryoYMD))
                 && kaishiTime != null) {
             this.set支払期間時間(source, kaishiTime);
 
         }
-        if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty())
+        if ((!is空白(shiharaiKaishiYMD) || !is空白(shiharaiShuryoYMD))
                 && ((kaishiTime != null && !kaishiTime.isEmpty())
                 || (shuryoTime != null && !shuryoTime.isEmpty()))) {
             source.kara2 = 接続符;
         }
-        if ((!shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty()) && shuryoTime != null) {
+        if ((!is空白(shiharaiKaishiYMD) || !is空白(shiharaiShuryoYMD)) && shuryoTime != null) {
             this.set支払期間時間(source, shuryoTime);
         }
     }
@@ -476,5 +474,12 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private boolean is空白(FlexibleDate entity) {
+        if (null == entity || entity.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

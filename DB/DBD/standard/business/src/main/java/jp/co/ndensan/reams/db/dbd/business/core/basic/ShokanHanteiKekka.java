@@ -253,7 +253,7 @@ public class ShokanHanteiKekka
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity();//To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

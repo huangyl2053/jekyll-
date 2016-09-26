@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1600011;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku.KyufuJissekiGaitoshaBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku.SaishinsaMoshitateJohoBusiness;
@@ -555,8 +554,7 @@ public class SaishinsaMoshitateTourokuPanelHandler {
 
     private void set申立者区分DDL() {
         List<KeyValueDataSource> 申立者区分DateSource = new ArrayList<>();
-        List<KagoMoshitate_MoshitateshaKubun> enumArray = Arrays.asList(KagoMoshitate_MoshitateshaKubun.values());
-        for (KagoMoshitate_MoshitateshaKubun kagoMoshitateEnum : enumArray) {
+        for (KagoMoshitate_MoshitateshaKubun kagoMoshitateEnum : KagoMoshitate_MoshitateshaKubun.values()) {
             RStringBuilder 申立者区分 = new RStringBuilder();
             申立者区分.append(kagoMoshitateEnum.getコード());
             申立者区分.append(COLON);

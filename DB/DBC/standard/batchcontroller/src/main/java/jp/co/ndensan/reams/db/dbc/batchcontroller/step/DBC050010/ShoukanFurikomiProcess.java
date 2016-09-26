@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.ShoukanFurikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetaiResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
@@ -32,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還データ取得情報_振込明細一時に登録処理_Processクラスです．
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 public class ShoukanFurikomiProcess extends BatchProcessBase<FurikomiDetaiResultEntity> {
 
@@ -72,12 +73,21 @@ public class ShoukanFurikomiProcess extends BatchProcessBase<FurikomiDetaiResult
         data.setRirekiNo(ZERO);
         data.setShoKisaiHokenshaNo(fdre.get償還払支給判定結果Entity().getShoKisaiHokenshaNo());
         data.setKetteiTsuchiNo(fdre.get償還払支給判定結果Entity().getKetteiTsuchiNo());
-        if (Decimal.ZERO.equals(fdre.get償還払支給判定結果Entity().getSagakuKingakuGokei())) {
-            data.setFurikomiKingaku(fdre.get償還払支給判定結果Entity().getShiharaiKingaku()
-                    .subtract(fdre.get償還払支給判定結果Entity().getZenkaiShiharaiKingaku()));
-        } else if (!Decimal.ZERO.equals(fdre.get償還払支給判定結果Entity().getSagakuKingakuGokei())) {
-            data.setFurikomiKingaku(fdre.get償還払支給判定結果Entity().getSagakuKingakuGokei()
-                    .subtract(fdre.get償還払支給判定結果Entity().getZenkaiShiharaiKingaku()));
+        DbT3036ShokanHanteiKekkaEntity 償還払支給判定結果Entity = fdre.get償還払支給判定結果Entity();
+        if (償還払支給判定結果Entity != null && Decimal.ZERO.equals(償還払支給判定結果Entity.getSagakuKingakuGokei())) {
+            Decimal 支払金額 = 償還払支給判定結果Entity.getShiharaiKingaku();
+            Decimal 前回支払金額 = 償還払支給判定結果Entity.getZenkaiShiharaiKingaku();
+            if (支払金額 != null && 前回支払金額 != null) {
+                data.setFurikomiKingaku(支払金額.subtract(前回支払金額));
+            }
+
+        }
+        if (償還払支給判定結果Entity != null && !Decimal.ZERO.equals(償還払支給判定結果Entity.getSagakuKingakuGokei())) {
+            Decimal 差額金額合計 = 償還払支給判定結果Entity.getSagakuKingakuGokei();
+            Decimal 前回支払金額 = 償還払支給判定結果Entity.getZenkaiShiharaiKingaku();
+            if (差額金額合計 != null && 前回支払金額 != null) {
+                data.setFurikomiKingaku(差額金額合計.subtract(前回支払金額));
+            }
         }
         data.setZenkaiShiharaiKingaku(fdre.get償還払支給判定結果Entity().getZenkaiShiharaiKingaku());
         data.setSagakuKingakuGokei(fdre.get償還払支給判定結果Entity().getSagakuKingakuGokei());

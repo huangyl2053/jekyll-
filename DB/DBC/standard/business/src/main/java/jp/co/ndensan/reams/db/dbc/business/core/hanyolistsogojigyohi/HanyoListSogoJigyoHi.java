@@ -68,10 +68,10 @@ import lombok.Setter;
 public class HanyoListSogoJigyoHi {
 
     private static final RString 基本情報 = new RString("基本情報のみ");
-    private static final RString 基本明細情報 = new RString("基本情報+明細情報");
-    private static final RString 基本集計情報 = new RString("基本情報+集計情報");
-    private static final RString 基本ケアマネジメント情報 = new RString("基本情報+ケアマネジメント費情報");
-    private static final RString 保険者_すべて = new RString("すべて");
+    private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
+    private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
+    private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
+    private static final RString 保険者_すべて = new RString("000000");
     private HanyoListSogoJigyoHiProcessParameter processParameter;
     private List<PersonalData> personalDataList;
 
@@ -942,7 +942,7 @@ public class HanyoListSogoJigyoHi {
                 processParameter.get審査年月開始年月(),
                 processParameter.get審査年月終了年月(),
                 processParameter.get取込年月開始年月(),
-                processParameter.get審査年月終了年月(),
+                processParameter.get取込年月終了年月(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 出力順);
     }

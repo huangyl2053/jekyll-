@@ -97,6 +97,7 @@ public class HanyoListSaishinsaKekkaResult {
     private static final Code 拡張情報_コード = new Code("0003");
     private static final RString 拡張情報_被保険者番号 = new RString("被保険者番号");
     private static final RString KIGO = new RString("　～　");
+    private static final CodeShubetsu 結果コード種別 = new CodeShubetsu("0020");
     private final HanyoListSaishinsaKekkaProcessParameter processParameter;
     private final List<PersonalData> personalDataList;
 
@@ -201,8 +202,8 @@ public class HanyoListSaishinsaKekkaResult {
         eucEntity.set申立事由コード(entity.get申立事由コード());
         eucEntity.set申立事由(getCodeByCode(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(), entity.get申立事由コード()));
         eucEntity.set再審査結果コード(entity.get再審査結果コード());
-        // TODO 内部QA:1749 Redmine:  (enumが知らない)
-        eucEntity.set再審査結果(entity.get再審査結果コード());
+        eucEntity.set再審査結果(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 結果コード種別, new Code(entity.get再審査結果コード()),
+                FlexibleDate.getNowDate()));
         eucEntity.set当初請求件数(setDecimal(entity.get当初請求件数()));
         eucEntity.set原審単位数(setDecimal(entity.get原審単位数()));
         eucEntity.set決定単位数(setDecimal(entity.get決定単位数()));
@@ -318,8 +319,8 @@ public class HanyoListSaishinsaKekkaResult {
         eucEntity.set申立事由コード(entity.get申立事由コード());
         eucEntity.set申立事由(getCodeByCode(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(), entity.get申立事由コード()));
         eucEntity.set再審査結果コード(entity.get再審査結果コード());
-        // TODO 内部QA:1749 Redmine:  (enumが知らない)
-        eucEntity.set再審査結果(entity.get再審査結果コード());
+        eucEntity.set再審査結果(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 結果コード種別, new Code(entity.get再審査結果コード()),
+                FlexibleDate.getNowDate()));
         eucEntity.set当初請求件数(setDecimal(entity.get当初請求件数()));
         eucEntity.set原審単位数(setDecimal(entity.get原審単位数()));
         eucEntity.set決定単位数(setDecimal(entity.get決定単位数()));

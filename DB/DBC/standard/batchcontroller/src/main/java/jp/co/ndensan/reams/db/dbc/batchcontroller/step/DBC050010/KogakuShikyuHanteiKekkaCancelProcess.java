@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 頼済の登録_高額介護サービス費支給判定結果_取消更新_Process処理クラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class KogakuShikyuHanteiKekkaCancelProcess extends BatchProcessBase<DbT3036ShokanHanteiKekkaEntity> {
 

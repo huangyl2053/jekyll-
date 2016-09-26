@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -55,13 +56,14 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private static final RString 課 = new RString("課");
     private static final RString 承認 = new RString("承認");
     private static final RString 却下 = new RString("却下");
-    private static final RString 認定者リスト = new RString("介護保険 訪問介護利用者負担額減額認定者リスト");
-    private static final RString 該当者リスト = new RString("介護保険 訪問介護利用者負担額減額該当者リスト");
+    private static final RString 認定者リスト = new RString("訪問介護利用者負担額減額認定者リスト");
+    private static final RString 該当者リスト = new RString("訪問介護利用者負担額減額該当者リスト");
     private final RDateTime 作成日時;
     private final TargetList 対象リスト;
     private final NinteishaListSakuseiEntity 訪問介護利用者負担額減額認定者Entity;
     private final Association 導入団体;
     private final IOutputOrder 出力順;
+    private final int index;
 
     /**
      * インスタンスを生成します。
@@ -71,26 +73,30 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
      * @param 訪問介護利用者負担額減額認定者Entity NinteishaListSakuseiEntity
      * @param 導入団体 Association
      * @param 出力順 IOutputOrder
+     * @param index int
      */
     public HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor(RDateTime 作成日時, TargetList 対象リスト,
-            NinteishaListSakuseiEntity 訪問介護利用者負担額減額認定者Entity, Association 導入団体, IOutputOrder 出力順) {
+            NinteishaListSakuseiEntity 訪問介護利用者負担額減額認定者Entity, Association 導入団体, IOutputOrder 出力順, int index) {
         this.作成日時 = 作成日時;
         this.対象リスト = 対象リスト;
         this.訪問介護利用者負担額減額認定者Entity = 訪問介護利用者負担額減額認定者Entity;
         this.導入団体 = 導入団体;
         this.出力順 = 出力順;
+        this.index = index;
     }
 
     @Override
     public HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource
             edit(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
-        editHeader(source);
-        edit被保険者情報Upper1(source);
-        edit被保険者情報Upper2(source);
-        edit被保険者情報Center1(source);
-        edit被保険者情報Center2(source);
-        edit被保険者情報Lower1(source);
-        edit被保険者情報Lower2(source);
+        if (index == 1) {
+            editHeader(source);
+            edit被保険者情報Upper1(source);
+            edit被保険者情報Center1(source);
+            edit被保険者情報Lower1(source);
+            edit世帯員(source);
+        } else {
+            edit世帯員(source);
+        }
         return source;
     }
 
@@ -169,35 +175,6 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         }
     }
 
-    private void edit被保険者情報Upper2(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
-        if (null != this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト()
-                && !this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト().isEmpty()) {
-            List<SetaiInRisutoEntity> 世帯員リスト = this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト();
-            for (int index = 0; index < 世帯員リスト.size(); index++) {
-                SetaiInRisutoEntity 世帯員情報 = 世帯員リスト.get(index);
-                if (index == 0) {
-                    get世帯員Upper(source, 世帯員情報);
-                }
-                if (index > 0) {
-                    source.listUpper_1 = RString.EMPTY;
-                    source.listUpper_2 = RString.EMPTY;
-                    source.listUpper_3 = RString.EMPTY;
-                    source.listUpper_4 = RString.EMPTY;
-                    source.listUpper_5 = RString.EMPTY;
-                    source.listUpper_6 = RString.EMPTY;
-                    source.listUpper_7 = RString.EMPTY;
-                    source.listUpper_8 = RString.EMPTY;
-                    source.listUpper_9 = RString.EMPTY;
-                    source.listUpper_10 = RString.EMPTY;
-                    source.listUpper_11 = RString.EMPTY;
-                    source.listUpper_12 = RString.EMPTY;
-                    get世帯員Upper(source, 世帯員情報);
-                }
-            }
-        }
-        source.listUpper_17 = RString.EMPTY;
-    }
-
     private void edit被保険者情報Center1(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
         if (null != this.訪問介護利用者負担額減額認定者Entity.getPsmEntity()) {
             UaFt200FindShikibetsuTaishoEntity 宛名 = this.訪問介護利用者負担額減額認定者Entity.getPsmEntity();
@@ -242,33 +219,6 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         }
     }
 
-    private void edit被保険者情報Center2(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
-        if (this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト() != null
-                && !this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト().isEmpty()) {
-            List<SetaiInRisutoEntity> 世帯員リスト = this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト();
-            for (int index = 0; index < 世帯員リスト.size(); index++) {
-                SetaiInRisutoEntity 世帯員情報 = 世帯員リスト.get(index);
-                if (index == 0) {
-                    get世帯員Center(source, 世帯員情報);
-                }
-                if (index > 0) {
-                    source.listCenter_1 = RString.EMPTY;
-                    source.listCenter_2 = RString.EMPTY;
-                    source.listCenter_3 = RString.EMPTY;
-                    source.listCenter_4 = RString.EMPTY;
-                    source.listCenter_5 = RString.EMPTY;
-                    source.listCenter_6 = RString.EMPTY;
-                    source.listCenter_7 = RString.EMPTY;
-                    source.listCenter_8 = RString.EMPTY;
-                    source.listCenter_9 = RString.EMPTY;
-                    source.listCenter_10 = RString.EMPTY;
-                    get世帯員Center(source, 世帯員情報);
-                }
-            }
-        }
-        source.listCenter_15 = RString.EMPTY;
-    }
-
     private void edit被保険者情報Lower1(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
         if (null != this.訪問介護利用者負担額減額認定者Entity.getPsmEntity()) {
             UaFt200FindShikibetsuTaishoEntity 宛名 = this.訪問介護利用者負担額減額認定者Entity.getPsmEntity();
@@ -297,7 +247,10 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             }
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード()) {
-            source.listLower_7 = this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード();
+            source.listLower_7 = RString.isNullOrEmpty(this.訪問介護利用者負担額減額認定者Entity.
+                    get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
+                    : TokuteiShippei.toValue(this.訪問介護利用者負担額減額認定者Entity.
+                            get要介護認定申請情報_2号特定疾病コード()).get名称();
         }
         source.listLower_8 = RString.EMPTY;
         if (訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
@@ -308,30 +261,20 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         }
     }
 
-    private void edit被保険者情報Lower2(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
+    private void edit世帯員(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
         if (null != this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト()
                 && !this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト().isEmpty()) {
             List<SetaiInRisutoEntity> 世帯員リスト = this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト();
-            for (int index = 0; index < 世帯員リスト.size(); index++) {
-                SetaiInRisutoEntity 世帯員情報 = 世帯員リスト.get(index);
-                if (index == 0) {
-                    get世帯員Lower(source, 世帯員情報);
-                }
-                if (index > 0) {
-                    source.listLower_1 = RString.EMPTY;
-                    source.listLower_2 = RString.EMPTY;
-                    source.listLower_3 = RString.EMPTY;
-                    source.listLower_4 = RString.EMPTY;
-                    source.listLower_5 = RString.EMPTY;
-                    source.listLower_6 = RString.EMPTY;
-                    source.listLower_7 = RString.EMPTY;
-                    source.listLower_8 = RString.EMPTY;
-                    source.listLower_9 = RString.EMPTY;
-                    get世帯員Lower(source, 世帯員情報);
-                }
+            if (世帯員リスト.size() > ((3 * index) - 3)) {
+                get世帯員Upper(source, 世帯員リスト.get((3 * index) - 3));
+            }
+            if (世帯員リスト.size() > ((3 * index) - 2)) {
+                get世帯員Center(source, 世帯員リスト.get((3 * index) - 2));
+            }
+            if (世帯員リスト.size() > ((3 * index) - 1)) {
+                get世帯員Lower(source, 世帯員リスト.get((3 * index) - 1));
             }
         }
-        source.listLower_14 = RString.EMPTY;
     }
 
     private RString get要介護度() {
@@ -365,6 +308,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
             source.listUpper_16 = 課;
         }
+        source.listUpper_17 = RString.EMPTY;
     }
 
     private void get世帯員Center(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, SetaiInRisutoEntity 世帯員情報) {
@@ -384,6 +328,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
             source.listCenter_14 = 課;
         }
+        source.listCenter_15 = RString.EMPTY;
     }
 
     private void get世帯員Lower(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, SetaiInRisutoEntity 世帯員情報) {
@@ -403,12 +348,13 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
             source.listLower_13 = 課;
         }
+        source.listLower_14 = RString.EMPTY;
     }
 
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource
             set出力順改頁(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
         List<ISetSortItem> list = new ArrayList<>();
-        if (出力順 != null && 出力順.get設定項目リスト() == null) {
+        if (出力順 != null && 出力順.get設定項目リスト() != null && !出力順.get設定項目リスト().isEmpty()) {
             list = 出力順.get設定項目リスト();
         }
         if (list.size() > LISTINDEX_0) {

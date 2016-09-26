@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -25,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 社会福祉法人軽減認定者リストEditorです。
@@ -136,6 +139,10 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
             source.list1_12 = 帳票情報.get認定年月日().wareki().toDateString();
         }
         source.list2_7 = 帳票情報.get入所施設コード();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (帳票情報.get被保険者番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 帳票情報.get被保険者番号().value());
+        }
         setsource_line_up(source);
     }
 

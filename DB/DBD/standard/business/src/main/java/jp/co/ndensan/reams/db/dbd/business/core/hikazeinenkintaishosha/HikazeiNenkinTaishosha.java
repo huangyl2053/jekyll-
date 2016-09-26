@@ -296,7 +296,7 @@ public class HikazeiNenkinTaishosha {
             eucEntity.set送付先行政区名(iAtesaki.get宛先行政区().get名称());
         }
         eucEntity.set被保険者番号(entity.get被保険者番号());
-        eucEntity.set年度(get年度(entity.get年度()));
+        eucEntity.set年度(get非課税年度(entity.get年度()));
         //TODO 処理区分  Enum存在しない QA1722
         eucEntity.set対象月(entity.get対象月());
         eucEntity.set基礎年金番号(entity.get基礎年金番号());
@@ -488,7 +488,7 @@ public class HikazeiNenkinTaishosha {
             eucEntity.set送付先行政区名(iAtesaki.get宛先行政区().get名称());
         }
         eucEntity.set被保険者番号(entity.get被保険者番号());
-        eucEntity.set年度(get年度(entity.get年度()));
+        eucEntity.set年度(get非課税年度(entity.get年度()));
         //TODO 処理区分  Enum存在しない QA1722
         eucEntity.set対象月(entity.get対象月());
         eucEntity.set基礎年金番号(entity.get基礎年金番号());
@@ -934,7 +934,7 @@ public class HikazeiNenkinTaishosha {
         if (RString.isNullOrEmpty(value)) {
             return RString.EMPTY;
         } else {
-            return new FlexibleDate(value).wareki().eraType(EraType.KANJI).
+            return new FlexibleYear(value).wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
     }
@@ -943,7 +943,8 @@ public class HikazeiNenkinTaishosha {
         if (RString.isNullOrEmpty(value)) {
             return RString.EMPTY;
         } else {
-            return new FlexibleYear(value).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
+            return new FlexibleYear(value).wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).toDateString();
         }
     }
 
@@ -956,6 +957,15 @@ public class HikazeiNenkinTaishosha {
     }
 
     private RString get年度(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return RString.EMPTY;
+        } else {
+            return new FlexibleYear(value).wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString().concat(年度);
+        }
+    }
+
+    private RString get非課税年度(RString value) {
         if (RString.isNullOrEmpty(value)) {
             return RString.EMPTY;
         } else {

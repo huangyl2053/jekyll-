@@ -175,6 +175,8 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
     private static final RString 項目名_帳票タイトル_持ち物内容文言１ = new RString("持ち物内容文言１");
     private static final RString 項目名_帳票タイトル_持ち物内容文言２ = new RString("持ち物内容文言２");
     private static final RString 項目名_帳票タイトル_持ち物内容文言３ = new RString("持ち物内容文言３");
+    private static final RString 項目名_帳票タイトル_ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
+    private static final RString 項目名_帳票タイトル_支払予定日印字有無 = new RString("支払予定日印字有無");
     private static final RString 支給額タイトル = new RString("支給額");
     private static final SubGyomuCode サブ業務コード = SubGyomuCode.DBC介護給付;
     private static final ReportId 帳票分類ID_内部帳票文字切れ = new ReportId("DBC100053_GassanKetteiTsuchisho");
@@ -306,6 +308,12 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
         ChohyoSeigyoHanyo 帳票制御汎用帳票タイトル_持ち物内容文言３ = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID,
                 管理年度, 項目名_帳票タイトル_持ち物内容文言３);
         帳票制御汎用キーList.add(帳票制御汎用帳票タイトル_持ち物内容文言３);
+        ChohyoSeigyoHanyo 帳票制御汎用帳票タイトル_ゆうちょ銀行店名表示 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID,
+                管理年度, 項目名_帳票タイトル_ゆうちょ銀行店名表示);
+        帳票制御汎用キーList.add(帳票制御汎用帳票タイトル_ゆうちょ銀行店名表示);
+        ChohyoSeigyoHanyo 帳票制御汎用帳票タイトル_支払予定日印字有無 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID,
+                管理年度, 項目名_帳票タイトル_支払予定日印字有無);
+        帳票制御汎用キーList.add(帳票制御汎用帳票タイトル_支払予定日印字有無);
         ChohyoSeigyoKyotsuManager manager = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu 帳票制御共通 = manager.get帳票制御共通(サブ業務コード, 帳票分類ID_内部帳票文字切れ);
         if (帳票制御共通 != null) {
@@ -606,6 +614,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
         高額合算支給決定通知書Entity.set文書7(通知文情報.get(INT_7));
         高額合算支給決定通知書Entity.set通知書番号(高額合算支給決定通知書データ.getShikyuSeiriNo());
         高額合算支給決定通知書Entity.set通番(対象件数);
+        高額合算支給決定通知書Entity.set支払予定日(processParameter.get支払予定日());
         return 高額合算支給決定通知書Entity;
     }
 

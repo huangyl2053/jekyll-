@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 /**
  * 振込エラーリスト作成_Process処理クラスです．
  *
- * @reamsid_L DBC-5010-030 x_lilh
+ * @reamsid_L DBC-2180-030 x_lilh
  */
 public class FurikomiErrorListCreateProcess extends BatchProcessBase<FurikomiDetailTempTableEntity> {
 
@@ -71,7 +71,7 @@ public class FurikomiErrorListCreateProcess extends BatchProcessBase<FurikomiDet
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(Path.getTmpDirectoryPath(), new RString("DBU900002_ShoriKekkaKakuninList.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBU900002_ShoriKekkaKakuninList.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .alwaysWriteHeader(FurikomiErrorListCsvEntity.class)
                 .setEncode(Encode.SJIS)

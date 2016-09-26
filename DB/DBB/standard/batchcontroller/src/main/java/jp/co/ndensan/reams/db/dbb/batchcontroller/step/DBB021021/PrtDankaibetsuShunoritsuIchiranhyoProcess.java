@@ -78,8 +78,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString 抽出条件_認定者を除く１号被保険者 = new RString("4");
     private static final RString 広域判定区分_広域保険者 = new RString("111");
     private static final RString 広域判定区分_単一市町村 = new RString("120");
-    private static final RString 完納出力区分_出力しない = new RString("0");
-    private static final RString 完納出力区分_出力する = new RString("1");
     private static final RString 調定年度 = new RString("調定年度");
     private static final RString 賦課年度 = new RString("賦課年度");
     private static final RString 科目コード = new RString("科目コード");
@@ -106,6 +104,8 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString TEXT_収納区分 = new RString("収納区分");
     private static final RString TEXT_完納分を出力する = new RString("完納分を出力する");
     private static final RString TEXT_未納分を出力する = new RString("未納分を出力する");
+    private static final RString 未納分 = new RString("未納分");
+    private static final RString 完納分 = new RString("完納分");
     private static final RString 保険料段階の小計 = new RString("**");
     private static final Decimal 負数_1 = new Decimal(-1);
     private static final Decimal NUM_100 = new Decimal(100);
@@ -292,18 +292,18 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         boolean is市町村コード改頁 = new ShotokuDankaiBetsuShunoritsuIchiranPageBreak(改頁List).
                 is市町村コード改頁(entity, beforeEntity);
         if (is市町村コード改頁) {
-            if (完納出力区分_出力しない.equals(parameter.get完納出力区分().get(INT_0))) {
+            if (未納分.equals(entity.getKannnouKunbun())) {
                 帳票タイトル = RString.EMPTY;
                 最終頁帳票タイトル = RString.EMPTY;
-            } else if (完納出力区分_出力する.equals(parameter.get完納出力区分().get(INT_0))) {
+            } else if (完納分.equals(entity.getKannnouKunbun())) {
                 帳票タイトル = TEXT_完納分;
                 最終頁帳票タイトル = TEXT_完納分;
             }
         } else {
-            if (完納出力区分_出力しない.equals(parameter.get完納出力区分().get(INT_0))) {
+            if (未納分.equals(entity.getKannnouKunbun())) {
                 帳票タイトル = get徴収方法(entity.getKamokuCode());
                 最終頁帳票タイトル = RString.EMPTY;
-            } else if (完納出力区分_出力する.equals(parameter.get完納出力区分().get(INT_0))) {
+            } else if (完納分.equals(entity.getKannnouKunbun())) {
                 帳票タイトル = get完納分徴収方法(entity.getKamokuCode());
                 最終頁帳票タイトル = TEXT_完納分;
             }
@@ -348,6 +348,9 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     @Override
     protected void afterExecute() {
         if (lastEntity == null) {
+            csvListWriter.close();
+            manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+            batchReportWriter_一覧表.close();
             return;
         }
         DankaibetsuShunoritsuIchiran 険料段階別収納率通知書集計Data
@@ -527,7 +530,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 充当額負件数 = INT_0;
         Decimal 充当額 = Decimal.ZERO;
         int 充当額件数 = INT_0;
-        int 収納データ区分 = entity.get収納データ区分();
+        int 収納データ区分 = entity.getShunoDataKubun();
         if (収納データ区分 < INT_50) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
@@ -544,7 +547,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
         } else if (収納データ区分 == INT_60) {
-            不納欠損額 = 不納欠損額.add(entity.getShunyugaku());
+            不納欠損額 = 不納欠損額.add(entity.getFunougaku());
             不納欠損件数++;
         }
         Decimal 未納額 = 調定額.subtract(収入額.subtract(還付額).add(充当額).subtract(充当額負)).subtract(不納欠損額);
@@ -1038,7 +1041,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         IShunoKamoku 特別徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
         if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
             return TEXT_普通徴収;
-        } else if (特別徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
+        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード().value())) {
             return TEXT_特別徴収;
         }
         return RString.EMPTY;
@@ -1190,7 +1193,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     }
 
     private void get小計集計(DankaibetsuShunoritsuTempEntity entity) {
-        int 収納データ区分 = entity.get収納データ区分();
+        int 収納データ区分 = entity.getShunoDataKubun();
         if (収納データ区分 < INT_50) {
             小計_調定額 = 小計_調定額.add(entity.getChoteigaku());
             小計_調定件数++;
@@ -1207,7 +1210,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
             小計_還付額 = 小計_還付額.add(entity.getShunyugaku().multiply(負数_1));
             小計_還付件数++;
         } else if (収納データ区分 == INT_60) {
-            小計_不納欠損額 = 小計_不納欠損額.add(entity.getShunyugaku());
+            小計_不納欠損額 = 小計_不納欠損額.add(entity.getFunougaku());
             小計_不納欠損件数++;
         }
 
@@ -1226,7 +1229,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 充当額負件数 = INT_0;
         Decimal 充当額 = Decimal.ZERO;
         int 充当額件数 = INT_0;
-        int 収納データ区分 = entity.get収納データ区分();
+        int 収納データ区分 = entity.getShunoDataKubun();
         if (収納データ区分 < INT_50) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
@@ -1243,7 +1246,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
         } else if (収納データ区分 == INT_60) {
-            不納欠損額 = 不納欠損額.add(entity.getShunyugaku());
+            不納欠損額 = 不納欠損額.add(entity.getFunougaku());
             不納欠損件数++;
         }
         if (entity.getChoteiNendo().isBefore(entity.getFukaNendo())) {
@@ -1301,7 +1304,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 充当額負件数 = INT_0;
         Decimal 充当額 = Decimal.ZERO;
         int 充当額件数 = INT_0;
-        int 収納データ区分 = entity.get収納データ区分();
+        int 収納データ区分 = entity.getShunoDataKubun();
         if (収納データ区分 < INT_50) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
@@ -1318,7 +1321,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
         } else if (収納データ区分 == INT_60) {
-            不納欠損額 = 不納欠損額.add(entity.getShunyugaku());
+            不納欠損額 = 不納欠損額.add(entity.getFunougaku());
             不納欠損件数++;
         }
         if (entity.getChoteiNendo().isBefore(entity.getFukaNendo())) {

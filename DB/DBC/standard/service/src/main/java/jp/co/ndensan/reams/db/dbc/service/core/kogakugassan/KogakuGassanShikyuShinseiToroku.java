@@ -124,7 +124,7 @@ public class KogakuGassanShikyuShinseiToroku {
     public List<ShinseishoJohoResult> getShinseishoJoho(ShinseishoJohoSearchParameter parameter) {
         IKogakuGassanShikyuShinseiTorokuMapper mapper = this.mapperProvider.create(IKogakuGassanShikyuShinseiTorokuMapper.class);
         List<HihokenshaNo> 被保険者番号List = new ArrayList();
-        if (parameter.is被保険者情報検索有無() && RString.isNullOrEmpty(parameter.get被保険者氏名())) {
+        if (parameter.is被保険者情報検索有無() && !RString.isNullOrEmpty(parameter.get被保険者氏名())) {
             被保険者番号List = 被保険者番号取得(parameter, mapper);
             if (被保険者番号List == null || 被保険者番号List.isEmpty()) {
                 return null;

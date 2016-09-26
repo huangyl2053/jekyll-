@@ -121,9 +121,6 @@ public class KanendoIdouKekkaIchiranProperty extends ReportPropertyBase<KanendoI
             BreakerCatalog<KanendoIdouKekkaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
-
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KanendoIdouKekkaIchiranSource> occuredBreak(
@@ -150,35 +147,35 @@ public class KanendoIdouKekkaIchiranProperty extends ReportPropertyBase<KanendoI
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("kanaMeisho"), new RString("")),
+        氏名５０音カナ(new RString("0010"), new RString("kanaMeisho"), new RString("\"ShikibetsuTaisho\".\"kanaMeisho\"")),
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString("seinengappiYMD"), new RString("")),
+        生年月日(new RString("0012"), new RString("seinengappiYMD"), new RString("\"ShikibetsuTaisho\".\"seinengappiYMD\"")),
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString("seibetsuCode"), new RString("")),
+        性別(new RString("0013"), new RString("seibetsuCode"), new RString("\"ShikibetsuTaisho\".\"seibetsuCode\"")),
         /**
          * 賦課年度
          */
-        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("")),
+        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("\"DbT2015KeisangoJoho\".\"fukaShichosonCode\"")),
         /**
          * 賦課年度
          */
-        賦課年度(new RString("0204"), new RString("list3_2"), new RString("")),
+        賦課年度(new RString("0204"), new RString("list3_2"), new RString("\"DbT2015KeisangoJoho\".\"fukaNendo\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("")),
+        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("\"DbT2015KeisangoJoho\".\"hihokenshaNo\"")),
         /**
          * 年金コード
          */
-        年金コード(new RString("0206"), new RString("nenkinCode"), new RString("")),
+        年金コード(new RString("0206"), new RString("nenkinCode"), new RString("\"DbT2015KeisangoJoho\".\"honNenkinCode\"")),
         /**
          * 年金番号
          */
-        年金番号(new RString("0207"), new RString("nenkinNo"), new RString(""));
+        年金番号(new RString("0207"), new RString("nenkinNo"), new RString("\"DbT2015KeisangoJoho\".\"honNenkinNo\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

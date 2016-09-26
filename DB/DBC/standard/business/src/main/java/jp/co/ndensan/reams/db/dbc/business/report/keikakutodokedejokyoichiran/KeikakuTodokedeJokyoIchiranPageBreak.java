@@ -65,27 +65,35 @@ public class KeikakuTodokedeJokyoIchiranPageBreak extends PageBreaker<KyotakuSer
             ReportLineRecord<KyotakuServiceKeikakuSakuseiSource> nextRecord) {
         boolean flag = false;
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.行政区コード.get項目ID())) {
-            flag = !currentRecord.getSource().listList1_4.equals(nextRecord.getSource().listList1_4);
+            flag = !checkNull(currentRecord.getSource().listList1_4).equals(nextRecord.getSource().listList1_4);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.識別コード.get項目ID())) {
-            flag = !currentRecord.getSource().listList2_1.equals(nextRecord.getSource().listList2_1);
+            flag = !checkNull(currentRecord.getSource().listList2_1).equals(nextRecord.getSource().listList2_1);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.生年月日.get項目ID())) {
-            flag = !currentRecord.getSource().listList3_1.equals(nextRecord.getSource().listList3_1);
+            flag = !checkNull(currentRecord.getSource().listList3_1).equals(nextRecord.getSource().listList3_1);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.被保険者番号.get項目ID())) {
-            flag = !currentRecord.getSource().listList1_1.equals(nextRecord.getSource().listList1_1);
+            flag = !checkNull(currentRecord.getSource().listList1_1).equals(nextRecord.getSource().listList1_1);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.計画届出日.get項目ID())) {
-            flag = !currentRecord.getSource().listList1_9.equals(nextRecord.getSource().listList1_9);
+            flag = !checkNull(currentRecord.getSource().listList1_9).equals(nextRecord.getSource().listList1_9);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.受給申請日.get項目ID())) {
-            flag = !currentRecord.getSource().listList1_6.equals(nextRecord.getSource().listList1_6);
+            flag = !checkNull(currentRecord.getSource().listList1_6).equals(nextRecord.getSource().listList1_6);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.認定日.get項目ID())) {
-            flag = !currentRecord.getSource().listList2_7.equals(nextRecord.getSource().listList2_7);
+            flag = !checkNull(currentRecord.getSource().listList2_7).equals(nextRecord.getSource().listList2_7);
         }
         return flag;
+    }
+
+    private RString checkNull(RString rstring) {
+        if (rstring == null) {
+            return RString.EMPTY;
+        } else {
+            return rstring;
+        }
     }
 
     private static List<RString> createBreakKeys(RString key, RString... any) {

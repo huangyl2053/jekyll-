@@ -25,7 +25,7 @@ public class ShunoJokyoHaakuMybatisParameter implements IMyBatisParameter {
     private List<RString> psmTotalShunyu;
     private RString psmShikibetsuTaisho;
     private FlexibleYear 日付関連_調定年度;
-    private FlexibleDate 基準日;
+    private RString 基準日;
     private RDate 基準日RDATE;
 
     /**
@@ -38,8 +38,8 @@ public class ShunoJokyoHaakuMybatisParameter implements IMyBatisParameter {
      */
     public ShunoJokyoHaakuMybatisParameter(FlexibleDate 基準日, FlexibleYear 日付関連_調定年度, RString psmShikibetsuTaisho,
             List<RString> psmTotalShunyu) {
-        this.基準日 = 基準日;
         if (基準日 != null && !基準日.isEmpty()) {
+            this.基準日 = new RString(基準日.toString());
             this.基準日RDATE = new RDate(基準日.toString());
         }
         this.日付関連_調定年度 = 日付関連_調定年度;

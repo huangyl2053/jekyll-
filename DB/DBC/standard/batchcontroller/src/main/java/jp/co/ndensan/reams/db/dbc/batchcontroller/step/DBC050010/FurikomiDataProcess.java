@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiDataSakusei_ErrorKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiDataKubun;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.KozaJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.FurikomiDataProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaFurikomiTempTableEntity;
@@ -38,8 +37,8 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.dbc050010.IFurikomiDataMapper.get振込対象データ");
-    private KozaJohoProcessParameter parameter;
-    private FurikomiGyomunaiKubun 振込業務内区分;
+    private FurikomiDataProcessParameter parameter;
+
     private boolean flag = true;
     private static final int INT10 = 10;
     private static final RString 名 = new RString("名");
@@ -88,7 +87,7 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
         tempTable1.setFurikomiYMD(parameter.get振込指定年月日());
         tempTable1.setSakuseiKaisu(Decimal.ONE);
         tempTable1.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-        tempTable1.setGyomunaiKubun(振込業務内区分.get名称());
+        tempTable1.setGyomunaiKubun(parameter.get振込業務内区分().get名称());
         tempTable1.setKamokuCode(KamokuCode.EMPTY);
         tempTable1.setKamokuEdabanCode(EdabanCode.EMPTY);
         tempTable1.setRyokinShubetsuCode(Code.EMPTY);

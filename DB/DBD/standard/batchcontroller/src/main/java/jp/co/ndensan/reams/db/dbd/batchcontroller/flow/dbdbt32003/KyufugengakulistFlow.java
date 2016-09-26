@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt32003.KyufuGengakuHaa
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
@@ -27,11 +26,11 @@ public class KyufugengakulistFlow extends BatchFlowBase<KyufuGengakuHaakuIchiran
     private static final String 対象者把握情報の取得 = "kyufuGengakuHaakuListTaishoTokutei";
     private static final String 収納滞納状況把握情報の取得 = "shunoTainoJokyoHaaku";
     private static final String 給付額減額滞納者把握情報取得 = "kyufuGengakuHaakuListSakusei";
-    private RDateTime バッチ起動時処理日時;
+//    private RDateTime バッチ起動時処理日時;
 
     @Override
     protected void prepareConfigData() {
-        バッチ起動時処理日時 = RDate.getNowDateTime();
+//        バッチ起動時処理日時 = RDate.getNowDateTime();
     }
 
     @Override

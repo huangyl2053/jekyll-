@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4920001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.yogaigoninteikekkarenkeidatatorikomi.YogaigoNinteiKekkaRenkeiDataTorikomiFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -57,19 +56,19 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
         RString 日次進捗Z7NCI242 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_旧, 基準日, SubGyomuCode.DBE認定支援);
         RString 要介護認定Z8NCI242 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
         RString 要介護認定Z7NCI242 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_旧, 基準日, SubGyomuCode.DBE認定支援);
-        if (連携の設定値.equals(KEY1)) {
-            set手動読込初期化状態(日次進捗Z8NCI242, 日次進捗Z7NCI242, 要介護認定Z8NCI242, 要介護認定Z7NCI242);
-        } else if (連携の設定値.equals(KEY2)) {
-            set自動読込初期化状態();
-        }
+//        if (連携の設定値.equals(KEY1)) {
+//            set手動読込初期化状態(日次進捗Z8NCI242, 日次進捗Z7NCI242, 要介護認定Z8NCI242, 要介護認定Z7NCI242);
+//        } else if (連携の設定値.equals(KEY2)) {
+//            set自動読込初期化状態();
+//        }
     }
 
-    private void set手動読込初期化状態(RString 日次進捗Z8NCI242, RString 日次進捗Z7NCI242, RString 要介護認定Z8NCI242, RString 要介護認定Z7NCI242) {
-        RString 取込みデータKey = div.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getRadDataSelect().getSelectedKey();
-        if (取込みデータKey.equals(new RString("key0"))) {
-
-        }
-    }
+//    private void set手動読込初期化状態(RString 日次進捗Z8NCI242, RString 日次進捗Z7NCI242, RString 要介護認定Z8NCI242, RString 要介護認定Z7NCI242) {
+//        RString 取込みデータKey = div.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getRadDataSelect().getSelectedKey();
+//        if (取込みデータKey.equals(new RString("key0"))) {
+//            
+//        }
+//    }
 
     private void set自動読込初期化状態() {
 

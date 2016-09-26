@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceRelateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonShukeiRelateEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +22,7 @@ import lombok.Setter;
 public class KyufuJissekiSearchDataBusiness implements Serializable {
 
     private static final long serialVersionUID = -2632968912981424943L;
-    private List<KyufuJissekiKihonShukeiRelateEntity> 給付実績基本集計データ;
-    private List<KyufuJissekiKihonKyotakuServiceRelateEntity> 給付実績基本居宅サービス計画費データ;
-    private List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> 給付実績高額介護サービス費データ;
+    private List<KyufuJissekiKihonShukeiBusiness> 給付実績基本集計データ;
+    private List<KyufuJissekiKihonKyotakuServiceBusiness> 給付実績基本居宅サービス計画費データ;
+    private List<KyufujissekiKogakuKaigoServicehi> 給付実績高額介護サービス費データ;
 }

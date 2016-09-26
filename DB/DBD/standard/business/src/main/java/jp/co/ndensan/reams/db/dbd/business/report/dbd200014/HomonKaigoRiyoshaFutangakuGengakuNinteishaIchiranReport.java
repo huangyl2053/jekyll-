@@ -27,6 +27,8 @@ public final class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport exten
     private final NinteishaListSakuseiEntity 訪問介護利用者負担額減額認定者Entity;
     private final Association 導入団体;
     private final IOutputOrder 出力順;
+    private static final int NUM_0 = 0;
+    private static final int NUM_3 = 3;
 
     /**
      * インスタンスを生成します。
@@ -53,11 +55,15 @@ public final class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport exten
      */
     @Override
     public void writeBy(ReportSourceWriter<HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource> writer) {
-        IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor editor
-                = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor(作成日時, 対象リスト,
-                        訪問介護利用者負担額減額認定者Entity, 導入団体, 出力順);
-        IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder builder
-                = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder(editor);
-        writer.writeLine(builder);
+        int index = 1;
+        for (int i = NUM_0; i < 訪問介護利用者負担額減額認定者Entity.get世帯員リスト().size(); i += NUM_3) {
+            IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor editor
+                    = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor(作成日時, 対象リスト,
+                            訪問介護利用者負担額減額認定者Entity, 導入団体, 出力順, index);
+            IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder builder
+                    = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder(editor);
+            writer.writeLine(builder);
+            index++;
+        }
     }
 }

@@ -99,14 +99,15 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoBodyEditor implements INinteiEnkiTsuchis
             return;
         }
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode99.toValue(entity.get一次判定結果コード().value()).get名称();
+            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode99.toValue(entity.get一次判定結果コード().value()).get略称();
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode02.toValue(entity.get一次判定結果コード().value()).get名称();
+            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode02.toValue(entity.get一次判定結果コード().value()).get略称();
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード()
                 .equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode06.toValue(entity.get一次判定結果コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果コード().value()).get名称();
+            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode06.toValue(entity.get一次判定結果コード().value()).get略称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード().value())) {
+            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果コード().value()).get略称();
         } else {
             source.listHakkoIchiranhyo_8 = null;
         }
@@ -121,13 +122,14 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoBodyEditor implements INinteiEnkiTsuchis
             return;
         }
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode99.toValue(entity.get一五次判定結果コード().value()).get名称();
+            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode99.toValue(entity.get一五次判定結果コード().value()).get略称();
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode02.toValue(entity.get一五次判定結果コード().value()).get名称();
+            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode02.toValue(entity.get一五次判定結果コード().value()).get略称();
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode06.toValue(entity.get一五次判定結果コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode09.toValue(entity.get一五次判定結果コード().value()).get名称();
+            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode06.toValue(entity.get一五次判定結果コード().value()).get略称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード().value())) {
+            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode09.toValue(entity.get一五次判定結果コード().value()).get略称();
         } else {
             source.listHakkoIchiranhyo_9 = null;
         }
@@ -158,7 +160,8 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoBodyEditor implements INinteiEnkiTsuchis
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード()
                 .equals(entity.get厚労省IF識別コード().value())) {
             source.listHakkoIchiranhyo_13 = YokaigoJotaiKubun06.toValue(entity.get前回要介護状態区分コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード().value())) {
             source.listHakkoIchiranhyo_13 = YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).get名称();
         } else {
             source.listHakkoIchiranhyo_13 = null;

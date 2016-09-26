@@ -60,6 +60,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
@@ -322,7 +323,9 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
      */
     public YMDHMS get最新調定日時(FlexibleYear 調定年度) {
 
-        DbT7022ShoriDateKanriEntity dbt7022entity = 処理日付管理Dac.select最新調定日時_現年度(調定年度);
+        List<RString> 処理名リスト = new ArrayList<>();
+        処理名リスト.add(ShoriName.異動賦課.get名称());
+        DbT7022ShoriDateKanriEntity dbt7022entity = 処理日付管理Dac.select最新の基準日(調定年度, 処理名リスト);
         if (dbt7022entity == null) {
             return null;
         }

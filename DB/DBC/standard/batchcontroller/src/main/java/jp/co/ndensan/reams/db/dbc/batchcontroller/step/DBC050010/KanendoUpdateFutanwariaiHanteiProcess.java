@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 処理日付管理マスタの更新処理クラスです。
  *
- * @reamsid_L DBC-5010-030 x_miaocl
+ * @reamsid_L DBC-2180-030 x_miaocl
  */
 public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
 
@@ -109,25 +109,24 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
 
     @Override
     protected void afterExecute() {
-        if (!Furikomi_ShoriKubun.明細一覧表作成.equals(parameter.get処理区分())) {
-            if (検索件数_0 == count) {
-                DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-                entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-                entity.setShichosonCode(new LasdecCode("000000"));
-                if (parameter.get処理名() != null) {
-                    entity.setShoriName(parameter.get処理名().get名称());
-                }
-                entity.setShoriEdaban(連番);
-                entity.setNendo(年度);
-                entity.setNendoNaiRenban(年度内連番);
-                entity.setKijunYMD(FlexibleDate.EMPTY);
-                entity.setKijunTimestamp(new YMDHMS(RString.EMPTY));
-                entity.setTaishoKaishiYMD(parameter.get開始年月日());
-                entity.setTaishoShuryoYMD(parameter.get終了年月日());
-                entity.setTaishoKaishiTimestamp(new YMDHMS(RString.EMPTY));
-                entity.setTaishoShuryoTimestamp(new YMDHMS(RString.EMPTY));
-                dbWriter.insert(entity);
+        if (!Furikomi_ShoriKubun.明細一覧表作成.equals(parameter.get処理区分()) && 検索件数_0 == count) {
+
+            DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
+            entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
+            entity.setShichosonCode(new LasdecCode("000000"));
+            if (parameter.get処理名() != null) {
+                entity.setShoriName(parameter.get処理名().get名称());
             }
+            entity.setShoriEdaban(連番);
+            entity.setNendo(年度);
+            entity.setNendoNaiRenban(年度内連番);
+            entity.setKijunYMD(FlexibleDate.EMPTY);
+            entity.setKijunTimestamp(new YMDHMS(RString.EMPTY));
+            entity.setTaishoKaishiYMD(parameter.get開始年月日());
+            entity.setTaishoShuryoYMD(parameter.get終了年月日());
+            entity.setTaishoKaishiTimestamp(new YMDHMS(RString.EMPTY));
+            entity.setTaishoShuryoTimestamp(new YMDHMS(RString.EMPTY));
+            dbWriter.insert(entity);
         }
         eucFileOutputJohoFactory();
     }

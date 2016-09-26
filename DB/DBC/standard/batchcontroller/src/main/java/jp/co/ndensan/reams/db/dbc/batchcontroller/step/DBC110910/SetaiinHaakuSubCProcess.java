@@ -40,10 +40,7 @@ public class SetaiinHaakuSubCProcess extends BatchProcessBase<SetaiYinEntity> {
 
     @Override
     protected void process(SetaiYinEntity entity) {
-        if (entity != null) {
-            entity = new SetaiYinEntity();
-            entity.setRoureifukusikubun(老齢福祉区分);
-            世帯員所得一時.update(entity);
-        }
+        entity.setRoureifukusikubun(老齢福祉区分);
+        世帯員所得一時.update(entity);
     }
 }

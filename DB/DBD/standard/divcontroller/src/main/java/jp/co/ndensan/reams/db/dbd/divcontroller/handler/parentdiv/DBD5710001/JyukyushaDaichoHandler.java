@@ -184,23 +184,22 @@ public class JyukyushaDaichoHandler {
         } else {
             parameter.set抽出条件設定区分(KEY1);
         }
-        if (対象者.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
-            parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
-            parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
-        }
+        parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
+        parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
         parameter.set今回抽出開始年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getFromDateValue());
         parameter.set今回抽出開始時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getFromTimeValue());
         parameter.set今回抽出終了年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getToDateValue());
         parameter.set今回抽出終了時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getToTimeValue());
-        parameter.set異動抽出対象リスト(div.getTaishouKikan().getChkIdouChushutsuTaishou().getSelectedValues());
+        parameter.set異動抽出対象リスト(setparameter_異動抽出());
         if (div.getRadShutsuryokuOption().getSelectedKey().equals(全てのページを印刷する)) {
             parameter.set出力オプション区分(KEY0);
         } else {
             parameter.set出力オプション区分(KEY1);
         }
         parameter.set出力順設定リスト(get画面出力順());
+        get画面初期();
         if (shoriDateKanri != null) {
-            parameter.set市町村コード(new RString(shoriDateKanri.get市町村コード().toString()));
+            parameter.set市町村コード(shoriDateKanri.get市町村コード().value());
         }
     }
 
@@ -221,5 +220,14 @@ public class JyukyushaDaichoHandler {
         div.getTaishouKikan().getTxtKonkaiymdtime().setToTimeValue(RDate.getNowDateTime().getTime());
         div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(true);
         div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(false);
+    }
+
+    private List<RString> setparameter_異動抽出() {
+        List<RString> list異動 = new ArrayList<>();
+        List<RString> 異動抽出list = div.getTaishouKikan().getChkIdouChushutsuTaishou().getSelectedValues();
+        for (RString list抽出 : 異動抽出list) {
+            list異動.add(list抽出.trim());
+        }
+        return list異動;
     }
 }
