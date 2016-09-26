@@ -59,10 +59,8 @@ public class HokenshaListDivHandler {
 
         List<KeyValueDataSource> list = new ArrayList<>();
 
-        if (全市町村の表示有無) {
-            if (1 < hokenshaList.size()) {
-                list.add(new KeyValueDataSource(ALL_SHICHOSON_KEY, ALL_SHICHOSON_VALUE));
-            }
+        if (全市町村の表示有無 && 1 < hokenshaList.size()) {
+            list.add(new KeyValueDataSource(ALL_SHICHOSON_KEY, ALL_SHICHOSON_VALUE));
         }
 
         Map<RString, HokenshaSummary> map = new HashMap<>();
