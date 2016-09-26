@@ -38,9 +38,10 @@ public class DBC640011_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
             for (int i = INDEX_0; i < fileNameList.size(); i++) {
                 parameter.setFileName(fileNameList.get(i));
                 if (i == 0) {
-                    parameter.set処理年月(flowEntity.getShoriYM());
+                    parameter.set処理年月(null);
                     parameter.set連番(0);
                 } else {
+                    parameter.set処理年月(flowEntity.getShoriYM());
                     parameter.set連番(flowEntity.get連番());
                 }
                 if (i == fileNameList.size() - 1) {
