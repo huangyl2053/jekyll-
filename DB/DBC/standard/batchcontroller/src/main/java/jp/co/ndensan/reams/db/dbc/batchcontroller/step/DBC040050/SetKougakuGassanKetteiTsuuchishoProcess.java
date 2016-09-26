@@ -468,7 +468,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            rStringList.add(作成日.concat(RString.HALF_SPACE).concat(作成時));
+            rStringList.add(作成日.concat(作成時));
             行目数++;
         } else {
             rStringList.add(RString.EMPTY);
