@@ -366,7 +366,7 @@ public class HanyoListParamHandler {
      * 年度RbGr onclick画面項目制御
      */
     public void onClick_radChushutsuJokenA() {
-        if (年度KEY.equals(div.getRadChushutsuJokenA1())) {
+        if (年度KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey())) {
             div.getDdlKijunNendo().setDisabled(表示);
             div.getChkChokkinNomiA().setDisabled(表示);
             div.getTxtKijunDateA().setDisabled(非表示);
@@ -381,7 +381,7 @@ public class HanyoListParamHandler {
      * 基準日RbGr onclick画面項目制御
      */
     public void onClick_radChushutsuJokenB() {
-        if (基準日KEY.equals(div.getRadChushutsuJokenB1())) {
+        if (基準日KEY.equals(div.getRadChushutsuJokenB1().getSelectedKey())) {
             基準日RbG_Onclick画面項目制御(true);
         } else {
             基準日RbG_Onclick画面項目制御(false);
@@ -396,17 +396,12 @@ public class HanyoListParamHandler {
             if (!div.getChkShinseishaNomi().isDisplayNone()) {
                 div.getChkShinseishaNomi().setDisabled(表示);
             }
-        } else if (適用年月日KEY.equals(div.getRadHaniJoken2().getSelectedKey())) {
-            申請日RbGr_非申請日RbSelected();
-        } else if (有効期限KEY.equals(div.getRadHaniJoken2().getSelectedKey())) {
-            申請日RbGr_非申請日RbSelected();
         } else {
             申請日RbGr_非申請日RbSelected();
         }
     }
 
     private void 申請日RbGr_非申請日RbSelected() {
-        //TODO
         List<RString> selectdKey = new ArrayList<>();
         div.getChkShinseishaNomi().setSelectedItemsByKey(selectdKey);
         if (!div.getChkShinseishaNomi().isDisplayNone()) {
@@ -938,25 +933,25 @@ public class HanyoListParamHandler {
 
     private void restore抽出項目区分(BatchParameterMap map, RString fieldName) {
         RString 抽出項目区分 = map.getParameterValue(RString.class, fieldName);
-        if (抽出項目区分.equals(ChushutsuKomokuKubun.チェックリスト実施日)) {
+        if (抽出項目区分.equals(ChushutsuKomokuKubun.チェックリスト実施日.getコード())) {
             div.getRadHaniJoken4().setSelectedKey(チェックリスト実施日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.入所日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.入所日.getコード())) {
             div.getRadHaniJoken1().setSelectedKey(入所日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.取得日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.取得日.getコード())) {
             div.getRadHaniJoken3().setSelectedKey(取得日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.喪失日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.喪失日.getコード())) {
             div.getRadHaniJoken3().setSelectedKey(喪失日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.有効期限)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.有効期限.getコード())) {
             div.getRadHaniJoken2().setSelectedKey(有効期限KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.決定日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.決定日.getコード())) {
             div.getRadHaniJoken2().setSelectedKey(決定日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.申請日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.申請日.getコード())) {
             div.getRadHaniJoken2().setSelectedKey(申請日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.退所日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.退所日.getコード())) {
             div.getRadHaniJoken1().setSelectedKey(退所日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.適用年月日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.適用年月日.getコード())) {
             div.getRadHaniJoken2().setSelectedKey(適用年月日KEY);
-        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.適用終了日)) {
+        } else if (抽出項目区分.equals(ChushutsuKomokuKubun.適用終了日.getコード())) {
             div.getRadHaniJoken4().setSelectedKey(適用終了日KEY);
         } else {
             div.getRadHaniJoken4().setSelectedKey(適用開始日KEY);
