@@ -33,6 +33,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
     private final KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 帳票出力対象データ;
     private final boolean 合計出力flag;
     private final int 件数;
+    private final int 連番;
 
     private static final int NUM_0 = 0;
     private static final RString 合計件数 = new RString("合計件数");
@@ -44,19 +45,21 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
      * @param 帳票出力対象データ KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity
      * @param 合計出力flag boolean
      * @param 件数 int
+     * @param 連番 int
      */
     public SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor(
-            KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 帳票出力対象データ, boolean 合計出力flag, int 件数) {
+            KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 帳票出力対象データ, boolean 合計出力flag, int 件数, int 連番) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.合計出力flag = 合計出力flag;
         this.件数 = 件数;
+        this.連番 = 連番;
     }
 
     @Override
     public SogojigyohiKagoMoshitateshojohoSofuIchiranSource edit(SogojigyohiKagoMoshitateshojohoSofuIchiranSource source) {
         DbWT1731KagoMoshitateTempEntity 過誤申立一時TBL = 帳票出力対象データ.getDbWT1731Entity();
         DbWT1001HihokenshaTempEntity 被保険者一時TBL = 帳票出力対象データ.getDbWT1001Entity();
-        source.listUpper_1 = new RString(件数);
+        source.listUpper_1 = new RString(連番);
         source.listUpper_2 = 過誤申立一時TBL.getJigyoshaNo().getColumnValue();
         source.listUpper_3 = 過誤申立一時TBL.getJigyoshaName();
 

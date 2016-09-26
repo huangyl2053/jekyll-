@@ -32,6 +32,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
     private final KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 帳票出力対象データ;
     private final boolean 合計出力flag;
     private final int 件数;
+    private final int 連番;
 
     private static final RString 合計件数 = new RString("合計件数");
     private static final RString 漢字_件 = new RString("件");
@@ -42,18 +43,20 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
      * @param 帳票出力対象データ SogojigyohiShinsaKetteiSeikyumeisaihyoEntity
      * @param 合計出力flag boolean
      * @param 件数 int
+     * @param 連番 int
      */
     public KaigokyufuhiKagoMoshitateshoOutBodyEditor(KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 帳票出力対象データ, boolean 合計出力flag,
-            int 件数
+            int 件数, int 連番
     ) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.合計出力flag = 合計出力flag;
         this.件数 = 件数;
+        this.連番 = 連番;
     }
 
     @Override
     public KyufuKagoMoshitateshojohoSofuIchiranSource edit(KyufuKagoMoshitateshojohoSofuIchiranSource source) {
-        source.listUpper_1 = new RString(件数);
+        source.listUpper_1 = new RString(連番);
         source.listUpper_2 = 帳票出力対象データ.getDbWT1731Entity().getJigyoshaNo().getColumnValue();
         source.listUpper_3 = 帳票出力対象データ.getDbWT1731Entity().getJigyoshaName();
         source.listUpper_4 = 帳票出力対象データ.getDbWT1731Entity().getHiHokenshaNo().getColumnValue();
