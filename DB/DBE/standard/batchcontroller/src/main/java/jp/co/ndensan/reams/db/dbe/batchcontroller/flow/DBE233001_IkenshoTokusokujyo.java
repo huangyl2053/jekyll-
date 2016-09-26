@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.dbe233001;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiIkenTokusokujoHakkoReportProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiIkenTokusokujoReportProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001.ShujiiUpadteDataProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE233001.ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE233001.ShujiiIkenTokusokujoHakkoReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE233001.ShujiiIkenTokusokujoReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE233001.ShujiiUpadteDataProcess;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoItem;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.Dbe233001FlowParameter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiCsvProcessParameter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.DBE233001_IkenshoTokusokujyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShujiiCsvProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShujiiUpdateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0060-040 zhangzhiming
  */
-public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
+public class DBE233001_IkenshoTokusokujyo extends BatchFlowBase<DBE233001_IkenshoTokusokujyoParameter> {
 
     private static final String 主治医意見書督促状の作成 = "shujiiIkenTokusokujoHakkoReport";
     private static final String 主治医意見書督促対象者一覧表の作成 = "shujiiIkenTokusokuTaishoshaIchiranhyoReport";

@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.yokaigoninteijohoteikyo;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkIchijiHanteiKekkaProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkNinteiChosahyo02Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkNinteiChosahyo12Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkNinteiChosahyo22Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkNinteiChosahyo32Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkNinteiChosahyo42Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkNinteiChosahyo52Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkShujiiIkenshoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkSonotaShiryoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkTokkiJiko03Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkTokkiJiko31Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.ChkTokkiJiko34Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.KoroshoShikibetsuCodeProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.NinteichosaProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo.UpdateDataProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.yokaigoninteijohoteikyo.YokaigoBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkIchijiHanteiKekkaProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkNinteiChosahyo02Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkNinteiChosahyo12Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkNinteiChosahyo22Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkNinteiChosahyo32Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkNinteiChosahyo42Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkNinteiChosahyo52Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkShujiiIkenshoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkSonotaShiryoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko03Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko31Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko34Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.KoroshoShikibetsuCodeProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.NinteichosaProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.UpdateDataProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090002.DBE090002_NinteikekkaJohoteikyoParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0230-030 zhangzhiming
  */
-public class YokaigoNinteiJohoTeikyoFlow extends BatchFlowBase<YokaigoBatchParameter> {
+public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_NinteikekkaJohoteikyoParameter> {
 
     private static final String 厚労省IF識別コード = "koroshoIfShikibetsuCode";
     private static final String 認定調査票の作成02 = "chkNinteiChosahyoReport02";

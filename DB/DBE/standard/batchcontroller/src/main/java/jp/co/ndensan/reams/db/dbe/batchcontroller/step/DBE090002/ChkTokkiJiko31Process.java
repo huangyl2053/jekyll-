@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.tokkitext2a4.TokkiText2A4Report;
+import jp.co.ndensan.reams.db.dbe.business.report.tokkitext1a4.TokkiText1A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiText1A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiTextEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a4.TokkiText2A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteichosaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext2a4.TokkiText2ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext1a4.TokkiText1ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -54,17 +54,17 @@ import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
  *
  * @reamsid_L DBE-0230-030 zhangzhiming
  */
-public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity> {
+public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo."
             + "IYokaigoNinteiJohoTeikyoMapper.get要介護認定申請者");
     private YokaigoBatchProcessParamter processPrm;
-    TokkiText2A4Entity bodyItem;
+    TokkiText1A4Entity bodyItem;
     IYokaigoNinteiJohoTeikyoMapper mapper;
     @BatchWriter
-    private BatchReportWriter<TokkiText2ReportSource> batchWrite;
-    private ReportSourceWriter<TokkiText2ReportSource> reportSourceWriter;
+    private BatchReportWriter<TokkiText1ReportSource> batchWrite;
+    private ReportSourceWriter<TokkiText1ReportSource> reportSourceWriter;
     private static final RString FILENAME_BAK = new RString("C4101_BAK.png");
     private static final RString FILENAME = new RString("C4101.png");
     private static final RString CSV出力有無 = new RString("なし");
@@ -183,13 +183,13 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517134.getReportId().value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
     @Override
     protected void process(YokaigoninteiEntity entity) {
-        TokkiText2A4Report report = new TokkiText2A4Report(setBodyItem(entity));
+        TokkiText1A4Report report = new TokkiText1A4Report(setBodyItem(entity));
         report.writeBy(reportSourceWriter);
     }
 
@@ -198,7 +198,7 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         set出力条件表();
     }
 
-    private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番, TokkiText2A4Entity ninteiEntity) {
+    private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番, TokkiText1A4Entity ninteiEntity) {
         RString 名称 = RString.EMPTY;
         if (連番 < 特記事項区分.size()) {
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
@@ -225,14 +225,14 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         return 名称;
     }
 
-    private TokkiText2A4Entity setBodyItem(YokaigoninteiEntity entity) {
-        TokkiText2A4Entity ninteiEntity = new TokkiText2A4Entity();
+    private TokkiText1A4Entity setBodyItem(YokaigoninteiEntity entity) {
+        TokkiText1A4Entity ninteiEntity = new TokkiText1A4Entity();
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         setBodyItem01(特記事項リスト, ninteiEntity);
         return ninteiEntity;
     }
 
-    private TokkiText2A4Entity setBodyItem01(List<NinteichosaRelateEntity> entity, TokkiText2A4Entity ninteiEntity) {
+    private TokkiText1A4Entity setBodyItem01(List<NinteichosaRelateEntity> entity, TokkiText1A4Entity ninteiEntity) {
         List<TokkiTextEntity> 特記事項List = new ArrayList<>();
         List<TokkiTextEntity> 特記事項番号リスト = new ArrayList<>();
         List<TokkiTextEntity> イメージリスト = new ArrayList<>();
@@ -275,12 +275,12 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
             }
         }
         ninteiEntity.set特記事項リスト(特記事項List);
-        ninteiEntity.set特記事項イメージリスト(イメージリスト);
         ninteiEntity.set特記事項番号リスト(特記事項番号リスト);
+        ninteiEntity.set特記事項イメージリスト(イメージリスト);
         return ninteiEntity;
     }
 
-    private RString get共有ファイルを引き出す(RDateTime イメージID, RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
+    private RString get共有ファイルを引き出す(RDateTime イメージID, RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
         RString imagePath = RString.EMPTY;
         RString fileName = get共有ファイル(特記事項番号, 特記事項連番, ninteiEntity);
         if (イメージID != null && !RString.isNullOrEmpty(fileName)) {
@@ -293,7 +293,7 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         return imagePath;
     }
 
-    private RString get共有ファイル(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
+    private RString get共有ファイル(RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         if (特記事項番号_101.equals(特記事項番号)) {
@@ -536,7 +536,7 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項401(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
+    private RString get特記事項401(RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())
@@ -581,7 +581,7 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項4(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
+    private RString get特記事項4(RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         builder.append(get特記事項401(特記事項番号, 特記事項連番, ninteiEntity));
@@ -662,7 +662,7 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項5(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
+    private RString get特記事項5(RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())
@@ -771,7 +771,7 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項6(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
+    private RString get特記事項6(RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         builder.append(get特記事項601(特記事項番号, 特記事項連番));
@@ -919,11 +919,11 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ
                 = new ReportOutputJokenhyoItem(
-                        ReportIdDBE.DBE517134.getReportId().value(),
+                        ReportIdDBE.DBE517131.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
                         new RString(JobContextHolder.getJobId()),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517134.getReportId().value()),
+                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517131.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         CSV出力有無,
                         CSVファイル名,

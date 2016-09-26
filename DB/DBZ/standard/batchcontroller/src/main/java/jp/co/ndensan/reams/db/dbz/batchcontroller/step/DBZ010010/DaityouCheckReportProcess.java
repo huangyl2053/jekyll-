@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.batchcontroller.step.seigoseichekkurisutosakusei;
+package jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBZ010010;
 
 import jp.co.ndensan.reams.db.dbz.business.core.seigoseichekkurisutosakusei.SeigoseiChekkuRisutoBusiness;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity;
@@ -19,28 +19,28 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 整合性チェックリストの作成クラスです。
+ * 被保険者台帳の作成クラスです。
  *
  * @reamsid_L DBA-5800-030 zhangzhiming
  */
-public class AtenaCheckReportProcess extends BatchProcessBase<SeigoseiChekkuRisutoEntity> {
+public class DaityouCheckReportProcess extends BatchProcessBase<SeigoseiChekkuRisutoEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.seigoseichekkurisutosakusei."
-            + "ISeigoseiChekkuRisutoMapper.select整合性チェック情報");
+            + "ISeigoseiChekkuRisutoMapper.select被保険者台帳情報");
     ISeigoseiChekkuRisutoMapper mapper;
-    private static final RString TABLE_整合性チェック情報B = new RString("SeigoseiChekkuRisutoTemp");
+    private static final RString TABLE_整合性チェック情報D = new RString("SeigoseiChekkuRisutoDTemp");
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 整合性チェック情報一時ファイルB;
+    BatchEntityCreatedTempTableWriter 整合性チェック情報一時ファイルD;
     @BatchWriter
     private BatchPermanentTableWriter<DbT1014SeigoseiCheckEntity> dbT1014Temp;
 
     @Override
     protected void initialize() {
-        整合性チェック情報一時ファイルB = new BatchEntityCreatedTempTableWriter(TABLE_整合性チェック情報B,
+        整合性チェック情報一時ファイルD = new BatchEntityCreatedTempTableWriter(TABLE_整合性チェック情報D,
                 SeigoseiChekkuTempTableBEntity.class);
         mapper = getMapper(ISeigoseiChekkuRisutoMapper.class);
-        mapper.del整合性情報事前削除();
+        mapper.del被保険者台帳情報削除();
     }
 
     @Override
@@ -55,6 +55,6 @@ public class AtenaCheckReportProcess extends BatchProcessBase<SeigoseiChekkuRisu
 
     @Override
     protected void process(SeigoseiChekkuRisutoEntity entity) {
-        dbT1014Temp.insert(SeigoseiChekkuRisutoBusiness.set整合性チェック情報登録(entity));
+        dbT1014Temp.insert(SeigoseiChekkuRisutoBusiness.set整合性チェック情報登録D(entity));
     }
 }

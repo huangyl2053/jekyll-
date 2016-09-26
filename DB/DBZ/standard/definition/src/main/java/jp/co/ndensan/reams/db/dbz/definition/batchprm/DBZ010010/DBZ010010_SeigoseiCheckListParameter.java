@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.batchprm.seigoseichekkurisutosakusei;
+package jp.co.ndensan.reams.db.dbz.definition.batchprm.DBZ010010;
 
 import jp.co.ndensan.reams.db.dbz.definition.processprm.seigoseichekkurisutosakusei.SeigoseiChekkuProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SeigoseiChekkuBatchParameter extends BatchParameterBase {
+public class DBZ010010_SeigoseiCheckListParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -9030429096189983750L;
     private static final String STANDARDYMD = "年齢到達の設定日";
@@ -30,7 +30,7 @@ public class SeigoseiChekkuBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public SeigoseiChekkuBatchParameter() {
+    public DBZ010010_SeigoseiCheckListParameter() {
     }
 
     /**
@@ -38,7 +38,7 @@ public class SeigoseiChekkuBatchParameter extends BatchParameterBase {
      *
      * @param 年齢到達の設定日 年齢到達の設定日
      */
-    public SeigoseiChekkuBatchParameter(FlexibleDate 年齢到達の設定日) {
+    public DBZ010010_SeigoseiCheckListParameter(FlexibleDate 年齢到達の設定日) {
         this.年齢到達の設定日 = 年齢到達の設定日;
     }
 

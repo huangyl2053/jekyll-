@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteichosaRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -16,11 +16,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 特記事項テキスト・イメージ区分の作成クラスです。
+ * 厚労省IF識別コードの作成クラスです。
  *
  * @reamsid_L DBE-0230-030 zhangzhiming
  */
-public class NinteichosaProcess extends BatchProcessBase<NinteichosaRelateEntity> {
+public class KoroshoShikibetsuCodeProcess extends BatchProcessBase<YokaigoninteiEntity> {
 
     /**
      * OUT_DATA_LISTです。
@@ -29,7 +29,7 @@ public class NinteichosaProcess extends BatchProcessBase<NinteichosaRelateEntity
     private YokaigoBatchProcessParamter processPrm;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo."
-            + "IYokaigoNinteiJohoTeikyoMapper.get特記事項区分");
+            + "IYokaigoNinteiJohoTeikyoMapper.get要介護認定申請者");
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
@@ -41,6 +41,7 @@ public class NinteichosaProcess extends BatchProcessBase<NinteichosaRelateEntity
     protected void initialize() {
         outDataList = new OutputParameter<>();
         shinseishoKanriNoList = new ArrayList<>();
+        super.initialize();
     }
 
     @Override
@@ -49,8 +50,8 @@ public class NinteichosaProcess extends BatchProcessBase<NinteichosaRelateEntity
     }
 
     @Override
-    protected void process(NinteichosaRelateEntity entity) {
-        shinseishoKanriNoList.add(entity.get特記事項区分());
+    protected void process(YokaigoninteiEntity entity) {
+        shinseishoKanriNoList.add(entity.get前回厚労省IF識別コード());
     }
 
     @Override
