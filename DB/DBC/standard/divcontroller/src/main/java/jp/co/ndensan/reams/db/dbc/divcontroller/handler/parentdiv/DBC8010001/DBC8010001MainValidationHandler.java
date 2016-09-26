@@ -136,6 +136,12 @@ public class DBC8010001MainValidationHandler {
         return pairs;
     }
 
+    /**
+     * 修正対象データ存在チェック。
+     *
+     * @param pairs ValidationMessageControlPairs
+     * @return
+     */
     public ValidationMessageControlPairs validateFor修正対象データ存在(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         NoInputMessages checkMessage = new NoInputMessages(DbcErrorMessages.口座振込データ登録なし_修正不可);

@@ -25,6 +25,11 @@ public class DBC8010001 {
         this.entity = entity;
     }
 
+    /**
+     * 処理時期管理entityを返します。
+     *
+     * @return entity DbT7022ShoriDateKanriEntity
+     */
     public DbT7022ShoriDateKanriEntity getEntity() {
         return this.entity;
     }
