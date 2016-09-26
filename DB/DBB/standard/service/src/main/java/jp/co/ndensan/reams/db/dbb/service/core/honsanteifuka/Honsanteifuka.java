@@ -165,7 +165,7 @@ public class Honsanteifuka {
         if (区分_ゼロ.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況_賦課(調定年度);
         } else if (区分_イチ.equals(遷移元区分)) {
-            entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.本算定賦課.get名称(), new RString("0001"));
+            entityList = 処理日付管理Dac.select処理状況(調定年度, ShoriName.本算定賦課.get名称(), new RString("0001"));
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();

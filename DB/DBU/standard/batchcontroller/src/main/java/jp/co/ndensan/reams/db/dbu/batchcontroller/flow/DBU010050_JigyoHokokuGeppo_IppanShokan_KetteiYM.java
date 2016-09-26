@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010050.CreateTempJigyoHokokuShokanbunTokeiMotoDataProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010050.JigyoHokokuGeppoIppanShokanDBU011200Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010050.JigyoHokokuGeppoIppanShokanDBU011391Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010050.JigyoHokokuGeppoIppanShokanDBU011392Process;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYM extends BatchFlowBase<DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter> {
 
+    private static final String CREATE事業報告償還分決定年月統計元データ = "CREATE事業報告償還分決定年月統計元データ";
     private static final String 事業報告償還分決定年月統計元データ = "事業報告償還分決定年月統計元データ";
     private static final String 帳票出力_処理確認リスト = "帳票出力_処理確認リスト";
     private static final String 根拠CSV作成_DBU011200 = "根拠CSV作成_DBU011200";
@@ -53,28 +55,32 @@ public class DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYM extends BatchFlowBa
         parameter = getParameter();
         parameter.setCsvFilePath(manager.getEucOutputDirectry());
         parameter.setManager(manager);
-        if (PrintControlKubun.集計のみ.getコード().equals(getParameter().getプリントコントロール区分())) {
+        executeStep(CREATE事業報告償還分決定年月統計元データ);
+        if (PrintControlKubun.集計のみ.getコード().equals(getParameter().getプリントコントロール区分())
+                || PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
             executeStep(事業報告償還分決定年月統計元データ);
             executeStep(帳票出力_処理確認リスト);
             executeStep(根拠CSV作成_DBU011200);
+            executeStep(根拠CSV作成_DBU011400);
             executeStep(根拠CSV作成_DBU011391);
             executeStep(根拠CSV作成_DBU011392);
             executeStep(根拠CSV作成_DBU011393);
-            executeStep(根拠CSV作成_DBU011400);
             executeStep(事業報告統計データ登録);
-        } else if (PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
-            executeStep(事業報告償還分決定年月統計元データ);
-            executeStep(帳票出力_処理確認リスト);
-            executeStep(根拠CSV作成_DBU011200);
-            executeStep(根拠CSV作成_DBU011391);
-            executeStep(根拠CSV作成_DBU011392);
-            executeStep(根拠CSV作成_DBU011393);
-            executeStep(根拠CSV作成_DBU011400);
-            executeStep(事業報告統計データ登録);
-        } else if (PrintControlKubun.過去分の印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
+        } else if (PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())
+                || PrintControlKubun.過去分の印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
             executeStep(DBU300006報告月報_一般状況);
             executeStep(DBU300007報告月報_一般状況);
         }
+    }
+
+    /**
+     * 事業報告世帯情報TEMPテーブルを作成します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(CREATE事業報告償還分決定年月統計元データ)
+    protected IBatchFlowCommand createTempJigyoHokokuShokanbunTokeiMotoData() {
+        return simpleBatch(CreateTempJigyoHokokuShokanbunTokeiMotoDataProcess.class).define();
     }
 
     /**

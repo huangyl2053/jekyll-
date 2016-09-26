@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.TaishoshaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -39,7 +39,7 @@ public class ChohyoShutsuryokuJohoShutokuResultEntity extends DbTableEntityBase<
     private RString 入所施設名称;
     private SeteiYouEntity 世帯員Entity;
     private NitennShihouEntity 認定情報Entity;
-    private RDateTime 帳票作成日時;
+    private FlexibleDate 帳票作成日時;
     private RString 出力順;
     private RString 導入団体コード;
     private RString 導入団体名称;

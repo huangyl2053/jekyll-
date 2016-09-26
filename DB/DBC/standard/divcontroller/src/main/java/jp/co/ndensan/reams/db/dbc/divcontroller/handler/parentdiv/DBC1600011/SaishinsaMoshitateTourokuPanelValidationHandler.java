@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1600011.Sais
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -31,6 +30,7 @@ public class SaishinsaMoshitateTourokuPanelValidationHandler {
     private static final RString 提供年月開始テキスト = new RString("提供年月開始");
     private static final RString 提供年月終了テキスト = new RString("提供年月終了");
     private static final RString 被保険者台帳 = new RString("被保険者台帳");
+    private static final RString 送付済みチェック = new RString("送付済みの");
     private static final int TWO = 2;
 
     /**
@@ -150,7 +150,8 @@ public class SaishinsaMoshitateTourokuPanelValidationHandler {
     public ValidationMessageControlPairs check送付済み() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (RString.isNullOrEmpty(div.getKagoMoshitatePanel().getTextBox6().getValue())) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(SoufuzumiMSG.送付済みチェック)));
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.削除不可, 送付済みチェック.toString())));
         }
         return validPairs;
     }
@@ -197,27 +198,6 @@ public class SaishinsaMoshitateTourokuPanelValidationHandler {
 
         public IdocheckMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
-    }
-
-    /**
-     * 送付済みチェックメッセージです。
-     */
-    public enum SoufuzumiMSG implements IMessageGettable {
-
-        /**
-         * 送付済みチェック
-         */
-        送付済みチェック("送付済みのため、削除できません");
-        private final Message message;
-
-        private SoufuzumiMSG(String msg) {
-            this.message = new ErrorMessage(RString.EMPTY.toString(), msg);
         }
 
         @Override

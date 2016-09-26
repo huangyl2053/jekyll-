@@ -7,33 +7,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolist
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku1Input.Chiku1InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku1Input.IChiku1InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.Chiku2InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.IChiku2InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku3Input.Chiku3InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku3Input.IChiku3InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.GyoseikuInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku1Input.IChiku1InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.IChiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku3Input.IChiku3InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -45,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNumRange;
  * @reamsid_L DBA-1610-040 dingyi
  */
 public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSelectDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
@@ -188,7 +183,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDvJokenSelect(DvJokenSelectDiv DvJokenSelect) {
+    public void setDvJokenSelect(DvJokenSelectDiv DvJokenSelect) {
         this.getDvAtena().setDvJokenSelect(DvJokenSelect);
     }
 
@@ -198,7 +193,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setRadSelectKijun(RadioButton radSelectKijun) {
+    public void setRadSelectKijun(RadioButton radSelectKijun) {
         this.getDvAtena().getDvJokenSelect().setRadSelectKijun(radSelectKijun);
     }
 
@@ -208,7 +203,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDvKensakuJoken(dvKensakuJokenDiv dvKensakuJoken) {
+    public void setDvKensakuJoken(dvKensakuJokenDiv dvKensakuJoken) {
         this.getDvAtena().getDvJokenSelect().setDvKensakuJoken(dvKensakuJoken);
     }
 
@@ -218,7 +213,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setTxtNenrei(TextBoxNumRange txtNenrei) {
+    public void setTxtNenrei(TextBoxNumRange txtNenrei) {
         this.getDvAtena().getDvJokenSelect().getDvKensakuJoken().setTxtNenrei(txtNenrei);
     }
 
@@ -228,7 +223,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setTxtNenreiKijunbi(TextBoxDate txtNenreiKijunbi) {
+    public void setTxtNenreiKijunbi(TextBoxDate txtNenreiKijunbi) {
         this.getDvAtena().getDvJokenSelect().getDvKensakuJoken().setTxtNenreiKijunbi(txtNenreiKijunbi);
     }
 
@@ -238,7 +233,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setTxtSeinengappi(TextBoxDateRange txtSeinengappi) {
+    public void setTxtSeinengappi(TextBoxDateRange txtSeinengappi) {
         this.getDvAtena().getDvJokenSelect().getDvKensakuJoken().setTxtSeinengappi(txtSeinengappi);
     }
 
@@ -253,7 +248,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDvChiku(DvChikuDiv DvChiku) {
+    public void setDvChiku(DvChikuDiv DvChiku) {
         this.getDvAtena().setDvChiku(DvChiku);
     }
 
@@ -263,7 +258,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDdlChikuSelect(DropDownList ddlChikuSelect) {
+    public void setDdlChikuSelect(DropDownList ddlChikuSelect) {
         this.getDvAtena().getDvChiku().setDdlChikuSelect(ddlChikuSelect);
     }
 
@@ -273,7 +268,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setLblStart(Label lblStart) {
+    public void setLblStart(Label lblStart) {
         this.getDvAtena().getDvChiku().setLblStart(lblStart);
     }
 
@@ -308,7 +303,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setLblEnd(Label lblEnd) {
+    public void setLblEnd(Label lblEnd) {
         this.getDvAtena().getDvChiku().setLblEnd(lblEnd);
     }
 
@@ -417,6 +412,11 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     @Override
     public void set保険者() {
         getHandler().set保険者();
+    }
+
+    @Override
+    public void set保険者(LasdecCode 市町村コード) {
+        getHandler().set保険者(市町村コード);
     }
 
     @Override

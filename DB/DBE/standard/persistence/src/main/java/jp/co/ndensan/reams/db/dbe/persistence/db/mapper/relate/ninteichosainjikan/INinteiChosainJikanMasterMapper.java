@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainjik
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainjikan.NinteiChosainJikanMasterParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninteichosainjikan.NinteiChosainEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainjikan.NinteiChosainEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 
 /**

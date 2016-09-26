@@ -61,8 +61,7 @@ public class ShoriDateKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
      */
     public static ShoriDateKanriManager createInstance() {
         return InstanceProvider.create(ShoriDateKanriManager.class);
@@ -473,7 +472,7 @@ public class ShoriDateKanriManager {
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
-        List<DbT7022ShoriDateKanriEntity> entitylist = dac.select基準日時toupdate(処理名, 年度内連番, 年度);
+        List<DbT7022ShoriDateKanriEntity> entitylist = dac.select処理状況(年度, 処理名, 年度内連番);
         for (DbT7022ShoriDateKanriEntity entity : entitylist) {
             entity.setKijunTimestamp(基準日時);
             entity.setState(EntityDataState.Modified);

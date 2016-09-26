@@ -36,12 +36,10 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
     private RString ページ出力区分;
     @BatchParameter(key = "集約区分", name = "集約区分")
     private RString 集約区分;
-    @BatchParameter(key = "一括処理制御", name = "一括処理制御")
-    private RString 一括処理制御;
     @BatchParameter(key = "保険者構成", name = "保険者構成")
     private RString 保険者構成;
-    @BatchParameter(key = "市町村コード", name = "市町村コード")
-    private RString 市町村コード;
+    @BatchParameter(key = "証記載保険者番号", name = "証記載保険者番号")
+    private RString 証記載保険者番号;
     @BatchParameter(key = "要介護度", name = "要介護度")
     private RString 要介護度;
     @BatchParameter(key = "死亡者分", name = "死亡者分")
@@ -60,32 +58,10 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
     private RString 償還分;
     @BatchParameter(key = "被保険者番号", name = "被保険者番号")
     private RString 被保険者番号;
-    @BatchParameter(key = "帳票ＩＤ１", name = "帳票ＩＤ１")
-    private RString 帳票ＩＤ１;
-    @BatchParameter(key = "帳票ＩＤ２", name = "帳票ＩＤ２")
-    private RString 帳票ＩＤ２;
-    @BatchParameter(key = "帳票ＩＤ３", name = "帳票ＩＤ３")
-    private RString 帳票ＩＤ３;
-    @BatchParameter(key = "帳票ＩＤ４", name = "帳票ＩＤ４")
-    private RString 帳票ＩＤ４;
-    @BatchParameter(key = "帳票ＩＤ５", name = "帳票ＩＤ５")
-    private RString 帳票ＩＤ５;
-    @BatchParameter(key = "ソート項目１", name = "ソート項目１")
-    private RString ソート項目１;
-    @BatchParameter(key = "ソート項目２", name = "ソート項目２")
-    private RString ソート項目２;
-    @BatchParameter(key = "ソート項目３", name = "ソート項目３")
-    private RString ソート項目３;
-    @BatchParameter(key = "ソート項目４", name = "ソート項目４")
-    private RString ソート項目４;
-    @BatchParameter(key = "ソート項目５", name = "ソート項目５")
-    private RString ソート項目５;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private RString 出力順ID;
     @BatchParameter(key = "文書番号", name = "文書番号")
     private RString 文書番号;
-    @BatchParameter(key = "ﾌﾟﾘﾝﾄｺﾝﾄﾛｰﾙ区分１", name = "ﾌﾟﾘﾝﾄｺﾝﾄﾛｰﾙ区分１")
-    private RString ﾌﾟﾘﾝﾄｺﾝﾄﾛｰﾙ区分１;
 
     /**
      * プロセスパラメータを作成します。

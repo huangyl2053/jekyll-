@@ -20,10 +20,10 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParameter {
 
-    private static final RString 基本明細情報 = new RString("基本情報+明細情報");
-    private static final RString 基本集計情報 = new RString("基本情報+集計情報");
-    private static final RString 基本ケアマネジメント情報 = new RString("基本情報+ケアマネジメント費情報");
-    private static final RString 保険者コード_すべて = new RString("すべて");
+    private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
+    private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
+    private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
+    private static final RString 保険者コード_すべて = new RString("000000");
     private final long 出力順ID;
     private final RString 出力順項目ID;
     private final boolean is項目名付加;
@@ -164,7 +164,7 @@ public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParamet
         } else if (基本ケアマネジメント情報.equals(抽出方法)) {
             is基本情報ケアマネジメント費情報 = true;
         }
-        if (!保険者コード_すべて.equals(保険者コード) && !保険者コード.isEmpty()) {
+        if (!保険者コード_すべて.equals(保険者コード) && !RString.isNullOrEmpty(保険者コード)) {
             保険者コードFlag = true;
         }
         return new HanyoListSogoJigyoMybatisParameter(出力順ID,

@@ -934,7 +934,7 @@ public class HikazeiNenkinTaishosha {
         if (RString.isNullOrEmpty(value)) {
             return RString.EMPTY;
         } else {
-            return new FlexibleDate(value).wareki().eraType(EraType.KANJI).
+            return new FlexibleYear(value).wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
     }

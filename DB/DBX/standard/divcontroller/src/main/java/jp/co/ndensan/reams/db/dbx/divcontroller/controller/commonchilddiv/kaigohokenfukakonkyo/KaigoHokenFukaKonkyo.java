@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.fuka.FukaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -105,10 +106,9 @@ public class KaigoHokenFukaKonkyo {
 
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
         if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
-            FukaJohoRelateSearchResult resultMax = 賦課根拠情報List.get(賦課根拠情報List.size() - 1);
-            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
-                    get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
-            getHandler(div).btnSearch(処理日付管理情報, resultMax, 賦課根拠情報List);
+            FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
+            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().get最大基準日時(画面賦課年度);
+            getHandler(div).btnSearch(処理日付管理情報, 賦課根拠情報List);
         }
         return ResponseData.of(div).respond();
     }
@@ -123,10 +123,9 @@ public class KaigoHokenFukaKonkyo {
 
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
         if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
-            FukaJohoRelateSearchResult resultMax = 賦課根拠情報List.get(賦課根拠情報List.size() - 1);
-            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
-                    get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
-            getHandler(div).btnBefore(処理日付管理情報, resultMax, 賦課根拠情報List);
+            FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
+            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().get最大基準日時(画面賦課年度);
+            getHandler(div).btnBefore(処理日付管理情報, 賦課根拠情報List);
         }
         return ResponseData.of(div).respond();
     }
@@ -141,10 +140,9 @@ public class KaigoHokenFukaKonkyo {
 
         List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
         if (賦課根拠情報List != null && !賦課根拠情報List.isEmpty()) {
-            FukaJohoRelateSearchResult resultMax = 賦課根拠情報List.get(賦課根拠情報List.size() - 1);
-            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
-                    get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
-            getHandler(div).btnAfter(処理日付管理情報, resultMax, 賦課根拠情報List);
+            FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
+            ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().get最大基準日時(画面賦課年度);
+            getHandler(div).btnAfter(処理日付管理情報, 賦課根拠情報List);
         }
         return ResponseData.of(div).respond();
     }

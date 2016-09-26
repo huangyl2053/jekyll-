@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -183,8 +184,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakko createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakko.class);
@@ -261,8 +261,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void pntKetteiTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -378,8 +377,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void pntHenkoTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 変更通知書出力対象区分, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -548,8 +546,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void pntNonyuTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 出力期, RString 納入通知書対象者, RString 口座振替分出力様式, RString 生活保護者先頭出力区分,
@@ -687,7 +684,9 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      */
     public YMDHMS get最新調定日時(FlexibleYear 調定年度) {
 
-        DbT7022ShoriDateKanriEntity dbt7022entity = 処理日付管理Dac.select最新調定日時過年度賦課(調定年度);
+        List<RString> 処理名リスト = new ArrayList<>();
+        処理名リスト.add(ShoriName.過年度賦課.get名称());
+        DbT7022ShoriDateKanriEntity dbt7022entity = 処理日付管理Dac.select最新の基準日(調定年度, 処理名リスト);
         if (dbt7022entity == null) {
             return null;
         }

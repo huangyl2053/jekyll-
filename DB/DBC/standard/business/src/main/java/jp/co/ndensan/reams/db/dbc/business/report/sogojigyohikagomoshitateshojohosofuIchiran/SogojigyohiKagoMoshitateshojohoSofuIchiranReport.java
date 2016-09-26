@@ -29,6 +29,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranReport extends Report<Sog
     private final boolean 合計出力flag;
     private final FlexibleYearMonth 処理年月;
     private final int 件数;
+    private final int 連番;
 
     /**
      * コンストラクタです
@@ -40,6 +41,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranReport extends Report<Sog
      * @param 改頁リスト List<RString>
      * @param 処理年月 FlexibleYearMonth
      * @param 件数 int
+     * @param 連番 int
      */
     public SogojigyohiKagoMoshitateshojohoSofuIchiranReport(
             KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 帳票出力対象データ,
@@ -48,7 +50,8 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranReport extends Report<Sog
             boolean 合計出力flag,
             List<RString> 改頁リスト,
             FlexibleYearMonth 処理年月,
-            int 件数) {
+            int 件数,
+            int 連番) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.出力順Map = 出力順Map;
         this.作成日時 = 作成日時;
@@ -56,6 +59,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranReport extends Report<Sog
         this.改頁リスト = 改頁リスト;
         this.処理年月 = 処理年月;
         this.件数 = 件数;
+        this.連番 = 連番;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranReport extends Report<Sog
                 = new SogojigyohiKagoMoshitateshojohoSofuIchiranHeaderEditor(出力順Map, 作成日時, 帳票出力対象データ, 改頁リスト, 処理年月);
 
         ISogojigyohiKagoMoshitateshojohoSofuIchiranEditor bodyEditor
-                = new SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor(帳票出力対象データ, 合計出力flag, 件数);
+                = new SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor(帳票出力対象データ, 合計出力flag, 件数, 連番);
 
         ISogojigyohiKagoMoshitateshojohoSofuIchiranBuilder builder
                 = new SogojigyohiKagoMoshitateshojohoSofuIchiranBuilder(headerEditor, bodyEditor);

@@ -43,4 +43,11 @@ public class GassanJigyobunKekkaIchiranEntity {
     private Decimal 支給額_うち70歳以上分按分後支給額;
     private ShikibetsuCode 識別コード;
 
+    private RString yubinNo;
+    private RString taishoNendo;
+    private RString gyoseiCode;
+    private RString jushoCode;
+    private RString shichosonCode;
+    private RString shoKisaiHokenshaNo;
+
 }

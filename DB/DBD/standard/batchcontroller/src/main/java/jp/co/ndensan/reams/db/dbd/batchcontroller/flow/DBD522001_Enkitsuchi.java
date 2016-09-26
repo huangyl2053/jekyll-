@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.enkitsuchisho.EnkiTsuchishoJyohoReportProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.enkitsuchisho.EnkiTsuchishohakenIchiranhyoJyohoReportProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD522001.EnkiTsuchishoJyohoReportProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD522001.EnkiTsuchishohakenIchiranhyoJyohoReportProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD522001.DBD522001_EnkitsuchiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

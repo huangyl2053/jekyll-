@@ -87,7 +87,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IShoka
         // TODO QA600 口座払の場合「**************」で表示
         source.torikeshiShiharaikikan = item.getTorikeshiShiharaikikan();
         source.shiharaiEndYMD = item.getShiharaiEndYMD();
-        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) && !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
+        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) || !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
             source.karaFugo = item.getKaraFugo();
         }
         source.shiharaiStartHMS = item.getShiharaiStartHMS();

@@ -26,6 +26,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<Sogojigyoh
     private final RDateTime 作成日時;
     private final int 合計;
     private final boolean flag;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -36,6 +37,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<Sogojigyoh
      * @param 作成日時 RDateTime
      * @param 合計 int
      * @param flag boolean
+     * @param 連番 int
      */
     public SogojigyohiKagoMoshitateshojohoSofuReport(
             KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 送付一覧表データ,
@@ -43,13 +45,15 @@ public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<Sogojigyoh
             FlexibleYearMonth 処理年月,
             RDateTime 作成日時,
             int 合計,
-            boolean flag) {
+            boolean flag,
+            int 連番) {
         this.送付一覧表データ = 送付一覧表データ;
         this.出力順情報 = 出力順情報;
         this.処理年月 = 処理年月;
         this.作成日時 = 作成日時;
         this.合計 = 合計;
         this.flag = flag;
+        this.連番 = 連番;
     }
 
     @Override
@@ -57,7 +61,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<Sogojigyoh
         ISogojigyohiKagoMoshitateshojohoSofuEditor headEditor
                 = new SogojigyohiKagoMoshitateshojohoSofuHeadEditor(送付一覧表データ, 出力順情報, 処理年月, 作成日時);
         ISogojigyohiKagoMoshitateshojohoSofuEditor bodyEditor
-                = new SogojigyohiKagoMoshitateshojohoSofuBodyEditor(送付一覧表データ, 合計, flag);
+                = new SogojigyohiKagoMoshitateshojohoSofuBodyEditor(送付一覧表データ, 合計, flag, 連番);
         ISogojigyohiKagoMoshitateshojohoSofuBuilder builder = new SogojigyohiKagoMoshitateshojohoSofuBuilder(headEditor, bodyEditor);
         writer.writeLine(builder);
     }

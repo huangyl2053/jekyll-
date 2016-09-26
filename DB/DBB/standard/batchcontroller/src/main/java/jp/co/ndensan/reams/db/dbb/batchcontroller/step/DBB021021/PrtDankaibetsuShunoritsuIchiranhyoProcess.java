@@ -1041,7 +1041,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         IShunoKamoku 特別徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
         if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
             return TEXT_普通徴収;
-        } else if (特別徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
+        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード().value())) {
             return TEXT_特別徴収;
         }
         return RString.EMPTY;

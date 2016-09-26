@@ -5,6 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200017.KogakuShikyuShinseishoHakkoIchiranOrder;
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200017.KogakuShikyuShinseishoHakkoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200017.KogakuShikyuShinseishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshinseishohakkoichiran.KogakuJigyoShinseishoHakkoIchiranParamter;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.ShinseishoHakkoIchiranhyoCsvEntity;
@@ -14,7 +18,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshi
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200017.KogakuShikyuShinseishoHakkoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -56,6 +63,7 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 一覧EUCエンティティID = new RString("DBC200017");
+    private static final RString ORDER_BY = new RString("order by");
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
 
@@ -66,6 +74,7 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
     private RString csvFileName;
     private FileSpoolManager manager;
     private IOutputOrder 出力順;
+    private List<RString> breakItemIds;
     private RDateTime システム日付;
 
     private int count;
@@ -76,12 +85,23 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
     protected void initialize() {
         count = 1;
         システム日付 = RDateTime.now();
+        breakItemIds = new ArrayList<>();
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
 
         csvFileName = CSV_FILE_NAME.concat(UNDER_LINE).
                 concat(導入団体クラス.get地方公共団体コード().value()).concat(UNDER_LINE).
                 concat(parameter.getSakuseibi().toString()).concat(CSV);
-        // TODO QA.1524    出力順設計書に、該当帳票ID関連の記載がない。
+        出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100011.getReportId(), parameter.getShutsuryokujunId());
+        if (出力順 != null) {
+            parameter.setOrderBy(MyBatisOrderByClauseCreator.create(
+                    KogakuShikyuShinseishoHakkoIchiranOrder.class, 出力順).replace(ORDER_BY, RString.EMPTY));
+            for (ISetSortItem item : 出力順.get設定項目リスト()) {
+                if (item.is改頁項目()) {
+                    breakItemIds.add(item.get項目ID());
+                }
+            }
+        }
     }
 
     @Override
@@ -91,7 +111,8 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200017.getReportId().value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200017.getReportId().value()).
+                addBreak(new KogakuShikyuShinseishoHakkoIchiranPageBreak(breakItemIds)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);

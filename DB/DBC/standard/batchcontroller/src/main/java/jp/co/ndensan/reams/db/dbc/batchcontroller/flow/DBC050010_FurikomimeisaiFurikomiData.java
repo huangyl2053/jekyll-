@@ -15,11 +15,13 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.KanendoUpdateFu
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.KogakuFurikomiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.KogakuShikyuHanteiKekkaCancelProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.KogakuShikyuHanteiKekkaUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.KougakuKozaJohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.KozaJohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShikyugakuJohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShinseiDataKakuninProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShokanHanteiKekkaCancelProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShokanHanteiKekkaUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShokanJuryoininProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShoriKekkaKakuninListDataNasiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShoukanFurikomiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.SyoriResultKakuninListCreateProcess;
@@ -75,6 +77,8 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private static final String 被保険者台帳_宛名情報 = "HihokenshaAtenaJoho";
     private static final String 被保険者台帳_宛名情報_エラー登録 = "EraTouroku";
     private static final String 還口座払の口座情報 = "KozaJoho";
+    private static final String 高額の口座情報 = "KougakuKozaJoho";
+    private static final String 償還受領委任払の口座情報 = "ShokanJuryoinin";
     private static final String 振込データ作成 = "FurikomiData";
     private static final String 振込データ登録_口座振込一時処理 = "FurikomiDataTouroku";
     private static final String 依頼済登録_償還 = "ShokanHanteiKekkaUpdate";
@@ -148,6 +152,8 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
             executeStep(被保険者台帳_宛名情報);
             executeStep(被保険者台帳_宛名情報_エラー登録);
             executeStep(還口座払の口座情報);
+            executeStep(高額の口座情報);
+            executeStep(償還受領委任払の口座情報);
             executeStep(振込データ作成);
             executeStep(振込データ登録_口座振込一時処理);
             レコード件数 = getResult(
@@ -155,27 +161,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
                     FurikomiDataTourokuProcess.PARAMETER_OUT_COUNT);
 
             if (0 != レコード件数) {
-                executeStep(口座振込データの登録処理);
-
-                if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                        || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
-
-                    executeStep(依頼済登録_償還);
-                    executeStep(依頼済取消_償還);
-                }
-                if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                        || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
-                    executeStep(依頼済登録_高額介護);
-                    executeStep(依頼済取消_高額介護);
-                }
-                executeStep(振込明細一覧表作成_受給取得状況);
-                executeStep(振込明細一覧表作成_申請データ有無確認);
-                executeStep(振込明細一覧表作成);
-
-                if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード())
-                        && 支払方法_窓口.equals(getParameter().get支払方法().getコード()))) {
-                    executeStep(振込エラーリスト作成);
-                }
+                振込データ登録_口座振込一時0件以外処理();
             }
         }
 
@@ -262,6 +248,26 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     protected IBatchFlowCommand kozaJoho() {
         return loopBatch(KozaJohoProcess.class)
                 .arguments(getParameter().toKozaJohoProcessParameter()).define();
+    }
+
+    /**
+     * 高額の口座情報
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(高額の口座情報)
+    protected IBatchFlowCommand kougakuKozaJoho() {
+        return loopBatch(KougakuKozaJohoProcess.class).define();
+    }
+
+    /**
+     * 償還受領委任払の口座情報
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(償還受領委任払の口座情報)
+    protected IBatchFlowCommand shokanJuryoinin() {
+        return loopBatch(ShokanJuryoininProcess.class).arguments(getParameter().toKozaJohoProcessParameter()).define();
     }
 
     /**
@@ -420,5 +426,30 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
             parameter.setTourokuKubun(登録区分_差分);
         }
         return parameter;
+    }
+
+    private void 振込データ登録_口座振込一時0件以外処理() {
+
+        executeStep(口座振込データの登録処理);
+
+        if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
+
+            executeStep(依頼済登録_償還);
+            executeStep(依頼済取消_償還);
+        }
+        if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
+            executeStep(依頼済登録_高額介護);
+            executeStep(依頼済取消_高額介護);
+        }
+        executeStep(振込明細一覧表作成_受給取得状況);
+        executeStep(振込明細一覧表作成_申請データ有無確認);
+        executeStep(振込明細一覧表作成);
+
+        if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード())
+                && 支払方法_窓口.equals(getParameter().get支払方法().getコード()))) {
+            executeStep(振込エラーリスト作成);
+        }
     }
 }

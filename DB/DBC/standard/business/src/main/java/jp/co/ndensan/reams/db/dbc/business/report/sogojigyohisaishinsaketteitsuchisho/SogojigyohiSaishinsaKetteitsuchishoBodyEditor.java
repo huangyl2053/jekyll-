@@ -91,6 +91,7 @@ public class SogojigyohiSaishinsaKetteitsuchishoBodyEditor
         source.listLower_4 = 帳票出力対象データ.get申立事由();
         source.listLower_5 = doカンマ編集(帳票出力対象データ.get原審単位数());
         source.listLower_6 = doカンマ編集(帳票出力対象データ.get調整単位数());
+        source.shikibetuCode = 帳票出力対象データ.get識別コード();
     }
 
     private void edit集計(SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource source) {

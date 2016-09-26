@@ -15,7 +15,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ReportIdDBC {
 
+    /**
+     * DBC701019_HanyoListJigyoKogakuServiceHiJokyo
+     *
+     */
     DBC701019(new ReportId("DBC701019_HanyoListJigyoKogakuServiceHiJokyo"), new RString("")),
+    /**
+     * DBC701003_HanyoListKogakuKaigoServiceHiJokyo
+     *
+     */
     DBC701003(new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo"), new RString("")),
     /**
      * 受給者給付実績台帳作成
@@ -733,7 +741,12 @@ public enum ReportIdDBC {
     /**
      * 高額介護サービス費対象者一覧表（遡及分） 帳票ＩＤです。
      */
-    DBC200100(new ReportId("DBC200100_KogakuServicehiTaishoshaIchiranSokyubun"), new RString("高額介護サービス費対象者一覧表（遡及分）"));
+    DBC200100(new ReportId("DBC200100_KogakuServicehiTaishoshaIchiranSokyubun"), new RString("高額介護サービス費対象者一覧表（遡及分）")),
+    /**
+     * 住宅改修理由書作成手数料支給（不支給）決定通知書 帳票ＩＤです。
+     */
+    DBC100044(new ReportId("DBC100044_JutakuKaishuRiyushoSakuseiTesuryoKetteiTsuchisho"), new RString("住宅改修理由書作成手数料支給（不支給）決定通知書"));
+
     private final ReportId reportId;
 
     private final RString reportName;

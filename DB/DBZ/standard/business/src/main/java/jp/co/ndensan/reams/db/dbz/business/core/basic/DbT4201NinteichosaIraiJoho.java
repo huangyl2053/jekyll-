@@ -183,7 +183,7 @@ public class DbT4201NinteichosaIraiJoho extends
      *
      * @return モバイルデータ出力済フラグ
      */
-    public boolean getモバイルデータ出力済フラグ() {
+    public boolean isモバイルデータ出力済フラグ() {
         return entity.getMobileDataShutsuryokuZumiFlag();
     }
 
@@ -192,7 +192,7 @@ public class DbT4201NinteichosaIraiJoho extends
      *
      * @return 事前調査フラグ
      */
-    public boolean get事前調査フラグ() {
+    public boolean is事前調査フラグ() {
         return entity.getJizenChosaFlag();
     }
 
@@ -237,7 +237,7 @@ public class DbT4201NinteichosaIraiJoho extends
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

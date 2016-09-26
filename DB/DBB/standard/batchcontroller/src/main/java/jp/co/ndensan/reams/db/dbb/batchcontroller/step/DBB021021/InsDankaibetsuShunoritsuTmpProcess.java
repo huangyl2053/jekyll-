@@ -46,10 +46,8 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
 
     private InsDankaibetsuShunoritsuTmpProcessParameter parameter;
     private CaFt702FindTotalShunyuFunction psmEntity;
-    private static final RString 未納分 = new RString("未納分");
+//    private static final RString 未納分 = new RString("未納分");
     private static final RString 完納分 = new RString("完納分");
-    private static final RString 完納出力区分_出力しない = new RString("0");
-    private static final RString 完納出力区分_出力する = new RString("1");
     private static final RString 認定者のみ = new RString("認定者のみ");
     private static final RString 認定者を除く１号被保険者 = new RString("認定者を除く１号被保険者");
     private static final RString 受給者のみ = new RString("受給者のみ");

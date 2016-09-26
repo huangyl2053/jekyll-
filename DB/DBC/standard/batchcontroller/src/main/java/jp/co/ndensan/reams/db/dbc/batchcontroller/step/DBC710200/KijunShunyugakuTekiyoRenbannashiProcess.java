@@ -118,12 +118,12 @@ public class KijunShunyugakuTekiyoRenbannashiProcess extends BatchProcessBase<Ha
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                new RString("汎用リスト　基準収入額適用情報CSV"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト　基準収入額適用情報CSV"),
                 new RString("HanyoList_KijunShunyugakuTekiyo.csv"),
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 kijunShunyugakuTekiyo.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

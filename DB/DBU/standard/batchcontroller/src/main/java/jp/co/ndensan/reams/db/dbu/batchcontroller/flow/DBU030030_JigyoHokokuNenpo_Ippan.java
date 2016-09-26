@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030.JigyoHokokuData
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030.JigyoHokokuDataReportDBU300105Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030.JigyoHokokuDataReportDBU300106Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030.JigyoHokokuDataTorokuProcess;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParamter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBU-5600-030 dingyi
  */
-public class DBU030030_JigyoHokokuNenpo_Ippan extends BatchFlowBase<DBU030030_JigyoHokokuNenpo_IppanParamter> {
+public class DBU030030_JigyoHokokuNenpo_Ippan extends BatchFlowBase<DBU030030_JigyoHokokuNenpo_IppanParameter> {
 
     private static final String 事業報告統計データ登録 = "事業報告統計データ登録";
     private static final String 帳票出力_介護事業状況報告月報_一般状況_様式1 = "帳票出力_介護事業状況報告月報_一般状況_様式1";

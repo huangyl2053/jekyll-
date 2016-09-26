@@ -32,10 +32,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HanyoListParamKokurenJyukyujyaJyoho {
 
-    private static final RString モード1 = new RString("共同処理用受給者情報（基本）");
-    private static final RString モード2 = new RString("共同処理用受給者情報（償還）");
-    private static final RString モード3 = new RString("共同処理用受給者情報（高額）");
-    private static final RString モード4 = new RString("国保連受給者情報");
+    private static final RString モード1 = new RString("DBCUC70501");
+    private static final RString モード2 = new RString("DBCUC70701");
+    private static final RString モード3 = new RString("DBCUC70601");
+    private static final RString モード4 = new RString("DBCUC70401");
 
     /**
      * 汎用リスト（資格）を初期化します。
@@ -44,7 +44,7 @@ public class HanyoListParamKokurenJyukyujyaJyoho {
      * @return ResponseData<HanyoListParamKokurenJyukyujyaJyohoDiv>
      */
     public ResponseData<HanyoListParamKokurenJyukyujyaJyohoDiv> onLoad(HanyoListParamKokurenJyukyujyaJyohoDiv div) {
-        RString モード = ResponseHolder.getState();
+        RString モード = ResponseHolder.getUIContainerId();
         List<KaigoDonyuKeitai> list = KaigoDonyuKeitaiManager.createInstance().get介護導入形態By業務分類(GyomuBunrui.介護事務);
         getHandler(div).onLoad(list);
         if (モード1.equals(モード)) {

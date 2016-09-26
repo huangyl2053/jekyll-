@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -27,6 +29,8 @@ public class KyufuTsuchiSakuseiDiv extends Panel {
     private TextBoxDateRange tdrServiceYM;
     @JsonProperty("chkServiceSyuruiSyuyaku")
     private CheckBoxList chkServiceSyuruiSyuyaku;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("holLine1")
     private HorizontalLine holLine1;
     @JsonProperty("chkYokaigodo")
@@ -82,6 +86,15 @@ public class KyufuTsuchiSakuseiDiv extends Panel {
     @JsonProperty("chkServiceSyuruiSyuyaku")
     public void setChkServiceSyuruiSyuyaku(CheckBoxList chkServiceSyuruiSyuyaku) {
         this.chkServiceSyuruiSyuyaku = chkServiceSyuruiSyuyaku;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     /*

@@ -16,8 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSet
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +36,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
     // 基準日
     private FlexibleDate 基準日;
     // 所得年度
-    private RString 所得年度;
+    private FlexibleYear 所得年度;
     // 旧措置区分
     private KyusochishaKubun 旧措置区分;
     // 世帯表示
@@ -53,7 +52,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
     // 帳票ID
     private RString 帳票ID;
 
-    private RDateTime 帳票作成日時;
+    private FlexibleDate 帳票作成日時;
 
     private boolean is認定者リスト = false;
     private boolean is該当者リスト = false;
@@ -76,7 +75,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
      * @param 帳票ID 帳票ID
      */
     public ChohyoShutsuryokuJohoShutokuProcessParameter(TargetList 対象リスト,
-            FlexibleDate 基準日, RString 所得年度, KyusochishaKubun 旧措置区分, SetaiHyoji 世帯表示,
+            FlexibleDate 基準日, FlexibleYear 所得年度, KyusochishaKubun 旧措置区分, SetaiHyoji 世帯表示,
             JukyushaKubun2 受給者区分, List<HihokenshaKeizaiJokyo> 世帯非課税等, CSVSettings 出力設定,
             Long 改頁出力順ID, RString 帳票ID) {
         this.対象リスト = 対象リスト;
@@ -89,7 +88,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
         this.出力設定 = 出力設定;
         this.改頁出力順ID = 改頁出力順ID;
         this.帳票ID = 帳票ID;
-        this.帳票作成日時 = RDate.getNowDateTime();
+        this.帳票作成日時 = FlexibleDate.getNowDate();
     }
 
     /**

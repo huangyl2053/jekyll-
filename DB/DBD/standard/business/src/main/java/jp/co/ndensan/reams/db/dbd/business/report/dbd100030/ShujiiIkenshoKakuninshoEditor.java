@@ -85,12 +85,12 @@ public class ShujiiIkenshoKakuninshoEditor implements IShugiiIkenshoKakuninshoEd
             source.hihoName1 = 主治医意見書確認書Entity.get氏名１();
             source.hihoName2 = 主治医意見書確認書Entity.get氏名２();
             source.hihoNo = 主治医意見書確認書Entity.get被保険者番号();
-            source.IkesyosakuseiYmd = 主治医意見書確認書Entity.get主治医意見書作成日();
+            source.ikesyosakuseiYmd = 主治医意見書確認書Entity.get主治医意見書作成日();
 //            source.ninnteikikan = 主治医意見書確認書Entity.get;
-            source.JiritsudoB1 = 主治医意見書確認書Entity.get寝たきり度_B1();
-            source.JiritsudoB2 = 主治医意見書確認書Entity.get寝たきり度_B2();
-            source.JiritsudoC1 = 主治医意見書確認書Entity.get寝たきり度_C1();
-            source.JiritsudoC2 = 主治医意見書確認書Entity.get寝たきり度_C2();
+            source.jiritsudoB1 = 主治医意見書確認書Entity.get寝たきり度_B1();
+            source.jiritsudoB2 = 主治医意見書確認書Entity.get寝たきり度_B2();
+            source.jiritsudoC1 = 主治医意見書確認書Entity.get寝たきり度_C1();
+            source.jiritsudoC2 = 主治医意見書確認書Entity.get寝たきり度_C2();
 //            source.chohyoNo = 主治医意見書確認書Entity.get;
         }
 

@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SetaiinHaakuSubTempProcess extends BatchProcessBase<SetaiYinEntity> {
 
-    private static final RString 本人区分 = new RString("１：本人");
+    private static final RString 本人区分 = new RString("1");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper.select住所地特例該当");
     private static final RString 世帯員所得情報一時 = new RString("SetaiYinShiyoTokuJyoHoTemp");
@@ -56,6 +56,7 @@ public class SetaiinHaakuSubTempProcess extends BatchProcessBase<SetaiYinEntity>
     @Override
     protected void process(SetaiYinEntity entity) {
         entity.setHonninnkubun(本人区分);
+        entity.setShotaishikibetsuCode(entity.getShikibetsuCode().getColumnValue());
         世帯員所得一時.insert(entity);
     }
 }

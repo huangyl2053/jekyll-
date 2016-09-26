@@ -726,8 +726,8 @@
                   AND A."shoriJotaiKubun" IN (#{通常},#{延期})
                   AND A."logicalDeletedFlag" = False
                  <if test="申請日フラグ">
-                  AND #{一次判定日From} <![CDATA[<=]]> A."ninteiShinseiYMD"
-                  AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{一次判定日To}
+                  AND #{申請日From} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                  AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{申請日To}
                 </if>
                 LIMIT(1)                                                                                                                
     </select>

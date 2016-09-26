@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntKarisanteiNo
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntKarisanteigakuHenkoTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntTokuchouKaishiTutishoKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.SystemTimeSyutokuProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt36002.KarisanteiIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -73,7 +73,7 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
     private static final String 納入通知書仮算定発行 = "pntKarisanteiNonyuTsuchishoProcess";
     private static final String 納入通知書発行後異動者登録 = "insNonyuTsuchishoHakkogoIdoshaProcess";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private RString バッチフロー_帳票分類ID;
     private KarisanteiIdoFukaProcessParameter processParameter;
 

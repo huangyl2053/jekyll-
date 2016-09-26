@@ -161,7 +161,7 @@ public class PostMainPanelCheck {
     }
 
     /**
-     * 文件第一行字节数的确定
+     * 長さ判定
      *
      * @param fileName RString
      * @param num int

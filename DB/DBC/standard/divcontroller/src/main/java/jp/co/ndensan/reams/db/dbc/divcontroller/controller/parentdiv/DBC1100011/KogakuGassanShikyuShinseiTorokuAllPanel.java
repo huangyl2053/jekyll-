@@ -82,7 +82,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
         KogakuGassanShinseishoHoji 高額合算申請書保持 = handler.initialize(引き継ぎデータ, 照会モード);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持);
-        if (!RString.isNullOrEmpty(照会モード)) {
+        if (RString.isNullOrEmpty(照会モード)) {
             前排他の設定(div);
         }
         if (RSTRING_ONE.equals(高額合算申請書保持.get申請状態())) {
@@ -211,6 +211,13 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         }
         RString 前排他キー = 排他情報.concat(被保険者番号.getColumnValue());
         排他制御(前排他キー);
+        handler.申請登録状態初期設定();
+        handler.onChange_ddlShinseiTaisyoNendo();
+        handler.onChange_ddlShokisaiHokenshaNo();
+        div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
+        div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
+        div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
+        div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
         handler.画面内共有子DIV初期化処理新規場合(対象者);
         handler.新規初期値取得設定();
         onChange_chkKofuShinseiUmu(div);
@@ -508,7 +515,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            if (!RString.isNullOrEmpty(照会モード) && div.getDgShinseiIchiran().getDataSource() != null) {
+            if (RString.isNullOrEmpty(照会モード) && div.getDgShinseiIchiran().getDataSource() != null) {
                 for (dgShinseiIchiran_Row row : div.getDgShinseiIchiran().getDataSource()) {
                     排他解除(排他情報.concat(row.getTxtHihokenshaNo()));
                 }

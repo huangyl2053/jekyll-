@@ -198,7 +198,5 @@ public class DBC5150011MainHandler {
     private void set抽出条件エリア状態() {
         div.getCcdServiceCodeInput().setDisabled(true);
         div.getCcdServiceCodeInput().setサービス名称(RString.EMPTY);
-        div.getCcdServiceCodeInput().setサービス種類コード(RString.EMPTY);
-        div.getCcdServiceCodeInput().setサービス項目コード(RString.EMPTY);
     }
 }
