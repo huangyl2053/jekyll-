@@ -29,6 +29,10 @@ public class ShoriKekkaKakuninListDataNasiProcess extends BatchProcessBase<Furik
     private static final int 振込明細一時件数なし = 0;
     private int count = 0;
     private OutputParameter<Integer> outputCount;
+
+    /**
+     * データ検索検索件数を返却
+     */
     public static final RString PARAMETER_OUT_COUNT;
 
     static {

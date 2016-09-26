@@ -64,6 +64,11 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
         executeStep(CREATE_CSVFILE);
     }
 
+    /**
+     * 取込国保情報一時表登録
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(INS_TORIKOMIKOKUHOJYOHOTEMP)
     protected IBatchFlowCommand 取込国保情報一時表登録() {
         return loopBatch(InsTorikomiKokuhoJyohoTempProcess.class)
@@ -71,6 +76,11 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 .define();
     }
 
+    /**
+     * 取込国保情報一時表更新
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(UPD_TORIKOMIKOKUHOJYOHOTEMP2)
     protected IBatchFlowCommand 取込国保情報一時表更新() {
         return loopBatch(UpdTorikomiKokuhoJyohoTemp2Process.class)
@@ -78,6 +88,11 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 .define();
     }
 
+    /**
+     * 取込国保情報一時表再更新
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(UPD_TORIKOMIKOKUHOJYOHOTEMP3)
     protected IBatchFlowCommand 取込国保情報一時表再更新() {
         return loopBatch(UpdTorikomiKokuhoJyohoTemp3Process.class)
@@ -85,6 +100,11 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 .define();
     }
 
+    /**
+     * 国保資格情報インポート用一時表登録
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(INS_KOKUHOSHIKAKUJYOHOTEMP)
     protected IBatchFlowCommand 国保資格情報インポート用一時表登録() {
         return loopBatch(InsKokuhoShikakuJyohoTempProcess.class)
@@ -92,6 +112,11 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 .define();
     }
 
+    /**
+     * 国保資格情報に登録
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(INS_KOKUHOSHIKAKUJYOHO)
     protected IBatchFlowCommand 国保資格情報に登録() {
         return loopBatch(InsKokuhoShikakuJyohoProcess.class)
@@ -99,12 +124,22 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 .define();
     }
 
+    /**
+     * 処理管理日付マスタ更新
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(UPD_SHORIDATEKANRI)
     protected IBatchFlowCommand 処理管理日付マスタ更新() {
         return simpleBatch(UpdShoriDateKanriProcess.class)
                 .arguments(getUpdShoriDateKanriProcessParameter()).define();
     }
 
+    /**
+     * 取込確認CSVファイル出力
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(CREATE_CSVFILE)
     protected IBatchFlowCommand 取込確認CSVファイル出力() {
         return loopBatch(KokuhoCsvFyiiruSyutuRyokuProcess.class).define();

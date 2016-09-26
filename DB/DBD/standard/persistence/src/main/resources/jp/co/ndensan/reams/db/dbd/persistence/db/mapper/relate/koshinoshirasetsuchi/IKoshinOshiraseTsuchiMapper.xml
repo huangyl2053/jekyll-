@@ -88,7 +88,7 @@
              master
            ) 
          ) AS "ShikibetsuTaisho"							
-         ON master."dbT4101NinteiShinseiJoho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode";								
+         ON master."dbT4101NinteiShinseiJoho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"							
         <if test="出力順 != null and !出力順.isEmpty()">
             ${出力順}
         </if>

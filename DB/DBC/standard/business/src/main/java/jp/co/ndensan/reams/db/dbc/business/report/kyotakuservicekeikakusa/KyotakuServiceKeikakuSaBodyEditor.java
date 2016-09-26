@@ -113,7 +113,8 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
 
     }
 
-    private void editAccessLog(KyotakuServiceKeikakuSaList 帳票情報, KyotakuServiceKeikakuSakuseiSource source) throws NullPointerException, IllegalArgumentException {
+    private void editAccessLog(KyotakuServiceKeikakuSaList 帳票情報, KyotakuServiceKeikakuSakuseiSource source)
+            throws NullPointerException, IllegalArgumentException {
         if (帳票情報.get被保険者番号() != null) {
             HihokenshaNo 被保険者番号 = 帳票情報.get被保険者番号();
             source.listList1_1 = 被保険者番号.getColumnValue();

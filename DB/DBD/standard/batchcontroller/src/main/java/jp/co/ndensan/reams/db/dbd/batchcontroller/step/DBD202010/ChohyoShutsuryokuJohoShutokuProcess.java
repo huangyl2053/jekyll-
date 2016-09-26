@@ -180,9 +180,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 personalDataList.add(personalData);
             }
         }
-
         ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
-
         eucCsvWriter.writeLine(resultEntity);
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
@@ -262,7 +260,8 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
         RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
         if (parameter.get帳票作成日時() != null) {
-            作成日時 = parameter.get帳票作成日時().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
+            作成日時 = parameter.get帳票作成日時().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
         }
         出力条件.add(作成日時);
 //        RString 出力順 = 出力順;
@@ -305,7 +304,44 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         } else {
             resultEntity.set決定区分(空白);
         }
+        if (t.is老齢福祉年金受給者()) {
+            resultEntity.set老齢福祉年金受給(ASTERISK);
+        } else {
+            resultEntity.set老齢福祉年金受給(空白);
+        }
 
+        if (t.is生活保護受給者()) {
+            resultEntity.set生活保護受給区分(ASTERISK);
+        } else {
+            resultEntity.set生活保護受給区分(空白);
+        }
+
+        if (ONE.equals(t.get本人課税区分())) {
+            resultEntity.set課税区分(課);
+        } else {
+            resultEntity.set課税区分(空白);
+        }
+        if (t.get利用者負担額減額Entity() == null || t.get利用者負担額減額Entity().getKyuhuritsu() == null) {
+            resultEntity.set減免給付率(空白);
+        } else {
+            HokenKyufuRitsu kyuhuritsu = t.get利用者負担額減額Entity().getKyuhuritsu();
+            if (kyuhuritsu != null) {
+                Decimal str = kyuhuritsu.getColumnValue();
+                resultEntity.set減免給付率(new RString(str.toString()));
+            }
+        }
+        if (t.get世帯員Entity().getPsmEntity() != null) {
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員Entity().getPsmEntity());
+            resultEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
+            resultEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+        }
+        setVoidEntity(resultEntity, t);
+        setEntity(resultEntity, t);
+        return resultEntity;
+    }
+
+    private ChohyoShutsuryokuJohoShutokuResultCsvEntity setVoidEntity(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity,
+            ChohyoShutsuryokuJohoShutokuResultEntity t) {
         resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
         if (THERE.equals(parameter.get出力設定().getコード())) {
             FlexibleDate shineiYMD = t.get利用者負担額減額Entity().getShinseiYMD();
@@ -342,23 +378,6 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 resultEntity.set減免有効期限(tekiyoShuryoYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
             }
         }
-        if (t.is老齢福祉年金受給者()) {
-            resultEntity.set老齢福祉年金受給(ASTERISK);
-        } else {
-            resultEntity.set老齢福祉年金受給(空白);
-        }
-
-        if (t.is生活保護受給者()) {
-            resultEntity.set生活保護受給区分(ASTERISK);
-        } else {
-            resultEntity.set生活保護受給区分(空白);
-        }
-
-        if (ONE.equals(t.get本人課税区分())) {
-            resultEntity.set課税区分(課);
-        } else {
-            resultEntity.set課税区分(空白);
-        }
         if (t.is所得税課税者()) {
             resultEntity.set所得税課税区分(課);
         } else {
@@ -371,6 +390,11 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         } else {
             resultEntity.set旧措置(空白);
         }
+        return resultEntity;
+    }
+
+    private ChohyoShutsuryokuJohoShutokuResultCsvEntity setEntity(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity,
+            ChohyoShutsuryokuJohoShutokuResultEntity t) {
         resultEntity.set要介護度((YokaigoJotaiKubunSupport.toValue(t.get厚労省IF識別コード(), t.get認定情報Entity().get要介護状態区分コード())).getName());
         if (THERE.equals(parameter.get出力設定().getコード())) {
             FlexibleDate 認定年月日 = t.get認定情報Entity().get認定年月日();
@@ -400,20 +424,6 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             }
         }
 
-        if (t.get利用者負担額減額Entity() == null || t.get利用者負担額減額Entity().getKyuhuritsu() == null) {
-            resultEntity.set減免給付率(空白);
-        } else {
-            HokenKyufuRitsu kyuhuritsu = t.get利用者負担額減額Entity().getKyuhuritsu();
-            if (kyuhuritsu != null) {
-                Decimal str = kyuhuritsu.getColumnValue();
-                resultEntity.set減免給付率(new RString(str.toString()));
-            }
-        }
-        if (t.get世帯員Entity().getPsmEntity() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員Entity().getPsmEntity());
-            resultEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
-            resultEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
-        }
         if (ONE.equals(t.get世帯員Entity().get課税区分())) {
             resultEntity.set世帯員課税区分(課);
         } else {

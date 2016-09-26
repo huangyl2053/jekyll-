@@ -22,15 +22,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010003.Ike
 import jp.co.ndensan.reams.db.dbd.service.core.basic.IryohiKojoManager;
 import jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei.IryoHiKojoKakuninSinsei;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100030.ShujiiIkenshoKakuninshoPrintService;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
@@ -66,13 +63,7 @@ public class IkenshoKakuninsho {
      * @return ResponseData<IkenshoKakuninshoDiv>
      */
     public ResponseData<IkenshoKakuninshoDiv> onLoad(IkenshoKakuninshoDiv div) {
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        // TODO テストデータ
-        TaishoshaKey taishoshaKey = new TaishoshaKey(
-                new HihokenshaNo(new RString("0000000098")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
-        ViewStateHolder.put(ViewStateKeys.資格対象者, taishoshaKey);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (taishoshaKey.get被保険者番号().isEmpty()) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
         }
@@ -94,8 +85,6 @@ public class IkenshoKakuninsho {
             throw new PessimisticLockingException();
         }
         RealInitialLocker.lock(排他キー);
-//        PersonalData personalData = PersonalData.of(taishoshaKey.get識別コード(),
-//                new ExpandedInformation(new Code("003"), new RString("被保険者番号"), 被保険者番号));
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
         List<KeyValueDataSource> 年度DDLデータ = new ArrayList<>();
         for (IryohiKojoEntityResult 医療費控除 : 医療費控除情報リスト) {
@@ -171,18 +160,9 @@ public class IkenshoKakuninsho {
         service.printSingle(getHandler(div).create主治医意見書確認書Entity(taishoshaKey));
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
         IryohiKojoManager manager = new IryohiKojoManager();
-        List<IryohiKojoEntityResult> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
-        RString 控除対象年 = div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey();
-        IryohiKojoEntityResult 表示対象データ = null;
-        for (IryohiKojoEntityResult 医療費控除 : 医療費控除情報リスト) {
-            if (控除対象年.equals(医療費控除.get控除対象年())) {
-                表示対象データ = 医療費控除;
-                break;
-            }
-        }
         IryohiKojo 医療費控除 = manager.get医療費控除(taishoshaKey.get被保険者番号(),
                 new FlexibleYear(div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey()),
-                表示対象データ == null ? RString.EMPTY : 表示対象データ.getデータ区分());
+                div.getHdndatakubun());
         IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
         builder.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
         manager.save医療費控除(builder.build());

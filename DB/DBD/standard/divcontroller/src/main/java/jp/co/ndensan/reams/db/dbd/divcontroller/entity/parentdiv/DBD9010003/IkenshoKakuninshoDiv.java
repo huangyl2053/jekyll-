@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanry
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshoKakuninshoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,10 +29,12 @@ public class IkenshoKakuninshoDiv extends Panel {
      */
     @JsonProperty("panelKakuninsho")
     private panelKakuninshoDiv panelKakuninsho;
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("panelShosaiEria")
     private panelShosaiEriaDiv panelShosaiEria;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
+    @JsonProperty("hdndatakubun")
+    private RString hdndatakubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -58,15 +61,6 @@ public class IkenshoKakuninshoDiv extends Panel {
     }
 
     /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
-     */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
-    }
-
-    /*
      * getpanelShosaiEria
      * @return panelShosaiEria
      */
@@ -82,6 +76,33 @@ public class IkenshoKakuninshoDiv extends Panel {
     @JsonProperty("panelShosaiEria")
     public void setPanelShosaiEria(panelShosaiEriaDiv panelShosaiEria) {
         this.panelShosaiEria = panelShosaiEria;
+    }
+
+    /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
+    }
+
+    /*
+     * gethdndatakubun
+     * @return hdndatakubun
+     */
+    @JsonProperty("hdndatakubun")
+    public RString getHdndatakubun() {
+        return hdndatakubun;
+    }
+
+    /*
+     * sethdndatakubun
+     * @param hdndatakubun hdndatakubun
+     */
+    @JsonProperty("hdndatakubun")
+    public void setHdndatakubun(RString hdndatakubun) {
+        this.hdndatakubun = hdndatakubun;
     }
 
     /*

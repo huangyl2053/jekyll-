@@ -61,8 +61,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
     private static final RString 連絡票を = new RString("btnUpdate");
-    private static final RString 新規データを削除しようとしています = new RString("新規データを削除しようとしています");
-    private static final RString 終了データを削除しようとしています = new RString("終了データを削除しようとしています");
+    private static final RString 新規データを削除しようとしています = new RString("新規データを削除しようとしています。");
+    private static final RString 終了データを削除しようとしています = new RString("終了データを削除しようとしています。");
 
     /**
      * 画面初期化です。
@@ -331,8 +331,11 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             訂正対象データ = JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
                     get訂正対象データ(引き継ぎ情報.get被保番号(), 引き継ぎ情報.get異動日(), 引き継ぎ情報.get履歴番号());
         }
-        boolean flag = getHandler(div).is受給者異動連絡票内容変更状態(
-                受給者訂正連絡票登録画面Div, 訂正対象データ);
+        boolean flag = false;
+        if (訂正対象データ != null) {
+            flag = getHandler(div).is受給者異動連絡票内容変更状態(
+                    受給者訂正連絡票登録画面Div, 訂正対象データ);
+        }
         if (TWO.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
             if (!flag) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());

@@ -161,7 +161,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
     protected void createWriter() {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         csvFileName = ファイル名_前.concat(parameter.get保険者番号().getColumnValue()).
-                concat(parameter.get処理年月().toDateString()).concat(ファイル_TYPE);
+                concat(parameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル_TYPE);
         csvFilePath = Path.combinePath(spoolWorkPath, csvFileName);
         csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
                 setDelimiter(カンマ).
@@ -341,7 +341,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
     }
 
     private void do外字類似変換() {
-        try (FileReader reader = new FileReader(csvFilePath, Encode.UTF_8);
+        try (FileReader reader = new FileReader(csvFilePath, Encode.UTF_8withBOM);
                 ByteWriter writer = new ByteWriter(csvFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
             for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
                 BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(

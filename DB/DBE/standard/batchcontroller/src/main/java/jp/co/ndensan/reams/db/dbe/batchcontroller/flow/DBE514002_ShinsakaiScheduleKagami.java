@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE514002.ShinsakaiScheduleKagamiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE514001.DBE514001_ShinsakaiScheduleParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -33,7 +33,7 @@ public class DBE514002_ShinsakaiScheduleKagami extends BatchFlowBase<DBE514001_S
      */
     @Step(SHINSAKAISCHEDULEKAGAMIHYO)
     protected IBatchFlowCommand shinsakaiSchedulekagami() {
-        return loopBatch(KaigoNinteiShinsakaiScheduleKagamiProcess.class)
+        return loopBatch(ShinsakaiScheduleKagamiProcess.class)
                 .arguments(getParameter().toKaigoNinteiShinsakaiScheduleKagamiProcessParamter()).define();
     }
 }

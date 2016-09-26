@@ -138,12 +138,12 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
 
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                new RString("汎用リスト　事業分高額合算支給決定情報CSV"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト　事業分高額合算支給決定情報CSV"),
                 new RString("HanyoList_JigyoBunKogakuGassanShikyuKettei.csv"),
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 business.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();

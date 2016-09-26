@@ -221,7 +221,7 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         FlexibleDate 申請日 = null;
         if (div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiYMD().getFromValue() != null) {
             申請日 = new FlexibleDate(
-                    div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiYMD().getFromValue().seireki().getDateStrings().toString());
+                    div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiYMD().getFromValue().toString());
         }
         RString 介護支給申請書整理番号1 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango1().getValue();
         RString 介護支給申請書整理番号2 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().getValue();
@@ -230,7 +230,8 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         if (介護支給申請書整理番号4.length() < 六) {
             介護支給申請書整理番号4.padZeroToLeft(六 - 介護支給申請書整理番号4.length());
         }
-        RString 介護支給申請書整理番号list = 介護支給申請書整理番号1.insert(介護支給申請書整理番号1.length() - 1, 介護支給申請書整理番号2.toString());
+        RString 介護支給申請書整理番号list
+                = 介護支給申請書整理番号1.insert(介護支給申請書整理番号1.length() - 1, 介護支給申請書整理番号2.toString());
         介護支給申請書整理番号list = 介護支給申請書整理番号list.insert(介護支給申請書整理番号list.length() - 1, 介護支給申請書整理番号3.toString());
         介護支給申請書整理番号list = 介護支給申請書整理番号list.insert(介護支給申請書整理番号list.length() - 1, 介護支給申請書整理番号4.toString());
         if (介護支給申請書整理番号list.length() != 十七) {
@@ -243,7 +244,8 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         if (医療支給申請書整理番号4.length() < 六) {
             医療支給申請書整理番号4.padZeroToLeft(六 - 医療支給申請書整理番号4.length());
         }
-        RString 医療支給申請書整理番号list = 医療支給申請書整理番号1.insert(医療支給申請書整理番号1.length() - 1, 医療支給申請書整理番号2.toString());
+        RString 医療支給申請書整理番号list
+                = 医療支給申請書整理番号1.insert(医療支給申請書整理番号1.length() - 1, 医療支給申請書整理番号2.toString());
         医療支給申請書整理番号list = 医療支給申請書整理番号list.insert(医療支給申請書整理番号list.length() - 1, 医療支給申請書整理番号3.toString());
         医療支給申請書整理番号list = 医療支給申請書整理番号list.insert(医療支給申請書整理番号list.length() - 1, 医療支給申請書整理番号4.toString());
         if (医療支給申請書整理番号list.length() != 十七) {
@@ -267,6 +269,15 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
             List<dgTorokuSearchResult_Row> rowList = new ArrayList<>();
+            addRow(list, rowList);
+            div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().setDataSource(rowList);
+
+            状態2(申請状況);
+        }
+    }
+
+    private void addRow(List<ShinseishoJohoResult> list, List<dgTorokuSearchResult_Row> rowList) throws IllegalArgumentException {
+        if (list != null) {
             for (ShinseishoJohoResult shoJohoResult : list) {
                 dgTorokuSearchResult_Row row = new dgTorokuSearchResult_Row();
                 if (shoJohoResult.get高額合算申請書().get支給申請書整理番号() != null) {
@@ -305,9 +316,6 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
                 row.setTxtRirekiNo(new RString(shoJohoResult.get高額合算申請書().get履歴番号().toString()));
                 rowList.add(row);
             }
-            div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().setDataSource(rowList);
-
-            状態2(申請状況);
         }
     }
 
