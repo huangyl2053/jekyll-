@@ -723,15 +723,15 @@
     </resultMap>
     
     <resultMap id="ResultMap_給付実績基本居宅サービス計画費" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceRelateEntity" autoMapping="true">
-        <id property="給付実績居宅サービス計画費データ.kokanJohoShikibetsuNo" column="dbT3025_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.inputShikibetsuNo" column="dbT3025_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.recodeShubetsuCode" column="dbT3025_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.shokisaiHokenshaNo" column="dbT3025_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.hiHokenshaNo" column="dbT3025_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.serviceTeikyoYM" column="dbT3025_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.jigyoshoNo" column="dbT3025_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.toshiNo" column="dbT3025_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="給付実績居宅サービス計画費データ.servicePlanhiMeisaiLineNo" column="dbT3025_servicePlanhiMeisaiLineNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.kokanJohoShikibetsuNo" column="dbT3025_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.inputShikibetsuNo" column="dbT3025_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.recodeShubetsuCode" column="dbT3025_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.shokisaiHokenshaNo" column="dbT3025_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.hiHokenshaNo" column="dbT3025_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.serviceTeikyoYM" column="dbT3025_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.jigyoshoNo" column="dbT3025_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.toshiNo" column="dbT3025_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績基本居宅サービス計画費データ.servicePlanhiMeisaiLineNo" column="dbT3025_servicePlanhiMeisaiLineNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="給付実績基本居宅サービス計画費データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.ResultMap_DbT3025KyufujissekiKyotakuServiceEntity"/>
         <association property="給付実績基本データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
     </resultMap>
