@@ -378,11 +378,6 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 resultEntity.set減免有効期限(tekiyoShuryoYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
             }
         }
-        if (t.is所得税課税者()) {
-            resultEntity.set所得税課税区分(課);
-        } else {
-            resultEntity.set所得税課税区分(空白);
-        }
         resultEntity.set入所施設コード(t.get入所施設コード());
         resultEntity.set入所施設名称(t.get入所施設名称());
         if (t.is旧措置者フラグ()) {
@@ -423,7 +418,11 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 resultEntity.set認定終了日(認定有効期間終了年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
             }
         }
-
+        if (t.is所得税課税者()) {
+            resultEntity.set所得税課税区分(課);
+        } else {
+            resultEntity.set所得税課税区分(空白);
+        }
         if (ONE.equals(t.get世帯員Entity().get課税区分())) {
             resultEntity.set世帯員課税区分(課);
         } else {
