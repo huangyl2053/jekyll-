@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -92,12 +93,13 @@ public class OmutsusiyoSyomeisho {
      * 発行処理
      *
      * @param div OmutsusiyoSyomeishoDiv
-     * @return ResponseData<OmutsusiyoSyomeishoDiv>
+     * @return ResponseData
      */
-    public ResponseData<OmutsusiyoSyomeishoDiv> onClick_btnReportPublish(OmutsusiyoSyomeishoDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(OmutsusiyoSyomeishoDiv div) {
+        ResponseData<SourceDataCollection> response = new ResponseData<>();
         List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
-        getHandler(div).publishReport(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), 医療費控除リスト);
-        return ResponseData.of(div).respond();
+        response.data = getHandler(div).publishReport(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), 医療費控除リスト);
+        return response;
     }
 
     /**
