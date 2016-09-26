@@ -124,6 +124,7 @@ public class KyufuJissekiShokaiFinder {
     private static final RString 交換情報識別番号の先頭３桁 = new RString("111");
     private static final RString 給付実績情報作成区分コード_削除 = new RString("3");
     private static final int INDEX_3 = 3;
+    private static final int INDEX_6 = 6;
 
     /**
      * コンストラクタです。
@@ -362,7 +363,8 @@ public class KyufuJissekiShokaiFinder {
                 給付実績所定疾患施設療養費等データリスト.addAll(ge給付実績所定疾患施設療養費等データ(入力識別番号,
                         被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
                 if (集計データ.getServiceTeikyoYM().isBefore(new FlexibleYearMonth(DbBusinessConfig.get(
-                        ConfigNameDBU.制度改正施行日_介護給付費見直し, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
+                        ConfigNameDBU.制度改正施行日_介護給付費見直し, RDate.getNowDate(),
+                        SubGyomuCode.DBU介護統計報告).substring(0, INDEX_6)))) {
                     給付実績特定診療費データリスト.addAll(get給付実績特定診療費データ(入力識別番号,
                             被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
                 } else {
