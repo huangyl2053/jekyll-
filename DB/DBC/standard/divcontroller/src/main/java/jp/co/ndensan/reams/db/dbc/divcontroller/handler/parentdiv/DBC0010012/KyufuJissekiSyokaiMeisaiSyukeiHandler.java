@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiJushochiTokureiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekisyokaimeisaisyukei.KyufuJissekiSyokaiMeisaiSyukeiBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.KyufuJissekiSyokaiMeisaiSyukeiDiv;
@@ -68,7 +69,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      *
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
-     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
+     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
      * @param 整理番号 RString
      * @param サービス提供年月 FlexibleYearMonth
      * @param 様式番号 RString
@@ -76,7 +77,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void onLoad(List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト, RString 整理番号,
+            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト, RString 整理番号,
             FlexibleYearMonth サービス提供年月, RString 様式番号, RString 事業者番号,
             List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         set明細情報の表示制御(様式番号, サービス提供年月);
@@ -93,12 +94,12 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      *
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisai>
-     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
+     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
      * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void setDataGrid総計(List<KyufujissekiShukei> 集計情報リスト,
             List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
+            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト,
             List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         if (!div.getDgKyufuJissekiShukei().isDisplayNone() && !集計情報リスト.isEmpty()) {
             setDataGrid集計情報(集計情報リスト);
@@ -128,12 +129,12 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         div.getDgKyufuJissekiMeisai().setDataSource(rowList);
     }
 
-    private void setDataGrid明細情報特例(List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
+    private void setDataGrid明細情報特例(List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト,
             List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         List<dgKyufuJissekiMeisaiJustoku_Row> rowList = new ArrayList<>();
-        for (KyufujissekiMeisaiJushochiTokurei 明細情報特例データ : 明細情報特例リスト) {
-            rowList.add(set明細情報特例(明細情報特例データ, 保険者情報));
-            rowList.add(set明細情報特例_後(明細情報特例データ));
+        for (KyufujissekiMeisaiJushochiTokureiBusiness 明細情報特例データ : 明細情報特例リスト) {
+            rowList.add(set明細情報特例(明細情報特例データ.get給付実績明細住所地特例情報(), 保険者情報));
+            rowList.add(set明細情報特例_後(明細情報特例データ.get給付実績明細住所地特例情報()));
         }
         div.getDgKyufuJissekiMeisaiJustoku().setDataSource(rowList);
     }
@@ -244,7 +245,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 被保険者番号 HihokenshaNo
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
-     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
+     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      * @param サービス提供年月 FlexibleYearMonth
      * @param 整理番号 RString
@@ -252,7 +253,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void change年月(RString data, HihokenshaNo 被保険者番号, List<KyufujissekiShukei> 集計情報リスト,
-            List<KyufujissekiMeisaiBusiness> 明細情報リスト, List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
+            List<KyufujissekiMeisaiBusiness> 明細情報リスト, List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト,
             List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月, RString 整理番号,
             NyuryokuShikibetsuNo 識別番号, List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
 
@@ -293,12 +294,12 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
-     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
+     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
      * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void change事業者(RString data, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
             List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
+            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト,
             List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
@@ -425,22 +426,22 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     /**
      * get給付実績明細データです。
      *
-     * @param 給付実績明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
+     * @param 給付実績明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
      * @param 整理番号 RString
      * @param 様式番号 RString
      * @param 事業者番号 RString
      * @param サービス提供年月 RString
-     * @return 給付実績明細データ List<KyufujissekiMeisaiJushochiTokurei>
+     * @return 給付実績明細データ List<KyufujissekiMeisaiJushochiTokureiBusiness>
      */
-    public List<KyufujissekiMeisaiJushochiTokurei> get給付実績明細情報特例(
-            List<KyufujissekiMeisaiJushochiTokurei> 給付実績明細情報特例リスト, RString 整理番号,
+    public List<KyufujissekiMeisaiJushochiTokureiBusiness> get給付実績明細情報特例(
+            List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細情報特例リスト, RString 整理番号,
             RString 事業者番号, RString 様式番号, RString サービス提供年月) {
-        List<KyufujissekiMeisaiJushochiTokurei> 給付実績明細情報特例データ = new ArrayList<>();
-        for (KyufujissekiMeisaiJushochiTokurei 給付実績明細情報特例 : 給付実績明細情報特例リスト) {
-            if (事業者番号.equals(給付実績明細情報特例.get事業所番号().value())
-                    && 整理番号.equals(給付実績明細情報特例.get整理番号())
-                    && 様式番号.equals(給付実績明細情報特例.get入力識別番号().value())
-                    && サービス提供年月.equals(給付実績明細情報特例.getサービス提供年月().toDateString())) {
+        List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細情報特例データ = new ArrayList<>();
+        for (KyufujissekiMeisaiJushochiTokureiBusiness 給付実績明細情報特例 : 給付実績明細情報特例リスト) {
+            if (事業者番号.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().get事業所番号().value())
+                    && 整理番号.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().get整理番号())
+                    && 様式番号.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().get入力識別番号().value())
+                    && サービス提供年月.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().getサービス提供年月().toDateString())) {
                 給付実績明細情報特例データ.add(給付実績明細情報特例);
             }
         }
