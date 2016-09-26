@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD203010;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200004.ShakaiFukushiHojinKeigenReport;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
@@ -23,12 +22,9 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinK
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinKeigenGaitoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinKeigenNoRennbannCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200004.ShakaiFukushiHojinReportSourse;
+import jp.co.ndensan.reams.db.dbd.service.core.dbd203010.NinteishaListSakuseiManager;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
-import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -108,18 +104,10 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private static final RString NINTEISHAICHIRANCSV = new RString("ShakaiFukushiHojinKeigenNinteishaIchiran.csv");
     private static final RString GAITOSHAICHIRANCSV = new RString("ShakaiFukushiHojinKeigenGaitoshaIchiran.csv");
     private static final RString LISTSCV = new RString("ShakaiFukushiHojinKeigenList.csv");
-    private static final RString 承認する = new RString("1");
-    private static final RString 承認しない = new RString("0");
     private static final RString 認定者 = new RString("1");
     private static final RString 該当者 = new RString("2");
     private static final RString 承認 = new RString("承認");
-    private static final RString 却下 = new RString("却下");
-    private static final RString 自己作成 = new RString("自己作成");
     private static final RString 課 = new RString("課");
-    private static final RString 旧措置者 = new RString("旧措置者");
-    private static final RString 居宅サービスのみ = new RString("居宅サービスのみ");
-    private static final RString 居住費食費のみ = new RString("居住費・食費のみ");
-    private static final RString 旧措ユ個のみ = new RString("旧措ユ個のみ");
     private static final RString 対象期間指定 = new RString("【対象期間指定】");
     private static final RString 対象年度 = new RString("【対象年度】");
     private static final RString 課税判定等基準日 = new RString("【課税判定等基準日】");
@@ -134,8 +122,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private static final RString 出力順 = new RString("【出力順】");
     private static final RString カラ = new RString("～");
     private static final RString POINT = new RString("、");
-    private static final RString ASTERISK = new RString("*");
     private static final RString SPACE = new RString("　　　　　　　　 ");
+    private static final RString より = new RString("＞");
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
     private static final int NO_2 = 2;
@@ -352,16 +340,13 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             for (int i = NO_0; i < entity.get世帯員リスト().size(); i++) {
                 if (i == NO_0) {
                     連番++;
-                    eucCsvEntity.set連番(new RString(連番));
-                    setEucCsvEntity(eucCsvEntity, entity);
-                    set世帯員CsvEntity(eucCsvEntity, entity.get世帯員リスト().get(i));
+                    NinteishaListSakuseiManager.createInstance().連番ありCSV世帯員情報設定(eucCsvEntity, entity, 連番,
+                            日付スラッシュ編集_flag, entity.get世帯員リスト().get(i));
                     eucCsvWriter.writeLine(eucCsvEntity);
                     ninteishapersonalDataList.add(toPersonalData2(entity.get世帯員リスト().get(i)));
                 } else {
                     連番++;
-                    eucCsvEntity.set連番(new RString(連番));
-                    setCsvEntityEmptyNo世帯員(eucCsvEntity);
-                    set世帯員CsvEntity(eucCsvEntity, entity.get世帯員リスト().get(i));
+                    NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, entity.get世帯員リスト().get(i));
                     eucCsvWriter.writeLine(eucCsvEntity);
                     ninteishapersonalDataList.add(toPersonalData2(entity.get世帯員リスト().get(i)));
                 }
@@ -369,22 +354,21 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         }
         if (連番_flag && entity.get世帯員リスト().isEmpty()) {
             ShakaiFukushiHojinKeigenCsvEntity eucCsvEntity = new ShakaiFukushiHojinKeigenCsvEntity();
-            setEucCsvEntity(eucCsvEntity, entity);
             連番++;
-            eucCsvEntity.set連番(new RString(連番));
+            NinteishaListSakuseiManager.createInstance().連番ありCSV世帯員情報設定(eucCsvEntity, entity, 連番,
+                    日付スラッシュ編集_flag, null);
             eucCsvWriter.writeLine(eucCsvEntity);
         }
         if (!連番_flag && entity.get世帯員リスト().size() > 0) {
             ShakaiFukushiHojinKeigenNoRennbannCsvEntity noRennbannCsvEntit = new ShakaiFukushiHojinKeigenNoRennbannCsvEntity();
             for (int i = NO_0; i < entity.get世帯員リスト().size(); i++) {
                 if (i == NO_0) {
-                    setNoRennbannEucCsvEntity(noRennbannCsvEntit, entity);
-                    set世帯員NoRennbannCsvEntity(noRennbannCsvEntit, entity.get世帯員リスト().get(i));
+                    NinteishaListSakuseiManager.createInstance().連番なしCSV世帯員情報設定(noRennbannCsvEntit, entity,
+                            日付スラッシュ編集_flag, entity.get世帯員リスト().get(i));
                     noRennbanneucCsvWriter.writeLine(noRennbannCsvEntit);
                     gaitoshapersonalDataList.add(toPersonalData2(entity.get世帯員リスト().get(i)));
                 } else {
-                    setNoRennbannCsvEntityEmptyNo世帯員(noRennbannCsvEntit);
-                    set世帯員NoRennbannCsvEntity(noRennbannCsvEntit, entity.get世帯員リスト().get(i));
+                    NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(noRennbannCsvEntit, entity.get世帯員リスト().get(i));
                     noRennbanneucCsvWriter.writeLine(noRennbannCsvEntit);
                     gaitoshapersonalDataList.add(toPersonalData2(entity.get世帯員リスト().get(i)));
                 }
@@ -392,10 +376,10 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         }
         if (!連番_flag && entity.get世帯員リスト().isEmpty()) {
             ShakaiFukushiHojinKeigenNoRennbannCsvEntity noRennbannCsvEntit = new ShakaiFukushiHojinKeigenNoRennbannCsvEntity();
-            setNoRennbannEucCsvEntity(noRennbannCsvEntit, entity);
+            NinteishaListSakuseiManager.createInstance().連番なしCSV世帯員情報設定(noRennbannCsvEntit, entity,
+                    日付スラッシュ編集_flag, null);
             noRennbanneucCsvWriter.writeLine(noRennbannCsvEntit);
         }
-
     }
 
     @Override
@@ -413,406 +397,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             認定者バッチ出力条件リストの出力();
         } else {
             該当者バッチ出力条件リストの出力();
-        }
-    }
-
-    private void setCsvEntityEmptyNo世帯員(ShakaiFukushiHojinKeigenCsvEntity eucCsvEntity) {
-        eucCsvEntity.setカナ氏名(RString.EMPTY);
-        eucCsvEntity.set住所(RString.EMPTY);
-        eucCsvEntity.set住所コード(RString.EMPTY);
-        eucCsvEntity.set住民種別(RString.EMPTY);
-        eucCsvEntity.set入所施設コード(RString.EMPTY);
-        eucCsvEntity.set入所施設名称(RString.EMPTY);
-        eucCsvEntity.set対象サービスの制限(RString.EMPTY);
-        eucCsvEntity.set居宅支援事業者名称(RString.EMPTY);
-        eucCsvEntity.set居宅支援事業者番号(RString.EMPTY);
-        eucCsvEntity.set年齢(RString.EMPTY);
-        eucCsvEntity.set所得税課税区分(RString.EMPTY);
-        eucCsvEntity.set旧措置(RString.EMPTY);
-        eucCsvEntity.set氏名(RString.EMPTY);
-        eucCsvEntity.set決定区分(RString.EMPTY);
-        eucCsvEntity.set減免事由(RString.EMPTY);
-        eucCsvEntity.set減免有効期限(RString.EMPTY);
-        eucCsvEntity.set減免決定日(RString.EMPTY);
-        eucCsvEntity.set減免申請日(RString.EMPTY);
-        eucCsvEntity.set減免適用日(RString.EMPTY);
-        eucCsvEntity.set生活保護受給区分(RString.EMPTY);
-        eucCsvEntity.set確認番号(RString.EMPTY);
-        eucCsvEntity.set老齢福祉年金受給(RString.EMPTY);
-        eucCsvEntity.set行政区(RString.EMPTY);
-        eucCsvEntity.set行政区コード(RString.EMPTY);
-        eucCsvEntity.set被保険者番号(RString.EMPTY);
-        eucCsvEntity.set要介護度(RString.EMPTY);
-        eucCsvEntity.set証保険者番号(RString.EMPTY);
-        eucCsvEntity.set認定日(RString.EMPTY);
-        eucCsvEntity.set認定終了日(RString.EMPTY);
-        eucCsvEntity.set認定開始日(RString.EMPTY);
-        eucCsvEntity.set課税区分(RString.EMPTY);
-        eucCsvEntity.set識別コード(RString.EMPTY);
-        eucCsvEntity.set軽減率分子(RString.EMPTY);
-        eucCsvEntity.set軽減率分母(RString.EMPTY);
-        eucCsvEntity.set連番(RString.EMPTY);
-        eucCsvEntity.set郵便番号(RString.EMPTY);
-    }
-
-    private void set世帯員CsvEntity(ShakaiFukushiHojinKeigenCsvEntity eucCsvEntity, Setaiinshotokujoho joho) {
-        if (joho.get世帯員宛名() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(joho.get世帯員宛名());
-            eucCsvEntity.set世帯員氏名(kojin.get名称().getName().value());
-            eucCsvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
-        } else {
-            eucCsvEntity.set世帯員氏名(RString.EMPTY);
-            eucCsvEntity.set世帯員住民種別(RString.EMPTY);
-        }
-        if (!joho.get本人課税区分().isNullOrEmpty() && joho.get本人課税区分().equals(new RString("1"))) {
-            eucCsvEntity.set世帯員課税区分(課);
-        } else {
-            eucCsvEntity.set世帯員課税区分(RString.EMPTY);
-        }
-
-        if (joho.get課税所得額() != null && joho.get課税所得額().intValue() > 0) {
-            eucCsvEntity.set世帯員所得税課税区分(課);
-        } else {
-            eucCsvEntity.set世帯員所得税課税区分(RString.EMPTY);
-        }
-
-    }
-
-    private void setEucCsvEntity(ShakaiFukushiHojinKeigenCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenGaitoshaIchiranEntity entity) {
-
-        if (entity.get社会福祉法人等利用者負担軽減の情報() != null) {
-            seteucCsvEntity軽減の情報_NotNull(eucCsvEntity, entity);
-        } else {
-            eucCsvEntity.set証保険者番号(RString.EMPTY);
-            eucCsvEntity.set確認番号(RString.EMPTY);
-            eucCsvEntity.set決定区分(RString.EMPTY);
-            eucCsvEntity.set減免事由(RString.EMPTY);
-            eucCsvEntity.set減免申請日(RString.EMPTY);
-            eucCsvEntity.set減免決定日(RString.EMPTY);
-            eucCsvEntity.set減免適用日(RString.EMPTY);
-            eucCsvEntity.set減免有効期限(RString.EMPTY);
-            eucCsvEntity.set軽減率分子(RString.EMPTY);
-            eucCsvEntity.set軽減率分母(RString.EMPTY);
-            eucCsvEntity.set対象サービスの制限(RString.EMPTY);
-        }
-        eucCsvEntity.set被保険者番号(entity.get被保険者番号() != null ? entity.get被保険者番号().value() : RString.EMPTY);
-        if (entity.get宛名() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-            eucCsvEntity.set識別コード(kojin.get識別コード().value());
-            eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().value());
-            eucCsvEntity.set氏名(kojin.get名称().getName().value());
-            eucCsvEntity.setカナ氏名(kojin.get名称().getKana().value());
-            eucCsvEntity.set年齢(kojin.get年齢算出().get年齢());
-            eucCsvEntity.set住民種別(kojin.get住民状態().住民状態略称());
-            eucCsvEntity.set郵便番号(kojin.get住所().get住所());
-            eucCsvEntity.set住所(kojin.get住所().get住所());
-            eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
-            eucCsvEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-        } else {
-            eucCsvEntity.set識別コード(RString.EMPTY);
-            eucCsvEntity.set住所コード(RString.EMPTY);
-            eucCsvEntity.set氏名(RString.EMPTY);
-            eucCsvEntity.setカナ氏名(RString.EMPTY);
-            eucCsvEntity.set年齢(RString.EMPTY);
-            eucCsvEntity.set住民種別(RString.EMPTY);
-            eucCsvEntity.set郵便番号(RString.EMPTY);
-            eucCsvEntity.set住所(RString.EMPTY);
-            eucCsvEntity.set行政区コード(RString.EMPTY);
-            eucCsvEntity.set行政区(RString.EMPTY);
-        }
-
-        eucCsvEntity.set居宅支援事業者番号(entity.get計画事業者番号() != null ? entity.get計画事業者番号() : RString.EMPTY);
-        if (entity.is自己作成()) {
-            eucCsvEntity.set居宅支援事業者名称(entity.get計画事業者名() != null ? entity.get計画事業者名() : RString.EMPTY);
-        } else {
-            eucCsvEntity.set居宅支援事業者名称(自己作成);
-        }
-        if (entity.is老齢福祉年金受給者()) {
-            eucCsvEntity.set老齢福祉年金受給(ASTERISK);
-        } else {
-            eucCsvEntity.set居宅支援事業者名称(RString.EMPTY);
-        }
-        if (entity.is生活保護受給者()) {
-            eucCsvEntity.set生活保護受給区分(ASTERISK);
-        } else {
-            eucCsvEntity.set生活保護受給区分(RString.EMPTY);
-        }
-        if (entity.get本人課税区分().equals(new RString("1"))) {
-            eucCsvEntity.set課税区分(課);
-        } else {
-            eucCsvEntity.set課税区分(RString.EMPTY);
-        }
-        if (entity.is所得税課税者()) {
-            eucCsvEntity.set所得税課税区分(課);
-        } else {
-            eucCsvEntity.set所得税課税区分(RString.EMPTY);
-        }
-        eucCsvEntity.set入所施設コード(entity.get入所施設コード());
-        eucCsvEntity.set入所施設名称(entity.get入所施設名称());
-        if (entity.is旧措置者フラグ()) {
-            eucCsvEntity.set旧措置(旧措置者);
-        } else {
-            eucCsvEntity.set旧措置(RString.EMPTY);
-        }
-        if (entity.get厚労省IF識別コード() != null && entity.get要介護状態区分コード() != null) {
-            eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(
-                    KoroshoInterfaceShikibetsuCode.toValue(entity.get厚労省IF識別コード()), entity.get要介護状態区分コード()).getName());
-        } else {
-            eucCsvEntity.set要介護度(RString.EMPTY);
-        }
-        eucCsvEntity.set認定日(toパターン32or34(日付スラッシュ編集_flag, entity.get認定年月日()));
-        eucCsvEntity.set認定開始日(toパターン32or34(日付スラッシュ編集_flag, entity.get認定有効期間開始日()));
-        eucCsvEntity.set認定終了日(toパターン32or34(日付スラッシュ編集_flag, entity.get認定有効期間終了日()));
-    }
-
-    private void seteucCsvEntity軽減の情報_NotNull(
-            ShakaiFukushiHojinKeigenCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenGaitoshaIchiranEntity entity) {
-        ShakaifukuRiyoshaFutanKeigen shakaifukuriyoshafutankeigen = new ShakaifukuRiyoshaFutanKeigen(entity.get社会福祉法人等利用者負担軽減の情報());
-        eucCsvEntity.set証保険者番号(
-                shakaifukuriyoshafutankeigen.get証記載保険者番号() != null ? shakaifukuriyoshafutankeigen.get証記載保険者番号().value() : RString.EMPTY);
-        eucCsvEntity.set確認番号(shakaifukuriyoshafutankeigen.get確認番号());
-        if (shakaifukuriyoshafutankeigen.get決定区分() != null) {
-            if (shakaifukuriyoshafutankeigen.get決定区分().equals(承認する)) {
-                eucCsvEntity.set決定区分(承認);
-            } else if (shakaifukuriyoshafutankeigen.get決定区分().equals(承認しない)) {
-                eucCsvEntity.set決定区分(却下);
-            } else {
-                eucCsvEntity.set決定区分(RString.EMPTY);
-            }
-        } else {
-            eucCsvEntity.set決定区分(RString.EMPTY);
-
-        }
-        if (shakaifukuriyoshafutankeigen.get申請事由() != null && !shakaifukuriyoshafutankeigen.get申請事由().isEmpty()) {
-            eucCsvEntity.set減免事由(shakaifukuriyoshafutankeigen.get申請事由());
-        }
-        eucCsvEntity.set減免申請日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get申請年月日()));
-        eucCsvEntity.set減免決定日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get決定年月日()));
-        eucCsvEntity.set減免適用日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get適用開始年月日()));
-        eucCsvEntity.set減免有効期限(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get適用終了年月日()));
-        if (shakaifukuriyoshafutankeigen.get軽減率_分子() != null) {
-            eucCsvEntity.set軽減率分子(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
-        } else {
-            eucCsvEntity.set軽減率分子(RString.EMPTY);
-        }
-        if (shakaifukuriyoshafutankeigen.get軽減率_分母() != null) {
-            eucCsvEntity.set軽減率分母(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
-        } else {
-            eucCsvEntity.set軽減率分母(RString.EMPTY);
-        }
-
-        if (shakaifukuriyoshafutankeigen.is居宅サービス限定()) {
-            eucCsvEntity.set対象サービスの制限(居宅サービスのみ.concat(POINT));
-        }
-        if (shakaifukuriyoshafutankeigen.is居住費_食費のみ() && shakaifukuriyoshafutankeigen.is居宅サービス限定()) {
-            eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().concat(居住費食費のみ.concat(POINT)));
-        }
-        if (shakaifukuriyoshafutankeigen.is旧措置者ユニット型個室のみ() && !eucCsvEntity.get対象サービスの制限().isNullOrEmpty()) {
-            eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().concat(旧措ユ個のみ.concat(POINT)));
-        }
-        if (eucCsvEntity.get対象サービスの制限() != null) {
-            int length = eucCsvEntity.get対象サービスの制限().length();
-            eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().substring(NO_0, length - NO_1));
-        } else {
-            eucCsvEntity.set対象サービスの制限(RString.EMPTY);
-        }
-    }
-
-    private void setNoRennbannCsvEntityEmptyNo世帯員(ShakaiFukushiHojinKeigenNoRennbannCsvEntity eucCsvEntity) {
-        eucCsvEntity.setカナ氏名(RString.EMPTY);
-        eucCsvEntity.set住所(RString.EMPTY);
-        eucCsvEntity.set住所コード(RString.EMPTY);
-        eucCsvEntity.set住民種別(RString.EMPTY);
-        eucCsvEntity.set入所施設コード(RString.EMPTY);
-        eucCsvEntity.set入所施設名称(RString.EMPTY);
-        eucCsvEntity.set対象サービスの制限(RString.EMPTY);
-        eucCsvEntity.set居宅支援事業者名称(RString.EMPTY);
-        eucCsvEntity.set居宅支援事業者番号(RString.EMPTY);
-        eucCsvEntity.set年齢(RString.EMPTY);
-        eucCsvEntity.set所得税課税区分(RString.EMPTY);
-        eucCsvEntity.set旧措置(RString.EMPTY);
-        eucCsvEntity.set氏名(RString.EMPTY);
-        eucCsvEntity.set決定区分(RString.EMPTY);
-        eucCsvEntity.set減免事由(RString.EMPTY);
-        eucCsvEntity.set減免有効期限(RString.EMPTY);
-        eucCsvEntity.set減免決定日(RString.EMPTY);
-        eucCsvEntity.set減免申請日(RString.EMPTY);
-        eucCsvEntity.set減免適用日(RString.EMPTY);
-        eucCsvEntity.set生活保護受給区分(RString.EMPTY);
-        eucCsvEntity.set確認番号(RString.EMPTY);
-        eucCsvEntity.set老齢福祉年金受給(RString.EMPTY);
-        eucCsvEntity.set行政区(RString.EMPTY);
-        eucCsvEntity.set行政区コード(RString.EMPTY);
-        eucCsvEntity.set被保険者番号(RString.EMPTY);
-        eucCsvEntity.set要介護度(RString.EMPTY);
-        eucCsvEntity.set証保険者番号(RString.EMPTY);
-        eucCsvEntity.set認定日(RString.EMPTY);
-        eucCsvEntity.set認定終了日(RString.EMPTY);
-        eucCsvEntity.set認定開始日(RString.EMPTY);
-        eucCsvEntity.set課税区分(RString.EMPTY);
-        eucCsvEntity.set識別コード(RString.EMPTY);
-        eucCsvEntity.set軽減率分子(RString.EMPTY);
-        eucCsvEntity.set軽減率分母(RString.EMPTY);
-        eucCsvEntity.set郵便番号(RString.EMPTY);
-    }
-
-    private void set世帯員NoRennbannCsvEntity(ShakaiFukushiHojinKeigenNoRennbannCsvEntity eucCsvEntity, Setaiinshotokujoho joho) {
-        if (joho.get世帯員宛名() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(joho.get世帯員宛名());
-            eucCsvEntity.set世帯員氏名(kojin.get名称().getName().value());
-            eucCsvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
-        } else {
-            eucCsvEntity.set世帯員氏名(RString.EMPTY);
-            eucCsvEntity.set世帯員住民種別(RString.EMPTY);
-        }
-        if (!joho.get本人課税区分().isNullOrEmpty() && joho.get本人課税区分().equals(new RString("1"))) {
-            eucCsvEntity.set世帯員課税区分(課);
-        } else {
-            eucCsvEntity.set世帯員課税区分(RString.EMPTY);
-        }
-
-        if (joho.get課税所得額() != null && joho.get課税所得額().intValue() > 0) {
-            eucCsvEntity.set世帯員所得税課税区分(課);
-        } else {
-            eucCsvEntity.set世帯員所得税課税区分(RString.EMPTY);
-        }
-    }
-
-    private void setNoRennbannEucCsvEntity(
-            ShakaiFukushiHojinKeigenNoRennbannCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenGaitoshaIchiranEntity entity) {
-        if (entity.get社会福祉法人等利用者負担軽減の情報() != null) {
-            setNoRennbanneucCsvEntity軽減の情報_NotNull(eucCsvEntity, entity);
-        } else {
-            eucCsvEntity.set証保険者番号(RString.EMPTY);
-            eucCsvEntity.set確認番号(RString.EMPTY);
-            eucCsvEntity.set決定区分(RString.EMPTY);
-            eucCsvEntity.set減免事由(RString.EMPTY);
-            eucCsvEntity.set減免申請日(RString.EMPTY);
-            eucCsvEntity.set減免決定日(RString.EMPTY);
-            eucCsvEntity.set減免適用日(RString.EMPTY);
-            eucCsvEntity.set減免有効期限(RString.EMPTY);
-            eucCsvEntity.set軽減率分子(RString.EMPTY);
-            eucCsvEntity.set軽減率分母(RString.EMPTY);
-            eucCsvEntity.set対象サービスの制限(RString.EMPTY);
-        }
-        eucCsvEntity.set被保険者番号(entity.get被保険者番号() != null ? entity.get被保険者番号().value() : RString.EMPTY);
-        if (entity.get宛名() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-            eucCsvEntity.set識別コード(kojin.get識別コード().value());
-            eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().value());
-            eucCsvEntity.set氏名(kojin.get名称().getName().value());
-            eucCsvEntity.setカナ氏名(kojin.get名称().getKana().value());
-            eucCsvEntity.set年齢(kojin.get年齢算出().get年齢());
-            eucCsvEntity.set住民種別(kojin.get住民状態().住民状態略称());
-            eucCsvEntity.set郵便番号(kojin.get住所().get住所());
-            eucCsvEntity.set住所(kojin.get住所().get住所());
-            eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
-            eucCsvEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-        } else {
-            eucCsvEntity.set識別コード(RString.EMPTY);
-            eucCsvEntity.set住所コード(RString.EMPTY);
-            eucCsvEntity.set氏名(RString.EMPTY);
-            eucCsvEntity.setカナ氏名(RString.EMPTY);
-            eucCsvEntity.set年齢(RString.EMPTY);
-            eucCsvEntity.set住民種別(RString.EMPTY);
-            eucCsvEntity.set郵便番号(RString.EMPTY);
-            eucCsvEntity.set住所(RString.EMPTY);
-            eucCsvEntity.set行政区コード(RString.EMPTY);
-            eucCsvEntity.set行政区(RString.EMPTY);
-        }
-
-        eucCsvEntity.set居宅支援事業者番号(entity.get計画事業者番号() != null ? entity.get計画事業者番号() : RString.EMPTY);
-        if (entity.is自己作成()) {
-            eucCsvEntity.set居宅支援事業者名称(entity.get計画事業者名() != null ? entity.get計画事業者名() : RString.EMPTY);
-        } else {
-            eucCsvEntity.set居宅支援事業者名称(自己作成);
-        }
-        if (entity.is老齢福祉年金受給者()) {
-            eucCsvEntity.set老齢福祉年金受給(ASTERISK);
-        } else {
-            eucCsvEntity.set居宅支援事業者名称(RString.EMPTY);
-        }
-        if (entity.is生活保護受給者()) {
-            eucCsvEntity.set生活保護受給区分(ASTERISK);
-        } else {
-            eucCsvEntity.set生活保護受給区分(RString.EMPTY);
-        }
-        if (entity.get本人課税区分().equals(new RString("1"))) {
-            eucCsvEntity.set課税区分(課);
-        } else {
-            eucCsvEntity.set課税区分(RString.EMPTY);
-        }
-        if (entity.is所得税課税者()) {
-            eucCsvEntity.set所得税課税区分(課);
-        } else {
-            eucCsvEntity.set所得税課税区分(RString.EMPTY);
-        }
-        eucCsvEntity.set入所施設コード(entity.get入所施設コード());
-        eucCsvEntity.set入所施設名称(entity.get入所施設名称());
-        if (entity.is旧措置者フラグ()) {
-            eucCsvEntity.set旧措置(旧措置者);
-        } else {
-            eucCsvEntity.set旧措置(RString.EMPTY);
-        }
-        if (entity.get厚労省IF識別コード() != null && entity.get要介護状態区分コード() != null) {
-            eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(
-                    KoroshoInterfaceShikibetsuCode.toValue(entity.get厚労省IF識別コード()), entity.get要介護状態区分コード()).getName());
-        } else {
-            eucCsvEntity.set要介護度(RString.EMPTY);
-        }
-        eucCsvEntity.set認定日(toパターン32or34(日付スラッシュ編集_flag, entity.get認定年月日()));
-        eucCsvEntity.set認定開始日(toパターン32or34(日付スラッシュ編集_flag, entity.get認定有効期間開始日()));
-        eucCsvEntity.set認定終了日(toパターン32or34(日付スラッシュ編集_flag, entity.get認定有効期間終了日()));
-    }
-
-    private void setNoRennbanneucCsvEntity軽減の情報_NotNull(
-            ShakaiFukushiHojinKeigenNoRennbannCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenGaitoshaIchiranEntity entity) {
-        ShakaifukuRiyoshaFutanKeigen shakaifukuriyoshafutankeigen = new ShakaifukuRiyoshaFutanKeigen(entity.get社会福祉法人等利用者負担軽減の情報());
-        eucCsvEntity.set証保険者番号(
-                shakaifukuriyoshafutankeigen.get証記載保険者番号() != null ? shakaifukuriyoshafutankeigen.get証記載保険者番号().value() : RString.EMPTY);
-        eucCsvEntity.set確認番号(shakaifukuriyoshafutankeigen.get確認番号());
-        if (shakaifukuriyoshafutankeigen.get決定区分() != null) {
-            if (shakaifukuriyoshafutankeigen.get決定区分().equals(承認する)) {
-                eucCsvEntity.set決定区分(承認);
-            } else if (shakaifukuriyoshafutankeigen.get決定区分().equals(承認しない)) {
-                eucCsvEntity.set決定区分(却下);
-            } else {
-                eucCsvEntity.set決定区分(RString.EMPTY);
-            }
-        } else {
-            eucCsvEntity.set決定区分(RString.EMPTY);
-        }
-        if (shakaifukuriyoshafutankeigen.get申請事由() != null && !shakaifukuriyoshafutankeigen.get申請事由().isEmpty()) {
-            eucCsvEntity.set減免事由(shakaifukuriyoshafutankeigen.get申請事由());
-        }
-        eucCsvEntity.set減免申請日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get申請年月日()));
-        eucCsvEntity.set減免決定日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get決定年月日()));
-        eucCsvEntity.set減免適用日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get適用開始年月日()));
-        eucCsvEntity.set減免有効期限(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get適用終了年月日()));
-        if (shakaifukuriyoshafutankeigen.get軽減率_分子() != null) {
-            eucCsvEntity.set軽減率分子(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
-        } else {
-            eucCsvEntity.set軽減率分子(RString.EMPTY);
-        }
-        if (shakaifukuriyoshafutankeigen.get軽減率_分母() != null) {
-            eucCsvEntity.set軽減率分母(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
-        } else {
-            eucCsvEntity.set軽減率分母(RString.EMPTY);
-        }
-        if (shakaifukuriyoshafutankeigen.is居宅サービス限定()) {
-            eucCsvEntity.set対象サービスの制限(居宅サービスのみ.concat(POINT));
-        }
-        if (shakaifukuriyoshafutankeigen.is居住費_食費のみ()) {
-            eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().concat(居住費食費のみ.concat(POINT)));
-        }
-        if (shakaifukuriyoshafutankeigen.is旧措置者ユニット型個室のみ()) {
-            eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().concat(旧措ユ個のみ.concat(POINT)));
-        }
-        if (eucCsvEntity.get対象サービスの制限() != null) {
-            int length = eucCsvEntity.get対象サービスの制限().length();
-            eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().substring(NO_0, length - NO_1));
-        } else {
-            eucCsvEntity.set対象サービスの制限(RString.EMPTY);
         }
     }
 
@@ -982,8 +566,10 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             List<ISetSortItem> 改頁項目List = outputOrder.get設定項目リスト();
             for (ISetSortItem sortItem : 改頁項目List) {
                 builder.append(sortItem.get項目名());
+                builder.append(より);
             }
         }
+        builder.delete(NO_0, builder.length() - NO_1);
         出力条件.add(builder.toRString());
         builder.delete(NO_0, builder.length());
     }
