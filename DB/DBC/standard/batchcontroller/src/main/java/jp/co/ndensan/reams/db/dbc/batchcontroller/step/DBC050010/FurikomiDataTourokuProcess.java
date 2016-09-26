@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.FurikomiDataTourokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaFurikomiTempTableEntity;
+import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.kozafurikomi.KozaFurikomiManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -40,11 +41,10 @@ public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTem
 
     @Override
     protected void beforeExecute() {
-        if (!処理区分_明細一覧表作成_3.equals(parameter.get処理区分())
-                && (処理区分_振込指定日修正_2.equals(parameter.get処理区分()) && !parameter.is再処理フラグ())) {
+        if (!処理区分_明細一覧表作成_3.equals(parameter.get処理区分().getコード())
+                && (処理区分_振込指定日修正_2.equals(parameter.get処理区分().getコード()) && !parameter.is再処理フラグ())) {
 
-//                    KozaFurikomiManager manager = new KozaFurikomiManager();
-            // KozaFurikomiManager.createInstance().;
+            KozaFurikomiManager.createInstance();
             // TODO 5.1　再処理準備
         }
     }
