@@ -3,14 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.basic;
+package jp.co.ndensan.reams.db.dbc.business.core.kogaku;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuGakuKeisanKekkaIdentifier;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyugakuKeisanKekkaMeisai;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.KogakuGassanShikyuGakuKeisanKekkaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -24,16 +32,17 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
- * 高額合算支給額計算結果を管理するクラスです。
+ * 高額合算支給額計算結果情報クラスです。
  *
- * @reamsid_L DBC-9999-012 huzongcheng
+ * @reamsid_L DBC-2030-030 huzongcheng
  */
-public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
-        KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekka>
+public class KogakuGassanShikyuGakuKeisanKekkaRelate extends ParentModelBase<
+        KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekkaRelate>
         implements Serializable {
 
     private final DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity;
     private final KogakuGassanShikyuGakuKeisanKekkaIdentifier id;
+    private final Models<KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier, KogakuGassanShikyugakuKeisanKekkaMeisai> 高額合算支給額計算結果;
 
     /**
      * コンストラクタです。<br/>
@@ -45,7 +54,7 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
      * @param 支給申請書整理番号 支給申請書整理番号
      * @param 履歴番号 履歴番号
      */
-    public KogakuGassanShikyuGakuKeisanKekka(HihokenshaNo 被保険者番号,
+    public KogakuGassanShikyuGakuKeisanKekkaRelate(HihokenshaNo 被保険者番号,
             FlexibleYear 対象年度,
             HokenshaNo 証記載保険者番号,
             RString 支給申請書整理番号,
@@ -68,23 +77,38 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
                 支給申請書整理番号,
                 履歴番号
         );
+        this.高額合算支給額計算結果 = Models.create(new ArrayList<KogakuGassanShikyugakuKeisanKekkaMeisai>());
     }
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}より{@link KogakuGassanShikyuGakuKeisanKekka}を生成します。
-     *
-     * @param entity
-     * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
+     * 高額合算支給額計算結果の新規作成時に使用します。
      */
-    public KogakuGassanShikyuGakuKeisanKekka(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果"));
+    public KogakuGassanShikyuGakuKeisanKekkaRelate() {
+        this.entity = new DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity();
+        this.id = null;
+        this.高額合算支給額計算結果 = Models.create(new ArrayList<KogakuGassanShikyugakuKeisanKekkaMeisai>());
+    }
+
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link FutanWariaiSokujiKouseiRelateEntity}より{@link KogakuGassanShikyuGakuKeisanKekkaRelate}を生成します。
+     *
+     * @param entity DBより取得した{@link FutanWariaiSokujiKouseiRelateEntity}
+     */
+    public KogakuGassanShikyuGakuKeisanKekkaRelate(KogakuGassanShikyuGakuKeisanKekkaRelateEntity entity) {
+        this.entity = requireNonNull(entity.get高額合算支給額計算結果(), UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果"));
         this.id = new KogakuGassanShikyuGakuKeisanKekkaIdentifier(
-                entity.getHihokenshaNo(),
-                entity.getTaishoNendo(),
-                entity.getShoKisaiHokenshaNo(),
-                entity.getShikyuShinseishoSeiriNo(),
-                entity.getRirekiNo());
+                entity.get高額合算支給額計算結果().getHihokenshaNo(),
+                entity.get高額合算支給額計算結果().getTaishoNendo(),
+                entity.get高額合算支給額計算結果().getShoKisaiHokenshaNo(),
+                entity.get高額合算支給額計算結果().getShikyuShinseishoSeiriNo(),
+                entity.get高額合算支給額計算結果().getRirekiNo());
+        List<KogakuGassanShikyugakuKeisanKekkaMeisai> 高額合算支給額計算結果list = new ArrayList();
+        for (DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity 高額合算支給額計算結果entity : entity.get高額合算支給額計算結果明細リスト()) {
+            高額合算支給額計算結果list.add(new KogakuGassanShikyugakuKeisanKekkaMeisai(高額合算支給額計算結果entity));
+        }
+        this.高額合算支給額計算結果 = Models.create(高額合算支給額計算結果list);
     }
 
     /**
@@ -93,15 +117,38 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
      * @param entity {@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
      * @param id {@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
      */
-    KogakuGassanShikyuGakuKeisanKekka(
+    KogakuGassanShikyuGakuKeisanKekkaRelate(
             DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity,
-            KogakuGassanShikyuGakuKeisanKekkaIdentifier id
+            KogakuGassanShikyuGakuKeisanKekkaIdentifier id,
+            Models<KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier, KogakuGassanShikyugakuKeisanKekkaMeisai> 高額合算支給額計算結果
     ) {
         this.entity = entity;
         this.id = id;
+        this.高額合算支給額計算結果 = 高額合算支給額計算結果;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
+    /**
+     * 高額合算支給額計算結果のリストを返します。
+     *
+     * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisai}のリスト
+     */
+    public List<KogakuGassanShikyugakuKeisanKekkaMeisai> get高額合算支給額計算結果list() {
+        return new ArrayList<>(高額合算支給額計算結果.clone().values());
+    }
+
+    /**
+     * 高額合算支給額計算結果を返します。
+     *
+     * @param id {@link KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier}
+     * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisai}
+     */
+    public KogakuGassanShikyugakuKeisanKekkaMeisai get高額合算支給額計算結果(KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier id) {
+        if (高額合算支給額計算結果.contains(id)) {
+            return 高額合算支給額計算結果.clone().get(id);
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
     /**
      * 被保険者番号を返します。
      *
@@ -527,10 +574,9 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
     }
 
     /**
-     * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}を返します。
+     * 利用者負担割合の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}を返します。
      *
-     * @return
-     * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
+     * @return 利用者負担割合の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
      */
     @Override
     public KogakuGassanShikyuGakuKeisanKekkaIdentifier identifier() {
@@ -538,30 +584,46 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
     }
 
     /**
-     * 保持する高額合算支給額計算結果を削除対象とします。<br/>
-     * {@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 利用者負担割合のみを変更対象とします。<br/>
+     * {@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
-     * @return 削除対象処理実施後の{@link KogakuGassanShikyuGakuKeisanKekka}
+     * @return 変更対象処理実施後の{@link KogakuGassanShikyuGakuKeisanKekkaRelate}
      */
     @Override
-    public KogakuGassanShikyuGakuKeisanKekka deleted() {
+    public KogakuGassanShikyuGakuKeisanKekkaRelate modifiedModel() {
+        DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity modifiedEntity = this.toEntity();
+        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KogakuGassanShikyuGakuKeisanKekkaRelate(
+                modifiedEntity, id, 高額合算支給額計算結果);
+    }
+
+    /**
+     * 保持する利用者負担割合を削除対象とします。
+     * <br/>
+     * {@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return 削除対象処理実施後の{@link KogakuGassanShikyuGakuKeisanKekkaRelate}
+     */
+    @Override
+    public KogakuGassanShikyuGakuKeisanKekkaRelate deleted() {
         DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
-        return new KogakuGassanShikyuGakuKeisanKekka(deletedEntity, id);
+        return new KogakuGassanShikyuGakuKeisanKekkaRelate(deletedEntity, id, 高額合算支給額計算結果);
     }
 
     /**
-     * {@link KogakuGassanShikyuGakuKeisanKekka}のシリアライズ形式を提供します。
+     * {@link KogakuGassanShikyuGakuKeisanKekkaRelate}のシリアライズ形式を提供します。
      *
-     * @return {@link KogakuGassanShikyuGakuKeisanKekka}のシリアライズ形式
+     * @return {@link KogakuGassanShikyuGakuKeisanKekkaRelate}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id);
+        return new _SerializationProxy(entity, id, 高額合算支給額計算結果);
 
     }
 
@@ -570,20 +632,32 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
         return hasChangedEntity();
     }
 
+    /**
+     * getKogakuGassanShikyugakuKeisanKekkaMeisaiList
+     *
+     * @return UnsupportedOperationException("Not supported yet.")
+     */
+    public List<KogakuGassanShikyugakuKeisanKekkaMeisai> getKogakuGassanShikyugakuKeisanKekkaMeisaiList() {
+        return new ArrayList<>(高額合算支給額計算結果.clone().values());
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
         private static final long serialVersionUID = 1L;
 
         private final DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity;
         private final KogakuGassanShikyuGakuKeisanKekkaIdentifier id;
+        private final Models<KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier, KogakuGassanShikyugakuKeisanKekkaMeisai> 高額合算支給額計算結果;
 
-        private _SerializationProxy(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity, KogakuGassanShikyuGakuKeisanKekkaIdentifier id) {
+        private _SerializationProxy(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity, KogakuGassanShikyuGakuKeisanKekkaIdentifier id,
+                Models<KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier, KogakuGassanShikyugakuKeisanKekkaMeisai> 高額合算支給額計算結果) {
             this.entity = entity;
             this.id = id;
+            this.高額合算支給額計算結果 = 高額合算支給額計算結果;
         }
 
         private Object readResolve() {
-            return new KogakuGassanShikyuGakuKeisanKekka(this.entity, this.id);
+            return new KogakuGassanShikyuGakuKeisanKekkaRelate(this.entity, this.id, this.高額合算支給額計算結果);
         }
     }
 
@@ -593,9 +667,8 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
      *
      * @return Builder
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder createBuilderForEdit() {
-        return new KogakuGassanShikyuGakuKeisanKekkaBuilder(entity, id);
+    public KogakuGassanShikyuGakuKeisanKekkaRelateBuilder createBuilderForEdit() {
+        return new KogakuGassanShikyuGakuKeisanKekkaRelateBuilder(entity, id, 高額合算支給額計算結果);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

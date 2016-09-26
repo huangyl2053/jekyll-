@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2030-030 huzongcheng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyugakukeisankekkatoroku.IKogakuGassanShikyugakuKeisanKekkaMapper">
+    <select id="select支給額計算結果履歴チェックオン"
+     resultMap="resultMap_ShikyuGakuKeisanKekka"
+     parameterType="java.util.Map" fetchSize="500"  resultOrdered="true">
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3072KogakuGassanShikyuGakuKeisanKekkaMapper.allColumns_DbT3072KogakuGassanShikyuGakuKeisanKekka" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiMapper.allColumns_DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai" />
+        FROM rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka"  AS "DbT3072KogakuGassanShikyuGakuKeisanKekka"
+        LEFT JOIN rgdb."DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai" AS "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"
+        ON "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."hihokenshaNo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."taishoNendo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."shoKisaiHokenshaNo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."shikyuShinseishoSeiriNo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."rirekiNo"
+        WHERE "DbT3072KogakuGassanShikyuGakuKeisanKekka"."isDeleted" = FALSE OR "DbT3072KogakuGassanShikyuGakuKeisanKekka"."isDeleted" = TRUE
+        <if test="検索年度開始 != null and !検索年度開始.isEmpty()">
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = #{被保険者番号}
+        </if>
+	<if test="検索年度開始 != null and !検索年度開始.isEmpty()">
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" <![CDATA[>=]]> #{検索年度開始}
+        </if>
+        <if test="検索年度終了 != null and !検索年度終了.isEmpty()">
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" <![CDATA[<=]]> #{検索年度終了}
+        </if>
+        ORDER BY "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" DESC,
+		 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" DESC,
+                 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" DESC,
+                 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" DESC,
+                 "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."meisanNo" DESC
+    </select>
+    
+    <select id="select支給額計算結果履歴チェックオフ"
+     resultMap="resultMap_ShikyuGakuKeisanKekka"
+     parameterType="java.util.Map" fetchSize="500"  resultOrdered="true">
+        WITH T AS (SELECT "M".*
+                   FROM rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" AS "M"
+                   WHERE "M"."rirekiNo" = (   
+                        SELECT MAX("N"."rirekiNo")
+                        FROM rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" AS "N"
+                        WHERE "M"."hihokenshaNo" = "N"."hihokenshaNo"
+                        AND "M"."taishoNendo" = "N"."taishoNendo"
+                        AND "M"."shoKisaiHokenshaNo" = "N"."shoKisaiHokenshaNo"
+                        AND "M"."shikyuShinseishoSeiriNo" = "N"."shikyuShinseishoSeiriNo")
+        )
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3072KogakuGassanShikyuGakuKeisanKekkaMapper.allColumns_DbT3072KogakuGassanShikyuGakuKeisanKekka" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiMapper.allColumns_DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai" />
+        FROM T  AS "DbT3072KogakuGassanShikyuGakuKeisanKekka"
+        LEFT JOIN rgdb."DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai" AS "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"
+        ON "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."hihokenshaNo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."taishoNendo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."shoKisaiHokenshaNo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."shikyuShinseishoSeiriNo"
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" = "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."rirekiNo"
+        WHERE "DbT3072KogakuGassanShikyuGakuKeisanKekka"."isDeleted" = FALSE OR "DbT3072KogakuGassanShikyuGakuKeisanKekka"."isDeleted" = TRUE
+        <if test="検索年度開始 != null and !検索年度開始.isEmpty()">
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = #{被保険者番号}
+        </if>
+	<if test="検索年度開始 != null and !検索年度開始.isEmpty()">
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" <![CDATA[>=]]> #{検索年度開始}
+        </if>
+        <if test="検索年度終了 != null and !検索年度終了.isEmpty()">
+        AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" <![CDATA[<=]]> #{検索年度終了}
+        </if>
+        ORDER BY "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" DESC,
+		 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" DESC,
+                 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" DESC,
+                 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" DESC,
+                 "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."meisanNo" DESC
+    </select>
+    
+    <resultMap id="resultMap_ShikyuGakuKeisanKekka"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.KogakuGassanShikyuGakuKeisanKekkaRelateEntity"
+               autoMapping="true">
+        <id  column="dbT3072KogakuGassanShikyuGakuKeisanKekka_hihokenshaNo" />
+        <id  column="dbT3072KogakuGassanShikyuGakuKeisanKekka_taishoNendo"/>
+        <id  column="dbT3072KogakuGassanShikyuGakuKeisanKekka_shoKisaiHokenshaNo" />
+        <id  column="dbT3072KogakuGassanShikyuGakuKeisanKekka_shikyuShinseishoSeiriNo"/>
+        <id  column="dbT3072KogakuGassanShikyuGakuKeisanKekka_rirekiNo" />
+        <association property="高額合算支給額計算結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3072KogakuGassanShikyuGakuKeisanKekkaMapper.ResultMap_DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity"/>
+        <collection property="高額合算支給額計算結果明細リスト" 
+                    ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity"
+                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiMapper.ResultMap_DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity"/>
+    </resultMap>
+</mapper>
