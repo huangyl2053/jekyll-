@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1510-020 x_xuliang -->
+<!-- 申請区分一致チェック -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.IShinseiKubunItchiChekkuMapper">
+    <select id="get申請区分一致"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.ShinseiKubunItchiChekkuEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT A."ninteiShinseiShinseijiKubunCode"
+        FROM rgdb."DbT4101NinteiShinseiJoho" AS A
+        WHERE A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+        AND A."hihokenshaNo" = #{被保番号}
+        AND A."ninteiShinseiYMD" = #{認定申請日}
+    </select>
+</mapper>
