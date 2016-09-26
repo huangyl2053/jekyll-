@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.InsertKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuKaigoServicehiDoChohyoHakkoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.UpdateKogakuShikyuHanteiKekkaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.updateKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuShoriKekkaKakuninListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
@@ -64,7 +64,7 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
      */
     @Step(高額サービス一時テーブルの設定)
     protected IBatchFlowCommand updateKogakuKaigoKetteiTsuchishoInfoTempProcess() {
-        return loopBatch(updateKogakuKaigoKetteiTsuchishoInfoTempProcess.class).arguments(creatParameter()).define();
+        return loopBatch(UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess.class).arguments(creatParameter()).define();
     }
 
     /**
