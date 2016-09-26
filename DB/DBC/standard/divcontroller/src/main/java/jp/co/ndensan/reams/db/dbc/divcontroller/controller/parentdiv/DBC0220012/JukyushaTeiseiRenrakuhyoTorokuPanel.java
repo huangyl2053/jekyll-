@@ -61,8 +61,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
     private static final RString 連絡票を = new RString("btnUpdate");
-    private static final RString 新規データを削除しようとしています = new RString("新規データを削除しようとしています");
-    private static final RString 終了データを削除しようとしています = new RString("終了データを削除しようとしています");
+    private static final RString 新規データを削除しようとしています = new RString("新規データを削除しようとしています。");
+    private static final RString 終了データを削除しようとしています = new RString("終了データを削除しようとしています。");
 
     /**
      * 画面初期化です。
