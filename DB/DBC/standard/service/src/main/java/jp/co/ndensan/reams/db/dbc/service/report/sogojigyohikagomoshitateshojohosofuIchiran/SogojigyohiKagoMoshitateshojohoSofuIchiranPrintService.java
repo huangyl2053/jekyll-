@@ -41,7 +41,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranPrintService {
      * @param 改頁リスト List<RString>
      * @param 処理年月 FlexibleYearMonth
      * @param 件数 int
-     * @param 連番
+     * @param 連番 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
