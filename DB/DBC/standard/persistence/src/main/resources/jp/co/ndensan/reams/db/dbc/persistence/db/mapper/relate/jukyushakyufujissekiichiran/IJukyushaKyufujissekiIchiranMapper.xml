@@ -66,9 +66,9 @@
         <result property="後_公費1_請求額" column="T1_kohi1Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_公費1_本人負担額" column="T1_kohi1Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_公費2_請求額" column="T1_kohi2Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="後_公費2_利用者負担額" column="T1_kohi2Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_本人負担額" column="T1_kohi2Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_公費3_請求額" column="T1_kohi3Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="後_公費3_利用者負担額" column="T1_kohi3Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_本人負担額" column="T1_kohi3Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="審査年月" column="T1_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="識別コード" column="T4_shikibetsuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="市町村コード" column="T4_hihokenshaNo_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
