@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100030.ShujiiIkenshoKakuninshoProperty;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.definition.core.meishofuyo.MeishoFuyoTypeEnum;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100030.ShujiiIkenshoKakuninshoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper;
@@ -59,7 +59,9 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -89,6 +91,7 @@ public class IryoHiKojoKakuninSinsei {
     private static final RString あり = new RString("あり");
     private static final RString なし = new RString("なし");
     private static final int サーティ = 30;
+    private static final int シックスティ = 60;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private final MapperProvider mapperProvider;
@@ -141,9 +144,32 @@ public class IryoHiKojoKakuninSinsei {
 
     /**
      * 医療費控除取得
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 医療費控除情報
      */
-    public void getIryohikojyo() {
-
+    public List<IryohiKojoEntityResult> getIryohikojyo(RString 被保険者番号) {
+        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
+        List<IryohiKojoEntityResult> 医療費控除情報 = new ArrayList<>();
+        List<IryohiKojoEntity> result = mapper.select医療費控除情報(被保険者番号);
+        if (result != null) {
+            for (IryohiKojoEntity entity : result) {
+                IryohiKojoEntityResult 医療費控除 = new IryohiKojoEntityResult();
+                医療費控除.setデータ区分(entity.getデータ区分());
+                医療費控除.set主治医意見書受領年月日(entity.get主治医意見書受領年月日());
+                医療費控除.set尿失禁の有無(entity.is尿失禁の有無());
+                医療費控除.set控除対象年(entity.get控除対象年());
+                医療費控除.set日常生活自立度(entity.get日常生活自立度());
+                医療費控除.set申請年月日(entity.get申請年月日());
+                医療費控除.set発行年月日(entity.get発行年月日());
+                医療費控除.set登録年月日(entity.get登録年月日());
+                医療費控除.set被保険者番号(entity.get被保険者番号());
+                医療費控除.set認定有効期間終了年月日(entity.get認定有効期間終了年月日());
+                医療費控除.set認定有効期間開始年月日(entity.get認定有効期間開始年月日());
+                医療費控除情報.add(医療費控除);
+            }
+        }
+        return 医療費控除情報;
     }
 
     /**
@@ -246,34 +272,52 @@ public class IryoHiKojoKakuninSinsei {
             } else {
                 jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地カッコ行政区);
             }
-        } else if (表示する.equals(住所編集_方書表示有無)) {
-            jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.行政区番地space方書);
         } else {
-            jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.行政区番地);
+            if (表示する.equals(住所編集_方書表示有無)) {
+                jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.行政区番地space方書);
+            } else {
+                jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.行政区番地);
+            }
         }
         jushoEditorBuilder.set行政区(宛名情報.get行政区画().getGyoseiku());
         RString 編集後住所 = jushoEditorBuilder.build().editJusho().get編集後住所All();
-
-        おむつ使用証明書Entity.set住所(編集後住所);
         if (編集後住所.length() <= サーティ) {
+            おむつ使用証明書Entity.set住所(編集後住所);
             おむつ使用証明書Entity.set住所１(RString.EMPTY);
             おむつ使用証明書Entity.set住所２(RString.EMPTY);
-        } else {
+        } else if (編集後住所.length() <= シックスティ) {
+            おむつ使用証明書Entity.set住所(RString.EMPTY);
             おむつ使用証明書Entity.set住所１(編集後住所.substring(0, サーティ));
             おむつ使用証明書Entity.set住所２(編集後住所.substring(サーティ));
-
+        } else {
+            おむつ使用証明書Entity.set住所(RString.EMPTY);
+            おむつ使用証明書Entity.set住所１(編集後住所.substring(0, サーティ));
+            おむつ使用証明書Entity.set住所２(編集後住所.substring(サーティ, シックスティ));
         }
-        RString 氏名 = 宛名情報.get外国人氏名().getName().value();
-        おむつ使用証明書Entity.set氏名(氏名);
+        RString 氏名 = RString.EMPTY;
+        if (宛名情報.get住民種別().equals(JuminShubetsu.日本人)) {
+            氏名 = 宛名情報.get日本人氏名().getName().value();
+            おむつ使用証明書Entity.set生年月日(宛名情報.get生年月日().toFlexibleDate()
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        } else if (宛名情報.get住民種別().equals(JuminShubetsu.外国人)) {
+            氏名 = 宛名情報.get外国人氏名().getName().value();
+            おむつ使用証明書Entity.set生年月日(宛名情報.get生年月日().toFlexibleDate().seireki()
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        }
         if (氏名.length() <= サーティ) {
+            おむつ使用証明書Entity.set氏名(氏名);
             おむつ使用証明書Entity.set氏名１(RString.EMPTY);
             おむつ使用証明書Entity.set氏名２(RString.EMPTY);
+        } else if (氏名.length() <= シックスティ) {
+            おむつ使用証明書Entity.set氏名(RString.EMPTY);
+            おむつ使用証明書Entity.set氏名１(編集後住所.substring(0, サーティ));
+            おむつ使用証明書Entity.set氏名２(編集後住所.substring(サーティ));
         } else {
+            おむつ使用証明書Entity.set氏名(RString.EMPTY);
             おむつ使用証明書Entity.set氏名１(氏名.substring(0, サーティ));
-            おむつ使用証明書Entity.set氏名２(氏名.substring(サーティ));
+            おむつ使用証明書Entity.set氏名２(氏名.substring(サーティ, シックスティ));
         }
-        おむつ使用証明書Entity.set生年月日(宛名情報.get生年月日().toFlexibleDate().seireki()
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         if (宛名情報.get性別().getCode().equals(性別男)) {
             おむつ使用証明書Entity.set性別男(選択する);
             おむつ使用証明書Entity.set性別女(RString.EMPTY);
@@ -564,7 +608,7 @@ public class IryoHiKojoKakuninSinsei {
     }
 
     private MeishoFuyoType get敬称(RString 敬称) {
-        if (敬称 != null && MeishoFuyoTypeEnum.様.getCode().equals(敬称)) {
+        if (MeishoFuyoTypeEnum.様.getCode().equals(敬称)) {
             return MeishoFuyoTypeEnum.様.getMeishoFuyoType();
         }
         return MeishoFuyoTypeEnum.無し.getMeishoFuyoType();

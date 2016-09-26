@@ -35,6 +35,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KozaFurikomiTempTableEntity extends DbTableEntityBase<KozaFurikomiTempTableEntity> implements IDbAccessable {
 
+    /**
+     * 口座振込一時テーブル名称
+     */
     public static final RString TABLE_NAME;
 
     static {

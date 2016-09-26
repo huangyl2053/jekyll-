@@ -52,6 +52,7 @@ public class FurikomiDataTourokuProcessParameter implements IBatchProcessParamet
         this.振込グループコード = 振込グループコード;
         this.振込指定年月日 = 振込指定年月日;
         this.再処理フラグ = 再処理フラグ;
+        this.処理区分 = 処理区分;
         this.誤振込指定年月日 = 誤振込指定年月日;
     }
 }

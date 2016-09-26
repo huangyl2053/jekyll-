@@ -53,6 +53,10 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     private IchijihanteiSumidataIferaBunisess eraBunisess;
     private RString koroshoIfShikibetsuCode = RString.EMPTY;
     private RString ファイル名;
+    private final RString ファイル09B = new RString("09B");
+    private final RString ファイル09AB = new RString("09A");
+    private final RString ファイル09Bエラ = new RString("IchijiHanteiErr_09B.CSV");
+    private final RString ファイル09Aエラ = new RString("IchijiHanteiErr_09A.CSV");
 
     @Override
     protected void initialize() {
@@ -85,26 +89,31 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     @Override
     protected void process(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity) {
         RString エラーデータ09B = eraBunisess.setエラーデータ09B(entity);
-        if (RString.isNullOrEmpty(エラーデータ09B)) {
+        if (!RString.isNullOrEmpty(エラーデータ09B) && ファイル09B.equals(entity.get厚労省IF識別コード())) {
+            getファイル名エラ(entity);
             IchijihanteiSumidataIferaEucEntity eraEucEntity = new IchijihanteiSumidataIferaEucEntity();
             eraEucEntity.set保険者番号(entity.get保険者番号());
             eraEucEntity.set被保険者番号(entity.get被保険者番号());
             eraEucEntity.setエラー項目(エラーデータ09B);
             eucCsvWriterJunitoJugo.writeLine(eraEucEntity);
+            return;
         }
         RString エラーデータ09A = eraBunisess.setエラーデータ09A(entity);
-        if (RString.isNullOrEmpty(エラーデータ09A)) {
+        if (!RString.isNullOrEmpty(エラーデータ09A) && ファイル09AB.equals(entity.get厚労省IF識別コード())) {
+            getファイル名エラ(entity);
             IchijihanteiSumidataIferaEucEntity eraEucEntity = new IchijihanteiSumidataIferaEucEntity();
             eraEucEntity.set保険者番号(entity.get保険者番号());
             eraEucEntity.set被保険者番号(entity.get被保険者番号());
             eraEucEntity.setエラー項目(エラーデータ09A);
             eucCsvWriterJunitoJugo.writeLine(eraEucEntity);
+            return;
         }
-        getファイル名(entity);
-        if (new RString("09B").equals(entity.get厚労省IF識別コード())) {
+        if (ファイル09B.equals(entity.get厚労省IF識別コード())) {
+            getファイル名(entity);
             eucCsvWriterJunitoJugo.writeLine(bunisess.set一次判定済データ09B(entity));
         }
-        if (new RString("09A").equals(entity.get厚労省IF識別コード())) {
+        if (ファイル09AB.equals(entity.get厚労省IF識別コード())) {
+            getファイル名(entity);
             eucCsvWriterJunitoJugo.writeLine(bunisess.set一次判定済データ09A(entity));
         }
         bunisess.getアクセスログ(entity.get被保険者番号());
@@ -129,6 +138,40 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
             eucCsvWriterJunitoJugo.close();
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
             ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会資料作成用データ送信ファイル名09A, RDate.getNowDate());
+            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
+        }
+        RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
+        if (new RString("1").equals(一次判定IF文字コード)) {
+            eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.SJIS).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(false).
+                    build();
+        } else if (new RString("2").equals(一次判定IF文字コード)) {
+            eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(false).
+                    build();
+        }
+    }
+
+    private void getファイル名エラ(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity) {
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        if (RString.isNullOrEmpty(koroshoIfShikibetsuCode)) {
+            koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
+            ファイル名 = ファイル09Aエラ;
+
+            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
+        }
+        if (!koroshoIfShikibetsuCode.equals(entity.get厚労省IF識別コード())) {
+            eucCsvWriterJunitoJugo.close();
+            koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
+            ファイル名 = ファイル09Bエラ;
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         }
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
