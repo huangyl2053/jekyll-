@@ -52,7 +52,8 @@
         <if test="被保険者情報検索有無 != null and 被保険者情報検索有無 == true
             and 被保険者番号 != null and !被保険者番号.isEmpty()">
             AND A."hihokenshaNo" = #{被保険者番号}
-            <if test="被保険者氏名前方一致 != null and 被保険者氏名前方一致 == true">
+            <if test="被保険者氏名前方一致 != null and 被保険者氏名前方一致 == true
+                and 被保険者番号リスト != null and !被保険者番号リスト.isEmpty()">
                 AND A."hihokenshaNo" IN 
                 <foreach item="被保険者番号リスト" index="index" collection="被保険者番号リスト"
                 open="(" separator="," close=")">
@@ -85,6 +86,7 @@
                     DbV1001."shikibetsuCode"
                 FROM   rgdb."DbV1001HihokenshaDaicho" as DbV1001
                 WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+                AND DbV1001."logicalDeletedFlag" = FALSE
             )
             SELECT
                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
@@ -99,7 +101,7 @@
                         hihokenshaDaicho
                  )
               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"
-               ON hihokenshaDaicho."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode";
+              ON hihokenshaDaicho."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     
     <select id="select高額合算申請書加入歴"

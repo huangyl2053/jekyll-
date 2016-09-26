@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2000-030 wangxue
  */
-public class updateKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProcessBase<DbT3057KogakuShikyuHanteiKekkaEntity> {
+public class UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProcessBase<DbT3057KogakuShikyuHanteiKekkaEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.select支給判定結果");

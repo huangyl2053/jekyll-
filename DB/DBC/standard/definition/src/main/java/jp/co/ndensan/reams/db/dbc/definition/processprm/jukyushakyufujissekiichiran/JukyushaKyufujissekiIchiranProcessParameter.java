@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 受給者給付実績一覧表 のバッチフロークラスです。
+ * 受給者給付実績一覧表 のProcess用パラメータクラスです。
  *
  * @reamsid_L DBC-3070-030 dangjingjing
  */
