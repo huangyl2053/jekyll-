@@ -33,16 +33,10 @@ public class KoshinTaishoHandler {
      * @return SharedFileEntryDescriptor
      */
     public SharedFileEntryDescriptor csvSyuShayou(KoshinTaishoDiv div) {
-        int count = 0;
-        RString 申請書管理番号 = new RString("");
+        List<RString> 申請書管理番号 = new ArrayList<>();
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
             if (row.getShinseishoKanriNo() != null) {
-                if (count == 0) {
-                    申請書管理番号 = row.getShinseishoKanriNo();
-                    count++;
-                } else {
-                    申請書管理番号 = new RString(申請書管理番号 + "," + row.getShinseishoKanriNo());
-                }
+                申請書管理番号.add(row.getShinseishoKanriNo());
             }
         }
         return KoshinTaishoFinder.createInstance().get調査データの取得(申請書管理番号);
@@ -104,7 +98,7 @@ public class KoshinTaishoHandler {
      */
     public void youKihoKoushiDb(KoshinTaishoDiv div) {
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
-             KoshinTaishoFinder.createInstance().get要介護認定申請情報の取得(row.getShinseishoKanriNo());
+            KoshinTaishoFinder.createInstance().get要介護認定申請情報の取得(row.getShinseishoKanriNo());
         }
     }
 

@@ -116,17 +116,17 @@ public class ShujiiIkenshoKakuninshoReportSource implements IReportSource {
     @ReportItem(name = "hihoNo", length = 12, order = 49)
     public RString hihoNo;
     @ReportItem(name = "IkesyosakuseiYmd", length = 13, order = 50)
-    public RString IkesyosakuseiYmd;
+    public RString ikesyosakuseiYmd;
     @ReportItem(name = "ninnteikikan", length = 28, order = 51)
     public RString ninnteikikan;
     @ReportItem(name = "JiritsudoB1", length = 2, order = 52)
-    public RString JiritsudoB1;
+    public RString jiritsudoB1;
     @ReportItem(name = "JiritsudoB2", length = 2, order = 53)
-    public RString JiritsudoB2;
+    public RString jiritsudoB2;
     @ReportItem(name = "JiritsudoC1", length = 2, order = 54)
-    public RString JiritsudoC1;
+    public RString jiritsudoC1;
     @ReportItem(name = "JiritsudoC2", length = 2, order = 55)
-    public RString JiritsudoC2;
+    public RString jiritsudoC2;
     @ReportItem(name = "chohyoNo", length = 4, order = 56)
     public RString chohyoNo;
 // </editor-fold>

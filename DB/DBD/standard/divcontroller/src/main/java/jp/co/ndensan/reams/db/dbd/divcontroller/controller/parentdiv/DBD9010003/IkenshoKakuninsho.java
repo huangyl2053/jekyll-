@@ -182,7 +182,7 @@ public class IkenshoKakuninsho {
         }
         IryohiKojo 医療費控除 = manager.get医療費控除(taishoshaKey.get被保険者番号(),
                 new FlexibleYear(div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey()),
-                表示対象データ.getデータ区分());
+                表示対象データ == null ? RString.EMPTY : 表示対象データ.getデータ区分());
         IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
         builder.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
         manager.save医療費控除(builder.build());

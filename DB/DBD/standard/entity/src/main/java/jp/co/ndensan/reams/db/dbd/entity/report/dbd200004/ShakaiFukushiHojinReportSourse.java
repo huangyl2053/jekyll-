@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.report.dbd200004;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 社会福祉法人軽減認定者リストReportSourceです。
@@ -153,5 +157,9 @@ public class ShakaiFukushiHojinReportSourse implements IReportSource {
     public RString list4_8;
     @ReportItem(name = "list4_9", length = 1, order = 68)
     public RString list4_9;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hihokenshaNo;
 // </editor-fold>
 }
