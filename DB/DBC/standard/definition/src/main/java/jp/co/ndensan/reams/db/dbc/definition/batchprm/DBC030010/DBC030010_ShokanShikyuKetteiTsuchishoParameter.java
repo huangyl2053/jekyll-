@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShoukanBaraiSuuchiShoIkatsuBatchParamter extends BatchParameterBase {
+public class DBC030010_ShokanShikyuKetteiTsuchishoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 4238980968374274198L;
 
