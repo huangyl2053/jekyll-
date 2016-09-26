@@ -47,6 +47,7 @@ public class OmutsusiyoSyomeishoHandler {
     private static final RString 医療費控除証明書 = new RString("IryohiKojyoSyomeisho");
     private static final RString DB = new RString("DB");
     private static final RString 帳票分類ID = new RString("DBD100029_OmutsuShoumeisho");
+    private static final RString おむつ使用証明書 = new RString("おむつ使用証明書");
 
     private final OmutsusiyoSyomeishoDiv div;
 
@@ -66,7 +67,7 @@ public class OmutsusiyoSyomeishoHandler {
      * @return List<IryohiKojoEntity>
      */
     public List<IryohiKojoEntityResult> onLoad(TaishoshaKey 引き継ぎEntity) {
-
+        div.getTxtCyouhyou().setValue(おむつ使用証明書);
         RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
         if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
