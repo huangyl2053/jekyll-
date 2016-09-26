@@ -43,6 +43,97 @@
         );
     </update>
 
+    <update
+        id="createTempJigyoHokokuNinteiTokeiMotoData">
+        CREATE TEMPORARY TABLE "tempJigyoHokokuNinteiTokeiMotoData"
+        (
+        "dataShuruiKubun" character varying(2) NOT NULL,                      <!-- データ種類区分 -->
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",                           <!-- 被保険者番号 -->
+        "rirekiNo" smallint,                                                  <!-- 履歴番号     -->
+        "shinseiYMD" rshare."UDD015YMD",                                      <!-- 申請年月日   -->
+        "gengakuKubun" character varying(2),                                  <!-- 減額区分  DBDEnum.減額区分...-->
+        "ketteiYMD" rshare."UDD015YMD",                                       <!-- 決定年月日   -->
+        "ketteiKubun" character varying(1),                                   <!-- 決定区分     -->
+        "hiShoninRiyu" character varying(200),                                <!-- 非承認理由   -->
+        "tekiyoKaishiYMD" rshare."UDD015YMD",                                 <!-- 適用開始年月日 -->
+        "tekiyoShuryoYMD" rshare."UDD015YMD",                                 <!-- 適用終了年月日  -->
+        "gengakugoKingaku" numeric(5,0),                                      <!-- 減額後金額      -->
+        "jukyushaDaichoRirekiNo" character(4),                                <!-- 受給者台帳履歴番号  -->
+        "yokaigoJotaiKubunCode" rshare."UDD035Code",                          <!-- 要介護認定状態区分コード  Enum（DBZ：要介護状態区分コード99）  -->
+        "jukyuShinseiYMD" rshare."UDD015YMD",                                 <!-- 受給申請年月日           -->
+        "ninteiYukoKikanKaishiYMD" rshare."UDD015YMD",                        <!-- 認定有効期間開始年月日   -->
+        "ninteiYukoKikanShuryoYMD" rshare."UDD015YMD",                        <!-- 認定有効期間終了年月日   -->
+        "ninteiYMD" rshare."UDD015YMD",                                       <!-- 認定年月日    認定年月日、却下年月日 -->
+        "yukoMukoKubun" rshare."UDD035Code",                                  <!-- 有効無効区分  Enum（DBD：有効無効区分）0：申請中、1：有効、2：無効   -->
+        "dataKubun" rshare."UDD035Code",                                      <!-- データ区分    Enum（DBD：データ区分）           -->
+        "kyuSochishaFlag" boolean,                                            <!-- 旧措置者フラグ    Enum（DBD：旧措置適用フラグ） -->
+        "logicalDeletedFlag" boolean,                                         <!-- 論理削除フラグ    True：論理削除 False：未削除  -->
+        "idoYMD" rshare."UDD015YMD",                                          <!-- 異動日                           -->
+        "edaNo" character(4),                                                 <!-- 枝番                             -->
+        "idoJiyuCode" character varying(2),                                   <!-- 異動事由コード                   -->
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",                       <!-- 識別コード                       -->
+        "shikakuShutokuJiyuCode" character varying(2),                        <!-- 資格取得事由コード               -->
+        "shikakuShutokuYMD" rshare."UDD015YMD",                               <!-- 資格取得年月日                   -->
+        "shikakuShutokuTodokedeYMD" rshare."UDD015YMD",                       <!-- 資格取得届出年月日               -->
+        "ichigoShikakuShutokuYMD" rshare."UDD015YMD",                         <!-- 第1号資格取得年月日              -->
+        "hihokennshaKubunCode" character varying(1),                          <!-- 被保険者区分コード    １号・２号 -->
+        "shikakuSoshitsuJiyuCode" character varying(2),                       <!-- 資格喪失事由コード               -->
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",                              <!-- 資格喪失年月日                   -->
+        "shikakuSoshitsuTodokedeYMD" rshare."UDD015YMD",                      <!-- 資格喪失届出年月日               -->
+        "jushochiTokureiFlag" character varying(1),                           <!-- 住所地特例フラグ                 -->
+        "koikinaiJushochiTokureiFlag" character varying(1),                   <!-- 広域内住所地特例フラグ           -->
+        "koikinaiTokureiSochimotoShichosonCode" rshare."UDD023LasdecCode",    <!-- 広住特措置元市町村コード         -->
+        "shichosonCode" rshare."UDD023LasdecCode",                            <!-- 市町村コード                     -->
+        "kyuShichosonCode" rshare."UDD023LasdecCode",                         <!-- 旧市町村コード    合併市町村の時は、旧市町村コードを設定 -->
+        "nyushoShisetsuCode" rgdb."DbUDD004JigyoshaNo",                       <!-- 入所施設コード               -->
+        "nyushoShoriYMD" rshare."UDD015YMD",                                  <!-- 入所処理年月日               -->
+        "nyushoYMD" rshare."UDD015YMD",                                       <!-- 入所年月日                   -->
+        "taishoShoriYMD" rshare."UDD015YMD",                                  <!-- 退所処理年月日               -->
+        "taishoYMD" rshare."UDD015YMD",                                       <!-- 退所年月日                   -->
+        "jigyoshaNo" rgdb."DbUDD004JigyoshaNo",                               <!-- 事業者番号                   -->
+        "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",                 <!-- サービス種類コード           -->
+        "kihonJohoJunkyoKubun" character(1),                                  <!-- 基本情報準拠区分             -->
+        "yukoKaishiYMD" rshare."UDD015YMD",                                   <!-- 有効開始日                   -->
+        "yukoShuryoYMD" rshare."UDD015YMD",                                   <!-- 有効終了日                   -->
+        "jigyoKaishiYMD" rshare."UDD015YMD",                                  <!-- 事業開始日                   -->
+        "jigyoKyushiYMD" rshare."UDD015YMD",                                  <!-- 事業休止日                   -->
+        "jigyoSaikaiYMD" rshare."UDD015YMD",                                  <!-- 事業再開日                   -->
+        "jigyoHaishiYMD" rshare."UDD015YMD",                                  <!-- 事業廃止日                   -->
+        "juryoininUmu" rshare."UDD035Code",                                   <!-- 受領委任の有無               -->
+        "torokuKaishiYMD" rshare."UDD015YMD",                                 <!-- 登録開始日                   -->
+        "torokuShuryoYMD" rshare."UDD015YMD",                                 <!-- 登録終了日                   -->
+        "seikatsuhogohouShitei_umu" rshare."UDD035Code" DEFAULT 0,            <!-- 生活保護法による指定の有無   -->
+        "idoJiyu" character varying(2),                                       <!-- 異動事由                     -->
+        "kanrishaName" rshare."UDD042AtenaMeisho",                            <!-- 管理者氏名                   -->
+        "kanrishaNameKana" rshare."UDD043AtenaKanaMeisho",                    <!-- 管理者氏名カナ               -->
+        "kanrishaYubinNo" rshare."UDD003YubinNo",                             <!-- 管理者住所郵便番号           -->
+        "kanrishaAddress" rshare."UDD046AtenaJusho",                          <!-- 管理者住所                   -->
+        "kanrishaAddressKana" character varying(50),                          <!-- 管理者住所カナ               -->
+        "jigyoshaName" rshare."UDD042AtenaMeisho",                            <!-- 事業者名称                   -->
+        "jigyoshaNameKana" rshare."UDD043AtenaKanaMeisho",                    <!-- 事業者名称カナ               -->
+        "jigyoshaYubinNo" rshare."UDD003YubinNo",                             <!-- 事業者郵便番号               -->
+        "jigyoshaAddress" rshare."UDD046AtenaJusho",                          <!-- 事業者住所                   -->
+        "jigyoshaAddressKana" character varying(100),                         <!-- 事業者住所カナ               -->
+        "jigyoshaTelNo" rshare."UDD026TelNo",                                 <!-- 事業者電話番号               -->
+        "jigyoshaFaxNo" rshare."UDD026TelNo",                                 <!-- 事業者FAX番号                -->
+        kyuhuritsu rgdb."DbUDD011HokenKyufuRitsu",                            <!-- 給付率                       -->
+        "shinseiRiyuKubun" character varying(2),                              <!-- 申請理由区分  DBDEnum.申請理由区分 ... -->
+        "riyoshaFutanDankai" character varying(1),                            <!-- 利用者負担段階    DBDEnum.利用者負担段階... -->
+        "shokuhiFutanGendogaku" numeric(5,0),                                 <!-- 食費負担限度額              -->
+        "unitTypeKoshitsu" numeric(5,0),                                      <!-- ユニット型個室              -->
+        "unitTypeJunKoshitsu" numeric(5,0),                                   <!-- ユニット型準個室            -->
+        "juraiTypeKoshitsu_Tokuyo" numeric(5,0),                              <!-- 従来型個室（特養等）        -->
+        "juraiTypeKoshitsu_Roken_Ryoyo" numeric(5,0),                         <!-- 従来型個室（老健・療養等）  -->
+        tashoshitsu numeric(5,0),                                             <!-- 多床室                      -->
+        "kyoshitsuShubetsu" character varying(1),                             <!-- 居室種別  DBDEnum.居室種別...  -->
+        "kyokaisoGaitoshaKubun" boolean,                                      <!-- 境界層該当者区分  trueの場合、境界層該当者 -->
+        "gekihenKanwaSochiTaishoshaKubun" boolean,                            <!-- 激変緩和措置対象者区分    trueの場合、激変緩和対象者 -->
+        "kyusochishaKubun" character varying(1),                              <!-- 旧措置者区分                -->
+        "shoriTimestamp" rshare."UDD018YMDHMS",                               <!-- 作成日時                    -->
+        "seinengappiYMD" rshare."UDD015YMD"                                   <!-- 生年月日                    -->
+        );
+    </update>
+
     <insert id="exeShotaiDataInsert"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter">
         SELECT rgdb."DbFt7021ShotaiDataInsert"(#{syukeiYM});
