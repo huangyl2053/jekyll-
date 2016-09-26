@@ -401,7 +401,12 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             }
             取込国保情報Entity.setエラー区分(エラー区分_1);
         }
+        エラーチェック処理_電算２用部分();
+        エラーチェック処理_電算２用部分1();
+        エラーチェック処理_電算２用部分2();
+    }
 
+    private void エラーチェック処理_電算２用部分() {
         RString 個人区分コード = 取込国保情報Entity.get個人区分コード();
         if (!個人区分コード_1.equals(個人区分コード) && !個人区分コード_2.equals(個人区分コード) && !個人区分コード_3.equals(個人区分コード)) {
             取込国保情報Entity.setエラーコード(エラーコード_56);
@@ -435,8 +440,6 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             }
             取込国保情報Entity.setエラー区分(エラー区分_1);
         }
-        エラーチェック処理_電算２用部分1();
-        エラーチェック処理_電算２用部分2();
     }
 
     private void エラーチェック処理_電算２用部分1() {

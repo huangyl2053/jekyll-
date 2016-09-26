@@ -723,7 +723,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
 
     private List<IKoza> get口座情報(KogakugassanShikyuKetteitsuchishoEntity entity) {
         if (entity.get被保検者情報() == null || entity.get被保検者情報().get識別コード() == null) {
-            return null;
+            return new ArrayList<>();
         }
         ChohyoSeigyoKyotsu 帳票共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票共通_帳票分類ID);
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
