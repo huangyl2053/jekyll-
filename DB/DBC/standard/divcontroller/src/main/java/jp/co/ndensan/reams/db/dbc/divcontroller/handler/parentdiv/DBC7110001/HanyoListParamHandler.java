@@ -34,6 +34,7 @@ public class HanyoListParamHandler {
     private static final RString 再審査結果情報 = new RString("再審査結果情報");
     private static final RString 保険者区分_経過措置_総合事業費 = new RString("3");
     private static final LasdecCode 保険者コード_全市町村 = new LasdecCode("000000");
+    private static final RString 保険者コード = new RString("hokenshacode");
     private final HanyoListParamPanelDiv div;
 
     /**
@@ -150,10 +151,10 @@ public class HanyoListParamHandler {
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
         if (広域.equals(導入形態)) {
-            if (restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("hokenshacode")).isEmpty()) {
+            if (restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード).isEmpty()) {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
-                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("hokenshacode")));
+                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード));
             }
         }
         div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jigyoushabangou")));
@@ -231,10 +232,10 @@ public class HanyoListParamHandler {
         }
         div.getChkHokenshaKubun().setSelectedItemsByKey(list保険者区分);
         if (広域.equals(導入形態)) {
-            if (restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("hokenshacode")).isEmpty()) {
+            if (restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード).isEmpty()) {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
-                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("hokenshacode")));
+                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード));
             }
         }
         div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jigyoushabangou")));

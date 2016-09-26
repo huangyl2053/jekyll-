@@ -173,12 +173,12 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
     private void outputJokenhyoFactory() {
         association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                new RString("汎用リスト　総合事業費情報CSV"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト　総合事業費情報CSV"),
                 new RString("HanyoList_SogoJigyoHi.csv"),
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 hanyolistsogojigyohi.set出力条件(市町村名, サービス種類コード名称, 事業所名));
         OutputJokenhyoFactory.createInstance(item).print();

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010019;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010019.JyutakuKayisyuHiDiv;
@@ -26,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class JyutakuKayisyuHi {
 
+    private static final int INT_ZERO = 0;
+
     /**
      * 画面の初期化メソッドです。
      *
@@ -33,10 +36,11 @@ public class JyutakuKayisyuHi {
      * @return 住宅改修費表示画面
      */
     public ResponseData<JyutakuKayisyuHiDiv> onLoad(JyutakuKayisyuHiDiv div) {
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         KyufuJissekiPrmBusiness 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        NyuryokuShikibetsuNo 識別番号 = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        KyufujissekiKihon 給付実績基本情報 = 引き継ぎ情報.getCsData_A().get(INT_ZERO);
+        RString 整理番号 = 給付実績基本情報.get整理番号();
+        NyuryokuShikibetsuNo 識別番号 = 給付実績基本情報.get入力識別番号();
         getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, サービス提供年月, 識別番号);
         List<ShikibetsuNoKanri> shikibetsuNoKanriList = KyufuJissekiShokaiFinder.createInstance().
                 getShikibetsuBangoKanri(サービス提供年月, 識別番号).records();

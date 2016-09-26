@@ -207,9 +207,9 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             ファイル名 = new RString("RiyoshaFutangakuGemmenNinteishaIchiran");
             帳票名称 = new RString("DBD200013_RiyoshaFutangakuGemmenNinteishaIchiran");
         }
-        if (ONE.equals(parameter.get出力設定().getコード())) {
+        if (ONE.equals(parameter.getCSV出力設定().getコード())) {
             項目名付加 = true;
-        } else if (!ONE.equals(parameter.get出力設定().getコード())) {
+        } else if (!ONE.equals(parameter.getCSV出力設定().getコード())) {
             項目名付加 = false;
         }
     }
@@ -248,7 +248,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 出力条件.add(new RString("　　　　　　　　 "));
             }
         }
-        if (null != parameter.get出力設定().getコード()) {
+        if (null != parameter.getCSV出力設定().getコード()) {
             出力条件.add(new RString("【CSV出力設定】 項目名付加、連番付加、日付\"/\"編集"));
         } else {
             出力条件.add(new RString("【CSV出力設定】 指定なし"));
@@ -343,7 +343,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     private ChohyoShutsuryokuJohoShutokuResultCsvEntity setVoidEntity(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity,
             ChohyoShutsuryokuJohoShutokuResultEntity t) {
         resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
-        if (THERE.equals(parameter.get出力設定().getコード())) {
+        if (THERE.equals(parameter.getCSV出力設定().getコード())) {
             FlexibleDate shineiYMD = t.get利用者負担額減額Entity().getShinseiYMD();
             if (shineiYMD != null && !shineiYMD.isEmpty()) {
                 resultEntity.set減免申請日(shineiYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
@@ -391,7 +391,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     private ChohyoShutsuryokuJohoShutokuResultCsvEntity setEntity(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity,
             ChohyoShutsuryokuJohoShutokuResultEntity t) {
         resultEntity.set要介護度((YokaigoJotaiKubunSupport.toValue(t.get厚労省IF識別コード(), t.get認定情報Entity().get要介護状態区分コード())).getName());
-        if (THERE.equals(parameter.get出力設定().getコード())) {
+        if (THERE.equals(parameter.getCSV出力設定().getコード())) {
             FlexibleDate 認定年月日 = t.get認定情報Entity().get認定年月日();
             if (認定年月日 != null && !認定年月日.isEmpty()) {
                 resultEntity.set認定日(認定年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
