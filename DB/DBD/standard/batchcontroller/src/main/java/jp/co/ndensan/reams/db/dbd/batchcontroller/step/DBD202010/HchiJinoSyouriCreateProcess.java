@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00002;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD202010;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.HchiJinoSyouriCreateProcessParamter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.temptable.HchiJinoSyouriKeyTempTableEntity;
@@ -31,7 +31,7 @@ public class HchiJinoSyouriCreateProcess extends BatchProcessBase<HchiJinoSyouri
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
-    private static final RString TABLE_NAME = new RString("TaisyoulyaYichiTetennTempTable");
+    private static final RString TABLE_NAME = new RString("gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp");
 
     @Override
     protected IBatchReader createReader() {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt00002;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD201010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.HchiJinoSyour
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,14 +29,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class RiyouShiryaFutannGakuGennmennKonntennlyaFlowParameter extends BatchParameterBase {
+public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends BatchParameterBase {
 
     // 対象リスト
     private TargetList 対象リスト;
     // 基準日
     private FlexibleDate 基準日;
     // 所得年度
-    private RString 所得年度;
+    private FlexibleYear 所得年度;
     // 旧措置区分
     private KyusochishaKubun 旧措置区分;
     // 世帯表示

@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00002;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD202010;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanlist.RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.RiyoshaFutangakuGemmenGaitoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.ChohyoShutsuryokuJohoShutokuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd00002.RiyoshaFutangakuGemmenGaitoshaIchiranReportSource;
@@ -40,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -48,9 +48,14 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -68,6 +73,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<ChohyoShutsuryokuJohoShutokuResultEntity> {
 
     private ChohyoShutsuryokuJohoShutokuProcessParameter parameter;
+    private IOutputOrder outputOrder;
     private RString 出力順;
     private RString reamsLoginID;
     private Association 導入団体;
@@ -76,20 +82,22 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     private RString 改ページ;
     private static final RString 認定者リストタイトル = new RString("介護保険 利用者負担額減免認定者リスト");
     private static final RString 該当者リストタイトル = new RString("介護保険 利用者負担額減免該当者リスト");
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_8 = 8;
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString THERE = new RString("3");
     private static final RString 却下 = new RString("却下");
     private static final RString 承認 = new RString("承認");
     private static final RString 空白 = new RString("");
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-    SimpleDateFormat formatDate = new SimpleDateFormat("平成yyyy年MM月dd日");
-    SimpleDateFormat formatfix = new SimpleDateFormat("平成yyyy年MM月dd日 HH時mm分ss秒");
     private static final RString ASTERISK = new RString("*");
     private static final RString 課 = new RString("課");
     private static final RString 旧措置者 = new RString("旧措置者");
-    private static final ReportId ID = new ReportId("DBD200002_RiyoshaFutangakuGemmenGaitoshaIchiran");
-//    private static final ReportId REPORT_DBD200002 = ReportIdDBD.DBD200002.getReportId();
+    private static final ReportIdDBD REPORT_DBD200002 = ReportIdDBD.DBD200002;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoulyagennmenn."
             + "GennMennGennGakuTaiSyoulyaMapper.select利用者負担額減免認定者");
@@ -110,10 +118,12 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         personalDataList = new ArrayList<>();
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
 
-        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-                ID, reamsLoginID, parameter.get改頁出力順ID());
-        // TODO
-        出力順 = MyBatisOrderByClauseCreator.create(null, outputOrder);
+        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
+                SubGyomuCode.DBD介護受給,
+                REPORT_DBD200002.getReportId(),
+                reamsLoginID,
+                parameter.get改頁出力順ID());
+        出力順 = MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder);
         導入団体 = AssociationFinderFactory.createInstance().getAssociation();
         帳票ID = parameter.get帳票ID();
         edit初期化();
@@ -136,11 +146,11 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(ID.value(),
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200002.getReportId().value(),
                 SubGyomuCode.DBD介護受給).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
 
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, eUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Excel, eUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
@@ -169,7 +179,6 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 PersonalData personalData = PersonalData.of(kojin.get識別コード());
                 personalDataList.add(personalData);
             }
-            
         }
 
         ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
@@ -218,8 +227,17 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         RString csvファイル名 = new RString("RiyoshaFutangakuGemmenGaitoshaIchiran.csv");
 
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(getDate(parameter.get基準日()));
-        出力条件.add(new RString("【所得年度】 " + parameter.get所得年度()));
+        if (parameter.get基準日() != null && !parameter.get基準日().isEmpty()) {
+            出力条件.add(parameter.get基準日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        }
+        RString 所得年度 = new RString("");
+        if (parameter.get所得年度() != null && !parameter.get所得年度().isEmpty()) {
+            所得年度 = parameter.get所得年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+
+        出力条件.add(new RString("【所得年度】 " + 所得年度));
         出力条件.add(new RString("【旧措置者区分】 " + parameter.get旧措置区分().get名称()));
         出力条件.add(new RString("【世帯表示】 " + parameter.get世帯表示().get名称()));
         if (ONE.equals(parameter.get対象リスト().getコード())) {
@@ -237,8 +255,17 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         } else {
             出力条件.add(new RString("【CSV出力設定】 指定なし"));
         }
-        出力条件.add(getRdate(parameter.get帳票作成日時()));
-//        RString 出力順 = 出力順;TODO
+        RString 作成日時 = new RString("");
+        RTime time = RDate.getNowTime();
+        RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
+        RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
+        RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
+        RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
+        if (parameter.get帳票作成日時() != null) {
+            作成日時 = parameter.get帳票作成日時().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
+        }
+        出力条件.add(作成日時);
+//        RString 出力順 = 出力順;
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID,
                 導入団体コード,
@@ -251,20 +278,6 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
-    }
-
-    private RString getRdate(RDateTime obj) {
-        if (null == obj) {
-            return new RString("");
-        }
-        return new RString(formatfix.format(obj));
-    }
-
-    private RString getDate(FlexibleDate obj) {
-        if (null == obj) {
-            return new RString("");
-        }
-        return new RString("【基準日】" + new RString(formatDate.format(obj)));
     }
 
     private ChohyoShutsuryokuJohoShutokuResultCsvEntity set利用者負担額減免認定者リストCSV(ChohyoShutsuryokuJohoShutokuResultEntity t) {
@@ -295,15 +308,39 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
 
         resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
         if (THERE.equals(parameter.get出力設定().getコード())) {
-            resultEntity.set減免申請日(edit年月日(t.get利用者負担額減額Entity().getShinseiYMD()));
-            resultEntity.set減免決定日(edit年月日(t.get利用者負担額減額Entity().getKetteiYMD()));
-            resultEntity.set減免適用日(edit年月日(t.get利用者負担額減額Entity().getTekiyoKaishiYMD()));
-            resultEntity.set減免有効期限(edit年月日(t.get利用者負担額減額Entity().getTekiyoShuryoYMD()));
+            FlexibleDate shineiYMD = t.get利用者負担額減額Entity().getShinseiYMD();
+            if (shineiYMD != null && !shineiYMD.isEmpty()) {
+                resultEntity.set減免申請日(shineiYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            }
+            FlexibleDate ketteiYMD = t.get利用者負担額減額Entity().getKetteiYMD();
+            if (ketteiYMD != null && !ketteiYMD.isEmpty()) {
+                resultEntity.set減免決定日(ketteiYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            }
+            FlexibleDate tekiyoKaishiYMD = t.get利用者負担額減額Entity().getTekiyoKaishiYMD();
+            if (tekiyoKaishiYMD != null && !tekiyoKaishiYMD.isEmpty()) {
+                resultEntity.set減免適用日(tekiyoKaishiYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            }
+            FlexibleDate tekiyoShuryoYMD = t.get利用者負担額減額Entity().getTekiyoShuryoYMD();
+            if (tekiyoShuryoYMD != null && !tekiyoShuryoYMD.isEmpty()) {
+                resultEntity.set減免有効期限(tekiyoShuryoYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            }
         } else {
-            resultEntity.set減免申請日(edit年月日_yyyymmdd(t.get利用者負担額減額Entity().getShinseiYMD()));
-            resultEntity.set減免決定日(edit年月日_yyyymmdd(t.get利用者負担額減額Entity().getKetteiYMD()));
-            resultEntity.set減免適用日(edit年月日_yyyymmdd(t.get利用者負担額減額Entity().getTekiyoKaishiYMD()));
-            resultEntity.set減免有効期限(edit年月日_yyyymmdd(t.get利用者負担額減額Entity().getTekiyoShuryoYMD()));
+            FlexibleDate shineiYMD = t.get利用者負担額減額Entity().getShinseiYMD();
+            if (shineiYMD != null && !shineiYMD.isEmpty()) {
+                resultEntity.set減免申請日(shineiYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+            }
+            FlexibleDate ketteiYMD = t.get利用者負担額減額Entity().getKetteiYMD();
+            if (ketteiYMD != null && !ketteiYMD.isEmpty()) {
+                resultEntity.set減免決定日(ketteiYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+            }
+            FlexibleDate tekiyoKaishiYMD = t.get利用者負担額減額Entity().getTekiyoKaishiYMD();
+            if (tekiyoKaishiYMD != null && !tekiyoKaishiYMD.isEmpty()) {
+                resultEntity.set減免適用日(tekiyoKaishiYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+            }
+            FlexibleDate tekiyoShuryoYMD = t.get利用者負担額減額Entity().getTekiyoShuryoYMD();
+            if (tekiyoShuryoYMD != null && !tekiyoShuryoYMD.isEmpty()) {
+                resultEntity.set減免有効期限(tekiyoShuryoYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+            }
         }
         if (t.is老齢福祉年金受給者()) {
             resultEntity.set老齢福祉年金受給(ASTERISK);
@@ -336,15 +373,33 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         }
         resultEntity.set要介護度((YokaigoJotaiKubunSupport.toValue(t.get厚労省IF識別コード(), t.get認定情報Entity().get要介護状態区分コード())).getName());
         if (THERE.equals(parameter.get出力設定().getコード())) {
-            resultEntity.set認定日(edit年月日(t.get認定情報Entity().get認定年月日()));
-            resultEntity.set認定開始日(edit年月日(t.get認定情報Entity().get認定有効期間開始年月日()));
-            resultEntity.set認定終了日(edit年月日(t.get認定情報Entity().get認定有効期間終了年月日()));
+            FlexibleDate 認定年月日 = t.get認定情報Entity().get認定年月日();
+            if (認定年月日 != null && !認定年月日.isEmpty()) {
+                resultEntity.set認定日(認定年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            }
+            FlexibleDate 認定有効期間開始年月日 = t.get認定情報Entity().get認定有効期間開始年月日();
+            if (認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty()) {
+                resultEntity.set認定開始日(認定有効期間開始年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            }
+            FlexibleDate 認定有効期間終了年月日 = t.get認定情報Entity().get認定有効期間終了年月日();
+            if (認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty()) {
+                resultEntity.set認定終了日(認定有効期間終了年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            }
         } else {
-            resultEntity.set認定日(edit年月日_yyyymmdd(t.get認定情報Entity().get認定年月日()));
-            resultEntity.set認定開始日(edit年月日_yyyymmdd(t.get認定情報Entity().get認定有効期間開始年月日()));
-            resultEntity.set認定終了日(edit年月日_yyyymmdd(t.get認定情報Entity().get認定有効期間終了年月日()));
+            FlexibleDate 認定年月日 = t.get認定情報Entity().get認定年月日();
+            if (認定年月日 != null && !認定年月日.isEmpty()) {
+                resultEntity.set認定日(認定年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+            }
+            FlexibleDate 認定有効期間開始年月日 = t.get認定情報Entity().get認定有効期間開始年月日();
+            if (認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty()) {
+                resultEntity.set認定開始日(認定有効期間開始年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+            }
+            FlexibleDate 認定有効期間終了年月日 = t.get認定情報Entity().get認定有効期間終了年月日();
+            if (認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty()) {
+                resultEntity.set認定終了日(認定有効期間終了年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+            }
         }
-        
+
         if (t.get利用者負担額減額Entity() == null || t.get利用者負担額減額Entity().getKyuhuritsu() == null) {
             resultEntity.set減免給付率(空白);
         } else {
@@ -373,19 +428,4 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         return resultEntity;
     }
 
-    private RString edit年月日_yyyymmdd(FlexibleDate date) {
-
-        if (date == null || FlexibleDate.EMPTY.equals(date)) {
-            return RString.EMPTY;
-        }
-        return new RString(date.toString());
-    }
-
-    private RString edit年月日(FlexibleDate date) {
-
-        if (date == null || FlexibleDate.EMPTY.equals(date)) {
-            return RString.EMPTY;
-        }
-        return new RString(formatter.format(date));
-    }
 }
