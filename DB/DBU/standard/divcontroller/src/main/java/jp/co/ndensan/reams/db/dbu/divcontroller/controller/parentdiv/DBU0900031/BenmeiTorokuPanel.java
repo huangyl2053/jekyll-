@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -47,8 +46,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class BenmeiTorokuPanel {
 
     private static final RString 状態_登録 = new RString("登録");
-    private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
+    private static final RString 修正 = new RString("修正状態");
+    private static final RString 削除 = new RString("削除状態");
 
     private BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho;
     private FlexibleDate 審査請求届出日;
@@ -80,7 +79,6 @@ public class BenmeiTorokuPanel {
             ViewStateHolder.put(ViewStateKeys.弁明登録情報, benmeiTorokuMeisaiJoho);
             getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態, 弁明書作成日);
         } else if (初期_状態.equals(削除)) {
-            CommonButtonHolder.setTextByCommonButtonFieldName(new RString("btnSave"), "削除");
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             if (benmeiTorokuMeisaiJoho != null) {
                 get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
@@ -104,7 +102,7 @@ public class BenmeiTorokuPanel {
         if (processState.equals(状態_登録) || processState.equals(修正)) {
             return get弁明登録明細の更新有り無しの判断(benmeiTorokuMeisaiJoho, panelDiv);
         } else if (processState.equals(削除)) {
-            return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.弁明登録一覧画面に遷移).respond();
+            return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(panelDiv).respond();
     }
@@ -115,17 +113,37 @@ public class BenmeiTorokuPanel {
      * @param panelDiv ShikakukihonPanelDiv
      * @return ResponseData<ShikakukihonPanelDiv>
      */
-    public ResponseData<BenmeiTorokuPanelDiv> onClick_btnSave(BenmeiTorokuPanelDiv panelDiv) {
+    public ResponseData<BenmeiTorokuPanelDiv> onClick_btnUpdate(BenmeiTorokuPanelDiv panelDiv) {
         RString processState = panelDiv.getProcessState();
         benmeiTorokuMeisaiJoho = ViewStateHolder.get(ViewStateKeys.弁明登録情報, BenmeiTorokuMeisaiJoho.class);
         if (processState.equals(状態_登録)) {
             return get弁明登録明細情報の登録処理(panelDiv);
         } else if (processState.equals(修正)) {
             return get弁明登録明細情報の更新処理(benmeiTorokuMeisaiJoho, panelDiv);
-        } else if (processState.equals(削除)) {
-            return get弁明登録明細情報の削除処理(panelDiv);
         }
         return ResponseData.of(panelDiv).respond();
+    }
+
+    /**
+     * 画面の「削除する」ボタンの機能を処理です。
+     *
+     * @param panelDiv ShikakukihonPanelDiv
+     * @return ResponseData<ShikakukihonPanelDiv>
+     */
+    public ResponseData<BenmeiTorokuPanelDiv> onClick_btnDelete(BenmeiTorokuPanelDiv panelDiv) {
+        benmeiTorokuMeisaiJoho = ViewStateHolder.get(ViewStateKeys.弁明登録情報, BenmeiTorokuMeisaiJoho.class);
+        return get弁明登録明細情報の削除処理(panelDiv);
+    }
+
+    /**
+     * 完了するボタン押下、メニュー画面へ遷移します。
+     *
+     * @param div BenmeiTorokuPanelDiv
+     * @return ResponseData<BenmeiTorokuPanelDiv>
+     */
+    public ResponseData<BenmeiTorokuPanelDiv> onClick_btnComplete(BenmeiTorokuPanelDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBU0900031TransitionEventName.処理完了).respond();
     }
 
     private BenmeiTorokuMeisaiJoho get弁明登録明細情報の取得(
@@ -154,10 +172,10 @@ public class BenmeiTorokuPanel {
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.弁明登録一覧画面に遷移).respond();
+                return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.一覧に戻る).respond();
             }
         } else {
-            return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.弁明登録一覧画面に遷移).respond();
+            return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(panelDiv).respond();
     }

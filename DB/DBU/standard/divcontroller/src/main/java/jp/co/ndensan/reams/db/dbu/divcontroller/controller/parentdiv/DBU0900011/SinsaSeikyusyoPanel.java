@@ -33,10 +33,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SinsaSeikyusyoPanel {
 
-    private static final RString 追加 = new RString("追加");
-    private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
-    private static final RString 発行ボタン = new RString("btnReportPublish");
+    private static final RString 追加 = new RString("追加状態");
+    private static final RString 修正 = new RString("修正状態");
+    private static final RString 削除 = new RString("削除状態");
+    private static final RString 発行ボタン = new RString("btnReportPublish");    
+    private static final RString 弁明登録 = new RString("DBUUC09100");
     private BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho;
     private final BenmeiTorokuManager benmeiTorokuManager = BenmeiTorokuManager.createInstance();
 
@@ -61,9 +62,9 @@ public class SinsaSeikyusyoPanel {
     }
     
     /**
-     * 審査請求書登録_一覧情報_再表示。
-     * 
-     * @param div　審査請求書登録_一覧情報Div
+     * 審査請求書登録_一覧情報。
+     *
+     * @param div 審査請求書登録_一覧情報Div
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onActive(SinsaSeikyusyoPanelDiv div) {
@@ -81,7 +82,7 @@ public class SinsaSeikyusyoPanel {
         ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
         ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.状態, 追加);
-        return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(追加);
     }
 
     /**
@@ -98,7 +99,9 @@ public class SinsaSeikyusyoPanel {
             ViewStateHolder.put(ViewStateKeys.審査請求届出日,
                     new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行ボタン, true);
+        if (getHandler(div).getUIContainerId().equals(弁明登録)){
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(発行ボタン, false);
+        }        
         return ResponseData.of(div).respond();
     }
 
@@ -121,7 +124,7 @@ public class SinsaSeikyusyoPanel {
             ViewStateHolder.put(ViewStateKeys.弁明書作成日,
                     new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtBenmeishoSakuseiYMD().getValue().toDateString()));
         }
-        return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(修正);
     }
 
     /**
@@ -129,12 +132,13 @@ public class SinsaSeikyusyoPanel {
      *
      * @param div SinsaSeikyusyoPanelDiv
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
-     */
+     */    
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnSakuzyo(SinsaSeikyusyoPanelDiv div) {
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
         benmeiTorokuMeisaiJoho = benmeiTorokuManager.getBenmeiTorokuMeisaiJoho(key.get識別コード(),
                 key.get被保険者番号(),
-                new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
+                new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue() == null
+                        ? RString.EMPTY : div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
         if (benmeiTorokuMeisaiJoho == null) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("削除データ"));
         }
@@ -149,7 +153,7 @@ public class SinsaSeikyusyoPanel {
             ViewStateHolder.put(ViewStateKeys.弁明書作成日,
                     new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtBenmeishoSakuseiYMD().getValue().toDateString()));
         }
-        return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(削除);
     }
     
     /**

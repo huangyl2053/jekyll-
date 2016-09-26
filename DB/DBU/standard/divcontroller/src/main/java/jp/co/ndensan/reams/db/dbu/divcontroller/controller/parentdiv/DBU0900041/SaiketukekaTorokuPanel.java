@@ -35,8 +35,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SaiketukekaTorokuPanel {
 
-    private static final RString 削除 = new RString("削除");
-    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除状態");
+    private static final RString 修正 = new RString("修正状態");
 
     /**
      * 裁決結果登録_登録の初期化。(オンロード)<br/>
@@ -116,7 +116,7 @@ public class SaiketukekaTorokuPanel {
      * @param div SinsaSeikyusyoMeisaiPanelDiv
      * @return ResponseData<SinsaSeikyusyoMeisaiPanelDiv>
      */
-    public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnFinish(SaiketukekaTorokuPanelDiv div) {
+    public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnComplete(SaiketukekaTorokuPanelDiv div) {
         createHandlerOf(div).内容の破棄();
         return ResponseData.of(div).forwardWithEventName(DBU0900041TransitionEventName.処理完了).respond();
     }
@@ -128,39 +128,43 @@ public class SaiketukekaTorokuPanel {
      * @return ResponseData<SaiketukekaTorokuPanelDiv>
      */
     public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnUpdate(SaiketukekaTorokuPanelDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor弁明書作成日の必須入力(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null
+                ? RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
+        boolean 変更あり = getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値(), 修正前の値);
+        if (変更あり) {
+            return 変更あり_修正処理(div);
+        } else {
+            return 変更なし_修正処理(div);
+        }
+    }
+
+    /**
+     * 削除するボタン押下、データがDBに更新します。
+     *
+     * @param div SaiketukekaTorokuPanelDiv
+     * @return ResponseData<SaiketukekaTorokuPanelDiv>
+     */
+    public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnDelete(SaiketukekaTorokuPanelDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().validateFor弁明書作成日の必須入力(pairs, div);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
-            RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null
-                    ? RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
-            boolean 変更あり = getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値(), 修正前の値);
-            if (変更あり) {
-                return 変更あり_修正処理(div);
-            } else {
-                return 変更なし_修正処理(div);
-            }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
+                    UrQuestionMessages.削除の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
-
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
-                        UrQuestionMessages.削除の確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                削除処理(識別コード, 被保険者番号, 審査請求届出日);
-                div.getKaryoMessage().getCcdKaigoKanryoMessage().setMessage(
-                        new RString(UrInformationMessages.正常終了.getMessage()
-                                .replace(削除.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-                return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
-            }
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            削除処理(識別コード, 被保険者番号, 審査請求届出日);
+            div.getKaryoMessage().getCcdKaigoKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage()
+                            .replace(削除.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
         }
         return ResponseData.of(div).respond();
     }
