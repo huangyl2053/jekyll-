@@ -23,7 +23,7 @@ public class ShikyuKetteitsuchishoParameterHandler {
 
     private final ShikyuKetteitsuchishoParameterDiv div;
     private static final int ZERO = 0;
-    private static final int EIGHT = 0;
+    private static final int EIGHT = 8;
 
     /**
      * コンストラクタです。
