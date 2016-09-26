@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.IShimeiWaKuhakuNoShoriMapper">
     <select id="get空白の処理"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.ShimeiWaKuhakuNoShoriEntity" 
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ShimeiWaKuhakuNoShoriEntity" 
             fetchSize="500" resultOrdered="true">
         SELECT A."hihokenshaKana",
         A."hihokenshaName",

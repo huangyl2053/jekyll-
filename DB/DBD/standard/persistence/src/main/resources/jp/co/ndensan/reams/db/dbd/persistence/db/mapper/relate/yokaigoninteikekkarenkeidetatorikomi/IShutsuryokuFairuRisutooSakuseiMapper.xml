@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.IShutsuryokuFairuRisutooSakuseiMapper">
     <select id="get出力ファイルリスト"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.OutFile" 
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.OutFile" 
             fetchSize="500" resultOrdered="true">
         SELECT
         A.shikibetsukodo AS 識別コード,
