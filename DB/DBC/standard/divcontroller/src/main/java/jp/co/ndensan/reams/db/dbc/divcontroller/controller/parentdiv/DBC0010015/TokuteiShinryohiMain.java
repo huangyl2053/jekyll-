@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010015;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.DBC0010015TransitionEventName;
@@ -26,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TokuteiShinryohiMain {
 
+    private static final int INT_ZERO = 0;
+
     /**
      * 画面初期化のメソッドです。
      *
@@ -35,10 +38,12 @@ public class TokuteiShinryohiMain {
     public ResponseData<TokuteiShinryohiMainDiv> onLoad(TokuteiShinryohiMainDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        RString 整理番号 = get整理番号(給付実績基本情報);
+        NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         div.getCcdKyufuJissekiHeader().initialize(
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月,
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class), 識別番号検索キー);
+                整理番号, 識別番号検索キー);
         getHandler(div).onLoad(給付実績情報照会情報, サービス提供年月);
         List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records();
@@ -142,6 +147,14 @@ public class TokuteiShinryohiMain {
         if (div.getTekiyoPanelPanel().isIsOpen()) {
             div.getTekiyoPanelPanel().setIsOpen(false);
         }
+    }
+
+    private RString get整理番号(List<KyufujissekiKihon> 給付実績基本情報) {
+        return 給付実績基本情報.get(INT_ZERO).get整理番号();
+    }
+
+    private NyuryokuShikibetsuNo get識別番号(List<KyufujissekiKihon> 給付実績基本情報) {
+        return 給付実績基本情報.get(INT_ZERO).get入力識別番号();
     }
 
     /**
