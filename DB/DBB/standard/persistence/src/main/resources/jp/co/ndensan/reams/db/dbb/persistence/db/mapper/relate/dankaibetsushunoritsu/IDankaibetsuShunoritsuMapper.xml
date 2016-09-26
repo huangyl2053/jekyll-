@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.dankaibetsushunoritsu.IDankaibetsuShunoritsuMapper">
     <select id="get収納宛名データ" resultMap="resultMap_ShunyuTaishoData"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dankaibetsushunoritsu.InsDankaibetsuShunoritsuTmpMybatisParamter" 
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT
             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
