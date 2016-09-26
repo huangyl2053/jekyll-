@@ -193,6 +193,11 @@ public class KyufuhiTuchiHosei
         return this.id;
     }
 
+    /**
+     * modifiedModelの処理です。
+     *
+     * @return KyufuhiTuchiHosei
+     */
     public KyufuhiTuchiHosei modifiedModel() {
         DbT3067KyufuhiTuchiHoseiEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
