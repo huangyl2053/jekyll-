@@ -370,11 +370,6 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgNinteiTaskList_Row> rowList = requestDiv.getCcdTaskList().getCheckbox();
             IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
             List<ShinseishoKanriNo> list = new ArrayList<>();
@@ -388,8 +383,6 @@ public class NinteichosaIrai {
             requestDiv.setHiddenIuputModel(DataPassingConverter.serialize(model));
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).respond();
-        }
-        return ResponseData.of(requestDiv).respond();
     }
 
     /**
