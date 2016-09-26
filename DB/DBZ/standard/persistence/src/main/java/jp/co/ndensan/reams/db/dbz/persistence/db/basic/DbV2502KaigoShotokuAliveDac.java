@@ -94,33 +94,6 @@ public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotok
                 limit(1).
                 toObject(DbV2502KaigoShotokuEntity.class);
     }
-    
-    /**
-     * キーで介護所得Aliveを全件取得します。
-     *
-     * @param 識別コード 識別コード
-     * @param 所得年度 所得年度
-     * @param 所得基準年月日 所得基準年月日
-     * @return DbV2502KaigoShotokuEntity
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public List<DbV2502KaigoShotokuEntity> selectAllByshoriTimeStamp(
-            ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
-        requireNonNull(所得基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("所得基準年月日"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbV2502KaigoShotoku.class).
-                where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(shotokuNendo, 所得年度),
-                                leq(shoriTimeStamp, 所得基準年月日))).order(by(rirekiNo, Order.DESC)).
-                toList(DbV2502KaigoShotokuEntity.class);
-    }
 
     /**
      * 介護所得を全件返します。
