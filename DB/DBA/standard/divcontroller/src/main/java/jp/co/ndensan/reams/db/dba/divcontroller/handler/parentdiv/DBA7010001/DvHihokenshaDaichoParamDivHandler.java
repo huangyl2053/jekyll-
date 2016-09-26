@@ -313,7 +313,7 @@ public class DvHihokenshaDaichoParamDivHandler {
         if (項目 != null) {
             return new FlexibleDate(項目.toDateString());
         }
-        return FlexibleDate.EMPTY;
+        return FlexibleDate.getNowDate();
     }
 
     private RString nullToEmpty(RString 項目) {
