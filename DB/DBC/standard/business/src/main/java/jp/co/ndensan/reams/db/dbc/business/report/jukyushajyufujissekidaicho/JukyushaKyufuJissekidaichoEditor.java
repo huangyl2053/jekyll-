@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushajyufujissekidaich
 /**
  * 受給者給付実績台帳 のEditorです。
  *
- * @reamsid_L DBC-3080-04 dangjingjing
+ * @reamsid_L DBC-3080-040 dangjingjing
  */
 public class JukyushaKyufuJissekidaichoEditor implements IJukyushaKyufuJissekidaichoEditor {
 
