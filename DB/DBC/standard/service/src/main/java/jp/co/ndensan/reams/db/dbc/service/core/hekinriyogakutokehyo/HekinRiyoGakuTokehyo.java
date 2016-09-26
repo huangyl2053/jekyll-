@@ -35,8 +35,8 @@ public class HekinRiyoGakuTokehyo {
     private static final int 年齢1 = 39;
     private static final int 年齢2 = 65;
     private static final int 值十 = 10;
-    private static final int 值九 = 9;
-    private static final int 值一 = 1;
+    private static final int 值二 = 2;
+    private static final int 值零 = 0;
     private static final RString 值11 = new RString("11");
     private static final RString 值12 = new RString("12");
     private static final RString 值13 = new RString("13");
@@ -59,7 +59,6 @@ public class HekinRiyoGakuTokehyo {
     private RString 要介護状態区分コード = RString.EMPTY;
     private RString サービス分類 = RString.EMPTY;
     private RString サービス分類コード = RString.EMPTY;
-    private IHekinRiyoGakuTokehyoMapper mapper;
     private static final int 值0 = 0;
     private static final RString 值1 = new RString("1");
     private static final RString 值2 = new RString("2");
@@ -98,7 +97,7 @@ public class HekinRiyoGakuTokehyo {
      */
     public void get給付実績データ取得処理() {
 
-        mapper = mapperProvider.create(IHekinRiyoGakuTokehyoMapper.class);
+        IHekinRiyoGakuTokehyoMapper mapper = mapperProvider.create(IHekinRiyoGakuTokehyoMapper.class);
         List<KyufujissekiTempTblEntity> entityList = mapper.get給付実績データ取得処理();
         List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList = new ArrayList<>();
         if (!entityList.isEmpty()) {
@@ -198,7 +197,7 @@ public class HekinRiyoGakuTokehyo {
             updatecreatentitylist(shukeinaiyouEntityList, レコード,
                     人数,
                     費用総額, 合計, レコード.getYoKaigoJotaiKubunCode());
-        } else if (shotoku.length() <= 值九 && 值一 <= shotoku.length()) {
+        } else if (shotoku.length() < 值二 && 值零 <= shotoku.length()) {
             updatecreatentitylist(shukeinaiyouEntityList,
                     レコード,
                     人数,

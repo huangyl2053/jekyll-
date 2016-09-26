@@ -98,7 +98,6 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString 值33 = new RString("33");
     private static final RString 值34 = new RString("34");
     private static final RString 值35 = new RString("35");
-    private static final RString 值36 = new RString("36");
     private static final RString 以上 = new RString("10以上");
     private static final RString その他 = new RString("その他");
     private static final RString 号 = new RString("２号");
