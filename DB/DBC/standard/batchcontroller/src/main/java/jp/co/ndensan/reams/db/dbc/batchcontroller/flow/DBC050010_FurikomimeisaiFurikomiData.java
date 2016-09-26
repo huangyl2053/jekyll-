@@ -161,27 +161,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
                     FurikomiDataTourokuProcess.PARAMETER_OUT_COUNT);
 
             if (0 != レコード件数) {
-                executeStep(口座振込データの登録処理);
-
-                if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                        || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
-
-                    executeStep(依頼済登録_償還);
-                    executeStep(依頼済取消_償還);
-                }
-                if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                        || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
-                    executeStep(依頼済登録_高額介護);
-                    executeStep(依頼済取消_高額介護);
-                }
-                executeStep(振込明細一覧表作成_受給取得状況);
-                executeStep(振込明細一覧表作成_申請データ有無確認);
-                executeStep(振込明細一覧表作成);
-
-                if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード())
-                        && 支払方法_窓口.equals(getParameter().get支払方法().getコード()))) {
-                    executeStep(振込エラーリスト作成);
-                }
+                振込データ登録_口座振込一時0件以外処理();
             }
         }
 
@@ -446,5 +426,30 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
             parameter.setTourokuKubun(登録区分_差分);
         }
         return parameter;
+    }
+
+    private void 振込データ登録_口座振込一時0件以外処理() {
+
+        executeStep(口座振込データの登録処理);
+
+        if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
+
+            executeStep(依頼済登録_償還);
+            executeStep(依頼済取消_償還);
+        }
+        if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
+            executeStep(依頼済登録_高額介護);
+            executeStep(依頼済取消_高額介護);
+        }
+        executeStep(振込明細一覧表作成_受給取得状況);
+        executeStep(振込明細一覧表作成_申請データ有無確認);
+        executeStep(振込明細一覧表作成);
+
+        if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード())
+                && 支払方法_窓口.equals(getParameter().get支払方法().getコード()))) {
+            executeStep(振込エラーリスト作成);
+        }
     }
 }

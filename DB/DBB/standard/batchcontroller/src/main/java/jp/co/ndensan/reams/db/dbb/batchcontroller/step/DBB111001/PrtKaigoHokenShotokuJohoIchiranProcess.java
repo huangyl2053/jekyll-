@@ -65,7 +65,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private static final RString INDEX_112 = new RString("112");
     private static final RString INDEX_120 = new RString("120");
     private static final RString EUCファイル名 = new RString("KaigoHokenShotokuJohoIchiran.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200009");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200008");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
@@ -93,6 +93,8 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private ReportSourceWriter<KaigoHokenShotokuJohoIchiranSource> hokenShotokuJohoIchiranSourceWriter;
     @BatchWriter
     private CsvWriter<KaigoHokenShotokuCSVEntity> eucCsvWriter;
+    private FileSpoolManager manager;
+    private RString eucFilePath;
     private Association association;
     private List<RString> 出力順項目リスト;
     private List<RString> 改頁項目リスト;
@@ -156,10 +158,10 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
 
     @Override
     protected void createWriter() {
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, EUCファイル名);
+        eucFilePath = Path.combinePath(spoolWorkPath, EUCファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(カンマ).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -180,6 +182,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
+        manager.spool(eucFilePath);
         List<RString> 出力条件リスト = set出力条件リスト(導入形態コード, 処理年度,
                 チェックボックス, ラジオボタン, 開始日時, 終了日時, parameter.get市町村情報リスト(), 出力順ID);
         int 出力ページ数 = hokenShotokuJohoIchiranSourceWriter.getPageGroupCount();

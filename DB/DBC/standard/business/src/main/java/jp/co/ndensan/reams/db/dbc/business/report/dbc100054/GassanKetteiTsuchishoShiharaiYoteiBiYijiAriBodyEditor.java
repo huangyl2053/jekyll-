@@ -307,7 +307,8 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
             RString 開始曜日 = new RString(shiharaiKaishiYMD.getDayOfWeek().getInFullParentheses());
             source.maStYmd = getパターン12(shiharaiKaishiYMD).concat(開始曜日).concat(接続符);
         } else if (!is空白(shiharaiShuryoYMD)) {
-            source.maStYmd = 接続符;
+            RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
+            source.maStYmd = 接続符.concat(getパターン12(shiharaiShuryoYMD)).concat(終了曜日);
         }
         if (!is空白(shiharaiKaishiYMD) && !is空白(shiharaiShuryoYMD)) {
             RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());

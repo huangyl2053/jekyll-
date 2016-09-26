@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class IkenshoKakuninshoHandler {
 
     private final IkenshoKakuninshoDiv div;
-//    private RString 表示対象のデータ区分 = RString.EMPTY;
     private static final RString 帳票分類ID = new RString("DBD100030_ShujiiIkenshoKakuninsho");
     private static final RString 帳票 = new RString("主治医意見書確認書");
     private static final RString あり = new RString("あり");
@@ -60,10 +59,11 @@ public class IkenshoKakuninshoHandler {
     public void onChange対象年(List<IryohiKojoEntityResult> 医療費控除情報リスト) {
         RString 控除対象年 = div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey();
         IryohiKojoEntityResult 表示対象データ = null;
+        RString 表示対象のデータ区分 = RString.EMPTY;
         for (IryohiKojoEntityResult 医療費控除 : 医療費控除情報リスト) {
             if (控除対象年.equals(医療費控除.get控除対象年())) {
                 表示対象データ = 医療費控除;
-//                表示対象のデータ区分 = 医療費控除.getデータ区分();
+                表示対象のデータ区分 = 医療費控除.getデータ区分();
                 break;
             }
         }
@@ -75,6 +75,7 @@ public class IkenshoKakuninshoHandler {
             div.getPanelShosaiEria().getTxtNinteiKikan().setToValue(表示対象データ.get認定有効期間終了年月日().toRDate());
             div.getPanelShosaiEria().getTxtZiritudo().setValue(get日常生活自立度(表示対象データ.get日常生活自立度()));
             div.getPanelShosaiEria().getTxtNyoushikkin().setValue(表示対象データ.is尿失禁の有無() ? あり : なし);
+            div.setHdndatakubun(表示対象のデータ区分);
         }
     }
 

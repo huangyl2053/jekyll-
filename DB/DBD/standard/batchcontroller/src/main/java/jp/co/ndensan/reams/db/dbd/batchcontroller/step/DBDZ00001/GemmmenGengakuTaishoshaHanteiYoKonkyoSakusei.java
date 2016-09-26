@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBDZ00001;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengakutaishoshahanteiyoukonsakusei.TaishoShaHanteiYoukonkyoItokiTempTableEntity;
@@ -44,8 +46,24 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
     private GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter processParamter;
     private IKojin iKojin;
     private ISetai isetai;
+    private static final RString 本人 = HonninKubun.本人.getCode();
+    private static final RString 第1段階 = RiyoshaFutanDankai.第一段階.getコード();
+    private static final RString 第2段階 = RiyoshaFutanDankai.第二段階.getコード();
+    private static final RString 第3段階 = RiyoshaFutanDankai.第三段階.getコード();
+    private static final RString 第4段階 = RiyoshaFutanDankai.第四段階.getコード();
+    private static final RString 課税区分_課税 = KazeiKubun.課税.getコード();
+    private List<TaishouJohoEntity> 被保険者番号list;
+    private List<RString> 課税区分list;
+    private List<Decimal> 金額list;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter youkonkyoItokiTemp;
+
+    @Override
+    protected void initialize() {
+        被保険者番号list = new ArrayList<>();
+        課税区分list = new ArrayList<>();
+        金額list = new ArrayList<>();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -60,97 +78,152 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
 
     @Override
     protected void process(TaishouJohoEntity list) {
-        TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = new TaishoShaHanteiYoukonkyoItokiTempTableEntity();
-        setTaishouJohoEntityValues(list);
-        if (list.get課税区分_住民税減免前().equals(KazeiKubun.課税.getコード())) {
-            tempTable.set世帯課税区分(SetaiKazeiKubun.課税.getコード());
+        if (被保険者番号list.isEmpty()) {
+            被保険者番号list.add(list);
+            課税区分list.add(list.get課税区分_住民税減免前());
+            get合計金額(list);
+        } else if (被保険者番号list.get(0).get被保険者番号().equals(list.get被保険者番号())) {
+            被保険者番号list.add(list);
+            課税区分list.add(list.get課税区分_住民税減免前());
+            get合計金額(list);
         } else {
-            tempTable.set世帯課税区分(SetaiKazeiKubun.非課税.getコード());
+            TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
+            youkonkyoItokiTemp.insert(tempTable);
+            被保険者番号list.clear();
+            課税区分list.clear();
+            金額list.clear();
+            被保険者番号list.add(list);
+            課税区分list.add(list.get課税区分_住民税減免前());
+            get合計金額(list);
         }
-        if (list.get本人区分().equals(HonninKubun.本人.getCode()) && ((list.get識別コード_生活保護受給者() != null
-                && !list.get識別コード_生活保護受給者().isEmpty())
-                || (list.get識別コード_老齢福祉年金受給者() != null && !list.get識別コード_老齢福祉年金受給者().isEmpty()))) {
-            tempTable.set利用者負担段階(RiyoshaFutanDankai.第一段階.getコード());
-        } else if (list.get課税区分_住民税減免前().equals(KazeiKubun.課税.getコード())) {
-            tempTable.set利用者負担段階(RiyoshaFutanDankai.第四段階.getコード());
-        } else if (!list.get本人区分().equals(HonninKubun.本人.getCode()) && ((list.get年金収入額().longValue()
-                + list.get合計所得金額().longValue()) <= processParamter.getNumber().longValue())) {
-            tempTable.set利用者負担段階(RiyoshaFutanDankai.第二段階.getコード());
-        } else {
-            tempTable.set利用者負担段階(RiyoshaFutanDankai.第三段階.getコード());
-        }
+    }
 
-        isetai = get世帯(list.get識別コード(), list.get基準日());
-        iKojin = get世帯(list.get識別コード(), list.get基準日()).get世帯員(list.get識別コード());
-        if (isetai.get配偶者(isetai.get世帯員(list.get識別コード())) == null) {
-            tempTable.set配偶者課税区分(RString.EMPTY);
-            tempTable.set配偶者識別コード(ShikibetsuCode.EMPTY);
-        } else {
-            set識別コードValue(tempTable, list);
-        }
-        setis高齢者複数世帯(tempTable, list.get識別コード(), list.get基準日());
-
-        if (list.get本人区分().equals(HonninKubun.本人.getCode())) {
-            set減免減額対象者判定用根拠作成_本人(list, tempTable);
-        } else {
-            set減免減額対象者判定用根拠作成_非私(tempTable);
-        }
-
-        if (0 < list.get課税所得額().longValue()) {
-            tempTable.setIs所得税課税世帯(Boolean.TRUE);
-        } else {
-            tempTable.setIs所得税課税世帯(Boolean.FALSE);
-        }
-        tempTable.set課税所得額(list.get課税所得額());
+    @Override
+    protected void afterExecute() {
+        TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
         youkonkyoItokiTemp.insert(tempTable);
     }
 
-    private void set識別コードValue(TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable, TaishouJohoEntity list) {
-        tempTable.set配偶者識別コード(iKojin.get識別コード());
-        if (iKojin.get識別コード().equals(list.get識別コード())) {
-            tempTable.set配偶者課税区分(list.get課税区分_住民税減免前());
-        } else {
-            tempTable.set配偶者課税区分(RString.EMPTY);
+    private TaishoShaHanteiYoukonkyoItokiTempTableEntity editorTaishouJohoEntity(List<TaishouJohoEntity> recordList,
+            List<RString> kuBunList, List<Decimal> kingakuList) {
+        TaishoShaHanteiYoukonkyoItokiTempTableEntity entity = new TaishoShaHanteiYoukonkyoItokiTempTableEntity();
+        entity.set世帯課税区分(SetaiKazeiKubun.非課税.getコード());
+        entity.setIs所得税課税世帯(Boolean.FALSE);
+        for (TaishouJohoEntity item : recordList) {
+            if (本人.equals(item.get本人区分()) && ((item.get識別コード_生活保護受給者() != null
+                    && !item.get識別コード_生活保護受給者().isEmpty())
+                    || (item.get識別コード_老齢福祉年金受給者() != null && !item.get識別コード_老齢福祉年金受給者().isEmpty()))) {
+                entity.set利用者負担段階(第1段階);
+
+            } else {
+                if (kuBunList != null && set利用者負担段階四(kuBunList)) {
+                    entity.set利用者負担段階(第4段階);
+                } else {
+                    if (kingakuList != null && set利用者負担段階二(kingakuList)) {
+                        entity.set利用者負担段階(第2段階);
+                    } else {
+                        entity.set利用者負担段階(第3段階);
+                    }
+                }
+            }
+            if (本人.equals(item.get本人区分())) {
+                setTaishouJohoEntity(item, entity);
+            }
+            if (課税区分_課税.equals(item.get課税区分_住民税減免前())) {
+                entity.set世帯課税区分(SetaiKazeiKubun.課税.getコード());
+            }
+            if (item.get課税所得額() != null && 0 < item.get課税所得額().longValue()) {
+                entity.setIs所得税課税者(Boolean.TRUE);
+            }
+        }
+        return entity;
+    }
+
+    private void get合計金額(TaishouJohoEntity list) {
+        if (!本人.equals(list.get本人区分())) {
+            金額list.add(list.get合計所得金額().add(list.get年金収入額()).add(list.get非課税年金勘案額()));
         }
     }
 
-    private void set減免減額対象者判定用根拠作成_本人(TaishouJohoEntity list, TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable) {
-        tempTable.set被保険者番号(list.get被保険者番号());
-        tempTable.set本人識別コード(list.get識別コード());
-        tempTable.set本人課税区分(list.get課税区分_住民税減免前());
-        if (list.get識別コード_生活保護受給者() != null && !list.get識別コード_生活保護受給者().isEmpty()) {
-            tempTable.setIs生活保護受給者(Boolean.TRUE);
-        } else {
-            tempTable.setIs生活保護受給者(Boolean.FALSE);
+    private boolean set利用者負担段階四(List<RString> kuBunList) {
+        for (RString item : kuBunList) {
+            if (課税区分_課税.equals(item)) {
+                return true;
+            }
         }
-        if (list.get識別コード_老齢福祉年金受給者() != null && !list.get識別コード_老齢福祉年金受給者().isEmpty()) {
-            tempTable.setIs老齢福祉年金受給者(Boolean.TRUE);
-        } else {
-            tempTable.setIs老齢福祉年金受給者(Boolean.FALSE);
-        }
-        tempTable.set合計所得金額(list.get合計所得金額());
-        tempTable.set年金収入額(list.get年金収入額());
-        tempTable.set非課税年金勘案額(list.get非課税年金勘案額());
-        if (0 < list.get課税所得額().longValue()) {
-            tempTable.setIs所得税課税者(Boolean.TRUE);
-        } else {
-            tempTable.setIs所得税課税者(Boolean.FALSE);
-        }
+        return false;
     }
 
-    private void set減免減額対象者判定用根拠作成_非私(TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable) {
-        tempTable.set被保険者番号(HihokenshaNo.EMPTY);
-        tempTable.set本人識別コード(ShikibetsuCode.EMPTY);
-        tempTable.set本人課税区分(RString.EMPTY);
-        tempTable.setIs生活保護受給者(Boolean.FALSE);
-        tempTable.setIs老齢福祉年金受給者(Boolean.FALSE);
-        tempTable.set合計所得金額(Decimal.ZERO);
-        tempTable.set年金収入額(Decimal.ZERO);
-        tempTable.set非課税年金勘案額(Decimal.ZERO);
-        tempTable.setIs所得税課税者(Boolean.FALSE);
-        tempTable.set配偶者課税区分(RString.EMPTY);
-        tempTable.set配偶者識別コード(ShikibetsuCode.EMPTY);
-        tempTable.setIs高齢者複数世帯(Boolean.FALSE);
+    private boolean set利用者負担段階二(List<Decimal> kingakuList) {
+        for (Decimal item : kingakuList) {
+            if (0 <= processParamter.getNumber().compareTo(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void setTaishouJohoEntity(TaishouJohoEntity item, TaishoShaHanteiYoukonkyoItokiTempTableEntity entity) {
+        isetai = get世帯(item.get識別コード(), item.get基準日());
+        iKojin = get世帯(item.get識別コード(), item.get基準日()).get世帯員(item.get識別コード());
+        if (item.get被保険者番号() != null) {
+            entity.set被保険者番号(item.get被保険者番号());
+        } else {
+            entity.set被保険者番号(HihokenshaNo.EMPTY);
+        }
+        if (item.get識別コード() != null) {
+            entity.set本人識別コード(item.get識別コード());
+        } else {
+            entity.set本人識別コード(ShikibetsuCode.EMPTY);
+        }
+
+        if (item.get課税区分_住民税減免前() != null) {
+            entity.set本人課税区分(item.get課税区分_住民税減免前());
+        } else {
+            entity.set本人課税区分(RString.EMPTY);
+        }
+
+        if (item.get識別コード_生活保護受給者() != null && !item.get識別コード_生活保護受給者().isEmpty()) {
+            entity.setIs生活保護受給者(Boolean.TRUE);
+        } else {
+            entity.setIs生活保護受給者(Boolean.FALSE);
+        }
+        if (item.get識別コード_老齢福祉年金受給者() != null && !item.get識別コード_老齢福祉年金受給者().isEmpty()) {
+            entity.setIs老齢福祉年金受給者(Boolean.TRUE);
+        } else {
+            entity.setIs老齢福祉年金受給者(Boolean.FALSE);
+        }
+
+        if (entity.get合計所得金額() == null) {
+            entity.set合計所得金額(Decimal.ZERO);
+        } else {
+            entity.set合計所得金額(item.get合計所得金額());
+        }
+
+        if (entity.get年金収入額() == null) {
+            entity.set年金収入額(Decimal.ZERO);
+        } else {
+            entity.set年金収入額(item.get年金収入額());
+        }
+
+        if (entity.get非課税年金勘案額() == null) {
+            entity.set非課税年金勘案額(Decimal.ZERO);
+        } else {
+            entity.set非課税年金勘案額(item.get非課税年金勘案額());
+        }
+
+        if (isetai.get配偶者(isetai.get世帯員(item.get識別コード())) == null) {
+            entity.set配偶者課税区分(RString.EMPTY);
+            entity.set配偶者識別コード(ShikibetsuCode.EMPTY);
+        } else {
+            set識別コードValue(entity, item);
+        }
+        setis高齢者複数世帯(entity, item.get識別コード(), item.get基準日());
+        if (entity.get課税所得額() == null) {
+            entity.set課税所得額(Decimal.ZERO);
+        } else {
+            entity.set課税所得額(item.get課税所得額());
+        }
     }
 
     private ISetai get世帯(ShikibetsuCode shikibetsuCode, FlexibleDate date) {
@@ -167,40 +240,12 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         }
     }
 
-    private void setTaishouJohoEntityValues(TaishouJohoEntity entity) {
-        if (entity.get課税区分_住民税減免前() == null || entity.get課税区分_住民税減免前().isEmpty()) {
-            entity.set課税区分_住民税減免前(RString.EMPTY);
+    private void set識別コードValue(TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable, TaishouJohoEntity list) {
+        tempTable.set配偶者識別コード(iKojin.get識別コード());
+        if (iKojin.get識別コード().equals(list.get識別コード())) {
+            tempTable.set配偶者課税区分(list.get課税区分_住民税減免前());
+        } else {
+            tempTable.set配偶者課税区分(RString.EMPTY);
         }
-        if (entity.get合計所得金額() == null) {
-            entity.set合計所得金額(Decimal.ZERO);
-        }
-        if (entity.get基準日() == null || entity.get基準日().isEmpty()) {
-            entity.set基準日(FlexibleDate.EMPTY);
-        }
-        if (entity.get年金収入額() == null) {
-            entity.set年金収入額(Decimal.ZERO);
-        }
-        if (entity.get本人区分() == null || entity.get本人区分().isEmpty()) {
-            entity.set本人区分(RString.EMPTY);
-        }
-        if (entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty()) {
-            entity.set被保険者番号(HihokenshaNo.EMPTY);
-        }
-        if (entity.get課税所得額() == null) {
-            entity.set課税所得額(Decimal.ZERO);
-        }
-        if (entity.get識別コード() == null || entity.get識別コード().isEmpty()) {
-            entity.set識別コード(ShikibetsuCode.EMPTY);
-        }
-        if (entity.get識別コード_生活保護受給者() == null || entity.get識別コード_生活保護受給者().isEmpty()) {
-            entity.set識別コード_生活保護受給者(ShikibetsuCode.EMPTY);
-        }
-        if (entity.get識別コード_老齢福祉年金受給者() == null || entity.get識別コード_老齢福祉年金受給者().isEmpty()) {
-            entity.set識別コード_老齢福祉年金受給者(ShikibetsuCode.EMPTY);
-        }
-        if (entity.get非課税年金勘案額() == null) {
-            entity.set非課税年金勘案額(Decimal.ZERO);
-        }
-
     }
 }

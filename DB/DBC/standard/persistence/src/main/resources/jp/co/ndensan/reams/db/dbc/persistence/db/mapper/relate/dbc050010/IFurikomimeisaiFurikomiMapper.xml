@@ -7,12 +7,12 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IFurikomimeisaiFurikomiMapper">
 
     <resultMap id="resultMap_ShokanJuryoininKeiyakusha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetaiResultEntity" autoMapping="true">
-        <id property="償還払支給判定結果Entity.hiHokenshaNo" column="dbT3036ShokanHanteiKekka_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="償還払支給判定結果Entity.serviceTeikyoYM" column="dbT3036ShokanHanteiKekka_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="償還払支給判定結果Entity.seiriNo" column="dbT3036ShokanHanteiKekka_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="償還払支給申請Entity.hiHokenshaNo" column="dbT3034ShokanShinsei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="償還払支給申請Entity.serviceTeikyoYM" column="dbT3034ShokanShinsei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="償還払支給申請Entity.seiriNo" column="dbT3034ShokanShinsei_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="償還払支給判定結果Entity.hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="償還払支給判定結果Entity.serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="償還払支給判定結果Entity.seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="償還払支給申請Entity.hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="償還払支給申請Entity.serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="償還払支給申請Entity.seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="償還払支給判定結果Entity"  resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
         <association property="償還払支給申請Entity"  resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
     </resultMap>
@@ -24,39 +24,39 @@
             判定結果.*,
             支給申請.*
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.noDeleted_DbT3036ShokanHanteiKekka" />) AS 判定結果
+            rgdb."DbT3036ShokanHanteiKekka" AS 判定結果
         INNER JOIN
-            (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS 支給申請
+            rgdb."DbT3034ShokanShinsei" AS 支給申請
             ON
-              判定結果."dbT3036ShokanHanteiKekka_hiHokenshaNo" = 支給申請."dbT3034ShokanShinsei_hiHokenshaNo"
-            AND  判定結果."dbT3036ShokanHanteiKekka_serviceTeikyoYM" = 支給申請."dbT3034ShokanShinsei_serviceTeikyoYM"
-            AND  判定結果."dbT3036ShokanHanteiKekka_seiriNo" = 支給申請."dbT3034ShokanShinsei_seiriNo"
+              判定結果."hiHokenshaNo" = 支給申請."hiHokenshaNo"
+            AND  判定結果."serviceTeikyoYM" = 支給申請."serviceTeikyoYM"
+            AND  判定結果."seiriNo" = 支給申請."seiriNo"
         WHERE
-           判定結果."dbT3036ShokanHanteiKekka_shikyuHushikyuKetteiKubun"='1'
+           判定結果."shikyuHushikyuKetteiKubun"='1'
            <if test="口座の場合">
-           AND 支給申請."dbT3034ShokanShinsei_shiharaiHohoKubunCode" IN('2','3')
+           AND 支給申請."shiharaiHohoKubunCode" IN('2','3')
            </if> 
            <if test="窓口の場合">
-           AND 支給申請."dbT3034ShokanShinsei_shiharaiHohoKubunCode"='1'
+           AND 支給申請."shiharaiHohoKubunCode"='1'
            </if> 
            <if test="振込データ作成済を除く">
-           AND 判定結果."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" =''
+           AND 判定結果."furikomiMeisaishoSakuseiYMD" =''
            </if>     
            <if test="振込データ作成済のみ">
-           AND 判定結果."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]>''
+           AND 判定結果."furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]>''
            </if> 
            <if test="全て">
-           AND 判定結果."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" =#{対象作成年月日}
+           AND 判定結果."furikomiMeisaishoSakuseiYMD" =#{対象作成年月日}
            </if>   
            <if test="再処理フラグT">
-           AND 判定結果."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" IN('',#{対象作成年月日})
+           AND 判定結果."furikomiMeisaishoSakuseiYMD" IN('',#{対象作成年月日})
            </if>  
            <if test="開始年月日T">
-           AND #{開始年月日}<![CDATA[<=]]>判定結果."dbT3036ShokanHanteiKekka_ketteiTsuchishoSakuseiYMD"
+           AND #{開始年月日}<![CDATA[<=]]>判定結果."ketteiTsuchishoSakuseiYMD"
            </if> 
            <if test="終了年月日T">
-           AND 判定結果."dbT3036ShokanHanteiKekka_ketteiTsuchishoSakuseiYMD" <![CDATA[<=]]> #{終了年月日}
+           AND 判定結果."ketteiTsuchishoSakuseiYMD" <![CDATA[<=]]> #{終了年月日}
            </if> 
-           AND 判定結果."dbT3036ShokanHanteiKekka_isDeleted" = FALSE
+           AND 判定結果."isDeleted" = FALSE
     </select>
 </mapper>

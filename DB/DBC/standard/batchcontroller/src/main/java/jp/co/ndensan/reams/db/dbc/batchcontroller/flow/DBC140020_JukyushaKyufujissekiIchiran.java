@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- * 受給者給付実績一覧表 のパラメータ
+ * 受給者給付実績一覧表 のバッチフロークラスです。
  *
  * @reamsid_L DBC-3070-030 dangjingjing
  */

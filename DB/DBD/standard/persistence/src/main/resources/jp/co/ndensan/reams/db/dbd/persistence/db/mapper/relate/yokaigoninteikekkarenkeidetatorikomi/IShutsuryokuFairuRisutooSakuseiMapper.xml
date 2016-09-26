@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1510-020 x_xuliang -->
+<!-- 出力ファイルリストを作成 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.IShutsuryokuFairuRisutooSakuseiMapper">
+    <select id="get出力ファイルリスト"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.OutFile" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        A.shikibetsukodo AS 識別コード,
+        A.hokenshabango AS 保険者番号,
+        A.hihokenjabango AS 被保険者番号,
+        A.ninteishinseibi AS 認定申請日,
+        A.edaban AS 枝番,
+        A.shinseikubunhorei AS 申請区分_法令_コード,
+        A.shinseikubunshinseiji AS 申請区分_申請時_コード,
+        A.torisakubunkodo AS 取下区分コード,
+        A.hihokenjakubun AS 被保険者区分コード,
+        A.shinseidaikokubun AS 申請代行区分コード,
+        A.seinengappi AS 生年月日,
+        A.nenrei AS 年齢,
+        A.seibetsukodo AS 性別コード,
+        A.hihokenjakanashimei AS 被保険者ｶﾅ氏名,
+        A.hihokenjakanjishimei AS 被保険者漢字氏名,
+        A.yubenbango AS 郵便番号,
+        A.jusho AS 住所,
+        A.tenwabango AS 電話番号,
+        A.byoinshisetsutonomeisho AS 病院施設等の名称,
+        A.byoinshisetsutonoshozaichi AS 病院施設等の所在地,
+        A.zenkainoninteishinsakaikekka AS 前回の認定審査会結果,
+        A.zenkainoninteiyukokigenkaishi AS 前回の認定有効期間_開始,
+        A.zenkainoninteiyukokigenshuryo AS 前回の認定有効期間_終了,
+        A.shujiiiryokikanbango AS 主治医医療機関番号,
+        A.shujiibango AS 主治医番号,
+        A.lkenshoiraibi AS 意見書依頼日,
+        A.lkenshonyushubi AS 意見書入手日,
+        A.lkensho_tankikioku AS 意見書_短期記憶,
+        A.lkensho_ninchinoryoku AS 意見書_認知能力,
+        A.lkensho_dentatsunoryoku AS 意見書_伝達能力,
+        A.lkensho_shokujikoi AS 意見書_食事行為,
+        A.lkensho_ninshishokoreishajiritsudo AS 意見書_認知症高齢者の日常生活自立度,
+        A.chosairaibi AS 調査依頼日,
+        A.chosajisshibi AS 調査実施日,
+        A.shiteikyotakukaigoshienjigyoshatobango AS 指定居宅介護支援事業者等番号,
+        A.ltakukubun AS 委託区分,
+        A.ninteichosainbango AS 認定調査員番号,
+        A.ninteichosainshikakukodo AS 認定調査員資格コード,
+        A.lchijihanteibi AS 一次判定日,
+        A.lchijihanteikekka AS 一次判定結果,
+        A.lchijihanteikekka_ninshishokasan AS 一次判定結果_認知症加算,
+        A.ninteishinsakaishiryosakuseibi AS 認定審査会資料作成日,
+        A.ninteishinsakaiyoteibi AS 認定審査会予定日,
+        A.gogitaibango AS 合議体番号,
+        A.shinsakaishiryobango AS 審査会資料番号,
+        A.nijihanteibi AS 二次判定日,
+        A.nijihanteikekka AS 二次判定結果,
+        A.ninteiyukokigen_kaishi AS 認定有効期間_開始,
+        A.ninteiyukokigen_shuryo AS 認定有効期間_終了,
+        A.tokuteishippeikodo AS 特定疾病コード,
+        A.yokaigo1nobaainojotaizo AS 要介護1の場合の状態像,
+        A.genzainosabisukubunkodo AS 現在のサービス区分コード,
+        A.genzainojokyo AS 現在の状況
+        FROM "FairudetaIchijiTeburuTemp" AS A
+    </select>
+</mapper>

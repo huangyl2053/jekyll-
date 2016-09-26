@@ -6,14 +6,12 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDivSpec;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -32,29 +30,33 @@ public class KoshinTaishoValidationHandler {
      */
     public ValidationMessageControlPairs 更新管理完了対象者一覧データの存在チェック(
             ValidationMessageControlPairs pairs, KoshinTaishoDiv div) {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(KoshinTaishoDivSpec.更新管理完了対象者一覧データの存在チェック)
-                .thenAdd(NoInputMessages.存在チェック).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.存在チェック, div).build().check(messages));
+
+        if (div.getCcdKoshinTaisho().getDataSource() == null || div.getCcdKoshinTaisho().getDataSource().isEmpty()) {
+            pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし)));
+        }
+
+        if (div.getCcdKoshinTaisho().getCheckbox() == null || div.getCcdKoshinTaisho().getCheckbox().isEmpty()) {
+            pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象行を選択)));
+        }
         return pairs;
     }
 
-    /**
-     * 更新管理完了対象者一覧データの行選択チェックを行います。
-     *
-     * @param pairs バリデーションコントロール
-     * @param div KoshinTaishoDiv
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs 更新管理完了対象者一覧データの行選択チェック(
-            ValidationMessageControlPairs pairs, KoshinTaishoDiv div) {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(KoshinTaishoDivSpec.更新管理完了対象者一覧データの行選択チェック)
-                .thenAdd(NoInputMessages.行選択チェック).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.行選択チェック, div).build().check(messages));
-        return pairs;
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            if (replacements.length == 0) {
+                this.message = message.getMessage();
+            } else {
+                this.message = message.getMessage().replace(replacements);
+            }
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 
     /**
@@ -66,28 +68,12 @@ public class KoshinTaishoValidationHandler {
      */
     public ValidationMessageControlPairs 更新管理完了対象者一覧選択行の完了処理事前チェック(
             ValidationMessageControlPairs pairs, KoshinTaishoDiv div) {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(KoshinTaishoDivSpec.更新管理完了対象者一覧選択行の完了処理事前チェック)
-                .thenAdd(NoInputMessages.完了処理事前チェック).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.完了処理事前チェック, div).build().check(messages));
+        for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
+            if (row.getKoshinTsuchiYMD().getValue() == null
+                    || row.getKoshinTsuchiYMD().getValue().toString().isEmpty()) {
+                pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.更新不可_汎用, "通知年月日が未設定")));
+            }
+        }
         return pairs;
-    }
-
-    private static enum NoInputMessages implements IValidationMessage {
-
-        存在チェック(UrErrorMessages.該当データなし.getMessage()),
-        行選択チェック(UrErrorMessages.対象行を選択.getMessage()),
-        完了処理事前チェック(UrErrorMessages.更新不可_汎用.getMessage(), "通知年月日が未設定");
-        private final Message message;
-
-        private NoInputMessages(Message message, String... replacements) {
-            this.message = message.replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }

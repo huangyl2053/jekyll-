@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710020.HanyoListJukyushaDaicho2Process;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710020.DBD710020_HanyoListJukyushaDaicho2Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -32,7 +32,7 @@ public class DBD710020_HanyoListJukyushaDaicho2 extends BatchFlowBase<DBD710020_
      */
     @Step(CSV_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        return loopBatch(HanyoRisutoJyukyusyaDaichoProcess.class)
+        return loopBatch(HanyoListJukyushaDaicho2Process.class)
                 .arguments(getParameter().toHanyoRisutoJyukyusyaDaichoProcessParameter())
                 .define();
     }

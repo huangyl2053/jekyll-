@@ -74,7 +74,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
     private static final RString なし = new RString("なし");
     private static final RString 契約申請日 = new RString("【契約申請日】：");
     private static final RString 契約決定日 = new RString("【契約決定日】：");
-    private static final RString 発行済 = new RString("【発行済␣␣】：");
+    private static final RString 発行済 = new RString("【発行済】：");
     private static final RString 発行済を出力する = new RString("発行済を出力する");
     private static final RString 発行済を出力しない = new RString("発行済を出力しない");
     private static final RString TWO = new RString("2");

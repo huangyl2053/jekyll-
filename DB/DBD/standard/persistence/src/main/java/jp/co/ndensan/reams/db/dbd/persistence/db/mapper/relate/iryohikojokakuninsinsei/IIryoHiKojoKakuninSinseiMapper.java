@@ -52,4 +52,12 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * @return 宛名情報
      */
     UaFt200FindShikibetsuTaishoEntity select宛名情報(ShikibetsuTaishoParameter param);
+
+    /**
+     * 医療費控除情報取得
+     *
+     * @param 被保険者番号 RString
+     * @return 単票用医療費控除
+     */
+    List<IryohiKojoEntity> select医療費控除情報(@Param("被保険者番号") RString 被保険者番号);
 }

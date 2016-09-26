@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujigyoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Report;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijinashi.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport;
 import jp.co.ndensan.reams.db.dbc.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KogakuKetteiTsuchiShoSealerReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
@@ -151,8 +151,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
                     = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport(reportEntity, 連番, 設定値, 通知書定型文, ninshoshaSource1);
             report1.writeBy(reportSourceWriter1);
 
-            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report2
-                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(reportEntity, 連番, 設定値, 通知書定型文, ninshoshaSource2);
+            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport report2
+                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity, 連番, 設定値, 通知書定型文, ninshoshaSource2);
             report2.writeBy(reportSourceWriter2);
 
             KogakuKetteiTsuchiShoEntity reportEntity3 = getShoSealerReportEntity(entity);

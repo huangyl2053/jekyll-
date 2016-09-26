@@ -70,7 +70,6 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
                 new EucEntityId("DBU010020"), UzUDE0831EucAccesslogFileType.Csv);
         parameter = getParameter();
         parameter.setCsvFilePath(manager.getEucOutputDirectry());
-        executeStep(CREATE事業報告世帯情報TEMPテーブル);
         if (PrintControlKubun.過去分の印刷.getコード().equals(parameter.getPrintControlKbn())) {
             executeStep(介護事業状況報告月報一般状況_別紙);
             executeStep(介護事業状況報告月報一般状況_様式1);
@@ -81,6 +80,7 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
             }
             executeStep(介護事業状況報告月報一般状況_様式1_5);
         } else if (PrintControlKubun.集計のみ.getコード().equals(parameter.getPrintControlKbn())) {
+            executeStep(CREATE事業報告世帯情報TEMPテーブル);
             executeStep(世帯情報処理);
             executeStep(被保台帳生年月日情報処理);
             executeStep(利用者負担減額管理情報処理);
@@ -95,6 +95,7 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
             executeStep(特定入所者管理情報または標準負担額減免情報の確認リスト);
             executeStep(受給者台帳情報の確認リスト);
         } else if (PrintControlKubun.集計後印刷.getコード().equals(parameter.getPrintControlKbn())) {
+            executeStep(CREATE事業報告世帯情報TEMPテーブル);
             executeStep(世帯情報処理);
             executeStep(被保台帳生年月日情報処理);
             executeStep(利用者負担減額管理情報処理);

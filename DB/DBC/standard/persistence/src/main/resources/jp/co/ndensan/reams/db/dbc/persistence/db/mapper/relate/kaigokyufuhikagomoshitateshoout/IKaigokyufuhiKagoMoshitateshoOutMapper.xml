@@ -195,12 +195,12 @@
              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter"
              resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity" fetchSize="500">
         SELECT 
-         "DbWT1731KagoMoshitate".* , dbWT1001.*
+         "DbWT1731KagoMoshitate".* , "DbWT1001Hihokensha".*
         FROM 
-         "DbWT1001Hihokensha" AS  dbWT1001,
+         "DbWT1001Hihokensha" AS  "DbWT1001Hihokensha",
          "DbWT1731KagoMoshitate" AS "DbWT1731KagoMoshitate"
         WHERE 
-             dbWT1001."exRenban" =  "DbWT1731KagoMoshitate"."renban"
+             "DbWT1001Hihokensha"."exRenban" =  "DbWT1731KagoMoshitate"."renban"
         AND  
              "DbWT1731KagoMoshitate"."sofuJogaiFlag" = FALSE
         ${出力順}

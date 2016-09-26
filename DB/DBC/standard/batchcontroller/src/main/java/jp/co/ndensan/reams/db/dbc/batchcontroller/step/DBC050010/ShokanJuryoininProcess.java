@@ -79,30 +79,24 @@ public class ShokanJuryoininProcess extends BatchProcessBase<ShokanJuryoininEnti
     @Override
     protected void process(ShokanJuryoininEntity entity) {
         FurikomiDetailTempTableEntity tempTable = entity.get振込明細一時Entity();
-        FlexibleDate 振込指定年月日 = new FlexibleDate(parameter.get振込指定年月日().toDateString());
+        FlexibleDate 振込指定年月日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        if (parameter.get振込指定年月日() != null) {
+            振込指定年月日 = new FlexibleDate(parameter.get振込指定年月日().toDateString());
+        }
         KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
         KinyuKikan 金融機関情報 = null;
         DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity = entity.get受領委任契約事業者Entity();
         if (dbt3077Entity != null) {
-            set金融機関情報(dbt3077Entity, 金融機関情報, kinyuKikanManager, 振込指定年月日);
+            KinyuKikanCode kinyuKikanCode = dbt3077Entity.getKinyuKikanCode();
+            if (kinyuKikanCode != null && !kinyuKikanCode.isEmpty()) {
+                金融機関情報 = kinyuKikanManager.getValidKinyuKikanOn(振込指定年月日, kinyuKikanCode.value());
+            }
             setTempTable2(dbt3077Entity, 金融機関情報, tempTable);
         }
         tempTable.setKozaDataFlag(true);
         tempTable.setKozaShikibetsuCode(ShikibetsuCode.EMPTY);
-        if (金融機関情報 != null) {
-            tempTable.setKinyuKikanName(金融機関情報.get金融機関名称());
-            tempTable.setKinyuKikanKanaName(金融機関情報.get金融機関カナ名称());
-        }
         tempTable.setKozaNayoseKey(set口座名寄せキー2(dbt3077Entity, tempTable));
         furikomiDetailTempTable.update(tempTable);
-    }
-
-    private void set金融機関情報(DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity, KinyuKikan 金融機関情報,
-            KinyuKikanManager kinyuKikanManager, FlexibleDate 振込指定年月日) {
-        KinyuKikanCode kinyuKikanCode = dbt3077Entity.getKinyuKikanCode();
-        if (kinyuKikanCode != null && !kinyuKikanCode.isEmpty()) {
-            金融機関情報 = kinyuKikanManager.getValidKinyuKikanOn(振込指定年月日, kinyuKikanCode.value());
-        }
     }
 
     private void setTempTable2(DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity, KinyuKikan 金融機関情報,
@@ -110,18 +104,21 @@ public class ShokanJuryoininProcess extends BatchProcessBase<ShokanJuryoininEnti
 
         tempTable.setKinyuKikanCode(dbt3077Entity.getKinyuKikanCode());
         KinyuKikanShitenCode shitenCode = dbt3077Entity.getShitenCode();
-        if (shitenCode != null && !shitenCode.isEmpty()) {
-            tempTable.setKinyuKikanShitenCode(shitenCode);
-            if (金融機関情報 != null) {
+        RString 口座種別 = dbt3077Entity.getKozaShubetsu();
+        YokinShubetsuPattern 預金種別 = null;
+        if (金融機関情報 != null) {
+            tempTable.setKinyuKikanName(金融機関情報.get金融機関名称());
+            tempTable.setKinyuKikanKanaName(金融機関情報.get金融機関カナ名称());
+            if (shitenCode != null && !shitenCode.isEmpty()) {
+                tempTable.setKinyuKikanShitenCode(shitenCode);
                 set支店(金融機関情報, tempTable, shitenCode);
             }
-        }
-        RString 口座種別 = dbt3077Entity.getKozaShubetsu();
-        if (口座種別 != null && !口座種別.isEmpty() && 金融機関情報 != null) {
-            YokinShubetsuPattern 預金種別 = 金融機関情報.get預金種別(口座種別);
-            if (預金種別 != null) {
-                tempTable.setYokinShubetsuName(預金種別.get預金種別略称());
+            if (口座種別 != null && !口座種別.isEmpty()) {
+                預金種別 = 金融機関情報.get預金種別(口座種別);
             }
+        }
+        if (預金種別 != null) {
+            tempTable.setYokinShubetsuName(預金種別.get預金種別略称());
         }
         tempTable.setYokinShubetsuCode(口座種別);
         tempTable.setKozaNo(dbt3077Entity.getKozaNo());

@@ -39,6 +39,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDetailTempTableEntity> implements IDbAccessable {
 
+    /**
+     * 振込明細一時テーブル名称
+     */
     public static final RString TABLE_NAME;
 
     static {

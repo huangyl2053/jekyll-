@@ -36,6 +36,11 @@ public interface IJigyoHokokuGeppoIppanMapper {
     void createTempJigyoHokokuHihokenshaTokeiMotoData();
 
     /**
+     * 事業報告認定統計元データテーブルをCREATEします。
+     */
+    void createTempJigyoHokokuNinteiTokeiMotoData();
+
+    /**
      * 事業状況報告世帯情報をtemp事業報告被保険者統計元データテーブルに登録します。
      *
      * @param paramter SyotaiJohoSyoriMybatisParameter
