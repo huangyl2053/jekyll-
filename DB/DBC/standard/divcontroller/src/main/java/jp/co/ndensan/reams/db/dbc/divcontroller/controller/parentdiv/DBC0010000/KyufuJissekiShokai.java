@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010000
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000TransitionEventName;
@@ -76,7 +78,6 @@ public class KyufuJissekiShokai {
     private static final int INT_SJYUG = 35;
     private static final int INT_SJYUR = 36;
     private static final int INT_NJYUNG = 75;
-    private static final RString RS_ZERO = new RString(0);
     private static final RString KEY = new RString("key0");
     private static final RString サービス提供月_開始 = new RString("04");
     private static final RString サービス提供月_終了 = new RString("03");
@@ -141,12 +142,16 @@ public class KyufuJissekiShokai {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
-//        KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
-//                get検索データ取得(被保険者番号, サービス提供年月_開始, サービス提供年月_終了);
-//        List<KyufujissekiKihon> 給付基本情報 = 給付実績情報照会情報.getJukyushaData();
+        KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
+                get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了);
+        ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        KyufuJissekiSearchDataBusiness 一覧データ = 給付実績情報照会情報.getSearchData();
         getHandler(div).onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
-                サービス提供年月_開始, サービス提供年月_終了);
-//        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
+                サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
+        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
     }
 
@@ -929,8 +934,7 @@ public class KyufuJissekiShokai {
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSento(KyufuJissekiShokaiDiv div) {
         FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
         FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
-        div.setHiddenZenBanGo(RS_ZERO);
-        getHandler(div).onClick_btnSento(サービス提供年月_開始, サービス提供年月_終了);
+        getHandler(div).onClick_btnSento(サービス提供年月_開始, サービス提供年月_終了, get一覧データ());
         return ResponseData.of(div).respond();
     }
 
@@ -941,7 +945,7 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnMae(KyufuJissekiShokaiDiv div) {
-        getHandler(div).onClick_btnMae();
+        getHandler(div).onClick_btnMae(get一覧データ());
         return ResponseData.of(div).respond();
     }
 
@@ -952,7 +956,7 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnTsugi(KyufuJissekiShokaiDiv div) {
-        getHandler(div).onClick_btnTsugi();
+        getHandler(div).onClick_btnTsugi(get一覧データ());
         return ResponseData.of(div).respond();
     }
 
@@ -965,10 +969,7 @@ public class KyufuJissekiShokai {
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSaigo(KyufuJissekiShokaiDiv div) {
         FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
         FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
-        int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
-        div.setHiddenZenBanGo(new RString(列 - INT_SJYUR + INT_ICHI));
-        div.setHiddenSaiGoBango(new RString(列 - INT_ICHI));
-        getHandler(div).onClick_btnSaigo(サービス提供年月_開始, サービス提供年月_終了);
+        getHandler(div).onClick_btnSaigo(サービス提供年月_開始, サービス提供年月_終了, get一覧データ());
         return ResponseData.of(div).respond();
     }
 
@@ -977,8 +978,6 @@ public class KyufuJissekiShokai {
                 getColumns().get(列 * INT_NI + INT_ICHI).getGroupName();
         ViewStateHolder.put(ViewStateKeys.サービス提供年月,
                 new FlexibleYearMonth(new RDate(サービス提供年月.toString()).getYearMonth().toDateString()));
-//        ViewStateHolder.put(ViewStateKeys.整理番号, RString.class);
-//        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
     }
 
     private KyufuJissekiShokaiHandler getHandler(KyufuJissekiShokaiDiv div) {
@@ -1055,5 +1054,11 @@ public class KyufuJissekiShokai {
 
     private ResponseData<KyufuJissekiShokaiDiv> response_GokeiJyutakuKayisyu(KyufuJissekiShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.住宅改修費).respond();
+    }
+
+    private KyufuJissekiSearchDataBusiness get一覧データ() {
+        KyufuJissekiPrmBusiness 給付実績情報照会情報
+                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        return 給付実績情報照会情報.getSearchData();
     }
 }
