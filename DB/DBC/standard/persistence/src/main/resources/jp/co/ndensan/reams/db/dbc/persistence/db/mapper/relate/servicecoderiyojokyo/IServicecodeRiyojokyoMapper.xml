@@ -445,7 +445,7 @@
         FROM 
         "DbWT3470chohyouShutsuryokuyou" AS "T1"
         INNER JOIN
-        "DbWT3470ToukeihyoMeisai" AS "T2"
+        "DbWT3470ToukeihyoMeisaichukan" AS "T2"
         ON "T1"."serviceShuruiCode" = "T2"."serviceShuruiCode"
         AND "T1"."sortYouKomokuCode" <![CDATA[<=]]> "T2"."serviceKomokuCode"
         GROUP BY
@@ -462,7 +462,7 @@
         FROM 
         "DbWT3470chohyouShutsuryokuyou" AS "T01"
         INNER JOIN
-        "DbWT3470ToukeihyoMeisai" AS "T02"
+        "DbWT3470ToukeihyoMeisaichukan" AS "T02"
         ON "T01"."serviceShuruiCode" = "T02"."serviceShuruiCode"
         AND "T01"."sortYouKomokuCode" <![CDATA[<=]]> "T02"."serviceKomokuCode"
         GROUP BY
@@ -658,7 +658,7 @@
     </resultMap>
     
     <resultMap id="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.ChohyouShutsuryokuyouTempEntity" autoMapping="true">
-        <result property="サービス名称" column="DbT7119ServiceCode_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス名称" column="serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="帳票出力" resultMap="resultMap_chohyouShutsuryokuyouEntity"/>
     </resultMap>
     

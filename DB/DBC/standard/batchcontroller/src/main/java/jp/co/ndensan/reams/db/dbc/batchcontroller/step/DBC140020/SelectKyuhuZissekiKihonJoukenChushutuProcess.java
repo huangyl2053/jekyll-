@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 受給者給付実績一覧表　の給付実績基本 のパラメータ
+ * 受給者給付実績一覧表　の給付実績基本 Processクラスです。
  *
  * @reamsid_L DBC-3070-030 dangjingjing
  */

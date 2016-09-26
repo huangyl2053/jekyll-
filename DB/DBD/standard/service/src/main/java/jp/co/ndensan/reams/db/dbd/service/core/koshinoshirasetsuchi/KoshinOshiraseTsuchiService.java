@@ -294,20 +294,20 @@ public class KoshinOshiraseTsuchiService {
         headerEntity.set市町村コード(koshinOshiraseEn.getDbT7051KoseiShichosonMaster().getShichosonCode().getColumnValue());
         headerEntity.set市町村名称(koshinOshiraseEn.getDbT7051KoseiShichosonMaster().getShichosonMeisho());
         Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
-        if (出力順Map.get(NUM_0) != null) {
-            headerEntity.set並び順1(出力順Map.get(NUM_0).get項目名());
-        }
         if (出力順Map.get(NUM_1) != null) {
-            headerEntity.set並び順2(出力順Map.get(NUM_1).get項目名());
+            headerEntity.set並び順1(出力順Map.get(NUM_1).get項目名());
         }
         if (出力順Map.get(NUM_2) != null) {
-            headerEntity.set並び順3(出力順Map.get(NUM_2).get項目名());
+            headerEntity.set並び順2(出力順Map.get(NUM_2).get項目名());
         }
         if (出力順Map.get(NUM_3) != null) {
-            headerEntity.set並び順4(出力順Map.get(NUM_3).get項目名());
+            headerEntity.set並び順3(出力順Map.get(NUM_3).get項目名());
         }
         if (出力順Map.get(NUM_4) != null) {
             headerEntity.set並び順4(出力順Map.get(NUM_4).get項目名());
+        }
+        if (出力順Map.get(NUM_5) != null) {
+            headerEntity.set並び順5(出力順Map.get(NUM_5).get項目名());
         }
         RTime time = RDate.getNowTime();
         RString hour = new RString(time.toString()).substring(NUM_0, NUM_2);

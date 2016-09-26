@@ -28,6 +28,22 @@ public class IchijihanteiSumidataIferaBunisess {
     private final RString 被保険者区分コード = new RString("被保険者区分コード");
     private final RString 申請代行区分コード = new RString("申請代行区分コード");
     private final RString 生年月日 = new RString("生年月日");
+    private final RString 性別コード = new RString("性別コード");
+    private final RString 前回の認定審査会結果 = new RString("前回の認定審査会結果");
+    private final RString 主治医医療機関番号 = new RString("主治医医療機関番号");
+    private final RString 意見書依頼日 = new RString("意見書依頼日");
+    private final RString 意見書入手日 = new RString("意見書入手日");
+    private final RString 意見書短期記憶 = new RString("意見書「短期記憶」");
+    private final RString 意見書認知能力 = new RString("意見書「認知能力」");
+    private final RString 意見書伝達能力 = new RString("意見書「伝達能力」");
+    private final RString 意見書食事行為 = new RString("意見書「食事行為」");
+    private final RString 意見書認知症高齢者の日常生活自立度 = new RString("意見書「認知症高齢者の日常生活自立度」");
+    private final RString 調査依頼日 = new RString("調査依頼日");
+    private final RString 調査実施日 = new RString("調査実施日");
+    private final RString 指定居宅介護支援事業者等番号 = new RString("指定居宅介護支援事業者等番号");
+    private final RString 一次判定日 = new RString("一次判定日");
+    private final RString 一次判定結果 = new RString("一次判定結果");
+    private final RString 一次判定結果認知症加算 = new RString("一次判定結果（認知症加算）");
 
     /**
      * エラーデータ処理。
@@ -92,70 +108,70 @@ public class IchijihanteiSumidataIferaBunisess {
 
     private void setエラーデータ09B1(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity, RStringBuilder builder) {
         if (RString.isNullOrEmpty(entity.get性別コード())) {
-            builder.append(new RString("性別コード"));
+            builder.append(性別コード);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get前回要介護状態区分コード())) {
-            builder.append(new RString("前回の認定審査会結果"));
+            builder.append(前回の認定審査会結果);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get主治医医療機関コード())) {
-            builder.append(new RString("主治医医療機関番号"));
+            builder.append(主治医医療機関番号);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get主治医意見書作成依頼年月日())) {
-            builder.append(new RString("意見書依頼日"));
+            builder.append(意見書依頼日);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get主治医意見書受領年月日())) {
-            builder.append(new RString("意見書入手日"));
+            builder.append(意見書入手日);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get短期記憶15())) {
-            builder.append(new RString("意見書「短期記憶」"));
+            builder.append(意見書短期記憶);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get日常の意思決定を行うための認知能力())) {
-            builder.append(new RString("意見書「認知能力」"));
+            builder.append(意見書認知能力);
             builder.append(データ);
         }
     }
 
     private void set一次判定エラーデータ(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity, RStringBuilder builder) {
         if (RString.isNullOrEmpty(entity.get自分の意思の伝達能力())) {
-            builder.append(new RString("意見書「伝達能力」"));
+            builder.append(意見書伝達能力);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get食事行為())) {
-            builder.append(new RString("意見書「食事行為」"));
+            builder.append(意見書食事行為);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get意見書認知症高齢者自立度())) {
-            builder.append(new RString("意見書「認知症高齢者の日常生活自立度」"));
+            builder.append(意見書認知症高齢者の日常生活自立度);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get調査依頼日())) {
-            builder.append(new RString("調査依頼日"));
+            builder.append(調査依頼日);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get実施年月日())) {
-            builder.append(new RString("調査実施日"));
+            builder.append(調査実施日);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get事業者番号())) {
-            builder.append(new RString("指定居宅介護支援事業者等番号"));
+            builder.append(指定居宅介護支援事業者等番号);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get一次判定日())) {
-            builder.append(new RString("一次判定日"));
+            builder.append(一次判定日);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get一次判定結果())) {
-            builder.append(new RString("一次判定結果"));
+            builder.append(一次判定結果);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get一次判定結果認知症加算())) {
-            builder.append(new RString("一次判定結果（認知症加算）"));
+            builder.append(一次判定結果認知症加算);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間())) {

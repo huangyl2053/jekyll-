@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6220001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hoshushiharaijunbipanel.HoshushiharaiJumbiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE622001.DBE622001_ShiharaidataSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6220001.HoshushiharaiJumbiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6220001.HoshushiharaiJumbiPanelHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6220001.HoshushiharaiJumbiPanelValidationHandler;
@@ -35,7 +35,7 @@ public class HoshushiharaiJumbiPanel {
      * @param div 画面情報
      * @return HoshushiharaiJumbiDiv
      */
-    public ResponseData<HoshushiharaiJumbiBatchParameter> onClick_btnHakkou(HoshushiharaiJumbiDiv div) {
+    public ResponseData<DBE622001_ShiharaidataSakuseiParameter> onClick_btnHakkou(HoshushiharaiJumbiDiv div) {
         return ResponseData.of(getHandler(div).onClick_btnHakkou()).respond();
     }
 

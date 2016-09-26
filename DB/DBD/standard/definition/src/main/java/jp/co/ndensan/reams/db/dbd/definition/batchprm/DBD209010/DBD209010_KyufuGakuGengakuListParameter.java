@@ -30,7 +30,7 @@ public class DBD209010_KyufuGakuGengakuListParameter extends BatchParameterBase 
     private static final String TAISHOKUBUN = "taishokubun";
     private static final String TSUCHISHOMIHAKKOSHACHUSHUTSU = "tsuchishomihakkoshachushutsu";
     private static final String GENGAKUTEKIYOCHUSHACHUSHUTSU = "gengakutekiyochushachushutsu";
-    private static final String GENGAKUTEKIYOCHUSHACHUSHUTSUKIJUNBI = "gengakutekiyochushachushutsukijunbi";
+    private static final String CHUSHUTSUKIJUNBI = "chushutsukijunbi";
     private static final String GENGAKUSHURYOBICHUSHUTSU = "gengakushuryobichushutsu";
     private static final String GENGAKUSHURYOBIHANIFROM = "gengakushuryobihanifrom";
     private static final String GENGAKUSHURYOBIHANITO = "gengakushuryobihanito";
@@ -46,7 +46,7 @@ public class DBD209010_KyufuGakuGengakuListParameter extends BatchParameterBase 
     private boolean 通知書未発行者抽出;
     @BatchParameter(key = GENGAKUTEKIYOCHUSHACHUSHUTSU, name = "減額適用中者抽出")
     private boolean 減額適用中者抽出;
-    @BatchParameter(key = GENGAKUTEKIYOCHUSHACHUSHUTSUKIJUNBI, name = "減額適用中者抽出基準日")
+    @BatchParameter(key = CHUSHUTSUKIJUNBI, name = "減額適用中者抽出基準日")
     private FlexibleDate 減額適用中者抽出基準日;
     @BatchParameter(key = GENGAKUSHURYOBICHUSHUTSU, name = "減額終了日抽出")
     private boolean 減額終了日抽出;

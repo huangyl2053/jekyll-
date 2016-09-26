@@ -265,14 +265,14 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (null != this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト()
                 && !this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト().isEmpty()) {
             List<SetaiInRisutoEntity> 世帯員リスト = this.訪問介護利用者負担額減額認定者Entity.get世帯員リスト();
-            if (世帯員リスト.size() > ((3 * index) - 3)) {
-                get世帯員Upper(source, 世帯員リスト.get((3 * index) - 3));
+            if (世帯員リスト.size() > ((LISTINDEX_3 * index) - LISTINDEX_3)) {
+                get世帯員Upper(source, 世帯員リスト.get((LISTINDEX_3 * index) - LISTINDEX_3));
             }
-            if (世帯員リスト.size() > ((3 * index) - 2)) {
-                get世帯員Center(source, 世帯員リスト.get((3 * index) - 2));
+            if (世帯員リスト.size() > ((LISTINDEX_3 * index) - 2)) {
+                get世帯員Center(source, 世帯員リスト.get((LISTINDEX_3 * index) - 2));
             }
-            if (世帯員リスト.size() > ((3 * index) - 1)) {
-                get世帯員Lower(source, 世帯員リスト.get((3 * index) - 1));
+            if (世帯員リスト.size() > ((LISTINDEX_3 * index) - 1)) {
+                get世帯員Lower(source, 世帯員リスト.get((LISTINDEX_3 * index) - 1));
             }
         }
     }
