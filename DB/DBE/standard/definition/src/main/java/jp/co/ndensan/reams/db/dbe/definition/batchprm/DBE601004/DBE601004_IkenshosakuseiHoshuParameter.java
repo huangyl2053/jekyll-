@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshohoshushokai;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601004;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshohoshushokaiichiran.IkenshoHoshuShokaiIchiranKey;
@@ -22,7 +22,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class IkenHoshuIchiranBatchParameter extends BatchParameterBase {
+public class DBE601004_IkenshosakuseiHoshuParameter extends BatchParameterBase {
 
     private static final String KEY_SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String KEY_IRAISHO_SAKUSEI_IRAI_TO = "iraishoSakuseiIraiTo";
@@ -47,7 +47,7 @@ public class IkenHoshuIchiranBatchParameter extends BatchParameterBase {
      * @param iraishoSakuseiIraiFrom 作成依頼日期間終了
      * @param keyJoho キー情報Entityリスト
      */
-    public IkenHoshuIchiranBatchParameter(
+    public DBE601004_IkenshosakuseiHoshuParameter(
             RString syohyoSyuturyoku,
             FlexibleDate iraishoSakuseiIraiTo,
             FlexibleDate iraishoSakuseiIraiFrom,
@@ -61,7 +61,7 @@ public class IkenHoshuIchiranBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public IkenHoshuIchiranBatchParameter() {
+    public DBE601004_IkenshosakuseiHoshuParameter() {
     }
 
     /**

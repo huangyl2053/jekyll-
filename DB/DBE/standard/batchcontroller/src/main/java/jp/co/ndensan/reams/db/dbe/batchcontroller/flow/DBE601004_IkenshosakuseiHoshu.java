@@ -1,7 +1,7 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ikenshohoshushokai;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshohoshushokai.IkenHoshuIchiranProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshohoshushokai.IkenHoshuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601004.IkenshosakuseiHoshuProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601004.DBE601004_IkenshosakuseiHoshuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1930-020 chenxiangyu
  */
-public class IkenHoshuIchiranFlow extends BatchFlowBase<IkenHoshuIchiranBatchParameter> {
+public class DBE601004_IkenshosakuseiHoshu extends BatchFlowBase<DBE601004_IkenshosakuseiHoshuParameter> {
 
     private static final String IKEN_HOSHU_ICHIRAN = "ikenHoshuIchiran";
 
@@ -29,7 +29,7 @@ public class IkenHoshuIchiranFlow extends BatchFlowBase<IkenHoshuIchiranBatchPar
      */
     @Step(IKEN_HOSHU_ICHIRAN)
     IBatchFlowCommand ikenHoshuIchiran() {
-        return loopBatch(IkenHoshuIchiranProcess.class)
+        return loopBatch(IkenshosakuseiHoshuProcess.class)
                 .arguments(getParameter().toProcessParamter()).define();
     }
 }

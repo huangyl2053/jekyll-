@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshohoshushokai;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601004;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBE-1930-020 chenxiangyu
  */
-public class IkenHoshuIchiranProcess extends BatchProcessBase<IkenshoHoshuShokaiRelateEntity> {
+public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuShokaiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshohoshushokai.IIkenshoHoshuShokaiRelateMapper.select合計額リスト");
