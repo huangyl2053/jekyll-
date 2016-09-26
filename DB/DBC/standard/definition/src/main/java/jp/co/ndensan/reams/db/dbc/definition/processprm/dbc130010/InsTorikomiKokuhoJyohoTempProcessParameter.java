@@ -31,7 +31,7 @@ public class InsTorikomiKokuhoJyohoTempProcessParameter implements IBatchProcess
      *
      * @param 保険者区分 RString
      * @param 表題 RString
-     * @param 処理対象市町村 List<RString>
+     * @param 市町村識別ID RString
      * @param if種類 RString
      * @param 取込形式 RString
      * @param 処理日時 RString
