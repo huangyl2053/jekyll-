@@ -46,7 +46,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
     // 世帯非課税等
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
     // CSV出力設定
-    private CSVSettings CSV出力設定;
+    private List<CSVSettings> CSV出力設定;
     // 改頁出力順ID
     private Long 改頁出力順ID;
     // 帳票ID
@@ -76,7 +76,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
      */
     public ChohyoShutsuryokuJohoShutokuProcessParameter(TargetList 対象リスト,
             FlexibleDate 基準日, FlexibleYear 所得年度, KyusochishaJukyushaKubun 旧措置区分, SetaiHyoji 世帯表示,
-            JukyushaKubun2 受給者区分, List<HihokenshaKeizaiJokyo> 世帯非課税等, CSVSettings CSV出力設定,
+            JukyushaKubun2 受給者区分, List<HihokenshaKeizaiJokyo> 世帯非課税等, List<CSVSettings> CSV出力設定,
             Long 改頁出力順ID, RString 帳票ID) {
         this.対象リスト = 対象リスト;
         this.基準日 = 基準日;

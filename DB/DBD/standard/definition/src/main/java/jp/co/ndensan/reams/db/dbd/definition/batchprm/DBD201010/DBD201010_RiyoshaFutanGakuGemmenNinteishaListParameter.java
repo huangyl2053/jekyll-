@@ -46,7 +46,7 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
     // 世帯非課税等
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
     // CSV出力設定
-    private CSVSettings CSV出力設定;
+    private List<CSVSettings> CSV出力設定;
     // 改頁出力順ID
     private Long 改頁出力順ID;
     // 帳票ID
