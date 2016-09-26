@@ -24,6 +24,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShoriKekkaKakuninListTempTableEntity extends DbTableEntityBase<ShoriKekkaKakuninListTempTableEntity> implements IDbAccessable {
 
+    /**
+     * 処理結果確認リスト一時テーブル名称
+     */
     public static final RString TABLE_NAME;
 
     static {
