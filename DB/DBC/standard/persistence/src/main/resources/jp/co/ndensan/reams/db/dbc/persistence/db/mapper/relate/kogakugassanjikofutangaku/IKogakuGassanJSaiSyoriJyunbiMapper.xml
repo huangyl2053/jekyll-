@@ -60,21 +60,21 @@
                 "DbWT37H1"."koshinFlag" = true
         ) AS MEISAI
         INNER JOIN 
-            rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070"
+            rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071"
         ON 
-            MEISAI."hokenshaNoIn" = "DbT3070"."hihokenshaNo"
+            MEISAI."hokenshaNoIn" = "DbT3071"."hihokenshaNo"
         AND 
-            MEISAI."taishoNendo" = "DbT3070"."taishoNendo"
+            MEISAI."taishoNendo" = "DbT3071"."taishoNendo"
         AND
-            MEISAI."shoKisaiHokenshaNo" = "DbT3070"."hokenshaNo"
+            MEISAI."shoKisaiHokenshaNo" = "DbT3071"."hokenshaNo"
         AND 
-            MEISAI."shikyuShinseishoSeiriNo" = "DbT3070"."shikyuShinseishoSeiriNo"
+            MEISAI."shikyuShinseishoSeiriNo" = "DbT3071"."shikyuShinseishoSeiriNo"
         AND
-            MEISAI."DbWT37H1_rirekiNo" = "DbT3070"."rirekiNo"
+            MEISAI."DbWT37H1_rirekiNo" = "DbT3071"."rirekiNo"
         AND 
-            MEISAI."taishoM" = "DbT3070"."taishoM"
+            MEISAI."taishoM" = "DbT3071"."taishoM"
         WHERE 
-            MEISAI."jikoFutanGaku" <![CDATA[<>]]> ("DbT3070"."sumi_Gokei_JikoFutanGaku" - "DbT3070"."sumi_Gokei_Under70KogakuShikyuGaku")
+            MEISAI."jikoFutanGaku" <![CDATA[<>]]> ("DbT3071"."sumi_JikoFutanGaku" - "DbT3071"."sumi_under_70KogakuShikyuGaku")
         GROUP BY MEISAI."renban"
     </select>
     
