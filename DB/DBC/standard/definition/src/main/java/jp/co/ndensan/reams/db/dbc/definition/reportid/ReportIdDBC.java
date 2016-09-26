@@ -15,7 +15,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ReportIdDBC {
 
+    /**
+     * DBC701019_HanyoListJigyoKogakuServiceHiJokyo
+     *
+     */
     DBC701019(new ReportId("DBC701019_HanyoListJigyoKogakuServiceHiJokyo"), new RString("")),
+    /**
+     * DBC701003_HanyoListKogakuKaigoServiceHiJokyo
+     *
+     */
     DBC701003(new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo"), new RString("")),
     /**
      * 受給者給付実績台帳作成
