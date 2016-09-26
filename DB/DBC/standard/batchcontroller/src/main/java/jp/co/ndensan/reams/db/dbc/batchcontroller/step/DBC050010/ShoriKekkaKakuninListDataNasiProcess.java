@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiDataSakusei_ErrorKubun;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShoriKekkaKakuninListTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2180-030 x_lilh
  */
-public class ShoriKekkaKakuninListDataNasiProcess extends BatchProcessBase<ShoriKekkaKakuninListTempTableEntity> {
+public class ShoriKekkaKakuninListDataNasiProcess extends BatchProcessBase<FurikomiDetailTempTableEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShoriKekkaKakuninListDataNasiMapper.select振込明細一時情報");
@@ -54,7 +55,7 @@ public class ShoriKekkaKakuninListDataNasiProcess extends BatchProcessBase<Shori
     }
 
     @Override
-    protected void process(ShoriKekkaKakuninListTempTableEntity t) {
+    protected void process(FurikomiDetailTempTableEntity t) {
         count++;
     }
 

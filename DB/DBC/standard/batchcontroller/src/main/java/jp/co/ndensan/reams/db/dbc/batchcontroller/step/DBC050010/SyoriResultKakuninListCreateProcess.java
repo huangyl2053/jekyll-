@@ -57,7 +57,7 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(Path.getTmpDirectoryPath(), new RString("DBU900002_ShoriKekkaKakuninList.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBU900002_ShoriKekkaKakuninList.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .alwaysWriteHeader(ShoriKekkaKakuninListCsvEntity.class)
                 .setEncode(Encode.SJIS)
@@ -79,7 +79,7 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
+        //manager.spool(eucFilePath);
     }
 
     private void edit処理結果確認リスト情報(ShoriKekkaKakuninListCsvEntity eucCsvEntity, ShoriKekkaKakuninListTempTableEntity t, int count) {
