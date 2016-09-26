@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.shokanketteitsuchishoikkatsu;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.KetteiTsuchiIchiranOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShiharaiYoteiBiYijiNashiOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShoHihokenshabunOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShoShiharaiYoteiBiYijiAriOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempInsertProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempShitenUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoSealer2OutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoSealerOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoTempInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.KetteiTsuchiIchiranOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShiharaiYoteiBiYijiNashiOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShoHihokenshabunOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShoShiharaiYoteiBiYijiAriOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempShitenUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoSealer2OutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoSealerOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoTempInsertProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-1000-020 zuotao
  */
-public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<ShoukanBaraiSuuchiShoIkatsuBatchParamter> {
+public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC030010_ShokanShikyuKetteiTsuchishoParameter> {
 
     private static final String TEMP_INSERT = "shokanKetteiTsuchiShoTempInsertProcess";
     private static final String MEISAI_TEMP_INSERT = "shokanKetteiTsuchiShoMeisaiTempInsertProcess";

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;

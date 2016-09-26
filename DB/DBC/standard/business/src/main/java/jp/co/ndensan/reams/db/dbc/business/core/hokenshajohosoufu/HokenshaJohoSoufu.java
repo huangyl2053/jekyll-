@@ -6,12 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.hokenshajohosoufu;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 送付情報Entityクラスです。
  *
  * @reamsid_L DBC-3480-010 dongyabin
  */
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HokenshaJohoSoufu {
 
     private RString 送付情報名称;

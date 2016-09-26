@@ -27,12 +27,14 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -107,8 +109,10 @@ public class OmutsusiyoSyomeishoHandler {
             }
         }
         if (表示対象データ != null) {
-            div.getPanelShosaiEria().getTxtZenkaiHakkouBi().setValue(表示対象データ.get発行年月日().toRDate());
-            div.getPanelShosaiEria().getTxtShinseiBi().setValue(表示対象データ.get申請年月日().toRDate());
+            div.getPanelShosaiEria().getTxtZenkaiHakkouBi()
+                    .setValue(表示対象データ.get発行年月日() != null ? new RDate(表示対象データ.get発行年月日().toString()) : null);
+            div.getPanelShosaiEria().getTxtShinseiBi()
+                    .setValue(表示対象データ.get申請年月日() != null ? new RDate(表示対象データ.get申請年月日().toString()) : null);
         }
     }
 
@@ -117,13 +121,14 @@ public class OmutsusiyoSyomeishoHandler {
      *
      * @param 引き継ぎEntity 引き継ぎEntity
      * @param 医療費控除リスト 医療費控除リスト
+     * @return SourceDataCollection
      */
-    public void publishReport(TaishoshaKey 引き継ぎEntity, List<IryohiKojoEntityResult> 医療費控除リスト) {
+    public SourceDataCollection publishReport(TaishoshaKey 引き継ぎEntity, List<IryohiKojoEntityResult> 医療費控除リスト) {
         ShikibetsuCode 識別コード = 引き継ぎEntity.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance().editomutsusiyoSyomeisho(識別コード, 帳票分類ID);
         OmutsuShoumeishoPrintService printService = new OmutsuShoumeishoPrintService();
-        printService.printSingle(おむつ使用証明書Entity);
+        SourceDataCollection collection = printService.printSingle(おむつ使用証明書Entity);
         AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード,
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号"))
                 .value(被保険者番号).build()));
@@ -142,5 +147,6 @@ public class OmutsusiyoSyomeishoHandler {
         IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
         builder.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
         manager.save医療費控除(builder.build());
+        return collection;
     }
 }
