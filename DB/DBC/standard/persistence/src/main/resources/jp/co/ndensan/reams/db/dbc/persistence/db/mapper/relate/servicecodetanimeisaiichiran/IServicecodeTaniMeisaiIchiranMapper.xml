@@ -141,7 +141,7 @@
                 AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{終了年月}
             </if>
             <if test="2==対象年月">
-                AND T1."shinsaYM"<![CDATA[<=]]>#{開始年月}
+                AND #{開始年月}<![CDATA[<=]]>T1."shinsaYM"
                 OR T1."shinsaYM" IS NULL
             </if>
     </select>
@@ -259,7 +259,7 @@
         '','','0','0','','','','','','','','','','0','','1','1','1','1','0','0', '1','1','1','1', '1','','',
         '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"    
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        WHERE "DbT1001HihokenshaDaicho"."shikibetsuCode" IS NOT NULL
+        WHERE "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NOT NULL
     </select>
     
     <select resultOrdered="true" id="get宛名情報抽出処理"
@@ -274,17 +274,7 @@
                     <when test="市町村コード==null or 市町村コード.toString() == ''.toString()">
                             <choose>
                                     <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
-                                            <if test="地区指定!=null and '町域'.toString()==地区指定.toString()">
-                                                AND "DbWT3470ServiceMeisai"."chikuCode1" IN <foreach  
-                                                collection="選択地区リスト"
-                                                item="item"
-                                                open="("  
-                                                separator=","  
-                                                close=")">  
-                                                #{item}  
-                                                </foreach>
-                                            </if>
-                                            <if test="地区指定!=null and '地区１'.toString()==地区指定.toString()">
+                                            <if test="地区指定!=null and '1'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."choikiCode" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -294,7 +284,17 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="地区指定!=null and '地区２'.toString()==地区指定.toString()">
+                                            <if test="地区指定!=null and '2'.toString()==地区指定.toString()">
+                                                AND "DbWT3470ServiceMeisai"."chikuCode1" IN <foreach  
+                                                collection="選択地区リスト"
+                                                item="item"
+                                                open="("  
+                                                separator=","  
+                                                close=")">  
+                                                #{item}  
+                                                </foreach>
+                                            </if>
+                                            <if test="地区指定!=null and '3'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."chikuCode2" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -304,7 +304,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="地区指定!=null and '地区３'==地区指定.toString()">
+                                            <if test="地区指定!=null and '4'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."chikuCode3" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -314,7 +314,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="地区指定!=null and '行政区'.toString()==地区指定.toString()">
+                                            <if test="地区指定!=null and '5'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."gyoseikuCode" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -325,14 +325,10 @@
                                                 </foreach>
                                             </if>
                                     </when>
-                                    <when test="旧市町村コード.toString()=='000000'.toString()">
-                                    </when>
                                     <otherwise>
                                             AND "DbWT3470ServiceMeisai"."kyuShichosonCode" = #{旧市町村コード}
                                     </otherwise>
                             </choose>
-                    </when>
-                    <when test="市町村コード.toString()=='000000'.toString()">
                     </when>
                     <otherwise>
                             <choose>
@@ -392,8 +388,8 @@
                 WHERE "事業者１"."jigyoshaNo" = "事業者２"."jigyoshaNo"
                 AND "事業者１"."yukoKaishiYMD" <![CDATA[<]]> "事業者２"."yukoKaishiYMD")
              ) AS 事業者
-        ON "DbWT3470ServiceMeisaichukan"."shokisaiHokenshaNo" = "事業者"."jigyoshaNo"
-        WHERE "DbWT3470ServiceMeisaichukan"."shokisaiHokenshaNo" IS NOT NULL
+        ON "DbWT3470ServiceMeisaichukan"."sakujigyoshoNo" = "事業者"."jigyoshaNo"
+        WHERE "DbWT3470ServiceMeisaichukan"."sakujigyoshoNo" IS NOT NULL
     </select>
     
     <select resultOrdered="true" id="get証記載保険者名"
@@ -618,7 +614,7 @@
         <result property="サービス種類コード" column="T3_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="サービス項目コード" column="T3_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
         <result property="後_単位数" column="T3_atoTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="後_回数" column="TT3_atoKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="後_回数" column="T3_atoKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="後_サービス単位数" column="T3_atoServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="再審査回数" column="T3_saishinsaKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="過誤回数" column="T3_kagoKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
