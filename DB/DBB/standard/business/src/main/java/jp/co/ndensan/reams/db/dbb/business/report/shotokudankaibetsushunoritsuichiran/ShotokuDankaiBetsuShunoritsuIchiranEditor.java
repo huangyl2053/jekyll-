@@ -32,6 +32,7 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
     private static final RString 秒 = new RString("秒");
     private static final RString FULLMONTH = new RString("00");
     private static final RString 作成 = new RString("作成");
+    private static final RString ONE = new RString("0");
     private static final int INT_0 = 0;
     private static final RString 記号 = new RString("*");
     private static final RString TEXT_過年度 = new RString("*過年度*");
@@ -53,7 +54,9 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
         source.printTimeStamp = getSakuseiYmdhm().concat(RString.HALF_SPACE).concat(作成);
         source.hokenshaNo = パラメータ.get被保険者番号();
         source.hokenshaName = パラメータ.get被保険者名();
-        source.shichosonCode = パラメータ.get市町村コード().value();
+        if (パラメータ.get市町村コード() != null) {
+            source.shichosonCode = パラメータ.get市町村コード().value();
+        }
         source.shichosonName = パラメータ.get市町村名();
         source.list_1 = パラメータ.get年度();
         source.hdn_list_1 = パラメータ.getHdn年度();
@@ -118,6 +121,9 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
     }
 
     private RString get金額Formatter(Decimal 金額) {
+        if (金額 == null) {
+            return ONE;
+        }
         return DecimalFormatter.toコンマ区切りRString(金額, INT_0);
     }
 }
