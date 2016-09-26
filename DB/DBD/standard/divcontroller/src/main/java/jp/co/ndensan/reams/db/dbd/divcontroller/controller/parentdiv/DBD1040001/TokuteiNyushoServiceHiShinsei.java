@@ -58,9 +58,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class TokuteiNyushoServiceHiShinsei {
 
-    //private final RString 申請メニュー = new RString("DBDMN21005");
+    private final RString 申請メニュー = new RString("DBDMN21005");
     private final RString 承認メニュー = new RString("DBDMN22005");
-    private final RString 申請メニュー = new RString("menu1");
+    //private final RString 申請メニュー = new RString("menu1");
     //private final RString 承認メニュー = new RString("menu1");
     private final RString 保存する = new RString("btnUpdate");
     private final RString 追加 = new RString("追加");
@@ -76,11 +76,11 @@ public class TokuteiNyushoServiceHiShinsei {
      * @return ResponseData<TokuteiNyushoServiceHiShinseiDiv>
      */
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onLoad(TokuteiNyushoServiceHiShinseiDiv div) {
-        //TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         getHandler(div).initialize(資格対象者);
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
@@ -127,11 +127,11 @@ public class TokuteiNyushoServiceHiShinsei {
      * @return 引数のDivを持つResponseData型
      */
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onBeforeOpenDialog_btnDispSetaiJoho(TokuteiNyushoServiceHiShinseiDiv div) {
-        //TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
         if (資格対象者 != null) {
             ShikibetsuCode 識別コード = 資格対象者.get識別コード();
@@ -148,11 +148,11 @@ public class TokuteiNyushoServiceHiShinsei {
      * @return 引数のDivを持つResponseData型
      */
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onBeforeOpenDialog_btnDispGemmenJoho(TokuteiNyushoServiceHiShinseiDiv div) {
-        //TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         if (資格対象者 != null) {
             HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
             if (被保険者番号 != null) {
@@ -169,11 +169,11 @@ public class TokuteiNyushoServiceHiShinsei {
      * @return 引数のDivを持つResponseData型
      */
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onClick_btnAddShinsei(TokuteiNyushoServiceHiShinseiDiv div) {
-        //TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         getHandler(div).set追加するボタン押下(資格対象者);
         return ResponseData.of(div).setState(DBD1040001StateName.詳細);
     }
@@ -196,11 +196,11 @@ public class TokuteiNyushoServiceHiShinsei {
         if (特別地域加算減免ViewState != null) {
             ViewStateHolder.put(ViewStateKeys.特別地域加算減免ViewState, 特別地域加算減免ViewState);
         }
-        //TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         getHandler(div).set申請一覧の修正ボタンをクリック(row, 資格対象者, 特別地域加算減免ViewState);
         return ResponseData.of(div).setState(DBD1040001StateName.詳細);
     }
@@ -291,11 +291,11 @@ public class TokuteiNyushoServiceHiShinsei {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            //TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            TaishoshaKey 資格対象者 = new TaishoshaKey(
-                    new HihokenshaNo(new RString("2190000001")),
-                    new ShikibetsuCode(new RString("000000000000010")),
-                    new SetaiCode(new RString("000000000000100")));
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//            TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                    new HihokenshaNo(new RString("2190000001")),
+//                    new ShikibetsuCode(new RString("000000000000010")),
+//                    new SetaiCode(new RString("000000000000100")));
             getHandler(div).set申請一覧に戻る(資格対象者);
             return ResponseData.of(div).setState(DBD1040001StateName.一覧);
         } else {
@@ -334,11 +334,11 @@ public class TokuteiNyushoServiceHiShinsei {
         TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報, TokubetsuchiikiKasanGemmen.class);
         TokubetsuChiikiKasanGemmenViewState 特別地域加算減免ViewState = ViewStateHolder.get(
                 ViewStateKeys.特別地域加算減免ViewState, TokubetsuChiikiKasanGemmenViewState.class);
-        //TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
@@ -442,11 +442,11 @@ public class TokuteiNyushoServiceHiShinsei {
         TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報, TokubetsuchiikiKasanGemmen.class);
         TokubetsuChiikiKasanGemmenViewState 特別地域加算減免ViewState = ViewStateHolder.get(
                 ViewStateKeys.特別地域加算減免ViewState, TokubetsuChiikiKasanGemmenViewState.class);
-        //TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
@@ -554,12 +554,12 @@ public class TokuteiNyushoServiceHiShinsei {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            //TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            TaishoshaKey 資格対象者 = new TaishoshaKey(
-                    new HihokenshaNo(new RString("2190000001")),
-                    new ShikibetsuCode(new RString("000000000000010")),
-                    new SetaiCode(new RString("000000000000100")));
-            PersonalData personalData = getHandler(div).toPersonalData(資格対象者);
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//            TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                    new HihokenshaNo(new RString("2190000001")),
+//                    new ShikibetsuCode(new RString("000000000000010")),
+//                    new SetaiCode(new RString("000000000000100")));
+            PersonalData personalData = getHandler(div).toPersonalData(taishoshaKey);
             AccessLogger.log(AccessLogType.更新, personalData);
 
             保存処理();
@@ -586,22 +586,22 @@ public class TokuteiNyushoServiceHiShinsei {
     }
 
     private void viewState破棄(TokuteiNyushoServiceHiShinseiDiv div) {
-        //TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請情報ListのViewState, null);
         ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請の情報List, null);
-        getHandler(div).入力情報をクリア(資格対象者);
+        getHandler(div).入力情報をクリア(taishoshaKey);
     }
 
     private void 前排他キーの解除() {
-        //TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("2190000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//                new HihokenshaNo(new RString("2190000001")),
+//                new ShikibetsuCode(new RString("000000000000010")),
+//                new SetaiCode(new RString("000000000000100")));
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("TokuchiGemmen")));

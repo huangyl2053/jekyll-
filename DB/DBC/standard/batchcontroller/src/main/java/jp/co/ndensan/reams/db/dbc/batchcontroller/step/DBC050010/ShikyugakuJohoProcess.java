@@ -157,62 +157,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
             entity.set要介護金額(Decimal.ZERO);
             entity.set要支援件数(Decimal.ZERO);
             entity.set要支援金額(Decimal.ZERO);
-            if (i == NUM0) {
-                entity.set様式名称(様式名称MAP.get(識別番号2131));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM1) {
-                entity.set様式名称(様式名称MAP.get(識別番号2141));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM2) {
-                entity.set様式名称(様式名称MAP.get(識別番号2151));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM3) {
-                entity.set様式名称(様式名称MAP.get(識別番号2161));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM4) {
-                entity.set様式名称(様式名称MAP.get(識別番号2171));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM5) {
-                entity.set様式名称(様式名称MAP.get(識別番号21B1));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM6) {
-                entity.set様式名称(様式名称MAP.get(識別番号2181));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM7) {
-                entity.set様式名称(様式名称MAP.get(識別番号2191));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM8) {
-                entity.set様式名称(様式名称MAP.get(識別番号21A1));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM9) {
-                entity.set様式名称(様式名称MAP.get(識別番号21C1));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM10) {
-                entity.set様式名称(様式名称MAP.get(識別番号21D1));
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM11) {
-                entity.set様式名称(償還計);
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM12) {
-                entity.set様式名称(RString.EMPTY);
-                振込明細一覧表合計.add(entity);
-            }
-            if (i == NUM13) {
-                entity.set様式名称(RString.EMPTY);
-                振込明細一覧表合計.add(entity);
-            }
+            set振込明細様式名称(i, entity);
         }
     }
 
@@ -471,6 +416,65 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         } else {
             entity.setその他件数(entity.getその他件数().add(NUM1));
             entity.setその他金額(entity.getその他金額().add(金額));
+        }
+    }
+
+    private void set振込明細様式名称(int i, GokeiDataEntity entity) {
+        if (i == NUM0) {
+            entity.set様式名称(様式名称MAP.get(識別番号2131));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM1) {
+            entity.set様式名称(様式名称MAP.get(識別番号2141));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM2) {
+            entity.set様式名称(様式名称MAP.get(識別番号2151));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM3) {
+            entity.set様式名称(様式名称MAP.get(識別番号2161));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM4) {
+            entity.set様式名称(様式名称MAP.get(識別番号2171));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM5) {
+            entity.set様式名称(様式名称MAP.get(識別番号21B1));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM6) {
+            entity.set様式名称(様式名称MAP.get(識別番号2181));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM7) {
+            entity.set様式名称(様式名称MAP.get(識別番号2191));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM8) {
+            entity.set様式名称(様式名称MAP.get(識別番号21A1));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM9) {
+            entity.set様式名称(様式名称MAP.get(識別番号21C1));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM10) {
+            entity.set様式名称(様式名称MAP.get(識別番号21D1));
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM11) {
+            entity.set様式名称(償還計);
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM12) {
+            entity.set様式名称(RString.EMPTY);
+            振込明細一覧表合計.add(entity);
+        }
+        if (i == NUM13) {
+            entity.set様式名称(RString.EMPTY);
+            振込明細一覧表合計.add(entity);
         }
     }
 }

@@ -61,7 +61,7 @@ public class KyufuhigenmenjyouhouRegisterManager {
     }
 
     /**
-     * 減免補正情報の取得。
+     * 減免補正情報の取得するです。
      *
      * @param parameter KyufuhigenmenjyouhouregisterParameter
      * @return SearchResult<KyufuhigenmenjyouhouRegisterResult> 減免補正情報
@@ -82,7 +82,7 @@ public class KyufuhigenmenjyouhouRegisterManager {
     }
 
     /**
-     * 減免補正情報の取得。
+     * 減免補正情報の取得するです。
      *
      * @param parameter KyufuhigenmenjyouhouregisterParameter
      * @return SearchResult<KyufuhigenmenjyouhouRegisterResult> 減免補正情報
@@ -104,7 +104,7 @@ public class KyufuhigenmenjyouhouRegisterManager {
     }
 
     /**
-     * 給付実績情報の存在。
+     * 給付実績情報の存在するです。
      *
      * @param parameter GenmenJyouhouParameter
      * @return boolean boolean

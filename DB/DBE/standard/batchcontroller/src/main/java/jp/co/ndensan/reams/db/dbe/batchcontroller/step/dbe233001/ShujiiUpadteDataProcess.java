@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE233001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShujiiUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;

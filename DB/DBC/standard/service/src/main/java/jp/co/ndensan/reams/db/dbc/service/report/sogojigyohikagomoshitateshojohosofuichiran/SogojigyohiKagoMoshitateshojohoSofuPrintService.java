@@ -38,6 +38,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
      * @param 作成日時 RDateTime
      * @param 合計 int
      * @param flag boolean
+     * @param 連番 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -46,13 +47,14 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
             FlexibleYearMonth 処理年月,
             RDateTime 作成日時,
             int 合計,
-            boolean flag) {
+            boolean flag,
+            int 連番) {
         if (送付一覧表データ == null) {
             return new SourceDataCollection();
         }
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 合計, flag, reportManager);
+            print(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 合計, flag, 連番, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -66,6 +68,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
      * @param 作成日時 RDateTime
      * @param 合計 int
      * @param flag boolean
+     * @param 連番 int
      * @param reportManager ReportManager
      */
     public void print(
@@ -75,12 +78,13 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
             RDateTime 作成日時,
             int 合計,
             boolean flag,
+            int 連番,
             ReportManager reportManager) {
         SogojigyohiKagoMoshitateshojohoSofuProperty property = new SogojigyohiKagoMoshitateshojohoSofuProperty();
         try (ReportAssembler<SogojigyohiKagoMoshitateshojohoSofuSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new SogojigyohiKagoMoshitateshojohoSofuReport(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 合計, flag).writeBy(reportSourceWriter);
+            new SogojigyohiKagoMoshitateshojohoSofuReport(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 合計, flag, 連番).writeBy(reportSourceWriter);
         }
     }
 

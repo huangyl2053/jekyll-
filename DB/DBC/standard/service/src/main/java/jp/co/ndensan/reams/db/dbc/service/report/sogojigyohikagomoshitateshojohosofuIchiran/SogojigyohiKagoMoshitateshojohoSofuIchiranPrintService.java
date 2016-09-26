@@ -41,6 +41,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranPrintService {
      * @param 改頁リスト List<RString>
      * @param 処理年月 FlexibleYearMonth
      * @param 件数 int
+     * @param 連番 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -50,13 +51,14 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranPrintService {
             boolean 合計出力flag,
             List<RString> 改頁リスト,
             FlexibleYearMonth 処理年月,
-            int 件数) {
+            int 件数,
+            int 連番) {
         if (帳票出力対象データ == null) {
             return new SourceDataCollection();
         }
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票出力対象データ, 出力順Map, 作成日時, 合計出力flag, 改頁リスト, 処理年月, 件数, reportManager);
+            print(帳票出力対象データ, 出力順Map, 作成日時, 合計出力flag, 改頁リスト, 処理年月, 件数, 連番, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -72,6 +74,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranPrintService {
      * @param 改頁リスト List<RString>
      * @param 処理年月 FlexibleYearMonth
      * @param 件数 int
+     * @param 連番 int
      * @param reportManager ReportManager
      */
     public void print(
@@ -82,13 +85,14 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranPrintService {
             List<RString> 改頁リスト,
             FlexibleYearMonth 処理年月,
             int 件数,
+            int 連番,
             ReportManager reportManager) {
         SogojigyohiKagoMoshitateshojohoSofuIchiranProperty property = new SogojigyohiKagoMoshitateshojohoSofuIchiranProperty();
         try (ReportAssembler<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             new SogojigyohiKagoMoshitateshojohoSofuIchiranReport(
-                    帳票出力対象データ, 出力順Map, 作成日時, 合計出力flag, 改頁リスト, 処理年月, 件数).writeBy(reportSourceWriter);
+                    帳票出力対象データ, 出力順Map, 作成日時, 合計出力flag, 改頁リスト, 処理年月, 件数, 連番).writeBy(reportSourceWriter);
         }
     }
 

@@ -34,6 +34,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
     private final boolean flag;
     private static final RString 合計件数タイトル = new RString("合計件数");
     private static final RString 件 = new RString("件");
+    private final int 連番;
 
     /**
      * コンストラクタです
@@ -41,19 +42,22 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
      * @param 送付一覧表データ SogojigyohiKagoMoshitateshojohoSofuIchiranEntity
      * @param 合計 int
      * @param flag boolean
+     * @param 連番 int
      */
     public SogojigyohiKagoMoshitateshojohoSofuBodyEditor(
             KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 送付一覧表データ,
             int 合計,
-            boolean flag) {
+            boolean flag,
+            int 連番) {
         this.送付一覧表データ = 送付一覧表データ;
         this.合計 = 合計;
         this.flag = flag;
+        this.連番 = 連番;
     }
 
     @Override
     public SogojigyohiKagoMoshitateshojohoSofuSource edit(SogojigyohiKagoMoshitateshojohoSofuSource source) {
-        source.listUpper_1 = new RString(合計);
+        source.listUpper_1 = new RString(連番);
         if (送付一覧表データ.getDbWT1731Entity().getJigyoshaNo() != null) {
             source.listUpper_2 = 送付一覧表データ.getDbWT1731Entity().getJigyoshaNo().value();
         }

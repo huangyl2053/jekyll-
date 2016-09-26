@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.DBZ8100001;
 
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.seigoseichekkurisutosakusei.SeigoseiChekkuBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBZ010010.DBZ010010_SeigoseiCheckListParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ8100001.SeigoseiChekkuRisutoSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -35,8 +35,8 @@ public class SeigoseiChekkuRisutoSakusei {
      * @param div SeigoseiChekkuRisutoSakuseiDiv
      * @return ResponseData<SeigoseiChekkuRisutoSakuseiDiv>
      */
-    public ResponseData<SeigoseiChekkuBatchParameter> onClick_btnJikoou(SeigoseiChekkuRisutoSakuseiDiv div) {
-        SeigoseiChekkuBatchParameter parameter = new SeigoseiChekkuBatchParameter();
+    public ResponseData<DBZ010010_SeigoseiCheckListParameter> onClick_btnJikoou(SeigoseiChekkuRisutoSakuseiDiv div) {
+        DBZ010010_SeigoseiCheckListParameter parameter = new DBZ010010_SeigoseiCheckListParameter();
         parameter.set年齢到達の設定日(new FlexibleDate(div.getTxtShoriKijyunbi().getValue().toDateString()));
         return ResponseData.of(parameter).respond();
     }

@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -33,7 +33,7 @@ public class DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter ext
     private static final String SHISETSUNYUSHOKUBUN = "shisetsunyushokubun";
     private static final String LIYOSHAFUTANGDANKAI = "liyoshafutangdankai";
     private static final String CHICHOUSONMINHIKAZEISEITAI = "chichousonminhikazeiseitai";
-    private static final String CHICHOUSONMINHONNIHIKAZEISEITAI = "chichousonminhonnihikazeiseitai";
+    private static final String CHISEITAI = "chichousonminhonnihikazeiseitai";
     private static final String RAOREIFUKUSHINENKINSHOUGAISHA = "raoreifukushinenkinshougaisha";
     private static final String SEIKATSUHOGOSHOUGAISHA = "seigatsuhogoshougaisha";
     private static final String KIJUNHI = "kijunhi";
@@ -52,7 +52,7 @@ public class DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter ext
     private RString 利用者負担段階;
     @BatchParameter(key = CHICHOUSONMINHIKAZEISEITAI, name = "市町村民税非課税世帯")
     private boolean 市町村民税非課税世帯;
-    @BatchParameter(key = CHICHOUSONMINHONNIHIKAZEISEITAI, name = "市町村民税本人非課税者")
+    @BatchParameter(key = CHISEITAI, name = "市町村民税本人非課税者")
     private boolean 市町村民税本人非課税者;
     @BatchParameter(key = RAOREIFUKUSHINENKINSHOUGAISHA, name = "老齢福祉年金受給者")
     private boolean 老齢福祉年金受給者;

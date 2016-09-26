@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1510-020 x_xuliang -->
+<!-- 保険者コードチェックデータ検索 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.IHokenShaKodochekkuMapper">
+    <select id="get保険者コードチェックデータ検索"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.HokenShaKodochekkuEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT A."shoKisaiHokenshaNo"
+        FROM rgdb."DbT4101NinteiShinseiJoho" AS A
+        WHERE A."hihokenshaNo" = #{被保番号}
+        AND A."ninteiShinseiYMD" = #{認定申請日}
+        AND A."ninteiShinseiShinseijiKubunCode" = #{申請区分_申請時}
+    </select>
+</mapper>

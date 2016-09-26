@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,7 @@ import lombok.Setter;
 public class DbWT3470chohyouShutsuryokuyouTempEntity
         extends DbTableEntityBase<DbWT3470chohyouShutsuryokuyouTempEntity> implements IDbAccessable {
 
+    @PrimaryKey
     @TempTableColumnOrder(1)
     private int renban;
     @TempTableColumnOrder(2)

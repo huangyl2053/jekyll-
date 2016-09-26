@@ -96,7 +96,7 @@ public class KoshinTaishoFinder {
      * @return SharedFileEntryDescriptor
      */
     @Transaction
-    public SharedFileEntryDescriptor get調査データの取得(RString 申請書管理番号) {
+    public SharedFileEntryDescriptor get調査データの取得(List<RString> 申請書管理番号) {
 
         KoshinTaishoMybatisParameter parameter = new KoshinTaishoMybatisParameter(申請書管理番号);
         IKoshinTaishoMapper mapper = mapperProvider.create(IKoshinTaishoMapper.class);
@@ -105,13 +105,15 @@ public class KoshinTaishoFinder {
 
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSV調査ファイル名);
         try (CsvWriter<SelectSyuuShadeTaCsvEntity> csvdeTeWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            if (調査データ情報List != null) {
+                = new CsvWriter.InstanceBuilder(filePath)
+                        .alwaysWriteHeader(SelectSyuuShadeTaCsvEntity.class)
+                        .canAppend(false)
+                        .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
+                        .setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            if (調査データ情報List != null && !調査データ情報List.isEmpty()) {
                 for (SelectSyuuShadeTaEntity entity : 調査データ情報List) {
                     csvdeTeWriter.writeLine(setdetaEntity(entity));
                 }
-                csvdeTeWriter.close();
             }
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSV調査ファイル名));
@@ -162,6 +164,7 @@ public class KoshinTaishoFinder {
      */
     private SelectSyuuShadeTaCsvEntity setdetaEntity(SelectSyuuShadeTaEntity sqlEntity) {
         SelectSyuuShadeTaCsvEntity entity = new SelectSyuuShadeTaCsvEntity();
+        entity.set被保険者番号(sqlEntity.get被保険者番号());
         if (sqlEntity.get厚労省IF識別コード() != null && !sqlEntity.get厚労省IF識別コード().isEmpty()) {
             entity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(sqlEntity.get厚労省IF識別コード()).get名称());
         }

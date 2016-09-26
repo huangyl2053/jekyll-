@@ -124,6 +124,7 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
     private CodeShubetsu コード種別_2;
 
     private int 件数 = 0;
+    private int 連番 = 1;
 
     private BatchReportWriter<KyufuKagoMoshitateshojohoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<KyufuKagoMoshitateshojohoSofuIchiranSource> reportSourceWriter;
@@ -255,17 +256,17 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
             if (コード_173.equals(parameter.getコード())) {
                 KaigokyufuhiKagoMoshitateshoOutReport kaiReport
                         = new KaigokyufuhiKagoMoshitateshoOutReport(this.exEtntity, 出力順Map,
-                                parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数);
+                                parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数, 連番);
                 kaiReport.writeBy(reportSourceWriter);
             } else if (コード_176.equals(parameter.getコード())) {
                 SogojigyohiKagoMoshitateshojohoSofuIchiranReport sogoReport
                         = new SogojigyohiKagoMoshitateshojohoSofuIchiranReport(this.exEtntity, 出力順Map,
-                                parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数);
+                                parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数, 連番);
                 sogoReport.writeBy(sogojigyohiKagoSourceWriter);
             } else if (コード_179.equals(parameter.getコード())) {
                 SogojigyohiKagoMoshitateshojohoSofuReport sogojiReport
                         = new SogojigyohiKagoMoshitateshojohoSofuReport(this.exEtntity, 並び順, parameter.get処理年月(),
-                                parameter.getシステム日付(), 件数, flag);
+                                parameter.getシステム日付(), 件数, flag, 連番);
                 sogojiReport.writeBy(sogojiWriter);
             }
 
@@ -282,6 +283,7 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
                 seikyugakuTsuchishoInCsvWriter.writeLine(output);
             }
             this.exEtntity = entity;
+            連番++;
         }
         this.アクセスログ対象追加(entity);
         件数++;
@@ -294,19 +296,19 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
         if (コード_173.equals(parameter.getコード())) {
             KaigokyufuhiKagoMoshitateshoOutReport kaiReport
                     = new KaigokyufuhiKagoMoshitateshoOutReport(this.exEtntity, 出力順Map,
-                            parameter.getシステム日付(), true, 改頁項目名リスト, parameter.get処理年月(), 件数);
+                            parameter.getシステム日付(), true, 改頁項目名リスト, parameter.get処理年月(), 件数, 連番);
             kaiReport.writeBy(reportSourceWriter);
             batchReportWriter.close();
         } else if (コード_176.equals(parameter.getコード())) {
             SogojigyohiKagoMoshitateshojohoSofuIchiranReport sogoReport
                     = new SogojigyohiKagoMoshitateshojohoSofuIchiranReport(this.exEtntity, 出力順Map,
-                            parameter.getシステム日付(), true, 改頁項目名リスト, parameter.get処理年月(), 件数);
+                            parameter.getシステム日付(), true, 改頁項目名リスト, parameter.get処理年月(), 件数, 連番);
             sogoReport.writeBy(sogojigyohiKagoSourceWriter);
             sogojigyohiKagoReportWriter.close();
         } else if (コード_179.equals(parameter.getコード())) {
             SogojigyohiKagoMoshitateshojohoSofuReport sogojiReport
                     = new SogojigyohiKagoMoshitateshojohoSofuReport(this.exEtntity, 並び順, parameter.get処理年月(),
-                            parameter.getシステム日付(), 件数, true);
+                            parameter.getシステム日付(), 件数, true, 連番);
             sogojiReport.writeBy(sogojiWriter);
             sogojiReportWriter.close();
         }

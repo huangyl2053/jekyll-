@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.Omutsusi
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100030.ShujiiIkenshoKakuninshoProperty;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.definition.core.meishofuyo.MeishoFuyoTypeEnum;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshub
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -45,7 +43,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
@@ -446,8 +443,6 @@ public class IryoHiKojoKakuninSinsei {
      * @return 宛先情報 IAtesaki
      */
     public IAtesaki getAtesaki_Iryohikojyo(ShikibetsuCode 識別コード) {
-        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-
         AtesakiPSMSearchKeyBuilder key = new AtesakiPSMSearchKeyBuilder(
                 AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         key.set識別コード(識別コード);
@@ -569,10 +564,8 @@ public class IryoHiKojoKakuninSinsei {
     }
 
     private MeishoFuyoType get敬称(RString 敬称) {
-        if (敬称 != null) {
-            if (MeishoFuyoTypeEnum.様.getCode().equals(敬称)) {
-                return MeishoFuyoTypeEnum.様.getMeishoFuyoType();
-            }
+        if (MeishoFuyoTypeEnum.様.getCode().equals(敬称)) {
+            return MeishoFuyoTypeEnum.様.getMeishoFuyoType();
         }
         return MeishoFuyoTypeEnum.無し.getMeishoFuyoType();
     }

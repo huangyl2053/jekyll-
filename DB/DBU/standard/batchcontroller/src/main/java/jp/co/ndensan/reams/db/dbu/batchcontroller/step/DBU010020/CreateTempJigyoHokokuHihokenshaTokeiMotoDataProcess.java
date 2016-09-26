@@ -17,6 +17,8 @@ public class CreateTempJigyoHokokuHihokenshaTokeiMotoDataProcess extends SimpleB
 
     @Override
     protected void process() {
-        getMapper(IJigyoHokokuGeppoIppanMapper.class).createTempJigyoHokokuHihokenshaTokeiMotoData();
+        IJigyoHokokuGeppoIppanMapper mapper = getMapper(IJigyoHokokuGeppoIppanMapper.class);
+        mapper.createTempJigyoHokokuHihokenshaTokeiMotoData();
+        mapper.createTempJigyoHokokuNinteiTokeiMotoData();
     }
 }

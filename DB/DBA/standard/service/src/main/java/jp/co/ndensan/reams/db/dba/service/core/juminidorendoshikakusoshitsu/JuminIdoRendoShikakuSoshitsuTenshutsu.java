@@ -239,10 +239,12 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
             到達日_65 = 介護保険法施行日;
         }
         paramter.set到達日_65歳(到達日_65);
+        paramter.set補正後65歳到達日(到達日_65);
         FlexibleDate 転出予定日の翌日 = nullToMin(住民異動情報.getTenshutsuYoteiIdoYMD()).plusDay(1);
         if (転出予定日の翌日.isBefore(介護保険法施行日)) {
             転出予定日の翌日 = 介護保険法施行日;
         }
+        paramter.set補正後転出予定日翌日(転出予定日の翌日);
         paramter.set転出予定日翌日(転出予定日の翌日);
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().nenreiCalc(住民異動情報, paramter);
     }

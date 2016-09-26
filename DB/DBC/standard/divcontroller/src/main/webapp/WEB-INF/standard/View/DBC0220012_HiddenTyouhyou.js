@@ -6,7 +6,7 @@ Uz._LoadInOrder.prototype.requestSequenceCallbackHandler = function(eventName) {
             var $span = $(event.target);
             if ($span.text() === "はい" && $("#hdnFlag_core").val() === "1") {
                 if ($("#chkJukyushaTeiseiRearakuhyoHakkou_1").is(':checked')) {
-                    $("#btnReportPublish").delay(10000).click();
+                    $("#btnReportPublish").click();
                 }
             }
         }

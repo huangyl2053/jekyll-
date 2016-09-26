@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5110001.KoshinShinseishaHaakuListProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD511003.KoshinShinseishaHaakuListProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511003.DBD511003_KoshinMiShinseishaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5110001.KoshinShinseishaHaakuListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

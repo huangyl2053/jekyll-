@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshintaisho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KoshinTaishoMybatisParameter {
 
-    private RString 申請書管理番号;
+    private List<RString> 申請書管理番号;
     private RString 概況調査テキストイメージ区分;
     private RString 特記事項テキストイメージ区分;
     private RString 処理状態区分;
@@ -30,14 +30,11 @@ public class KoshinTaishoMybatisParameter {
     /**
      * @param 申請書管理番号 申請書管理番号
      */
-    public KoshinTaishoMybatisParameter(RString 申請書管理番号) {
+    public KoshinTaishoMybatisParameter(List<RString> 申請書管理番号) {
         this.申請書管理番号 = 申請書管理番号;
-        this.概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        this.特記事項テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        if (ShoriJotaiKubun.通常.getコード() != null) {
-            this.処理状態区分 = ShoriJotaiKubun.通常.getコード();
-        } else {
-            this.処理状態区分 = ShoriJotaiKubun.延期.getコード();
-        }
+        this.概況調査テキストイメージ区分 = DbBusinessConfig.get(
+                ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        this.特記事項テキストイメージ区分 = DbBusinessConfig.get(
+                ConfigNameDBE.特記事項テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 }

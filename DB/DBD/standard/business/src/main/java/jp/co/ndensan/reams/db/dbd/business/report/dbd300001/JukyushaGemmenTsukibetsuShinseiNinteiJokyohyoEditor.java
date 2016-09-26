@@ -28,6 +28,8 @@ public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJuk
     private final Association association;
     private final FlexibleYear 対象年度;
     private final JukyushaGemmenJisshiJokyoEntity データリスト;
+    private final RString 保険者番号;
+    private final RString 保険者名;
 
     /**
      * インスタンスを生成します。
@@ -35,12 +37,16 @@ public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJuk
      * @param association Association
      * @param 対象年度 FlexibleDate
      * @param データリスト JukyushaGemmenJisshiJokyoEntity
+     * @param 保険者番号 RString
+     * @param 保険者名 RString
      */
     public JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor(Association association, FlexibleYear 対象年度,
-            JukyushaGemmenJisshiJokyoEntity データリスト) {
+            JukyushaGemmenJisshiJokyoEntity データリスト, RString 保険者番号, RString 保険者名) {
         this.association = association;
         this.対象年度 = 対象年度;
         this.データリスト = データリスト;
+        this.保険者番号 = 保険者番号;
+        this.保険者名 = 保険者名;
     }
 
     @Override
@@ -51,19 +57,20 @@ public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJuk
     }
 
     private void setHeader(JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReportSource source) {
-        source.shichosonName = this.association.get市町村名();
+        if (null != this.association.get市町村名()) {
+            source.shichosonName = this.association.get市町村名();
+        }
         if (null != this.対象年度) {
             source.nendo = this.対象年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         source.printTimeStamp = get印刷日時();
-        //TODO バッチが実装していない、完成したら、この分はバッチで実装します。
-//        if (全て.equals(this.市町村コード.value()) || this.市町村コード.isEmpty()) {
-//            source.hokenshaNo = this.association.getLasdecCode_().value();
-//            source.hokenshaName = this.association.get市町村名();
-//        } else {
-//            source.hokenshaNo = this.市町村コード.value();
-//            source.hokenshaName = AssociationFinderFactory.createInstance().getAssociation(this.市町村コード).get市町村名();
-//        }
+        if (null != this.保険者番号) {
+            source.hokenshaNo = this.保険者番号;
+        }
+        if (null != this.保険者名) {
+            source.hokenshaName = this.保険者名;
+        }
+
     }
 
     private void set出力内容(JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReportSource source) {
