@@ -280,7 +280,7 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
             dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
         }
         if (row.getTxtShikyuShinseishoNo() != null) {
-            dataResult.set整理番号(row.getTxtShikyuShinseishoNo().substring(十一, 十七));
+            dataResult.set整理番号(row.getTxtSeiriNo());
         }
         if (row.getTxtShinseiDaihyoshaName() != null) {
             dataResult.set申請代表者氏名(new AtenaMeisho(row.getTxtShinseiDaihyoshaName()));

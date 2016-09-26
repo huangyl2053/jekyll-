@@ -522,7 +522,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             }
             return ResponseData.of(div).forwardWithEventName(DBC1100011TransitionEventName.戻る).respond();
         }
-        if (!変更有無判定(div)) {
+        if (!変更有無判定(div) && div.getDgShinseiIchiran().getDataSource() != null) {
+            for (dgShinseiIchiran_Row row : div.getDgShinseiIchiran().getDataSource()) {
+                排他解除(排他情報.concat(row.getTxtHihokenshaNo()));
+            }
             return ResponseData.of(div).forwardWithEventName(DBC1100011TransitionEventName.戻る).respond();
         }
         return ResponseData.of(div).respond();
