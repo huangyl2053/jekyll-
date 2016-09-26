@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosajohohyo32.NinteiChosaJohohyo32Report;
+import jp.co.ndensan.reams.db.dbe.business.report.ninteichosajohohyo52.NinteiChosaJohohyo52Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteiChosaJohohyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosajohohyo.NinteiChosaJohohyo32ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosajohohyo.NinteiChosaJohohyo52ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -28,20 +28,20 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser08;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser11;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser13;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser14;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser20;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser21;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser22;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser23;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser24;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser30;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser31;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser32;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser33;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser34;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
@@ -87,7 +87,7 @@ import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
  *
  * @reamsid_L DBE-0230-030 zhangzhiming
  */
-public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEntity> {
+public class ChkNinteiChosahyo52Process extends BatchProcessBase<YokaigoninteiEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo."
@@ -96,8 +96,8 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
     NinteiChosaJohohyoEntity bodyItem;
     IYokaigoNinteiJohoTeikyoMapper mapper;
     @BatchWriter
-    private BatchReportWriter<NinteiChosaJohohyo32ReportSource> batchWrite32;
-    private ReportSourceWriter<NinteiChosaJohohyo32ReportSource> reportSourceWriter32;
+    private BatchReportWriter<NinteiChosaJohohyo52ReportSource> batchWrite52;
+    private ReportSourceWriter<NinteiChosaJohohyo52ReportSource> reportSourceWriter52;
     private static final RString 判定結果コード09 = new RString("09");
     private static final RString 判定結果コード06 = new RString("06");
     private static final RString 判定結果コード02 = new RString("02");
@@ -199,6 +199,9 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
     private static final int 連番79 = 79;
     private static final int 連番80 = 80;
     private static final int 連番81 = 81;
+    private static final int 連番82 = 82;
+    private static final int 連番83 = 83;
+    private static final int 連番84 = 84;
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
     List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity;
     List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity;
@@ -225,26 +228,25 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
 
     @Override
     protected void createWriter() {
-        batchWrite32 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE091032.getReportId().value()).create();
-        reportSourceWriter32 = new ReportSourceWriter(batchWrite32);
+        batchWrite52 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE091052.getReportId().value()).create();
+        reportSourceWriter52 = new ReportSourceWriter(batchWrite52);
     }
 
     @Override
     protected void process(YokaigoninteiEntity entity) {
         bodyItem = setBodyItem(entity);
-        bodyItem.setサービス区分リスト_32(setサービス状況02(dbt5207Entity, dbt5208Entity));
-        bodyItem.set麻痺拘縮1_リスト_32(set麻痺拘縮1_リスト(dbt5211Entity));
-        bodyItem.set麻痺拘縮2_リスト_32(set麻痺拘縮2_リスト(dbt5211Entity));
-        bodyItem.set移動リスト_32(set移動リスト(dbt5211Entity));
-        bodyItem.set複雑動作リスト_32(set複雑動作リスト(dbt5211Entity));
-        bodyItem.set特別介護リスト_32(set特別介護リスト(dbt5211Entity));
-        bodyItem.set身の回りリスト_32(set身の回りリスト(dbt5211Entity));
-        bodyItem.set意思疎通リスト_32(set意思疎通リスト(dbt5211Entity));
-        bodyItem.set問題行動リスト_32(set問題行動リスト(dbt5211Entity));
-        bodyItem.set特別な医療リスト_32(set特別な医療リスト(dbt5211Entity));
-        bodyItem.set活動参加リスト_32(set活動参加リスト(dbt5211Entity));
-        NinteiChosaJohohyo32Report report = new NinteiChosaJohohyo32Report(bodyItem);
-        report.writeBy(reportSourceWriter32);
+        bodyItem.setサービス区分リスト_52(setサービス状況02(dbt5207Entity, dbt5208Entity));
+        bodyItem.set麻痺拘縮1_リスト_52(set麻痺拘縮1_リスト(dbt5211Entity));
+        bodyItem.set麻痺拘縮2_リスト_52(set麻痺拘縮2_リスト(dbt5211Entity));
+        bodyItem.set移動リスト_52(set移動リスト(dbt5211Entity));
+        bodyItem.set複雑動作リスト_52(set複雑動作リスト(dbt5211Entity));
+        bodyItem.set特別介護リスト_52(set特別介護リスト(dbt5211Entity));
+        bodyItem.set身の回りリスト_52(set身の回りリスト(dbt5211Entity));
+        bodyItem.set意思疎通リスト_52(set意思疎通リスト(dbt5211Entity));
+        bodyItem.set問題行動リスト_52(set問題行動リスト(dbt5211Entity));
+        bodyItem.set特別な医療リスト_52(set特別な医療リスト(dbt5211Entity));
+        NinteiChosaJohohyo52Report report = new NinteiChosaJohohyo52Report(bodyItem);
+        report.writeBy(reportSourceWriter52);
     }
 
     @Override
@@ -252,39 +254,25 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         set出力条件表();
     }
 
-    private List<RString> set活動参加リスト(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity) {
-        List<RString> 活動参加リスト = new ArrayList<>();
-        活動参加リスト.add(get名称24(dbt5211Entity, 連番79));
-        活動参加リスト.add(get名称13(dbt5211Entity, 連番80));
-        活動参加リスト.add(get名称01(dbt5211Entity, 連番81));
-        return 活動参加リスト;
-    }
-
     private List<RString> set特別な医療リスト(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity) {
         List<RString> 特別な医療リスト = new ArrayList<>();
-        特別な医療リスト.add(get名称01(dbt5211Entity, 連番67));
-        特別な医療リスト.add(get名称01(dbt5211Entity, 連番68));
-        特別な医療リスト.add(get名称01(dbt5211Entity, 連番69));
-        特別な医療リスト.add(get名称01(dbt5211Entity, 連番70));
-        特別な医療リスト.add(get名称01(dbt5211Entity, 連番71));
-        特別な医療リスト.add(get名称01(dbt5211Entity, 連番72));
         特別な医療リスト.add(get名称01(dbt5211Entity, 連番73));
         特別な医療リスト.add(get名称01(dbt5211Entity, 連番74));
         特別な医療リスト.add(get名称01(dbt5211Entity, 連番75));
         特別な医療リスト.add(get名称01(dbt5211Entity, 連番76));
         特別な医療リスト.add(get名称01(dbt5211Entity, 連番77));
         特別な医療リスト.add(get名称01(dbt5211Entity, 連番78));
+        特別な医療リスト.add(get名称01(dbt5211Entity, 連番79));
+        特別な医療リスト.add(get名称01(dbt5211Entity, 連番80));
+        特別な医療リスト.add(get名称01(dbt5211Entity, 連番81));
+        特別な医療リスト.add(get名称01(dbt5211Entity, 連番82));
+        特別な医療リスト.add(get名称01(dbt5211Entity, 連番83));
+        特別な医療リスト.add(get名称01(dbt5211Entity, 連番84));
         return 特別な医療リスト;
     }
 
     private List<RString> set問題行動リスト(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity) {
         List<RString> 問題行動リスト = new ArrayList<>();
-        問題行動リスト.add(get名称16(dbt5211Entity, 連番48));
-        問題行動リスト.add(get名称16(dbt5211Entity, 連番49));
-        問題行動リスト.add(get名称16(dbt5211Entity, 連番50));
-        問題行動リスト.add(get名称16(dbt5211Entity, 連番51));
-        問題行動リスト.add(get名称16(dbt5211Entity, 連番52));
-        問題行動リスト.add(get名称16(dbt5211Entity, 連番53));
         問題行動リスト.add(get名称16(dbt5211Entity, 連番54));
         問題行動リスト.add(get名称16(dbt5211Entity, 連番55));
         問題行動リスト.add(get名称16(dbt5211Entity, 連番56));
@@ -298,48 +286,59 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         問題行動リスト.add(get名称16(dbt5211Entity, 連番64));
         問題行動リスト.add(get名称16(dbt5211Entity, 連番65));
         問題行動リスト.add(get名称16(dbt5211Entity, 連番66));
+        問題行動リスト.add(get名称16(dbt5211Entity, 連番67));
+        問題行動リスト.add(get名称16(dbt5211Entity, 連番68));
+        問題行動リスト.add(get名称16(dbt5211Entity, 連番69));
+        問題行動リスト.add(get名称16(dbt5211Entity, 連番70));
+        問題行動リスト.add(get名称16(dbt5211Entity, 連番71));
+        問題行動リスト.add(get名称16(dbt5211Entity, 連番72));
         return 問題行動リスト;
     }
 
     private List<RString> set意思疎通リスト(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity) {
         List<RString> 意思疎通リスト = new ArrayList<>();
-        意思疎通リスト.add(get名称08(dbt5211Entity, 連番38));
-        意思疎通リスト.add(get名称09(dbt5211Entity, 連番39));
-        意思疎通リスト.add(get名称14(dbt5211Entity, 連番40));
-        意思疎通リスト.add(get名称23(dbt5211Entity, 連番41));
-        意思疎通リスト.add(get名称15(dbt5211Entity, 連番42));
-        意思疎通リスト.add(get名称15(dbt5211Entity, 連番43));
-        意思疎通リスト.add(get名称15(dbt5211Entity, 連番44));
-        意思疎通リスト.add(get名称15(dbt5211Entity, 連番45));
-        意思疎通リスト.add(get名称15(dbt5211Entity, 連番46));
-        意思疎通リスト.add(get名称15(dbt5211Entity, 連番47));
+        意思疎通リスト.add(get名称08(dbt5211Entity, 連番44));
+        意思疎通リスト.add(get名称09(dbt5211Entity, 連番45));
+        意思疎通リスト.add(get名称14(dbt5211Entity, 連番46));
+        意思疎通リスト.add(get名称23(dbt5211Entity, 連番47));
+        意思疎通リスト.add(get名称15(dbt5211Entity, 連番48));
+        意思疎通リスト.add(get名称15(dbt5211Entity, 連番49));
+        意思疎通リスト.add(get名称15(dbt5211Entity, 連番50));
+        意思疎通リスト.add(get名称15(dbt5211Entity, 連番51));
+        意思疎通リスト.add(get名称15(dbt5211Entity, 連番52));
+        意思疎通リスト.add(get名称15(dbt5211Entity, 連番53));
         return 意思疎通リスト;
     }
 
     private List<RString> set身の回りリスト(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity) {
         List<RString> 身の回りリスト = new ArrayList<>();
-        身の回りリスト.add(get名称22(dbt5211Entity, 連番28));
-        身の回りリスト.add(get名称22(dbt5211Entity, 連番29));
-        身の回りリスト.add(get名称22(dbt5211Entity, 連番30));
         身の回りリスト.add(get名称22(dbt5211Entity, 連番31));
-        身の回りリスト.add(get名称20(dbt5211Entity, 連番32));
-        身の回りリスト.add(get名称20(dbt5211Entity, 連番33));
+        身の回りリスト.add(get名称22(dbt5211Entity, 連番32));
+        身の回りリスト.add(get名称22(dbt5211Entity, 連番33));
         身の回りリスト.add(get名称22(dbt5211Entity, 連番34));
-        身の回りリスト.add(get名称22(dbt5211Entity, 連番35));
-        身の回りリスト.add(get名称22(dbt5211Entity, 連番36));
-        身の回りリスト.add(get名称17(dbt5211Entity, 連番37));
+        身の回りリスト.add(get名称34(dbt5211Entity, 連番35));
+        身の回りリスト.add(get名称34(dbt5211Entity, 連番36));
+        身の回りリスト.add(get名称34(dbt5211Entity, 連番37));
+        身の回りリスト.add(get名称34(dbt5211Entity, 連番38));
+        身の回りリスト.add(get名称22(dbt5211Entity, 連番39));
+        身の回りリスト.add(get名称22(dbt5211Entity, 連番40));
+        身の回りリスト.add(get名称22(dbt5211Entity, 連番41));
+        身の回りリスト.add(get名称16(dbt5211Entity, 連番42));
+        身の回りリスト.add(get名称16(dbt5211Entity, 連番43));
         return 身の回りリスト;
     }
 
     private List<RString> set特別介護リスト(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity) {
         List<RString> 特別介護リスト = new ArrayList<>();
-        特別介護リスト.add(get名称01(dbt5211Entity, 連番21));
         特別介護リスト.add(get名称01(dbt5211Entity, 連番22));
-        特別介護リスト.add(get名称11(dbt5211Entity, 連番23));
-        特別介護リスト.add(get名称20(dbt5211Entity, 連番24));
-        特別介護リスト.add(get名称20(dbt5211Entity, 連番25));
-        特別介護リスト.add(get名称20(dbt5211Entity, 連番26));
-        特別介護リスト.add(get名称20(dbt5211Entity, 連番27));
+        特別介護リスト.add(get名称01(dbt5211Entity, 連番23));
+        特別介護リスト.add(get名称30(dbt5211Entity, 連番24));
+        特別介護リスト.add(get名称31(dbt5211Entity, 連番25));
+        特別介護リスト.add(get名称16(dbt5211Entity, 連番26));
+        特別介護リスト.add(get名称16(dbt5211Entity, 連番27));
+        特別介護リスト.add(get名称32(dbt5211Entity, 連番28));
+        特別介護リスト.add(get名称32(dbt5211Entity, 連番29));
+        特別介護リスト.add(get名称33(dbt5211Entity, 連番30));
         return 特別介護リスト;
     }
 
@@ -348,6 +347,7 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         複雑動作リスト.add(get名称02(dbt5211Entity, 連番18));
         複雑動作リスト.add(get名称04(dbt5211Entity, 連番19));
         複雑動作リスト.add(get名称21(dbt5211Entity, 連番20));
+        複雑動作リスト.add(get名称21(dbt5211Entity, 連番21));
         return 複雑動作リスト;
     }
 
@@ -378,9 +378,9 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         移動リスト.add(get名称02(dbt5211Entity, 連番11));
         移動リスト.add(get名称02(dbt5211Entity, 連番12));
         移動リスト.add(get名称03(dbt5211Entity, 連番13));
-        移動リスト.add(get名称04(dbt5211Entity, 連番14));
-        移動リスト.add(get名称02(dbt5211Entity, 連番15));
-        移動リスト.add(get名称20(dbt5211Entity, 連番16));
+        移動リスト.add(get名称03(dbt5211Entity, 連番14));
+        移動リスト.add(get名称04(dbt5211Entity, 連番15));
+        移動リスト.add(get名称02(dbt5211Entity, 連番16));
         移動リスト.add(get名称20(dbt5211Entity, 連番17));
         return 移動リスト;
     }
@@ -388,8 +388,6 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
     private List<RString> setサービス状況02(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
             List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
         List<RString> サービス区分リスト = new ArrayList<>();
-        サービス区分リスト.add(RString.isNullOrEmpty(bodyItem.getサービス区分コード()) ? RString.EMPTY
-                : ServiceKubunCode.toValue(bodyItem.getサービス区分コード()).get名称());
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 0)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番1)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番2)));
@@ -397,22 +395,17 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番4)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番5)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番6)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番10)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番7)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番8)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番15)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番9)));
+        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番10)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番11)));
+        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番12)));
         if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
             サービス区分リスト.add(new RString("1"));
         } else {
             サービス区分リスト.add(new RString("0"));
         }
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番12)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番13)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番14)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番16)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番17)));
         return サービス区分リスト;
     }
 
@@ -606,22 +599,42 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 
-    private RString get名称24(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
+    private RString get名称34(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size()) {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser24.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser34.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
         }
         return RString.EMPTY;
     }
 
-    private RString get名称17(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
+    private RString get名称32(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size()) {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser17.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser32.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get名称31(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser31.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get名称30(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser30.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
         }
         return RString.EMPTY;
     }
@@ -656,16 +669,6 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         return RString.EMPTY;
     }
 
-    private RString get名称13(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
-        if (連番 < dbt5211Entity.size()) {
-            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-                return RString.EMPTY;
-            }
-            return ChosaAnser13.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
-        }
-        return RString.EMPTY;
-    }
-
     private RString get名称23(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size()) {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
@@ -676,12 +679,12 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         return RString.EMPTY;
     }
 
-    private RString get名称11(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
+    private RString get名称33(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size()) {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser11.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser33.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
         }
         return RString.EMPTY;
     }
@@ -805,12 +808,12 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ
                 = new ReportOutputJokenhyoItem(
-                        ReportIdDBE.DBE091032.getReportId().value(),
+                        ReportIdDBE.DBE091052.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
                         new RString(JobContextHolder.getJobId()),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE091032.getReportId().value()),
-                        new RString(String.valueOf(reportSourceWriter32.pageCount().value())),
+                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE091052.getReportId().value()),
+                        new RString(String.valueOf(reportSourceWriter52.pageCount().value())),
                         CSV出力有無,
                         CSVファイル名,
                         出力条件);

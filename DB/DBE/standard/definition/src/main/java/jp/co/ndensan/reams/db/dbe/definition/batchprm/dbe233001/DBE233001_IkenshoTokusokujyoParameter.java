@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class Dbe233001FlowParameter extends BatchParameterBase {
+public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -5216323955138548895L;
 

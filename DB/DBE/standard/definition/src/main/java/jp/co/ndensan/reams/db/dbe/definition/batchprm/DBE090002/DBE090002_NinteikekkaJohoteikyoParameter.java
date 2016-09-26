@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.yokaigoninteijohoteikyo;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090002;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class YokaigoBatchParameter extends BatchParameterBase {
+public class DBE090002_NinteikekkaJohoteikyoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -1572924779386182816L;
     private static final String SHINSEISHOKANRINO = "shinseishoKanriNo";
@@ -54,7 +54,7 @@ public class YokaigoBatchParameter extends BatchParameterBase {
      * コンストラクタです。
      *
      */
-    public YokaigoBatchParameter() {
+    public DBE090002_NinteikekkaJohoteikyoParameter() {
     }
 
     /**
@@ -70,7 +70,7 @@ public class YokaigoBatchParameter extends BatchParameterBase {
      * @param radShujii マスキング(主治医意見書)フラグ
      * @param radSohotaShiryoMasking マスキング(その他資料)フラグ
      */
-    public YokaigoBatchParameter(RString shinseishoKanriNo, RString chkNinteiChosahyo,
+    public DBE090002_NinteikekkaJohoteikyoParameter(RString shinseishoKanriNo, RString chkNinteiChosahyo,
             RString chkTokkiJiko, RString chkShujiiIkensho, RString chkSonotaShiryo,
             RString chkIchijiHanteiKekka, RString radTokkiJikoMasking, RString radShujii, RString radSohotaShiryoMasking) {
         this.shinseishoKanriNo = shinseishoKanriNo;

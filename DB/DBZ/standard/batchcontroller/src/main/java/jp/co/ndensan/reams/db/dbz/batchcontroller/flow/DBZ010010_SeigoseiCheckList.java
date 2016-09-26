@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.batchcontroller.flow.seigoseichekkurisutosakusei;
+package jp.co.ndensan.reams.db.dbz.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.seigoseichekkurisutosakusei.AtenaCheckReportProcess;
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.seigoseichekkurisutosakusei.DaityouCheckReportProcess;
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.seigoseichekkurisutosakusei.TempInsertReportBProcess;
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.seigoseichekkurisutosakusei.TempInsertReportDProcess;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.seigoseichekkurisutosakusei.SeigoseiChekkuBatchParameter;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBZ010010.AtenaCheckReportProcess;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBZ010010.DaityouCheckReportProcess;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBZ010010.TempInsertReportBProcess;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBZ010010.TempInsertReportDProcess;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBZ010010.DBZ010010_SeigoseiCheckListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBA-5800-030 zhangzhiming
  */
-public class SeigoseiChekkuRisutoFlow extends BatchFlowBase<SeigoseiChekkuBatchParameter> {
+public class DBZ010010_SeigoseiCheckList extends BatchFlowBase<DBZ010010_SeigoseiCheckListParameter> {
 
     private static final String TEMP_INSERTB = "tempInsertReportB";
     private static final String TEMP_INSERTD = "tempInsertReportD";

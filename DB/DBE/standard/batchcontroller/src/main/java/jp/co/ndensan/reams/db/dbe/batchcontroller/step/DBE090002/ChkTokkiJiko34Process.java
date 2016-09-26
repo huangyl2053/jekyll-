@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokkiimage.NinteiChosaTokkiImageReport;
+import jp.co.ndensan.reams.db.dbe.business.report.tokkitext2a4.TokkiText2A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokkiimage.NinteiChosaTokkiImageEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiTextEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a4.TokkiText2A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteichosaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokkiimage.NinteiChosaTokkiImageReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext2a4.TokkiText2ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -41,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -54,17 +54,19 @@ import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
  *
  * @reamsid_L DBE-0230-030 zhangzhiming
  */
-public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity> {
+public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo."
             + "IYokaigoNinteiJohoTeikyoMapper.get要介護認定申請者");
     private YokaigoBatchProcessParamter processPrm;
-    NinteiChosaTokkiImageEntity bodyItem;
+    TokkiText2A4Entity bodyItem;
     IYokaigoNinteiJohoTeikyoMapper mapper;
     @BatchWriter
-    private BatchReportWriter<NinteiChosaTokkiImageReportSource> batchWrite;
-    private ReportSourceWriter<NinteiChosaTokkiImageReportSource> reportSourceWriter;
+    private BatchReportWriter<TokkiText2ReportSource> batchWrite;
+    private ReportSourceWriter<TokkiText2ReportSource> reportSourceWriter;
+    private static final RString FILENAME_BAK = new RString("C4101_BAK.png");
+    private static final RString FILENAME = new RString("C4101.png");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
     private static final RString フラグ = new RString("1");
@@ -74,8 +76,10 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString その他資料チェックフラグ = new RString("【その他資料チェックフラグ】");
     private static final RString 一次判定結果チェックフラグ = new RString("【一次判定結果チェックフラグ】");
     private static final RString 総合事業開始区分 = new RString("【総合事業開始区分】");
-    private static final int 連番23 = 23;
-    private static final int 連番24 = 24;
+    private static final RString 全イメージ = new RString("2");
+    private static final RString 短冊 = new RString("3");
+    private static final RString すべて = new RString("1");
+    private static final RString 一つずつ = new RString("3");
     private static final RString 特記事項番号_101 = new RString("101");
     private static final RString 特記事項番号_102 = new RString("102");
     private static final RString 特記事項番号_103 = new RString("103");
@@ -159,27 +163,17 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 特記事項番号_6056 = new RString("6056");
     private static final RString 特記事項番号_701 = new RString("701");
     private static final RString 特記事項番号_702 = new RString("702");
-    private static final RString コマ割り = new RString("1");
     List<NinteichosaRelateEntity> 特記事項リスト;
-    List<NinteichosaRelateEntity> 特記事項区分;
 
     @Override
     protected void initialize() {
         特記事項リスト = new ArrayList<>();
-        特記事項区分 = new ArrayList<>();
     }
 
     @Override
     protected void beforeExecute() {
         mapper = getMapper(IYokaigoNinteiJohoTeikyoMapper.class);
         特記事項リスト = mapper.get特記事項リスト(processPrm.toYokaigoBatchMybitisParamter());
-        for (NinteichosaRelateEntity list : 特記事項リスト) {
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(list.get特記事項区分())
-                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項イメージ, RDate.getNowDate(),
-                                    SubGyomuCode.DBE認定支援))) {
-                特記事項区分.add(list);
-            }
-        }
     }
 
     @Override
@@ -189,18 +183,13 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE091003.getReportId().value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517134.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
     @Override
     protected void process(YokaigoninteiEntity entity) {
-        bodyItem = setBodyItem(entity);
-        bodyItem.set特記事項リスト番号(set特記事項リスト1(特記事項区分));
-        bodyItem.set特記事項リスト連番(set特記事項リスト2(特記事項区分));
-        bodyItem.set特記事項リスト名称(set特記事項リスト3(特記事項区分));
-        bodyItem.set特記事項リストイメージ(set特記事項リスト4(特記事項区分));
-        NinteiChosaTokkiImageReport report = new NinteiChosaTokkiImageReport(bodyItem);
+        TokkiText2A4Report report = new TokkiText2A4Report(setBodyItem(entity));
         report.writeBy(reportSourceWriter);
     }
 
@@ -209,16 +198,102 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         set出力条件表();
     }
 
-    private List<RString> set特記事項リスト4(List<NinteichosaRelateEntity> 特記事項区分) {
-        List<RString> 特記事項リスト4 = new ArrayList<>();
-        for (int i = 0; i < 特記事項区分.size(); i++) {
-            特記事項リスト4.add(共有ファイルを引き出す(getイメージID(特記事項区分, i), get特記事項番号(特記事項区分, i),
-                    get特記事項連番(特記事項区分, i)));
+    private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番, TokkiText2A4Entity ninteiEntity) {
+        RString 名称 = RString.EMPTY;
+        if (連番 < 特記事項区分.size()) {
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+            }
         }
-        return 特記事項リスト4;
+        return 名称;
     }
 
-    private RString get共有ファイル(RString 特記事項番号, RString 特記事項連番) {
+    private TokkiText2A4Entity setBodyItem(YokaigoninteiEntity entity) {
+        TokkiText2A4Entity ninteiEntity = new TokkiText2A4Entity();
+        ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
+        setBodyItem01(特記事項リスト, ninteiEntity);
+        return ninteiEntity;
+    }
+
+    private TokkiText2A4Entity setBodyItem01(List<NinteichosaRelateEntity> entity, TokkiText2A4Entity ninteiEntity) {
+        List<TokkiTextEntity> 特記事項List = new ArrayList<>();
+        List<TokkiTextEntity> 特記事項番号リスト = new ArrayList<>();
+        List<TokkiTextEntity> イメージリスト = new ArrayList<>();
+        for (int i = 0; i < entity.size(); i++) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get(i).get特記事項区分())
+                    && すべて.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項編集, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                TokkiTextEntity tokki = new TokkiTextEntity();
+                tokki.set特記事項(entity.get(i).get特記事項());
+                tokki.set特記事項番号(entity.get(i).get特記事項番号());
+                tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
+                tokki.set特記事項連番(entity.get(i).get特記事項連番());
+                特記事項List.add(tokki);
+            }
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get(i).get特記事項区分())
+                    && 一つずつ.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項編集, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                TokkiTextEntity tokki = new TokkiTextEntity();
+                tokki.set特記事項(entity.get(i).get特記事項());
+                tokki.set特記事項番号(entity.get(i).get特記事項番号());
+                tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
+                tokki.set特記事項連番(entity.get(i).get特記事項連番());
+                特記事項番号リスト.add(tokki);
+            }
+            if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
+                    && 全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項イメージ, RDate.getNowDate(),
+                                    SubGyomuCode.DBE認定支援))) {
+                RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
+                ninteiEntity.set特記事項イメージ(共有ファイルを引き出す(イメージID));
+            }
+            if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
+                    && 短冊.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項イメージ, RDate.getNowDate(),
+                                    SubGyomuCode.DBE認定支援))) {
+                TokkiTextEntity tokki = new TokkiTextEntity();
+                tokki.set特記事項(entity.get(i).get特記事項());
+                tokki.set特記事項番号(entity.get(i).get特記事項番号());
+                tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
+                tokki.set特記事項連番(entity.get(i).get特記事項連番());
+                tokki.set特記事項イメージ(get共有ファイルを引き出す(entity.get(i).getイメージID(),
+                        entity.get(i).get特記事項番号(), entity.get(i).get特記事項連番(), ninteiEntity));
+                イメージリスト.add(tokki);
+            }
+        }
+        ninteiEntity.set特記事項リスト(特記事項List);
+        ninteiEntity.set特記事項イメージリスト(イメージリスト);
+        ninteiEntity.set特記事項番号リスト(特記事項番号リスト);
+        return ninteiEntity;
+    }
+
+    private RString get共有ファイルを引き出す(RDateTime イメージID, RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
+        RString imagePath = RString.EMPTY;
+        RString fileName = get共有ファイル(特記事項番号, 特記事項連番, ninteiEntity);
+        if (イメージID != null && !RString.isNullOrEmpty(fileName)) {
+            if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
+                imagePath = getFilePath(イメージID, fileName);
+            } else {
+                imagePath = getFilePathBak(イメージID, fileName.replace(".png", "_BAK.png"));
+            }
+        }
+        return imagePath;
+    }
+
+    private RString get共有ファイル(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         if (特記事項番号_101.equals(特記事項番号)) {
@@ -288,9 +363,9 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         }
         builder.append(get特記事項2(特記事項番号, 特記事項連番));
         builder.append(get特記事項3(特記事項番号, 特記事項連番));
-        builder.append(get特記事項4(特記事項番号, 特記事項連番));
-        builder.append(get特記事項5(特記事項番号, 特記事項連番));
-        builder.append(get特記事項6(特記事項番号, 特記事項連番));
+        builder.append(get特記事項4(特記事項番号, 特記事項連番, ninteiEntity));
+        builder.append(get特記事項5(特記事項番号, 特記事項連番, ninteiEntity));
+        builder.append(get特記事項6(特記事項番号, 特記事項連番, ninteiEntity));
         return imageName;
     }
 
@@ -461,12 +536,12 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項401(RString 特記事項番号, RString 特記事項連番) {
+    private RString get特記事項401(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(bodyItem.get厚労省IF識別コード())) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_401.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
                 builder.append(特記事項連番);
@@ -506,11 +581,11 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項4(RString 特記事項番号, RString 特記事項連番) {
+    private RString get特記事項4(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
-        builder.append(get特記事項401(特記事項番号, 特記事項連番));
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(bodyItem.get厚労省IF識別コード())) {
+        builder.append(get特記事項401(特記事項番号, 特記事項連番, ninteiEntity));
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_4011.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
                 builder.append(特記事項連番);
@@ -547,7 +622,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
                 imageName = builder.toRString();
             }
         }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(bodyItem.get厚労省IF識別コード())) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_4011.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
                 builder.append(特記事項連番);
@@ -587,13 +662,13 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項5(RString 特記事項番号, RString 特記事項連番) {
+    private RString get特記事項5(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(bodyItem.get厚労省IF識別コード())) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_501.equals(特記事項番号)) {
                 builder.append(new RString("C3057-"));
                 builder.append(特記事項連番);
@@ -625,7 +700,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
                 imageName = builder.toRString();
             }
         }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(bodyItem.get厚労省IF識別コード())) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_5011.equals(特記事項番号)) {
                 builder.append(new RString("C3057-"));
                 builder.append(特記事項連番);
@@ -696,14 +771,14 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString get特記事項6(RString 特記事項番号, RString 特記事項連番) {
+    private RString get特記事項6(RString 特記事項番号, RString 特記事項連番, TokkiText2A4Entity ninteiEntity) {
         RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         builder.append(get特記事項601(特記事項番号, 特記事項連番));
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(bodyItem.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(bodyItem.get厚労省IF識別コード())) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_605.equals(特記事項番号)) {
                 builder.append(new RString("C3067-"));
                 builder.append(特記事項連番);
@@ -735,7 +810,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
                 imageName = builder.toRString();
             }
         }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(bodyItem.get厚労省IF識別コード())) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_6051.equals(特記事項番号)) {
                 builder.append(new RString("C3067-"));
                 builder.append(特記事項連番);
@@ -770,14 +845,13 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString 特記事項番号, RString 特記事項連番) {
+    private RString 共有ファイルを引き出す(RDateTime イメージID) {
         RString imagePath = RString.EMPTY;
-        RString fileName = get共有ファイル(特記事項番号, 特記事項連番);
-        if (イメージID != null && !RString.isNullOrEmpty(fileName)) {
+        if (イメージID != null) {
             if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
-                imagePath = getFilePath(イメージID, fileName);
+                imagePath = getFilePath(イメージID, FILENAME);
             } else {
-                imagePath = getFilePathBak(イメージID, fileName.replace(".png", "_BAK.png"));
+                imagePath = getFilePathBak(イメージID, FILENAME_BAK);
             }
         }
         return imagePath;
@@ -816,130 +890,6 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 
-    private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番) {
-        RString 名称 = RString.EMPTY;
-        if (連番 < 特記事項区分.size()) {
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
-            }
-        }
-        return 名称;
-    }
-
-    private List<RString> set特記事項リスト3(List<NinteichosaRelateEntity> 特記事項区分) {
-        List<RString> 特記事項リスト3 = new ArrayList<>();
-        for (int i = 0; i < 特記事項区分.size(); i++) {
-            特記事項リスト3.add(get特記事項名称(特記事項区分, i));
-        }
-        return 特記事項リスト3;
-    }
-
-    private List<RString> set特記事項リスト2(List<NinteichosaRelateEntity> 特記事項区分) {
-        List<RString> 特記事項リスト2 = new ArrayList<>();
-        for (int i = 0; i < 特記事項区分.size(); i++) {
-            特記事項リスト2.add(get特記事項連番(特記事項区分, i));
-        }
-        return 特記事項リスト2;
-    }
-
-    private RDateTime getイメージID(List<NinteichosaRelateEntity> 特記事項, int 連番) {
-        if (連番 < 特記事項.size()) {
-            if (特記事項.get(連番).getイメージID() == null) {
-                return RDateTime.MIN;
-            }
-            return 特記事項.get(連番).getイメージID();
-        }
-        return RDateTime.MIN;
-    }
-
-    private RString get特記事項連番(List<NinteichosaRelateEntity> 特記事項, int 連番) {
-        if (連番 < 特記事項.size()) {
-            if (RString.isNullOrEmpty(特記事項.get(連番).get特記事項連番())) {
-                return RString.EMPTY;
-            }
-            return 特記事項.get(連番).get特記事項連番();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get特記事項番号(List<NinteichosaRelateEntity> 特記事項, int 連番) {
-        if (連番 < 特記事項.size()) {
-            if (RString.isNullOrEmpty(特記事項.get(連番).get特記事項番号())) {
-                return RString.EMPTY;
-            }
-            return 特記事項.get(連番).get特記事項番号();
-        }
-        return RString.EMPTY;
-    }
-
-    private List<RString> set特記事項リスト1(List<NinteichosaRelateEntity> 特記事項区分) {
-        List<RString> 特記事項リスト1 = new ArrayList<>();
-        for (int i = 0; i < 特記事項区分.size(); i++) {
-            特記事項リスト1.add(get特記事項番号(特記事項区分, i));
-        }
-        return 特記事項リスト1;
-    }
-
-    private NinteiChosaTokkiImageEntity setBodyItem(YokaigoninteiEntity entity) {
-        NinteiChosaTokkiImageEntity ninteiEntity = new NinteiChosaTokkiImageEntity();
-        ninteiEntity.set保険者番号(entity.get保険者番号());
-        ninteiEntity.set被保険者番号(entity.get被保険者番号());
-        ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
-        ninteiEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getEra());
-        ninteiEntity.set申請日_年(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getYear());
-        ninteiEntity.set申請日_月(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getMonth());
-        ninteiEntity.set申請日_日(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getDay());
-        ninteiEntity.set作成日_元号(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getEra());
-        ninteiEntity.set作成日_年(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getYear());
-        ninteiEntity.set作成日_月(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getMonth());
-        ninteiEntity.set作成日_日(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getDay());
-        ninteiEntity.set調査日_元号(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getEra());
-        ninteiEntity.set調査日_年(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getYear());
-        ninteiEntity.set調査日_月(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getMonth());
-        ninteiEntity.set調査日_日(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getDay());
-        ninteiEntity.set審査日_元号(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getEra());
-        ninteiEntity.set審査日_年(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getYear());
-        ninteiEntity.set審査日_月(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getMonth());
-        ninteiEntity.set審査日_日(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getDay());
-        ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
-        int page = (特記事項区分.size() + 連番23) / 連番24;
-        ninteiEntity.set総ページ数(new RString(page));
-        return ninteiEntity;
-    }
-
     private void set出力条件表() {
         List<RString> 出力条件 = new ArrayList();
         RStringBuilder builder = new RStringBuilder();
@@ -969,11 +919,11 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ
                 = new ReportOutputJokenhyoItem(
-                        ReportIdDBE.DBE091003.getReportId().value(),
+                        ReportIdDBE.DBE517134.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
                         new RString(JobContextHolder.getJobId()),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE091003.getReportId().value()),
+                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517134.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         CSV出力有無,
                         CSVファイル名,
