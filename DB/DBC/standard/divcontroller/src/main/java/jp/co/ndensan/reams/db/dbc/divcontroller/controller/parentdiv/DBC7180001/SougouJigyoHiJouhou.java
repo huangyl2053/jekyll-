@@ -78,7 +78,7 @@ public class SougouJigyoHiJouhou {
      * @return ResponseData<SougouJigyoHiJouhouDiv>
      */
     public ResponseData<SougouJigyoHiJouhouDiv> onClick_btnBatchParameterRestore(SougouJigyoHiJouhouDiv div) {
-        getHandler(div).onClick_btnBatchParameterRestore();
+        getHandler(div).onClick_btnBatchParameterRestore(set作成区分(div));
         return ResponseData.of(div).respond();
     }
 
@@ -96,7 +96,7 @@ public class SougouJigyoHiJouhou {
         return new SougouJigyoHiJouhouHandler(div);
     }
 
-    private void set作成区分(SougouJigyoHiJouhouDiv div) {
+    private List<SougouJigyoHiJouhouBusiness> set作成区分(SougouJigyoHiJouhouDiv div) {
         List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = new ArrayList<>();
         if (KEY1.equals(div.getRadSakuseiKubun().getSelectedKey())
                 || KEY2.equals(div.getRadSakuseiKubun().getSelectedKey())
@@ -108,5 +108,6 @@ public class SougouJigyoHiJouhou {
                     creatParameter(ServiceBunrui.ケアマネジメント_経過措置.getコード(), ServiceBunrui.ケアマネジメント.getコード())).records();
         }
         getHandler(div).setサービス種類DDL(div.getRadSakuseiKubun().getSelectedKey(), sougoujigyohijouhous);
+        return sougoujigyohijouhous;
     }
 }

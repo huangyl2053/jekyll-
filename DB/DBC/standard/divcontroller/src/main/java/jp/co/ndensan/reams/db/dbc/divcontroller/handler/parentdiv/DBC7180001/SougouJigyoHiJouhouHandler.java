@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7180001;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.sougoujigyohijouhou.SougouJigyoHiJouhouBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710180.DBC710180_HanyoListSogoJigyoHiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -39,10 +37,8 @@ public class SougouJigyoHiJouhouHandler {
     private static final RString 作成区分_KEY2 = new RString("key2");
     private static final RString 作成区分_KEY3 = new RString("key3");
     private static final RString 全て市町村 = new RString("000000");
-    private static final RString DATADOURCE = new RString("DATADOURCE");
     private static final RString 基本情報 = new RString("基本情報のみ");
     private final SougouJigyoHiJouhouDiv div;
-    private static Map<RString, List<KeyValueDataSource>> map;
 
     /**
      * コンストラクタです。
@@ -88,13 +84,7 @@ public class SougouJigyoHiJouhouHandler {
         source.setKey(new RString("Empty"));
         source.setValue(new RString("すべて"));
         list.add(source);
-        for (SougouJigyoHiJouhouBusiness sougoujigyohijouhou : sougoujigyohijouhous) {
-            KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(sougoujigyohijouhou.getサービス種類コード());
-            dataSource.setValue(sougoujigyohijouhou.getサービス種類名称());
-            list.add(dataSource);
-            div.getDdlSabisuSyurui().setDataSource(list);
-        }
+        setサービスソース(sougoujigyohijouhous, list);
         div.getDdlSabisuSyurui().setSelectedKey(new RString("Empty"));
         div.getDdlSabisuSyurui().setReadOnly(false);
         if (作成区分_KEY0.equals(key)) {
@@ -140,8 +130,6 @@ public class SougouJigyoHiJouhouHandler {
         parameter.set日付スラッシュ付加(is日付スラッシュ編集);
         parameter.set事業者コード(div.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
         parameter.setサービス種類コード(div.getDdlSabisuSyurui().getSelectedKey());
-        map = new HashMap<>();
-        map.put(DATADOURCE, div.getDdlSabisuSyurui().getDataSource());
         RString 市町村コード = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())
                 && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value().equals(全て市町村)) {
@@ -177,8 +165,10 @@ public class SougouJigyoHiJouhouHandler {
 
     /**
      * 画面条件を復元します。
+     *
+     * @param sougoujigyohijouhous List<SougouJigyoHiJouhouBusiness>
      */
-    public void onClick_btnBatchParameterRestore() {
+    public void onClick_btnBatchParameterRestore(List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous) {
         BatchParameterMap restoreBatchParameterMap = div.getJokenFukugenHozonl().getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         List<RString> 編集方法 = new ArrayList<>();
         boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("is項目名付加"));
@@ -212,11 +202,10 @@ public class SougouJigyoHiJouhouHandler {
         div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
                 new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
         RString syuruicode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("サービス種類コード"));
+        List<KeyValueDataSource> list = new ArrayList();
         if (!RString.isNullOrEmpty(syuruicode)) {
-            if (map != null) {
-                div.getDdlSabisuSyurui().setDataSource(map.get(DATADOURCE));
-                div.getDdlSabisuSyurui().setSelectedKey(syuruicode);
-            }
+            div.getDdlSabisuSyurui().setDataSource(setサービスソース(sougoujigyohijouhous, list));
+            div.getDdlSabisuSyurui().setSelectedKey(syuruicode);
         }
         RString jigyoshacode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("事業者コード"));
         div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(jigyoshacode);
@@ -251,5 +240,16 @@ public class SougouJigyoHiJouhouHandler {
             return RString.EMPTY;
         }
         return 日付.toDateString();
+    }
+
+    private List<KeyValueDataSource> setサービスソース(List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous, List<KeyValueDataSource> list) {
+        for (SougouJigyoHiJouhouBusiness sougoujigyohijouhou : sougoujigyohijouhous) {
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(sougoujigyohijouhou.getサービス種類コード());
+            dataSource.setValue(sougoujigyohijouhou.getサービス種類名称());
+            list.add(dataSource);
+            div.getDdlSabisuSyurui().setDataSource(list);
+        }
+        return list;
     }
 }
