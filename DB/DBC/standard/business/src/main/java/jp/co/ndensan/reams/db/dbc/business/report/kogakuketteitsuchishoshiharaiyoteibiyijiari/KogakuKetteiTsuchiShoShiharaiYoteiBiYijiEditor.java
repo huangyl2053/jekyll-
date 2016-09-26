@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBC-2000-040 zhengshenlei
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor {
 
     private final KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報;
     private final RString テスト印刷 = new RString("テスト印刷");
@@ -70,7 +70,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IKogak
      * @param 通知書定型文List List<RString>
      * @param 認証者ソースデータ NinshoshaSource
      */
-    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor(
+    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor(
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報,
             int 連番,
             RString 設定値,

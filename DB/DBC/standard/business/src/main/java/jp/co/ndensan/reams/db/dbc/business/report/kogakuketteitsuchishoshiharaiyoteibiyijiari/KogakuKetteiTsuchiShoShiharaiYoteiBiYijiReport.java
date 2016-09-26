@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBC-2000-040 zhengshenlei
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport extends Report<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> {
 
     private final KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報;
     private final int 連番;
@@ -35,7 +35,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<Ko
      * @param 通知書定型文List List<RString>
      * @param 認証者ソースデータ NinshoshaSource
      */
-    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(
+    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報,
             int 連番,
             RString 設定値,
@@ -50,9 +50,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<Ko
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> writer) {
-        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor editor
-                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor(帳票情報, 連番, 設定値, 通知書定型文List, 認証者ソースデータ);
-        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder builder = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder(editor);
+        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor editor
+                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor(帳票情報, 連番, 設定値, 通知書定型文List, 認証者ソースデータ);
+        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiBuilder builder = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiBuilder(editor);
         writer.writeLine(builder);
     }
 }

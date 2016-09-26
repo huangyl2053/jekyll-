@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBC-2000-040 zhengshenlei
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty extends ReportPropertyBase<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty extends ReportPropertyBase<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> {
 
     /**
      * コンストラクタです。
      */
-    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty() {
+    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty() {
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100008.getReportId());
     }
 }

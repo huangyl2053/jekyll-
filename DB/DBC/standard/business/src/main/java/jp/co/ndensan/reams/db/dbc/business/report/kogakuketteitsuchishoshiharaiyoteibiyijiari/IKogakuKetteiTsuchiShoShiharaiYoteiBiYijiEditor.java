@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBC-2000-040 zhengshenlei
  */
-public interface IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor extends IReportEditor<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> {
+public interface IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor extends IReportEditor<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> {
 
 }

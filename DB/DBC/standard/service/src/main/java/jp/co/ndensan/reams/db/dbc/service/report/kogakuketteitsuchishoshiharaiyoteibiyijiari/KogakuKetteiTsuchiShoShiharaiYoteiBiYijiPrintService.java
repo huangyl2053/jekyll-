@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.service.report.kogakuketteitsuchishoshiharaiyoteibiyijiari;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBC-2000-040 zhengshenlei
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
 
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final ReportId 帳票分類ID = new ReportId("DBC100008_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAri");
@@ -85,7 +85,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService {
             Ninshosha 認証者,
             List<RString> 通知書定型文List,
             ReportManager reportManage) {
-        KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty property = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty();
+        KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty property = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty();
         try (ReportAssembler<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> assembler = createAssembler(property, reportManage)) {
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
             RString 帳票イメージフォルダパス = assembler.getImageFolderPath();
@@ -97,7 +97,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService {
             ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> reportSourceWriter;
             reportSourceWriter = new ReportSourceWriter(assembler);
             RString 設定値 = fetch設定値();
-            new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(
+            new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(
                     帳票情報,
                     連番,
                     設定値,
