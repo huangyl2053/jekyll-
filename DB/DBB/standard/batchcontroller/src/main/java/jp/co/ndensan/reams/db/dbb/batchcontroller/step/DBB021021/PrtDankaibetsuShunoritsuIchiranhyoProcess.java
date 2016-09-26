@@ -125,6 +125,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString TEXT_特別徴収 = new RString("（特別徴収）");
     private static final RString TEXT_普通徴収_完納分 = new RString("（普通徴収　完納分）");
     private static final RString TEXT_特別徴収_完納分 = new RString("（特別徴収　完納分）");
+    private static final RString 該当データ無し = new RString("「該当データ無し」");
 
     private PrtDankaibetsuShunoritsuIchiranhyoParameter parameter;
 
@@ -325,7 +326,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
             clear小計();
             get小計集計(entity);
         }
-        if (is科目コード改頁) {
+        if (is科目コード改頁 || is市町村コード改頁) {
             List<DankaibetsuShunoritsuIchiran> 年度分険料段階別収納率通知書リスト
                     = get年度分険料段階別収納率通知書パラメータ(beforeEntity);
             for (DankaibetsuShunoritsuIchiran data : 年度分険料段階別収納率通知書リスト) {
@@ -348,6 +349,11 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     @Override
     protected void afterExecute() {
         if (lastEntity == null) {
+            DankaibetsuShunoritsuIchiran 険料段階別収納率通知書集計Data = new DankaibetsuShunoritsuIchiran();
+            険料段階別収納率通知書集計Data.set年度(該当データ無し);
+            ShotokuDankaiBetsuShunoritsuIchiranReport 通知書report
+                    = new ShotokuDankaiBetsuShunoritsuIchiranReport(険料段階別収納率通知書集計Data);
+            通知書report.writeBy(reportSourceWriter_一覧表);
             csvListWriter.close();
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
             batchReportWriter_一覧表.close();
