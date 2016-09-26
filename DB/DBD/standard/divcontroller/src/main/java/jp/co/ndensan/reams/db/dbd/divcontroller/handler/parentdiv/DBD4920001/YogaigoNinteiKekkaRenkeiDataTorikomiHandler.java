@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4920001;
 
+import java.io.File;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.DataGridFile_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.yogaigoninteikekkarenkeidatatorikomi.YogaigoNinteiKekkaRenkeiDataTorikomiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -14,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 要介護認定申請連携データ取込のHandlerクラスです。
@@ -27,6 +30,8 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
+    private static final RString なし = new RString("0");
+    private static final RString あり = new RString("1");
 
     /**
      * コンストラクタです。
@@ -52,25 +57,46 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
             }
         }
         RString 連携の設定値 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ連携, 基準日, SubGyomuCode.DBE認定支援);
-        RString 日次進捗Z8NCI242 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
-        RString 日次進捗Z7NCI242 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_旧, 基準日, SubGyomuCode.DBE認定支援);
-        RString 要介護認定Z8NCI242 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
-        RString 要介護認定Z7NCI242 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_旧, 基準日, SubGyomuCode.DBE認定支援);
-//        if (連携の設定値.equals(KEY1)) {
-//            set手動読込初期化状態(日次進捗Z8NCI242, 日次進捗Z7NCI242, 要介護認定Z8NCI242, 要介護認定Z7NCI242);
-//        } else if (連携の設定値.equals(KEY2)) {
-//            set自動読込初期化状態();
-//        }
+        if (連携の設定値.equals(KEY1)) {
+            set手動読込初期化状態();
+        } else if (連携の設定値.equals(KEY2)) {
+            set自動読込初期化状態();
+        }
     }
 
-//    private void set手動読込初期化状態(RString 日次進捗Z8NCI242, RString 日次進捗Z7NCI242, RString 要介護認定Z8NCI242, RString 要介護認定Z7NCI242) {
-//        RString 取込みデータKey = div.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getRadDataSelect().getSelectedKey();
-//        if (取込みデータKey.equals(new RString("key0"))) {
-//            
-//        }
-//    }
+    private void set手動読込初期化状態() {
+        
+    }
 
     private void set自動読込初期化状態() {
-
+//        RString 要介護認定Z8NCI242 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+//        RString 要介護認定Z7NCI242 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_旧, 基準日, SubGyomuCode.DBE認定支援);
+//        RString 取込みデータKey = div.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getRadDataSelect().getSelectedKey();
+//        if (取込みデータKey.equals(new RString("key0"))) {
+//            RString 日次進捗Z8NCI242 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+//            RString 日次進捗Z7NCI242 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_旧, 基準日, SubGyomuCode.DBE認定支援);
+//            div.getDataGridFile().setDataSource()
+//        }
+    }
+    
+    private void getFileCount(RString path, RString ファイル, DataGridFile_Row row) {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(path).append(File.separator).append(ファイル);
+        File file = new File(builder.toString());
+        if (file.exists()) {
+            row.setTotal(あり);
+        } else {
+            row.setTotal(なし);
+        }
+    }
+    
+    private DataGridFile_Row setRowFile(RString path, RString フォーマット, RString 名称, RString ファイル名) {
+        DataGridFile_Row row = new DataGridFile_Row();
+        row.setSelected(Boolean.TRUE);
+        row.setFileFormat(フォーマット);
+        row.setMeisho(名称);
+        row.setFileName(ファイル名);
+        getFileCount(path, ファイル名, row);
+        return row;
     }
 }

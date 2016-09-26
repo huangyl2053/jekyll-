@@ -26,9 +26,10 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
     実行不可 {
                 @Override
                 public boolean apply(DBC8010001MainDiv div) {
+                    //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
 //                    DBC8010001MainHandler handler = new DBC8010001MainHandler(div);
 //                    List list = new ArrayList();
-//TODO                    List<FurikomiGroupItakushaRelateEntity> list = handler.getFurikomiGroupItakushaRelateEntity();
+//                    List<FurikomiGroupItakushaRelateEntity> list = handler.getFurikomiGroupItakushaRelateEntity();
 //                    return 0 != list.size();
                     return true;
                 }
@@ -78,7 +79,7 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
                     RString 委託者ID = div.getTxtItakushaCode().getValue();
                     div.getTxtFurikomiShiteiYMD().getValue();
                     KozaFurikomiMapperParameter parameter;
-                    //TODO Need to be sure!
+                    //TODO Code in the next line is incorrect,not final, need to be modified!
                     parameter = KozaFurikomiMapperParameter.createSelectParameter(0l, new Decimal(委託者ID.toString()), div.getTxtFurikomiShiteiYMD().getValue(), Decimal.ZERO, SubGyomuCode.DBC介護給付);
                     KozaFurikomiManager manager = KozaFurikomiManager.createInstance();
                     int size = manager.get口座振込リストBy検索条件(parameter).records().size();

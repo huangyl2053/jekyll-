@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.servicecodetanim
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecodetanimeisaiichiran.KyufuJissekiMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470shoriKekkaListTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.DbWT3470ServiceMeisaichukanTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.DbWT3470chohyouShutsuryokuTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.HihokenshaShikibetsuTaishoMeisaiEntity;
@@ -106,13 +107,12 @@ public interface IServicecodeTaniMeisaiIchiranMapper {
      * @return DbWT3470chohyouShutsuryokuTempEntity
      */
     List<DbWT3470chohyouShutsuryokuTempEntity> get帳票出力用一時TBL(KyufuJissekiMybatisParameter parameter);
-//
-//
-//    /**
-//     * 処理結果リストの取得
-//     *
-//     * @param parameter KyufuJissekiMeisaiGetMybatisParameter
-//     * @return DbWT3470shoriKekkaListTempEntity
-//     */
-//    List<DbWT3470shoriKekkaListTempEntity> get処理結果リスト(KyufuJissekiMeisaiGetMybatisParameter parameter);
+
+    /**
+     * 処理結果リストの取得
+     *
+     * @param parameter KyufuJissekiMybatisParameter
+     * @return DbWT3470shoriKekkaListTempEntity
+     */
+    List<DbWT3470shoriKekkaListTempEntity> get処理結果リスト(KyufuJissekiMybatisParameter parameter);
 }

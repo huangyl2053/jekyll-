@@ -36,10 +36,11 @@ public class DBC8010001Main {
     public ResponseData<DBC8010001MainDiv> onLoad(DBC8010001MainDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getHandler(div).initialize(pairs);
-        if (pairs.iterator().hasNext()) {
-            //TODO
+        //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
+//        if (pairs.iterator().hasNext()) {
+//
 //            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
+//        }
         return ResponseData.of(div).respond();
     }
 

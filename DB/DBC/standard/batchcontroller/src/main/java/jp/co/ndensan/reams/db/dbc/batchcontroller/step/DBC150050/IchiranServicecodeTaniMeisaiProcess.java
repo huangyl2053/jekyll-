@@ -73,7 +73,6 @@ public class IchiranServicecodeTaniMeisaiProcess
 
     private IOutputOrder 並び順;
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY ");
     private static final RString コンマ = new RString(",");
     @BatchWriter
     private CsvWriter<DbWT3470chohyouShutsuryokuyouCSVEntity> dbwt3470CSVWriter;
@@ -103,10 +102,10 @@ public class IchiranServicecodeTaniMeisaiProcess
         RString 出力順 = MyBatisOrderByClauseCreator.create(IchiranServicecodeTaniMeisaiOutPutOrder.class, 並び順);
         if (!RString.isNullOrEmpty(出力順)) {
             List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
+            出力順 = RString.EMPTY;
             if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
+                for (int i = 0; i < 出力順BODY.size(); i++) {
+                    出力順 = concat出力順(i, 出力順, 出力順BODY.get(i));
                 }
             }
             parameter.set出力順(出力順);
@@ -150,6 +149,7 @@ public class IchiranServicecodeTaniMeisaiProcess
 
     @Override
     protected void afterExecute() {
+        dbwt3470CSVWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(dbwt3470FilePath, accessLogUUID);
@@ -162,9 +162,9 @@ public class IchiranServicecodeTaniMeisaiProcess
         csvEntity.set送付年月(パターン56(parameter.get開始年月()));
         csvEntity.set作成日時(getパターン12(FlexibleDate.getNowDate()));
         csvEntity.set保険者番号(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         csvEntity.set保険者名(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
     }
 
     private void setCSV明細(DbWT3470chohyouShutsuryokuTempEntity entity,
@@ -298,6 +298,15 @@ public class IchiranServicecodeTaniMeisaiProcess
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private RString concat出力順(int i, RString 出力順, RString 条件) {
+        if (i == INT_0) {
+            出力順 = 出力順.concat(条件);
+        } else {
+            出力順 = 出力順.concat(コンマ).concat(条件);
+        }
+        return 出力順;
     }
 
     private void アクセスログ対象追加(DbWT3470chohyouShutsuryokuTempEntity entity) {

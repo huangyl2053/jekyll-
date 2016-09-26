@@ -60,7 +60,7 @@
             認定調査票概況調査."ninteichosaJisshiYMD" AS 認定調査実施年月日,
             認定調査票概況調査."ninteichosaJuryoYMD" AS 認定調査受領年月日,
             認定調査票概況調査."ninteiChosaKubunCode" AS 認定調査区分コード,
-            認定調査票概況調査."chosaItakusakiCode" AS 認定調査実施場所コード,
+            認定調査票概況調査."chosaJisshiBashoCode" AS 認定調査実施場所コード,
             認定調査票概況調査."chosaJisshiBashoMeisho" AS 認定調査実施場所名称,
             認定調査票概況調査."serviceKubunCode" AS 認定調査サービス区分コード,
             認定調査票概況調査."riyoShisetsuShimei" AS 利用施設名,

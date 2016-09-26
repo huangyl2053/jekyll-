@@ -1081,7 +1081,7 @@ public class KyufuJissekiShokaiHandler {
     }
 
     private void set列名の設定(int 列, FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
-        if (INT_ZERO < 列 && 列 % INT_NI == INT_ICHI) {
+        if (INT_ZERO < 列 && 列 % INT_NI != INT_ZERO) {
             RString 列名 = get年度列名(サービス提供年月_開始, サービス提供年月_終了).get(列 / INT_NI - INT_ICHI);
             div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(列).setGroupName(列名);
             div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(列 + 1).setGroupName(列名);

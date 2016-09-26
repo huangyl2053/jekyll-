@@ -5,8 +5,8 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.INinteiKekkaRenkeiDetaTorikomiMapper">
     <select id="get変更したいデータを取得する" 
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.DBD205010.RendingJieguoLianxieMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.HenKouData" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.DBD492001.RendingJieguoLianxieMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.HenKouData" 
             fetchSize="500" resultOrdered="true">
         SELECT
         A.*

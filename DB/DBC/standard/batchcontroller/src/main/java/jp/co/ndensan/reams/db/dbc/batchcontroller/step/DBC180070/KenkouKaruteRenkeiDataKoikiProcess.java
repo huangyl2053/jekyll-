@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -110,7 +111,7 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
             csvEntity.set識別コード(entity.getShikibetsuCode());
             csvEntity.set資格取得年月日(getValue(entity.getShikakuShutokuYMD()));
             csvEntity.set資格喪失年月日(getValue(entity.getShikakuSoshitsuYMD()));
-            csvEntity.set業務コード(entity.getGyomuCode());
+            csvEntity.set業務コード(GyomuCode.DB介護保険.value());
             csvEntity.set住民種別コード(entity.getJuminShubetsuCode());
             csvEntity.set住民状態コード(entity.getJuminJotaiCode());
             csvEntity.set名称(entity.getMeisho());

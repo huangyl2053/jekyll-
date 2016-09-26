@@ -152,14 +152,16 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set給付実績認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
         eucEntity.set老人保健市町村番号(entity.get老人保健市町村番号());
         eucEntity.set老人保健受給者番号(entity.get老人保健受給者番号());
+        eucEntity.set保険者番号後期(entity.get保険者番号後期());
         eucEntity.set被保険者番号後期(entity.get被保険者番号後期());
         eucEntity.set保険者番号国保(entity.get保険者番号国保());
         eucEntity.set被保険者証番号国保(entity.get被保険者証番号国保());
+        eucEntity.set個人番号国保(entity.get個人番号国保());
         eucEntity.set開始年月日(set日付編集(entity.get開始年月日()));
         eucEntity.set中止年月日(set日付編集(entity.get中止年月日()));
         eucEntity.set前保険サービス単位数(entity.get前保険サービス単位数());
         eucEntity.set前保険請求額(entity.get前保険請求額());
-        eucEntity.set前保険サービス単位数(entity.get前保険利用者負担額());
+        eucEntity.set前保険利用者負担額(entity.get前保険利用者負担額());
         eucEntity.set後サービス単位数(entity.get後保険サービス単位数());
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
@@ -311,7 +313,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set前保険サービス単位数(entity.get前保険サービス単位数());
         eucEntity.set前保険請求額(entity.get前保険請求額());
         eucEntity.set前保険利用者負担額(entity.get前保険利用者負担額());
-        eucEntity.set前保険サービス単位数(entity.get後保険サービス単位数());
+        eucEntity.set後保険サービス単位数(entity.get後保険サービス単位数());
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
@@ -382,7 +384,6 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後単位数(entity.getケアマネジメント費後単位数());
         eucEntity.set後回数(entity.getケアマネジメント費後回数());
         eucEntity.set後サービス単位数(entity.get後保険サービス単位数());
-        eucEntity.set後サービス単位数合計(entity.getケアマネジメント費後サービス単位数());
         eucEntity.set後サービス単位数合計(entity.getケアマネジメント費後サービス単位数合計());
         eucEntity.set後請求金額(entity.getケアマネジメント費後請求金額());
         eucEntity.set後利用者負担額(entity.getケアマネジメント費後利用者負担額());
@@ -395,6 +396,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set前保険利用者負担額(entity.get前保険利用者負担額());
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
+        eucEntity.set後保険サービス単位数(entity.get後保険サービス単位数());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
         eucEntity.set審査年月(set年月(entity.get審査年月()));
         eucEntity.set取込年月(set年月(entity.get取込年月()));
@@ -466,9 +468,11 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set給付実績認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
         eucEntity.set老人保健市町村番号(entity.get老人保健市町村番号());
         eucEntity.set老人保健受給者番号(entity.get老人保健受給者番号());
+        eucEntity.set保険者番号後期(entity.get保険者番号後期());
         eucEntity.set被保険者番号後期(entity.get被保険者番号後期());
         eucEntity.set保険者番号国保(entity.get保険者番号国保());
         eucEntity.set被保険者証番号国保(entity.get被保険者証番号国保());
+        eucEntity.set個人番号国保(entity.get個人番号国保());
         eucEntity.set開始年月日(set日付編集(entity.get開始年月日()));
         eucEntity.set中止年月日(set日付編集(entity.get中止年月日()));
         eucEntity.set前保険サービス単位数(entity.get前保険サービス単位数());
@@ -690,7 +694,6 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後単位数(entity.getケアマネジメント費後単位数());
         eucEntity.set後回数(entity.getケアマネジメント費後回数());
         eucEntity.set後サービス単位数(entity.get後保険サービス単位数());
-        eucEntity.set後サービス単位数合計(entity.getケアマネジメント費後サービス単位数());
         eucEntity.set後サービス単位数合計(entity.getケアマネジメント費後サービス単位数合計());
         eucEntity.set後請求金額(entity.getケアマネジメント費後請求金額());
         eucEntity.set後利用者負担額(entity.getケアマネジメント費後利用者負担額());
@@ -701,6 +704,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set前保険サービス単位数(entity.get前保険サービス単位数());
         eucEntity.set前保険請求額(entity.get前保険請求額());
         eucEntity.set前保険利用者負担額(entity.get前保険利用者負担額());
+        eucEntity.set後保険サービス単位数(entity.get後保険サービス単位数());
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
