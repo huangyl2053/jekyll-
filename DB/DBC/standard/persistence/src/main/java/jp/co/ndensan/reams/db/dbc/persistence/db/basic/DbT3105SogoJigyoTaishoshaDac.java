@@ -41,6 +41,7 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     private static final RString KEY_被保険者番号 = new RString("被保険者番号");
     private static final RString KEY_世帯基準日 = new RString("世帯基準日");
     private static final RString KEY_履歴番号 = new RString("履歴番号");
+    private static final RString KEY_総合事業対象者エンティティ = new RString("総合事業対象者エンティティ");
 
     /**
      * 主キーで総合事業対象者を取得します。
@@ -90,7 +91,7 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     @Transaction
     @Override
     public int save(DbT3105SogoJigyoTaishoshaEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("総合事業対象者エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_総合事業対象者エンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -106,7 +107,7 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
      */
     @Transaction
     public int saveOrDeletePhysicalBy(DbT3105SogoJigyoTaishoshaEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("総合事業対象者エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_総合事業対象者エンティティ.toString()));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 

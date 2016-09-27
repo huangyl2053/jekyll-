@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.HokenShaKodochekkuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.HokenShaKodochekkuEntity;
 
 /**
  * 保険者コードチェックデータ検索のマッパーインタフェースです。

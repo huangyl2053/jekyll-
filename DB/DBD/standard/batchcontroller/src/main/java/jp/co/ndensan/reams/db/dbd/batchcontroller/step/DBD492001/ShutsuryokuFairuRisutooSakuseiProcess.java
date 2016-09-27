@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD492001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.DBD492001.RendingJieguoLianxieProcessParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ErrorRecord;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.OutFile;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.OutFilekekka;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ShinchokuNoTorikomiRisutoFairuCSVEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.TorikomiErarisutofairuCSVEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ichijiteburu.ErarisutofairuIchijiTeburuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ichijiteburu.FairudetaIchijiTeburuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ichijiteburu.JinbunoQurirumirisutofairuYishiteburuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ichijiteburu.YokaigoninteiIntafesumasutaEntity;
-import jp.co.ndensan.reams.db.dbd.service.core.DBD492001.NinteiKekkaRenkeiDataTorikomiManager;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd492001.RendingJieguoLianxieProcessParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ErrorRecord;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFile;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFilekekka;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ShinchokuNoTorikomiRisutoFairuCSVEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.TorikomiErarisutofairuCSVEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.ErarisutofairuIchijiTeburuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.FairudetaIchijiTeburuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.JinbunoQurirumirisutofairuYishiteburuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.YokaigoninteiIntafesumasutaEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.dbd492001.NinteiKekkaRenkeiDataTorikomiManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -37,8 +37,12 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 出力ファイルリストを作成_process処理クラスです。
@@ -60,6 +64,7 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
     private final RString 英数字_結果の取込みエラーリストファイル = new RString("KekkaNoTorikomiErrList.CSV");
 
     private List<PersonalData> personalDataList;
+    private FileSpoolManager manager;
 
     private static final RString 一時デーブル_日次進捗 = new RString("日次進捗");
     private static final RString 一時デーブル_認定結果 = new RString("認定結果");
@@ -79,6 +84,8 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
 
     private RString eucFilePath_1;
     private RString eucFilePath_2;
+
+    private RString eucFilePath;
 
     private Association association;
 
@@ -131,6 +138,8 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
     @Override
     protected void process(OutFile outFile) {
         ファイル出力用データの編集(outFile);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, log);
     }
 
     private void ファイル出力用データの編集(OutFile t) {
@@ -381,7 +390,7 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
-        RString EUCエンティティID = new RString("-");
+        RString eUCエンティティID = new RString("-");
         RString 出力件数_1 = new RString(String.valueOf(eucCsvWriter_1.getCount()));
         RString 出力件数_2 = new RString(String.valueOf(eucCsvWriter_2.getCount()));
         List<RString> 出力条件 = new ArrayList<>();
@@ -394,7 +403,7 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
                     市町村名,
                     ジョブ番号,
                     英数字_進捗の取込みリストファイル,
-                    EUCエンティティID,
+                    eUCエンティティID,
                     出力件数_1,
                     出力条件);
             EucFileOutputJokenhyoFactory.createInstance(item_1).print();
@@ -404,7 +413,7 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
                     市町村名,
                     ジョブ番号,
                     英数字_進捗の取込みエラーリストファイル,
-                    EUCエンティティID,
+                    eUCエンティティID,
                     出力件数_1,
                     出力条件);
             EucFileOutputJokenhyoFactory.createInstance(item_2).print();
@@ -415,7 +424,7 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
                     市町村名,
                     ジョブ番号,
                     英数字_結果の取込みリストファイル,
-                    EUCエンティティID,
+                    eUCエンティティID,
                     出力件数_2,
                     出力条件);
 
@@ -426,7 +435,7 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
                     市町村名,
                     ジョブ番号,
                     英数字_結果の取込みエラーリストファイル,
-                    EUCエンティティID,
+                    eUCエンティティID,
                     出力件数_2,
                     出力条件);
 

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB213001.CreateCheckFileProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB213001.TokuchoSofuJohoRenkeiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB213001.CreateRenkeiFileProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB213001.DBB213001_TokuchoSofuJohoRenkeiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -30,7 +30,7 @@ public class DBB213001_TokuchoSofuJohoRenkei extends BatchFlowBase<DBB213001_Tok
 
     @Step(連携用出力ファイル作成)
     IBatchFlowCommand creatRenkeiFile() {
-        return loopBatch(TokuchoSofuJohoRenkeiProcess.class).define();
+        return loopBatch(CreateRenkeiFileProcess.class).define();
     }
 
     @Step(チェックファイル作成)

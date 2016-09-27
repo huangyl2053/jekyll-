@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -170,7 +171,9 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<L
                 dbWT38P1TempEntity.setShikyuGaku(getDecimal(csvEntity.get支給額()));
             }
             if (csvEntity.get処理年月() != null) {
-                dbWT38P1TempEntity.setShoriYM(new FlexibleYearMonth(csvEntity.get処理年月()));
+                RDate date = new RDate(csvEntity.get処理年月().toString());
+                RString getdate = date.toDateString();
+                dbWT38P1TempEntity.setShoriYM(new FlexibleDate(getdate.toString()).getYearMonth());
             }
             dbWT38P1TempEntity.setUketoriYM(FlexibleYearMonth.EMPTY);
             dbWT38P1TempEntity.setSofuYM(FlexibleYearMonth.EMPTY);

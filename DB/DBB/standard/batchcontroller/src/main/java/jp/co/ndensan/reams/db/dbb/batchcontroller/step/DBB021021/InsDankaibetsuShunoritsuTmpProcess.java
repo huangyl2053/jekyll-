@@ -48,13 +48,13 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     private CaFt702FindTotalShunyuFunction psmEntity;
 //    private static final RString 未納分 = new RString("未納分");
     private static final RString 完納分 = new RString("完納分");
-    private static final RString 認定者のみ = new RString("認定者のみ");
-    private static final RString 認定者を除く１号被保険者 = new RString("認定者を除く１号被保険者");
-    private static final RString 受給者のみ = new RString("受給者のみ");
+    private static final RString 抽出条件_認定者のみ = new RString("2");
+    private static final RString 抽出条件_受給者のみ = new RString("3");
+    private static final RString 抽出条件_認定者を除く１号被保険者 = new RString("4");
     private static final RString 認定者 = new RString("認定者");
     private static final RString 受給者 = new RString("受給者");
-    private static final RString 広域保険者 = new RString("広域保険者");
-    private static final RString 単一市町村分 = new RString("単一市町村分");
+    private static final RString 広域保険者 = new RString("111");
+    private static final RString 単一市町村分 = new RString("120");
     private static final RString 市町村分 = new RString("000000");
     private static final RString ONE = new RString("1");
     private static final int INT_0 = 0;
@@ -158,11 +158,11 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
                 || 単一市町村分.equals(parameter.get広域判定区分()))
                 && 市町村コード != null
                 && 市町村分.equals(市町村コード.code市町村RString())) {
-            if ((認定者のみ.equals(parameter.get抽出条件())
-                    || 認定者を除く１号被保険者.equals(parameter.get抽出条件()))
+            if ((抽出条件_認定者のみ.equals(parameter.get抽出条件())
+                    || 抽出条件_認定者を除く１号被保険者.equals(parameter.get抽出条件()))
                     && 収納データ.get受給者給付COUNT().get受給者台帳COUNT() != INT_0) {
                 entity.setTaishouKubun(認定者);
-            } else if (受給者のみ.equals(parameter.get抽出条件())
+            } else if (抽出条件_受給者のみ.equals(parameter.get抽出条件())
                     && 収納データ.get受給者給付COUNT().get給付実績基本COUNT() != INT_0) {
                 entity.setTaishouKubun(受給者);
             }

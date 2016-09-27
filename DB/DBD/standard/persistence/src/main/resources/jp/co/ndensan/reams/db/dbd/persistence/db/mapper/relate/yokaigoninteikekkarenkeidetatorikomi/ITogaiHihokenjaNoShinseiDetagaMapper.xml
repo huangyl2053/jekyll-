@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.ITogaiHihokenjaNoShinseiDetagaMapper">
     <select id="get当該被保険者の申請データが存在"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.TogaiHihokenjaNoShinseiDetagaEntity" 
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.TogaiHihokenjaNoShinseiDetagaEntity" 
             fetchSize="500" resultOrdered="true">
         SELECT A."shinseishoKanriNo"
         FROM rgdb."DbT4101NinteiShinseiJoho" AS A

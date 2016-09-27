@@ -26,6 +26,11 @@ public class TokuchoSofuJohoRenkeiProcessParameter implements IBatchProcessParam
     private RYearMonth 処理対象年月;
     private List<RString> 市町村コードリスト;
 
+    /**
+     * 特徴送付情報連携のMybitisParameterを作成する。
+     *
+     * @return TokuchoSofuJohoRenkeiMybitisParameter
+     */
     public TokuchoSofuJohoRenkeiMybitisParameter toTokuchoSofuJohoRenkeiMybitisParameter() {
         return new TokuchoSofuJohoRenkeiMybitisParameter(処理年度, 処理対象年月, 市町村コードリスト);
     }

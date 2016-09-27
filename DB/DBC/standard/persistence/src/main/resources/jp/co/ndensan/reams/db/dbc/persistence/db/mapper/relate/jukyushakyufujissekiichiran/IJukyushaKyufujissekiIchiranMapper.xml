@@ -177,11 +177,11 @@ LEFT JOIN
                 AND 
                 DbT3017."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
             </if>
-            <if test="被保険者番号flag">
+            <if test="給付実績区分flag">
                 AND
                 DbT3017."kyufuJissekiKubunCode" = '1'
             </if>
-            <if test="!被保険者番号flag">
+            <if test="給付実績区分flag">
                 AND
                 DbT3017."kyufuJissekiKubunCode" = '2'
             </if>
@@ -391,13 +391,12 @@ LEFT JOIN
             </if>
             <if test="!公費受給者番号flag">
                 AND
-                DbT3017."kohi1JukyushaNo" = #{公費受給者番号} or DbT3017."kohi2JukyushaNo" = #{公費受給者番号} or DbT3017."kohi2JukyushaNo" = #{公費受給者番号}
+                DbT3017."kohi1JukyushaNo" = #{公費受給者番号} or DbT3017."kohi2JukyushaNo" = #{公費受給者番号} or DbT3017."kohi3JukyushaNo" = #{公費受給者番号}
             </if>
             <if test="!計画作成事業者番号flag">
                 AND
                 DbT3017."kyotakuKaigoShienJigyoshoNo" = #{計画作成事業者番号}
             </if>
-            
             <if test="!給付率flag">
                 <if test="給付率区分flag1">
                     DbT3017."hokenKyufuritsu" = #{給付率}
@@ -475,8 +474,8 @@ LEFT JOIN
 LEFT JOIN 																			
 	rgua.${psmShikibetsuTaisho} AS PSM
         ON
-        T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"																		
-        <where>
+        T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"	
+         <where>
             <if test="対象年月flag">
                 #{年月範囲_開始} <![CDATA[<=]]> T1."serviceTeikyoYM"
                 AND 
@@ -502,6 +501,7 @@ LEFT JOIN
                 AND
                 T1."kyufuJissekiKubunCode" = '2'
             </if>
+            <if test="flag">
             <if test="訪問通所他flag">
                 AND
                 T1."inputShikibetsuNo" IN ('7131','2131')
@@ -618,15 +618,16 @@ LEFT JOIN
                 AND
                 T1."inputShikibetsuNo" IN ('8171')
             </if>
-            <if test="flag">
+            </if>
+            <if test="!flag">
                 AND
                 T1."inputShikibetsuNo" IN ('7131','2131','7141','7142','7143','2141','2142','2143')
             </if>
             <if test="!公費負担者番号flag">
                 AND
-                T1."kohi1FutanNo" = #{公費負担者番号} or T1."kohi2FutanNo" = #{公費負担者番号} or T1."kohi2FutanNo" = #{公費負担者番号}
+                T1."kohi1FutanNo" = #{公費負担者番号} or T1."kohi2FutanNo" = #{公費負担者番号} or T1."kohi3FutanNo" = #{公費負担者番号}
             </if>
-       </where>
+       </where>																	
  </select>
     
     <select resultOrdered="true" id="getSelectAll" 

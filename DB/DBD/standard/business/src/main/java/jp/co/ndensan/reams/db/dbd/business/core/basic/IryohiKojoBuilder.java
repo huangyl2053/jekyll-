@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 医療費控除のビルダークラスです。
@@ -35,6 +36,90 @@ public class IryohiKojoBuilder {
         this.entity = entity.clone();
         this.id = id;
 
+    }
+
+    /**
+     * 登録年月日を設定します。
+     *
+     * @param 登録年月日 登録年月日
+     * @return {@link IryohiKojoBuilder}
+     */
+    public IryohiKojoBuilder set登録年月日(FlexibleDate 登録年月日) {
+        requireNonNull(登録年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("登録年月日"));
+        entity.setTorokuYMD(登録年月日);
+        return this;
+    }
+
+    /**
+     * 申請年月日を設定します。
+     *
+     * @param 申請年月日 申請年月日
+     * @return {@link IryohiKojoBuilder}
+     */
+    public IryohiKojoBuilder set申請年月日(FlexibleDate 申請年月日) {
+        requireNonNull(申請年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("申請年月日"));
+        entity.setShinseiYMD(申請年月日);
+        return this;
+    }
+
+    /**
+     * 認定有効期間開始年月日を設定します。
+     *
+     * @param 認定有効期間開始年月日 認定有効期間開始年月日
+     * @return {@link IryohiKojoBuilder}
+     */
+    public IryohiKojoBuilder set認定有効期間開始年月日(FlexibleDate 認定有効期間開始年月日) {
+        requireNonNull(認定有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間開始年月日"));
+        entity.setNinteiYukoKikanKaishiYMD(認定有効期間開始年月日);
+        return this;
+    }
+
+    /**
+     * 認定有効期間終了年月日を設定します。
+     *
+     * @param 認定有効期間終了年月日 認定有効期間終了年月日
+     * @return {@link IryohiKojoBuilder}
+     */
+    public IryohiKojoBuilder set認定有効期間終了年月日(FlexibleDate 認定有効期間終了年月日) {
+        requireNonNull(認定有効期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間終了年月日"));
+        entity.setNinteiYukoKikanShuryoYMD(認定有効期間終了年月日);
+        return this;
+    }
+
+    /**
+     * 主治医意見書受領年月日を設定します。
+     *
+     * @param 主治医意見書受領年月日 主治医意見書受領年月日
+     * @return {@link IryohiKojoBuilder}
+     */
+    public IryohiKojoBuilder set主治医意見書受領年月日(FlexibleDate 主治医意見書受領年月日) {
+        requireNonNull(主治医意見書受領年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書受領年月日"));
+        entity.setShujiiIkenshoJuryoYMD(主治医意見書受領年月日);
+        return this;
+    }
+
+    /**
+     * 日常生活自立度を設定します。
+     *
+     * @param 日常生活自立度 日常生活自立度
+     * @return {@link IryohiKojoBuilder}
+     */
+    public IryohiKojoBuilder set日常生活自立度(RString 日常生活自立度) {
+        requireNonNull(日常生活自立度, UrSystemErrorMessages.値がnull.getReplacedMessage("日常生活自立度"));
+        entity.setNichijoSeikatsuJiritsudo(日常生活自立度);
+        return this;
+    }
+
+    /**
+     * 尿失禁の発生を設定します。
+     *
+     * @param 尿失禁の発生 尿失禁の発生
+     * @return {@link IryohiKojoBuilder}
+     */
+    public IryohiKojoBuilder set尿失禁の発生(boolean 尿失禁の発生) {
+        requireNonNull(尿失禁の発生, UrSystemErrorMessages.値がnull.getReplacedMessage("尿失禁の発生"));
+        entity.setNyoshikkinHassei(尿失禁の発生);
+        return this;
     }
 
     /**
