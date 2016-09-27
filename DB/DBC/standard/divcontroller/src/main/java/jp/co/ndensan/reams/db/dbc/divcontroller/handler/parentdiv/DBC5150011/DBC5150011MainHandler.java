@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.servicecodeichiran.Chushut
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011.DBC5150011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011.dgServiceBunruiList_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.ShutsuryokuHoho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -145,7 +144,7 @@ public class DBC5150011MainHandler {
         } else if (div.getRadChushutsuJokenServiceCode().getSelectedKey() != null
                 && !div.getRadChushutsuJokenServiceCode().getSelectedKey().isEmpty()) {
             parameter.set抽出条件区分(div.getRadChushutsuJokenServiceCode().getSelectedValue());
-            parameter.setサービス種類コード(new ServiceShuruiCode(div.getCcdServiceCodeInput().getサービスコード1()));
+            parameter.setサービス種類コード(div.getCcdServiceCodeInput().getサービスコード1());
             parameter.setサービス項目コード(div.getCcdServiceCodeInput().getサービスコード2());
         } else {
             parameter.set抽出条件区分(div.getRadChushutsuJokenServiceBunrui().getSelectedValue());
