@@ -206,7 +206,7 @@ public class JukyushaKyufuJissekiDaichoHandler {
         } else {
             batchParameter.setすべて選択(ゼロ);
         }
-        List<RString> すべて選択 = div.getTabChushutsuJoken().getChkYokaigodo().getSelectedKeys();
+        List<RString> すべて選択 = div.getTabChushutsuJoken().getChkYokaigodo().getSelectedValues();
         if (すべて選択.contains(new RString("要介護1"))) {
             batchParameter.set要介護1(いち);
         } else {
@@ -425,21 +425,21 @@ public class JukyushaKyufuJissekiDaichoHandler {
     }
 
     private void setバッチ3(DBC140020_JukyushaKyufujissekiIchiranParameter batchParameter) {
-        if (!div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedKey().isEmpty()) {
-            if (div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedKey().equals(全て)) {
+        if (!div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedValue().isEmpty()) {
+            if (div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedValue().equals(全て)) {
                 batchParameter.set旧措置特定有無(いち);
-            } else if (div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedKey().equals(なし)) {
+            } else if (div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedValue().equals(なし)) {
                 batchParameter.set旧措置特定有無(に);
-            } else if (div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedKey().equals(あり)) {
+            } else if (div.getTabChushutsuJoken().getRadKyuSochiTokureiUmu().getSelectedValue().equals(あり)) {
                 batchParameter.set旧措置特定有無(さん);
             }
         }
-        if (!div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedKey().isEmpty()) {
-            if (div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedKey().equals(全て)) {
+        if (!div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedValue().isEmpty()) {
+            if (div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedValue().equals(全て)) {
                 batchParameter.set老人保健市町村番号有無(いち);
-            } else if (div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedKey().equals(なし)) {
+            } else if (div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedValue().equals(なし)) {
                 batchParameter.set老人保健市町村番号有無(に);
-            } else if (div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedKey().equals(あり)) {
+            } else if (div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedValue().equals(あり)) {
                 batchParameter.set老人保健市町村番号有無(さん);
             }
         }
@@ -453,12 +453,12 @@ public class JukyushaKyufuJissekiDaichoHandler {
         } else {
             batchParameter.set老人保健市町村番号有_終了(new RString("99999999"));
         }
-        if (!div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedKey().isEmpty()) {
-            if (div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedKey().equals(全て)) {
+        if (!div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedValue().isEmpty()) {
+            if (div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedValue().equals(全て)) {
                 batchParameter.set老人保健受給者番号有無(いち);
-            } else if (div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedKey().equals(なし)) {
+            } else if (div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedValue().equals(なし)) {
                 batchParameter.set老人保健受給者番号有無(に);
-            } else if (div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedKey().equals(あり)) {
+            } else if (div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedValue().equals(あり)) {
                 batchParameter.set老人保健受給者番号有無(さん);
             }
         }
@@ -495,12 +495,12 @@ public class JukyushaKyufuJissekiDaichoHandler {
         if (!div.getTabChushutsuJoken().getTxtKeikakuSakuseiJigyoshoNo().getValue().isEmpty()) {
             batchParameter.set計画作成事業者番号(div.getTxtKeikakuSakuseiJigyoshoNo().getValue());
         }
-        if (!div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedKey().isEmpty()) {
-            if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedKey().equals(new RString("同じ"))) {
+        if (!div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().isEmpty()) {
+            if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().equals(new RString("同じ"))) {
                 batchParameter.set老人保健受給者番号有無(いち);
-            } else if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedKey().equals(new RString("超える"))) {
+            } else if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().equals(new RString("超える"))) {
                 batchParameter.set老人保健受給者番号有無(に);
-            } else if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedKey().equals(new RString("未満"))) {
+            } else if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().equals(new RString("未満"))) {
                 batchParameter.set老人保健受給者番号有無(さん);
             }
         }
