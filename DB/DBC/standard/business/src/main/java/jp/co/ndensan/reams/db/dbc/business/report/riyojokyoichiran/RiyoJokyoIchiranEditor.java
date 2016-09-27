@@ -130,14 +130,15 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
             source.list1Lower_3 = RString.EMPTY;
         }
         // データ区分 DBC.ENUM.利用状況統計表_データ区分より表示名称を取得
-        if (new RString("1").equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())) {
+        if (new RString("1").equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())
+                && 数値.equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())) {
             source.list1Lower_4 = entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo();
-            if (new RString("2").equals(entity.get帳票出力対象データリスト().getJigyoshoNo())) {
-                source.list1Lower_4 = entity.get帳票出力対象データリスト().getJigyoshoNo();
-            }
-        } else if (数値.equals(entity.get帳票出力対象データリスト().getJigyoshoNo())
-                || 数値.equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())) {
+        } else {
             source.list1Lower_4 = RString.EMPTY;
+        }
+        if (new RString("2").equals(entity.get帳票出力対象データリスト().getJigyoshoNo())
+                && 数値.equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())) {
+            source.list1Lower_4 = entity.get帳票出力対象データリスト().getJigyoshoNo();
         } else {
             source.list1Lower_4 = RString.EMPTY;
         }
