@@ -108,7 +108,7 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString 合計 = new RString("合計");
     private static final int 值二 = 2;
     private static final int 值三 = 3;
-    private static int count = 0;
+    private int count = 0;
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
