@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.KyufuGengakuHaakuListSakuseiProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.KyufuGengakuHaakuListTaishoTokuteiProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoJokyoHaakuProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoTainoJokyoHaakuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.KyufuGengakuHaakuListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.KyufuGengakuHaakuListTaishoTokuteiProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.ShunoJokyoHaakuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.ShunoTainoJokyoHaakuProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

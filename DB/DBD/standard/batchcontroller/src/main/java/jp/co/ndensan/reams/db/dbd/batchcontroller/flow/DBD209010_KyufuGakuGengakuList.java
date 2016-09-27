@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoJokyoHaakuProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoTainoJokyoHaakuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.ShunoJokyoHaakuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.ShunoTainoJokyoHaakuProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32004.KyufuGakuGengakuTainoShaProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32004.TaishoShaKanriJohoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209010.DBD209010_KyufuGakuGengakuListParameter;
