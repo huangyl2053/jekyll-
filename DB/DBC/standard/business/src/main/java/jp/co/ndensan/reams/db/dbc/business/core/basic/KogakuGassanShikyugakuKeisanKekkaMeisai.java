@@ -24,9 +24,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-9999-012 huzongcheng
  */
-public class KogakuGassanShikyugakuKeisanKekkaMeisai extends ModelBase<KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier, 
-		DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity, KogakuGassanShikyugakuKeisanKekkaMeisai>
-        implements Serializable {
+public class KogakuGassanShikyugakuKeisanKekkaMeisai 
+    extends ModelBase<KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier, 
+            DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity, 
+            KogakuGassanShikyugakuKeisanKekkaMeisai> 
+    implements Serializable {
 
     private final DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity entity;
     private final KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier id;
