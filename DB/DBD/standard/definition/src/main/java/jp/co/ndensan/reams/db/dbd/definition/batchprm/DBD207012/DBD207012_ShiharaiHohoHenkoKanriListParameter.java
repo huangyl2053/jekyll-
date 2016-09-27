@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207012;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoHaakuOneProcessParameter;
@@ -22,12 +22,12 @@ import lombok.Setter;
 /**
  * 支払方法変更管理リスト作成バッチ用のパラメータです。
  *
- * @reamsid_L DBD-3630-010 zhulx
+ * @reamsid_L DBD-3630-040 zhulx
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiHohoHenkoListFlowParameter extends BatchParameterBase {
+public class DBD207012_ShiharaiHohoHenkoKanriListParameter extends BatchParameterBase {
 
     private static final String KIJUNYMD = "kijunYMD";
     private static final String TOUROKUSYASENNTAKU = "tourokuSyaSenntaku";

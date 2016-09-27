@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbdbt32003;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.KyufuGengakuHaakuListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.KyufuGengakuHaakuListTaishoTokuteiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoJokyoHaakuProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32003.ShunoTainoJokyoHaakuProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt32003.KyufuGengakuHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
  *
  * @reamsid_L DBD-3610-030 x_lilh
  */
-public class KyufugengakulistFlow extends BatchFlowBase<KyufuGengakuHaakuIchiranBatchParameter> {
+public class DBD209011_KyufuGakuGengakuTainoshaHaakuList extends BatchFlowBase<DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter> {
 
     private static final String 収納状況把握情報の取得 = "shunoJokyoHaaku";
     private static final String 対象者把握情報の取得 = "kyufuGengakuHaakuListTaishoTokutei";

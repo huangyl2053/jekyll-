@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd207010;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoKanrFiveProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuFourProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuOneProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuThreeProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuTwoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoKanrFiveProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoKanriTempTableInsertProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.ShiharaiHohoHenkoListFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207012.DBD207012_ShiharaiHohoHenkoKanriListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- * DBDMN32001_2_支払方法変更管理フロークラスです．
+ * バッチ「支払方法変更管理リスト作成」のフロークラスです．
  *
- * @reamsid_L DBD-3650-040 x_lilh
+ * @reamsid_L DBD-3630-040 x_lilh
  */
-public class ShiharaiHohoHenkoHaakuKanriFlow extends BatchFlowBase<ShiharaiHohoHenkoListFlowParameter> {
+public class DBD207012_ShiharaiHohoHenkoKanriList extends BatchFlowBase<DBD207012_ShiharaiHohoHenkoKanriListParameter> {
 
     private static final String 支払方法変更管理対象者抽出 = "shiharaiHohoHenkoKanri";
     private static final String 支払方法変更_収納情報テーブル_PROCESS = "shiharaiHohoHenkoHaakuOneProcess";
