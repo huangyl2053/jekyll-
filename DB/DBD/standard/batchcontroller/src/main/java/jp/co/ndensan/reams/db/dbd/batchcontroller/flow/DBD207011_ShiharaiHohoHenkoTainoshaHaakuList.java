@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd207010;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuFiveProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuFourProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuOneProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuThreeProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoHaakuTwoProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010.ShiharaiHohoHenkoTainoTempTableInsertProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuFiveProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuFourProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuOneProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuThreeProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuTwoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoTainoTempTableInsertProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207011.DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3650-040 x_lilh
  */
-public class ShiharaiHohoHenkoHaakuIchiranFlow extends BatchFlowBase<ShiharaiHohoHenkoHaakuIchiranBatchParameter> {
+public class DBD207011_ShiharaiHohoHenkoTainoshaHaakuList extends BatchFlowBase<DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter> {
 
     private static final String 対象者情報一時テーブル_PROCESS = "taisyoJohoTempInsertProcess";
     private static final String 支払方法変更_収納情報テーブル_PROCESS = "shiharaiHohoHenkoHaakuOneProcess";
