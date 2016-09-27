@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020003;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt32003.KyufuGengakuHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020003.KyufugakuGengakuHaakuIchiran;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020003.ChishutsuJokenParameterDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -61,7 +61,7 @@ public class DBD2020003ValidationHandler {
      *
      * @return バッチパラメター
      */
-    public KyufuGengakuHaakuIchiranBatchParameter setBatchParameter() {
+    public DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter setBatchParameter() {
         KyufugakuGengakuHaakuIchiran kyufugakuGengakuHaakuIchiran = new KyufugakuGengakuHaakuIchiran();
         return kyufugakuGengakuHaakuIchiran.createKyufuGengakuHaakuIchiranParameter(div);
     }
