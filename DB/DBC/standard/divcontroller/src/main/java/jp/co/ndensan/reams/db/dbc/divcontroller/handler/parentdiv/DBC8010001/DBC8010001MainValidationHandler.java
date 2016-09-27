@@ -140,7 +140,7 @@ public class DBC8010001MainValidationHandler {
      * 修正対象データ存在チェック。
      *
      * @param pairs ValidationMessageControlPairs
-     * @return
+     * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateFor修正対象データ存在(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
