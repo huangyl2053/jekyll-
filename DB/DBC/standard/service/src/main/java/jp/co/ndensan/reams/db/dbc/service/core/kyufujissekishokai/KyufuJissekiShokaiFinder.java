@@ -921,8 +921,7 @@ public class KyufuJissekiShokaiFinder {
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号文字列.toString()));
         List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細住所地特例データリスト = new ArrayList<>();
-        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class
-        );
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         List<KyufujissekiMeisaiJushochiTokureiRelateEntity> entityList = mapper.get給付実績明細住所地特例データ(
                 KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
                         入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
@@ -996,7 +995,7 @@ public class KyufuJissekiShokaiFinder {
         List<KyufujissekiKogakuKaigoServicehi> ストアデータ = new ArrayList<>();
         boolean 共同処理あり = false;
         for (int i = 0; i < 給付実績基本高額介護サービス費データ.size(); i++) {
-            DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = 給付実績基本高額介護サービス費表示対象データ.get(i).toEntity();
+            DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = 給付実績基本高額介護サービス費データ.get(i).toEntity();
             ストアデータ.add(new KyufujissekiKogakuKaigoServicehi(entity));
             if (i == 0) {
                 先頭レコード = entity;
