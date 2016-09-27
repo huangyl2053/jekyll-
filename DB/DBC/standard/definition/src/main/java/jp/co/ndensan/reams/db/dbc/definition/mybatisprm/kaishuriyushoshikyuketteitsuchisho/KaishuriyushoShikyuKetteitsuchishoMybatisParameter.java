@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class KaishuriyushoShikyuKetteitsuchishoMybatisParameter implements IMyBatisParameter {
+public class KaishuriyushoShikyuKetteitsuchishoMybatisParameter implements IMyBatisParameter {
 
     private RString 市町村コード;
     private final RString サブ業務コード = new RString("DBC");
