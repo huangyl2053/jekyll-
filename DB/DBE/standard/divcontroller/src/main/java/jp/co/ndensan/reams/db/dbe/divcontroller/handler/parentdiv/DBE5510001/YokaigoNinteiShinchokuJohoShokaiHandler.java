@@ -330,6 +330,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     }
 
     private void clearBotton() {
+        boolean is被保険者から検索 = (get検索方法() == KensakuHoho.被保険者から検索する場合);
         onload();
         div.getTxtHihokenshaNo().clearValue();
         div.getTxtShikibetsuCode().clearValue();
@@ -347,10 +348,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getChkShinsakaiJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkKensakuOption().setSelectedItemsByKey(CHK_BOX_NASI);
         init最大表示件数();
-
-        boolean is被保険者から検索 = (get検索方法() == KensakuHoho.被保険者から検索する場合);
-        div.getSerchFromHohokensha().setDisplayNone(is被保険者から検索);
-        div.getSerchFromShinchokuJokyo().setDisplayNone(!is被保険者から検索);
         div.getShinseiJohoIchiran().setIsOpen(false);
+        if(!is被保険者から検索){
+            div.getRadKensakuHoho().setSelectedKey(KensakuHoho.進捗状況から検索する場合.key);
+            div.getSerchFromHohokensha().setDisplayNone(true);
+            div.getSerchFromShinchokuJokyo().setDisplayNone(false);
+            div.getSerchFromShinchokuJokyo().setIsOpen(true);
+            div.getDgShinseiJoho().setHeight(KensakuHoho.進捗状況から検索する場合.dgShinseiJohoHeigh);
+        }
     }
 }
