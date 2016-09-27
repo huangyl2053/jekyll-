@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010010.DBU010010_JigyoHokokuGeppo_MainParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020.DBU010020_JigyoHokokuGeppo_IppanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010090.DBU010090_JigyoHokokuGeppo_HokenkyufuKogakuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010100.DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -15,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,6 +32,8 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
     private static final RString DBU010090FLOW_FLOWID = new RString("DBU010090_JigyoHokokuGeppo_HokenkyufuKogaku");
     private static final String CALL_FLOW_DBU010100 = "DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan";
     private static final RString DBU010100FLOW_FLOWID = new RString("DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan");
+    private static final String 事業報告月報_一般状況 = "DBU010020_JigyoHokokuGeppo_Ippan";
+    private static final RString 事業報告月報_一般状況_FLOWID = new RString("DBU010020_JigyoHokokuGeppo_Ippan");
     private static final RString 出力区分_1 = new RString("1");
     private static final int 連番_1 = 1;
     private static final int 連番_2 = 2;
@@ -38,12 +44,41 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
 
     @Override
     protected void defineFlow() {
+        if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(0))) {
+            executeStep(事業報告月報_一般状況);
+        }
         if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_7))) {
             executeStep(CALL_FLOW_DBU010090);
         }
         if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_8))) {
             executeStep(CALL_FLOW_DBU010100);
         }
+    }
+
+    /**
+     * 事業報告月報_一般状況です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(事業報告月報_一般状況)
+    protected IBatchFlowCommand callJigyoHokokuGeppo_Ippan() {
+        DBU010020_JigyoHokokuGeppo_IppanParameter parameter = new DBU010020_JigyoHokokuGeppo_IppanParameter();
+        parameter.setPrintControlKbn(getParameter().getPrintControlKbn());
+        parameter.setSyukeiYM(new FlexibleYearMonth(getParameter().getShuukeiNengetu().get(0)));
+        parameter.setHokokuYM(new FlexibleYearMonth(getParameter().getHoukokuNengetu()));
+        parameter.setNendo(new FlexibleYear(getParameter().getNendo().get(0)));
+        parameter.setSakuseiYMD(new RString(getParameter().getSakuseiNitizi().get(0).toString()));
+        parameter.setSyoriYMDHMS(new YMDHMS(getParameter().getSyoriNitizi().getDate(), getParameter().getSyoriNitizi().getTime()));
+        parameter.setKyuShichosonKbn(getParameter().getOldShichosonKubun());
+        parameter.setKoseiShichosonKbn(getParameter().getKouseiShichosonKubun());
+        parameter.setShichosonCode(getParameter().getShichosonCode().value());
+        parameter.setKoseiShichosonList(codeList(getParameter().getKouseiShichosonCode()));
+        parameter.setKyuShichosonList(codeList(getParameter().getOldShichosonCode()));
+        parameter.setKakoShukeiShichosonList(getParameter().getShuukeibunShichosonCode());
+        parameter.setKakoShukeiKyuShichosonKbn(getParameter().getShuukeibunShichosonKubun());
+        parameter.setSakuseiCSVFileID(getParameter().getCsvID().get(0));
+        parameter.setBatchID(getParameter().getBatchID().get(0));
+        return otherBatchFlow(事業報告月報_一般状況_FLOWID, SubGyomuCode.DBU介護統計報告, parameter).define();
     }
 
     /**
