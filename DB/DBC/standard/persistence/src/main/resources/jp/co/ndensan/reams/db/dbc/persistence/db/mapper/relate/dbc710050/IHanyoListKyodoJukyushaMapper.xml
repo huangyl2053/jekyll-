@@ -15,8 +15,8 @@
         WHERE
             1=1
             AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoKubunCode" IN
-            <foreach item="異動区分S" index="index" collection="異動区分S" open="(" separator="," close=")">
-                #{異動区分S}
+            <foreach item="異動区分" index="index" collection="異動区分S" open="(" separator="," close=")">
+                #{異動区分}
             </foreach>
             <if test="!削除含める" >
             AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."logicalDeletedFlag" = FALSE

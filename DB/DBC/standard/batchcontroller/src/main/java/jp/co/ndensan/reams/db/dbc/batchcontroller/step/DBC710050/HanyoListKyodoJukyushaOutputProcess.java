@@ -72,6 +72,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     private static final RString TITLE_処理対象年月 = new RString("　　　　　処理対象年月：");
     private static final RString TITLE_異動年月 = new RString("　　　　　異動年月　　：");
     private static final RString 各異動月の最新のみ = new RString("　　　　　■各異動月の最新情報のみ抽出する");
+    private static final RString 削除された情報 = new RString("　　■削除された情報を含める");
     private static final RString 新規_黒 = new RString("■新規");
     private static final RString 新規_白 = new RString("□新規");
     private static final RString 変更_黒 = new RString("■変更");
@@ -251,7 +252,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
         }
         RString 削除された情報を含める;
         if (parameter.is削除含める()) {
-            削除された情報を含める = new RString("　　■削除された情報を含める");
+            削除された情報を含める = 削除された情報;
         } else {
             削除された情報を含める = RString.EMPTY;
         }
@@ -259,6 +260,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     }
 
     private RString dateFormat(FlexibleYearMonth date) {
+
         if (date == null) {
             return RString.EMPTY;
         }
