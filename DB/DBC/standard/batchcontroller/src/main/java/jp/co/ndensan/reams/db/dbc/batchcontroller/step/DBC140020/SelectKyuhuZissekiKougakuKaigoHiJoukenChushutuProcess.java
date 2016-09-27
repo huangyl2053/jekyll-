@@ -56,11 +56,11 @@ public class SelectKyuhuZissekiKougakuKaigoHiJoukenChushutuProcess extends Batch
 
     @Override
     protected void process(JukyushaKyufujissekiIchiranRelateEntity entity) {
-        if (!entity.get要介護状態区分コード().isEmpty()) {
+        if (entity.get要介護状態区分コード() != null && !entity.get要介護状態区分コード().isEmpty()) {
             entity.set要介護状態区分名称(YokaigoJotaiKubunSupport.toValue(new FlexibleDate(entity.getサービス提供年月().concat("01")),
                     new RString(entity.get要介護状態区分コード().toString())).getName());
         }
-        if (!entity.get給付実績区分コード().isEmpty()) {
+        if (entity.get給付実績区分コード() != null && !entity.get給付実績区分コード().isEmpty()) {
             entity.set給付実績区分名称(KyufuJissekiKubun.toValue(entity.get給付実績区分コード()).get名称());
         }
         JukyushaKyufujissekiIchiranTableEntity tablEntity = new JukyushaKyufujissekiIchiranTableEntity();
