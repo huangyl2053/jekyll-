@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護支援専門員を管理するクラスです。
  *
- * @reamsid_L DBC-3370-010 yuqingzhang
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareManegerEntity, CareManeger> implements Serializable {
 
@@ -68,7 +68,6 @@ public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareMan
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 介護支援専門員番号を返します。
      *
@@ -206,5 +205,4 @@ public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareMan
         return new CareManegerBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

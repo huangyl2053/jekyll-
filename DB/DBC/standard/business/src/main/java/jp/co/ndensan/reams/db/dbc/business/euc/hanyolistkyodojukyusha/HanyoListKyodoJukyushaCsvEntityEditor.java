@@ -230,6 +230,8 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         bodyList.add(entity.get被保険者台帳管理().getShichosonCode().getColumnValue());
         if (構成市町村マスタ.containsKey(entity.get被保険者台帳管理().getShichosonCode())) {
             bodyList.add(構成市町村マスタ.get(entity.get被保険者台帳管理().getShichosonCode()).get市町村名称());
+        } else {
+            bodyList.add(RString.EMPTY);
         }
         bodyList.add(地方公共団体情報.getLasdecCode_().getColumnValue());
         bodyList.add(地方公共団体情報.get市町村名());
@@ -251,12 +253,16 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         YubinNo 郵便番号 = entity.get共同処理用受給者異動基本送付().getYubinNo();
         if (YubinNo.EMPTY != 郵便番号 && 郵便番号 != null) {
             bodyList.add(郵便番号.getEditedYubinNo());
+        } else {
+            bodyList.add(RString.EMPTY);
         }
         bodyList.add(entity.get共同処理用受給者異動基本送付().getDdressKana());
         bodyList.add(entity.get共同処理用受給者異動基本送付().getAddress());
         TelNo 電話番号 = entity.get共同処理用受給者異動基本送付().getTelNo();
         if (TelNo.EMPTY != 電話番号 && 電話番号 != null) {
             bodyList.add(電話番号.getColumnValue());
+        } else {
+            bodyList.add(RString.EMPTY);
         }
         bodyList.add(entity.get共同処理用受給者異動基本送付().getChohyoOutputJunjyoCode());
         return bodyList;
