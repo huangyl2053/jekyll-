@@ -208,7 +208,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             ファイル名 = new RString("RiyoshaFutangakuGemmenNinteishaIchiran");
             帳票名称 = new RString("DBD200013_RiyoshaFutangakuGemmenNinteishaIchiran");
         }
-        for (CSVSettings csvsetings : parameter.getCSV出力設定()) {
+        for (CSVSettings csvsetings : parameter.getCsv出力設定()) {
             if (ONE.equals(csvsetings.getコード())) {
                 項目名付加 = true;
             } else if (!ONE.equals(csvsetings.getコード())) {
@@ -251,7 +251,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 出力条件.add(new RString("　　　　　　　　 "));
             }
         }
-        if (null != parameter.getCSV出力設定()) {
+        if (null != parameter.getCsv出力設定()) {
             出力条件.add(new RString("【CSV出力設定】 項目名付加、連番付加、日付\"/\"編集"));
         } else {
             出力条件.add(new RString("【CSV出力設定】 指定なし"));
@@ -346,7 +346,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     private ChohyoShutsuryokuJohoShutokuResultCsvEntity setVoidEntity(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity,
             ChohyoShutsuryokuJohoShutokuResultEntity t) {
         resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
-        for (CSVSettings csvsetings : parameter.getCSV出力設定()) {
+        for (CSVSettings csvsetings : parameter.getCsv出力設定()) {
             if (THERE.equals(csvsetings.getコード())) {
                 FlexibleDate shineiYMD = t.get利用者負担額減額Entity().getShinseiYMD();
                 if (shineiYMD != null && !shineiYMD.isEmpty()) {
@@ -393,7 +393,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             ChohyoShutsuryokuJohoShutokuResultEntity t) {
         resultEntity.set要介護度((YokaigoJotaiKubunSupport.toValue(t.get厚労省IF識別コード(),
                 t.get認定情報Entity().get要介護状態区分コード())).getName());
-        for (CSVSettings csvsetings : parameter.getCSV出力設定()) {
+        for (CSVSettings csvsetings : parameter.getCsv出力設定()) {
             if (THERE.equals(csvsetings.getコード())) {
                 FlexibleDate 認定年月日 = t.get認定情報Entity().get認定年月日();
                 if (認定年月日 != null && !認定年月日.isEmpty()) {

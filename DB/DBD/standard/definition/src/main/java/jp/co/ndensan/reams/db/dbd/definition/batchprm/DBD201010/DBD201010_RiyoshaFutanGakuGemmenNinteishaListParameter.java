@@ -46,7 +46,7 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
     // 世帯非課税等
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
     // CSV出力設定
-    private List<CSVSettings> CSV出力設定;
+    private List<CSVSettings> csv出力設定;
     // 改頁出力順ID
     private Long 改頁出力順ID;
     // 帳票ID
@@ -68,6 +68,6 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
      */
     public ChohyoShutsuryokuJohoShutokuProcessParameter toChohyoShutsuryokuJohoShutokuProcessParameter() {
         return new ChohyoShutsuryokuJohoShutokuProcessParameter(対象リスト, 基準日, 所得年度,
-                旧措置区分, 世帯表示, 受給者区分, 世帯非課税等, CSV出力設定, 改頁出力順ID, 帳票ID);
+                旧措置区分, 世帯表示, 受給者区分, 世帯非課税等, csv出力設定, 改頁出力順ID, 帳票ID);
     }
 }

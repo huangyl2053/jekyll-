@@ -46,7 +46,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
     // 世帯非課税等
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
     // CSV出力設定
-    private List<CSVSettings> CSV出力設定;
+    private List<CSVSettings> csv出力設定;
     // 改頁出力順ID
     private Long 改頁出力順ID;
     // 帳票ID
@@ -70,13 +70,13 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
      * @param 世帯表示 世帯表示
      * @param 受給者区分 受給者区分
      * @param 世帯非課税等 世帯非課税等
-     * @param CSV出力設定 CSV出力設定
+     * @param csv出力設定 csv出力設定
      * @param 改頁出力順ID 改頁出力順ID
      * @param 帳票ID 帳票ID
      */
     public ChohyoShutsuryokuJohoShutokuProcessParameter(TargetList 対象リスト,
             FlexibleDate 基準日, FlexibleYear 所得年度, KyusochishaJukyushaKubun 旧措置区分, SetaiHyoji 世帯表示,
-            JukyushaKubun2 受給者区分, List<HihokenshaKeizaiJokyo> 世帯非課税等, List<CSVSettings> CSV出力設定,
+            JukyushaKubun2 受給者区分, List<HihokenshaKeizaiJokyo> 世帯非課税等, List<CSVSettings> csv出力設定,
             Long 改頁出力順ID, RString 帳票ID) {
         this.対象リスト = 対象リスト;
         this.基準日 = 基準日;
@@ -85,7 +85,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
         this.世帯表示 = 世帯表示;
         this.受給者区分 = 受給者区分;
         this.世帯非課税等 = 世帯非課税等;
-        this.CSV出力設定 = CSV出力設定;
+        this.csv出力設定 = csv出力設定;
         this.改頁出力順ID = 改頁出力順ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = FlexibleDate.getNowDate();
