@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-2110-010 LDNS shaotw
  */
-public class DBD519003_YokaigoNinteiSoshitsuDataSakusei extends BatchFlowBase<jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519003.DBD519003_YokaigoNinteiSoshitsuDataSakusei> {
+public class DBD519003_YokaigoNinteiSoshitsuDataSakusei extends
+        BatchFlowBase<jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519003.DBD519003_YokaigoNinteiSoshitsuDataSakusei> {
 
     private static final RString 印刷する = new RString("1");
     private static final String 資格喪失情報PROCESSを実行 = "資格喪失情報PROCESSを実行";
