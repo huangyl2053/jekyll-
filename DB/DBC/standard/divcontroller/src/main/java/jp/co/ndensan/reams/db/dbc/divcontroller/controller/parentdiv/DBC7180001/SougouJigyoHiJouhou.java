@@ -81,15 +81,16 @@ public class SougouJigyoHiJouhou {
     public ResponseData<SougouJigyoHiJouhouDiv> onClick_btnBatchParameterRestore(SougouJigyoHiJouhouDiv div) {
         BatchParameterMap restoreBatchParameterMap = div.getJokenFukugenHozonl().getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         RString 抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出方法"));
-        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = new ArrayList<>();
         if (基本ケアマネジメント情報.equals(抽出方法)) {
-            sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
+            List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
                     creatParameter(ServiceBunrui.ケアマネジメント_経過措置.getコード(), ServiceBunrui.ケアマネジメント.getコード())).records();
+            getHandler(div).onClick_btnBatchParameterRestore(sougoujigyohijouhous);
         } else {
-            sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
+            List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
                     creatParameter(ServiceBunrui.総合事業_経過措置.getコード(), ServiceBunrui.総合事業.getコード())).records();
+            getHandler(div).onClick_btnBatchParameterRestore(sougoujigyohijouhous);
         }
-        getHandler(div).onClick_btnBatchParameterRestore(sougoujigyohijouhous);
+
         return ResponseData.of(div).respond();
     }
 

@@ -727,37 +727,45 @@ public class HanyoListSogoJigyoHi {
         jokenBuilder.append(new RString("【抽出対象者】"));
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("保険者："));
         if (!RString.isNullOrEmpty(processParameter.get保険者コード()) && !保険者_すべて.equals(processParameter.get保険者コード())) {
-            jokenBuilder.append(new RString("保険者："));
             jokenBuilder.append(市町村名);
         }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("抽出方法："));
         jokenBuilder.append(set抽出方法());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("サービス提供年月："));
         jokenBuilder.append(setサービス提供年月());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("審査年月："));
         jokenBuilder.append(set審査年月());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("取込年月："));
         jokenBuilder.append(set取込年月());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("事業者コード："));
         if (!RString.isNullOrEmpty(processParameter.get事業者コード())) {
-            jokenBuilder.append(new RString("事業者コード：("));
+            jokenBuilder.append(new RString("("));
             jokenBuilder.append(processParameter.get事業者コード());
             jokenBuilder.append(new RString("） "));
             jokenBuilder.append(事業所名);
         }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("サービス種類コード："));
         if (!RString.isNullOrEmpty(processParameter.getサービス種類コード())) {
-            jokenBuilder.append(new RString("サービス種類コード：("));
+            jokenBuilder.append(new RString("("));
             jokenBuilder.append(processParameter.getサービス種類コード());
             jokenBuilder.append(new RString("） "));
             jokenBuilder.append(サービス種類コード名称);
+        } else {
+            jokenBuilder.append(new RString("(すべて） "));
         }
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
@@ -815,13 +823,13 @@ public class HanyoListSogoJigyoHi {
     private RStringBuilder set抽出方法() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         if (基本情報.equals(processParameter.get抽出方法())) {
-            jokenBuilder.append(new RString("抽出方法：基本情報のみ"));
+            jokenBuilder.append(new RString("基本情報のみ"));
         } else if (基本明細情報.equals(processParameter.get抽出方法())) {
-            jokenBuilder.append(new RString("抽出方法：基本情報＋明細情報"));
+            jokenBuilder.append(new RString("基本情報＋明細情報"));
         } else if (基本集計情報.equals(processParameter.get抽出方法())) {
-            jokenBuilder.append(new RString("抽出方法：基本情報＋集計情報"));
+            jokenBuilder.append(new RString("基本情報＋集計情報"));
         } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
-            jokenBuilder.append(new RString("抽出方法：基本情報＋ケアマネジメント費情報"));
+            jokenBuilder.append(new RString("基本情報＋ケアマネジメント費情報"));
         }
         return jokenBuilder;
     }
@@ -830,18 +838,15 @@ public class HanyoListSogoJigyoHi {
         RStringBuilder jokenBuilder = new RStringBuilder();
         if (!RString.isNullOrEmpty(processParameter.getサービス提供年月開始年月())
                 && !RString.isNullOrEmpty(processParameter.getサービス提供年月終了年月())) {
-            jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月終了年月()));
         } else if (!RString.isNullOrEmpty(processParameter.getサービス提供年月開始年月())
                 && RString.isNullOrEmpty(processParameter.getサービス提供年月終了年月())) {
-            jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月開始年月()));
             jokenBuilder.append(new RString("～"));
         } else if (RString.isNullOrEmpty(processParameter.getサービス提供年月開始年月())
                 && !RString.isNullOrEmpty(processParameter.getサービス提供年月終了年月())) {
-            jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月終了年月()));
         }
@@ -852,18 +857,15 @@ public class HanyoListSogoJigyoHi {
         RStringBuilder jokenBuilder = new RStringBuilder();
         if (!RString.isNullOrEmpty(processParameter.get審査年月開始年月())
                 && !RString.isNullOrEmpty(processParameter.get審査年月終了年月())) {
-            jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(set年月(processParameter.get審査年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get審査年月終了年月()));
         } else if (!RString.isNullOrEmpty(processParameter.get審査年月開始年月())
                 && RString.isNullOrEmpty(processParameter.get審査年月終了年月())) {
-            jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(set年月(processParameter.get審査年月開始年月()));
             jokenBuilder.append(new RString("～"));
         } else if (RString.isNullOrEmpty(processParameter.get審査年月開始年月())
                 && !RString.isNullOrEmpty(processParameter.get審査年月終了年月())) {
-            jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get審査年月終了年月()));
         }
@@ -874,18 +876,15 @@ public class HanyoListSogoJigyoHi {
         RStringBuilder jokenBuilder = new RStringBuilder();
         if (!RString.isNullOrEmpty(processParameter.get取込年月開始年月())
                 && !RString.isNullOrEmpty(processParameter.get取込年月終了年月())) {
-            jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(set年月(processParameter.get取込年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get取込年月終了年月()));
         } else if (!RString.isNullOrEmpty(processParameter.get取込年月開始年月())
                 && RString.isNullOrEmpty(processParameter.get取込年月終了年月())) {
-            jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(set年月(processParameter.get取込年月開始年月()));
             jokenBuilder.append(new RString("～"));
         } else if (RString.isNullOrEmpty(processParameter.get取込年月開始年月())
                 && !RString.isNullOrEmpty(processParameter.get取込年月終了年月())) {
-            jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get取込年月終了年月()));
         }
