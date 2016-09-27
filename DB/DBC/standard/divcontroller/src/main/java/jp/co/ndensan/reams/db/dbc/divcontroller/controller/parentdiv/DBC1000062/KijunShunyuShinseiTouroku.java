@@ -309,6 +309,7 @@ public class KijunShunyuShinseiTouroku {
             return ResponseData.of(div).respond();
         }
         ValidationMessageControlPairs validPairs = getValidationHandler(div).明細パネルチェックValidate();
+        validPairs.add(getValidationHandler(div).明細確定時のチェック処理());
         if (validPairs.iterator().hasNext()) {
             div.setHdnFlag1(チェックなし);
             div.setHdnFlag2(チェックなし);

@@ -416,6 +416,7 @@ public class KijunShunyuShinseiTourokuHandler {
             div.setHdnRirekiNo(new RString(getMax履歴番号() + NUM_1));
             基準収入額データList = get明細Gird(識別コード);
             追加状態定義();
+            set明細パネル(false);
         } else {
             dgIchiran_Row 修正Row = div.getIchiran().getDgIchiran().getClickedItem();
             div.getMeisai().getTxtSetaiCode().setValue(修正Row.getSetaiCode());
@@ -445,11 +446,21 @@ public class KijunShunyuShinseiTourokuHandler {
             div.setHdnRirekiNo(修正Row.getRirekiNo());
             基準収入額データList = DataPassingConverter.deserialize(修正Row.getKijyunShunyuGakuData(), List.class);
             修正状態定義();
+            set明細パネル(true);
         }
 
         set明細Girdの項目(基準収入額データList, 状態);
         set押下可能ボタン();
         set隠し項目(識別コード);
+    }
+
+    private void set明細パネル(boolean flag) {
+        div.getMeisai().getTxtSetaiCode().setDisabled(flag);
+        div.getMeisai().getTxtShoriNendo().setDisabled(flag);
+        div.getMeisai().getTxtSetaiinHaakuKijunYMD().setDisabled(flag);
+        div.getMeisai().getTxtShinseiYMD().setDisabled(flag);
+        div.getMeisai().getTxtShinseishoSakuseiYMD().setDisabled(flag);
+        div.getMeisai().getBtnSetaiSaiSanshutsu().setDisabled(flag);
     }
 
     private void clear明細パネル() {
@@ -631,6 +642,7 @@ public class KijunShunyuShinseiTourokuHandler {
         List<KijunShunyuShinseiDate> 基準収入額データList = new ArrayList<>();
         FlexibleDate 世帯員把握基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
         FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+        FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
         int count = NUM_0;
         List<SetaiinJoho> 世帯員情報List = SetaiinFinder.createInstance().get世帯員情報By識別コード(識別コード, 世帯員把握基準日);
         List<HihokenshaDaicho> 被保険者台帳情報List = new ArrayList<>();
@@ -643,7 +655,7 @@ public class KijunShunyuShinseiTourokuHandler {
         }
         for (HihokenshaDaicho 被保険者台帳 : 被保険者台帳情報List) {
             List<SetaiinShotoku> 世帯員所得List = SetaiinShotokuJohoFinder.createInstance().get世帯員所得情報(
-                    被保険者台帳.get識別コード(), 処理年度.getYear(), new YMDHMS(世帯員把握基準日.toString().concat(KEY_HMS.toString())));
+                    被保険者台帳.get識別コード(), 年度, new YMDHMS(世帯員把握基準日.toString().concat(KEY_HMS.toString())));
             RString システム日付 = RDate.getNowDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             if (世帯員所得List == null || 世帯員所得List.isEmpty()) {
@@ -671,6 +683,8 @@ public class KijunShunyuShinseiTourokuHandler {
             int count,
             FlexibleDate 世帯員把握基準日) {
         KijunShunyuShinseiDate 基準収入額データ;
+        FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+        FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
             HihokenshaNo 被保険者番号 = 世帯員所得.get被保険者番号();
             基準収入額データ = new KijunShunyuShinseiDate();
@@ -680,8 +694,7 @@ public class KijunShunyuShinseiTourokuHandler {
             基準収入額データ.set氏名カナ(世帯員所得.getカナ氏名());
             基準収入額データ.set生年月日(世帯員所得.get生年月日());
             基準収入額データ.set性別(世帯員所得.get性別());
-            FlexibleDate 計算基準日 = new FlexibleDate(div.getMeisai().getTxtShoriNendo().getValue().getYear()
-                    .minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
+            FlexibleDate 計算基準日 = new FlexibleDate(年度.minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
             AgeCalculator 年齢 = new AgeCalculator(DateOfBirthFactory.createInstance(世帯員所得.get生年月日()),
                     JuminJotai.住民, 世帯員所得.get住民情報_異動日(), 計算基準日);
             基準収入額データ.set年齢(年齢.get年齢());
@@ -802,8 +815,9 @@ public class KijunShunyuShinseiTourokuHandler {
     public void set世帯再算出(ShikibetsuCode 識別コード, RString 状態) {
         RString 世帯コード = div.getMeisai().getTxtSetaiCode().getValue();
         FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+        FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
         FlexibleDate 基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
-        Map<RString, Integer> 控除対象人数 = 計算控除対象人数(識別コード, 処理年度.getYear());
+        Map<RString, Integer> 控除対象人数 = 計算控除対象人数(識別コード, 年度);
         div.getMeisai().getTxtUnder16().setValue(new Decimal(控除対象人数.get(KEY_未満人数)));
         div.getMeisai().getTxtOver16().setValue(new Decimal(控除対象人数.get(KEY_以上人数)));
         set明細Girdの項目(get明細Gird(識別コード), 状態);
@@ -868,15 +882,16 @@ public class KijunShunyuShinseiTourokuHandler {
                 set控除前後(row, 課税所得額);
             }
         } else {
+            FlexibleDate 世帯基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
+            FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+            FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
             for (dgMeisai_Row row : rowList) {
                 HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getHihokenshaNo());
-                FlexibleDate 世帯基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
-                FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
                 HihokenshaDaicho 被保険者台帳情報 = HihokenshaDaichoManager.createInstance().find被保険者台帳(
                         被保険者番号, 世帯基準日);
                 if (被保険者台帳情報 != null) {
                     List<SetaiinShotoku> 世帯員所得List = SetaiinShotokuJohoFinder.createInstance().get世帯員所得情報(
-                            被保険者台帳情報.get識別コード(), 処理年度.getYear(), YMDHMS.now());
+                            被保険者台帳情報.get識別コード(), 年度, YMDHMS.now());
                     Decimal 課税所得額 = 世帯員所得List == null || 世帯員所得List.isEmpty()
                             ? Decimal.ZERO : 世帯員所得List.get(NUM_0).get課税所得額();
                     row.getKazeiShotokuKojomae().setValue(課税所得額);
@@ -1022,8 +1037,10 @@ public class KijunShunyuShinseiTourokuHandler {
     }
 
     private void set一覧Grid(dgIchiran_Row row) {
+        FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+        FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
         row.setSetaiCode(div.getMeisai().getTxtSetaiCode().getValue());
-        row.setShoriNendo(getWarekiYear(div.getMeisai().getTxtShoriNendo().getValue().getYear()));
+        row.setShoriNendo(getWarekiYear(年度));
         row.setRirekiNo(div.getHdnRirekiNo());
         row.setSetaikijunYMD(toWarekiHalf_Zero(div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue()));
         row.setShinseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseiYMD().getValue()));

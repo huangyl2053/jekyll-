@@ -15,12 +15,15 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -31,7 +34,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KijunShunyuShinseiTourokuValidationHandler {
 
     private final KijunShunyuShinseiTourokuDiv div;
+    private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
+    private static final int NUM_4 = 4;
     private static final RString MESSAGE_控除再算出 = new RString("世帯員１人に世帯主チェックを付けて、世帯主を");
     private static final RString MESSAGE_いづれか = new RString("適用開始・算定基準額・決定年月日のいづれか");
     private static final RString MESSAGE_全て = new RString("適用開始・算定基準額・決定年月日の全て");
@@ -88,6 +93,34 @@ public class KijunShunyuShinseiTourokuValidationHandler {
         return create明細GridDictionary().check(messages);
     }
 
+    /**
+     * 明細確定時のバリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 明細確定時のチェック処理() {
+        ValidationMessageControlPairs messages = new ValidationMessageControlPairs();
+        if (!KijunShunyuShinseiTourokuSpec.処理年度チェック.apply(div)) {
+            messages.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
+                    MESSAGE_処理年度.toString().replace(MESSAGE_XXXX, DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度,
+                                    RDate.getNowDate(), SubGyomuCode.DBB介護賦課)))));
+        }
+        if (!KijunShunyuShinseiTourokuSpec.世帯員把握基準日チェック.apply(div)) {
+            FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+            FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+            messages.add(new ValidationMessageControlPair(get入力値が不正Message(MESSAGE_世帯員把握基準日,
+                    年度.toDateString(), 年度.plusYear(NUM_1).toDateString())));
+        }
+        if (!KijunShunyuShinseiTourokuSpec.適用開始チェック１.apply(div)) {
+            FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+            FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+            messages.add(new ValidationMessageControlPair(get入力値が不正Message(MESSAGE_適用開始,
+                    年度.toDateString(), 年度.plusYear(NUM_1).toDateString())));
+        }
+
+        return messages;
+    }
+
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage)
@@ -97,14 +130,6 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     private ValidationDictionary create明細パネルDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(KijunShunyuShinseiTourokuValidationMessages.適用データチェックMessage)
-                .add(new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, MESSAGE_処理年度.toString()
-                                .replace(MESSAGE_XXXX, DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, RDate.getNowDate(),
-                                                SubGyomuCode.DBB介護賦課))))
-                .add(get入力値が不正Message(MESSAGE_世帯員把握基準日,
-                                div.getMeisai().getTxtShoriNendo().getValue().getYear().toDateString(),
-                                div.getMeisai().getTxtShoriNendo().getValue().getYear().plusYear(NUM_1).toDateString()))
-                .add(get入力値が不正Message(MESSAGE_適用開始, div.getMeisai().getTxtShoriNendo().getValue().getYear().toDateString(),
-                                div.getMeisai().getTxtShoriNendo().getValue().getYear().plusYear(NUM_1).toDateString()))
                 .add(KijunShunyuShinseiTourokuValidationMessages.適用開始に不整合チェックMessage)
                 .add(KijunShunyuShinseiTourokuValidationMessages.総収入額チェックMessage)
                 .add(KijunShunyuShinseiTourokuValidationMessages.世帯員チェックMessage)
@@ -150,18 +175,6 @@ public class KijunShunyuShinseiTourokuValidationHandler {
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(KijunShunyuShinseiTourokuSpec.適用データチェック)
                     .thenAdd(KijunShunyuShinseiTourokuValidationMessages.適用データチェックMessage)
-                    .ifNot(KijunShunyuShinseiTourokuSpec.処理年度チェック)
-                    .thenAdd(new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, MESSAGE_処理年度.toString()
-                                    .replace(MESSAGE_XXXX, DbBusinessConfig.get(
-                                                    ConfigNameDBB.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))))
-                    .ifNot(KijunShunyuShinseiTourokuSpec.世帯員把握基準日チェック)
-                    .thenAdd(get入力値が不正Message(MESSAGE_世帯員把握基準日,
-                                    div.getMeisai().getTxtShoriNendo().getValue().getYear().toDateString(),
-                                    div.getMeisai().getTxtShoriNendo().getValue().getYear().plusYear(NUM_1).toDateString()))
-                    .ifNot(KijunShunyuShinseiTourokuSpec.適用開始チェック１)
-                    .thenAdd(get入力値が不正Message(MESSAGE_適用開始,
-                                    div.getMeisai().getTxtShoriNendo().getValue().getYear().toDateString(),
-                                    div.getMeisai().getTxtShoriNendo().getValue().getYear().plusYear(NUM_1).toDateString()))
                     .ifNot(KijunShunyuShinseiTourokuSpec.適用開始チェック２)
                     .thenAdd(KijunShunyuShinseiTourokuValidationMessages.適用開始に不整合チェックMessage)
                     .ifNot(KijunShunyuShinseiTourokuSpec.総収入額チェック)
