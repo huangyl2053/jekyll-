@@ -231,15 +231,15 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 heikinRiyoGakuTokeihyoEntity.set条件1(条件１);
             }
         }
-        if ((!RString.isNullOrEmpty(paramter.getShichosonCode()) && 值000000.equals(paramter.getShichosonCode()))
-                && (!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) || 值000000.equals(paramter.getKyuShichosonCode())) {
+        if ((!RString.isNullOrEmpty(paramter.getShichosonCode()) && !值000000.equals(paramter.getShichosonCode()))
+                && (RString.isNullOrEmpty(paramter.getKyuShichosonCode())) || 值000000.equals(paramter.getKyuShichosonCode())) {
             RStringBuilder rb = new RStringBuilder();
             rb.append(市町村名);
             rb.append(":");
             rb.append(paramter.getShichosonMei());
             RString 条件2 = rb.toRString();
             heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
-        } else if ((!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) && 值000000.equals(paramter.getKyuShichosonCode())) {
+        } else if ((!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) && !值000000.equals(paramter.getKyuShichosonCode())) {
             RStringBuilder rb = new RStringBuilder();
             rb.append(旧市町村名);
             rb.append(":");
