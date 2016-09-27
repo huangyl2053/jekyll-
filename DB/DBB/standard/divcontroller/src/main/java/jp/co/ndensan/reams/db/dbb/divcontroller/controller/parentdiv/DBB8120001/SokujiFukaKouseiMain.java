@@ -91,6 +91,7 @@ public class SokujiFukaKouseiMain {
     private static final RString メニューID_通知書発行後異動把握 = new RString("DBBMN32001");
     private static final RString メニューID_特徴仮算定賦課エラー一覧 = new RString("DBBMN33004");
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
+    private static final RString メニューID_特殊処理 = new RString("DBBMNC3001");
     private static final Code CODE_003 = new Code("0003");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -626,7 +627,8 @@ public class SokujiFukaKouseiMain {
             通知書番号 = 賦課エラー情報.get通知書番号();
             被保険者番号 = 賦課エラー情報.get被保険者番号();
             識別コード = 賦課エラー情報.get識別コード();
-        } else if (メニューID_即時賦課更正.equals(メニューID)) {
+        } else if (メニューID_即時賦課更正.equals(メニューID)
+                || メニューID_特殊処理.equals(メニューID)) {
             FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             賦課年度 = 賦課対象者.get賦課年度();
             通知書番号 = 賦課対象者.get通知書番号();
