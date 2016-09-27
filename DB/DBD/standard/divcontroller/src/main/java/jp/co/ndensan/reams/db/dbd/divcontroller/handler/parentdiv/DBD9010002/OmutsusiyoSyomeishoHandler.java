@@ -111,9 +111,11 @@ public class OmutsusiyoSyomeishoHandler {
         }
         if (表示対象データ != null) {
             div.getPanelShosaiEria().getTxtZenkaiHakkouBi()
-                    .setValue(表示対象データ.get発行年月日() != null ? new RDate(表示対象データ.get発行年月日().toString()) : null);
+                    .setValue((表示対象データ.get発行年月日() != null && !表示対象データ.get発行年月日().isEmpty())
+                            ? new RDate(表示対象データ.get発行年月日().toString()) : null);
             div.getPanelShosaiEria().getTxtShinseiBi()
-                    .setValue(表示対象データ.get申請年月日() != null ? new RDate(表示対象データ.get申請年月日().toString()) : null);
+                    .setValue((表示対象データ.get申請年月日() != null && !表示対象データ.get申請年月日().isEmpty())
+                            ? new RDate(表示対象データ.get申請年月日().toString()) : null);
         }
     }
 
@@ -130,7 +132,7 @@ public class OmutsusiyoSyomeishoHandler {
         OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance().editomutsusiyoSyomeisho(識別コード, 帳票分類ID);
         OmutsuShoumeishoPrintService printService = new OmutsuShoumeishoPrintService();
         SourceDataCollection collection = printService.printSingle(おむつ使用証明書Entity);
-        AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード,
+        AccessLogger.log(AccessLogType.更新, PersonalData.of(識別コード,
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号"))
                 .value(被保険者番号).build()));
         IryohiKojoManager manager = new IryohiKojoManager();

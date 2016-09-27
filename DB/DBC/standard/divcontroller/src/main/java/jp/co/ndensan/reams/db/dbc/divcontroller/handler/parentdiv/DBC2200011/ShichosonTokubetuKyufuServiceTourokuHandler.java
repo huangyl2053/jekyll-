@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.shichosontokubetukyufuservice.Shi
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -128,6 +129,15 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         div.getKubunShikyuGendogakuShosai().getRadKubun().setDisabled(false);
         div.getKubunShikyuGendogakuShosai().getTxtTanni().setDisabled(false);
         div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().setDisabled(false);
+
+        div.getKubunShikyuGendogakuShosai().getTxtServiceCode2().clearValue();
+        div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().clearValue();
+        div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().clearValue();
+        div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().clearValue();
+        div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().clearValue();
+        div.getKubunShikyuGendogakuShosai().getRadKubun().setSelectedKey(単位コード);
+        div.getKubunShikyuGendogakuShosai().getTxtTanni().clearValue();
+        div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().clearValue();
 
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(削除やめる, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(追加やめる, false);
@@ -242,16 +252,37 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
     }
 
     /**
-     * 項目が変更をチェックのメソッドです。
+     * 追加項目が変更をチェックのメソッドです。
      *
      * @return Boolean
      */
-    public boolean is項目が変更() {
+    public boolean is追加項目が変更() {
+        RString serviceCode = div.getKubunShikyuGendogakuShosai().getTxtServiceCode2().getValue();
+        RDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue();
+        RDate 有効期間終了年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue();
+        RString 正式名称 = div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue();
+        RString 略称 = div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue();
+        RString 区分 = div.getKubunShikyuGendogakuShosai().getRadKubun().getSelectedKey();
+        Decimal 単位_日数 = div.getKubunShikyuGendogakuShosai().getTxtTanni().getValue();
+        Decimal 支給限度基準額 = div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().getValue();
+
+        return !(serviceCode.isNullOrEmpty() && 有効期間開始年月日 == null
+                && 有効期間終了年月日 == null && 正式名称.isEmpty()
+                && 略称.isEmpty() && 区分.equals(単位コード)
+                && 単位_日数 == null && 支給限度基準額 == null);
+    }
+
+    /**
+     * 修正項目が変更をチェックのメソッドです。
+     *
+     * @return Boolean
+     */
+    public boolean is修正項目が変更() {
         ShichosonTokubetuKyufuServiceManager manager = new ShichosonTokubetuKyufuServiceManager();
 
         RString serviceCode = サービスコード固定値.concat(div.getKubunShikyuGendogakuShosai().getTxtServiceCode2().getValue());
-        FlexibleDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue().toFlexibleDate();
-        FlexibleDate 有効期間終了年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue().toFlexibleDate();
+        RDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue();
+        RDate 有効期間終了年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue();
         RString 正式名称 = div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue();
         RString 略称 = div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue();
         RString 区分 = div.getKubunShikyuGendogakuShosai().getRadKubun().getSelectedKey();
@@ -267,8 +298,8 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
                 .set市町村特別給付用サービスコード(serviceCode)
                 .set市町村特別給付用サービス名_正式名称(正式名称)
                 .set市町村特別給付用サービス名_略称(略称)
-                .set市町村特別給付用サービス有効期間開始年月日(有効期間開始年月日)
-                .set市町村特別給付用サービス有効期間終了年月日(有効期間終了年月日)
+                .set市町村特別給付用サービス有効期間開始年月日(有効期間開始年月日 != null ? new FlexibleDate(有効期間開始年月日.toDateString()) : FlexibleDate.EMPTY)
+                .set市町村特別給付用サービス有効期間終了年月日(有効期間終了年月日 != null ? new FlexibleDate(有効期間終了年月日.toDateString()) : FlexibleDate.EMPTY)
                 .set市町村特別給付用サービス区分(区分)
                 .set市町村特別給付用単位_日数(単位_日数)
                 .set市町村特別給付用支給限度基準額(支給限度基準額)
@@ -296,6 +327,33 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         entity.set履歴番号(Integer.parseInt(row.getRirekiNo().toString()));
         entity.set直近フラグ(row.getChokkinFlag());
         initialize明細エリア(entity);
+    }
+
+    /**
+     * 入力された値を破棄します
+     */
+    public void discard入力内容() {
+        dgServiceNaiyo_Row row = div.getDgServiceNaiyo().getActiveRow();
+        if (row == null) {
+            row = div.getDgServiceNaiyo().getDataSource().get(0);
+        }
+        ShichosonTokubetuKyufuServiceEntityResult entity = new ShichosonTokubetuKyufuServiceEntityResult();
+        entity.setサービスコード(row.getServiceCode());
+        entity.set有効期間開始年月日(new FlexibleDate(row.getServiceYukoKikanKaishiYMDSeireki().getValue().toString()));
+        entity.set有効期間終了年月日(new FlexibleDate(row.getServiceYukoKikanShuryoYMDSeireki().getValue().toString()));
+        entity.set正式名称(row.getServiceSeishikiName());
+        if (単位.equals(row.getServiceKubun())) {
+            entity.setサービス区分(単位コード);
+        } else if (日数.equals(row.getServiceKubun())) {
+            entity.setサービス区分(日数コード);
+        }
+        entity.set単位(new Decimal(row.getTanisuNissu().toString()));
+        entity.set支給限度基準額(new Decimal(row.getShikyuGendogaku().toString()));
+        entity.set略称(row.getServiceRyakushoName());
+        entity.set履歴番号(Integer.parseInt(row.getRirekiNo().toString()));
+        entity.set直近フラグ(row.getChokkinFlag());
+        initialize明細エリア(entity);
+        initialize照会モード();
     }
 
     /**
@@ -338,7 +396,7 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         }
         div.getDgServiceNaiyo().setDataSource(dataSource);
         if (div.getDgServiceNaiyo().getActiveRow() == null) {
-            div.getDgServiceNaiyo().setActiveRowId(1);
+            div.getDgServiceNaiyo().setActiveRowId(0);
         }
     }
 }
