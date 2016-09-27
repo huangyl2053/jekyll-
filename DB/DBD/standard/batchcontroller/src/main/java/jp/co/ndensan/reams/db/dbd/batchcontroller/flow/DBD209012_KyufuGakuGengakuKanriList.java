@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.ShunoJokyoHaakuProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.ShunoTainoJokyoHaakuProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32004.KyufuGakuGengakuTainoShaProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt32004.TaishoShaKanriJohoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209012.KyufuGakuGengakuTainoShaProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209012.TaishoShaKanriJohoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012.DBD209012_KyufuGakuGengakuKanriListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoJokyoHaakuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoTainoJokyoHaakuProcessParameter;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
  *
  * @reamsid_L DBD-3800-030 x_xuliang
  */
-public class DBD209012_KyufuGakuGengakuKanriLis extends BatchFlowBase<DBD209012_KyufuGakuGengakuKanriListParameter> {
+public class DBD209012_KyufuGakuGengakuKanriList extends BatchFlowBase<DBD209012_KyufuGakuGengakuKanriListParameter> {
 
     private static final String 収納状況把握情報の取得 = "shunoJokyoHaaku";
     private static final String 対象者管理情報の取得 = "KyufuGengakuKanriListTaishoTokutei";
