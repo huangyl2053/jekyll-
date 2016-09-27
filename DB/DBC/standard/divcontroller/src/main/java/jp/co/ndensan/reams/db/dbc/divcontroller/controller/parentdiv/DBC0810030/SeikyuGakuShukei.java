@@ -68,9 +68,7 @@ public class SeikyuGakuShukei {
                 事業者番号,
                 様式番号,
                 明細番号, null);
-        if (entityList == null || entityList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
+        
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
         getHandler(div).initialize(entityList);
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
