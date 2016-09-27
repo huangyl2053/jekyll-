@@ -959,7 +959,10 @@ public class HanyoListParamHandler {
     }
 
     private RDate flexibleDateToRDate(FlexibleDate date) {
-        return new RDate(date.getYearValue(), date.getMonthValue(), date.getDayValue());
+        if (date != null) {
+            return new RDate(date.getYearValue(), date.getMonthValue(), date.getDayValue());
+        }
+        return null;
     }
 
     private void restore基準日(BatchParameterMap map, RString fieldName) {
@@ -1053,7 +1056,7 @@ public class HanyoListParamHandler {
         get宛名抽出条件div().set地区２終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
         get宛名抽出条件div().set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
         get宛名抽出条件div().set地区３終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
-        get宛名抽出条件div().set保険者(); //TODO
+        get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
     }
 
     private void restore出力順_帳票ID_出力項目(BatchParameterMap map, RString 出力順fieldName, RString 帳票IDfieldName, RString 出力項目fieldName) {
@@ -1435,7 +1438,6 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setDisabled(喪失区分DDLIs非表示);
     }
 
-    //to-do: 宛名抽出条件パネル
     private void set宛名抽出条件パネル() {
         get宛名抽出条件div().initialize();
         get宛名抽出条件子Div().getRadSelectKijun().setSelectedKey(NenreiSoChushutsuHoho.年齢範囲.getコード());
@@ -1447,7 +1449,7 @@ public class HanyoListParamHandler {
 
     private void set宛名抽出条件共有パネル() {
         get宛名抽出条件div().set地区(Chiku.全て.getコード());
-        //TODO　保険者DDL
+        get宛名抽出条件div().set保険者();
         get宛名抽出条件子Div().getTxtSeinengappi().clearFromValue();
         get宛名抽出条件子Div().getTxtSeinengappi().clearToValue();
     }
