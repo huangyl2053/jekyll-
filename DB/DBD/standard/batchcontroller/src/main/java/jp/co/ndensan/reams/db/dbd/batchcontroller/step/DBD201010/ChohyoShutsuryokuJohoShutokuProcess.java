@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD202010;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     private static final ReportIdDBD REPORT_DBD200002 = ReportIdDBD.DBD200002;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoulyagennmenn."
-            + "GennMennGennGakuTaiSyoulyaMapper.select利用者負担額減免認定者");
+            + "IGennMennGennGakuTaiSyoulyaMapper.select利用者負担額減免認定者");
     private int 連番 = 0;
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
@@ -208,11 +208,13 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             ファイル名 = new RString("RiyoshaFutangakuGemmenNinteishaIchiran");
             帳票名称 = new RString("DBD200013_RiyoshaFutangakuGemmenNinteishaIchiran");
         }
-        for (CSVSettings csvsetings : parameter.getCsv出力設定()) {
-            if (ONE.equals(csvsetings.getコード())) {
-                項目名付加 = true;
-            } else if (!ONE.equals(csvsetings.getコード())) {
-                項目名付加 = false;
+        if (parameter.getCsv出力設定() != null && !parameter.getCsv出力設定().isEmpty()) {
+            for (CSVSettings csvsetings : parameter.getCsv出力設定()) {
+                if (ONE.equals(csvsetings.getコード())) {
+                    項目名付加 = true;
+                } else if (!ONE.equals(csvsetings.getコード())) {
+                    項目名付加 = false;
+                }
             }
         }
     }

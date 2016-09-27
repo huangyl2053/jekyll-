@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD202010.ChohyoShutsuryokuJohoShutokuProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD202010.HchiJinoSyouriCreateProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010.ChohyoShutsuryokuJohoShutokuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010.HchiJinoSyouriCreateProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD201010.DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
