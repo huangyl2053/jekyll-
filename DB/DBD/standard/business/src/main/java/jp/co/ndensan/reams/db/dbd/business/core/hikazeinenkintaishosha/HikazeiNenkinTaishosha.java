@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.db.dbd.entity.euc.hikazeinenkintaishosha.HikazeiNenki
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -168,13 +166,8 @@ public class HikazeiNenkinTaishosha {
         } else {
             年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
         }
-        FlexibleDate 消除異動年月日 = FlexibleDate.EMPTY;
-        AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(
-                new FlexibleDate(年齢基準日.toDateString())),
-                JuminJotai.住登外,
-                消除異動年月日);
-        RString 年齢From逆算 = new RString(ageCalculator.get年齢到達日(-年齢From).toString());
-        RString 年齢To逆算 = new RString(ageCalculator.get年齢到達日(-年齢To).toString());
+        RString 年齢From逆算 = 年齢基準日.minusYear(年齢To).toDateString();
+        RString 年齢To逆算 = 年齢基準日.minusYear(年齢From + 1).plusDay(1).toDateString();
         return HikazeiNenkinTaishoshaMybatisParameter.createMybatisParameter(
                 processParameter.get抽出方法(),
                 processParameter.get被保険者抽出方法(),
