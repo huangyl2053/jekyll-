@@ -140,8 +140,8 @@ public class HihokenshaDaichoKoshinProcess extends BatchProcessBase<ShikakuIdoTa
     protected void afterExecute() {
         DbT7022ShoriDateKanriEntity dbt7022 = mapper.selectバッチ内で抽出条件();
         if (dbt7022 == null) {
-            hihokenshaDaichoKoshin.updNenreitotatsuJoken(開始日, 終了日, dbt7022);
-            dbT7022Writer.insert(dbt7022);
+            DbT7022ShoriDateKanriEntity insertEntity = hihokenshaDaichoKoshin.updNenreitotatsuJoken(開始日, 終了日, null);
+            dbT7022Writer.insert(insertEntity);
         } else {
             hihokenshaDaichoKoshin.updNenreitotatsuJoken(開始日, 終了日, dbt7022);
             dbT7022Writer.update(dbt7022);
