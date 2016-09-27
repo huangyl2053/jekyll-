@@ -169,8 +169,8 @@ public class JizenShinsakaiShiryoPublicationHandler {
         if (!div.getPublicationTargetShinsakai().getTxtGogitaiName().getValue().isEmpty()) {
             batchParameter.setGogitaiMei(div.getPublicationTargetShinsakai().getTxtGogitaiName().getValue());
         }
-        if (!div.getPublishingCondition().getTxtShutsuryokuJun().getValue().isEmpty()) {
-            batchParameter.setSyuturyokuJun(div.getPublishingCondition().getTxtShutsuryokuJun().getValue());
+        if (div.getPublicationTargetShinsakai().getTxtYoteiTeiin().getValue() != null) {
+            batchParameter.setSyuturyokuJun(new RString(div.getPublicationTargetShinsakai().getTxtYoteiTeiin().getValue().toString()));
         }
         if (!div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().isEmpty()) {
             if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(A4縦)) {
