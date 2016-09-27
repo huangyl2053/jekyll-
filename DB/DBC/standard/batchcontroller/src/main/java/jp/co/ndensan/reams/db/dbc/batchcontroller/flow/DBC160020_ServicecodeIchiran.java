@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC160020.ServicecodeIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC160020.DBC160020_ServicecodeIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecodeichiran.ServicecodeIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -49,7 +50,7 @@ public class DBC160020_ServicecodeIchiran extends BatchFlowBase<DBC160020_Servic
         param.set処理日時(システム日時);
         param.set抽出条件区分(getParameter().get抽出条件区分());
         param.setサービス分類s(getParameter().getサービス分類s());
-        param.setサービス種類コード(getParameter().getサービス種類コード());
+        param.setサービス種類コード(new ServiceShuruiCode(getParameter().getサービス種類コード()));
         param.setサービス項目コード(getParameter().getサービス項目コード());
         param.set帳票で出力(getParameter().is帳票で出力());
         param.setＣＳＶファイルで出力(getParameter().isＣＳＶファイルで出力());
