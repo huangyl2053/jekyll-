@@ -561,7 +561,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                 div.getCblGassan2().getSelectedKeys().contains(ALL)
                 && div.getRadShukeiType5().getSelectedKey().equals(決定年月),
                 市町村コードリスト,
-                div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey().equals(new RString("gappei")),
+                div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey().equals(new RString("kyuShichoson")),
                 div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey().equals(new RString("koseiShichoson"))
         );
         return batchParameter;
