@@ -99,7 +99,6 @@ public class CreateGyomuHokenshaJohoGetsujiProcess extends BatchProcessBase<Toku
         if (null != entity.getHihokensha() && null != entity.getHihokensha().getShikibetsuCode()) {
             boolean 資格喪失flag = do資格喪失の判定(entity.getHihokensha(), now);
             if (!資格喪失flag) {
-                System.out.println("資格が喪失していない。");
                 不一致理由 = do徴収方法の不一致理由(entity.getChoshuhoho(), 開始月);
             } else {
                 不一致理由 = do他市町村住所地特例者台帳時不一致理由(entity.getTokurei(), entity.getJogaisha(), true);
