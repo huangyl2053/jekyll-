@@ -152,7 +152,7 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
         if (対象年月1.equals(taishoNendoYM)) {
             istaishoNendoYM = true;
         } else if (対象年月2.equals(taishoNendoYM)) {
-            istaishoNendoYM = true;
+            istaishoNendoYM = false;
         }
         return istaishoNendoYM;
     }

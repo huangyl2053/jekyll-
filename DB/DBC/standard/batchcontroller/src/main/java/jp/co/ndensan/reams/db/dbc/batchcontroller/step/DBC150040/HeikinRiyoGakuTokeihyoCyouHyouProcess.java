@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150040;
 
+import java.math.BigDecimal;
 import jp.co.ndensan.reams.db.dbc.business.report.heikinriyogakutokeihyo.HeikinRiyoGakuTokeihyoReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.heikinriyogakuyokeihyo.HeikinriyogakuTokeihyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -41,6 +42,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper."
             + "get平均利用額統計Entity");
     private static final int 值0 = 0;
+    private static final RString 值零 = new RString("0");
     private static final RString 值1 = new RString("1");
     private static final RString 值2 = new RString("2");
     private static final RString 值33 = new RString("3");
@@ -69,7 +71,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     @BatchWriter
     private BatchReportWriter<HeikinRiyoGakuTokeihyoReportSource> batchReportWriter;
     private ReportSourceWriter<HeikinRiyoGakuTokeihyoReportSource> reportSourceWriter;
-    private int count = 1;
+    private int count = 0;
     private HeikinriyogakuTokeihyoProcessParameter paramter;
     private static final RString 帳票ID = ReportIdDBC.DBC300004.getReportId().value();
     private HeikinRiyoGakuTokeihyoEntity heikinRiyoGakuTokeihyoEntity = new HeikinRiyoGakuTokeihyoEntity();
@@ -95,6 +97,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
 
     @Override
     protected void process(ShikakutempTblEntity entity) {
+        count++;
         editHeikinRiyoGakuTokeihyoEntity(heikinRiyoGakuTokeihyoEntity);
         if (人数.equals(entity.getShukeinaiyou())) {
             heikinRiyoGakuTokeihyoEntity.set人数明細_要支援１(getRString(entity.getYoshien1()));
@@ -162,7 +165,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             heikinRiyoGakuTokeihyoEntity.set平均額１０(平均額);
         }
 
-        if (count % 值3 == 0) {
+        if (count == 值3) {
             heikinRiyoGakuTokeihyoEntity.set平均額明細_要支援１(toDecimal(heikinRiyoGakuTokeihyoEntity.get費用総額明細_要支援１(),
                     heikinRiyoGakuTokeihyoEntity.get人数明細_要支援１()));
             heikinRiyoGakuTokeihyoEntity.set平均額明細_要支援２(toDecimal(heikinRiyoGakuTokeihyoEntity.get費用総額明細_要支援２(),
@@ -184,9 +187,8 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             HeikinRiyoGakuTokeihyoReport report = new HeikinRiyoGakuTokeihyoReport(heikinRiyoGakuTokeihyoEntity, now);
             report.writeBy(reportSourceWriter);
             heikinRiyoGakuTokeihyoEntity = new HeikinRiyoGakuTokeihyoEntity();
+            count = 0;
         }
-
-        count++;
     }
 
     private void editHeikinRiyoGakuTokeihyoEntity(HeikinRiyoGakuTokeihyoEntity heikinRiyoGakuTokeihyoEntity) {
@@ -251,7 +253,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
-                rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
+                rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值2.equals(paramter.getChikuShitei())) {
@@ -260,7 +262,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
-                rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
+                rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值33.equals(paramter.getChikuShitei())) {
@@ -269,7 +271,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
-                rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
+                rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值4.equals(paramter.getChikuShitei())) {
@@ -278,7 +280,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
-                rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
+                rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值5.equals(paramter.getChikuShitei())) {
@@ -287,7 +289,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(":");
                 rb.append(paramter.get選択地区().get(0));
                 rb.append("～");
-                rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
+                rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else {
@@ -303,9 +305,10 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
 
         if (RString.isNullOrEmpty(obj1) || RString.isNullOrEmpty(obj2)
                 || 值0 == Integer.valueOf(obj1.toString()) || 值0 == Integer.valueOf(obj2.toString())) {
-            return RString.EMPTY;
+            return 值零;
         } else {
-            return new RString((new Decimal(obj1.toString()).divide(new Decimal(obj2.toString()))).toString());
+            return new RString(new BigDecimal((new Decimal(obj1.toString()).divide(new Decimal(obj2.toString()))).toString())
+                    .setScale(值0, BigDecimal.ROUND_HALF_UP).toString());
         }
     }
 

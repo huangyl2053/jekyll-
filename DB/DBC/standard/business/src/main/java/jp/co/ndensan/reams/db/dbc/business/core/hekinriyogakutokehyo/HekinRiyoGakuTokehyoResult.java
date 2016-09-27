@@ -108,7 +108,7 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString 合計 = new RString("合計");
     private static final int 值二 = 2;
     private static final int 值三 = 3;
-    private int count = 0;
+    private boolean isFirst = true;
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
@@ -346,6 +346,7 @@ public class HekinRiyoGakuTokehyoResult {
                 一時Entity.setYokaigo4(Decimal.ZERO);
                 一時Entity.setYokaigo5(Decimal.ZERO);
                 一時Entity.setGokeichi(Decimal.ZERO);
+                一時Entity.setShotokuCd(n + 1);
                 一時EntityList.add(一時Entity);
             }
         }
@@ -359,8 +360,8 @@ public class HekinRiyoGakuTokehyoResult {
      */
     public SyorikekkaCyouHyouEucCsvEntity setSyorikekkaCyouHyouEucCsvEntity(SyorikekkatempTblEntity entity) {
         SyorikekkaCyouHyouEucCsvEntity csvEntity = new SyorikekkaCyouHyouEucCsvEntity();
-        if (count == 0) {
-            count++;
+        if (isFirst) {
+            isFirst = false;
             csvEntity.set作成日時(setDateFormat());
         }
         csvEntity.set処理名(entity.getErrorkubun());

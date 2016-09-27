@@ -52,7 +52,7 @@ public class HekinRiyoGakuTokehyo {
     private static final RString 值45 = new RString("45");
     private static final RString 值46 = new RString("46");
     private static final RString 值59 = new RString("59");
-    private static final RString 人数 = new RString("人数");
+    private static final RString 人 = new RString("人数");
     private static final RString 費用総額 = new RString("費用総額");
     private RString 被保険者番号 = RString.EMPTY;
     private FlexibleYearMonth サービス提供年月 = FlexibleYearMonth.EMPTY;
@@ -124,10 +124,10 @@ public class HekinRiyoGakuTokehyo {
     }
 
     private int get対象レコード人数(KyufujissekiTempTblEntity レコード) {
-        int count = 0;
-        if (!被保険者番号.equals(レコード.getHiHokenshaNo())
-                && !サービス提供年月.toString().equals(レコード.getServiceTeikyoYM().toString())
-                && !要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode()) && !サービス分類.equals(レコード.getServiceBunrui())) {
+        int count = 1;
+        if (被保険者番号.equals(レコード.getHiHokenshaNo())
+                && サービス提供年月.toString().equals(レコード.getServiceTeikyoYM().toString())
+                && 要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode()) && サービス分類.equals(レコード.getServiceBunrui())) {
             被保険者番号 = レコード.getHiHokenshaNo();
             サービス提供年月 = レコード.getServiceTeikyoYM();
             要介護状態区分コード = レコード.getYoKaigoJotaiKubunCode();
@@ -254,8 +254,8 @@ public class HekinRiyoGakuTokehyo {
             for (ShukeinaiyouEntity shukeinaiyouEntity : list) {
                 if (所得段階.equals(shukeinaiyouEntity.get所得段階()) && 要介護状態区分コード.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
                     shukeinaiyouEntity.setページNo(レコード.getServiceBunrui());
-                    shukeinaiyouEntity.set人数(人数);
-                    shukeinaiyouEntity.set費用総額(費用総額);
+                    shukeinaiyouEntity.set人数(shukeinaiyouEntity.get人数() + 人数);
+                    shukeinaiyouEntity.set費用総額(shukeinaiyouEntity.get費用総額() + 費用総額);
                 }
             }
         }
@@ -345,13 +345,181 @@ public class HekinRiyoGakuTokehyo {
         for (List<ShukeinaiyouEntity> list : shukeinaiyouEntityList) {
             for (ShukeinaiyouEntity shukeinaiyouEntity : list) {
                 if (shukeinaiyouEntity.get人数() > 0) {
-                    shukeinaiyouEntity.set集計内容(人数);
-                    mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    shukeinaiyouEntity.set集計内容(人);
+                    if (值11.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(true);
+                        shukeinaiyouEntity.setIsyokaigo1(false);
+                        shukeinaiyouEntity.setIsyokaigo2(false);
+                        shukeinaiyouEntity.setIsyokaigo3(false);
+                        shukeinaiyouEntity.setIsyokaigo4(false);
+                        shukeinaiyouEntity.setIsyokaigo5(false);
+                        shukeinaiyouEntity.setIsyoshien1(false);
+                        shukeinaiyouEntity.setIsyoshien2(false);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    } else if (值12.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                        shukeinaiyouEntity.setIsyokaigo1(false);
+                        shukeinaiyouEntity.setIsyokaigo2(false);
+                        shukeinaiyouEntity.setIsyokaigo3(false);
+                        shukeinaiyouEntity.setIsyokaigo4(false);
+                        shukeinaiyouEntity.setIsyokaigo5(false);
+                        shukeinaiyouEntity.setIsyoshien1(true);
+                        shukeinaiyouEntity.setIsyoshien2(false);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    } else if (值13.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                        shukeinaiyouEntity.setIsyokaigo1(false);
+                        shukeinaiyouEntity.setIsyokaigo2(false);
+                        shukeinaiyouEntity.setIsyokaigo3(false);
+                        shukeinaiyouEntity.setIsyokaigo4(false);
+                        shukeinaiyouEntity.setIsyokaigo5(false);
+                        shukeinaiyouEntity.setIsyoshien1(false);
+                        shukeinaiyouEntity.setIsyoshien2(true);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+
+                    } else if (值21.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                        shukeinaiyouEntity.setIsyokaigo1(true);
+                        shukeinaiyouEntity.setIsyokaigo2(false);
+                        shukeinaiyouEntity.setIsyokaigo3(false);
+                        shukeinaiyouEntity.setIsyokaigo4(false);
+                        shukeinaiyouEntity.setIsyokaigo5(false);
+                        shukeinaiyouEntity.setIsyoshien1(false);
+                        shukeinaiyouEntity.setIsyoshien2(false);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    } else if (值22.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                        shukeinaiyouEntity.setIsyokaigo1(false);
+                        shukeinaiyouEntity.setIsyokaigo2(true);
+                        shukeinaiyouEntity.setIsyokaigo3(false);
+                        shukeinaiyouEntity.setIsyokaigo4(false);
+                        shukeinaiyouEntity.setIsyokaigo5(false);
+                        shukeinaiyouEntity.setIsyoshien1(false);
+                        shukeinaiyouEntity.setIsyoshien2(false);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    } else if (值23.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                        shukeinaiyouEntity.setIsyokaigo1(false);
+                        shukeinaiyouEntity.setIsyokaigo2(false);
+                        shukeinaiyouEntity.setIsyokaigo3(true);
+                        shukeinaiyouEntity.setIsyokaigo4(false);
+                        shukeinaiyouEntity.setIsyokaigo5(false);
+                        shukeinaiyouEntity.setIsyoshien1(false);
+                        shukeinaiyouEntity.setIsyoshien2(false);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    } else if (值24.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                        shukeinaiyouEntity.setIsyokaigo1(false);
+                        shukeinaiyouEntity.setIsyokaigo2(false);
+                        shukeinaiyouEntity.setIsyokaigo3(false);
+                        shukeinaiyouEntity.setIsyokaigo4(true);
+                        shukeinaiyouEntity.setIsyokaigo5(false);
+                        shukeinaiyouEntity.setIsyoshien1(false);
+                        shukeinaiyouEntity.setIsyoshien2(false);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    } else if (值25.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                        shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                        shukeinaiyouEntity.setIsyokaigo1(false);
+                        shukeinaiyouEntity.setIsyokaigo2(false);
+                        shukeinaiyouEntity.setIsyokaigo3(false);
+                        shukeinaiyouEntity.setIsyokaigo4(false);
+                        shukeinaiyouEntity.setIsyokaigo5(true);
+                        shukeinaiyouEntity.setIsyoshien1(false);
+                        shukeinaiyouEntity.setIsyoshien2(false);
+                        mapper.updateDB出力出力用一時TBL人数(shukeinaiyouEntity);
+                    }
+                    getupdateDB出力出力用一時TB(
+                            mapper, shukeinaiyouEntity);
                 }
-                if (shukeinaiyouEntity.get費用総額() > 0) {
-                    shukeinaiyouEntity.set集計内容(費用総額);
-                    mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
-                }
+
+            }
+        }
+    }
+
+    private void getupdateDB出力出力用一時TB(
+            IHekinRiyoGakuTokehyoMapper mapper, ShukeinaiyouEntity shukeinaiyouEntity) {
+        if (shukeinaiyouEntity.get費用総額() > 0) {
+            shukeinaiyouEntity.set集計内容(費用総額);
+            if (值11.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(true);
+                shukeinaiyouEntity.setIsyokaigo1(false);
+                shukeinaiyouEntity.setIsyokaigo2(false);
+                shukeinaiyouEntity.setIsyokaigo3(false);
+                shukeinaiyouEntity.setIsyokaigo4(false);
+                shukeinaiyouEntity.setIsyokaigo5(false);
+                shukeinaiyouEntity.setIsyoshien1(false);
+                shukeinaiyouEntity.setIsyoshien2(false);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
+            } else if (值12.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                shukeinaiyouEntity.setIsyokaigo1(false);
+                shukeinaiyouEntity.setIsyokaigo2(false);
+                shukeinaiyouEntity.setIsyokaigo3(false);
+                shukeinaiyouEntity.setIsyokaigo4(false);
+                shukeinaiyouEntity.setIsyokaigo5(false);
+                shukeinaiyouEntity.setIsyoshien1(true);
+                shukeinaiyouEntity.setIsyoshien2(false);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
+            } else if (值13.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                shukeinaiyouEntity.setIsyokaigo1(false);
+                shukeinaiyouEntity.setIsyokaigo2(false);
+                shukeinaiyouEntity.setIsyokaigo3(false);
+                shukeinaiyouEntity.setIsyokaigo4(false);
+                shukeinaiyouEntity.setIsyokaigo5(false);
+                shukeinaiyouEntity.setIsyoshien1(false);
+                shukeinaiyouEntity.setIsyoshien2(true);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
+            } else if (值21.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                shukeinaiyouEntity.setIsyokaigo1(true);
+                shukeinaiyouEntity.setIsyokaigo2(false);
+                shukeinaiyouEntity.setIsyokaigo3(false);
+                shukeinaiyouEntity.setIsyokaigo4(false);
+                shukeinaiyouEntity.setIsyokaigo5(false);
+                shukeinaiyouEntity.setIsyoshien1(false);
+                shukeinaiyouEntity.setIsyoshien2(false);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
+            } else if (值22.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                shukeinaiyouEntity.setIsyokaigo1(false);
+                shukeinaiyouEntity.setIsyokaigo2(true);
+                shukeinaiyouEntity.setIsyokaigo3(false);
+                shukeinaiyouEntity.setIsyokaigo4(false);
+                shukeinaiyouEntity.setIsyokaigo5(false);
+                shukeinaiyouEntity.setIsyoshien1(false);
+                shukeinaiyouEntity.setIsyoshien2(false);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
+            } else if (值23.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                shukeinaiyouEntity.setIsyokaigo1(false);
+                shukeinaiyouEntity.setIsyokaigo2(false);
+                shukeinaiyouEntity.setIsyokaigo3(true);
+                shukeinaiyouEntity.setIsyokaigo4(false);
+                shukeinaiyouEntity.setIsyokaigo5(false);
+                shukeinaiyouEntity.setIsyoshien1(false);
+                shukeinaiyouEntity.setIsyoshien2(false);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
+            } else if (值24.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                shukeinaiyouEntity.setIsyokaigo1(false);
+                shukeinaiyouEntity.setIsyokaigo2(false);
+                shukeinaiyouEntity.setIsyokaigo3(false);
+                shukeinaiyouEntity.setIsyokaigo4(true);
+                shukeinaiyouEntity.setIsyokaigo5(false);
+                shukeinaiyouEntity.setIsyoshien1(false);
+                shukeinaiyouEntity.setIsyoshien2(false);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
+            } else if (值25.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                shukeinaiyouEntity.setIskeikanoyokaigo(false);
+                shukeinaiyouEntity.setIsyokaigo1(false);
+                shukeinaiyouEntity.setIsyokaigo2(false);
+                shukeinaiyouEntity.setIsyokaigo3(false);
+                shukeinaiyouEntity.setIsyokaigo4(false);
+                shukeinaiyouEntity.setIsyokaigo5(true);
+                shukeinaiyouEntity.setIsyoshien1(false);
+                shukeinaiyouEntity.setIsyoshien2(false);
+                mapper.updateDB出力出力用一時TBL費用総額(shukeinaiyouEntity);
             }
         }
     }
