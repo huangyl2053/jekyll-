@@ -784,8 +784,10 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         }
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getChkResetInfo().setSelectedItemsByKey(限度額リセット);
-        div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setValue(
-                new RDate(償還払支給申請情報.get領収年月日().toString()));
+        if (償還払支給申請情報.get領収年月日() != null) {
+            div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setValue(
+                    new RDate(償還払支給申請情報.get領収年月日().toString()));
+        }
         List<KeyValueDataSource> 保険者リスト = div.getJutakuKaishuShinseiContents().getDdlHokensha().getDataSource();
         for (KeyValueDataSource 保険者 : 保険者リスト) {
             if (保険者.getKey().equals(償還払支給申請情報.get証記載保険者番号().value())) {
@@ -861,8 +863,10 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateYMD().setValue(
                     new RDate(償還払支給申請情報.get理由書作成日().toString()));
         }
-        div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setDomain(
-                new AtenaKanaMeisho(償還払支給申請情報.get理由書作成者カナ()));
+        if (償還払支給申請情報.get理由書作成者カナ() != null) {
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setDomain(
+                    new AtenaKanaMeisho(償還払支給申請情報.get理由書作成者カナ()));
+        }
         if (償還払支給申請情報.get理由書作成者() != null) {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorName().setDomain(
                     new AtenaMeisho(償還払支給申請情報.get理由書作成者()));

@@ -52,21 +52,9 @@ public class ServiceKeikakuHiHandler {
      * 画面初期化onLoad 平成２１年4月以降の場合 Handler
      *
      * @param entity200904List List<ShokanServicePlan200904Result>
-     * @param サービス年月 FlexibleYearMonth
-     * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 RString
-     * @param 申請日 RString
-     * @param 明細番号 RString
-     * @param 証明書 RString
      */
     public void onLoad(
-            List<ShokanServicePlan200904Result> entity200904List,
-            FlexibleYearMonth サービス年月,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 申請日,
-            RString 明細番号,
-            RString 証明書) {
+            List<ShokanServicePlan200904Result> entity200904List) {
         ShokanServicePlan200904Result entity200904 = entity200904List.get(0);
         for (int i = 1; i < entity200904List.size(); i++) {
             if (new Decimal(entity200904.getEntity().get連番().toString()).compareTo(
@@ -74,7 +62,6 @@ public class ServiceKeikakuHiHandler {
                 entity200904 = entity200904List.get(i);
             }
         }
-        setヘッダ_エリア(サービス年月, 申請日, 事業者番号, 明細番号, 証明書);
         setサービス計画費_パネル_共通エリア(entity200904);
         setサービス計画費パネル_データグリッドエリア(entity200904List);
         div.getPanelServiceKeikakuhiUp1().getTxtSeikyugaku().setValue(new Decimal(entity200904.getEntity().get請求金額()));
@@ -85,22 +72,9 @@ public class ServiceKeikakuHiHandler {
      * 画面初期化onLoad サービス年月が200604～200903の場合
      *
      * @param entity200604 ShokanServicePlan200604Result
-     * @param サービス年月 FlexibleYearMonth
-     * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 RString
-     * @param 申請日 RString
-     * @param 明細番号 RString
-     * @param 証明書 RString
      */
     public void onLoad(
-            ShokanServicePlan200604Result entity200604,
-            FlexibleYearMonth サービス年月,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 申請日,
-            RString 明細番号,
-            RString 証明書) {
-        setヘッダ_エリア(サービス年月, 申請日, 事業者番号, 明細番号, 証明書);
+            ShokanServicePlan200604Result entity200604) {
         setサービス計画費パネル_詳細エリア200604(entity200604);
     }
 
@@ -108,22 +82,9 @@ public class ServiceKeikakuHiHandler {
      * 画面初期化onLoad サービス年月が200603以前の場合
      *
      * @param entity200004 ShokanServicePlan200004Result
-     * @param サービス年月 FlexibleYearMonth
-     * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 RString
-     * @param 申請日 RString
-     * @param 明細番号 RString
-     * @param 証明書 RString
      */
     public void onLoad20004(
-            ShokanServicePlan200004Result entity200004,
-            FlexibleYearMonth サービス年月,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 申請日,
-            RString 明細番号,
-            RString 証明書) {
-        setヘッダ_エリア(サービス年月, 申請日, 事業者番号, 明細番号, 証明書);
+            ShokanServicePlan200004Result entity200004) {        
         setサービス計画費パネル_詳細エリア200004(entity200004);
     }
 
@@ -184,7 +145,16 @@ public class ServiceKeikakuHiHandler {
         }
     }
 
-    private void setヘッダ_エリア(
+    /**
+     * ヘッダ編集処理
+     *
+     * @param サービス年月 FlexibleYearMonth
+     * @param 申請日 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 明細番号 RString
+     * @param 証明書 RString
+     */
+    public void setヘッダ_エリア(
             FlexibleYearMonth サービス年月,
             RString 申請日,
             JigyoshaNo 事業者番号,
