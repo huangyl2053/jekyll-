@@ -27,6 +27,7 @@ public final class KyufuJissekiKensakuDataMapperParameter {
     private final FlexibleYearMonth サービス提供年月_終了;
     private final JigyoshaNo 事業所番号;
     private final RString 整理番号;
+    private final FlexibleYearMonth サービス提供年月;
 
     /**
      * コンストラクタ
@@ -41,7 +42,7 @@ public final class KyufuJissekiKensakuDataMapperParameter {
      */
     private KyufuJissekiKensakuDataMapperParameter(NyuryokuShikibetsuNo 入力識別番号, boolean has入力識別番号, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
-            JigyoshaNo 事業所番号, RString 整理番号) {
+            JigyoshaNo 事業所番号, RString 整理番号, FlexibleYearMonth サービス提供年月) {
         this.入力識別番号 = 入力識別番号;
         this.has入力識別番号 = has入力識別番号;
         this.被保険者番号 = 被保険者番号;
@@ -49,6 +50,7 @@ public final class KyufuJissekiKensakuDataMapperParameter {
         this.サービス提供年月_終了 = サービス提供年月_終了;
         this.事業所番号 = 事業所番号;
         this.整理番号 = 整理番号;
+        this.サービス提供年月 = サービス提供年月;
     }
 
     /**
@@ -60,12 +62,13 @@ public final class KyufuJissekiKensakuDataMapperParameter {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
+     * @param サービス提供年月 サービス提供年月
      * @return 給付実績情報照会検索データ取得用のMyBatisパラメータ
      */
     public static KyufuJissekiKensakuDataMapperParameter createParameter_給付実績検索データ(NyuryokuShikibetsuNo 入力識別番号,
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
-            JigyoshaNo 事業所番号, RString 整理番号) {
+            JigyoshaNo 事業所番号, RString 整理番号, FlexibleYearMonth サービス提供年月) {
         return new KyufuJissekiKensakuDataMapperParameter(入力識別番号, 入力識別番号 != null && !RString.isNullOrEmpty(入力識別番号.value()),
-                被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号);
+                被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号, サービス提供年月);
     }
 }
