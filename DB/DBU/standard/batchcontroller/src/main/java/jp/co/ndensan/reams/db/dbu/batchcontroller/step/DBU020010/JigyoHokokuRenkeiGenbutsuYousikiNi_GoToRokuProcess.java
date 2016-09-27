@@ -165,6 +165,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
         mapperProvider = InstanceProvider.create(MapperProvider.class);
         mapper = mapperProvider.create(IJigyoHokokuRenkeiMapper.class);
         保険者番号data = new HashMap<>();
+        保険者名称data = new HashMap<>();
         List<RString> 保険者番号List = new ArrayList<>();
         List<RString> 保険者名称List = new ArrayList<>();
         if (processParameter.is旧保険者分()) {
