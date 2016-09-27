@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 受給者給付実績台帳 Builderのインターフェースクラスです。
  *
- * @reamsid_L DBC-3080-04 dangjingjing
+ * @reamsid_L DBC-3080-040 dangjingjing
  */
 public interface IJukyushaKyufuJissekidaichoBuilder extends IReportBuilder<JukyushaKyufuJissekidaichoReportSource> {
 

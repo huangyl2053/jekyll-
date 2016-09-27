@@ -137,6 +137,8 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
     private CsvWriter<HonnSanteiFukaCSVEntity> eucCsvWriter;
     private HonsanteiFukaProcessParameter processParameter;
     private HonsenteiKeisangojohoParameter myBatisParameter;
+    private FileSpoolManager manager;
+    private RString eucFilePath;
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private IOutputOrder 出力順情報;
     private List<RString> pageBreakKeys;
@@ -210,10 +212,10 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
                 ReportIdDBB.DBB200009.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
         sourceWriter = new ReportSourceWriter<>(reportWriter);
 
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 本算定_EUCファイル名);
+        eucFilePath = Path.combinePath(spoolWorkPath, 本算定_EUCファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(カンマ).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -262,6 +264,7 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         出力条件リスト.add(builder.toRString());
         int 出力ページ数 = sourceWriter.pageCount().value();
         loadバッチ出力条件リスト(出力条件リスト, 出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
+        manager.spool(eucFilePath);
     }
 
     private void loadバッチ出力条件リスト(List<RString> 出力条件リスト, int 出力ページ数,

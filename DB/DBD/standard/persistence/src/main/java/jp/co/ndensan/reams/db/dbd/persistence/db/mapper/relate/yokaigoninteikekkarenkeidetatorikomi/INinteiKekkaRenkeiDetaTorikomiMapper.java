@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD205010.HenKouData;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.HenKouData;
 
 /**
  * バッチパラメータ．データリストより、変更したいデータを取得するのマッパーインタフェースです。

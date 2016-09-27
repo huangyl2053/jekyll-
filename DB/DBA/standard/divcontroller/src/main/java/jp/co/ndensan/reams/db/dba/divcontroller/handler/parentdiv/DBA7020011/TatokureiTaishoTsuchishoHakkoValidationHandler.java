@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class TatokureiTaishoTsuchishoHakkoValidationHandler {
 
     private final TatokureiTaishoTsuchishoHakkoDiv div;
-    private final int 役所名と御中の桁数_チェック = 30;
-    private final int 担当課名と様の桁数_チェック = 15;
+    private static final int 役所名と御中の桁数_チェック = 30;
+    private static final int 担当課名と様の桁数_チェック = 15;
 
     /**
      * コンストラクタです。

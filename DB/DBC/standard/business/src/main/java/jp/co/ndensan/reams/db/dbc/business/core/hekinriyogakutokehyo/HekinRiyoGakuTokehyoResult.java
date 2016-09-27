@@ -12,9 +12,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.Shika
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkaCyouHyouEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -98,7 +102,6 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString 值33 = new RString("33");
     private static final RString 值34 = new RString("34");
     private static final RString 值35 = new RString("35");
-    private static final RString 值36 = new RString("36");
     private static final RString 以上 = new RString("10以上");
     private static final RString その他 = new RString("その他");
     private static final RString 号 = new RString("２号");
@@ -106,6 +109,9 @@ public class HekinRiyoGakuTokehyoResult {
     private static final int 值二 = 2;
     private static final int 值三 = 3;
     private int count = 0;
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
 
     /**
      * set給付実績データ一時TBL
@@ -314,33 +320,32 @@ public class HekinRiyoGakuTokehyoResult {
         serviceshuruiList.add(市町村特別給付);
         serviceshuruiList.add(総合計);
         for (int i = 0; i < serviceshuruiList.size(); i++) {
-            ShikakutempTblEntity 一時Entity = new ShikakutempTblEntity();
-            一時Entity.setPageNO(new RString(String.valueOf(i + 1)));
-            一時Entity.setServiceshurui(serviceshuruiList.get(i));
-            set一時Entity(一時Entity,
-                    shotokuList, shukeinaiyouList,
+            set一時Entity(i, serviceshuruiList, shotokuList, shukeinaiyouList,
                     一時EntityList);
         }
         return 一時EntityList;
     }
 
-    private void set一時Entity(ShikakutempTblEntity 一時Entity,
+    private void set一時Entity(int i, List<RString> serviceshuruiList,
             List<RString> shotokuList, List<RString> shukeinaiyouList,
             List<ShikakutempTblEntity> 一時EntityList) {
-        一時Entity.setHokenseiteitoku(RString.EMPTY);
-        一時Entity.setYoshien1(Decimal.ZERO);
-        一時Entity.setYoshien2(Decimal.ZERO);
-        一時Entity.setKeikanoyokaigo(Decimal.ZERO);
-        一時Entity.setYokaigo1(Decimal.ZERO);
-        一時Entity.setYokaigo2(Decimal.ZERO);
-        一時Entity.setYokaigo3(Decimal.ZERO);
-        一時Entity.setYokaigo4(Decimal.ZERO);
-        一時Entity.setYokaigo5(Decimal.ZERO);
-        一時Entity.setGokeichi(Decimal.ZERO);
-        for (int i = 0; i < shotokuList.size(); i++) {
-            一時Entity.setShotoku(shotokuList.get(i));
+        for (int n = 0; n < shotokuList.size(); n++) {
             for (int j = 0; j < shukeinaiyouList.size(); j++) {
+                ShikakutempTblEntity 一時Entity = new ShikakutempTblEntity();
+                一時Entity.setPageNO(new RString(String.valueOf(i + 1)));
+                一時Entity.setServiceshurui(serviceshuruiList.get(i));
                 一時Entity.setShukeinaiyou(shukeinaiyouList.get(j));
+                一時Entity.setShotoku(shotokuList.get(n));
+                一時Entity.setHokenseiteitoku(RString.EMPTY);
+                一時Entity.setYoshien1(Decimal.ZERO);
+                一時Entity.setYoshien2(Decimal.ZERO);
+                一時Entity.setKeikanoyokaigo(Decimal.ZERO);
+                一時Entity.setYokaigo1(Decimal.ZERO);
+                一時Entity.setYokaigo2(Decimal.ZERO);
+                一時Entity.setYokaigo3(Decimal.ZERO);
+                一時Entity.setYokaigo4(Decimal.ZERO);
+                一時Entity.setYokaigo5(Decimal.ZERO);
+                一時Entity.setGokeichi(Decimal.ZERO);
                 一時EntityList.add(一時Entity);
             }
         }
@@ -356,7 +361,7 @@ public class HekinRiyoGakuTokehyoResult {
         SyorikekkaCyouHyouEucCsvEntity csvEntity = new SyorikekkaCyouHyouEucCsvEntity();
         if (count == 0) {
             count++;
-            csvEntity.set作成日時(setDateFormat(new RString(RDateTime.now().toString())));
+            csvEntity.set作成日時(setDateFormat());
         }
         csvEntity.set処理名(entity.getErrorkubun());
         csvEntity.set被保険者番号(entity.getHiHokenshaNo());
@@ -367,11 +372,19 @@ public class HekinRiyoGakuTokehyoResult {
         return csvEntity;
     }
 
-    private RString setDateFormat(RString date) {
-        RString formatDate = RString.EMPTY;
-        if (!RString.isNullOrEmpty(date)) {
-            formatDate = new FlexibleDate(date).wareki().toDateString();
-        }
-        return formatDate;
+    private RString setDateFormat() {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        RDateTime printdate = RDateTime.now();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        return printTimeStampSb.toRString();
     }
 }

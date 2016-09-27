@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000;
 
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.KyufuJissekiShokaiDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -54,10 +56,37 @@ public class KyufuJissekiShokaiValidationHandler {
         return validPairs;
     }
 
+    /**
+     * 「検索する」ボタンを押下する場合、チックを実行します。
+     *
+     * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs do検索チェック(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
+
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (給付実績情報照会情報 == null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.該当の給付データ));
+        } else {
+            KyufuJissekiSearchDataBusiness 一覧データ = 給付実績情報照会情報.getSearchData();
+            if (一覧データ == null) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.該当の給付データ));
+            } else {
+                if (一覧データ.get給付実績基本居宅サービス計画費データ() == null || 一覧データ.get給付実績基本居宅サービス計画費データ().isEmpty()
+                        || 一覧データ.get給付実績基本集計データ() == null || 一覧データ.get給付実績基本集計データ().isEmpty()
+                        || 一覧データ.get給付実績高額介護サービス費データ() == null || 一覧データ.get給付実績高額介護サービス費データ().isEmpty()) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.該当の給付データ));
+                }
+            }
+        }
+        return validPairs;
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
         サービス提供年月(UrErrorMessages.未指定, "サービス提供年月を"),
-        サービス提供年月の範囲指定(UrErrorMessages.未指定, "サービス提供年月日は10年以内で");
+        サービス提供年月の範囲指定(UrErrorMessages.未指定, "サービス提供年月日は10年以内で"),
+        該当の給付データ(UrErrorMessages.存在しない, "該当の給付データ");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

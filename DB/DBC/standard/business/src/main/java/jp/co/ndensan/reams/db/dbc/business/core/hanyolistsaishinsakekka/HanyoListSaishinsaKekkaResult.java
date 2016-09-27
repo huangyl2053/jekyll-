@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistsaishinsakekka.Hanyo
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsaishinsakekka.HanyoListSaishinsaKekkaRenbanAriEUCEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsaishinsakekka.HanyoListSaishinsaKekkaRenbanNashiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -200,7 +199,7 @@ public class HanyoListSaishinsaKekkaResult {
         eucEntity.set給付証記載保険者番号(nullToEmpty(entity.get証記載保険者番号()));
         eucEntity.set申立単位数(new RString(String.valueOf(entity.get申立単位数())));
         eucEntity.set申立事由コード(entity.get申立事由コード());
-        eucEntity.set申立事由(getCodeByCode(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(), entity.get申立事由コード()));
+        eucEntity.set申立事由(entity.get申立事由());
         eucEntity.set再審査結果コード(entity.get再審査結果コード());
         eucEntity.set再審査結果(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 結果コード種別, new Code(entity.get再審査結果コード()),
                 FlexibleDate.getNowDate()));
@@ -317,7 +316,7 @@ public class HanyoListSaishinsaKekkaResult {
         eucEntity.set給付証記載保険者番号(nullToEmpty(entity.get証記載保険者番号()));
         eucEntity.set申立単位数(new RString(String.valueOf(entity.get申立単位数())));
         eucEntity.set申立事由コード(entity.get申立事由コード());
-        eucEntity.set申立事由(getCodeByCode(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(), entity.get申立事由コード()));
+        eucEntity.set申立事由(entity.get申立事由());
         eucEntity.set再審査結果コード(entity.get再審査結果コード());
         eucEntity.set再審査結果(CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 結果コード種別, new Code(entity.get再審査結果コード()),
                 FlexibleDate.getNowDate()));
@@ -714,17 +713,6 @@ public class HanyoListSaishinsaKekkaResult {
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).getYearMonth());
         }
         return jokenBuilder.toRString();
-    }
-
-    private RString getCodeByCode(CodeShubetsu codeShubetsu, RString code) {
-        if (code == null || code.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return CodeMaster.getCodeRyakusho(
-                SubGyomuCode.DBC介護給付,
-                codeShubetsu,
-                new Code(code),
-                FlexibleDate.getNowDate());
     }
 
     private RString nullToEmpty(HihokenshaNo obj) {

@@ -87,12 +87,14 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
         RStringBuilder builder = new RStringBuilder();
         builder.append(帳票作成日時.getDate()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(RString.FULL_SPACE)
                 .append(yinsatsubi.getTime().getHour())
                 .append(new RString("時"))
                 .append(yinsatsubi.getTime().getMinute())
                 .append(new RString("分"))
                 .append(yinsatsubi.getTime().getSecond())
                 .append(new RString("秒"))
+                .append(RString.FULL_SPACE)
                 .append(作成);
         source.printTimeStamp = builder.toRString();
         source.title = 帳票タイトル;

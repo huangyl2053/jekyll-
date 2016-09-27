@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 受給者給付実績台帳 Builderクラスです。
  *
- * @reamsid_L DBC-3080-04 dangjingjing
+ * @reamsid_L DBC-3080-040 dangjingjing
  */
 public class JukyushaKyufuJissekidaichoBuilder implements IJukyushaKyufuJissekidaichoBuilder {
 

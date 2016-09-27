@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.HeikinRiyoGakuTokeihyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShikakutempTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.heikinriyogakutokeihyo.HeikinRiyoGakuTokeihyoReportSource;
+import jp.co.ndensan.reams.db.dbc.service.core.hekinriyogakutokehyo.HekinRiyoGakuTokehyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -39,6 +40,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper."
             + "get平均利用額統計Entity");
+    private static final int 值0 = 0;
     private static final RString 值1 = new RString("1");
     private static final RString 值2 = new RString("2");
     private static final RString 值33 = new RString("3");
@@ -72,6 +74,12 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private static final RString 帳票ID = ReportIdDBC.DBC300004.getReportId().value();
     private HeikinRiyoGakuTokeihyoEntity heikinRiyoGakuTokeihyoEntity = new HeikinRiyoGakuTokeihyoEntity();
     private RDateTime now;
+
+    @Override
+    protected void initialize() {
+        HekinRiyoGakuTokehyo hekinRiyoGakuTokehyo = HekinRiyoGakuTokehyo.createInstance();
+        hekinRiyoGakuTokehyo.get給付実績データ取得処理();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -226,14 +234,14 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             RStringBuilder rb = new RStringBuilder();
             rb.append(市町村名);
             rb.append(":");
-            rb.append(setDateFormat(paramter.getShichosonMei()));
+            rb.append(paramter.getShichosonMei());
             RString 条件2 = rb.toRString();
             heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
         } else if ((!RString.isNullOrEmpty(paramter.getKyuShichosonCode())) && 值000000.equals(paramter.getKyuShichosonCode())) {
             RStringBuilder rb = new RStringBuilder();
             rb.append(旧市町村名);
             rb.append(":");
-            rb.append(setDateFormat(paramter.getKyuShichosonMei()));
+            rb.append(paramter.getKyuShichosonMei());
             RString 条件2 = rb.toRString();
             heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
         } else if (paramter.getShichosonCode().isEmpty() && paramter.getKyuShichosonCode().isEmpty()) {
@@ -245,7 +253,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
-                heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
+                heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值2.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(行政区);
@@ -254,7 +262,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
-                heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
+                heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值33.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(地区1);
@@ -263,7 +271,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
-                heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
+                heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值4.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(地区2);
@@ -272,7 +280,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
-                heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
+                heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else if (值5.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(地区3);
@@ -281,7 +289,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append("～");
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size()));
                 RString 条件2 = rb.toRString();
-                heikinRiyoGakuTokeihyoEntity.set条件2(setDateFormat(条件2));
+                heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
             } else {
                 heikinRiyoGakuTokeihyoEntity.set条件2(RString.EMPTY);
             }
@@ -293,12 +301,12 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
 
     private RString toDecimal(RString obj1, RString obj2) {
 
-        if (RString.isNullOrEmpty(obj1) || RString.isNullOrEmpty(obj2)) {
+        if (RString.isNullOrEmpty(obj1) || RString.isNullOrEmpty(obj2)
+                || 值0 == Integer.valueOf(obj1.toString()) || 值0 == Integer.valueOf(obj2.toString())) {
             return RString.EMPTY;
         } else {
             return new RString((new Decimal(obj1.toString()).divide(new Decimal(obj2.toString()))).toString());
         }
-
     }
 
     private RString setDateFormat(RString date) {

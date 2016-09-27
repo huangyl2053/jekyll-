@@ -79,11 +79,11 @@ public class DBC8010001MainHandler {
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
                 div.getItakusha()).build().check(messages));
-        if (pairs.iterator().hasNext()) {
-            //TODO
+        //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
+//        if (pairs.iterator().hasNext()) {
 //            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
 //            return pairs;
-        }
+//        }
 
         RString 処理名 = prepare処理名(メニューID, 振込単位);
         DBC8010001MainManager manager = new DBC8010001MainManager();
@@ -279,10 +279,11 @@ public class DBC8010001MainHandler {
     }
 
     /**
-     * 委託者情報の取得。TODO
+     * 委託者情報の取得。
      *
      * @return List<FurikomiGroupItakushaRelateEntity>
      */
+    //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
 //    public List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID,RString 振込単位) {
 //        List<FurikomiGroupItakushaRelateEntity> list = new ArrayList<FurikomiGroupItakushaRelateEntity>();
 //        RString 業務内区分 = new RString("");

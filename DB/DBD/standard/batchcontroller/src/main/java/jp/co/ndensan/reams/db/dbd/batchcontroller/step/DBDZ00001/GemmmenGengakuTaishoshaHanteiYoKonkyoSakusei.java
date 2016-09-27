@@ -140,6 +140,15 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
     }
 
     private void get合計金額(TaishouJohoEntity list) {
+        if (list.get合計所得金額() == null) {
+            list.set合計所得金額(Decimal.ZERO);
+        }
+        if (list.get年金収入額() == null) {
+            list.set年金収入額(Decimal.ZERO);
+        }
+        if (list.get非課税年金勘案額() == null) {
+            list.set非課税年金勘案額(Decimal.ZERO);
+        }
         if (!本人.equals(list.get本人区分())) {
             金額list.add(list.get合計所得金額().add(list.get年金収入額()).add(list.get非課税年金勘案額()));
         }

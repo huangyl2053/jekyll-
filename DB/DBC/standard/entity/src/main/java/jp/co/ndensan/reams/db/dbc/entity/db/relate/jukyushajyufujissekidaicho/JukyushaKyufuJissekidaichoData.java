@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 受給者給付実績台帳 のパラメータクラスです。
  *
- * @reamsid_L DBC-3080-04 dangjingjing
+ * @reamsid_L DBC-3080-040 dangjingjing
  */
 @Getter
 @Setter

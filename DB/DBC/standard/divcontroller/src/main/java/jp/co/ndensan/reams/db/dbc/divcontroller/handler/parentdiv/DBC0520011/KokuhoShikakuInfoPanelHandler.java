@@ -180,7 +180,7 @@ public class KokuhoShikakuInfoPanelHandler {
                 flag = true;
             }
         } else {
-            flag = insert国保資格詳細情報(shikibetsuCode, 国保資格詳細情報, kokuhoShikakuInfoManager);
+            flag = insert国保資格詳細情報(shikibetsuCode, kokuhoShikakuInfoManager);
             if (flag) {
                 前排他制御の解除(被保険者番号);
                 AccessLogger.log(AccessLogType.更新, toPersonalData(被保険者番号));
@@ -244,9 +244,8 @@ public class KokuhoShikakuInfoPanelHandler {
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
-    private boolean insert国保資格詳細情報(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfo 国保資格詳細情報,
-            KokuhoShikakuInfoManager kokuhoShikakuInfoManager) {
-        国保資格詳細情報 = new KokuhoShikakuInfo(shikibetsuCode, new RString("0001"));
+    private boolean insert国保資格詳細情報(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfoManager kokuhoShikakuInfoManager) {
+        KokuhoShikakuInfo 国保資格詳細情報 = new KokuhoShikakuInfo(shikibetsuCode, new RString("0001"));
         KokuhoShikakuInfoBuilder builder = 国保資格詳細情報.createBuilderForEdit();
         if (div.getTxtKokuhoHokenshoNo().getValue() != null) {
             builder.set国保保険証番号(new RString(div.getTxtKokuhoHokenshoNo().getValue().toString()));

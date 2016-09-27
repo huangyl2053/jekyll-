@@ -63,11 +63,6 @@ public class KyufuJissekiMeisaiProcess
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void process(ServiceMeisaiEntity entity) {
         連番 = 連番 + INT_1;
         DbWT3470ServiceMeisaiTempEntity serviceMeisaiTempEntity = new DbWT3470ServiceMeisaiTempEntity();
@@ -131,7 +126,7 @@ public class KyufuJissekiMeisaiProcess
             エラー結果.setHihokenshaNo(HihokenshaNo.EMPTY);
             エラー結果.setKey1(parameter.get開始年月());
             エラー結果.setKey2(parameter.get終了年月());
-            RString 対象サービス種類 = new RString("");
+            RString 対象サービス種類 = RString.EMPTY;
             for (RString code : parameter.getサービス種類コードリスト()) {
                 対象サービス種類.concat(code != null ? code : RString.EMPTY);
             }

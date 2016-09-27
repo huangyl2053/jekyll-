@@ -7,7 +7,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020003;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt32003.KyufuGengakuHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020003.ChishutsuJokenParameterDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -36,8 +36,8 @@ public class KyufugakuGengakuHaakuIchiran {
      * @param div div
      * @return 給付額減額滞納者把握パラメター
      */
-    public KyufuGengakuHaakuIchiranBatchParameter createKyufuGengakuHaakuIchiranParameter(ChishutsuJokenParameterDiv div) {
-        KyufuGengakuHaakuIchiranBatchParameter parameter = new KyufuGengakuHaakuIchiranBatchParameter();
+    public DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter createKyufuGengakuHaakuIchiranParameter(ChishutsuJokenParameterDiv div) {
+        DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter parameter = new DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter();
 
         parameter.set基準日(div.getChishutsuJoken().getTxtKijunbi().getValue());
         parameter.set時効起算日登録者の選択(isRadCheckedValue(div.getRadJikoKisanbiTorokushaNomi().getSelectedKey()));

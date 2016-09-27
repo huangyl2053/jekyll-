@@ -14,15 +14,9 @@ import jp.co.ndensan.reams.db.dbx.divcontroller.entity.commonchilddiv.KaigoHoken
 import jp.co.ndensan.reams.db.dbx.divcontroller.entity.commonchilddiv.KaigoHokenFukaKonkyo.KaigoHokenFukaKonkyoHandler;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbx.service.core.fuka.FukaJohoFinder;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -32,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @reamsid_L DBB-5723-010 xuxin
  */
 public class KaigoHokenFukaKonkyo {
-
-    private static final RString ログコード = new RString("0001");
 
     private KaigoHokenFukaKonkyoHandler getHandler(KaigoHokenFukaKonkyoDiv div) {
         return new KaigoHokenFukaKonkyoHandler(div);
@@ -57,11 +49,8 @@ public class KaigoHokenFukaKonkyo {
                 FukaJohoRelateSearchResult resultMax = resultList.get(resultList.size() - 1);
                 ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
                         get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
-                getHandler(div).init(処理日付管理情報, resultMax, resultList);
+                getHandler(div).init(処理日付管理情報, resultMax, resultList, 識別コード);
             }
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code(識別コード.getColumnValue()), ログコード,
-                    識別コード.getColumnValue());
-            AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード, expandedInfo));
         }
         return ResponseData.of(div).respond();
     }

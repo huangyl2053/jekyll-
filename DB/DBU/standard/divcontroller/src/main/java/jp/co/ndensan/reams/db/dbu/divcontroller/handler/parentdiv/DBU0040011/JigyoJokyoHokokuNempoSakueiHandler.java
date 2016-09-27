@@ -65,8 +65,8 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private static final RString 実行単位選択過去の集計 = new RString("SAN");
     private static final RString 旧市町村分 = new RString("kyuShichoson");
     private static final RString 構成市町村分 = new RString("koseiShichoson");
-    private static final RString 旧市町村分コード = new RString("1");
-    private static final RString 構成市町村分コード = new RString("0");
+    private static final RString 旧市町村分コード = new RString("0");
+    private static final RString 構成市町村分コード = new RString("1");
     private static final RString 年報報告様式12KEY = new RString("yoshiki12");
     private static final RString 年報報告一般状況111KEY = new RString("ippan1_11");
     private static final RString 年報報告一般状況1214現物分KEY = new RString("ippan12_14Genbutsu");
@@ -1350,9 +1350,11 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     }
 
     private RString get過去集計分旧市町村区分(RString 市町村コード, List<RString> 旧市町村コードリスト) {
-        for (RString 旧市町村コード : 旧市町村コードリスト) {
-            if (市町村コード.equals(旧市町村コード)) {
-                return new RString("1");
+        if (旧市町村コードリスト != null && !旧市町村コードリスト.isEmpty()) {
+            for (RString 旧市町村コード : 旧市町村コードリスト) {
+                if (市町村コード.equals(旧市町村コード)) {
+                    return new RString("1");
+                }
             }
         }
         return new RString("2");

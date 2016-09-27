@@ -59,7 +59,6 @@ public class HekinRiyoGakuTokehyo {
     private RString 要介護状態区分コード = RString.EMPTY;
     private RString サービス分類 = RString.EMPTY;
     private RString サービス分類コード = RString.EMPTY;
-    private IHekinRiyoGakuTokehyoMapper mapper;
     private static final int 值0 = 0;
     private static final RString 值1 = new RString("1");
     private static final RString 值2 = new RString("2");
@@ -98,7 +97,7 @@ public class HekinRiyoGakuTokehyo {
      */
     public void get給付実績データ取得処理() {
 
-        mapper = mapperProvider.create(IHekinRiyoGakuTokehyoMapper.class);
+        IHekinRiyoGakuTokehyoMapper mapper = mapperProvider.create(IHekinRiyoGakuTokehyoMapper.class);
         List<KyufujissekiTempTblEntity> entityList = mapper.get給付実績データ取得処理();
         List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList = new ArrayList<>();
         if (!entityList.isEmpty()) {
@@ -140,7 +139,7 @@ public class HekinRiyoGakuTokehyo {
 
     private void get対象レコード年齢の処理(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList, KyufujissekiTempTblEntity レコード,
             int 人数, int 費用金額, IHekinRiyoGakuTokehyoMapper mapper) {
-        AgeCalculator agecounter = new AgeCalculator(DateOfBirthFactory.createInstance(レコード.getUmareYMD()), 住民, FlexibleDate.EMPTY);
+        AgeCalculator agecounter = new AgeCalculator(DateOfBirthFactory.createInstance(レコード.getUmareYMD()), 住民, FlexibleDate.MAX);
         RString 年齢 = agecounter.get年齢();
         int age = Integer.valueOf(年齢.toString());
         if (年齢1 > age || (age == 年齢1 && レコード.getServiceTeikyoYM().toString().equals(レコード.getUmareYMD().toString()))) {
@@ -182,28 +181,28 @@ public class HekinRiyoGakuTokehyo {
                     レコード,
                     人数,
                     費用総額,
-                    レコード.getShotoku(),
+                    その他,
                     レコード.getYoKaigoJotaiKubunCode()
             );
             updatecreatentitylist(shukeinaiyouEntityList, レコード,
                     人数,
                     費用総額, 合計, レコード.getYoKaigoJotaiKubunCode());
-        } else if (以上.equals(shotoku)) {
+        } else if (值十 < Integer.valueOf(shotoku.toString())) {
             updatecreatentitylist(shukeinaiyouEntityList,
                     レコード,
                     人数,
                     費用総額,
-                    レコード.getShotoku(),
+                    以上,
                     レコード.getYoKaigoJotaiKubunCode());
             updatecreatentitylist(shukeinaiyouEntityList, レコード,
                     人数,
                     費用総額, 合計, レコード.getYoKaigoJotaiKubunCode());
-        } else if (shotoku.length() <= 值九 && 值一 <= shotoku.length()) {
+        } else if (Integer.valueOf(shotoku.toString()) <= 值九 && 值一 <= Integer.valueOf(shotoku.toString())) {
             updatecreatentitylist(shukeinaiyouEntityList,
                     レコード,
                     人数,
                     費用総額,
-                    レコード.getShotoku(),
+                    new RString(Integer.valueOf(shotoku.toString())),
                     レコード.getYoKaigoJotaiKubunCode());
             updatecreatentitylist(shukeinaiyouEntityList, レコード,
                     人数,

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Hihoke
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuTaisho;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.shafuku.ChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.ninteishalistsakusei.NinteishaListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00004.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -106,8 +106,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private static final RString LISTSCV = new RString("ShakaiFukushiHojinKeigenList.csv");
     private static final RString 認定者 = new RString("1");
     private static final RString 該当者 = new RString("2");
-    private static final RString 承認 = new RString("承認");
-    private static final RString 課 = new RString("課");
     private static final RString 対象期間指定 = new RString("【対象期間指定】");
     private static final RString 対象年度 = new RString("【対象年度】");
     private static final RString 課税判定等基準日 = new RString("【課税判定等基準日】");
@@ -410,20 +408,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         return PersonalData.of(joho.get世帯員宛名() == null ? ShikibetsuCode.EMPTY : joho.get世帯員宛名().getShikibetsuCode());
     }
 
-    private RString toパターン32or34(boolean flag, FlexibleDate date) {
-        if (date == null) {
-            return RString.EMPTY;
-        }
-        if (flag) {
-            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        } else {
-            return date.seireki().
-                    separator(Separator.NONE).
-                    fillType(FillType.ZERO).
-                    toDateString();
-        }
-    }
-
     private void 認定者バッチ出力条件リストの出力() {
         RString 出力ページ数;
         RString 導入団体コード = association.getLasdecCode_().value();
@@ -569,7 +553,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                 builder.append(より);
             }
         }
-        builder.delete(NO_0, builder.length() - NO_1);
+        builder.delete(builder.length() - NO_1, builder.length());
         出力条件.add(builder.toRString());
         builder.delete(NO_0, builder.length());
     }

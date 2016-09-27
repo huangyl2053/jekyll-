@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 受給者給付実績台帳 のPropertyです。
  *
- * @reamsid_L DBC-3080-04 dangjingjing
+ * @reamsid_L DBC-3080-040 dangjingjing
  */
 public class JukyushaKyufuJissekidaichoProperty extends ReportPropertyBase<JukyushaKyufuJissekidaichoReportSource> {
 

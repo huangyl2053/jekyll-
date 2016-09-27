@@ -67,15 +67,11 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString 予防給付サービス_選択 = new RString("key0");
     private static final RString 介護給付サービス_選択 = new RString("key1");
     private static final RString なし_選択 = new RString("key2");
-    private static final RString 住宅改修_有 = new RString("key0");
     private static final RString 住宅改修_無 = new RString("key1");
     private static final RString 登録グループコード = new RString("5001");
     private static final RString 在宅 = new RString("在宅");
     private static final RString 施設 = new RString("施設");
     private static final RString カンマ = new RString(",");
-    private static final int 住宅改修_連番 = 1;
-    private static final int 市町村特別給付_連番 = 1;
-    private static final int 介護保険給付外の在宅サービス_連番 = 2;
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>

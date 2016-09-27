@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD201010;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
@@ -38,7 +38,7 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
     // 所得年度
     private FlexibleYear 所得年度;
     // 旧措置区分
-    private KyusochishaKubun 旧措置区分;
+    private KyusochishaJukyushaKubun 旧措置区分;
     // 世帯表示
     private SetaiHyoji 世帯表示;
     // 受給者区分
@@ -46,7 +46,7 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
     // 世帯非課税等
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
     // CSV出力設定
-    private CSVSettings 出力設定;
+    private List<CSVSettings> csv出力設定;
     // 改頁出力順ID
     private Long 改頁出力順ID;
     // 帳票ID
@@ -68,6 +68,6 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
      */
     public ChohyoShutsuryokuJohoShutokuProcessParameter toChohyoShutsuryokuJohoShutokuProcessParameter() {
         return new ChohyoShutsuryokuJohoShutokuProcessParameter(対象リスト, 基準日, 所得年度,
-                旧措置区分, 世帯表示, 受給者区分, 世帯非課税等, 出力設定, 改頁出力順ID, 帳票ID);
+                旧措置区分, 世帯表示, 受給者区分, 世帯非課税等, csv出力設定, 改頁出力順ID, 帳票ID);
     }
 }

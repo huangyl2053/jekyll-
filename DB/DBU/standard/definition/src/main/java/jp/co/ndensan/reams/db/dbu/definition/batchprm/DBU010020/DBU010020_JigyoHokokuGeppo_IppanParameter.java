@@ -36,6 +36,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     private static final String HOKOKUYM = "hokokuYM";
     private static final String NENDO = "nendo";
     private static final String SAKUSEIYMD = "sakuseiYMD";
+    private static final String SYORIYMDHMS = "syoriYMDHMS";
     private static final String SHICHOSONCODE = "shichosonCode";
     private static final String KOSEISHICHOSONKBN = "koseiShichosonKbn";
     private static final String KYUSHICHOSONKBN = "kyuShichosonKbn";
@@ -45,8 +46,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     private static final String KAKOSHUKEIKYUSHICHOSONKBN = "kakoShukeiKyuShichosonKbn";
     private static final String SAKUSEICSVFILEID = "sakuseiCSVFileID";
     private static final String SYUTURYOKUCSVFILEPATH = "syuturyokuCSVFilePath";
-    private static final YMDHMS SYORIYMDHMS = YMDHMS.now();
-    private static final RString BATCHID = new RString("DBU010020_JigyoHokokuGeppo_Ippan");
+    private static final String BATCHID = "batchID";
 
     @BatchParameter(key = PRINTCONTROLKBN, name = "プリントコントロール区分")
     private RString printControlKbn;
@@ -76,6 +76,10 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     private RString sakuseiCSVFileID;
     @BatchParameter(key = SYUTURYOKUCSVFILEPATH, name = "出力CSVファイルPath")
     private RString csvFilePath;
+    @BatchParameter(key = BATCHID, name = "バッチID")
+    private RString batchID;
+    @BatchParameter(key = SYORIYMDHMS, name = "処理日時")
+    private YMDHMS syoriYMDHMS;
 
     /**
      * コンストラクタです。
@@ -99,7 +103,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      * @return HihokenshaDaichoBirthYMDProcessParameter
      */
     public HihokenshaDaichoBirthYMDProcessParameter toHihokenshaDaichoBirthYMDProcessParameter() {
-        return new HihokenshaDaichoBirthYMDProcessParameter(SYORIYMDHMS, syukeiYM, sakuseiCSVFileID, csvFilePath);
+        return new HihokenshaDaichoBirthYMDProcessParameter(syoriYMDHMS, syukeiYM, sakuseiCSVFileID, csvFilePath);
     }
 
     /**
@@ -136,7 +140,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      */
     public JigyouHoukokuTokeiProcessParameter toJigyouHoukokuTokeiProcessParameter() {
         return new JigyouHoukokuTokeiProcessParameter(hokokuYM, syukeiYM, nendo, shichosonCode,
-                koseiShichosonList, koseiShichosonKbn, kyuShichosonList, kyuShichosonKbn, SYORIYMDHMS, csvFilePath);
+                koseiShichosonList, koseiShichosonKbn, kyuShichosonList, kyuShichosonKbn, syoriYMDHMS, csvFilePath);
     }
 
     /**
@@ -146,7 +150,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      */
     public JigyoHokokuGeppoIppanReportProcessParameter toJigyoHokokuGeppoIppanReportProcessParameter() {
         return new JigyoHokokuGeppoIppanReportProcessParameter(syukeiYM, kakoShukeiShichosonList,
-                shichosonCode, printControlKbn, SYORIYMDHMS, kakoShukeiKyuShichosonKbn);
+                shichosonCode, printControlKbn, syoriYMDHMS, kakoShukeiKyuShichosonKbn);
     }
 
     /**
@@ -155,7 +159,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      * @return JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter
      */
     public JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter toJigyoHokokuGeppoShoriKekkaKakuninListProcessParameter() {
-        return new JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter(BATCHID, kakoShukeiKyuShichosonKbn,
-                koseiShichosonKbn, kyuShichosonKbn, syukeiYM, koseiShichosonList, kyuShichosonList, SYORIYMDHMS);
+        return new JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter(batchID, kakoShukeiKyuShichosonKbn,
+                koseiShichosonKbn, kyuShichosonKbn, syukeiYM, koseiShichosonList, kyuShichosonList, syoriYMDHMS);
     }
 }

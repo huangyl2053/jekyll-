@@ -124,6 +124,7 @@ public class KyufuJissekiShokaiFinder {
     private static final RString 交換情報識別番号の先頭３桁 = new RString("111");
     private static final RString 給付実績情報作成区分コード_削除 = new RString("3");
     private static final int INDEX_3 = 3;
+    private static final int INDEX_6 = 6;
 
     /**
      * コンストラクタです。
@@ -344,10 +345,10 @@ public class KyufuJissekiShokaiFinder {
                         サービス提供年月_開始, サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY));
         for (KyufuJissekiKihonShukeiRelateEntity entity : kihonShukeiList) {
             DbT3033KyufujissekiShukeiEntity 集計データ = entity.get給付実績集計データ();
-            NyuryokuShikibetsuNo 入力識別番号 = entity.get給付実績集計データ().getInputShikibetsuNo();
-            JigyoshaNo 事業所番号_検索用 = entity.get給付実績集計データ().getJigyoshoNo();
-            RString 整理番号_検索用 = entity.get給付実績集計データ().getSeiriNo();
             if (集計データ != null && check表示対象データ(集計データ.getShokisaiHokenshaNo())) {
+                NyuryokuShikibetsuNo 入力識別番号 = 集計データ.getInputShikibetsuNo();
+                JigyoshaNo 事業所番号_検索用 = 集計データ.getJigyoshoNo();
+                RString 整理番号_検索用 = 集計データ.getSeiriNo();
                 KyufuJissekiKihonShukeiBusiness 給付実績基本集計データ = new KyufuJissekiKihonShukeiBusiness();
                 給付実績基本集計データ.set給付実績基本データ(new KyufujissekiKihon(entity.get給付実績基本データ()));
                 給付実績基本集計データ.set給付実績集計データ(new KyufujissekiShukei(entity.get給付実績集計データ()));
@@ -361,8 +362,15 @@ public class KyufuJissekiShokaiFinder {
                         被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
                 給付実績所定疾患施設療養費等データリスト.addAll(ge給付実績所定疾患施設療養費等データ(入力識別番号,
                         被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
-                給付実績特定診療費データリスト.addAll(get給付実績特定診療費データ(入力識別番号,
-                        被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
+                if (集計データ.getServiceTeikyoYM().isBefore(new FlexibleYearMonth(DbBusinessConfig.get(
+                        ConfigNameDBU.制度改正施行日_介護給付費見直し, RDate.getNowDate(),
+                        SubGyomuCode.DBU介護統計報告).substring(0, INDEX_6)))) {
+                    給付実績特定診療費データリスト.addAll(get給付実績特定診療費データ(入力識別番号,
+                            被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
+                } else {
+                    給付実績特定診療費_特別療養費データリスト.addAll(get給付実績特定診療費_特別療養費データ(入力識別番号,
+                            被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
+                }
                 給付実績食事費用データリスト.addAll(get給付実績食事費用データ(入力識別番号,
                         被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
                 給付実績居宅サービス計画費データリスト.addAll(get給付実績居宅サービス計画費データ(入力識別番号,
@@ -372,7 +380,7 @@ public class KyufuJissekiShokaiFinder {
                 給付実績住宅改修費データリスト.addAll(get給付実績住宅改修費データ(入力識別番号,
                         被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
                 給付実績高額介護サービス費データリスト.addAll(get給付実績高額介護サービス費データ(入力識別番号,
-                        被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
+                        被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 整理番号_検索用));
                 給付実績特定入所者介護サービス費用データリスト.addAll(get給付実績特定入所者介護サービス費用データ(
                         入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号_検索用, 整理番号_検索用));
                 給付実績社会福祉法人軽減額データリスト.addAll(get給付実績社会福祉法人軽減額データ(入力識別番号,
@@ -476,7 +484,11 @@ public class KyufuJissekiShokaiFinder {
         for (KyufujissekiMeisaiRelateEntity entity : entityList) {
             KyufujissekiMeisaiBusiness 給付実績明細データ = new KyufujissekiMeisaiBusiness();
             給付実績明細データ.set給付実績明細(new KyufujissekiMeisai(entity.get給付実績明細データ()));
-            給付実績明細データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績明細データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績明細データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績明細データリスト.add(給付実績明細データ);
         }
         return 給付実績明細データリスト;
@@ -660,7 +672,11 @@ public class KyufuJissekiShokaiFinder {
                 createParameter_給付実績検索データ(入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
         for (KyufujissekiKyotakuServiceRelateEntity entity : entityList) {
             KyufujissekiKyotakuServiceBusiness 給付実績居宅サービス計画費データ = new KyufujissekiKyotakuServiceBusiness();
-            給付実績居宅サービス計画費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績居宅サービス計画費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績居宅サービス計画費データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績居宅サービス計画費データ.set居宅サービス計画費(
                     new KyufujissekiKyotakuService(entity.get給付実績居宅サービス計画費データ()));
             給付実績居宅サービス計画費データリスト.add(給付実績居宅サービス計画費データ);
@@ -694,7 +710,11 @@ public class KyufuJissekiShokaiFinder {
                         入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
         for (KyufujissekiFukushiYoguHanbaihiBusinessRelateEntity entity : entityList) {
             KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費データ = new KyufujissekiFukushiYoguHanbaihiBusiness();
-            給付実績福祉用具販売費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績福祉用具販売費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績福祉用具販売費データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績福祉用具販売費データ.set給付実績福祉用具販売費基本情報(
                     new KyufujissekiFukushiYoguHanbaihi(entity.get給付実績福祉用具販売費データ()));
             給付実績福祉用具販売費データリスト.add(給付実績福祉用具販売費データ);
@@ -726,7 +746,11 @@ public class KyufuJissekiShokaiFinder {
                 createParameter_給付実績検索データ(入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
         for (KyufujissekiJutakuKaishuhiRelateEntity entity : entityList) {
             KyufujissekiJutakuKaishuhiBusiness 給付実績住宅改修費データ = new KyufujissekiJutakuKaishuhiBusiness();
-            給付実績住宅改修費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績住宅改修費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績住宅改修費データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績住宅改修費データ.set給付実績住宅改修費情報(new KyufujissekiJutakuKaishuhi(entity.get給付実績住宅改修費データ()));
             給付実績住宅改修費データリスト.add(給付実績住宅改修費データ);
         }
@@ -740,23 +764,21 @@ public class KyufuJissekiShokaiFinder {
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月_開始 サービス提供年月_開始
      * @param サービス提供年月_終了 サービス提供年月_終了
-     * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @return 給付実績高額介護サービス費データ
      */
     public List<KyufujissekiKogakuKaigoServicehi> get給付実績高額介護サービス費データ(NyuryokuShikibetsuNo 入力識別番号,
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月_開始,
-            FlexibleYearMonth サービス提供年月_終了, JigyoshaNo 事業所番号, RString 整理番号) {
+            FlexibleYearMonth サービス提供年月_終了, RString 整理番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
         requireNonNull(サービス提供年月_開始, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_開始文字列.toString()));
         requireNonNull(サービス提供年月_終了, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_終了文字列.toString()));
-        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号文字列.toString()));
         List<KyufujissekiKogakuKaigoServicehi> 給付実績高額介護サービス費データリスト = new ArrayList<>();
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> entityList = mapper.get給付実績高額介護サービス費データ(
                 KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
-                        入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
+                        入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, JigyoshaNo.EMPTY, 整理番号));
         for (DbT3028KyufujissekiKogakuKaigoServicehiEntity entity : entityList) {
             KyufujissekiKogakuKaigoServicehi 給付実績高額介護サービス費データ = new KyufujissekiKogakuKaigoServicehi(entity);
             給付実績高額介護サービス費データリスト.add(給付実績高額介護サービス費データ);
@@ -791,7 +813,11 @@ public class KyufuJissekiShokaiFinder {
         for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoRelateEntity entity : entityList) {
             KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 給付実績特定入所者介護サービス費用データ
                     = new KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness();
-            給付実績特定入所者介護サービス費用データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績特定入所者介護サービス費用データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績特定入所者介護サービス費用データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績特定入所者介護サービス費用データ.set特定入所者費用(
                     new KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(entity.get給付実績特定入所者介護サービス費用データ()));
             給付実績特定入所者介護サービス費用データリスト.add(給付実績特定入所者介護サービス費用データ);
@@ -825,7 +851,11 @@ public class KyufuJissekiShokaiFinder {
                         入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
         for (KyufuJissekiShakaiFukushiHojinKeigengakuRelateEntity entity : entityList) {
             KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績集計データ = new KyufuJissekiShakaiFukushiHojinKeigengakuBusiness();
-            給付実績集計データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績集計データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績集計データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績集計データ.set給付実績社会福祉法人軽減額情報(new KyufuJissekiShakaiFukushiHojinKeigengaku(
                     entity.get給付実績社会福祉法人軽減額データ()));
             給付実績社会福祉法人軽減額データリスト.add(給付実績集計データ);
@@ -859,7 +889,11 @@ public class KyufuJissekiShokaiFinder {
                         入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
         for (KyufuJissekiCareManagementHiRelateEntity entity : entityList) {
             KyufuJissekiCareManagementHiBusiness 給付実績ケアマネジメント費データ = new KyufuJissekiCareManagementHiBusiness();
-            給付実績ケアマネジメント費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績ケアマネジメント費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績ケアマネジメント費データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績ケアマネジメント費データ.set給付実績ケアマネジメント費基本情報(
                     new KyufuJissekiCareManagementHi(entity.get給付実績ケアマネジメント費データ()));
             給付実績ケアマネジメント費データリスト.add(給付実績ケアマネジメント費データ);
@@ -893,7 +927,11 @@ public class KyufuJissekiShokaiFinder {
                         入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号));
         for (KyufujissekiMeisaiJushochiTokureiRelateEntity entity : entityList) {
             KyufujissekiMeisaiJushochiTokureiBusiness 給付実績明細住所地特例データ = new KyufujissekiMeisaiJushochiTokureiBusiness();
-            給付実績明細住所地特例データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績明細住所地特例データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績明細住所地特例データ.setサービス種類略称(RString.EMPTY);
+            }
             給付実績明細住所地特例データ.set給付実績明細住所地特例情報(new KyufujissekiMeisaiJushochiTokurei(
                     entity.get給付実績明細住所地特例データ()));
             給付実績明細住所地特例データリスト.add(給付実績明細住所地特例データ);
@@ -957,7 +995,7 @@ public class KyufuJissekiShokaiFinder {
         List<KyufujissekiKogakuKaigoServicehi> ストアデータ = new ArrayList<>();
         boolean 共同処理あり = false;
         for (int i = 0; i < 給付実績基本高額介護サービス費データ.size(); i++) {
-            DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = 給付実績基本高額介護サービス費表示対象データ.get(i).toEntity();
+            DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = 給付実績基本高額介護サービス費データ.get(i).toEntity();
             ストアデータ.add(new KyufujissekiKogakuKaigoServicehi(entity));
             if (i == 0) {
                 先頭レコード = entity;

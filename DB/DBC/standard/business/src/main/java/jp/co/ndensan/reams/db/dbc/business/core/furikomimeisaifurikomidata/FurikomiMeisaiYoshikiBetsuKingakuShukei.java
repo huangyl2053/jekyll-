@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
 
-    private static final int length = 25;
+    private static final int LENGTH = 25;
 
     /**
      * 印字様式番号別集計。
@@ -99,7 +99,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
 
     private List<InjiYoushikiBangouBetuKingaku> getOutPut(Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> groups) {
         List<InjiYoushikiBangouBetuKingaku> outList = new ArrayList<>();
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < LENGTH; i++) {
             List group = groups.get(new RString(i));
             if (null != group && !group.isEmpty()) {
                 InjiYoushikiBangouBetuKingaku out = getOutItem((ArrayList<YoushikiBangouBetuKingakuEntity>) group);
@@ -153,7 +153,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         RString 様式番号RS = get様式番号RS();
         List<RString> groupRS = 様式番号RS.split(";");
 
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < LENGTH; i++) {
             int index = i - 1;
             List<RString> list = groupRS.get(index).split(",");
             for (RString rs : list) {
@@ -168,7 +168,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
     private Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> getGroups() {
         Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> map;
         map = new HashMap<>();
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < LENGTH; i++) {
             map.put(new RString(i), new ArrayList<YoushikiBangouBetuKingakuEntity>());
         }
         return map;
@@ -177,7 +177,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
     private RString getKeyOfGroup(YoushikiBangouBetuKingakuEntity entity) {
         RString 様式番号RS = get様式番号RS();
         List<RString> groupRS = 様式番号RS.split(";");
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < LENGTH; i++) {
             int index = i - 1;
             List<RString> list = groupRS.get(index).split(",");
             for (RString rs : list) {

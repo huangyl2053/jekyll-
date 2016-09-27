@@ -442,8 +442,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
         AccessLogger.log(AccessLogType.更新, personalData);
         handler.initializeDisplay(対象者);
         onClick_chkRirekiHyouji(div);
-        return ResponseData.of(div).forwardWithEventName(
-                DBC1140011TransitionEventName.完了).respond();
+        return ResponseData.of(div).setState(DBC1140011StateName.処理完了);
 
     }
 

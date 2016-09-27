@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.ShiharaiHohoHenkoListFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207012.DBD207012_ShiharaiHohoHenkoKanriListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
@@ -34,7 +34,7 @@ public class ShiharaiHohoHenkoKanriIchiran {
      *
      * @return CreateShiharaiHohoListBatchParameter 支払方法変更管理リスト_バッチ用のパラメータ
      */
-    public ShiharaiHohoHenkoListFlowParameter createShiharaiHohoHenkoKanriIchiranParameter() {
+    public DBD207012_ShiharaiHohoHenkoKanriListParameter createShiharaiHohoHenkoKanriIchiranParameter() {
         ShiharaiHohoKanriListData tempData = new ShiharaiHohoKanriListData();
         tempData.set基準日(div.getChushutsuJoken().getTxtKijunYMD().getValue());
         tempData.set登録者選択(div.getRadTorokusha().getSelectedKey());
@@ -48,7 +48,7 @@ public class ShiharaiHohoHenkoKanriIchiran {
         tempData.set帳票ID(ReportIdDBD.DBD200007.getReportId());
         tempData.set帳票分類ID(ReportIdDBD.DBD200007.getReportId());
         tempData.set帳票作成日時(RDateTime.now());
-        ShiharaiHohoHenkoListFlowParameter batchParameter = new ShiharaiHohoHenkoListFlowParameter();
+        DBD207012_ShiharaiHohoHenkoKanriListParameter batchParameter = new DBD207012_ShiharaiHohoHenkoKanriListParameter();
         batchParameter.toDbd207010BatchParameter(tempData);
         return batchParameter;
     }

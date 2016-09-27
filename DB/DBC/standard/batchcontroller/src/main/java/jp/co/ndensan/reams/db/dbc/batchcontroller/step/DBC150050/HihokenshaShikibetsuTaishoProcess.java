@@ -66,10 +66,6 @@ public class HihokenshaShikibetsuTaishoProcess
         サービス明細一時tableWriter.update(serviceMeisaiTempEntity);
     }
 
-    @Override
-    protected void afterExecute() {
-    }
-
     private void set宛名(IShikibetsuTaisho 識別対象, DbWT3470ServiceMeisaiTempEntity serviceMeisaiTempEntity) {
         serviceMeisaiTempEntity.setShikibetsuCode(識別対象.get識別コード());
         serviceMeisaiTempEntity.setJuminShubetsuCode(識別対象.get住民種別().getCode());
