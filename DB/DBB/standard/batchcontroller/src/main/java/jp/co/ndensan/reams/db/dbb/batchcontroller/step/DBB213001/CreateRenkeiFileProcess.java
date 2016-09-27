@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -37,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
  *
  * @reamsid_L DBB-1790-040 yuanzhenxia
  */
-public class TokuchoSofuJohoRenkeiProcess extends BatchProcessBase<TokuchoSofuJohoRenkeiEntity> {
+public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRenkeiEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper"
@@ -98,20 +99,13 @@ public class TokuchoSofuJohoRenkeiProcess extends BatchProcessBase<TokuchoSofuJo
         ファイル出力DE__Z1AList = new ArrayList<>();
         proParameter = new TokuchoSofuJohoRenkeiProcessParameter();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-//        List<KoseiShichoson> 広域市町村情報 = finder.getKoseiShichosonList().records();
-//        if (!広域市町村情報.isEmpty()) {
-//            for (KoseiShichoson item : 広域市町村情報) {
-//                市町村コードリスト.add(item.get市町村コード().value());
-//                市町村IDMap.put(item.get市町村コード().value(), item.get市町村識別ID());
-//            }
-//        }
-
-        市町村コードリスト.add(new RString("00001"));
-        市町村コードリスト.add(new RString("00002"));
-        市町村コードリスト.add(new RString("00003"));
-        市町村IDMap.put(new RString("00001"), new RString("01"));
-        市町村IDMap.put(new RString("00002"), new RString("02"));
-        市町村IDMap.put(new RString("00003"), new RString("03"));
+        List<KoseiShichoson> 広域市町村情報 = finder.getKoseiShichosonList().records();
+        if (!広域市町村情報.isEmpty()) {
+            for (KoseiShichoson item : 広域市町村情報) {
+                市町村コードリスト.add(item.get市町村コード().value());
+                市町村IDMap.put(item.get市町村コード().value(), item.get市町村識別ID());
+            }
+        }
         proParameter.set処理年度(処理年度);
         proParameter.set処理対象年月(処理対象年月);
         proParameter.set市町村コードリスト(市町村コードリスト);
