@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207011;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoHaakoFiveProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoHaakuOneProcessParameter;
@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiHohoHenkoHaakuIchiranBatchParameter extends BatchParameterBase {
+public class DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter extends BatchParameterBase {
 
     private static final String KIJUNYMD = "kijunYMD";
     private static final String HIHOKENSHAALL = "hihokenshaAll";
