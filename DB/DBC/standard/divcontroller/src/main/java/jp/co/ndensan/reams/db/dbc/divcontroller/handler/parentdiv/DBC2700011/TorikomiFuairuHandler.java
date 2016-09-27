@@ -24,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 給付費単位数表標準マスタ取込画面のHandlerです。
  *
- * @author x_zhaowen
+ * @reamsid_L DBC-3400-010 x_zhaowen
  */
 public class TorikomiFuairuHandler {
 
@@ -59,14 +60,14 @@ public class TorikomiFuairuHandler {
                 .setDelimiter(new RString(",")).setEnclosure(new RString("\""))
                 .hasHeader(false).setEncode(Encode.UTF_8withBOM).build()) {
             while (true) {
-            KaigoServiceNaiyouCsvEntity entity = csvReader.readLine();
-            if (entity != null) {
-                csvEntityList.add(entity);
-            } else {
-                break;
+                KaigoServiceNaiyouCsvEntity entity = csvReader.readLine();
+                if (entity != null) {
+                    csvEntityList.add(entity);
+                } else {
+                    break;
+                }
             }
-        }
-        csvReader.close();
+            csvReader.close();
         }
         div.getTxtFuairuRekodoSu().setValue(new Decimal(csvEntityList.size()));
     }
@@ -87,7 +88,6 @@ public class TorikomiFuairuHandler {
 //        }
 //        div.setHdnLine(line);
 //    }
-
     /**
      * バッチ用パラメータクラスを作成します。
      *
@@ -96,7 +96,7 @@ public class TorikomiFuairuHandler {
     public DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter setBatchParameter() {
         return new DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter();
     }
-    
+
 //    private CsvReader<KaigoServiceNaiyouCsvEntity> createCsvReader(RString) {
 //        return new CsvReader.InstanceBuilder(csvFilePath, KaigoServiceNaiyouCsvEntity.class)
 //                .setDelimiter(new RString(",")).setEnclosure(new RString("\""))

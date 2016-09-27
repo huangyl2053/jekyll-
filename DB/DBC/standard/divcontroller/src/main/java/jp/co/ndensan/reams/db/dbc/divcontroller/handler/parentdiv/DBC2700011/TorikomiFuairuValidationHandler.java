@@ -18,22 +18,23 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 給付費単位数表標準マスタ取込画面のValidationHandlerです。
  *
  * @reamsid_L DBC-3400-010 x_zhaowen
  */
 public class TorikomiFuairuValidationHandler {
-    
+
     private final TorikomiFuairuDiv div;
 
     /**
      * コンストラクタです。
-     * 
+     *
      * @param div TorikomiFuairuDiv
      */
     public TorikomiFuairuValidationHandler(TorikomiFuairuDiv div) {
         this.div = div;
     }
-    
+
     /**
      * アップロードファイル未指定チェックを行います。
      *
@@ -51,12 +52,17 @@ public class TorikomiFuairuValidationHandler {
                 checkMessage, div.getUplAppurodoFuairu()).build().check(messages));
         return pairs;
     }
-    
-    
+
+    /**
+     * アップロードファイル項目数チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
     public ValidationMessageControlPairs validateForアップロードファイル項目数(ValidationMessageControlPairs pairs) {
-         return pairs;
+        return pairs;
     }
-    
+
     private static final class NoInputMessages implements IValidationMessage {
 
         private final Message message;
