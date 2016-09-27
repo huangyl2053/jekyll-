@@ -44,6 +44,14 @@ public class IchijihanteiSumidataIferaBunisess {
     private final RString 一次判定日 = new RString("一次判定日");
     private final RString 一次判定結果 = new RString("一次判定結果");
     private final RString 一次判定結果認知症加算 = new RString("一次判定結果（認知症加算）");
+    private final RString 要介護認定等基準時間 = new RString("要介護認定等基準時間");
+    private final RString 要介護認定等基準時間食事 = new RString("要介護認定等基準時間(食事)");
+    private final RString 要介護認定等基準時間排泄 = new RString("要介護認定等基準時間(排泄)");
+    private final RString 要介護認定等基準時間移動 = new RString("要介護認定等基準時間(移動)");
+    private final RString 要介護認定等基準時間清潔保持 = new RString("要介護認定等基準時間(清潔保持)");
+    private final RString 要介護認定等基準時間間接ケア = new RString("要介護認定等基準時間(間接ケア)");
+    private final RString 要介護認定等基準時間BPSD関連 = new RString("要介護認定等基準時間(BPSD関連)");
+    private final RString 要介護認定等基準時間機能訓練 = new RString("要介護認定等基準時間(機能訓練)");
 
     /**
      * エラーデータ処理。
@@ -175,102 +183,94 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間())) {
-            builder.append(new RString("要介護認定等基準時間"));
+            builder.append(要介護認定等基準時間);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間食事())) {
-            builder.append(new RString("要介護認定等基準時間(食事)"));
+            builder.append(要介護認定等基準時間食事);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間排泄())) {
-            builder.append(new RString("要介護認定等基準時間(排泄)"));
+            builder.append(要介護認定等基準時間排泄);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間移動())) {
-            builder.append(new RString("要介護認定等基準時間(移動)"));
+            builder.append(要介護認定等基準時間移動);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間清潔保持())) {
-            builder.append(new RString("要介護認定等基準時間(清潔保持)"));
+            builder.append(要介護認定等基準時間清潔保持);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間間接ケア())) {
-            builder.append(new RString("要介護認定等基準時間(間接ケア)"));
+            builder.append(要介護認定等基準時間間接ケア);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間BPSD関連())) {
-            builder.append(new RString("要介護認定等基準時間(BPSD関連)"));
+            builder.append(要介護認定等基準時間BPSD関連);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間機能訓練())) {
-            builder.append(new RString("要介護認定等基準時間(機能訓練)"));
-            builder.append(データ);
-        }
-        if (RString.isNullOrEmpty(entity.get要介護認定等基準時間BPSD関連())) {
-            builder.append(new RString("要介護認定等基準時間(BPSD関連)"));
+            builder.append(要介護認定等基準時間機能訓練);
             builder.append(データ);
         }
     }
 
     private void set一次判定エラーデータ09A(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity, RStringBuilder builder) {
         if (RString.isNullOrEmpty(entity.get自分の意思の伝達能力())) {
-            builder.append(new RString("意見書「伝達能力」"));
+            builder.append(意見書伝達能力);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get食事行為())) {
-            builder.append(new RString("意見書「食事行為」"));
+            builder.append(意見書食事行為);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get意見書認知症高齢者自立度())) {
-            builder.append(new RString("意見書「認知症高齢者の日常生活自立度」"));
+            builder.append(意見書認知症高齢者の日常生活自立度);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get実施年月日())) {
-            builder.append(new RString("調査実施日"));
+            builder.append(調査実施日);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get一次判定結果())) {
-            builder.append(new RString("一次判定結果"));
+            builder.append(一次判定結果);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get一次判定結果認知症加算())) {
-            builder.append(new RString("一次判定結果（認知症加算）"));
+            builder.append(一次判定結果認知症加算);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間())) {
-            builder.append(new RString("要介護認定等基準時間"));
+            builder.append(要介護認定等基準時間);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間食事())) {
-            builder.append(new RString("要介護認定等基準時間(食事)"));
+            builder.append(要介護認定等基準時間食事);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間排泄())) {
-            builder.append(new RString("要介護認定等基準時間(排泄)"));
+            builder.append(要介護認定等基準時間排泄);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間移動())) {
-            builder.append(new RString("要介護認定等基準時間(移動)"));
+            builder.append(要介護認定等基準時間移動);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間清潔保持())) {
-            builder.append(new RString("要介護認定等基準時間(清潔保持)"));
+            builder.append(要介護認定等基準時間清潔保持);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間間接ケア())) {
-            builder.append(new RString("要介護認定等基準時間(間接ケア)"));
+            builder.append(要介護認定等基準時間間接ケア);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間BPSD関連())) {
-            builder.append(new RString("要介護認定等基準時間(BPSD関連)"));
+            builder.append(要介護認定等基準時間BPSD関連);
             builder.append(データ);
         }
         if (RString.isNullOrEmpty(entity.get要介護認定等基準時間機能訓練())) {
-            builder.append(new RString("要介護認定等基準時間(機能訓練)"));
-            builder.append(データ);
-        }
-        if (RString.isNullOrEmpty(entity.get要介護認定等基準時間BPSD関連())) {
-            builder.append(new RString("要介護認定等基準時間(BPSD関連)"));
+            builder.append(要介護認定等基準時間機能訓練);
             builder.append(データ);
         }
     }
