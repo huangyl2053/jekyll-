@@ -67,7 +67,11 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
         chosahoshuseikyu.set市町村コード(導入団体コード);
         chosahoshuseikyu.set市町村名(市町村名);
         chosahoshuseikyu.set被保険者番号(entity.get被保険者番号());
-        chosahoshuseikyu.set被保険者氏名(entity.get被保険者氏名());
+        if (entity.get被保険者氏名() != null && !entity.get被保険者氏名().isEmpty()) {
+            chosahoshuseikyu.set被保険者氏名(entity.get被保険者氏名());
+        } else if (entity.get被保険者氏名() == null && entity.get被保険者氏名().isEmpty()) {
+            chosahoshuseikyu.set被保険者氏名(new RString("該当データ無し"));
+        }
         chosahoshuseikyu.set要介護度(entity.get要介護状態区分名称());
         chosahoshuseikyu.setサービス提供年月(new FlexibleYearMonth(entity.getサービス提供年月()));
         chosahoshuseikyu.set公費負担者1(entity.get公費1_負担者番号());

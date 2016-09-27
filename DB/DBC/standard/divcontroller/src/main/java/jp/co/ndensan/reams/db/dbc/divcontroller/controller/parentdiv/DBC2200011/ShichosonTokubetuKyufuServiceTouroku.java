@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2200011
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2200011.ShichosonTokubetuKyufuServiceTourokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2200011.ShichosonTokubetuKyufuServiceTourokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2200011.ShichosonTokubetuKyufuServiceTourokuValidationHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -87,10 +86,10 @@ public class ShichosonTokubetuKyufuServiceTouroku {
      */
     public ResponseData<ShichosonTokubetuKyufuServiceTourokuDiv> onClick_cancelDelete(ShichosonTokubetuKyufuServiceTourokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("削除を取消します。")).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).initialize();
+            getHandler(div).initialize照会モード();
         }
         return ResponseData.of(div).respond();
     }
@@ -102,13 +101,13 @@ public class ShichosonTokubetuKyufuServiceTouroku {
      * @return ResponseData
      */
     public ResponseData<ShichosonTokubetuKyufuServiceTourokuDiv> onClick_cancelInsert(ShichosonTokubetuKyufuServiceTourokuDiv div) {
-        boolean is項目が変更 = getHandler(div).is項目が変更();
+        boolean is項目が変更 = getHandler(div).is追加項目が変更();
         if (is項目が変更) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).initialize();
+                getHandler(div).discard入力内容();
             }
         } else {
             getHandler(div).initialize照会モード();
@@ -123,13 +122,13 @@ public class ShichosonTokubetuKyufuServiceTouroku {
      * @return ResponseData
      */
     public ResponseData<ShichosonTokubetuKyufuServiceTourokuDiv> onClick_cancelModify(ShichosonTokubetuKyufuServiceTourokuDiv div) {
-        boolean is項目が変更 = getHandler(div).is項目が変更();
+        boolean is項目が変更 = getHandler(div).is修正項目が変更();
         if (is項目が変更) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).initialize();
+                getHandler(div).discard入力内容();
             }
         } else {
             getHandler(div).initialize照会モード();
@@ -153,7 +152,7 @@ public class ShichosonTokubetuKyufuServiceTouroku {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save();
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }

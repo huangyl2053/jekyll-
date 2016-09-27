@@ -912,10 +912,8 @@ public class HanyoListKokuhorenJukyushaResult {
             市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
         }
+        出力条件List.add(jokenBuilder.toRString());
         出力条件List.add(RString.EMPTY);
-        出力条件List.add(jokenBuilder.toRString());
-        jokenBuilder = new RStringBuilder();
-        出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("日付抽出区分："));
         jokenBuilder.append(HizukeChushutsuKubun.toValue(processParameter.get日付抽出区分()).get名称());

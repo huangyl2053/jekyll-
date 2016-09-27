@@ -46,7 +46,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(変更したいデータを取得)
-    protected IBatchFlowCommand NinteiKekkaRenkeiDetaTorikomiProcess() {
+    protected IBatchFlowCommand ninteiKekkaRenkeiDetaTorikomiProcess() {
         return loopBatch(NinteiKekkaRenkeiDetaTorikomiProcess.class)
                 .arguments(getParameter().toRendingJieguoLianxieProcessParameter())
                 .define();
@@ -58,7 +58,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(保険者コードチェックデータ検索)
-    protected IBatchFlowCommand HokenShaKodochekkuProcess() {
+    protected IBatchFlowCommand hokenShaKodochekkuProcess() {
         return loopBatch(HokenShaKodochekkuProcess.class)
                 .define();
     }
@@ -69,7 +69,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(当該被保険者の申請データが存在するかどうかチェック)
-    protected IBatchFlowCommand TogaiHihokenjaNoShinseiDetagaProcess() {
+    protected IBatchFlowCommand togaiHihokenjaNoShinseiDetagaProcess() {
         return loopBatch(TogaiHihokenjaNoShinseiDetagaProcess.class)
                 .define();
     }
@@ -80,7 +80,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(申請区分一致チェック)
-    protected IBatchFlowCommand ShinseiKubunItchiChekkuProcess() {
+    protected IBatchFlowCommand shinseiKubunItchiChekkuProcess() {
         return loopBatch(ShinseiKubunItchiChekkuProcess.class)
                 .define();
     }
@@ -91,7 +91,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(被保険者ｶﾅ氏名と被保険者漢字氏名は空白の処理)
-    protected IBatchFlowCommand ShimeiWaKuhakuNoShoriProcess() {
+    protected IBatchFlowCommand shimeiWaKuhakuNoShoriProcess() {
         return loopBatch(ShimeiWaKuhakuNoShoriProcess.class)
                 .define();
     }
@@ -102,7 +102,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(出力ファイルリストを作成)
-    protected IBatchFlowCommand ShutsuryokuFairuRisutooSakuseiProcess() {
+    protected IBatchFlowCommand shutsuryokuFairuRisutooSakuseiProcess() {
         return loopBatch(ShutsuryokuFairuRisutooSakuseiProcess.class)
                 .arguments(getParameter().toRendingJieguoLianxieProcessParameter())
                 .define();

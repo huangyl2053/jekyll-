@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC160020;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,7 +40,7 @@ public class DBC160020_ServicecodeIchiranParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_CHUSHUTSUJOKENKUBUN, name = "抽出条件区分")
     private RString 抽出条件区分;
     @BatchParameter(key = KEY_SERVICESHURUICODE, name = "サービス種類コード")
-    private ServiceShuruiCode サービス種類コード;
+    private RString サービス種類コード;
     @BatchParameter(key = KEY_SERVICEKOUMOKUCD, name = "サービス項目コード")
     private RString サービス項目コード;
     @BatchParameter(key = KEY_SERVICEBUNRRUICDLIST, name = "サービス分類s")

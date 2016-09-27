@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD492001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.DBD492001.RendingJieguoLianxieProcessParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ErrorRecord;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.HenKouData;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd492001.RendingJieguoLianxieProcessParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ErrorRecord;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.HenKouData;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -43,6 +43,7 @@ public class NinteiKekkaRenkeiDetaTorikomiProcess extends BatchProcessBase<HenKo
     private List<ErrorRecord> errorRecordList;
     private List<HenKouData> henKouDataList;
     private RString 一時デーブル;
+    private final int 項目数 = 328;
 
     private RendingJieguoLianxieProcessParameter processParameter;
 
@@ -65,22 +66,22 @@ public class NinteiKekkaRenkeiDetaTorikomiProcess extends BatchProcessBase<HenKo
     @Override
     protected void process(HenKouData entity) {
         ErrorRecord error = new ErrorRecord();
-        if (henKouDataList.size() != 328) {
+        if (henKouDataList.size() != 項目数) {
             データチェック(error, entity);
         } else {
-            if (!いち.equals(entity.getTorisakubunkodo().value())
-                    || !に.equals(entity.getTorisakubunkodo().value())
-                    || !よっ.equals(entity.getTorisakubunkodo().value())) {
+            if (!いち.equals(entity.get取下区分コード().value())
+                    || !に.equals(entity.get取下区分コード().value())
+                    || !よっ.equals(entity.get取下区分コード().value())) {
                 データチェック(error, entity);
             } else {
-                if (!ゼロいち.equals(entity.getNijihanteikekka())
-                        || !じゅうに.equals(entity.getNijihanteikekka())
-                        || !じゅうさん.equals(entity.getNijihanteikekka())
-                        || !にじゅういち.equals(entity.getNijihanteikekka())
-                        || !にじゅうに.equals(entity.getNijihanteikekka())
-                        || !にじゅうみ.equals(entity.getNijihanteikekka())
-                        || !にじゅうよっ.equals(entity.getNijihanteikekka())
-                        || !にじゅうご.equals(entity.getNijihanteikekka())) {
+                if (!ゼロいち.equals(entity.get二次判定結果())
+                        || !じゅうに.equals(entity.get二次判定結果())
+                        || !じゅうさん.equals(entity.get二次判定結果())
+                        || !にじゅういち.equals(entity.get二次判定結果())
+                        || !にじゅうに.equals(entity.get二次判定結果())
+                        || !にじゅうみ.equals(entity.get二次判定結果())
+                        || !にじゅうよっ.equals(entity.get二次判定結果())
+                        || !にじゅうご.equals(entity.get二次判定結果())) {
                     データチェック(error, entity);
                 }
             }
@@ -88,26 +89,26 @@ public class NinteiKekkaRenkeiDetaTorikomiProcess extends BatchProcessBase<HenKo
     }
 
     private void データチェック(ErrorRecord error, HenKouData entity) {
-        error.setShikibetsukodo(entity.getShikibetsukodo());
-        error.setHokenshabango(entity.getHokenshabango());
-        error.setHihokenjabango(entity.getHihokenjabango());
-        error.setNinteishinseibi(entity.getNinteishinseibi());
-        error.setEdaban(entity.getEdaban());
-        error.setShinseikubunhorei(entity.getShinseikubunhorei());
-        error.setShinseikubunshinseiji(entity.getShinseikubunshinseiji());
-        error.setTorisakubunkodo(entity.getTorisakubunkodo());
-        error.setHihokenjakubun(entity.getHihokenjakubun());
-        error.setShinseidaikokubun(entity.getShinseidaikokubun());
-        error.setSeinengappi(entity.getSeinengappi());
-        error.setNenrei(entity.getNenrei());
-        error.setSeibetsukodo(entity.getSeibetsukodo());
-        error.setHihokenjakanashimei(entity.getHihokenjakanashimei());
-        error.setHihokenjakanjishimei(entity.getHihokenjakanjishimei());
-        error.setYubenbango(entity.getYubenbango());
-        error.setJusho(entity.getJusho());
-        error.setTenwabango(entity.getTenwabango());
-        error.setByoinshisetsutonomeisho(entity.getByoinshisetsutonomeisho());
-        error.setByoinshisetsutonoshozaichi(entity.getByoinshisetsutonoshozaichi());
+        error.setShikibetsukodo(entity.get識別コード());
+        error.setHokenshabango(entity.get保険者番号());
+        error.setHihokenjabango(entity.get被保険者番号());
+        error.setNinteishinseibi(entity.get認定申請日());
+        error.setEdaban(entity.get枝番());
+        error.setShinseikubunhorei(entity.get申請区分_法令コード());
+        error.setShinseikubunshinseiji(entity.get申請区分_申請時コード());
+        error.setTorisakubunkodo(entity.get取下区分コード());
+        error.setHihokenjakubun(entity.get被保険者区分コード());
+        error.setShinseidaikokubun(entity.get申請代行区分コード());
+        error.setSeinengappi(entity.get生年月日());
+        error.setNenrei(entity.get年齢());
+        error.setSeibetsukodo(entity.get性別コード());
+        error.setHihokenjakanashimei(entity.get被保険者ｶﾅ氏名());
+        error.setHihokenjakanjishimei(entity.get被保険者漢字氏名());
+        error.setYubenbango(entity.get郵便番号());
+        error.setJusho(entity.get住所());
+        error.setTenwabango(entity.get電話番号());
+        error.setByoinshisetsutonomeisho(entity.get病院施設等の名称());
+        error.setByoinshisetsutonoshozaichi(entity.get病院施設等の所在地());
         errorRecordList.add(error);
     }
 }

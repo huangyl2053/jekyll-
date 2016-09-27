@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.Models;
 /**
  * 業務概念CareManegerのHolderクラスです。
  *
- * @reamsid_L DBC-3370-010 yuqingzhang
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 public class CareManegerHolder implements Serializable {
 

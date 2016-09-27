@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -37,20 +36,19 @@ public class ShiharaiHohoHenkoHaakuFiveProcess extends BatchProcessBase<Shiharai
 
     private static final ReportIdDBD REPORT_DBD200006 = ReportIdDBD.DBD200006;
 
-    private static final RString 基準日 = new RString("【基準日】 ");
-    private static final RString 被保険者選択 = new RString("【抽出対象】 被保険者全員");
-    private static final RString 滞納期間 = new RString("【滞納期間】");
-    private static final RString ヵ月経過 = new RString("ヵ月経過");
-    private static final RString 受給者全員 = new RString("【抽出対象】 受給者全員");
-    private static final RString 受給認定申請中者 = new RString("【抽出対象】 受給認定申請中者");
-    private static final RString 受給認定日抽出 = new RString("【抽出方法】 受給認定日抽出");
-    private static final RString 受給認定日抽出の開始 = new RString("【抽出対象】 償還申請中者");
-    private static final RString 受給認定日抽出の終了 = new RString("【抽出方法】 償還支給決定日抽出");
-    private static final RString 受給申請中者 = new RString("受給申請中者:");
-    private static final RString 受給支給決定日抽出 = new RString("受給申請中者の滞納期間:");
-    private static final RString 受給支給決定日抽出の開始 = new RString("受給支給決定日抽出の開始:");
-    private static final RString 受給支給決定日抽出の終了 = new RString("受給支給決定日抽出の終了:");
-
+//    private static final RString 基準日 = new RString("【基準日】 ");
+//    private static final RString 被保険者選択 = new RString("【抽出対象】 被保険者全員");
+//    private static final RString 滞納期間 = new RString("【滞納期間】");
+//    private static final RString ヵ月経過 = new RString("ヵ月経過");
+//    private static final RString 受給者全員 = new RString("【抽出対象】 受給者全員");
+//    private static final RString 受給認定申請中者 = new RString("【抽出対象】 受給認定申請中者");
+//    private static final RString 受給認定日抽出 = new RString("【抽出方法】 受給認定日抽出");
+//    private static final RString 受給認定日抽出の開始 = new RString("【抽出対象】 償還申請中者");
+//    private static final RString 受給認定日抽出の終了 = new RString("【抽出方法】 償還支給決定日抽出");
+//    private static final RString 受給申請中者 = new RString("受給申請中者:");
+//    private static final RString 受給支給決定日抽出 = new RString("受給申請中者の滞納期間:");
+//    private static final RString 受給支給決定日抽出の開始 = new RString("受給支給決定日抽出の開始:");
+//    private static final RString 受給支給決定日抽出の終了 = new RString("受給支給決定日抽出の終了:");
     private Association association;
 
     @Override
@@ -99,10 +97,10 @@ public class ShiharaiHohoHenkoHaakuFiveProcess extends BatchProcessBase<Shiharai
         return result;
     }
 
-    private RString edit日期(FlexibleDate 日期) {
-        if (日期 != null && !日期.isEmpty()) {
-            return new RString(日期.toString());
-        }
-        return RString.EMPTY;
-    }
+//    private RString edit日期(FlexibleDate 日期) {
+//        if (日期 != null && !日期.isEmpty()) {
+//            return new RString(日期.toString());
+//        }
+//        return RString.EMPTY;
+//    }
 }
