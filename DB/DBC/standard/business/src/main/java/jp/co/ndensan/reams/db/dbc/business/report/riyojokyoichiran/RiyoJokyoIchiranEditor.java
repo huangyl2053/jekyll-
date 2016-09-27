@@ -6,11 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.report.riyojokyoichiran;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.RiyojokyoTokeihyo_DataKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.RiyojokyoTokeihyo_RiyoJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.riyojokyoichiran.RiyoJokyoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.riyojokyoichiran.RiyoJokyoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -18,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -26,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -38,9 +43,12 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
 
     private final RiyoJokyoIchiranEntity entity;
     private static final RString KANA = new RString("：");
+    private static final RString 区分_2 = new RString("2");
+    private static final RString 区分_1 = new RString("1");
     private static final int THREE = 3;
     private static final int FOUR = 4;
     private static final int SIX = 6;
+    private static final int 文字_120 = 120;
     private static final RString 数値 = new RString("0000000000");
 
     /**
@@ -83,7 +91,7 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
             iryoKikanCodeBulider.append(entity.get帳票出力対象データリスト().getShoriShichosonName());
             source.kyuShichoson = iryoKikanCodeBulider.toRString();
         } else if (entity.get旧市町村コード().isEmpty() || new RString("000000").equals(entity.get旧市町村コード())) {
-            source.kyuShichoson.isEmpty();
+            source.kyuShichoson = RString.EMPTY;
         } else if (!entity.get帳票出力対象データリスト().getKyuShichosonCode().isEmpty()) {
             RStringBuilder stringBuilder = new RStringBuilder();
             stringBuilder.append(entity.get旧市町村コード());
@@ -92,20 +100,23 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
             source.kyuShichoson = stringBuilder.toRString();
         }
         source.shutsuryokujun1 = entity.get並び順().get(0);
-        source.shutsuryokujun1 = entity.get並び順().get(1);
-        source.shutsuryokujun1 = entity.get並び順().get(2);
-        source.shutsuryokujun1 = entity.get並び順().get(THREE);
-        source.shutsuryokujun1 = entity.get並び順().get(FOUR);
-        source.shutsuryokujun1 = entity.get改頁().get(0);
-        source.shutsuryokujun1 = entity.get改頁().get(1);
-        source.shutsuryokujun1 = entity.get改頁().get(2);
-        source.shutsuryokujun1 = entity.get改頁().get(THREE);
-        source.shutsuryokujun1 = entity.get改頁().get(FOUR);
+        source.shutsuryokujun2 = entity.get並び順().get(1);
+        source.shutsuryokujun3 = entity.get並び順().get(2);
+        source.shutsuryokujun4 = entity.get並び順().get(THREE);
+        source.shutsuryokujun5 = entity.get並び順().get(FOUR);
+        source.kaiPege1 = entity.get改頁().get(0);
+        source.kaiPege2 = entity.get改頁().get(1);
+        source.kaiPege3 = entity.get改頁().get(2);
+        source.kaiPege4 = entity.get改頁().get(THREE);
+        source.kaiPege5 = entity.get改頁().get(FOUR);
         source.list1Upper_1 = entity.get帳票出力対象データリスト().getHihokenshaNo();
-        source.list1Upper_2 = entity.get帳票出力対象データリスト().getShimeiKana();
-        // 識別 DBC.ENUM.利用状況統計表_データ区分より表示名称を取得
-//        source.list1Upper_3 = entity.get帳票出力対象データリスト().getDataKubun();
-        if (new RString("2").equals(entity.get帳票出力対象データリスト().getRiyoJissekiFlag())) {
+        if (文字_120 < entity.get帳票出力対象データリスト().getShimeiKana().length()) {
+            source.list1Upper_2 = entity.get帳票出力対象データリスト().getShimeiKana().substring(0, 文字_120);
+        } else {
+            source.list1Upper_2 = entity.get帳票出力対象データリスト().getShimeiKana();
+        }
+        source.list1Upper_3 = RiyojokyoTokeihyo_DataKubun.toValue(entity.get帳票出力対象データリスト().getDataKubun()).get名称();
+        if (区分_2.equals(entity.get帳票出力対象データリスト().getRiyoJissekiFlag())) {
             source.list1Upper_4 = RiyojokyoTokeihyo_RiyoJissekiKubun.toValue(entity.get帳票出力対象データリスト().getRiyoJissekiFlag()).get名称();
         } else {
             source.list1Upper_4 = RString.EMPTY;
@@ -118,9 +129,10 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
     }
 
     private RiyoJokyoIchiranReportSource editSource1(RiyoJokyoIchiranReportSource source) {
-        // データ区分 DBC.ENUM.利用状況統計表_データ区分より表示名称を取得
         RStringBuilder iraiDateTime = new RStringBuilder();
-        if (!RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getServiceTeikyoYM())) {
+        if (区分_2.equals(entity.get帳票出力対象データリスト().getDataKubun())
+                && 区分_2.equals(entity.get帳票出力対象データリスト().getServiceKubun())
+                && !RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getServiceTeikyoYM())) {
             iraiDateTime.append(new RDate(entity.get帳票出力対象データリスト().getServiceTeikyoYM().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).
@@ -129,23 +141,18 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         } else {
             source.list1Lower_3 = RString.EMPTY;
         }
-        // データ区分 DBC.ENUM.利用状況統計表_データ区分より表示名称を取得
-        if (new RString("1").equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())
-                && 数値.equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())) {
+        if (区分_1.equals(entity.get帳票出力対象データリスト().getDataKubun())
+                && !数値.equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())) {
             source.list1Lower_4 = entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo();
-        } else {
-            source.list1Lower_4 = RString.EMPTY;
-        }
-        if (new RString("2").equals(entity.get帳票出力対象データリスト().getJigyoshoNo())
-                && 数値.equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoNo())) {
+        } else if (区分_2.equals(entity.get帳票出力対象データリスト().getDataKubun())
+                && !数値.equals(entity.get帳票出力対象データリスト().getJigyoshoNo())) {
             source.list1Lower_4 = entity.get帳票出力対象データリスト().getJigyoshoNo();
         } else {
             source.list1Lower_4 = RString.EMPTY;
         }
-        // データ区分 DBC.ENUM.利用状況統計表_データ区分より表示名称を取得
         if (数値.equals(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoName())) {
             source.list1Lower_5 = entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoName();
-            if (new RString("2").equals(entity.get帳票出力対象データリスト().getKyotakuServiceSakuseiKubunCode())) {
+            if (区分_2.equals(entity.get帳票出力対象データリスト().getKyotakuServiceSakuseiKubunCode())) {
                 source.list1Lower_5 = KyotakuservicekeikakuSakuseikubunCode.
                         toValue(entity.get帳票出力対象データリスト().getKyotakuServiceJigyoshoName()).get名称();
             }
@@ -154,33 +161,43 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         } else {
             source.list1Lower_5 = RString.EMPTY;
         }
+        if (区分_1.equals(entity.get帳票出力対象データリスト().getDataKubun())) {
+            source.list1Lower_5 = KyotakuservicekeikakuSakuseikubunCode.
+                    toValue(entity.get帳票出力対象データリスト().getKyotakuServiceSakuseiKubunCode()).get名称();
+        } else if (区分_2.equals(entity.get帳票出力対象データリスト().getDataKubun())
+                && !数値.equals(entity.get帳票出力対象データリスト().getJigyoshoNo())) {
+            source.list1Lower_5 = entity.get帳票出力対象データリスト().getJigyoshoNo();
+        } else {
+            source.list1Lower_5 = RString.EMPTY;
+        }
         RStringBuilder iraiDateTime1 = new RStringBuilder();
         if (!RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getServiceTeikyoYM())) {
-            iraiDateTime.append(new RDate(entity.get帳票出力対象データリスト().getServiceTeikyoYM().toString()).wareki().eraType(EraType.KANJI_RYAKU).
+            iraiDateTime.append(new RDate(entity.get帳票出力対象データリスト()
+                    .getServiceTeikyoYM().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
             source.listGokeiJoho_1 = iraiDateTime1.toRString();
         }
-        // 下記メソッドより要介護度名称を取得
-        source.listGokeiJoho_2 = entity.get帳票出力対象データリスト().getYoKaigoJotaiKubunCode();
+        source.listGokeiJoho_2 = YokaigoJotaiKubunSupport.toValue(new FlexibleYearMonth(entity.get帳票出力対象データリスト().getServiceTeikyoYM()),
+                entity.get帳票出力対象データリスト().getYoKaigoJotaiKubunCode()).getName();
         RStringBuilder iraiDateTime2 = new RStringBuilder();
         if (!RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getNinteiYukoKaishiYMD())) {
-            iraiDateTime.append(new RDate(entity.get帳票出力対象データリスト().getNinteiYukoKaishiYMD().
+            iraiDateTime2.append(new RDate(entity.get帳票出力対象データリスト().getNinteiYukoKaishiYMD().
                     toString()).wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
-            source.listGokeiJoho_3 = iraiDateTime1.toRString();
+            source.listGokeiJoho_3 = iraiDateTime2.toRString();
         }
         RStringBuilder iraiDateTime3 = new RStringBuilder();
         if (!RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getNinteiYukoShuryoYMD())) {
-            iraiDateTime.append(new RDate(entity.get帳票出力対象データリスト().getNinteiYukoShuryoYMD().
+            iraiDateTime3.append(new RDate(entity.get帳票出力対象データリスト().getNinteiYukoShuryoYMD().
                     toString()).wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
-            source.listGokeiJoho_3 = iraiDateTime1.toRString();
+            source.listGokeiJoho_3 = iraiDateTime3.toRString();
         }
         RStringBuilder stringBuilder1 = new RStringBuilder();
         stringBuilder1.append(iraiDateTime2.toRString());
@@ -204,8 +221,8 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         source.listRiyoJokyo1_5 = DecimalFormatter.
                 toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHokenRiyoshaFutangaku().toString()), 0);
         source.listRiyoJokyo2_1 = entity.get帳票出力対象データリスト().getTankiNyushoJitsunissu();
-        // コードマスタAPIより名称を取得
-        source.listRiyoJokyo2_2 = entity.get帳票出力対象データリスト().getTaishogoJotaiCode();
+        source.listRiyoJokyo2_2 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.退所_院_後の状態コード.getコード(),
+                new Code(entity.get帳票出力対象データリスト().getTaishogoJotaiCode()), FlexibleDate.getNowDate());
         source.listRiyoJokyo2_3 = DecimalFormatter.
                 toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHokenDekidakaTanisu().toString()), 0);
         source.listRiyoJokyo2_4 = DecimalFormatter.
@@ -216,7 +233,6 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
     }
 
     private RiyoJokyoIchiranReportSource editSource2(RiyoJokyoIchiranReportSource source) {
-        // 小数部、整数部
         source.listRiyoJokyo3_1 = entity.get帳票出力対象データリスト().getShafukuKeigenritsu();
         if (is制度改正以降()) {
             source.listRiyoJokyo3_2 = DecimalFormatter.
@@ -228,15 +244,14 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
             source.listRiyoJokyo3_3 = DecimalFormatter.
                     toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getShafukuKeigengaku().toString()), 0);
         } else if (is制度改正以前()) {
-            source.listRiyoJokyo3_2 = RString.EMPTY;
+            source.listRiyoJokyo3_3 = RString.EMPTY;
         }
         if (is制度改正以降()) {
             source.listRiyoJokyo3_4 = DecimalFormatter.
                     toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getShafukuKeigengoRiyoshaFutangaku().toString()), 0);
         } else if (is制度改正以前()) {
-            source.listRiyoJokyo3_2 = RString.EMPTY;
+            source.listRiyoJokyo3_4 = RString.EMPTY;
         }
-        // 制度改正以降※2
         int 食費_日数 = Integer.parseInt(entity.get帳票出力対象データリスト().getTokuteiNyushoShokuhiNissu().toString());
         int 居住_日数 = Integer.parseInt(entity.get帳票出力対象データリスト().getTokuteiNyushoKyojuNissu().toString());
         if (is制度改正以降()) {
@@ -249,63 +264,51 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         if (is制度改正以前()) {
             source.listRiyoJokyo1_6 = new RString(居住_日数 + 食費_日数);
         }
-        int 食費_費用額 = Integer.parseInt(DecimalFormatter.
-                toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoShokuhiHiyogaku().toString()), 0).toString());
-        int 居住_費用額 = Integer.parseInt(DecimalFormatter.
-                toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoKyojuHiyogaku().toString()), 0).toString());
+        Decimal 食費_費用額 = new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoShokuhiHiyogaku().toString());
+        Decimal 居住_費用額 = new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoKyojuHiyogaku().toString());
         if (is制度改正以降()) {
-            source.listRiyoJokyo1_7 = new RString(食費_費用額 + 居住_費用額);
+            source.listRiyoJokyo1_7 = DecimalFormatter.toコンマ区切りRString(食費_費用額.add(居住_費用額), 0);
         }
         if (is制度改正以前()) {
-            source.listRiyoJokyo1_7 = entity.get帳票出力対象データリスト().getNichigakuHyojunFutangaku();
+            source.listRiyoJokyo1_7 = DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getNichigakuHyojunFutangaku().toString()), 0);
         }
-        // 制度改正以降※2
-        int 食費_負担額 = Integer.parseInt(DecimalFormatter.
-                toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().
-                                getTokuteiNyushoShokuhiRiyoshaFutangaku().toString()), 0).toString());
-        int 居住_負担額 = Integer.parseInt(DecimalFormatter.
-                toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().
-                                getTokuteiNyushoKyojuRiyoshaFutangaku().toString()), 0).toString());
+        Decimal 食費_負担額 = new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoShokuhiRiyoshaFutangaku().toString());
+        Decimal 居住_負担額 = new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoKyojuRiyoshaFutangaku().toString());
         if (is制度改正以降()) {
-            source.listRiyoJokyo2_6 = new RString(食費_負担額 + 居住_負担額);
+            source.listRiyoJokyo2_6 = DecimalFormatter.toコンマ区切りRString(食費_負担額.add(居住_負担額), 0);
         }
         if (is制度改正以前()) {
-            source.listRiyoJokyo2_6 = entity.get帳票出力対象データリスト().getShokujiTeikyohiGokei();
+            source.listRiyoJokyo2_6 = DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getShokujiTeikyohiGokei().toString()), 0);
         }
-        // 制度改正以降※2
-        int 食費_請求額 = Integer.parseInt(DecimalFormatter.
-                toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().
-                                getTokuteiNyushoShokuhiRiyoshaFutangaku().toString()), 0).toString());
-        int 居住_請求額 = Integer.parseInt(DecimalFormatter.
-                toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().
-                                getTokuteiNyushoKyojuRiyoshaFutangaku().toString()), 0).toString());
+        Decimal 食費_請求額 = new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoShokuhiRiyoshaFutangaku().toString());
+        Decimal 居住_請求額 = new Decimal(entity.get帳票出力対象データリスト().getTokuteiNyushoKyojuRiyoshaFutangaku().toString());
         if (is制度改正以降()) {
-            source.listRiyoJokyo3_5 = new RString(食費_請求額 + 居住_請求額);
+            source.listRiyoJokyo3_5 = DecimalFormatter.toコンマ区切りRString(食費_請求額.add(居住_請求額), 0);
         }
         if (is制度改正以前()) {
-            source.listRiyoJokyo3_5 = entity.get帳票出力対象データリスト().getShokujiTeikyohiSeikyugaku();
+            source.listRiyoJokyo3_5 = DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getShokujiTeikyohiSeikyugaku().toString()), 0);
         }
-        if ((new RString("0")).equals(entity.get帳票出力対象データリスト().getHomonShikyuGendogaku())) {
-            source.listRiyoJokyo1_8 = RString.HALF_SPACE;
-        } else {
-            source.listRiyoJokyo1_8 = DecimalFormatter.
-                    toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHomonShikyuGendogaku().toString()), 0);
-        }
-        if ((new RString("0")).equals(entity.get帳票出力対象データリスト().getHomonRiyoServiceTanisu())) {
+        source.listRiyoJokyo1_8 = DecimalFormatter.
+                toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHomonShikyuGendogaku().toString()), 0);
+        if (区分_1.equals(entity.get帳票出力対象データリスト().getDataKubun())) {
             source.listRiyoJokyo1_9 = RString.HALF_SPACE;
+            source.listRiyoJokyo2_7 = RString.HALF_SPACE;
+            source.listRiyoJokyo2_8 = entity.get帳票出力対象データリスト().getHomonRiyoritsu();
+            source.listRiyoJokyo3_6 = RString.HALF_SPACE;
+            source.listRiyoJokyo3_7 = entity.get帳票出力対象データリスト().getTankiRiyoritsu();
         } else {
             source.listRiyoJokyo1_9 = DecimalFormatter.
                     toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHomonRiyoServiceTanisu().toString()), 0);
-        }
-        source.listRiyoJokyo2_8 = entity.get帳票出力対象データリスト().getHomonRiyoritsu();
-
-        if ((new RString("0")).equals(entity.get帳票出力対象データリスト().getTankiRiyoServiceTanisu())) {
-            source.listRiyoJokyo3_6 = RString.HALF_SPACE;
-        } else {
+            source.listRiyoJokyo2_7 = DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHomonRiyoServiceTanisu().toString()), 0);
+            source.listRiyoJokyo2_8 = RString.EMPTY;
+            source.listRiyoJokyo3_7 = RString.EMPTY;
             source.listRiyoJokyo3_6 = DecimalFormatter.
                     toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getTankiRiyoServiceTanisu().toString()), 0);
         }
-        source.listRiyoJokyo3_7 = entity.get帳票出力対象データリスト().getTankiRiyoritsu();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hihokennshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 entity.get帳票出力対象データリスト().getHihokenshaNo());
