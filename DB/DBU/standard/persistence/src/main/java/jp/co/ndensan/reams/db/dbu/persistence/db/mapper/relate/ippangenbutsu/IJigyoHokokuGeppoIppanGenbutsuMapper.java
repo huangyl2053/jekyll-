@@ -31,8 +31,6 @@ public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
     /**
      * 処理結果確認リストEntityの取得処理です。
      *
-     * @param parameter 事業報告月報_一般現物パラメータ
-     *
      * @return 処理結果確認リストEntity
      */
     List<JigyoHokokuIppanGenbutsuRelateEntity> getResultKyufuJisseki();

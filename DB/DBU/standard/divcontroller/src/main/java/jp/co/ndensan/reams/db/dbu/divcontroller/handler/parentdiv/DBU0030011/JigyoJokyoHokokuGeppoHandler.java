@@ -549,7 +549,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                 && div.getRadShukeiType3().getSelectedKey().equals(決定年月),
                 div.getCblGassan1().getSelectedKeys().contains(ALL)
                 && div.getRadShukeiType3().getSelectedKey().equals(審査年月),
-                div.getCblIppanShokan().getSelectedKeys().contains(ALL)
+                div.getCblGassan1().getSelectedKeys().contains(ALL)
                 && div.getRadShukeiType3().getSelectedKey().equals(決定年月),
                 div.getCblHokenKyufuGembutsu().getSelectedKeys().contains(new RString("hokenKyufuGenbutsu")),
                 div.getCblHokenKyufuShokan().getSelectedKeys().contains(決定状況償還分)
