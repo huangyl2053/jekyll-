@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * {@link NijiYoboJigyoTaishosha}の編集を行うビルダークラスです。
  *
- * @reamsid_L DBC-2400-010 yuqingzhang
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 public class NijiYoboJigyoTaishoshaBuilder {
 
