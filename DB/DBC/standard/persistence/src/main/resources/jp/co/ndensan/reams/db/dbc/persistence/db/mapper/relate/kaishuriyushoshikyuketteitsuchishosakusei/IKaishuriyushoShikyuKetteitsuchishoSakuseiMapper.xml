@@ -100,7 +100,6 @@
         FROM
         <include refid="共通条件" />
     </select>
-
     <sql id="allColumns_DbT3094JutakuKaishuRiyushoTesuryoKettei">
         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."riyushoSakuseiJigyoshaNo" as "riyushoSakuseiJigyoshaNo",
         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."ketteiYMD" as "ketteiYMD",
@@ -123,9 +122,6 @@
         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."uketoriYM" as "uketoriYM",
         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."kozaID" as "kozaID"
     </sql>
-
-
-
     <resultMap id="ResultMap_DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity" autoMapping="true">
         <id property="riyushoSakuseiJigyoshaNo" column="riyushoSakuseiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="ketteiYMD" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
