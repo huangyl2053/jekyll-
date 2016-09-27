@@ -346,21 +346,21 @@ public class KoshinOshiraseTsuchiService {
         if (nianhao.startsWith(明治)) {
             entity.set出生元号明治(まる);
             entity.set出生元号大正(RString.EMPTY);
-            entity.set出生元号明治(RString.EMPTY);
+            entity.set出生元号昭和(RString.EMPTY);
         } else if (nianhao.startsWith(大正)) {
             entity.set出生元号明治(RString.EMPTY);
             entity.set出生元号大正(まる);
-            entity.set出生元号明治(RString.EMPTY);
+            entity.set出生元号昭和(RString.EMPTY);
         } else if (nianhao.startsWith(昭和)) {
             entity.set出生元号明治(RString.EMPTY);
             entity.set出生元号大正(RString.EMPTY);
-            entity.set出生元号明治(まる);
+            entity.set出生元号昭和(まる);
         }
         entity.set被保険者名称カナ(koshinOshiraseEn.getDbt4101Entity().getHihokenshaKana().getColumnValue());
         entity.set出生年YYYY(RString.EMPTY);
-        entity.set生まれYY(deleteFirstZero(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getYear()));
-        entity.set出生月MM(deleteFirstZero(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getMonth()));
-        entity.set出生日DD(deleteFirstZero(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().getDay()));
+        entity.set生まれYY(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().fillType(FillType.NONE).getYear().substring(NUM_1));
+        entity.set出生月MM(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().fillType(FillType.NONE).getMonth());
+        entity.set出生日DD(koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().fillType(FillType.NONE).getDay());
         entity.set被保険者名称(koshinOshiraseEn.getDbt4101Entity().getHihokenshaName().getColumnValue());
         if (Seibetsu.男.getコード().equals(koshinOshiraseEn.getDbt4101Entity().getSeibetsu().getColumnValue())) {
             entity.set性別男(まる);
@@ -387,24 +387,16 @@ public class KoshinOshiraseTsuchiService {
             entity = sakusei(entity, eCode);
         }
 
-        entity.set有効開始年YYYY(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD().wareki().getYear());
-        entity.set有効開始月MM(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD().wareki().getMonth());
-        entity.set有効開始日DD(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD().wareki().getDay());
-        entity.set有効終了年YYYY(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD().wareki().getYear());
-        entity.set有効終了月MM(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD().wareki().getMonth());
+        entity.set有効開始年YYYY(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).getYear());
+        entity.set有効開始月MM(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD().wareki().fillType(FillType.NONE).getMonth());
+        entity.set有効開始日DD(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD().wareki().fillType(FillType.NONE).getDay());
+        entity.set有効終了年YYYY(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).getYear());
+        entity.set有効終了月MM(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD().wareki().fillType(FillType.NONE).getMonth());
         entity.set有効終了日DD(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD().wareki().getDay());
 
         return entity;
-    }
-
-    private RString deleteFirstZero(RString rstr) {
-        if (rstr == null || rstr.isEmpty()) {
-            return RString.EMPTY;
-        }
-        if (rstr.startsWith(new RString("0"))) {
-            rstr = rstr.substring(1);
-        }
-        return rstr;
     }
 
     private void set通知書発行一覧(KoshinOshiraseHeaderEntity twonin, KoshinOshiraseTsuchiUpdateEntity koshinOshiraseEn, int index) {
