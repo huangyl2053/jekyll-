@@ -261,6 +261,8 @@ public class HanyoListKyodoJukyushaShokanCsvEditor {
         Decimal 保険給付支払一時差止金額 = 共同処理用受給者異動償還送付Entity.getHokenkyufuIchijiSashitomeKingaku();
         if (保険給付支払一時差止金額 != null) {
             bodyList.add(new RString(保険給付支払一時差止金額.toString()));
+        } else {
+            bodyList.add(RString.EMPTY);
         }
         return bodyList;
     }

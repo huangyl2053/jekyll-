@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020003;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt32003.KyufuGengakuHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020003.ChishutsuJokenParameterDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020003.DBD2020003ValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -153,7 +153,7 @@ public class ChishutsuJokenParameter {
      * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
-    public ResponseData<KyufuGengakuHaakuIchiranBatchParameter> onClick_btnBatchExecute(ChishutsuJokenParameterDiv div) {
+    public ResponseData<DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter> onClick_btnBatchExecute(ChishutsuJokenParameterDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

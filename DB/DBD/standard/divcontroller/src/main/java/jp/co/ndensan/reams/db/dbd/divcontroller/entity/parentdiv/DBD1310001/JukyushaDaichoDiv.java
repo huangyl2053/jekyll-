@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * JukyushaDaichoPanel のクラスファイル 
+ * JukyushaDaicho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class JukyushaDaichoPanelDiv extends PanelBatchParameter {
+public class JukyushaDaichoDiv extends PanelBatchParameter {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
@@ -41,6 +41,8 @@ public class JukyushaDaichoPanelDiv extends PanelBatchParameter {
     private ChohyoShutsuryokujunDiv ccdShutsuryokujun;
     @JsonProperty("ccdShutsuryokuKoumoku")
     private ChohyoShutsuryokuKomokuDiv ccdShutsuryokuKoumoku;
+    @JsonProperty("CommonChildDiv1")
+    private HanyoListAtenaSelectDiv CommonChildDiv1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -136,6 +138,15 @@ public class JukyushaDaichoPanelDiv extends PanelBatchParameter {
     @JsonProperty("ccdShutsuryokuKoumoku")
     public IChohyoShutsuryokuKomokuDiv getCcdShutsuryokuKoumoku() {
         return ccdShutsuryokuKoumoku;
+    }
+
+    /*
+     * getCommonChildDiv1
+     * @return CommonChildDiv1
+     */
+    @JsonProperty("CommonChildDiv1")
+    public IHanyoListAtenaSelectDiv getCommonChildDiv1() {
+        return CommonChildDiv1;
     }
 
     /*
