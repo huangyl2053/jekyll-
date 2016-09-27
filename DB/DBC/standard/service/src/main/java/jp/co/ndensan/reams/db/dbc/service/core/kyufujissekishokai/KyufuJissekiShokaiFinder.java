@@ -996,7 +996,6 @@ public class KyufuJissekiShokaiFinder {
         boolean 共同処理あり = false;
         for (int i = 0; i < 給付実績基本高額介護サービス費データ.size(); i++) {
             DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = 給付実績基本高額介護サービス費データ.get(i).toEntity();
-            ストアデータ.add(new KyufujissekiKogakuKaigoServicehi(entity));
             if (i == 0) {
                 先頭レコード = entity;
             }
@@ -1015,6 +1014,7 @@ public class KyufuJissekiShokaiFinder {
                     給付実績基本高額介護サービス費表示対象データ.add(new KyufujissekiKogakuKaigoServicehi(先頭レコード));
                 }
             }
+            ストアデータ.add(new KyufujissekiKogakuKaigoServicehi(entity));
         }
         return 給付実績基本高額介護サービス費表示対象データ;
     }
