@@ -63,16 +63,14 @@ var DBZ;
                     this.controls = controls;
                 }
                 DisplayType.prototype.shokai = function () {
-                    this.controls.btnAdd().visible = false;
-                    this.controls.HenkoInput().visible = false;
                     this.controls.dgHenko().readOnly = false;
 
                     var gridSetting = this.controls.dgHenko().gridSetting;
 
                     gridSetting.columns[0].visible = false;
                     gridSetting.columns[8].visible = true;
-                    gridSetting.isShowModifyButtonColumn = true;
-                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
 
