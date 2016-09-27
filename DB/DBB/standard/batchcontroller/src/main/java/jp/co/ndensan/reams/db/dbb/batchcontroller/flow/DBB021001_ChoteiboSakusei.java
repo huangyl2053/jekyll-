@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBB-0770-030 zhangrui
  */
-public class DBB021001_ChoteiboSakuseiFlow extends BatchFlowBase<DBB021001_ChoteiboSakuseiParameter> {
+public class DBB021001_ChoteiboSakusei extends BatchFlowBase<DBB021001_ChoteiboSakuseiParameter> {
 
     @Override
     protected void defineFlow() {
