@@ -32,8 +32,8 @@ public class DvKogakuServiceJoho {
 
     private static final RString 事務広域 = new RString("事務広域");
     private static final RString 事務単一 = new RString("事務単一");
-    private static final RString モード１ = new RString("DBCMN23001");
-    private static final RString モード２ = new RString("DBCMN23019");
+    private static final RString モード１ = new RString("DBCMN13001");
+    private static final RString モード２ = new RString("DBCMN13019");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
 
