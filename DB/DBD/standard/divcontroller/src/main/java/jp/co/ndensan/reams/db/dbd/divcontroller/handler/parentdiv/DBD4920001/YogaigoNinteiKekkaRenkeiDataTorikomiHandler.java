@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4920001;
 
-import java.io.File;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.DataGridFile_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.yogaigoninteikekkarenkeidatatorikomi.YogaigoNinteiKekkaRenkeiDataTorikomiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -16,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 要介護認定申請連携データ取込のHandlerクラスです。
@@ -65,7 +62,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
     }
 
     private void set手動読込初期化状態() {
-        
+
     }
 
     private void set自動読込初期化状態() {
@@ -78,25 +75,24 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
 //            div.getDataGridFile().setDataSource()
 //        }
     }
-    
-    private void getFileCount(RString path, RString ファイル, DataGridFile_Row row) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(path).append(File.separator).append(ファイル);
-        File file = new File(builder.toString());
-        if (file.exists()) {
-            row.setTotal(あり);
-        } else {
-            row.setTotal(なし);
-        }
-    }
-    
-    private DataGridFile_Row setRowFile(RString path, RString フォーマット, RString 名称, RString ファイル名) {
-        DataGridFile_Row row = new DataGridFile_Row();
-        row.setSelected(Boolean.TRUE);
-        row.setFileFormat(フォーマット);
-        row.setMeisho(名称);
-        row.setFileName(ファイル名);
-        getFileCount(path, ファイル名, row);
-        return row;
-    }
+
+//    private void getFileCount(RString path, RString ファイル, DataGridFile_Row row) {
+//        RStringBuilder builder = new RStringBuilder();
+//        builder.append(path).append(File.separator).append(ファイル);
+//        File file = new File(builder.toString());
+//        if (file.exists()) {
+//            row.setTotal(あり);
+//        } else {
+//            row.setTotal(なし);
+//        }
+//    }
+//    private DataGridFile_Row setRowFile(RString path, RString フォーマット, RString 名称, RString ファイル名) {
+//        DataGridFile_Row row = new DataGridFile_Row();
+//        row.setSelected(Boolean.TRUE);
+//        row.setFileFormat(フォーマット);
+//        row.setMeisho(名称);
+//        row.setFileName(ファイル名);
+//        getFileCount(path, ファイル名, row);
+//        return row;
+//    }
 }
