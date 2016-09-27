@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209010;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugengakukanrilist.TaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32004.KyufuGakuGengakuTainoShaProcessParameter;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD209010_KyufuGakuGengakuListParameter extends BatchParameterBase {
+public class DBD209012_KyufuGakuGengakuKanriListParameter extends BatchParameterBase {
 
     private static final String KIJUNBI = "kijunbi";
     private static final String TAISHOKUBUN = "taishokubun";
