@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.IShinseiKubunItchiChekkuMapper">
     <select id="get申請区分一致"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ShinseiKubunItchiChekkuEntity" 
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ShinseiKubunItchiChekkuEntity" 
             fetchSize="500" resultOrdered="true">
         SELECT A."ninteiShinseiShinseijiKubunCode"
         FROM rgdb."DbT4101NinteiShinseiJoho" AS A

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD492001;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ShimeiWaKuhakuNoShoriEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ichijiteburu.FairudetaIchijiTeburuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ShimeiWaKuhakuNoShoriEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.FairudetaIchijiTeburuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.service.core.DBD492001;
+package jp.co.ndensan.reams.db.dbd.service.core.dbd492001;
 
-import jp.co.ndensan.reams.db.dbd.business.core.DBD492001.NinteiKekkaRenkeiDataTorikomi;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.OutFile;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.OutFilekekka;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd492001.NinteiKekkaRenkeiDataTorikomi;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFile;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFilekekka;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -34,7 +34,7 @@ public class NinteiKekkaRenkeiDataTorikomiManager {
      */
     public void 項目設定(OutFile t, OutFilekekka out) {
         NinteiKekkaRenkeiDataTorikomi but = new NinteiKekkaRenkeiDataTorikomi();
-        but.NinteiKekkaRenkeiDataTorikomi(t, out);
+        but.ninteiKekkaRenkeiDataTorikomiBusiness(t, out);
     }
 
 }

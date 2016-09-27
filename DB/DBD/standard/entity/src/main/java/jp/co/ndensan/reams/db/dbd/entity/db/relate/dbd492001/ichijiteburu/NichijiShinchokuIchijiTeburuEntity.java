@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ichijiteburu;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu;
 
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -20,14 +20,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
- * 認定結果一時デーブルEntity
+ * 日次進捗一時デーブルEntity
  *
  * @reamsid_L DBD-1510-020 x_xuliang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinteiKekkaIchijiTeburuEntity extends DbTableEntityBase<NinteiKekkaIchijiTeburuEntity> implements IDbAccessable {
+public class NichijiShinchokuIchijiTeburuEntity extends DbTableEntityBase<NichijiShinchokuIchijiTeburuEntity> implements IDbAccessable {
 
     /**
      * テーブル名です。
@@ -36,7 +36,7 @@ public class NinteiKekkaIchijiTeburuEntity extends DbTableEntityBase<NinteiKekka
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = (new RString("NinteiKekkaIchijiTeburuTemp"));
+        TABLE_NAME = (new RString("NichijiShinchokuIchijiTeburuTemp"));
     }
 
     @TempTableColumnOrder(1)
@@ -374,7 +374,7 @@ public class NinteiKekkaIchijiTeburuEntity extends DbTableEntityBase<NinteiKekka
     @TempTableColumnOrder(167)
     private RString wagamatomaranai04;
     @TempTableColumnOrder(168)
-    private RString Kusurinonaifuku05;
+    private RString kusurinonaifuku05;
     @TempTableColumnOrder(169)
     private RString kinsennokanri05;
     @TempTableColumnOrder(170)
@@ -695,5 +695,4 @@ public class NinteiKekkaIchijiTeburuEntity extends DbTableEntityBase<NinteiKekka
     private RString ninteishinsakaiikento;
     @TempTableColumnOrder(328)
     private RString komentoto;
-
 }

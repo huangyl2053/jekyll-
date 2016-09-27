@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD492001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.DBD492001.RendingJieguoLianxieProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd492001.RendingJieguoLianxieProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

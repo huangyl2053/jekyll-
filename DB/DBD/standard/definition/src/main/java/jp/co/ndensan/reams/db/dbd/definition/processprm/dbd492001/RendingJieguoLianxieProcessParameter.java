@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.processprm.DBD492001;
+package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd492001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.DBD492001.RendingJieguoLianxieMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd492001.RendingJieguoLianxieMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

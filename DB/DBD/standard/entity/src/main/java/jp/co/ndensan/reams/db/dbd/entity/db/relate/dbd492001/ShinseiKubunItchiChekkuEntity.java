@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
- * 保険者コードチェックデータ検索Entity
+ * 申請区分一致チェックEntity
  *
  * @reamsid_L DBD-1510-020 x_xuliang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HokenShaKodochekkuEntity {
+public class ShinseiKubunItchiChekkuEntity {
 
-    private RString shoKisaiHokenshaNo;
+    private Code ninteiShinseiShinseijiKubunCode;
 
 }

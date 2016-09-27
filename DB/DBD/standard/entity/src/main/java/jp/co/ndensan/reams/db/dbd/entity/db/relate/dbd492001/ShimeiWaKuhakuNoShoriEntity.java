@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001;
 
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;

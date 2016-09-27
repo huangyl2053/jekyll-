@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ShimeiWaKuhakuNoShoriEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ShimeiWaKuhakuNoShoriEntity;
 
 /**
  * 被保険者ｶﾅ氏名と被保険者漢字氏名は空白処理のマッパーインタフェースです。

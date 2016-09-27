@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.DBD492001.ichijiteburu;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
