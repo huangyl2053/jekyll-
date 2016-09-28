@@ -22,11 +22,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -42,11 +43,8 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper."
             + "get平均利用額統計Entity");
     private static final RString 地区指定_0 = new RString("0");
-    private static final RString 地区指定_1 = new RString("1");
-    private static final RString 地区指定_2 = new RString("2");
-    private static final RString 地区指定_3 = new RString("3");
-    private static final RString 地区指定_4 = new RString("4");
-    private static final RString 地区指定_5 = new RString("5");
+    private static final RString 対象年月_1 = new RString("1");
+    private static final RString 対象年月_2 = new RString("2");
     private static final RString 所得段階_6 = new RString("6");
     private static final RString 所得段階_7 = new RString("7");
     private static final RString 所得段階_8 = new RString("8");
@@ -62,6 +60,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private static final RString 地区1 = new RString("地区1");
     private static final RString 地区2 = new RString("地区2");
     private static final RString 地区3 = new RString("地区3");
+    private static final RString 地区指定_町域 = new RString("町域");
     private static final RString 集計内容_費用総額 = new RString("費用総額");
     private static final RString 集計内容_平均額 = new RString("平均額");
     private static final RString 所得段階_以上 = new RString("10以上");
@@ -118,16 +117,13 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             heikinRiyoGakuTokeihyoEntity.set費用総額明細_要介護４(getRString(entity.getYokaigo4()));
             heikinRiyoGakuTokeihyoEntity.set費用総額明細_要介護５(getRString(entity.getYokaigo5()));
             heikinRiyoGakuTokeihyoEntity.set費用総額明細_合計(getRString(entity.getGokeichi()));
-            if (new RString("30").equals(entity.getPageNO())) {
-                heikinRiyoGakuTokeihyoEntity.set費用総額明細_要介護５(getRString(entity.getYokaigo5()));
-            }
         }
         heikinRiyoGakuTokeihyoEntity.setページ数(entity.getPageNO());
         heikinRiyoGakuTokeihyoEntity.setサービス種類名称(entity.getServiceshurui());
         if (所得段階_6.equals(entity.getShotoku()) && RString.isNullOrEmpty(entity.getHokenseiteitoku())) {
             heikinRiyoGakuTokeihyoEntity.set所得段階６(RString.EMPTY);
         } else {
-            heikinRiyoGakuTokeihyoEntity.set所得段階６(所得段階_6);
+            heikinRiyoGakuTokeihyoEntity.set所得段階６(RStringUtil.convert半角to全角(所得段階_6));
             heikinRiyoGakuTokeihyoEntity.set人数６(集計内容_人数);
             heikinRiyoGakuTokeihyoEntity.set費用総額６(集計内容_費用総額);
             heikinRiyoGakuTokeihyoEntity.set平均額６(集計内容_平均額);
@@ -136,7 +132,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             heikinRiyoGakuTokeihyoEntity.set所得段階７(RString.EMPTY);
 
         } else {
-            heikinRiyoGakuTokeihyoEntity.set所得段階７(所得段階_7);
+            heikinRiyoGakuTokeihyoEntity.set所得段階７(RStringUtil.convert半角to全角(所得段階_7));
             heikinRiyoGakuTokeihyoEntity.set人数７(集計内容_人数);
             heikinRiyoGakuTokeihyoEntity.set費用総額７(集計内容_費用総額);
             heikinRiyoGakuTokeihyoEntity.set平均額７(集計内容_平均額);
@@ -144,7 +140,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
         if (所得段階_8.equals(entity.getShotoku()) && RString.isNullOrEmpty(entity.getHokenseiteitoku())) {
             heikinRiyoGakuTokeihyoEntity.set所得段階８(RString.EMPTY);
         } else {
-            heikinRiyoGakuTokeihyoEntity.set所得段階８(所得段階_8);
+            heikinRiyoGakuTokeihyoEntity.set所得段階８(RStringUtil.convert半角to全角(所得段階_8));
             heikinRiyoGakuTokeihyoEntity.set人数８(集計内容_人数);
             heikinRiyoGakuTokeihyoEntity.set費用総額８(集計内容_費用総額);
             heikinRiyoGakuTokeihyoEntity.set平均額８(集計内容_平均額);
@@ -152,7 +148,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
         if (所得段階_9.equals(entity.getShotoku()) && RString.isNullOrEmpty(entity.getHokenseiteitoku())) {
             heikinRiyoGakuTokeihyoEntity.set所得段階９(RString.EMPTY);
         } else {
-            heikinRiyoGakuTokeihyoEntity.set所得段階９(所得段階_9);
+            heikinRiyoGakuTokeihyoEntity.set所得段階９(RStringUtil.convert半角to全角(所得段階_9));
             heikinRiyoGakuTokeihyoEntity.set人数９(集計内容_人数);
             heikinRiyoGakuTokeihyoEntity.set費用総額９(集計内容_費用総額);
             heikinRiyoGakuTokeihyoEntity.set平均額９(集計内容_平均額);
@@ -160,7 +156,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
         if (所得段階_以上.equals(entity.getShotoku()) && RString.isNullOrEmpty(entity.getHokenseiteitoku())) {
             heikinRiyoGakuTokeihyoEntity.set所得段階１０(RString.EMPTY);
         } else {
-            heikinRiyoGakuTokeihyoEntity.set所得段階１０(所得段階_以上);
+            heikinRiyoGakuTokeihyoEntity.set所得段階１０(RStringUtil.convert半角to全角(所得段階_以上));
             heikinRiyoGakuTokeihyoEntity.set人数１０(集計内容_人数);
             heikinRiyoGakuTokeihyoEntity.set費用総額１０(集計内容_費用総額);
             heikinRiyoGakuTokeihyoEntity.set平均額１０(集計内容_平均額);
@@ -195,7 +191,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private void editHeikinRiyoGakuTokeihyoEntity(HeikinRiyoGakuTokeihyoEntity heikinRiyoGakuTokeihyoEntity) {
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (地区指定_1.equals(paramter.getTaishoNendoYM())) {
+        if (対象年月_1.equals(paramter.getTaishoNendoYM())) {
             if (!paramter.getKaishiYM().equals(paramter.getShuryoYM())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(提供月);
@@ -213,7 +209,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 RString 条件１ = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件1(条件１);
             }
-        } else if (地区指定_2.equals(paramter.getTaishoNendoYM())) {
+        } else if (対象年月_2.equals(paramter.getTaishoNendoYM())) {
             if (!paramter.getKaishiYM().equals(paramter.getShuryoYM())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(審査月);
@@ -248,7 +244,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
             RString 条件2 = rb.toRString();
             heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
         } else if (paramter.getShichosonCode().isEmpty() && paramter.getKyuShichosonCode().isEmpty()) {
-            if (地区指定_1.equals(paramter.getChikuShitei())) {
+            if (地区指定_町域.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(住所);
                 rb.append(":");
@@ -257,7 +253,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
-            } else if (地区指定_2.equals(paramter.getChikuShitei())) {
+            } else if (行政区.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(行政区);
                 rb.append(":");
@@ -266,7 +262,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
-            } else if (地区指定_3.equals(paramter.getChikuShitei())) {
+            } else if (地区1.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(地区1);
                 rb.append(":");
@@ -275,7 +271,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
-            } else if (地区指定_4.equals(paramter.getChikuShitei())) {
+            } else if (地区2.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(地区2);
                 rb.append(":");
@@ -284,7 +280,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
                 rb.append(paramter.get選択地区().get(paramter.get選択地区().size() - 1));
                 RString 条件2 = rb.toRString();
                 heikinRiyoGakuTokeihyoEntity.set条件2(条件2);
-            } else if (地区指定_5.equals(paramter.getChikuShitei())) {
+            } else if (地区3.equals(paramter.getChikuShitei())) {
                 RStringBuilder rb = new RStringBuilder();
                 rb.append(地区3);
                 rb.append(":");
@@ -316,7 +312,7 @@ public class HeikinRiyoGakuTokeihyoCyouHyouProcess extends BatchProcessBase<Shik
     private RString setDateFormat(RString date) {
         RString formatDate = RString.EMPTY;
         if (!RString.isNullOrEmpty(date)) {
-            formatDate = new FlexibleDate(date).wareki().toDateString();
+            formatDate = new FlexibleYearMonth(date).wareki().toDateString();
         }
         return formatDate;
     }
