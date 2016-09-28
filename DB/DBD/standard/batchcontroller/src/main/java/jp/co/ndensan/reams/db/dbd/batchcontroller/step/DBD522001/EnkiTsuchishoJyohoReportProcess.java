@@ -8,18 +8,34 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD522001;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import static jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.TsutishoHakkoCommonProcess.get地方公共団体;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd522001.YokaigoNinteiEnkiTshuchishoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.enkitsuchisho.EnkiTsuchishohakenIchiranhyoJyohoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.enkitsuchisho.YokaigoNinteiEnkiTshuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd522001.YokaigoNinteiEnkiTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.HojinDaihyoshaRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SetainushiRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -30,9 +46,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -57,6 +76,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     private EnkiTsuchishohakenIchiranhyoJyohoProcessParameter parameter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101TableWriter;
+    private SofubutsuAtesakiSource sofubutsuAtesakiSource;
 
     @Override
     protected IBatchReader createReader() {
@@ -68,13 +88,26 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
         batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD522001.value()).create();
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
         dbT4101TableWriter = new BatchPermanentTableWriter<>(DbT4101NinteiShinseiJohoEntity.class);
+        IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
+        AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
+        builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        builder.set識別コード(ShikibetsuCode.EMPTY);
+        builder.set基準日(FlexibleDate.getNowDate());
+        builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+        builder.set世帯主利用区分(SetainushiRiyoKubun.利用しない);
+        builder.set代納人利用区分(DainoRiyoKubun.利用する);
+        builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
+        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
+        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, get地方公共団体(), get帳票共通情報(REPORT_DBD522001));
+        sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+
     }
 
     @Override
     protected void process(DbT4101NinteiShinseiJohoEntity dbtEntity) {
         YokaigoNinteiEnkiTshuchishoEntity entity = new YokaigoNinteiEnkiTshuchishoEntity();
         entity.setEntity(dbtEntity);
-        //TODO 送付物宛先情報の取得
+        set送付物宛先情報(entity);
         entity.set文書番号(ReportUtil.get文書番号(SubGyomuCode.DBD介護受給, REPORT_DBD522001, parameter.get通知書発行日()));
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBD介護受給,
@@ -125,6 +158,44 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
         dbtEntity.setEnkiTsuchiHakkoYMD(parameter.get通知書発行日());
         dbtEntity.setEnkiTsuchiHakkoKaisu(entity.getEntity().getEnkiTsuchiHakkoKaisu() + 1);
         dbT4101TableWriter.update(dbtEntity);
+    }
+
+    private void set送付物宛先情報(YokaigoNinteiEnkiTshuchishoEntity entity) {
+        entity.set郵便番号(sofubutsuAtesakiSource.yubinNo);
+        entity.set行政区(sofubutsuAtesakiSource.gyoseiku);
+        entity.set住所TextField(sofubutsuAtesakiSource.jushoText);
+        entity.set住所優先順位1(sofubutsuAtesakiSource.jusho1);
+        entity.set住所優先順位2(sofubutsuAtesakiSource.jusho2);
+        entity.set住所優先順位3(sofubutsuAtesakiSource.jusho3);
+        entity.set方書TextField(sofubutsuAtesakiSource.katagakiText);
+        entity.set方書優先順位1標準(sofubutsuAtesakiSource.katagaki1);
+        entity.set方書優先順位2標準(sofubutsuAtesakiSource.katagaki2);
+        entity.set方書優先順位1小(sofubutsuAtesakiSource.katagakiSmall1);
+        entity.set方書優先順位2小(sofubutsuAtesakiSource.katagakiSmall2);
+        entity.set代納人区分(sofubutsuAtesakiSource.dainoKubunMei);
+        entity.set氏名1TextField(sofubutsuAtesakiSource.shimeiText);
+        entity.set氏名1優先順位1標準(sofubutsuAtesakiSource.shimei1);
+        entity.set氏名1優先順位2標準(sofubutsuAtesakiSource.shimei2);
+        entity.set氏名1優先順位1小(sofubutsuAtesakiSource.shimeiSmall1);
+        entity.set氏名1優先順位2小(sofubutsuAtesakiSource.shimeiSmall2);
+        entity.set氏名2TextField(sofubutsuAtesakiSource.samabunShimeiText);
+        entity.set氏名2優先順位1標準(sofubutsuAtesakiSource.samabunShimei1);
+        entity.set氏名2優先順位2標準(sofubutsuAtesakiSource.samabunShimei2);
+        entity.set氏名2優先順位1小(sofubutsuAtesakiSource.samabunShimeiSmall1);
+        entity.set氏名2優先順位2小(sofubutsuAtesakiSource.samabunShimeiSmall2);
+        entity.set氏名1敬称1(sofubutsuAtesakiSource.meishoFuyo1);
+        entity.set氏名1敬称2(sofubutsuAtesakiSource.meishoFuyo2);
+        entity.set氏名2敬称1(sofubutsuAtesakiSource.samaBun1);
+        entity.set氏名2敬称2(sofubutsuAtesakiSource.samaBun2);
+        entity.set左括弧1(sofubutsuAtesakiSource.kakkoLeft1);
+        entity.set左括弧2(sofubutsuAtesakiSource.kakkoLeft2);
+        entity.set右括弧1(sofubutsuAtesakiSource.kakkoRight1);
+        entity.set右括弧2(sofubutsuAtesakiSource.kakkoRight2);
+        entity.setカスタマバーコード(sofubutsuAtesakiSource.customerBarCode);
+    }
+
+    private ChohyoSeigyoKyotsu get帳票共通情報(ReportId reportId) {
+        return new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBD介護受給, reportId);
     }
 
     @Override
