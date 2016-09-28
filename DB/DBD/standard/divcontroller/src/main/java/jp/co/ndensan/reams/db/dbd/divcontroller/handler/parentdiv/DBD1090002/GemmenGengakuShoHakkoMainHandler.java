@@ -393,7 +393,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getFutanGendogakuNintei().getFutanGendogakuNinteiKetteibi().setValue(futanGendogakuNintei.get決定年月日());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiTekiyobi().setValue(futanGendogakuNintei.get適用開始年月日());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiYukoKigen().setValue(futanGendogakuNintei.get適用終了年月日());
-        div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShoninShinsaiRiyu().setValue(futanGendogakuNintei.get非承認理由());
+        if (futanGendogakuNintei.get非承認理由() != null) {
+            div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShoninShinsaiRiyu().setValue(futanGendogakuNintei.get非承認理由());
+        } else {
+            div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShoninShinsaiRiyu().clearValue();
+        }
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShinseiRiyu().setValue(
                 futanGendogakuNintei.get申請理由区分() == null || futanGendogakuNintei.get申請理由区分().isEmpty()
                         ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
