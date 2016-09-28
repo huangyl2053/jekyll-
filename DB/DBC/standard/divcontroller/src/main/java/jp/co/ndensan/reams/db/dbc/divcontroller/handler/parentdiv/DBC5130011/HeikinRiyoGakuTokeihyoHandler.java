@@ -43,10 +43,10 @@ public class HeikinRiyoGakuTokeihyoHandler {
         RDate fromDate = div.getTxtTaishoYmRange().getFromValue();
         RDate toDate = div.getTxtTaishoYmRange().getToValue();
         if (fromDate != null) {
-            parameter.setKaishiYM(fromDate.toDateString());
+            parameter.setKaishiYM(fromDate.getYearMonth().toDateString());
         }
         if (toDate != null) {
-            parameter.setShuryoYM(toDate.toDateString());
+            parameter.setShuryoYM(toDate.getYearMonth().toDateString());
         }
         RString 地区指定 = div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象();
         parameter.setChikuShitei(地区指定);
