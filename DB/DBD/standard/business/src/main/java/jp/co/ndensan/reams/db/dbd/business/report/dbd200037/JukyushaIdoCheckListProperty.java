@@ -78,11 +78,7 @@ public class JukyushaIdoCheckListProperty {
         /**
          * 処理年月日
          */
-        処理年月日(new RString("0317"), new RString("処理年月日"), new RString("B.\"shoriYMD\"")),
-        /**
-         * 処理種別
-         */
-        処理種別(new RString("0318"), new RString("処理種別"), new RString(""));
+        処理年月日(new RString("0317"), new RString("処理年月日"), new RString("B.\"shoriYMD\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
