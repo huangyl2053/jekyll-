@@ -55,7 +55,8 @@ public class HihokenshaDaichoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
      */
     public static HihokenshaDaichoManager createInstance() {
         return InstanceProvider.create(HihokenshaDaichoManager.class);
@@ -286,6 +287,22 @@ public class HihokenshaDaichoManager {
     public HihokenshaDaicho get資格の情報For資格不整合(HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード, FlexibleDate 異動日) {
         DbT1001HihokenshaDaichoEntity entity = dac.get資格の情報(被保険者番号, 識別コード, 異動日, new RString("1"));
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 被保険者番号、論理削除フラグで被保険者台帳から最新データを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public HihokenshaDaicho selectByHihokenshaNo(HihokenshaNo 被保険者番号) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectByHihokenshaNo(被保険者番号);
         if (entity == null) {
             return null;
         }

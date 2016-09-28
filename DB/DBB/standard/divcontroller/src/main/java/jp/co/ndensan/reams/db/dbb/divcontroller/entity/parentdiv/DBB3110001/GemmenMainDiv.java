@@ -429,8 +429,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo13() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo13();
+    public TextBoxNum getTxtFuchoGemmemGo13() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo13();
     }
 
     @JsonIgnore
@@ -449,8 +449,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo1() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblTokuchoGemmemGo1();
+    public TextBoxNum getTxtTokuchoGemmemGo1() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtTokuchoGemmemGo1();
     }
 
     @JsonIgnore
@@ -469,8 +469,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo14() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo14();
+    public TextBoxNum getTxtFuchoGemmemGo14() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo14();
     }
 
     @JsonIgnore
@@ -494,8 +494,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo1() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo1();
+    public TextBoxNum getTxtFuchoGemmemGo1() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo1();
     }
 
     @JsonIgnore
@@ -514,8 +514,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo2() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblTokuchoGemmemGo2();
+    public TextBoxNum getTxtTokuchoGemmemGo2() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtTokuchoGemmemGo2();
     }
 
     @JsonIgnore
@@ -534,8 +534,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo2() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo2();
+    public TextBoxNum getTxtFuchoGemmemGo2() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo2();
     }
 
     @JsonIgnore
@@ -559,8 +559,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo3() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo3();
+    public TextBoxNum getTxtFuchoGemmemGo3() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo3();
     }
 
     @JsonIgnore
@@ -579,8 +579,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo3() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblTokuchoGemmemGo3();
+    public TextBoxNum getTxtTokuchoGemmemGo3() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtTokuchoGemmemGo3();
     }
 
     @JsonIgnore
@@ -599,8 +599,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo4() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo4();
+    public TextBoxNum getTxtFuchoGemmemGo4() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo4();
     }
 
     @JsonIgnore
@@ -624,8 +624,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo5() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo5();
+    public TextBoxNum getTxtFuchoGemmemGo5() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo5();
     }
 
     @JsonIgnore
@@ -644,8 +644,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo4() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblTokuchoGemmemGo4();
+    public TextBoxNum getTxtTokuchoGemmemGo4() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtTokuchoGemmemGo4();
     }
 
     @JsonIgnore
@@ -664,8 +664,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo6() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo6();
+    public TextBoxNum getTxtFuchoGemmemGo6() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo6();
     }
 
     @JsonIgnore
@@ -689,8 +689,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo7() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo7();
+    public TextBoxNum getTxtFuchoGemmemGo7() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo7();
     }
 
     @JsonIgnore
@@ -709,8 +709,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo5() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblTokuchoGemmemGo5();
+    public TextBoxNum getTxtTokuchoGemmemGo5() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtTokuchoGemmemGo5();
     }
 
     @JsonIgnore
@@ -729,8 +729,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo8() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo8();
+    public TextBoxNum getTxtFuchoGemmemGo8() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo8();
     }
 
     @JsonIgnore
@@ -754,8 +754,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo9() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo9();
+    public TextBoxNum getTxtFuchoGemmemGo9() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo9();
     }
 
     @JsonIgnore
@@ -774,8 +774,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo6() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblTokuchoGemmemGo6();
+    public TextBoxNum getTxtTokuchoGemmemGo6() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtTokuchoGemmemGo6();
     }
 
     @JsonIgnore
@@ -794,8 +794,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo10() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo10();
+    public TextBoxNum getTxtFuchoGemmemGo10() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo10();
     }
 
     @JsonIgnore
@@ -819,8 +819,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo11() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo11();
+    public TextBoxNum getTxtFuchoGemmemGo11() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo11();
     }
 
     @JsonIgnore
@@ -844,8 +844,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo12() {
-        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo12();
+    public TextBoxNum getTxtFuchoGemmemGo12() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getTxtFuchoGemmemGo12();
     }
 
     @JsonIgnore
@@ -959,8 +959,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getGo1() {
-        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getGo1();
+    public TextBoxNum getTxtGo1() {
+        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getTxtGo1();
     }
 
     @JsonIgnore
@@ -1064,8 +1064,8 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getGo2() {
-        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getGo2();
+    public TextBoxNum getTxtGo2() {
+        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getTxtGo2();
     }
 
     @JsonIgnore

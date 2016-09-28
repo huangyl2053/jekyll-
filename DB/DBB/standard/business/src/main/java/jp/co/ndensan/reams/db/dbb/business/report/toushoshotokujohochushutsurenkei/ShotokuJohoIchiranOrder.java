@@ -16,17 +16,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShotokuJohoIchiranOrder implements IReportItems {
 
     /**
-     * 世帯コード
-     */
-    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho\".\"setaiCode\"")),
-    /**
      * 識別コード
      */
     識別コード(new RString("0009"), new RString("識別コード"), new RString("\"ShikibetsuTaisho\".\"shikibetsuCode\"")),
     /**
      * 氏名５０音カナ
      */
-    // TODO QA1538 氏名５０音カナ　がない、
     氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho\".\"kanaMeisho\"")),
     /**
      * 被保険者番号

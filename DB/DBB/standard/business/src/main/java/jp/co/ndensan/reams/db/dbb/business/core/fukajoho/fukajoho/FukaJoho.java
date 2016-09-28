@@ -13,12 +13,17 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyot
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
+import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmen.Gemmen;
+import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -1187,6 +1192,39 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     }
 
     /**
+     * 賦課の情報が保持する賦課減免の情報をリストで返します。
+     *
+     * @param 減免情報 GemmenJoho
+     * @return 減免の情報
+     */
+    public GemmenJoho get減免の情報(GemmenJoho 減免情報) {
+        List<jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity> 介護期別RelateEntityList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity 介護期別RelateEntity
+                    = new jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity();
+            介護期別RelateEntity.set介護期別Entity(介護期別.toEntity());
+            List<UrT0705ChoteiKyotsuEntity> 調定共通RelateEntityList = new ArrayList<>();
+            List<ChoteiKyotsu> 調定共通EntityList = 介護期別.getChoteiKyotsuList();
+            for (ChoteiKyotsu 調定共通 : 調定共通EntityList) {
+                調定共通RelateEntityList.add(調定共通.toEntity());
+            }
+            介護期別RelateEntity.set調定共通EntityList(調定共通RelateEntityList);
+            介護期別RelateEntityList.add(介護期別RelateEntity);
+        }
+        GemmenJohoRelateEntity 減免の情報RelateEntity = new GemmenJohoRelateEntity();
+        減免の情報RelateEntity.set介護期別Entity(介護期別RelateEntityList);
+        List<DbT2004GemmenEntity> gemmenEntityList = new ArrayList<>();
+        List<Gemmen> gemmenList = 減免情報.getGemmenList();
+        for (Gemmen gemmen : gemmenList) {
+            gemmenEntityList.add(gemmen.toEntity());
+        }
+        減免の情報RelateEntity.set介護賦課減免Entity(gemmenEntityList);
+        減免の情報RelateEntity.set介護賦課Entity(entity);
+        return new GemmenJoho(減免の情報RelateEntity);
+    }
+
+    /**
      * {@link DbT2002FukaEntity}のクローンを返します。
      *
      * @return {@link DbT2002FukaEntity}のクローン
@@ -1207,8 +1245,10 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     }
 
     /**
-     * 賦課の情報配下の要素を削除対象とします。<br/> {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 賦課の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link FukaJoho}を返します。
+     * 賦課の情報配下の要素を削除対象とします。<br/>
+     * {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 賦課の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link FukaJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link FukaJoho}
      * @throws IllegalStateException DbT2002FukaEntityのデータ状態が変更の場合
@@ -1232,7 +1272,8 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     }
 
     /**
-     * 賦課の情報のみを変更対象とします。<br/> {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 賦課の情報のみを変更対象とします。<br/>
+     * {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link FukaJoho}
      */

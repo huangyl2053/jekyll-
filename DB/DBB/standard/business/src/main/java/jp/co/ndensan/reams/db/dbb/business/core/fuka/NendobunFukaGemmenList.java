@@ -54,6 +54,15 @@ public class NendobunFukaGemmenList implements Serializable {
         if (過年度2 != null) {
             年度分賦課リスト.set過年度2(過年度2.get賦課の情報());
         }
+        if (過年度3 != null) {
+            年度分賦課リスト.set過年度2(過年度3.get賦課の情報());
+        }
+        if (過年度4 != null) {
+            年度分賦課リスト.set過年度2(過年度4.get賦課の情報());
+        }
+        if (過年度5 != null) {
+            年度分賦課リスト.set過年度2(過年度5.get賦課の情報());
+        }
         年度分賦課リスト.set賦課年度(賦課年度);
         年度分賦課リスト.set賦課期日(賦課期日);
         年度分賦課リスト.set通知書番号(通知書番号);
