@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.Ichiji
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIferaEucEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -65,7 +66,8 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         eraBunisess = new IchijihanteiSumidataIferaBunisess();
         ファイル名 = new RString("111.csv");
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
-        paramter.set仮一次判定区分(false);
+        RString 仮一次判定区分 = KariIchijiHanteiKubun.本一次判定.get名称();
+        paramter.set仮一次判定区分(Boolean.valueOf(仮一次判定区分.toString()));
     }
 
     @Override
