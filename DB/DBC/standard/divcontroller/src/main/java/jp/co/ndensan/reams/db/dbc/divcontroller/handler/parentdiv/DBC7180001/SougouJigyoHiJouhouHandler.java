@@ -124,7 +124,9 @@ public class SougouJigyoHiJouhouHandler {
         parameter.set連番付加(is連番付加);
         parameter.set日付スラッシュ付加(is日付スラッシュ編集);
         parameter.set事業者コード(div.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
+        parameter.set事業者名(div.getCcdJigyoshaBango().getNyuryokuShisetsuMeisho());
         parameter.setサービス種類コード(div.getDdlSabisuSyurui().getSelectedKey());
+        parameter.setサービス名称(div.getDdlSabisuSyurui().getSelectedValue());
         RString 市町村コード = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())
                 && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value().equals(全て市町村)) {
