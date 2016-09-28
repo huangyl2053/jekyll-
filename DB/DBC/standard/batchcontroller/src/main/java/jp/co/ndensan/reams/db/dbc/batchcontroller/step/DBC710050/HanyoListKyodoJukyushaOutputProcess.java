@@ -13,10 +13,8 @@ import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyodojukyusha.HanyoListK
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyodoshoriyojukyushajoho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710050.HanyoListKyodoJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710050.KyodoJukyushaKihonEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710050.IHanyoListKyodoJukyushaMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -45,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト_共同処理用受給者情報（基本）のバッチ用パラメータフロークラスです。
@@ -100,8 +97,6 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void initialize() {
-
-        InstanceProvider.create(MapperProvider.class).create(IHanyoListKyodoJukyushaMapper.class).select共同処理用受給者情報(parameter.toMybatisParameter());
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
         csv出力Flag = 定数_なし;
@@ -156,6 +151,13 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void afterExecute() {
+        if (定数_なし.equals(csv出力Flag) && parameter.is項目名付加()) {
+            List<RString> list = new ArrayList<>();
+            for (int i = 0; i < editor.setHeaderList(parameter).size(); i++) {
+                list.add(RString.EMPTY);
+            }
+            csvListWriter.writeLine(list);
+        }
         csvListWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
