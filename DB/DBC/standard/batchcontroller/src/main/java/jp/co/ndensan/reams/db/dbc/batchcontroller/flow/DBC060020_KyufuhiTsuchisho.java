@@ -84,6 +84,9 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
             executeStep(処理結果リスト作成);
             executeStep(介護給付費福祉用具貸与品目一時TBL作成);
             executeStep(介護保険給付費通知書作成);
+            executeStep(介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ);
+            executeStep(介護保険給付費通知書_福祉用具貸与品目);
+            executeStep(給付費通知発行一覧表);
         }
         if (null != returnEntity) {
             executeStep(取込済ファイル削除);

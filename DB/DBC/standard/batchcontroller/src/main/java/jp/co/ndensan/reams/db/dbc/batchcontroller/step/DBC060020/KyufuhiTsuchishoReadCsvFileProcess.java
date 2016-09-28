@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -68,7 +68,7 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
     protected void createWriter() {
         介護給付費福祉用具貸与品目一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(介護給付費福祉用具貸与品目一時_TABLE_NAME,
-                        KyufuhiTuchiHakkoCsvEntity.class);
+                        KyufuhiTuchiHakkoIchiranRelateEntity.class);
         処理結果リスト一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
                         DbWT0002KokuhorenTorikomiErrorEntity.class);
@@ -80,7 +80,7 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
         List<RString> data = line.split(区切り文字.toString());
         hakkoCsvEntity = ListToObjectMappingHelper.
                 toObject(KyufuhiTuchiHakkoCsvEntity.class, data);
-        if (new RString("2").equals(hakkoCsvEntity.getレコード番号()) && (種別).equals(hakkoCsvEntity.get帳票レコード種別())) {
+        if (new RString("2").equals(hakkoCsvEntity.getレコード種別()) && (種別).equals(hakkoCsvEntity.get帳票レコード種別())) {
             前データを一時TBLに登録する(hakkoCsvEntity);
         }
     }
@@ -182,11 +182,11 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
         介護給付費福祉用具貸与品目一時tableWriter.insert(登録Entity);
     }
 
-    private FlexibleDate get年月日(RString 年月日str) {
+    private FlexibleYearMonth get年月日(RString 年月日str) {
         if (RString.isNullOrEmpty(年月日str)) {
             return null;
         }
-        return new FlexibleDate(年月日str);
+        return new FlexibleYearMonth(年月日str);
     }
 
     private Decimal getDecimal(RString decimalStr) {
