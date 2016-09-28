@@ -163,9 +163,10 @@
         rgdb."DbT3113RiyoshaFutanWariai" AS D
         ON
         A."hihokenshaNo" = D."hihokenshaNo"
+        AND A.nendo =  D."nendo" 
+        AND D."logicalDeletedFlag" = false
         WHERE
         A."hihokenshaNo" = #{被保険者番号}
-        AND D."logicalDeletedFlag" = false
     </select>
 
     <select resultOrdered="true" id ="findサービス受給状況"
