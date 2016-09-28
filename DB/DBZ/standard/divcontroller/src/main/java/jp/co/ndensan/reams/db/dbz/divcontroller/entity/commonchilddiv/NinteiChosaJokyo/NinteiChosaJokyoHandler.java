@@ -261,6 +261,11 @@ public class NinteiChosaJokyoHandler {
         konkaiDataPass.set二次判定認定有効終了年月日(div.getTxtNinteiYukoKikanTo().getValue());
         konkaiDataPass.set延期通知発行年月日(div.getTxtEnkiTsuchiHakkoDay().getValue());
         konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
+        NinteiChosaJokyoDataPass dataPass = DataPassingConverter.deserialize(div.getHdnSerializedBusiness_Konkai(),
+                NinteiChosaJokyoDataPass.class);
+        konkaiDataPass.set市町村コード(dataPass.get市町村コード());
+        konkaiDataPass.set厚労省IF識別コード(dataPass.get厚労省IF識別コード());
+        konkaiDataPass.set申請書管理番号(dataPass.get申請書管理番号());
         div.setHdnSerializedBusiness_Konkai(DataPassingConverter.serialize(konkaiDataPass));
     }
 

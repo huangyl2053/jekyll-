@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RirekiShu
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
@@ -112,7 +113,7 @@ public class RirekiShuseiHandler {
                 div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuSakujyoMode);
                 div.setHdnDisplayModeKey(new RString("1"));
                 div.getBtnKakutei().setDisabled(false);
-            } else if (!(konkai.get削除事由コード() != null && !konkai.get削除事由コード().isEmpty())) {
+            } else if (konkai.get削除事由コード() != null && !konkai.get削除事由コード().isEmpty()) {
                 div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(new RString("RirekiShuseiMode"));
                 div.getCcdNinteiShinseiTodokedesha().set状態(SHOKAI_MODE);
                 div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -139,16 +140,16 @@ public class RirekiShuseiHandler {
             set介護認定申請基本情報入力(konkai);
             NinteiShinseiTodokedeshaDataPassModel dataPass = new NinteiShinseiTodokedeshaDataPassModel();
             dataPass.set申請書管理番号(konkai.get申請書管理番号().value());
-            dataPass.setカナ氏名(konkai.getカナ氏名());
-            dataPass.set事業者区分(konkai.get事業者区分());
-            dataPass.set住所(konkai.get住所());
+            dataPass.setカナ氏名(ObjectUtil.defaultIfNull(konkai.getカナ氏名(), RString.EMPTY));
+            dataPass.set事業者区分(ObjectUtil.defaultIfNull(konkai.get事業者区分(), RString.EMPTY));
+            dataPass.set住所(ObjectUtil.defaultIfNull(konkai.get住所(), RString.EMPTY));
             if (konkai.get事業者番号() != null) {
                 dataPass.set申請届出代行事業者番号(konkai.get事業者番号().value());
             }
             if (konkai.get届出代行区分() != null) {
                 dataPass.set申請届出代行区分コード(konkai.get届出代行区分().value());
             }
-            dataPass.set続柄(konkai.get本人との関係性());
+            dataPass.set続柄(ObjectUtil.defaultIfNull(konkai.get本人との関係性(), RString.EMPTY));
             if (konkai.get郵便番号() != null) {
                 dataPass.set郵便番号(konkai.get郵便番号().value());
             }
@@ -160,11 +161,17 @@ public class RirekiShuseiHandler {
 
             div.getCcdShujiiIryokikanAndShujiiInput().initialize(konkai.get市町村コード(),
                     konkai.get申請書管理番号(), new SubGyomuCode(div.getHdnSubGyomuCd()),
-                    konkai.get主治医医療機関コード(), konkai.get医療機関名称(), konkai.get主治医コード(), konkai.get主治医氏名());
+                    ObjectUtil.defaultIfNull(konkai.get主治医医療機関コード(), RString.EMPTY),
+                    ObjectUtil.defaultIfNull(konkai.get医療機関名称(), RString.EMPTY),
+                    ObjectUtil.defaultIfNull(konkai.get主治医コード(), RString.EMPTY),
+                    ObjectUtil.defaultIfNull(konkai.get主治医氏名(), RString.EMPTY));
             div.getCcdShujiiIryokikanAndShujiiInput().setShiteii(konkai.is指定医フラグ());
 
             div.getCcdChosaItakusakiAndChosainInput().initialize(RString.EMPTY,
-                    konkai.get認定調査委託先コード(), konkai.get事業者名称(), konkai.get認定調査員コード(), konkai.get調査員氏名());
+                    ObjectUtil.defaultIfNull(konkai.get認定調査委託先コード(), RString.EMPTY),
+                    ObjectUtil.defaultIfNull(konkai.get事業者名称(), RString.EMPTY),
+                    ObjectUtil.defaultIfNull(konkai.get認定調査員コード(), RString.EMPTY),
+                    ObjectUtil.defaultIfNull(konkai.get調査員氏名(), RString.EMPTY));
             div.getCcdChosaItakusakiAndChosainInput().setHdnShinseishoKanriNo(konkai.get申請書管理番号().value());
             div.getCcdChosaItakusakiAndChosainInput().setHdnShichosonCode(konkai.get市町村コード().value());
 
@@ -172,6 +179,12 @@ public class RirekiShuseiHandler {
             set前回情報(konkai);
             set申請その他情報(konkai);
             div.setHdnInput(this.get画面項目());
+            RirekiShuseiDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkaiJohoSerialized(),
+                    RirekiShuseiDataPass.class);
+            div.setHdnKonkaiJoho(DataPassingConverter.serialize(konkai.get調査状況用情報()));
+            if (zenkai != null) {
+                div.setHdnZenkaiJoho(DataPassingConverter.serialize(zenkai.get調査状況用情報()));
+            }
         }
     }
 
@@ -509,13 +522,13 @@ public class RirekiShuseiHandler {
         if (konkai.get削除事由コード() != null && !konkai.get削除事由コード().isEmpty()) {
             div.getCcdShinseiSonotaJohoInput().set削除事由(konkai.get削除事由コード().value());
         }
-        div.getCcdShinseiSonotaJohoInput().set理由(konkai.get異動理由());
-        div.getCcdShinseiSonotaJohoInput().set取消日(konkai.get取下年月日());
-        div.getCcdShinseiSonotaJohoInput().set喪失日(konkai.get喪失年月日());
-        div.getCcdShinseiSonotaJohoInput().set発行日2(konkai.get受給資格証明書発行年月日２());
-        div.getCcdShinseiSonotaJohoInput().set発行日１(konkai.get受給資格証明書発行年月日１());
-        div.getCcdShinseiSonotaJohoInput().set当初認定期間From(konkai.get当初認定有効開始年月日());
-        div.getCcdShinseiSonotaJohoInput().set当初認定期間To(konkai.get当初認定有効終了年月日());
+        div.getCcdShinseiSonotaJohoInput().set理由(ObjectUtil.defaultIfNull(konkai.get異動理由(), RString.EMPTY));
+        div.getCcdShinseiSonotaJohoInput().set取消日(ObjectUtil.defaultIfNull(konkai.get取下年月日(), FlexibleDate.EMPTY));
+        div.getCcdShinseiSonotaJohoInput().set喪失日(ObjectUtil.defaultIfNull(konkai.get喪失年月日(), FlexibleDate.EMPTY));
+        div.getCcdShinseiSonotaJohoInput().set発行日2(ObjectUtil.defaultIfNull(konkai.get受給資格証明書発行年月日２(), FlexibleDate.EMPTY));
+        div.getCcdShinseiSonotaJohoInput().set発行日１(ObjectUtil.defaultIfNull(konkai.get受給資格証明書発行年月日１(), FlexibleDate.EMPTY));
+        div.getCcdShinseiSonotaJohoInput().set当初認定期間From(ObjectUtil.defaultIfNull(konkai.get当初認定有効開始年月日(), FlexibleDate.EMPTY));
+        div.getCcdShinseiSonotaJohoInput().set当初認定期間To(ObjectUtil.defaultIfNull(konkai.get当初認定有効終了年月日(), FlexibleDate.EMPTY));
         if (konkai.getデータ区分() != null && !konkai.getデータ区分().isEmpty()) {
             div.getCcdShinseiSonotaJohoInput().set異動事由(konkai.getデータ区分().value());
         }
@@ -526,11 +539,11 @@ public class RirekiShuseiHandler {
         RirekiShuseiDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkaiJohoSerialized(),
                 RirekiShuseiDataPass.class);
         if (zenkai != null) {
-            div.getCcdZenkaiNinteiKekka().getTxtNinteiDay().setValue(zenkai.get認定年月日());
+            div.getCcdZenkaiNinteiKekka().getTxtNinteiDay().setValue(ObjectUtil.defaultIfNull(zenkai.get認定年月日(), FlexibleDate.EMPTY));
             div.getCcdZenkaiNinteiKekka().getTxtYokaigodo().setValue(
                     get要介護状態区分名称(zenkai.get厚労省IF識別コード().value(), zenkai.get要介護状態区分コード()));
-            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanFrom().setValue(zenkai.get認定有効開始年月日());
-            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanTo().setValue(zenkai.get認定有効終了年月日());
+            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanFrom().setValue(ObjectUtil.defaultIfNull(zenkai.get認定有効開始年月日(), FlexibleDate.EMPTY));
+            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanTo().setValue(ObjectUtil.defaultIfNull(zenkai.get認定有効終了年月日(), FlexibleDate.EMPTY));
         }
     }
 
@@ -550,10 +563,10 @@ public class RirekiShuseiHandler {
             selKey.add(KEY_0);
             ninteiInput.setみなし更新認定(selKey);
         }
-        ninteiInput.set認定年月日(konkai.get認定年月日());
-        ninteiInput.set有効開始年月日(konkai.get認定有効開始年月日());
-        ninteiInput.set有効終了年月日(konkai.get認定有効終了年月日());
-        ninteiInput.set審査会意見(konkai.get介護認定審査会意見());
+        ninteiInput.set認定年月日(ObjectUtil.defaultIfNull(konkai.get認定年月日(), FlexibleDate.EMPTY));
+        ninteiInput.set有効開始年月日(ObjectUtil.defaultIfNull(konkai.get認定有効開始年月日(), FlexibleDate.EMPTY));
+        ninteiInput.set有効終了年月日(ObjectUtil.defaultIfNull(konkai.get認定有効終了年月日(), FlexibleDate.EMPTY));
+        ninteiInput.set審査会意見(ObjectUtil.defaultIfNull(konkai.get介護認定審査会意見(), RString.EMPTY));
         ninteiInput.setサービス一覧リスト(getサービス種類リスト(konkai));
         ninteiInput.set申請書管理番号(konkai.get申請書管理番号());
         div.getCcdNinteiJohoInput().initialize(ninteiInput);

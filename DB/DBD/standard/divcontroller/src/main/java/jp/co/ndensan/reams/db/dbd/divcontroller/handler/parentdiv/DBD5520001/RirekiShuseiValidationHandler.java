@@ -30,6 +30,9 @@ public class RirekiShuseiValidationHandler {
 
     private final RirekiShuseiDiv div;
 
+    private static final RString KU_BUN_追 = new RString("追");
+    private static final RString KU_BUN_直 = new RString("直");
+
     /**
      * コンストラクタです。
      *
@@ -49,7 +52,7 @@ public class RirekiShuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean hasFlag = false;
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (!RString.isNullOrEmpty(row.getKubun()) && !new RString("直").equals(row.getKubun())) {
+            if (!RString.isNullOrEmpty(row.getKubun()) && !KU_BUN_直.equals(row.getKubun())) {
                 hasFlag = true;
                 break;
             }
@@ -87,7 +90,7 @@ public class RirekiShuseiValidationHandler {
             }
         }
         if (hasFlag) {
-            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.既に登録済));
+            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.既に登録済, div.getDgRirekiIchiran()));
             return validationMessages;
         }
         return validationMessages;
@@ -103,8 +106,8 @@ public class RirekiShuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean hasFlag = false;
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (new RString("追").equals(row.getKubun())) {
-                RirekiShuseiDataPass pass = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiDataPass.class);
+            if (KU_BUN_追.equals(row.getKubun())) {
+                RirekiShuseiDataPass pass = DataPassingConverter.deserialize(row.getDataPass(), RirekiShuseiDataPass.class);
                 if (ShinseiJokyoKubun.申請中.getコード().equals(pass.get申請状況区分())) {
                     hasFlag = true;
                     break;
@@ -118,7 +121,7 @@ public class RirekiShuseiValidationHandler {
             }
         }
         if (hasFlag) {
-            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.更新不可_汎用));
+            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.更新不可_汎用, div.getDgRirekiIchiran()));
             return validationMessages;
         }
         return validationMessages;
@@ -146,6 +149,7 @@ public class RirekiShuseiValidationHandler {
         更新不可_汎用(UrErrorMessages.更新不可_汎用, "受給申請中のデータが存在する"),
         受給共通_受給者登録なし(DbdErrorMessages.受給共通_受給者登録なし),
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可);
+
         private final Message message;
 
         private RirekiShuseiMessages(IMessageGettable message, String... replaceParam) {
