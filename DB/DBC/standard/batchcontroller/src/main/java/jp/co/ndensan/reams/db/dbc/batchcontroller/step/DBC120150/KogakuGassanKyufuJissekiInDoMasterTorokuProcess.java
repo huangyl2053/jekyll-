@@ -97,16 +97,15 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
         dbt3075entity.setShoriYM(高額合算給付実績一時.getShoriYM());
         dbt3075entity.setUketoriYM(parameter.get処理年月());
         dbt3075entity.setSofuYM(FlexibleYearMonth.EMPTY);
-        if (parameter.get処理区分().equals(RString.EMPTY)) {
+        if (parameter.get処理区分().isNullOrEmpty()) {
             dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの返却データ以外.getCode());
         }
-        if (parameter.get処理区分().equals(INT_1)) {
+        if (INT_1.equals(parameter.get処理区分())) {
             dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの送付データ後期分.getCode());
         }
-        if (parameter.get処理区分().equals(INT_2)) {
+        if (INT_2.equals(parameter.get処理区分())) {
             dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの送付データ国保分.getCode());
         }
-
         dbT3075Writer.insert(dbt3075entity);
 
     }
