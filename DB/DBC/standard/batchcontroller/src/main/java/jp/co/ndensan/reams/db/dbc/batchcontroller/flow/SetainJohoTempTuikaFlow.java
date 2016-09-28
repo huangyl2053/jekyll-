@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.Riyosha
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -41,7 +41,7 @@ public class SetainJohoTempTuikaFlow
     private static final String CLEAR世帯員所得情報 = "clearTmpSetaiShotokuProcess";
 
     private static final String 世帯員把握入力 = "setainHakunyuryokuProcess";
-    private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString 世帯員把握BATCHID = new RString("DBB002001_SetaiinHaaku");
     private static final String 世帯員把握FLOW = "setaiShotokuKazeiHanteiFlow";
     private static final RString 管理識別区分 = new RString("3");
     private static final String 世帯員情報作成 = "setainJohoSakuseiProcess";
@@ -90,48 +90,48 @@ public class SetainJohoTempTuikaFlow
         }
     }
 
-    @Step(判定基準日設定)
+    @Step (判定基準日設定)
     IBatchFlowCommand hanteiKijunbiSetteiProcess() {
         return loopBatch(HanteiKijunbiSetteiProcess.class).arguments(loopProcessPrm).define();
     }
 
-    @Step(CLEAR世帯員所得情報)
+    @Step (CLEAR世帯員所得情報)
     IBatchFlowCommand clearTmpSetaiShotokuProcess() {
         return loopBatch(ClearTmpSetaiShotokuProcess.class).arguments(processPrm).define();
     }
 
-    @Step(CLEAR世帯員把握入力)
+    @Step (CLEAR世帯員把握入力)
     IBatchFlowCommand clearSetainHakuNyuryokuTempProcess() {
         return loopBatch(ClearSetainHakuNyuryokuTempProcess.class).arguments(processPrm).define();
     }
 
-    @Step(CLEAR被保険者番号)
+    @Step (CLEAR被保険者番号)
     IBatchFlowCommand clearHanteiHihonkenshaNoTempProcess() {
         return loopBatch(ClearHanteiHihonkenshaNoTempProcess.class).arguments(processPrm).define();
     }
 
-    @Step(世帯員把握入力)
+    @Step (世帯員把握入力)
     IBatchFlowCommand setainHakunyuryokuProcess() {
         return loopBatch(SetainHakunyuryokuProcess.class).arguments(loopProcessPrm).define();
     }
 
-    @Step(世帯員把握FLOW)
+    @Step (世帯員把握FLOW)
     IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
         return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBZ介護共通,
-                new SetaiShotokuKazeiHanteiBatchParameter(管理識別区分)).define();
+                new DBB002001_SetaiinHaakuParameter(管理識別区分)).define();
     }
 
-    @Step(世帯員情報作成)
+    @Step (世帯員情報作成)
     IBatchFlowCommand setainJohoSakuseiProcess() {
         return loopBatch(SetainJohoSakuseiProcess.class).arguments(loopProcessPrm).define();
     }
 
-    @Step(月別判定対象者の作成)
+    @Step (月別判定対象者の作成)
     IBatchFlowCommand tsukibetsuHanteiTaishoshaTempProcess() {
         return loopBatch(TsukibetsuHanteiTaishoshaTempProcess.class).arguments(loopProcessPrm).define();
     }
 
-    @Step(月別判定対象者の作成二回目)
+    @Step (月別判定対象者の作成二回目)
     IBatchFlowCommand tsukibetsuHanteiTaishoshaTempNigaimeProcess() {
         return loopBatch(TsukibetsuHanteiTaishoshaTempNigaimeProcess.class).arguments(loopProcessPrm).define();
     }
