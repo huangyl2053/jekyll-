@@ -27,8 +27,8 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
-    private static final RString なし = new RString("0");
-    private static final RString あり = new RString("1");
+//    private static final RString なし = new RString("0");
+//    private static final RString あり = new RString("1");
 
     /**
      * コンストラクタです。
