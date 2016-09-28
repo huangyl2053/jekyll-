@@ -93,7 +93,7 @@ public class KaishuriyushoShikyuKetteitsuchishoBusiness {
         }
         帳票データ.setKetteiKekka(entity.getShikyu_FushikyuKubun());
         if (entity.getRiyushoSakuseiSeikyuKingaku() != null) {
-            帳票データ.setTesuryo(DecimalFormatter.toコンマ区切りRString(entity.getRiyushoSakuseiSeikyuKingaku(), 0));
+            帳票データ.setTesuryo(DecimalFormatter.toRString(entity.getRiyushoSakuseiSeikyuKingaku(), 0));
         }
         帳票データ.setFushikyuRiyu(entity.getFushikyuRiyu());
         帳票データ.setShiharaiHouhou(支払方法);
@@ -138,7 +138,7 @@ public class KaishuriyushoShikyuKetteitsuchishoBusiness {
         data.set被保険者氏名(RString.EMPTY);
         data.set改修先住所(entity.getKaishuTaishoJutakuJusho());
         data.set工事の種類(entity.getKaishuNaiyo_kasho_Kibo());
-        AtenaMeisho 理由書作成者 = entity.getJutakuKaishuJigyoshaMeisho();
+        AtenaMeisho 理由書作成者 = entity.getRiyushoSakuseishaMei();
         if (理由書作成者 != null) {
             data.set理由書作成者(理由書作成者.value());
         }
