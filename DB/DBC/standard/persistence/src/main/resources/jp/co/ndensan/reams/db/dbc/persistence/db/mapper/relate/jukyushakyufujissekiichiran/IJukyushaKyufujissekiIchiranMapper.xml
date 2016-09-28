@@ -193,10 +193,6 @@ LEFT JOIN
                 AND
                DbT3017."yoKaigoJotaiKubunCode" IN ('22')
             </if>
-            <if test="!要介護2flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('21','22')
-            </if>
             <if test="要介護3flag">
                 AND
                DbT3017."yoKaigoJotaiKubunCode" IN ('23')

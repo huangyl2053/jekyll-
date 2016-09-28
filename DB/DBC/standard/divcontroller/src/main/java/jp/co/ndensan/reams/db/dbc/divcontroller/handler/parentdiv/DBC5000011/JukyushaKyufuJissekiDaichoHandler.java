@@ -186,10 +186,10 @@ public class JukyushaKyufuJissekiDaichoHandler {
             }
         }
         if (!div.getTabChushutsuJoken().getTxtRangeYM().getFromValue().toString().isEmpty()) {
-            batchParameter.set年月範囲_開始(div.getTxtRangeYM().getFromValue().toDateString());
+            batchParameter.set年月範囲_開始(div.getTxtRangeYM().getFromValue().getYearMonth().toDateString());
         }
         if (!div.getTabChushutsuJoken().getTxtRangeYM().getToValue().toString().isEmpty()) {
-            batchParameter.set年月範囲_終了(div.getTxtRangeYM().getToValue().toDateString());
+            batchParameter.set年月範囲_終了(div.getTxtRangeYM().getToValue().getYearMonth().toDateString());
         }
         if (!div.getTabChushutsuJoken().getTxtRangeHihokenshaNoFrom().getValue().isEmpty()) {
             batchParameter.set被保険者番号_開始(div.getTabChushutsuJoken().getTxtRangeHihokenshaNoFrom().getValue());
@@ -340,12 +340,12 @@ public class JukyushaKyufuJissekiDaichoHandler {
 
     private void setバッチ2(DBC140020_JukyushaKyufujissekiIchiranParameter batchParameter) {
         if (!div.getTabChushutsuJoken().getRadKyufuJissekiKubun().getSelectedKey().isEmpty()) {
-            if (div.getTabChushutsuJoken().getRadKonkaiTaishoYM().getSelectedKey().equals(訪問通所他_サービス_全て_償還)) {
-                batchParameter.set給付率区分(ゼロ);
-            } else if (div.getTabChushutsuJoken().getRadKonkaiTaishoYM().getSelectedKey().equals(短期入所生活介護_審査年月_現物)) {
-                batchParameter.set給付率区分(いち);
-            } else if (div.getTabChushutsuJoken().getRadKonkaiTaishoYM().getSelectedKey().equals(訪問通所他_サービス_全て_償還)) {
-                batchParameter.set給付率区分(に);
+            if (div.getTabChushutsuJoken().getRadKyufuJissekiKubun().getSelectedKey().equals(訪問通所他_サービス_全て_償還)) {
+                batchParameter.set給付実績区分(ゼロ);
+            } else if (div.getTabChushutsuJoken().getRadKyufuJissekiKubun().getSelectedKey().equals(短期入所生活介護_審査年月_現物)) {
+                batchParameter.set給付実績区分(いち);
+            } else if (div.getTabChushutsuJoken().getRadKyufuJissekiKubun().getSelectedKey().equals(短期入所療養介護_老健施設)) {
+                batchParameter.set給付実績区分(に);
             }
         }
         List<RString> 出力様式ボタン2 = div.getTabChushutsuJoken().getChkShutsuryokuYoshiki2().getSelectedKeys();
@@ -497,11 +497,11 @@ public class JukyushaKyufuJissekiDaichoHandler {
         }
         if (!div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().isEmpty()) {
             if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().equals(new RString("同じ"))) {
-                batchParameter.set老人保健受給者番号有無(いち);
+                batchParameter.set給付率区分(いち);
             } else if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().equals(new RString("超える"))) {
-                batchParameter.set老人保健受給者番号有無(に);
+                batchParameter.set給付率区分(に);
             } else if (div.getTabChushutsuJoken().getRadKyufuritsu().getSelectedValue().equals(new RString("未満"))) {
-                batchParameter.set老人保健受給者番号有無(さん);
+                batchParameter.set給付率区分(さん);
             }
         }
         if (!div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().toString().isEmpty()) {
