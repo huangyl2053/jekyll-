@@ -495,13 +495,21 @@ public class GemmenGengakuShoHakkoMainHandler {
                 setValue(shakaifukuRiyoshaFutanKeigen.get適用開始年月日());
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenYukoKigen().
                 setValue(shakaifukuRiyoshaFutanKeigen.get適用終了年月日());
-        div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu().
-                setValue(shakaifukuRiyoshaFutanKeigen.get非承認理由());
+        if (shakaifukuRiyoshaFutanKeigen.get非承認理由() != null) {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu().
+                    setValue(shakaifukuRiyoshaFutanKeigen.get非承認理由());
+        } else {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu().clearValue();
+        }
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu().
                 setValue(shakaifukuRiyoshaFutanKeigen.get申請事由());
-        div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu().setValue(
-                new RString(shakaifukuRiyoshaFutanKeigen.get軽減率_分子().toString().concat("/").
-                        concat(shakaifukuRiyoshaFutanKeigen.get軽減率_分母().toString())));
+        if (shakaifukuRiyoshaFutanKeigen.get軽減率_分母() != null && shakaifukuRiyoshaFutanKeigen.get軽減率_分子() != null) {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu().setValue(
+                    new RString(shakaifukuRiyoshaFutanKeigen.get軽減率_分子().toString().concat("/").
+                            concat(shakaifukuRiyoshaFutanKeigen.get軽減率_分母().toString())));
+        } else {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu().clearValue();
+        }
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKakuninNo().
                 setValue(shakaifukuRiyoshaFutanKeigen.get確認番号());
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei().
