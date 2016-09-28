@@ -179,7 +179,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         KogakugassanSoufuFairuSakuseiEndEntity endEntity = this.getEndEntity();
         eucCsvWriter.writeLine(endEntity);
         eucCsvWriter.close();
-        //do外字類似変換();
+        do外字類似変換();
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
