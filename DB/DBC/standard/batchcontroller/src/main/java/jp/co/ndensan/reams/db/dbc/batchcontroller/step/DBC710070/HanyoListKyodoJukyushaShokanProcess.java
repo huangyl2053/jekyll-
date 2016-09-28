@@ -166,6 +166,13 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void afterExecute() {
+        if (なし.equals(csv出力Flag) && processParameter.is項目名付加()) {
+            List<RString> bodyList = new ArrayList<>();
+            for (int i = 0; i < editor.setHeaderList(processParameter).size(); i++) {
+                bodyList.add(RString.EMPTY);
+            }
+            csvListWriter.writeLine(bodyList);
+        }
         csvListWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.isDeleted;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.kijunTimestamp;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.kijunYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.nendo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.nendoNaiRenban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shichosonCode;
@@ -1588,7 +1589,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
                                 eq(shoriName, ShoriName.年次利用者負担割合判定.get名称()),
-                                not(eq(nendo, FlexibleYear.EMPTY)))).
+                                not(eq(kijunYMD, FlexibleYear.EMPTY)))).
                 order(by(nendo, Order.DESC)).
                 limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -1627,7 +1628,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
-                                eq(shoriName, ShoriName.年次利用者負担割合判定.get名称()),
+                                eq(shoriName, ShoriName.異動分利用者負担割合判定.get名称()),
                                 eq(nendo, 年度))).
                 order(by(nendoNaiRenban, Order.DESC)).
                 limit(1).

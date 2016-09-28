@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001;
 
-import jp.co.ndensan.reams.db.dbz.definition.processprm.DBB002001.SetaiShotokuKazeiHanteiProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.processprm.setaiinhaaku.SetaiShotokuKazeiHanteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

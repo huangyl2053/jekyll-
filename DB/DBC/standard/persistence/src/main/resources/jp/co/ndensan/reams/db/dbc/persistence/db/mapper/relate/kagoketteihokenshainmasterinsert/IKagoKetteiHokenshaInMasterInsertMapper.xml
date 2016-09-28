@@ -98,7 +98,11 @@
              "DbWT0001Hihokensha" AS DbWT0001
         WHERE 
             DbWT3061."renban" = DbWT0001."meisaiRenban") AS TEMP
-      
-        
     </select>
+    
+    <delete id="再処理準備" parameterType="java.util.Map">
+        DELETE FROM rgdb."DbT3061KagoKetteiMeisai"
+        WHERE "torikomiYM" = #{処理年月}
+        AND "hokenshaKubun" = #{保険者区分KEY}
+    </delete>
 </mapper>
