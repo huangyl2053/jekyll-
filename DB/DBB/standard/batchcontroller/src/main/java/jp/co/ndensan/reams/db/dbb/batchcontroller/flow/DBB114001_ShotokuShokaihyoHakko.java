@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001.RinjiCreatTable
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001.ShotokuShokaihyotoReportProcess;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001.DBB114001_ShotokuShokaihyoHakkoParameter;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -37,7 +37,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
     private static final String 世帯員把握_TEMP_2 = "setaiShotokuKazeiHanteiKogakuKaiko";
 
     private static final ReportId 帳票ID = new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran");
-    private static final RString BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString BATCH_ID = new RString("DBB002001_SetaiinHaaku");
     private static final RString 出力対象が_１ = new RString("1");
     private static final RString 出力対象が_２ = new RString("2");
     private static final RString 出力対象が_３ = new RString("3");
@@ -73,7 +73,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      *
      * @return IBatchFlowCommand
      */
-    @Step(RINJICREAT_TABLE_PROCESS)
+    @Step (RINJICREAT_TABLE_PROCESS)
     protected IBatchFlowCommand rinjiCreatTableProcess() {
         return loopBatch(RinjiCreatTableProcess.class).arguments(getParameter().toProcessParameter()).define();
     }
@@ -83,10 +83,10 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      *
      * @return 世帯員所得情報一時
      */
-    @Step(世帯員把握_TEMP_1)
+    @Step (世帯員把握_TEMP_1)
     protected IBatchFlowCommand setaiShotokuKazeiHanteiFuka() {
         RString 管理識別区分 = SetaiinHaakuKanriShikibetsuKubun.賦課.getコード();
-        SetaiShotokuKazeiHanteiBatchParameter param = new SetaiShotokuKazeiHanteiBatchParameter(管理識別区分);
+        DBB002001_SetaiinHaakuParameter param = new DBB002001_SetaiinHaakuParameter(管理識別区分);
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, param).define();
     }
 
@@ -95,10 +95,10 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      *
      * @return 世帯員所得情報一時
      */
-    @Step(世帯員把握_TEMP_2)
+    @Step (世帯員把握_TEMP_2)
     protected IBatchFlowCommand setaiShotokuKazeiHanteiKogakuKaiko() {
         RString 管理識別区分 = SetaiinHaakuKanriShikibetsuKubun.高額介護.getコード();
-        SetaiShotokuKazeiHanteiBatchParameter param = new SetaiShotokuKazeiHanteiBatchParameter(管理識別区分);
+        DBB002001_SetaiinHaakuParameter param = new DBB002001_SetaiinHaakuParameter(管理識別区分);
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, param).define();
     }
 
@@ -107,7 +107,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      *
      * @return IBatchFlowCommand
      */
-    @Step(GETJUMINJOUHOU_DATA_PROCESS)
+    @Step (GETJUMINJOUHOU_DATA_PROCESS)
     protected IBatchFlowCommand getJuminjouhouProcess() {
         DBB114001_ShotokuShokaihyoHakkoParameter param = new DBB114001_ShotokuShokaihyoHakkoParameter();
         param.set出力順(出力順);
@@ -120,7 +120,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      *
      * @return 帳票出力パラメータ
      */
-    @Step(PRT_SHOTOKUSHOKAIHYO_PROCESS)
+    @Step (PRT_SHOTOKUSHOKAIHYO_PROCESS)
     protected IBatchFlowCommand printShotokuShokaihyoProcess() {
         DBB114001_ShotokuShokaihyoHakkoParameter param = new DBB114001_ShotokuShokaihyoHakkoParameter();
         param.set出力順(出力順);

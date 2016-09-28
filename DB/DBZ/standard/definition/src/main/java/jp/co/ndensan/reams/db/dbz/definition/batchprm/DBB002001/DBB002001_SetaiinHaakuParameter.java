@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka;
+package jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001;
 
-import jp.co.ndensan.reams.db.dbz.definition.processprm.fuka.SetaiShotokuKazeiHanteiProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.processprm.DBB002001.SetaiShotokuKazeiHanteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SetaiShotokuKazeiHanteiBatchParameter extends BatchParameterBase {
+public class DBB002001_SetaiinHaakuParameter extends BatchParameterBase {
 
     @BatchParameter(key = "管理識別区分", name = "管理識別区分")
     private RString 管理識別区分;
@@ -30,7 +30,7 @@ public class SetaiShotokuKazeiHanteiBatchParameter extends BatchParameterBase {
      *
      * @param 管理識別区分 RString
      */
-    public SetaiShotokuKazeiHanteiBatchParameter(RString 管理識別区分) {
+    public DBB002001_SetaiinHaakuParameter(RString 管理識別区分) {
         this.管理識別区分 = 管理識別区分;
     }
 
