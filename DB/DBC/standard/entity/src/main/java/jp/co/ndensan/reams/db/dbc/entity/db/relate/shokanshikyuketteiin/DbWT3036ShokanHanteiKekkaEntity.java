@@ -21,50 +21,50 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
  *
  * @reamsid_L DBC-0980-331 chenaoqi
  */
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
 public class DbWT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbWT3036ShokanHanteiKekkaEntity> implements IDbAccessable {
 
-    @TempTableColumnOrder(1)
+    @TempTableColumnOrder (1)
     private Decimal renban;
-    @TempTableColumnOrder(2)
-    private ShoKisaiHokenshaNo shokisaiHokenshaNo;
-    @TempTableColumnOrder(3)
-    private RString shokisaiHokenshaMei;
-    @TempTableColumnOrder(4)
-    private FlexibleDate sakuseiYmd;
-    @TempTableColumnOrder(5)
-    private RString kokuhoRengokaiMei;
-    @TempTableColumnOrder(6)
+    @TempTableColumnOrder (2)
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    @TempTableColumnOrder (3)
+    private RString shoKisaiHokenshaName;
+    @TempTableColumnOrder (4)
+    private FlexibleDate sakuseiYMD;
+    @TempTableColumnOrder (5)
+    private RString kokuhorenName;
+    @TempTableColumnOrder (6)
     private RString tsuchishoNo;
-    @TempTableColumnOrder(7)
+    @TempTableColumnOrder (7)
     private RString seiriNo;
-    @TempTableColumnOrder(8)
-    private FlexibleYearMonth serviceTeikyoYm;
-    @TempTableColumnOrder(9)
+    @TempTableColumnOrder (8)
+    private FlexibleYearMonth serviceTeikyoYM;
+    @TempTableColumnOrder (9)
     private JigyoshaNo jigyoshoNo;
-    @TempTableColumnOrder(10)
-    private RString jigyoshoMei;
-    @TempTableColumnOrder(11)
+    @TempTableColumnOrder (10)
+    private RString jigyoshoName;
+    @TempTableColumnOrder (11)
     private ServiceShuruiCode serviceShuruiCode;
-    @TempTableColumnOrder(12)
+    @TempTableColumnOrder (12)
     private RString serviceShuruiMei;
-    @TempTableColumnOrder(13)
+    @TempTableColumnOrder (13)
     private Decimal tanisuKingaku;
-    @TempTableColumnOrder(14)
+    @TempTableColumnOrder (14)
     private Decimal shiharaiKingaku;
-    @TempTableColumnOrder(15)
+    @TempTableColumnOrder (15)
     private Decimal zougenTanisu;
-    @TempTableColumnOrder(16)
+    @TempTableColumnOrder (16)
     private RString shiharaiHohoKubunCode;
-    @TempTableColumnOrder(17)
+    @TempTableColumnOrder (17)
     private RString biko1;
-    @TempTableColumnOrder(18)
+    @TempTableColumnOrder (18)
     private RString biko2;
-    @TempTableColumnOrder(19)
+    @TempTableColumnOrder (19)
     private RString koshinDBumu;
-    @TempTableColumnOrder(20)
+    @TempTableColumnOrder (20)
     private JigyoshaNo wrkJigyoshoNo;
 
 }

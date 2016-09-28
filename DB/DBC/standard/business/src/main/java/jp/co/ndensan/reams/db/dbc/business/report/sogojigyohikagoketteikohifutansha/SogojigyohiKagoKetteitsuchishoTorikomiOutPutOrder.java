@@ -46,7 +46,7 @@ public enum SogojigyohiKagoKetteitsuchishoTorikomiOutPutOrder implements IReport
     /**
      * サービス提供年月
      */
-    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYm"), new RString("DbWT3061.\"serviceTeikyoYm\"")),
+    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYm"), new RString("DbWT3061.\"serviceTeikyoYM\"")),
     /**
      * 事業者番号
      */
@@ -54,7 +54,7 @@ public enum SogojigyohiKagoKetteitsuchishoTorikomiOutPutOrder implements IReport
     /**
      * 取り扱い年月
      */
-    取り扱い年月(new RString("0363"), new RString("toriatsukaiYM"), new RString("DbWT3061.\"toriatsukaiYM\""));
+    取り扱い年月(new RString("0363"), new RString("toriatsukaiYm"), new RString("DbWT3061.\"toriatsukaiYM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

@@ -52,11 +52,11 @@ public class HihokenshaJohoSoufuDataSakuseyi {
     public FlexibleYearMonth getMaxShoriYearMonth() {
         FlexibleYearMonth 処理年月;
         DbT3104KokuhorenInterfaceKanriEntity resultEntity = 国保連インターフェース管理Dac.getMaxShoriYM();
-        処理年月 = resultEntity.getShoriYM();
-        if (処理年月 == null || 処理年月.isEmpty()) {
+        if (resultEntity == null) {
             FlexibleDate システム日付 = FlexibleDate.getNowDate();
             return システム日付.getYearMonth();
         }
+        処理年月 = resultEntity.getShoriYM();
         return 処理年月;
     }
 

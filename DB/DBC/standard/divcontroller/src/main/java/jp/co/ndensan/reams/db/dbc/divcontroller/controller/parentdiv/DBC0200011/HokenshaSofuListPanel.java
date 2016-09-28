@@ -21,13 +21,15 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 保険者情報送付データ作成
+ * 保険者情報送付データ作成のクラスです。
  *
  * @reamsid_L DBC-3300-010 wangxingpeng
  */
 public class HokenshaSofuListPanel {
 
     private FlexibleYearMonth 処理年月;
+    private static final int 定数_0 = 0;
+    private static final int 定数_3 = 3;
 
     /**
      * 初期化のンメソッドます。
@@ -43,27 +45,15 @@ public class HokenshaSofuListPanel {
     }
 
     /**
+     * 「表示する」ボタンのメソッドます。
      *
      * @param div HokenshaSofuListPanelDiv
      * @return ResponseData HokenshaSofuListPanelDiv
      */
     public ResponseData<HokenshaSofuListPanelDiv> onClick_btnHyojisuru(HokenshaSofuListPanelDiv div) {
-        処理年月 = new FlexibleYearMonth(div.getTxtShoriNengetsu().getValue().getYearMonth().toDateString());
-        getHandler(div).initialize(処理年月);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 処理年月テキストボックス変更時にリストを更新します。
-     *
-     * @param div KokuhorenTorikomiListDiv
-     * @return ResponseData
-     */
-    public ResponseData<HokenshaSofuListPanelDiv> onChange_txtShoriYM(HokenshaSofuListPanelDiv div) {
         if (div.getTxtShoriNengetsu().getValue() == null) {
             ValidationMessageControlPairs valid = getValidationHandler(div).validateFor処理年月未入力チェック();
             if (valid.iterator().hasNext()) {
-                div.getBtnHyojisuru().setDisabled(true);
                 return ResponseData.of(div).addValidationMessages(valid).respond();
             }
         }
@@ -84,29 +74,23 @@ public class HokenshaSofuListPanel {
         dgHokenshaSofuList_Row row = div.getDgHokenshaSofuList().getClickedItem();
         KokuhorenDataSofuViewState parmater = new KokuhorenDataSofuViewState(
                 div.getTxtShoriNengetsu().getValue().getYearMonth(), 再処理区分, row.getKokanShikibetsuNo());
-        ViewStateHolder.put(ViewStateHolderName.国保連取込情報, parmater);
-        RString paramete = row.getKokanShikibetsuNo();
+        ViewStateHolder.put(ViewStateHolderName.国保連送付情報, parmater);
+        RString paramete = row.getKokanShikibetsuNo().substring(定数_0, 定数_3);
         return ResponseData.of(div).forwardWithEventName(DBC0200011TransitionEventName.バッチ起動)
                 .parameter(paramete);
     }
 
     /**
-     * 「スケジュール設定」ボタンのメソッドます。
+     * スケジュール設定へのメソッドます。
      *
      * @param div KokuhorenTorikomiListDiv
-     * @return ResponseData
+     * @return ResponseData HokenshaSofuListPanelDiv
      */
     public ResponseData<HokenshaSofuListPanelDiv> onClick_btnScheduleSetting(HokenshaSofuListPanelDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理年月, div.getTxtShoriNengetsu().getValue());
         return ResponseData.of(div).forwardWithEventName(DBC0200011TransitionEventName.スケジュール設定へ).respond();
     }
 
-    /**
-     * 保険者情報送付データ作成のHandlerクラスを取得のンメソッドます。
-     *
-     * @param div YokaigoninteiJigyotaishoRirekiListDiv
-     * @return YokaigoninteiJigyotaishoRirekiListHandler
-     */
     private HokenshaSofuListPanelHandler getHandler(HokenshaSofuListPanelDiv div) {
         return new HokenshaSofuListPanelHandler(div);
     }

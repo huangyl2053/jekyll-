@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSyuuJiyuu;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA110010.DBA110010_HihokenshashoHakkoKanriboParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1110011.BatchPanelHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboFinder;
@@ -88,7 +88,7 @@ public class BatchPanel {
      */
     public ResponseData onClick_btnJikko(BatchPanelDiv div) {
 
-        ResponseData<HihokenshashoHakkoKanriboBatchParameter> response = new ResponseData<>();
+        ResponseData<DBA110010_HihokenshashoHakkoKanriboParameter> response = new ResponseData<>();
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         response.data = getHandler(div).batchParameter(div.getDgKoufuJiyu().getSelectedItems(),

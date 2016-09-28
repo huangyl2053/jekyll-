@@ -198,19 +198,20 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
                 世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
             }
             source.listLower_8 = 世帯課税名称;
-            if (KetteiKubun.承認する.getコード().equals(this.帳票情報.get決定区分().getコード())) {
-                source.listLower_9 = new RString("承認");
-            } else {
-                source.listLower_9 = new RString("非承認");
+            source.listLower_9 = RString.EMPTY;
+            if (this.帳票情報.get決定区分() != null && (KetteiKubun.承認する.getコード().equals(this.帳票情報.get決定区分().getコード()))) {
+                source.listLower_10 = new RString("承認");
+            } else if (this.帳票情報.get決定区分() != null) {
+                source.listLower_10 = new RString("非承認");
             }
             if (this.帳票情報.get旧措置() != null) {
-                source.listLower_10 = this.帳票情報.get旧措置().get名称();
+                source.listLower_11 = this.帳票情報.get旧措置().get名称();
             }
             if (this.帳票情報.getユニット型個室() != null) {
-                source.listLower_11 = new RString(this.帳票情報.getユニット型個室().toString());
+                source.listLower_12 = new RString(this.帳票情報.getユニット型個室().toString());
             }
             if (this.帳票情報.get従来型老健() != null) {
-                source.listLower_12 = new RString(this.帳票情報.get従来型老健().toString());
+                source.listLower_13 = new RString(this.帳票情報.get従来型老健().toString());
             }
         }
     }
@@ -227,7 +228,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat("").concat(時分秒).concat("").concat("作成");
+        return 年月日.concat("　").concat(時分秒).concat("　").concat("作成");
     }
 
     private RString get要介護度() {

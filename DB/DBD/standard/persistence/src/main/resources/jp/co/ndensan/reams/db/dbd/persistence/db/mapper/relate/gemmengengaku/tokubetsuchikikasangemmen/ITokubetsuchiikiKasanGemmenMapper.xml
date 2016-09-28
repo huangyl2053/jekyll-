@@ -73,6 +73,26 @@
         AND A."dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" = #{履歴番号}
     </select>
     
+    <select id="select特別地域加算減免申請情報の取得"
+            resultMap="resultMap_TokubetsuchiikiKasanGemmenEntity"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenParameter"
+            fetchSize="500">
+            SELECT
+                A.*,
+                B.*
+                FROM (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4020TokubetsuchiikiKasanGemmenMapper.noDeleted_DbT4020TokubetsuchiikiKasanGemmen" />) AS A
+                LEFT JOIN (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS B
+                ON A."dbT4020TokubetsuchiikiKasanGemmen_shoKisaiHokenshaNo" = B."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+                AND A."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = B."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+                AND A."dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+                AND B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
+            <where>
+                AND A."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = #{被保険者番号}
+            </where>
+            ORDER BY  A."dbT4020TokubetsuchiikiKasanGemmen_shinseiYMD" DESC
+    </select>
+    
     <resultMap id="resultMap_TokubetsuchiikiKasanGemmenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity" autoMapping="true">
         <id property="特別地域加算減免Entity.hihokenshaNo" column="dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="特別地域加算減免Entity.rirekiNo" column="dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" />

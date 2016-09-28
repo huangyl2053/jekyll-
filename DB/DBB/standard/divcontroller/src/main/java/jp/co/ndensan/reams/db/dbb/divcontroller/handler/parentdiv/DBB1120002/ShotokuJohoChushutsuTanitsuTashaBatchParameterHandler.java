@@ -6,8 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu.ShotokuJohoChushutsuGamenParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112001.DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu.ShotokuJohoChushutsuRenkeitanitu;
@@ -23,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -44,6 +48,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     private static final RString 遷移区分_1 = new RString("1");
     private static final RString 処理区分_2 = new RString("2");
     private static final RString 処理区分_3 = new RString("3");
+    private static final RString ファイル付箋 = new RString("ShotokuJohoChushutsuTanitsuTasha");
     private static final RString 単一保険者でないため = new RString("単一保険者でないため");
     private static final RString 所得引出方法が不正のため = new RString("所得引出方法が不正のため");
     private static final RString 当初所得引出 = new RString("当初所得引出");
@@ -136,13 +141,37 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータの設定します。
      *
-     * @return ShotokuJohoTyushutuRenkeiTanituParameter 所得情報抽出・連携_バッチパラメータクラスです
+     * @param 共有ファイルID RDateTime
+     * @return DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter
+     * 所得情報抽出・連携_バッチパラメータクラスです
      */
-    public ShutokuJohoChushutsuRenkeiBatchParameter getBatchParamter() {
-        ShutokuJohoChushutsuRenkeiBatchParameter batchparam = new ShutokuJohoChushutsuRenkeiBatchParameter();
-        batchparam.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
-        batchparam.set出力順ID(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID());
-        return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoParameter(batchparam);
+    public DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter getBatchParamter_DBB112001(RDateTime 共有ファイルID) {
+        ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
+        param.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
+        param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID()));
+        param.set市町村情報List(Collections.EMPTY_LIST);
+        param.set共有ファイルID(共有ファイルID);
+        param.set共有ファイル名(ファイル付箋);
+        param.setファイル名(div.getHiddenResult());
+        return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112001Parameter(param);
+    }
+
+    /**
+     * 「実行する」ボタンを押下バッチ実行、バッチパラメータの設定します。
+     *
+     * @param 共有ファイルID RDateTime
+     * @return DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter
+     * 所得情報抽出・連携_バッチパラメータクラスです
+     */
+    public DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter getBatchParameter_DBB112003(RDateTime 共有ファイルID) {
+        ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
+        param.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
+        param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID()));
+        param.set市町村情報List(Collections.EMPTY_LIST);
+        param.set共有ファイルID(共有ファイルID);
+        param.set共有ファイル名(ファイル付箋);
+        param.setファイル名(div.getHiddenResult());
+        return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112003Parameter(param);
     }
 
     private void 処理区分Handler(RString メニューID, RString 処理区分) {

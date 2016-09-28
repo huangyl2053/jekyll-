@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -212,5 +213,38 @@ public class DbT7131KaigoServiceNaiyouDac {
                                 leq(基準年月, teikyoShuryoYM)))
                 .order(by(serviceShuruiCd, Order.ASC), by(serviceKoumokuCd, Order.ASC))
                 .toList(DbT7131KaigoServiceNaiyouEntity.class);
+    }
+
+    /**
+     * +
+     * サービスコード取得２を取得します。
+     *
+     * @param 基準年月 基準年月
+     * @param サービス種類 サービス種類
+     * @return List<DbT7131KaigoServiceNaiyouEntity>
+     */
+    public List<DbT7131KaigoServiceNaiyouEntity> getServiceCodeList2(FlexibleYearMonth 基準年月,
+            List<RString> サービス種類) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7131KaigoServiceNaiyou.class).
+                where(and(leq(teikyoKaishiYM, 基準年月),
+                                leq(基準年月, teikyoShuryoYM),
+                                in(DbT7131KaigoServiceNaiyou.serviceShuruiCd, サービス種類)))
+                .order(by(serviceShuruiCd, Order.ASC), by(serviceKoumokuCd, Order.ASC))
+                .toList(DbT7131KaigoServiceNaiyouEntity.class);
+    }
+
+    /**
+     * データを物理削除する
+     *
+     * @param entity DbT7131KaigoServiceNaiyouEntity
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public int delete(DbT7131KaigoServiceNaiyouEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス内容エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
     }
 }

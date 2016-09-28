@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJ
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,10 +19,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額受領委任契約事業者を管理するクラスです。
+ *
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class KogakuJuryoininKeiyakuJigyosha
-    extends ModelBase<KogakuJuryoininKeiyakuJigyoshaIdentifier, DbT3076KogakuJuryoininKeiyakuJigyoshaEntity, 
-            KogakuJuryoininKeiyakuJigyosha> implements Serializable {
+        extends ModelBase<KogakuJuryoininKeiyakuJigyoshaIdentifier, DbT3076KogakuJuryoininKeiyakuJigyoshaEntity, KogakuJuryoininKeiyakuJigyosha>
+        implements Serializable {
 
     private final DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity;
     private final KogakuJuryoininKeiyakuJigyoshaIdentifier id;
@@ -33,22 +34,17 @@ public class KogakuJuryoininKeiyakuJigyosha
      * 高額受領委任契約事業者の新規作成時に使用します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param 受付年月日 受付年月日
      * @param 履歴番号 履歴番号
      */
     public KogakuJuryoininKeiyakuJigyosha(HihokenshaNo 被保険者番号,
-            FlexibleDate 受付年月日,
             int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3076KogakuJuryoininKeiyakuJigyoshaEntity();
         this.entity.setHihokenshaNo(被保険者番号);
-        this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KogakuJuryoininKeiyakuJigyoshaIdentifier(
                 被保険者番号,
-                受付年月日,
                 履歴番号
         );
     }
@@ -63,7 +59,6 @@ public class KogakuJuryoininKeiyakuJigyosha
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額受領委任契約事業者"));
         this.id = new KogakuJuryoininKeiyakuJigyoshaIdentifier(
                 entity.getHihokenshaNo(),
-                entity.getUketsukeYMD(),
                 entity.getRirekiNo());
     }
 
@@ -229,21 +224,26 @@ public class KogakuJuryoininKeiyakuJigyosha
     }
 
     /**
-     * 保持する高額受領委任契約事業者を削除対象とします。<br/>
-     * {@link DbT3076KogakuJuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する高額受領委任契約事業者を削除対象とします。<br/> {@link DbT3076KogakuJuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KogakuJuryoininKeiyakuJigyosha}
      */
     @Override
     public KogakuJuryoininKeiyakuJigyosha deleted() {
         DbT3076KogakuJuryoininKeiyakuJigyoshaEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new KogakuJuryoininKeiyakuJigyosha(deletedEntity, id);
+    }
+
+    /**
+     * 保持する高額受領委任契約事業者を修正対象とします。<br/> {@link DbT3076KogakuJuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link KogakuJuryoininKeiyakuJigyosha}
+     */
+    public KogakuJuryoininKeiyakuJigyosha modified() {
+        DbT3076KogakuJuryoininKeiyakuJigyoshaEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new KogakuJuryoininKeiyakuJigyosha(modifiedEntity, id);
     }
 
     /**
@@ -258,7 +258,7 @@ public class KogakuJuryoininKeiyakuJigyosha
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -110,5 +110,4 @@ public class JigyohokokuGeppoYoshiki1Data {
     private RString 左記以外_3;
     private RString 左記以外_4;
     private RString 左記以外_5;
-
 }

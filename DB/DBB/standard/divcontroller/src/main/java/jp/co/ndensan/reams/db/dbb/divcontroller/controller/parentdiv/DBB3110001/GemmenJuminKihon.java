@@ -5,13 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB3110001;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.NendobunFukaGemmenList;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.KaigoHokenryoGemmenParam;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.NendobunFukaGemmenListResult;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.DBB3110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.GemmenJuminKihonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3110001.GemmenJuminKihonHandler;
@@ -25,14 +23,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKe
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey.Builder;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -47,23 +43,21 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class GemmenJuminKihon {
 
-//    private static final RString 状況_申請 = new RString("申請");
-//    private static final RString 状況_決定 = new RString("決定");
-//    private static final RString 状況_訂正 = new RString("訂正した内容で、決定");
-//    private static final RString 処理_登録 = new RString("登録");
+    private static final RString 状況_申請 = new RString("申請");
+    private static final RString 状況_決定 = new RString("決定");
+    private static final RString 状況_訂正 = new RString("訂正した内容で、決定");
+    private static final RString 処理_登録 = new RString("登録");
     private static final RString 処理_取消 = new RString("取消");
     private static final int ゼロ_定値 = 0;
     private static final int イチ_定値 = 1;
     private static final RString 発行ボタンSHOW = new RString("1");
-    private static final RString 定値_ゼロ = new RString("0");
-    private static final RString 定値_イチ = new RString("1");
-//    private static final RString 入力状況_新規申請 = new RString("新規_申請");
-//    private static final RString 入力状況_新規決定 = new RString("新規_決定");
-//    private static final RString 入力状況_申請中申請 = new RString("申請中_申請");
-//    private static final RString 入力状況_申請中決定 = new RString("申請中_決定");
-//    private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
-//    private static final RString 入力状況_決定済訂正 = new RString("決定済_訂正");
-//    private static final RString 入力状況_決定済取消 = new RString("決定済_取消");
+    private static final RString 入力状況_新規申請 = new RString("新規_申請");
+    private static final RString 入力状況_新規決定 = new RString("新規_決定");
+    private static final RString 入力状況_申請中申請 = new RString("申請中_申請");
+    private static final RString 入力状況_申請中決定 = new RString("申請中_決定");
+    private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
+    private static final RString 入力状況_決定済訂正 = new RString("決定済_訂正");
+    private static final RString 入力状況_決定済取消 = new RString("決定済_取消");
 
     /**
      * 画面の初期化メソッドです。
@@ -83,9 +77,8 @@ public class GemmenJuminKihon {
         KaigoFukaKihonSearchKey searchKey = builder.build();
 
         handler.loadヘッダパネル(識別コード, searchKey);
-
-        // TODO QA1131 viewStateの賦課年度（ただし、検索画面で「全年度」を指定した場合は空白）  どのをより判断ですが？
-        int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, new FukaNendo(賦課年度));
+        FukaNendo 年度 = 賦課年度 == null || 賦課年度.isEmpty() ? FukaNendo.EMPTY : new FukaNendo(賦課年度);
+        int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, 年度);
         if (全賦課履歴データ件数 == ゼロ_定値) {
             handler.loadパネル状態2();
             handler.set全賦課履歴情報Visible(true);
@@ -174,9 +167,7 @@ public class GemmenJuminKihon {
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
-        Map<RString, List> map = getHandler(div).計算する(年度分賦課減免リスト, 賦課年度, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.減免後の普徴金額LIST, (ArrayList) map.get(定値_ゼロ));
-        ViewStateHolder.put(ViewStateKeys.減免後の特徴と過年度金額LIST, (ArrayList) map.get(定値_イチ));
+        getHandler(div).計算する(年度分賦課減免リスト, 賦課年度, 被保険者番号);
         return createResponse(div);
     }
 
@@ -190,42 +181,41 @@ public class GemmenJuminKihon {
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
         GemmenJoho 最新減免の情報 = 年度分賦課減免リスト.get最新減免の情報();
         GemmenJuminKihonValidationHandler validationHandler = new GemmenJuminKihonValidationHandler(div);
-        ValidationMessageControlPairs pairs = validationHandler.減免額の整合性チェック();
-        pairs.add(validationHandler.決定日の必須入力チェック());
+        // TODO ビジネス設計_DBBBZ13001_23_賦課の計算.xlsxの調定計算 が問題があります。
+        ValidationMessageControlPairs pairs = validationHandler.決定日の必須入力チェック();
+//        pairs.add(validationHandler.減免額の整合性チェック());
         pairs.add(validationHandler.減免額の必須入力チェック());
-        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
+//        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
         pairs.add(validationHandler.決定日の必須入力チェック２());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         GemmenJuminKihonHandler handler = getHandler(div);
-        // TODO QA1158 メッセージ 「%1情報を%2します。よろしいですか？」 がありません。
-//        RString 入力状況 = handler.メッセージ判断(最新減免の情報);
-//        QuestionMessage message = null;
-//        if (入力状況_新規申請.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_新規決定.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_決定.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_申請中申請.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_申請中決定.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_決定.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_申請中取消.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_申請.toString()).replace(処理_取消.toString()).evaluate());
-//        } else if (入力状況_決定済訂正.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_訂正.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_決定済取消.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_決定.toString()).replace(処理_取消.toString()).evaluate());
-//        }
-        QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                UrQuestionMessages.保存の確認.getMessage().evaluate());
+        RString 入力状況 = handler.メッセージ判断(最新減免の情報);
+        QuestionMessage message = null;
+        if (入力状況_新規申請.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
+        } else if (入力状況_新規決定.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString()).replace(処理_登録.toString()).evaluate());
+        } else if (入力状況_申請中申請.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
+        } else if (入力状況_申請中決定.equals(入力状況)) {
+//            .replace(状況_決定.toString()).replace(処理_登録.toString())
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().evaluate());
+        } else if (入力状況_申請中取消.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString()).replace(処理_取消.toString()).evaluate());
+        } else if (入力状況_決定済訂正.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_訂正.toString()).replace(処理_登録.toString()).evaluate());
+        } else if (入力状況_決定済取消.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString()).replace(処理_取消.toString()).evaluate());
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(message).respond();
         }
@@ -233,10 +223,7 @@ public class GemmenJuminKihon {
             FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
             FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
-            List<Decimal> 減免後の普徴金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の普徴金額LIST, List.class);
-            List<Decimal> 減免後の特徴と過年度金額LIST = ViewStateHolder.get(ViewStateKeys.減免後の特徴と過年度金額LIST, List.class);
-            年度分賦課減免リスト = handler.保存前の編集(年度分賦課減免リスト,
-                    賦課年度, 被保険者番号, 減免後の普徴金額LIST, 減免後の特徴と過年度金額LIST);
+            年度分賦課減免リスト = handler.保存前の編集(年度分賦課減免リスト, 賦課年度, 被保険者番号);
             ViewStateHolder.put(ViewStateKeys.年度分賦課減免リスト, 年度分賦課減免リスト);
             Code 減免種類コード = ViewStateHolder.get(ViewStateKeys.減免種類コード, Code.class);
             Code 取消種類コード = ViewStateHolder.get(ViewStateKeys.取消種類コード, Code.class);

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-5020-011 wangxiaodong -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kenkoukaruterenkeidatakoiki.IKenkouKaruteRenkeiDataKoikiMapper">
+    <resultMap id="resultMap_KenkouKaruteRenkeiDataEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidata.KenkouKaruteRenkeiDataEntity"
+               autoMapping="true">
+        <result property="被保険者番号" column="Dbv1001hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="異動日" column="Dbv1001idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="市町村コード" column="Dbv1001shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="識別コード" column="Dbv1001shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得年月日" column="Dbv1001shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失年月日" column="Dbv1001shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="論理削除フラグ" column="Dbv1001logicalDeletedFlag" />
+        <result property="業務コード" column="PSMgyomucode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住民種別コード" column="PSMjuminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住民状態コード" column="PSMjuminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="名称" column="PSMmeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="カナ名称" column="PSMkanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="個人番号" column="PSMkojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="PSMseinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="性別" column="PSMseibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="履歴番号" column="Dbv4001rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="枝番" column="Dbv4001edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護認定状態区分コード" column="Dbv4001yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定年月日" column="Dbv4001ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="喪失年月日" column="Dbv4001soshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間開始年月日" column="Dbv4001ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間終了年月日" column="Dbv4001ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+
+    <select id="createKenkouKaruteRenkeiData"
+            resultOrdered="true"
+            fetchSize="500"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kenkoukaruterenkeidata.KenkouKaruteRenkeiDataMybatisParameter"
+            resultMap="resultMap_KenkouKaruteRenkeiDataEntity">
+        SELECT
+        PSM."gyomuCode" AS "PSMgyomucode",
+        PSM."juminShubetsuCode" AS "PSMjuminShubetsuCode",
+        PSM."juminJotaiCode" AS "PSMjuminJotaiCode",
+        PSM."meisho" AS "PSMmeisho",
+        PSM."kanaMeisho" AS "PSMkanaMeisho",
+        PSM."kojinNo" AS "PSMkojinNo",
+        PSM."seinengappiYMD" AS "PSMseinengappiYMD",
+        PSM."seibetsuCode" AS "PSMseibetsuCode",
+        Dbv.*
+        FROM (
+        SELECT Dbv1001."hihokenshaNo" AS "Dbv1001hihokenshaNo",
+        Dbv1001."idoYMD" AS "Dbv1001idoYMD",
+        Dbv1001."shichosonCode" AS "Dbv1001shichosonCode",
+        Dbv1001."shikibetsuCode" AS "Dbv1001shikibetsuCode",
+        Dbv1001."shikakuShutokuYMD" AS "Dbv1001shikakuShutokuYMD",
+        Dbv1001."shikakuSoshitsuYMD" AS "Dbv1001shikakuSoshitsuYMD",
+        Dbv1001."logicalDeletedFlag" AS "Dbv1001logicalDeletedFlag",
+        Dbv4001."rirekiNo" AS "Dbv4001rirekiNo",
+        Dbv4001."edaban" AS "Dbv4001edaban",
+        Dbv4001."yokaigoJotaiKubunCode" AS "Dbv4001yokaigoJotaiKubunCode",
+        Dbv4001."ninteiYMD" AS "Dbv4001ninteiYMD",
+        Dbv4001."soshitsuYMD" AS "Dbv4001soshitsuYMD",
+        Dbv4001."ninteiYukoKikanKaishiYMD" AS "Dbv4001ninteiYukoKikanKaishiYMD",
+        Dbv4001."ninteiYukoKikanShuryoYMD" AS "Dbv4001ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbV1001HihokenshaDaicho" AS Dbv1001
+        LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS Dbv4001
+        ON Dbv1001."hihokenshaNo" = Dbv4001."hihokenshaNo") AS Dbv
+        INNER JOIN
+        rgua.${psmShikibetsuTaisho} AS PSM
+        ON Dbv."Dbv1001shikibetsuCode" = PSM."shikibetsuCode"
+        ORDER BY Dbv."Dbv1001shikibetsuCode"
+    </select>
+
+    <select id="getKenkouKaruteRenkeiDataKoiki"
+            resultOrdered="true"
+            fetchSize="500"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidatakoiki.KenkoKaruteRenkeiKoikiTempTableEntity">
+        SELECT
+        temp."hihokenshaNo",
+        temp."idoYMD",
+        temp."shichosonCode",
+        temp."shikibetsuCode",
+        temp."shikakuShutokuYMD",
+        temp."shikakuSoshitsuYMD",
+        temp."logicalDeletedFlag",
+        temp."gyomuCode",
+        temp."juminShubetsuCode",
+        temp."juminJotaiCode",
+        temp."meisho",
+        temp."kanaMeisho",
+        temp."kojinNo",
+        temp."seinengappiYMD",
+        temp."seibetsuCode",
+        temp."rirekiNo",
+        temp."edaban",
+        temp."yokaigoJotaiKubunCode",
+        temp."ninteiYMD",
+        temp."soshitsuYMD",
+        temp."ninteiYukoKikanKaishiYMD",
+        temp."ninteiYukoKikanShuryoYMD"
+        FROM "KenkoKaruteRenkeiKoikiTempTable" temp
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" dbT7051
+        ON temp."shichosonCode" = dbT7051."shichosonCode"
+        AND dbT7051."gappeiKyuShichosonKubun" = '0'
+        ORDER BY
+        temp."shichosonCode"
+        , temp."hihokenshaNo"
+    </select>
+
+</mapper>

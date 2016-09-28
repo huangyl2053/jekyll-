@@ -3,23 +3,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushic
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 22 13:09:13 JST 2015 
+ * Wed Aug 31 10:28:57 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * ddlCodeList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * ddlCodeList_Row のクラスファイルです。
+ *
+ * @reamsid_L DBB-5720-010 xuxin
  */
-
 public class ddlCodeList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString code;
     private RString name;

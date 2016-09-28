@@ -6,12 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager;
 
 import java.io.Serializable;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
+import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
+import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0526SeikatsuHogoFujoShuruiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -33,10 +32,11 @@ public class SikakuSaisinnsikiRelateEntity implements Serializable {
     private RString 課税区分;
     private Decimal 合計所得金額;
     private Decimal 公的年金収入額;
-    private FukaJohoRelateEntity 賦課の情報;
+    private FukaJohoTempEntity 賦課情報一時Entity;
     private DbT2001ChoshuHohoEntity 徴収方法の情報;
     private DbT1001HihokenshaDaichoEntity 資格の情報;
-    private List<SeikatsuHogoJukyushaRelateEntity> 生保の情報;
-    private List<DbT7006RoreiFukushiNenkinJukyushaEntity> 老齢の情報;
+    private UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者Entity;
+    private UrT0526SeikatsuHogoFujoShuruiEntity 生活保護扶助種類Entity;
+    private DbT7006RoreiFukushiNenkinJukyushaEntity 老齢の情報;
 
 }

@@ -98,7 +98,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             return null;
         }
         if (Boolean.TRUE.equals(論理削除)) {
-            div.setMode_DisplayMode(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.shokai);
+            div.setMode_DisplayMode(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo);
         }
 
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().getJukyushaIdoJoho(

@@ -193,8 +193,6 @@ dbu/db/dbu/Total/btn_ReSearch
 dbu/db/dbu/Total/onClick_btnCheck
 dbu/db/dbu/Total/onClick_btnPublish
 dbu/db/dbu/Total/onLoad
-dbu/db/dbu/ToukeiJyohoSyokai/onClick_btnShukei
-dbu/db/dbu/ToukeiJyohoSyokai/onLoad
 dbu/db/dbu/YoshikiIchiBesshi/onClick_btnBack
 dbu/db/dbu/YoshikiIchiBesshi/onClick_btnSave
 dbu/db/dbu/YoshikiIchiBesshi/onLoad

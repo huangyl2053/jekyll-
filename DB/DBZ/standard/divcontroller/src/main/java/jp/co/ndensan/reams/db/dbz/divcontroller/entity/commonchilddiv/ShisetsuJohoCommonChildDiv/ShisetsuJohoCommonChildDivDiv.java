@@ -4,12 +4,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -25,7 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -224,7 +226,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -239,11 +241,11 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
     }
 
-    public void setMode_State( State value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    public void setMode_State(State value) {
+        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
     }
 
     // </editor-fold>
@@ -360,5 +362,16 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @Override
     public void get入所施設名称(JigyoshaNo 入所施設コード) {
         getHandler().get入所施設名称(入所施設コード);
+    }
+
+    /**
+     * サービス種類抽出区分とサービス種類の設定.
+     *
+     * @param サービス種類抽出区分 RString
+     * @param サービス種類 List<RString>
+     */
+    @Override
+    public void setサービス種類(RString サービス種類抽出区分, List<RString> サービス種類) {
+        getHandler().setサービス種類(サービス種類抽出区分, サービス種類);
     }
 }

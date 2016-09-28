@@ -67,8 +67,8 @@ public class RiyoshaFutangakuGengakuHandler {
 
     private final RiyoshaFutangakuGengakuPanelDiv div;
 
-    private final RString 申請メニュー = new RString("DBDMN21002");
-    private final RString 承認メニュー = new RString("DBDMN22002");
+    private static final RString 申請メニュー = new RString("DBDMN21002");
+    private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString BTNUPDATE_FIELDNAME = new RString("btnUpdate");
     private static final RString 申請情報を = new RString("申請情報を");
     private static final RString 承認情報を = new RString("承認情報を");

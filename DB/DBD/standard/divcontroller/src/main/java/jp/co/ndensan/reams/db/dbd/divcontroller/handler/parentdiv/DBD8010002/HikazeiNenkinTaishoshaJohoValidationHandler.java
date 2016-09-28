@@ -99,13 +99,35 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
      * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor処理状態(ValidationMessageControlPairs pairs) {
+    public ValidationMessageControlPairs validateFor処理状態単一(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        RString syoriJyotai = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().isEmpty()
-                ? new RString("空白") : div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai();
+
+        RString syoriJyotai = div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori().isEmpty()
+                ? new RString("空白") : div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori();
+
         NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.処理状態不正, syoriJyotai.toString());
-        messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.処理状態チェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.処理状態単一チェック)
+                .thenAdd(checkMessage).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
+                div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));
+
+        return pairs;
+    }
+
+    /**
+     * 処理状態チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor処理状態広域(ValidationMessageControlPairs pairs) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+
+        RString syoriJyotai = div.getTxtShoriJotai().getValue();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.処理状態不正, syoriJyotai.toString());
+        messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.処理状態広域チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
                 div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));

@@ -168,6 +168,15 @@ public class KyufuJissekiHeaderHandler {
         div.setHiddenYoshikiNo(様式番号);
     }
 
+    /**
+     * 要介護度を取得します。
+     *
+     * @return 要介護度
+     */
+    public RString get要介護度() {
+        return div.getTxtYoKaigodo().getValue();
+    }
+
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         div.getTxtHihoNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
         div.getTxtJuminShubetsu().setValue(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));

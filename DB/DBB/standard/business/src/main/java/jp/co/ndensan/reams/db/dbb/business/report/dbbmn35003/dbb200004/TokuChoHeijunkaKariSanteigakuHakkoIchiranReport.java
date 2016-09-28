@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.kingaku.IKingakuFormatter;
 import jp.co.ndensan.reams.ur.urz.business.core.kingaku.KingakuFormatter;
@@ -78,52 +80,50 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
 
     private void setHeader(EditedKariSanteiTsuchiShoKyotsu editedData, TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item, IOutputOrder outputOrder) {
 
-        RString 改頁１ = RString.EMPTY;
-        RString 改頁２ = RString.EMPTY;
-        RString 改頁３ = RString.EMPTY;
-        RString 改頁４ = RString.EMPTY;
-        RString 改頁５ = RString.EMPTY;
         RString 出力順１ = RString.EMPTY;
         RString 出力順２ = RString.EMPTY;
         RString 出力順３ = RString.EMPTY;
         RString 出力順４ = RString.EMPTY;
         RString 出力順５ = RString.EMPTY;
 
-        List<ISetSortItem> list = outputOrder.get設定項目リスト();
-        if (list == null) {
-            list = new ArrayList<>();
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
+        if (改頁Map.get(INDEX_1) != null) {
+            改頁１ = 改頁Map.get(INDEX_1).get項目名();
+        }
+        if (改頁Map.get(INDEX_2) != null) {
+            改頁２ = 改頁Map.get(INDEX_2).get項目名();
+        }
+        if (改頁Map.get(INDEX_3) != null) {
+            改頁３ = 改頁Map.get(INDEX_3).get項目名();
+        }
+        if (改頁Map.get(INDEX_4) != null) {
+            改頁４ = 改頁Map.get(INDEX_4).get項目名();
+        }
+        if (改頁Map.get(INDEX_5) != null) {
+            改頁５ = 改頁Map.get(INDEX_5).get項目名();
         }
 
-        if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = list.get(0).get項目名();
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
+        if (出力順Map.get(INDEX_1) != null) {
+            出力順１ = 出力順Map.get(INDEX_1).get項目名();
         }
-        if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-            改頁２ = list.get(INDEX_1).get項目名();
+        if (出力順Map.get(INDEX_2) != null) {
+            出力順２ = 出力順Map.get(INDEX_2).get項目名();
         }
-        if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = list.get(INDEX_2).get項目名();
+        if (出力順Map.get(INDEX_3) != null) {
+            出力順３ = 出力順Map.get(INDEX_3).get項目名();
         }
-        if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-            改頁４ = list.get(INDEX_3).get項目名();
+        if (出力順Map.get(INDEX_4) != null) {
+            出力順４ = 出力順Map.get(INDEX_4).get項目名();
         }
-        if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = list.get(INDEX_4).get項目名();
-        }
-
-        if (list.size() > INDEX_0) {
-            出力順１ = list.get(INDEX_0).get項目名();
-        }
-        if (list.size() > INDEX_1) {
-            出力順２ = list.get(INDEX_1).get項目名();
-        }
-        if (list.size() > INDEX_2) {
-            出力順３ = list.get(INDEX_2).get項目名();
-        }
-        if (list.size() > INDEX_3) {
-            出力順４ = list.get(INDEX_3).get項目名();
-        }
-        if (list.size() > INDEX_4) {
-            出力順５ = list.get(INDEX_4).get項目名();
+        if (出力順Map.get(INDEX_5) != null) {
+            出力順５ = 出力順Map.get(INDEX_5).get項目名();
         }
 
         RTime time = 帳票作成日時.getTime();

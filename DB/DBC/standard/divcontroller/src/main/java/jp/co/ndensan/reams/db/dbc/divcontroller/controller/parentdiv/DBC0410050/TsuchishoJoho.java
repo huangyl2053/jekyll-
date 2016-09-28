@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410050;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorendatatorikomi.KokuhorenDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410050.TsuchishoJohoDiv;
@@ -49,7 +49,7 @@ public class TsuchishoJoho {
      * @param div TsuchishoJohoDiv
      * @return KokuhorenDataTorikomiBatchParameter
      */
-    public ResponseData<KokuhorenDataTorikomiBatchParameter> onClick_btnExcute(TsuchishoJohoDiv div) {
+    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJohoDiv div) {
 
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200084.getReportId(),
@@ -57,7 +57,7 @@ public class TsuchishoJoho {
         if (outputOrder != null) {
             ChohyoShutsuryokujunManagerFactory.createInstance().save前回出力順(outputOrder);
         }
-        KokuhorenDataTorikomiBatchParameter parameter = new KokuhorenDataTorikomiBatchParameter();
+        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         if (処理年月 != null) {
             parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toString()));
@@ -70,7 +70,7 @@ public class TsuchishoJoho {
         }
         if (null != div.getCcdKokurenJohoTorikomi().get出力順ID()) {
             long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
-            parameter.setShutsuryokujunId(出力順ID);
+            parameter.setShutsuryokujunId(new RString(出力順ID));
         }
         return ResponseData.of(parameter).respond();
     }

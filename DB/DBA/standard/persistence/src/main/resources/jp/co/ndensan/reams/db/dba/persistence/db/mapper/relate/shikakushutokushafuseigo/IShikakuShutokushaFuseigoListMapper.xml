@@ -73,7 +73,7 @@
                               GROUP BY psmJyohou."kanaMeisho",
                                        psmJyohou."seinengappiYMD",
                                        psmJyohou."seibetsuCode"
-                              HAVING count(*)>1) AS countPSM
+                              HAVING 1<![CDATA[<]]>count(*)) AS countPSM
                         ON countPSM."kanaMeisho" = psm."kanaMeisho"
                         AND countPSM."seinengappiYMD" = psm."seinengappiYMD"
                         AND countPSM."seibetsuCode" = psm."seibetsuCode"

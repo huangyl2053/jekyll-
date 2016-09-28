@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.workflowcontroller.nenreitotatsushikakuido;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA010010.DBA010010_NenreitotatsuShikakuIdoParameter;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
@@ -21,8 +21,8 @@ public class DBAWFBC010 {
      * @param flowparam フローパラメータ
      * @return nenreitotatsuShikakuIdoParameter バッチパラメータクラス
      */
-    public NenreitotatsuShikakuIdoBatchFlowParameter createBPForNenreitotatsuShikakuIdo(FlowParameters flowparam) {
-        NenreitotatsuShikakuIdoBatchFlowParameter nenreitotatsuShikakuIdoParameter = new NenreitotatsuShikakuIdoBatchFlowParameter();
+    public DBA010010_NenreitotatsuShikakuIdoParameter createBPForNenreitotatsuShikakuIdo(FlowParameters flowparam) {
+        DBA010010_NenreitotatsuShikakuIdoParameter nenreitotatsuShikakuIdoParameter = new DBA010010_NenreitotatsuShikakuIdoParameter();
 
         return nenreitotatsuShikakuIdoParameter;
     }

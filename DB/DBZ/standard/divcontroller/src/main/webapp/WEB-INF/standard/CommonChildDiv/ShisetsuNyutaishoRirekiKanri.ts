@@ -287,7 +287,9 @@ module DBZ {
 
             }
 
-		export class Riyou{
+
+
+            export class Riyou{
 			private gridWidthCalc;
 			private controls: Controls;
                     constructor(controls: Controls) {
@@ -310,7 +312,7 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    //this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
 
 					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -328,7 +330,7 @@ module DBZ {
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
-                    //this.controls.TenshutsusakiJohoPanel().displayNone = false;
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
 
                 }
 
@@ -349,7 +351,7 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    //this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
 
 					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -367,7 +369,7 @@ module DBZ {
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
-                    //this.controls.TenshutsusakiJohoPanel().displayNone = false;
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
 
 					}
 
@@ -387,7 +389,7 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    //this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
 					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -404,7 +406,7 @@ module DBZ {
                     gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
-                    //this.controls.TenshutsusakiJohoPanel().displayNone = false;
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 }
 
 					public 他市町村住所地特例者対象機能(): void {
@@ -422,7 +424,7 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    //this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
 					//施設種類表示、転出先保険者番号非表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -440,7 +442,7 @@ module DBZ {
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
-                    //this.controls.TenshutsusakiJohoPanel().displayNone = true;
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
 
                 	}
 
@@ -459,7 +461,7 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    //this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
+                    this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
 
                     //施設種類、転出先保険者番号非表示
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -477,7 +479,7 @@ module DBZ {
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
-                    //this.controls.TenshutsusakiJohoPanel().displayNone = true;
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
 
 
                 }

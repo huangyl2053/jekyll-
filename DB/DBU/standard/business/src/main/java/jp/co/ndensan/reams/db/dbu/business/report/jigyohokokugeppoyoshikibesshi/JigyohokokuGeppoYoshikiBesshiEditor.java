@@ -46,7 +46,7 @@ public class JigyohokokuGeppoYoshikiBesshiEditor implements IJigyohokokuGeppoYos
     private JigyohokokuGeppoYoshikiBesshiReportSource editSource(JigyohokokuGeppoYoshikiBesshiReportSource source) {
         source.printTimeStamp = data.get作成日時();
         source.shukeiKubun = data.get集計区分();
-        source.shuukeiHani = set集計範囲(data.get集計範囲());
+        source.shuukeiHani = set集計範囲(data.get集計区分(), data.get集計範囲());
         source.hokenshaNo = data.get保険者番号();
         source.hokenshaName = data.get保険者名();
         source.komokuHyodaiRetsu1 = data.get項目標題列1();
@@ -60,18 +60,24 @@ public class JigyohokokuGeppoYoshikiBesshiEditor implements IJigyohokokuGeppoYos
         return source;
     }
 
-    private RString set集計範囲(RString 集計範囲) {
+    private RString set集計範囲(RString 集計区分, RString 集計範囲) {
         if (RString.isNullOrEmpty(集計範囲)) {
             return RString.EMPTY;
         }
         RStringBuilder 集計範囲_SB = new RStringBuilder();
         集計範囲_SB.append(new RString("("));
-        FlexibleYear 集計範囲_年度 = new FlexibleYear(集計範囲.substring(0, 年度));
-        FlexibleYearMonth 集計範囲_Temp = new FlexibleYearMonth(集計範囲);
-        集計範囲_SB.append(集計範囲_年度.wareki().eraType(EraType.KANJI).getYear());
-        集計範囲_SB.append(new RString("年度"));
-        集計範囲_SB.append(集計範囲_Temp.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonth());
-        集計範囲_SB.append(new RString("分)"));
+        if (new RString("年報").equals(集計区分)) {
+            集計範囲_SB.append(集計範囲);
+            集計範囲_SB.append(new RString("年度"));
+        } else {
+            FlexibleYear 集計範囲_年度 = new FlexibleYear(集計範囲.substring(0, 年度));
+            FlexibleYearMonth 集計範囲_Temp = new FlexibleYearMonth(集計範囲);
+            集計範囲_SB.append(集計範囲_年度.wareki().eraType(EraType.KANJI).getYear());
+            集計範囲_SB.append(new RString("年度"));
+            集計範囲_SB.append(集計範囲_Temp.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonth());
+            集計範囲_SB.append(new RString("分"));
+        }
+        集計範囲_SB.append(new RString(")"));
         return 集計範囲_SB.toRString();
 
     }

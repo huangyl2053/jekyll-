@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-3490-050 yaoyahui -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper">
+    <resultMap id="resultMap_getEntityList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.KyufujissekiTempTblEntity" autoMapping="true">
+        <result property="hiHokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceTeikyoYM" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="yoKaigoJotaiKubunCode" column="要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="umareYMD" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="serviceSyuruiCode" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceKomokuCode" column="サービス項目コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenSeikyuKingaku" column="保険請求額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenRiyoshaFutangaku" column="保険利用者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenTanisu" column="保険単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenTanisuTani" column="保険単位単価" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenDekidakaTanisu" column="保険出来高点数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiyosogaku" column="費用額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="shotoku" column="所得段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceBunrui" column="サービス分類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
+        <result property="hokenryoDankai2" column="保険料算定段階2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenryoDankai1" column="保険料算定段階1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukaNendo" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="rank_num" column="rank_number" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+       
+    </resultMap>
+    <select resultOrdered="true" id="get給付実績データ一時" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.heikinriyogakuyokeihyo.HeikinriyogakuTokeihyoMybatisParameter"
+            resultMap="resultMap_getEntityList" 
+            fetchSize="500">
+        WITH T1 AS (
+        SELECT
+        給付実績."hiHokenshaNo"
+        , 給付実績."serviceTeikyoYM"
+        ,給付実績."umareYMD"
+        ,給付実績."yoKaigoJotaiKubunCode"
+        ,Dbt3025."atoSeikyuKingaku"
+        ,Dbt3025."serviceTanisu"
+        ,Dbt3025."tanisuTanka"
+        ,substr(Dbt3025."serviceCode",1,2) AS サービス種類コード 
+        ,Dbt1001."shikibetsuCode"
+        FROM
+        <include refid="subsql"/>
+        INNER JOIN
+        rgdb."DbT3025KyufujissekiKyotakuService" AS DbT3025
+        ON 給付実績."hiHokenshaNo" = DbT3025."hiHokenshaNo"
+        AND 給付実績."serviceTeikyoYM" = DbT3025."serviceTeikyoYM"
+        AND 給付実績."jigyoshoNo" = DbT3025."jigyoshoNo"
+        AND 給付実績."toshiNo" =	DbT3025."toshiNo"
+        AND 給付実績."inputShikibetsuNo" = DbT3025."inputShikibetsuNo" 
+        AND substr(DbT3025."serviceCode",1,2) IN('43','46')
+        INNER JOIN 
+        rgdb."DbT1001HihokenshaDaicho" AS Dbt1001
+        ON 給付実績."hiHokenshaNo" = Dbt1001."hihokenshaNo"
+        AND substr(Dbt1001."shikakuShutokuYMD",1,6)<![CDATA[<=]]>給付実績."serviceTeikyoYM"
+        AND (substr(Dbt1001."shikakuSoshitsuYMD",1,6)<![CDATA[>=]]>給付実績."serviceTeikyoYM"
+        OR Dbt1001."shikakuSoshitsuYMD" = '')
+        <if test="isshichosonkyuShichosonCode1" >
+            AND ((Dbt1001."koikinaiJushochiTokureiFlag" <![CDATA[<>]]>'1' AND Dbt1001."shichosonCode"
+            = #{shichosonCode})
+            OR (Dbt1001."koikinaiJushochiTokureiFlag" = '1' AND Dbt1001."koikinaiTokureiSochimotoShichosonCode" = #{shichosonCode}))
+        </if>
+        <if test="isshichosonkyuShichosonCode2">
+            AND Dbt1001."kyuShichosonCode" = #{kyuShichosonCode}
+        </if>
+        ORDER BY 給付実績."hiHokenshaNo"
+        ,給付実績."serviceTeikyoYM"
+        ,DbT3025."serviceCode")
+        , 
+        T2 AS (
+        SELECT
+        給付実績."hiHokenshaNo"
+        ,給付実績."serviceTeikyoYM"
+        ,給付実績."umareYMD"
+        ,給付実績."yoKaigoJotaiKubunCode"
+        ,DbT3033."atoHokenSeikyugaku"
+        ,DbT3033."hokenRiyoshaFutangaku"
+        ,DbT3033."atoHokenTanisuTotal"
+        ,DbT3033."hokenTanisuTani"
+        ,DbT3033."atoHokenDekidakaTanisuTotal"
+        ,DbT3033."serviceSyuruiCode"
+        ,Dbt1001."shikibetsuCode"
+        FROM
+        <include refid="subsql"/>
+        INNER JOIN
+        rgdb."DbT3033KyufujissekiShukei" AS DbT3033
+        ON 給付実績."hiHokenshaNo" = DbT3033."hiHokenshaNo"
+        AND 給付実績."serviceTeikyoYM" = DbT3033."serviceTeikyoYM"
+        AND 給付実績."jigyoshoNo" = DbT3033."jigyoshoNo"
+        AND 給付実績."toshiNo" =	DbT3033."toshiNo"
+        AND 給付実績."inputShikibetsuNo" = DbT3033."inputShikibetsuNo" 
+        AND DbT3033."serviceSyuruiCode" NOT IN('43','46','59')
+        INNER JOIN 
+        rgdb."DbT1001HihokenshaDaicho" AS Dbt1001
+        ON 給付実績."hiHokenshaNo" = Dbt1001."hihokenshaNo"
+        AND substr(Dbt1001."shikakuShutokuYMD",1,6) <![CDATA[<=]]> 給付実績."serviceTeikyoYM"
+        AND (substr(Dbt1001."shikakuSoshitsuYMD",1,6) <![CDATA[>=]]> 給付実績."serviceTeikyoYM"
+        OR Dbt1001."shikakuSoshitsuYMD" = '')
+        <if test="isshichosonkyuShichosonCode1" >
+            AND ((Dbt1001."koikinaiJushochiTokureiFlag" <![CDATA[<>]]> '1' AND Dbt1001."shichosonCode"
+            = #{shichosonCode})
+            OR (Dbt1001."koikinaiJushochiTokureiFlag" = '1' AND Dbt1001."koikinaiTokureiSochimotoShichosonCode" =#{shichosonCode}))
+        </if>
+        <if test="isshichosonkyuShichosonCode2">
+            AND Dbt1001."kyuShichosonCode" = #{kyuShichosonCode}
+        </if>
+        ORDER BY 給付実績."hiHokenshaNo"
+        ,給付実績."serviceTeikyoYM"
+        ,DbT3033."serviceSyuruiCode")
+        ,
+        T3 AS (
+        SELECT
+        給付実績."hiHokenshaNo"
+        ,給付実績."serviceTeikyoYM"
+        ,給付実績."umareYMD"
+        ,給付実績."yoKaigoJotaiKubunCode"	
+        , DbT3029."serviceSyuruiCode"
+        , DbT3029."serviceKomokuCode"
+        , SUM(DbT3029."hiyogaku") AS 費用額
+        ,Dbt1001."shikibetsuCode"
+        FROM
+        <include refid="subsql"/>
+        INNER JOIN
+        rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS DbT3029
+        ON 給付実績."hiHokenshaNo" = DbT3029."hiHokenshaNo"
+        AND 給付実績."serviceTeikyoYM" = DbT3029."serviceTeikyoYM"
+        AND 給付実績."jigyoshoNo" = DbT3029."jigyoshoNo"
+        AND 給付実績."toshiNo" =	DbT3029."toshiNo"
+        AND 給付実績."inputShikibetsuNo" = DbT3029."inputShikibetsuNo" 
+        AND DbT3029."serviceSyuruiCode" = '59'
+        INNER JOIN 
+        rgdb."DbT1001HihokenshaDaicho" AS Dbt1001
+        ON 給付実績."hiHokenshaNo" = Dbt1001."hihokenshaNo"
+        AND substr(Dbt1001."shikakuShutokuYMD",1,6) <![CDATA[<=]]> 給付実績."serviceTeikyoYM"
+        AND (substr(Dbt1001."shikakuSoshitsuYMD",1,6) <![CDATA[>=]]>給付実績."serviceTeikyoYM"
+        OR Dbt1001."shikakuSoshitsuYMD" = '')
+        <if test="isshichosonkyuShichosonCode1" >
+            AND ((Dbt1001."koikinaiJushochiTokureiFlag" <![CDATA[<>]]>'1' AND Dbt1001."shichosonCode"
+            = #{shichosonCode})
+            OR (Dbt1001."koikinaiJushochiTokureiFlag" = '1' AND Dbt1001."koikinaiTokureiSochimotoShichosonCode" = #{shichosonCode} ))
+        </if>
+        <if test="isshichosonkyuShichosonCode2">
+            AND Dbt1001."kyuShichosonCode" = #{kyuShichosonCode}
+        </if>
+        GROUP BY 
+        給付実績."hiHokenshaNo"
+        ,給付実績."serviceTeikyoYM"
+        ,給付実績."umareYMD"
+        ,給付実績."yoKaigoJotaiKubunCode"
+        ,給付実績."toshiNo"
+        , DbT3029."serviceSyuruiCode"
+        , DbT3029."serviceKomokuCode"
+        ,Dbt1001."shikibetsuCode"
+        ORDER BY 給付実績."hiHokenshaNo"
+        ,給付実績."serviceTeikyoYM"
+        ,DbT3029."serviceSyuruiCode")
+        
+        SELECT 
+        被保険者番号
+        ,サービス提供年月
+        ,要介護状態区分コード
+        ,生年月日
+        ,サービス種類コード
+        ,サービス項目コード
+        ,保険請求額
+        , 保険利用者負担額
+        ,保険単位数
+        ,保険単位単価
+        ,保険出来高点数
+        ,費用額
+        ,所得段階
+     	
+        FROM 
+        ( SELECT 
+        T1."hiHokenshaNo" AS 被保険者番号
+        ,T1."serviceTeikyoYM" AS サービス提供年月
+        ,T1."yoKaigoJotaiKubunCode" AS 要介護状態区分コード
+        ,T1."umareYMD" AS 生年月日
+        ,T1."サービス種類コード" AS サービス種類コード
+        ,'' AS サービス項目コード
+        ,T1."atoSeikyuKingaku"||'' AS 保険請求額
+        ,'0' AS  保険利用者負担額
+        ,T1."serviceTanisu" AS 保険単位数
+        ,T1."tanisuTanka" AS 保険単位単価
+        ,'0' AS 保険出来高点数
+        ,'0' AS 費用額
+        ,'' AS 所得段階
+        , T1."shikibetsuCode" AS 識別コード
+        		
+        FROM T1 
+        UNION
+        SELECT 
+        T2."hiHokenshaNo" AS 被保険者番号
+        ,T2."serviceTeikyoYM" AS サービス提供年月
+        ,T2."yoKaigoJotaiKubunCode" AS 要介護状態区分コード
+        ,T2."umareYMD" AS 生年月日
+        ,T2."serviceSyuruiCode" AS サービス種類コード
+        ,'' as "サービス項目コード"
+        ,T2."atoHokenSeikyugaku" AS 保険請求額
+        ,T2."hokenRiyoshaFutangaku" AS  保険利用者負担額
+        ,T2."atoHokenTanisuTotal" AS 保険単位数
+        ,T2."hokenTanisuTani" AS 保険単位単価
+        ,T2."atoHokenDekidakaTanisuTotal" AS 保険出来高点数 
+        ,'0' AS 費用額
+        ,'' AS 所得段階
+        , T2."shikibetsuCode" AS 識別コード
+    		
+        FROM T2 
+        UNION
+        SELECT 
+        T3."hiHokenshaNo" AS 被保険者番号
+        ,T3."serviceTeikyoYM" AS サービス提供年月
+        ,T3."yoKaigoJotaiKubunCode" AS 要介護状態区分コード
+        ,T3."umareYMD" AS 生年月日
+        ,T3."serviceSyuruiCode" AS サービス種類コード 
+        ,T3."serviceKomokuCode" AS サービス項目コード
+        ,'0' AS 保険請求額
+        ,'0' AS 保険利用者負担額
+        ,'0' AS 保険単位数
+        ,'0' AS 保険単位単価
+        ,'0' AS 保険出来高点数
+        ,T3."費用額"||'' AS 費用額
+        ,'' AS 所得段階
+        ,T3."shikibetsuCode" AS 識別コード       		
+        FROM T3 ) AS T4
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        AS 宛名PSM 
+        ON  T4."識別コード" = 宛名PSM."shikibetsuCode"
+        <include refid="subsql1"/>
+    </select>
+    <sql id="subsql">
+        <if test="istaishoNendoYM">
+            ( 
+            SELECT
+            * FROM(
+            SELECT
+            *
+            , row_number() over ( 
+            partition by
+            給付実績基本1."hiHokenshaNo"
+            order by
+            給付実績基本1."shinsaYM" DESC
+            ) AS rank_number 
+            FROM
+            ( 
+            SELECT
+            <include refid="allColumns_DbT3017KyufujissekiKihon" />
+            , ( 
+            CASE 
+            WHEN "DbT3017KyufujissekiKihon"."shinsaYM" = '' 
+            THEN '999999' 
+            ELSE "DbT3017KyufujissekiKihon"."shinsaYM" 
+            END
+            ) AS 審査年月 
+            FROM
+            rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+            WHERE 
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[>=]]> #{kaishiYM}
+            AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> #{shuryoYM} 
+            AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" <![CDATA[<>]]> '3' 
+            AND substr("DbT3017KyufujissekiKihon"."inputShikibetsuNo",1,3) NOT IN ('71P', '816', '71R', '817')
+
+            ) AS 給付実績基本1
+    
+            ) AS 給付実績基本2 
+            WHERE
+            rank_number = 1) AS 給付実績
+        </if>
+        <if test="!istaishoNendoYM">
+            ( 
+            SELECT
+            * 
+            FROM
+            ( 
+            SELECT
+            <include refid="allColumns_DbT3017KyufujissekiKihon" />
+            , row_number() over ( 
+            partition by
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo"
+            ORDER BY
+            "DbT3017KyufujissekiKihon"."shinsaYM" DESC
+            ) AS rank_number 
+            FROM
+            rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+            WHERE
+            "DbT3017KyufujissekiKihon"."shinsaYM"<![CDATA[>=]]> #{kaishiYM}
+            AND "DbT3017KyufujissekiKihon"."shinsaYM" <![CDATA[<=]]> #{shuryoYM} 
+            AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" <![CDATA[<>]]> '3' 
+            AND substr("DbT3017KyufujissekiKihon"."inputShikibetsuNo",1,3) NOT IN ('71P', '816', '71R', '817')
+            
+            ) AS 給付実績基本1 
+            WHERE
+            rank_number = 1
+            ) AS 給付実績 
+        </if>
+    </sql>
+    <sql id="subsql1">
+        
+        <if test="isshichosonkyuShichosonCode3">
+            <if test="is町域">
+                AND 宛名PSM."choikiCode" IN  
+                <foreach collection="selectorChikulist" item="selectorChiku" open="(" separator="," close=")"> #{selectorChiku} </foreach>  
+            </if>
+            <if test="is行政区">
+                AND 宛名PSM."gyoseikuCode" IN 
+                <foreach collection="selectorChikulist" item="gyoseikuCode" open="(" separator="," close=")"> #{gyoseikuCode} </foreach>  
+            </if>
+            <if test="is地区1">
+                AND 宛名PSM."chikuCode1" IN 
+                <foreach collection="selectorChikulist" item="chikuCode1" open="(" separator="," close=")"> #{chikuCode1} </foreach>  
+            </if>
+            <if test="is地区2">
+                AND 宛名PSM."chikuCode2" IN 
+                <foreach collection="selectorChikulist" item="chikuCode2" open="(" separator="," close=")"> #{chikuCode2} </foreach>
+            </if>
+            <if test="is地区3">
+                AND 宛名PSM."chikuCode3" IN 
+                <foreach collection="selectorChikulist" item="chikuCode3" open="(" separator="," close=")"> #{chikuCode3} </foreach>
+            </if>
+        </if>
+        
+    </sql>
+    
+    <select resultOrdered="true" id="get給付実績データ一時に更新" 
+            resultMap="resultMap_getEntityList" 
+            fetchSize="500">
+        SELECT
+        <include refid = "allColumns_DbWTkyufujisTempTbl"/>
+        , 介護賦課データ.保険料算定段階2 AS 保険料算定段階2
+        , 介護賦課データ.保険料算定段階1 AS 保険料算定段階1
+        , 介護賦課データ.賦課年度 AS 賦課年度
+        , 介護賦課データ.rank_num AS rank_number 
+        FROM
+        ( 
+        SELECT
+        介護1.被保険者番号 AS 被保険者番号
+        , 介護1.賦課年度 AS 賦課年度
+        , 介護1.保険料算定段階2 AS 保険料算定段階2
+        , 介護1.保険料算定段階1 AS 保険料算定段階1
+        , 介護1.rank_num AS rank_num 
+        FROM
+        (
+        SELECT
+        Dbt2002."hihokenshaNo" AS 被保険者番号
+        , Dbt2002."fukaNendo" AS 賦課年度
+        , Dbt2002."hokenryoDankai2" AS 保険料算定段階2
+        , Dbt2002."hokenryoDankai1" AS 保険料算定段階1
+        , row_number() over ( 
+        partition by
+        Dbt2002."hihokenshaNo"
+        , Dbt2002."fukaNendo" 
+        order by
+        Dbt2002."tsuchishoNo"
+        , Dbt2002."choteiNendo"
+        , Dbt2002."rirekiNo" DESC
+        ) AS rank_num 
+        FROM
+        rgdb."DbT2002Fuka" AS Dbt2002 
+        WHERE
+        Dbt2002."fukaNendo" <![CDATA[>=]]> ( 
+        SELECT
+        substr(MIN("DbWTkyufujisTempTbl"."serviceTeikyoYM"), 1, 4) 
+        FROM
+        "DbWTkyufujisTempTbl"
+        ) 
+        AND Dbt2002."fukaNendo" <![CDATA[<=]]> ( 
+        SELECT
+        substr( 
+        MAX("DbWTkyufujisTempTbl"."serviceTeikyoYM") , 1 , 4
+        ) 
+        FROM
+        "DbWTkyufujisTempTbl"
+        )
+        ) AS 介護1 
+        WHERE
+        rank_num = 1
+        ) AS 介護賦課データ 
+        INNER JOIN "DbWTkyufujisTempTbl" 
+        ON 介護賦課データ.被保険者番号 = "DbWTkyufujisTempTbl"."hiHokenshaNo" 
+        AND 介護賦課データ.賦課年度 = substr("DbWTkyufujisTempTbl"."serviceTeikyoYM", 1, 4)
+
+    </select>
+       
+    <select resultOrdered="true" id="get給付実績データ取得処理" 
+            resultMap="resultMap_getEntityList" 
+            fetchSize="500">
+        SELECT
+        <include refid="allColumns_DbWTkyufujisTempTbl"/>
+        FROM
+        "DbWTkyufujisTempTbl"
+        ORDER BY
+         LPAD('0', 2-length("serviceBunrui")) || "serviceBunrui"
+        ,"DbWTkyufujisTempTbl"."hiHokenshaNo"
+        , "DbWTkyufujisTempTbl"."serviceTeikyoYM"
+        , "DbWTkyufujisTempTbl"."yoKaigoJotaiKubunCode" 
+    </select>
+    <resultMap id="resultMap_getSyorikekkatempTblEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity" autoMapping="true">
+        <result property="errorkubun" column="errorkubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ki1" column="ki1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="ki2" column="ki2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ki3" column="ki3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ki4" column="ki4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ki5" column="ki5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="errornaiyo" column="errornaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="biko" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="get処理結果確認リスト作成" 
+            resultMap="resultMap_getSyorikekkatempTblEntity" 
+            fetchSize="500">
+        
+        SELECT "errorkubun",
+        "hiHokenshaNo",
+        "ki1",
+        "ki2",
+        "ki3",
+        "ki4",
+        "ki5" ,
+        "errornaiyo",
+        "biko"
+        FROM  "DbWT1504ShoriKekkaKakuninList"
+        ORDER BY   "hiHokenshaNo"
+    </select>
+    <resultMap id="resultMap_getEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShikakutempTblEntity" autoMapping="true">
+        <result property="serviceshurui" column="serviceshurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="pageNO" column="pageNO" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenseiteitoku" column="hokenseiteitoku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotoku" column="shotoku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shukeinaiyou" column="shukeinaiyou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoshien1" column="yoshien1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yoshien2" column="yoshien2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="keikanoyokaigo" column="keikanoyokaigo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokaigo1" column="yokaigo1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokaigo2" column="yokaigo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokaigo3" column="yokaigo3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokaigo4" column="yokaigo4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/> 
+        <result property="yokaigo5" column="yokaigo5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/> 
+        <result property="gokeichi" column="gokeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/> 
+    </resultMap>
+    <select resultOrdered="true" id="get平均利用額統計Entity" 
+            resultMap="resultMap_getEntity" 
+            fetchSize="500">
+        
+        SELECT  "serviceshurui",
+        "pageNO",
+        "hokenseiteitoku",
+        "shotoku",
+        "shukeinaiyou",
+        "yoshien1",
+        "yoshien2",
+        "keikanoyokaigo",
+        "yokaigo1",
+        "yokaigo2",
+        "yokaigo3",
+        "yokaigo4",   
+        "yokaigo5",
+        "gokeichi"
+        FROM "DbWShikakutempTbl" ORDER BY  LPAD('0', 2-length("pageNO")) || "pageNO" , "shotokuCd"
+    </select>
+    <insert  id="insert処理結果リスト一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity" >
+        
+        INSERT 
+        INTO "DbWT1504ShoriKekkaKakuninList" 
+        VALUES ( 
+        #{errorkubun}
+        , #{hiHokenshaNo}
+        , #{ki1}
+        , #{ki2}
+        , #{ki3}
+        , #{ki4}
+        , #{ki5}
+        , #{errornaiyo}
+        , #{biko}
+        ) 
+
+      
+    </insert>
+    
+        
+    <update  id="updateDB出力出力用一時TBL人数" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShukeinaiyouEntity" >
+        
+        UPDATE "DbWShikakutempTbl" 
+        SET
+        "hokenseiteitoku" = #{所得段階}
+        <if test="isyoshien1">
+            , "yoshien1" = "yoshien1" + #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyoshien2">
+            , "yoshien2" = "yoshien2" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="iskeikanoyokaigo">
+            , "keikanoyokaigo" = "keikanoyokaigo" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo1">
+            , "yokaigo1" = "yokaigo1" + #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo2">
+            , "yokaigo2" = "yokaigo2" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo3">
+            , "yokaigo3" = "yokaigo3" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo4">
+            , "yokaigo4" = "yokaigo4" + #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo5">
+            , "yokaigo5" = "yokaigo5" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        WHERE
+        "pageNO" = #{ページNo} 
+        AND "shotoku" = #{所得段階} 
+        AND "shukeinaiyou" = #{集計内容}
+
+ 
+    </update>
+      
+    <update  id="updateDB出力出力用一時TBL費用総額" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShukeinaiyouEntity"  >
+        UPDATE "DbWShikakutempTbl" 
+        SET
+        <if test="isyoshien1">
+            "yoshien1" = "yoshien1" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyoshien2">
+            "yoshien2" = "yoshien2" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="iskeikanoyokaigo">
+            "keikanoyokaigo" = "keikanoyokaigo" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo1">
+            "yokaigo1" = "yokaigo1" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo2">
+            "yokaigo2" = "yokaigo2" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo3">
+            "yokaigo3" = "yokaigo3" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo4">
+            "yokaigo4" = "yokaigo4" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo5">
+            "yokaigo5" = "yokaigo5" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        WHERE
+        "pageNO" = #{ページNo} 
+        AND "shotoku" = #{所得段階} 
+        AND "shukeinaiyou" = #{集計内容}
+
+    </update>
+    <sql id="allColumns_DbT3017KyufujissekiKihon">
+        "DbT3017KyufujissekiKihon"."insertDantaiCd" as "insertDantaiCd",
+        "DbT3017KyufujissekiKihon"."insertTimestamp" as "insertTimestamp",
+        "DbT3017KyufujissekiKihon"."insertReamsLoginId" as "insertReamsLoginId",
+        "DbT3017KyufujissekiKihon"."insertContextId" as "insertContextId",
+        "DbT3017KyufujissekiKihon"."isDeleted" as "isDeleted",
+        "DbT3017KyufujissekiKihon"."updateCount" as "updateCount",
+        "DbT3017KyufujissekiKihon"."lastUpdateTimestamp" as "lastUpdateTimestamp",
+        "DbT3017KyufujissekiKihon"."lastUpdateReamsLoginId" as "lastUpdateReamsLoginId",
+        "DbT3017KyufujissekiKihon"."kokanShikibetsuNo" as "kokanShikibetsuNo",
+        "DbT3017KyufujissekiKihon"."inputShikibetsuNo" as "inputShikibetsuNo",
+        "DbT3017KyufujissekiKihon"."recodeShubetsuCode" as "recodeShubetsuCode",
+        "DbT3017KyufujissekiKihon"."shokisaiHokenshaNo" as "shokisaiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."hiHokenshaNo" as "hiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" as "serviceTeikyoYM",
+        "DbT3017KyufujissekiKihon"."jigyoshoNo" as "jigyoshoNo",
+        "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" as "kyufuSakuseiKubunCode",
+        "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" as "kyufuJissekiKubunCode",
+        "DbT3017KyufujissekiKihon"."toshiNo" as "toshiNo",
+        "DbT3017KyufujissekiKihon"."kohi1FutanshaNo" as "kohi1FutanshaNo",
+        "DbT3017KyufujissekiKihon"."kohi1JukyushaNo" as "kohi1JukyushaNo",
+        "DbT3017KyufujissekiKihon"."kohi2FutanshaNo" as "kohi2FutanshaNo",
+        "DbT3017KyufujissekiKihon"."kohi2JukyushaNo" as "kohi2JukyushaNo",
+        "DbT3017KyufujissekiKihon"."kohi3FutanshaNo" as "kohi3FutanshaNo",
+        "DbT3017KyufujissekiKihon"."kohi3JukyushaNo" as "kohi3JukyushaNo",
+        "DbT3017KyufujissekiKihon"."umareYMD" as "umareYMD",
+        "DbT3017KyufujissekiKihon"."seibetsuCode" as "seibetsuCode",
+        "DbT3017KyufujissekiKihon"."yoKaigoJotaiKubunCode" as "yoKaigoJotaiKubunCode",
+        "DbT3017KyufujissekiKihon"."kyuSochiNyushoshaTokureiCode" as "kyuSochiNyushoshaTokureiCode",
+        "DbT3017KyufujissekiKihon"."ninteiYukoKaishiYMD" as "ninteiYukoKaishiYMD",
+        "DbT3017KyufujissekiKihon"."ninteiYukoShuryoYMD" as "ninteiYukoShuryoYMD",
+        "DbT3017KyufujissekiKihon"."rojinHokenShichosonNo" as "rojinHokenShichosonNo",
+        "DbT3017KyufujissekiKihon"."rojinhokenJukyushaNo" as "rojinhokenJukyushaNo",
+        "DbT3017KyufujissekiKihon"."kokiHokenshaNo" as "kokiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."kokiHiHokenshaNo" as "kokiHiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."kokuhoHokenshaNo" as "kokuhoHokenshaNo",
+        "DbT3017KyufujissekiKihon"."kokuhoHiHokenshashoNo" as "kokuhoHiHokenshashoNo",
+        "DbT3017KyufujissekiKihon"."kokuhoKojinNo" as "kokuhoKojinNo",
+        "DbT3017KyufujissekiKihon"."kyotakuServiceSakuseiKubunCode" as "kyotakuServiceSakuseiKubunCode",
+        "DbT3017KyufujissekiKihon"."kyotakuKaigoShienJigyoshoNo" as "kyotakuKaigoShienJigyoshoNo",
+        "DbT3017KyufujissekiKihon"."kaishiYMD" as "kaishiYMD",
+        "DbT3017KyufujissekiKihon"."chushiYMD" as "chushiYMD",
+        "DbT3017KyufujissekiKihon"."chushiRiyuNyushomaeJyokyoCode" as "chushiRiyuNyushomaeJyokyoCode",
+        "DbT3017KyufujissekiKihon"."nyushoYMD" as "nyushoYMD",
+        "DbT3017KyufujissekiKihon"."taishoYMD" as "taishoYMD",
+        "DbT3017KyufujissekiKihon"."nyushoJitsunissu" as "nyushoJitsunissu",
+        "DbT3017KyufujissekiKihon"."gaihakuNissu" as "gaihakuNissu",
+        "DbT3017KyufujissekiKihon"."taishogoJotaiCode" as "taishogoJotaiCode",
+        "DbT3017KyufujissekiKihon"."hokenKyufuritsu" as "hokenKyufuritsu",
+        "DbT3017KyufujissekiKihon"."kohi1Kyufuritsu" as "kohi1Kyufuritsu",
+        "DbT3017KyufujissekiKihon"."kohi2Kyufuritsu" as "kohi2Kyufuritsu",
+        "DbT3017KyufujissekiKihon"."kohi3Kyufuritsu" as "kohi3Kyufuritsu",
+        "DbT3017KyufujissekiKihon"."maeHokenServiceTanisu" as "maeHokenServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeHokenSeikyugaku" as "maeHokenSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeHokenRiyoshaFutangaku" as "maeHokenRiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeHokenKinkyuShisetsuRyoyoSeikyugaku" as "maeHokenKinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeHokenTokuteiShinryohiSeikyugaku" as "maeHokenTokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1ServiceTanisu" as "maeKohi1ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeKohi1Seikyugaku" as "maeKohi1Seikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1RiyoshaFutangaku" as "maeKohi1RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1KinkyuShisetsuRyoyoSeikyugaku" as "maeKohi1KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1TokuteiShinryohiSeikyugaku" as "maeKohi1TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2ServiceTanisu" as "maeKohi2ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeKohi2Seikyugaku" as "maeKohi2Seikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2RiyoshaFutangaku" as "maeKohi2RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2KinkyuShisetsuRyoyoSeikyugaku" as "maeKohi2KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2TokuteiShinryohiSeikyugaku" as "maeKohi2TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3ServiceTanisu" as "maeKohi3ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeKohi3Seikyugaku" as "maeKohi3Seikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3RiyoshaFutangaku" as "maeKohi3RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3KinkyuShisetsuRyoyoSeikyugaku" as "maeKohi3KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3TokuteiShinryohiSeikyugaku" as "maeKohi3TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenServiceTanisu" as "atoHokenServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoHokenSeikyugaku" as "atoHokenSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenRiyoshaFutangaku" as "atoHokenRiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoHokenKinkyuShisetsuRyoyoSeikyugaku" as "atoHokenKinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenTokuteiShinryohiSeikyugaku" as "atoHokenTokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1ServiceTanisu" as "atoKohi1ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoKohi1Seikyugaku" as "atoKohi1Seikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1RiyoshaFutangaku" as "atoKohi1RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1KinkyuShisetsuRyoyoSeikyugaku" as "atoKohi1KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1TokuteiShinryohiSeikyugaku" as "atoKohi1TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2ServiceTanisu" as "atoKohi2ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoKohi2Seikyugaku" as "atoKohi2Seikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2RiyoshaFutangaku" as "atoKohi2RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2KinkyuShisetsuRyoyoSeikyugaku" as "atoKohi2KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2TokuteiShinryohiSeikyugaku" as "atoKohi2TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3ServiceTanisu" as "atoKohi3ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoKohi3Seikyugaku" as "atoKohi3Seikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3RiyoshaFutangaku" as "atoKohi3RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3KinkyuShisetsuRyoyoSeikyugaku" as "atoKohi3KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3TokuteiShinryohiSeikyugaku" as "atoKohi3TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."keikaiKubunCode" as "keikaiKubunCode",
+        "DbT3017KyufujissekiKihon"."shinsaYM" as "shinsaYM",
+        "DbT3017KyufujissekiKihon"."seiriNo" as "seiriNo",
+        "DbT3017KyufujissekiKihon"."sofuYM" as "sofuYM",
+        "DbT3017KyufujissekiKihon"."torikomiYM" as "torikomiYM",
+        "DbT3017KyufujissekiKihon"."dokujiSakuseiKubun" as "dokujiSakuseiKubun",
+        "DbT3017KyufujissekiKihon"."hokenshaHoyuKyufujissekiJohoSakujoFlag" as "hokenshaHoyuKyufujissekiJohoSakujoFlag"
+    </sql>
+    <sql id="allColumns_DbWTkyufujisTempTbl">
+        "DbWTkyufujisTempTbl"."hiHokenshaNo" AS 被保険者番号,
+        "DbWTkyufujisTempTbl"."serviceTeikyoYM" AS サービス提供年月,
+        "DbWTkyufujisTempTbl"."yoKaigoJotaiKubunCode" AS 要介護状態区分コード,
+        "DbWTkyufujisTempTbl"."umareYMD" AS 生年月日,
+        "DbWTkyufujisTempTbl"."serviceSyuruiCode" AS サービス種類コード ,
+        "DbWTkyufujisTempTbl"."serviceKomokuCode" as "サービス項目コード",
+        "DbWTkyufujisTempTbl"."hokenSeikyuKingaku" AS 保険請求額,
+        "DbWTkyufujisTempTbl"."hokenRiyoshaFutangaku" AS 保険利用者負担額,
+        "DbWTkyufujisTempTbl"."hokenTanisu" AS 保険単位数,
+        "DbWTkyufujisTempTbl"."hokenTanisuTani" AS 保険単位単価,
+        "DbWTkyufujisTempTbl"."hokenDekidakaTanisu" AS 保険出来高点数,
+        "DbWTkyufujisTempTbl"."hiyosogaku" AS 費用額,
+        "DbWTkyufujisTempTbl"."shotoku" AS 所得段階,
+        "DbWTkyufujisTempTbl"."serviceBunrui" AS サービス分類 
+        
+    </sql>
+</mapper>

@@ -480,4 +480,40 @@
         DbT7021."shichosonCode",
         DbT7021."shukeiNo"
     </select>
+    
+    <select id="get合併市町村の取得"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+    SELECT		
+	*
+    FROM		
+	rgdb."DbT7056GappeiShichoson" AS dbT7056
+    WHERE
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            dbT7056."kyuShichosonCode" = #{item}
+        </foreach>
+    </select>
+    
+    <select id="get構成市町村マスタの取得"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+    SELECT	
+	*
+    FROM	
+        rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+    WHERE
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            dbT7051."shichosonCode" = #{item}
+        </foreach>	
+    </select>
 </mapper>

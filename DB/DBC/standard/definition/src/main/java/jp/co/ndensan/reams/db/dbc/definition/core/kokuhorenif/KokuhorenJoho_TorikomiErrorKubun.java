@@ -31,6 +31,14 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
      */
     名称取得エラー("05", "名称取得エラー"),
     /**
+     * コード:06 名称:データ不正_通知書データのみ 略称:定義なし
+     */
+    データ不正_通知書データのみ("06", "データ不正_通知書データのみ"),
+    /**
+     * コード:07 名称:データ不正_一覧データのみ 略称:定義なし
+     */
+    データ不正_一覧データのみ("07", "データ不正_一覧データのみ"),
+    /**
      * コード:10 名称:新旧被保険者番号変換エラー 略称:定義なし
      */
     新旧被保険者番号変換エラー("10", "新旧被保険者番号変換エラー"),
@@ -47,6 +55,10 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
      */
     世帯集約番号取得エラー("40", "世帯集約番号取得エラー"),
     /**
+     * コード:41 名称:証記載保険者番号取得エラー 略称:定義なし
+     */
+    証記載保険者番号取得エラー("41", "証記載保険者番号取得エラー"),
+    /**
      * コード:60 名称:再処理不可 略称:定義なし
      */
     再処理不可("60", "再処理不可"),
@@ -58,6 +70,14 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
      * コード:62 名称:関連データなし 略称:定義なし
      */
     関連データなし("62", "関連データなし"),
+    /**
+     * コード:63 名称:給付実績情報内容不一致 略称:定義なし
+     */
+    給付実績情報内容不一致("63", "給付実績情報内容不一致"),
+    /**
+     * コード:64 名称:更新対象データなし 略称:定義なし
+     */
+    更新対象データなし("64", "更新対象データなし"),
     /**
      * コード:99 名称:取込対象データなし 略称:定義なし
      */
@@ -106,13 +126,19 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
         } else if ((KokuhorenJoho_TorikomiErrorKubun.再処理不可.getコード().contains(code))
                 || (KokuhorenJoho_TorikomiErrorKubun.再処理データなし.getコード().contains(code))
                 || (KokuhorenJoho_TorikomiErrorKubun.関連データなし.getコード().contains(code))
-                || (KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード().contains(code))) {
+                || (KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード().contains(code))
+                || (KokuhorenJoho_TorikomiErrorKubun.給付実績情報内容不一致.getコード().contains(code))
+                || (KokuhorenJoho_TorikomiErrorKubun.更新対象データなし.getコード().contains(code))) {
             return new RString("DB登録");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.証記載保険者番号取得エラー.getコード().contains(code)) {
+            return new RString("証記載保険者番号取得");
         } else if (KokuhorenJoho_TorikomiErrorKubun.キー項目不一致.getコード().contains(code)
                 || KokuhorenJoho_TorikomiErrorKubun.レコード構成不正.getコード().contains(code)
                 || KokuhorenJoho_TorikomiErrorKubun.必須レコードなし.getコード().contains(code)
                 || KokuhorenJoho_TorikomiErrorKubun.複数レコード不可.getコード().contains(code)
-                || KokuhorenJoho_TorikomiErrorKubun.名称取得エラー.getコード().contains(code)) {
+                || KokuhorenJoho_TorikomiErrorKubun.名称取得エラー.getコード().contains(code)
+                || KokuhorenJoho_TorikomiErrorKubun.データ不正_通知書データのみ.getコード().contains(code)
+                || KokuhorenJoho_TorikomiErrorKubun.データ不正_一覧データのみ.getコード().contains(code)) {
             return new RString("CSVファイル取込");
         }
         return null;
@@ -127,11 +153,12 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
     public static RString getエラーメッセージ(RString code) {
         if (KokuhorenJoho_TorikomiErrorKubun.新旧被保険者番号変換エラー.getコード().contains(code)) {
             return new RString("新被保険者番号に変換できません。");
-        } else if ((KokuhorenJoho_TorikomiErrorKubun.被保険者情報取得エラー.getコード().contains(code))
-                || (KokuhorenJoho_TorikomiErrorKubun.宛名取得エラー.getコード().contains(code))) {
+        } else if ((KokuhorenJoho_TorikomiErrorKubun.被保険者情報取得エラー.getコード().contains(code))) {
             return new RString("被保険者台帳が存在しません。");
-        } else if (KokuhorenJoho_TorikomiErrorKubun.世帯集約番号取得エラー.getコード().contains(code)) {
+        } else if (KokuhorenJoho_TorikomiErrorKubun.宛名取得エラー.getコード().contains(code)) {
             return new RString("宛名が存在しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.世帯集約番号取得エラー.getコード().contains(code)) {
+            return new RString("世帯集約番号の取得ができません。");
         } else if (KokuhorenJoho_TorikomiErrorKubun.再処理不可.getコード().contains(code)) {
             return new RString("関連データが登録済のため再処理できません。");
         } else if (KokuhorenJoho_TorikomiErrorKubun.再処理データなし.getコード().contains(code)) {
@@ -150,6 +177,16 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
             return new RString("レコード構成が不正です。（複数レコード不可）");
         } else if (KokuhorenJoho_TorikomiErrorKubun.名称取得エラー.getコード().contains(code)) {
             return new RString("名称が取得できません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.データ不正_通知書データのみ.getコード().contains(code)) {
+            return new RString("データが不正です。通知書データしかありません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.データ不正_一覧データのみ.getコード().contains(code)) {
+            return new RString("データが不正です。一覧データしかありません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.証記載保険者番号取得エラー.getコード().contains(code)) {
+            return new RString("証記載保険者番号の取得ができません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.給付実績情報内容不一致.getコード().contains(code)) {
+            return new RString("返却元の保険者保有給付実績情報と内容が一致しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.更新対象データなし.getコード().contains(code)) {
+            return new RString("更新対象のデータが存在しません。");
         }
         return null;
     }

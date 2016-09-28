@@ -39,6 +39,16 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5030001",
+     "layoutTitle": "完了処理・通知書発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

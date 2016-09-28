@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.idojyu_onChange = function () {
+                return "idojyu_onChange";
+            };
             return Events;
         })();
         ShinseiSonotaJohoInput.Events = Events;

@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShikyuGendogakuKyotakuServiceDetailPanel のクラスファイル 
- * 
- * @author 自動生成
+ * ShikyuGendogakuKyotakuServiceDetailPanel のクラスファイル
+ *
+ * @reamsid_L DBC-3410-010 jianglaisheng
  */
 public class ShikyuGendogakuKyotakuServiceDetailPanelDiv extends Panel {
     /*
@@ -21,6 +19,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShikyuGendogakuKyotakuServiceTop")
     private ShikyuGendogakuKyotakuServiceTopDiv ShikyuGendogakuKyotakuServiceTop;
     @JsonProperty("KubunShikyuGendogaku")
@@ -45,7 +44,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanelDiv extends Panel {
 
     @JsonProperty("ShikyuGendogakuKyotakuServiceTop")
     public void setShikyuGendogakuKyotakuServiceTop(ShikyuGendogakuKyotakuServiceTopDiv ShikyuGendogakuKyotakuServiceTop) {
-        this.ShikyuGendogakuKyotakuServiceTop=ShikyuGendogakuKyotakuServiceTop;
+        this.ShikyuGendogakuKyotakuServiceTop = ShikyuGendogakuKyotakuServiceTop;
     }
 
     @JsonProperty("KubunShikyuGendogaku")
@@ -55,7 +54,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanelDiv extends Panel {
 
     @JsonProperty("KubunShikyuGendogaku")
     public void setKubunShikyuGendogaku(KubunShikyuGendogakuDiv KubunShikyuGendogaku) {
-        this.KubunShikyuGendogaku=KubunShikyuGendogaku;
+        this.KubunShikyuGendogaku = KubunShikyuGendogaku;
     }
 
     @JsonProperty("ShuruiShikyuGendogaku")
@@ -65,7 +64,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanelDiv extends Panel {
 
     @JsonProperty("ShuruiShikyuGendogaku")
     public void setShuruiShikyuGendogaku(ShuruiShikyuGendogakuDiv ShuruiShikyuGendogaku) {
-        this.ShuruiShikyuGendogaku=ShuruiShikyuGendogaku;
+        this.ShuruiShikyuGendogaku = ShuruiShikyuGendogaku;
     }
 
     @JsonProperty("btnSettle")
@@ -75,7 +74,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanelDiv extends Panel {
 
     @JsonProperty("btnSettle")
     public void setBtnSettle(Button btnSettle) {
-        this.btnSettle=btnSettle;
+        this.btnSettle = btnSettle;
     }
 
     @JsonProperty("btnCancel")
@@ -85,7 +84,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanelDiv extends Panel {
 
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
-        this.btnCancel=btnCancel;
+        this.btnCancel = btnCancel;
     }
 
 }

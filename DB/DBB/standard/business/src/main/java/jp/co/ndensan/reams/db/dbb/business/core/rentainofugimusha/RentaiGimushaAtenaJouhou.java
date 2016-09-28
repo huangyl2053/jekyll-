@@ -34,4 +34,5 @@ public class RentaiGimushaAtenaJouhou {
     private RString 住民種別;
     private RString 続柄;
     private AtenaJusho 住所;
+    private int 履歴番号;
 }

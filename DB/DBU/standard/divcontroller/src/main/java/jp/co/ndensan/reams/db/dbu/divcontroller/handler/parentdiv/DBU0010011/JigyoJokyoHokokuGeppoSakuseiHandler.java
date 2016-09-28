@@ -7,23 +7,34 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
+import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010010.DBU010010_JigyoHokokuGeppo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiDiv;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 事業状況報告（月報）作成の処理です
@@ -32,9 +43,18 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class JigyoJokyoHokokuGeppoSakuseiHandler {
 
+    private static final RString 集計のみ_CODE = new RString("1");
+    private static final RString 集計後に印刷_CODE = new RString("2");
+    private static final RString 過去の集計結果を印刷_CODE = new RString("3");
+    private static final RString 集計のみ = new RString("shukei");
+    private static final RString 集計後に印刷 = new RString("shukeiOutput");
+    private static final RString 過去の集計結果を印刷 = new RString("kakoShukeiOutput");
     private static final RString 合併あり = new RString("1");
     private static final RString 審査年月 = new RString("1");
     private static final RString 決定年月 = new RString("2");
+    private static final RString 現物分_選択 = new RString("1");
+    private static final RString 償還分_審査_選択 = new RString("2");
+    private static final RString 償還分_決定_選択 = new RString("3");
     private static final int 月 = 3;
     private static final int 月別 = 4;
     private static final RString 点 = new RString(".");
@@ -50,6 +70,15 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private static final RString 決定年月で集計 = new RString("keiteiYM4");
     private static final RString 給付審査年月で集計 = new RString("shinsaYM5");
     private static final RString 給付決定年月で集計 = new RString("keiteiYM5");
+    private static final RString DBU010020 = new RString("DBU010020");
+    private static final RString DBU010030 = new RString("DBU010030");
+    private static final RString DBU010040 = new RString("DBU010040");
+    private static final RString DBU010050 = new RString("DBU010050");
+    private static final RString DBU010060 = new RString("DBU010060");
+    private static final RString DBU010070 = new RString("DBU010070");
+    private static final RString DBU010080 = new RString("DBU010080");
+    private static final RString DBU010090 = new RString("DBU010090");
+    private static final RString DBU010100 = new RString("DBU010100");
     private static final RDate 基準日 = RDate.getNowDate();
     private static final RString 年度内連番 = new RString("0001");
     private final JigyoJokyoHokokuGeppoSakuseiDiv div;
@@ -76,6 +105,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         set過去報告年月(shoriDateKanriList);
         set審査年月決定年月();
         set日付時刻();
+        setすべて選択チェックボックス();
     }
 
     private void set合併市町村用保険者選択ラジオボタン() {
@@ -121,6 +151,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             count = count + 1;
         }
         div.getDdlKakoHokokuYM().setDataSource(dataSourceList);
+        div.getDdlKakoHokokuYM().setDisabled(true);
     }
 
     /**
@@ -210,6 +241,18 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         }
     }
 
+    private void setすべて選択チェックボックス() {
+        List<RString> allKey = new ArrayList<>();
+        div.getCblOutputTaisho1().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho2().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho3().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho4().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho5().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho6().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho7().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaishoAll().setSelectedItemsByKey(allKey);
+    }
+
     /**
      * 日付時刻、空白を設定する
      */
@@ -228,6 +271,51 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         div.getTxtSakuseiTime5().clearValue();
         div.getTxtSakuseiTime6().clearValue();
         div.getTxtSakuseiTime7().clearValue();
+    }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報().get市町村コード();
+    }
+
+    /**
+     * 構成市町村コードListを取得します。
+     *
+     * @return 構成市町村コードList
+     */
+    public List<LasdecCode> get構成市町村コードList() {
+        List<LasdecCode> 構成市町村コードList = new ArrayList<>();
+        KoseiShichosonJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報();
+        RString 市町村識別ID = 市町村情報.get市町村識別ID();
+        if (new RString("00").equals(市町村識別ID)) {
+            List<KoikiZenShichosonJoho> 現市町村情報List = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
+            for (KoikiZenShichosonJoho 現市町村情報 : 現市町村情報List) {
+                構成市町村コードList.add(現市町村情報.get市町村コード());
+            }
+        } else {
+            構成市町村コードList.add(市町村情報.get市町村コード());
+        }
+        return 構成市町村コードList;
+    }
+
+    /**
+     * 旧市町村コードListを取得します。
+     *
+     * @return 旧市町村コードList
+     */
+    public List<LasdecCode> get旧市町村コードList() {
+        List<LasdecCode> 旧市町村コードList = new ArrayList<>();
+        List<GappeiCityJyoho> 合併市町村情List = GappeiCityJohoBFinder.createInstance().
+                getSennyoukouikigappeijohokensaku(HyojiUmu.表示する.getコード(),
+                        ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().value()).records();
+        for (GappeiCityJyoho 合併市町村情 : 合併市町村情List) {
+            旧市町村コードList.add(合併市町村情.get旧市町村コード());
+        }
+        return 旧市町村コードList;
     }
 
     private boolean is合併あり() {
@@ -883,5 +971,339 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             div.getTxtSakuseiTime5().setReadOnly(true);
             div.getRadlblShukeiType5().setReadOnly(true);
         }
+    }
+
+    /**
+     * 実行するボタンを押します。
+     *
+     * @return DBU010010_JigyoHokokuGeppo_MainParameter
+     */
+    public DBU010010_JigyoHokokuGeppo_MainParameter onClick_Jikou() {
+        DBU010010_JigyoHokokuGeppo_MainParameter param = new DBU010010_JigyoHokokuGeppo_MainParameter();
+        param.setPrintControlKbn(getプリントコントロール区分());
+        param.setShuukeiNengetu(get集計年月());
+        if (div.getTxtHokokuYM().getValue() != null) {
+            param.setHoukokuNengetu(div.getTxtHokokuYM().getValue().toDateString());
+            param.setHokokuNendo(div.getTxtHokokuYM().getValue().getYear().toDateString());
+        }
+        param.setNendo(get年度());
+        param.setSakuseiNitizi(get作成日時());
+        param.setSyoriNitizi(RDate.getNowDateTime());
+        param.setOldShichosonKubun(GappeiCityJohoBFinder.createInstance().getGappeijohokubun());
+        param.setKouseiShichosonKubun(new RString("0"));
+        if (is広域()) {
+            param.setKouseiShichosonKubun(new RString("1"));
+        }
+        param.setShichosonCode(get市町村コード());
+        param.setKouseiShichosonCode(get構成市町村コードList());
+        param.setOldShichosonCode(get旧市町村コードList());
+        ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getShichosonKubun(), ShichosonSelectorModel.class);
+        if (model != null) {
+            if (model.getList() != null && !model.getList().isEmpty()) {
+                param.setShuukeibunShichosonKubun(
+                        get過去集計分旧市町村区分(model.getList().get(0).get市町村コード().value(),
+                                param.getOldShichosonCode()));
+            }
+            param.setShuukeibunShichosonCode(get過去集計分市町村コードリスト(model.getList()));
+        }
+        param.setKyuufuShuukeiKubunn(get給付集計区分());
+        param.setHokokuKubun(合併あり);
+        param.setKaishiYm(div.getTxtShukeiYM4Bak());
+        param.setShusyoYm(div.getTxtShukeiYM5Bak());
+        param.setKetteiYm(get決定年月());
+        if (div.getTxtShukeiYM7().getValue() != null) {
+            param.setShukeiNendo(div.getTxtShukeiYM7().getValue().seireki().toDateString());
+        }
+        return getバッチID(param);
+    }
+
+    private RString getプリントコントロール区分() {
+        RString プリントコントロール区分 = RString.EMPTY;
+        if (集計のみ.equals(div.getRadJikkoTaniShukeiOnly().getSelectedKey())) {
+            プリントコントロール区分 = 集計のみ_CODE;
+        } else if (集計後に印刷.equals(div.getRadJikkoTaniShukeiAfterPrint().getSelectedKey())) {
+            プリントコントロール区分 = 集計後に印刷_CODE;
+        } else if (過去の集計結果を印刷.equals(div.getRadJikkoTaniKakoShukeiKekka().getSelectedKey())) {
+            プリントコントロール区分 = 過去の集計結果を印刷_CODE;
+        }
+        return プリントコントロール区分;
+    }
+
+    private List<RString> get集計年月() {
+        List<RString> shuukeiNengetu = new ArrayList<>();
+        if (div.getTxtShukeiYM1().getValue() != null) {
+            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM2().getValue() != null) {
+            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM4().getValue() != null) {
+            shuukeiNengetu.add(div.getTxtShukeiYM4().getValue().seireki().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM3().getValue() != null) {
+            shuukeiNengetu.add(div.getTxtShukeiYM3().getValue().seireki().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM5().getValue() != null) {
+            shuukeiNengetu.add(div.getTxtShukeiYM5().getValue().seireki().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM6().getValue() != null) {
+            shuukeiNengetu.add(div.getTxtShukeiYM6().getValue().seireki().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM7().getValue() != null) {
+            shuukeiNengetu.add(div.getTxtShukeiYM7().getValue().seireki().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        return shuukeiNengetu;
+    }
+
+    private List<RString> get年度() {
+        List<RString> nendo = new ArrayList<>();
+        if (!div.getTxtShukeiYM1().getValue().isEmpty()) {
+            nendo.add(div.getTxtShukeiYM1().getValue().getYear().toDateString());
+        } else {
+            nendo.add(RString.EMPTY);
+        }
+        if (!div.getTxtShukeiYM4().getValue().isEmpty()) {
+            nendo.add(div.getTxtShukeiYM4().getValue().getYear().toDateString());
+        } else {
+            nendo.add(RString.EMPTY);
+        }
+        if (!div.getTxtShukeiYM6().getValue().isEmpty()) {
+            nendo.add(div.getTxtShukeiYM6().getValue().seireki().toDateString());
+        } else {
+            nendo.add(RString.EMPTY);
+        }
+        if (!div.getTxtShukeiYM7().getValue().isEmpty()) {
+            nendo.add(div.getTxtShukeiYM7().getValue().getYear().toDateString());
+        } else {
+            nendo.add(RString.EMPTY);
+        }
+        return nendo;
+    }
+
+    private List<RDateTime> get作成日時() {
+        List<RDateTime> 作成日時 = new ArrayList<>();
+        if (div.getTxtSakuseiYMD1().getValue() != null) {
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD1().getValue(), div.getTxtSakuseiTime1().getValue()));
+        } else {
+            作成日時.add(RDateTime.MIN);
+        }
+        if (div.getTxtSakuseiYMD2().getValue() != null) {
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD2().getValue(), div.getTxtSakuseiTime2().getValue()));
+        } else {
+            作成日時.add(RDateTime.MIN);
+        }
+        if (div.getTxtSakuseiYMD4().getValue() != null) {
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD4().getValue(), div.getTxtSakuseiTime4().getValue()));
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD4().getValue(), div.getTxtSakuseiTime4().getValue()));
+        } else {
+            作成日時.add(RDateTime.MIN);
+            作成日時.add(RDateTime.MIN);
+        }
+        if (div.getTxtSakuseiYMD3().getValue() != null) {
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD3().getValue(), div.getTxtSakuseiTime3().getValue()));
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD3().getValue(), div.getTxtSakuseiTime3().getValue()));
+        } else {
+            作成日時.add(RDateTime.MIN);
+            作成日時.add(RDateTime.MIN);
+        }
+        if (div.getTxtSakuseiYMD5().getValue() != null) {
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD5().getValue(), div.getTxtSakuseiTime5().getValue()));
+        } else {
+            作成日時.add(RDateTime.MIN);
+        }
+        if (div.getTxtSakuseiYMD6().getValue() != null) {
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD6().getValue(), div.getTxtSakuseiTime6().getValue()));
+        } else {
+            作成日時.add(RDateTime.MIN);
+        }
+        if (div.getTxtSakuseiYMD7().getValue() != null) {
+            作成日時.add(set作成日時(div.getTxtSakuseiYMD7().getValue(), div.getTxtSakuseiTime7().getValue()));
+        } else {
+            作成日時.add(RDateTime.MIN);
+        }
+        return 作成日時;
+    }
+
+    private RDateTime set作成日時(RDate 作成日, RTime 作成時) {
+        return RDateTime.of(作成日.getYearValue(), 作成日.getMonthValue(),
+                作成日.getDayValue(), 作成時.getHour(), 作成時.getSecond());
+    }
+
+    private RString get過去集計分旧市町村区分(RString 市町村コード, List<LasdecCode> 旧市町村コードリスト) {
+        for (LasdecCode 旧市町村コード : 旧市町村コードリスト) {
+            if (市町村コード.equals(旧市町村コード.value())) {
+                return new RString("1");
+            }
+        }
+        return new RString("2");
+    }
+
+    private List<RString> get過去集計分市町村コードリスト(List<ShichosonSelectorResult> 市町村選択検索結果) {
+        List<RString> 過去集計分市町村コードリスト = new ArrayList<>();
+        for (ShichosonSelectorResult 市町村選択結果 : 市町村選択検索結果) {
+            過去集計分市町村コードリスト.add(市町村選択結果.get市町村コード().value());
+        }
+        return 過去集計分市町村コードリスト;
+    }
+
+    private DBU010010_JigyoHokokuGeppo_MainParameter getバッチID(DBU010010_JigyoHokokuGeppo_MainParameter param) {
+        List<RString> バッチID = new ArrayList<>();
+        List<RString> 出力区分List = new ArrayList<>();
+        if (div.getCblOutputTaisho1().getSelectedKeys().contains(一般状況1_11)) {
+            バッチID.add(DBU010020);
+            出力区分List.add(合併あり);
+        } else {
+            バッチID.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho2().getSelectedKeys().contains(一般状況12_14_現物分)) {
+            バッチID.add(DBU010030);
+            出力区分List.add(合併あり);
+        } else {
+            バッチID.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho4().getSelectedKeys().contains(一般状況12_14_償還分)) {
+
+            if (div.getRadlblShukeiType4().getSelectedKey().equals(審査年月で集計)) {
+                バッチID.add(DBU010040);
+                出力区分List.add(合併あり);
+            } else {
+                バッチID.add(RString.EMPTY);
+                出力区分List.add(RString.EMPTY);
+            }
+            if (div.getRadlblShukeiType4().getSelectedKey().equals(決定年月で集計)) {
+                バッチID.add(DBU010050);
+                出力区分List.add(合併あり);
+            } else {
+                バッチID.add(RString.EMPTY);
+                出力区分List.add(RString.EMPTY);
+            }
+        } else {
+            バッチID.add(RString.EMPTY);
+            バッチID.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho3().getSelectedKeys().contains(保険給付決定状況_現物分)) {
+            出力区分List.add(合併あり);
+            バッチID.add(DBU010060);
+        } else {
+            バッチID.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho5().getSelectedKeys().contains(保険給付決定状況_償還分)) {
+
+            if (div.getRadlblShukeiType5().getSelectedKey().equals(給付審査年月で集計)) {
+                バッチID.add(DBU010070);
+                出力区分List.add(合併あり);
+            } else {
+                バッチID.add(RString.EMPTY);
+                出力区分List.add(RString.EMPTY);
+            }
+            if (div.getRadlblShukeiType5().getSelectedKey().equals(給付決定年月で集計)) {
+                バッチID.add(DBU010080);
+                出力区分List.add(合併あり);
+            } else {
+                バッチID.add(RString.EMPTY);
+                出力区分List.add(RString.EMPTY);
+            }
+        } else {
+            バッチID.add(RString.EMPTY);
+            バッチID.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額分)) {
+            出力区分List.add(合併あり);
+            バッチID.add(DBU010090);
+        } else {
+            バッチID.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
+            出力区分List.add(合併あり);
+            バッチID.add(DBU010100);
+        } else {
+            バッチID.add(RString.EMPTY);
+            出力区分List.add(RString.EMPTY);
+        }
+        param.setBatchID(バッチID);
+        param.setSyutyoryokuKubun(出力区分List);
+        return param;
+    }
+
+    private List<RString> get給付集計区分() {
+        List<RString> 給付集計区分 = new ArrayList<>();
+        if (div.getCblOutputTaisho2().getSelectedKeys().contains(一般状況12_14_現物分)) {
+            給付集計区分.add(現物分_選択);
+        } else {
+            給付集計区分.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho4().getSelectedKeys().contains(一般状況12_14_償還分)) {
+            if (div.getRadlblShukeiType4().getSelectedKey().equals(審査年月で集計)) {
+                給付集計区分.add(償還分_審査_選択);
+            } else {
+                給付集計区分.add(RString.EMPTY);
+            }
+            if (div.getRadlblShukeiType4().getSelectedKey().equals(決定年月で集計)) {
+                給付集計区分.add(償還分_決定_選択);
+            } else {
+                給付集計区分.add(RString.EMPTY);
+            }
+        } else {
+            給付集計区分.add(RString.EMPTY);
+            給付集計区分.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho3().getSelectedKeys().contains(保険給付決定状況_現物分)) {
+            給付集計区分.add(現物分_選択);
+        } else {
+            給付集計区分.add(RString.EMPTY);
+        }
+        if (div.getCblOutputTaisho5().getSelectedKeys().contains(保険給付決定状況_償還分)) {
+            if (div.getRadlblShukeiType5().getSelectedKey().equals(給付審査年月で集計)) {
+                給付集計区分.add(償還分_審査_選択);
+            } else {
+                給付集計区分.add(RString.EMPTY);
+            }
+            if (div.getRadlblShukeiType5().getSelectedKey().equals(給付決定年月で集計)) {
+                給付集計区分.add(償還分_決定_選択);
+            } else {
+                給付集計区分.add(RString.EMPTY);
+            }
+        } else {
+            給付集計区分.add(RString.EMPTY);
+            給付集計区分.add(RString.EMPTY);
+        }
+        return 給付集計区分;
+    }
+
+    private List<RString> get決定年月() {
+        List<RString> 決定年月 = new ArrayList<>();
+        if (div.getTxtShukeiYM4().getValue() != null) {
+            決定年月.add(div.getTxtShukeiYM4().getValue().seireki().toDateString());
+        } else {
+            決定年月.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM7().getValue() != null) {
+            決定年月.add(div.getTxtShukeiYM7().getValue().seireki().toDateString());
+        } else {
+            決定年月.add(RString.EMPTY);
+        }
+        return 決定年月;
     }
 }

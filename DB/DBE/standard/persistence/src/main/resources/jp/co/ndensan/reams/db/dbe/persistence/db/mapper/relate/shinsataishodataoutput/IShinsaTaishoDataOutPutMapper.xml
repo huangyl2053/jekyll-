@@ -366,4 +366,30 @@
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" 
         WHERE "shinsakaiKaisaiNo" = #{kaisaiBangou} 			
     </select>
+    <resultMap id="resultMap_getSaikaiObjectOutPut" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.SaikaiObjectOutPutEntity" autoMapping="true">
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>         
+        <result property="イメージ共有ファイルID" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>  
+    </resultMap>
+    <select resultOrdered="true" id="get審査対象" resultMap="resultMap_getSaikaiObjectOutPut"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT 
+        T5101."shinseishoKanriNo"
+        ,T5101."shoKisaiHokenshaNo"
+        ,T5101."hihokenshaNo"
+        ,T5115."imageSharedFileId"
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511
+        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS T5502
+        ON T5502."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
+        LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+        ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo"
+        AND T5101."logicalDeletedFlag" = FALSE
+        LEFT JOIN rgdb."DbT5115Image" AS T5115
+        ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+        WHERE 
+        T5511."shinsakaiKaisaiNo"= #{kaisaiBangou}
+    </select>
+    
 </mapper>

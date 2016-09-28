@@ -263,8 +263,8 @@
         ON DbT4001."hihokenshaNo" = 抽出対象."hihokenshaNo"
         AND DbT4001."logicalDeletedFlag" = false
         AND DbT4001."yukoMukoKubun" = '1'
-        AND DbT4001."toshoNinteiYukoKaishiYMD" <![CDATA[<=]]> 抽出対象."shinseishoSakuseiSetaiKijunYMD"
-        AND 抽出対象."shinseishoSakuseiSetaiKijunYMD" <![CDATA[<=]]> DbT4001."toshoNinteiYukoShuryoYMD"
+        AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> 抽出対象."shinseishoSakuseiSetaiKijunYMD"
+        AND 抽出対象."shinseishoSakuseiSetaiKijunYMD" <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
         ) AS 有効履歴
         WHERE
         有効履歴.番号 = 1)AS 受給者台帳
@@ -296,6 +296,7 @@
         ON
         基準収入額適用情報."shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki" />."shikibetsuCode"
+        ${出力順}
     </select>
 
 </mapper>

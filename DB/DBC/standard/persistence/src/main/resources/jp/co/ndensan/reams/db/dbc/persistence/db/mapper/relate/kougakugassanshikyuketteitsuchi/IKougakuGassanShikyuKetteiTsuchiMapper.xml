@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2310-030 chenyadong -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakugassanshikyuketteitsuchi.IKougakuGassanShikyuKetteiTsuchiMapper">
+  
+   <select id="select高額合算" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchi.KougakuGassanShikyuKetteiTsuchiParameter"
+            resultMap="resultMap_KogakuGassanEntity" fetchSize="500">
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3074KogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3074KogakuGassanShikyuFushikyuKettei" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3072KogakuGassanShikyuGakuKeisanKekkaMapper.allColumns_DbT3072KogakuGassanShikyuGakuKeisanKekka" />
+        FROM
+            rgdb."DbT3074KogakuGassanShikyuFushikyuKettei" AS "DbT3074KogakuGassanShikyuFushikyuKettei"
+        INNER JOIN    
+            rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" AS "DbT3072KogakuGassanShikyuGakuKeisanKekka"
+        ON
+            "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo" 
+            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."taishoNendo"
+            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo"
+            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."rirekiNo"
+        WHERE
+            "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo" = #{被保険者番号}
+            AND "DbT3074KogakuGassanShikyuFushikyuKettei"."taishoNendo" = #{対象年度}
+            AND "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo" = #{連絡票整理番号}
+            AND "DbT3074KogakuGassanShikyuFushikyuKettei"."rirekiNo" = #{履歴番号}
+            AND "DbT3074KogakuGassanShikyuFushikyuKettei"."isDeleted" = false
+            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."isDeleted" = false
+   </select>
+   
+   <resultMap id="resultMap_KogakuGassanEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchi.KogakuGassanEntity" autoMapping="true">
+        <id column="DbT3074KogakuGassanShikyuFushikyuKettei_hihokenshaNo"/>
+        <association property="高額合算支給額計算結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3072KogakuGassanShikyuGakuKeisanKekkaMapper.ResultMap_DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity"/>
+        <association property="高額合算支給不支給決定" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3074KogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3074KogakuGassanShikyuFushikyuKetteiEntity"/>    
+    </resultMap>
+    
+</mapper>

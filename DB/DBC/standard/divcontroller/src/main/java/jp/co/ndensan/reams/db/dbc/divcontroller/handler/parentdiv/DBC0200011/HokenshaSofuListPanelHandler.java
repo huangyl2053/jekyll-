@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 
 /**
- * {@link HokenshaSofuListPanel}のHandlerクラスです。
+ * 保険者情報送付データ作成のハンドラクラスです。
  *
  * @reamsid_L DBC-3300-010 wangxingpeng
  */
@@ -58,16 +58,14 @@ public class HokenshaSofuListPanelHandler {
         HihokenshaJohoSoufuDataSakuseyi 保険者情報送付 = HihokenshaJohoSoufuDataSakuseyi.createInstance();
         List<KokuhorenSofuJohoResult> resultList = 保険者情報送付.getKokuhorenSofuJoho(処理年月);
         for (KokuhorenSofuJohoResult 国保連送付情報 : resultList) {
-            KokuhorenSofuJohoInfo kokuhorenSofuJohoInfo = new KokuhorenSofuJohoInfo();
-            if (国保連送付情報 != null) {
+            if (isｺｰﾄﾞ(国保連送付情報.get交換情報識別番号())) {
+                KokuhorenSofuJohoInfo kokuhorenSofuJohoInfo = new KokuhorenSofuJohoInfo();
                 kokuhorenSofuJohoInfo.set交換識別番号(国保連送付情報.get交換情報識別番号());
                 kokuhorenSofuJohoInfo.set国保連送付情報(国保連送付情報);
-                if (ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()) != null) {
-                    kokuhorenSofuJohoInfo.set一覧表示順(ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()).get一覧表示順());
-                }
+                kokuhorenSofuJohoInfo.set一覧表示順(ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()).get一覧表示順());
                 kokuhorenSofuJohoInfo.set処理名(ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()).get略称());
+                kokuhorenSofuJohoInfoList.add(kokuhorenSofuJohoInfo);
             }
-            kokuhorenSofuJohoInfoList.add(kokuhorenSofuJohoInfo);
         }
         List<dgHokenshaSofuList_Row> gHokenshaSofuListDataSource = new ArrayList<>();
         for (KokuhorenSofuJohoInfo model : kokuhorenSofuJohoInfoList) {
@@ -103,7 +101,7 @@ public class HokenshaSofuListPanelHandler {
     }
 
     /**
-     * get再処理区分
+     * get再処理区分のメソッドます。
      *
      * @param div HokenshaSofuListPanelDiv
      * @return RString
@@ -120,7 +118,7 @@ public class HokenshaSofuListPanelHandler {
     }
 
     /**
-     * get処理年月
+     * get処理年月のメソッドます。
      *
      * @return FlexibleYearMonth 処理年月
      */
@@ -156,6 +154,55 @@ public class HokenshaSofuListPanelHandler {
                 return 処理状態区分_横線;
             default:
                 return RString.EMPTY;
+        }
+    }
+
+    /**
+     * isｺｰﾄﾞのメソッドます。
+     *
+     * @param 交換情報識別番号 RString
+     * @return boolean
+     */
+    public boolean isｺｰﾄﾞ(RString 交換情報識別番号) {
+        switch (交換情報識別番号.toString()) {
+            case "531":
+                return true;
+            case "5C1":
+                return true;
+            case "821":
+                return true;
+            case "211":
+                return true;
+            case "341":
+                return true;
+            case "113":
+                return true;
+            case "173":
+                return true;
+            case "174":
+                return true;
+            case "371":
+                return true;
+            case "37K":
+                return true;
+            case "37K1":
+                return true;
+            case "37K2":
+                return true;
+            case "381":
+                return true;
+            case "38Q":
+                return true;
+            case "176":
+                return true;
+            case "179":
+                return true;
+            case "536":
+                return true;
+            case "5Ｈ1":
+                return false;
+            default:
+                return false;
         }
     }
 }

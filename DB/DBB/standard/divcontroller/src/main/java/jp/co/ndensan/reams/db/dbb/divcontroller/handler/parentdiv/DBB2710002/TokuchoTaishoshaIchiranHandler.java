@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.T
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoMiDouteiListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271003.DBB271003_TokuchoTaishoshaIchiranSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.TokuchoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTokubetChoshuMidoteiIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTokubetChoshuTaishoshaIchiran_Row;
@@ -713,9 +713,9 @@ public class TokuchoTaishoshaIchiranHandler {
      *
      * @param 特別徴収開始月 RString
      * @param 捕捉月リスト List<RString>
-     * @return TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter
+     * @return DBB271003_TokuchoTaishoshaIchiranSakuseiParameter
      */
-    public TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter
+    public DBB271003_TokuchoTaishoshaIchiranSakuseiParameter
             getBatchParameter(RString 特別徴収開始月, List<RString> 捕捉月リスト) {
         TokuchoTaishoshaIchiranSakuseiResult result = new TokuchoTaishoshaIchiranSakuseiResult();
         result.set捕捉月リスト(捕捉月リスト == null ? new ArrayList() : 捕捉月リスト);

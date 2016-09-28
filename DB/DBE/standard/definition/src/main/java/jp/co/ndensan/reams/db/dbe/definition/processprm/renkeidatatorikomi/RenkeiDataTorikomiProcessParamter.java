@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.ShiseiDataParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE192001.ShiseiDataParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

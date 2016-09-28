@@ -9,13 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohishinsaketteiseikyu
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 介護給付費等請求額通知書一覧表帳票Builderクラスです
  *
- * @reamsid_L DBC-2480-030 jiangwenkai
- */
-/**
- *
- * 帳票設計_DBC200070_介護予防・日常生活支援総合事業費審査決定請求明細表Sourceクラスです
+ * 帳票設計_DBC200070_介護予防・日常生活支援総合事業費審査決定請求明細表帳票Builderクラスです
  *
  * @reamsid_L DBC-2500-031 jiangwenkai
  */

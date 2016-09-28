@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * KiwarigakuPanel3 のクラスファイル
@@ -101,8 +102,8 @@ public class KiwarigakuPanel3Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getGo2() {
-        return this.celKiwarigaku30304.getGo2();
+    public TextBoxNum getTxtGo2() {
+        return this.celKiwarigaku30304.getTxtGo2();
     }
 
     @JsonIgnore
@@ -668,25 +669,25 @@ class celKiwarigaku30303AtKiwarigakuPanel3 extends TableCell {
 class celKiwarigaku30304AtKiwarigakuPanel3 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("Go2")
-    private Label Go2;
+    @JsonProperty("txtGo2")
+    private TextBoxNum txtGo2;
 
     /*
-     * getGo2
-     * @return Go2
+     * gettxtGo2
+     * @return txtGo2
      */
-    @JsonProperty("Go2")
-    public Label getGo2() {
-        return Go2;
+    @JsonProperty("txtGo2")
+    public TextBoxNum getTxtGo2() {
+        return txtGo2;
     }
 
     /*
-     * setGo2
-     * @param Go2 Go2
+     * settxtGo2
+     * @param txtGo2 txtGo2
      */
-    @JsonProperty("Go2")
-    public void setGo2(Label Go2) {
-        this.Go2 = Go2;
+    @JsonProperty("txtGo2")
+    public void setTxtGo2(TextBoxNum txtGo2) {
+        this.txtGo2 = txtGo2;
     }
 
     // </editor-fold>

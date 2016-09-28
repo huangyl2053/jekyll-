@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3870-010 jinge -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shogaishakojotaishoninteisho.IShogaishaKojoTaishoNinteishoMapper">
+    <select id="get受給者台帳情報" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4040011.ShogaishaKojoTaishoNinteishoParameter"  fetchSize="500" resultOrdered="true">
+        SELECT "ninteiYMD"
+	FROM(
+	   SELECT 
+	   "shikibetsuCode",
+	   "hihokenshaNo",
+	   "ninteiYMD",
+	   ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo" ORDER BY "rirekiNo" DESC, edaban DESC) AS 行番
+	   FROM 
+	    rgdb."DbT4001JukyushaDaicho"
+	    WHERE "logicalDeletedFlag" = false
+	    AND "hihokenshaNo" = #{被保険者番号}
+	) AS tmp受給者台帳
+	WHERE tmp受給者台帳.行番 = 1
+    </select>
+    <select id="get宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4040011.ShogaishaKojoTaishoNinteishoParameter"  fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+           rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+           '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
+        WHERE "ShikibetsuTaisho"."shikibetsuCode" = #{識別コード}
+    </select> 
+    <select id="get宛先情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4040011.ShogaishaKojoTaishoNinteishoParameter"  fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+        FROM
+          rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
+        WHERE "Atesaki"."shikibetsuCode" = #{識別コード}
+    </select>
+</mapper>

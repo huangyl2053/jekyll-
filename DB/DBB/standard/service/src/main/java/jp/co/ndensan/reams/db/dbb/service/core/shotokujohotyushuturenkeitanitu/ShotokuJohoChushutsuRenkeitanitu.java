@@ -5,17 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShichosonJohoShutoku;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu.ShotokuJohoChushutsuGamenParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112001.DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -32,13 +33,13 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 遷移区分_1 = new RString("1");
     private static final RString 不可 = new RString("2");
     private static final RString 可 = new RString("1");
-    private static final RString 共有ファイル名 = new RString("BBKAIGO");
-    private static final RString 共有ファイルID = new RString("C:\\Users\\LDNS\\shared\\sharedFiles");
-    private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
-    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
     private static final RString 当初_単一 = new RString("3");
     private static final RString 異動_単一 = new RString("4");
+    private static final RString 枝番 = new RString("0001");
 
+    /**
+     * コンストラクタです。
+     */
     ShotokuJohoChushutsuRenkeitanitu() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
@@ -55,7 +56,8 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンス
      */
     public static ShotokuJohoChushutsuRenkeitanitu createInstance() {
         return InstanceProvider.create(ShotokuJohoChushutsuRenkeitanitu.class);
@@ -72,28 +74,28 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     public RString getShoriKubun(RString 市町村識別ID, RString 遷移区分, FlexibleYear 年度) {
         RString 処理区分 = RString.EMPTY;
         YMDHMS 基準日時;
-        DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity;
+        List<DbT7022ShoriDateKanriEntity> 処理日付管理異動情報EntityList
+                = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.当初所得引出.get名称(), 枝番, 年度, 枝番);
         if (遷移区分_0.equals(遷移区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度);
-            if (処理日付管理異動情報Entity == null) {
+            if (処理日付管理異動情報EntityList == null || 処理日付管理異動情報EntityList.isEmpty()) {
                 処理区分 = 処理日付管理マスタ無し;
             } else {
-                基準日時 = 処理日付管理異動情報Entity.getKijunTimestamp();
+                基準日時 = 処理日付管理異動情報EntityList.get(0).getKijunTimestamp();
                 処理区分 = 基準日時1(基準日時);
             }
             return 処理区分;
         }
         if (遷移区分_1.equals(遷移区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度);
-            if (処理日付管理異動情報Entity == null) {
+            if (処理日付管理異動情報EntityList == null || 処理日付管理異動情報EntityList.isEmpty()) {
                 処理区分 = 不可;
                 return 処理区分;
             } else {
-                基準日時 = 処理日付管理異動情報Entity.getKijunTimestamp();
+                基準日時 = 処理日付管理異動情報EntityList.get(0).getKijunTimestamp();
                 基準日時2(基準日時);
-                以降の判定処理を行わない判別(処理日付管理異動情報Entity, 年度, 処理区分);
+                以降の判定処理を行わない判別(年度, 処理区分);
             }
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_異動所得情報抽出(年度);
+            DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
+                    = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
             if (処理日付管理異動情報Entity == null) {
                 処理区分 = 不可;
             } else {
@@ -105,27 +107,42 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     }
 
     /**
+     * 当初_単一バッチ用パラメータ作成します。
+     *
+     * @param parameter ShotokuJohoChushutsuGamenParameter
+     * @return DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter
+     */
+    public DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter createShotokuJohoDBB112001Parameter(
+            ShotokuJohoChushutsuGamenParameter parameter) {
+        DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter result = new DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter();
+        result.set処理年度(parameter.get処理年度());
+        result.set市町村情報List(parameter.get市町村情報List());
+        result.set出力順ID(parameter.get出力順ID());
+        result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.setファイル名(parameter.getファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
+        result.set処理区分(当初_単一);
+        return result;
+    }
+
+    /**
      * バッチ用パラメータ作成します。
      *
-     * @param parameter ShotokuJohoTyushutuRenkeiKoikiParameter
-     * @return ShotokuJohoBatchresultParameter createShotokuJohoParameter
+     * @param parameter ShotokuJohoChushutsuGamenParameter
+     * @return DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter
      */
-    public ShutokuJohoChushutsuRenkeiBatchParameter createShotokuJohoParameter(
-            ShutokuJohoChushutsuRenkeiBatchParameter parameter) {
-        ShutokuJohoChushutsuRenkeiBatchParameter result = new ShutokuJohoChushutsuRenkeiBatchParameter();
-        List<ShichosonJohoShutoku> 市町村情報List = new ArrayList<>();
+    public DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter createShotokuJohoDBB112003Parameter(
+            ShotokuJohoChushutsuGamenParameter parameter) {
+        DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter result = new DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter();
         result.set処理年度(parameter.get処理年度());
-        result.set市町村情報List(市町村情報List);
+        result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
-        result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
-        result.set共有ファイル名(共有ファイル名);
-        result.set共有ファイルID(共有ファイルID);
-        RString メニューID = ResponseHolder.getMenuID();
-        if (所得情報抽出_連携当初.equals(メニューID)) {
-            result.set処理区分(当初_単一);
-        } else if (所得情報抽出_連携異動.equals(メニューID)) {
-            result.set処理区分(異動_単一);
-        }
+        result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
+        result.setファイル名(parameter.getファイル名());
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
+        result.set処理区分(異動_単一);
         return result;
     }
 
@@ -149,18 +166,19 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         return 処理区分;
     }
 
-    private RString 以降の判定処理を行わない判別(DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity,
-            FlexibleYear 年度, RString 処理区分) {
+    private RString 以降の判定処理を行わない判別(FlexibleYear 年度, RString 処理区分) {
+        RString 戻り値_処理区分 = RString.EMPTY;
         if (!不可.equals(処理区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_異動所得情報抽出(年度);
+            DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
+                    = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
             if (処理日付管理異動情報Entity == null) {
-                処理区分 = 不可;
+                戻り値_処理区分 = 不可;
             } else {
-                処理区分 = 可;
+                戻り値_処理区分 = 可;
             }
-            return 処理区分;
+            return 戻り値_処理区分;
         } else {
-            return 処理区分;
+            return 戻り値_処理区分;
         }
     }
 }

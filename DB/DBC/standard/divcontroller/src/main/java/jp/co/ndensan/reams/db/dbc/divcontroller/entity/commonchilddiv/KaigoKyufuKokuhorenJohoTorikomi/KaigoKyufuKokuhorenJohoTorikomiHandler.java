@@ -28,6 +28,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
     private static final RString 通常分ファイル名 = new RString("11100000");
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
+    private static final RString STR_1 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -57,7 +58,11 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
         RYearMonth 処理年月 = parmater.get処理年月();
         div.getTxtShoriYmd().setValue(new RDate(処理年月.toString()));
         RString 再処理区分 = parmater.get再処理区分();
-        div.getTxtSaishoriKubun().setValue(SaiShoriKubun.toValue(再処理区分).get名称());
+        if (STR_1.equals(再処理区分)) {
+            div.getTxtSaishoriKubun().setValue(SaiShoriKubun.toValue(再処理区分).get名称());
+        } else {
+            div.getTxtSaishoriKubun().setValue(RString.EMPTY);
+        }
     }
 
     /**

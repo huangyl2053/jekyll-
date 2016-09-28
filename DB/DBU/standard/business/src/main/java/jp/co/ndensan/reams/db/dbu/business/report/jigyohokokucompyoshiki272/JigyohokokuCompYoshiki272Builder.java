@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki272;
 
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -15,17 +15,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 public class JigyohokokuCompYoshiki272Builder implements IJigyohokokuCompYoshiki272Builder {
 
-    private final IJigyohokokuCompYoshiki272Editor headeditor;
     private final IJigyohokokuCompYoshiki272Editor bodyeditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headeditor {@link IJigyohokokuCompYoshiki272Editor}
      * @param bodyeditor {@link IJigyohokokuCompYoshiki272Editor}
      */
-    public JigyohokokuCompYoshiki272Builder(IJigyohokokuCompYoshiki272Editor headeditor, IJigyohokokuCompYoshiki272Editor bodyeditor) {
-        this.headeditor = headeditor;
+    public JigyohokokuCompYoshiki272Builder(IJigyohokokuCompYoshiki272Editor bodyeditor) {
         this.bodyeditor = bodyeditor;
     }
 
@@ -36,7 +33,7 @@ public class JigyohokokuCompYoshiki272Builder implements IJigyohokokuCompYoshiki
      */
     @Override
     public JigyohokokuCompYoshiki272ReportSource build() {
-        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki272ReportSource()).join(headeditor).join(bodyeditor).buildSource();
+        return ReportEditorJoiner.from(new JigyohokokuCompYoshiki272ReportSource()).join(bodyeditor).buildSource();
     }
 
 }

@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ビジネス設計_DBBBZ81003_1_特徴対象者一覧作成
+ * DBB-1830-040バッチ設計_DBBBT84001_特徴制度間Ｉ／ＦのMyBatisParameterクラスです。
  *
- * @reamsid_L DBB-1860-030 liuyang
+ * @reamsid_L DBB-1830-040 liuyang
  */
 @lombok.Getter
 @lombok.Setter

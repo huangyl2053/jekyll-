@@ -176,9 +176,9 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
     }
 
     /**
-     * 一览に選択のデータを取得します。
+     * 一覧に選択のデータを取得します。
      *
-     * @return 一览に選択のデータ
+     * @return 一覧に選択のデータ
      */
     @Override
     public List<dgNinteiTaskList_Row> getCheckbox() {
@@ -186,9 +186,9 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
     }
 
     /**
-     * 一览にデータを取得します。
+     * 一覧にデータを取得します。
      *
-     * @return 一览のデータ
+     * @return 一覧のデータ
      */
     @Override
     public List<dgNinteiTaskList_Row> getDataSource() {

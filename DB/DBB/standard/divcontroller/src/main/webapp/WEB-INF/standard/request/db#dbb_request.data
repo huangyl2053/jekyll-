@@ -139,6 +139,11 @@ dbb/db/dbb/HonsanteiChohyoHakko2/change_txtKetteiTsuchiYousikiSettei
 dbb/db/dbb/HonsanteiChohyoHakko2/onLoad
 dbb/db/dbb/HonsanteiFukaKakunin/onLoad
 dbb/db/dbb/HonsanteiFukaKakutei/onLoad
+dbb/db/dbb/HonsanteiFukaKeisanTotal/onClick_btnKetteiTsuchiYousikiSettei2
+dbb/db/dbb/HonsanteiFukaKeisanTotal/onClick_btnSantei
+dbb/db/dbb/HonsanteiFukaKeisanTotal/onClick_btnSanteiCheck
+dbb/db/dbb/HonsanteiFukaKeisanTotal/onClick_btnTsuchishoSakusei
+dbb/db/dbb/HonsanteiFukaKeisanTotal/onLoad
 dbb/db/dbb/HonsanteiIdo/onChange_ddlShoritsuki
 dbb/db/dbb/HonsanteiIdo/onChange_radChushutsuJoken
 dbb/db/dbb/HonsanteiIdo/onClick_Register
@@ -286,6 +291,9 @@ dbb/db/dbb/ShotokushokaihyoIkkatu/onChange_ddlShoriNendo
 dbb/db/dbb/ShotokushokaihyoIkkatu/onClick_Register
 dbb/db/dbb/ShotokushokaihyoIkkatu/onClick_beforeRegisterCheck
 dbb/db/dbb/ShotokushokaihyoIkkatu/onLoad
+dbb/db/dbb/ShotokushokaihyoIkkatu/onLoad_HeijunkaAugustKeisan
+dbb/db/dbb/ShunoJoho/gyomuMethod
+dbb/db/dbb/ShunoJoho/onActive
 dbb/db/dbb/ShunoJoho/gyomuMethod
 dbb/db/dbb/ShunoJoho/onActive
 dbb/db/dbb/ShunoJoho/onClick

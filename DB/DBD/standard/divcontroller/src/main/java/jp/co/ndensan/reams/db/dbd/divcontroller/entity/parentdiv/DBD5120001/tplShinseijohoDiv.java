@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
@@ -19,8 +19,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNint
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 
 /**
  * tplShinseijoho のクラスファイル
@@ -29,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  */
 public class tplShinseijohoDiv extends TabPanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,12 +47,12 @@ public class tplShinseijohoDiv extends TabPanel {
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
     @JsonProperty("ccdNinteiInput")
     private NinteiInputDiv ccdNinteiInput;
+    @JsonProperty("ccdShinseiTodokedesha")
+    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
     @JsonProperty("ccdShinseiSonotaJohoInput")
     private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
-    @JsonProperty("ccdShinseiTodokedesha")
-    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,7 +60,7 @@ public class tplShinseijohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getShujiiAndShujiiIryoKikan
      * @return ShujiiAndShujiiIryoKikan
      */
@@ -152,6 +151,15 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
+     * getccdShinseiTodokedesha
+     * @return ccdShinseiTodokedesha
+     */
+    @JsonProperty("ccdShinseiTodokedesha")
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return ccdShinseiTodokedesha;
+    }
+
+    /*
      * getccdShinseiSonotaJohoInput
      * @return ccdShinseiSonotaJohoInput
      */
@@ -167,15 +175,6 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
         return ccdZenkaiNinteiKekkaJoho;
-    }
-
-    /*
-     * getccdShinseiTodokedesha
-     * @return ccdShinseiTodokedesha
-     */
-    @JsonProperty("ccdShinseiTodokedesha")
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return ccdShinseiTodokedesha;
     }
 
     /*

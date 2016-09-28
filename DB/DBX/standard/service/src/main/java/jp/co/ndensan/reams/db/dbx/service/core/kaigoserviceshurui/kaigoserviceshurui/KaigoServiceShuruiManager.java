@@ -9,16 +9,24 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui.IKaigoServiceShuruiMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -36,7 +44,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KaigoServiceShuruiManager {
 
+    private static final RString 抽出パターン_1 = new RString("1");
+    private static final RString 抽出パターン_2 = new RString("2");
+    private static final RString 抽出パターン_3 = new RString("3");
+    private static final RString 抽出パターン_4 = new RString("4");
+    private static final RString 抽出パターン_5 = new RString("5");
+    private static final int 年月_INDEX = 6;
     private static final RString 符号 = new RString(":");
+    private static final RString ZERO = new RString("00");
+    private static final RString すべて = new RString("すべて");
 
     private final MapperProvider mapperProvider;
     private final DbT7130KaigoServiceShuruiDac 介護サービス種類Dac;
@@ -71,8 +87,7 @@ public class KaigoServiceShuruiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
      */
     public static KaigoServiceShuruiManager createInstance() {
         return InstanceProvider.create(KaigoServiceShuruiManager.class);
@@ -152,6 +167,47 @@ public class KaigoServiceShuruiManager {
     }
 
     /**
+     * 親画面より引き渡されたパラメータのサービス種類コードより、サービス種類情報を取得します。
+     *
+     * @param 基準年月 基準年月
+     * @param サービス種類リスト サービス種類リスト
+     * @param サービス分類リスト サービス分類リスト
+     * @param 抽出パターン 抽出パターン
+     * @return KaigoServiceShuruiの{@code list}
+     */
+    @Transaction
+    public SearchResult<KaigoServiceShurui> getServiceTypeList2(FlexibleYearMonth 基準年月,
+            List<RString> サービス種類リスト,
+            List<RString> サービス分類リスト,
+            RString 抽出パターン) {
+        if (抽出パターン_1.equals(抽出パターン)) {
+            基準年月 = new FlexibleYearMonth(DbBusinessConfig.
+                    get(ConfigNameDBU.制度改正施行日_支給限度額一本化, RDate.MAX, SubGyomuCode.DBU介護統計報告).substring(0, 年月_INDEX));
+        } else if (抽出パターン_2.equals(抽出パターン)
+                || 抽出パターン_3.equals(抽出パターン)
+                || 抽出パターン_4.equals(抽出パターン)
+                || 抽出パターン_5.equals(抽出パターン)) {
+            基準年月 = new FlexibleYearMonth(DbBusinessConfig.
+                    get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.MAX, SubGyomuCode.DBU介護統計報告).substring(0, 年月_INDEX));
+        } else {
+            if (基準年月.isEmpty()) {
+                基準年月 = new FlexibleYearMonth(FlexibleDate.getNowDate().toString().substring(0, 年月_INDEX));
+            }
+        }
+        IDbT7130KaigoServiceShuruiMapper mapper = mapperProvider.create(IDbT7130KaigoServiceShuruiMapper.class);
+
+        List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = mapper.getServiceTypeList2(SabisuKodoParameter
+                .createServiceTypeParam2(基準年月, サービス分類リスト, サービス種類リスト, 抽出パターン));
+        ArrayList<KaigoServiceShurui> 介護サービス種類List = new ArrayList<>();
+        for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報リスト) {
+            KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new KaigoServiceShuruiEntity();
+            kaigoServiceShuruiEntity.set介護サービス種類Entity(entity);
+            介護サービス種類List.add(new KaigoServiceShurui(kaigoServiceShuruiEntity));
+        }
+        return SearchResult.of(介護サービス種類List, 0, false);
+    }
+
+    /**
      * サービス種類コードより、フォーカスアウトのサービス種類取得のリストを返します。
      *
      * @param サービス種類コード サービス種類コード
@@ -207,4 +263,20 @@ public class KaigoServiceShuruiManager {
         return dataSource;
     }
 
+    /**
+     * サービス種類DDLを返します。
+     *
+     * @param list List<ServiceShuruiCode>
+     * @return List<KeyValueDataSource>
+     */
+    @Transaction
+    public List<KeyValueDataSource> getサービス種類DDL(List<ServiceShuruiCode> list) {
+
+        DbT7130KaigoServiceShuruiEntity サービス種類情報リスト = 介護サービス種類Dac.select介護サービス(list);
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(サービス種類情報リスト.getServiceShuruiCd().getColumnValue(),
+                サービス種類情報リスト.getServiceShuruiMeisho()));
+        dataSource.add(new KeyValueDataSource(ZERO, すべて));
+        return dataSource;
+    }
 }

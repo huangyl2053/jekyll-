@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1210011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,13 +9,14 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBC1210011のイベント名定義クラスです</br>
  *
- * @author 自動生成
+ * @reamsid_L DBC-2310-010 chenyadong
  */
 public enum DBC1210011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     該当者検索へ("該当者検索へ"),
-    完了("完了");
+    完了("完了"),
+    検索結果一覧へ("検索結果一覧へ");
 
     private final RString name;
 

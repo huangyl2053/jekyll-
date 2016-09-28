@@ -7,7 +7,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shogaishakoujohaaku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4038ShogaishaKoujoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shogaishakojotaishoshahaakukekkaichiran.ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity;
@@ -25,7 +25,7 @@ public interface IShogaishaKojoTaishoshaHaakuKekkaIchiranMapper {
      * @param parameter ShogaishaKojoTaishoshaHaakuKekkaIchiranMapperParameter
      * @return List<ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity>
      */
-    List<ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity> get障がい者控除対象者出力一覧情報(ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter parameter);
+    List<ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity> get障がい者控除対象者出力一覧情報(ShogaishaKojoTaishoshaHaakuKekkaIchiranMapperParameter parameter);
 
     /**
      * 障がい者控除情報を取得します。

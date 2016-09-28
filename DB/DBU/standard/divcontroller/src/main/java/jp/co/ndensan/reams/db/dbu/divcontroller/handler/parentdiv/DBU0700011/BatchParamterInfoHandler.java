@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0700011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.hiroshimadomain.HiroshimaDomainBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050020.DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kouikitenkyoresultlist.KouikiTenkyoResultListBatchParameterSakusei;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kouikitenkyoresultlist.KouikiTenkyoResultListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0700011.BatchParamterInfoDiv;
@@ -71,10 +71,10 @@ public class BatchParamterInfoHandler {
     /**
      * バッチパラメータを取得
      *
-     * @return HiroshimaDomainBatchParameter
+     * @return DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter
      */
-    public HiroshimaDomainBatchParameter setBatchParamter() {
-        HiroshimaDomainBatchParameter paramter = new HiroshimaDomainBatchParameter();
+    public DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter setBatchParamter() {
+        DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter paramter = new DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter();
 
         KouikiTenkyoResultListSakuseiParameter param1 = new KouikiTenkyoResultListSakuseiParameter();
         param1.setKaishihi(div.getTxtkaishihi().getValue());

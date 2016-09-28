@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0140001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.DBB014003_FuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.DBB0140001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001.FuchoKarisanteiFukaMenuPanelHandler;
@@ -54,8 +54,9 @@ public class FuchoKarisanteiFukaMenuPanel {
      * @param div FuchoKarisanteiFukaMenuPanelDiv
      * @return バッチパラメータを引き渡し
      */
-    public ResponseData<FuchoKarisanteiBatchParameter> onClick_btnFuchoKarisanteiFukaBatch(FuchoKarisanteiFukaMenuPanelDiv div) {
-        FuchoKarisanteiBatchParameter parameter = getHandler(div).getバッチパラメータ();
+    public ResponseData<DBB014003_FuchoKarisanteiTsuchishoHakkoParameter>
+            onClick_btnFuchoKarisanteiFukaBatch(FuchoKarisanteiFukaMenuPanelDiv div) {
+        DBB014003_FuchoKarisanteiTsuchishoHakkoParameter parameter = getHandler(div).getバッチパラメータ();
         return ResponseData.of(parameter).respond();
     }
 
@@ -65,8 +66,9 @@ public class FuchoKarisanteiFukaMenuPanel {
      * @param div FuchoKarisanteiFukaMenuPanelDiv
      * @return バッチパラメータを引き渡し
      */
-    public ResponseData<FuchoKarisanteiBatchParameter> onClick_btnFuchoKarisanteiTsuchishoBatch(FuchoKarisanteiFukaMenuPanelDiv div) {
-        FuchoKarisanteiBatchParameter parameter = getHandler(div).getバッチパラメータ();
+    public ResponseData<DBB014003_FuchoKarisanteiTsuchishoHakkoParameter>
+            onClick_btnFuchoKarisanteiTsuchishoBatch(FuchoKarisanteiFukaMenuPanelDiv div) {
+        DBB014003_FuchoKarisanteiTsuchishoHakkoParameter parameter = getHandler(div).getバッチパラメータ();
         return ResponseData.of(parameter).respond();
     }
 

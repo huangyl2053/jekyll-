@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class EnkiTsuchiHakkoTaishoshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +29,12 @@ public class EnkiTsuchiHakkoTaishoshaDiv extends Panel {
     private EnkiRiyuSettingDiv EnkiRiyuSetting;
     @JsonProperty("EnkitsuchiNaiyo")
     private EnkitsuchiNaiyoDiv EnkitsuchiNaiyo;
+    @JsonProperty("hiddenGyomuCode")
+    private RString hiddenGyomuCode;
+    @JsonProperty("hiddenGroupCode")
+    private RString hiddenGroupCode;
+    @JsonProperty("hiddenTeikeibun")
+    private RString hiddenTeikeibun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -87,6 +94,60 @@ public class EnkiTsuchiHakkoTaishoshaDiv extends Panel {
     @JsonProperty("EnkitsuchiNaiyo")
     public void setEnkitsuchiNaiyo(EnkitsuchiNaiyoDiv EnkitsuchiNaiyo) {
         this.EnkitsuchiNaiyo = EnkitsuchiNaiyo;
+    }
+
+    /*
+     * gethiddenGyomuCode
+     * @return hiddenGyomuCode
+     */
+    @JsonProperty("hiddenGyomuCode")
+    public RString getHiddenGyomuCode() {
+        return hiddenGyomuCode;
+    }
+
+    /*
+     * sethiddenGyomuCode
+     * @param hiddenGyomuCode hiddenGyomuCode
+     */
+    @JsonProperty("hiddenGyomuCode")
+    public void setHiddenGyomuCode(RString hiddenGyomuCode) {
+        this.hiddenGyomuCode = hiddenGyomuCode;
+    }
+
+    /*
+     * gethiddenGroupCode
+     * @return hiddenGroupCode
+     */
+    @JsonProperty("hiddenGroupCode")
+    public RString getHiddenGroupCode() {
+        return hiddenGroupCode;
+    }
+
+    /*
+     * sethiddenGroupCode
+     * @param hiddenGroupCode hiddenGroupCode
+     */
+    @JsonProperty("hiddenGroupCode")
+    public void setHiddenGroupCode(RString hiddenGroupCode) {
+        this.hiddenGroupCode = hiddenGroupCode;
+    }
+
+    /*
+     * gethiddenTeikeibun
+     * @return hiddenTeikeibun
+     */
+    @JsonProperty("hiddenTeikeibun")
+    public RString getHiddenTeikeibun() {
+        return hiddenTeikeibun;
+    }
+
+    /*
+     * sethiddenTeikeibun
+     * @param hiddenTeikeibun hiddenTeikeibun
+     */
+    @JsonProperty("hiddenTeikeibun")
+    public void setHiddenTeikeibun(RString hiddenTeikeibun) {
+        this.hiddenTeikeibun = hiddenTeikeibun;
     }
 
     /*

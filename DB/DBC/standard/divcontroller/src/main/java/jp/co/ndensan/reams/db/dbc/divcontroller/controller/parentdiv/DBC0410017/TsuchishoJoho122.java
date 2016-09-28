@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410017;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120280.DBC120280_SogojigyohiShikakuShogohyoKeikaSochiInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410017.TsuchishoJoho122Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -38,11 +41,13 @@ public class TsuchishoJoho122 {
      * @param div TsuchishoJoho122Div
      * @return TsuchishoJoho122Div
      */
-    public ResponseData<TsuchishoJoho122Div> onClick_btnExcute(TsuchishoJoho122Div div) {
-
-        // TODO QA471 パラメータ作成ビジネスを呼び出して、バッチを起動する
-        div.getCcdKokurenJohoTorikomi().get再処理区分();
-        div.getCcdKokurenJohoTorikomi().get処理年月();
-        return ResponseData.of(div).respond();
+    public ResponseData<DBC120280_SogojigyohiShikakuShogohyoKeikaSochiInParameter> onClick_btnExcute(TsuchishoJoho122Div div) {
+        DBC120280_SogojigyohiShikakuShogohyoKeikaSochiInParameter parameter
+                = new DBC120280_SogojigyohiShikakuShogohyoKeikaSochiInParameter();
+        RDate date = div.getCcdKokurenJohoTorikomi().get処理年月();
+        FlexibleYearMonth 処理年月 = date == null ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(date.getYearMonth().toDateString());
+        parameter.setShoriYM(処理年月);
+        return ResponseData.of(parameter).respond();
     }
 }

@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050021;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>

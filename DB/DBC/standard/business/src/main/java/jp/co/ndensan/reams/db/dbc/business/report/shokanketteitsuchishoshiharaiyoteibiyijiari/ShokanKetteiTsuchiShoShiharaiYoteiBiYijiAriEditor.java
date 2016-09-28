@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyomongon.ChohyoMongonYoshiki;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -86,21 +87,25 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IShoka
         // TODO QA600 口座払の場合「**************」で表示
         source.torikeshiShiharaikikan = item.getTorikeshiShiharaikikan();
         source.shiharaiEndYMD = item.getShiharaiEndYMD();
-        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) && !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
+        if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) || !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
             source.karaFugo = item.getKaraFugo();
         }
         source.shiharaiStartHMS = item.getShiharaiStartHMS();
         source.shiharaiEndHMS = item.getShiharaiEndHMS();
         source.sihaYoYmd = item.getSihaYoYmd();
-        source.tsuchibun2 = item.getTsuchibun２();
         source.seirino = item.getSeirino();
         source.tsuchino = item.getTsuchino();
         source.remban = item.getRemban();
-        source.tsuchibunLarge = item.getTsuchibunLarge();
-        source.tsuchibunMix1 = item.getTsuchibunMix1();
-        source.tsuchibunMix2 = item.getTsuchibunMix2();
-        source.tsuchibunMixTwo1 = item.getTsuchibunMixtwo1();
-        source.tsuchibunMixTwo2 = item.getTsuchibunMixtwo2();
+        if (!item.get定型文文字サイズ().isEmpty()) {
+            set通知書データ(source);
+        } else {
+            source.tsuchibun2 = item.getTsuchibun２();
+            source.tsuchibunLarge = item.getTsuchibunLarge();
+            source.tsuchibunMix1 = item.getTsuchibunMix1();
+            source.tsuchibunMix2 = item.getTsuchibunMix2();
+            source.tsuchibunMixTwo1 = item.getTsuchibunMixtwo1();
+            source.tsuchibunMixTwo2 = item.getTsuchibunMixtwo2();
+        }
         source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
@@ -142,5 +147,19 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IShoka
         source.samabunShimeiSmall1 = item.getSamabunShimeiSmall1();
         source.customerBarCode = item.getCustomerBarCode();
         return source;
+    }
+
+    private void set通知書データ(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource source) {
+        if (ChohyoMongonYoshiki.フォント小.getコード().equals(item.get定型文文字サイズ())) {
+            source.tsuchibun2 = item.getTsuchibun２();
+        } else if (ChohyoMongonYoshiki.フォント大.getコード().equals(item.get定型文文字サイズ())) {
+            source.tsuchibunLarge = item.getTsuchibunLarge();
+        } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals((item.get定型文文字サイズ()))) {
+            source.tsuchibunMix1 = item.getTsuchibunMix1();
+            source.tsuchibunMix2 = item.getTsuchibunMix2();
+        } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals(item.get定型文文字サイズ())) {
+            source.tsuchibunMixTwo1 = item.getTsuchibunMixtwo1();
+            source.tsuchibunMixTwo2 = item.getTsuchibunMixtwo2();
+        }
     }
 }

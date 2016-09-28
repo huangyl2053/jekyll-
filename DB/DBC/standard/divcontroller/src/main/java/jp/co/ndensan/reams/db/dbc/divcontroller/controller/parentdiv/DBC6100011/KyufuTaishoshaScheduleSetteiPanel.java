@@ -9,21 +9,21 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.DBC6100011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.DBC6100011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaScheduleSettei;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -34,8 +34,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KyufuTaishoshaScheduleSetteiPanel {
 
     private static final RString 出力文言 = new RString("登録");
-    private static final RString 高額介護場合 = new RString("341");
-    private static final RString 総合事業高額介護場合 = new RString("342");
+    private static final RString 高額介護場合 = new RString("KGK1");
+    private static final RString 総合事業高額介護場合 = new RString("KGK2");
     private static final RString 高額介護_メニューID = new RString("DBCMN41001");
     private static final RString 総合事業高額介護_メニューID = new RString("DBCMNL1001");
     private static final RString STR_ONE = new RString("1");
@@ -86,10 +86,6 @@ public class KyufuTaishoshaScheduleSetteiPanel {
      */
     public ResponseData<KyufuTaishoshaScheduleSetteiPanelDiv> onClick_btnKakutei(
             KyufuTaishoshaScheduleSetteiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).前後順チェックValidate();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
         RString 交換情報識別番号 = null;
         if (高額介護_メニューID.equals(ResponseHolder.getMenuID())) {
             交換情報識別番号 = 高額介護場合;
@@ -167,16 +163,14 @@ public class KyufuTaishoshaScheduleSetteiPanel {
     public ResponseData<KyufuTaishoshaScheduleSetteiPanelDiv> onChange_ddlShoriJokyo(
             KyufuTaishoshaScheduleSetteiPanelDiv div) {
         Map<Integer, RString> map = ViewStateHolder.get(ViewStateKeys.変更前処理状況, Map.class);
-        getHandler(div).to処理状況変更チェック(map);
+        if (getHandler(div).to処理状況変更チェック(map)) {
+            throw new ApplicationException(DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
+        }
         ViewStateHolder.put(ViewStateKeys.変更前処理状況, (Serializable) getHandler(div).get変更前処理状況());
         return ResponseData.of(div).respond();
     }
 
     private KyufuTaishoshaScheduleSetteiPanelHandler getHandler(KyufuTaishoshaScheduleSetteiPanelDiv div) {
         return new KyufuTaishoshaScheduleSetteiPanelHandler(div);
-    }
-
-    private KyufuTaishoshaScheduleSetteiPanelValidationHandler getValidationHandler(KyufuTaishoshaScheduleSetteiPanelDiv div) {
-        return new KyufuTaishoshaScheduleSetteiPanelValidationHandler(div);
     }
 }

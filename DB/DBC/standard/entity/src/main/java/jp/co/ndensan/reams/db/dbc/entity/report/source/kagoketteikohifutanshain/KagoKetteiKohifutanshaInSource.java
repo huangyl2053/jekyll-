@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票Source
@@ -47,6 +50,9 @@ public class KagoKetteiKohifutanshaInSource implements IReportSource {
     public RString kaipage5;
     @ReportItem(name = "listUpper_1", length = 4, order = 15)
     public RString listUpper_1;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 6, order = 16)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 10, order = 17)
@@ -103,6 +109,16 @@ public class KagoKetteiKohifutanshaInSource implements IReportSource {
     public RString tokuteiNyushoshaKaigohiTanisu;
     @ReportItem(name = "tokuteiNyushoshaKaigohiFutangaku", length = 17, order = 43)
     public RString tokuteiNyushoshaKaigohiFutangaku;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 69)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 70)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 10, order = 72)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -156,7 +172,12 @@ public class KagoKetteiKohifutanshaInSource implements IReportSource {
         tokuteiNyushoshaKaigohiTitle,
         tokuteiNyushoshaKaigohiKensu,
         tokuteiNyushoshaKaigohiTanisu,
-        tokuteiNyushoshaKaigohiFutangaku
+        tokuteiNyushoshaKaigohiFutangaku,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 // </editor-fold>
 }

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3111-020 duanzhanli -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.tankinyushokakudaigaitosha.ITankiNyushoKakudaiGaitoshaMapper">
+
+    <resultMap id="get短期入所拡大該当者Result" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaRelateEntity">
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得事由コード" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得年月日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得届出年月日" column="shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失事由コード" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失年月日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失届出年月日" column="shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者区分コード" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所地特例フラグ" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="有効開始年月" column="yukoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="有効終了年月" column="yukoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="拡大倍数" column="kakudaiBaisu"/>
+        <result property="切り分け単位数" column="kiriwakeTaniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="限度額管理期間数" column="gendoGakuKanriKikanSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="登録年月日" column="torokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="変更年月日" column="henkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給申請事由" column="jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給申請年月日" column="jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定年月日" column="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="旧措置者フラグ" column="kyuSochishaFlag" />
+        <result property="みなし要介護区分コード" column="minashiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="直近異動事由コード" column="chokkinIdoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="宛名Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+
+    <sql id="短期入所拡大該当者">
+        短期入所拡大該当者."shichosonCode" AS "shichosonCode",
+        短期入所拡大該当者."hihokenshaNo" AS "hihokenshaNo",
+        短期入所拡大該当者."shikakuShutokuJiyuCode" AS "shikakuShutokuJiyuCode",
+        短期入所拡大該当者."shikakuShutokuYMD" AS "shikakuShutokuYMD",
+        短期入所拡大該当者."shikakuShutokuTodokedeYMD" AS "shikakuShutokuTodokedeYMD",
+        短期入所拡大該当者."shikakuSoshitsuJiyuCode" AS "shikakuSoshitsuJiyuCode",
+        短期入所拡大該当者."shikakuSoshitsuYMD" AS "shikakuSoshitsuYMD",
+        短期入所拡大該当者."shikakuSoshitsuTodokedeYMD" AS "shikakuSoshitsuTodokedeYMD",
+        短期入所拡大該当者."hihokennshaKubunCode" AS "hihokennshaKubunCode",
+        短期入所拡大該当者."jushochiTokureiFlag" AS "jushochiTokureiFlag",
+        短期入所拡大該当者."koikinaiJushochiTokureiFlag" AS "koikinaiJushochiTokureiFlag",
+        短期入所拡大該当者."koikinaiTokureiSochimotoShichosonCode" AS "koikinaiTokureiSochimotoShichosonCode",
+        短期入所拡大該当者."yukoKaishiYM" AS "yukoKaishiYM",
+        短期入所拡大該当者."yukoShuryoYM" AS "yukoShuryoYM",
+        短期入所拡大該当者."kakudaiBaisu" AS "kakudaiBaisu",
+        短期入所拡大該当者."kiriwakeTaniSu" AS "kiriwakeTaniSu",
+        短期入所拡大該当者."gendoGakuKanriKikanSu" AS "gendoGakuKanriKikanSu",
+        短期入所拡大該当者."torokuYMD" AS "torokuYMD",
+        短期入所拡大該当者."henkoYMD" AS "henkoYMD",
+        短期入所拡大該当者."jukyuShinseiJiyu" AS "jukyuShinseiJiyu",
+        短期入所拡大該当者."jukyuShinseiYMD" AS "jukyuShinseiYMD",
+        短期入所拡大該当者."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        短期入所拡大該当者."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        短期入所拡大該当者."ninteiYMD" AS "ninteiYMD",
+        短期入所拡大該当者."kyuSochishaFlag" AS "kyuSochishaFlag",
+        短期入所拡大該当者."minashiCode" AS "minashiCode",
+        短期入所拡大該当者."chokkinIdoJiyuCode" AS "chokkinIdoJiyuCode"
+    </sql>
+    <select resultOrdered="true" id="get短期入所拡大該当者" resultMap="get短期入所拡大該当者Result"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaMybatisParameter" fetchSize="500">
+        WITH  抽出対象  AS (
+        SELECT
+        "hihokenshaNo",
+        "shikibetsuKubun",
+        "yukoKaishiYM",
+        "rirekiNo",
+        "yukoShuryoYM",
+        "kakudaiBaisu",
+        "kiriwakeTaniSu",
+        "gendoGakuKanriKikanSu",
+        "torokuYMD",
+        "henkoYMD"
+        FROM
+        rgdb."DbT7116JukyushaGendoGakuKanri"
+        WHERE
+        "shikibetsuKubun" = '1'
+        <if test="!is適用開始年月FromNULL">
+            AND #{適用開始年月From} <![CDATA[<=]]> "yukoKaishiYM"
+        </if>
+        <if test="!is適用開始年月ToNULL">
+            AND "yukoKaishiYM" <![CDATA[<=]]> #{適用開始年月To}
+        </if>
+        <if test="!is適用終了年月FromNULL">
+            AND #{適用終了年月From} <![CDATA[<=]]> "yukoShuryoYM"
+        </if>
+        <if test="!is適用終了年月ToNULL">
+            AND "yukoShuryoYM" <![CDATA[<=]]> #{適用終了年月To}
+        </if>
+        <if test="is抽出区分_直近">
+            AND NOT EXISTS(select 1
+            from
+            rgdb."DbT7116JukyushaGendoGakuKanri" AS DbT7116
+            where
+            DbT7116."hihokenshaNo" = "hihokenshaNo"
+            AND DbT7116."shikibetsuKubun" = "shikibetsuKubun"
+            AND "yukoKaishiYM" <![CDATA[<]]> DbT7116."yukoKaishiYM"
+            )
+        </if>
+        <if test="is入力済みを含む">
+            AND ("gendoGakuKanriKikanSu" ='' OR "gendoGakuKanriKikanSu" IS NULL)
+        </if>
+        )
+        SELECT
+        <include refid="短期入所拡大該当者" />,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM(
+        SELECT
+        被保険者台帳管理."shichosonCode",
+        被保険者台帳管理."hihokenshaNo",
+        被保険者台帳管理."shikibetsuCode",
+        被保険者台帳管理."shikakuShutokuJiyuCode",
+        被保険者台帳管理."shikakuShutokuYMD",
+        被保険者台帳管理."shikakuShutokuTodokedeYMD",
+        被保険者台帳管理."shikakuSoshitsuJiyuCode",
+        被保険者台帳管理."shikakuSoshitsuYMD",
+        被保険者台帳管理."shikakuSoshitsuTodokedeYMD",
+        被保険者台帳管理."hihokennshaKubunCode",
+        被保険者台帳管理."jushochiTokureiFlag",
+        被保険者台帳管理."koikinaiJushochiTokureiFlag",
+        被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode",
+        被保険者台帳管理."kyuShichosonCode",
+        抽出対象."shikibetsuKubun",
+        抽出対象."yukoKaishiYM",
+        抽出対象."rirekiNo",
+        抽出対象."yukoShuryoYM",
+        抽出対象."kakudaiBaisu",
+        抽出対象."kiriwakeTaniSu",
+        抽出対象."gendoGakuKanriKikanSu",
+        抽出対象."torokuYMD",
+        抽出対象."henkoYMD",
+        受給者台帳."jukyuShinseiJiyu",
+        受給者台帳."jukyuShinseiYMD",
+        受給者台帳."yokaigoJotaiKubunCode",
+        受給者台帳."ninteiYukoKikanKaishiYMD",
+        受給者台帳."ninteiYukoKikanShuryoYMD",
+        受給者台帳."ninteiYMD",
+        受給者台帳."kyuSochishaFlag",
+        受給者台帳."minashiCode",
+        受給者台帳."chokkinIdoJiyuCode"
+        FROM
+        抽出対象 AS 抽出対象
+        INNER JOIN
+        (SELECT
+        有効履歴."shichosonCode",
+        有効履歴."hihokenshaNo",
+        有効履歴."shikibetsuCode",
+        有効履歴."shikakuShutokuJiyuCode",
+        有効履歴."shikakuShutokuYMD",
+        有効履歴."shikakuShutokuTodokedeYMD",
+        有効履歴."shikakuSoshitsuJiyuCode",
+        有効履歴."shikakuSoshitsuYMD",
+        有効履歴."shikakuSoshitsuTodokedeYMD",
+        有効履歴."hihokennshaKubunCode",
+        有効履歴."jushochiTokureiFlag",
+        有効履歴."koikinaiJushochiTokureiFlag",
+        有効履歴."koikinaiTokureiSochimotoShichosonCode",
+        有効履歴."kyuShichosonCode"
+        FROM(
+        SELECT
+        DbT1001."shichosonCode",
+        DbT1001."hihokenshaNo",
+        DbT1001."shikibetsuCode",
+        DbT1001."shikakuShutokuJiyuCode",
+        DbT1001."shikakuShutokuYMD",
+        DbT1001."shikakuShutokuTodokedeYMD",
+        DbT1001."shikakuSoshitsuJiyuCode",
+        DbT1001."shikakuSoshitsuYMD",
+        DbT1001."shikakuSoshitsuTodokedeYMD",
+        DbT1001."hihokennshaKubunCode",
+        DbT1001."jushochiTokureiFlag",
+        DbT1001."koikinaiJushochiTokureiFlag",
+        DbT1001."koikinaiTokureiSochimotoShichosonCode",
+        DbT1001."kyuShichosonCode",
+        ROW_NUMBER() OVER (PARTITION BY DbT1001."hihokenshaNo", DbT1001."shikakuShutokuYMD" ORDER BY DbT1001."idoYMD" DESC, DbT1001."edaNo" DESC) As 番号
+        FROM
+        抽出対象 AS 抽出対象
+        INNER JOIN
+        rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+        ON DbT1001."hihokenshaNo" = 抽出対象."hihokenshaNo"
+        AND DbT1001."logicalDeletedFlag" = false
+        AND (抽出対象."yukoKaishiYM"||'31') <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
+        AND(
+        DbT1001."shikakuSoshitsuYMD" = ''
+        OR DbT1001."shikakuSoshitsuYMD" IS NULL
+        OR DbT1001."shikakuSoshitsuYMD" <![CDATA[>=]]> (抽出対象."yukoKaishiYM" || '01'))
+        ) AS 有効履歴
+        WHERE
+        有効履歴.番号 = 1)被保険者台帳管理
+        ON 被保険者台帳管理."hihokenshaNo" = 抽出対象."hihokenshaNo"
+        LEFT JOIN
+        (SELECT
+        有効履歴."hihokenshaNo",
+        有効履歴."jukyuShinseiJiyu",
+        有効履歴."jukyuShinseiYMD",
+        有効履歴."yokaigoJotaiKubunCode",
+        有効履歴."ninteiYukoKikanKaishiYMD",
+        有効履歴."ninteiYukoKikanShuryoYMD",
+        有効履歴."ninteiYMD",
+        有効履歴."kyuSochishaFlag",
+        有効履歴."minashiCode",
+        有効履歴."chokkinIdoJiyuCode"
+        FROM
+        (SELECT
+        DbT4001."hihokenshaNo",
+        DbT4001."jukyuShinseiJiyu",
+        DbT4001."jukyuShinseiYMD",
+        DbT4001."yokaigoJotaiKubunCode",
+        DbT4001."ninteiYukoKikanKaishiYMD",
+        DbT4001."ninteiYukoKikanShuryoYMD",
+        DbT4001."ninteiYMD",
+        DbT4001."kyuSochishaFlag",
+        DbT4001."minashiCode",
+        DbT4001."chokkinIdoJiyuCode",
+        ROW_NUMBER() OVER (PARTITION BY DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+        FROM
+        抽出対象 AS 抽出対象
+        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS DbT4001
+        ON DbT4001."hihokenshaNo" = 抽出対象."hihokenshaNo"
+        AND DbT4001."logicalDeletedFlag" = false
+        AND DbT4001."yukoMukoKubun" = '1'
+        AND (抽出対象."yukoKaishiYM"||'31') <![CDATA[>=]]> DbT4001."ninteiYukoKikanKaishiYMD"
+        AND DbT4001."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> (抽出対象."yukoKaishiYM" || '01')
+        ) AS 有効履歴
+        WHERE
+        有効履歴.番号 = 1)受給者台帳
+        ON  抽出対象."hihokenshaNo" = 受給者台帳."hihokenshaNo"
+        )短期入所拡大該当者
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON
+        短期入所拡大該当者."shikibetsuCode" =
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        ${出力順}
+    </select>
+</mapper>

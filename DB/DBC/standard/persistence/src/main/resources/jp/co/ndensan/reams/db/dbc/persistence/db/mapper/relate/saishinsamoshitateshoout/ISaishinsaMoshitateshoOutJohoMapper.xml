@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-2540-030 liuhui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsamoshitateshoout.ISaishinsaMoshitateshoOutJohoMapper">
+    
+    <select id="get帳票出力対象データ" resultMap="resultMap_SaishinsaMoshitateIchiranhyoTaisyoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter"  fetchSize="500" resultOrdered="true">
+        SELECT 
+        <include refid="allColumns_saishinsaMoshitateIchiranhyoTaisyo" />
+        FROM "DbWT1741SaishinsaMoshitate" AS DbWT1741
+        INNER JOIN "DbWT1001Hihokensha" AS DbWT1001 ON DbWT1741."renban" = DbWT1001."exRenban"
+        WHERE DbWT1741."sofuJogaiFlag" = false
+        ${出力順}
+    </select>
+    
+    <resultMap id="resultMap_SaishinsaMoshitateIchiranhyoTaisyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateIchiranhyoTaisyoEntity" autoMapping="true">
+        <result property="被保険者_連番" column="dbWT1001_連番"/>
+        <result property="被保険者_保険者番号" column="dbWT1001_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="被保険者_保険者名" column="dbWT1001_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_証記載保険者番号" column="dbWT1001_証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者_被保険者番号" column="dbWT1001_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者_サービス提供年月" column="dbWT1001_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="被保険者_変換対象フラグ" column="dbWT1001_変換対象フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="被保険者_旧市町村コード" column="dbWT1001_旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="被保険者_送付被保険者番号" column="dbWT1001_送付被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者_市町村コード" column="dbWT1001_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="被保険者_管内管外区分" column="dbWT1001_管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_郵便番号" column="dbWT1001_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_町域コード" column="dbWT1001_町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_行政区コード" column="dbWT1001_行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_行政区名" column="dbWT1001_行政区名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_住所" column="dbWT1001_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_番地" column="dbWT1001_番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_方書" column="dbWT1001_方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_宛名カナ名称" column="dbWT1001_宛名カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_宛名名称" column="dbWT1001_宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_氏名50音カナ" column="dbWT1001_氏名50音カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_識別コード" column="dbWT1001_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="被保険者_資格取得日" column="dbWT1001_資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者_資格取得事由コード" column="dbWT1001_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_資格喪失日" column="dbWT1001_資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者_資格喪失事由コード" column="dbWT1001_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_世帯集約番号" column="dbWT1001_世帯集約番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_生年月日" column="dbWT1001_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者_性別コード" column="dbWT1001_性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_市町村加入年月日" column="dbWT1001_市町村加入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者_市町村脱退年月日" column="dbWT1001_市町村脱退年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="再審査申立_連番" column="dbWT1741_連番"/>
+        <result property="再審査申立_事業所番号" column="dbWT1741_事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="再審査申立_被保険者番号" column="dbWT1741_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="再審査申立_サービス提供年月" column="dbWT1741_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="再審査申立_サービス種類コード" column="dbWT1741_サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="再審査申立_サービス項目コード" column="dbWT1741_サービス項目コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+        <result property="再審査申立_履歴番号" column="dbWT1741_履歴番号"/>
+        <result property="再審査申立_申立年月日" column="dbWT1741_申立年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="再審査申立_申立者区分コード" column="dbWT1741_申立者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査申立_証記載保険者番号" column="dbWT1741_証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="再審査申立_申立単位数" column="dbWT1741_申立単位数"/>
+        <result property="再審査申立_申立事由コード" column="dbWT1741_申立事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査申立_国保連送付年月" column="dbWT1741_国保連送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="再審査申立_国保連再送付有フラグ" column="dbWT1741_国保連再送付有フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="再審査申立_備考" column="dbWT1741_備考" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査申立_保険者番号" column="dbWT1741_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="再審査申立_保険者名" column="dbWT1741_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査申立_証記載保険者名" column="dbWT1741_証記載保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査申立_事業者名" column="dbWT1741_事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査申立_サービス名称" column="dbWT1741_サービス名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査申立_送付除外フラグ" column="dbWT1741_送付除外フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+    </resultMap>
+    
+    <sql id="allColumns_saishinsaMoshitateIchiranhyoTaisyo">
+        DbWT1001."exRenban" as dbWT1001_連番,
+        DbWT1001."exHokenshaNo" as dbWT1001_保険者番号,
+        DbWT1001."exHokenshaName" as dbWT1001_保険者名,
+        DbWT1001."exShoHokenshaNo" as dbWT1001_証記載保険者番号,
+        DbWT1001."exHihokenshaNo" as dbWT1001_被保険者番号,
+        DbWT1001."exServiceTeikyoYm" as dbWT1001_サービス提供年月,
+        DbWT1001."henkanFlag" as dbWT1001_変換対象フラグ,
+        DbWT1001."oldShichosonCode" as dbWT1001_旧市町村コード,
+        DbWT1001."sofuHihokenshaNo" as dbWT1001_送付被保険者番号,
+        DbWT1001."shichosonCode" as dbWT1001_市町村コード,
+        DbWT1001."kannaiKangaiKubun" as dbWT1001_管内管外区分,
+        DbWT1001."yubinNo" as dbWT1001_郵便番号,
+        DbWT1001."choikiCode" as dbWT1001_町域コード,
+        DbWT1001."gyoseikuCode" as dbWT1001_行政区コード,
+        DbWT1001."gyoseikuMei" as dbWT1001_行政区名,
+        DbWT1001."jusho" as dbWT1001_住所,
+        DbWT1001."banchi" as dbWT1001_番地,
+        DbWT1001."katagaki" as dbWT1001_方書,
+        DbWT1001."kanaMeisho" as dbWT1001_宛名カナ名称,
+        DbWT1001."meisho" as dbWT1001_宛名名称,
+        DbWT1001."shimei50onKana" as dbWT1001_氏名50音カナ,
+        DbWT1001."shikibetsuCode" as dbWT1001_識別コード,
+        DbWT1001."shikakuShutokuYmd" as dbWT1001_資格取得日,
+        DbWT1001."shikakuShutokuJiyuCode" as dbWT1001_資格取得事由コード,
+        DbWT1001."shikakuSoshitsuYmd" as dbWT1001_資格喪失日,
+        DbWT1001."shikakuSoshitsuJiyuCode" as dbWT1001_資格喪失事由コード,
+        DbWT1001."setaiShuyakuNo" as dbWT1001_世帯集約番号,
+        DbWT1001."seinenYmd" as dbWT1001_生年月日,
+        DbWT1001."seibetsuCode" as dbWT1001_性別コード,
+        DbWT1001."shichosonKanyuYmd" as dbWT1001_市町村加入年月日,
+        DbWT1001."shichosonDattaiYmd" as dbWT1001_市町村脱退年月日,
+        DbWT1741."renban" as dbWT1741_連番,
+        DbWT1741."jigyoshoNo" as dbWT1741_事業所番号,
+        DbWT1741."hiHokenshaNo" as dbWT1741_被保険者番号,
+        DbWT1741."serviceTeikyoYM" as dbWT1741_サービス提供年月,
+        DbWT1741."serviceTeikyoShuruiCode" as dbWT1741_サービス種類コード,
+        DbWT1741."serviceKomokuCode" as dbWT1741_サービス項目コード,
+        DbWT1741."rirekiNo" as dbWT1741_履歴番号,
+        DbWT1741."moshitateYMD" as dbWT1741_申立年月日,
+        DbWT1741."moshitateshaKubunCode" as dbWT1741_申立者区分コード,
+        DbWT1741."shokisaiHokenshaNo" as dbWT1741_証記載保険者番号,
+        DbWT1741."moshitateTanisu" as dbWT1741_申立単位数,
+        DbWT1741."moshitateJiyuCode" as dbWT1741_申立事由コード,
+        DbWT1741."kokuhorenSofuYM" as dbWT1741_国保連送付年月,
+        DbWT1741."kokuhirenSaiSofuAriFlag" as dbWT1741_国保連再送付有フラグ,
+        DbWT1741."biko" as dbWT1741_備考,
+        DbWT1741."hokenshaNo" as dbWT1741_保険者番号,
+        DbWT1741."hokenshaName" as dbWT1741_保険者名,
+        DbWT1741."shokisaiHokenshaName" as dbWT1741_証記載保険者名,
+        DbWT1741."jigyoshaName" as dbWT1741_事業者名,
+        DbWT1741."serviceMeisho" as dbWT1741_サービス名称,
+        DbWT1741."sofuJogaiFlag" as dbWT1741_送付除外フラグ
+    </sql>
+    
+    <select id="select再審査申立データリスト" resultMap="resultMap_DbWT1741SaishinsaMoshitateTempEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitateshoout.SaishinsaMoshitateMybatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbT3062SaishinsaMoshitate" />
+        FROM rgdb."DbT3062SaishinsaMoshitate" AS DbT3062 
+        WHERE 
+        (
+        DbT3062."kokuhorenSofuYM" IS NULL
+        OR DbT3062."kokuhorenSofuYM" = '' 
+        <if test="再処理区分 == 1">
+            OR DbT3062."kokuhorenSofuYM" = #{処理年月}
+        </if>
+        OR DbT3062."kokuhirenSaiSofuAriFlag" = true
+        )
+        AND DbT3062."serviceTeikyoYM" <![CDATA[<=]]> #{処理年月}
+        AND DbT3062."isDeleted" = false
+        ORDER BY DbT3062."jigyoshoNo" ASC, 
+        DbT3062."hiHokenshaNo" ASC, 
+        DbT3062."serviceTeikyoYM" ASC, 
+        DbT3062."serviceTeikyoShuruiCode" ASC, 
+        DbT3062."serviceKomokuCode" ASC, 
+        DbT3062."rirekiNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_DbWT1741SaishinsaMoshitateTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.DbWT1741SaishinsaMoshitateTempEntity" autoMapping="true">
+        <result property="事業所番号" column="dbWT1741_事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="被保険者番号" column="dbWT1741_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="サービス提供年月" column="dbWT1741_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="サービス種類コード" column="dbWT1741_サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス項目コード" column="dbWT1741_サービス項目コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+        <result property="履歴番号" column="dbWT1741_履歴番号"/>
+        <result property="申立年月日" column="dbWT1741_申立年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="申立者区分コード" column="dbWT1741_申立者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="dbWT1741_証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="申立単位数" column="dbWT1741_申立単位数"/>
+        <result property="申立事由コード" column="dbWT1741_申立事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="国保連送付年月" column="dbWT1741_国保連送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="国保連再送付有フラグ" column="dbWT1741_国保連再送付有フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="備考" column="dbWT1741_備考" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT3062SaishinsaMoshitate">
+        DbT3062."jigyoshoNo" as dbWT1741_事業所番号,
+        DbT3062."hiHokenshaNo" as dbWT1741_被保険者番号,
+        DbT3062."serviceTeikyoYM" as dbWT1741_サービス提供年月,
+        DbT3062."serviceTeikyoShuruiCode" as dbWT1741_サービス種類コード,
+        DbT3062."serviceKomokuCode" as dbWT1741_サービス項目コード,
+        DbT3062."rirekiNo" as dbWT1741_履歴番号,
+        DbT3062."moshitateYMD" as dbWT1741_申立年月日,
+        DbT3062."moshitateshaKubunCode" as dbWT1741_申立者区分コード,
+        DbT3062."shokisaiHokenshaNo" as dbWT1741_証記載保険者番号,
+        DbT3062."moshitateTanisu" as dbWT1741_申立単位数,
+        DbT3062."moshitateJiyuCode" as dbWT1741_申立事由コード,
+        DbT3062."kokuhorenSofuYM" as dbWT1741_国保連送付年月,
+        DbT3062."kokuhirenSaiSofuAriFlag" as dbWT1741_国保連再送付有フラグ,
+        DbT3062."biko" as dbWT1741_備考
+    </sql>
+    
+    <select id="select保険者番号取込関連リスト"
+            resultMap="resultMap_HokenshaNoKanrenEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbWT1001Hihokensha" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        INNER JOIN "DbWT1001Hihokensha" AS DbWT1001 ON 再審査申立."renban" = DbWT1001."exRenban"
+    </select>
+
+    <resultMap id="resultMap_HokenshaNoKanrenEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateAndHihokenshaKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="被保険者" resultMap="ResultMap_DbWT1001HihokenshaEntity"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_DbWT1741SaishinsaMoshitateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.DbWT1741SaishinsaMoshitateEntity" autoMapping="true">
+        <result property="renban" column="dbWT1741_renban"/>
+        <result property="jigyoshoNo" column="dbWT1741_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="hiHokenshaNo" column="dbWT1741_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="serviceTeikyoYM" column="dbWT1741_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="serviceTeikyoShuruiCode" column="dbWT1741_serviceTeikyoShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="serviceKomokuCode" column="dbWT1741_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+        <result property="rirekiNo" column="dbWT1741_rirekiNo"/>
+        <result property="moshitateYMD" column="dbWT1741_moshitateYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="moshitateshaKubunCode" column="dbWT1741_moshitateshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokisaiHokenshaNo" column="dbWT1741_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="moshitateTanisu" column="dbWT1741_moshitateTanisu"/>
+        <result property="moshitateJiyuCode" column="dbWT1741_moshitateJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuhorenSofuYM" column="dbWT1741_kokuhorenSofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kokuhirenSaiSofuAriFlag" column="dbWT1741_kokuhirenSaiSofuAriFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="biko" column="dbWT1741_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaNo" column="dbWT1741_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="hokenshaName" column="dbWT1741_hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokisaiHokenshaName" column="dbWT1741_shokisaiHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaName" column="dbWT1741_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceMeisho" column="dbWT1741_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuJogaiFlag" column="dbWT1741_sofuJogaiFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_DbWT1001HihokenshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.DbWT1001HihokenshaEntity" autoMapping="true">
+        <result property="exRenban" column="dbWT1001_exRenban"/>
+        <result property="exHokenshaNo" column="dbWT1001_exHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="exHokenshaName" column="dbWT1001_exHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exShoHokenshaNo" column="dbWT1001_exShoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="exHihokenshaNo" column="dbWT1001_exHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="exServiceTeikyoYm" column="dbWT1001_exServiceTeikyoYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="henkanFlag" column="dbWT1001_henkanFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="oldShichosonCode" column="dbWT1001_oldShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="sofuHihokenshaNo" column="dbWT1001_sofuHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shichosonCode" column="dbWT1001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kannaiKangaiKubun" column="dbWT1001_kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="dbWT1001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode" column="dbWT1001_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuCode" column="dbWT1001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuMei" column="dbWT1001_gyoseikuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jusho" column="dbWT1001_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="banchi" column="dbWT1001_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="katagaki" column="dbWT1001_katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanaMeisho" column="dbWT1001_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisho" column="dbWT1001_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shimei50onKana" column="dbWT1001_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="dbWT1001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikakuShutokuYmd" column="dbWT1001_shikakuShutokuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="dbWT1001_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYmd" column="dbWT1001_shikakuSoshitsuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="dbWT1001_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiShuyakuNo" column="dbWT1001_setaiShuyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinenYmd" column="dbWT1001_seinenYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="dbWT1001_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonKanyuYmd" column="dbWT1001_shichosonKanyuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shichosonDattaiYmd" column="dbWT1001_shichosonDattaiYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbWT1741SaishinsaMoshitate">
+        再審査申立."renban" as dbWT1741_renban,
+        再審査申立."jigyoshoNo" as dbWT1741_jigyoshoNo,
+        再審査申立."hiHokenshaNo" as dbWT1741_hiHokenshaNo,
+        再審査申立."serviceTeikyoYM" as dbWT1741_serviceTeikyoYM,
+        再審査申立."serviceTeikyoShuruiCode" as dbWT1741_serviceTeikyoShuruiCode,
+        再審査申立."serviceKomokuCode" as dbWT1741_serviceKomokuCode,
+        再審査申立."rirekiNo" as dbWT1741_rirekiNo,
+        再審査申立."moshitateYMD" as dbWT1741_moshitateYMD,
+        再審査申立."moshitateshaKubunCode" as dbWT1741_moshitateshaKubunCode,
+        再審査申立."shokisaiHokenshaNo" as dbWT1741_shokisaiHokenshaNo,
+        再審査申立."moshitateTanisu" as dbWT1741_moshitateTanisu,
+        再審査申立."moshitateJiyuCode" as dbWT1741_moshitateJiyuCode,
+        再審査申立."kokuhorenSofuYM" as dbWT1741_kokuhorenSofuYM,
+        再審査申立."kokuhirenSaiSofuAriFlag" as dbWT1741_kokuhirenSaiSofuAriFlag,
+        再審査申立."biko" as dbWT1741_biko,
+        再審査申立."hokenshaNo" as dbWT1741_hokenshaNo,
+        再審査申立."hokenshaName" as dbWT1741_hokenshaName,
+        再審査申立."shokisaiHokenshaName" as dbWT1741_shokisaiHokenshaName,
+        再審査申立."jigyoshaName" as dbWT1741_jigyoshaName,
+        再審査申立."serviceMeisho" as dbWT1741_serviceMeisho,
+        再審査申立."sofuJogaiFlag" as dbWT1741_sofuJogaiFlag
+    </sql>
+    
+    <sql id="allColumns_DbWT1001Hihokensha">
+        DbWT1001."exRenban" as dbWT1001_exRenban,
+        DbWT1001."exHokenshaNo" as dbWT1001_exHokenshaNo,
+        DbWT1001."exHokenshaName" as dbWT1001_exHokenshaName,
+        DbWT1001."exShoHokenshaNo" as dbWT1001_exShoHokenshaNo,
+        DbWT1001."exHihokenshaNo" as dbWT1001_exHihokenshaNo,
+        DbWT1001."exServiceTeikyoYm" as dbWT1001_exServiceTeikyoYm,
+        DbWT1001."henkanFlag" as dbWT1001_henkanFlag,
+        DbWT1001."oldShichosonCode" as dbWT1001_oldShichosonCode,
+        DbWT1001."sofuHihokenshaNo" as dbWT1001_sofuHihokenshaNo,
+        DbWT1001."shichosonCode" as dbWT1001_shichosonCode,
+        DbWT1001."kannaiKangaiKubun" as dbWT1001_kannaiKangaiKubun,
+        DbWT1001."yubinNo" as dbWT1001_yubinNo,
+        DbWT1001."choikiCode" as dbWT1001_choikiCode,
+        DbWT1001."gyoseikuCode" as dbWT1001_gyoseikuCode,
+        DbWT1001."gyoseikuMei" as dbWT1001_gyoseikuMei,
+        DbWT1001."jusho" as dbWT1001_jusho,
+        DbWT1001."banchi" as dbWT1001_banchi,
+        DbWT1001."katagaki" as dbWT1001_katagaki,
+        DbWT1001."kanaMeisho" as dbWT1001_kanaMeisho,
+        DbWT1001."meisho" as dbWT1001_meisho,
+        DbWT1001."shimei50onKana" as dbWT1001_shimei50onKana,
+        DbWT1001."shikibetsuCode" as dbWT1001_shikibetsuCode,
+        DbWT1001."shikakuShutokuYmd" as dbWT1001_shikakuShutokuYmd,
+        DbWT1001."shikakuShutokuJiyuCode" as dbWT1001_shikakuShutokuJiyuCode,
+        DbWT1001."shikakuSoshitsuYmd" as dbWT1001_shikakuSoshitsuYmd,
+        DbWT1001."shikakuSoshitsuJiyuCode" as dbWT1001_shikakuSoshitsuJiyuCode,
+        DbWT1001."setaiShuyakuNo" as dbWT1001_setaiShuyakuNo,
+        DbWT1001."seinenYmd" as dbWT1001_seinenYmd,
+        DbWT1001."seibetsuCode" as dbWT1001_seibetsuCode,
+        DbWT1001."shichosonKanyuYmd" as dbWT1001_shichosonKanyuYmd,
+        DbWT1001."shichosonDattaiYmd" as dbWT1001_shichosonDattaiYmd
+    </sql>
+    
+    <select id="select保険者番号取得関連リスト"
+            resultMap="ResultMap_HokenshaNoEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        "DbWT1741SaishinsaMoshitate"."hokenshaNo" AS dbwt1741_hokenshaNo,
+        COUNT(DISTINCT "DbWT1741SaishinsaMoshitate"."renban") AS dbwt1741_count
+        FROM "DbWT1741SaishinsaMoshitate"
+        WHERE "DbWT1741SaishinsaMoshitate"."sofuJogaiFlag" = false
+        GROUP BY "DbWT1741SaishinsaMoshitate"."hokenshaNo"
+    </select>
+    
+    <resultMap id="ResultMap_HokenshaNoEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateGetHokenshaNoEntity"
+               autoMapping="true">
+        <id property="保険者番号" column="dbwt1741_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="レコード件数" column="dbwt1741_count" />
+    </resultMap>
+ 
+    <select id="select送付対象データ関連リスト" resultMap="resultMap_SofuTaisyoDataEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitateshoout.SaishinsaMoshitateMybatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbWT1001Hihokensha" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        INNER JOIN "DbWT1001Hihokensha" AS DbWT1001 ON 再審査申立."renban" = DbWT1001."exRenban"
+        WHERE 再審査申立."hokenshaNo" = #{保険者番号}
+        AND 再審査申立."sofuJogaiFlag" = false
+        ORDER BY 再審査申立."renban" ASC
+    </select>
+
+    <resultMap id="resultMap_SofuTaisyoDataEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateAndHihokenshaKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban" />
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="被保険者" resultMap="ResultMap_DbWT1001HihokenshaEntity"/>
+    </resultMap>
+    
+    <select id="select送付除外区分関連リスト"
+            resultMap="resultMap_SofuJogaiFlagKanrenEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        INNER JOIN "DbWT1001Hihokensha" AS DbWT1001 ON 再審査申立."renban" = DbWT1001."exRenban"
+        WHERE DbWT1001."shikibetsuCode" IS NULL 
+        OR DbWT1001."shikibetsuCode" = ''
+    </select>
+    
+    <resultMap id="resultMap_SofuJogaiFlagKanrenEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateAndHihokenshaKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban" />
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+    </resultMap>
+    
+    <select id="select旧市町村名称関連リスト"
+            resultMap="resultMap_KyuShichosonMeishoEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbT7056GappeiShichoson" /> 
+        FROM (SELECT *
+        FROM "DbWT1741SaishinsaMoshitate" 
+        WHERE ("DbWT1741SaishinsaMoshitate"."shokisaiHokenshaName" IS NULL OR "DbWT1741SaishinsaMoshitate"."shokisaiHokenshaName" = '') 
+        AND "DbWT1741SaishinsaMoshitate"."sofuJogaiFlag" = FALSE ) AS 再審査申立
+        INNER JOIN (SELECT * FROM (SELECT DbT7056.*,
+        row_number() over(partition by DbT7056."kyuHokenshaNo" order by DbT7056."gappeiYMD" desc) AS "rowNum"
+        FROM rgdb."DbT7056GappeiShichoson" AS DbT7056) AS A
+        WHERE A."rowNum" = '1'
+        ) AS 旧市町村
+        ON 再審査申立."shokisaiHokenshaNo" = 旧市町村."kyuHokenshaNo"
+    </select>
+    
+    <resultMap id="resultMap_KyuShichosonMeishoEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="合併市町村" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.ResultMap_DbT7056GappeiShichosonEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT7056GappeiShichoson">
+        旧市町村."gappeiYMD" as "dbT7056GappeiShichoson_gappeiYMD",
+        旧市町村."chiikiNo" as "dbT7056GappeiShichoson_chiikiNo",
+        旧市町村."kyuShichosonCode" as "dbT7056GappeiShichoson_kyuShichosonCode",
+        旧市町村."insertDantaiCd" as "dbT7056GappeiShichoson_insertDantaiCd",
+        旧市町村."insertTimestamp" as "dbT7056GappeiShichoson_insertTimestamp",
+        旧市町村."insertReamsLoginId" as "dbT7056GappeiShichoson_insertReamsLoginId",
+        旧市町村."insertContextId" as "dbT7056GappeiShichoson_insertContextId",
+        旧市町村."isDeleted" as "dbT7056GappeiShichoson_isDeleted",
+        旧市町村."updateCount" as "dbT7056GappeiShichoson_updateCount",
+        旧市町村."lastUpdateTimestamp" as "dbT7056GappeiShichoson_lastUpdateTimestamp",
+        旧市町村."lastUpdateReamsLoginId" as "dbT7056GappeiShichoson_lastUpdateReamsLoginId",
+        旧市町村."unyoKaishiYMD" as "dbT7056GappeiShichoson_unyoKaishiYMD",
+        旧市町村."unyoShuryoYMD" as "dbT7056GappeiShichoson_unyoShuryoYMD",
+        旧市町村."kyuHokenshaNo" as "dbT7056GappeiShichoson_kyuHokenshaNo",
+        旧市町村."kyuShichosonMeisho" as "dbT7056GappeiShichoson_kyuShichosonMeisho",
+        旧市町村."todofukenMeisho" as "dbT7056GappeiShichoson_todofukenMeisho",
+        旧市町村."gunMeisho" as "dbT7056GappeiShichoson_gunMeisho",
+        旧市町村."yubinNo" as "dbT7056GappeiShichoson_yubinNo",
+        旧市町村."telNo" as "dbT7056GappeiShichoson_telNo",
+        旧市町村."rojinhokenShichosonNo" as "dbT7056GappeiShichoson_rojinhokenShichosonNo",
+        旧市町村."rokenJukyushaNoTaikei" as "dbT7056GappeiShichoson_rokenJukyushaNoTaikei",
+        旧市町村."hyojiUmu" as "dbT7056GappeiShichoson_hyojiUmu"
+    </sql>
+    
+    <select id="select市町村名称関連リスト"
+            resultMap="resultMap_ShichosonMeishoEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbT7051KoseiShichosonMaster" />
+        FROM (SELECT * 
+        FROM "DbWT1741SaishinsaMoshitate"
+        WHERE ("DbWT1741SaishinsaMoshitate"."shokisaiHokenshaName" IS NULL OR "DbWT1741SaishinsaMoshitate"."shokisaiHokenshaName" = '') 
+        AND "DbWT1741SaishinsaMoshitate"."sofuJogaiFlag" = FALSE) AS 再審査申立
+        INNER JOIN (SELECT *  FROM (SELECT DbT7051.*,
+        row_number() over (partition by DbT7051."shoKisaiHokenshaNo" order by DbT7051."kanyuYMD" desc) AS "rowNum"
+        FROM rgdb."DbT7051KoseiShichosonMaster" AS DbT7051) AS A 
+        WHERE A."rowNum" = '1'
+        ) AS 構成市町村
+        ON 再審査申立."shokisaiHokenshaNo" = 構成市町村."shoKisaiHokenshaNo"
+    </select>
+    
+    <resultMap id="resultMap_ShichosonMeishoEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="構成市町村マスタ" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT7051KoseiShichosonMaster">
+        構成市町村."shichosonShokibetsuID" as "dbT7051KoseiShichosonMaster_shichosonShokibetsuID",
+        構成市町村."insertDantaiCd" as "dbT7051KoseiShichosonMaster_insertDantaiCd",
+        構成市町村."insertTimestamp" as "dbT7051KoseiShichosonMaster_insertTimestamp",
+        構成市町村."insertReamsLoginId" as "dbT7051KoseiShichosonMaster_insertReamsLoginId",
+        構成市町村."insertContextId" as "dbT7051KoseiShichosonMaster_insertContextId",
+        構成市町村."isDeleted" as "dbT7051KoseiShichosonMaster_isDeleted",
+        構成市町村."updateCount" as "dbT7051KoseiShichosonMaster_updateCount",
+        構成市町村."lastUpdateTimestamp" as "dbT7051KoseiShichosonMaster_lastUpdateTimestamp",
+        構成市町村."lastUpdateReamsLoginId" as "dbT7051KoseiShichosonMaster_lastUpdateReamsLoginId",
+        構成市町村."shichosonCode" as "dbT7051KoseiShichosonMaster_shichosonCode",
+        構成市町村."shoKisaiHokenshaNo" as "dbT7051KoseiShichosonMaster_shoKisaiHokenshaNo",
+        構成市町村."kokuhorenKoikiShichosonNo" as "dbT7051KoseiShichosonMaster_kokuhorenKoikiShichosonNo",
+        構成市町村."shichosonMeisho" as "dbT7051KoseiShichosonMaster_shichosonMeisho",
+        構成市町村."todofukenMeisho" as "dbT7051KoseiShichosonMaster_todofukenMeisho",
+        構成市町村."gunMeisho" as "dbT7051KoseiShichosonMaster_gunMeisho",
+        構成市町村."yubinNo" as "dbT7051KoseiShichosonMaster_yubinNo",
+        構成市町村."jusho" as "dbT7051KoseiShichosonMaster_jusho",
+        構成市町村."telNo" as "dbT7051KoseiShichosonMaster_telNo",
+        構成市町村."yusenChikuCode" as "dbT7051KoseiShichosonMaster_yusenChikuCode",
+        構成市町村."tyohyoTodoufukenHyojiUmu" as "dbT7051KoseiShichosonMaster_tyohyoTodoufukenHyojiUmu",
+        構成市町村."tyohyoGunHyojiUmu" as "dbT7051KoseiShichosonMaster_tyohyoGunHyojiUmu",
+        構成市町村."tyohyoShichosonHyojiUmu" as "dbT7051KoseiShichosonMaster_tyohyoShichosonHyojiUmu",
+        構成市町村."tyohyoJushoHenshuHouhou" as "dbT7051KoseiShichosonMaster_tyohyoJushoHenshuHouhou",
+        構成市町村."tyohyoKatagakiHyojiUmu" as "dbT7051KoseiShichosonMaster_tyohyoKatagakiHyojiUmu",
+        構成市町村."gaikokujinHyojiHouhou" as "dbT7051KoseiShichosonMaster_gaikokujinHyojiHouhou",
+        構成市町村."rojinhokenShichosonNo" as "dbT7051KoseiShichosonMaster_rojinhokenShichosonNo",
+        構成市町村."rokenJukyushaNoTaikei" as "dbT7051KoseiShichosonMaster_rokenJukyushaNoTaikei",
+        構成市町村."shotokuHikidashiHoho" as "dbT7051KoseiShichosonMaster_shotokuHikidashiHoho",
+        構成市町村."nofugakuDataRenkeiHoho" as "dbT7051KoseiShichosonMaster_nofugakuDataRenkeiHoho",
+        構成市町村."tokuchoBunpaishuyaku" as "dbT7051KoseiShichosonMaster_tokuchoBunpaishuyaku",
+        構成市町村."ikoYMD" as "dbT7051KoseiShichosonMaster_ikoYMD",
+        構成市町村."kanyuYMD" as "dbT7051KoseiShichosonMaster_kanyuYMD",
+        構成市町村."ridatsuYMD" as "dbT7051KoseiShichosonMaster_ridatsuYMD",
+        構成市町村."gappeiKyuShichosonKubun" as "dbT7051KoseiShichosonMaster_gappeiKyuShichosonKubun",
+        構成市町村."gappeiKyuShichosonHyojiUmu" as "dbT7051KoseiShichosonMaster_gappeiKyuShichosonHyojiUmu",
+        構成市町村."gappeiChiikiNo" as "dbT7051KoseiShichosonMaster_gappeiChiikiNo",
+        構成市町村."unyoHokenshaNo" as "dbT7051KoseiShichosonMaster_unyoHokenshaNo",
+        構成市町村."unyoKaishiYMD" as "dbT7051KoseiShichosonMaster_unyoKaishiYMD",
+        構成市町村."unyoShuryoYMD" as "dbT7051KoseiShichosonMaster_unyoShuryoYMD",
+        構成市町村."unyoKeitaiKubun" as "dbT7051KoseiShichosonMaster_unyoKeitaiKubun"
+    </sql>
+    
+    <select id="select介護事業者指定サービス名称関連リスト"
+            resultMap="resultMap_ServiceJigyoshaNameEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbT7063KaigoJigyoshaShiteiService" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        INNER JOIN (
+        SELECT サービス事業者1.*
+        FROM rgdb."DbT7063KaigoJigyoshaShiteiService" AS サービス事業者1
+        WHERE NOT EXISTS (
+        SELECT 'X' 
+        FROM rgdb."DbT7063KaigoJigyoshaShiteiService" AS サービス事業者２ 
+        WHERE サービス事業者1."jigyoshaNo" = サービス事業者２."jigyoshaNo" 
+        AND サービス事業者1."serviceShuruiCode" = サービス事業者２."serviceShuruiCode" 
+        AND サービス事業者1."yukoKaishiYMD" <![CDATA[<]]> サービス事業者２."yukoKaishiYMD" 
+        )
+        ) AS サービス事業者1
+        ON 再審査申立."jigyoshoNo" = サービス事業者1."jigyoshaNo" AND 再審査申立."serviceTeikyoShuruiCode" = サービス事業者1."serviceShuruiCode"
+        WHERE サービス事業者1."kihonJohoJunkyoKubun" = '0'
+    </select>
+    
+    <resultMap id="resultMap_ServiceJigyoshaNameEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="サービス事業者" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT7063KaigoJigyoshaShiteiService">
+        サービス事業者1."jigyoshaNo" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaNo",
+        サービス事業者1."serviceShuruiCode" as "dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode",
+        サービス事業者1."yukoKaishiYMD" as "dbT7063KaigoJigyoshaShiteiService_yukoKaishiYMD",
+        サービス事業者1."insertDantaiCd" as "dbT7063KaigoJigyoshaShiteiService_insertDantaiCd",
+        サービス事業者1."insertTimestamp" as "dbT7063KaigoJigyoshaShiteiService_insertTimestamp",
+        サービス事業者1."insertReamsLoginId" as "dbT7063KaigoJigyoshaShiteiService_insertReamsLoginId",
+        サービス事業者1."insertContextId" as "dbT7063KaigoJigyoshaShiteiService_insertContextId",
+        サービス事業者1."isDeleted" as "dbT7063KaigoJigyoshaShiteiService_isDeleted",
+        サービス事業者1."updateCount" as "dbT7063KaigoJigyoshaShiteiService_updateCount",
+        サービス事業者1."lastUpdateTimestamp" as "dbT7063KaigoJigyoshaShiteiService_lastUpdateTimestamp",
+        サービス事業者1."lastUpdateReamsLoginId" as "dbT7063KaigoJigyoshaShiteiService_lastUpdateReamsLoginId",
+        サービス事業者1."yukoShuryoYMD" as "dbT7063KaigoJigyoshaShiteiService_yukoShuryoYMD",
+        サービス事業者1."idoYMD" as "dbT7063KaigoJigyoshaShiteiService_idoYMD",
+        サービス事業者1."idoJiyu" as "dbT7063KaigoJigyoshaShiteiService_idoJiyu",
+        サービス事業者1."shiteiNo" as "dbT7063KaigoJigyoshaShiteiService_shiteiNo",
+        サービス事業者1."kihonJohoJunkyoKubun" as "dbT7063KaigoJigyoshaShiteiService_kihonJohoJunkyoKubun",
+        サービス事業者1."jigyoKaishiYMD" as "dbT7063KaigoJigyoshaShiteiService_jigyoKaishiYMD",
+        サービス事業者1."jigyoKyushiYMD" as "dbT7063KaigoJigyoshaShiteiService_jigyoKyushiYMD",
+        サービス事業者1."jigyoSaikaiYMD" as "dbT7063KaigoJigyoshaShiteiService_jigyoSaikaiYMD",
+        サービス事業者1."jigyoHaishiYMD" as "dbT7063KaigoJigyoshaShiteiService_jigyoHaishiYMD",
+        サービス事業者1."jigyoshaName" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaName",
+        サービス事業者1."jigyoshaNameKana" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaNameKana",
+        サービス事業者1."jigyoshaYubinNo" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaYubinNo",
+        サービス事業者1."jigyoshaAddress" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaAddress",
+        サービス事業者1."jigyoshaAddressKana" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaAddressKana",
+        サービス事業者1."jigyoshaTelNo" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaTelNo",
+        サービス事業者1."jigyoshaFaxNo" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaFaxNo",
+        サービス事業者1."torokuHokenshaNo" as "dbT7063KaigoJigyoshaShiteiService_torokuHokenshaNo",
+        サービス事業者1."juryoininUmu" as "dbT7063KaigoJigyoshaShiteiService_juryoininUmu",
+        サービス事業者1."torokuKaishiYMD" as "dbT7063KaigoJigyoshaShiteiService_torokuKaishiYMD",
+        サービス事業者1."torokuShuryoYMD" as "dbT7063KaigoJigyoshaShiteiService_torokuShuryoYMD",
+        サービス事業者1."kanrishaName" as "dbT7063KaigoJigyoshaShiteiService_kanrishaName",
+        サービス事業者1."kanrishaNameKana" as "dbT7063KaigoJigyoshaShiteiService_kanrishaNameKana",
+        サービス事業者1."kanrishaYubinNo" as "dbT7063KaigoJigyoshaShiteiService_kanrishaYubinNo",
+        サービス事業者1."kanrishaAddress" as "dbT7063KaigoJigyoshaShiteiService_kanrishaAddress",
+        サービス事業者1."kanrishaAddressKana" as "dbT7063KaigoJigyoshaShiteiService_kanrishaAddressKana",
+        サービス事業者1."kozaJohoJunkyoKubun" as "dbT7063KaigoJigyoshaShiteiService_kozaJohoJunkyoKubun",
+        サービス事業者1."shakaiFukushihoujinKeigenjigyouJisshi_umu" as "dbT7063KaigoJigyoshaShiteiService_shakaiFukushihoujinKeigenjigyouJisshi_umu",
+        サービス事業者1."seikatsuhogohouShitei_umu" as "dbT7063KaigoJigyoshaShiteiService_seikatsuhogohouShitei_umu",
+        サービス事業者1."shisetsunadoKubun" as "dbT7063KaigoJigyoshaShiteiService_shisetsunadoKubun",
+        サービス事業者1."jininHaichiKubun" as "dbT7063KaigoJigyoshaShiteiService_jininHaichiKubun",
+        サービス事業者1."tokubetsuChiikiKasan_umu" as "dbT7063KaigoJigyoshaShiteiService_tokubetsuChiikiKasan_umu",
+        サービス事業者1."kinkyujiHomonkaigoKasan_umu" as "dbT7063KaigoJigyoshaShiteiService_kinkyujiHomonkaigoKasan_umu",
+        サービス事業者1."tokubetsuKanriTaisei" as "dbT7063KaigoJigyoshaShiteiService_tokubetsuKanriTaisei",
+        サービス事業者1."kinoKunrenShidoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_kinoKunrenShidoTaisei_umu",
+        サービス事業者1."shokujiTeikyoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_shokujiTeikyoTaisei_umu",
+        サービス事業者1."nyuyokuKaijoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_nyuyokuKaijoTaisei_umu",
+        サービス事業者1."tokubetsuNyuyokuKaijoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_tokubetsuNyuyokuKaijoTaisei_umu",
+        サービス事業者1."joukinsenjuIshiHaichi_umu" as "dbT7063KaigoJigyoshaShiteiService_joukinsenjuIshiHaichi_umu",
+        サービス事業者1."ishiHaichiKijun" as "dbT7063KaigoJigyoshaShiteiService_ishiHaichiKijun",
+        サービス事業者1."seisinkaIshiTeikitekiRyouyousidou_umu" as "dbT7063KaigoJigyoshaShiteiService_seisinkaIshiTeikitekiRyouyousidou_umu",
+        サービス事業者1."yakanKinmuJokenKijun" as "dbT7063KaigoJigyoshaShiteiService_yakanKinmuJokenKijun",
+        サービス事業者1."ninchishouSenmontou_umu" as "dbT7063KaigoJigyoshaShiteiService_ninchishouSenmontou_umu",
+        サービス事業者1."shokujiTeikyoJokyo" as "dbT7063KaigoJigyoshaShiteiService_shokujiTeikyoJokyo",
+        サービス事業者1."sougeiTaisei" as "dbT7063KaigoJigyoshaShiteiService_sougeiTaisei",
+        サービス事業者1."rehaTeikyoTaisei_SogoRehaShisetsu_umu" as "dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_SogoRehaShisetsu_umu",
+        サービス事業者1."rehaTeikyoTaisei_RigakuRyohoII_umu" as "dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_RigakuRyohoII_umu",
+        サービス事業者1."rehaTeikyoTaisei_RigakuRyohoIII_umu" as "dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_RigakuRyohoIII_umu",
+        サービス事業者1."rehaTeikyoTaisei_SagyoRyohoII_umu" as "dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_SagyoRyohoII_umu",
+        サービス事業者1."rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu" as "dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu",
+        サービス事業者1."rehaTeikyoTaisei_Sonota_umu" as "dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_Sonota_umu",
+        サービス事業者1."rehabilitationKasanJokyo" as "dbT7063KaigoJigyoshaShiteiService_rehabilitationKasanJokyo",
+        サービス事業者1."ryoyoKankyoKijun" as "dbT7063KaigoJigyoshaShiteiService_ryoyoKankyoKijun",
+        サービス事業者1."ishiKetuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_ishiKetuinGenzanJokyo_umu",
+        サービス事業者1."kangoShokuinKetsuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_kangoShokuinKetsuinGenzanJokyo_umu",
+        サービス事業者1."rigakuRyouhousiKetsuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_rigakuRyouhousiKetsuinGenzanJokyo_umu",
+        サービス事業者1."sagyouRyouhousiKetsuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_sagyouRyouhousiKetsuinGenzanJokyo_umu",
+        サービス事業者1."kaigoShokuinKetsuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_kaigoShokuinKetsuinGenzanJokyo_umu",
+        サービス事業者1."kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu",
+        サービス事業者1."kaigoJujishaKetsuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_kaigoJujishaKetsuinGenzanJokyo_umu",
+        サービス事業者1."kansenTaisakuSidoKanri_umu" as "dbT7063KaigoJigyoshaShiteiService_kansenTaisakuSidoKanri_umu",
+        サービス事業者1."jushoHifuKaiyouShidoKanri_umu" as "dbT7063KaigoJigyoshaShiteiService_jushoHifuKaiyouShidoKanri_umu",
+        サービス事業者1."yakuzaiKaniriShido_umu" as "dbT7063KaigoJigyoshaShiteiService_yakuzaiKaniriShido_umu",
+        サービス事業者1."shogaishaSeikatsuShienTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_shogaishaSeikatsuShienTaisei_umu",
+        サービス事業者1."chiikiKubunCode" as "dbT7063KaigoJigyoshaShiteiService_chiikiKubunCode",
+        サービス事業者1."jikanEnchoServiceTaisei" as "dbT7063KaigoJigyoshaShiteiService_jikanEnchoServiceTaisei",
+        サービス事業者1."kobetsuRehabilitationTeikyoTaisei" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehabilitationTeikyoTaisei",
+        サービス事業者1."kyojuhiTaisaku" as "dbT7063KaigoJigyoshaShiteiService_kyojuhiTaisaku",
+        サービス事業者1."yakanCare_umu" as "dbT7063KaigoJigyoshaShiteiService_yakanCare_umu",
+        サービス事業者1."rehabilitationKinoKyoka_umu" as "dbT7063KaigoJigyoshaShiteiService_rehabilitationKinoKyoka_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu",
+        サービス事業者1."gengoChokakushiKetsuinGenzanJokyo_umu" as "dbT7063KaigoJigyoshaShiteiService_gengoChokakushiKetsuinGenzanJokyo_umu",
+        サービス事業者1."eiyouKanriHyoka" as "dbT7063KaigoJigyoshaShiteiService_eiyouKanriHyoka",
+        サービス事業者1."tokuteijigyoushoKasan_HomonKaigo_umu" as "dbT7063KaigoJigyoshaShiteiService_tokuteijigyoushoKasan_HomonKaigo_umu",
+        サービス事業者1."jakunenseiNinchishoCareTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_jakunenseiNinchishoCareTaisei_umu",
+        サービス事業者1."undokiKinoKojoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_undokiKinoKojoTaisei_umu",
+        サービス事業者1."eiyoManagement_KaizenTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_eiyoManagement_KaizenTaisei_umu",
+        サービス事業者1."kokuKinoKojoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_kokuKinoKojoTaisei_umu",
+        サービス事業者1."jigyoshoHyokaKasan_Moshide_umu" as "dbT7063KaigoJigyoshaShiteiService_jigyoshoHyokaKasan_Moshide_umu",
+        サービス事業者1."jigyoshoHyokaKasan_Kettei_umu" as "dbT7063KaigoJigyoshaShiteiService_jigyoshoHyokaKasan_Kettei_umu",
+        サービス事業者1."kinkyuUkeireTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_kinkyuUkeireTaisei_umu",
+        サービス事業者1."yakanKangoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_yakanKangoTaisei_umu",
+        サービス事業者1."tokuteijigyoshoKasan_Kyotakukaigoshien_umu" as "dbT7063KaigoJigyoshaShiteiService_tokuteijigyoshoKasan_Kyotakukaigoshien_umu",
+        サービス事業者1."kaigoShienSemmoninSenjuJokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_kaigoShienSemmoninSenjuJokinshaNinsu",
+        サービス事業者1."kaigoSienSemmoninSenjuHijokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninSenjuHijokinshaNinsu",
+        サービス事業者1."kaigoSienSemmoninKemmuJokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninKemmuJokinshaNinsu",
+        サービス事業者1."kaigoSienSemmoninKemmuHijokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninKemmuHijokinshaNinsu",
+        サービス事業者1."homonkaigoServiceTeikyoSekininshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_homonkaigoServiceTeikyoSekininshaNinsu",
+        サービス事業者1."homonkaigoSenjuJokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_homonkaigoSenjuJokinshaNinsu",
+        サービス事業者1."homonkaigoSenjuHijokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_homonkaigoSenjuHijokinshaNinsu",
+        サービス事業者1."homonkaigoKemmuJokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_homonkaigoKemmuJokinshaNinsu",
+        サービス事業者1."homonkaigoKemmuHijokinshaNinsu" as "dbT7063KaigoJigyoshaShiteiService_homonkaigoKemmuHijokinshaNinsu",
+        サービス事業者1."homonkaigoJokinKanzangoNinsu" as "dbT7063KaigoJigyoshaShiteiService_homonkaigoJokinKanzangoNinsu",
+        サービス事業者1."riyoTeiinNinsu" as "dbT7063KaigoJigyoshaShiteiService_riyoTeiinNinsu",
+        サービス事業者1."shiteiYukoKaishiYMD" as "dbT7063KaigoJigyoshaShiteiService_shiteiYukoKaishiYMD",
+        サービス事業者1."shiteiYukoShuryoYMD" as "dbT7063KaigoJigyoshaShiteiService_shiteiYukoShuryoYMD",
+        サービス事業者1."shiteiKoshinShinseichuKubun" as "dbT7063KaigoJigyoshaShiteiService_shiteiKoshinShinseichuKubun",
+        サービス事業者1."koryokuTeishiKaishiYMD" as "dbT7063KaigoJigyoshaShiteiService_koryokuTeishiKaishiYMD",
+        サービス事業者1."koryokuTeishiShuryoYMD" as "dbT7063KaigoJigyoshaShiteiService_koryokuTeishiShuryoYMD",
+        サービス事業者1."daikiboJigyoshaGaito_umu" as "dbT7063KaigoJigyoshaShiteiService_daikiboJigyoshaGaito_umu",
+        サービス事業者1."junUnitCareTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_junUnitCareTaisei_umu",
+        サービス事業者1."judokaTaioTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_judokaTaioTaisei_umu",
+        サービス事業者1."iryoRenkeiTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_iryoRenkeiTaisei_umu",
+        サービス事業者1."unitCareTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_unitCareTaisei_umu",
+        サービス事業者1."zaitaku_nyushoSogoRiyoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_zaitaku_nyushoSogoRiyoTaisei_umu",
+        サービス事業者1."terminalCareTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_terminalCareTaisei_umu",
+        サービス事業者1."shintaiKosokuHaishiTorikumi_umu" as "dbT7063KaigoJigyoshaShiteiService_shintaiKosokuHaishiTorikumi_umu",
+        サービス事業者1."shokiboKyotenShugoTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_shokiboKyotenShugoTaisei_umu",
+        サービス事業者1."ninchishoCareKasan_umu" as "dbT7063KaigoJigyoshaShiteiService_ninchishoCareKasan_umu",
+        サービス事業者1."kobetsuKinoKunrenTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuKinoKunrenTaisei_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_SagyoRyoho_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_SagyoRyoho_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_Sonota_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_Sonota_umu",
+        サービス事業者1."setsubiKijun" as "dbT7063KaigoJigyoshaShiteiService_setsubiKijun",
+        サービス事業者1."ryoyoTaiseiIjiTokubetsuKasan" as "dbT7063KaigoJigyoshaShiteiService_ryoyoTaiseiIjiTokubetsuKasan",
+        サービス事業者1."kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu" as "dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu",
+        サービス事業者1."sankyuHelperTaisei" as "dbT7063KaigoJigyoshaShiteiService_sankyuHelperTaisei",
+        サービス事業者1."chuSankanChiikiShokiboJigyoshoKasan_chiiki" as "dbT7063KaigoJigyoshaShiteiService_chuSankanChiikiShokiboJigyoshoKasan_chiiki",
+        サービス事業者1."chuSankanChiikiShokiboJigyoushoKasan_kibo" as "dbT7063KaigoJigyoshaShiteiService_chuSankanChiikiShokiboJigyoushoKasan_kibo",
+        サービス事業者1."serviceTeikyoTaiseiKyokaKasan" as "dbT7063KaigoJigyoshaShiteiService_serviceTeikyoTaiseiKyokaKasan",
+        サービス事業者1."ninchishoTankiShuchuRehabilitationKasan" as "dbT7063KaigoJigyoshaShiteiService_ninchishoTankiShuchuRehabilitationKasan",
+        サービス事業者1."jakunenseiNinchishoRiyoushaUkeeireKasan" as "dbT7063KaigoJigyoshaShiteiService_jakunenseiNinchishoRiyoushaUkeeireKasan",
+        サービス事業者1."kangoTaiseiKasan" as "dbT7063KaigoJigyoshaShiteiService_kangoTaiseiKasan",
+        サービス事業者1."yakinShokuinHaichiKasan" as "dbT7063KaigoJigyoshaShiteiService_yakinShokuinHaichiKasan",
+        サービス事業者1."ryoyoShokuKasan" as "dbT7063KaigoJigyoshaShiteiService_ryoyoShokuKasan",
+        サービス事業者1."nichijoSeikatsuKeizokuShienKasan" as "dbT7063KaigoJigyoshaShiteiService_nichijoSeikatsuKeizokuShienKasan",
+        サービス事業者1."ninchishoSemmonCareKasan" as "dbT7063KaigoJigyoshaShiteiService_ninchishoSemmonCareKasan",
+        サービス事業者1."twentyFourHoursTsuhoTaioKasan" as "dbT7063KaigoJigyoshaShiteiService_twentyFourHoursTsuhoTaioKasan",
+        サービス事業者1."kangoShokuinHaichiKasan" as "dbT7063KaigoJigyoshaShiteiService_kangoShokuinHaichiKasan",
+        サービス事業者1."yakanCareKasan" as "dbT7063KaigoJigyoshaShiteiService_yakanCareKasan",
+        サービス事業者1."shudanCommunicationRyoho_umu" as "dbT7063KaigoJigyoshaShiteiService_shudanCommunicationRyoho_umu",
+        サービス事業者1."serviceTeikyoTaiseiKyokaKasan_Karadokogata" as "dbT7063KaigoJigyoshaShiteiService_serviceTeikyoTaiseiKyokaKasan_Karadokogata",
+        サービス事業者1."nitchuShintaikaigoTaise_20funmiman_umu" as "dbT7063KaigoJigyoshaShiteiService_nitchuShintaikaigoTaise_20funmiman_umu",
+        サービス事業者1."serviceTeikyoSekininshaTaisei_umu" as "dbT7063KaigoJigyoshaShiteiService_serviceTeikyoSekininshaTaisei_umu",
+        サービス事業者1."doitsuTatemonoKyojuRiyoshaGenzan_umu" as "dbT7063KaigoJigyoshaShiteiService_doitsuTatemonoKyojuRiyoshaGenzan_umu",
+        サービス事業者1."kinkyuTankiNyushoTaiseiKakuhoKasan" as "dbT7063KaigoJigyoshaShiteiService_kinkyuTankiNyushoTaiseiKakuhoKasan",
+        サービス事業者1."zaitakuFukki_ZaitakuRyoyoShienKinoKasan" as "dbT7063KaigoJigyoshaShiteiService_zaitakuFukki_ZaitakuRyoyoShienKinoKasan",
+        サービス事業者1."seikatuKinoKojoGroupKatsudoKasan" as "dbT7063KaigoJigyoshaShiteiService_seikatuKinoKojoGroupKatsudoKasan",
+        サービス事業者1."kaigoShokuinShoguKaizenKasan" as "dbT7063KaigoJigyoshaShiteiService_kaigoShokuinShoguKaizenKasan"
+    </sql>
+    
+    <select id="select介護事業者名称取得関連リスト"
+            resultMap="resultMap_JigyoshaNameEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbT7060KaigoJigyosha" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        INNER JOIN (
+        SELECT 事業者1.*
+        FROM rgdb."DbT7060KaigoJigyosha" AS 事業者1
+        WHERE NOT EXISTS (
+        SELECT 'X' 
+        FROM rgdb."DbT7060KaigoJigyosha" AS 事業者２ 
+        WHERE 事業者1."jigyoshaNo" = 事業者２."jigyoshaNo" 
+        AND 事業者1."yukoKaishiYMD" <![CDATA[<]]> 事業者２."yukoKaishiYMD" 
+        )
+        ) AS 事業者1
+        ON 再審査申立."jigyoshoNo" = 事業者1."jigyoshaNo" 
+        WHERE 再審査申立."jigyoshaName" IS NULL 
+        OR 再審査申立."jigyoshaName" = ''
+    </select>
+    
+    <resultMap id="resultMap_JigyoshaNameEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="事業者" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT7060KaigoJigyosha">
+        事業者1."jigyoshaNo" as "dbT7060KaigoJigyosha_jigyoshaNo",
+        事業者1."yukoKaishiYMD" as "dbT7060KaigoJigyosha_yukoKaishiYMD",
+        事業者1."insertDantaiCd" as "dbT7060KaigoJigyosha_insertDantaiCd",
+        事業者1."insertTimestamp" as "dbT7060KaigoJigyosha_insertTimestamp",
+        事業者1."insertReamsLoginId" as "dbT7060KaigoJigyosha_insertReamsLoginId",
+        事業者1."insertContextId" as "dbT7060KaigoJigyosha_insertContextId",
+        事業者1."isDeleted" as "dbT7060KaigoJigyosha_isDeleted",
+        事業者1."updateCount" as "dbT7060KaigoJigyosha_updateCount",
+        事業者1."lastUpdateTimestamp" as "dbT7060KaigoJigyosha_lastUpdateTimestamp",
+        事業者1."lastUpdateReamsLoginId" as "dbT7060KaigoJigyosha_lastUpdateReamsLoginId",
+        事業者1."yukoShuryoYMD" as "dbT7060KaigoJigyosha_yukoShuryoYMD",
+        事業者1."idoYMD" as "dbT7060KaigoJigyosha_idoYMD",
+        事業者1."idoJiyuCode" as "dbT7060KaigoJigyosha_idoJiyuCode",
+        事業者1."jigyoKaishiYMD" as "dbT7060KaigoJigyosha_jigyoKaishiYMD",
+        事業者1."jigyoKyushiYMD" as "dbT7060KaigoJigyosha_jigyoKyushiYMD",
+        事業者1."jigyoSaikaiYMD" as "dbT7060KaigoJigyosha_jigyoSaikaiYMD",
+        事業者1."jigyoHaishiYMD" as "dbT7060KaigoJigyosha_jigyoHaishiYMD",
+        事業者1."jigyoshaName" as "dbT7060KaigoJigyosha_jigyoshaName",
+        事業者1."jigyoshaNameKana" as "dbT7060KaigoJigyosha_jigyoshaNameKana",
+        事業者1."yubinNo" as "dbT7060KaigoJigyosha_yubinNo",
+        事業者1."jigyoshaAddress" as "dbT7060KaigoJigyosha_jigyoshaAddress",
+        事業者1."jigyoshaKanaAddress" as "dbT7060KaigoJigyosha_jigyoshaKanaAddress",
+        事業者1."telNo" as "dbT7060KaigoJigyosha_telNo",
+        事業者1."faxNo" as "dbT7060KaigoJigyosha_faxNo",
+        事業者1."atesakiBusho" as "dbT7060KaigoJigyosha_atesakiBusho",
+        事業者1."atesakininName" as "dbT7060KaigoJigyosha_atesakininName",
+        事業者1."atesakininNamekana" as "dbT7060KaigoJigyosha_atesakininNamekana",
+        事業者1."shiteiKijungaitoJigyoshaKubun" as "dbT7060KaigoJigyosha_shiteiKijungaitoJigyoshaKubun",
+        事業者1."shozaiShichoson" as "dbT7060KaigoJigyosha_shozaiShichoson",
+        事業者1."serviceJisshiChiiki" as "dbT7060KaigoJigyosha_serviceJisshiChiiki",
+        事業者1."hojinShubetsu" as "dbT7060KaigoJigyosha_hojinShubetsu",
+        事業者1."bedSu" as "dbT7060KaigoJigyosha_bedSu",
+        事業者1."shozokuNinzu" as "dbT7060KaigoJigyosha_shozokuNinzu",
+        事業者1."riyoshaSu" as "dbT7060KaigoJigyosha_riyoshaSu",
+        事業者1."biko" as "dbT7060KaigoJigyosha_biko"
+    </sql>
+    
+    <select id="select事業者名称エラーデータ関連リスト"
+            resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        WHERE 再審査申立."jigyoshoNo" IS NOT NULL 
+        AND 再審査申立."jigyoshoNo" != ''
+        AND 再審査申立."jigyoshoNo" != '0000000000'
+        AND (再審査申立."jigyoshaName" IS NULL OR 再審査申立."jigyoshaName" = '')
+    </select>
+    
+    <select id="selectサービス種類名称関連リスト"
+            resultMap="resultMap_ServiceShuruiMeishoEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbT7130KaigoServiceShurui" /> 
+        FROM (SELECT *
+        FROM "DbWT1741SaishinsaMoshitate" 
+        WHERE "DbWT1741SaishinsaMoshitate"."serviceKomokuCode" IS NULL OR "DbWT1741SaishinsaMoshitate"."serviceKomokuCode" = '' 
+        OR "DbWT1741SaishinsaMoshitate"."serviceKomokuCode" = '0000' ) AS 再審査申立
+        INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS 介護サービス種類
+        ON 再審査申立."serviceTeikyoShuruiCode" = 介護サービス種類."serviceShuruiCd"
+        WHERE 介護サービス種類."teikyoKaishiYM" <![CDATA[<=]]> 再審査申立."serviceTeikyoYM"
+        AND (再審査申立."serviceTeikyoYM" <![CDATA[<=]]> 介護サービス種類."teikyoshuryoYM" 
+        OR 介護サービス種類."teikyoshuryoYM" IS NULL OR 介護サービス種類."teikyoshuryoYM" = '')
+    </select>
+    
+    <resultMap id="resultMap_ServiceShuruiMeishoEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="介護サービス種類" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT7130KaigoServiceShurui">
+        介護サービス種類."serviceShuruiCd" as "dbT7130KaigoServiceShurui_serviceShuruiCd",
+        介護サービス種類."teikyoKaishiYM" as "dbT7130KaigoServiceShurui_teikyoKaishiYM",
+        介護サービス種類."insertDantaiCd" as "dbT7130KaigoServiceShurui_insertDantaiCd",
+        介護サービス種類."insertTimestamp" as "dbT7130KaigoServiceShurui_insertTimestamp",
+        介護サービス種類."insertReamsLoginId" as "dbT7130KaigoServiceShurui_insertReamsLoginId",
+        介護サービス種類."insertContextId" as "dbT7130KaigoServiceShurui_insertContextId",
+        介護サービス種類."isDeleted" as "dbT7130KaigoServiceShurui_isDeleted",
+        介護サービス種類."updateCount" as "dbT7130KaigoServiceShurui_updateCount",
+        介護サービス種類."lastUpdateTimestamp" as "dbT7130KaigoServiceShurui_lastUpdateTimestamp",
+        介護サービス種類."lastUpdateReamsLoginId" as "dbT7130KaigoServiceShurui_lastUpdateReamsLoginId",
+        介護サービス種類."teikyoshuryoYM" as "dbT7130KaigoServiceShurui_teikyoshuryoYM",
+        介護サービス種類."serviceShuruiMeisho" as "dbT7130KaigoServiceShurui_serviceShuruiMeisho",
+        介護サービス種類."serviceShuruiRyakusho" as "dbT7130KaigoServiceShurui_serviceShuruiRyakusho",
+        介護サービス種類."serviceBunrruicode" as "dbT7130KaigoServiceShurui_serviceBunrruicode",
+        介護サービス種類."serviceShuruiNaibuCd" as "dbT7130KaigoServiceShurui_serviceShuruiNaibuCd",
+        介護サービス種類."gendogakuKubun" as "dbT7130KaigoServiceShurui_gendogakuKubun",
+        介護サービス種類."yusenJuni" as "dbT7130KaigoServiceShurui_yusenJuni",
+        介護サービス種類."kyotakuServiceKubun" as "dbT7130KaigoServiceShurui_kyotakuServiceKubun",
+        介護サービス種類."shiteiServiceKubun" as "dbT7130KaigoServiceShurui_shiteiServiceKubun",
+        介護サービス種類."kijunGaitoServiceKubun" as "dbT7130KaigoServiceShurui_kijunGaitoServiceKubun",
+        介護サービス種類."minashiKubun" as "dbT7130KaigoServiceShurui_minashiKubun",
+        介護サービス種類."gamenHyojiKubun" as "dbT7130KaigoServiceShurui_gamenHyojiKubun",
+        介護サービス種類."shien1InKahiKubun" as "dbT7130KaigoServiceShurui_shien1InKahiKubun",
+        介護サービス種類."shien2InKahiKubun" as "dbT7130KaigoServiceShurui_shien2InKahiKubun",
+        介護サービス種類."nijiyoboInKahiKubun" as "dbT7130KaigoServiceShurui_nijiyoboInKahiKubun",
+        介護サービス種類."serviceShoBunrui" as "dbT7130KaigoServiceShurui_serviceShoBunrui"
+    </sql>
+    
+    <select id="select介護サービス内容名称関連リスト"
+            resultMap="resultMap_ServiceNameEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbT7131KaigoServiceNaiyou" /> 
+        FROM (SELECT *
+        FROM "DbWT1741SaishinsaMoshitate" 
+        WHERE "DbWT1741SaishinsaMoshitate"."serviceKomokuCode" IS NOT NULL AND "DbWT1741SaishinsaMoshitate"."serviceKomokuCode" != '' 
+        AND "DbWT1741SaishinsaMoshitate"."serviceKomokuCode" != '0000' ) AS 再審査申立
+        INNER JOIN rgdb."DbT7131KaigoServiceNaiyou" AS 介護サービス内容
+        ON 再審査申立."serviceTeikyoShuruiCode" = 介護サービス内容."serviceShuruiCd"
+        AND 再審査申立."serviceKomokuCode" = 介護サービス内容."serviceKoumokuCd"
+        WHERE 介護サービス内容."teikyoKaishiYM" <![CDATA[<=]]> 再審査申立."serviceTeikyoYM"
+        AND (再審査申立."serviceTeikyoYM" <![CDATA[<=]]> 介護サービス内容."teikyoShuryoYM" 
+        OR 介護サービス内容."teikyoShuryoYM" IS NULL OR 介護サービス内容."teikyoShuryoYM" = '')
+    </select>
+    
+    <resultMap id="resultMap_ServiceNameEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="介護サービス内容" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT7131KaigoServiceNaiyou">
+        介護サービス内容."serviceShuruiCd" as "dbT7131KaigoServiceNaiyou_serviceShuruiCd",
+        介護サービス内容."serviceKoumokuCd" as "dbT7131KaigoServiceNaiyou_serviceKoumokuCd",
+        介護サービス内容."teikyoKaishiYM" as "dbT7131KaigoServiceNaiyou_teikyoKaishiYM",
+        介護サービス内容."rirekiNo" as "dbT7131KaigoServiceNaiyou_rirekiNo",
+        介護サービス内容."insertDantaiCd" as "dbT7131KaigoServiceNaiyou_insertDantaiCd",
+        介護サービス内容."insertTimestamp" as "dbT7131KaigoServiceNaiyou_insertTimestamp",
+        介護サービス内容."insertReamsLoginId" as "dbT7131KaigoServiceNaiyou_insertReamsLoginId",
+        介護サービス内容."insertContextId" as "dbT7131KaigoServiceNaiyou_insertContextId",
+        介護サービス内容."isDeleted" as "dbT7131KaigoServiceNaiyou_isDeleted",
+        介護サービス内容."updateCount" as "dbT7131KaigoServiceNaiyou_updateCount",
+        介護サービス内容."lastUpdateTimestamp" as "dbT7131KaigoServiceNaiyou_lastUpdateTimestamp",
+        介護サービス内容."lastUpdateReamsLoginId" as "dbT7131KaigoServiceNaiyou_lastUpdateReamsLoginId",
+        介護サービス内容."teikyoShuryoYM" as "dbT7131KaigoServiceNaiyou_teikyoShuryoYM",
+        介護サービス内容."serviceName" as "dbT7131KaigoServiceNaiyou_serviceName",
+        介護サービス内容."serviceNameRyaku" as "dbT7131KaigoServiceNaiyou_serviceNameRyaku",
+        介護サービス内容."taniSu" as "dbT7131KaigoServiceNaiyou_taniSu",
+        介護サービス内容."tanisuShikibetsuCode" as "dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode",
+        介護サービス内容."tanisuSanteiTaniCode" as "dbT7131KaigoServiceNaiyou_tanisuSanteiTaniCode",
+        介護サービス内容."idouJiyuCode" as "dbT7131KaigoServiceNaiyou_idouJiyuCode",
+        介護サービス内容."gendogakuTaishogaiFlag" as "dbT7131KaigoServiceNaiyou_gendogakuTaishogaiFlag",
+        介護サービス内容."gaibuServiceRiyoKataKubun" as "dbT7131KaigoServiceNaiyou_gaibuServiceRiyoKataKubun",
+        介護サービス内容."tokubetsuChiikiKasanFlag" as "dbT7131KaigoServiceNaiyou_tokubetsuChiikiKasanFlag",
+        介護サービス内容."riyosyaFutanTeiritsuTeigakuKubun" as "dbT7131KaigoServiceNaiyou_riyosyaFutanTeiritsuTeigakuKubun",
+        介護サービス内容."koshinUmuFoag" as "dbT7131KaigoServiceNaiyou_koshinUmuFoag",
+        介護サービス内容."motoTensu" as "dbT7131KaigoServiceNaiyou_motoTensu",
+        介護サービス内容."motoGendogakuTaishogaiFlag" as "dbT7131KaigoServiceNaiyou_motoGendogakuTaishogaiFlag",
+        介護サービス内容."motoTaniShikibetsuCd" as "dbT7131KaigoServiceNaiyou_motoTaniShikibetsuCd",
+        介護サービス内容."riyoshaFutanGaku" as "dbT7131KaigoServiceNaiyou_riyoshaFutanGaku",
+        介護サービス内容."kyufuRitsu" as "dbT7131KaigoServiceNaiyou_kyufuRitsu",
+        介護サービス内容."nijiyoboJigyoTaishaJishiKubunHigaito" as "dbT7131KaigoServiceNaiyou_nijiyoboJigyoTaishaJishiKubunHigaito",
+        介護サービス内容."yoshien1JukyushaJishiKubun" as "dbT7131KaigoServiceNaiyou_yoshien1JukyushaJishiKubun",
+        介護サービス内容."yoshien2JukyushaJishiKubun" as "dbT7131KaigoServiceNaiyou_yoshien2JukyushaJishiKubun",
+        介護サービス内容."taishoJigyoJishiKubun" as "dbT7131KaigoServiceNaiyou_taishoJigyoJishiKubun",
+        介護サービス内容."sogoJigyoServiceKubun" as "dbT7131KaigoServiceNaiyou_sogoJigyoServiceKubun",
+        介護サービス内容."seigenNissuKaisu" as "dbT7131KaigoServiceNaiyou_seigenNissuKaisu",
+        介護サービス内容."santeiKaisuSeigenKikanKubun" as "dbT7131KaigoServiceNaiyou_santeiKaisuSeigenKikanKubun"
+    </sql>
+    
+    <select id="select特定診療サービスコード名称関連リスト"
+            resultMap="resultMap_ServiceMeishoEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="allColumns_DbT7120TokuteiShinryoServiceCode" /> 
+        FROM (SELECT *,
+        CASE WHEN "DbWT1741SaishinsaMoshitate"."serviceTeikyoShuruiCode" IN ('23','26','53') THEN '60' 
+        WHEN "DbWT1741SaishinsaMoshitate"."serviceTeikyoShuruiCode" IN ('22','25','52') THEN '70'
+        ELSE "DbWT1741SaishinsaMoshitate"."serviceTeikyoShuruiCode" END AS 検索サービス種類コード
+        FROM "DbWT1741SaishinsaMoshitate" 
+        WHERE "DbWT1741SaishinsaMoshitate"."serviceMeisho" IS NULL OR "DbWT1741SaishinsaMoshitate"."serviceMeisho" = '' 
+        AND "DbWT1741SaishinsaMoshitate"."serviceTeikyoShuruiCode" IN ('22','23','25','26','52','53')) AS 再審査申立
+        INNER JOIN rgdb."DbT7120TokuteiShinryoServiceCode" AS 特定診療サービスコード
+        ON 再審査申立.検索サービス種類コード = 特定診療サービスコード."serviceShuruiCode"
+        AND 再審査申立."serviceKomokuCode" = 特定診療サービスコード."serviceKomokuCode"
+        WHERE 特定診療サービスコード."tekiyoKaishiYM" <![CDATA[<=]]> 再審査申立."serviceTeikyoYM"
+        AND (再審査申立."serviceTeikyoYM" <![CDATA[<=]]> 特定診療サービスコード."tekiyoShuryoYM" 
+        OR 特定診療サービスコード."tekiyoShuryoYM" IS NULL OR 特定診療サービスコード."tekiyoShuryoYM" = '')
+    </select>
+    
+    <resultMap id="resultMap_ServiceMeishoEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="特定診療サービスコード" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7120TokuteiShinryoServiceCodeMapper.ResultMap_DbT7120TokuteiShinryoServiceCodeEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT7120TokuteiShinryoServiceCode">
+        特定診療サービスコード."serviceShuruiCode" as "dbT7120TokuteiShinryoServiceCode_serviceShuruiCode",
+        特定診療サービスコード."serviceKomokuCode" as "dbT7120TokuteiShinryoServiceCode_serviceKomokuCode",
+        特定診療サービスコード."tekiyoKaishiYM" as "dbT7120TokuteiShinryoServiceCode_tekiyoKaishiYM",
+        特定診療サービスコード."rirekiNo" as "dbT7120TokuteiShinryoServiceCode_rirekiNo",
+        特定診療サービスコード."insertDantaiCd" as "dbT7120TokuteiShinryoServiceCode_insertDantaiCd",
+        特定診療サービスコード."insertTimestamp" as "dbT7120TokuteiShinryoServiceCode_insertTimestamp",
+        特定診療サービスコード."insertReamsLoginId" as "dbT7120TokuteiShinryoServiceCode_insertReamsLoginId",
+        特定診療サービスコード."insertContextId" as "dbT7120TokuteiShinryoServiceCode_insertContextId",
+        特定診療サービスコード."isDeleted" as "dbT7120TokuteiShinryoServiceCode_isDeleted",
+        特定診療サービスコード."updateCount" as "dbT7120TokuteiShinryoServiceCode_updateCount",
+        特定診療サービスコード."lastUpdateTimestamp" as "dbT7120TokuteiShinryoServiceCode_lastUpdateTimestamp",
+        特定診療サービスコード."lastUpdateReamsLoginId" as "dbT7120TokuteiShinryoServiceCode_lastUpdateReamsLoginId",
+        特定診療サービスコード."tekiyoShuryoYM" as "dbT7120TokuteiShinryoServiceCode_tekiyoShuryoYM",
+        特定診療サービスコード."serviceMeisho" as "dbT7120TokuteiShinryoServiceCode_serviceMeisho",
+        特定診療サービスコード."taniSu" as "dbT7120TokuteiShinryoServiceCode_taniSu",
+        特定診療サービスコード."taniSuShikibetsu" as "dbT7120TokuteiShinryoServiceCode_taniSuShikibetsu",
+        特定診療サービスコード."santeiTani" as "dbT7120TokuteiShinryoServiceCode_santeiTani",
+        特定診療サービスコード."goseiShikibetsuKubun" as "dbT7120TokuteiShinryoServiceCode_goseiShikibetsuKubun",
+        特定診療サービスコード."tokuteiShinryoKubunCode" as "dbT7120TokuteiShinryoServiceCode_tokuteiShinryoKubunCode",
+        特定診療サービスコード."tokuteiShinryoKomokuCode" as "dbT7120TokuteiShinryoServiceCode_tokuteiShinryoKomokuCode",
+        特定診療サービスコード."santeiSeiyakuKikan" as "dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKikan",
+        特定診療サービスコード."santeiSeiyakuKaisu" as "dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKaisu"
+    </sql>
+    
+    <select id="selectサービス名称エラーデータ関連リスト"
+            resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        WHERE 再審査申立."serviceMeisho" IS NULL OR 再審査申立."serviceMeisho" = ''
+    </select>
+    
+    <select id="selectDB更新データ関連リスト"
+            resultMap="resultMap_DBKoushinDataEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3062SaishinsaMoshitateMapper.allColumns_DbT3062SaishinsaMoshitate" /> 
+        FROM rgdb."DbT3062SaishinsaMoshitate" AS "DbT3062SaishinsaMoshitate"
+        INNER JOIN "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        ON "DbT3062SaishinsaMoshitate"."jigyoshoNo" = 再審査申立."jigyoshoNo"
+        AND "DbT3062SaishinsaMoshitate"."hiHokenshaNo" = 再審査申立."hiHokenshaNo"
+        AND "DbT3062SaishinsaMoshitate"."serviceTeikyoYM" = 再審査申立."serviceTeikyoYM"
+        AND "DbT3062SaishinsaMoshitate"."serviceTeikyoShuruiCode" = 再審査申立."serviceTeikyoShuruiCode"
+        AND "DbT3062SaishinsaMoshitate"."serviceKomokuCode" = 再審査申立."serviceKomokuCode"
+        AND "DbT3062SaishinsaMoshitate"."rirekiNo" = 再審査申立."rirekiNo"
+        
+    </select>
+    
+    <resultMap id="resultMap_DBKoushinDataEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity"
+               autoMapping="true">
+        <id column="dbWT1741_renban"/>
+        <association property="再審査申立" resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity"/>
+        <association property="再審査申立データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3062SaishinsaMoshitateMapper.ResultMap_DbT3062SaishinsaMoshitateEntity"/>
+    </resultMap>
+    
+</mapper>

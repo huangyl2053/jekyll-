@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410043;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120870.DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410043.TsuchishoJoho662Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -51,12 +50,12 @@ public class TsuchishoJoho662 {
      * @param div TsuchishoJoho662Div
      * @return ResponseData
      */
-    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(
+    public ResponseData<DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter> onClick_btnExcute(
             TsuchishoJoho662Div div) {
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
-        return ResponseData.of(new KokuhorenKyoutsuBatchParameter()).respond();
+        return ResponseData.of(new DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter()).respond();
     }
 
     /**
@@ -65,7 +64,7 @@ public class TsuchishoJoho662 {
      * @param div TsuchishoJoho662Div
      * @return KokuhorenKyoutsuBatchParameter
      */
-    public KokuhorenKyoutsuBatchParameter setBatchParameter(TsuchishoJoho662Div div) {
+    public DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter setBatchParameter(TsuchishoJoho662Div div) {
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
             Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -77,8 +76,8 @@ public class TsuchishoJoho662 {
                 IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
                 manager.save前回出力順(iOutputOrder);
             }
-            KokuhorenKyoutsuBatchParameter parameter
-                    = new KokuhorenKyoutsuBatchParameter();
+            DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter parameter
+                    = new DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaInParameter();
             RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
             SaiShoriKubun 再処理区分 = null;
             if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
@@ -88,7 +87,7 @@ public class TsuchishoJoho662 {
             }
             parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
             parameter.setSaishoriKubun(再処理区分);
-            parameter.setShutsuryokujunId(new RString(出力順ID.toString()));
+            parameter.setShutsuryokujunId(出力順ID);
             return parameter;
         }
         return null;

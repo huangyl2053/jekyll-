@@ -41,7 +41,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoService {
                 = mapperProvider.create(IShakaiFukushiHoujinnKeigenTsuuchishoMapper.class);
         List<ShakaiFukushiHoujinnKeigenTsuuchishoEntity> result
                 = mapper.get社会福祉法人等軽減の通知書発行情報(利用者負担割合検索条件);
-        if (result == null || !result.isEmpty()) {
+        if (result == null || result.isEmpty()) {
             return 0;
         }
         return result.size();

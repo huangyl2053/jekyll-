@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-2530-030 jiangwenkai -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufuhikagomoshitateshoout.IKaigokyufuhiKagoMoshitateshoOutMapper">  
+    <select id="select過誤申立データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomoshitateshoout.KagoMoshitateMybatisParameter"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.ResultMap_DbT3059KagoMoshitateEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.allColumns_DbT3059KagoMoshitate" />
+        FROM
+         rgdb."DbT3059KagoMoshitate" AS "DbT3059KagoMoshitate"
+        WHERE
+          1 = 1
+          <if test="再処理区分 == 1">
+            <if test="送付対象情報 == 1">
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+                 OR  "DbT3059KagoMoshitate"."kokuhorenSofuYM" = #{処理年月}
+                 OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
+            AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '1'
+            AND "DbT3059KagoMoshitate"."isDeleted" = '0'
+            AND "DbT3059KagoMoshitate"."serviceTeikyoYM" <![CDATA[<]]>  #{処理年月}
+            AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
+            </if>
+            <if test=" 送付対象情報 == 2">
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+                 OR  "DbT3059KagoMoshitate"."kokuhorenSofuYM" = #{処理年月}
+                 OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
+            AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '0'
+            AND "DbT3059KagoMoshitate"."isDeleted" = '0'
+            AND "DbT3059KagoMoshitate"."serviceTeikyoYM" <![CDATA[<]]>  #{処理年月}
+            AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
+           </if>
+           
+           <if test=" 送付対象情報 == null or 送付対象情報.isEmpty()">
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+                 OR  "DbT3059KagoMoshitate"."kokuhorenSofuYM" = #{処理年月}
+                 OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
+            AND "DbT3059KagoMoshitate"."isDeleted" = '0'
+            AND "DbT3059KagoMoshitate"."serviceTeikyoYM" <![CDATA[<]]>  #{処理年月}
+            AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
+           </if>
+        </if>
+        
+         <if test="再処理区分 != 1">
+            <if test="送付対象情報 == 1">
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+                 OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
+            AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '1'
+            AND "DbT3059KagoMoshitate"."isDeleted" = '0'
+            AND "DbT3059KagoMoshitate"."serviceTeikyoYM" <![CDATA[<]]>  #{処理年月}
+            AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
+            </if>
+            <if test=" 送付対象情報 == 2">
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+                 OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
+            AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '0'
+            AND "DbT3059KagoMoshitate"."isDeleted" = '0'
+            AND "DbT3059KagoMoshitate"."serviceTeikyoYM" <![CDATA[<]]>  #{処理年月}
+            AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
+           </if>
+           
+           <if test=" 送付対象情報 == null or 送付対象情報.isEmpty()">
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+                 OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
+            AND "DbT3059KagoMoshitate"."isDeleted" = '0'
+            AND "DbT3059KagoMoshitate"."serviceTeikyoYM" <![CDATA[<]]>  #{処理年月}
+            AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
+           </if>
+        </if>
+      ORDER BY
+            "DbT3059KagoMoshitate"."shokisaiHokenshaNo"  ASC ,
+            "DbT3059KagoMoshitate"."serviceTeikyoYM"  ASC 
+    </select>
+    
+    
+     <select id="select保険者番号"
+            resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutGetHihokenshaNoEntity" fetchSize="500" resultOrdered="true">
+        SELECT 
+         dbWT1001.*,dbWT1731.*
+        FROM "DbWT1001Hihokensha" AS dbWT1001
+        INNER JOIN  "DbWT1731KagoMoshitate" AS dbWT1731
+        ON dbWT1001."exRenban"  = dbWT1731."renban" 
+    </select>
+    
+    <resultMap id="resultMap_KaigokyufuhiKagoMoshitateshoOutGetHihokenshaNoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutGetHihokenshaNoEntity" autoMapping="true">
+        <id column="renban"/>
+        <association property="dbWT1731Entity" resultMap="resultMap_DbWT1731KagoMoshitateTempEntity"/>
+        <association property="dbWT1001Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout.IHokenshaKyufujissekiOutMapper.resultMap_DbWT1001HihokenshaTempEntity"/>
+    </resultMap>
+    
+    
+      <!--テーブルDbWT1731KagoMoshitateの項目をDbWT1731KagoMoshitateTempEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_DbWT1731KagoMoshitateTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshitateTempEntity" autoMapping="true">
+        <id  property="renban" column="renban"/>
+        <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="rirekiNo" column="rirekiNo" />
+        <result property="moshitateYMD" column="moshitateYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="moshitateshaKubunCode" column="moshitateshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="moshitateJiyuCode" column="moshitateJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuhorenSofuYM" column="kokuhorenSofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kokuhirenSaiSofuAriFlag" column="kokuhirenSaiSofuAriFlag" />
+        <result property="dogetsuShinsaAriFlag" column="dogetsuShinsaAriFlag" />
+        <result property="moshitateshoKubunCode" column="moshitateshoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="hokenshaName" column="hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaName" column="shoKisaiHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuJogaiFlag" column="sofuJogaiFlag"/>
+    </resultMap>
+    
+    <select id="select送付除外区分"
+            resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutGetHihokenshaNoEntity" fetchSize="500" resultOrdered="true">
+        SELECT *
+        FROM "DbWT1001Hihokensha" AS dbWT1001
+        INNER JOIN  "DbWT1731KagoMoshitate" AS dbWT1731
+        ON dbWT1001."exRenban"  = dbWT1731."renban" 
+        WHERE dbWT1001."shikibetsuCode" IS NULL OR dbWT1001."shikibetsuCode" =''
+    </select>
+    
+    
+     <select resultOrdered="true" id="select事業者名称" resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutGetjigyoshaNameEntity" fetchSize="500">
+        SELECT TEMP.*,
+       <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />
+        FROM "DbWT1731KagoMoshitate" AS TEMP
+        LEFT JOIN ( SELECT D1.* 
+                    FROM rgdb."DbT7060KaigoJigyosha" AS D1
+                    WHERE NOT EXISTS ( SELECT 'X' FROM rgdb."DbT7060KaigoJigyosha" AS D2
+                                             WHERE   D1."jigyoshaNo" = D2."jigyoshaNo" 
+                                             AND     D1."yukoKaishiYMD"  <![CDATA[<]]> D2."yukoKaishiYMD" )) AS "DbT7060KaigoJigyosha"
+        ON TEMP."jigyoshaNo" = "DbT7060KaigoJigyosha"."jigyoshaNo"
+        WHERE    TEMP."jigyoshaNo" IS NOT NULL  AND TEMP."jigyoshaNo" != ''
+    </select>
+    
+    <resultMap id="resultMap_KaigokyufuhiKagoMoshitateshoOutGetjigyoshaNameEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutGetjigyoshaNameEntity" autoMapping="true">
+        <id column="renban"/>
+        <association property="dbWT1731Entity" resultMap="resultMap_DbWT1731KagoMoshitateTempEntity"/>
+        <association property="dbT7060Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+    </resultMap>
+    
+     <select resultOrdered="true" id="select市町村_単一" resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutgetCitySingleEntity" fetchSize="500">
+        SELECT dbWT1731.* ,
+       <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.allColumns_DbT7056GappeiShichoson" />
+        FROM 
+         (SELECT  
+               TEMP.*
+          FROM 
+                "DbWT1731KagoMoshitate" AS TEMP 
+          WHERE TEMP."shoKisaiHokenshaName" IS NULL OR  TEMP."shoKisaiHokenshaName" =''
+          AND TEMP."sofuJogaiFlag" = FALSE) AS dbWT1731 
+          INNER JOIN ( SELECT A.* 
+                       FROM
+                           (SELECT *,
+                              ROW_NUMBER() OVER (PARTITION BY "kyuHokenshaNo" ORDER BY "gappeiYMD" DESC) AS rowNum
+                       FROM rgdb."DbT7056GappeiShichoson" ) AS A
+                       WHERE A.rowNum = 1 )  AS "DbT7056GappeiShichoson"
+        ON dbWT1731."shoKisaiHokenshaNo" = "DbT7056GappeiShichoson"."kyuHokenshaNo"
+    </select>
+    
+    <resultMap id="resultMap_KaigokyufuhiKagoMoshitateshoOutgetCitySingleEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutgetCitySingleEntity" autoMapping="true">
+        <id column="renban"/>
+        <association property="dbWT1731Entity" resultMap="resultMap_DbWT1731KagoMoshitateTempEntity"/>
+        <association property="dbT7056Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.ResultMap_DbT7056GappeiShichosonEntity"/>
+    </resultMap>
+    
+     <select resultOrdered="true" id="select市町村_広域" resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutgetCityWideAreaEntity" fetchSize="500">
+        SELECT dbWT1731.* ,
+       <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster" />
+        FROM 
+         (SELECT 
+            TEMP.*
+          FROM 
+                "DbWT1731KagoMoshitate" AS TEMP 
+          WHERE TEMP."shoKisaiHokenshaName" IS NULL OR TEMP."shoKisaiHokenshaName" =''
+          AND TEMP."sofuJogaiFlag" = FALSE ) AS dbWT1731 
+          INNER JOIN ( SELECT A.* 
+                       FROM
+                          ( SELECT *,
+                               ROW_NUMBER() OVER (PARTITION BY "shoKisaiHokenshaNo" ORDER BY "kanyuYMD"  DESC) AS rowNum
+                            FROM rgdb."DbT7051KoseiShichosonMaster" ) AS A
+                       WHERE A.rowNum = 1 )  AS "DbT7051KoseiShichosonMaster"
+        ON dbWT1731."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+    </select>
+    
+    <resultMap id="resultMap_KaigokyufuhiKagoMoshitateshoOutgetCityWideAreaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutgetCityWideAreaEntity" autoMapping="true">
+        <id column="renban"/>
+        <association property="dbWT1731Entity" resultMap="resultMap_DbWT1731KagoMoshitateTempEntity"/>
+        <association property="dbT7051Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
+    </resultMap>  
+    
+     <select resultOrdered="true" id="do帳票出力" 
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter"
+             resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity" fetchSize="500">
+        SELECT 
+         "DbWT1731KagoMoshitate".* , "DbWT1001Hihokensha".*
+        FROM 
+         "DbWT1001Hihokensha" AS  "DbWT1001Hihokensha",
+         "DbWT1731KagoMoshitate" AS "DbWT1731KagoMoshitate"
+        WHERE 
+             "DbWT1001Hihokensha"."exRenban" =  "DbWT1731KagoMoshitate"."renban"
+        AND  
+             "DbWT1731KagoMoshitate"."sofuJogaiFlag" = FALSE
+        ${出力順}
+    </select>
+    
+    <resultMap id="resultMap_KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity" autoMapping="true">
+        <id column="renban"/>
+        <association property="dbWT1731Entity" resultMap="resultMap_DbWT1731KagoMoshitateTempEntity"/>
+        <association property="dbWT1001Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout.IHokenshaKyufujissekiOutMapper.resultMap_DbWT1001HihokenshaTempEntity"/>
+    </resultMap> 
+       
+    <select id="select保険者番号Error"
+            resultMap="resultMap_DbWT1731KagoMoshitateTempEntity" fetchSize="500" resultOrdered="true">
+        SELECT DISTINCT dbWT1731."hokenshaNo"
+        FROM "DbWT1731KagoMoshitate" AS dbWT1731
+        WHERE dbWT1731."sofuJogaiFlag" = FALSE
+    </select>
+    
+    <select resultOrdered="true" id="select送付ファイル" 
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter"
+             resultMap="resultMap_KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity" fetchSize="500">
+        SELECT 
+         dbWT1731.* , dbWT1001.*
+        FROM 
+         "DbWT1001Hihokensha" AS  dbWT1001,
+         "DbWT1731KagoMoshitate" AS dbWT1731
+        WHERE 
+             dbWT1001."exRenban" =  dbWT1731."renban"
+        AND
+             dbWT1731."hokenshaNo" =  #{保険者番号}
+        AND  
+             dbWT1731."sofuJogaiFlag" = FALSE
+    </select>
+       
+
+   <select id="updatetDB_送付済"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.ResultMap_DbT3059KagoMoshitateEntity" fetchSize="500" resultOrdered="true">
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.allColumns_DbT3059KagoMoshitate" />
+        FROM 
+         (SELECT * 
+            FROM "DbWT1731KagoMoshitate" 
+            WHERE "DbWT1731KagoMoshitate"."sofuJogaiFlag" = FALSE ) AS dbWT1731
+        INNER JOIN 
+          rgdb."DbT3059KagoMoshitate" AS "DbT3059KagoMoshitate"
+        ON 
+             dbWT1731."jigyoshaNo" = "DbT3059KagoMoshitate"."jigyoshoNo"
+         AND dbWT1731."hiHokenshaNo" = "DbT3059KagoMoshitate"."hiHokenshaNo"
+         AND dbWT1731."serviceTeikyoYM" = "DbT3059KagoMoshitate"."serviceTeikyoYM"
+         AND dbWT1731."rirekiNo" = "DbT3059KagoMoshitate"."rirekiNo"
+    </select>
+
+    
+    <select id="updatetDB_未送付"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.ResultMap_DbT3059KagoMoshitateEntity" fetchSize="500" resultOrdered="true">
+        SELECT 
+          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.allColumns_DbT3059KagoMoshitate" />
+        FROM 
+         (SELECT * 
+            FROM "DbWT1731KagoMoshitate" 
+            WHERE "DbWT1731KagoMoshitate"."sofuJogaiFlag" = true ) AS dbWT1731
+        INNER JOIN 
+          rgdb."DbT3059KagoMoshitate" AS "DbT3059KagoMoshitate"
+        ON 
+             dbWT1731."jigyoshaNo" = "DbT3059KagoMoshitate"."jigyoshoNo"
+         AND dbWT1731."hiHokenshaNo" = "DbT3059KagoMoshitate"."hiHokenshaNo"
+         AND dbWT1731."serviceTeikyoYM" = "DbT3059KagoMoshitate"."serviceTeikyoYM"
+         AND dbWT1731."rirekiNo" = "DbT3059KagoMoshitate"."rirekiNo"
+    </select>
+
+
+</mapper>

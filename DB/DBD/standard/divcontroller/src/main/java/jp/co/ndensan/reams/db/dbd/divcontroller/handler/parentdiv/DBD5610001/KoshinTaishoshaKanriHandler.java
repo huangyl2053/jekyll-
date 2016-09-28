@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5610001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5610001.KoshinTaishoshaKanriParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511001.DBD511001_KoshinTaishoshaKanriParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5610001.KoshinTaishoshaKanriDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.ShoriDateKanriService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -65,8 +65,8 @@ public class KoshinTaishoshaKanriHandler {
      *
      * @return KoshinTaishoshaKanriParameter KoshinTaishoshaKanriParameter
      */
-    public KoshinTaishoshaKanriParameter getParameter() {
-        KoshinTaishoshaKanriParameter parameter = new KoshinTaishoshaKanriParameter();
+    public DBD511001_KoshinTaishoshaKanriParameter getParameter() {
+        DBD511001_KoshinTaishoshaKanriParameter parameter = new DBD511001_KoshinTaishoshaKanriParameter();
         if (div.getZenkaiJoho().getTxtTaishoTsuki().getValue() != null) {
             parameter.set対象月(new FlexibleDate(div.getZenkaiJoho().getTxtTaishoTsuki().getValue().toDateString()).getYearMonth());
         } else {

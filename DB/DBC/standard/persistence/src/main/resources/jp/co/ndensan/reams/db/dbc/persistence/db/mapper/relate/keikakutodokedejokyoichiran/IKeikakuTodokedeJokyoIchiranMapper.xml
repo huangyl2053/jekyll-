@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 計画届出状況リストのデータを抽出するのマッピングクラスです。 -->
+<!-- @reamsid_L DBC-1960-030 jianglaisheng -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.keikakutodokedejokyoichiran.IKeikakuTodokedeJokyoIchiranMapper">
+    
+    <resultMap id="result_KeikakuTodokedeJokyoIchiranEntity" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranEntity" autoMapping="true">
+        <result property="被保険者番号" column="DbT4001_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="履歴番号" column="DbT4001_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給申請年月日" column="DbT4001_jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="受給申請事由" column="DbT4001_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="要介護認定状態区分コード" column="DbT4001_yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="認定有効期間開始日" column="DbT4001_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了日" column="DbT4001_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定年月日" column="DbT4001_ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="識別コード" column="DbT1001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="資格取得年月日" column="DbT1001_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失年月日" column="DbT1001_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失事由コード" column="DbT1001_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例フラグ" column="DbT1001_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設フラウ" column="施設フラウ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="対象年月" column="居宅サービス計画_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="計画届出日" column="居宅サービス計画_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用開始年月日" column="居宅サービス計画_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用終了年月日" column="居宅サービス計画_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="事業者番号" column="居宅サービス計画_keikakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="作成区分コード" column="居宅サービス計画_sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="居宅サービス計画_jigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="変更年月日" column="居宅サービス計画_jigyoshaHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="事業者名称" column="居宅サービス計画_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="宛名" 
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="getデータを抽出" resultMap="result_KeikakuTodokedeJokyoIchiranEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranParameter">
+        SELECT
+            受給者台帳."hihokenshaNo" AS DbT4001_hihokenshaNo
+            ,受給者台帳."rirekiNo" AS DbT4001_rirekiNo
+            ,受給者台帳."jukyuShinseiYMD" AS DbT4001_jukyuShinseiYMD
+            ,受給者台帳."jukyuShinseiJiyu" AS DbT4001_jukyuShinseiJiyu
+            ,受給者台帳."yokaigoJotaiKubunCode" AS DbT4001_yokaigoJotaiKubunCode
+            ,受給者台帳."ninteiYukoKikanKaishiYMD" AS DbT4001_ninteiYukoKikanKaishiYMD
+            ,受給者台帳."ninteiYukoKikanShuryoYMD" AS DbT4001_ninteiYukoKikanShuryoYMD
+            ,受給者台帳."ninteiYMD" AS DbT4001_ninteiYMD
+            , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            ,被保険者台帳."shikibetsuCode" AS DbT1001_shikibetsuCode
+            ,被保険者台帳."shikakuShutokuYMD" AS DbT1001_shikakuShutokuYMD
+            ,被保険者台帳."shikakuSoshitsuYMD" AS DbT1001_shikakuSoshitsuYMD
+            ,被保険者台帳."shikakuSoshitsuJiyuCode" AS DbT1001_shikakuSoshitsuJiyuCode
+            ,被保険者台帳."jushochiTokureiFlag" AS DbT1001_jushochiTokureiFlag
+            ,介護保険施設入退所."shikibetsuCode" AS 施設フラウ
+            ,居宅サービス計画."taishoYM" AS 居宅サービス計画_taishoYM
+            ,居宅サービス計画."todokedeYMD" AS 居宅サービス計画_todokedeYMD
+            ,居宅サービス計画."tekiyoKaishiYMD" AS 居宅サービス計画_tekiyoKaishiYMD
+            ,居宅サービス計画."tekiyoShuryoYMD" AS 居宅サービス計画_tekiyoShuryoYMD
+            ,居宅サービス計画."事業者番号" AS 居宅サービス計画_keikakuJigyoshaNo
+            ,居宅サービス計画."sakuseiKubunCode" AS 居宅サービス計画_sakuseiKubunCode
+            ,居宅サービス計画."事業者電話番号" AS 居宅サービス計画_jigyoshaTelNo
+            ,居宅サービス計画."変更年月日" AS 居宅サービス計画_jigyoshaHenkoYMD
+            ,居宅サービス計画."事業者名称" AS 居宅サービス計画_jigyoshaName
+        FROM
+            rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
+        LEFT JOIN
+            (SELECT
+                被保険者台帳管理."hihokenshaNo"
+                ,被保険者台帳管理."shikibetsuCode"
+                ,被保険者台帳管理."shikakuShutokuYMD"
+                ,被保険者台帳管理."shikakuSoshitsuYMD"
+                ,被保険者台帳管理."shikakuSoshitsuJiyuCode"
+                ,被保険者台帳管理."jushochiTokureiFlag"
+                ,row_number() OVER (PARTITION BY 被保険者台帳管理."hihokenshaNo",
+                                    被保険者台帳管理."edaNo" 
+                                    ORDER BY 被保険者台帳管理."idoYMD" DESC) AS 異動日降順
+            FROM
+                rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
+            WHERE
+                (被保険者台帳管理."shikakuShutokuYMD" <![CDATA[ <= ]]> #{ 基準日 }
+                AND #{ 基準日 } <![CDATA[ < ]]> 被保険者台帳管理."shikakuSoshitsuYMD"
+                OR 被保険者台帳管理."shikakuSoshitsuYMD" IS NULL)
+                AND 被保険者台帳管理."logicalDeletedFlag" = FALSE
+                ) AS 被保険者台帳
+            ON  被保険者台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo"
+            AND 被保険者台帳."異動日降順" = '1'
+        LEFT JOIN						
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = 被保険者台帳."shikibetsuCode"
+        LEFT JOIN
+            rgdb."DbT1004ShisetsuNyutaisho" AS 介護保険施設入退所
+        ON 介護保険施設入退所."shikibetsuCode" = 被保険者台帳."shikibetsuCode"
+        AND 介護保険施設入退所."nyushoYMD" <![CDATA[ <= ]]> #{ 基準日 }
+        AND #{ 基準日 } <![CDATA[ <= ]]> 介護保険施設入退所."taishoYMD"
+        LEFT JOIN
+            (SELECT	
+                居宅給付計画届出."hihokenshaNo"
+                ,居宅給付計画届出."todokedeYMD"
+                ,A."taishoYM"
+                ,A."tekiyoKaishiYMD"
+                ,A."tekiyoShuryoYMD"
+                ,A."事業者番号"
+                ,A."sakuseiKubunCode"
+                ,A."事業者電話番号"
+                ,A."変更年月日"
+                ,A."事業者名称"
+                ,ROW_NUMBER() OVER (PARTITION BY 居宅給付計画届出. "hihokenshaNo",
+                                    居宅給付計画届出. "taishoYM" 
+                                    ORDER BY 居宅給付計画届出."rirekiNo" DESC) AS 最大順
+            FROM	
+                rgdb."DbT3005KyotakuKeikakuTodokede" AS 居宅給付計画届出
+            LEFT JOIN
+                (SELECT	
+                    居宅給付計画事業者作成."hihokenshaNo"
+                    ,居宅給付計画事業者作成."taishoYM"
+                    ,居宅給付計画事業者作成."rirekiNo"
+                    ,居宅給付計画事業者作成."tekiyoKaishiYMD"
+                    ,居宅給付計画事業者作成."tekiyoShuryoYMD"
+                    ,居宅給付計画事業者作成."jigyoshaHenkoYMD" AS 変更年月日
+                    ,居宅給付計画事業者作成."keikakuJigyoshaNo" AS 事業者番号
+                    ,居宅給付計画事業者作成."sakuseiKubunCode"
+                    ,CASE 居宅給付計画事業者作成."sakuseiKubunCode"
+                        WHEN '4' THEN B2."事業者電話番号"
+                        ELSE B1."事業者電話番号" END AS 事業者電話番号
+                    ,CASE 居宅給付計画事業者作成."sakuseiKubunCode"
+                        WHEN '4' THEN B2."事業者名称"
+                        ELSE B1."事業者名称" END AS 事業者名称
+                FROM	
+                    rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS 居宅給付計画事業者作成
+                LEFT JOIN
+                    (
+                    SELECT * FROM(
+                        SELECT	
+                            介護事業者指定サービス."jigyoshaNo"
+                            ,介護事業者指定サービス."jigyoshaTelNo" AS 事業者電話番号
+                            ,介護事業者指定サービス."jigyoshaName" AS 事業者名称
+                            ,ROW_NUMBER() OVER (PARTITION BY 介護事業者指定サービス. "jigyoshaNo",
+                                                介護事業者指定サービス. "serviceShuruiCode"
+                                                ORDER BY 介護事業者指定サービス."yukoKaishiYMD" DESC) AS 直近
+                        FROM	
+                            rgdb."DbT7063KaigoJigyoshaShiteiService" AS 介護事業者指定サービス
+                        WHERE	
+                            介護事業者指定サービス."serviceShuruiCode" in ('43','73')) AS BBB
+                    WHERE BBB."直近" = '1'
+                    ) AS B1	
+                ON B1."jigyoshaNo" = 居宅給付計画事業者作成."keikakuJigyoshaNo"
+                LEFT JOIN
+                    (
+                    SELECT * FROM(
+                        SELECT
+                            介護事業者指定サービス."jigyoshaNo"
+                            ,介護事業者指定サービス."jigyoshaTelNo" AS 事業者電話番号
+                            ,介護事業者指定サービス."jigyoshaName" AS 事業者名称
+                            ,ROW_NUMBER() OVER (PARTITION BY 介護事業者指定サービス. "jigyoshaNo",
+                                                介護事業者指定サービス. "serviceShuruiCode"
+                                                ORDER BY 介護事業者指定サービス."yukoKaishiYMD" DESC) AS 直近
+                        FROM
+                            rgdb."DbT7063KaigoJigyoshaShiteiService" AS 介護事業者指定サービス
+                        WHERE
+                            介護事業者指定サービス."serviceShuruiCode" in ('46','75','AF')) AS BBBB
+                    WHERE BBBB."直近" = '1'
+                    )AS B2
+                ON B2."jigyoshaNo" = 居宅給付計画事業者作成."keikakuJigyoshaNo"
+                UNION
+                SELECT
+                    居宅給付計画自己作成."hihokenshaNo"
+                    ,居宅給付計画自己作成."taishoYM"
+                    ,居宅給付計画自己作成."rirekiNo"
+                    ,居宅給付計画自己作成."tekiyoKaishiYMD"
+                    ,居宅給付計画自己作成."tekiyoShuryoYMD"
+                    ,居宅給付計画自己作成."keikakuHenkoYMD" AS 変更年月日
+                    ,'' AS　事業者番号
+                    ,居宅給付計画自己作成."sakuseiKubunCode"
+                    ,'' AS　事業者電話番号
+                    ,'' AS　事業者名称
+                FROM										
+                    rgdb."DbT3007KyotakuKeikakuJikoSakusei" AS 居宅給付計画自己作成									
+                ) AS A
+            ON A."hihokenshaNo" = 居宅給付計画届出."hihokenshaNo"
+            AND A."taishoYM" = 居宅給付計画届出."taishoYM"
+            AND A."rirekiNo" = 居宅給付計画届出."rirekiNo"
+            WHERE
+                居宅給付計画届出."taishoYM" <![CDATA[ <= ]]> #{ 基準日_年月 }
+            ) AS 居宅サービス計画
+        ON 居宅サービス計画."hihokenshaNo" = 受給者台帳."hihokenshaNo"
+        AND 居宅サービス計画."最大順" = '1'
+        WHERE
+            (受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[ <= ]]> #{ 基準日 }
+            AND #{ 基準日 } <![CDATA[ <= ]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
+            OR 受給者台帳."rirekiNo" = '0000')
+            AND 受給者台帳."logicalDeletedFlag" = FALSE
+        ORDER BY
+            受給者台帳."hihokenshaNo" ASC,
+            受給者台帳."rirekiNo" DESC
+            <if test="orderBy != null and orderBy.toString() != ''.toString()">
+            ${ orderBy }
+            </if>
+    </select>
+</mapper>

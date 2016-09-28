@@ -1,8 +1,11 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200022_償還払不支給決定者一覧表 ShokanbaraiFushikyuKetteishaIchiranSource
@@ -14,22 +17,22 @@ public class ShokanbaraiFushikyuKetteishaIchiranSource implements IReportSource 
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
-    @ReportItem(name = "kokuhorenName", length = 15, order = 2)
-    public RString kokuhorenName;
-    @ReportItem(name = "hokenshaNo", length = 6, order = 3)
-    public RString hokenshaNo;
-    @ReportItem(name = "hokenshaName", length = 20, order = 4)
-    public RString hokenshaName;
-    @ReportItem(name = "shutsuryokujun1", length = 10, order = 5)
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 6, order = 2)
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "shoKisaiHokenshaName", length = 20, order = 3)
+    public RString shoKisaiHokenshaName;
+    @ReportItem(name = "shutsuryokujun1", length = 10, order = 4)
     public RString shutsuryokujun1;
-    @ReportItem(name = "shutsuryokujun2", length = 10, order = 6)
+    @ReportItem(name = "shutsuryokujun2", length = 10, order = 5)
     public RString shutsuryokujun2;
-    @ReportItem(name = "shutsuryokujun3", length = 10, order = 7)
+    @ReportItem(name = "shutsuryokujun3", length = 10, order = 6)
     public RString shutsuryokujun3;
-    @ReportItem(name = "shutsuryokujun4", length = 10, order = 8)
+    @ReportItem(name = "shutsuryokujun4", length = 10, order = 7)
     public RString shutsuryokujun4;
-    @ReportItem(name = "shutsuryokujun5", length = 10, order = 9)
+    @ReportItem(name = "shutsuryokujun5", length = 10, order = 8)
     public RString shutsuryokujun5;
+    @ReportItem(name = "kokuhorenName", length = 15, order = 9)
+    public RString kokuhorenName;
     @ReportItem(name = "kaipage1", length = 20, order = 10)
     public RString kaipage1;
     @ReportItem(name = "kaipage2", length = 20, order = 11)
@@ -42,6 +45,9 @@ public class ShokanbaraiFushikyuKetteishaIchiranSource implements IReportSource 
     public RString kaipage5;
     @ReportItem(name = "listUpper_1", length = 6, order = 15)
     public RString listUpper_1;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 10, order = 16)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 20, order = 17)
@@ -56,7 +62,7 @@ public class ShokanbaraiFushikyuKetteishaIchiranSource implements IReportSource 
     public RString listUpper_7;
     @ReportItem(name = "listUpper_8", length = 5, order = 22)
     public RString listUpper_8;
-    @ReportItem(name = "listUpper_9", length = 20, order = 23)
+    @ReportItem(name = "listUpper_9", length = 38, order = 23)
     public RString listUpper_9;
     @ReportItem(name = "listDBKoshinUmu_1", length = 2, order = 24)
     public RString listDBKoshinUmu_1;
@@ -74,12 +80,56 @@ public class ShokanbaraiFushikyuKetteishaIchiranSource implements IReportSource 
     public RString listLower_6;
     @ReportItem(name = "listLower_7", length = 9, order = 31)
     public RString listLower_7;
-    @ReportItem(name = "listLower_8", length = 20, order = 32)
+    @ReportItem(name = "listLower_8", length = 38, order = 32)
     public RString listLower_8;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * ShokanbaraiFushikyuKetteishaIchiranSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        pageCount,
+        kokuhorenName,
+        shoKisaiHokenshaNo,
+        shoKisaiHokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        listLower_6,
+        listLower_7,
+        listLower_8,
+        listDBKoshinUmu_1,
+    }
 }

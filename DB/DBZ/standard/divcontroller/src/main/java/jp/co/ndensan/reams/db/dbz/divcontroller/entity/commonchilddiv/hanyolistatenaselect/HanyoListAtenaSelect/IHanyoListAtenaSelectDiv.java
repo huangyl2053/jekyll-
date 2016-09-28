@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoCh
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -127,6 +128,13 @@ public interface IHanyoListAtenaSelectDiv extends ICommonChildDivBaseProperties 
      * 汎用リスト宛名抽出条件共有子Divの保険者の値を設定します。
      */
     public void set保険者();
+
+    /**
+     * 汎用リスト宛名抽出条件共有子Divの保険者の値（選択項）を設定します。
+     *
+     * @param 市町村コード
+     */
+    public void set保険者(LasdecCode 市町村コード);
 
     /**
      * 汎用リスト宛名抽出条件共有子Divの地区ラジオボタンの設定値を返却します。

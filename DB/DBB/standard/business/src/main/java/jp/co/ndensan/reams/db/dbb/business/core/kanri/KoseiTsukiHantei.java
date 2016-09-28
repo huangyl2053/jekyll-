@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiHyoki;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.TsukiShorkiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.TsukiShorkiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
@@ -74,8 +74,10 @@ public class KoseiTsukiHantei {
             throw new IllegalArgumentException();
         }
         Kitsuki kitsuki = find更正月(指定日);
-        if (!Tsuki._4月.equals(kitsuki.get月()) || !Tsuki._5月.equals(kitsuki.get月())) {
+        if (!(Tsuki._3月.equals(kitsuki.get月()) || Tsuki._4月.equals(kitsuki.get月()) || Tsuki._5月.equals(kitsuki.get月()))) {
             throw new IllegalArgumentException();
+        } else if (Tsuki._3月.equals(kitsuki.get月())) {
+            return kitsuki;
         }
         SuitoSeiriTaishoNendo 出納整理対象年度 = new GennenZuijiHantei().get出納整理対象年度(kitsuki.get月());
         Tsuki 月 = kitsuki.get月();

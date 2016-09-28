@@ -10,15 +10,21 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyo.KijunShunyugakuTekiyo;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunshunyugakutekiyo.KijunShunyugakuTekiyoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistparam.HanyoListParamRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistparam.HanyoListParamRenbanariEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -26,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -53,23 +60,28 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private int 連番 = 1;
+    private static final int NUM5 = 5;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private KijunShunyugakuTekiyo kijunShunyugakuTekiyo;
+    private Association association;
+    private boolean flag;
     @BatchWriter
     private CsvWriter<HanyoListParamRenbanariEUCEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
+        flag = false;
+        association = AssociationFinderFactory.createInstance().getAssociation();
         kijunShunyugakuTekiyo = new KijunShunyugakuTekiyo(processParameter);
         get市町村名();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, kijunShunyugakuTekiyo.createMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, kijunShunyugakuTekiyo.createMybatisParameter(get出力順()));
     }
 
     @Override
@@ -88,34 +100,46 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
 
     @Override
     protected void process(HanyoListParamRelateEntity entity) {
-        eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity(entity, 市町村名MasterMap, 市町村名, 連番++));
+        flag = true;
+        eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity(entity, 市町村名MasterMap, association, 連番++));
     }
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
-        manager.spool(eucFilePath);
+        if (!flag) {
+            eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity());
+            eucCsvWriter.close();
+            manager.spool(eucFilePath);
+        } else {
+            eucCsvWriter.close();
+            manager.spool(eucFilePath, kijunShunyugakuTekiyo.getアクセスログ());
+        }
         outputJokenhyoFactory();
     }
 
     private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                new RString("汎用リスト　基準収入額適用情報CSV"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト　基準収入額適用情報CSV"),
                 new RString("HanyoList_KijunShunyugakuTekiyo.csv"),
+                EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
                 kijunShunyugakuTekiyo.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
     private RString get出力件数(Decimal 出力件数) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
-        return builder.toRString();
+        RString 件数;
+        if (flag) {
+            RStringBuilder builder = new RStringBuilder();
+            builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
+            件数 = builder.toRString();
+        } else {
+            件数 = new RString("0");
+        }
+        return 件数;
     }
 
     private void get市町村名() {
@@ -124,8 +148,8 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
             市町村名 = new RString("全市町村");
         } else if (!RString.isNullOrEmpty(保険者コード)) {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            Association association = finder.getAssociation(new LasdecCode(保険者コード));
-            市町村名 = association.get市町村名();
+            Association 市町村 = finder.getAssociation(new LasdecCode(保険者コード));
+            市町村名 = 市町村.get市町村名();
         } else {
             市町村名 = RString.EMPTY;
         }
@@ -136,4 +160,14 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
         }
     }
 
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701020.getReportId(), processParameter.get出力順ID());
+        RString 出力順 = RString.EMPTY;
+        if (outputOrder != null) {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
+                    KijunShunyugakuTekiyo.ShutsuryokujunEnum.class, outputOrder), NUM5);
+        }
+        return 出力順;
+    }
 }

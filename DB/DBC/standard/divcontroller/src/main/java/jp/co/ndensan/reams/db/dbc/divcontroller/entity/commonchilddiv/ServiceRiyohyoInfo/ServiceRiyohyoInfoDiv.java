@@ -4,24 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.IServiceTypeInputCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.IServiceTypeInputCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,9 +23,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ServiceRiyohyoInfo のクラスファイル
@@ -40,7 +36,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -415,7 +412,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
             KaigoType[] enumArray = KaigoType.values();
 
             for (KaigoType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -430,11 +427,11 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     public KaigoType getMode_KaigoType() {
-        return (KaigoType) _CommonChildDivModeUtil.getMode( this.modes, KaigoType.class );
+        return (KaigoType) _CommonChildDivModeUtil.getMode(this.modes, KaigoType.class);
     }
 
-    public void setMode_KaigoType( KaigoType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, KaigoType.class , value );
+    public void setMode_KaigoType(KaigoType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, KaigoType.class, value);
     }
 
     public static enum GamenMode implements ICommonChildDivMode {
@@ -454,7 +451,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
             GamenMode[] enumArray = GamenMode.values();
 
             for (GamenMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -469,11 +466,11 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     public GamenMode getMode_GamenMode() {
-        return (GamenMode) _CommonChildDivModeUtil.getMode( this.modes, GamenMode.class );
+        return (GamenMode) _CommonChildDivModeUtil.getMode(this.modes, GamenMode.class);
     }
 
-    public void setMode_GamenMode( GamenMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, GamenMode.class , value );
+    public void setMode_GamenMode(GamenMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, GamenMode.class, value);
     }
 
     /*
@@ -495,22 +492,12 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public Button getBtnKakutei() {
-        return this.getServiceRiyohyoBeppyoJigyoshaServiceInput().getBtnKakutei();
-    }
-
-    @JsonIgnore
-    public void  setBtnKakutei(Button btnKakutei) {
-        this.getServiceRiyohyoBeppyoJigyoshaServiceInput().setBtnKakutei(btnKakutei);
-    }
-
-    @JsonIgnore
     public Button getBtnBeppyoMeisaiKakutei() {
         return this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei();
     }
 
     @JsonIgnore
-    public void  setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
+    public void setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnBeppyoMeisaiKakutei(btnBeppyoMeisaiKakutei);
     }
 
@@ -520,7 +507,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
+    public void setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisaiGokei(btnCalcMeisaiGokei);
     }
 
@@ -530,7 +517,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
+    public void setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnCancelMeisaiInput(btnCancelMeisaiInput);
     }
 
@@ -540,7 +527,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnCalcMeisai(Button btnCalcMeisai) {
+    public void setBtnCalcMeisai(Button btnCalcMeisai) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisai(btnCalcMeisai);
     }
 
@@ -550,7 +537,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnBeppyoGokeiKakutei(Button btnBeppyoGokeiKakutei) {
+    public void setBtnBeppyoGokeiKakutei(Button btnBeppyoGokeiKakutei) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnBeppyoGokeiKakutei(btnBeppyoGokeiKakutei);
     }
 
@@ -560,7 +547,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
+    public void setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCancelGokeiInput(btnCancelGokeiInput);
     }
 
@@ -570,7 +557,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnCalcGokei(Button btnCalcGokei) {
+    public void setBtnCalcGokei(Button btnCalcGokei) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
     }
 
@@ -580,7 +567,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnUpdate(Button btnUpdate) {
+    public void setBtnUpdate(Button btnUpdate) {
         this.getServiceRiyohyoBeppyoFooter().setBtnUpdate(btnUpdate);
     }
 
@@ -590,7 +577,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void  setBtnBackRiyoNengetsuIchiran(Button btnBackRiyoNengetsuIchiran) {
+    public void setBtnBackRiyoNengetsuIchiran(Button btnBackRiyoNengetsuIchiran) {
         this.getServiceRiyohyoBeppyoFooter().setBtnBackRiyoNengetsuIchiran(btnBackRiyoNengetsuIchiran);
     }
 

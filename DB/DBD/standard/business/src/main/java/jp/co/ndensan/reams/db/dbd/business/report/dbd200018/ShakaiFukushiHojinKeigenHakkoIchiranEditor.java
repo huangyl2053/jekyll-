@@ -200,12 +200,19 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat("").concat(時分秒).concat("").concat("作成");
+        return 年月日.concat(" ").concat(時分秒).concat(" ").concat("作成");
     }
 
     private RString get適用日有効期限() {
-        RString 適用日 = this.帳票情報.get適用日().wareki().toDateString();
-        RString 有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
+        RString 適用日 = RString.EMPTY;
+        RString 有効期限 = RString.EMPTY;
+
+        if (this.帳票情報.get適用日() != null) {
+            適用日 = this.帳票情報.get適用日().wareki().toDateString();
+        }
+        if (this.帳票情報.get有効期限() != null) {
+            有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
+        }
         return 適用日.concat(new RString("~")).concat(有効期限);
     }
 }

@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払請求集計のデータアクセスクラスです。
  *
- * @reamsid_L DBC-0950-010 zuotao
+ * @reamsid_L DBD-9999-011 zuotao
  */
 public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEntity> {
 
@@ -390,5 +390,66 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
                     eq(meisaiNo, 明細番号));
         }
         return iTrueFalseCriteria;
+    }
+
+    /**
+     * 給付の種類を取得します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNo
+     * @return List<DbT3053ShokanShukeiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3053ShokanShukeiEntity> get給付の種類(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3053ShokanShukei.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号)
+                        )).order(by(serviceShuruiCode)).
+                toList(DbT3053ShokanShukeiEntity.class);
+    }
+
+    /**
+     * 償還払請求集計を検索します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNo
+     * @return List<DbT3053ShokanShukeiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3053ShokanShukeiEntity> select償還払請求集計(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3053ShokanShukei.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(DbT3053ShokanShukei.isDeleted, false)
+                        )).order(by(jigyoshaNo), by(yoshikiNo), by(meisaiNo)).
+                toList(DbT3053ShokanShukeiEntity.class);
     }
 }

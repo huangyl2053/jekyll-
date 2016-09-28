@@ -190,8 +190,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                 rList.add(getNotNull(data.get備考()));
                 csvListWriter.writeLine(rList);
             }
-            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
             csvListWriter.close();
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         }
     }
 

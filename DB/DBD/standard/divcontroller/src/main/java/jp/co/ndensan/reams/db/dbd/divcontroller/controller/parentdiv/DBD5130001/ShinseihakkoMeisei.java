@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5130001.Shi
 import jp.co.ndensan.reams.db.dbd.service.report.dbd501001.YokaigoNinteiShinseishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd501002.YokaigoNinteikbnHenkoShinseishoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.HakkoRirekiManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.IHakkoRirekiManager;
@@ -29,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定申請書発行画面のDivControllerです。
@@ -44,11 +47,11 @@ public class ShinseihakkoMeisei {
      * @return ResponseData<ShinseihakkoMeiseiDiv>
      */
     public ResponseData<ShinseihakkoMeiseiDiv> onLoad(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-//        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("6000000010"));
-        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+//        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("6000000010"));
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
         getHandler(shinseihakkoMeiseiDiv).initialize(識別コード, 被保険者番号);
         return ResponseData.of(shinseihakkoMeiseiDiv).respond();
     }

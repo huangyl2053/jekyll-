@@ -28,6 +28,8 @@ public class FutanWariaiHanteiIchiranProcessParameter implements IBatchProcessPa
     private final boolean テストモード;
     private final RDateTime 処理日時;
 
+    private RString ファイルパス;
+
     /**
      * コンストラクタです。
      *

@@ -13,7 +13,12 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufukettei.KogakuS
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog.SimplePageBreaker;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 高額サービス費支給（不支給）決定者一覧表帳票Item
@@ -36,7 +41,30 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200015.getReportId());
 
         pageBreakKeys = new ArrayList<>();
-        pageBreakKeys.add(new RString(ReportSourceFields.hokenshaNo.name()));
+        pageBreakKeys.add(new RString(ReportSourceFields.shoKisaiHokenshaNo.name()));
+    }
+
+    @Override
+    public Breakers<KogakuShikyuFushikyuKetteishaIchiranSource> defineBreakers(
+            Breakers<KogakuShikyuFushikyuKetteishaIchiranSource> breakers,
+            BreakerCatalog<KogakuShikyuFushikyuKetteishaIchiranSource> catalog) {
+        return breakers.add(catalog.new SimplePageBreaker(
+
+
+
+
+            pageBreakKeys) {
+            @Override
+            public ReportLineRecord<KogakuShikyuFushikyuKetteishaIchiranSource> occuredBreak(
+                    ReportLineRecord<KogakuShikyuFushikyuKetteishaIchiranSource> currentRecord,
+                    ReportLineRecord<KogakuShikyuFushikyuKetteishaIchiranSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+                    return currentRecord;
+                }
+                return currentRecord;
+            }
+        }).fixed();
     }
 
     /**
@@ -47,7 +75,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("hokenshaNo"), new RString("SHINSAKETTEITEMP.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("SHINSAKETTEITEMP.\"shokisaiHokenshaNo\"")),
         /**
          * 郵便番号
          */

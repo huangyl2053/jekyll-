@@ -231,8 +231,8 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
     public ValidationMessageControlPairs 週コピー開始日チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         RStringBuilder date = new RStringBuilder();
-        if (div.getTxtCopyTo().getValue() == null  || !FlexibleDate.canConvert(date.append(getLblMonth(div.getLblMonth().getText()))
-                        .append(div.getTxtCopyTo().getValue().padZeroToLeft(INDEX_2)).toRString()) || !new FlexibleDate(date.toRString()).isValid()) {
+        if (div.getTxtCopyTo().getValue() == null || !FlexibleDate.canConvert(date.append(getLblMonth(div.getLblMonth().getText()))
+                .append(div.getTxtCopyTo().getValue().padZeroToLeft(INDEX_2)).toRString()) || !new FlexibleDate(date.toRString()).isValid()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(UrErrorMessages.入力値が不正_追加メッセージあり, "週コピー開始日"),
                     div.getTxtCopyTo()));
@@ -328,7 +328,6 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
         for (dgKaisaiYoteiNyuryokuran_Row row : div.getDgKaisaiYoteiNyuryokuran().getDataSource()) {
             index = index + 1;
             if (重複チェック4(row)) {
-                // TODO  内部QA：864 Redmine：#78578  (重複の合議体が入力messageの引数がありません)
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.重複の合議体が入力),
                         div.getDgKaisaiYoteiNyuryokuran()));

@@ -5,19 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120900;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiseikyugakutsuchishokohi.SogojigyohiSeikyugakuTsuchishoKohiPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiseikyugakutsuchishokohi.SogojigyohiSeikyugakuTsuchishoKohiReport;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohiseikyugakutsuchishokohiin.TsuchishoKohiDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohiseikyugakutsuchishokohi.TsuchishofutanshaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohiseikyugakutsuchishokohi.SogojigyohiSeikyugakuTsuchishoKohiSource;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -33,8 +36,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -42,30 +47,43 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-4700-030 qinzhen
  */
-public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<DbWT1511SeikyugakuTsuchishoTempEntity> {
+public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<DbWT1511SeikyugakuTsuchishoTempEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper"
             + ".relate.sogojigyohiseikyugakutsuchishokohikouhifutann.ITsuchishoKohiChoyoMapper.get帳票出力対象データ");
-    private TsuchishoKohiDoIchiranhyoSakuseiProcessParameter parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200082");
     private FileSpoolManager manager;
     private RString eucFilePath;
+    private List<RString> pageBreakKeys;
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 出力ファイル名
             = new RString("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi.csv");
+    private final RString 総合計 = new RString("＊＊　総合計　＊＊");
+    private final RString コード_99 = new RString("99");
+    private YMDHMS システム日付;
+    private int index = 0;
+    private static final RString SAKUSEI = new RString("作成");
     @BatchWriter
     private BatchReportWriter<SogojigyohiSeikyugakuTsuchishoKohiSource> batchReportWriter;
     private ReportSourceWriter<SogojigyohiSeikyugakuTsuchishoKohiSource> reportSourceWriter;
     private CsvWriter<TsuchishofutanshaIchiranCSVEntity> csvEntityWriter;
-    private final RString 総合計 = new RString("＊＊　総合計　＊＊");
-    private final RString コード_99 = new RString("99");
-    private int index = 0;
-    private static final RString SAKUSEI = new RString("作成");
+
+    @Override
+    protected void initialize() {
+        pageBreakKeys = new ArrayList<>();
+        pageBreakKeys.add(
+                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kohiFutanshaNo.name()));
+        pageBreakKeys.add(
+                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kanCode.name()));
+        pageBreakKeys.add(
+                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kouCode.name()));
+    }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200082.getReportId().value()).create();
+        PageBreaker<SogojigyohiSeikyugakuTsuchishoKohiSource> breaker = new SogojigyohiSeikyugakuTsuchishoKohiPageBreak(pageBreakKeys);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200082.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 出力ファイル名);
@@ -73,7 +91,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
                 .filePath(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
+                .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
@@ -81,6 +99,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
 
     @Override
     protected void beforeExecute() {
+        システム日付 = YMDHMS.now();
     }
 
     @Override
@@ -89,16 +108,21 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
     }
 
     @Override
-    protected void process(DbWT1511SeikyugakuTsuchishoTempEntity entity) {
-        SogojigyohiSeikyugakuTsuchishoKohiReport report = new SogojigyohiSeikyugakuTsuchishoKohiReport(entity, parameter.getシステム日付());
+    protected void keyBreakProcess(DbWT1511SeikyugakuTsuchishoTempEntity entity) {
+    }
+
+    @Override
+    protected void usualProcess(DbWT1511SeikyugakuTsuchishoTempEntity entity) {
+        SogojigyohiSeikyugakuTsuchishoKohiReport report = new SogojigyohiSeikyugakuTsuchishoKohiReport(entity, システム日付);
         report.writeBy(reportSourceWriter);
-        TsuchishofutanshaIchiranCSVEntity csvEntity = do帳票のCSVファイル作成(entity, parameter.getシステム日付());
+        TsuchishofutanshaIchiranCSVEntity csvEntity = do帳票のCSVファイル作成(entity, システム日付);
         csvEntityWriter.writeLine(csvEntity);
     }
 
     @Override
     protected void afterExecute() {
         csvEntityWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private TsuchishofutanshaIchiranCSVEntity do帳票のCSVファイル作成(DbWT1511SeikyugakuTsuchishoTempEntity csvDataEntity,
@@ -108,7 +132,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
-            RString 作成時 = new RString(作成日時.getRDateTime().toString()).concat(RString.HALF_SPACE).concat(SAKUSEI);
+            RString 作成時 = 作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
             csvEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
             csvEntity.set審査年月(パターン56(csvDataEntity.get審査年月()));
             csvEntity.set国保連合会名(csvDataEntity.get国保連合会名());
@@ -122,15 +146,17 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
         csvEntity.set公費負担者番号(csvDataEntity.get公費負担者番号());
         csvEntity.set公費負担者名(csvDataEntity.get公費負担者名());
         if (コード_99.equals(csvDataEntity.get款コード())) {
-            csvEntity.set款コード(総合計);
+            csvEntity.set款名(総合計);
         } else {
             csvEntity.set款名(csvDataEntity.get款名());
         }
+        csvEntity.set款コード(csvDataEntity.get款コード());
         if (コード_99.equals(csvDataEntity.get項コード())) {
             csvEntity.set項名(RString.EMPTY);
         } else {
             csvEntity.set項名(csvDataEntity.get項名());
         }
+        csvEntity.set項コード(csvDataEntity.get項コード());
         csvEntity.setサービス種類コード(csvDataEntity.getサービス種類コード());
         csvEntity.setサービス種類名(csvDataEntity.getサービス種類名());
         csvEntity.set通常分_件数(doカンマ編集(csvDataEntity.get通常分_件数()));
@@ -159,7 +185,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
             csvEntity.set累計_再審査_過誤_件数(doカンマ編集(csvDataEntity.get累計_再審査_過誤_件数()));
             csvEntity.set累計_再審査_過誤_公費対象単位数(doカンマ編集(csvDataEntity.get累計_再審査_過誤_単位数()));
             csvEntity.set累計_再審査_過誤_公費対象調整額(doカンマ編集(csvDataEntity.get累計_再審査_過誤_調整額()));
-            csvEntity.set累計_負担額(doカンマ編集(csvDataEntity.get合計_公費負担額()));
+            csvEntity.set累計_負担額(doカンマ編集(csvDataEntity.get累計_公費負担額()));
             csvEntity.set累計_公費分本人負担額(doカンマ編集(csvDataEntity.get累計_利用者負担額()));
         }
         if (!RString.isNullOrEmpty(csvDataEntity.get手数料_帳票レコード種別())) {
@@ -183,4 +209,5 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
         return 年月.wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
+
 }

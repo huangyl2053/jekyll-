@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DialogsDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class DialogsDiv extends Panel {
     private ButtonDialog btnDispShisetsuJoho;
     @JsonProperty("btnDispGemmenJoho")
     private ButtonDialog btnDispGemmenJoho;
+    @JsonProperty("btnHikazeiNenkinSho")
+    private ButtonDialog btnHikazeiNenkinSho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +68,24 @@ public class DialogsDiv extends Panel {
     @JsonProperty("btnDispGemmenJoho")
     public void setBtnDispGemmenJoho(ButtonDialog btnDispGemmenJoho) {
         this.btnDispGemmenJoho = btnDispGemmenJoho;
+    }
+
+    /*
+     * getbtnHikazeiNenkinSho
+     * @return btnHikazeiNenkinSho
+     */
+    @JsonProperty("btnHikazeiNenkinSho")
+    public ButtonDialog getBtnHikazeiNenkinSho() {
+        return btnHikazeiNenkinSho;
+    }
+
+    /*
+     * setbtnHikazeiNenkinSho
+     * @param btnHikazeiNenkinSho btnHikazeiNenkinSho
+     */
+    @JsonProperty("btnHikazeiNenkinSho")
+    public void setBtnHikazeiNenkinSho(ButtonDialog btnHikazeiNenkinSho) {
+        this.btnHikazeiNenkinSho = btnHikazeiNenkinSho;
     }
 
     // </editor-fold>

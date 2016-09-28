@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1300001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710020.DBD710020_HanyoListJukyushaDaicho2Parameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1300001.JukyushaDaichoPanelDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -129,8 +129,8 @@ public class JukyushaDaichoPanelHandler {
      *
      * @return HanyoRisutoJyukyusyaDaichoBatchParameter
      */
-    public HanyoRisutoJyukyusyaDaichoBatchParameter setBatchParameter() {
-        HanyoRisutoJyukyusyaDaichoBatchParameter parameter = new HanyoRisutoJyukyusyaDaichoBatchParameter();
+    public DBD710020_HanyoListJukyushaDaicho2Parameter setBatchParameter() {
+        DBD710020_HanyoListJukyushaDaicho2Parameter parameter = new DBD710020_HanyoListJukyushaDaicho2Parameter();
         parameter.setCyusyutsudatakubun(div.getDdlChushutsuData().getSelectedKey());
         boolean 申請取消データ抽出Flag = false;
         boolean 削除データ抽出Flag = false;

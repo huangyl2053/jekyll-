@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNint
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
  * tabShinseishaJoho のクラスファイル
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  */
 public class tabShinseishaJohoDiv extends TabContainer {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,7 +41,7 @@ public class tabShinseishaJohoDiv extends TabContainer {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * gettplShinseijoho
      * @return tplShinseijoho
      */
@@ -142,6 +141,11 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
+    }
+
+    @JsonIgnore
     public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
         return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
     }
@@ -149,11 +153,6 @@ public class tabShinseishaJohoDiv extends TabContainer {
     @JsonIgnore
     public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
         return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
-    }
-
-    @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
     }
 
     @JsonIgnore

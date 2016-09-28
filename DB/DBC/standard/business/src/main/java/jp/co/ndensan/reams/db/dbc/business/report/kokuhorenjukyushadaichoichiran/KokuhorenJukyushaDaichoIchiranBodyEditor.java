@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -171,6 +172,14 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         source.listList8_11 = 対象データ.get被保険者番号後期();
         source.listList8_12 = 対象データ.get被保険者証番号国保();
         名称項目編集(source);
+        source.yubinNo = getNotNull(対象データ.get郵便番号());
+        source.choikiCode = getNotNull(対象データ.get町域コード());
+        source.gyoseikuCode = getNotNull(対象データ.get行政区コード());
+        source.shimei50onKana = getNotNull(対象データ.get氏名50音カナ());
+        source.shichosonCode = 対象データ.get市町村コード();
+        if (!RString.isNullOrEmpty(対象データ.get識別コード())) {
+            source.shikibetuCode = new ShikibetsuCode(対象データ.get識別コード());
+        }
         return source;
     }
 
@@ -238,6 +247,13 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private RString getNotNull(RString str) {
+        if (RString.isNullOrEmpty(str)) {
+            return RString.EMPTY;
+        }
+        return str;
     }
 
 }

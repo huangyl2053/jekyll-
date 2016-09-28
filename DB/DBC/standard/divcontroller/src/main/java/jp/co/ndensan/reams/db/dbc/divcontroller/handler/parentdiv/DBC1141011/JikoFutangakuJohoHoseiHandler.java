@@ -5,18 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1141011;
 
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1141011.JikoFutangakuJohoHoseiDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBCMN62002_高額合算自己負担額情報補正（一括）のクラスです。
@@ -26,10 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JikoFutangakuJohoHoseiHandler {
 
     private final JikoFutangakuJohoHoseiDiv div;
-    private static final RString 送付取込区分 = new RString("2");
-    private static final RString 処理状態区分 = new RString("3");
-    private static final RString 交換情報識別番号 = new RString("37J");
-    private static final RString MAX = new RString("MAX");
+    private static final RString 入力前 = new RString("onClick_btn");
 
     /**
      * コンストラクタです。
@@ -46,21 +42,21 @@ public class JikoFutangakuJohoHoseiHandler {
      */
     public void initialize() {
 
-        KokuhorenInterfaceKanri 国保連インターフェース管理Max;
-        KokuhorenInterfaceKanriManager 国保連インターフェース管理Manager = new KokuhorenInterfaceKanriManager();
-        国保連インターフェース管理Max = 国保連インターフェース管理Manager.get新国保連インターフェース管理(
-                MAX, 送付取込区分, 処理状態区分, 交換情報識別番号);
-        if (国保連インターフェース管理Max != null) {
-            FlexibleYearMonth 最新の処理年月 = 国保連インターフェース管理Max.get処理年月();
-            div.getTxtKakuninJouhouUketoriYM().setValue(new RDate(最新の処理年月.toString()));
-        } else {
-            div.getTxtKakuninJouhouUketoriYM().setValue(null);
-            throw new ApplicationException(DbcErrorMessages.自己負担額確認情報取込前.getMessage());
-        }
+        div.getTxtKakuninJouhouUketoriYM().setValue(new RDate(ViewStateHolder.get(ViewStateKeys.最新の処理年月,
+                FlexibleYearMonth.class).toString()));
         RString 支払場所 = DbBusinessConfig.get(ConfigNameDBC.高額合算自己負担額補正_支払場所, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
         div.getTxtShiharaiBasho().setValue(支払場所);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200031.getReportId());
+    }
+
+    /**
+     * エラー時処理。
+     *
+     * @param flag boolean
+     */
+    public void setCommonButtonVisible(boolean flag) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(入力前, flag);
     }
 
     /**

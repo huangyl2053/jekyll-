@@ -200,51 +200,54 @@ public class IraiJohoDataTorikomiManager {
 
     private int insert要介護認定主治医意見書情報(RString 申請書管理番号, int 主治医意見書作成依頼履歴番号,
             RString 主治医医療機関コード, RString 主治医コード, IkenshokinyuyoshiBusiness business) {
-        DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
-        entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
-        entity.setKoroshoIfShikibetsuCode(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード());
-        entity.setIkenshoIraiKubun(IkenshoIraiKubun.初回依頼.getコード());
-        entity.setShujiiIryoKikanCode(主治医医療機関コード);
-        entity.setShujiiCode(主治医コード);
-        entity.setIkenshoJuryoYMD(FlexibleDate.getNowDate());
-        entity.setIkenshoKinyuYMD(business.get記入日());
-        entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
-        entity.setIkenshoSakuseiKaisuKubun(rStringToCode(business.get意見書作成回数()));
-        entity.setZaitakuShisetsuKubun(rStringToCode(business.get種別()));
-        entity.setIkenshoDoiFlag(business.is同意の有無());
-        entity.setSaishuShinryoYMD(business.get最終診察日());
-        entity.setExistTakaJushinFlag(business.is他科受診有無());
-        if (!RString.isNullOrEmpty(business.get他科名())) {
-            entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
-            entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
-            entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));
-            entity.setExistSeikeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_3, INT_4)));
-            entity.setExistNoshinkeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_4, INT_5)));
-            entity.setExistHifukaJushinFlag(選択項目.equals(business.get他科名().substring(INT_5, INT_6)));
-            entity.setExistHinyokikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_6, INT_7)));
-            entity.setExistFujinkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_7, INT_8)));
-            entity.setExistJibiinkokaJushinFlag(選択項目.equals(business.get他科名().substring(INT_8, INT_9)));
-            entity.setExistRehabilitationkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_9, INT_10)));
-            entity.setExistShikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_10, INT_11)));
-            entity.setExistGankaJushinFlag(選択項目.equals(business.get他科名().substring(INT_11, INT_12)));
-            entity.setExistSonotaJushinkaFlag(選択項目.equals(business.get他科名().substring(INT_12, INT_13)));
+        if (!RString.isNullOrEmpty(申請書管理番号)) {
+            DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
+            entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
+            entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
+            entity.setKoroshoIfShikibetsuCode(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード());
+            entity.setIkenshoIraiKubun(IkenshoIraiKubun.初回依頼.getコード());
+            entity.setShujiiIryoKikanCode(主治医医療機関コード);
+            entity.setShujiiCode(主治医コード);
+            entity.setIkenshoJuryoYMD(FlexibleDate.getNowDate());
+            entity.setIkenshoKinyuYMD(business.get記入日());
+            entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
+            entity.setIkenshoSakuseiKaisuKubun(rStringToCode(business.get意見書作成回数()));
+            entity.setZaitakuShisetsuKubun(rStringToCode(business.get種別()));
+            entity.setIkenshoDoiFlag(business.is同意の有無());
+            entity.setSaishuShinryoYMD(business.get最終診察日());
+            entity.setExistTakaJushinFlag(business.is他科受診有無());
+            if (!RString.isNullOrEmpty(business.get他科名())) {
+                entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
+                entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
+                entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));
+                entity.setExistSeikeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_3, INT_4)));
+                entity.setExistNoshinkeigekaJushinFlag(選択項目.equals(business.get他科名().substring(INT_4, INT_5)));
+                entity.setExistHifukaJushinFlag(選択項目.equals(business.get他科名().substring(INT_5, INT_6)));
+                entity.setExistHinyokikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_6, INT_7)));
+                entity.setExistFujinkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_7, INT_8)));
+                entity.setExistJibiinkokaJushinFlag(選択項目.equals(business.get他科名().substring(INT_8, INT_9)));
+                entity.setExistRehabilitationkaJushinFlag(選択項目.equals(business.get他科名().substring(INT_9, INT_10)));
+                entity.setExistShikaJushinFlag(選択項目.equals(business.get他科名().substring(INT_10, INT_11)));
+                entity.setExistGankaJushinFlag(選択項目.equals(business.get他科名().substring(INT_11, INT_12)));
+                entity.setExistSonotaJushinkaFlag(選択項目.equals(business.get他科名().substring(INT_12, INT_13)));
+            }
+            entity.setSonotaJushinKaMei(business.getその他の他科名());
+            entity.setShindamMei1(business.get診断名1());
+            entity.setHasshoYMD1(get発症年月日(business.get発症年月日1()));
+            entity.setShindamMei2(business.get診断名2());
+            entity.setHasshoYMD2(get発症年月日(business.get発症年月日2()));
+            entity.setShindamMei3(business.get診断名3());
+            entity.setHasshoYMD3(get発症年月日(business.get発症年月日3()));
+            entity.setAnteisei(business.get症状安定性());
+            entity.setFuanteiJokyo(business.get症状不安定時の具体的状況());
+            entity.setChiryoNaiyo(business.get経過及び治療内容());
+            entity.setTokkiJiko(business.getその他特記事項());
+            entity.setNijiHanteiKekkaRenrakuFlag(false);
+            entity.setIkenshoMemo(RString.EMPTY);
+            entity.setState(EntityDataState.Added);
+            return dbT5302Dac.save(entity);
         }
-        entity.setSonotaJushinKaMei(business.getその他の他科名());
-        entity.setShindamMei1(business.get診断名1());
-        entity.setHasshoYMD1(get発症年月日(business.get発症年月日1()));
-        entity.setShindamMei2(business.get診断名2());
-        entity.setHasshoYMD2(get発症年月日(business.get発症年月日2()));
-        entity.setShindamMei3(business.get診断名3());
-        entity.setHasshoYMD3(get発症年月日(business.get発症年月日3()));
-        entity.setAnteisei(business.get症状安定性());
-        entity.setFuanteiJokyo(business.get症状不安定時の具体的状況());
-        entity.setChiryoNaiyo(business.get経過及び治療内容());
-        entity.setTokkiJiko(business.getその他特記事項());
-        entity.setNijiHanteiKekkaRenrakuFlag(false);
-        entity.setIkenshoMemo(RString.EMPTY);
-        entity.setState(EntityDataState.Added);
-        return dbT5302Dac.save(entity);
+        return 0;
     }
 
     private int updata要介護認定主治医意見書情報(DbT5302ShujiiIkenshoJohoEntity entity, IkenshokinyuyoshiBusiness business,
@@ -299,11 +302,14 @@ public class IraiJohoDataTorikomiManager {
 
     private int insert要介護認定主治医意見書意見項目(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号,
             IkenshokinyuyoshiBusiness business) {
-        DbT5304ShujiiIkenshoIkenItemEntity entity = new DbT5304ShujiiIkenshoIkenItemEntity();
-        entity.setShinseishoKanriNo(申請書管理番号);
-        entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
-        entity.setKoroshoIfShikibetsuCode(B_09);
-        return insert主治医意見書意見項目(entity, business);
+        if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
+            DbT5304ShujiiIkenshoIkenItemEntity entity = new DbT5304ShujiiIkenshoIkenItemEntity();
+            entity.setShinseishoKanriNo(申請書管理番号);
+            entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
+            entity.setKoroshoIfShikibetsuCode(B_09);
+            return insert主治医意見書意見項目(entity, business);
+        }
+        return 0;
     }
 
     private int insert主治医意見書意見項目(DbT5304ShujiiIkenshoIkenItemEntity entity, IkenshokinyuyoshiBusiness business) {
@@ -347,11 +353,14 @@ public class IraiJohoDataTorikomiManager {
 
     private int insert要介護認定主治医意見書記入項目(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号,
             IkenshokinyuyoshiBusiness business) {
-        DbT5303ShujiiIkenshoKinyuItemEntity entity = new DbT5303ShujiiIkenshoKinyuItemEntity();
-        entity.setShinseishoKanriNo(申請書管理番号);
-        entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
-        entity.setKoroshoIfShikibetsuCode(B_09);
-        return insert主治医意見書記入項目(entity, business);
+        if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
+            DbT5303ShujiiIkenshoKinyuItemEntity entity = new DbT5303ShujiiIkenshoKinyuItemEntity();
+            entity.setShinseishoKanriNo(申請書管理番号);
+            entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
+            entity.setKoroshoIfShikibetsuCode(B_09);
+            return insert主治医意見書記入項目(entity, business);
+        }
+        return 0;
     }
 
     private int insert主治医意見書記入項目(DbT5303ShujiiIkenshoKinyuItemEntity entity,

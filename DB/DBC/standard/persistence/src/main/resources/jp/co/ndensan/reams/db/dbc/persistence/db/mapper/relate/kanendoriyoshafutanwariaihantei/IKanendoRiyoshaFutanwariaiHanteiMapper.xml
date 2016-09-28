@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-4940-030 wangrenze -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kanendoriyoshafutanwariaihantei.IKanendoRiyoshaFutanwariaiHanteiMapper">
+    <select  resultOrdered="true" id="selectDate" 
+             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kanendoriyoshafutanwariaihantei.KanendoRiyoshaFutanwariaiHanteiMybatisParameter" 
+             fetchSize="500">
+       SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
+        AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{処理名}
+       
+    </select>
+</mapper>

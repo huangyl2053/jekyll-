@@ -104,11 +104,7 @@ public enum ReportIdDBE {
      * 認定調査依頼発行一覧表の帳票ＩＤです。
      */
     DBE233001(new ReportId("DBE233001_ShujiiIkenshoSakuseiTokusokujo"), new RString("主治医意見書提出督促状")),
-    /**
-     * 主治医意見書作成依頼一覧の帳票ＩＤです。
-     */
-    DBE230002(
-            new ReportId("DBE230002_IkenshoSakuseiIraiIchiranhyo"), new RString("主治医意見書作成依頼一覧")),
+
     /**
      * その他資料A3の帳票ID。
      */
@@ -150,20 +146,7 @@ public enum ReportIdDBE {
      * 追加資料鑑の帳票ＩＤです。
      */
     DBE517019(new ReportId("DBE517019_TsuikashiryokagamiA4"), new RString("追加資料鑑")),
-    /**
-     * 介護保険診断命令書の帳票ＩＤです。
-     */
-    DBE235001(new ReportId("DBE235001_kaigohokenShindanMeireisho"), new RString("介護保険診断命令書")),
-    /**
-     * 認定調査依頼一覧表の帳票ＩＤです。
-     */
-    DBE220002(
-            new ReportId("DBE220002_ChosaIraiIchiranhyo"), new RString("認定調査依頼一覧表")),
-    /**
-     * 要介護認定調査依頼書の帳票ＩＤです。
-     */
-    DBE220001(
-            new ReportId("DBE220001_ChosaIraisho"), new RString("要介護認定調査依頼書")),
+
     /**
      * 介護認定審査会スケジュール表です。
      */
@@ -195,25 +178,15 @@ public enum ReportIdDBE {
     DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo(
             new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("認定調査督促対象者一覧表")),
     /**
-     * 主治医意見書作成料請求書です。
-     */
-    DBE234001(new ReportId("DBE234001_ShujiiIkenshoSakuseiRyoSeikyusho"), new RString("主治医意見書作成料請求書")),
-    /**
      * 介護認定審査会スケジュール表かがみの帳票ID。
      */
     DBE514002(new ReportId("DBE514002_Shinsaschedulekagami"), new RString("介護認定審査会スケジュール表かがみ")),
-    /**
-     * 要介護認定調査票（概況調査）の帳票ＩＤです。
-     */
-    DBE221011(new ReportId("DBE221011_chosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）")),
+
     /**
      * 要介護認定調査票（概況調査）の帳票ＩＤです。
      */
     DBE221001(new ReportId("DBE221001_ChosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）")),
-    /**
-     * 要介護認定調査票（特記事項）の帳票ＩＤです。
-     */
-    DBE221022_1(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
+
     /**
      * 要介護認定調査票（特記事項）の帳票ＩＤです。
      */
@@ -238,34 +211,16 @@ public enum ReportIdDBE {
      * 要介護認定調査票（特記事項）の帳票ＩＤです。
      */
     DBE221043(new ReportId("DBE221043_tokkijikoOCR"), new RString("DBE221043_要介護認定調査票（特記事項）")),
-    /**
-     * 要介護認定調査票（特記事項）フリー様式の帳票ＩＤです。
-     */
-    DBE221022_2(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）フリー様式")),
-    /**
-     * 要介護認定調査票（基本調査）の帳票ＩＤです。
-     */
-    DBE221012(new ReportId("DBE221012_chosahyoKihonchosa"), new RString("要介護認定調査票（基本調査）")),
+
     /**
      * 前回認定調査結果との比較表の帳票ＩＤです。
      */
     DBE293001(new ReportId("DBE293001_ChosahyoSaiCheckhyo"), new RString("前回認定調査結果との比較表")),
-    /**
-     * 要介護認定調査票差異チェック票(片面)の帳票ＩＤです。
-     */
-    DBE292001(new ReportId("DBE292001_SaiChekkuhyo"), new RString("要介護認定調査票差異チェック票")),
+
     /**
      * 要介護認定調査票差異チェック票(片面)の帳票ＩＤです。
      */
     DBE701001(new ReportId("DBE701001_ShinsaHanteiJokyo"), new RString("介護認定審査会判定状況表")),
-    /**
-     * 要介護認定調査票差異チェック票(両面左)の帳票ＩＤです。
-     */
-    DBE292003(new ReportId("DBE292003_SaiChekkuhyoHidari"), new RString("要介護認定調査票差異チェック票(両面左)")),
-    /**
-     * 要介護認定調査票差異チェック票(両面右)の帳票ＩＤです。
-     */
-    DBE292002(new ReportId("DBE292002_SaiChekkuhyoMigi"), new RString("要介護認定調査票差異チェック票(両面右)")),
     /**
      * 介護認定審査会集計表（現在の状況別）の帳票ＩＤです。
      */
@@ -326,10 +281,7 @@ public enum ReportIdDBE {
      * その他資料A4の帳票ＩＤです。
      */
     DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("その他資料")),
-    /**
-     * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
-     */
-    DBE231001(new ReportId("DBE231001_ikenshokinyuyoshi"), new RString("要介護認定主治医意見書記入用紙")),
+
     /**
      * 主治医意見書の帳票ＩＤです。
      */
@@ -478,10 +430,7 @@ public enum ReportIdDBE {
      * 介護認定審査会委員報酬支払通知書の帳票ID。
      */
     DBE621001(new ReportId("DBE621001_iinhoshushiharai"), new RString("介護認定審査会委員報酬支払通知書")),
-    /**
-     * 要介護認定調査票（概況特記）の帳票ID。
-     */
-    DBE221051(new ReportId("DBE221051_GaikyotokkiA4"), new RString("要介護認定調査票（概況特記）")),
+
     /**
      * 帳票出力用認定調査実績集計表の帳票ID。
      */

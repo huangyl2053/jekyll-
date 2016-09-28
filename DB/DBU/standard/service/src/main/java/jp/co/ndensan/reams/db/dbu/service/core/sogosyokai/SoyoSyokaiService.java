@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1002TekiyoJogaishaAliv
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1003TashichosonJushochiTokureiAliveDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1004ShisetsuNyutaishoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,6 +46,7 @@ public class SoyoSyokaiService {
     private final DbV1002TekiyoJogaishaAliveDac dbv1002dac;
     private final DbT7060KaigoJigyoshaDac dbt7060dac;
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbt1005dac;
+    private final DbT1004ShisetsuNyutaishoDac dbt1004dac;
 
     /**
      * インスタンスです。
@@ -55,6 +59,7 @@ public class SoyoSyokaiService {
         this.dbv1002dac = InstanceProvider.create(DbV1002TekiyoJogaishaAliveDac.class);
         this.dbt7060dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
         this.dbt1005dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
+        this.dbt1004dac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
     }
 
     /**
@@ -73,7 +78,8 @@ public class SoyoSyokaiService {
             DbV1003TashichosonJushochiTokureiAliveDac dbv1003dac,
             DbV1002TekiyoJogaishaAliveDac dbv1002dac,
             DbT7060KaigoJigyoshaDac dbt7060dac,
-            DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbt1005dac
+            DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbt1005dac,
+            DbT1004ShisetsuNyutaishoDac dbt1004dac
     ) {
         this.dbv1001dac = dbv1001dac;
         this.dbv1004dac = dbv1004dac;
@@ -81,6 +87,7 @@ public class SoyoSyokaiService {
         this.dbv1002dac = dbv1002dac;
         this.dbt7060dac = dbt7060dac;
         this.dbt1005dac = dbt1005dac;
+        this.dbt1004dac = dbt1004dac;
     }
 
     /**
@@ -145,10 +152,10 @@ public class SoyoSyokaiService {
      * @return ShisetsuNyutaishoAlive
      */
     @Transaction
-    public ShisetsuNyutaishoAlive get施設入退所Order(ShikibetsuCode 識別コード, RString 台帳種別) {
-        DbV1004ShisetsuNyutaishoEntity result = dbv1004dac.get施設入退所Order(識別コード, 台帳種別);
+    public ShisetsuNyutaisho get施設入退所Order(ShikibetsuCode 識別コード, RString 台帳種別) {
+        DbT1004ShisetsuNyutaishoEntity result = dbt1004dac.get施設入退所Order(識別コード, 台帳種別);
         if (result != null) {
-            return new ShisetsuNyutaishoAlive(result);
+            return new ShisetsuNyutaisho(result);
         }
         return null;
     }
@@ -178,8 +185,11 @@ public class SoyoSyokaiService {
     public KaigoJigyosha get事業者名称_入所施設コード(RString 入所施設コード) {
         DbT7060KaigoJigyoshaEntity result = dbt7060dac.get事業者名称_入所施設コード(入所施設コード);
         KaigoJigyoshaEntity kaigojigyoshaentity = new KaigoJigyoshaEntity();
-        kaigojigyoshaentity.set介護事業者Entity(result);
-        return new KaigoJigyosha(kaigojigyoshaentity);
+        if (result != null) {
+            kaigojigyoshaentity.set介護事業者Entity(result);
+            return new KaigoJigyosha(kaigojigyoshaentity);
+        }
+        return null;
     }
 
     /**

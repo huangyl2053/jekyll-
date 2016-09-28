@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3810-030 liuwei2 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jigyoshomukeshakai.IKeikakuJigyoshaJohoMapper">
+    <select
+        resultOrdered="true"
+        id="get計画事業者情報"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010MybatisParameter"
+        resultMap="ResultMap_KeikakuJigyoshaJohoEntity" fetchSize="500">
+        SELECT
+        社福軽減."shoKisaiHokenshaNo",
+        社福軽減."hihokenshaNo",
+        社福軽減."rirekiNo",
+        社福軽減."kyotakuServiceGentei",
+        社福軽減."kyojuhiShokuhiNomi",
+        社福軽減."kyusochishaUnitTypeKoshitsuNomi",
+        社福軽減."kakuninNo",
+        社福軽減."tekiyoKaishiYMD",
+        社福軽減."tekiyoShuryoYMD",
+        被保2."shikibetsuCode",
+        被保2."hihokennshaKubunCode",
+        被保2."shikakuShutokuYMD",
+        被保2."shikakuShutokuJiyuCode",
+        被保2."shikakuSoshitsuYMD",
+        被保2."shikakuSoshitsuJiyuCode",
+        被保2."jushochiTokureiFlag",
+        被保2."koikinaiJushochiTokureiFlag",
+        被保2."koikinaiTokureiSochimotoShichosonCode",
+        被保2."shichosonCode",
+        被保2."kyuShichosonCode",
+        受給2."yokaigoJotaiKubunCode",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD",
+        居宅給付計画2."taishoYM",
+        居宅給付計画2."sakuseiKubunCode",
+        居宅給付計画2."keikakuJigyoshaNo",
+        居宅事業者2."jigyoshaNo",
+        居宅事業者2."jigyoshaName",
+        居宅事業者2."jigyoshaNameKana",
+        居宅事業者2."yubinNo",
+        居宅事業者2."jigyoshaAddress",
+        居宅事業者2."telNo",
+        居宅事業者2."yukoKaishiYMD",
+        居宅事業者2."yukoShuryoYMD"
+        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS 社福軽減
+        INNER JOIN(
+        SELECT
+        被保."hihokenshaNo",
+        被保."shikibetsuCode",
+        被保."hihokennshaKubunCode",
+        被保."shikakuShutokuYMD",
+        被保."shikakuShutokuJiyuCode",
+        被保."shikakuSoshitsuYMD",
+        被保."shikakuSoshitsuJiyuCode",
+        被保."jushochiTokureiFlag",
+        被保."koikinaiJushochiTokureiFlag",
+        被保."koikinaiTokureiSochimotoShichosonCode",
+        被保."shichosonCode",
+        被保."kyuShichosonCode"
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保
+        WHERE
+        (
+        被保."shikakuShutokuYMD" <![CDATA[<=]]> #{基準日}  AND
+        (#{基準日}  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR   被保."shikakuSoshitsuYMD" = '')
+        )
+        AND 被保."logicalDeletedFlag" = FALSE
+        <if test="is出力しない" >
+            AND 被保."shikakuSoshitsuYMD" = ''
+        </if>
+        AND NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保1
+        WHERE 被保1."hihokenshaNo" = 被保."hihokenshaNo" AND
+        (被保1."idoYMD" <![CDATA[<]]> 被保."idoYMD" OR
+        (被保1."idoYMD" <![CDATA[=]]> 被保."idoYMD" AND
+        被保1."edaNo" <![CDATA[<]]> 被保."edaNo"))
+        )
+        )AS 被保2
+        ON 被保2."hihokenshaNo" = 社福軽減."hihokenshaNo"
+        INNER JOIN
+        (
+        SELECT
+        受給."hihokenshaNo",
+        受給."yokaigoJotaiKubunCode",
+        受給."ninteiYukoKikanKaishiYMD",
+        受給."ninteiYukoKikanShuryoYMD"
+        FROM  rgdb."DbT4001JukyushaDaicho" AS 受給
+        WHERE (
+        受給."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準日} AND
+        ( #{基準日} <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD" OR
+        受給."ninteiYukoKikanShuryoYMD" = '')) AND
+        受給."logicalDeletedFlag"  = FALSE
+        AND NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給1
+        WHERE 受給1."hihokenshaNo" = 受給."hihokenshaNo" AND
+        (受給1."rirekiNo" <![CDATA[<]]> 受給."rirekiNo" OR (受給1."rirekiNo" <![CDATA[=]]> 受給."rirekiNo" AND 受給1."edaban" <![CDATA[<]]> 受給."edaban"))
+        )
+        )AS 受給2
+        ON  受給2."hihokenshaNo" = 社福軽減."hihokenshaNo"
+        INNER JOIN
+        (
+        SELECT
+        居宅給付計画."hihokenshaNo",
+        居宅給付計画."taishoYM",
+        居宅給付計画."sakuseiKubunCode",
+        居宅給付計画."keikakuJigyoshaNo"
+        FROM rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS 居宅給付計画
+        WHERE (居宅給付計画."tekiyoKaishiYMD"<![CDATA[<=]]> #{基準日} AND
+        (#{基準日} <![CDATA[<=]]> 居宅給付計画."tekiyoShuryoYMD" OR 居宅給付計画."tekiyoShuryoYMD"  = ''))
+        <if test="事業者番号isNotEmpty" >
+            AND 居宅給付計画."keikakuJigyoshaNo" = #{事業者番号}
+        </if>
+        AND NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS 居宅給付計画1
+        WHERE 居宅給付計画1."hihokenshaNo" = 居宅給付計画."hihokenshaNo" AND
+        (居宅給付計画1."taishoYM" <![CDATA[<]]> 居宅給付計画."taishoYM" OR
+        (居宅給付計画1."taishoYM" <![CDATA[=]]> 居宅給付計画."taishoYM" AND
+        居宅給付計画1."rirekiNo" <![CDATA[<]]> 居宅給付計画."rirekiNo"))
+        )
+        )AS 居宅給付計画2
+        ON  居宅給付計画2."hihokenshaNo" = 社福軽減."hihokenshaNo"
+        LEFT JOIN (
+        SELECT
+        居宅事業者."jigyoshaNo",
+        居宅事業者."jigyoshaName",
+        居宅事業者."jigyoshaNameKana",
+        居宅事業者."yubinNo",
+        居宅事業者."jigyoshaAddress",
+        居宅事業者."telNo",
+        居宅事業者."yukoKaishiYMD",
+        居宅事業者."yukoShuryoYMD"
+        FROM rgdb."DbT7060KaigoJigyosha" AS 居宅事業者
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT7060KaigoJigyosha" AS 居宅事業者1
+        WHERE 居宅事業者1."jigyoshaNo" = 居宅事業者."jigyoshaNo"  AND
+        居宅事業者1."yukoKaishiYMD" <![CDATA[<]]> 居宅事業者."yukoKaishiYMD"
+        )
+        )AS 居宅事業者2
+        ON 居宅事業者2."jigyoshaNo" = 居宅給付計画2."keikakuJigyoshaNo"
+        WHERE
+        社福軽減."ketteiKubun" = '1' AND
+        社福軽減."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日} AND
+        ( #{基準日}  <![CDATA[<=]]> 社福軽減."tekiyoShuryoYMD" OR
+        社福軽減."tekiyoShuryoYMD" = '')
+        ${出力順}
+    </select>
+
+    <resultMap id="ResultMap_KeikakuJigyoshaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.KeikakuJigyoshaJohoEntity" autoMapping="true">
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="履歴番号" column="rirekiNo"/>
+        <result property="居宅サービス限定" column="kyotakuServiceGentei" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="居住費食費のみ" column="kyojuhiShokuhiNomi" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="旧措置者ユニット型個室のみ" column="kyusochishaUnitTypeKoshitsuNomi" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="確認番号" column="kakuninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用開始年月日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用終了年月日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者区分コード" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得年月日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格取得事由コード" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失年月日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失事由コード" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所地特例フラグ" column="jushochiTokureiFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="旧市町村コード" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+
+        <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+        <result property="対象年月" column="taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="作成区分コード" column="sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="計画事業者番号" column="keikakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+
+        <result property="事業者名称" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称カナ" column="jigyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者住所" column="jigyoshaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="有効開始日" column="yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="有効終了日" column="yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+    </resultMap>
+</mapper>

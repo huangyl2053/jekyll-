@@ -66,6 +66,7 @@
         <result property="定額利用者負担単価金額" column="定額利用者負担単価金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="限度額対象外フラグ" column="限度額対象外フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担定率定額区分" column="利用者負担定率定額区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="明細番号" column="明細番号" />
     </resultMap>
     <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_KyufuJikoSakuseiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter" fetchSize="500">
@@ -91,6 +92,7 @@
         A.サービス項目コード AS サービス項目コード,
         A.事業者コード AS 事業者コード,
         A.合計フラグ AS 合計フラグ,
+        A.明細番号 AS 明細番号,
         A.定額利用者負担単価金額 AS 定額利用者負担単価金額,
         DbT7131KaigoServiceNaiyou."gendogakuTaishogaiFlag" AS 限度額対象外フラグ,
         DbT7131KaigoServiceNaiyou."riyosyaFutanTeiritsuTeigakuKubun" AS 利用者負担定率定額区分
@@ -111,6 +113,7 @@
         B."kyufuRitsu" AS 給付率,
         B."kyufuKeikakuTaniSu" AS 給付計画単位数,
         B."goukeiFlag" AS 合計フラグ,
+        B."meisaiNo" AS 明細番号,
         NULL AS 定額利用者負担単価金額
         FROM
         rgdb."DbT3119KyotakuKeikakuJikosakuseiKanri" AS B
@@ -136,6 +139,7 @@
         C."kyufuRitsu" AS 給付率,
         C."keikakuTaniSu" AS 給付計画単位数,
         C."goukeiFlag" AS 合計フラグ,
+        C."meisaiNo" AS 明細番号,
         C."teigakuRiyoshaFutanTankaKingaku" AS 定額利用者負担単価金額
         FROM
         rgdb."DbT3120YoboKeikakuJikoSakuseiKanri"  C

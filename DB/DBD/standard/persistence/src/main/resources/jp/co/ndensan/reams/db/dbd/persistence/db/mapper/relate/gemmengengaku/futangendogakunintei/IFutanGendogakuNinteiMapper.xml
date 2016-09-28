@@ -139,15 +139,42 @@
         B.*
         FROM (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.noDeleted_DbT4018KaigoHokenFutanGendogakuNintei" />) AS A
         LEFT JOIN (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS B
-         ON A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" = B."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        ON A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" = B."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
         AND A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = B."dbT4010GemmenGengakuShinsei_hihokenshaNo"
         AND A."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
         AND B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
         WHERE
-            A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
+        A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
         AND A."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = #{履歴番号}
     </select>
-    
+
+    <select id="get非課税年金勘案額"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            fetchSize="500">
+        SELECT
+        SUM(TO_NUMBER(A."dtkingaku1", '99999999999')) AS 非課税年金勘案額
+        FROM
+        (
+        SELECT
+        "dtkingaku1"
+        ,ROW_NUMBER() OVER (
+        PARTITION BY "dtnenkinhokenshacode"
+        ,"genkisonenkinno"
+        ,SUBSTRING("dtnenkincode", 1, 3)
+        ORDER BY
+        "dtsakuseiymd" DESC
+        ) AS 最大順
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        WHERE
+        "hihokenshano" = #{被保険者番号}
+        AND "dttaishoy" =#{対象年}
+        ) AS A
+        WHERE
+        A.最大順 = '1'
+    </select>
+
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_FutanGendogakuNinteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity" autoMapping="true">
         <id property="介護保険負担限度額認定Entity.shoKisaiHokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>

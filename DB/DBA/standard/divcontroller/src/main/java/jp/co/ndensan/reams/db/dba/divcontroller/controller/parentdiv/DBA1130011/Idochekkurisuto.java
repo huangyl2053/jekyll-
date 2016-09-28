@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1130011;
 
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.idochecklist.IdoCheckListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA130010.DBA130010_IdoCheckListParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1130011.IdochekkurisutoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1130011.IdochekkurisutoHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1130011.IdochekkurisutoValidationHandler;
@@ -69,7 +69,7 @@ public class Idochekkurisuto {
      * @param div 異動チェックリストDIV
      * @return ResponseData<IdochekkurisutoDiv>
      */
-    public ResponseData<IdoCheckListBatchParameter> onClick_BatchRegister(IdochekkurisutoDiv div) {
+    public ResponseData<DBA130010_IdoCheckListParameter> onClick_BatchRegister(IdochekkurisutoDiv div) {
         IdoCheckListParameter param = IdoCheckListParameter.createIdoCheckListParameter(
                 div.getTxtzenkaikaishi().getValue(),
                 div.getTxtzenkaishuryo().getValue(),
@@ -79,7 +79,7 @@ public class Idochekkurisuto {
                 div.getCcdChohyoShutsuryokujun().get出力順ID(),
                 div.getChktaishodaicho().isAllSelected());
 
-        IdoCheckListBatchParameter batchParam = service.getIdoCheckListBatchParameter(param);
+        DBA130010_IdoCheckListParameter batchParam = service.getIdoCheckListBatchParameter(param);
 
         return ResponseData.of(batchParam).respond();
     }

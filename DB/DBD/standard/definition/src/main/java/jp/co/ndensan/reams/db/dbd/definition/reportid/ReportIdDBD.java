@@ -32,6 +32,18 @@ public enum ReportIdDBD {
      */
     DBD800002(new ReportId("DBD800002_RiyoshaFutangakuGengakuMenjyoShinseisho"), new RString("介護保険利用者負担額減額・免除申請書")),
     /**
+     * 負担限度額認定更新のお知らせ通知書旧措置の帳票ID。
+     */
+    DBD200008(new ReportId("DBD200008_KyufuGengakuHaakuIchiran"), new RString("給付額減額滞納者把握情報取得")),
+    /**
+     * 負担限度額認定更新のお知らせ通知書の帳票ID。
+     */
+    DBD511001(new ReportId("DBD511001_KoshinShinseiOshiraseTshuchisho"), new RString("認定更新お知らせ通知書")),
+    /**
+     * 負担限度額認定更新のお知らせ通知書旧措置の帳票ID。
+     */
+    DBD511002(new ReportId("DBD511002_KoshinShinseiTsuchishoHakkoIchiranhyo"), new RString("更新申請のお知らせ通知書発行一覧表")),
+    /**
      * 汎用リスト 受給者台帳２の帳票ＩＤです。
      */
     DBD130001(new ReportId("DBD130001_HanyoList_JukyushaDaicho2"), new RString("汎用リスト 受給者台帳２")),
@@ -55,6 +67,10 @@ public enum ReportIdDBD {
      * 給付減額滞納者把握リストの帳票ＩＤです。
      */
     DBD200009(new ReportId("DBD200009_KyufuGengakuKanriIchiran"), new RString("給付減額滞納者把握リスト")),
+    /**
+     * 利用者負担額減免認定者リストの帳票ＩＤです。
+     */
+    DBD200002(new ReportId("DBD200002_RiyoshaFutangakuGemmenGaitoshaIchiran"), new RString("利用者負担額減免認定者リスト")),
     /**
      * 支払方法変更管理リストの帳票ＩＤです。
      */
@@ -140,6 +156,18 @@ public enum ReportIdDBD {
      */
     DBD100022(new ReportId("DBD100022_TokubetsuChiikiKasanRiyoshaFutanGengakuKakuninsho"), new RString("特別地域加算に係る訪問介護利用者負担減額確認証")),
     /**
+     * 負担限度額認定更新のお知らせ通知書（旧措置者用）の帳票ＩＤです。
+     */
+    DBD100027(new ReportId("DBD100027_FutanGendogakuNinteiKoshinTsuchishoKyusochi"), new RString("負担限度額認定更新のお知らせ通知書（旧措置者用）")),
+    /**
+     * おむつ証明書の帳票ＩＤです。
+     */
+    DBD100029(new ReportId("DBD100029_OmutsuShoumeisho"), new RString("おむつ証明書")),
+    /**
+     *  主治医意見書確認書の帳票ＩＤです。
+     */
+    DBD100030(new ReportId("DBD100030_ShujiiIkenshoKakuninsho"), new RString(" 主治医意見書確認書")),
+    /**
      * 要介護認定結果通知書の帳票ＩＤです。
      */
     DBD532001(new ReportId("DBD532001_YokaigoNinteiKekkaTshuchisho"), new RString("要介護認定結果通知書")),
@@ -148,6 +176,14 @@ public enum ReportIdDBD {
      */
     DBD550002(new ReportId("DBD550002_ServiceHenkoTshuchisho"), new RString("サービス変更通知書")),
     /**
+     * 受給者減免月別申請・認定状況表の帳票ＩＤです。
+     */
+    DBD300001(new ReportId("DBD300001_JukyushaGemmenTsukibetsuShinseiNinteiJokyohyo"), new RString("受給者減免月別申請・認定状況表")),
+    /**
+     * 受給者減免月別認定者数状況表の帳票ＩＤです。
+     */
+    DBD300002(new ReportId("DBD300002_JukyushaGemmenTsukibetsuNinteishaJokyohyo"), new RString("受給者減免月別認定者数状況表")),
+    /**
      * 要介護認定実施状況表（統計表）の帳票ＩＤです。
      */
     DBD300003(new ReportId("DBD300003_YokaigoNinteiJisshiJokyohyo"), new RString("要介護認定実施状況表（統計表）")),
@@ -155,6 +191,10 @@ public enum ReportIdDBD {
      * 要介護認定月別受給者数状況表（統計表）の帳票ＩＤです。
      */
     DBD300004(new ReportId("DBD300004_YokaigoNinteiTsukibetsuJukyushaSuJokyohyo"), new RString("要介護認定月別受給者数状況表（統計表）")),
+    /**
+     * 年齢階級別要介護度状況の帳票ＩＤです。
+     */
+    DBD300005(new ReportId("DBD300005_NenreiKaikyubetsuYokaigodoJokyo"), new RString("年齢階級別要介護度状況")),
     /**
      * 要介護度変更通知書の帳票ＩＤです。
      */
@@ -200,9 +240,33 @@ public enum ReportIdDBD {
      */
     DBD503001(new ReportId("DBD503001_ShinsaHanteiIraiIchiranhyo"), new RString("介護認定審査判定依頼一覧表")),
     /**
+     * 給付制限対象者一覧CSVの帳票ＩＤです。
+     */
+    DBD200010(new ReportId("DBD200010_KyufuSeigenTaishoIchiran"), new RString("給付制限対象者一覧CSV")),
+    /**
      * 特別地域加算軽減実績管理リストの帳票ＩＤです。
      */
     DBD200012(new ReportId("DBD200012_TokubetsuChiikiKasanKeigenJissekiKanriIchiran"), new RString("特別地域加算軽減実績管理リスト")),
+    /**
+     * 訪問介護利用者負担額減額認定者リストの帳票ＩＤです。
+     */
+    DBD200014(new ReportId("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran"), new RString("訪問介護利用者負担額減額認定者リスト")),
+    /**
+     * 訪問介護利用者負担額減額該当者リストの帳票ＩＤです。
+     */
+    DBD200003(new ReportId("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran"), new RString("訪問介護利用者負担額減額該当者リスト")),
+    /**
+     * 負担限度額認定者リストの帳票ＩＤです。
+     */
+    DBD200001(new ReportId("DBD200001_FutanGendogakuNinteiGaitoshaIchiran"), new RString("負担限度額認定者リスト")),
+    /**
+     * 負担限度額認定者リストの帳票ＩＤです。
+     */
+    DBD200016(new ReportId("DBD200016_FutanGendogakuNinteishaIchiran"), new RString("負担限度額認定者リスト")),
+    /**
+     * 事業所向け社会福祉法人軽減対象者一覧表の帳票ＩＤです。
+     */
+    DBD200017(new ReportId("DBD200017_JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiran"), new RString("事業所向け社会福祉法人軽減対象者一覧表")),
     /**
      * 要介護認定通知書一括発行の帳票ＩＤです。
      */
@@ -255,7 +319,11 @@ public enum ReportIdDBD {
     /**
      * 非課税年金対象者情報遡及不一致チェックリストの帳票ＩＤです。
      */
-    DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト"));
+    DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト")),
+    /**
+     * 汎用リスト出力(非課税年金対象者)の帳票ＩＤです。
+     */
+    DBD701008(new ReportId("DBD701008_HanyoListHikazeiNenkinTaishosha"), new RString("汎用リスト　非課税年金対象者"));
 
     private final ReportId reportId;
     private final RString reportName;

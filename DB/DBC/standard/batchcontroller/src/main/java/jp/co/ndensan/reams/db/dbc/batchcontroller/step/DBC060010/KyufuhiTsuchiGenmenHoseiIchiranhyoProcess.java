@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060010;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kaigojuminhyo.KyufuTsuchiGenmenHose
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchigenmenhoseiichiran.KyufuhiTuchiGenmenhoseiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchigenmenhoseiichiran.KyufuhiTuchiGenmenhoseiIchiranReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -49,12 +49,14 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC060010"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString 広域の全市町村_KEY = new RString("000000");
     private KyufuTsuchiGenmenHoseiProcessParameter processParameter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString spoolWorkPath;
-    private HokenshaNo 市町村コード = HokenshaNo.EMPTY;
-    private List<HokenshaNo> 市町村コードList;
+    private RString 市町村コード = RString.EMPTY;
+    private List<RString> 市町村コードList;
+    private RString 地方公共団体コード;
     @BatchWriter
     private CsvWriter<KyufuTsuchiGenmenHoseiCsvEntity> eucCsvWriter;
     private BatchReportWriter<KyufuhiTuchiGenmenhoseiIchiranReportSource> reportWriter;
@@ -65,16 +67,17 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
         市町村コードList = processParameter.get市町村コードList();
-        Collections.sort(市町村コードList, new Comparator<HokenshaNo>() {
+        Collections.sort(市町村コードList, new Comparator<RString>() {
             @Override
-            public int compare(HokenshaNo entity1, HokenshaNo entity2) {
-                return entity1.value().compareTo(entity2.value());
+            public int compare(RString entity1, RString entity2) {
+                return entity1.compareTo(entity2);
             }
         });
         市町村コード = 市町村コードList.get(0);
+        地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         RStringBuilder filePath = new RStringBuilder();
         filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
-        filePath.append(市町村コードList.get(0).value());
+        filePath.append(市町村コードList.get(0));
         filePath.append(".csv");
         eucFilePath = Path.combinePath(spoolWorkPath, filePath.toRString());
     }
@@ -91,7 +94,7 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build();
         reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200043.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(reportWriter);
@@ -112,13 +115,16 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
 
     private void get給付費通知減免補正一覧表のCSV出力(KyufuTsuchiGenmenHoseiEntity entity) {
         RStringBuilder filePath = new RStringBuilder();
-        if (!市町村コード.equals(entity.getShokisaiHokenshaNo())) {
-            市町村コード = entity.getShokisaiHokenshaNo();
+        if (is広域の全市町村()) {
+            if (広域の全市町村_KEY.equals(市町村コード)) {
+                市町村コード = 地方公共団体コード;
+                eucCsvWriter.close();
+                setCreateCSV(filePath);
+            }
+        } else if (!市町村コード.equals(entity.getShokisaiHokenshaNo().value())) {
+            市町村コード = entity.getShokisaiHokenshaNo().value();
             eucCsvWriter.close();
-            filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
-            filePath.append(entity.getHiHokenshaNo().value());
-            filePath.append(".csv");
-            setFilePath(filePath);
+            setCreateCSV(filePath);
         }
         eucCsvWriter.writeLine(
                 new KyufuTsuchiGenmenHoseiCsvEntity(
@@ -132,6 +138,21 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
                         entity.getRiyoshaFutangaku(),
                         entity.getServiceShuruiMeisho())
         );
+    }
+
+    private void setCreateCSV(RStringBuilder filePath) {
+        filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
+        filePath.append(市町村コード);
+        filePath.append(".csv");
+        boolean delFlag = true;
+        File tmpfile = new File("KyufuhiTuchiGenmenhoseiIchiran_000000.csv");
+        if (tmpfile.exists()) {
+            delFlag = tmpfile.delete();
+        }
+        delFlag = true;
+        if (delFlag) {
+            setFilePath(filePath);
+        }
     }
 
     private void setFilePath(RStringBuilder filePath) {
@@ -152,5 +173,9 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
         KyufuhiTuchiGenmenhoseiIchiranEntity reportEntity = business.get給付費通知減免補正一覧表の帳票情報(entity, 保険者コード, 保険者名);
         KyufuhiTuchiGenmenhoseiIchiranReport report = new KyufuhiTuchiGenmenhoseiIchiranReport(reportEntity);
         report.writeBy(reportSourceWriter);
+    }
+
+    private boolean is広域の全市町村() {
+        return 広域の全市町村_KEY.equals(市町村コードList.get(0));
     }
 }

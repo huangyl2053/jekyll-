@@ -4,10 +4,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * ServiceRiyohyoBeppyoGokei のクラスファイル
@@ -15,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -338,7 +342,7 @@ public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnBeppyoGokeiKakutei(Button btnBeppyoGokeiKakutei) {
+    public void setBtnBeppyoGokeiKakutei(Button btnBeppyoGokeiKakutei) {
         this.getServiceRiyohyoBeppyoGokeiFooter().setBtnBeppyoGokeiKakutei(btnBeppyoGokeiKakutei);
     }
 
@@ -348,7 +352,7 @@ public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
+    public void setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
         this.getServiceRiyohyoBeppyoGokeiFooter().setBtnCancelGokeiInput(btnCancelGokeiInput);
     }
 
@@ -358,7 +362,7 @@ public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCalcGokei(Button btnCalcGokei) {
+    public void setBtnCalcGokei(Button btnCalcGokei) {
         this.getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
     }
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1030021;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT00004.DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD203010.DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030021.ShakaiFukushiHojinKeigenNinteishaListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030021.ShakaiFukushiHojinKeigenNinteishaListHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -113,8 +113,8 @@ public class ShakaiFukushiHojinKeigenNinteishaList {
      * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
-    public ResponseData<DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter> onClick_btnBatchExecute(ShakaiFukushiHojinKeigenNinteishaListDiv div) {
-        DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter parameter = getHandler(div).createParameter();
+    public ResponseData<DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter> onClick_btnBatchExecute(ShakaiFukushiHojinKeigenNinteishaListDiv div) {
+        DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter parameter = getHandler(div).createParameter();
         return ResponseData.of(parameter).respond();
     }
 

@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -110,13 +109,13 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         }
 
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfoTemp =  tsuchishoTeikeibunManager.get最新適用日(
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfoTemp = tsuchishoTeikeibunManager.get最新適用日(
                 SubGyomuCode.DBA介護資格,
-                new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), 
-                KamokuCode.EMPTY, 
-                INT1, 
+                new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"),
+                KamokuCode.EMPTY,
+                INT1,
                 INT1);
-        
+
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(
                 SubGyomuCode.DBA介護資格,
                 new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"),
@@ -150,7 +149,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set退所年月日(施設情報Entity.get退所年月日().
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-              outEntity.set退所事由(CodeMaster.getCodeRyakusho(
+            outEntity.set退所事由(CodeMaster.getCodeRyakusho(
                     DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
                     new Code(施設情報Entity.get退所事由()),
                     FlexibleDate.getNowDate()));

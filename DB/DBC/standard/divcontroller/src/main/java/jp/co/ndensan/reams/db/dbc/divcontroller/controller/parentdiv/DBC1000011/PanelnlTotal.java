@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1000011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011.PanelnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000011.PanelnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyu.ShokanbaraiShikyuFinder;
@@ -114,8 +114,8 @@ public class PanelnlTotal {
      * @param div 償還払い支給（不支給）決定通知書一括作成DIV
      * @return ResponseData<PanelnlTotalDiv>
      */
-    public ResponseData<ShoukanBaraiSuuchiShoIkatsuBatchParamter> onClick_batch(PanelnlTotalDiv div) {
-        ShoukanBaraiSuuchiShoIkatsuBatchParamter parameter = createHandler(div).onClick_btnJikouBatch();
+    public ResponseData<DBC030010_ShokanShikyuKetteiTsuchishoParameter> onClick_batch(PanelnlTotalDiv div) {
+        DBC030010_ShokanShikyuKetteiTsuchishoParameter parameter = createHandler(div).onClick_btnJikouBatch();
         return ResponseData.of(parameter).respond();
     }
 

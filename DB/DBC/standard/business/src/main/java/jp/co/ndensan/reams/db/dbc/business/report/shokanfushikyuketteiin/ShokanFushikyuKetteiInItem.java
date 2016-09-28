@@ -20,8 +20,8 @@ public class ShokanFushikyuKetteiInItem {
     private final RString 印刷日時;
     private final RString ページ数;
     private final RString 国保連合会名;
-    private final RString 保険者番号;
-    private final RString 保険者名称;
+    private final RString 証記載保険者番号;
+    private final RString 証記載保険者名;
     private final RString 並び順１;
     private final RString 並び順２;
     private final RString 並び順３;
@@ -42,7 +42,7 @@ public class ShokanFushikyuKetteiInItem {
     private final RString 喪失事由;
     private final RString 備考１;
     private final RString 整理番号;
-    private final RString 住所コード;
+    private final RString 町域コード;
     private final RString 住所;
     private final RString 行政区コード;
     private final RString 行政区;
@@ -57,8 +57,8 @@ public class ShokanFushikyuKetteiInItem {
      * @param 印刷日時 印刷日時
      * @param ページ数 ページ数
      * @param 国保連合会名 国保連合会名
-     * @param 保険者番号 保険者番号
-     * @param 保険者名称 保険者名称
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 証記載保険者名 証記載保険者名
      * @param 並び順１ 並び順１
      * @param 並び順２ 並び順２
      * @param 並び順３ 並び順３
@@ -79,7 +79,7 @@ public class ShokanFushikyuKetteiInItem {
      * @param 喪失事由 喪失事由
      * @param 備考１ 備考１
      * @param 整理番号 整理番号
-     * @param 住所コード 住所コード
+     * @param 町域コード 町域コード
      * @param 住所 住所
      * @param 行政区コード 行政区コード
      * @param 行政区 行政区
@@ -92,8 +92,8 @@ public class ShokanFushikyuKetteiInItem {
             RString 印刷日時,
             RString ページ数,
             RString 国保連合会名,
-            RString 保険者番号,
-            RString 保険者名称,
+            RString 証記載保険者番号,
+            RString 証記載保険者名,
             RString 並び順１,
             RString 並び順２,
             RString 並び順３,
@@ -114,7 +114,7 @@ public class ShokanFushikyuKetteiInItem {
             RString 喪失事由,
             RString 備考１,
             RString 整理番号,
-            RString 住所コード,
+            RString 町域コード,
             RString 住所,
             RString 行政区コード,
             RString 行政区,
@@ -125,8 +125,8 @@ public class ShokanFushikyuKetteiInItem {
         this.印刷日時 = 印刷日時;
         this.ページ数 = ページ数;
         this.国保連合会名 = 国保連合会名;
-        this.保険者番号 = 保険者番号;
-        this.保険者名称 = 保険者名称;
+        this.証記載保険者番号 = 証記載保険者番号;
+        this.証記載保険者名 = 証記載保険者名;
         this.並び順１ = 並び順１;
         this.並び順２ = 並び順２;
         this.並び順３ = 並び順３;
@@ -147,7 +147,7 @@ public class ShokanFushikyuKetteiInItem {
         this.喪失事由 = 喪失事由;
         this.備考１ = 備考１;
         this.整理番号 = 整理番号;
-        this.住所コード = 住所コード;
+        this.町域コード = 町域コード;
         this.住所 = 住所;
         this.行政区コード = 行政区コード;
         this.行政区 = 行政区;

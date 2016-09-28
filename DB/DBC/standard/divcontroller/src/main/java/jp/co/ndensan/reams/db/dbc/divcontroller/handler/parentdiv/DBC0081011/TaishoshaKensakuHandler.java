@@ -308,7 +308,9 @@ public class TaishoshaKensakuHandler {
             row.setTxtHokenshaMoshitateRiyu(一覧明細.get申立事由コード());
             row.setTxtMousitateTaisyou(一覧明細.getコード名称());
             row.setTxtMote(一覧明細.get再審査申立事由());
-            row.setTxtHokenshaServiceTeikyoYM(new FlexibleDate(一覧明細.getサービス提供年月()).getYearMonth().wareki().toDateString());
+            if (!RString.isNullOrEmpty(一覧明細.getサービス提供年月())) {
+                row.setTxtHokenshaServiceTeikyoYM(new FlexibleDate(一覧明細.getサービス提供年月()).getYearMonth().wareki().toDateString());
+            }
             row.setTxtHokenshaServiceType(一覧明細.getサービス種類コード());
             row.setTxtHokenshaStyle(一覧明細.getサービス種類名());
             row.setTxtSasia(一覧明細.get再審査結果コード());

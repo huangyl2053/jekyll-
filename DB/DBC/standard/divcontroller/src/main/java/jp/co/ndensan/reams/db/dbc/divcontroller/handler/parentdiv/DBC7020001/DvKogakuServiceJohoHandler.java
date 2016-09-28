@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030.DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.KokuhorenFuicchi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShiharaiSaki;
@@ -14,10 +15,10 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinsaHoh
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.Taishosha;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -30,11 +31,12 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 汎用リスト_高額介護サービス費状況
+ * 画面設計_DBCGM23001_汎用リスト出力(高額介護サービス費状況)
  *
- * @reamsid_L DBC-3092-010 sunhui
+ * @reamsid_L DBC-5040-010 chenyadong
  */
 public class DvKogakuServiceJohoHandler {
 
@@ -49,6 +51,10 @@ public class DvKogakuServiceJohoHandler {
     private static final RString 項目名 = new RString("1");
     private static final RString 連番 = new RString("2");
     private static final RString 日付スラッシュ = new RString("3");
+    private static final RString RSTRING_4 = new RString("4");
+    private static final RString RSTRING_5 = new RString("5");
+    private static final RString モード１ = new RString("DBCMN13001");
+    private static final RString モード２ = new RString("DBCMN13019");
 
     /**
      * コンストラクタです。
@@ -72,24 +78,29 @@ public class DvKogakuServiceJohoHandler {
     /**
      * 初期化設定のinitializeメソッドです
      *
+     * @param state RString
      */
-    public void initialize() {
+    public void initialize(RString state) {
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
-        panel.getDdlKogakuShoriJokyo().setDataSource(get処理状況リスト());
-        panel.getDdlKogakuShinsaHoho().setDataSource(get審査方法リスト());
+        panel.getDdlKogakuShoriJokyo().setDataSource(get処理状況リスト(state));
         panel.getDdlKogakuSanteiKijun().setDataSource(get算定基準リスト());
-        panel.getRadKogakuKokuhorenFuicchi().setDataSource(get国保連不一致リスト());
         panel.getRadKogakuTaishosha().setDataSource(get対象者リスト());
         panel.getRadKogakuShinseiKubun().setDataSource(get申請区分リスト());
         panel.getRadKogakuShiharaisaki().setDataSource(get支払先リスト());
 
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().setSelectedKey(すべて_0);
-        div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().setSelectedKey(すべて_0);
-        div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setSelectedKey(すべて_0);
+
+        if (state.equals(モード１)) {
+            panel.getDdlKogakuShinsaHoho().setDataSource(get審査方法リスト());
+            panel.getRadKogakuKokuhorenFuicchi().setDataSource(get国保連不一致リスト());
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().setSelectedKey(すべて_0);
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().setSelectedKey(すべて_0);
+        }
+
     }
 
     /**
@@ -159,11 +170,16 @@ public class DvKogakuServiceJohoHandler {
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
      * @param 市町村判定 RString
-     * @return HanyoListKogakuKaigoBatchParameter
-     * 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
-    public HanyoListKogakuKaigoBatchParameter getBatchParamter(RString 市町村判定) {
-        HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
+    public DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter getBatchParamter(RString 市町村判定) {
+        DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter batchparam = new DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter();
+        batchparam.setModo(ViewStateHolder.get(ViewStateKeys.モード, int.class));
+        if (div.getTxtShinsaNengetsu().getValue() == null) {
+            batchparam.setShinsaYM(null);
+        } else {
+            batchparam.setShinsaYM(new FlexibleYearMonth(div.getTxtShinsaNengetsu().getValue().toString()));
+        }
         if (事務広域.equals(市町村判定)) {
             HokenshaSummary 保険者DDLSelected = div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem();
             if (!全市町村.equals(保険者DDLSelected.get市町村名称())) {
@@ -270,7 +286,7 @@ public class DvKogakuServiceJohoHandler {
         return pairs;
     }
 
-    private void batchParamterHandleParentAdd(HanyoListKogakuKaigoBatchParameter batchparam) {
+    private void batchParamterHandleParentAdd(DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter batchparam) {
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate().getFromValue() == null) {
             batchparam.setShisehiFrom(null);
         } else {
@@ -316,7 +332,7 @@ public class DvKogakuServiceJohoHandler {
 
     }
 
-    private void batchParamterHandleSubAdd(HanyoListKogakuKaigoBatchParameter batchparam) {
+    private void batchParamterHandleSubAdd(DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter batchparam) {
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenSofuYM().getFromValue() == null) {
             batchparam.setKokuhoreSofuYMFrom(null);
         } else {
@@ -350,11 +366,20 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setHizukeHeshu(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ));
     }
 
-    private List<KeyValueDataSource> get処理状況リスト() {
+    private List<KeyValueDataSource> get処理状況リスト(RString state) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShoriJokyo 処理状況 : ShoriJokyo.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
-            dataSourceList.add(dataSource);
+            if (state.equals(モード１)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get略称());
+                dataSourceList.add(dataSource);
+            }
+            if (state.equals(モード２)) {
+                RString コード = 処理状況.getコード();
+                if (!コード.equals(RSTRING_4) && !コード.equals(RSTRING_5)) {
+                    KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get略称());
+                    dataSourceList.add(dataSource);
+                }
+            }
         }
         return dataSourceList;
     }

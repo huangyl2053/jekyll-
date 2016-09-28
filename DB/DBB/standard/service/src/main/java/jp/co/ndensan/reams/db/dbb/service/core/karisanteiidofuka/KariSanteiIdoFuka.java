@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.KariSanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.TyouhyouResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015001.DBB015001_KarisanteiIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2014TsuchishoUchiwakeJokenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -112,6 +113,8 @@ public class KariSanteiIdoFuka {
     private static final RString 標準版 = new RString("001");
     private static final RString コンビニマルチ収納タイプ = new RString("301");
     private static final RString コンビニ角公タイプ = new RString("302");
+    private static final RString 年度内連番_1 = new RString("0001");
+    private static final RString 年度内連番_2 = new RString("0002");
 
     /**
      * コンストラクタです。
@@ -149,7 +152,7 @@ public class KariSanteiIdoFuka {
         if (定値_0.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況_異動賦課(調定年度);
         } else if (定値_1.equals(遷移元区分)) {
-            dbt = 処理日付管理Dac.select処理状況_異動通知書作成(調定年度);
+            dbt = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.仮算定異動賦課.get名称(), 年度内連番_1, 調定年度);
             if (dbt != null) {
                 entityList.add(dbt);
             }
@@ -172,7 +175,7 @@ public class KariSanteiIdoFuka {
      */
     public YMDHMS getTyusyutuKaishibi(FlexibleYear 調定年度) {
         DbT7022ShoriDateKanriEntity 処理日付管理entity;
-        処理日付管理entity = 処理日付管理Dac.select抽出開始日時(調定年度);
+        処理日付管理entity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.仮算定異動賦課.get名称(), 年度内連番_1, 調定年度);
         if (処理日付管理entity == null || 処理日付管理entity.getKijunTimestamp() == null || 処理日付管理entity.getKijunTimestamp().isEmpty()) {
             return null;
         } else {
@@ -524,10 +527,10 @@ public class KariSanteiIdoFuka {
      * バッチ用パラメータ作成します。
      *
      * @param parameter parameter
-     * @return KarisanteiIdoFukaParameter
+     * @return DBB015001_KarisanteiIdoFukaParameter
      */
-    public KarisanteiIdoFukaParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
-        KarisanteiIdoFukaParameter result = new KarisanteiIdoFukaParameter();
+    public DBB015001_KarisanteiIdoFukaParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
+        DBB015001_KarisanteiIdoFukaParameter result = new DBB015001_KarisanteiIdoFukaParameter();
         result.set調定年度(parameter.get調定年度());
         result.set賦課年度(parameter.get賦課年度());
         result.set処理対象月(parameter.get処理対象());
@@ -587,11 +590,13 @@ public class KariSanteiIdoFuka {
      * @return 依頼金計算処理区分 RString
      */
     public RString getIraikinKeisanShoriKubun(FlexibleYear 調定年度, RYearMonth 算定月) {
-        List<DbT7022ShoriDateKanriEntity> 特徴対象者同定list = 処理日付管理Dac.get特徴対象者同定(調定年度);
+        List<DbT7022ShoriDateKanriEntity> 特徴対象者同定list
+                = 処理日付管理Dac.select処理状況(調定年度, ShoriName.特徴対象者同定.get名称(), 年度内連番_1);
         if (特徴対象者同定list.isEmpty()) {
             return 特徴同定未完了;
         }
-        List<DbT7022ShoriDateKanriEntity> 依頼金額計算list = 処理日付管理Dac.get依頼金額計算(調定年度);
+        List<DbT7022ShoriDateKanriEntity> 依頼金額計算list
+                = 処理日付管理Dac.select処理状況(調定年度, ShoriName.依頼金額計算.get名称(), 年度内連番_2);
         YMDHMS 基準日時1 = 特徴対象者同定list.get(0).getKijunTimestamp();
         if (基準日時1 == null || 基準日時1.isEmpty()) {
             return 特徴同定未完了;
@@ -616,7 +621,7 @@ public class KariSanteiIdoFuka {
      * @return 処理日付管理entity
      */
     public ShoriDateKanri get基準日時(FlexibleYear 調定年度, RString 処理名) {
-        DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.selectMax基準日(調定年度, 処理名);
+        DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.select最大基準日時(SubGyomuCode.DBB介護賦課, 処理名, 年度内連番_1, 調定年度);
         return new ShoriDateKanri(shoriDateKanri);
     }
 }

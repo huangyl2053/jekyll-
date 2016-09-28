@@ -107,6 +107,18 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac implements ISaveabl
     }
 
     /**
+     * DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("事業高額合算支給不支給決定エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 事業高額合算支給不支給決定を全件返します。
      *
      * @param 被保険者番号 HihokenshaNo

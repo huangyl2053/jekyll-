@@ -222,14 +222,14 @@ public class KyotakuServiceRiyohyoMain {
         HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
         RString 前排他キー = 排他キー.concat(被保険者番号.getColumnValue());
         LockingKey key = new LockingKey(前排他キー);
-        if (!RealInitialLocker.tryGetLock(key)) {
+        if (!RealInitialLocker.tryGetLock(key) && !ResponseHolder.isReRequest()) {
             throw new PessimisticLockingException();
         }
         RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
         TankiNyushoResult 短期入所情報 = ViewStateHolder.get(ViewStateKeys.短期入所情報, TankiNyushoResult.class);
-        if (!new RString(DbcQuestionMessages.自己作成_終了確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && !new RString(DbcQuestionMessages.限度余裕確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+
+        if (RString.isNullOrEmpty(ResponseHolder.getMessageCode())) {
             if (削除.equals(表示モード)) {
                 return 削除処理(div, 居宅総合事業区分, 短期入所情報, key);
             } else if (追加.equals(表示モード)) {
@@ -237,6 +237,8 @@ public class KyotakuServiceRiyohyoMain {
             } else if (修正.equals(表示モード)) {
                 div.getCcdServiceRiyohyoInfo().DB修正処理(居宅総合事業区分, 短期入所情報);
             }
+        } else if (削除.equals(表示モード)) {
+            return 削除処理(div, 居宅総合事業区分, 短期入所情報, key);
         }
         List<KyufuJikoSakuseiResult> サービス利用票情報 = div.getCcdServiceRiyohyoInfo().getサービス利用票情報();
         if (!div.getCcdServiceRiyohyoInfo().isChkZanteiKubunAllSelected()) {

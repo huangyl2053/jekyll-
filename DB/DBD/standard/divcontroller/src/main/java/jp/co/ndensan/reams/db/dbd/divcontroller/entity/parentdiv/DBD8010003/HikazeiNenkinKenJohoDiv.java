@@ -354,12 +354,12 @@ public class HikazeiNenkinKenJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTbTaishoNen() {
+    public TextBoxDate getTbTaishoNen() {
         return this.getShoSaiPanel().getNaiyoArea().getTbTaishoNen();
     }
 
     @JsonIgnore
-    public void  setTbTaishoNen(TextBox tbTaishoNen) {
+    public void  setTbTaishoNen(TextBoxDate tbTaishoNen) {
         this.getShoSaiPanel().getNaiyoArea().setTbTaishoNen(tbTaishoNen);
     }
 

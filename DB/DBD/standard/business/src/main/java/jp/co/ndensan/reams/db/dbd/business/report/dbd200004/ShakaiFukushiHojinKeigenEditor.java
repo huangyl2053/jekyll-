@@ -17,8 +17,17 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 社会福祉法人軽減認定者リストEditorです。
@@ -37,6 +46,7 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
     private static final RString 居住費食費のみ = new RString("居住費・食費のみ");
     private static final RString 旧措ユ個のみ = new RString("旧措ユ個のみ");
     private static final RString POINT = new RString("、");
+    private static final RString 作成 = new RString("作成");
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
     private final ShakaiFukushiHojinKeigenGaitoshaIchiranEntity 帳票情報;
@@ -73,7 +83,20 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
     }
 
     private void setsource(ShakaiFukushiHojinReportSourse source) {
-        source.printTimeStamp = 帳票作成日時.toDateString();
+        RDateTime yinsatsubi = RDateTime.now();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(帳票作成日時.getDate()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(RString.FULL_SPACE)
+                .append(yinsatsubi.getTime().getHour())
+                .append(new RString("時"))
+                .append(yinsatsubi.getTime().getMinute())
+                .append(new RString("分"))
+                .append(yinsatsubi.getTime().getSecond())
+                .append(new RString("秒"))
+                .append(RString.FULL_SPACE)
+                .append(作成);
+        source.printTimeStamp = builder.toRString();
         source.title = 帳票タイトル;
         if (null != association) {
             source.hokenshaNo = this.association.get地方公共団体コード().value();
@@ -111,13 +134,17 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
             source.list1_10 = new RString("*");
         }
         if (帳票情報.get厚労省IF識別コード() != null && 帳票情報.get要介護状態区分コード() != null) {
-            source.list1_12 = (YokaigoJotaiKubunSupport.toValue(
+            source.list1_11 = (YokaigoJotaiKubunSupport.toValue(
                     KoroshoInterfaceShikibetsuCode.toValue(帳票情報.get厚労省IF識別コード()), 帳票情報.get要介護状態区分コード()).getName());
         }
         if (帳票情報.get認定年月日() != null && !帳票情報.get認定年月日().isEmpty()) {
-            source.list1_13 = 帳票情報.get認定年月日().wareki().toDateString();
+            source.list1_12 = 帳票情報.get認定年月日().wareki().toDateString();
         }
         source.list2_7 = 帳票情報.get入所施設コード();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (帳票情報.get被保険者番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 帳票情報.get被保険者番号().value());
+        }
         setsource_line_up(source);
     }
 
@@ -248,19 +275,19 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
         if (帳票情報.get世帯員リスト().get(listindex).get世帯員宛名() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(帳票情報.get世帯員リスト().get(listindex).get世帯員宛名());
             if (kojin.get名称() != null) {
-                source.list1_14 = kojin.get名称().getName().value();
+                source.list1_13 = kojin.get名称().getName().value();
             }
             if (kojin.get住民状態() != null) {
-                source.list1_15 = kojin.get住民状態().住民状態略称();
+                source.list1_14 = kojin.get住民状態().住民状態略称();
             }
         }
         if (!帳票情報.get世帯員リスト().get(listindex).get本人課税区分().isNullOrEmpty()
                 && 帳票情報.get世帯員リスト().get(listindex).get本人課税区分().equals(new RString("1"))) {
-            source.list1_16 = new RString("課");
+            source.list1_15 = new RString("課");
         }
         if (帳票情報.get世帯員リスト().get(listindex).get課税所得額() != null
                 && 帳票情報.get世帯員リスト().get(listindex).get課税所得額().intValue() <= 0) {
-            source.list1_17 = new RString("課");
+            source.list1_16 = new RString("課");
         }
     }
 

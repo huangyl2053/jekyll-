@@ -94,6 +94,7 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaBodyEditor
         source.listLower_6 = doカンマ編集(帳票出力対象データ.get原審単位数());
         source.listLower_7 = doカンマ編集(帳票出力対象データ.get決定単位数());
         source.listLower_8 = doカンマ編集(帳票出力対象データ.get公費負担額());
+        source.shikibetuCode = 帳票出力対象データ.get識別コード();
     }
 
     private void edit集計(SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource source) {
