@@ -20,6 +20,11 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposa
 public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
 
     /**
+     * temp事業報告償還分決定年月統計元データの作成処理です。
+     */
+    void createtempJigyoHokokuTokeiMotoData();
+
+    /**
      * 事業報告統計元データの取得処理です。
      *
      * @param parameter 事業報告月報_一般現物パラメータ

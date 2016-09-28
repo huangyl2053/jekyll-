@@ -117,7 +117,7 @@ public class JigyoHokokuGeppoIppanGenbutsuProcessParamter implements IBatchProce
      */
     public JigyoHokokuGeppoIppanGenbutsuMybatisParamter toSelectDataMybitisParamter() {
         return JigyoHokokuGeppoIppanGenbutsuMybatisParamter.createDataParam(集計番号,
-                new RString("tempJigyoHokokuTokeiMotoData"));
+                new RString("\"tempJigyoHokokuTokeiMotoData\""));
     }
 
     /**

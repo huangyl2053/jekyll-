@@ -198,7 +198,7 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         }
         List<RString> 集計番号List = new ArrayList<>();
         集計番号List.add(ShukeiNo.toValue(new RString("1200")).getコード());
-        集計番号List.add(ShukeiNo.toValue(new RString("1300")).getコード());
+        集計番号List.add(ShukeiNo.toValue(new RString("1400")).getコード());
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 市町村コードリスト, 集計番号List, 表番号List, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, null, 集計年月, 給付集計区分);
