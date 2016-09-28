@@ -376,12 +376,12 @@ public class JigyoJokyoHokokuGeppoHandler {
     }
 
     private void setCblGassan1() {
-        if (!div.getTxtShukeiYM2().isDisabled()) {
+        if (!div.getCblIppanGembutsu().isDisabled()) {
             一般状況14_現物分.clear();
             一般状況14_現物分.add(new RString("ippan12_14Genbutsu"));
             div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
         }
-        if (!div.getTxtShukeiYM3().isDisabled()) {
+        if (!div.getCblIppanShokan().isDisabled()) {
             一般状況14_償還分.clear();
             一般状況14_償還分.add(new RString("ippan12_14Genbutsu"));
             div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
@@ -389,12 +389,12 @@ public class JigyoJokyoHokokuGeppoHandler {
     }
 
     private void setCblGassan2() {
-        if (!div.getTxtShukeiYM4().isDisabled()) {
+        if (!div.getCblHokenKyufuGembutsu().isDisabled()) {
             保険給付決定状況_現物分.clear();
             保険給付決定状況_現物分.add(new RString("hokenKyufuGenbutsu"));
             div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
         }
-        if (!div.getTxtShukeiYM5().isDisabled()) {
+        if (!div.getCblHokenKyufuShokan().isDisabled()) {
             決定状況合算_償還分.clear();
             決定状況合算_償還分.add(決定状況償還分);
             div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
@@ -479,7 +479,7 @@ public class JigyoJokyoHokokuGeppoHandler {
      * チェックボックスの初期選択処理です。
      */
     public void setShutsuryoku() {
-        if (!div.getTxtShukeiYM1().isDisabled()) {
+        if (!div.getCblIppan1to10().isDisabled()) {
             一般状況10.clear();
             一般状況10.add(new RString("ippan1_11"));
             div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
