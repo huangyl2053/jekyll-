@@ -79,6 +79,12 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter extends BatchParam
     private FileSpoolManager manager;
 
     /**
+     * コンストラクタです。
+     */
+    public DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter() {
+    }
+
+    /**
      * Process用のパラメータを生成します。
      *
      * @return JigyoHokokuGeppoIppanGenbutsuProcessParamter
