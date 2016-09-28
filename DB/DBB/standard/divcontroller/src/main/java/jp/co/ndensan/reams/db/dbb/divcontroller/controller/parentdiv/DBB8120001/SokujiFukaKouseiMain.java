@@ -588,7 +588,8 @@ public class SokujiFukaKouseiMain {
     }
 
     private boolean is特殊処理() {
-        return メニューID_即時賦課更正.equals(ResponseHolder.getMenuID());
+        return メニューID_即時賦課更正.equals(ResponseHolder.getMenuID())
+                || メニューID_特殊処理.equals(ResponseHolder.getMenuID());
     }
 
     private boolean is更正前と状態変更なし(List<KoseiZengoFuka> 更正前後賦課のリスト) {
