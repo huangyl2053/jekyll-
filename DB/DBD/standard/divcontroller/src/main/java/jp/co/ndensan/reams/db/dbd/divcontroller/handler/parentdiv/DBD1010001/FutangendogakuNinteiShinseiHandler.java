@@ -1031,13 +1031,13 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set預貯金額(formFgn.get預貯金額());
         builder.set有価証券評価概算額(formFgn.get有価証券評価概算額());
         builder.setその他金額(formFgn.getその他金額());
-        builder.set決定区分(formFgn.get決定区分());
+        builder.set決定区分(formFgn.get決定区分() == null ? RString.EMPTY : formFgn.get決定区分());
         builder.set決定年月日(formFgn.get決定年月日() == null ? FlexibleDate.EMPTY : formFgn.get決定年月日());
         builder.set適用開始年月日(formFgn.get適用開始年月日() == null ? FlexibleDate.EMPTY : formFgn.get適用開始年月日());
         builder.set適用終了年月日(formFgn.get適用終了年月日() == null ? FlexibleDate.EMPTY : formFgn.get適用終了年月日());
-        builder.set旧措置者区分(formFgn.get旧措置者区分());
-        builder.set利用者負担段階(formFgn.get利用者負担段階());
-        builder.set居室種別(formFgn.get居室種別());
+        builder.set旧措置者区分(formFgn.get旧措置者区分() == null ? RString.EMPTY : formFgn.get旧措置者区分());
+        builder.set利用者負担段階(formFgn.get利用者負担段階() == null ? RString.EMPTY : formFgn.get利用者負担段階());
+        builder.set居室種別(formFgn.get居室種別() == null ? RString.EMPTY : formFgn.get居室種別());
         builder.set食費負担限度額(formFgn.get食費負担限度額());
         builder.setユニット型個室(formFgn.getユニット型個室());
         builder.setユニット型準個室(formFgn.getユニット型準個室());

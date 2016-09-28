@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -98,7 +99,16 @@ public class RiyoshaFutangakuGengakuPanel {
         }
         getHandler(div).初期処理(taishoshaKey);
         ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 0);
-
+        List<ddlShinseiIchiran_Row> rows = div.getRiyoshaFutangakuGengakuShinseiList().getDdlShinseiIchiran().getDataSource();
+        for (ddlShinseiIchiran_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getRiyoshaFutangakuGengakuShinseiList().getBtnInputNew().setDisabled(true);
+            } else {
+                row.setModifyButtonState(DataGridButtonState.Disabled);
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setSelectable(Boolean.FALSE);
+            }
+        }
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
 

@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihoj
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001Div;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.dgShinseiList_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenManager;
-import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
@@ -56,6 +55,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenService;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 
 /**
  *
@@ -130,6 +131,16 @@ public class DBD1030001Handler {
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
         RealInitialLocker.lock(new LockingKey(new RString("DB").concat(被保険者番号.getColumnValue().concat("ShafukuKeigen"))));
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                row.setModifyButtonState((DataGridButtonState.Disabled));
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setSelectable(Boolean.FALSE);
+            }
+        }
         return 情報と状態ArrayList;
     }
 
@@ -468,13 +479,8 @@ public class DBD1030001Handler {
     private void 状態３制御(RString 状態) {
         div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisabled(false);
         div.getShafukuRiyoshaKeigen().getBtnShowGenmenJoho().setDisabled(false);
-        if (状態_追加.equals(状態)) {
-            div.getTxtShinseiYMD().setDisabled(false);
-            div.getTxtShinseiRiyu().setDisabled(false);
-        } else {
-            div.getTxtShinseiYMD().setDisabled(true);
-            div.getTxtShinseiRiyu().setDisabled(true);
-        }
+        div.getTxtShinseiYMD().setDisabled(false);
+        div.getTxtShinseiRiyu().setDisabled(false);
         div.getRadKetteiKubun().setDisabled(true);
         div.getTxtKetteiYMD().setDisabled(true);
         div.getTxtTekiyoYMD().setDisabled(true);
