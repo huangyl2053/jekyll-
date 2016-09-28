@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReport;
-import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoKanrFiveProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFiveEntity;
@@ -112,13 +111,15 @@ public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiH
     protected void process(ShiharaiHohoHenkoHaakuFiveEntity t) {
         count++;
         if (count == 1) {
-            reportData = createShiharaiHohoHenkoEntity(t);
+            reportData = new ShiharaiHohoHenkoEntity();
+            createShiharaiHohoHenkoEntity(t);
         }
         if (count == 2) {
-            reportData1 = createShiharaiHohoHenkoEntity(t);
+            reportData1 = new ShiharaiHohoHenkoEntity();
+            createShiharaiHohoHenkoEntity(t);
 
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
-                    HokenshaNo.EMPTY, RString.EMPTY, outputOrder, null, null);
+                    HokenshaNo.EMPTY, RString.EMPTY, outputOrder, reportData, reportData1);
 
             finder.writeBy(reportSourceWriter);
             count = 0;
@@ -141,7 +142,10 @@ public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiH
         reportData.set資格取得日(t.get支払方法変更情報_資格取得日());
         reportData.set資格喪失日(t.get支払方法変更情報_資格喪失日());
         reportData.set喪失事由(ShikakuSoshitsuJiyu.toValue(t.get支払方法変更情報_喪失事由()));
-        reportData.set資格区分(ShikakuKubun.toValue(t.get支払方法変更情報_申請中()));
+        if (t.get支払方法変更情報_申請中() != null && !t.get支払方法変更情報_申請中().isEmpty()) {
+            reportData.set資格区分(ShikakuKubun.toValue(t.get支払方法変更情報_申請中()));
+        }
+
         reportData.set住特フラグ(new RString(t.get支払方法変更情報_住特フラグ().toString()));
         reportData.set生保(t.get支払方法変更情報_生保());
 
@@ -155,15 +159,20 @@ public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiH
         reportData.set償還未払い情報_申請中(t.get償還未払い_申請中());
         reportData.set償還未払い情報_申請日(t.get償還未払い_申請日());
         reportData.set申請中件数(new RString(t.get償還未払い_申請中件数()));
-        reportData.set整理番号(new Code(t.get償還未払い_整理番号()));
-        reportData.set提供年月(new FlexibleYearMonth(t.get償還未払い_提供年月().toDateString()));
+        if (t.get償還未払い_整理番号() != null && !t.get償還未払い_整理番号().isEmpty()) {
+            reportData.set整理番号(new Code(t.get償還未払い_整理番号()));
+        }
+        if (t.get償還未払い_提供年月() != null && !t.get償還未払い_提供年月().isEmpty()) {
+            reportData.set提供年月(new FlexibleYearMonth(t.get償還未払い_提供年月().toDateString()));
+        }
+
         reportData.set未通知件数(new RString(t.get償還未払い_未通知件数()));
 
         // TODO 滞納管理状況  終了状況
 //        reportData.set滞納管理状況();
         reportData.set最長滞納期間(new RString(String.valueOf(t.get収納状況_最長滞納期間())));
         reportData.set以前滞納額(t.get収納状況_以前滞納額());
-        reportData.set以前滞納区分(TainoKubun.toValue(t.get収納状況_以前滞納区分()));
+//        reportData.set以前滞納区分(TainoKubun.toValue(t.get収納状況_以前滞納区分()));
 //        reportData.set終了状況();
 
         reportData.set適用終了日_2行目(t.get滞納者対策情報_適用終了日());
@@ -172,7 +181,11 @@ public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiH
         reportData.set弁明期限_5行目(t.get滞納者対策情報_弁明期限());
         reportData.set弁明受付日_6行目(t.get滞納者対策情報_弁明受付日());
         reportData.set償還発行日_7行目(t.get滞納者対策情報_償還発行日());
-        reportData.set償還証期限_8行目(new FlexibleDate(String.valueOf(t.get滞納者対策情報_償還証期限())));
+
+        if (0 != t.get滞納者対策情報_償還証期限()) {
+            reportData.set償還証期限_8行目(new FlexibleDate(String.valueOf(t.get滞納者対策情報_償還証期限())));
+        }
+
         reportData.set差止中件数_9行目(new RString(t.get滞納者対策情報_差止中件数()));
         reportData.set差止中金額_10行目((t.get滞納者対策情報_差止中金額()));
 
