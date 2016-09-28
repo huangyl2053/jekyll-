@@ -43,7 +43,7 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
     private static final RString 帳票ID = ReportIdDBC.DBC300003.getReportId().value();
     private static final RString 提供月 = new RString("提供月:");
     private static final RString 審査月 = new RString("審査月:");
-    private static final RString 值000000 = new RString("000000");
+    private static final RString 値000000 = new RString("000000");
     private static final RString 市町村名 = new RString("市町村名:");
     private static final RString 旧市町村名 = new RString("旧市町村名:");
     private static final RString 住所 = new RString("住所:");
@@ -52,12 +52,13 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
     private static final RString 地区2 = new RString("地区2:");
     private static final RString 地区3 = new RString("地区3:");
     private static final RString 町域 = new RString("1");
-    private static final RString 值2 = new RString("2");
-    private static final RString 值3 = new RString("3");
-    private static final RString 值4 = new RString("4");
-    private static final RString 值5 = new RString("5");
+    private static final RString 値2 = new RString("2");
+    private static final RString 値3 = new RString("3");
+    private static final RString 値4 = new RString("4");
+    private static final RString 値5 = new RString("5");
     NenreiKeikyuBetsuRiyoJyokyoEntity reportEntity = new NenreiKeikyuBetsuRiyoJyokyoEntity();
     private NenreikaikyuRiyojokyoProcessParameter processParameter;
+    private int count = 0;
 
     @BatchWriter
     private BatchReportWriter<NenreiKeikyuBetsuRiyoJyokyoReportSource> batchReportWriter;
@@ -82,6 +83,7 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
 
     @Override
     protected void process(TmpSyuturyokuYoRelateEntity entity) {
+        count++;
         editReportEntity(reportEntity);
         reportEntity.setページ数(entity.getPageNo());
         reportEntity.set印刷日時(RDate.getNowDateTime());
@@ -94,8 +96,11 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
             set明細2(entity);
         }
 
-        NenreiKeikyuBetsuRiyoJyokyoReport report = new NenreiKeikyuBetsuRiyoJyokyoReport(reportEntity);
-        report.writeBy(reportSourceWriter);
+        if (count == 2) {
+            NenreiKeikyuBetsuRiyoJyokyoReport report = new NenreiKeikyuBetsuRiyoJyokyoReport(reportEntity);
+            report.writeBy(reportSourceWriter);
+            count = 0;
+        }
     }
 
     private void set明細1(TmpSyuturyokuYoRelateEntity entity) {
@@ -176,14 +181,14 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
             RString 条件１ = rb.toRString();
             entity.set条件1(条件１);
         }
-        if ((!processParameter.getShichosonCode().value().isEmpty() && !(processParameter.getShichosonCode().value().equals(值000000)))
-                && (processParameter.getKyoShichosonCode().value().isEmpty() || processParameter.getKyoShichosonCode().value().equals(值000000))) {
+        if ((!processParameter.getShichosonCode().value().isEmpty() && !(processParameter.getShichosonCode().value().equals(値000000)))
+                && (processParameter.getKyoShichosonCode().value().isEmpty() || processParameter.getKyoShichosonCode().value().equals(値000000))) {
             RStringBuilder rb = new RStringBuilder();
             rb.append(市町村名);
             rb.append(processParameter.getShichosonMeisho());
             RString 条件2 = rb.toRString();
             entity.set条件2(条件2);
-        } else if (!processParameter.getShichosonCode().value().isEmpty() && !(processParameter.getShichosonCode().value().equals(值000000))) {
+        } else if (!processParameter.getShichosonCode().value().isEmpty() && !(processParameter.getShichosonCode().value().equals(値000000))) {
             RStringBuilder rb = new RStringBuilder();
             rb.append(旧市町村名);
             rb.append(processParameter.getKyoShichosonMeisho());
@@ -192,13 +197,13 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
         } else if (processParameter.getShichosonCode().value().isEmpty() && processParameter.getKyoShichosonCode().value().isEmpty()) {
             if (processParameter.getSentakuTaisyoKubun().equals(町域)) {
                 entity.set条件2(setBuilder(住所));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(值2)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(値2)) {
                 entity.set条件2(setBuilder(行政区));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(值3)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(値3)) {
                 entity.set条件2(setBuilder(地区1));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(值4)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(値4)) {
                 entity.set条件2(setBuilder(地区2));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(值5)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(値5)) {
                 entity.set条件2(setBuilder(地区3));
             } else {
                 entity.set条件2(RString.EMPTY);
