@@ -195,13 +195,18 @@ public class NinteiEnkiTsuchishoHakkoHandler {
                     .toValue(発行対象者情報.get申請区分_申請時_コード().getColumnValue()).get名称());
         }
         dataSource.setEnkiketteidate(getTextBoxDate(発行対象者情報.get延期決定日()));
+        dataSource.setHiddenenKiketteidate(flexibleDateToRString(発行対象者情報.get延期決定日()));
         dataSource.setEnkiriyu(発行対象者情報.get延期理由());
+        dataSource.setHiddenEnkiriyu(発行対象者情報.get延期理由());
         if (発行対象者情報.get通知書発行日() != null) {
             dataSource.setTsuchishohakkoymd(getTextBoxDate(発行対象者情報.get通知書発行日()));
+            dataSource.setHiddenTsuchishohakkoymd(flexibleDateToRString(発行対象者情報.get通知書発行日()));
         }
         dataSource.setEnkikaisu(new RString(発行対象者情報.get延期回数()));
         dataSource.setMikomishorikikanfrom(getTextBoxDate(発行対象者情報.get延期見込み期間開始日()));
+        dataSource.setHiddenMikomishorikikanfrom(flexibleDateToRString(発行対象者情報.get延期見込み期間開始日()));
         dataSource.setMikomishorikikanto(getTextBoxDate(発行対象者情報.get延期見込み期間終了日()));
+        dataSource.setHiddenMikomishorikikanto(flexibleDateToRString(発行対象者情報.get延期見込み期間終了日()));
         if (発行対象者情報.get調査実施日() != null) {
             dataSource.setChosajissiymd(getTextBoxDate(発行対象者情報.get調査実施日()));
         }
@@ -243,15 +248,38 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         for (int index = 0; index < rowList.size(); index++) {
             if (selectedRowList.contains(rowList.get(index))) {
                 rowList.get(index).setEnkiriyu(延期理由);
-                rowList.get(index).setChangeflag(変更フラグ_変更);
+                if (is変更(延期理由, rowList.get(index))) {
+                    rowList.get(index).setChangeflag(変更フラグ_変更);
+                } else {
+                    rowList.get(index).setChangeflag(RString.EMPTY);
+                }
             }
         }
         for (int index = 0; index < selectedRowList.size(); index++) {
             selectedRowList.get(index).setEnkiriyu(延期理由);
-            selectedRowList.get(index).setChangeflag(変更フラグ_変更);
+            if (is変更(延期理由, selectedRowList.get(index))) {
+                selectedRowList.get(index).setChangeflag(変更フラグ_変更);
+            } else {
+                selectedRowList.get(index).setChangeflag(RString.EMPTY);
+            }
         }
         div.getDgHakkotaishosha().setDataSource(rowList);
         div.getDgHakkotaishosha().setSelectedItems(selectedRowList);
+    }
+
+    private boolean is変更(RString 延期理由, dgHakkotaishosha_Row row) {
+        return !isEquals(延期理由, row.getHiddenEnkiriyu())
+                || !isEquals(row.getHiddenenKiketteidate(), row.getEnkiketteidate().getValue())
+                || !isEquals(row.getHiddenTsuchishohakkoymd(), row.getTsuchishohakkoymd().getValue())
+                || !isEquals(row.getHiddenMikomishorikikanfrom(), row.getMikomishorikikanfrom().getValue())
+                || !isEquals(row.getHiddenMikomishorikikanto(), row.getMikomishorikikanto().getValue());
+    }
+
+    private boolean isEquals(RString value1, RString value2) {
+        if (null == value1 || value1.isEmpty()) {
+            return null == value2 || value2.isEmpty();
+        }
+        return value1.equals(value2);
     }
 
     /**
@@ -317,6 +345,13 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         return textBoxDate;
     }
 
+    private RString flexibleDateToRString(FlexibleDate date) {
+        if (date != null && !date.isEmpty()) {
+            return new RString(date.toString());
+        }
+        return RString.EMPTY;
+    }
+
     private TextBoxDate getTextBoxDate(RDate date) {
         TextBoxDate textBoxDate = new TextBoxDate();
         if (date != null) {
@@ -348,11 +383,31 @@ public class NinteiEnkiTsuchishoHakkoHandler {
     }
 
     private dgHakkotaishosha_Row get延期内容の更新(dgHakkotaishosha_Row row) {
+        RString 変更フラグ = RString.EMPTY;
+        if (is延期内容更新(row)) {
+            変更フラグ = 変更フラグ_変更;
+        }
         return new dgHakkotaishosha_Row(row.getRiyuselect(), row.getHokenshano(), row.getHokensha(), row.getHihokenshano(),
                 row.getHihokenshaname(), row.getNinteishinseiymd(), row.getShinseikubun(), div.getTxtnkiKetteiDate(), row.getEnkiriyu(),
                 div.getTxtTsuchishoHakkoDate(), row.getEnkikaisu(), getTextBoxDate(div.getTxtMikomiDateTsuchisho().getFromValue()),
                 getTextBoxDate(div.getTxtMikomiDateTsuchisho().getToValue()), row.getChosajissiymd(), row.getIkenshojyuryoymd(),
-                row.getIchijihanteiymd(), row.getShinsakaiyoteiymd(), row.getShinseishokanrino(), 変更フラグ_変更);
+                row.getIchijihanteiymd(), row.getShinsakaiyoteiymd(), row.getShinseishokanrino(), 変更フラグ, row.getHiddenEnkiriyu(),
+                row.getHiddenenKiketteidate(), row.getHiddenTsuchishohakkoymd(), row.getHiddenMikomishorikikanfrom(), row.getHiddenMikomishorikikanto());
+    }
+
+    private boolean is延期内容更新(dgHakkotaishosha_Row row) {
+        return !isEquals(row.getHiddenEnkiriyu(), row.getEnkiriyu())
+                || !isEquals(row.getHiddenenKiketteidate(), new RString(div.getTxtnkiKetteiDate().toString()))
+                || !isEquals(row.getHiddenTsuchishohakkoymd(), new RString(div.getTxtTsuchishoHakkoDate().toString()))
+                || !isEquals(row.getHiddenMikomishorikikanfrom(), div.getTxtMikomiDateTsuchisho().getFromValue())
+                || !isEquals(row.getHiddenMikomishorikikanto(), div.getTxtMikomiDateTsuchisho().getToValue());
+    }
+
+    private boolean isEquals(RString value1, RDate value2) {
+        if (null == value2) {
+            return null == value1 || value1.isEmpty();
+        }
+        return value2.toDateString().equals(value1);
     }
 
     private boolean is対象行Selected(dgHakkotaishosha_Row row, List<dgHakkotaishosha_Row> selectedRowList) {
@@ -456,14 +511,22 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             dgHakkotaishosha_Row row = rowList.get(index);
             if (clickRow.equals(row)) {
                 row.setEnkiriyu(サンプル文書);
-                row.setChangeflag(変更フラグ_変更);
+                if (is変更(サンプル文書, row)) {
+                    row.setChangeflag(変更フラグ_変更);
+                } else {
+                    row.setChangeflag(RString.EMPTY);
+                }
             }
         }
         for (int index = 0; index < selectedRowList.size(); index++) {
             dgHakkotaishosha_Row row = selectedRowList.get(index);
             if (clickRow.equals(row)) {
                 row.setEnkiriyu(サンプル文書);
-                row.setChangeflag(変更フラグ_変更);
+                if (is変更(サンプル文書, row)) {
+                    row.setChangeflag(変更フラグ_変更);
+                } else {
+                    row.setChangeflag(RString.EMPTY);
+                }
             }
         }
         div.getDgHakkotaishosha().setDataSource(rowList);
