@@ -25,12 +25,12 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
     private static final RString 対象年月1 = new RString("1");
     private static final RString 対象年月2 = new RString("2");
     private static final RString 市町村コード = new RString("000000");
-    private static final RString 町域 = new RString("1");
-    private static final RString 行政区 = new RString("2");
-    private static final RString 地区1 = new RString("3");
-    private static final RString 地区2 = new RString("4");
-    private static final RString 地区3 = new RString("5");
-    private static final RString 全て = new RString("0");
+    private static final RString 町域 = new RString("町域");
+    private static final RString 行政区 = new RString("行政区");
+    private static final RString 地区1 = new RString("地区1");
+    private static final RString 地区2 = new RString("地区2");
+    private static final RString 地区3 = new RString("地区3");
+    private static final RString 全て = new RString("全て");
     private RString taishoNendoYM;
     private RString kaishiYM;
     private RString shuryoYM;

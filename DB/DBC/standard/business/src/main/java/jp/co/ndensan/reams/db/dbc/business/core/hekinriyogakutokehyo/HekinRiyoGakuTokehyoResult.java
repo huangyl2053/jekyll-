@@ -67,47 +67,47 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString 人数 = new RString("人数");
     private static final RString 費用総額 = new RString("費用総額");
     private static final RString 平均額 = new RString("平均額");
-    private static final RString 值1 = new RString("1");
-    private static final RString 值2 = new RString("2");
-    private static final RString 值3 = new RString("3");
-    private static final RString 值4 = new RString("4");
-    private static final RString 值5 = new RString("5");
-    private static final RString 值6 = new RString("6");
-    private static final RString 值7 = new RString("7");
-    private static final RString 值8 = new RString("8");
-    private static final RString 值9 = new RString("9");
-    private static final RString 值10 = new RString("10");
-    private static final RString 值11 = new RString("11");
-    private static final RString 值12 = new RString("12");
-    private static final RString 值13 = new RString("13");
-    private static final RString 值14 = new RString("14");
-    private static final RString 值15 = new RString("15");
-    private static final RString 值16 = new RString("16");
-    private static final RString 值17 = new RString("17");
-    private static final RString 值18 = new RString("18");
-    private static final RString 值19 = new RString("19");
-    private static final RString 值20 = new RString("20");
-    private static final RString 值21 = new RString("21");
-    private static final RString 值22 = new RString("22");
-    private static final RString 值23 = new RString("23");
-    private static final RString 值24 = new RString("24");
-    private static final RString 值25 = new RString("25");
-    private static final RString 值26 = new RString("26");
-    private static final RString 值27 = new RString("27");
-    private static final RString 值28 = new RString("28");
-    private static final RString 值29 = new RString("29");
-    private static final RString 值30 = new RString("30");
-    private static final RString 值31 = new RString("31");
-    private static final RString 值32 = new RString("32");
-    private static final RString 值33 = new RString("33");
-    private static final RString 值34 = new RString("34");
-    private static final RString 值35 = new RString("35");
-    private static final RString 以上 = new RString("10以上");
-    private static final RString その他 = new RString("その他");
-    private static final RString 号 = new RString("２号");
-    private static final RString 合計 = new RString("合計");
-    private static final int 值二 = 2;
-    private static final int 值三 = 3;
+    private static final RString サービス分類_1 = new RString("1");
+    private static final RString サービス分類_2 = new RString("2");
+    private static final RString サービス分類_3 = new RString("3");
+    private static final RString サービス分類_4 = new RString("4");
+    private static final RString サービス分類_5 = new RString("5");
+    private static final RString サービス分類_6 = new RString("6");
+    private static final RString サービス分類_7 = new RString("7");
+    private static final RString サービス分類_8 = new RString("8");
+    private static final RString サービス分類_9 = new RString("9");
+    private static final RString サービス分類_10 = new RString("10");
+    private static final RString サービス分類_11 = new RString("11");
+    private static final RString サービス分類_12 = new RString("12");
+    private static final RString サービス分類_13 = new RString("13");
+    private static final RString サービス分類_14 = new RString("14");
+    private static final RString サービス分類_15 = new RString("15");
+    private static final RString サービス分類_16 = new RString("16");
+    private static final RString サービス分類_17 = new RString("17");
+    private static final RString サービス分類_18 = new RString("18");
+    private static final RString サービス分類_19 = new RString("19");
+    private static final RString サービス分類_20 = new RString("20");
+    private static final RString サービス分類_21 = new RString("21");
+    private static final RString サービス分類_22 = new RString("22");
+    private static final RString サービス分類_23 = new RString("23");
+    private static final RString サービス分類_24 = new RString("24");
+    private static final RString サービス分類_25 = new RString("25");
+    private static final RString サービス分類_26 = new RString("26");
+    private static final RString サービス分類_27 = new RString("27");
+    private static final RString サービス分類_28 = new RString("28");
+    private static final RString サービス分類_29 = new RString("29");
+    private static final RString サービス分類_30 = new RString("30");
+    private static final RString サービス分類_31 = new RString("31");
+    private static final RString サービス分類_32 = new RString("32");
+    private static final RString サービス分類_33 = new RString("33");
+    private static final RString サービス分類_34 = new RString("34");
+    private static final RString サービス分類_35 = new RString("35");
+    private static final RString 所得段階_10以上 = new RString("10以上");
+    private static final RString 所得段階_その他 = new RString("その他");
+    private static final RString 所得段階_2号 = new RString("２号");
+    private static final RString 所得段階_合計 = new RString("合計");
+    private static final int 定数2 = 2;
+    private static final int 定数3 = 3;
     private boolean isFirst = true;
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
@@ -146,10 +146,10 @@ public class HekinRiyoGakuTokehyoResult {
     }
 
     private void set一時EntityのServiceBunrui(KyufujissekiTempTblEntity entity, KyufujissekiTempTblEntity 一時Entity) {
-        if (值1.equals(entity.getServiceKomokuCode().substring(值二, 值三))) {
-            一時Entity.setServiceBunrui(值33);
-        } else if (值2.equals(entity.getServiceKomokuCode())) {
-            一時Entity.setServiceBunrui(值34);
+        if (サービス分類_1.equals(entity.getServiceKomokuCode().substring(定数2, 定数3))) {
+            一時Entity.setServiceBunrui(サービス分類_33);
+        } else if (サービス分類_2.equals(entity.getServiceKomokuCode())) {
+            一時Entity.setServiceBunrui(サービス分類_34);
         }
     }
 
@@ -158,102 +158,102 @@ public class HekinRiyoGakuTokehyoResult {
         set給付実績データ一時Entity2(entity, 一時Entity);
         set給付実績データ一時Entity3(entity, 一時Entity);
         if (ServiceCategoryShurui.定期随時.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值26);
+            一時Entity.setServiceBunrui(サービス分類_26);
         } else if (ServiceCategoryShurui.看小短外.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值27);
+            一時Entity.setServiceBunrui(サービス分類_27);
         } else if (ServiceCategoryShurui.看小規短.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值28);
+            一時Entity.setServiceBunrui(サービス分類_28);
         } else if (ServiceCategoryShurui.地域通所.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值29);
+            一時Entity.setServiceBunrui(サービス分類_29);
         } else if (ServiceCategoryShurui.用具販売.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予用販売.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值30);
+            一時Entity.setServiceBunrui(サービス分類_30);
         } else if (ServiceCategoryShurui.住宅改修.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予住改修.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值31);
+            一時Entity.setServiceBunrui(サービス分類_31);
         } else if (ServiceCategoryShurui.居宅支援.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予防支援.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值32);
+            一時Entity.setServiceBunrui(サービス分類_32);
         } else {
-            一時Entity.setServiceBunrui(值35);
+            一時Entity.setServiceBunrui(サービス分類_35);
         }
     }
 
     private void set給付実績データ一時Entity1(KyufujissekiTempTblEntity entity, KyufujissekiTempTblEntity 一時Entity) {
         if (ServiceCategoryShurui.訪問介護.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值1);
+            一時Entity.setServiceBunrui(サービス分類_1);
         } else if (ServiceCategoryShurui.訪問入浴.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪入浴.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值2);
+            一時Entity.setServiceBunrui(サービス分類_2);
         } else if (ServiceCategoryShurui.訪問看護.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪看護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值3);
+            一時Entity.setServiceBunrui(サービス分類_3);
         } else if (ServiceCategoryShurui.訪問リハ.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪リハ.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值4);
+            一時Entity.setServiceBunrui(サービス分類_4);
         } else if (ServiceCategoryShurui.通所介護.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予通介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值5);
+            一時Entity.setServiceBunrui(サービス分類_5);
         } else if (ServiceCategoryShurui.通所リハ.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予通リハ.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值6);
+            一時Entity.setServiceBunrui(サービス分類_6);
         } else if (ServiceCategoryShurui.用具貸与.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予用貸与.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值7);
+            一時Entity.setServiceBunrui(サービス分類_7);
         }
     }
 
     private void set給付実績データ一時Entity2(KyufujissekiTempTblEntity entity, KyufujissekiTempTblEntity 一時Entity) {
         if (ServiceCategoryShurui.短期生活.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予短介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值8);
+            一時Entity.setServiceBunrui(サービス分類_8);
         } else if (ServiceCategoryShurui.短期老健.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予短老健.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值9);
+            一時Entity.setServiceBunrui(サービス分類_9);
         } else if (ServiceCategoryShurui.短期医療.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予訪看護.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值10);
+            一時Entity.setServiceBunrui(サービス分類_10);
         } else if (ServiceCategoryShurui.療養指導.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予療養指.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值11);
+            一時Entity.setServiceBunrui(サービス分類_11);
         } else if (ServiceCategoryShurui.特施短外.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.予特施設.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值12);
+            一時Entity.setServiceBunrui(サービス分類_12);
         } else if (ServiceCategoryShurui.特施短期.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值13);
+            一時Entity.setServiceBunrui(サービス分類_13);
         } else if (ServiceCategoryShurui.福祉施設.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值14);
+            一時Entity.setServiceBunrui(サービス分類_14);
         } else if (ServiceCategoryShurui.老健施設.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值15);
+            一時Entity.setServiceBunrui(サービス分類_15);
         } else if (ServiceCategoryShurui.医療施設.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值16);
+            一時Entity.setServiceBunrui(サービス分類_16);
         } else if (ServiceCategoryShurui.地夜間訪.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值17);
+            一時Entity.setServiceBunrui(サービス分類_17);
         }
     }
 
     private void set給付実績データ一時Entity3(KyufujissekiTempTblEntity entity, KyufujissekiTempTblEntity 一時Entity) {
         if (ServiceCategoryShurui.地通所介.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.地予通所.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值18);
+            一時Entity.setServiceBunrui(サービス分類_18);
         } else if (ServiceCategoryShurui.地小短外.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.地予小外.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值19);
+            一時Entity.setServiceBunrui(サービス分類_19);
         } else if (ServiceCategoryShurui.地予小短.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值20);
+            一時Entity.setServiceBunrui(サービス分類_20);
         } else if (ServiceCategoryShurui.地共同介.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.地予共同.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值21);
+            一時Entity.setServiceBunrui(サービス分類_21);
         } else if (ServiceCategoryShurui.地施短外.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值22);
+            一時Entity.setServiceBunrui(サービス分類_22);
         } else if (ServiceCategoryShurui.地施短期.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值23);
+            一時Entity.setServiceBunrui(サービス分類_23);
         } else if (ServiceCategoryShurui.地共同短.getコード().equals(entity.getServiceSyuruiCode())
                 || ServiceCategoryShurui.地予共短.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值24);
+            一時Entity.setServiceBunrui(サービス分類_24);
         } else if (ServiceCategoryShurui.地福祉生.getコード().equals(entity.getServiceSyuruiCode())) {
-            一時Entity.setServiceBunrui(值25);
+            一時Entity.setServiceBunrui(サービス分類_25);
         }
     }
 
@@ -265,19 +265,19 @@ public class HekinRiyoGakuTokehyoResult {
     public List<ShikakutempTblEntity> set出力用一時TBL() {
         List<ShikakutempTblEntity> 一時EntityList = new ArrayList<>();
         List<RString> shotokuList = new ArrayList<>();
-        shotokuList.add(值1);
-        shotokuList.add(值2);
-        shotokuList.add(值3);
-        shotokuList.add(值4);
-        shotokuList.add(值5);
-        shotokuList.add(值6);
-        shotokuList.add(值7);
-        shotokuList.add(值8);
-        shotokuList.add(值9);
-        shotokuList.add(以上);
-        shotokuList.add(その他);
-        shotokuList.add(号);
-        shotokuList.add(合計);
+        shotokuList.add(サービス分類_1);
+        shotokuList.add(サービス分類_2);
+        shotokuList.add(サービス分類_3);
+        shotokuList.add(サービス分類_4);
+        shotokuList.add(サービス分類_5);
+        shotokuList.add(サービス分類_6);
+        shotokuList.add(サービス分類_7);
+        shotokuList.add(サービス分類_8);
+        shotokuList.add(サービス分類_9);
+        shotokuList.add(所得段階_10以上);
+        shotokuList.add(所得段階_その他);
+        shotokuList.add(所得段階_2号);
+        shotokuList.add(所得段階_合計);
         List<RString> shukeinaiyouList = new ArrayList<>();
         shukeinaiyouList.add(人数);
         shukeinaiyouList.add(費用総額);
