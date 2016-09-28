@@ -417,15 +417,192 @@
                        DbT5101."nigoTokuteiShippeiCode" AS "特定疾病",
                        DbT5102."yokaigoJotaizoReiCode" AS "要介護状態像例コード",
                        DbT5202."serviceKubunCode" AS "サービス区分コード",
+                            Z."予防訪問介護ホームヘルプ" AS "予防訪問介護ホームヘルプ",
+                            Z."予防訪問入浴介護" AS "予防訪問入浴介護",
+                            Z."予防訪問看護" AS "予防訪問看護",
+                            Z."予防訪問リハビリテーション" AS "予防訪問リハビリテーション",
+                            Z."予防居宅療養管理指導" AS "予防居宅療養管理指導",
+                            Z."予防通所介護デイサービス" AS "予防通所介護デイサービス",
+                            Z."予防通所リハビリテーションデイケア" AS "予防通所リハビリテーションデイケア",
+                            Z."予防短期入所生活介護ショートステイ" AS "予防短期入所生活介護ショートステイ",
+                            Z."予防短期入所療養介護" AS "予防短期入所療養介護",
+                            Z."予防特定施設入居者生活介護" AS "予防特定施設入居者生活介護",
+                            Z."予防福祉用具貸与" AS "予防福祉用具貸与",
+                            Z."予防特定福祉用具販売" AS "予防特定福祉用具販売",
+                            Z."予防認知症対応型通所介護" AS "予防認知症対応型通所介護",
+                            Z."予防小規模多機能型居宅介護" AS "予防小規模多機能型居宅介護",
+                            Z."予防認知症対応型共同生活介護グループホーム" AS "予防認知症対応型共同生活介護グループホーム",
+                            Z."介護訪問介護ホームヘルプ" AS "介護訪問介護ホームヘルプ",
+                            Z."介護訪問入浴介護" "介護訪問入浴介護",
+                            Z."介護訪問看護" AS "介護訪問看護",
+                            Z."介護訪問リハビリテーション" AS "介護訪問リハビリテーション",
+                            Z."介護居宅療養管理指導" AS "介護居宅療養管理指導",
+                            Z."介護通所介護デイサービス" AS "介護通所介護デイサービス",
+                            Z."介護通所リハビリテーションデイケア" AS "介護通所リハビリテーションデイケア",
+                            Z."介護短期入所生活介護ショートステイ" AS "介護短期入所生活介護ショートステイ",
+                            Z."介護短期入所療養介護" AS "介護短期入所療養介護",
+                            Z."介護特定施設入居者生活介護" AS "介護特定施設入居者生活介護",
+                            Z."介護福祉用具貸与" AS "介護福祉用具貸与",
+                            Z."介護特定福祉用具販売" AS "介護特定福祉用具販売",
+                            Z."介護夜間対応型訪問介護" AS "介護夜間対応型訪問介護",
+                            Z."介護認知症対応型通所介護" AS "介護認知症対応型通所介護",
+                            Z."介護小規模多機能型居宅介護" AS "介護小規模多機能型居宅介護",
+                            Z."介護認知症対応型共同生活介護グループホーム" AS "介護認知症対応型共同生活介護グループホーム",
+                            Z."介護地域密着型特定施設入居者生活介護" AS "介護地域密着型特定施設入居者生活介護",
+                            Z."介護地域密着型介護老人福祉施設入所者生活介護" AS "介護地域密着型介護老人福祉施設入所者生活介護",
+                            Z."介護定期巡回随時対応型訪問介護看護" AS "介護定期巡回随時対応型訪問介護看護",
+                            Z."介護複合型サービス" AS "介護複合型サービス",
                        DbT5210.remban AS "施設利用",
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_予防給付サービス" />,
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_介護給付サービス" />,
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_予防給付サービス09A" />,
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_介護給付サービス09A" />,
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_認定調査票基本調査調査項目" />,
+                            W."麻痺左上肢" AS "麻痺左上肢",
+                            W."麻痺右上肢" AS "麻痺右上肢",
+                            W."麻痺左下肢" AS "麻痺左下肢",
+                            W."麻痺右下肢" AS "麻痺右下肢",
+                            W."麻痺その他" AS "麻痺その他",
+                            W."拘縮肩関節" AS "拘縮肩関節",
+                            W."拘縮股関節" AS "拘縮股関節",
+                            W."拘縮膝関節" AS "拘縮膝関節",
+                            W."拘縮その他" AS "拘縮その他",
+                            W."寝返り" AS "寝返り",
+                            W."起き上がり" AS "起き上がり",
+                            W."座位保持" AS "座位保持",
+                            W."両足での立位" AS "両足での立位",
+                            W."歩行" AS "歩行",
+                            W."立ち上がり" AS "立ち上がり",
+                            W."片足での立位" AS "片足での立位",
+                            W."洗身" AS "洗身",
+                            W."つめ切り" AS "つめ切り",
+                            W."視力" AS "視力",
+                            W."聴力" AS "聴力",
+                            W."移乗" AS "移乗",
+                            W."移動" AS "移動",
+                            W."えん下" AS "えん下",
+                            W."食事摂取" AS "食事摂取",
+                            W."排尿" AS "排尿",
+                            W."排便" AS "排便",  
+                            W."口腔清潔" AS "口腔清潔",
+                            W."洗顔" AS "洗顔",
+                            W."整髪" AS "整髪",
+                            W."上衣の着脱" AS "上衣の着脱",
+                            W."ズボン等の着脱" AS "ズボン等の着脱",
+                            W."外出頻度" AS "外出頻度",
+                            W."意思の伝達" AS "意思の伝達",
+                            W."毎日の日課を理解" AS "毎日の日課を理解",
+                            W."生年月日をいう" AS "生年月日をいう",
+                            W."短期記憶" AS "短期記憶",
+                            W."自分の名前をいう" AS "自分の名前をいう",
+                            W."今の季節を理解" AS "今の季節を理解",
+                            W."場所の理解" AS "場所の理解",
+                            W."徘徊" AS "徘徊",
+                            W."外出して戻れない" AS "外出して戻れない",
+                            W."被害的" AS "被害的",
+                            W."作話" AS "作話",
+                            W."感情が不安定" AS "感情が不安定",
+                            W."昼夜逆転" AS "昼夜逆転",
+                            W."同じ話をする" AS "同じ話をする",
+                            W."大声を出す" AS "大声を出す",
+                            W."介護に抵抗" AS "介護に抵抗",
+                            W."落ち着きなし" AS "落ち着きなし",
+                            W."一人で出たがる" AS "一人で出たがる",
+                            W."収集癖" AS "収集癖",
+                            W."物や衣類を壊す" AS "物や衣類を壊す",
+                            W."ひどい物忘れ" AS "ひどい物忘れ",
+                            W."独り言独り笑い" AS "独り言独り笑い",
+                            W."自分勝手に行動する" AS "自分勝手に行動する",
+                            W."話がまとまらない" AS "話がまとまらない",
+                            W."薬の内服" AS "薬の内服",
+                            W."金銭の管理" AS "金銭の管理",
+                            W."日常の意思決定" AS "日常の意思決定",
+                            W."集団への不適応" AS "集団への不適応",
+                            W."買い物" AS "買い物",
+                            W."簡単な調理" AS "簡単な調理" ,
+                            W."点滴の管理" AS "点滴の管理",
+                            W."中心静脈栄養" AS "中心静脈栄養",
+                            W."透析" AS "透析",
+                            W."ストーマの処置" AS "ストーマの処置",
+                            W."酸素療法" AS "酸素療法",
+                            W."レスピレーター" AS "レスピレーター",
+                            W."気管切開の処置" AS "気管切開の処置",
+                            W."疼痛の看護" AS "疼痛の看護",
+                            W."経管栄養" AS "経管栄養",
+                            W."モニター測定" AS "モニター測定",
+                            W."じょくそうの処置" AS "じょくそうの処置",
+                            W."カテーテル" AS "カテーテル",
                        DbT5203."shogaiNichijoSeikatsuJiritsudoCode" AS "障害高齢者自立度日常生活自立度",
                        DbT5203."ninchishoNichijoSeikatsuJiritsudoCode" AS "認知症高齢者自立度日常生活自立度",
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_前回認定調査票基本調査調査項目" />,
+                            c."前回結果麻痺左上肢" AS "前回結果麻痺左上肢",
+                            c."前回結果麻痺右上肢" AS "前回結果麻痺右上肢",
+                            c."前回結果麻痺左下肢" AS "前回結果麻痺左下肢",
+                            c."前回結果麻痺右下肢" AS "前回結果麻痺右下肢",
+                            c."前回結果麻痺その他" AS "前回結果麻痺その他" ,
+                            c."前回結果拘縮肩関節" AS "前回結果拘縮肩関節",
+                            c."前回結果拘縮股関節" AS "前回結果拘縮股関節",
+                            c."前回結果拘縮膝関節" AS "前回結果拘縮膝関節",
+                            c."前回結果拘縮その他" AS "前回結果拘縮その他",
+                            c."前回結果寝返り" AS "前回結果寝返り",
+                            c."前回結果起き上がり" AS "前回結果起き上がり",
+                            c."前回結果座位保持" AS "前回結果座位保持",
+                            c."前回結果両足での立位" AS "前回結果両足での立位",
+                            c."前回結果歩行" AS "前回結果歩行",
+                            c."前回結果立ち上がり" AS "前回結果立ち上がり",
+                            c."前回結果片足での立位" AS "前回結果片足での立位",
+                            c."前回結果洗身" AS "前回結果洗身",
+                            c."前回結果つめ切り" AS "前回結果つめ切り",
+                            c."前回結果視力" AS "前回結果視力",
+                            C."前回結果聴力" AS "前回結果聴力",
+                            C."前回結果移乗" AS "前回結果移乗",
+                            C."前回結果移動" AS "前回結果移動",
+                            C."前回結果えん下" AS "前回結果えん下",
+                            C."前回結果食事摂取" AS "前回結果食事摂取",
+                            C."前回結果排尿" AS "前回結果排尿",
+                            C."前回結果排便" AS "前回結果排便",
+                            C."前回結果口腔清潔" AS "前回結果口腔清潔",
+                            C."前回結果洗顔" AS "前回結果洗顔",
+                            C."前回結果整髪" AS "前回結果整髪",
+                            C."前回結果上衣の着脱" AS "前回結果上衣の着脱",
+                            C."前回結果ズボン等の着脱" AS "前回結果ズボン等の着脱",
+                            C."前回結果外出頻度" AS "前回結果外出頻度",
+                            C."前回結果意思の伝達" AS "前回結果意思の伝達",
+                            C."前回結果毎日の日課を理解" AS "前回結果毎日の日課を理解",
+                            C."前回結果生年月日をいう" AS "前回結果生年月日をいう",
+                            C."前回結果短期記憶" AS "前回結果短期記憶",
+                            C."前回結果自分の名前をいう" AS "前回結果自分の名前をいう",
+                            C."前回結果今の季節を理解" AS "前回結果今の季節を理解",
+                            C."前回結果場所の理解" AS "前回結果場所の理解",
+                            C."前回結果徘徊" AS "前回結果徘徊",
+                            C."前回結果外出して戻れない" AS "前回結果外出して戻れない",
+                            C."前回結果被害的" AS "前回結果被害的",
+                            C."前回結果作話" AS "前回結果作話",
+                            C."前回結果感情が不安定" AS "前回結果感情が不安定",
+                            C."前回結果昼夜逆転" AS "前回結果昼夜逆転",
+                            C."前回結果同じ話をする" AS "前回結果同じ話をする",
+                            C."前回結果大声を出す" AS "前回結果大声を出す",
+                            C."前回結果介護に抵抗" AS "前回結果介護に抵抗",
+                            C."前回結果落ち着きなし" AS "前回結果落ち着きなし",
+                            C."前回結果一人で出たがる" AS "前回結果一人で出たがる",
+                            C."前回結果収集癖" AS "前回結果収集癖",
+                            C."前回結果物や衣類を壊す" AS "前回結果物や衣類を壊す",
+                            C."前回結果ひどい物忘れ" AS "前回結果ひどい物忘れ",
+                            C."前回結果独り言独り笑い" AS "前回結果独り言独り笑い",
+                            C."前回結果自分勝手に行動する" AS "前回結果自分勝手に行動する",
+                            C."前回結果話がまとまらない" AS "前回結果話がまとまらない",
+                            C."前回結果薬の内服" AS "前回結果薬の内服",
+                            C."前回結果金銭の管理" AS "前回結果金銭の管理",
+                            C."前回結果日常の意思決定" AS "前回結果日常の意思決定",
+                            C."前回結果集団への不適応" AS "前回結果集団への不適応",
+                            C."前回結果買い物" AS "前回結果買い物",
+                            C."前回結果簡単な調理" AS "前回結果簡単な調理",
+                            C."前回結果点滴の管理" AS "前回結果点滴の管理",
+                            C."前回結果中心静脈栄養" AS "前回結果中心静脈栄養",
+                            C."前回結果透析" AS "前回結果透析",
+                            C."前回結果ストーマの処置" AS "前回結果ストーマの処置",
+                            C."前回結果酸素療法" AS "前回結果酸素療法",
+                            C."前回結果レスピレーター" AS "前回結果レスピレーター",
+                            C."前回結果気管切開の処置" AS "前回結果気管切開の処置",
+                            C."前回結果疼痛の看護" AS "前回結果疼痛の看護",
+                            C."前回結果経管栄養" AS "前回結果経管栄養",
+                            C."前回結果モニター測定" AS "前回結果モニター測定",
+                            C."前回結果じょくそうの処置" AS "前回結果じょくそうの処置",
+                            C."前回結果カテーテル" AS "前回結果カテーテル",
                        zenkaiDbT5203."shogaiNichijoSeikatsuJiritsudoCode" AS "前回結果障害高齢者自立度日常生活自立度",
                        zenkaiDbT5203."ninchishoNichijoSeikatsuJiritsudoCode" AS "前回結果認知症高齢者自立度日常生活自立度",
                        zenkaiDbT5116."ichijiHanteiKekkaCode" AS "前回結果一次判定結果",
@@ -453,10 +630,41 @@
                        zenkaiDbT5102."nijiHanteiYMD" AS "前回結果二次判定日",
                        zenkaiDbT5202."serviceKubunCode" AS "前回結果サービス区分コード",
                        zenkaiDbT5210.remban AS "前回結果施設利用",
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_前回予防給付サービス" />,
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_前回介護給付サービス" />,
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_前回予防給付サービス09A" />,
-                       <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper.allColumns_前回介護給付サービス09A" />,
+                       S."前回予防訪問介護ホームヘルプ" AS "前回予防訪問介護ホームヘルプ",
+                       S."前回予防訪問入浴介護" AS "前回予防訪問入浴介護",
+                       S."前回予防訪問看護" AS "前回予防訪問看護",
+                       S."前回予防訪問リハビリテーション" AS "前回予防訪問リハビリテーション",
+                       S."前回予防居宅療養管理指導" AS "前回予防居宅療養管理指導",
+                       S."前回予防通所介護デイサービス" AS "前回予防通所介護デイサービス",
+                       S."前回予防通所リハビリテーションデイケア" AS "前回予防通所リハビリテーションデイケア",
+                       S."前回予防短期入所生活介護ショートステイ" AS "前回予防短期入所生活介護ショートステイ",
+                       S."前回予防短期入所療養介護" AS "前回予防短期入所療養介護",
+                       S."前回予防特定施設入居者生活介護" AS "前回予防特定施設入居者生活介護",
+                       S."前回予防福祉用具貸与" AS "前回予防福祉用具貸与",
+                       S."前回予防特定福祉用具販売" AS "前回予防特定福祉用具販売",
+                       S."前回予防認知症対応型通所介護" AS "前回予防認知症対応型通所介護",
+                       S."前回予防小規模多機能型居宅介護" AS "前回予防小規模多機能型居宅介護",
+                       S."前回予防認知症対応型共同生活介護グループホーム" AS "前回予防認知症対応型共同生活介護グループホーム",
+                       S."前回介護訪問介護ホームヘルプ" AS "前回介護訪問介護ホームヘルプ",
+                       S."前回介護訪問入浴介護" AS "前回介護訪問入浴介護",
+                       S."前回介護訪問看護" AS "前回介護訪問看護",
+                       S."前回介護訪問リハビリテーション" AS "前回介護訪問リハビリテーション",
+                       S."前回介護居宅療養管理指導" AS "前回介護居宅療養管理指導",
+                       S."前回介護通所介護デイサービス" AS "前回介護通所介護デイサービス",
+                       S."前回介護通所リハビリテーションデイケア" AS "前回介護通所リハビリテーションデイケア",
+                       S."前回介護短期入所生活介護ショートステイ" AS "前回介護短期入所生活介護ショートステイ",
+                       S."前回介護短期入所療養介護" AS "前回介護短期入所療養介護",
+                       S."前回介護特定施設入居者生活介護" AS "前回介護特定施設入居者生活介護",
+                       S."前回介護福祉用具貸与" AS "前回介護福祉用具貸与",
+                       S."前回介護特定福祉用具販売" AS "前回介護特定福祉用具販売",
+                       S."前回介護夜間対応型訪問介護" AS "前回介護夜間対応型訪問介護",
+                       S."前回介護認知症対応型通所介護" AS "前回介護認知症対応型通所介護",
+                       S."前回介護小規模多機能型居宅介護" AS "前回介護小規模多機能型居宅介護",
+                       S."前回介護認知症対応型共同生活介護グループホーム" AS "前回介護認知症対応型共同生活介護グループホーム",
+                       S."前回介護地域密着型特定施設入居者生活介護" AS "前回介護地域密着型特定施設入居者生活介護",
+                       S."前回介護地域密着型介護老人福祉施設入所者生活介護" AS "前回介護地域密着型介護老人福祉施設入所者生活介護",
+                       S."前回介護定期巡回随時対応型訪問介護看護" AS "前回介護定期巡回随時対応型訪問介護看護",
+                       S."前回介護複合型サービス"AS "前回介護複合型サービス",
                        zenkaiDbT5101."koroshoIfShikibetsuCode" AS "前回識別コード",
                        DbT5102."shinsakaiIken" AS "審査会意見",
                        DbT5102."shinsakaiMemo" AS "コメント等"
@@ -492,11 +700,468 @@
                 AND DbT5203."ninteichosaRirekiNo" = (SELECT MAX(DbT5203Nintei."ninteichosaRirekiNo")
                                      FROM rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203Nintei
                                      WHERE  DbT5203."shinseishoKanriNo" = DbT5203Nintei."shinseishoKanriNo")
-                LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211
-                ON DbT5211."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                AND DbT5211."ninteichosaRirekiNo"= (SELECT MAX(DbT5211Nintei."ninteichosaRirekiNo")
-                                    FROM rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211Nintei
-                                    WHERE DbT5211."shinseishoKanriNo" = DbT5211Nintei."shinseishoKanriNo")
+                LEFT JOIN 
+                        (select 
+                            T."shinseishoKanriNo",
+                            T."ninteichosaRirekiNo",
+                            MAX(T.麻痺左上肢)AS "麻痺左上肢",
+                            MAX(T.麻痺右上肢)AS "麻痺右上肢",
+                            MAX(T.麻痺左下肢)AS "麻痺左下肢",
+                            MAX(T.麻痺右下肢)AS "麻痺右下肢",
+                            MAX(T.麻痺その他)AS "麻痺その他",
+                            MAX(T.拘縮肩関節)AS "拘縮肩関節",
+                            MAX(T.拘縮股関節)AS "拘縮股関節",
+                            MAX(T.拘縮膝関節)AS "拘縮膝関節",
+                            MAX(T.拘縮その他)AS "拘縮その他",
+                            MAX(T.寝返り)AS "寝返り",
+                            MAX(T.起き上がり)AS "起き上がり",
+                            MAX(T.座位保持)AS "座位保持",
+                            MAX(T.両足での立位)AS "両足での立位",
+                            MAX(T.歩行)AS "歩行",
+                            MAX(T.立ち上がり)AS "立ち上がり",
+                            MAX(T.片足での立位)AS "片足での立位",
+                            MAX(T.洗身)AS "洗身",
+                            MAX(T.つめ切り)AS "つめ切り",
+                            MAX(T.視力)AS "視力",
+                            MAX(T.聴力)AS "聴力",
+                            MAX(T.移乗)AS "移乗",
+                            MAX(T.移動)AS "移動",
+                            MAX(T.えん下)AS "えん下",
+                            MAX(T.食事摂取)AS "食事摂取",
+                            MAX(T.排尿)AS "排尿",
+                            MAX(T.排便)AS "排便",
+                            MAX(T.口腔清潔)AS "口腔清潔",
+                            MAX(T.洗顔)AS "洗顔",
+                            MAX(T.整髪)AS "整髪",
+                            MAX(T.上衣の着脱)AS "上衣の着脱",
+                            MAX(T.ズボン等の着脱)AS "ズボン等の着脱",
+                            MAX(T.外出頻度)AS "外出頻度",
+                            MAX(T.意思の伝達)AS "意思の伝達",
+                            MAX(T.毎日の日課を理解)AS "毎日の日課を理解",
+                            MAX(T.生年月日をいう)AS "生年月日をいう",
+                            MAX(T.短期記憶)AS "短期記憶",
+                            MAX(T.自分の名前をいう)AS "自分の名前をいう",
+                            MAX(T.今の季節を理解)AS "今の季節を理解",
+                            MAX(T.場所の理解)AS "場所の理解",
+                            MAX(T.徘徊)AS "徘徊",
+                            MAX(T.外出して戻れない)AS "外出して戻れない",
+                            MAX(T.被害的)AS "被害的",
+                            MAX(T.作話)AS "作話",
+                            MAX(T.感情が不安定)AS "感情が不安定",
+                            MAX(T.昼夜逆転)AS "昼夜逆転",
+                            MAX(T.同じ話をする)AS "同じ話をする",
+                            MAX(T.大声を出す)AS "大声を出す",
+                            MAX(T.介護に抵抗)AS "介護に抵抗",
+                            MAX(T.落ち着きなし)AS "落ち着きなし",
+                            MAX(T.一人で出たがる)AS "一人で出たがる",
+                            MAX(T.収集癖)AS "収集癖",
+                            MAX(T.物や衣類を壊す)AS "物や衣類を壊す",
+                            MAX(T.ひどい物忘れ)AS "ひどい物忘れ",
+                            MAX(T.独り言独り笑い)AS "独り言独り笑い",
+                            MAX(T.自分勝手に行動する)AS "自分勝手に行動する",
+                            MAX(T.話がまとまらない)AS "話がまとまらない",
+                            MAX(T.薬の内服)AS "薬の内服",
+                            MAX(T.金銭の管理)AS "金銭の管理",
+                            MAX(T.日常の意思決定)AS "日常の意思決定",
+                            MAX(T.集団への不適応)AS "集団への不適応",
+                            MAX(T.買い物)AS "買い物",
+                            MAX(T.簡単な調理)AS "簡単な調理",
+                            MAX(T.点滴の管理)AS "点滴の管理",
+                            MAX(T.中心静脈栄養)AS "中心静脈栄養",
+                            MAX(T.透析)AS "透析",
+                            MAX(T.ストーマの処置)AS "ストーマの処置",
+                            MAX(T.酸素療法)AS "酸素療法",
+                            MAX(T.レスピレーター)AS "レスピレーター",
+                            MAX(T.気管切開の処置)AS "気管切開の処置",
+                            MAX(T.疼痛の看護)AS "疼痛の看護",
+                            MAX(T.経管栄養)AS "経管栄養",
+                            MAX(T.モニター測定)AS "モニター測定",
+                            MAX(T.じょくそうの処置)AS "じょくそうの処置",
+                            MAX(T.カテーテル)AS "カテーテル" 
+                    from
+                            (select 
+                                    DbT5211."shinseishoKanriNo",
+                                    DbT5211."ninteichosaRirekiNo",
+                                    CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 1 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 麻痺左上肢
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 2 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 麻痺右上肢
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 3 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 麻痺左下肢
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 4 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 麻痺右下肢
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 5 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 麻痺その他
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 6 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 拘縮肩関節
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 7 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 拘縮股関節
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 8 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 拘縮膝関節
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 9 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 拘縮その他
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 10 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 寝返り
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 11 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 起き上がり
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 12 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 座位保持
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 13 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 両足での立位
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 14 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 歩行
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 15 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 立ち上がり
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 16 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 片足での立位
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 17 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 洗身
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 18 
+                                    THEN DbT5211."researchItem" 
+                                    END AS つめ切り
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 19 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 視力
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 20 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 聴力
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 21 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 移乗
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 22 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 移動
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 23 
+                                    THEN DbT5211."researchItem" 
+                                    END AS えん下
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 24 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 食事摂取
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 25 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 排尿
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 26 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 排便
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 27 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 口腔清潔
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 28 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 洗顔
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 29 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 整髪
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 30 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 上衣の着脱
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 31 
+                                    THEN DbT5211."researchItem" 
+                                    END AS ズボン等の着脱
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 32 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 外出頻度
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 33 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 意思の伝達
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 34 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 毎日の日課を理解
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 35 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 生年月日をいう
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 36 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 短期記憶
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 37 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 自分の名前をいう
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 38 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 今の季節を理解
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 39 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 場所の理解
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 40 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 徘徊
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 41 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 外出して戻れない
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 42 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 被害的
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 43 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 作話
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 44 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 感情が不安定
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 45 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 昼夜逆転
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 46 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 同じ話をする
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 47 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 大声を出す
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 48 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 介護に抵抗
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 49 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 落ち着きなし
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 50 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 一人で出たがる
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 51 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 収集癖
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 52 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 物や衣類を壊す
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 53 
+                                    THEN DbT5211."researchItem" 
+                                    END AS ひどい物忘れ
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 54 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 独り言独り笑い
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 55 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 自分勝手に行動する
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 56 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 話がまとまらない
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 57 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 薬の内服
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 58 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 金銭の管理
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 59 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 日常の意思決定
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 60 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 集団への不適応
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 61 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 買い物
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 62 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 簡単な調理
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 63 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 点滴の管理
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 64 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 中心静脈栄養
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 65 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 透析
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 66 
+                                    THEN DbT5211."researchItem" 
+                                    END AS ストーマの処置
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 67 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 酸素療法
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 68 
+                                    THEN DbT5211."researchItem" 
+                                    END AS レスピレーター
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 69 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 気管切開の処置
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 70 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 疼痛の看護
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 71 
+                                    THEN DbT5211."researchItem" 
+                                    END AS 経管栄養
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 72 
+                                    THEN DbT5211."researchItem" 
+                                    END AS モニター測定
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 73 
+                                    THEN DbT5211."researchItem" 
+                                    END AS じょくそうの処置
+                                  , CASE 
+                                    WHEN 
+                                     DbT5211."remban" = 74 
+                                    THEN DbT5211."researchItem" 
+                                    END AS カテーテル FROM
+                                rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211) as T group by T."shinseishoKanriNo",T."ninteichosaRirekiNo") as W
+                                    ON W."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+                                    AND W."ninteichosaRirekiNo" = ( 
+                                      SELECT
+                                        MAX(DbT5211Nintei."ninteichosaRirekiNo") 
+                                      FROM
+                                        rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211Nintei 
+                                      WHERE
+                                        W."shinseishoKanriNo" = DbT5211Nintei."shinseishoKanriNo"
+                                    )     
                 LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
                 ON DbT5301."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT5301."ikenshoIraiRirekiNo" = (SELECT MAX(DbT5301Shujii."ikenshoIraiRirekiNo")
@@ -536,21 +1201,240 @@
                 AND  DbT5202."ninteichosaRirekiNo" = ( SELECT MAX(DbT5202Nintei."ninteichosaRirekiNo")
                                  FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202Nintei
                                  WHERE DbT5202."shinseishoKanriNo" = DbT5202Nintei."shinseishoKanriNo")
-                LEFT JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207
-                ON  DbT5207."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                AND  DbT5207."ninteichosaRirekiNo" = (SELECT MAX(DbT5207Nintei."ninteichosaRirekiNo")
-                                      FROM  rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207Nintei
-                                      WHERE DbT5207."shinseishoKanriNo" = DbT5207Nintei."shinseishoKanriNo")
+                LEFT JOIN (select 
+                                T."shinseishoKanriNo",
+                                T."ninteichosaRirekiNo",
+                                MAX(T.予防訪問介護ホームヘルプ)AS "予防訪問介護ホームヘルプ",
+                                MAX(T.予防訪問入浴介護)AS "予防訪問入浴介護",
+                                MAX(T.予防訪問看護)AS "予防訪問看護",
+                                MAX(T.予防訪問リハビリテーション)AS "予防訪問リハビリテーション",
+                                MAX(T.予防居宅療養管理指導)AS "予防居宅療養管理指導",
+                                MAX(T.予防通所介護デイサービス)AS "予防通所介護デイサービス",
+                                MAX(T.予防通所リハビリテーションデイケア)AS "予防通所リハビリテーションデイケア",
+                                MAX(T.予防短期入所生活介護ショートステイ)AS "予防短期入所生活介護ショートステイ",
+                                MAX(T.予防短期入所療養介護)AS "予防短期入所療養介護",
+                                MAX(T.予防特定施設入居者生活介護)AS "予防特定施設入居者生活介護",
+                                MAX(T.予防福祉用具貸与)AS "予防福祉用具貸与",
+                                MAX(T.予防特定福祉用具販売)AS "予防特定福祉用具販売",
+                                MAX(T.予防認知症対応型通所介護)AS "予防認知症対応型通所介護",
+                                MAX(T.予防小規模多機能型居宅介護)AS "予防小規模多機能型居宅介護",
+                                MAX(T.予防認知症対応型共同生活介護グループホーム)AS "予防認知症対応型共同生活介護グループホーム",
+                                MAX(T.介護訪問介護ホームヘルプ)AS "介護訪問介護ホームヘルプ",
+                                MAX(T.介護訪問入浴介護)AS "介護訪問入浴介護",
+                                MAX(T.介護訪問看護)AS "介護訪問看護",
+                                MAX(T.介護訪問リハビリテーション)AS "介護訪問リハビリテーション",
+                                MAX(T.介護居宅療養管理指導)AS "介護居宅療養管理指導",
+                                MAX(T.介護通所介護デイサービス)AS "介護通所介護デイサービス",
+                                MAX(T.介護通所リハビリテーションデイケア)AS "介護通所リハビリテーションデイケア",
+                                MAX(T.介護短期入所生活介護ショートステイ)AS "介護短期入所生活介護ショートステイ",
+                                MAX(T.介護短期入所療養介護)AS "介護短期入所療養介護",
+                                MAX(T.介護特定施設入居者生活介護)AS "介護特定施設入居者生活介護",
+                                MAX(T.介護福祉用具貸与)AS "介護福祉用具貸与",
+                                MAX(T.介護特定福祉用具販売)AS "介護特定福祉用具販売",
+                                MAX(T.介護夜間対応型訪問介護)AS "介護夜間対応型訪問介護",
+                                MAX(T.介護認知症対応型通所介護)AS "介護認知症対応型通所介護",
+                                MAX(T.介護小規模多機能型居宅介護)AS "介護小規模多機能型居宅介護",
+                                MAX(T.介護認知症対応型共同生活介護グループホーム)AS "介護認知症対応型共同生活介護グループホーム",
+                                MAX(T.介護地域密着型特定施設入居者生活介護)AS "介護地域密着型特定施設入居者生活介護",
+                                MAX(T.介護地域密着型介護老人福祉施設入所者生活介護)AS "介護地域密着型介護老人福祉施設入所者生活介護",
+                                MAX(T.介護定期巡回随時対応型訪問介護看護)AS "介護定期巡回随時対応型訪問介護看護",
+                                MAX(T.介護複合型サービス)AS "介護複合型サービス"
+                              from
+                                (select 
+                                  DbT5207."shinseishoKanriNo",
+                                  DbT5207."ninteichosaRirekiNo",
+                                  CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 1 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防訪問介護ホームヘルプ
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 2 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防訪問入浴介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1'
+                                  AND DbT5207."remban" = 3 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防訪問看護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1'
+                                  AND DbT5207."remban" = 4 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防訪問リハビリテーション
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 5 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防居宅療養管理指導
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 6 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防通所介護デイサービス
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 7 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防通所リハビリテーションデイケア
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 8 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防短期入所生活介護ショートステイ
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 9 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防短期入所療養介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 10 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防特定施設入居者生活介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 11 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防福祉用具貸与
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 12 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防特定福祉用具販売
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 14 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防認知症対応型通所介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 15 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防小規模多機能型居宅介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '1' 
+                                  AND DbT5207."remban" = 16 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 予防認知症対応型共同生活介護グループホーム
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2'
+                                  AND DbT5207."remban" = 1 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護訪問介護ホームヘルプ
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2'
+                                  AND DbT5207."remban" = 2 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護訪問入浴介護
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2'
+                                  AND DbT5207."remban" = 3 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護訪問看護
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2'
+                                  AND DbT5207."remban" = 4 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護訪問リハビリテーション
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 5 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護居宅療養管理指導
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 6 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護通所介護デイサービス
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 7 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護通所リハビリテーションデイケア
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 8 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護短期入所生活介護ショートステイ
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 9 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護短期入所療養介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 10 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護特定施設入居者生活介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 11 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護福祉用具貸与
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 12 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護特定福祉用具販売
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 13 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護夜間対応型訪問介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 14 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護認知症対応型通所介護
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 15 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護小規模多機能型居宅介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 16 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護認知症対応型共同生活介護グループホーム
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 17 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護地域密着型特定施設入居者生活介護
+                                , CASE 
+                                  WHEN  DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 18 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護地域密着型介護老人福祉施設入所者生活介護
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2'   
+                                  AND DbT5207."remban" = 19 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護定期巡回随時対応型訪問介護看護
+                                , CASE 
+                                  WHEN DbT5202."serviceKubunCode" = '2' 
+                                  AND DbT5207."remban" = 20 
+                                  THEN DbT5207."serviceJokyo" 
+                                  END AS 介護複合型サービス
+                                 FROM
+                                  rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207
+                                      INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+                                      ON  DbT5207."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" ) as T group by T."shinseishoKanriNo",T."ninteichosaRirekiNo") as Z
+                                  ON Z."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+                                  AND Z."ninteichosaRirekiNo" = ( 
+                                    SELECT
+                                      MAX(DbT5207Nintei."ninteichosaRirekiNo") 
+                                    FROM rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207Nintei
+                                    WHERE
+                                      Z."shinseishoKanriNo" = DbT5207Nintei."shinseishoKanriNo"
+                                  )   
                 LEFT JOIN  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208 
                 ON  DbT5208."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"     
                 AND  DbT5208."ninteichosaRirekiNo" = (SELECT MAX(DbT5208Nintei."ninteichosaRirekiNo")
                                       FROM  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208Nintei
                                       WHERE DbT5208."shinseishoKanriNo" = DbT5208Nintei."shinseishoKanriNo")
-                LEFT JOIN  rgdb."DbT5209NinteichosahyoKinyuItem" as DbT5209
-                ON  DbT5209."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                AND  DbT5209."ninteichosaRirekiNo" = (SELECT MAX(DbT5209Nintei."ninteichosaRirekiNo")
-                                      FROM  rgdb."DbT5209NinteichosahyoKinyuItem" as DbT5209Nintei
-                                      WHERE DbT5209."shinseishoKanriNo" = DbT5209Nintei."shinseishoKanriNo")
                 LEFT JOIN  rgdb."DbT5210NinteichosahyoShisetsuRiyo" as DbT5210
                 ON  DbT5210."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND  DbT5210."ninteichosaRirekiNo" = (SELECT  MAX(DbT5210Nintei."ninteichosaRirekiNo")
@@ -575,16 +1459,695 @@
                 AND zenkaiDbT5203."ninteichosaRirekiNo" = (SELECT MAX(zenkaiDbT5203Nintei."ninteichosaRirekiNo")
                                            FROM rgdb."DbT5203NinteichosahyoKihonChosa" AS zenkaiDbT5203Nintei
                                            WHERE  zenkaiDbT5203Nintei."shinseishoKanriNo" = zenkaiDbT5203."shinseishoKanriNo" )
-                LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS zenkaiDbT5211
-                ON zenkaiDbT5211."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
-                AND zenkaiDbT5211."ninteichosaRirekiNo" = (SELECT MAX(zenkaiDbT5211Nintei."ninteichosaRirekiNo")
-                                           FROM  rgdb."DbT5211NinteichosahyoChosaItem" AS zenkaiDbT5211Nintei
-                                           WHERE  zenkaiDbT5211Nintei."shinseishoKanriNo" = zenkaiDbT5211."shinseishoKanriNo")
-                LEFT JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" AS zenkaiDbT5207
-                ON zenkaiDbT5207."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
-                AND zenkaiDbT5207."ninteichosaRirekiNo" = (SELECT MAX(zenkaiDbT5207Nintei."ninteichosaRirekiNo")
-                                           FROM rgdb."DbT5207NinteichosahyoServiceJokyo" AS zenkaiDbT5207Nintei
-                                           WHERE zenkaiDbT5207Nintei."shinseishoKanriNo" = zenkaiDbT5207."shinseishoKanriNo")
+                LEFT JOIN  (select 
+                                T."shinseishoKanriNo",
+                                T."ninteichosaRirekiNo",
+                                MAX(T.前回結果麻痺左上肢)AS "前回結果麻痺左上肢",
+                                MAX(T.前回結果麻痺右上肢)AS "前回結果麻痺右上肢",
+                                MAX(T.前回結果麻痺左下肢)AS "前回結果麻痺左下肢",
+                                MAX(T.前回結果麻痺右下肢)AS "前回結果麻痺右下肢",
+                                MAX(T.前回結果麻痺その他)AS "前回結果麻痺その他",
+                                MAX(T.前回結果拘縮肩関節)AS "前回結果拘縮肩関節",
+                                MAX(T.前回結果拘縮股関節)AS "前回結果拘縮股関節",
+                                MAX(T.前回結果拘縮膝関節)AS "前回結果拘縮膝関節",
+                                MAX(T.前回結果拘縮その他)AS "前回結果拘縮その他",
+                                MAX(T.前回結果寝返り)AS "前回結果寝返り",
+                                MAX(T.前回結果起き上がり)AS "前回結果起き上がり",
+                                MAX(T.前回結果座位保持)AS "前回結果座位保持",
+                                MAX(T.前回結果両足での立位)AS "前回結果両足での立位",
+                                MAX(T.前回結果歩行)AS "前回結果歩行",
+                                MAX(T.前回結果立ち上がり)AS "前回結果立ち上がり",
+                                MAX(T.前回結果片足での立位)AS "前回結果片足での立位",
+                                MAX(T.前回結果洗身)AS "前回結果洗身",
+                                MAX(T.前回結果つめ切り)AS "前回結果つめ切り",
+                                MAX(T.前回結果視力)AS "前回結果視力",
+                                MAX(T.前回結果聴力)AS "前回結果聴力",
+                                MAX(T.前回結果移乗)AS "前回結果移乗",
+                                MAX(T.前回結果移動)AS "前回結果移動",
+                                MAX(T.前回結果えん下)AS "前回結果えん下",
+                                MAX(T.前回結果食事摂取)AS "前回結果食事摂取",
+                                MAX(T.前回結果排尿)AS "前回結果排尿",
+                                MAX(T.前回結果排便)AS "前回結果排便",
+                                MAX(T.前回結果口腔清潔)AS "前回結果口腔清潔",
+                                MAX(T.前回結果洗顔)AS "前回結果洗顔",
+                                MAX(T.前回結果整髪)AS "前回結果整髪",
+                                MAX(T.前回結果上衣の着脱)AS "前回結果上衣の着脱",
+                                MAX(T.前回結果ズボン等の着脱)AS "前回結果ズボン等の着脱",
+                                MAX(T.前回結果外出頻度)AS "前回結果外出頻度",
+                                MAX(T.前回結果意思の伝達)AS "前回結果意思の伝達",
+                                MAX(T.前回結果毎日の日課を理解)AS "前回結果毎日の日課を理解",
+                                MAX(T.前回結果生年月日をいう)AS "前回結果生年月日をいう",
+                                MAX(T.前回結果短期記憶)AS "前回結果短期記憶",
+                                MAX(T.前回結果自分の名前をいう)AS "前回結果自分の名前をいう",
+                                MAX(T.前回結果今の季節を理解)AS "前回結果今の季節を理解",
+                                MAX(T.前回結果場所の理解)AS "前回結果場所の理解",
+                                MAX(T.前回結果徘徊)AS "前回結果徘徊",
+                                MAX(T.前回結果外出して戻れない)AS "前回結果外出して戻れない",
+                                MAX(T.前回結果被害的)AS "前回結果被害的",
+                                MAX(T.前回結果作話)AS "前回結果作話",
+                                MAX(T.前回結果感情が不安定)AS "前回結果感情が不安定",
+                                MAX(T.前回結果昼夜逆転)AS "前回結果昼夜逆転",
+                                MAX(T.前回結果同じ話をする)AS "前回結果同じ話をする",
+                                MAX(T.前回結果大声を出す)AS "前回結果大声を出す",
+                                MAX(T.前回結果介護に抵抗)AS "前回結果介護に抵抗",
+                                MAX(T.前回結果落ち着きなし)AS "前回結果落ち着きなし",
+                                MAX(T.前回結果一人で出たがる)AS "前回結果一人で出たがる",
+                                MAX(T.前回結果収集癖)AS "前回結果収集癖",
+                                MAX(T.前回結果物や衣類を壊す)AS "前回結果物や衣類を壊す",
+                                MAX(T.前回結果ひどい物忘れ)AS "前回結果ひどい物忘れ",
+                                MAX(T.前回結果独り言独り笑い)AS "前回結果独り言独り笑い",
+                                MAX(T.前回結果自分勝手に行動する)AS "前回結果自分勝手に行動する",
+                                MAX(T.前回結果話がまとまらない)AS "前回結果話がまとまらない",
+                                MAX(T.前回結果薬の内服)AS "前回結果薬の内服",
+                                MAX(T.前回結果金銭の管理)AS "前回結果金銭の管理",
+                                MAX(T.前回結果日常の意思決定)AS "前回結果日常の意思決定",
+                                MAX(T.前回結果集団への不適応)AS "前回結果集団への不適応",
+                                MAX(T.前回結果買い物)AS "前回結果買い物",
+                                MAX(T.前回結果簡単な調理)AS "前回結果簡単な調理",
+                                MAX(T.前回結果点滴の管理)AS "前回結果点滴の管理",
+                                MAX(T.前回結果中心静脈栄養)AS "前回結果中心静脈栄養",
+                                MAX(T.前回結果透析)AS "前回結果透析",
+                                MAX(T.前回結果ストーマの処置)AS "前回結果ストーマの処置",
+                                MAX(T.前回結果酸素療法)AS "前回結果酸素療法",
+                                MAX(T.前回結果レスピレーター)AS "前回結果レスピレーター",
+                                MAX(T.前回結果気管切開の処置)AS "前回結果気管切開の処置",
+                                MAX(T.前回結果疼痛の看護)AS "前回結果疼痛の看護",
+                                MAX(T.前回結果経管栄養)AS "前回結果経管栄養",
+                                MAX(T.前回結果モニター測定)AS "前回結果モニター測定",
+                                MAX(T.前回結果じょくそうの処置)AS "前回結果じょくそうの処置",
+                                MAX(T.前回結果カテーテル)AS "前回結果カテーテル" 
+                              from
+                                (select 
+                                  zenkaiDbT5211."shinseishoKanriNo",
+                                  zenkaiDbT5211."ninteichosaRirekiNo",
+                                     CASE 
+                                  WHEN 
+                                  zenkaiDbT5211."remban" = 1 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果麻痺左上肢
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 2 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果麻痺右上肢
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 3 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果麻痺左下肢
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 4 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果麻痺右下肢
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 5 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果麻痺その他
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 6 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果拘縮肩関節
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 7 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果拘縮股関節
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 8 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果拘縮膝関節
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 9 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果拘縮その他
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 10 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果寝返り
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 11 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果起き上がり
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 12 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果座位保持
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 13 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果両足での立位
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 14 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果歩行
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 15 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果立ち上がり
+                                , CASE 
+                                  WHEN 
+                                  zenkaiDbT5211."remban" = 16 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果片足での立位
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 17 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果洗身
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 18 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果つめ切り
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 19 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果視力
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 20 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果聴力
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 21 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果移乗
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 22 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果移動
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 23 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果えん下
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 24 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果食事摂取
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 25 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果排尿
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 26 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果排便
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 27 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果口腔清潔
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 28 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果洗顔
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 29 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果整髪
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 30 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果上衣の着脱
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 31 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果ズボン等の着脱
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 32 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果外出頻度
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 33 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果意思の伝達
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 34 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果毎日の日課を理解
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 35 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果生年月日をいう
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 36 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果短期記憶
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 37 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果自分の名前をいう
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 38 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果今の季節を理解
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 39 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果場所の理解
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 40 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果徘徊
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 41 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果外出して戻れない
+                                , CASE 
+                                  WHEN 
+                                  zenkaiDbT5211."remban" = 42 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果被害的
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 43 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果作話
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 44 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果感情が不安定
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 45 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果昼夜逆転
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 46 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果同じ話をする
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 47 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果大声を出す
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 48 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果介護に抵抗
+                                , CASE 
+                                  WHEN 
+                                  zenkaiDbT5211."remban" = 49 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果落ち着きなし
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 50 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果一人で出たがる
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 51 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果収集癖
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 52 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果物や衣類を壊す
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 53 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果ひどい物忘れ
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 54 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果独り言独り笑い
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 55 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果自分勝手に行動する
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 56 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果話がまとまらない
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 57 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果薬の内服
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 58 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果金銭の管理
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 59 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果日常の意思決定
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 60 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果集団への不適応
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 61 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果買い物
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 62 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果簡単な調理
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 63 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果点滴の管理
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 64 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果中心静脈栄養
+                                , CASE 
+                                  WHEN 
+                                  zenkaiDbT5211."remban" = 65 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果透析
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 66 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果ストーマの処置
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 67 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果酸素療法
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 68 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果レスピレーター
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 69 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果気管切開の処置
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 70 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果疼痛の看護
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 71 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果経管栄養
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 72 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果モニター測定
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 73 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果じょくそうの処置
+                                , CASE 
+                                  WHEN 
+                                   zenkaiDbT5211."remban" = 74 
+                                  THEN zenkaiDbT5211."researchItem" 
+                                  END AS 前回結果カテーテル FROM rgdb."DbT5211NinteichosahyoChosaItem" AS zenkaiDbT5211) as T group by T."shinseishoKanriNo",T."ninteichosaRirekiNo") as C
+                                  ON C."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
+                                  AND C."ninteichosaRirekiNo" = ( 
+                                    SELECT
+                                      MAX(DbT5211Nintei."ninteichosaRirekiNo") 
+                                    FROM
+                                      rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211Nintei 
+                                    WHERE
+                                      C."shinseishoKanriNo" = DbT5211Nintei."shinseishoKanriNo"
+                                  )
+                LEFT JOIN (select 
+                                        T."shinseishoKanriNo",
+                                        T."ninteichosaRirekiNo",
+                                        MAX(T.前回予防訪問介護ホームヘルプ)AS "前回予防訪問介護ホームヘルプ",
+                                        MAX(T.前回予防訪問入浴介護)AS "前回予防訪問入浴介護",
+                                        MAX(T.前回予防訪問看護)AS "前回予防訪問看護",
+                                        MAX(T.前回予防訪問リハビリテーション)AS "前回予防訪問リハビリテーション",
+                                        MAX(T.前回予防居宅療養管理指導)AS "前回予防居宅療養管理指導",
+                                        MAX(T.前回予防通所介護デイサービス)AS "前回予防通所介護デイサービス",
+                                        MAX(T.前回予防通所リハビリテーションデイケア)AS "前回予防通所リハビリテーションデイケア",
+                                        MAX(T.前回予防短期入所生活介護ショートステイ)AS "前回予防短期入所生活介護ショートステイ",
+                                        MAX(T.前回予防短期入所療養介護)AS "前回予防短期入所療養介護",
+                                        MAX(T.前回予防特定施設入居者生活介護)AS "前回予防特定施設入居者生活介護",
+                                        MAX(T.前回予防福祉用具貸与)AS "前回予防福祉用具貸与",
+                                        MAX(T.前回予防特定福祉用具販売)AS "前回予防特定福祉用具販売",
+                                        MAX(T.前回予防認知症対応型通所介護)AS "前回予防認知症対応型通所介護",
+                                        MAX(T.前回予防小規模多機能型居宅介護)AS "前回予防小規模多機能型居宅介護",
+                                        MAX(T.前回予防認知症対応型共同生活介護グループホーム)AS "前回予防認知症対応型共同生活介護グループホーム",
+                                        MAX(T.前回介護訪問介護ホームヘルプ)AS "前回介護訪問介護ホームヘルプ",
+                                        MAX(T.前回介護訪問入浴介護)AS "前回介護訪問入浴介護",
+                                        MAX(T.前回介護訪問看護)AS "前回介護訪問看護",
+                                        MAX(T.前回介護訪問リハビリテーション)AS "前回介護訪問リハビリテーション",
+                                        MAX(T.前回介護居宅療養管理指導)AS "前回介護居宅療養管理指導",
+                                        MAX(T.前回介護通所介護デイサービス)AS "前回介護通所介護デイサービス",
+                                        MAX(T.前回介護通所リハビリテーションデイケア)AS "前回介護通所リハビリテーションデイケア",
+                                        MAX(T.前回介護短期入所生活介護ショートステイ)AS "前回介護短期入所生活介護ショートステイ",
+                                        MAX(T.前回介護短期入所療養介護)AS "前回介護短期入所療養介護",
+                                        MAX(T.前回介護特定施設入居者生活介護)AS "前回介護特定施設入居者生活介護",
+                                        MAX(T.前回介護福祉用具貸与)AS "前回介護福祉用具貸与",
+                                        MAX(T.前回介護特定福祉用具販売)AS "前回介護特定福祉用具販売",
+                                        MAX(T.前回介護夜間対応型訪問介護)AS "前回介護夜間対応型訪問介護",
+                                        MAX(T.前回介護認知症対応型通所介護)AS "前回介護認知症対応型通所介護",
+                                        MAX(T.前回介護小規模多機能型居宅介護)AS "前回介護小規模多機能型居宅介護",
+                                        MAX(T.前回介護認知症対応型共同生活介護グループホーム)AS "前回介護認知症対応型共同生活介護グループホーム",
+                                        MAX(T.前回介護地域密着型特定施設入居者生活介護)AS "前回介護地域密着型特定施設入居者生活介護",
+                                        MAX(T.前回介護地域密着型介護老人福祉施設入所者生活介護)AS "前回介護地域密着型介護老人福祉施設入所者生活介護",
+                                        MAX(T.前回介護定期巡回随時対応型訪問介護看護)AS "前回介護定期巡回随時対応型訪問介護看護",
+                                        MAX(T.前回介護複合型サービス)AS "前回介護複合型サービス"
+                                      from
+                                        (select 
+                                          DbT5207."shinseishoKanriNo",
+                                          DbT5207."ninteichosaRirekiNo",
+                                          CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 1 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防訪問介護ホームヘルプ
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 2 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防訪問入浴介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1'
+                                          AND DbT5207."remban" = 3 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防訪問看護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1'
+                                          AND DbT5207."remban" = 4 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防訪問リハビリテーション
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 5 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防居宅療養管理指導
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 6 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防通所介護デイサービス
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 7 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防通所リハビリテーションデイケア
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 8 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防短期入所生活介護ショートステイ
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 9 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防短期入所療養介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 10 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防特定施設入居者生活介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 11 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防福祉用具貸与
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 12 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防特定福祉用具販売
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 14 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防認知症対応型通所介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 15 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防小規模多機能型居宅介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '1' 
+                                          AND DbT5207."remban" = 16 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回予防認知症対応型共同生活介護グループホーム
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2'
+                                          AND DbT5207."remban" = 1 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護訪問介護ホームヘルプ
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2'
+                                          AND DbT5207."remban" = 2 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護訪問入浴介護
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2'
+                                          AND DbT5207."remban" = 3 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護訪問看護
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2'
+                                          AND DbT5207."remban" = 4 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護訪問リハビリテーション
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 5 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護居宅療養管理指導
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 6 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護通所介護デイサービス
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 7 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護通所リハビリテーションデイケア
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 8 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護短期入所生活介護ショートステイ
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 9 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護短期入所療養介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 10 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護特定施設入居者生活介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 11 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護福祉用具貸与
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 12 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護特定福祉用具販売
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 13 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護夜間対応型訪問介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 14 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護認知症対応型通所介護
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 15 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護小規模多機能型居宅介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 16 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護認知症対応型共同生活介護グループホーム
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 17 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護地域密着型特定施設入居者生活介護
+                                        , CASE 
+                                          WHEN  DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 18 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護地域密着型介護老人福祉施設入所者生活介護
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2'   
+                                          AND DbT5207."remban" = 19 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護定期巡回随時対応型訪問介護看護
+                                        , CASE 
+                                          WHEN DbT5202."serviceKubunCode" = '2' 
+                                          AND DbT5207."remban" = 20 
+                                          THEN DbT5207."serviceJokyo" 
+                                          END AS 前回介護複合型サービス
+                                         FROM
+                                          rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207
+                                              INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
+                                              ON  DbT5207."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" ) as T group by T."shinseishoKanriNo",T."ninteichosaRirekiNo") as S
+                                          ON S."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
+                                          AND S."ninteichosaRirekiNo" = ( 
+                                            SELECT
+                                              MAX(DbT5207Nintei."ninteichosaRirekiNo") 
+                                            FROM rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207Nintei
+                                            WHERE
+                                              S."shinseishoKanriNo" = DbT5207Nintei."shinseishoKanriNo"
+                                          ) 
                 LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS zenkaiDbT5208
                 ON zenkaiDbT5208."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
                 AND zenkaiDbT5208."ninteichosaRirekiNo" = (SELECT MAX(zenkaiDbT5208Nintei."ninteichosaRirekiNo")
@@ -610,333 +2173,6 @@
                         DbT5101."koroshoIfShikibetsuCode" ,
                         DbT7051."shoKisaiHokenshaNo",
                         DbT5101."hihokenshaNo",
-                        DbT5101."ninteiShinseiYMD"
+                        DbT5101."ninteiShinseiYMD"       
 </select>
-<select resultOrdered="true" id="get宛名連動介護保険更新" 
-        resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity"
-        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteisumidataif.IchijihanteiSumidataIftMybitisParamter" fetchSize="500">
-        SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
-        FROM
-        rgdb."DbT7211GaibuRenkeiDataoutputJoho"
-        WHERE
-        "DbT7211GaibuRenkeiDataoutputJoho"."shinseishoKanriNo" IN
-                       <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
-    </select>
-<sql id="allColumns_予防給付サービス">
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 1 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問介護ホームヘルプ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 2 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問入浴介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 3 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問看護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 4 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問リハビリテーション,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 5 THEN  DbT5207."serviceJokyo" END AS 予防居宅療養管理指導,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 6 THEN  DbT5207."serviceJokyo" END AS 予防通所介護デイサービス,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 7 THEN  DbT5207."serviceJokyo" END AS 予防通所リハビリテーションデイケア,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 8 THEN  DbT5207."serviceJokyo" END AS 予防短期入所生活介護ショートステイ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 9 THEN  DbT5207."serviceJokyo" END AS 予防短期入所療養介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 10 THEN  DbT5207."serviceJokyo" END AS 予防特定施設入居者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 11 THEN  DbT5207."serviceJokyo" END AS 予防福祉用具貸与,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 12 THEN  DbT5207."serviceJokyo" END AS 予防特定福祉用具販売,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 14 THEN  DbT5207."serviceJokyo" END AS 予防認知症対応型通所介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 15 THEN  DbT5207."serviceJokyo" END AS 予防小規模多機能型居宅介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 16 THEN  DbT5207."serviceJokyo" END AS 予防認知症対応型共同生活介護グループホーム,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" = '1' AND DbT5208."remban" = 1 THEN  DbT5208."serviceJokyoFlag" END AS 住宅改修予防給付
-    </sql>
-    <sql id="allColumns_介護給付サービス">
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 1 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問介護ホームヘルプ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 2 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問入浴介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 3 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問看護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B'  AND DbT5207."remban" = 4 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問リハビリテーション,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 5 THEN  DbT5207."serviceJokyo" END AS 介護居宅療養管理指導,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 6 THEN  DbT5207."serviceJokyo" END AS 介護通所介護デイサービス,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 7 THEN  DbT5207."serviceJokyo" END AS 介護通所リハビリテーションデイケア,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 8 THEN  DbT5207."serviceJokyo" END AS 介護短期入所生活介護ショートステイ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 9 THEN  DbT5207."serviceJokyo" END AS 介護短期入所療養介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 10 THEN  DbT5207."serviceJokyo" END AS 介護特定施設入居者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 11 THEN  DbT5207."serviceJokyo" END AS 介護福祉用具貸与,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 12 THEN  DbT5207."serviceJokyo" END AS 介護特定福祉用具販売,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 13 THEN  DbT5207."serviceJokyo" END AS 介護夜間対応型訪問介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 14 THEN  DbT5207."serviceJokyo" END AS 介護認知症対応型通所介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 15 THEN  DbT5207."serviceJokyo" END AS 介護小規模多機能型居宅介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 16 THEN  DbT5207."serviceJokyo" END AS 介護認知症対応型共同生活介護グループホーム,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 17 THEN  DbT5207."serviceJokyo" END AS 介護地域密着型特定施設入居者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 18 THEN  DbT5207."serviceJokyo" END AS 介護地域密着型介護老人福祉施設入所者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 19 THEN  DbT5207."serviceJokyo" END AS 介護定期巡回随時対応型訪問介護看護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 20 THEN  DbT5207."serviceJokyo" END AS 介護複合型サービス, 
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09B' AND DbT5202."serviceKubunCode" = '2' AND DbT5208."remban" = 1 THEN  DbT5208."serviceJokyoFlag" END AS 住宅改修介護給付
-    </sql>
-    <sql id="allColumns_予防給付サービス09A">
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 1 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問介護ホームヘルプ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 2 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問入浴介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 3 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問看護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 4 AND DbT5202."serviceKubunCode" ='1' THEN  DbT5207."serviceJokyo" END AS 予防訪問リハビリテーション,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 5 THEN  DbT5207."serviceJokyo" END AS 予防居宅療養管理指導,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 6 THEN  DbT5207."serviceJokyo" END AS 予防通所介護デイサービス,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 7 THEN  DbT5207."serviceJokyo" END AS 予防通所リハビリテーションデイケア,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 8 THEN  DbT5207."serviceJokyo" END AS 予防短期入所生活介護ショートステイ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 9 THEN  DbT5207."serviceJokyo" END AS 予防短期入所療養介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 10 THEN  DbT5207."serviceJokyo" END AS 予防特定施設入居者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 11 THEN  DbT5207."serviceJokyo" END AS 予防福祉用具貸与,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 12 THEN  DbT5207."serviceJokyo" END AS 予防特定福祉用具販売,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 14 THEN  DbT5207."serviceJokyo" END AS 予防認知症対応型通所介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 15 THEN  DbT5207."serviceJokyo" END AS 予防小規模多機能型居宅介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='1' AND DbT5207."remban" = 16 THEN  DbT5207."serviceJokyo" END AS 予防認知症対応型共同生活介護グループホーム,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" = '1' AND DbT5208."remban" = 1 THEN  DbT5208."serviceJokyoFlag" END AS 住宅改修予防給付
-    </sql>
-    <sql id="allColumns_介護給付サービス09A">
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 1 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問介護ホームヘルプ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 2 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問入浴介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 3 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問看護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A'  AND DbT5207."remban" = 4 AND DbT5202."serviceKubunCode" ='2' THEN  DbT5207."serviceJokyo" END AS 介護訪問リハビリテーション,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 5 THEN  DbT5207."serviceJokyo" END AS 介護居宅療養管理指導,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 6 THEN  DbT5207."serviceJokyo" END AS 介護通所介護デイサービス,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 7 THEN  DbT5207."serviceJokyo" END AS 介護通所リハビリテーションデイケア,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 8 THEN  DbT5207."serviceJokyo" END AS 介護短期入所生活介護ショートステイ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 9 THEN  DbT5207."serviceJokyo" END AS 介護短期入所療養介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 10 THEN  DbT5207."serviceJokyo" END AS 介護特定施設入居者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 11 THEN  DbT5207."serviceJokyo" END AS 介護福祉用具貸与,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 12 THEN  DbT5207."serviceJokyo" END AS 介護特定福祉用具販売,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 13 THEN  DbT5207."serviceJokyo" END AS 介護夜間対応型訪問介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 14 THEN  DbT5207."serviceJokyo" END AS 介護認知症対応型通所介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 15 THEN  DbT5207."serviceJokyo" END AS 介護小規模多機能型居宅介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 16 THEN  DbT5207."serviceJokyo" END AS 介護認知症対応型共同生活介護グループホーム,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 17 THEN  DbT5207."serviceJokyo" END AS 介護地域密着型特定施設入居者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 18 THEN  DbT5207."serviceJokyo" END AS 介護地域密着型介護老人福祉施設入所者生活介護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 19 THEN  DbT5207."serviceJokyo" END AS 介護定期巡回随時対応型訪問介護看護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" ='2' AND DbT5207."remban" = 20 THEN  DbT5207."serviceJokyo" END AS 介護複合型サービス, 
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" = '09A' AND DbT5202."serviceKubunCode" = '2' AND DbT5208."remban" = 1 THEN  DbT5208."serviceJokyoFlag" END AS 住宅改修介護給付
-    </sql>
-    <sql id="allColumns_認定調査票基本調査調査項目">
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 1 THEN  DbT5211."researchItem" END AS 麻痺左上肢,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 2 THEN  DbT5211."researchItem" END AS 麻痺右上肢,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 3 THEN  DbT5211."researchItem" END AS 麻痺左下肢,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 4 THEN  DbT5211."researchItem" END AS 麻痺右下肢,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 5 THEN  DbT5211."researchItem" END AS 麻痺その他,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 6 THEN  DbT5211."researchItem" END AS 拘縮肩関節,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 7 THEN  DbT5211."researchItem" END AS 拘縮股関節,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 8 THEN  DbT5211."researchItem" END AS 拘縮膝関節,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 9 THEN  DbT5211."researchItem" END AS 拘縮その他,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 10 THEN  DbT5211."researchItem" END AS 寝返り,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 11 THEN  DbT5211."researchItem" END AS 起き上がり,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 12 THEN  DbT5211."researchItem" END AS 座位保持,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 13 THEN  DbT5211."researchItem" END AS 両足での立位,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 14 THEN  DbT5211."researchItem" END AS 歩行,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 15 THEN  DbT5211."researchItem" END AS 立ち上がり,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 16 THEN  DbT5211."researchItem" END AS 片足での立位,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 17 THEN  DbT5211."researchItem" END AS 洗身,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 18 THEN  DbT5211."researchItem" END AS つめ切り,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 19 THEN  DbT5211."researchItem" END AS 視力,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 20 THEN  DbT5211."researchItem" END AS 聴力,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 21 THEN  DbT5211."researchItem" END AS 移乗,    
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 22 THEN  DbT5211."researchItem" END AS 移動,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 23 THEN  DbT5211."researchItem" END AS えん下,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 24 THEN  DbT5211."researchItem" END AS 食事摂取,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 25 THEN  DbT5211."researchItem" END AS 排尿,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 26 THEN  DbT5211."researchItem" END AS 排便,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 27 THEN  DbT5211."researchItem" END AS 口腔清潔,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 28 THEN  DbT5211."researchItem" END AS 洗顔,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 29 THEN  DbT5211."researchItem" END AS 整髪,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 30 THEN  DbT5211."researchItem" END AS 上衣の着脱,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 31 THEN  DbT5211."researchItem" END AS ズボン等の着脱,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 32 THEN  DbT5211."researchItem" END AS 外出頻度,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 33 THEN  DbT5211."researchItem" END AS 意思の伝達,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 34 THEN  DbT5211."researchItem" END AS 毎日の日課を理解,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 35 THEN  DbT5211."researchItem" END AS 生年月日をいう,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 36 THEN  DbT5211."researchItem" END AS 短期記憶,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 37 THEN  DbT5211."researchItem" END AS 自分の名前をいう,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 38 THEN  DbT5211."researchItem" END AS 今の季節を理解,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 39 THEN  DbT5211."researchItem" END AS 場所の理解,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 40 THEN  DbT5211."researchItem" END AS 徘徊,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 41 THEN  DbT5211."researchItem" END AS 外出して戻れない,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 42 THEN  DbT5211."researchItem" END AS 被害的,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 43 THEN  DbT5211."researchItem" END AS 作話,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 44 THEN  DbT5211."researchItem" END AS 感情が不安定,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 45 THEN  DbT5211."researchItem" END AS 昼夜逆転,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 46 THEN  DbT5211."researchItem" END AS 同じ話をする,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 47 THEN  DbT5211."researchItem" END AS 大声を出す,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 48 THEN  DbT5211."researchItem" END AS 介護に抵抗,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 49 THEN  DbT5211."researchItem" END AS 落ち着きなし,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 50 THEN  DbT5211."researchItem" END AS 一人で出たがる,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 51 THEN  DbT5211."researchItem" END AS 収集癖,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 52 THEN  DbT5211."researchItem" END AS 物や衣類を壊す,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 53 THEN  DbT5211."researchItem" END AS ひどい物忘れ,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 54 THEN  DbT5211."researchItem" END AS 独り言独り笑い,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 55 THEN  DbT5211."researchItem" END AS 自分勝手に行動する,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 56 THEN  DbT5211."researchItem" END AS 話がまとまらない,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 57 THEN  DbT5211."researchItem" END AS 薬の内服,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 58 THEN  DbT5211."researchItem" END AS 金銭の管理,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 59 THEN  DbT5211."researchItem" END AS 日常の意思決定,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 60 THEN  DbT5211."researchItem" END AS 集団への不適応,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 61 THEN  DbT5211."researchItem" END AS 買い物,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 62 THEN  DbT5211."researchItem" END AS 簡単な調理,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 63 THEN  DbT5211."researchItem" END AS 点滴の管理,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 64 THEN  DbT5211."researchItem" END AS 中心静脈栄養,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 65 THEN  DbT5211."researchItem" END AS 透析,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 66 THEN  DbT5211."researchItem" END AS ストーマの処置,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 67 THEN  DbT5211."researchItem" END AS 酸素療法,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 68 THEN  DbT5211."researchItem" END AS レスピレーター,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 69 THEN  DbT5211."researchItem" END AS 気管切開の処置,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 70 THEN  DbT5211."researchItem" END AS 疼痛の看護,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 71 THEN  DbT5211."researchItem" END AS 経管栄養,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 72 THEN  DbT5211."researchItem" END AS モニター測定,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 73 THEN  DbT5211."researchItem" END AS じょくそうの処置,
-           CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND DbT5211."remban" = 74 THEN  DbT5211."researchItem" END AS カテーテル    
-    </sql>
-    <sql id="allColumns_前回認定調査票基本調査調査項目">
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 1 THEN  zenkaiDbT5211."researchItem" END AS 前回結果麻痺左上肢,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 2 THEN  zenkaiDbT5211."researchItem" END AS 前回結果麻痺右上肢,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 3 THEN  zenkaiDbT5211."researchItem" END AS 前回結果麻痺左下肢,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 4 THEN  zenkaiDbT5211."researchItem" END AS 前回結果麻痺右下肢,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 5 THEN  zenkaiDbT5211."researchItem" END AS 前回結果麻痺その他,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 6 THEN  zenkaiDbT5211."researchItem" END AS 前回結果拘縮肩関節,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 7 THEN  zenkaiDbT5211."researchItem" END AS 前回結果拘縮股関節,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 8 THEN  zenkaiDbT5211."researchItem" END AS 前回結果拘縮膝関節,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 9 THEN  zenkaiDbT5211."researchItem" END AS 前回結果拘縮その他,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 10 THEN  zenkaiDbT5211."researchItem" END AS 前回結果寝返り,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 11 THEN  zenkaiDbT5211."researchItem" END AS 前回結果起き上がり,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 12 THEN  zenkaiDbT5211."researchItem" END AS 前回結果座位保持,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 13 THEN  zenkaiDbT5211."researchItem" END AS 前回結果両足での立位,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 14 THEN  zenkaiDbT5211."researchItem" END AS 前回結果歩行,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 15 THEN  zenkaiDbT5211."researchItem" END AS 前回結果立ち上がり,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 16 THEN  zenkaiDbT5211."researchItem" END AS 前回結果片足での立位,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 17 THEN  zenkaiDbT5211."researchItem" END AS 前回結果洗身,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 18 THEN  zenkaiDbT5211."researchItem" END AS 前回結果つめ切り,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 19 THEN  zenkaiDbT5211."researchItem" END AS 前回結果視力,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 20 THEN  zenkaiDbT5211."researchItem" END AS 前回結果聴力,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 21 THEN  zenkaiDbT5211."researchItem" END AS 前回結果移乗,    
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 22 THEN  zenkaiDbT5211."researchItem" END AS 前回結果移動,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 23 THEN  zenkaiDbT5211."researchItem" END AS 前回結果えん下,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 24 THEN  zenkaiDbT5211."researchItem" END AS 前回結果食事摂取,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 25 THEN  zenkaiDbT5211."researchItem" END AS 前回結果排尿,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 26 THEN  zenkaiDbT5211."researchItem" END AS 前回結果排便,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 27 THEN  zenkaiDbT5211."researchItem" END AS 前回結果口腔清潔,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 28 THEN  zenkaiDbT5211."researchItem" END AS 前回結果洗顔,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 29 THEN  zenkaiDbT5211."researchItem" END AS 前回結果整髪,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 30 THEN  zenkaiDbT5211."researchItem" END AS 前回結果上衣の着脱,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 31 THEN  zenkaiDbT5211."researchItem" END AS 前回結果ズボン等の着脱,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 32 THEN  zenkaiDbT5211."researchItem" END AS 前回結果外出頻度,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 33 THEN  zenkaiDbT5211."researchItem" END AS 前回結果意思の伝達,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 34 THEN  zenkaiDbT5211."researchItem" END AS 前回結果毎日の日課を理解,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 35 THEN  zenkaiDbT5211."researchItem" END AS 前回結果生年月日をいう,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 36 THEN  zenkaiDbT5211."researchItem" END AS 前回結果短期記憶,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 37 THEN  zenkaiDbT5211."researchItem" END AS 前回結果自分の名前をいう,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 38 THEN  zenkaiDbT5211."researchItem" END AS 前回結果今の季節を理解,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 39 THEN  zenkaiDbT5211."researchItem" END AS 前回結果場所の理解,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 40 THEN  zenkaiDbT5211."researchItem" END AS 前回結果徘徊,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 41 THEN  zenkaiDbT5211."researchItem" END AS 前回結果外出して戻れない,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 42 THEN  zenkaiDbT5211."researchItem" END AS 前回結果被害的,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 43 THEN  zenkaiDbT5211."researchItem" END AS 前回結果作話,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 44 THEN  zenkaiDbT5211."researchItem" END AS 前回結果感情が不安定,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 45 THEN  zenkaiDbT5211."researchItem" END AS 前回結果昼夜逆転,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 46 THEN  zenkaiDbT5211."researchItem" END AS 前回結果同じ話をする,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 47 THEN  zenkaiDbT5211."researchItem" END AS 前回結果大声を出す,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 48 THEN  zenkaiDbT5211."researchItem" END AS 前回結果介護に抵抗,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 49 THEN  zenkaiDbT5211."researchItem" END AS 前回結果落ち着きなし,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 50 THEN  zenkaiDbT5211."researchItem" END AS 前回結果一人で出たがる,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 51 THEN  zenkaiDbT5211."researchItem" END AS 前回結果収集癖,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 52 THEN  zenkaiDbT5211."researchItem" END AS 前回結果物や衣類を壊す,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 53 THEN  zenkaiDbT5211."researchItem" END AS 前回結果ひどい物忘れ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 54 THEN  zenkaiDbT5211."researchItem" END AS 前回結果独り言独り笑い,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 55 THEN  zenkaiDbT5211."researchItem" END AS 前回結果自分勝手に行動する,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 56 THEN  zenkaiDbT5211."researchItem" END AS 前回結果話がまとまらない,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 57 THEN  zenkaiDbT5211."researchItem" END AS 前回結果薬の内服,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 58 THEN  zenkaiDbT5211."researchItem" END AS 前回結果金銭の管理,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 59 THEN  zenkaiDbT5211."researchItem" END AS 前回結果日常の意思決定,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 60 THEN  zenkaiDbT5211."researchItem" END AS 前回結果集団への不適応,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 61 THEN  zenkaiDbT5211."researchItem" END AS 前回結果買い物,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 62 THEN  zenkaiDbT5211."researchItem" END AS 前回結果簡単な調理,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 63 THEN  zenkaiDbT5211."researchItem" END AS 前回結果点滴の管理,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 64 THEN  zenkaiDbT5211."researchItem" END AS 前回結果中心静脈栄養,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 65 THEN  zenkaiDbT5211."researchItem" END AS 前回結果透析,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 66 THEN  zenkaiDbT5211."researchItem" END AS 前回結果ストーマの処置,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 67 THEN  zenkaiDbT5211."researchItem" END AS 前回結果酸素療法,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 68 THEN  zenkaiDbT5211."researchItem" END AS 前回結果レスピレーター,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 69 THEN  zenkaiDbT5211."researchItem" END AS 前回結果気管切開の処置,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 70 THEN  zenkaiDbT5211."researchItem" END AS 前回結果疼痛の看護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 71 THEN  zenkaiDbT5211."researchItem" END AS 前回結果経管栄養,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 72 THEN  zenkaiDbT5211."researchItem" END AS 前回結果モニター測定,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 73 THEN  zenkaiDbT5211."researchItem" END AS 前回結果じょくそうの処置,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" IN('09B','09A') AND zenkaiDbT5211."remban" = 74 THEN  zenkaiDbT5211."researchItem" END AS 前回結果カテーテル    
-    </sql>
-    <sql id="allColumns_前回予防給付サービス">
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 1 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問介護ホームヘルプ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 2 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問入浴介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 3 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問看護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 4 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問リハビリテーション,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 5 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防居宅療養管理指導,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 6 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防通所介護デイサービス,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 7 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防通所リハビリテーションデイケア,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 8 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防短期入所生活介護ショートステイ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 9 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防短期入所療養介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 10 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防特定施設入居者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 11 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防福祉用具貸与,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 12 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防特定福祉用具販売,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 14 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防認知症対応型通所介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 15 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防小規模多機能型居宅介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 16 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防認知症対応型共同生活介護グループホーム,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" = '1' AND zenkaiDbT5208."remban" = 1 THEN  zenkaiDbT5208."serviceJokyoFlag" END AS 前回住宅改修予防給付
-    </sql>
-    <sql id="allColumns_前回介護給付サービス">
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 1 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問介護ホームヘルプ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 2 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問入浴介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 3 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問看護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B'  AND zenkaiDbT5207."remban" = 4 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問リハビリテーション,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 5 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護居宅療養管理指導,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 6 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護通所介護デイサービス,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 7 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護通所リハビリテーションデイケア,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 8 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護短期入所生活介護ショートステイ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 9 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護短期入所療養介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 10 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護特定施設入居者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 11 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護福祉用具貸与,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 12 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護特定福祉用具販売,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 13 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護夜間対応型訪問介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 14 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護認知症対応型通所介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 15 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護小規模多機能型居宅介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 16 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護認知症対応型共同生活介護グループホーム,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 17 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護地域密着型特定施設入居者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 18 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護地域密着型介護老人福祉施設入所者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 19 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護定期巡回随時対応型訪問介護看護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 20 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護複合型サービス, 
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09B' AND zenkaiDbT5202."serviceKubunCode" = '2' AND zenkaiDbT5208."remban" = 1 THEN  zenkaiDbT5208."serviceJokyoFlag" END AS 前回住宅改修介護給付
-    </sql>
-    <sql id="allColumns_前回予防給付サービス09A">
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 1 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問介護ホームヘルプ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 2 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問入浴介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 3 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問看護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 4 AND zenkaiDbT5202."serviceKubunCode" ='1' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防訪問リハビリテーション,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 5 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防居宅療養管理指導,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 6 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防通所介護デイサービス,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 7 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防通所リハビリテーションデイケア,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 8 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防短期入所生活介護ショートステイ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 9 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防短期入所療養介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 10 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防特定施設入居者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 11 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防福祉用具貸与,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 12 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防特定福祉用具販売,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 14 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防認知症対応型通所介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 15 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防小規模多機能型居宅介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='1' AND zenkaiDbT5207."remban" = 16 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回予防認知症対応型共同生活介護グループホーム,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" = '1' AND zenkaiDbT5208."remban" = 1 THEN  zenkaiDbT5208."serviceJokyoFlag" END AS 前回住宅改修予防給付
-    </sql>
-    <sql id="allColumns_前回介護給付サービス09A">
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 1 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問介護ホームヘルプ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 2 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問入浴介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 3 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問看護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A'  AND zenkaiDbT5207."remban" = 4 AND zenkaiDbT5202."serviceKubunCode" ='2' THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護訪問リハビリテーション,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 5 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護居宅療養管理指導,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 6 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護通所介護デイサービス,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 7 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護通所リハビリテーションデイケア,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 8 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護短期入所生活介護ショートステイ,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 9 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護短期入所療養介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 10 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護特定施設入居者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 11 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護福祉用具貸与,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 12 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護特定福祉用具販売,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 13 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護夜間対応型訪問介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 14 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護認知症対応型通所介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 15 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護小規模多機能型居宅介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 16 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護認知症対応型共同生活介護グループホーム,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 17 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護地域密着型特定施設入居者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 18 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護地域密着型介護老人福祉施設入所者生活介護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 19 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護定期巡回随時対応型訪問介護看護,
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" ='2' AND zenkaiDbT5207."remban" = 20 THEN  zenkaiDbT5207."serviceJokyo" END AS 前回介護複合型サービス, 
-           CASE WHEN  zenkaiDbT5101."koroshoIfShikibetsuCode" = '09A' AND zenkaiDbT5202."serviceKubunCode" = '2' AND zenkaiDbT5208."remban" = 1 THEN  zenkaiDbT5208."serviceJokyoFlag" END AS 前回住宅改修介護給付
-    </sql>   
 </mapper>
