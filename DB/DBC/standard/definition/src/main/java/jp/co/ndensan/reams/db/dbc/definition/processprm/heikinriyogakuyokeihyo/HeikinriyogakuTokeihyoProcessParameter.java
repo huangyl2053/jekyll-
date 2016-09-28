@@ -188,11 +188,11 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
         is地区2 = false;
         is地区3 = false;
         if (全て.equals(chikuShitei)) {
-            is町域 = true;
-            is行政区 = true;
-            is地区1 = true;
-            is地区2 = true;
-            is地区3 = true;
+            is町域 = false;
+            is行政区 = false;
+            is地区1 = false;
+            is地区2 = false;
+            is地区3 = false;
         } else if (町域.equals(chikuShitei)) {
             is町域 = true;
         } else if (行政区.equals(chikuShitei)) {
