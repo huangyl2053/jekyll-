@@ -255,6 +255,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
     public void setdgIchijiHanteiZumi(List<IchijiHanteizumiDataShutsuryokuBusiness> list) {
         List<dgIchijiHanteiZumi_Row> dgChosainList = new ArrayList<>();
         IchijiHanteizumiDataShutsuryoku shutsuryoku = new IchijiHanteizumiDataShutsuryoku();
+        boolean ボタン制御フラグ = true;
         for (IchijiHanteizumiDataShutsuryokuBusiness business : list) {
             dgIchijiHanteiZumi_Row row = new dgIchijiHanteiZumi_Row();
             row.setHokenshaMei(nullOrEmpty(business.get市町村名称()));
@@ -282,7 +283,9 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
                     business.get申請書管理番号()));
             AccessLogger.log(AccessLogType.照会, personalData);
             dgChosainList.add(row);
+            ボタン制御フラグ = false;
         }
+        div.getShoriOptions().setDisplayNone(ボタン制御フラグ);
         div.getDgIchijiHanteiZumi().setDataSource(dgChosainList);
     }
 
@@ -351,7 +354,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
 
             shinseishoKanriNo.add(row.getShinseishoKanriNo());
         }
-        boolean 仮一次判定区分 = KariIchijiHanteiKubun.本一次判定.is仮一次判定();
+        RString 仮一次判定区分 = KariIchijiHanteiKubun.本一次判定.get名称();
         return IchijiHanteizumiDataShutsuryokuMybitisParamter.createParam(div.getRadJyoken().getSelectedKey(),
                 申請日From,
                 申請日To,
@@ -360,7 +363,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
                 div.getTextBoxNum().getValue(),
                 総合事業開始区分,
                 shinseishoKanriNo,
-                仮一次判定区分);
+                Boolean.valueOf(仮一次判定区分.toString()));
 
     }
 

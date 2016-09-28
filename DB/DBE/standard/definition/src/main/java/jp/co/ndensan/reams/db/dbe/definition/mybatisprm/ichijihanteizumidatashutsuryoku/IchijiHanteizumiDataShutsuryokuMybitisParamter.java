@@ -88,10 +88,10 @@ public final class IchijiHanteizumiDataShutsuryokuMybitisParamter {
         boolean 一次判定日フラグ = false;
         boolean 申請日フラグ = false;
         boolean usesSaidaiHyojiKensu = false;
-        if (!RString.isNullOrEmpty(日付指定)) {
+        if (new RString("1").equals(日付指定)) {
             一次判定日フラグ = true;
         }
-        if (!RString.isNullOrEmpty(日付指定)) {
+        if (new RString("0").equals(日付指定)) {
             申請日フラグ = true;
         }
         if (saidaiHyojiKensu != null) {

@@ -89,14 +89,15 @@ public class IchijiHanteizumiDataShutsuryokuValidationHandler {
     public ValidationMessageControlPairs validate一覧未選択チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getDgIchijiHanteiZumi().getSelectedItems().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(IchijiHanteizumiDataShutsuryokuValidationHandler.RRVMessages.Validate結果一覧未選択, div.getDgIchijiHanteiZumi()));
+            validPairs.add(new ValidationMessageControlPair(IchijiHanteizumiDataShutsuryokuValidationHandler.RRVMessages.Validate結果一覧未選択,
+                    div.getDgIchijiHanteiZumi()));
         }
         return validPairs;
     }
 
     private static enum RRVMessages implements IValidationMessage {
 
-        Validate最大表示件数の必須入力チェック(UrErrorMessages.必須),
+        Validate最大表示件数の必須入力チェック(UrErrorMessages.必須項目),
         Validate結果一覧未選択(UrErrorMessages.対象行を選択);
         private final Message message;
 

@@ -91,6 +91,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set要介護認定等基準時間間接ケア(entity.get要介護認定等基準時間間接ケア());
         eucEntity.set要介護認定等基準時間BPSD関連(entity.get要介護認定等基準時間BPSD関連());
         eucEntity.set要介護認定等基準時間医療関連(entity.get要介護認定等基準時間医療関連());
+        eucEntity.set要介護認定等基準時間機能訓練(entity.get要介護認定等基準時間機能訓練());
         eucEntity.set要介護認定等基準時間認知症加算(entity.get要介護認定等基準時間認知症加算());
         eucEntity.set中間評価項目得点第１群(entity.get中間評価項目得点第1群());
         eucEntity.set中間評価項目得点第２群(entity.get中間評価項目得点第2群());
@@ -207,6 +208,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set要介護認定等基準時間間接ケア(entity.get要介護認定等基準時間間接ケア());
         eucEntity.set要介護認定等基準時間BPSD関連(entity.get要介護認定等基準時間BPSD関連());
         eucEntity.set要介護認定等基準時間医療関連(entity.get要介護認定等基準時間医療関連());
+        eucEntity.set要介護認定等基準時間機能訓練(entity.get要介護認定等基準時間機能訓練());
         eucEntity.set要介護認定等基準時間認知症加算(entity.get要介護認定等基準時間認知症加算());
         eucEntity.set中間評価項目得点第１群(entity.get中間評価項目得点第1群());
         eucEntity.set中間評価項目得点第２群(entity.get中間評価項目得点第2群());
@@ -318,39 +320,39 @@ public class IchijihanteiSumidataIfBunisess {
     private void set予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
         if (予防給付サービス.equals(entity.getサービス区分コード())) {
-            eucEntity.set訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
-            eucEntity.set訪問入浴介護(entity.get予防訪問入浴介護());
-            eucEntity.set訪問看護(entity.get予防訪問看護());
-            eucEntity.set訪問リハビリテーション(entity.get予防訪問リハビリテーション());
-            eucEntity.set居宅療養管理指導(entity.get予防居宅療養管理指導());
-            eucEntity.set通所介護デイサービス(entity.get予防通所介護デイサービス());
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
+            eucEntity.set介護予防訪問入浴介護(entity.get予防訪問入浴介護());
+            eucEntity.set介護予防訪問看護(entity.get予防訪問看護());
+            eucEntity.set介護予防訪問リハビリテーション(entity.get予防訪問リハビリテーション());
+            eucEntity.set介護予防居宅療養管理指導(entity.get予防居宅療養管理指導());
+            eucEntity.set介護予防通所介護デイサービス(entity.get予防通所介護デイサービス());
             eucEntity.set介護予防通所リハビリテーション(entity.get予防通所リハビリテーションデイケア());
-            eucEntity.set短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
-            eucEntity.set短期入所療養介護(entity.get予防短期入所療養介護());
-            eucEntity.set特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
-            eucEntity.set福祉用具貸与(entity.get予防福祉用具貸与());
-            eucEntity.set特定福祉用具販売(entity.get予防特定福祉用具販売());
-            eucEntity.set住宅改修介護給付(entity.get住宅改修予防給付());
-            eucEntity.set認知症対応型通所介護(entity.get予防認知症対応型通所介護());
-            eucEntity.set小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
-            eucEntity.set認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
+            eucEntity.set介護予防短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
+            eucEntity.set介護予防短期入所療養介護(entity.get予防短期入所療養介護());
+            eucEntity.set介護予防特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
+            eucEntity.set介護予防福祉用具貸与(entity.get予防福祉用具貸与());
+            eucEntity.set特定介護予防福祉用具販売(entity.get予防特定福祉用具販売());
+            eucEntity.set住宅改修予防給付(entity.get住宅改修予防給付());
+            eucEntity.set介護予防認知症対応型通所介護(entity.get予防認知症対応型通所介護());
+            eucEntity.set介護予防小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(項目);
-            eucEntity.set訪問入浴介護(項目);
-            eucEntity.set訪問看護(項目);
-            eucEntity.set訪問リハビリテーション(項目);
-            eucEntity.set居宅療養管理指導(項目);
-            eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(項目);
+            eucEntity.set介護予防訪問入浴介護(項目);
+            eucEntity.set介護予防訪問看護(項目);
+            eucEntity.set介護予防訪問リハビリテーション(項目);
+            eucEntity.set介護予防居宅療養管理指導(項目);
+            eucEntity.set介護予防通所介護デイサービス(項目);
             eucEntity.set介護予防通所リハビリテーション(項目);
-            eucEntity.set短期入所生活介護ショートステイ(項目);
-            eucEntity.set短期入所療養介護(項目);
-            eucEntity.set特定施設入居者生活介護(項目);
-            eucEntity.set福祉用具貸与(項目);
-            eucEntity.set特定福祉用具販売(項目);
-            eucEntity.set住宅改修介護給付(項目);
-            eucEntity.set認知症対応型通所介護(項目);
-            eucEntity.set小規模多機能型居宅介護(項目);
-            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set介護予防短期入所生活介護ショートステイ(項目);
+            eucEntity.set介護予防短期入所療養介護(項目);
+            eucEntity.set介護予防特定施設入居者生活介護(項目);
+            eucEntity.set介護予防福祉用具貸与(項目);
+            eucEntity.set特定介護予防福祉用具販売(項目);
+            eucEntity.set住宅改修予防給付(項目);
+            eucEntity.set介護予防認知症対応型通所介護(項目);
+            eucEntity.set介護予防小規模多機能型居宅介護(項目);
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
@@ -560,37 +562,39 @@ public class IchijihanteiSumidataIfBunisess {
     private void set前回結果予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
         if (予防給付サービス.equals(entity.get前回結果サービス区分コード())) {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
-            eucEntity.set前回結果訪問入浴介護(entity.get前回予防訪問入浴介護());
-            eucEntity.set前回結果訪問看護(entity.get前回予防訪問看護());
-            eucEntity.set前回結果訪問リハビリテーション(entity.get前回予防訪問リハビリテーション());
-            eucEntity.set前回結果居宅療養管理指導(entity.get前回予防居宅療養管理指導());
-            eucEntity.set前回結果通所介護デイサービス(entity.get前回予防通所介護デイサービス());
-            eucEntity.set前回結果短期入所生活介護ショートステイ(entity.get前回予防短期入所生活介護ショートステイ());
-            eucEntity.set前回結果短期入所療養介護(entity.get前回予防短期入所療養介護());
-            eucEntity.set前回結果特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
-            eucEntity.set前回結果福祉用具貸与(entity.get前回予防福祉用具貸与());
-            eucEntity.set前回結果特定福祉用具販売(entity.get前回予防特定福祉用具販売());
-            eucEntity.set前回結果住宅改修介護給付(entity.get前回住宅改修予防給付());
-            eucEntity.set前回結果認知症対応型通所介護(entity.get前回予防認知症対応型通所介護());
-            eucEntity.set前回結果小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回予防認知症対応型共同生活介護グループホーム());
+            eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
+            eucEntity.set前回結果介護予防訪問入浴介護(entity.get前回予防訪問入浴介護());
+            eucEntity.set前回結果介護予防訪問看護(entity.get前回予防訪問看護());
+            eucEntity.set前回結果介護予防訪問リハビリテーション(entity.get前回予防訪問リハビリテーション());
+            eucEntity.set前回結果介護予防居宅療養管理指導(entity.get前回予防居宅療養管理指導());
+            eucEntity.set前回結果介護予防通所介護デイサービス(entity.get前回予防通所介護デイサービス());
+            eucEntity.set前回結果介護予防通所リハビリテーション(entity.get前回予防通所リハビリテーションデイケア());
+            eucEntity.set前回結果介護予防短期入所生活介護ショートステイ(entity.get前回予防短期入所生活介護ショートステイ());
+            eucEntity.set前回結果介護予防短期入所療養介護(entity.get前回予防短期入所療養介護());
+            eucEntity.set前回結果介護予防特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
+            eucEntity.set前回結果介護予防福祉用具貸与(entity.get前回予防福祉用具貸与());
+            eucEntity.set前回結果特定介護予防福祉用具販売(entity.get前回予防特定福祉用具販売());
+            eucEntity.set前回結果住宅改修予防給付(entity.get前回住宅改修予防給付());
+            eucEntity.set前回結果介護予防認知症対応型通所介護(entity.get前回予防認知症対応型通所介護());
+            eucEntity.set前回結果介護予防小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
+            eucEntity.set前回結果介護予防認知症対応型共同生活介護グループホーム(entity.get前回予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
-            eucEntity.set前回結果訪問入浴介護(項目);
-            eucEntity.set前回結果訪問看護(項目);
-            eucEntity.set前回結果訪問リハビリテーション(項目);
-            eucEntity.set前回結果居宅療養管理指導(項目);
-            eucEntity.set前回結果通所介護デイサービス(項目);
-            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
-            eucEntity.set前回結果短期入所療養介護(項目);
-            eucEntity.set前回結果特定施設入居者生活介護(項目);
-            eucEntity.set前回結果福祉用具貸与(項目);
-            eucEntity.set前回結果特定福祉用具販売(項目);
-            eucEntity.set前回結果住宅改修介護給付(項目);
-            eucEntity.set前回結果認知症対応型通所介護(項目);
-            eucEntity.set前回結果小規模多機能型居宅介護(項目);
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果介護予防訪問入浴介護(項目);
+            eucEntity.set前回結果介護予防訪問看護(項目);
+            eucEntity.set前回結果介護予防訪問リハビリテーション(項目);
+            eucEntity.set前回結果介護予防居宅療養管理指導(項目);
+            eucEntity.set前回結果介護予防通所介護デイサービス(項目);
+            eucEntity.set前回結果介護予防通所リハビリテーション(項目);
+            eucEntity.set前回結果介護予防短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果介護予防短期入所療養介護(項目);
+            eucEntity.set前回結果介護予防特定施設入居者生活介護(項目);
+            eucEntity.set前回結果介護予防福祉用具貸与(項目);
+            eucEntity.set前回結果特定介護予防福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修予防給付(項目);
+            eucEntity.set前回結果介護予防認知症対応型通所介護(項目);
+            eucEntity.set前回結果介護予防小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果介護予防認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
@@ -640,37 +644,38 @@ public class IchijihanteiSumidataIfBunisess {
     private void set予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
         if (予防給付サービス.equals(entity.getサービス区分コード())) {
-            eucEntity.set訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
-            eucEntity.set訪問入浴介護(entity.get予防訪問入浴介護());
-            eucEntity.set訪問看護(entity.get予防訪問看護());
-            eucEntity.set訪問リハビリテーション(entity.get予防訪問リハビリテーション());
-            eucEntity.set居宅療養管理指導(entity.get予防居宅療養管理指導());
-            eucEntity.set通所介護デイサービス(entity.get予防通所介護デイサービス());
-            eucEntity.set短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
-            eucEntity.set短期入所療養介護(entity.get予防短期入所療養介護());
-            eucEntity.set特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
-            eucEntity.set福祉用具貸与(entity.get予防福祉用具貸与());
-            eucEntity.set特定福祉用具販売(entity.get予防特定福祉用具販売());
-            eucEntity.set住宅改修介護給付(entity.get住宅改修予防給付());
-            eucEntity.set認知症対応型通所介護(entity.get予防認知症対応型通所介護());
-            eucEntity.set小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
-            eucEntity.set認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
+            eucEntity.set介護予防訪問入浴介護(entity.get予防訪問入浴介護());
+            eucEntity.set介護予防訪問看護(entity.get予防訪問看護());
+            eucEntity.set介護予防訪問リハビリテーション(entity.get予防訪問リハビリテーション());
+            eucEntity.set介護予防居宅療養管理指導(entity.get予防居宅療養管理指導());
+            eucEntity.set介護予防通所介護デイサービス(entity.get予防通所介護デイサービス());
+            eucEntity.set介護予防通所リハビリテーション(entity.get予防通所リハビリテーションデイケア());
+            eucEntity.set介護予防短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
+            eucEntity.set介護予防短期入所療養介護(entity.get予防短期入所療養介護());
+            eucEntity.set介護予防特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
+            eucEntity.set介護予防福祉用具貸与(entity.get予防福祉用具貸与());
+            eucEntity.set特定介護予防福祉用具販売(entity.get予防特定福祉用具販売());
+            eucEntity.set住宅改修予防給付(entity.get住宅改修予防給付());
+            eucEntity.set介護予防認知症対応型通所介護(entity.get予防認知症対応型通所介護());
+            eucEntity.set介護予防小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(項目);
-            eucEntity.set訪問入浴介護(項目);
-            eucEntity.set訪問看護(項目);
-            eucEntity.set訪問リハビリテーション(項目);
-            eucEntity.set居宅療養管理指導(項目);
-            eucEntity.set通所介護デイサービス(項目);
-            eucEntity.set短期入所生活介護ショートステイ(項目);
-            eucEntity.set短期入所療養介護(項目);
-            eucEntity.set特定施設入居者生活介護(項目);
-            eucEntity.set福祉用具貸与(項目);
-            eucEntity.set特定福祉用具販売(項目);
-            eucEntity.set住宅改修介護給付(項目);
-            eucEntity.set認知症対応型通所介護(項目);
-            eucEntity.set小規模多機能型居宅介護(項目);
-            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(項目);
+            eucEntity.set介護予防訪問入浴介護(項目);
+            eucEntity.set介護予防訪問看護(項目);
+            eucEntity.set介護予防居宅療養管理指導(項目);
+            eucEntity.set介護予防通所介護デイサービス(項目);
+            eucEntity.set介護予防通所リハビリテーション(項目);
+            eucEntity.set介護予防短期入所生活介護ショートステイ(項目);
+            eucEntity.set介護予防短期入所療養介護(項目);
+            eucEntity.set介護予防特定施設入居者生活介護(項目);
+            eucEntity.set介護予防福祉用具貸与(項目);
+            eucEntity.set特定介護予防福祉用具販売(項目);
+            eucEntity.set住宅改修予防給付(項目);
+            eucEntity.set介護予防認知症対応型通所介護(項目);
+            eucEntity.set介護予防小規模多機能型居宅介護(項目);
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
