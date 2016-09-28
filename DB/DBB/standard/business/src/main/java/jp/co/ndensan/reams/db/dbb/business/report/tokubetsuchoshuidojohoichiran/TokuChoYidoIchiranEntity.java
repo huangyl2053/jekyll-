@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran;
 
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.chohyo.HyojiCodes;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
