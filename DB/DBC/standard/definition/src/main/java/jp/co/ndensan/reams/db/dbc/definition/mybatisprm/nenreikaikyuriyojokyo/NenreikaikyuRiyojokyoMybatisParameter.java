@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenreikaikyuriyojokyo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.ur.urz.definition.core.chiku.ChikuShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,7 +25,11 @@ import lombok.Getter;
 public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter {
 
     private static final Code CODE = new Code("000000");
-    private static final RString 町域 = new RString("町域");
+    private static final RString 町域 = new RString("1");
+    private static final RString 行政区 = new RString("2");
+    private static final RString 地区1 = new RString("3");
+    private static final RString 地区2 = new RString("4");
+    private static final RString 地区3 = new RString("5");
     private final FlexibleDate serviceTeikyoYM;
     private final FlexibleDate sinsaYM;
     private final FlexibleDate nenreiSansyutuKijyubi;
@@ -162,16 +165,16 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
             if (町域.equals(tmpSentakuTaisyo)) {
                 tyouikiFlag = true;
             }
-            if (ChikuShubetsu.行政区.toString().equals(tmpSentakuTaisyo.toString())) {
+            if (行政区.equals(tmpSentakuTaisyo)) {
                 gyoseikuFlag = true;
             }
-            if (ChikuShubetsu.地区1.toString().equals(tmpSentakuTaisyo.toString())) {
+            if (地区1.equals(tmpSentakuTaisyo)) {
                 chikuCode1Flag = true;
             }
-            if (ChikuShubetsu.地区2.toString().equals(tmpSentakuTaisyo.toString())) {
+            if (地区2.equals(tmpSentakuTaisyo)) {
                 chikuCode2Flag = true;
             }
-            if (ChikuShubetsu.地区3.toString().equals(tmpSentakuTaisyo.toString())) {
+            if (地区3.equals(tmpSentakuTaisyo)) {
                 chikuCode3Flag = true;
             }
         }

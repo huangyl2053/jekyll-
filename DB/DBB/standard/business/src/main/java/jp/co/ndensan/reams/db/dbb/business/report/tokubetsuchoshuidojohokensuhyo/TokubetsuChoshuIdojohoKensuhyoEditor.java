@@ -61,7 +61,7 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
                 : parameter.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString().concat(年度).
                 concat(parameter.get処理対象月()).concat(月開始);
-        source.shichosonCode = parameter.get特徴異動件数Entity().get構成市町村コード().getColumnValue();
+        source.shichosonCode = parameter.get特徴異動件数Entity().get構成市町村コード();
         source.shichosonName = parameter.get特徴異動件数Entity().get市町村名称();
         RDate システム日時 = RDate.getNowDate();
         source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, システム日時, SubGyomuCode.DBU介護統計報告);
@@ -75,31 +75,55 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
             source.tsukairaiTitleRight = RString.EMPTY;
         }
 
-        source.list1_1 = new RString(parameter.get特徴異動件数Entity().get資格件数Left());
-        source.list2_1 = parameter.get特徴異動件数Entity().get特別徴収義務者コードLeft().getColumnValue();
+        source.list1_1 = parameter.get特徴異動件数Entity().get資格件数Left();
+        source.list2_1 = parameter.get特徴異動件数Entity().get特別徴収義務者コードLeft();
         source.list2_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                new Code(parameter.get特徴異動件数Entity().get特別徴収義務者コードLeft().getColumnValue()));
-        source.list2_3 = new RString(parameter.get特徴異動件数Entity().get件数Left());
-        source.list2_4 = new RString(parameter.get特徴異動件数Entity().get仮徴収額変更件数Left());
-        source.list3_1 = new RString(parameter.get特徴異動件数Entity().get住所地特例件数Left());
-        source.list4_1 = new RString(parameter.get特徴異動件数Entity().get追加依頼件数Left());
+                new Code(parameter.get特徴異動件数Entity().get特別徴収義務者コードLeft()));
+        source.list2_3 = parameter.get特徴異動件数Entity().get件数Left();
+        source.list2_4 = parameter.get特徴異動件数Entity().get仮徴収額変更件数Left();
+        source.list3_1 = parameter.get特徴異動件数Entity().get住所地特例件数Left();
+        source.list4_1 = parameter.get特徴異動件数Entity().get追加依頼件数Left();
 
-        source.list1_2 = new RString(parameter.get特徴異動件数Entity().get資格件数Right());
-        source.list2_5 = parameter.get特徴異動件数Entity().get特別徴収義務者コードRight().getColumnValue();
+        if (parameter.get特徴異動件数Entity().get資格件数Right().isNullOrEmpty()) {
+            source.list1_2 = RString.EMPTY;
+        } else {
+            source.list1_2 = parameter.get特徴異動件数Entity().get資格件数Right();
+        }
+        if (parameter.get特徴異動件数Entity().get特別徴収義務者コードRight().isNullOrEmpty()) {
+            source.list2_5 = RString.EMPTY;
+        } else {
+            source.list2_5 = parameter.get特徴異動件数Entity().get特別徴収義務者コードRight();
+        }
+        if (parameter.get特徴異動件数Entity().get件数Right().isNullOrEmpty()) {
+            source.list2_7 = RString.EMPTY;
+        } else {
+            source.list2_7 = parameter.get特徴異動件数Entity().get件数Right();
+        }
         source.list2_6 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                new Code(parameter.get特徴異動件数Entity().get特別徴収義務者コードRight().getColumnValue()));
-        source.list2_7 = new RString(parameter.get特徴異動件数Entity().get件数Right());
-        source.list2_8 = new RString(parameter.get特徴異動件数Entity().get仮徴収額変更件数Right());
-        source.list3_2 = new RString(parameter.get特徴異動件数Entity().get住所地特例件数Right());
-        source.list4_2 = new RString(parameter.get特徴異動件数Entity().get追加依頼件数Right());
+                new Code(parameter.get特徴異動件数Entity().get特別徴収義務者コードRight()));
+        if (parameter.get特徴異動件数Entity().get仮徴収額変更件数Right().isNullOrEmpty()) {
+            source.list2_8 = RString.EMPTY;
+        } else {
+            source.list2_8 = parameter.get特徴異動件数Entity().get仮徴収額変更件数Right();
+        }
+        if (parameter.get特徴異動件数Entity().get住所地特例件数Right().isNullOrEmpty()) {
+            source.list3_2 = RString.EMPTY;
+        } else {
+            source.list3_2 = parameter.get特徴異動件数Entity().get住所地特例件数Right();
+        }
+        if (parameter.get特徴異動件数Entity().get追加依頼件数Right().isNullOrEmpty()) {
+            source.list4_2 = RString.EMPTY;
+        } else {
+            source.list4_2 = parameter.get特徴異動件数Entity().get追加依頼件数Right();
+        }
 
         source.baitaiNo = RString.EMPTY;
         source.shurokuKensu = RString.EMPTY;
-        source.gokeiKensu = parameter.get特徴異動件数Entity().get該当件数の件数の合計();
-        source.gokeiSoshituKensu = parameter.get特徴異動件数Entity().get資格喪失の件数の合計();
-        source.gokeiKariSanShutsuGakuHenkoKensu = parameter.get特徴異動件数Entity().get仮徴収額変更の件数の合計();
-        source.gokeijushochiTokureiKensu = parameter.get特徴異動件数Entity().get住所地特例の件数の合計();
-        source.gokeiTsukairaiKensu = parameter.get特徴異動件数Entity().get特徴追加依頼の件数の合計();
+        source.gokeiKensu = parameter.get該当件数の件数の合計();
+        source.gokeiSoshituKensu = parameter.get資格喪失の件数の合計();
+        source.gokeiKariSanShutsuGakuHenkoKensu = parameter.get仮徴収額変更の件数の合計();
+        source.gokeijushochiTokureiKensu = parameter.get住所地特例の件数の合計();
+        source.gokeiTsukairaiKensu = parameter.get特徴追加依頼の件数の合計();
         return source;
 
     }
