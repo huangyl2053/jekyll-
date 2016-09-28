@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021021;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,10 +16,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DankaibetsuShunoritsuEntity {
+public class DankaibetsuShunoritsuEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private RString 市町村コード;
     private RString 市町村名称;
+
+    /**
+     * コンストラクタです。
+     */
+    public DankaibetsuShunoritsuEntity() {
+    }
 
     /**
      * コンストラクタです。
