@@ -132,7 +132,8 @@ public class JizenShinsakaiShiryoPublicationHandler {
         if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys()
                 .contains(印刷帳票_審査会資料)) {
             div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setReadOnly(false);
-        } else {
+        } else if (!div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys()
+                .contains(印刷帳票_審査会資料)) {
             div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setReadOnly(true);
         }
     }

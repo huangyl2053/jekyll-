@@ -78,8 +78,6 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString 市町村名;
-    private RString サービス種類コード名称;
-    private RString 事業所名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private HanyoListSogoJigyoHiProcessParameter processParameter;
     private HanyoListSogoJigyoHi hanyolistsogojigyohi;
@@ -123,15 +121,11 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
             eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本ありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
         } else if (基本明細情報.equals(processParameter.get抽出方法())) {
             eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本明細ありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
-            サービス種類コード名称 = entity.get明細サービス種類名称();
         } else if (基本集計情報.equals(processParameter.get抽出方法())) {
             eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本集計ありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
-            サービス種類コード名称 = entity.get集計サービス種類名称();
         } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
             eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本マネジありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
-            サービス種類コード名称 = entity.getケアマネジメント費サービス種類名称();
         }
-        事業所名 = entity.get事業者名称();
     }
 
     @Override
@@ -183,7 +177,7 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
                 new RString("HanyoList_SogoJigyoHi.csv"),
                 EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
-                hanyolistsogojigyohi.set出力条件(市町村名, サービス種類コード名称, 事業所名));
+                hanyolistsogojigyohi.set出力条件(市町村名));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
