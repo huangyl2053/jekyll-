@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * IdoRiyoshaFutanwariaiHanteiHandler_異動分利用者負担割合判定のHandlerクラスです。
@@ -41,9 +43,13 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
     private static final RString 処理区分_異動 = new RString("2");
     private static final int INDEX_処理年度 = 0;
     private static final RString 今回終了日時 = new RString("今回終了日時");
+    private static final RString 今回開始日時 = new RString("今回開始日時");
     private static final RString 画面起動時の今回終了日時 = new RString("画面起動時の今回終了日時");
+    private static final RString 年次処理実施日時 = new RString("年次処理実施日時");
     private static final RString 実行する = new RString("btnBatchRegister");
     private static final RString KEY0 = new RString("key0");
+    private static final RString ERRORFLAG_ERROR = new RString("1");
+    private static final RString ERRORFLAG_RIGHT = new RString("0");
     private static final ShoriDateKanriManager MANAGER
             = InstanceProvider.create(ShoriDateKanriManager.class);
 
@@ -73,7 +79,6 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
      * @return RDateTime
      */
     public RDateTime onLoad() {
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
         List<KeyValueDataSource> list = new ArrayList<>();
         FlexibleDate 現在時刻 = new FlexibleDate(RDate.getNowDate().toDateString());
         FlexibleYear 現在年度 = 現在時刻.getNendo();
@@ -90,7 +95,8 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
             年次判定年度 = shoriDateKanri.get年度();
         }
         if (年次判定年度 == null || 年次判定年度.isEmpty()) {
-            throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
+            div.setErrorFlag(DataPassingConverter.serialize(ERRORFLAG_ERROR));
+            return null;
         }
         if (処理年度.isBefore(年次判定年度)) {
             KeyValueDataSource keyValueData1 = new KeyValueDataSource(
@@ -104,12 +110,15 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
                     処理年度.toDateString(), 処理年度.wareki().toDateString());
             list.add(keyValueData);
         } else {
-            throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
+            div.setErrorFlag(DataPassingConverter.serialize(ERRORFLAG_ERROR));
+            return null;
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, false);
         div.getDdlNendo().setDataSource(list);
         div.getDdlNendo().setSelectedIndex(INDEX_処理年度);
         onChange();
+        if (null == div.getTxtKonkaiShuryoDate().getValue()) {
+            return null;
+        }
         return RDateTime.convertFrom(div.getTxtKonkaiShuryoDate().getValue(), div.getTxtKonkaiShuryoTime().getValue());
     }
 
@@ -117,13 +126,15 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
      * 年度の変更処理です。
      */
     public void onChange() {
+        div.setErrorFlag(DataPassingConverter.serialize(ERRORFLAG_RIGHT));
         ShoriDateKanri 年次処理実施日時ShoriDateKanri = MANAGER
                 .get年次の実施日時(new FlexibleYear(div.getDdlNendo().getSelectedKey()));
         if (年次処理実施日時ShoriDateKanri == null
                 || 年次処理実施日時ShoriDateKanri.get基準日時() == null
                 || 年次処理実施日時ShoriDateKanri.get基準日時().isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
-            throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
+            div.setErrorFlag(DataPassingConverter.serialize(ERRORFLAG_ERROR));
+            return;
         }
         RDateTime 年次処理実施日時 = 年次処理実施日時ShoriDateKanri.get基準日時().getRDateTime();
         div.getTxtNenjiShoriDate().setValue(年次処理実施日時.getDate());
@@ -131,12 +142,18 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
         ShoriDateKanri 異動分処理実施日時ShoriDateKanri = MANAGER
                 .get異動の実施日時(new FlexibleYear(div.getDdlNendo().getSelectedKey()));
         if (異動分処理実施日時ShoriDateKanri != null) {
-            RDateTime 対象開始日時 = 異動分処理実施日時ShoriDateKanri.get対象開始日時().getRDateTime();
-            RDateTime 対象終了日時 = 異動分処理実施日時ShoriDateKanri.get対象終了日時().getRDateTime();
-            div.getTxtZenkaiKaishiDate().setValue(対象開始日時.getDate());
-            div.getTxtZenkaiKaishiTime().setValue(対象開始日時.getTime());
-            div.getTxtZenkaiShuryoDate().setValue(対象終了日時.getDate());
-            div.getTxtZenkaiShuryoTime().setValue(対象終了日時.getTime());
+            YMDHMS 異動分対象開始日時 = 異動分処理実施日時ShoriDateKanri.get対象開始日時();
+            if (null != 異動分対象開始日時) {
+                RDateTime 対象開始日時 = 異動分対象開始日時.getRDateTime();
+                div.getTxtZenkaiKaishiDate().setValue(対象開始日時.getDate());
+                div.getTxtZenkaiKaishiTime().setValue(対象開始日時.getTime());
+            }
+            YMDHMS 異動分対象終了日時 = 異動分処理実施日時ShoriDateKanri.get対象終了日時();
+            if (null != 異動分対象終了日時) {
+                RDateTime 対象終了日時 = 異動分対象終了日時.getRDateTime();
+                div.getTxtZenkaiShuryoDate().setValue(対象終了日時.getDate());
+                div.getTxtZenkaiShuryoTime().setValue(対象終了日時.getTime());
+            }
         }
         if (異動分処理実施日時ShoriDateKanri == null) {
             div.getTxtZenkaiKaishiDate().setValue(null);
@@ -176,8 +193,8 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
             throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
         }
         if (今回開始時間.isBefore(RDateTime.convertFrom(年次処理実施年月日, 年次処理実施時刻))) {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
-                    .replace(今回終了日時.toString(), 画面起動時の今回終了日時.toString()));
+            throw new ApplicationException(DbzErrorMessages.期間が不正_過去日付不可.getMessage()
+                    .replace(今回開始日時.toString(), 年次処理実施日時.toString()));
         }
         if (画面起動時_今回終了時間.isBefore(今回終了時間)) {
             throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
