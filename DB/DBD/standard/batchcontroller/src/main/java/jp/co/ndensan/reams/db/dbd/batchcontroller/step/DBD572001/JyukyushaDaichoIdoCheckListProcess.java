@@ -141,11 +141,11 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     private RString get出力順(IOutputOrder order) {
         if (null == order) {
+            new JournalWriter().writeErrorJournal(RDateTime.now(), new RString(UrErrorMessages.実行不可.getMessage()
+                    .replace(帳票出力順の取得.toString()).toString()));
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(帳票出力順の取得.toString()).toString());
         } else {
-            new JournalWriter().writeErrorJournal(RDateTime.now(), new RString(UrErrorMessages.実行不可.getMessage()
-                    .replace(帳票出力順の取得.toString()).toString()));
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                     create(DBD200037_JukyushaIdoCheckListEnum.class, order), NUM5);
         }
