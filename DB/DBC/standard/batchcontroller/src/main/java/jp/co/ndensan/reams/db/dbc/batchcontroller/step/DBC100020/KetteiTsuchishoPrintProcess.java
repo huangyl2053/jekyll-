@@ -50,7 +50,9 @@ public class KetteiTsuchishoPrintProcess extends BatchProcessBase<KaishuriyushoS
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kaishuriyushoshikyuketteitsuchishosakusei.IKaishuriyushoShikyuKetteitsuchishoSakuseiMapper.get住宅改修理由書作成手数料請求");
-    private static final RString 被保険番号 = new RString("0003");
+    private static final RString 被保険番号コード = new RString("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
+
     private KaishuriyushoShikyuKetteitsuchishoProcessParameter processParameter;
     @BatchWriter
     BatchReportWriter<JutakuKaishuRiyushoSakuseiReportSource> batchReportWriter;
@@ -96,7 +98,7 @@ public class KetteiTsuchishoPrintProcess extends BatchProcessBase<KaishuriyushoS
     }
 
     private PersonalData toPersonalData(KaishuriyushoShikyuKetteitsuchishoEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(被保険番号), new RString("被保険者番号"),
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(被保険番号コード), 被保険者番号,
                 entity.getHihokenshaNo().value());
         return PersonalData.of(entity.getShikibetsuCode(), expandedInfo);
     }

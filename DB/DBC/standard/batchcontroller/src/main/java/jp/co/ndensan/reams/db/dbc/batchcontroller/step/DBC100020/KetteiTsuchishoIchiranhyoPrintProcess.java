@@ -51,7 +51,8 @@ public class KetteiTsuchishoIchiranhyoPrintProcess extends BatchKeyBreakBase<Kai
             + "kaishuriyushoshikyuketteitsuchishosakusei.IKaishuriyushoShikyuKetteitsuchishoSakuseiMapper.get住宅改修理由書作成手数料請求");
     private final List<RString> pageBreakKeys = Collections.unmodifiableList(Arrays.asList(
             new RString(JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource.ReportSourceFields.jigyoshaMeisho.name())));
-    private static final RString 被保険番号 = new RString("0003");
+    private static final RString 被保険番号コード = new RString("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     private KaishuriyushoShikyuKetteitsuchishoProcessParameter processParameter;
     @BatchWriter
@@ -92,6 +93,7 @@ public class KetteiTsuchishoIchiranhyoPrintProcess extends BatchKeyBreakBase<Kai
 
         isExists = true;
         count = count.add(Decimal.ONE);
+        // TODO 1782確認中
         住宅改修理由書作成手数料請求明細tableWriter.insert(business.create住宅改修理由書作成手数料請求明細(entity));
         証記載保険者番号 = entity.getShoKisaiHokenshaNo();
         JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranData data = business.createcreate住宅改修理由書作成手数料請求書兼申請書(entity);
@@ -134,7 +136,7 @@ public class KetteiTsuchishoIchiranhyoPrintProcess extends BatchKeyBreakBase<Kai
     }
 
     private PersonalData toPersonalData(KaishuriyushoShikyuKetteitsuchishoEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(被保険番号), new RString("被保険者番号"),
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(被保険番号コード), 被保険者番号,
                 entity.getHihokenshaNo().value());
         return PersonalData.of(entity.getShikibetsuCode(), expandedInfo);
     }
