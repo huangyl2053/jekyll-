@@ -40,8 +40,7 @@ public class KaigokyufuhiKagoMoshitateshoOutPageBreak extends PageBreaker<KyufuK
     public boolean isBreak(ReportLineRecord<KyufuKagoMoshitateshojohoSofuIchiranSource> currentSource,
             ReportLineRecord<KyufuKagoMoshitateshojohoSofuIchiranSource> nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.証記載保険者番号.get項目ID())
-                && !currentSource.getSource().shokisaiHokenshaNo.equals(nextSource.getSource().shokisaiHokenshaNo)) {
+        if (!currentSource.getSource().shokisaiHokenshaNo.equals(nextSource.getSource().shokisaiHokenshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_11.equals(nextSource.getSource().listUpper_11)) {

@@ -41,8 +41,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuPageBreak extends PageBreaker<So
     public boolean isBreak(ReportLineRecord<SogojigyohiKagoMoshitateshojohoSofuSource> currentSource,
             ReportLineRecord<SogojigyohiKagoMoshitateshojohoSofuSource> nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.証記載保険者番号.get項目ID())
-                && !currentSource.getSource().shokisaiHokenshaNo.equals(nextSource.getSource().shokisaiHokenshaNo)) {
+        if (!currentSource.getSource().shokisaiHokenshaNo.equals(nextSource.getSource().shokisaiHokenshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_11.equals(nextSource.getSource().listUpper_11)) {
