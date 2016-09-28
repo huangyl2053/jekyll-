@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC100020;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -43,5 +45,21 @@ public class DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter extends Batch
      * コンストラクタです。
      */
     public DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter() {
+    }
+
+    /**
+     * 決定通知書発行のProcessパラメータを作成します。
+     *
+     * @return 決定通知書発行のProcessパラメータ
+     */
+    public KaishuriyushoShikyuKetteitsuchishoProcessParameter toKaishuriyushoShikyuKetteitsuchishoProcessParameter() {
+        KaishuriyushoShikyuKetteitsuchishoProcessParameter parameter = new KaishuriyushoShikyuKetteitsuchishoProcessParameter();
+        parameter.set決定開始日(決定日_開始日);
+        parameter.set決定終了日(決定日_終了日);
+        parameter.set事業者コード(new JigyoshaNo(事業者コード));
+        parameter.set作成日(作成日);
+        parameter.set指定事業者のみフラグ(指定事業者のみフラグ);
+        parameter.set文書番号(文書情報);
+        return parameter;
     }
 }

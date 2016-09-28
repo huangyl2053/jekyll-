@@ -29,7 +29,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
     private final RString 給付実績区分;
     private final boolean 給付実績区分flag;
     private final RString すべて選択;
-    private final boolean すべて選択flag;
     private final RString 要介護1;
     private final boolean 要介護1flag;
     private final RString 要介護2;
@@ -147,7 +146,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 給付実績区分 給付実績区分
      * @param 給付実績区分flag 給付実績区分flag
      * @param すべて選択 すべて選択
-     * @param すべて選択flag すべて選択flag
      * @param 要介護1 要介護1
      * @param 要介護1flag 要介護1flag
      * @param 要介護2 要介護2
@@ -262,7 +260,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 給付実績区分,
             boolean 給付実績区分flag,
             RString すべて選択,
-            boolean すべて選択flag,
             RString 要介護1,
             boolean 要介護1flag,
             RString 要介護2,
@@ -376,7 +373,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
         this.給付実績区分 = 給付実績区分;
         this.給付実績区分flag = 給付実績区分flag;
         this.すべて選択 = すべて選択;
-        this.すべて選択flag = すべて選択flag;
         this.要介護1 = 要介護1;
         this.要介護1flag = 要介護1flag;
         this.要介護2 = 要介護2;
@@ -608,12 +604,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 給付率,
             RString psmShikibetsuTaisho
     ) {
-        boolean 要介護2flag = false;
-        if (new RString("1").equals(要介護2)) {
-            要介護2flag = true;
-        } else if (new RString("1").equals(要介護1)) {
-            要介護2flag = false;
-        }
         boolean flag = false;
         if (new RString("1").equals(訪問通所他) && new RString("1").equals(短期入所生活介護)) {
             flag = true;
@@ -648,11 +638,10 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
                 給付実績区分,
                 new RString("1").equals(給付実績区分),
                 すべて選択,
-                new RString("1").equals(すべて選択),
                 要介護1,
                 new RString("1").equals(要介護1),
                 要介護2,
-                要介護2flag,
+                new RString("1").equals(要介護2),
                 要介護3,
                 new RString("1").equals(要介護3),
                 要介護4,
@@ -736,20 +725,20 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
                 老人保健受給者番号有_開始,
                 老人保健受給者番号有_終了,
                 公費負担者番号,
-                RString.EMPTY.equals(公費負担者番号),
+                RString.isNullOrEmpty(公費負担者番号),
                 公費受給者番号,
-                RString.EMPTY.equals(公費受給者番号),
+                RString.isNullOrEmpty(公費受給者番号),
                 事業者番号_開始,
                 事業者番号_終了,
                 !new RString("0000000000").equals(事業者番号_開始) && !new RString("9999999999").equals(事業者番号_終了),
                 計画作成事業者番号,
-                RString.EMPTY.equals(計画作成事業者番号),
+                RString.isNullOrEmpty(計画作成事業者番号),
                 給付率区分,
                 new RString("1").equals(給付率区分),
                 new RString("2").equals(給付率区分),
                 new RString("3").equals(給付率区分),
                 給付率,
-                RString.EMPTY.equals(給付率),
+                RString.isNullOrEmpty(給付率),
                 psmShikibetsuTaisho
         );
     }

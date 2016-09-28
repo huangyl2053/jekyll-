@@ -30,6 +30,10 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class IchijihanteiSumidataIfBunisess {
 
+    private final RString 項目 = new RString("0");
+    private final RString 予防給付サービス = new RString("1");
+    private final RString 介護給付サービス = new RString("2");
+
     /**
      * ファイル一次判定済データ09B。
      *
@@ -41,14 +45,14 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set識別コード(entity.get厚労省IF識別コード());
         eucEntity.set保険者番号(entity.get保険者番号());
         eucEntity.set被保険者番号(entity.get被保険者番号());
-        eucEntity.set認定申請日(new FlexibleDate(entity.get認定申請年月日()).wareki().toDateString());
-        eucEntity.set枝番(new RString("0"));
+        eucEntity.set認定申請日(nullchck(entity.get認定申請年月日()));
+        eucEntity.set枝番(項目);
         eucEntity.set申請区分法令コード(entity.get申請区分法令コード());
         eucEntity.set申請区分申請時コード(entity.get申請区分申請時コード());
         eucEntity.set取下区分コード(entity.get取下区分コード());
         eucEntity.set被保険者区分コード(entity.get被保険者区分コード());
         eucEntity.set申請代行区分コード(entity.get申請代行区分コート());
-        eucEntity.set生年月日(new FlexibleDate(entity.get生年月日()).wareki().toDateString());
+        eucEntity.set生年月日(nullchck(entity.get生年月日()));
         eucEntity.set年齢(entity.get年齢());
         eucEntity.set性別コード(entity.get性別コード());
         eucEntity.set被保険者ｶﾅ氏名(entity.get被保険者氏名カナ());
@@ -59,24 +63,24 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set病院施設等の名称(entity.get施設名());
         eucEntity.set病院施設等の所在地(entity.get施設住所());
         eucEntity.set前回の認定審査会結果(entity.get前回要介護状態区分コード());
-        eucEntity.set前回の認定有効期間開始(new FlexibleDate(entity.get前回認定有効期間開始()).wareki().toDateString());
-        eucEntity.set前回の認定有効期間終了(new FlexibleDate(entity.get前回認定有効期間終了()).wareki().toDateString());
+        eucEntity.set前回の認定有効期間開始(nullchck(entity.get前回認定有効期間開始()));
+        eucEntity.set前回の認定有効期間終了(nullchck(entity.get前回認定有効期間終了()));
         eucEntity.set主治医医療機関番号(entity.get主治医医療機関コード());
         eucEntity.set主治医番号(entity.get主治医コード());
-        eucEntity.set意見書依頼日(new FlexibleDate(entity.get主治医意見書作成依頼年月日()).wareki().toDateString());
-        eucEntity.set意見書入手日(new FlexibleDate(entity.get主治医意見書受領年月日()).wareki().toDateString());
+        eucEntity.set意見書依頼日(nullchck(entity.get主治医意見書作成依頼年月日()));
+        eucEntity.set意見書入手日(nullchck(entity.get主治医意見書受領年月日()));
         eucEntity.set意見書短期記憶(entity.get短期記憶15());
         eucEntity.set意見書認知能力(entity.get日常の意思決定を行うための認知能力());
         eucEntity.set意見書伝達能力(entity.get自分の意思の伝達能力());
         eucEntity.set意見書食事行為(entity.get食事行為());
         eucEntity.set意見書認知症高齢者の日常生活自立度(entity.get意見書認知症高齢者自立度());
-        eucEntity.set調査依頼日(new FlexibleDate(entity.get調査依頼日()).wareki().toDateString());
-        eucEntity.set調査実施日(new FlexibleDate(entity.get実施年月日()).wareki().toDateString());
+        eucEntity.set調査依頼日(nullchck(entity.get調査依頼日()));
+        eucEntity.set調査実施日(nullchck(entity.get実施年月日()));
         eucEntity.set指定居宅介護支援事業者等番号(entity.get事業者番号());
         eucEntity.set委託区分(entity.get委託区分());
         eucEntity.set認定調査員番号(entity.get認定調査員コード());
         eucEntity.set認定調査員資格コード(entity.get調査員資格());
-        eucEntity.set一次判定日(new FlexibleDate(entity.get一次判定日()).wareki().toDateString());
+        eucEntity.set一次判定日(nullchck(entity.get一次判定日()));
         eucEntity.set一次判定結果(entity.get一次判定結果());
         eucEntity.set一次判定結果認知症加算(entity.get一次判定結果認知症加算());
         eucEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
@@ -135,8 +139,8 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set前回結果状態の安定性(entity.get前回結果状態の安定性());
         eucEntity.set前回結果認知症自立度Ⅱ以上の蓋然性(entity.get前回結果認知症自立度Ⅱ以上の蓋然性());
         eucEntity.set前回結果認知機能及び状態安定性から推定される給付区分(entity.get給付区分());
-        eucEntity.set前回結果申請日(new FlexibleDate(entity.get前回結果申請日()).wareki().toDateString());
-        eucEntity.set前回結果二次判定日(new FlexibleDate(entity.get前回結果二次判定日()).wareki().toDateString());
+        eucEntity.set前回結果申請日(nullchck(entity.get前回結果申請日()));
+        eucEntity.set前回結果二次判定日(nullchck(entity.get前回結果二次判定日()));
         eucEntity.set前回結果現在のサービス区分コード(entity.get前回結果サービス区分コード());
         eucEntity.set前回結果現在の状況(entity.get前回結果施設利用());
         set前回結果介護給付サービス(entity, eucEntity);
@@ -158,13 +162,13 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set識別コード(entity.get厚労省IF識別コード());
         eucEntity.set保険者番号(entity.get保険者番号());
         eucEntity.set被保険者番号(entity.get被保険者番号());
-        eucEntity.set認定申請日(new FlexibleDate(entity.get認定申請年月日()).wareki().toDateString());
-        eucEntity.set枝番(new RString("0"));
+        eucEntity.set認定申請日(nullchck(entity.get認定申請年月日()));
+        eucEntity.set枝番(項目);
         eucEntity.set申請種別コード(entity.get申請区分申請時コード());
         eucEntity.set取下区分コード(entity.get取下区分コード());
         eucEntity.set被保険者区分コード(entity.get被保険者区分コード());
         eucEntity.set申請代行区分コード(entity.get申請代行区分コート());
-        eucEntity.set生年月日(new FlexibleDate(entity.get生年月日()).wareki().toDateString());
+        eucEntity.set生年月日(nullchck(entity.get生年月日()));
         eucEntity.set年齢(entity.get年齢());
         eucEntity.set性別コード(entity.get性別コード());
         eucEntity.set被保険者ｶﾅ氏名(entity.get被保険者氏名カナ());
@@ -175,24 +179,24 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set病院施設等の名称(entity.get施設名());
         eucEntity.set病院施設等の所在地(entity.get施設住所());
         eucEntity.set前回の認定審査会結果(entity.get前回要介護状態区分コード());
-        eucEntity.set前回の認定有効期間開始(new FlexibleDate(entity.get前回認定有効期間開始()).wareki().toDateString());
-        eucEntity.set前回の認定有効期間終了(new FlexibleDate(entity.get前回認定有効期間終了()).wareki().toDateString());
+        eucEntity.set前回の認定有効期間開始(nullchck(entity.get前回認定有効期間開始()));
+        eucEntity.set前回の認定有効期間終了(nullchck(entity.get前回認定有効期間終了()));
         eucEntity.set主治医医療機関番号(entity.get主治医医療機関コード());
         eucEntity.set主治医番号(entity.get主治医コード());
-        eucEntity.set意見書依頼日(new FlexibleDate(entity.get主治医意見書作成依頼年月日()).wareki().toDateString());
-        eucEntity.set意見書入手日(new FlexibleDate(entity.get主治医意見書受領年月日()).wareki().toDateString());
+        eucEntity.set意見書依頼日(nullchck(entity.get主治医意見書作成依頼年月日()));
+        eucEntity.set意見書入手日(nullchck(entity.get主治医意見書受領年月日()));
         eucEntity.set意見書短期記憶(entity.get短期記憶15());
         eucEntity.set意見書認知能力(entity.get日常の意思決定を行うための認知能力());
         eucEntity.set意見書伝達能力(entity.get自分の意思の伝達能力());
         eucEntity.set意見書食事行為(entity.get食事行為());
         eucEntity.set意見書認知症高齢者の日常生活自立度(entity.get意見書認知症高齢者自立度());
-        eucEntity.set調査依頼日(new FlexibleDate(entity.get調査依頼日()).wareki().toDateString());
-        eucEntity.set調査実施日(new FlexibleDate(entity.get実施年月日()).wareki().toDateString());
+        eucEntity.set調査依頼日(nullchck(entity.get調査依頼日()));
+        eucEntity.set調査実施日(nullchck(entity.get実施年月日()));
         eucEntity.set指定居宅介護支援事業者等番号(entity.get事業者番号());
         eucEntity.set委託区分(entity.get委託区分());
         eucEntity.set認定調査員番号(entity.get認定調査員コード());
         eucEntity.set認定調査員資格コード(entity.get調査員資格());
-        eucEntity.set一次判定日(new FlexibleDate(entity.get一次判定日()).wareki().toDateString());
+        eucEntity.set一次判定日(nullchck(entity.get一次判定日()));
         eucEntity.set一次判定結果(entity.get一次判定結果());
         eucEntity.set一次判定結果認知症加算(entity.get一次判定結果認知症加算());
         eucEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
@@ -251,8 +255,8 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set前回結果状態の安定性(entity.get前回結果状態の安定性());
         eucEntity.set前回結果認知症自立度Ⅱ以上の蓋然性(entity.get前回結果認知症自立度Ⅱ以上の蓋然性());
         eucEntity.set前回結果認知機能及び状態安定性から推定される給付区分(entity.get給付区分());
-        eucEntity.set前回結果申請日(new FlexibleDate(entity.get前回結果申請日()).wareki().toDateString());
-        eucEntity.set前回結果二次判定日(new FlexibleDate(entity.get前回結果二次判定日()).wareki().toDateString());
+        eucEntity.set前回結果申請日(nullchck(entity.get前回結果申請日()));
+        eucEntity.set前回結果二次判定日(nullchck(entity.get前回結果二次判定日()));
         eucEntity.set前回結果現在のサービス区分コード(entity.get前回結果サービス区分コード());
         eucEntity.set前回結果現在の状況(entity.get前回結果施設利用());
         set前回結果介護給付サービス(entity, eucEntity);
@@ -265,7 +269,7 @@ public class IchijihanteiSumidataIfBunisess {
 
     private void set介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
-        if (new RString("2").equals(entity.getサービス区分コード())) {
+        if (介護給付サービス.equals(entity.getサービス区分コード())) {
             eucEntity.set訪問介護ホームヘルプサービス(entity.get介護訪問介護ホームヘルプ());
             eucEntity.set訪問入浴介護(entity.get介護訪問入浴介護());
             eucEntity.set訪問看護(entity.get介護訪問看護());
@@ -288,32 +292,32 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set定期巡回随時対応型訪問介護看護(entity.get介護定期巡回随時対応型訪問介護看護());
             eucEntity.set複合型サービス(entity.get介護複合型サービス());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set訪問入浴介護(new RString("0"));
-            eucEntity.set訪問看護(new RString("0"));
-            eucEntity.set訪問リハビリテーション(new RString("0"));
-            eucEntity.set居宅療養管理指導(new RString("0"));
-            eucEntity.set通所介護デイサービス(new RString("0"));
-            eucEntity.set短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set短期入所療養介護(new RString("0"));
-            eucEntity.set特定施設入居者生活介護(new RString("0"));
-            eucEntity.set福祉用具貸与(new RString("0"));
-            eucEntity.set特定福祉用具販売(new RString("0"));
-            eucEntity.set住宅改修介護給付(new RString("0"));
-            eucEntity.set夜間対応型訪問介護(new RString("0"));
-            eucEntity.set認知症対応型通所介護(new RString("0"));
-            eucEntity.set小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set認知症対応型共同生活介護グループホーム(new RString("0"));
-            eucEntity.set地域密着型特定施設入居者生活介護(new RString("0"));
-            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(new RString("0"));
-            eucEntity.set定期巡回随時対応型訪問介護看護(new RString("0"));
-            eucEntity.set複合型サービス(new RString("0"));
+            eucEntity.set訪問介護ホームヘルプサービス(項目);
+            eucEntity.set訪問入浴介護(項目);
+            eucEntity.set訪問看護(項目);
+            eucEntity.set訪問リハビリテーション(項目);
+            eucEntity.set居宅療養管理指導(項目);
+            eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set短期入所生活介護ショートステイ(項目);
+            eucEntity.set短期入所療養介護(項目);
+            eucEntity.set特定施設入居者生活介護(項目);
+            eucEntity.set福祉用具貸与(項目);
+            eucEntity.set特定福祉用具販売(項目);
+            eucEntity.set住宅改修介護給付(項目);
+            eucEntity.set夜間対応型訪問介護(項目);
+            eucEntity.set認知症対応型通所介護(項目);
+            eucEntity.set小規模多機能型居宅介護(項目);
+            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set地域密着型特定施設入居者生活介護(項目);
+            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(項目);
+            eucEntity.set定期巡回随時対応型訪問介護看護(項目);
+            eucEntity.set複合型サービス(項目);
         }
     }
 
     private void set予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
-        if (new RString("1").equals(entity.getサービス区分コード())) {
+        if (予防給付サービス.equals(entity.getサービス区分コード())) {
             eucEntity.set訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
             eucEntity.set訪問入浴介護(entity.get予防訪問入浴介護());
             eucEntity.set訪問看護(entity.get予防訪問看護());
@@ -331,22 +335,22 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
             eucEntity.set認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set訪問入浴介護(new RString("0"));
-            eucEntity.set訪問看護(new RString("0"));
-            eucEntity.set訪問リハビリテーション(new RString("0"));
-            eucEntity.set居宅療養管理指導(new RString("0"));
-            eucEntity.set通所介護デイサービス(new RString("0"));
-            eucEntity.set介護予防通所リハビリテーション(new RString("0"));
-            eucEntity.set短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set短期入所療養介護(new RString("0"));
-            eucEntity.set特定施設入居者生活介護(new RString("0"));
-            eucEntity.set福祉用具貸与(new RString("0"));
-            eucEntity.set特定福祉用具販売(new RString("0"));
-            eucEntity.set住宅改修介護給付(new RString("0"));
-            eucEntity.set認知症対応型通所介護(new RString("0"));
-            eucEntity.set小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set認知症対応型共同生活介護グループホーム(new RString("0"));
+            eucEntity.set訪問介護ホームヘルプサービス(項目);
+            eucEntity.set訪問入浴介護(項目);
+            eucEntity.set訪問看護(項目);
+            eucEntity.set訪問リハビリテーション(項目);
+            eucEntity.set居宅療養管理指導(項目);
+            eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set介護予防通所リハビリテーション(項目);
+            eucEntity.set短期入所生活介護ショートステイ(項目);
+            eucEntity.set短期入所療養介護(項目);
+            eucEntity.set特定施設入居者生活介護(項目);
+            eucEntity.set福祉用具貸与(項目);
+            eucEntity.set特定福祉用具販売(項目);
+            eucEntity.set住宅改修介護給付(項目);
+            eucEntity.set認知症対応型通所介護(項目);
+            eucEntity.set小規模多機能型居宅介護(項目);
+            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
@@ -508,7 +512,7 @@ public class IchijihanteiSumidataIfBunisess {
 
     private void set前回結果介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
-        if (new RString("2").equals(entity.get前回結果サービス区分コード())) {
+        if (介護給付サービス.equals(entity.get前回結果サービス区分コード())) {
             eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回介護訪問介護ホームヘルプ());
             eucEntity.set前回結果訪問入浴介護(entity.get前回介護訪問入浴介護());
             eucEntity.set前回結果訪問看護(entity.get前回介護訪問看護());
@@ -530,32 +534,32 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果定期巡回随時対応型訪問介護看護(entity.get前回介護定期巡回随時対応型訪問介護看護());
             eucEntity.set前回結果複合型サービス(entity.get前回介護複合型サービス());
         } else {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set前回結果訪問入浴介護(new RString("0"));
-            eucEntity.set前回結果訪問看護(new RString("0"));
-            eucEntity.set前回結果訪問リハビリテーション(new RString("0"));
-            eucEntity.set前回結果居宅療養管理指導(new RString("0"));
-            eucEntity.set前回結果通所介護デイサービス(new RString("0"));
-            eucEntity.set前回結果短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set前回結果短期入所療養介護(new RString("0"));
-            eucEntity.set前回結果特定施設入居者生活介護(new RString("0"));
-            eucEntity.set前回結果福祉用具貸与(new RString("0"));
-            eucEntity.set前回結果特定福祉用具販売(new RString("0"));
-            eucEntity.set前回結果住宅改修介護給付(new RString("0"));
-            eucEntity.set前回結果夜間対応型訪問介護(new RString("0"));
-            eucEntity.set前回結果認知症対応型通所介護(new RString("0"));
-            eucEntity.set前回結果小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(new RString("0"));
-            eucEntity.set前回結果地域密着型特定施設入居者生活介護(new RString("0"));
-            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(new RString("0"));
-            eucEntity.set前回結果定期巡回随時対応型訪問介護看護(new RString("0"));
-            eucEntity.set前回結果複合型サービス(new RString("0"));
+            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果訪問入浴介護(項目);
+            eucEntity.set前回結果訪問看護(項目);
+            eucEntity.set前回結果訪問リハビリテーション(項目);
+            eucEntity.set前回結果居宅療養管理指導(項目);
+            eucEntity.set前回結果通所介護デイサービス(項目);
+            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果短期入所療養介護(項目);
+            eucEntity.set前回結果特定施設入居者生活介護(項目);
+            eucEntity.set前回結果福祉用具貸与(項目);
+            eucEntity.set前回結果特定福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修介護給付(項目);
+            eucEntity.set前回結果夜間対応型訪問介護(項目);
+            eucEntity.set前回結果認知症対応型通所介護(項目);
+            eucEntity.set前回結果小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set前回結果地域密着型特定施設入居者生活介護(項目);
+            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(項目);
+            eucEntity.set前回結果定期巡回随時対応型訪問介護看護(項目);
+            eucEntity.set前回結果複合型サービス(項目);
         }
     }
 
     private void set前回結果予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
-        if (new RString("1").equals(entity.get前回結果サービス区分コード())) {
+        if (予防給付サービス.equals(entity.get前回結果サービス区分コード())) {
             eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
             eucEntity.set前回結果訪問入浴介護(entity.get前回予防訪問入浴介護());
             eucEntity.set前回結果訪問看護(entity.get前回予防訪問看護());
@@ -572,27 +576,27 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
             eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set前回結果訪問入浴介護(new RString("0"));
-            eucEntity.set前回結果訪問看護(new RString("0"));
-            eucEntity.set前回結果訪問リハビリテーション(new RString("0"));
-            eucEntity.set前回結果居宅療養管理指導(new RString("0"));
-            eucEntity.set前回結果通所介護デイサービス(new RString("0"));
-            eucEntity.set前回結果短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set前回結果短期入所療養介護(new RString("0"));
-            eucEntity.set前回結果特定施設入居者生活介護(new RString("0"));
-            eucEntity.set前回結果福祉用具貸与(new RString("0"));
-            eucEntity.set前回結果特定福祉用具販売(new RString("0"));
-            eucEntity.set前回結果住宅改修介護給付(new RString("0"));
-            eucEntity.set前回結果認知症対応型通所介護(new RString("0"));
-            eucEntity.set前回結果小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(new RString("0"));
+            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果訪問入浴介護(項目);
+            eucEntity.set前回結果訪問看護(項目);
+            eucEntity.set前回結果訪問リハビリテーション(項目);
+            eucEntity.set前回結果居宅療養管理指導(項目);
+            eucEntity.set前回結果通所介護デイサービス(項目);
+            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果短期入所療養介護(項目);
+            eucEntity.set前回結果特定施設入居者生活介護(項目);
+            eucEntity.set前回結果福祉用具貸与(項目);
+            eucEntity.set前回結果特定福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修介護給付(項目);
+            eucEntity.set前回結果認知症対応型通所介護(項目);
+            eucEntity.set前回結果小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
     private void set介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        if (new RString("2").equals(entity.getサービス区分コード())) {
+        if (介護給付サービス.equals(entity.getサービス区分コード())) {
             eucEntity.set訪問介護ホームヘルプサービス(entity.get介護訪問介護ホームヘルプ());
             eucEntity.set訪問入浴介護(entity.get介護訪問入浴介護());
             eucEntity.set訪問看護(entity.get介護訪問看護());
@@ -612,30 +616,30 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set地域密着型特定施設入居者生活介護(entity.get介護地域密着型特定施設入居者生活介護());
             eucEntity.set地域密着型介護老人福祉施設入所者生活介護(entity.get介護地域密着型介護老人福祉施設入所者生活介護());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set訪問入浴介護(new RString("0"));
-            eucEntity.set訪問看護(new RString("0"));
-            eucEntity.set訪問リハビリテーション(new RString("0"));
-            eucEntity.set居宅療養管理指導(new RString("0"));
-            eucEntity.set通所介護デイサービス(new RString("0"));
-            eucEntity.set短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set短期入所療養介護(new RString("0"));
-            eucEntity.set特定施設入居者生活介護(new RString("0"));
-            eucEntity.set福祉用具貸与(new RString("0"));
-            eucEntity.set特定福祉用具販売(new RString("0"));
-            eucEntity.set住宅改修介護給付(new RString("0"));
-            eucEntity.set夜間対応型訪問介護(new RString("0"));
-            eucEntity.set認知症対応型通所介護(new RString("0"));
-            eucEntity.set小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set認知症対応型共同生活介護グループホーム(new RString("0"));
-            eucEntity.set地域密着型特定施設入居者生活介護(new RString("0"));
-            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(new RString("0"));
+            eucEntity.set訪問介護ホームヘルプサービス(項目);
+            eucEntity.set訪問入浴介護(項目);
+            eucEntity.set訪問看護(項目);
+            eucEntity.set訪問リハビリテーション(項目);
+            eucEntity.set居宅療養管理指導(項目);
+            eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set短期入所生活介護ショートステイ(項目);
+            eucEntity.set短期入所療養介護(項目);
+            eucEntity.set特定施設入居者生活介護(項目);
+            eucEntity.set福祉用具貸与(項目);
+            eucEntity.set特定福祉用具販売(項目);
+            eucEntity.set住宅改修介護給付(項目);
+            eucEntity.set夜間対応型訪問介護(項目);
+            eucEntity.set認知症対応型通所介護(項目);
+            eucEntity.set小規模多機能型居宅介護(項目);
+            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set地域密着型特定施設入居者生活介護(項目);
+            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(項目);
         }
     }
 
     private void set予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        if (new RString("1").equals(entity.getサービス区分コード())) {
+        if (予防給付サービス.equals(entity.getサービス区分コード())) {
             eucEntity.set訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
             eucEntity.set訪問入浴介護(entity.get予防訪問入浴介護());
             eucEntity.set訪問看護(entity.get予防訪問看護());
@@ -652,21 +656,21 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
             eucEntity.set認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set訪問入浴介護(new RString("0"));
-            eucEntity.set訪問看護(new RString("0"));
-            eucEntity.set訪問リハビリテーション(new RString("0"));
-            eucEntity.set居宅療養管理指導(new RString("0"));
-            eucEntity.set通所介護デイサービス(new RString("0"));
-            eucEntity.set短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set短期入所療養介護(new RString("0"));
-            eucEntity.set特定施設入居者生活介護(new RString("0"));
-            eucEntity.set福祉用具貸与(new RString("0"));
-            eucEntity.set特定福祉用具販売(new RString("0"));
-            eucEntity.set住宅改修介護給付(new RString("0"));
-            eucEntity.set認知症対応型通所介護(new RString("0"));
-            eucEntity.set小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set認知症対応型共同生活介護グループホーム(new RString("0"));
+            eucEntity.set訪問介護ホームヘルプサービス(項目);
+            eucEntity.set訪問入浴介護(項目);
+            eucEntity.set訪問看護(項目);
+            eucEntity.set訪問リハビリテーション(項目);
+            eucEntity.set居宅療養管理指導(項目);
+            eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set短期入所生活介護ショートステイ(項目);
+            eucEntity.set短期入所療養介護(項目);
+            eucEntity.set特定施設入居者生活介護(項目);
+            eucEntity.set福祉用具貸与(項目);
+            eucEntity.set特定福祉用具販売(項目);
+            eucEntity.set住宅改修介護給付(項目);
+            eucEntity.set認知症対応型通所介護(項目);
+            eucEntity.set小規模多機能型居宅介護(項目);
+            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
@@ -828,7 +832,7 @@ public class IchijihanteiSumidataIfBunisess {
 
     private void set前回結果介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        if (new RString("2").equals(entity.get前回結果サービス区分コード())) {
+        if (介護給付サービス.equals(entity.get前回結果サービス区分コード())) {
             eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回介護訪問介護ホームヘルプ());
             eucEntity.set前回結果訪問入浴介護(entity.get前回介護訪問入浴介護());
             eucEntity.set前回結果訪問看護(entity.get前回介護訪問看護());
@@ -849,31 +853,31 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果地域密着型特定施設入居者生活介護(entity.get前回介護地域密着型特定施設入居者生活介護());
             eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(entity.get前回介護地域密着型介護老人福祉施設入所者生活介護());
         } else {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set前回結果訪問入浴介護(new RString("0"));
-            eucEntity.set前回結果訪問看護(new RString("0"));
-            eucEntity.set前回結果訪問リハビリテーション(new RString("0"));
-            eucEntity.set前回結果居宅療養管理指導(new RString("0"));
-            eucEntity.set前回結果通所介護デイサービス(new RString("0"));
-            eucEntity.set前回結果通所リハビリテーション(new RString("0"));
-            eucEntity.set前回結果短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set前回結果短期入所療養介護(new RString("0"));
-            eucEntity.set前回結果特定施設入居者生活介護(new RString("0"));
-            eucEntity.set前回結果福祉用具貸与(new RString("0"));
-            eucEntity.set前回結果特定福祉用具販売(new RString("0"));
-            eucEntity.set前回結果住宅改修介護給付(new RString("0"));
-            eucEntity.set前回結果夜間対応型訪問介護(new RString("0"));
-            eucEntity.set前回結果認知症対応型通所介護(new RString("0"));
-            eucEntity.set前回結果小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(new RString("0"));
-            eucEntity.set前回結果地域密着型特定施設入居者生活介護(new RString("0"));
-            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(new RString("0"));
+            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果訪問入浴介護(項目);
+            eucEntity.set前回結果訪問看護(項目);
+            eucEntity.set前回結果訪問リハビリテーション(項目);
+            eucEntity.set前回結果居宅療養管理指導(項目);
+            eucEntity.set前回結果通所介護デイサービス(項目);
+            eucEntity.set前回結果通所リハビリテーション(項目);
+            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果短期入所療養介護(項目);
+            eucEntity.set前回結果特定施設入居者生活介護(項目);
+            eucEntity.set前回結果福祉用具貸与(項目);
+            eucEntity.set前回結果特定福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修介護給付(項目);
+            eucEntity.set前回結果夜間対応型訪問介護(項目);
+            eucEntity.set前回結果認知症対応型通所介護(項目);
+            eucEntity.set前回結果小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set前回結果地域密着型特定施設入居者生活介護(項目);
+            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(項目);
         }
     }
 
     private void set前回結果予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        if (new RString("1").equals(entity.get前回結果サービス区分コード())) {
+        if (予防給付サービス.equals(entity.get前回結果サービス区分コード())) {
             eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
             eucEntity.set前回結果訪問入浴介護(entity.get前回予防訪問入浴介護());
             eucEntity.set前回結果訪問看護(entity.get前回予防訪問看護());
@@ -890,21 +894,21 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
             eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(new RString("0"));
-            eucEntity.set前回結果訪問入浴介護(new RString("0"));
-            eucEntity.set前回結果訪問看護(new RString("0"));
-            eucEntity.set前回結果訪問リハビリテーション(new RString("0"));
-            eucEntity.set前回結果居宅療養管理指導(new RString("0"));
-            eucEntity.set前回結果通所介護デイサービス(new RString("0"));
-            eucEntity.set前回結果短期入所生活介護ショートステイ(new RString("0"));
-            eucEntity.set前回結果短期入所療養介護(new RString("0"));
-            eucEntity.set前回結果特定施設入居者生活介護(new RString("0"));
-            eucEntity.set前回結果福祉用具貸与(new RString("0"));
-            eucEntity.set前回結果特定福祉用具販売(new RString("0"));
-            eucEntity.set前回結果住宅改修介護給付(new RString("0"));
-            eucEntity.set前回結果認知症対応型通所介護(new RString("0"));
-            eucEntity.set前回結果小規模多機能型居宅介護(new RString("0"));
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(new RString("0"));
+            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果訪問入浴介護(項目);
+            eucEntity.set前回結果訪問看護(項目);
+            eucEntity.set前回結果訪問リハビリテーション(項目);
+            eucEntity.set前回結果居宅療養管理指導(項目);
+            eucEntity.set前回結果通所介護デイサービス(項目);
+            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果短期入所療養介護(項目);
+            eucEntity.set前回結果特定施設入居者生活介護(項目);
+            eucEntity.set前回結果福祉用具貸与(項目);
+            eucEntity.set前回結果特定福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修介護給付(項目);
+            eucEntity.set前回結果認知症対応型通所介護(項目);
+            eucEntity.set前回結果小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
@@ -931,6 +935,7 @@ public class IchijihanteiSumidataIfBunisess {
     public RString get出力件数(Decimal 出力件数) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
+        builder.append(new RString("件"));
         return builder.toRString();
     }
 
@@ -943,14 +948,9 @@ public class IchijihanteiSumidataIfBunisess {
     public List<RString> get出力条件(IchijihanteiSumidataIftProcessParamter paramter) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
-        if (new RString("0").equals(paramter.get日付指定())) {
+        if (項目.equals(paramter.get日付指定())) {
             jokenBuilder.append(new RString("【日付指定】　申請日"));
-        }
-        if (new RString("1").equals(paramter.get日付指定())) {
-            jokenBuilder.append(new RString("【日付指定】　一次判定日"));
-        }
-        出力条件List.add(jokenBuilder.toRString());
-        if (new RString("0").equals(paramter.get日付指定())) {
+            出力条件List.add(jokenBuilder.toRString());
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(new RString("【申請日From】"));
             jokenBuilder.append(new FlexibleDate(paramter.get申請日From()).wareki().toDateString());
@@ -960,7 +960,9 @@ public class IchijihanteiSumidataIfBunisess {
             jokenBuilder.append(new FlexibleDate(paramter.get申請日To()).wareki().toDateString());
             出力条件List.add(jokenBuilder.toRString());
         }
-        if (new RString("1").equals(paramter.get日付指定())) {
+        if (予防給付サービス.equals(paramter.get日付指定())) {
+            jokenBuilder.append(new RString("【日付指定】　一次判定日"));
+            出力条件List.add(jokenBuilder.toRString());
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(new RString("【一次判定日From】"));
             jokenBuilder.append(new FlexibleDate(paramter.get一次判定日From()).wareki().toDateString());
@@ -972,5 +974,13 @@ public class IchijihanteiSumidataIfBunisess {
         }
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
+    }
+
+    private RString nullchck(RString ogj) {
+        if (!RString.isNullOrEmpty(ogj)) {
+            return new FlexibleDate(ogj).wareki().toDateString();
+        }
+        return RString.EMPTY;
+
     }
 }

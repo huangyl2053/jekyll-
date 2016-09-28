@@ -181,26 +181,28 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     }
 
     private void edit法別区分(HobetsuKubun 法別区分) {
-        if (法別区分_全て_コード.equals(法別区分.getコード())) {
-            is法別区分_全て = true;
-        }
-        if (法別区分_施行時_いち.equals(法別区分.getコード())) {
-            法別区分施行時 = 法別区分_施行時_いち;
-            is法別区分_施行時 = true;
-        }
-        if (法別区分_障害時_に.equals(法別区分.getコード())) {
-            法別区分障害時 = 法別区分_障害時_に;
-            is法別区分_障害時 = true;
-        }
-        if (法別区分_障害時_さん.equals(法別区分.getコード())) {
-            法別区分障害全額免除 = 法別区分_障害時_さん;
-            is法別区分_障害ヘルプ全額免除 = true;
+        if (法別区分 != null) {
+            if (法別区分_全て_コード.equals(法別区分.getコード())) {
+                is法別区分_全て = true;
+            }
+            if (法別区分_施行時_いち.equals(法別区分.getコード())) {
+                法別区分施行時 = 法別区分_施行時_いち;
+                is法別区分_施行時 = true;
+            }
+            if (法別区分_障害時_に.equals(法別区分.getコード())) {
+                法別区分障害時 = 法別区分_障害時_に;
+                is法別区分_障害時 = true;
+            }
+            if (法別区分_障害時_さん.equals(法別区分.getコード())) {
+                法別区分障害全額免除 = 法別区分_障害時_さん;
+                is法別区分_障害ヘルプ全額免除 = true;
+            }
+
         }
 
     }
 
     private void edit世帯非課税等(List<HihokenshaKeizaiJokyo> 世帯非課税等) {
-
         for (HihokenshaKeizaiJokyo 世帯非課税情報 : 世帯非課税等) {
             if (世帯非課税等_市町村民税非課税世帯_いち.equals(世帯非課税情報.getコード())) {
                 is世帯非課税等_市町村民税非課税世帯 = true;

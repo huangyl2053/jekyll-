@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBDZ00001.GemmmenGengakuT
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBDZ00001.SetaiinHaakuInputSakusei;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -28,7 +28,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
     private static final String 世帯員把握入力 = "SetaiinHaakuInputSakusei";
     private static final String 世帯員把握 = "SetaiShotokuKazeiHanteiFlow";
     private static final String 減免減額対象者判定用根拠作成 = "GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei";
-    private static final RString SETSHOTOKUKAZEIHANTEIFLOW = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString SETSHOTOKUKAZEIHANTEIFLOW = new RString("DBB002001_SetaiinHaaku");
 
     @Override
     protected void defineFlow() {
@@ -42,7 +42,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員把握入力)
+    @Step (世帯員把握入力)
     protected IBatchFlowCommand setaiinHaakuInputSakusei() {
         if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
             return loopBatch(SetaiinHaakuInputSakusei.class)
@@ -61,7 +61,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員把握)
+    @Step (世帯員把握)
     protected IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
         return otherBatchFlow(SETSHOTOKUKAZEIHANTEIFLOW, SubGyomuCode.DBZ介護共通, getSetaiShotokuKazeiHanteiBatchParameter()).define();
     }
@@ -71,7 +71,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
      *
      * @return IBatchFlowCommand
      */
-    @Step(減免減額対象者判定用根拠作成)
+    @Step (減免減額対象者判定用根拠作成)
     protected IBatchFlowCommand gemmmenGengakuTaishoshaHanteiYoKonkyoSakusei() {
         if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
             return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
@@ -84,7 +84,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
         }
     }
 
-    private SetaiShotokuKazeiHanteiBatchParameter getSetaiShotokuKazeiHanteiBatchParameter() {
-        return new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.負担限度額.getコード());
+    private DBB002001_SetaiinHaakuParameter getSetaiShotokuKazeiHanteiBatchParameter() {
+        return new DBB002001_SetaiinHaakuParameter(SetaiinHaakuKanriShikibetsuKubun.負担限度額.getコード());
     }
 }

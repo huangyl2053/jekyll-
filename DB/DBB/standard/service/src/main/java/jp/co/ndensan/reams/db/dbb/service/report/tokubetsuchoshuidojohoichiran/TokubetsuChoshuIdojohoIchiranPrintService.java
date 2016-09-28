@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshuidojohoichiran;
 
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran.TokuChoYidoIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran.TokubetsuChoshuIdojohoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran.TokubetsuChoshuIdojohoIchiranReport;
@@ -37,7 +36,9 @@ public class TokubetsuChoshuIdojohoIchiranPrintService {
      * @param 特徴異動情報 TokuChoYidoIchiranEntity
      * @param 作成日時 RDateTime
      * @param 賦課年度 FlexibleYear
-     * @param 出力順Map Map<RString, RString>
+     * @param 保険者番号 RString
+     * @param 保険者名称 RString
+     * @param 出力順リスト List<RString>
      * @param 改頁リスト List<RString>
      *
      * @return SourceDataCollection
@@ -46,14 +47,16 @@ public class TokubetsuChoshuIdojohoIchiranPrintService {
             TokuChoYidoIchiranEntity 特徴異動情報,
             RDateTime 作成日時,
             FlexibleYear 賦課年度,
-            Map<RString, RString> 出力順Map,
+            RString 保険者番号,
+            RString 保険者名称,
+            List<RString> 出力順リスト,
             List<RString> 改頁リスト) {
         if (特徴異動情報 == null) {
             return new SourceDataCollection();
         }
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(特徴異動情報, 作成日時, 賦課年度, 出力順Map, 改頁リスト, reportManager);
+            print(特徴異動情報, 作成日時, 賦課年度, 保険者番号, 保険者名称, 出力順リスト, 改頁リスト, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -65,7 +68,9 @@ public class TokubetsuChoshuIdojohoIchiranPrintService {
      * @param 特徴異動情報 TokuChoYidoIchiranEntity
      * @param 作成日時 RDateTime
      * @param 賦課年度 FlexibleYear
-     * @param 出力順Map Map<RString, RString>
+     * @param 保険者番号 RString
+     * @param 保険者名称 RString
+     * @param 出力順リスト List<RString>
      * @param 改頁リスト List<RString>
      * @param reportManager ReportManager
      */
@@ -73,14 +78,16 @@ public class TokubetsuChoshuIdojohoIchiranPrintService {
             TokuChoYidoIchiranEntity 特徴異動情報,
             RDateTime 作成日時,
             FlexibleYear 賦課年度,
-            Map<RString, RString> 出力順Map,
+            RString 保険者番号,
+            RString 保険者名称,
+            List<RString> 出力順リスト,
             List<RString> 改頁リスト,
             ReportManager reportManager) {
         TokubetsuChoshuIdojohoIchiranProperty property = new TokubetsuChoshuIdojohoIchiranProperty();
         try (ReportAssembler<TokubetsuChoshuIdojohoIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuIdojohoIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new TokubetsuChoshuIdojohoIchiranReport(特徴異動情報, 作成日時, 賦課年度, 出力順Map, 改頁リスト).writeBy(reportSourceWriter);
+            new TokubetsuChoshuIdojohoIchiranReport(特徴異動情報, 作成日時, 賦課年度, 保険者番号, 保険者名称, 出力順リスト, 改頁リスト).writeBy(reportSourceWriter);
         }
     }
 

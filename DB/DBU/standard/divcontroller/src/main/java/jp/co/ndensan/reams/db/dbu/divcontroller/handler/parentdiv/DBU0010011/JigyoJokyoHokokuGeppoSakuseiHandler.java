@@ -105,6 +105,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         set過去報告年月(shoriDateKanriList);
         set審査年月決定年月();
         set日付時刻();
+        setすべて選択チェックボックス();
     }
 
     private void set合併市町村用保険者選択ラジオボタン() {
@@ -238,6 +239,18 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             div.getTxtSakuseiYMD7().setReadOnly(false);
             div.getTxtSakuseiTime7().setReadOnly(false);
         }
+    }
+
+    private void setすべて選択チェックボックス() {
+        List<RString> allKey = new ArrayList<>();
+        div.getCblOutputTaisho1().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho2().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho3().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho4().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho5().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho6().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaisho7().setSelectedItemsByKey(allKey);
+        div.getCblOutputTaishoAll().setSelectedItemsByKey(allKey);
     }
 
     /**
@@ -1008,9 +1021,9 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         RString プリントコントロール区分 = RString.EMPTY;
         if (集計のみ.equals(div.getRadJikkoTaniShukeiOnly().getSelectedKey())) {
             プリントコントロール区分 = 集計のみ_CODE;
-        } else if (集計後に印刷.equals(div.getRadJikkoTaniShukeiOnly().getSelectedKey())) {
+        } else if (集計後に印刷.equals(div.getRadJikkoTaniShukeiAfterPrint().getSelectedKey())) {
             プリントコントロール区分 = 集計後に印刷_CODE;
-        } else if (過去の集計結果を印刷.equals(div.getRadJikkoTaniShukeiOnly().getSelectedKey())) {
+        } else if (過去の集計結果を印刷.equals(div.getRadJikkoTaniKakoShukeiKekka().getSelectedKey())) {
             プリントコントロール区分 = 過去の集計結果を印刷_CODE;
         }
         return プリントコントロール区分;
@@ -1058,22 +1071,22 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
 
     private List<RString> get年度() {
         List<RString> nendo = new ArrayList<>();
-        if (div.getTxtShukeiYM1().getValue() != null) {
+        if (!div.getTxtShukeiYM1().getValue().isEmpty()) {
             nendo.add(div.getTxtShukeiYM1().getValue().getYear().toDateString());
         } else {
             nendo.add(RString.EMPTY);
         }
-        if (div.getTxtShukeiYM4().getValue() != null) {
+        if (!div.getTxtShukeiYM4().getValue().isEmpty()) {
             nendo.add(div.getTxtShukeiYM4().getValue().getYear().toDateString());
         } else {
             nendo.add(RString.EMPTY);
         }
-        if (div.getTxtShukeiYM6().getValue() != null) {
+        if (!div.getTxtShukeiYM6().getValue().isEmpty()) {
             nendo.add(div.getTxtShukeiYM6().getValue().seireki().toDateString());
         } else {
             nendo.add(RString.EMPTY);
         }
-        if (div.getTxtShukeiYM7().getValue() != null) {
+        if (!div.getTxtShukeiYM7().getValue().isEmpty()) {
             nendo.add(div.getTxtShukeiYM7().getValue().getYear().toDateString());
         } else {
             nendo.add(RString.EMPTY);

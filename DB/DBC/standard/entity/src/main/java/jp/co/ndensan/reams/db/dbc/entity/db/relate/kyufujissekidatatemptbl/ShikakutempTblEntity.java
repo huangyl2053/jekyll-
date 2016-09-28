@@ -56,4 +56,6 @@ public class ShikakutempTblEntity extends DbTableEntityBase<ShikakutempTblEntity
     private Decimal yokaigo5;
     @TempTableColumnOrder(14)
     private Decimal gokeichi;
+    @TempTableColumnOrder(15)
+    private int shotokuCd;
 }

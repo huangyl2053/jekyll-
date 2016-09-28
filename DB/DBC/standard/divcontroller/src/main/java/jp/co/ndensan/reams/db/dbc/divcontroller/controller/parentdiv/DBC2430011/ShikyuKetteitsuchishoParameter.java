@@ -37,8 +37,9 @@ public class ShikyuKetteitsuchishoParameter {
      */
     public ResponseData<ShikyuKetteitsuchishoParameterDiv> onLoad(ShikyuKetteitsuchishoParameterDiv div) {
         RString temp市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
-        KetteiTimestampBusiness business = KaishuriyushoShikyuKetteitsuchishoManager.createInstance().get前回の実行情報(
-                KaishuriyushoShikyuKetteitsuchishoMybatisParameter.create前回の実行情報取得パラメータ(temp市町村コード));
+        KaishuriyushoShikyuKetteitsuchishoMybatisParameter parameter = new KaishuriyushoShikyuKetteitsuchishoMybatisParameter();
+        parameter.set市町村コード(temp市町村コード);
+        KetteiTimestampBusiness business = KaishuriyushoShikyuKetteitsuchishoManager.createInstance().get前回の実行情報(parameter);
         getHandler(div).onLoad(business);
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {

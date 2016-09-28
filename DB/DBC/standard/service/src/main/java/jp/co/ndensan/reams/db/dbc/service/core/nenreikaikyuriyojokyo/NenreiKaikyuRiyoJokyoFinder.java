@@ -155,10 +155,9 @@ public class NenreiKaikyuRiyoJokyoFinder {
     ) {
         for (List<UpdateParameterEntity> list : updateParEntityList) {
             for (UpdateParameterEntity updateParEntity : list) {
-                if (年齢階級.equals(updateParEntity.get区分())) {
-                    if (要介護状態区分コード.equals(updateParEntity.get要介護状態区分コード())) {
-                        updateParEntity.setKubun(count);
-                    }
+                if (年齢階級.equals(updateParEntity.get区分())
+                        && 要介護状態区分コード.equals(updateParEntity.get要介護状態区分コード())) {
+                    updateParEntity.setKubun(count);
                 }
             }
         }

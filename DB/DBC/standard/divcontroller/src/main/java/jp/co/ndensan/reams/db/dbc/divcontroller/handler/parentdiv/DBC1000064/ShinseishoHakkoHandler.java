@@ -55,11 +55,11 @@ public class ShinseishoHakkoHandler {
     public void set初期化処理() {
         div.getRadChushutsuJoken().setDataSource(get申請書発行_抽出条件());
         set抽出条件表示制御処理();
-        if (INDEX_101 < Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)))
-                && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_731) {
+        if (INDEX_101 <= Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)))
+                && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) <= INDEX_731) {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate().minusYear(1));
-        } else if (INDEX_801 < Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8))
-                && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_1231) {
+        } else if (INDEX_801 <= Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8))
+                && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) <= INDEX_1231) {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate());
         }
         FlexibleDate 世帯員把握基準日基準日 = new FlexibleDate(YMDHMS.now().getYear()

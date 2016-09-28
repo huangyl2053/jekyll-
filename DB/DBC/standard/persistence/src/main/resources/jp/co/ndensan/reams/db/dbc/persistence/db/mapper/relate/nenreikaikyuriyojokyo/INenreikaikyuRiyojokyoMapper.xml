@@ -70,7 +70,7 @@
       ON
             tmp_DbT3017."hiHokenshaNo" = DbT1001."hihokenshaNo"
             AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> tmp_DbT3017."serviceTeikyoYM"
-            AND tmp_DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
+            AND tmp_DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT1001."shikakuSoshitsuYMD"
             <if test="shichosonFlag">
                   AND DbT1001."shichosonCode" = #{shichosonCode}
             </if>
@@ -84,19 +84,19 @@
                   ON 宛名PSM."shikibetsuCode" = DbT1001."shikibetsuCode"
                   <if test="shichosonAndKyu">
                     <if test="tyouikiFlag">
-                          AND 宛名PSM.choikiCode IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."choikiCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="gyoseikuFlag">
-                          AND 宛名PSM.gyoseikuCode IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."gyoseikuCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="chikuCode1Flag">
-                          AND 宛名PSM.chikuCode1 IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."chikuCode1" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="chikuCode2Flag">
-                          AND 宛名PSM.chikuCode2 IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."chikuCode2" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="chikuCode3Flag">
-                          AND 宛名PSM.chikuCode3 IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."chikuCode3" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                   </if>
       ORDER BY
@@ -159,19 +159,19 @@
                   ON 宛名PSM."shikibetsuCode" = DbT1001."shikibetsuCode"
                   <if test="shichosonAndKyu">
                     <if test="tyouikiFlag">
-                          AND 宛名PSM.choikiCode IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."choikiCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="gyoseikuFlag">
-                          AND 宛名PSM.gyoseikuCode IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."gyoseikuCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="chikuCode1Flag">
-                          AND 宛名PSM.chikuCode1 IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."chikuCode1" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="chikuCode2Flag">
-                          AND 宛名PSM.chikuCode2 IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."chikuCode2" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                     <if test="chikuCode3Flag">
-                          AND 宛名PSM.chikuCode3 IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                          AND 宛名PSM."chikuCode3" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
                     </if>
                   </if>
           ORDER BY

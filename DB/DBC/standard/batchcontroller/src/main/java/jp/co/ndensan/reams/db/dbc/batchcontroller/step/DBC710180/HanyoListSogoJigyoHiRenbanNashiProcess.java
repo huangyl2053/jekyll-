@@ -145,9 +145,12 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
             } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
                 eucCsvWriter.writeLine(new HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity());
             }
+            eucCsvWriter.close();
+            manager.spool(eucFilePath);
+        } else {
+            eucCsvWriter.close();
+            manager.spool(eucFilePath, hanyolistsogojigyohi.getアクセスログ());
         }
-        eucCsvWriter.close();
-        manager.spool(eucFilePath, hanyolistsogojigyohi.getアクセスログ());
         outputJokenhyoFactory();
     }
 

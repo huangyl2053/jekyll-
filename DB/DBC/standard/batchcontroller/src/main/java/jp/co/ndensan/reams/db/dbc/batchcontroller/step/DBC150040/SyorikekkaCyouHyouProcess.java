@@ -40,11 +40,13 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
     @BatchWriter
     private CsvWriter<SyorikekkaCyouHyouEucCsvEntity> eucCsvWriter;
     private static final RString 処理結果確認リストCSV = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private HekinRiyoGakuTokehyoResult hekinRiyoGakuTokehyoResult;
 
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 処理結果確認リストCSV);
+        hekinRiyoGakuTokehyoResult = new HekinRiyoGakuTokehyoResult();
     }
 
     @Override
@@ -65,7 +67,7 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
 
     @Override
     protected void process(SyorikekkatempTblEntity entity) {
-        eucCsvWriter.writeLine(new HekinRiyoGakuTokehyoResult().setSyorikekkaCyouHyouEucCsvEntity(entity));
+        eucCsvWriter.writeLine(hekinRiyoGakuTokehyoResult.setSyorikekkaCyouHyouEucCsvEntity(entity));
     }
 
     @Override

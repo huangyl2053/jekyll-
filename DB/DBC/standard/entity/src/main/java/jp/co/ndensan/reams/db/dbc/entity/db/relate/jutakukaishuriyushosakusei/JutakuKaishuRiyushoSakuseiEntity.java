@@ -17,14 +17,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JutakuKaishuRiyushoSakuseiEntity {
 
-    private RString 文書番号;
-    private RString 事業者コード;
-    private RString 受付年月日;
-    private RString 決定年月日;
-    private RString 支給_不支給;
-    private RString 支給金額;
-    private RString 不支給の理由;
-    private RString 支払方法;
-    private RString 支払予定日;
-    private RString 作成日;
+    private RString hakkoYMD;
+    private RString denshiKoin;
+    private RString ninshoshaYakushokuMei;
+    private RString koinMojiretsu;
+    private RString ninshoshaShimeiKakenai;
+    private RString ninshoshaShimeiKakeru;
+    private RString koinShoryaku;
+    private RString bunshoNo;
+    private RString sofusakiYubinNo;
+    private RString sofusakiJusho;
+    private RString sofusakiShimei;
+    private RString jigyoshoCustomerBarCode;
+    private RString tsuchoBun;
+    private RString uketsukeYMD;
+    private RString ketteiYMD;
+    private RString ketteiKekka;
+    private RString tesuryo;
+    private RString fushikyuRiyu;
+    private RString shiharaiHouhou;
+    private RString shiharaiYoteiYMD;
+    private RString tsuchiBun;
+    private RString choshaBushoName;
+    private RString tantoName;
+    private RString yubinBango;
+    private RString shozaichi;
+    private RString telNo;
+    private RString naisenLabel;
+    private RString naisenNo;
+    private RString faxNo;
+
 }

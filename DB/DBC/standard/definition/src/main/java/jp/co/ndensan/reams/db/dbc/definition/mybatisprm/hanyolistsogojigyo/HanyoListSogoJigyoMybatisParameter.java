@@ -23,7 +23,6 @@ public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParamet
     private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
     private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
     private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
-    private static final RString 保険者コード_すべて = new RString("000000");
     private final long 出力順ID;
     private final RString 出力順項目ID;
     private final boolean is項目名付加;
@@ -157,6 +156,7 @@ public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParamet
         boolean is基本情報集計情報 = false;
         boolean is基本情報ケアマネジメント費情報 = false;
         boolean 保険者コードFlag = false;
+        boolean サービス種類コードFlag = false;
         if (基本明細情報.equals(抽出方法)) {
             is基本情報明細情報 = true;
         } else if (基本集計情報.equals(抽出方法)) {
@@ -164,8 +164,11 @@ public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParamet
         } else if (基本ケアマネジメント情報.equals(抽出方法)) {
             is基本情報ケアマネジメント費情報 = true;
         }
-        if (!保険者コード_すべて.equals(保険者コード) && !RString.isNullOrEmpty(保険者コード)) {
+        if (!new RString("000000").equals(保険者コード) && !RString.isNullOrEmpty(保険者コード)) {
             保険者コードFlag = true;
+        }
+        if (!new RString("Empty").equals(サービス種類コード) && !RString.isNullOrEmpty(サービス種類コード)) {
+            サービス種類コードFlag = true;
         }
         return new HanyoListSogoJigyoMybatisParameter(出力順ID,
                 出力順項目ID,
@@ -174,7 +177,7 @@ public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParamet
                 is日付スラッシュ付加,
                 !isnull(事業者コード),
                 事業者コード,
-                !isnull(サービス種類コード),
+                サービス種類コードFlag,
                 サービス種類コード,
                 保険者コードFlag,
                 保険者コード,

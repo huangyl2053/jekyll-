@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * KiwarigakuPanel1 のクラスファイル
@@ -358,8 +359,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo13() {
-        return this.celKiwarigaku0305.getLblFuchoGemmemGo13();
+    public TextBoxNum getTxtFuchoGemmemGo13() {
+        return this.celKiwarigaku0305.getTxtFuchoGemmemGo13();
     }
 
     @JsonIgnore
@@ -378,8 +379,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo1() {
-        return this.celKiwarigaku0309.getLblTokuchoGemmemGo1();
+    public TextBoxNum getTxtTokuchoGemmemGo1() {
+        return this.celKiwarigaku0309.getTxtTokuchoGemmemGo1();
     }
 
     @JsonIgnore
@@ -398,8 +399,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo14() {
-        return this.celKiwarigaku0405.getLblFuchoGemmemGo14();
+    public TextBoxNum getTxtFuchoGemmemGo14() {
+        return this.celKiwarigaku0405.getTxtFuchoGemmemGo14();
     }
 
     @JsonIgnore
@@ -423,8 +424,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo1() {
-        return this.celKiwarigaku0505.getLblFuchoGemmemGo1();
+    public TextBoxNum getTxtFuchoGemmemGo1() {
+        return this.celKiwarigaku0505.getTxtFuchoGemmemGo1();
     }
 
     @JsonIgnore
@@ -443,8 +444,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo2() {
-        return this.celKiwarigaku0509.getLblTokuchoGemmemGo2();
+    public TextBoxNum getTxtTokuchoGemmemGo2() {
+        return this.celKiwarigaku0509.getTxtTokuchoGemmemGo2();
     }
 
     @JsonIgnore
@@ -463,8 +464,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo2() {
-        return this.celKiwarigaku0605.getLblFuchoGemmemGo2();
+    public TextBoxNum getTxtFuchoGemmemGo2() {
+        return this.celKiwarigaku0605.getTxtFuchoGemmemGo2();
     }
 
     @JsonIgnore
@@ -488,8 +489,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo3() {
-        return this.celKiwarigaku0705.getLblFuchoGemmemGo3();
+    public TextBoxNum getTxtFuchoGemmemGo3() {
+        return this.celKiwarigaku0705.getTxtFuchoGemmemGo3();
     }
 
     @JsonIgnore
@@ -508,8 +509,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo3() {
-        return this.celKiwarigaku0709.getLblTokuchoGemmemGo3();
+    public TextBoxNum getTxtTokuchoGemmemGo3() {
+        return this.celKiwarigaku0709.getTxtTokuchoGemmemGo3();
     }
 
     @JsonIgnore
@@ -528,8 +529,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo4() {
-        return this.celKiwarigaku0805.getLblFuchoGemmemGo4();
+    public TextBoxNum getTxtFuchoGemmemGo4() {
+        return this.celKiwarigaku0805.getTxtFuchoGemmemGo4();
     }
 
     @JsonIgnore
@@ -553,8 +554,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo5() {
-        return this.celKiwarigaku0905.getLblFuchoGemmemGo5();
+    public TextBoxNum getTxtFuchoGemmemGo5() {
+        return this.celKiwarigaku0905.getTxtFuchoGemmemGo5();
     }
 
     @JsonIgnore
@@ -573,8 +574,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo4() {
-        return this.celKiwarigaku0909.getLblTokuchoGemmemGo4();
+    public TextBoxNum getTxtTokuchoGemmemGo4() {
+        return this.celKiwarigaku0909.getTxtTokuchoGemmemGo4();
     }
 
     @JsonIgnore
@@ -593,8 +594,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo6() {
-        return this.celKiwarigaku1005.getLblFuchoGemmemGo6();
+    public TextBoxNum getTxtFuchoGemmemGo6() {
+        return this.celKiwarigaku1005.getTxtFuchoGemmemGo6();
     }
 
     @JsonIgnore
@@ -618,8 +619,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo7() {
-        return this.celKiwarigaku1105.getLblFuchoGemmemGo7();
+    public TextBoxNum getTxtFuchoGemmemGo7() {
+        return this.celKiwarigaku1105.getTxtFuchoGemmemGo7();
     }
 
     @JsonIgnore
@@ -638,8 +639,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo5() {
-        return this.celKiwarigaku1109.getLblTokuchoGemmemGo5();
+    public TextBoxNum getTxtTokuchoGemmemGo5() {
+        return this.celKiwarigaku1109.getTxtTokuchoGemmemGo5();
     }
 
     @JsonIgnore
@@ -658,8 +659,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo8() {
-        return this.celKiwarigaku1205.getLblFuchoGemmemGo8();
+    public TextBoxNum getTxtFuchoGemmemGo8() {
+        return this.celKiwarigaku1205.getTxtFuchoGemmemGo8();
     }
 
     @JsonIgnore
@@ -683,8 +684,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo9() {
-        return this.celKiwarigaku1305.getLblFuchoGemmemGo9();
+    public TextBoxNum getTxtFuchoGemmemGo9() {
+        return this.celKiwarigaku1305.getTxtFuchoGemmemGo9();
     }
 
     @JsonIgnore
@@ -703,8 +704,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoGemmemGo6() {
-        return this.celKiwarigaku1309.getLblTokuchoGemmemGo6();
+    public TextBoxNum getTxtTokuchoGemmemGo6() {
+        return this.celKiwarigaku1309.getTxtTokuchoGemmemGo6();
     }
 
     @JsonIgnore
@@ -723,8 +724,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo10() {
-        return this.celKiwarigaku1405.getLblFuchoGemmemGo10();
+    public TextBoxNum getTxtFuchoGemmemGo10() {
+        return this.celKiwarigaku1405.getTxtFuchoGemmemGo10();
     }
 
     @JsonIgnore
@@ -748,8 +749,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo11() {
-        return this.celKiwarigaku1505.getLblFuchoGemmemGo11();
+    public TextBoxNum getTxtFuchoGemmemGo11() {
+        return this.celKiwarigaku1505.getTxtFuchoGemmemGo11();
     }
 
     @JsonIgnore
@@ -773,8 +774,8 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoGemmemGo12() {
-        return this.celKiwarigaku1605.getLblFuchoGemmemGo12();
+    public TextBoxNum getTxtFuchoGemmemGo12() {
+        return this.celKiwarigaku1605.getTxtFuchoGemmemGo12();
     }
 
     @JsonIgnore
@@ -3609,25 +3610,25 @@ class celKiwarigaku0303AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0305AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo13")
-    private Label lblFuchoGemmemGo13;
+    @JsonProperty("txtFuchoGemmemGo13")
+    private TextBoxNum txtFuchoGemmemGo13;
 
     /*
-     * getlblFuchoGemmemGo13
-     * @return lblFuchoGemmemGo13
+     * gettxtFuchoGemmemGo13
+     * @return txtFuchoGemmemGo13
      */
-    @JsonProperty("lblFuchoGemmemGo13")
-    public Label getLblFuchoGemmemGo13() {
-        return lblFuchoGemmemGo13;
+    @JsonProperty("txtFuchoGemmemGo13")
+    public TextBoxNum getTxtFuchoGemmemGo13() {
+        return txtFuchoGemmemGo13;
     }
 
     /*
-     * setlblFuchoGemmemGo13
-     * @param lblFuchoGemmemGo13 lblFuchoGemmemGo13
+     * settxtFuchoGemmemGo13
+     * @param txtFuchoGemmemGo13 txtFuchoGemmemGo13
      */
-    @JsonProperty("lblFuchoGemmemGo13")
-    public void setLblFuchoGemmemGo13(Label lblFuchoGemmemGo13) {
-        this.lblFuchoGemmemGo13 = lblFuchoGemmemGo13;
+    @JsonProperty("txtFuchoGemmemGo13")
+    public void setTxtFuchoGemmemGo13(TextBoxNum txtFuchoGemmemGo13) {
+        this.txtFuchoGemmemGo13 = txtFuchoGemmemGo13;
     }
 
     // </editor-fold>
@@ -3737,25 +3738,25 @@ class celKiwarigaku0307AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0309AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblTokuchoGemmemGo1")
-    private Label lblTokuchoGemmemGo1;
+    @JsonProperty("txtTokuchoGemmemGo1")
+    private TextBoxNum txtTokuchoGemmemGo1;
 
     /*
-     * getlblTokuchoGemmemGo1
-     * @return lblTokuchoGemmemGo1
+     * gettxtTokuchoGemmemGo1
+     * @return txtTokuchoGemmemGo1
      */
-    @JsonProperty("lblTokuchoGemmemGo1")
-    public Label getLblTokuchoGemmemGo1() {
-        return lblTokuchoGemmemGo1;
+    @JsonProperty("txtTokuchoGemmemGo1")
+    public TextBoxNum getTxtTokuchoGemmemGo1() {
+        return txtTokuchoGemmemGo1;
     }
 
     /*
-     * setlblTokuchoGemmemGo1
-     * @param lblTokuchoGemmemGo1 lblTokuchoGemmemGo1
+     * settxtTokuchoGemmemGo1
+     * @param txtTokuchoGemmemGo1 txtTokuchoGemmemGo1
      */
-    @JsonProperty("lblTokuchoGemmemGo1")
-    public void setLblTokuchoGemmemGo1(Label lblTokuchoGemmemGo1) {
-        this.lblTokuchoGemmemGo1 = lblTokuchoGemmemGo1;
+    @JsonProperty("txtTokuchoGemmemGo1")
+    public void setTxtTokuchoGemmemGo1(TextBoxNum txtTokuchoGemmemGo1) {
+        this.txtTokuchoGemmemGo1 = txtTokuchoGemmemGo1;
     }
 
     // </editor-fold>
@@ -3865,25 +3866,25 @@ class celKiwarigaku0403AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0405AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo14")
-    private Label lblFuchoGemmemGo14;
+    @JsonProperty("txtFuchoGemmemGo14")
+    private TextBoxNum txtFuchoGemmemGo14;
 
     /*
-     * getlblFuchoGemmemGo14
-     * @return lblFuchoGemmemGo14
+     * gettxtFuchoGemmemGo14
+     * @return txtFuchoGemmemGo14
      */
-    @JsonProperty("lblFuchoGemmemGo14")
-    public Label getLblFuchoGemmemGo14() {
-        return lblFuchoGemmemGo14;
+    @JsonProperty("txtFuchoGemmemGo14")
+    public TextBoxNum getTxtFuchoGemmemGo14() {
+        return txtFuchoGemmemGo14;
     }
 
     /*
-     * setlblFuchoGemmemGo14
-     * @param lblFuchoGemmemGo14 lblFuchoGemmemGo14
+     * settxtFuchoGemmemGo14
+     * @param txtFuchoGemmemGo14 txtFuchoGemmemGo14
      */
-    @JsonProperty("lblFuchoGemmemGo14")
-    public void setLblFuchoGemmemGo14(Label lblFuchoGemmemGo14) {
-        this.lblFuchoGemmemGo14 = lblFuchoGemmemGo14;
+    @JsonProperty("txtFuchoGemmemGo14")
+    public void setTxtFuchoGemmemGo14(TextBoxNum txtFuchoGemmemGo14) {
+        this.txtFuchoGemmemGo14 = txtFuchoGemmemGo14;
     }
 
     // </editor-fold>
@@ -4058,25 +4059,25 @@ class celKiwarigaku0503AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0505AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo1")
-    private Label lblFuchoGemmemGo1;
+    @JsonProperty("txtFuchoGemmemGo1")
+    private TextBoxNum txtFuchoGemmemGo1;
 
     /*
-     * getlblFuchoGemmemGo1
-     * @return lblFuchoGemmemGo1
+     * gettxtFuchoGemmemGo1
+     * @return txtFuchoGemmemGo1
      */
-    @JsonProperty("lblFuchoGemmemGo1")
-    public Label getLblFuchoGemmemGo1() {
-        return lblFuchoGemmemGo1;
+    @JsonProperty("txtFuchoGemmemGo1")
+    public TextBoxNum getTxtFuchoGemmemGo1() {
+        return txtFuchoGemmemGo1;
     }
 
     /*
-     * setlblFuchoGemmemGo1
-     * @param lblFuchoGemmemGo1 lblFuchoGemmemGo1
+     * settxtFuchoGemmemGo1
+     * @param txtFuchoGemmemGo1 txtFuchoGemmemGo1
      */
-    @JsonProperty("lblFuchoGemmemGo1")
-    public void setLblFuchoGemmemGo1(Label lblFuchoGemmemGo1) {
-        this.lblFuchoGemmemGo1 = lblFuchoGemmemGo1;
+    @JsonProperty("txtFuchoGemmemGo1")
+    public void setTxtFuchoGemmemGo1(TextBoxNum txtFuchoGemmemGo1) {
+        this.txtFuchoGemmemGo1 = txtFuchoGemmemGo1;
     }
 
     // </editor-fold>
@@ -4186,25 +4187,25 @@ class celKiwarigaku0507AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0509AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblTokuchoGemmemGo2")
-    private Label lblTokuchoGemmemGo2;
+    @JsonProperty("txtTokuchoGemmemGo2")
+    private TextBoxNum txtTokuchoGemmemGo2;
 
     /*
-     * getlblTokuchoGemmemGo2
-     * @return lblTokuchoGemmemGo2
+     * gettxtTokuchoGemmemGo2
+     * @return txtTokuchoGemmemGo2
      */
-    @JsonProperty("lblTokuchoGemmemGo2")
-    public Label getLblTokuchoGemmemGo2() {
-        return lblTokuchoGemmemGo2;
+    @JsonProperty("txtTokuchoGemmemGo2")
+    public TextBoxNum getTxtTokuchoGemmemGo2() {
+        return txtTokuchoGemmemGo2;
     }
 
     /*
-     * setlblTokuchoGemmemGo2
-     * @param lblTokuchoGemmemGo2 lblTokuchoGemmemGo2
+     * settxtTokuchoGemmemGo2
+     * @param txtTokuchoGemmemGo2 txtTokuchoGemmemGo2
      */
-    @JsonProperty("lblTokuchoGemmemGo2")
-    public void setLblTokuchoGemmemGo2(Label lblTokuchoGemmemGo2) {
-        this.lblTokuchoGemmemGo2 = lblTokuchoGemmemGo2;
+    @JsonProperty("txtTokuchoGemmemGo2")
+    public void setTxtTokuchoGemmemGo2(TextBoxNum txtTokuchoGemmemGo2) {
+        this.txtTokuchoGemmemGo2 = txtTokuchoGemmemGo2;
     }
 
     // </editor-fold>
@@ -4314,25 +4315,25 @@ class celKiwarigaku0603AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0605AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo2")
-    private Label lblFuchoGemmemGo2;
+    @JsonProperty("txtFuchoGemmemGo2")
+    private TextBoxNum txtFuchoGemmemGo2;
 
     /*
-     * getlblFuchoGemmemGo2
-     * @return lblFuchoGemmemGo2
+     * gettxtFuchoGemmemGo2
+     * @return txtFuchoGemmemGo2
      */
-    @JsonProperty("lblFuchoGemmemGo2")
-    public Label getLblFuchoGemmemGo2() {
-        return lblFuchoGemmemGo2;
+    @JsonProperty("txtFuchoGemmemGo2")
+    public TextBoxNum getTxtFuchoGemmemGo2() {
+        return txtFuchoGemmemGo2;
     }
 
     /*
-     * setlblFuchoGemmemGo2
-     * @param lblFuchoGemmemGo2 lblFuchoGemmemGo2
+     * settxtFuchoGemmemGo2
+     * @param txtFuchoGemmemGo2 txtFuchoGemmemGo2
      */
-    @JsonProperty("lblFuchoGemmemGo2")
-    public void setLblFuchoGemmemGo2(Label lblFuchoGemmemGo2) {
-        this.lblFuchoGemmemGo2 = lblFuchoGemmemGo2;
+    @JsonProperty("txtFuchoGemmemGo2")
+    public void setTxtFuchoGemmemGo2(TextBoxNum txtFuchoGemmemGo2) {
+        this.txtFuchoGemmemGo2 = txtFuchoGemmemGo2;
     }
 
     // </editor-fold>
@@ -4507,25 +4508,25 @@ class celKiwarigaku0703AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0705AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo3")
-    private Label lblFuchoGemmemGo3;
+    @JsonProperty("txtFuchoGemmemGo3")
+    private TextBoxNum txtFuchoGemmemGo3;
 
     /*
-     * getlblFuchoGemmemGo3
-     * @return lblFuchoGemmemGo3
+     * gettxtFuchoGemmemGo3
+     * @return txtFuchoGemmemGo3
      */
-    @JsonProperty("lblFuchoGemmemGo3")
-    public Label getLblFuchoGemmemGo3() {
-        return lblFuchoGemmemGo3;
+    @JsonProperty("txtFuchoGemmemGo3")
+    public TextBoxNum getTxtFuchoGemmemGo3() {
+        return txtFuchoGemmemGo3;
     }
 
     /*
-     * setlblFuchoGemmemGo3
-     * @param lblFuchoGemmemGo3 lblFuchoGemmemGo3
+     * settxtFuchoGemmemGo3
+     * @param txtFuchoGemmemGo3 txtFuchoGemmemGo3
      */
-    @JsonProperty("lblFuchoGemmemGo3")
-    public void setLblFuchoGemmemGo3(Label lblFuchoGemmemGo3) {
-        this.lblFuchoGemmemGo3 = lblFuchoGemmemGo3;
+    @JsonProperty("txtFuchoGemmemGo3")
+    public void setTxtFuchoGemmemGo3(TextBoxNum txtFuchoGemmemGo3) {
+        this.txtFuchoGemmemGo3 = txtFuchoGemmemGo3;
     }
 
     // </editor-fold>
@@ -4635,25 +4636,25 @@ class celKiwarigaku0707AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0709AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblTokuchoGemmemGo3")
-    private Label lblTokuchoGemmemGo3;
+    @JsonProperty("txtTokuchoGemmemGo3")
+    private TextBoxNum txtTokuchoGemmemGo3;
 
     /*
-     * getlblTokuchoGemmemGo3
-     * @return lblTokuchoGemmemGo3
+     * gettxtTokuchoGemmemGo3
+     * @return txtTokuchoGemmemGo3
      */
-    @JsonProperty("lblTokuchoGemmemGo3")
-    public Label getLblTokuchoGemmemGo3() {
-        return lblTokuchoGemmemGo3;
+    @JsonProperty("txtTokuchoGemmemGo3")
+    public TextBoxNum getTxtTokuchoGemmemGo3() {
+        return txtTokuchoGemmemGo3;
     }
 
     /*
-     * setlblTokuchoGemmemGo3
-     * @param lblTokuchoGemmemGo3 lblTokuchoGemmemGo3
+     * settxtTokuchoGemmemGo3
+     * @param txtTokuchoGemmemGo3 txtTokuchoGemmemGo3
      */
-    @JsonProperty("lblTokuchoGemmemGo3")
-    public void setLblTokuchoGemmemGo3(Label lblTokuchoGemmemGo3) {
-        this.lblTokuchoGemmemGo3 = lblTokuchoGemmemGo3;
+    @JsonProperty("txtTokuchoGemmemGo3")
+    public void setTxtTokuchoGemmemGo3(TextBoxNum txtTokuchoGemmemGo3) {
+        this.txtTokuchoGemmemGo3 = txtTokuchoGemmemGo3;
     }
 
     // </editor-fold>
@@ -4763,25 +4764,25 @@ class celKiwarigaku0803AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0805AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo4")
-    private Label lblFuchoGemmemGo4;
+    @JsonProperty("txtFuchoGemmemGo4")
+    private TextBoxNum txtFuchoGemmemGo4;
 
     /*
-     * getlblFuchoGemmemGo4
-     * @return lblFuchoGemmemGo4
+     * gettxtFuchoGemmemGo4
+     * @return txtFuchoGemmemGo4
      */
-    @JsonProperty("lblFuchoGemmemGo4")
-    public Label getLblFuchoGemmemGo4() {
-        return lblFuchoGemmemGo4;
+    @JsonProperty("txtFuchoGemmemGo4")
+    public TextBoxNum getTxtFuchoGemmemGo4() {
+        return txtFuchoGemmemGo4;
     }
 
     /*
-     * setlblFuchoGemmemGo4
-     * @param lblFuchoGemmemGo4 lblFuchoGemmemGo4
+     * settxtFuchoGemmemGo4
+     * @param txtFuchoGemmemGo4 txtFuchoGemmemGo4
      */
-    @JsonProperty("lblFuchoGemmemGo4")
-    public void setLblFuchoGemmemGo4(Label lblFuchoGemmemGo4) {
-        this.lblFuchoGemmemGo4 = lblFuchoGemmemGo4;
+    @JsonProperty("txtFuchoGemmemGo4")
+    public void setTxtFuchoGemmemGo4(TextBoxNum txtFuchoGemmemGo4) {
+        this.txtFuchoGemmemGo4 = txtFuchoGemmemGo4;
     }
 
     // </editor-fold>
@@ -4956,25 +4957,25 @@ class celKiwarigaku0903AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0905AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo5")
-    private Label lblFuchoGemmemGo5;
+    @JsonProperty("txtFuchoGemmemGo5")
+    private TextBoxNum txtFuchoGemmemGo5;
 
     /*
-     * getlblFuchoGemmemGo5
-     * @return lblFuchoGemmemGo5
+     * gettxtFuchoGemmemGo5
+     * @return txtFuchoGemmemGo5
      */
-    @JsonProperty("lblFuchoGemmemGo5")
-    public Label getLblFuchoGemmemGo5() {
-        return lblFuchoGemmemGo5;
+    @JsonProperty("txtFuchoGemmemGo5")
+    public TextBoxNum getTxtFuchoGemmemGo5() {
+        return txtFuchoGemmemGo5;
     }
 
     /*
-     * setlblFuchoGemmemGo5
-     * @param lblFuchoGemmemGo5 lblFuchoGemmemGo5
+     * settxtFuchoGemmemGo5
+     * @param txtFuchoGemmemGo5 txtFuchoGemmemGo5
      */
-    @JsonProperty("lblFuchoGemmemGo5")
-    public void setLblFuchoGemmemGo5(Label lblFuchoGemmemGo5) {
-        this.lblFuchoGemmemGo5 = lblFuchoGemmemGo5;
+    @JsonProperty("txtFuchoGemmemGo5")
+    public void setTxtFuchoGemmemGo5(TextBoxNum txtFuchoGemmemGo5) {
+        this.txtFuchoGemmemGo5 = txtFuchoGemmemGo5;
     }
 
     // </editor-fold>
@@ -5084,25 +5085,25 @@ class celKiwarigaku0907AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku0909AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblTokuchoGemmemGo4")
-    private Label lblTokuchoGemmemGo4;
+    @JsonProperty("txtTokuchoGemmemGo4")
+    private TextBoxNum txtTokuchoGemmemGo4;
 
     /*
-     * getlblTokuchoGemmemGo4
-     * @return lblTokuchoGemmemGo4
+     * gettxtTokuchoGemmemGo4
+     * @return txtTokuchoGemmemGo4
      */
-    @JsonProperty("lblTokuchoGemmemGo4")
-    public Label getLblTokuchoGemmemGo4() {
-        return lblTokuchoGemmemGo4;
+    @JsonProperty("txtTokuchoGemmemGo4")
+    public TextBoxNum getTxtTokuchoGemmemGo4() {
+        return txtTokuchoGemmemGo4;
     }
 
     /*
-     * setlblTokuchoGemmemGo4
-     * @param lblTokuchoGemmemGo4 lblTokuchoGemmemGo4
+     * settxtTokuchoGemmemGo4
+     * @param txtTokuchoGemmemGo4 txtTokuchoGemmemGo4
      */
-    @JsonProperty("lblTokuchoGemmemGo4")
-    public void setLblTokuchoGemmemGo4(Label lblTokuchoGemmemGo4) {
-        this.lblTokuchoGemmemGo4 = lblTokuchoGemmemGo4;
+    @JsonProperty("txtTokuchoGemmemGo4")
+    public void setTxtTokuchoGemmemGo4(TextBoxNum txtTokuchoGemmemGo4) {
+        this.txtTokuchoGemmemGo4 = txtTokuchoGemmemGo4;
     }
 
     // </editor-fold>
@@ -5212,25 +5213,25 @@ class celKiwarigaku1003AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1005AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo6")
-    private Label lblFuchoGemmemGo6;
+    @JsonProperty("txtFuchoGemmemGo6")
+    private TextBoxNum txtFuchoGemmemGo6;
 
     /*
-     * getlblFuchoGemmemGo6
-     * @return lblFuchoGemmemGo6
+     * gettxtFuchoGemmemGo6
+     * @return txtFuchoGemmemGo6
      */
-    @JsonProperty("lblFuchoGemmemGo6")
-    public Label getLblFuchoGemmemGo6() {
-        return lblFuchoGemmemGo6;
+    @JsonProperty("txtFuchoGemmemGo6")
+    public TextBoxNum getTxtFuchoGemmemGo6() {
+        return txtFuchoGemmemGo6;
     }
 
     /*
-     * setlblFuchoGemmemGo6
-     * @param lblFuchoGemmemGo6 lblFuchoGemmemGo6
+     * settxtFuchoGemmemGo6
+     * @param txtFuchoGemmemGo6 txtFuchoGemmemGo6
      */
-    @JsonProperty("lblFuchoGemmemGo6")
-    public void setLblFuchoGemmemGo6(Label lblFuchoGemmemGo6) {
-        this.lblFuchoGemmemGo6 = lblFuchoGemmemGo6;
+    @JsonProperty("txtFuchoGemmemGo6")
+    public void setTxtFuchoGemmemGo6(TextBoxNum txtFuchoGemmemGo6) {
+        this.txtFuchoGemmemGo6 = txtFuchoGemmemGo6;
     }
 
     // </editor-fold>
@@ -5405,25 +5406,25 @@ class celKiwarigaku1103AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1105AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo7")
-    private Label lblFuchoGemmemGo7;
+    @JsonProperty("txtFuchoGemmemGo7")
+    private TextBoxNum txtFuchoGemmemGo7;
 
     /*
-     * getlblFuchoGemmemGo7
-     * @return lblFuchoGemmemGo7
+     * gettxtFuchoGemmemGo7
+     * @return txtFuchoGemmemGo7
      */
-    @JsonProperty("lblFuchoGemmemGo7")
-    public Label getLblFuchoGemmemGo7() {
-        return lblFuchoGemmemGo7;
+    @JsonProperty("txtFuchoGemmemGo7")
+    public TextBoxNum getTxtFuchoGemmemGo7() {
+        return txtFuchoGemmemGo7;
     }
 
     /*
-     * setlblFuchoGemmemGo7
-     * @param lblFuchoGemmemGo7 lblFuchoGemmemGo7
+     * settxtFuchoGemmemGo7
+     * @param txtFuchoGemmemGo7 txtFuchoGemmemGo7
      */
-    @JsonProperty("lblFuchoGemmemGo7")
-    public void setLblFuchoGemmemGo7(Label lblFuchoGemmemGo7) {
-        this.lblFuchoGemmemGo7 = lblFuchoGemmemGo7;
+    @JsonProperty("txtFuchoGemmemGo7")
+    public void setTxtFuchoGemmemGo7(TextBoxNum txtFuchoGemmemGo7) {
+        this.txtFuchoGemmemGo7 = txtFuchoGemmemGo7;
     }
 
     // </editor-fold>
@@ -5533,25 +5534,25 @@ class celKiwarigaku1107AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1109AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblTokuchoGemmemGo5")
-    private Label lblTokuchoGemmemGo5;
+    @JsonProperty("txtTokuchoGemmemGo5")
+    private TextBoxNum txtTokuchoGemmemGo5;
 
     /*
-     * getlblTokuchoGemmemGo5
-     * @return lblTokuchoGemmemGo5
+     * gettxtTokuchoGemmemGo5
+     * @return txtTokuchoGemmemGo5
      */
-    @JsonProperty("lblTokuchoGemmemGo5")
-    public Label getLblTokuchoGemmemGo5() {
-        return lblTokuchoGemmemGo5;
+    @JsonProperty("txtTokuchoGemmemGo5")
+    public TextBoxNum getTxtTokuchoGemmemGo5() {
+        return txtTokuchoGemmemGo5;
     }
 
     /*
-     * setlblTokuchoGemmemGo5
-     * @param lblTokuchoGemmemGo5 lblTokuchoGemmemGo5
+     * settxtTokuchoGemmemGo5
+     * @param txtTokuchoGemmemGo5 txtTokuchoGemmemGo5
      */
-    @JsonProperty("lblTokuchoGemmemGo5")
-    public void setLblTokuchoGemmemGo5(Label lblTokuchoGemmemGo5) {
-        this.lblTokuchoGemmemGo5 = lblTokuchoGemmemGo5;
+    @JsonProperty("txtTokuchoGemmemGo5")
+    public void setTxtTokuchoGemmemGo5(TextBoxNum txtTokuchoGemmemGo5) {
+        this.txtTokuchoGemmemGo5 = txtTokuchoGemmemGo5;
     }
 
     // </editor-fold>
@@ -5661,25 +5662,25 @@ class celKiwarigaku1203AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1205AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo8")
-    private Label lblFuchoGemmemGo8;
+    @JsonProperty("txtFuchoGemmemGo8")
+    private TextBoxNum txtFuchoGemmemGo8;
 
     /*
-     * getlblFuchoGemmemGo8
-     * @return lblFuchoGemmemGo8
+     * gettxtFuchoGemmemGo8
+     * @return txtFuchoGemmemGo8
      */
-    @JsonProperty("lblFuchoGemmemGo8")
-    public Label getLblFuchoGemmemGo8() {
-        return lblFuchoGemmemGo8;
+    @JsonProperty("txtFuchoGemmemGo8")
+    public TextBoxNum getTxtFuchoGemmemGo8() {
+        return txtFuchoGemmemGo8;
     }
 
     /*
-     * setlblFuchoGemmemGo8
-     * @param lblFuchoGemmemGo8 lblFuchoGemmemGo8
+     * settxtFuchoGemmemGo8
+     * @param txtFuchoGemmemGo8 txtFuchoGemmemGo8
      */
-    @JsonProperty("lblFuchoGemmemGo8")
-    public void setLblFuchoGemmemGo8(Label lblFuchoGemmemGo8) {
-        this.lblFuchoGemmemGo8 = lblFuchoGemmemGo8;
+    @JsonProperty("txtFuchoGemmemGo8")
+    public void setTxtFuchoGemmemGo8(TextBoxNum txtFuchoGemmemGo8) {
+        this.txtFuchoGemmemGo8 = txtFuchoGemmemGo8;
     }
 
     // </editor-fold>
@@ -5854,25 +5855,25 @@ class celKiwarigaku1303AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1305AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo9")
-    private Label lblFuchoGemmemGo9;
+    @JsonProperty("txtFuchoGemmemGo9")
+    private TextBoxNum txtFuchoGemmemGo9;
 
     /*
-     * getlblFuchoGemmemGo9
-     * @return lblFuchoGemmemGo9
+     * gettxtFuchoGemmemGo9
+     * @return txtFuchoGemmemGo9
      */
-    @JsonProperty("lblFuchoGemmemGo9")
-    public Label getLblFuchoGemmemGo9() {
-        return lblFuchoGemmemGo9;
+    @JsonProperty("txtFuchoGemmemGo9")
+    public TextBoxNum getTxtFuchoGemmemGo9() {
+        return txtFuchoGemmemGo9;
     }
 
     /*
-     * setlblFuchoGemmemGo9
-     * @param lblFuchoGemmemGo9 lblFuchoGemmemGo9
+     * settxtFuchoGemmemGo9
+     * @param txtFuchoGemmemGo9 txtFuchoGemmemGo9
      */
-    @JsonProperty("lblFuchoGemmemGo9")
-    public void setLblFuchoGemmemGo9(Label lblFuchoGemmemGo9) {
-        this.lblFuchoGemmemGo9 = lblFuchoGemmemGo9;
+    @JsonProperty("txtFuchoGemmemGo9")
+    public void setTxtFuchoGemmemGo9(TextBoxNum txtFuchoGemmemGo9) {
+        this.txtFuchoGemmemGo9 = txtFuchoGemmemGo9;
     }
 
     // </editor-fold>
@@ -5982,25 +5983,25 @@ class celKiwarigaku1307AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1309AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblTokuchoGemmemGo6")
-    private Label lblTokuchoGemmemGo6;
+    @JsonProperty("txtTokuchoGemmemGo6")
+    private TextBoxNum txtTokuchoGemmemGo6;
 
     /*
-     * getlblTokuchoGemmemGo6
-     * @return lblTokuchoGemmemGo6
+     * gettxtTokuchoGemmemGo6
+     * @return txtTokuchoGemmemGo6
      */
-    @JsonProperty("lblTokuchoGemmemGo6")
-    public Label getLblTokuchoGemmemGo6() {
-        return lblTokuchoGemmemGo6;
+    @JsonProperty("txtTokuchoGemmemGo6")
+    public TextBoxNum getTxtTokuchoGemmemGo6() {
+        return txtTokuchoGemmemGo6;
     }
 
     /*
-     * setlblTokuchoGemmemGo6
-     * @param lblTokuchoGemmemGo6 lblTokuchoGemmemGo6
+     * settxtTokuchoGemmemGo6
+     * @param txtTokuchoGemmemGo6 txtTokuchoGemmemGo6
      */
-    @JsonProperty("lblTokuchoGemmemGo6")
-    public void setLblTokuchoGemmemGo6(Label lblTokuchoGemmemGo6) {
-        this.lblTokuchoGemmemGo6 = lblTokuchoGemmemGo6;
+    @JsonProperty("txtTokuchoGemmemGo6")
+    public void setTxtTokuchoGemmemGo6(TextBoxNum txtTokuchoGemmemGo6) {
+        this.txtTokuchoGemmemGo6 = txtTokuchoGemmemGo6;
     }
 
     // </editor-fold>
@@ -6110,25 +6111,25 @@ class celKiwarigaku1403AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1405AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo10")
-    private Label lblFuchoGemmemGo10;
+    @JsonProperty("txtFuchoGemmemGo10")
+    private TextBoxNum txtFuchoGemmemGo10;
 
     /*
-     * getlblFuchoGemmemGo10
-     * @return lblFuchoGemmemGo10
+     * gettxtFuchoGemmemGo10
+     * @return txtFuchoGemmemGo10
      */
-    @JsonProperty("lblFuchoGemmemGo10")
-    public Label getLblFuchoGemmemGo10() {
-        return lblFuchoGemmemGo10;
+    @JsonProperty("txtFuchoGemmemGo10")
+    public TextBoxNum getTxtFuchoGemmemGo10() {
+        return txtFuchoGemmemGo10;
     }
 
     /*
-     * setlblFuchoGemmemGo10
-     * @param lblFuchoGemmemGo10 lblFuchoGemmemGo10
+     * settxtFuchoGemmemGo10
+     * @param txtFuchoGemmemGo10 txtFuchoGemmemGo10
      */
-    @JsonProperty("lblFuchoGemmemGo10")
-    public void setLblFuchoGemmemGo10(Label lblFuchoGemmemGo10) {
-        this.lblFuchoGemmemGo10 = lblFuchoGemmemGo10;
+    @JsonProperty("txtFuchoGemmemGo10")
+    public void setTxtFuchoGemmemGo10(TextBoxNum txtFuchoGemmemGo10) {
+        this.txtFuchoGemmemGo10 = txtFuchoGemmemGo10;
     }
 
     // </editor-fold>
@@ -6303,25 +6304,25 @@ class celKiwarigaku1503AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1505AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo11")
-    private Label lblFuchoGemmemGo11;
+    @JsonProperty("txtFuchoGemmemGo11")
+    private TextBoxNum txtFuchoGemmemGo11;
 
     /*
-     * getlblFuchoGemmemGo11
-     * @return lblFuchoGemmemGo11
+     * gettxtFuchoGemmemGo11
+     * @return txtFuchoGemmemGo11
      */
-    @JsonProperty("lblFuchoGemmemGo11")
-    public Label getLblFuchoGemmemGo11() {
-        return lblFuchoGemmemGo11;
+    @JsonProperty("txtFuchoGemmemGo11")
+    public TextBoxNum getTxtFuchoGemmemGo11() {
+        return txtFuchoGemmemGo11;
     }
 
     /*
-     * setlblFuchoGemmemGo11
-     * @param lblFuchoGemmemGo11 lblFuchoGemmemGo11
+     * settxtFuchoGemmemGo11
+     * @param txtFuchoGemmemGo11 txtFuchoGemmemGo11
      */
-    @JsonProperty("lblFuchoGemmemGo11")
-    public void setLblFuchoGemmemGo11(Label lblFuchoGemmemGo11) {
-        this.lblFuchoGemmemGo11 = lblFuchoGemmemGo11;
+    @JsonProperty("txtFuchoGemmemGo11")
+    public void setTxtFuchoGemmemGo11(TextBoxNum txtFuchoGemmemGo11) {
+        this.txtFuchoGemmemGo11 = txtFuchoGemmemGo11;
     }
 
     // </editor-fold>
@@ -6496,25 +6497,25 @@ class celKiwarigaku1603AtKiwarigakuPanel1 extends TableCell {
 class celKiwarigaku1605AtKiwarigakuPanel1 extends TableCell {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblFuchoGemmemGo12")
-    private Label lblFuchoGemmemGo12;
+    @JsonProperty("txtFuchoGemmemGo12")
+    private TextBoxNum txtFuchoGemmemGo12;
 
     /*
-     * getlblFuchoGemmemGo12
-     * @return lblFuchoGemmemGo12
+     * gettxtFuchoGemmemGo12
+     * @return txtFuchoGemmemGo12
      */
-    @JsonProperty("lblFuchoGemmemGo12")
-    public Label getLblFuchoGemmemGo12() {
-        return lblFuchoGemmemGo12;
+    @JsonProperty("txtFuchoGemmemGo12")
+    public TextBoxNum getTxtFuchoGemmemGo12() {
+        return txtFuchoGemmemGo12;
     }
 
     /*
-     * setlblFuchoGemmemGo12
-     * @param lblFuchoGemmemGo12 lblFuchoGemmemGo12
+     * settxtFuchoGemmemGo12
+     * @param txtFuchoGemmemGo12 txtFuchoGemmemGo12
      */
-    @JsonProperty("lblFuchoGemmemGo12")
-    public void setLblFuchoGemmemGo12(Label lblFuchoGemmemGo12) {
-        this.lblFuchoGemmemGo12 = lblFuchoGemmemGo12;
+    @JsonProperty("txtFuchoGemmemGo12")
+    public void setTxtFuchoGemmemGo12(TextBoxNum txtFuchoGemmemGo12) {
+        this.txtFuchoGemmemGo12 = txtFuchoGemmemGo12;
     }
 
     // </editor-fold>

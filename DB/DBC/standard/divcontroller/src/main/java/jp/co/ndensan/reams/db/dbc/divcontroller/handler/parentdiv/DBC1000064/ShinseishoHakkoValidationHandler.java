@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000064;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000064.ShinseishoHakkoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -25,7 +26,9 @@ public class ShinseishoHakkoValidationHandler {
     private final ShinseishoHakkoDiv div;
     private static final RString 処理年度 = new RString("処理年度");
     private static final RString 平成27年度以降 = new RString("平成27年度以降");
-    private static final FlexibleDate 年度 = new FlexibleDate("2015");
+    private static final FlexibleYear 年度 = new FlexibleYear("2015");
+    private static final int NUM_0 = 0;
+    private static final int NUM_4 = 4;
 
     /**
      * コンストラクタです。
@@ -43,7 +46,9 @@ public class ShinseishoHakkoValidationHandler {
      */
     public ValidationMessageControlPairs get入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtShoriNendo().getValue().isBefore(年度)) {
+        FlexibleDate 年度Date = div.getTxtShoriNendo().getValue();
+        FlexibleYear year = new FlexibleYear(年度Date.toString().substring(NUM_0, NUM_4));
+        if (year.isBefore(年度)) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinseishoHakkoValidationHandler.ShinseishoHakkoValidationMessages(
                             UrErrorMessages.項目に対する制約, 処理年度.toString(), 平成27年度以降.toString()),

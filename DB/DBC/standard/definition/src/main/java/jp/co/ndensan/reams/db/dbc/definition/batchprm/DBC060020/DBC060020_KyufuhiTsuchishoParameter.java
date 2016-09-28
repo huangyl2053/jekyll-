@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060020;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufuhitsuchisho.KyufuhiTsuchishoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -32,8 +33,8 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
     private FlexibleYearMonth サービス開始年月;
     @BatchParameter(key = "サービス終了年月", name = "サービス終了年月")
     private FlexibleYearMonth サービス終了年月;
-    @BatchParameter(key = "ページ出力区分", name = "ページ出力区分")
-    private RString ページ出力区分;
+    @BatchParameter(key = "福祉用具貸与ページ出力区分", name = "福祉用具貸与ページ出力区分")
+    private RString 福祉用具貸与ページ出力区分;
     @BatchParameter(key = "集約区分", name = "集約区分")
     private RString 集約区分;
     @BatchParameter(key = "保険者構成", name = "保険者構成")
@@ -42,20 +43,20 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
     private RString 証記載保険者番号;
     @BatchParameter(key = "要介護度", name = "要介護度")
     private RString 要介護度;
-    @BatchParameter(key = "死亡者分", name = "死亡者分")
-    private RString 死亡者分;
-    @BatchParameter(key = "ゼロ査定実績", name = "ゼロ査定実績")
-    private RString ゼロ査定実績;
-    @BatchParameter(key = "再審査分", name = "再審査分")
-    private RString 再審査分;
-    @BatchParameter(key = "過誤分", name = "過誤分")
-    private RString 過誤分;
-    @BatchParameter(key = "施設分", name = "施設分")
-    private RString 施設分;
-    @BatchParameter(key = "特定入所者介護", name = "特定入所者介護")
-    private RString 特定入所者介護;
-    @BatchParameter(key = "償還分", name = "償還分")
-    private RString 償還分;
+    @BatchParameter(key = "死亡者分を対象としない", name = "死亡者分を対象としない")
+    private RString 死亡者分を対象としない;
+    @BatchParameter(key = "ゼロ査定実績を対象としない", name = "ゼロ査定実績を対象としない")
+    private RString ゼロ査定実績を対象としない;
+    @BatchParameter(key = "再審査分を対象としない", name = "再審査分を対象としない")
+    private RString 再審査分を対象としない;
+    @BatchParameter(key = "過誤分を対象としない", name = "過誤分を対象としない")
+    private RString 過誤分を対象としない;
+    @BatchParameter(key = "施設分を対象としない", name = "施設分を対象としない")
+    private RString 施設分を対象としない;
+    @BatchParameter(key = "特定入所者介護を対象としない", name = "特定入所者介護を対象としない")
+    private RString 特定入所者介護を対象としない;
+    @BatchParameter(key = "償還分を対象としない", name = "償還分を対象としない")
+    private RString 償還分を対象としない;
     @BatchParameter(key = "被保険者番号", name = "被保険者番号")
     private RString 被保険者番号;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
@@ -75,7 +76,9 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
      *
      * @return プロセスパラメータ
      */
-    public DBC060020_KyufuhiTsuchishoParameter toProcessParameter() {
-        return new DBC060020_KyufuhiTsuchishoParameter();
+    public KyufuhiTsuchishoProcessParameter toProcessParameter() {
+        return new KyufuhiTsuchishoProcessParameter(集約区分, サービス種類区分, サービス種類区分, サービス種類区分, 福祉用具貸与ページ出力区分, 集約区分,
+                保険者構成, 証記載保険者番号, 要介護度, 死亡者分を対象としない, ゼロ査定実績を対象としない, 再審査分を対象としない, 過誤分を対象としない,
+                施設分を対象としない, 特定入所者介護を対象としない, 償還分を対象としない, サービス種類区分, 出力順ID, 文書番号);
     }
 }

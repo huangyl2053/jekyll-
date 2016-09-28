@@ -82,6 +82,7 @@ public class TokubetsuChoshuIdojohoIchiranSource implements IReportSource {
     public RString listUpper_10;
     @ReportItem(name = "listUpper_11", length = 14, order = 31)
     public RString listUpper_11;
+    @ReportPerson(id = "A")
     @ReportItem(name = "listLower_1", length = 15, order = 32)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 4, order = 33)
@@ -98,9 +99,6 @@ public class TokubetsuChoshuIdojohoIchiranSource implements IReportSource {
     public RString listLower_7;
     @ReportItem(name = "listLower_8", length = 23, order = 39)
     public RString listLower_8;
-    @ReportPerson(id = "A")
-    @ReportItem(name = "shikibetsuCode", length = 15)
-    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

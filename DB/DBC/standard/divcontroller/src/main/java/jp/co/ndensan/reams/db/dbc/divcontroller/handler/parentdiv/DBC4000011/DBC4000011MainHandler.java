@@ -160,11 +160,10 @@ public class DBC4000011MainHandler {
                     + kaigoServiceNaiyou.getサービス項目コード().toString()));
             row.setTeikyoKaishiYM(new RString(kaigoServiceNaiyou.get提供開始年月().
                     wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString()));
-            if (kaigoServiceNaiyou.get提供終了年月() == null || kaigoServiceNaiyou.get提供終了年月().isEmpty()) {
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-            } else {
+            if (kaigoServiceNaiyou.get提供終了年月() != null && !kaigoServiceNaiyou.get提供終了年月().isEmpty()) {
                 row.setTeikyoShuryoYM(new RString(kaigoServiceNaiyou.get提供終了年月().wareki().
                         firstYear(FirstYear.ICHI_NEN).toDateString().toString()));
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
             }
             row.setServiceName(kaigoServiceNaiyou.getサービス名称());
             row.setServiceNameRyaku(kaigoServiceNaiyou.getサービス略称());

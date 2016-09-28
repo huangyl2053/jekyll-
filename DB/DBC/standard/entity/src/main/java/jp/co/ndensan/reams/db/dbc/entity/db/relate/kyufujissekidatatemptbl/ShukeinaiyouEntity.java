@@ -23,4 +23,12 @@ public class ShukeinaiyouEntity {
     private RString 所得段階;
     private RString 要介護状態区分コード;
     private RString 集計内容;
+    private boolean isyoshien1;
+    private boolean isyoshien2;
+    private boolean iskeikanoyokaigo;
+    private boolean isyokaigo1;
+    private boolean isyokaigo2;
+    private boolean isyokaigo3;
+    private boolean isyokaigo4;
+    private boolean isyokaigo5;
 }

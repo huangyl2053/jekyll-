@@ -63,7 +63,7 @@
         <result property="集計後保険請求分請求額" column="集計後保険請求分請求額" />
         <result property="集計再審査回数" column="集計再審査回数" />
         <result property="集計過誤回数" column="集計過誤回数"  />
-        <result property="ケアマネジメント費指定基準該当事業所区分" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ケアマネジメント費指定基準該当事業所区分" column="指定基準該当事業所区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ケアマネジメント費単位数単価" column="マネジメント単位数単価" />
         <result property="ケアマネジメント費サービスコード" column="マネジメントサービスコード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ケアマネジメント費サービス種類名称" column="サービス種類名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -244,7 +244,8 @@
   <if test="is基本情報ケアマネジメント費情報">
      RIGHT JOIN(
          SELECT
-           給付実績ケアマネジメント費."tanisuTanka" AS "マネジメント単位数単価"
+             給付実績ケアマネジメント費."shiteiKijungaitoJigyoshoKubunCode" AS "指定基準該当事業所区分"
+           , 給付実績ケアマネジメント費."tanisuTanka" AS "マネジメント単位数単価"
            , 給付実績ケアマネジメント費."serviceCode" AS "マネジメントサービスコード"
            , 給付実績ケアマネジメント費."tanisu" AS "マネジメント単位数"
            , 給付実績ケアマネジメント費."kaisu" AS "マネジメント回数"

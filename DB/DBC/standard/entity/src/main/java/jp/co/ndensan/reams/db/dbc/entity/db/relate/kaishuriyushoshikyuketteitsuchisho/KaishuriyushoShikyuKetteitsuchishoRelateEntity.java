@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KaishuriyushoShikyuKetteitsuchishoRelateEntity {
 
     private RString temp_前回決定日_開始日;

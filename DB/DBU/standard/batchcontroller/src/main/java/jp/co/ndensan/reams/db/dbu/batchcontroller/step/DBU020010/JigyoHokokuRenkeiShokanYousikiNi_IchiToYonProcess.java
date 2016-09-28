@@ -685,11 +685,9 @@ public class JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess extends BatchProc
         RString spoolWorkPath = processParameter.getSpoolWorkPath();
         eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                setEncode(Encode.SJIS)
-                .setDelimiter(EUC_WRITER_DELIMITER)
+                setEncode(Encode.SJIS).setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false).
+                .setNewLine(NewLine.CRLF).hasHeader(false).
                 build();
     }
 
@@ -738,13 +736,14 @@ public class JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess extends BatchProc
         eucCsvWriter.close();
     }
 
-    private void tempCsv(boolean flag) {
+    private boolean tempCsv(boolean flag) {
         if (flag) {
             File tmpfile = new File(eucFilePath.toString());
             if (tmpfile.exists()) {
-                tmpfile.delete();
+                return tmpfile.delete();
             }
         }
+        return true;
     }
 
     private void setFilePath(RStringBuilder filePath) {

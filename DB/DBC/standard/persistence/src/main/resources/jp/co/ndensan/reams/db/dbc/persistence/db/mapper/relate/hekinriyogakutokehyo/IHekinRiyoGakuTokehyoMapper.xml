@@ -78,7 +78,7 @@
         ,DbT3033."hokenRiyoshaFutangaku"
         ,DbT3033."atoHokenTanisuTotal"
         ,DbT3033."hokenTanisuTani"
-        ,DbT3033."atoHokenDekidakaSeikyugaku"
+        ,DbT3033."atoHokenDekidakaTanisuTotal"
         ,DbT3033."serviceSyuruiCode"
         ,Dbt1001."shikibetsuCode"
         FROM
@@ -201,7 +201,7 @@
         ,T2."hokenRiyoshaFutangaku" AS  保険利用者負担額
         ,T2."atoHokenTanisuTotal" AS 保険単位数
         ,T2."hokenTanisuTani" AS 保険単位単価
-        ,T2."atoHokenDekidakaSeikyugaku" AS 保険出来高点数 
+        ,T2."atoHokenDekidakaTanisuTotal" AS 保険出来高点数 
         ,'0' AS 費用額
         ,'' AS 所得段階
         , T2."shikibetsuCode" AS 識別コード
@@ -287,7 +287,7 @@
             rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
             WHERE
             "DbT3017KyufujissekiKihon"."shinsaYM"<![CDATA[>=]]> #{kaishiYM}
-            AND "DbT3017KyufujissekiKihon"."shinsaYM" <![CDATA[>=]]> #{shuryoYM} 
+            AND "DbT3017KyufujissekiKihon"."shinsaYM" <![CDATA[<=]]> #{shuryoYM} 
             AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" <![CDATA[<>]]> '3' 
             AND substr("DbT3017KyufujissekiKihon"."inputShikibetsuNo",1,3) NOT IN ('71P', '816', '71R', '817')
             
@@ -335,45 +335,45 @@
         , 介護賦課データ.rank_num AS rank_number 
         FROM
         ( 
-         SELECT
-         介護1.被保険者番号 AS 被保険者番号
-         , 介護1.賦課年度 AS 賦課年度
-         , 介護1.保険料算定段階2 AS 保険料算定段階2
-         , 介護1.保険料算定段階1 AS 保険料算定段階1
-         , 介護1.rank_num AS rank_num 
+        SELECT
+        介護1.被保険者番号 AS 被保険者番号
+        , 介護1.賦課年度 AS 賦課年度
+        , 介護1.保険料算定段階2 AS 保険料算定段階2
+        , 介護1.保険料算定段階1 AS 保険料算定段階1
+        , 介護1.rank_num AS rank_num 
         FROM
-         (
-           SELECT
-           Dbt2002."hihokenshaNo" AS 被保険者番号
-          , Dbt2002."fukaNendo" AS 賦課年度
-          , Dbt2002."hokenryoDankai2" AS 保険料算定段階2
-          , Dbt2002."hokenryoDankai1" AS 保険料算定段階1
-          , row_number() over ( 
-          partition by
-          Dbt2002."hihokenshaNo"
-          , Dbt2002."fukaNendo" 
-          order by
-          Dbt2002."tsuchishoNo"
-          , Dbt2002."choteiNendo"
-          , Dbt2002."rirekiNo" DESC
-                             ) AS rank_num 
-          FROM
-          rgdb."DbT2002Fuka" AS Dbt2002 
-          WHERE
-          Dbt2002."fukaNendo" <![CDATA[>=]]> ( 
-          SELECT
-          substr(MIN("DbWTkyufujisTempTbl"."serviceTeikyoYM"), 1, 4) 
-            FROM
-            "DbWTkyufujisTempTbl"
-                                             ) 
-          AND Dbt2002."fukaNendo" <![CDATA[<=]]> ( 
-          SELECT
-          substr( 
-          MAX("DbWTkyufujisTempTbl"."serviceTeikyoYM") , 1 , 4
-              ) 
-         FROM
-         "DbWTkyufujisTempTbl"
-                                               )
+        (
+        SELECT
+        Dbt2002."hihokenshaNo" AS 被保険者番号
+        , Dbt2002."fukaNendo" AS 賦課年度
+        , Dbt2002."hokenryoDankai2" AS 保険料算定段階2
+        , Dbt2002."hokenryoDankai1" AS 保険料算定段階1
+        , row_number() over ( 
+        partition by
+        Dbt2002."hihokenshaNo"
+        , Dbt2002."fukaNendo" 
+        order by
+        Dbt2002."tsuchishoNo"
+        , Dbt2002."choteiNendo"
+        , Dbt2002."rirekiNo" DESC
+        ) AS rank_num 
+        FROM
+        rgdb."DbT2002Fuka" AS Dbt2002 
+        WHERE
+        Dbt2002."fukaNendo" <![CDATA[>=]]> ( 
+        SELECT
+        substr(MIN("DbWTkyufujisTempTbl"."serviceTeikyoYM"), 1, 4) 
+        FROM
+        "DbWTkyufujisTempTbl"
+        ) 
+        AND Dbt2002."fukaNendo" <![CDATA[<=]]> ( 
+        SELECT
+        substr( 
+        MAX("DbWTkyufujisTempTbl"."serviceTeikyoYM") , 1 , 4
+        ) 
+        FROM
+        "DbWTkyufujisTempTbl"
+        )
         ) AS 介護1 
         WHERE
         rank_num = 1
@@ -392,8 +392,8 @@
         FROM
         "DbWTkyufujisTempTbl"
         ORDER BY
-        "DbWTkyufujisTempTbl"."serviceSyuruiCode",
-        "DbWTkyufujisTempTbl"."hiHokenshaNo"
+         LPAD('0', 2-length("serviceBunrui")) || "serviceBunrui"
+        ,"DbWTkyufujisTempTbl"."hiHokenshaNo"
         , "DbWTkyufujisTempTbl"."serviceTeikyoYM"
         , "DbWTkyufujisTempTbl"."yoKaigoJotaiKubunCode" 
     </select>
@@ -457,15 +457,15 @@
         "yokaigo3",
         "yokaigo4",   
         "yokaigo5",
-       "gokeichi"
-        FROM "DbWShikakutempTbl" ORDER BY  "pageNO","shotoku"
+        "gokeichi"
+        FROM "DbWShikakutempTbl" ORDER BY  LPAD('0', 2-length("pageNO")) || "pageNO" , "shotokuCd"
     </select>
     <insert  id="insert処理結果リスト一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity" >
         
         INSERT 
         INTO "DbWT1504ShoriKekkaKakuninList" 
         VALUES ( 
-          #{errorkubun}
+        #{errorkubun}
         , #{hiHokenshaNo}
         , #{ki1}
         , #{ki2}
@@ -485,15 +485,38 @@
         UPDATE "DbWShikakutempTbl" 
         SET
         "hokenseiteitoku" = #{所得段階}
-        , "yoshien1" = "yoshien1" + 1
-        , "yoshien2" = "yoshien2" + 1
-        , "keikanoyokaigo" = "keikanoyokaigo" + 1
-        , "yokaigo1" = "yokaigo1" + 1
-        , "yokaigo2" = "yokaigo2" + 1
-        , "yokaigo3" = "yokaigo3" + 1
-        , "yokaigo4" = "yokaigo4" + 1
-        , "yokaigo5" = "yokaigo5" + 1
-        , "gokeichi" = "gokeichi" + 1 
+        <if test="isyoshien1">
+            , "yoshien1" = "yoshien1" + #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyoshien2">
+            , "yoshien2" = "yoshien2" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="iskeikanoyokaigo">
+            , "keikanoyokaigo" = "keikanoyokaigo" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo1">
+            , "yokaigo1" = "yokaigo1" + #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo2">
+            , "yokaigo2" = "yokaigo2" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo3">
+            , "yokaigo3" = "yokaigo3" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo4">
+            , "yokaigo4" = "yokaigo4" + #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
+        <if test="isyokaigo5">
+            , "yokaigo5" = "yokaigo5" +  #{人数}
+            ,"gokeichi" =  "gokeichi" +  #{人数}
+        </if>
         WHERE
         "pageNO" = #{ページNo} 
         AND "shotoku" = #{所得段階} 
@@ -505,15 +528,38 @@
     <update  id="updateDB出力出力用一時TBL費用総額" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShukeinaiyouEntity"  >
         UPDATE "DbWShikakutempTbl" 
         SET
-        "yoshien1" = "yoshien1" + #{費用総額}
-        , "yoshien2" = "yoshien2" + #{費用総額}
-        , "keikanoyokaigo" = "keikanoyokaigo" + #{費用総額}
-        , "yokaigo1" = "yokaigo1" + #{費用総額}
-        , "yokaigo2" = "yokaigo2" + #{費用総額}
-        , "yokaigo3" = "yokaigo3" + #{費用総額}
-        , "yokaigo4" = "yokaigo4" + #{費用総額}
-        , "yokaigo5" = "yokaigo5" + #{費用総額}
-        , "gokeichi" = "gokeichi" + #{費用総額} 
+        <if test="isyoshien1">
+            "yoshien1" = "yoshien1" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyoshien2">
+            "yoshien2" = "yoshien2" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="iskeikanoyokaigo">
+            "keikanoyokaigo" = "keikanoyokaigo" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo1">
+            "yokaigo1" = "yokaigo1" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo2">
+            "yokaigo2" = "yokaigo2" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo3">
+            "yokaigo3" = "yokaigo3" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo4">
+            "yokaigo4" = "yokaigo4" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
+        <if test="isyokaigo5">
+            "yokaigo5" = "yokaigo5" + #{費用総額}
+            ,"gokeichi" =  "gokeichi" +  #{費用総額}
+        </if>
         WHERE
         "pageNO" = #{ページNo} 
         AND "shotoku" = #{所得段階} 

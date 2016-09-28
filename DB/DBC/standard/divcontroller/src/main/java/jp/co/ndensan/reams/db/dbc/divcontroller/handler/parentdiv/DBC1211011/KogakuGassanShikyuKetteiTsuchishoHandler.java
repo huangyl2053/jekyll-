@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040050.DBC040050_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikoFutanShomeisho_Insho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.SofuTorikomiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1211011.KogakuGassanShikyuKetteiTsuchishoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -46,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.YmdKubun;
 public class KogakuGassanShikyuKetteiTsuchishoHandler {
 
     private final KogakuGassanShikyuKetteiTsuchishoDiv div;
-    private static final ReportId 高額合算決定通知書 = ReportIdDBC.DBC100053.getReportId();
+    private static final ReportId 高額合算決定通知書 = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final RString 前回対象年月 = new RString("前回対象年月");
     private static final RString 前回対象日 = new RString("前回対象日");
     private static final RString KEY_0 = new RString("key0");

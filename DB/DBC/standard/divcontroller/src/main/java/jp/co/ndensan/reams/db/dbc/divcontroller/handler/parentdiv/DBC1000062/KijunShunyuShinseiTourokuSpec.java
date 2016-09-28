@@ -125,6 +125,7 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
 
         private static final int NUM_0 = 0;
         private static final int NUM_1 = 1;
+        private static final int NUM_4 = 4;
         private static final int NUM_6 = 6;
         private static final FlexibleYear 年度_2015 = new FlexibleYear("2015");
         private static final RString 月日_0801 = new RString("0801");
@@ -144,15 +145,17 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
             FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
             RString 所得年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, RDate.getNowDate(),
                     SubGyomuCode.DBB介護賦課);
-            return !(処理年度.getYear().isBefore(年度_2015) || new FlexibleYear(所得年度).isBefore(処理年度.getYear()));
+            FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+            return !(年度.isBefore(年度_2015) || new FlexibleYear(所得年度).isBefore(年度));
         }
 
         public static boolean is世帯員把握基準日チェック(KijunShunyuShinseiTourokuDiv div) {
             FlexibleDate 世帯員把握基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
             if (世帯員把握基準日 != null && !世帯員把握基準日.isEmpty()) {
                 FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
-                FlexibleDate 処理年度_0801 = new FlexibleDate(処理年度.getYear().toDateString().concat(月日_0801));
-                FlexibleDate 処理年度_0731 = new FlexibleDate(処理年度.getYear().plusYear(NUM_1).toDateString().concat(月日_0731));
+                FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+                FlexibleDate 処理年度_0801 = new FlexibleDate(年度.toDateString().concat(月日_0801));
+                FlexibleDate 処理年度_0731 = new FlexibleDate(年度.plusYear(NUM_1).toDateString().concat(月日_0731));
                 return !(世帯員把握基準日.isBefore(処理年度_0801) || 処理年度_0731.isBefore(世帯員把握基準日));
             }
             return true;
@@ -164,8 +167,9 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
                 return true;
             }
             FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
-            FlexibleYearMonth 処理年度_08 = new FlexibleYearMonth(処理年度.getYear().toDateString().concat(月_08));
-            FlexibleYearMonth 処理年度_07 = new FlexibleYearMonth(処理年度.getYear().plusYear(NUM_1).toDateString().concat(月_07));
+            FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+            FlexibleYearMonth 処理年度_08 = new FlexibleYearMonth(年度.toDateString().concat(月_08));
+            FlexibleYearMonth 処理年度_07 = new FlexibleYearMonth(年度.plusYear(NUM_1).toDateString().concat(月_07));
             FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(適用開始.toString().substring(NUM_0, NUM_6));
             return !(適用開始年月.isBefore(処理年度_08) || 処理年度_07.isBefore(適用開始年月));
         }

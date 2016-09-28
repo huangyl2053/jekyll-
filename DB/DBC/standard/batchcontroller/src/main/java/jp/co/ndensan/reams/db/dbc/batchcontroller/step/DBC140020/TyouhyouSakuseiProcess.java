@@ -41,6 +41,7 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
     private ReportSourceWriter<JukyushaKyufuJissekiIchiranReportSource> reportSourceWriter;
     private RString 導入団体コード;
     private RString 市町村名;
+    private final int index_tmp = 0;
 
     @Override
     protected void initialize() {
@@ -67,11 +68,7 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
         chosahoshuseikyu.set市町村コード(導入団体コード);
         chosahoshuseikyu.set市町村名(市町村名);
         chosahoshuseikyu.set被保険者番号(entity.get被保険者番号());
-        if (entity.get被保険者氏名() != null && !entity.get被保険者氏名().isEmpty()) {
-            chosahoshuseikyu.set被保険者氏名(entity.get被保険者氏名());
-        } else if (entity.get被保険者氏名() == null && entity.get被保険者氏名().isEmpty()) {
-            chosahoshuseikyu.set被保険者氏名(new RString("該当データ無し"));
-        }
+        chosahoshuseikyu.set被保険者氏名(entity.get被保険者氏名());
         chosahoshuseikyu.set要介護度(entity.get要介護状態区分名称());
         chosahoshuseikyu.setサービス提供年月(new FlexibleYearMonth(entity.getサービス提供年月()));
         chosahoshuseikyu.set公費負担者1(entity.get公費1_負担者番号());
@@ -114,5 +111,15 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
         chosahoshuseikyu.set特定入所者介護費等請求額_公費3(entity.get後_公費3_特定入所者介護サービス費等請求額());
         JukyushaKyufuJissekiIchiranReport report = new JukyushaKyufuJissekiIchiranReport(chosahoshuseikyu);
         report.writeBy(reportSourceWriter);
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (index_tmp == 0) {
+            JukyushaKyufuJissekiIchiranData entity = new JukyushaKyufuJissekiIchiranData();
+            entity.set被保険者氏名(new RString("該当データ無し"));
+            JukyushaKyufuJissekiIchiranReport report = new JukyushaKyufuJissekiIchiranReport(entity);
+            report.writeBy(reportSourceWriter);
+        }
     }
 }

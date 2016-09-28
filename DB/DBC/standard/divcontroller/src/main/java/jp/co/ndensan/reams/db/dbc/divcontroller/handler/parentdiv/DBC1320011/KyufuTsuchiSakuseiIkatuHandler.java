@@ -120,16 +120,16 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         parameter.setサービス終了年月(new FlexibleYearMonth(
                 div.getKyufuTsuchiSakusei().getTdrServiceYM().getToValue().getYearMonth().toDateString()));
         if (!div.getKyufuTsuchiSakusei().getGrdTuuchiJoho().getDataSource().isEmpty()) {
-            parameter.setページ出力区分(ONE);
+            parameter.set福祉用具貸与ページ出力区分(ONE);
         } else {
-            parameter.setページ出力区分(ZERO);
+            parameter.set福祉用具貸与ページ出力区分(ZERO);
         }
         if (!div.getKyufuTsuchiSakusei().getChkServiceSyuruiSyuyaku().getSelectedItems().isEmpty()) {
             parameter.set集約区分(ONE);
         } else {
             parameter.set集約区分(ZERO);
         }
-        if (ONE.equals(parameter.getページ出力区分())) {
+        if (ONE.equals(parameter.get福祉用具貸与ページ出力区分())) {
             if (DonyuKeitaiCode.事務広域.getCode().equals(div.getKyufuTsuchiSakusei().getHdn保険者構成key())) {
                 parameter.set保険者構成(TWO);
                 parameter.set証記載保険者番号(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
@@ -142,19 +142,19 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         List<KeyValueDataSource> chkTyusyutuJokenList = div.getKyufuTsuchiSakusei().getChkTyusyutuJoken().getSelectedItems();
         for (KeyValueDataSource dataSource : chkTyusyutuJokenList) {
             if (KEY0.equals(dataSource.getKey())) {
-                parameter.set死亡者分(ONE);
+                parameter.set死亡者分を対象としない(ONE);
             } else if (KEY1.equals(dataSource.getKey())) {
-                parameter.setゼロ査定実績(ONE);
+                parameter.setゼロ査定実績を対象としない(ONE);
             } else if (KEY2.equals(dataSource.getKey())) {
-                parameter.set再審査分(ONE);
+                parameter.set再審査分を対象としない(ONE);
             } else if (KEY3.equals(dataSource.getKey())) {
-                parameter.set過誤分(ONE);
+                parameter.set過誤分を対象としない(ONE);
             } else if (KEY4.equals(dataSource.getKey())) {
-                parameter.set施設分(ONE);
+                parameter.set施設分を対象としない(ONE);
             } else if (KEY5.equals(dataSource.getKey())) {
-                parameter.set特定入所者介護(ONE);
+                parameter.set特定入所者介護を対象としない(ONE);
             } else if (KEY6.equals(dataSource.getKey())) {
-                parameter.set償還分(ONE);
+                parameter.set償還分を対象としない(ONE);
             }
         }
         parameter.set被保険者番号(div.getKyufuTsuchiSakusei().getTxtHihokenshaNo().getValue());

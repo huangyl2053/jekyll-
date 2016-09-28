@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.batchcontroller.flow.fuka;
+package jp.co.ndensan.reams.db.dbz.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.fuka.InsSetaiinHaakuTmp1Process;
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.fuka.InsSetaiinHaakuTmp2Process;
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.fuka.InsSetaiinHaakuTmp3Process;
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.fuka.UpdSetaiinHaakuNyuryokuProcess;
-import jp.co.ndensan.reams.db.dbz.batchcontroller.step.fuka.UpdSetaiinHaakuTmpProcess;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBB002001.InsSetaiinHaakuTmp1Process;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBB002001.InsSetaiinHaakuTmp2Process;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBB002001.InsSetaiinHaakuTmp3Process;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBB002001.UpdSetaiinHaakuNyuryokuProcess;
+import jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBB002001.UpdSetaiinHaakuTmpProcess;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBB-0640-010 chenaoqi
  */
-public class SetaiShotokuKazeiHanteiFlow extends BatchFlowBase<SetaiShotokuKazeiHanteiBatchParameter> {
+public class DBB002001_SetaiinHaaku extends BatchFlowBase<DBB002001_SetaiinHaakuParameter> {
 
     private static final String UPDATESETAIINHAAKU = "updSetaiinHaaku";
     private static final String INSSETAIINHAAKU_1 = "insSetaiinHaaku1";

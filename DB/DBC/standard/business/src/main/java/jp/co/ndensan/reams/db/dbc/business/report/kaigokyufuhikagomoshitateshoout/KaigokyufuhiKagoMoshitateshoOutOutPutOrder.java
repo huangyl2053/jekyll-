@@ -43,11 +43,11 @@ public enum KaigokyufuhiKagoMoshitateshoOutOutPutOrder implements IReportItems {
     /**
      * 被保険者番号
      */
-    被保険者番号("0104", "被保険者番号", "\"DbWT1731KagoMoshitate\".\"hihokenshaNo\""),
+    被保険者番号("0104", "被保険者番号", "\"DbWT1731KagoMoshitate\".\"hiHokenshaNo\""),
     /**
      * 事業者番号
      */
-    事業者番号("0366", "事業者番号", "\"DbWT1731KagoMoshitate\".\"jigyoshoNo\""),
+    事業者番号("0366", "事業者番号", "\"DbWT1731KagoMoshitate\".\"jigyoshaNo\""),
     /**
      * サービス提供年月
      */

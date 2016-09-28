@@ -185,13 +185,14 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
         eucCsvWriter.close();
     }
 
-    private void tempCsv(boolean flag) {
+    private boolean tempCsv(boolean flag) {
         if (flag) {
             File tmpfile = new File(eucFilePath.toString());
             if (tmpfile.exists()) {
-                tmpfile.delete();
+                return tmpfile.delete();
             }
         }
+        return true;
     }
 
     private void setFilePath(RStringBuilder filePath) {

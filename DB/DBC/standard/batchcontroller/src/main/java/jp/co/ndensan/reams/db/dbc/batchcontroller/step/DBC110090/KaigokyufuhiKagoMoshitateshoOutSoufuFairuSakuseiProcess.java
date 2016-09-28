@@ -64,6 +64,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
     private static final RString ファイル名_後 = new RString(".csv");
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
     private static final RString RSTRING_00 = new RString("00");
     private static final RString RSTRING_000 = new RString("000");
     private static final RString RSTRING_0000000000 = new RString("0000000000");
@@ -114,7 +115,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         mybatisParameter.set保険者番号(processParameter.get保険者番号());
 
         総出力件数 = INT_0;
-        レコード番号 = INT_0;
+        レコード番号 = INT_1;
 
         if (コード_173.equals(processParameter.getコード())) {
             出力ファイル名 = ファイル名_前.concat(コード_173).concat(processParameter.get保険者番号().getColumnValue())
@@ -162,23 +163,23 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
 
     @Override
     protected void process(KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity entity) {
-        if (レコード番号 == INT_0) {
+        if (レコード番号 == INT_1) {
             KogakugassanSoufuFairuSakuseiControlEntity controlEntity = this.getControlEntity();
             eucCsvWriter.writeLine(controlEntity);
+            レコード番号++;
         }
         KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiMeisaiEntity kaigoEntity = this.getKaigoEntity(entity);
         eucCsvWriter.writeLine(kaigoEntity);
-        総出力件数 = 総出力件数 + 1;
-        レコード番号 = レコード番号 + 1;
+        総出力件数++;
+        レコード番号++;
     }
 
     @Override
     protected void afterExecute() {
-        レコード番号 = レコード番号 + 1;
         KogakugassanSoufuFairuSakuseiEndEntity endEntity = this.getEndEntity();
         eucCsvWriter.writeLine(endEntity);
         eucCsvWriter.close();
-        do外字類似変換();
+        //do外字類似変換();
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
@@ -230,7 +231,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         controlEntity.setレコード種別(RecordShubetsu.コントロールレコード.getコード());
         controlEntity.setレコード番号_連番(new RString(レコード番号));
         controlEntity.setボリュ_ム通番(RSTRING_000);
-        controlEntity.setレコード件数(new RString(reader.getCount()));
+        controlEntity.setレコード件数(new RString(processParameter.get件数()));
         controlEntity.setデータ種別(this.データ種別);
         controlEntity.set福祉事務所特定番号(RSTRING_00);
         controlEntity.set保険者番号(processParameter.get保険者番号().getColumnValue());

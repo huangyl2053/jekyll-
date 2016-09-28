@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Aug 29 10:36:53 CST 2016 
+ * Tue Sep 27 18:14:48 CST 2016 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgHakkotaishosha_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
 
     private ButtonDialog riyuselect;
     private RString hokenshano;
@@ -42,6 +42,11 @@ public class dgHakkotaishosha_Row extends DataRow {
     private TextBoxDate shinsakaiyoteiymd;
     private RString shinseishokanrino;
     private RString changeflag;
+    private RString hiddenEnkiriyu;
+    private RString hiddenenKiketteidate;
+    private RString hiddenTsuchishohakkoymd;
+    private RString hiddenMikomishorikikanfrom;
+    private RString hiddenMikomishorikikanto;
 
     public dgHakkotaishosha_Row() {
         super();
@@ -64,6 +69,11 @@ public class dgHakkotaishosha_Row extends DataRow {
         this.shinsakaiyoteiymd = new TextBoxDate();
         this.shinseishokanrino = RString.EMPTY;
         this.changeflag = RString.EMPTY;
+        this.hiddenEnkiriyu = RString.EMPTY;
+        this.hiddenenKiketteidate = RString.EMPTY;
+        this.hiddenTsuchishohakkoymd = RString.EMPTY;
+        this.hiddenMikomishorikikanfrom = RString.EMPTY;
+        this.hiddenMikomishorikikanto = RString.EMPTY;
         this.setOriginalData("riyuselect", riyuselect);
         this.setOriginalData("hokenshano", hokenshano);
         this.setOriginalData("hokensha", hokensha);
@@ -83,9 +93,14 @@ public class dgHakkotaishosha_Row extends DataRow {
         this.setOriginalData("shinsakaiyoteiymd", shinsakaiyoteiymd);
         this.setOriginalData("shinseishokanrino", shinseishokanrino);
         this.setOriginalData("changeflag", changeflag);
+        this.setOriginalData("hiddenEnkiriyu", hiddenEnkiriyu);
+        this.setOriginalData("hiddenenKiketteidate", hiddenenKiketteidate);
+        this.setOriginalData("hiddenTsuchishohakkoymd", hiddenTsuchishohakkoymd);
+        this.setOriginalData("hiddenMikomishorikikanfrom", hiddenMikomishorikikanfrom);
+        this.setOriginalData("hiddenMikomishorikikanto", hiddenMikomishorikikanto);
     }
 
-    public dgHakkotaishosha_Row(ButtonDialog riyuselect, RString hokenshano, RString hokensha, RString hihokenshano, RString hihokenshaname, TextBoxDate ninteishinseiymd, RString shinseikubun, TextBoxDate enkiketteidate, RString enkiriyu, TextBoxDate tsuchishohakkoymd, RString enkikaisu, TextBoxDate mikomishorikikanfrom, TextBoxDate mikomishorikikanto, TextBoxDate chosajissiymd, TextBoxDate ikenshojyuryoymd, TextBoxDate ichijihanteiymd, TextBoxDate shinsakaiyoteiymd, RString shinseishokanrino, RString changeflag) {
+    public dgHakkotaishosha_Row(ButtonDialog riyuselect, RString hokenshano, RString hokensha, RString hihokenshano, RString hihokenshaname, TextBoxDate ninteishinseiymd, RString shinseikubun, TextBoxDate enkiketteidate, RString enkiriyu, TextBoxDate tsuchishohakkoymd, RString enkikaisu, TextBoxDate mikomishorikikanfrom, TextBoxDate mikomishorikikanto, TextBoxDate chosajissiymd, TextBoxDate ikenshojyuryoymd, TextBoxDate ichijihanteiymd, TextBoxDate shinsakaiyoteiymd, RString shinseishokanrino, RString changeflag, RString hiddenEnkiriyu, RString hiddenenKiketteidate, RString hiddenTsuchishohakkoymd, RString hiddenMikomishorikikanfrom, RString hiddenMikomishorikikanto) {
         super();
         this.setOriginalData("riyuselect", riyuselect);
         this.setOriginalData("hokenshano", hokenshano);
@@ -106,6 +121,11 @@ public class dgHakkotaishosha_Row extends DataRow {
         this.setOriginalData("shinsakaiyoteiymd", shinsakaiyoteiymd);
         this.setOriginalData("shinseishokanrino", shinseishokanrino);
         this.setOriginalData("changeflag", changeflag);
+        this.setOriginalData("hiddenEnkiriyu", hiddenEnkiriyu);
+        this.setOriginalData("hiddenenKiketteidate", hiddenenKiketteidate);
+        this.setOriginalData("hiddenTsuchishohakkoymd", hiddenTsuchishohakkoymd);
+        this.setOriginalData("hiddenMikomishorikikanfrom", hiddenMikomishorikikanfrom);
+        this.setOriginalData("hiddenMikomishorikikanto", hiddenMikomishorikikanto);
         this.riyuselect = riyuselect;
         this.hokenshano = hokenshano;
         this.hokensha = hokensha;
@@ -125,6 +145,11 @@ public class dgHakkotaishosha_Row extends DataRow {
         this.shinsakaiyoteiymd = shinsakaiyoteiymd;
         this.shinseishokanrino = shinseishokanrino;
         this.changeflag = changeflag;
+        this.hiddenEnkiriyu = hiddenEnkiriyu;
+        this.hiddenenKiketteidate = hiddenenKiketteidate;
+        this.hiddenTsuchishohakkoymd = hiddenTsuchishohakkoymd;
+        this.hiddenMikomishorikikanfrom = hiddenMikomishorikikanfrom;
+        this.hiddenMikomishorikikanto = hiddenMikomishorikikanto;
     }
 
     public ButtonDialog getRiyuselect() {
@@ -201,6 +226,26 @@ public class dgHakkotaishosha_Row extends DataRow {
 
     public RString getChangeflag() {
         return changeflag;
+    }
+
+    public RString getHiddenEnkiriyu() {
+        return hiddenEnkiriyu;
+    }
+
+    public RString getHiddenenKiketteidate() {
+        return hiddenenKiketteidate;
+    }
+
+    public RString getHiddenTsuchishohakkoymd() {
+        return hiddenTsuchishohakkoymd;
+    }
+
+    public RString getHiddenMikomishorikikanfrom() {
+        return hiddenMikomishorikikanfrom;
+    }
+
+    public RString getHiddenMikomishorikikanto() {
+        return hiddenMikomishorikikanto;
     }
 
     public void setRiyuselect(ButtonDialog riyuselect) {
@@ -296,6 +341,31 @@ public class dgHakkotaishosha_Row extends DataRow {
     public void setChangeflag(RString changeflag) {
         this.setOriginalData("changeflag", changeflag);
         this.changeflag = changeflag;
+    }
+
+    public void setHiddenEnkiriyu(RString hiddenEnkiriyu) {
+        this.setOriginalData("hiddenEnkiriyu", hiddenEnkiriyu);
+        this.hiddenEnkiriyu = hiddenEnkiriyu;
+    }
+
+    public void setHiddenenKiketteidate(RString hiddenenKiketteidate) {
+        this.setOriginalData("hiddenenKiketteidate", hiddenenKiketteidate);
+        this.hiddenenKiketteidate = hiddenenKiketteidate;
+    }
+
+    public void setHiddenTsuchishohakkoymd(RString hiddenTsuchishohakkoymd) {
+        this.setOriginalData("hiddenTsuchishohakkoymd", hiddenTsuchishohakkoymd);
+        this.hiddenTsuchishohakkoymd = hiddenTsuchishohakkoymd;
+    }
+
+    public void setHiddenMikomishorikikanfrom(RString hiddenMikomishorikikanfrom) {
+        this.setOriginalData("hiddenMikomishorikikanfrom", hiddenMikomishorikikanfrom);
+        this.hiddenMikomishorikikanfrom = hiddenMikomishorikikanfrom;
+    }
+
+    public void setHiddenMikomishorikikanto(RString hiddenMikomishorikikanto) {
+        this.setOriginalData("hiddenMikomishorikikanto", hiddenMikomishorikikanto);
+        this.hiddenMikomishorikikanto = hiddenMikomishorikikanto;
     }
 
     // </editor-fold>

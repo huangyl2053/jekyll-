@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.DBB051001_GennendoIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -49,7 +49,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
     private static final String 世帯員把握 = "collectSetaiin";
     private static final String 世帯員把握フロー = "setaiinBatchFlow";
     private static final String 本算定異動_現年度_通知書一括発行 = "honsanteiIdoGennendoTsuchisyoIkatsuHakoFlow";
-    private static final RString 世帯員把握BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString 世帯員把握BATCH_ID = new RString("DBB002001_SetaiinHaaku");
     private static final RString 本算定異動_現年度_通知書一括発行BATCH_ID = new RString("DBB051003_GennendoIdoTsuchishoHakko");
     private static final String 賦課計算 = "calculateFukaTsujoIdo";
     private static final String 特徴依頼金計算_４月開始 = "calculateTokuchoIraikin4gatsuKaishi";
@@ -120,7 +120,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(システム日時の取得)
+    @Step (システム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
         return simpleBatch(SystemTimeGennendoIdoFukaProcess.class).define();
     }
@@ -130,7 +130,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(特別徴収開始者抽出)
+    @Step (特別徴収開始者抽出)
     protected IBatchFlowCommand selectTokuchoKaishisha() {
         return simpleBatch(TokuchoKaishishaProcess.class).arguments(processParameter).define();
     }
@@ -140,7 +140,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(異動対象者抽出)
+    @Step (異動対象者抽出)
     protected IBatchFlowCommand selectIdoJoho() {
         return simpleBatch(IdoJohoProcess.class).arguments(processParameter).define();
     }
@@ -150,7 +150,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(異動トリガーTEMP作成)
+    @Step (異動トリガーTEMP作成)
     protected IBatchFlowCommand createIdoTriggerTemp() {
         return simpleBatch(IdoTriggerTempProcess.class).arguments(processParameter).define();
     }
@@ -160,7 +160,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(通知書番号発番)
+    @Step (通知書番号発番)
     protected IBatchFlowCommand getTsuchishoNo() {
         return simpleBatch(TsuchishoNoProcess.class).arguments(processParameter).define();
     }
@@ -170,7 +170,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握)
+    @Step (世帯員把握)
     protected IBatchFlowCommand collectSetaiin() {
         return simpleBatch(SetaiinProcess.class).define();
     }
@@ -180,10 +180,10 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握フロー)
+    @Step (世帯員把握フロー)
     protected IBatchFlowCommand setaiinBatchFlow() {
         return otherBatchFlow(世帯員把握BATCH_ID, SubGyomuCode.DBB介護賦課,
-                new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
+                new DBB002001_SetaiinHaakuParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
     }
 
     /**
@@ -191,7 +191,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(賦課計算)
+    @Step (賦課計算)
     protected IBatchFlowCommand calculateFukaTsujoIdo() {
         return simpleBatch(FukaTsujoIdoProcess.class).arguments(processParameter).define();
     }
@@ -201,7 +201,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(特徴依頼金計算_４月開始)
+    @Step (特徴依頼金計算_４月開始)
     protected IBatchFlowCommand calculateTokuchoIraikin4gatsuKaishi() {
         return simpleBatch(TokuchoIraikinProcess.class).arguments(processParameter).define();
     }
@@ -211,7 +211,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(賦課の情報登録フロー)
+    @Step (賦課の情報登録フロー)
     protected IBatchFlowCommand choteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
                 new DBB004001_FukaJohoTorokuParameter(true)).define();
@@ -222,7 +222,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(計算後情報テーブル削除)
+    @Step (計算後情報テーブル削除)
     protected IBatchFlowCommand keisangoJohoDelete() {
         return simpleBatch(KeisangoJohoDelete.class).define();
     }
@@ -232,7 +232,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(計算後情報作成)
+    @Step (計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
         return otherBatchFlow(計算後情報作成BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getKeisangoJohoSakuseiBatchParamter(RString.EMPTY)).define();
@@ -257,7 +257,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(本算定異動_現年度_結果一覧表)
+    @Step (本算定異動_現年度_結果一覧表)
     protected IBatchFlowCommand spoolHonsanteiIdoKekkaIchiranData() {
         return simpleBatch(HonsanteiIdoKekkaIchiranProcess.class).arguments(processParameter).define();
     }
@@ -267,7 +267,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(処理日付管理テーブル更新)
+    @Step (処理日付管理テーブル更新)
     protected IBatchFlowCommand updateSystemTimeProcess() {
         return simpleBatch(SystemTimeUpdateProcess.class).arguments(processParameter).define();
     }
@@ -277,7 +277,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
      *
      * @return バッチコマンド
      */
-    @Step(本算定異動_現年度_通知書一括発行)
+    @Step (本算定異動_現年度_通知書一括発行)
     protected IBatchFlowCommand honsanteiIdoGennendoTsuchisyoIkatsuHakoFlow() {
         return otherBatchFlow(本算定異動_現年度_通知書一括発行BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getParameter().toDBB051003_GennendoIdoTsuchishoHakkoParameter()).define();

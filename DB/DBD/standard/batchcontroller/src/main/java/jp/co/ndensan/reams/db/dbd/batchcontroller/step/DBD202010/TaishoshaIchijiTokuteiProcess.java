@@ -54,7 +54,7 @@ public class TaishoshaIchijiTokuteiProcess extends BatchProcessBase<TaishoshaIch
     private TaishoshaIchijiTokuteiTableEntity create対象者一次特定Entity(TaishoshaIchijiTokuteiEntity t) {
         TaishoshaIchijiTokuteiTableEntity data = new TaishoshaIchijiTokuteiTableEntity();
         data.setHihokenshaNo(new HihokenshaNo(t.getHihokenshaNo().getColumnValue()));
-        data.setKijunYMD(processParameter.get基準日());
+        data.setKijunYMD(processParameter.get課税判定等基準日());
         return data;
     }
 }

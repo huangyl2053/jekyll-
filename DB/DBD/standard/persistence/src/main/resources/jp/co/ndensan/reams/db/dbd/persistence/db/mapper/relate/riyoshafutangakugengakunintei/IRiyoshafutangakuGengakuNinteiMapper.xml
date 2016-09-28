@@ -40,15 +40,10 @@
                 AND 受給者台帳."kyuSochishaFlag" = true )
             </if>
             <if test="is旧措置者区分_旧措置者以外">
-                AND NOT EXIST (
-                SELECT 1
-                FROM
-                rgdb."DbT4001JukyushaDaicho" AS J
-                WHERE
-                J."hihokenshaNo" = A."hihokenshaNo"
-                AND J."logicalDeletedFlag" = false
-                AND J."kyuSochishaFlag" = true
-                )
+                AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4001JukyushaDaicho" J
+                WHERE J."hihokenshaNo" = A."hihokenshaNo"
+                AND J."logicalDeletedFlag" = false 
+                AND J."kyuSochishaFlag" = true)
             </if>
         </if>
         <if test="is対象リスト_認定者リスト">

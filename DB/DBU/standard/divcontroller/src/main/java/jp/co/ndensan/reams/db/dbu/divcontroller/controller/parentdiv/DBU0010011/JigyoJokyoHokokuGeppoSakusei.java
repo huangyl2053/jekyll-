@@ -29,6 +29,13 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JigyoJokyoHokokuGeppoSakusei {
 
+    private static final RString 一般状況1_11 = new RString("ippan1_11");
+    private static final RString 一般状況12_14_現物分 = new RString("ippan12_14Genbutsu");
+    private static final RString 保険給付決定状況_現物分 = new RString("hokenKyufuGenbutsu");
+    private static final RString 一般状況12_14_償還分 = new RString("ippan12_14Shokan");
+    private static final RString 保険給付決定状況_償還分 = new RString("hokenKyufuShokan");
+    private static final RString 保険給付決定状況_高額分 = new RString("hokenKyufuKogaku");
+    private static final RString 保険給付決定状況_高額合算分 = new RString("hokenKyufuKogakuGassan");
     private static final RString 集計のみ = new RString("shukei");
     private static final RString 集計後に印刷 = new RString("shukeiOutput");
     private static final RString 過去の集計結果を印刷 = new RString("kakoShukeiOutput");
@@ -193,6 +200,11 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaishoAll(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         getHandler(div).setすべて選択();
+        onChange_cblOutputTaisho1(div);
+        onChange_cblOutputTaisho2(div);
+        onChange_celOutputTaisho3(div);
+        onChange_cblOutputTaisho4(div);
+        onChange_cblOutputTaisho5(div);
         return ResponseData.of(div).respond();
     }
 
@@ -204,6 +216,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho1(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         getHandler(div).set作成日時の設定();
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -215,6 +228,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho2(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         getHandler(div).set一般状況償還分();
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -226,6 +240,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_celOutputTaisho3(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         getHandler(div).set保険給付償還分();
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -242,6 +257,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         } else if (div.getRadlblShukeiType4().getSelectedKey().equals(new RString("keiteiYM4"))) {
             div.getTxtShukeiYM4().setValue(shukeiYM4);
         }
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -258,6 +274,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         } else if (div.getRadlblShukeiType5().getSelectedKey().equals(new RString("keiteiYM5"))) {
             div.getTxtShukeiYM5().setValue(shukeiYM5);
         }
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -329,6 +346,20 @@ public class JigyoJokyoHokokuGeppoSakusei {
         枝番List.add(new RString("0011"));
         枝番List.add(new RString("0012"));
         return shoriDateKanriManager.get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告, 処理名List, 枝番List).records();
+    }
+
+    private void setすべて選択チェックボックス(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        List<RString> allKey = new ArrayList<>();
+        if (div.getCblOutputTaisho1().getSelectedKeys().contains(一般状況1_11)
+                && div.getCblOutputTaisho2().getSelectedKeys().contains(一般状況12_14_現物分)
+                && div.getCblOutputTaisho3().getSelectedKeys().contains(保険給付決定状況_現物分)
+                && div.getCblOutputTaisho4().getSelectedKeys().contains(一般状況12_14_償還分)
+                && div.getCblOutputTaisho5().getSelectedKeys().contains(保険給付決定状況_償還分)
+                && div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額分)
+                && div.getCblOutputTaisho7().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
+            allKey.add(new RString("all"));
+        }
+        div.getCblOutputTaishoAll().setSelectedItemsByKey(allKey);
     }
 
     private JigyoJokyoHokokuGeppoSakuseiHandler getHandler(JigyoJokyoHokokuGeppoSakuseiDiv div) {

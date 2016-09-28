@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -158,10 +159,15 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<L
             dbWT38P1TempEntity.setShoKisaiHokenshaNo(new HokenshaNo(csvEntity.get保険者番号()));
             dbWT38P1TempEntity.setKokuho_HihokenshaShoKigo(csvEntity.get被保険者証記号());
             if (csvEntity.get申請年月日() != null) {
-                dbWT38P1TempEntity.setShinseiYMD(new FlexibleDate(csvEntity.get申請年月日()));
+                RDate date1 = new RDate(csvEntity.get申請年月日().toString());
+                RString getdate1 = date1.toDateString();
+                dbWT38P1TempEntity.setShinseiYMD(new FlexibleDate(getdate1));
             }
+
             if (csvEntity.get決定年月日() != null) {
-                dbWT38P1TempEntity.setKetteiYMD(new FlexibleDate(csvEntity.get決定年月日()));
+                RDate date2 = new RDate(csvEntity.get決定年月日().toString());
+                RString getdate2 = date2.toDateString();
+                dbWT38P1TempEntity.setKetteiYMD(new FlexibleDate(getdate2));
             }
             if (csvEntity.get自己負担総額() != null) {
                 dbWT38P1TempEntity.setJikoFutanSogaku(getDecimal(csvEntity.get自己負担総額()));
@@ -170,7 +176,9 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<L
                 dbWT38P1TempEntity.setShikyuGaku(getDecimal(csvEntity.get支給額()));
             }
             if (csvEntity.get処理年月() != null) {
-                dbWT38P1TempEntity.setShoriYM(new FlexibleYearMonth(csvEntity.get処理年月()));
+                RDate date = new RDate(csvEntity.get処理年月().toString());
+                RString getdate = date.toDateString();
+                dbWT38P1TempEntity.setShoriYM(new FlexibleDate(getdate).getYearMonth());
             }
             dbWT38P1TempEntity.setUketoriYM(FlexibleYearMonth.EMPTY);
             dbWT38P1TempEntity.setSofuYM(FlexibleYearMonth.EMPTY);

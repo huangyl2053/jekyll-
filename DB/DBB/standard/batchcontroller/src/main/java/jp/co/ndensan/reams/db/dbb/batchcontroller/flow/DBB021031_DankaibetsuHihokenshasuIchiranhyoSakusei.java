@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021031.DankaibetsuHiho
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021031.HihokenshaProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021031.DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -34,7 +34,7 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
     private static final String 段階取得 = "getDankai";
     private static final String 帳票の出力 = "getReport";
     private static final String CSVの出力 = "getDankaiCSV";
-    private static final RString BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString BATCH_ID = new RString("DBB002001_SetaiinHaaku");
     private DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter parameter;
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
 
@@ -64,7 +64,7 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(被保険者対象抽出)
+    @Step (被保険者対象抽出)
     protected IBatchFlowCommand getHihokensha() {
         return loopBatch(HihokenshaProcess.class).arguments(processParameter).define();
     }
@@ -74,10 +74,10 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握)
+    @Step (世帯員把握)
     protected IBatchFlowCommand collectSetaiin() {
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
-                new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
+                new DBB002001_SetaiinHaakuParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
     }
 
     /**
@@ -85,7 +85,7 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(段階取得)
+    @Step (段階取得)
     protected IBatchFlowCommand getDankai() {
         return loopBatch(DankaiProcess.class).arguments(processParameter).define();
     }
@@ -95,7 +95,7 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(CSVの出力)
+    @Step (CSVの出力)
     protected IBatchFlowCommand getDankaiCSV() {
         return loopBatch(DankaibetsuHihokenshasuReportCSVProcess.class).arguments(processParameter).define();
     }
@@ -105,7 +105,7 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(帳票の出力)
+    @Step (帳票の出力)
     protected IBatchFlowCommand getReport() {
         return loopBatch(DankaibetsuHihokenshasuReportProcess.class).arguments(processParameter).define();
     }
