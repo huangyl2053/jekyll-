@@ -76,7 +76,7 @@ public class KyufuhiTuchiHakkoIchiran {
         coverEntity.set改ページ条件4(RString.EMPTY);
         coverEntity.set改ページ条件5(RString.EMPTY);
         coverEntity.set帳票連番(RString.EMPTY);
-        coverEntity.set被保険者氏名(RString.EMPTY);
+        coverEntity.set被保険者氏名(hakkoEntity.get証記載保険者名());
         coverEntity.set被保険者番号(hakkoEntity.get被保険者番号());
         coverEntity.set証記載保険者(hakkoEntity.get証記載保険者番号());
         coverEntity.set年月(hakkoEntity.getサービス提供年月());
