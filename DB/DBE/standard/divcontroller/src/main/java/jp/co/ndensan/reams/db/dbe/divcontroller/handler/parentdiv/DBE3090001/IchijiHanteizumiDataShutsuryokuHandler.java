@@ -382,10 +382,13 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
         }
         parameter.setShinseishoKanriNoList(shinseishoKanriNo);
         parameter.set日付指定(div.getRadJyoken().getSelectedKey());
-        parameter.set申請日From(div.getTxtShinseibi().getFromValue().toDateString());
-        parameter.set申請日To(div.getTxtShinseibi().getToValue().toDateString());
-        parameter.set申請日From(div.getTxtIchijiHanteibi().getFromValue().toDateString());
-        parameter.set申請日To(div.getTxtIchijiHanteibi().getToValue().toDateString());
+        if (new RString("1").equals(div.getRadJyoken().getSelectedKey())) {
+            parameter.set一次判定日From(div.getTxtIchijiHanteibi().getFromValue().toDateString());
+            parameter.set一次判定日To(div.getTxtIchijiHanteibi().getToValue().toDateString());
+        } else if (new RString("0").equals(div.getRadJyoken().getSelectedKey())) {
+            parameter.set申請日From(div.getTxtShinseibi().getFromValue().toDateString());
+            parameter.set申請日To(div.getTxtShinseibi().getToValue().toDateString());
+        }
         return parameter;
     }
 
