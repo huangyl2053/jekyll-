@@ -353,7 +353,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuKetteibi().setValue(riyoshaFutangakuGengaku.get決定年月日());
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuTekiyobi().setValue(riyoshaFutangakuGengaku.get適用開始年月日());
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuYukoKigen().setValue(riyoshaFutangakuGengaku.get適用終了年月日());
-        div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuShoninShinaiRiyu().setValue(riyoshaFutangakuGengaku.get非承認理由());
+        if (riyoshaFutangakuGengaku.get非承認理由() != null) {
+            div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuShoninShinaiRiyu().setValue(riyoshaFutangakuGengaku.get非承認理由());
+        } else {
+            div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuShoninShinaiRiyu().clearValue();
+        }
     }
 
     private void クリア負担限度額認定エリア() {
