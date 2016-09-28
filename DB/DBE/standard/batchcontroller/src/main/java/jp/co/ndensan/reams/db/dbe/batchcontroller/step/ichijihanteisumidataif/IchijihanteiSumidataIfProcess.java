@@ -92,16 +92,16 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     @Override
     protected void process(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity) {
         if (ファイル09B.equals(entity.get厚労省IF識別コード())) {
-//            RString エラーデータ09B = eraBunisess.setエラーデータ09B(entity);
-//            if (!RString.isNullOrEmpty(エラーデータ09B)) {
-//                getファイル名エラ(entity);
-//                IchijihanteiSumidataIferaEucEntity eraEucEntity = new IchijihanteiSumidataIferaEucEntity();
-//                eraEucEntity.set保険者番号(entity.get保険者番号());
-//                eraEucEntity.set被保険者番号(entity.get被保険者番号());
-//                eraEucEntity.setエラー項目(エラーデータ09B);
-//                eucCsvWriterJunitoJugo.writeLine(eraEucEntity);
-//                return;
-//            }
+            RString エラーデータ09B = eraBunisess.setエラーデータ09B(entity);
+            if (!RString.isNullOrEmpty(エラーデータ09B)) {
+                getファイル名エラ(entity);
+                IchijihanteiSumidataIferaEucEntity eraEucEntity = new IchijihanteiSumidataIferaEucEntity();
+                eraEucEntity.set保険者番号(entity.get保険者番号());
+                eraEucEntity.set被保険者番号(entity.get被保険者番号());
+                eraEucEntity.setエラー項目(エラーデータ09B);
+                eucCsvWriterJunitoJugo.writeLine(eraEucEntity);
+                return;
+            }
             getファイル名(entity);
             eucCsvWriterJunitoJugo.writeLine(bunisess.set一次判定済データ09B(entity));
         }
