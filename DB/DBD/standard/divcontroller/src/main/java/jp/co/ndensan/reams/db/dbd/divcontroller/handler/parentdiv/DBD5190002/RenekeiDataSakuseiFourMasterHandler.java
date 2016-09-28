@@ -121,7 +121,7 @@ public class RenekeiDataSakuseiFourMasterHandler {
             return;
         }
         YMDHMS 終了年月日時分秒 = 要介護認定外部データ出力履歴.getDataOutputShuryoYMDHMS();
-        if (終了年月日時分秒 != null) {
+        if (終了年月日時分秒 != null && !終了年月日時分秒.isEmpty()) {
             div.getTxtzenkaishoriymdtime().setToDateValue(終了年月日時分秒.getDate());
             div.getTxtzenkaishoriymdtime().setToTimeValue(終了年月日時分秒.getRDateTime().getTime());
             if (終了年月日時分秒.getRDateTime().getTime().compareTo(RTime.of(HOUR_23, MINUTE_59, SECOND_59)) == 0) {
@@ -131,11 +131,20 @@ public class RenekeiDataSakuseiFourMasterHandler {
                 div.getTxtkonkaishoriymdtime().setFromDateValue(終了年月日時分秒.getDate());
                 div.getTxtkonkaishoriymdtime().setFromTimeValue(終了年月日時分秒.getRDateTime().getTime().plusSeconds(ONE_SECOND));
             }
+        } else {
+            div.getTxtzenkaishoriymdtime().clearFromDateValue();
+            div.getTxtzenkaishoriymdtime().clearFromTimeValue();
+            div.getTxtkonkaishoriymdtime().clearFromDateValue();
+            div.getTxtkonkaishoriymdtime().clearFromTimeValue();
         }
-        if (要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS() != null) {
+        if (要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS() != null && !要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS().isEmpty()) {
             div.getTxtzenkaishoriymdtime().setFromDateValue(要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS().getDate());
             div.getTxtzenkaishoriymdtime().setFromTimeValue(要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS().getRDateTime().getTime());
+        } else {
+            div.getTxtzenkaishoriymdtime().clearFromDateValue();
+            div.getTxtzenkaishoriymdtime().clearFromTimeValue();
         }
+
     }
 
     private void 全件の場合表示制御() {
