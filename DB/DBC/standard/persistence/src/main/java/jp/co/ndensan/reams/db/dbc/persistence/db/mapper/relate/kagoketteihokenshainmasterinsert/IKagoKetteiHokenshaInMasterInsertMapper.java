@@ -28,4 +28,10 @@ public interface IKagoKetteiHokenshaInMasterInsertMapper {
      */
     void insert過誤決定明細(Map<String, Object> parameter);
 
+    /**
+     * 過誤決定明細TBL再処理準備
+     *
+     * @param parameter Map<String, Object>
+     */
+    void 再処理準備(Map<String, Object> parameter);
 }
