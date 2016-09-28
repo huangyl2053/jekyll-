@@ -28,8 +28,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
     public KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity 帳票データ作成(KyufuhiTuchiHakkoEntity hakkoEntity,
             KyufuhiTsuchishoProcessParameter processParameter) {
         KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity coverEntity = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity();
-        coverEntity.set被保険者氏名(hakkoEntity.get被保険者番号());
-        coverEntity.set被保険者氏名(hakkoEntity.get被保険者番号());
+        coverEntity.set被保険者番号(hakkoEntity.get被保険者番号());
         coverEntity.setサービス集計開始年月(processParameter.getサービス年月開始());
         coverEntity.setサービス集計終了年月(processParameter.getサービス年月終了());
         coverEntity.setサービス年月(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
