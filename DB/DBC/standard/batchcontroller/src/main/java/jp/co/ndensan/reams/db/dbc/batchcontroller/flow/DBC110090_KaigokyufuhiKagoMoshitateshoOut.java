@@ -7,16 +7,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutDoErrorProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaNameProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetOldHihokenshaNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutSetHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKagoMoshitateshoOutDoErrorProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKagoMoshitateshoOutGetHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKagoMoshitateshoOutGetKagoMoshitateListProcess;
@@ -27,6 +23,14 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKag
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKagoMoshitateshoOutUpdateSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKagoMoshitateshoOutgetCitySingleProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090.KaigokyufuhiKagoMoshitateshoOutgetCityWideAreaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutDoErrorProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaNameProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetOldHihokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutSetHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.DBC110090_KaigokyufuhiKagoMoshitateshoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoGetKagoMoshitateListProcessParameter;
@@ -96,6 +100,7 @@ public class DBC110090_KaigokyufuhiKagoMoshitateshoOut extends BatchFlowBase<DBC
     private List<SharedFileDescriptor> エントリ情報List;
     private DonyuKeitaiCode 導入形態コード;
     private KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter soufuFairuParameter;
+    private Map<RString, Integer> 件数Map;
 
     private static final RString 書区分コード = new RString("1");
     private static final RString コード = new RString("173");
@@ -131,8 +136,10 @@ public class DBC110090_KaigokyufuhiKagoMoshitateshoOut extends BatchFlowBase<DBC
                 this.soufuFairuParameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
                 List<DbWT1731KagoMoshitateTempEntity> bWT1731List = getResult(
                         List.class, new RString(保険者番号の取得), KaigokyufuhiKagoMoshitateshoOutDoErrorProcess.PARAMETER_OUT_OUTPUTENTRY);
+                this.get件数Map(bWT1731List);
                 for (DbWT1731KagoMoshitateTempEntity dbt : bWT1731List) {
                     this.soufuFairuParameter.set保険者番号(dbt.getHokenshaNo());
+                    this.soufuFairuParameter.set件数(this.件数Map.get(dbt.getHokenshaNo().getColumnValue()));
                     executeStep(送付ファイル作成);
                     int num = getResult(
                             Integer.class, new RString(送付ファイル作成), KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess.PARAMETER_OUT_OUTPUTCOUNT);
@@ -141,8 +148,8 @@ public class DBC110090_KaigokyufuhiKagoMoshitateshoOut extends BatchFlowBase<DBC
                             List.class, new RString(送付ファイル作成), KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess.PARAMETER_OUT_OUTPUTENTRY);
                     this.エントリ情報List.addAll(list);
                 }
+                executeStep(帳票出力);
             }
-            executeStep(帳票出力);
             executeStep(DB更新_送付済);
             executeStep(DB更新_未送付);
             executeStep(国保連インタフェース管理更新);
@@ -469,5 +476,22 @@ public class DBC110090_KaigokyufuhiKagoMoshitateshoOut extends BatchFlowBase<DBC
             param.setFileNameList(list);
         }
         return param;
+    }
+
+    private void get件数Map(List<DbWT1731KagoMoshitateTempEntity> bWT1731List) {
+        this.件数Map = new HashMap<>();
+        Set<RString> 保険者番号Set = new HashSet();
+        for (DbWT1731KagoMoshitateTempEntity entity : bWT1731List) {
+            if (!保険者番号Set.contains(entity.getHokenshaNo().getColumnValue())) {
+                this.件数Map.put(entity.getHokenshaNo().getColumnValue(), 1);
+                保険者番号Set.add(entity.getHokenshaNo().getColumnValue());
+            } else {
+                int i = this.件数Map.get(entity.getHokenshaNo().getColumnValue());
+                i++;
+                this.件数Map.put(entity.getHokenshaNo().getColumnValue(), i);
+            }
+
+        }
+
     }
 }

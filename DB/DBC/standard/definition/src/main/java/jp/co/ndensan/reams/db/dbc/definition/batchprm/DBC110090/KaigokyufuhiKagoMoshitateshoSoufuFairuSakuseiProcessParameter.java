@@ -23,5 +23,6 @@ public class KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter imple
     private HokenshaNo 保険者番号;
     private RString コード;
     private FlexibleYearMonth 処理年月;
+    private int 件数;
 
 }
