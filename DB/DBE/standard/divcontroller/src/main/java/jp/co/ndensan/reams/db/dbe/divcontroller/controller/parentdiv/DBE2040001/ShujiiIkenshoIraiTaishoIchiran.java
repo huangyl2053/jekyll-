@@ -189,24 +189,17 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
-            List<ShinseishoKanriNo> list = new ArrayList<>();
-            for (dgNinteiTaskList_Row row : rowList) {
-                if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                    list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                }
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        List<ShinseishoKanriNo> list = new ArrayList<>();
+        for (dgNinteiTaskList_Row row : rowList) {
+            if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
+                list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             }
-            model.set申請書管理番号リスト(list);
-            model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
-            div.setHiddenIuputModel(DataPassingConverter.serialize(model));
-            RealInitialLocker.release(排他キー);
-            return ResponseData.of(div).respond();
         }
+        model.set申請書管理番号リスト(list);
+        model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
+        div.setHiddenIuputModel(DataPassingConverter.serialize(model));
+        RealInitialLocker.release(排他キー);
         return ResponseData.of(div).respond();
     }
 
