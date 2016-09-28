@@ -21,6 +21,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuhiTsuchishoSealerType {
 
+    private static final int 桁目1 = 1;
+    private static final int 桁目2 = 2;
+    private static final int 桁目3 = 3;
+    private static final int 桁目4 = 4;
+    private static final int 桁目5 = 5;
+    private static final int 桁目6 = 6;
+    private static final int 桁目7 = 7;
+    private static final RString 問い合わせ先 = new RString("問い合わせ先");
+
     /**
      * コンストラクタです。
      *
@@ -35,14 +44,14 @@ public class KyufuhiTsuchishoSealerType {
             KyufuhiTsuchishoProcessParameter processParameter,
             NinshoshaSource ninshoshaSource, SofubutsuAtesakiSource atesakiSource, IToiawasesakiSourceBuilder sourceBuilder) {
         KyufuhiTsuchishoSealerEntity coverEntity = new KyufuhiTsuchishoSealerEntity();
-        coverEntity.setYubinNo1(hakkoEntity.get郵便番号());
-        coverEntity.setYubinNo2(hakkoEntity.get郵便番号());
-        coverEntity.setYubinNo3(hakkoEntity.get郵便番号());
-        coverEntity.setYubinNo4(hakkoEntity.get郵便番号());
-        coverEntity.setYubinNo5(hakkoEntity.get郵便番号());
-        coverEntity.setYubinNo6(hakkoEntity.get郵便番号());
+        coverEntity.setYubinNo1(hakkoEntity.get郵便番号().substring(桁目2));
+        coverEntity.setYubinNo2(hakkoEntity.get郵便番号().substring(桁目3));
+        coverEntity.setYubinNo3(hakkoEntity.get郵便番号().substring(桁目4));
+        coverEntity.setYubinNo4(hakkoEntity.get郵便番号().substring(桁目5));
+        coverEntity.setYubinNo5(hakkoEntity.get郵便番号().substring(桁目6));
+        coverEntity.setYubinNo6(hakkoEntity.get郵便番号().substring(桁目7));
         coverEntity.setHihokenshaNo(hakkoEntity.get被保険者番号());
-        coverEntity.setHihokenshaName(hakkoEntity.get被保険者番号());
+        coverEntity.setHihokenshaName(hakkoEntity.get証記載保険者名());
         coverEntity.setShukeiserviceSTYM(processParameter.getサービス年月開始());
         coverEntity.setShukeiserviceEDYM(processParameter.getサービス年月終了());
         coverEntity.setListServiceIchiran_1(hakkoEntity.getサービス提供年月());
@@ -51,7 +60,7 @@ public class KyufuhiTsuchishoSealerType {
         coverEntity.setListServiceIchiran_4(hakkoEntity.get日数_回数());
         coverEntity.setListServiceIchiran_5(new RString(hakkoEntity.get利用者負担額().toString()));
         coverEntity.setListServiceIchiran_6(new RString(hakkoEntity.getサービス費用合計額().toString()));
-        coverEntity.setToiawasesakiTitle(new RString("問い合わせ先"));
+        coverEntity.setToiawasesakiTitle(問い合わせ先);
         coverEntity.setHakkoYMD(ninshoshaSource.denshiKoin);
         coverEntity.setDenshiKoin(ninshoshaSource.hakkoYMD);
         coverEntity.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
@@ -61,7 +70,7 @@ public class KyufuhiTsuchishoSealerType {
         coverEntity.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
         coverEntity.setKoinShoryaku(ninshoshaSource.koinShoryaku);
         coverEntity.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
-        coverEntity.setYubinNo(atesakiSource.yubinNo);
+        coverEntity.setYubinNo(atesakiSource.yubinNo.substring(桁目1));
         coverEntity.setGyoseiku(atesakiSource.gyoseiku);
         coverEntity.setJusho4(atesakiSource.jusho1);
         coverEntity.setJushoText(atesakiSource.jushoText);
