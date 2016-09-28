@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000012;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -43,6 +44,8 @@ public class IdoRiyoshaFutanwariaiHanteiDiv extends Panel {
     private PanelNoteDiv PanelNote;
     @JsonProperty("tblNote")
     private TablePanel tblNote;
+    @JsonProperty("ErrorFlag")
+    private RString ErrorFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -174,6 +177,24 @@ public class IdoRiyoshaFutanwariaiHanteiDiv extends Panel {
     @JsonProperty("tblNote")
     public void setTblNote(TablePanel tblNote) {
         this.tblNote = tblNote;
+    }
+
+    /*
+     * getErrorFlag
+     * @return ErrorFlag
+     */
+    @JsonProperty("ErrorFlag")
+    public RString getErrorFlag() {
+        return ErrorFlag;
+    }
+
+    /*
+     * setErrorFlag
+     * @param ErrorFlag ErrorFlag
+     */
+    @JsonProperty("ErrorFlag")
+    public void setErrorFlag(RString ErrorFlag) {
+        this.ErrorFlag = ErrorFlag;
     }
 
     /*
