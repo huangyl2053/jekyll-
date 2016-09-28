@@ -805,6 +805,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
+        div.getTxtTenban().setReadOnly(true);
     }
 
     /**
@@ -926,6 +927,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanName1().setReadOnly(true);
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
+        div.getTxtTenban1().setReadOnly(true);
     }
 
     /**

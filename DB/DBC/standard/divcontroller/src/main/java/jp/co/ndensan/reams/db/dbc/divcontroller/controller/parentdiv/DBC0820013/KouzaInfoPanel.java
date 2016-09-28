@@ -60,11 +60,11 @@ public class KouzaInfoPanel {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
+        FlexibleYearMonth サービス年月;
+        サービス年月 = new FlexibleYearMonth((new RDate(
                 ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-
         KouzaInfoHandler handler = getHandler(div);
         ShokanShinsei 支給申請情報 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
         ViewStateHolder.put(ViewStateKeys.詳細データ, 支給申請情報);
@@ -88,10 +88,10 @@ public class KouzaInfoPanel {
         if (支払方法区分コード != null && !支払方法区分コード.isEmpty()) {
             param.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
         }
-        if (支給申請情報.get支払期間開始年月日() != null) {
+        if (支給申請情報.get支払期間開始年月日() != null && !支給申請情報.get支払期間開始年月日().isEmpty()) {
             param.setStartYMD(new RDate(支給申請情報.get支払期間開始年月日().toString()));
         }
-        if (支給申請情報.get支払期間終了年月日() != null) {
+        if (支給申請情報.get支払期間終了年月日() != null && !支給申請情報.get支払期間終了年月日().isEmpty()) {
             param.setEndYMD(new RDate(支給申請情報.get支払期間終了年月日().toString()));
         }
         RString 支払窓口開始時間 = 支給申請情報.get支払窓口開始時間();
