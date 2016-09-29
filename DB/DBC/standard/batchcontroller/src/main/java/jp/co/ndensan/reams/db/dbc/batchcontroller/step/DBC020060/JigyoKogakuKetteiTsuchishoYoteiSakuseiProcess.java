@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari.Jigyo
 import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -70,7 +72,8 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
     private Set<RString> 条件set;
     private RString 出力順情報;
     private int 連番;
-    private RString 設定値;
+    private List<RString> タイトルlist;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private NinshoshaSource ninshoshaSource1;
     private NinshoshaSource ninshoshaSource2;
 
@@ -90,9 +93,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         条件set = new HashSet();
         mybatisParameter = new JigyoKogakuKetteiTsuchishoReportParameter();
         service = ServicehiShikyuKetteiTsuchisho.createInstance();
-        設定値 = service.get設定値(帳票分類ID);
+        タイトルlist = service.getタイトル(帳票分類ID);
         get出力順();
         通知書定型文 = get通知書定型文();
+        帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
     }
 
     @Override
@@ -121,11 +125,11 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
                 .concat(entity.get被保険者番号().getColumnValue());
         if (!条件set.contains(tempStr)) {
             KogakuKetteiTsuchiShoEntity reportEntity = getReportEntity(entity);
-            JigyoKogakuKetteiTsuchishoYijiNashiReport report1 = new JigyoKogakuKetteiTsuchishoYijiNashiReport(設定値,
-                    reportEntity, ninshoshaSource1, parameter.get文書番号(), 通知書定型文);
+            JigyoKogakuKetteiTsuchishoYijiNashiReport report1 = new JigyoKogakuKetteiTsuchishoYijiNashiReport(タイトルlist,
+                    reportEntity, ninshoshaSource1, parameter.get文書番号(), 通知書定型文, 帳票制御共通情報);
             report1.writeBy(reportSourceWriter1);
-            JigyoKogakuKetteiTsuchishoYijiAriReport report2 = new JigyoKogakuKetteiTsuchishoYijiAriReport(設定値,
-                    reportEntity, ninshoshaSource2, parameter.get文書番号(), 通知書定型文);
+            JigyoKogakuKetteiTsuchishoYijiAriReport report2 = new JigyoKogakuKetteiTsuchishoYijiAriReport(タイトルlist,
+                    reportEntity, ninshoshaSource2, parameter.get文書番号(), 通知書定型文, 帳票制御共通情報);
             report2.writeBy(reportSourceWriter2);
             条件set.add(tempStr);
             連番 = 連番 + INT_1;
@@ -154,7 +158,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
 
     private List<RString> get通知書定型文() {
 
-        // TODO QA
+        // TODO QA1560
         List<RString> list = new ArrayList<>();
         list.add(RString.EMPTY);
         return list;
@@ -181,7 +185,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         reportEntity.set受付年月日(entity.get受付年月日());
         reportEntity.set本人支払額(entity.get本人支払額());
         reportEntity.set対象年月(entity.getサービス提供年月());
-        // TODO QA 一時表に「サービス種類」が存在しない
+        // TODO QA1560 一時表に「サービス種類」が存在しない
         reportEntity.set給付の種類(RString.EMPTY);
 
         reportEntity.set支給結果(entity.get支給結果());
@@ -206,12 +210,12 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         if (null != 改頁リスト && 改頁リスト.size() >= INT_1) {
             reportEntity.set持ちもの(改頁リスト.get(INT_0));
         }
-        // TODO 金融機関
+        // TODO QA1560 金融機関
         reportEntity.set金融機関(entity.get金融機関名称());
 
         reportEntity.set支払場所(entity.get支払場所());
         reportEntity.set決定通知書番号(entity.get決定通知No());
-        // TODO 支払期間
+        // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(entity.get支払期間開始年月日());
         reportEntity.set支払期間終了年月日(entity.get支払期間終了年月日());
         reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
