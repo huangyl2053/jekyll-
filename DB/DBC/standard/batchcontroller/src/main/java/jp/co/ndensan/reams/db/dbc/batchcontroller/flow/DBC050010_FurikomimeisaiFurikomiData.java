@@ -154,7 +154,11 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
             executeStep(還口座払の口座情報);
             executeStep(高額の口座情報);
             executeStep(償還受領委任払の口座情報);
-            executeStep(振込データ作成);
+
+            if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード()))) {
+                executeStep(振込データ作成);
+            }
+
             executeStep(振込データ登録_口座振込一時処理);
             レコード件数 = getResult(
                     Integer.class, new RString(振込データ登録_口座振込一時処理),
@@ -310,7 +314,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
      */
     @Step(口座振込データの登録処理)
     protected IBatchFlowCommand callGetKouzaFurikomiProcess() {
-        return otherBatchFlow(口座振込データの登録処理BATCH_ID, SubGyomuCode.DBC介護給付, createKozaFurikomiRegisterParameter()).define();
+        return otherBatchFlow(口座振込データの登録処理BATCH_ID, SubGyomuCode.UXX公開共通, createKozaFurikomiRegisterParameter()).define();
     }
 
     /**
@@ -380,7 +384,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
      */
     @Step(振込明細一覧表作成)
     protected IBatchFlowCommand shikyugakuJoho() {
-        return loopBatch(ShikyugakuJohoProcess.class).define();
+        return loopBatch(ShikyugakuJohoProcess.class).arguments(getParameter().toShikyugakuJohoProcessParameter()).define();
     }
 
     /**
@@ -431,7 +435,6 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private void 振込データ登録_口座振込一時0件以外処理() {
 
         executeStep(口座振込データの登録処理);
-
         if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
                 || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
 
