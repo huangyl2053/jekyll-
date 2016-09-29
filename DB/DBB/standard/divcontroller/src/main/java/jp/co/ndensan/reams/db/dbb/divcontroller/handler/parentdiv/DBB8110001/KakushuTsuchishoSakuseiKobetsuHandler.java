@@ -354,12 +354,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .getLblFukankonkyoMae7().setText(DateEditor.to和暦(賦課の情報.get老年廃止日()));
         }
         if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+             if(!賦課の情報.get課税区分().equals(new RString("0"))){
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae8().setText(KazeiKubun.toValue(賦課の情報.get課税区分()).get名称());
+            }
         }
         if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+            if(!賦課の情報.get世帯課税区分().equals(new RString("0"))){
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae9().setText(SetaiKazeiKubun.toValue(賦課の情報.get世帯課税区分()).get名称());
+            }
         }
         Decimal 合計所得金額 = 賦課の情報.get合計所得金額();
         if (合計所得金額 != null) {
@@ -419,12 +423,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .getLblFukankonkyoAto7().setText(DateEditor.to和暦(賦課の情報.get老年廃止日()));
         }
         if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+             if(!賦課の情報.get課税区分().equals(new RString("0"))){
+                 div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto8().setText(KazeiKubun.toValue(賦課の情報.get課税区分()).get名称());
+            }
         }
         if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+            if(!賦課の情報.get世帯課税区分().equals(new RString("0"))){
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto9().setText(SetaiKazeiKubun.toValue(賦課の情報.get世帯課税区分()).get名称());
+            }
         }
         Decimal 合計所得金額 = 賦課の情報.get合計所得金額();
         if (合計所得金額 != null) {
