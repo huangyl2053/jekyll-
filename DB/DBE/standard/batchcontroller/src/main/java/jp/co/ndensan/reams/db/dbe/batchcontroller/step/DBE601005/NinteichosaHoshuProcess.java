@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosahoshushokai;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601005;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  * @reamsid_L DBE-1940-020 jinjue
  *
  */
-public class NinteiChosaHoshuShokaiProcess extends BatchProcessBase<NinteiChosaHoshuShokaiRelateEntity> {
+public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuShokaiRelateEntity> {
 
     private NinteiChosaHoshuShokaiProcessParameter parameter;
     private static final RString MYBATIS_SELECT_ID = new RString(

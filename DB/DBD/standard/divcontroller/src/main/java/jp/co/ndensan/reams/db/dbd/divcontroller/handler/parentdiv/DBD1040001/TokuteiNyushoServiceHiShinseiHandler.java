@@ -344,6 +344,8 @@ public class TokuteiNyushoServiceHiShinseiHandler {
 
         GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder
                 = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
+        RString 決定区分 = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
+        Decimal 軽減率 = div.getShinseiDetail().getTxtKeigenRitsu().getValue();
         builder.set申請事由(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getShinseiDetail().getTxtShinseiYMD().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
@@ -372,6 +374,10 @@ public class TokuteiNyushoServiceHiShinseiHandler {
                 row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
                 row.setJotai(状態);
                 row.setShoninShinaiRiyu(div.getShinseiDetail().getTxtHiShoninRiyu().getText());
+                row.setKetteiKubun(決定区分);
+                if (軽減率 != null) {
+                    row.setKeigenritsu(new RString(軽減率.toString()));
+                }
                 is新規 = false;
             }
         }
@@ -382,6 +388,10 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
             row.setJotai(追加);
             row.setShoninShinaiRiyu(div.getShinseiDetail().getTxtHiShoninRiyu().getText());
+            row.setKetteiKubun(決定区分);
+            if (軽減率 != null) {
+                row.setKeigenritsu(new RString(軽減率.toString()));
+            }
             row.setHiddenShoKisaiHokenshaNo(証記載保険者番号.value());
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
             newRowList.add(row);
@@ -471,7 +481,9 @@ public class TokuteiNyushoServiceHiShinseiHandler {
                 row.getTxtKetteiYMD().setValue(決定日);
                 row.getTxtTekiyoYMD().setValue(適用日);
                 row.getTxtYukoKigenYMD().setValue(有効期限);
-                row.setKeigenritsu(new RString(軽減率.value().toString()));
+                if (軽減率 != null) {
+                    row.setKeigenritsu(new RString(軽減率.value().toString()));
+                }
                 row.setKakuninNo(確認番号);
                 row.setShoninShinaiRiyu(非承認理由);
                 is新規 = false;
@@ -487,7 +499,9 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.getTxtKetteiYMD().setValue(決定日);
             row.getTxtTekiyoYMD().setValue(適用日);
             row.getTxtYukoKigenYMD().setValue(有効期限);
-            row.setKeigenritsu(new RString(軽減率.value().toString()));
+            if (軽減率 != null) {
+                row.setKeigenritsu(new RString(軽減率.value().toString()));
+            }
             row.setKakuninNo(確認番号);
             row.setShoninShinaiRiyu(非承認理由);
             row.setHiddenShoKisaiHokenshaNo(証記載保険者番号.value());
@@ -703,7 +717,11 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinsei().getShinseiDetail().getTxtKettaiYMD().setValue(row.getTxtKetteiYMD().getValue());
         div.getShinsei().getShinseiDetail().getTxtTekiyoYMD().setValue(row.getTxtTekiyoYMD().getValue());
         div.getShinsei().getShinseiDetail().getTxtYukoKigenYMD().setValue(row.getTxtYukoKigenYMD().getValue());
-        div.getShinsei().getShinseiDetail().getTxtKeigenRitsu().setValue(new Decimal(row.getKeigenritsu().toString()));
+        if (row.getKeigenritsu() != null) {
+            div.getShinsei().getShinseiDetail().getTxtKeigenRitsu().setValue(new Decimal(row.getKeigenritsu().toString()));
+        } else {
+            div.getShinsei().getShinseiDetail().getTxtKeigenRitsu().setValue(Decimal.ZERO);
+        }
         div.getShinsei().getShinseiDetail().getTxtKakuninNo().setValue(row.getKakuninNo());
         div.getShinsei().getShinseiDetail().getTxtHiShoninRiyu().setValue(row.getShoninShinaiRiyu());
     }

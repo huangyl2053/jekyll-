@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Hihoke
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShuru;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -55,6 +57,8 @@ public class ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter implements IMyBa
     private boolean is市町村民税本人非課税者 = false;
     private boolean is老齢福祉年金受給者 = false;
     private boolean is生活保護受給者 = false;
+    private RString 利用者負担額減額;
+    private RString 承認する;
 
     /**
      * 利用者負担額減免認定者リスト発行の引数を返します。
@@ -75,6 +79,8 @@ public class ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter implements IMyBa
         this.出力順 = 出力順;
         this.基準日 = 基準日;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.利用者負担額減額 = GemmenGengakuShuru.利用者負担額減額.getコード();
+        this.承認する = KetteiKubun.承認する.getコード();
     }
 
     private void edit対象リスト(TargetList 対象リスト) {
