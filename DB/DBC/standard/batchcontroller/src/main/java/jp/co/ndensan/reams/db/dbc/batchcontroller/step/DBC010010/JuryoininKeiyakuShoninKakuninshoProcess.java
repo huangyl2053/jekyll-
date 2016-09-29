@@ -165,7 +165,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         }
         償還受領委任契約者.update(償還受領委任契約者Entity);
         count++;
-        if (entity.get識別コード() != null) {
+        if (entity.get識別コード() != null && !entity.get識別コード().isEmpty()) {
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 被保険者番号,
                     entity.get償還受領委任契約者().getHihokenshaNo().value());
             AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.get識別コード(), expandedInfo));

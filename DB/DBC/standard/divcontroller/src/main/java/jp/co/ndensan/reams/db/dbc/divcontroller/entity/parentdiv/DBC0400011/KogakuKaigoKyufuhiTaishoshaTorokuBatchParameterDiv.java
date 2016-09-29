@@ -4,22 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 
 /**
- * KogakuKaigoKyufuhiTaishoshaTorokuBatchParameter のクラスファイル
- *
- * @reamsid_L DBC-2010-030 huzongcheng
+ * KogakuKaigoKyufuhiTaishoshaTorokuBatchParameter のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -93,7 +91,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv extends PanelBat
     }
 
     @JsonIgnore
-    public void setBlank1(Space blank1) {
+    public void  setBlank1(Space blank1) {
         this.getPublishIchiranhyo().setBlank1(blank1);
     }
 
