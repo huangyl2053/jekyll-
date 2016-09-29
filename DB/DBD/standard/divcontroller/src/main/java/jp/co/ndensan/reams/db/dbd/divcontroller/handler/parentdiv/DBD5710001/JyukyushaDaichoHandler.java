@@ -184,8 +184,10 @@ public class JyukyushaDaichoHandler {
         } else {
             parameter.set抽出条件設定区分(KEY1);
         }
-        parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
-        parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
+        if (div.getTaishouSha().getTxtHihokenshaBangou() != null) {
+            parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
+            parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
+        }
         parameter.set今回抽出開始年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getFromDateValue());
         parameter.set今回抽出開始時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getFromTimeValue());
         parameter.set今回抽出終了年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getToDateValue());
