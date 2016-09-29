@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.euc.dbb213001.TokuchoSofuJohoRenkeiCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -48,9 +47,12 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     private static final RString Z99_550_XXDTA = new RString("Z99_550_xx.DTA");
     private static final RString DEXXZ12YYYY01DTA = new RString("DExxZ12yyyy01.DTA");
     private static final RString DEXXZ1AYYYYZZDTA = new RString("DExxZ1Ayyyyzz.DTA");
-    private static final RString 七月 = new RString("07");
+    private static final RString 七月 = new RString("7");
     private static final RString XX = new RString("xx");
     private static final RString YYYY = new RString("yyyy");
+    private static final int INT_ZERO = 0;
+    private static final int INT_ONE = 1;
+    private static final int INT_FIVE = 5;
     private TokuchoSofuJohoRenkeiProcessParameter proParameter;
     private FlexibleYear 処理年度;
     private RYearMonth 処理対象年月;
@@ -67,23 +69,25 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     private Map<RString, FldWriter> ファイル出力DE__Z12Map;
     private Map<RString, FldWriter> ファイル出力DE__Z1AMap;
     private RString 市町村;
+    private RString 通知内容コード;
+    private RString 特別徴収義務者コード;
     private int 各種金額欄合計1 = 0;
     private int 各種金額欄合計2 = 0;
-    private int count = 1;
-    private int circle = 1;
+    private int count = 0;
     private List<TokuchoSofuJohoRenkeiEntity> 特徴送付情報連携情報;
 
     @BatchWriter
-    private FldWriter<TokuchoSofuJohoRenkeiCsvEntity> fldZ1A000Writer;
-    private FldWriter<TokuchoSofuJohoRenkeiCsvEntity> fldZ99_550Writer;
-    private FldWriter<TokuchoSofuJohoRenkeiCsvEntity> fldDE__Z12Writer;
-    private FldWriter<TokuchoSofuJohoRenkeiCsvEntity> fldDE__Z1AWriter;
+    private FldWriter fldZ1A000Writer;
+    private FldWriter fldZ99_550Writer;
+    private FldWriter fldDE__Z12Writer;
+    private FldWriter fldDE__Z1AWriter;
 
     @Override
     protected void initialize() {
         処理年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         処理対象年月 = RDate.getNowDate().getYearMonth();
+        市町村 = RString.EMPTY;
         市町村コードリスト = new ArrayList<>();
         市町村IDMap = new HashMap<>();
         ファイル出力Z1A000Map = new HashMap<>();
@@ -102,14 +106,13 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
         List<KoseiShichoson> 広域市町村情報 = finder.getKoseiShichosonList().records();
         if (!広域市町村情報.isEmpty()) {
             for (KoseiShichoson item : 広域市町村情報) {
-                市町村コードリスト.add(item.get市町村コード().value());
-                市町村IDMap.put(item.get市町村コード().value(), item.get市町村識別ID());
+                市町村コードリスト.add(item.get市町村コード().value().substring(INT_ZERO, INT_FIVE));
+                市町村IDMap.put(item.get市町村コード().value().substring(INT_ZERO, INT_FIVE), item.get市町村識別ID());
             }
         }
         proParameter.set処理年度(処理年度);
         proParameter.set処理対象年月(処理対象年月);
         proParameter.set市町村コードリスト(市町村コードリスト);
-
     }
 
     @Override
@@ -154,87 +157,118 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                     setNewLine(NewLine.CRLF).
                     build();
             ファイル出力DE__Z1AMap.put(市町村コード, fldDE__Z1AWriter);
-
         }
-
     }
 
     @Override
     protected void process(TokuchoSofuJohoRenkeiEntity entity) {
-        if (circle == 1) {
+        特徴送付情報連携情報.add(entity);
+        if (市町村.equals(entity.get市町村コードDT())) {
+            if (七月.equals(new RString(処理対象年月.getMonthValue()))) {
+                editブロック(entity, ファイル出力DE__Z12Map);
+            } else {
+                editブロック(entity, ファイル出力DE__Z1AMap);
+            }
+        } else {
+            通知内容コード = RString.EMPTY;
+            特別徴収義務者コード = RString.EMPTY;
+            if (七月.equals(new RString(処理対象年月.getMonthValue()))) {
+                // TODO QA1536 媒体通番? ファイル格納件数?
+                ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .edit管理(count));
+                ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .editファイル管理(count));
+                ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .edit管理(count));
+                ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .editファイル管理(count));
+                editブロック(entity, ファイル出力DE__Z12Map);
+            } else {
+                // TODO QA1536 媒体通番? ファイル格納件数?
+                ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .edit管理(count));
+                ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .editファイル管理(count));
+                ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .edit管理(count));
+                ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                        .editファイル管理(count));
+                editブロック(entity, ファイル出力DE__Z1AMap);
+            }
             市町村 = entity.get市町村コードDT();
         }
-        if (市町村.equals(entity.get市町村コードDT())) {
+        count++;
+    }
+
+    private void editブロック(TokuchoSofuJohoRenkeiEntity entity, Map<RString, FldWriter> writerMap) {
+        if (通知内容コード.equals(entity.get通知内容コードDT()) && 特別徴収義務者コード.equals(entity.get特別徴収義務者コードDT().value())) {
             各種金額欄合計1 = 各種金額欄合計1 + Integer.parseInt(entity.get各種金額欄1DT().toString());
             各種金額欄合計2 = 各種金額欄合計2 + Integer.parseInt(entity.get各種金額欄2DT().toString());
+            ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
+            ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                    .editデータZ99_550_xx_DTAファイルのみ());
         } else {
             各種金額欄合計1 = Integer.parseInt(entity.get各種金額欄1DT().toString());
             各種金額欄合計2 = Integer.parseInt(entity.get各種金額欄2DT().toString());
-            市町村 = entity.get市町村コードDT();
+            if (count != INT_ZERO) {
+                ファイル出力Z1A000Map.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()).writeLine(
+                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報.get(count - INT_ONE))
+                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                                各種金額欄合計二.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                                特徴送付情報連携情報.size()));
+                ファイル出力Z99_550Map.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()).writeLine(
+                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報.get(count - INT_ONE))
+                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                                各種金額欄合計二.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                                特徴送付情報連携情報.size()));
+                writerMap.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()).writeLine(
+                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報.get(count - INT_ONE))
+                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                                各種金額欄合計二.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                                特徴送付情報連携情報.size()));
+            }
+            ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
+            ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
+            ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
+            ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
+                    .editデータZ99_550_xx_DTAファイルのみ());
+            writerMap.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
+            writerMap.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
+
         }
+        通知内容コード = entity.get通知内容コードDT();
+        特別徴収義務者コード = entity.get特別徴収義務者コードDT().value();
         各種金額欄合偉一.put(entity.get市町村コードDT(), 各種金額欄合計1);
         各種金額欄合計二.put(entity.get市町村コードDT(), 各種金額欄合計2);
-        特徴送付情報連携情報.add(entity);
-        circle++;
     }
 
     @Override
     protected void afterExecute() {
-        for (TokuchoSofuJohoRenkeiEntity entity : 特徴送付情報連携情報) {
-            if (七月.equals(new RString(処理対象年月.getMonthValue()))) {
-                if (count == 1) {
-                    ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .edit管理(count, 特徴送付情報連携情報.size()));
-                    ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
-                    ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .edit管理(count, 特徴送付情報連携情報.size()));
-                    ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
-                    ファイル出力DE__Z12Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
-                }
-                ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
-                ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                        .editデータZ99_550_xx_DTAファイルのみ());
-                ファイル出力DE__Z12Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
-                if (count == 1) {
-                    ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .editトレイラ(各種金額欄合偉一.get(entity.get市町村コードDT()), 各種金額欄合計二.get(entity.get市町村コードDT()),
-                                    特徴送付情報連携情報.size()));
-                    ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .editトレイラ(各種金額欄合偉一.get(entity.get市町村コードDT()), 各種金額欄合計二.get(entity.get市町村コードDT()),
-                                    特徴送付情報連携情報.size()));
-                    ファイル出力DE__Z12Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .editトレイラ(各種金額欄合偉一.get(entity.get市町村コードDT()), 各種金額欄合計二.get(entity.get市町村コードDT()),
-                                    特徴送付情報連携情報.size()));
-                }
-
-            } else {
-                if (count == 1) {
-                    ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).edit管理(count,
-                            特徴送付情報連携情報.size()));
-                    ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
-                    ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).edit管理(count,
-                            特徴送付情報連携情報.size()));
-                    ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
-                    ファイル出力DE__Z1AMap.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
-                }
-                ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
-                ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                        .editデータZ99_550_xx_DTAファイルのみ());
-                ファイル出力DE__Z1AMap.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
-                if (count == 1) {
-                    ファイル出力Z1A000Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .editトレイラ(各種金額欄合偉一.get(entity.get市町村コードDT()), 各種金額欄合計二.get(entity.get市町村コードDT()),
-                                    特徴送付情報連携情報.size()));
-                    ファイル出力Z99_550Map.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .editトレイラ(各種金額欄合偉一.get(entity.get市町村コードDT()), 各種金額欄合計二.get(entity.get市町村コードDT()),
-                                    特徴送付情報連携情報.size()));
-                    ファイル出力DE__Z1AMap.get(entity.get市町村コードDT()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
-                            .editトレイラ(各種金額欄合偉一.get(entity.get市町村コードDT()), 各種金額欄合計二.get(entity.get市町村コードDT()),
-                                    特徴送付情報連携情報.size()));
-                }
-            }
-            count++;
-        }
+        ファイル出力Z1A000Map.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()).writeLine(
+                new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報.get(count - INT_ONE))
+                .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        各種金額欄合計二.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        特徴送付情報連携情報.size()));
+        ファイル出力Z99_550Map.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()).writeLine(
+                new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報.get(count - INT_ONE))
+                .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        各種金額欄合計二.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        特徴送付情報連携情報.size()));
+        ファイル出力DE__Z1AMap.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()).writeLine(
+                new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報.get(count - INT_ONE))
+                .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        各種金額欄合計二.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        特徴送付情報連携情報.size()));
+        ファイル出力DE__Z12Map.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()).writeLine(
+                new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報.get(count - INT_ONE))
+                .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        各種金額欄合計二.get(特徴送付情報連携情報.get(count - INT_ONE).get市町村コードDT()),
+                        特徴送付情報連携情報.size()));
+        特徴送付情報連携情報 = new ArrayList<>();
+        ファイル出力Z99_550List = new ArrayList<>();
+        ファイル出力Z1A000List = new ArrayList<>();
+        ファイル出力DE__Z12List = new ArrayList<>();
+        ファイル出力DE__Z1AList = new ArrayList<>();
         for (RString fileName : ファイル出力Z1A000List) {
             FilesystemName sharedFileName = new FilesystemName(fileName);
             SharedFile.defineSharedFile(sharedFileName);
@@ -259,7 +293,5 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
             FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
             SharedFile.copyToSharedFile(絶対パス, sharedFileName);
         }
-
     }
-
 }

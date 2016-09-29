@@ -60,8 +60,8 @@
         <foreach collection="市町村コードリスト" item="code" open="(" separator="," close=")"> #{code} </foreach>
        ORDER BY
         年金特徴回付情報."koseiCityCode",
-        年金特徴回付情報."dtTokubetsuChoshuGimushaCode",
         年金特徴回付情報."dtTsuchiNaiyoCode",
+        年金特徴回付情報."dtTokubetsuChoshuGimushaCode",
         年金特徴回付情報."dtKisoNenkinNo",
         年金特徴回付情報."dtNenkinCode"
     </select>
