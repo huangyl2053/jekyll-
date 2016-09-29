@@ -111,6 +111,7 @@ public class AtenaSealCreateHandler {
             }
         }
         if (導入形態コード.getColumnValue().equals(定数_120)) {
+            div.getDdlShicyouson().getDataSource().clear();
             div.getDdlShicyouson().setDisplayNone(true);
         }
         div.getTxtKijyunnengatu().setYmdKubunEnum(YmdKubun.年月);
