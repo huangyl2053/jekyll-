@@ -10,16 +10,12 @@ import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyiji
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiReport;
 import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -31,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 帳票設計_DBCMN43002_事業高額決定通知書 PrintServiceするクラスです。
@@ -39,10 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBC-2000-100 lijian
  */
 public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
-
-    private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
-    private static final ReportId 帳票分類ID = new ReportId("DBC100061_JigyoKogakuKetteiTsuchisho");
-    private static final RString 項目名 = new RString("取り消し線");
 
     /**
      * 帳票設計_DBCMN43002_事業高額決定通知書 (単一帳票出力用)
@@ -53,6 +44,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
      * @param 帳票ID RString
      * @param 認証者 Ninshosha
      * @param 通知書定型文List List<RString>
+     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
+     * @param titleList List<RString>
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -61,10 +54,12 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
             RString 文書番号,
             RString 帳票ID,
             Ninshosha 認証者,
-            List<RString> 通知書定型文List) {
+            List<RString> 通知書定型文List,
+            ChohyoSeigyoKyotsu 帳票制御共通情報,
+            List<RString> titleList) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, 通知書定型文List, reportManager);
+            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, 通知書定型文List, 帳票制御共通情報, titleList, reportManager);
             collection = reportManager.publish();
         }
 
@@ -81,6 +76,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
      * @param 帳票ID RString
      * @param 認証者 Ninshosha
      * @param 通知書定型文List List<RString>
+     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
+     * @param titleList List<RString>
      * @param reportManager ReportManager
      */
     public void print(
@@ -90,6 +87,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
             RString 帳票ID,
             Ninshosha 認証者,
             List<RString> 通知書定型文List,
+            ChohyoSeigyoKyotsu 帳票制御共通情報,
+            List<RString> titleList,
             ReportManager reportManager) {
 
         JigyoKogakuKetteiTsuchishoYijiNashiProperty property = new JigyoKogakuKetteiTsuchishoYijiNashiProperty();
@@ -107,22 +106,13 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
             ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> reportSourceWriter;
             reportSourceWriter = new ReportSourceWriter(assembler);
 
-            RString 設定値 = fetch設定値();
-
             new JigyoKogakuKetteiTsuchishoYijiNashiReport(
-                    設定値,
+                    titleList,
                     帳票情報,
                     認証者ソースデータ,
                     文書番号,
-                    通知書定型文List).writeBy(reportSourceWriter);
+                    通知書定型文List, 帳票制御共通情報).writeBy(reportSourceWriter);
         }
-    }
-
-    private RString fetch設定値() {
-        DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名);
-        return entity.getKomokuValue();
-
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

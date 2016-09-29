@@ -111,7 +111,7 @@
             <if test="保険者コード !='' and 保険者コード != '000000'">
                 AND (
                     ("DbV1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" <![CDATA[<>]]> '1' 
-                        AND "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" = #{保険者コード}
+                        AND "DbV1001HihokenshaDaicho"."shichosonCode" = #{保険者コード}
                     )
                     OR
                     ( "DbV1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1'
