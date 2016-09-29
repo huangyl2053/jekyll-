@@ -254,6 +254,8 @@ public class KaigoHihokenshaInfoPanel {
         KaigoHihokenshaInfoPanelHandler handler = getHandler(div);
         dgRentaiNofuGimushaIchiran_Row row = div.getDgRentaiNofuGimushaIchiran().getClickedItem();
         handler.setRentaiNofuGimushaInfo(row);
+        div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().setDisabled(true);
+        div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().setDisabled(true);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者削除);
     }
 
@@ -312,7 +314,7 @@ public class KaigoHihokenshaInfoPanel {
         AccessLogger.log(AccessLogType.更新, personalData);
         LockingKey 前排他キー = new LockingKey(DBBHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         RealInitialLocker.release(前排他キー);
-        return ResponseData.of(div).forwardWithEventName(DBB6110001TransitionEventName.完了状態).respond();
+        return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者更新結果確認);
     }
 
     /**
