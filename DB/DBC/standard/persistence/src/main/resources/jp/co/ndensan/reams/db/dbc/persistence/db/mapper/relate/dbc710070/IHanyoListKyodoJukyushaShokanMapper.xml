@@ -35,9 +35,9 @@
                 <if test="異動年月To !=null and 異動年月To.toString()!=''" >
                 AND  SUBSTR("DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."idoYMD",1,6)  <![CDATA[<=]]> #{異動年月To}
                 </if>
-            </if>
-            <if test ="保険者コード !='' and 保険者コード != '000000'">
+                <if test ="!保険者コード.isEmpty() and 保険者コード != '000000'">
                 AND  "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."shoKisaiHokenshaNo"  = #{保険者コード}
+                </if>
             </if>
          )   
         SELECT

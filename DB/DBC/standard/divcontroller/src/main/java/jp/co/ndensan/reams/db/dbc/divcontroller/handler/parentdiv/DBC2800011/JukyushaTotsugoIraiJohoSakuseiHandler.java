@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110810.DBC110810_Jukyus
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JyukyusyaIF_TotugoIraiJyohoTyusyutuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2800011.JukyushaTotsugoIraiJohoSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -48,7 +49,7 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
         div.getDdlChushutsuKubun().setSelectedKey(RSTRING_1);
         div.getTxtTaishoYM().clearFromValue();
         div.getTxtTaishoYM().clearToValue();
-        div.getTxtNinteiYM().clearValue();
+        div.getTxtNinteiYM().setValue(RDate.getNowDate());
         div.getTxtTaishoYM().setDisabled(true);
         div.getTxtNinteiYM().setDisabled(false);
     }

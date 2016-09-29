@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.dbc200025;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200025.DbWT2111ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200025.ShokanRenrakuhyoSofuIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -60,10 +60,10 @@ public class ShokanRenrakuhyoSofuIchiranHeaderEditor
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         if (null != parameter.get償還連絡票一覧表データ()) {
-            DbWT2111ShokanShinseiEntity 償還払支給申請Entity = parameter.get償還連絡票一覧表データ().get償還払支給申請Entity();
+            DbWT2111ShokanShinseiTempEntity 償還払支給申請Entity = parameter.get償還連絡票一覧表データ().get償還払支給申請一時TBL();
             if (null != 償還払支給申請Entity) {
-                source.hokenshaNo = getColumnValue(償還払支給申請Entity.get保険者番号());
-                source.hokenshaName = 償還払支給申請Entity.get保険者名();
+                source.hokenshaNo = getColumnValue(償還払支給申請Entity.getHokenshaNo());
+                source.hokenshaName = 償還払支給申請Entity.getHokenshaName();
             }
         }
         source.sofuYM = doパターン56(parameter.get処理年月());

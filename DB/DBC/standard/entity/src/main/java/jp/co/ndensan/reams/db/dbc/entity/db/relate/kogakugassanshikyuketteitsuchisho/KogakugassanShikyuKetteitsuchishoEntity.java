@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuc
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -23,17 +24,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakugassanShikyuKetteitsuchishoEntity {
 
-    private RString shikyuKubun;
-    private RString shutsuryokujunMei1;
-    private RString shutsuryokujunMei2;
-    private RString shutsuryokujunMei3;
-    private RString shutsuryokujunMei4;
-    private RString shutsuryokujunMei5;
-    private RString kaiPeiji1;
-    private RString kaiPeiji2;
-    private RString kaiPeiji3;
-    private RString kaiPeiji4;
-    private RString kaiPeiji5;
     private HihokenshaNo hihokenshaNo;
     private FlexibleYear taishoNendo;
     private HokenshaNo hokenshaNo;
@@ -65,4 +55,5 @@ public class KogakugassanShikyuKetteitsuchishoEntity {
     private long kozaID;
     private RString ketteiTsuchiRealHakkoFlag;
     private HihokenshaDaichoResultEntity 被保検者情報;
+    private UaFt200FindShikibetsuTaishoEntity 宛名;
 }

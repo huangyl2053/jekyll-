@@ -185,7 +185,8 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         RString serviceCode = サービスコード固定値.concat(div.getKubunShikyuGendogakuShosai().getTxtServiceCode2().getValue());
         FlexibleDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue() != null
                 ? new FlexibleDate(div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue().toDateString()) : FlexibleDate.EMPTY;
-        int 履歴番号 = Integer.parseInt(div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().toString());
+        int 履歴番号 = div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().isNullOrEmpty()
+                ? 0 : Integer.parseInt(div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().toString());
 
         if (!CommonButtonHolder.isDisplayNone(追加やめる)) {
             dgServiceNaiyo_Row 直近データ = null;

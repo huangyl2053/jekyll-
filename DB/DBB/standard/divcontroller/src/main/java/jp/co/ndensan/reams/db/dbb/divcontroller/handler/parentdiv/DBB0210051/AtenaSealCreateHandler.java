@@ -53,6 +53,7 @@ public class AtenaSealCreateHandler {
     private static final RString 定数_12 = new RString("12");
     private static final int NUM_0 = 0;
     private static final int NUM_6 = 6;
+    private static final RString ALL = new RString("all");
     private static final RString 普通徴収 = new RString("普通徴収");
     private static final RString 特別徴収 = new RString("特別徴収");
     private static final RString 現住所 = new RString("現住所");
@@ -144,7 +145,7 @@ public class AtenaSealCreateHandler {
         RString 資格区分 = get資格区分(div.getDdlShikakuKubun().getSelectedKey());
         RString 市町村指定のkey = div.getDdlShicyouson().getSelectedKey();
         RString 市町村指定のvalue = div.getDdlShicyouson().getSelectedValue();
-        RString 市町村指定 = 市町村指定のkey.concat(市町村指定のvalue);
+        RString 市町村指定 = 市町村指定のkey.concat(RString.HALF_SPACE).concat(市町村指定のvalue);
         RString 最優先住所 = div.getDdlSaiyusenJusho().getSelectedValue();
         RString 敬称 = div.getDdlKeisho().getSelectedValue();
         RString 被保番号表示 = div.getRadIsPrintHihokenshaNo().getSelectedValue();
@@ -187,6 +188,22 @@ public class AtenaSealCreateHandler {
         }
         parameter.set業務コード(SubGyomuCode.DBB介護賦課);
         return parameter;
+    }
+
+    /**
+     * onChangeのメソッドます。
+     *
+     */
+    public void onChange() {
+        List<RString> 抽出対象list = div.getChkTaishosha().getSelectedValues();
+        if (抽出対象list != null) {
+            if (抽出対象list.size() == 2) {
+                div.getDdlShikakuKubun().setSelectedKey(ALL);
+                div.getDdlShikakuKubun().setDisabled(true);
+            } else {
+                div.getDdlShikakuKubun().setDisabled(false);
+            }
+        }
     }
 
     private List<KeyValueDataSource> getdataSource(List<KoseiShichoson> 構成市町村リスト) {
