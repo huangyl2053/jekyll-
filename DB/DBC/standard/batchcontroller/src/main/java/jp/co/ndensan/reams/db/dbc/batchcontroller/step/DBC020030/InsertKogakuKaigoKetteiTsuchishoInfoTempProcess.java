@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceshikyukettei.KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.InsertKetteiTsuchishoInfoTempMybatisParameter;
@@ -16,6 +15,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -70,9 +71,12 @@ public class InsertKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
                 .set業務コード(GyomuCode.DB介護保険)
                 .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set基準日(new FlexibleDate(RDate.getNowDate().toDateString())).build();
-        List<KamokuCode> kamokuList = new ArrayList<>();
-        mybatisParameter = new InsertKetteiTsuchishoInfoTempMybatisParameter(parameter.get抽出モード(), parameter.get抽出条件日付From(),
-                parameter.get抽出条件日付To(), parameter.get決定者受付年月(), parameter.get印書(), parameter.get高額自動償還(), searchKey, kamokuList);
+        List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
+                get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
+        FlexibleDate 抽出条件日付From = new FlexibleDate(parameter.get抽出条件日付From().toDateString());
+        FlexibleDate 抽出条件日付To = new FlexibleDate(parameter.get抽出条件日付To().toDateString());
+        mybatisParameter = new InsertKetteiTsuchishoInfoTempMybatisParameter(parameter.get抽出モード(), 抽出条件日付From,
+                抽出条件日付To, parameter.get決定者受付年月(), parameter.get印書(), parameter.get高額自動償還(), searchKey, kamokuList);
         return new BatchDbReader(MAPPERPATH, mybatisParameter);
     }
 

@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -77,10 +76,8 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
     private NinshoshaSource ninshoshaSource1;
     private NinshoshaSource ninshoshaSource2;
 
-    @BatchWriter
     BatchReportWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> batchReportWriter1;
     ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> reportSourceWriter1;
-    @BatchWriter
     BatchReportWriter<JigyoKogakuKetteiTsuchishoYijiAriSource> batchReportWriter2;
     ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiAriSource> reportSourceWriter2;
 
@@ -138,6 +135,8 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
 
     @Override
     protected void afterExecute() {
+        batchReportWriter1.close();
+        batchReportWriter2.close();
     }
 
     private void get出力順() {
