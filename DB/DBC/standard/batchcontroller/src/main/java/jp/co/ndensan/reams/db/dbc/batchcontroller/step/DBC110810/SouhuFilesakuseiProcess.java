@@ -284,6 +284,23 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         record2Entity.set軽減率適用開始年月日(trim(entity.getKeigenritsuTekiyoKaishiYMD()));
         record2Entity.set軽減率適用終了年月日(trim(entity.getKeigenritsuTekiyoShuryoYMD()));
         record2Entity.set小規模多機能型居宅介護(entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag());
+        record2Entity.set保険者番号後期(trim(entity.getKokiKoureiIryoHokenshaNo()));
+        record2Entity.set被保険者番号後期(trim(entity.getKokikoureiIryoHiHokenshaNo()));
+        record2Entity.set保険者番号国保(trim(entity.getKokuhoHokenshaNo()));
+        record2Entity.set被保険者番号国保(trim(entity.getKokuhoHiHokenshaNo()));
+        record2Entity.set個人番号国保(trim(entity.getKokuhoKojinNo()));
+        record2Entity.set二次予防事業区分コード(trim(entity.getNijiyoboJigyoKubunCode()));
+        record2Entity.set二次予防事業開始年月日(change(entity.getNijiyoboJigyoYukoKikanKaishiYMD()));
+        record2Entity.set二次予防事業終了年月日(change(entity.getNijiyoboJigyoYukoKikanShuryoYMD()));
+        record2Entity.set住所地特例対象者区分コード(trim(entity.getJushochiTokureiTaishoshaKubunCode()));
+        record2Entity.set施設所在保険者番号(trim(entity.getShisetsuShozaiHokenjaNo()));
+        record2Entity.set住所地特例適用開始日(trim(entity.getJushochiTokureiTekiyoKaishiYMD()));
+        record2Entity.set住所地特例適用終了日(trim(entity.getJushochiTokureiTekiyoShuryoYMD()));
+        record2Entity.set居宅費新1負担限度額(trim(entity.getKyotakuhiShin1FutanGendogaku()));
+        record2Entity.set居宅費新2負担限度額(trim(entity.getKyotakuhiShin2FutanGendogaku()));
+        record2Entity.set居宅費新3負担限度額(trim(entity.getKyotakuhiShin3FutanGendogaku()));
+        record2Entity.set二割負担適用開始年月日(trim(entity.getRiyosyaFutanWariaiYukoKaishiYMD()));
+        record2Entity.set二割負担適用終了年月日(trim(entity.getRiyosyaFutanWariaiYukoShuryoYMD()));
         return record2Entity;
 
     }
@@ -401,7 +418,25 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
                         record2Entity.get軽減率(),
                         record2Entity.get軽減率適用開始年月日(),
                         record2Entity.get軽減率適用終了年月日(),
-                        record2Entity.is小規模多機能型居宅介護()));
+                        record2Entity.is小規模多機能型居宅介護(),
+                        record2Entity.get保険者番号後期(),
+                        record2Entity.get被保険者番号後期(),
+                        record2Entity.get保険者番号国保(),
+                        record2Entity.get被保険者番号国保(),
+                        record2Entity.get個人番号国保(),
+                        record2Entity.get二次予防事業区分コード(),
+                        record2Entity.get二次予防事業開始年月日(),
+                        record2Entity.get二次予防事業終了年月日(),
+                        record2Entity.get住所地特例対象者区分コード(),
+                        record2Entity.get施設所在保険者番号(),
+                        record2Entity.get住所地特例適用開始日(),
+                        record2Entity.get住所地特例適用終了日(),
+                        record2Entity.get居宅費新1負担限度額(),
+                        record2Entity.get居宅費新2負担限度額(),
+                        record2Entity.get居宅費新3負担限度額(),
+                        record2Entity.get二割負担適用開始年月日(),
+                        record2Entity.get二割負担適用終了年月日()
+                ));
     }
 
     private void getEndCSV出力() {
