@@ -20,23 +20,26 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoReport
 
     private final KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity;
     private final int 連番;
+    private final boolean flag;
 
     /**
      * インスタンスを生成します。
      *
      * @param entity KogakuShikyuFushikyuKetteiTsuchiHakkoEntity
      * @param 連番 int
+     * @param flag boolean
      */
-    public KogakuShikyuFushikyuKetteiTsuchiHakkoReport(KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity, int 連番) {
+    public KogakuShikyuFushikyuKetteiTsuchiHakkoReport(KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity, int 連番, boolean flag) {
         this.entity = entity;
         this.連番 = 連番;
+        this.flag = flag;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> writer) {
 
         IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor headerEditor = new KogakuShikyuFushikyuKetteiTsuchiHakkoHeaderEditor(entity);
-        IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor bodyEditor = new KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor(entity, 連番);
+        IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor bodyEditor = new KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor(entity, 連番, flag);
         IKogakuShikyuFushikyuKetteiTsuchiHakkoBuilder builder = new KogakuShikyuFushikyuKetteiTsuchiHakkoBuilder(headerEditor, bodyEditor);
         writer.writeLine(builder);
     }
