@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChoteiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -167,7 +168,12 @@ public class KaigoHokenFukaKonkyoHandler {
         div.getLblFukaKonkyoData2().setText(resultMax.get介護賦課Result().get世帯課税区分名称());
         div.getLblFukaKonkyoData3().setText(doカンマ編集(resultMax.get介護賦課Result().get合計所得金額()));
         div.getLblFukaKonkyoData4().setText(doカンマ編集(resultMax.get介護賦課Result().get公的年金収入額()));
-        div.getLblFukaKonkyoData5().setText(resultMax.get介護賦課Result().get保険料算定段階());
+        RString 段階区分 = resultMax.get介護賦課Result().get保険料算定段階();
+        if (!RString.isNullOrEmpty(段階区分)) {
+            RString 保険料段階 = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List().
+                    getBy段階区分(段階区分).get表記();
+            div.getLblFukaKonkyoData5().setText(RString.isNullOrEmpty(保険料段階) ? null : 保険料段階);
+        }
         div.getLblFukaKonkyoData6().setText(doカンマ編集(resultMax.get介護賦課Result().get減免前介護保険料_年額()));
         div.getLblFukaKonkyoData7().setText(doカンマ編集(resultMax.get介護賦課Result().get減免額()));
         div.getLblFukaKonkyoData8().setText(doカンマ編集(resultMax.get介護賦課Result().get確定介護保険料_年額()));
@@ -178,10 +184,15 @@ public class KaigoHokenFukaKonkyoHandler {
                 ? 月割開始年月1.wareki().toDateString().concat(符号).concat(月割終了年月1.wareki().toDateString()) : null);
         if (月割開始年月1 != null && !RString.isNullOrEmpty(月割開始年月1.toDateString())
                 && 月割終了年月1 != null && !RString.isNullOrEmpty(月割終了年月1.toDateString())) {
-            int 月数1 = 月割終了年月1.getBetweenMonths(月割開始年月1);
+            int 月数1 = 月割終了年月1.getBetweenMonths(月割開始年月1) + 1;
             div.getLblGessuData1().setText(new RString(月数1));
         }
-        div.getLblHokenryoDankaiKubunData1().setText(resultMax.get介護賦課Result().get保険料算定段階1());
+        RString 段階区分1 = resultMax.get介護賦課Result().get保険料算定段階1();
+        if (!RString.isNullOrEmpty(段階区分1)) {
+            RString 保険料段階区分1 = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List().
+                    getBy段階区分(段階区分1).get表記();
+            div.getLblHokenryoDankaiKubunData1().setText(RString.isNullOrEmpty(保険料段階区分1) ? null : 保険料段階区分1);
+        }
         Decimal 保険料率1 = resultMax.get介護賦課Result().get算定年額保険料1();
         div.getLblHokenryoritsuData1().setText(doカンマ編集(保険料率1));
         if (保険料率1 != null && 月割開始年月1 != null && !RString.isNullOrEmpty(月割開始年月1.toDateString())
@@ -196,10 +207,15 @@ public class KaigoHokenFukaKonkyoHandler {
                 ? 月割開始年月2.wareki().toDateString().concat(符号).concat(月割終了年月2.wareki().toDateString()) : null);
         if (月割開始年月2 != null && !RString.isNullOrEmpty(月割開始年月2.toDateString())
                 && 月割終了年月2 != null && !RString.isNullOrEmpty(月割終了年月2.toDateString())) {
-            int 月数2 = 月割終了年月2.getBetweenMonths(月割開始年月2);
+            int 月数2 = 月割終了年月2.getBetweenMonths(月割開始年月2) + 1;
             div.getLblGessuData2().setText(new RString(月数2));
         }
-        div.getLblHokenryoDankaiKubunData2().setText(resultMax.get介護賦課Result().get保険料算定段階2());
+        RString 段階区分2 = resultMax.get介護賦課Result().get保険料算定段階2();
+        if (!RString.isNullOrEmpty(段階区分2)) {
+            RString 保険料段階区分2 = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List().
+                    getBy段階区分(段階区分2).get表記();
+            div.getLblHokenryoDankaiKubunData2().setText(RString.isNullOrEmpty(保険料段階区分2) ? null : 保険料段階区分2);
+        }
         Decimal 保険料率2 = resultMax.get介護賦課Result().get算定年額保険料2();
         div.getLblHokenryoritsuData2().setText(doカンマ編集(保険料率2));
         if (保険料率2 != null && 月割開始年月2 != null && !RString.isNullOrEmpty(月割開始年月2.toDateString())
@@ -258,8 +274,12 @@ public class KaigoHokenFukaKonkyoHandler {
         FlexibleDate 老年終了日 = resultMax仮算定用.get介護賦課Result().get老年廃止日();
         div.getLblRonenShuryobiData().setText(老年終了日 == null ? null : 老年終了日.wareki().toDateString());
 
-        //TODO
-        div.getLblFukaKonkyoData1().setText(resultMax仮算定用.get介護賦課Result().get保険料算定段階());
+        RString 段階区分 = resultMax仮算定用.get介護賦課Result().get保険料算定段階();
+        if (!RString.isNullOrEmpty(段階区分)) {
+            RString 前年度保険料段階 = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List().
+                    getBy段階区分(段階区分).get表記();
+            div.getLblFukaKonkyoData1().setText(RString.isNullOrEmpty(前年度保険料段階) ? null : 前年度保険料段階);
+        }
         div.getLblFukaKonkyoData2().setText(doカンマ編集(
                 resultMax仮算定用.get介護賦課Result().get算定年額保険料2() == null
                 ? resultMax仮算定用.get介護賦課Result().get算定年額保険料1()
