@@ -25,17 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakugassanShikyuKetteitsuchishoTempEntity implements IDbAccessable, Serializable {
 
-    private RString shikyuKubun;
-    private RString shutsuryokujunMei1;
-    private RString shutsuryokujunMei2;
-    private RString shutsuryokujunMei3;
-    private RString shutsuryokujunMei4;
-    private RString shutsuryokujunMei5;
-    private RString kaiPeiji1;
-    private RString kaiPeiji2;
-    private RString kaiPeiji3;
-    private RString kaiPeiji4;
-    private RString kaiPeiji5;
     private HihokenshaNo hihokenshaNo;
     private FlexibleYear taishoNendo;
     private HokenshaNo hokenshaNo;

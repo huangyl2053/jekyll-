@@ -28,17 +28,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakugassanShikyuKetteitsuchisho {
 
-    private RString 支給不支給区分;
-    private RString 出力順1;
-    private RString 出力順2;
-    private RString 出力順3;
-    private RString 出力順4;
-    private RString 出力順5;
-    private RString 改頁1;
-    private RString 改頁2;
-    private RString 改頁3;
-    private RString 改頁4;
-    private RString 改頁5;
     private RString 郵便番号;
     private RString 行政区;
     private RString 住所Text;
