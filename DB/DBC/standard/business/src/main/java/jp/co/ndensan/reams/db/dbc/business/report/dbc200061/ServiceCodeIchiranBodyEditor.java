@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBCMNJ2006_サービスコード一覧表BodyEditor
@@ -64,7 +66,7 @@ public class ServiceCodeIchiranBodyEditor
             source.List1_5 = doパターン62(entity.getTeikyoShuryoYM());
         }
         if (!INT_05.equals(getColumnValue(entity.getTanisuShikibetsuCode()))) {
-            source.List1_6 = new RString(entity.getTaniSu());
+            source.List1_6 = doカンマ編集(new Decimal(entity.getTaniSu()));
         }
         source.List1_7 = getColumnValue(entity.getTanisuShikibetsuCode());
         if (区分_1.equals(entity.getRiyosyaFutanTeiritsuTeigakuKubun())) {
@@ -72,7 +74,7 @@ public class ServiceCodeIchiranBodyEditor
         } else if (区分_2.equals(entity.getRiyosyaFutanTeiritsuTeigakuKubun())) {
             source.List1_8 = 定額;
         }
-        source.List1_9 = entity.getKyufuRitsu();
+        source.List1_9 = doカンマ編集(new Decimal(String.valueOf(entity.getKyufuRitsu())));
         source.List1_10 = entity.getRiyoshaFutanGaku();
         if (区分_2.equals(entity.getTaishoJigyoJishiKubun())) {
             source.List1_11 = HOSHI;
@@ -97,7 +99,7 @@ public class ServiceCodeIchiranBodyEditor
         }
         source.List2_2 = entity.getMotoTaniShikibetsuCd();
         if (!INT_05.equals(source.List2_2)) {
-            source.List2_1 = entity.getMotoTensu();
+            source.List2_1 = doカンマ編集(new Decimal(String.valueOf(entity.getMotoTensu())));
         }
         if (区分_1.equals(entity.getMotoGendogakuTaishogaiFlag())) {
             source.List2_3 = HOSHI;
@@ -116,6 +118,13 @@ public class ServiceCodeIchiranBodyEditor
             return RString.EMPTY;
         }
         return ym.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString doカンマ編集(Decimal number) {
+        if (null == number) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
 
 }

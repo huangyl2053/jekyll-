@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigokyufuhitaishoshatoroku;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc710100.HanyoListKagoKekkaMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.UpdKogakuKokuhorenIFMstMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -20,29 +23,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatchProcessParameter {
 
-    private RString menuId;
     private Long shuturyokuJunn;
     private FlexibleYearMonth shinsaYMFrom;
     private FlexibleYearMonth shinsaYMTo;
     private boolean shuturyokuFlg;
+    private FlexibleYearMonth sysYearMonth;
+    private YMDHMS sysDate;
 
     /**
      * コンストラクタです。
      *
      *
-     * @param menuId RString
      * @param shuturyokuJunn RString
      * @param shinsaYMFrom FlexibleYearMonth
      * @param shinsaYMTo FlexibleYearMonth
      * @param shuturyokuFlg boolean
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
-            RString menuId,
             Long shuturyokuJunn,
             FlexibleYearMonth shinsaYMFrom,
             FlexibleYearMonth shinsaYMTo,
             boolean shuturyokuFlg) {
-        this.menuId = menuId;
         this.shuturyokuJunn = shuturyokuJunn;
         this.shinsaYMFrom = shinsaYMFrom;
         this.shinsaYMTo = shinsaYMTo;
@@ -51,10 +52,28 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
 
     /**
      * コンストラクタです。
-     *
-     *
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter() {
     }
 
+    /**
+     * toMyBatisParameterのメソッドです。
+     *
+     * @return {@link HanyoListKagoKekkaMybatisParameter}
+     */
+    public KyufuJissekiKihonKogakuMybatisParameter toMybatisParameter() {
+        KyufuJissekiKihonKogakuMybatisParameter parameter = new KyufuJissekiKihonKogakuMybatisParameter();
+        parameter.set最新のサービス提供年月(shinsaYMFrom);
+        parameter.set最古のサービス提供年月(shinsaYMTo);
+        return parameter;
+    }
+
+    /**
+     * toMyBatisParameterのメソッドです。
+     *
+     * @return {@link UpdKogakuKokuhorenIFMstMybatisParameter}
+     */
+    public UpdKogakuKokuhorenIFMstMybatisParameter toCreateUpdKogakuKokuhorenIFMstMybatisParameter() {
+        return new UpdKogakuKokuhorenIFMstMybatisParameter(shinsaYMFrom, shinsaYMTo, sysYearMonth, sysDate);
+    }
 }

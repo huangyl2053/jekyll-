@@ -47,7 +47,6 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter extends
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter toCreateGyomuHokenshaJohoGetsujiProcessParameter() {
         return new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
-                menuId,
                 shuturyokuJunn,
                 shinsaYMFrom,
                 shinsaYMTo,

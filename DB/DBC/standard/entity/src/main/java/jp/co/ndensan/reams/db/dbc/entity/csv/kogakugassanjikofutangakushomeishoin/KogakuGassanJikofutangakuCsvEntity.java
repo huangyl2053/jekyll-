@@ -5,13 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeishoin;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 高額合算自己負担額証明書情報取込のの帳票CSVEntity
+ * 高額合算自己負担額証明書情報取込の帳票CSVEntity
  *
  * @reamsid_L DBC-2640-010 zhengshenlei
  */
@@ -33,11 +36,11 @@ public class KogakuGassanJikofutangakuCsvEntity {
     @CsvField(order = 60, name = "No.")
     private RString no;
     @CsvField(order = 70, name = "証記載保険者番号")
-    private RString 証記載保険者番号;
+    private ShoKisaiHokenshaNo 証記載保険者番号;
     @CsvField(order = 80, name = "証記載保険者名")
     private RString 証記載保険者名;
     @CsvField(order = 90, name = "対象年度")
-    private RString 対象年度;
+    private FlexibleYear 対象年度;
     @CsvField(order = 100, name = "被保険者番号")
     private RString 被保険者番号;
     @CsvField(order = 110, name = "被保険者氏名")
@@ -45,7 +48,7 @@ public class KogakuGassanJikofutangakuCsvEntity {
     @CsvField(order = 120, name = "支給申請書整理番号")
     private RString 支給申請書整理番号;
     @CsvField(order = 130, name = "履歴番号")
-    private RString 履歴番号;
+    private int 履歴番号;
     @CsvField(order = 140, name = "申請年月日")
     private RString 申請年月日;
     @CsvField(order = 150, name = "異動区分コード")
@@ -65,7 +68,7 @@ public class KogakuGassanJikofutangakuCsvEntity {
     @CsvField(order = 220, name = "自己負担額")
     private RString 自己負担額;
     @CsvField(order = 230, name = "自己負担額_うち70_74歳")
-    private RString 自己負担額_うち70_74歳;
+    private Decimal 自己負担額_うち70_74歳;
     @CsvField(order = 240, name = "自己負担額の差異")
     private RString 自己負担額の差異;
 }

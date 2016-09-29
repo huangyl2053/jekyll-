@@ -84,7 +84,7 @@ public class KogakuGassanJikofutangakuShomeiPageBreak extends PageBreaker<Gassan
         boolean flg = false;
         if (this.breakKeysList.contains(
                 KogakuGassanJikofutangakuShomeiProperty.DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran.証記載保険者番号.get項目ID())
-                && !currentSource.get高額合算自己負担額_保険者番号().equals(nextSource.get高額合算自己負担額_保険者番号())) {
+                && !currentSource.get被保険者_証記載保険者番号().equals(nextSource.get被保険者_証記載保険者番号())) {
             flg = true;
         }
         return flg;

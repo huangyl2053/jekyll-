@@ -94,7 +94,7 @@ public class KogakuGassanJikofutangakuShomeiService {
         resultEntity.set申請年月日(entity.get高額合算自己負担額_申請年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         resultEntity.set異動区分コード(entity.get高額合算自己負担額_異動区分());
-        resultEntity.set異動区分(KaigoGassan_Idokubun.valueOf(entity.get高額合算自己負担額_異動区分().toString()).get名称());
+        resultEntity.set異動区分(KaigoGassan_Idokubun.toValue(entity.get高額合算自己負担額_異動区分()).get名称());
         resultEntity.set介護加入期間_開始(entity.get高額合算自己負担額_被保険者期間開始年月日().wareki()
                 .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         resultEntity.set介護加入期間_終了(entity.get高額合算自己負担額_被保険者期間終了年月日().wareki()

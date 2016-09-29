@@ -68,6 +68,13 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
                 editEmpty(source);
             }
             return source;
+        } else {
+            source.add_hokenshaNo = getColumnValue(entity.get証記載保険者番号());
+            source.add_shichosonCode = getColumnValue(entity.get市町村コード());
+            source.add_kanaMeisho = getColumnValue(entity.get氏名５０音カナ());
+            source.add_choikiCode = getColumnValue(entity.get町域コード());
+            source.add_gyoseikuCode = getColumnValue(entity.get行政区コード());
+            source.add_yubinNo = getColumnValue(entity.get郵便番号());
         }
         if (集計Flag) {
             edit集計(source);
@@ -121,12 +128,14 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
             source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
         }
         if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
-            source.listUpper_1 = getColumnValue(entity.get被保険者氏名().getName()).substringReturnAsPossible(0, INT_34);
+            source.listUpper_1 = entity.get被保険者氏名().substringReturnAsPossible(0, INT_34);
         } else {
             source.listUpper_1 = アステリスク_15;
         }
         source.listUpper_2 = entity.get支給申請整理番号();
-        source.listUpper_3 = toRS(entity.get申請年月日().toString());
+        if (null != entity.get申請年月日()) {
+            source.listUpper_3 = toRS(entity.get申請年月日().toString());
+        }
         source.listUpper_4 = doカンマ編集(entity.get自己負担総額());
     }
 
@@ -146,8 +155,8 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     }
 
     private RString get住所() {
-        if (null != entity.get住所() && null != entity.get住所().get住所()) {
-            return entity.get住所().get住所().substringReturnAsPossible(0, INT_34);
+        if (null != entity.get住所()) {
+            return entity.get住所().substringReturnAsPossible(0, INT_34);
 
         }
         return RString.EMPTY;

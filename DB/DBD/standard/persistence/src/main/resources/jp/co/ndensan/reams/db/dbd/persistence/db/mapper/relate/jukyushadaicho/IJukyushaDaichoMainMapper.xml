@@ -12,7 +12,7 @@
     <update id="updDbt7022ShoriDateKanri"  parameterType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.ShoriDateKanriEntity">
         UPDATE rgdb."DbT7022ShoriDateKanri"
         SET
-            "updateCount" = #{updateCount},
+            "updateCount" = "updateCount"+1,
             "lastUpdateTimestamp" = #{lastUpdateTimestamp},
             "lastUpdateReamsLoginId" = #{lastUpdateReamsLoginId},
             "taishoKaishiTimestamp" = #{taishoKaishiTimestamp},
@@ -44,6 +44,7 @@
       <id column="老齢福祉年金_識別コード"/>
       <id column="老齢福祉年金_受給開始年月日"/>
       <id column="社福法人軽減_被保険者番号"/>
+      <id column="支払方法変更_証記載保険者番号"/>
       <id column="支払方法変更_被保険者番号"/>
       <id column="支払方法変更_管理区分"/>
       <id column="給付額減額情報_被保険者番号"/>
@@ -192,8 +193,10 @@
      <result property="社福法人軽減_旧措置者ユニット型個室のみ" column="社福法人軽減_旧措置者ユニット型個室のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
     </resultMap>
      <resultMap id="ResultMap_支払方法変更" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.ShiharaiHohoHenkoEntity" autoMapping="true">
+      <id property="支払方法変更_証記載保険者番号" column="支払方法変更_証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
       <id property="支払方法変更_被保険者番号" column="支払方法変更_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
       <id property="支払方法変更_管理区分" column="支払方法変更_管理区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+      <result property="支払方法変更_証記載保険者番号" column="支払方法変更_証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
       <result property="支払方法変更_被保険者番号" column="支払方法変更_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
       <result property="支払方法変更_管理区分" column="支払方法変更_管理区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
       <result property="支払方法変更_登録区分" column="支払方法変更_登録区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -333,6 +336,8 @@
      <result property="psm_地区名2" column="psm_地区名2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
      <result property="psm_地区コード3" column="psm_地区コード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
      <result property="psm_地区名3" column="psm_地区名3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_町域コード" column="psm_町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_処理年月日" column="psm_処理年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
      <result property="t7005_老人保健市町村コード" column="t7005_老人保健市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
      <result property="t7005_老人保健受給者番号" column="t7005_老人保健受給者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
      <result property="t7051_市町村名称" column="t7051_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -453,6 +458,8 @@
            PSM."chikuName2" AS psm_地区名2,
            PSM."chikuCode3" AS psm_地区コード3,
            PSM."chikuName3" AS psm_地区名3,
+           PSM."choikiCode" AS psm_町域コード,
+           PSM."shoriYMD" AS psm_処理年月日,
            T7005."rojinHokenShichosonCode" AS t7005_老人保健市町村コード,
            T7005."rojinHokenJukyushaNo" AS t7005_老人保健受給者番号,
            T7051."shichosonMeisho" AS t7051_市町村名称,
@@ -544,6 +551,7 @@
             特例施設入退所."jigyoshaNo" AS 特例施設入退所_事業者番号,
             特例施設入退所."jigyoshaMeisho" AS 特例施設入退所_事業者名称,
             特例施設入退所."telNo" AS 特例施設入退所_電話番号,
+            支払方法変更."shoKisaiHokenshaNo" AS 支払方法変更_証記載保険者番号,
             支払方法変更."hihokenshaNo" AS 支払方法変更_被保険者番号,
             支払方法変更."kanriKubun" AS 支払方法変更_管理区分,
             支払方法変更."torokuKubun" AS 支払方法変更_登録区分,
@@ -904,7 +912,8 @@
       </if>
     ) AS T4001_1
       WHERE rank_number = 1
-      <!--${出力順}-->
+      order by 受給者台帳_被保険者番号
+      ${出力順}
   </select>
     <sql id="負担限度額認定情報">
         SELECT 
@@ -935,7 +944,6 @@
             AND T4018."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T4018."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-         <!--${出力順}-->
     </sql>
   <sql id="社福法人軽減情報">
         SELECT 
@@ -960,7 +968,6 @@
             AND T4017."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T4017."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-         <!--${出力順}-->
     </sql>  
    <sql id="利用者負担減免情報">
         SELECT 
@@ -980,7 +987,6 @@
             AND T4014."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T4014."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-         <!--${出力順}-->
    </sql> 
    <sql id="訪問介護等減額情報">
         SELECT 
@@ -1002,7 +1008,6 @@
             AND T4016."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T4016."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-         <!--${出力順}-->
    </sql>
    <sql id="標準負担減額情報">
         SELECT 
@@ -1022,7 +1027,6 @@
             WHERE T4012."hihokenshaNo" <![CDATA[>=]]> #{被保険者番号From}
             AND T4012."hihokenshaNo" <![CDATA[<=]]> #{被保険者番号To}
            </if>
-        <!--${出力順}-->
    </sql> 
     <sql id="特別地域加算減免情報">
         SELECT 
@@ -1043,7 +1047,6 @@
             WHERE T4020."hihokenshaNo" <![CDATA[>=]]> #{被保険者番号From}
             AND T4020."hihokenshaNo" <![CDATA[<=]]> #{被保険者番号To}
            </if>
-        <!--${出力順}-->
    </sql> 
    <sql id="施設入退所情報">
         SELECT 
@@ -1069,7 +1072,6 @@
             AND T1004."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T1004."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-        <!--${出力順}-->
    </sql> 
    
    <sql id="居宅計画届出情報">
@@ -1117,7 +1119,6 @@
             AND T3005."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T3005."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-        <!--${出力順}-->
    </sql> 
    <sql id="特例施設入退所情報">
         SELECT 
@@ -1142,10 +1143,10 @@
             AND T1004."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T1004."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-        <!--${出力順}-->
    </sql>
    <sql id="支払方法変更情報">
         SELECT 
+            T4021."shoKisaiHokenshaNo",
             T4021."hihokenshaNo",
             T4021."kanriKubun",
             T4021."torokuKubun",
@@ -1192,7 +1193,6 @@
             AND T4021."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T4021."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-        <!--${出力順}-->
    </sql>
    <sql id="給付額減額情報">
         SELECT 
@@ -1221,7 +1221,6 @@
             AND T4021."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T4021."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-        <!--${出力順}-->
    </sql>
    <sql id="資格情報">
         SELECT 
@@ -1254,7 +1253,6 @@
             AND T1001."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T1001."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-        <!--${出力順}-->
    </sql>
    <sql id="老齢福祉年金情報">
         SELECT 
@@ -1276,7 +1274,6 @@
             AND T7006."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T7006."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-         <!--${出力順}-->
    </sql>
        <sql id="生活保護情報">
         SELECT 
@@ -1298,6 +1295,5 @@
             AND T0508."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
             AND T0508."lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
             </if>
-         <!--${出力順}-->
    </sql>
 </mapper>

@@ -5,9 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 帳票設計_DBC200034_高額合算自己負担額証明書情報取込一覧表のEntity
@@ -47,18 +55,18 @@ public class KogakuGassanJikofutangakuShomeishoDateEntity {
     private RString 被保険者_資格喪失事由コード;
     private RString 被保険者_世帯集約番号;
     private int 高額合算自己負担額_連番;
-    private RString 高額合算自己負担額_被保険者番号;
-    private RString 高額合算自己負担額_対象年度;
-    private RString 高額合算自己負担額_保険者番号;
+    private HihokenshaNo 高額合算自己負担額_被保険者番号;
+    private FlexibleYear 高額合算自己負担額_対象年度;
+    private ShoKisaiHokenshaNo 高額合算自己負担額_保険者番号;
     private RString 高額合算自己負担額_支給申請書整理番号;
-    private RString 高額合算自己負担額_履歴番号;
+    private int 高額合算自己負担額_履歴番号;
     private RString 高額合算自己負担額_保険制度コード;
     private RString 高額合算自己負担額_保険者名;
     private RString 高額合算自己負担額_国保被保険者証記号;
-    private RString 高額合算自己負担額_被保険者氏名カナ;
-    private RString 高額合算自己負担額_被保険者氏名;
-    private RString 高額合算自己負担額_生年月日;
-    private RString 高額合算自己負担額_性別;
+    private AtenaKanaMeisho 高額合算自己負担額_被保険者氏名カナ;
+    private AtenaMeisho 高額合算自己負担額_被保険者氏名;
+    private FlexibleDate 高額合算自己負担額_生年月日;
+    private Code 高額合算自己負担額_性別;
     private RString 高額合算自己負担額_所得区分;
     private RString 高額合算自己負担額_70歳以上の者に係る所得区分;
     private RString 高額合算自己負担額_自己負担額証明書整理番号;
@@ -74,21 +82,21 @@ public class KogakuGassanJikofutangakuShomeishoDateEntity {
     private FlexibleDate 高額合算自己負担額_被保険者期間開始年月日;
     private FlexibleDate 高額合算自己負担額_被保険者期間終了年月日;
     private FlexibleDate 高額合算自己負担額_申請年月日;
-    private RString 高額合算自己負担額_合計_自己負担額;
-    private RString 高額合算自己負担額_合計_70_74自己負担額_内訳;
-    private RString 高額合算自己負担額_合計_70未満高額支給額;
-    private RString 高額合算自己負担額_合計_70_74高額支給額;
-    private RString 高額合算自己負担額_補正済_合計_自己負担額;
-    private RString 高額合算自己負担額_補正済_合計_70_74自己負担額_内訳;
-    private RString 高額合算自己負担額_補正済_合計_70未満高額支給額;
-    private RString 高額合算自己負担額_補正済_合計_70_74高額支給額;
-    private RString 高額合算自己負担額_宛先氏名;
-    private RString 高額合算自己負担額_宛先郵便番号;
+    private Decimal 高額合算自己負担額_合計_自己負担額;
+    private Decimal 高額合算自己負担額_合計_70_74自己負担額_内訳;
+    private Decimal 高額合算自己負担額_合計_70未満高額支給額;
+    private Decimal 高額合算自己負担額_合計_70_74高額支給額;
+    private Decimal 高額合算自己負担額_補正済_合計_自己負担額;
+    private Decimal 高額合算自己負担額_補正済_合計_70_74自己負担額_内訳;
+    private Decimal 高額合算自己負担額_補正済_合計_70未満高額支給額;
+    private Decimal 高額合算自己負担額_補正済_合計_70_74高額支給額;
+    private AtenaMeisho 高額合算自己負担額_宛先氏名;
+    private YubinNo 高額合算自己負担額_宛先郵便番号;
     private RString 高額合算自己負担額_宛先住所;
     private RString 高額合算自己負担額_窓口払対象者判定コード;
     private RString 高額合算自己負担額_支払場所;
-    private RString 高額合算自己負担額_支払期間開始年月日;
-    private RString 高額合算自己負担額_支払期間終了年月日;
+    private FlexibleDate 高額合算自己負担額_支払期間開始年月日;
+    private FlexibleDate 高額合算自己負担額_支払期間終了年月日;
     private RString 高額合算自己負担額_閉庁内容;
     private RString 高額合算自己負担額_支払期間開始時間;
     private RString 高額合算自己負担額_支払期間終了時間;
@@ -105,7 +113,7 @@ public class KogakuGassanJikofutangakuShomeishoDateEntity {
     private RString 高額合算自己負担額_自己負担額証明書リアル発行フラグ;
     private FlexibleDate 高額合算自己負担額_バッチ補正実施年月日;
     private FlexibleDate 高額合算自己負担額_リアル補正実施年月日;
-    private RString 高額合算自己負担額_更新フラグ;
+    private Boolean 高額合算自己負担額_更新フラグ;
     private boolean 高額合算自己負担額_自己負担額差異フラグ;
 
 }

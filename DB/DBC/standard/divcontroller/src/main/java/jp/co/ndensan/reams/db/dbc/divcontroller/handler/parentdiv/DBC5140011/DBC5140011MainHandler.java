@@ -87,7 +87,7 @@ public class DBC5140011MainHandler {
             parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
         }
         if (div.getRadTaishoYM().getSelectedValue() != null && !div.getRadTaishoYM().getSelectedValue().isEmpty()) {
-            parameter.set対象年月(div.getRadTaishoYM().getSelectedValue());
+            parameter.set対象年月(div.getRadTaishoYM().getSelectedKey());
         }
         parameter.set開始年月(new FlexibleYearMonth(div.getTxtTaishoYmRange().getFromValue().getYearMonth().toDateString()));
         parameter.set終了年月(new FlexibleYearMonth(div.getTxtTaishoYmRange().getToValue().getYearMonth().toDateString()));
@@ -98,7 +98,7 @@ public class DBC5140011MainHandler {
             parameter.set事業者番号(div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo());
         }
         if (div.getChkNinteiKekka().getSelectedValues() != null && !div.getChkNinteiKekka().getSelectedValues().isEmpty()) {
-            parameter.set認定結果リスト(div.getChkNinteiKekka().getSelectedValues());
+            parameter.set認定結果リスト(div.getChkNinteiKekka().getSelectedKeys());
         }
         List<RString> list = new ArrayList();
         for (dgServiceShuruiList_Row row : div.getDgServiceShuruiList().getSelectedItems()) {
@@ -131,8 +131,6 @@ public class DBC5140011MainHandler {
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().isEmpty()) {
             parameter.set地区指定(div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象());
-        } else {
-            parameter.set地区指定(null);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果().isEmpty()) {
@@ -144,38 +142,26 @@ public class DBC5140011MainHandler {
                 }
             }
             parameter.set選択地区リスト(sort昇順ByKey(list));
-        } else {
-            parameter.set選択地区リスト(null);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get市町村コード() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get市町村コード().isEmpty()) {
             parameter.set市町村コード(div.getChikuShitei().getCcdChikuShichosonSelect().get市町村コード());
-        } else {
-            parameter.set市町村コード(null);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get市町村名称() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get市町村名称().isEmpty()) {
             parameter.set市町村名称(div.getChikuShitei().getCcdChikuShichosonSelect().get市町村名称());
-        } else {
-            parameter.set市町村名称(null);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get旧市町村コード() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get旧市町村コード().isEmpty()) {
             parameter.set旧市町村コード(div.getChikuShitei().getCcdChikuShichosonSelect().get旧市町村コード());
-        } else {
-            parameter.set旧市町村コード(null);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get旧市町村名称() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get旧市町村名称().isEmpty()) {
             parameter.set旧市町村名称(div.getChikuShitei().getCcdChikuShichosonSelect().get旧市町村名称());
-        } else {
-            parameter.set旧市町村名称(null);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get導入形態コード() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get導入形態コード().isEmpty()) {
             parameter.set導入形態コード(div.getChikuShitei().getCcdChikuShichosonSelect().get導入形態コード());
-        } else {
-            parameter.set導入形態コード(null);
         }
     }
 
@@ -248,7 +234,7 @@ public class DBC5140011MainHandler {
     private void pamaRestore1(BatchParameterMap restoreBatchParameterMap) throws IllegalArgumentException {
         RString 対象年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("対象年月"));
         if (対象年月 != null && !対象年月.isEmpty()) {
-            div.getRadTaishoYM().setSelectedValue(対象年月);
+            div.getRadTaishoYM().setSelectedKey(対象年月);
         }
         FlexibleYearMonth 開始年月 = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, new RString("開始年月"));
         if (開始年月 != null && !開始年月.isEmpty()) {
