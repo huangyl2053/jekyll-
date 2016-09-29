@@ -195,26 +195,25 @@ public class GemmenJuminKihon {
         QuestionMessage message = null;
         if (入力状況_新規申請.equals(入力状況)) {
             message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
-                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString(), 処理_登録.toString()).evaluate());
         } else if (入力状況_新規決定.equals(入力状況)) {
             message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
-                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString()).replace(処理_登録.toString()).evaluate());
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString(), 処理_登録.toString()).evaluate());
         } else if (入力状況_申請中申請.equals(入力状況)) {
             message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
-                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString(), 処理_登録.toString()).evaluate());
         } else if (入力状況_申請中決定.equals(入力状況)) {
-//            .replace(状況_決定.toString()).replace(処理_登録.toString())
             message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
-                    DbbQuestionMessages.減免情報等更新確認.getMessage().evaluate());
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString(), 処理_登録.toString()).evaluate());
         } else if (入力状況_申請中取消.equals(入力状況)) {
             message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
-                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString()).replace(処理_取消.toString()).evaluate());
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString(), 処理_取消.toString()).evaluate());
         } else if (入力状況_決定済訂正.equals(入力状況)) {
             message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
-                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_訂正.toString()).replace(処理_登録.toString()).evaluate());
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_訂正.toString(), 処理_登録.toString()).evaluate());
         } else if (入力状況_決定済取消.equals(入力状況)) {
             message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
-                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString()).replace(処理_取消.toString()).evaluate());
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString(), 処理_取消.toString()).evaluate());
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(message).respond();
