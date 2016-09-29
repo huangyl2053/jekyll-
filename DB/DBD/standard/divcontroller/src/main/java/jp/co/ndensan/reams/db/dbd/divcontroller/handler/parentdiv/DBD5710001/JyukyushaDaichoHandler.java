@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.JyukyushaDaichoOrderKey;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001_JukyushaDaichoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.JyukyushaDaichoDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.ShoriDateKanriService;
@@ -178,7 +178,7 @@ public class JyukyushaDaichoHandler {
      * @param div JyukyushaDaichoDiv
      * @param parameter DBD571001Parameter
      */
-    public void onCilck_btnBatchRegister(JyukyushaDaichoDiv div, DBD571001Parameter parameter) {
+    public void onCilck_btnBatchRegister(JyukyushaDaichoDiv div, DBD571001_JukyushaDaichoParameter parameter) {
         if (対象期間.equals(div.getRadChushutsuJyouken().getSelectedKey())) {
             parameter.set抽出条件設定区分(KEY0);
         } else {
