@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-1480-040 liuyl-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinfoif.IModifyNinteiShinseiJohoMapper">
+    <resultMap id="ResultMap_ModifyNinteiShinseiJohoEntity"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.ModifyNinteiShinseiJohoEntity">
+        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定申請区分法令コード"  column="認定申請区分法令コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="認定申請区分申請時コード" column="認定申請区分申請時コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="取下区分コード" column="取下区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="年齢" column="年齢"/>
+        <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="被保険者氏名カナ" column="被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="郵便番号" column="郵便番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="前回要介護状態区分コード" column="前回要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="前回認定有効期間開始" column="前回認定有効期間開始" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回認定有効期間終了" column="前回認定有効期間終了" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="主治医医療機関コード" column="主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医コード" column="主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="に号特定疾病コード" column="に号特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="認定調査委託先コード" column="認定調査委託先コード"  typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/>
+        <result property="申請届出代行区分コード" column="申請届出代行区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="申請届出者氏名" column="申請届出者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者氏名カナ" column="申請届出者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者郵便番号" column="申請届出者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="申請届出者住所" column="申請届出者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者電話番号" column="申請届出者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="申請者関係コード" column="申請者関係コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="本人との関係"  column="本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="連絡先1" column="連絡先1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="連絡先2" column="連絡先2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="事業者住所"  column="事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="事業者名称カナ" column="事業者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="dbT7060郵便番号" column="dbT7060郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="電話番号" column="電話番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="一次判定内容" column="一次判定内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="select申請情報IF電算標準版"  
+              resultMap="ResultMap_ModifyNinteiShinseiJohoEntity" 
+              parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.ModifyNinteiShinseiJohoMybatisParameter"
+              fetchSize="500">
+        SELECT 
+        "NinteiShinseiJohoTemp"."shinseishoKanriNo" AS 申請書管理番号,
+        "NinteiShinseiJohoTemp"."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
+        "NinteiShinseiJohoTemp"."shoKisaiHokenshaNo" AS 証記載保険者番号,
+        "NinteiShinseiJohoTemp"."hihokenshaNo" AS 被保険者番号,
+        "NinteiShinseiJohoTemp"."ninteiShinseiYMD" AS 認定申請年月日,
+        "NinteiShinseiJohoTemp"."ninteiShinseiHoreiKubunCode" AS 認定申請区分法令コード,
+        "NinteiShinseiJohoTemp"."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード,
+        "NinteiShinseiJohoTemp"."torisageKubunCode" AS 取下区分コード,
+        "NinteiShinseiJohoTemp"."hihokenshaKubunCode" AS 被保険者区分コード,
+        "NinteiShinseiJohoTemp"."seinengappiYMD" AS 生年月日,
+        "NinteiShinseiJohoTemp"."age" AS 年齢,
+        "NinteiShinseiJohoTemp"."seibetsu" AS 性別,
+        "NinteiShinseiJohoTemp"."hihokenshaKana" AS 被保険者氏名カナ,
+        "NinteiShinseiJohoTemp"."hihokenshaName" AS 被保険者氏名,
+        "NinteiShinseiJohoTemp"."yubinNo" AS 郵便番号,
+        "NinteiShinseiJohoTemp"."jusho" AS 住所,
+        "NinteiShinseiJohoTemp"."zenYokaigoKubunCode" AS 前回要介護状態区分コード,
+        "NinteiShinseiJohoTemp"."zenkaiYukoKikanStart" AS 前回認定有効期間開始,
+        "NinteiShinseiJohoTemp"."zenkaiYukoKikanEnd" AS 前回認定有効期間終了,
+        "NinteiShinseiJohoTemp"."shujiiIryokikanCode" AS 主治医医療機関コード,
+        "NinteiShinseiJohoTemp"."shujiiCode" AS 主治医コード,
+        "NinteiShinseiJohoTemp"."nigoTokuteiShippeiCode" AS に号特定疾病コード,
+        "NinteiShinseiJohoTemp"."nyushoShisetsuCode" AS 入所施設コード,
+        "NinteiShinseiJohoTemp"."ninteiChosaItakusakiCode" AS 認定調査委託先コード,
+        rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeDaikoKubunCode" AS 申請届出代行区分コード,
+        rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeshaShimei"  AS  申請届出者氏名,
+        rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeshaKanaShimei" AS 申請届出者氏名カナ,
+        rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeshaYubinNo" AS 申請届出者郵便番号,
+        rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeshaJusho"  AS 申請届出者住所,
+        rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeshaTelNo"  AS 申請届出者電話番号,
+        rgdb."DbV4001JukyushaDaicho"."shinseishaKankeiCode" AS 申請者関係コード,
+        rgdb."DbV4001JukyushaDaicho"."homninKankei"  AS 本人との関係,
+        "ShikibetsuTaisho"."renrakusaki1" AS 連絡先1,
+        "ShikibetsuTaisho"."renrakusaki2" AS 連絡先2,
+        G."jigyoshaName"  AS 事業者名称,
+        G."jigyoshaAddress" AS 事業者住所,
+        G."jigyoshaNameKana" AS 事業者名称カナ,
+        G."yubinNo"  AS dbT7060郵便番号,
+        G."telNo"  AS 電話番号,
+        rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" AS 市町村コード,
+        rgdb."DbT4003YokaigoNinteiInterface"."ichijiHanteiNaiyo"  AS  一次判定内容
+        FROM 
+        "NinteiShinseiJohoTemp"
+        LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho"
+        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4120ShinseitodokedeJoho"."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbV4001JukyushaDaicho"
+        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
+        ON "NinteiShinseiJohoTemp"."shoKisaiHokenshaNo" = rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        AND rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" =#{市町村コード}
+        LEFT JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS "ShikibetsuTaisho"
+        ON rgdb."DbV4001JukyushaDaicho"."shikibetsuCode" ="ShikibetsuTaisho"."shikibetsuCode"
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha"  AS G
+        ON "NinteiShinseiJohoTemp"."nyushoShisetsuCode" = G."jigyoshaNo"
+        AND NOT EXISTS (  SELECT 'X'
+                          FROM rgdb."DbT7060KaigoJigyosha" AS G1
+                          WHERE G."jigyoshaNo" = G1."jigyoshaNo"
+                          AND G."yukoKaishiYMD" <![CDATA[<]]> G1."yukoKaishiYMD"
+                          )
+        LEFT JOIN rgdb."DbT4003YokaigoNinteiInterface"
+        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
+    </select>
+       <select resultOrdered="true" id="select申請情報IF厚労省版"  
+              resultMap="ResultMap_ModifyNinteiShinseiJohoEntity" 
+              fetchSize="500">
+         SELECT
+        "NinteiShinseiJohoTemp"."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
+        "NinteiShinseiJohoTemp"."shoKisaiHokenshaNo" AS 証記載保険者番号,
+        "NinteiShinseiJohoTemp"."hihokenshaNo" AS 被保険者番号,
+        "NinteiShinseiJohoTemp"."ninteiShinseiYMD" AS 認定申請年月日,
+        "NinteiShinseiJohoTemp"."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード,
+        "NinteiShinseiJohoTemp"."torisageKubunCode" AS 取下区分コード,
+        "NinteiShinseiJohoTemp"."hihokenshaKubunCode" AS 被保険者区分コード
+        "NinteiShinseiJohoTemp"."seinengappiYMD" AS 生年月日,
+        "NinteiShinseiJohoTemp"."age" AS 年齢,
+        "NinteiShinseiJohoTemp"."seibetsu" AS 性別,
+        "NinteiShinseiJohoTemp"."hihokenshaKana" AS 被保険者氏名カナ,
+        "NinteiShinseiJohoTemp"."hihokenshaName" AS 被保険者氏名,
+        "NinteiShinseiJohoTemp"."yubinNo" AS 郵便番号,
+        "NinteiShinseiJohoTemp"."jusho" AS 住所,
+        "NinteiShinseiJohoTemp"."zenYokaigoKubunCode" AS 前回要介護状態区分コード,
+        "NinteiShinseiJohoTemp"."zenkaiYukoKikanStart" AS 前回認定有効期間開始,
+        "NinteiShinseiJohoTemp"."zenkaiYukoKikanEnd" AS 前回認定有効期間終了,
+        "NinteiShinseiJohoTemp"."shujiiIryokikanCode" AS 主治医医療機関コード,
+        "NinteiShinseiJohoTemp"."shujiiCode" AS 主治医コード,
+         rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeDaikoKubunCode" AS 申請届出代行区分コード,
+         "ShikibetsuTaisho"."renrakusaki1" AS 連絡先1,
+         G."jigyoshaName"  AS 事業者名称,
+         G."jigyoshaAddress" AS 事業者住所,
+         rgdb."DbT4003YokaigoNinteiInterface"."ichijiHanteiNaiyo"  AS  一次判定内容
+         FROM 
+        "NinteiShinseiJohoTemp"
+        LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho"
+        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4120ShinseitodokedeJoho"."shinseishoKanriNo" 
+        LEFT JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS "ShikibetsuTaisho"
+        ON rgdb."DbV4001JukyushaDaicho"."shikibetsuCode" ="ShikibetsuTaisho"."shikibetsuCode"
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha"  AS G
+        ON "NinteiShinseiJohoTemp"."nyushoShisetsuCode" = G."jigyoshaNo"
+        AND NOT EXISTS (  SELECT 'X'
+                          FROM rgdb."DbT7060KaigoJigyosha" AS G1
+                          WHERE G."jigyoshaNo" = G1."jigyoshaNo"
+                          AND G."yukoKaishiYMD" <![CDATA[<]]> G1."yukoKaishiYMD"
+                          )
+         LEFT JOIN rgdb."DbT4003YokaigoNinteiInterface"
+        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
+       </select>
+    <select id="select連絡先情報" resultOrdered="true" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.ResultMap_DbT4150RenrakusakiJohoEntity"
+            fetchSize="500">
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.allColumns_DbT4150RenrakusakiJoho" />
+        FROM 
+        rgdb."DbT4150RenrakusakiJoho"
+        WHERE
+        rgdb."DbT4150RenrakusakiJoho"."shinseishoKanriNo" = #{申請書管理番号}
+        ORDER BY 
+        rgdb."DbT4150RenrakusakiJoho"."priority"
+        limit 2
+    </select>
+</mapper>
+        
+        
+ 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-1480-040 liuyl-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinfoif.IInsNinteiGaibuDataOutputHistoryMapper">
+   <resultMap id="ResultMap_DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity">
+       <id property="dataKubun" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+       <result property="insertDantaiCd"  column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="insertTimestamp" column="insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+       <result property="insertReamsLoginId" column="insertReamsLoginId"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="insertContextId" column="insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+       <result property="isDeleted"  column="isDeleted"/>
+       <result property="updateCount" column="updateCount"/>
+       <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+       <result property="lastUpdateReamsLoginId" column="lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="dataKubun" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+       <result property="dataOutputKaishiYMDHMS" column="dataOutputKaishiYMDHMS" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+       <result property="dataOutputShuryoYMDHMS" column="dataOutputShuryoYMDHMS" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+   </resultMap>
+    <select id="select出力履歴" resultMap="ResultMap_DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity"
+        resultOrdered="true" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.InsNinteiGaibuDataOutputHistoryMybitsParameter"
+        fetchSize="500">
+        SELECT *
+        FROM 
+        rgdb."DbT7204YokaigoNinteiGaibuDataOutputHistory"
+        WHERE rgdb."DbT7204YokaigoNinteiGaibuDataOutputHistory"."dataKubun" = #{出力データ区分}
+    </select>
+    <insert id="insertその他情報登録" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.InsNinteiGaibuDataOutputHistoryMybitsParameter">
+        INSERT INTO 
+        rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+        ("shinseishoKanriNo","ninteiShinseiJohoChushutsuYMD","ninteiChosaKekkaJohoChushutsuYMD","ninteiChosaIkenshoKekkaJohoChushutsuYMD","ichijihanteiChushutsuYMD","shinsakaiKekkaJohoChushutsuYMD")
+        SELECT 
+        "NinteiShinseiJohoTemp"."shinseishoKanriNo",
+        #{システム日付},
+        null,
+        null,
+        null,
+        null
+        FROM "NinteiShinseiJohoTemp"
+    </insert>
+</mapper>

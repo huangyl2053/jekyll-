@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-1480-040 liuyl-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinfoif.INinteiShinseiJohoMapper">
+    <select id="select要介護認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"
+        resultOrdered="true" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.NinteiShinseiJohoMybatisParameter"
+        fetchSize="500">
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
+        FROM rgdb."DbT4101NinteiShinseiJoho" 
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho"
+        ON rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" =rgdb."DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+        AND rgdb."DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        INNER JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" 
+        ON rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo"=rgdb."DbT7211GaibuRenkeiDataoutputJoho"."shinseishoKanriNo"
+        WHERE 
+        rgdb."DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" =#{証記載保険者番号}
+        <if test="is被保険者番号非空">
+        AND rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo" =#{被保険者番号}
+        </if>
+        <if test="is対象外被保険者番号リスト非空">
+        AND rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo" NOT IN 
+        <foreach item="対象外被保険者番号リスト" index="index" collection="対象外被保険者番号リスト" open="(" separator="," close=")">
+        #{対象外被保険者番号リスト}
+        </foreach>
+        </if>
+        <if test="is今回開始期間FROM非空">
+        AND #{今回開始期間FROM} <![CDATA[<=]]> rgdb."DbT4101NinteiShinseiJoho"."insertTimestamp"
+        </if>
+        <if test="is今回開始期間TO非空">
+        AND rgdb."DbT4101NinteiShinseiJoho"."insertTimestamp" <![CDATA[<=]]> #{今回開始期間TO}
+        </if>
+        AND rgdb."DbT4101NinteiShinseiJoho"."logicalDeletedFlag" IS FALSE
+        AND rgdb."DbT7211GaibuRenkeiDataoutputJoho"."ninteiShinseiJohoChushutsuYMD" IS NULL
+        ORDER BY
+        rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo" 
+    </select>
+</mapper>
+        
