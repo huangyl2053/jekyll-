@@ -66,8 +66,8 @@ public class KokuhorenSofuDataErrorIchiranEditor
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.cityCd = this.市町村コード;
         source.cityMei = this.市町村名称;
-        source.listList1_1 = getColumnValue(entity.get被保険者番号());
-        source.listList2_1 = new RString(連番);
+        source.listList2_1 = getColumnValue(entity.get被保険者番号());
+        source.listList1_1 = new RString(連番);
         source.listList2_2 = entity.get氏名カナ();
         source.listList2_3 = entity.get氏名();
         source.listList2_4 = getパターン4(entity.get資格取得日());
