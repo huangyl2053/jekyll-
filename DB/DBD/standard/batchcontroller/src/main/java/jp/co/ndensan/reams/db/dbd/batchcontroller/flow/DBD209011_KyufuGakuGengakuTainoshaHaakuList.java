@@ -26,20 +26,13 @@ public class DBD209011_KyufuGakuGengakuTainoshaHaakuList extends BatchFlowBase<D
     private static final String 対象者把握情報の取得 = "kyufuGengakuHaakuListTaishoTokutei";
     private static final String 収納滞納状況把握情報の取得 = "shunoTainoJokyoHaaku";
     private static final String 給付額減額滞納者把握情報取得 = "kyufuGengakuHaakuListSakusei";
-//    private RDateTime バッチ起動時処理日時;
-
-    @Override
-    protected void prepareConfigData() {
-//        バッチ起動時処理日時 = RDate.getNowDateTime();
-    }
 
     @Override
     protected void defineFlow() {
         executeStep(収納状況把握情報の取得);
-        //        executeStep(対象者把握情報の取得);
-//        executeStep(収納滞納状況把握情報test);
-//        executeStep(収納滞納状況把握情報の取得);
-//        executeStep(給付額減額滞納者把握情報取得);
+        executeStep(対象者把握情報の取得);
+        executeStep(収納滞納状況把握情報の取得);
+        executeStep(給付額減額滞納者把握情報取得);
     }
 
     /**

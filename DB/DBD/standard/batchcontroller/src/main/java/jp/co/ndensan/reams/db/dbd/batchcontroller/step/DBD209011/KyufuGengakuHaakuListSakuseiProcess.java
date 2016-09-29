@@ -8,12 +8,18 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.TsutishoHakkoCommonProcess;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd200008.KyufuGengakuHaakuIchiranProerty;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.KyufuGengakuHaakuListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListSakuseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufugakuGengakuTainoshaHaakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200008.KyufuGengakuHaakuIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -30,13 +36,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * 給付額減額滞納者把握情報の取得_Process処理クラスです．
  *
- * @reamsid_L DBD-3610-050 x_miaocl
+ * @reamsid_L DBD-3610-030 x_miaocl
  */
-public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuGengakuHaakuListSakuseiEntity> {
+public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufugakuGengakuTainoshaHaakuEntity> {
 
+    private static final int NUM5 = 5;
     private KyufuGengakuHaakuListSakuseiProcessParameter parameter;
     private static final ReportId REPORT_DBD200008 = ReportIdDBD.DBD200008.getReportId();
-    private static final ReportId 帳票ID = new ReportId("DBD200008_KyufuGengakuHaakuIchiran");
+    private IOutputOrder outputOrder;
     private BatchReportWriter<KyufuGengakuHaakuIchiranReportSource> batchReportWrite;
 //    private ReportSourceWriter<KyufuGengakuHaakuIchiranReportSource> reportSourceWriter;
 //    private RString reamsLoginID;
@@ -62,18 +69,27 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toKyufuGengakuHaakuListSakuseiMybatisParameter(parameter.get改頁出力順ID()));
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        if (parameter.get改頁出力順ID() != null) {
+            outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200008, Long.parseLong(parameter.get改頁出力順ID().toString()));
+        }
+        RString 出力順 = RString.EMPTY;
+        if (outputOrder != null) {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
+                    create(KyufuGengakuHaakuIchiranProerty.DBD200008ShutsuryokujunEnum.class, outputOrder), NUM5);
+        }
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toKyufuGengakuHaakuListSakuseiMybatisParameter(出力順));
     }
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(帳票ID.value(),
-                SubGyomuCode.DBD介護受給).create();
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200008.value(), SubGyomuCode.DBD介護受給).create();
 //        reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
     @Override
-    protected void process(KyufuGengakuHaakuListSakuseiEntity sjhe) {
+    protected void process(KyufugakuGengakuTainoshaHaakuEntity haakuEntity) {
+        edit給付額減額滞納者把握情報(haakuEntity);
 //        RString 帳票タイトル = new RString("介護保険　給付額減額把握リスト");
     }
 
@@ -82,15 +98,10 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
         バッチ出力条件リストの出力();
     }
 
-//    private RString get出力順() {
-//        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-//        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, parameter.get帳票ID(), reamsLoginID, parameter.get改頁出力順ID());
-//        RString 出力順 = RString.EMPTY;
-//        if (order != null) {
-//            //出力順 = MyBatisOrderByClauseCreator.create(KyufuGengakuCsvProcessProperty.DBD200008_KyufuGengakuHaakuIchiran.class, order);
-//        }
-//        return 出力順;
-//    }
+    private void edit給付額減額滞納者把握情報(KyufugakuGengakuTainoshaHaakuEntity haakuEntity) {
+
+    }
+
 //    private HihokenshaJohoEntity 給付額減額情報(KyufuGengakuHaakuListSakuseiEntity sjhe) {
 //        HihokenshaJohoEntity entity = new HihokenshaJohoEntity();
 //        IKojin kojin = ShikibetsuTaishoFactory.createKojin(sjhe.getFindShikibetsuTaishoEntity());

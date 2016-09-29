@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 
+import java.util.List;
+import jp.co.ndensan.reams.ca.cax.entity.db.basic.CaT0701ShunyuEntity;
 import jp.co.ndensan.reams.ca.cax.entity.db.basic.CaT1018TokusokuHakkoRirekiEntity;
-import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
 /**
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 public class ChoteiRelateEntity {
 
     private UrT0705ChoteiKyotsuEntity 調定共通Entity;
-    private TotalShunyuRelateEntity 収入;
+    private List<CaT0701ShunyuEntity> 収入List;
     private CaT1018TokusokuHakkoRirekiEntity caT1018_督促状発行履歴Entity;
 
 }

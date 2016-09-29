@@ -92,10 +92,10 @@ public class KyufuGengakuHaakuListSakuseiProcessParameter implements IBatchProce
     /**
      * ＳＱＬ使用された情報を作成します．
      *
-     * @param 改頁出力順ID 改頁出力順ID
+     * @param 出力順 出力順
      * @return ＳＱＬ使用されたパラメター
      */
-    public KyufuGengakuHaakuListSakuseiMybatisParameter toKyufuGengakuHaakuListSakuseiMybatisParameter(Long 改頁出力順ID) {
-        return new KyufuGengakuHaakuListSakuseiMybatisParameter(改頁出力順ID);
+    public KyufuGengakuHaakuListSakuseiMybatisParameter toKyufuGengakuHaakuListSakuseiMybatisParameter(RString 出力順) {
+        return new KyufuGengakuHaakuListSakuseiMybatisParameter(出力順);
     }
 }

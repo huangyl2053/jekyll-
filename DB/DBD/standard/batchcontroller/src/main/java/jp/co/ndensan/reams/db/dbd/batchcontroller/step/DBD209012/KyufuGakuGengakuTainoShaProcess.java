@@ -138,9 +138,9 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
         Decimal 未納額_当該;
 
         for (ShunoTainoJokyoTempTableEntity entity : 収納滞納状況一時List) {
-            RString 賦課年度 = entity.getFukaNendo().toDateString();
+            RString 賦課年度 = entity.getTmp_fukaNendo().toDateString();
 
-            調定額_当該 = entity.getChoteigaku();
+            調定額_当該 = entity.getTmp_choteigaku();
             調定額_合計 = 調定額年度Map.get(賦課年度);
             if (調定額_合計 != null) {
                 調定額_合計 = 調定額_合計.add(調定額_当該);
@@ -149,7 +149,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
                 調定額年度Map.put(賦課年度, 調定額_当該);
             }
 
-            収入額_当該 = entity.getShunyugaku();
+            収入額_当該 = entity.getTmp_shunyugaku();
             収入額_合計 = 収入額Map.get(賦課年度);
             if (収入額_合計 != null) {
                 収入額_合計 = 収入額_合計.add(収入額_当該);
@@ -158,7 +158,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
                 収入額Map.put(賦課年度, 収入額_当該);
             }
 
-            未納額_当該 = entity.getMinogaku();
+            未納額_当該 = entity.getTmp_minogaku();
             未納額_合計 = 未納額Map.get(賦課年度);
             if (未納額_合計 != null) {
                 未納額_合計 = 未納額_合計.add(未納額_当該);
@@ -217,19 +217,19 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
         被保険者情報Entity.set住所(kojin.get住所().get住所());
         被保険者情報Entity.set郵便番号(kojin.get住所().get郵便番号().getColumnValue());
 
-        被保険者情報Entity.set資格取得日(entity.get収納滞納状況一時Entity().get(0).getShikakuShutokuYMD());
-        被保険者情報Entity.set資格喪失日(entity.get収納滞納状況一時Entity().get(0).getShikakuSoshitsuYMD());
-        被保険者情報Entity.set喪失事由(entity.get収納滞納状況一時Entity().get(0).getShikakuSoshitsuJiyuCode());
-        被保険者情報Entity.set資格区分(entity.get収納滞納状況一時Entity().get(0).get資格区分());
-        被保険者情報Entity.set住特フラグ(entity.get収納滞納状況一時Entity().get(0).getKoikinaiJushochiTokureiFlag());
-        被保険者情報Entity.set生保フラグ(entity.get収納滞納状況一時Entity().get(0).isSeihoFlag());
-        被保険者情報Entity.set厚労省IF識別コード(entity.get収納滞納状況一時Entity().get(0).getKoroshoIfShikibetsuCode().getColumnValue());
-        被保険者情報Entity.set要介護状態区分コード(entity.get収納滞納状況一時Entity().get(0).getYokaigoJotaiKubunCode().getColumnValue());
-        被保険者情報Entity.set認定有効期間開始年月日(entity.get収納滞納状況一時Entity().get(0).getNinteiYukoKikanKaishiYMD());
-        被保険者情報Entity.set認定有効期間終了年月日(entity.get収納滞納状況一時Entity().get(0).getNinteiYukoKikanShuryoYMD());
-        被保険者情報Entity.set認定日(entity.get収納滞納状況一時Entity().get(0).getNinteiYMD());
-        被保険者情報Entity.set申請中フラグ(entity.get収納滞納状況一時Entity().get(0).isShiseityuFlag());
-        被保険者情報Entity.set申請日(entity.get収納滞納状況一時Entity().get(0).getJukyuShinseiYMD());
+        被保険者情報Entity.set資格取得日(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuShutokuYMD());
+        被保険者情報Entity.set資格喪失日(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuSoshitsuYMD());
+        被保険者情報Entity.set喪失事由(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuSoshitsuJiyuCode());
+        被保険者情報Entity.set資格区分(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuKubunCode());
+        被保険者情報Entity.set住特フラグ(entity.get収納滞納状況一時Entity().get(0).getTmp_koikinaiJushochiTokureiFlag());
+        被保険者情報Entity.set生保フラグ(entity.get収納滞納状況一時Entity().get(0).isTmp_seihoFlag());
+        被保険者情報Entity.set厚労省IF識別コード(entity.get収納滞納状況一時Entity().get(0).getTmp_koroshoIfShikibetsuCode().getColumnValue());
+        被保険者情報Entity.set要介護状態区分コード(entity.get収納滞納状況一時Entity().get(0).getTmp_yokaigoJotaiKubunCode().getColumnValue());
+        被保険者情報Entity.set認定有効期間開始年月日(entity.get収納滞納状況一時Entity().get(0).getTmp_ninteiYukoKikanKaishiYMD());
+        被保険者情報Entity.set認定有効期間終了年月日(entity.get収納滞納状況一時Entity().get(0).getTmp_ninteiYukoKikanShuryoYMD());
+        被保険者情報Entity.set認定日(entity.get収納滞納状況一時Entity().get(0).getTmp_ninteiYMD());
+        被保険者情報Entity.set申請中フラグ(entity.get収納滞納状況一時Entity().get(0).isTmp_shiseityuFlag());
+        被保険者情報Entity.set申請日(entity.get収納滞納状況一時Entity().get(0).getTmp_jukyuShinseiYMD());
         被保険者情報Entity.set徴収権消滅期間(decimalToRString(徴収権消滅期間));
         被保険者情報Entity.set納付済み期間(decimalToRString(納付済み期間));
         被保険者情報Entity.set給付額減額期間(decimalToRString(給付額減額期間));
@@ -238,23 +238,23 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
         List<ShunoJohoEntity> 収納情報List = new ArrayList<>();
         for (ShunoTainoJokyoTempTableEntity data : entity.get収納滞納状況一時Entity()) {
             ShunoJohoEntity resultData = new ShunoJohoEntity();
-            resultData.set調定年度(data.getChoteiNendo());
-            resultData.set賦課年度(data.getFukaNendo());
+//            resultData.set調定年度(data.getTmp_choteiNendo());
+//            resultData.set賦課年度(data.getFukaNendo());
             List<ShunoKibetsuEntity> 期別情報List = new ArrayList<>();
             for (ShunoTainoJokyoTempTableEntity table : entity.get収納滞納状況一時Entity()) {
                 ShunoKibetsuEntity resulttable = new ShunoKibetsuEntity();
-                resulttable.set期別(table.getKibetsu());
-                resulttable.set保険料金(table.getChoteigaku());
+                resulttable.set期別(new RString(table.getTmp_kibetsu()));
+                resulttable.set保険料金(table.getTmp_choteigaku());
 //QA                resulttable.set納期限(FlexibleDate.MAX);
-                resulttable.set滞納額(table.getMinogaku());
-                resulttable.set滞納区分(table.getTainoKubun());
-                resulttable.set時効起算日(table.getJikoKisanYMD());
-                resulttable.set時効起算事由(table.getJikoKisanJiyu());
+                resulttable.set滞納額(table.getTmp_minogaku());
+                resulttable.set滞納区分(table.getTmp_tainoKubun());
+                resulttable.set時効起算日(table.getTmp_jikoKisanYMD());
+                resulttable.set時効起算事由(table.getTmp_jikoKisanJiyu());
                 期別情報List.add(resulttable);
             }
             resultData.set期別情報(期別情報List);
-            resultData.set特徴普徴区分(data.getTokucho_FuchoKubun());
-            if (data.getFukaNendo() == null) {
+            resultData.set特徴普徴区分(data.getTmp_tokucho_FuchoKubun());
+            if (data.getTmp_fukaNendo() == null) {
                 resultData.set収納情報なし(new RString("true"));
             }
             収納情報List.add(resultData);
