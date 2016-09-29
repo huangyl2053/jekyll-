@@ -1,0 +1,1336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBU-5570-030 xuyannan -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hokenkyufushokankettei.IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper">
+    <sql id="kyufuJoukenn">
+        <if test ="縦軸index == 1">
+            "serviceSyuruiCode" IN ('11','61','12','62','13','63','14','64','31','34') AND
+        </if>
+        <if test ="縦軸index == 2">
+            "serviceSyuruiCode" IN ('21','24','22','25','23','26') AND
+        </if>
+        <if test ="縦軸index == 3">
+            "serviceSyuruiCode" IN ('17','67','41','44','42','45') AND
+        </if>
+        <if test ="縦軸index == 4">
+            "serviceSyuruiCode" IN ('41','44') AND
+        </if>
+        <if test ="縦軸index == 5">
+            "serviceSyuruiCode" IN ('42','45') AND
+        </if>
+        <if test ="縦軸index == 6">
+            "serviceSyuruiCode" IN ('51','52','53') AND
+        </if>
+        <if test ="縦軸index == 7">
+            "serviceSyuruiCode" = '51' AND
+        </if>
+        <if test ="縦軸index == 8">
+            "serviceSyuruiCode" = '52' AND
+        </if>
+        <if test ="縦軸index == 9">
+            "serviceSyuruiCode" = '53' AND
+        </if>
+        <if test ="縦軸index == 10">
+            "serviceSyuruiCode" = '00' AND
+        </if>
+        <if test ="縦軸index == 11">
+            "serviceSyuruiCode" = '00' AND
+        </if>
+        <if test ="縦軸index == 12">
+            "serviceSyuruiCode" = '00' AND
+        </if>
+        <if test ="縦軸index == 13">
+            "serviceSyuruiCode" = '00' AND
+        </if>
+        <if test ="縦軸index == 14">
+            "serviceSyuruiCode" <![CDATA[<>]]> '00' AND
+        </if>
+        <if test ="縦軸index == 15">
+            ("serviceSyuruiCode" IN ('11','61','12','62','13','63','14','64','31','34','21','24','22','25','23','26','17','67',
+                '41','44','42','45','15','65','16','66') OR
+            SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B')) AND
+        </if>
+        <if test ="縦軸index == 16">
+            "serviceSyuruiCode" IN ('11','61') AND
+        </if>
+        <if test ="縦軸index == 17">
+            "serviceSyuruiCode" IN ('12','62') AND
+        </if>
+        <if test ="縦軸index == 18">
+            "serviceSyuruiCode" IN ('13','63') AND
+        </if>
+        <if test ="縦軸index == 19">
+            "serviceSyuruiCode" IN ('14','64') AND
+        </if>
+        <if test ="縦軸index == 20">
+            "serviceSyuruiCode" IN ('15','65') AND
+        </if>
+        <if test ="縦軸index == 21">
+            "serviceSyuruiCode" IN ('16','66') AND
+        </if>
+        <if test ="縦軸index == 22">
+            "serviceSyuruiCode" IN ('17','67') AND
+        </if>
+        <if test ="縦軸index == 23">
+            "serviceSyuruiCode" IN ('21','24') AND
+        </if>
+        <if test ="縦軸index == 24">
+            "serviceSyuruiCode" IN ('22','25') AND
+        </if>
+        <if test ="縦軸index == 25">
+            "serviceSyuruiCode" IN ('23','26') AND
+        </if>
+        <if test ="縦軸index == 26">
+            "serviceSyuruiCode" IN ('31','34') AND
+        </if>
+        <if test ="縦軸index == 27">
+            "serviceSyuruiCode" IN ('35','37','38','39') AND
+        </if>
+        <if test ="縦軸index == 28">
+            "serviceSyuruiCode" IN ('33','35','27') AND
+        </if>
+        <if test ="縦軸index == 29">
+            SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B') AND
+        </if>
+        <if test ="縦軸index == 30">
+            "serviceSyuruiCode" IN ('15','65','16','66') AND
+        </if>
+        <if test ="縦軸index == 31">
+            "serviceSyuruiCode" IN ('71','72','74','73','75','68','69','36','54','76','77','79','78') AND
+        </if>
+        <if test ="縦軸index == 32">
+            "serviceSyuruiCode" = '71' AND
+        </if>
+        <if test ="縦軸index == 33">
+            "serviceSyuruiCode" IN ('72','74') AND
+        </if>
+        <if test ="縦軸index == 34">
+            "serviceSyuruiCode" IN ('73','75','68','69') AND
+        </if>
+        <if test ="縦軸index == 35">
+            "serviceSyuruiCode" = '36' AND
+        </if>
+        <if test ="縦軸index == 36">
+            "serviceSyuruiCode" = '54' AND
+        </if>
+        <if test ="縦軸index == 37">
+            "serviceSyuruiCode" = '76' AND
+        </if>
+        <if test ="縦軸index == 38">
+            "serviceSyuruiCode" IN ('77','79') AND
+        </if>
+        <if test ="縦軸index == 39">
+            "serviceSyuruiCode" = '78' AND
+        </if>
+        <if test ="横軸index == 1">
+            "yoKaigoJotaiKubunCode" IN ('01')
+        </if>
+        <if test ="横軸index == 2">
+            "yoKaigoJotaiKubunCode" IN ('11')
+        </if>
+        <if test ="横軸index == 3">
+            "yoKaigoJotaiKubunCode" IN ('21')
+        </if>
+        <if test ="横軸index == 4">
+            "yoKaigoJotaiKubunCode" IN ('22')
+        </if>
+        <if test ="横軸index == 5">
+            "yoKaigoJotaiKubunCode" IN ('23')
+        </if>
+        <if test ="横軸index == 6">
+            "yoKaigoJotaiKubunCode" IN ('24')
+        </if>
+        <if test ="横軸index == 7">
+            "yoKaigoJotaiKubunCode" IN ('25')
+        </if>
+        <if test ="横軸index == 8">
+            "yoKaigoJotaiKubunCode" IN ('21','22','23','24','25')
+        </if>
+        <if test ="横軸index == 9">
+            "yoKaigoJotaiKubunCode" IN ('12')
+        </if>
+        <if test ="横軸index == 10">
+            "yoKaigoJotaiKubunCode" IN ('13')
+        </if>
+        <if test ="横軸index == 11">
+            "yoKaigoJotaiKubunCode" IN ('12','13')
+        </if>
+        <if test ="横軸index == 12">
+            "yoKaigoJotaiKubunCode" IN ('01','11','12','13','21','22','23','24','25')
+        </if>
+        <include refid="shichosonCode" />
+    </sql>
+    <sql id="shichosonCode">
+        <if test ="構成市町村区分 == 1">
+            AND #{市町村コード} = "shichosonCode"
+        </if>
+        <if test ="旧市町村区分 == 1">
+            AND #{旧市町村コード} = "kyuShichosonCode"
+        </if>
+    </sql>   
+    <sql id="tokuteiJoukenn">
+        <if test= "縦軸index == 1">
+            SUBSTRING("serviceKomokuCode", 0, 3) IN ('511','521','531','541','211','241','221','251','231','261') AND
+        </if>
+        <if test= "縦軸index == 2">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('512','522','532','542','212','242','222','252','232','262') AND
+        </if>
+        <if test= "縦軸index == 3">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('511','521','531','541','211','241','221','251','231','261','512','522','532','542','212','242','222','252','232','262') AND
+        </if>
+        <if test= "縦軸index == 4">
+            SUBSTRING("serviceKomokuCode",0,3) = '511' AND
+        </if>
+        <if test= "縦軸index == 5">
+            SUBSTRING("serviceKomokuCode",0,3) = '521' AND
+        </if>
+        <if test= "縦軸index == 6">
+            SUBSTRING("serviceKomokuCode",0,3) = '531' AND
+        </if>
+        <if test= "縦軸index == 7">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('211','241') AND
+        </if>
+        <if test= "縦軸index == 8">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('221','251') AND
+        </if>
+        <if test= "縦軸index == 9">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('231','261') AND
+        </if>
+        <if test= "縦軸index == 10">
+            SUBSTRING("serviceKomokuCode",0,3) = '512' AND
+        </if>
+        <if test= "縦軸index == 11">
+            SUBSTRING("serviceKomokuCode",0,3) = '522' AND
+        </if>
+        <if test= "縦軸index == 12">
+            SUBSTRING("serviceKomokuCode",0,3) = '532' AND
+        </if>
+        <if test= "縦軸index == 13">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('212','242') AND
+        </if>
+        <if test= "縦軸index == 14">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('222','252') AND
+        </if>
+        <if test= "縦軸index == 15">
+            SUBSTRING("serviceKomokuCode",0,3) IN ('232','262') AND
+        </if>
+        <if test= "縦軸index == 16">
+            SUBSTRING("serviceKomokuCode",0,3) = '541' AND
+        </if>
+        <if test= "縦軸index == 17">
+            SUBSTRING("serviceKomokuCode",0,3) = '542' AND
+        </if>
+        <if test ="横軸index == 1">
+            "yoKaigoJotaiKubunCode" IN ('01')
+        </if>
+        <if test ="横軸index == 2">
+            "yoKaigoJotaiKubunCode" IN ('11')
+        </if>
+        <if test ="横軸index == 3">
+            "yoKaigoJotaiKubunCode" IN ('21')
+        </if>
+        <if test ="横軸index == 4">
+            "yoKaigoJotaiKubunCode" IN ('22')
+        </if>
+        <if test ="横軸index == 5">
+            "yoKaigoJotaiKubunCode" IN ('23')
+        </if>
+        <if test ="横軸index == 6">
+            "yoKaigoJotaiKubunCode" IN ('24')
+        </if>
+        <if test ="横軸index == 7">
+            "yoKaigoJotaiKubunCode" IN ('25')
+        </if>
+        <if test ="横軸index == 8">
+            "yoKaigoJotaiKubunCode" IN ('21','22','23','24','25')
+        </if>
+        <if test ="横軸index == 9">
+            "yoKaigoJotaiKubunCode" IN ('12')
+        </if>
+        <if test ="横軸index == 10">
+            "yoKaigoJotaiKubunCode" IN ('13')
+        </if>
+        <if test ="横軸index == 11">
+            "yoKaigoJotaiKubunCode" IN ('12','13')
+        </if>
+        <if test ="横軸index == 12">
+            "yoKaigoJotaiKubunCode" IN ('01','11','12','13','21','22','23','24','25')
+        </if>
+        <include refid="shichosonCode" />
+    </sql>
+    <sql id="kyufu">
+        "dataKubun",
+        "shukeiKubun",
+        "hyoNo",
+        "shukeiNo",
+        "shukeiTani",
+        "tateNo",
+        "yokoNo",
+        "inputShikibetsuNo",
+        "shokisaiHokenshaNo",
+        "hihokenshaNo",
+        "serviceTeikyoYM",
+        "kyufuJissekiKubunCode",
+        "jigyoshaNo",
+        "seiriNo",
+        "meisaiNo",
+        "motoSeiriNo",
+        "shinseiKanrisikyuKubunCode",
+        "umareYMD",
+        "yoKaigoJotaiKubunCode",
+        "kyuSochiNyushoshaTokureiCode",
+        "hokenKyufuritsu",
+        "kyufuSakuseiKubunCode",
+        "shokujihiyoHokenshaNo",
+        "kihonTeikyoNissu",
+        "tokubetsuTeikyoNissu",
+        "shokujiTeikyoNobeNissu",
+        "kihonTeikyoTanka",
+        "tokubetsuTeikyoTanka",
+        "atoShokujiTeikyoSeikyuGaku",
+        "shokujiHiyosikyuKubunCode",
+        "shokujiHiyosikyuGaku",
+        "serviceSyuruiCode",
+        "seikyuTensuTanka",
+        "seikyugaku",
+        "riyoshaFutangaku",
+        "atoTensuGokei",
+        "atoHokenSeikyugaku",
+        "atoDekidakaTensuGokei",
+        "atoDekidakaSeikyuGaku",
+        "shukeiShikyukubunCode",
+        "shukeiShikyuKingaku",
+        "zougenten",
+        "atoTensu",
+        "atoSeikyuKingaku",
+        "keikakuhiShikyukubunCode",
+        "keikakuhiShikyuKingaku",
+        "meisaiTensu",
+        "shikakuKubun",
+        "shichosonCode",
+        "kyuShichosonCode",
+        "genbutsubunSonzaiFlag",
+        "futanWariaiNendo",
+        "futanWariaiKubun",
+        "shinsaYM",
+        "riyoshaFutanGenmenHihokenshaNo",
+        "sakuseiKubunErrorFlag",
+        "futanWariaiErrorFlag",
+        "zengoKyufurituErrorFlag",
+        "shukei0x01",
+        "shukei0x02",
+        "shukei0x03",
+        "shukei0x04",
+        "saikeibunHokenritu",
+        "saikeiShukei0x04",
+        "rirekiFlag"
+    </sql>
+    <sql id="tokutei">
+        "dataKubun",
+        "shukeiKubun",
+        "hyoNo",
+        "shukeiNo",
+        "shukeiTani",
+        "tateNo",
+        "yokoNo",
+        "inputShikibetsuNo",
+        "shoKisaiHokenshaNo",
+        "hihokenshaNo",
+        "serviceTeikyoYM",
+        "kyufuJissekiKubunCode",
+        "jigyoshaNo",
+        "seiriNo",
+        "meisaiNo",
+        "motoSeiriNo",
+        "shikyukubunCode",
+        "umareYMD",
+        "yoKaigoJotaiKubunCode",
+        "kyufuSakuseiKubunCode",
+        "renban",
+        "recodeJunjiNo",
+        "serviceSyuruiCode",
+        "serviceKomokuCode",
+        "atoHokenbunSeikyugaku",
+        "shikakuKubun",
+        "shichosonCode",
+        "kyuShichosonCode",
+        "genbutsubunSonzaiFlag",
+        "shukei0x05",
+        "shukei0x06"
+    </sql>
+    <select id="getJigyouHokokuShiryou_KaigoKyufu"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity" 
+            resultOrdered="true" fetchSize="500">
+            SELECT
+                CASE 
+                    WHEN A."kyufuSakuseiKubunCode" = '1' 
+                    THEN '21' 
+                    WHEN A."kyufuSakuseiKubunCode" = '2' 
+                    THEN '21' 
+                    WHEN A."kyufuSakuseiKubunCode" = '3' 
+                    THEN '22' 
+                    END AS dataKubun
+                , CASE 
+                    WHEN A."kyufuSakuseiKubunCode" = '1' 
+                    THEN '加算' 
+                    WHEN A."kyufuSakuseiKubunCode" = '2' 
+                    THEN '加算' 
+                    WHEN A."kyufuSakuseiKubunCode" = '3' 
+                    THEN '減算' 
+                    END AS shukeiKubun
+                , '' AS hyoNo
+                , '' AS shukeiNo
+                , '1' AS shukeiTani
+                , '' AS tateNo
+                , '' AS yokoNo
+                , A."inputShikibetsuNo"
+                , A."shokisaiHokenshaNo"
+                , A."hiHokenshaNo"
+                , A."serviceTeikyoYM"
+                , A."kyufuJissekiKubunCode"
+                , A."jigyoshoNo" AS jigyoshaNo
+                , A."toshiNo"
+                , '' AS meisaiNo
+                , A."seiriNo"
+                , '' AS shinseiKanrisikyuKubunCode
+                , A."umareYMD"
+                , A."yoKaigoJotaiKubunCode"
+                , A."kyuSochiNyushoshaTokureiCode"
+                , A."hokenKyufuritsu"
+                , A."kyufuSakuseiKubunCode"
+                , '' AS shokujihiyoHokenshaNo
+                , 0 AS kihonTeikyoNissu
+                , 0 AS tokubetsuTeikyoNissu
+                , 0 AS shokujiTeikyoNobeNissu
+                , 0 AS kihonTeikyoTanka
+                , 0 AS tokubetsuTeikyoTanka
+                , 0 AS atoShokujiTeikyoSeikyuGaku
+                , '' AS shokujiHiyosikyuKubunCode
+                , 0 AS shokujiHiyosikyuKubun
+                , CASE 
+                    WHEN B."hiHokenshaNo" IS NOT NULL 
+                    THEN B."serviceSyuruiCode" 
+                    WHEN C."hiHokenshaNo" IS NOT NULL 
+                    THEN SUBSTRING(C."serviceCode", 0, 2) 
+                    ELSE NULL 
+                    END AS serviceSyuruiCode
+                , B."hokenTanisuTani"
+                , B."hokenSeikyugaku"
+                , B."hokenRiyoshaFutangaku"
+                , B."atoHokenTanisuTotal"
+                , B."atoHokenSeikyugaku"
+                , B."atoHokenDekidakaTanisuTotal"
+                , B."atoHokenDekidakaSeikyugaku"
+                , '' AS shukeiShikyukubunCode
+                , 0 AS shukeiShikyuKingaku
+                , 0 AS zougenten
+                , CASE 
+                    WHEN C."hiHokenshaNo" IS NOT NULL 
+                    THEN C."atoServiceTanisuTotal" 
+                    ELSE 0 
+                    END AS atoTensu
+                , CASE 
+                    WHEN C."hiHokenshaNo" IS NOT NULL 
+                    THEN C."atoSeikyuKingaku" 
+                    ELSE 0 
+                    END AS atoSeikyuKingaku
+                , '' AS keikakuhiShikyukubunCode
+                , 0 AS keikakuhiShikyuKingaku
+                , 0 AS meisaiTensu
+                , '' AS shikakuKubun
+                , '' AS shichosonCode
+                , '' AS kyuShichosonCode
+                , '' AS genbutsubunSonzaiFlag
+                , '' AS futanWariaiNendo
+                , 10 AS futanWariaiKubun
+                , #{集計年月} AS shinsaYM
+                , '' AS riyoshaFutanGenmenHihokenshaNo
+                , '9' AS sakuseiKubunErrorFlag
+                , '1' AS futanWariaiErrorFlag
+                , '0' AS zengoKyufurituErrorFlag
+                , 1 AS shukei0x01
+                , 0 AS shukei0x02
+                , 0 AS shukei0x03
+                , 0 AS shukei0x04
+                , 0 AS saikeibunHokenritu
+                , 0 AS saikeiShukei0x04
+                , '1' AS rirekiFlag 
+            FROM
+                rgdb."DbT3017KyufujissekiKihon" AS A 
+            LEFT JOIN rgdb."DbT3033KyufujissekiShukei" AS B 
+                ON A."inputShikibetsuNo" = B."inputShikibetsuNo" 
+                AND A."hiHokenshaNo" = B."hiHokenshaNo" 
+                AND A."serviceTeikyoYM" = B."serviceTeikyoYM" 
+                AND A."jigyoshoNo" = B."jigyoshoNo" 
+                AND A."seiriNo" = B."seiriNo" 
+            LEFT JOIN rgdb."DbT3025KyufujissekiKyotakuService" AS C 
+                ON A."inputShikibetsuNo" = C."inputShikibetsuNo" 
+                AND A."hiHokenshaNo" = C."hiHokenshaNo" 
+                AND A."serviceTeikyoYM" = C."serviceTeikyoYM" 
+                AND A."jigyoshoNo" = C."jigyoshoNo" 
+                AND A."seiriNo" = C."seiriNo" 
+            WHERE
+                A."inputShikibetsuNo" NOT LIKE '8%' 
+                AND A."inputShikibetsuNo" NOT LIKE '1%' 
+                AND A."inputShikibetsuNo" NOT LIKE '6%' 
+                AND A."inputShikibetsuNo" NOT LIKE '7%' 
+                AND A."inputShikibetsuNo" NOT LIKE 'P%' 
+                AND A."inputShikibetsuNo" NOT LIKE 'R%' 
+                AND A."kyufuJissekiKubunCode" = '2' 
+                AND ( 
+                  ( 
+                    B."hiHokenshaNo" IS NOT NULL 
+                    and B."serviceSyuruiCode" <![CDATA[<>]]> '81'
+                  ) 
+                  OR ( 
+                    C."hiHokenshaNo" IS NOT NULL 
+                    AND C."servicePlanhiMeisaiLineNo" = '99'
+                  )
+                ) 
+                AND (A."hiHokenshaNo" || A."serviceTeikyoYM") IN ( 
+                  SELECT DISTINCT
+                    D."hiHokenshaNo" || D."serviceTeikyoYM" 
+                  FROM
+                    rgdb."DbT3036ShokanHanteiKekka" AS D 
+                  WHERE
+                    SUBSTRING(D."ketteiYMD", 1, 6) = #{集計年月}
+                ) 
+    </select>
+    
+    <select id="getZenRireki"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity" 
+            resultOrdered="true" fetchSize="500">
+            SELECT
+                '22' AS dataKubun
+                , '減算' AS shukeiKubun
+                , '' AS hyoNo
+                , '' AS shukeiNo
+                , '1' AS shukeiTani
+                , '' AS tateNo
+                , '' AS yokoNo
+                , A."inputShikibetsuNo"
+                , A."shokisaiHokenshaNo"
+                , A."hiHokenshaNo"
+                , A."serviceTeikyoYM"
+                , A."kyufuJissekiKubunCode"
+                , A."jigyoshoNo" AS jigyoshaNo
+                , A."toshiNo"
+                , '' AS meisaiNo
+                , A."seiriNo"
+                , '' AS shinseiKanrisikyuKubunCode
+                , A."umareYMD"
+                , A."yoKaigoJotaiKubunCode"
+                , A."kyuSochiNyushoshaTokureiCode"
+                , A."hokenKyufuritsu"
+                , A."kyufuSakuseiKubunCode"
+                , '' AS shokujihiyoHokenshaNo
+                , 0 AS kihonTeikyoNissu
+                , 0 AS tokubetsuTeikyoNissu
+                , 0 AS shokujiTeikyoNobeNissu
+                , 0 AS kihonTeikyoTanka
+                , 0 AS tokubetsuTeikyoTanka
+                , 0 AS atoShokujiTeikyoSeikyuGaku
+                , '' AS shokujiHiyosikyuKubunCode
+                , 0 AS shokujiHiyosikyuKubun
+                , CASE 
+                    WHEN B."hiHokenshaNo" IS NOT NULL 
+                    THEN B."serviceSyuruiCode" 
+                    WHEN C."hiHokenshaNo" IS NOT NULL 
+                    THEN SUBSTRING(C."serviceCode", 0, 2) 
+                    ELSE NULL 
+                    END AS serviceSyuruiCode
+                , B."hokenTanisuTani"
+                , B."hokenSeikyugaku"
+                , B."hokenRiyoshaFutangaku"
+                , B."atoHokenTanisuTotal"
+                , B."atoHokenSeikyugaku"
+                , B."atoHokenDekidakaTanisuTotal"
+                , B."atoHokenDekidakaSeikyugaku"
+                , '' AS shukeiShikyukubunCode
+                , 0 AS shukeiShikyuKingaku
+                , 0 AS zougenten
+                , CASE 
+                    WHEN C."hiHokenshaNo" IS NOT NULL 
+                    THEN C."atoServiceTanisuTotal" 
+                    ELSE 0 
+                    END AS atoTensu
+                , CASE 
+                    WHEN C."hiHokenshaNo" IS NOT NULL 
+                    THEN C."atoSeikyuKingaku" 
+                    ELSE 0 
+                    END AS atoSeikyuKingaku
+                , '' AS keikakuhiShikyukubunCode
+                , 0 AS keikakuhiShikyuKingaku
+                , 0 AS meisaiTensu
+                , '' AS shikakuKubun
+                , '' AS shichosonCode
+                , '' AS kyuShichosonCode
+                , '' AS genbutsubunSonzaiFlag
+                , '' AS futanWariaiNendo
+                , 10 AS futanWariaiKubun                        
+                ,#{集計年月} AS shinsaYM
+                , '' AS riyoshaFutanGenmenHihokenshaNo
+                , '9' AS sakuseiKubunErrorFlag
+                , '1' AS futanWariaiErrorFlag
+                <!-- TODO 内部QA:1789 Readmin# E."hokenKyufuritsu"が存在しない。 -->
+                <!--, CASE -->
+                <!--    WHEN A."hokenKyufuritsu" <![CDATA[<>]]> E."hokenKyufuritsu" -->
+                <!--    THEN "1" -->
+                <!--    WHEN A."hokenKyufuritsu" = E."hokenKyufuritsu" -->
+                <!--    THEN "0" -->
+                <!--    END AS zengoKyufurituErrorFlag -->
+                , 1 AS shukei0x01
+                , 0 AS shukei0x02
+                , 0 AS shukei0x03
+                , 0 AS shukei0x04
+                , 0 AS saikeibunHokenritu
+                , 0 AS saikeiShukei0x04
+                , '0' AS rirekiFlag 
+            FROM
+                rgdb."DbT3017KyufujissekiKihon" AS A 
+            LEFT JOIN rgdb."DbT3033KyufujissekiShukei" AS B 
+                ON A."inputShikibetsuNo" = B."inputShikibetsuNo" 
+                AND A."hiHokenshaNo" = B."hiHokenshaNo" 
+                AND A."serviceTeikyoYM" = B."serviceTeikyoYM" 
+                AND A."jigyoshoNo" = B."jigyoshoNo" 
+                AND A."seiriNo" = B."seiriNo" 
+            LEFT JOIN rgdb."DbT3025KyufujissekiKyotakuService" AS C 
+                ON A."inputShikibetsuNo" = C."inputShikibetsuNo" 
+                AND A."hiHokenshaNo" = C."hiHokenshaNo" 
+                AND A."serviceTeikyoYM" = C."serviceTeikyoYM" 
+                AND A."jigyoshoNo" = C."jigyoshoNo" 
+                AND A."seiriNo" = C."seiriNo" 
+            WHERE
+                A."inputShikibetsuNo" NOT LIKE '8%' 
+                AND A."inputShikibetsuNo" NOT LIKE '1%' 
+                AND A."inputShikibetsuNo" NOT LIKE '6%' 
+                AND A."inputShikibetsuNo" NOT LIKE '7%' 
+                AND A."inputShikibetsuNo" NOT LIKE 'P%' 
+                AND A."inputShikibetsuNo" NOT LIKE 'R%' 
+                AND A."kyufuJissekiKubunCode" = '2' 
+                AND (B."hiHokenshaNo" IS NOT NULL 
+                     OR (C."hiHokenshaNo" IS NOT NULL 
+                        AND C."servicePlanhiMeisaiLineNo" = '99')
+                     ) 
+                AND ( 
+                  A."inputShikibetsuNo" || A."hiHokenshaNo" || A."serviceTeikyoYM" || A."jigyoshoNo" || A."shinsaYM" || 
+                  A."kyufuSakuseiKubunCode"
+                ) IN (SELECT
+                         D."inputShikibetsuNo" || D."hiHokenshaNo" || D."serviceTeikyoYM" || D."jigyoshoNo" || MAX(D."shinsaYM")
+                         || Min(D."kyufuSakuseiKubunCode") 
+                      FROM
+                          rgdb."DbT3017KyufujissekiKihon" AS D
+                        , "tempDwbTKyufujissekiShukeiKonkyo1" AS E 
+                      WHERE
+                          E."kyufuSakuseiKubunCode" IN ('2', '3') 
+                          AND D."inputShikibetsuNo" = E."inputShikibetsuNo" 
+                          AND D."hiHokenshaNo" = E."hihokenshaNo" 
+                          AND D."serviceTeikyoYM" = E."serviceTeikyoYM" 
+                          AND D."jigyoshoNo" = E."jigyoshaNo" 
+                          AND D."shinsaYM" <![CDATA[<]]> #{集計年月}
+                          AND D."kyufuJissekiKubunCode" = '2' 
+                      GROUP BY
+                          D."inputShikibetsuNo"
+                          , D."hiHokenshaNo"
+                          , D."serviceTeikyoYM"
+                          , D."jigyoshoNo") 
+    </select>
+    
+    <insert id="updateShoriDateKanri"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" >
+        SELECT rgdb."DbFx7014ShoriDateKanriUpdate"(
+            #{サブ業務コード},
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{処理名},
+            #{処理枝番},
+            #{集計年度},
+            #{基準年月日},
+            #{基準日時}
+            );
+    </insert>
+    
+    <update id="update後_点数" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "atoTensu" = ( 
+            SELECT
+              SUM(dbT3025."atoServiceTanisuTotal") 
+            FROM
+              rgdb."DbT3025KyufujissekiKyotakuService" AS dbT3025 
+            WHERE
+              "hihokenshaNo" = dbT3025."hiHokenshaNo" 
+              AND "serviceTeikyoYM" = dbT3025."serviceTeikyoYM" 
+              AND "inputShikibetsuNo" = dbT3025."inputShikibetsuNo" 
+              AND "jigyoshaNo" = dbT3025."jigyoshoNo" 
+              AND "seiriNo" = dbT3025."toshiNo"
+        GROUP BY
+          dbT3025."hiHokenshaNo", dbT3025."serviceTeikyoYM") WHERE SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B')
+    </update>
+    
+    <update id="update市町村コードと旧市町村コード" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+            "shichosonCode" = ( 
+                SELECT
+                    CASE WHEN D."koikinaiTokureiSochimotoShichosonCode" <![CDATA[<>]]> '' 
+                         THEN D."koikinaiTokureiSochimotoShichosonCode" 
+                         WHEN D."koikinaiTokureiSochimotoShichosonCode" = '' 
+                         THEN D."shichosonCode" 
+                         END AS ShichosonCode 
+                 FROM
+                     "tempDwbTKyufujissekiShukeiKonkyo1" AS A
+                     , rgdb."DbT1001HihokenshaDaicho" AS D 
+                 WHERE
+                     A."hihokenshaNo" = D."hihokenshaNo" 
+                     AND D."hihokenshaNo" = ( 
+                         SELECT
+                             "hihokenshaNo" 
+                         FROM
+                             rgdb."DbT1001HihokenshaDaicho" 
+                         WHERE
+                             "hihokenshaNo" = A."hihokenshaNo" 
+                             AND SUBSTRING("shikakuShutokuYMD", 1, 6) <![CDATA[<=]]> A."serviceTeikyoYM" 
+                         ORDER BY
+                             "idoYMD" DESC
+                             , "edaNo" DESC 
+                         LIMIT 1) 
+                     AND D."idoYMD" = ( 
+                         SELECT
+                             "idoYMD" 
+                         FROM
+                             rgdb."DbT1001HihokenshaDaicho" 
+                         WHERE
+                             "hihokenshaNo" = A."hihokenshaNo" 
+                             AND SUBSTRING("shikakuShutokuYMD", 1, 6) <![CDATA[<=]]> A."serviceTeikyoYM" 
+                         ORDER BY
+                           "idoYMD" DESC
+                           , "edaNo" DESC 
+                         LIMIT 1) 
+                     AND D."edaNo" = ( 
+                         SELECT
+                             "edaNo" 
+                         FROM
+                             rgdb."DbT1001HihokenshaDaicho" 
+                         WHERE
+                             "hihokenshaNo" = A."hihokenshaNo" 
+                             AND SUBSTRING("shikakuShutokuYMD", 1, 6) <![CDATA[<=]]> A."serviceTeikyoYM" 
+                         ORDER BY
+                             "idoYMD" DESC
+                             , "edaNo" DESC 
+                         LIMIT 1) 
+                     AND D."shikakuSoshitsuYMD" <![CDATA[<>]]> '' 
+                     AND A."serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING(D."shikakuSoshitsuYMD", 1, 6)) 
+            , "kyuShichosonCode" = ( 
+                SELECT 
+                    A."kyuShichosonCode" 
+                FROM
+                    "tempDwbTKyufujissekiShukeiKonkyo1" AS A
+                    , rgdb."DbT1001HihokenshaDaicho" AS D 
+                WHERE
+                    A."hihokenshaNo" = D."hihokenshaNo" 
+                    AND D."hihokenshaNo" = ( 
+                        SELECT
+                            "hihokenshaNo" 
+                        FROM
+                            rgdb."DbT1001HihokenshaDaicho" 
+                        WHERE
+                            "hihokenshaNo" = A."hihokenshaNo" 
+                            AND SUBSTRING("shikakuShutokuYMD", 1, 6) <![CDATA[<=]]> A."serviceTeikyoYM" 
+                        ORDER BY
+                            "idoYMD" DESC
+                            , "edaNo" DESC 
+                        LIMIT 1) 
+                    AND D."idoYMD" = ( 
+                        SELECT
+                            "idoYMD" 
+                        FROM
+                            rgdb."DbT1001HihokenshaDaicho" 
+                        WHERE
+                            "hihokenshaNo" = A."hihokenshaNo" 
+                            AND SUBSTRING("shikakuShutokuYMD", 1, 6) <![CDATA[<=]]> A."serviceTeikyoYM" 
+                        ORDER BY
+                            "idoYMD" DESC
+                            , "edaNo" DESC 
+                        LIMIT 1) 
+                    AND D."edaNo" = ( 
+                        SELECT
+                            "edaNo" 
+                        FROM
+                            rgdb."DbT1001HihokenshaDaicho" 
+                        WHERE
+                            "hihokenshaNo" = A."hihokenshaNo" 
+                            AND SUBSTRING("shikakuShutokuYMD", 1, 6) <![CDATA[<=]]> A."serviceTeikyoYM" 
+                        ORDER BY
+                            "idoYMD" DESC
+                            , "edaNo" DESC 
+                        LIMIT 1) 
+      
+                    AND ((D."shikakuSoshitsuYMD" = '') 
+                        OR (D."shikakuSoshitsuYMD" <![CDATA[<>]]> ''
+                        AND A."serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING(D."shikakuSoshitsuYMD", 1, 6)))
+                         ) 
+    </update>
+    <update id="update負担割合区分と負担割合エラーフラグ_一回目" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "futanWariaiErrorFlag" = '0'
+          , "futanWariaiKubun" = ( 
+            SELECT
+              dbT3114."futanWariaiKubun" 
+            FROM
+              rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS dbT3114 
+            WHERE
+              dbT3114."hihokenshaNo" = "hihokenshaNo" 
+              AND dbT3114."nendo" = "futanWariaiNendo" 
+              AND SUBSTRING(dbT3114."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> "serviceTeikyoYM" 
+              AND "serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING(dbT3114."yukoShuryoYMD", 1, 6) 
+              AND '201508' <![CDATA[<=]]> "serviceTeikyoYM" 
+              AND (dbT3114."nendo" || dbT3114."hihokenshaNo" || dbT3114."rirekiNo") IN 
+                (SELECT
+                  A."nendo" || A."hihokenshaNo" || MAX(A."rirekiNo") 
+                FROM
+                  rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS A 
+                WHERE
+                  A."hihokenshaNo" = "hihokenshaNo" 
+                  AND A."nendo" = "futanWariaiNendo" 
+                  AND A."logicalDeletedFlag" <![CDATA[<>]]> 'true' 
+                GROUP BY
+                  A."hihokenshaNo"
+                  , A."nendo" 
+                LIMIT 1
+                )
+          ) 
+    </update>
+    <update id="update負担割合区分と負担割合エラーフラグ_二回目" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "futanWariaiErrorFlag" = '0'
+          , "futanWariaiKubun" = '10' 
+        WHERE
+          "serviceTeikyoYM" <![CDATA[<]]> '201508'
+    </update>
+    <!-- TODO 内部QA:1725 Redmine#101525 テーブル「利用者負担減免マスタ」はデータベースに存在しないので、実装できない。-->
+<!--    <update id="update利用者負担減免被保険者番号">
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "riyoshaFutanGenmenHihokenshaNo" = ( 
+            SELECT
+              "hihokenshaNo" 
+            FROM
+              rgdb."DbT4014RiyoshaFutangakuGengaku" 
+            WHERE
+              "hihokenshaNo" = "hihokenshaNo" 
+              AND SUBSTRING("tekiyoKaishiYMD", 0, 6) <![CDATA[<=]]> "serviceTeikyoYM" 
+              AND "serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING("tekiyoShuryoYMD", 0, 6) 
+              AND "ketteiKubun" = '1')
+    </update>-->
+    <update id="update0x02_集計" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "shukei0x02" = ( 
+            SELECT
+              CASE 
+                WHEN SUBSTRING("inputShikibetsuNo", 1, 3) IN ('21C', '21D') 
+                THEN 0 
+                WHEN SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B') 
+                THEN "atoTensu" 
+                ELSE "atoTensuGokei" + "atoDekidakaTensuGokei" 
+                END AS shukei0x02 
+            FROM
+              "tempDwbTKyufujissekiShukeiKonkyo1")
+    </update>
+    <update id="update0x03_集計" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "shukei0x03" = ( 
+            SELECT
+              CASE 
+                WHEN SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B') 
+                THEN "atoSeikyuKingaku" 
+                WHEN SUBSTRING("inputShikibetsuNo", 1, 3) IN ('21D', '21C') 
+                THEN  "seikyugaku" + "riyoshaFutangaku" 
+                WHEN SUBSTRING("inputShikibetsuNo", 1, 3) NOT IN ('812', '21B', '21D', '21C') 
+                THEN ("atoTensuGokei" * "seikyuTensuTanka") + ("atoDekidakaTensuGokei" * 10) END AS shukei0x03 
+        FROM
+          "tempDwbTKyufujissekiShukeiKonkyo1")
+    </update>
+    <update id="update0x04_集計" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "shukei0x04" = ( 
+            SELECT
+              CASE 
+                WHEN SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B') 
+                THEN "atoSeikyuKingaku" 
+                WHEN SUBSTRING("inputShikibetsuNo", 1, 3) NOT IN ('812', '21B') 
+                THEN "atoHokenSeikyugaku" + "atoDekidakaSeikyuGaku" 
+                END AS shukei0x04 
+            FROM
+              "tempDwbTKyufujissekiShukeiKonkyo1")
+    </update>
+    <update id="update0x04再掲_集計1" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "saikeiShukei0x04" = "atoSeikyuKingaku" * ("hokenKyufuritsu" - 90) / "hokenKyufuritsu"  
+        WHERE
+           "futanWariaiKubun" = '10' 
+           AND 90 <![CDATA[<]]> "hokenKyufuritsu"  
+           AND SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B')
+    </update>
+    <update id="update0x04再掲_集計2" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "saikeiShukei0x04" = "atoSeikyuKingaku" * ("hokenKyufuritsu" - 80) / "hokenKyufuritsu" 
+        WHERE
+          "futanWariaiKubun" = '20' 
+          AND 80 <![CDATA[<]]> "hokenKyufuritsu" 
+          AND SUBSTRING("inputShikibetsuNo", 1, 3) IN ('812', '21B')
+    </update>
+    <update id="update0x04再掲_集計3" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "saikeiShukei0x04" = ( 
+            "atoSeikyuKingaku" * ("hokenKyufuritsu" - 90) / "hokenKyufuritsu") + ( 
+            "atoDekidakaSeikyuGaku" * ("hokenKyufuritsu" - 90) / "hokenKyufuritsu") 
+        WHERE
+          "futanWariaiKubun" = '10' 
+          AND 90 <![CDATA[<]]> "hokenKyufuritsu" 
+          AND SUBSTRING("inputShikibetsuNo", 1, 3) NOT IN ('812', '21B')
+    </update>
+    <update id="update0x04再掲_集計4" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "saikeiShukei0x04" = ( "atoSeikyuKingaku" * ("hokenKyufuritsu" - 80) / "hokenKyufuritsu") + ( 
+            "atoDekidakaSeikyuGaku" * ("hokenKyufuritsu" - 80) / "hokenKyufuritsu") 
+        WHERE
+          "futanWariaiKubun" = '20' 
+          AND 80 <![CDATA[<]]> "hokenKyufuritsu" 
+          AND SUBSTRING("inputShikibetsuNo", 1, 3) NOT IN ('812', '21B')
+    </update>
+    <update id="updateKyufuマイナス対応" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 
+        SET
+          "shukei0x01" = "shukei0x01" * - 1
+          , "shukei0x02" = "shukei0x02" * - 1
+          , "shukei0x03" = "shukei0x03" * - 1
+          , "shukei0x04" = "shukei0x04" * - 1
+          , "saikeiShukei0x04" = "saikeiShukei0x04" * - 1 
+        WHERE
+          "shukeiKubun" = '減算'
+    </update>
+    <delete id="delete不要データ" >
+        DELETE FROM "tempDwbTKyufujissekiShukeiKonkyo1" 
+        WHERE "shukeiKubun" = '減算' AND "kyufuSakuseiKubunCode" = '3' AND "rirekiFlag" = '1'
+    </delete>
+    <select id="getKaigoKyufu"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT 
+            <include refid="kyufu" />
+        FROM "tempDwbTKyufujissekiShukeiKonkyo1" 
+    </select>
+    <select id="getJigyouHokokuShiryou_TokuteiNyusyo"
+                resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo2Entity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT
+          A."dataKubun"
+          , A."shukeiKubun"
+          , A."hyoNo"
+          , '' AS shukeiNo
+          , '1' AS shukeiTani
+          , '' AS tateNo
+          , '' AS yokoNo
+          , A."inputShikibetsuNo"
+          , A."shokisaiHokenshaNo"
+          , A."hihokenshaNo"
+          , A."serviceTeikyoYM"
+          , A."kyufuJissekiKubunCode"
+          , A."jigyoshaNo"
+          , A."seiriNo"
+          , A."meisaiNo"
+          , A."motoSeiriNo"
+          , '' AS "shikyukubunCode"
+          , A."umareYMD"
+          , A."yoKaigoJotaiKubunCode"
+          , A."kyufuSakuseiKubunCode"
+          , '' AS renban
+          , B."recodeJunjiNo" AS recodeJunjiNo
+          , B."serviceSyuruiCode"
+          , B."serviceKomokuCode"
+          , B."atoHokenbunSeikyugaku"
+          , A."shikakuKubun"
+          , A."shichosonCode"
+          , A."kyuShichosonCode"
+          , A."genbutsubunSonzaiFlag"
+          , 1 AS shukei0x05
+          , B."atoHokenbunSeikyugaku" AS shukei0x06 
+        FROM
+          "tempDwbTKyufujissekiShukeiKonkyo1" AS A 
+          INNER JOIN rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS B 
+            ON A."inputShikibetsuNo" = B."inputShikibetsuNo" 
+            AND A."hihokenshaNo" = B."hiHokenshaNo" 
+            AND A."serviceTeikyoYM" = B."serviceTeikyoYM" 
+            AND A."jigyoshaNo" = B."jigyoshoNo" 
+            AND A."seiriNo" = B."seiriNo" 
+        WHERE
+          B."recodeJunjiNo" = '99'
+    </select>
+    <update id="updateTokuteiマイナス対応" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo2" 
+        SET
+          "shukei0x05" = "shukei0x05" * - 1
+          , "shukei0x06" = "shukei0x06" * - 1
+        WHERE
+          "shukeiKubun" = '減算'
+    </update>
+    <select id="getTokuteiNyusyo"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo2Entity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT <include refid="tokutei" /> FROM "tempDwbTKyufujissekiShukeiKonkyo2" 
+    </select>
+    <delete id="delete事業報告統計データ" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" >
+        DELETE FROM rgdb."DbT7021JigyoHokokuTokeiData" 
+        WHERE "shukeiTaishoYSeireki" = #{集計年度} 
+        AND "shukeiTaishoM" = #{審査年月} 
+        AND "hyoNo" IN ('06', '16')
+        AND "shukeiNo" IN <foreach collection="集計番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
+    </delete>
+    <insert id="insert事業報告統計データ"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" >
+        INSERT 
+        INTO rgdb."DbT7021JigyoHokokuTokeiData"  (
+          "hokokuYSeireki"
+          ,"hokokuM"
+          ,"shukeiTaishoYSeireki"
+          ,"shukeiTaishoM"
+          ,"toukeiTaishoKubun"
+          ,"shichosonCode"
+          ,"hyoNo"
+          ,"shukeiNo"
+          ,"shukeiTani"
+          ,"tateNo"
+          ,"yokoNo"
+          ,"shukeiKekkaAtai"
+          ,"shukeiKomokuMeisho"
+          ,"tateKomokuCode"
+          ,"yokoKomokuCode"
+          )
+        VALUES ( 
+          #{報告年度}
+          , #{報告年月}
+          , #{集計年度}
+          , #{集計年月}
+          , #{統計対象区分}
+          , #{市町村コード}
+          , #{表番号}
+          , #{集計番号}
+          , '1'
+          , #{縦軸index}
+          , #{横軸index}
+          , #{集計結果値}
+          , NULL
+          , NULL
+          , NULL
+        ) 
+    </insert>
+
+    <select id="get集計結果値_0101_1"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1" WHERE <include refid="kyufuJoukenn" /> AND "dataKubun" ='21'
+    </select>
+    <select id="get集計結果値_0101_2"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1" WHERE <include refid="kyufuJoukenn" /> AND "dataKubun" ='22'
+    </select>
+    <select id="get集計結果値_0102"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+         SELECT SUM("atoTensu") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE 
+            <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0103"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensuGokei") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE
+            <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0104"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoSeikyuKingaku") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE
+            <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0107_1"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "shikakuKubun"='1号'
+            AND "futanWariaiKubun" = '20'
+            AND <include refid="kyufuJoukenn" />
+            AND "dataKubun" ='21'
+    </select>
+    <select id="get集計結果値_0107_2"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1" 
+            WHERE "shikakuKubun"='1号'
+            AND "futanWariaiKubun" = '20'
+            AND <include refid="kyufuJoukenn" />
+            AND "dataKubun" ='22'
+    </select>
+    <select id="get集計結果値_0108"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensu") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='1号'
+            AND "futanWariaiKubun" = '20'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0109"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensuGokei") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='1号'
+            AND "futanWariaiKubun" = '20'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0110"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoSeikyuKingaku") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='1号'
+            AND "futanWariaiKubun" = '20'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0201_1"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "shikakuKubun"='2号' 
+            AND <include refid="kyufuJoukenn" />
+            AND "dataKubun" ='21'
+    </select>
+    <select id="get集計結果値_0201_2"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "shikakuKubun"='2号' 
+            AND <include refid="kyufuJoukenn" />
+            AND "dataKubun" ='22'
+    </select>
+    <select id="get集計結果値_0202"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensu") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='2号' 
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0203"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensuGokei") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='2号'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0204"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoSeikyuKingaku") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='2号'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0301_1"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND <include refid="kyufuJoukenn" />
+            AND "dataKubun" ='21'
+    </select>
+    <select id="get集計結果値_0301_2"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND <include refid="kyufuJoukenn" />
+            AND "dataKubun" ='22'
+    </select>
+    <select id="get集計結果値_0302"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensu") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0303"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensuGokei") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0304"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoSeikyuKingaku") FROM "tempDwbTKyufujissekiShukeiKonkyo1" 
+            WHERE "saikeibunHokenritu" <![CDATA[<>]]> '0' 
+            AND <include refid="kyufuJoukenn" /> 
+    </select>
+    <select id="get集計結果値_0401_1"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "shikakuKubun"='2号'
+            AND "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND <include refid="kyufuJoukenn" />
+            AND "dataKubun" ='21'
+    </select>
+    <select id="get集計結果値_0401_2"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT(*) AS 件数 FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE "shikakuKubun"='2号'
+            AND "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND<include refid="kyufuJoukenn" />
+            AND "dataKubun" ='22'
+    </select>
+    <select id="get集計結果値_0402"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensu") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='2号'
+            AND "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0403"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoTensuGokei") FROM "tempDwbTKyufujissekiShukeiKonkyo1"
+            WHERE  "shikakuKubun"='2号'
+            AND "saikeibunHokenritu" <![CDATA[<>]]> '0'
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0404"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("atoSeikyuKingaku") FROM "tempDwbTKyufujissekiShukeiKonkyo1" 
+            WHERE  "shikakuKubun"='2号' 
+            AND "saikeibunHokenritu" <![CDATA[<>]]> '0' 
+            AND <include refid="kyufuJoukenn" />
+    </select>
+    <select id="get集計結果値_0105"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("shukei0x05") FROM "tempDwbTKyufujissekiShukeiKonkyo2" WHERE <include refid="tokuteiJoukenn" />
+    </select>
+    <select id="get集計結果値_0106"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("shukei0x06") FROM "tempDwbTKyufujissekiShukeiKonkyo2" WHERE <include refid="tokuteiJoukenn" />
+    </select>
+    <select id="get集計結果値_0205"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("shukei0x05") FROM "tempDwbTKyufujissekiShukeiKonkyo2" WHERE <include refid="tokuteiJoukenn" /> AND "shikakuKubun" = '2号'
+    </select>
+    <select id="get集計結果値_0206"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" 
+            resultOrdered="true" fetchSize="500">
+        SELECT SUM("shukei0x06") FROM "tempDwbTKyufujissekiShukeiKonkyo2" WHERE <include refid="tokuteiJoukenn" /> AND "shikakuKubun" = '2号'
+    </select>
+    <select id="getJigyouHokoku_Hokensha"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.JigyoHokokuShiryouRelateEntity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT * FROM rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{集計年月},
+            ARRAY<foreach  
+                    collection="集計番号List"  
+                    item="list"
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{list} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="表番号List"  
+                    item="list"
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{list} 
+                 </foreach>);
+    </select>
+    <select id="getShoriKekkaKakuninListBySakuseiKubun"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT <include refid="kyufu" /> FROM "tempDwbTKyufujissekiShukeiKonkyo1" WHERE "sakuseiKubunErrorFlag" = '1'
+    </select>
+    <select id="getShoriKekkaKakuninListByFutanWariai"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT <include refid="kyufu" /> FROM "tempDwbTKyufujissekiShukeiKonkyo1" WHERE "futanWariaiErrorFlag" = '1'
+    </select>
+    <select id="getShoriKekkaKakuninListByZengoKyufuritu"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT <include refid="kyufu" /> FROM "tempDwbTKyufujissekiShukeiKonkyo1" WHERE "zengoKyufurituErrorFlag" = '1'
+    </select>
+    <select id="getShoriKekkaKakuninListByShichoson"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity" 
+            resultOrdered="true" fetchSize="500">
+        SELECT <include refid="kyufu" /> FROM "tempDwbTKyufujissekiShukeiKonkyo1" WHERE "shichosonCode" IS NULL
+    </select>
+</mapper>
