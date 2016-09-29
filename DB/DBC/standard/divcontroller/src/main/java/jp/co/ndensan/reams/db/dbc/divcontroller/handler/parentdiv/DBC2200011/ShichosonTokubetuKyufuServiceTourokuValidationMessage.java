@@ -18,10 +18,15 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShichosonTokubetuKyufuServiceTourokuValidationMessage implements IValidationMessage {
 
     /**
-     * 選択されていない。
+     * 更新不可。
      *
      */
-    選択されていない(UrErrorMessages.選択されていない),
+    更新不可(UrErrorMessages.更新不可),
+    /**
+     * 削除不可。
+     *
+     */
+    削除不可(UrErrorMessages.削除不可),
     /**
      * 有効開始日と有効終了日の前後関係が不正。
      */
@@ -39,17 +44,9 @@ public enum ShichosonTokubetuKyufuServiceTourokuValidationMessage implements IVa
      */
     名称入力内容が不正(UrErrorMessages.使用不可文字),
     /**
-     * 名称入力文字数が不正。
-     */
-    名称入力文字数が不正(UrErrorMessages.桁数超過, "64"),
-    /**
      * 略称入力内容が不正
      */
-    略称入力内容が不正(UrErrorMessages.使用不可文字),
-    /**
-     * 略称入力文字数が不正
-     */
-    略称入力文字数が不正(UrErrorMessages.桁数超過, "5");
+    略称入力内容が不正(UrErrorMessages.使用不可文字);
 
     private final Message message;
 
