@@ -84,9 +84,9 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
             RString 審査年月, boolean 出力フラグ, Long 出力順ID) {
         DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter param = new DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter();
         if (!RString.isNullOrEmpty(審査年月)) {
-            param.setShinsaYM(new FlexibleYearMonth(審査年月));
+            param.setShoriYM(new FlexibleYearMonth(審査年月));
         } else {
-            param.setShinsaYM(new FlexibleYearMonth(RString.EMPTY));
+            param.setShoriYM(new FlexibleYearMonth(RString.EMPTY));
         }
         param.setShuturyokuFlg(出力フラグ);
         param.setShuturyokuJunn(出力順ID);
