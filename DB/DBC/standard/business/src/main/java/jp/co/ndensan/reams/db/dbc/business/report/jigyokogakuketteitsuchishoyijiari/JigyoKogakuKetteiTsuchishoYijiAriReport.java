@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyij
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -23,31 +24,35 @@ public class JigyoKogakuKetteiTsuchishoYijiAriReport extends Report<JigyoKogakuK
     private final NinshoshaSource 認証者ソースデータ;
     private final KogakuKetteiTsuchiShoEntity 帳票情報;
     private final RString 文書番号;
-    private final RString 設定値;
+    private final List<RString> titleList;
     private final List<RString> 通知書定型文List;
+    private final ChohyoSeigyoKyotsu 帳票制御共通情報;
 
     /**
      * コンストラクタです。
      *
-     * @param 設定値 RString
+     * @param titleList List<RString>
      * @param 帳票情報 KogakuKetteiTsuchiShoEntity
      * @param 認証者ソースデータ NinshoshaSource
      * @param 文書番号 RString
      * @param 通知書定型文List List<RString>
+     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      *
      */
     public JigyoKogakuKetteiTsuchishoYijiAriReport(
-            RString 設定値,
+            List<RString> titleList,
             KogakuKetteiTsuchiShoEntity 帳票情報,
             NinshoshaSource 認証者ソースデータ,
             RString 文書番号,
-            List<RString> 通知書定型文List) {
+            List<RString> 通知書定型文List,
+            ChohyoSeigyoKyotsu 帳票制御共通情報) {
 
-        this.設定値 = 設定値;
+        this.titleList = titleList;
         this.帳票情報 = 帳票情報;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.文書番号 = 文書番号;
         this.通知書定型文List = 通知書定型文List;
+        this.帳票制御共通情報 = 帳票制御共通情報;
 
     }
 
@@ -55,11 +60,12 @@ public class JigyoKogakuKetteiTsuchishoYijiAriReport extends Report<JigyoKogakuK
     public void writeBy(ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiAriSource> writer) {
 
         IJigyoKogakuKetteiTsuchishoYijiAriEditor editor = new JigyoKogakuKetteiTsuchishoYijiAriEditor(
-                設定値,
+                titleList,
                 帳票情報,
                 認証者ソースデータ,
                 文書番号,
-                通知書定型文List);
+                通知書定型文List,
+                帳票制御共通情報);
 
         IJigyoKogakuKetteiTsuchishoYijiAriBuilder builder = new JigyoKogakuKetteiTsuchishoYijiAriBuilder(editor);
 
