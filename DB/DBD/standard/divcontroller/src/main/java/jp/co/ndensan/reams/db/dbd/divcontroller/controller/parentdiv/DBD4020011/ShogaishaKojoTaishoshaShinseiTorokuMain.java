@@ -75,8 +75,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
             ArrayList<ShogaishaKoujo> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
             List<ShogaishaKoujoToJotai> 情報と状態Lis = hanlder.onLoad(識別コード, 被保険者番号, 申請一覧情報);
             ArrayList<ShogaishaKoujoToJotai> 情報と状態ArrayList = new ArrayList<>(情報と状態Lis);
-            ViewStateHolder.put(DBD4020011ViewStateKey.申請一覧情報, 申請一覧情報ArrayList);
-            ViewStateHolder.put(DBD4020011ViewStateKey.申請一覧情報と状態, 情報と状態ArrayList);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報, 申請一覧情報ArrayList);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 情報と状態ArrayList);
         }
         if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
@@ -104,10 +104,10 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
     public ResponseData<ShogaishaKojoTaishoshaShinseiTorokuMainDiv> onClick_btnShowSetaiJoho(ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
         div.getBtnShowSetaiJoho().setDisplayNone(true);
         div.getBtnCloseSetaiJoho().setDisplayNone(false);
-        Boolean is世帯所得一覧の初期化 = ViewStateHolder.get(DBD4020011ViewStateKey.is世帯所得一覧の初期化, Boolean.class);
+        Boolean is世帯所得一覧の初期化 = ViewStateHolder.get(ViewStateKeys.is世帯所得一覧の初期化, Boolean.class);
         if (null == is世帯所得一覧の初期化 || !is世帯所得一覧の初期化) {
             getHandler(div).世帯所得一覧の初期化(get識別コードFromViewState());
-            ViewStateHolder.put(DBD4020011ViewStateKey.is世帯所得一覧の初期化, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is世帯所得一覧の初期化, Boolean.TRUE);
         }
         if (一覧.getName().equals(ResponseHolder.getState())) {
             div.getBtnCloseSetaiJoho().setText(文字列_申請一覧を表示する);
@@ -144,7 +144,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
      */
     public ResponseData<ShogaishaKojoTaishoshaShinseiTorokuMainDiv> onClick_btnAddShinsei(ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
         getHandler(div).onClick_btnAddShinsei(get識別コードFromViewState());
-        ViewStateHolder.put(DBD4020011ViewStateKey.編集障がい者控除申請登録の情報, null);
+        ViewStateHolder.put(ViewStateKeys.編集障がい者控除申請登録の情報, null);
         return ResponseData.of(div).setState(詳細);
     }
 
@@ -158,7 +158,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
         ShogaishaKojoTaishoshaShinseiTorokuMainHandler handler = getHandler(div);
         ArrayList<ShogaishaKoujoToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
         ShogaishaKoujoToJotai 情報と状態 = handler.get情報と状態BySelectDataSouce(情報と状態ArrayList);
-        ViewStateHolder.put(DBD4020011ViewStateKey.編集障がい者控除申請登録の情報, 情報と状態);
+        ViewStateHolder.put(ViewStateKeys.編集障がい者控除申請登録の情報, 情報と状態);
         getHandler(div).onSelectByModifyButton(情報と状態);
         return ResponseData.of(div).setState(詳細);
     }
@@ -171,13 +171,13 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
      */
     public ResponseData<ShogaishaKojoTaishoshaShinseiTorokuMainDiv> onSelectByDeleteButton(ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            ViewStateHolder.put(DBD4020011ViewStateKey.is削除ReRequest, Boolean.FALSE);
+            ViewStateHolder.put(ViewStateKeys.is削除ReRequest, Boolean.FALSE);
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            if (!ViewStateHolder.get(DBD4020011ViewStateKey.is削除ReRequest, Boolean.class) && !削除処理(div)) {
-                ViewStateHolder.put(DBD4020011ViewStateKey.is削除ReRequest, Boolean.TRUE);
+            if (!ViewStateHolder.get(ViewStateKeys.is削除ReRequest, Boolean.class) && !削除処理(div)) {
+                ViewStateHolder.put(ViewStateKeys.is削除ReRequest, Boolean.TRUE);
                 return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
             }
             return ResponseData.of(div).respond();
@@ -192,13 +192,13 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
         }
         ArrayList<ShogaishaKoujoToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
         getHandler(div).onSelectByDeleteButton(情報と状態ArrayList);
-        ViewStateHolder.put(DBD4020011ViewStateKey.申請一覧情報と状態, 情報と状態ArrayList);
+        ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 情報と状態ArrayList);
         return true;
     }
 
     private ArrayList<ShogaishaKoujoToJotai> get情報と状態ArrayList() {
         ArrayList<ShogaishaKoujoToJotai> 情報と状態ArrayList
-                = ViewStateHolder.get(DBD4020011ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
         if (null == 情報と状態ArrayList) {
             情報と状態ArrayList = new ArrayList<>();
         }
@@ -281,8 +281,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             ShogaishaKoujoToJotai 編集情報
-                    = ViewStateHolder.get(DBD4020011ViewStateKey.編集障がい者控除申請登録の情報, ShogaishaKoujoToJotai.class);
-            Integer 追加履歴番号 = ViewStateHolder.get(DBD4020011ViewStateKey.追加履歴番号, Integer.class);
+                    = ViewStateHolder.get(ViewStateKeys.編集障がい者控除申請登録の情報, ShogaishaKoujoToJotai.class);
+            Integer 追加履歴番号 = ViewStateHolder.get(ViewStateKeys.追加履歴番号, Integer.class);
             if (null == 追加履歴番号 || 追加履歴番号 == 0) {
                 追加履歴番号 = -1;
             }
@@ -292,8 +292,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
             }
             ArrayList<ShogaishaKoujoToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
             getHandler(div).onClick_btnConfirm(情報と状態ArrayList, 編集情報, 追加履歴番号, 最初情報, get被保険者番号FromViewState());
-            ViewStateHolder.put(DBD4020011ViewStateKey.申請一覧情報と状態, 情報と状態ArrayList);
-            ViewStateHolder.put(DBD4020011ViewStateKey.追加履歴番号, 追加履歴番号 - 1);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 情報と状態ArrayList);
+            ViewStateHolder.put(ViewStateKeys.追加履歴番号, 追加履歴番号 - 1);
             return ResponseData.of(div).setState(一覧);
         }
         return ResponseData.of(div).respond();
@@ -301,7 +301,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
 
     private ShogaishaKoujoToJotai get最初情報(ShogaishaKoujoToJotai 編集情報) {
         ShogaishaKoujoIdentifier id = 編集情報.get障がい書控除申請登録情報().identifier();
-        ArrayList<ShogaishaKoujo> 最初申請一覧情報 = ViewStateHolder.get(DBD4020011ViewStateKey.申請一覧情報, ArrayList.class);
+        ArrayList<ShogaishaKoujo> 最初申請一覧情報 = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
         for (ShogaishaKoujo 最初情報 : 最初申請一覧情報) {
             if (id.equals(最初情報.identifier())) {
                 return new ShogaishaKoujoToJotai(最初情報, RString.EMPTY, 編集情報.get新履歴番号());
@@ -370,38 +370,6 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
 
     private ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler getValidationHandler() {
         return new ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler();
-    }
-
-    /**
-     * 引数定義<br/>
-     *
-     */
-    public enum DBD4020011ViewStateKey {
-
-        /**
-         * 申請一覧情報と状態です。
-         */
-        申請一覧情報と状態,
-        /**
-         * 申請一覧情報。
-         */
-        申請一覧情報,
-        /**
-         * is世帯所得一覧の初期化。
-         */
-        is世帯所得一覧の初期化,
-        /**
-         * is削除ReRequest。
-         */
-        is削除ReRequest,
-        /**
-         * 編集障がい者控除申請登録の情報です。
-         */
-        編集障がい者控除申請登録の情報,
-        /**
-         * 追加履歴番号。
-         */
-        追加履歴番号;
     }
 
 }
