@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020004;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.kyufugakugengakukanrilist.KyufugakuGengakuKanriListFlowParameter;
-import jp.co.ndensan.reams.db.dbd.definition.core.kyufugakugengakukanrilist.KyufugakuGengakuKanriListData;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012.DBD209012_KyufuGakuGengakuKanriListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugengakukanrilist.TaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.KyufugakuGengakuKanriListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -112,22 +114,20 @@ public class KyufugakuGengakuKanriListHandler {
      *
      * @return CreateKyufugakuGengakuKanriListBatchParameter 給付額減額管理リスト_バッチ用のパラメータ
      */
-    public KyufugakuGengakuKanriListFlowParameter batchParameter() {
-        KyufugakuGengakuKanriListData tempData = new KyufugakuGengakuKanriListData();
-        tempData.set基準日(div.getChushutuJoken().getTxtKijunDate().getValue());
-        tempData.set対象区分(div.getChushutuJoken().getRadTaisho().getSelectedKey());
+    public DBD209012_KyufuGakuGengakuKanriListParameter batchParameter() {
+        DBD209012_KyufuGakuGengakuKanriListParameter tempData = new DBD209012_KyufuGakuGengakuKanriListParameter();
+        tempData.set基準日(日期類型変更(div.getChushutuJoken().getTxtKijunDate().getValue()));
+        tempData.set対象区分(対象区分に変更(div.getChushutuJoken().getRadTaisho().getSelectedKey()));
         tempData.set通知書未発行者抽出(div.getChkTsuchishoMihakko().isAllSelected());
         tempData.set減額適用中者抽出(div.getChkGengakuTekiyochuSha().isAllSelected());
-        tempData.set減額適用中者抽出基準日(div.getTxtGengakuTekiyoChushaKijunDate().getValue());
+        tempData.set減額適用中者抽出基準日(日期類型変更(div.getTxtGengakuTekiyoChushaKijunDate().getValue()));
         tempData.set減額終了日抽出(div.getChkGengakuShuryoDate().isAllSelected());
-        tempData.set減額終了日範囲From(div.getTxtGengakuShuryoRange().getFromValue());
-        tempData.set減額終了日範囲To(div.getTxtGengakuShuryoRange().getToValue());
+        tempData.set減額終了日範囲From(日期類型変更(div.getTxtGengakuShuryoRange().getFromValue()));
+        tempData.set減額終了日範囲To(日期類型変更(div.getTxtGengakuShuryoRange().getToValue()));
         tempData.set保険料完納者出力(div.getChushutuJoken().getChkOutputsHokenryoKannosha().isAllSelected());
-        tempData.set改頁出力順ID(new RString(String.valueOf(div.getCcdChohyoShutsuryokujun().get出力順ID())));
-        tempData.set帳票ID(ReportIdDBD.DBD200009.getReportId().value());
-        KyufugakuGengakuKanriListFlowParameter batchParameter = new KyufugakuGengakuKanriListFlowParameter();
-        batchParameter.toDbd209010BatchParameter(tempData);
-        return batchParameter;
+        tempData.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
+        tempData.set帳票ID(ReportIdDBD.DBD200009.getReportId());
+        return tempData;
     }
 
     /**
@@ -139,4 +139,17 @@ public class KyufugakuGengakuKanriListHandler {
         this.div = div;
     }
 
+    private FlexibleDate 日期類型変更(RDate 変更前日期) {
+        if (変更前日期 != null) {
+            return new FlexibleDate(変更前日期.toDateString());
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    private TaishoKubun 対象区分に変更(RString 対象区分) {
+        if (全登録者.equals(対象区分)) {
+            return TaishoKubun.全登録者;
+        }
+        return TaishoKubun.全登録者以外;
+    }
 }
