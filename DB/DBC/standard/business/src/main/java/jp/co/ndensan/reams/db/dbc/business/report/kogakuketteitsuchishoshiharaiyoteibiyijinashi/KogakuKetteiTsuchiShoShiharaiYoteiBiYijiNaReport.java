@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharai
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijinashi.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,42 +19,45 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBC-2000-050 zhengshenlei
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport extends Report<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport extends Report<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> {
 
     private final KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報;
     private final int 連番;
-    private final RString 設定値;
+    private final List<RString> titleList;
     private final List<RString> 通知書定型文List;
     private final NinshoshaSource 認証者ソースデータ;
+    private final ChohyoSeigyoKyotsu 帳票制御共通情報;
 
     /**
      * コンストラクタです。
      *
      * @param 帳票情報 KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity
      * @param 連番 int
-     * @param 設定値 RString
+     * @param titleList List<RString>
      * @param 通知書定型文List List<RString>
      * @param 認証者ソースデータ NinshoshaSource
+     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      */
-    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport(
+    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報,
             int 連番,
-            RString 設定値,
+            List<RString> titleList,
             List<RString> 通知書定型文List,
-            NinshoshaSource 認証者ソースデータ) {
+            NinshoshaSource 認証者ソースデータ,
+            ChohyoSeigyoKyotsu 帳票制御共通情報) {
         this.帳票情報 = 帳票情報;
         this.連番 = 連番;
-        this.設定値 = 設定値;
+        this.titleList = titleList;
         this.通知書定型文List = 通知書定型文List;
         this.認証者ソースデータ = 認証者ソースデータ;
-
+        this.帳票制御共通情報 = 帳票制御共通情報;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> writer) {
-        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor editor
-                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor(帳票情報, 連番, 設定値, 通知書定型文List, 認証者ソースデータ);
-        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder builder = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder(editor);
+        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor editor
+                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor(帳票情報, 連番, titleList, 通知書定型文List, 認証者ソースデータ, 帳票制御共通情報);
+        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaBuilder builder = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaBuilder(editor);
         writer.writeLine(builder);
     }
 

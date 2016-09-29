@@ -13,16 +13,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBC-2000-050 zhengshenlei
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder implements IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaBuilder implements IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaBuilder {
 
-    private final IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor editor;
+    private final IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor editor;
 
     /**
      * コンストラクタです。
      *
      * @param editor IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor
      */
-    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiBuilder(IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor editor) {
+    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaBuilder(IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor editor) {
         this.editor = editor;
     }
 

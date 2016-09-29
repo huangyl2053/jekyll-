@@ -69,27 +69,40 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
 
     @Override
     protected void defineFlow() {
-        交換情報識別番号 = DbBusinessConfig.get(
-                ConfigNameDBC.国保連取込_高額合算自己負担額証明書情報_交換情報識別番号, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        executeStep(ファイル取得);
-        returnEntity
-                = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class,
-                        new RString(ファイル取得), KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-        parameter = new KogakuGassanJikofutangakuShomeishoInProcessParamerter();
-        int size = returnEntity.getFileNameList().size();
-        for (int i = 0; i < size; i++) {
-            parameter.setFileName(returnEntity.getFileNameList().get(i));
-            String filePath = returnEntity.get保存先フォルダのパス() + File.separator;
-            File path = new File(filePath);
-            csvFullPath = new RString(path.getPath());
-            if (i == size - 1) {
-                isLast = true;
-            }
-            executeStep(CSVファイル取込);
-            flowEntity = getResult(KogakuGassanJikofutangakuShomeishoFlowEntity.class, new RString(CSVファイル取込),
-                    KogakuGassanJikofutangakuShomeishoInProcess.PARAMETER_OUT_FLOWENTITY);
-            if (null != flowEntity) {
-                レコード件数合算 = flowEntity.get高額合算自己負担額一時TBL登録件数();
+        try {
+            交換情報識別番号 = DbBusinessConfig.get(
+                    ConfigNameDBC.国保連取込_高額合算自己負担額証明書情報_交換情報識別番号, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            executeStep(ファイル取得);
+            returnEntity
+                    = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class,
+                            new RString(ファイル取得), KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            parameter = new KogakuGassanJikofutangakuShomeishoInProcessParamerter();
+            int size = returnEntity.getFileNameList().size();
+            for (int i = 0; i < size; i++) {
+                parameter.setFileName(returnEntity.getFileNameList().get(i));
+                String filePath = returnEntity.get保存先フォルダのパス() + File.separator;
+                File path = new File(filePath);
+                csvFullPath = new RString(path.getPath());
+                parameter.setPath(csvFullPath);
+                if (i == 0) {
+                    parameter.set処理年月(null);
+                    parameter.set連番(0);
+                } else {
+                    parameter.set処理年月(flowEntity.getShoriYM());
+                    parameter.set連番(flowEntity.get連番());
+                }
+                if (i == size - 1) {
+                    parameter.setさいごファイルフラグ(true);
+                } else {
+                    parameter.setさいごファイルフラグ(false);
+                }
+                executeStep(CSVファイル取込);
+                flowEntity = getResult(KogakuGassanJikofutangakuShomeishoFlowEntity.class, new RString(CSVファイル取込),
+                        KogakuGassanJikofutangakuShomeishoInProcess.PARAMETER_OUT_FLOWENTITY);
+                if (null != flowEntity) {
+                    レコード件数合算 = レコード件数合算 + flowEntity.getCodeNum();
+                    parameter.setレコード件数合算(レコード件数合算);
+                }
             }
 
             if (0 == レコード件数合算) {
@@ -106,6 +119,10 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
                 executeStep(一覧表作成);
                 executeStep(処理結果リスト作成);
             }
+        } finally {
+            if (null != returnEntity) {
+                executeStep(取込済ファイル削除);
+            }
         }
     }
 
@@ -116,10 +133,10 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(ファイル取得)
     protected IBatchFlowCommand callGetFileProcess() {
-        KokuhorenkyotsuGetFileProcessParameter parameter = new KokuhorenkyotsuGetFileProcessParameter();
-        parameter.set交換情報識別番号(交換情報識別番号);
-        parameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
-        return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(parameter).define();
+        KokuhorenkyotsuGetFileProcessParameter processparameter = new KokuhorenkyotsuGetFileProcessParameter();
+        processparameter.set交換情報識別番号(交換情報識別番号);
+        processparameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
+        return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(processparameter).define();
     }
 
     /**
@@ -129,10 +146,6 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
-        parameter.setPath(csvFullPath);
-        parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set連番(レコード件数合算);
-        parameter.setさいごファイルフラグ(isLast);
         return loopBatch(KogakuGassanJikofutangakuShomeishoInProcess.class).arguments(parameter).define();
     }
 
@@ -153,9 +166,9 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(マスタ登録_再処理準備)
     protected IBatchFlowCommand callDoMasterTorokuSaiShoriProcess() {
-        KogakuGassanJikofutangakuDoMasterTorokuProcessParameter parameter = new KogakuGassanJikofutangakuDoMasterTorokuProcessParameter();
-        parameter.set処理年月(getParameter().getShoriYM());
-        return loopBatch(KogakuGassanJSaiSyoriJyunbiProcess.class).arguments(parameter).define();
+        KogakuGassanJikofutangakuDoMasterTorokuProcessParameter processparameter = new KogakuGassanJikofutangakuDoMasterTorokuProcessParameter();
+        processparameter.set処理年月(getParameter().getShoriYM());
+        return loopBatch(KogakuGassanJSaiSyoriJyunbiProcess.class).arguments(processparameter).define();
     }
 
     /**
@@ -165,9 +178,9 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(マスタ登録_マスタ更新)
     protected IBatchFlowCommand callDoMasterTorokuProcess() {
-        KogakuGassanJikofutangakuDoMasterTorokuProcessParameter parameter = new KogakuGassanJikofutangakuDoMasterTorokuProcessParameter();
-        parameter.set処理年月(getParameter().getShoriYM());
-        return loopBatch(KogakuGassanJSaiSyoriJyunbiDoMasterProcess.class).arguments(parameter).define();
+        KogakuGassanJikofutangakuDoMasterTorokuProcessParameter processparameter = new KogakuGassanJikofutangakuDoMasterTorokuProcessParameter();
+        processparameter.set処理年月(getParameter().getShoriYM());
+        return loopBatch(KogakuGassanJSaiSyoriJyunbiDoMasterProcess.class).arguments(processparameter).define();
     }
 
     /**
@@ -187,14 +200,14 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(国保連インタフェース管理更新)
     protected IBatchFlowCommand callDoInterfaceKanriKousinProcess() {
-        KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter parameter
+        KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter processparameter
                 = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
-        parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set交換情報識別番号(交換情報識別番号);
-        parameter.set処理対象年月(flowEntity.getShoriYM());
-        parameter.setレコード件数合計(レコード件数合算);
-        parameter.setFileNameList(returnEntity.getFileNameList());
-        return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
+        processparameter.set処理年月(getParameter().getShoriYM());
+        processparameter.set交換情報識別番号(交換情報識別番号);
+        processparameter.set処理対象年月(flowEntity.getShoriYM());
+        processparameter.setレコード件数合計(レコード件数合算);
+        processparameter.setFileNameList(returnEntity.getFileNameList());
+        return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(processparameter).define();
     }
 
     /**
@@ -204,14 +217,14 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(一覧表作成)
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
-        KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter parameter
+        KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter processparameter
                 = new KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter();
-        parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(ReportIdDBC.DBC200034.getReportId().getColumnValue()));
-        parameter.set出力順ID(Long.valueOf(getParameter().getShutsuryokujunId().toString()));
-        parameter.set処理年月(getParameter().getShoriYM());
-        parameter.setシステム日付(RDateTime.now());
-        return loopBatch(KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess.class).arguments(parameter).
+        processparameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        processparameter.set帳票ID(new ReportId(ReportIdDBC.DBC200034.getReportId().getColumnValue()));
+        processparameter.set出力順ID(Long.valueOf(getParameter().getShutsuryokujunId().toString()));
+        processparameter.set処理年月(getParameter().getShoriYM());
+        processparameter.setシステム日付(RDateTime.now());
+        return loopBatch(KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess.class).arguments(processparameter).
                 define();
     }
 
@@ -222,10 +235,10 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(処理結果リスト作成)
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
-        KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
+        KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter processparameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ3);
-        return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
+        processparameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ3);
+        return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(processparameter).define();
     }
 
     /**
@@ -235,11 +248,11 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
      */
     @Step(取込済ファイル削除)
     protected IBatchFlowCommand callDeleteReveicedFileProcess() {
-        KokuhorenkyotsuDeleteReveicedFileProcessParameter parameter
+        KokuhorenkyotsuDeleteReveicedFileProcessParameter processparameter
                 = new KokuhorenkyotsuDeleteReveicedFileProcessParameter();
-        parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set保存先フォルダ(returnEntity.get保存先フォルダのパス().toRString());
-        parameter.setエントリ情報List(returnEntity.getEntityList());
-        return simpleBatch(KokuhorenkyoutsuDeleteReveicedFileProcess.class).arguments(parameter).define();
+        processparameter.set処理年月(getParameter().getShoriYM());
+        processparameter.set保存先フォルダ(returnEntity.get保存先フォルダのパス().toRString());
+        processparameter.setエントリ情報List(returnEntity.getEntityList());
+        return simpleBatch(KokuhorenkyoutsuDeleteReveicedFileProcess.class).arguments(processparameter).define();
     }
 }

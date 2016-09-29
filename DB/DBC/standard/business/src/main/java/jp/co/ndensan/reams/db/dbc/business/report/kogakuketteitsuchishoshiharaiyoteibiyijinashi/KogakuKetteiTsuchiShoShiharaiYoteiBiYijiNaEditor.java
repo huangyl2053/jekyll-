@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari;
+package jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijinashi;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijinashi.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -21,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 帳票設計_DBCMN43002_高額サービス等支給（不支給）決定通知書((支払予定日あり))のEditorクラスです。
+ * 帳票設計_DBCMN43002_高額サービス等支給（不支給）決定通知書のEditorクラスです。
  *
- * @reamsid_L DBC-2000-040 zhengshenlei
+ * @reamsid_L DBC-2000-050 zhengshenlei
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor {
 
     private final KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報;
     private final RString テスト印刷 = new RString("テスト印刷");
@@ -42,24 +42,23 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private static final int INDEX_TEN = 10;
     private static final int INDEX_ELEVEN = 11;
     private static final int INDEX_TWELVE = 12;
-    private final int 連番;
+    private int 連番;
     private final List<RString> 通知書定型文List;
     private static final RString 増減の理由 = new RString("増減の理由");
     private static final RString 不支給の理由 = new RString("不支給の理由");
     private static final RString 支給 = new RString("1");
     private static final RString 不支給 = new RString("2");
-    private static final RString 窓口払い区分 = new RString("1");
-    private static final RString 窓口払い = new RString("窓口払い");
-    private static final RString 口座払いでゆうちょ = new RString("口座払いでゆうちょ");
+    private static final RString 窓口払い = new RString("1");
     private static final RString 半角アスタリスク = new RString("************");
     private static final RString 口座種別 = new RString("口座種別");
     private static final RString 通帳記号 = new RString("通帳記号");
+    private static final RString 口座払いでゆうちょ = new RString("口座払いでゆうちょ");
     private static final RString 口座番号 = new RString("口座番号");
     private static final RString 通帳番号 = new RString("通帳番号");
     private final NinshoshaSource 認証者ソースデータ;
-    private final List<RString> titleList;
-    private static final RString 記号 = new RString("~");
     private final ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private final List<RString> titleList;
+    private final RString 記号 = new RString("~");
     private static final RString SIZE_TWO = new RString("2");
     private static final RString SIZE_THREE = new RString("3");
     private static final RString SIZE_FOUR = new RString("4");
@@ -74,7 +73,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
      * @param 認証者ソースデータ NinshoshaSource
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      */
-    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor(
+    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor(
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報,
             int 連番,
             List<RString> titleList,
@@ -90,8 +89,25 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     }
 
     @Override
-    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource edit(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource edit(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.bunshoNo = 帳票情報.get文書番号();
+        if (帳票情報.isテスト出力フラグ()) {
+            source.testPrint = テスト印刷;
+        } else {
+            source.testPrint = RString.EMPTY;
+        }
+        source.renban = new RString(連番);
+        setタイトル(source);
+
+        if (通知書定型文List.size() > INDEX_ONE) {
+            source.tsuchibun1 = 通知書定型文List.get(INDEX_ONE);
+            source.tsuchibun2 = 通知書定型文List.get(INDEX_ONE);
+        } else {
+            source.tsuchibun1 = RString.EMPTY;
+            source.tsuchibun2 = RString.EMPTY;
+        }
+        source.hihokenshaName = 帳票情報.get被保険者氏名();
+
         if (帳票情報.get被保険者番号() != null) {
             List<RString> 被保険者番号List = new ArrayList<>();
             RString 保険者番号 = 帳票情報.get被保険者番号().value();
@@ -110,21 +126,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             source.hihokenshaNo10 = set被保険者番号(被保険者番号List, INDEX_NINE);
         }
 
-        if (帳票情報.isテスト出力フラグ()) {
-            source.testPrint = テスト印刷;
-        } else {
-            source.testPrint = RString.EMPTY;
-        }
-        source.renban = new RString(連番);
-        setタイトル(source);
-        if (通知書定型文List.size() > INDEX_ONE) {
-            source.tsuchibun1 = 通知書定型文List.get(INDEX_ONE);
-            source.tsuchibun2 = 通知書定型文List.get(INDEX_ONE);
-        } else {
-            source.tsuchibun1 = RString.EMPTY;
-            source.tsuchibun2 = RString.EMPTY;
-        }
-        source.hihokenshaName = 帳票情報.get被保険者氏名();
         source.uketsukeYMD = 年月日編集(帳票情報.get受付年月日());
         source.ketteiYMD = 年月日編集(帳票情報.get決定年月日());
         source.honninShiharaiGaku = get金額(帳票情報.get本人支払額());
@@ -145,8 +146,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.riyu3 = 帳票情報.get不支給理由();
         source.torikeshi1 = 帳票情報.get窓口払();
         source.torikeshi2 = 帳票情報.get口座払();
-        source.bankName = 帳票情報.get金融機関();
-        if (支給.equals(帳票情報.get支給_不支給区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())
+        if (支給.equals(帳票情報.get支給_不支給区分()) && !窓口払い.equals(帳票情報.get支払方法区分())
                 || 不支給.equals(帳票情報.get支給_不支給区分())) {
             source.torikeshiMochimono1 = 半角アスタリスク;
             source.torikeshiMochimono2 = 半角アスタリスク;
@@ -195,7 +195,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             source.kouzaNo = 帳票情報.get通帳番号();
         }
         source.kouzaMeigi = 帳票情報.get口座名義人();
-        source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
         source.tsuchino = 帳票情報.get決定通知書番号();
         source.tsuban = new RString(連番);
         set通知文２(source);
@@ -217,7 +216,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         return index < titleList.size() ? titleList.get(index) : RString.EMPTY;
     }
 
-    private void setタイトル(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void setタイトル(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.title = getTitle(titleList, INDEX_ZERO);
         source.title2_1 = getTitle(titleList, INDEX_ONE);
         source.title2_2_1 = getTitle(titleList, INDEX_TWO);
@@ -231,10 +230,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.title3_3_1 = getTitle(titleList, INDEX_TEN);
         source.title3_3_2 = getTitle(titleList, INDEX_ELEVEN);
         source.title3_4 = getTitle(titleList, INDEX_TWELVE);
-
     }
 
-    private void set通知文２(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void set通知文２(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.tsuchibun3 = get通知書定型文(INDEX_TWO);
         source.tsuchibun4 = get通知書定型文(INDEX_TWO);
         source.tsuchibun5 = get通知書定型文(INDEX_TWO);
@@ -259,7 +257,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.tsuchibun24 = get通知書定型文(INDEX_TWO);
     }
 
-    private void set通知文Large(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void set通知文Large(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.tsuchibunLarge3 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
         source.tsuchibunLarge4 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
         source.tsuchibunLarge5 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
@@ -279,7 +277,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.tsuchibunLarge19 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
     }
 
-    private void set通知文上段Small(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void set通知文上段Small(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.tsuchibunMix3 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
         source.tsuchibunMix4 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
         source.tsuchibunMix5 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
@@ -295,7 +293,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.tsuchibunMix15 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
     }
 
-    private void set通知文下段Large(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void set通知文下段Large(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.tsuchibunMix16 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
         source.tsuchibunMix17 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
         source.tsuchibunMix18 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
@@ -305,7 +303,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.tsuchibunMix22 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
     }
 
-    private void set通知文上段Small_2(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void set通知文上段Small_2(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.tsuchibunMixtwo3 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
         source.tsuchibunMixtwo4 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
         source.tsuchibunMixtwo5 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
@@ -316,7 +314,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
 
     }
 
-    private void set通知文下段Large_2(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void set通知文下段Large_2(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         source.tsuchibunMixtwo10 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
         source.tsuchibunMixtwo11 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
         source.tsuchibunMixtwo12 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
@@ -348,7 +346,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         return 金額 != null ? new RString(金額.toString()) : RString.EMPTY;
     }
 
-    private void set雛形部品CompNinshosha(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+    private void set雛形部品CompNinshosha(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         if (認証者ソースデータ != null) {
             source.denshiKoin = 認証者ソースデータ.denshiKoin;
             source.hakkoYMD = 認証者ソースデータ.hakkoYMD;
@@ -371,5 +369,4 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         return 日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
-
 }
