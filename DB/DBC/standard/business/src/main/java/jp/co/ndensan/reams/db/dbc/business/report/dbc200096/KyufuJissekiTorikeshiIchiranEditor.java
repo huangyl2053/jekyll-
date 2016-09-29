@@ -41,6 +41,7 @@ public class KyufuJissekiTorikeshiIchiranEditor
     private static final RString 年度タイトル = new RString("年度");
     private static final RString 被保険者番号タイトル = new RString("被保険者番号");
     private static final RString サービス提供年月タイトル = new RString("サービス提供年月");
+    private static final RString 給付実績取消一覧表 = new RString("給付実績取消一覧表");
 
     /**
      * コンストラクタです
@@ -74,6 +75,7 @@ public class KyufuJissekiTorikeshiIchiranEditor
         source.printTimeStamp = get日時(RDateTime.now());
         source.kaishiTimestamp = get日時(this.抽出期間開始日時);
         source.shuryoTimestamp = get日時(this.抽出期間終了日時);
+        source.title = 給付実績取消一覧表;
         if (null != association) {
             source.cityCode = getColumnValue(association.get地方公共団体コード());
             source.cityName = association.get市町村名();
