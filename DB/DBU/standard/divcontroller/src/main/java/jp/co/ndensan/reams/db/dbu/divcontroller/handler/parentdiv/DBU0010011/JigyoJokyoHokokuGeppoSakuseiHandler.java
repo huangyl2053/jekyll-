@@ -1032,37 +1032,37 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private List<RString> get集計年月() {
         List<RString> shuukeiNengetu = new ArrayList<>();
         if (div.getTxtShukeiYM1().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().getYearMonth());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM2().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().getYearMonth());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM4().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM4().getValue().seireki().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM4().getValue().seireki().getYearMonth());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM3().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM3().getValue().seireki().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM3().getValue().seireki().getYearMonth());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM5().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM5().getValue().seireki().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM5().getValue().seireki().getYearMonth());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM6().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM6().getValue().seireki().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM6().getValue().seireki().getYearMonth());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM7().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM7().getValue().seireki().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM7().getValue().seireki().getYearMonth());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }

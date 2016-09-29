@@ -4,7 +4,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho.IJukyushaDaichoMapper">
     <resultMap id="ResultMap_DbT4001JukyushaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity" autoMapping="true"/>
-    <select resultOrdered="true" id="get受給者台帳" fetchSize="500" resultMap="ResultMap_DbT4001JukyushaDaichoEntity" 
+    <select id="get受給者台帳" fetchSize="500" resultMap="ResultMap_DbT4001JukyushaDaichoEntity" 
               resultOrdered="true"  parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.jukyushajaicho.JukyushaDaichoParameter">
         SELECT 
             A.* 
@@ -23,8 +23,9 @@
         ORDER BY A."ninteiYMD",A."insertTimestamp" DESC
         limit 1
     </select>
-    <select resultOrdered="true" id="get異動抽出台帳リスト" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity" fetchSize="500">
+    <select id="get異動抽出台帳リスト" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity" resultOrdered="true"
+            fetchSize="500">
         <if test="is要介護認定">
             <include refid="要介護認定" />
             UNION
