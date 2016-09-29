@@ -983,16 +983,16 @@ public class SokujiFukaKouseiMain {
                 return is差異がある;
             }
         }
-        if (Decimal.ZERO.compareTo(textBoxNum.getValue()) < 0) {
+        if (Decimal.ZERO.compareTo(期別金額) < 0) {
             ChoteiKyotsu 調定共通 = new ChoteiKyotsu(0L).createBuilderForEdit().
                     set収納ID(0L).
                     set会計年度(new RYear(賦課の情報.get賦課年度().getYearValue())).
                     set処理年度(new RYear(賦課の情報.get賦課年度().getYearValue())).
                     set調定事由コード(調定事由コード_更正).
-                    set調定年月日(賦課の情報.get調定日時().getDate()).
-                    set調定額(textBoxNum.getValue()).
+                    set調定年月日(賦課の情報.get調定日時() == null ? null : 賦課の情報.get調定日時().getDate()).
+                    set調定額(期別金額).
                     set消費税額(Decimal.ZERO).
-                    set納期限(textBoxDate.getValue()).
+                    set納期限(textBoxDate == null ? null : textBoxDate.getValue()).
                     set賦課処理状況(Boolean.FALSE).build();
             Kibetsu 介護期別情報 = new Kibetsu(
                     賦課の情報.get調定年度(),

@@ -76,9 +76,11 @@ public class HihokenshaShikibetsuTaishoProcess
         if (null != 識別対象.to個人()) {
             serviceMeisaiTempEntity.setSeinengappiYMD(識別対象.to個人().get生年月日().toFlexibleDate());
             // QA#1612
-//            serviceMeisaiTempEntity.setAge(new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
-//                宛名.get消除異動年月日()));
-            serviceMeisaiTempEntity.setSeibetsu(識別対象.to個人().get性別().toRString());
+//            serviceMeisaiTempEntity.setAge(new AgeCalculator(識別対象.to個人().get生年月日(),
+//                    識別対象.to個人().get住民状態(),
+//                    識別対象.to個人().get消除異動年月日(),
+//                    AgeArrivalDay.前日).get年齢());
+            serviceMeisaiTempEntity.setSeibetsu(識別対象.to個人().get性別().getCode());
         }
 
         serviceMeisaiTempEntity.setSetaiCode(識別対象.get世帯コード());

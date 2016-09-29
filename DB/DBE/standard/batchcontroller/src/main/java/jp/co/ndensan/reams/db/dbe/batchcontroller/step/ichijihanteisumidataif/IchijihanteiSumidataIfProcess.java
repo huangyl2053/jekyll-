@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.Ichiji
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIferaEucEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -65,7 +66,8 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         eraBunisess = new IchijihanteiSumidataIferaBunisess();
         ファイル名 = new RString("111.csv");
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
-        paramter.set仮一次判定区分(false);
+        RString 仮一次判定区分 = KariIchijiHanteiKubun.本一次判定.get名称();
+        paramter.set仮一次判定区分(Boolean.valueOf(仮一次判定区分.toString()));
     }
 
     @Override
@@ -90,16 +92,16 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     @Override
     protected void process(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity) {
         if (ファイル09B.equals(entity.get厚労省IF識別コード())) {
-//            RString エラーデータ09B = eraBunisess.setエラーデータ09B(entity);
-//            if (!RString.isNullOrEmpty(エラーデータ09B)) {
-//                getファイル名エラ(entity);
-//                IchijihanteiSumidataIferaEucEntity eraEucEntity = new IchijihanteiSumidataIferaEucEntity();
-//                eraEucEntity.set保険者番号(entity.get保険者番号());
-//                eraEucEntity.set被保険者番号(entity.get被保険者番号());
-//                eraEucEntity.setエラー項目(エラーデータ09B);
-//                eucCsvWriterJunitoJugo.writeLine(eraEucEntity);
-//                return;
-//            }
+            RString エラーデータ09B = eraBunisess.setエラーデータ09B(entity);
+            if (!RString.isNullOrEmpty(エラーデータ09B)) {
+                getファイル名エラ(entity);
+                IchijihanteiSumidataIferaEucEntity eraEucEntity = new IchijihanteiSumidataIferaEucEntity();
+                eraEucEntity.set保険者番号(entity.get保険者番号());
+                eraEucEntity.set被保険者番号(entity.get被保険者番号());
+                eraEucEntity.setエラー項目(エラーデータ09B);
+                eucCsvWriterJunitoJugo.writeLine(eraEucEntity);
+                return;
+            }
             getファイル名(entity);
             eucCsvWriterJunitoJugo.writeLine(bunisess.set一次判定済データ09B(entity));
         }

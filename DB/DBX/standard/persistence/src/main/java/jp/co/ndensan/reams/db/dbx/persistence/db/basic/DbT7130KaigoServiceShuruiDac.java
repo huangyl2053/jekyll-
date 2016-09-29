@@ -264,8 +264,8 @@ public class DbT7130KaigoServiceShuruiDac {
     public List<DbT7130KaigoServiceShuruiEntity> getサービス種類コードと名称() throws NullPointerException {
 
         List<Code> list = new ArrayList<>();
-        list.add(new Code(ServiceBunrui.総合事業.getコード()));
-        list.add(new Code(ServiceBunrui.ケアマネジメント.getコード()));
+        list.add(new Code(ServiceBunrui.総合事業_経過措置.getコード()));
+        list.add(new Code(ServiceBunrui.ケアマネジメント_経過措置.getコード()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.
@@ -337,7 +337,7 @@ public class DbT7130KaigoServiceShuruiDac {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.selectSpecific(serviceShuruiMeisho).
+        return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
                 where(
                         in(serviceShuruiCd, list)).

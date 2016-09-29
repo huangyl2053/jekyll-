@@ -92,9 +92,9 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
             HomonKaigoRiyoshaFutanGengakuHandler handler = getHandler(div);
             List<HomonKaigoRiyoshaFutangakuGengaku> 申請一覧情報 = handler.get申請一覧情報(被保険者番号);
             ArrayList<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報 = new ArrayList<>(申請一覧情報);
-            ViewStateHolder.put(DBD1070001ViewStateKey.申請一覧情報, 最初申請一覧情報);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報, 最初申請一覧情報);
             List<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態List = handler.onLoad(識別コード, 被保険者番号, 申請一覧情報);
-            ViewStateHolder.put(DBD1070001ViewStateKey.申請一覧情報と状態, new ArrayList(情報と状態List));
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, new ArrayList(情報と状態List));
             if (申請メニュー.equals(ResponseHolder.getMenuID())) {
                 return ResponseData.of(div).respond();
             }
@@ -113,10 +113,10 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
         div.getBtnShowSetaiJoho().setDisplayNone(true);
         div.getBtnCloseSetaiJoho().setDisplayNone(false);
         div.getBtnOpenGemmenJoho().setDisplayNone(false);
-        Boolean is世帯所得一覧の初期化 = ViewStateHolder.get(DBD1070001ViewStateKey.is世帯所得一覧の初期化, Boolean.class);
+        Boolean is世帯所得一覧の初期化 = ViewStateHolder.get(ViewStateKeys.is世帯所得一覧の初期化, Boolean.class);
         if (null == is世帯所得一覧の初期化 || !is世帯所得一覧の初期化) {
             getHandler(div).世帯所得一覧の初期化(get識別コードFromViewState());
-            ViewStateHolder.put(DBD1070001ViewStateKey.is世帯所得一覧の初期化, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is世帯所得一覧の初期化, Boolean.TRUE);
         }
         if (申請一覧.getName().equals(ResponseHolder.getState())) {
             div.getBtnCloseSetaiJoho().setText(文字列_申請一覧を表示する);
@@ -167,7 +167,7 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
         HomonKaigoRiyoshaFutanGengakuHandler handler = getHandler(div);
         ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
         HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態 = handler.get情報と状態BySelectDataSouce(情報と状態ArrayList);
-        ViewStateHolder.put(DBD1070001ViewStateKey.編集訪問介護利用者負担額減額申請の情報, 情報と状態);
+        ViewStateHolder.put(ViewStateKeys.編集訪問介護利用者負担額減額申請の情報, 情報と状態);
         getHandler(div).onSelectByModifyButton(情報と状態);
         return ResponseData.of(div).setState(申請情報入力);
     }
@@ -180,13 +180,13 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onSelectByDeleteButton(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            ViewStateHolder.put(DBD1070001ViewStateKey.is削除ReRequest, Boolean.FALSE);
+            ViewStateHolder.put(ViewStateKeys.is削除ReRequest, Boolean.FALSE);
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            if (!ViewStateHolder.get(DBD1070001ViewStateKey.is削除ReRequest, Boolean.class) && !削除処理(div)) {
-                ViewStateHolder.put(DBD1070001ViewStateKey.is削除ReRequest, Boolean.TRUE);
+            if (!ViewStateHolder.get(ViewStateKeys.is削除ReRequest, Boolean.class) && !削除処理(div)) {
+                ViewStateHolder.put(ViewStateKeys.is削除ReRequest, Boolean.TRUE);
                 return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
             }
             return ResponseData.of(div).respond();
@@ -201,13 +201,13 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
         }
         ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
         getHandler(div).onSelectByDeleteButton(情報と状態ArrayList);
-        ViewStateHolder.put(DBD1070001ViewStateKey.申請一覧情報と状態, 情報と状態ArrayList);
+        ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 情報と状態ArrayList);
         return true;
     }
 
     private ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> get情報と状態ArrayList() {
         ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList
-                = ViewStateHolder.get(DBD1070001ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
         if (null == 情報と状態ArrayList) {
             情報と状態ArrayList = new ArrayList<>();
         }
@@ -222,7 +222,7 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnAddShinsei(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
         getHandler(div).onClick_btnAddShinsei(get識別コードFromViewState());
-        ViewStateHolder.put(DBD1070001ViewStateKey.編集訪問介護利用者負担額減額申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.編集訪問介護利用者負担額減額申請の情報, null);
         return ResponseData.of(div).setState(申請情報入力);
     }
 
@@ -244,8 +244,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報
-                    = ViewStateHolder.get(DBD1070001ViewStateKey.編集訪問介護利用者負担額減額申請の情報, HomonKaigoRiyoshaFutangakuGengakuToJotai.class);
-            Integer 追加履歴番号 = ViewStateHolder.get(DBD1070001ViewStateKey.追加履歴番号, Integer.class);
+                    = ViewStateHolder.get(ViewStateKeys.編集訪問介護利用者負担額減額申請の情報, HomonKaigoRiyoshaFutangakuGengakuToJotai.class);
+            Integer 追加履歴番号 = ViewStateHolder.get(ViewStateKeys.追加履歴番号, Integer.class);
             if (null == 追加履歴番号 || 追加履歴番号 == 0) {
                 追加履歴番号 = -1;
             }
@@ -255,8 +255,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
             }
             ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
             getHandler(div).onClick_btnConfirm(情報と状態ArrayList, 編集情報, 追加履歴番号, 最初情報, get被保険者番号FromViewState());
-            ViewStateHolder.put(DBD1070001ViewStateKey.申請一覧情報と状態, 情報と状態ArrayList);
-            ViewStateHolder.put(DBD1070001ViewStateKey.追加履歴番号, 追加履歴番号 - 1);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 情報と状態ArrayList);
+            ViewStateHolder.put(ViewStateKeys.追加履歴番号, 追加履歴番号 - 1);
             return ResponseData.of(div).setState(申請一覧);
         }
         return ResponseData.of(div).respond();
@@ -264,7 +264,7 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
 
     private HomonKaigoRiyoshaFutangakuGengakuToJotai get最初情報(HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報) {
         HomonKaigoRiyoshaFutangakuGengakuIdentifier id = 編集情報.get訪問介護利用者負担額減額情報().identifier();
-        ArrayList<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報 = ViewStateHolder.get(DBD1070001ViewStateKey.申請一覧情報, ArrayList.class);
+        ArrayList<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報 = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
         for (HomonKaigoRiyoshaFutangakuGengaku 最初情報 : 最初申請一覧情報) {
             if (id.equals(最初情報.identifier())) {
                 return new HomonKaigoRiyoshaFutangakuGengakuToJotai(最初情報, RString.EMPTY, 編集情報.get新履歴番号());
@@ -339,7 +339,7 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             ArrayList<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報
-                    = ViewStateHolder.get(DBD1070001ViewStateKey.申請一覧情報, ArrayList.class);
+                    = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
             handler.onClick_btnUpdate(get情報と状態ArrayList(),
                     get識別コードFromViewState(), get被保険者番号FromViewState(), 最初申請一覧情報);
             return ResponseData.of(div).setState(完了メッセージ);
@@ -478,38 +478,6 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
 
     private HomonKaigoRiyoshaFutanGengakuValidationHandler getValidationHandler() {
         return new HomonKaigoRiyoshaFutanGengakuValidationHandler();
-    }
-
-    /**
-     * 引数定義<br/>
-     *
-     */
-    private enum DBD1070001ViewStateKey {
-
-        /**
-         * 申請一覧情報です。
-         */
-        申請一覧情報,
-        /**
-         * 申請一覧情報と状態です。
-         */
-        申請一覧情報と状態,
-        /**
-         * 編集訪問介護利用者負担額減額申請の情報です。
-         */
-        編集訪問介護利用者負担額減額申請の情報,
-        /**
-         * 追加履歴番号です。
-         */
-        追加履歴番号,
-        /**
-         * is削除ReRequestです。
-         */
-        is削除ReRequest,
-        /**
-         *
-         */
-        is世帯所得一覧の初期化;
     }
 
 }

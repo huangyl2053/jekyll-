@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoshoNameEntity {
 
+    private int 連番;
     private DbWT3470ServiceMeisaichukanTempEntity サービス明細;
     private DbT7060KaigoJigyoshaEntity 介護事業者;
 

@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -148,6 +149,7 @@ public class RenkeiDataTorikomiHandler {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
         SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, path, opts);
         div.setPath(entity.getDirectAccessPath());
+        div.setHiddenFileId(new RString(entity.getSharedFileId().toString()));
         return entity;
     }
 
@@ -175,6 +177,7 @@ public class RenkeiDataTorikomiHandler {
         }
         batchParameter.set申請情報データリスト(parameterList);
         batchParameter.set格納パス(div.getPath());
+        batchParameter.set共有ファイルID(RDateTime.parse(div.getHiddenFileId().toString()));
         return batchParameter;
     }
 

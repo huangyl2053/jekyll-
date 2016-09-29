@@ -5,7 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,40 +28,40 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbWT111BKyufuJissekiD1TempEntity {
 
-    private RString 連番;
+    private int 連番;
     private RString レコード番号;
-    private RString 交換情報識別番号;
-    private RString 入力識別番号;
+    private KokanShikibetsuNo 交換情報識別番号;
+    private NyuryokuShikibetsuNo 入力識別番号;
     private RString レコード種別コード;
-    private RString 証記載保険者番号;
-    private RString 被保険者番号;
-    private RString サービス提供年月;
-    private RString 事業所番号;
+    private HokenshaNo 証記載保険者番号;
+    private HihokenshaNo 被保険者番号;
+    private FlexibleYearMonth サービス提供年月;
+    private JigyoshaNo 事業所番号;
     private RString 通し番号;
-    private RString サービス種類コード;
-    private RString サービス項目コード;
-    private RString 単位数;
-    private RString 日数_回数;
-    private RString 公費１対象日数_回数;
-    private RString 公費２対象日数_回数;
-    private RString 公費３対象日数_回数;
-    private RString サービス単位数;
-    private RString 公費１対象サービス単位数;
-    private RString 公費２対象サービス単位数;
-    private RString 公費３対象サービス単位数;
+    private ServiceShuruiCode サービス種類コード;
+    private ServiceKomokuCode サービス項目コード;
+    private Decimal 単位数;
+    private int 日数_回数;
+    private int 公費１対象日数_回数;
+    private int 公費２対象日数_回数;
+    private int 公費３対象日数_回数;
+    private Decimal サービス単位数;
+    private Decimal 公費１対象サービス単位数;
+    private Decimal 公費２対象サービス単位数;
+    private Decimal 公費３対象サービス単位数;
     private RString 摘要;
-    private RString 後_単位数;
-    private RString 後_日数_回数;
-    private RString 後_公費１対象日数_回数;
-    private RString 後_公費２対象日数_回数;
-    private RString 後_公費３対象日数_回数;
-    private RString 後_サービス単位数;
-    private RString 後_公費１対象サービス単位数;
-    private RString 後_公費２対象サービス単位数;
-    private RString 後_公費３対象サービス単位数;
-    private RString 再審査回数;
-    private RString 過誤回数;
-    private RString 審査年月;
+    private Decimal 後_単位数;
+    private int 後_日数_回数;
+    private int 後_公費１対象日数_回数;
+    private int 後_公費２対象日数_回数;
+    private int 後_公費３対象日数_回数;
+    private Decimal 後_サービス単位数;
+    private Decimal 後_公費１対象サービス単位数;
+    private Decimal 後_公費２対象サービス単位数;
+    private Decimal 後_公費３対象サービス単位数;
+    private int 再審査回数;
+    private int 過誤回数;
+    private FlexibleYearMonth 審査年月;
     private RString 整理番号;
-    private RString 取込年月;
+    private FlexibleYearMonth 取込年月;
 }

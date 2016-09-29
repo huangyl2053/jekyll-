@@ -157,7 +157,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         if ((広域保険者.equals(parameter.get広域判定区分())
                 || 単一市町村分.equals(parameter.get広域判定区分()))
                 && 市町村コード != null
-                && 市町村分.equals(市町村コード.code市町村RString())) {
+                && 市町村分.equals(市町村コード.getColumnValue())) {
             if ((抽出条件_認定者のみ.equals(parameter.get抽出条件())
                     || 抽出条件_認定者を除く１号被保険者.equals(parameter.get抽出条件()))
                     && 収納データ.get受給者給付COUNT().get受給者台帳COUNT() != INT_0) {
@@ -182,10 +182,10 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         LasdecCode 賦課市町村コード = 収納データ.get介護賦課().getFukaShichosonCode();
         if (市町村コード != null
                 && 広域保険者.equals(parameter.get広域判定区分())
-                && !市町村分.equals(市町村コード.code市町村RString())
+                && !市町村分.equals(市町村コード.getColumnValue())
                 && 賦課市町村コード != null
-                && (賦課市町村コード.code市町村RString().equals(parameter.get市町村情報())
-                || 賦課市町村コード.code市町村RString().equals(parameter.get旧市町村情報()))) {
+                && (賦課市町村コード.getColumnValue().equals(parameter.get市町村情報())
+                || 賦課市町村コード.getColumnValue().equals(parameter.get旧市町村情報()))) {
             if (ONE.equals(収納データ.get被保険者台帳().getKoikinaiJushochiTokureiFlag())) {
                 entity.setFukaLasdecCode(収納データ.get被保険者台帳().getKoikinaiTokureiSochimotoShichosonCode());
             } else {

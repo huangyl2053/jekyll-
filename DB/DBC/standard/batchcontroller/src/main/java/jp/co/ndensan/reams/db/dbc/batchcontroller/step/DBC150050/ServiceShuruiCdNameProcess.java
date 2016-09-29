@@ -120,7 +120,7 @@ public class ServiceShuruiCdNameProcess
         tempEntity.setSaishinsaKaisu(dbWT3470entity.getSaishinsaKaisu());
         tempEntity.setKagoKaisu(dbWT3470entity.getKagoKaisu());
         tempEntity.setShinsaYM(dbWT3470entity.getShinsaYM());
-        tempEntity.setServiceCodeName(entity.getサービス名称());
+        tempEntity.setServiceName(entity.getサービス名称());
         サービス明細中間一時tableWriter.update(tempEntity);
     }
 

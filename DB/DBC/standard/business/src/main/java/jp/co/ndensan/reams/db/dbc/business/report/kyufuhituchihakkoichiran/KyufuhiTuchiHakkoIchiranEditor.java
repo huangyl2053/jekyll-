@@ -88,10 +88,14 @@ public class KyufuhiTuchiHakkoIchiranEditor implements IKyufuhiTuchiHakkoIchiran
         source.listCenter_8 = item.getサービス項目コード();
         source.listCenter_9 = item.getサービス名称();
         source.listCenter_10 = item.get日数_回数();
-        source.listCenter_11 = DecimalFormatter.
-                toコンマ区切りRString(new Decimal(item.get利用者負担額_円().toString()), 0);
-        source.listCenter_12 = DecimalFormatter.
-                toコンマ区切りRString(new Decimal(item.getサービス費用_円().toString()), 0);
+        if (item.get利用者負担額_円() != null) {
+            source.listCenter_11 = DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(item.get利用者負担額_円().toString()), 0);
+        }
+        if (item.getサービス費用_円() != null) {
+            source.listCenter_12 = DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(item.getサービス費用_円().toString()), 0);
+        }
         source.listCenter_13 = item.get要介護度();
         source.listCenter_14 = item.get資格喪失日();
         source.listCenter_15 = item.get喪失事由();

@@ -37,6 +37,7 @@ public class KyufuhiTuchiHakkoIchiran {
         coverEntity.set発行日時(processParameter.get処理年月日());
         coverEntity.set保険者コード(association.getLasdecCode_().value());
         coverEntity.set保険者名(association.get市町村名());
+        // TODO 出力順は実装されていない.
         coverEntity.set出力順1(RString.EMPTY);
         coverEntity.set出力順2(RString.EMPTY);
         coverEntity.set出力順3(RString.EMPTY);
@@ -65,6 +66,7 @@ public class KyufuhiTuchiHakkoIchiran {
         coverEntity.set発行日時(processParameter.get処理年月日());
         coverEntity.set保険者コード(association.getLasdecCode_().value());
         coverEntity.set保険者名(association.get市町村名());
+        // TODO 出力順は実装されていない.
         coverEntity.set出力順1(RString.EMPTY);
         coverEntity.set出力順2(RString.EMPTY);
         coverEntity.set出力順3(RString.EMPTY);

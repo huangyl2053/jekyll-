@@ -129,7 +129,7 @@ SELECT
 	PSM."choikiCode" AS PSM_choikiCode,	
 	PSM."gyoseikuCode" AS PSM_gyoseikuCode,																											
 	PSM."setaiCode" AS PSM_setaiCode,																											
-	DbT7060A."jigyoshaName" AS DbT7060A_jigyoshaName,																										
+	DbT7060A."jigyoshaName" AS T2_jigyoshaName,																										
 	'',																	
 	''															
 FROM																												
@@ -160,7 +160,9 @@ LEFT JOIN
         ON
         T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"
         <where>
+            1 = 1
             <if test="対象年月flag">
+                AND
                 #{年月範囲_開始} <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
                 AND 
                 DbT3017."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了} 
@@ -337,10 +339,6 @@ LEFT JOIN
                 AND
                 DbT3017."inputShikibetsuNo" IN ('8171')
             </if>
-            <if test="flag">
-                AND
-                DbT3017."inputShikibetsuNo" IN ('7131','2131','7141','7142','7143','2141','2142','2143')
-            </if>
             <if test="旧措置特定有無flag">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '0'
@@ -392,6 +390,7 @@ LEFT JOIN
                 DbT3017."kyotakuKaigoShienJigyoshoNo" = #{計画作成事業者番号}
             </if>
             <if test="!給付率flag">
+                AND
                 <if test="給付率区分flag1">
                     DbT3017."hokenKyufuritsu" = #{給付率}
                 </if>
@@ -470,7 +469,9 @@ LEFT JOIN
         ON
         T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"	
          <where>
+             1 = 1
             <if test="対象年月flag">
+                AND
                 #{年月範囲_開始} <![CDATA[<=]]> T1."serviceTeikyoYM"
                 AND 
                 T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了} 
@@ -610,10 +611,6 @@ LEFT JOIN
             <if test="総合事業ケアマネジメントflag">
                 AND
                 T1."inputShikibetsuNo" IN ('8171')
-            </if>
-            <if test="flag">
-                AND
-                T1."inputShikibetsuNo" IN ('7131','2131','7141','7142','7143','2141','2142','2143')
             </if>
             <if test="!公費負担者番号flag">
                 AND

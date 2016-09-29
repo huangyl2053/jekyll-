@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150050;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.servicecodetanimeisaiichiran.IchiranServicecodeTaniMeisaiOutPutOrder;
@@ -46,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -55,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -89,11 +92,13 @@ public class IchiranServicecodeTaniMeisaiProcess
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private final Code code = new Code("0003");
     private final RString 漢字_被保険者番号 = new RString("被保険者番号");
+    private static final RString SAKUSEI = new RString("作成");
 
     @Override
     protected void initialize() {
 
         count = INT_0;
+        識別コードset = new HashSet<>();
         並び順 = get並び順();
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
@@ -160,7 +165,13 @@ public class IchiranServicecodeTaniMeisaiProcess
 
     private void setCSVヘッダー(DbWT3470chohyouShutsuryokuyouCSVEntity csvEntity) {
         csvEntity.set送付年月(パターン56(parameter.get開始年月()));
-        csvEntity.set作成日時(getパターン12(FlexibleDate.getNowDate()));
+        RDateTime 作成日時 = RDateTime.now();
+        RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
+        RString 作成時 = 作成日時.getTime()
+                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
+        csvEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
         csvEntity.set保険者番号(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         csvEntity.set保険者名(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称,
@@ -252,15 +263,6 @@ public class IchiranServicecodeTaniMeisaiProcess
         IOutputOrder order = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
                 parameter.get出力順ID());
         return order;
-    }
-
-    private static RString getパターン12(FlexibleDate date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -40,7 +40,7 @@ public class KyufuhiTuchiHakkoIchiranRelateEntity extends DbTableEntityBase<Kyuf
     @TempTableColumnOrder(7)
     private RString hiHokenshaNo;
     @TempTableColumnOrder(8)
-    private FlexibleDate serviceTeikyoYM;
+    private FlexibleYearMonth serviceTeikyoYM;
     @TempTableColumnOrder(9)
     private RString jigyoshoNo;
     @TempTableColumnOrder(10)
