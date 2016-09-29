@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -165,6 +166,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
         } else {
             spoolManager.spool(eucFilePath);
         }
+        spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),

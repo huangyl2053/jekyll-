@@ -166,13 +166,14 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
 
     @Override
     protected void afterExecute() {
+        noRebancsvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
         } else {
             spoolManager.spool(eucFilePath);
         }
-        noRebancsvWriter.close();
+        spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
