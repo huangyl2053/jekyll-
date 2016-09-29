@@ -412,8 +412,34 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             }
         } else {
             getHandler(div).前排他キーの解除(被保険者番号);
-            return ResponseData.of(div).forwardWithEventName(DBC1230011TransitionEventName.対象者検索に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC1230011TransitionEventName.検索結果一覧に戻る).respond();
         }
+    }
+
+    /**
+     * 「検索結果一覧に戻する」ボタンです。
+     *
+     * @param div KogakuGassanShikyuKetteiHoseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_btnSearchResult(
+            KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).前排他キーの解除(被保険者番号);
+        return ResponseData.of(div).forwardWithEventName(DBC1230011TransitionEventName.検索結果一覧に戻る).respond();
+    }
+
+    /**
+     * 「対象者検索に戻るする」ボタンです。
+     *
+     * @param div KogakuGassanShikyuKetteiHoseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_btnRevert(
+            KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).前排他キーの解除(被保険者番号);
+        return ResponseData.of(div).forwardWithEventName(DBC1230011TransitionEventName.対象者検索に戻る).respond();
     }
 
     /**

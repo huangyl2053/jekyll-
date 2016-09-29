@@ -328,7 +328,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtKeisanYMD().getToValue().toString()), 事業分フラグ);
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setValue(給付の種類);
-        set高額口座情報エリア(被保険者番号, 新規, 識別コード, null);
+//        set支払方法タブ(被保険者番号, 新規, 識別コード, null);
     }
 
     /**
@@ -353,11 +353,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                     getTxtKeisanYMD().setToValue(new RDate(row.getKeisanShuryoYMD().getValue().toString()));
         }
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().setValue(row.getJikoFutanSeiriNo());
-        if (row.getShinseiYMD().getValue() != null) {
+        if (row.getShinseiYMD().getValue() != null && !row.getShinseiYMD().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShinseiYMD().
                     setValue(new RDate(row.getShinseiYMD().getValue().toString()));
         }
-        if (row.getKetteiYMD().getValue() != null) {
+        if (row.getKetteiYMD().getValue() != null && !row.getKetteiYMD().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKetteiYMD().
                     setValue(new RDate(row.getKetteiYMD().getValue().toString()));
         }
@@ -365,6 +365,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtJikoFutanSogaku().setValue(new Decimal(row.getTxtJikoFutangaku().toString()));
         }
+        set新規以外の決定情報初期値_Two(row);
+//        set支払方法タブ(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row);
+    }
+
+    private void set新規以外の決定情報初期値_Two(dgKogakuGassanShikyuFushikyuKettei_Row row) {
         if (row.getTxtShikyuKubun() != null && !row.getTxtShikyuKubun().isEmpty()
                 && ShikyuFushikyuKubun.支給.getコード().equals(row.getTxtShikyuKubun())) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().setSelectedValue(支給);
@@ -385,7 +390,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtUketoriYM().setValue(new RDate(row.getTxtUketoriNengetsu().getValue().toString()));
         }
-        if (row.getKetteiTsuchiSakuseiYMD().getValue() != null) {
+        if (row.getKetteiTsuchiSakuseiYMD().getValue() != null
+                && !row.getKetteiTsuchiSakuseiYMD().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKetteiTsuchiSakuseiYMD().
                     setValue(new RDate(row.getKetteiTsuchiSakuseiYMD().getValue().toString()));
         }
@@ -394,7 +400,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtFurikomiTsuchiSakuseiYMD().
                     setValue(new RDate(row.getFurikomiTsuchiSakuseiYMD().getValue().toString()));
         }
-        set高額口座情報エリア(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row);
     }
 
     /**
@@ -957,7 +962,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
     }
 
-    private void set高額口座情報エリア(
+    private void set支払方法タブ(
             HihokenshaNo 被保険者番号,
             RString 処理モデル,
             ShikibetsuCode 識別コード,
