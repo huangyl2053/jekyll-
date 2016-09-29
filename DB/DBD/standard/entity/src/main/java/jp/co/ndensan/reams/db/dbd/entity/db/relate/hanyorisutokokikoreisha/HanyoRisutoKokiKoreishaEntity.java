@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoRisutoKokiKoreishaEntity {
 
+    private RString 被保険者台帳管理_識別コード;
     private RString 被保険者台帳管理_被保険者番号;
     private RString 被保険者台帳管理_資格取得事由コード;
     private FlexibleDate 被保険者台帳管理_資格取得年月日;

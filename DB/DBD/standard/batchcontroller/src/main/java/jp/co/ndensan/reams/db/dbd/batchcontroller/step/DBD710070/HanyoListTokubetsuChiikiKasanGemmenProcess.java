@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710070;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.report.HanyoListTokubetsuChiikiKasanGemmenOrderby;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
@@ -38,28 +39,44 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder._SetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.PageBreakType;
+import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.SortOrder;
+import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.NewpageType;
+import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.YamawakeType;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -155,6 +172,8 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     private static final RString 却下者 = new RString("却下者：");
     private static final RString 喪失区分 = new RString("喪失区分：");
     private static final RString SAI = new RString("歳");
+    private static final RString SHOKISAIHIHOKENSHANO = new RString("shoKisaiHokenshaNo");
+    private static final RString HIHOKENSHANO = new RString("hihokenshaNo");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyolisttokubetsuchiikikasangemmen."
             + "IHanyoListTokubetsuChiikiKasanGemmenMapper.get汎用リスト");
@@ -181,33 +200,46 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        RString 出力順 = get出力順();
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        List<JuminShubetsu> 住民種別List = new ArrayList<>();
+        List<JuminJotai> 住民状態List = new ArrayList<>();
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-//        key.set町域コード開始値(ChoikiCode.EMPTY);
-//        key.set町域コード終了値(ChoikiCode.EMPTY);
-//        key.set行政区コード開始値(GyoseikuCode.EMPTY);
-//        key.set行政区コード終了値(GyoseikuCode.EMPTY);
-//        key.set地区コード1開始値(ChikuCode.EMPTY);
-//        key.set地区コード1終了値(ChikuCode.EMPTY);
-//        key.set地区コード2開始値(ChikuCode.EMPTY);
-//        key.set地区コード2終了値(ChikuCode.EMPTY);
-//        key.set地区コード3開始値(ChikuCode.EMPTY);
-//        key.set地区コード3終了値(ChikuCode.EMPTY);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        key.set住民種別(get住民種別(住民種別List));
+        key.set住民状態(get住民状態(住民状態List));
+        key.set町域コード開始値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_From()));
+        key.set町域コード終了値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_To()));
+        key.set行政区コード開始値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_From()));
+        key.set行政区コード終了値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_To()));
+        key.set地区コード1開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_From()));
+        key.set地区コード1終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_To()));
+        key.set地区コード2開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
+        key.set地区コード2終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_To()));
+        key.set地区コード3開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
+        key.set地区コード3終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_To()));
+        key.set町域コード開始値(ChoikiCode.EMPTY);
+        key.set町域コード終了値(ChoikiCode.EMPTY);
+        key.set行政区コード開始値(GyoseikuCode.EMPTY);
+        key.set行政区コード終了値(GyoseikuCode.EMPTY);
+        key.set地区コード1開始値(ChikuCode.EMPTY);
+        key.set地区コード1終了値(ChikuCode.EMPTY);
+        key.set地区コード2開始値(ChikuCode.EMPTY);
+        key.set地区コード2終了値(ChikuCode.EMPTY);
+        key.set地区コード3開始値(ChikuCode.EMPTY);
+        key.set地区コード3終了値(ChikuCode.EMPTY);
+        IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
         return new BatchDbReader(MYBATIS_SELECT_ID,
-                processParamter.toTokubetsuChiikiKasanGemmenMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+                processParamter.toTokubetsuChiikiKasanGemmenMybatisParameter(psmShikibetsuTaisho, psmAtesaki, 出力順));
     }
 
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_TokubetsuChiikiKasanGemmen.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBD_TokubetsuChiikiKasanGemmen_Temp.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -235,6 +267,29 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         manager.spool(eucFilePath, log);
 //        processParamter.getSyutsuryoku().equals(CSVSettings.日付スラッシュ編集)
         バッチ出力条件リストの出力();
+    }
+
+    private RString get出力順() {
+        List<RString> 出力DB項目名 = new ArrayList();
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
+                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
+        List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
+        for (ISetSortItem item : 設定項目リスト) {
+            出力DB項目名.add(item.getDB項目名());
+        }
+        if (!出力DB項目名.contains(SHOKISAIHIHOKENSHANO)) {
+            order.get設定項目リスト().add(new _SetSortItem(GyomuCode.DB介護保険, new RString("0103"), SHOKISAIHIHOKENSHANO, NewpageType.選択不可,
+                    0, YamawakeType.設定不可, SubGyomuCode.DBD介護受給, CodeShubetsu.EMPTY, 0, SortOrder.ASCENDING,
+                    true, true, PageBreakType.設定なし, 0, 0));
+        }
+        if (!出力DB項目名.contains(HIHOKENSHANO)) {
+            order.get設定項目リスト().add(new _SetSortItem(GyomuCode.DB介護保険, new RString("0104"), HIHOKENSHANO, NewpageType.選択不可,
+                    0, YamawakeType.設定不可, SubGyomuCode.DBD介護受給, CodeShubetsu.EMPTY, 0, SortOrder.ASCENDING,
+                    true, true, PageBreakType.設定なし, 0, 0));
+        }
+        RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListTokubetsuChiikiKasanGemmenOrderby.class, order);
+        return 出力順;
     }
 
     private TokubetsuChiikiKasanGemmenEucCsvEntity setBlank() {
@@ -1376,4 +1431,19 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         return finder.getAssociation(市町村コード);
     }
 
+    private List<JuminShubetsu> get住民種別(List<JuminShubetsu> 住民種別List) {
+        住民種別List.add(JuminShubetsu.日本人);
+        住民種別List.add(JuminShubetsu.外国人);
+        住民種別List.add(JuminShubetsu.住登外個人_日本人);
+        住民種別List.add(JuminShubetsu.住登外個人_外国人);
+        return 住民種別List;
+    }
+
+    private List<JuminJotai> get住民状態(List<JuminJotai> 住民状態List) {
+        住民状態List.add(JuminJotai.住登外);
+        住民状態List.add(JuminJotai.消除者);
+        住民状態List.add(JuminJotai.転出者);
+        住民状態List.add(JuminJotai.死亡者);
+        return 住民状態List;
+    }
 }
