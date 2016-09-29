@@ -14,7 +14,7 @@
           1 = 1
           <if test="再処理区分 == 1">
             <if test="送付対象情報 == 1">
-            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null OR "DbT3059KagoMoshitate"."kokuhorenSofuYM" = ''
                  OR  "DbT3059KagoMoshitate"."kokuhorenSofuYM" = #{処理年月}
                  OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
             AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '1'
@@ -23,7 +23,7 @@
             AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
             </if>
             <if test=" 送付対象情報 == 2">
-            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null OR "DbT3059KagoMoshitate"."kokuhorenSofuYM" = ''
                  OR  "DbT3059KagoMoshitate"."kokuhorenSofuYM" = #{処理年月}
                  OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
             AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '0'
@@ -33,7 +33,7 @@
            </if>
            
            <if test=" 送付対象情報 == null or 送付対象情報.isEmpty()">
-            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null OR "DbT3059KagoMoshitate"."kokuhorenSofuYM" = ''
                  OR  "DbT3059KagoMoshitate"."kokuhorenSofuYM" = #{処理年月}
                  OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
             AND "DbT3059KagoMoshitate"."isDeleted" = '0'
@@ -44,7 +44,7 @@
         
          <if test="再処理区分 != 1">
             <if test="送付対象情報 == 1">
-            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null OR "DbT3059KagoMoshitate"."kokuhorenSofuYM" = ''
                  OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
             AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '1'
             AND "DbT3059KagoMoshitate"."isDeleted" = '0'
@@ -52,7 +52,7 @@
             AND "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{申立書区分コード}
             </if>
             <if test=" 送付対象情報 == 2">
-            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null OR "DbT3059KagoMoshitate"."kokuhorenSofuYM" = ''
                  OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
             AND "DbT3059KagoMoshitate"."dogetsuShinsaAriFlag" = '0'
             AND "DbT3059KagoMoshitate"."isDeleted" = '0'
@@ -61,7 +61,7 @@
            </if>
            
            <if test=" 送付対象情報 == null or 送付対象情報.isEmpty()">
-            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null
+            AND ("DbT3059KagoMoshitate"."kokuhorenSofuYM" is null OR "DbT3059KagoMoshitate"."kokuhorenSofuYM" = ''
                  OR  "DbT3059KagoMoshitate"."kokuhirenSaiSofuAriFlag" = TRUE)
             AND "DbT3059KagoMoshitate"."isDeleted" = '0'
             AND "DbT3059KagoMoshitate"."serviceTeikyoYM" <![CDATA[<]]>  #{処理年月}
@@ -213,11 +213,20 @@
     </resultMap> 
        
     <select id="select保険者番号Error"
-            resultMap="resultMap_DbWT1731KagoMoshitateTempEntity" fetchSize="500" resultOrdered="true">
-        SELECT DISTINCT dbWT1731."hokenshaNo"
+            resultMap="ResultMap_KaigokyufuhiKagoMoshitateshoOutDoErrorEntity" fetchSize="500" resultOrdered="true">
+        SELECT  dbWT1731."hokenshaNo" AS dbwt1731_hokenshaNo,
+        COUNT(DISTINCT dbWT1731."renban") AS dbwt1731_count
         FROM "DbWT1731KagoMoshitate" AS dbWT1731
         WHERE dbWT1731."sofuJogaiFlag" = FALSE
+        GROUP BY dbWT1731."hokenshaNo"
     </select>
+    
+     <resultMap id="ResultMap_KaigokyufuhiKagoMoshitateshoOutDoErrorEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoErrorEntity"
+               autoMapping="true">
+        <id property="保険者番号" column="dbwt1731_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="レコード件数" column="dbwt1731_count" />
+    </resultMap>
     
     <select resultOrdered="true" id="select送付ファイル" 
              parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter"

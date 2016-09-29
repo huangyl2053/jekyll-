@@ -6,16 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0260013;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo.IKyodoJukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0260013.KyodoJukyusyaIdoRenrakuhyoDetailDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kyodoshoriyojukyushaidorenrakuhyosakusei.KyodoshoriyoJukyushaIdoRenrakuhyoSakusei;
 import jp.co.ndensan.reams.db.dbc.service.report.kyodoshorijukyushaidorenrakuhyo.KyodoShoriJukyushaIdoRenrakuhyoPrintService;
-import jp.co.ndensan.reams.db.dbc.service.report.kyodoshorijukyushateiseirenrakuhyo.KyodoShoriJukyushaTeiseiRenrakuhyoPrintService;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
@@ -79,20 +76,10 @@ public class KyodoJukyusyaIdoRenrakuhyoDetailHandler {
         KyodoshoriyoJukyushaIdoRenrakuhyoSakusei 受給者連絡票データ作成 = KyodoshoriyoJukyushaIdoRenrakuhyoSakusei
                 .createInstance();
         KyodoshoriyoJukyushaIdoRenrakuhyoParam param = iKDiv.getNewデータ();
-        if ((iKDiv.get基本送付情報を追加活性() && Decimal.ONE.equals(iKDiv.get基本送付_履歴番号()))
-                || (iKDiv.get償還送付情報を追加活性() && Decimal.ONE.equals(iKDiv.get償還送付_履歴番号()))
-                || (iKDiv.get高額送付情報を追加活性() && Decimal.ONE.equals(iKDiv.get高額送付_履歴番号()))) {
-            KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity 異動連絡票データ = 受給者連絡票データ作成
-                    .editKyodoshoriyoJukyushaIdoRenrakuhyo(param);
-            KyodoShoriJukyushaIdoRenrakuhyoPrintService printService
-                    = new KyodoShoriJukyushaIdoRenrakuhyoPrintService();
-            return printService.printSingle(異動連絡票データ);
-        } else {
-            KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 訂正連絡票データ = 受給者連絡票データ作成
-                    .editKyodoshoriyoJukyushaTeiseiRenrakuhyo(param);
-            KyodoShoriJukyushaTeiseiRenrakuhyoPrintService printService
-                    = new KyodoShoriJukyushaTeiseiRenrakuhyoPrintService();
-            return printService.printSingle(訂正連絡票データ);
-        }
+        KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity 異動連絡票データ = 受給者連絡票データ作成
+                .editKyodoshoriyoJukyushaIdoRenrakuhyo(param);
+        KyodoShoriJukyushaIdoRenrakuhyoPrintService printService
+                = new KyodoShoriJukyushaIdoRenrakuhyoPrintService();
+        return printService.printSingle(異動連絡票データ);
     }
 }

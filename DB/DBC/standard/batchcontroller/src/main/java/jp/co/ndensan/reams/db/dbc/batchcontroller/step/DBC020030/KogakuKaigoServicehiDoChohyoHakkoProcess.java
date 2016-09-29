@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer.Koga
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -76,6 +78,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     private Set<RString> 条件set;
     private List<RString> 通知書定型文;
     private List<RString> タイトルlist;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private int 連番;
     private RString 設定値;
     private NinshoshaSource ninshoshaSource1;
@@ -106,10 +109,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         mybatisParameter = new JigyoKogakuKetteiTsuchishoReportParameter();
         service = ServicehiShikyuKetteiTsuchisho.createInstance();
         タイトルlist = service.getタイトル(帳票分類ID);
-        設定値 = service.get設定値(帳票分類ID);
         通知書定型文 = get通知書定型文();
         get出力順();
         do口座マスク編集();
+        帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
     }
 
     @Override
@@ -147,12 +150,12 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         if (!条件set.contains(tempStr)) {
 
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity = getReportEntity(entity);
-            KogKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReportport1
-                    = new KogakuKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReporttEntity, 連番, 設定値, 通知書定型文, ninshoshaSource1);
+            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport report1
+                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(reportEntity, 連番, タイトルlist, 通知書定型文, ninshoshaSource1, 帳票制御共通情報);
             report1.writeBy(reportSourceWriter1);
 
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport report2
-                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity, 連番, 設定値, 通知書定型文, ninshoshaSource2, null);
+                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity, 連番, タイトルlist, 通知書定型文, ninshoshaSource2, 帳票制御共通情報);
             report2.writeBy(reportSourceWriter2);
 
             KogakuKetteiTsuchiShoEntity reportEntity3 = getShoSealerReportEntity(entity);
@@ -161,7 +164,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
             report3.writeBy(reportSourceWriter3);
             KogakuKetteiTsuchiShoEntity reportEntity4 = getShoSealer2ReportEntity(entity);
             KogakuKetteiTsuchiShoSealer2Report report4
-                    = new KogakuKetteiTsuchiShoSealer2Report(設定値, reportEntity4, ninshoshaSource4, parameter.get文書番号());
+                    = new KogakuKetteiTsuchiShoSealer2Report(タイトルlist, reportEntity4, ninshoshaSource4, parameter.get文書番号());
             report4.writeBy(reportSourceWriter4);
             条件set.add(tempStr);
             連番 = 連番 + INT_1;
