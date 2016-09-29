@@ -117,7 +117,7 @@ public class AtenaSealCreateHandler {
         div.getCcdJushoSettei().initialize(SubGyomuCode.DBZ介護共通.getColumnValue(), 帳票分類ID.getColumnValue());
         //TODO QA1568
         div.getCcdAtenaSealPosition().load(定数_12);
-        div.getCcdShutsuryokuJun().load(SubGyomuCode.DBB介護賦課, 帳票分類ID);
+        div.getCcdShutsuryokuJun().load(SubGyomuCode.DBZ介護共通, 帳票分類ID);
     }
 
     /**
