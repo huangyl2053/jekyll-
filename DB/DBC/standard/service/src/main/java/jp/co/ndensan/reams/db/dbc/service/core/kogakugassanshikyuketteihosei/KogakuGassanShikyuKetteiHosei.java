@@ -381,6 +381,50 @@ public class KogakuGassanShikyuKetteiHosei {
         return result;
     }
 
+    /**
+     * 高額決定履歴番取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @return int
+     */
+    public int get高額決定Max履歴番号(HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) {
+        int 履歴番号 = 1;
+        DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity = 高額合算支給不支給決定dac.getMax履歴番号のentity(
+                被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+        if (entity != null) {
+            履歴番号 = entity.getRirekiNo() + 1;
+        }
+        return 履歴番号;
+    }
+
+    /**
+     * 事業高額決定履歴番取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @return int
+     */
+    public int get事業高額決定Max履歴番号(HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) {
+        int 履歴番号 = 1;
+        DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity entity = 事業高額合算支給不支給決定dac.getMax履歴番号のentity(
+                被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+        if (entity != null) {
+            履歴番号 = entity.getRirekiNo() + 1;
+        }
+        return 履歴番号;
+    }
+
     private void get更新高額合算支給不支給決定(
             KogakuGassanShikyuFushikyuKettei 高額合算Entity,
             RString 処理モード) {
