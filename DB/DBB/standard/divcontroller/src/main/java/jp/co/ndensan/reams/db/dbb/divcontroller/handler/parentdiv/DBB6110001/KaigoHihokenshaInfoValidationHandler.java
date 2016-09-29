@@ -48,6 +48,9 @@ public class KaigoHihokenshaInfoValidationHandler {
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(KaigoHihokenshaInfoValidationMessage.連帯納付義務者が選択されていない)
+                .add(KaigoHihokenshaInfoValidationMessage.初期状態からの変更有無)
+                .add(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
+                .add(KaigoHihokenshaInfoValidationMessage.開始日未入力)
                 .build();
     }
 
