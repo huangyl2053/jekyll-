@@ -22,15 +22,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class InsNenkinTokuchoKaifuJoho2Process extends BatchProcessBase<UeT0511NenkinTokuchoKaifuJohoEntity> {
 
-    private static final RString 処理対象月が4月_6月 = new RString("jp.co.ndensan.reams.db.dbb.persistence"
+    private static final RString 処理対象月が4月_6月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
             + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_4月_6月");
-    private static final RString 処理対象月が5月 = new RString("jp.co.ndensan.reams.db.dbb.persistence"
+    private static final RString 処理対象月が5月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
             + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_5月");
 
-    private static final RString 処理対象月が8月_9月_11月_1月_3月 = new RString("jp.co.ndensan.reams.db.dbb.persistence"
+    private static final RString 処理対象月が8月_9月_11月_1月_3月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
             + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_8_9_11_1_3月");
 
-    private static final RString 処理対象月が10月_12月_2月 = new RString("jp.co.ndensan.reams.db.dbb.persistence"
+    private static final RString 処理対象月が10月_12月_2月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
             + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_10_12_2月");
 
     private static final RString TEMP_TABLE = new RString("特徴異動追加Temp");
@@ -45,17 +45,17 @@ public class InsNenkinTokuchoKaifuJoho2Process extends BatchProcessBase<UeT0511N
 
     @Override
     protected IBatchReader createReader() {
-        RString MYBATIS_SELECT_ID = 処理対象月が8月_9月_11月_1月_3月;
+        RString myBatisSelectId = 処理対象月が8月_9月_11月_1月_3月_ID;
         if (parameter.is処理対象月が5月()) {
-            MYBATIS_SELECT_ID = 処理対象月が5月;
+            myBatisSelectId = 処理対象月が5月_ID;
         }
         if (parameter.is処理対象月が4月_6月()) {
-            MYBATIS_SELECT_ID = 処理対象月が4月_6月;
+            myBatisSelectId = 処理対象月が4月_6月_ID;
         }
         if (parameter.is処理対象月が10月_12月_2月()) {
-            MYBATIS_SELECT_ID = 処理対象月が10月_12月_2月;
+            myBatisSelectId = 処理対象月が10月_12月_2月_ID;
         }
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(myBatisSelectId);
     }
 
     @Override

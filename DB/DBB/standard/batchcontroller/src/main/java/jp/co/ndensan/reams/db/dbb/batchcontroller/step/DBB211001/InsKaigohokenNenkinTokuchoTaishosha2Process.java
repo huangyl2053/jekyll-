@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -101,7 +102,10 @@ public class InsKaigohokenNenkinTokuchoTaishosha2Process extends BatchProcessBas
         年金コード = 対象者情報.getNenkinCode();
         entity.setShoriTimestamp(parameter.getシステム日時().getRDateTime());
         entity.setDtCityCode(対象者情報.getDtCityCode());
-        entity.setDtTokubetsuChoshuGimushaCode(対象者情報.getDtTokubetsuChoshuGimushaCode().value());
+        Code dT特別徴収義務者コード = 対象者情報.getDtTokubetsuChoshuGimushaCode();
+        if (dT特別徴収義務者コード != null) {
+            entity.setDtTokubetsuChoshuGimushaCode(dT特別徴収義務者コード.value());
+        }
         entity.setDtTsuchiNaiyoCode(対象者情報.getDtTsuchiNaiyoCode());
         entity.setDtBaitaiCode(対象者情報.getDtBaitaiCode());
         entity.setDtTokubetsuChoshuSeidoCode(対象者情報.getDtTokubetsuChoshuSeidoCode());
@@ -172,6 +176,7 @@ public class InsKaigohokenNenkinTokuchoTaishosha2Process extends BatchProcessBas
         }
         if (捕捉月_08月.equals(捕捉月)
                 && 特別徴収_特徴開始月_月捕捉_4月開始.equals(特別徴収_特徴開始月_8月捕捉)) {
+            return 待機フラグ_待機あり;
         }
         return 待機フラグ_待機なし;
     }

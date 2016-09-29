@@ -27,6 +27,7 @@ public class InsTokuchoTsuikaIraiTempProcessParameter implements IBatchProcessPa
     private static final RString 処理対象月_10月 = new RString("10");
     private static final RString 処理対象月_12月 = new RString("12");
     private static final RString ZERO = new RString("0");
+    private static final int FOUR = 4;
 
     private final RYear 賦課年度;
     private final RString 処理対象月;
@@ -55,7 +56,7 @@ public class InsTokuchoTsuikaIraiTempProcessParameter implements IBatchProcessPa
     public SelectTokuchoTsuikaIraiTempMyBatisParameter toSelectTokuchoTsuikaIraiTempMyBatisParameter(
             RString 通知内容コード) {
         RYearMonth 年月 = new RYearMonth(賦課年度.toDateString().concat(処理対象月));
-        RString 処理対象月の4カ月前 = new RString(年月.minusMonth(4).getMonthValue());
+        RString 処理対象月の4カ月前 = new RString(年月.minusMonth(FOUR).getMonthValue());
         if (処理対象月の4カ月前.length() == 1) {
             return new SelectTokuchoTsuikaIraiTempMyBatisParameter(賦課年度, 賦課年度.minusYear(1),
                     is処理対象月が4月(), 通知内容コード, ZERO.concat(処理対象月の4カ月前));
