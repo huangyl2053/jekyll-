@@ -174,7 +174,7 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
             csvListWriter.writeLine(bodyList);
         }
         csvListWriter.close();
-        if (なし.equals(csv出力Flag)) {
+        if (定数_なし.equals(csv出力Flag)) {
             count = 0;
         } else {
             count = csvListWriter.getCount();
