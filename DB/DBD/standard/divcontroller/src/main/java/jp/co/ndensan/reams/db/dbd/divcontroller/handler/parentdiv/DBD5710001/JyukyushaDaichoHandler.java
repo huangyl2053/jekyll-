@@ -184,7 +184,8 @@ public class JyukyushaDaichoHandler {
         } else {
             parameter.set抽出条件設定区分(KEY1);
         }
-        if (div.getTaishouSha().getTxtHihokenshaBangou() != null) {
+        if (div.getTaishouSha().getTxtHihokenshaBangou().getFromValue() != null
+                && div.getTaishouSha().getTxtHihokenshaBangou().getToValue() != null) {
             parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
             parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
         }
