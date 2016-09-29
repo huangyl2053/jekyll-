@@ -337,7 +337,7 @@ public class DbT7130KaigoServiceShuruiDac {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.selectSpecific(serviceShuruiMeisho).
+        return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
                 where(
                         in(serviceShuruiCd, list)).
