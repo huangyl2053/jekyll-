@@ -85,4 +85,42 @@ public class TokubetsuChoshuIdojohoKensuhyoSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * TokubetsuChoshuIdojohoKensuhyoSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        testShori,
+        nenkinHokenshaName,
+        nengetsu,
+        shichosonCode,
+        shichosonName,
+        hokenshaNo,
+        hokenshaName,
+        tsukairaiTitleLeft,
+        tsukairaiTitleRight,
+        list1_1,
+        list1_2,
+        list2_1,
+        list2_2,
+        list2_3,
+        list2_4,
+        list2_5,
+        list2_6,
+        list2_7,
+        list2_8,
+        list3_1,
+        list3_2,
+        list4_1,
+        list4_2,
+        gokeiSoshituKensu,
+        gokeiKensu,
+        gokeiKariSanShutsuGakuHenkoKensu,
+        baitaiNo,
+        shurokuKensu,
+        gokeijushochiTokureiKensu,
+        gokeiTsukairaiKensu
+    }
 }
