@@ -50,7 +50,9 @@ public class DBC160020_ServicecodeIchiran extends BatchFlowBase<DBC160020_Servic
         param.set処理日時(システム日時);
         param.set抽出条件区分(getParameter().get抽出条件区分());
         param.setサービス分類s(getParameter().getサービス分類s());
-        param.setサービス種類コード(new ServiceShuruiCode(getParameter().getサービス種類コード()));
+        if (getParameter().getサービス種類コード() != null && getParameter().getサービス種類コード().isEmpty()) {
+            param.setサービス種類コード(new ServiceShuruiCode(getParameter().getサービス種類コード()));
+        }
         param.setサービス項目コード(getParameter().getサービス項目コード());
         param.set帳票で出力(getParameter().is帳票で出力());
         param.setＣＳＶファイルで出力(getParameter().isＣＳＶファイルで出力());

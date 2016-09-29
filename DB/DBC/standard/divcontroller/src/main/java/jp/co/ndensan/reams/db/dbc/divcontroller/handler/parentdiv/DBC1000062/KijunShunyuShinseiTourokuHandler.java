@@ -915,7 +915,7 @@ public class KijunShunyuShinseiTourokuHandler {
                 row.getKazeiShotokuKojogo().setValue(課税所得_控除後);
             }
         } else {
-            row.getKazeiShotokuKojogo().setValue(Decimal.ZERO);
+            row.getKazeiShotokuKojogo().setValue(課税所得額);
         }
     }
 
