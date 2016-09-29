@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.ninteienkitsuchishohakko
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteienkitsuchishohakko.INinteiEnkiTsuchishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
@@ -173,7 +173,7 @@ public class NinteiEnkiTsuchishoHakkoManager {
     @Transaction
     public List<RString> get延期の理由() {
         List<UzT0007CodeEntity> entityList
-                = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, DBECodeShubetsu.消費税率.getコード());
+                = CodeMaster.getCodeRireki(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.延期理由.getコード());
         List<RString> 延期の理由 = new ArrayList<>();
         for (UzT0007CodeEntity entity : entityList) {
             延期の理由.add(entity.getコード名称());
