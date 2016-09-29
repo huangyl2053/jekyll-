@@ -415,7 +415,7 @@ public class ShujiiIryoKikanMaster {
         ViewStateHolder.put(ViewStateKeys.主治医医療機関マスタ検索結果, models);
         div.getShujiiIchiran().setDisabled(false);
         getHandler(div).setShujiiIryoKikanJohoToIchiran(イベント状態);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9010001StateName.医療機関一覧);
     }
 
     /**
