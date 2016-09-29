@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -27,8 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,7 +42,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @JsonProperty("radTekiyoJyogaiShisetsu")
     private RadioButton radTekiyoJyogaiShisetsu;
     @JsonProperty("txtNyuryokuShisetsuKodo")
-    private TextBox txtNyuryokuShisetsuKodo;
+    private TextBoxCode txtNyuryokuShisetsuKodo;
     @JsonProperty("btnJigyoshaKensaku")
     private ButtonDialog btnJigyoshaKensaku;
     @JsonProperty("txtNyuryokuShisetsuMeisho")
@@ -135,7 +133,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return txtNyuryokuShisetsuKodo
      */
     @JsonProperty("txtNyuryokuShisetsuKodo")
-    public TextBox getTxtNyuryokuShisetsuKodo() {
+    public TextBoxCode getTxtNyuryokuShisetsuKodo() {
         return txtNyuryokuShisetsuKodo;
     }
 
@@ -144,7 +142,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param txtNyuryokuShisetsuKodo txtNyuryokuShisetsuKodo
      */
     @JsonProperty("txtNyuryokuShisetsuKodo")
-    public void setTxtNyuryokuShisetsuKodo(TextBox txtNyuryokuShisetsuKodo) {
+    public void setTxtNyuryokuShisetsuKodo(TextBoxCode txtNyuryokuShisetsuKodo) {
         this.txtNyuryokuShisetsuKodo = txtNyuryokuShisetsuKodo;
     }
 
@@ -227,7 +225,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -242,11 +240,11 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
     }
 
-    public void setMode_State(State value) {
-        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     // </editor-fold>
