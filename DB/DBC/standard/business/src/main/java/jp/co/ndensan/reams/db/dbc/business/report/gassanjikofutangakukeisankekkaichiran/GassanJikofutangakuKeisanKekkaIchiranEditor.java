@@ -85,6 +85,9 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         if (市町村コード != null) {
             source.shichosonCd = 市町村コード.getColumnValue();
         }
+        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get識別コード() != null) {
+            source.shikibetuCode = 高額合算自己負担額計算結果一覧表.get識別コード();
+        }
         source.shichosonName = 市町村名称;
         source.shutsuryokujun1 = 出力順1;
         source.shutsuryokujun2 = 出力順2;
