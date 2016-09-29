@@ -237,9 +237,9 @@
                 AND T2."serviceTeikyoYM" <![CDATA[<=]]> #{終了年月}
             </if>
             <if test="2==対象年月">
-                AND (#{開始年月<![CDATA[<=]]>T1."shinsaYM"}
+                AND (#{開始年月}<![CDATA[<=]]>T1."shinsaYM"
                 OR T1."shinsaYM" IS NULL)
-                AND #{開始年月<![CDATA[<=]]>T2."shinsaYM"}
+                AND #{開始年月}<![CDATA[<=]]>T2."shinsaYM"
                 AND T2."shinsaYM" <![CDATA[<=]]> #{終了年月}
             </if>
     </select>
@@ -247,6 +247,7 @@
     <select resultOrdered="true" id="get被保険者宛名情報"
             resultMap="resultMap_HihokenshaShikibetsuTaishoMeisaiEntity" fetchSize="500">
         SELECT
+            "DbWT3470ServiceMeisai"."renban" AS "DbWT3470ToukeihyoMeisai_renban",
             "DbWT3470ServiceMeisai".*,
             <include refid="allColumns_DbT1001HihokenshaDaicho" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
@@ -284,7 +285,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="地区指定!=null and '2'.toString()==地区指定.toString()">
+                                            <if test="地区指定!=null and '3'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."chikuCode1" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -294,7 +295,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="地区指定!=null and '3'.toString()==地区指定.toString()">
+                                            <if test="地区指定!=null and '4'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."chikuCode2" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -304,7 +305,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="地区指定!=null and '4'.toString()==地区指定.toString()">
+                                            <if test="地区指定!=null and '5'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."chikuCode3" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -314,7 +315,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="地区指定!=null and '5'.toString()==地区指定.toString()">
+                                            <if test="地区指定!=null and '2'.toString()==地区指定.toString()">
                                                 AND "DbWT3470ServiceMeisai"."gyoseikuCode" IN <foreach  
                                                 collection="選択地区リスト"
                                                 item="item"
@@ -325,23 +326,27 @@
                                                 </foreach>
                                             </if>
                                     </when>
+                                    <when test="旧市町村コード.toString()=='000000'.toString()">
+                                    </when>
                                     <otherwise>
                                             AND "DbWT3470ServiceMeisai"."kyuShichosonCode" = #{旧市町村コード}
                                     </otherwise>
                             </choose>
                     </when>
+                    <when test="市町村コード.toString()=='000000'.toString()">
+                    </when>
                     <otherwise>
                             <choose>
                                     <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
-                                         AND DbWT3470ServiceMeisai."koikinaiJushochiTokureiFlag" = '1'
-                                         AND DbWT3470ServiceMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                         AND "DbWT3470ServiceMeisai"."koikinaiJushochiTokureiFlag" = '1'
+                                         AND "DbWT3470ServiceMeisai"."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
                                     </when>
                                     <when test="旧市町村コード.toString()=='000000'.toString()">
-                                          AND DbWT3470ServiceMeisai."koikinaiJushochiTokureiFlag" = '1'
-                                          AND DbWT3470ServiceMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                          AND "DbWT3470ServiceMeisai"."koikinaiJushochiTokureiFlag" = '1'
+                                          AND "DbWT3470ServiceMeisai"."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
                                     </when>
                                     <otherwise>
-                                          AND DbWT3470ServiceMeisai."kyuShichosonCode" = #{旧市町村コード}
+                                          AND "DbWT3470ServiceMeisai"."kyuShichosonCode" = #{旧市町村コード}
                                     </otherwise>
                             </choose>
                     </otherwise>
@@ -351,6 +356,7 @@
     <select resultOrdered="true" id="get介護事業者情報"
             resultMap="resultMap_JigyoshoNameEntity" fetchSize="500">
         SELECT
+        "DbWT3470ServiceMeisaichukan"."renban" AS "T1_renban",
         "DbWT3470ServiceMeisaichukan".*,
         事業者.*
         FROM
@@ -373,6 +379,7 @@
     <select resultOrdered="true" id="get計画事業所名"
             resultMap="resultMap_JigyoshoNameEntity" fetchSize="500">
         SELECT
+        "DbWT3470ServiceMeisaichukan"."renban" AS "T1_renban",
         "DbWT3470ServiceMeisaichukan".*,
         事業者.*
         FROM
@@ -395,6 +402,7 @@
     <select resultOrdered="true" id="get証記載保険者名"
             resultMap="resultMap_ShoKisaiHokenshaNoNameEntity" fetchSize="500">
         SELECT
+        "DbWT3470ServiceMeisaichukan"."renban" AS "T1_renban",
         "DbWT3470ServiceMeisaichukan".*,
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster" />
         FROM
@@ -442,6 +450,7 @@
     <select resultOrdered="true" id="getサービス種類名称"
             resultMap="resultMap_ServiceShuruiCdNameEntity" fetchSize="500">
         SELECT
+        "T1"."renban" AS "T1_renban",
         "T9"."serviceMeisho",
         "T1".*
         FROM
@@ -477,6 +486,7 @@
     <select resultOrdered="true" id="getサービス項目名称"
             resultMap="resultMap_ServiceKomokuCodeNameEntity" fetchSize="500">
         SELECT
+        "T1"."renban" AS "T1_renban",
         "T9"."serviceMeisho",
         "T1".*
         FROM
@@ -677,27 +687,32 @@
     </resultMap>
     
     <resultMap id="resultMap_JigyoshoNameEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.JigyoshoNameEntity" autoMapping="true">
+        <id property="連番" column="T1_renban"/>
         <association property="サービス明細" resultMap="NewResultMap_DbWT3470ServiceMeisaichukanTempEntity"/>
         <association property="介護事業者"
                      resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_ShoKisaiHokenshaNoNameEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.ShoKisaiHokenshaNoNameEntity" autoMapping="true">
+        <id property="連番" column="T1_renban"/>
         <association property="サービス明細" resultMap="NewResultMap_DbWT3470ServiceMeisaichukanTempEntity"/>
         <association property="証記載保険者" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_ServiceShuruiCdTBLEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.ServiceShuruiCdTBLEntity" autoMapping="true">
+        <result property="サービス提供年月" column="MAX_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <association property="サービス明細" resultMap="NewResultMap_DbWT3470ServiceMeisaichukanTempEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_ServiceShuruiCdNameEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.ServiceShuruiCdNameEntity" autoMapping="true">
-        <association property="サービス名称" resultMap="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="連番" column="T1_renban"/>
+        <result property="サービス名称" column="serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="サービス明細一時TBL" resultMap="NewResultMap_DbWT3470ServiceShuruiCdTBLTempEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_ServiceKomokuCodeNameEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.ServiceShuruiCdNameEntity" autoMapping="true">
-        <association property="サービス名称" resultMap="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="連番" column="T1_renban"/>
+        <result property="サービス名称" column="serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="サービス明細一時TBL" resultMap="NewResultMap_DbWT3470ServiceShuruiCdTBLTempEntity"/>
     </resultMap>
     
@@ -727,6 +742,7 @@
         <result property="jushochiTokureiFlag" column="dbT1001HihokenshaDaicho_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koikinaiJushochiTokureiFlag" column="dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyuShichosonCode" column="dbT1001HihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="koikinaiTokureiSochimotoShichosonCode" column="dbT1001_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
     </resultMap>
     
         <resultMap id="NewResultMap_DbWT3470ServiceMeisaiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.DbWT3470ServiceMeisaiTempEntity" autoMapping="true">
@@ -989,7 +1005,7 @@
          "DbT1001HihokenshaDaicho"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
          "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
          "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
-         "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+         "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001_koikinaiTokureiSochimotoShichosonCode",
          "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode"
     </sql>
     
