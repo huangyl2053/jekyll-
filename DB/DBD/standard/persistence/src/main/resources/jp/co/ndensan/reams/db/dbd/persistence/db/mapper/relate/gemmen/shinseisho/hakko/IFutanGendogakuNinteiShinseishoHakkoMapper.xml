@@ -44,9 +44,15 @@
                INNER JOIN rgdb."DbT4031ShinseishoHakkoKohoshas" AS C 
                ON C."haakuShoriID" =A."haakuShoriId" 
                AND C."hihokenshaNo" =B."hihokenshaNo" 
-               INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+               LEFT OUTER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+               (SELECT 
+               ARRAY_AGG(CAST(rgdb."DbT4031ShinseishoHakkoKohoshas"."shikibetsuCode" AS TEXT))
+               FROM 
+               rgdb."DbT4031ShinseishoHakkoKohoshas"
+               )
+               ) AS "ShikibetsuTaisho"
                ON "ShikibetsuTaisho"."shikibetsuCode" =C."shikibetsuCode"
                INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS E
                ON E."hihokenshaNo" = C."hihokenshaNo"

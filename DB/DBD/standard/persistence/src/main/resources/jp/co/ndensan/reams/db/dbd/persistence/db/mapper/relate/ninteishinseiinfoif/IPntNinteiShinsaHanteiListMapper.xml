@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-1480-040 liuyl-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinfoif.IPntNinteiShinsaHanteiListMapper">
+    <resultMap id="ResultMap_PntNinteiShinsaHanteiListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.PntNinteiShinsaHanteiListEntity">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="被保険者氏名カナ"  column="被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="認定申請区分_申請時_コード"  column="認定申請区分_申請時_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回要介護状態区分コード" column="前回要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="前回認定有効期間_開始" column="前回認定有効期間_開始" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回認定有効期間_終了" column="前回認定有効期間_終了" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+        <select resultOrdered="true" id="select介護認定審査判定データ"  
+              resultMap="ResultMap_PntNinteiShinsaHanteiListEntity" 
+              fetchSize="500">
+            SELECT 
+            A."hihokenshaNo" AS 被保険者番号,
+            A."hihokenshaName"  AS 被保険者氏名,
+            A."hihokenshaKana" AS 被保険者氏名カナ,
+            A."jusho" AS 住所,
+            A."seinengappiYMD" AS 生年月日,
+            A."seibetsu" AS 性別,
+            A."ninteiShinseiShinseijiKubunCode"  AS 認定申請区分_申請時_コード,
+            A."hihokenshaKubunCode"  AS 被保険者区分コード,
+            A."ninteiShinseiYMD"  AS 認定申請年月日,
+            A."zenYokaigoKubunCode" AS 前回要介護状態区分コード,
+            A."zenkaiYukoKikanStart"  AS 前回認定有効期間_開始,
+            A."zenkaiYukoKikanEnd"  AS 前回認定有効期間_終了
+            FROM 
+            "NinteiShinseiJohoTemp" AS A,
+            "KouikiyoukaigoNinteishinseiJouhouTemp"  AS B
+            WHERE
+            A."shoKisaiHokenshaNo" =B."hokenshaNo"
+            AND A."hihokenshaNo" =B."hihokenshaNo"
+            ORDER BY
+            A."hihokenshaNo"
+        </select>
+</mapper>
+            

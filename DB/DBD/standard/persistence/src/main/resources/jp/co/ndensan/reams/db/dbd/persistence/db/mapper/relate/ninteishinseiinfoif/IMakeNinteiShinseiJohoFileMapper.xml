@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-1480-040 liuyl-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinfoif.IMakeNinteiShinseiJohoFileMapper">
+    <select id="select要介護認定申請連携データ" resultOrdered="true"  
+              resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.temp.KouikiyoukaigoNinteishinseiJouhouTempEntity" 
+              fetchSize="500">
+        SELECT 
+        "KouikiyoukaigoNinteishinseiJouhouTemp".*
+        FROM 
+        "KouikiyoukaigoNinteishinseiJouhouTemp"
+        ORDER BY
+        "KouikiyoukaigoNinteishinseiJouhouTemp"."shikensharuNo"
+    </select>
+</mapper>
