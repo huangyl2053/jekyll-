@@ -230,7 +230,7 @@ public class IryouhiKoujyoHandler {
         IryohiKojoManager manager = new IryohiKojoManager();
         for (IryohiKojyoItiranDataGrid_Row row : div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getDataSource()) {
             if (追加.equals(row.getJyoutai())) {
-                FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().toDateString());
+                FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
                 IryohiKojo 医療費控除 = new IryohiKojo(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
                 IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
                 builder.set登録年月日(new FlexibleDate(row.getHiddentorokuDD().getValue().toDateString()));
@@ -240,7 +240,7 @@ public class IryouhiKoujyoHandler {
                 set医療費控除画面項目(builder, row);
                 manager.save医療費控除(builder.build().added());
             } else if (修正.equals(row.getJyoutai())) {
-                FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().toDateString());
+                FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
                 IryohiKojo 医療費控除 = manager.get医療費控除(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
                 IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
                 builder.set登録年月日(new FlexibleDate(row.getHiddentorokuDD().getValue().toDateString()));
@@ -248,7 +248,7 @@ public class IryouhiKoujyoHandler {
                 set医療費控除画面項目(builder, row);
                 manager.save医療費控除(builder.build().modifiedModel());
             } else if (削除.equals(row.getJyoutai())) {
-                FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().toDateString());
+                FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
                 IryohiKojo 医療費控除 = manager.get医療費控除(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
                 IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
                 manager.save医療費控除(builder.build().deleted());
