@@ -118,8 +118,13 @@ public class IchiranServicecodeRiyojokyoProcess
     private ReportSourceWriter<ServiceCodeBetsuRiyoJokyoSource> reportSourceWriter;
     private int count;
 
+    private ServicecodeRiyojokyoReport reportEntity;
+
+    private boolean 改頁Flag;
+
     @Override
     protected void initialize() {
+        改頁Flag = false;
         count = INT_0;
         parameter.set出力順(帳票出力順);
         nissuKaisuSyukeichi_01 = Decimal.ZERO;
@@ -162,30 +167,30 @@ public class IchiranServicecodeRiyojokyoProcess
 
     @Override
     protected void usualProcess(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
-        count = count + INT_1;
-        beforeEntity = getBefore();
-        if (beforeEntity != null) {
-            beforeサービス種類スコード = beforeEntity.getServiceRyakushou();
-            beforeソート用サービス項目コード = beforeEntity.getSortYouKomokuCode();
-            ServicecodeRiyojokyoReport reportEntity = new ServicecodeRiyojokyoReport();
-            if (is変換(beforeサービス種類スコード, currentサービス種類スコード)) {
-                非集計(reportEntity, beforeEntity, false);
-                集計(reportEntity, beforeEntity);
-            } else {
-                非集計(reportEntity, beforeEntity, false);
-            }
-        }
         currentサービス種類スコード = entity.getServiceShuruiCode();
         currentソート用サービス項目コード = entity.getSortYouKomokuCode();
         currentEntity = entity;
+        count = count + INT_1;
+        beforeEntity = getBefore();
+        if (beforeEntity != null) {
+            beforeサービス種類スコード = beforeEntity.getServiceShuruiCode();
+            beforeソート用サービス項目コード = beforeEntity.getSortYouKomokuCode();
+            if (is変換(beforeサービス種類スコード, currentサービス種類スコード)) {
+                改頁Flag = true;
+                非集計(beforeEntity, false);
+                集計(beforeEntity);
+            } else {
+                非集計(beforeEntity, false);
+            }
+        }
+
     }
 
     @Override
     protected void afterExecute() {
         if (count != INT_0) {
-            ServicecodeRiyojokyoReport reportEntity = new ServicecodeRiyojokyoReport();
-            非集計(reportEntity, currentEntity, true);
-            集計(reportEntity, currentEntity);
+            非集計(currentEntity, true);
+            集計(currentEntity);
         }
 
     }
@@ -194,60 +199,64 @@ public class IchiranServicecodeRiyojokyoProcess
     protected void keyBreakProcess(DbWT3470chohyouShutsuryokuyouTempEntity t) {
     }
 
-    private void set明細(ServicecodeRiyojokyoReport reportEntity,
-            DbWT3470chohyouShutsuryokuyouTempEntity entity) {
-        ServicecodeRiyojokyoReportEntity meisaiEntity = new ServicecodeRiyojokyoReportEntity();
+    private void set明細(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
+        ServicecodeRiyojokyoReportEntity meisaiEntity;
+        if (reportEntity.get明細リスト() != null) {
+            meisaiEntity = reportEntity.get明細リスト();
+        } else {
+            meisaiEntity = new ServicecodeRiyojokyoReportEntity();
+        }
         meisaiEntity.set種類コード(entity.getServiceShuruiCode());
         meisaiEntity.set項目コード(entity.getSortYouKomokuCode());
-        meisaiEntity.setサービス略称_上(entity.getYoKaigoJotaiKubunCode().substringEmptyOnError(INT_0, INT_15));
-        meisaiEntity.setサービス略称_下(entity.getYoKaigoJotaiKubunCode().substringEmptyOnError(INT_16, INT_30));
-        if (!is変換(beforeサービス種類スコード, currentサービス種類スコード)) {
-            if (要介護状態区分コード_01.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set非該当日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set非該当単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_01 = nissuKaisuSyukeichi_01.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_01 = taniSuSyukeichi_01.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_12.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set要支援１日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set要支援１単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_12 = nissuKaisuSyukeichi_12.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_12 = taniSuSyukeichi_12.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_13.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set要支援２日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set要支援２単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_13 = nissuKaisuSyukeichi_13.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_13 = taniSuSyukeichi_13.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_11.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set経過的要介護日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set経過的要介護単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_11 = nissuKaisuSyukeichi_11.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_11 = taniSuSyukeichi_11.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_21.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set要介護１日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set要介護１単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_21 = nissuKaisuSyukeichi_21.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_21 = taniSuSyukeichi_21.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_22.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set要介護２日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set要介護２単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_22 = nissuKaisuSyukeichi_22.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_22 = taniSuSyukeichi_22.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_23.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set要介護３日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set要介護３単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_23 = nissuKaisuSyukeichi_23.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_23 = taniSuSyukeichi_23.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_24.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set要介護４日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set要介護４単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_24 = nissuKaisuSyukeichi_24.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_24 = taniSuSyukeichi_24.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            } else if (要介護状態区分コード_25.equals(entity.getYoKaigoJotaiKubunCode())) {
-                meisaiEntity.set要介護５日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                meisaiEntity.set要介護５単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
-                nissuKaisuSyukeichi_25 = nissuKaisuSyukeichi_25.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
-                taniSuSyukeichi_25 = taniSuSyukeichi_25.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
-            }
+        if (entity.getServiceRyakushou() != null && !entity.getServiceRyakushou().isEmpty()) {
+            meisaiEntity.setサービス略称_上(entity.getServiceRyakushou().substringEmptyOnError(INT_0, INT_15));
+            meisaiEntity.setサービス略称_下(entity.getServiceRyakushou().substringEmptyOnError(INT_16, INT_30));
+        }
+        if (要介護状態区分コード_01.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set非該当日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set非該当単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_01 = nissuKaisuSyukeichi_01.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_01 = taniSuSyukeichi_01.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_12.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set要支援１日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set要支援１単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_12 = nissuKaisuSyukeichi_12.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_12 = taniSuSyukeichi_12.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_13.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set要支援２日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set要支援２単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_13 = nissuKaisuSyukeichi_13.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_13 = taniSuSyukeichi_13.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_11.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set経過的要介護日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set経過的要介護単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_11 = nissuKaisuSyukeichi_11.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_11 = taniSuSyukeichi_11.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_21.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set要介護１日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set要介護１単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_21 = nissuKaisuSyukeichi_21.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_21 = taniSuSyukeichi_21.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_22.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set要介護２日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set要介護２単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_22 = nissuKaisuSyukeichi_22.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_22 = taniSuSyukeichi_22.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_23.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set要介護３日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set要介護３単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_23 = nissuKaisuSyukeichi_23.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_23 = taniSuSyukeichi_23.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_24.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set要介護４日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set要介護４単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_24 = nissuKaisuSyukeichi_24.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_24 = taniSuSyukeichi_24.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
+        } else if (要介護状態区分コード_25.equals(entity.getYoKaigoJotaiKubunCode())) {
+            meisaiEntity.set要介護５日数_回数集計値(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            meisaiEntity.set要介護５単位数集計値(getDecimalVaule(entity.getTaniSuSyukeichi()));
+            nissuKaisuSyukeichi_25 = nissuKaisuSyukeichi_25.add(getDecimalVaule(entity.getNissuKaisuSyukeichi()));
+            taniSuSyukeichi_25 = taniSuSyukeichi_25.add(getDecimalVaule(entity.getTaniSuSyukeichi()));
         }
         reportEntity.set明細リスト(meisaiEntity);
     }
@@ -295,8 +304,7 @@ public class IchiranServicecodeRiyojokyoProcess
         return !current.equals(before);
     }
 
-    private void 集計(ServicecodeRiyojokyoReport reportEntity,
-            DbWT3470chohyouShutsuryokuyouTempEntity entity) {
+    private void 集計(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
         ServicecodeRiyojokyoReportEntity meisaiEntity = new ServicecodeRiyojokyoReportEntity();
         meisaiEntity.setサービス略称_上(合計);
         meisaiEntity.set非該当日数_回数集計値(setDecimalVaule(nissuKaisuSyukeichi_01));
@@ -354,13 +362,36 @@ public class IchiranServicecodeRiyojokyoProcess
         }
         ServiceCodeBetsuRiyoJokyoReport report = new ServiceCodeBetsuRiyoJokyoReport(reportEntity, RDateTime.now());
         report.writeBy(reportSourceWriter);
+        reportEntity = new ServicecodeRiyojokyoReport();
+        改頁Flag = false;
+        nissuKaisuSyukeichi_01 = Decimal.ZERO;
+        nissuKaisuSyukeichi_12 = Decimal.ZERO;
+        nissuKaisuSyukeichi_13 = Decimal.ZERO;
+        nissuKaisuSyukeichi_11 = Decimal.ZERO;
+        nissuKaisuSyukeichi_21 = Decimal.ZERO;
+        nissuKaisuSyukeichi_22 = Decimal.ZERO;
+        nissuKaisuSyukeichi_23 = Decimal.ZERO;
+        nissuKaisuSyukeichi_24 = Decimal.ZERO;
+        nissuKaisuSyukeichi_25 = Decimal.ZERO;
+        taniSuSyukeichi_01 = Decimal.ZERO;
+        taniSuSyukeichi_12 = Decimal.ZERO;
+        taniSuSyukeichi_13 = Decimal.ZERO;
+        taniSuSyukeichi_11 = Decimal.ZERO;
+        taniSuSyukeichi_21 = Decimal.ZERO;
+        taniSuSyukeichi_22 = Decimal.ZERO;
+        taniSuSyukeichi_23 = Decimal.ZERO;
+        taniSuSyukeichi_24 = Decimal.ZERO;
+        taniSuSyukeichi_25 = Decimal.ZERO;
     }
 
-    private void 非集計(ServicecodeRiyojokyoReport reportEntity,
-            DbWT3470chohyouShutsuryokuyouTempEntity entity, boolean 最終flag) {
+    private void 非集計(DbWT3470chohyouShutsuryokuyouTempEntity entity, boolean 最終flag) {
+        if (null == reportEntity) {
+            reportEntity = new ServicecodeRiyojokyoReport();
+        }
         if (!最終flag && (beforeソート用サービス項目コード == null
-                || currentソート用サービス項目コード.equals(beforeソート用サービス項目コード))) {
-            set明細(reportEntity, entity);
+                || currentソート用サービス項目コード.equals(beforeソート用サービス項目コード))
+                && !改頁Flag) {
+            set明細(entity);
         } else {
             if (対象年月指定_サービス対象年月.equals(parameter.get対象年月指定())) {
                 reportEntity.set条件１(get条件１(提供月));
@@ -394,23 +425,28 @@ public class IchiranServicecodeRiyojokyoProcess
             } else {
                 reportEntity.setタイトル(タイトル_59以外);
             }
-            set明細(reportEntity, entity);
+            set明細(entity);
             Decimal 集計回数合計値 = Decimal.ZERO;
             Decimal 集計単位数合計値 = Decimal.ZERO;
             get合計値(集計回数合計値, 集計単位数合計値, reportEntity.get明細リスト());
             ServiceCodeBetsuRiyoJokyoReport report = new ServiceCodeBetsuRiyoJokyoReport(reportEntity, RDateTime.now());
             report.writeBy(reportSourceWriter);
+            reportEntity = new ServicecodeRiyojokyoReport();
         }
     }
 
     private void get合計値(Decimal 回数合計値, Decimal 単位数合計値, ServicecodeRiyojokyoReportEntity meisaiEntity) {
         回数合計値 = Decimal.ZERO.add(getDecimalVaule(meisaiEntity.get非該当日数_回数集計値()))
+                .add(getDecimalVaule(meisaiEntity.get要支援１日数_回数集計値()))
+                .add(getDecimalVaule(meisaiEntity.get要支援２日数_回数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護１日数_回数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護２日数_回数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護３日数_回数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護４日数_回数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護５日数_回数集計値()));
         単位数合計値 = Decimal.ZERO.add(getDecimalVaule(meisaiEntity.get非該当単位数集計値()))
+                .add(getDecimalVaule(meisaiEntity.get要支援１単位数集計値()))
+                .add(getDecimalVaule(meisaiEntity.get要支援２単位数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護１単位数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護２単位数集計値()))
                 .add(getDecimalVaule(meisaiEntity.get要介護３単位数集計値()))

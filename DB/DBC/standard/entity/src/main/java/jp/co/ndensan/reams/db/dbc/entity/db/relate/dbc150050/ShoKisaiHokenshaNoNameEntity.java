@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShoKisaiHokenshaNoNameEntity {
 
+    private int 連番;
     private DbWT3470ServiceMeisaichukanTempEntity サービス明細;
     private DbT7051KoseiShichosonMasterEntity 証記載保険者;
 
