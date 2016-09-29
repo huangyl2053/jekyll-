@@ -27,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2010-040 jianglaisheng
  */
-public class InsSetaiinHaakuNyuryokuKogakuTmpProcess1 extends BatchProcessBase<InsSetaiinHaakuNyuryokuKogakuTmpEntity1> {
+public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1 extends BatchProcessBase<InsSetaiinHaakuNyuryokuKogakuTmpEntity1> {
 
-    private static final RString 給付実績基本情報高額一時 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db."
+    private static final RString 給付実績基本情報事業高額一時 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db."
             + "mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
-            + "get給付実績基本情報高額一時3");
+            + "get給付実績基本情報事業高額一時3");
     private static final RString TABLE_世帯員把握入力一時 = new RString("TempSetaiinHaakuNyuryoku");
     private static final RString RS_01 = new RString("01");
     private static final int YEAR_2006 = 2006;
@@ -69,14 +69,14 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess1 extends BatchProcessBase<I
     protected void initialize() {
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
         InsSetaiinHaakuNyuryokuKogakuFlowEntity1 flowEntity = new InsSetaiinHaakuNyuryokuKogakuFlowEntity1();
-        flowEntity = mapper.getサービス提供年月_高額一時();
+        flowEntity = mapper.getサービス提供年月_事業高額一時();
         returnEntity = new OutputParameter<>();
         returnEntity.setValue(flowEntity);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(給付実績基本情報高額一時);
+        return new BatchDbReader(給付実績基本情報事業高額一時);
     }
 
     @Override
