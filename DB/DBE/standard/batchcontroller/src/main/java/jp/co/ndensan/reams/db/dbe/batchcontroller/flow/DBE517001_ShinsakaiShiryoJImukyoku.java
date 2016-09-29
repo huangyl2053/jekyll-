@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiSonotaJohoDataSakuseiA4Process;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokki
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA4Process;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517001.DBE517001_ShinsakaiShiryoJImukyokuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0150-190 linghuhang
  */
-public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParameter> {
+public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_ShinsakaiShiryoJImukyokuParameter> {
 
     private static final String 事務局_審査対象者一覧 = "jimuShinsakaiIinJoho";
     private static final String 事務局_追加資料鑑 = "jimuTuikaSiryo";

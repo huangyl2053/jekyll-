@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shiryoshinsakai;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiKaisaiYoteiJohoUpdateProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0150-220 linghuhang
  */
-public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParameter> {
+public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_ShinsakaiShiryoParameter> {
 
     private static final String 事務局_審査会資料一括作成 = "jimuShiryoShinsakaiFlow";
     private static final RString 事務局_審査会資料一括作成ID = new RString("DBE517001_ShinsakaiShiryoJImukyoku");

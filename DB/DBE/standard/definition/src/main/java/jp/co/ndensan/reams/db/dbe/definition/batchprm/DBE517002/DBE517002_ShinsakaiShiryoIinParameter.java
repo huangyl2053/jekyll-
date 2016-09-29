@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
+public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
 
     private static final String SHINSAKAIKAISAINO = "shinsakaiKaisaiNo";
     private static final String SHINSAKAIKAISAIYOTEIYMD = "shinsakaiKaisaiYoteiYMD";
@@ -38,15 +38,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     private static final String SAKUSEIJOKEN = "sakuseiJoken";
     private static final String BANGOSTART = "bangoStart";
     private static final String BANGOEND = "bangoEnd";
-    private static final String CHOYOJIMU_TAISHOUSHAFALG = "choyoJimu_taishoushaFalg";
-    private static final String CHOYOJIMU_TOKKIJIKOUFALG = "choyoJimu_tokkiJikouFalg";
-    private static final String CHOYOJIMU_ITIZIHANTEIFALG = "choyoJimu_itiziHanteiFalg";
-    private static final String CHOYOJIMU_TOKKIJIKOUHANTEIFALG = "choyoJimu_tokkiJikouHanteiFalg";
-    private static final String CHOYOJIMU_IKENSHOFALG = "choyoJimu_ikenshoFalg";
-    private static final String CHOYOJIMU_GAIKYOUTOKKIFALG = "choyoJimu_gaikyouTokkiFalg";
-    private static final String CHOYOJIMU_HANTEIFALG = "choyoJimu_hanteiFalg";
-    private static final String CHOYOJIMU_GAIKYOUTOKKIIRANFALG = "choyoJimu_gaikyouTokkiIranFalg";
-    private static final String CHOYOJIMU_SONOTASIRYOFALG = "choyoJimu_sonotaSiryoFalg";
     private static final String CHOHYOIIN_TUUTISHOFALG = "chohyoIin_tuutishoFalg";
     private static final String CHOHYOIIN_TOKKIJIKOUFALG = "chohyoIin_tokkiJikouFalg";
     private static final String CHOHYOIIN_ITIZIHANTEIFALG = "chohyoIin_itiziHanteiFalg";
@@ -78,24 +69,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     private int bangoStart;
     @BatchParameter(key = BANGOEND, name = "終了資料番号")
     private int bangoEnd;
-    @BatchParameter(key = CHOYOJIMU_TAISHOUSHAFALG, name = "事務局審査会対象者一覧フラグ")
-    private RString choyoJimu_taishoushaFalg;
-    @BatchParameter(key = CHOYOJIMU_TOKKIJIKOUFALG, name = "事務局特記事項フラグ")
-    private RString choyoJimu_tokkiJikouFalg;
-    @BatchParameter(key = CHOYOJIMU_ITIZIHANTEIFALG, name = "事務局一次判定結果票フラグ")
-    private RString choyoJimu_itiziHanteiFalg;
-    @BatchParameter(key = CHOYOJIMU_TOKKIJIKOUHANTEIFALG, name = "事務局特記事項_一次判定フラグ")
-    private RString choyoJimu_tokkiJikouHanteiFalg;
-    @BatchParameter(key = CHOYOJIMU_IKENSHOFALG, name = "事務局主治医意見書フラグ")
-    private RString choyoJimu_ikenshoFalg;
-    @BatchParameter(key = CHOYOJIMU_SONOTASIRYOFALG, name = "事務局その他資料フラグ")
-    private RString choyoJimu_sonotaSiryoFalg;
-    @BatchParameter(key = CHOYOJIMU_GAIKYOUTOKKIFALG, name = "事務局概況特記フラグ")
-    private RString choyoJimu_gaikyouTokkiFalg;
-    @BatchParameter(key = CHOYOJIMU_HANTEIFALG, name = "事務局予備判定記入表フラグ")
-    private RString choyoJimu_hanteiFalg;
-    @BatchParameter(key = CHOYOJIMU_GAIKYOUTOKKIIRANFALG, name = "事務局概況特記一覧フラグ")
-    private RString choyoJimu_gaikyouTokkiIranFalg;
     @BatchParameter(key = CHOHYOIIN_TAISHOUSHAFALG, name = "委員用審査会対象者一覧フラグ")
     private RString chohyoIin_taishoushaFalg;
     @BatchParameter(key = CHOHYOIIN_TOKKIJIKOUFALG, name = "委員用特記事項フラグ")
@@ -116,7 +89,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public ShiryoShinsakaiBatchParameter() {
+    public DBE517002_ShinsakaiShiryoIinParameter() {
     }
 
     /**
@@ -133,15 +106,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @param sakuseiJoken 作成条件
      * @param bangoStart 開始資料番号
      * @param bangoEnd 終了資料番号
-     * @param choyoJimu_taishoushaFalg 事務局審査会対象者一覧フラグ
-     * @param choyoJimu_tokkiJikouFalg 事務_特記事項フラグ
-     * @param choyoJimu_itiziHanteiFalg 事務_一次判定結果票フラグ
-     * @param choyoJimu_tokkiJikouHanteiFalg 事務_特記事項_一次判定フラグ
-     * @param choyoJimu_ikenshoFalg 事務_主治医意見書フラグ
-     * @param choyoJimu_sonotaSiryoFalg 事務局その他資料フラグ
-     * @param choyoJimu_gaikyouTokkiFalg 事務_概況特記フラグ
-     * @param choyoJimu_hanteiFalg 事務_予備判定記入表フラグ
-     * @param choyoJimu_gaikyouTokkiIranFalg 事務_概況特記一覧フラグ
      * @param chohyoIin_taishoushaFalg 委員用審査会対象者一覧フラグ
      * @param chohyoIin_tuutishoFalg 委員_審査会開催通知書フラグ
      * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
@@ -151,7 +115,7 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
      */
-    public ShiryoShinsakaiBatchParameter(
+    public DBE517002_ShinsakaiShiryoIinParameter(
             RString shinsakaiKaisaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
@@ -163,15 +127,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
             RString sakuseiJoken,
             int bangoStart,
             int bangoEnd,
-            RString choyoJimu_taishoushaFalg,
-            RString choyoJimu_tokkiJikouFalg,
-            RString choyoJimu_itiziHanteiFalg,
-            RString choyoJimu_tokkiJikouHanteiFalg,
-            RString choyoJimu_ikenshoFalg,
-            RString choyoJimu_sonotaSiryoFalg,
-            RString choyoJimu_gaikyouTokkiFalg,
-            RString choyoJimu_hanteiFalg,
-            RString choyoJimu_gaikyouTokkiIranFalg,
             RString chohyoIin_taishoushaFalg,
             RString chohyoIin_tokkiJikouFalg,
             RString chohyoIin_itiziHanteiFalg,
@@ -191,15 +146,6 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
         this.sakuseiJoken = sakuseiJoken;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
-        this.choyoJimu_taishoushaFalg = choyoJimu_taishoushaFalg;
-        this.choyoJimu_tokkiJikouFalg = choyoJimu_tokkiJikouFalg;
-        this.choyoJimu_itiziHanteiFalg = choyoJimu_itiziHanteiFalg;
-        this.choyoJimu_tokkiJikouHanteiFalg = choyoJimu_tokkiJikouHanteiFalg;
-        this.choyoJimu_ikenshoFalg = choyoJimu_ikenshoFalg;
-        this.choyoJimu_sonotaSiryoFalg = choyoJimu_sonotaSiryoFalg;
-        this.choyoJimu_gaikyouTokkiFalg = choyoJimu_gaikyouTokkiFalg;
-        this.choyoJimu_hanteiFalg = choyoJimu_hanteiFalg;
-        this.choyoJimu_gaikyouTokkiIranFalg = choyoJimu_gaikyouTokkiIranFalg;
         this.chohyoIin_taishoushaFalg = chohyoIin_taishoushaFalg;
         this.chohyoIin_tokkiJikouFalg = chohyoIin_tokkiJikouFalg;
         this.chohyoIin_itiziHanteiFalg = chohyoIin_itiziHanteiFalg;
@@ -278,4 +224,5 @@ public class ShiryoShinsakaiBatchParameter extends BatchParameterBase {
     public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
         return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, bangoStart, bangoEnd, gogitaiNo);
     }
+
 }

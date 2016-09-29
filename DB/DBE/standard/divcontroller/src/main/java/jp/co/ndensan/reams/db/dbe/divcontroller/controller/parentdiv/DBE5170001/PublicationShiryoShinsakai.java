@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5170001;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KaisaiYoteiJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiValidationHandler;
@@ -113,7 +113,7 @@ public class PublicationShiryoShinsakai {
      * @param div PublicationShiryoShinsakaiDiv
      * @return ResponseData<ShiryoShinsakaiBatchParameter>
      */
-    public ResponseData<ShiryoShinsakaiBatchParameter> onClick_btnExecute(PublicationShiryoShinsakaiDiv div) {
+    public ResponseData<DBE517000_ShinsakaiShiryoParameter> onClick_btnExecute(PublicationShiryoShinsakaiDiv div) {
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))
