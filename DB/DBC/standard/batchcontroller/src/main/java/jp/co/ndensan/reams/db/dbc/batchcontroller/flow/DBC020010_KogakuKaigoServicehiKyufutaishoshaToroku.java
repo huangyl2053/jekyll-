@@ -5,8 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.DelSaishoriJigyoKogakuTmpProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.DelSaishoriKogakuTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsHihokenshaDaichoTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsHihokenshaDaichoTmpProcess2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsJigyoKogakuKaigoServiceHiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKijunShunyugakuTekiyoKanriTmpProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKogakuKaigoServiceHiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyokaisoGaitoshaTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess2;
@@ -19,42 +24,37 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJisseki
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess8;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess3;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess4;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess3;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess4;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiShafukuKeigenTmpProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiShukeiTmpProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuKogakuTmpProcess2;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess1;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess1;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinShotokuHanteiMeisaiTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsShiharaiHohoHenkoKanriTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.PrtErrorListJigyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.PrtErrorListKogakuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.PrtTaishoshaIchiranJigyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.PrtTaishoshaIchiranKogakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdJigyoKKogakuKokuhorenIFMstProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKogakuKokuhorenIFMstProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanKogakuTmpProcess5;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdSetaiinHaakuNyuryokuKogakuTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.DelSaishoriJigyoKogakuTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.DelSaishoriKogakuTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsJigyoKogakuKaigoServiceHiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKijunShunyugakuTekiyoKanriTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKogakuKaigoServiceHiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess3;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess4;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess3;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess4;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiShafukuKeigenTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiShukeiTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuKogakuTmpProcess1;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess2;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess3;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.UpdJigyoKKogakuKokuhorenIFMstProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.UpdKogakuKokuhorenIFMstProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020010.KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter;
@@ -189,7 +189,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             executeStep(支払方法変更管理のバックアップ);
             executeStep(境界層該当者のバックアップ);
             if (ShoriJotaiKubun.再処理前.getコード().equals(getParameter().getShoriStateKubun())) {
-                executeStep(前回処理対象高額データの削除); // QA
+                executeStep(前回処理対象高額データの削除);
             }
             executeStep(給付実績基本情報高額一時３の作成);
             executeStep(高額用世帯員把握入力一時の作成１);
@@ -209,14 +209,14 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             executeStep(給付実績集計のバックアップ);
             executeStep(給付実績社会福祉法人軽減額のバックアップ);
             executeStep(基準収入額適用管理のバックアップ);
-            executeStep(給付実績中間高額一時の作成7); // TODO
+            executeStep(給付実績中間高額一時の作成7);
             executeStep(世帯員把握入力一時の更新);
             executeStep(世帯員把握フロー);
             executeStep(世帯員所得判定明細一時の作成);
             executeStep(世帯員所得判定明細高額一時の作成２);
             executeStep(世帯員所得判定明細高額一時の作成３);
-            executeStep(給付実績中間高額一時の作成8);// TODO
-            executeStep(高額介護サービス費一時の作成);// TODO
+            executeStep(給付実績中間高額一時の作成8);
+            executeStep(高額介護サービス費一時の作成);
             executeStep(高額対象者一覧表発行処理);
             executeStep(高額エラーリストの発行);
             executeStep(高額国保連ＩＦマスタ更新);
@@ -256,7 +256,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             executeStep(給付実績集計のバックアップ);
             executeStep(給付実績社会福祉法人軽減額のバックアップ);
             executeStep(基準収入額適用管理のバックアップ);
-            executeStep(給付実績中間事業高額一時の作成7); //TODO
+            executeStep(給付実績中間事業高額一時の作成7);
             executeStep(世帯員把握入力一時の更新);
             executeStep(世帯員把握フロー);
             executeStep(世帯員所得判定明細一時の作成);
@@ -264,7 +264,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             executeStep(世帯員所得判定明細事業高額一時の作成３);
             executeStep(給付実績中間事業高額一時の作成8);
             executeStep(給付実績中間事業高額一時の作成8);
-            executeStep(事業高額介護サービス費一時の作成);// TODO
+            executeStep(事業高額介護サービス費一時の作成);
             executeStep(事業高額対象者一覧表発行処理);
             executeStep(事業高額エラーリストの発行);
             executeStep(事業高額国保連ＩＦマスタ更新);
