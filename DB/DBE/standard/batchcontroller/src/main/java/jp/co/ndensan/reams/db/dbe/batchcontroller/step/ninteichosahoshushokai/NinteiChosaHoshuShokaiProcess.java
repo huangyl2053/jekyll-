@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshushokai.NinteiChosaHoshuShokaiChange;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahoshuichiran.ChosahoshuichiranReport;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshuShokaiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.IChosaHoshuShokaiCsvEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.NinteiChosaHoshuShokaiRelateEntity;
