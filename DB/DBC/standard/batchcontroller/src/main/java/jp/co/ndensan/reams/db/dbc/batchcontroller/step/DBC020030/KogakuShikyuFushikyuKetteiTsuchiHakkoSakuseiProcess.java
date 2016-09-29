@@ -177,7 +177,7 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKe
             returnEntity.set被保険者氏名(RString.EMPTY);
         }
         returnEntity.set住所(住所);
-        // 郵便番号的来源不明
+        // TODO QA郵便番号？
         returnEntity.set郵便番号(RString.EMPTY);
         if (null != entity.getサービス提供年月()) {
             returnEntity.set提供年月(entity.getサービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).

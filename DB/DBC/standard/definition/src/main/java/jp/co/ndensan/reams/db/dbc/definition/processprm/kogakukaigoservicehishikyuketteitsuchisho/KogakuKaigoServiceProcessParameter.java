@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishi
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -118,7 +119,9 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
      * @return KogakukaigoKetteiTsuchishoInfoTempParameter パラメータ
      */
     public KogakukaigoKetteiTsuchishoInfoTempParameter toパラメータ() {
-        return new KogakukaigoKetteiTsuchishoInfoTempParameter(抽出モード, 抽出条件日付From, 抽出条件日付To,
+        FlexibleDate 日付From = 抽出条件日付From == null ? FlexibleDate.EMPTY : new FlexibleDate(抽出条件日付From.toDateString());
+        FlexibleDate 日付To = 抽出条件日付To == null ? FlexibleDate.EMPTY : new FlexibleDate(抽出条件日付To.toDateString());
+        return new KogakukaigoKetteiTsuchishoInfoTempParameter(抽出モード, 日付From, 日付To,
                 決定者受付年月, 印書, 高額自動償還, 発行日, 文書番号,
                 テスト出力フラグ, 決定日一括更新区分, 決定日, 利用者向け決定通知書フラグ, 受領委任者向け決定通知書フラグ, 振込予定日,
                 支払場所, 支払期間From, 支払期間To, 開始時間, 終了時間, 出力順ID);

@@ -189,24 +189,27 @@
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.allColumns_DbT3111JigyoKogakuShikyuHanteiKekka" />
         FROM
             rgdb."DbT3111JigyoKogakuShikyuHanteiKekka"
+      <if test="抽出モード == 1">
         INNER JOIN rgdb."DbT3110JigyoKogakuShikyuShinsei" AS 支給申請
-          ON 支給申請."hihokenshaNo" = "DbT3111JigyoKogakuShikyuHanteiKekka"."hihokenshaNo"
-            AND 支給申請."serviceTeikyoYM" = "DbT3111JigyoKogakuShikyuHanteiKekka"."serviceTeikyoYM"
-        WHERE 1 = 1
-            <if test="抽出モード == 1">              
-                AND 支給申請."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
-                AND 支給申請."uketsukeYMD" <![CDATA[<=]]> #{抽出条件日付To}
-            </if>
-            <if test="抽出モード == 2">              
-                AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
-                AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
-            </if>       
-            <if test="抽出モード == 3">              
-                AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteishaUketoriYM" = #{決定者受付年月}
-            </if> 
+        ON 支給申請."hihokenshaNo" = "DbT3111JigyoKogakuShikyuHanteiKekka"."hihokenshaNo"
+           AND 支給申請."serviceTeikyoYM" = "DbT3111JigyoKogakuShikyuHanteiKekka"."serviceTeikyoYM"
+        WHERE
+            支給申請."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
+            AND 支給申請."uketsukeYMD" <![CDATA[<=]]> #{抽出条件日付To}
+      </if>
+      <if test="抽出モード == 2">
+        WHERE
+            "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
+            AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
+      </if>       
+      <if test="抽出モード == 3">
+        WHERE
+            "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteishaUketoriYM" = #{決定者受付年月}
+      </if> 
     </select>
     
     <select  resultOrdered="true" id="select最大年度内連番"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.SelectShoriDateKanriMybatisParameter"
             resultType="int" fetchSize="500" >
         SELECT
             count(*)

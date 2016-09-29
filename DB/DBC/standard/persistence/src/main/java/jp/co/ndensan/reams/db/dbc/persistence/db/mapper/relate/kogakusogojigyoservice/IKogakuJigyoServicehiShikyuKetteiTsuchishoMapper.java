@@ -8,11 +8,10 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakusogojigyos
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.InsertKetteiTsuchishoInfoTempMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.SelectShoriDateKanriMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.DbWT0203ShoriKekkaKakuninListTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 高額総合事業サービス費支給（不支給）決定通知書作成する用マッパーインタフェースです。
@@ -40,15 +39,10 @@ public interface IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper {
     /**
      * 処理日付管理マスタのMAX年度内連番取得するメソッドです。
      *
-     * @param サブ業務コード サブ業務コード
-     * @param 市町村コード 市町村コード
-     * @param 処理名 処理名
-     * @param 処理枝番 処理枝番
-     * @param 年度 年度
+     * @param parameter SelectShoriDateKanriMybatisParameter
      * @return 年度内連番
      */
-    int select最大年度内連番(@Param("サブ業務コード") RString サブ業務コード, @Param("市町村コード") RString 市町村コード,
-            @Param("処理名") RString 処理名, @Param("処理枝番") RString 処理枝番, @Param("年度") RString 年度);
+    int select最大年度内連番(SelectShoriDateKanriMybatisParameter parameter);
 
     /**
      * 事業高額決定通知書出力データを取得します。

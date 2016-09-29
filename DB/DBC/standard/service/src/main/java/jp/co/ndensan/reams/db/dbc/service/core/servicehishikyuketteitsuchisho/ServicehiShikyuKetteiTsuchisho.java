@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -29,9 +29,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ServicehiShikyuKetteiTsuchisho {
 
-    private static final RString 市町村コード = new RString("000000");
+    private static final RString 抽出モード_受付日 = new RString("1");
+    private static final RString 抽出モード_決定日 = new RString("2");
+    private static final RString 抽出モード_決定者受付年月 = new RString("3");
+    private static final LasdecCode 市町村コード = new LasdecCode("000000");
     private static final RString 処理枝番 = new RString("0000");
-    private static final RString 年度_固定 = new RString("0000");
+    private static final FlexibleYear 年度_固定 = new FlexibleYear("0000");
+    private static final RString 年度内連番_01 = new RString("01");
+    private static final RString 固定_0 = new RString("0");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名2 = new RString("シーラタイプタイトル２");
     private static final RString 介護保険高額介護サービス費 = new RString("介護保険高額介護サービス費");
@@ -85,20 +90,11 @@ public class ServicehiShikyuKetteiTsuchisho {
         tmpEntity.setShinsaShikyuKubunCode(entity.get支給区分コード());
         tmpEntity.setKogakuShikyuGaku(entity.get高額支給額());
         tmpEntity.setKinyuKikanCode(entity.get金融機関コード());
-
-        //TODO 設定?
         tmpEntity.setKikan_name(entity.get金融機関名称());
-
         tmpEntity.setKinyuKikanShitenCode(entity.get支店コード());
-
-        //TODO 設定?
         tmpEntity.setKikanShiten_name(entity.get支店名称());
-
         tmpEntity.setYokinShubetsu(entity.get預金種別());
-
-        //TODO 設定?
         tmpEntity.setYokinShubetsuRyakusho(entity.get預金種別名称());
-
         tmpEntity.setKozaNo(entity.get口座番号());
         tmpEntity.setKozaMeigininKanji(entity.get口座名義人漢字());
         tmpEntity.setShuryoYMD(entity.get口座終了年月日());
@@ -456,19 +452,6 @@ public class ServicehiShikyuKetteiTsuchisho {
     }
 
     /**
-     * 年度内連番を取得します。
-     *
-     * @param 処理名 RString
-     * @return 年度内連番
-     */
-    public int get年度内連番(RString 処理名) {
-        IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper mapper
-                = mapperProvider.create(IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.class);
-        return mapper.select最大年度内連番(SubGyomuCode.DBC介護給付.getColumnValue(), 市町村コード,
-                処理名, 処理枝番, 年度_固定);
-    }
-
-    /**
      * 帳票用のタイトルListを取得する。
      *
      * @param 帳票分類ID ReportId
@@ -492,20 +475,4 @@ public class ServicehiShikyuKetteiTsuchisho {
         titleList.add(title2);
         return titleList;
     }
-
-    /**
-     * 帳票用のタイトルの設定値を取得する。
-     *
-     * @param 帳票分類ID ReportId
-     * @return 設定値 RString
-     */
-    public RString get設定値(ReportId 帳票分類ID) {
-        DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名2);
-        if (entity == null) {
-            return RString.EMPTY;
-        }
-        return entity.getKomokuValue();
-    }
-
 }

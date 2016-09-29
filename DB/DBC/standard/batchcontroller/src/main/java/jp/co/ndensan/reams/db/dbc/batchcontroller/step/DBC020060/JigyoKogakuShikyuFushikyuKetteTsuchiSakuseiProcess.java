@@ -182,13 +182,13 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
             returnEntity.set被保険者氏名(RString.EMPTY);
         }
         returnEntity.set住所(住所);
-        // 郵便番号的来源不明
+        // TODO QA1560郵便番号?
         returnEntity.set郵便番号(RString.EMPTY);
         if (null != entity.getサービス提供年月()) {
             returnEntity.set提供年月(entity.getサービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         }
-        // 区分支給限度額要介護状態区分はですか
+        // TODO QA1560 区分支給限度額要介護状態区分はですか
         if (null != entity.get要介護認定状態区分コード() && !entity.get要介護認定状態区分コード().isEmpty()) {
             KubunShikyuGendogakuYokaigoJotaiKubun 要介護度 = KubunShikyuGendogakuYokaigoJotaiKubun.
                     toValue(entity.get要介護認定状態区分コード().getColumnValue());
@@ -212,7 +212,7 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
         } else {
             returnEntity.set自動償還(自動償還フラグ_FALSE);
         }
-        // ?TODO QA
+        // TODO QA1560
         returnEntity.set支給総件数(RString.EMPTY);
         return returnEntity;
     }
