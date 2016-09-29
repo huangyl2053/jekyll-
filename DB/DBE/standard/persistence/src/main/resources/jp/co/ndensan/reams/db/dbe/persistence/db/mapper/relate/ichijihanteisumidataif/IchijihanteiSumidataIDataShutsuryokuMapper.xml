@@ -31,7 +31,7 @@
     <result property="主治医コード" column="主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="主治医意見書作成依頼年月日" column="主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="主治医意見書受領年月日" column="主治医意見書受領年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="短期記憶" column="短期記憶" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="意見書短期記憶" column="意見書短期記憶" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="日常の意思決定を行うための認知能力" column="日常の意思決定を行うための認知能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="自分の意思の伝達能力" column="自分の意思の伝達能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="食事行為" column="食事行為" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -176,7 +176,7 @@
     <result property="意思の伝達" column="意思の伝達" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="毎日の日課を理解" column="毎日の日課を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="生年月日をいう" column="生年月日をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="短期記憶15" column="短期記憶15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期記憶" column="短期記憶" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="自分の名前をいう" column="自分の名前をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="今の季節を理解" column="今の季節を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="場所の理解" column="場所の理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -358,26 +358,11 @@
                        DbT5912."shujiiCode" AS "主治医コード",
                        DbT5301."ikenshoSakuseiIraiYMD" AS "主治医意見書作成依頼年月日",
                        DbT5302."ikenshoJuryoYMD" AS "主治医意見書受領年月日",
-                       CASE WHEN DbT5101."koroshoIfShikibetsuCode" IN('09B','09A')
-                       AND DbT5304.remban = '15' 
-                       THEN DbT5304."ikenItem"
-                       END AS 短期記憶15,
-                       CASE WHEN  DbT5101."koroshoIfShikibetsuCode" IN('09B','09A')
-                       AND DbT5304.remban = '16'
-                       THEN DbT5304."ikenItem"
-                       END AS 日常の意思決定を行うための認知能力,
-                       CASE WHEN DbT5101."koroshoIfShikibetsuCode" IN('09B','09A')
-                       AND DbT5304.remban = '17'
-                       THEN DbT5304."ikenItem"
-                       END AS 自分の意思の伝達能力,
-                       CASE WHEN DbT5101."koroshoIfShikibetsuCode" IN('09B','09A')
-                       AND DbT5304.remban = '69'
-                       THEN DbT5304."ikenItem"
-                       END AS 食事行為,
-                       CASE WHEN DbT5101."koroshoIfShikibetsuCode" IN('09B','09A')
-                       AND DbT5304.remban = '14'
-                       THEN DbT5304."ikenItem"
-                       END AS 意見書認知症高齢者自立度,
+                       Y."意見書短期記憶" AS "意見書短期記憶",
+                       Y."日常の意思決定を行うための認知能力" AS "日常の意思決定を行うための認知能力",
+                       Y."自分の意思の伝達能力" AS "自分の意思の伝達能力",
+                       Y."食事行為" AS "食事行為",
+                       Y."意見書認知症高齢者自立度" AS "意見書認知症高齢者自立度",
                        DbT5201."ninteichosaIraiYMD" AS "調査依頼日",
                        DbT5202."ninteichosaJisshiYMD" AS "実施年月日",
                        DbT5910."jigyoshaNo" AS "事業者番号",
@@ -417,6 +402,8 @@
                        DbT5101."nigoTokuteiShippeiCode" AS "特定疾病",
                        DbT5102."yokaigoJotaizoReiCode" AS "要介護状態像例コード",
                        DbT5202."serviceKubunCode" AS "サービス区分コード",
+                            K."住宅改修予防給付" AS "住宅改修予防給付",
+                            K."住宅改修介護給付" AS "住宅改修介護給付",
                             Z."予防訪問介護ホームヘルプ" AS "予防訪問介護ホームヘルプ",
                             Z."予防訪問入浴介護" AS "予防訪問入浴介護",
                             Z."予防訪問看護" AS "予防訪問看護",
@@ -452,7 +439,7 @@
                             Z."介護地域密着型介護老人福祉施設入所者生活介護" AS "介護地域密着型介護老人福祉施設入所者生活介護",
                             Z."介護定期巡回随時対応型訪問介護看護" AS "介護定期巡回随時対応型訪問介護看護",
                             Z."介護複合型サービス" AS "介護複合型サービス",
-                       DbT5210.remban AS "施設利用",
+                            DbT5210.remban AS "施設利用",
                             W."麻痺左上肢" AS "麻痺左上肢",
                             W."麻痺右上肢" AS "麻痺右上肢",
                             W."麻痺左下肢" AS "麻痺左下肢",
@@ -630,6 +617,8 @@
                        zenkaiDbT5102."nijiHanteiYMD" AS "前回結果二次判定日",
                        zenkaiDbT5202."serviceKubunCode" AS "前回結果サービス区分コード",
                        zenkaiDbT5210.remban AS "前回結果施設利用",
+                       M."前回住宅改修予防給付",
+                       M."前回住宅改修介護給付",
                        S."前回予防訪問介護ホームヘルプ" AS "前回予防訪問介護ホームヘルプ",
                        S."前回予防訪問入浴介護" AS "前回予防訪問入浴介護",
                        S."前回予防訪問看護" AS "前回予防訪問看護",
@@ -1172,11 +1161,56 @@
                 AND DbT5302."ikenshoIraiRirekiNo" = (SELECT MAX(DbT5302Shujii."ikenshoIraiRirekiNo")
                                     FROM rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302Shujii
                                     WHERE DbT5302."shinseishoKanriNo" = DbT5302Shujii."shinseishoKanriNo")
-                LEFT JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304
-                ON DbT5304."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                AND DbT5304."ikenshoIraiRirekiNo" = (SELECT MAX(DbT5304Shujii."ikenshoIraiRirekiNo")
-                                      FROM rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304Shujii
-                                      WHERE DbT5304."shinseishoKanriNo" = DbT5304Shujii."shinseishoKanriNo")
+                LEFT JOIN  ( 
+                                select
+                                  T."shinseishoKanriNo"
+                                  , T."ikenshoIraiRirekiNo"
+                                  , MAX(T.意見書短期記憶) AS "意見書短期記憶"
+                                  , MAX(T.日常の意思決定を行うための認知能力) AS "日常の意思決定を行うための認知能力"
+                                  , MAX(T.自分の意思の伝達能力) AS "自分の意思の伝達能力"
+                                  , MAX(T.食事行為) AS "食事行為"
+                                  , MAX(T.意見書認知症高齢者自立度) AS "意見書認知症高齢者自立度"
+                                from
+                                  ( 
+                                    select
+                                        DbT5304."shinseishoKanriNo"
+                                      , DbT5304."ikenshoIraiRirekiNo"
+                                      , CASE 
+                                        WHEN DbT5304."remban" = 15 
+                                        THEN DbT5304."ikenItem" 
+                                        END AS 意見書短期記憶
+                                      , CASE 
+                                        WHEN DbT5304."remban" = 16 
+                                        THEN DbT5304."ikenItem" 
+                                        END AS 日常の意思決定を行うための認知能力
+                                      , CASE
+                                        WHEN DbT5304."remban" = 17
+                                        THEN DbT5304."ikenItem"
+                                        END AS 自分の意思の伝達能力
+                                      , CASE
+                                        WHEN DbT5304."remban" = 69
+                                        THEN DbT5304."ikenItem"
+                                        END AS 食事行為
+                                      , CASE
+                                        WHEN DbT5304."remban" = 14
+                                        THEN DbT5304."ikenItem"
+                                        END AS 意見書認知症高齢者自立度
+                                    FROM
+                                      rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304
+                                  ) as T 
+                                group by
+                                  T."shinseishoKanriNo"
+                                  , T."ikenshoIraiRirekiNo"
+                              ) as Y 
+                                ON Y."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"  
+                                AND Y."ikenshoIraiRirekiNo" = ( 
+                                  SELECT
+                                    MAX(DbT5304Shujii."ikenshoIraiRirekiNo") 
+                                  FROM
+                                      rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304Shujii
+                                  WHERE
+                                    Y."shinseishoKanriNo" = DbT5304Shujii."shinseishoKanriNo"
+                                )
                 LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
                 ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT5201."ninteichosaIraiRirekiNo" = (SELECT MAX(DbT5201Nintei."ninteichosaIraiRirekiNo")
@@ -1430,11 +1464,48 @@
                                     WHERE
                                       Z."shinseishoKanriNo" = DbT5207Nintei."shinseishoKanriNo"
                                   )   
-                LEFT JOIN  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208 
-                ON  DbT5208."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"     
-                AND  DbT5208."ninteichosaRirekiNo" = (SELECT MAX(DbT5208Nintei."ninteichosaRirekiNo")
-                                      FROM  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208Nintei
-                                      WHERE DbT5208."shinseishoKanriNo" = DbT5208Nintei."shinseishoKanriNo")
+                LEFT JOIN  ( 
+                                select
+                                  T."shinseishoKanriNo"
+                                  , T."ninteichosaRirekiNo"
+                                  , T."住宅改修予防給付" AS "住宅改修予防給付"
+                                   , T."住宅改修介護給付" AS "住宅改修介護給付" 
+                                from
+                                  ( 
+                                    select
+                                      DbT5208."shinseishoKanriNo"
+                                      , DbT5208."ninteichosaRirekiNo"
+                                      , CASE 
+                                        WHEN DbT5202."serviceKubunCode" = '1' 
+                                        AND DbT5208."remban" = 1 
+                                        THEN DbT5208."serviceJokyoFlag" 
+                                        END AS 住宅改修予防給付
+                                      , CASE 
+                                        WHEN DbT5202."serviceKubunCode" = '2' 
+                                        AND DbT5208."remban" = 1 
+                                        THEN DbT5208."serviceJokyoFlag" 
+                                        END AS 住宅改修介護給付
+
+                                    FROM
+                                      rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208
+                                      INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+                                        ON DbT5208."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+                                  ) as T 
+                                group by
+                                  T."shinseishoKanriNo"
+                                  , T."ninteichosaRirekiNo"
+                                  , T."住宅改修予防給付"
+                                  , T."住宅改修介護給付"
+                              ) as K 
+                                ON K."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+                                AND K."ninteichosaRirekiNo" = ( 
+                                  SELECT
+                                    MAX(DbT5208Nintei."ninteichosaRirekiNo") 
+                                  FROM
+                                            rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208Nintei 
+                                  WHERE
+                                    K."shinseishoKanriNo" = DbT5208Nintei."shinseishoKanriNo"
+                                ) 
                 LEFT JOIN  rgdb."DbT5210NinteichosahyoShisetsuRiyo" as DbT5210
                 ON  DbT5210."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND  DbT5210."ninteichosaRirekiNo" = (SELECT  MAX(DbT5210Nintei."ninteichosaRirekiNo")
@@ -2148,11 +2219,48 @@
                                             WHERE
                                               S."shinseishoKanriNo" = DbT5207Nintei."shinseishoKanriNo"
                                           ) 
-                LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS zenkaiDbT5208
-                ON zenkaiDbT5208."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
-                AND zenkaiDbT5208."ninteichosaRirekiNo" = (SELECT MAX(zenkaiDbT5208Nintei."ninteichosaRirekiNo")
-                                           FROM  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS zenkaiDbT5208Nintei
-                                           WHERE zenkaiDbT5208Nintei."shinseishoKanriNo" = zenkaiDbT5208."shinseishoKanriNo")
+                LEFT JOIN( 
+                                    select
+                                      T."shinseishoKanriNo"
+                                      , T."ninteichosaRirekiNo"
+                                      , T."前回住宅改修予防給付" AS "前回住宅改修予防給付"
+                                       , T."前回住宅改修介護給付" AS "前回住宅改修介護給付" 
+                                    from
+                                      ( 
+                                        select
+                                            DbT5208."shinseishoKanriNo"
+                                          , DbT5208."ninteichosaRirekiNo"
+                                          , CASE 
+                                            WHEN DbT5202."serviceKubunCode" = '1' 
+                                            AND DbT5208."remban" = 1 
+                                            THEN DbT5208."serviceJokyoFlag" 
+                                            END AS 前回住宅改修予防給付
+                                          , CASE 
+                                            WHEN DbT5202."serviceKubunCode" = '2' 
+                                            AND DbT5208."remban" = 1 
+                                            THEN DbT5208."serviceJokyoFlag" 
+                                            END AS 前回住宅改修介護給付
+
+                                        FROM
+                                          rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208
+                                          INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+                                            ON DbT5208."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+                                      ) as T 
+                                    group by
+                                      T."shinseishoKanriNo"
+                                      , T."ninteichosaRirekiNo"
+                                      , T."前回住宅改修予防給付"
+                                      , T."前回住宅改修介護給付"
+                                  ) as M 
+                                    ON M."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
+                                    AND M."ninteichosaRirekiNo" = ( 
+                                      SELECT
+                                        MAX(DbT5208Nintei."ninteichosaRirekiNo") 
+                                      FROM
+                                          rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208Nintei 
+                                      WHERE
+                                        M."shinseishoKanriNo" = DbT5208Nintei."shinseishoKanriNo"
+                                    )
                 LEFT JOIN  rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS zenkaiDbT5210
                 ON zenkaiDbT5210."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
                 AND zenkaiDbT5210."ninteichosaRirekiNo" = (SELECT MAX(zenkaiDbT5210Nintei."ninteichosaRirekiNo")

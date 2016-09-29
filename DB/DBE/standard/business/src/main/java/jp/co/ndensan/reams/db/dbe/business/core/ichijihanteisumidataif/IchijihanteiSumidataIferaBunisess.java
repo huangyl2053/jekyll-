@@ -135,7 +135,7 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(意見書入手日);
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get短期記憶15())) {
+        if (RString.isNullOrEmpty(entity.get意見書短期記憶())) {
             builder.append(意見書短期記憶);
             builder.append(データ);
         }
@@ -1703,7 +1703,7 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("生年月日"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get短期記憶15())) {
+        if (RString.isNullOrEmpty(entity.get意見書短期記憶())) {
             builder.append(new RString("意見書「短期記憶」"));
             builder.append(データ);
         }

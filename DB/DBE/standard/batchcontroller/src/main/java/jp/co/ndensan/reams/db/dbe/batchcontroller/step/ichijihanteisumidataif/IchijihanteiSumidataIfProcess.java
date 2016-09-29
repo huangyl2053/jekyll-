@@ -58,6 +58,8 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     private final RString ファイル09AB = new RString("09A");
     private final RString ファイル09Bエラ = new RString("IchijiHanteiErr_09B.CSV");
     private final RString ファイル09Aエラ = new RString("IchijiHanteiErr_09A.CSV");
+    private final RString 文字コード = new RString("1");
+    private final RString 文字 = new RString("2");
 
     @Override
     protected void initialize() {
@@ -86,7 +88,6 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
                 setNewLine(NewLine.CRLF).
                 hasHeader(false).
                 build();
-
     }
 
     @Override
@@ -167,7 +168,6 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         if (RString.isNullOrEmpty(koroshoIfShikibetsuCode)) {
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
             ファイル名 = ファイル09Aエラ;
-
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         }
         if (!koroshoIfShikibetsuCode.equals(entity.get厚労省IF識別コード())) {
@@ -177,7 +177,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         }
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
-        if (new RString("1").equals(一次判定IF文字コード)) {
+        if (文字コード.equals(一次判定IF文字コード)) {
             eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -185,7 +185,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
                     setNewLine(NewLine.CRLF).
                     hasHeader(false).
                     build();
-        } else if (new RString("2").equals(一次判定IF文字コード)) {
+        } else if (文字.equals(一次判定IF文字コード)) {
             eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -213,10 +213,10 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     private Encode getEncode() {
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
         Encode encode = Encode.SJIS;
-        if (new RString("1").equals(一次判定IF文字コード)) {
+        if (文字コード.equals(一次判定IF文字コード)) {
             encode = Encode.SJIS;
 
-        } else if (new RString("2").equals(一次判定IF文字コード)) {
+        } else if (文字.equals(一次判定IF文字コード)) {
             encode = Encode.UTF_8withBOM;
         }
         return encode;
