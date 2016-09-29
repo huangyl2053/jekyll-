@@ -165,6 +165,7 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
 
     @Override
     protected void afterExecute() {
+        long count;
         if (定数_なし.equals(csv出力Flag) && parameter.is項目名付加()) {
             List<RString> bodyList = new ArrayList<>();
             for (int i = 0; i < edit.setHeaderList(parameter).size(); i++) {
@@ -173,13 +174,18 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
             csvListWriter.writeLine(bodyList);
         }
         csvListWriter.close();
+        if (なし.equals(csv出力Flag)) {
+            count = 0;
+        } else {
+            count = csvListWriter.getCount();
+        }
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
         } else {
             spoolManager.spool(eucFilePath);
         }
-        RString csvCount = new RString(csvListWriter.getCount());
+        RString csvCount = new RString(count);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
