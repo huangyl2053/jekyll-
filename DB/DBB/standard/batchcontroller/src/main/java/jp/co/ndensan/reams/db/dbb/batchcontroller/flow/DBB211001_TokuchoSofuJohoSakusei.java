@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
@@ -53,28 +54,28 @@ import jp.co.ndensan.reams.uz.uza.lang.Width;
  */
 public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_TokuchoSofuJohoSakuseiParameter> {
 
-    private static final String 特徴依頼のデータ抽出 = "InsTokuchoIraiTempProcess";
-    private static final String 年金特徴回付情報追加用データ作成 = "InsNenkinTokuchoKaifuJoho1Process";
-    private static final String 介護徴収方法の追加 = "InsChoshuHohoProcess";
-    private static final String 介護特別徴収情報取込履歴の登録 = "InsTorikomiRirekiProcess";
-    private static final String 介護保険年金特徴対象者情報の登録 = "InsKaigohokenNenkinTokuchoTaishosha1Process";
-    private static final String 特別徴収依頼情報一覧表を帳票で作成 = "PrtTokuchoIraijohoIchiranhyoProcess";
-    private static final String 特別徴収依頼情報件数表を帳票で作成 = "PrtTokuchoIraijohoKensuhyoProcess";
-    private static final String 資格喪失等のデータ抽出 = "InsTokuchoTeishiTempProcess";
-    private static final String 資格喪失等_追加用データ作成 = "InsShikakuSoshitsuTempProcess";
-    private static final String 住所地特例該当のデータ抽出 = "InsJushochiTokureiTempProcess";
-    private static final String 住所地特例該当_追加用データ作成 = "InsJushochiTokureiTsuikaTempProcess";
-    private static final String 最新の賦課の情報を取得 = "InsFukaTempProcess";
-    private static final String 仮徴収額変更データ抽出 = "InsKariHenkoTempProcess";
-    private static final String 仮徴収額変更_追加用データ作成 = "InsKariHenkoTsuikaTempProcess";
-    private static final String 特徴追加依頼のデータ抽出 = "InsTokuchoTsuikaIraiTempProcess";
-    private static final String 特徴追加依頼_追加用データ作成 = "InsTokuchoTsuikaIraiTsuikaTempProcess";
-    private static final String 特徴異動情報_追加用データの取得 = "InsNenkinTokuchoKaifuJoho2Process";
-    private static final String 特徴異動_徴収方法の追加 = "InsChoshuHoho2Process";
-    private static final String 特徴異動_年金特徴対象者情報の登録 = "InsKaigohokenNenkinTokuchoTaishosha2Process";
-    private static final String 特別徴収異動情報一覧表の発行 = "PrtTokuchoIdojohoIchiranhyoProcess";
-    private static final String 特徴異動情報件数表の発行 = "PrtTokuchoIdojohoKensuhyoProcess";
-    private static final String 処理日付管理テーブル更新 = "UpdShoriDateKanriProcess";
+    private static final String 特徴依頼のデータ抽出 = "insTokuchoIraiTempProcess";
+    private static final String 年金特徴回付情報追加用データ作成 = "insNenkinTokuchoKaifuJoho1Process";
+    private static final String 介護徴収方法の追加 = "insChoshuHohoProcess";
+    private static final String 介護特別徴収情報取込履歴の登録 = "insTorikomiRirekiProcess";
+    private static final String 介護保険年金特徴対象者情報の登録 = "insKaigohokenNenkinTokuchoTaishosha1Process";
+    private static final String 特別徴収依頼情報一覧表を帳票で作成 = "prtTokuchoIraijohoIchiranhyoProcess";
+    private static final String 特別徴収依頼情報件数表を帳票で作成 = "prtTokuchoIraijohoKensuhyoProcess";
+    private static final String 資格喪失等のデータ抽出 = "insTokuchoTeishiTempProcess";
+    private static final String 資格喪失等_追加用データ作成 = "insShikakuSoshitsuTempProcess";
+    private static final String 住所地特例該当のデータ抽出 = "insJushochiTokureiTempProcess";
+    private static final String 住所地特例該当_追加用データ作成 = "insJushochiTokureiTsuikaTempProcess";
+    private static final String 最新の賦課の情報を取得 = "insFukaTempProcess";
+    private static final String 仮徴収額変更データ抽出 = "insKariHenkoTempProcess";
+    private static final String 仮徴収額変更_追加用データ作成 = "insKariHenkoTsuikaTempProcess";
+    private static final String 特徴追加依頼のデータ抽出 = "insTokuchoTsuikaIraiTempProcess";
+    private static final String 特徴追加依頼_追加用データ作成 = "insTokuchoTsuikaIraiTsuikaTempProcess";
+    private static final String 特徴異動情報_追加用データの取得 = "insNenkinTokuchoKaifuJoho2Process";
+    private static final String 特徴異動_徴収方法の追加 = "insChoshuHoho2Process";
+    private static final String 特徴異動_年金特徴対象者情報の登録 = "insKaigohokenNenkinTokuchoTaishosha2Process";
+    private static final String 特別徴収異動情報一覧表の発行 = "prtTokuchoIdojohoIchiranhyoProcess";
+    private static final String 特徴異動情報件数表の発行 = "prtTokuchoIdojohoKensuhyoProcess";
+    private static final String 処理日付管理テーブル更新 = "updShoriDateKanriProcess";
 
     private static final RString 処理対象月_01月 = new RString("01");
     private static final RString 処理対象月_1月 = new RString("1");
@@ -104,7 +105,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
 
     @Override
     protected void initialize() {
-        システム日時 = YMDHMS.now();
+        システム日時 = new YMDHMS(RDate.getNowDateTime());
     }
 
     @Override
@@ -150,7 +151,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特徴依頼のデータ抽出)
-    protected IBatchFlowCommand InsTokuchoIraiTempProcess() {
+    protected IBatchFlowCommand insTokuchoIraiTempProcess() {
         return loopBatch(InsTokuchoIraiTempProcess.class)
                 .arguments(getParameter().toInsTokuchoIraiTempProcessParameter()).define();
     }
@@ -161,7 +162,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(年金特徴回付情報追加用データ作成)
-    protected IBatchFlowCommand InsNenkinTokuchoKaifuJoho1Process() {
+    protected IBatchFlowCommand insNenkinTokuchoKaifuJoho1Process() {
         return loopBatch(InsNenkinTokuchoKaifuJoho1Process.class)
                 .arguments(getParameter().toInsNenkinTokuchoKaifuJoho1ProcessParameter(システム日時)).define();
     }
@@ -172,7 +173,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(介護徴収方法の追加)
-    protected IBatchFlowCommand InsChoshuHohoProcess() {
+    protected IBatchFlowCommand insChoshuHohoProcess() {
         return loopBatch(InsChoshuHohoProcess.class).define();
     }
 
@@ -182,7 +183,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(介護特別徴収情報取込履歴の登録)
-    protected IBatchFlowCommand InsTorikomiRirekiProcess() {
+    protected IBatchFlowCommand insTorikomiRirekiProcess() {
         return loopBatch(InsTorikomiRirekiProcess.class)
                 .arguments(getParameter().toInsTorikomiRirekiProcessParameter(システム日時)).define();
     }
@@ -193,7 +194,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(介護保険年金特徴対象者情報の登録)
-    protected IBatchFlowCommand InsKaigohokenNenkinTokuchoTaishosha1Process() {
+    protected IBatchFlowCommand insKaigohokenNenkinTokuchoTaishosha1Process() {
         return loopBatch(InsKaigohokenNenkinTokuchoTaishosha1Process.class)
                 .arguments(getParameter().toInsKaigohokenNenkinTaishosha1ProcessParameter(システム日時)).define();
     }
@@ -204,7 +205,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特別徴収依頼情報一覧表を帳票で作成)
-    protected IBatchFlowCommand PrtTokuchoIraijohoIchiranhyoProcess() {
+    protected IBatchFlowCommand prtTokuchoIraijohoIchiranhyoProcess() {
         return loopBatch(PrtTokuchoIraijohoIchiranhyoProcess.class)
                 .arguments(getParameter().toPrtTokuchoIraijohoIchiranhyoProcessParameter(システム日時, 出力条件の編集(true)))
                 .define();
@@ -216,7 +217,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特別徴収依頼情報件数表を帳票で作成)
-    protected IBatchFlowCommand PrtTokuchoIraijohoKensuhyoProcess() {
+    protected IBatchFlowCommand prtTokuchoIraijohoKensuhyoProcess() {
         return loopBatch(PrtTokuchoIraijohoKensuhyoProcess.class)
                 .arguments(getParameter().toPrtTokuchoIraijohoKensuhyoProcessParameter(システム日時, 出力条件の編集(false)))
                 .define();
@@ -228,7 +229,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(資格喪失等のデータ抽出)
-    protected IBatchFlowCommand InsTokuchoTeishiTempProcess() {
+    protected IBatchFlowCommand insTokuchoTeishiTempProcess() {
         return loopBatch(InsTokuchoTeishiTempProcess.class)
                 .arguments(getParameter().toInsTokuchoTeishiTempProcessParameter(システム日時))
                 .define();
@@ -240,7 +241,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(資格喪失等_追加用データ作成)
-    protected IBatchFlowCommand InsShikakuSoshitsuTempProcess() {
+    protected IBatchFlowCommand insShikakuSoshitsuTempProcess() {
         return loopBatch(InsShikakuSoshitsuTempProcess.class)
                 .arguments(getParameter().toInsShikakuSoshitsuTempProcessParameter(システム日時))
                 .define();
@@ -252,7 +253,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(住所地特例該当のデータ抽出)
-    protected IBatchFlowCommand InsJushochiTokureiTempProcess() {
+    protected IBatchFlowCommand insJushochiTokureiTempProcess() {
         return loopBatch(InsJushochiTokureiTempProcess.class)
                 .arguments(getParameter().toInsJushochiTokureiTempProcessParameter(システム日時))
                 .define();
@@ -264,7 +265,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(住所地特例該当_追加用データ作成)
-    protected IBatchFlowCommand InsJushochiTokureiTsuikaTempProcess() {
+    protected IBatchFlowCommand insJushochiTokureiTsuikaTempProcess() {
         return loopBatch(InsJushochiTokureiTsuikaTempProcess.class)
                 .arguments(getParameter().toInsJushochiTokureiTsuikaTempProcessParameter(システム日時))
                 .define();
@@ -276,7 +277,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(最新の賦課の情報を取得)
-    protected IBatchFlowCommand InsFukaTempProcess() {
+    protected IBatchFlowCommand insFukaTempProcess() {
         return loopBatch(InsFukaTempProcess.class)
                 .arguments(getParameter().toInsFukaTempProcessParameter())
                 .define();
@@ -288,7 +289,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(仮徴収額変更データ抽出)
-    protected IBatchFlowCommand InsKariHenkoTempProcess() {
+    protected IBatchFlowCommand insKariHenkoTempProcess() {
         return loopBatch(InsKariHenkoTempProcess.class)
                 .arguments(getParameter().toInsKariHenkoTempProcessParameter())
                 .define();
@@ -300,7 +301,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(仮徴収額変更_追加用データ作成)
-    protected IBatchFlowCommand InsKariHenkoTsuikaTempProcess() {
+    protected IBatchFlowCommand insKariHenkoTsuikaTempProcess() {
         return loopBatch(InsKariHenkoTsuikaTempProcess.class)
                 .arguments(getParameter().toInsKariHenkoTsuikaTempProcessParameter(システム日時))
                 .define();
@@ -312,7 +313,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特徴追加依頼のデータ抽出)
-    protected IBatchFlowCommand InsTokuchoTsuikaIraiTempProcess() {
+    protected IBatchFlowCommand insTokuchoTsuikaIraiTempProcess() {
         return loopBatch(InsTokuchoTsuikaIraiTempProcess.class)
                 .arguments(getParameter().toInsTokuchoTsuikaIraiTempProcessParameter())
                 .define();
@@ -324,7 +325,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特徴追加依頼_追加用データ作成)
-    protected IBatchFlowCommand InsTokuchoTsuikaIraiTsuikaTempProcess() {
+    protected IBatchFlowCommand insTokuchoTsuikaIraiTsuikaTempProcess() {
         return loopBatch(InsTokuchoTsuikaIraiTsuikaTempProcess.class)
                 .arguments(getParameter().toInsTokuchoTsuikaIraiTsuikaTempProcessParameter(システム日時))
                 .define();
@@ -336,7 +337,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特徴異動情報_追加用データの取得)
-    protected IBatchFlowCommand InsNenkinTokuchoKaifuJoho2Process() {
+    protected IBatchFlowCommand insNenkinTokuchoKaifuJoho2Process() {
         return loopBatch(InsNenkinTokuchoKaifuJoho2Process.class)
                 .arguments(getParameter().toInsNenkinTokuchoKaifuJoho2ProcessParameter(
                                 is処理対象月が４月_６月(), is処理対象月が5月(), is処理対象月が10月_12月_2月()))
@@ -349,7 +350,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特徴異動_徴収方法の追加)
-    protected IBatchFlowCommand InsChoshuHoho2Process() {
+    protected IBatchFlowCommand insChoshuHoho2Process() {
         return loopBatch(InsChoshuHoho2Process.class)
                 .arguments(getParameter().toInsChoshuHoho2ProcessParameter(
                                 is処理対象月が４月_６月(), is処理対象月が2月()))
@@ -362,7 +363,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特徴異動_年金特徴対象者情報の登録)
-    protected IBatchFlowCommand InsKaigohokenNenkinTokuchoTaishosha2Process() {
+    protected IBatchFlowCommand insKaigohokenNenkinTokuchoTaishosha2Process() {
         return loopBatch(InsKaigohokenNenkinTokuchoTaishosha2Process.class)
                 .arguments(getParameter().toInsKaigohokenNenkinTokuchoTaishosha2ProcessParameter(
                                 システム日時))
@@ -375,7 +376,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特別徴収異動情報一覧表の発行)
-    protected IBatchFlowCommand PrtTokuchoIdojohoIchiranhyoProcess() {
+    protected IBatchFlowCommand prtTokuchoIdojohoIchiranhyoProcess() {
         return loopBatch(PrtTokuchoIdojohoIchiranhyoProcess.class)
                 .arguments(getParameter().toPrtTokuchoIdojohoIchiranhyoProcessParameter(
                                 システム日時, 出力条件の編集(true)))
@@ -388,7 +389,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(特徴異動情報件数表の発行)
-    protected IBatchFlowCommand PrtTokuchoIdojohoKensuhyoProcess() {
+    protected IBatchFlowCommand prtTokuchoIdojohoKensuhyoProcess() {
         return loopBatch(PrtTokuchoIdojohoKensuhyoProcess.class)
                 .arguments(getParameter().toPrtTokuchoIdojohoKensuhyoProcessParameter(
                                 システム日時, 出力条件の編集(false)))
@@ -401,7 +402,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      * @return IBatchFlowCommand
      */
     @Step(処理日付管理テーブル更新)
-    protected IBatchFlowCommand UpdShoriDateKanriProcess() {
+    protected IBatchFlowCommand updShoriDateKanriProcess() {
         return simpleBatch(UpdShoriDateKanriProcess.class)
                 .arguments(getParameter().toUpdShoriDateKanriProcessParameter(
                                 システム日時, is処理対象月が1月(), is処理対象月が2月(),
