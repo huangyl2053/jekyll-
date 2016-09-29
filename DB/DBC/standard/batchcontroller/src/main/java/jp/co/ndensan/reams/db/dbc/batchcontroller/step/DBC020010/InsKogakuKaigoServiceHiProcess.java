@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class InsKogakuKaigoServiceHiProcess extends SimpleBatchProcessBase {
 
     @Override
-    protected void beforeExecute() {
+    protected void process() {
         IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper = InstanceProvider.create(MapperProvider.class).
                 create(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
         mapper.insert高額介護サービス費支給申請();
@@ -28,9 +28,5 @@ public class InsKogakuKaigoServiceHiProcess extends SimpleBatchProcessBase {
         mapper.insert高額介護サービス費給付対象者合計();
         mapper.update高額介護サービス費給付対象者合計();
         mapper.insert高額介護サービス給付対象者明細();
-    }
-
-    @Override
-    protected void process() {
     }
 }
