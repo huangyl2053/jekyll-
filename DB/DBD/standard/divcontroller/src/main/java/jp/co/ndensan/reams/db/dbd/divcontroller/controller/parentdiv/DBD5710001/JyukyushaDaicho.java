@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5710001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001_JukyushaDaichoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.DBD5710001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.JyukyushaDaichoDiv;
@@ -76,8 +76,8 @@ public class JyukyushaDaicho {
      * @param div JyukyushaDaichoDiv
      * @return ResponseData<DBD571001Parameter>
      */
-    public ResponseData<DBD571001Parameter> onCilck_btnBatchRegister(JyukyushaDaichoDiv div) {
-        DBD571001Parameter parameter = new DBD571001Parameter();
+    public ResponseData<DBD571001_JukyushaDaichoParameter> onCilck_btnBatchRegister(JyukyushaDaichoDiv div) {
+        DBD571001_JukyushaDaichoParameter parameter = new DBD571001_JukyushaDaichoParameter();
         creatJyukyushaDaichoHandler(div).onCilck_btnBatchRegister(div, parameter);
         return ResponseData.of(parameter).respond();
     }

@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD571001Parameter extends BatchParameterBase {
+public class DBD571001_JukyushaDaichoParameter extends BatchParameterBase {
 
     @BatchParameter(key = "抽出条件設定区分", name = "抽出条件設定区分")
     private RString 抽出条件設定区分;

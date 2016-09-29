@@ -35,16 +35,15 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Ninchish
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -140,7 +139,6 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
     private static final RString HOKENSHA = new RString("保険者：");
     private static final RString KIZYUNNICHI = new RString("基準日：");
     private static final RString NENLEIKIZYUNNICHI = new RString("年齢基準日:");
-    private static final RString CHOKINNOMI = new RString("対象データ：直近のみ");
     private static final RString SOSHITSUKUBEN = new RString("喪失区分：");
     private static final RString SHIKIBETSUCODE = new RString("国保資格情報_識別コード");
     private static final RString RIREKIBANGO = new RString("国保資格情報_履歴番号");
@@ -180,11 +178,9 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
     @Override
     protected IBatchReader createReader() {
         RString 出力順 = get出力順();
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
@@ -1009,10 +1005,6 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
             builder.append(COMMA);
         }
         builder = get日付範囲(builder);
-        if (processParamter.isChokindatacyusyutsu()) {
-            builder.append(CHOKINNOMI);
-            builder.append(COMMA);
-        }
         if (!RString.isNullOrEmpty(processParamter.getSoshitsukubun())
                 && !SoshitsuKubun.資格判定なし.getコード().equals(processParamter.getSoshitsukubun())) {
             builder.append(SOSHITSUKUBEN);
