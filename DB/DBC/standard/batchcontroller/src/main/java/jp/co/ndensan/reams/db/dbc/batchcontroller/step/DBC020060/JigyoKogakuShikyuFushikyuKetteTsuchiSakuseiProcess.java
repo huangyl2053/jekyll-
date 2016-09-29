@@ -146,7 +146,6 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
     protected void afterExecute() {
         if (dataFlag) {
             JigyoKogakuShikyuFushikyuKetteTsuchiEntity afterEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
-            afterEntity.setテスト出力フラグ(parameter.getテスト出力フラグ());
             set出力順と改頁(afterEntity);
             afterEntity.set被保険者氏名(被保険者氏名_出力ない);
             JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(afterEntity, 連番);
@@ -174,6 +173,7 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
     private JigyoKogakuShikyuFushikyuKetteTsuchiEntity getFushikyuReportEntity(KetteiTsuchishoInfoTempResultEntity entity) {
         JigyoKogakuShikyuFushikyuKetteTsuchiEntity returnEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
         set出力順と改頁(returnEntity);
+        returnEntity.setテスト出力フラグ(parameter.getテスト出力フラグ());
         returnEntity.set決定通知No(entity.get決定通知No());
         if (null != entity.get被保険者番号()) {
             returnEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
