@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.DBE631001;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE631001.GensendataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE631001.DBE631001_GensendataSakuseiParameter;

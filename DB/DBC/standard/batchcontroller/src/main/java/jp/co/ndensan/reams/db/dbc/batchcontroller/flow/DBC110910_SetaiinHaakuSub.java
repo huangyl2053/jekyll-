@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc110910;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110910.SetaiShotoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110910.SetaiinHaakuSubBProcess;
@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC110910_SetaiinHaakuSub extends BatchFlowBase<DBC110910_SetaiinHaakuSubParameter> {
 
-    // TODO 　一時ファイルでバッチに未実装
     private static final String 一時ファイル作成 = "一時ファイル";
     private static final String 住所地特例該当 = "特例該当";
     private static final String 住所地特例該当以外 = "特例該当以外";

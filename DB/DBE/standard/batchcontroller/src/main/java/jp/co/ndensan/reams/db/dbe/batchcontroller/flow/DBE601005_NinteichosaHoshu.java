@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ninteichosahoshushokai;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosahoshushokai.NinteiChosaHoshuShokaiProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiFlowParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601005.NinteichosaHoshuProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.DBE601005_NinteichosaHoshuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1940-020 jinjue
  */
-public class NinteiChosaHoshuShokaiFlow extends BatchFlowBase<NinteiChosaHoshuShokaiFlowParameter> {
+public class DBE601005_NinteichosaHoshu extends BatchFlowBase<DBE601005_NinteichosaHoshuParameter> {
 
     private static final String データ作成 = "ninteichosahoshushokai";
 
@@ -32,7 +32,7 @@ public class NinteiChosaHoshuShokaiFlow extends BatchFlowBase<NinteiChosaHoshuSh
      */
     @Step(データ作成)
     protected IBatchFlowCommand ninteichosahoshushokai() {
-        return loopBatch(NinteiChosaHoshuShokaiProcess.class)
+        return loopBatch(NinteichosaHoshuProcess.class)
                 .arguments(getParameter().toProcessParamter()).define();
     }
 }

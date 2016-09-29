@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jutariyutesuseikenshinichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -33,5 +34,6 @@ public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranData {
     private RString 工事の種類;
     private RString 理由書作成者;
     private RString 備考;
+    private ShikibetsuCode 識別コード;
 
 }

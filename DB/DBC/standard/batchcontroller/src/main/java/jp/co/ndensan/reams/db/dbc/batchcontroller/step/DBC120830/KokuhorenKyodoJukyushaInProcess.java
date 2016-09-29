@@ -84,7 +84,7 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
     private RString 帳票タイトル;
     private List<ShikibetsuCode> 識別コードList;
     private static final RString 出力ファイル名
-            = new RString("DBC200056_KyodoJukyushaKoshinkekkaIchiran.csv");
+            = new RString("DBC200057_KyodoJukyushaIchiran.csv");
     private static final RString デフォルト出力順 = new RString(" ORDER BY dbWT5C30.\"hokenshaNo\" ASC ");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
 
