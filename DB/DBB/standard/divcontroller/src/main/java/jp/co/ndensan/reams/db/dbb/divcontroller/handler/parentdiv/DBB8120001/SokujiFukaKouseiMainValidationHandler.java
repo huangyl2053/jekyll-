@@ -221,9 +221,12 @@ public class SokujiFukaKouseiMainValidationHandler {
             return;
         }
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
-        Decimal 納付額_４期 = tablePanel.getTxtTokuchoKoseiGo10().getValue();
-        Decimal 納付額_５期 = tablePanel.getTxtTokuchoKoseiGo12().getValue();
-        Decimal 納付額_６期 = tablePanel.getTxtTokuchoKoseiGo02().getValue();
+        Decimal 納付額_４期 = tablePanel.getTxtTokuchoKoseiGo10().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo10().getValue();
+        Decimal 納付額_５期 = tablePanel.getTxtTokuchoKoseiGo12().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo12().getValue();
+        Decimal 納付額_６期 = tablePanel.getTxtTokuchoKoseiGo02().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo02().getValue();
         if (納付額_４期.subtract(納付額_５期).abs().compareTo(円_３００) > 0) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
                     DbbErrorMessages.特徴期別額不正_300円以上の差)));
