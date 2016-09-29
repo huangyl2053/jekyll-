@@ -29,6 +29,7 @@ public class KokuhorenSofuDataErrorIchiranEditor
     private final KokuhorenSofuDataErrorIchiranEntity entity;
     private final RString 市町村コード;
     private final RString 市町村名称;
+    private final int 連番;
     private static final RString SAKUSEI = new RString("作成");
 
     /**
@@ -37,12 +38,14 @@ public class KokuhorenSofuDataErrorIchiranEditor
      * @param entity KokuhorenSofuDataErrorIchiranEntity
      * @param 市町村コード RString
      * @param 市町村名称 RString
+     * @param 連番 int
      */
     public KokuhorenSofuDataErrorIchiranEditor(
-            KokuhorenSofuDataErrorIchiranEntity entity, RString 市町村コード, RString 市町村名称) {
+            KokuhorenSofuDataErrorIchiranEntity entity, RString 市町村コード, RString 市町村名称, int 連番) {
         this.entity = entity;
         this.市町村コード = 市町村コード;
         this.市町村名称 = 市町村名称;
+        this.連番 = 連番;
     }
 
     @Override
@@ -57,14 +60,14 @@ public class KokuhorenSofuDataErrorIchiranEditor
 
     private void editSource(KokuhorenSofuDataErrorIchiranSource source) {
         RDateTime 作成日時 = RDateTime.now();
-        RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString 作成日 = getパターン12_2(entity.get作成年月日());
         RString 作成時 = 作成日時.getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.cityCd = this.市町村コード;
         source.cityMei = this.市町村名称;
-        source.listList2_1 = getColumnValue(entity.get被保険者番号());
+        source.listList1_1 = getColumnValue(entity.get被保険者番号());
+        source.listList2_1 = new RString(連番);
         source.listList2_2 = entity.get氏名カナ();
         source.listList2_3 = entity.get氏名();
         source.listList2_4 = getパターン4(entity.get資格取得日());
@@ -102,6 +105,15 @@ public class KokuhorenSofuDataErrorIchiranEditor
     }
 
     private static RString getパターン12(FlexibleYearMonth date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
+    }
+
+    private static RString getパターン12_2(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
