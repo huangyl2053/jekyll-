@@ -188,7 +188,7 @@ public class DBC5140011MainHandler {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         pamaRestore1(restoreBatchParameterMap);
         List<RString> 認定結果リスト = restoreBatchParameterMap.getParameterListValue(RString.class, new RString("認定結果リスト"));
-        if (認定結果リスト != null && 認定結果リスト.isEmpty()) {
+        if (認定結果リスト != null && !認定結果リスト.isEmpty()) {
             div.getChkNinteiKekka().setSelectedItemsByKey(認定結果リスト);
         }
         List<RString> サービス種類コードリスト
