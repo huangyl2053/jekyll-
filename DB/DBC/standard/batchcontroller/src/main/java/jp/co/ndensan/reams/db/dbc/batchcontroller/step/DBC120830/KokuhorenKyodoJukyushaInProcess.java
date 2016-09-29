@@ -100,7 +100,7 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
         mapper = getMapper(IKyodoJukyushaKoshinKekkaInMapper.class);
         KyodoJukyushaKoshinKekkaInMybatisParameter batisparameter = new KyodoJukyushaKoshinKekkaInMybatisParameter();
         batisparameter.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-        batisparameter.setChohyoBunruiID(ReportIdDBC.DBC200057.getReportId().value());
+        batisparameter.setChohyoBunruiID(ReportIdDBC.DBC200056.getReportId().value());
         batisparameter.setKanriNendo(KANRINENDO);
         batisparameter.setKomokuName(ChohyoSeigyoHanyoKomokuMei.帳票タイトル_随時.get名称());
         帳票タイトル = mapper.帳票タイトルの取得(batisparameter);

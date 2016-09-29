@@ -143,6 +143,10 @@ public enum ReportIdDBC {
      */
     DBC200055(new ReportId("DBC200055_JukyushaKoshinkekkaIchiran"), new RString("受給者情報更新結果一覧表")),
     /**
+     * 共同処理用受給者情報更新結果一覧表
+     */
+    DBC200056(new ReportId("DBC200056_KyodoJukyushaKoshinkekkaIchiran"), new RString("共同処理用受給者情報更新結果一覧表")),
+    /**
      * 共同処理用受給者情報一覧表
      */
     DBC200057(new ReportId("DBC200057_KyodoJukyushaIchiran"), new RString("共同処理用受給者情報一覧表")),
