@@ -83,7 +83,6 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
         source.printTimeStamp = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
         source.listHakkoTaishosha_1 = count;
-        source.shichosonName = getColumnValue(entity.getShoKisaiHokenshaNoChohyo());
         source.listHakkoTaishosha_2 = getColumnValue(entity.getHihokenshaNoChohyo());
         source.listHakkoTaishosha_3 = getパターン51(entity.getServiceTeikyoYMChohyo());
         source.listHakkoTaishosha_4 = getColumnValue(entity.getMeishoChohyo());
@@ -116,6 +115,7 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
         }
         source.サービス種類 = entity.getServiceShuruiCodeChohyo() == null ? RString.EMPTY : entity.getServiceShuruiCodeChohyo().value();
         source.氏名カナ = entity.getShimeikanaChohyo() == null ? RString.EMPTY : entity.getShimeikanaChohyo().value();
+        source.shikibetsuCode = getColumnValue(entity.getShikibetsuCodeChohyo());
     }
 
     private void editIOutputOrder(KogakuShikyuShinseishoHakkoIchiranSource source) {
