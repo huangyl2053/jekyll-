@@ -57,12 +57,12 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor implements IKogakuS
                 source.listUpper_11 = entity.get資格喪失日();
                 source.listUpper_12 = entity.get自動償還();
                 source.listLower_7 = entity.get喪失事由();
+            } else {
+                source.listUpper_7 = 支給計;
+                source.listUpper_8 = entity.get支給総件数();
+                source.listUpper_9 = entity.get本人支給額合計();
+                source.listLower_5 = entity.get支給額給額合計();
             }
-        } else {
-            source.listUpper_7 = 支給計;
-            source.listUpper_8 = entity.get支給総件数();
-            source.listUpper_9 = entity.get本人支給額合計();
-            source.listLower_5 = entity.get支給額給額合計();
         }
 
         return source;
