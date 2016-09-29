@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 対象者把握情報の取得_Process処理パラメタークラスです．
  *
- * @reamsid_L DBD-3610-050 x_lilh
+ * @reamsid_L DBD-3610-030 x_lilh
  */
 @lombok.Getter
 @lombok.Setter

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32003;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +22,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuGengakuHaakuListTaishoTokuteiMybatisParameter implements IMyBatisParameter {
 
-    private FlexibleDate 基準日;
-    private RString 時効起算日登録者の選択;
+    private RDate 基準日;
+    private boolean is時効起算日登録者のみ;
+    private boolean is時効起算日登録者以外;
+    private boolean is被保険者全員以外;
+    private boolean is受給認定申請中者チェックオン;
+    private boolean is受給認定日抽出チェックオン;
+    private boolean is認定有効終了日抽出チェックオン;
+    private boolean is保険料完納者も出力チェックオン;
+
     private RString 被保険者選択;
     private RString 受給者全員;
     private RString 受給認定申請中者;
@@ -63,8 +71,15 @@ public class KyufuGengakuHaakuListTaishoTokuteiMybatisParameter implements IMyBa
             FlexibleDate 認定有効終日抽出の終了,
             RString 保険料完納者も出力) {
 
-        this.基準日 = 基準日;
-        this.時効起算日登録者の選択 = 時効起算日登録者の選択;
+        this.基準日 = new RDate(基準日.toString());
+        this.is時効起算日登録者のみ = new RString("0").equals(時効起算日登録者の選択);
+        this.is時効起算日登録者以外 = new RString("1").equals(時効起算日登録者の選択);
+        this.is被保険者全員以外 = new RString("1").equals(被保険者選択);
+        this.is受給認定申請中者チェックオン = new RString("0").equals(受給認定申請中者);
+        this.is受給認定日抽出チェックオン = new RString("0").equals(受給認定日抽出);
+        this.is認定有効終了日抽出チェックオン = new RString("0").equals(認定有効終日抽出);
+        this.is保険料完納者も出力チェックオン = new RString("0").equals(保険料完納者も出力);
+
         this.被保険者選択 = 被保険者選択;
         this.受給者全員 = 受給者全員;
         this.受給認定申請中者 = 受給認定申請中者;
