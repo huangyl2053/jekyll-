@@ -169,7 +169,7 @@ public class JuryoininKeiyakuShoninKakuninshoService {
             AtenaJusho sofusakiJusho = entity.get受領委任契約事業者().getSofusakiJusho();
             AtenaJusho keiyakuJigyoshaJusho = entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho();
             AtenaMeisho sofusakiJigyoshaName = entity.get受領委任契約事業者().getSofusakiJigyoshaName();
-            if (sofusakiYubinNo != null) {
+            if (sofusakiJusho != null && !sofusakiJusho.isEmpty() && sofusakiYubinNo != null) {
                 事業者用Entity.set郵便番号(sofusakiYubinNo.value());
             } else if (keiyakuJigyoshaYubinNo != null) {
                 事業者用Entity.set郵便番号(keiyakuJigyoshaYubinNo.value());
@@ -179,7 +179,7 @@ public class JuryoininKeiyakuShoninKakuninshoService {
             } else if (keiyakuJigyoshaJusho != null) {
                 事業者用Entity.set住所Text(keiyakuJigyoshaJusho.value());
             }
-            if (sofusakiJigyoshaName != null) {
+            if (sofusakiJusho != null && !sofusakiJusho.isEmpty() && sofusakiJigyoshaName != null) {
                 事業者用Entity.set氏名Text(sofusakiJigyoshaName.value());
             } else if (keiyakuJigyoshaName != null) {
                 事業者用Entity.set氏名Text(keiyakuJigyoshaName.value());

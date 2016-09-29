@@ -45,6 +45,10 @@ public final class FurikomiMeisaiIchiranDetailReport extends Report<FurikomiMeis
         this.設定値 = 設定値;
     }
 
+    private static final int 連番空白 = 0;
+    private static final int 様式連番_1 = 1;
+    private static int 前件様式連番 = -1;
+
     /**
      * writeBy
      *
@@ -52,9 +56,24 @@ public final class FurikomiMeisaiIchiranDetailReport extends Report<FurikomiMeis
      */
     @Override
     public void writeBy(ReportSourceWriter<FurikomiMeisaiIchiranDetailReportSource> writer) {
+
+        if (様式連番_1 == 一覧表用データ.get様式連番() && is様式連番_偶数(前件様式連番)) {
+            前件様式連番 = 0;
+
+            IFurikomiMeisaiIchiranDetailEditor bodyEditor
+                    = new FurikomiMeisaiIchiranDetailEditor(一覧表用データ, 出力順, 支払方法, 作成日時, 設定値, true);
+            IFurikomiMeisaiIchiranDetailBuilder builder = new FurikomiMeisaiIchiranDetailBuilder(bodyEditor);
+            writer.writeLine(builder);
+        }
         IFurikomiMeisaiIchiranDetailEditor bodyEditor
-                = new FurikomiMeisaiIchiranDetailEditor(一覧表用データ, 出力順, 支払方法, 作成日時, 設定値);
+                = new FurikomiMeisaiIchiranDetailEditor(一覧表用データ, 出力順, 支払方法, 作成日時, 設定値, false);
         IFurikomiMeisaiIchiranDetailBuilder builder = new FurikomiMeisaiIchiranDetailBuilder(bodyEditor);
         writer.writeLine(builder);
+
+        前件様式連番 = 一覧表用データ.get様式連番();
+    }
+
+    private boolean is様式連番_偶数(int 様式連番) {
+        return 連番空白 == (様式連番 % 2);
     }
 }

@@ -24,7 +24,7 @@
         FROM
             "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
         WHERE
-           '0' <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku" 
+           0 <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku" 
            AND 振込明細一時TBL."kozaDataFlag" = TRUE
         )
         
@@ -40,7 +40,7 @@
                 SELECT *
                 FROM 振込対象 AS slv
                 WHERE slv."kozaNayoseKey" = mst."kozaNayoseKey"
-                AND slv."比較キー" <![CDATA[<=]]> mst."比較キー"
+                AND slv."比較キー" <![CDATA[<]]> mst."比較キー"
                 )
             ) AS 振込明細1,
 
@@ -52,7 +52,7 @@
             FROM
                 "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
             WHERE
-                '0' <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku"
+                0 <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku"
                 AND 振込明細一時TBL."kozaDataFlag" = TRUE
             GROUP BY
                 振込明細一時TBL."kozaNayoseKey"
