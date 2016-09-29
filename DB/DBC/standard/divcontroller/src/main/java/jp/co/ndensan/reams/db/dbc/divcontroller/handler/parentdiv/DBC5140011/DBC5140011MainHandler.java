@@ -98,7 +98,7 @@ public class DBC5140011MainHandler {
             parameter.set事業者番号(div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo());
         }
         if (div.getChkNinteiKekka().getSelectedValues() != null && !div.getChkNinteiKekka().getSelectedValues().isEmpty()) {
-            parameter.set認定結果リスト(div.getChkNinteiKekka().getSelectedValues());
+            parameter.set認定結果リスト(div.getChkNinteiKekka().getSelectedKeys());
         }
         List<RString> list = new ArrayList();
         for (dgServiceShuruiList_Row row : div.getDgServiceShuruiList().getSelectedItems()) {
