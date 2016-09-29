@@ -543,7 +543,11 @@ public class GemmenGengakuShoHakkoMainHandler {
                         ? RString.EMPTY : KetteiKubun.toValue(tokubetsuchiikiKasanGemmen.get決定区分()).get名称());
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShinseibi().setValue(tokubetsuchiikiKasanGemmen.get申請年月日());
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenTekiyobi().setValue(tokubetsuchiikiKasanGemmen.get適用開始年月日());
-        div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu().setValue(tokubetsuchiikiKasanGemmen.get非承認理由());
+        if (tokubetsuchiikiKasanGemmen.get非承認理由() != null) {
+            div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu().setValue(tokubetsuchiikiKasanGemmen.get非承認理由());
+        } else {
+            div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu().clearValue();
+        }
         if (tokubetsuchiikiKasanGemmen.get減額率() != null) {
             div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenKeigenritsu().
                     setValue(new RString(tokubetsuchiikiKasanGemmen.get減額率().getColumnValue().toString()));
