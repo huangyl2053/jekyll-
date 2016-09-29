@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.gensenchoshudatasakusei;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gensenchoshudatasakusei.GensenChoshuDataSakuseiChange;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei.GensenChoshuProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE631001.GensenChoshuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.GensenChoshuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.IGensenChoshuCsvEucEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
