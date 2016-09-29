@@ -55,7 +55,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class IkenshoKakuninsho {
 
     private static final RString 完了メッセージメイン = new RString("主治医意見書確認書の作成を完了しました。");
-    
+
     /**
      * 画面初期化処理です。
      *
@@ -79,13 +79,6 @@ public class IkenshoKakuninsho {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("主治医意見書確認書"));
         }
         ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList<>(医療費控除情報リスト));
-        getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
-        LockingKey 排他キー = create排他キー(taishoshaKey);
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            throw new PessimisticLockingException();
-        }
-        RealInitialLocker.lock(排他キー);
-        AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
         List<KeyValueDataSource> 年度DDLデータ = new ArrayList<>();
         for (IryohiKojoEntityResult 医療費控除 : 医療費控除情報リスト) {
             KeyValueDataSource data = new KeyValueDataSource();
@@ -95,6 +88,15 @@ public class IkenshoKakuninsho {
             年度DDLデータ.add(data);
         }
         div.getPanelShosaiEria().getDdlTaishonen().setDataSource(年度DDLデータ);
+        getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
+        LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
+                .concat(被保険者番号).concat(new RString("IryohiKojyoSyomeisho")));
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
+        }
+        RealInitialLocker.lock(排他キー);
+        AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
+
         return ResponseData.of(div).respond();
     }
 
@@ -150,7 +152,7 @@ public class IkenshoKakuninsho {
     }
 
     /**
-     * 
+     *
      * @param div IkenshoKakuninshoDiv
      * @return ResponseData<IkenshoKakuninshoDiv>
      */
@@ -168,7 +170,7 @@ public class IkenshoKakuninsho {
         manager.save医療費控除(builder.build());
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 発行完了
      *
@@ -195,7 +197,7 @@ public class IkenshoKakuninsho {
     private IkenshoKakuninshoHandler getHandler(IkenshoKakuninshoDiv div) {
         return new IkenshoKakuninshoHandler(div);
     }
-    
+
     private PersonalData createpersonalData(TaishoshaKey taishoshaKey) {
         PersonalData personalData = PersonalData.of(taishoshaKey.get識別コード(),
                 new ExpandedInformation(new Code("003"), new RString("被保険者番号"), taishoshaKey.get被保険者番号().value()));
