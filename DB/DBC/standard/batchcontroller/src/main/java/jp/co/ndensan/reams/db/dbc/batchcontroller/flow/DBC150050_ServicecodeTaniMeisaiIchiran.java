@@ -236,6 +236,7 @@ public class DBC150050_ServicecodeTaniMeisaiIchiran
         KyufuJissekiProcessParameter kyufuJissekiParameter = new KyufuJissekiProcessParameter();
         kyufuJissekiParameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
         kyufuJissekiParameter.set帳票ID(new ReportId(ReportIdDBC.DBC200005.getReportId().getColumnValue()));
+        kyufuJissekiParameter.set開始年月(getParameter().get開始年月());
         if (getParameter().get出力順ID() != null) {
             kyufuJissekiParameter.set出力順ID(getParameter().get出力順ID());
         }

@@ -359,6 +359,10 @@
                 SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
                 SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            <if test="'00'.toString()!=対象サービス種類.toString()">
+            WHERE
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            </if>
             GROUP BY
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,1),
@@ -372,8 +376,10 @@
                 SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
                 SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+           <if test="'00'.toString()!=対象サービス種類.toString()">
             WHERE
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            </if>
             GROUP BY
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",2,1),
@@ -387,8 +393,10 @@
                 SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
                 SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            <if test="'00'.toString()!=対象サービス種類.toString()">
             WHERE
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            </if>
             GROUP BY
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,2),
@@ -402,8 +410,10 @@
                 SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
                 SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            <if test="'00'.toString()!=対象サービス種類.toString()">
             WHERE
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            </if>
             GROUP BY
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,3),
@@ -417,8 +427,10 @@
                 SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
                 SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            <if test="'00'.toString()!=対象サービス種類.toString()">
             WHERE
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            </if>
             GROUP BY
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
                 "DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",
