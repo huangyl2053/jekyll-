@@ -64,6 +64,8 @@ public class KaigoHihokenshaInfoPanel {
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
     private static final RString ONE = new RString("1");
+    private static final RString MESSAGETAISHO = new RString("更新は正常に終了しました。");
+    private static final RString 終了年月日NULL = new RString("99999999");
 
     /**
      * 画面初期化のメソッドます。
@@ -147,8 +149,14 @@ public class KaigoHihokenshaInfoPanel {
         RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
         ShikibetsuCode 識別コード = div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().getDomain();
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
-        if (履歴番号.isNullOrEmpty()) {
-            履歴番号 = ONE;
+        if (DBB6110001StateName.連帯納付義務者新規.getName().equals(ResponseHolder.getState())) {
+            KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
+            Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+            if (履歴番号.isNullOrEmpty() && 最新履歴番号 == null) {
+                履歴番号 = ONE;
+            } else {
+                履歴番号 = new RString(最新履歴番号.intValue() + 1);
+            }
         }
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
         RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
@@ -159,7 +167,7 @@ public class KaigoHihokenshaInfoPanel {
                     被保険者番号, new Decimal(履歴番号.toString()));
             result = result.createBuilderForEdit()
                     .set開始年月日(new FlexibleDate(開始年月日.toString()))
-                    .set終了年月日(終了年月日 == null ? new FlexibleDate(RString.EMPTY)
+                    .set終了年月日(終了年月日 == null ? new FlexibleDate(終了年月日NULL)
                             : new FlexibleDate(終了年月日.toString()))
                     .set識別コード(識別コード).build();
             result = result.added();
@@ -171,7 +179,7 @@ public class KaigoHihokenshaInfoPanel {
             } else {
                 result = result.createBuilderForEdit()
                         .set開始年月日(new FlexibleDate(開始年月日.toString()))
-                        .set終了年月日(終了年月日 == null ? new FlexibleDate(RString.EMPTY)
+                        .set終了年月日(終了年月日 == null ? new FlexibleDate(終了年月日NULL)
                                 : new FlexibleDate(終了年月日.toString()))
                         .set識別コード(識別コード).build();
                 result = result.modified();
@@ -199,6 +207,8 @@ public class KaigoHihokenshaInfoPanel {
         RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
         List<AtenaJouhou> list = rentaiNofuGimusha.getLastSetaiIchiran(taishoshaKey.get世帯コード());
         handler.set直近世帯情報取得(list);
+        div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().setDisabled(false);
+        div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().setDisabled(false);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者新規);
     }
 
@@ -240,6 +250,8 @@ public class KaigoHihokenshaInfoPanel {
         handler.set直近世帯情報取得(list);
         dgRentaiNofuGimushaIchiran_Row row = div.getDgRentaiNofuGimushaIchiran().getClickedItem();
         handler.setRentaiNofuGimushaInfo(row);
+        div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().setDisabled(false);
+        div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().setDisabled(false);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者修正);
     }
 
@@ -304,7 +316,9 @@ public class KaigoHihokenshaInfoPanel {
         }
         KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
         for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
-            if (entity.hasChanged()) {
+            if (entity.hasChanged() && entity.isModified()) {
+                manager.saveModify(entity);
+            } else {
                 manager.save(entity);
             }
         }
@@ -335,6 +349,7 @@ public class KaigoHihokenshaInfoPanel {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         LockingKey 前排他キー = new LockingKey(DBBHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         RealInitialLocker.release(前排他キー);
+        div.getCcdKiagoKanryoMessage().setSuccessMessage(MESSAGETAISHO);
         // TODO QA#101047
         return ResponseData.of(div).forwardWithEventName(DBB6110001TransitionEventName.完了状態).respond();
     }
