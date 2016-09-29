@@ -61,7 +61,6 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
     private static final String マスタ登録_マスタ更新 = "doMasterTorokuUpdate";
     private static final String マスタ登録_マスタ更新_2 = "doMasterTorokuUpdate2";
     private RString csvFullPath;
-    private boolean isLast;
     private int レコード件数合算;
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;

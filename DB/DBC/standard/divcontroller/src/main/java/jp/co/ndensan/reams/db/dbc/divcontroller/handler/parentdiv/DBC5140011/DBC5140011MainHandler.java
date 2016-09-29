@@ -98,7 +98,7 @@ public class DBC5140011MainHandler {
             parameter.set事業者番号(div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo());
         }
         if (div.getChkNinteiKekka().getSelectedValues() != null && !div.getChkNinteiKekka().getSelectedValues().isEmpty()) {
-            parameter.set認定結果リスト(div.getChkNinteiKekka().getSelectedValues());
+            parameter.set認定結果リスト(div.getChkNinteiKekka().getSelectedKeys());
         }
         List<RString> list = new ArrayList();
         for (dgServiceShuruiList_Row row : div.getDgServiceShuruiList().getSelectedItems()) {
@@ -188,7 +188,7 @@ public class DBC5140011MainHandler {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         pamaRestore1(restoreBatchParameterMap);
         List<RString> 認定結果リスト = restoreBatchParameterMap.getParameterListValue(RString.class, new RString("認定結果リスト"));
-        if (認定結果リスト != null && 認定結果リスト.isEmpty()) {
+        if (認定結果リスト != null && !認定結果リスト.isEmpty()) {
             div.getChkNinteiKekka().setSelectedItemsByKey(認定結果リスト);
         }
         List<RString> サービス種類コードリスト

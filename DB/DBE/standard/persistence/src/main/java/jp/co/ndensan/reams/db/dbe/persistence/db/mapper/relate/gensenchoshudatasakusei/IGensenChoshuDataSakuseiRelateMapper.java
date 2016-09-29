@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gensenchoshudatasakusei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei.GensenChoshuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE631001.GensenChoshuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.GensenChoshuRelateEntity;
 
 /**

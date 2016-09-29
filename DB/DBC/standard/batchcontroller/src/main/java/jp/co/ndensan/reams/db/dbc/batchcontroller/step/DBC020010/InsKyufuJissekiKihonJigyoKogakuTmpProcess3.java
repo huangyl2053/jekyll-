@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -24,7 +24,7 @@ public class InsKyufuJissekiKihonJigyoKogakuTmpProcess3 extends BatchProcessBase
 
     private static final RString 給付実績基本情報事業高額一時 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db."
             + "mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
-            + "get給付実績基本情報事業高額一時3");
+            + "get給付実績基本情報事業高額一時3リスト");
     private static final RString 給付実績基本情報事業高額一時3 = new RString("TempKyufujissekiKihonJigyo3");
     private static final int INDEX_2 = 2;
 
@@ -51,7 +51,7 @@ public class InsKyufuJissekiKihonJigyoKogakuTmpProcess3 extends BatchProcessBase
         }
         entity.setShokisaiHokenshaNo(new HokenshaNo(entity.getShokisaiHokenshaNo().getColumnValue().substring(INDEX_2)));
         一時給付実績基本情報事業高額一時3.insert(entity);
-
+        breakKey = getBreakKey(entity);
     }
 
     private RString getBreakKey(DbT3017KyufujissekiKihonEntity entity) {

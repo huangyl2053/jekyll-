@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFile;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFilekekka;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ShinchokuNoTorikomiRisutoFairuCSVEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.TorikomiErarisutofairuCSVEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.ErarisutofairuIchijiTeburuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.FairudetaIchijiTeburuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.JinbunoQurirumirisutofairuYishiteburuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.YokaigoninteiIntafesumasutaEntity;
@@ -107,9 +106,9 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
         tmpTableWriter_1 = BatchEntityCreatedTempTableWriterBuilders.createBuilder(JinbunoQurirumirisutofairuYishiteburuEntity.class)
                 .tempTableName(JinbunoQurirumirisutofairuYishiteburuEntity.TABLE_NAME)
                 .build();
-        tmpTableWriter_2 = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ErarisutofairuIchijiTeburuEntity.class)
-                .tempTableName(ErarisutofairuIchijiTeburuEntity.TABLE_NAME)
-                .build();
+//        tmpTableWriter_2 = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ErarisutofairuIchijiTeburuEntity.class)
+//                .tempTableName(ErarisutofairuIchijiTeburuEntity.TABLE_NAME)
+//                .build();
         tmpTableWriter_3 = BatchEntityCreatedTempTableWriterBuilders.createBuilder(YokaigoninteiIntafesumasutaEntity.class)
                 .tempTableName(YokaigoninteiIntafesumasutaEntity.TABLE_NAME)
                 .build();
@@ -150,8 +149,8 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
             NinteiKekkaRenkeiDataTorikomiManager.createInstance().項目設定(t, out);
             JinbunoQurirumirisutofairuYishiteburuEntity jinbunoEntity = create出力ファイルのデータ編集(out);
             tmpTableWriter_1.insert(jinbunoEntity);
-            ErarisutofairuIchijiTeburuEntity erarEntity = createエラーリストファイルデータの編集(error);
-            tmpTableWriter_2.insert(erarEntity);
+//            ErarisutofairuIchijiTeburuEntity erarEntity = createエラーリストファイルデータの編集(error);
+//            tmpTableWriter_2.insert(erarEntity);
             YokaigoninteiIntafesumasutaEntity yoKaigonEntity = create要介護認定インターフェースマスタル(fairudetaEntity);
             tmpTableWriter_3.insert(yoKaigonEntity);
 
@@ -159,14 +158,14 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
             ファイル出力進捗の取込みリストファイル(csventity, jinbunoEntity);
             eucCsvWriter_1.writeLine(csventity);
             TorikomiErarisutofairuCSVEntity csvEntity = new TorikomiErarisutofairuCSVEntity();
-            ファイル出力進捗の取込みエラーリストファイル(csvEntity, erarEntity);
+//            ファイル出力進捗の取込みエラーリストファイル(csvEntity, erarEntity);
             eucCsvWriter_2.writeLine(csvEntity);
         } else if (一時デーブル_認定結果.equals(processParameter.get取込みデータ区分())) {
             NinteiKekkaRenkeiDataTorikomiManager.createInstance().項目設定(t, out);
             JinbunoQurirumirisutofairuYishiteburuEntity jinbunoEntity = create出力ファイルのデータ編集(out);
             tmpTableWriter_1.insert(jinbunoEntity);
-            ErarisutofairuIchijiTeburuEntity erarEntity = createエラーリストファイルデータの編集(error);
-            tmpTableWriter_2.insert(erarEntity);
+//            ErarisutofairuIchijiTeburuEntity erarEntity = createエラーリストファイルデータの編集(error);
+//            tmpTableWriter_2.insert(erarEntity);
             YokaigoninteiIntafesumasutaEntity yoKaigonEntity = create要介護認定インターフェースマスタル(fairudetaEntity);
             tmpTableWriter_3.insert(yoKaigonEntity);
 
@@ -174,7 +173,7 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
             ファイル出力進捗の取込みリストファイル(csventity, jinbunoEntity);
             eucCsvWriter_1.writeLine(csventity);
             TorikomiErarisutofairuCSVEntity csvEntity = new TorikomiErarisutofairuCSVEntity();
-            ファイル出力進捗の取込みエラーリストファイル(csvEntity, erarEntity);
+//            ファイル出力進捗の取込みエラーリストファイル(csvEntity, erarEntity);
             eucCsvWriter_2.writeLine(csvEntity);
             personalDataList.add(toPersonalData(t));
         }
@@ -255,32 +254,31 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
         return entity;
     }
 
-    private ErarisutofairuIchijiTeburuEntity createエラーリストファイルデータの編集(ErrorRecord error) {
-        ErarisutofairuIchijiTeburuEntity entity = new ErarisutofairuIchijiTeburuEntity();
-        entity.setShikibetsukodo(error.getShikibetsukodo());
-        entity.setHokenshabango(error.getHokenshabango());
-        entity.setHihokenjabango(error.getHihokenjabango());
-        entity.setNinteishinseibi(error.getNinteishinseibi());
-        entity.setEdaban(error.getEdaban());
-        entity.setShinseikubunhorei(error.getShinseikubunhorei());
-        entity.setShinseikubunshinseiji(error.getShinseikubunshinseiji());
-        entity.setTorisakubunkodo(error.getTorisakubunkodo());
-        entity.setHihokenjakubun(error.getHihokenjakubun());
-        entity.setShinseidaikokubun(error.getShinseidaikokubun());
-        entity.setSeinengappi(error.getSeinengappi());
-        entity.setNenrei(error.getNenrei());
-        entity.setSeibetsukodo(error.getSeibetsukodo());
-        entity.setHihokenjakanashimei(error.getHihokenjakanashimei());
-        entity.setHihokenjakanjishimei(error.getHihokenjakanjishimei());
-        entity.setYubenbango(error.getYubenbango());
-        entity.setJusho(error.getJusho());
-        entity.setTenwabango(error.getTenwabango());
-        entity.setByoinshisetsutonomeisho(error.getByoinshisetsutonomeisho());
-        entity.setByoinshisetsutonoshozaichi(error.getByoinshisetsutonoshozaichi());
-        entity.setEramesseji(error.getEramesseji());
-        return entity;
-    }
-
+//    private ErarisutofairuIchijiTeburuEntity createエラーリストファイルデータの編集(ErrorRecord error) {
+//        ErarisutofairuIchijiTeburuEntity entity = new ErarisutofairuIchijiTeburuEntity();
+//        entity.setShikibetsukodo(error.getShikibetsukodo());
+//        entity.setHokenshabango(error.getHokenshabango());
+//        entity.setHihokenjabango(error.getHihokenjabango());
+//        entity.setNinteishinseibi(error.getNinteishinseibi());
+//        entity.setEdaban(error.getEdaban());
+//        entity.setShinseikubunhorei(error.getShinseikubunhorei());
+//        entity.setShinseikubunshinseiji(error.getShinseikubunshinseiji());
+//        entity.setTorisakubunkodo(error.getTorisakubunkodo());
+//        entity.setHihokenjakubun(error.getHihokenjakubun());
+//        entity.setShinseidaikokubun(error.getShinseidaikokubun());
+//        entity.setSeinengappi(error.getSeinengappi());
+//        entity.setNenrei(error.getNenrei());
+//        entity.setSeibetsukodo(error.getSeibetsukodo());
+//        entity.setHihokenjakanashimei(error.getHihokenjakanashimei());
+//        entity.setHihokenjakanjishimei(error.getHihokenjakanjishimei());
+//        entity.setYubenbango(error.getYubenbango());
+//        entity.setJusho(error.getJusho());
+//        entity.setTenwabango(error.getTenwabango());
+//        entity.setByoinshisetsutonomeisho(error.getByoinshisetsutonomeisho());
+//        entity.setByoinshisetsutonoshozaichi(error.getByoinshisetsutonoshozaichi());
+//        entity.setEramesseji(error.getEramesseji());
+//        return entity;
+//    }
     private void ファイル出力進捗の取込みリストファイル(ShinchokuNoTorikomiRisutoFairuCSVEntity csventity, JinbunoQurirumirisutofairuYishiteburuEntity entity) {
         csventity.set識別コード(entity.getShikibetsukodo());
         csventity.set識別コード名称(entity.getShikibetsukodo_meisho());
@@ -355,30 +353,29 @@ public class ShutsuryokuFairuRisutooSakuseiProcess extends BatchProcessBase<OutF
 
     }
 
-    private void ファイル出力進捗の取込みエラーリストファイル(TorikomiErarisutofairuCSVEntity csventity, ErarisutofairuIchijiTeburuEntity entity) {
-        csventity.set識別コード(entity.getShikibetsukodo().value());
-        csventity.set保険者番号(entity.getHokenshabango());
-        csventity.set被保険者番号(entity.getHihokenjabango());
-        csventity.set認定申請日(new RString(entity.getNinteishinseibi().toString()));
-        csventity.set枝番(entity.getEdaban());
-        csventity.set申請区分_法令_コード(entity.getShinseikubunhorei().value());
-        csventity.set申請区分_申請時_コード(entity.getShinseikubunshinseiji().value());
-        csventity.set取下区分コード(entity.getTorisakubunkodo().value());
-        csventity.set被保険者区分コード(entity.getHihokenjakubun().value());
-        csventity.set申請代行区分コード(entity.getShinseidaikokubun().value());
-        csventity.set生年月日(new RString(entity.getSeinengappi().toString()));
-        csventity.set年齢(new RString(entity.getNenrei()));
-        csventity.set性別コード(entity.getSeibetsukodo().value());
-        csventity.set被保険者ｶﾅ氏名(entity.getHihokenjakanashimei().value());
-        csventity.set被保険者漢字氏名(entity.getHihokenjakanjishimei().value());
-        csventity.set郵便番号(entity.getYubenbango().value());
-        csventity.set住所(entity.getJusho().value());
-        csventity.set電話番号(entity.getTenwabango().value());
-        csventity.set病院施設等の名称(entity.getByoinshisetsutonomeisho());
-        csventity.set病院施設等の所在地(entity.getByoinshisetsutonoshozaichi());
-        csventity.setエラーメッセージ(entity.getEramesseji());
-    }
-
+//    private void ファイル出力進捗の取込みエラーリストファイル(TorikomiErarisutofairuCSVEntity csventity, ErarisutofairuIchijiTeburuEntity entity) {
+//        csventity.set識別コード(entity.getShikibetsukodo().value());
+//        csventity.set保険者番号(entity.getHokenshabango());
+//        csventity.set被保険者番号(entity.getHihokenjabango());
+//        csventity.set認定申請日(new RString(entity.getNinteishinseibi().toString()));
+//        csventity.set枝番(entity.getEdaban());
+//        csventity.set申請区分_法令_コード(entity.getShinseikubunhorei().value());
+//        csventity.set申請区分_申請時_コード(entity.getShinseikubunshinseiji().value());
+//        csventity.set取下区分コード(entity.getTorisakubunkodo().value());
+//        csventity.set被保険者区分コード(entity.getHihokenjakubun().value());
+//        csventity.set申請代行区分コード(entity.getShinseidaikokubun().value());
+//        csventity.set生年月日(new RString(entity.getSeinengappi().toString()));
+//        csventity.set年齢(new RString(entity.getNenrei()));
+//        csventity.set性別コード(entity.getSeibetsukodo().value());
+//        csventity.set被保険者ｶﾅ氏名(entity.getHihokenjakanashimei().value());
+//        csventity.set被保険者漢字氏名(entity.getHihokenjakanjishimei().value());
+//        csventity.set郵便番号(entity.getYubenbango().value());
+//        csventity.set住所(entity.getJusho().value());
+//        csventity.set電話番号(entity.getTenwabango().value());
+//        csventity.set病院施設等の名称(entity.getByoinshisetsutonomeisho());
+//        csventity.set病院施設等の所在地(entity.getByoinshisetsutonoshozaichi());
+//        csventity.setエラーメッセージ(entity.getEramesseji());
+//    }
     @Override
     protected void afterExecute() {
         eucCsvWriter_1.close();

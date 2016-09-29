@@ -36,11 +36,23 @@ public class JizenShinsakaiShiryoPublication {
         JizenShinsakaiShiryoPublicationBusiness 対象審査会情報
                 = JizenShinsakaiShiryoPublicationManager.creatInstance().get審査会開催番号(審査会開催番号);
         getHandler(div).onLoad(対象審査会情報, 審査会開催番号);
+        getHandler(div).set審査会資料選択chkの設定();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 印刷審査会資料選択チェックボックスの使用可能・不可能を設定する。
+     * 出力スタイル_印刷サイズddl変更します。
+     *
+     * @param div JizenShinsakaiShiryoPublicationDiv
+     * @return ResponseData<JizenShinsakaiShiryoPublicationDiv>
+     */
+    public ResponseData<JizenShinsakaiShiryoPublicationDiv> onChange_Ddl(JizenShinsakaiShiryoPublicationDiv div) {
+        getHandler(div).set審査会資料選択chkの設定();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 印刷審査会資料選択チェックボックスの使用可能・不可能を設定します。
      *
      * @param div JizenShinsakaiShiryoPublicationDiv
      * @return ResponseData<JizenShinsakaiShiryoPublicationDiv>
@@ -51,7 +63,7 @@ public class JizenShinsakaiShiryoPublication {
     }
 
     /**
-     * 「指定条件で実行する」ボタン。
+     * 「指定条件で実行する」を設定します。
      *
      * @param div JizenShinsakaiShiryoPublicationDiv
      * @return ResponseData<JizenShinsakaiShiryoPublicationDiv>
@@ -70,7 +82,7 @@ public class JizenShinsakaiShiryoPublication {
     }
 
     /**
-     * 帳票の出力処理を実施する。
+     * 帳票の出力処理を実施です。
      *
      * @param div JizenShinsakaiShiryoPublicationDiv
      * @return ResponseData<DBE526002_JIzenShinsakekkaTorokuSakuseiParameter>
