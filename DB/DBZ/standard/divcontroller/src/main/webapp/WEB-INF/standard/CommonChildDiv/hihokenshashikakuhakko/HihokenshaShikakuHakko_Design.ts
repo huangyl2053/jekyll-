@@ -37,6 +37,14 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("YukoKigenInfo"));
             }
 
+            public btnTyokuzenRireki(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTyokuzenRireki"));
+            }
+
+            public btnSaishin(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSaishin"));
+            }
+
             public txtYukoKigen(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtYukoKigen"));
             }
