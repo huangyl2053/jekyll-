@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishosealer2;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Source;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KogakuKetteiTsuchiShoSealer2Report extends Report<KogakuKetteiTsuchiShoSealer2Source> {
 
-    private final RString 設定値;
+    private final List<RString> titleList;
     private final KogakuKetteiTsuchiShoEntity 帳票情報;
     private final NinshoshaSource 認証者ソースデータ;
     private final RString 文書番号;
@@ -27,19 +28,19 @@ public class KogakuKetteiTsuchiShoSealer2Report extends Report<KogakuKetteiTsuch
     /**
      * コンストラクタです。
      *
-     * @param 設定値 RString
+     * @param titleList List<RString>
      * @param 帳票情報 KogakuKetteiTsuchiShoEntity
      * @param 認証者ソースデータ NinshoshaSource
      * @param 文書番号 RString
      *
      */
     public KogakuKetteiTsuchiShoSealer2Report(
-            RString 設定値,
+            List<RString> titleList,
             KogakuKetteiTsuchiShoEntity 帳票情報,
             NinshoshaSource 認証者ソースデータ,
             RString 文書番号) {
 
-        this.設定値 = 設定値;
+        this.titleList = titleList;
         this.帳票情報 = 帳票情報;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.文書番号 = 文書番号;
@@ -48,7 +49,7 @@ public class KogakuKetteiTsuchiShoSealer2Report extends Report<KogakuKetteiTsuch
     @Override
     public void writeBy(ReportSourceWriter<KogakuKetteiTsuchiShoSealer2Source> writer) {
         IKogakuKetteiTsuchiShoSealer2Editor editor = new KogakuKetteiTsuchiShoSealer2Editor(
-                設定値,
+                titleList,
                 帳票情報,
                 認証者ソースデータ,
                 文書番号);

@@ -5,20 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.kogakuketteitsuchishosealer2;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Property;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Report;
 import jp.co.ndensan.reams.db.dbc.entity.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Source;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -30,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 帳票設計_DBCMN43002_高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）PrintServiceクラスです。
@@ -38,10 +33,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBC-2000-070 lijian
  */
 public class KogakuKetteiTsuchiShoSealer2PrintService {
-
-    private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
-    private static final ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
-    private static final RString 項目名 = new RString("取り消し線");
 
     /**
      * 高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）(単一帳票出力用)
@@ -51,6 +42,7 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
      * @param 文書番号 RString
      * @param 帳票ID RString
      * @param 認証者 Ninshosha
+     * @param titleList List<RString>
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -58,10 +50,11 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
             RDate 発行日,
             RString 文書番号,
             RString 帳票ID,
-            Ninshosha 認証者) {
+            Ninshosha 認証者,
+            List<RString> titleList) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, reportManager);
+            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, titleList, reportManager);
             collection = reportManager.publish();
         }
 
@@ -76,6 +69,7 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
      * @param 文書番号 RString
      * @param 帳票ID RString
      * @param 認証者 Ninshosha
+     * @param titleList List<RString>
      * @param reportManager ReportManager
      */
     public void print(
@@ -84,6 +78,7 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
             RString 文書番号,
             RString 帳票ID,
             Ninshosha 認証者,
+            List<RString> titleList,
             ReportManager reportManager) {
 
         KogakuKetteiTsuchiShoSealer2Property property = new KogakuKetteiTsuchiShoSealer2Property();
@@ -101,21 +96,12 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
             ReportSourceWriter<KogakuKetteiTsuchiShoSealer2Source> reportSourceWriter;
             reportSourceWriter = new ReportSourceWriter(assembler);
 
-            RString 設定値 = fetch設定値();
-
             new KogakuKetteiTsuchiShoSealer2Report(
-                    設定値,
+                    titleList,
                     帳票情報,
                     認証者ソースデータ,
                     文書番号).writeBy(reportSourceWriter);
         }
-    }
-
-    private RString fetch設定値() {
-        DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名);
-        return entity.getKomokuValue();
-
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
