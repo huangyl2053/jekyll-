@@ -80,7 +80,7 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
     private static final RString TITLE_処理対象年月 = new RString("　　　処理対象年月：");
     private static final RString TITLE_異動年月 = new RString("　　　異動年月　　：");
     private static final RString 各異動月の最新のみ = new RString("■各異動月の最新情報のみ抽出する");
-    private static final LasdecCode 全市町村_CODE = new LasdecCode("000000");
+    private static final RString 全市町村_CODE = new RString("000000");
     private static final RString 全市町村 = new RString("00000 全市町村");
     private static final RString 新規_黒 = new RString("■新規");
     private static final RString 新規_白 = new RString("□新規");
@@ -166,6 +166,13 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void afterExecute() {
+        if (なし.equals(csv出力Flag) && processParameter.is項目名付加()) {
+            List<RString> bodyList = new ArrayList<>();
+            for (int i = 0; i < editor.setHeaderList(processParameter).size(); i++) {
+                bodyList.add(RString.EMPTY);
+            }
+            csvListWriter.writeLine(bodyList);
+        }
         csvListWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
@@ -191,14 +198,14 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
     private List<RString> get抽出条件() {
         List<RString> 抽出条件 = new ArrayList<>();
         抽出条件.add(TITLE_抽出条件);
-        if (processParameter.get保険者コード() == null || LasdecCode.EMPTY.equals(processParameter.get保険者コード())) {
+        if (RString.isNullOrEmpty(processParameter.get保険者コード())) {
             抽出条件.add(RString.EMPTY);
-        } else if (processParameter.get保険者コード() != null && 全市町村_CODE.equals(processParameter.get保険者コード())) {
+        } else if (!RString.isNullOrEmpty(processParameter.get保険者コード()) && 全市町村_CODE.equals(processParameter.get保険者コード())) {
             抽出条件.add(TITLE_保険者.concat(全市町村));
         } else {
             Association association = AssociationFinderFactory.
-                    createInstance().getAssociation(processParameter.get保険者コード());
-            抽出条件.add(TITLE_保険者.concat(processParameter.get保険者コード().getColumnValue().concat(association.get市町村名())));
+                    createInstance().getAssociation(new LasdecCode(processParameter.get保険者コード()));
+            抽出条件.add(TITLE_保険者.concat(processParameter.get保険者コード().concat(association.get市町村名())));
         }
         抽出条件.add(RString.EMPTY);
         if (!processParameter.get日付抽出区分().isEmpty() && HizukeChushutsuKubun.すべて.getコード().equals(processParameter.get日付抽出区分())) {

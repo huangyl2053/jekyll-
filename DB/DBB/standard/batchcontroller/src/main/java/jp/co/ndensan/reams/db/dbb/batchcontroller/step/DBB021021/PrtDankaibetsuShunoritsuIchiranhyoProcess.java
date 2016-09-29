@@ -1097,7 +1097,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         bodyList.add(get金額Formatter(data.get不納欠損額()));
         bodyList.add(data.get収納率());
         bodyList.add(getCSV徴収方法(data.get科目コード()));
-        bodyList.add(data.get市町村コード().code市町村RString());
+        bodyList.add(data.get市町村コード().getColumnValue());
         return bodyList;
     }
 

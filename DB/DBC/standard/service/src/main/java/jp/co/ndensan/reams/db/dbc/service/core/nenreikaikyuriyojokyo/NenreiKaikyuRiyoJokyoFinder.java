@@ -28,10 +28,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class NenreiKaikyuRiyoJokyoFinder {
 
-    private RString 被保険者番号 = RString.EMPTY;
-    private FlexibleYearMonth サービス提供年月 = FlexibleYearMonth.EMPTY;
-    private RString 要介護状態区分コード = RString.EMPTY;
-    private RString サービス分類コード = RString.EMPTY;
     private static final RString 処理名 = new RString("「生年月日算出」");
     private static final RString エラー内容 = new RString("生年月日算出エラー");
     private static final RString 年齢階級1 = new RString("40歳～49歳");
@@ -48,11 +44,23 @@ public class NenreiKaikyuRiyoJokyoFinder {
     private static final RString 年齢階級12 = new RString("100歳以上");
     private static final RString 年齢階級13 = new RString("１号計");
     private static final RString 年齢階級14 = new RString("総合計");
-    private static final int 桁_0 = 0;
+    private static final RString 値01 = new RString("01");
+    private static final RString 値11 = new RString("11");
+    private static final RString 値12 = new RString("12");
+    private static final RString 値13 = new RString("13");
+    private static final RString 値21 = new RString("21");
+    private static final RString 値22 = new RString("22");
+    private static final RString 値23 = new RString("23");
+    private static final RString 値24 = new RString("24");
+    private static final RString 値25 = new RString("25");
     private static final int 年齢40 = 40;
     private static final int 年齢65 = 65;
     private static final RString RSTRING_ZERO = new RString("0");
     private final MapperProvider mapperProvider;
+    private RString 被保険者番号 = RString.EMPTY;
+    private FlexibleYearMonth サービス提供年月 = FlexibleYearMonth.EMPTY;
+    private RString 要介護状態区分コード = RString.EMPTY;
+    private RString サービス分類コード = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -80,7 +88,7 @@ public class NenreiKaikyuRiyoJokyoFinder {
     }
 
     /**
-     * 出力用一時TBLを更新する。
+     * 出力用一時TBLを更新です。
      *
      */
     @Transaction
@@ -93,6 +101,7 @@ public class NenreiKaikyuRiyoJokyoFinder {
             サービス分類コード = entityList.get(0).getServiceSyuruiCode().value();
         }
         for (int i = 0; i < entityList.size(); i++) {
+            edit対象レコード(updateParEntityList, entityList.get(i), mapper);
             if (!サービス分類コード.equals(entityList.get(i).getServiceSyuruiCode().value())) {
                 updateDB出力出力用一時TBL(updateParEntityList, mapper);
                 updateParEntityList = createntitylist();
@@ -111,10 +120,10 @@ public class NenreiKaikyuRiyoJokyoFinder {
     }
 
     private int get対象レコード数(TmpKyufujissekiRelateEntity レコード) {
-        int count = 0;
-        if (!被保険者番号.equals(レコード.getHiHokenshaNo().value())
-                && !サービス提供年月.toString().equals(レコード.getServiceTeikyoYM().toString())
-                && !要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode())) {
+        int count = 1;
+        if (被保険者番号.equals(レコード.getHiHokenshaNo().value())
+                && サービス提供年月.toString().equals(レコード.getServiceTeikyoYM().toString())
+                && 要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode())) {
             被保険者番号 = レコード.getHiHokenshaNo().value();
             サービス提供年月 = レコード.getServiceTeikyoYM();
             要介護状態区分コード = レコード.getYoKaigoJotaiKubunCode();
@@ -141,7 +150,7 @@ public class NenreiKaikyuRiyoJokyoFinder {
                     count,
                     年齢階級4, レコード.getYoKaigoJotaiKubunCode());
 
-        } else if (age >= 年齢65) {
+        } else if (年齢65 <= age) {
             updateCreatEntitylist(updateParEntityList,
                     count,
                     年齢階級13, レコード.getYoKaigoJotaiKubunCode());
@@ -157,7 +166,7 @@ public class NenreiKaikyuRiyoJokyoFinder {
             for (UpdateParameterEntity updateParEntity : list) {
                 if (年齢階級.equals(updateParEntity.get区分())
                         && 要介護状態区分コード.equals(updateParEntity.get要介護状態区分コード())) {
-                    updateParEntity.setKubun(count);
+                    updateParEntity.setKubun(updateParEntity.getKubun() + count);
                 }
             }
         }
@@ -200,7 +209,7 @@ public class NenreiKaikyuRiyoJokyoFinder {
 
     private UpdateParameterEntity setEntity(RString 年齢階級, RString 要介護状態区分コード) {
         UpdateParameterEntity list = new UpdateParameterEntity();
-        list.setKubun(桁_0);
+        list.setKubun(0);
         list.setページNo(RSTRING_ZERO);
         list.set区分(年齢階級);
         list.set要介護状態区分コード(要介護状態区分コード);
@@ -211,7 +220,114 @@ public class NenreiKaikyuRiyoJokyoFinder {
         for (List<UpdateParameterEntity> list : updateParEntityList) {
             for (UpdateParameterEntity updateEntity : list) {
                 if (updateEntity.getKubun() > 0) {
-                    mapper.update出力用一時TBL(updateEntity);
+                    if (値01.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(true);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値11.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(true);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値12.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(true);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値13.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(true);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値21.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(true);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値22.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(true);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値23.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(true);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値24.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(true);
+                        updateEntity.setYouKaigo5flag(false);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
+                    if (値25.equals(updateEntity.get要介護状態区分コード())) {
+                        updateEntity.setHiGaitouflag(false);
+                        updateEntity.setYoSien1flag(false);
+                        updateEntity.setYoSien2flag(false);
+                        updateEntity.setKeikatekiYoSienflag(false);
+                        updateEntity.setYouKaigo1flag(false);
+                        updateEntity.setYouKaigo2flag(false);
+                        updateEntity.setYouKaigo3flag(false);
+                        updateEntity.setYouKaigo4flag(false);
+                        updateEntity.setYouKaigo5flag(true);
+                        mapper.update出力用一時TBL(updateEntity);
+                    }
                 }
             }
         }

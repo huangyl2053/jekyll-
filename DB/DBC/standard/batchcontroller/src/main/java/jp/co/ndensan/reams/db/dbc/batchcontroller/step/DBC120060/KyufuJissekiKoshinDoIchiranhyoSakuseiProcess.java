@@ -111,7 +111,7 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
         改頁リスト = new ArrayList<>();
         改頁リスト.add(固定改頁項目ID);
         並び順 = get並び順();
-        
+
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());

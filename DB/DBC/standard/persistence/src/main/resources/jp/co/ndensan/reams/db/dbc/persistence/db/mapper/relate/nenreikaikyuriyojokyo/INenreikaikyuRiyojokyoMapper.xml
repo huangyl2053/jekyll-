@@ -244,16 +244,42 @@
     <update  id="update出力用一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.UpdateParameterEntity" >      
         UPDATE "DbSyuturyokuYoTemp" 
         SET
-        "hiGaitou" = "hiGaitou" + 1
-        , "yoSien1" = "yoSien1" + 1
-        , "yoSien2" = "yoSien2" + 1
-        , "keikatekiYoSien" = "keikatekiYoSien" + 1
-        , "youKaigo1" = "youKaigo1" + 1
-        , "youKaigo2" = "youKaigo2" + 1
-        , "youKaigo3" = "youKaigo3" + 1
-        , "youKaigo4" = "youKaigo4" + 1
-        , "youKaigo5" = "youKaigo5" + 1
-        , "goikei" = "goikei" + 1 
+        <if test="hiGaitouflag">
+            "hiGaitou" = "hiGaitou" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+        <if test="yoSien1flag">
+            "yoSien1" = "yoSien1" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+         <if test="yoSien2flag">
+            "yoSien2" = "yoSien2" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+        <if test="keikatekiYoSienflag">
+            "keikatekiYoSien" = "keikatekiYoSien" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+         <if test="youKaigo1flag">
+            "youKaigo1" = "youKaigo1" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+        <if test="youKaigo2flag">
+            "youKaigo2" = "youKaigo2" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+        <if test="youKaigo3flag">
+            "youKaigo3" = "youKaigo3" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+        <if test="youKaigo4flag">
+            "youKaigo4" = "youKaigo4" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if>
+        <if test="youKaigo5flag">
+            "youKaigo5" = "youKaigo5" + #{kubun}
+            ,"goikei" =  "goikei" +  #{kubun}
+        </if> 
         WHERE
         "kubun" = #{区分}
     </update>

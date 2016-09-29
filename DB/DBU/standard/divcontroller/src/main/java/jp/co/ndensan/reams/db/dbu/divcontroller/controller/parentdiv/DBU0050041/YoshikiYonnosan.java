@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050041;
 
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformation;
-import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName.検索に戻る;
@@ -14,6 +13,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0050041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.YoshikiYonnosanDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -210,12 +210,12 @@ public class YoshikiYonnosan {
                     handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))) {
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -237,7 +237,7 @@ public class YoshikiYonnosan {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -268,7 +268,7 @@ public class YoshikiYonnosan {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<YoshikiYonnosanDiv> onClick_btnDelUpdate(YoshikiYonnosanDiv div) {
-        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+        ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }
 
@@ -325,7 +325,7 @@ public class YoshikiYonnosan {
 
     private InsuranceInformation get引き継ぎデータ(YoshikiYonnosanDiv div) {
         InsuranceInformation 引き継ぎデータ
-                = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
+                = ViewStateHolder.get(ViewStateKeys.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
             if (div.getYoshikiYonnosanMeisai().getDdlShicyoson().isDisplayNone()) {
                 引き継ぎデータ = new InsuranceInformation(

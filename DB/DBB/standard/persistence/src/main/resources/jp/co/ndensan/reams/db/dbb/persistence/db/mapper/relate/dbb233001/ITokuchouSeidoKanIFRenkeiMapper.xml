@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 特徴制度間Ｉ／Ｆ連携のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-1810-040 dengjiajia -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.dbb233001.ITokuchouSeidoKanIFRenkeiMapper">
+<select id="select連携ファイル用" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb233001.TokuchouSeidoKanIFRenkeiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb233001.TokuchouSeidoKanIFRenkeiMyBatisParameter"
+            resultOrdered="true">
+        <include refid="selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity" />
+</select>
+
+ <sql id="selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity" >
+        SELECT
+
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtCityCode" AS dt市町村コード,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtTokubetsuChoshuGimushaCode" AS dt特別徴収義務者コード,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtTokubetsuChoshuSeidoCode" AS dt特別徴収制度コード,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtTsuchiNaiyoCode" AS dt通知内容コード,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtSakuseiYMD" AS dt作成年月日,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKisoNenkinNo" AS dt基礎年金番号,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtNenkinCode" AS dt年金コード,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtBirthDay" AS dt生年月日,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtSeibetsu" AS dt性別,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKanaShimei" AS dtカナ氏名,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtShiftCode1" AS dtシフトコード1,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKanjiShimei" AS dt漢字氏名,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtShiftCode2" AS dtシフトコード2,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtYubinNo" AS dt郵便番号,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKanaJusho" AS dtカナ住民,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtShiftCode3" AS dtシフトコード3,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKanjiJusho" AS dt漢字住所,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtShiftCode4" AS dtシフトコード4,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKakushuKubun" AS dt各種区分,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtShoriKekka" AS dt処理結果,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKakushuYMD" AS dt各種年月日,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKakushuKingaku1" AS dt各種金額欄1,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKakushuKingaku2" AS dt各種金額欄2,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKakushuKingaku3" AS dt各種金額欄3,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKyosaiNenkinshoshoKigoNo" AS dt共済年金証記号番号,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKokiIkanCode" AS dt後期移管コード,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtYobi1" AS dt予備1,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtYobi2" AS dt予備2,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."kaigohokenHihokenshaNo" AS 介護保険被保険者番号,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."kojinCodeKubun" AS 個人コード区分,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."kojinCode" AS 個人コード,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."kaigohokenJushochitokureiKubun" AS 介護保険住所地特例区分,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."hosokuYMD" AS 捕捉年月日,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."taikiFlag" AS 待機フラグ,
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."yobi" AS 予備
+     FROM
+          rgue."UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550" AS UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550
+     WHERE
+         TO_CHAR(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."shoriTimestamp",'YYYY') = #{処理年度}
+     
+        <if test="市町村コードリスト!=null and 市町村コードリスト.size()!=0">
+            AND UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtCityCode" IN 
+            <foreach collection="市町村コードリスト" item="市町村コード"
+                     index="index" open="(" close=")" separator=",">
+                #{市町村コード}
+            </foreach>
+        </if>
+        <if test="市町村コードリスト==null or 市町村コードリスト.size()==0">
+            AND FALSE
+        </if>
+     
+     ORDER BY
+         UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtCityCode",
+         UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtTokubetsuChoshuGimushaCode",
+         UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtTsuchiNaiyoCode",
+         UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtKisoNenkinNo",
+         UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550."dtNenkinCode" ASC
+         
+ </sql>
+</mapper>
+
+
+     
+
+

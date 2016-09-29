@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020004;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.kyufugakugengakukanrilist.KyufugakuGengakuKanriListFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012.DBD209012_KyufuGakuGengakuKanriListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.DBD2020004StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.KyufugakuGengakuKanriListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020004.KyufugakuGengakuKanriListHandler;
@@ -75,8 +75,8 @@ public class KyufugakuGengakuKanriList {
      * @param div KyufugakuGengakuKanriListDiv のクラスファイル
      * @return ResponseData
      */
-    public ResponseData<KyufugakuGengakuKanriListFlowParameter> onClick_batchParameter(KyufugakuGengakuKanriListDiv div) {
-        ResponseData<KyufugakuGengakuKanriListFlowParameter> responseData = new ResponseData<>();
+    public ResponseData<DBD209012_KyufuGakuGengakuKanriListParameter> onClick_batchParameter(KyufugakuGengakuKanriListDiv div) {
+        ResponseData<DBD209012_KyufuGakuGengakuKanriListParameter> responseData = new ResponseData<>();
         responseData.data = createHandler(div).batchParameter();
         return responseData;
     }

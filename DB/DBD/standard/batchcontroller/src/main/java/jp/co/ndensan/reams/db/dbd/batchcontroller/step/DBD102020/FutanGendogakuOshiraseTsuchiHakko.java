@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102020;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmen.shinseisho.hakko.Ddb102020MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoOrderKey;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.Futan
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko.IFutanGendogakuOshiraseTsuchiHakkoMapper;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -158,7 +160,7 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
                     processParamter.get発行日().getDayValue());
         }
         NinteiKoshinTsuchishoItem item = new NinteiKoshinTsuchishoItem(
-                null,
+                new FutanGendogakuNintei(ShoKisaiHokenshaNo.EMPTY, entity.get被保険者番号(), 1),
                 kojin,
                 atesaki,
                 new ChohyoSeigyoKyotsu(帳票制御共通),

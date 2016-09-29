@@ -32,15 +32,29 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         coverEntity.set被保険者氏名(hakkoEntity.get被保険者番号());
         coverEntity.setサービス集計開始年月(processParameter.getサービス年月開始());
         coverEntity.setサービス集計終了年月(processParameter.getサービス年月終了());
-        coverEntity.setサービス年月(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
-        coverEntity.setサービス事業所(hakkoEntity.getRelateEntity().getJigyoshoKanji());
-        coverEntity.setタイコード(hakkoEntity.getRelateEntity().getFukushiYouguKaHinmokuCode());
-        coverEntity.set福祉用具商品名(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
-        coverEntity.set費用額(new RString(hakkoEntity.getRelateEntity().getHiyouGaku().toString()));
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
+            coverEntity.setサービス年月(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+        }
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getJigyoshoKanji() != null) {
+            coverEntity.setサービス事業所(hakkoEntity.getRelateEntity().getJigyoshoKanji());
+        }
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getFukushiYouguShouhin() != null) {
+            coverEntity.setタイコード(hakkoEntity.getRelateEntity().getFukushiYouguKaHinmokuCode());
+        }
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getFukushiYouguShouhin() != null) {
+            coverEntity.set福祉用具商品名(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+        }
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getHiyouGaku() != null) {
+            coverEntity.set費用額(new RString(hakkoEntity.getRelateEntity().getHiyouGaku().toString()));
+        }
         RStringBuilder builderイトル1 = new RStringBuilder();
-        builderイトル1.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
+            builderイトル1.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+        }
         builderイトル1.append(new RString("全国費用額分布状況【"));
-        builderイトル1.append(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getFukushiYouguShouhin() != null) {
+            builderイトル1.append(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+        }
         builderイトル1.append(new RString("】"));
         coverEntity.set参考資料タイトル1(builderイトル1.toRString());
         if (hakkoEntity.getRelateEntity().getZenkokuTanisuHani1().longValue() <= hakkoEntity.getRelateEntity().getHiyouGaku().longValue()
@@ -48,9 +62,13 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
             coverEntity.setあなたの位置1(new RString("◆"));
         }
         RStringBuilder builderイトル2 = new RStringBuilder();
-        builderイトル2.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
+            builderイトル2.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+        }
         builderイトル2.append(new RString("全国費用額分布状況【"));
-        builderイトル2.append(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getFukushiYouguShouhin() != null) {
+            builderイトル2.append(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+        }
         builderイトル2.append(new RString("】"));
         coverEntity.set参考資料タイトル2(builderイトル2.toRString());
         if (hakkoEntity.getRelateEntity().getZenkokuTanisuHani1().longValue() <= hakkoEntity.getRelateEntity().getHiyouGaku().longValue()
@@ -58,9 +76,13 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
             coverEntity.setあなたの位置2(new RString("◆"));
         }
         RStringBuilder builderイトル3 = new RStringBuilder();
-        builderイトル3.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
+            builderイトル3.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+        }
         builderイトル3.append(new RString("全国費用額分布状況【"));
-        builderイトル3.append(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+        if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getFukushiYouguShouhin() != null) {
+            builderイトル3.append(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+        }
         builderイトル3.append(new RString("】"));
         coverEntity.set参考資料タイトル3(builderイトル3.toRString());
         if (hakkoEntity.getRelateEntity().getZenkokuTanisuHani1().longValue() <= hakkoEntity.getRelateEntity().getHiyouGaku().longValue()

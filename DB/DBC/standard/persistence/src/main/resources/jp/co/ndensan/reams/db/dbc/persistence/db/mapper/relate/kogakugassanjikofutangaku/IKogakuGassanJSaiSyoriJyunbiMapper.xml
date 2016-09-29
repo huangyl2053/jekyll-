@@ -46,7 +46,7 @@
     <select id="select連番" resultMap="ResultMap_DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true"> 
         SELECT
-        <include refid="allColumns_DbWT37H2"/>
+        "DbWT37H2"."renban" AS dbWT37H2_renban
         FROM(
             SELECT "DbWT37H2".*,
                    "DbWT37H1"."rirekiNo" as "DbWT37H1_rirekiNo"
@@ -58,36 +58,37 @@
                 "DbWT37H2"."renban" = "DbWT37H1"."renban"
             WHERE
                 "DbWT37H1"."koshinFlag" = true
-        ) AS MEISAI
+        ) AS "DbWT37H2"
         INNER JOIN 
             rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071"
         ON 
-            MEISAI."hokenshaNoIn" = "DbT3071"."hihokenshaNo"
+            "DbWT37H2"."hokenshaNoIn" = "DbT3071"."hihokenshaNo"
         AND 
-            MEISAI."taishoNendo" = "DbT3071"."taishoNendo"
+            "DbWT37H2"."taishoNendo" = "DbT3071"."taishoNendo"
         AND
-            MEISAI."shoKisaiHokenshaNo" = "DbT3071"."hokenshaNo"
+            "DbWT37H2"."shoKisaiHokenshaNo" = "DbT3071"."hokenshaNo"
         AND 
-            MEISAI."shikyuShinseishoSeiriNo" = "DbT3071"."shikyuShinseishoSeiriNo"
+            "DbWT37H2"."shikyuShinseishoSeiriNo" = "DbT3071"."shikyuShinseishoSeiriNo"
         AND
-            MEISAI."DbWT37H1_rirekiNo" = "DbT3071"."rirekiNo"
+            "DbWT37H2"."DbWT37H1_rirekiNo" = "DbT3071"."rirekiNo"
         AND 
-            MEISAI."taishoM" = "DbT3071"."taishoM"
+            "DbWT37H2"."taishoM" = "DbT3071"."taishoM"
         WHERE 
-            MEISAI."jikoFutanGaku" <![CDATA[<>]]> ("DbT3071"."sumi_JikoFutanGaku" - "DbT3071"."sumi_under_70KogakuShikyuGaku")
-        GROUP BY MEISAI."renban"
+            "DbWT37H2"."jikoFutanGaku" <![CDATA[<>]]> ("DbT3071"."sumi_JikoFutanGaku" - "DbT3071"."sumi_under_70KogakuShikyuGaku")
+        GROUP BY "DbWT37H2"."renban"
     </select>
     
     <select id="get帳票出力対象データ" resultMap="resultMap_KogakuGassanJikofutangakuShomeishoDateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter"  fetchSize="500" resultOrdered="true">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter" 
+            fetchSize="500" resultOrdered="true">
         SELECT
         <include refid="allColumns_kogakuGassanJikofutangakuShomeishoDateEntity" />
         FROM 
-            "DbWT37H1KogakuGassanaJikofutangaku" AS DbWT37H1
+            "DbWT37H1KogakuGassanaJikofutangaku" AS "DbWT37H1"
         INNER JOIN 
-            "DbWT0001Hihokensha" AS DbWT0001
+            "DbWT0001Hihokensha" AS "DbWT0001"
         ON 
-            DbWT37H1."renban" = DbWT0001."meisaiRenban"
+            "DbWT37H1"."renban" = "DbWT0001"."meisaiRenban"
         ${出力順}
     </select>
     
@@ -156,300 +157,115 @@
     </sql>
     
     <sql id="allColumns_DbWT37H2">
-        DbWT37H2."renban" AS dbWT37H2_renban,
-        DbWT37H2."hokenshaNoIn" AS dbWT37H2_hokenshaNoIn,
-        DbWT37H2."taishoNendo" AS dbWT37H2_taishoNendo,
-        DbWT37H2."shoKisaiHokenshaNo" AS dbWT37H2_shoKisaiHokenshaNo,
-        DbWT37H2."shikyuShinseishoSeiriNo" AS dbWT37H2_shikyuShinseishoSeiriNo,
-        DbWT37H2."rirekiNo" AS dbWT37H2_rirekiNo,
-        DbWT37H2."taishoM" AS dbWT37H2_taishoM,
-        DbWT37H2."jikoFutanGaku" AS dbWT37H2_jikoFutanGaku,
-        DbWT37H2."uchisu_70_74JikoFutanGaku" AS dbWT37H2_uchisu_70_74JikoFutanGaku,
-        DbWT37H2."under_70KogakuShikyuGaku" AS dbWT37H2_under_70KogakuShikyuGaku,
-        DbWT37H2."over_70_74KogakuShikyuGaku" AS dbWT37H2_over_70_74KogakuShikyuGaku,
-        DbWT37H2."tekiyo" AS dbWT37H2_tekiyo,
-        DbWT37H2."sumi_JikoFutanGaku" AS dbWT37H2_sumi_JikoFutanGaku,
-        DbWT37H2."sumi_70_74JikoFutanGaku" AS dbWT37H2_sumi_70_74JikoFutanGaku,
-        DbWT37H2."sumi_under_70KogakuShikyuGaku" AS dbWT37H2_sumi_under_70KogakuShikyuGaku,
-        DbWT37H2."sumi_70_74KogakuShikyuGaku" AS dbWT37H2_sumi_70_74KogakuShikyuGaku,
-        DbWT37H2."sumi_Tekiyo" AS dbWT37H2_sumi_Tekiyo,
-        DbWT37H2."jikoFutangakuSaiFlag" AS dbWT37H2_jikoFutangakuSaiFlag
-    </sql>
-    
-     <sql id="allColumns_DbT3070">
-        DbT3070."hihokenshaNo" AS dbT3070_hihokenshaNo,
-        DbT3070."taishoNendo" AS dbT3070_taishoNendo,
-        DbT3070."hokenshaNo" AS dbT3070_hokenshaNo,
-        DbT3070."shikyuShinseishoSeiriNo" AS dbT3070_shikyuShinseishoSeiriNo,
-        DbT3070."rirekiNo" AS dbT3070_rirekiNo,
-        DbT3070."hokenSeidoCode" AS dbT3070_hokenSeidoCode,
-        DbT3070."hokenshaMei" AS dbT3070_hokenshaMei,
-        DbT3070."kokuho_HihokenshaShoKigo" AS dbT3070_kokuho_HihokenshaShoKigo,
-        DbT3070."hihokenshaShimeiKana" AS dbT3070_hihokenshaShimeiKana,
-        DbT3070."hihokenshaShimei" AS dbT3070_hihokenshaShimei,
-        DbT3070."umareYMD" AS dbT3070_umareYMD,
-        DbT3070."seibetsuCode" AS dbT3070_seibetsuCode,
-        DbT3070."shotokuKubun" AS dbT3070_shotokuKubun,
-        DbT3070."over70_ShotokuKubun" AS dbT3070_over70_ShotokuKubun,
-        DbT3070."jikoFutanSeiriNo" AS dbT3070_jikoFutanSeiriNo,
-        DbT3070."koki_HokenshaNo" AS dbT3070_koki_HokenshaNo,
-        DbT3070."koki_HihokenshaNo" AS dbT3070_koki_HihokenshaNo,
-        DbT3070."kokuho_HokenshaNo" AS dbT3070_kokuho_HokenshaNo,
-        DbT3070."kokuho_HihokenshaShoNo" AS dbT3070_kokuho_HihokenshaShoNo,
-        DbT3070."kokuho_KojinNo" AS dbT3070_kokuho_KojinNo,
-        DbT3070."idoKubun" AS dbT3070_idoKubun,
-        DbT3070."hoseiZumiSofuKubun" AS dbT3070_hoseiZumiSofuKubun,
-        DbT3070."taishoKeisanKaishiYMD" AS dbT3070_taishoKeisanKaishiYMD,
-        DbT3070."taishoKeisanShuryoYMD" AS dbT3070_taishoKeisanShuryoYMD,
-        DbT3070."hihokenshaKaishiYMD" AS dbT3070_hihokenshaKaishiYMD,
-        DbT3070."hihokenshaShuryoYMD" AS dbT3070_hihokenshaShuryoYMD,
-        DbT3070."shinseiYMD" AS dbT3070_shinseiYMD,
-        DbT3070."gokei_JikoFutanGaku" AS dbT3070_gokei_JikoFutanGaku,
-        DbT3070."gokei_70_74JikoFutanGaku" AS dbT3070_gokei_70_74JikoFutanGaku,
-        DbT3070."gokei_Under70KogakuShikyuGaku" AS dbT3070_gokei_Under70KogakuShikyuGaku,
-        DbT3070."gokei_70_74KogakuShikyuGaku" AS dbT3070_gokei_70_74KogakuShikyuGaku,
-        DbT3070."sumi_Gokei_JikoFutanGaku" AS dbT3070_sumi_Gokei_JikoFutanGaku,
-        DbT3070."sumi_Gokei_70_74JikoFutanGaku" AS dbT3070_sumi_Gokei_70_74JikoFutanGaku,
-        DbT3070."sumi_Gokei_Under70KogakuShikyuGaku" AS dbT3070_sumi_Gokei_Under70KogakuShikyuGaku,
-        DbT3070."sumi_Gokei_70_74KogakuShikyuGaku" AS dbT3070_sumi_Gokei_70_74KogakuShikyuGaku,
-        DbT3070."atesakiShimei" AS dbT3070_atesakiShimei,
-        DbT3070."atesakiYubinNo" AS dbT3070_atesakiYubinNo,
-        DbT3070."atesakiJusho" AS dbT3070_atesakiJusho,
-        DbT3070."madoguchi_TaishoshaHanteiCode" AS dbT3070_madoguchi_TaishoshaHanteiCode,
-        DbT3070."shiharaiBasho" AS dbT3070_shiharaiBasho,
-        DbT3070."shikaraiKaishiYMD" AS dbT3070_shikaraiKaishiYMD,
-        DbT3070."shiharaiShuryoYMD" AS dbT3070_shiharaiShuryoYMD,
-        DbT3070."heichoNaiyo" AS dbT3070_heichoNaiyo,
-        DbT3070."shiharaiKaishiTime" AS dbT3070_shiharaiKaishiTime,
-        DbT3070."shiharaiShuryoTime" AS dbT3070_shiharaiShuryoTime,
-        DbT3070."biko" AS dbT3070_biko,
-        DbT3070."dataSakuseiKubun" AS dbT3070_dataSakuseiKubun,
-        DbT3070."kakunin_UketoriYM" AS dbT3070_kakunin_UketoriYM,
-        DbT3070."hoseiZumi_SofuYM" AS dbT3070_hoseiZumi_SofuYM,
-        DbT3070."shomeisho_UketoriYM" AS dbT3070_shomeisho_UketoriYM,
-        DbT3070."saisoFlag" AS dbT3070_saisoFlag,
-        DbT3070."sofuTaishoGaiFlag" AS dbT3070_sofuTaishoGaiFlag,
-        DbT3070."jikoFutanKeisanYMD" AS dbT3070_jikoFutanKeisanYMD,
-        DbT3070."shomeiShoSakuseiYMD" AS dbT3070_shomeiShoSakuseiYMD,
-        DbT3070."koki_KokuhoShoriKubun" AS dbT3070_koki_KokuhoShoriKubun,
-        DbT3070."jikoFutangakuShomeishoRealHakkoFlag" AS dbT3070_jikoFutangakuShomeishoRealHakkoFlag,
-        DbT3070."batchHoseiJissiYMD" AS dbT3070_batchHoseiJissiYMD,
-        DbT3070."realHoseiJissiYMD" AS dbT3070_realHoseiJissiYMD
-    </sql>
-    
-    
-    <sql id="allColumns_DbT3070DbWT37H1DateEntity">
-        DbT3070."hihokenshaNo" AS dbT3070_hihokenshaNo,
-        DbT3070."taishoNendo" AS dbT3070_taishoNendo,
-        DbT3070."hokenshaNo" AS dbT3070_hokenshaNo,
-        DbT3070."shikyuShinseishoSeiriNo" AS dbT3070_shikyuShinseishoSeiriNo,
-        DbT3070."rirekiNo" AS dbT3070_rirekiNo,
-        DbT3070."hokenSeidoCode" AS dbT3070_hokenSeidoCode,
-        DbT3070."hokenshaMei" AS dbT3070_hokenshaMei,
-        DbT3070."kokuho_HihokenshaShoKigo" AS dbT3070_kokuho_HihokenshaShoKigo,
-        DbT3070."hihokenshaShimeiKana" AS dbT3070_hihokenshaShimeiKana,
-        DbT3070."hihokenshaShimei" AS dbT3070_hihokenshaShimei,
-        DbT3070."umareYMD" AS dbT3070_umareYMD,
-        DbT3070."seibetsuCode" AS dbT3070_seibetsuCode,
-        DbT3070."shotokuKubun" AS dbT3070_shotokuKubun,
-        DbT3070."over70_ShotokuKubun" AS dbT3070_over70_ShotokuKubun,
-        DbT3070."jikoFutanSeiriNo" AS dbT3070_jikoFutanSeiriNo,
-        DbT3070."koki_HokenshaNo" AS dbT3070_koki_HokenshaNo,
-        DbT3070."koki_HihokenshaNo" AS dbT3070_koki_HihokenshaNo,
-        DbT3070."kokuho_HokenshaNo" AS dbT3070_kokuho_HokenshaNo,
-        DbT3070."kokuho_HihokenshaShoNo" AS dbT3070_kokuho_HihokenshaShoNo,
-        DbT3070."kokuho_KojinNo" AS dbT3070_kokuho_KojinNo,
-        DbT3070."idoKubun" AS dbT3070_idoKubun,
-        DbT3070."hoseiZumiSofuKubun" AS dbT3070_hoseiZumiSofuKubun,
-        DbT3070."taishoKeisanKaishiYMD" AS dbT3070_taishoKeisanKaishiYMD,
-        DbT3070."taishoKeisanShuryoYMD" AS dbT3070_taishoKeisanShuryoYMD,
-        DbT3070."hihokenshaKaishiYMD" AS dbT3070_hihokenshaKaishiYMD,
-        DbT3070."hihokenshaShuryoYMD" AS dbT3070_hihokenshaShuryoYMD,
-        DbT3070."shinseiYMD" AS dbT3070_shinseiYMD,
-        DbT3070."gokei_JikoFutanGaku" AS dbT3070_gokei_JikoFutanGaku,
-        DbT3070."gokei_70_74JikoFutanGaku" AS dbT3070_gokei_70_74JikoFutanGaku,
-        DbT3070."gokei_Under70KogakuShikyuGaku" AS dbT3070_gokei_Under70KogakuShikyuGaku,
-        DbT3070."gokei_70_74KogakuShikyuGaku" AS dbT3070_gokei_70_74KogakuShikyuGaku,
-        DbT3070."sumi_Gokei_JikoFutanGaku" AS dbT3070_sumi_Gokei_JikoFutanGaku,
-        DbT3070."sumi_Gokei_70_74JikoFutanGaku" AS dbT3070_sumi_Gokei_70_74JikoFutanGaku,
-        DbT3070."sumi_Gokei_Under70KogakuShikyuGaku" AS dbT3070_sumi_Gokei_Under70KogakuShikyuGaku,
-        DbT3070."sumi_Gokei_70_74KogakuShikyuGaku" AS dbT3070_sumi_Gokei_70_74KogakuShikyuGaku,
-        DbT3070."atesakiShimei" AS dbT3070_atesakiShimei,
-        DbT3070."atesakiYubinNo" AS dbT3070_atesakiYubinNo,
-        DbT3070."atesakiJusho" AS dbT3070_atesakiJusho,
-        DbT3070."madoguchi_TaishoshaHanteiCode" AS dbT3070_madoguchi_TaishoshaHanteiCode,
-        DbT3070."shiharaiBasho" AS dbT3070_shiharaiBasho,
-        DbT3070."shikaraiKaishiYMD" AS dbT3070_shikaraiKaishiYMD,
-        DbT3070."shiharaiShuryoYMD" AS dbT3070_shiharaiShuryoYMD,
-        DbT3070."heichoNaiyo" AS dbT3070_heichoNaiyo,
-        DbT3070."shiharaiKaishiTime" AS dbT3070_shiharaiKaishiTime,
-        DbT3070."shiharaiShuryoTime" AS dbT3070_shiharaiShuryoTime,
-        DbT3070."biko" AS dbT3070_biko,
-        DbT3070."dataSakuseiKubun" AS dbT3070_dataSakuseiKubun,
-        DbT3070."kakunin_UketoriYM" AS dbT3070_kakunin_UketoriYM,
-        DbT3070."hoseiZumi_SofuYM" AS dbT3070_hoseiZumi_SofuYM,
-        DbT3070."shomeisho_UketoriYM" AS dbT3070_shomeisho_UketoriYM,
-        DbT3070."saisoFlag" AS dbT3070_saisoFlag,
-        DbT3070."sofuTaishoGaiFlag" AS dbT3070_sofuTaishoGaiFlag,
-        DbT3070."jikoFutanKeisanYMD" AS dbT3070_jikoFutanKeisanYMD,
-        DbT3070."shomeiShoSakuseiYMD" AS dbT3070_shomeiShoSakuseiYMD,
-        DbT3070."koki_KokuhoShoriKubun" AS dbT3070_koki_KokuhoShoriKubun,
-        DbT3070."jikoFutangakuShomeishoRealHakkoFlag" AS dbT3070_jikoFutangakuShomeishoRealHakkoFlag,
-        DbT3070."batchHoseiJissiYMD" AS dbT3070_batchHoseiJissiYMD,
-        DbT3070."realHoseiJissiYMD" AS dbT3070_realHoseiJissiYMD
-        DbWT37H1."renban" AS dbWT37H1_renban,
-        DbWT37H1."hokenshaNoIn" AS dbWT37H1_hokenshaNoIn,
-        DbWT37H1."taishoNendo" AS dbWT37H1_taishoNendo,
-        DbWT37H1."shoKisaiHokenshaNo" AS dbWT37H1_shoKisaiHokenshaNo,
-        DbWT37H1."shikyuShinseishoSeiriNo" AS dbWT37H1_shikyuShinseishoSeiriNo,
-        DbWT37H1."rirekiNo" AS dbWT37H1_rirekiNo,
-        DbWT37H1."hokenSeidoCode" AS dbWT37H1_hokenSeidoCode,
-        DbWT37H1."hokenshaMei" AS dbWT37H1_hokenshaMei,
-        DbWT37H1."kokuho_HihokenshaShoKigo" AS dbWT37H1_kokuho_HihokenshaShoKigo,
-        DbWT37H1."hihokenshaShimeiKana" AS dbWT37H1_hihokenshaShimeiKana,
-        DbWT37H1."hihokenshaShimei" AS dbWT37H1_hihokenshaShimei,
-        DbWT37H1."umareYMD" AS dbWT37H1_umareYMD,
-        DbWT37H1."seibetsuCode" AS dbWT37H1_seibetsuCode,
-        DbWT37H1."shotokuKubun" AS dbWT37H1_shotokuKubun,
-        DbWT37H1."over70_ShotokuKubun" AS dbWT37H1_over70_ShotokuKubun,
-        DbWT37H1."jikoFutanSeiriNo" AS dbWT37H1_jikoFutanSeiriNo,
-        DbWT37H1."koki_HokenshaNo" AS dbWT37H1_koki_HokenshaNo,
-        DbWT37H1."koki_HihokenshaNo" AS dbWT37H1_koki_HihokenshaNo,
-        DbWT37H1."kokuho_HokenshaNo" AS dbWT37H1_kokuho_HokenshaNo,
-        DbWT37H1."kokuho_HihokenshaShoNo" AS dbWT37H1_kokuho_HihokenshaShoNo,
-        DbWT37H1."kokuho_KojinNo" AS dbWT37H1_kokuho_KojinNo,
-        DbWT37H1."idoKubun" AS dbWT37H1_idoKubun,
-        DbWT37H1."hoseiZumiSofuKubun" AS dbWT37H1_hoseiZumiSofuKubun,
-        DbWT37H1."taishoKeisanKaishiYMD" AS dbWT37H1_taishoKeisanKaishiYMD,
-        DbWT37H1."taishoKeisanShuryoYMD" AS dbWT37H1_taishoKeisanShuryoYMD,
-        DbWT37H1."hihokenshaKaishiYMD" AS dbWT37H1_hihokenshaKaishiYMD,
-        DbWT37H1."hihokenshaShuryoYMD" AS dbWT37H1_hihokenshaShuryoYMD,
-        DbWT37H1."shinseiYMD" AS dbWT37H1_shinseiYMD,
-        DbWT37H1."gokei_JikoFutanGaku" AS dbWT37H1_gokei_JikoFutanGaku,
-        DbWT37H1."gokei_70_74JikoFutanGaku" AS dbWT37H1_gokei_70_74JikoFutanGaku,
-        DbWT37H1."gokei_Under70KogakuShikyuGaku" AS dbWT37H1_gokei_Under70KogakuShikyuGaku,
-        DbWT37H1."gokei_70_74KogakuShikyuGaku" AS dbWT37H1_gokei_70_74KogakuShikyuGaku,
-        DbWT37H1."sumi_Gokei_JikoFutanGaku" AS dbWT37H1_sumi_Gokei_JikoFutanGaku,
-        DbWT37H1."sumi_Gokei_70_74JikoFutanGaku" AS dbWT37H1_sumi_Gokei_70_74JikoFutanGaku,
-        DbWT37H1."sumi_Gokei_Under70KogakuShikyuGaku" AS dbWT37H1_sumi_Gokei_Under70KogakuShikyuGaku,
-        DbWT37H1."sumi_Gokei_70_74KogakuShikyuGaku" AS dbWT37H1_sumi_Gokei_70_74KogakuShikyuGaku,
-        DbWT37H1."atesakiShimei" AS dbWT37H1_atesakiShimei,
-        DbWT37H1."atesakiYubinNo" AS dbWT37H1_atesakiYubinNo,
-        DbWT37H1."atesakiJusho" AS dbWT37H1_atesakiJusho,
-        DbWT37H1."madoguchi_TaishoshaHanteiCode" AS dbWT37H1_madoguchi_TaishoshaHanteiCode,
-        DbWT37H1."shiharaiBasho" AS dbWT37H1_shiharaiBasho,
-        DbWT37H1."shikaraiKaishiYMD" AS dbWT37H1_shikaraiKaishiYMD,
-        DbWT37H1."shiharaiShuryoYMD" AS dbWT37H1_shiharaiShuryoYMD,
-        DbWT37H1."heichoNaiyo" AS dbWT37H1_heichoNaiyo,
-        DbWT37H1."shiharaiKaishiTime" AS dbWT37H1_shiharaiKaishiTime,
-        DbWT37H1."shiharaiShuryoTime" AS dbWT37H1_shiharaiShuryoTime,
-        DbWT37H1."biko" AS dbWT37H1_biko,
-        DbWT37H1."dataSakuseiKubun" AS dbWT37H1_dataSakuseiKubun,
-        DbWT37H1."kakunin_UketoriYM" AS dbWT37H1_kakunin_UketoriYM,
-        DbWT37H1."hoseiZumi_SofuYM" AS dbWT37H1_hoseiZumi_SofuYM,
-        DbWT37H1."shomeisho_UketoriYM" AS dbWT37H1_shomeisho_UketoriYM,
-        DbWT37H1."saisoFlag" AS dbWT37H1_saisoFlag,
-        DbWT37H1."sofuTaishoGaiFlag" AS dbWT37H1_sofuTaishoGaiFlag,
-        DbWT37H1."jikoFutanKeisanYMD" AS dbWT37H1_jikoFutanKeisanYMD,
-        DbWT37H1."shomeiShoSakuseiYMD" AS dbWT37H1_shomeiShoSakuseiYMD,
-        DbWT37H1."koki_KokuhoShoriKubun" AS dbWT37H1_koki_KokuhoShoriKubun,
-        DbWT37H1."jikoFutangakuShomeishoRealHakkoFlag" AS dbWT37H1_jikoFutangakuShomeishoRealHakkoFlag,
-        DbWT37H1."batchHoseiJissiYMD" AS dbWT37H1_batchHoseiJissiYMD,
-        DbWT37H1."realHoseiJissiYMD" AS dbWT37H1_realHoseiJissiYMD,
-        DbWT37H1."koshinFlag" AS dbWT37H1_koshinFlag,
-        DbWT37H1."jikoFutangakuSaiFlag" AS dbWT37H1_jikoFutangakuSaiFlag
-    </sql>
-    
+        "DbWT37H2"."renban" AS dbWT37H2_renban,
+        "DbWT37H2"."hokenshaNoIn" AS dbWT37H2_hokenshaNoIn,
+        "DbWT37H2"."taishoNendo" AS dbWT37H2_taishoNendo,
+        "DbWT37H2"."shoKisaiHokenshaNo" AS dbWT37H2_shoKisaiHokenshaNo,
+        "DbWT37H2"."shikyuShinseishoSeiriNo" AS dbWT37H2_shikyuShinseishoSeiriNo,
+        "DbWT37H2"."rirekiNo" AS dbWT37H2_rirekiNo,
+        "DbWT37H2"."taishoM" AS dbWT37H2_taishoM,
+        "DbWT37H2"."jikoFutanGaku" AS dbWT37H2_jikoFutanGaku,
+        "DbWT37H2"."uchisu_70_74JikoFutanGaku" AS dbWT37H2_uchisu_70_74JikoFutanGaku,
+        "DbWT37H2"."under_70KogakuShikyuGaku" AS dbWT37H2_under_70KogakuShikyuGaku,
+        "DbWT37H2"."over_70_74KogakuShikyuGaku" AS dbWT37H2_over_70_74KogakuShikyuGaku,
+        "DbWT37H2"."tekiyo" AS dbWT37H2_tekiyo,
+        "DbWT37H2"."sumi_JikoFutanGaku" AS dbWT37H2_sumi_JikoFutanGaku,
+        "DbWT37H2"."sumi_70_74JikoFutanGaku" AS dbWT37H2_sumi_70_74JikoFutanGaku,
+        "DbWT37H2"."sumi_under_70KogakuShikyuGaku" AS dbWT37H2_sumi_under_70KogakuShikyuGaku,
+        "DbWT37H2"."sumi_70_74KogakuShikyuGaku" AS dbWT37H2_sumi_70_74KogakuShikyuGaku,
+        "DbWT37H2"."sumi_Tekiyo" AS dbWT37H2_sumi_Tekiyo,
+        "DbWT37H2"."jikoFutangakuSaiFlag" AS dbWT37H2_jikoFutangakuSaiFlag
+    </sql>  
     
     <sql id="allColumns_kogakuGassanJikofutangakuShomeishoDateEntity">
-        DbWT0001."meisaiRenban" as DbWT0001_連番,
-        DbWT0001."shoHokenshaNo" as DbWT0001_証記載保険者番号,
-        DbWT0001."orgHihokenshaNo" as DbWT0001_被保険者番号,
-        DbWT0001."serviceTeikyoYmd" as DbWT0001_サービス提供年月末日,
-        DbWT0001."orgHihokenshaKanaShimei" as DbWT0001_被保険者カナ氏名,
-        DbWT0001."orgHihokenshaKanaShimei" as DbWT0001_被保険者氏名,
-        DbWT0001."oldShichosonCode" as DbWT0001_旧市町村コード,
-        DbWT0001."henkanHihokenshaNo" as DbWT0001_変換被保険者番号,  
-        DbWT0001."hihokenshaNo" as DbWT0001_登録被保険者番号,
-        DbWT0001."shichosonCode" as DbWT0001_市町村コード,
-        DbWT0001."kannaiKangaiKubun" as DbWT0001_管内管外区分,
-        DbWT0001."yubinNo" as DbWT0001_郵便番号,
-        DbWT0001."choikiCode" as DbWT0001_町域コード,
-        DbWT0001."gyoseikuCode" as DbWT0001_行政区コード,
-        DbWT0001."gyoseikuMei" as DbWT0001_行政区名,
-        DbWT0001."jusho" as DbWT0001_住所,
-        DbWT0001."banchi" as DbWT0001_番地,
-        DbWT0001."katagaki" as DbWT0001_方書,
-        DbWT0001."kanaMeisho" as DbWT0001_宛名カナ名称,
-        DbWT0001."meisho" as DbWT0001_宛名名称,
-        DbWT0001."shimei50onKana" as DbWT0001_氏名50音カナ,
-        DbWT0001."shikibetsuCode" as DbWT0001_識別コード,
-        DbWT0001."shikakuShutokuYmd" as DbWT0001_資格取得日,
-        DbWT0001."shikakuShutokuJiyuCode" as DbWT0001_資格取得事由コード,
-        DbWT0001."shikakuSoshitsuYmd" as DbWT0001_資格喪失日,
-        DbWT0001."shikakuSoshitsuJiyuCode" as DbWT0001_資格喪失事由コード,
-        DbWT0001."setaiShuyakuNo" as DbWT0001_世帯集約番号,
-        DbWT37H1."renban" as DbWT37H1_連番,
-        DbWT37H1."hokenshaNoIn" as DbWT37H1_被保険者番号,
-        DbWT37H1."taishoNendo" as DbWT37H1_対象年度,
-        DbWT37H1."shoKisaiHokenshaNo" as DbWT37H1_保険者番号,
-        DbWT37H1."shikyuShinseishoSeiriNo" as DbWT37H1_支給申請書整理番号,
-        DbWT37H1."rirekiNo" as DbWT37H1_履歴番号,
-        DbWT37H1."hokenSeido" as DbWT37H1_保険制度コード,
-        DbWT37H1."hokenshaMei" as DbWT37H1_保険者名,
-        DbWT37H1."kokuho_HihokenshaShoKigo" as DbWT37H1_国保被保険者証記号,
-        DbWT37H1."hihokenshaShimeiKana" as DbWT37H1_被保険者氏名カナ,
-        DbWT37H1."hihokenshaShimei" as DbWT37H1_被保険者氏名,
-        DbWT37H1."umareYMD" as DbWT37H1_生年月日,
-        DbWT37H1."seibetsu" as DbWT37H1_性別,
-        DbWT37H1."shotokuKubun" as DbWT37H1_所得区分,
-        DbWT37H1."over70_ShotokuKubun" as DbWT37H1_70歳以上の者に係る所得区分,
-        DbWT37H1."jikoFutanSeiriNo" as DbWT37H1_自己負担額証明書整理番号,
-        DbWT37H1."koki_HokenshaNo" as DbWT37H1_後期保険者番号,
-        DbWT37H1."koki_HihokenshaNo" as DbWT37H1_後期被保険者番号,
-        DbWT37H1."kokuho_HokenshaNo" as DbWT37H1_国保保険者番号,
-        DbWT37H1."kokuho_HihokenshaShoNo" as DbWT37H1_国保被保険者証番号,
-        DbWT37H1."kokuho_KojinNo" as DbWT37H1_国保個人番号,
-        DbWT37H1."idoKubun" as DbWT37H1_異動区分,
-        DbWT37H1."hoseiZumiSofuKubun" as DbWT37H1_補正済自己負担額送付区分,
-        DbWT37H1."taishoKeisanKaishiYMD" as DbWT37H1_対象計算期間開始年月日,
-        DbWT37H1."taishoKeisanShuryoYMD" as DbWT37H1_対象計算期間終了年月日,
-        DbWT37H1."hihokenshaKaishiYMD" as DbWT37H1_被保険者期間開始年月日,
-        DbWT37H1."hihokenshaShuryoYMD" as DbWT37H1_被保険者期間終了年月日,
-        DbWT37H1."shinseiYMD" as DbWT37H1_申請年月日,
-        DbWT37H1."gokei_JikoFutanGaku" as DbWT37H1_合計_自己負担額,
-        DbWT37H1."gokei_70_74JikoFutanGaku" as DbWT37H1_合計_70_74自己負担額_内訳,
-        DbWT37H1."gokei_Under70KogakuShikyuGaku" as DbWT37H1_合計_70未満高額支給額
-        DbWT37H1."gokei_70_74KogakuShikyuGaku as DbWT37H1_合計_70_74高額支給額
-        DbWT37H1."sumi_Gokei_JikoFutanGaku as DbWT37H1_補正済_合計_自己負担額
-        DbWT37H1."sumi_Gokei_70_74JikoFutanGaku as DbWT37H1_補正済_合計_70_74自己負担額_内訳
-        DbWT37H1."sumi_Gokei_Under70KogakuShikyuGaku as DbWT37H1_補正済_合計_70未満高額支給額
-        DbWT37H1."sumi_Gokei_70_74KogakuShikyuGaku as DbWT37H1_補正済_合計_70_74高額支給額
-        DbWT37H1."atesakiShimei as DbWT37H1_宛先氏名
-        DbWT37H1."atesaki as DbWT37H1_宛先郵便番号
-        DbWT37H1."atesakiJusho as DbWT37H1_宛先住所
-        DbWT37H1."madoguchi_TaishoshaHantei" as DbWT37H1_窓口払対象者判定コード
-        DbWT37H1."shiharaiBasho" as DbWT37H1_支払場所
-        DbWT37H1."shikaraiKaishiYMD" as DbWT37H1_支払期間開始年月日
-        DbWT37H1."shiharaiShuryoYMD" as DbWT37H1_支払期間終了年月日
-        DbWT37H1."heichoNaiyo" as DbWT37H1_閉庁内容
-        DbWT37H1."shiharaiKaishiTime" as DbWT37H1_支払期間開始時間
-        DbWT37H1."shiharaiShuryoTime" as DbWT37H1_支払期間終了時間
-        DbWT37H1."biko" as DbWT37H1_備考
-        DbWT37H1."dataSakuseiKubun" as DbWT37H1_データ作成区分
-        DbWT37H1."kakunin_UketoriYM" as DbWT37H1_自己負担額確認情報受取年月
-        DbWT37H1."hoseiZumi_SofuYM" as DbWT37H1_補正済自己負担額情報送付年月
-        DbWT37H1."shomeisho_UketoriYM" as DbWT37H1_自己負担額証明書情報受取年月
-        DbWT37H1."saisoFlag" as DbWT37H1_再送フラグ
-        DbWT37H1."sofuTaishoGaiFlag" as DbWT37H1_送付対象外フラグ
-        DbWT37H1."jikoFutanKeisanYMD" as DbWT37H1_自己負担額計算年月日
-        DbWT37H1."shomeiShoSakuseiYMD" as DbWT37H1_自己負担額証明書作成年月日
-        DbWT37H1."koki_KokuhoShoriKubun" as DbWT37H1_後期_国保処理区分
-        DbWT37H1."jikoFutangakuShomeishoRealHakkoFlag" as DbWT37H1_自己負担額証明書リアル発行フラグ
-        DbWT37H1."batchHoseiJissiYMD" as DbWT37H1_バッチ補正実施年月日
-        DbWT37H1."realHoseiJissiYMD" as DbWT37H1_リアル補正実施年月日
-        DbWT37H1."koshinFlag" as DbWT37H1_更新フラグ
-        DbWT37H1."jikoFutangakuSaiFlag" as DbWT37H1_自己負担額差異フラグ
+        "DbWT0001"."meisaiRenban" as dbWT0001_連番,
+        "DbWT0001"."shoHokenshaNo" as dbWT0001_証記載保険者番号,
+        "DbWT0001"."orgHihokenshaNo" as dbWT0001_被保険者番号,
+        "DbWT0001"."serviceTeikyoYmd" as dbWT0001_サービス提供年月末日,
+        "DbWT0001"."orgHihokenshaKanaShimei" as dbWT0001_被保険者カナ氏名,
+        "DbWT0001"."orgHihokenshaKanaShimei" as dbWT0001_被保険者氏名,
+        "DbWT0001"."oldShichosonCode" as dbWT0001_旧市町村コード,
+        "DbWT0001"."henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
+        "DbWT0001"."hihokenshaNo" as dbWT0001_登録被保険者番号,
+        "DbWT0001"."shichosonCode" as dbWT0001_市町村コード,
+        "DbWT0001"."kannaiKangaiKubun" as dbWT0001_管内管外区分,
+        "DbWT0001"."yubinNo" as dbWT0001_郵便番号,
+        "DbWT0001"."choikiCode" as dbWT0001_町域コード,
+        "DbWT0001"."gyoseikuCode" as dbWT0001_行政区コード,
+        "DbWT0001"."gyoseikuMei" as dbWT0001_行政区名,
+        "DbWT0001"."jusho" as dbWT0001_住所,
+        "DbWT0001"."banchi" as dbWT0001_番地,
+        "DbWT0001"."katagaki" as dbWT0001_方書,
+        "DbWT0001"."kanaMeisho" as dbWT0001_宛名カナ名称,
+        "DbWT0001"."meisho" as dbWT0001_宛名名称,
+        "DbWT0001"."shimei50onKana" as dbWT0001_氏名50音カナ,
+        "DbWT0001"."shikibetsuCode" as dbWT0001_識別コード,
+        "DbWT0001"."shikakuShutokuYmd" as dbWT0001_資格取得日,
+        "DbWT0001"."shikakuShutokuJiyuCode" as dbWT0001_資格取得事由コード,
+        "DbWT0001"."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
+        "DbWT0001"."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
+        "DbWT0001"."setaiShuyakuNo" as dbWT0001_世帯集約番号,
+        "DbWT37H1"."renban" as dbWT37H1_連番,
+        "DbWT37H1"."hokenshaNoIn" as dbWT37H1_被保険者番号,
+        "DbWT37H1"."taishoNendo" as dbWT37H1_対象年度,
+        "DbWT37H1"."shoKisaiHokenshaNo" as dbWT37H1_保険者番号,
+        "DbWT37H1"."shikyuShinseishoSeiriNo" as dbWT37H1_支給申請書整理番号,
+        "DbWT37H1"."rirekiNo" as dbWT37H1_履歴番号,
+        "DbWT37H1"."hokenSeidoCode" as dbWT37H1_保険制度コード,
+        "DbWT37H1"."hokenshaMei" as dbWT37H1_保険者名,
+        "DbWT37H1"."kokuho_HihokenshaShoKigo" as dbWT37H1_国保被保険者証記号,
+        "DbWT37H1"."hihokenshaShimeiKana" as dbWT37H1_被保険者氏名カナ,
+        "DbWT37H1"."hihokenshaShimei" as dbWT37H1_被保険者氏名,
+        "DbWT37H1"."umareYMD" as dbWT37H1_生年月日,
+        "DbWT37H1"."seibetsuCode" as dbWT37H1_性別,
+        "DbWT37H1"."shotokuKubun" as dbWT37H1_所得区分,
+        "DbWT37H1"."over70_ShotokuKubun" as dbWT37H1_70歳以上の者に係る所得区分,
+        "DbWT37H1"."jikoFutanSeiriNo" as dbWT37H1_自己負担額証明書整理番号,
+        "DbWT37H1"."koki_HokenshaNo" as dbWT37H1_後期保険者番号,
+        "DbWT37H1"."koki_HihokenshaNo" as dbWT37H1_後期被保険者番号,
+        "DbWT37H1"."kokuho_HokenshaNo" as dbWT37H1_国保保険者番号,
+        "DbWT37H1"."kokuho_HihokenshaShoNo" as dbWT37H1_国保被保険者証番号,
+        "DbWT37H1"."kokuho_KojinNo" as dbWT37H1_国保個人番号,
+        "DbWT37H1"."idoKubun" as dbWT37H1_異動区分,
+        "DbWT37H1"."hoseiZumiSofuKubun" as dbWT37H1_補正済自己負担額送付区分,
+        "DbWT37H1"."taishoKeisanKaishiYMD" as dbWT37H1_対象計算期間開始年月日,
+        "DbWT37H1"."taishoKeisanShuryoYMD" as dbWT37H1_対象計算期間終了年月日,
+        "DbWT37H1"."hihokenshaKaishiYMD" as dbWT37H1_被保険者期間開始年月日,
+        "DbWT37H1"."hihokenshaShuryoYMD" as dbWT37H1_被保険者期間終了年月日,
+        "DbWT37H1"."shinseiYMD" as dbWT37H1_申請年月日,
+        "DbWT37H1"."gokei_JikoFutanGaku" as dbWT37H1_合計_自己負担額,
+        "DbWT37H1"."gokei_70_74JikoFutanGaku" as dbWT37H1_合計_70_74自己負担額_内訳,
+        "DbWT37H1"."gokei_Under70KogakuShikyuGaku" as dbWT37H1_合計_70未満高額支給額,
+        "DbWT37H1"."gokei_70_74KogakuShikyuGaku" as dbWT37H1_合計_70_74高額支給額,
+        "DbWT37H1"."sumi_Gokei_JikoFutanGaku" as dbWT37H1_補正済_合計_自己負担額,
+        "DbWT37H1"."sumi_Gokei_70_74JikoFutanGaku" as dbWT37H1_補正済_合計_70_74自己負担額_内訳,
+        "DbWT37H1"."sumi_Gokei_Under70KogakuShikyuGaku" as dbWT37H1_補正済_合計_70未満高額支給額,
+        "DbWT37H1"."sumi_Gokei_70_74KogakuShikyuGaku" as dbWT37H1_補正済_合計_70_74高額支給額,
+        "DbWT37H1"."atesakiShimei" as dbWT37H1_宛先氏名,
+        "DbWT37H1"."atesakiYubinNo" as dbWT37H1_宛先郵便番号,
+        "DbWT37H1"."atesakiJusho" as dbWT37H1_宛先住所,
+        "DbWT37H1"."madoguchi_TaishoshaHanteiCode" as dbWT37H1_窓口払対象者判定コード,
+        "DbWT37H1"."shiharaiBasho" as dbWT37H1_支払場所,
+        "DbWT37H1"."shikaraiKaishiYMD" as dbWT37H1_支払期間開始年月日,
+        "DbWT37H1"."shiharaiShuryoYMD" as dbWT37H1_支払期間終了年月日,
+        "DbWT37H1"."heichoNaiyo" as dbWT37H1_閉庁内容,
+        "DbWT37H1"."shiharaiKaishiTime" as dbWT37H1_支払期間開始時間,
+        "DbWT37H1"."shiharaiShuryoTime" as dbWT37H1_支払期間終了時間,
+        "DbWT37H1"."biko" as dbWT37H1_備考,
+        "DbWT37H1"."dataSakuseiKubun" as dbWT37H1_データ作成区分,
+        "DbWT37H1"."kakunin_UketoriYM" as dbWT37H1_自己負担額確認情報受取年月,
+        "DbWT37H1"."hoseiZumi_SofuYM" as dbWT37H1_補正済自己負担額情報送付年月,
+        "DbWT37H1"."shomeisho_UketoriYM" as dbWT37H1_自己負担額証明書情報受取年月,
+        "DbWT37H1"."saisoFlag" as dbWT37H1_再送フラグ,
+        "DbWT37H1"."sofuTaishoGaiFlag" as dbWT37H1_送付対象外フラグ,
+        "DbWT37H1"."jikoFutanKeisanYMD" as dbWT37H1_自己負担額計算年月日,
+        "DbWT37H1"."shomeiShoSakuseiYMD" as dbWT37H1_自己負担額証明書作成年月日,
+        "DbWT37H1"."koki_KokuhoShoriKubun" as dbWT37H1_後期_国保処理区分,
+        "DbWT37H1"."jikoFutangakuShomeishoRealHakkoFlag" as dbWT37H1_自己負担額証明書リアル発行フラグ,
+        "DbWT37H1"."batchHoseiJissiYMD" as dbWT37H1_バッチ補正実施年月日,
+        "DbWT37H1"."realHoseiJissiYMD" as dbWT37H1_リアル補正実施年月日,
+        "DbWT37H1"."koshinFlag" as dbWT37H1_更新フラグ,
+        "DbWT37H1"."jikoFutangakuSaiFlag" as dbWT37H1_自己負担額差異フラグ
     </sql>
     
     <resultMap id="ResultMap_KogakuGassanJSaiSyoriJyunbiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120130.KogakuGassanJSaiSyoriJyunbiEntity" autoMapping="true">
@@ -679,22 +495,93 @@
     </resultMap>
     
     <resultMap id ="resultMap_KogakuGassanJikofutangakuShomeishoDateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity" autoMapping="true">
-        <id property="証記載保険者番号" column="dbWT37H1_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="証記載保険者名" column="dbWT37H1_hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="被保険者番号" column="dbWT0001_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="被保険者氏名" column="dbWT0001_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="支給申請書整理番号" column="dbWT37H1_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="対象年度" column="dbWT37H1_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="履歴番号" column="dbWT37H1_rirekiNo"/>
-        <result property="申請年月日" column="dbWT37H1_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="異動区分コード" column="dbWT37H1_idoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="対象計算期間_開始" column="dbWT37H1_taishoKeisanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="対象計算期間_終了" column="dbWT37H1_taishoKeisanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="介護加入期間_開始" column="dbWT37H1_hihokenshaKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="介護加入期間_終了" column="dbWT37H1_hihokenshaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="自己負担額合計" column="dbWT37H1_gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="自己負担額合計_うち70_74歳" column="dbWT37H1_gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額介護サービス費" column="dbWT37H1_gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="高額合算自己負担額_連番" column="dbWT37H1_連番"/>
+        <id property="高額合算自己負担額_被保険者番号" column="dbWT37H1_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="高額合算自己負担額_対象年度" column="dbWT37H1_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="高額合算自己負担額_保険者番号" column="dbWT37H1_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="高額合算自己負担額_支給申請書整理番号" column="dbWT37H1_支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="高額合算自己負担額_履歴番号" column="dbWT37H1_履歴番号"/>
+        <result property="高額合算自己負担額_保険制度コード" column="dbWT37H1_保険制度コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_保険者名" column="dbWT37H1_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_国保被保険者証記号" column="dbWT37H1_国保被保険者証記号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_被保険者氏名カナ" column="dbWT37H1_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="高額合算自己負担額_被保険者氏名" column="dbWT37H1_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="高額合算自己負担額_生年月日" column="dbWT37H1_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_性別" column="dbWT37H1_性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="高額合算自己負担額_所得区分" column="dbWT37H1_所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_超過70歳者に係る所得区分" column="dbWT37H1_超過70歳者に係る所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額証明書整理番号" column="dbWT37H1_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_後期保険者番号" column="dbWT37H1_後期保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_後期被保険者番号" column="dbWT37H1_後期被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_国保保険者番号" column="dbWT37H1_国保保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_国保被保険者証番号" column="dbWT37H1_国保被保険者証番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_国保個人番号" column="dbWT37H1_国保個人番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_異動区分" column="dbWT37H1_異動区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_補正済自己負担額送付区分" column="dbWT37H1_補正済自己負担額送付区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_対象計算期間開始年月日" column="dbWT37H1_対象計算期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_対象計算期間終了年月日" column="dbWT37H1_対象計算期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_被保険者期間開始年月日" column="dbWT37H1_被保険者期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_被保険者期間終了年月日" column="dbWT37H1_被保険者期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_申請年月日" column="dbWT37H1_申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_合計_自己負担額" column="dbWT37H1_合計_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_合計_70_74自己負担額_内訳" column="dbWT37H1_合計_70_74自己負担額_内訳" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_合計_70未満高額支給額" column="dbWT37H1_合計_70未満高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_合計_70_74高額支給額" column="dbWT37H1_合計_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_補正済_合計_自己負担額" column="dbWT37H1_補正済_合計_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_補正済_合計_70_74自己負担額_内訳" column="補正済_合計_70_74自己負担額_内訳" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_補正済_合計_70未満高額支給額" column="dbWT37H1_補正済_合計_70未満高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_補正済_合計_70_74高額支給額" column="dbWT37H1_補正済_合計_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_宛先氏名" column="dbWT37H1_宛先氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="高額合算自己負担額_宛先郵便番号" column="dbWT37H1_宛先郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="高額合算自己負担額_宛先住所" column="dbWT37H1_宛先住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_窓口払対象者判定コード" column="dbWT37H1_窓口払対象者判定コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_支払場所" column="dbWT37H1_支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_支払期間開始年月日" column="dbWT37H1_支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_支払期間終了年月日" column="dbWT37H1_支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_閉庁内容" column="dbWT37H1_閉庁内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_支払期間開始時間" column="dbWT37H1_支払期間開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_支払期間終了時間" column="dbWT37H1_支払期間終了時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_備考" column="dbWT37H1_備考" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_データ作成区分" column="dbWT37H1_データ作成区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額確認情報受取年月" column="dbWT37H1_自己負担額確認情報受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="高額合算自己負担額_補正済自己負担額情報送付年月" column="dbWT37H1_補正済自己負担額情報送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額証明書情報受取年月" column="dbWT37H1_自己負担額証明書情報受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="高額合算自己負担額_再送フラグ" column="dbWT37H1_再送フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_送付対象外フラグ" column="dbWT37H1_送付対象外フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額計算年月日" column="dbWT37H1_自己負担額計算年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額証明書作成年月日" column="dbWT37H1_自己負担額証明書作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_後期_国保処理区分" column="dbWT37H1_後期_国保処理区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額証明書リアル発行フラグ" column="dbWT37H1_自己負担額証明書リアル発行フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_バッチ補正実施年月日" column="dbWT37H1_バッチ補正実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_リアル補正実施年月日" column="dbWT37H1_リアル補正実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_更新フラグ" column="dbWT37H1_更新フラグ"/>
+        <result property="高額合算自己負担額_自己負担額差異フラグ" column="dbWT37H1_自己負担額差異フラグ"/>
+        <result property="被保険者_連番" column="dbWT0001_連番"/>
+        <result property="被保険者_証記載保険者番号" column="dbWT0001_証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_被保険者番号" column="dbWT0001_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_サービス提供年月末日" column="dbWT0001_サービス提供年月末日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_被保険者カナ氏名" column="dbWT0001_被保険者カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_被保険者氏名" column="dbWT0001_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_旧市町村コード" column="dbWT0001_旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_変換被保険者番号" column="dbWT0001_変換被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_登録被保険者番号" column="dbWT0001_登録被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_市町村コード" column="dbWT0001_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_管内管外区分" column="dbWT0001_管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_郵便番号" column="dbWT0001_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_町域コード" column="dbWT0001_町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_行政区コード" column="dbWT0001_行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_行政区名" column="dbWT0001_行政区名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_住所" column="dbWT0001_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_番地" column="dbWT0001_番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_方書" column="dbWT0001_方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_宛名カナ名称" column="dbWT0001_宛名カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_宛名名称" column="dbWT0001_宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_氏名50音カナ" column="dbWT0001_氏名50音カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_識別コード" column="dbWT0001_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_資格取得日" column="dbWT0001_資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_資格取得事由コード" column="dbWT0001_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_資格喪失日" column="dbWT0001_資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_資格喪失事由コード" column="dbWT0001_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_世帯集約番号" column="dbWT0001_世帯集約番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 </mapper>

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 集計内容のEntity
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShukeinaiyouEntity {
 
     private int 人数;
-    private int 費用総額;
+    private Decimal 費用総額;
     private RString ページNo;
     private RString 所得段階;
     private RString 要介護状態区分コード;

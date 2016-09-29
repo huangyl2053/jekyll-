@@ -25,17 +25,21 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * おむつ使用証明書画面のHandlerです。
@@ -43,11 +47,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  * @reamsid_L DBD-5780-010 tz_chengpeng
  */
 public class OmutsusiyoSyomeishoHandler {
-
-    private static final RString 医療費控除証明書 = new RString("IryohiKojyoSyomeisho");
-    private static final RString DB = new RString("DB");
-    private static final RString 帳票分類ID = new RString("DBD100029_OmutsuShoumeisho");
-    private static final RString おむつ使用証明書 = new RString("おむつ使用証明書");
 
     private final OmutsusiyoSyomeishoDiv div;
 
@@ -67,7 +66,7 @@ public class OmutsusiyoSyomeishoHandler {
      * @return List<IryohiKojoEntity>
      */
     public List<IryohiKojoEntityResult> onLoad(TaishoshaKey 引き継ぎEntity) {
-        div.getTxtCyouhyou().setValue(おむつ使用証明書);
+        div.getTxtCyouhyou().setValue(new RString("おむつ使用証明書"));
         RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
         if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
@@ -75,12 +74,13 @@ public class OmutsusiyoSyomeishoHandler {
         }
         List<IryohiKojoEntityResult> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(被保険者番号, IryoHiKojoNaiyo.おむつ使用証明書.getコード());
         if (医療費控除リスト.isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), true);
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("おむつ使用証明書"));
         }
 
         div.getPanelKakuninsho().getCcdKaigoAtenaInfo().initialize(引き継ぎEntity.get識別コード());
         div.getPanelKakuninsho().getCcdKaigoShikakuKihon().initialize(引き継ぎEntity.get被保険者番号());
-        RealInitialLocker.lock(new LockingKey(DB.concat(被保険者番号).concat(医療費控除証明書)));
+        RealInitialLocker.lock(new LockingKey(new RString("DB").concat(被保険者番号.concat(new RString("IryohiKojyoSyomeisho")))));
         AccessLogger.log(AccessLogType.照会, PersonalData.of(引き継ぎEntity.get識別コード(),
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号")).value(被保険者番号).build()));
         List<KeyValueDataSource> 年度DDLデータ = new ArrayList<>();
@@ -88,7 +88,7 @@ public class OmutsusiyoSyomeishoHandler {
             KeyValueDataSource data = new KeyValueDataSource();
             RYear 控除対象年 = new RYear(医療費控除.get控除対象年());
             data.setKey(控除対象年.toDateString());
-            data.setValue(控除対象年.wareki().toDateString());
+            data.setValue(控除対象年.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).toDateString());
             年度DDLデータ.add(data);
         }
         div.getPanelShosaiEria().getDdlTaishonen().setDataSource(年度DDLデータ);
@@ -129,7 +129,8 @@ public class OmutsusiyoSyomeishoHandler {
     public SourceDataCollection publishReport(TaishoshaKey 引き継ぎEntity, List<IryohiKojoEntityResult> 医療費控除リスト) {
         ShikibetsuCode 識別コード = 引き継ぎEntity.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
-        OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance().editomutsusiyoSyomeisho(識別コード, 帳票分類ID);
+        OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance()
+                .editomutsusiyoSyomeisho(識別コード, new RString("DBD100029_OmutsuShoumeisho"));
         OmutsuShoumeishoPrintService printService = new OmutsuShoumeishoPrintService();
         SourceDataCollection collection = printService.printSingle(おむつ使用証明書Entity);
         AccessLogger.log(AccessLogType.更新, PersonalData.of(識別コード,

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ServiceShuruiCdNameEntity {
 
+    private int 連番;
     private RString サービス名称;
     private DbWT3470ServiceShuruiCdTBLTempEntity サービス明細一時TBL;
 }

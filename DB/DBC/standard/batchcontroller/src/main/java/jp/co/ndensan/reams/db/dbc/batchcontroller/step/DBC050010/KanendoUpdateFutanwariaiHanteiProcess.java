@@ -48,6 +48,8 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010"
             + ".IKanendoUpdateFutanwariaiHanteiMapper.get処理日付管理マスタ更新");
+    private static final RString MYBATIS_SELECT_ID_NASI = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010"
+            + ".IKanendoUpdateFutanwariaiHanteiMapper.get処理日付管理マスタデータなし");
     private static final RString 連番 = new RString("0000");
     private static final RString 年度内連番 = new RString("0001");
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
@@ -89,7 +91,7 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
         if (!Furikomi_ShoriKubun.明細一覧表作成.equals(parameter.get処理区分())) {
             return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toKanendoUpdateFutanwariaiHanteMybatisParameter());
         }
-        return null;
+        return new BatchDbReader(MYBATIS_SELECT_ID_NASI);
     }
 
     @Override

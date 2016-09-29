@@ -17,8 +17,9 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -36,6 +37,8 @@ public class DvKogakuServiceJoho {
     private static final RString モード２ = new RString("DBCMN13019");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
+    private static final RString BTNEXECUTE = new RString("btnExecute");
+    private static final RString BTNELEMENT = new RString("btnElement");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -52,7 +55,8 @@ public class DvKogakuServiceJoho {
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
         if (市町村セキュリティ情報 == null) {
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+            //throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         if (市町村セキュリティ情報.get導入形態コード() != null
                 && 市町村セキュリティ情報.get導入形態コード().is広域()) {
@@ -72,6 +76,7 @@ public class DvKogakuServiceJoho {
             div.getCcdKogakuShutsuryokuKomoku().load(new RString(ReportIdDBC.DBC701003.getReportId().toString()),
                     SubGyomuCode.DBC介護給付);
             ViewStateHolder.put(ViewStateKeys.モード, NUM_1);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
         }
         if (state.equals(モード２)) {
             div.getDdlKogakuShinsaHoho().setDisplayNone(true);
@@ -88,6 +93,7 @@ public class DvKogakuServiceJoho {
             div.getCcdKogakuShutsuryokuKomoku().load(new RString(ReportIdDBC.DBC701019.getReportId().toString()),
                     SubGyomuCode.DBC介護給付);
             ViewStateHolder.put(ViewStateKeys.モード, NUM_2);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNELEMENT, false);
         }
         div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
         div.getCcdKogakuShutsuryokuKomoku().setDisabled(true);

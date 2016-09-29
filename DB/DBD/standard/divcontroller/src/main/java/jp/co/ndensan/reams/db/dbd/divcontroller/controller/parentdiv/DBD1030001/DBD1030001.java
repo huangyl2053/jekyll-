@@ -99,9 +99,9 @@ public class DBD1030001 {
             DBD1030001Handler handler = getHandler(div);
             List<ShakaifukuRiyoshaFutanKeigen> 申請一覧情報 = handler.申請一覧データ準備(被保険者番号);
             ArrayList<ShakaifukuRiyoshaFutanKeigen> 最初申請一覧情報 = new ArrayList<>(申請一覧情報);
-            ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報, 最初申請一覧情報);
-            ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, handler.onLoad(識別コード, 被保険者番号, 申請一覧情報));
-            ViewStateHolder.put(DBD1030001ViewStateKey.is申請情報のDDL初期化, Boolean.FALSE);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報, 最初申請一覧情報);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, handler.onLoad(識別コード, 被保険者番号, 申請一覧情報));
+            ViewStateHolder.put(ViewStateKeys.is申請情報のDDL初期化, Boolean.FALSE);
             if (申請メニューID.equals(ResponseHolder.getMenuID())) {
                 return ResponseData.of(div).respond();
             }
@@ -120,10 +120,10 @@ public class DBD1030001 {
         div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisplayNone(true);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(false);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisabled(false);
-        Boolean is世帯所得一覧の初期化 = ViewStateHolder.get(DBD1030001ViewStateKey.is世帯所得一覧の初期化, Boolean.class);
+        Boolean is世帯所得一覧の初期化 = ViewStateHolder.get(ViewStateKeys.is世帯所得一覧の初期化, Boolean.class);
         if (null == is世帯所得一覧の初期化 || !is世帯所得一覧の初期化) {
             getHandler(div).世帯所得一覧の初期化(get識別コードFromViewState());
-            ViewStateHolder.put(DBD1030001ViewStateKey.is世帯所得一覧の初期化, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is世帯所得一覧の初期化, Boolean.TRUE);
         }
         if (一覧.getName().equals(ResponseHolder.getState())) {
             div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setText(文字列_申請一覧を表示する);
@@ -159,7 +159,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnAddShinsei(DBD1030001Div div) {
-        ViewStateHolder.put(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.編集社会福祉法人等利用者負担軽減申請の情報, null);
         申請情報のDDL初期化(div);
         getHandler(div).onClick_btnAddShinsei(get識別コードFromViewState());
         return ResponseData.of(div).setState(詳細);
@@ -175,7 +175,7 @@ public class DBD1030001 {
         申請情報のDDL初期化(div);
         DBD1030001Handler handler = getHandler(div);
         ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = handler.get情報と状態BySelectDataSouce(get情報と状態ArrayList());
-        ViewStateHolder.put(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, 情報と状態);
+        ViewStateHolder.put(ViewStateKeys.編集社会福祉法人等利用者負担軽減申請の情報, 情報と状態);
         getHandler(div).onClick_onSelectByModifyButton(get識別コードFromViewState(), 情報と状態);
         return ResponseData.of(div).setState(詳細);
     }
@@ -188,13 +188,13 @@ public class DBD1030001 {
      */
     public ResponseData<DBD1030001Div> onClick_onSelectByDeleteButton(DBD1030001Div div) {
         if (!ResponseHolder.isReRequest()) {
-            ViewStateHolder.put(DBD1030001ViewStateKey.is削除ReRequest, Boolean.FALSE);
+            ViewStateHolder.put(ViewStateKeys.is削除ReRequest, Boolean.FALSE);
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            if (!ViewStateHolder.get(DBD1030001ViewStateKey.is削除ReRequest, Boolean.class) && !削除処理(div)) {
-                ViewStateHolder.put(DBD1030001ViewStateKey.is削除ReRequest, Boolean.TRUE);
+            if (!ViewStateHolder.get(ViewStateKeys.is削除ReRequest, Boolean.class) && !削除処理(div)) {
+                ViewStateHolder.put(ViewStateKeys.is削除ReRequest, Boolean.TRUE);
                 return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
             }
             return ResponseData.of(div).respond();
@@ -211,11 +211,11 @@ public class DBD1030001 {
         if (状態.isEmpty() || 状態_修正.equals(状態)) {
             ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList
                     = getHandler(div).元状態変更(dataSouce, 状態_削除, get情報と状態ArrayList());
-            ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, new情報と状態ArrayList);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, new情報と状態ArrayList);
         } else if (状態_追加.equals(状態)) {
             ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList
                     = getHandler(div).dataSourceの削除(dataSouce, get情報と状態ArrayList());
-            ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, new情報と状態ArrayList);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, new情報と状態ArrayList);
         }
         return true;
     }
@@ -280,8 +280,8 @@ public class DBD1030001 {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             ShakaifukuRiyoshaFutanKeigenToJotai 編集情報
-                    = ViewStateHolder.get(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
-            Integer 追加履歴番号 = ViewStateHolder.get(DBD1030001ViewStateKey.追加履歴番号, Integer.class);
+                    = ViewStateHolder.get(ViewStateKeys.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
+            Integer 追加履歴番号 = ViewStateHolder.get(ViewStateKeys.追加履歴番号, Integer.class);
             if (null == 追加履歴番号 || 追加履歴番号 == 0) {
                 追加履歴番号 = -1;
             }
@@ -291,8 +291,8 @@ public class DBD1030001 {
             }
             ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList
                     = getHandler(div).情報を確定(get情報と状態ArrayList(), 編集情報, 追加履歴番号, 最初情報, get被保険者番号FromViewState());
-            ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, new情報と状態ArrayList);
-            ViewStateHolder.put(DBD1030001ViewStateKey.追加履歴番号, 追加履歴番号 - 1);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, new情報と状態ArrayList);
+            ViewStateHolder.put(ViewStateKeys.追加履歴番号, 追加履歴番号 - 1);
             return ResponseData.of(div).setState(一覧);
         }
         return ResponseData.of(div).respond();
@@ -300,7 +300,7 @@ public class DBD1030001 {
 
     private ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> get情報と状態ArrayList() {
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList
-                = ViewStateHolder.get(DBD1030001ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
         if (null == 情報と状態ArrayList) {
             情報と状態ArrayList = new ArrayList<>();
         }
@@ -342,8 +342,8 @@ public class DBD1030001 {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             ShakaifukuRiyoshaFutanKeigenToJotai 編集情報
-                    = ViewStateHolder.get(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
-            Integer 追加履歴番号 = ViewStateHolder.get(DBD1030001ViewStateKey.追加履歴番号, Integer.class);
+                    = ViewStateHolder.get(ViewStateKeys.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
+            Integer 追加履歴番号 = ViewStateHolder.get(ViewStateKeys.追加履歴番号, Integer.class);
             if (null == 追加履歴番号 || 追加履歴番号 == 0) {
                 追加履歴番号 = -1;
             }
@@ -353,8 +353,8 @@ public class DBD1030001 {
             }
             ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList
                     = getHandler(div).情報を確定(get情報と状態ArrayList(), 編集情報, 追加履歴番号, 最初情報, get被保険者番号FromViewState());
-            ViewStateHolder.put(DBD1030001ViewStateKey.追加履歴番号, 追加履歴番号 - 1);
-            ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, new情報と状態ArrayList);
+            ViewStateHolder.put(ViewStateKeys.追加履歴番号, 追加履歴番号 - 1);
+            ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, new情報と状態ArrayList);
             return ResponseData.of(div).setState(一覧);
         }
         return ResponseData.of(div).respond();
@@ -362,7 +362,7 @@ public class DBD1030001 {
 
     private ShakaifukuRiyoshaFutanKeigenToJotai get最初情報(ShakaifukuRiyoshaFutanKeigenToJotai 編集情報) {
         ShakaifukuRiyoshaFutanKeigenIdentifier id = 編集情報.get社会福祉法人等利用者負担軽減情報().identifier();
-        ArrayList<ShakaifukuRiyoshaFutanKeigen> 最初申請一覧情報 = ViewStateHolder.get(DBD1030001ViewStateKey.申請一覧情報, ArrayList.class);
+        ArrayList<ShakaifukuRiyoshaFutanKeigen> 最初申請一覧情報 = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
         for (ShakaifukuRiyoshaFutanKeigen 最初情報 : 最初申請一覧情報) {
             if (id.equals(最初情報.identifier())) {
                 return new ShakaifukuRiyoshaFutanKeigenToJotai(最初情報, RString.EMPTY, 編集情報.get新履歴番号());
@@ -378,7 +378,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnReSearch(DBD1030001Div div) {
-        ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, null);
+        ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, null);
         getHandler(div).前排他の解除(get被保険者番号FromViewState());
         return ResponseData.of(div).forwardWithEventName(検索処理へ).respond();
     }
@@ -390,7 +390,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnToSearchResult(DBD1030001Div div) {
-        ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, null);
+        ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, null);
         getHandler(div).前排他の解除(get被保険者番号FromViewState());
         return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
     }
@@ -440,11 +440,11 @@ public class DBD1030001 {
     }
 
     private void 申請情報のDDL初期化(DBD1030001Div div) {
-        Boolean is申請情報のDDL初期化 = ViewStateHolder.get(DBD1030001ViewStateKey.is申請情報のDDL初期化, Boolean.class);
+        Boolean is申請情報のDDL初期化 = ViewStateHolder.get(ViewStateKeys.is申請情報のDDL初期化, Boolean.class);
         if (!Boolean.TRUE.equals(is申請情報のDDL初期化)) {
             div.getCcdShinseiJoho().initialize(get識別コードFromViewState());
             div.getDdlKeigenJiyu().setDataSource(getAll軽減事由());
-            ViewStateHolder.put(DBD1030001ViewStateKey.is申請情報のDDL初期化, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is申請情報のDDL初期化, Boolean.TRUE);
         }
     }
 
@@ -490,42 +490,6 @@ public class DBD1030001 {
 
     private DBD1030001ValidationHandler getValidationHandler() {
         return new DBD1030001ValidationHandler();
-    }
-
-    /**
-     * 引数定義<br/>
-     *
-     */
-    public enum DBD1030001ViewStateKey {
-
-        /**
-         * 申請一覧情報です。
-         */
-        申請一覧情報,
-        /**
-         * 申請一覧情報と状態です。
-         */
-        申請一覧情報と状態,
-        /**
-         * 編集社会福祉法人等利用者負担軽減申請の情報です。
-         */
-        編集社会福祉法人等利用者負担軽減申請の情報,
-        /**
-         * 追加履歴番号です。
-         */
-        追加履歴番号,
-        /**
-         * 追加履歴番号です。
-         */
-        is申請情報のDDL初期化,
-        /**
-         * is削除ReRequestです。
-         */
-        is削除ReRequest,
-        /**
-         *
-         */
-        is世帯所得一覧の初期化;
     }
 
 }

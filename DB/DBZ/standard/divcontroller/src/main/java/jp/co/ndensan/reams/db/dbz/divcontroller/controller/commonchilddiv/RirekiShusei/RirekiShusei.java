@@ -55,14 +55,6 @@ public class RirekiShusei {
      * @return ResponseData<RirekiShuseiDiv>
      */
     public ResponseData<RirekiShuseiDiv> onBefore_btnChosaJokyo(RirekiShuseiDiv div) {
-        RirekiShuseiDataPass konkai = DataPassingConverter.deserialize(div.getHdnKonkaiJohoSerialized(),
-                RirekiShuseiDataPass.class);
-        RirekiShuseiDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkaiJohoSerialized(),
-                RirekiShuseiDataPass.class);
-        div.setHdnKonkaiJoho(DataPassingConverter.serialize(konkai.get調査状況用情報()));
-        if (zenkai != null) {
-            div.setHdnZenkaiJoho(DataPassingConverter.serialize(zenkai.get調査状況用情報()));
-        }
         return ResponseData.of(div).respond();
     }
 

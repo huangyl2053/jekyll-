@@ -20,6 +20,16 @@
         AND rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" ='0001'
        
     </select>
+    
+    <select  resultOrdered="true" id="get処理日付管理マスタデータなし" 
+             resultMap="ResultMap_DbT7022ShoriDateKanriEntity"
+             fetchSize="500">
+          SELECT
+        rgdb."DbT7022ShoriDateKanri".*
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE FALSE
+    </select>
     <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT7022ShoriDateKanriEntity_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="subGyomuCode" column="dbT7022ShoriDateKanriEntity_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>

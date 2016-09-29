@@ -2175,4 +2175,15 @@
                         DbT5101."hihokenshaNo",
                         DbT5101."ninteiShinseiYMD"       
 </select>
+<select resultOrdered="true" id="get宛名連動介護保険更新" 
+        resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity"
+        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteisumidataif.IchijihanteiSumidataIftMybitisParamter" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
+        FROM
+        rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+        WHERE
+        "DbT7211GaibuRenkeiDataoutputJoho"."shinseishoKanriNo" IN
+                       <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+    </select>
 </mapper>

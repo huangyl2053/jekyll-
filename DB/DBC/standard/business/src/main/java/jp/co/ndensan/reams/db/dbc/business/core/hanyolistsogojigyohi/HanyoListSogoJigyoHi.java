@@ -71,7 +71,7 @@ public class HanyoListSogoJigyoHi {
     private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
     private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
     private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
-    private static final RString サービス種類_すべて = new RString("すべて");
+    private static final RString サービス種類_すべて = new RString("Empty");
     private HanyoListSogoJigyoHiProcessParameter processParameter;
     private List<PersonalData> personalDataList;
 
@@ -374,7 +374,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set単位数単価(entity.getケアマネジメント費単位数単価());
         eucEntity.setサービスコード(entity.getケアマネジメント費サービスコード());
         eucEntity.setサービス名称(entity.getケアマネジメント費サービス種類名称());
-        eucEntity.set単位数単価(entity.getケアマネジメント費サービス単位数());
+        eucEntity.set単位数(entity.getケアマネジメント費単位数());
         eucEntity.set回数(entity.getケアマネジメント費回数());
         eucEntity.setサービス単位数(entity.getケアマネジメント費サービス単位数());
         eucEntity.setサービス単位数合計(entity.getケアマネジメント費サービス単位数合計());
@@ -383,7 +383,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set利用者負担額(entity.getケアマネジメント費利用者負担額());
         eucEntity.set後単位数(entity.getケアマネジメント費後単位数());
         eucEntity.set後回数(entity.getケアマネジメント費後回数());
-        eucEntity.set後サービス単位数(entity.get後保険サービス単位数());
+        eucEntity.set後サービス単位数(entity.getケアマネジメント費後サービス単位数());
         eucEntity.set後サービス単位数合計(entity.getケアマネジメント費後サービス単位数合計());
         eucEntity.set後請求金額(entity.getケアマネジメント費後請求金額());
         eucEntity.set後利用者負担額(entity.getケアマネジメント費後利用者負担額());
@@ -684,7 +684,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set単位数単価(entity.getケアマネジメント費単位数単価());
         eucEntity.setサービスコード(entity.getケアマネジメント費サービスコード());
         eucEntity.setサービス名称(entity.getケアマネジメント費サービス種類名称());
-        eucEntity.set単位数単価(entity.getケアマネジメント費サービス単位数());
+        eucEntity.set単位数(entity.getケアマネジメント費単位数());
         eucEntity.set回数(entity.getケアマネジメント費回数());
         eucEntity.setサービス単位数(entity.getケアマネジメント費サービス単位数());
         eucEntity.setサービス単位数合計(entity.getケアマネジメント費サービス単位数合計());
@@ -693,7 +693,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set利用者負担額(entity.getケアマネジメント費利用者負担額());
         eucEntity.set後単位数(entity.getケアマネジメント費後単位数());
         eucEntity.set後回数(entity.getケアマネジメント費後回数());
-        eucEntity.set後サービス単位数(entity.get後保険サービス単位数());
+        eucEntity.set後サービス単位数(entity.getケアマネジメント費後サービス単位数());
         eucEntity.set後サービス単位数合計(entity.getケアマネジメント費後サービス単位数合計());
         eucEntity.set後請求金額(entity.getケアマネジメント費後請求金額());
         eucEntity.set後利用者負担額(entity.getケアマネジメント費後利用者負担額());
@@ -717,11 +717,9 @@ public class HanyoListSogoJigyoHi {
      * 出力条件を作成するメッソドです。
      *
      * @param 市町村名 RString
-     * @param サービス種類コード名称 RString
-     * @param 事業所名 RString
      * @return List<RString>
      */
-    public List<RString> set出力条件(RString 市町村名, RString サービス種類コード名称, RString 事業所名) {
+    public List<RString> set出力条件(RString 市町村名) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出対象者】"));
@@ -731,11 +729,10 @@ public class HanyoListSogoJigyoHi {
             jokenBuilder.append(RString.EMPTY);
         } else if (new RString("000000").equals(processParameter.get保険者コード())) {
             jokenBuilder.append(new RString("保険者："));
-            jokenBuilder.append(new RString("000000 全市町村"));
+            jokenBuilder.append(new RString(" 全市町村"));
         } else {
             jokenBuilder.append(new RString("保険者："));
             RStringBuilder 市町村名builder = new RStringBuilder();
-            市町村名builder.append(processParameter.get保険者コード());
             市町村名builder.append(RString.HALF_SPACE);
             市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
@@ -763,18 +760,21 @@ public class HanyoListSogoJigyoHi {
             jokenBuilder.append(new RString("（"));
             jokenBuilder.append(processParameter.get事業者コード());
             jokenBuilder.append(new RString("） "));
-            jokenBuilder.append(事業所名);
+            jokenBuilder.append(processParameter.get事業者名());
         }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("サービス種類コード："));
-        if (!RString.isNullOrEmpty(processParameter.getサービス種類コード())) {
-            jokenBuilder.append(new RString("（"));
-            jokenBuilder.append(processParameter.getサービス種類コード());
-            jokenBuilder.append(new RString("） "));
-            jokenBuilder.append(サービス種類コード名称);
-        } else if (サービス種類_すべて.equals(processParameter.getサービス種類コード())) {
-            jokenBuilder.append(new RString("（すべて） "));
+        if (!基本情報.equals(processParameter.get抽出方法())) {
+            jokenBuilder.append(new RString("サービス種類コード："));
+            if (!RString.isNullOrEmpty(processParameter.getサービス種類コード()) && !サービス種類_すべて.equals(processParameter.getサービス種類コード())) {
+                jokenBuilder.append(new RString("（"));
+                jokenBuilder.append(processParameter.getサービス種類コード());
+                jokenBuilder.append(new RString("） "));
+                jokenBuilder.append(processParameter.getサービス名称());
+            }
+            if (サービス種類_すべて.equals(processParameter.getサービス種類コード())) {
+                jokenBuilder.append(new RString("すべて"));
+            }
         }
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;

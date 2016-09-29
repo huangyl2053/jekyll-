@@ -15,12 +15,18 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishofukushiyogutaiyo
 import jp.co.ndensan.reams.db.dbc.service.core.kyufuhitsuchisho.KyufuhiTsuchishoFukushiYoguTaiyoHinmoku;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -48,6 +54,7 @@ public class KyufuhiTsuchishoReportDBC100043Process extends BatchProcessBase<Kyu
     private KyufuhiTsuchishoProcessParameter processParameter;
     private AtesakiPSMSearchKeyBuilder 宛先builder;
     private static final ReportId REPORT_DBC100043 = ReportIdDBC.DBC100043.getReportId();
+    @BatchWriter
     private BatchReportWriter<KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource> batchWrite;
     private ReportSourceWriter<KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource> reportSourceWriter;
 
@@ -60,17 +67,18 @@ public class KyufuhiTsuchishoReportDBC100043Process extends BatchProcessBase<Kyu
     }
 
     @Override
-    protected void beforeExecute() {
+    protected IBatchReader createReader() {
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC100043.value()).create();
+        reportSourceWriter = new ReportSourceWriter(batchWrite);
         通知文1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100043.getReportId(), KamokuCode.EMPTY, 数値_11, 1, FlexibleDate.getNowDate());
         通知文3 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100043.getReportId(), KamokuCode.EMPTY, 数値_11, 2, FlexibleDate.getNowDate());
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC100043.value()).create();
-        reportSourceWriter = new ReportSourceWriter(batchWrite);
+        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+        宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
+        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        宛先builder.set基準日(new FlexibleDate(processParameter.get処理年月日()));
+        宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(宛先builder.build());
         KyufuhiTsuchishoBatchMybitisParameter mybatisParam = processParameter.
                 toKyufuhiTsuchishoBatchMybitisParameter(new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()));

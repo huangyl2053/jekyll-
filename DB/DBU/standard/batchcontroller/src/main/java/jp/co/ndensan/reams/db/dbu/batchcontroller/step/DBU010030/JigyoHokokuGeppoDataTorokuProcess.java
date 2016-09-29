@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuProcessParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.KyufuJissekiKonkyoRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyouHoukokuTokeiRelateEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu.IJigyoHokokuGeppoIppanGenbutsuMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBU-5540-030 suguangjun
  *
  */
-public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<KyufuJissekiKonkyoRelateEntity> {
+public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<JigyouHoukokuTokeiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu."
@@ -34,7 +35,7 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<KyufuJis
     private IJigyoHokokuGeppoIppanGenbutsuMapper mapper;
     @BatchWriter
     private BatchPermanentTableWriter<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityWriter;
-    private final int index_4 = 4;
+    private static final int INDEX_4 = 4;
 
     @Override
     protected void initialize() {
@@ -52,24 +53,21 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<KyufuJis
     }
 
     @Override
-    protected void process(KyufuJissekiKonkyoRelateEntity entity) {
+    protected void process(JigyouHoukokuTokeiRelateEntity entity) {
         DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity = new DbT7021JigyoHokokuTokeiDataEntity();
         if (processParameter.get報告年月() != null) {
-            dbT7021Entity.setHokokuYSeireki(new FlexibleYear(processParameter.get報告年月().substring(0, index_4)));
-            dbT7021Entity.setHokokuM(processParameter.get報告年月().substring(index_4));
+            dbT7021Entity.setHokokuYSeireki(new FlexibleYear(processParameter.get報告年月().substring(0, INDEX_4)));
+            dbT7021Entity.setHokokuM(processParameter.get報告年月().substring(INDEX_4));
         }
         if (processParameter.get集計年月() != null) {
-            dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年月().substring(0, index_4)));
-            dbT7021Entity.setShukeiTaishoM(processParameter.get集計年月().substring(index_4));
+            dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年月().substring(0, INDEX_4)));
+            dbT7021Entity.setShukeiTaishoM(processParameter.get集計年月().substring(INDEX_4));
         }
-//        dbT7021Entity.setToukeiTaishoKubun(processParameter.get統計対象区分());
-//        dbT7021Entity.setShichosonCode(new LasdecCode(processParameter.get市町村コード()));
-//        if (new RString("1").equals(processParameter.get給付実績区分コード())) {
-//            dbT7021Entity.setHyoNo(new Code("01"));
-//        } else if (new RString("2").equals(processParameter.get給付実績区分コード())) {
-//            dbT7021Entity.setHyoNo(new Code("03"));
-//        }
-        dbT7021Entity.setShukeiNo(new Code(entity.getShukeiNo()));
+        // TODO  内部QA：1757 Redmine：#102256(統計対象区分,市町村コード,表番号の取得方式が知らない、一時固定値を使用します)
+        dbT7021Entity.setToukeiTaishoKubun(new RString("1"));
+        dbT7021Entity.setShichosonCode(new LasdecCode("123456"));
+        dbT7021Entity.setHyoNo(new Code("2"));
+        dbT7021Entity.setShukeiNo(rstringToCode(entity.getShukeiNum()));
         dbT7021Entity.setShukeiTani(new Code("1"));
         dbT7021Entity.setTateNo(rstringToDecimal(entity.getTateNo()));
         dbT7021Entity.setYokoNo(rstringToDecimal(entity.getYokoNo()));
@@ -90,5 +88,12 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<KyufuJis
             return Decimal.ZERO;
         }
         return new Decimal(date.toString());
+    }
+
+    private Code rstringToCode(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return Code.EMPTY;
+        }
+        return new Code(date);
     }
 }

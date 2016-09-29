@@ -89,9 +89,15 @@ public class DBC5140011Main {
     public ResponseData<DBC5140011MainDiv> onClick_chkSelectKyotaku(DBC5140011MainDiv div) {
 
         List<dgServiceShuruiList_Row> rselectList = new ArrayList();
+        List<dgServiceShuruiList_Row> alreadySelectedRows = div.getChushutsuJoken2().getDgServiceShuruiList().getSelectedItems();
         List<dgServiceShuruiList_Row> rowList = div.getChushutsuJoken2().getDgServiceShuruiList().getDataSource();
         for (dgServiceShuruiList_Row row : rowList) {
             if (row.getHdnServiceBunruiCode().equals(ServiceBunrui.居宅サービス.getコード().padZeroToLeft(2))) {
+                rselectList.add(row);
+            }
+        }
+        for (dgServiceShuruiList_Row row : alreadySelectedRows) {
+            if (!rselectList.contains(row)) {
                 rselectList.add(row);
             }
         }
@@ -108,9 +114,15 @@ public class DBC5140011Main {
     public ResponseData<DBC5140011MainDiv> onClick_btnSelectShisetsu(DBC5140011MainDiv div) {
 
         List<dgServiceShuruiList_Row> rselectList = new ArrayList();
+        List<dgServiceShuruiList_Row> alreadySelectedRows = div.getChushutsuJoken2().getDgServiceShuruiList().getSelectedItems();
         List<dgServiceShuruiList_Row> rowList = div.getChushutsuJoken2().getDgServiceShuruiList().getDataSource();
         for (dgServiceShuruiList_Row row : rowList) {
             if (row.getHdnServiceBunruiCode().equals(ServiceBunrui.施設サービス.getコード().padZeroToLeft(2))) {
+                rselectList.add(row);
+            }
+        }
+        for (dgServiceShuruiList_Row row : alreadySelectedRows) {
+            if (!rselectList.contains(row)) {
                 rselectList.add(row);
             }
         }

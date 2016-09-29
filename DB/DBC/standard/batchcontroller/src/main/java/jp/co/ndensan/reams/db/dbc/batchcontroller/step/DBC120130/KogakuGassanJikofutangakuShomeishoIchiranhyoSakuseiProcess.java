@@ -60,7 +60,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<KogakuGassanJikofutangakuShomeishoDateEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "KogakuGassanJikofutangaku.IKogakuGassanJSaiSyoriJyunbiMapper.get帳票出力対象データ");
+            + "kogakugassanjikofutangaku.IKogakuGassanJSaiSyoriJyunbiMapper.get帳票出力対象データ");
 
     private KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter parameter;
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
@@ -99,10 +99,10 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
     private static final RString 出力ファイル名
             = new RString("DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT37H1.\"hokenshaNo\" ASC ,DbWT37H1.\"hokenshaNo\" DEC");
+    private static final RString デフォルト出力順
+            = new RString(" ORDER BY \"DbWT37H1\".\"hokenshaNoIn\" ASC ,\"DbWT37H1\".\"jikoFutangakuSaiFlag\" DESC");
     private static final RString コンマ = new RString(",");
-
-    private static final RString 固定改頁項目ID = new RString("0365");
+    private static final RString 固定改頁項目ID = new RString("0103");
 
     @Override
     protected void initialize() {
@@ -158,7 +158,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
         csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();

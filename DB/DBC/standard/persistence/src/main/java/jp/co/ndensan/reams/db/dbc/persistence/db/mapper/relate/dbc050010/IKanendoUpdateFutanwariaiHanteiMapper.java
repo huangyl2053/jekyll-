@@ -24,4 +24,10 @@ public interface IKanendoUpdateFutanwariaiHanteiMapper {
      */
     List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタ更新(KanendoUpdateFutanwariaiHanteMybatisParameter parameter);
 
+    /**
+     * 処理日付管理マスタデータなし
+     *
+     * @return 処理日付管理マスタデータなし情報
+     */
+    List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタデータなし();
 }

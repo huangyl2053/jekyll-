@@ -95,15 +95,16 @@ public class KokuhorenTorikomiListHandler {
         row.setTxtTorikomiJoho(model.get処理名());
         row.setTxtZenZengetsu(get処理状態(model.get前々月処理状態()));
         row.setTxtZengetsu(get処理状態(model.get前月処理状態()));
-        if (model.get当月処理状態() != null && ShoriJotaiKubun.toValue(model.get当月処理状態()) != null) {
+        if (model.get当月処理状態() != null && !model.get当月処理状態().isEmpty()
+                && ShoriJotaiKubun.toValue(model.get当月処理状態()) != null) {
             row.setTxtTogetsuJotai(ShoriJotaiKubun.toValue(model.get当月処理状態()).get名称());
         }
-        row.setTxtShoriNichiji(model.get当月処理日時() != null ? model.get当月処理日時().getDate()
-                .wareki().toDateString().concat(RString.HALF_SPACE)
+        row.setTxtShoriNichiji(model.get当月処理日時() != null && !model.get当月処理日時().isEmpty()
+                ? model.get当月処理日時().getDate().wareki().toDateString().concat(RString.HALF_SPACE)
                 .concat(model.get当月処理日時().getRDateTime().getTime().toString().substring(0, NUM)) : RString.EMPTY);
         row.setSaishoriFlag(get再処理可否区分(model.is再処理可否区分()));
-        row.getIchiranHyojijun().setValue(model.get一覧表示順() != null ? new Decimal(model.get一覧表示順().toString())
-                : Decimal.ZERO);
+        row.getIchiranHyojijun().setValue(model.get一覧表示順() != null && !model.get一覧表示順().isEmpty()
+                ? new Decimal(model.get一覧表示順().toString()) : Decimal.ZERO);
         row.setBatchID(model.getバッチID());
         row.setKokanShikibetsuNo(model.get交換識別番号());
         row.getShoriYM().setValue(new RDate(処理年月.getYearValue(), 処理年月.getMonthValue()));

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 連帯納付義務者宛名情報のEntity
@@ -34,5 +35,6 @@ public class RentaiGimushaAtenaJouhou {
     private RString 住民種別;
     private RString 続柄;
     private AtenaJusho 住所;
+    private EntityDataState 状態;
     private int 履歴番号;
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010;
 
+import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -44,6 +46,14 @@ public class KozaFurikomiTempTableEntity extends DbTableEntityBase<KozaFurikomiT
         TABLE_NAME = new RString("DbWT0511KozaFurikomi");
     }
 
+    private RString insertDantaiCd;
+    private RDateTime insertTimestamp;
+    private RString insertReamsLoginId;
+    private UUID insertContextId;
+    private boolean isDeleted = false;
+    private int updateCount = 0;
+    private RDateTime lastUpdateTimestamp;
+    private RString lastUpdateReamsLoginId;
     @PrimaryKey
     @TempTableColumnOrder(1)
     private long furikomiId;
@@ -80,36 +90,38 @@ public class KozaFurikomiTempTableEntity extends DbTableEntityBase<KozaFurikomiT
     @TempTableColumnOrder(17)
     private RString kinyuKikanShitenKanaName;
     @TempTableColumnOrder(18)
-    private RString yokinShubetsuCode;
+    private RString yokinShubetsu;
     @TempTableColumnOrder(19)
-    private RString kozaNo;
+    private RString yokinShubetsuName;
     @TempTableColumnOrder(20)
-    private AtenaKanaMeisho kozaMeiginin;
+    private RString kozaNo;
     @TempTableColumnOrder(21)
-    private AtenaMeisho kozaMeigininKanji;
+    private AtenaKanaMeisho kozaMeiginin;
     @TempTableColumnOrder(22)
-    private Decimal furikomigaku;
+    private AtenaMeisho kozaMeigininKanji;
     @TempTableColumnOrder(23)
-    private RString kokyakuCode1;
+    private Decimal furikomigaku;
     @TempTableColumnOrder(24)
-    private RString kokyakuCode2;
+    private RString kokyakuCode1;
     @TempTableColumnOrder(25)
-    private RString kozaTekiyo;
+    private RString kokyakuCode2;
     @TempTableColumnOrder(26)
-    private RString tesuryoFutanKubun;
+    private RString kozaTekiyo;
     @TempTableColumnOrder(27)
-    private Decimal tesuryo;
+    private RString tesuryoFutanKubun;
     @TempTableColumnOrder(28)
-    private Code furikomiSakuseiKubun;
+    private Decimal tesuryo;
     @TempTableColumnOrder(29)
-    private YMDHMS furikomiSakuseiYMDHMS;
+    private Code furikomiSakuseiKubun;
     @TempTableColumnOrder(30)
-    private ShikibetsuCode taishoshaShikibetsuCode;
+    private YMDHMS furikomiSakuseiYMDHMS;
     @TempTableColumnOrder(31)
-    private boolean baitaiSakuseizumiFlag;
+    private ShikibetsuCode taishoshaShikibetsuCode;
     @TempTableColumnOrder(32)
-    private boolean iraishoSakuseizumiFlag;
+    private boolean baitaiSakuseizumiFlag;
     @TempTableColumnOrder(33)
+    private boolean iraishoSakuseizumiFlag;
+    @TempTableColumnOrder(34)
     private boolean sakujoFlag;
 
 }

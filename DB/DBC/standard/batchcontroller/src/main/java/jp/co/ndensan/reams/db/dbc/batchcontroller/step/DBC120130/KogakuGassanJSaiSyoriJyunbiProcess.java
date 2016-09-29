@@ -8,12 +8,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120130;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,14 +21,6 @@ public class KogakuGassanJSaiSyoriJyunbiProcess extends BatchProcessBase {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakugassanjikofutangaku.IKogakuGassanJSaiSyoriJyunbiMapper.do再処理準備");
-
-    @BatchWriter
-    BatchPermanentTableWriter 高額合算自己負担額TBLWriter;
-    @BatchWriter
-    IBatchTableWriter 処理結果リスト一時tbWriter;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 高額合算自己負担額一時tableWriter;
-
     private KogakuGassanJikofutangakuDoMasterTorokuProcessParameter parameter;
     private KogakuGassanJikofutangakuDoMasterTorokuParameter dbParameter;
 

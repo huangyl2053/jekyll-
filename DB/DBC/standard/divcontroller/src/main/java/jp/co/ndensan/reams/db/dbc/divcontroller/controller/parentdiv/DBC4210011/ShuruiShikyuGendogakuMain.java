@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4210011;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.DBC4210011StateName;
@@ -34,12 +36,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShuruiShikyuGendogakuMain {
 
-    private int state;
+    private static final Map<RString, Integer> 状態 = new HashMap();
     private static final int 標準 = 1;
     private static final int 保存 = 2;
     private static final int 修正 = 3;
     private static final int 追加 = 4;
     private static final int 削除 = 5;
+    private static final RString いち = new RString("1");
     private static final LockingKey 排他キー = new LockingKey("DBCShikyuGendoGakuTableDbT7111");
     private static final RString 共通ボタン = new RString("btnUpdate");
 
@@ -57,7 +60,7 @@ public class ShuruiShikyuGendogakuMain {
             List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).initialize();
             ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
                     new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
-            state = 標準;
+            状態.put(いち, 標準);
             return ResponseData.of(div).setState(DBC4210011StateName.標準);
         }
     }
@@ -93,7 +96,7 @@ public class ShuruiShikyuGendogakuMain {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             ShuruiShikyuGendogakuMainValidationHandler validationHandler = getValidationHandler();
-            switch (state) {
+            switch (状態.get(いち)) {
                 case 追加:
                     validationHandler.標準適用開始年月チェック(pairs, div);
                     validationHandler.サービス提供期間チェック(pairs, div);
@@ -131,19 +134,19 @@ public class ShuruiShikyuGendogakuMain {
             }
             getHandler(div).btnSave();
             RealInitialLocker.release(排他キー);
-            state = 保存;
+            状態.put(いち, 保存);
             return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
-        } else if (ResponseHolder.isWarningIgnoredRequest() && state == 追加) {
+        } else if (ResponseHolder.isWarningIgnoredRequest() && 状態.get(いち) == 追加) {
             getHandler(div).追加する(shikyuGendoGakuList);
             getHandler(div).btnSave();
             RealInitialLocker.release(排他キー);
-            state = 保存;
+            状態.put(いち, 保存);
             return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
-        } else if (ResponseHolder.isWarningIgnoredRequest() && state == 修正) {
+        } else if (ResponseHolder.isWarningIgnoredRequest() && 状態.get(いち) == 修正) {
             getHandler(div).update修正(shikyuGendoGakuList);
             getHandler(div).btnSave();
             RealInitialLocker.release(排他キー);
-            state = 保存;
+            状態.put(いち, 保存);
             return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
         }
         return ResponseData.of(div).respond();
@@ -164,7 +167,7 @@ public class ShuruiShikyuGendogakuMain {
             List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).btnContinue();
             ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
                     new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
-            state = 標準;
+            状態.put(いち, 標準);
             return ResponseData.of(div).setState(DBC4210011StateName.標準);
         }
     }
@@ -214,7 +217,7 @@ public class ShuruiShikyuGendogakuMain {
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_btnAddShikyuGendogaku(ShuruiShikyuGendogakuMainDiv div) {
         getHandler(div).btnAddShikyuGendogaku();
-        state = 追加;
+        状態.put(いち, 追加);
         return ResponseData.of(div).respond();
     }
 
@@ -227,7 +230,7 @@ public class ShuruiShikyuGendogakuMain {
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_modify(ShuruiShikyuGendogakuMainDiv div) {
         getHandler(div).modify();
-        state = 修正;
+        状態.put(いち, 修正);
         return ResponseData.of(div).respond();
     }
 
@@ -240,7 +243,7 @@ public class ShuruiShikyuGendogakuMain {
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_delete(ShuruiShikyuGendogakuMainDiv div) {
         getHandler(div).delete();
-        state = 削除;
+        状態.put(いち, 削除);
         return ResponseData.of(div).respond();
     }
 

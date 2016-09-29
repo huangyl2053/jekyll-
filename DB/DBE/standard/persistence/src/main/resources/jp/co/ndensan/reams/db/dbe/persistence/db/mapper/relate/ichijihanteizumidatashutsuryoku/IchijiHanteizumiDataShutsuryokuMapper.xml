@@ -13,7 +13,7 @@
         <result property="hihokenshaNo" column="T5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaName" column="T5101_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiShinseiShinseijiKubunCode" column= "T5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteiShinseiHoreiKubunCode" column= "T5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiHoreiKubunCode" column= "T5101_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ichijiHanteiYMD" column= "T5116_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ichijiHanteiKekkaCode" column= "T5116_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ichijihanteiChushutsuYMD" column= "T7211_ichijihanteiChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -64,8 +64,8 @@
                       T5101."shoriJotaiKubun" IN (#{通常},#{延期})
                   AND T5101."logicalDeletedFlag" = False
                  <if test="申請日フラグ">
-                  AND #{一次判定日From} <![CDATA[<=]]> T5101."ninteiShinseiYMD"
-                  AND T5101."ninteiShinseiYMD" <![CDATA[<=]]> #{一次判定日To}
+                  AND #{申請日From} <![CDATA[<=]]> T5101."ninteiShinseiYMD"
+                  AND T5101."ninteiShinseiYMD" <![CDATA[<=]]> #{申請日To}
                 </if>
                ORDER BY
                     T5101."shoKisaiHokenshaNo", T5101."ninteiShinseiYMD", T5101."hihokenshaNo"
@@ -1415,4 +1415,66 @@
            CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 72 THEN  H2."researchItem" END AS 前回異食行動,
            CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 73 THEN  H2."researchItem" END AS 前回性的行動
     </sql>
+    <resultMap id="resultMap_DbT5207Entity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity" autoMapping="true">
+        <result property="remban"  column="認定調査票_連番" />
+        <result property="serviceJokyo"  column="認定調査票_サービスの状況" />
+    </resultMap>
+    <select resultOrdered="true" id="get認定調査票サービス状況" resultMap="resultMap_DbT5207Entity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMybitisParamter" fetchSize="500">
+        SELECT
+            DbT5207NinteichosahyoServiceJokyo."remban" AS 認定調査票_連番
+            ,DbT5207NinteichosahyoServiceJokyo."serviceJokyo" AS 認定調査票_サービスの状況
+        FROM 
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
+        INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207NinteichosahyoServiceJokyo
+            ON DbT5207NinteichosahyoServiceJokyo."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+            AND DbT5207NinteichosahyoServiceJokyo."ninteichosaRirekiNo"=(SELECT MAX(DbT5207Nintei."ninteichosaRirekiNo") FROM 
+        rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207Nintei WHERE DbT5207Nintei."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
+        WHERE DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                       <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>   
+        order by DbT5207NinteichosahyoServiceJokyo."remban"
+    </select>
+    
+     <resultMap id="resultMap_DbT5211Entity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity" autoMapping="true">
+        <result property="remban"  column="認定調査票調査_連番" />
+        <result property="researchItem"  column="認定調査票調査_調査項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get認定調査票調査項目" resultMap="resultMap_DbT5211Entity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMybitisParamter" fetchSize="500">
+        SELECT
+            DbT5211NinteichosahyoChosaItem."remban" AS 認定調査票調査_連番
+            ,DbT5211NinteichosahyoChosaItem."researchItem" AS 認定調査票調査_調査項目
+        FROM 
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102NinteiKekkaJoho
+            ON DbT5102NinteiKekkaJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211NinteichosahyoChosaItem
+            ON DbT5211NinteichosahyoChosaItem."shinseishoKanriNo"=DbT5102NinteiKekkaJoho."shinseishoKanriNo"
+            AND DbT5211NinteichosahyoChosaItem."ninteichosaRirekiNo"=(SELECT MAX(DbT5211Nintei."ninteichosaRirekiNo") FROM 
+        rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211Nintei WHERE DbT5211Nintei."shinseishoKanriNo" = DbT5102NinteiKekkaJoho."shinseishoKanriNo")
+        WHERE DbT5101NinteiShinseiJoho."shinseishoKanriNo" = <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach> 
+        order by DbT5211NinteichosahyoChosaItem."remban"
+    </select>
+    <resultMap id="resultMap_ZenDbT5211Entity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity" autoMapping="true">
+        <result property="remban"  column="前回認定調査票調査_連番" />
+        <result property="researchItem"  column="前回認定調査票調査_調査項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get前回認定調査票調査項目" resultMap="resultMap_ZenDbT5211Entity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter" fetchSize="500">
+         SELECT
+            Zen_DbT5211NinteichosahyoChosaItem."remban" AS 前回認定調査票調査_連番
+            ,Zen_DbT5211NinteichosahyoChosaItem."researchItem" AS 前回認定調査票調査_調査項目
+        FROM 
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
+        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
+            ON DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS Zen_DbT5211NinteichosahyoChosaItem
+            ON Zen_DbT5211NinteichosahyoChosaItem."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
+            AND Zen_DbT5211NinteichosahyoChosaItem."ninteichosaRirekiNo"=(SELECT MAX(Zen_DbT5211Nintei."ninteichosaRirekiNo") 
+            FROM rgdb."DbT5211NinteichosahyoChosaItem" AS Zen_DbT5211Nintei WHERE Zen_DbT5211Nintei."shinseishoKanriNo" = DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo")
+        WHERE DbT5101NinteiShinseiJoho."shinseishoKanriNo" =  <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        order by Zen_DbT5211NinteichosahyoChosaItem."remban"
+    </select>
 </mapper>

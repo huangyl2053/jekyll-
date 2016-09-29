@@ -19,13 +19,14 @@
         LEFT JOIN 
         rgdb."DbV4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
         ON "DbT4001JukyushaDaicho"."hihokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo"
+        WHERE "DbT3074KogakuGassanShikyuFushikyuKettei"."isDeleted" = false
         <if test="支給区分 != null and 支給区分.toString()!=''.toString()">
         AND "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuKubunCode" = #{支給区分}   
         </if>
         <if test="支払方法区分 != null and 支払方法区分.toString()!=''.toString()">
         AND "DbT3074KogakuGassanShikyuFushikyuKettei"."shiharaiHohoKubun" = #{支払方法区分}   
         </if>
-        <if test="対象年度 != null and !対象年度.toString()!=''.toString()">
+        <if test="対象年度 != null and 対象年度.toString()!=''.toString()">
         AND "DbT3074KogakuGassanShikyuFushikyuKettei"."taishoNendo" = #{対象年度}   
         </if>
         <if test="決定情報受取年月From != null and !決定情報受取年月From.isEmpty()">

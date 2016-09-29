@@ -41,7 +41,7 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
     private ReportSourceWriter<JukyushaKyufuJissekiIchiranReportSource> reportSourceWriter;
     private RString 導入団体コード;
     private RString 市町村名;
-    private final int index_tmp = 0;
+    private int index_tmp = 0;
 
     @Override
     protected void initialize() {
@@ -64,6 +64,7 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
 
     @Override
     protected void process(JukyushaKyufujissekiIchiranRelateEntity entity) {
+        index_tmp++;
         chosahoshuseikyu.set作成日時(RDate.getNowDateTime());
         chosahoshuseikyu.set市町村コード(導入団体コード);
         chosahoshuseikyu.set市町村名(市町村名);
@@ -81,7 +82,7 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
         chosahoshuseikyu.set負担額_公費本人1(entity.get後_公費1_本人負担額());
         chosahoshuseikyu.set緊急時施設療養請求合計額_保険(entity.get後_緊急時施設療養費請求額());
         chosahoshuseikyu.set緊急時施設療養請求合計額_公費1(entity.get後_公費1_緊急時施設療養費請求額());
-        chosahoshuseikyu.set緊急時施設療養請求合計額_保険(entity.get後_保険_特定診療費請求額());
+        chosahoshuseikyu.set特定診療請求合計額_保険(entity.get後_保険_特定診療費請求額());
         chosahoshuseikyu.set特定診療請求合計額_公費1(entity.get後_公費1_特定入所者介護サービス費等請求額());
         chosahoshuseikyu.set特定入所者介護費等請求額_保険(entity.get後_公費1_特定入所者介護サービス費等請求額());
         chosahoshuseikyu.set特定入所者介護費等請求額_公費1(entity.get後_公費1_特定入所者介護サービス費等請求額());

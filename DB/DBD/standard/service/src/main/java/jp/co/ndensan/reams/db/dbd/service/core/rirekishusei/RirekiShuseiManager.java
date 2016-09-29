@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiBusiness;
+import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiUpdBusiness;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.rirekishusei.RirekiShuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.rirekishusei.IRirekiShuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
@@ -39,6 +41,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4202NinteichosahyoGaik
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4301ShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4302ShujiiIkenshoJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4101NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -63,6 +66,13 @@ public class RirekiShuseiManager {
     private final DbT4202NinteichosahyoGaikyoChosaDac dbt4202Dac;
     private final DbT4301ShujiiIkenshoIraiJohoDac dbt4301Dac;
     private final DbT4302ShujiiIkenshoJohoDac dbt4302Dac;
+    private final DbT4101NinteiShinseiJohoManager dbt4101Manager;
+
+    private static final RString KU_BUN_回 = new RString("回");
+    private static final RString KU_BUN_修 = new RString("修");
+    private static final RString KU_BUN_削 = new RString("削");
+    private static final RString KU_BUN_追 = new RString("追");
+    private static final RString SAKUJO_KUBUN = new RString("0");
 
     /**
      * コンストラクタです。
@@ -80,6 +90,7 @@ public class RirekiShuseiManager {
         this.dbt4202Dac = InstanceProvider.create(DbT4202NinteichosahyoGaikyoChosaDac.class);
         this.dbt4301Dac = InstanceProvider.create(DbT4301ShujiiIkenshoIraiJohoDac.class);
         this.dbt4302Dac = InstanceProvider.create(DbT4302ShujiiIkenshoJohoDac.class);
+        this.dbt4101Manager = DbT4101NinteiShinseiJohoManager.createInstance();
     }
 
     /**
@@ -92,7 +103,8 @@ public class RirekiShuseiManager {
             DbT4116IchijiHanteiKekkaJohoDac dbt4116Dac, DbT4120ShinseitodokedeJohoDac dbt4120Dac,
             DbT4121ShinseiRirekiJohoDac dbt4121Dac, DbT4123NinteiKeikakuJohoDac dbt4123Dac,
             DbT4201NinteichosaIraiJohoDac dbt4201Dac, DbT4202NinteichosahyoGaikyoChosaDac dbt4202Dac,
-            DbT4301ShujiiIkenshoIraiJohoDac dbt4301Dac, DbT4302ShujiiIkenshoJohoDac dbt4302Dac) {
+            DbT4301ShujiiIkenshoIraiJohoDac dbt4301Dac, DbT4302ShujiiIkenshoJohoDac dbt4302Dac,
+            DbT4101NinteiShinseiJohoManager dbt4101Manager) {
         this.mapperProvider = mapperProvider;
         this.dbt4001Dac = dbt4001Dac;
         this.dbt4101Dac = dbt4101Dac;
@@ -105,6 +117,7 @@ public class RirekiShuseiManager {
         this.dbt4202Dac = dbt4202Dac;
         this.dbt4301Dac = dbt4301Dac;
         this.dbt4302Dac = dbt4302Dac;
+        this.dbt4101Manager = dbt4101Manager;
     }
 
     /**
@@ -168,164 +181,164 @@ public class RirekiShuseiManager {
     }
 
     /**
+     * 受給履歴の修正
+     *
+     * @param updDataList 画面データ
+     * @param retList 申請書管理番号リスト
+     */
+    @Transaction
+    public void save受給履歴(List<RirekiShuseiUpdBusiness> updDataList, List<ShinseishoKanriNo> retList) {
+        for (RirekiShuseiUpdBusiness data : updDataList) {
+            save受給者台帳(data.get受給者台帳());
+            if (KU_BUN_追.equals(data.getKubun()) || data.isTsuikaKubun()) {
+                save要介護認定申請情報(data.get要介護認定申請情報());
+                if (!data.isTsuikaKubun()) {
+                    save申請履歴情報(data.get申請履歴情報更新行());
+                }
+                save認定調査依頼情報(data.get認定調査依頼情報());
+                save認定調査票_概況調査(data.get認定調査票_概況調査());
+                save主治医意見書作成依頼情報(data.get主治医意見書作成依頼情報());
+                save要介護認定主治医意見書情報(data.get要介護認定主治医意見書情報());
+                save要介護認定一次判定結果情報(data.get要介護認定一次判定結果情報());
+                save要介護認定結果情報(data.get要介護認定結果情報());
+                save申請届出情報(data.get申請届出情報());
+                save要介護認定計画情報(data.get要介護認定計画情報());
+            } else if (KU_BUN_修.equals(data.getKubun())) {
+                save要介護認定申請情報(data.get要介護認定申請情報());
+                save認定調査依頼情報(data.get認定調査依頼情報());
+                save認定調査票_概況調査(data.get認定調査票_概況調査());
+                save主治医意見書作成依頼情報(data.get主治医意見書作成依頼情報());
+                save要介護認定主治医意見書情報(data.get要介護認定主治医意見書情報());
+                save要介護認定一次判定結果情報(data.get要介護認定一次判定結果情報());
+                save要介護認定結果情報(data.get要介護認定結果情報());
+                save申請届出情報(data.get申請届出情報());
+                save要介護認定計画情報(data.get要介護認定計画情報());
+            }
+            save受給履歴For削除Or回復(data.get要介護認定申請情報(), data.get要介護認定申請情報次回行(),
+                    data.get申請履歴情報更新行(), data.get申請履歴情報次回行(),
+                    data.getKubun(), data.isTsuikaKubun(), data.getMaeGoKubun());
+        }
+        for (ShinseishoKanriNo 申請書管理番号 : retList) {
+            save申請情報(set認定申請By前回受給者台帳(get認定申請情報(申請書管理番号)));
+        }
+    }
+
+    private DbT4101NinteiShinseiJoho set認定申請By前回受給者台帳(DbT4101NinteiShinseiJoho 認定申請) {
+        JukyushaDaicho 前回受給者台帳 = get前回受給者台帳(認定申請.get申請書管理番号());
+        if (前回受給者台帳 != null) {
+            DbT4101NinteiShinseiJohoBuilder 認定申請Builder = 認定申請.createBuilderForEdit();
+            認定申請Builder.set前回要介護状態区分コード(前回受給者台帳.get要介護認定状態区分コード());
+            認定申請Builder.set前回認定年月日(前回受給者台帳.get認定年月日());
+            認定申請Builder.set前回認定有効期間_開始(前回受給者台帳.get認定有効期間開始年月日());
+            認定申請Builder.set前回認定有効期間_終了(前回受給者台帳.get認定有効期間終了年月日());
+            return 認定申請Builder.build().modifiedModel();
+        }
+        return 認定申請;
+    }
+
+    private void save受給履歴For削除Or回復(DbT4101NinteiShinseiJoho 要介護認定申請情報,
+            DbT4101NinteiShinseiJoho 要介護認定申請情報次回行,
+            DbT4121ShinseiRirekiJoho 申請履歴情報, DbT4121ShinseiRirekiJoho 申請履歴情報次回行,
+            RString kubun, boolean tsuikaKubun, RString maeGoKubun) {
+        if (KU_BUN_回.equals(kubun)) {
+            save要介護認定申請情報(要介護認定申請情報);
+            save要介護認定申請情報(要介護認定申請情報次回行);
+            save申請履歴情報(申請履歴情報);
+            save申請履歴情報(申請履歴情報次回行);
+        } else if (KU_BUN_削.equals(kubun) && !tsuikaKubun) {
+            save要介護認定申請情報(要介護認定申請情報);
+            if (!SAKUJO_KUBUN.equals(maeGoKubun)) {
+                save申請履歴情報(申請履歴情報);
+                delete申請履歴情報(申請履歴情報次回行);
+            }
+        }
+    }
+
+    /**
      * 要介護認定申請情報{@link DbT4101NinteiShinseiJoho}を保存します。
      *
      * @param 要介護認定申請情報 {@link DbT4101NinteiShinseiJoho}
      * @return 更新件数 更新結果の件数を返します。
      */
-    @Transaction
-    public boolean save要介護認定申請情報(DbT4101NinteiShinseiJoho 要介護認定申請情報) {
+    public boolean save申請情報(DbT4101NinteiShinseiJoho 要介護認定申請情報) {
+        return dbt4101Manager.save要介護認定申請情報(要介護認定申請情報);
+    }
+
+    private boolean save要介護認定申請情報(DbT4101NinteiShinseiJoho 要介護認定申請情報) {
         if (!要介護認定申請情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4101Dac.save(要介護認定申請情報.toEntity());
     }
 
-    /**
-     * 受給者台帳{@link JukyushaDaicho}を保存します。
-     *
-     * @param 受給者台帳 {@link JukyushaDaicho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save受給者台帳(JukyushaDaicho 受給者台帳) {
+    private boolean save受給者台帳(JukyushaDaicho 受給者台帳) {
         if (!受給者台帳.hasChanged()) {
             return false;
         }
         return 1 == dbt4001Dac.save(受給者台帳.toEntity());
     }
 
-    /**
-     * 要介護認定結果情報{@link DbT4102NinteiKekkaJoho}を保存します。
-     *
-     * @param 要介護認定結果情報 {@link DbT4102NinteiKekkaJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save要介護認定結果情報(DbT4102NinteiKekkaJoho 要介護認定結果情報) {
+    private boolean save要介護認定結果情報(DbT4102NinteiKekkaJoho 要介護認定結果情報) {
         if (!要介護認定結果情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4102Dac.save(要介護認定結果情報.toEntity());
     }
 
-    /**
-     * 要介護認定一次判定結果情報{@link IchijiHanteiKekkaJoho}を保存します。
-     *
-     * @param 要介護認定一次判定結果情報 {@link IchijiHanteiKekkaJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save要介護認定一次判定結果情報(IchijiHanteiKekkaJoho 要介護認定一次判定結果情報) {
+    private boolean save要介護認定一次判定結果情報(IchijiHanteiKekkaJoho 要介護認定一次判定結果情報) {
         if (!要介護認定一次判定結果情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4116Dac.save(要介護認定一次判定結果情報.toEntity());
     }
 
-    /**
-     * 申請届出情報{@link ShinseitodokedeJoho}を保存します。
-     *
-     * @param 申請届出情報 {@link ShinseitodokedeJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save申請届出情報(DbT4120ShinseitodokedeJoho 申請届出情報) {
+    private boolean save申請届出情報(DbT4120ShinseitodokedeJoho 申請届出情報) {
         if (!申請届出情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4120Dac.save(申請届出情報.toEntity());
     }
 
-    /**
-     * 申請履歴情報{@link ShinseiRirekiJoho}を保存します。
-     *
-     * @param 申請履歴情報 {@link ShinseiRirekiJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save申請履歴情報(DbT4121ShinseiRirekiJoho 申請履歴情報) {
+    private boolean save申請履歴情報(DbT4121ShinseiRirekiJoho 申請履歴情報) {
         if (!申請履歴情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4121Dac.save(申請履歴情報.toEntity());
     }
 
-    /**
-     * 申請履歴情報{@link ShinseiRirekiJoho}を保存します。
-     *
-     * @param 申請履歴情報 {@link ShinseiRirekiJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean delete申請履歴情報(DbT4121ShinseiRirekiJoho 申請履歴情報) {
+    private boolean delete申請履歴情報(DbT4121ShinseiRirekiJoho 申請履歴情報) {
         return 1 == dbt4121Dac.deletePhysical(申請履歴情報.toEntity());
     }
 
-    /**
-     * 要介護認定計画情報{@link DbT4123NinteiKeikakuJoho}を保存します。
-     *
-     * @param 要介護認定計画情報 {@link DbT4123NinteiKeikakuJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save要介護認定計画情報(DbT4123NinteiKeikakuJoho 要介護認定計画情報) {
+    private boolean save要介護認定計画情報(DbT4123NinteiKeikakuJoho 要介護認定計画情報) {
         if (!要介護認定計画情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4123Dac.save(要介護認定計画情報.toEntity());
     }
 
-    /**
-     * 認定調査依頼情報{@link DbT4201NinteichosaIraiJoho}を保存します。
-     *
-     * @param 認定調査依頼情報 {@link DbT4201NinteichosaIraiJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save認定調査依頼情報(DbT4201NinteichosaIraiJoho 認定調査依頼情報) {
+    private boolean save認定調査依頼情報(DbT4201NinteichosaIraiJoho 認定調査依頼情報) {
         if (!認定調査依頼情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4201Dac.save(認定調査依頼情報.toEntity());
     }
 
-    /**
-     * 認定調査票_概況調査{@link DbT4202NinteichosahyoGaikyoChosa}を保存します。
-     *
-     * @param 認定調査票_概況調査 {@link DbT4202NinteichosahyoGaikyoChosa}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save認定調査票_概況調査(DbT4202NinteichosahyoGaikyoChosa 認定調査票_概況調査) {
+    private boolean save認定調査票_概況調査(DbT4202NinteichosahyoGaikyoChosa 認定調査票_概況調査) {
         if (!認定調査票_概況調査.hasChanged()) {
             return false;
         }
         return 1 == dbt4202Dac.save(認定調査票_概況調査.toEntity());
     }
 
-    /**
-     * 主治医意見書作成依頼情報{@link DbT4301ShujiiIkenshoIraiJoho}を保存します。
-     *
-     * @param 主治医意見書作成依頼情報 {@link DbT4301ShujiiIkenshoIraiJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save主治医意見書作成依頼情報(DbT4301ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報) {
+    private boolean save主治医意見書作成依頼情報(DbT4301ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報) {
         if (!主治医意見書作成依頼情報.hasChanged()) {
             return false;
         }
         return 1 == dbt4301Dac.save(主治医意見書作成依頼情報.toEntity());
     }
 
-    /**
-     * 要介護認定主治医意見書情報{@link DbT4302ShujiiIkenshoJoho}を保存します。
-     *
-     * @param 要介護認定主治医意見書情報 {@link DbT4302ShujiiIkenshoJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save要介護認定主治医意見書情報(DbT4302ShujiiIkenshoJoho 要介護認定主治医意見書情報) {
+    private boolean save要介護認定主治医意見書情報(DbT4302ShujiiIkenshoJoho 要介護認定主治医意見書情報) {
         if (!要介護認定主治医意見書情報.hasChanged()) {
             return false;
         }

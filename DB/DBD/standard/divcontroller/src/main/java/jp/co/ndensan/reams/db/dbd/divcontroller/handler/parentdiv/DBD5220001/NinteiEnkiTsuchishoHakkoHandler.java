@@ -397,8 +397,8 @@ public class NinteiEnkiTsuchishoHakkoHandler {
 
     private boolean is延期内容更新(dgHakkotaishosha_Row row) {
         return !isEquals(row.getHiddenEnkiriyu(), row.getEnkiriyu())
-                || !isEquals(row.getHiddenenKiketteidate(), new RString(div.getTxtnkiKetteiDate().toString()))
-                || !isEquals(row.getHiddenTsuchishohakkoymd(), new RString(div.getTxtTsuchishoHakkoDate().toString()))
+                || !isEquals(row.getHiddenenKiketteidate(), div.getTxtnkiKetteiDate().getValue())
+                || !isEquals(row.getHiddenTsuchishohakkoymd(), div.getTxtTsuchishoHakkoDate().getValue())
                 || !isEquals(row.getHiddenMikomishorikikanfrom(), div.getTxtMikomiDateTsuchisho().getFromValue())
                 || !isEquals(row.getHiddenMikomishorikikanto(), div.getTxtMikomiDateTsuchisho().getToValue());
     }

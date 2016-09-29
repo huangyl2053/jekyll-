@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 証記載保険者名取得Processクラスです。
@@ -44,15 +43,8 @@ public class ShoKisaiHokenshaNoNameProcess
     @Override
     protected void process(ShoKisaiHokenshaNoNameEntity entity) {
         DbWT3470ServiceMeisaichukanTempEntity tempEntity = entity.getサービス明細();
-        tempEntity.setServiceName(getColumnValue(entity.get証記載保険者().getShichosonCode()));
+        tempEntity.setShokisaiHokenshaName(entity.get証記載保険者().getShichosonMeisho());
         サービス明細中間一時tableWriter.update(tempEntity);
-    }
-
-    private RString getColumnValue(IDbColumnMappable entity) {
-        if (null != entity) {
-            return entity.getColumnValue();
-        }
-        return RString.EMPTY;
     }
 
 }

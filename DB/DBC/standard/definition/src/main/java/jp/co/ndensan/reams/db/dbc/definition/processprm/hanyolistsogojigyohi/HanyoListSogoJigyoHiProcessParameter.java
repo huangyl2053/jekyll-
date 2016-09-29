@@ -36,6 +36,8 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
     private final RString 審査年月終了年月;
     private final RString 取込年月開始年月;
     private final RString 取込年月終了年月;
+    private final RString 事業者名;
+    private final RString サービス名称;
 
     /**
      * コンストラクタです。
@@ -56,6 +58,8 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
      * @param 審査年月終了年月 審査年月終了年月
      * @param 取込年月開始年月 取込年月開始年月
      * @param 取込年月終了年月 取込年月終了年月
+     * @param 事業者名 事業者名
+     * @param サービス名称 サービス名称
      */
     public HanyoListSogoJigyoHiProcessParameter(RString 帳票ID,
             long 出力順ID,
@@ -72,7 +76,9 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
             RString 審査年月開始年月,
             RString 審査年月終了年月,
             RString 取込年月開始年月,
-            RString 取込年月終了年月) {
+            RString 取込年月終了年月,
+            RString 事業者名,
+            RString サービス名称) {
         this.帳票ID = 帳票ID;
         this.出力順ID = 出力順ID;
         this.出力順項目ID = 出力順項目ID;
@@ -89,6 +95,8 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
         this.審査年月終了年月 = 審査年月終了年月;
         this.取込年月開始年月 = 取込年月開始年月;
         this.取込年月終了年月 = 取込年月終了年月;
+        this.事業者名 = 事業者名;
+        this.サービス名称 = サービス名称;
     }
 
 }

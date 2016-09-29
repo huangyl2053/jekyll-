@@ -62,7 +62,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050001."
+            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010."
                     + "IShikyugakuJohoMapper.select様式番号別支給金額情報");
     private static final RString 処理結果確認リスト一時TBL = new RString("DbWT0512ShoriKekkaKakuninList");
     private ShikyugakuJohoMybatisParameter データの取得Parameter;
@@ -194,8 +194,8 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
             MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
             振込明細一覧表明細.set様式別集計金額(Decimal.ZERO);
             for (InjiYoushikiBangouBetuKingaku 印字様式番号別金額 : 印字様式番号別金額List) {
-                振込明細一覧表明細.set様式連番(new RString(様式連番));
-                振込明細一覧表明細.set名寄せ件数(new RString(t.get名寄せ件数()));
+                振込明細一覧表明細.set様式連番(様式連番);
+                振込明細一覧表明細.set名寄せ件数(t.get名寄せ件数());
                 振込明細一覧表明細.set印字様式名称(様式名称MAP.get(印字様式番号別金額.get印字様式番号()));
                 振込明細一覧表明細.set集計様式番号(印字様式番号別金額.get集計様式番号());
                 振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
@@ -219,12 +219,12 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         } else if (t.get振込明細一時Entity().getDataKubun().equals(処理区分2)) {
             MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
             振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
-            振込明細一覧表明細.set様式連番(new RString(NUM1));
+            振込明細一覧表明細.set様式連番(NUM1);
             振込明細一覧表明細.set印字様式名称(様式名称MAP.get(KyufuJissekiYoshikiKubun._3411_高額介護給付費.getコード()));
             振込明細一覧表明細.set集計様式番号(NyuryokuShikibetsuNoShokan3Keta.高額介護サービス.getコード());
             振込明細一覧表明細.set様式別集計金額(t.get振込明細一時Entity().getFurikomiKingaku());
             振込明細一覧表明細.set印字様式番号(KyufuJissekiYoshikiKubun._3411_高額介護給付費.getコード());
-            振込明細一覧表明細.set名寄せ件数(new RString(t.get名寄せ件数()));
+            振込明細一覧表明細.set名寄せ件数(t.get名寄せ件数());
             FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
                     RDateTime.now(), 設定値);
             report.writeBy(reportSourceWriter_明細一覧表);

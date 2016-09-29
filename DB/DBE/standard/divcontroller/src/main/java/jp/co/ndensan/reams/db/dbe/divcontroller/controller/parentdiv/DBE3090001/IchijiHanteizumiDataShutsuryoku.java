@@ -176,6 +176,17 @@ public class IchijiHanteizumiDataShutsuryoku {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * Modoru。
+     *
+     * @param div IchijiHanteiDiv
+     * @return ResponseData
+     */
+    public ResponseData<IchijiHanteizumiDataShutsuryokuDiv> btn_btnModoru(IchijiHanteizumiDataShutsuryokuDiv div) {
+
+        return ResponseData.of(div).setState(DBE3090001StateName.初期表示);
+    }
+
     private IchijiHanteizumiDataShutsuryokuHandler getHandler(IchijiHanteizumiDataShutsuryokuDiv div) {
         return new IchijiHanteizumiDataShutsuryokuHandler(div);
     }
