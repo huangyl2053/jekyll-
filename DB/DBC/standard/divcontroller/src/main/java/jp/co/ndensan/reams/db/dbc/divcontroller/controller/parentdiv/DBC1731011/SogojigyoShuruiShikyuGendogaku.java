@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -78,7 +79,10 @@ public class SogojigyoShuruiShikyuGendogaku {
 
     private void setサービス種類DDLのDataSource(SogojigyoShuruiShikyuGendogakuDiv div) {
         KaigoServiceShuruiManager manager = InstanceProvider.create(KaigoServiceShuruiManager.class);
-        getHandler(div).setDataSource(manager);
+        List<KeyValueDataSource> dataSource = manager.getサービス種類DDLのDataSource();
+        if (!dataSource.isEmpty()) {
+            getHandler(div).setDataSource(dataSource);
+        }
     }
 
     /**
