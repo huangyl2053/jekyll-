@@ -148,6 +148,9 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onBlur_TaisyoYY(IryouhiKoujyoDiv div) {
+        if (div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue() == null) {
+            return ResponseData.of(div).respond();
+        }
         TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
         RString 対象年 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue().toDateString();
