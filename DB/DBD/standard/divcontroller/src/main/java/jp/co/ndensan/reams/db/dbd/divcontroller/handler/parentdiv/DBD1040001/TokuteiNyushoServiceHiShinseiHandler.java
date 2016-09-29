@@ -264,10 +264,12 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         RString selectKey = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
         if (selectKey.equals(承認する_KEY)) {
             div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(true);
+            div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
             div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(false);
             div.getShinseiDetail().getTxtKakuninNo().setDisabled(false);
         } else if (selectKey.equals(承認しない_KEY)) {
             div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(false);
+            div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(false);
             div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(true);
             div.getShinseiDetail().getTxtKakuninNo().setDisabled(true);
         }
@@ -629,7 +631,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(true);
         div.getShinseiDetail().getTxtKakuninNo().setDisabled(true);
         div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(true);
-        div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(false);
+        div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
         div.getShinseiDetail().getBtnBackToShinseiList().setDisabled(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
@@ -690,6 +692,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(true);
             div.getShinseiDetail().getTxtKakuninNo().setDisabled(true);
             div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(true);
+            div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
             div.getShinseiDetail().getTxtDetermineShinsei().setDisplayNone(false);
             div.getShinseiDetail().getBtnConfirm().setDisplayNone(true);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
@@ -702,10 +705,10 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(false);
             div.getShinseiDetail().getTxtKakuninNo().setDisabled(false);
             div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(false);
+            div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(false);
             div.getShinseiDetail().getTxtDetermineShinsei().setDisplayNone(true);
             div.getShinseiDetail().getBtnConfirm().setDisplayNone(false);
         }
-        div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(false);
         div.getShinseiDetail().getBtnBackToShinseiList().setDisabled(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
     }
