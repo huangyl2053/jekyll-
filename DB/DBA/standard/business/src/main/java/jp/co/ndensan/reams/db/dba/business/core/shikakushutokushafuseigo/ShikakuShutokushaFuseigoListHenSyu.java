@@ -60,7 +60,7 @@ public class ShikakuShutokushaFuseigoListHenSyu {
         if (entity.getShichosonCode() != null && !entity.getShichosonCode().isEmpty()) {
             ichiranhyoEntity.set市町村コードList(entity.getShichosonCode().value());
         }
-        ichiranhyoEntity.set資格区分(HihokenshaJoho.toValue(entity.getHihokennshaKubunCode()).get名称());
+        ichiranhyoEntity.set資格区分(get被保険者情報(entity.getHihokennshaKubunCode()));
         if (住所地特例フラグ.equals(entity.getJushochiTokureiFlag())) {
             ichiranhyoEntity.set住特(new RString("*"));
         } else {
@@ -102,7 +102,7 @@ public class ShikakuShutokushaFuseigoListHenSyu {
         if (entity.getShichosonCode() != null && !entity.getShichosonCode().isEmpty()) {
             csvDataEntity.setShichosonCode(entity.getShichosonCode().value());
         }
-        csvDataEntity.setShikaKubun(HihokenshaJoho.toValue(entity.getHihokennshaKubunCode()).get名称());
+        csvDataEntity.setShikaKubun(get被保険者情報(entity.getHihokennshaKubunCode()));
         if (住所地特例フラグ.equals(entity.getJushochiTokureiFlag())) {
             csvDataEntity.setJuutoku(new RString("*"));
         } else {
@@ -117,6 +117,7 @@ public class ShikakuShutokushaFuseigoListHenSyu {
     }
 
     private RString get生年月日(FlexibleDate 生年月日) {
+        //TODO 仕様変更1.01　対応待ち　ＱＡ1800回答待ち
         if (生年月日 != null && !生年月日.isEmpty()) {
             return 生年月日.wareki().toDateString();
         }
@@ -135,5 +136,12 @@ public class ShikakuShutokushaFuseigoListHenSyu {
             前住所.append(方書.value());
         }
         return 前住所.toRString();
+    }
+
+    private RString get被保険者情報(RString code) {
+        if (!RString.isNullOrEmpty(code)) {
+            HihokenshaJoho.toValue(code).get名称();
+        }
+        return RString.EMPTY;
     }
 }

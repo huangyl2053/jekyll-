@@ -24,7 +24,7 @@
         "serviceYukoKikanKaishiYMD" DESC
     </select>
 
-    <select resultOrdered="true" id="get最大履歴番号" resultType="int"
+    <select resultOrdered="true" id="get最大履歴番号" resultType="Integer"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
         max("rirekiNo") as "rirekiNo"

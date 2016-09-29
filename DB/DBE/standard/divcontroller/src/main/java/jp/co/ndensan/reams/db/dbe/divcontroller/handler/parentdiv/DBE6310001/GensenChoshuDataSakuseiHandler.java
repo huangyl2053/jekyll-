@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6310001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei.GensenChoshuDataSakuseiFlowParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE631001.DBE631001_GensendataSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6310001.GensenChoshuDataSakuseiDiv;
 
 /**
@@ -31,8 +31,8 @@ public class GensenChoshuDataSakuseiHandler {
      *
      * @return 「源泉徴収データ作成」のbatch用パラメータ
      */
-    public GensenChoshuDataSakuseiFlowParameter getTempData() {
-        GensenChoshuDataSakuseiFlowParameter tempData = new GensenChoshuDataSakuseiFlowParameter();
+    public DBE631001_GensendataSakuseiParameter getTempData() {
+        DBE631001_GensendataSakuseiParameter tempData = new DBE631001_GensendataSakuseiParameter();
         tempData.set指定年(div.getTxtNendo().getValue().getYear());
         return tempData;
     }

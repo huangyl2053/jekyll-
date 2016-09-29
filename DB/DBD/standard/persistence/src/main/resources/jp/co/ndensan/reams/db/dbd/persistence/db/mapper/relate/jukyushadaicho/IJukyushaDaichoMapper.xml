@@ -24,7 +24,8 @@
         limit 1
     </select>
     <select id="get異動抽出台帳リスト" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity" resultOrdered="true"
+            fetchSize="500">
         <if test="is要介護認定">
             <include refid="要介護認定" />
             UNION

@@ -187,8 +187,10 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
 
     private List<RString> setselectorChikulist() {
         List<RString> selectorChikulist = new ArrayList<>();
-        for (RString 選択結果 : 選択地区Map.keySet()) {
-            selectorChikulist.add(選択結果);
+        if (0 < selectorChikulist.size()) {
+            for (RString 選択結果 : 選択地区Map.keySet()) {
+                selectorChikulist.add(選択結果);
+            }
         }
         return selectorChikulist;
     }

@@ -46,8 +46,6 @@ public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource im
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokenshaNo;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hihokenshaName;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

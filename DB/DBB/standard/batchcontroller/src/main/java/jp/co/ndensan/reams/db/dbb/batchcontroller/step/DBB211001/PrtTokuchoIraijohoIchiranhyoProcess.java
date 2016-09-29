@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -104,9 +103,6 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
     @BatchWriter
     private BatchReportWriter<TokubetsuChoshuIraiJohoIchiranSource> batchReportWriter;
     private ReportSourceWriter<TokubetsuChoshuIraiJohoIchiranSource> reportSourceWriter;
-
-    @BatchWriter
-    BatchPermanentTableWriter 介護特別徴収情報Writer;
 
     @BatchWriter
     CsvWriter<TokubetsuChoshuIraiJohoIchiranDataCSVEntity> 特別徴収依頼情報一覧表ＣＳＶ;

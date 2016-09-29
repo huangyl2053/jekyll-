@@ -176,7 +176,7 @@ public class NinteiEnkiTsuchishoHakkoManager {
                 = CodeMaster.getCodeRireki(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.延期理由.getコード());
         List<RString> 延期の理由 = new ArrayList<>();
         for (UzT0007CodeEntity entity : entityList) {
-            延期の理由.add(entity.getコード名称());
+            延期の理由.add(entity.getコード略称());
         }
         return 延期の理由;
     }

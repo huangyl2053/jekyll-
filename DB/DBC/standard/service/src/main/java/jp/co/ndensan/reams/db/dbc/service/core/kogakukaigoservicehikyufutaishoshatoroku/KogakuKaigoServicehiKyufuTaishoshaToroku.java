@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishos
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020040.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
@@ -75,24 +75,18 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
     /**
      * バッチパラメータ取得
      *
-     * @param 審査年月From RString
-     * @param 審査年月To RString
+     * @param 審査年月 RString
      * @param 出力フラグ RString
      * @param 出力順ID Long
      * @return DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter
      */
     public DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
-            RString 審査年月From, RString 審査年月To, boolean 出力フラグ, Long 出力順ID) {
+            RString 審査年月, boolean 出力フラグ, Long 出力順ID) {
         DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter param = new DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter();
-        if (!RString.isNullOrEmpty(審査年月From)) {
-            param.setShinsaYMFrom(new FlexibleYearMonth(審査年月From));
+        if (!RString.isNullOrEmpty(審査年月)) {
+            param.setShoriYM(new FlexibleYearMonth(審査年月));
         } else {
-            param.setShinsaYMFrom(new FlexibleYearMonth(RString.EMPTY));
-        }
-        if (!RString.isNullOrEmpty(審査年月To)) {
-            param.setShinsaYMTo(new FlexibleYearMonth(審査年月To));
-        } else {
-            param.setShinsaYMTo(new FlexibleYearMonth(RString.EMPTY));
+            param.setShoriYM(new FlexibleYearMonth(RString.EMPTY));
         }
         param.setShuturyokuFlg(出力フラグ);
         param.setShuturyokuJunn(出力順ID);

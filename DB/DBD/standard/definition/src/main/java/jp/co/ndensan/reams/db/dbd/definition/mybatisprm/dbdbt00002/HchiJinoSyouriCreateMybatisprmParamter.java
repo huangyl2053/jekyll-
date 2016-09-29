@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,6 +35,7 @@ public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter
     private final RString 一 = new RString("1");
     private final RString 二 = new RString("2");
     private final RString 三 = new RString("3");
+    private RString 有効;
 
     /**
      * 対象者一次特定の引数を返します。
@@ -50,6 +52,7 @@ public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter
         edit対象リスト(対象リスト);
         edit受給者区分(受給者区分);
         edit旧措置区分(旧措置区分);
+        this.有効 = YukoMukoKubun.有効.getコード();
     }
 
     private void edit対象リスト(TargetList 対象リスト) {

@@ -7,6 +7,13 @@ package jp.co.ndensan.reams.db.dbu.business.report.shorikekkakakuninist;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.shorikekkakakuninlist.ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.report.shorikekkakakuninlist.ShoriKekkaKakuninListReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 処理確認リストのヘーダEditorです。
@@ -16,6 +23,11 @@ import jp.co.ndensan.reams.db.dbu.entity.report.shorikekkakakuninlist.ShoriKekka
 public class ShoriKekkaKakuninListEditor implements IShoriKekkaKakuninListEditor {
 
     private final ShoriKekkaKakuninListEntity entity;
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final int ゼロ = 0;
+    private static final int ハチ = 8;
 
     /**
      * インスタンスを生成します。
@@ -38,7 +50,7 @@ public class ShoriKekkaKakuninListEditor implements IShoriKekkaKakuninListEditor
     }
 
     private ShoriKekkaKakuninListReportSource editHeader(ShoriKekkaKakuninListReportSource source) {
-        source.printTimeStamp = entity.get作成日時();
+        source.printTimeStamp = set処理日時();
         source.shichosonCode = entity.get保険者番号();
         source.shichosonName = entity.get保険者名();
         source.keyKomoku1 = entity.get項目コード1();
@@ -56,4 +68,19 @@ public class ShoriKekkaKakuninListEditor implements IShoriKekkaKakuninListEditor
         return source;
     }
 
+    private RString set処理日時() {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        RDateTime printdate = RDateTime.of(entity.get作成日時().substring(ゼロ, ハチ), entity.get作成日時().substring(ハチ));
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        return printTimeStampSb.toRString();
+    }
 }

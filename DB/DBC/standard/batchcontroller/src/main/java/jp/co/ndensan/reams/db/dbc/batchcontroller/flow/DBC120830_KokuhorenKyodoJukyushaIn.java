@@ -81,7 +81,9 @@ public class DBC120830_KokuhorenKyodoJukyushaIn
                     executeStep(一時TBL基本情報作成);
                     レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL基本情報作成),
                             CreateTmptableProcess.レコード件数));
-                    処理対象年月 = getResult(RString.class, new RString(一時TBL基本情報作成), CreateTmptableProcess.処理対象年月);
+                    if (RString.isNullOrEmpty(処理対象年月)) {
+                        処理対象年月 = getResult(RString.class, new RString(一時TBL基本情報作成), CreateTmptableProcess.処理対象年月);
+                    }
                 } catch (Exception e) {
                     throw new BatchInterruptedException(e.getMessage());
                 }

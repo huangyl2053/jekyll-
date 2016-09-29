@@ -228,10 +228,7 @@ public class DBC2000022PanelAll {
             throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
         }
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
-        FutanWariaiSokujiKouseiHolder holder
-                = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-
-        int 枝番 = getMax枝番(holder.get利用者負担割合明細()) + 1;
+        int 枝番 = getMax枝番(div.getDgFutanWariai().getDataSource()) + 1;
         getHandler(div).onClick_上に追加する(利用者負担割合, 枝番);
         return ResponseData.of(div).respond();
     }
@@ -247,10 +244,7 @@ public class DBC2000022PanelAll {
             throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
         }
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
-        FutanWariaiSokujiKouseiHolder holder
-                = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-
-        int 枝番 = getMax枝番(holder.get利用者負担割合明細()) + 1;
+        int 枝番 = getMax枝番(div.getDgFutanWariai().getDataSource()) + 1;
         getHandler(div).onClick_下に追加する(利用者負担割合, 枝番);
         return ResponseData.of(div).respond();
     }
@@ -554,12 +548,13 @@ public class DBC2000022PanelAll {
         return ResponseData.of(div).respond();
     }
 
-    private int getMax枝番(List<RiyoshaFutanWariaiMeisai> list) {
+    private int getMax枝番(List<dgFutanWariai_Row> list) {
         int 枝番 = 0;
         if (list != null && !list.isEmpty()) {
-            for (RiyoshaFutanWariaiMeisai 明細 : list) {
-                if (明細.get枝番号() > 枝番) {
-                    枝番 = 明細.get枝番号();
+            for (dgFutanWariai_Row 明細 : list) {
+                int 明細枝番 = Integer.parseInt(明細.getEdaNo().toString());
+                if (明細枝番 > 枝番) {
+                    枝番 = 明細枝番;
                 }
             }
         }
