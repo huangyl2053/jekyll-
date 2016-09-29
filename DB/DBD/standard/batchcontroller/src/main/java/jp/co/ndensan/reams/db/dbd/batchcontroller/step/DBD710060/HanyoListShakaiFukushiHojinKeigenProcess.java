@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710060;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.homon.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
@@ -39,16 +38,15 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -200,11 +198,9 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
@@ -1098,11 +1094,6 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
             builder.append(地方公共団体.get市町村名());
             builder.append(COMMA);
         }
-        if (null != processParamter.getNendo()) {
-            builder.append(NENDO);
-            builder.append(processParamter.getNendo().wareki().eraType(EraType.KANJI).toDateString());
-            builder.append(COMMA);
-        }
         if (null != processParamter.getKizyunnichi()) {
             builder.append(KIZYUNNICHI);
             builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
@@ -1144,9 +1135,6 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                 出力条件.add(build);
             }
         }
-        出力条件.add(get旧措置者());
-        出力条件.add(get利用者負担段階());
-        出力条件.add(get負担割合区分());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 new RString("DBD701006"),
                 導入団体コード,
@@ -1286,11 +1274,6 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
             builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
             builder.append(COMMA);
         }
-        if (!RString.isNullOrEmpty(processParamter.getHobetsukubun())) {
-            builder.append(法別区分);
-            builder.append(HobetsuKubun.toValue(processParamter.getHobetsukubun()).get名称());
-            builder.append(COMMA);
-        }
         if (!RString.isNullOrEmpty(processParamter.getKyakasha())) {
             builder.append(却下者);
             builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
@@ -1323,79 +1306,6 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
             builder.append(右記号);
             builder.append(SPACE);
             builder.append(toMesho);
-        }
-        return builder.toRString();
-    }
-
-    private RString get旧措置者() {
-        RStringBuilder builder = new RStringBuilder();
-        if (processParamter.isShiteinyushoshakyusochisha()
-                || processParamter.isShiteinyushoshafutankeigensha()
-                || processParamter.isShiteinyushoshasonota()) {
-            builder.append(旧措置者);
-            builder.append(COLON);
-            if (processParamter.isShiteinyushoshakyusochisha()) {
-                builder.append(旧措置者);
-                builder.append(POINT);
-            }
-            if (processParamter.isShiteinyushoshafutankeigensha()) {
-                builder.append(負担軽減者);
-                builder.append(POINT);
-            }
-            if (processParamter.isShiteinyushoshasonota()) {
-                builder.append(その他);
-            }
-        }
-        if (builder.toRString().endsWith(POINT)) {
-            return builder.toRString().substring(0, builder.toRString().length() - 1);
-        }
-        return builder.toRString();
-    }
-
-    private RString get利用者負担段階() {
-        RStringBuilder builder = new RStringBuilder();
-        if (processParamter.isShiteinyushoshadaiichidankai()
-                || processParamter.isShiteinyushoshadainidankai()
-                || processParamter.isShiteinyushoshadaisandankai()
-                || processParamter.isShiteinyushoshakazeisou()) {
-            builder.append(利用者負担段階);
-            if (processParamter.isShiteinyushoshadaiichidankai()) {
-                builder.append(第一段階);
-                builder.append(POINT);
-            }
-            if (processParamter.isShiteinyushoshadainidankai()) {
-                builder.append(第二段階);
-                builder.append(POINT);
-            }
-            if (processParamter.isShiteinyushoshadaisandankai()) {
-                builder.append(第三段階);
-                builder.append(POINT);
-            }
-            if (processParamter.isShiteinyushoshakazeisou()) {
-                builder.append(課税層第三段階);
-            }
-        }
-        if (builder.toRString().endsWith(POINT)) {
-            return builder.toRString().substring(0, builder.toRString().length() - 1);
-        }
-        return builder.toRString();
-    }
-
-    private RString get負担割合区分() {
-        RStringBuilder builder = new RStringBuilder();
-        if (processParamter.isJigyotaishoshafutanichiwari()
-                || processParamter.isJigyotaishoshafutanniwari()) {
-            builder.append(負担割合区分);
-            if (processParamter.isJigyotaishoshafutanichiwari()) {
-                builder.append(FUTANWARIAI_1);
-                builder.append(POINT);
-            }
-            if (processParamter.isJigyotaishoshafutanniwari()) {
-                builder.append(FUTANWARIAI_2);
-            }
-        }
-        if (builder.toRString().endsWith(POINT)) {
-            return builder.toRString().substring(0, builder.toRString().length() - 1);
         }
         return builder.toRString();
     }

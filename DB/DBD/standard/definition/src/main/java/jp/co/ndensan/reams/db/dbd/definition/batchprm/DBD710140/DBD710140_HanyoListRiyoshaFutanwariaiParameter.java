@@ -26,6 +26,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD710140_HanyoListRiyoshaFutanwariaiParameter extends BatchParameterBase {
 
+    private static final String HYOUDAI = "hyoudai";
+    private static final String DETASYUBETSUMESYO = "detasyubetsumesyo";
+    private static final String SYUTSURYOKU = "syutsuryoku";
     private static final String CYUSYUTSUHOHOKUBUN = "cyusyutsuhohokubun";
     private static final String NENDO = "nendo";
     private static final String KIZYUNNICHI = "kizyunnichi";
@@ -40,6 +43,12 @@ public class DBD710140_HanyoListRiyoshaFutanwariaiParameter extends BatchParamet
     private static final String SYUTSURYOKUJUN = "syutsuryokujun";
     private static final String SYUTSURYOKUKOMOKU = "syutsuryokukomoku";
 
+    @BatchParameter(key = HYOUDAI, name = "表題")
+    private RString hyoudai;
+    @BatchParameter(key = DETASYUBETSUMESYO, name = "データ種別名")
+    private RString detasyubetsumesyo;
+    @BatchParameter(key = SYUTSURYOKU, name = "出力方法")
+    private RString syutsuryoku;
     @BatchParameter(key = CYUSYUTSUHOHOKUBUN, name = "抽出方法区分")
     private RString cyusyutsuhohokubun;
     @BatchParameter(key = NENDO, name = "年度")
@@ -74,6 +83,9 @@ public class DBD710140_HanyoListRiyoshaFutanwariaiParameter extends BatchParamet
      */
     public HanyoListRiyoshaFutanwariaiProcessParameter toHanyoRisutoRiyoshaFutanWariaiProcessParameter() {
         return new HanyoListRiyoshaFutanwariaiProcessParameter(
+                hyoudai,
+                detasyubetsumesyo,
+                syutsuryoku,
                 cyusyutsuhohokubun,
                 nendo,
                 kizyunnichi,

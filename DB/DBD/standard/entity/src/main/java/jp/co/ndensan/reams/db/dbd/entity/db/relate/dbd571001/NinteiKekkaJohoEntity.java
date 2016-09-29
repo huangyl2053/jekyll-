@@ -120,6 +120,8 @@ public class NinteiKekkaJohoEntity {
     private RString psm_地区名2;
     private RString psm_地区コード3;
     private RString psm_地区名3;
+    private RString psm_町域コード;
+    private FlexibleDate psm_処理年月日;
     private RString t7005_老人保健市町村コード;
     private RString t7005_老人保健受給者番号;
     private RString t7051_市町村名称;

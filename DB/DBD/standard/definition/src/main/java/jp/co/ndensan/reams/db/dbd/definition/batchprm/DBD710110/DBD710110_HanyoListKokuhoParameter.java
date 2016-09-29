@@ -24,12 +24,14 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD710110_HanyoListKokuhoParameter extends BatchParameterBase {
 
+    private static final String HYOUDAI = "hyoudai";
+    private static final String DETASYUBETSUMESYO = "detasyubetsumesyo";
+    private static final String SYUTSURYOKU = "syutsuryoku";
     private static final String CYUSYUTSUHOHOKUBUN = "cyusyutsuhohokubun";
     private static final String CYUSYUTSUKOMOKUKUBUN = "cyusyutsukomokukubun";
     private static final String KIZYUNNICHI = "kizyunnichi";
     private static final String HITSUKEHANIFROM = "hitsukehanifrom";
     private static final String HITSUKEHANITO = "hitsukehanito";
-    private static final String CHOKINDATACYUSYUTSU = "chokindatacyusyutsu";
     private static final String SOSHITSUKUBUN = "soshitsukubun";
     private static final String KOMOKUMEIFUKA = "komokumeifuka";
     private static final String RENBANFUKA = "renbanfuka";
@@ -39,6 +41,12 @@ public class DBD710110_HanyoListKokuhoParameter extends BatchParameterBase {
     private static final String SYUTSURYOKUJUN = "syutsuryokujun";
     private static final String SYUTSURYOKUKOMOKU = "syutsuryokukomoku";
 
+    @BatchParameter(key = HYOUDAI, name = "表題")
+    private RString hyoudai;
+    @BatchParameter(key = DETASYUBETSUMESYO, name = "データ種別名")
+    private RString detasyubetsumesyo;
+    @BatchParameter(key = SYUTSURYOKU, name = "出力方法")
+    private RString syutsuryoku;
     @BatchParameter(key = CYUSYUTSUHOHOKUBUN, name = "抽出方法区分")
     private RString cyusyutsuhohokubun;
     @BatchParameter(key = CYUSYUTSUKOMOKUKUBUN, name = "抽出項目区分")
@@ -49,8 +57,6 @@ public class DBD710110_HanyoListKokuhoParameter extends BatchParameterBase {
     private FlexibleDate hitsukehanifrom;
     @BatchParameter(key = HITSUKEHANITO, name = "日付範囲To")
     private FlexibleDate hitsukehanito;
-    @BatchParameter(key = CHOKINDATACYUSYUTSU, name = "直近データ抽出")
-    private boolean chokindatacyusyutsu;
     @BatchParameter(key = SOSHITSUKUBUN, name = "喪失区分")
     private RString soshitsukubun;
     @BatchParameter(key = KOMOKUMEIFUKA, name = "項目名付加")
@@ -75,12 +81,14 @@ public class DBD710110_HanyoListKokuhoParameter extends BatchParameterBase {
      */
     public HanyoListKokuhoProcessParameter toHanyoRisutoKokuhoProcessParameter() {
         return new HanyoListKokuhoProcessParameter(
+                hyoudai,
+                detasyubetsumesyo,
+                syutsuryoku,
                 cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
                 kizyunnichi,
                 hitsukehanifrom,
                 hitsukehanito,
-                chokindatacyusyutsu,
                 soshitsukubun,
                 isCsvkomokumeifuka,
                 isCsvrenbanfuka,
