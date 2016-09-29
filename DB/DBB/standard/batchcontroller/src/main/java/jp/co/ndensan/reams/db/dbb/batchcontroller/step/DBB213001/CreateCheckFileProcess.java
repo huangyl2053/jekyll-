@@ -25,11 +25,11 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -48,13 +48,16 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper"
                     + ".select特徴送付情報連携のデータ");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("GenkyoChosashoTaishoshaList"));
+    // TODO QA No1635 EucEntityId
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("CHKCSV"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ファイル出力Z12 = new RString("Z12_nnnnnn_CHK.Csv");
     private static final RString ファイル出力Z1A = new RString("Z1A_nnnnnn_CHK.Csv");
     private static final RString NNNNNN = new RString("nnnnnn");
     private static final RString Z12 = new RString("Z12");
+    private static final int INT_ZERO = 0;
+    private static final int INT_FIVE = 5;
     private TokuchoSofuJohoRenkeiProcessParameter proParameter;
     private FlexibleYear 処理年度;
     private RYearMonth 処理対象年月;
@@ -64,11 +67,11 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
     private Map<RString, RString> 市町村IDMap;
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private Map<RString, EucCsvWriter> ファイル出力Z12Map;
-    private Map<RString, EucCsvWriter> ファイル出力Z1AMap;
+    private Map<RString, CsvWriter> ファイル出力Z12Map;
+    private Map<RString, CsvWriter> ファイル出力Z1AMap;
     @BatchWriter
-    private EucCsvWriter<CheckFileCsvEntity> z12Writer;
-    private EucCsvWriter<CheckFileCsvEntity> z1AWriter;
+    private CsvWriter<CheckFileCsvEntity> z12Writer;
+    private CsvWriter<CheckFileCsvEntity> z1AWriter;
 
     @Override
     protected void initialize() {
@@ -86,8 +89,8 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
         List<KoseiShichoson> 広域市町村情報 = finder.getKoseiShichosonList().records();
         if (!広域市町村情報.isEmpty()) {
             for (KoseiShichoson item : 広域市町村情報) {
-                市町村コードリスト.add(item.get市町村コード().value());
-                市町村IDMap.put(item.get市町村コード().value(), item.get市町村識別ID());
+                市町村コードリスト.add(item.get市町村コード().value().substring(INT_ZERO, INT_FIVE));
+                市町村IDMap.put(item.get市町村コード().value().substring(INT_ZERO, INT_FIVE), item.get市町村識別ID());
             }
         }
         proParameter.set処理年度(処理年度);
@@ -104,7 +107,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
             RString chkZ12 = ファイル出力Z12.replace(NNNNNN, 市町村コード);
             ファイル出力CHKZ12List.add(chkZ12);
             eucFilePath = Path.combinePath(spoolWorkPath, chkZ12);
-            z12Writer = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+            z12Writer = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.SJIS).
@@ -115,7 +118,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
             RString chkZ1A = ファイル出力Z1A.replace(NNNNNN, 市町村コード);
             ファイル出力CHKZ1AList.add(chkZ1A);
             eucFilePath = Path.combinePath(spoolWorkPath, chkZ1A);
-            z1AWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+            z1AWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.SJIS).
