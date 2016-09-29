@@ -95,8 +95,8 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
     private static final RString 対象事業者実施区分 = new RString("総合事業実施区分(事業対象者)");
     private static final RString 要支援１受給者実施区分 = new RString("総合事業実施区分(要支援1)");
     private static final RString 要支援２受給者実施区分 = new RString("総合事業実施区分(要支援2)");
-    private static final RString 二次予防事業対象者実施区分 = new RString("二次予防事業対象者実施区分");
-    private static final RString 特別地域加算 = new RString("総合事業実施区分(二次予防)");
+    private static final RString 二次予防事業対象者実施区分 = new RString("総合事業実施区分(二次予防)");
+    private static final RString 特別地域加算 = new RString("特別地域加算");
     private static final RString 独自更新 = new RString("独自更新");
 
     private CsvListWriter csvListWriter;
@@ -113,18 +113,7 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
             parameter.setサービス項目コード桁目(parameter.getサービス項目コード().length());
             parameter.setサービス項目コード(parameter.getサービス項目コード().trimStart().trimEnd());
         }
-    }
 
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toMybatisParameter());
-    }
-
-    @Override
-    protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBC.DBC200061.getReportId().value()).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         List<UzT0007CodeEntity> 単位数識別コードリスト = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                 DBCCodeShubetsu.単位数識別コード.getコード(), FlexibleDate.getNowDate());
         taniList = new ArrayList<>();
@@ -165,26 +154,42 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
             };
             Collections.sort(serviceList, comparator);
         }
-        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
-                UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
-                csvFileName);
-        if (parameter.is項目名付加()) {
-            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(true).setHeader(headerList).
-                    build();
-        } else {
-            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(false).
-                    build();
+    }
+
+    @Override
+    protected IBatchReader createReader() {
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toMybatisParameter());
+    }
+
+    @Override
+    protected void createWriter() {
+        if (parameter.is帳票で出力()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBC.DBC200061.getReportId().value()).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        }
+        if (parameter.isＣＳＶファイルで出力()) {
+            spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+                    UzUDE0831EucAccesslogFileType.Csv);
+            eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
+                    csvFileName);
+            if (parameter.is項目名付加()) {
+                csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).
+                        setDelimiter(EUC_WRITER_DELIMITER).
+                        setEnclosure(EUC_WRITER_ENCLOSURE).
+                        setEncode(Encode.UTF_8withBOM).
+                        setNewLine(NewLine.CRLF).
+                        hasHeader(true).setHeader(headerList).
+                        build();
+            } else {
+                csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).
+                        setDelimiter(EUC_WRITER_DELIMITER).
+                        setEnclosure(EUC_WRITER_ENCLOSURE).
+                        setEncode(Encode.UTF_8withBOM).
+                        setNewLine(NewLine.CRLF).
+                        hasHeader(false).
+                        build();
+            }
         }
     }
 
@@ -301,7 +306,7 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
         if (isRstring_1(entity.get介護サービス内容().getGendogakuTaishogaiFlag())) {
             rStringList.add(HOSHI);
         } else {
-            rStringList.add(entity.get介護サービス内容().getGendogakuTaishogaiFlag());
+            rStringList.add(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(entity.get介護サービス内容().getMotoTaniShikibetsuCd())) {
             rStringList.add(entity.get介護サービス内容().getMotoTaniShikibetsuCd());
