@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050021
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformation;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
-import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName.様式４の２;
@@ -16,6 +15,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.Kaig
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1DivSpec;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -139,7 +139,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             return responseDate;
         }
         KaigoHokenShoriDateKanri 処理日付管理マスタ = getHandler(div).get処理日付管理マスタ();
-        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.様式４の３, 処理日付管理マスタ);
+        ViewStateHolder.put(ViewStateKeys.様式４の３, 処理日付管理マスタ);
         if (内部処理モード_修正追加.equals(div.getGamenMode()) || RString.isNullOrEmpty(div.getGamenMode())) {
             return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(内部処理モード_修正);
         } else {
@@ -177,11 +177,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             if (handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ(div)))) {
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -198,7 +198,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             return getResponseData_btnModUpdate(div);
         } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -214,10 +214,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             if (修正データ != null && !修正データ.get詳細データエリア().isEmpty()) {
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
@@ -231,7 +231,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
      * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onClick_btnDelUpdate(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
-        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+        ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }
 
@@ -337,7 +337,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
 
     private InsuranceInformation get引き継ぎデータ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         InsuranceInformation 引き継ぎデータ
-                = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
+                = ViewStateHolder.get(ViewStateKeys.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
             if (div.getDdlShicyoson().isDisplayNone()) {
                 引き継ぎデータ = new InsuranceInformation(
