@@ -37,6 +37,13 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity implements Clone
 
     /**
      * コンストラクタです。
+     */
+    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity() {
+
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param entity DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity
      */
