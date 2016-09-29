@@ -53,78 +53,78 @@ public class TokuChoIraiTempEntity extends DbTableEntityBase<TokuChoIraiTempEnti
     @TempTableColumnOrder(15)
     private RString 国保世代コード;
     @TempTableColumnOrder(16)
-    private RString DT市町村コード;
+    private RString dT市町村コード;
     @TempTableColumnOrder(17)
-    private RString DT特別徴収義務者コード;
+    private RString dT特別徴収義務者コード;
     @TempTableColumnOrder(18)
-    private RString DT通知内容コード;
+    private RString dT通知内容コード;
     @TempTableColumnOrder(19)
-    private RString DT媒体コード;
+    private RString dT媒体コード;
     @TempTableColumnOrder(20)
-    private RString DT特別徴収制度コード;
+    private RString dT特別徴収制度コード;
     @TempTableColumnOrder(21)
-    private RString DT作成年月日;
+    private RString dT作成年月日;
     @TempTableColumnOrder(22)
-    private RString DT基礎年金番号;
+    private RString dT基礎年金番号;
     @TempTableColumnOrder(23)
-    private RString DT年金コード;
+    private RString dT年金コード;
     @TempTableColumnOrder(24)
-    private RString DT予備1;
+    private RString dT予備1;
     @TempTableColumnOrder(25)
-    private RString DT生年月日;
+    private RString dT生年月日;
     @TempTableColumnOrder(26)
-    private RString DT性別;
+    private RString dT性別;
     @TempTableColumnOrder(27)
-    private RString DTカナ氏名;
+    private RString dTカナ氏名;
     @TempTableColumnOrder(28)
-    private RString DTシフトコード1;
+    private RString dTシフトコード1;
     @TempTableColumnOrder(29)
-    private RString DT漢字氏名;
+    private RString dT漢字氏名;
     @TempTableColumnOrder(30)
-    private RString DTシフトコード2;
+    private RString dTシフトコード2;
     @TempTableColumnOrder(31)
-    private RString DT郵便番号;
+    private RString dT郵便番号;
     @TempTableColumnOrder(32)
-    private RString DTカナ住所;
+    private RString dTカナ住所;
     @TempTableColumnOrder(33)
-    private RString DTシフトコード3;
+    private RString dTシフトコード3;
     @TempTableColumnOrder(34)
-    private RString DT漢字住所;
+    private RString dT漢字住所;
     @TempTableColumnOrder(35)
-    private RString DTシフトコード4;
+    private RString dTシフトコード4;
     @TempTableColumnOrder(36)
-    private RString DT各種区分;
+    private RString dT各種区分;
     @TempTableColumnOrder(37)
-    private RString DT処理結果;
+    private RString dT処理結果;
     @TempTableColumnOrder(38)
-    private RString DT後期移管コード;
+    private RString dT後期移管コード;
     @TempTableColumnOrder(39)
-    private RString DT各種年月日;
+    private RString dT各種年月日;
     @TempTableColumnOrder(40)
-    private RString DT各種金額欄１;
+    private RString dT各種金額欄１;
     @TempTableColumnOrder(41)
-    private RString DT各種金額欄２;
+    private RString dT各種金額欄２;
     @TempTableColumnOrder(42)
-    private RString DT各種金額欄3;
+    private RString dT各種金額欄3;
     @TempTableColumnOrder(43)
-    private RString DT予備2;
+    private RString dT予備2;
     @TempTableColumnOrder(44)
-    private RString DT共済年金証書記号番号;
+    private RString dT共済年金証書記号番号;
     @TempTableColumnOrder(45)
-    private RString DT各種金額欄4;
+    private RString dT各種金額欄4;
     @TempTableColumnOrder(46)
-    private RString DT各種金額欄5;
+    private RString dT各種金額欄5;
     @TempTableColumnOrder(47)
-    private RString DT各種金額欄6;
+    private RString dT各種金額欄6;
     @TempTableColumnOrder(48)
-    private RString DT各種金額欄7;
+    private RString dT各種金額欄7;
     @TempTableColumnOrder(49)
-    private RString DT各種金額欄8;
+    private RString dT各種金額欄8;
     @TempTableColumnOrder(50)
-    private RString DT停止年月;
+    private RString dT停止年月;
     @TempTableColumnOrder(51)
-    private RString DT予備4住民税;
+    private RString dT予備4住民税;
     @TempTableColumnOrder(52)
-    private RString DT個人番号;
+    private RString dT個人番号;
 
 }
