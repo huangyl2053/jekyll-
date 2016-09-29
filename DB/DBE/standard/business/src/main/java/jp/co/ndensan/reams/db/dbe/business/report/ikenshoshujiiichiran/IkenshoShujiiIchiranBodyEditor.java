@@ -51,7 +51,7 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         RString yubinNo = item.getYubinNo() == null ? RString.EMPTY : item.getYubinNo().value();
         if (RString.isNullOrEmpty(yubinNo)
                 || item.getYubinNo().value().length() != 数値_7) {
-            source.listIchiranhyoUpper_4 = item.getYubinNo().value();
+            source.listIchiranhyoUpper_4 = yubinNo;
         } else {
             RStringBuilder yubinBango = new RStringBuilder();
             yubinBango.append(yubinNo.substring(0, 数値_3));
