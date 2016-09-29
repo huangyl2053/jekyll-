@@ -34,6 +34,11 @@ public class InsChoshuHoho2ProcessParameter implements IBatchProcessParameter {
         this.is処理対象月が2月 = is処理対象月が2月;
     }
 
+    /**
+     * SelectChoshuHohoMyBatisParameterを取得する。
+     *
+     * @return SelectChoshuHohoMyBatisParameter
+     */
     public SelectChoshuHohoMyBatisParameter toSelectChoshuHohoMyBatisParameter() {
         return new SelectChoshuHohoMyBatisParameter(is処理対象月が4月_6月, is処理対象月が2月);
     }

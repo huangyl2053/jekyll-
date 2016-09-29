@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7210001.Zigy
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -61,6 +60,7 @@ public class HanyoListBachParamHandler {
             div.getCcdHokenshaList().setDisplayNone(true);
         }
         if (list.get(0).get導入形態コード().is広域()) {
+            div.getCcdHokenshaList().setDisplayNone(false);
             div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         }
         List<KeyValueDataSource> dataSource = new ArrayList<>();
@@ -122,7 +122,7 @@ public class HanyoListBachParamHandler {
         parameter.set連番付加(連番の付加);
         parameter.set項目名付加(項目付加);
         if (!div.getCcdHokenshaList().isDisplayNone()) {
-            if (div.getCcdHokenshaList().getSelectedItem().get市町村コード().equals(LasdecCode.EMPTY)) {
+            if (div.getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 parameter.set保険者コード(new RString("000000"));
             } else {
                 parameter.set保険者コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());

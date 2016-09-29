@@ -190,7 +190,7 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
                         getBefore().get構成市町村コード()))) {
             特徴依頼情報件数表の発行();
         }
-        TokubetsuChoshuIraiJohoKensuhyoDataCSVEntity cSVEntity = CSVEntityの編集(t,
+        TokubetsuChoshuIraiJohoKensuhyoDataCSVEntity cSVEntity = csvEntityの編集(t,
                 年金保険者名称の編集(new Code(t.getDT特別徴収義務者コード())));
         csvEntityList.add(cSVEntity);
     }
@@ -200,12 +200,12 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
 
         List<RString> 出力条件リスト = parameter.get出力条件リスト();
         RString 帳票名 = ReportIdDBB.DBB200020.getReportName();
-        RString CSV出力有無 = CSV出力有無_無り;
-        RString CSVファイル名 = 出力ファイル名_NO_DATA;
+        RString csv出力有無 = CSV出力有無_無り;
+        RString csvファイル名 = 出力ファイル名_NO_DATA;
         if (isHasData) {
             ファイル出力();
-            CSV出力有無 = CSV出力有無_有り;
-            CSVファイル名 = 出力ファイル名;
+            csv出力有無 = CSV出力有無_有り;
+            csvファイル名 = 出力ファイル名;
             manager.spool(特徴依頼情報件数表ＣＳＶFilePath);
         }
         if (!reportEntityList.isEmpty()) {
@@ -213,7 +213,7 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
         }
         特徴依頼情報件数表ＣＳＶ.close();
         loadバッチ出力条件リスト(出力条件リスト, new ReportId(parameter.get件数表帳票ID()),
-                出力ページ数, CSV出力有無, CSVファイル名, 帳票名);
+                出力ページ数, csv出力有無, csvファイル名, 帳票名);
 
     }
 
@@ -252,17 +252,17 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
         出力ページ数++;
     }
 
-    private RString 年金保険者名称の編集(Code DT特徴義務者コード) {
+    private RString 年金保険者名称の編集(Code dT特徴義務者コード) {
         NenkinHokenshaHantei 年金保険者判定クラス = new NenkinHokenshaHantei();
-        if (isNotNull(DT特徴義務者コード)
-                && 年金保険者判定クラス.is厚労省(DT特徴義務者コード.value())) {
+        if (isNotNull(dT特徴義務者コード)
+                && 年金保険者判定クラス.is厚労省(dT特徴義務者コード.value())) {
             return 年金保険者名称_厚労省;
         } else {
             return 年金保険者名称_地共済;
         }
     }
 
-    private TokubetsuChoshuIraiJohoKensuhyoDataCSVEntity CSVEntityの編集(
+    private TokubetsuChoshuIraiJohoKensuhyoDataCSVEntity csvEntityの編集(
             TokuChoIraiKensu 特徴依頼件数Entity, RString 年金保険者名称) {
         RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 parameter.getシステム日時().getDate(), SubGyomuCode.DBU介護統計報告);

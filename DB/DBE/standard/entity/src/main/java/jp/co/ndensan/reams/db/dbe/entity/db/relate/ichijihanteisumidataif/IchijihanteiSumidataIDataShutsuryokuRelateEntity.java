@@ -43,7 +43,7 @@ public class IchijihanteiSumidataIDataShutsuryokuRelateEntity {
     private RString 主治医コード;
     private RString 主治医意見書作成依頼年月日;
     private RString 主治医意見書受領年月日;
-    private RString 短期記憶;
+    private RString 意見書短期記憶;
     private RString 日常の意思決定を行うための認知能力;
     private RString 自分の意思の伝達能力;
     private RString 食事行為;
@@ -189,7 +189,7 @@ public class IchijihanteiSumidataIDataShutsuryokuRelateEntity {
     private RString 意思の伝達;
     private RString 毎日の日課を理解;
     private RString 生年月日をいう;
-    private RString 短期記憶15;
+    private RString 短期記憶;
     private RString 自分の名前をいう;
     private RString 今の季節を理解;
     private RString 場所の理解;

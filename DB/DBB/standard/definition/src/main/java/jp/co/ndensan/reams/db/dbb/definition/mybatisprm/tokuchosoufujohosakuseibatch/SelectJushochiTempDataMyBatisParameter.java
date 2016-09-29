@@ -24,6 +24,7 @@ import lombok.Setter;
 @Setter
 public class SelectJushochiTempDataMyBatisParameter implements IMyBatisParameter {
 
+    private static final int 月_4 = 4;
     private final RYear 賦課年度;
     private final RDateTime 処理日時;
     private final RString 異動事由コード;
@@ -45,7 +46,7 @@ public class SelectJushochiTempDataMyBatisParameter implements IMyBatisParameter
         this.処理日時 = 処理日時;
         this.異動事由コード = ShikakuJutokuTekiyoJiyu.自特例適用.getコード();
         this.処理対象月 = 処理対象月;
-        this.is処理対象月が4月 = (処理対象月 == 4);
+        this.is処理対象月が4月 = (処理対象月 == 月_4);
         this.処理名 = ShoriName.特徴異動情報作成.get名称();
         this.前年度の賦課年度 = 賦課年度.minusYear(1);
     }
