@@ -22,10 +22,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanRenrakuhyoSofuIchiranEntity {
 
-//    private DbWT1001HihokenshaEntity 被保険者一時TBL;
-//    private DbT3038ShokanKihonEntity 償還払請求基本Entity;
-//    private DbWT2111ShokanShinseiEntity 償還払支給申請Entity;
-//    private DbT3118ShikibetsuNoKanriEntity 識別番号管理Entity;
     private DbWT2111ShokanShinseiTempEntity 償還払支給申請一時TBL;
     private DbWT1001HihokenshaTempEntity 被保険者一時TBL;
     private JigyoshaNo 基本_事業者番号;
