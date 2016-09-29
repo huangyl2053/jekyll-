@@ -74,7 +74,9 @@ public class ServiceCodeIchiranBodyEditor
         } else if (区分_2.equals(entity.getRiyosyaFutanTeiritsuTeigakuKubun())) {
             source.List1_8 = 定額;
         }
-        source.List1_9 = doカンマ編集(new Decimal(String.valueOf(entity.getKyufuRitsu())));
+        if (null != entity.getKyufuRitsu()) {
+            source.List1_9 = doカンマ編集(new Decimal(String.valueOf(entity.getKyufuRitsu())));
+        }
         source.List1_10 = entity.getRiyoshaFutanGaku();
         if (区分_2.equals(entity.getTaishoJigyoJishiKubun())) {
             source.List1_11 = HOSHI;
@@ -98,7 +100,7 @@ public class ServiceCodeIchiranBodyEditor
             source.List1_17 = HOSHI;
         }
         source.List2_2 = entity.getMotoTaniShikibetsuCd();
-        if (!INT_05.equals(source.List2_2)) {
+        if (!INT_05.equals(source.List2_2) && null != entity.getMotoTensu()) {
             source.List2_1 = doカンマ編集(new Decimal(String.valueOf(entity.getMotoTensu())));
         }
         if (区分_1.equals(entity.getMotoGendogakuTaishogaiFlag())) {
