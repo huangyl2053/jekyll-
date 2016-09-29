@@ -539,6 +539,10 @@ public enum ReportIdDBC {
      */
     DBC200025(new ReportId("DBC200025_ShokanRenrakuhyoSofuIchiran"), new RString("償還連絡票送付一覧表")),
     /**
+     * 償還連絡票送付情報エラーリスト帳票ＩＤです。
+     */
+    DBC200026(new ReportId("DBC200026_ShokanRenrakuhyoSofuJohoErrorIchiran"), new RString("償還連絡票送付情報エラーリスト")),
+    /**
      * 償高額合算自己負担額確認情報取込一覧表帳票ＩＤです。
      */
     DBC200028(new ReportId("DBC200028_GassanJikofutangakuKakuninTorikomiIchiran"), new RString("高額合算自己負担額確認情報取込一覧表")),
