@@ -37,16 +37,16 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdSetaiinHaaku
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.DelSaishoriJigyoKogakuTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.DelSaishoriKogakuTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsJigyoKogakuKaigoServiceHiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsJigyoKogakuSetaiinHaakuNyuryokuTmpProcess1;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKijunShunyugakuTekiyoKanriTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKogakuKaigoServiceHiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess3;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess4;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiKihonKogakuTmpProcess3;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiKihonKogakuTmpProcess4;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess3;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess4;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess3;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonKogakuTmpProcess4;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiShafukuKeigenTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiShukeiTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinHaakuNyuryokuKogakuTmpProcess1;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsSetaiinHaakuNyuryokuKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess2;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2;
@@ -58,6 +58,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.UpdKyufuJisseki
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020010.KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.InsKyufuJissekiKihonKogakuTmpProcess4Param;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.InsSetaiinHaakuNyuryokuKogakuFlowEntity1;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -75,6 +77,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlowBase<DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter> {
 
+    private InsSetaiinHaakuNyuryokuKogakuFlowEntity1 returnEntity;
     private static final RString メニューID_高額介護サービス = new RString("DBCMN41002");
     private static final RString メニューID_事業高額介護サービス = new RString("DBCMNL1002");
     private FlexibleDate sysDate;
@@ -102,7 +105,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
     private static final String 給付実績基本情報高額一時３の作成 = "callInsKyufuJissekiKihonKogakuTmpProcess3";
     private static final String 給付実績基本情報事業高額一時３の作成 = "callInsKyufuJissekiKihonJigyoKogakuTmpProcess3";
     private static final String 高額用世帯員把握入力一時の作成１ = "callInsSetaiinHaakuNyuryokuKogakuTmpProcess1";
-    private static final String 事業高額用世帯員把握入力一時の作成１ = "callInsJigyoKogakuSetaiinHaakuNyuryokuTmpProcess1";
+    private static final String 事業高額用世帯員把握入力一時の作成１ = "callInsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1";
     private static final String 給付実績基本情報高額一時４の作成 = "callInsKyufuJissekiKihonKogakuTmpProcess4";
     private static final String 給付実績基本情報事業高額一時４の作成 = "callInsKyufuJissekiKihonJigyoKogakuTmpProcess4";
     private static final String 世帯員把握フロー = "callSetaiShotokuKazeiHanteiFlow";
@@ -190,6 +193,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             }
             executeStep(給付実績基本情報高額一時３の作成);
             executeStep(高額用世帯員把握入力一時の作成１);
+            returnEntity = getResult(InsSetaiinHaakuNyuryokuKogakuFlowEntity1.class, new RString(高額用世帯員把握入力一時の作成１),
+                    InsSetaiinHaakuNyuryokuKogakuTmpProcess1.PARAMETER_OUT_RETURNENTITY);
             executeStep(給付実績基本情報高額一時４の作成);
             executeStep(世帯員把握フロー);
             executeStep(世帯員把握入力高額一時の作成2);
@@ -233,6 +238,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             }
             executeStep(給付実績基本情報事業高額一時３の作成);
             executeStep(事業高額用世帯員把握入力一時の作成１);
+            returnEntity = getResult(InsSetaiinHaakuNyuryokuKogakuFlowEntity1.class, new RString(事業高額用世帯員把握入力一時の作成１),
+                    InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1.PARAMETER_OUT_RETURNENTITY);
             executeStep(給付実績基本情報事業高額一時４の作成);
             executeStep(世帯員把握フロー);
             executeStep(世帯員把握入力事業高額一時の作成2);
@@ -512,7 +519,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(事業高額用世帯員把握入力一時の作成１)
     protected IBatchFlowCommand callInsJigyoKogakuSetaiinHaakuNyuryokuTmpProcess() {
-        return loopBatch(InsJigyoKogakuSetaiinHaakuNyuryokuTmpProcess1.class).define();
+        return loopBatch(InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1.class).define();
     }
 
     /**
@@ -522,7 +529,9 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(給付実績基本情報高額一時４の作成)
     protected IBatchFlowCommand callInsKyufuJissekiKihonKogakuTmpProcess4() {
-        return loopBatch(InsKyufuJissekiKihonKogakuTmpProcess4.class).define();
+        return loopBatch(InsKyufuJissekiKihonKogakuTmpProcess4.class)
+                .arguments(get給付実績基本情報高額一時４バッチパラメータ())
+                .define();
     }
 
     /**
@@ -532,7 +541,9 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(給付実績基本情報事業高額一時４の作成)
     protected IBatchFlowCommand callInsKyufuJissekiKihonJigyoKogakuTmpProcess4() {
-        return loopBatch(InsKyufuJissekiKihonJigyoKogakuTmpProcess4.class).define();
+        return loopBatch(InsKyufuJissekiKihonJigyoKogakuTmpProcess4.class)
+                .arguments(get給付実績基本情報高額一時４バッチパラメータ())
+                .define();
     }
 
     /**
@@ -929,5 +940,13 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
 
     private DBB002001_SetaiinHaakuParameter getSetaiShotokuKazeiHanteiBatchParameter() {
         return new DBB002001_SetaiinHaakuParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード());
+    }
+
+    private InsKyufuJissekiKihonKogakuTmpProcess4Param get給付実績基本情報高額一時４バッチパラメータ() {
+        InsKyufuJissekiKihonKogakuTmpProcess4Param param = new InsKyufuJissekiKihonKogakuTmpProcess4Param(
+                returnEntity.get最古のサービス提供年月(),
+                returnEntity.get最新のサービス提供年月(),
+                getParameter().getShoriYM());
+        return param;
     }
 }
