@@ -222,6 +222,7 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
                         Integer.parseInt(直近データ.getRirekiNo().toString()));
                 ShichosonTokubetuKyufuServiceBuilder updBuilder = 市町村特別給付サービス内容.createBuilderForEdit();
                 updBuilder.set市町村特別給付用サービス有効期間終了年月日(有効期間開始年月日.minusDay(1));
+                updBuilder.set変更年月日(FlexibleDate.getNowDate());
                 manager.save市町村特別給付サービス内容(updBuilder.build());
             }
         } else if (!CommonButtonHolder.isDisplayNone(修正やめる)) {

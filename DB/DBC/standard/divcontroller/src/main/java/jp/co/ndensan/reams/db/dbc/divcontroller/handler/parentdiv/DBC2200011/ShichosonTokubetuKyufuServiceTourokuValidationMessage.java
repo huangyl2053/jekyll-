@@ -21,12 +21,12 @@ public enum ShichosonTokubetuKyufuServiceTourokuValidationMessage implements IVa
      * 更新不可。
      *
      */
-    更新不可(UrErrorMessages.更新不可),
+    更新不可(UrErrorMessages.更新不可, "非直近データ"),
     /**
      * 削除不可。
      *
      */
-    削除不可(UrErrorMessages.削除不可),
+    削除不可(UrErrorMessages.削除不可, "非直近データ"),
     /**
      * 有効開始日と有効終了日の前後関係が不正。
      */
