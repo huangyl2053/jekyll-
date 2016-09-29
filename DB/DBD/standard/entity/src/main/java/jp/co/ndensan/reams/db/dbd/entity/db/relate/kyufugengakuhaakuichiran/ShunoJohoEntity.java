@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 
 /**
  * 収納情報Entity
@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 public class ShunoJohoEntity {
 
     private List<ShunoKibetsuEntity> 期別情報;
-    private RYear 賦課年度;
-    private RYear 調定年度;
+    private FlexibleYear 賦課年度;
+    private FlexibleYear 調定年度;
     private RString 特徴普徴区分;
     private RString 収納情報なし;
 
