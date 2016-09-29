@@ -84,34 +84,38 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
         source.list3_1 = parameter.get特徴異動件数Entity().get住所地特例件数Left();
         source.list4_1 = parameter.get特徴異動件数Entity().get追加依頼件数Left();
 
-        if (parameter.get特徴異動件数Entity().get資格件数Right().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(parameter.get特徴異動件数Entity().get資格件数Right())) {
             source.list1_2 = RString.EMPTY;
         } else {
             source.list1_2 = parameter.get特徴異動件数Entity().get資格件数Right();
         }
-        if (parameter.get特徴異動件数Entity().get特別徴収義務者コードRight().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(parameter.get特徴異動件数Entity().get特別徴収義務者コードRight())) {
             source.list2_5 = RString.EMPTY;
         } else {
             source.list2_5 = parameter.get特徴異動件数Entity().get特別徴収義務者コードRight();
         }
-        if (parameter.get特徴異動件数Entity().get件数Right().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(parameter.get特徴異動件数Entity().get件数Right())) {
             source.list2_7 = RString.EMPTY;
         } else {
             source.list2_7 = parameter.get特徴異動件数Entity().get件数Right();
         }
-        source.list2_6 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                new Code(parameter.get特徴異動件数Entity().get特別徴収義務者コードRight()));
-        if (parameter.get特徴異動件数Entity().get仮徴収額変更件数Right().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(parameter.get特徴異動件数Entity().get特別徴収義務者コードRight())) {
+            source.list2_6 = RString.EMPTY;
+        } else {
+            source.list2_6 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                    new Code(parameter.get特徴異動件数Entity().get特別徴収義務者コードRight()));
+        }
+        if (RString.isNullOrEmpty(parameter.get特徴異動件数Entity().get仮徴収額変更件数Right())) {
             source.list2_8 = RString.EMPTY;
         } else {
             source.list2_8 = parameter.get特徴異動件数Entity().get仮徴収額変更件数Right();
         }
-        if (parameter.get特徴異動件数Entity().get住所地特例件数Right().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(parameter.get特徴異動件数Entity().get住所地特例件数Right())) {
             source.list3_2 = RString.EMPTY;
         } else {
             source.list3_2 = parameter.get特徴異動件数Entity().get住所地特例件数Right();
         }
-        if (parameter.get特徴異動件数Entity().get追加依頼件数Right().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(parameter.get特徴異動件数Entity().get追加依頼件数Right())) {
             source.list4_2 = RString.EMPTY;
         } else {
             source.list4_2 = parameter.get特徴異動件数Entity().get追加依頼件数Right();

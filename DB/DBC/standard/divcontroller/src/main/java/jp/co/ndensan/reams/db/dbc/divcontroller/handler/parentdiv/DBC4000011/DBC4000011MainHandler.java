@@ -265,12 +265,12 @@ public class DBC4000011MainHandler {
             div.getServiceShosai().getDdlTanisuSanteiTaniCode().setDisabled(false);
             div.getServiceShosai().getTxtSeigenNissuKaisu().setDisabled(false);
             div.getServiceShosai().getDdlSanteiKaisuSeigenKikanKubun().setDisabled(false);
-            div.getServiceShosai().getDdlTanisuShikibetsu().setDisabled(false);
+            div.getServiceShosai().getDdlTanisuShikibetsu().setDisabled(true);
         } else {
             div.getServiceShosai().getDdlTanisuSanteiTaniCode().setDisabled(true);
             div.getServiceShosai().getTxtSeigenNissuKaisu().setDisabled(true);
             div.getServiceShosai().getDdlSanteiKaisuSeigenKikanKubun().setDisabled(true);
-            div.getServiceShosai().getDdlTanisuShikibetsu().setDisabled(true);
+            div.getServiceShosai().getDdlTanisuShikibetsu().setDisabled(false);
         }
         if (RST_33.equals(サービス種類) || RST_35.equals(サービス種類) || RST_93.equals(サービス種類)) {
             div.getServiceShosai().getChkGaibuService().setDisabled(false);
