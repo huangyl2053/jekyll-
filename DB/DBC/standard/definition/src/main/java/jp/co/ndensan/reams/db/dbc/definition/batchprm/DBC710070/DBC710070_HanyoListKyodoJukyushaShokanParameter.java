@@ -95,14 +95,11 @@ public class DBC710070_HanyoListKyodoJukyushaShokanParameter extends BatchParame
         if (!RString.isNullOrEmpty(idoNengetsuTo)) {
             異動年月To = new FlexibleYearMonth(idoNengetsuTo);
         }
-        if (!RString.isNullOrEmpty(hokenshaKodo)) {
-            保険者コード = new LasdecCode(hokenshaKodo);
-        }
         if (shutsuryokujunId != null) {
             帳票ID = new RString(shutsuryokujunId);
         }
         return new HanyoListKyodoJukyushaShokanProcessParameter(
-                chohyoId, 帳票ID, shutsuryokukomokuId, komokumeFuka, renbanFuka, hitsukeHenshu, 保険者コード, hitsukeChushutsuKubun,
+                chohyoId, 帳票ID, shutsuryokukomokuId, komokumeFuka, renbanFuka, hitsukeHenshu, hokenshaKodo, hitsukeChushutsuKubun,
                 処理対象年月From, 処理対象年月To, 異動年月From, 異動年月To, kakuidozukinoSaishinNomi, idoKubun, sakujyoMeru);
     }
 }
