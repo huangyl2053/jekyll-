@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-3400-030 liuyl-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc170020.IKaigoSabisuNaiyoMasterKoshinMapper">
+     <select id="select介護サービス内容" resultOrdered="true"  
+              resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc170020.TorikomiDataTempEntity" 
+              fetchSize="500">
+         SELECT
+         "DbT7131KaigoServiceNaiyouTemp".*
+         FROM
+         "DbT7131KaigoServiceNaiyouTemp"
+     </select>
+     <delete id="delete介護サービス内容">
+         DELETE FROM rgdb."DbT7131KaigoServiceNaiyou"
+         WHERE rgdb."DbT7131KaigoServiceNaiyou"."serviceShuruiCd" NOT IN
+         (SELECT DISTINCT rgdb."DbT7130KaigoServiceShurui"."serviceShuruiCd"
+          FROM rgdb."DbT7130KaigoServiceShurui"
+          WHERE rgdb."DbT7130KaigoServiceShurui"."serviceBunrruicode"
+          IN ('09','10','11','12','13')
+          )
+     </delete>
+</mapper>
+     
+     

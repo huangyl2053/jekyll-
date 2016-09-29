@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -48,10 +49,16 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
     private static final RString サービス種類コード_35 = new RString("35");
     private static final RString 適用開始年月日200604 = new RString("200604");
     private static final RString ゼロ = new RString("0");
+    private static final RString いち = new RString("1");
 
     @Override
     protected void initialize() {
         csvFilePath = RString.EMPTY;
+        RString filename = new RString("KM999999_COMMON.csv");
+        RString localFilePath = new RString("D:\\KM999999_COMMON.csv");
+        FilesystemPath path = new FilesystemPath(localFilePath);
+        FilesystemName filesystemName = new FilesystemName(filename);
+        SharedFile.copyToSharedFile(path, filesystemName);
     }
 
     @Override
@@ -90,7 +97,7 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
             取込データ一時作成(tblEntity, 適用開始年月日, entity);
             取込データ一時tableWriter.insert(tblEntity);
             return;
-        } else if (後レコード == null) {
+        } else {
             後レコード = entity;
         }
         if (前レコード.getサービス種類コード().equals(後レコード.getサービス種類コード())
@@ -109,7 +116,7 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
     private CsvReader<KaigoServiceNaiyouCsvEntity> createCsvReader() {
         return new CsvReader.InstanceBuilder(csvFilePath, KaigoServiceNaiyouCsvEntity.class)
                 .setDelimiter(new RString(",")).setEnclosure(new RString("\""))
-                .hasHeader(false).setEncode(Encode.UTF_8withBOM).build();
+                .hasHeader(false).setEncode(Encode.UTF_8withBOM).setNewLine(NewLine.CRLF).build();
     }
 
     private void 取込データ一時作成(TorikomiDataTempEntity tblEntity, FlexibleYearMonth 適用開始年月日, KaigoServiceNaiyouCsvEntity csvEntity) {
@@ -124,19 +131,30 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
         tblEntity.setTanisuShikibetsuCode(new Code(csvEntity.get単位数識別()));
         tblEntity.setTanisuSanteiTaniCode(new Code(csvEntity.get算定単位()));
         tblEntity.setIdouJiyuCode(new Code(異動事由コード_010));
-        tblEntity.setGendogakuTaishogaiFlag(csvEntity.get支給限度額対象区分());  // TODO 「データ登録なしのとき」の判定
-
+        if (csvEntity.get支給限度額対象区分() != null && !csvEntity.get支給限度額対象区分().isEmpty()) {
+            tblEntity.setGendogakuTaishogaiFlag(いち);
+        } else {
+            tblEntity.setGendogakuTaishogaiFlag(ゼロ);
+        }
         if ((サービス種類コード_33.equals(csvEntity.getサービス種類コード()) || サービス種類コード_35.equals(csvEntity.getサービス種類コード()))
                 && csvEntity.get適用開始年月日().substring(0, NUM_6).compareTo(適用開始年月日200604) >= 0) {
             tblEntity.setGaibuServiceRiyoKataKubun(csvEntity.get人員配置区分());
         } else {
             tblEntity.setGaibuServiceRiyoKataKubun(ゼロ);
         }
-        tblEntity.setTokubetsuChiikiKasanFlag(csvEntity.get特別地域加算()); // TODO 「データ登録なしのとき」の判定
+        if (csvEntity.get特別地域加算() != null && !csvEntity.get特別地域加算().isEmpty()) {
+            tblEntity.setTokubetsuChiikiKasanFlag(いち);
+        } else {
+            tblEntity.setTokubetsuChiikiKasanFlag(ゼロ);
+        }
         tblEntity.setRiyosyaFutanTeiritsuTeigakuKubun(ゼロ);
         tblEntity.setKoshinUmuFoag(ゼロ);
         tblEntity.setMotoTensu(csvEntity.get単位数_合成単位数());
-        tblEntity.setMotoGendogakuTaishogaiFlag(csvEntity.get支給限度額対象区分());  // setGendogakuTaishogaiFlagと同じ
+        if (csvEntity.get支給限度額対象区分() != null && !csvEntity.get支給限度額対象区分().isEmpty()) {
+            tblEntity.setMotoGendogakuTaishogaiFlag(いち);
+        } else {
+            tblEntity.setMotoGendogakuTaishogaiFlag(ゼロ);
+        }
         tblEntity.setMotoTaniShikibetsuCd(csvEntity.get単位数識別());
         tblEntity.setRiyoshaFutanGaku(ゼロ);
         tblEntity.setKyufuRitsu(ゼロ);
