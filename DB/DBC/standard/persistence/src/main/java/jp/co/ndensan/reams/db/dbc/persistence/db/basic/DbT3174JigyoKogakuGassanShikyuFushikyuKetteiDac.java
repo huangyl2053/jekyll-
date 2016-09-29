@@ -137,4 +137,39 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac implements ISaveabl
                 order(by(taishoNendo, Order.DESC), by(shikyuSeiriNo, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity.class);
     }
+
+    /**
+     * 高額合算支給不支給決定を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 ShikyuSeiriNo
+     * @return DbT3074KogakuGassanShikyuFushikyuKetteiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity getMax履歴番号のentity(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3174JigyoKogakuGassanShikyuFushikyuKettei.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoNendo, 対象年度),
+                                eq(hokenshaNo, 保険者番号),
+                                eq(shikyuSeiriNo, 支給申請書整理番号),
+                                eq(isDeleted, false))).
+                order(by(rirekiNo, Order.DESC)).limit(1).
+                toObject(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity.class);
+    }
 }

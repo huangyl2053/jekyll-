@@ -6,10 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230011;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuFushikyuKettei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuFushikyuKettei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.HihokenshaDaichoResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
@@ -36,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -57,6 +63,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString 被保番号 = new RString("被保険者番号");
+    private static final RString 処理不可 = new RString("処理不可");
     private static final RString 新規 = new RString("新規");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
@@ -71,12 +78,17 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private static final RString 定値_日付3 = new RString("0731");
     private static final RString 定値_喪失事由コード = new RString("52");
     private static final RDate 定値_年度年度 = new RDate("2008");
+    private static final RString アンダーライン = new RString("_");
     private static final RString 支給決定情報補正判定MSG1 = new RString("支給決定情報補正判定Msg1");
     private static final RString 支給決定情報補正判定MSG2 = new RString("支給決定情報補正判定Msg2");
     private static final RString 支給決定情報補正判定MSG3 = new RString("支給決定情報補正判定Msg3");
     private static final RString 支給決定情報補正判定MSG4 = new RString("支給決定情報補正判定Msg4");
     private static final RString 支給決定情報補正判定MSG5 = new RString("支給決定情報補正判定Msg5");
     private static final RString 支給決定情報補正判定MSG6 = new RString("支給決定情報補正判定Msg6");
+    private static final int NUM_0 = 0;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_5 = 5;
     private static final int NUM_EIGHT = 8;
     private static final int NUM_SEVEN = 7;
 
@@ -189,14 +201,18 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             dgKogakuGassanShikyuFushikyuKettei_Row row = new dgKogakuGassanShikyuFushikyuKettei_Row();
             if (事業分フラグ) {
                 row.setHihokenshaNo(entity.get事業高額合算決定entity().get被保険者番号().value());
-                row.getTxtTaishoNendo().setValue(new FlexibleDate(entity.get事業高額合算決定entity().
-                        get対象年度().toDateString()));
+                row.getTxtTaishoNendo().setValue(new RDate(entity.get事業高額合算決定entity().
+                        get対象年度().toString()));
                 row.setTxtShokisaiNo(entity.get事業高額合算決定entity().get保険者番号().value());
                 row.setTxtRenrakuhyoSeiriNo(entity.get事業高額合算決定entity().get支給申請書整理番号());
                 row.setTxtRirekiNo(new RString(entity.get事業高額合算決定entity().get履歴番号()));
-                row.setTxtJikoFutangaku(new RString(entity.get事業高額合算決定entity().get自己負担総額().intValue()));
+                if (entity.get事業高額合算決定entity().get自己負担総額() != null) {
+                    row.setTxtJikoFutangaku(new RString(entity.get事業高額合算決定entity().get自己負担総額().intValue()));
+                }
                 row.setTxtShikyuKubun(entity.get事業高額合算決定entity().get支払方法区分());
-                row.setTxtShikyugaku(new RString(entity.get事業高額合算決定entity().get支給額().intValue()));
+                if (entity.get事業高額合算決定entity().get支給額() != null) {
+                    row.setTxtShikyugaku(new RString(entity.get事業高額合算決定entity().get支給額().intValue()));
+                }
                 if (entity.get事業高額合算決定entity().get受取年月() != null
                         && !entity.get事業高額合算決定entity().get受取年月().isEmpty()) {
                     row.getTxtUketoriNengetsu().setValue(new FlexibleDate(entity.
@@ -217,14 +233,18 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 rowList.add(row);
             } else {
                 row.setHihokenshaNo(entity.get高額合算決定entity().get被保険者番号().value());
-                row.getTxtTaishoNendo().setValue(new FlexibleDate(
-                        entity.get高額合算決定entity().get対象年度().toDateString()));
+                row.getTxtTaishoNendo().setValue(new RDate(
+                        entity.get高額合算決定entity().get対象年度().toString()));
                 row.setTxtShokisaiNo(entity.get高額合算決定entity().get保険者番号().value());
                 row.setTxtRenrakuhyoSeiriNo(entity.get高額合算決定entity().get支給申請書整理番号());
                 row.setTxtRirekiNo(new RString(entity.get高額合算決定entity().get履歴番号()));
-                row.setTxtJikoFutangaku(new RString(entity.get高額合算決定entity().get自己負担総額().intValue()));
+                if (entity.get高額合算決定entity().get自己負担総額() != null) {
+                    row.setTxtJikoFutangaku(new RString(entity.get高額合算決定entity().get自己負担総額().intValue()));
+                }
                 row.setTxtShikyuKubun(entity.get高額合算決定entity().get支払方法区分());
-                row.setTxtShikyugaku(new RString(entity.get高額合算決定entity().get支給額().intValue()));
+                if (entity.get高額合算決定entity().get支給額() != null) {
+                    row.setTxtShikyugaku(new RString(entity.get高額合算決定entity().get支給額().intValue()));
+                }
                 if (entity.get高額合算決定entity().get受取年月() != null
                         && !entity.get高額合算決定entity().get受取年月().isEmpty()) {
                     row.getTxtUketoriNengetsu().setValue(new FlexibleDate(entity.get高額合算決定entity().
@@ -268,19 +288,19 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSogaku().setValue(Decimal.ZERO);
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().setValue(Decimal.ZERO);
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                getTxtTaishoNendo().getValue().equals(定値_年度年度)) {
+                getTxtTaishoNendo().getValue().getYear().equals(定値_年度年度.getYear())) {
             RString 開始計算対象期間 = div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtTaishoNendo().getValue().toDateString().concat(定値_日付1);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtKeisanYMD().setFromValue(new RDate(開始計算対象期間.toString()));
         } else {
             RString 開始計算対象期間 = div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtTaishoNendo().getValue().toDateString().concat(定値_日付2);
+                    getTxtTaishoNendo().getValue().getYear().toDateString().concat(定値_日付2);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtKeisanYMD().setFromValue(new RDate(開始計算対象期間.toString()));
         }
         RString 終了計算対象期間 = div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                getTxtTaishoNendo().getValue().plusYear(1).toDateString().concat(定値_日付3);
+                getTxtTaishoNendo().getValue().getYear().plusYear(1).toDateString().concat(定値_日付3);
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtKeisanYMD().setToValue(new RDate(終了計算対象期間.toString()));
         HihokenshaDaichoResult 被保険者台帳管理情報 = KogakuGassanShikyuKetteiHosei.
@@ -324,13 +344,13 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 getTxtTaishoNendo().setValue(new RDate(row.getTxtTaishoNendo().getValue().toString()));
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtHihokenshaNo().setValue(row.getTxtShokisaiNo());
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyuSeiriNo().setValue(row.getTxtRenrakuhyoSeiriNo());
-        if (row.getKeisanKaishiYMD().getValue() != null) {
+        if (row.getKeisanKaishiYMD().getValue() != null && !row.getKeisanKaishiYMD().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtKeisanYMD().setFromValue(new RDate(row.getKeisanKaishiYMD().getValue().toString()));
         }
-        if (row.getKeisanShuryoYMD().getValue() != null) {
+        if (row.getKeisanShuryoYMD().getValue() != null && !row.getKeisanShuryoYMD().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtKeisanYMD().setToValue(new RDate(row.getKeisanShuryoYMD().toString()));
+                    getTxtKeisanYMD().setToValue(new RDate(row.getKeisanShuryoYMD().getValue().toString()));
         }
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().setValue(row.getJikoFutanSeiriNo());
         if (row.getShinseiYMD().getValue() != null) {
@@ -369,11 +389,136 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKetteiTsuchiSakuseiYMD().
                     setValue(new RDate(row.getKetteiTsuchiSakuseiYMD().getValue().toString()));
         }
-        if (row.getFurikomiTsuchiSakuseiYMD().getValue() != null) {
+        if (row.getFurikomiTsuchiSakuseiYMD().getValue() != null
+                && !row.getFurikomiTsuchiSakuseiYMD().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtFurikomiTsuchiSakuseiYMD().
                     setValue(new RDate(row.getFurikomiTsuchiSakuseiYMD().getValue().toString()));
         }
         set高額口座情報エリア(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row);
+    }
+
+    /**
+     * 決定情報保存処理クリアです。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @param 画面モード RString
+     * @param 決定情報list List<KogakuGassanShikyuKetteiHoseiResult>
+     */
+    public void save決定情報(HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号,
+            RString 画面モード,
+            List<KogakuGassanShikyuKetteiHoseiResult> 決定情報list) {
+        boolean 事業分フラグ = false;
+        Map<RString, KogakuGassanShikyuFushikyuKettei> 高額合算決定map = new HashMap<>();
+        Map<RString, JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算決定map = new HashMap<>();
+        if (div.get事業分フラグ().equals(new RString(Boolean.TRUE.toString()))) {
+            事業分フラグ = true;
+        }
+        if (事業分フラグ) {
+            if (新規.equals(画面モード)) {
+                int 履歴番号 = KogakuGassanShikyuKetteiHosei.createInstance().get事業高額決定Max履歴番号(
+                        被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+                JigyoKogakuGassanShikyuFushikyuKettei 事業高額決定result = new JigyoKogakuGassanShikyuFushikyuKettei(
+                        被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
+                事業高額決定result = buid事業高額決定(事業高額決定result);
+                事業高額決定result = 事業高額決定result.added();
+                KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShoriJigyo(事業高額決定result, 新規);
+                return;
+            }
+            for (KogakuGassanShikyuKetteiHoseiResult 決定情報 : 決定情報list) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(決定情報.get事業高額合算決定entity().get被保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get事業高額合算決定entity().get対象年度().toDateString());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get事業高額合算決定entity().get保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get事業高額合算決定entity().get支給申請書整理番号());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get事業高額合算決定entity().get履歴番号());
+                事業高額合算決定map.put(builder.toRString(), 決定情報.get事業高額合算決定entity());
+            }
+            dgKogakuGassanShikyuFushikyuKettei_Row row = div.
+                    getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
+            RStringBuilder rowBuilder = new RStringBuilder();
+            rowBuilder.append(row.getHihokenshaNo());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtTaishoNendo().getValue().toString());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtShokisaiNo());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtRenrakuhyoSeiriNo());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtRirekiNo());
+            JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算決定entity = 事業高額合算決定map.
+                    get(rowBuilder.toRString());
+            if (事業高額合算決定entity == null) {
+                return;
+            }
+            事業高額合算決定entity = buid事業高額決定(事業高額合算決定entity);
+            if (修正.equals(画面モード)) {
+                事業高額合算決定entity = 事業高額合算決定entity.modified();
+            } else if (削除.equals(画面モード) || 照会.equals(画面モード)) {
+                事業高額合算決定entity = 事業高額合算決定entity.deleted();
+            }
+            KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShoriJigyo(事業高額合算決定entity, 画面モード);
+        } else {
+            if (新規.equals(画面モード)) {
+                int 履歴番号 = KogakuGassanShikyuKetteiHosei.createInstance().get高額決定Max履歴番号(
+                        被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+                KogakuGassanShikyuFushikyuKettei 高額決定result = new KogakuGassanShikyuFushikyuKettei(
+                        被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
+                高額決定result = buid高額決定(高額決定result);
+                高額決定result.added();
+                KoshinShoriResult result = new KoshinShoriResult();
+                result.set高額合算支給不支給決定Entity(高額決定result);
+                KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShori(result, 新規);
+                return;
+            }
+            for (KogakuGassanShikyuKetteiHoseiResult 決定情報 : 決定情報list) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(決定情報.get高額合算決定entity().get被保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get高額合算決定entity().get対象年度().toDateString());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get高額合算決定entity().get保険者番号().value());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get高額合算決定entity().get支給申請書整理番号());
+                builder.append(アンダーライン);
+                builder.append(決定情報.get高額合算決定entity().get履歴番号());
+                高額合算決定map.put(builder.toRString(), 決定情報.get高額合算決定entity());
+            }
+            dgKogakuGassanShikyuFushikyuKettei_Row row = div.
+                    getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
+            RStringBuilder rowBuilder = new RStringBuilder();
+            rowBuilder.append(row.getHihokenshaNo());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtTaishoNendo().getValue().toString());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtShokisaiNo());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtRenrakuhyoSeiriNo());
+            rowBuilder.append(アンダーライン);
+            rowBuilder.append(row.getTxtRirekiNo());
+            KogakuGassanShikyuFushikyuKettei 高額合算決定entity = 高額合算決定map.get(rowBuilder.toRString());
+            if (高額合算決定entity == null) {
+                return;
+            }
+            高額合算決定entity = buid高額決定(高額合算決定entity);
+            if (修正.equals(画面モード)) {
+                高額合算決定entity = 高額合算決定entity.modified();
+            } else if (削除.equals(画面モード) || 照会.equals(画面モード)) {
+                高額合算決定entity = 高額合算決定entity.deleted();
+            }
+            KoshinShoriResult result = new KoshinShoriResult();
+            result.set高額合算支給不支給決定Entity(高額合算決定entity);
+            KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShori(result, 画面モード);
+        }
     }
 
     /**
@@ -411,7 +556,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             shmoResult = KogakuGassanShikyuKetteiHosei.createInstance().shoriModeHantei(
                     被保険者番号, new HokenshaNo(div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue()),
                     div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue(),
-                    new FlexibleYear(div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue().toDateString()),
+                    new FlexibleYear(div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue().getYear().toDateString()),
                     FlexibleYearMonth.EMPTY, RString.EMPTY, ONE);
         } else if (修正.equals(モード)) {
             dgKogakuGassanShikyuFushikyuKettei_Row 選択行データ
@@ -419,7 +564,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             shmoResult = KogakuGassanShikyuKetteiHosei.createInstance().shoriModeHantei(
                     被保険者番号, new HokenshaNo(選択行データ.getTxtShokisaiNo()),
                     選択行データ.getTxtRenrakuhyoSeiriNo(),
-                    選択行データ.getTxtTaishoNendo().getValue().getYear(),
+                    new FlexibleYear(選択行データ.getTxtTaishoNendo().getValue().getYear().toDateString()),
                     選択行データ.getTxtUketoriNengetsu().getValue().getYearMonth(),
                     選択行データ.getTxtShikyuKubun(), TWO);
         } else if (削除.equals(モード)) {
@@ -427,12 +572,12 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                     = div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
             shmoResult = KogakuGassanShikyuKetteiHosei.createInstance().shoriModeHantei(被保険者番号, new HokenshaNo(
                     選択行データ.getTxtShokisaiNo()), 選択行データ.getTxtRenrakuhyoSeiriNo(),
-                    選択行データ.getTxtTaishoNendo().getValue().getYear(),
+                    new FlexibleYear(選択行データ.getTxtTaishoNendo().getValue().getYear().toDateString()),
                     選択行データ.getTxtUketoriNengetsu().getValue().getYearMonth(),
                     選択行データ.getTxtShikyuKubun(), THREE);
         }
         if (shmoResult.getWkメッセージ() != null && !shmoResult.getWkメッセージ().isEmpty()) {
-            getErrorMessage(shmoResult.getWkメッセージ());
+            getErrorMessage(shmoResult.getWkメッセージ(), shmoResult.getWkモード());
         }
         return shmoResult.getWkモード();
     }
@@ -540,6 +685,14 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     }
 
     /**
+     * 画面tap設定です。
+     */
+    public void set画面tap() {
+        div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTabKogakuGassanShikyuFushikyuKettei().setSelectedItem(
+                div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTplKettei());
+    }
+
+    /**
      * 決定情報内容変更状態です。
      *
      * @param parameter KogakuGassanShikyuKetteiHoseiDetailParameter
@@ -573,6 +726,168 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 || is比較変更年月日(parameter.get振込明細書作成日(),
                         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtFurikomiTsuchiSakuseiYMD().getValue())
                 || is支払方法タブ(parameter);
+    }
+
+    private JigyoKogakuGassanShikyuFushikyuKettei buid事業高額決定(JigyoKogakuGassanShikyuFushikyuKettei entity) {
+        entity = entity.createBuilderForEdit().set保険制度コード(THREE)
+                .set自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                        getTxtJikoFutanSogaku().getValue())
+                .set支給区分コード(ShikyuFushikyuKubun.valueOf(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                                getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
+                .set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue())
+                .build();
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue() != null) {
+            entity = entity.createBuilderForEdit().set対象計算期間開始年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKeisanYMD().getFromValue().toDateString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue() != null) {
+            entity = entity.createBuilderForEdit().set対象計算期間終了年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKeisanYMD().getToValue().toDateString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShinseiYMD().getValue() != null) {
+            entity = entity.createBuilderForEdit().set申請年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtShinseiYMD().getValue().toDateString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKetteiYMD().getValue() != null) {
+            entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKetteiYMD().getValue().toDateString())).build();
+        }
+        if (支給.equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                getRadShikyuKubunCode().getSelectedValue())) {
+            entity = entity.createBuilderForEdit().set給付の種類(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKyufuShurui().getValue())
+                    .set備考(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                            getTxtBiko().getValue())
+                    .build();
+        } else {
+            entity = entity.createBuilderForEdit().set不支給理由(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtBiko().getValue()).build();
+        }
+        entity = entity.createBuilderForEdit().set支払方法区分(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getShiharaiHohoRad())
+                .set支払場所(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                        getCcdShiharaiHohoJoho().getShiharaiBasho()).build();
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getStartYMD() != null) {
+            entity = entity.createBuilderForEdit().set支払期間開始年月日(new FlexibleDate(div.
+                    getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                    .getCcdShiharaiHohoJoho().getStartYMD().toString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho() != null) {
+            entity = entity.createBuilderForEdit().set支払期間終了年月日(new FlexibleDate(div.
+                    getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().
+                    getEndYMD().toString())).build();
+
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getStartHHMM() != null) {
+            RString 時間 = new RString(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                    .getCcdShiharaiHohoJoho().getStartHHMM().toString());
+            entity = entity.createBuilderForEdit().set支払期間開始時間(
+                    時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getEndHHMM() != null) {
+            RString 時間 = new RString(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                    .getCcdShiharaiHohoJoho().getEndHHMM().toString());
+            entity = entity.createBuilderForEdit().set支払期間終了時間(
+                    時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getKozaNo() != null
+                && !div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getKozaNo().isEmpty()) {
+            entity = entity.createBuilderForEdit().set口座ID(
+                    Long.parseLong(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                            .getCcdShiharaiHohoJoho().getKozaNo().toString())).build();
+        }
+        return entity;
+    }
+
+    private KogakuGassanShikyuFushikyuKettei buid高額決定(KogakuGassanShikyuFushikyuKettei entity) {
+        entity = entity.createBuilderForEdit().set保険制度コード(THREE)
+                .set自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                        getTxtJikoFutanSogaku().getValue())
+                .set支給区分コード(ShikyuFushikyuKubun.valueOf(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                                getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
+                .set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue())
+                .build();
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue() != null) {
+            entity = entity.createBuilderForEdit().set対象計算期間開始年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKeisanYMD().getFromValue().toDateString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue() != null) {
+            entity = entity.createBuilderForEdit().set対象計算期間終了年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKeisanYMD().getToValue().toDateString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShinseiYMD().getValue() != null) {
+            entity = entity.createBuilderForEdit().set申請年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtShinseiYMD().getValue().toDateString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKetteiYMD().getValue() != null) {
+            entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
+                    div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKetteiYMD().getValue().toDateString())).build();
+        }
+        if (支給.equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                getRadShikyuKubunCode().getSelectedValue())) {
+            entity = entity.createBuilderForEdit().set給付の種類(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKyufuShurui().getValue())
+                    .set備考(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                            getTxtBiko().getValue())
+                    .build();
+        } else {
+            entity = entity.createBuilderForEdit().set不支給理由(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtBiko().getValue()).build();
+        }
+        entity = entity.createBuilderForEdit().set支払方法区分(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getShiharaiHohoRad())
+                .set支払場所(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                        getCcdShiharaiHohoJoho().getShiharaiBasho()).build();
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getStartYMD() != null) {
+            entity = entity.createBuilderForEdit().set支払期間開始年月日(new FlexibleDate(div.
+                    getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                    .getCcdShiharaiHohoJoho().getStartYMD().toString())).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho() != null) {
+            entity = entity.createBuilderForEdit().set支払期間終了年月日(new FlexibleDate(div.
+                    getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().
+                    getEndYMD().toString())).build();
+
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getStartHHMM() != null) {
+            RString 時間 = new RString(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                    .getCcdShiharaiHohoJoho().getStartHHMM().toString());
+            entity = entity.createBuilderForEdit().set支払期間開始時間(
+                    時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getEndHHMM() != null) {
+            RString 時間 = new RString(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                    .getCcdShiharaiHohoJoho().getEndHHMM().toString());
+            entity = entity.createBuilderForEdit().set支払期間終了時間(
+                    時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        }
+        if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getKozaNo() != null
+                && !div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                .getCcdShiharaiHohoJoho().getKozaNo().isEmpty()) {
+            entity = entity.createBuilderForEdit().set口座ID(
+                    Long.parseLong(div.getKogakuGassanShikyuKetteiHoseiDetailPanel()
+                            .getCcdShiharaiHohoJoho().getKozaNo().toString())).build();
+        }
+        return entity;
     }
 
     private boolean is支払方法タブ(KogakuGassanShikyuKetteiHoseiDetailParameter parameter) {
@@ -663,23 +978,23 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
     }
 
-    private void getErrorMessage(RString メッセージ) {
-        if (支給決定情報補正判定MSG1.equals(メッセージ)) {
+    private void getErrorMessage(RString メッセージ, RString モード) {
+        if (支給決定情報補正判定MSG1.equals(メッセージ) && 処理不可.equals(モード)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg1.getMessage());
-        } else if (支給決定情報補正判定MSG2.equals(メッセージ)) {
+        } else if (支給決定情報補正判定MSG2.equals(メッセージ) && 処理不可.equals(モード)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg2.getMessage());
-        } else if (支給決定情報補正判定MSG3.equals(メッセージ)) {
+        } else if (支給決定情報補正判定MSG3.equals(メッセージ) && 処理不可.equals(モード)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg3.getMessage());
-        } else if (支給決定情報補正判定MSG4.equals(メッセージ)) {
+        } else if (支給決定情報補正判定MSG4.equals(メッセージ) && 処理不可.equals(モード)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg4.getMessage());
-        } else if (支給決定情報補正判定MSG5.equals(メッセージ)) {
+        } else if (支給決定情報補正判定MSG5.equals(メッセージ) && 処理不可.equals(モード)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg5.getMessage());
-        } else if (支給決定情報補正判定MSG6.equals(メッセージ)) {
+        } else if (支給決定情報補正判定MSG6.equals(メッセージ) && 処理不可.equals(モード)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg6.getMessage());
         }

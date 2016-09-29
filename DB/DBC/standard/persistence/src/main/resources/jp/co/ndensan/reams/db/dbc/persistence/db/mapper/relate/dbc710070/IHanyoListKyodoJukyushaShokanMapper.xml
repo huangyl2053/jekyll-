@@ -36,10 +36,13 @@
                 AND  SUBSTR("DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."idoYMD",1,6)  <![CDATA[<=]]> #{異動年月To}
                 </if>
             </if>
+            <if test ="保険者コード !='' and 保険者コード != '000000'">
+                AND  "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."shoKisaiHokenshaNo"  = #{保険者コード}
+            </if>
          )   
         SELECT
             <include refid="allColumns_DbT1001HihokenshaDaicho" />,
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710070.IHanyoListKyodoJukyushaShokanMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>                
         FROM
             "KyodoJukyushaShokanNewest"  AS "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"
@@ -77,7 +80,7 @@
         <id column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_hiHokenshaNo" />
         <id column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoYMD" />
         <id column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_rirekiNo" />
-        <association property="共同処理用受給者異動償還送付" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"/>
+        <association property="共同処理用受給者異動償還送付" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710070.IHanyoListKyodoJukyushaShokanMapper.ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"/>
         <association property="被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap> 
@@ -111,4 +114,55 @@
          "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
          "DbT1001HihokenshaDaicho"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
     </sql>
+     <sql id="allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu">
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hiHokenshaNo" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_hiHokenshaNo",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."idoYMD" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."rirekiNo" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_rirekiNo",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertDantaiCd" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertDantaiCd",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertTimestamp" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertTimestamp",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertReamsLoginId" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertReamsLoginId",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertContextId" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertContextId",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."isDeleted" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_isDeleted",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."updateCount" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_updateCount",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."lastUpdateTimestamp" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateTimestamp",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."lastUpdateReamsLoginId" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateReamsLoginId",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."idoKubunCode" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoKubunCode",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."jukyushaIdoJiyu" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_jukyushaIdoJiyu",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."shoKisaiHokenshaNo" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_shoKisaiHokenshaNo",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenKyufuIchijiSashitomeKaishiYMD" as "dbT3003_hokenKyufuIchijiSashitomeKaishiYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenKyufuIchijiSashitomeShuryoYMD" as "dbT3003_hokenKyufuIchijiSashitomeShuryoYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenkyufuIchijiSashitomeKubunCode" as "dbT3003_hokenkyufuIchijiSashitomeKubunCode",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenkyufuIchijiSashitomeKingaku" as "dbT3003_hokenkyufuIchijiSashitomeKingaku",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."teiseiRenrakuhyoFlag" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiRenrakuhyoFlag",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."sofuYM" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_sofuYM",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."teiseiKubunCode" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiKubunCode",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."teiseiYMD" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."logicalDeletedFlag" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_logicalDeletedFlag"
+    </sql>
+    <!--テーブルDbT3003KyodoShoriyoJukyushaIdoShokanSofuの項目をDbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="idoYMD" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="rirekiNo" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_isDeleted" />
+        <result property="updateCount" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoKubunCode" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyushaIdoJiyu" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_jukyushaIdoJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="hokenKyufuIchijiSashitomeKaishiYMD" column="dbT3003_hokenKyufuIchijiSashitomeKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hokenKyufuIchijiSashitomeShuryoYMD" column="dbT3003_hokenKyufuIchijiSashitomeShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hokenkyufuIchijiSashitomeKubunCode" column="dbT3003_hokenkyufuIchijiSashitomeKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenkyufuIchijiSashitomeKingaku" column="dbT3003_hokenkyufuIchijiSashitomeKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="teiseiRenrakuhyoFlag" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiRenrakuhyoFlag" />
+        <result property="sofuYM" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="teiseiKubunCode" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teiseiYMD" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_logicalDeletedFlag" />
+    </resultMap>
 </mapper>

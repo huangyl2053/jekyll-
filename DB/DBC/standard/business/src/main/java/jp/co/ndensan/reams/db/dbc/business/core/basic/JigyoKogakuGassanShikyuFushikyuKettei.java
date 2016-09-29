@@ -414,6 +414,30 @@ public class JigyoKogakuGassanShikyuFushikyuKettei
     }
 
     /**
+     * 修正JigyoKogakuGassanShikyuFushikyuKettei
+     *
+     * @return JigyoKogakuGassanShikyuFushikyuKettei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuGassanShikyuFushikyuKettei modified() {
+        DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new JigyoKogakuGassanShikyuFushikyuKettei(modifiedEntity, id);
+    }
+
+    /**
+     * add JigyoKogakuGassanShikyuFushikyuKettei
+     *
+     * @return JigyoKogakuGassanShikyuFushikyuKettei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuGassanShikyuFushikyuKettei added() {
+        DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JigyoKogakuGassanShikyuFushikyuKettei(addedEntity, id);
+    }
+
+    /**
      * {@link JigyoKogakuGassanShikyuFushikyuKettei}のシリアライズ形式を提供します。
      *
      * @return {@link JigyoKogakuGassanShikyuFushikyuKettei}のシリアライズ形式
