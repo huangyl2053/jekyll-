@@ -166,12 +166,18 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void afterExecute() {
+        long count;
         if (なし.equals(csv出力Flag) && processParameter.is項目名付加()) {
             List<RString> bodyList = new ArrayList<>();
             for (int i = 0; i < editor.setHeaderList(processParameter).size(); i++) {
                 bodyList.add(RString.EMPTY);
             }
             csvListWriter.writeLine(bodyList);
+        }
+        if (なし.equals(csv出力Flag)) {
+            count = 0;
+        } else {
+            count = csvListWriter.getCount();
         }
         csvListWriter.close();
         if (!personalDataList.isEmpty()) {
@@ -180,13 +186,14 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
         } else {
             spoolManager.spool(eucFilePath);
         }
+
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
                 地方公共団体情報.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 日本語ファイル名,
-                new RString(csvListWriter.getCount()),
+                new RString(count),
                 csv出力Flag,
                 CSVファイル名,
                 get抽出条件()

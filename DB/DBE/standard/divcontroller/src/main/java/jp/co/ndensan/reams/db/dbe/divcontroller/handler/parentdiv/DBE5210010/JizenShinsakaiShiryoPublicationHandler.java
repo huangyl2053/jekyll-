@@ -27,13 +27,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class JizenShinsakaiShiryoPublicationHandler {
 
     private final JizenShinsakaiShiryoPublicationDiv div;
-    private static final RString すべて選択_印刷一次判定_A4_両面 = new RString("1");
-    private static final RString 個別設定_印刷特記事項_A3_片面 = new RString("2");
+    private static final RString すべて選択_印刷一次判定_A4_両面_1 = new RString("1");
+    private static final RString 個別設定_印刷特記事項_A3_片面_2 = new RString("2");
     private static final RString 印刷帳票_審査会開催通知書 = new RString("key0");
     private static final RString 印刷帳票_審査会資料 = new RString("key1");
     private static final RString 印刷帳票_予備判定記入表 = new RString("key2");
-    private static final RString 印刷帳票_特記事項 = new RString("0");
-    private static final RString 印刷帳票_主治医意見書 = new RString("3");
+    private static final RString 印刷帳票_特記事項_0 = new RString("0");
+    private static final RString 印刷帳票_主治医意見書_3 = new RString("3");
     private final RDate 日期 = RDate.getNowDate();
 
     /**
@@ -80,7 +80,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
         div.getPublishingCondition().getDdlShutsuryokuStyleZenken().setSelectedKey(出力スタイル_印刷サイズddl);
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getTxtCopyNumForShinsakaiIin1().setValue(new Decimal(部数.toString()));
         RString 印刷帳票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員, 日期, SubGyomuCode.DBE認定支援);
-        if (個別設定_印刷特記事項_A3_片面.equals(印刷帳票)) {
+        if (すべて選択_印刷一次判定_A4_両面_1.equals(印刷帳票)) {
             RString 審査会開催通知書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_開催通知書, 日期, SubGyomuCode.DBE認定支援);
             RString 審査会資料 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_審査会資料, 日期, SubGyomuCode.DBE認定支援);
             RString 特記事項 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_特記事項, 日期, SubGyomuCode.DBE認定支援);
@@ -89,35 +89,35 @@ public class JizenShinsakaiShiryoPublicationHandler {
                     SubGyomuCode.DBE認定支援);
             RString 主治医意見書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_主治医意見書, 日期, SubGyomuCode.DBE認定支援);
             RString 予備判定記入票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_予備判定記入表, 日期, SubGyomuCode.DBE認定支援);
-            if (個別設定_印刷特記事項_A3_片面.equals(審査会開催通知書)) {
+            if (個別設定_印刷特記事項_A3_片面_2.equals(審査会開催通知書)) {
                 印刷帳票chk.add(印刷帳票_審査会開催通知書);
             }
-            if (個別設定_印刷特記事項_A3_片面.equals(審査会資料)) {
+            if (個別設定_印刷特記事項_A3_片面_2.equals(審査会資料)) {
                 印刷帳票chk.add(印刷帳票_審査会資料);
             }
-            if (個別設定_印刷特記事項_A3_片面.equals(特記事項)) {
-                印刷審査会資料chk.add(印刷帳票_特記事項);
+            if (個別設定_印刷特記事項_A3_片面_2.equals(特記事項)) {
+                印刷審査会資料chk.add(印刷帳票_特記事項_0);
             }
-            if (個別設定_印刷特記事項_A3_片面.equals(一次判定結果票)) {
-                印刷審査会資料chk.add(すべて選択_印刷一次判定_A4_両面);
+            if (個別設定_印刷特記事項_A3_片面_2.equals(一次判定結果票)) {
+                印刷審査会資料chk.add(すべて選択_印刷一次判定_A4_両面_1);
             }
-            if (個別設定_印刷特記事項_A3_片面.equals(特記事項_一次判定結果票)) {
-                印刷審査会資料chk.add(個別設定_印刷特記事項_A3_片面);
+            if (個別設定_印刷特記事項_A3_片面_2.equals(特記事項_一次判定結果票)) {
+                印刷審査会資料chk.add(個別設定_印刷特記事項_A3_片面_2);
             }
-            if (個別設定_印刷特記事項_A3_片面.equals(主治医意見書)) {
-                印刷審査会資料chk.add(印刷帳票_主治医意見書);
+            if (個別設定_印刷特記事項_A3_片面_2.equals(主治医意見書)) {
+                印刷審査会資料chk.add(印刷帳票_主治医意見書_3);
             }
-            if (個別設定_印刷特記事項_A3_片面.equals(予備判定記入票)) {
+            if (個別設定_印刷特記事項_A3_片面_2.equals(予備判定記入票)) {
                 印刷帳票chk.add(印刷帳票_予備判定記入表);
             }
         }
-        if (すべて選択_印刷一次判定_A4_両面.equals(印刷帳票)) {
+        if (すべて選択_印刷一次判定_A4_両面_1.equals(印刷帳票)) {
             印刷帳票chk.add(印刷帳票_審査会開催通知書);
             印刷帳票chk.add(印刷帳票_審査会資料);
-            印刷審査会資料chk.add(印刷帳票_特記事項);
-            印刷審査会資料chk.add(すべて選択_印刷一次判定_A4_両面);
-            印刷審査会資料chk.add(個別設定_印刷特記事項_A3_片面);
-            印刷審査会資料chk.add(印刷帳票_主治医意見書);
+            印刷審査会資料chk.add(印刷帳票_特記事項_0);
+            印刷審査会資料chk.add(すべて選択_印刷一次判定_A4_両面_1);
+            印刷審査会資料chk.add(個別設定_印刷特記事項_A3_片面_2);
+            印刷審査会資料chk.add(印刷帳票_主治医意見書_3);
             印刷帳票chk.add(印刷帳票_予備判定記入表);
         }
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票chk);
@@ -126,20 +126,60 @@ public class JizenShinsakaiShiryoPublicationHandler {
     }
 
     /**
-     * 印刷審査会資料選択チェックボックスの使用可能・不可能を設定する。
+     * 印刷審査会資料選択チェックボックスの使用可能・不可能を設定でし。
      */
     public void set審査会資料選択chkの設定() {
         if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys()
                 .contains(印刷帳票_審査会資料)) {
-            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setReadOnly(false);
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabled(false);
+            set選択chk();
         } else if (!div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys()
                 .contains(印刷帳票_審査会資料)) {
-            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setReadOnly(true);
+            List<RString> keys = new ArrayList<>();
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(keys);
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabled(true);
+        }
+    }
+
+    private void set選択chk() {
+        if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(個別設定_印刷特記事項_A3_片面_2)) {
+            List<RString> keys_se = new ArrayList<>();
+            if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
+                    .getSelectedKeys().contains(個別設定_印刷特記事項_A3_片面_2)) {
+                keys_se.add(個別設定_印刷特記事項_A3_片面_2);
+            }
+            if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
+                    .getSelectedKeys().contains(印刷帳票_主治医意見書_3)) {
+                keys_se.add(印刷帳票_主治医意見書_3);
+            }
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(keys_se);
+            List<RString> keys = new ArrayList<>();
+            keys.add(印刷帳票_特記事項_0);
+            keys.add(すべて選択_印刷一次判定_A4_両面_1);
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(keys);
+        } else if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(すべて選択_印刷一次判定_A4_両面_1)) {
+            List<RString> keys_se = new ArrayList<>();
+            if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
+                    .getSelectedKeys().contains(印刷帳票_特記事項_0)) {
+                keys_se.add(印刷帳票_特記事項_0);
+            }
+            if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
+                    .getSelectedKeys().contains(すべて選択_印刷一次判定_A4_両面_1)) {
+                keys_se.add(すべて選択_印刷一次判定_A4_両面_1);
+            }
+            if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
+                    .getSelectedKeys().contains(印刷帳票_主治医意見書_3)) {
+                keys_se.add(印刷帳票_主治医意見書_3);
+            }
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(keys_se);
+            List<RString> keys = new ArrayList<>();
+            keys.add(個別設定_印刷特記事項_A3_片面_2);
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(keys);
         }
     }
 
     /**
-     * バッチパラメータの設定について
+     * バッチパラメータの設定します。
      *
      * @return DBE526002_JIzenShinsakekkaTorokuSakuseiParameter
      */
@@ -168,17 +208,17 @@ public class JizenShinsakaiShiryoPublicationHandler {
             batchParameter.setSyuturyokuJun(new RString(div.getPublicationTargetShinsakai().getTxtYoteiTeiin().getValue().toString()));
         }
         if (!div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().isEmpty()) {
-            if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(すべて選択_印刷一次判定_A4_両面)) {
-                batchParameter.setSyuturyokuStyle(すべて選択_印刷一次判定_A4_両面);
-            } else if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(個別設定_印刷特記事項_A3_片面)) {
-                batchParameter.setSyuturyokuStyle(個別設定_印刷特記事項_A3_片面);
+            if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(すべて選択_印刷一次判定_A4_両面_1)) {
+                batchParameter.setSyuturyokuStyle(すべて選択_印刷一次判定_A4_両面_1);
+            } else if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(個別設定_印刷特記事項_A3_片面_2)) {
+                batchParameter.setSyuturyokuStyle(個別設定_印刷特記事項_A3_片面_2);
             }
         }
         if (!div.getPublishingCondition().getRadShutsuryokuStyleZenken().getSelectedKey().isEmpty()) {
-            if (div.getPublishingCondition().getRadShutsuryokuStyleZenken().getSelectedKey().equals(すべて選択_印刷一次判定_A4_両面)) {
-                batchParameter.setInsatuHouhou(すべて選択_印刷一次判定_A4_両面);
-            } else if (div.getPublishingCondition().getRadShutsuryokuStyleZenken().getSelectedKey().equals(個別設定_印刷特記事項_A3_片面)) {
-                batchParameter.setInsatuHouhou(個別設定_印刷特記事項_A3_片面);
+            if (div.getPublishingCondition().getRadShutsuryokuStyleZenken().getSelectedKey().equals(すべて選択_印刷一次判定_A4_両面_1)) {
+                batchParameter.setInsatuHouhou(すべて選択_印刷一次判定_A4_両面_1);
+            } else if (div.getPublishingCondition().getRadShutsuryokuStyleZenken().getSelectedKey().equals(個別設定_印刷特記事項_A3_片面_2)) {
+                batchParameter.setInsatuHouhou(個別設定_印刷特記事項_A3_片面_2);
             }
         }
         batchParameter.setSakuseiJyoken(new RString("全件"));
@@ -198,34 +238,34 @@ public class JizenShinsakaiShiryoPublicationHandler {
         List<RString> 印刷審査会資料 = div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
                 .getSelectedKeys();
         if (印刷帳票.contains(印刷帳票_審査会開催通知書)) {
-            batchParameter.setTuutiFlag(new RString("1"));
+            batchParameter.setTuutiFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
-            batchParameter.setTuutiFlag(new RString("0"));
+            batchParameter.setTuutiFlag(印刷帳票_特記事項_0);
         }
-        if (印刷審査会資料.contains(印刷帳票_特記事項)) {
-            batchParameter.setTokkiJikouFlag(new RString("1"));
+        if (印刷審査会資料.contains(印刷帳票_特記事項_0)) {
+            batchParameter.setTokkiJikouFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
-            batchParameter.setTokkiJikouFlag(new RString("0"));
+            batchParameter.setTokkiJikouFlag(印刷帳票_特記事項_0);
         }
-        if (印刷審査会資料.contains(すべて選択_印刷一次判定_A4_両面)) {
-            batchParameter.setItiHenteiKekkaFlag(new RString("1"));
+        if (印刷審査会資料.contains(すべて選択_印刷一次判定_A4_両面_1)) {
+            batchParameter.setItiHenteiKekkaFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
-            batchParameter.setItiHenteiKekkaFlag(new RString("0"));
+            batchParameter.setItiHenteiKekkaFlag(印刷帳票_特記事項_0);
         }
-        if (印刷審査会資料.contains(個別設定_印刷特記事項_A3_片面)) {
-            batchParameter.setTokkiPlusItiFlag(new RString("1"));
+        if (印刷審査会資料.contains(個別設定_印刷特記事項_A3_片面_2)) {
+            batchParameter.setTokkiPlusItiFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
-            batchParameter.setTokkiPlusItiFlag(new RString("0"));
+            batchParameter.setTokkiPlusItiFlag(印刷帳票_特記事項_0);
         }
-        if (印刷審査会資料.contains(印刷帳票_主治医意見書)) {
-            batchParameter.setIkensyoFlag(new RString("1"));
+        if (印刷審査会資料.contains(印刷帳票_主治医意見書_3)) {
+            batchParameter.setIkensyoFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
-            batchParameter.setIkensyoFlag(new RString("0"));
+            batchParameter.setIkensyoFlag(印刷帳票_特記事項_0);
         }
         if (印刷帳票.contains(印刷帳票_予備判定記入表)) {
-            batchParameter.setYobiHenteiFlag(new RString("1"));
+            batchParameter.setYobiHenteiFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
-            batchParameter.setYobiHenteiFlag(new RString("0"));
+            batchParameter.setYobiHenteiFlag(印刷帳票_特記事項_0);
         }
     }
 

@@ -65,13 +65,13 @@ public class KogakuShikyuShinseishoHakkoIchiranPageBreak extends PageBreaker<Kog
             ReportLineRecord<KogakuShikyuShinseishoHakkoIchiranSource> nextRecord) {
         boolean flag = false;
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.郵便番号.get項目ID())) {
-            flag = !currentRecord.getSource().listHakkoTaishosha_4.equals(nextRecord.getSource().listHakkoTaishosha_4);
-        }
-        if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.町域コード.get項目ID())) {
             flag = !currentRecord.getSource().listHakkoTaishosha_5.equals(nextRecord.getSource().listHakkoTaishosha_5);
         }
-        if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
+        if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.町域コード.get項目ID())) {
             flag = !currentRecord.getSource().listHakkoTaishosha_6.equals(nextRecord.getSource().listHakkoTaishosha_6);
+        }
+        if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
+            flag = !currentRecord.getSource().listHakkoTaishosha_7.equals(nextRecord.getSource().listHakkoTaishosha_7);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.氏名５０音カナ.get項目ID())) {
             flag = !currentRecord.getSource().氏名カナ.equals(nextRecord.getSource().氏名カナ);
@@ -83,10 +83,10 @@ public class KogakuShikyuShinseishoHakkoIchiranPageBreak extends PageBreaker<Kog
             flag = !currentRecord.getSource().shichosonNo.equals(nextRecord.getSource().shichosonNo);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.被保険者番号.get項目ID())) {
-            flag = !currentRecord.getSource().listHakkoTaishosha_1.equals(nextRecord.getSource().listHakkoTaishosha_1);
+            flag = !currentRecord.getSource().listHakkoTaishosha_2.equals(nextRecord.getSource().listHakkoTaishosha_2);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.サービス年月.get項目ID())) {
-            flag = !currentRecord.getSource().listHakkoTaishosha_2.equals(nextRecord.getSource().listHakkoTaishosha_2);
+            flag = !currentRecord.getSource().listHakkoTaishosha_3.equals(nextRecord.getSource().listHakkoTaishosha_3);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.サービス分類.get項目ID())) {
             flag = !currentRecord.getSource().サービス種類.equals(nextRecord.getSource().サービス種類);

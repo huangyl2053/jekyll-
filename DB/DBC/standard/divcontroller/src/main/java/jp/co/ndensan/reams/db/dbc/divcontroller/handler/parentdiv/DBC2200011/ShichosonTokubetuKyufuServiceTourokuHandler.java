@@ -185,7 +185,8 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         RString serviceCode = サービスコード固定値.concat(div.getKubunShikyuGendogakuShosai().getTxtServiceCode2().getValue());
         FlexibleDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue() != null
                 ? new FlexibleDate(div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue().toDateString()) : FlexibleDate.EMPTY;
-        int 履歴番号 = Integer.parseInt(div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().toString());
+        int 履歴番号 = div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().isNullOrEmpty()
+                ? 0 : Integer.parseInt(div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().toString());
 
         if (!CommonButtonHolder.isDisplayNone(追加やめる)) {
             dgServiceNaiyo_Row 直近データ = null;
@@ -195,10 +196,11 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
                     break;
                 }
             }
-            int 最大履歴番号 = finder.get最大履歴番号(serviceCode);
+            Integer 最大履歴番号 = finder.get最大履歴番号(serviceCode);
+            最大履歴番号 = 最大履歴番号 == null ? 0 : 最大履歴番号;
             ShichosonTokubetuKyufuService entity = new ShichosonTokubetuKyufuService(serviceCode,
                     有効期間開始年月日,
-                    最大履歴番号 + 1);
+                    最大履歴番号.intValue() + 1);
             ShichosonTokubetuKyufuServiceBuilder builder = entity.createBuilderForEdit();
             builder.set市町村特別給付用サービスコード(serviceCode);
             builder.set市町村特別給付用サービス名_正式名称(div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue());

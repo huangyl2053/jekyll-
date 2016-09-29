@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710050;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyolisthomonkaigoriyoshafutangakugengaku.HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -102,7 +103,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcessParameter implemen
      * @return HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter
      */
     public HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter toTokubetsuChiikiKasanGemmenMybatisParameter(
-            RString psmShikibetsuTaisho,
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
             RString psmAtesaki) {
         return new HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter(
                 cyusyutsuhohokubun,

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710140;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutoriyoshafutanwariai.HanyoRisutoRiyoshaFutanWariaiMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -24,6 +25,9 @@ import lombok.Setter;
 @Setter
 public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProcessParameter {
 
+    private RString hyoudai;
+    private RString detasyubetsumesyo;
+    private RString syutsuryoku;
     private RString cyusyutsuhohokubun;
     private FlexibleYear nendo;
     private FlexibleDate kizyunnichi;
@@ -41,6 +45,9 @@ public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProces
     /**
      * コンストラクタです。
      *
+     * @param hyoudai 表題
+     * @param detasyubetsumesyo データ種別名
+     * @param syutsuryoku 出力方法
      * @param cyusyutsuhohokubun 抽出方法区分
      * @param nendo 年度
      * @param kizyunnichi 基準日
@@ -55,10 +62,14 @@ public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProces
      * @param syutsuryokujun 出力順
      * @param syutsuryokukomoku 出力項目
      */
-    public HanyoListRiyoshaFutanwariaiProcessParameter(RString cyusyutsuhohokubun, FlexibleYear nendo,
+    public HanyoListRiyoshaFutanwariaiProcessParameter(RString hyoudai, RString detasyubetsumesyo,
+            RString syutsuryoku, RString cyusyutsuhohokubun, FlexibleYear nendo,
             FlexibleDate kizyunnichi, boolean isJigyotaishoshafutanichiwari, boolean isJigyotaishoshafutanniwari,
             boolean isNendochokindatacyusyutsu, boolean isCsvkomokumeifuka, boolean isCsvrenbanfuka, boolean isCsvhitsukesurasyuhensyu,
             AtenaSelectBatchParameter atenacyusyutsujyoken, RString cyohyoid, Long syutsuryokujun, RString syutsuryokukomoku) {
+        this.hyoudai = hyoudai;
+        this.detasyubetsumesyo = detasyubetsumesyo;
+        this.syutsuryoku = syutsuryoku;
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.nendo = nendo;
         this.kizyunnichi = kizyunnichi;
@@ -82,7 +93,8 @@ public class HanyoListRiyoshaFutanwariaiProcessParameter implements IBatchProces
      * @param syutsuryokujun 出力順
      * @return HanyoRisutoRiyoshaFutanWariaiMybatisParameter
      */
-    public HanyoRisutoRiyoshaFutanWariaiMybatisParameter toHanyoRisutoRiyoshaFutanWariaiMybatisParameter(RString psmShikibetsuTaisho,
+    public HanyoRisutoRiyoshaFutanWariaiMybatisParameter toHanyoRisutoRiyoshaFutanWariaiMybatisParameter(
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
             RString psmAtesaki, RString syutsuryokujun) {
         return new HanyoRisutoRiyoshaFutanWariaiMybatisParameter(
                 cyusyutsuhohokubun,

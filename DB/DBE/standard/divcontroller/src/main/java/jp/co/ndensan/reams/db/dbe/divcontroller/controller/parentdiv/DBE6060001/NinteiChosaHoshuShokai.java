@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6060001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshushokai.NinteichosahoshushokaiBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiFlowParameter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.DBE601005_NinteichosaHoshuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshuShokaiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.NinteiChosaHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6060001.NinteiChosaHoshuShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6060001.NinteiChosaHoshuShokaiValidationHandler;
@@ -130,8 +130,8 @@ public class NinteiChosaHoshuShokai {
      * @param div NinteiChosaHoshuShokaiDiv
      * @return ResponseData<NinteiChosaHoshuShokaiFlowParameter>
      */
-    public ResponseData<NinteiChosaHoshuShokaiFlowParameter> getParameterToCSV(NinteiChosaHoshuShokaiDiv div) {
-        NinteiChosaHoshuShokaiFlowParameter tempData = getHandler(div).getTempData(new RString("1"));
+    public ResponseData<DBE601005_NinteichosaHoshuParameter> getParameterToCSV(NinteiChosaHoshuShokaiDiv div) {
+        DBE601005_NinteichosaHoshuParameter tempData = getHandler(div).getTempData(new RString("1"));
         return ResponseData.of(tempData).respond();
     }
 
@@ -141,8 +141,8 @@ public class NinteiChosaHoshuShokai {
      * @param div NinteiChosaHoshuShokaiDiv
      * @return ResponseData<NinteiChosaHoshuShokaiFlowParameter>
      */
-    public ResponseData<NinteiChosaHoshuShokaiFlowParameter> getParameter(NinteiChosaHoshuShokaiDiv div) {
-        NinteiChosaHoshuShokaiFlowParameter tempData = getHandler(div).getTempData(new RString("2"));
+    public ResponseData<DBE601005_NinteichosaHoshuParameter> getParameter(NinteiChosaHoshuShokaiDiv div) {
+        DBE601005_NinteichosaHoshuParameter tempData = getHandler(div).getTempData(new RString("2"));
         return ResponseData.of(tempData).respond();
     }
 

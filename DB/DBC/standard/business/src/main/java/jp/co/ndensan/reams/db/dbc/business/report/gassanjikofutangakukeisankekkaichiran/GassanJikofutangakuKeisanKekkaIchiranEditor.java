@@ -41,7 +41,8 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
     private final RString 改頁5;
     private static final RString 種別日本人 = new RString("１x");
     private static final RString 種別外国人 = new RString("２x");
-    private static final RString LINE = new RString(" ～ ");
+    private static final RString LINE = new RString("～");
+    private static final RString 定数 = new RString("度");
 
     /**
      * コンストラクタです
@@ -84,6 +85,9 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
     public GassanJikofutangakuKeisanKekkaIchiranSource edit(GassanJikofutangakuKeisanKekkaIchiranSource source) {
         if (市町村コード != null) {
             source.shichosonCd = 市町村コード.getColumnValue();
+        }
+        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get識別コード() != null) {
+            source.shikibetuCode = 高額合算自己負担額計算結果一覧表.get識別コード();
         }
         source.shichosonName = 市町村名称;
         source.shutsuryokujun1 = 出力順1;
@@ -129,18 +133,18 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         source.list_5 = 高額合算自己負担額計算結果一覧表.get申請書整理番号();
         if (高額合算自己負担額計算結果一覧表.get申請年月日() != null) {
             source.list_6 = 高額合算自己負担額計算結果一覧表.get申請年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
         }
         if (高額合算自己負担額計算結果一覧表.get申請対象年度() != null) {
             source.list_7 = 高額合算自己負担額計算結果一覧表.get申請対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(定数);
         }
         if (高額合算自己負担額計算結果一覧表.get介護加入期間開始() != null
                 && 高額合算自己負担額計算結果一覧表.get介護加入期間終了() != null) {
             RString 介護加入期間開始 = 高額合算自己負担額計算結果一覧表.get介護加入期間開始().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
             RString 介護加入期間終了 = 高額合算自己負担額計算結果一覧表.get介護加入期間終了().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
             source.list_8 = 介護加入期間開始.concat(LINE).concat(介護加入期間終了);
         }
     }

@@ -24,6 +24,8 @@ import lombok.Getter;
 @Getter
 public class IdoChushutsuDaichoNewMybatisParameter implements IMyBatisParameter {
 
+    private static final RString COMMA = new RString(",");
+
     private final RString 抽出条件設定区分;
     private final HihokenshaNo 被保険者番号From;
     private final HihokenshaNo 被保険者番号To;
@@ -78,7 +80,7 @@ public class IdoChushutsuDaichoNewMybatisParameter implements IMyBatisParameter 
         this.今回抽出終了時分秒 = 今回抽出終了時分秒;
         this.被保険者番号リスト = 被保険者番号リスト;
         this.識別コードリスト = 識別コードリスト;
-        this.出力順 = 出力順;
+        this.出力順 = COMMA.concat(出力順.substring(9));
         this.is広域 = is広域;
         this.is単一 = is単一;
         get今回抽出日付();

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -90,7 +91,7 @@ public class RiyoshaFutanGakuGengakuMybatisParameter implements IMyBatisParamete
     private boolean has地区2To;
     private boolean has地区3From;
     private boolean has地区3To;
-    private final RString psmShikibetsuTaisho;
+    private final IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho;
     private final RString psmAtesaki;
     private final RString 出力順;
 
@@ -124,7 +125,7 @@ public class RiyoshaFutanGakuGengakuMybatisParameter implements IMyBatisParamete
             RString soshitsukubun,
             RString kyakasha,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
-            RString psmShikibetsuTaisho,
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
             RString psmAtesaki,
             RString 出力順) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;

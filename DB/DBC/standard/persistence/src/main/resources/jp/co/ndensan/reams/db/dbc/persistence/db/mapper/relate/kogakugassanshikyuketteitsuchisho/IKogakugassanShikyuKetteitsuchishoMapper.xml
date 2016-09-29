@@ -86,40 +86,23 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoMybatisParameter"
             resultMap="resultMap_KogakugassanShikyuKetteitsuchishoEntity" fetchSize="500">
         SELECT "KogakugassanShikyuKetteitsuchishoTemp".*,
-               "DbV1001"."shichosonCode" AS "DbV1001_shichosonCode",
-               "DbV1001"."shikibetsuCode" AS "DbV1001_shikibetsuCode",
-               "DbV1001"."kanaMeisho" AS "DbV1001_kanaMeisho",
-               "DbV1001"."meisho" AS "DbV1001_meisho",
-               "DbV1001"."seinengappiYMD" AS "DbV1001_seinengappiYMD",
-               "DbV1001"."seibetsuCode" AS "DbV1001_seibetsuCode",
-               "DbV1001"."yubinNo" AS "DbV1001_yubinNo",
-               "DbV1001"."zenkokuJushoCode" AS "DbV1001_zenkokuJushoCode",
-               "DbV1001"."gyoseikuCode" AS "DbV1001_gyoseikuCode",
-               "DbV1001"."juminShubetsuCode" AS "DbV1001_juminShubetsuCode",
-               "DbV1001"."jusho" AS "DbV1001_jusho"
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+                CASE WHEN "DbV1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1' THEN "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+                    ELSE "DbV1001HihokenshaDaicho"."shichosonCode" END AS "DbV1001_shichosonCode",
+               "DbV1001HihokenshaDaicho"."shikibetsuCode" AS "DbV1001_shikibetsuCode"
+<!--               "ShikibetsuTaisho"."yubinNo" AS "ShikibetsuTaisho_yubinNo",
+               "ShikibetsuTaisho"."choikiCode" AS "ShikibetsuTaisho_choikiCode",
+               "ShikibetsuTaisho"."gyoseikuCode" AS "ShikibetsuTaisho_gyoseikuCode",
+               "ShikibetsuTaisho"."kanaMeisho" AS "ShikibetsuTaisho_kanaMeisho"-->
         FROM "KogakugassanShikyuKetteitsuchishoTemp" AS "KogakugassanShikyuKetteitsuchishoTemp"
-        LEFT JOIN ( SELECT "DbV1001HihokenshaDaicho"."shichosonCode",
-                           "DbV1001HihokenshaDaicho"."hihokenshaNo",
-                           "DbV1001HihokenshaDaicho"."shikibetsuCode",
-                           "ShikibetsuTaisho"."kanaMeisho",
-                           "ShikibetsuTaisho"."meisho",
-                           "ShikibetsuTaisho"."seinengappiYMD",
-                           "ShikibetsuTaisho"."seibetsuCode",
-                           "ShikibetsuTaisho"."yubinNo",
-                           "ShikibetsuTaisho"."zenkokuJushoCode",
-                           "ShikibetsuTaisho"."gyoseikuCode",
-                           "ShikibetsuTaisho"."juminShubetsuCode",
-                           "ShikibetsuTaisho"."jusho"
-                    FROM rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
-                    LEFT JOIN
-                    rgua."UaFt200FindShikibetsuTaisho"('2',#{基準年月日},true,'DB',FALSE,'','','','','','','','','','','',true,
+        LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
+        ON "DbV1001HihokenshaDaicho"."hihokenshaNo" = "KogakugassanShikyuKetteitsuchishoTemp"."hihokenshaNo"
+        LEFT JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('2',#{基準年月日},true,'DB',FALSE,'','','','','','','','','','','',true,
                     '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                     true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-                    ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
-                    WHERE "DbV1001HihokenshaDaicho"."logicalDeletedFlag" = false
-                   ) AS "DbV1001"
-        ON "DbV1001"."hihokenshaNo" = "KogakugassanShikyuKetteitsuchishoTemp"."hihokenshaNo"
-        ORDER BY "KogakugassanShikyuKetteitsuchishoTemp"."shikyuKubun" ASC
+        ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
+        ORDER BY "KogakugassanShikyuKetteitsuchishoTemp"."shikyuKubunCode" ASC
                <if test="出力順 != null">
                 ,${出力順}
                </if>
@@ -168,20 +151,12 @@
         <result property="kozaID" column="kozaID" />
         <result property="ketteiTsuchiRealHakkoFlag" column="ketteiTsuchiRealHakkoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="被保検者情報" resultMap="resultMap_HihokenshaDaichoResultEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_HihokenshaDaichoResultEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.HihokenshaDaichoResultEntity" autoMapping="true">
         <result property="市町村コード" column="DbV1001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="識別コード" column="DbV1001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="kanaMeisho" column="DbV1001_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="meisho" column="DbV1001_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="seinengappiYMD" column="DbV1001_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="seibetsuCode" column="DbV1001_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yubinNo" column="DbV1001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="zenkokuJushoCode" column="DbV1001_zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
-        <result property="gyoseikuCode" column="DbV1001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
-        <result property="juminShubetsuCode" column="DbV1001_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jusho" column="DbV1001_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
     </resultMap>
     <select id="get中間DB_高額合算支給決定通知書データ" resultOrdered="true" 
             resultMap="ResultMap_DbT3074KogakuGassanShikyuFushikyuKetteiEntity" fetchSize="500">
