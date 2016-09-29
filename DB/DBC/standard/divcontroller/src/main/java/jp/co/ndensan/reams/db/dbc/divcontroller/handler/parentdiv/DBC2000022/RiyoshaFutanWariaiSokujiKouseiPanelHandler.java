@@ -497,7 +497,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         if (rowIndex == div.getDgFutanWariai().getDataSource().size() - 1) {
             rowsData.add(newRowData);
         } else {
-            rowsData.add(rowIndex, newRowData);
+            rowsData.add(rowIndex + 1, newRowData);
         }
         div.getDgFutanWariai().setDataSource(rowsData);
     }
