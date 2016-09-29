@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -91,9 +90,9 @@ public class IkenshoKakuninsho {
         getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号).concat(new RString("IryohiKojyoSyomeisho")));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            throw new PessimisticLockingException();
-        }
+//        if (!RealInitialLocker.tryGetLock(排他キー)) {
+//            throw new PessimisticLockingException();
+//        }
         RealInitialLocker.lock(排他キー);
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
 
