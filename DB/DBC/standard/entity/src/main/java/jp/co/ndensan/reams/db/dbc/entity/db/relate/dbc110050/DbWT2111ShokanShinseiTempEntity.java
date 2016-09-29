@@ -80,9 +80,9 @@ public class DbWT2111ShokanShinseiTempEntity extends DbTableEntityBase<DbWT2111S
     @TempTableColumnOrder(21)
     private Decimal hokenTaishoHiyogaku;
     @TempTableColumnOrder(22)
-    private int hokenKyufugaku;
+    private Decimal hokenKyufugaku;
     @TempTableColumnOrder(23)
-    private int riyoshaFutangaku;
+    private Decimal riyoshaFutangaku;
     @TempTableColumnOrder(24)
     private RString shikyuShinseiShinsaKubun;
     @TempTableColumnOrder(25)
