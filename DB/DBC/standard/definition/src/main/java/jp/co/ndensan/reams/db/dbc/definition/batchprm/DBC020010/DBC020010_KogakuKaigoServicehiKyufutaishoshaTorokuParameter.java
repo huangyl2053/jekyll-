@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020040;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010;
 
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -25,32 +24,18 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter extends
 
     private static final String KEY_MENUID = "menuId";
     private static final String KEY_SHUTURYOKUJUNN = "shuturyokuJunn";
-    private static final String KEY_SHINSAYMFROM = "ShinsaYMFrom";
-    private static final String KEY_SHINSAYMTO = "ShinsaYMTo";
+    private static final String KEY_SHORIYM = "shoriYM";
+    private static final String KEY_SHORISTATEKUBUN = "shoriStateKubun";
     private static final String KEY_SHUTURYOKUFLG = "shuturyokuFlg";
 
     @BatchParameter(key = KEY_MENUID, name = "メニューID")
     private RString menuId;
     @BatchParameter(key = KEY_SHUTURYOKUJUNN, name = "出力順ID")
     private long shuturyokuJunn;
-    @BatchParameter(key = KEY_SHINSAYMFROM, name = "審査年月From")
-    private FlexibleYearMonth shinsaYMFrom;
-    @BatchParameter(key = KEY_SHINSAYMTO, name = "審査年月To")
-    private FlexibleYearMonth shinsaYMTo;
+    @BatchParameter(key = KEY_SHORIYM, name = "処理年月")
+    private FlexibleYearMonth shoriYM;
+    @BatchParameter(key = KEY_SHORISTATEKUBUN, name = "処理状態区分")
+    private RString shoriStateKubun;
     @BatchParameter(key = KEY_SHUTURYOKUFLG, name = "出力フラグ")
     private boolean shuturyokuFlg;
-
-    /**
-     * processのパラメータを生成します。
-     *
-     * @return processパラメータ
-     */
-    public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter toCreateGyomuHokenshaJohoGetsujiProcessParameter() {
-        return new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
-                shuturyokuJunn,
-                shinsaYMFrom,
-                shinsaYMTo,
-                shuturyokuFlg);
-    }
-
 }
