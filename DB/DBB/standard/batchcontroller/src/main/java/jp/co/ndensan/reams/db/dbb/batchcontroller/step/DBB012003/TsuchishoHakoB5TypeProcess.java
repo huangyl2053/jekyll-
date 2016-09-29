@@ -106,7 +106,9 @@ public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuH
     @Override
     protected IBatchReader createReader() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
+        if (parameter.get出力順ID() != null && !parameter.get出力順ID().isEmpty()) {
+            outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
+        }
 
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {

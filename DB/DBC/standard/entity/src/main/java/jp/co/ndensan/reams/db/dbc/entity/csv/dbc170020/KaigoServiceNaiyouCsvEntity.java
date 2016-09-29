@@ -606,7 +606,7 @@ public class KaigoServiceNaiyouCsvEntity {
     private RString 訪問看護体制強化加算;
     @CsvField(order = 293, name = "予備項目(293)")
     private RString 予備項目293;
-    @CsvField(order = 287, name = "予備項目(294)")
+    @CsvField(order = 294, name = "予備項目(294)")
     private RString 予備項目294;
     @CsvField(order = 295, name = "予備項目(295)")
     private RString 予備項目295;

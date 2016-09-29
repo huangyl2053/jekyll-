@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-3400-030 liuyl-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc170020.IKaigoSabisuNaiyoCSVSakuseiMapper">
+     <select id="select介護サービス内容取込結果" resultOrdered="true"  
+              resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc170020.TorikomiDataTempEntity" 
+              fetchSize="500">
+         SELECT
+         "DbT7131KaigoServiceNaiyouTemp".*
+         FROM
+         "DbT7131KaigoServiceNaiyouTemp"
+         ORDER BY 
+         "DbT7131KaigoServiceNaiyouTemp"."serviceShuruiCd",
+         "DbT7131KaigoServiceNaiyouTemp"."serviceKoumokuCd",
+         "DbT7131KaigoServiceNaiyouTemp"."teikyoKaishiYM",
+         "DbT7131KaigoServiceNaiyouTemp"."rirekiNo"
+     </select>
+</mapper>
