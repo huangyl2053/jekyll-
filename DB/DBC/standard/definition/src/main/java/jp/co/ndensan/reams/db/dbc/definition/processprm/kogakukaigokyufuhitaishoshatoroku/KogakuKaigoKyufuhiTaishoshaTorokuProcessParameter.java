@@ -29,6 +29,8 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
     private boolean shuturyokuFlg;
     private FlexibleYearMonth sysYearMonth;
     private YMDHMS sysDate;
+    private FlexibleYearMonth 最新のサービス提供年月;
+    private FlexibleYearMonth 最古のサービス提供年月;
 
     /**
      * コンストラクタです。
@@ -52,6 +54,19 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
 
     /**
      * コンストラクタです。
+     *
+     * @param 最古のサービス提供年月 FlexibleYearMonth
+     * @param 最新のサービス提供年月 FlexibleYearMonth
+     */
+    public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
+            FlexibleYearMonth 最新のサービス提供年月,
+            FlexibleYearMonth 最古のサービス提供年月) {
+        this.最新のサービス提供年月 = 最新のサービス提供年月;
+        this.最古のサービス提供年月 = 最古のサービス提供年月;
+    }
+
+    /**
+     * コンストラクタです。
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter() {
     }
@@ -63,8 +78,8 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
      */
     public KyufuJissekiKihonKogakuMybatisParameter toMybatisParameter() {
         KyufuJissekiKihonKogakuMybatisParameter parameter = new KyufuJissekiKihonKogakuMybatisParameter();
-        parameter.set最新のサービス提供年月(shinsaYMFrom);
-        parameter.set最古のサービス提供年月(shinsaYMTo);
+        parameter.set最新のサービス提供年月(最新のサービス提供年月);
+        parameter.set最古のサービス提供年月(最古のサービス提供年月);
         return parameter;
     }
 
@@ -74,6 +89,6 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
      * @return {@link UpdKogakuKokuhorenIFMstMybatisParameter}
      */
     public UpdKogakuKokuhorenIFMstMybatisParameter toCreateUpdKogakuKokuhorenIFMstMybatisParameter() {
-        return new UpdKogakuKokuhorenIFMstMybatisParameter(shinsaYMFrom, shinsaYMTo, sysYearMonth, sysDate);
+        return new UpdKogakuKokuhorenIFMstMybatisParameter(sysYearMonth, sysDate);
     }
 }

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchCopiedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -25,7 +25,7 @@ public class InsKyufuJissekiShukeiTmpProcess extends BatchProcessBase<DbT3033Kyu
     private KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter parameter;
 
     @BatchWriter
-    BatchCopiedTempTableWriter 給付実績集計一時tableWriter;
+    BatchEntityCreatedTempTableWriter 給付実績集計一時tableWriter;
 
     private static final RString 給付実績集計一時_TABLE_NAME = new RString("TempKyufujissekiShukei");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
@@ -37,7 +37,8 @@ public class InsKyufuJissekiShukeiTmpProcess extends BatchProcessBase<DbT3033Kyu
 
     @Override
     protected void createWriter() {
-        給付実績集計一時tableWriter = new BatchCopiedTempTableWriter(DbT3033KyufujissekiShukeiEntity.class, 給付実績集計一時_TABLE_NAME);
+        給付実績集計一時tableWriter = new BatchEntityCreatedTempTableWriter(
+                給付実績集計一時_TABLE_NAME, DbT3033KyufujissekiShukeiEntity.class);
     }
 
     @Override

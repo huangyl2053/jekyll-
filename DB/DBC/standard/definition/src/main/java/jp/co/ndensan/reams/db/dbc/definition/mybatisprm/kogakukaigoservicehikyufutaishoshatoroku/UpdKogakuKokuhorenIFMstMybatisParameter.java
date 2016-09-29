@@ -19,24 +19,16 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class UpdKogakuKokuhorenIFMstMybatisParameter implements IMyBatisParameter {
 
-    private FlexibleYearMonth 審査年月From;
-    private FlexibleYearMonth 審査年月To;
     private FlexibleYearMonth 処理年月;
     private YMDHMS 処理日時;
 
     /**
      * コンストラクタです。
      *
-     * @param 審査年月From FlexibleYearMonth
-     * @param 審査年月To FlexibleYearMonth
      * @param 処理年月 FlexibleYearMonth
      * @param 処理日時 YMDHMS
      */
-    public UpdKogakuKokuhorenIFMstMybatisParameter(FlexibleYearMonth 審査年月From, FlexibleYearMonth 審査年月To,
-            FlexibleYearMonth 処理年月,
-            YMDHMS 処理日時) {
-        this.審査年月From = 審査年月From;
-        this.審査年月To = 審査年月From;
+    public UpdKogakuKokuhorenIFMstMybatisParameter(FlexibleYearMonth 処理年月, YMDHMS 処理日時) {
         this.処理年月 = 処理年月;
         this.処理日時 = 処理日時;
     }
