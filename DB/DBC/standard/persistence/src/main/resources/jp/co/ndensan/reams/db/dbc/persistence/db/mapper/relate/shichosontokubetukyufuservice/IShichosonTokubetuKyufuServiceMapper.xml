@@ -19,7 +19,7 @@
         FROM
         rgdb."DbT3066ShichosonTokubetuKyufuService"
         WHERE
-        rgdb."DbT3066ShichosonTokubetuKyufuService"."isDeleted" = FALSE
+        rgdb."DbT3066ShichosonTokubetuKyufuService"."logicalDeletedFlag" = FALSE
         ORDER BY "serviceCode" ASC,
         "serviceYukoKikanKaishiYMD" DESC
     </select>
