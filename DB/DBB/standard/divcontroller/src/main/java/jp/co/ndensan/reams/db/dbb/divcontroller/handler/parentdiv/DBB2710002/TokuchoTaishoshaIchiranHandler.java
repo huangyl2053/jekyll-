@@ -59,7 +59,7 @@ public class TokuchoTaishoshaIchiranHandler {
     private static final RString 同定済一覧_VALUE = new RString("同定済一覧");
     private static final RString 未同定一覧_VALUE = new RString("未同定一覧");
     private static final RString 確認済を含む_VALUE = new RString("確認済を含む");
-    private static final RString 帳票グループコード = new RString("DBB200018");
+    private static final RString 帳票グループコード = new RString("DBB2710002");
     private static final RString LEFT = new RString("(");
     private static final RString RIGHT = new RString(")");
     private static final RString 未同定_CODE = new RString("0");
