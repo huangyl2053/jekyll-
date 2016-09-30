@@ -30,7 +30,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler {
      * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 申請日の未入力チェック(ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+    public ValidationMessageControlPairs 申請日の未入力チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.申請日の非空チェック)
                 .thenAdd(NoInputMessages.申請日の必須入力).messages());
@@ -46,7 +47,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler {
      * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 決定日の未入力チェック(ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+    public ValidationMessageControlPairs 決定日の未入力チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.決定日の非空チェック)
                 .thenAdd(NoInputMessages.決定日の必須入力).messages());
@@ -56,18 +58,87 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler {
     }
 
     /**
-     * 決定日の未入力チェックを行います。
+     * 対象年度の未入力チェックを行います。
      *
      * @param pairs バリデーションコントロール
      * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 対象年度の未入力チェック(ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+    public ValidationMessageControlPairs 対象年度の未入力チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.対象年度の非空チェック)
                 .thenAdd(NoInputMessages.対象年度の必須入力).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.対象年度の必須入力, div.getTxtTaishoNendo()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 認知証高齢者自立度の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 認知証高齢者自立度の未入力チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.認知証高齢者自立度の非空チェック)
+                .thenAdd(NoInputMessages.認知証高齢者自立度の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.認知証高齢者自立度の必須入力, div.getDdlNinchishoKoreishaJiritsudo()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 障がい高齢者自立度の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 障がい高齢者自立度の未入力チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.障がい高齢者自立度の非空チェック)
+                .thenAdd(NoInputMessages.障がい高齢者自立度の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.障がい高齢者自立度の必須入力, div.getDdlShogaiKoreishaJiritsudo()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 認定区分の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 認定区分の未入力チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.認定区分の非空チェック)
+                .thenAdd(NoInputMessages.認定区分の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.認定区分の必須入力, div.getDdlNinteiKubun()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 認定内容の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 認定内容の未入力チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.認定内容の非空チェック)
+                .thenAdd(NoInputMessages.認定内容の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.認定内容の必須入力, div.getDdlNinteiNaiyo()).build().check(messages));
         return pairs;
     }
 
@@ -78,7 +149,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler {
      * @param div ShogaishaKojoTaishoshaShinseiTorokuMainDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 対象年度重複チェック(ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+    public ValidationMessageControlPairs 対象年度重複チェック(
+            ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(ShogaishaKojoTaishoshaShinseiTorokuMainDivSpec.対象年度重複チェック)
                 .thenAdd(NoInputMessages.対象年度重複チェック).messages());
@@ -92,6 +164,10 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler {
         申請日の必須入力(UrErrorMessages.必須.getMessage(), "申請日"),
         対象年度の必須入力(UrErrorMessages.必須.getMessage(), "対象年度"),
         決定日の必須入力(UrErrorMessages.必須.getMessage(), "決定日"),
+        認知証高齢者自立度の必須入力(UrErrorMessages.必須.getMessage(), "認知証高齢者自立度"),
+        障がい高齢者自立度の必須入力(UrErrorMessages.必須.getMessage(), "障がい高齢者自立度"),
+        認定区分の必須入力(UrErrorMessages.必須.getMessage(), "認定区分"),
+        認定内容の必須入力(UrErrorMessages.必須.getMessage(), "認定内容"),
         対象年度重複チェック(UrErrorMessages.既に登録済.getMessage(), "対象年度");
         private final Message message;
 

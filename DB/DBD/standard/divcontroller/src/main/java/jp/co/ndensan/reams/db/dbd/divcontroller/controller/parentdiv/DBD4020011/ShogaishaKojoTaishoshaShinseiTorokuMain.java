@@ -17,6 +17,7 @@ import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD40200
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4020011.DBD4020011StateName.世帯一覧from詳細;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4020011.DBD4020011StateName.完了;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4020011.DBD4020011StateName.詳細;
+import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4020011.DBD4020011TransitionEventName.検索処理へ;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4020011.DBD4020011TransitionEventName.検索結果一覧へ;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4020011.ShogaishaKojoTaishoshaShinseiTorokuMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4020011.dgShinseiList_Row;
@@ -52,6 +53,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
     private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
     private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
     private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
+    private final RString 漢字承認する = new RString("承認する");
 
     /**
      * 画面初期化
@@ -159,8 +161,24 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
         ArrayList<ShogaishaKoujoToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
         ShogaishaKoujoToJotai 情報と状態 = handler.get情報と状態BySelectDataSouce(情報と状態ArrayList);
         ViewStateHolder.put(ViewStateKeys.編集障がい者控除申請登録の情報, 情報と状態);
-        getHandler(div).onSelectByModifyButton(情報と状態);
+        ShogaishaKoujo 最初情報 = null;
+        if (情報と状態 != null) {
+            最初情報 = get書控除申請登録最初情報(情報と状態);
+        }
+        boolean is承認情報 = 最初情報 != null && 最初情報.get決定区分() != null && !最初情報.get決定区分().isEmpty();
+        getHandler(div).onSelectByModifyButton(情報と状態, is承認情報);
         return ResponseData.of(div).setState(詳細);
+    }
+
+    private ShogaishaKoujo get書控除申請登録最初情報(ShogaishaKoujoToJotai 編集情報) {
+        ShogaishaKoujoIdentifier id = 編集情報.get障がい書控除申請登録情報().identifier();
+        ArrayList<ShogaishaKoujo> 最初申請一覧情報 = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
+        for (ShogaishaKoujo 最初情報 : 最初申請一覧情報) {
+            if (id.equals(最初情報.identifier())) {
+                return 最初情報;
+            }
+        }
+        return null;
     }
 
     /**
@@ -229,13 +247,39 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
     }
 
     /**
-     * 対象者検索を戻る　ボタンを押下する。
+     * 「検索結果一覧へ」　ボタンを押下する。
      *
      * @param div {@link ShogaishaKojoTaishoshaShinseiTorokuMainDiv 障がい者控除対象者申請登録画面Div}
      * @return 障がい者控除対象者申請登録Divを持つResponseData
      */
     public ResponseData<ShogaishaKojoTaishoshaShinseiTorokuMainDiv> onClick_btnBack(ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
-        return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            getHandler(div).前排他解除(get被保険者番号FromViewState());
+            return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「再検索する」　ボタンを押下する。
+     *
+     * @param div {@link ShogaishaKojoTaishoshaShinseiTorokuMainDiv 障がい者控除対象者申請登録画面Div}
+     * @return 障がい者控除対象者申請登録Divを持つResponseData
+     */
+    public ResponseData<ShogaishaKojoTaishoshaShinseiTorokuMainDiv> onClick_reSearch(ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            getHandler(div).前排他解除(get被保険者番号FromViewState());
+            return ResponseData.of(div).forwardWithEventName(検索処理へ).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -274,8 +318,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
             ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler validationhandler = getValidationHandler();
             validationhandler.申請日の未入力チェック(pairs, div);
             if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
-                validationhandler.決定日の未入力チェック(pairs, div);
-                validationhandler.対象年度の未入力チェック(pairs, div);
+                承認情報チェック(pairs, div, validationhandler);
             }
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -297,6 +340,18 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
             return ResponseData.of(div).setState(一覧);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void 承認情報チェック(ValidationMessageControlPairs pairs, ShogaishaKojoTaishoshaShinseiTorokuMainDiv div,
+            ShogaishaKojoTaishoshaShinseiTorokuMainValidationHandler validationhandler) {
+        validationhandler.決定日の未入力チェック(pairs, div);
+        validationhandler.対象年度の未入力チェック(pairs, div);
+        if (漢字承認する.equals(div.getRadKettaiKubun().getSelectedValue())) {
+            validationhandler.認知証高齢者自立度の未入力チェック(pairs, div);
+            validationhandler.障がい高齢者自立度の未入力チェック(pairs, div);
+            validationhandler.認定区分の未入力チェック(pairs, div);
+            validationhandler.認定内容の未入力チェック(pairs, div);
+        }
     }
 
     private ShogaishaKoujoToJotai get最初情報(ShogaishaKoujoToJotai 編集情報) {

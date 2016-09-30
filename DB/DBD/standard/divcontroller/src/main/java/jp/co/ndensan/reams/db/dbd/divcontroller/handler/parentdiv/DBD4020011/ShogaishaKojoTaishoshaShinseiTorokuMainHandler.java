@@ -47,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -142,7 +144,17 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
                 = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, 被保険者番号_Name, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
         申請情報エリア非活性制御();
+        RealInitialLocker.lock(new LockingKey(new RString("DB").concat(被保険者番号.getColumnValue().concat("ShogaishaKoujo"))));
         return 情報と状態List;
+    }
+
+    /**
+     * 前排他解除処理です。
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    public void 前排他解除(HihokenshaNo 被保険者番号) {
+        RealInitialLocker.release(new LockingKey(new RString("DB").concat(被保険者番号.getColumnValue().concat("ShogaishaKoujo"))));
     }
 
     private void 申請情報を追加するボタン活性設定(List<ShogaishaKoujo> 申請一覧情報) {
@@ -328,7 +340,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     public void onClick_btnAddShinsei(ShikibetsuCode 識別コード) {
         div.getTxtShinseiYMD().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         clear申請情報エリア(識別コード);
-        一覧制御(true, true);
+        一覧制御(true, true, false);
     }
 
     private void clear申請情報エリア(ShikibetsuCode 識別コード) {
@@ -350,7 +362,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         div.getDdlNinteiNaiyo().setSelectedKey(RString.EMPTY);
     }
 
-    private void 一覧制御(boolean is追加修正, boolean is承認する) {
+    private void 一覧制御(boolean is追加修正, boolean is承認する, boolean is承認情報) {
         div.getBtnAddShinsei().setDisabled(true);
         div.getDgShinseiList().setDisabled(true);
         div.getTxtShinseiYMD().setDisabled(!is追加修正);
@@ -362,7 +374,6 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         boolean is申請メニュー = 申請メニュー.equals(ResponseHolder.getMenuID());
         div.getRadKettaiKubun().setDisabled(is申請メニュー);
         div.getTxtKettaiYMD().setDisabled(is申請メニュー);
-        div.getTxtTaishoNendo().setDisabled(is申請メニュー);
         div.getTxtKijunYMD().setDisabled(is申請メニュー);
         div.getTxtHaakuYMD().setDisabled(is申請メニュー);
         div.getChkHasShogaishaTecho().setDisabled(is申請メニュー);
@@ -372,11 +383,13 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             div.getDdlShogaiKoreishaJiritsudo().setDisabled(true);
             div.getDdlNinteiKubun().setDisabled(true);
             div.getDdlNinteiNaiyo().setDisabled(true);
+            div.getTxtTaishoNendo().setDisabled(true);
         } else {
             div.getDdlNinchishoKoreishaJiritsudo().setDisabled(!is承認する);
             div.getDdlShogaiKoreishaJiritsudo().setDisabled(!is承認する);
             div.getDdlNinteiKubun().setDisabled(!is承認する);
             div.getDdlNinteiNaiyo().setDisabled(!is承認する);
+            div.getTxtTaishoNendo().setDisabled(is承認情報);
         }
         div.getTxtHiShoninRiyu().setDisabled(is申請メニュー || is承認する);
         div.getBtnHiShoninRiyu().setDisabled(is申請メニュー || is承認する);
@@ -387,9 +400,9 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
      *
      * @param 情報と状態 情報と状態
      */
-    public void onSelectByModifyButton(ShogaishaKoujoToJotai 情報と状態) {
+    public void onSelectByModifyButton(ShogaishaKoujoToJotai 情報と状態, boolean is承認情報) {
         set申請情報エリア(情報と状態);
-        一覧制御(状態_追加.equals(情報と状態.get状態()), 承認する.equals(情報と状態.get障がい書控除申請登録情報().get決定区分()));
+        一覧制御(状態_追加.equals(情報と状態.get状態()), 承認する.equals(情報と状態.get障がい書控除申請登録情報().get決定区分()), is承認情報);
     }
 
     private void set申請情報エリア(ShogaishaKoujoToJotai 情報と状態) {
@@ -1026,6 +1039,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
                 new ExpandedInformation(CODE_0003, 被保険者番号_Name, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.更新, personalData);
         ShogaishaKojoTaishoshaShinseiTorokuManager.createIntance().更新処理(情報と状態ArrayList, 申請メニュー.equals(ResponseHolder.getMenuID()));
+        前排他解除(被保険者番号);
         div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
