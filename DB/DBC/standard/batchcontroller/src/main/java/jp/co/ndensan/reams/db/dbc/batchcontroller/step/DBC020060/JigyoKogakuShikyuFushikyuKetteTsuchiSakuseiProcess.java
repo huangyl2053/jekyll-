@@ -90,6 +90,8 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
     private RString 住所;
     private RString 出力順情報;
     private int 連番;
+    private Decimal 本人支給額合計;
+    private Decimal 支給額給額合計;
 
     @BatchWriter
     BatchReportWriter<JigyoKogakuShikyuFushikyuKetteTsuchiSource> batchReportWriter;
@@ -99,7 +101,9 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
     protected void initialize() {
 
         dataFlag = true;
-        連番 = INT_1;
+        連番 = INT_0;
+        本人支給額合計 = Decimal.ZERO;
+        支給額給額合計 = Decimal.ZERO;
         並び順 = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         pageBreakKeys = new ArrayList<>();
@@ -136,10 +140,13 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
         dataFlag = false;
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(entity.get宛名());
         住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報, 導入団体情報);
-        JigyoKogakuShikyuFushikyuKetteTsuchiEntity reportEntity = getFushikyuReportEntity(entity);
-        JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(reportEntity, 連番);
-        report.writeBy(reportSourceWriter);
         連番 = 連番 + INT_1;
+        JigyoKogakuShikyuFushikyuKetteTsuchiEntity reportEntity = getFushikyuReportEntity(entity);
+        JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(reportEntity, 連番, false);
+        report.writeBy(reportSourceWriter);
+        本人支給額合計 = 本人支給額合計.add(entity.get本人支払額());
+        支給額給額合計 = 支給額給額合計.add(entity.get本人支払額());
+
     }
 
     @Override
@@ -148,9 +155,20 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
             JigyoKogakuShikyuFushikyuKetteTsuchiEntity afterEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
             set出力順と改頁(afterEntity);
             afterEntity.set被保険者氏名(被保険者氏名_出力ない);
-            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(afterEntity, 連番);
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(afterEntity, 連番, false);
+            report.writeBy(reportSourceWriter);
+        } else {
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(getLastEntity(), 連番, true);
             report.writeBy(reportSourceWriter);
         }
+    }
+
+    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity getLastEntity() {
+        JigyoKogakuShikyuFushikyuKetteTsuchiEntity lastEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
+        lastEntity.set支給総件数(new RString(連番));
+        lastEntity.set本人支給額合計(doカンマ編集(本人支給額合計));
+        lastEntity.set支給額給額合計(doカンマ編集(支給額給額合計));
+        return lastEntity;
     }
 
     private void get出力順() {
