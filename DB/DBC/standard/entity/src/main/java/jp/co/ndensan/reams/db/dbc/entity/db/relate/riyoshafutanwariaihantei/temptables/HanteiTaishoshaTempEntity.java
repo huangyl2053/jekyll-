@@ -65,4 +65,12 @@ public class HanteiTaishoshaTempEntity
     private RString gekihenKanwaKubun;
     private FlexibleDate hanteiKijunYMD;
     private RString dataKubun;
+
+    /**
+     * HanteiTaishoshaTempEntityのコンストラクタです。
+     */
+    public HanteiTaishoshaTempEntity() {
+        this.taishoTsuki = RString.EMPTY;
+    }
+
 }
