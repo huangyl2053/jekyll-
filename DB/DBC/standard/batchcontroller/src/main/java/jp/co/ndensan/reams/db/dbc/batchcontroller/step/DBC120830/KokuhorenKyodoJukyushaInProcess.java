@@ -86,6 +86,8 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
     private static final RString 出力ファイル名
             = new RString("DBC200057_KyodoJukyushaIchiran.csv");
     private static final RString デフォルト出力順 = new RString(" ORDER BY dbWT5C30.\"hokenshaNo\" ASC ");
+    private static final RString デフォルト出力順_1 = new RString(" dbWT0001.\"hihokenshaNo\" ASC ");
+    private static final RString デフォルト出力順_2 = new RString(" dbWT5C30.\"idoYMD\" ASC ");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
 
     @BatchWriter
@@ -131,6 +133,8 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
                 }
             }
         }
+        出力順 = 出力順.concat(コンマ).concat(デフォルト出力順_1);
+        出力順 = 出力順.concat(コンマ).concat(デフォルト出力順_2);
         帳票データの取得Parameter.set出力順(出力順);
         pageBreakKeys.add(new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.hokenshaNo.name()));
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
