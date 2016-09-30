@@ -385,4 +385,24 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                 order(by(shoriYM, Order.DESC)).
                 toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
+
+    /**
+     * 国保連連携スケジュールの処理番号有無　取得返します。
+     *
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 処理状態区分 処理状態区分
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> get処理番号(RString 交換情報識別番号, RString 処理状態区分) {
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_交換情報識別番号.toString()));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_処理状態区分.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(shoriJotaiKubun, 処理状態区分)))
+                .toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
 }
