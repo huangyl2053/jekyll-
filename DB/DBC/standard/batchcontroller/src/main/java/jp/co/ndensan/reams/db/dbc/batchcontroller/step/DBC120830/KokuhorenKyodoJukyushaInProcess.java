@@ -65,7 +65,7 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
                     + "kokuhorenkyodojukyushain.IKokuhorenKyodoJukyushaInMapper.get帳票出力対象データ");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200056");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200057");
     private static final RString コンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString KANRINENDO = new RString("0000");
@@ -102,7 +102,7 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
         mapper = getMapper(IKyodoJukyushaKoshinKekkaInMapper.class);
         KyodoJukyushaKoshinKekkaInMybatisParameter batisparameter = new KyodoJukyushaKoshinKekkaInMybatisParameter();
         batisparameter.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-        batisparameter.setChohyoBunruiID(ReportIdDBC.DBC200056.getReportId().value());
+        batisparameter.setChohyoBunruiID(ReportIdDBC.DBC200057.getReportId().value());
         batisparameter.setKanriNendo(KANRINENDO);
         batisparameter.setKomokuName(ChohyoSeigyoHanyoKomokuMei.帳票タイトル_随時.get名称());
         帳票タイトル = mapper.帳票タイトルの取得(batisparameter);
