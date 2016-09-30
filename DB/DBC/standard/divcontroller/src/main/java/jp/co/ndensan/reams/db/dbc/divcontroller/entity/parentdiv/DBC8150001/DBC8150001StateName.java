@@ -15,8 +15,7 @@ public enum DBC8150001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    標準("標準"),
-    高額介護対象者抽出遡及分("高額介護対象者抽出遡及分");
+    標準("標準");
 
     private final RString name;
 
