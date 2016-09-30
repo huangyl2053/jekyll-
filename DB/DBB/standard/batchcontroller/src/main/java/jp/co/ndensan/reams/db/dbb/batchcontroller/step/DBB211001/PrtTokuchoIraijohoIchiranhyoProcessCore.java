@@ -54,6 +54,15 @@ public class PrtTokuchoIraijohoIchiranhyoProcessCore {
     }
 
     /**
+     * 改ページ名を取得です。
+     *
+     * @return List<RString> 改頁項名
+     */
+    public List<RString> get改頁項名() {
+        return breakPage;
+    }
+
+    /**
      * 出力順項です。
      *
      * @return List<RString> 出力順項

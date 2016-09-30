@@ -106,7 +106,6 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     private RString 特別徴収異動情報一覧表ＣＳＶFilePath;
     private FileSpoolManager manager;
     private PrtTokuchoIdojohoIchiranhyoProcessCore processCore;
-    private int 出力ページ数;
     private boolean isHasData;
 
     @BatchWriter
@@ -118,7 +117,6 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
 
     @Override
     protected void initialize() {
-        出力ページ数 = 0;
         isHasData = false;
         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
         if (!RString.isNullOrEmpty(parameter.get出力順ID()) && !ZERO.equals(parameter.get出力順ID())) {
@@ -180,8 +178,6 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
 
     @Override
     protected void keyBreakProcess(TokuChoYidoIchiran t) {
-//        if (processCore) {
-//        }
     }
 
     @Override
@@ -202,7 +198,7 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
                 特徴異動情報Entity, parameter.getシステム日時().getRDateTime(),
                 new FlexibleYear(parameter.get賦課年度().toDateString()),
                 保険者情報_保険者番号, 保険者情報_保険者名称,
-                processCore.出力順項(), processCore.改頁項());
+                processCore.出力順項(), processCore.get改頁項名());
         report.writeBy(reportSourceWriter);
         TokubetsuChoshuIdojohoIchiranDataCSVEntity csvEntity = csvEntityの編集(行政区コード, 表示コード,
                 年金保険者名称, t.get特徴異動追加情報());
@@ -212,14 +208,13 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     @Override
     protected void afterExecute() {
         特別徴収異動情報一覧表ＣＳＶ.close();
-        manager.spool(特別徴収異動情報一覧表ＣＳＶFilePath);
-
         List<RString> 出力条件リスト = parameter.get出力条件リスト();
-        出力ページ数 = 1;
+        int 出力ページ数 = reportSourceWriter.pageCount().value();
         RString 帳票名 = ReportIdDBB.DBB200021.getReportName();
         RString csv出力有無 = CSV出力有無_無り;
         RString csvファイル名 = 出力ファイル名_NO_DATA;
         if (isHasData) {
+            manager.spool(特別徴収異動情報一覧表ＣＳＶFilePath);
             csv出力有無 = CSV出力有無_有り;
             csvファイル名 = 出力ファイル名;
         }

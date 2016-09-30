@@ -183,7 +183,7 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
         TokubetsuChoshuIraiJohoIchiranEntity 特徴依頼情報Entity = 特徴依頼情報Entityを作成(行政区コード,
                 表示コード, 年金保険者名称, t.get対象者情報(), t.get市町村名称());
         TokubetsuChoshuIraiJohoIchiranReport report = new TokubetsuChoshuIraiJohoIchiranReport(
-                特徴依頼情報Entity, processCore.出力順項(), processCore.改頁項(),
+                特徴依頼情報Entity, processCore.出力順項(), processCore.get改頁項名(),
                 parameter.getシステム日時().getRDateTime());
         report.writeBy(reportSourceWriter);
         TokubetsuChoshuIraiJohoIchiranDataCSVEntity cSVEntity = csvEntityの編集(行政区コード, 表示コード,
@@ -194,15 +194,13 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
     @Override
     protected void afterExecute() {
         特別徴収依頼情報一覧表ＣＳＶ.close();
-        manager.spool(特別徴収依頼情報一覧表ＣＳＶFilePath);
-
         List<RString> 出力条件リスト = parameter.get出力条件リスト();
-        //TODO
-        int 出力ページ数 = 1;
+        int 出力ページ数 = reportSourceWriter.pageCount().value();
         RString 帳票名 = ReportIdDBB.DBB200019.getReportName();
         RString csv出力有無 = CSV出力有無_無り;
         RString csvファイル名 = 出力ファイル名_NO_DATA;
         if (isHasData) {
+            manager.spool(特別徴収依頼情報一覧表ＣＳＶFilePath);
             csv出力有無 = CSV出力有無_有り;
             csvファイル名 = 出力ファイル名;
         }
