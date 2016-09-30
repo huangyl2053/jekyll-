@@ -30,7 +30,7 @@ public class INenreiToutatsuYoteishaCheckListProcessParameter implements IBatchP
     private RString juminShubetsu;
     private FlexibleDate konkaikaishi;
     private FlexibleDate konkaisyuryo;
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
 
     /**
      * コンストラクタです。<br/>
@@ -46,7 +46,7 @@ public class INenreiToutatsuYoteishaCheckListProcessParameter implements IBatchP
      */
     public INenreiToutatsuYoteishaCheckListProcessParameter(RString syutsuryokutaisyo, boolean koumokumeiflg,
             boolean renbanfukaflg, boolean nichihensyuflg, RString juminShubetsu, FlexibleDate konkaikaishi,
-            FlexibleDate konkaisyuryo, RString shutsuryokujunId) {
+            FlexibleDate konkaisyuryo, Long shutsuryokujunId) {
         this.syutsuryokutaisyo = syutsuryokutaisyo;
         this.koumokumeiflg = koumokumeiflg;
         this.renbanfukaflg = renbanfukaflg;

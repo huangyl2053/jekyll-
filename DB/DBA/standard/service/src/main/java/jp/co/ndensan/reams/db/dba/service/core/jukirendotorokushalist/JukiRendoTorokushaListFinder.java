@@ -55,7 +55,8 @@ public class JukiRendoTorokushaListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンス
      */
     public static JukiRendoTorokushaListFinder createInstance() {
         return InstanceProvider.create(JukiRendoTorokushaListFinder.class);
@@ -92,7 +93,7 @@ public class JukiRendoTorokushaListFinder {
             FlexibleDate 今回開始日,
             FlexibleDate 今回終了日,
             List<RString> 対象台帳,
-            RString 出力順ID) {
+            Long 出力順ID) {
         boolean 被保険者台帳フラグ = false;
         boolean 他住所地特例者管理フラグ = false;
         boolean 適用除外者台帳フラグ = false;
@@ -147,7 +148,7 @@ public class JukiRendoTorokushaListFinder {
         parameter.setHihokenshadaichoFLG(被保険者台帳フラグ);
         parameter.setTajushochitokureishakanriFLG(他住所地特例者管理フラグ);
         parameter.setTekiyojogaishadaichoFLG(適用除外者台帳フラグ);
-        parameter.setShuturyokujunID(RString.EMPTY);
+        parameter.setShuturyokujunID(出力順ID);
         return parameter;
     }
 }

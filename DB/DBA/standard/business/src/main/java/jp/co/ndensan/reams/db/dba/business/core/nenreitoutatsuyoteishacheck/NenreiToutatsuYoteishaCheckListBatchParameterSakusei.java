@@ -43,7 +43,7 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
      */
     public INenreiToutatsuYoteishaCheckListBatchParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
             RString 出力対象, RString 住民種別, FlexibleDate 今回開始日, FlexibleDate 今回終了日, List<RString> 編集方法,
-            RString 出力順ID) {
+            Long 出力順ID) {
         if (今回開始日 == null || 今回開始日.isEmpty() || 今回終了日 == null || 今回終了日.isEmpty()) {
             throw new IllegalArgumentException();
         }

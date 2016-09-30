@@ -39,7 +39,7 @@ public class NenreiTotatsuTorokushaListBatchParameter extends BatchParameterBase
     @BatchParameter(key = KEY_KONKAISHURYO_YMDHMS, name = "今回終了日時")
     private RString konkaishuryoYMDHMS;
     @BatchParameter(key = KEY_SHUTURYOKUJUN_ID, name = "出力順ID")
-    private RString shuturyokujunID;
+    private Long shuturyokujunID;
 
     /**
      * バーチのパラメータを作成します。

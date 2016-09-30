@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1150011
 
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsutoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.NenreiTotatsuTorokushaListDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1150011.NenreiTotatsuTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListFinder;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -73,6 +75,7 @@ public class NenreiTotatsuTorokushaList {
         }
         // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
 //        loadChohyoMode(サブ業務コード, 帳票ID);
+        div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200008.getReportId());
         return ResponseData.of(div).respond();
     }
 
@@ -102,7 +105,7 @@ public class NenreiTotatsuTorokushaList {
                 div.getTxtzenkaishuryo().getValue(),
                 div.getTxtkonkaikaishi().getValue(),
                 div.getTxtkonkaishuryo().getValue(),
-                RString.EMPTY);
+                div.getCcdChohyoShutsuryokujun().get出力順ID());
         return ResponseData.of(parameter).respond();
     }
 

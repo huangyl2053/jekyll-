@@ -49,7 +49,7 @@ public class JyukiRendoTorokushaListBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_TEKIYOJOGAISHADAICHO_FLG, name = "適用除外者台帳フラグ")
     private boolean tekiyojogaishadaichoFLG;
     @BatchParameter(key = KEY_SHUTURYOKUJUN_ID, name = "出力順ID")
-    private RString shuturyokujunID;
+    private Long shuturyokujunID;
     @BatchParameter(key = KEY_LOGINUSER_ID, name = "LOGINユーザID")
     private RString loginUserId;
 
