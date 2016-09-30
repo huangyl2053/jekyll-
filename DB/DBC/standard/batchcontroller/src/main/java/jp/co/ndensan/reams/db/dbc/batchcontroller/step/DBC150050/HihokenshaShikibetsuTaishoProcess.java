@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150050;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.DbWT3470ServiceMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.HihokenshaShikibetsuTaishoMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -75,11 +77,10 @@ public class HihokenshaShikibetsuTaishoProcess
         }
         if (null != 識別対象.to個人()) {
             serviceMeisaiTempEntity.setSeinengappiYMD(識別対象.to個人().get生年月日().toFlexibleDate());
-            // QA#1612
-//            serviceMeisaiTempEntity.setAge(new AgeCalculator(識別対象.to個人().get生年月日(),
-//                    識別対象.to個人().get住民状態(),
-//                    識別対象.to個人().get消除異動年月日(),
-//                    AgeArrivalDay.前日).get年齢());
+            serviceMeisaiTempEntity.setAge(new AgeCalculator(識別対象.to個人().get生年月日(),
+                    識別対象.to個人().get住民状態(),
+                    識別対象.to個人().get消除異動年月日(),
+                    AgeArrivalDay.前日).get年齢());
             serviceMeisaiTempEntity.setSeibetsu(識別対象.to個人().get性別().getCode());
         }
 
