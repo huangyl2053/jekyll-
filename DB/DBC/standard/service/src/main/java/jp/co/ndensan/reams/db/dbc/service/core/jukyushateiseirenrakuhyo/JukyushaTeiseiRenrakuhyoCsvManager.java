@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.JukyushaTeiseiRenrakuhyoCsvDataEnti
 import jp.co.ndensan.reams.db.dbc.entity.csv.JukyushaTeiseiRenrakuhyoCsvEndEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -37,6 +39,7 @@ public class JukyushaTeiseiRenrakuhyoCsvManager {
     private static final RString ダブルクォート = new RString("\"");
     private static final RString 出力ファイル名 = new RString("jktei0.csv");
     private static final RString 定数_ZERO = new RString("0");
+    private static final int INDEX_ZERO = 0;
     private static final RString 定数_ONE = new RString("1");
     private static final RString 定数_TWO = new RString("2");
     private static final RString 定数_THREE = new RString("3");
@@ -91,9 +94,14 @@ public class JukyushaTeiseiRenrakuhyoCsvManager {
         csvControlEntity.setレコード件数(定数_ONE);
         csvControlEntity.setデータ種別(受給者訂正情報);
         csvControlEntity.set福祉事務所特定番号(定数_ZERO);
-        RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        csvControlEntity.set保険者番号(保険者番号);
+        KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
+        List<KoikiZenShichosonJoho> 広域市町村情報 = finder.koseiShichosonJoho().records();
+        if (広域市町村情報 != null && 広域市町村情報.size() > INDEX_ZERO) {
+            ShoKisaiHokenshaNo 証記載保険者番号 = 広域市町村情報.get(INDEX_ZERO).get証記載保険者番号();
+            if (証記載保険者番号 != null) {
+                csvControlEntity.set保険者番号(証記載保険者番号.getColumnValue());
+            }
+        }
         csvControlEntity.set事業所番号(定数_ZERO);
         csvControlEntity.set都道府県番号(定数_ZERO);
         RString 国保連送付媒体_受給異動Ｆ_媒体区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付媒体_受給訂正Ｆ_媒体区分,

@@ -405,7 +405,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         }
         set編集方法(restoreBatchParameterMap);
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
-            RString honkenshaCode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("honkenshaCode"));
+            RString honkenshaCode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hokenshaKodo"));
             if (全市町村.equals(honkenshaCode)) {
                 div.getCcdHokenshaList().loadHokenshaList();
             } else {

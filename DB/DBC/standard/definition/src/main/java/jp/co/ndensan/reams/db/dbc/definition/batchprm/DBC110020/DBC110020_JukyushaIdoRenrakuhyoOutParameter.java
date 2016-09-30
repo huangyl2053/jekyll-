@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110020;
 
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110020.JukyushaIdoRenrakuhyoOutProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,28 +22,8 @@ public class DBC110020_JukyushaIdoRenrakuhyoOutParameter extends BatchParameterB
 
     private static final String KEY_処理年月 = "処理年月";
     private static final String KEY_再処理区分 = "再処理区分";
-    private static final String KEY_抽出条件 = "抽出条件";
-    private static final String KEY_ファイル名 = "ファイル名";
     @BatchParameter(key = KEY_処理年月, name = "処理年月")
     private RYearMonth 処理年月;
     @BatchParameter(key = KEY_再処理区分, name = "再処理区分")
     private RString 再処理区分;
-    @BatchParameter(key = KEY_抽出条件, name = "抽出条件")
-    private RString 抽出条件;
-    @BatchParameter(key = KEY_ファイル名, name = "ファイル名")
-    private RString ファイル名;
-
-    /**
-     * processのパラメータを生成します。
-     *
-     * @return KogakugassanKeisankekkaRenrakuhyoOutProcessParameter
-     */
-    public JukyushaIdoRenrakuhyoOutProcessParameter toProcessParameter() {
-        return new JukyushaIdoRenrakuhyoOutProcessParameter(
-                処理年月,
-                再処理区分,
-                抽出条件,
-                ファイル名);
-    }
-
 }
