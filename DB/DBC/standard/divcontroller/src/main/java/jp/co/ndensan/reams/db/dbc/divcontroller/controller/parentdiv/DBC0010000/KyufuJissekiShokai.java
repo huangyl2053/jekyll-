@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010000;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KojinKakuteiKey;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -93,7 +95,7 @@ public class KyufuJissekiShokai {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            div.getCcdKaigoShikakuKihon().setVisible(true);
+            div.getCcdKaigoShikakuKihon().setVisible(false);
             return ResponseData.of(div).addMessage(new InformationMessage(
                     DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
                     DbcInformationMessages.被保険者でないデータ.getMessage().evaluate())).respond();
@@ -134,25 +136,42 @@ public class KyufuJissekiShokai {
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnKyufuJissekiSearch(KyufuJissekiShokaiDiv div) {
         ValidationMessageControlPairs validation = getValidationHandler(div).doチェック();
         if (validation.iterator().hasNext()) {
+            div.getKyufuJissekiSearchPanel().setIsOpen(true);
+            div.getKyufuJissekiListPanel().setIsOpen(false);
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
         FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
+        SetaiCode 世帯コード = 資格対象者.get世帯コード();
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
                 get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了);
         ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報);
         if (validationMessages.iterator().hasNext()) {
+            div.getKyufuJissekiSearchPanel().setIsOpen(true);
+            div.getKyufuJissekiListPanel().setIsOpen(false);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        for (int i = INT_ZERO; i < INT_NJYUNG; i++) {
+            div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(true);
+            div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(true);
         }
         KyufuJissekiSearchDataBusiness 一覧データ = 給付実績情報照会情報.getSearchData();
         getHandler(div).onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
                 サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
+        KojinKakuteiKey key = new KojinKakuteiKey();
+        key.set識別コード(識別コード);
+        key.set被保険者番号(被保険者番号);
+        key.set世帯コード(世帯コード);
+        給付実績情報照会情報.setKojinKakuteiKey(key);
         ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
-        return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
+        div.getKyufuJissekiSearchPanel().setIsOpen(false);
+        div.getKyufuJissekiListPanel().setIsOpen(true);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -995,7 +1014,7 @@ public class KyufuJissekiShokai {
     }
 
     private ResponseData<KyufuJissekiShokaiDiv> response_Meisai(KyufuJissekiShokaiDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.明細_集計).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.基本情報).respond();
     }
 
     private FlexibleYearMonth getサービス提供年月_開始(KyufuJissekiShokaiDiv div) {
