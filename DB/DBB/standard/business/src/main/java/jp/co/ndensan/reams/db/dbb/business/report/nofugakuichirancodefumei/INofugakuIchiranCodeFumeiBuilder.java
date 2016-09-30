@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.nofugakuichirancodefumei;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.source.nofugakuichirancodefumei.NofugakuIchiranCodeFumeiSource;
+import jp.co.ndensan.reams.db.dbb.business.report.nofugakuichirandaihyo.NofugakuIchiranSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
@@ -14,6 +14,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  * @reamsid_L DBB-1890-050 qinzhen
  */
 public interface INofugakuIchiranCodeFumeiBuilder extends
-        IReportBuilder<NofugakuIchiranCodeFumeiSource> {
+        IReportBuilder<NofugakuIchiranSource> {
 
 }
