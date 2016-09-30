@@ -22,11 +22,11 @@ public class TokubetsuChoshuIraiJohoKensuhyoEntity {
     private RString 構成市町村コード;
     private RString 市町村名称;
     private Code left特別徴収義務者コード;
-    private int left件数;
+    private Integer left件数;
     private RString left金額1;
     private RString left金額2;
     private Code right特別徴収義務者コード;
-    private int right件数;
+    private Integer right件数;
     private RString right金額1;
     private RString right金額2;
 
