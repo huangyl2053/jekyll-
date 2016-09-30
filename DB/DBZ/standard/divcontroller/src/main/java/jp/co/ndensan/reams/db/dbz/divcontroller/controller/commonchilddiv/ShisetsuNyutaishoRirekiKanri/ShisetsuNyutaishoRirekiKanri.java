@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNy
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -108,9 +107,10 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-        RString 住所地特例フラグ = KaigoHohenShisetsuNyutaishoshaKanriManager.
-                createInstance().get被保険者台帳管理の直近データ(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate(住所地特例フラグ);
+//TODO n3327 オフショアで追加された保険者番号のチェックが無い。追加要否の判断が必要。
+//        RString 住所地特例フラグ = KaigoHohenShisetsuNyutaishoshaKanriManager.
+//                createInstance().get被保険者台帳管理の直近データ(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate(/*住所地特例フラグ*/);
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         } else {
