@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb233001.CreateRenkeiFileProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB233001.TokuchoSeidokanIFRenkeiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB233001.DBB233001_TokuchoSeidokanIFRenkeiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -32,7 +32,7 @@ public class DBB233001_TokuchoSeidokanIFRenkei extends BatchFlowBase<DBB233001_T
     @Step(TOKUCHOUSEIDOKANIFRENKEI_PROCESS)
     IBatchFlowCommand tokuchouSeidoKanIFRenkeiProcess() {
         List<RString> 市町村コードリスト = new ArrayList<>();
-        return loopBatch(CreateRenkeiFileProcess.class).arguments(
+        return loopBatch(TokuchoSeidokanIFRenkeiProcess.class).arguments(
                 new DBB233001_TokuchoSeidokanIFRenkeiParameter().
                 toTokuchouSeidoKanIFRenkeiProcessParameter(FlexibleYear.EMPTY, 市町村コードリスト)).define();
     }

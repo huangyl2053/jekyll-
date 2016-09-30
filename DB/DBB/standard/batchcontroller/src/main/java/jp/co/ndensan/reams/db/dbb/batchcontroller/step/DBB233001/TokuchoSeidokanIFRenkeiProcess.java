@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb233001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB233001;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1810-040 dengjiajia
  */
-public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchouSeidoKanIFRenkeiEntity> {
+public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSeidoKanIFRenkeiEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.dbb233001.ITokuchouSeidoKanIFRenkeiMapper.select連携ファイル用");
