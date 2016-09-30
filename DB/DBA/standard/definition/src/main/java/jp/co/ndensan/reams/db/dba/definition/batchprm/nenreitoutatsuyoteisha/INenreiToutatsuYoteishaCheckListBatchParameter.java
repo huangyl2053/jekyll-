@@ -48,7 +48,7 @@ public class INenreiToutatsuYoteishaCheckListBatchParameter extends BatchParamet
     @BatchParameter(key = KEY_KONKAISYURYO, name = "今回終了日")
     private FlexibleDate konkaisyuryo;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "出力順ID")
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
 
     /**
      * コンストラクタです。
@@ -70,7 +70,7 @@ public class INenreiToutatsuYoteishaCheckListBatchParameter extends BatchParamet
      */
     public INenreiToutatsuYoteishaCheckListBatchParameter(RString syutsuryokutaisyo, boolean koumokumeiflg,
             boolean renbanfukaflg, boolean nichihensyuflg, RString juminShubetsu, FlexibleDate konkaikaishi,
-            FlexibleDate konkaisyuryo, RString shutsuryokujunId) {
+            FlexibleDate konkaisyuryo, Long shutsuryokujunId) {
         this.syutsuryokutaisyo = syutsuryokutaisyo;
         this.koumokumeiflg = koumokumeiflg;
         this.renbanfukaflg = renbanfukaflg;

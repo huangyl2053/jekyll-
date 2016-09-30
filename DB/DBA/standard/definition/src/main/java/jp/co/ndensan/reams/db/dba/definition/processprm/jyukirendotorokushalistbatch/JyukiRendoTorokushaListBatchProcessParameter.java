@@ -30,7 +30,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private boolean hihokenshadaichoFLG;
     private boolean tajushochitokureishakanriFLG;
     private boolean tekiyojogaishadaichoFLG;
-    private RString shuturyokujunID;
+    private Long shuturyokujunID;
     private RString loginId;
     private List<Code> shutokuJiyu_Hihokensha;
     private List<Code> tekiyoJiyu_TaTokureisha;
@@ -67,7 +67,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
             boolean hihokenshadaichoFLG,
             boolean tajushochitokureishakanriFLG,
             boolean tekiyojogaishadaichoFLG,
-            RString shuturyokujunID,
+            Long shuturyokujunID,
             RString loginId) {
         this.zenkaikaishiYMDHMS = zenkaikaishiYMDHMS;
         this.zenkaishuryoYMDHMS = zenkaishuryoYMDHMS;

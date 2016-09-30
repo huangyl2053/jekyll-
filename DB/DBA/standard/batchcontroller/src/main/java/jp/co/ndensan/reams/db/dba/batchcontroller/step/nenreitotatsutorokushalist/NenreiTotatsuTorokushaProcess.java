@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -64,6 +65,8 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     private List<NenreiTotatsushaJouhouEntity> nenreiTotatsushaJouhoulist;
     private NenreiTotatsuTorokushaBusiness business;
     private ShikibetsuCode old識別コード;
+    private IOutputOrder chohyoShuturyokujun;
+    private RString 出力順;
 
     @BatchWriter
     private BatchReportWriter<NenreitotatsuKakuninListReportSource> batchReportWriter;
@@ -77,6 +80,17 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         nenreiTotatsushaJouhoulist = new ArrayList<>();
         business = new NenreiTotatsuTorokushaBusiness();
         old識別コード = new ShikibetsuCode("");
+//        TODO:修正中
+//        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+//        if (processParameter.getShuturyokujunID() != null) {
+//            chohyoShuturyokujun = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
+//                    ReportIdDBA.DBA200008.getReportId(), processParameter.getShuturyokujunID());
+//            if (chohyoShuturyokujun != null) {
+//                出力順 = MyBatisOrderByClauseCreator.create(
+//                        NenreitotatsuKakuninListItem.class, chohyoShuturyokujun).replace(
+//                                new RString("order by"), RString.EMPTY);
+//            }
+//        }
     }
 
     @Override

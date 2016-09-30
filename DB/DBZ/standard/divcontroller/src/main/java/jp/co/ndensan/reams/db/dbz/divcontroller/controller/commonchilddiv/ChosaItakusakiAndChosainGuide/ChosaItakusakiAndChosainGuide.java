@@ -98,14 +98,7 @@ public class ChosaItakusakiAndChosainGuide {
     }
 
     private ChosaItakusakiAndChosainGuideParameter createParam(ChosaItakusakiAndChosainGuideDiv div) {
-
-        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
-                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-
-        市町村コード = dataPassModel.get市町村コード();
-        if (RString.isNullOrEmpty(市町村コード)) {
-            市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
-        }
+        市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
         return ChosaItakusakiAndChosainGuideParameter.createParam(
                 div.getTxtChosaItakusakiCodeFrom().getValue(),
                 div.getTxtChosaItakuaskiCodeTo().getValue(),
