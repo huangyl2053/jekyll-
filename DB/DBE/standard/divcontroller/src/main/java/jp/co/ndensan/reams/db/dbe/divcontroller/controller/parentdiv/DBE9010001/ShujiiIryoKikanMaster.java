@@ -523,6 +523,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnBackShujiiMasterToToroku(ShujiiIryoKikanMasterDiv div) {
         ViewStateHolder.put(SaibanHanyokeyName.医療機関コード, div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
+        ViewStateHolder.put(ViewStateKeys.市町村コード, div.getShujiiJohoInput().getTxtShichoson().getValue());
         if (状態_削除.equals(div.getShujiiJohoInput().getState())
             || RString.EMPTY.equals(div.getShujiiJohoInput().getState())
             || ((状態_修正.equals(div.getShujiiJohoInput().getState())
