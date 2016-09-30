@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.ShoriKekkaKakun
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.UpdateMasterTableProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.UpdateShikyugakuUpdateTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020070.DBC020070_JigyobunShikyugakuKeisanParameter;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020070.IJigyobunShikyugakuKeisanMapper;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -58,7 +57,6 @@ public class DBC020070_JigyobunShikyugakuKeisan extends BatchFlowBase<DBC020070_
 
     @Override
     protected void defineFlow() {
-        IJigyobunShikyugakuKeisanMapper mapper = getMapper(IJigyobunShikyugakuKeisanMapper.class);
         executeStep(高額合算支給額計算結果);
         boolean hasData = getResult(
                 Boolean.class, new RString(高額合算支給額計算結果), GogakuGassanShikyugakuCalcResultProcess.PARAMETER_OUT_FLOWFLAG);
@@ -84,9 +82,6 @@ public class DBC020070_JigyobunShikyugakuKeisan extends BatchFlowBase<DBC020070_
         executeStep(処理結果確認リストを出力する);
         executeStep(更新用一時の情報をマスタにINSERTする);
         executeStep(処理結果を_処理日付管理マスタに設定する);
-
-        mapper.get支給額の計算();
-        mapper.get更新用データの支払情報の更新();
     }
 
     @Step(高額合算支給額計算結果)
