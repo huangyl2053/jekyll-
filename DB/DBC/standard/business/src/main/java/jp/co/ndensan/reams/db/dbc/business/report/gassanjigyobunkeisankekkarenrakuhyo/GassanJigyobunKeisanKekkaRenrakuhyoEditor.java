@@ -52,6 +52,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
     private static final int INDEX_50 = 50;
     private static final int INDEX_75 = 75;
     private static final RString 文_被保険者番号 = new RString("被保険者番号");
+    private static final RString NENDO = new RString("年度");
 
     /**
      * コンストラクタです
@@ -210,7 +211,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
             source.HihokenshaNo = 被保険者番号.getColumnValue();
         }
         source.taishoNendo = dataEntity.getDbt3172Entity().getTaishoNendo().wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
         FlexibleDate 対象計算期間開始年月日 = dataEntity.getDbt3172Entity().getTaishoKeisanKaishiYMD();
         if (対象計算期間開始年月日 != null) {
             source.keisanSTYMD = 対象計算期間開始年月日.wareki().eraType(EraType.KANJI).
@@ -306,9 +307,9 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
             return;
         }
         int 市町村length = 地方公共団体.get市町村名().toString().toCharArray().length;
-        if (市町村length < INDEX_14) {
+        if (市町村length <= INDEX_14) {
             source.shichosonmeisho1 = 地方公共団体.get市町村名();
-        } else if (市町村length < INDEX_15) {
+        } else if (INDEX_15 <= 市町村length) {
             source.shichosonmeisho2 = 地方公共団体.get市町村名();
         }
 
