@@ -399,6 +399,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
      * 申請一覧の修正ボタンを押下処理です。
      *
      * @param 情報と状態 情報と状態
+     * @param is承認情報 is承認情報
      */
     public void onSelectByModifyButton(ShogaishaKoujoToJotai 情報と状態, boolean is承認情報) {
         set申請情報エリア(情報と状態);
