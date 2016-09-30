@@ -90,11 +90,11 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
         try (ReportAssembler<GassanJigyobunKeisanKekkaRenrakuhyoSource> assembler
                 = createAssembler(property, reportManager)) {
             ReportSourceWriter<GassanJigyobunKeisanKekkaRenrakuhyoSource> reportSourceWriter = new ReportSourceWriter(assembler);
-
+            FlexibleDate 開始年月日 = new FlexibleDate("20000401");
             RString 通知書定型文1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
-                    KamokuCode.EMPTY, INDEX_1, INDEX_1, 作成日);
+                    KamokuCode.EMPTY, INDEX_1, INDEX_1, 開始年月日);
             RString 通知書定型文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
-                    KamokuCode.EMPTY, INDEX_1, INDEX_2, 作成日);
+                    KamokuCode.EMPTY, INDEX_2, INDEX_1, 開始年月日);
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
             IToiawasesakiSourceBuilderCreator creator = ReportSourceBuilders.toiawaseSourceBuilder();
             IToiawasesakiSourceBuilder builder = creator.create(GyomuCode.DB介護保険,
