@@ -118,6 +118,7 @@ public class DBC190030ProcessParameter implements IBatchProcessParameter {
     /**
      * toDBC190030MyBatisParameterのメソッドです。
      *
+     * @param 出力順 RString
      * @return DBC190030MyBatisParameter
      */
     public DBC190030MyBatisParameter toDBC190030MyBatisParameter(RString 出力順) {
