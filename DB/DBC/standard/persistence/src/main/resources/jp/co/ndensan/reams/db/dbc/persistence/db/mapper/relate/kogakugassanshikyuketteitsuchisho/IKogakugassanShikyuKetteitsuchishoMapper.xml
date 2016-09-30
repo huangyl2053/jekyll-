@@ -33,7 +33,8 @@
                    AND "DbT3074KogakuGassanShikyuFushikyuKettei"."ketteiTsuchiRealHakkoFlag" = '0'
                </if>
                <if test="印書区分 == 3 ">
-                   AND "DbT3074KogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD" = ''
+                   AND ("DbT3074KogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD" = ''
+                       OR "DbT3074KogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD" IS NULL)
                </if>
                AND "DbT3074KogakuGassanShikyuFushikyuKettei"."isDeleted" = false
                ORDER BY "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo" ASC,
