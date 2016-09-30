@@ -121,4 +121,6 @@ public class JukyushaKyufujissekiIchiranTableEntity extends DbTableEntityBase<Ju
     private RString 要介護状態区分名称;
     @TempTableColumnOrder(49)
     private RString 給付実績区分名称;
+    @TempTableColumnOrder(50)
+    private RString 様式;
 }

@@ -33,6 +33,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
     private RString 要介護5;
     private RString 要支援1;
     private RString 要支援2;
+    private RString 事業対象者;
     private RString 経過的要介護;
     private RString 自立;
     private RString 訪問通所他;
@@ -78,6 +79,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
     private RString 計画作成事業者番号;
     private RString 給付率区分;
     private RString 給付率;
+    private RString 出力順ID;
     private RString psmShikibetsuTaisho;
 
     /**
@@ -97,6 +99,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
      * @param 要介護5 要介護5
      * @param 要支援1 要支援1
      * @param 要支援2 要支援2
+     * @param 事業対象者 事業対象者
      * @param 経過的要介護 経過的要介護
      * @param 自立 自立
      * @param 訪問通所他 訪問通所他
@@ -142,6 +145,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
      * @param 計画作成事業者番号 計画作成事業者番号
      * @param 給付率区分 給付率区分
      * @param 給付率 給付率
+     * @param 出力順ID 出力順ID
      */
     public JukyushaKyufujissekiIchiranProcessParameter(RString 対象年月,
             RString 年月範囲_開始,
@@ -157,6 +161,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
             RString 要介護5,
             RString 要支援1,
             RString 要支援2,
+            RString 事業対象者,
             RString 経過的要介護,
             RString 自立,
             RString 訪問通所他,
@@ -201,7 +206,8 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
             RString 事業者番号_終了,
             RString 計画作成事業者番号,
             RString 給付率区分,
-            RString 給付率) {
+            RString 給付率,
+            RString 出力順ID) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;
@@ -216,6 +222,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
         this.要介護5 = 要介護5;
         this.要支援1 = 要支援1;
         this.要支援2 = 要支援2;
+        this.事業対象者 = 事業対象者;
         this.経過的要介護 = 経過的要介護;
         this.自立 = 自立;
         this.訪問通所他 = 訪問通所他;
@@ -261,6 +268,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
         this.計画作成事業者番号 = 計画作成事業者番号;
         this.給付率区分 = 給付率区分;
         this.給付率 = 給付率;
+        this.出力順ID = 出力順ID;
     }
 
     /**
@@ -280,6 +288,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
      * @param 要介護5 要介護5
      * @param 要支援1 要支援1
      * @param 要支援2 要支援2
+     * @param 事業対象者 事業対象者
      * @param 経過的要介護 経過的要介護
      * @param 自立 自立
      * @param 訪問通所他 訪問通所他
@@ -325,6 +334,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
      * @param 計画作成事業者番号 計画作成事業者番号
      * @param 給付率区分 給付率区分
      * @param 給付率 給付率
+     * @param 出力順ID 出力順ID
      * @return JukyushaKyufujissekiIchiranProcessParameter
      */
     public static JukyushaKyufujissekiIchiranProcessParameter createJukyushaKyufujissekiIchiranProcessParameter(
@@ -342,6 +352,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
             RString 要介護5,
             RString 要支援1,
             RString 要支援2,
+            RString 事業対象者,
             RString 経過的要介護,
             RString 自立,
             RString 訪問通所他,
@@ -386,7 +397,8 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
             RString 事業者番号_終了,
             RString 計画作成事業者番号,
             RString 給付率区分,
-            RString 給付率) {
+            RString 給付率,
+            RString 出力順ID) {
         return new JukyushaKyufujissekiIchiranProcessParameter(対象年月,
                 年月範囲_開始,
                 年月範囲_終了,
@@ -401,73 +413,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
                 要介護5,
                 要支援1,
                 要支援2,
-                経過的要介護,
-                自立,
-                訪問通所他,
-                短期入所生活介護,
-                短期入所療養介護_老健施設,
-                短期入所療養介護_医療施設,
-                認知症対応型共同生活,
-                特定施設入居者生活介護,
-                認知症対応型共同生活_短期,
-                特定施設入居生活介護_短期,
-                居宅介護支援,
-                介護老人福祉施設サービス,
-                介護老人保健施設サービス,
-                介護療養型医療施設サービス,
-                特定福祉用具販売費,
-                住宅改修費,
-                高額介護サービス費,
-                予防訪問通所他,
-                予防短期入所生活介護,
-                予防短期入所療養介護_老健施設,
-                予防短期入所療養介護_医療施設,
-                予防認知症対応型共同生活,
-                予防特定施設入居者生活介護,
-                予防認知症対応型共同生活_短期,
-                予防支援,
-                予防特定福祉用具販売費,
-                予防住宅改修費,
-                介護予防_生活支援_経過,
-                経過措置ケアマネジメント,
-                介護予防_生活支援総合事業,
-                総合事業ケアマネジメント,
-                旧措置特定有無,
-                老人保健市町村番号有無,
-                老人保健市町村番号有_開始,
-                老人保健市町村番号有_終了,
-                老人保健受給者番号有無,
-                老人保健受給者番号有_開始,
-                老人保健受給者番号有_終了,
-                公費負担者番号,
-                公費受給者番号,
-                事業者番号_開始,
-                事業者番号_終了,
-                計画作成事業者番号,
-                給付率区分,
-                給付率);
-    }
-
-    /**
-     * 受給者給付実績一覧表のMybaticParameter作成する。
-     *
-     * @return JukyushaKyufujissekiIchiranMybatisParameter
-     */
-    public JukyushaKyufujissekiIchiranMybatisParameter toJukyushaKyufujissekiIchiranMybatisParameter() {
-        return JukyushaKyufujissekiIchiranMybatisParameter.createSelectByKeyParam(対象年月,
-                年月範囲_開始,
-                年月範囲_終了,
-                被保険者番号_開始,
-                被保険者番号_終了,
-                給付実績区分,
-                すべて選択,
-                要介護1,
-                要介護2,
-                要介護3,
-                要介護4,
-                要介護5,
-                要支援1,
-                要支援2,
+                事業対象者,
                 経過的要介護,
                 自立,
                 訪問通所他,
@@ -513,6 +459,76 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
                 計画作成事業者番号,
                 給付率区分,
                 給付率,
+                出力順ID);
+    }
+
+    /**
+     * 受給者給付実績一覧表のMybaticParameter作成する。
+     *
+     * @return JukyushaKyufujissekiIchiranMybatisParameter
+     */
+    public JukyushaKyufujissekiIchiranMybatisParameter toJukyushaKyufujissekiIchiranMybatisParameter() {
+        return JukyushaKyufujissekiIchiranMybatisParameter.createSelectByKeyParam(対象年月,
+                年月範囲_開始,
+                年月範囲_終了,
+                被保険者番号_開始,
+                被保険者番号_終了,
+                給付実績区分,
+                すべて選択,
+                要介護1,
+                要介護2,
+                要介護3,
+                要介護4,
+                要介護5,
+                要支援1,
+                要支援2,
+                事業対象者,
+                経過的要介護,
+                自立,
+                訪問通所他,
+                短期入所生活介護,
+                短期入所療養介護_老健施設,
+                短期入所療養介護_医療施設,
+                認知症対応型共同生活,
+                特定施設入居者生活介護,
+                認知症対応型共同生活_短期,
+                特定施設入居生活介護_短期,
+                居宅介護支援,
+                介護老人福祉施設サービス,
+                介護老人保健施設サービス,
+                介護療養型医療施設サービス,
+                特定福祉用具販売費,
+                住宅改修費,
+                高額介護サービス費,
+                予防訪問通所他,
+                予防短期入所生活介護,
+                予防短期入所療養介護_老健施設,
+                予防短期入所療養介護_医療施設,
+                予防認知症対応型共同生活,
+                予防特定施設入居者生活介護,
+                予防認知症対応型共同生活_短期,
+                予防支援,
+                予防特定福祉用具販売費,
+                予防住宅改修費,
+                介護予防_生活支援_経過,
+                経過措置ケアマネジメント,
+                介護予防_生活支援総合事業,
+                総合事業ケアマネジメント,
+                旧措置特定有無,
+                老人保健市町村番号有無,
+                老人保健市町村番号有_開始,
+                老人保健市町村番号有_終了,
+                老人保健受給者番号有無,
+                老人保健受給者番号有_開始,
+                老人保健受給者番号有_終了,
+                公費負担者番号,
+                公費受給者番号,
+                事業者番号_開始,
+                事業者番号_終了,
+                計画作成事業者番号,
+                給付率区分,
+                給付率,
+                出力順ID,
                 psmShikibetsuTaisho);
     }
 }

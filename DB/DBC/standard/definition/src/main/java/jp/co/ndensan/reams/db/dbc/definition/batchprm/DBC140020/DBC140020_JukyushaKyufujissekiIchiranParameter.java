@@ -34,6 +34,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
     private static final String KEY_YOU_KAIGO5 = "要介護5";
     private static final String KEY_YOU_SHIEN1 = "要支援1";
     private static final String KEY_YOU_SHIEN2 = "要支援2";
+    private static final String KEY_ZIGYOU_TAISHOUSHA = "事業対象者";
     private static final String KEY_KEIKATEKI_YOU_KAIGO = "経過的要介護";
     private static final String KEY_ZIRITU = "自立";
     private static final String KEY_HOMO_TUSHO_HOKA = "訪問通所他";
@@ -79,6 +80,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
     private static final String KEY_K_S_ZIGYOUSHA_NO = "計画作成事業者番号";
     private static final String KEY_K_RITU_KUBUN = "給付率区分";
     private static final String KEY_KYUHU_RITU = "給付率";
+    private static final String KEY_SHUTURYOKU_JUN_ID = "出力順ID";
 
     @BatchParameter(key = KEY_TAISH_YM, name = "対象年月")
     private RString 対象年月;
@@ -108,6 +110,8 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
     private RString 要支援1;
     @BatchParameter(key = KEY_YOU_SHIEN2, name = "要支援2")
     private RString 要支援2;
+    @BatchParameter(key = KEY_ZIGYOU_TAISHOUSHA, name = "事業対象者")
+    private RString 事業対象者;
     @BatchParameter(key = KEY_KEIKATEKI_YOU_KAIGO, name = "経過的要介護")
     private RString 経過的要介護;
     @BatchParameter(key = KEY_ZIRITU, name = "自立")
@@ -198,6 +202,8 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
     private RString 給付率区分;
     @BatchParameter(key = KEY_KYUHU_RITU, name = "給付率")
     private RString 給付率;
+    @BatchParameter(key = KEY_SHUTURYOKU_JUN_ID, name = "出力順ID")
+    private RString 出力順ID;
 
     /**
      * コンストラクタです。
@@ -222,6 +228,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
      * @param 要介護5 要介護5
      * @param 要支援1 要支援1
      * @param 要支援2 要支援2
+     * @param 事業対象者 事業対象者
      * @param 経過的要介護 経過的要介護
      * @param 自立 自立
      * @param 訪問通所他 訪問通所他
@@ -267,6 +274,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
      * @param 計画作成事業者番号 計画作成事業者番号
      * @param 給付率区分 給付率区分
      * @param 給付率 給付率
+     * @param 出力順ID 出力順ID
      */
     public DBC140020_JukyushaKyufujissekiIchiranParameter(RString 対象年月,
             RString 年月範囲_開始,
@@ -282,6 +290,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
             RString 要介護5,
             RString 要支援1,
             RString 要支援2,
+            RString 事業対象者,
             RString 経過的要介護,
             RString 自立,
             RString 訪問通所他,
@@ -326,7 +335,8 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
             RString 事業者番号_終了,
             RString 計画作成事業者番号,
             RString 給付率区分,
-            RString 給付率) {
+            RString 給付率,
+            RString 出力順ID) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;
@@ -341,6 +351,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
         this.要介護5 = 要介護5;
         this.要支援1 = 要支援1;
         this.要支援2 = 要支援2;
+        this.事業対象者 = 事業対象者;
         this.経過的要介護 = 経過的要介護;
         this.自立 = 自立;
         this.訪問通所他 = 訪問通所他;
@@ -386,6 +397,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
         this.計画作成事業者番号 = 計画作成事業者番号;
         this.給付率区分 = 給付率区分;
         this.給付率 = 給付率;
+        this.出力順ID = 出力順ID;
     }
 
     /**
@@ -408,6 +420,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
                 要介護5,
                 要支援1,
                 要支援2,
+                事業対象者,
                 経過的要介護,
                 自立,
                 訪問通所他,
@@ -451,6 +464,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
                 事業者番号_終了,
                 計画作成事業者番号,
                 給付率区分,
-                給付率);
+                給付率,
+                出力順ID);
     }
 }

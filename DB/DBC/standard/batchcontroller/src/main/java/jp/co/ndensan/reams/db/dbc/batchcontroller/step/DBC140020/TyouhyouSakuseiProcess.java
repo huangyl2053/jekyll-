@@ -88,7 +88,7 @@ public class TyouhyouSakuseiProcess extends BatchProcessBase<JukyushaKyufujissek
         chosahoshuseikyu.set特定入所者介護費等請求額_公費1(entity.get後_公費1_特定入所者介護サービス費等請求額());
         chosahoshuseikyu.set識別コード(entity.get識別コード());
         chosahoshuseikyu.set住所(entity.get住所());
-        //chosahoshuseikyu.set様式();TODO  内部QA：1714 Redmine：#101459(受給者給付実績一覧表Entityに項目「様式」がありません)
+        chosahoshuseikyu.set様式(entity.get様式());
         chosahoshuseikyu.set公費負担者2(entity.get公費2_負担者番号());
         chosahoshuseikyu.set公費受給者2(entity.get公費2_受給者番号());
         chosahoshuseikyu.setサービス単位数_公費2(entity.get後_公費2_サービス単位数());

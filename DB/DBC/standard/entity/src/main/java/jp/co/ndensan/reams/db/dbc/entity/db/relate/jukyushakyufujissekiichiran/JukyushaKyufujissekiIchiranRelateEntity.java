@@ -66,4 +66,5 @@ public class JukyushaKyufujissekiIchiranRelateEntity {
     private RString 事業者名称;
     private RString 要介護状態区分名称;
     private RString 給付実績区分名称;
+    private RString 様式;
 }

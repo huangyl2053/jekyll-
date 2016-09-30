@@ -43,6 +43,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
     private final boolean 要支援1flag;
     private final RString 要支援2;
     private final boolean 要支援2flag;
+    private final RString 事業対象者;
+    private final boolean 事業対象者flag;
     private final RString 経過的要介護;
     private final boolean 経過的要介護flag;
     private final RString 自立;
@@ -130,6 +132,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
     private final boolean 給付率区分flag3;
     private final RString 給付率;
     private final boolean 給付率flag;
+    private final RString 出力順ID;
     private final RString psmShikibetsuTaisho;
 
     /**
@@ -160,6 +163,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 要支援1flag 要支援1flag
      * @param 要支援2 要支援2
      * @param 要支援2flag 要支援2flag
+     * @param 事業対象者 事業対象者
+     * @param 事業対象者flag 事業対象者flag
      * @param 経過的要介護 経過的要介護
      * @param 経過的要介護flag 経過的要介護flag
      * @param 自立 自立
@@ -247,6 +252,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 給付率区分flag3 給付率区分flag3
      * @param 給付率 給付率
      * @param 給付率flag 給付率flag
+     * @param 出力順ID 出力順ID
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
     protected JukyushaKyufujissekiIchiranMybatisParameter(boolean flag,
@@ -274,6 +280,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             boolean 要支援1flag,
             RString 要支援2,
             boolean 要支援2flag,
+            RString 事業対象者,
+            boolean 事業対象者flag,
             RString 経過的要介護,
             boolean 経過的要介護flag,
             RString 自立,
@@ -361,6 +369,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             boolean 給付率区分flag3,
             RString 給付率,
             boolean 給付率flag,
+            RString 出力順ID,
             RString psmShikibetsuTaisho) {
         this.flag = flag;
         this.対象年月 = 対象年月;
@@ -387,6 +396,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
         this.要支援1flag = 要支援1flag;
         this.要支援2 = 要支援2;
         this.要支援2flag = 要支援2flag;
+        this.事業対象者 = 事業対象者;
+        this.事業対象者flag = 事業対象者flag;
         this.経過的要介護 = 経過的要介護;
         this.経過的要介護flag = 経過的要介護flag;
         this.自立 = 自立;
@@ -474,6 +485,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
         this.給付率区分flag3 = 給付率区分flag3;
         this.給付率 = 給付率;
         this.給付率flag = 給付率flag;
+        this.出力順ID = 出力順ID;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
@@ -494,6 +506,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 要介護5 要介護5
      * @param 要支援1 要支援1
      * @param 要支援2 要支援2
+     * @param 事業対象者 事業対象者
      * @param 経過的要介護 経過的要介護
      * @param 自立 自立
      * @param 訪問通所他 訪問通所他
@@ -539,6 +552,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 計画作成事業者番号 計画作成事業者番号
      * @param 給付率区分 給付率区分
      * @param 給付率 給付率
+     * @param 出力順ID 出力順ID
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @return JukyushaKyufujissekiIchiranMybatisParameter
      */
@@ -557,6 +571,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 要介護5,
             RString 要支援1,
             RString 要支援2,
+            RString 事業対象者,
             RString 経過的要介護,
             RString 自立,
             RString 訪問通所他,
@@ -602,6 +617,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
+            RString 出力順ID,
             RString psmShikibetsuTaisho
     ) {
         boolean flag = false;
@@ -652,6 +668,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
                 new RString("1").equals(要支援1),
                 要支援2,
                 new RString("1").equals(要支援2),
+                事業対象者,
+                new RString("1").equals(事業対象者),
                 経過的要介護,
                 new RString("1").equals(経過的要介護),
                 自立,
@@ -739,6 +757,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
                 new RString("3").equals(給付率区分),
                 給付率,
                 RString.isNullOrEmpty(給付率),
+                出力順ID,
                 psmShikibetsuTaisho
         );
     }
