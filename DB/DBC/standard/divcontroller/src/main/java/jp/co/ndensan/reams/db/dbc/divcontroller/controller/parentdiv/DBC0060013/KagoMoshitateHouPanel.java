@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060013.Kag
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060013.KagoMoshitateHouPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -41,9 +39,8 @@ public class KagoMoshitateHouPanel {
      * @return 画面設計_DBC0060013_訪問通所サービスの給付管理照会画面
      */
     public ResponseData<KagoMoshitateHouPanelDiv> onLoad(KagoMoshitateHouPanelDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
-        ShikibetsuCode shikibetsuCode = key.get識別コード();
-        div.getCommonKaigpAtenainfoChildDiv1().initialize(shikibetsuCode);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        div.getCommonKaigpAtenainfoChildDiv1().initialize(識別コード);
         KyufuKanrihyoShokaiDataModel 対象者一覧
                 = ViewStateHolder.get(ViewStateKeys.給付管理票200604Entity, KyufuKanrihyoShokaiDataModel.class);
         ValidationMessageControlPairs pairs = getValidationHandler().validateFor被保険者番号(対象者一覧);
@@ -56,9 +53,7 @@ public class KagoMoshitateHouPanel {
         List<KyufuKanrihyoShokaiDataModel> 対象者一覧list
                 = ViewStateHolder.get(ViewStateKeys.給付管理明細一覧, ArrayList.class);
         boolean tanflg = ViewStateHolder.get(ViewStateKeys.訪問通所サービスフラグ, Boolean.class);
-        if (tanflg && 対象者一覧list != null) {
-            getHandler(div).setShohinSourcre(対象者一覧list);
-        }
+        getHandler(div).setShohinSourcre(対象者一覧list, tanflg);
         アクセスログ(対象者一覧.get被保険者番号());
         getHandler(div).initialize(対象者一覧, 対象者一覧list);
         return ResponseData.of(div).respond();

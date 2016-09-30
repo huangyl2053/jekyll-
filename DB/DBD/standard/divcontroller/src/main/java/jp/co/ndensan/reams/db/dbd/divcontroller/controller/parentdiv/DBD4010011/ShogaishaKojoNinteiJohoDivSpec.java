@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4010011.DBD4
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
- * 障がい者控除対象者认定の障がい者控除認定情報バリデーションクラスです。
+ * 障がい者控除対象者認定の障がい者控除認定情報バリデーションクラスです。
  *
  * @reamsid_L DBD-3850-010 liuwei2
  */

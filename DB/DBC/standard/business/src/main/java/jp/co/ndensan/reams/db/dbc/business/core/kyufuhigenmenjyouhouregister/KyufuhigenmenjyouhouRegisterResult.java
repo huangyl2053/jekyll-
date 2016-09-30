@@ -98,8 +98,8 @@ public class KyufuhigenmenjyouhouRegisterResult {
         ServiceShuruiCode サービス種類コード = getサービス種類コード();
         RString サービス種類略称 = getサービス種類略称();
         if (null != サービス種類コード && !サービス種類コード.isEmpty()
-                && RString.isNullOrEmpty(サービス種類略称)) {
-            return new RString(サービス種類コード.toString() + RString.HALF_SPACE.toString() + サービス種類略称.toString());
+                && !RString.isNullOrEmpty(サービス種類略称)) {
+            return new RString(サービス種類コード.value().toString() + RString.HALF_SPACE.toString() + サービス種類略称.toString());
         }
         return RString.EMPTY;
     }

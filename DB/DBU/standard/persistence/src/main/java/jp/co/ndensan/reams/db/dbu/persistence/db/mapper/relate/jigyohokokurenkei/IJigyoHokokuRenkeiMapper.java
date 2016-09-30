@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenke
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 
 /**
  * 様式別連携情報作成のMapperクラスです。
@@ -104,4 +106,20 @@ public interface IJigyoHokokuRenkeiMapper {
      * @return List<DbT7021JigyoHokokuTokeiDataEntity>　事業報告統計データ
      */
     List<DbT7021JigyoHokokuTokeiDataEntity> get保険給付決定状況合算分決定年月情報の取得(JigyoHokokuRenkeiParameter parameter);
+
+    /**
+     * 合併市町村を取得します。
+     *
+     * @param parameter 事業報告集計一覧用パラメータ
+     * @return List<DbT7056GappeiShichosonEntity>　合併市町村データ
+     */
+    List<DbT7056GappeiShichosonEntity> get合併市町村の取得(JigyoHokokuRenkeiParameter parameter);
+
+    /**
+     * 合併市町村を取得します。
+     *
+     * @param parameter 事業報告集計一覧用パラメータ
+     * @return List<DbT7051KoseiShichosonMasterEntity>　構成市町村マスタデータ
+     */
+    List<DbT7051KoseiShichosonMasterEntity> get構成市町村マスタの取得(JigyoHokokuRenkeiParameter parameter);
 }

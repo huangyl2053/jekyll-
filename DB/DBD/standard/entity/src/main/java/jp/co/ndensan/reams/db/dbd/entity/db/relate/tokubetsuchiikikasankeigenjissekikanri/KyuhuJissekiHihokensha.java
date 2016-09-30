@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenji
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,12 +22,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyuhuJissekiHihokensha {
 
     private HihokenshaNo 被保険者番号;
-    private FlexibleYear サービス提供年月;
-    private UaFt200FindShikibetsuTaishoEntity 宛名;
-    private FlexibleYear 審査年月;
+    private FlexibleYearMonth サービス提供年月;
+    private FlexibleYearMonth 審査年月;
     private RString 給付区分;
     private boolean exists社福軽減給付実績;
     private boolean exists有効特地減免;
     private List<KyuhuJissekiMeisai> 給付実績明細リスト;
-    private KyuhuJissekiShukei 給付実績集計;
+    private KyuhuJissekiShukei 給付実績集計Entity;
+    private UaFt200FindShikibetsuTaishoEntity 宛名;
 }

@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work3.HanteiTaishoshaTuikaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work5.SeikatsuHogoGaitoJohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work6.FutanWariaiHanteiNenziProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.HanteiTaishoshaTuikaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SeikatsuHogoGaitoJohoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.FutanWariaiHanteiNenziProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -51,7 +51,7 @@ public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_
         service = RiyoshaFutanWariaiHantei.createInstance();
         util = new RiyoshaFutanWariaiHanteiUtil();
         RYear nendo = util.getFlexibleYearRYear(getParameter().getTaishoNendo());
-        getParameter().setHanteiKijunbi(service.getHanteiKijunbi(
+        getParameter().setHanteiKijunbi(service.getHanteiKijunbiNoEmpty(
                 util.getFlexibleDateString(getParameter().getKijunbi())));
         getParameter().setTaishoGetsu(service.initializeTaishoGetsu());
         getParameter().set対象開始日(service.getTaishoKaishibi(nendo));

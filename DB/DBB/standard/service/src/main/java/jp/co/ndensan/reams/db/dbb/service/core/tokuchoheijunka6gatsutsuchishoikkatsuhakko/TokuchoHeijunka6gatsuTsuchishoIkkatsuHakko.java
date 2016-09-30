@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoik
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty.DBB100012ShutsuryokujunEnum;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikat
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KariSanteigakuHenkoTsuchishoHakkoIchiranData;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoIdoshaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
@@ -37,8 +37,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki._Atesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -71,7 +71,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -83,8 +82,6 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
 
     private final MapperProvider mapperProvider;
     private final ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper mapper;
-    private final DbT2017TsuchishoHakkogoIdoshaDac dac;
-    private final DbT7065ChohyoSeigyoKyotsuDac dbt7065dac;
 
     private static final ReportId 帳票分類ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
@@ -131,8 +128,6 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.mapper = mapperProvider.create(ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.class);
-        this.dac = InstanceProvider.create(DbT2017TsuchishoHakkogoIdoshaDac.class);
-        this.dbt7065dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
     }
 
     /**
@@ -159,9 +154,10 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param fukaTemp 介護賦課一時テーブルのエンティティ
      * @param param パラメータ
      * @param 連番 連番
+     * @return 通知書発行後異動者テーブルのエンティティ
      */
-    @Transaction
-    public void insTsuchishoHakkogoIdosha(DbT2002FukaTempTableEntity fukaTemp, TsuchishoIdoshaTorokuProcessParameter param, int 連番) {
+    public DbT2017TsuchishoHakkogoIdoshaEntity insTsuchishoHakkogoIdosha(DbT2002FukaTempTableEntity fukaTemp,
+            TsuchishoIdoshaTorokuProcessParameter param, int 連番) {
 
         DbT2017TsuchishoHakkogoIdoshaEntity entity = new DbT2017TsuchishoHakkogoIdoshaEntity();
         entity.setReportID(new ReportId(param.get帳票ID()));
@@ -173,7 +169,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         entity.setKeisanTimestamp(fukaTemp.getKoseigo_choteiNichiji());
         entity.setGaitoRemban(連番);
         entity.setIdoAriFlag(false);
-        dac.save(entity);
+        return entity;
     }
 
     /**
@@ -182,7 +178,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @return 帳票制御共通情報
      */
     public DbT7065ChohyoSeigyoKyotsuEntity find帳票制御共通情報() {
-        return dbt7065dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012);
+        return mapper.select帳票制御共通情報(SubGyomuCode.DBB介護賦課.getColumnValue(), 帳票分類ID_DBB100012.getColumnValue());
     }
 
     /**
@@ -261,42 +257,38 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         RString 改頁３ = RString.EMPTY;
         RString 改頁４ = RString.EMPTY;
         RString 改頁５ = RString.EMPTY;
-        if (outputOrder != null) {
-            List<ISetSortItem> list = outputOrder.get設定項目リスト();
-            if (list == null) {
-                list = new ArrayList<>();
-            }
-            if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-                改頁１ = to帳票物理名(list.get(0).get項目ID());
-            }
-            if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-                改頁２ = to帳票物理名(list.get(INDEX_1).get項目ID());
-            }
-            if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-                改頁３ = to帳票物理名(list.get(INDEX_2).get項目ID());
-            }
-            if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-                改頁４ = to帳票物理名(list.get(INDEX_3).get項目ID());
-            }
-            if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-                改頁５ = to帳票物理名(list.get(INDEX_4).get項目ID());
-            }
 
-            if (!改頁１.isEmpty()) {
-                pageBreakKeys.add(改頁１);
-            }
-            if (!改頁２.isEmpty()) {
-                pageBreakKeys.add(改頁２);
-            }
-            if (!改頁３.isEmpty()) {
-                pageBreakKeys.add(改頁３);
-            }
-            if (!改頁４.isEmpty()) {
-                pageBreakKeys.add(改頁４);
-            }
-            if (!改頁５.isEmpty()) {
-                pageBreakKeys.add(改頁５);
-            }
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
+        if (改頁Map.get(INDEX_1) != null) {
+            改頁１ = to帳票物理名(改頁Map.get(INDEX_1));
+        }
+        if (改頁Map.get(INDEX_2) != null) {
+            改頁２ = to帳票物理名(改頁Map.get(INDEX_2));
+        }
+        if (改頁Map.get(INDEX_3) != null) {
+            改頁３ = to帳票物理名(改頁Map.get(INDEX_3));
+        }
+        if (改頁Map.get(INDEX_4) != null) {
+            改頁４ = to帳票物理名(改頁Map.get(INDEX_4));
+        }
+        if (改頁Map.get(INDEX_5) != null) {
+            改頁５ = to帳票物理名(改頁Map.get(INDEX_5));
+        }
+
+        if (改頁１ != null && !改頁１.isEmpty()) {
+            pageBreakKeys.add(改頁１);
+        }
+        if (改頁２ != null && !改頁２.isEmpty()) {
+            pageBreakKeys.add(改頁２);
+        }
+        if (改頁３ != null && !改頁３.isEmpty()) {
+            pageBreakKeys.add(改頁３);
+        }
+        if (改頁４ != null && !改頁４.isEmpty()) {
+            pageBreakKeys.add(改頁４);
+        }
+        if (改頁５ != null && !改頁５.isEmpty()) {
+            pageBreakKeys.add(改頁５);
         }
     }
 
@@ -603,21 +595,21 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         printer.print();
     }
 
-    private RString to帳票物理名(RString 項目ID) {
+    private RString to帳票物理名(ISetSortItem item) {
 
         RString 帳票物理名 = RString.EMPTY;
 
-        if (DBB100012ShutsuryokujunEnum.郵便番号.get項目ID().equals(項目ID)) {
+        if (DBB100012ShutsuryokujunEnum.郵便番号.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_郵便;
-        } else if (DBB100012ShutsuryokujunEnum.行政区コード.get項目ID().equals(項目ID)) {
+        } else if (DBB100012ShutsuryokujunEnum.行政区コード.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_行政区コード;
-        } else if (DBB100012ShutsuryokujunEnum.世帯コード.get項目ID().equals(項目ID)) {
+        } else if (DBB100012ShutsuryokujunEnum.世帯コード.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_世帯コード;
-        } else if (DBB100012ShutsuryokujunEnum.生年月日.get項目ID().equals(項目ID)) {
+        } else if (DBB100012ShutsuryokujunEnum.生年月日.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_生年月日;
-        } else if (DBB100012ShutsuryokujunEnum.性別.get項目ID().equals(項目ID)) {
+        } else if (DBB100012ShutsuryokujunEnum.性別.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_性別;
-        } else if (DBB100012ShutsuryokujunEnum.市町村コード.get項目ID().equals(項目ID)) {
+        } else if (DBB100012ShutsuryokujunEnum.市町村コード.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_市町村コード;
         }
 

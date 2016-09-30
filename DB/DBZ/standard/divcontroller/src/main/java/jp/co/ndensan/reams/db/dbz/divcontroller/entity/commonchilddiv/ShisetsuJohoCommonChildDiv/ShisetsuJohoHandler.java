@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJogaiTokureiTaishoShisetsuInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 施設情報のHandlerクラスです。
@@ -448,6 +450,19 @@ public class ShisetsuJohoHandler {
      */
     public void setShisetsuMeisho(RString meisho) {
         div.getTxtNyuryokuShisetsuMeisho().setValue(meisho);
+    }
+
+    /**
+     * サービス種類抽出区分とサービス種類の設定.
+     *
+     * @param サービス種類抽出区分 RString
+     * @param サービス種類 List<RString>
+     */
+    public void setサービス種類(RString サービス種類抽出区分, List<RString> サービス種類) {
+        JigyoshaMode mode = new JigyoshaMode();
+        mode.setサービス種類(サービス種類);
+        mode.setサービス種類抽出区分(サービス種類抽出区分);
+        div.setJigyoshaMode(DataPassingConverter.serialize(mode));
     }
 
     /**

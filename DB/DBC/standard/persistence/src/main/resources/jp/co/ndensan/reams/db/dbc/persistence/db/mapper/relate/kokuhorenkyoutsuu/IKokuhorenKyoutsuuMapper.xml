@@ -306,7 +306,7 @@
     <update id="update被保険者一時TBLWith被保険者宛名情報" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity">
         UPDATE "DbWT0001Hihokensha"
         set
-        "shichosonCode" = #{旧市町村コード},
+        "shichosonCode" = #{市町村コード},
         "kannaiKangaiKubun" = #{管内管外区分},
         "yubinNo" = #{郵便番号},
         "choikiCode" = #{町域コード},

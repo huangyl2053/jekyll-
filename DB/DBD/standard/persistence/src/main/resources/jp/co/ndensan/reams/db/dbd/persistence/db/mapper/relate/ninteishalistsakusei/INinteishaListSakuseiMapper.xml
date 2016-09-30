@@ -192,7 +192,7 @@
                                  AND
                                  #{対象年度の開始日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."tekiyoKaishiYMD"
                                  AND
-                                 社会福祉法人等利用者負担軽減."tekiyoShuryoYMD"<![CDATA[<=]]>#{対象年度の開始日}
+                                 社会福祉法人等利用者負担軽減."tekiyoShuryoYMD"<![CDATA[<=]]>#{対象年度の終了日}
                                  )
                                   <if test="抽出対象 ==1">
                                       OR
@@ -201,7 +201,7 @@
                                       AND
                                       #{対象年度の開始日}<![CDATA[<=]]>社会福祉法人等利用者負担軽減."shinseiYMD"
                                       AND
-                                      社会福祉法人等利用者負担軽減."shinseiYMD"<![CDATA[<=]]>#{対象年度の開始日}
+                                      社会福祉法人等利用者負担軽減."shinseiYMD"<![CDATA[<=]]>#{対象年度の終了日}
                                       )
                                   </if>
                              </if>

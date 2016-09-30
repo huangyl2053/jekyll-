@@ -1,14 +1,16 @@
 package jp.co.ndensan.reams.db.dbb.service.core.fuka;
 
+import java.util.Collections;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ca.cax.business.core.shuno.ShunoKanri;
-import jp.co.ndensan.reams.ca.cax.business.core.shuno.ShunoKey;
-import jp.co.ndensan.reams.ca.cax.business.core.shuno.chotei.Chotei;
+import jp.co.ndensan.reams.ca.cax.business.core.chotei.choteikyotsu.Chotei;
+import jp.co.ndensan.reams.ca.cax.business.core.chotei.choteikyotsu.ChoteiFactory;
+import jp.co.ndensan.reams.ca.cax.business.core.shunokanri.shunokanri.ShunoKanri;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.ShunoShoriJokyo;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.ChoteiJiyu;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.FukaShoriJokyo;
-import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.SaibanKeysChotei;
-import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoManager;
+import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoService;
+import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
+import jp.co.ndensan.reams.ca.cax.service.saiban.ChoteiSaiban;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
@@ -18,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
-import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.Nokitsuki;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -26,13 +27,11 @@ import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoK
 import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.RyokinShubetsuCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -88,7 +87,7 @@ public class FukaManager {
     @Transaction
     public void save賦課(FukaJoho 介護賦課) {
         requireNonNull(介護賦課, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課"));
-        ShunoManager shunoManager = new ShunoManager();
+        ShunoManager shunoManager = ShunoService.get収納Manager();
         ShunoKamokuFinder shunoKamokuManager = ShunoKamokuFinder.createInstance();
         FukaNokiResearcher 納期 = FukaNokiResearcher.createInstance();
         save介護期別By特別徴収(介護賦課, shunoKamokuManager, shunoManager, 納期);
@@ -104,27 +103,27 @@ public class FukaManager {
             ShunoKamokuFinder shunoKamokuManager,
             ShunoManager shunoManager,
             FukaNokiResearcher 納期) {
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額01()) < 0) {
+        if (介護賦課.get特徴期別金額01() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額01()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額01(), 納期.get特徴納期(1).get納期限(), 1);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額02()) < 0) {
+        if (介護賦課.get特徴期別金額02() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額02()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額02(), 納期.get特徴納期(納期_2).get納期限(), 納期_2);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額03()) < 0) {
+        if (介護賦課.get特徴期別金額03() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額03()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額03(), 納期.get特徴納期(納期_3).get納期限(), 納期_3);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額04()) < 0) {
+        if (介護賦課.get特徴期別金額04() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額04()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額04(), 納期.get特徴納期(納期_4).get納期限(), 納期_4);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額05()) < 0) {
+        if (介護賦課.get特徴期別金額05() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額05()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額05(), 納期.get特徴納期(納期_5).get納期限(), 納期_5);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額06()) < 0) {
+        if (介護賦課.get特徴期別金額06() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額06()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額06(), 納期.get特徴納期(納期_6).get納期限(), 納期_6);
         }
@@ -210,70 +209,34 @@ public class FukaManager {
             int 期) {
         IShunoKamoku 科目 = shunoKamokuManager.get科目(徴収種別.equals(ChoshuHohoKibetsu.普通徴収)
                 ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
-        shunoManager.save調定(get収納キークラス(介護賦課, 科目, 期),
-                get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 科目));
+        long 調定ID = ChoteiSaiban.getNumbering調定ID();
+        ShunoKanri 収納管理 = get収納管理(介護賦課, 科目, 期);
+        shunoManager.save収納管理(収納管理);
+        shunoManager.save調定(収納管理, get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 調定ID, 納期限, 収納管理));
         介護期別Manager.save介護期別(new Kibetsu(介護賦課.get調定年度(), 介護賦課.get賦課年度(),
-                介護賦課.get通知書番号(), 介護賦課.get履歴番号(), 徴収種別.getコード(), 期));
+                介護賦課.get通知書番号(), 介護賦課.get履歴番号(), 徴収種別.getコード(), 期)
+                .createBuilderForEdit().set調定ID(new Decimal(調定ID)).build());
     }
 
-    private ShunoKey get収納キークラス(FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
-        return new ShunoKey(get収納管理(介護賦課, 科目, 期), 科目, get納期月(科目, 期));
-    }
-
-    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, IShunoKamoku 科目) {
-        Chotei.Builder builder = Chotei.newBuilder();
-        long id = Saiban.get(SubGyomuCode.CAX収滞公開, new RString(SaibanKeysChotei.調定ID.name())).next();
-        builder.set調定ID(id);
-        builder.set調定状況ID(id);
-        builder.set科目コード(科目.getコード());
-        builder.set科目枝番コード(科目.get枝番コード());
-        builder.set料金種別コード(new RyokinShubetsuCodeValue(RString.EMPTY));
-        builder.set事業区分(JigyoKubun.未使用);
-        // TODO QA#89276 回答待ち。DBはNOT NULL COLUMN ですが、対応する項目は設定しない、DBにINSERTする場合、エラーが発生しました。
-        // rshare."UrT0707ChoteiJokyo" NOT NULL
-        // builder.set調定状況ID
-        // builder.set収納処理状況
-        // builder.set合計件数
-        // builder.set合計金額
-        // builder.set調定年月日
-        builder.set収納処理状況(ShunoShoriJokyo.未取込);
-        builder.set合計件数(0);
-        builder.set合計金額(Decimal.ZERO);
-        builder.set調定年月日(RDate.getNowDate());
-        builder.set収納ID(0L);
-        builder.set更正回数(0);
-        builder.set会計年度(new RYear(調定年度.getYearValue()));
-        builder.set調定事由コード(ChoteiJiyu.更正その他);
-        builder.set調定額(調定額);
-        builder.set消費税額(Decimal.ZERO);
-        builder.set納期限(納期限);
-        builder.set賦課処理状況(FukaShoriJokyo.保留中);
-        return builder.build();
+    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, long 調定ID, RDate 調定年月日, ShunoKanri 収納管理) {
+        return ChoteiFactory.createChoteiInstanceParamChoteiId(
+                調定ID, new RYear(調定年度.getYearValue()), 0, ChoteiJiyu.更正その他, 調定年月日, 調定額,
+                Decimal.ZERO, 納期限, FukaShoriJokyo.保留中, ShunoShoriJokyo.未取込, Collections.EMPTY_LIST, 収納管理)
+                .createBuilderForEdit()
+                .set処理年度(new RYear(調定年度.getYearValue()))
+                .set収納ID(0L)
+                .set処理番号(0).build();
     }
 
     private ShunoKanri get収納管理(FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
-        ShunoKanri.Builder builder = ShunoKanri.newBuilder();
-        builder.setChoteiNendo(new RYear(介護賦課.get調定年度().getYearValue()));
-        builder.setRyokinShubetsuCode(new RyokinShubetsuCodeValue(RString.EMPTY));
-        builder.setJigyoKubunCode(JigyoKubun.未使用);
-        builder.setChoshukenUmu(false);
-        builder.setChoteiNo(0);
-        builder.setKamokuCode(科目.getコード());
-        builder.setKamokuEdabanCode(科目.get枝番コード());
-        builder.setKazeiNendo(new RYear(介護賦課.get賦課年度().getYearValue()));
-        builder.setKibetsu(期);
-        builder.setShikibetsuCode(介護賦課.get識別コード());
-        builder.setShunoId(0L);
-        builder.setTsuchishoNo(new TsuchishoNo(new Decimal(介護賦課.get通知書番号().toString())));
-
-        return builder.build();
-    }
-
-    private Nokitsuki get納期月(IShunoKamoku 科目, int 期) {
-        Nokitsuki.Builder builder = Nokitsuki.newBuilder();
-        builder.set科目コード(科目.getコード());
-        builder.set科目枝番コード(科目.get枝番コード());
-        builder.set期別(期);
-        return builder.build();
+        return new ShunoKanri(0L,
+                科目.getコード(),
+                科目.get枝番コード(),
+                new RyokinShubetsuCodeValue(RString.EMPTY),
+                JigyoKubun.未使用.getJigyoKubunCd(),
+                new RYear(介護賦課.get調定年度().toString()),
+                new RYear(介護賦課.get賦課年度().toString()),
+                new TsuchishoNo(new Decimal(介護賦課.get通知書番号().toString())),
+                期, true, 0).createBuilderForEdit().set識別コード(介護賦課.get識別コード()).build();
     }
 }

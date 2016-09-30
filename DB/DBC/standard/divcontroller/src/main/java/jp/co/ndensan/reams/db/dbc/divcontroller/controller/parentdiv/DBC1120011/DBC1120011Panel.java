@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1120011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc1120011panel.DBC1120011PanelBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1120011.DBC1120011PanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1120011.DBC1120011PanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1120011.DBC1120011PanelValidationHandler;
@@ -64,16 +64,16 @@ public class DBC1120011Panel {
      * @param div DBC1120011PanelDiv
      * @return ResponseData
      */
-    public ResponseData<DBC1120011PanelBatchParameter> onClick_JikoFutangakuKeisanIkkatsuPanel(DBC1120011PanelDiv div) {
+    public ResponseData<DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter> onClick_JikoFutangakuKeisanIkkatsuPanel(DBC1120011PanelDiv div) {
         LockingKey 排他キー = new LockingKey(ResponseHolder.getMenuID());
         RealInitialLocker.release(排他キー);
-        DBC1120011PanelBatchParameter param = setBatchParameter(div);
+        DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter param = setBatchParameter(div);
         return ResponseData.of(param).respond();
     }
 
-    private DBC1120011PanelBatchParameter setBatchParameter(DBC1120011PanelDiv div) {
-        DBC1120011PanelBatchParameter parameter = new DBC1120011PanelBatchParameter();
-        parameter.setShoriTimestamp(RDate.getNowDate());
+    private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter setBatchParameter(DBC1120011PanelDiv div) {
+        DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter parameter = new DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter();
+        parameter.setShoriTimestamp(RDate.getNowDateTime());
         if (div.getTxtShinseiTaishoYMD().getFromValue().toString().isEmpty()) {
             parameter.setTaishoKaishiDay(RDate.MIN);
         } else {

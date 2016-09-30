@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -72,7 +73,8 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
 
     @Override
     public void loadHokenshaList(GyomuBunrui 業務分類) {
-        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類));
+//        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類));
+        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類), true);
         if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
             this.ddlHokenshaList.setSelectedIndex(0);
         }
@@ -81,5 +83,19 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     @Override
     public void setSelectedShichosonIfExist(LasdecCode 市町村コード) {
         this.createHandler().setSelectedShichsonIfExist(市町村コード);
+    }
+
+    @Override
+    public void loadHokenshaList(GyomuBunrui 業務分類, boolean 全市町村表示有無) {
+        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類),
+                Objects.requireNonNull(全市町村表示有無));
+        if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
+            this.ddlHokenshaList.setSelectedIndex(0);
+        }
+    }
+
+    @Override
+    public void setSelectedShoKisaiHokenshaNoIfExist(ShoKisaiHokenshaNo 証記載保険者番号) {
+        this.createHandler().setSelectedShoKisaiHokenshaNoIfExist(証記載保険者番号);
     }
 }

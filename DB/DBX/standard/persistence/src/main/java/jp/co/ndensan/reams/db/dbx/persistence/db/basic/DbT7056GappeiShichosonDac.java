@@ -152,4 +152,19 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
                 toList(DbT7056GappeiShichosonEntity.class);
     }
 
+    /**
+     * 証記載保険者番号より、旧市町村名称を取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return List<DbT7056GappeiShichosonEntity>
+     */
+    public List<DbT7056GappeiShichosonEntity> get旧市町村名称(RString 証記載保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7056GappeiShichoson.class).
+                where(eq(kyuHokenshaNo, 証記載保険者番号)).
+                order(by(gappeiYMD, Order.DESC)).
+                toList(DbT7056GappeiShichosonEntity.class);
+    }
+
 }

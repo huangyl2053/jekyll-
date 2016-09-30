@@ -294,6 +294,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
                                 lt(異動年月日, idoYMD),
                                 eq(logicalDeletedFlag, false))).
                 groupBy(idoYMD).
+                order(by(DbT3001JukyushaIdoRenrakuhyo.idoYMD, Order.DESC)).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }
 
@@ -323,6 +324,32 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
                                 eq(idoYMD, 異動年月日),
                                 eq(rirekiNo, 履歴番号),
                                 eq(logicalDeletedFlag, 論理削除フラグ))).
+                toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
+
+    /**
+     * 受給者異動送付を全件返します。
+     *
+     * @param 被保険者番号 hiHokenshaNo
+     * @param 異動年月日 idoYMD
+     * @param 履歴番号 int
+     * @return DbT3001JukyushaIdoRenrakuhyoEntity
+     */
+    @Transaction
+    public DbT3001JukyushaIdoRenrakuhyoEntity getAllByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動年月日,
+            int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(履歴号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動年月日),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }
 

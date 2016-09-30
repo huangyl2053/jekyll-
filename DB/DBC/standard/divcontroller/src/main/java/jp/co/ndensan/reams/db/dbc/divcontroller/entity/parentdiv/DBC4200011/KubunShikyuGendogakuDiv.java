@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KubunShikyuGendogaku のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-3410-010 jianglaisheng
  */
 public class KubunShikyuGendogakuDiv extends Panel {
     /*
@@ -51,5 +51,4 @@ public class KubunShikyuGendogakuDiv extends Panel {
     public void setTplKubunShikyuGendogaku(tplKubunShikyuGendogakuDiv tplKubunShikyuGendogaku) {
         this.tplKubunShikyuGendogaku = tplKubunShikyuGendogaku;
     }
-
 }

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3470-030 xuyongchao -->
+<!-- 年齢階級別利用状況作成 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenreikaikyuriyojokyo.INenreikaikyuRiyojokyoMapper">
+   <sql id="teikyoYM_DbT3017">
+     SELECT
+          *
+     FROM
+        (
+         SELECT
+              *,
+              ROW_NUMBER() OVER (PARTITION BY DbT3017_1."hiHokenshaNo" order by DbT3017_1."shinsaYM_1" DESC) AS "rank_number"
+         FROM
+            (
+               SELECT
+                    *,
+                    (CASE WHEN DbT3017."shinsaYM" = '' THEN '999999' ELSE DbT3017."shinsaYM" END) AS "shinsaYM_1"
+               FROM
+                    rgdb."DbT3017KyufujissekiKihon" AS DbT3017
+               WHERE
+                    DbT3017."serviceTeikyoYM" = #{serviceTeikyoYM}
+                    AND DbT3017."kyufuSakuseiKubunCode" != '3'
+                    AND substring(DbT3017."inputShikibetsuNo" from 0 for 4) NOT IN ( '71P','816','71R','817' )
+             ) AS DbT3017_1
+        ) AS DbT3017_2
+       WHERE
+         rank_number = 1   
+   </sql>
+   
+   <sql id="sinsaYM_DbT3017">
+       SELECT 
+            *
+       FROM 
+            rgdb."DbT3017KyufujissekiKihon" AS DbT3017
+       WHERE
+            DbT3017."shinsaYM" = #{sinsaYM}
+            AND DbT3017."kyufuSakuseiKubunCode" != '3'
+            AND substring(DbT3017."inputShikibetsuNo" from 0 for 4) NOT IN ( '71P','816','71R','817' )
+   </sql>
+   
+   <select resultOrdered="true" id="getKyufujissekiKyotaku"
+           parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoMybatisParameter"
+           resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoRelateEntity" fetchSize="500">
+       SELECT
+            tmp_DbT3017."hiHokenshaNo" AS "hiHokenshaNo",
+            tmp_DbT3017."serviceTeikyoYM" AS "serviceTeikyoYM",
+            tmp_DbT3017."umareYMD" AS "umareYMD",
+            tmp_DbT3017."yoKaigoJotaiKubunCode" AS "yoKaigoJotaiKubunCode",
+            substring(DbT3025."serviceCode" from 0 for 3) AS "serviceSyuruiCode",
+            宛名PSM."meisho"
+      FROM
+            <if test="teikyoYMFlag">
+                  (<include refid="teikyoYM_DbT3017" />) AS tmp_DbT3017
+            </if>
+            <if test="sinsaYMFlag">
+                  (<include refid="sinsaYM_DbT3017" />) AS tmp_DbT3017
+            </if>
+      INNER JOIN
+            rgdb."DbT3025KyufujissekiKyotakuService" AS DbT3025
+      ON
+            tmp_DbT3017."hiHokenshaNo" = DbT3025."hiHokenshaNo"
+            AND tmp_DbT3017."serviceTeikyoYM" = DbT3025."serviceTeikyoYM"
+            AND tmp_DbT3017."jigyoshoNo" = DbT3025."jigyoshoNo"
+            AND tmp_DbT3017."toshiNo" = DbT3025."toshiNo"
+            AND tmp_DbT3017."inputShikibetsuNo" = DbT3025."inputShikibetsuNo"
+            AND DbT3025."servicePlanhiMeisaiLineNo" = '99'
+      INNER JOIN
+            rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+      ON
+            tmp_DbT3017."hiHokenshaNo" = DbT1001."hihokenshaNo"
+            AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> tmp_DbT3017."serviceTeikyoYM"
+            AND tmp_DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT1001."shikakuSoshitsuYMD"
+            <if test="shichosonFlag">
+                  AND DbT1001."shichosonCode" = #{shichosonCode}
+            </if>
+            <if test="kyuShichosonFlag">
+                  AND DbT1001."kyuShichosonCode" = #{kyoShichosonCode}
+            </if>
+      INNER JOIN
+          rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+             true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM
+                  ON 宛名PSM."shikibetsuCode" = DbT1001."shikibetsuCode"
+                  <if test="shichosonAndKyu">
+                    <if test="tyouikiFlag">
+                          AND 宛名PSM."choikiCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="gyoseikuFlag">
+                          AND 宛名PSM."gyoseikuCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="chikuCode1Flag">
+                          AND 宛名PSM."chikuCode1" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="chikuCode2Flag">
+                          AND 宛名PSM."chikuCode2" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="chikuCode3Flag">
+                          AND 宛名PSM."chikuCode3" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                  </if>
+      ORDER BY
+            tmp_DbT3017."hiHokenshaNo",
+            tmp_DbT3017."serviceTeikyoYM",
+            DbT3025."serviceCode"
+   </select>
+   
+   <select resultOrdered="true" id="getKyufujissekiShukei"
+           parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoMybatisParameter"
+           resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoRelateEntity" fetchSize="500">
+       SELECT
+            tmp_DbT3017."hiHokenshaNo" AS "hiHokenshaNo",
+            tmp_DbT3017."serviceTeikyoYM" AS "serviceTeikyoYM",
+            tmp_DbT3017."umareYMD" AS "umareYMD",
+            tmp_DbT3017."yoKaigoJotaiKubunCode" AS "yoKaigoJotaiKubunCode",
+            DbT3033."serviceSyuruiCode" AS "serviceSyuruiCode",
+            DbT3029."serviceKomokuCode" AS "serviceKomokuCode",
+            宛名PSM."meisho"
+          FROM
+                <if test="teikyoYMFlag">
+                      (<include refid="teikyoYM_DbT3017" />) AS tmp_DbT3017
+                </if>
+                <if test="sinsaYMFlag">
+                      (<include refid="sinsaYM_DbT3017" />) AS tmp_DbT3017
+                </if>
+          INNER JOIN
+                rgdb."DbT3033KyufujissekiShukei" AS DbT3033
+          ON
+                tmp_DbT3017."hiHokenshaNo" = DbT3033."hiHokenshaNo"
+                AND tmp_DbT3017."serviceTeikyoYM" = DbT3033."serviceTeikyoYM"
+                AND tmp_DbT3017."jigyoshoNo" = DbT3033."jigyoshoNo"
+                AND tmp_DbT3017."toshiNo" = DbT3033."toshiNo"
+                AND tmp_DbT3017."inputShikibetsuNo" = DbT3033."inputShikibetsuNo"
+          LEFT OUTER  JOIN
+                rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS DbT3029
+          ON
+                DbT3029."hiHokenshaNo" = DbT3033."hiHokenshaNo"
+                AND DbT3029."serviceTeikyoYM" = DbT3033."serviceTeikyoYM"
+                AND DbT3029."jigyoshoNo" = DbT3033."jigyoshoNo"
+                AND DbT3029."toshiNo" = DbT3033."toshiNo"
+                AND DbT3029."inputShikibetsuNo" = DbT3033."inputShikibetsuNo"
+                AND DbT3029."serviceSyuruiCode" = DbT3033."serviceSyuruiCode"
+          INNER JOIN
+                rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+          ON
+                tmp_DbT3017."hiHokenshaNo" = DbT1001."hihokenshaNo"
+                AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> tmp_DbT3017."serviceTeikyoYM"
+                AND tmp_DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT1001."shikakuSoshitsuYMD"
+                <if test="shichosonFlag">
+                      AND DbT1001."shichosonCode" = #{shichosonCode}
+                </if>
+                <if test="kyuShichosonFlag">
+                      AND DbT1001."kyuShichosonCode" = #{kyoShichosonCode}
+                </if>
+          INNER JOIN
+              rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+             true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM
+                  ON 宛名PSM."shikibetsuCode" = DbT1001."shikibetsuCode"
+                  <if test="shichosonAndKyu">
+                    <if test="tyouikiFlag">
+                          AND 宛名PSM."choikiCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="gyoseikuFlag">
+                          AND 宛名PSM."gyoseikuCode" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="chikuCode1Flag">
+                          AND 宛名PSM."chikuCode1" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="chikuCode2Flag">
+                          AND 宛名PSM."chikuCode2" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                    <if test="chikuCode3Flag">
+                          AND 宛名PSM."chikuCode3" IN <foreach collection="sentakuTaisyoList" item="sentakuTaisyo" open="(" separator="," close=")"> #{sentakuTaisyo} </foreach>
+                    </if>
+                  </if>
+          ORDER BY
+                tmp_DbT3017."hiHokenshaNo",
+                tmp_DbT3017."serviceTeikyoYM",
+                DbT3033."serviceSyuruiCode"
+   </select>
+   
+   <select resultOrdered="true" id="getKyufujissekiTemp"
+           resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpKyufujissekiRelateEntity" fetchSize="500">
+       SELECT
+            *
+          FROM
+            "DbKyufujissekiTemp" AS tmpKyufujisseki
+          WHERE
+            1=1
+          ORDER BY
+            tmpKyufujisseki."hiHokenshaNo",
+            tmpKyufujisseki."serviceTeikyoYM",
+            tmpKyufujisseki."yoKaigoJotaiKubunCode"
+   </select>
+   
+   <insert  id="insert処理結果リスト一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.SyorikekkatempTblEntity" >
+        INSERT 
+        INTO "DbWSyorikekkatempTbl" 
+        VALUES ( 
+        #{shoriMei}
+        , #{hiHokenshaNo}
+        , #{serviceTeikyoYM}
+        , #{hiHokenshaKana}
+        , #{errorMsg}
+        , #{bikou}
+        ) 
+    </insert>
+    
+    <select resultOrdered="true" id="get処理結果確認リスト作成" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.SyorikekkatempTblEntity" 
+            fetchSize="500">  
+        SELECT "shoriMei",
+        "hiHokenshaNo",
+        "serviceTeikyoYM",
+        "hiHokenshaKana",
+        "errorMsg",
+        "bikou"
+        FROM  "DbWSyorikekkatempTbl"
+        ORDER BY   "hiHokenshaNo"
+    </select>
+    
+    <select resultOrdered="true" id="get出力用一時TBL" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpSyuturyokuYoRelateEntity" 
+            fetchSize="500">
+        SELECT  "serviceSyuruiCodeMei",
+        "no",
+        "pageNo",
+        "kubun",
+        "hiGaitou",
+        "yoSien1",
+        "yoSien2",
+        "keikatekiYoSien",
+        "youKaigo1",
+        "youKaigo2",
+        "youKaigo3",
+        "youKaigo4",   
+        "youKaigo5",
+       "goikei",
+        "bikou"
+        FROM "DbSyuturyokuYoTemp" ORDER BY  "pageNo","no"
+    </select>
+    
+    <update  id="update出力用一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.UpdateParameterEntity" >      
+        UPDATE "DbSyuturyokuYoTemp" 
+        SET
+        "hiGaitou" = "hiGaitou" + 1
+        , "yoSien1" = "yoSien1" + 1
+        , "yoSien2" = "yoSien2" + 1
+        , "keikatekiYoSien" = "keikatekiYoSien" + 1
+        , "youKaigo1" = "youKaigo1" + 1
+        , "youKaigo2" = "youKaigo2" + 1
+        , "youKaigo3" = "youKaigo3" + 1
+        , "youKaigo4" = "youKaigo4" + 1
+        , "youKaigo5" = "youKaigo5" + 1
+        , "goikei" = "goikei" + 1 
+        WHERE
+        "kubun" = #{区分}
+    </update>
+   
+</mapper>

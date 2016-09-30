@@ -19,18 +19,38 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyohokokuCompYoshiki272Change {
 
-    private final RString listUpper_1;
-    private final RString listLower_1;
+    private RString listUpper_1;
+    private RString listLower_1;
+    private RString 作成日時;
+    private RString 集計範囲;
+    private RString 集計区分;
+    private RString 保険者番号;
+    private RString 保険者名;
 
     /**
      *
      * @param listUpper_1 件数
      * @param listLower_1 給付額
+     * @param 作成日時 RString
+     * @param 集計範囲 RString
+     * @param 集計区分 RString
+     * @param 保険者番号 RString
+     * @param 保険者名 RString
      */
     public JigyohokokuCompYoshiki272Change(RString listUpper_1,
-            RString listLower_1) {
+            RString listLower_1,
+            RString 作成日時,
+            RString 集計範囲,
+            RString 集計区分,
+            RString 保険者番号,
+            RString 保険者名) {
         this.listUpper_1 = listUpper_1;
         this.listLower_1 = listLower_1;
+        this.作成日時 = 作成日時;
+        this.集計範囲 = 集計範囲;
+        this.集計区分 = 集計区分;
+        this.保険者番号 = 保険者番号;
+        this.保険者名 = 保険者名;
     }
 
 }

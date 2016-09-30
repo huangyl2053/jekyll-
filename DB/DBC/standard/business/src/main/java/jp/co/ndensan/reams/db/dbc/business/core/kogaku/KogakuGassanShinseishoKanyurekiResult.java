@@ -1,0 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.business.core.kogaku;
+
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyureki;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * 高額合算申請書加入歴データです。
+ *
+ * @reamsid_L DBC-2040-040 huzongcheng
+ */
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class KogakuGassanShinseishoKanyurekiResult implements Serializable {
+
+    private RString 状態;
+    private KogakuGassanShinseishoKanyureki 高額合算申請書加入歴;
+}

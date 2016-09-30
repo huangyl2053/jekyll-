@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufuKanrihyoDeleteProcess;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;

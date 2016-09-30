@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--@reamsid_L DBC-3020-010 chenyadong-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.postmainpanel.IPostMainPanelMapper">
+    <select resultOrdered="true" 
+            id = "get広域保険者for00" 
+            resultMap="resultmap_getPostMainPanel" 
+            parameterType="java.util.Map" fetchSize="500">
+        SELECT 
+        T7022."kijunTimestamp" AS kijunTimestamp
+        ,T7022."taishoKaishiTimestamp" AS taishoKaishiTimestamp
+        ,T7051."shichosonCode" AS shichosonCode
+        ,T7051."shichosonMeisho" AS shichosonMeisho
+        ,T7051."shichosonShokibetsuID" AS shichosonShokibetsuID 
+        FROM rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        INNER JOIN rgdb."DbT7022ShoriDateKanri" AS T7022
+        ON lpad(T7051."shichosonShokibetsuID",4,'0')= T7022."shoriEdaban"
+      
+        <if test="国保情報取り込み">
+             AND  T7022."shoriName" = '国保情報取り込み'
+        </if>
+        <if test="後期高齢者情報取り込み">
+             AND  T7022."shoriName" = '後期高齢者情報取り込み'
+        </if>
+        WHERE T7051."gappeiKyuShichosonKubun" = '0'	
+        ORDER BY	
+        T7022."kijunYMD" DESC,
+        T7022."kijunTimestamp" DESC	
+    </select>
+    
+    <resultMap id="resultmap_getPostMainPanel" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.postmainpanel.PostMainPanelEntity" autoMapping="true">
+        <id property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="市町村識別ID" column="shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="基準日時" column="kijunTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <id property="対象開始日時" column="taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+    </resultMap>
+   
+    <select resultOrdered="true" id = "get広域保険者" 
+            resultMap="resultmap_getPostMainPanel"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.postmainpanel.PostMainPanelMybatisParameter" fetchSize="500">
+        SELECT 
+        T7022."kijunTimestamp" AS kijunTimestamp
+        ,T7022."taishoKaishiTimestamp" AS taishoKaishiTimestamp
+        ,T7051."shichosonCode" AS shichosonCode
+        ,T7051."shichosonMeisho" AS shichosonMeisho
+        ,T7051."shichosonShokibetsuID" AS shichosonShokibetsuID 
+        FROM rgdb."DbT7022ShoriDateKanri" AS T7022
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        ON lpad(T7051."shichosonShokibetsuID",4,'0') = T7022."shoriEdaban"
+       
+        WHERE T7022."shoriEdaban" = lpad(#{市町村識別ID},4,'0')
+         AND 
+        <if test="国保情報取り込み">
+            T7022."shoriName" = #{処理名}
+        </if>
+        <if test="後期高齢者情報取り込み">
+            T7022."shoriName" = #{処理名}
+        </if>	
+    </select>
+</mapper>

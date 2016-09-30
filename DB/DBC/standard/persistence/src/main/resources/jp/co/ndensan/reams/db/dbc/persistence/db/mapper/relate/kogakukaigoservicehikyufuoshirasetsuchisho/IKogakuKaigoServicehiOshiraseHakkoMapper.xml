@@ -157,12 +157,16 @@
         AND (("ShinseiJohoShokanTemp"."shinsaHohoKubunShokan" = '1' AND "ShinseiJohoShokanTemp"."ketteiShikyuKubunCodeShokan" = '1' AND '0' <![CDATA[ < ]]> "ShinseiJohoShokanTemp"."ketteiKogakuShikyuGakuShokan") 
         OR ("ShinseiJohoShokanTemp"."shinsaHohoKubunShokan" = '2' AND "ShinseiJohoShokanTemp"."hanteiKekkaShikyuKubunCodeShokan" = '1' AND '0' <![CDATA[ < ]]> "ShinseiJohoShokanTemp"."shikyuKingakuShokan"))
     </select>
-    <select resultOrdered="true" id="get申請書発行一覧表" resultMap="result_ShinseiJohoChohyoTemp"
+    <select resultOrdered="true" id="get申請書発行一覧表" resultMap="result_ShinseiJohoChohyoTempRelate市町村名称"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoMybatisParameter">
         SELECT 
-        "ShinseiJohoChohyoTemp".*
+        "ShinseiJohoChohyoTemp".*,
+        rgdb."DbT7051KoseiShichosonMaster"."shichosonMeisho"
         FROM 
         "ShinseiJohoChohyoTemp"
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
+        ON "ShinseiJohoChohyoTemp"."shichosonCodeChohyo" = rgdb."DbT7051KoseiShichosonMaster"."shichosonCode"
+        AND rgdb."DbT7051KoseiShichosonMaster"."gappeiKyuShichosonKubun" = '0'
         <if test="orderBy != null and orderBy.toString() != ''.toString()">
             ORDER BY 
             ${ orderBy }
@@ -418,6 +422,14 @@
         <association property="給付対象者合計" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity"/>
         <association property="給付対象者明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity"/>
         <association property="支給審査決定" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>
+    </resultMap>
+    <resultMap id="result_ShinseiJohoChohyoTempRelate市町村名称" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempRelateEntity">
+        <id column="hihokenshaNoChohyo" />
+        <id column="serviceTeikyoYMChohyo" />
+        <id column="shoKisaiHokenshaNoChohyo" />
+        <id column="rirekiNoChohyo" />
+        <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="申請情報" resultMap="result_ShinseiJohoChohyoTemp"/>
     </resultMap>
     <resultMap id="result_ShinseiJohoChohyoTempRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempRelateEntity">
         <id column="hihokenshaNoChohyo" />

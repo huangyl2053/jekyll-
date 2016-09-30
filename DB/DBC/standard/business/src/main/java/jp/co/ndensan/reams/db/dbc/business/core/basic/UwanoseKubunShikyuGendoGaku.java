@@ -19,10 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 上乗せ居宅サービス区分支給限度額を管理するクラスです。
  */
-public class UwanoseKubunShikyuGendoGaku 
-extends ModelBase<UwanoseKubunShikyuGendoGakuIdentifier, 
-        DbT7113UwanoseKubunShikyuGendoGakuEntity, 
-        UwanoseKubunShikyuGendoGaku> implements Serializable {
+public class UwanoseKubunShikyuGendoGaku
+        extends ModelBase<
+        UwanoseKubunShikyuGendoGakuIdentifier, DbT7113UwanoseKubunShikyuGendoGakuEntity, UwanoseKubunShikyuGendoGaku>
+        implements Serializable {
 
     private final DbT7113UwanoseKubunShikyuGendoGakuEntity entity;
     private final UwanoseKubunShikyuGendoGakuIdentifier id;
@@ -176,7 +176,7 @@ extends ModelBase<UwanoseKubunShikyuGendoGakuIdentifier,
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

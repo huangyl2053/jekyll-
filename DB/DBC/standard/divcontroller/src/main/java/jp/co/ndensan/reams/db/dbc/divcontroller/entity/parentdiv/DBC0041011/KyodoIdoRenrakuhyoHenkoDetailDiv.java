@@ -17,16 +17,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KyodoIdoRenrakuhyoHenkoDetailDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KyodoIdoRenrakuhyoHenkoDetailInfo")
+    @JsonProperty ("KyodoIdoRenrakuhyoHenkoDetailInfo")
     private KyodoJukyushaIdoRenrakuhyoDiv KyodoIdoRenrakuhyoHenkoDetailInfo;
-
     /*
      * [ GetterとSetterの作成 ]
      * クライアント側から取得した情報を元に検索を行い
@@ -37,7 +36,8 @@ public class KyodoIdoRenrakuhyoHenkoDetailDiv extends Panel {
      * getKyodoIdoRenrakuhyoHenkoDetailInfo
      * @return KyodoIdoRenrakuhyoHenkoDetailInfo
      */
-    @JsonProperty("KyodoIdoRenrakuhyoHenkoDetailInfo")
+
+    @JsonProperty ("KyodoIdoRenrakuhyoHenkoDetailInfo")
     public IKyodoJukyushaIdoRenrakuhyoDiv getKyodoIdoRenrakuhyoHenkoDetailInfo() {
         return KyodoIdoRenrakuhyoHenkoDetailInfo;
     }

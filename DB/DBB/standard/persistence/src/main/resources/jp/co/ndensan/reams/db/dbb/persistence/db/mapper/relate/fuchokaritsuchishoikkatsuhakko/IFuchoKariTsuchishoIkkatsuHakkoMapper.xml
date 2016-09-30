@@ -3903,13 +3903,13 @@
         "TmpIdoFukaJoho"."Fuka_tsuchishoNo" = "TempKaigoFukaZennendo"."dbT2002Fuka_tsuchishoNo"
     </update>
     <select id="select異動賦課情報一時" resultMap="resultMap_FuchoKariTsuchishoIkkatsuHakkoTemp"
-            fetchSize="500">
+            fetchSize="500" resultOrdered="true">
         SELECT
         *
         FROM
         "TmpIdoFukaJoho"
     </select>
-    <select id="select出力対象データ" resultMap="resultMap_FuchoKariTsuchishoIkkatsuHakkoTemp"
+    <select id="select出力対象データ" resultOrdered="true" resultMap="resultMap_FuchoKariTsuchishoIkkatsuHakkoTemp"
             fetchSize="500"  parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuchokaritsuchishoikkatsuhakko.FuchokaritsuchishoikkatsuhakkoParameter">
         SELECT
         *

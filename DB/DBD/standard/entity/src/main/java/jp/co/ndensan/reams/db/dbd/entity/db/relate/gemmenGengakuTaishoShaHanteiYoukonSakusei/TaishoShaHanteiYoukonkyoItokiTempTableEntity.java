@@ -62,11 +62,11 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends
     private Decimal 非課税年金勘案額;
     @TempTableColumnOrder(13)
     private Boolean is高齢者複数世帯;
-    @TempTableColumnOrder(13)
+    @TempTableColumnOrder(14)
     private Boolean is所得税課税世帯;
-    @TempTableColumnOrder(10)
+    @TempTableColumnOrder(15)
     private Boolean is所得税課税者;
-    @TempTableColumnOrder(11)
+    @TempTableColumnOrder(16)
     private Decimal 課税所得額;
 
     /**

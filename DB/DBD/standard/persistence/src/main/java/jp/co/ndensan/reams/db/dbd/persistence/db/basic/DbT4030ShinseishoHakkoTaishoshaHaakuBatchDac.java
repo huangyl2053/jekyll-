@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.distinct;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -27,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 申請書発行対象者把握情報を取得する。
  *
- * @reamsid_L DBD-3530-060 liuyl
+ * @reamsid_L DBD-9999-013 liuyl
  */
 public class DbT4030ShinseishoHakkoTaishoshaHaakuBatchDac {
 
@@ -56,7 +57,8 @@ public class DbT4030ShinseishoHakkoTaishoshaHaakuBatchDac {
     @Transaction
     public List<DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity> select基準日時(RString 減免減額種類) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(sqlSession);
-        return accessor.select().table(DbT4030ShinseishoHakkoTaishoshaHaakuBatch.class).
+        return accessor.selectSpecific(distinct(batchExecutedTimestamp)).
+                table(DbT4030ShinseishoHakkoTaishoshaHaakuBatch.class).
                 where(and(
                                 eq(gemmenGengakuShurui, 減免減額種類),
                                 leq(batchExecutedTimestamp, YMDHMS.now()),

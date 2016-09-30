@@ -47,10 +47,6 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranValidationHandler {
      *
      * @return バリデーション突合結果
      */
-    /*  public ValidationMessageControlPairs validate() {
-     IValidationMessages messages = new ControlValidator(div).validate();
-     return createDictionary().check(messages);
-     }*/
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(ShotokuDankaibetsuHihokenshaSuIchiranValidationMessages.本算定賦課処理_NotEmpty,
@@ -58,7 +54,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranValidationHandler {
                 .add(ShotokuDankaibetsuHihokenshaSuIchiranValidationMessages.資格基準日_入力,
                         div.getTxtShikakuKijunYMD())
                 .add(ShotokuDankaibetsuHihokenshaSuIchiranValidationMessages.調定基準日_入力,
-                        div.getTxtShikakuKijunYMD())
+                        div.getTxtChoteiKijunYMD())
                 .add(ShotokuDankaibetsuHihokenshaSuIchiranValidationMessages.資格基準日より調定基準日_だめ,
                         div.getChushutsuJoken())
                 .build();
@@ -113,15 +109,21 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranValidationHandler {
 
                     @Override
                     public boolean apply(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-                        return div.getTxtShikakuKijunYMD().getValue().compareTo(div.getTxtChoteiKijunYMD()
-                                .getValue()) <= 0;
+                        if (div.getTxtChoteiKijunYMD().getValue() != null && !div.getTxtChoteiKijunYMD().getValue()
+                        .toString().isEmpty() && div.getTxtShikakuKijunYMD().getValue() != null
+                        && !div.getTxtShikakuKijunYMD().getValue().toString().isEmpty()) {
+                            return div.getTxtShikakuKijunYMD().getValue().compareTo(div.getTxtChoteiKijunYMD()
+                                    .getValue()) <= 0;
+                        } else {
+                            return true;
+                        }
                     }
                 };
     }
 
     private enum ShotokuDankaibetsuHihokenshaSuIchiranValidationMessages implements IValidationMessage {
 
-        本算定賦課処理_NotEmpty(DbzErrorMessages.実行不可, 本算定賦課が実行されない.toString(), 本処理の実行.toString()), 
+        本算定賦課処理_NotEmpty(DbzErrorMessages.実行不可, 本算定賦課が実行されない.toString(), 本処理の実行.toString()),
         資格基準日_入力(UrErrorMessages.必須, 資格基準日.toString()),
         調定基準日_入力(UrErrorMessages.必須, 調定基準日.toString()),
         資格基準日より調定基準日_だめ(DbzErrorMessages.期間が不正_未来日付不可, 資格基準日.toString(), 調定基準日.toString());

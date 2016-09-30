@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShinseiDetailDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +29,10 @@ public class ShinseiDetailDiv extends Panel {
     private TextBoxFlexibleDate txtShinseiYMD;
     @JsonProperty("ddlShinseiRiyu")
     private DropDownList ddlShinseiRiyu;
+    @JsonProperty("izokuNenkinJukyu")
+    private CheckBoxList izokuNenkinJukyu;
+    @JsonProperty("shogaiNenkinJukyu")
+    private CheckBoxList shogaiNenkinJukyu;
     @JsonProperty("HaigushaJoho")
     private HaigushaJohoDiv HaigushaJoho;
     @JsonProperty("YochokinJoho")
@@ -108,6 +112,42 @@ public class ShinseiDetailDiv extends Panel {
     @JsonProperty("ddlShinseiRiyu")
     public void setDdlShinseiRiyu(DropDownList ddlShinseiRiyu) {
         this.ddlShinseiRiyu = ddlShinseiRiyu;
+    }
+
+    /*
+     * getizokuNenkinJukyu
+     * @return izokuNenkinJukyu
+     */
+    @JsonProperty("izokuNenkinJukyu")
+    public CheckBoxList getIzokuNenkinJukyu() {
+        return izokuNenkinJukyu;
+    }
+
+    /*
+     * setizokuNenkinJukyu
+     * @param izokuNenkinJukyu izokuNenkinJukyu
+     */
+    @JsonProperty("izokuNenkinJukyu")
+    public void setIzokuNenkinJukyu(CheckBoxList izokuNenkinJukyu) {
+        this.izokuNenkinJukyu = izokuNenkinJukyu;
+    }
+
+    /*
+     * getshogaiNenkinJukyu
+     * @return shogaiNenkinJukyu
+     */
+    @JsonProperty("shogaiNenkinJukyu")
+    public CheckBoxList getShogaiNenkinJukyu() {
+        return shogaiNenkinJukyu;
+    }
+
+    /*
+     * setshogaiNenkinJukyu
+     * @param shogaiNenkinJukyu shogaiNenkinJukyu
+     */
+    @JsonProperty("shogaiNenkinJukyu")
+    public void setShogaiNenkinJukyu(CheckBoxList shogaiNenkinJukyu) {
+        this.shogaiNenkinJukyu = shogaiNenkinJukyu;
     }
 
     /*

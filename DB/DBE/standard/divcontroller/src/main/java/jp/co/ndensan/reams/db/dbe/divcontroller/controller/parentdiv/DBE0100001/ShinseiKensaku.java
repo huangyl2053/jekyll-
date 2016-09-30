@@ -50,7 +50,7 @@ public class ShinseiKensaku {
 //    private static final RString MENUID_DBEMN14001 = new RString("DBEMN14001");
 //    private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
 //    private static final RString MENUID_DBEMN31005 = new RString("DBEMN31005");
-    private static final RString MENUID_DBEMN21001 = new RString("DBEMN21001");
+    private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN33001 = new RString("DBEMN33001");
     private static final RString MENUID_DBEMN62001 = new RString("DBEMN72001");
 //>>>>>>> origin/sync
@@ -75,8 +75,8 @@ public class ShinseiKensaku {
         } else if (MENUID_DBEMN11003.equals(menuID)) {
             return DBE0100001StateName.個人照会;
         } else if (MENUID_DBEMN14001.equals(menuID)
-                   || MENUID_DBEMN32002.equals(menuID)
-                   || MENUID_DBEMN31005.equals(menuID)) {
+                || MENUID_DBEMN32002.equals(menuID)
+                || MENUID_DBEMN31005.equals(menuID)) {
             return DBE0100001StateName.情報提供;
         }
         return DBE0100001StateName.条件指定;
@@ -135,8 +135,8 @@ public class ShinseiKensaku {
     private ResponseData<ShinseiKensakuDiv> forwardNextOrStay(ShinseiKensakuDiv div, Events event) {
         RString menuID = ResponseHolder.getMenuID();
         dgShinseiJoho_Row row = (event == Events.検索結果1件) ? div.getDgShinseiJoho().getDataSource().get(0)
-                                : (event == Events.対象選択) ? div.getDgShinseiJoho().getClickedItem()
-                                  : null;
+                : (event == Events.対象選択) ? div.getDgShinseiJoho().getClickedItem()
+                        : null;
         if (row == null) {
             return ResponseData.of(div).respond();
         }
@@ -179,7 +179,7 @@ public class ShinseiKensaku {
                     //>>>>>>> origin/sync
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
-        } else if (MENUID_DBEMN21001.equals(menuID)) {
+        } else if (MENUID_DBEMN31001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
         } else if (MENUID_DBEMN33001.equals(menuID)) {

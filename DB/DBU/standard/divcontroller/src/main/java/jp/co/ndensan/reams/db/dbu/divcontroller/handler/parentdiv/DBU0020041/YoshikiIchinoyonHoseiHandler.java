@@ -169,14 +169,14 @@ public final class YoshikiIchinoyonHoseiHandler {
             set第4段階申請件数リスト(第4段階申請件数リスト);
             set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_1030), 第4段階申請件数リスト,
                     new Decimal(縦番号_1));
-            List<Decimal> 食费のみ減額認定件数リスト = new ArrayList<>();
-            set食费のみ減額認定件数リスト(食费のみ減額認定件数リスト);
-            set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_1030), 食费のみ減額認定件数リスト,
+            List<Decimal> 食費のみ減額認定件数リスト = new ArrayList<>();
+            set食費のみ減額認定件数リスト(食費のみ減額認定件数リスト);
+            set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_1030), 食費のみ減額認定件数リスト,
                     new Decimal(縦番号_2));
-            List<Decimal> 食费のみ減額認定件数累積リスト = new ArrayList<>();
-            set食费のみ減額認定件数累積リスト(食费のみ減額認定件数累積リスト);
+            List<Decimal> 食費のみ減額認定件数累積リスト = new ArrayList<>();
+            set食費のみ減額認定件数累積リスト(食費のみ減額認定件数累積リスト);
             set画面データリスト(
-                    画面データリスト, 更新前データ, new Code(集計番号_1030), 食费のみ減額認定件数累積リスト,
+                    画面データリスト, 更新前データ, new Code(集計番号_1030), 食費のみ減額認定件数累積リスト,
                     new Decimal(縦番号_3));
             List<Decimal> 居住費のみ減額認定件数リスト = new ArrayList<>();
             set居住費のみ減額認定件数リスト(居住費のみ減額認定件数リスト);
@@ -188,15 +188,15 @@ public final class YoshikiIchinoyonHoseiHandler {
             set画面データリスト(
                     画面データリスト, 更新前データ, new Code(集計番号_1030), 居住費のみ減額認定件数累積リスト,
                     new Decimal(縦番号_5));
-            List<Decimal> 食费及び居住費減額認定件数リスト = new ArrayList<>();
-            set食费及び居住費減額認定件数リスト(食费及び居住費減額認定件数リスト);
+            List<Decimal> 食費及び居住費減額認定件数リスト = new ArrayList<>();
+            set食費及び居住費減額認定件数リスト(食費及び居住費減額認定件数リスト);
             set画面データリスト(
-                    画面データリスト, 更新前データ, new Code(集計番号_1030), 食费及び居住費減額認定件数リスト,
+                    画面データリスト, 更新前データ, new Code(集計番号_1030), 食費及び居住費減額認定件数リスト,
                     new Decimal(縦番号_6));
-            List<Decimal> 食费及び居住費減額認定件数累積リスト = new ArrayList<>();
-            set食费及び居住費減額認定件数累積リスト(食费及び居住費減額認定件数累積リスト);
+            List<Decimal> 食費及び居住費減額認定件数累積リスト = new ArrayList<>();
+            set食費及び居住費減額認定件数累積リスト(食費及び居住費減額認定件数累積リスト);
             set画面データリスト(
-                    画面データリスト, 更新前データ, new Code(集計番号_1030), 食费及び居住費減額認定件数累積リスト,
+                    画面データリスト, 更新前データ, new Code(集計番号_1030), 食費及び居住費減額認定件数累積リスト,
                     new Decimal(縦番号_7));
         }
 
@@ -398,21 +398,21 @@ public final class YoshikiIchinoyonHoseiHandler {
         申請件数リスト.add(div.getYoshikiIchinoyonHosei10().getTxtGokeiShinseiSu().getValue());
     }
 
-    private void set食费のみ減額認定件数リスト(List<Decimal> 食费のみ減額認定件数リスト) {
-        食费のみ減額認定件数リスト.add(
+    private void set食費のみ減額認定件数リスト(List<Decimal> 食費のみ減額認定件数リスト) {
+        食費のみ減額認定件数リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDanichigouShokujihiGengakuNinteiSu().getValue());
-        食费のみ減額認定件数リスト.add(
+        食費のみ減額認定件数リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDannigouShokujihiGengakuNinteiSu().getValue());
-        食费のみ減額認定件数リスト.add(
+        食費のみ減額認定件数リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtGokeiShokujihiGengakuNinteiSu().getValue());
     }
 
-    private void set食费のみ減額認定件数累積リスト(List<Decimal> 食费のみ減額認定件数累積リスト) {
-        食费のみ減額認定件数累積リスト.add(
+    private void set食費のみ減額認定件数累積リスト(List<Decimal> 食費のみ減額認定件数累積リスト) {
+        食費のみ減額認定件数累積リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDanichigouShokujiGengakuNinteiKei().getValue());
-        食费のみ減額認定件数累積リスト.add(
+        食費のみ減額認定件数累積リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDannigouShokujiGengakuNinteiKei().getValue());
-        食费のみ減額認定件数累積リスト.add(
+        食費のみ減額認定件数累積リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtGokeiShokujiGengakuNinteiKei().getValue());
     }
 
@@ -434,21 +434,21 @@ public final class YoshikiIchinoyonHoseiHandler {
                 div.getYoshikiIchinoyonHosei10().getTxtGokeiKyojuhiGengakuNinteiKei().getValue());
     }
 
-    private void set食费及び居住費減額認定件数リスト(List<Decimal> 食费及び居住費減額認定件数リスト) {
-        食费及び居住費減額認定件数リスト.add(
+    private void set食費及び居住費減額認定件数リスト(List<Decimal> 食費及び居住費減額認定件数リスト) {
+        食費及び居住費減額認定件数リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDanichigouSJGengakuNinteiSu().getValue());
-        食费及び居住費減額認定件数リスト.add(
+        食費及び居住費減額認定件数リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDannigouSJGengakuNinteiSu().getValue());
-        食费及び居住費減額認定件数リスト.add(
+        食費及び居住費減額認定件数リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtGokeiSJGengakuNinteiSu().getValue());
     }
 
-    private void set食费及び居住費減額認定件数累積リスト(List<Decimal> 食费及び居住費減額認定件数累積リスト) {
-        食费及び居住費減額認定件数累積リスト.add(
+    private void set食費及び居住費減額認定件数累積リスト(List<Decimal> 食費及び居住費減額認定件数累積リスト) {
+        食費及び居住費減額認定件数累積リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDanichigouSJGengakuNinteiKei().getValue());
-        食费及び居住費減額認定件数累積リスト.add(
+        食費及び居住費減額認定件数累積リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtDannigouSJGengakuNinteiKei().getValue());
-        食费及び居住費減額認定件数累積リスト.add(
+        食費及び居住費減額認定件数累積リスト.add(
                 div.getYoshikiIchinoyonHosei10().getTxtGokeiSJGengakuNinteiKei().getValue());
     }
 

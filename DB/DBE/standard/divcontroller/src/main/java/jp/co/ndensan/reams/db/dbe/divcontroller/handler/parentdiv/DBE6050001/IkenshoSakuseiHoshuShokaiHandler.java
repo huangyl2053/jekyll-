@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshohoshushokai.IkenshoHoshuShokaiBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshohoshushokai.IkenHoshuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601004.DBE601004_IkenshosakuseiHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshohoshushokaiichiran.IkenshoHoshuShokaiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.dgIkenshoSakuseiHoshu_Row;
@@ -154,7 +154,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
      * @param 帳票出力区分 帳票出力区分
      * @return 意見書作成報酬照会の合計額リスト_バッチフロークラスパラメータ
      */
-    public IkenHoshuIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
+    public DBE601004_IkenshosakuseiHoshuParameter createBatchParam(RString 帳票出力区分) {
         List<IkenshoHoshuShokaiIchiranKey> keyJohoList = new ArrayList<>();
         for (dgIkenshoSakuseiHoshu_Row row : div.getDgIkenshoSakuseiHoshu().getSelectedItems()) {
             if (row.getSelected()) {
@@ -174,7 +174,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         if (div.getTxtSakuseiIraibi().getToValue() != null) {
             作成依頼日終了 = new FlexibleDate(div.getTxtSakuseiIraibi().getToValue().toDateString());
         }
-        return new IkenHoshuIchiranBatchParameter(帳票出力区分, 作成依頼日開始, 作成依頼日終了, keyJohoList);
+        return new DBE601004_IkenshosakuseiHoshuParameter(帳票出力区分, 作成依頼日開始, 作成依頼日終了, keyJohoList);
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {

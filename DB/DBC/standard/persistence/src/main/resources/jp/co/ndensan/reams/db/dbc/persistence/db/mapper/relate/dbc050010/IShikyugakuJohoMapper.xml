@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2180-030 tianyh -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShikyugakuJohoMapper">
+    
+    <select resultOrdered="true" id="select様式番号別支給金額情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.ShikyugakuJohoMybatisParameter"
+            resultMap="resultMap_ShikyugakuJohoEntity" fetchSize="500">
+        <include refid="selectshikyugakuJoho" />
+    </select>
+    <sql id="selectshikyugakuJoho">
+        WITH 様式番号別集計 AS (
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                SUM(償還払."shikyuKingaku") AS sum支給金額,
+                SUM(償還払."sagakuKingaku") AS sum差額金額
+            FROM
+                rgdb."DbT3043ShokanShokujiHiyo" AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                SUM(償還払."shikyuKingaku") AS sum支給金額,
+                SUM(償還払."sagakuKingaku") AS sum差額金額
+            FROM
+                rgdb."DbT3045ShokanServicePlan200004" AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                SUM(償還払."shikyuKingaku") AS sum支給金額,
+                SUM(償還払."sagakuKingaku") AS sum差額金額
+            FROM
+                rgdb."DbT3046ShokanServicePlan200604" AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                SUM(償還払."shikyuKingaku") AS sum支給金額,
+                SUM(償還払."sagakuKingaku") AS sum差額金額
+            FROM
+                (
+                    SELECT * FROM rgdb."DbT3047ShokanServicePlan200904" AS mst
+                    WHERE NOT EXISTS (
+                                        SELECT * FROM rgdb."DbT3047ShokanServicePlan200904" AS slv
+                                        WHERE mst."hiHokenshaNo" = slv."hiHokenshaNo"
+                                              AND mst."serviceTeikyoYM" = slv."serviceTeikyoYM"
+                                              AND mst."seiriNo" = slv."seiriNo"
+                                              AND mst."yoshikiNo" = slv."yoshikiNo"
+                                              AND mst."meisaiNo" = slv."meisaiNo"
+                                              AND mst."renban" <![CDATA[<]]> slv."renban"
+                                      )
+                )AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                '0' AS sum支給金額,
+                SUM(償還払."sagakuKingaku") AS sum差額金額
+            FROM
+                rgdb."DbT3048ShokanFukushiYoguHanbaihi" AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                '0' AS sum支給金額,
+                SUM(償還払."sagakuKingaku") AS sum差額金額
+            FROM
+                rgdb."DbT3049ShokanJutakuKaishu" AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                SUM(償還払."shikyuKingaku") AS sum支給金額,
+                SUM(償還払."seikyugakuSagakuKingaku"+償還払."dekidakaSeikyugakuSagaku") AS sum差額金額
+            FROM
+                (
+                    SELECT * FROM  rgdb."DbT3053ShokanShukei" WHERE  "yoshikiNo" NOT IN('21C1','21C2','21D1','21D2')
+                ) AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                SUM(償還払."shikyuKingaku") AS sum支給金額,
+                '0' AS sum差額金額
+            FROM
+                (
+                    SELECT * FROM  rgdb."DbT3053ShokanShukei" WHERE  "yoshikiNo" NOT IN('21C1','21C2','21D1','21D2')
+                ) AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+            UNION ALL 
+            SELECT 
+                償還払."hiHokenshaNo",
+                償還払."serviceTeikyoYM",
+                償還払."seiriNo",
+                償還払."yoshikiNo",
+                SUM(償還払."shikyuKingaku") AS sum支給金額,
+                SUM(償還払."sagakuKingaku") AS sum差額金額
+            FROM 
+                rgdb."DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo" AS 償還払
+            INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
+            ON 
+                償還払."hiHokenshaNo" = 一時."hihokenshaNo"
+            AND 償還払."serviceTeikyoYM" = 一時."serviceTeikyoYM"
+            AND 償還払."seiriNo" = 一時."seiriNo"
+            AND 一時."dataKubun" = '1'
+            AND 一時."kozaDataFlag" = TRUE
+            GROUP BY 償還払."hiHokenshaNo",償還払."serviceTeikyoYM",償還払."seiriNo",償還払."yoshikiNo"
+        )
+        
+        SELECT 
+            振込明細一時TBL.*,
+            様式番号別金額.*,
+            名寄せ件数表.NUM
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
+        LEFT JOIN (
+                    SELECT 様式番号別集計."hiHokenshaNo",
+                           様式番号別集計."serviceTeikyoYM",
+                           様式番号別集計."seiriNo",
+                           様式番号別集計."yoshikiNo",
+                           SUM(様式番号別集計."sum支給金額") AS 支給金額計,
+                           SUM(様式番号別集計."sum差額金額") AS 差額金額計
+                    FROM 様式番号別集計
+                    GROUP BY 様式番号別集計."hiHokenshaNo",
+                            様式番号別集計."serviceTeikyoYM",
+                            様式番号別集計."seiriNo",
+                            様式番号別集計."yoshikiNo"
+                    HAVING 
+                    '0'<![CDATA[<]]> SUM(様式番号別集計."sum支給金額") 
+                    OR '0'<![CDATA[<]]> SUM(様式番号別集計."sum差額金額")
+                    ) AS 様式番号別金額
+        ON  振込明細一時TBL."hihokenshaNo" = 様式番号別金額."hiHokenshaNo"
+        AND 振込明細一時TBL."serviceTeikyoYM" = 様式番号別金額."serviceTeikyoYM"
+        AND 振込明細一時TBL."seiriNo" = 様式番号別金額."seiriNo"
+        INNER JOIN (
+                SELECT "kozaNayoseKey",
+                COUNT(*) AS NUM
+                FROM "DbWT0510FurikomiMeisai" 
+                WHERE 
+                     '0'<![CDATA[<]]>"DbWT0510FurikomiMeisai"."furikomiKingaku"
+                     AND "DbWT0510FurikomiMeisai"."kozaDataFlag" = TRUE
+                GROUP BY "kozaNayoseKey"
+                ) AS 名寄せ件数表
+        ON 振込明細一時TBL."kozaNayoseKey" = 名寄せ件数表."kozaNayoseKey" 
+        WHERE
+            '0'<![CDATA[<]]>振込明細一時TBL."furikomiKingaku"
+            AND 振込明細一時TBL."kozaDataFlag" = TRUE
+        ORDER BY
+        振込明細一時TBL."kinyuKikanCode" ASC,
+        振込明細一時TBL."kinyuKikanShitenCode" ASC,
+        振込明細一時TBL."hihokenshaNo" ASC,
+        振込明細一時TBL."serviceTeikyoYM" ASC,
+        振込明細一時TBL."dataKubun" ASC,
+        振込明細一時TBL."seiriNo" ASC,
+        振込明細一時TBL."rirekiNo" ASC,
+        様式番号別金額."yoshikiNo" ASC
+        ${出力順}
+    </sql>    
+    
+    
+    <select resultOrdered="true" id="select様式番号名称"
+            resultMap="resultMap_yoshikiNoJoho" fetchSize="500">
+        <include refid="selectyoshikiNoJoho" />
+    </select>
+    <sql id="selectyoshikiNoJoho">
+        SELECT
+           mst."shikibetsuNo",
+           mst."meisho2"
+        FROM rgdb."DbT3118ShikibetsuNoKanri" AS mst
+        WHERE "shikibetsuNoKubon" = '2'
+        AND NOT EXISTS (
+                        SELECT * FROM rgdb."DbT3118ShikibetsuNoKanri" AS slv
+                        WHERE mst."shikibetsuNo" = slv."shikibetsuNo"
+                        AND mst."tekiyoKaishiYM"<![CDATA[<]]>slv."tekiyoKaishiYM"
+                        )
+    </sql> 
+    <resultMap id="resultMap_yoshikiNoJoho" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.YoshikiNoJohoEntity">
+        <id column="shikibetsuNo"/>  
+        <result property="識別番号" column="shikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="名称２" column="meisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap> 
+    
+    <resultMap id="resultMap_ShikyugakuJohoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShikyugakuJohoEntity">
+        <result property="名寄せ件数" column="名寄せ件数" />
+        <association property="振込明細一時Entity" resultMap="resultMap_FurikomiDetailTempTableEntity"/>
+        <collection property="様式番号別金額EntityList" resultMap="resultMap_YoushikiBangouBetuKingakuEntity"/>
+    </resultMap> 
+    
+    <resultMap id="resultMap_FurikomiDetailTempTableEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity">
+        <result property="dataKubun" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rirekiNo" column="rirekiNo" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="ketteiTsuchiNo" column="ketteiTsuchiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="furikomiKingaku" column="furikomiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="zenkaiShiharaiKingaku" column="zenkaiShiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sagakuKingakuGokei" column="sagakuKingakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaID" column="kozaID" />
+        <result property="juryoininKeiyakuNo" column="juryoininKeiyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiBasho" column="shiharaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiKaishiYMD" column="shiharaiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiShuryoYMD" column="shiharaiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiKaishiTime" column="shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiShuryoTime" column="shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shimeiKana" column="shimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="shimei" column="shimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="shimei50onKana" column="shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
+        <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="gyoseikuMei" column="gyoseikuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kozaDataFlag" column="kozaDataFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="kozaShikibetsuCode" column="kozaShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <result property="kinyuKikanName" column="kinyuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kinyuKikanKanaName" column="kinyuKikanKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kinyuKikanShitenCode" column="kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="kinyuKikanShitenName" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kinyuKikanShitenKanaName" column="kinyuKikanShitenKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokinShubetsuCode" column="yokinShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokinShubetsuName" column="yokinShubetsuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNo" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeiginin" column="kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kozaNayoseKey" column="kozaNayoseKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiDataFlag" column="shinseiDataFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="shinseiKubunCode" column="shinseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokaigoJotaiKubunCode" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap> 
+    <resultMap id="resultMap_YoushikiBangouBetuKingakuEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.YoushikiBangouBetuKingakuEntity">
+        <result property="被保険者番号" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="整理番号" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="様式番号" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支給金額計" column="支給金額計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="差額金額計" column="差額金額計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap> 
+</mapper>

@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * {@link KogakuJuryoininKeiyakuJigyosha}の編集を行うビルダークラスです。
+ * 高額受領委任契約事業者を管理のBuilderです。
+ *
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class KogakuJuryoininKeiyakuJigyoshaBuilder {
 
@@ -179,7 +181,6 @@ public class KogakuJuryoininKeiyakuJigyoshaBuilder {
      * @return {@link KogakuJuryoininKeiyakuJigyoshaBuilder}
      */
     public KogakuJuryoininKeiyakuJigyoshaBuilder set利用者負担上限額(Decimal 利用者負担上限額) {
-        requireNonNull(利用者負担上限額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担上限額"));
         entity.setRiyoshaFutanJogenGaku(利用者負担上限額);
         return this;
     }

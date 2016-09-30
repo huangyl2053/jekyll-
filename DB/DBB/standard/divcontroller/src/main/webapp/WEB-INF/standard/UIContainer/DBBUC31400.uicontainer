@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC31400",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護保険料減免登録（一括）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB3140001",
+     "toLayoutTitle": "介護保険料減免登録（一括）",
+     "toState": "Syuryou"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB3140001",
+     "layoutTitle": "介護保険料減免登録（一括）",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

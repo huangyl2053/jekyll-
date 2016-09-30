@@ -10,9 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -69,6 +67,8 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final RString 項目名_提出期限初期 = new RString("提出期限初期");
     private static final RString 項目名_電話番号表示 = new RString("電話番号表示");
     private static final RString 項目名_委任状提出先 = new RString("委任状提出先");
+    private static final int BEGININDEX = 0;
+    private static final int ENDINDEX = 6;
 
     /**
      * コンストラクタです。
@@ -186,9 +186,6 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
             List<JigyoKogakuShikyuShinsei> serviceTeikyoYMList
                     = KogakuShikyuShinseishoIkkatsu.createInstance().getServiceTeikyoByDbT3110(被保険者番号, 証記載保険者番号);
-            if (serviceTeikyoYMList.isEmpty()) {
-                throw new ApplicationException(DbcErrorMessages.被保険者の高額介護サービス支給申請情報が無い.getMessage());
-            }
             for (JigyoKogakuShikyuShinsei jigyoKogakuShikyuShinsei : serviceTeikyoYMList) {
                 FlexibleYearMonth サービス提供年月 = jigyoKogakuShikyuShinsei.getサービス提供年月();
                 datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), サービス提供年月.wareki().toDateString()));
@@ -208,12 +205,12 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 = new DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
-            FlexibleDate 年月 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
-            処理年月 = new FlexibleYearMonth(年月.toString());
+            FlexibleDate 処理年月日 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
+            処理年月 = new FlexibleYearMonth(処理年月日.toString().substring(BEGININDEX, ENDINDEX));
             parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
-            RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue();
-            処理年月 = new FlexibleYearMonth(年月.toString());
+            RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey();
+            処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
             parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;
@@ -222,9 +219,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         parameter.setShoriYm(処理年月);
 
         parameter.setSakuseibi(div.getShutsuryokuTaisho().getTxtSakuseiDate().getValue());
-        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        RString 被保険者番号 = RString.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
-            被保険者番号 = new HihokenshaNo(div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().toString());
+            被保険者番号 = div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue();
         }
         parameter.setHihokenshaNo(被保険者番号);
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSyuuJiyuu;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA110010.DBA110010_HihokenshashoHakkoKanriboParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKaishuJiyu_Row;
@@ -81,11 +81,11 @@ public class BatchPanelHandler {
      * @param koufuJiyuList 交付事由リスト
      * @param kaishuJiyuList 回収事由リスト
      * @param menuID 処理メニューID
-     * @return HihokenshashoHakkoKanriboBatchParameter 被保険者証発行管理簿_バッチ用のパラメータ
+     * @return DBA110010_HihokenshashoHakkoKanriboParameter 被保険者証発行管理簿_バッチ用のパラメータ
      */
-    public HihokenshashoHakkoKanriboBatchParameter batchParameter(List<dgKoufuJiyu_Row> koufuJiyuList,
+    public DBA110010_HihokenshashoHakkoKanriboParameter batchParameter(List<dgKoufuJiyu_Row> koufuJiyuList,
             List<dgKaishuJiyu_Row> kaishuJiyuList, RString menuID) {
-        HihokenshashoHakkoKanriboBatchParameter parameter = new HihokenshashoHakkoKanriboBatchParameter();
+        DBA110010_HihokenshashoHakkoKanriboParameter parameter = new DBA110010_HihokenshashoHakkoKanriboParameter();
         if (被保険者証発行管理.equals(menuID)) {
             parameter.setAkasihakoumod(証発行モード_001);
         } else if (資格者証発行管理.equals(menuID)) {

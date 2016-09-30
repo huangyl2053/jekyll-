@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshadaicho.IkkatsuSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA020010.DBA020010_HihokenshaDaichoIkkatsuParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -48,12 +48,12 @@ public final class HihokenshaDaichoIkkatsuSakusei {
      * @param 出力フラグ 出力フラグ
      * @param 出力順ID 出力順ID
      * @param 登録ユーザーID 登録ユーザーID
-     * @return IkkatsuSakuseiBatchParameter
+     * @return DBA020010_HihokenshaDaichoIkkatsuParameter
      */
-    public static IkkatsuSakuseiBatchParameter createHihokenshaDaichoBatchParameter(boolean 資格喪失者抽出フラグ,
+    public static DBA020010_HihokenshaDaichoIkkatsuParameter createHihokenshaDaichoBatchParameter(boolean 資格喪失者抽出フラグ,
             boolean 出力フラグ,
             Long 出力順ID,
             RString 登録ユーザーID) {
-        return new IkkatsuSakuseiBatchParameter(資格喪失者抽出フラグ, 出力フラグ, 出力順ID, 登録ユーザーID);
+        return new DBA020010_HihokenshaDaichoIkkatsuParameter(資格喪失者抽出フラグ, 出力フラグ, 出力順ID, 登録ユーザーID);
     }
 }

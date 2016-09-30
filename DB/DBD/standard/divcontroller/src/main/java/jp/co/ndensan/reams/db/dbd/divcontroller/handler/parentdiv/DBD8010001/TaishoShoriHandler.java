@@ -73,6 +73,7 @@ public class TaishoShoriHandler {
     private static final RString 対象ファイル開始_月次 = new RString("Z5200000_");
     private static final RString 対象ファイル終了 = new RString(".DTA");
     private static final RString 横 = new RString("_");
+    private static final RString 空白 = new RString(" ");
 
     /**
      * 画面タイトルのenum
@@ -182,8 +183,8 @@ public class TaishoShoriHandler {
                         YMDHMS 基準日時 = target.get基準日時();
                         row.setTxtShoriNichiji(null != 基準日時 && !基準日時.isEmpty()
                                 ? 基準日時.getDate().wareki().eraType(EraType.KANJI)
-                                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString()
-                                .concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                                .firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString()
+                                .concat(空白).concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                                 : RString.EMPTY);
                     }
                     break;

@@ -53,7 +53,11 @@ public enum NyuryokuShikibetsuNoShokan3Keta {
     /**
      * コード:21D 名称:住宅改修費 略称:定義なし
      */
-    住宅改修費("21D", "住宅改修費");
+    住宅改修費("21D", "住宅改修費"),
+    /**
+     * コード:341 名称:高額介護サービス 略称:定義なし
+     */
+    高額介護サービス("341", "高額介護サービス");
 
     private final RString code;
     private final RString fullName;

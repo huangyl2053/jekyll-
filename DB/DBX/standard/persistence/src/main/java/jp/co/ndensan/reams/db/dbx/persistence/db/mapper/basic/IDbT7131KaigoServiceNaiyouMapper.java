@@ -22,12 +22,29 @@ public interface IDbT7131KaigoServiceNaiyouMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7131KaigoServiceNaiyouEntity getEntity();
-    
+
     /**
      * サービスコード取得します。
+     *
      * @param param SabisuKodoParameter
      * @return List<DbT7131KaigoServiceNaiyouEntity>
      */
     List<DbT7131KaigoServiceNaiyouEntity> getKaigoServiceNaiyou(SabisuKodoParameter param);
-    
+
+    /**
+     * サービスコード取得3を取得します。
+     *
+     * @param param SabisuKodoParameter
+     * @return List<DbT7131KaigoServiceNaiyouEntity>
+     */
+    List<DbT7131KaigoServiceNaiyouEntity> getServiceCodeList3(SabisuKodoParameter param);
+
+    /**
+     * サービスコード取得4を取得します。
+     *
+     * @param param SabisuKodoParameter
+     * @return List<DbT7131KaigoServiceNaiyouEntity>
+     */
+    List<DbT7131KaigoServiceNaiyouEntity> getServiceCodeList4(SabisuKodoParameter param);
+
 }

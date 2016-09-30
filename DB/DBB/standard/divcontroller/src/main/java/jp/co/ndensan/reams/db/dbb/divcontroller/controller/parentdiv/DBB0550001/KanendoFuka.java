@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0550001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055001.DBB055001_KanendoIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.DBB0550001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.KanendoFukaDiv;
@@ -81,6 +81,7 @@ public class KanendoFuka {
      * @return ResponseData
      */
     public ResponseData<KanendoFukaDiv> onClick_onBeforeCheck(KanendoFukaDiv div) {
+        getHandler(div).get帳票IDのチェック();
         ValidationMessageControlPairs pairs = getHandler(div).getCheckMessage();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -94,9 +95,9 @@ public class KanendoFuka {
      * @param div KanendoFukaDiv
      * @return ResponseData
      */
-    public ResponseData<HonSanteiIdoKanendoFukaBatchParameter> onClick_Reserve(KanendoFukaDiv div) {
+    public ResponseData<DBB055003_KanendoIdoTsuchishoHakkoParameter> onClick_Reserve(KanendoFukaDiv div) {
         HonsanteiIdoDivParameter parameter = getHandler(div).setBatchParam();
-        HonSanteiIdoKanendoFukaBatchParameter para = HonsanteiIdoKanendo.createInstance().createBatchParam(parameter);
+        DBB055003_KanendoIdoTsuchishoHakkoParameter para = HonsanteiIdoKanendo.createInstance().createBatchParam(parameter);
         return ResponseData.of(para).respond();
     }
 
@@ -106,9 +107,9 @@ public class KanendoFuka {
      * @param div KanendoFukaDiv
      * @return ResponseData
      */
-    public ResponseData<HonSanteiIdoFukaBatchParameter> onClick_Element(KanendoFukaDiv div) {
+    public ResponseData<DBB055001_KanendoIdoFukaParameter> onClick_Element(KanendoFukaDiv div) {
         HonsanteiIdoDivParameter parameter = getHandler(div).setBatchParam();
-        HonSanteiIdoFukaBatchParameter para = HonsanteiIdoKanendo.createInstance().createIdoBatchParam(parameter);
+        DBB055001_KanendoIdoFukaParameter para = HonsanteiIdoKanendo.createInstance().createIdoBatchParam(parameter);
         return ResponseData.of(para).respond();
     }
 
@@ -148,7 +149,7 @@ public class KanendoFuka {
      * @return ResponseData
      */
     public ResponseData<KanendoFukaDiv> onChange_ddlShoritsuki(KanendoFukaDiv div) {
-        getHandler(div).set帳票作成個別情報();
+        getHandler(div).set帳票作成個別情報(div.getKanendoShoriNaiyo().getDdlShoritsuki().getSelectedKey());
         return ResponseData.of(div).respond();
     }
 

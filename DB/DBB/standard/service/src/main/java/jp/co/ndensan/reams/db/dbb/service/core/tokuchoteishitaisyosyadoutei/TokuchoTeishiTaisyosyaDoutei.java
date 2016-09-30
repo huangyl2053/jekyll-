@@ -39,7 +39,6 @@ public class TokuchoTeishiTaisyosyaDoutei {
     private final RString 広域保険者 = new RString("2");
     private final RString 最新の広域構成市町村 = new RString("0");
     private final RString 表示 = new RString("1");
-    private final SubGyomuCode 介護賦課 = SubGyomuCode.DBB介護賦課;
     private final RString 処理名 = new RString(ShoriName.特徴対象者同定.toString());
     private final DbT7022ShoriDateKanriDac shoriDateKanriDac;
     private final MapperProvider mapperProvider;
@@ -49,6 +48,9 @@ public class TokuchoTeishiTaisyosyaDoutei {
     private static final RString 年度内連番_4 = new RString("0004");
     private static final RString 年度内連番_5 = new RString("0005");
     private static final RString 年度内連番_6 = new RString("0006");
+    private static final RString 年度内連番_7 = new RString("0007");
+    private static final RString 年度内連番_9 = new RString("0009");
+    private static final RString 年度内連番_11 = new RString("0011");
     private static final RString 月捕捉_00 = new RString("00");
     private static final RString 月捕捉_02 = new RString("02");
     private static final RString 月捕捉_04 = new RString("04");
@@ -57,6 +59,12 @@ public class TokuchoTeishiTaisyosyaDoutei {
     private static final RString 月捕捉_08 = new RString("08");
     private static final RString 月捕捉_10 = new RString("10");
     private static final RString 月捕捉_12 = new RString("12");
+    private static final RString 対象者情報取得月_02 = new RString("02");
+    private static final RString 対象者情報取得月_04 = new RString("04");
+    private static final RString 対象者情報取得月_05 = new RString("05");
+    private static final RString 対象者情報取得月_08 = new RString("08");
+    private static final RString 対象者情報取得月_10 = new RString("10");
+    private static final RString 対象者情報取得月_12 = new RString("12");
     private final RString 年次 = new RString("2");
     private final RString 月次 = new RString("1");
 
@@ -71,8 +79,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
     /**
      * 初期化メソッドです。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TokuchoTeishiTaisyosyaDoutei}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuchoTeishiTaisyosyaDoutei}のインスタンス
      */
     public static TokuchoTeishiTaisyosyaDoutei createInstance() {
         return InstanceProvider.create(TokuchoTeishiTaisyosyaDoutei.class);
@@ -90,7 +97,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
         ITokuchoTeishiTaisyosyaDouteiMapper mapper = mapperProvider.create(ITokuchoTeishiTaisyosyaDouteiMapper.class);
 
         TokuchoTeishiTaisyosyaDouteiMybatisParameter param = new TokuchoTeishiTaisyosyaDouteiMybatisParameter();
-        param.set介護賦課(介護賦課);
+        param.set介護賦課(SubGyomuCode.DBB介護賦課);
         param.set処理名(処理名);
         param.set処理年度(処理年度);
         param.set最新の広域構成市町村(最新の広域構成市町村);
@@ -110,7 +117,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
         }
 
         if (単一保険者.equals(モード)) {
-            List<DbT7022ShoriDateKanriEntity> entityList = shoriDateKanriDac.selectShoriDateKanri(介護賦課, 処理名, 処理年度);
+            List<DbT7022ShoriDateKanriEntity> entityList = shoriDateKanriDac.selectShoriDateKanri(SubGyomuCode.DBB介護賦課, 処理名, 処理年度);
             if (entityList == null || entityList.isEmpty()) {
                 return resultEntityList;
             }
@@ -138,7 +145,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
         ITokuchoTeishiTaisyosyaDouteiMapper mapper = mapperProvider.create(ITokuchoTeishiTaisyosyaDouteiMapper.class);
 
         TokuchoTeishiTaisyosyaDouteiMybatisParameter param = new TokuchoTeishiTaisyosyaDouteiMybatisParameter();
-        param.set介護賦課(介護賦課);
+        param.set介護賦課(SubGyomuCode.DBB介護賦課);
         param.set処理年度(処理年度);
         param.set対象者情報取得月(対象者情報取得月);
         param.set特徴対象者情報取込(ShoriName.特徴対象者情報取込.get名称());
@@ -163,7 +170,28 @@ public class TokuchoTeishiTaisyosyaDoutei {
         }
 
         if (単一保険者.equals(モード)) {
-            List<DbT7022ShoriDateKanriEntity> entityList = shoriDateKanriDac.select処理状況一覧情報(介護賦課, 処理年度, 対象者情報取得月);
+            RString shoriName = RString.EMPTY;
+            RString nendoNaiRenban = RString.EMPTY;
+            if (対象者情報取得月_04.equals(対象者情報取得月)) {
+                shoriName = ShoriName.特徴結果情報取込.get名称();
+                nendoNaiRenban = 年度内連番_1;
+            } else if (対象者情報取得月_05.equals(対象者情報取得月)) {
+                shoriName = ShoriName.特徴対象者情報取込.get名称();
+                nendoNaiRenban = 年度内連番_1;
+            } else if (対象者情報取得月_08.equals(対象者情報取得月)) {
+                shoriName = ShoriName.特徴結果情報取込.get名称();
+                nendoNaiRenban = 年度内連番_5;
+            } else if (対象者情報取得月_10.equals(対象者情報取得月)) {
+                shoriName = ShoriName.特徴結果情報取込.get名称();
+                nendoNaiRenban = 年度内連番_7;
+            } else if (対象者情報取得月_12.equals(対象者情報取得月)) {
+                shoriName = ShoriName.特徴結果情報取込.get名称();
+                nendoNaiRenban = 年度内連番_9;
+            } else if (対象者情報取得月_02.equals(対象者情報取得月)) {
+                shoriName = ShoriName.特徴結果情報取込.get名称();
+                nendoNaiRenban = 年度内連番_11;
+            }
+            List<DbT7022ShoriDateKanriEntity> entityList = shoriDateKanriDac.select処理状況一覧情報(処理年度, shoriName, nendoNaiRenban);
             if (entityList == null || entityList.isEmpty()) {
                 return resultEntityList;
             }
@@ -193,7 +221,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
         param.set最新の広域構成市町村(最新の広域構成市町村);
         param.set表示(表示);
         param.set特徴対象者同定(ShoriName.特徴対象者同定.get名称());
-        param.set介護賦課(介護賦課);
+        param.set介護賦課(SubGyomuCode.DBB介護賦課);
         param.set処理年度(処理年度);
 
         if (広域保険者.equals(モード)) {
@@ -206,7 +234,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
         }
 
         if (単一保険者.equals(モード)) {
-            DbT7022ShoriDateKanriEntity entity = shoriDateKanriDac.select今回処理内容情報(介護賦課, 処理年度);
+            DbT7022ShoriDateKanriEntity entity = shoriDateKanriDac.select今回処理内容情報(SubGyomuCode.DBB介護賦課, 処理年度);
             if (entity == null) {
                 return null;
             }

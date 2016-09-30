@@ -7,27 +7,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
+import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.ChohyoShutsuryokuKomokuDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.IChohyoShutsuryokuKomokuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterRestore;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterSave;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * DvKogakuServiceJoho のクラスファイル
- *
- * @reamsid_L DBC-3092-010 sunhui
+ * DvKogakuServiceJoho のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class DvKogakuServiceJohoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -70,7 +67,7 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDvJokenFukugenHozon(DvJokenFukugenHozonDiv DvJokenFukugenHozon) {
+    public void  setDvJokenFukugenHozon(DvJokenFukugenHozonDiv DvJokenFukugenHozon) {
         this.getDvKogakuServiceParam().setDvJokenFukugenHozon(DvJokenFukugenHozon);
     }
 
@@ -80,7 +77,7 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKogakuParamSave(ButtonBatchParameterSave btnKogakuParamSave) {
+    public void  setBtnKogakuParamSave(ButtonBatchParameterSave btnKogakuParamSave) {
         this.getDvKogakuServiceParam().getDvJokenFukugenHozon().setBtnKogakuParamSave(btnKogakuParamSave);
     }
 
@@ -90,7 +87,7 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKogakuParamRestore(ButtonBatchParameterRestore btnKogakuParamRestore) {
+    public void  setBtnKogakuParamRestore(ButtonBatchParameterRestore btnKogakuParamRestore) {
         this.getDvKogakuServiceParam().getDvJokenFukugenHozon().setBtnKogakuParamRestore(btnKogakuParamRestore);
     }
 
@@ -100,7 +97,7 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDvKogakuChushutsuJoken(DvKogakuChushutsuJokenDiv DvKogakuChushutsuJoken) {
+    public void  setDvKogakuChushutsuJoken(DvKogakuChushutsuJokenDiv DvKogakuChushutsuJoken) {
         this.getDvKogakuServiceParam().setDvKogakuChushutsuJoken(DvKogakuChushutsuJoken);
     }
 
@@ -110,20 +107,18 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDvKogakuService(dvKogakuServiceDiv dvKogakuService) {
+    public void  setDvKogakuService(dvKogakuServiceDiv dvKogakuService) {
         this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().setDvKogakuService(dvKogakuService);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtKogakuServiceTeikyoYM() {
-        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getTxtKogakuServiceTeikyoYM();
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM();
     }
 
     @JsonIgnore
-    public void setTxtKogakuServiceTeikyoYM(TextBoxDateRange txtKogakuServiceTeikyoYM) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setTxtKogakuServiceTeikyoYM(txtKogakuServiceTeikyoYM);
+    public void  setTxtKogakuServiceTeikyoYM(TextBoxDateRange txtKogakuServiceTeikyoYM) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuServiceTeikyoYM(txtKogakuServiceTeikyoYM);
     }
 
     @JsonIgnore
@@ -132,9 +127,8 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKogakuShinseiDate(TextBoxDateRange txtKogakuShinseiDate) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setTxtKogakuShinseiDate(txtKogakuShinseiDate);
+    public void  setTxtKogakuShinseiDate(TextBoxDateRange txtKogakuShinseiDate) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuShinseiDate(txtKogakuShinseiDate);
     }
 
     @JsonIgnore
@@ -143,21 +137,18 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKogakuShoriJokyo(DropDownList ddlKogakuShoriJokyo) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setDdlKogakuShoriJokyo(ddlKogakuShoriJokyo);
+    public void  setDdlKogakuShoriJokyo(DropDownList ddlKogakuShoriJokyo) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setDdlKogakuShoriJokyo(ddlKogakuShoriJokyo);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtKogakuHokenshaKetteiDate() {
-        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getTxtKogakuHokenshaKetteiDate();
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuHokenshaKetteiDate();
     }
 
     @JsonIgnore
-    public void setTxtKogakuHokenshaKetteiDate(TextBoxDateRange txtKogakuHokenshaKetteiDate) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setTxtKogakuHokenshaKetteiDate(txtKogakuHokenshaKetteiDate);
+    public void  setTxtKogakuHokenshaKetteiDate(TextBoxDateRange txtKogakuHokenshaKetteiDate) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuHokenshaKetteiDate(txtKogakuHokenshaKetteiDate);
     }
 
     @JsonIgnore
@@ -166,21 +157,18 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKogakuShinsaHoho(DropDownList ddlKogakuShinsaHoho) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setDdlKogakuShinsaHoho(ddlKogakuShinsaHoho);
+    public void  setDdlKogakuShinsaHoho(DropDownList ddlKogakuShinsaHoho) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setDdlKogakuShinsaHoho(ddlKogakuShinsaHoho);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtKogakuKokuhorenKetteiYM() {
-        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getTxtKogakuKokuhorenKetteiYM();
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenKetteiYM();
     }
 
     @JsonIgnore
-    public void setTxtKogakuKokuhorenKetteiYM(TextBoxDateRange txtKogakuKokuhorenKetteiYM) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setTxtKogakuKokuhorenKetteiYM(txtKogakuKokuhorenKetteiYM);
+    public void  setTxtKogakuKokuhorenKetteiYM(TextBoxDateRange txtKogakuKokuhorenKetteiYM) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuKokuhorenKetteiYM(txtKogakuKokuhorenKetteiYM);
     }
 
     @JsonIgnore
@@ -189,45 +177,38 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKogakuSanteiKijun(DropDownList ddlKogakuSanteiKijun) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setDdlKogakuSanteiKijun(ddlKogakuSanteiKijun);
+    public void  setDdlKogakuSanteiKijun(DropDownList ddlKogakuSanteiKijun) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setDdlKogakuSanteiKijun(ddlKogakuSanteiKijun);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtKogakuTaishoshaUketoriYM() {
-        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getTxtKogakuTaishoshaUketoriYM();
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuTaishoshaUketoriYM();
     }
 
     @JsonIgnore
-    public void setTxtKogakuTaishoshaUketoriYM(TextBoxDateRange txtKogakuTaishoshaUketoriYM) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setTxtKogakuTaishoshaUketoriYM(txtKogakuTaishoshaUketoriYM);
+    public void  setTxtKogakuTaishoshaUketoriYM(TextBoxDateRange txtKogakuTaishoshaUketoriYM) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuTaishoshaUketoriYM(txtKogakuTaishoshaUketoriYM);
     }
 
     @JsonIgnore
     public RadioButton getRadKogakuKokuhorenFuicchi() {
-        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getRadKogakuKokuhorenFuicchi();
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi();
     }
 
     @JsonIgnore
-    public void setRadKogakuKokuhorenFuicchi(RadioButton radKogakuKokuhorenFuicchi) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setRadKogakuKokuhorenFuicchi(radKogakuKokuhorenFuicchi);
+    public void  setRadKogakuKokuhorenFuicchi(RadioButton radKogakuKokuhorenFuicchi) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuKokuhorenFuicchi(radKogakuKokuhorenFuicchi);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtKogakuKokuhorenSofuYM() {
-        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getTxtKogakuKokuhorenSofuYM();
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenSofuYM();
     }
 
     @JsonIgnore
-    public void setTxtKogakuKokuhorenSofuYM(TextBoxDateRange txtKogakuKokuhorenSofuYM) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setTxtKogakuKokuhorenSofuYM(txtKogakuKokuhorenSofuYM);
+    public void  setTxtKogakuKokuhorenSofuYM(TextBoxDateRange txtKogakuKokuhorenSofuYM) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuKokuhorenSofuYM(txtKogakuKokuhorenSofuYM);
     }
 
     @JsonIgnore
@@ -236,21 +217,18 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKogakuTaishosha(RadioButton radKogakuTaishosha) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setRadKogakuTaishosha(radKogakuTaishosha);
+    public void  setRadKogakuTaishosha(RadioButton radKogakuTaishosha) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuTaishosha(radKogakuTaishosha);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtKogakuKetteiJohoUketoriYM() {
-        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getTxtKogakuKetteiJohoUketoriYM();
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM();
     }
 
     @JsonIgnore
-    public void setTxtKogakuKetteiJohoUketoriYM(TextBoxDateRange txtKogakuKetteiJohoUketoriYM) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setTxtKogakuKetteiJohoUketoriYM(txtKogakuKetteiJohoUketoriYM);
+    public void  setTxtKogakuKetteiJohoUketoriYM(TextBoxDateRange txtKogakuKetteiJohoUketoriYM) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuKetteiJohoUketoriYM(txtKogakuKetteiJohoUketoriYM);
     }
 
     @JsonIgnore
@@ -259,9 +237,8 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKogakuShinseiKubun(RadioButton radKogakuShinseiKubun) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setRadKogakuShinseiKubun(radKogakuShinseiKubun);
+    public void  setRadKogakuShinseiKubun(RadioButton radKogakuShinseiKubun) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuShinseiKubun(radKogakuShinseiKubun);
     }
 
     @JsonIgnore
@@ -270,9 +247,8 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblKogakuShiharai(Label lblKogakuShiharai) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setLblKogakuShiharai(lblKogakuShiharai);
+    public void  setLblKogakuShiharai(Label lblKogakuShiharai) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setLblKogakuShiharai(lblKogakuShiharai);
     }
 
     @JsonIgnore
@@ -281,9 +257,8 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKogakuShiharaisaki(RadioButton radKogakuShiharaisaki) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setRadKogakuShiharaisaki(radKogakuShiharaisaki);
+    public void  setRadKogakuShiharaisaki(RadioButton radKogakuShiharaisaki) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuShiharaisaki(radKogakuShiharaisaki);
     }
 
     @JsonIgnore
@@ -292,9 +267,18 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblKogakuKetteiGaku(Label lblKogakuKetteiGaku) {
-        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService()
-                .setLblKogakuKetteiGaku(lblKogakuKetteiGaku);
+    public void  setLblKogakuKetteiGaku(Label lblKogakuKetteiGaku) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setLblKogakuKetteiGaku(lblKogakuKetteiGaku);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShinsaNengetsu() {
+        return this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().getTxtShinsaNengetsu();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsaNengetsu(TextBoxDate txtShinsaNengetsu) {
+        this.getDvKogakuServiceParam().getDvKogakuChushutsuJoken().getDvKogakuService().setTxtShinsaNengetsu(txtShinsaNengetsu);
     }
 
     @JsonIgnore
@@ -313,7 +297,7 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDvCsvHenshuHoho(DvCsvHenshuHohoDiv DvCsvHenshuHoho) {
+    public void  setDvCsvHenshuHoho(DvCsvHenshuHohoDiv DvCsvHenshuHoho) {
         this.getDvKogakuServiceParam().setDvCsvHenshuHoho(DvCsvHenshuHoho);
     }
 
@@ -323,18 +307,18 @@ public class DvKogakuServiceJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkCsvHenshuHoho(CheckBoxList chkCsvHenshuHoho) {
+    public void  setChkCsvHenshuHoho(CheckBoxList chkCsvHenshuHoho) {
         this.getDvKogakuServiceParam().getDvCsvHenshuHoho().setChkCsvHenshuHoho(chkCsvHenshuHoho);
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdKogakuShutsuryokujun() {
-        return this.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun();
     }
 
     @JsonIgnore
     public IChohyoShutsuryokuKomokuDiv getCcdKogakuShutsuryokuKomoku() {
         return this.getDvKogakuServiceParam().getCcdKogakuShutsuryokuKomoku();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdKogakuShutsuryokujun() {
+        return this.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun();
     }
 
     // </editor-fold>

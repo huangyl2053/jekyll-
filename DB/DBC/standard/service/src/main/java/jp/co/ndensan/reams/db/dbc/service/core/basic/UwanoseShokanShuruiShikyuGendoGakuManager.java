@@ -149,6 +149,25 @@ public class UwanoseShokanShuruiShikyuGendoGakuManager {
     /**
      * 上乗せ償還払い給付種類支給限度額{@link UwanoseShokanShuruiShikyuGendoGaku}を保存します。
      *
+     * @param 上乗せList {@link UwanoseShokanShuruiShikyuGendoGaku}
+     */
+    @Transaction
+    public void save上乗せList(List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せList) {
+        if (!上乗せList.isEmpty()) {
+            for (UwanoseShokanShuruiShikyuGendoGaku 上乗せ : 上乗せList) {
+                requireNonNull(上乗せ,
+                        UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ償還払い給付種類支給限度額.toString()));
+                if (!上乗せ.hasChanged()) {
+                    continue;
+                }
+                dac.save(上乗せ.toEntity());
+            }
+        }
+    }
+
+    /**
+     * 上乗せ償還払い給付種類支給限度額{@link UwanoseShokanShuruiShikyuGendoGaku}を保存します。
+     *
      * @param insert上乗せList {@link UwanoseShokanShuruiShikyuGendoGaku}
      * @param update上乗せList {@link UwanoseShokanShuruiShikyuGendoGaku}
      */

@@ -25,10 +25,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算支給額計算結果を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
-public class KogakuGassanShikyuGakuKeisanKekka
-    extends ModelBase<KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekka>
-    implements Serializable {
+public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<
+        KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekka>
+        implements Serializable {
 
     private final DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity;
     private final KogakuGassanShikyuGakuKeisanKekkaIdentifier id;
@@ -72,7 +74,8 @@ public class KogakuGassanShikyuGakuKeisanKekka
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}より{@link KogakuGassanShikyuGakuKeisanKekka}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
+     * @param entity
+     * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
      */
     public KogakuGassanShikyuGakuKeisanKekka(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果"));
@@ -496,6 +499,24 @@ public class KogakuGassanShikyuGakuKeisanKekka
     }
 
     /**
+     * 再送フラグを返します。
+     *
+     * @return 送付年月
+     */
+    public RString get再送フラグ() {
+        return entity.getSaisoFG();
+    }
+
+    /**
+     * 支給額計算結果連絡票作成年月日を返します。
+     *
+     * @return 送付年月
+     */
+    public FlexibleDate get支給額計算結果連絡票作成年月日() {
+        return entity.getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD();
+    }
+
+    /**
      * {@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}のクローンを返します。
      *
      * @return {@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}のクローン
@@ -508,7 +529,8 @@ public class KogakuGassanShikyuGakuKeisanKekka
     /**
      * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}を返します。
      *
-     * @return 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
+     * @return
+     * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
      */
     @Override
     public KogakuGassanShikyuGakuKeisanKekkaIdentifier identifier() {
@@ -545,7 +567,7 @@ public class KogakuGassanShikyuGakuKeisanKekka
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -6,74 +6,58 @@
 package jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShichosonJohoShutoku;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.SichousonEntity;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 所得情報抽出・連携（バッチ）のProcessパラメータです。
  *
- * @reamsid_L DBB-1690-060 sunhui
+ * @reamsid_L DBB-1690-060 gongliang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcessParameter {
 
-    private FlexibleYear shorinendo;
-    private List<ShichosonJohoShutoku> shichosonJohoList;
-    private long shutsuryokujunID;
-    private ReportId chohyoID;
-    private RString sharefilesname;
-    private RString sharefilesID;
-    private RString shorikubun;
-    private YMDHMS shorinichiji;
+    private FlexibleYear 処理年度;
+    private List<SichousonEntity> 市町村情報List;
+    private RString 出力順ID;
+    private ReportId 帳票ID;
+    private RString ファイル名;
+    private RString 共有ファイル名;
+    private RDateTime 共有ファイルID;
+    private RString 処理区分;
+    private YMDHMS 処理日時;
 
     /**
      * コンストラクタです。
      *
-     * @param shorinendo FlexibleYear
-     * @param shichosonJohoList List<ShichosonJohoEntity>
-     * @param shutsuryokujunID long
-     * @param chohyoID ReportId
-     * @param sharefilesname RString
-     * @param sharefilesID RDateTime
-     * @param shorikubun RString
-     * @param shorinichiji YMDHMS
+     * @param 処理年度 FlexibleYear
+     * @param 市町村情報List List<SichousonEntity>
+     * @param 出力順ID RString
+     * @param 帳票ID ReportId
+     * @param ファイル名 RString
+     * @param 共有ファイル名 RString
+     * @param 共有ファイルID RDateTime
+     * @param 処理区分 RString
+     * @param 処理日時 YMDHMS
      */
-    public ShutokuJohoShuchutsuRenkeiProcessParameter(FlexibleYear shorinendo,
-            List<ShichosonJohoShutoku> shichosonJohoList, long shutsuryokujunID, ReportId chohyoID,
-            RString sharefilesname, RString sharefilesID, RString shorikubun, YMDHMS shorinichiji) {
-        this.shorinendo = shorinendo;
-        this.shichosonJohoList = shichosonJohoList;
-        this.shutsuryokujunID = shutsuryokujunID;
-        this.chohyoID = chohyoID;
-        this.sharefilesname = sharefilesname;
-        this.sharefilesID = sharefilesID;
-        this.shorikubun = shorikubun;
-        this.shorinichiji = shorinichiji;
-    }
-
-    /**
-     * 所得情報抽出・連携（バッチ）のMyBatisパラメータ作成です。
-     *
-     * @return 所得情報抽出・連携（バッチ）のMyBatisパラメータ
-     */
-    public ShutokuJohoChushutsuRenkeiMybatisParameter toMybatisParamter() {
-
-        return new ShutokuJohoChushutsuRenkeiMybatisParameter(
-                shorinendo,
-                shichosonJohoList,
-                shutsuryokujunID,
-                chohyoID,
-                sharefilesname,
-                sharefilesID,
-                shorikubun,
-                shorinichiji
-        );
+    public ShutokuJohoShuchutsuRenkeiProcessParameter(FlexibleYear 処理年度,
+            List<SichousonEntity> 市町村情報List, RString 出力順ID, ReportId 帳票ID, RString ファイル名,
+            RString 共有ファイル名, RDateTime 共有ファイルID, RString 処理区分, YMDHMS 処理日時) {
+        this.処理年度 = 処理年度;
+        this.市町村情報List = 市町村情報List;
+        this.出力順ID = 出力順ID;
+        this.帳票ID = 帳票ID;
+        this.ファイル名 = ファイル名;
+        this.共有ファイル名 = 共有ファイル名;
+        this.共有ファイルID = 共有ファイルID;
+        this.処理区分 = 処理区分;
+        this.処理日時 = 処理日時;
     }
 }

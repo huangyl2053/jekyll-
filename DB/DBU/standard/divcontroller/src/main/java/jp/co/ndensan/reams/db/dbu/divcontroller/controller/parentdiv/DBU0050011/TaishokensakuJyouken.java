@@ -37,7 +37,7 @@ public class TaishokensakuJyouken {
      */
     public ResponseData<TaishokensakuJyoukenDiv> onload(TaishokensakuJyoukenDiv div) {
         Boolean is詳細画面から = ViewStateHolder.get(ViewStateKey.is詳細画面から, Boolean.class);
-        RString 市町村名称 = ViewStateHolder.get(TaishokensakuJyoukenHandler.DBU0050011ViewStateKey.選択市町村名称, RString.class);
+        RString 市町村名称 = ViewStateHolder.get(ViewStateKey.選択市町村名称, RString.class);
         getHandler(div).onload(is詳細画面から, 市町村名称);
         return ResponseData.of(div).respond();
     }
@@ -75,6 +75,7 @@ public class TaishokensakuJyouken {
                 getHandler(div).get市町村コード(div.getDdlShichoson().getSelectedKey()),
                 div.getDdlShichoson().getSelectedValue());
         ViewStateHolder.put(ViewStateKey.様式４, isuranceInfEntity);
+        ViewStateHolder.put(ViewStateKey.選択市町村名称, div.getDdlShichoson().getSelectedValue());
         return ResponseData.of(div).forwardWithEventName(追加).respond();
     }
 
@@ -87,6 +88,7 @@ public class TaishokensakuJyouken {
     public ResponseData<TaishokensakuJyoukenDiv> onClick_btnModify(TaishokensakuJyoukenDiv div) {
         InsuranceInformation insuranceInformation = getHandler(div).onClick_btnModify();
         ViewStateHolder.put(ViewStateKey.様式４, insuranceInformation);
+        ViewStateHolder.put(ViewStateKey.選択市町村名称, div.getDdlShichoson().getSelectedValue());
         return ResponseData.of(div).forwardWithEventName(DBU0050011TransitionEventName.修正).respond();
     }
 
@@ -99,6 +101,7 @@ public class TaishokensakuJyouken {
     public ResponseData<TaishokensakuJyoukenDiv> onClick_btnDelete(TaishokensakuJyoukenDiv div) {
         InsuranceInformation insuranceInformation = getHandler(div).onClick_btnDelete();
         ViewStateHolder.put(ViewStateKey.様式４, insuranceInformation);
+        ViewStateHolder.put(ViewStateKey.選択市町村名称, div.getDdlShichoson().getSelectedValue());
         if (入力済.equals(insuranceInformation.get様式４入力状況())) {
             return ResponseData.of(div).forwardWithEventName(削除).parameter(様式４);
         } else if (入力済.equals(insuranceInformation.get様式４の２入力状況())) {

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207011.DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -36,8 +36,8 @@ public class ShiharaiHohoHenkoHaakuIchiran {
      * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return 支払方法変更滞納者把握リスト（画面）バッチパラメター
      */
-    public ShiharaiHohoHenkoHaakuIchiranBatchParameter createShiharaiHohoHenkoHaakuIchiranParameter(ShiharaiHohoHenkoHakuListMainDiv div) {
-        ShiharaiHohoHenkoHaakuIchiranBatchParameter parameter = new ShiharaiHohoHenkoHaakuIchiranBatchParameter();
+    public DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter createShiharaiHohoHenkoHaakuIchiranParameter(ShiharaiHohoHenkoHakuListMainDiv div) {
+        DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter parameter = new DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter();
         parameter.setKijunYMD(div.getChushutsuJoken().getTxtKijunYMD().getValue());
         if (!div.getRadHihokenshaAll().getSelectedKey().isNullOrEmpty()) {
             parameter.setHihokenshaAll(SELECTED_VALUE);

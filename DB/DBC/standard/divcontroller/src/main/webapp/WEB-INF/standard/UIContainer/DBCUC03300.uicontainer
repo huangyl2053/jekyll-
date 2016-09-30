@@ -67,6 +67,34 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0330011",
+     "layoutTitle": "高額サービス費等受領委任払決定登録",
+     "eventName": "世帯情報表示",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0030013",
+     "toLayoutTitle": "高額介護サービス費照会",
+     "toState": "世帯情報一覧"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0030013",
+     "layoutTitle": "高額介護サービス費照会",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0330011",
+     "toLayoutTitle": "高額サービス費等受領委任払決定登録",
+     "toState": ""
     }
    ]
   }

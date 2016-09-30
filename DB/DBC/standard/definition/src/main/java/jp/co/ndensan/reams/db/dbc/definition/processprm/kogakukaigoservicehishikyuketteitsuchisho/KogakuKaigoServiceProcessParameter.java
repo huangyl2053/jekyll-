@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishi
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -27,7 +28,7 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
     private RString 抽出モード;
     private RDate 抽出条件日付From;
     private RDate 抽出条件日付To;
-    private RDate 決定者受付年月;
+    private FlexibleYearMonth 決定者受付年月;
     private RString 印書;
     private RString 高額自動償還;
     private RDate 発行日;
@@ -51,7 +52,7 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
      * @param 抽出モード RString
      * @param 抽出条件日付From RDate
      * @param 抽出条件日付To RDate
-     * @param 決定者受付年月 RDate
+     * @param 決定者受付年月 FlexibleYearMonth
      * @param 印書 RString
      * @param 高額自動償還 RString
      * @param 発行日 RDate
@@ -72,7 +73,7 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
     public KogakuKaigoServiceProcessParameter(RString 抽出モード,
             RDate 抽出条件日付From,
             RDate 抽出条件日付To,
-            RDate 決定者受付年月,
+            FlexibleYearMonth 決定者受付年月,
             RString 印書,
             RString 高額自動償還,
             RDate 発行日,
@@ -118,8 +119,8 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
      */
     public KogakukaigoKetteiTsuchishoInfoTempParameter toパラメータ() {
         return new KogakukaigoKetteiTsuchishoInfoTempParameter(抽出モード, 抽出条件日付From, 抽出条件日付To,
-                決定者受付年月, 印書, 高額自動償還, 発行日, 文書番号, テスト出力フラグ, 決定日一括更新区分,
-                決定日, 利用者向け決定通知書フラグ, 受領委任者向け決定通知書フラグ, 振込予定日, 支払場所,
-                支払期間From, 支払期間To, 開始時間, 終了時間, 出力順ID);
+                決定者受付年月, 印書, 高額自動償還, 発行日, 文書番号,
+                テスト出力フラグ, 決定日一括更新区分, 決定日, 利用者向け決定通知書フラグ, 受領委任者向け決定通知書フラグ, 振込予定日,
+                支払場所, 支払期間From, 支払期間To, 開始時間, 終了時間, 出力順ID);
     }
 }

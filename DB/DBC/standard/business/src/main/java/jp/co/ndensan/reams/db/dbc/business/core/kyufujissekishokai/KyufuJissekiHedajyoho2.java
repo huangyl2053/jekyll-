@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +20,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufuJissekiHedajyoho2 {
+public class KyufuJissekiHedajyoho2 implements Serializable {
+
+    private static final long serialVersionUID = -126557749316409820L;
 
     private FlexibleYearMonth サービス提供年月;
     private RString 給付実績区分コード;

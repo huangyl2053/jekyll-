@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6220001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hoshushiharaijunbipanel.HoshushiharaiJumbiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE622001.DBE622001_ShiharaidataSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6220001.HoshushiharaiJumbiDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,10 +32,10 @@ public class HoshushiharaiJumbiPanelHandler {
     /**
      * 発行するボタン処理です
      *
-     * @return HoshushiharaiJumbiBatchParameter
+     * @return DBE622001_ShiharaidataSakuseiParameter
      */
-    public HoshushiharaiJumbiBatchParameter onClick_btnHakkou() {
-        HoshushiharaiJumbiBatchParameter batchParameter = new HoshushiharaiJumbiBatchParameter();
+    public DBE622001_ShiharaidataSakuseiParameter onClick_btnHakkou() {
+        DBE622001_ShiharaidataSakuseiParameter batchParameter = new DBE622001_ShiharaidataSakuseiParameter();
         FlexibleDate fbFrom = new FlexibleDate(div.getTxtJissekiDateRange().getFromValue().toDateString());
         FlexibleDate fbTo = new FlexibleDate(div.getTxtJissekiDateRange().getToValue().toDateString());
         batchParameter.setJissekidaterangefrom(fbFrom);

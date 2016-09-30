@@ -70,8 +70,7 @@ public class ShokkenTorikeshiIchibuSoshituManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokkenTorikeshiIchibuSoshituManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShokkenTorikeshiIchibuSoshituManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShokkenTorikeshiIchibuSoshituManager}のインスタンス
      */
     public static ShokkenTorikeshiIchibuSoshituManager createInstance() {
         return InstanceProvider.create(ShokkenTorikeshiIchibuSoshituManager.class);
@@ -207,7 +206,7 @@ public class ShokkenTorikeshiIchibuSoshituManager {
     public int save申請履歴情報(DbT4121ShinseiRirekiJoho 申請履歴情報, EntityDataState state) {
         DbT4121ShinseiRirekiJohoEntity entity = 申請履歴情報.toEntity();
         entity.setState(state);
-        return 申請履歴情報Dac.insert(entity);
+        return 申請履歴情報Dac.save(entity);
     }
 
     /**

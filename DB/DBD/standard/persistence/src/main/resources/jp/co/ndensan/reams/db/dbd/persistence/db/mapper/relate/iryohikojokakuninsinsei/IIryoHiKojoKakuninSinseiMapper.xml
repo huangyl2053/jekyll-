@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-5770-030 tz_chengpeng-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper">
+    <select resultOrdered="true" id="受給者台帳抽出"
+            resultType="Integer" fetchSize="500">
+        SELECT
+        COUNT(DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo")
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS DbT4001JukyushaDaicho
+        WHERE
+        DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" = #{被保険者番号}
+        AND
+        DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_yukoMukoKubun" = '1'
+        AND
+        DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_logicalDeletedFlag" = false
+    </select>
+
+    <select resultOrdered="true" id="select受給者台帳情報"
+            resultMap="resultmap_getSogoJigyouTaisyouSyaJyohoJoho" fetchSize="500">
+        SELECT Jukyu."ninteiYukoKikanKaishiYMD", Jukyu."ninteiYukoKikanShuryoYMD", Jukyu."ikenshoJuryoYMD",
+        Jukyu."hihokenshaNo",Jukyu."rirekiNo",Jukyu."edaban"
+        FROM(
+        SELECT Jukyu."ninteiYukoKikanKaishiYMD", Jukyu."ninteiYukoKikanShuryoYMD",Jukyu."shinseishoKanriNo", Shuji."ikenshoJuryoYMD",
+        Jukyu."hihokenshaNo",Jukyu."rirekiNo",Jukyu."edaban"
+        FROM rgdb."DbT4001JukyushaDaicho" AS Jukyu
+        LEFT JOIN(
+        SELECT "ikenshoJuryoYMD","shinseishoKanriNo"
+        FROM rgdb."DbT4302ShujiiIkenshoJoho" as Shuji1
+        WHERE NOT EXISTS (
+        SELECT 1
+        FROM rgdb."DbT4302ShujiiIkenshoJoho"
+        WHERE rgdb."DbT4302ShujiiIkenshoJoho"."shinseishoKanriNo" = Shuji1."shinseishoKanriNo"
+        AND rgdb."DbT4302ShujiiIkenshoJoho"."ikenshoIraiRirekiNo" > Shuji1."ikenshoIraiRirekiNo")) as Shuji
+        ON Shuji."shinseishoKanriNo" = Jukyu."shinseishoKanriNo"
+        WHERE Jukyu."hihokenshaNo" = #{被保険者番号}
+        AND Jukyu."yukoMukoKubun" = '1'
+        AND (
+        SUBSTR(Jukyu."ninteiYukoKikanKaishiYMD",0, 5) <![CDATA[<=]]> #{対象年}
+        AND (
+        SUBSTR(Jukyu."ninteiYukoKikanShuryoYMD",0, 5) <![CDATA[>=]]> #{対象年}
+        OR Jukyu."ninteiYukoKikanShuryoYMD" = ''))
+        ) as Jukyu
+
+        WHERE Jukyu."hihokenshaNo"  = #{被保険者番号}
+        AND NOT EXISTS (
+        SELECT 1
+        FROM (
+        SELECT Jukyu2."ninteiYukoKikanKaishiYMD", Jukyu2."ninteiYukoKikanShuryoYMD",Jukyu2."hihokenshaNo",
+        Jukyu2."rirekiNo",Jukyu2."edaban"
+        FROM  rgdb."DbT4001JukyushaDaicho" AS Jukyu2
+        WHERE Jukyu2."hihokenshaNo"  = #{被保険者番号}
+        AND Jukyu2."yukoMukoKubun" = '1'
+        AND (
+        SUBSTR(Jukyu2."ninteiYukoKikanKaishiYMD",0, 5) <![CDATA[<=]]> #{対象年}
+        AND (
+        SUBSTR(Jukyu2."ninteiYukoKikanShuryoYMD",0, 5) <![CDATA[>=]]> #{対象年}
+        OR Jukyu2."ninteiYukoKikanShuryoYMD" = ''))
+        ) AS Jukyu1
+        WHERE Jukyu1."hihokenshaNo"  = Jukyu."hihokenshaNo"
+        AND (Jukyu1."rirekiNo" > Jukyu."rirekiNo"
+        OR (Jukyu1."rirekiNo" = Jukyu."rirekiNo"
+        AND Jukyu1."edaban" > Jukyu."edaban")))
+        ORDER BY Jukyu."hihokenshaNo", Jukyu."ninteiYukoKikanKaishiYMD" DESC
+    </select>
+
+    <resultMap id="resultmap_getIryohikojyoChohyo" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="控除対象年" column="kojoTaishoNen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録年月日" column="torokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="申請年月日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="主治医意見書受領年月日" column="shujiiIkenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="日常生活自立度" column="nichijoSeikatsuJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="尿失禁の有無" column="nyoshikkinHassei" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="発行年月日" column="hakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="select医療費控除情報"
+            resultMap="resultmap_getIryohikojyoChohyo" fetchSize="500">
+        SELECT
+        "hihokenshaNo" ,
+        "kojoTaishoNen" ,
+        "dataKubun",
+        "torokuYMD" ,
+        "shinseiYMD" ,
+        "ninteiYukoKikanKaishiYMD" ,
+        "ninteiYukoKikanShuryoYMD" ,
+        "shujiiIkenshoJuryoYMD" ,
+        "nichijoSeikatsuJiritsudo" ,
+        "nyoshikkinHassei" ,
+        "hakkoYMD"
+        FROM        rgdb."DbT4401IryohiKojo"
+        WHERE   "hihokenshaNo" = #{被保険者番号}
+        AND     "logicalDeletedFlag" = FALSE
+        ORDER BY "dataKubun","kojoTaishoNen" DESC
+    </select>
+    
+    <select resultOrdered="true" id="select単票用医療費控除"
+            resultMap="resultmap_getIryohikojyoChohyo" fetchSize="500">
+        SELECT
+        "hihokenshaNo" ,
+        "kojoTaishoNen" ,
+        "dataKubun",
+        "torokuYMD" ,
+        "shinseiYMD" ,
+        "ninteiYukoKikanKaishiYMD" ,
+        "ninteiYukoKikanShuryoYMD" ,
+        "shujiiIkenshoJuryoYMD" ,
+        "nichijoSeikatsuJiritsudo" ,
+        "nyoshikkinHassei" ,
+        "hakkoYMD"
+        FROM		rgdb."DbT4401IryohiKojo"
+        WHERE	"hihokenshaNo" = #{被保険者番号}
+        AND		"dataKubun" = #{データ区分}
+        AND		"logicalDeletedFlag" = FALSE
+        ORDER BY "kojoTaishoNen" DESC
+    </select>
+
+    <select resultOrdered="true" id="select宛名情報"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+    </select>
+
+    <resultMap id="resultmap_getSogoJigyouTaisyouSyaJyohoJoho" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho" autoMapping="true">
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="主治医意見書受領年月日" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+</mapper>

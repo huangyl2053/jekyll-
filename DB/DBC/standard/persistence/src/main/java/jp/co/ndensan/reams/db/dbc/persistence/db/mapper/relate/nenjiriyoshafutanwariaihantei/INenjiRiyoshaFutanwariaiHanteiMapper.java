@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenjiriyoshafuta
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiMybaticParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.HanteiTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.JukyushaDaichoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.SogoJigyoTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
@@ -49,7 +49,14 @@ public interface INenjiRiyoshaFutanwariaiHanteiMapper {
      *
      * @return 判定対象者情報
      */
-    List<HanteiTaishoshaEntity> getHanteiTaishoshaTemp();
+    List<SogoJigyoTaishoshaTempEntity> getHanteiTaishoshaTemp_SogoJigyo();
+
+    /**
+     * 判定対象者TEMPを検索する
+     *
+     * @return 判定対象者情報
+     */
+    List<JukyushaDaichoTempEntity> getHanteiTaishoshaTemp_JukyuSha();
 
     /**
      * 利用者負担割合明細を削除する
@@ -82,5 +89,12 @@ public interface INenjiRiyoshaFutanwariaiHanteiMapper {
      * @return 処理日付管理マスタ情報
      */
     List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタ(NenjiRiyoshaFutanwariaiHanteiMybaticParameter parameter);
+
+    /**
+     * 処理結果確認リストを検索する
+     *
+     * @return 処理結果確認リスト情報
+     */
+    List<DbWT1801ShoriKekkaKakuninListEntity> get処理結果確認リスト();
 
 }

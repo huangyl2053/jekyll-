@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-3370-010 yuqingzhang--> 
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigoshiensenmoninjouhou.IKaigoShienSenmoninJouhouMapper">
+    <select id="select介護支援専門員情報" resultOrdered="true" resultMap="allColumns_KaigoShienSenmoninJouhouEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigoshiensenmoninjouhou.KaigoShienSenmoninJouhouParameter"  fetchSize="500">
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7064CareManegerMapper.allColumns_DbT7064CareManeger" />,
+        "dbt7060"."shozokuJigyoshaNo" AS "shozokuJigyoshaNo",
+        "dbt7060"."shozokuJigyoshaMei" AS "shozokuJigyoshaMei"
+        FROM "rgdb"."DbT7064CareManeger" AS "DbT7064CareManeger"
+        INNER JOIN (
+            SELECT 
+                temp."shozokuJigyoshaNo" AS "shozokuJigyoshaNo",
+                temp."shozokuJigyoshaMei" AS "shozokuJigyoshaMei"
+            FROM 
+                (SELECT 
+                    "DbT7060KaigoJigyosha"."jigyoshaNo" AS "shozokuJigyoshaNo",
+                    "DbT7060KaigoJigyosha"."jigyoshaName" AS "shozokuJigyoshaMei",
+                    ROW_NUMBER() OVER (PARTITION BY "DbT7060KaigoJigyosha"."jigyoshaNo" ORDER BY "DbT7060KaigoJigyosha"."yukoKaishiYMD" DESC) AS 行番
+                FROM "rgdb"."DbT7060KaigoJigyosha" AS "DbT7060KaigoJigyosha"
+                ) AS temp
+            WHERE temp.行番 = 1
+        ) AS "dbt7060"
+        ON "DbT7064CareManeger"."shozokuJigyoshaNo" = "dbt7060"."shozokuJigyoshaNo"
+        WHERE "DbT7064CareManeger"."isDeleted" = false
+        <if test="介護支援専門員番号 != null and 介護支援専門員番号 != ''">
+            AND "DbT7064CareManeger"."kaigoShienSenmoninNo" = #{介護支援専門員番号}
+        </if>
+        <if test="所属事業者番号 != null and 所属事業者番号 != ''">
+            AND "DbT7064CareManeger"."shozokuJigyoshaNo" = #{所属事業者番号}
+        </if>
+        <if test="カナ氏名 != null and !isカナ氏名の前方一致">
+            AND "DbT7064CareManeger"."kaigoShienSenmoninMeiKana" = #{カナ氏名}
+        </if>
+        <if test="カナ氏名 != null and isカナ氏名の前方一致">
+            AND "DbT7064CareManeger"."kaigoShienSenmoninMeiKana" LIKE #{カナ氏名} || '%'
+        </if>
+        <if test="漢字氏名 != null and !is漢字氏名の前方一致">
+            AND "DbT7064CareManeger"."kaigoShienSenmoninMei" = #{漢字氏名}
+        </if>
+        <if test="漢字氏名 != null and is漢字氏名の前方一致">
+            AND "DbT7064CareManeger"."kaigoShienSenmoninMei" LIKE #{漢字氏名} || '%'
+        </if>
+        <if test="有効開始年月日 != null">
+            AND "DbT7064CareManeger"."yukoKaishiDate" <![CDATA[>=]]> #{有効開始年月日}
+        </if>
+        <if test="有効終了年月日 != null">
+            AND "DbT7064CareManeger"."yukoShuryoDate" <![CDATA[<=]]> #{有効終了年月日}
+        </if>
+        <if test="最大表示件数 > 0">
+            LIMIT #{最大表示件数}
+        </if>
+    </select>
+    <resultMap id= "allColumns_KaigoShienSenmoninJouhouEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigoshiensenmoninjouhou.KaigoShienSenmoninJouhouEntity"
+               autoMapping="true">
+        <id property="careManegerentity.kaigoShienSenmoninNo" column="dbT7064CareManeger_kaigoShienSenmoninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shozokuJigyoshaNo" column="shozokuJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shozokuJigyoshaMei" column="shozokuJigyoshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="careManegerentity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7064CareManegerMapper.ResultMap_DbT7064CareManegerEntity"/>
+    </resultMap>
+    <select id="select介護支援専門員番号の重複チェック" resultOrdered="true" resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigoshiensenmoninjouhou.KaigoShienSenmoninJouhouParameter"  fetchSize="500">
+        SELECT 
+        count(0)
+        FROM "rgdb"."DbT7064CareManeger" AS "DbT7064CareManeger"
+        WHERE "DbT7064CareManeger"."isDeleted" = false
+        AND "DbT7064CareManeger"."kaigoShienSenmoninNo" = #{介護支援専門員番号}
+    </select>
+</mapper>

@@ -38,16 +38,16 @@
     </resultMap>
 
     <sql id="allColumns_kohifutanshaChohyo">
-        DbWT3060."hdrShoHokenshaNo" AS dbWT3060_hdrShoHokenshaNo,
-        DbWT3060."hdrShoHokenshaMei" AS dbWT3060_hdrShoHokenshaMei,
-        DbWT3061."toriatsukaiYm" AS dbWT3061_toriatsukaiYm,
+        DbWT3060."shoKisaiHokenshaNo" AS dbWT3060_hdrShoHokenshaNo,
+        DbWT3060."shoKisaiHokenshaName" AS dbWT3060_hdrShoHokenshaMei,
+        DbWT3061."toriatsukaiYM" AS dbWT3061_toriatsukaiYm,
         DbWT3061."jigyoshoNo" AS dbWT3061_jigyoshoNo,
-        DbWT3061."jigyoshoMei" AS dbWT3061_jigyoshoMei,
+        DbWT3061."jigyoshoName" AS dbWT3061_jigyoshoMei,
         DbWT3061."kohiJukyushaNo" AS dbWT3061_kohiJukyushaNo,
         DbWT0001."meisho" AS dbWT0001_meisho,
         DbWT3061."kohiShokisaiHokenshaNo" AS dbWT3061_kohiShokisaiHokenshaNo,
         DbWT0001."hihokenshaNo" AS dbWT0001_hihokenshaNo,
-        DbWT3061."serviceTeikyoYm" AS dbWT3061_serviceTeikyoYm,
+        DbWT3061."serviceTeikyoYM" AS dbWT3061_serviceTeikyoYm,
         DbWT3061."serviceShuruiCode" AS dbWT3061_serviceShuruiCode,
         DbWT3061."serviceShuruiName" AS dbWT3061_serviceShuruiName,
         DbWT3061."kagomoushitateJiyuCode" AS dbWT3061_kagomoushitateJiyuCode,

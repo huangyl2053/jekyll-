@@ -423,13 +423,13 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onBlur_txtRiyoYM(ServiceRiyohyoInfoDiv div) {
+        RDate 利用年月日 = div.getTxtRiyoYM().getValue();
+        if (利用年月日 == null) {
+            return ResponseData.of(div).respond();
+        }
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
-        RDate 利用年月日 = div.getTxtRiyoYM().getValue();
-        FlexibleYearMonth 利用年月 = null;
-        if (利用年月日 != null) {
-            利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
-        }
+        FlexibleYearMonth 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
         getHandler(div).set区分支給限度額(被保険者番号, 居宅総合事業区分, 利用年月);
         return ResponseData.of(div).respond();
     }

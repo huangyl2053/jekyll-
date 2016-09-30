@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-//import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -49,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleDateOperator;
@@ -186,6 +186,8 @@ public class TaishoshaSearch {
             // 最近処理者履歴の保存
             save最近処理者(div, 対象者);
             div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result, 最大表示件数));
+
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.FALSE);
             // 次画面遷移
             return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
             // 検索結果が２件以上の場合
@@ -203,6 +205,8 @@ public class TaishoshaSearch {
             div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result, 最大表示件数));
             div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder()
                     .getTxtMaxNumber().setValue(new Decimal(最大表示件数));
+
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.TRUE);
             // 画面状態遷移
             return ResponseData.of(div).setState(該当者一覧);
         }
@@ -234,6 +238,8 @@ public class TaishoshaSearch {
             }
             div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(対象者, 最近処理者検索数));
         }
+
+        ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.FALSE);
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
@@ -254,6 +260,12 @@ public class TaishoshaSearch {
         save最近処理者(div);
         // ViewState_個人確定キーの保存
         put対象者Key(create対象者Key(div));
+
+        if (該当者一覧.getName().equals(ResponseHolder.getState())) {
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.TRUE);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.FALSE);
+        }
         // 次画面遷移
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }

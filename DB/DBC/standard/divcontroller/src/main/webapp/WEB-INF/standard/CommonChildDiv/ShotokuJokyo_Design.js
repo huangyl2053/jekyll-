@@ -4,6 +4,10 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
+
             Events.onClick_btnKakutei = function () {
                 return "onClick_btnKakutei";
             };

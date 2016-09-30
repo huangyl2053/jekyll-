@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5920001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.itakusakichosainichiran.ItakusakiChosainIchiranBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE592001.DBE592001_ItakusakiChosainParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5920001.ItakusakiChosainIchiranDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -55,7 +55,7 @@ public class ItakusakiChosainIchiran {
      * @param div ItakusakiChosainIchiranDiv
      * @return ResponseData<ItakusakiChosainIchiranBatchParamter>
      */
-    public ResponseData<ItakusakiChosainIchiranBatchParamter> onclick_Publis(ItakusakiChosainIchiranDiv div) {
+    public ResponseData<DBE592001_ItakusakiChosainParameter> onclick_Publis(ItakusakiChosainIchiranDiv div) {
         return ResponseData.of(getHandler(div).onclick_Publis()).respond();
     }
 

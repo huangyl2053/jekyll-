@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -22,7 +23,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufuJissekiHedajyoho1 {
+public class KyufuJissekiHedajyoho1 implements Serializable {
+
+    private static final long serialVersionUID = 6645317330879336163L;
 
     private HihokenshaNo 被保険者番号;
     private ShikibetsuCode 識別コード;

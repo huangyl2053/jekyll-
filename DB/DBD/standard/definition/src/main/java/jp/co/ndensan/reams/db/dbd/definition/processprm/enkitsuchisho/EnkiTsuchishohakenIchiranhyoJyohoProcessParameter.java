@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.enkitsuchisho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho.EnkiTsuchishoJyohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho.EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,7 +28,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
     private FlexibleDate 処理見込み日From;
     private FlexibleDate 処理見込み日To;
     private FlexibleDate 通知書発行日;
-    private List<ShinseishoKanriNo> 申請書管理番号リスト;
+    private List<RString> 申請書管理番号リスト;
 
     /**
      * コンストラクタです。
@@ -45,7 +44,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
             FlexibleDate shorimikomibiFrom,
             FlexibleDate shorimikomibiTo,
             FlexibleDate tsuchishohakkonbi,
-            List<ShinseishoKanriNo> shinseishokanribangorisuto) {
+            List<RString> shinseishokanribangorisuto) {
         this.画面モード = gamenmodo;
         this.処理見込み日From = shorimikomibiFrom;
         this.処理見込み日To = shorimikomibiTo;

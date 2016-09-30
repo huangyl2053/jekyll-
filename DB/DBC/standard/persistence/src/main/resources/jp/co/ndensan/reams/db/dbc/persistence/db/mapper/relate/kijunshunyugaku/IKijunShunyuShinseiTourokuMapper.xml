@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4620-010 wangkanglei -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunshunyugaku.IKijunShunyuShinseiTourokuMapper">
+    <!-- 被保険者番号に一致する最新のレコードを取得 -->
+    <select  resultOrdered="true" id="get被保険者台帳" 
+             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity" 
+             parameterType="java.util.Map" 
+             fetchSize="500">
+        SELECT 
+            A.*
+        FROM (
+            SELECT
+                B.*,
+                row_number() OVER (PARTITION BY B."hihokenshaNo" ORDER BY B."idoYMD" DESC, B."edaNo" DESC ) AS rowNo
+            FROM rgdb."DbT1001HihokenshaDaicho" AS B) AS A
+        WHERE
+        A.rowNo = 1
+        AND A."hihokenshaNo" = #{被保険者番号}
+    </select>
+</mapper>

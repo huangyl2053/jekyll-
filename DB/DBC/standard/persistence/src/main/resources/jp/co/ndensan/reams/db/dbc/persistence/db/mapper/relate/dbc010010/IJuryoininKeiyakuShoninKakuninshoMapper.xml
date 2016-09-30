@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-1910-030 yuanzhenxia -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc010010.IJuryoininKeiyakuShoninKakuninshoMapper">
+   <select id="get受領委任データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc010010.JuryoininKeiyakuShoninKakuninshoMybatisParameter"
+           resultMap="受領委任データResultMap" resultOrdered="true" fetchSize="500">
+       SELECT 
+           償還受領委任契約者.*,
+           受領委任契約事業者.*,
+           被保険者台帳管理NEWEST."shichosonCode",
+           被保険者台帳管理NEWEST."shikibetsuCode",
+           宛名PSM."meisho",
+           宛名PSM."kanaMeisho",
+           宛名PSM."seinengappiYMD",
+           宛名PSM."seibetsuCode",
+           宛名PSM."yubinNo",
+           宛名PSM."zenkokuJushoCode",
+           宛名PSM."gyoseikuCode",
+           宛名PSM."juminShubetsuCode",
+           宛名PSM."jusho",
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+       FROM
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.noDeleted_DbT3078ShokanJuryoininKeiyakusha" />) AS 償還受領委任契約者
+       LEFT JOIN
+           (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3077JuryoininKeiyakuJigyosha" />) AS 受領委任契約事業者
+       ON 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" = 受領委任契約事業者."dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaNo"
+       LEFT JOIN 
+           rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理NEWEST
+       ON  償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_hihokenshaNo" = 被保険者台帳管理NEWEST."hihokenshaNo"
+       LEFT JOIN
+           rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
+           '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM  
+       ON  宛名PSM."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
+       LEFT JOIN 
+           rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+       ON  "Atesaki"."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
+       WHERE 
+           #{契約申請日開始} <![CDATA[<=]]> 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD"
+       AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" <![CDATA[<=]]> #{契約申請日終了}
+       AND #{契約決定日開始} <![CDATA[<=]]> 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD"
+       AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<=]]> #{契約決定日終了}
+       <if test="発行済 = '2'">
+            AND (
+                (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" = ''
+                 or 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" is null)
+                OR (
+                (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD"  <![CDATA[<>]]> ''
+                or 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" is not null)
+                AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSaiHakkoKubun" = '1'
+                )
+             )
+       </if>
+       AND  (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<>]]> ''
+            AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" is not null)
+           <if test="改頁出力順 != null">
+            ORDER BY
+             ${改頁出力順}
+           </if>
+   </select>
+   <resultMap id="受領委任データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010010.JuryoininKeiyakuShoninKakuninshoEntity" autoMapping="true">
+        <id column="dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo"/>
+        <id column="dbT3078ShokanJuryoininKeiyakusha_shinseiYMD"/>
+        <result property="名称" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="カナ名称" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="生年月日" column="seiengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="全国住所コード" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="住民種別コード" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <association property="償還受領委任契約者"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.ResultMap_DbT3078ShokanJuryoininKeiyakushaEntity"/>
+        <association property="受領委任契約事業者"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"/>
+        <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+    
+</mapper>  

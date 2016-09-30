@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTy
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,9 +35,8 @@ public class ServiceTypeCommonChildHandler {
      * サービス種類検索初期化の設定します。
      *
      * @param list List<KaigoServiceShurui>
-     * @param サービス種類コード ServiceShuruiCode
      */
-    public void initialize(List<KaigoServiceShurui> list, ServiceShuruiCode サービス種類コード) {
+    public void initialize(List<KaigoServiceShurui> list) {
 
         List<dgServiceType_Row> dataList = new ArrayList<>();
         for (KaigoServiceShurui result : list) {
@@ -46,9 +44,6 @@ public class ServiceTypeCommonChildHandler {
             row.setTxtServiceShuruiCode(result.getサービス種類コード().getColumnValue());
             row.setTxtServiceShuruiName(result.getサービス種類名称());
             row.setTxtServiceRyakusho(result.getサービス種類略称());
-            if (result.getサービス種類コード().getColumnValue().equals(サービス種類コード.getColumnValue())) {
-                row.setSelected(Boolean.TRUE);
-            }
             dataList.add(row);
         }
         div.getDgServiceType().setDataSource(dataList);

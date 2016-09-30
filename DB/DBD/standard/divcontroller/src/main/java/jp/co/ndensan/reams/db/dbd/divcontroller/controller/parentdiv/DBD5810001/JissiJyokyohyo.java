@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5810001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.DBD581001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581000.DBD581000_TokeiHyoHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5810001.JissiJyokyohyoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoValidationHandler;
@@ -82,8 +82,8 @@ public class JissiJyokyohyo {
      * @param div JissiJyokyohyoDiv
      * @return ResponseData<JissiJyokyohyoDiv>
      */
-    public ResponseData<DBD581001Parameter> onCilck_btnBatchRegister(JissiJyokyohyoDiv div) {
-        DBD581001Parameter parameter = new DBD581001Parameter();
+    public ResponseData<DBD581000_TokeiHyoHakkoParameter> onCilck_btnBatchRegister(JissiJyokyohyoDiv div) {
+        DBD581000_TokeiHyoHakkoParameter parameter = new DBD581000_TokeiHyoHakkoParameter();
         getHandler().onCilck_btnBatchRegister(div, parameter);
         return ResponseData.of(parameter).respond();
     }

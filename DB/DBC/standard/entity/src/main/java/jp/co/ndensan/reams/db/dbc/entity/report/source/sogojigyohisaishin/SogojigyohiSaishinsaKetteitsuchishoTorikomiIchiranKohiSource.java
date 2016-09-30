@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishin;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
@@ -23,24 +24,24 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource implem
     public RString printTimeStamp;
     @ReportItem(name = "torikomiYM", length = 8, order = 2)
     public RString torikomiYM;
-    @ReportItem(name = "kokuhorenName", length = 15, order = 3)
+    @ReportItem(name = "kohiFutanshaNo", length = 8, order = 3)
+    public RString kohiFutanshaNo;
+    @ReportItem(name = "kohiFutanshaName", length = 20, order = 4)
+    public RString kohiFutanshaName;
+    @ReportItem(name = "kokuhorenName", length = 15, order = 5)
     public RString kokuhorenName;
-    @ReportItem(name = "shinsakaiName", length = 15, order = 4)
-    public RString shinsakaiName;
-    @ReportItem(name = "koshiFutanshaNo", length = 8, order = 5)
-    public RString koshiFutanshaNo;
-    @ReportItem(name = "koshiFutanshaName", length = 20, order = 6)
-    public RString koshiFutanshaName;
-    @ReportItem(name = "shutsuryokujun1", length = 10, order = 7)
+    @ReportItem(name = "shutsuryokujun1", length = 10, order = 6)
     public RString shutsuryokujun1;
-    @ReportItem(name = "shutsuryokujun2", length = 10, order = 8)
+    @ReportItem(name = "shutsuryokujun2", length = 10, order = 7)
     public RString shutsuryokujun2;
-    @ReportItem(name = "shutsuryokujun3", length = 10, order = 9)
+    @ReportItem(name = "shutsuryokujun3", length = 10, order = 8)
     public RString shutsuryokujun3;
-    @ReportItem(name = "shutsuryokujun4", length = 10, order = 10)
+    @ReportItem(name = "shutsuryokujun4", length = 10, order = 9)
     public RString shutsuryokujun4;
-    @ReportItem(name = "shutsuryokujun5", length = 10, order = 11)
+    @ReportItem(name = "shutsuryokujun5", length = 10, order = 10)
     public RString shutsuryokujun5;
+    @ReportItem(name = "shinsakaiName", length = 15, order = 11)
+    public RString shinsakaiName;
     @ReportItem(name = "kaipage1", length = 20, order = 12)
     public RString kaipage1;
     @ReportItem(name = "kaipage2", length = 20, order = 13)
@@ -51,8 +52,9 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource implem
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 16)
     public RString kaipage5;
-    @ReportPerson(id = "A")
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 17)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 20, order = 18)

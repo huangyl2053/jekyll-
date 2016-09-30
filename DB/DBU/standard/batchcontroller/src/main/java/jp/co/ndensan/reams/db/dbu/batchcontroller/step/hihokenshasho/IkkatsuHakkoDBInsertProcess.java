@@ -63,15 +63,17 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
             for (IkkatsuHakkoRelateEntity entity : 被保険者証一覧リスト) {
                 iIkkatsuHakkoMapper.insertShoKofuKaishu(set証交付回収Entity(entity));
             }
-            DbT7022ShoriDateKanriEntity dbT7022Entity = new DbT7022ShoriDateKanriEntity();
             YMDHMS konkaikijunYMDHMS = new YMDHMS(mybatisPrm.getKonkaikijunYMDHMS());
             YMDHMS konkaiFromYMDHMS = new YMDHMS(mybatisPrm.getKonkaiFromYMDHMS());
             YMDHMS konkaiToYMDHMS = new YMDHMS(mybatisPrm.getKonkaiToYMDHMS());
-            dbT7022Entity.setKijunTimestamp(konkaikijunYMDHMS);
-            dbT7022Entity.setTaishoKaishiTimestamp(konkaiFromYMDHMS);
-            dbT7022Entity.setTaishoShuryoTimestamp(konkaiToYMDHMS);
-            dbT7022Entity.setShoriEdaban(mybatisPrm.getShutsuryokuJokenCode());
-            iIkkatsuHakkoMapper.updateShoriDateKanri(dbT7022Entity);
+            List<DbT7022ShoriDateKanriEntity> dbt7022EntityList = iIkkatsuHakkoMapper.getDbT7022ShoriDateKanri(mybatisPrm);
+            for (DbT7022ShoriDateKanriEntity dbT7022Entity : dbt7022EntityList) {
+                dbT7022Entity.setKijunTimestamp(konkaikijunYMDHMS);
+                dbT7022Entity.setTaishoKaishiTimestamp(konkaiFromYMDHMS);
+                dbT7022Entity.setTaishoShuryoTimestamp(konkaiToYMDHMS);
+                dbT7022Entity.setShoriEdaban(mybatisPrm.getShutsuryokuJokenCode());
+                iIkkatsuHakkoMapper.updateShoriDateKanri(dbT7022Entity);
+            }
         }
     }
 

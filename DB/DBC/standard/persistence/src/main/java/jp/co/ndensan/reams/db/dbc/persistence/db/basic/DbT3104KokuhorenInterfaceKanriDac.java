@@ -48,6 +48,9 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     private static final RString KEY_交換情報識別番号 = new RString("交換情報識別番号");
     private static final RString KEY_送付取込区分 = new RString("送付取込区分");
     private static final RString KEY_TYPE = new RString("type");
+    private static final RString MSG_処理年月 = new RString("処理年月");
+    private static final RString 送付取込区分_送付 = new RString("1");
+    private static final RString 送付取込区分_取込 = new RString("2");
 
     /**
      * 主キーで国保連インターフェース管理を取得します(論理削除行ではない)。
@@ -315,5 +318,71 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                         eq(kokanShikibetsuNo, 交換情報識別番号)).
                 order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
                 toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * get最新の処理年月。
+     *
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @param 送付取込区分 sofuTorikomiKubun
+     * @param 処理状態区分 shoriJotaiKubun
+     * @return KokuhorenInterfaceKanri
+     */
+    @Transaction
+    public DbT3104KokuhorenInterfaceKanriEntity get最新の処理年月(
+            RString 交換情報識別番号,
+            RString 送付取込区分,
+            RString 処理状態区分) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(sofuTorikomiKubun, 送付取込区分),
+                                eq(shoriJotaiKubun, 処理状態区分),
+                                eq(isDeleted, 論理削除フラグ))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
+                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連連携スケジュール設定のスケジュール履歴情報_送付 取得返します。
+     *
+     * @param 処理年月 FlexibleYearMonth
+     *
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> getスケジュール履歴情報_送付(FlexibleYearMonth 処理年月) {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_処理年月.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(shoriYM, 処理年月),
+                                eq(sofuTorikomiKubun, 送付取込区分_送付))).
+                order(by(shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連連携スケジュール設定のスケジュール履歴情報_取込 取得返します。
+     *
+     * @param 処理年月 FlexibleYearMonth
+     *
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> getスケジュール履歴情報_取込(FlexibleYearMonth 処理年月) {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_処理年月.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(shoriYM, 処理年月),
+                                eq(sofuTorikomiKubun, 送付取込区分_取込))).
+                order(by(shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 }

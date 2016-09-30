@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBU-4100-040 wanghuafeng-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kyufujoho.IKyufuJohoMapper">
+    <resultMap id="getKyufujohoentity" 
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.kyufujoho.KyufuJohoEntity" autoMapping="true">
+        <result property="届出年月日" column="届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業作成区分" column="計画作成区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業適用開始" column="事業者開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業適用終了" column="事業者終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス種類コード" column="種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="計画事業所番号" column="計画事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="自己計画作成区分" column="自己作成区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="自己適用開始" column="自己開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="自己適用終了" column="自己終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス分類コード" column="serviceBunrruicode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="購入金額" column="購入金額"  />
+        <result property="保険請求額" column="保険請求額"  />
+        <result property="利用者負担額" column="利用者負担額"  />
+        <result property="改修費用合計" column="改修費用合計"  />
+    </resultMap>
+    <select id="get居宅サービス計画情報"
+            resultMap="getKyufujohoentity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParamter" resultOrdered="true">
+        SELECT
+            "DbT3005"."todokedeYMD" AS "届出年月日"
+            , "DbT3006"."sakuseiKubunCode" AS "計画作成区分"
+            , "DbT3006"."tekiyoKaishiYMD" AS "事業者開始年月日"
+            , "DbT3006"."tekiyoShuryoYMD" AS "事業者終了年月日"
+            , "DbT3006"."serviceShuruiCode" AS "種類コード"
+            , "DbT3006"."keikakuJigyoshaNo" AS "計画事業所番号"
+            , "DbT3007"."sakuseiKubunCode" AS "自己作成区分"
+            , "DbT3007"."tekiyoKaishiYMD" AS "自己開始年月日"
+            , "DbT3007"."tekiyoShuryoYMD" AS "自己終了年月日" 
+       FROM
+            "rgdb"."DbT3005KyotakuKeikakuTodokede" AS "DbT3005" 
+       LEFT JOIN "rgdb"."DbT3006KyotakuKeikakuJigyoshaSakusei" AS "DbT3006" 
+           ON "DbT3005"."hihokenshaNo" = "DbT3006"."hihokenshaNo" 
+           AND "DbT3005"."taishoYM" = "DbT3006"."taishoYM" 
+           AND "DbT3005"."rirekiNo" = "DbT3006"."rirekiNo" 
+       LEFT JOIN "rgdb"."DbT3007KyotakuKeikakuJikoSakusei" AS "DbT3007" 
+           ON "DbT3005"."hihokenshaNo" = "DbT3007"."hihokenshaNo" 
+           AND "DbT3005"."taishoYM" = "DbT3007"."taishoYM" 
+           AND "DbT3005"."rirekiNo" = "DbT3007"."rirekiNo" 
+       WHERE
+           "DbT3005"."hihokenshaNo" = #{被保険者番号} 
+       ORDER BY
+           "DbT3005"."rirekiNo" DESC 
+       LIMIT
+           1
+    </select>
+    
+    <select id="get購入金額"
+            resultMap="getKyufujohoentity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter" resultOrdered="true">
+        SELECT
+            SUM("DbT3048"."kounyuKingaku") AS "購入金額" 
+        FROM
+            rgdb."DbT3048ShokanFukushiYoguHanbaihi" AS "DbT3048" 
+        INNER JOIN rgdb."DbT3036ShokanHanteiKekka" AS "DbT3036" 
+            ON "DbT3048"."hiHokenshaNo" = "DbT3036"."hiHokenshaNo" 
+            AND "DbT3048"."serviceTeikyoYM" = "DbT3036"."serviceTeikyoYM" 
+            AND "DbT3048"."seiriNo" = "DbT3036"."seiriNo" 
+        WHERE
+            "DbT3048"."hiHokenshaNo" = #{被保険者番号} 
+             AND #{開始年月} <![CDATA[<=]]> "DbT3048"."serviceTeikyoYM"  
+             AND "DbT3048"."serviceTeikyoYM" <![CDATA[<=]]> #{終了年月} 
+             AND "DbT3036"."shikyuHushikyuKetteiKubun" = #{支給不支給}
+        
+    </select>
+    
+    <select id="get保険請求負担額"
+            resultMap="getKyufujohoentity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter" resultOrdered="true">
+        SELECT
+            SUM("DbT3038"."hokenSeikyugaku") AS "保険請求額"
+           , SUM("DbT3038"."riyoshaFutangaku") AS "利用者負担額" 
+        FROM
+            rgdb."DbT3038ShokanKihon" AS "DbT3038" 
+        WHERE
+            "DbT3038"."hiHokenshaNo" 
+            || "DbT3038"."serviceTeikyoYM" 
+            || "DbT3038"."seiriNo" 
+            || "DbT3038"."jigyoshaNo" 
+            || "DbT3038"."yoshikiNo" 
+            || "DbT3038"."meisaiNo" IN ( 
+       SELECT
+            "DbT3048"."hiHokenshaNo" 
+            || "DbT3048"."serviceTeikyoYM" 
+            || "DbT3048"."seiriNo" 
+            || "DbT3048"."jigyoshaNo" 
+            || "DbT3048"."yoshikiNo" 
+            || "DbT3048"."meisaiNo" 
+       FROM
+           "rgdb"."DbT3048ShokanFukushiYoguHanbaihi" AS "DbT3048" 
+       INNER JOIN "rgdb"."DbT3036ShokanHanteiKekka" AS "DbT3036" 
+            ON "DbT3048"."hiHokenshaNo" = "DbT3036"."hiHokenshaNo" 
+            AND "DbT3048"."serviceTeikyoYM" = "DbT3036"."serviceTeikyoYM" 
+            AND "DbT3048"."seiriNo" = "DbT3036"."seiriNo" 
+       
+        WHERE
+          "DbT3048"."hiHokenshaNo" = #{被保険者番号} 
+          AND #{開始年月} <![CDATA[<=]]> "DbT3048"."serviceTeikyoYM"  
+          AND "DbT3048"."serviceTeikyoYM" <![CDATA[<=]]> #{終了年月} 
+          AND "DbT3036"."shikyuHushikyuKetteiKubun" = #{支給不支給} 
+       GROUP BY
+         "DbT3048"."hiHokenshaNo"
+         , "DbT3048"."serviceTeikyoYM"
+         , "DbT3048"."seiriNo"
+         , "DbT3048"."jigyoshaNo"
+        , "DbT3048"."yoshikiNo"
+        , "DbT3048"."meisaiNo"
+      ) 
+    </select>
+    
+    <select id="get住宅改修費用合計"
+            resultMap="getKyufujohoentity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter" resultOrdered="true">
+        SELECT
+            SUM("DbT3049"."kaishuKingaku") AS "改修費用合計" 
+        FROM
+            rgdb."DbT3049ShokanJutakuKaishu" AS "DbT3049" 
+        INNER JOIN rgdb."DbT3036ShokanHanteiKekka" AS "DbT3036" 
+            ON "DbT3049"."hiHokenshaNo" = "DbT3036"."hiHokenshaNo" 
+            AND "DbT3049"."serviceTeikyoYM" = "DbT3036"."serviceTeikyoYM" 
+            AND "DbT3049"."seiriNo" = "DbT3036"."seiriNo" 
+        WHERE
+            "DbT3049"."hiHokenshaNo" = #{被保険者番号} 
+            AND "DbT3036"."shikyuHushikyuKetteiKubun" = #{支給不支給}
+    </select>
+    
+    <select id="get住宅改修請求負担額"
+            resultMap="getKyufujohoentity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter" resultOrdered="true">
+        SELECT
+            SUM("DbT3038"."hokenSeikyugaku") AS "保険請求額"
+            , SUM("DbT3038"."riyoshaFutangaku") AS "利用者負担額" 
+        FROM
+            rgdb."DbT3038ShokanKihon" AS "DbT3038" 
+        WHERE
+            "DbT3038"."hiHokenshaNo" 
+            || "DbT3038"."serviceTeikyoYM" 
+            || "DbT3038"."seiriNo" 
+            || "DbT3038"."jigyoshaNo" 
+            || "DbT3038"."yoshikiNo" 
+            || "DbT3038"."meisaiNo" IN ( 
+       SELECT
+            "DbT3049"."hiHokenshaNo" 
+            || "DbT3049"."serviceTeikyoYM" 
+            || "DbT3049"."seiriNo" 
+            || "DbT3049"."jigyoshaNo" 
+            || "DbT3049"."yoshikiNo" 
+            || "DbT3049"."meisaiNo" 
+       FROM
+           "rgdb"."DbT3049ShokanJutakuKaishu" AS "DbT3049" 
+         INNER JOIN "rgdb"."DbT3036ShokanHanteiKekka" AS "DbT3036" 
+            ON "DbT3036"."hiHokenshaNo" = "DbT3049"."hiHokenshaNo" 
+            AND "DbT3036"."serviceTeikyoYM" = "DbT3049"."serviceTeikyoYM" 
+            AND "DbT3036"."seiriNo" = "DbT3049"."seiriNo" 
+     
+        WHERE
+           "DbT3049"."hiHokenshaNo" = #{被保険者番号} 
+           AND "DbT3036"."shikyuHushikyuKetteiKubun" = #{支給不支給}
+        GROUP BY
+           "DbT3049"."hiHokenshaNo" ,
+	   "DbT3049"."serviceTeikyoYM" ,
+	   "DbT3049"."seiriNo",
+	   "DbT3049"."jigyoshaNo",
+	   "DbT3049"."yoshikiNo" ,
+	   "DbT3049"."meisaiNo"
+       ) 
+    </select>
+    
+    <select id="getサービス利用状況情報"
+            resultMap="getKyufujohoentity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParamter" resultOrdered="true">
+        SELECT
+            "DbT3033"."serviceTeikyoYM" 
+            ,"DbT7130"."serviceBunrruicode"
+        FROM
+            rgdb."DbT3033KyufujissekiShukei" AS "DbT3033" 
+        INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS "DbT7130" 
+            ON "DbT3033"."serviceSyuruiCode" = "DbT7130"."serviceShuruiCd" 
+        WHERE
+            "DbT3033"."hiHokenshaNo" = #{被保険者番号} 
+            AND #{サービス提供年月}  <![CDATA[<]]> "DbT3033"."serviceTeikyoYM"
+            AND "DbT7130"."serviceBunrruicode" in 
+         <foreach collection="serviceBunrruicodelist" item="code" open="(" separator="," close=")"> #{code} </foreach>
+         ORDER BY "DbT3033"."serviceTeikyoYM"
+    </select>
+</mapper>

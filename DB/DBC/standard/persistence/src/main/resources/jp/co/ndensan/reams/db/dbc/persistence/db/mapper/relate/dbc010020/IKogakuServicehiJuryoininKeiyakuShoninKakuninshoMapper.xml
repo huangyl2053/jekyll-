@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-1970-030 zhouchuanlin -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc010020.IKogakuServicehiJuryoininKeiyakuShoninKakuninshoMapper">
+   <select id="get高額受領委任契約事業者情報データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter"
+           resultMap="高額介護事業者情報データResultMap" resultOrdered="true" fetchSize="500">
+       SELECT 
+           高額介護事業者.*,
+           介護事業者.*,
+           介護事業者代表者.*,
+           被保険者台帳管理NEWEST."shichosonCode" AS "shichosonCode",
+           被保険者台帳管理NEWEST."shikibetsuCode" AS "shikibetsuCode",
+           宛名PSM."meisho" AS "meisho",
+           宛名PSM."kanaMeisho" AS "kanaMeisho",
+           宛名PSM."seinengappiYMD" AS "seinengappiYMD",
+           宛名PSM."seibetsuCode" AS "seibetsuCode",
+           宛名PSM."yubinNo" AS "yubinNo",
+           宛名PSM."zenkokuJushoCode" AS "zenkokuJushoCode",
+           宛名PSM."gyoseikuCode" AS "gyoseikuCode",
+           宛名PSM."juminShubetsuCode" AS "juminShubetsuCode",
+           宛名PSM."jusho" AS "jusho",
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+       FROM
+           (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3076KogakuJuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3076KogakuJuryoininKeiyakuJigyosha" />) AS 高額介護事業者
+       LEFT JOIN
+           (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.noDeleted_DbT7060KaigoJigyosha" />) AS 介護事業者
+       ON 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_jigyoshaNo" = 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo" AND 介護事業者."dbT7060KaigoJigyosha_yukoKaishiYMD" = 
+           (SELECT MAX(A."yukoKaishiYMD") AS "yukoKaishiYMD"
+           FROM rgdb."DbT7060KaigoJigyosha" A 
+           WHERE A."isDeleted" = FALSE)
+       LEFT JOIN 
+           (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.noDeleted_DbT7062KaigoJigyoshaDaihyosha" />) AS 介護事業者代表者
+       ON  介護事業者."dbT7060KaigoJigyosha_jigyoshaNo" = 介護事業者代表者."dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo" 
+           AND 介護事業者."dbT7060KaigoJigyosha_yukoKaishiYMD" = 介護事業者代表者."dbT7062KaigoJigyoshaDaihyosha_yukoKaishiYMD"
+       LEFT JOIN 
+           rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理NEWEST
+       ON  高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_hihokenshaNo" = 被保険者台帳管理NEWEST."hihokenshaNo"
+       LEFT JOIN
+           rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
+           '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM  
+       ON  宛名PSM."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
+       LEFT JOIN 
+           rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+       ON  "Atesaki"."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
+       WHERE 
+           #{契約申請日開始} <![CDATA[<=]]> 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_shinseiYMD"
+       AND 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_shinseiYMD" <![CDATA[<=]]> #{契約申請日終了}
+       AND #{契約決定日開始} <![CDATA[<=]]> 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD"
+       AND 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD" <![CDATA[<=]]> #{契約決定日終了}
+        <if test="発行済 == '2'">
+            AND (
+              ( 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_shoninKekkaTsuchiSakuseiYMD" = '' OR 
+             高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_shoninKekkaTsuchiSakuseiYMD" IS NULL)
+              OR (
+                   (高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_shoninKekkaTsuchiSakuseiYMD" <![CDATA[<>]]> ''
+                   OR 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_shoninKekkaTsuchiSakuseiYMD" IS NULL)
+               AND 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_shoninKekkaTsuchiSaiHakkoKubun" = '1'
+               )
+            )
+        </if>
+       AND  (高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD" <![CDATA[<>]]> ''
+            AND 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD" is not null)
+            <if test="改頁出力順 != null and !改頁出力順.isEmpty()">
+                ORDER BY
+                ${改頁出力順}
+            </if>
+   </select>
+     <resultMap id="高額介護事業者情報データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoEntity" autoMapping="true">
+        <id column="dbT3076KogakuJuryoininKeiyakuJigyosha_hihokenshaNo"/>
+        <id column="dbT3076KogakuJuryoininKeiyakuJigyosha_rirekiNo"/>
+        <result property="名称" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="カナ名称" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="全国住所コード" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="住民種別コード" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <association property="高額介護事業者"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3076KogakuJuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3076KogakuJuryoininKeiyakuJigyoshaEntity"/>
+        <association property="介護事業者"
+                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+        <association property="介護事業者代表者"
+                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"/>
+        <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+</mapper>  

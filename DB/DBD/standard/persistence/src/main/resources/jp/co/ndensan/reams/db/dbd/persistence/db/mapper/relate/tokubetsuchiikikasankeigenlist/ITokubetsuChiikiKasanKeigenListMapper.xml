@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 給付実績参照キー作成用XMLです。 -->
+<!-- @reamsid_L DBD-3980-050 jinge -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.tokubetsuchiikikasankeigenlist.ITokubetsuChiikiKasanKeigenListMapper">
+  <resultMap id="resultMap_KyufujissekiKihonEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd204010.KyufujissekiKihonEntity" autoMapping="true">
+        <result property="jigyoshoNo" column="事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="serviceTeikyoYM" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="shinsaYM" column="審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="kyufuSakuseiKubunCode" column="給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="inputShikibetsuNo" column="入力識別番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler" />
+        <result property="shokisaiHokenshaNo" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="toshiNo" column="通し番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>  
+   <select id="get給付実績参照キー作成情報" resultMap="resultMap_KyufujissekiKihonEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010.TaishoKyufuJissekiTokuteiMybatisprmParamter"
+            fetchSize="500" resultOrdered="true">
+  SELECT
+     A2."inputShikibetsuNo" AS 入力識別番号,
+     A2."shokisaiHokenshaNo" AS 証記載保険者番号,
+     A2."hiHokenshaNo" AS 被保険者番号,
+     A2."serviceTeikyoYM" AS サービス提供年月,
+     A2."jigyoshoNo" AS 事業者番号,
+     A2."toshiNo" AS 通し番号,
+     A2."shinsaYM" AS 審査年月,
+     A2."kyufuSakuseiKubunCode" AS 給付実績情報作成区分コード
+  FROM
+     rgdb."DbT3017KyufujissekiKihon" AS A2
+  INNER JOIN
+  (
+  SELECT
+    "inputShikibetsuNo",
+    "shokisaiHokenshaNo",
+    "hiHokenshaNo",
+    "serviceTeikyoYM",
+    "jigyoshoNo",
+    "toshiNo",
+    MAX("shinsaYM") AS 審査年月
+  FROM
+    rgdb."DbT3017KyufujissekiKihon"
+  GROUP BY
+    "inputShikibetsuNo",
+    "shokisaiHokenshaNo",
+    "hiHokenshaNo",
+    "serviceTeikyoYM",
+    "jigyoshoNo",
+    "toshiNo"
+   ) AS A1
+   ON A1."inputShikibetsuNo" = A2."inputShikibetsuNo"
+   AND A1."shokisaiHokenshaNo" = A2."shokisaiHokenshaNo"
+   AND A1."hiHokenshaNo" = A2."hiHokenshaNo"
+   AND A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+   AND A1."jigyoshoNo" = A2."jigyoshoNo"
+   AND A1.審査年月 = A2."shinsaYM"
+   AND A1."toshiNo" = A2."toshiNo"
+   WHERE
+     A2."kyufuSakuseiKubunCode" != '3'
+   <if test="is対象年月_サービス提供年月">
+      AND #{年月範囲の開始} <![CDATA[<=]]> A2."serviceTeikyoYM"
+      AND A2."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲の終了}
+   </if>
+   <if test="is対象年月_審査年月">
+      AND #{年月範囲の開始} <![CDATA[<=]]> A2."shinsaYM"
+      AND A2."shinsaYM" <![CDATA[<=]]> #{年月範囲の終了}
+   </if>
+   <if test="is事業者番号_非空">
+      AND A2."jigyoshoNo" = #{事業者番号}
+   </if>
+   </select>
+   
+   <resultMap id="resultMap_KyuufuJiqsekiShuukeiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiShukei" autoMapping="true">
+        <id property="サービス種類コード" column="集計サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
+        <result property="保険請求額" column="保険請求額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="利用者負担額" column="保険利用者負担額" />    
+   </resultMap>
+   <resultMap id="resultMap_KyuufuJiqsekiDetailListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiMeisai" autoMapping="true">
+        <id property="サービス種類コード" column="明細サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="サービス項目コード" column="サービス項目コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler" />
+        <result property="サービス名称" column="サービス名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="単位数" column="後単位数" />
+        <result property="日数回数" column="後日数回数" />
+        <result property="サービス単位数" column="後サービス単位数" />
+   </resultMap>
+   
+    <resultMap id="resultMap_KyuufuJiqsekiHihokenshaListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiHihokensha" autoMapping="true">
+        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <id property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="審査年月" column="審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="給付区分" column="給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exists社福軽減給付実績" column="exists社福軽減給付実績" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="exists有効特地減免" column="exists有効特地減免" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="給付実績集計Entity" resultMap="resultMap_KyuufuJiqsekiShuukeiEntity"/>
+        <collection property="給付実績明細リスト" resultMap="resultMap_KyuufuJiqsekiDetailListEntity"/>
+    </resultMap>
+
+   <resultMap id="resultMap_TokubetsuChiikiKasanKeigenJissekiKanriListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri" autoMapping="true">
+        <id property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/> 
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        
+        <collection property="給付実績被保険者リスト" resultMap="resultMap_KyuufuJiqsekiHihokenshaListEntity"/>
+       <!-- <result property="入力識別番号" column="入力識別番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler" />
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="通し番号" column="通し番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />-->
+    </resultMap>
+    <select id="select特別地域加算軽減実績管理情報" resultMap="resultMap_TokubetsuChiikiKasanKeigenJissekiKanriListEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010.TokuchiJissekiKanriListSakuseiMybatisParameter"
+            fetchSize="500" resultOrdered="true">
+    SELECT
+        給付実績キー."jigyoshoNo" AS 事業者番号,
+        給付実績キー."hihokenshaNo" AS 被保険者番号,
+        給付実績キー."serviceTeikyoYM" AS サービス提供年月,
+        給付実績キー."shinsaYM" AS 審査年月,
+        給付実績キー."kyufuSakuseiKubunCode" AS 給付実績情報作成区分コード,
+        給付実績キー."inputShikibetsuNo" AS 入力識別番号,
+        給付実績キー."shokisaiHokenshaNo" AS 証記載保険者番号,
+        給付実績キー."toshiNo" AS 通し番号,
+        給付実績明細."serviceShuruiCode" AS 明細サービス種類コード,
+        給付実績明細."serviceKomokuCode" AS サービス項目コード,
+        給付実績明細."atoTanisu" AS 後単位数,
+        給付実績明細."atoNissuKaisu" AS 後日数回数,
+        給付実績明細."atoServiceTanisu" AS 後サービス単位数,
+        給付実績集計."serviceSyuruiCode" AS 集計サービス種類コード,
+        給付実績集計."hokenSeikyugaku" AS 保険請求額,
+        給付実績集計."hokenRiyoshaFutangaku" AS 保険利用者負担額,
+        介護事業者."jigyoshaName" AS 事業者名称,
+        給付実績明細."serviceName" AS サービス名称,
+        CASE WHEN 給付実績社会福祉法人軽減額."inputShikibetsuNo" IS NULL THEN FALSE ELSE TRUE END AS exists社福軽減給付実績,
+        CASE WHEN 特別地域加算減免."hihokenshaNo" IS NULL THEN FALSE ELSE TRUE END AS exists有効特地減免,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+    FROM
+      "KyufuJisekiSanshoKeyTemps" AS 給付実績キー
+    INNER JOIN 
+      rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳Newest
+      ON 被保険者台帳Newest."hihokenshaNo" = 給付実績キー."hihokenshaNo"
+    INNER JOIN
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+    AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 被保険者台帳Newest."shikibetsuCode"
+    INNER JOIN(
+      SELECT
+         給付実績明細_1."serviceShuruiCode",
+	 給付実績明細_1."serviceKomokuCode",
+	 給付実績明細_1."atoTanisu",
+	 給付実績明細_1."atoNissuKaisu",
+	 給付実績明細_1."atoServiceTanisu",
+	 給付実績明細_1."serviceTeikyoYM",
+         給付実績明細_1."inputShikibetsuNo",
+         給付実績明細_1."shokisaiHokenshaNo",
+         給付実績明細_1."hiHokenshaNo",
+         給付実績明細_1."jigyoshoNo",
+         給付実績明細_1."toshiNo",
+         介護サービス内容."serviceName"
+    FROM
+         rgdb."DbT3018KyufujissekiMeisai" AS 給付実績明細_1
+    INNER JOIN(
+      SELECT
+	  S."serviceShuruiCd",
+	  S."serviceKoumokuCd",
+	  S."teikyoKaishiYM",
+	  S."teikyoShuryoYM",
+          S."serviceName",
+          S."rirekiNo"
+	FROM rgdb."DbT7131KaigoServiceNaiyou" AS S
+	WHERE S."tokubetsuChiikiKasanFlag" = '1'
+	  AND NOT EXISTS (
+	          SELECT 1
+		  FROM rgdb."DbT7131KaigoServiceNaiyou" AS S2
+		  WHERE 
+			   S."serviceShuruiCd" = S2."serviceShuruiCd"
+			  AND S."serviceKoumokuCd" = S2."serviceKoumokuCd"
+			  AND S."teikyoKaishiYM" = S2."teikyoKaishiYM"
+			  AND S."rirekiNo" <![CDATA[<]]> S2."rirekiNo" )
+    ) AS 介護サービス内容
+      ON 介護サービス内容."serviceShuruiCd" = 給付実績明細_1."serviceShuruiCode"
+      AND 介護サービス内容."serviceKoumokuCd" = 給付実績明細_1."serviceKomokuCode"
+      WHERE 介護サービス内容."teikyoKaishiYM" <![CDATA[<=]]> 給付実績明細_1."serviceTeikyoYM"
+      AND 給付実績明細_1."serviceTeikyoYM" <![CDATA[<=]]> 介護サービス内容."teikyoShuryoYM"
+    ) AS 給付実績明細
+  ON 給付実績キー."inputShikibetsuNo" = 給付実績明細."inputShikibetsuNo"
+  AND 給付実績キー."shokisaiHokenshaNo" = 給付実績明細."shokisaiHokenshaNo"
+  AND 給付実績キー."hihokenshaNo" = 給付実績明細."hiHokenshaNo"
+  AND 給付実績キー."serviceTeikyoYM" = 給付実績明細."serviceTeikyoYM"
+  AND 給付実績キー."jigyoshoNo" = 給付実績明細."jigyoshoNo"
+  AND 給付実績キー."toshiNo" = 給付実績明細."toshiNo"
+  LEFT JOIN rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS 給付実績社会福祉法人軽減額
+  ON 給付実績キー."inputShikibetsuNo" = 給付実績社会福祉法人軽減額."inputShikibetsuNo"
+  AND 給付実績キー."shokisaiHokenshaNo" = 給付実績社会福祉法人軽減額."shokisaiHokenshaNo"
+  AND 給付実績キー."hihokenshaNo" = 給付実績社会福祉法人軽減額."hiHokenshaNo"
+  AND 給付実績キー."serviceTeikyoYM" = 給付実績社会福祉法人軽減額."serviceTeikyoYM"
+  AND 給付実績キー."jigyoshoNo" = 給付実績社会福祉法人軽減額."jigyoshoNo"
+  AND 給付実績キー."toshiNo" = 給付実績社会福祉法人軽減額."toshiNo"
+  INNER JOIN rgdb."DbT3033KyufujissekiShukei" AS 給付実績集計
+  ON 給付実績キー."inputShikibetsuNo" = 給付実績集計."inputShikibetsuNo"
+  AND 給付実績キー."shokisaiHokenshaNo" = 給付実績集計."shokisaiHokenshaNo"
+  AND 給付実績キー."hihokenshaNo" = 給付実績集計."hiHokenshaNo"
+  AND 給付実績キー."serviceTeikyoYM" = 給付実績集計."serviceTeikyoYM"
+  AND 給付実績キー."jigyoshoNo" = 給付実績集計."jigyoshoNo"
+  AND 給付実績キー."toshiNo" = 給付実績集計."toshiNo"
+  LEFT JOIN(
+    SELECT DISTINCT
+	   特別地域加算減免_1."hihokenshaNo",
+           特別地域加算減免_1."tekiyoKaishiYMD",
+           特別地域加算減免_1."tekiyoShuryoYMD"
+	FROM 
+           rgdb."DbT4020TokubetsuchiikiKasanGemmen" AS 特別地域加算減免_1
+        INNER JOIN
+           "KyufuJisekiSanshoKeyTemps" AS 給付実績キー一時
+           ON  給付実績キー一時."hihokenshaNo" = 特別地域加算減免_1."hihokenshaNo"
+	WHERE
+	   substring(特別地域加算減免_1."tekiyoKaishiYMD",0,7) <![CDATA[<=]]> 給付実績キー一時."serviceTeikyoYM"
+    AND 給付実績キー一時."serviceTeikyoYM" <![CDATA[<=]]> substring(特別地域加算減免_1."tekiyoShuryoYMD",0,7)
+    ) AS 特別地域加算減免
+  ON 給付実績キー."hihokenshaNo" = 特別地域加算減免."hihokenshaNo"
+  LEFT JOIN(
+      SELECT 
+	   "jigyoshaNo",
+	   "jigyoshaName",
+           "yukoKaishiYMD",
+           "yukoShuryoYMD"
+	FROM 
+           rgdb."DbT7060KaigoJigyosha" AS 介護事業者_1
+        INNER JOIN
+           "KyufuJisekiSanshoKeyTemps" AS 給付実績キー一時
+           ON  給付実績キー一時."jigyoshoNo" = 介護事業者_1."jigyoshaNo"
+	WHERE
+	   substring(介護事業者_1."yukoKaishiYMD",0,7) <![CDATA[<=]]> 給付実績キー一時."serviceTeikyoYM"
+    AND 給付実績キー一時."serviceTeikyoYM" <![CDATA[<=]]> substring(介護事業者_1."yukoShuryoYMD",0,7)
+    ) AS 介護事業者
+  ON 給付実績キー."jigyoshoNo" = 介護事業者."jigyoshaNo"
+  WHERE
+    1 = 1
+    <if test="is地区コード">
+        <if test="is地区_住所">
+        AND #{開始地区コード} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."zenkokuJushoCode"
+	AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."zenkokuJushoCode" <![CDATA[<=]]> #{終了地区コード}
+        </if>
+        <if test="is地区_行政区"> 
+        AND #{開始地区コード} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode"
+	AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode" <![CDATA[<=]]> #{終了地区コード}
+        </if>
+        <if test="is地区_地区">
+        AND #{開始地区コード} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
+	AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{終了地区コード}
+        </if>
+        <if test="is地区_全て">
+
+        </if>
+    </if>
+	<if test="is市町村コード_非空">
+        AND #{市町村コード} = CASE WHEN 被保険者台帳Newest."koikinaiTokureiSochimotoShichosonCode" IS NULL THEN 被保険者台帳Newest."shichosonCode"
+	WHEN 被保険者台帳Newest."koikinaiTokureiSochimotoShichosonCode" = '' THEN 被保険者台帳Newest."shichosonCode" ELSE 被保険者台帳Newest."koikinaiTokureiSochimotoShichosonCode" END
+            
+        </if>
+        
+    ${出力順}
+    </select>
+</mapper>

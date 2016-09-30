@@ -4,12 +4,20 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_DdlChiku = function () {
+                return "onChange_DdlChiku";
+            };
+
             Events.onOkClose_btnChoikiGuide = function () {
                 return "onOkClose_btnChoikiGuide";
             };
 
             Events.onOkClose_btnChikuNyuryokuGuide = function () {
                 return "onOkClose_btnChikuNyuryokuGuide";
+            };
+
+            Events.onChange_市町村DDL = function () {
+                return "onChange_市町村DDL";
             };
             return Events;
         })();

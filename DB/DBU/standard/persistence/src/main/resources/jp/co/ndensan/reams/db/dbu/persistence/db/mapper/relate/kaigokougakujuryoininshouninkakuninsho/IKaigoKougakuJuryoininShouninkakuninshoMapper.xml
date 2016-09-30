@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 総合窓口用被保険者、受給者等判断のマッピング用XMLです。 -->
+<!-- @reamsid_L DBU-4220-010 jinjue -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigokougakujuryoininshouninkakuninsho.IKaigoKougakuJuryoininShouninkakuninshoMapper">
+
+    <select id="select被保険者"    resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigokougakujuryoininshouninkakuninsho.KaigoKougakuJuryoininShouninkakuninshoParameter" fetchSize="500" resultOrdered="true">
+        SELECT		COUNT(0)	AS "被保険者"
+        FROM		   <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho"/>
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        INNER JOIN
+        rgdb."DbT7023RendoHoryuTokuteiJusho" AS T7023
+        ON		T7023."jushoCode" =<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode"
+        AND		T7023."banchiCode1" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."banchiCode1"
+        AND		T7023."banchiCode2" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."banchiCode2"
+        AND		T7023."banchiCode3" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."banchiCode3"
+        WHERE		<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = #{識別コード}
+    </select>
+    <select id="select受給者"    resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigokougakujuryoininshouninkakuninsho.KaigoKougakuJuryoininShouninkakuninshoParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        COUNT(0)	AS "受給者"
+        FROM		rgdb."DbV7512JukyushaDaichoFukushi"	AS T7512
+        WHERE		T7512."shikibetsuCode" =#{識別コード}
+    </select>
+</mapper>

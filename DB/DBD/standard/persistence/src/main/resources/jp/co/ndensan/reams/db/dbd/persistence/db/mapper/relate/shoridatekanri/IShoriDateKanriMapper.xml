@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1770-020 donghj -->
+
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shoridatekanri.IShoriDateKanriMapper">
+    
+    <update id="updDbt7022ShoriDateKanri"  parameterType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.ShoriDateKanriEntity">
+        UPDATE rgdb."DbT7022ShoriDateKanri"
+        SET
+            "updateCount" = #{updateCount},
+            "lastUpdateTimestamp" = #{lastUpdateTimestamp},
+            "lastUpdateReamsLoginId" = #{lastUpdateReamsLoginId},
+            "kijunYMD" = #{kijunYMD},
+            "kijunTimestamp" = #{kijunTimestamp},
+            "taishoKaishiYMD" = #{taishoKaishiYMD},
+            "taishoShuryoYMD" = #{taishoShuryoYMD},
+            "taishoKaishiTimestamp" = #{taishoKaishiTimestamp},
+            "taishoShuryoTimestamp" = #{taishoShuryoTimestamp}
+        WHERE
+            "subGyomuCode" = #{subGyomuCode}
+        AND "shoriName" = #{shoriName}
+        AND "shoriEdaban" = #{shoriEdaban}
+      </update>
+    
+</mapper>

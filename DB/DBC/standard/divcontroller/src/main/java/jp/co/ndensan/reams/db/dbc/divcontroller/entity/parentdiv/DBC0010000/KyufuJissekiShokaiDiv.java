@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -35,6 +36,12 @@ public class KyufuJissekiShokaiDiv extends Panel {
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdKaigoAtenaInfo")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
+    @JsonProperty("hiddenSaiGoBango")
+    private RString hiddenSaiGoBango;
+    @JsonProperty("hiddenSyuToKenSu")
+    private RString hiddenSyuToKenSu;
+    @JsonProperty("hiddenZenBanGo")
+    private RString hiddenZenBanGo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,6 +101,60 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonProperty("ccdKaigoAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
         return ccdKaigoAtenaInfo;
+    }
+
+    /*
+     * gethiddenSaiGoBango
+     * @return hiddenSaiGoBango
+     */
+    @JsonProperty("hiddenSaiGoBango")
+    public RString getHiddenSaiGoBango() {
+        return hiddenSaiGoBango;
+    }
+
+    /*
+     * sethiddenSaiGoBango
+     * @param hiddenSaiGoBango hiddenSaiGoBango
+     */
+    @JsonProperty("hiddenSaiGoBango")
+    public void setHiddenSaiGoBango(RString hiddenSaiGoBango) {
+        this.hiddenSaiGoBango = hiddenSaiGoBango;
+    }
+
+    /*
+     * gethiddenSyuToKenSu
+     * @return hiddenSyuToKenSu
+     */
+    @JsonProperty("hiddenSyuToKenSu")
+    public RString getHiddenSyuToKenSu() {
+        return hiddenSyuToKenSu;
+    }
+
+    /*
+     * sethiddenSyuToKenSu
+     * @param hiddenSyuToKenSu hiddenSyuToKenSu
+     */
+    @JsonProperty("hiddenSyuToKenSu")
+    public void setHiddenSyuToKenSu(RString hiddenSyuToKenSu) {
+        this.hiddenSyuToKenSu = hiddenSyuToKenSu;
+    }
+
+    /*
+     * gethiddenZenBanGo
+     * @return hiddenZenBanGo
+     */
+    @JsonProperty("hiddenZenBanGo")
+    public RString getHiddenZenBanGo() {
+        return hiddenZenBanGo;
+    }
+
+    /*
+     * sethiddenZenBanGo
+     * @param hiddenZenBanGo hiddenZenBanGo
+     */
+    @JsonProperty("hiddenZenBanGo")
+    public void setHiddenZenBanGo(RString hiddenZenBanGo) {
+        this.hiddenZenBanGo = hiddenZenBanGo;
     }
 
     /*
@@ -257,6 +318,56 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonIgnore
     public void  setTxtKyufuJissekiListSeinengappi(TextBox txtKyufuJissekiListSeinengappi) {
         this.getKyufuJissekiListPanel().setTxtKyufuJissekiListSeinengappi(txtKyufuJissekiListSeinengappi);
+    }
+
+    @JsonIgnore
+    public DataIdoPanelDiv getDataIdoPanel() {
+        return this.getKyufuJissekiListPanel().getDataIdoPanel();
+    }
+
+    @JsonIgnore
+    public void  setDataIdoPanel(DataIdoPanelDiv DataIdoPanel) {
+        this.getKyufuJissekiListPanel().setDataIdoPanel(DataIdoPanel);
+    }
+
+    @JsonIgnore
+    public Button getBtnSento() {
+        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnSento();
+    }
+
+    @JsonIgnore
+    public void  setBtnSento(Button btnSento) {
+        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnSento(btnSento);
+    }
+
+    @JsonIgnore
+    public Button getBtnMae() {
+        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnMae();
+    }
+
+    @JsonIgnore
+    public void  setBtnMae(Button btnMae) {
+        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnMae(btnMae);
+    }
+
+    @JsonIgnore
+    public Button getBtnTsugi() {
+        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnTsugi();
+    }
+
+    @JsonIgnore
+    public void  setBtnTsugi(Button btnTsugi) {
+        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnTsugi(btnTsugi);
+    }
+
+    @JsonIgnore
+    public Button getBtnSaigo() {
+        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnSaigo();
+    }
+
+    @JsonIgnore
+    public void  setBtnSaigo(Button btnSaigo) {
+        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnSaigo(btnSaigo);
     }
 
     @JsonIgnore

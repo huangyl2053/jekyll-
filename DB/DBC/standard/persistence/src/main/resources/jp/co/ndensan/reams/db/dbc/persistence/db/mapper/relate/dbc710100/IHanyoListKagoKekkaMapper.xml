@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3094-020 qinzhen -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710100.IHanyoListKagoKekkaMapper">
+    <select resultOrdered="true" id="select過誤結果情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc710100.HanyoListKagoKekkaMybatisParameter"
+            resultMap="resultMap_HanyoListKagoKekka" fetchSize="500">
+        <include refid="selectHanyoListKagoKekka" />
+    </select>
+    <sql id="selectHanyoListKagoKekka">
+        WITH "KaigoJigyoshanNewest" AS       
+        (SELECT 
+            dbT7060."jigyoshaNo",
+            dbT7060."jigyoshaName"
+        FROM 
+            rgdb."DbT7060KaigoJigyosha" AS dbT7060
+        WHERE
+            NOT EXISTS(
+                SELECT 1 
+                FROM
+                    rgdb."DbT7060KaigoJigyosha"  AS dbT7060_2
+                WHERE 
+                    dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
+                    AND  dbT7060."yukoKaishiYMD" <![CDATA[<]]>  dbT7060_2."yukoKaishiYMD"
+            )
+        )
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3061KagoKetteiMeisaiMapper.allColumns_DbT3061KagoKetteiMeisai" />,
+            <include refid="allColumns_DbT1001HihokenshaDaicho" />,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+            <include refid="allColumns_JukyushaDaicho"/>,
+            <include refid="allColumns_KagoKetteiJukyosha"/>,
+            <include refid="allColumns_NijiYoboJigyoTaisho"/>,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShurui"/>   
+            
+        FROM
+            rgdb."DbT3061KagoKetteiMeisai"  AS "DbT3061KagoKetteiMeisai"
+        INNER JOIN 
+            rgdb."DbV1001HihokenshaDaicho"  AS "DbT1001HihokenshaDaicho"
+        ON 
+            "DbT3061KagoKetteiMeisai"."hiHokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON
+            "DbT1001HihokenshaDaicho"."shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode" 
+        LEFT JOIN
+            (SELECT 
+                *             
+            FROM
+                (SELECT
+                    "KagoKetteiJukyu"."toriatsukaiYM",
+                    "KagoKetteiJukyu"."hokenshaKubun",
+                    "KagoKetteiJukyu"."hiHokenshaNo",
+                    "KagoKetteiJukyu"."serviceTeikyoYM",
+                    "KagoKetteiJukyu"."jigyoshoNo",
+                    "JukyushaJOIN"."shichosonCode",
+                    "JukyushaJOIN"."hihokenshaNo",
+                    "JukyushaJOIN"."rirekiNo",
+                    "JukyushaJOIN"."edaban",
+                    "JukyushaJOIN"."jukyuShinseiJiyu",
+                    "JukyushaJOIN"."yoshienshaNinteiShinseiFlag",
+                    "JukyushaJOIN"."jukyuShinseiYMD",
+                    "JukyushaJOIN"."yokaigoJotaiKubunCode",
+                    "JukyushaJOIN"."ninteiYukoKikanKaishiYMD",
+                    "JukyushaJOIN"."ninteiYukoKikanShuryoYMD",
+                    "JukyushaJOIN"."ninteiYMD",
+                    "JukyushaJOIN"."kyuSochishaFlag",
+                    "JukyushaJOIN"."minashiCode",
+                    "JukyushaJOIN"."chokkinIdoJiyuCode",
+                    row_number() OVER(partition by "JukyushaJOIN"."shichosonCode", "JukyushaJOIN"."hihokenshaNo"													
+						order by "JukyushaJOIN"."rirekiNo" DESC, "JukyushaJOIN"."edaban" DESC)  AS "No"
+                FROM
+                    rgdb."DbT3061KagoKetteiMeisai" AS "KagoKetteiJukyu"
+                INNER JOIN
+                    rgdb."DbT4001JukyushaDaicho" AS "JukyushaJOIN"
+                ON
+                    "JukyushaJOIN"."hihokenshaNo" = "KagoKetteiJukyu"."hiHokenshaNo"
+                    AND "JukyushaJOIN"."yukoMukoKubun" = '1'
+                    AND "JukyushaJOIN"."logicalDeletedFlag" = false
+                    AND SUBSTR("JukyushaJOIN"."ninteiYukoKikanKaishiYMD",1,6)  <![CDATA[<=]]>  "KagoKetteiJukyu"."serviceTeikyoYM"
+                    AND "KagoKetteiJukyu"."serviceTeikyoYM"  <![CDATA[<=]]>  SUBSTR("JukyushaJOIN"."ninteiYukoKikanShuryoYMD",1,6)
+                )  AS A 
+            WHERE A."No" = '1')      AS "JukyushaDaicho" 
+        ON
+            "JukyushaDaicho"."hihokenshaNo" = "DbT3061KagoKetteiMeisai"."hiHokenshaNo"
+            AND "JukyushaDaicho"."toriatsukaiYM" = "DbT3061KagoKetteiMeisai"."toriatsukaiYM"
+            AND "JukyushaDaicho"."hokenshaKubun" = "DbT3061KagoKetteiMeisai"."hokenshaKubun"
+            AND "JukyushaDaicho"."serviceTeikyoYM" = "DbT3061KagoKetteiMeisai"."serviceTeikyoYM"
+            AND "JukyushaDaicho"."jigyoshoNo" = "DbT3061KagoKetteiMeisai"."jigyoshoNo"
+        LEFT JOIN
+            rgdb."DbT7130KaigoServiceShurui"  AS "DbT7130KaigoServiceShurui"
+        ON
+            "DbT7130KaigoServiceShurui"."serviceShuruiCd" = "DbT3061KagoKetteiMeisai"."serviceShuruiCode"
+            AND "DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3061KagoKetteiMeisai"."serviceTeikyoYM"
+            AND "DbT3061KagoKetteiMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
+        LEFT JOIN
+            "KaigoJigyoshanNewest"  AS "KagoKetteiJukyosha"
+        ON
+            "KagoKetteiJukyosha"."jigyoshaNo"  =  "DbT3061KagoKetteiMeisai"."jigyoshoNo"
+        LEFT JOIN
+            (SELECT 
+                dbT3100."hihokenshaNo" , 
+                dbT3100."tekiyoKaishiYMD" , 
+                dbT3100."tekiyoShuryoYMD" , 
+                dbT3100."chosaJisshiYMD" , 
+                dbT3100."ketteiYMD" 
+            FROM
+                rgdb."DbT3100NijiYoboJigyoTaishosha"  AS dbT3100
+            WHERE 
+                NOT EXISTS (
+                SELECT  1  FROM rgdb."DbT3100NijiYoboJigyoTaishosha"  AS dbT3100_2
+                WHERE dbT3100."hihokenshaNo" = dbT3100_2."hihokenshaNo" AND dbT3100."tekiyoKaishiYMD" <![CDATA[<]]> dbT3100_2."tekiyoKaishiYMD"
+                )
+            ) AS "NijiYoboJigyoTaisho"
+        ON
+            "NijiYoboJigyoTaisho"."hihokenshaNo" =  "JukyushaDaicho"."hihokenshaNo"
+        WHERE 
+            "DbT3061KagoKetteiMeisai"."isDeleted" =false    
+            <if test="国保連取扱年月From !=null and 国保連取扱年月From.toString()!=''" >
+                AND  #{国保連取扱年月From} <![CDATA[<=]]> "DbT3061KagoKetteiMeisai"."toriatsukaiYM"   
+            </if>
+            <if test="国保連取扱年月To !=null and 国保連取扱年月To.toString()!=''">
+                AND  "DbT3061KagoKetteiMeisai"."toriatsukaiYM"  <![CDATA[<=]]> #{国保連取扱年月To}    
+            </if>
+            <if test="保険者区分!=null and !保険者区分.isEmpty()">
+                AND  "DbT3061KagoKetteiMeisai"."hokenshaKubun" = #{保険者区分}
+            </if>
+            <if test="サービス提供年月From !=null and サービス提供年月From.toString()!=''" >
+                AND  #{サービス提供年月From} <![CDATA[<=]]> "DbT3061KagoKetteiMeisai"."serviceTeikyoYM"  
+            </if>
+            <if test="サービス提供年月To !=null  and サービス提供年月To.toString()!=''" >
+                AND  "DbT3061KagoKetteiMeisai"."serviceTeikyoYM"  <![CDATA[<=]]> #{サービス提供年月To}   
+            </if>
+            <if test="事業者コード !=null and !事業者コード.isEmpty()" >
+                AND  "DbT3061KagoKetteiMeisai"."jigyoshoNo" = #{事業者コード}
+            </if>  
+            <if test="保険者コード!=null and !保険者コード.isEmpty() and  保険者コード.toString() != 'すべて' ">
+                AND  "DbT1001HihokenshaDaicho"."shichosonCode" = #{保険者コード}
+            </if>            
+    </sql>
+    
+    
+    
+    <resultMap id="resultMap_HanyoListKagoKekka" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.HanyoListKagoKekkaEntity">
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>  
+        <association property="過誤決定明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3061KagoKetteiMeisaiMapper.ResultMap_DbT3061KagoKetteiMeisaiEntity"/>
+        <association property="最新被保台帳" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="二次予防事業対象情報" resultMap="ResultMap_NijiYoboJigyoTaisho"/> 
+        <association property="受給者台帳" resultMap="ResultMap_JukyushaDaicho"/>
+        <association property="過誤決定事業者" resultMap = "ResultMap_KagoKetteiJukyosha"/>             
+        <association property="介護サービス種類" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/> 
+    </resultMap> 
+  
+    <sql id="allColumns_KagoKetteiJukyosha">
+        "KagoKetteiJukyosha"."jigyoshaNo"                    AS          "KagoKetteiJukyosha_jigyoshaNo", 
+        "KagoKetteiJukyosha"."jigyoshaName"                  AS          "KagoKetteiJukyosha_jigyoshaName"
+    </sql>
+    
+     <resultMap id="ResultMap_KagoKetteiJukyosha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.KagoKetteiJukyoshaRealEntity" autoMapping="true">
+        <result property="jigyoshoNo"                   column="KagoKetteiJukyosha_jigyoshoNo"                       typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="jigyoshaName"                 column="KagoKetteiJukyosha_jigyoshaName"                     typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+    </resultMap>
+      
+    <sql id="allColumns_NijiYoboJigyoTaisho">
+        "NijiYoboJigyoTaisho"."hihokenshaNo"                    AS          "NijiYoboJigyoTaisho_hihokenshaNo", 
+        "NijiYoboJigyoTaisho"."tekiyoKaishiYMD"                 AS          "NijiYoboJigyoTaisho_tekiyoKaishiYMD", 
+        "NijiYoboJigyoTaisho"."tekiyoShuryoYMD"                 AS          "NijiYoboJigyoTaisho_tekiyoShuryoYMD", 
+        "NijiYoboJigyoTaisho"."chosaJisshiYMD"                  AS          "NijiYoboJigyoTaisho_chosaJisshiYMD", 
+        "NijiYoboJigyoTaisho"."ketteiYMD"                       AS          "NijiYoboJigyoTaisho_ketteiYMD"
+    </sql>
+    
+     <resultMap id="ResultMap_NijiYoboJigyoTaisho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710090.NijiYoboJigyoTaishoRealEntity" autoMapping="true">
+        <result property="hihokenshaNo"                 column="NijiYoboJigyoTaisho_hihokenshaNo"                       typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="tekiyoKaishiYMD"              column="NijiYoboJigyoTaisho_tekiyoKaishiYMD"                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD"              column="NijiYoboJigyoTaisho_tekiyoShuryoYMD"                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chosaJisshiYMD"               column="NijiYoboJigyoTaisho_chosaJisshiYMD"                     typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD"                    column="NijiYoboJigyoTaisho_ketteiYMD"                          typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    
+    
+    <sql id="allColumns_JukyushaDaicho">
+        "JukyushaDaicho"."jigyoshoNo"                       AS          "JukyushaDaicho_jigyoshoNo", 
+        "JukyushaDaicho"."serviceTeikyoYM"                  AS          "JukyushaDaicho_serviceTeikyoYM",
+        "JukyushaDaicho"."toriatsukaiYM"                    AS          "JukyushaDaicho_toriatsukaiYM",
+        "JukyushaDaicho"."hokenshaKubun"                    AS          "JukyushaDaicho_hokenshaKubun",
+        "JukyushaDaicho"."shichosonCode"                    AS          "JukyushaDaicho_shichosonCode",
+        "JukyushaDaicho"."hihokenshaNo"                     AS          "JukyushaDaicho_hihokenshaNo",
+        "JukyushaDaicho"."rirekiNo"                         AS          "JukyushaDaicho_rirekiNo",
+        "JukyushaDaicho"."edaban"                           AS          "JukyushaDaicho_edaban" ,
+        "JukyushaDaicho"."jukyuShinseiJiyu"                 AS          "JukyushaDaicho_jukyuShinseiJiyu" ,
+        "JukyushaDaicho"."yoshienshaNinteiShinseiFlag"      AS          "JukyushaDaicho_yoshienshaNinteiShinseiFlag" ,
+        "JukyushaDaicho"."jukyuShinseiYMD"                  AS          "JukyushaDaicho_jukyuShinseiYMD" ,
+        "JukyushaDaicho"."yokaigoJotaiKubunCode"            AS          "JukyushaDaicho_yokaigoJotaiKubunCode" ,
+        "JukyushaDaicho"."ninteiYukoKikanKaishiYMD"         AS          "JukyushaDaicho_ninteiYukoKikanKaishiYMD" ,
+        "JukyushaDaicho"."ninteiYukoKikanShuryoYMD"         AS          "JukyushaDaicho_ninteiYukoKikanShuryoYMD" ,
+        "JukyushaDaicho"."ninteiYMD"                        AS          "JukyushaDaicho_ninteiYMD" ,
+        "JukyushaDaicho"."kyuSochishaFlag"                  AS          "JukyushaDaicho_kyuSochishaFlag",
+        "JukyushaDaicho"."minashiCode"                      AS          "JukyushaDaicho_minashiCode" ,
+        "JukyushaDaicho"."chokkinIdoJiyuCode"               AS          "JukyushaDaicho_chokkinIdoJiyuCode" ,
+        "JukyushaDaicho"."No"                               AS          "JukyushaDaicho_no" 
+    </sql>
+    
+     <resultMap id="ResultMap_JukyushaDaicho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.KekkaJukyushaDaichoRealEntity" autoMapping="true">
+        <result property="jigyoshoNo"                   column="JukyushaDaicho_jigyoshoNo"                              typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="hokenshaKubun"                column="JukyushaDaicho_hokenshaKubun"                           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceTeikyoYM"              column="JukyushaDaicho_serviceTeikyoYM"                         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="toriatsukaiYM"                column="JukyushaDaicho_toriatsukaiYM"                           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shichosonCode"                column="JukyushaDaicho_shichosonCode"                           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="hihokenshaNo"                 column="JukyushaDaicho_hihokenshaNo"                            typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="rirekiNo"                     column="JukyushaDaicho_rirekiNo"                                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="edaban"                       column="JukyushaDaicho_edaban"                                  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyuShinseiJiyu"             column="JukyushaDaicho_jukyuShinseiJiyu"                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yoshienshaNinteiShinseiFlag"  column="JukyushaDaicho_yoshienshaNinteiShinseiFlag"  />
+        <result property="jukyuShinseiYMD"              column="JukyushaDaicho_jukyuShinseiYMD"                         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yokaigoJotaiKubunCode"        column="JukyushaDaicho_yokaigoJotaiKubunCode"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD"     column="JukyushaDaicho_ninteiYukoKikanKaishiYMD"                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD"     column="JukyushaDaicho_ninteiYukoKikanShuryoYMD"                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYMD"                    column="JukyushaDaicho_ninteiYMD"                               typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyuSochishaFlag"              column="JukyushaDaicho_kyuSochishaFlag" />
+        <result property="minashiCode"                  column="JukyushaDaicho_minashiCode"                             typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="chokkinIdoJiyuCode"           column="JukyushaDaicho_chokkinIdoJiyuCode"                      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="no"                           column="JukyushaDaicho_no"                                      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT1001HihokenshaDaicho">
+         "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+         "DbT1001HihokenshaDaicho"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+         "DbT1001HihokenshaDaicho"."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+         "DbT1001HihokenshaDaicho"."idoJiyuCode" as "dbT1001HihokenshaDaicho_idoJiyuCode",
+         "DbT1001HihokenshaDaicho"."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+         "DbT1001HihokenshaDaicho"."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+         "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+         "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+         "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+         "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+         "DbT1001HihokenshaDaicho"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
+    </sql>
+    
+    
+</mapper>

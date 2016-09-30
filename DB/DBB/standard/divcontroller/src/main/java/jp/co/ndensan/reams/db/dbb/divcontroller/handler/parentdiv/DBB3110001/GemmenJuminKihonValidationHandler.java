@@ -317,7 +317,7 @@ public class GemmenJuminKihonValidationHandler {
     private static enum GemmenJuminKihonValidationMessages implements IValidationMessage {
 
         未指定チェック(UrErrorMessages.未指定, 出力対象チェックMESSAGE.toString()),
-        賦課情報の存在チェック(DbbErrorMessages.賦課情報なし),
+        賦課情報の存在チェック(DbbErrorMessages.賦課情報なし, 減免額MESSAGE.toString()),
         減免額の整合性チェック(DbbErrorMessages.減免額_合計不一致),
         決定日の必須入力チェック(DbzErrorMessages.複数必須項目相関チェックエラー, 減免額MESSAGE.toString(), 決定日MESSAGE.toString()),
         減免額の必須入力チェック(UrErrorMessages.必須項目_追加メッセージあり, 減免額MESSAGE.toString()),

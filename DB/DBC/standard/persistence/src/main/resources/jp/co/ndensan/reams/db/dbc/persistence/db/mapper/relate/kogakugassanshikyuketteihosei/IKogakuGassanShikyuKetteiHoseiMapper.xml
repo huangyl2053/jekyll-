@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要：支給決定情報補正（単）(事業分兼)のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2290-030 quxiaodong -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei.IKogakuGassanShikyuKetteiHoseiMapper">
+    <select resultOrdered="true" id="get高額合算list"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity"
+            fetchSize="500">
+        SELECT "A".*
+        FROM
+        rgdb."DbT3074KogakuGassanShikyuFushikyuKettei" AS "A"
+        WHERE
+        "A"."isDeleted"='false'
+        <if test="対象年度 != null and !対象年度.isEmpty()">
+            AND "A"."taishoNendo"=#{対象年度}
+        </if>
+        <if test="証記載保険者番号 != null and !証記載保険者番号.isEmpty()">
+            AND "A"."hokenshaNo"=#{証記載保険者番号}
+        </if>
+        <if test="支給申請書整理番号 != null and !支給申請書整理番号.isEmpty()">
+            AND "A"."shikyuSeiriNo"=#{支給申請書整理番号}
+        </if>
+        ORDER BY
+        "A"."taishoNendo" DESC,
+        "A"."hihokenshaNo" DESC,
+        "A"."shikyuSeiriNo" DESC,
+        "A"."rirekiNo" DESC
+    </select>
+    <select resultOrdered="true" id="get事業高額合算list"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity"
+            fetchSize="500">
+        SELECT "B".*
+        FROM
+        rgdb."DbT3174JigyoKogakuGassanShikyuFushikyuKettei" AS "B"
+        WHERE
+        "B"."isDeleted"='false'
+        <if test="対象年度 != null and !対象年度.isEmpty()">
+            AND "B"."taishoNendo"=#{対象年度}
+        </if>
+        <if test="証記載保険者番号 != null and !証記載保険者番号.isEmpty()">
+            AND "B"."hokenshaNo"=#{証記載保険者番号}
+        </if>
+        <if test="支給申請書整理番号 != null and !支給申請書整理番号.isEmpty()">
+            AND "B"."shikyuSeiriNo"=#{支給申請書整理番号}
+        </if>
+        ORDER BY
+        "B"."taishoNendo" DESC,
+        "B"."hihokenshaNo" DESC,
+        "B"."shikyuSeiriNo" DESC,
+        "B"."rirekiNo" DESC
+    </select>
+    <select resultOrdered="true" id="get高額合算給付実績"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.ShoriModeHanteiParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity"
+            fetchSize="500">
+        SELECT "B".*
+        FROM
+        (
+        SELECT
+        "C"."kokanJohoShikibetsuNo",
+        "C"."hihokenshaNo",
+        "C"."shikyuShinseiSeiriNo",
+        MAX("C"."seiriNo") AS 整理番号
+        FROM
+        rgdb."DbT3075KogakuGassanKyufuJisseki" AS "C"
+        GROUP BY
+        "C"."kokanJohoShikibetsuNo",
+        "C"."hihokenshaNo",
+        "C"."shikyuShinseiSeiriNo"
+        ) AS "A"
+        INNER JOIN
+        rgdb."DbT3075KogakuGassanKyufuJisseki" AS "B"
+        ON
+        "A"."kokanJohoShikibetsuNo"="B"."kokanJohoShikibetsuNo"
+        AND "A"."hihokenshaNo"="B"."hihokenshaNo"
+        AND "A"."shikyuShinseiSeiriNo"="B"."shikyuShinseiSeiriNo"
+        WHERE
+        "B"."isDeleted"='false'
+        AND "B"."hihokenshaNo"=#{被保険者番号}
+        AND "B"."shoKisaiHokenshaNo"=#{証記載保険者番号}
+        AND "B"."shikyuShinseiSeiriNo"=#{支給申請書整理番号}
+        ORDER BY
+        "B"."shoriYM" DESC
+        LIMIT 1
+    </select>
+
+    <select resultOrdered="true" id="get高額合算支給額計算結果"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity"
+            fetchSize="500">
+        SELECT "B".*
+        FROM
+        (
+        SELECT
+        "C"."hihokenshaNo",
+        "C"."taishoNendo",
+        "C"."shoKisaiHokenshaNo",
+        "C"."shikyuShinseishoSeiriNo",
+        MAX("C"."rirekiNo") AS 履歴番号
+        FROM
+        rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" AS "C"
+        GROUP BY
+        "C"."hihokenshaNo",
+        "C"."taishoNendo",
+        "C"."shoKisaiHokenshaNo",
+        "C"."shikyuShinseishoSeiriNo"
+        ) AS "A"
+        INNER JOIN
+        rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" AS "B"
+        ON
+        "A"."hihokenshaNo"="B"."hihokenshaNo"
+        AND "A"."taishoNendo"="B"."taishoNendo"
+        AND "A"."shoKisaiHokenshaNo"="B"."shoKisaiHokenshaNo"
+        AND "A"."shikyuShinseishoSeiriNo"="B"."shikyuShinseishoSeiriNo"
+        WHERE
+        "B"."isDeleted"='false'
+        AND "B"."hihokenshaNo"=#{被保険者番号}
+        AND "B"."taishoNendo"=#{対象年度}
+        AND "B"."shoKisaiHokenshaNo"=#{証記載保険者番号}
+        AND "B"."shikyuShinseishoSeiriNo"=#{支給申請書整理番号}
+        ORDER BY
+        "B"."rirekiNo" DESC
+        LIMIT 1
+    </select>
+</mapper>

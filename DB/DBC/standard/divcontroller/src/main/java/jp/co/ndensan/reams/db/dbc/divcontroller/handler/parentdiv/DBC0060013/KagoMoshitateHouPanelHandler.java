@@ -81,8 +81,13 @@ public class KagoMoshitateHouPanelHandler {
      * 一覧エリア検索処理する。
      *
      * @param kksbsList 給付管理明細一覧
+     * @param tanflg 訪問通所サービスフラグ
      */
-    public void setShohinSourcre(List<KyufuKanrihyoShokaiDataModel> kksbsList) {
+    public void setShohinSourcre(List<KyufuKanrihyoShokaiDataModel> kksbsList, boolean tanflg) {
+        if (tanflg && kksbsList == null) {
+            div.getService().getDgServive().setDataSource(new ArrayList());
+            return;
+        }
         List<dgServive_Row> serviceRowList = new ArrayList();
         for (KyufuKanrihyoShokaiDataModel jigyoshaInput : kksbsList) {
             if (KyotakuServiceKubun.訪問通所.getコード().equals(jigyoshaInput.get給付管理票種別区分コード())) {

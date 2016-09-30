@@ -55,7 +55,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_Jyukyusyajoho(KaigoSikakuTokusouDiv div) {
-        return ResponseData.of(div).forwardWithEventName(null).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -65,7 +65,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_KyufuJoho(KaigoSikakuTokusouDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBU0600011TransitionEventName.一覧表示).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -75,7 +75,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_Fukasyajoho(KaigoSikakuTokusouDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBU0600011TransitionEventName.一覧表示).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -85,7 +85,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_Jyuminsyajoho(KaigoSikakuTokusouDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBU0600011TransitionEventName.一覧表示).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -95,8 +95,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_Hihokensyajoho(KaigoSikakuTokusouDiv div) {
-        //TODO 王華鳳　QA１５６９　UIContainerが漏れる　
-        return ResponseData.of(div).forwardWithEventName(null).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -106,8 +105,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_HokaJyusyotokurei(KaigoSikakuTokusouDiv div) {
-        //TODO 王華鳳　QA１５６９　UIContainerが漏れる
-        return ResponseData.of(div).forwardWithEventName(null).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -117,8 +115,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_Shiyojyogaisya(KaigoSikakuTokusouDiv div) {
-        //TODO 王華鳳　QA１５６９　UIContainerが漏れる
-        return ResponseData.of(div).forwardWithEventName(null).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**

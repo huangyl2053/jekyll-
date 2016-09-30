@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShikakuTokusoRireki {
 
-    private static final RString 照会モード_Dialog = new RString("shokai_Dialog");
+    private static final RString 照会モード = new RString("shokai_Dialog");
 
     /**
      * 資格得喪履歴の初期化処理します。
@@ -29,7 +29,7 @@ public class ShikakuTokusoRireki {
     public ResponseData<ShikakuTokusoRirekiDiv> initialize(ShikakuTokusoRirekiDiv div) {
 
         if (div.getMode() != null && !div.getMode().isEmpty()) {
-            if (div.getMode().equals(照会モード_Dialog)) {
+            if (div.getMode().equals(照会モード)) {
                 div.setDialogDisplay();
             } else {
                 div.setMode_DisplayType(ShikakuTokusoRirekiDiv.DisplayType.valueOf(div.getMode().toString()));

@@ -16,6 +16,7 @@ import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,7 +41,7 @@ public class HokenshaListDivHandler {
     /**
      * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。 また、共有子Div内に、取得した保険者のリストを保持します。
      */
-    void loadAndHoldHokenshaList(GyomuBunrui 業務分類) {
+    void loadAndHoldHokenshaList(GyomuBunrui 業務分類, boolean 全市町村の表示有無) {
         List<HokenshaSummary> hokenshaList = new ArrayList<>(
                 HokenshaListLoader.createInstance()
                 .getShichosonCodeNameList(業務分類)
@@ -57,7 +58,8 @@ public class HokenshaListDivHandler {
         });
 
         List<KeyValueDataSource> list = new ArrayList<>();
-        if (1 < hokenshaList.size()) {
+
+        if (全市町村の表示有無 && 1 < hokenshaList.size()) {
             list.add(new KeyValueDataSource(ALL_SHICHOSON_KEY, ALL_SHICHOSON_VALUE));
         }
 
@@ -86,6 +88,25 @@ public class HokenshaListDivHandler {
         }
         for (Map.Entry<RString, HokenshaSummary> entry : ShichosonListHolder.getFrom(div).entrySet()) {
             if (Objects.equals(entry.getValue().get市町村コード(), lasdecCode)) {
+                div.getDdlHokenshaList().setSelectedKey(entry.getKey());
+            }
+        }
+    }
+
+    /**
+     * 指定の証記載保険者番号に該当する要素を保持する場合、その市町村をDDLの選択値とします。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     */
+    void setSelectedShoKisaiHokenshaNoIfExist(ShoKisaiHokenshaNo 証記載保険者番号) {
+        if (!ShichosonListHolder.hasShichosonList(div)) {
+            return;
+        }
+        if (証記載保険者番号 == null) {
+            return;
+        }
+        for (Map.Entry<RString, HokenshaSummary> entry : ShichosonListHolder.getFrom(div).entrySet()) {
+            if (Objects.equals(entry.getValue().get証記載保険者番号(), 証記載保険者番号)) {
                 div.getDdlHokenshaList().setSelectedKey(entry.getKey());
             }
         }

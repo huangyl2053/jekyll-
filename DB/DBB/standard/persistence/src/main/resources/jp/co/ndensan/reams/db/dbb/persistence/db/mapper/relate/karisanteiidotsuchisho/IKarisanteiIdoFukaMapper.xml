@@ -2977,7 +2977,7 @@
         <association property="宛先代納" resultMap="ResultMap_AtesakiDainoEntity"/>
     </resultMap>
     
-    <select id="select全件賦課情報" resultMap="resultMap_TmpFukaInfo"
+    <select resultOrdered="true" id="select全件賦課情報" resultMap="resultMap_TmpFukaInfo"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
             A.*
@@ -3641,7 +3641,7 @@
         <result property="dainoninSetaiCode"                   column="Atesaki_dainoninSetaiCode"                   typeHandler="SetaiCodeTypeHandler" />
     </resultMap>
        
-    <select id="select全件賦課情報_変更" resultMap="resultMap_TmpFukaInfo"
+    <select resultOrdered="true" id="select全件賦課情報_変更" resultMap="resultMap_TmpFukaInfo"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
             A.*
@@ -3652,7 +3652,7 @@
        ${出力順}
     </select>
     
-    <select id="select全件賦課情報_納入" resultMap="resultMap_TmpFukaInfo"
+    <select resultOrdered="true" id="select全件賦課情報_納入" resultMap="resultMap_TmpFukaInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" fetchSize="500">
         SELECT
             A.*

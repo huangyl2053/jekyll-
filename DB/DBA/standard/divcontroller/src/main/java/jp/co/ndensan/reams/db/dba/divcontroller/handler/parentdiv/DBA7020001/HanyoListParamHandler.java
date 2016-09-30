@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaBatchParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha.HanyoListSeikatsuhogoJukyushaBatchParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaBatchParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA740010.DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA760010.DBA760010_HanyoListSeikatsuHogoJukyushaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA720010.DBA720010_HanyoListTaShichosonJushochiTokureishaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA730010.DBA730010_HanyoListTekiyoJogaishaParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -132,10 +132,10 @@ public class HanyoListParamHandler {
     /**
      * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
      *
-     * @return parameter HanyoListSeikatsuhogoJukyushaBatchParameter
+     * @return parameter DBA760010_HanyoListSeikatsuHogoJukyushaParameter
      */
-    public HanyoListSeikatsuhogoJukyushaBatchParameter onClick_btnSeikatsuKogakuParamSave() {
-        HanyoListSeikatsuhogoJukyushaBatchParameter parameter = new HanyoListSeikatsuhogoJukyushaBatchParameter();
+    public DBA760010_HanyoListSeikatsuHogoJukyushaParameter onClick_btnSeikatsuKogakuParamSave() {
+        DBA760010_HanyoListSeikatsuHogoJukyushaParameter parameter = new DBA760010_HanyoListSeikatsuHogoJukyushaParameter();
         parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
         parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
         parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
@@ -162,10 +162,10 @@ public class HanyoListParamHandler {
     /**
      * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
      *
-     * @return parameter HanyoListRoreiFukushiNenkinJukyushaBatchParameter
+     * @return parameter DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter
      */
-    public HanyoListRoreiFukushiNenkinJukyushaBatchParameter onClick_btnRoreiKogakuParamSave() {
-        HanyoListRoreiFukushiNenkinJukyushaBatchParameter parameter = new HanyoListRoreiFukushiNenkinJukyushaBatchParameter();
+    public DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter onClick_btnRoreiKogakuParamSave() {
+        DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter parameter = new DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter();
         parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
         parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
         parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
@@ -192,10 +192,10 @@ public class HanyoListParamHandler {
     /**
      * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
      *
-     * @return parameter HanyoListTaShichosonJushochiTokureishaBatchParameter
+     * @return parameter DBA720010_HanyoListTaShichosonJushochiTokureishaParameter
      */
-    public HanyoListTaShichosonJushochiTokureishaBatchParameter onClick_btnTashichoKogakuParamSave() {
-        HanyoListTaShichosonJushochiTokureishaBatchParameter parameter = new HanyoListTaShichosonJushochiTokureishaBatchParameter();
+    public DBA720010_HanyoListTaShichosonJushochiTokureishaParameter onClick_btnTashichoKogakuParamSave() {
+        DBA720010_HanyoListTaShichosonJushochiTokureishaParameter parameter = new DBA720010_HanyoListTaShichosonJushochiTokureishaParameter();
         parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
         parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
         parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
@@ -222,10 +222,10 @@ public class HanyoListParamHandler {
     /**
      * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
      *
-     * @return parameter HanyoListTekiyoJogaishaBatchParameter
+     * @return parameter DBA730010_HanyoListTekiyoJogaishaParameter
      */
-    public HanyoListTekiyoJogaishaBatchParameter onClick_btnTekiyoKogakuParamSave() {
-        HanyoListTekiyoJogaishaBatchParameter parameter = new HanyoListTekiyoJogaishaBatchParameter();
+    public DBA730010_HanyoListTekiyoJogaishaParameter onClick_btnTekiyoKogakuParamSave() {
+        DBA730010_HanyoListTekiyoJogaishaParameter parameter = new DBA730010_HanyoListTekiyoJogaishaParameter();
         parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
         parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
         parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
@@ -402,7 +402,7 @@ public class HanyoListParamHandler {
         }
     }
 
-    private void 生活抽出条件保存(HanyoListSeikatsuhogoJukyushaBatchParameter parameter) {
+    private void 生活抽出条件保存(DBA760010_HanyoListSeikatsuHogoJukyushaParameter parameter) {
         生活保護受給者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
@@ -443,7 +443,7 @@ public class HanyoListParamHandler {
         parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
     }
 
-    private void 老齢抽出条件保存(HanyoListRoreiFukushiNenkinJukyushaBatchParameter parameter) {
+    private void 老齢抽出条件保存(DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter parameter) {
         老齢福祉年金受給者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
@@ -484,7 +484,7 @@ public class HanyoListParamHandler {
         parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
     }
 
-    private void 他市町村抽出条件保存(HanyoListTaShichosonJushochiTokureishaBatchParameter parameter) {
+    private void 他市町村抽出条件保存(DBA720010_HanyoListTaShichosonJushochiTokureishaParameter parameter) {
         他市町村住所地特例者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
@@ -525,7 +525,7 @@ public class HanyoListParamHandler {
         parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
     }
 
-    private void 適用抽出条件保存(HanyoListTekiyoJogaishaBatchParameter parameter) {
+    private void 適用抽出条件保存(DBA730010_HanyoListTekiyoJogaishaParameter parameter) {
         適用除外者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
@@ -566,7 +566,7 @@ public class HanyoListParamHandler {
         parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
     }
 
-    private void 適用除外者保存(HanyoListTekiyoJogaishaBatchParameter parameter) {
+    private void 適用除外者保存(DBA730010_HanyoListTekiyoJogaishaParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadTekiyoJogaishaChushutsu().getSelectedKey());
         parameter.setKijunYMDkubun(div.getRadTekiyoJogaishaTekiyoKijyun().getSelectedKey());
         if (div.getTexTekiyoJogaishaKijyunDate().getValue() != null) {
@@ -610,7 +610,7 @@ public class HanyoListParamHandler {
         parameter.setShisetsuHenkonashi(施設変更なし区分);
     }
 
-    private void 他市町村住所地特例者保存(HanyoListTaShichosonJushochiTokureishaBatchParameter parameter) {
+    private void 他市町村住所地特例者保存(DBA720010_HanyoListTaShichosonJushochiTokureishaParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadTaShichosonJushotiTokureishaChushutsu().getSelectedKey());
         parameter.setKijunYMDkubun(div.getRadTaShichosonJushotiTokureishaTekiyoKijyun().getSelectedKey());
         if (div.getTexTaShichosonJushotiTokureishaKijyunDate().getValue() != null) {
@@ -654,7 +654,7 @@ public class HanyoListParamHandler {
         parameter.setShisetsuHenkonashi(施設変更なし区分);
     }
 
-    private void 老齢福祉年金受給者保存(HanyoListRoreiFukushiNenkinJukyushaBatchParameter parameter) {
+    private void 老齢福祉年金受給者保存(DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadRoreiFukushiNenkinJukyushaChushutsu().getSelectedKey());
         if (div.getTexRoreiFukushiNenkinJukyushaKijyunDate().getValue() != null) {
             parameter.setKijunYMD(div.getTexRoreiFukushiNenkinJukyushaKijyunDate().getValue().toDateString());
@@ -668,7 +668,7 @@ public class HanyoListParamHandler {
         }
     }
 
-    private void 生活保護受給者保存(HanyoListSeikatsuhogoJukyushaBatchParameter parameter) {
+    private void 生活保護受給者保存(DBA760010_HanyoListSeikatsuHogoJukyushaParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadSeikatuhogoJukyushaChushutsu().getSelectedKey());
         if (div.getTexSeikatuhogoKijunDate().getValue() != null) {
             parameter.setKijunYMD(div.getTexSeikatuhogoKijunDate().getValue().toDateString());

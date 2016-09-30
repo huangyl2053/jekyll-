@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支払方法区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 wangchao
  */
 public enum ShiharaiHohoKubun {
 

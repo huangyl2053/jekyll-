@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--@reamsid_L DBC-2110-050 liuxiaoyu-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigojuryoininkeiyaku.IKaigoJuryoininKeiyakuMapper">
+ <select resultOrdered="true" id="select受領委任契約事業者"
+         resultMap="resultMap_KozaJyoho" fetchSize="500"
+         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigojuryoininkeiyaku.KaigoJuryoininKeiyakuMybatisParameter">
+        SELECT  A."keiyakuJigyoshaNo" As "keiyakuJigyoshaNo",
+                A."keiyakuJigyoshaKanaName" As "keiyakuJigyoshaKanaName",
+                A."keiyakuJigyoshaYubinNo" As "keiyakuJigyoshaYubinNo",
+                A."keiyakuJigyoshaJusho" As "keiyakuJigyoshaJusho",
+                A."kaishiYMD" As "kaishiYMD",
+                D."name" AS "name",
+                A."kozaNo" As "kozaNo",
+                A."keiyakuJigyoshaName" As "keiyakuJigyoshaName",
+                A."keiyakuJigyoshaJusho" As "keiyakuJigyoshaJusho",
+                A."keiyakuShurui" As "keiyakuShurui",
+                F."name" AS "rsname",
+                A."kozaMeiginin" As "kozaMeiginin"     
+        FROM  rgdb."DbT3077JuryoininKeiyakuJigyosha"  AS  A
+              LEFT JOIN(
+                 SELECT *
+                 FROM(
+                      SELECT *,
+                      ROW_NUMBER() OVER(PARTITION BY C."kinyuKikanCode" ORDER BY C."kaishiYMD" DESC) AS X
+                      FROM  
+                        rgua."UaT0302KinyuKikan"   AS C ) AS B
+                WHERE
+                    B.X  = 1     
+                      )    AS      D    
+                 ON D."kinyuKikanCode"  = A."kinyuKikanCode"  
+             LEFT JOIN(
+               SELECT *
+                FROM(
+                     SELECT *,
+                     ROW_NUMBER() OVER(PARTITION BY F."kinyuKikanCode",F."kinyuKikanShitenCode" ORDER BY F."kaishiYMD" DESC)AS Y
+                     FROM  
+                     rgua."UaT0303KinyuKikanShiten"   AS F)    AS E
+                    WHERE
+                      E.Y  = 1 
+                  )   AS F
+                    ON F."kinyuKikanCode" =A."kinyuKikanCode" 
+                    AND F."kinyuKikanShitenCode" = A."shitenCode"      
+        WHERE  A."keiyakuJigyoshaNo" <![CDATA[<=]]> #{契約事業者番号TO}
+        AND    #{契約事業者番号FROM} <![CDATA[<=]]> A."keiyakuJigyoshaNo"
+        AND    A."kaishiYMD" <![CDATA[<=]]> #{契約日TO}
+        AND    #{契約日FROM} <![CDATA[<=]]> A."kaishiYMD"
+        <if test="契約種別 == 0">
+        AND (A."keiyakuShurui"='01'
+        OR A."keiyakuShurui" ='02'
+        OR A."keiyakuShurui" ='03')       
+        </if>
+        <if test="契約種別 == 1">
+        AND A."keiyakuShurui" ='01' 
+        </if>
+        <if test="契約種別 == 2">
+        AND A."keiyakuShurui"='02' 
+        </if>
+        <if test="契約種別 == 3">
+        AND A."keiyakuShurui" ='03' 
+        </if>
+        <if test="契約期間終了事業者 == 1">
+            AND A."shuryoYMD" ='99999999' 
+        </if> 
+        <if test="契約期間終了事業者 == 2"> 
+            AND A."shuryoYMD"<![CDATA[<>]]>'99999999' 
+        </if>
+        ${並び順}
+ </select>
+    <resultMap id="resultMap_KozaJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigojuryoininkeiyakujigyoshaichirahyo.KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity" autoMapping="true">
+          <result property="事業者番号"            column="keiyakuJigyoshaNo"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+          <result property="事業者名称カナ"            column="keiyakuJigyoshaKanaName"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+          <result property="所在地郵便番号"            column="keiyakuJigyoshaYubinNo"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+          <result property="所在地上段"            column="keiyakuJigyoshaJusho"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+          <result property="契約開始日"            column="kaishiYMD"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+          <result property="振込先金融機関"            column="name"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+          <result property="振込先口座番号"            column="kozaNo"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+          <result property="事業者名称"            column="keiyakuJigyoshaName"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+          <result property="所在地下段"            column="keiyakuJigyoshaJusho"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+          <result property="契約種別"            column="keiyakuShurui"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+          <result property="振込先支店名"            column="rsname"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+          <result property="振込先名義人名"            column="kozaMeiginin"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+  </resultMap>
+</mapper>
+

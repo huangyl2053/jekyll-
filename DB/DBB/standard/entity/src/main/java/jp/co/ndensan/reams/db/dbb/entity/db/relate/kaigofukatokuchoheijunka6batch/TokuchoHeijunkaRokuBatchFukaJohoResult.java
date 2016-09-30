@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6bat
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
 
 /**
  * 賦課情報TempEntity
  *
- * @reamsid_L DBB-0810-020 yebangqiang
+ * @reamsid_L DBB-0810-010 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class TokuchoHeijunkaRokuBatchFukaJohoResult implements Serializable {
 
-    private FukaJohoRelateEntity 賦課の情報;
+    private FukaJohoTmpEntity 賦課の情報;
     private TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果;
 }

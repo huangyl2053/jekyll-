@@ -178,36 +178,6 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
     }
 
     /**
-     * 他市町村住所地特例を取得します。
-     *
-     * @param 識別コード ShikibetsuCode
-     * @param 年齢到達日 年齢到達日
-     * @return List<DbT1003TashichosonJushochiTokureiEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public List<DbT1003TashichosonJushochiTokureiEntity> select他市町村住所地特例(
-            ShikibetsuCode 識別コード,
-            FlexibleDate 年齢到達日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
-        requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT1003TashichosonJushochiTokurei.class).
-                where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                (or(
-                                        and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
-                                        (or(and(leq(tekiyoYMD, 年齢到達日), isNULL(kaijoYMD)),
-                                                and(leq(tekiyoYMD, 年齢到達日), eq(kaijoYMD, ""))))
-                                )),
-                                eq(logicalDeletedFlag, false))).
-                toList(DbT1003TashichosonJushochiTokureiEntity.class);
-    }
-
-    /**
      * 他特例者チェック１を返します。
      *
      * @param 識別コード 識別コード
@@ -257,4 +227,24 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
+    /**
+     * 他市町村住所地特例で異動日のレコード中で最大の枝番を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1003TashichosonJushochiTokureiEntity
+     */
+    @Transaction
+    public List<DbT1003TashichosonJushochiTokureiEntity> get適用除外者受給者台帳(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(logicalDeletedFlag, false))).
+                order(by(shikibetsuCode), by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                toList(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
 }

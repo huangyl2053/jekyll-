@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5910001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE591001.DBE591001_IryokikanShujiiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiHateiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputPage;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputSort;
@@ -73,9 +73,9 @@ public class IkenshoShujiiIchiranHandler {
      *
      * @return 医療機関・主治医一覧表作成_バッチフロークラスパラメータ
      */
-    public IkenshoShujiiIchiranParameter onClick_btnReportPublish() {
+    public DBE591001_IryokikanShujiiParameter onClick_btnReportPublish() {
 
-        IkenshoShujiiIchiranParameter batchParameter = new IkenshoShujiiIchiranParameter();
+        DBE591001_IryokikanShujiiParameter batchParameter = new DBE591001_IryokikanShujiiParameter();
         batchParameter.setShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
         batchParameter.setShichosonName(div.getCcdHokensha().getSelectedItem().get市町村名称());
         batchParameter.setIryoKikanCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());

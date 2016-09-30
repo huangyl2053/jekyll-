@@ -325,6 +325,24 @@ public class KaigoServiceNaiyou
     }
 
     /**
+     * 制限日数・回数を返します。
+     *
+     * @return 制限日数・回数
+     */
+    public RString get制限日数回数() {
+        return entity.getSeigenNissuKaisu();
+    }
+
+    /**
+     * 算定回数制限期間区分を返します。
+     *
+     * @return 算定回数制限期間区分
+     */
+    public RString get算定回数制限期間区分() {
+        return entity.getSanteiKaisuSeigenKikanKubun();
+    }
+
+    /**
      * {@link DbT7131KaigoServiceNaiyouEntity}のクローンを返します。
      *
      * @return {@link DbT7131KaigoServiceNaiyouEntity}のクローン

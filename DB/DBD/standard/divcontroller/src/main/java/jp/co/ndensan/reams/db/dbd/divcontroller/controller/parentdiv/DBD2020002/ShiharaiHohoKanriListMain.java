@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.ShiharaiHohoHenkoListFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207012.DBD207012_ShiharaiHohoHenkoKanriListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002.ShiharaiHohoKanriListMainHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -55,8 +55,8 @@ public class ShiharaiHohoKanriListMain {
      * @param div ShiharaiHohoKanriListMainDiv のクラスファイル
      * @return ResponseData<ShiharaiHohoKanriListMainDiv>
      */
-    public ResponseData<ShiharaiHohoHenkoListFlowParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {
-        ResponseData<ShiharaiHohoHenkoListFlowParameter> responseData = new ResponseData<>();
+    public ResponseData<DBD207012_ShiharaiHohoHenkoKanriListParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {
+        ResponseData<DBD207012_ShiharaiHohoHenkoKanriListParameter> responseData = new ResponseData<>();
         responseData.data = createBusiness(div).createShiharaiHohoHenkoKanriIchiranParameter();
         return responseData;
     }

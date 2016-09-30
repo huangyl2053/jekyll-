@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4910001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinchokudataoutput.ShinchokuDataOutputBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE491001.DBE491001_NichijiShinchokuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.DBE4910001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.DBE4910001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.ShinchokuDataOutputDiv;
@@ -108,7 +108,7 @@ public class ShinchokuDataOutput {
      * @param div 要介護認定進捗情報データ出力div
      * @return ResponseData<ShinchokuDataOutputDiv>
      */
-    public ResponseData<ShinchokuDataOutputBatchParamter> onClick_btnShinchokuDataOutput(ShinchokuDataOutputDiv div) {
+    public ResponseData<DBE491001_NichijiShinchokuParameter> onClick_btnShinchokuDataOutput(ShinchokuDataOutputDiv div) {
         return ResponseData.of(getHandler(div).setBatchParamter(div)).respond();
     }
 

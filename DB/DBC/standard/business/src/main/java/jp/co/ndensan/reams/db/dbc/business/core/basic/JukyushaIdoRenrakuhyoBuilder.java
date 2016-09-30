@@ -958,6 +958,17 @@ public class JukyushaIdoRenrakuhyoBuilder {
     }
 
     /**
+     * 論理削除フラグを設定します。
+     *
+     * @param 論理削除フラグ boolean
+     * @return {@link JukyushaIdoRenrakuhyoBuilder}
+     */
+    public JukyushaIdoRenrakuhyoBuilder set論理削除フラグ(boolean 論理削除フラグ) {
+        entity.setLogicalDeletedFlag(論理削除フラグ);
+        return this;
+    }
+
+    /**
      * {@link JukyushaIdoRenrakuhyo}のインスタンスを生成します。
      *
      * @return {@link JukyushaIdoRenrakuhyo}のインスタンス

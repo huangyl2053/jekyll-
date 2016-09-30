@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4710-030 chenjie -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohikohijukyusha.ISogojigyohiKohiJukyushaMapper">
+    <select id="get帳票出力対象データ"
+            resultMap="resultMap_SogojigyohiKohiJukyushaEntity" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter"  fetchSize="500" resultOrdered="true">
+        SELECT 
+        <include refid="allColumns_sogojigyohiKohiJukyusha" />
+        FROM "DbWT6412KohiJukyushabetsuShukei" AS DbWT6412
+        INNER JOIN "DbWT6411KohiJukyushabetsuMeisai" AS DbWT6411 ON DbWT6412."sRirekiNo" = DbWT6411."mRirekiNo"
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON DbWT6411."mRenban" = DbWT0001."meisaiRenban"
+        ${出力順}
+    </select>
+    
+    <resultMap id="resultMap_SogojigyohiKohiJukyushaEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikohijukyusha.SogojigyohiKohiJukyushaEntity"
+               autoMapping="true" >
+        <result property="審査年月" column="dbWT6412_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="国保連合会名" column="dbWT6412_kokuhorenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費負担者番号" column="dbWT6412_kohiFutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費負担者名" column="dbWT6412_kohiFutanshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費受給者番号" column="dbWT6411_kohiJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月" column="dbWT6411_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="事業者番号" column="dbWT6411_jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者名" column="dbWT6411_jigyoshoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスコード" column="dbWT6411_serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス種類名" column="dbWT6411_serviceShuruiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス項目名" column="dbWT6411_serviceKomokuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="日数回数" column="dbWT6411_nissuKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公費対象単位数" column="dbWT6411_kohiTaishoTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公費負担金額" column="dbWT6411_kohiFutanKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公費分本人負担額" column="dbWT6411_kohibunHonninFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="登録被保険者番号" column="dbWT0001_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="宛名名称" column="dbWT0001_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="dbWT0001_shoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="公費対象単位数集計" column="dbWT6412_kohiTaishoTanisuShukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公費負担金額集計" column="dbWT6412_kohiFutanKingakuShukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公費分本人負担額集計" column="dbWT6412_kohibunHonninFutangakuShukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="被保険者番号" column="dbWT0001_orgHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        
+    </resultMap>
+    
+    <sql id="allColumns_sogojigyohiKohiJukyusha">
+        DbWT6412."shinsaYM" As dbWT6412_shinsaYM,
+        DbWT6412."kokuhorenName" As dbWT6412_kokuhorenName,
+        DbWT6412."kohiFutanshaNo" As dbWT6412_kohiFutanshaNo,
+        DbWT6412."kohiFutanshaName" As dbWT6412_kohiFutanshaName,
+        DbWT6411."kohiJukyushaNo" As dbWT6411_kohiJukyushaNo,
+        DbWT6411."serviceTeikyoYM" As dbWT6411_serviceTeikyoYM,
+        DbWT6411."jigyoshoNo" As dbWT6411_jigyoshoNo,
+        DbWT6411."jigyoshoName" As dbWT6411_jigyoshoName,
+        DbWT6411."serviceCode" As dbWT6411_serviceCode,
+        DbWT6411."serviceShuruiMei" As dbWT6411_serviceShuruiMei,
+        DbWT6411."serviceKomokuMei" As dbWT6411_serviceKomokuMei,
+        DbWT6411."serviceKomokuMei" As dbWT6411_serviceKomokuMei,
+        DbWT6411."nissuKaisu" As dbWT6411_nissuKaisu,
+        DbWT6411."kohiTaishoTanisu" As dbWT6411_kohiTaishoTanisu,
+        DbWT6411."kohiFutanKingaku" As dbWT6411_kohiFutanKingaku,
+        DbWT6411."kohibunHonninFutangaku" As dbWT6411_kohibunHonninFutangaku,
+        DbWT0001."hihokenshaNo" As dbWT0001_hihokenshaNo,
+        DbWT0001."meisho" As dbWT0001_meisho,
+        DbWT0001."shoHokenshaNo" As dbWT0001_shoHokenshaNo,
+        DbWT6412."kohiTaishoTanisuShukei" As dbWT6412_kohiTaishoTanisuShukei,
+        DbWT6412."kohiFutanKingakuShukei" As dbWT6412_kohiFutanKingakuShukei,
+        DbWT6412."kohibunHonninFutangakuShukei" As dbWT6412_kohibunHonninFutangakuShukei,
+        DbWT0001."shikibetsuCode" As dbWT0001_shikibetsuCode,
+        DbWT0001."orgHihokenshaNo" AS dbWT0001_orgHihokenshaNo
+    </sql>
+</mapper>

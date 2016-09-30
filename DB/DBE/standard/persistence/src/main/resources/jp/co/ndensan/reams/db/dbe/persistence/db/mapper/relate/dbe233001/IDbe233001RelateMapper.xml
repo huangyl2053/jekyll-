@@ -23,7 +23,7 @@
         <result property="temp_処理名" column="temp_処理名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="select主治医意見書督促状ByKey" resultMap="resultMap_ShujiiIkenTokusokujoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShuturyokuJyoukenProcessParamter" fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho."yubinNo"  AS  temp_事業者郵便番号,
         DbT7051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
@@ -136,7 +136,7 @@
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="select主治医意見書督促対象者一覧表ByKey" resultMap="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShuturyokuJyoukenProcessParamter"
             fetchSize="500">
         SELECT
         DbT7051KoseiShichosonMaster."shichosonCode" AS temp_市町村コード,
@@ -226,7 +226,7 @@
     
     <select resultOrdered="true" id="select宛名機関"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiIkenTokusokujoMybitisParamter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShujiiIkenTokusokujoMybitisParamter"
             fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>

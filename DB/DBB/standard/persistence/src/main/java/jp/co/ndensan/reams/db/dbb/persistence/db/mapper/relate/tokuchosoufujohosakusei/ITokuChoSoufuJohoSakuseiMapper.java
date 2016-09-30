@@ -7,15 +7,47 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.UpdateShorikanriMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity;
 
 /**
- * 通知書打ち分け条件の取得処理
+ * DBB-1830-040バッチ設計_DBBBT84001_特徴制度間Ｉ／ＦのMapperクラスです。
  *
- * @reamsid_L DBB-0780-030 xicongwang
+ * @reamsid_L DBB-1830-040 liuyang
  */
 public interface ITokuChoSoufuJohoSakuseiMapper {
+
+    /**
+     * 介護特別徴収情報取込履歴追加する。
+     *
+     * @param entity UeT1704KaigoTokuchoTorikomiRirekiEntity
+     */
+    void insertTorikomiRireki(UeT1704KaigoTokuchoTorikomiRirekiEntity entity);
+
+    /**
+     * getDbT7022Entitiesのメソッドです。
+     *
+     * @param param UpdateShorikanriMyBatisParameter
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    List<DbT7022ShoriDateKanriEntity> getDbT7022Entities(UpdateShorikanriMyBatisParameter param);
+
+    /**
+     * 処理日付管理マスタ更新のメソッドです。
+     *
+     * @param parameter UpdateShorikanriMyBatisParameter
+     */
+    void updateShoriDateKanri(UpdateShorikanriMyBatisParameter parameter);
+
+    /**
+     * 介護特別徴収情報取込履歴の最大の連番を取得する。
+     *
+     * @return Integer
+     */
+    Integer selectMaxRenbanUeT1704();
 
     /**
      * 特徴開始月が10月 or 12月 or 2月の場合<br/>

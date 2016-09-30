@@ -252,10 +252,159 @@ public class KanendoIdouKekkaIchiranSource implements IReportSource {
     public RString list5_21;
     @ReportItem(name = "list10_1", length = 10, order = 118)
     public RString list10_1;
+    @ReportItem(name = "shikibetsuCode", length = 10, order = 119)
+    public RString shikibetsuCode;
+    @ReportItem(name = "kanaMeisho", length = 10, order = 120)
+    public RString kanaMeisho;
+    @ReportItem(name = "seinengappiYMD", length = 10, order = 121)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", length = 10, order = 122)
+    public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode", length = 10, order = 123)
+    public RString shichosonCode;
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 124)
+    public RString hihokenshaNo;
+    @ReportItem(name = "nenkinCode", length = 10, order = 125)
+    public RString nenkinCode;
+    @ReportItem(name = "nenkinNo", length = 10, order = 126)
+    public RString nenkinNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * KanendoIdouKekkaIchiranSourceのenum
+     */
+    public enum DBB200027ReportSourceFields {
+
+        printTimeStamp,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listFuchoKi_1,
+        listFuchoKi_2,
+        listFuchoKi_3,
+        listFuchoKi_4,
+        listFuchoKi_5,
+        listFuchoKi_6,
+        listFuchoKi_7,
+        listFuchoKi_8,
+        listFuchoKi_9,
+        listFuchoKi_10,
+        listFuchoKi_11,
+        listFuchoKi_12,
+        listFuchoKi_13,
+        listFuchoKi_14,
+        list1_1,
+        list1_2,
+        list1_3,
+        list1_4,
+        list1_5,
+        list1_6,
+        list6_1,
+        list2_1,
+        list2_2,
+        list2_3,
+        list2_4,
+        list2_5,
+        list2_6,
+        list2_7,
+        list2_8,
+        list2_9,
+        list2_10,
+        list2_11,
+        list2_12,
+        list2_13,
+        list2_14,
+        list2_15,
+        list2_16,
+        list2_17,
+        list2_18,
+        list2_19,
+        list7_1,
+        list3_1,
+        list3_2,
+        list3_3,
+        list3_4,
+        list3_5,
+        list3_6,
+        list3_7,
+        list3_8,
+        list3_9,
+        list3_10,
+        list3_11,
+        list3_12,
+        list3_13,
+        list3_14,
+        list3_15,
+        list3_16,
+        list3_17,
+        list3_18,
+        list3_19,
+        list8_1,
+        list4_1,
+        list4_2,
+        list4_3,
+        list4_4,
+        list4_5,
+        list4_6,
+        list4_7,
+        list4_8,
+        list4_9,
+        list4_10,
+        list4_11,
+        list4_12,
+        list4_13,
+        list4_14,
+        list4_15,
+        list4_16,
+        list4_17,
+        list4_18,
+        list4_19,
+        list4_20,
+        list4_21,
+        list9_1,
+        list5_1,
+        list5_2,
+        list5_3,
+        list5_4,
+        list5_5,
+        list5_6,
+        list5_7,
+        list5_8,
+        list5_9,
+        list5_10,
+        list5_11,
+        list5_12,
+        list5_13,
+        list5_14,
+        list5_15,
+        list5_16,
+        list5_17,
+        list5_18,
+        list5_19,
+        list5_20,
+        list5_21,
+        list10_1,
+        shikibetsuCode,
+        kanaMeisho,
+        seinengappiYMD,
+        seibetsuCode,
+        shichosonCode,
+        hihokenshaNo,
+        nenkinCode,
+        nenkinNo
+    }
 }

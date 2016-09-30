@@ -78,6 +78,6 @@ public class SogoJigyoTaishoshaTempEntity extends DbTableEntityBase<SogoJigyoTai
     @TempTableColumnOrder(25)
     private RString dataKubun;
     @TempTableColumnOrder(26)
-    private RString shikibetsuCode;
+    private ShikibetsuCode shikibetsuCode;
 
 }

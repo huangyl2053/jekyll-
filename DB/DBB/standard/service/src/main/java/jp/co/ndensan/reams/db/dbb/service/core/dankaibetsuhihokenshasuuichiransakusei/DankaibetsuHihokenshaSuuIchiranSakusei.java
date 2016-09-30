@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -58,7 +59,8 @@ public class DankaibetsuHihokenshaSuuIchiranSakusei {
      */
     @Transaction
     public YMDHMS getHonsanteiShoribi(FlexibleYear 調定年度) {
-        List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.本算定賦課.get名称());
+        List<DbT7022ShoriDateKanriEntity> entityList
+                = 処理日付管理Dac.select処理状況(調定年度, ShoriName.本算定賦課.get名称(), new RString("0001"));
         if (entityList.isEmpty()) {
             return null;
         }

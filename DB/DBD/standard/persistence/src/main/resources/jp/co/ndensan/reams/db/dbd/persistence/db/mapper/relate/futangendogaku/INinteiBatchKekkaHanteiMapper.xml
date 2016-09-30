@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3710-070 chenxin -->
+<!-- 概要： 負担限度額認定申請一括承認（バッチ）_結果一覧出力用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogaku.INinteiBatchKekkaHanteiMapper">
+    <select id="selectAll" fetchSize="500" resultOrdered="true"
+        resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.temptable.ShoninKekkaTempEntity">
+        SELECT
+            *
+        FROM
+            "shoninKekkaTempEntity"
+    </select>
+</mapper>

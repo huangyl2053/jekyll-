@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE510001.DBE510001_ShinsakaiAutoWaritsukeParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.ShinsakaiAutoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
@@ -72,7 +72,7 @@ public class ShinsakaiAutoHandler {
      *
      * @return List<TaisyosyaJidoWaritsukeBatchParameter>
      */
-    public TaisyosyaJidoWaritsukeBatchParameter setBatchParameter() {
+    public DBE510001_ShinsakaiAutoWaritsukeParameter setBatchParameter() {
 
         List<RString> shinsakaiKaisaiNo = new ArrayList<>();
         List<FlexibleDate> kaisaiYMD = new ArrayList<>();
@@ -87,6 +87,6 @@ public class ShinsakaiAutoHandler {
                 shinsakaiJidoWariateTeiin.add(Integer.valueOf(row.getShinsakaiJidoWariateTeiin().toString()));
             }
         }
-        return new TaisyosyaJidoWaritsukeBatchParameter(shinsakaiKaisaiNo, kaisaiYMD, shinsakaiWaritsukeNinsu, shinsakaiJidoWariateTeiin);
+        return new DBE510001_ShinsakaiAutoWaritsukeParameter(shinsakaiKaisaiNo, kaisaiYMD, shinsakaiWaritsukeNinsu, shinsakaiJidoWariateTeiin);
     }
 }

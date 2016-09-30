@@ -58,6 +58,7 @@ public class NinteiEnkiTsuchishoHakkoParameter implements IMyBatisParameter {
     private boolean is一次判定_判定済チェックON;
     private boolean is審査会割付_割付未チェックON;
     private boolean is審査会割付_割付済チェックON;
+    private boolean is単一;
 
     /**
      * コンストラクタです。
@@ -97,8 +98,8 @@ public class NinteiEnkiTsuchishoHakkoParameter implements IMyBatisParameter {
         this.申請区分_更新申請 = new RString(NinteiShinseiKubunShinsei.更新申請.コード());
         this.申請区分_区分変更申請 = new RString(NinteiShinseiKubunShinsei.区分変更申請.コード());
         if (!発行有無KeyList.contains(KEY0)) {
-            this.is発行有無_発行未チェックON = 発行有無KeyList.contains(KEY1);
-            this.is発行有無_発行済チェックON = 発行有無KeyList.contains(KEY2);
+            this.is発行有無_発行未チェックON = 発行有無KeyList.contains(KEY1) && !発行有無KeyList.contains(KEY2);
+            this.is発行有無_発行済チェックON = 発行有無KeyList.contains(KEY2) && !発行有無KeyList.contains(KEY1);
         }
         this.みなし２号等対象フラグ = KEY0.equals(みなし２号Key);
         if (処理見込み日From != null) {
@@ -109,34 +110,35 @@ public class NinteiEnkiTsuchishoHakkoParameter implements IMyBatisParameter {
             this.is処理見込み日Toが入力 = true;
             this.処理見込み日To = 処理見込み日To.toDateString();
         }
+        edit検索条件(認定調査KeyList, 意見書受領KeyList, 一次判定KeyList, 審査会割付KeyList, 市町村コード, 延期の理由);
+    }
+
+    private void edit検索条件(List<RString> 認定調査KeyList,
+            List<RString> 意見書受領KeyList, List<RString> 一次判定KeyList,
+            List<RString> 審査会割付KeyList, LasdecCode 市町村コード, RString 延期の理由) {
         if (!延期の理由.isNullOrEmpty()) {
             this.延期の理由 = 延期の理由;
             this.is延期の理由が選択 = true;
         }
-        edit検索条件(認定調査KeyList, 意見書受領KeyList, 一次判定KeyList, 審査会割付KeyList, 市町村コード);
-    }
-
-    private void edit検索条件(List<RString> 認定調査KeyList,
-            List<RString> 意見書受領KeyList, List<RString> 一次判定KeyList, List<RString> 審査会割付KeyList, LasdecCode 市町村コード) {
         if (市町村コード != null && !市町村コード.isEmpty()) {
             this.市町村コード = 市町村コード.getColumnValue();
             this.is保険者が選択 = true;
         }
         if (!認定調査KeyList.contains(KEY0)) {
-            this.is認定調査_調査未チェックON = 認定調査KeyList.contains(KEY1);
-            this.is認定調査_調査済チェックON = 認定調査KeyList.contains(KEY2);
+            this.is認定調査_調査未チェックON = 認定調査KeyList.contains(KEY1) && !認定調査KeyList.contains(KEY2);
+            this.is認定調査_調査済チェックON = 認定調査KeyList.contains(KEY2) && !認定調査KeyList.contains(KEY1);
         }
         if (!意見書受領KeyList.contains(KEY0)) {
-            this.is意見書受領_受領未チェックON = 意見書受領KeyList.contains(KEY1);
-            this.is意見書受領_受領済チェックON = 意見書受領KeyList.contains(KEY2);
+            this.is意見書受領_受領未チェックON = 意見書受領KeyList.contains(KEY1) && !意見書受領KeyList.contains(KEY2);
+            this.is意見書受領_受領済チェックON = 意見書受領KeyList.contains(KEY2) && !意見書受領KeyList.contains(KEY1);
         }
         if (!一次判定KeyList.contains(KEY0)) {
-            this.is一次判定_判定未チェックON = 一次判定KeyList.contains(KEY1);
-            this.is一次判定_判定済チェックON = 一次判定KeyList.contains(KEY2);
+            this.is一次判定_判定未チェックON = 一次判定KeyList.contains(KEY1) && !一次判定KeyList.contains(KEY2);
+            this.is一次判定_判定済チェックON = 一次判定KeyList.contains(KEY2) && !一次判定KeyList.contains(KEY1);
         }
         if (!審査会割付KeyList.contains(KEY0)) {
-            this.is審査会割付_割付未チェックON = 審査会割付KeyList.contains(KEY1);
-            this.is審査会割付_割付済チェックON = 審査会割付KeyList.contains(KEY2);
+            this.is審査会割付_割付未チェックON = 審査会割付KeyList.contains(KEY1) && !審査会割付KeyList.contains(KEY2);
+            this.is審査会割付_割付済チェックON = 審査会割付KeyList.contains(KEY2) && !審査会割付KeyList.contains(KEY1);
         }
     }
 

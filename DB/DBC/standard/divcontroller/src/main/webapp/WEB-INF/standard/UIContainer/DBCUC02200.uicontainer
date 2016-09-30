@@ -32,30 +32,16 @@
     },
     {
      "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0220012",
-     "layoutTitle": "受給者異動連絡票変更登録",
-     "eventName": "対象者一覧",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0220011",
-     "toLayoutTitle": "受給者異動連絡票変更登録",
-     "toState": "対象者一覧"
-    },
-    {
-     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0220011",
+     "layoutName": "DBC0220012",
      "layoutTitle": "受給者異動連絡票変更登録",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
     },
     {
-     "id": "5",
+     "id": "4",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0220011",
@@ -69,7 +55,7 @@
      "toState": "検索条件"
     },
     {
-     "id": "6",
+     "id": "5",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBZ",
      "layoutName": "DBZ0200001",
@@ -80,21 +66,35 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
      "toLayoutTitle": "受給者異動連絡票変更登録",
-     "toState": "対象者検索"
+     "toState": ""
     },
     {
-     "id": "7",
+     "id": "6",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0200001",
-     "layoutTitle": "対象者検索",
-     "eventName": "終了",
-     "destroy": false,
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220012",
+     "layoutTitle": "受給者異動連絡票変更登録",
+     "eventName": "検索条件",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
      "toLayoutTitle": "受給者異動連絡票変更登録",
      "toState": "対象者検索"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220012",
+     "layoutTitle": "受給者異動連絡票変更登録",
+     "eventName": "対象者一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220011",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
+     "toState": "対象者一覧"
     }
    ]
   }

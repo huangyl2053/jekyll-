@@ -67,8 +67,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoHeaderEditor
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
         source.shinsakaiName = 帳票出力対象データ.get審査委員会名();
-        source.koshiFutanshaNo = 帳票出力対象データ.get公費負担者番号().getColumnValue();
-        source.koshiFutanshaName = 帳票出力対象データ.get公費負担者名();
+        source.kohiFutanshaNo = 帳票出力対象データ.get公費負担者番号().value();
+        source.kohiFutanshaName = 帳票出力対象データ.get公費負担者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);

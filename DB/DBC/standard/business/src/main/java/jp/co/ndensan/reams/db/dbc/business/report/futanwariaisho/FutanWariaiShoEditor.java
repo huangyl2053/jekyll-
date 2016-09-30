@@ -137,7 +137,6 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
 
     private void set日本人外国人(FutanWariaiShoSource source) {
         if (個人List != null && !個人List.isEmpty()) {
-            //TODO
             IKojin 個人 = 個人List.get(INDEX_ZERO);
             if (個人.is日本人()) {
                 source.umareYmd = entity.get生年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).

@@ -12,11 +12,14 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 KanendoIdouKekkaIchiranBodyEditorです。
@@ -143,6 +146,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         source.list8_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
         source.list9_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
         source.list10_1 = RString.EMPTY;
+        set追加項目(source);
         return source;
     }
 
@@ -463,6 +467,28 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 source.kaipage5 = 改頁項目List.get(NUM_4);
             }
         }
+    }
+
+    private void set追加項目(KanendoIdouKekkaIchiranSource source) {
+        UaFt200FindShikibetsuTaishoEntity 宛名 = 計算後情報_宛名_口座_更正後Entity.get宛名Entity();
+        source.shikibetsuCode = getColumnValue(宛名.getShikibetsuCode());
+        source.kanaMeisho = getColumnValue(宛名.getKanaMeisho());
+        FlexibleDate 生年月日 = 宛名.getSeinengappiYMD();
+        if (null != 生年月日) {
+            source.seinengappiYMD = 生年月日.seireki().toDateString();
+        }
+        source.seibetsuCode = 宛名.getSeibetsuCode();
+        source.shichosonCode = getColumnValue(計算後情報_宛名_口座_更正後Entity.get賦課市町村コード());
+        source.hihokenshaNo = getColumnValue(計算後情報_宛名_口座_更正後Entity.get被保険者番号());
+        source.nenkinCode = 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード();
+        source.nenkinNo = 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号();
+    }
+
+    private RString getColumnValue(IDbColumnMappable column) {
+        if (null == column) {
+            return RString.EMPTY;
+        }
+        return column.getColumnValue();
     }
 
 }

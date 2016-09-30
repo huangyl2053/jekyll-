@@ -7,12 +7,13 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * {@link NijiYoboJigyoTaishosha}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 public class NijiYoboJigyoTaishoshaBuilder {
 
@@ -33,32 +34,6 @@ public class NijiYoboJigyoTaishoshaBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 被保険者番号を設定します。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @return {@link NijiYoboJigyoTaishoshaBuilder}
-     */
-    public NijiYoboJigyoTaishoshaBuilder set被保険者番号(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        entity.setHihokenshaNo(被保険者番号);
-        return this;
-    }
-
-    /**
-     * 履歴番号を設定します。
-     *
-     * @param 履歴番号 履歴番号
-     * @return {@link NijiYoboJigyoTaishoshaBuilder}
-     */
-    public NijiYoboJigyoTaishoshaBuilder set履歴番号(int 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
     }
 
     /**
@@ -106,6 +81,18 @@ public class NijiYoboJigyoTaishoshaBuilder {
     public NijiYoboJigyoTaishoshaBuilder set決定年月日(FlexibleDate 決定年月日) {
         requireNonNull(決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
         entity.setKetteiYMD(決定年月日);
+        return this;
+    }
+
+    /**
+     * 調査実施日を設定します。
+     *
+     * @param 調査実施日 調査実施日
+     * @return {@link NijiYoboJigyoTaishoshaBuilder}
+     */
+    public NijiYoboJigyoTaishoshaBuilder set調査実施日(FlexibleDate 調査実施日) {
+        requireNonNull(調査実施日, UrSystemErrorMessages.値がnull.getReplacedMessage("調査実施日"));
+        entity.setChosaJisshiYMD(調査実施日);
         return this;
     }
 

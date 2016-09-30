@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2270001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosadataoutput.NinteiChosaDataOutputBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.NinteiChosaDataOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2270001.NinteiChosaDataOutputHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2270001.NinteiChosaDataOutputValidationHandler;
@@ -96,7 +96,7 @@ public class NinteiChosaDataOutput {
      * @param div コントロールdiv
      * @return ResponseData<NinteiChosaDataOutputDiv>
      */
-    public ResponseData<NinteiChosaDataOutputBatchParamter> onClick_btnExecute(NinteiChosaDataOutputDiv div) {
+    public ResponseData<DBE224001_NinteichosaDataOutputParameter> onClick_btnExecute(NinteiChosaDataOutputDiv div) {
         return ResponseData.of(getHandler(div).getBatchParameter()).respond();
     }
 

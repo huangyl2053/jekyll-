@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunjikofutangakuke
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanjigyobunjikofutangakukeisankekkaichiran.GassanJigyobunJikofutangakuKeisanKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanjigyobunjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -26,12 +27,10 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
 
     private final GassanJikofutangakuKeisanKekkaIchiranEntity 帳票出力対象データ;
 
-    private static final RString 宛名ﾃﾞｰﾀ種別_1 = new RString("１x");
-    private static final RString 宛名ﾃﾞｰﾀ種別_2 = new RString("２x");
+    private static final RString 宛名データ種別_1 = new RString("１x");
+    private static final RString 宛名データ種別_2 = new RString("２x");
     private static final RString 符号_1 = new RString("～");
     private static final RString 符号_2 = new RString("*");
-    private static final RString 漢字_男 = new RString("男");
-    private static final RString 漢字_女 = new RString("女");
     private static final RString 数字_1 = new RString("1");
     private static final RString 数字_2 = new RString("2");
     private static final RString 数字_3 = new RString("3");
@@ -55,10 +54,10 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     public GassanJigyobunJikofutangakuKeisanKekkaIchiranSource edit(GassanJigyobunJikofutangakuKeisanKekkaIchiranSource source) {
         source.list_1 = getColumnValue(帳票出力対象データ.get被保険者番号());
         source.list_2 = 帳票出力対象データ.get被保険者氏名();
-        if (宛名ﾃﾞｰﾀ種別_1.equals(帳票出力対象データ.get宛名ﾃﾞｰﾀ種別())) {
+        if (宛名データ種別_1.equals(帳票出力対象データ.get宛名データ種別())) {
 
             source.list_3 = 帳票出力対象データ.get生年月日().wareki().firstYear(FirstYear.ICHI_NEN).toDateString();
-        } else if (宛名ﾃﾞｰﾀ種別_2.equals(帳票出力対象データ.get宛名ﾃﾞｰﾀ種別())) {
+        } else if (宛名データ種別_2.equals(帳票出力対象データ.get宛名データ種別())) {
 
             source.list_3 = 帳票出力対象データ.get生年月日().seireki().toDateString();
         }
@@ -82,10 +81,10 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     }
 
     private RString get性別(RString 性別) {
-        if (数字_1.equals(性別)) {
-            return 漢字_男;
+        if (Seibetsu.男.getコード().equals(性別)) {
+            return Seibetsu.男.get名称();
         } else {
-            return 漢字_女;
+            return Seibetsu.女.get名称();
         }
     }
 

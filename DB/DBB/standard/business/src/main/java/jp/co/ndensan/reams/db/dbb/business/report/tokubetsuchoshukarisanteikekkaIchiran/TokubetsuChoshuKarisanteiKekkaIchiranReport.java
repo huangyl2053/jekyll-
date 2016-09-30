@@ -24,61 +24,58 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranReport extends Report<Tokubets
 
     private final RString 市町村コード;
     private final RString 市町村名称;
-    private final List<TokuchoKariKeisangoFukaEntity> 特徴仮算定計算後賦課情報EntityList;
+    private final TokuchoKariKeisangoFukaEntity 特徴仮算定計算後賦課情報Entity;
     private final FlexibleYear 調定年度;
     private final YMDHMS 調定日時;
     private final List<RString> 並び順List;
     private final List<RString> 改頁List;
-    private final List<RString> 住所編集リスト;
-    private final List<Decimal> 前年度保険料リスト;
+    private final RString 住所編集;
+    private final Decimal 前年度保険料;
+    private final int 連番;
 
     /**
      *
      * @param 市町村名称 RString
      * @param 市町村コード RString
-     * @param 特徴仮算定計算後賦課情報EntityList List<TokuchoKariKeisangoFukaEntity>
+     * @param 特徴仮算定計算後賦課情報Entity List<TokuchoKariKeisangoFukaEntity>
      * @param 調定年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @param 並び順List List<RString>
      * @param 改頁List List<RString>
-     * @param 住所編集リスト List<RString>
-     * @param 前年度保険料リスト List<RString>
+     * @param 住所編集 RString
+     * @param 前年度保険料 RString
+     * @param 連番 int
      */
     public TokubetsuChoshuKarisanteiKekkaIchiranReport(
             RString 市町村名称,
             RString 市町村コード,
-            List<TokuchoKariKeisangoFukaEntity> 特徴仮算定計算後賦課情報EntityList,
+            TokuchoKariKeisangoFukaEntity 特徴仮算定計算後賦課情報Entity,
             FlexibleYear 調定年度,
             YMDHMS 調定日時,
             List<RString> 並び順List,
             List<RString> 改頁List,
-            List<RString> 住所編集リスト,
-            List<Decimal> 前年度保険料リスト) {
+            RString 住所編集,
+            Decimal 前年度保険料,
+            int 連番) {
         this.市町村名称 = 市町村名称;
         this.市町村コード = 市町村コード;
-        this.特徴仮算定計算後賦課情報EntityList = 特徴仮算定計算後賦課情報EntityList;
+        this.特徴仮算定計算後賦課情報Entity = 特徴仮算定計算後賦課情報Entity;
         this.調定年度 = 調定年度;
         this.調定日時 = 調定日時;
         this.並び順List = 並び順List;
         this.改頁List = 改頁List;
-        this.住所編集リスト = 住所編集リスト;
-        this.前年度保険料リスト = 前年度保険料リスト;
+        this.住所編集 = 住所編集;
+        this.前年度保険料 = 前年度保険料;
+        this.連番 = 連番;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKarisanteiKekkaIchiranSource> writer) {
-        int index = 0;
-        for (TokuchoKariKeisangoFukaEntity entity : 特徴仮算定計算後賦課情報EntityList) {
-            RString 住所編集 = 住所編集リスト.get(index);
-            Decimal 前年度保険料 = 前年度保険料リスト.get(index);
-            index++;
-            int 連番 = index;
-            TokubetsuChoshuKarisanteiKekkaIchiranEditor editor = new TokubetsuChoshuKarisanteiKekkaIchiranEditor(
-                    市町村コード, 市町村名称, entity, 調定年度, 調定日時, 並び順List, 改頁List, 連番, 住所編集, 前年度保険料);
-            TokubetsuChoshuKarisanteiKekkaIchiranBuilder builder
-                    = new TokubetsuChoshuKarisanteiKekkaIchiranBuilder(editor);
-            writer.writeLine(builder);
-        }
+        TokubetsuChoshuKarisanteiKekkaIchiranEditor editor = new TokubetsuChoshuKarisanteiKekkaIchiranEditor(
+                市町村コード, 市町村名称, 特徴仮算定計算後賦課情報Entity, 調定年度, 調定日時, 並び順List, 改頁List, 連番, 住所編集, 前年度保険料);
+        TokubetsuChoshuKarisanteiKekkaIchiranBuilder builder
+                = new TokubetsuChoshuKarisanteiKekkaIchiranBuilder(editor);
+        writer.writeLine(builder);
 
     }
 

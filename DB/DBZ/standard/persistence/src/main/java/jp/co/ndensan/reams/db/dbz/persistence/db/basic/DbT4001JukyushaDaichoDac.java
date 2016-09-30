@@ -41,6 +41,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -61,6 +62,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_市町村コード = new RString("市町村コード");
     private static final RString メッセージ_申請書管理番号 = new RString("申請書管理番号");
+    private static final RString メッセージ_世帯基準日 = new RString("世帯基準日");
     @InjectSession
     private SqlSession session;
 
@@ -371,6 +373,32 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
                                 eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false)))
                 .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 指定要介護状態区分の取得
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 開始対象計算期間 FlexibleDate
+     * @param 終了対象計算期間 FlexibleDate
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity get要介護状態区分(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 開始対象計算期間,
+            FlexibleDate 終了対象計算期間) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, 開始対象計算期間),
+                                leq(終了対象計算期間, ninteiYukoKikanShuryoYMD),
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
+                                eq(logicalDeletedFlag, false)))
+                .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC), by(ninteiYukoKikanShuryoYMD, Order.DESC))
+                .limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
     }
 
     /**
@@ -729,4 +757,88 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT4001JukyushaDaichoEntity.class);
     }
+
+    /**
+     * 受給者台帳を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 世帯基準日 FlexibleDate
+     * @param 有効無効区分 RString
+     * @param 履歴番号 RString
+     * @param 被保険者番号Flag boolean
+     * @return List<DbT4001JukyushaDaichoEntity>
+     * @throws NullPointerException 引数被保険者番号がnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> get受給(HihokenshaNo 被保険者番号,
+            FlexibleDate 世帯基準日,
+            RString 有効無効区分,
+            RString 履歴番号,
+            boolean 被保険者番号Flag) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(世帯基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_世帯基準日.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        if (被保険者番号Flag) {
+            return accessor.select().
+                    table(DbT4001JukyushaDaicho.class).
+                    where(and(eq(hihokenshaNo, 被保険者番号),
+                                    or(and(
+                                                    leq(ninteiYukoKikanKaishiYMD, 世帯基準日),
+                                                    leq(世帯基準日, ninteiYukoKikanShuryoYMD),
+                                                    eq(yukoMukoKubun, 有効無効区分)),
+                                            eq(rirekiNo, 履歴番号)))).
+                    toList(DbT4001JukyushaDaichoEntity.class);
+        }
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(or(and(
+                                        leq(ninteiYukoKikanKaishiYMD, 世帯基準日),
+                                        leq(世帯基準日, ninteiYukoKikanShuryoYMD),
+                                        eq(yukoMukoKubun, 有効無効区分)),
+                                eq(rirekiNo, 履歴番号))).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号をキーにして、受給者台帳．被保険者番号情報ある場合は、最新の履歴番号で、かつ、最大の枝番である情報を取得する。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> get受給者台帳データ(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 受給者台帳情報取得
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 転出予定日 転出予定日
+     * @return DbT4001JukyushaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> get受給者台帳(HihokenshaNo 被保険者番号,
+            FlexibleDate 転出予定日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(転出予定日, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, 転出予定日),
+                                leq(転出予定日, ninteiYukoKikanShuryoYMD))).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
 }

@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendo
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 負担限度額認定のマッパーインタフェースです。
@@ -73,4 +76,15 @@ public interface IFutanGendogakuNinteiMapper {
      * @return FutanGendogakuNinteiEntity
      */
     FutanGendogakuNinteiEntity select負担限度額認定(NinteiJohoParameter parameter);
+
+    /**
+     * 非課税年金勘案額を取得。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年 RString
+     * @return RString
+     */
+    RString get非課税年金勘案額(
+            @Param("被保険者番号") HihokenshaNo 被保険者番号,
+            @Param("対象年") RString 対象年);
 }

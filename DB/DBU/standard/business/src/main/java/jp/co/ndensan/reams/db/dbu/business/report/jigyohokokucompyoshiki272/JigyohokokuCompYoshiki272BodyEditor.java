@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki272;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272Change;
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
 
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7） のBodyEditorです。
@@ -40,6 +40,11 @@ public class JigyohokokuCompYoshiki272BodyEditor implements IJigyohokokuCompYosh
     private JigyohokokuCompYoshiki272ReportSource editSource(JigyohokokuCompYoshiki272ReportSource source) {
         source.listUpper_1 = change.getListUpper_1();
         source.listLower_1 = change.getListLower_1();
+        source.printTimeStamp = change.get作成日時();
+        source.shukeiKubun = change.get集計区分();
+        source.shuukeiHani = change.get集計範囲();
+        source.hokenshaNo = change.get保険者番号();
+        source.hokenshaName = change.get保険者名();
         return source;
     }
 

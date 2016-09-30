@@ -5,22 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saishinsaketteihokenshain;
 
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 再審査決定通知書情報取込（保険者分）のパラメータです。
  *
  * @reamsid_L DBC-2520-010 chenaoqi
  */
-public class SaishinsaKetteiHokenshaInParameter extends UaFt200FindShikibetsuTaishoParam {
+@Getter
+@Setter
+@SuppressWarnings ("PMD.UnusedPrivateField")
+public class SaishinsaKetteiHokenshaInParameter implements IMyBatisParameter {
 
-    /**
-     * コンストラクタです。
-     *
-     * @param searchKey 宛名検索条件
-     */
-    public SaishinsaKetteiHokenshaInParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
-        super(searchKey);
-    }
+    private RString 出力順;
+
 }

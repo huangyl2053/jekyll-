@@ -27,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class JizenShinsakaiShiryoPublicationHandler {
 
     private final JizenShinsakaiShiryoPublicationDiv div;
-    private static final RString 個別設定 = new RString("2");
     private static final RString すべて選択 = new RString("1");
-    private static final RString 印刷帳票_審査会開催通知書 = new RString("0");
-    private static final RString 印刷帳票_審査会資料 = new RString("1");
-    private static final RString 印刷帳票_予備判定記入表 = new RString("2");
+    private static final RString 個別設定 = new RString("2");
+    private static final RString 印刷帳票_審査会開催通知書 = new RString("key0");
+    private static final RString 印刷帳票_審査会資料 = new RString("key1");
+    private static final RString 印刷帳票_予備判定記入表 = new RString("key2");
     private static final RString 印刷帳票_特記事項 = new RString("0");
     private static final RString 印刷帳票_一次判定結果票 = new RString("1");
     private static final RString 印刷帳票_特記事項_一次判定結果票 = new RString("2");
@@ -169,8 +169,8 @@ public class JizenShinsakaiShiryoPublicationHandler {
         if (!div.getPublicationTargetShinsakai().getTxtGogitaiName().getValue().isEmpty()) {
             batchParameter.setGogitaiMei(div.getPublicationTargetShinsakai().getTxtGogitaiName().getValue());
         }
-        if (!div.getPublishingCondition().getTxtShutsuryokuJun().getValue().isEmpty()) {
-            batchParameter.setSyuturyokuJun(div.getPublishingCondition().getTxtShutsuryokuJun().getValue());
+        if (div.getPublicationTargetShinsakai().getTxtYoteiTeiin().getValue() != null) {
+            batchParameter.setSyuturyokuJun(new RString(div.getPublicationTargetShinsakai().getTxtYoteiTeiin().getValue().toString()));
         }
         if (!div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().isEmpty()) {
             if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(A4縦)) {
@@ -202,7 +202,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
         List<RString> 印刷帳票 = div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys();
         List<RString> 印刷審査会資料 = div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
                 .getSelectedKeys();
-        if (印刷審査会資料.contains(印刷帳票_審査会開催通知書)) {
+        if (印刷帳票.contains(印刷帳票_審査会開催通知書)) {
             batchParameter.setTuutiFlag(new RString("1"));
         } else {
             batchParameter.setTuutiFlag(new RString("0"));

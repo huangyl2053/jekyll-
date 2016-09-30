@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static idojyu_onChange(): string {
+                return "idojyu_onChange";
+            }
+
         }
 
         export class Controls {

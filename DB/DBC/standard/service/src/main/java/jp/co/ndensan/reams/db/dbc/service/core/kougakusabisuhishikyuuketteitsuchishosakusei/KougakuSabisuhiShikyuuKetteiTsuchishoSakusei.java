@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuc
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.ketteitsuchishosakusei.param.KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020060.DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -65,8 +65,7 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
      * 高額サービス費支給決定通知書作成画面入力するデータより、バッチ用パラメータクラスを作成する。
      *
      * @param parameter ShikyuketteituchishoSakuseiJyokenParameter
-     * @return
-     * {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
+     * @return {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
      */
     public DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter
             getDBC020030_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter) {
@@ -99,13 +98,12 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
      * 高額総合事業サービス費支給決定通知書作成画面入力するデータより、バッチ用パラメータクラスを作成する。
      *
      * @param parameter ShikyuketteituchishoSakuseiJyokenParameter
-     * @return
-     * {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
+     * @return {@link DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter}
      */
-    public DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter
+    public DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter
             getDBC020060_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter) {
-        DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter batchParameter
-                = new DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
+        DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter batchParameter
+                = new DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter();
         batchParameter.set抽出モード(parameter.get抽出モード());
         batchParameter.set抽出条件日付From(parameter.get抽出条件日付From());
         batchParameter.set抽出条件日付To(parameter.get抽出条件日付To());

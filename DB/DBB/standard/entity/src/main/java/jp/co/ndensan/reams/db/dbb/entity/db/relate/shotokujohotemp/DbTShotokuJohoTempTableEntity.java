@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohotemp;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
- * 所得情報TempのEntity
+ * 所得情報抽出・連携_広域のバッチ 所得情報TempのEntity
  *
- * @reamsid_L DBB-1690-070 sunhui
+ * @reamsid_L DBB-1690-060 gongliang
  */
 @lombok.Getter
 @lombok.Setter
@@ -25,49 +25,49 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class DbTShotokuJohoTempTableEntity extends DbTableEntityBase<DbTShotokuJohoTempTableEntity> implements IDbAccessable {
 
     @TempTableColumnOrder(1)
-    private LasdecCode 市町村コード;
+    private LasdecCode shichosonCode;
     @TempTableColumnOrder(2)
-    private RString 識別ＩＤ;
+    private RString shikibetuId;
     @TempTableColumnOrder(3)
-    private YMDHMS タイムスタンプ;
+    private RString timeStep;
     @TempTableColumnOrder(4)
-    private RString 最終レコード区分;
+    private RString saisyuRecordKunbun;
     @TempTableColumnOrder(5)
-    private RString 連番;
+    private int renben;
     @TempTableColumnOrder(6)
-    private RString ＦＩＬＬＥＲ;
+    private RString filler;
     @TempTableColumnOrder(7)
-    private FlexibleYear 賦課年度;
+    private FlexibleYear fukaNendo;
     @TempTableColumnOrder(8)
-    private RString 住民ｺｰﾄﾞ;
+    private ShikibetsuCode jyuuminCode;
     @TempTableColumnOrder(9)
-    private RString 所得把握区分_申告区分;
+    private RString shotoKunbun;
     @TempTableColumnOrder(10)
-    private RString 非課税区分;
+    private RString hiKazeiKunbun;
     @TempTableColumnOrder(11)
-    private RString 住民税所得割;
+    private RString jyuuminseiKiru;
     @TempTableColumnOrder(12)
-    private RString 住民税均等割;
+    private RString jyuuminseiIziKiru;
     @TempTableColumnOrder(13)
-    private Decimal 合計所得金額;
+    private Decimal gokeiShotokuGaku;
     @TempTableColumnOrder(14)
-    private Decimal 給与収入額;
+    private Decimal agiShunyuGaku;
     @TempTableColumnOrder(15)
-    private Decimal 公的年金等収入額;
+    private Decimal nenkiniShunyuGaku;
     @TempTableColumnOrder(16)
-    private Decimal 公的年金等所得額;
+    private Decimal nenkiniShotokuGaku;
     @TempTableColumnOrder(17)
-    private RString その他所得１;
+    private RString sonotaSyutoku1;
     @TempTableColumnOrder(18)
-    private RString その他所得２;
+    private RString sonotaSyutoku2;
     @TempTableColumnOrder(19)
-    private RString 予備;
+    private RString yobi;
     @TempTableColumnOrder(20)
-    private RString 激変緩和区分;
+    private RString gekihenkanwaKubun;
     @TempTableColumnOrder(21)
-    private RString データ種類;
+    private RString dataShubetsu;
     @TempTableColumnOrder(22)
-    private Decimal 所得税;
+    private Decimal shotoZei;
     @TempTableColumnOrder(23)
-    private YMDHMS 更新日時;
+    private RString updateTimestamp;
 }

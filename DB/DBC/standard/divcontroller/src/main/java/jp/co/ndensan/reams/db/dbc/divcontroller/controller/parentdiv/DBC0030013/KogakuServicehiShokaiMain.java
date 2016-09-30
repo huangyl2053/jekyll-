@@ -39,7 +39,7 @@ public class KogakuServicehiShokaiMain {
      * @param div KogakuServicehiShokaiMainDiv
      * @return 世帯合算並列表示画面
      */
-    public ResponseData<KogakuServicehiShokaiMainDiv> onClick_btnNarabeteHyoji(KogakuServicehiShokaiMainDiv div) {
+    public ResponseData<KogakuServicehiShokaiMainDiv> onClick_Hikaku(KogakuServicehiShokaiMainDiv div) {
         KogakuServiceData 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.該当者一覧キー, KogakuServiceData.class);
         getHandler(div).onClick_並べて表示する(引き継ぎ情報);
         return ResponseData.of(div).setState(DBC0030013StateName.並べて表示);

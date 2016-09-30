@@ -326,6 +326,18 @@ public class HomonKaigoRiyoshaFutangakuGengaku extends ParentModelBase<
     }
 
     /**
+     * 訪問介護利用者負担額減額のみを変更対象とします。
+     *
+     * @return 変更対象処理実施後の{@link HomonKaigoRiyoshaFutangakuGengaku}
+     */
+    public HomonKaigoRiyoshaFutangakuGengaku updateModel() {
+        DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity modifiedEntity = entity.clone();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new HomonKaigoRiyoshaFutangakuGengaku(
+                modifiedEntity, id, gemmenGengakuShinsei);
+    }
+
+    /**
      * 訪問介護利用者負担額減額が保持する精神手帳任意項目情報に対して、指定の識別子に該当する減免減額申請情報を返します。
      *
      * @param id 減免減額申請情報の識別子

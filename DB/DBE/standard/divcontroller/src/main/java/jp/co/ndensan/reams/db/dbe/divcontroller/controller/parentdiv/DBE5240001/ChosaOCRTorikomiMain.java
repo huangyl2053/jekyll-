@@ -307,6 +307,16 @@ public class ChosaOCRTorikomiMain {
     public ResponseData<ChosaOCRTorikomiMainDiv> onClick_BtnSave(ChosaOCRTorikomiMainDiv div) {
         RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         boolean 選択Flag = false;
+        for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
+            if (row.getSelected()) {
+                選択Flag = true;
+            }
+        }
+        if (!選択Flag) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(getValidationHandler().check一覧対象未選択());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -315,16 +325,6 @@ public class ChosaOCRTorikomiMain {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
-                if (row.getSelected()) {
-                    選択Flag = true;
-                }
-            }
-            if (!選択Flag) {
-                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(getValidationHandler().check一覧対象未選択());
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
             db更新(div, 審査会開催番号);
             onClick_BtnOCRTorikomi(div);
         }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -45,7 +45,7 @@ public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter
      */
     public HchiJinoSyouriCreateMybatisprmParamter(
             TargetList 対象リスト, JukyushaKubun2 受給者区分,
-            KyusochishaKubun 旧措置区分, FlexibleDate 基準日) {
+            KyusochishaJukyushaKubun 旧措置区分, FlexibleDate 基準日) {
         this.基準日 = 基準日;
         edit対象リスト(対象リスト);
         edit受給者区分(受給者区分);
@@ -69,7 +69,7 @@ public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter
         }
     }
 
-    private void edit旧措置区分(KyusochishaKubun 旧措置区分) {
+    private void edit旧措置区分(KyusochishaJukyushaKubun 旧措置区分) {
         if (一.equals(旧措置区分.getコード())) {
             is旧措置者以外 = true;
         } else if (三.equals(旧措置区分.getコード())) {
@@ -87,7 +87,7 @@ public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter
      * @return HchiJinoSyouriCreateMybatisprmParamter
      */
     public HchiJinoSyouriCreateMybatisprmParamter ceactTestParmeter(
-            TargetList 対象リスト, JukyushaKubun2 受給者区分, KyusochishaKubun 旧措置区分, FlexibleDate 基準日) {
+            TargetList 対象リスト, JukyushaKubun2 受給者区分, KyusochishaJukyushaKubun 旧措置区分, FlexibleDate 基準日) {
         return new HchiJinoSyouriCreateMybatisprmParamter(対象リスト, 受給者区分, 旧措置区分, 基準日);
     }
 }

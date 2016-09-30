@@ -75,6 +75,9 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
             }
         }
 
+       // ShichosonSelectorModel model = new ShichosonSelectorModel();
+        // div.setKyuShichoson(DataPassingConverter.serialize(model));
+        // model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
         div.getTxtShikakuKijunYMD().setValue(システム日付);
         div.getTxtChoteiKijunYMD().setValue(システム日付);
     }
@@ -140,23 +143,6 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
         }
     }
 
-    /**
-     * btnShichosonSelectのonOkClose事件です。
-     */
-    //TODO QA.1203
-   /* public void onOkCloseShichosonSelect() {
-     //ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
-     // div.
-     }*/
-    /**
-     * btnShichosonSelectのonBeforeOpenDialog事件です。
-     */
-    //TODO　QA.1203
-   /* public void onBeforeOpenDialog() {
-     // ShichosonSelectorModel model = new ShichosonSelectorModel();
-     //   model.setShichosonModel(KOUSEI_MODO_KOUSEI);
-     //  div.setKyuShichoson(DataPassingConverter.serialize(model));
-     }*/
     /**
      * chkChosaJokenのonChange事件です。
      */

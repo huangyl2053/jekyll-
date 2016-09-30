@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-1670-030 surun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gemmen.IGemmenMapper">
+    <select id="getData"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenMybatisParameter"
+            resultMap="resultMapGemmenEntity" fetchSize="500" resultOrdered="true">
+        <include refid="selectGemmenEntity" />
+    </select>
+    <sql id="selectGemmenEntity">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu" />,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />,
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2004GemmenMapper.allColumns_DbT2004Gemmen" />,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            rgdb."DbV2002Fuka"  AS "DbT2002Fuka"
+            JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu" 
+            ON  "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
+            AND "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
+            AND "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
+            AND "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+            ON  "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
+            LEFT JOIN rgdb."DbT2004Gemmen"  AS "DbT2004Gemmen"
+            ON  "DbT2004Gemmen"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
+            AND "DbT2004Gemmen"."fukaNendo"  = "DbT2002Fuka"."fukaNendo"
+            AND "DbT2004Gemmen"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
+            AND "DbT2004Gemmen"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+            LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('1','','true','DB','false','','','','','','','','','','','0','false',
+            '','','','','','','0','false','','','','','','','','','','0','','true','true','true','true','true','true','true',
+            'true','true','true','true','','','','','','','','0','false','','','false','false','false','','','','','','','',
+            '','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+            ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
+            <if test="list町域コード != null">
+                AND "ShikibetsuTaisho"."choikiCode" IN 
+                <foreach collection="list町域コード" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+            </if>
+            <if test="list行政区コード !=null">
+                AND "ShikibetsuTaisho"."gyoseikuCode" IN
+                <foreach collection="list行政区コード" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+            </if>
+            <if test="list地区1コード !=null">
+                AND "ShikibetsuTaisho"."chikuCode1" IN
+                <foreach collection="list地区1コード" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+            </if>
+            <if test="list地区2コード !=null">
+                AND "ShikibetsuTaisho"."chikuCode2" IN
+                <foreach collection="list地区2コード" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+            </if>
+            <if test="list地区3コード !=null">
+                AND "ShikibetsuTaisho"."chikuCode3" IN
+                <foreach collection="list地区3コード" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+            </if>
+        WHERE
+            "DbT2002Fuka"."choteiNendo" = #{choteiNendo} AND 
+            "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo",
+            "DbT2003Kibetsu"."choshuHouhou",
+            "DbT2003Kibetsu"."ki"
+    </sql>
+    
+    <resultMap id="resultMapGemmenEntity" autoMapping="true" 
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenEntity">
+        <id column="dbT2002Fuka_choteiNendo"/>
+        <id column="dbT2002Fuka_fukaNendo"/>
+        <id column="dbT2002Fuka_tsuchishoNo"/>
+        <id column="dbT2002Fuka_rirekiNo"/>
+        <id column="dbT2003Kibetsu_choshuHouhou"/>
+        <id column="dbT2003Kibetsu_ki"/>
+        <association property="介護賦課" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity" />
+        <association property="介護期別" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity" />
+        <association property="調定共通" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity" />
+        <association property="介護賦課減免" 
+                    resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2004GemmenMapper.ResultMap_DbT2004GemmenEntity"/>
+        <association property="宛名Entity"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+        
+</mapper>

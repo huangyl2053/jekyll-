@@ -6,6 +6,34 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper">
 
+    <select resultOrdered="true" id="selectバッチ内で抽出条件"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        "subGyomuCode" = 'DBA'
+        AND "shichosonCode" = '000000'
+        AND "shoriName" = '年齢到達抽出処理'
+        AND "shoriEdaban" = '00'
+        AND "nendo" = '0000'
+        AND "nendoNaiRenban" = '00'
+    </select>
+
+    <select resultOrdered="true" id="select被保険者台帳管理By論理削除フラグAnd識別コード"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+            fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE
+        "shikibetsuCode" = #{識別コード}
+        AND "logicalDeletedFlag" = FALSE
+        ORDER BY
+        "idoYMD" DESC,
+        "edaNo" DESC
+        LIMIT 1
+    </select>
+
     <!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->
     <resultMap id="resultMap_ShikakuIdoTaishoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
@@ -30,8 +58,75 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         WHERE
         "seinengappiYMD" <![CDATA[>=]]> #{開始日}
-        AND 
+        AND
         "seinengappiYMD" <![CDATA[<=]]> #{終了日}
+    </select>
+
+    <!-- DbT1003TashichosonJushochiTokureiEntityの項目にマッピングします。-->
+    <select id="select他市町村住所地特例" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
+            fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT1003TashichosonJushochiTokurei"
+        WHERE
+        "shikibetsuCode" = #{識別コード}
+        AND (("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+        AND "kaijoYMD" <![CDATA[>]]> #{年齢到達日}
+        )
+        OR
+        ("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+        AND ("kaijoYMD" IS NULL OR "kaijoYMD" = '')
+        ))
+        AND "logicalDeletedFlag" = FALSE
+    </select>
+
+
+    <!-- DbT1002TekiyoJogaishaEntityの項目にマッピングします。-->
+    <select id="select適用除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
+            fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT1002TekiyoJogaisha"
+        WHERE
+        "shikibetsuCode" = #{識別コード}
+        AND (("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+        AND "kaijoYMD" <![CDATA[>=]]> #{年齢到達日}
+        )
+        OR
+        ("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
+        AND ("kaijoYMD" IS NULL OR "kaijoYMD" ='')
+        ))
+        AND "logicalDeletedFlag" = FALSE
+    </select>
+
+
+    <!-- DbT1009ShikakuShutokuJogaishaEntityの項目にマッピングします。-->
+    <select id="select資格取得除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
+            fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT1009ShikakuShutokuJogaisha"
+        WHERE
+        "shikibetsuCode" = #{識別コード}
+    </select>
+
+
+    <!-- DbT1010TennyushutsuHoryuTaishoshaEntityの項目にマッピングします。-->
+    <select id="select転入保留対象者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
+            fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT1010TennyushutsuHoryuTaishosha"
+        WHERE
+        "shikibetsuCode" = #{識別コード}
     </select>
 
 </mapper>

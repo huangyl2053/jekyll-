@@ -132,6 +132,27 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
     }
 
     /**
+     * 介護事業者情報の最新を取得。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @return DbT7060KaigoJigyoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7060KaigoJigyoshaEntity select介護事業者情報の最新(
+            JigyoshaNo 事業者番号) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT事業者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号)).
+                order(by(yukoKaishiYMD, Order.DESC)).limit(1).
+                toObject(DbT7060KaigoJigyoshaEntity.class);
+    }
+
+    /**
      * 事業者名称の取得。
      *
      * @param 事業者番号 JigyoshaNo

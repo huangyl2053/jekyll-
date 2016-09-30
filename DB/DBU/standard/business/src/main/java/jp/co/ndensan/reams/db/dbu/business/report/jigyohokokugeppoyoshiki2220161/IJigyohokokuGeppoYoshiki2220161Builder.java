@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokugeppoyoshiki2220161.J
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 事業報告月報様式_04のBuilderのインタ—フェ—スです。
+ * 事業報告月報様式_04のBuilderのインタフェースです。
  *
  * @reamsid_L DBU-5560-080 wanghuafeng
  */

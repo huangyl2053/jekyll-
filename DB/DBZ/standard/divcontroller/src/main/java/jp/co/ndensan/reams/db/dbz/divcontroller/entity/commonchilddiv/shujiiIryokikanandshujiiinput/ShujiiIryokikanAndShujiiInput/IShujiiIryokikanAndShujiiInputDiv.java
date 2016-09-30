@@ -115,11 +115,25 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
     public void setTxtIryoKikanCode(TextBoxCode txtIryoKikanCode);
 
     /**
+     * txtIryoKikanCodeの取得
+     *
+     * @return txtIryoKikanCode TextBoxCode
+     */
+    public TextBoxCode getTxtIryoKikanCode();
+
+    /**
      * txtIryoKikanNameの設定
      *
      * @param txtIryoKikanName TextBox
      */
     public void setTxtIryoKikanName(TextBox txtIryoKikanName);
+
+    /**
+     * txtIryoKikanNameの取得
+     *
+     * @return txtIryoKikanName TextBox
+     */
+    public TextBox getTxtIryoKikanName();
 
     /**
      * txtShujiiCodeの設定
@@ -129,9 +143,24 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
     public void setTxtShujiiCode(TextBoxCode txtShujiiCode);
 
     /**
+     * txtShujiiCodeの取得
+     *
+     * @return txtShujiiCode TextBoxCode
+     */
+    public TextBoxCode getTxtShujiiCode();
+
+    /**
      * txtShujiiNameの設定
      *
      * @param txtShujiiName TextBox
      */
     public void setTxtShujiiName(TextBox txtShujiiName);
+
+    /**
+     * txtShujiiNameの取得
+     *
+     * @return txtShujiiName TextBox
+     */
+    public TextBox getTxtShujiiName();
+
 }

@@ -1,8 +1,11 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.kyufukanrihyo;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 給付管理票取込結果一覧表Source
@@ -48,6 +51,9 @@ public class KyufuKanrihyoTorikomiKekkaIchiranSource implements IReportSource {
     public RString listCenter_2;
     @ReportItem(name = "listCenter_3", length = 2, order = 18)
     public RString listCenter_3;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listCenter_4", length = 10, order = 19)
     public RString listCenter_4;
     @ReportItem(name = "listCenter_5", length = 2, order = 20)

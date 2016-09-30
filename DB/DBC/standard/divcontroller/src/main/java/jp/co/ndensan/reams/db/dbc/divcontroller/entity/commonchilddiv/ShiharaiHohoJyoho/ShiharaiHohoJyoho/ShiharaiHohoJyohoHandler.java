@@ -56,6 +56,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 高額サービス費支給申請 = new RString("DBCUC04400");
     private final RString 高額合算支給申請 = new RString("DBCUC11000");
     private final RString 高額合算支給決定情報補正 = new RString("DBCUC12300");
+    private final RString 自己負担額証明書交付申請書登録 = new RString("DBCUC11100");
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
     private final ShiharaiHohoJyohoDiv div;
@@ -965,8 +966,9 @@ public class ShiharaiHohoJyohoHandler {
 
             return ShunoKamokuShubetsu.介護給付_高額;
         }
+        // TODO QA.1583
         if (高額合算支給申請.equals(uiContainerId)
-                || 高額合算支給決定情報補正.equals(uiContainerId)) {
+                || 高額合算支給決定情報補正.equals(uiContainerId) || 自己負担額証明書交付申請書登録.equals(uiContainerId)) {
             return ShunoKamokuShubetsu.介護給付_高額合算;
         }
         return null;

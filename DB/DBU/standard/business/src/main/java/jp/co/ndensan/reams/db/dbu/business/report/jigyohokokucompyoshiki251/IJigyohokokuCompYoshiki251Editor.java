@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki251.Jigyoh
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 事業報告複合様式_05のEditorインタ—フェ—スです。
+ * 事業報告複合様式_05のEditorのインタフェースです。
  *
  * @reamsid_L DBU-5560-060 wanghuafeng
  */

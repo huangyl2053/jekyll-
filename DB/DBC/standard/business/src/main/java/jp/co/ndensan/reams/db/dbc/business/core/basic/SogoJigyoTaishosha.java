@@ -129,6 +129,15 @@ public class SogoJigyoTaishosha
     }
 
     /**
+     * チェックリスト実施日を返します。
+     *
+     * @return チェックリスト実施日
+     */
+    public FlexibleDate getチェックリスト実施日() {
+        return entity.getChecklistJisshiYMD();
+    }
+
+    /**
      * {@link DbT3105SogoJigyoTaishoshaEntity}のクローンを返します。
      *
      * @return {@link DbT3105SogoJigyoTaishoshaEntity}のクローン
@@ -149,8 +158,8 @@ public class SogoJigyoTaishosha
     }
 
     /**
-     * 保持する総合事業対象者を削除対象とします。<br/>
-     * {@link DbT3105SogoJigyoTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する総合事業対象者を削除対象とします。
+     * <br/> {@link DbT3105SogoJigyoTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link SogoJigyoTaishosha}
      */
