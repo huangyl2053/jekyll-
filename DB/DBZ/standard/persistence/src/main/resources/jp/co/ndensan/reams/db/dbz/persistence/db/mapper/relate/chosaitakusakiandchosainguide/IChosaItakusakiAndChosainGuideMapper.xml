@@ -130,9 +130,33 @@
         DbT5910."ninteichosaItakusakiCode" = DbT5913."ninteiChosaItakusakiCode"
         AND
         DbT5910."shichosonCode" = DbT5913."shichosonCode"
+        <if test="認定調査員コードFROMフラグ">
+            AND
+            DbT5913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
+        </if>
+        <if test="認定調査員コードToフラグ">
+            AND
+            DbT5913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
+        </if>
+        <if test="調査員状況フラグ">
+            AND
+            DbT5913."jokyoFlag" = TRUE
+        </if>
+        <if test="調査員状況無効フラグ">
+            AND
+            DbT5913."jokyoFlag" = FALSE
+        </if>
+        <if test="調査員名称フラグ">
+            AND
+            DbT5913."chosainShimei" LIKE '%'||#{調査員名称}||'%'
+        </if>
+        <if test="調査員カナフラグ">
+            AND
+            DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
+        </if> 
         <where>
          <if test="市町村コードフラグ">
-           AND  DbT5913."shichosonCode" =#{市町村コード}
+           AND  DbT5910."shichosonCode" =#{市町村コード}
         </if>
         <if test="認定調査委託先コードFROMフラグ">
             AND
@@ -165,31 +189,7 @@
         <if test="地区コードフラグ">
             AND
             DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
-        </if>
-        <if test="認定調査員コードFROMフラグ">
-            AND
-            DbT5913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
-        </if>
-        <if test="認定調査員コードToフラグ">
-            AND
-            DbT5913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
-        </if>
-        <if test="調査員状況フラグ">
-            AND
-            DbT5913."jokyoFlag" = TRUE
-        </if>
-        <if test="調査員状況無効フラグ">
-            AND
-            DbT5913."jokyoFlag" = FALSE
-        </if>
-        <if test="調査員名称フラグ">
-            AND
-            DbT5913."chosainShimei" LIKE '%'||#{調査員名称}||'%'
-        </if>
-        <if test="調査員カナフラグ">
-            AND
-            DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
-        </if>   
+        </if>  
         </where>
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
