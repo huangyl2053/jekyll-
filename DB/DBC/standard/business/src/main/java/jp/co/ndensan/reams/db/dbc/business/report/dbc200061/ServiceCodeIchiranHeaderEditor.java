@@ -33,7 +33,6 @@ public class ServiceCodeIchiranHeaderEditor
         implements IServiceCodeIchiranEditor {
 
     private final ServiceCodeIchiranParameter parameter;
-    private static final RString SAKUSEI = new RString("作成");
     private static final RString 単位数単位 = new RString("単位数単位");
     private static final RString コロン = new RString("：");
     private static final RString スペース = new RString(" ");
