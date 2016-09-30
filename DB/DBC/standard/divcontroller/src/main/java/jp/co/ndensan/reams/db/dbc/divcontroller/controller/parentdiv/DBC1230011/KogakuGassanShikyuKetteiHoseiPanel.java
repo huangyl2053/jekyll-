@@ -494,6 +494,9 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                 ViewStateKeys.詳細データ, KogakuGassanShikyuKetteiHoseiDetailParameter.class);
         boolean flag = getHandler(div).is決定情報内容変更状態(para);
         ValidationMessageControlPairs validPairs = getCheckHandler(div).check決定情報保存();
+        if (削除.equals(画面モード) || 照会.equals(画面モード)) {
+            return save決定情報登録(div, 画面モード);
+        }
         if (flag) {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
