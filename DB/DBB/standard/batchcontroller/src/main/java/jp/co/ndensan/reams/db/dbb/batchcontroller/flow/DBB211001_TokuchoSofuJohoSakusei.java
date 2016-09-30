@@ -136,7 +136,12 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
         }
         if (!is処理対象月が7月()) {
             executeStep(特徴異動情報_追加用データの取得);
+        }
+
+        if (is処理対象月は８月を除く偶数月の場合()) {
             executeStep(特徴異動_徴収方法の追加);
+        }
+        if (!is処理対象月が7月()) {
             executeStep(介護特別徴収情報取込履歴の登録);
             executeStep(特徴異動_年金特徴対象者情報の登録);
             executeStep(特別徴収異動情報一覧表の発行);

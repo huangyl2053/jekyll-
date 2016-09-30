@@ -131,7 +131,8 @@ SELECT
 	PSM."setaiCode" AS PSM_setaiCode,																											
 	DbT7060A."jigyoshaName" AS T2_jigyoshaName,																										
 	'',																	
-	''															
+	'',
+        ''															
 FROM																												
 	rgdb."DbT3017KyufujissekiKihon" AS DbT3017																											
 LEFT JOIN 
@@ -214,6 +215,10 @@ LEFT JOIN
             <if test="要支援2flag">
                 AND
                DbT3017."yoKaigoJotaiKubunCode" IN ('13')
+            </if>
+            <if test="事業対象者flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('06')
             </if>
             <if test="経過的要介護flag">
                 AND
@@ -455,7 +460,8 @@ LEFT JOIN
 	PSM."setaiCode" AS PSM_setaiCode_2,																		
 	'',								
 	'',									
-	''									
+	'',
+        ''									
 FROM																			
 	rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS T1																		
 LEFT JOIN 																			
@@ -670,7 +676,8 @@ LEFT JOIN
     JKJITable.世帯コード,
     JKJITable.事業者名称,
     JKJITable.要介護状態区分名称,
-    JKJITable.給付実績区分名称	
+    JKJITable.給付実績区分名称,
+    JKJITable.様式
         FROM																			
         "JukyusyaKyufuJiqsekiIchiranhyouTable"	AS JKJITable																	
     </select>

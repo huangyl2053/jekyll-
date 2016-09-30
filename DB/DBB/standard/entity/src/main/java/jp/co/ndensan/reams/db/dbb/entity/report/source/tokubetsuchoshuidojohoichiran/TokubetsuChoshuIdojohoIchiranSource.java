@@ -149,8 +149,7 @@ public class TokubetsuChoshuIdojohoIchiranSource implements IReportSource {
         listLower_5,
         listLower_6,
         listLower_7,
-        listLower_8,
-        shikibetsuCode
+        listLower_8
 
     }
 }

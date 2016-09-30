@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010010.DBU010010_JigyoHokokuGeppo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020.DBU010020_JigyoHokokuGeppo_IppanParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010030.DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010050.DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010090.DBU010090_JigyoHokokuGeppo_HokenkyufuKogakuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010100.DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -34,6 +36,10 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
     private static final RString DBU010100FLOW_FLOWID = new RString("DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan");
     private static final String 事業報告月報_一般状況 = "DBU010020_JigyoHokokuGeppo_Ippan";
     private static final RString 事業報告月報_一般状況_FLOWID = new RString("DBU010020_JigyoHokokuGeppo_Ippan");
+    private static final String CALL_FLOW_DBU010050 = "DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYM";
+    private static final RString DBU010050FLOW_FLOWID = new RString("DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYM");
+    private static final String CALL_FLOW_DBU010030 = "DBU010030_JigyoHokokuGeppo_IppanGenbutsu";
+    private static final RString DBU010030FLOW_FLOWID = new RString("DBU010030_JigyoHokokuGeppo_IppanGenbutsu");
     private static final RString 出力区分_1 = new RString("1");
     private static final int 連番_1 = 1;
     private static final int 連番_2 = 2;
@@ -46,6 +52,12 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
     protected void defineFlow() {
         if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(0))) {
             executeStep(事業報告月報_一般状況);
+        }
+        if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_1))) {
+            executeStep(CALL_FLOW_DBU010030);
+        }
+        if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_3))) {
+            executeStep(CALL_FLOW_DBU010050);
         }
         if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_7))) {
             executeStep(CALL_FLOW_DBU010090);
@@ -134,6 +146,59 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
         parameter.set過去集計分市町村コードリスト(getParameter().getShuukeibunShichosonCode());
         parameter.set過去集計分旧市町村区分(getParameter().getShuukeibunShichosonKubun());
         return otherBatchFlow(DBU010100FLOW_FLOWID, SubGyomuCode.DBU介護統計報告, parameter).define();
+    }
+
+    /**
+     * 事業報告月報_一般状況（１２～１４）【償還_決定】です。
+     *
+     * @return DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter
+     */
+    @Step(CALL_FLOW_DBU010050)
+    protected IBatchFlowCommand callDbu010050Flow() {
+        DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter parameter = new DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter();
+        parameter.setプリントコントロール区分(getParameter().getPrintControlKbn());
+        parameter.set報告年月(getParameter().getHoukokuNengetu());
+        parameter.set年度(getParameter().getNendo().get(連番_1));
+        parameter.set決定年月(getParameter().getKetteiYm().get(0));
+        parameter.set作成日時(new RString(getParameter().getSakuseiNitizi().get(連番_3).toString()));
+        parameter.set処理日時(new RString(getParameter().getSyoriNitizi().toString()));
+        parameter.set給付集計区分(getParameter().getKyuufuShuukeiKubunn().get(連番_2));
+        parameter.set市町村コード(getParameter().getShichosonCode().value());
+        parameter.set構成市町村区分(getParameter().getKouseiShichosonKubun());
+        parameter.set旧市町村区分(getParameter().getOldShichosonKubun());
+        parameter.set旧市町村コードList(codeList(getParameter().getOldShichosonCode()));
+        parameter.set構成市町村コードList(codeList(getParameter().getKouseiShichosonCode()));
+        parameter.set過去集計分市町村コードList(getParameter().getShuukeibunShichosonCode());
+        parameter.set過去集計分旧市町村区分(getParameter().getShuukeibunShichosonKubun());
+        parameter.set作成CSVファイルID(getParameter().getCsvID().get(連番_3));
+        parameter.setバッチID(getParameter().getBatchID().get(連番_3));
+        return otherBatchFlow(DBU010050FLOW_FLOWID, SubGyomuCode.DBU介護統計報告, parameter).define();
+    }
+
+    /**
+     * 事業報告月報_一般状況（１２～１４）【償還_決定】です。
+     *
+     * @return DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter
+     */
+    @Step(CALL_FLOW_DBU010030)
+    protected IBatchFlowCommand callDbu010030Flow() {
+        DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter parameter = new DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter();
+        parameter.setプリントコントロール区分(getParameter().getPrintControlKbn());
+        parameter.set集計年月(getParameter().getShuukeiNengetu().get(連番_1));
+        parameter.set報告年月(getParameter().getHoukokuNengetu());
+        parameter.set作成日時(new RString(getParameter().getSakuseiNitizi().get(連番_1).toString()));
+        parameter.set処理日時(new RString(getParameter().getSyoriNitizi().toString()));
+        parameter.set給付集計区分(getParameter().getKyuufuShuukeiKubunn().get(0));
+        parameter.set市町村コード(getParameter().getShichosonCode().value());
+        parameter.set構成市町村区分(getParameter().getKouseiShichosonKubun());
+        parameter.set旧市町村区分(getParameter().getOldShichosonKubun());
+        parameter.set旧市町村コードList(codeList(getParameter().getOldShichosonCode()));
+        parameter.set構成市町村コードList(codeList(getParameter().getKouseiShichosonCode()));
+        parameter.set過去集計分市町村コードList(getParameter().getShuukeibunShichosonCode());
+        parameter.set過去集計分旧市町村区分(getParameter().getShuukeibunShichosonKubun());
+        parameter.set作成CSVファイルID(getParameter().getCsvID().get(連番_1));
+        parameter.setバッチID(getParameter().getBatchID().get(連番_1));
+        return otherBatchFlow(DBU010030FLOW_FLOWID, SubGyomuCode.DBU介護統計報告, parameter).define();
     }
 
     private List<RString> codeList(List<LasdecCode> 市町村コードリスト) {

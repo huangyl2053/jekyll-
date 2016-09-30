@@ -113,6 +113,7 @@ public class SelectKyuhuZissekiKougakuKaigoHiJoukenChushutuProcess extends Batch
         tablEntity.set事業者名称(entity.get事業者名称());
         tablEntity.set要介護状態区分名称(entity.get要介護状態区分名称());
         tablEntity.set給付実績区分名称(entity.get給付実績区分名称());
+        tablEntity.set様式(entity.get様式());
         一時実績一覧表.insert(tablEntity);
     }
 }

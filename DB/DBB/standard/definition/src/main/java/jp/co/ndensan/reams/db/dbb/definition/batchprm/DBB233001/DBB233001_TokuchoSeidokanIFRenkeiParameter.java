@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.dbb233001;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB233001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb233001.TokuchouSeidoKanIFRenkeiProcessParameter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchouSeidoKanIFRenkeiBatchParameter extends BatchParameterBase {
+public class DBB233001_TokuchoSeidokanIFRenkeiParameter extends BatchParameterBase {
 
     /**
      * 連携用出力ファイル作成ファイル出力（連携用出力ファイル） のparameter作成する。

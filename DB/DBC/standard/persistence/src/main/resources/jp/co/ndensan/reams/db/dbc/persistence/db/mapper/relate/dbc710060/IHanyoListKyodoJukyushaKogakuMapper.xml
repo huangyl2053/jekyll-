@@ -50,16 +50,16 @@
             AND "logicalDeletedFlag" = false
         </if>
         <if test="2 == 日付抽出区分" >                       
-            <if test="処理対象年月From != null and 処理対象年月From != ''" >
+            <if test="処理対象年月From != null and !処理対象年月From.isEmpty()" >
                 AND #{処理対象年月From} <![CDATA[<=]]> "sofuYM"
             </if>
-            <if test="処理対象年月To != null and 処理対象年月To != ''" >
+            <if test="処理対象年月To != null and !処理対象年月To.isEmpty()" >
                 AND "sofuYM" <![CDATA[<=]]> #{処理対象年月To}
             </if>
-            <if test="異動年月From != null and 異動年月From != ''" > 
+            <if test="異動年月From != null and !異動年月From.isEmpty()" > 
                 AND #{異動年月From} <![CDATA[<=]]> SUBSTRING("idoYMD" FROM 1 FOR 6) 
             </if>
-            <if test="異動年月To != null and 異動年月To != ''" > 
+            <if test="異動年月To != null and !異動年月To.isEmpty()" > 
                 AND SUBSTRING("idoYMD" FROM 1 FOR 6)  <![CDATA[<=]]> #{異動年月To}                     
             </if>
             <if test ="!保険者コード.isEmpty() and 保険者コード.toString() != '000000'">

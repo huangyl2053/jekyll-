@@ -47,8 +47,8 @@ public class KyufuJissekiShokaiValidationHandler {
                     || div.getTxtKyufuJissekiSearchServiceTeikyoYM().getToValue() == null) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.サービス提供年月, div.getTxtKyufuJissekiSearchServiceTeikyoYM()));
             } else {
-                if (div.getTxtKyufuJissekiSearchServiceTeikyoYM().getToValue().
-                        isBefore(div.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromValue().plusMonth(サービス提供年月の範囲))) {
+                if (!div.getTxtKyufuJissekiSearchServiceTeikyoYM().getToValue().
+                        isBeforeOrEquals(div.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromValue().plusYear(サービス提供年月の範囲))) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.サービス提供年月の範囲指定, div.getTxtKyufuJissekiSearchServiceTeikyoYM()));
                 }
             }

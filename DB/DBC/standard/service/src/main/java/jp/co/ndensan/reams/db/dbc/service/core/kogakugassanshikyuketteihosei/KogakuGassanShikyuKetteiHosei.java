@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Ko
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.ShoriModeHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
@@ -128,12 +127,9 @@ public class KogakuGassanShikyuKetteiHosei {
             RString 支給申請書整理番号,
             boolean 事業分フラグ) {
         List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
-        IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(IKogakuGassanShikyuKetteiHoseiMapper.class);
-        KogakuGassanShikyuKetteiHoseiParameter parameter
-                = new KogakuGassanShikyuKetteiHoseiParameter(対象年度, 証記載保険者番号, 支給申請書整理番号);
         if (事業分フラグ) {
             List<DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity> 事業高額合算list
-                    = mapper.get事業高額合算list(parameter);
+                    = 事業高額合算支給不支給決定dac.getAllByKey(対象年度, 証記載保険者番号, 支給申請書整理番号);
             if (事業高額合算list == null || 事業高額合算list.isEmpty()) {
                 return result;
             } else {
@@ -146,7 +142,7 @@ public class KogakuGassanShikyuKetteiHosei {
             return result;
         }
         List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> 高額合算list
-                = mapper.get高額合算list(parameter);
+                = 高額合算支給不支給決定dac.getAllByKey(対象年度, 証記載保険者番号, 支給申請書整理番号);
         if (高額合算list == null || 高額合算list.isEmpty()) {
             return result;
         } else {
@@ -170,7 +166,7 @@ public class KogakuGassanShikyuKetteiHosei {
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
-        DbV1001HihokenshaDaichoEntity 被保険者台帳管理entity = 被保険者台帳管理dac.get被保険者台帳情報(被保険者番号);
+        DbV1001HihokenshaDaichoEntity 被保険者台帳管理entity = 被保険者台帳管理dac.select被保険者台帳情報(被保険者番号);
         if (被保険者台帳管理entity == null) {
             return null;
         }

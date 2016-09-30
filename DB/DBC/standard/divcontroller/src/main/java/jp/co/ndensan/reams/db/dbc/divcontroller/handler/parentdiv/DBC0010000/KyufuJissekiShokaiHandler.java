@@ -143,6 +143,13 @@ public class KyufuJissekiShokaiHandler {
         div.getTxtKyufuJissekiSearchServiceTeikyoYM().clearFromValue();
         div.getTxtKyufuJissekiSearchServiceTeikyoYM().clearToValue();
         div.getRadTaisho1().setSelectedKey(KEY);
+        if (!RString.isNullOrEmpty(div.getRadNendo().getSelectedKey())) {
+            div.getDdlKyufuJissekiSearchNendo().setDisabled(false);
+            div.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisabled(true);
+        } else {
+            div.getDdlKyufuJissekiSearchNendo().setDisabled(true);
+            div.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisabled(false);
+        }
     }
 
     /**
