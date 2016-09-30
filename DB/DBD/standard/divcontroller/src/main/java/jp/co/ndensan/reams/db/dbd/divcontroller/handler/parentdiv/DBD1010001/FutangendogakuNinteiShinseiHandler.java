@@ -180,7 +180,7 @@ public class FutangendogakuNinteiShinseiHandler {
         init負担段階DDL();
         init居室種別DDL();
         clear申請情報エリア(資格対象者);
-        onChange_radKetteiKubun(true, 資格対象者);
+        onChange_radKetteiKubun(false, 資格対象者);
         set申請情報エリア表示制御();
     }
 
@@ -249,6 +249,8 @@ public class FutangendogakuNinteiShinseiHandler {
                 div.getDdlRiyoshaFutanDankai().setSelectedKey(
                         service.judge利用者負担段階(資格対象者.get被保険者番号(), 資格対象者.get識別コード()).getコード());
                 onChange_ddlRiyoshaFutanDankai();
+            } else {
+                div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
             }
         } else {
             List<KeyValueDataSource> dataSources = new ArrayList<>();
@@ -731,7 +733,8 @@ public class FutangendogakuNinteiShinseiHandler {
             dataSource.add(source);
         }
         div.getDdlKyusochisha().setDataSource(dataSource);
-        div.getDdlKyusochisha().setSelectedKey(KyuSochishaKubun.非該当.getコード());
+        div.getDdlKyusochisha().setIsBlankLine(true);
+        div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
     }
 
     private void init負担段階DDL() {
