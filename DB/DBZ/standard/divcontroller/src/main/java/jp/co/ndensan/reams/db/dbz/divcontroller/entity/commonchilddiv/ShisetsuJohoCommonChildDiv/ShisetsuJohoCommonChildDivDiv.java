@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -368,5 +369,16 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @Override
     public void get入所施設名称(JigyoshaNo 入所施設コード) {
         getHandler().get入所施設名称(入所施設コード);
+    }
+
+    /**
+     * サービス種類抽出区分とサービス種類の設定.
+     *
+     * @param サービス種類抽出区分 RString
+     * @param サービス種類 List<RString>
+     */
+    @Override
+    public void setサービス種類(RString サービス種類抽出区分, List<RString> サービス種類) {
+        getHandler().setサービス種類(サービス種類抽出区分, サービス種類);
     }
 }
