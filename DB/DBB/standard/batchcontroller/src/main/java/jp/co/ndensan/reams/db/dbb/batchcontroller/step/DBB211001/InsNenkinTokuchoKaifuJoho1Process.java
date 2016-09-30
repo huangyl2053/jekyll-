@@ -78,13 +78,13 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
     @Override
     protected void process(TokuchoIraiDataEntity t) {
         if (!t.get賦課Newest().getTsuchishoNo().equals(通知書番号)) {
+            賦課Temp情報 = new DbT2002FukaJohoTempTableEntity();
+            対象者の情報 = 対象者の情報を編集(t);
             if (通知書番号 != null) {
                 dT各種金額欄１とDT各種金額欄2を編集(対象者の情報);
                 特徴依頼追加Temp.insert(対象者の情報);
                 年金特徴回付情報TableWriter.insert(対象者の情報);
             }
-            賦課Temp情報 = new DbT2002FukaJohoTempTableEntity();
-            対象者の情報 = 対象者の情報を編集(t);
         }
         set特徴期期別金額(new Decimal(t.get調定額().toString()),
                 Integer.parseInt(t.get期().toString()), 賦課Temp情報);
@@ -148,8 +148,8 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
     }
 
     private void dT各種金額欄１とDT各種金額欄2を編集(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
-        RString dT各種金額欄１ = new RString(Decimal.ZERO.toString());
-        RString dT各種金額欄2 = new RString(Decimal.ZERO.toString());
+        RString dT各種金額欄１ = RString.EMPTY;
+        RString dT各種金額欄2 = RString.EMPTY;
         if (賦課Temp情報 != null) {
             dT各種金額欄１ = get金額(賦課Temp情報.getTkKibetsuGaku04());
             dT各種金額欄2 = get金額(賦課Temp情報.getTkKibetsuGaku05());

@@ -94,12 +94,13 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
 
     @Override
     protected void process(ShikakuSoshitsuDataEntity t) {
+
         if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
+            業務概念_賦課の情報 = new DbT2002FukaJohoTempTableEntity();
+            対象者の情報 = 対象者の情報を編集(t);
             if (通知書番号 != null) {
                 特徴追加依頼追加Temp.insert(対象者の情報);
             }
-            業務概念_賦課の情報 = new DbT2002FukaJohoTempTableEntity();
-            対象者の情報 = 対象者の情報を編集(t);
         }
         set特徴期期別金額(new Decimal(t.get調定額().toString()),
                 Integer.parseInt(t.get期().toString()), 業務概念_賦課の情報);

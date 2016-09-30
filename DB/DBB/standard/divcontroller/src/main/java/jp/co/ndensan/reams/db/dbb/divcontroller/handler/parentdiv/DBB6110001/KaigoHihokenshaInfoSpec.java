@@ -88,9 +88,6 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
          * @param div KaigoHihokenshaInfoDiv
          */
         public static boolean is開始日と終了日の前後順(KaigoHihokenshaInfoPanelDiv div) {
-            if (div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue() == null) {
-                return true;
-            }
             return div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue().isBeforeOrEquals(
                     div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue());
         }

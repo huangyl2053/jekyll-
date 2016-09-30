@@ -85,10 +85,10 @@ public class InsShikakuSoshitsuTempProcess extends BatchProcessBase<ShikakuSoshi
     @Override
     protected void process(ShikakuSoshitsuDataEntity t) {
         if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
+            対象者の情報 = 対象者の情報を編集(t);
             if (通知書番号 != null) {
                 資格喪失等追加Temp.insert(対象者の情報);
             }
-            対象者の情報 = 対象者の情報を編集(t);
         }
         通知書番号 = t.get賦課情報().getTsuchishoNo();
 

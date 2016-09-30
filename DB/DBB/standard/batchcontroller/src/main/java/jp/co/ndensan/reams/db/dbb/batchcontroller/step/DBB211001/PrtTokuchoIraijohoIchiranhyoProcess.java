@@ -194,13 +194,15 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
     @Override
     protected void afterExecute() {
         特別徴収依頼情報一覧表ＣＳＶ.close();
+        manager.spool(特別徴収依頼情報一覧表ＣＳＶFilePath);
+
         List<RString> 出力条件リスト = parameter.get出力条件リスト();
-        int 出力ページ数 = reportSourceWriter.pageCount().value();
+        //TODO
+        int 出力ページ数 = 1;
         RString 帳票名 = ReportIdDBB.DBB200019.getReportName();
         RString csv出力有無 = CSV出力有無_無り;
         RString csvファイル名 = 出力ファイル名_NO_DATA;
         if (isHasData) {
-            manager.spool(特別徴収依頼情報一覧表ＣＳＶFilePath);
             csv出力有無 = CSV出力有無_有り;
             csvファイル名 = 出力ファイル名;
         }

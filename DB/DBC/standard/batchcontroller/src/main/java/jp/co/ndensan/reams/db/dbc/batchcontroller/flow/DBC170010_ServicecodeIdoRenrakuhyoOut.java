@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC170010.IdoRenrakuhyoDBUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC170010.IdoRenrakuhyoSofuFileSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC170010.IdoRenrakuhyoSofuTaishoDataShutokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC170010.DBC170010_ServicecodeIdoRenrakuhyoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;
@@ -53,9 +53,9 @@ public class DBC170010_ServicecodeIdoRenrakuhyoOut extends BatchFlowBase<DBC1700
                     Integer.class, new RString(送付ファイル作成), IdoRenrakuhyoSofuFileSakuseiProcess.PARAMETER_OUT_OUTPUTCOUNT);
             エントリ情報List = (ArrayList<SharedFileDescriptor>) getResult(
                     List.class, new RString(送付ファイル作成), IdoRenrakuhyoSofuFileSakuseiProcess.PARAMETER_OUT_OUTPUTENTRY);
-            if (本番処理.equals(getParameter().get処理選択区分())) {
-                executeStep(DB更新);
-            }
+        }
+        if (本番処理.equals(getParameter().get処理選択区分())) {
+            executeStep(DB更新);
         }
         executeStep(国保連インタフェース管理更新);
         executeStep(処理結果リスト作成);

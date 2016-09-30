@@ -223,7 +223,7 @@ resultMap="resultMap_追加用データ" >
              </foreach>
         </if>
      ORDER BY
-        賦課Newest."tsuchishoNo"
+        賦課Newest."hihokenshaNo"
 </select>
 
 <select resultOrdered="true" id="get住所地特例該当データ" 
@@ -340,7 +340,7 @@ resultMap="resultMap_追加用データ" >
              </foreach>
         </if>
     ORDER BY
-        賦課Newest."tsuchishoNo"
+        賦課Newest."hihokenshaNo"
 </select>
 
 <select resultOrdered="true" id="get最新の賦課の情報" 
@@ -484,7 +484,7 @@ resultMap="resultMap_追加用データ" >
     INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
         ON 調定共通_介護継承."choteiId" = 介護期別."choteiId"
     ORDER BY
-        賦課Newest."tsuchishoNo"
+        賦課Newest."hihokenshaNo"
 </select>
 
 <select resultOrdered="true" id="get追加用データ_4月_6月" 
@@ -1449,8 +1449,8 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         <id column="dbT2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id column="dbT2001ChoshuHoho_rirekiNo" />
-        <id property="期" column="ki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="期" column="ki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="対象者情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="被保険者台帳管理Newest" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="賦課Newest" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
