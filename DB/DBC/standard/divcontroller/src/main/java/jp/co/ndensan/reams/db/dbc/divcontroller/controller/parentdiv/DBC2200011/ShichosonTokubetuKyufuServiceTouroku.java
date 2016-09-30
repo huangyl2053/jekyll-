@@ -110,7 +110,7 @@ public class ShichosonTokubetuKyufuServiceTouroku {
                 getHandler(div).discard入力内容();
             }
         } else {
-            getHandler(div).initialize照会モード();
+            getHandler(div).discard入力内容();
         }
         return ResponseData.of(div).respond();
     }

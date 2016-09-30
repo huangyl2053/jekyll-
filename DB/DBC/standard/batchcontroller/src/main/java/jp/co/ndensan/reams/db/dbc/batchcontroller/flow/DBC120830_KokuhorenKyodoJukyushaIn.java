@@ -178,7 +178,7 @@ public class DBC120830_KokuhorenKyodoJukyushaIn
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
         KokuhorenKyodoJukyushaInGetIdProcessParameter parameter = new KokuhorenKyodoJukyushaInGetIdProcessParameter();
         parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(ReportIdDBC.DBC200056.getReportId());
+        parameter.set帳票ID(ReportIdDBC.DBC200057.getReportId());
         parameter.set出力順ID(getParameter().getShutsuryokujunId());
         return loopBatch(KokuhorenKyodoJukyushaInProcess.class).arguments(parameter)
                 .define();
