@@ -33,7 +33,7 @@ public class ServiceCodeIchiranHeaderEditor
         implements IServiceCodeIchiranEditor {
 
     private final ServiceCodeIchiranParameter parameter;
-    private static final RString 単位数単位 = new RString("単位数単位");
+    private static final RString 単位数単位 = new RString("【単位数単位】");
     private static final RString コロン = new RString("：");
     private static final RString スペース = new RString(" ");
     private static final RString 全角空白 = new RString("　");
@@ -80,10 +80,10 @@ public class ServiceCodeIchiranHeaderEditor
             }
         }
 
-        if (バッチパラメータ.get抽出条件区分().equals(ServiceCodeIchiran_ChushutsuJokenKubun.サービスコードを指定.getコード())) {
+        if (バッチパラメータ.get抽出条件区分().equals(ServiceCodeIchiran_ChushutsuJokenKubun.サービスコードを指定.get名称())) {
             source.chushutsuJoken = サービスコード.concat(全角空白).concat(getColumnValue(バッチパラメータ.getサービス種類コード())).
                     concat(スペース).concat(バッチパラメータ.getサービス項目コード());
-        } else if (バッチパラメータ.get抽出条件区分().equals(ServiceCodeIchiran_ChushutsuJokenKubun.サービス分類を指定.getコード())) {
+        } else if (バッチパラメータ.get抽出条件区分().equals(ServiceCodeIchiran_ChushutsuJokenKubun.サービス分類を指定.get名称())) {
             source.chushutsuJoken = getサービス分類();
         }
 

@@ -90,6 +90,9 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess1 extends BatchProcessBase<I
         TempSetaiinHaakuNyuryokuEntity insertEntity = new TempSetaiinHaakuNyuryokuEntity();
         給付実績基本情報高額一時3情報 = entity.get給付実績基本情報高額一時３();
         被保険者台帳情報 = entity.get被保険者台帳();
+        if (被保険者台帳情報 == null) {
+            return;
+        }
         FlexibleDate 資格取得年月日 = 被保険者台帳情報.getShikakuShutokuYMD();
         FlexibleYearMonth サービス提供年月 = 給付実績基本情報高額一時3情報.getServiceTeikyoYM();
         if (資格取得年月日 != null && サービス提供年月 != null) {
@@ -124,6 +127,8 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess1 extends BatchProcessBase<I
             }
             insertEntity.setShotokuNendo(ｗｋ年月日.getNendo());
         }
+        insertEntity.setHihokenshaNo(被保険者台帳情報.getHihokenshaNo());
+        insertEntity.setShikibetsuCode(被保険者台帳情報.getShikibetsuCode());
         get住所地特例該当(insertEntity);
         世帯員把握入力一時.insert(insertEntity);
     }

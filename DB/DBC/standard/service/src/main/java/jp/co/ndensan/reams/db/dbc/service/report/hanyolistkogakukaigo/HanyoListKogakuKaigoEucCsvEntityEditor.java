@@ -193,15 +193,21 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(
                 GyomuBunrui.介護事務);
         HokenshaSummary hokenshaSummary;
-        if (広域内住所地特例フラグ) {
-            hokenshaSummary = hokenshaList.get(広住特措置元市町村コード);
-        } else {
-            hokenshaSummary = hokenshaList.get(市町村コード);
+        ShoKisaiHokenshaNo 証記載保険者番号 = null;
+        if (null != 広住特措置元市町村コード && !広住特措置元市町村コード.isEmpty()) {
+            if (広域内住所地特例フラグ) {
+                hokenshaSummary = hokenshaList.get(広住特措置元市町村コード);
+                証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
+            } else if (null != 市町村コード && 市町村コード.isEmpty()) {
+                hokenshaSummary = hokenshaList.get(市町村コード);
+                証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
+
+            }
+
+            csvEntity.set資格証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
+                    ? 証記載保険者番号.getColumnValue()
+                    : RString.EMPTY);
         }
-        ShoKisaiHokenshaNo 証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
-        csvEntity.set資格証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
-                ? 証記載保険者番号.getColumnValue()
-                : RString.EMPTY);
 
         return csvEntity;
     }

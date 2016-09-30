@@ -149,10 +149,10 @@ public class KaigoHihokenshaInfoPanel {
         RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
         ShikibetsuCode 識別コード = div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().getDomain();
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
-        if (DBB6110001StateName.連帯納付義務者新規.getName().equals(ResponseHolder.getState())) {
+        if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) && 履歴番号.isNullOrEmpty()) {
             KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
             Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
-            if (履歴番号.isNullOrEmpty() && 最新履歴番号 == null) {
+            if (最新履歴番号 == null) {
                 履歴番号 = ONE;
             } else {
                 履歴番号 = new RString(最新履歴番号.intValue() + 1);
@@ -328,6 +328,7 @@ public class KaigoHihokenshaInfoPanel {
         AccessLogger.log(AccessLogType.更新, personalData);
         LockingKey 前排他キー = new LockingKey(DBBHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         RealInitialLocker.release(前排他キー);
+        div.getCcdKiagoKanryoMessage().setSuccessMessage(MESSAGETAISHO);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者更新結果確認);
     }
 
@@ -340,18 +341,24 @@ public class KaigoHihokenshaInfoPanel {
     public ResponseData<KaigoHihokenshaInfoPanelDiv> onClick_ReSearch(
             KaigoHihokenshaInfoPanelDiv div) {
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+        if (DBB6110001StateName.連帯納付義務者更新結果確認.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).forwardWithEventName(DBB6110001TransitionEventName.一覧へ戻る).respond();
+        }
         for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
-            if (entity.hasChanged()) {
+            if (entity.hasChanged() && !ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
             }
         }
-        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        LockingKey 前排他キー = new LockingKey(DBBHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-        RealInitialLocker.release(前排他キー);
-        div.getCcdKiagoKanryoMessage().setSuccessMessage(MESSAGETAISHO);
-        // TODO QA#101047
-        return ResponseData.of(div).forwardWithEventName(DBB6110001TransitionEventName.完了状態).respond();
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        } else {
+            FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            LockingKey 前排他キー = new LockingKey(DBBHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+            RealInitialLocker.release(前排他キー);
+            // TODO QA#101047
+        }
+        return ResponseData.of(div).forwardWithEventName(DBB6110001TransitionEventName.一覧へ戻る).respond();
     }
 
     private KaigoHihokenshaInfoPanelHandler getHandler(KaigoHihokenshaInfoPanelDiv div) {

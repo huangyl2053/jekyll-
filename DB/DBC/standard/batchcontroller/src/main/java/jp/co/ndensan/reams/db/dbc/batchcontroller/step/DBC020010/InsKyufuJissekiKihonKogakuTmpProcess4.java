@@ -50,12 +50,11 @@ public class InsKyufuJissekiKihonKogakuTmpProcess4 extends BatchProcessBase<DbT3
         if (breakKey != null && breakKey.equals(getBreakKey(entity))) {
             return;
         }
+        breakKey = getBreakKey(entity);
         if (processParameter.get処理年月().isBeforeOrEquals(entity.getShinsaYM())) {
             return;
         }
         給付実績基本情報高額一時.insert(entity);
-        breakKey = getBreakKey(entity);
-
     }
 
     private RString getBreakKey(DbT3017KyufujissekiKihonEntity entity) {
