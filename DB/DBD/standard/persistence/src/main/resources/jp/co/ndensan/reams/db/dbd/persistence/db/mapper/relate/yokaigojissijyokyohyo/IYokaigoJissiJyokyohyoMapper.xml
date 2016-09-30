@@ -103,12 +103,13 @@
     <select id="get受給者台帳マスタ" fetchSize="500" resultOrdered="true"
             resultMap="ResultMap_JissiJyokyohyoEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoMybatisParameter">
+        WITH master AS(
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
             T4123."ninteiShinsakaiWariateYoteiYMD" AS T4123_ninteiShinsakaiWariateYoteiYMD,
             T4123."ninteichosaYoteiYMD" AS T4123_ninteichosaYoteiYMD,
             T4123."ikenshoSakuseiIraiYoteiYMD" AS T4123_ikenshoSakuseiIraiYoteiYMD,
-            T7051."kokuhorenKoikiShichosonNo" AS T7051_kokuhorenKoikiShichosonNo,
+            T7051."kokuhorenKoikiShichosonNo" AS T7051_kokuhorenKoikiShichosonNo, 
             T7051."shichosonMeisho" AS T7051_shichosonMeisho,
             <if test="is導入形態コード111 || is導入形態コード112">
                 T4003."chosaItakuYMD" AS X4102_ninteichosaIraiYMD,
@@ -126,7 +127,8 @@
                 X4102_shinsakaiShiryoSakuseiYMD,
                 T4123."ninteiShinsakaiYoteiYMD" AS shinsakaiYoteiYMD,
             </if>
-            T1001."shikakuSoshitsuYMD" AS T1001_shikakuSoshitsuYMD
+            T1001."shikakuSoshitsuYMD" AS T1001_shikakuSoshitsuYMD,
+            T4101."ninteiShinseiHoreiKubunCode" as T4101_ninteiShinseiHoreiKubunCode
         FROM
             rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
             INNER JOIN  rgdb."DbT4101NinteiShinseiJoho" AS T4101
@@ -138,9 +140,6 @@
                 ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = T4123."shinseishoKanriNo"
             INNER JOIN  rgdb."DbT1001HihokenshaDaicho" AS T1001
                 ON      T1001."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-            INNER JOIN  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />  
-            AS B
-            ON B."shikibetsuCode"  = "DbT4001JukyushaDaicho"."shikibetsuCode" 
             <if test="is導入形態コード111 || is導入形態コード112">
                 INNER JOIN  rgdb."DbT4003YokaigoNinteiInterface" AS T4003
                     ON      "DbT4001JukyushaDaicho"."hihokenshaNo" = T4003."hihokenshaNo"
@@ -210,6 +209,24 @@
                 ) AS X4102
                     ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = X4102."shinseishoKanriNo"
             </if>
+            )
+            
+            SELECT
+                master.*
+            FROM
+                master
+            LEFT OUTER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            ( 
+                SELECT
+                    ARRAY_AGG(CAST ("dbT4001JukyushaDaicho_shikibetsuCode" AS TEXT))
+                FROM 
+                    master
+            ) 
+                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+            AS "ShikibetsuTaisho"							
+                ON "dbT4001JukyushaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+            
             <where>
                 1 = 1
                <include refid="条件1" />
@@ -218,70 +235,70 @@
             </where>
             
          ORDER BY
-            "DbT4001JukyushaDaicho"."hihokenshaNo"        
+            "dbT4001JukyushaDaicho_hihokenshaNo"        
     </select>
     <sql id="条件1">
         <if test="年齢基準日 != null and !年齢基準日.isEmpty()">
             <if test="生年月日From2!=null and !生年月日From2.isEmpty()">
-                AND #{生年月日From2} <![CDATA[<=]]> B."seinengappiYMD"
+                AND #{生年月日From2} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD"
             </if>
             <if test="生年月日To2!=null and !生年月日To2.isEmpty()">
-                AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
+                AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
             </if>
         </if>
         <if test="生年月日From!=null and !生年月日From.isEmpty() and 生年月日To!=null and !生年月日To.isEmpty() ">
             <if test="生年月日From!=null and !生年月日From.isEmpty()">
-                AND #{生年月日From} <![CDATA[<=]]> B."seinengappiYMD"
+                AND #{生年月日From} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD"
             </if>
             <if test="生年月日To!=null and !生年月日To.isEmpty()">
-                AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
+                AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
             </if>
         </if>
     </sql>
     <sql id="条件2">
         <if test="is住所">
             <if test="開始地区コード!=null and !開始地区コード.isEmpty()">
-                AND #{開始地区コード} <![CDATA[<=]]> B."choikiCode"
+                AND #{開始地区コード} <![CDATA[<=]]> "ShikibetsuTaisho"."choikiCode"
             </if>
             <if test="終了地区コード!=null and !終了地区コード.isEmpty()">
-                AND B."choikiCode" <![CDATA[<=]]> #{終了地区コード}
+                AND "ShikibetsuTaisho"."choikiCode" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
         <if test="is行政区">
             <if test="開始地区コード!=null and !開始地区コード.isEmpty()">
-                AND #{開始地区コード} <![CDATA[<=]]> B."gyoseikucode"
+                AND #{開始地区コード} <![CDATA[<=]]> "ShikibetsuTaisho"."gyoseikuCode"
             </if>
             <if test="終了地区コード!=null and !終了地区コード.isEmpty()">
-                AND B."gyoseikucode" <![CDATA[<=]]> #{終了地区コード}
+                AND "ShikibetsuTaisho"."gyoseikuCode" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
         <if test="is地区2">
             <if test="開始地区コード!=null and !開始地区コード.isEmpty()">
-                AND #{開始地区コード} <![CDATA[<=]]> B."chikuCode2"
+                AND #{開始地区コード} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode2"
             </if>
             <if test="終了地区コード!=null and !終了地区コード.isEmpty()">
-                AND B."chikuCode2" <![CDATA[<=]]> #{終了地区コード}
+                AND "ShikibetsuTaisho"."chikuCode2" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
     </sql>
     <sql id="条件3">
         <if test="is受給申請事由">
-            AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IS NOT NULL
+            AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu" IS NOT NULL
         </if>
         <if test="is申請区分申請時">
              AND (
-                (T4101."ninteiShinseiHoreiKubunCode"='1' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IN ('1','3','6'))
-                OR  (T4101."ninteiShinseiHoreiKubunCode"='2' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"=2)
-                OR  (T4101."ninteiShinseiHoreiKubunCode"='3' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"=4)
-                OR  (T4101."ninteiShinseiHoreiKubunCode"='4' OR T4101."ninteiShinseiHoreiKubunCode"=5 AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"=7)
+                (T4101_ninteiShinseiHoreiKubunCode='1' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu" IN ('1','3','6'))
+                OR  (T4101_ninteiShinseiHoreiKubunCode='2' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu"='2')
+                OR  (T4101_ninteiShinseiHoreiKubunCode='3' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu"='4')
+                OR  (T4101_ninteiShinseiHoreiKubunCode='4' OR T4101_ninteiShinseiHoreiKubunCode='5' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu"='7')
                 )
          </if>
          <if test="is申請区分法令">
             AND(
-                (T4101."ninteiShinseiHoreiKubunCode"='1' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu" IN ('1','3','6'))
-                OR  (T4101."ninteiShinseiHoreiKubunCode"='2' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"='2')
-                OR  (T4101."ninteiShinseiHoreiKubunCode"='3' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"='4')
-                OR  (T4101."ninteiShinseiHoreiKubunCode"='4' AND "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"='7')
+                (T4101_ninteiShinseiHoreiKubunCode='1' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu" IN ('1','3','6'))
+                OR  (T4101_ninteiShinseiHoreiKubunCode='2' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu"='2')
+                OR  (T4101_ninteiShinseiHoreiKubunCode='3' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu"='4')
+                OR  (T4101_ninteiShinseiHoreiKubunCode='4' AND "dbT4001JukyushaDaicho_jukyuShinseiJiyu"='7')
                 )
          </if>        
     </sql>

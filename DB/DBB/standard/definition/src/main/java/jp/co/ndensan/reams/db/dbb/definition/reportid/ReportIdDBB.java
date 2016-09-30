@@ -383,11 +383,11 @@ public enum ReportIdDBB {
      */
     DBB200012(new ReportId("DBB200012_KaigoHokenryogakuKetteiHenkoTsuchiHakkoIchiran"), new RString("介護保険料額決定通知書発行 一覧表")),
     /**
-     * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
+     * 特別徴収開始通知書（仮算定）発行一覧表の帳票ID
      */
-    DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書 本算定")),
+    DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書（仮算定）発行一覧表")),
     /**
-     * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
+     * 特別徴収仮算定結果一覧表の帳票ID
      */
     DBB200002(new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran"), new RString("特別徴収仮算定結果一覧表")),
     /**
@@ -489,7 +489,11 @@ public enum ReportIdDBB {
     /**
      * 特別徴収異動情報一覧表の帳票ID
      */
-    DBB200021(new ReportId("DBB200021_TokubetsuChoshuIdojohoIchiran"), new RString("特別徴収異動情報一覧表"));
+    DBB200021(new ReportId("DBB200021_TokubetsuChoshuIdojohoIchiran"), new RString("特別徴収異動情報一覧表")),
+    /**
+     * 宛名シールの帳票ID
+     */
+    DBB100087(new ReportId("DBB100087_AtenaSeal"), new RString("宛名シール"));
 
     private final ReportId reportId;
     private final RString reportName;

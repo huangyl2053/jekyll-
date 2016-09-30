@@ -30,9 +30,9 @@ public class InsNenkinTokuchoKaifuJoho1ProcessParameter implements IBatchProcess
     /**
      * コンストラクタです。
      *
-     * @param 賦課年度
-     * @param 処理対象月
-     * @param システム日時
+     * @param 賦課年度 RYear
+     * @param 処理対象月 RString
+     * @param システム日時 YMDHMS
      */
     public InsNenkinTokuchoKaifuJoho1ProcessParameter(RYear 賦課年度,
             RString 処理対象月, YMDHMS システム日時) {

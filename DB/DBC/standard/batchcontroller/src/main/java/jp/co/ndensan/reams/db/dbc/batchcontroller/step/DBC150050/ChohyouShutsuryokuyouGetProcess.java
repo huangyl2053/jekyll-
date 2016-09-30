@@ -33,7 +33,7 @@ public class ChohyouShutsuryokuyouGetProcess
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
+        return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam_帳票出力用());
     }
 
     @Override

@@ -137,6 +137,7 @@ public class IryouhiKoujyo {
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_AddButton(IryouhiKoujyoDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 追加);
+        div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setSelectedKey(IryoHiKojoNaiyo.主治医意見書確認書.getコード());
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().setValue(RDate.getNowDate());
         return ResponseData.of(div).setState(DBD9010001StateName.主治医意見書確認書);
     }

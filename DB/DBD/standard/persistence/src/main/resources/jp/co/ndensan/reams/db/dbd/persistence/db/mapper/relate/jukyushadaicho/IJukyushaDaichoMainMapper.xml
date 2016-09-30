@@ -3,7 +3,7 @@
 <!--@reamsid_L DBD-1760-020 panxiaobo-->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho.IJukyushaDaichoMainMapper">
-    <select id="get新たな抽出対象リスト" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity" fetchSize="500">
+    <select resultOrdered="true" id="get新たな抽出対象リスト" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity" fetchSize="500">
        SELECT 
         "KensakuJyoukenTempTable"."hihokenshaNo" AS 被保険者番号,
         "KensakuJyoukenTempTable"."shikibetsuCode" AS 識別コード
@@ -353,7 +353,7 @@
      <result property="x2002_保険料段階" column="x2002_保険料段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
      <result property="rank_number" column="rank_number" />
     </resultMap>
-      <select id="get個人情報と要介護認定情報" 
+      <select resultOrdered="true" id="get個人情報と要介護認定情報" 
               resultMap="ResultMap_IdoChushutsuDaichoNewEntity"
              parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoNewMybatisParameter" 
               fetchSize="500">

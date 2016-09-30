@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.KyufuGengakuHaakuListTaishoTokuteiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListTaishoTokuteiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.DuixiangZheTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.TaishoshaJohoTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 対象者把握情報の取得_Process処理クラスです．
  *
- * @reamsid_L DBD-3610-050 x_miaocl
+ * @reamsid_L DBD-3610-030 x_miaocl
  */
 public class KyufuGengakuHaakuListTaishoTokuteiProcess extends BatchProcessBase<KyufuGengakuHaakuListTaishoTokuteiEntity> {
 
@@ -49,18 +49,18 @@ public class KyufuGengakuHaakuListTaishoTokuteiProcess extends BatchProcessBase<
 
     @Override
     protected void createWriter() {
-        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(DuixiangZheTempTableEntity.class)
-                .tempTableName(DuixiangZheTempTableEntity.TABLE_NAME).build();
+        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(TaishoshaJohoTempTableEntity.class)
+                .tempTableName(TaishoshaJohoTempTableEntity.TABLE_NAME).build();
     }
 
     @Override
-    protected void process(KyufuGengakuHaakuListTaishoTokuteiEntity t) {
-        tmpTableWriter.insert(create重複処理(t));
+    protected void process(KyufuGengakuHaakuListTaishoTokuteiEntity tmpTblEntity) {
+        tmpTableWriter.insert(edit対象者(tmpTblEntity));
     }
 
-    private DuixiangZheTempTableEntity create重複処理(KyufuGengakuHaakuListTaishoTokuteiEntity entity) {
-        DuixiangZheTempTableEntity daTableEntity = new DuixiangZheTempTableEntity();
-        daTableEntity.setHihokenshaNo2(entity.getHihokenshaNo());
-        return daTableEntity;
+    private TaishoshaJohoTempTableEntity edit対象者(KyufuGengakuHaakuListTaishoTokuteiEntity tmpTblEntity) {
+        TaishoshaJohoTempTableEntity insertEntity = new TaishoshaJohoTempTableEntity();
+        insertEntity.setHihokenshaNo2(tmpTblEntity.getHihokenshaNo());
+        return insertEntity;
     }
 }

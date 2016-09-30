@@ -359,7 +359,9 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     @Override
     @JsonIgnore
     public void set選択対象(RString 選択対象) {
-        this.getDdlChiku().setSelectedKey(選択対象);
+        if (!RString.isNullOrEmpty(選択対象)) {
+            this.getDdlChiku().setSelectedKey(選択対象);
+        }
     }
 
     @Override

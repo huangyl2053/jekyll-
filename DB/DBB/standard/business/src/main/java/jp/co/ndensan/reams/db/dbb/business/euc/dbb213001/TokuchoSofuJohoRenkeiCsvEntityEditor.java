@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 連携用出力ファイルに特徴依頼情報DTAデータの編集クラスです。
@@ -176,7 +177,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
      * @param 格納件数 格納件数
      * @return DTAレコード
      */
-    public TokuchoSofuJohoRenkeiTolelaEntity editトレイラ(int 各種金額欄合計1, int 各種金額欄合計2, int 格納件数) {
+    public TokuchoSofuJohoRenkeiTolelaEntity editトレイラ(Decimal 各種金額欄合計1, Decimal 各種金額欄合計2, int 格納件数) {
         return new TokuchoSofuJohoRenkeiTolelaEntity(
                 THREESTRING,
                 entity.get市町村コードDT(),
@@ -186,8 +187,8 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
                 entity.get特別徴収制度コードDT(),
                 editパターン3(RDate.getNowDate()),
                 new RString(格納件数),
-                new RString(各種金額欄合計1),
-                new RString(各種金額欄合計2),
+                new RString(各種金額欄合計1.toString()),
+                new RString(各種金額欄合計2.toString()),
                 合計金額金額,
                 RString.EMPTY
         );

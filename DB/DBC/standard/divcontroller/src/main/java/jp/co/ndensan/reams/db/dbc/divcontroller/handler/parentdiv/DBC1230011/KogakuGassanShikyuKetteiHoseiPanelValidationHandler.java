@@ -340,8 +340,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
             boolean flag1 = !div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().
                     getFromValue().isBeforeOrEquals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                             getTxtTaishoNendo().getValue()) || !div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtTaishoNendo().getValue().isBeforeOrEquals(
-                            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue());
+                    getTxtKeisanYMD().getToValue().isBeforeOrEquals(
+                            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                            getTxtTaishoNendo().getValue());
             boolean flag2 = 定値_年度年度1.getYear().equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtTaishoNendo().getValue().getYear()) && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtKeisanYMD().getFromValue().isBefore(定値_開始計算対象期間1)
@@ -374,7 +375,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
         }
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getValue() != null
                 && !div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getValue().isEmpty()
-                && NUM_TWENTY != div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length()) {
+                && NUM_TWENTY != div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                getTxtJikoFutanSeiriNo().getValue().length()) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.桁数が不正, 自己負担額証明書整理番号.toString(), TWENTY.toString())));

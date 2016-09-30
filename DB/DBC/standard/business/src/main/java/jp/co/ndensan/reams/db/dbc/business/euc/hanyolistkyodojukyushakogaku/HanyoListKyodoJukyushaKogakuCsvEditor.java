@@ -257,12 +257,12 @@ public class HanyoListKyodoJukyushaKogakuCsvEditor {
         bodyList.add(new RString(entity.get受給者異動高額().getRirekiNo()));
         bodyList.add(format日付項目(entity.get受給者異動高額().getIdoYMD(), param));
         if (!RString.isNullOrEmpty(entity.get受給者異動高額().getIdoKubunCode())) {
-            bodyList.add(JukyushaIF_IdoKubunCode.toValue(entity.get受給者異動高額().getIdoKubunCode()).get名称());
+            bodyList.add(edit異動区分(entity.get受給者異動高額().getIdoKubunCode()));
         } else {
             bodyList.add(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(entity.get受給者異動高額().getJukyushaIdoJiyu())) {
-            bodyList.add(JukyushaIF_JukyushaIdoJiyu.toValue(entity.get受給者異動高額().getJukyushaIdoJiyu()).get名称());
+            bodyList.add(edit異動事由(entity.get受給者異動高額().getJukyushaIdoJiyu()));
         } else {
             bodyList.add(RString.EMPTY);
         }
@@ -270,14 +270,16 @@ public class HanyoListKyodoJukyushaKogakuCsvEditor {
         HihokenshaNo hihokenshaNo = entity.get受給者異動高額().getSetaiShuyakuNo();
         if (hihokenshaNo != null) {
             bodyList.add(hihokenshaNo.getColumnValue());
+        } else {
+            bodyList.add(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(entity.get受給者異動高額().getSetaiShotokuKubunCode())) {
-            bodyList.add(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.toValue(entity.get受給者異動高額().getSetaiShotokuKubunCode()).get名称());
+            bodyList.add(edit世帯所得区分(entity.get受給者異動高額().getSetaiShotokuKubunCode()));
         } else {
             bodyList.add(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(entity.get受給者異動高額().getShotokuKubunCode())) {
-            bodyList.add(JukyushaIF_KyodoKogakuShotokuKubunCode.toValue(entity.get受給者異動高額().getShotokuKubunCode()).get名称());
+            bodyList.add(edit所得区分(entity.get受給者異動高額().getShotokuKubunCode()));
         } else {
             bodyList.add(RString.EMPTY);
         }
@@ -323,4 +325,71 @@ public class HanyoListKyodoJukyushaKogakuCsvEditor {
         return temp;
     }
 
+    private RString edit異動区分(RString idoKubunCode) {
+        if (RString.isNullOrEmpty(idoKubunCode)) {
+            return RString.EMPTY;
+        } else if (JukyushaIF_IdoKubunCode.新規.getコード().equals(idoKubunCode)) {
+            return JukyushaIF_IdoKubunCode.新規.get名称();
+        } else if (JukyushaIF_IdoKubunCode.変更.getコード().equals(idoKubunCode)) {
+            return JukyushaIF_IdoKubunCode.変更.get名称();
+        } else if (JukyushaIF_IdoKubunCode.終了.getコード().equals(idoKubunCode)) {
+            return JukyushaIF_IdoKubunCode.終了.get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString edit異動事由(RString idoJiyu) {
+        if (RString.isNullOrEmpty(idoJiyu)) {
+            return RString.EMPTY;
+        } else if (JukyushaIF_JukyushaIdoJiyu.受給資格取得.getコード().equals(idoJiyu)) {
+            return JukyushaIF_JukyushaIdoJiyu.受給資格取得.get名称();
+        } else if (JukyushaIF_JukyushaIdoJiyu.受給資格喪失.getコード().equals(idoJiyu)) {
+            return JukyushaIF_JukyushaIdoJiyu.受給資格喪失.get名称();
+        } else if (JukyushaIF_JukyushaIdoJiyu.広域連合における受給者の市町村間転居異動.getコード().equals(idoJiyu)) {
+            return JukyushaIF_JukyushaIdoJiyu.広域連合における受給者の市町村間転居異動.get名称();
+        } else if (JukyushaIF_JukyushaIdoJiyu.合併による新規.getコード().equals(idoJiyu)) {
+            return JukyushaIF_JukyushaIdoJiyu.合併による新規.get名称();
+        } else if (JukyushaIF_JukyushaIdoJiyu.その他異動.getコード().equals(idoJiyu)) {
+            return JukyushaIF_JukyushaIdoJiyu.その他異動.get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString edit世帯所得区分(RString setaiShotokuKubunCode) {
+        if (RString.isNullOrEmpty(setaiShotokuKubunCode)) {
+            return RString.EMPTY;
+        } else if (JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.getコード().equals(setaiShotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.get名称();
+        } else if (JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.getコード().equals(setaiShotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.get名称();
+        } else if (JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.getコード().equals(setaiShotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.get名称();
+        } else if (JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.getコード().equals(setaiShotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.get名称();
+        } else if (JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.getコード().equals(setaiShotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString edit所得区分(RString shotokuKubunCode) {
+        if (RString.isNullOrEmpty(shotokuKubunCode)) {
+            return RString.EMPTY;
+        } else if (JukyushaIF_KyodoKogakuShotokuKubunCode.一般.getコード().equals(shotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuShotokuKubunCode.一般.get名称();
+        } else if (JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.getコード().equals(shotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.get名称();
+        } else if (JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.getコード().equals(shotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.get名称();
+        } else if (JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.getコード().equals(shotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.get名称();
+        } else if (JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.getコード().equals(shotokuKubunCode)) {
+            return JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
 }

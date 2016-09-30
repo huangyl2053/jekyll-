@@ -69,7 +69,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set主治医番号(entity.get主治医コード());
         eucEntity.set意見書依頼日(nullchck(entity.get主治医意見書作成依頼年月日()));
         eucEntity.set意見書入手日(nullchck(entity.get主治医意見書受領年月日()));
-        eucEntity.set意見書短期記憶(entity.get短期記憶15());
+        eucEntity.set意見書短期記憶(entity.get意見書短期記憶());
         eucEntity.set意見書認知能力(entity.get日常の意思決定を行うための認知能力());
         eucEntity.set意見書伝達能力(entity.get自分の意思の伝達能力());
         eucEntity.set意見書食事行為(entity.get食事行為());
@@ -188,7 +188,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set主治医番号(entity.get主治医コード());
         eucEntity.set意見書依頼日(nullchck(entity.get主治医意見書作成依頼年月日()));
         eucEntity.set意見書入手日(nullchck(entity.get主治医意見書受領年月日()));
-        eucEntity.set意見書短期記憶(entity.get短期記憶15());
+        eucEntity.set意見書短期記憶(entity.get意見書短期記憶());
         eucEntity.set意見書認知能力(entity.get日常の意思決定を行うための認知能力());
         eucEntity.set意見書伝達能力(entity.get自分の意思の伝達能力());
         eucEntity.set意見書食事行為(entity.get食事行為());

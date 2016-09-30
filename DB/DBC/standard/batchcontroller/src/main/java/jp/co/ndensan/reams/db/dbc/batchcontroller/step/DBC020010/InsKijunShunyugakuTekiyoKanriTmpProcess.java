@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchCopiedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class InsKijunShunyugakuTekiyoKanriTmpProcess extends BatchProcessBase<DbT3116KijunShunyugakuTekiyoKanriEntity> {
 
     @BatchWriter
-    BatchCopiedTempTableWriter 基準収入額適用管理一時;
+    BatchEntityCreatedTempTableWriter 基準収入額適用管理一時;
 
     private static final RString 基準収入額適用管理一時_TABLE_NAME = new RString("TempyokaisoGaitosha");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
@@ -34,8 +34,8 @@ public class InsKijunShunyugakuTekiyoKanriTmpProcess extends BatchProcessBase<Db
 
     @Override
     protected void createWriter() {
-        基準収入額適用管理一時 = new BatchCopiedTempTableWriter(DbT3116KijunShunyugakuTekiyoKanriEntity.class,
-                基準収入額適用管理一時_TABLE_NAME);
+        基準収入額適用管理一時 = new BatchEntityCreatedTempTableWriter(
+                基準収入額適用管理一時_TABLE_NAME, DbT3116KijunShunyugakuTekiyoKanriEntity.class);
     }
 
     @Override

@@ -89,6 +89,8 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKe
     private RString 住所;
     private RString 出力順情報;
     private int 連番;
+    private Decimal 本人支給額合計;
+    private Decimal 支給額給額合計;
 
     @BatchWriter
     BatchReportWriter<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> batchReportWriter;
@@ -97,7 +99,9 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKe
     @Override
     protected void initialize() {
         dataFlag = true;
-        連番 = INT_1;
+        連番 = INT_0;
+        本人支給額合計 = Decimal.ZERO;
+        支給額給額合計 = Decimal.ZERO;
         並び順 = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         pageBreakKeys = new ArrayList<>();
@@ -131,11 +135,14 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKe
     @Override
     protected void usualProcess(KetteiTsuchishoInfoTempResultEntity entity) {
         dataFlag = false;
+        連番 = 連番 + INT_1;
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(entity.get宛名());
         住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報, 導入団体情報);
         KogakuShikyuFushikyuKetteiTsuchiHakkoEntity reportEntity = getFushikyuReportEntity(entity);
-        KogakuShikyuFushikyuKetteiTsuchiHakkoReport report = new KogakuShikyuFushikyuKetteiTsuchiHakkoReport(reportEntity, 連番);
+        KogakuShikyuFushikyuKetteiTsuchiHakkoReport report = new KogakuShikyuFushikyuKetteiTsuchiHakkoReport(reportEntity, 連番, false);
         report.writeBy(reportSourceWriter);
+        本人支給額合計 = 本人支給額合計.add(entity.get本人支払額());
+        支給額給額合計 = 支給額給額合計.add(entity.get本人支払額());
     }
 
     @Override
@@ -144,9 +151,20 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKe
             KogakuShikyuFushikyuKetteiTsuchiHakkoEntity afterEntity = new KogakuShikyuFushikyuKetteiTsuchiHakkoEntity();
             set出力順と改頁(afterEntity);
             afterEntity.set被保険者氏名(被保険者氏名_出力ない);
-            KogakuShikyuFushikyuKetteiTsuchiHakkoReport report = new KogakuShikyuFushikyuKetteiTsuchiHakkoReport(afterEntity, 連番);
+            KogakuShikyuFushikyuKetteiTsuchiHakkoReport report = new KogakuShikyuFushikyuKetteiTsuchiHakkoReport(afterEntity, 連番, false);
+            report.writeBy(reportSourceWriter);
+        } else {
+            KogakuShikyuFushikyuKetteiTsuchiHakkoReport report = new KogakuShikyuFushikyuKetteiTsuchiHakkoReport(getLastEntity(), 連番, true);
             report.writeBy(reportSourceWriter);
         }
+    }
+
+    private KogakuShikyuFushikyuKetteiTsuchiHakkoEntity getLastEntity() {
+        KogakuShikyuFushikyuKetteiTsuchiHakkoEntity lastEntity = new KogakuShikyuFushikyuKetteiTsuchiHakkoEntity();
+        lastEntity.set支給総件数(new RString(連番));
+        lastEntity.set本人支給額合計(doカンマ編集(本人支給額合計));
+        lastEntity.set支給額給額合計(doカンマ編集(支給額給額合計));
+        return lastEntity;
     }
 
     private void get出力順() {
@@ -177,7 +195,7 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKe
             returnEntity.set被保険者氏名(RString.EMPTY);
         }
         returnEntity.set住所(住所);
-        // 郵便番号的来源不明
+        // TODO QA郵便番号？
         returnEntity.set郵便番号(RString.EMPTY);
         if (null != entity.getサービス提供年月()) {
             returnEntity.set提供年月(entity.getサービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).

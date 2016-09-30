@@ -43,8 +43,14 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListHandler {
      *
      */
     public void onLoad() {
+        HomonKaigoRiyoshaFutangakuGengakuNinteishaList homokaigoriyosha
+                = new HomonKaigoRiyoshaFutangakuGengakuNinteishaList();
         div.getCcdChohyoShuturyokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200003.getReportId());
         div.getTxtTaishoYM().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
+        Range<FlexibleDate> range = homokaigoriyosha.estimate対象期間(
+                new FlexibleYear(div.getTxtTaishoYM().getValue().toString().substring(NO_0, NO_4)));
+        div.getTxtTaishoKikanKaishi().setValue(range.getFrom());
+        div.getTxtTaishoKikanShuryo().setValue(range.getTo());
         div.getTxtShotokuNendo().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         div.getTxtKijunYMD().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         if (div.getRadTaishoList().getSelectedKey().equals(該当者リスト)) {

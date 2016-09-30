@@ -33,7 +33,6 @@ public class ServiceCodeIchiranHeaderEditor
         implements IServiceCodeIchiranEditor {
 
     private final ServiceCodeIchiranParameter parameter;
-    private static final RString SAKUSEI = new RString("作成");
     private static final RString 単位数単位 = new RString("単位数単位");
     private static final RString コロン = new RString("：");
     private static final RString スペース = new RString(" ");
@@ -64,8 +63,8 @@ public class ServiceCodeIchiranHeaderEditor
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = 作成日時.getTime()
-                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
-        source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
+                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        source.printTimeStamp = 作成日.concat(RString.FULL_SPACE).concat(作成時);
         if (null != 導入団体) {
             source.hokenshaNo = getColumnValue(導入団体.getLasdecCode_());
             source.hokenshaName = 導入団体.getShichosonName_();

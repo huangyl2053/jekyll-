@@ -46,7 +46,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -183,7 +186,7 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
                 特徴依頼情報Entity, processCore.出力順項(), processCore.改頁項(),
                 parameter.getシステム日時().getRDateTime());
         report.writeBy(reportSourceWriter);
-        TokubetsuChoshuIraiJohoIchiranDataCSVEntity cSVEntity = CSVEntityの編集(行政区コード, 表示コード,
+        TokubetsuChoshuIraiJohoIchiranDataCSVEntity cSVEntity = csvEntityの編集(行政区コード, 表示コード,
                 年金保険者名称, t.get対象者情報(), t.get市町村名称());
         特別徴収依頼情報一覧表ＣＳＶ.writeLine(cSVEntity);
     }
@@ -191,20 +194,18 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
     @Override
     protected void afterExecute() {
         特別徴収依頼情報一覧表ＣＳＶ.close();
-        manager.spool(特別徴収依頼情報一覧表ＣＳＶFilePath);
-
         List<RString> 出力条件リスト = parameter.get出力条件リスト();
-        //TODO
-        int 出力ページ数 = 1;
+        int 出力ページ数 = reportSourceWriter.pageCount().value();
         RString 帳票名 = ReportIdDBB.DBB200019.getReportName();
-        RString CSV出力有無 = CSV出力有無_無り;
-        RString CSVファイル名 = 出力ファイル名_NO_DATA;
+        RString csv出力有無 = CSV出力有無_無り;
+        RString csvファイル名 = 出力ファイル名_NO_DATA;
         if (isHasData) {
-            CSV出力有無 = CSV出力有無_有り;
-            CSVファイル名 = 出力ファイル名;
+            manager.spool(特別徴収依頼情報一覧表ＣＳＶFilePath);
+            csv出力有無 = CSV出力有無_有り;
+            csvファイル名 = 出力ファイル名;
         }
         loadバッチ出力条件リスト(出力条件リスト, new ReportId(parameter.get帳票ID()),
-                出力ページ数, CSV出力有無, CSVファイル名, 帳票名);
+                出力ページ数, csv出力有無, csvファイル名, 帳票名);
 
     }
 
@@ -234,23 +235,35 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
         HyojiCodes 表示コード = null;
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = 特徴依頼一覧Entity.get宛名();
+        ChoikiCode 町域コード = ChoikiCode.EMPTY;
+        GyoseikuCode 行政区コー = GyoseikuCode.EMPTY;
+        ChikuCode 地区コード１ = ChikuCode.EMPTY;
+        ChikuCode 地区コード２ = ChikuCode.EMPTY;
+        ChikuCode 地区コード３ = ChikuCode.EMPTY;
+        if (isNotNull(宛名情報)) {
+            町域コード = 宛名情報.getChoikiCode();
+            行政区コー = 宛名情報.getGyoseikuCode();
+            地区コード１ = 宛名情報.getChikuCode1();
+            地区コード２ = 宛名情報.getChikuCode2();
+            地区コード３ = 宛名情報.getChikuCode3();
+        }
         if (isNotNull(帳票制御共通情報)) {
             表示コード = researcher.create表示コード情報(帳票制御共通情報.toEntity(),
-                    (isNotNull(宛名情報) && isNotNull(宛名情報.getChoikiCode())) ? 宛名情報.getChoikiCode().value() : RString.EMPTY,
-                    (isNotNull(宛名情報) && isNotNull(宛名情報.getGyoseikuCode())) ? 宛名情報.getGyoseikuCode().value() : RString.EMPTY,
-                    (isNotNull(宛名情報) && isNotNull(宛名情報.getChikuCode1())) ? 宛名情報.getChikuCode1().value() : RString.EMPTY,
-                    (isNotNull(宛名情報) && isNotNull(宛名情報.getChikuCode2())) ? 宛名情報.getChikuCode2().value() : RString.EMPTY,
-                    (isNotNull(宛名情報) && isNotNull(宛名情報.getChikuCode3())) ? 宛名情報.getChikuCode3().value() : RString.EMPTY,
+                    町域コード != null ? 町域コード.value() : RString.EMPTY,
+                    行政区コー != null ? 行政区コー.value() : RString.EMPTY,
+                    地区コード１ != null ? 地区コード１.value() : RString.EMPTY,
+                    地区コード２ != null ? 地区コード２.value() : RString.EMPTY,
+                    地区コード３ != null ? 地区コード３.value() : RString.EMPTY,
                     (isNotNull(特徴依頼一覧Entity.get納組()) && isNotNull(特徴依頼一覧Entity.get納組().getNokumi()))
                     ? 特徴依頼一覧Entity.get納組().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         return 表示コード;
     }
 
-    private RString 年金保険者名称の編集(Code DT特徴義務者コード) {
+    private RString 年金保険者名称の編集(Code dT特徴義務者コード) {
         NenkinHokenshaHantei 年金保険者判定クラス = new NenkinHokenshaHantei();
-        if (isNotNull(DT特徴義務者コード)
-                && 年金保険者判定クラス.is厚労省(DT特徴義務者コード.value())) {
+        if (isNotNull(dT特徴義務者コード)
+                && 年金保険者判定クラス.is厚労省(dT特徴義務者コード.value())) {
             return 年金保険者名称_厚労省;
         } else {
             return 年金保険者名称_地共済;
@@ -286,8 +299,9 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
         特徴依頼情報Entity.set金額1(特徴依頼追加情報.getDtKakushuKingaku1());
         特徴依頼情報Entity.set金額2(特徴依頼追加情報.getDtKakushuKingaku2());
         特徴依頼情報Entity.set金額3(特徴依頼追加情報.getDtKakushuKingaku3());
-        if (isNotNull(特徴依頼追加情報.getShikibetsuCode())) {
-            特徴依頼情報Entity.set識別コード(特徴依頼追加情報.getShikibetsuCode().value());
+        ShikibetsuCode 識別コード = 特徴依頼追加情報.getShikibetsuCode();
+        if (isNotNull(識別コード)) {
+            特徴依頼情報Entity.set識別コード(識別コード.value());
         } else {
             特徴依頼情報Entity.set識別コード(RString.EMPTY);
         }
@@ -300,7 +314,7 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
         return 特徴依頼情報Entity;
     }
 
-    private TokubetsuChoshuIraiJohoIchiranDataCSVEntity CSVEntityの編集(RString 行政区コード,
+    private TokubetsuChoshuIraiJohoIchiranDataCSVEntity csvEntityの編集(RString 行政区コード,
             HyojiCodes 表示コード, RString 年金保険者名称,
             UeT0511NenkinTokuchoKaifuJohoEntity 特徴依頼追加情報, RString 市町村名称) {
         RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,

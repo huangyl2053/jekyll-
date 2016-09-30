@@ -18,11 +18,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd582001.YokaigoNinteiTsukib
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoReportEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -34,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -99,15 +93,21 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
+    private static final RString 月別04 = new RString("004");
+    private static final RString 月別05 = new RString("005");
+    private static final RString 月別06 = new RString("006");
+    private static final RString 月別07 = new RString("007");
+    private static final RString 月別08 = new RString("008");
+    private static final RString 月別09 = new RString("009");
+    private static final RString 月別10 = new RString("010");
+    private static final RString 月別11 = new RString("011");
+    private static final RString 月別12 = new RString("012");
+    private static final RString 月別01 = new RString("101");
+    private static final RString 月別02 = new RString("102");
+    private static final RString 月別03 = new RString("103");
 
     @Override
     protected void initialize() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        parameter.setPsmShikibetsuTaisho(psmShikibetsuTaisho);
         受給状況リスト初期化();
         受給状況リストEntity = new JukyushaSuJokyohyoRisutoEntity();
         受給状況リストEntity.set受給状況リスト(new ArrayList<YokaigoNinteiJisshiJokyohyoReportEntity>());
@@ -137,36 +137,67 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
             受給状況リストEntity作成();
             受給状況リスト初期化();
         }
-        受給状況Entity.get受給状況リスト1().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get件数().intValue());
-        受給状況Entity.get受給状況リスト2().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get件数旧措置().intValue());
-        受給状況Entity.get受給状況リスト3().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get新規().intValue());
-        受給状況Entity.get受給状況リスト4().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get新規旧措置().intValue());
-        受給状況Entity.get受給状況リスト5().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get要支援().intValue());
-        受給状況Entity.get受給状況リスト6().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get要支援旧措置().intValue());
-        受給状況Entity.get受給状況リスト7().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get更新().intValue());
-        受給状況Entity.get受給状況リスト8().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get更新旧措置().intValue());
-        受給状況Entity.get受給状況リスト9().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get区分変更().intValue());
-        受給状況Entity.get受給状況リスト10().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get区分変更旧措置().intValue());
-        受給状況Entity.get受給状況リスト11().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get転入().intValue());
-        受給状況Entity.get受給状況リスト12().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get転入旧措置().intValue());
-        受給状況Entity.get受給状況リスト13().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get職権他().intValue());
-        受給状況Entity.get受給状況リスト14().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件()))
-                .set年度合計(jukyushaSuJokyohyoEntity.get職権他().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト1().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get件数().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト2().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get件数旧措置().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト3().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get新規().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト4().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get新規旧措置().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト5().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get要支援().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト6().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get要支援旧措置().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト7().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get更新().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト8().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get更新旧措置().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト9().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get区分変更().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト10().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get区分変更旧措置().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト11().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get転入().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト12().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get転入旧措置().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト13().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get職権他().intValue());
+        受給状況Entity作成(受給状況Entity.get受給状況リスト14().get(rstringToInt(jukyushaSuJokyohyoEntity.get取得条件().substring(0, 2))),
+                jukyushaSuJokyohyoEntity, jukyushaSuJokyohyoEntity.get職権他旧措置().intValue());
         beforeCode = jukyushaSuJokyohyoEntity.get市町村コード();
         beforeEntity = jukyushaSuJokyohyoEntity;
+    }
+
+    private void 受給状況Entity作成(YokaigoNinteiJisshiJokyohyoEntity jisshiJokyohyoEntity,
+            YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity jukyushaSuJokyohyoEntity,
+            int 件数) {
+        if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別04)) {
+            jisshiJokyohyoEntity.set四月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別05)) {
+            jisshiJokyohyoEntity.set五月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別06)) {
+            jisshiJokyohyoEntity.set六月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別07)) {
+            jisshiJokyohyoEntity.set七月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別08)) {
+            jisshiJokyohyoEntity.set八月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別09)) {
+            jisshiJokyohyoEntity.set九月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別10)) {
+            jisshiJokyohyoEntity.set十月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別11)) {
+            jisshiJokyohyoEntity.set十一月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別12)) {
+            jisshiJokyohyoEntity.set十二月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別01)) {
+            jisshiJokyohyoEntity.set一月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別02)) {
+            jisshiJokyohyoEntity.set二月の合計(件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().substring(2).equals(月別03)) {
+            jisshiJokyohyoEntity.set三月の合計(件数);
+        }
+
     }
 
     private int rstringToInt(RString rstring) {
@@ -300,26 +331,29 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
     }
 
     private RString 集計項目設定(int index) {
-        if (index == 0) {
-            return 集計項目認定件数;
-        } else if (index == 1) {
-            return 集計項目要介護度1;
-        } else if (index == 2) {
-            return 集計項目要介護度2;
-        } else if (index == INDEX_3) {
-            return 集計項目要介護度3;
-        } else if (index == INDEX_4) {
-            return 集計項目要介護度4;
-        } else if (index == INDEX_5) {
-            return 集計項目要介護度5;
-        } else if (index == INDEX_6) {
-            return 集計項目要支援1;
-        } else if (index == INDEX_7) {
-            return 集計項目要支援2;
-        } else if (index == INDEX_8) {
-            return 集計項目経過介護;
-        } else if (index == INDEX_9) {
-            return 集計項目自立;
+        switch (index) {
+            case 0:
+                return 集計項目認定件数;
+            case 1:
+                return 集計項目要介護度1;
+            case 2:
+                return 集計項目要介護度2;
+            case INDEX_3:
+                return 集計項目要介護度3;
+            case INDEX_4:
+                return 集計項目要介護度4;
+            case INDEX_5:
+                return 集計項目要介護度5;
+            case INDEX_6:
+                return 集計項目要支援1;
+            case INDEX_7:
+                return 集計項目要支援2;
+            case INDEX_8:
+                return 集計項目経過介護;
+            case INDEX_9:
+                return 集計項目自立;
+            default:
+                break;
         }
         return RString.EMPTY;
     }
@@ -328,8 +362,45 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
             YokaigoNinteiJisshiJokyohyoEntity jisshiJokyohyoEntity2) {
         jisshiJokyohyoReportEntity.set市町村番号(jisshiJokyohyoEntity.get市町村番号());
         jisshiJokyohyoReportEntity.set市町村名(jisshiJokyohyoEntity.get市町村名());
-        jisshiJokyohyoReportEntity.set年度合計(new RString(jisshiJokyohyoEntity.get年度合計())
-                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get年度合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set四月の合計(new RString(jisshiJokyohyoEntity.get四月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get四月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set五月の合計(new RString(jisshiJokyohyoEntity.get五月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get五月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set六月の合計(new RString(jisshiJokyohyoEntity.get六月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get六月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set七月の合計(new RString(jisshiJokyohyoEntity.get七月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get七月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set八月の合計(new RString(jisshiJokyohyoEntity.get八月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get八月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set九月の合計(new RString(jisshiJokyohyoEntity.get九月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get九月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set十月の合計(new RString(jisshiJokyohyoEntity.get十月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get十月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set十一月の合計(new RString(jisshiJokyohyoEntity.get十一月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get十一月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set十二月の合計(new RString(jisshiJokyohyoEntity.get十二月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get十二月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set一月の合計(new RString(jisshiJokyohyoEntity.get一月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get一月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set二月の合計(new RString(jisshiJokyohyoEntity.get二月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get二月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set三月の合計(new RString(jisshiJokyohyoEntity.get三月の合計())
+                .concat("(").concat(new RString(jisshiJokyohyoEntity2.get三月の合計())).concat(")"));
+        jisshiJokyohyoReportEntity.set年度合計(new RString(
+                jisshiJokyohyoEntity.get一月の合計() + jisshiJokyohyoEntity.get二月の合計()
+                + jisshiJokyohyoEntity.get三月の合計() + jisshiJokyohyoEntity.get四月の合計()
+                + jisshiJokyohyoEntity.get五月の合計() + jisshiJokyohyoEntity.get六月の合計()
+                + jisshiJokyohyoEntity.get七月の合計() + jisshiJokyohyoEntity.get八月の合計()
+                + jisshiJokyohyoEntity.get九月の合計() + jisshiJokyohyoEntity.get十月の合計()
+                + jisshiJokyohyoEntity.get十一月の合計() + jisshiJokyohyoEntity.get十二月の合計())
+                .concat("(").concat(new RString(
+                jisshiJokyohyoEntity2.get一月の合計() + jisshiJokyohyoEntity2.get二月の合計()
+                + jisshiJokyohyoEntity2.get三月の合計() + jisshiJokyohyoEntity2.get四月の合計()
+                + jisshiJokyohyoEntity2.get五月の合計() + jisshiJokyohyoEntity2.get六月の合計()
+                + jisshiJokyohyoEntity2.get七月の合計() + jisshiJokyohyoEntity2.get八月の合計()
+                + jisshiJokyohyoEntity2.get九月の合計() + jisshiJokyohyoEntity2.get十月の合計()
+                + jisshiJokyohyoEntity2.get十一月の合計() + jisshiJokyohyoEntity2.get十二月の合計()))
+                .concat(")"));
         受給状況リストEntity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
     }
 
@@ -338,7 +409,7 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
         if (beforeEntity != null) {
             受給状況リストEntity作成();
         }
-        FlexibleDate 基準日 = parameter.get基準年月日();
+        FlexibleDate 基準日 = parameter.get基準年月日04();
         RString 年齢 = new RString(parameter.get年齢From())
                 .concat("～")
                 .concat(new RString(parameter.get年齢To()));
@@ -390,10 +461,10 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(new RString("【対象年度】 " + parameter.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()));
-        if (parameter.get基準年月日() == null) {
+        if (parameter.get基準年月日04() == null) {
             出力条件.add(new RString("【基準日】 "));
         } else {
-            出力条件.add(new RString("【基準日】 ").concat(new RString(parameter.get基準年月日().getDayValue())));
+            出力条件.add(new RString("【基準日】 ").concat(new RString(parameter.get基準年月日04().getDayValue())));
         }
         出力条件.add(new RString("【集計単位】 " + parameter.get集計単位()));
         出力条件.add(new RString("【年齢From】 " + parameter.get年齢From()));

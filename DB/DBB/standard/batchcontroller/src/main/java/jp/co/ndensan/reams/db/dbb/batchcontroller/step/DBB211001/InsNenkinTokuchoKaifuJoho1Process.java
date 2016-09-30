@@ -78,13 +78,13 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
     @Override
     protected void process(TokuchoIraiDataEntity t) {
         if (!t.get賦課Newest().getTsuchishoNo().equals(通知書番号)) {
-            賦課Temp情報 = new DbT2002FukaJohoTempTableEntity();
-            対象者の情報 = 対象者の情報を編集(t);
             if (通知書番号 != null) {
-                DT各種金額欄１とDT各種金額欄2を編集(対象者の情報);
+                dT各種金額欄１とDT各種金額欄2を編集(対象者の情報);
                 特徴依頼追加Temp.insert(対象者の情報);
                 年金特徴回付情報TableWriter.insert(対象者の情報);
             }
+            賦課Temp情報 = new DbT2002FukaJohoTempTableEntity();
+            対象者の情報 = 対象者の情報を編集(t);
         }
         set特徴期期別金額(new Decimal(t.get調定額().toString()),
                 Integer.parseInt(t.get期().toString()), 賦課Temp情報);
@@ -95,7 +95,7 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
     @Override
     protected void afterExecute() {
         if (通知書番号 != null) {
-            DT各種金額欄１とDT各種金額欄2を編集(対象者の情報);
+            dT各種金額欄１とDT各種金額欄2を編集(対象者の情報);
             年金特徴回付情報TableWriter.insert(対象者の情報);
         }
     }
@@ -110,10 +110,10 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
         RDateTime 処理日時 = parameter.getシステム日時().getRDateTime();
         RString 連携種別 = RenkeiGyomuShubetsu.介護特別徴収.getコード()
                 .concat(RenkeiJohoShubetsu.依頼情報.getコード());
-        RString DT通知内容コード = TsuchiNaiyoCodeType.特別徴収依頼通知.get通知内容コード();
-        RString DT作成年月日 = parameter.getシステム日時().getDate().toDateString();
-        RString DT各種区分 = getDT各種区分(徴収方法Newest, 被保険者台帳管理Newest);
-        RString DT各種年月日 = parameter.getシステム日時().getDate().toDateString();
+        RString dT通知内容コード = TsuchiNaiyoCodeType.特別徴収依頼通知.get通知内容コード();
+        RString dT作成年月日 = parameter.getシステム日時().getDate().toDateString();
+        RString dT各種区分 = getDT各種区分(徴収方法Newest, 被保険者台帳管理Newest);
+        RString dT各種年月日 = parameter.getシステム日時().getDate().toDateString();
 
         SetaiCode 国保世帯コード = new SetaiCode(new RString("0"));
         entity.setShoriNendo(処理年度);
@@ -121,17 +121,17 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
         entity.setShoriTaishoYM(処理対象年月);
         entity.setShoriTimestamp(処理日時);
         entity.setRenkeiShubetsu(連携種別);
-        entity.setDtTsuchiNaiyoCode(DT通知内容コード);
+        entity.setDtTsuchiNaiyoCode(dT通知内容コード);
         entity.setDtBaitaiCode(DT媒体コード_回線);
-        entity.setDtSakuseiYMD(DT作成年月日);
+        entity.setDtSakuseiYMD(dT作成年月日);
         entity.setDtYobi1(RString.HALF_SPACE);
-        entity.setDtKakushuKubun(DT各種区分);
+        entity.setDtKakushuKubun(dT各種区分);
         entity.setDtShoriKekka(RString.HALF_SPACE);
         entity.setDtKokiIkanCode(RString.HALF_SPACE);
-        entity.setDtKakushuYMD(DT各種年月日);
+        entity.setDtKakushuYMD(dT各種年月日);
 
         entity.setDtYobi2(RString.HALF_SPACE);
-        if (!DT各種区分_03.equals(DT各種区分) && 被保険者台帳管理Newest != null) {
+        if (!DT各種区分_03.equals(dT各種区分) && 被保険者台帳管理Newest != null) {
             entity.setShikibetsuCode(被保険者台帳管理Newest.getShikibetsuCode());
             entity.setHihokenshaNo(被保険者台帳管理Newest.getHihokenshaNo().value());
         }
@@ -147,15 +147,15 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
         return entity;
     }
 
-    private void DT各種金額欄１とDT各種金額欄2を編集(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
-        RString DT各種金額欄１ = RString.EMPTY;
-        RString DT各種金額欄2 = RString.EMPTY;
+    private void dT各種金額欄１とDT各種金額欄2を編集(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
+        RString dT各種金額欄１ = new RString(Decimal.ZERO.toString());
+        RString dT各種金額欄2 = new RString(Decimal.ZERO.toString());
         if (賦課Temp情報 != null) {
-            DT各種金額欄１ = get金額(賦課Temp情報.getTkKibetsuGaku04());
-            DT各種金額欄2 = get金額(賦課Temp情報.getTkKibetsuGaku05());
+            dT各種金額欄１ = get金額(賦課Temp情報.getTkKibetsuGaku04());
+            dT各種金額欄2 = get金額(賦課Temp情報.getTkKibetsuGaku05());
         }
-        entity.setDtKakushuKingaku1(DT各種金額欄１);
-        entity.setDtKakushuKingaku2(DT各種金額欄2);
+        entity.setDtKakushuKingaku1(dT各種金額欄１);
+        entity.setDtKakushuKingaku2(dT各種金額欄2);
     }
 
     private FlexibleYearMonth get処理対象年月() {

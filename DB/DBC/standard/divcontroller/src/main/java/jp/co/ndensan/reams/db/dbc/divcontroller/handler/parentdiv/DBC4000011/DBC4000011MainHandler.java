@@ -211,9 +211,9 @@ public class DBC4000011MainHandler {
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
         clear詳細パネル();
-        定率定額区分選択();
         div.getServiceShosai().getTxtTeikyoKikanYM().setToDisabled(true);
         編集状態の画面制御();
+        定率定額区分選択();
     }
 
     /**
@@ -235,6 +235,7 @@ public class DBC4000011MainHandler {
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
         編集状態の画面制御();
+        定率定額区分選択();
         return identifier;
     }
 
@@ -373,7 +374,7 @@ public class DBC4000011MainHandler {
             div.getServiceShosai().getChkGendogakuTaishogai().setSelectedItemsByKey(selectList);
         }
         RString 外部サービス利用型区分 = サービス内容.get外部サービス利用型区分();
-        if (外部サービス利用型区分.equals(RST_1)) {
+        if (外部サービス利用型区分.equals(RST_2)) {
             List<RString> selectList = new ArrayList<>();
             selectList.add(外部サービス利用型区分);
             div.getServiceShosai().getChkGaibuService().setSelectedItemsByKey(selectList);
@@ -384,7 +385,6 @@ public class DBC4000011MainHandler {
             selectList.add(特別地域);
             div.getServiceShosai().getChkTokubetsuChiikiKasn().setSelectedItemsByKey(selectList);
         }
-        定率定額区分選択();
     }
 
     private void clear詳細パネル() {

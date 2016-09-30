@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.InsJushochiTok
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.ShikakuSoshitsuDataEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiGyomuShubetsu;
@@ -78,10 +76,10 @@ public class InsJushochiTokureiTsuikaTempProcess extends BatchProcessBase<Shikak
     @Override
     protected void process(ShikakuSoshitsuDataEntity t) {
         if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
-            対象者の情報 = 対象者の情報を編集(t);
             if (通知書番号 != null) {
                 住所地特例該当追加Temp.insert(対象者の情報);
             }
+            対象者の情報 = 対象者の情報を編集(t);
         }
         通知書番号 = t.get賦課情報().getTsuchishoNo();
     }
@@ -94,9 +92,7 @@ public class InsJushochiTokureiTsuikaTempProcess extends BatchProcessBase<Shikak
     }
 
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者の情報を編集(ShikakuSoshitsuDataEntity t) {
-        DbT2001ChoshuHohoEntity 徴収方法情報 = t.get徴収方法情報();
         DbT1001HihokenshaDaichoEntity 資格情報 = t.get資格情報();
-        DbT2002FukaEntity 賦課情報 = t.get賦課情報();
         UeT0511NenkinTokuchoKaifuJohoEntity 対象者情報 = t.get対象者情報();
         FlexibleYear 処理年度 = new FlexibleYear(parameter.get賦課年度().toDateString());
         RString 通知内容コード = TsuchiNaiyoCodeType.住所地特例該当者通知.get通知内容コード();
@@ -104,23 +100,23 @@ public class InsJushochiTokureiTsuikaTempProcess extends BatchProcessBase<Shikak
         RDateTime 処理日時 = parameter.getシステム日時().getRDateTime();
         RString 連携種別 = RenkeiGyomuShubetsu.介護特別徴収.getコード()
                 .concat(RenkeiJohoShubetsu.各種異動情報.getコード());
-        RString DT通知内容コード = TsuchiNaiyoCodeType.住所地特例該当者通知.get通知内容コード();
-        RString DT作成年月日 = parameter.getシステム日時().getDate().toDateString();
-        RString DT各種年月日 = getDT各種年月日(資格情報);
+        RString dT通知内容コード = TsuchiNaiyoCodeType.住所地特例該当者通知.get通知内容コード();
+        RString dT作成年月日 = parameter.getシステム日時().getDate().toDateString();
+        RString dT各種年月日 = getDT各種年月日(資格情報);
         SetaiCode 国保世帯コード = new SetaiCode(new RString("0"));
         対象者情報.setShoriNendo(処理年度);
         対象者情報.setTsuchiNaiyoCode(通知内容コード);
         対象者情報.setShoriTaishoYM(処理対象年月);
         対象者情報.setShoriTimestamp(処理日時);
         対象者情報.setRenkeiShubetsu(連携種別);
-        対象者情報.setDtTsuchiNaiyoCode(DT通知内容コード);
+        対象者情報.setDtTsuchiNaiyoCode(dT通知内容コード);
         対象者情報.setDtBaitaiCode(DT媒体コード_回線);
-        対象者情報.setDtSakuseiYMD(DT作成年月日);
+        対象者情報.setDtSakuseiYMD(dT作成年月日);
         対象者情報.setDtYobi1(RString.HALF_SPACE);
         対象者情報.setDtKakushuKubun(DT各種区分_01);
         対象者情報.setDtShoriKekka(RString.HALF_SPACE);
         対象者情報.setDtKokiIkanCode(RString.HALF_SPACE);
-        対象者情報.setDtKakushuYMD(DT各種年月日);
+        対象者情報.setDtKakushuYMD(dT各種年月日);
         対象者情報.setDtKakushuKingaku1(各種金額_全桁0設定);
         対象者情報.setDtKakushuKingaku2(各種金額_全桁0設定);
         対象者情報.setDtKakushuKingaku3(各種金額_全桁0設定);

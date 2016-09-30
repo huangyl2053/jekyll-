@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.ca.cax.entity.db.basic.CaT0701ShunyuEntity;
 import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoJokyoHaakuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KibetsuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoJokyoHaakuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoJokyoHaakuTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoJokyoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -24,9 +25,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
-import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
@@ -47,13 +45,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 収納状況把握情報の取得_Process処理クラスです．
  *
- * @reamsid_L DBD-3610-050 x_lilh
+ * @reamsid_L DBD-3610-030 x_lilh
  */
 public class ShunoJokyoHaakuProcess extends BatchProcessBase<ShunoJokyoHaakuEntity> {
 
@@ -61,39 +58,13 @@ public class ShunoJokyoHaakuProcess extends BatchProcessBase<ShunoJokyoHaakuEnti
     private FlexibleYear 日付関連_調定年度;
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist."
-                    + "IShunoTainoJokyoHaakuMapper.get対象者把握情報");
-    private List<RString> psmTotalShunyu;
-    private static final RString LEFT_FORMAT = new RString("'{");
-    private static final RString RIGHT_FORMAT = new RString("}'");
-    private static final RString MIDDLE_FORMAT = new RString(",");
+                    + "IShunoTainoJokyoHaakuMapper.get収納状況把握情報");
     private static final int INT_9 = 9;
 
     @Override
     protected void initialize() {
         RString 日付関連_調定年度R = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         日付関連_調定年度 = new FlexibleYear(日付関連_調定年度R).minusYear(INT_9);
-        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
-        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
-        IShunoKamoku 介護保険料_特別徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
-        psmTotalShunyu = new ArrayList<>();
-        if (介護保険料_普通徴収 != null && !RString.isNullOrEmpty(介護保険料_普通徴収.get表示用コードwithハイフン())) {
-            psmTotalShunyu.add(介護保険料_普通徴収.get表示用コードwithハイフン());
-        }
-        if (介護保険料_特別徴収 != null && !RString.isNullOrEmpty(介護保険料_特別徴収.get表示用コードwithハイフン())) {
-            psmTotalShunyu.add(介護保険料_特別徴収.get表示用コードwithハイフン());
-        }
-
-        RStringBuilder rStringBuilder = new RStringBuilder();
-        rStringBuilder.append(LEFT_FORMAT);
-        if (!psmTotalShunyu.isEmpty()) {
-            for (int i = 0; i < psmTotalShunyu.size(); i++) {
-                rStringBuilder.append(psmTotalShunyu.get(i) == null ? RString.EMPTY : psmTotalShunyu.get(i));
-                if (i != psmTotalShunyu.size() - 1) {
-                    rStringBuilder.append(MIDDLE_FORMAT);
-                }
-            }
-        }
-        rStringBuilder.append(RIGHT_FORMAT);
     }
 
     @Override
@@ -106,28 +77,32 @@ public class ShunoJokyoHaakuProcess extends BatchProcessBase<ShunoJokyoHaakuEnti
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
 
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShunoJokyoHaakuMybatisParameter(parameter.get基準日(),
-                日付関連_調定年度, psmShikibetsuTaisho, psmTotalShunyu));
+                日付関連_調定年度, psmShikibetsuTaisho));
     }
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
 
     @Override
     protected void createWriter() {
-        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShunoJokyoHaakuTempTableEntity.class)
-                .tempTableName(ShunoJokyoHaakuTempTableEntity.TABLE_NAME).build();
+        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShunoJokyoTempTableEntity.class)
+                .tempTableName(ShunoJokyoTempTableEntity.TABLE_NAME).build();
     }
 
     @Override
     protected void process(ShunoJokyoHaakuEntity shunoJokyoEntity) {
-        ShunoJokyoHaakuTempTableEntity entity = データ編集(shunoJokyoEntity);
-        if (entity != null) {
-            tmpTableWriter.insert(entity);
+        List<ShunoJokyoTempTableEntity> insertEnList = edit収納状況把握情報(shunoJokyoEntity);
+        if (insertEnList != null) {
+            for (ShunoJokyoTempTableEntity entity : insertEnList) {
+                tmpTableWriter.insert(entity);
+            }
         }
     }
 
-    private ShunoJokyoHaakuTempTableEntity データ編集(ShunoJokyoHaakuEntity shunoJokyoEntity) {
+    private List<ShunoJokyoTempTableEntity> edit収納状況把握情報(ShunoJokyoHaakuEntity shunoJokyoEntity) {
+        List<ShunoJokyoTempTableEntity> insertEnList = new ArrayList<>();
 
         HihokenshaNo 被保険者番号 = shunoJokyoEntity.get資格情報Entity().getHihokenshaNo();
+        RString 被保険者区分コード = shunoJokyoEntity.get資格情報Entity().getHihokennshaKubunCode();
         ShikibetsuCode 識別コード = shunoJokyoEntity.get宛名Entity().getShikibetsuCode();
         RString 被保険者氏名カナ = shunoJokyoEntity.get宛名Entity().getKanaName();
         AtenaMeisho 被保険者氏名 = shunoJokyoEntity.get宛名Entity().getKanjiShimei();
@@ -140,7 +115,6 @@ public class ShunoJokyoHaakuProcess extends BatchProcessBase<ShunoJokyoHaakuEnti
         FlexibleDate 資格取得日 = shunoJokyoEntity.get資格情報Entity().getShikakuShutokuYMD();
         FlexibleDate 資格喪失日 = shunoJokyoEntity.get資格情報Entity().getShikakuSoshitsuYMD();
         RString 喪失事由 = shunoJokyoEntity.get資格情報Entity().getShikakuSoshitsuJiyuCode();
-//        RString 資格区分 = shunoJokyoEntity.get資格情報Entity().getShikaku  QA待ち
         RString 住所地特例フラグ = shunoJokyoEntity.get資格情報Entity().getJushochiTokureiFlag();
 
         Code 厚労省IF識別コード = Code.EMPTY;
@@ -175,38 +149,41 @@ public class ShunoJokyoHaakuProcess extends BatchProcessBase<ShunoJokyoHaakuEnti
         if (null == 期別情報List || 期別情報List.isEmpty()) {
             return null;
         }
-        ShunoJokyoHaakuTempTableEntity tmpTblEntity = new ShunoJokyoHaakuTempTableEntity();
-        tmpTblEntity.setHihokenshaNo(被保険者番号);
-        tmpTblEntity.setShikibetsuCode(識別コード);
-        tmpTblEntity.setHihokenshaShimeiKana(被保険者氏名カナ);
-        tmpTblEntity.setHihokenshaShimei(被保険者氏名);
-        tmpTblEntity.setSetaiCode(世帯番号);
-        tmpTblEntity.setGyoseikuCode(行政区ｺｰﾄﾞ);
-        tmpTblEntity.setGyoseikuName(行政区);
-        tmpTblEntity.setJushoCode(住所コード);
-        tmpTblEntity.setYubinNo(郵便番号);
-        tmpTblEntity.setJusho(住所);
-        tmpTblEntity.setShikakuShutokuYMD(資格取得日);
-        tmpTblEntity.setShikakuSoshitsuYMD(資格喪失日);
-        tmpTblEntity.setShikakuSoshitsuJiyuCode(喪失事由);
-//    tmpTblEntity.setShikakuKubunCode();    QA#102231
-        tmpTblEntity.setKoikinaiJushochiTokureiFlag(住所地特例フラグ);
-        tmpTblEntity.setSeihoFlag(生保フラグ);
-        tmpTblEntity.setKoroshoIfShikibetsuCode(厚労省IF識別コード);
-        tmpTblEntity.setYokaigoJotaiKubunCode(要介護状態区分コード);
-        tmpTblEntity.setNinteiYukoKikanKaishiYMD(認定有効期間開始年月日);
-        tmpTblEntity.setNinteiYukoKikanShuryoYMD(認定有効期間終了年月日);
-        tmpTblEntity.setNinteiYMD(認定日);
-        tmpTblEntity.setShiseityuFlag(申請中フラグ);
-        tmpTblEntity.setJukyuShinseiYMD(申請日);
-        tmpTblEntity.setChoteiNendo(調定年度);
-        tmpTblEntity.setFukaNendo(賦課年度);
-        set期別情報(tmpTblEntity, 期別情報List.get(0));
-        return null;
+        ShunoJokyoTempTableEntity tmpTblEntity = new ShunoJokyoTempTableEntity();
+        tmpTblEntity.setTmp_hihokenshaNo(被保険者番号);
+        tmpTblEntity.setTmp_shikakuKubunCode(被保険者区分コード);
+        tmpTblEntity.setTmp_shikibetsuCode(識別コード);
+        tmpTblEntity.setTmp_hihokenshaShimeiKana(被保険者氏名カナ);
+        tmpTblEntity.setTmp_hihokenshaShimei(被保険者氏名);
+        tmpTblEntity.setTmp_setaiCode(世帯番号);
+        tmpTblEntity.setTmp_gyoseikuCode(行政区ｺｰﾄﾞ);
+        tmpTblEntity.setTmp_gyoseikuName(行政区);
+        tmpTblEntity.setTmp_jushoCode(住所コード);
+        tmpTblEntity.setTmp_yubinNo(郵便番号);
+        tmpTblEntity.setTmp_jusho(住所);
+        tmpTblEntity.setTmp_shikakuShutokuYMD(資格取得日);
+        tmpTblEntity.setTmp_shikakuSoshitsuYMD(資格喪失日);
+        tmpTblEntity.setTmp_shikakuSoshitsuJiyuCode(喪失事由);
+        tmpTblEntity.setTmp_koikinaiJushochiTokureiFlag(住所地特例フラグ);
+        tmpTblEntity.setTmp_seihoFlag(生保フラグ);
+        tmpTblEntity.setTmp_koroshoIfShikibetsuCode(厚労省IF識別コード);
+        tmpTblEntity.setTmp_yokaigoJotaiKubunCode(要介護状態区分コード);
+        tmpTblEntity.setTmp_ninteiYukoKikanKaishiYMD(認定有効期間開始年月日);
+        tmpTblEntity.setTmp_ninteiYukoKikanShuryoYMD(認定有効期間終了年月日);
+        tmpTblEntity.setTmp_ninteiYMD(認定日);
+        tmpTblEntity.setTmp_shiseityuFlag(申請中フラグ);
+        tmpTblEntity.setTmp_jukyuShinseiYMD(申請日);
+        tmpTblEntity.setTmp_choteiNendo(調定年度);
+        tmpTblEntity.setTmp_fukaNendo(賦課年度);
+
+        for (KibetsuJohoEntity 期別 : 期別情報List) {
+            set期別情報(tmpTblEntity, 期別, insertEnList);
+        }
+        return insertEnList;
     }
 
-    private void set期別情報(ShunoJokyoHaakuTempTableEntity tmpTblEntity, KibetsuJohoEntity 期別) {
-
+    private void set期別情報(ShunoJokyoTempTableEntity tmpTblEntity, KibetsuJohoEntity 期別, List<ShunoJokyoTempTableEntity> insertEnList) {
+        ShunoJokyoTempTableEntity insertEntity = new ShunoJokyoTempTableEntity();
         UrT0705ChoteiKyotsuEntity 調定共通Entity = 期別.get調定関連().get調定共通Entity();
         if (調定共通Entity == null) {
             調定共通Entity = new UrT0705ChoteiKyotsuEntity();
@@ -214,30 +191,49 @@ public class ShunoJokyoHaakuProcess extends BatchProcessBase<ShunoJokyoHaakuEnti
 
         int 期 = 期別.get期別Entity().getKi();
         Decimal 調定額 = 調定共通Entity.getChoteigaku();
-        // QA #101563
-        Decimal 収入額 = 期別.get調定関連().get収入().get最新収入Entity().getShunyugaku();
+
+        Decimal 収入額 = Decimal.ZERO;
+        List<CaT0701ShunyuEntity> 収入List = 期別.get調定関連().get収入List();
+        for (CaT0701ShunyuEntity caT0701 : 収入List) {
+            caT0701.getShunyuYMD();
+            if (caT0701.getShunyugaku() != null) {
+                収入額 = 収入額.add(caT0701.getShunyugaku());
+            }
+        }
         Decimal 未納額 = 調定額.subtract(収入額);
         RDate 納期限 = 調定共通Entity.getNokigenYMD();
 
         RString 時効起算事由 = RString.EMPTY;
         FlexibleDate 仮の時効起算日 = FlexibleDate.EMPTY;
-        FlexibleDate 時効起算年月日 = 期別.get時効起算日管理Entity().getJikoKisanYMD();
-        RDate 納期限の翌日 = 調定共通Entity.getNokigenYMD().plusDay(1);
-        RDate 督促状発行年月日 = 期別.get調定関連().getCaT1018_督促状発行履歴Entity().getTokusokujoHakkoYMD();
+        FlexibleDate 時効起算年月日 = FlexibleDate.EMPTY;
+        if (期別.get時効起算日管理Entity() != null) {
+            時効起算年月日 = 期別.get時効起算日管理Entity().getJikoKisanYMD();
+        }
+
         if (時効起算年月日 != null && !時効起算年月日.isEmpty()) {
             仮の時効起算日 = 時効起算年月日;
             時効起算事由 = 期別.get時効起算日管理Entity().getJikoKisanYMDKubun();
-
-        } else if (督促状発行年月日 != null) {
+        } else if (期別.get調定関連().getCaT1018_督促状発行履歴Entity() != null
+                && 期別.get調定関連().getCaT1018_督促状発行履歴Entity().getTokusokujoHakkoYMD() != null) {
+            RDate 督促状発行年月日 = 期別.get調定関連().getCaT1018_督促状発行履歴Entity().getTokusokujoHakkoYMD();
             仮の時効起算日 = new FlexibleDate(督促状発行年月日.toDateString());
             時効起算事由 = JikoKisanbiKubun.督促状発行日.getコード();
 
-        } else if (納期限の翌日 != null) {
+        } else if (調定共通Entity.getNokigenYMD() != null && 調定共通Entity.getNokigenYMD() != null) {
+            RDate 納期限の翌日 = 調定共通Entity.getNokigenYMD().plusDay(1);
             仮の時効起算日 = new FlexibleDate(納期限の翌日.toDateString());
             時効起算事由 = JikoKisanbiKubun.納期限翌日.getコード();
         }
 
-        // 収入の取得結果を、以下の要素を持つリストとする。 DBDEnum.時効起算日区分. 収入日 QA#102231
+        for (CaT0701ShunyuEntity caT0701 : 収入List) {
+            if (仮の時効起算日.plusYear(2).isBeforeOrEquals(new FlexibleDate(caT0701.getShunyuYMD().toDateString()))) {
+                break;
+            } else if (new FlexibleDate(caT0701.getShunyuYMD().toDateString()).isBefore(時効起算年月日)
+                    && 仮の時効起算日.isBeforeOrEquals(new FlexibleDate(caT0701.getShunyuYMD().toDateString()))) {
+                仮の時効起算日 = new FlexibleDate(caT0701.getShunyuYMD().toDateString());
+            }
+        }
+
         FlexibleDate 時効起算日 = 仮の時効起算日;
         if (時効起算日.equals(FlexibleDate.EMPTY)) {
             時効起算事由 = JikoKisanbiKubun.不明_調定無し.getコード();
@@ -269,21 +265,53 @@ public class ShunoJokyoHaakuProcess extends BatchProcessBase<ShunoJokyoHaakuEnti
 
         RString 特徴_普徴区分 = 期別.get期別Entity().getChoshuHouhou();
         TsuchishoNo 通知書番号 = 期別.get期別Entity().getTsuchishoNo();
-        RDate 督促状発行日 = 期別.get調定関連().getCaT1018_督促状発行履歴Entity().getTokusokujoHakkoYMD();
 
-        tmpTblEntity.setTokucho_FuchoKubun(特徴_普徴区分);
-        tmpTblEntity.setTsuchishoNo(通知書番号);
-        tmpTblEntity.setKibetsu(new RString(期));
-        tmpTblEntity.setChoteigaku(調定額);
-        tmpTblEntity.setShunyugaku(収入額);
-        tmpTblEntity.setMinogaku(未納額);
-        tmpTblEntity.setNokigen(納期限);
-//            tmpTblEntity.setShunyuYMD;  QA#102231
-        tmpTblEntity.setTokusokujoHakkoYMD(督促状発行日);
-        tmpTblEntity.setJikoKisanYMD(時効起算日);
-        tmpTblEntity.setJikoKisanJiyu(時効起算事由);
-        tmpTblEntity.setMinoKannoKubun(未納完納区分);
-        tmpTblEntity.setJikoKubun(時効区分);
+        insertEntity.setTmp_hihokenshaNo(tmpTblEntity.getTmp_hihokenshaNo());
+        insertEntity.setTmp_shikibetsuCode(tmpTblEntity.getTmp_shikibetsuCode());
+        insertEntity.setTmp_hihokenshaShimeiKana(tmpTblEntity.getTmp_hihokenshaShimeiKana());
+        insertEntity.setTmp_hihokenshaShimei(tmpTblEntity.getTmp_hihokenshaShimei());
+        insertEntity.setTmp_setaiCode(tmpTblEntity.getTmp_setaiCode());
+        insertEntity.setTmp_gyoseikuCode(tmpTblEntity.getTmp_gyoseikuCode());
+        insertEntity.setTmp_gyoseikuName(tmpTblEntity.getTmp_gyoseikuName());
+        insertEntity.setTmp_jushoCode(tmpTblEntity.getTmp_jushoCode());
+        insertEntity.setTmp_yubinNo(tmpTblEntity.getTmp_yubinNo());
+        insertEntity.setTmp_jusho(tmpTblEntity.getTmp_jusho());
+        insertEntity.setTmp_shikakuShutokuYMD(tmpTblEntity.getTmp_shikakuShutokuYMD());
+        insertEntity.setTmp_shikakuSoshitsuYMD(tmpTblEntity.getTmp_shikakuSoshitsuYMD());
+        insertEntity.setTmp_shikakuSoshitsuJiyuCode(tmpTblEntity.getTmp_shikakuSoshitsuJiyuCode());
+        insertEntity.setTmp_shikakuKubunCode(tmpTblEntity.getTmp_shikakuKubunCode());
+        insertEntity.setTmp_koikinaiJushochiTokureiFlag(tmpTblEntity.getTmp_koikinaiJushochiTokureiFlag());
+        insertEntity.setTmp_seihoFlag(tmpTblEntity.isTmp_seihoFlag());
+        insertEntity.setTmp_koroshoIfShikibetsuCode(tmpTblEntity.getTmp_koroshoIfShikibetsuCode());
+        insertEntity.setTmp_yokaigoJotaiKubunCode(tmpTblEntity.getTmp_yokaigoJotaiKubunCode());
+        insertEntity.setTmp_ninteiYukoKikanKaishiYMD(tmpTblEntity.getTmp_ninteiYukoKikanKaishiYMD());
+        insertEntity.setTmp_ninteiYukoKikanShuryoYMD(tmpTblEntity.getTmp_ninteiYukoKikanShuryoYMD());
+        insertEntity.setTmp_ninteiYMD(tmpTblEntity.getTmp_ninteiYMD());
+        insertEntity.setTmp_shiseityuFlag(tmpTblEntity.isTmp_shiseityuFlag());
+        insertEntity.setTmp_jukyuShinseiYMD(tmpTblEntity.getTmp_jukyuShinseiYMD());
+        insertEntity.setTmp_choteiNendo(tmpTblEntity.getTmp_choteiNendo());
+        insertEntity.setTmp_fukaNendo(tmpTblEntity.getTmp_fukaNendo());
+
+        insertEntity.setTmp_tokucho_FuchoKubun(特徴_普徴区分);
+        insertEntity.setTmp_tsuchishoNo(通知書番号);
+        insertEntity.setTmp_kibetsu(期);
+        insertEntity.setTmp_choteigaku(調定額);
+        insertEntity.setTmp_shunyugaku(収入額);
+        if (!収入List.isEmpty()) {
+            insertEntity.setTmp_shunyuYMD(収入List.get(0).getShunyuYMD());
+        }
+        insertEntity.setTmp_minogaku(未納額);
+        insertEntity.setTmp_nokigen(納期限);
+        if (期別.get調定関連().getCaT1018_督促状発行履歴Entity() != null) {
+            RDate 督促状発行日 = 期別.get調定関連().getCaT1018_督促状発行履歴Entity().getTokusokujoHakkoYMD();
+            insertEntity.setTmp_tokusokujoHakkoYMD(督促状発行日);
+        }
+        insertEntity.setTmp_jikoKisanYMD(時効起算日);
+        insertEntity.setTmp_jikoKisanJiyu(時効起算事由);
+        insertEntity.setTmp_minoKannoKubun(未納完納区分);
+        insertEntity.setTmp_jikoKubun(時効区分);
+
+        insertEnList.add(insertEntity);
     }
 
 }

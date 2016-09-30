@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 特徴送付情報連携プロセスです。
@@ -61,8 +62,8 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     private List<RString> ファイル出力DE__Z12List;
     private List<RString> ファイル出力DE__Z1AList;
     private Map<RString, RString> 市町村IDMap;
-    private Map<RString, Integer> 各種金額欄合偉一;
-    private Map<RString, Integer> 各種金額欄合計二;
+    private Map<RString, Decimal> 各種金額欄合偉一;
+    private Map<RString, Decimal> 各種金額欄合計二;
     private Map<RString, FldWriter> ファイル出力Z1A000Map;
     private Map<RString, FldWriter> ファイル出力Z99_550Map;
     private Map<RString, FldWriter> ファイル出力DE__Z12Map;
@@ -70,8 +71,8 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     private RString 市町村;
     private RString 通知内容コード;
     private RString 特別徴収義務者コード;
-    private int 各種金額欄合計1 = 0;
-    private int 各種金額欄合計2 = 0;
+    private Decimal 各種金額欄合計1 = Decimal.ZERO;
+    private Decimal 各種金額欄合計2 = Decimal.ZERO;
     private int count = 0;
     private TokuchoSofuJohoRenkeiEntity 特徴送付情報連携情報;
 
@@ -200,14 +201,14 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
 
     private void editブロック(TokuchoSofuJohoRenkeiEntity entity, Map<RString, FldWriter> writerMap) {
         if (通知内容コード.equals(entity.get通知内容コードDT()) && 特別徴収義務者コード.equals(entity.get特別徴収義務者コードDT().value())) {
-            各種金額欄合計1 = 各種金額欄合計1 + Integer.parseInt(entity.get各種金額欄1DT().toString());
-            各種金額欄合計2 = 各種金額欄合計2 + Integer.parseInt(entity.get各種金額欄2DT().toString());
+            各種金額欄合計1 = 各種金額欄合計1.add(new Decimal(entity.get各種金額欄1DT().toString()));
+            各種金額欄合計2 = 各種金額欄合計2.add(new Decimal(entity.get各種金額欄2DT().toString()));
             ファイル出力Z1A000Map.get(entity.get構成市町村コード()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
             ファイル出力Z99_550Map.get(entity.get構成市町村コード()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
                     .editデータZ99_550_xx_DTAファイルのみ());
         } else {
-            各種金額欄合計1 = Integer.parseInt(entity.get各種金額欄1DT().toString());
-            各種金額欄合計2 = Integer.parseInt(entity.get各種金額欄2DT().toString());
+            各種金額欄合計1 = new Decimal(entity.get各種金額欄1DT().toString());
+            各種金額欄合計2 = new Decimal(entity.get各種金額欄2DT().toString());
             if (count != INT_ZERO) {
                 ファイル出力Z1A000Map.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
                         new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)

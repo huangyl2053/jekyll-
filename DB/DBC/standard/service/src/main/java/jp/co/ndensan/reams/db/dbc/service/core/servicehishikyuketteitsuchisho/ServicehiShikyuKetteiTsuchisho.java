@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -29,21 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ServicehiShikyuKetteiTsuchisho {
 
-    private static final RString 市町村コード = new RString("000000");
-    private static final RString 処理枝番 = new RString("0000");
-    private static final RString 年度_固定 = new RString("0000");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
+    private static final RString 項目名1 = new RString("シーラタイプタイトル１");
     private static final RString 項目名2 = new RString("シーラタイプタイトル２");
-    private static final RString 介護保険高額介護サービス費 = new RString("介護保険高額介護サービス費");
-
-    private final MapperProvider mapperProvider;
-
-    /**
-     * コンストラクタです。
-     */
-    ServicehiShikyuKetteiTsuchisho() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-    }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ServicehiShikyuKetteiTsuchisho}のインスタンスを返します。
@@ -85,20 +71,11 @@ public class ServicehiShikyuKetteiTsuchisho {
         tmpEntity.setShinsaShikyuKubunCode(entity.get支給区分コード());
         tmpEntity.setKogakuShikyuGaku(entity.get高額支給額());
         tmpEntity.setKinyuKikanCode(entity.get金融機関コード());
-
-        //TODO 設定?
         tmpEntity.setKikan_name(entity.get金融機関名称());
-
         tmpEntity.setKinyuKikanShitenCode(entity.get支店コード());
-
-        //TODO 設定?
         tmpEntity.setKikanShiten_name(entity.get支店名称());
-
         tmpEntity.setYokinShubetsu(entity.get預金種別());
-
-        //TODO 設定?
         tmpEntity.setYokinShubetsuRyakusho(entity.get預金種別名称());
-
         tmpEntity.setKozaNo(entity.get口座番号());
         tmpEntity.setKozaMeigininKanji(entity.get口座名義人漢字());
         tmpEntity.setShuryoYMD(entity.get口座終了年月日());
@@ -456,19 +433,6 @@ public class ServicehiShikyuKetteiTsuchisho {
     }
 
     /**
-     * 年度内連番を取得します。
-     *
-     * @param 処理名 RString
-     * @return 年度内連番
-     */
-    public int get年度内連番(RString 処理名) {
-        IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper mapper
-                = mapperProvider.create(IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.class);
-        return mapper.select最大年度内連番(SubGyomuCode.DBC介護給付.getColumnValue(), 市町村コード,
-                処理名, 処理枝番, 年度_固定);
-    }
-
-    /**
      * 帳票用のタイトルListを取得する。
      *
      * @param 帳票分類ID ReportId
@@ -479,12 +443,13 @@ public class ServicehiShikyuKetteiTsuchisho {
         RString title1 = RString.EMPTY;
         RString title2 = RString.EMPTY;
         DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名2);
-        if (entity == null) {
-            title = 介護保険高額介護サービス費;
+        DbT7067ChohyoSeigyoHanyoEntity entity1 = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名1);
+        DbT7067ChohyoSeigyoHanyoEntity entity2 = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名2);
+        if (entity2 == null || RString.isNullOrEmpty(entity2.getKomokuValue())) {
+            title = entity1.getKomokuValue();
         } else {
-            title1 = 介護保険高額介護サービス費;
-            title2 = entity.getKomokuValue();
+            title1 = entity1.getKomokuValue();
+            title2 = entity2.getKomokuValue();
         }
         List<RString> titleList = new ArrayList<>();
         titleList.add(title);
@@ -494,18 +459,18 @@ public class ServicehiShikyuKetteiTsuchisho {
     }
 
     /**
-     * 帳票用のタイトルの設定値を取得する。
+     * 設定値を取得する。
      *
      * @param 帳票分類ID ReportId
-     * @return 設定値 RString
+     * @param 項目名 RString
+     * @return 設定値
      */
-    public RString get設定値(ReportId 帳票分類ID) {
+    public RString get設定値(ReportId 帳票分類ID, RString 項目名) {
         DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名2);
+        DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名);
         if (entity == null) {
             return RString.EMPTY;
         }
         return entity.getKomokuValue();
     }
-
 }

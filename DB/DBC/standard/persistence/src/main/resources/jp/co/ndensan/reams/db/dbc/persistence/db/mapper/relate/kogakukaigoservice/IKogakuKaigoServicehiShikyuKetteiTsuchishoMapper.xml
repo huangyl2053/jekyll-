@@ -80,8 +80,18 @@
                 (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
                  ON koza."uaT0310Koza_kozaId" = 支給申請."kozaID"   
             LEFT JOIN
-                rgdb."DbV1001HihokenshaDaicho" AS SUB被保険者台帳管理
-                 ON 支給申請."hihokenshaNo" = SUB被保険者台帳管理."hihokenshaNo"
+                (
+                    SELECT *
+                    FROM(
+                        SELECT *
+                            ,row_number () OVER (PARTITION BY t1001. "hihokenshaNo" ORDER BY t1001. "idoYMD" DESC, t1001. "edaNo" DESC) AS rrkno
+                        FROM rgdb. "DbT1001HihokenshaDaicho" t1001
+                        WHERE t1001. "logicalDeletedFlag" = FALSE
+                        ) iv
+                    WHERE iv.rrkno = 1
+
+                ) AS SUB被保険者台帳管理
+            ON 支給申請."hihokenshaNo" = SUB被保険者台帳管理."hihokenshaNo"
             LEFT JOIN
                 (
                  SELECT *
@@ -128,6 +138,7 @@
                 AND SUB給付対象者合計."jidoShokanTaishoFlag" = false
             </if> 
             AND ((支給判定結果."ketteiYMD" <![CDATA[<>]]> ''
+                  AND 支給判定結果."ketteiYMD" IS NOT NULL
                   AND 支給判定結果."shinsaHohoKubun" = '2')
                  OR(支給判定結果."ketteiYMD" <![CDATA[<>]]> ''
                   AND 支給判定結果."ketteiYMD" IS NOT NULL
@@ -187,23 +198,23 @@
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.allColumns_DbT3057KogakuShikyuHanteiKekka" />
         FROM
             rgdb."DbT3057KogakuShikyuHanteiKekka"
-        WHERE 
-         <if test="抽出モード == 1"> 
-                EXISTS ( SELECT 'X'
-                         FROM rgdb."DbT3056KogakuShikyuShinsei" AS bdt3056
-                         WHERE bdt3056."hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
-                            AND bdt3056."serviceTeikyoYM" = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
-                            AND bdt3056."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
-                            AND bdt3056."uketsukeYMD" <![CDATA[<=]]> #{抽出条件日付To}
-                 )
-            </if>
-            <if test="抽出モード == 2">              
-                "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
-                AND "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
-            </if>       
-            <if test="抽出モード == 3">              
-                "DbT3057KogakuShikyuHanteiKekka"."ketteishaUketoriYM" = #{決定者受付年月}
-            </if> 
+        <if test="抽出モード == 1"> 
+        INNER JOIN rgdb."DbT3056KogakuShikyuShinsei" AS bdt3056
+        ON bdt3056."hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
+            AND bdt3056."serviceTeikyoYM" = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
+        WHERE
+            bdt3056."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
+            AND bdt3056."uketsukeYMD" <![CDATA[<=]]> #{抽出条件日付To}
+        </if>
+        <if test="抽出モード == 2"> 
+        WHERE             
+            "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
+            AND "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
+        </if>       
+        <if test="抽出モード == 3">
+        WHERE             
+            "DbT3057KogakuShikyuHanteiKekka"."ketteishaUketoriYM" = #{決定者受付年月}
+        </if> 
     </select>
     
     <select resultOrdered="true" id="get高額サービス帳票出力データ"

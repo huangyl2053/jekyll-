@@ -42,13 +42,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -64,6 +64,16 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     private static final RString フラグ_TRUE = new RString("true");
     private static final RString アスタリスク = new RString("*");
     private static final RString 支払方法区分_ = new RString("**************");
+    private static final RString 取り消し線_項目名 = new RString("取り消し線");
+    private static final RString 帳票タイトル_項目名 = new RString("帳票タイトル");
+    private static final RString 調整用_項目名 = new RString("帳票タイトル_調整用");
+    private static final RString 取り消し線無し = new RString("0");
+    private static final RString 高額介護 = new RString("高額介護（予防）サービス費");
+    private static final RString 支給区分_1 = new RString("1");
+    private static final RString 支給区分_支給 = new RString("支給");
+    private static final RString 支給区分_不支給 = new RString("不支給");
+    private static final RString 決定通知書_NAME = new RString("決定通知書");
+    private static final RString 決定通知書_調整用_NAME = new RString("決定通知書　調整用");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -78,24 +88,23 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     private Set<RString> 条件set;
     private List<RString> 通知書定型文;
     private List<RString> タイトルlist;
+    private List<RString> インフォ;
     private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private int 連番;
-    private RString 設定値;
+    private RString 設定値1;
+    private RString 設定値2;
+    private RString 設定値3;
     private NinshoshaSource ninshoshaSource1;
     private NinshoshaSource ninshoshaSource2;
     private NinshoshaSource ninshoshaSource3;
     private NinshoshaSource ninshoshaSource4;
 
-    @BatchWriter
     BatchReportWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> batchReportWriter1;
     ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> reportSourceWriter1;
-    @BatchWriter
     BatchReportWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> batchReportWriter2;
     ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> reportSourceWriter2;
-    @BatchWriter
     BatchReportWriter<KogakuKetteiTsuchiShoSealerSource> batchReportWriter3;
     ReportSourceWriter<KogakuKetteiTsuchiShoSealerSource> reportSourceWriter3;
-    @BatchWriter
     BatchReportWriter<KogakuKetteiTsuchiShoSealer2Source> batchReportWriter4;
     ReportSourceWriter<KogakuKetteiTsuchiShoSealer2Source> reportSourceWriter4;
 
@@ -109,7 +118,11 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         mybatisParameter = new JigyoKogakuKetteiTsuchishoReportParameter();
         service = ServicehiShikyuKetteiTsuchisho.createInstance();
         タイトルlist = service.getタイトル(帳票分類ID);
+        設定値1 = service.get設定値(帳票分類ID, 取り消し線_項目名);
+        設定値2 = service.get設定値(帳票分類ID, 帳票タイトル_項目名);
+        設定値3 = service.get設定値(帳票分類ID, 調整用_項目名);
         通知書定型文 = get通知書定型文();
+        インフォ = getインフォ();
         get出力順();
         do口座マスク編集();
         帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
@@ -151,20 +164,20 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
 
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity = getReportEntity(entity);
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport report1
-                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(reportEntity, 連番, タイトルlist, 通知書定型文, ninshoshaSource1, 帳票制御共通情報);
+                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(reportEntity, 連番, getタイトル(entity), 通知書定型文, ninshoshaSource1, 帳票制御共通情報);
             report1.writeBy(reportSourceWriter1);
 
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport report2
-                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity, 連番, タイトルlist, 通知書定型文, ninshoshaSource2, 帳票制御共通情報);
+                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity, 連番, getタイトル(entity), 通知書定型文, ninshoshaSource2, 帳票制御共通情報);
             report2.writeBy(reportSourceWriter2);
 
             KogakuKetteiTsuchiShoEntity reportEntity3 = getShoSealerReportEntity(entity);
             KogakuKetteiTsuchiShoSealerReport report3 = new KogakuKetteiTsuchiShoSealerReport(reportEntity3, parameter.get文書番号(),
-                    通知書定型文, getインフォ(), ninshoshaSource3, タイトルlist);
+                    通知書定型文, インフォ, ninshoshaSource3, タイトルlist);
             report3.writeBy(reportSourceWriter3);
             KogakuKetteiTsuchiShoEntity reportEntity4 = getShoSealer2ReportEntity(entity);
             KogakuKetteiTsuchiShoSealer2Report report4
-                    = new KogakuKetteiTsuchiShoSealer2Report(タイトルlist, reportEntity4, ninshoshaSource4, parameter.get文書番号());
+                    = new KogakuKetteiTsuchiShoSealer2Report(getタイトル(entity), reportEntity4, ninshoshaSource4, parameter.get文書番号());
             report4.writeBy(reportSourceWriter4);
             条件set.add(tempStr);
             連番 = 連番 + INT_1;
@@ -173,6 +186,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
 
     @Override
     protected void afterExecute() {
+        batchReportWriter1.close();
+        batchReportWriter2.close();
+        batchReportWriter3.close();
+        batchReportWriter4.close();
     }
 
     private void get出力順() {
@@ -192,11 +209,11 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     }
 
     private void do口座マスク編集() {
-        // TODO QA
+        // TODO QA1560
     }
 
     private List<RString> get通知書定型文() {
-        // TODO QA
+        // TODO QA1560
         List<RString> list = new ArrayList<>();
         list.add(RString.EMPTY);
         return list;
@@ -219,7 +236,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         reportEntity.set受付年月日(toRDate(entity.get受付年月日()));
         reportEntity.set本人支払額(entity.get本人支払額());
         reportEntity.set対象年月(entity.getサービス提供年月());
-        // TODO QA 一時表に「サービス種類」が存在しない
+        // TODO QA1560 一時表に「サービス種類」が存在しない
         reportEntity.set給付の種類(RString.EMPTY);
 
         reportEntity.set支給_不支給決定区分(entity.get支給結果());
@@ -241,15 +258,15 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
             reportEntity.set窓口払(RString.EMPTY);
             reportEntity.set口座払(RString.EMPTY);
         }
-        if (null != 改頁リスト && 改頁リスト.size() >= INT_1) {
+        if (null != 改頁リスト && INT_1 <= 改頁リスト.size()) {
             reportEntity.set持ちもの(改頁リスト.get(INT_0));
         }
-        // 金融機関
+        // TODO QA1560 金融機関?
         reportEntity.set金融機関(entity.get金融機関名称());
 
         reportEntity.set支払場所(entity.get支払場所());
         reportEntity.set決定通知書番号(entity.get決定通知No());
-        // 支払期間
+        // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(toRDate(entity.get支払期間開始年月日()));
         reportEntity.set支払期間終了年月日(toRDate(entity.get支払期間終了年月日()));
         reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
@@ -265,7 +282,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         }
         reportEntity.set本人支払額(entity.get本人支払額());
         reportEntity.set対象年月(entity.getサービス提供年月());
-        // TODO QA 一時表に「サービス種類」が存在しない
+        // TODO QA1560 一時表に「サービス種類」が存在しない
         reportEntity.set給付の種類(RString.EMPTY);
 
         reportEntity.set支給結果(entity.get支給結果());
@@ -296,7 +313,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         set口座情報_2(reportEntity);
         reportEntity.set決定通知書番号(entity.get決定通知No());
         reportEntity.set自動償還対象フラグ(entity.is自動償還対象フラグ());
-        // 支払期間
+        // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(entity.get支払期間開始年月日());
         reportEntity.set支払期間終了年月日(entity.get支払期間終了年月日());
         reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
@@ -315,7 +332,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         reportEntity.set支給額IDX3(entity.get支払金額());
         reportEntity.set支給額IDX4(entity.get支払金額());
 
-        // TODO QA審査方法区分と決定額が設定しない
+        // TODO QA1560 審査方法区分と決定額が設定しない
         reportEntity.set審査方法区分(entity.get審査方法区分());
         reportEntity.set決定額IDX1(entity.get高額支給額());
         reportEntity.set決定額IDX2(entity.get高額支給額());
@@ -348,7 +365,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     }
 
     private void set口座情報_3(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity) {
-        // TODO ゆうちょ銀行
+        // TODO QA1560 ゆうちょ銀行
         reportEntity.setゆうちょ銀行フラグ(true);
         boolean flag = true;
         if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
@@ -381,7 +398,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     }
 
     private void set口座情報_1(KogakuKetteiTsuchiShoEntity reportEntity) {
-        // TODO ゆうちょ銀行
+        // TODO QA1560 ゆうちょ銀行
         reportEntity.setゆうちょ銀行フラグ(true);
         boolean flag = true;
         if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
@@ -414,7 +431,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     }
 
     private void set口座情報_2(KogakuKetteiTsuchiShoEntity reportEntity) {
-        // TODO ゆうちょ銀行
+        // TODO QA1560 ゆうちょ銀行
         reportEntity.setゆうちょ銀行フラグ(true);
         boolean flag = true;
         if (flag) {
@@ -443,5 +460,71 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
             return null;
         }
         return new RDate(date.toString());
+    }
+
+    private List<RString> getタイトル(KetteiTsuchishoInfoTempResultEntity entity) {
+        List<RString> list = new ArrayList<>();
+        if (取り消し線無し.equals(設定値1)) {
+            if (Decimal.ZERO.compareTo(entity.get支払金額()) <= 0) {
+                list.add(設定値2);
+            } else {
+                list.add(設定値3);
+            }
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+        } else if (Decimal.ZERO.compareTo(entity.get支払金額()) <= 0) {
+            list.add(RString.EMPTY);
+            list.add(高額介護);
+            if (支給区分_1.equals(entity.get支給区分コード())) {
+                list.add(支給区分_支給);
+                list.add(RString.EMPTY);
+                list.add(RString.EMPTY);
+                list.add(支給区分_不支給);
+            } else {
+                list.add(RString.EMPTY);
+                list.add(支給区分_支給);
+                list.add(支給区分_不支給);
+                list.add(RString.EMPTY);
+            }
+            list.add(決定通知書_NAME);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+        } else {
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(RString.EMPTY);
+            list.add(高額介護);
+            if (支給区分_1.equals(entity.get支給区分コード())) {
+                list.add(支給区分_支給);
+                list.add(RString.EMPTY);
+                list.add(RString.EMPTY);
+                list.add(支給区分_不支給);
+            } else {
+                list.add(RString.EMPTY);
+                list.add(支給区分_支給);
+                list.add(支給区分_不支給);
+                list.add(RString.EMPTY);
+            }
+            list.add(決定通知書_調整用_NAME);
+        }
+        return list;
     }
 }

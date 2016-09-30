@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiGyomuShubetsu;
@@ -95,13 +94,12 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
 
     @Override
     protected void process(ShikakuSoshitsuDataEntity t) {
-
         if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
-            業務概念_賦課の情報 = new DbT2002FukaJohoTempTableEntity();
-            対象者の情報 = 対象者の情報を編集(t);
             if (通知書番号 != null) {
                 特徴追加依頼追加Temp.insert(対象者の情報);
             }
+            業務概念_賦課の情報 = new DbT2002FukaJohoTempTableEntity();
+            対象者の情報 = 対象者の情報を編集(t);
         }
         set特徴期期別金額(new Decimal(t.get調定額().toString()),
                 Integer.parseInt(t.get期().toString()), 業務概念_賦課の情報);
@@ -119,7 +117,6 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者の情報を編集(ShikakuSoshitsuDataEntity t) {
         DbT1001HihokenshaDaichoEntity 資格情報 = t.get資格情報();
         DbT2001ChoshuHohoEntity 徴収方法情報 = t.get徴収方法情報();
-        DbT2002FukaEntity 賦課情報 = t.get賦課情報();
         UeT0511NenkinTokuchoKaifuJohoEntity 対象者情報 = t.get対象者情報();
         FlexibleYear 処理年度 = new FlexibleYear(parameter.get賦課年度().toDateString());
         RString 通知内容コード = TsuchiNaiyoCodeType.特別徴収追加依頼通知.get通知内容コード();
@@ -127,20 +124,20 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
         RDateTime 処理日時 = parameter.getシステム日時().getRDateTime();
         RString 連携種別 = RenkeiGyomuShubetsu.介護特別徴収.getコード()
                 .concat(RenkeiJohoShubetsu.各種異動情報.getコード());
-        RString DT通知内容コード = TsuchiNaiyoCodeType.特別徴収追加依頼通知.get通知内容コード();
-        RString DT作成年月日 = parameter.getシステム日時().getDate().toDateString();
-        RString DT各種区分 = getDT各種区分(徴収方法情報, 対象者情報, 資格情報);
+        RString dT通知内容コード = TsuchiNaiyoCodeType.特別徴収追加依頼通知.get通知内容コード();
+        RString dT作成年月日 = parameter.getシステム日時().getDate().toDateString();
+        RString dT各種区分 = getDT各種区分(徴収方法情報, 対象者情報, 資格情報);
         SetaiCode 国保世帯コード = new SetaiCode(new RString("0"));
         対象者情報.setShoriNendo(処理年度);
         対象者情報.setTsuchiNaiyoCode(通知内容コード);
         対象者情報.setShoriTaishoYM(処理対象年月);
         対象者情報.setShoriTimestamp(処理日時);
         対象者情報.setRenkeiShubetsu(連携種別);
-        対象者情報.setDtTsuchiNaiyoCode(DT通知内容コード);
+        対象者情報.setDtTsuchiNaiyoCode(dT通知内容コード);
         対象者情報.setDtBaitaiCode(DT媒体コード_回線);
-        対象者情報.setDtSakuseiYMD(DT作成年月日);
+        対象者情報.setDtSakuseiYMD(dT作成年月日);
         対象者情報.setDtYobi1(RString.HALF_SPACE);
-        対象者情報.setDtKakushuKubun(DT各種区分);
+        対象者情報.setDtKakushuKubun(dT各種区分);
         対象者情報.setDtShoriKekka(RString.HALF_SPACE);
         対象者情報.setDtKokiIkanCode(RString.HALF_SPACE);
         対象者情報.setDtKakushuYMD(parameter.getシステム日時().getDate().toDateString());
@@ -148,7 +145,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
         対象者情報.setDtKakushuKingaku2(各種金額_全桁0設定);
         対象者情報.setDtYobi2(RString.HALF_SPACE);
         対象者情報.setDtKyosaiNenkinshoshoKigoNo(RString.HALF_SPACE);
-        if (!DT各種区分_03.equals(DT各種区分)) {
+        if (!DT各種区分_03.equals(dT各種区分)) {
             対象者情報.setShikibetsuCode(資格情報.getShikibetsuCode());
             対象者情報.setHihokenshaNo(資格情報.getHihokenshaNo().value());
         }
@@ -234,12 +231,14 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
             case 捕捉月の６カ月後_12月:
                 徴収方法ｎ月 = 徴収方法の情報.getChoshuHoho12gatsu();
                 break;
+            default:
+                break;
         }
         return 徴収方法ｎ月;
     }
 
-    private RString getDT各種金額欄(RString DT各種区分, RString 捕捉月) {
-        if (DT各種区分_01.equals(DT各種区分) || DT各種区分_02.equals(DT各種区分)) {
+    private RString getDT各種金額欄(RString dT各種区分, RString 捕捉月) {
+        if (DT各種区分_01.equals(dT各種区分) || DT各種区分_02.equals(dT各種区分)) {
             KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
             RYearMonth 年月 = new RYearMonth(parameter.get賦課年度().toDateString().concat(捕捉月));
             RString 特徴開始月;
@@ -252,7 +251,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
             RString 期 = 期月リスト.get月の期(月).get期();
             return get特徴期期別金額(Integer.parseInt(期.toString()));
         }
-        if (DT各種区分_03.equals(DT各種区分)) {
+        if (DT各種区分_03.equals(dT各種区分)) {
             return 各種金額_全桁0設定;
         }
         return RString.EMPTY;

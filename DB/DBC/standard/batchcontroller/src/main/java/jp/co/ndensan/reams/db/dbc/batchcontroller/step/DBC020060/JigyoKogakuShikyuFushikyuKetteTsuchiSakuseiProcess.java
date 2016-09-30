@@ -90,6 +90,8 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
     private RString 住所;
     private RString 出力順情報;
     private int 連番;
+    private Decimal 本人支給額合計;
+    private Decimal 支給額給額合計;
 
     @BatchWriter
     BatchReportWriter<JigyoKogakuShikyuFushikyuKetteTsuchiSource> batchReportWriter;
@@ -99,7 +101,9 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
     protected void initialize() {
 
         dataFlag = true;
-        連番 = INT_1;
+        連番 = INT_0;
+        本人支給額合計 = Decimal.ZERO;
+        支給額給額合計 = Decimal.ZERO;
         並び順 = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         pageBreakKeys = new ArrayList<>();
@@ -136,10 +140,13 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
         dataFlag = false;
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(entity.get宛名());
         住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報, 導入団体情報);
-        JigyoKogakuShikyuFushikyuKetteTsuchiEntity reportEntity = getFushikyuReportEntity(entity);
-        JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(reportEntity, 連番);
-        report.writeBy(reportSourceWriter);
         連番 = 連番 + INT_1;
+        JigyoKogakuShikyuFushikyuKetteTsuchiEntity reportEntity = getFushikyuReportEntity(entity);
+        JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(reportEntity, 連番, false);
+        report.writeBy(reportSourceWriter);
+        本人支給額合計 = 本人支給額合計.add(entity.get本人支払額());
+        支給額給額合計 = 支給額給額合計.add(entity.get本人支払額());
+
     }
 
     @Override
@@ -148,9 +155,20 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
             JigyoKogakuShikyuFushikyuKetteTsuchiEntity afterEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
             set出力順と改頁(afterEntity);
             afterEntity.set被保険者氏名(被保険者氏名_出力ない);
-            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(afterEntity, 連番);
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(afterEntity, 連番, false);
+            report.writeBy(reportSourceWriter);
+        } else {
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(getLastEntity(), 連番, true);
             report.writeBy(reportSourceWriter);
         }
+    }
+
+    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity getLastEntity() {
+        JigyoKogakuShikyuFushikyuKetteTsuchiEntity lastEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
+        lastEntity.set支給総件数(new RString(連番));
+        lastEntity.set本人支給額合計(doカンマ編集(本人支給額合計));
+        lastEntity.set支給額給額合計(doカンマ編集(支給額給額合計));
+        return lastEntity;
     }
 
     private void get出力順() {
@@ -182,13 +200,13 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
             returnEntity.set被保険者氏名(RString.EMPTY);
         }
         returnEntity.set住所(住所);
-        // 郵便番号的来源不明
+        // TODO QA1560郵便番号?
         returnEntity.set郵便番号(RString.EMPTY);
         if (null != entity.getサービス提供年月()) {
             returnEntity.set提供年月(entity.getサービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         }
-        // 区分支給限度額要介護状態区分はですか
+        // TODO QA1560 区分支給限度額要介護状態区分はですか
         if (null != entity.get要介護認定状態区分コード() && !entity.get要介護認定状態区分コード().isEmpty()) {
             KubunShikyuGendogakuYokaigoJotaiKubun 要介護度 = KubunShikyuGendogakuYokaigoJotaiKubun.
                     toValue(entity.get要介護認定状態区分コード().getColumnValue());
@@ -212,7 +230,7 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
         } else {
             returnEntity.set自動償還(自動償還フラグ_FALSE);
         }
-        // ?TODO QA
+        // TODO QA1560
         returnEntity.set支給総件数(RString.EMPTY);
         return returnEntity;
     }

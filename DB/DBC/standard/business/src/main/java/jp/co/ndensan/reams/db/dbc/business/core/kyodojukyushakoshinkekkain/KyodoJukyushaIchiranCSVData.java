@@ -46,7 +46,6 @@ public class KyodoJukyushaIchiranCSVData {
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
     private static final RString SAKUSEI = new RString("作成");
-    private static final RString SANKAKU = new RString("△");
 
     /**
      * 共同処理用受給者情報一覧表のReportデータの設定です。
