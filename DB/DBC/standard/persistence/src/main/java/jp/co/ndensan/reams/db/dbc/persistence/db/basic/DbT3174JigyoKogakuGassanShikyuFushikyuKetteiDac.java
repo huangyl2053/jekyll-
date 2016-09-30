@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKettei;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -139,7 +141,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac implements ISaveabl
     }
 
     /**
-     * 高額合算支給不支給決定を全件返します。
+     * 事業高額合算支給不支給決定を全件返します。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 対象年度 TaishoNendo
@@ -171,5 +173,37 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac implements ISaveabl
                                 eq(isDeleted, false))).
                 order(by(rirekiNo, Order.DESC)).limit(1).
                 toObject(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity.class);
+    }
+
+    /**
+     * 事業高額合算支給不支給決定を全件返します。
+     *
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @return List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity>
+     */
+    @Transaction
+    public List<DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity> getAllByKey(FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<ITrueFalseCriteria> criteria = new ArrayList<>();
+        criteria.add(eq(isDeleted, false));
+        if (対象年度 != null && !対象年度.isEmpty()) {
+            criteria.add(eq(taishoNendo, 対象年度));
+        }
+        if (保険者番号 != null && !保険者番号.isEmpty()) {
+            criteria.add(eq(hokenshaNo, 保険者番号));
+        }
+        if (支給申請書整理番号 != null && !支給申請書整理番号.isEmpty()) {
+            criteria.add(eq(shikyuSeiriNo, 支給申請書整理番号));
+        }
+        return accessor.select().
+                table(DbT3174JigyoKogakuGassanShikyuFushikyuKettei.class).
+                where(and(criteria)).
+                order(by(taishoNendo, Order.DESC), by(hihokenshaNo, Order.DESC),
+                        by(shikyuSeiriNo, Order.DESC), by(rirekiNo, Order.DESC)).
+                toList(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity.class);
     }
 }
