@@ -32,6 +32,10 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
     private final List<Code> henkoJiyu_Hihokensha;
     private final List<Code> jutokuTekiyo;
     private final List<Code> jutokuKaijo;
+    private final Code idouJiyu_tennyu;
+    private final Code idouJiyu_tensyutu;
+    private final Code idouJiyu_sibou;
+    private final Code idouJiyu_tenkyo;
 
     /**
      * コンストラクタ。
@@ -48,6 +52,10 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
      * @param henkoJiyu_Hihokensha 介護資格変更事由（被保険者）
      * @param jutokuTekiyo 介護資格住特適用
      * @param jutokuKaijo 介護資格住特解除
+     * @param idouJiyu_tennyu 異動事由（転入）転入
+     * @param idouJiyu_tensyutu 異動事由（転出）
+     * @param idouJiyu_sibou 異動事由（死亡）
+     * @param idouJiyu_tenkyo 異動事由（転居）
      */
     public JyukiRendoTorokushaListBatchMybatisParameter(
             RString konkaikaishiYMDHMS,
@@ -61,7 +69,11 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
             List<Code> kaijoJiyu_Jogaisha,
             List<Code> henkoJiyu_Hihokensha,
             List<Code> jutokuTekiyo,
-            List<Code> jutokuKaijo) {
+            List<Code> jutokuKaijo,
+            Code idouJiyu_tennyu,
+            Code idouJiyu_tensyutu,
+            Code idouJiyu_sibou,
+            Code idouJiyu_tenkyo) {
 
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;
@@ -75,5 +87,9 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
         this.henkoJiyu_Hihokensha = henkoJiyu_Hihokensha;
         this.jutokuTekiyo = jutokuTekiyo;
         this.jutokuKaijo = jutokuKaijo;
+        this.idouJiyu_tennyu = idouJiyu_tennyu;
+        this.idouJiyu_tensyutu = idouJiyu_tensyutu;
+        this.idouJiyu_sibou = idouJiyu_sibou;
+        this.idouJiyu_tenkyo = idouJiyu_tenkyo;
     }
 }

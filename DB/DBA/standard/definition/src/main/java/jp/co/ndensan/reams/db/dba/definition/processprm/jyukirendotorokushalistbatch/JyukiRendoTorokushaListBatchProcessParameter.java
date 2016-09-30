@@ -41,6 +41,10 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private List<Code> henkoJiyu_Hihokensha;
     private List<Code> jutokuTekiyo;
     private List<Code> jutokuKaijo;
+    private Code idouJiyu_tennyu;
+    private Code idouJiyu_tensyutu;
+    private Code idouJiyu_sibou;
+    private Code idouJiyu_tenkyo;
 
     /**
      * コンストラクタ。
@@ -94,6 +98,11 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
                 kaijoJiyu_Jogaisha,
                 henkoJiyu_Hihokensha,
                 jutokuTekiyo,
-                jutokuKaijo);
+                jutokuKaijo,
+                idouJiyu_tennyu,
+                idouJiyu_tensyutu,
+                idouJiyu_sibou,
+                idouJiyu_tenkyo
+        );
     }
 }
