@@ -219,9 +219,6 @@ public class DBC150050_ServicecodeTaniMeisaiIchiran
         kyufuJissekiParameter.set認定結果リスト(getParameter().get認定結果リスト());
         kyufuJissekiParameter.setサービス種類コードリスト(getParameter().getサービス種類コードリスト());
         RString サービス項目コード指定 = getParameter().getサービス項目コード();
-        if (!RString.isNullOrEmpty(サービス項目コード指定)) {
-            サービス項目コード指定 = サービス項目コード指定.replace(アンダーライン, RString.HALF_SPACE);
-        }
         kyufuJissekiParameter.setサービス項目コード(サービス項目コード指定);
         return loopBatch(ChohyouShutsuryokuyouGetProcess.class).arguments(kyufuJissekiParameter).define();
     }
