@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
+import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001.DbT5101DensanErrorCheckProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001.DbT5101DensanErrorTempOutputProcess;
@@ -55,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -90,7 +92,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     @Override
     protected void defineFlow() {
         RDate 基準日 = RDate.getNowDate();
-        path = getParameter().get格納パス();
+        path = Directory.createTmpDirectory().concat(File.separator);
         List<RString> 取込み対象ファイルリスト = getParameter().get取込み対象ファイルリスト();
         if (取込み対象ファイルリスト != null && !取込み対象ファイルリスト.isEmpty()) {
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援);
@@ -101,11 +103,11 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
             認定調査員ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
             調査委託先ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
 
-            主治医情報ファイル = new RString(path.toString() + 主治医情報ファイル名.toString());
-            医療機関ファイル = new RString(path.toString() + 医療機関ファイル名.toString());
-            認定調査員ファイル = new RString(path.toString() + 認定調査員ファイル名.toString());
-            調査委託先ファイル = new RString(path.toString() + 調査委託先ファイル名.toString());
-            認定申請ファイル = new RString(path.toString() + 認定申請ファイル名.toString());
+            主治医情報ファイル = path.concat(主治医情報ファイル名);
+            医療機関ファイル = path.concat(医療機関ファイル名);
+            認定調査員ファイル = path.concat(認定調査員ファイル名);
+            調査委託先ファイル = path.concat(調査委託先ファイル名);
+            認定申請ファイル = path.concat(認定申請ファイル名);
             if (IF種類_電算.equals(認定申請IF種類)) {
                 call電算標準版_認定申請IF種類(取込み対象ファイルリスト);
             }
