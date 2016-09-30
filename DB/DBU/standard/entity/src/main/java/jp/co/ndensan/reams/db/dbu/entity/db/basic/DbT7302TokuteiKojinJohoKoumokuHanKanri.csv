@@ -1,0 +1,9 @@
+﻿koban,varchar,RString,,,,,項番,A
+tokuteiKojinJohoKomokuCode,varchar,RString,,,,,特定個人情報項目コード,A
+tokuteiKojinJohoMeiCode,varchar,RString,,,,,特定個人情報名コード,A
+codeRenban,varchar,RString,,,,,コード連番,A
+versionJoho,varchar,RString,,,,,バージョン情報,A
+mukokaFlag,varchar,RString,,,,,無効化フラグ,A
+yukoStNichiji,UDD019Timestamp,RDateTime,,,,,有効開始日時,A
+yukoEdNichiji,UDD019Timestamp,RDateTime,,,,,有効終了日時,A
+tokuteiKojinJohoKomokuMei,text,RString,,,,,特定個人情報の項目名,A
