@@ -93,6 +93,14 @@ public class OmutsusiyoSyomeishoHandler {
             年度DDLデータ.add(data);
         }
         div.getPanelShosaiEria().getDdlTaishonen().setDataSource(年度DDLデータ);
+        div.getPanelShosaiEria().getDdlTaishonen().setSelectedKey(医療費控除リスト.get(0).get控除対象年());
+        div.getPanelShosaiEria().getTxtZenkaiHakkouBi()
+                .setValue((医療費控除リスト.get(0).get発行年月日() != null && !医療費控除リスト.get(0).get発行年月日().isEmpty())
+                        ? new RDate(医療費控除リスト.get(0).get発行年月日().toString()) : null);
+        div.getPanelShosaiEria().getTxtShinseiBi()
+                .setValue((医療費控除リスト.get(0).get申請年月日() != null && !医療費控除リスト.get(0).get申請年月日().isEmpty())
+                        ? new RDate(医療費控除リスト.get(0).get申請年月日().toString()) : null);
+        div.getPanelShosaiEria().getTxtSakuseiBi().setValue(RDate.getNowDate());
         return 医療費控除リスト;
     }
 
