@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5920001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.itakusakichosainichiran.ItakusakiChosainIchiranBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE592001.DBE592001_ItakusakiChosainParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.itakusakichosainzichiran.JyoukyouType;
 import jp.co.ndensan.reams.db.dbe.definition.core.itakusakichosainzichiran.NarabiJunType;
 import jp.co.ndensan.reams.db.dbe.definition.core.itakusakichosainzichiran.NextPageType;
@@ -42,8 +42,8 @@ public class ItakusakiChosainIchiranHandler {
      *
      * @return ItakusakiChosainIchiranBatchParamter
      */
-    public ItakusakiChosainIchiranBatchParamter onclick_Publis() {
-        ItakusakiChosainIchiranBatchParamter param = new ItakusakiChosainIchiranBatchParamter();
+    public DBE592001_ItakusakiChosainParameter onclick_Publis() {
+        DBE592001_ItakusakiChosainParameter param = new DBE592001_ItakusakiChosainParameter();
         param.setShichosonCode(div.getHokensha().getSelectedItem().get市町村コード().getColumnValue());
         param.setShichosonMeisho(div.getHokensha().getSelectedItem().get市町村名称());
         param.setItakusakiCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
@@ -56,7 +56,7 @@ public class ItakusakiChosainIchiranHandler {
         return param;
     }
 
-    private void setパラメータ状況(ItakusakiChosainIchiranBatchParamter param) {
+    private void setパラメータ状況(DBE592001_ItakusakiChosainParameter param) {
         if (状況_有効のみ.equals(div.getRadJyokyo().getSelectedKey())) {
             param.setJyoukyou(JyoukyouType.有効のみ.code());
         } else if (状況_無効のみ.equals(div.getRadJyokyo().getSelectedKey())) {
@@ -66,7 +66,7 @@ public class ItakusakiChosainIchiranHandler {
         }
     }
 
-    private void setパラメータ並び順(ItakusakiChosainIchiranBatchParamter param) {
+    private void setパラメータ並び順(DBE592001_ItakusakiChosainParameter param) {
         if (委託先コード_調査員コード.equals(div.getDdlOutputSort().getSelectedKey())) {
             param.setNarabiJun(NarabiJunType.委託先コード_調査員コード.code());
         } else if (委託先コード_調査員氏名.equals(div.getDdlOutputSort().getSelectedKey())) {
@@ -82,7 +82,7 @@ public class ItakusakiChosainIchiranHandler {
         }
     }
 
-    private void setパラメータ改頁(ItakusakiChosainIchiranBatchParamter param) {
+    private void setパラメータ改頁(DBE592001_ItakusakiChosainParameter param) {
         if (状況_有効のみ.equals(div.getDdlNextpage().getSelectedKey())) {
             param.setNextPage(NextPageType.委託先コード.code());
         } else {

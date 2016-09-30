@@ -87,6 +87,8 @@ public class ShikyuShinseiDetail {
             handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, 償還払支給申請, config);
         }
 
+        handler.set本人情報();
+
         if (!MODEL_DEL.equals(画面モード)) {
             return ResponseData.of(div).setState(登録修正モード);
         } else {
@@ -243,11 +245,11 @@ public class ShikyuShinseiDetail {
         }
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
@@ -270,7 +272,11 @@ public class ShikyuShinseiDetail {
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnKouzaInfo(ShikyuShinseiDetailDiv div) {
         ValidationMessageControlPairs validPairs = 申請既存チェック(div);
         if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            if (!getHandler(div).is変更あり_ADD()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            } else {
+                return setAdd(div, MODEL_ADD);
+            }
         }
         putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.口座情報).respond();
@@ -352,4 +358,20 @@ public class ShikyuShinseiDetail {
     private ShikyuShinseiDetailValidationHandler getValidationHandler(ShikyuShinseiDetailDiv div) {
         return new ShikyuShinseiDetailValidationHandler(div);
     }
+
+    /**
+     * 「申請者区分」ラジオボタン変更処理
+     *
+     * @param div 償還払支給申請の支給申請を登録する画面Div
+     * @return ResponseData<ShikyuShinseiDetailDiv>
+     */
+    public ResponseData<ShikyuShinseiDetailDiv> onChange_rdoShinseisyaKubun(ShikyuShinseiDetailDiv div) {
+        ResponseData<ShikyuShinseiDetailDiv> responseData = new ResponseData<>();
+        ShikyuShinseiDetailHandler handler = getHandler(div);
+        handler.set本人情報();
+
+        responseData.data = div;
+        return responseData;
+    }
+
 }

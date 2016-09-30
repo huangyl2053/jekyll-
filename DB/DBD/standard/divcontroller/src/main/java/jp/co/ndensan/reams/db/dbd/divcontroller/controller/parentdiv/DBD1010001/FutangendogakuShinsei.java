@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -87,7 +88,16 @@ public class FutangendogakuShinsei {
 
         ArrayList<FutanGendogakuNinteiViewState> resultList = getHandler(div).onLoad(識別コード, 被保険者番号, 申請一覧情報ArrayList);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, resultList);
-
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getShinseiList().getBtnAddShinsei().setDisabled(true);
+            } else {
+                row.setModifyButtonState(DataGridButtonState.Disabled);
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setSelectable(Boolean.FALSE);
+            }
+        }
         div.getShinseiDetail().setDisabled(true);
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).respond();

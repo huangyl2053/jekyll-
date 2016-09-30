@@ -180,7 +180,7 @@ public class FutangendogakuNinteiShinseiHandler {
         init負担段階DDL();
         init居室種別DDL();
         clear申請情報エリア(資格対象者);
-        onChange_radKetteiKubun(true, 資格対象者);
+        onChange_radKetteiKubun(false, 資格対象者);
         set申請情報エリア表示制御();
     }
 
@@ -249,6 +249,8 @@ public class FutangendogakuNinteiShinseiHandler {
                 div.getDdlRiyoshaFutanDankai().setSelectedKey(
                         service.judge利用者負担段階(資格対象者.get被保険者番号(), 資格対象者.get識別コード()).getコード());
                 onChange_ddlRiyoshaFutanDankai();
+            } else {
+                div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
             }
         } else {
             List<KeyValueDataSource> dataSources = new ArrayList<>();
@@ -731,7 +733,8 @@ public class FutangendogakuNinteiShinseiHandler {
             dataSource.add(source);
         }
         div.getDdlKyusochisha().setDataSource(dataSource);
-        div.getDdlKyusochisha().setSelectedKey(KyuSochishaKubun.非該当.getコード());
+        div.getDdlKyusochisha().setIsBlankLine(true);
+        div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
     }
 
     private void init負担段階DDL() {
@@ -1031,13 +1034,13 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set預貯金額(formFgn.get預貯金額());
         builder.set有価証券評価概算額(formFgn.get有価証券評価概算額());
         builder.setその他金額(formFgn.getその他金額());
-        builder.set決定区分(formFgn.get決定区分());
+        builder.set決定区分(formFgn.get決定区分() == null ? RString.EMPTY : formFgn.get決定区分());
         builder.set決定年月日(formFgn.get決定年月日() == null ? FlexibleDate.EMPTY : formFgn.get決定年月日());
         builder.set適用開始年月日(formFgn.get適用開始年月日() == null ? FlexibleDate.EMPTY : formFgn.get適用開始年月日());
         builder.set適用終了年月日(formFgn.get適用終了年月日() == null ? FlexibleDate.EMPTY : formFgn.get適用終了年月日());
-        builder.set旧措置者区分(formFgn.get旧措置者区分());
-        builder.set利用者負担段階(formFgn.get利用者負担段階());
-        builder.set居室種別(formFgn.get居室種別());
+        builder.set旧措置者区分(formFgn.get旧措置者区分() == null ? RString.EMPTY : formFgn.get旧措置者区分());
+        builder.set利用者負担段階(formFgn.get利用者負担段階() == null ? RString.EMPTY : formFgn.get利用者負担段階());
+        builder.set居室種別(formFgn.get居室種別() == null ? RString.EMPTY : formFgn.get居室種別());
         builder.set食費負担限度額(formFgn.get食費負担限度額());
         builder.setユニット型個室(formFgn.getユニット型個室());
         builder.setユニット型準個室(formFgn.getユニット型準個室());

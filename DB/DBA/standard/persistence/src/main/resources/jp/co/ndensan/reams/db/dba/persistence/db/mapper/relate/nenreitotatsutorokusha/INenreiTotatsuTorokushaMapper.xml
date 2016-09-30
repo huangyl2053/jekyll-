@@ -326,12 +326,6 @@
         AND (
         dbT1001."idoJiyuCode" = #{shutokuJiyu_Hihokensha}
         OR dbT1001."idoJiyuCode" = #{henkoJiyu_Hihokensha}
-        OR dbT1001."idoJiyuCode" IN
-        <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        OR dbT1001."idoJiyuCode" IN
-        <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        OR dbT1001."idoJiyuCode" IN
-        <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
         )
     </select>
 

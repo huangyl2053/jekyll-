@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.itakusakichosainichiran;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE592001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.itakusakichosainichiran.ItakusakiChosainIchiranQueryProcessParemeter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -19,7 +19,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ItakusakiChosainIchiranBatchParamter extends BatchParameterBase {
+public class DBE592001_ItakusakiChosainParameter extends BatchParameterBase {
 
     private static final String SHICHOSON_CODE = "shichosonCode";
     private static final String SHICHOSON_MEISHO = "shichosonMeisho";

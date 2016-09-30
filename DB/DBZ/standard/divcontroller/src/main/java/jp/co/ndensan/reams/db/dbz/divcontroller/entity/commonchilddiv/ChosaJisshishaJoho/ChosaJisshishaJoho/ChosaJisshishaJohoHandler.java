@@ -67,6 +67,13 @@ public class ChosaJisshishaJohoHandler {
             div.getDdlChosaJisshiBasho().setSelectedValue(key.get調査実施場所());
         }
         div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
+        
+        if (ChosaJisshiBashoCode.その他.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
+            div.getTxtJisshiBashoMeisho().setDisabled(false);
+        } else {
+            div.getTxtJisshiBashoMeisho().setDisabled(true);
+        }
+        
         List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(key.
                 get申請書管理番号()).records();
         List<KeyValueDataSource> shozokuKikan = new ArrayList<>();

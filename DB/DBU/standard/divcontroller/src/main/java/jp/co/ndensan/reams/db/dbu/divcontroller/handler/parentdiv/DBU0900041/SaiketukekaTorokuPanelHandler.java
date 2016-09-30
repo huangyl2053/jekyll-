@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 裁決結果登録_登録DivのHandlerクラスです。
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class SaiketukekaTorokuPanelHandler {
 
     private final SaiketukekaTorokuPanelDiv div;
-    private static final RString 更新ボタン = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -100,14 +98,12 @@ public class SaiketukekaTorokuPanelHandler {
         div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().setReadOnly(true);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().setReadOnly(true);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().setReadOnly(true);
-        CommonButtonHolder.setTextByCommonButtonFieldName(更新ボタン, "削除する");
     }
 
     private void 活性の恢復() {
         div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().setReadOnly(false);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().setReadOnly(false);
         div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().setReadOnly(false);
-        CommonButtonHolder.setTextByCommonButtonFieldName(更新ボタン, "保存する");
     }
 
     /**

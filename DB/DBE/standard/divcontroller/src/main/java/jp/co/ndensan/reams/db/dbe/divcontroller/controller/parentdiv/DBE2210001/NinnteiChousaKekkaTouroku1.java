@@ -447,6 +447,14 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).respond();
         }
         ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
+        
+        if (ChosaJisshiBashoCode.その他.getコード().equals(現在の実施場所)) {
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(false);
+        } else {
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().clearValue();
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(true);
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -776,6 +784,9 @@ public class NinnteiChousaKekkaTouroku1 {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
         getValidationHandler().validateFor実施場所の必須入力(pairs, div);
+        if (ChosaJisshiBashoCode.その他.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
+            getValidationHandler().validateFor実施場所名称の必須入力(pairs, div);
+        }
         getValidationHandler().validateFor所属機関の必須入力(pairs, div);
         getValidationHandler().validateFor記入者の必須入力(pairs, div);
         getValidationHandler().validateFor第1群の必須入力(pairs, div);

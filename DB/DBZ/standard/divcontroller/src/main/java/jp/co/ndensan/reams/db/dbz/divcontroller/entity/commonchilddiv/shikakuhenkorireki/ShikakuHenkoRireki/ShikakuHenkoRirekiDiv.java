@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  * @reamsid_L DBA-1300-050 chengsanyuan
  */
 public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
