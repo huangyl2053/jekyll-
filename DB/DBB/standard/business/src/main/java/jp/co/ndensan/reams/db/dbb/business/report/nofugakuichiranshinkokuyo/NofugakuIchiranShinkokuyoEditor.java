@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business.report.nofugakuichiranshinkokuyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.nofugakuichirandaihyo.NofugakuIchiranSource;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.nofugakudatasakuseitandokushichoson.DbT2016NofugakuJohoTemp;
-import jp.co.ndensan.reams.db.dbb.entity.report.source.nofugakuichiranshinkokuyo.NofugakuIchiranShinkokuyoSource;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -21,10 +21,10 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -49,7 +49,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
 
     private static final RString 前正符号 = new RString("+");
     private static final RString 前符号 = new RString("-");
-    private static final RString INDEX_0 = new RString("0");
+    private static final RString VALUE_0 = new RString("+0000000");
     private static final RString 年分タイトル = new RString("年分");
     private static final RString 確定申告用タイトル = new RString("確定申告用");
     private static final RString 特別徴収タイトル = new RString("特別徴収");
@@ -65,7 +65,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
     private final RString 市町村名称;
     private final List<RString> 出力項目リスト;
     private final List<RString> 改頁項目リスト;
-    private final RDate 対象年;
+    private final RYear 対象年;
     private final DbT2016NofugakuJohoTemp 納付額情報;
     private final UaFt200FindShikibetsuTaishoEntity 宛名Entity;
 
@@ -75,13 +75,13 @@ public class NofugakuIchiranShinkokuyoEditor implements
      * @param 市町村名称 RString
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
-     * @param 対象年 RDate
+     * @param 対象年 RYear
      * @param 納付額情報 DbT2016NofugakuJohoTemp
      * @param 宛名Entity UaFt200FindShikibetsuTaishoEntity
      *
      */
     public NofugakuIchiranShinkokuyoEditor(RString 市町村名称, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
-            RDate 対象年, DbT2016NofugakuJohoTemp 納付額情報, UaFt200FindShikibetsuTaishoEntity 宛名Entity) {
+            RYear 対象年, DbT2016NofugakuJohoTemp 納付額情報, UaFt200FindShikibetsuTaishoEntity 宛名Entity) {
         this.市町村名称 = 市町村名称;
         this.出力項目リスト = 出力項目リスト;
         this.改頁項目リスト = 改頁項目リスト;
@@ -91,7 +91,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
     }
 
     @Override
-    public NofugakuIchiranShinkokuyoSource edit(NofugakuIchiranShinkokuyoSource source) {
+    public NofugakuIchiranSource edit(NofugakuIchiranSource source) {
 
         if (納付額情報 != null) {
             if (納付額情報.get賦課市町村コード() != null) {
@@ -226,7 +226,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
         return sakuseiYMD.toRString();
     }
 
-    private void getlist6_4(NofugakuIchiranShinkokuyoSource source, Decimal middle1, Decimal middle2, Decimal middle3,
+    private void getlist6_4(NofugakuIchiranSource source, Decimal middle1, Decimal middle2, Decimal middle3,
             Decimal middle4, Decimal middle5, Decimal middle6) {
         if (middle1.compareTo(Decimal.ZERO) != NUM_0 || middle2.compareTo(Decimal.ZERO) != NUM_0) {
             if (middle3.add(middle4).compareTo(Decimal.ZERO) == NUM_0 && middle5.add(middle6).compareTo(Decimal.ZERO) == NUM_0) {
@@ -263,20 +263,29 @@ public class NofugakuIchiranShinkokuyoEditor implements
 
         if (null != decimal) {
             RString string = DecimalFormatter.toRString(decimal, NUM_0);
-            if (NUM_0 <= string.compareTo(INDEX_0)) {
-
+            if (Decimal.ZERO.compareTo(decimal) <= 0) {
                 return 前正符号.concat(string.padZeroToLeft(num));
             } else {
-
                 return 前符号.concat(string.substring(NUM_1).padZeroToLeft(num));
             }
 
         }
-        return INDEX_0;
+        if (NUM_7 == num) {
+            return VALUE_0;
+        }
+        return 特別徴収期別調定額;
     }
 
     private Decimal getDecimalNum(Decimal decimal, Decimal decimal2, Decimal decimal3, Decimal decimal4, Decimal decimal5, Decimal decimal6) {
-        return decimal.add(decimal2).add(decimal3).add(decimal4).add(decimal5).add(decimal6);
+        return doNullDecimal(decimal).add(doNullDecimal(decimal2)).add(doNullDecimal(decimal3)).
+                add(doNullDecimal(decimal4)).add(doNullDecimal(decimal5)).add(doNullDecimal(decimal6));
+    }
+
+    private Decimal doNullDecimal(Decimal decimal6) {
+        if (null == decimal6) {
+            return Decimal.ZERO;
+        }
+        return decimal6;
     }
 
     private RString get改頁(int index) {
@@ -287,22 +296,28 @@ public class NofugakuIchiranShinkokuyoEditor implements
         return index < 出力項目リスト.size() ? 出力項目リスト.get(index) : RString.EMPTY;
     }
 
-    private void get収入額以外分(NofugakuIchiranShinkokuyoSource source, Decimal middle2, Decimal middle5, Decimal middle6) {
+    private void get収入額以外分(NofugakuIchiranSource source, Decimal middle2, Decimal middle5, Decimal middle6) {
         if (納付額情報.get調定年度().compareTo(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1)) == NUM_0) {
             if (納付額情報.get賦課年度().compareTo(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1)) == NUM_0) {
                 source.list11_14 = doカンマ編集(middle2.divide(納付額情報.get特徴収入額06()), NUM_7);
             }
             if (!new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1).isBefore(納付額情報.get賦課年度())) {
-                source.list13_14 = doカンマ編集(middle5.add(納付額情報.get普徴収入額07()).add(納付額情報.get普徴収入額08()).add(納付額情報.get普徴収入額09()), NUM_7);
+                source.list13_14 = doカンマ編集(middle5.add(doNullDecimal(納付額情報.get普徴収入額07()))
+                        .add(doNullDecimal(納付額情報.get普徴収入額08()))
+                        .add(doNullDecimal(納付額情報.get普徴収入額09())), NUM_7);
             }
         } else if (納付額情報.get調定年度().compareTo(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4))) == NUM_0) {
             if (納付額情報.get賦課年度().compareTo(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4))) == NUM_0) {
                 source.list11_14 = doカンマ編集(納付額情報.get特徴収入額06(), NUM_7);
-                source.list13_14 = doカンマ編集(納付額情報.get普徴収入額10().add(納付額情報.get普徴収入額11()).add(納付額情報.get普徴収入額12()), NUM_7);
+                source.list13_14 = doカンマ編集(doNullDecimal(納付額情報.get普徴収入額10())
+                        .add(doNullDecimal(納付額情報.get普徴収入額11()))
+                        .add(doNullDecimal(納付額情報.get普徴収入額12())), NUM_7);
             }
             if (納付額情報.get賦課年度().isBefore(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)))) {
                 source.list11_14 = doカンマ編集(middle2, NUM_7);
-                source.list13_14 = doカンマ編集(納付額情報.get普徴収入額10().add(納付額情報.get普徴収入額11()).add(納付額情報.get普徴収入額12()), NUM_7);
+                source.list13_14 = doカンマ編集(doNullDecimal(納付額情報.get普徴収入額10())
+                        .add(doNullDecimal(納付額情報.get普徴収入額11()))
+                        .add(doNullDecimal(納付額情報.get普徴収入額12())), NUM_7);
             }
         } else {
             source.list11_14 = doカンマ編集(middle2, NUM_7);
@@ -310,7 +325,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
         }
     }
 
-    private void get期別額(NofugakuIchiranShinkokuyoSource source) {
+    private void get期別額(NofugakuIchiranSource source) {
         source.list10_3 = doカンマ編集(納付額情報.get特徴調定額06(), NUM_6);
         source.list10_5 = doカンマ編集(納付額情報.get特徴調定額01(), NUM_6);
         source.list10_7 = doカンマ編集(納付額情報.get特徴調定額02(), NUM_6);

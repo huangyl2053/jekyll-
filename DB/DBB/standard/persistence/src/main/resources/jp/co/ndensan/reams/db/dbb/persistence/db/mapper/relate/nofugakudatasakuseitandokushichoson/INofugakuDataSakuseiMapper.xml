@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2016NofugakuJohoTempマスタとエンティティのマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-1890-030 chenaoqi -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nofugakudatasakuseitandokushichoson.INofugakuDataSakuseiMapper">
+
+    <!--テーブルDbT2016NofugakuJohoTempの項目をNofugakuJohoResultEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_NofugakuJohoResultEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.nofugakudatasakuseitandokushichoson.NofugakuJohoResultEntity" autoMapping="true">
+        <result property="調定年度" column="dbT2016NofugakuJohoTemp_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="賦課年度" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="通知書番号" column="通知書番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="賦課市町村コード" column="賦課市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="特徴歳出還付額" column="特徴歳出還付額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴歳出還付額" column="普徴歳出還付額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="期" column="期" />
+        <result property="徴収方法" column="徴収方法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定額" column="調定額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="収入額" column="収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+<!--        <result property="領収日" column="領収日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="収入日" column="収入日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>-->
+    </resultMap>
+    
+    <select resultOrdered="true" id="get納付額情報" resultMap="ResultMap_NofugakuJohoResultEntity"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nofugakudatasakuseitandokushichoson.NofugakuDataMybatisParameter" fetchSize="500" >
+        SELECT
+        "DbV2002Fuka"."choteiNendo" AS 調定年度,
+        "DbV2002Fuka"."fukaNendo" AS 賦課年度,
+        "DbV2002Fuka"."tsuchishoNo" AS 通知書番号,
+        "DbV2002Fuka"."hihokenshaNo" AS 被保険者番号,
+        "DbV2002Fuka"."shikibetsuCode" AS 識別コード,
+        "DbV2002Fuka"."fukaShichosonCode" AS 賦課市町村コード,
+        "DbV2002Fuka"."tkSaishutsuKampuGaku" AS 特徴歳出還付額,
+        "DbV2002Fuka"."fuSaishutsuKampuGaku" AS 普徴歳出還付額,
+        "DbT2003Kibetsu"."ki" AS 期,
+        "DbT2003Kibetsu"."choshuHouhou" AS 徴収方法,
+        "UrT0705ChoteiKyotsu"."choteigaku" AS 調定額,
+        A."CaV0702shunyugaku" AS 収入額
+<!--        A"ryoshuYMD" AS 領収日,
+        A"shunyuYMD" AS 収入日-->
+        FROM
+        rgdb."DbV2002Fuka" AS "DbV2002Fuka"
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        ON
+        "DbT2003Kibetsu"."choteiNendo" = "DbV2002Fuka"."choteiNendo" and
+        "DbT2003Kibetsu"."fukaNendo" = "DbV2002Fuka"."fukaNendo" and
+        "DbT2003Kibetsu"."tsuchishoNo" = "DbV2002Fuka"."tsuchishoNo" and
+        "DbT2003Kibetsu"."rirekiNo" = "DbV2002Fuka"."rirekiNo" and
+        "DbT2003Kibetsu"."choshuHouhou" = '1'
+        INNER JOIN
+        rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+        ON
+        "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
+        LEFT JOIN rgca."CaFt702FindTotalShunyu"(0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL,
+                    NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, 0, 0) AS A
+        ON "UrT0705ChoteiKyotsu"."shunoId" = A."UrT0700shunoId"
+        <if test="is非課税年金 == true">
+            INNER JOIN rgdb."DbV2503TokuchoHikazeiNenkinHantei" AS "DbV2503"
+            ON "DbT2003Kibetsu"."tsuchishoNo" = "DbV2503"."tsuchishoNo" and
+            "DbT2003Kibetsu"."choteiNendo" = "DbV2503"."choteiNendo" and
+            "DbT2003Kibetsu"."fukaNendo" = "DbV2503"."kazeiNendo" and
+            "DbT2003Kibetsu"."ki" = "DbV2503"."ki" and
+            "DbT2003Kibetsu"."choshuHouhou" = '1'
+        </if>
+        WHERE
+            "DbV2002Fuka"."choteiNendo" IN (#{対象年},#{対象年minus1})
+<!--            <if test="集計日区分 == 2">
+            AND A."ryoshuYMD" BETWEEN(抽出開始日,抽出終了日)
+            </if>
+             <if test="集計日区分 == 3">
+            AND A."shunyuYMD" BETWEEN(抽出開始日,抽出終了日)
+            </if>-->
+            AND "DbV2002Fuka"."fukaShichosonCode" = #{市町村コード}
+        ORDER BY "DbV2002Fuka"."choteiNendo" DESC,
+                 "DbV2002Fuka"."fukaNendo" DESC,
+                 "DbV2002Fuka"."tsuchishoNo" DESC,
+                 "DbT2003Kibetsu"."choshuHouhou" DESC,
+                 "DbT2003Kibetsu"."ki" DESC
+    </select>
+    
+    <resultMap id="ResultMap_NofugakuJohoReportEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.nofugakudatasakuseitandokushichoson.NofugakuJohoReportEntity" autoMapping="true">
+       <association property="納付額情報" resultMap="ResultMap_DbT2016NofugakuJohoTemp"/>
+       <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/> 
+    </resultMap>
+    
+    <select resultOrdered="true" id="get納付額一覧表情報" resultMap="ResultMap_NofugakuJohoReportEntity"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nofugakudatasakuseitandokushichoson.NofugakuDataMybatisParameter" fetchSize="500" >
+        SELECT 
+            <include refid="allColumns_DbT2016NofugakuJohoTemp" />,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM "DbT2016NofugakuJohoTemp" AS "DbT2016NofugakuJohoTemp"
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,'',
+        '','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')  AS "ShikibetsuTaisho"
+        ON  "DbT2016NofugakuJohoTemp"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        AND "DbT2016NofugakuJohoTemp"."fukaShichosonCode" = "ShikibetsuTaisho"."genLasdecCode"
+        <if test="出力順 != null">
+        ${出力順}
+        </if>
+    </select>
+    
+    <sql id="allColumns_DbT2016NofugakuJohoTemp">
+        "DbT2016NofugakuJohoTemp"."choteiNendo" as "dbT2016NofugakuJohoTemp_choteiNendo",
+        "DbT2016NofugakuJohoTemp"."fukaNendo" as "dbT2016NofugakuJohoTemp_fukaNendo",
+        "DbT2016NofugakuJohoTemp"."tsuchishoNo" as "dbT2016NofugakuJohoTemp_tsuchishoNo",
+        "DbT2016NofugakuJohoTemp"."hihokenshaNo" as "dbT2016NofugakuJohoTemp_hihokenshaNo",
+        "DbT2016NofugakuJohoTemp"."shikibetsuCode" as "dbT2016NofugakuJohoTemp_shikibetsuCode",
+        "DbT2016NofugakuJohoTemp"."fukaShichosonCode" as "dbT2016NofugakuJohoTemp_fukaShichosonCode",
+        "DbT2016NofugakuJohoTemp"."tkSaishutsuKampuGaku" as "dbT2016NofugakuJohoTemp_tkSaishutsuKampuGaku",
+        "DbT2016NofugakuJohoTemp"."fuSaishutsuKampuGaku" as "dbT2016NofugakuJohoTemp_fuSaishutsuKampuGaku",
+        "DbT2016NofugakuJohoTemp"."tkChoteiGaku01" as "dbT2016NofugakuJohoTemp_tkChoteiGaku01",
+        "DbT2016NofugakuJohoTemp"."tkChoteiGaku02" as "dbT2016NofugakuJohoTemp_tkChoteiGaku02",
+        "DbT2016NofugakuJohoTemp"."tkChoteiGaku03" as "dbT2016NofugakuJohoTemp_tkChoteiGaku03",
+        "DbT2016NofugakuJohoTemp"."tkChoteiGaku04" as "dbT2016NofugakuJohoTemp_tkChoteiGaku04",
+        "DbT2016NofugakuJohoTemp"."tkChoteiGaku05" as "dbT2016NofugakuJohoTemp_tkChoteiGaku05",
+        "DbT2016NofugakuJohoTemp"."tkChoteiGaku06" as "dbT2016NofugakuJohoTemp_tkChoteiGaku06",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku01" as "dbT2016NofugakuJohoTemp_fuChoteiGaku01",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku02" as "dbT2016NofugakuJohoTemp_fuChoteiGaku02",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku03" as "dbT2016NofugakuJohoTemp_fuChoteiGaku03",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku04" as "dbT2016NofugakuJohoTemp_fuChoteiGaku04",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku05" as "dbT2016NofugakuJohoTemp_fuChoteiGaku05",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku06" as "dbT2016NofugakuJohoTemp_fuChoteiGaku06",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku07" as "dbT2016NofugakuJohoTemp_fuChoteiGaku07",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku08" as "dbT2016NofugakuJohoTemp_fuChoteiGaku08",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku09" as "dbT2016NofugakuJohoTemp_fuChoteiGaku09",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku10" as "dbT2016NofugakuJohoTemp_fuChoteiGaku10",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku11" as "dbT2016NofugakuJohoTemp_fuChoteiGaku11",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku12" as "dbT2016NofugakuJohoTemp_fuChoteiGaku12",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku13" as "dbT2016NofugakuJohoTemp_fuChoteiGaku13",
+        "DbT2016NofugakuJohoTemp"."fuChoteiGaku14" as "dbT2016NofugakuJohoTemp_fuChoteiGaku14",
+        "DbT2016NofugakuJohoTemp"."tkShunyuGaku01" as "dbT2016NofugakuJohoTemp_tkShunyuGaku01",
+        "DbT2016NofugakuJohoTemp"."tkShunyuGaku02" as "dbT2016NofugakuJohoTemp_tkShunyuGaku02",
+        "DbT2016NofugakuJohoTemp"."tkShunyuGaku03" as "dbT2016NofugakuJohoTemp_tkShunyuGaku03",
+        "DbT2016NofugakuJohoTemp"."tkShunyuGaku04" as "dbT2016NofugakuJohoTemp_tkShunyuGaku04",
+        "DbT2016NofugakuJohoTemp"."tkShunyuGaku05" as "dbT2016NofugakuJohoTemp_tkShunyuGaku05",
+        "DbT2016NofugakuJohoTemp"."tkShunyuGaku06" as "dbT2016NofugakuJohoTemp_tkShunyuGaku06",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku01" as "dbT2016NofugakuJohoTemp_fuShunyuGaku01",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku02" as "dbT2016NofugakuJohoTemp_fuShunyuGaku02",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku03" as "dbT2016NofugakuJohoTemp_fuShunyuGaku03",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku04" as "dbT2016NofugakuJohoTemp_fuShunyuGaku04",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku05" as "dbT2016NofugakuJohoTemp_fuShunyuGaku05",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku06" as "dbT2016NofugakuJohoTemp_fuShunyuGaku06",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku07" as "dbT2016NofugakuJohoTemp_fuShunyuGaku07",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku08" as "dbT2016NofugakuJohoTemp_fuShunyuGaku08",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku09" as "dbT2016NofugakuJohoTemp_fuShunyuGaku09",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku10" as "dbT2016NofugakuJohoTemp_fuShunyuGaku10",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku11" as "dbT2016NofugakuJohoTemp_fuShunyuGaku11",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku12" as "dbT2016NofugakuJohoTemp_fuShunyuGaku12",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku13" as "dbT2016NofugakuJohoTemp_fuShunyuGaku14",
+        "DbT2016NofugakuJohoTemp"."fuShunyuGaku14" as "dbT2016NofugakuJohoTemp_fuShunyuGaku14",
+        "DbT2016NofugakuJohoTemp"."tkRyoshuYMD01" as "dbT2016NofugakuJohoTemp_tkRyoshuYMD01",
+        "DbT2016NofugakuJohoTemp"."tkRyoshuYMD02" as "dbT2016NofugakuJohoTemp_tkRyoshuYMD02",
+        "DbT2016NofugakuJohoTemp"."tkRyoshuYMD03" as "dbT2016NofugakuJohoTemp_tkRyoshuYMD03",
+        "DbT2016NofugakuJohoTemp"."tkRyoshuYMD04" as "dbT2016NofugakuJohoTemp_tkRyoshuYMD04",
+        "DbT2016NofugakuJohoTemp"."tkRyoshuYMD05" as "dbT2016NofugakuJohoTemp_tkRyoshuYMD05",
+        "DbT2016NofugakuJohoTemp"."tkRyoshuYMD06" as "dbT2016NofugakuJohoTemp_tkRyoshuYMD06",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD01" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD01",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD02" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD02",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD03" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD03",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD04" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD04",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD05" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD05",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD06" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD06",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD07" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD07",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD08" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD08",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD09" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD09",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD10" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD10",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD11" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD11",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD12" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD12",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD13" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD13",
+        "DbT2016NofugakuJohoTemp"."fuRyoshuYMD14" as "dbT2016NofugakuJohoTemp_fuRyoshuYMD14",
+        "DbT2016NofugakuJohoTemp"."tkShunyuYMD01" as "dbT2016NofugakuJohoTemp_tkShunyuYMD01",
+        "DbT2016NofugakuJohoTemp"."tkShunyuYMD02" as "dbT2016NofugakuJohoTemp_tkShunyuYMD02",
+        "DbT2016NofugakuJohoTemp"."tkShunyuYMD03" as "dbT2016NofugakuJohoTemp_tkShunyuYMD03",
+        "DbT2016NofugakuJohoTemp"."tkShunyuYMD04" as "dbT2016NofugakuJohoTemp_tkShunyuYMD04",
+        "DbT2016NofugakuJohoTemp"."tkShunyuYMD05" as "dbT2016NofugakuJohoTemp_tkShunyuYMD05",
+        "DbT2016NofugakuJohoTemp"."tkShunyuYMD06" as "dbT2016NofugakuJohoTemp_tkShunyuYMD06",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD01" as "dbT2016NofugakuJohoTemp_fuShunyuYMD01",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD02" as "dbT2016NofugakuJohoTemp_fuShunyuYMD02",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD03" as "dbT2016NofugakuJohoTemp_fuShunyuYMD03",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD04" as "dbT2016NofugakuJohoTemp_fuShunyuYMD04",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD05" as "dbT2016NofugakuJohoTemp_fuShunyuYMD05",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD06" as "dbT2016NofugakuJohoTemp_fuShunyuYMD06",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD07" as "dbT2016NofugakuJohoTemp_fuShunyuYMD07",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD08" as "dbT2016NofugakuJohoTemp_fuShunyuYMD08",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD09" as "dbT2016NofugakuJohoTemp_fuShunyuYMD09",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD10" as "dbT2016NofugakuJohoTemp_fuShunyuYMD10",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD11" as "dbT2016NofugakuJohoTemp_fuShunyuYMD11",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD12" as "dbT2016NofugakuJohoTemp_fuShunyuYMD12",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD13" as "dbT2016NofugakuJohoTemp_fuShunyuYMD13",
+        "DbT2016NofugakuJohoTemp"."fuShunyuYMD14" as "dbT2016NofugakuJohoTemp_fuShunyuYMD14"
+    </sql>
+    
+    <resultMap id="ResultMap_DbT2016NofugakuJohoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.nofugakudatasakuseitandokushichoson.DbT2016NofugakuJohoTemp" autoMapping="true">
+        <result property="調定年度" column="dbT2016NofugakuJohoTemp_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="賦課年度" column="dbT2016NofugakuJohoTemp_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="通知書番号" column="dbT2016NofugakuJohoTemp_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="被保険者番号" column="dbT2016NofugakuJohoTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="識別コード" column="dbT2016NofugakuJohoTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="賦課市町村コード" column="dbT2016NofugakuJohoTemp_fukaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="特徴歳出還付額" column="dbT2016NofugakuJohoTemp_tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴歳出還付額" column="dbT2016NofugakuJohoTemp_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴調定額01" column="dbT2016NofugakuJohoTemp_tkChoteiGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴調定額02" column="dbT2016NofugakuJohoTemp_tkChoteiGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴調定額03" column="dbT2016NofugakuJohoTemp_tkChoteiGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴調定額04" column="dbT2016NofugakuJohoTemp_tkChoteiGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴調定額05" column="dbT2016NofugakuJohoTemp_tkChoteiGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴調定額06" column="dbT2016NofugakuJohoTemp_tkChoteiGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額01" column="dbT2016NofugakuJohoTemp_fuChoteiGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額02" column="dbT2016NofugakuJohoTemp_fuChoteiGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額03" column="dbT2016NofugakuJohoTemp_fuChoteiGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額04" column="dbT2016NofugakuJohoTemp_fuChoteiGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額05" column="dbT2016NofugakuJohoTemp_fuChoteiGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額06" column="dbT2016NofugakuJohoTemp_fuChoteiGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額07" column="dbT2016NofugakuJohoTemp_fuChoteiGaku07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額08" column="dbT2016NofugakuJohoTemp_fuChoteiGaku08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額09" column="dbT2016NofugakuJohoTemp_fuChoteiGaku09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額10" column="dbT2016NofugakuJohoTemp_fuChoteiGaku10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額11" column="dbT2016NofugakuJohoTemp_fuChoteiGaku11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額12" column="dbT2016NofugakuJohoTemp_fuChoteiGaku12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額13" column="dbT2016NofugakuJohoTemp_fuChoteiGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴調定額14" column="dbT2016NofugakuJohoTemp_fuChoteiGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴収入額01" column="dbT2016NofugakuJohoTemp_tkShunyuGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴収入額02" column="dbT2016NofugakuJohoTemp_tkShunyuGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴収入額03" column="dbT2016NofugakuJohoTemp_tkShunyuGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴収入額04" column="dbT2016NofugakuJohoTemp_tkShunyuGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴収入額05" column="dbT2016NofugakuJohoTemp_tkShunyuGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴収入額06" column="dbT2016NofugakuJohoTemp_tkShunyuGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額01" column="dbT2016NofugakuJohoTemp_fuShunyuGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額02" column="dbT2016NofugakuJohoTemp_fuShunyuGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額03" column="dbT2016NofugakuJohoTemp_fuShunyuGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額04" column="dbT2016NofugakuJohoTemp_fuShunyuGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額05" column="dbT2016NofugakuJohoTemp_fuShunyuGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額06" column="dbT2016NofugakuJohoTemp_fuShunyuGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額07" column="dbT2016NofugakuJohoTemp_fuShunyuGaku07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額08" column="dbT2016NofugakuJohoTemp_fuShunyuGaku08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額09" column="dbT2016NofugakuJohoTemp_fuShunyuGaku09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額10" column="dbT2016NofugakuJohoTemp_fuShunyuGaku10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額11" column="dbT2016NofugakuJohoTemp_fuShunyuGaku11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額12" column="dbT2016NofugakuJohoTemp_fuShunyuGaku12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額13" column="dbT2016NofugakuJohoTemp_fuShunyuGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴収入額14" column="dbT2016NofugakuJohoTemp_fuShunyuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴領収日01" column="dbT2016NofugakuJohoTemp_tkRyoshuYMD01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴領収日02" column="dbT2016NofugakuJohoTemp_tkRyoshuYMD02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴領収日03" column="dbT2016NofugakuJohoTemp_tkRyoshuYMD03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴領収日04" column="dbT2016NofugakuJohoTemp_tkRyoshuYMD04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴領収日05" column="dbT2016NofugakuJohoTemp_tkRyoshuYMD05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴領収日06" column="dbT2016NofugakuJohoTemp_tkRyoshuYMD06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日01" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日02" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日03" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日04" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日05" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日06" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日07" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日08" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日09" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日10" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日11" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日12" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日13" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴領収日14" column="dbT2016NofugakuJohoTemp_fuRyoshuYMD14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴収入日01" column="dbT2016NofugakuJohoTemp_tkShunyuYMD01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴収入日02" column="dbT2016NofugakuJohoTemp_tkShunyuYMD02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴収入日03" column="dbT2016NofugakuJohoTemp_tkShunyuYMD03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴収入日04" column="dbT2016NofugakuJohoTemp_tkShunyuYMD04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴収入日05" column="dbT2016NofugakuJohoTemp_tkShunyuYMD05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特徴収入日06" column="dbT2016NofugakuJohoTemp_tkShunyuYMD06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日01" column="dbT2016NofugakuJohoTemp_fuShunyuYMD01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日02" column="dbT2016NofugakuJohoTemp_fuShunyuYMD02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日03" column="dbT2016NofugakuJohoTemp_fuShunyuYMD03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日04" column="dbT2016NofugakuJohoTemp_fuShunyuYMD04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日05" column="dbT2016NofugakuJohoTemp_fuShunyuYMD05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日06" column="dbT2016NofugakuJohoTemp_fuShunyuYMD06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日07" column="dbT2016NofugakuJohoTemp_fuShunyuYMD07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日08" column="dbT2016NofugakuJohoTemp_fuShunyuYMD08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日09" column="dbT2016NofugakuJohoTemp_fuShunyuYMD09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日10" column="dbT2016NofugakuJohoTemp_fuShunyuYMD10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日11" column="dbT2016NofugakuJohoTemp_fuShunyuYMD11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日12" column="dbT2016NofugakuJohoTemp_fuShunyuYMD12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日13" column="dbT2016NofugakuJohoTemp_fuShunyuYMD13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="普徴収入日14" column="dbT2016NofugakuJohoTemp_fuShunyuYMD14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+</mapper>
