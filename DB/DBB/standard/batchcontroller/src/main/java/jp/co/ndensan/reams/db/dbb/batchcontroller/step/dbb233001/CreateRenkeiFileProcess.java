@@ -47,13 +47,9 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchouSeidoKanIF
     private TokuchouSeidoKanIFRenkeiProcessParameter parameter;
     private List<KoseiShichoson> 広域市町村情報;
     private List<RString> ファイル出力List;
-    private Map<RString, FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity>> map;
-    private Map<RString, RString> 情報map;
-    private static final RString レコード区分_2 = new RString("2");
-    private static final RString 通知内容コード_00 = new RString("00");
-    private static final RString 特別徴収制度コード_0 = new RString("0");
-    private static final RString 金額1_2 = new RString("00000000000");
-
+    private Map map;
+    private Map 情報map;
+//    private FileSpoolManager manager;
     @BatchWriter
     private FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity> writer;
 
@@ -80,10 +76,12 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchouSeidoKanIF
 
     @Override
     protected void createWriter() {
+//        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, RString.EMPTY, UzUDE0831EucAccesslogFileType.Other);
+//        RString spoolWorkPath = manager.getSharedFileName();
         for (KoseiShichoson 情報 : 広域市町村情報) {
+//            dtaFilePath = Path.combinePath(spoolWorkPath);
             RString ファイル名 = DTA_NAME_PREFIX.concat(情報.get市町村識別ID()).concat(DTA_NAME_SUFFIX);
-            RString dtaFilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
-            writer = new FldWriter.InstanceBuilder(dtaFilePath)
+            writer = new FldWriter.InstanceBuilder(ファイル名)
                     .setNewLine(NewLine.CRLF)
                     .setEncodeJIS().build();
             情報map.put(情報.get市町村コード().value(), ファイル名);
@@ -93,15 +91,20 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchouSeidoKanIF
 
     @Override
     protected void process(TokuchouSeidoKanIFRenkeiEntity entity) {
-        ファイル出力List.add(情報map.get(entity.getDt市町村コード()));
-        map.get(entity.getDt市町村コード()).writeLine(getDtaEntity(entity));
+        for (Object key : map.keySet()) {
+
+            if (entity.getDt市町村コード().equals(key)) {
+                ファイル出力List.add((RString) 情報map.get(key));
+                FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity> fileWriter = (FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity>) map.get(key);
+                fileWriter.writeLine(getDtaEntity(entity));
+            }
+        }
         ファイル出力List = removeDuplicate(ファイル出力List);
     }
 
     @Override
     protected void afterExecute() {
-        // AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
-        // QA1562(#102498) AccessLoggerの質疑が存在します。
+//        AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
         for (RString fileName : ファイル出力List) {
             FilesystemName sharedFileName = new FilesystemName(fileName);
             SharedFile.defineSharedFile(sharedFileName);
@@ -112,12 +115,12 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchouSeidoKanIF
 
     private TokuchouSeidoKanIFRenkeiDTAEntity getDtaEntity(TokuchouSeidoKanIFRenkeiEntity t) {
         TokuchouSeidoKanIFRenkeiDTAEntity dTAEntity = new TokuchouSeidoKanIFRenkeiDTAEntity();
-        dTAEntity.setレコード区分(レコード区分_2);
+        dTAEntity.setレコード区分(new RString("2"));
         dTAEntity.set市町村コード(t.getDt市町村コード());
         dTAEntity.set特別徴収義務者コード(t.getDt特別徴収義務者コード().toRString());
-        dTAEntity.set通知内容コード(通知内容コード_00);
+        dTAEntity.set通知内容コード(new RString("00"));
         dTAEntity.set予備1(RString.EMPTY);
-        dTAEntity.set特別徴収制度コード(特別徴収制度コード_0);
+        dTAEntity.set特別徴収制度コード(new RString("0"));
         dTAEntity.set作成年月日(t.getDt作成年月日());
         dTAEntity.set基礎年金番号(t.getDt基礎年金番号());
         dTAEntity.set年金コード(t.getDt年金コード());
@@ -137,8 +140,8 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchouSeidoKanIF
         dTAEntity.set処理結果コード(t.getDt処理結果());
         dTAEntity.set後期移管コード(t.getDt後期移管コード());
         dTAEntity.set各種年月日(t.getDt各種年月日());
-        dTAEntity.set金額1(金額1_2);
-        dTAEntity.set金額2(金額1_2);
+        dTAEntity.set金額1(new RString("00000000000"));
+        dTAEntity.set金額2(new RString("00000000000"));
         dTAEntity.set金額3(t.getDt各種金額欄3());
         dTAEntity.set予備3(RString.EMPTY);
         dTAEntity.set共済年金証書記号番号(t.getDt共済年金証記号番号());

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb233001.CreateRenkeiFileProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB233001.DBB233001_TokuchoSeidokanIFRenkeiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.dbb233001.TokuchouSeidoKanIFRenkeiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBB-1810-040 dengjiajia
  */
-public class DBB233001_TokuchoSeidokanIFRenkei extends BatchFlowBase<DBB233001_TokuchoSeidokanIFRenkeiParameter> {
+public class DBB233001_TokuchouSeidoKanIFRenkeiFlow extends BatchFlowBase<TokuchouSeidoKanIFRenkeiBatchParameter> {
 
     private static final String TOKUCHOUSEIDOKANIFRENKEI_PROCESS = "tokuchouSeidoKanIFRenkeiProcess";
 
