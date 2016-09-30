@@ -1139,8 +1139,12 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     }
 
     private RDateTime set作成日時(RDate 作成日, RTime 作成時) {
+        if (作成時 != null) {
+            return RDateTime.of(作成日.getYearValue(), 作成日.getMonthValue(),
+                    作成日.getDayValue(), 作成時.getHour(), 作成時.getSecond());
+        }
         return RDateTime.of(作成日.getYearValue(), 作成日.getMonthValue(),
-                作成日.getDayValue(), 作成時.getHour(), 作成時.getSecond());
+                作成日.getDayValue(), 00, 00);
     }
 
     private RString get過去集計分旧市町村区分(RString 市町村コード, List<LasdecCode> 旧市町村コードリスト) {
