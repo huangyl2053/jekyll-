@@ -77,10 +77,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlowBase<DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter> {
 
-    private InsSetaiinHaakuNyuryokuKogakuFlowEntity1 returnEntity;
     private static final RString メニューID_高額介護サービス = new RString("DBCMN41002");
     private static final RString メニューID_事業高額介護サービス = new RString("DBCMNL1002");
-    private FlexibleDate sysDate;
     private static final RString 世帯員把握BATCHID = new RString("DBB002001_SetaiinHaaku");
     private static final String 高額介護サービス費支給申請のバックアップ = "backupKogakuShikyuShinsei";
     private static final String 高額介護サービス費支給判定結果のバックアップ = "backupKogakuShikyuHanteiKekka";
@@ -168,6 +166,9 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
     private static final RString TABLE_事業高額介護サービス費支給審査決定全件一時 = new RString("TempJigyoKogakuShikyuShinsaKetteiZen");
     private static final RString TABLE_事業高額介護サービス費給付対象者合計全件一時 = new RString("TempJigyoKogakuKyufuTaishoshaGokeiZen");
     private static final RString TABLE_事業高額介護サービス費給付対象者明細全件一時 = new RString("TempJigyoKogakuKyufuTaishoshaMeisaiZen");
+
+    private InsSetaiinHaakuNyuryokuKogakuFlowEntity1 returnEntity;
+    private FlexibleDate sysDate;
 
     @Override
     protected void initialize() {
@@ -928,13 +929,6 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
         KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter parameter
                 = new KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter();
         parameter.set処理年月(getParameter().getShoriYM());
-        return parameter;
-    }
-
-    private KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter setInsSaishoriKogakuShikyuSinseiTmpParameter() {
-        KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter parameter
-                = new KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter();
-        parameter.set処理年月(sysDate.getYearMonth());
         return parameter;
     }
 
