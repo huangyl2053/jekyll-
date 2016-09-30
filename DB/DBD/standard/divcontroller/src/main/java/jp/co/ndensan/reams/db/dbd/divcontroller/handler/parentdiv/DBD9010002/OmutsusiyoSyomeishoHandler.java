@@ -70,6 +70,7 @@ public class OmutsusiyoSyomeishoHandler {
         RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
         if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), true);
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
         List<IryohiKojoEntityResult> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(被保険者番号, IryoHiKojoNaiyo.おむつ使用証明書.getコード());
