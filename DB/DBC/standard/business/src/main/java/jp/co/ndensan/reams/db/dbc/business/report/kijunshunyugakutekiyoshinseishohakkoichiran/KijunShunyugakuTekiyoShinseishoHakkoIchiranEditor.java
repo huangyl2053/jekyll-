@@ -66,7 +66,9 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
     @Override
     public KijunShunyugakuTekiyoShinseishoHakkoIchiranSource edit(KijunShunyugakuTekiyoShinseishoHakkoIchiranSource source) {
         source.printTimeStamp = get印刷日時(YMDHMS.now());
-        source.nendo = 発行対象者.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度作成);
+        if (発行対象者.get年度() != null) {
+            source.nendo = 発行対象者.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度作成);
+        }
         source.hokenshaNo = 市町村番号;
         source.hokenshaName = 市町村名;
         edit出力順(source);
