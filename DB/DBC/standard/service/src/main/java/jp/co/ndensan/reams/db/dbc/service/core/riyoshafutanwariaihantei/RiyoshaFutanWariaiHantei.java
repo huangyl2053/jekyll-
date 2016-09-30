@@ -704,7 +704,7 @@ public class RiyoshaFutanWariaiHantei {
     }
 
     private FlexibleDate get有効開始日１(FlexibleYear 対象年度, FlexibleDate 認定有効開始日) {
-        if (対象年度 == null || 認定有効開始日 == null) {
+        if (対象年度 == null || 認定有効開始日 == null || 認定有効開始日.isEmpty()) {
             return null;
         }
         FlexibleDate date = new FlexibleDate(対象年度.getYearValue(), NUM八月, 1);
@@ -715,7 +715,7 @@ public class RiyoshaFutanWariaiHantei {
     }
 
     private FlexibleDate get有効開始日２(FlexibleYear 対象年度, FlexibleDate 宛名異動年月日) {
-        if (対象年度 == null || 宛名異動年月日 == null) {
+        if (対象年度 == null || 宛名異動年月日 == null || 宛名異動年月日.isEmpty()) {
             return null;
         }
         FlexibleDate date = new FlexibleDate(対象年度.getYearValue(), NUM八月, 1);
