@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210051;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021051.DBB021051_AtenaSealSakuseiParameter;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210051.AtenaSealCreateDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -64,7 +64,7 @@ public class AtenaSealCreateHandler {
     private static final RString 郡 = new RString(" 郡 ");
     private static final RString 都道府県 = new RString(" 都道府県 ");
     private static final RString 方書 = new RString(" 方書 ");
-    private static final ReportId 帳票ID = ReportIdDBB.DBB100087.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBZ.DBZ100001.getReportId();
 
     /**
      * コンストラクタです。
@@ -114,10 +114,10 @@ public class AtenaSealCreateHandler {
             div.getDdlShicyouson().setDisplayNone(true);
         }
         div.getTxtKijyunnengatu().setYmdKubunEnum(YmdKubun.年月);
-        div.getCcdJushoSettei().initialize(SubGyomuCode.DBB介護賦課.getColumnValue(), 帳票ID.getColumnValue());
+        div.getCcdJushoSettei().initialize(SubGyomuCode.DBZ介護共通.getColumnValue(), 帳票ID.getColumnValue());
         //TODO QA1568
         div.getCcdAtenaSealPosition().load(定数_12);
-        div.getCcdShutsuryokuJun().load(SubGyomuCode.DBB介護賦課, 帳票ID);
+        div.getCcdShutsuryokuJun().load(SubGyomuCode.DBZ介護共通, 帳票ID);
     }
 
     /**
