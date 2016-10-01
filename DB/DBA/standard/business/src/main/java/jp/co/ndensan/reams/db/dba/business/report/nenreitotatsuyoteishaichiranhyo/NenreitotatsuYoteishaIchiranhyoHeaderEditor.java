@@ -49,6 +49,10 @@ class NenreitotatsuYoteishaIchiranhyoHeaderEditor implements INenreitotatsuYotei
         source.kaipage3 = item.getKaipage3();
         source.kaipage4 = item.getKaipage4();
         source.kaipage5 = item.getKaipage5();
+        source.tyusyutsukikanF = item.getTyusyutsukikanF();
+        source.tyusyutsukikanT = item.getTyusyutsukikanT();
+        source.shutsuRyokuTaisho = item.getShutsuRyokuTaisho();
+        source.juminShubetsu = item.getJuminShubetsu();
         return source;
     }
 }
