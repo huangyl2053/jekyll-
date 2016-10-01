@@ -23,8 +23,10 @@ import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManag
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -56,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 主治医マスタ処理のクラスです。。
@@ -587,8 +590,11 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnToSearchIryoKikan(ShujiiMasterDiv div) {
-        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(div.getHdnTxtIryoKikanCode());
-        div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setValue(div.getHdnTxtIryoKikanName());
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(dataPassModel.get主治医医療機関コード());
+        div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setValue(dataPassModel.get主治医医療機関名称());
+        div.getShujiiJohoInput().getTxtShichoson().setValue(dataPassModel.get市町村コード());
         return ResponseData.of(div).respond();
     }
 
@@ -599,6 +605,11 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_IryoKikanOpen(ShujiiMasterDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
+        dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        dataPassModel.set市町村コード(div.getShujiiJohoInput().getTxtShichoson().getValue());
+        dataPassModel.set対象モード(new RString(TaishoMode.IryoKikanMode.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         return ResponseData.of(div).respond();
     }
 
