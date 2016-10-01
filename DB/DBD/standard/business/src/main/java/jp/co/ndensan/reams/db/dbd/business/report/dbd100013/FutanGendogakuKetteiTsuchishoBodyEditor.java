@@ -20,7 +20,11 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -130,15 +134,15 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         source.hihokenshaNo8 = 負担限度額認定.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
         source.hihokenshaNo9 = 負担限度額認定.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
         source.hihokenshaNo10 = 負担限度額認定.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
-        source.ketteiYMD = 負担限度額認定.get決定年月日().wareki().toDateString();
+        source.ketteiYMD = 負担限度額認定.get決定年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.ninteiKekka1 = RString.EMPTY;
         source.ninteiKekka2 = RString.EMPTY;
 
         if (KetteiKubun.承認する.getコード().equals(負担限度額認定.get決定区分())) {
-            source.tekiyoYMD = 負担限度額認定.get適用開始年月日().wareki().toDateString();
+            source.tekiyoYMD = 負担限度額認定.get適用開始年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka3 = new RString("（承認内容）");
             source.shoninSuru = 決定区分_承認;
-            source.yukoYMD = 負担限度額認定.get適用終了年月日().wareki().toDateString();
+            source.yukoYMD = 負担限度額認定.get適用終了年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
             source.futanName1 = 負担名_食費負担限度額;
             source.futanName2 = 負担名_居住費負担限度額ユニット型個室;
@@ -477,6 +481,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
         source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
         source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
         source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
         source.koinShoryaku = ninshoshaSource.koinShoryaku;

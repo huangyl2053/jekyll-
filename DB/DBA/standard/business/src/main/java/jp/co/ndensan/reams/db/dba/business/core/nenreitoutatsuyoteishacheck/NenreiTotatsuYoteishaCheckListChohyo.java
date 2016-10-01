@@ -47,7 +47,9 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
         headItem = new NenreitotatsuYoteishaIchiranhyoHeadItem(
                 get印刷日時(), nenreiCheckListJyohoEntity.get市町村コード(), nenreiCheckListJyohoEntity.get市町村名(),
                 並び順.get(0), 並び順.get(INDEX_1), 並び順.get(INDEX_2), 並び順.get(INDEX_3), 並び順.get(INDEX_4),
-                改頁.get(0), 改頁.get(INDEX_1), 改頁.get(INDEX_2), 改頁.get(INDEX_3), 改頁.get(INDEX_4));
+                改頁.get(0), 改頁.get(INDEX_1), 改頁.get(INDEX_2), 改頁.get(INDEX_3), 改頁.get(INDEX_4),
+                nenreiCheckListJyohoEntity.get抽出期間From(),nenreiCheckListJyohoEntity.get抽出期間To(),
+                nenreiCheckListJyohoEntity.get出力対象(),nenreiCheckListJyohoEntity.get住民種別());
         if (nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト().isEmpty()) {
             NenreitotatsuYoteishaIchiranhyoBodyItem bodyItem = new NenreitotatsuYoteishaIchiranhyoBodyItem(
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -69,7 +71,7 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(String.format("%02d", datetime.getHour()));
         systemDateTime.append(new RString("時"));

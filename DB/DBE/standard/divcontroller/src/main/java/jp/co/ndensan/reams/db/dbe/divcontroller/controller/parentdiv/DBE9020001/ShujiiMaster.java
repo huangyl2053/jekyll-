@@ -23,8 +23,10 @@ import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManag
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -56,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 主治医マスタ処理のクラスです。。
@@ -88,9 +91,9 @@ public class ShujiiMaster {
         getHandler(div).clearKensakuJoken();
 
         RString 医療機関登録から主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
-        LasdecCode 医療機関登録から市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
-        
+
         if (医療機関登録から主治医医療機関コード != null && !医療機関登録から主治医医療機関コード.isEmpty()) {
+            LasdecCode 医療機関登録から市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
             ShujiiMasterMapperParameter parameter = ShujiiMasterMapperParameter.createSelectByKeyParam(
             医療機関登録から市町村コード,
             true,
@@ -147,7 +150,9 @@ public class ShujiiMaster {
     public ResponseData<ShujiiMasterDiv> onClick_btnSearchShujii(ShujiiMasterDiv div) {
         getHandler(div).load();
         searchChosainInfo(div);
-
+        if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty()) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validateBtnReSearchNoResult()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -254,10 +259,7 @@ public class ShujiiMaster {
         List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
                 = shujiiMasterFinder.getShujiiIchiranList(
                         parameter).records();
-        if (主治医情報List.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.主治医マスタ検索結果, Models.create(new ArrayList<ShujiiJoho>()));
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
+
         div.getShujiiSearch().setDisabled(true);
         div.getShujiiIchiran().setDisabled(false);
         getHandler(div).setShujiiIchiran(主治医情報List);
@@ -284,9 +286,9 @@ public class ShujiiMaster {
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
 
         RString 医療機関登録から主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
-        RString 医療機関登録から市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
-        
-        if (!RString.isNullOrEmpty(医療機関登録から主治医医療機関コード) && !RString.isNullOrEmpty(医療機関登録から市町村コード) ) {
+
+        if (!RString.isNullOrEmpty(医療機関登録から主治医医療機関コード)) {
+            RString 医療機関登録から市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
             div.getShujiiJohoInput().getTxtShichoson().setValue(医療機関登録から市町村コード);
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(医療機関登録から主治医医療機関コード);
             onBlur_txtShichoson(div);
@@ -587,8 +589,11 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnToSearchIryoKikan(ShujiiMasterDiv div) {
-        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(div.getHdnTxtIryoKikanCode());
-        div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setValue(div.getHdnTxtIryoKikanName());
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(dataPassModel.get主治医医療機関コード());
+        div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setValue(dataPassModel.get主治医医療機関名称());
+        div.getShujiiJohoInput().getTxtShichoson().setValue(dataPassModel.get市町村コード());
         return ResponseData.of(div).respond();
     }
 
@@ -599,6 +604,11 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_IryoKikanOpen(ShujiiMasterDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
+        dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        dataPassModel.set市町村コード(div.getShujiiJohoInput().getTxtShichoson().getValue());
+        dataPassModel.set対象モード(new RString(TaishoMode.IryoKikanMode.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         return ResponseData.of(div).respond();
     }
 

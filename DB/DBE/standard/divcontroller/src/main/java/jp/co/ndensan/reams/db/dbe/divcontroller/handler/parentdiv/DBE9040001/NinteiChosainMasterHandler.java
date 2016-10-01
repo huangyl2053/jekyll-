@@ -175,6 +175,10 @@ public class NinteiChosainMasterHandler {
         if (!RString.isNullOrEmpty(chikuName)) {
             row.setChiku(chikuName);
         }
+        
+        if (!RString.isNullOrEmpty(chosainShikaku)) {
+            chosainShikaku = chosainShikaku.trim();
+        }
         row.setChosainShikaku(RString.isNullOrEmpty(chosainShikaku) ? RString.EMPTY : Sikaku.toValue(chosainShikaku).get名称());
         row.setChosainShikakuCode(chosainShikaku);
         TextBoxNum chosaKanoNinzu = new TextBoxNum();

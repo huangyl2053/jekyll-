@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001.DBD
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -275,7 +276,11 @@ public class DBD1030001 {
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().申請日の未入力チェック(pairs, div);
+            if (div.getTxtShinseiYMD().getValue().isEmpty()) {
+                getValidationHandler().申請日の未入力チェック(pairs, div);
+            } else {
+                pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+            }
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
@@ -321,16 +326,35 @@ public class DBD1030001 {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             DBD1030001ValidationHandler validationHandler = getValidationHandler();
-            validationHandler.申請日の未入力チェック(pairs, div);
+            if (div.getTxtShinseiYMD().getValue().isEmpty()) {
+                validationHandler.申請日の未入力チェック(pairs, div);
+            } else {
+                pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+            }
             if (KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
                 validationHandler.決定区分の未入力チェック(pairs, div);
-                validationHandler.決定日の未入力チェック(pairs, div);
-                validationHandler.適用日の未入力チェック(pairs, div);
-                validationHandler.有効期限の未入力チェック(pairs, div);
+                if (div.getTxtKetteiYMD().getValue().isEmpty()) {
+                    validationHandler.決定日の未入力チェック(pairs, div);
+                } else {
+                    pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtKetteiYMD()));
+                }
+                if (div.getTxtTekiyoYMD().getValue().isEmpty()) {
+                    validationHandler.適用日の未入力チェック(pairs, div);
+                } else {
+                    pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtTekiyoYMD()));
+                }
+                if (div.getTxtYukoKigenYMD().getValue().isEmpty()) {
+                    validationHandler.有効期限の未入力チェック(pairs, div);
+                } else {
+                    pairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getTxtYukoKigenYMD()));
+                }
                 validationHandler.軽減事由の未入力チェック(pairs, div);
                 validationHandler.軽減率_分子の未入力チェック(pairs, div);
                 validationHandler.軽減率_分母の未入力チェック(pairs, div);
                 validationHandler.確認番号の未入力チェック(pairs, div);
+            }
+            if (pairs.existsError()) {
+                ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
