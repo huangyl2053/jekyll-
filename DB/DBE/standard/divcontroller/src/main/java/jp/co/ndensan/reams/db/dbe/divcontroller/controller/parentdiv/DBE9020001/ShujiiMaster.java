@@ -150,7 +150,9 @@ public class ShujiiMaster {
     public ResponseData<ShujiiMasterDiv> onClick_btnSearchShujii(ShujiiMasterDiv div) {
         getHandler(div).load();
         searchChosainInfo(div);
-
+        if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty()) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validateBtnReSearchNoResult()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -257,10 +259,7 @@ public class ShujiiMaster {
         List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
                 = shujiiMasterFinder.getShujiiIchiranList(
                         parameter).records();
-        if (主治医情報List.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.主治医マスタ検索結果, Models.create(new ArrayList<ShujiiJoho>()));
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
+
         div.getShujiiSearch().setDisabled(true);
         div.getShujiiIchiran().setDisabled(false);
         getHandler(div).setShujiiIchiran(主治医情報List);

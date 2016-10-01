@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -103,10 +104,13 @@ public class NinteichosaItakusakiMaster {
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnSearchShujii(NinteichosaItakusakiMasterDiv div) {
         List<KoseiShichosonMaster> list = getHandler(div).searchShujii();
-        if (list.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
         getHandler(div).setDataSource(list);
+        if (list.isEmpty()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            DBE9030001ErrorMessage 該当データなし = new DBE9030001ErrorMessage(UrErrorMessages.該当データなし);
+            pairs.add(new ValidationMessageControlPair(該当データなし));
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         return ResponseData.of(div).setState(DBE9030001StateName.一覧);
     }
 
@@ -418,7 +422,7 @@ public class NinteichosaItakusakiMaster {
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
         return new NinteichosaItakusakiMasterHandler(div);
     }
-
+    
     private boolean is一覧エリア編集有り(NinteichosaItakusakiMasterDiv div) {
         for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
             if (!row.getJotai().isEmpty()) {
