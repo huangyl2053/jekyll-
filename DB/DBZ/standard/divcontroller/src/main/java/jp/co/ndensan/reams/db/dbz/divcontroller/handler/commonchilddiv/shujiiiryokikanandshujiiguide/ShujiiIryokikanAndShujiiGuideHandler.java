@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.Sh
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.dgKensakuKekkaIchiran_Row;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,6 +49,10 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
+            if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
+                div.getHokenshaList().setSelectedShichosonIfExist(市町村コード);
+            }
         }
         div.getKensakuKekkaIchiran().getDgKensakuKekkaIchiran().setDataSource(null);
     }

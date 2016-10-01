@@ -4,24 +4,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShujiiMaster のクラスファイル
- *
- * @reamsid_L DBE-0250-010 suguangjun
+ * ShujiiMaster のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShujiiMasterDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,6 +39,8 @@ public class ShujiiMasterDiv extends Panel {
     private RString hdnTxtIryoKikanCode;
     @JsonProperty("hdnTxtIryoKikanName")
     private RString hdnTxtIryoKikanName;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -147,6 +148,24 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -155,7 +174,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanCodeFrom(TextBoxCode txtSearchShujiiIryokikanCodeFrom) {
+    public void  setTxtSearchShujiiIryokikanCodeFrom(TextBoxCode txtSearchShujiiIryokikanCodeFrom) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanCodeFrom(txtSearchShujiiIryokikanCodeFrom);
     }
 
@@ -165,7 +184,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanCodeTo(TextBoxCode txtSearchShujiiIryokikanCodeTo) {
+    public void  setTxtSearchShujiiIryokikanCodeTo(TextBoxCode txtSearchShujiiIryokikanCodeTo) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanCodeTo(txtSearchShujiiIryokikanCodeTo);
     }
 
@@ -175,7 +194,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiCodeFrom(TextBoxCode txtSearchShujiiCodeFrom) {
+    public void  setTxtSearchShujiiCodeFrom(TextBoxCode txtSearchShujiiCodeFrom) {
         this.getShujiiSearch().setTxtSearchShujiiCodeFrom(txtSearchShujiiCodeFrom);
     }
 
@@ -185,7 +204,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiCodeTo(TextBoxCode txtSearchShujiiCodeTo) {
+    public void  setTxtSearchShujiiCodeTo(TextBoxCode txtSearchShujiiCodeTo) {
         this.getShujiiSearch().setTxtSearchShujiiCodeTo(txtSearchShujiiCodeTo);
     }
 
@@ -195,7 +214,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
+    public void  setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanMeisho(txtSearchShujiiIryokikanMeisho);
     }
 
@@ -205,7 +224,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+    public void  setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
         this.getShujiiSearch().setDdlKikanMeisho(ddlKikanMeisho);
     }
 
@@ -215,7 +234,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
+    public void  setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanKanaMeisho(txtSearchShujiiIryokikanKanaMeisho);
     }
 
@@ -225,7 +244,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+    public void  setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
         this.getShujiiSearch().setDdlKikanKanaMeisho(ddlKikanKanaMeisho);
     }
 
@@ -235,7 +254,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiShimei(TextBox txtSearchShujiiShimei) {
+    public void  setTxtSearchShujiiShimei(TextBox txtSearchShujiiShimei) {
         this.getShujiiSearch().setTxtSearchShujiiShimei(txtSearchShujiiShimei);
     }
 
@@ -245,7 +264,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlShujiiMeisho(DropDownList ddlShujiiMeisho) {
+    public void  setDdlShujiiMeisho(DropDownList ddlShujiiMeisho) {
         this.getShujiiSearch().setDdlShujiiMeisho(ddlShujiiMeisho);
     }
 
@@ -255,7 +274,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiKanaShimei(TextBoxKana txtSearchShujiiKanaShimei) {
+    public void  setTxtSearchShujiiKanaShimei(TextBoxKana txtSearchShujiiKanaShimei) {
         this.getShujiiSearch().setTxtSearchShujiiKanaShimei(txtSearchShujiiKanaShimei);
     }
 
@@ -265,7 +284,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlShujiiKanaMeisho(DropDownList ddlShujiiKanaMeisho) {
+    public void  setDdlShujiiKanaMeisho(DropDownList ddlShujiiKanaMeisho) {
         this.getShujiiSearch().setDdlShujiiKanaMeisho(ddlShujiiKanaMeisho);
     }
 
@@ -275,7 +294,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
+    public void  setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
         this.getShujiiSearch().setRadSearchJokyoFlag(radSearchJokyoFlag);
     }
 
@@ -285,7 +304,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.getShujiiSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
@@ -295,7 +314,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSearchShujii(Button btnSearchShujii) {
+    public void  setBtnSearchShujii(Button btnSearchShujii) {
         this.getShujiiSearch().setBtnSearchShujii(btnSearchShujii);
     }
 
@@ -305,7 +324,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
+    public void  setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.getShujiiSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
     }
 
@@ -320,7 +339,7 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgShujiiIchiran(DataGrid<dgShujiiIchiran_Row> dgShujiiIchiran) {
+    public void  setDgShujiiIchiran(DataGrid<dgShujiiIchiran_Row> dgShujiiIchiran) {
         this.getShujiiIchiran().getPanelShujiiIchiranBatchParameter().setDgShujiiIchiran(dgShujiiIchiran);
     }
 
