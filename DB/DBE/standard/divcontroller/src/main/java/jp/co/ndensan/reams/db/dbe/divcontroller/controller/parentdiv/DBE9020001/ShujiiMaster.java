@@ -88,9 +88,9 @@ public class ShujiiMaster {
         getHandler(div).clearKensakuJoken();
 
         RString 医療機関登録から主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
-        LasdecCode 医療機関登録から市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
-        
+
         if (医療機関登録から主治医医療機関コード != null && !医療機関登録から主治医医療機関コード.isEmpty()) {
+            LasdecCode 医療機関登録から市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
             ShujiiMasterMapperParameter parameter = ShujiiMasterMapperParameter.createSelectByKeyParam(
             医療機関登録から市町村コード,
             true,
@@ -284,9 +284,9 @@ public class ShujiiMaster {
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
 
         RString 医療機関登録から主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
-        RString 医療機関登録から市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
-        
-        if (!RString.isNullOrEmpty(医療機関登録から主治医医療機関コード) && !RString.isNullOrEmpty(医療機関登録から市町村コード) ) {
+
+        if (!RString.isNullOrEmpty(医療機関登録から主治医医療機関コード)) {
+            RString 医療機関登録から市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
             div.getShujiiJohoInput().getTxtShichoson().setValue(医療機関登録から市町村コード);
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(医療機関登録から主治医医療機関コード);
             onBlur_txtShichoson(div);
