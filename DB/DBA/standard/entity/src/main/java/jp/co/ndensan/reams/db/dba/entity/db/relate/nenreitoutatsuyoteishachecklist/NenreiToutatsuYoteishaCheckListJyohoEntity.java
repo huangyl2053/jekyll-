@@ -27,5 +27,9 @@ public class NenreiToutatsuYoteishaCheckListJyohoEntity {
     private boolean 連番付加フラグ;
     private boolean 日付編集フラグ;
     private List<NenreiToutatsuYoteishaCheckListEntity> 年齢到達予定者チェックリスト;
+    private RString 抽出期間From;
+    private RString 抽出期間To;
+    private RString 出力対象;
+    private RString 住民種別;
 
 }

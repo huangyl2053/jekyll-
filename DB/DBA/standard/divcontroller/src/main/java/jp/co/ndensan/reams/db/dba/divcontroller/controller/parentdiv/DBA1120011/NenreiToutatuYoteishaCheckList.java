@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck.Nenr
 import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListBatchParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1120011.NenreiToutatuYoteishaCheckListDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1120011.NenreiToutatuYoteishaCheckListValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist.NenreiToutatuYoteishaCheckListManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -49,9 +51,8 @@ public class NenreiToutatuYoteishaCheckList {
             requestDiv.getTxtZenkaiRange().setToValue(new RDate(
                     shoriDateKanri.getTaishoShuryoYMD().wareki().toDateString().toString()));
             requestDiv.getTxtKonkaiRange().setFromValue(new RDate(
-                    shoriDateKanri.getTaishoKaishiYMD().plusDay(1).wareki().toDateString().toString()));
-            requestDiv.getTxtKonkaiRange().setToValue(new RDate(
-                    RDate.getNowDate().wareki().toDateString().toString()));
+                    shoriDateKanri.getTaishoShuryoYMD().plusDay(1).wareki().toDateString().toString()));
+            requestDiv.getTxtKonkaiRange().clearToValue();
         }
         requestDiv.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200001.getReportId());
         // TODO QA323
@@ -62,6 +63,20 @@ public class NenreiToutatuYoteishaCheckList {
         return responseData;
     }
 
+    /**
+     * 年齢到達予定者チェックリスト実施前のCheck。<br/>
+     *
+     * @param requestDiv NenreiToutatuYoteishaCheckListDiv
+     * @return ResponseData<INenreiToutatsuYoteishaCheckListBatchParameter>
+     */
+    public ResponseData<NenreiToutatuYoteishaCheckListDiv> onClick_btnCheck(NenreiToutatuYoteishaCheckListDiv requestDiv){
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(getValidationHandler(requestDiv).checkShuryoToValueInput());
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
+        }
+        return ResponseData.of(requestDiv).respond();
+    }
     /**
      * 年齢到達予定者チェックリストの実施button。<br/>
      *
@@ -84,5 +99,9 @@ public class NenreiToutatuYoteishaCheckList {
                         出力対象, 住民種別, 今回開始日, 今回終了日, 編集方法, 出力順ID);
         return ResponseData.of(parameter).respond();
 
+    }
+    
+    private NenreiToutatuYoteishaCheckListValidationHandler getValidationHandler(NenreiToutatuYoteishaCheckListDiv div) {
+        return new NenreiToutatuYoteishaCheckListValidationHandler(div);
     }
 }

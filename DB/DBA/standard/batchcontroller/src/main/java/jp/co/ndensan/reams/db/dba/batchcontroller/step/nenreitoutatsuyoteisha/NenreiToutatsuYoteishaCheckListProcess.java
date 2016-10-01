@@ -51,9 +51,13 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -145,7 +149,16 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         nenreiCheckListJyohoEntity.set項目名付加フラグ(processParameter.isKoumokumeiflg());
         nenreiCheckListJyohoEntity.set連番付加フラグ(processParameter.isRenbanfukaflg());
         nenreiCheckListJyohoEntity.set日付編集フラグ(processParameter.isNichihensyuflg());
-
+        nenreiCheckListJyohoEntity.set抽出期間From(processParameter.getKonkaikaishi().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        nenreiCheckListJyohoEntity.set抽出期間To(processParameter.getKonkaisyuryo().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        nenreiCheckListJyohoEntity.set住民種別(processParameter.getJuminShubetsu());
+        nenreiCheckListJyohoEntity.set出力対象(processParameter.getSyutsuryokutaisyo());
     }
 
     @Override
