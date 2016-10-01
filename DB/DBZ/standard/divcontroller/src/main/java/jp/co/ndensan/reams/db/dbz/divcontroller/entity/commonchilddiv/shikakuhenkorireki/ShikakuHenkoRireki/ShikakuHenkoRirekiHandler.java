@@ -597,7 +597,7 @@ public class ShikakuHenkoRirekiHandler {
         return false;
     }
 
-    private class HenkoRirekiComparator implements Comparator<dgHenko_Row> {
+    private static class HenkoRirekiComparator implements Comparator<dgHenko_Row> {
 
         @Override
         public int compare(dgHenko_Row o1, dgHenko_Row o2) {

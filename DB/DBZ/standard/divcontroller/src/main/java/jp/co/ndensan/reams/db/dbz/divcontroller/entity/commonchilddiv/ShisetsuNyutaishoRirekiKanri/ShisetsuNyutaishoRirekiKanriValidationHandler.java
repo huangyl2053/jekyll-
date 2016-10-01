@@ -47,16 +47,16 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
-        if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
-            if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
-                    isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        RRVMessages.前後関係逆転,
-                        div.getShisetsuNyutaishoInput().getTxtTaishoDate(),
-                        div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
-            }
+        if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()
+            && div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
+            && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
+            && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
+                isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    RRVMessages.前後関係逆転,
+                    div.getShisetsuNyutaishoInput().getTxtTaishoDate(),
+                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+
         }
 
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
@@ -153,11 +153,10 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
                 }
             }
 
-            if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
-                if (rowId != 0) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.退所日,
-                            div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
-                }
+            if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty() && rowId != 0) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.退所日,
+                        div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
+
             }
         }
         return validPairs;
