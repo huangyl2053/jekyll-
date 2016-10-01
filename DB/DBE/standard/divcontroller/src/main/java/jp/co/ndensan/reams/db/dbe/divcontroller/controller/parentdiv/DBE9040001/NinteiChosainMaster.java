@@ -117,6 +117,9 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onClick_btnSearchShujii(NinteiChosainMasterDiv div) {
 
         searchChosainInfo(div);
+        if (div.getChosainIchiran().getDgChosainIchiran().getDataSource().isEmpty()) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validateBtnReSearchNoResult()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -219,10 +222,6 @@ public class NinteiChosainMaster {
         List<jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster> 調査員情報List
                 = ninteiChosainMasterFinder.getChosainJohoIchiranList(
                         parameter).records();
-        if (調査員情報List.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.認定調査員マスタ検索結果, Models.create(new ArrayList<ChosainJoho>()));
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
         div.getChosainSearch().setDisabled(true);
         div.getChosainIchiran().setDisabled(false);
         getHandler(div).setChosainIchiran(調査員情報List);

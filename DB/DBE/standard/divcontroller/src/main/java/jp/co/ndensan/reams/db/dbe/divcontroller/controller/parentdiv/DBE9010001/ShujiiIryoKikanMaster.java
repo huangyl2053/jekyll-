@@ -103,6 +103,9 @@ public class ShujiiIryoKikanMaster {
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnSearchKoseiShujiiIryoKikan(
             ShujiiIryoKikanMasterDiv div) {
         searchKoseiShujiiIryoKikanInfo(div);
+        if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty()) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validateBtnReSearchNoResult()).respond();
+        }
         div.getShujiiIchiran().setDisabled(false);
         return ResponseData.of(div).respond();
     }
@@ -144,11 +147,6 @@ public class ShujiiIryoKikanMaster {
                 );
         List<jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報List
                 = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter).records();
-        if (主治医医療機関情報List.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.主治医医療機関マスタ検索結果, Models.create(
-                    new ArrayList<ShujiiIryoKikanJoho>()));
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
         getHandler(div).setShujiKikanJohoIchiran(主治医医療機関情報List);
         List<ShujiiIryoKikanJoho> 主治医医療機関マスタList
                 = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoList(parameter).records();
