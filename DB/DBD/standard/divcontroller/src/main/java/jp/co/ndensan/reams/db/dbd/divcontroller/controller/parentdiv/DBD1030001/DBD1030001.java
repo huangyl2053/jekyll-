@@ -276,7 +276,11 @@ public class DBD1030001 {
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().申請日の未入力チェック(pairs, div);
+            if (div.getTxtShinseiYMD().getValue().isEmpty()) {
+                getValidationHandler().申請日の未入力チェック(pairs, div);
+            } else {
+                pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+            }
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
