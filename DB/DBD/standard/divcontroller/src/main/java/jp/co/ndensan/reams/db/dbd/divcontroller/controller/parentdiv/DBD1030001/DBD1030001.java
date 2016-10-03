@@ -270,20 +270,20 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnShinseiKakutei(DBD1030001Div div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (div.getTxtShinseiYMD().getValue().isEmpty()) {
+            getValidationHandler().申請日の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+        }
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            if (div.getTxtShinseiYMD().getValue().isEmpty()) {
-                getValidationHandler().申請日の未入力チェック(pairs, div);
-            } else {
-                pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
-            }
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
             ShakaifukuRiyoshaFutanKeigenToJotai 編集情報
                     = ViewStateHolder.get(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
             Integer 追加履歴番号 = ViewStateHolder.get(DBD1030001ViewStateKey.追加履歴番号, Integer.class);

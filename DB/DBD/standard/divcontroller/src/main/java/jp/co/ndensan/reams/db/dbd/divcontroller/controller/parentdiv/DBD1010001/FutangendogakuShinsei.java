@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakuninte
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -264,6 +265,13 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnShinseiKakutei(FutangendogakuShinseiDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (!div.getTxtShinseiYMD().getValue().isEmpty()) {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+        }
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
