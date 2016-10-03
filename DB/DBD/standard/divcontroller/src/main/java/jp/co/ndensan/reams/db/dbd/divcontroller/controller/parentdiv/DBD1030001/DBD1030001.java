@@ -333,25 +333,7 @@ public class DBD1030001 {
             }
             if (KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
                 validationHandler.決定区分の未入力チェック(pairs, div);
-                if (div.getTxtKetteiYMD().getValue().isEmpty()) {
-                    validationHandler.決定日の未入力チェック(pairs, div);
-                } else {
-                    pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtKetteiYMD()));
-                }
-                if (div.getTxtTekiyoYMD().getValue().isEmpty()) {
-                    validationHandler.適用日の未入力チェック(pairs, div);
-                } else {
-                    pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtTekiyoYMD()));
-                }
-                if (div.getTxtYukoKigenYMD().getValue().isEmpty()) {
-                    validationHandler.有効期限の未入力チェック(pairs, div);
-                } else {
-                    pairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getTxtYukoKigenYMD()));
-                }
-                validationHandler.軽減事由の未入力チェック(pairs, div);
-                validationHandler.軽減率_分子の未入力チェック(pairs, div);
-                validationHandler.軽減率_分母の未入力チェック(pairs, div);
-                validationHandler.確認番号の未入力チェック(pairs, div);
+                入力チェック(div, validationHandler, pairs);
             }
             if (pairs.existsError()) {
                 ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -382,6 +364,33 @@ public class DBD1030001 {
             return ResponseData.of(div).setState(一覧);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「承認情報を確定する」ボタン押下時に入力チェックを行うbr/>
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     */
+    private void 入力チェック(DBD1030001Div div, DBD1030001ValidationHandler validationHandler, ValidationMessageControlPairs pairs) {
+        if (div.getTxtKetteiYMD().getValue().isEmpty()) {
+            validationHandler.決定日の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtKetteiYMD()));
+        }
+        if (div.getTxtTekiyoYMD().getValue().isEmpty()) {
+            validationHandler.適用日の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtTekiyoYMD()));
+        }
+        if (div.getTxtYukoKigenYMD().getValue().isEmpty()) {
+            validationHandler.有効期限の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getTxtYukoKigenYMD()));
+        }
+        validationHandler.軽減事由の未入力チェック(pairs, div);
+        validationHandler.軽減率_分子の未入力チェック(pairs, div);
+        validationHandler.軽減率_分母の未入力チェック(pairs, div);
+        validationHandler.確認番号の未入力チェック(pairs, div);
     }
 
     private ShakaifukuRiyoshaFutanKeigenToJotai get最初情報(ShakaifukuRiyoshaFutanKeigenToJotai 編集情報) {

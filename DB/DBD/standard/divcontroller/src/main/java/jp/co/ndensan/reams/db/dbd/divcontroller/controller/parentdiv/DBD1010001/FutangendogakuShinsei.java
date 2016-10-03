@@ -89,18 +89,18 @@ public class FutangendogakuShinsei {
 
         ArrayList<FutanGendogakuNinteiViewState> resultList = getHandler(div).onLoad(識別コード, 被保険者番号, 申請一覧情報ArrayList);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, resultList);
-        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
-        for (dgShinseiList_Row row : rows) {
-            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
-                div.getShinseiList().getBtnAddShinsei().setDisabled(true);
-            } else {
-                row.setModifyButtonState(DataGridButtonState.Disabled);
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-                row.setSelectable(Boolean.FALSE);
-            }
-        }
         div.getShinseiDetail().setDisabled(true);
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+            for (dgShinseiList_Row row : rows) {
+                if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                    div.getShinseiList().getBtnAddShinsei().setDisabled(true);
+                } else {
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
             return ResponseData.of(div).respond();
         } else {
             return ResponseData.of(div).rootTitle(承認タイトル).respond();
