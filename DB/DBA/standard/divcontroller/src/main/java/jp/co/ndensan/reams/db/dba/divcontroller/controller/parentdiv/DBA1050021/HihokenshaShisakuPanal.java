@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochito
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ua.uax.business.core.IAtenaShokaiSimple;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -76,24 +77,17 @@ public class HihokenshaShisakuPanal {
         HihokenshaNo 被保番号 = 対象者キー.get被保険者番号();
         ShikibetsuCode 識別コード = 対象者キー.get識別コード();
 
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            div.setReadOnly(true);
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(new ValidationMessageControlPair(HihokenshaShisakuPanalErrorMessage.排他_他のユーザが使用中));
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
-
-        //旧初期化方法
-        ShikakuRirekiJoho 資格得喪情報
-                = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
-        getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
-
-        //新初期化方法
+        //この画面は、被保険者照会（照会画面なのでロック不要）と、資格異動訂正（前画面でノック済みのはずなので再度ロックは不要）から呼ばれるため、ロックを行わない。
+        //また、プロファイラで確認したところ、ここのロックで4秒ほどかかっていたため、レスポンスの観点からも無い方が良い。
+//        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+//            div.setReadOnly(true);
+//            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+//            validationMessages.add(new ValidationMessageControlPair(HihokenshaShisakuPanalErrorMessage.排他_他のユーザが使用中));
+//            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+//        }
         List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
         FlexibleDate shikakuShutokuDate = ViewStateHolder.get(ViewStateKeys.対象者_資格取得日, FlexibleDate.class);
-        System.out.println(hihoDaicho.size());
-        div.getCcdJutokuDialogButton().initialize(ItemList.of(hihoDaicho), shikakuShutokuDate, JushochiTokureiState.照会);
-        div.getCcdShikakuHenkoDialogButton().initialize(ItemList.of(hihoDaicho), 識別コード, shikakuShutokuDate, ShikakuHenkoState.照会);
+        getHandler(div).initialize(初期_状態, hihoDaicho, 識別コード, 被保番号, shikakuShutokuDate);
 
         if (状態_追加.equals(初期_状態)) {
             return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
@@ -274,7 +268,6 @@ public class HihokenshaShisakuPanal {
      * @return ResponseData<HihokenshaShisakuPanalDiv> 被保険者資格詳細異動Div
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onClick_btnBack(HihokenshaShisakuPanalDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
     }
 
