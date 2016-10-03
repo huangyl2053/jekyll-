@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
@@ -30,9 +28,13 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+//CHECKSTYLE IGNORE ImportControl FOR NEXT 2 LINES
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 
 /**
  * 画面サービス登録のHandlerクラスです。
@@ -126,169 +128,173 @@ public class JigyoshaServiceHandler {
      * @param div JigyoshaServiceDiv
      */
     public void set追加情報(JigyoshaServiceDiv div) {
-        DbT7063KaigoJigyoshaShiteiServiceEntity beforeDiv = new DbT7063KaigoJigyoshaShiteiServiceEntity();
-        beforeDiv.setJigyoshaNo(new JigyoshaNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().getValue()));
-        beforeDiv.setServiceShuruiCode(new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey().toString()));
-        beforeDiv.setYukoKaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
-        beforeDiv.setYukoShuryoYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue());
-        if (!div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().isEmpty()) {
-            beforeDiv.setKihonJohoJunkyoKubun(div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().get(0));
-        } else {
-            beforeDiv.setKihonJohoJunkyoKubun(RString.EMPTY);
-        }
-        beforeDiv.setJigyoKaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD().getValue());
-        beforeDiv.setJigyoKyushiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD().getValue());
-        beforeDiv.setJigyoSaikaiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD().getValue());
-        beforeDiv.setJigyoHaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoHaishiYMD().getValue());
-        beforeDiv.setJigyoshaName(new AtenaMeisho(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaName().getValue()));
-        beforeDiv.setJigyoshaNameKana(new AtenaKanaMeisho(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNameKana().getValue()));
-        beforeDiv.setJigyoshaYubinNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaYubinNo().getValue());
-        beforeDiv.setJigyoshaAddress(new AtenaJusho(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().getValue()));
-        beforeDiv.setJigyoshaAddressKana(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddressKana().getValue());
-        beforeDiv.setJigyoshaTelNo(new TelNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaTelNo().getValue()));
-        beforeDiv.setJigyoshaFaxNo(new TelNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaFaxNo().getValue()));
-        beforeDiv.setTorokuHokenshaNo(div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue());
-        beforeDiv.setJuryoininUmu(new Code(div.getJigyoshaServiceKihon().getRadJuryoininUmu().getSelectedKey()));
-        beforeDiv.setTorokuKaishiYMD(div.getJigyoshaServiceKihon().getTxtTorokuKaishiYMD().getValue());
-        beforeDiv.setTorokuShuryoYMD(div.getJigyoshaServiceKihon().getTxtTorokuShuryoYMD().getValue());
-        beforeDiv.setKanrishaName(new AtenaMeisho(div.getJigyoshaServiceKihon().getTxtKanrishaName().getValue()));
-        beforeDiv.setKanrishaNameKana(new AtenaKanaMeisho(div.getJigyoshaServiceKihon().getTxtKanrishaNameKana().getValue()));
-        beforeDiv.setKanrishaYubinNo(div.getJigyoshaServiceKihon().getTxtKanrishaYubinNo().getValue());
-        beforeDiv.setKanrishaAddress(new AtenaJusho(div.getJigyoshaServiceKihon().getTxtKanrishaAddress().getValue()));
-        beforeDiv.setKanrishaAddressKana(div.getJigyoshaServiceKihon().getTxtKanrishaAddressKana().getValue());
-        beforeDiv.setShakaiFukushihoujinKeigenjigyouJisshi_umu(new Code(div.getJigyoshaServiceKihon().
-                getRadShakaiFukushihoujinKeigenjigyouJisshiUumu().getSelectedKey()));
-        beforeDiv.setSeikatsuhogohouShitei_umu(new Code(div.getJigyoshaServiceKihon().getRadSeikatsuhogohouShiteiUmu().getSelectedKey()));
-        beforeDiv.setShisetsunadoKubun(new Code(div.getJigyoshaServiceShosai().getDdlShisetsunadoKubun().getSelectedKey()));
-        beforeDiv.setJininHaichiKubun(new Code(div.getJigyoshaServiceShosai().getDdlJininHaichiKubun().getSelectedKey()));
-        beforeDiv.setTokubetsuChiikiKasan_umu(new Code(div.getJigyoshaServiceShosai().getRadTokubetsuChiikiKasanUmu().getSelectedKey()));
-        beforeDiv.setKinkyujiHomonkaigoKasan_umu(new Code(div.getJigyoshaServiceShosai().getRadKinkyujiHomonkaigoKasanUmu().getSelectedKey()));
-        beforeDiv.setTokubetsuKanriTaisei(new Code(div.getJigyoshaServiceShosai().getRadTokubetsuKanriTaisei().getSelectedKey()));
-        beforeDiv.setKinoKunrenShidoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadKinoKunrenShidoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setShokujiTeikyoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadShokujiTeikyoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setNyuyokuKaijoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadNyuyokuKaijoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setTokubetsuNyuyokuKaijoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadTokubetsuNyuyokuKaijoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setJoukinsenjuIshiHaichi_umu(new Code(div.getJigyoshaServiceShosai().getRadJoukinsenjuIshiHaichiUmu().getSelectedKey()));
-        beforeDiv.setIshiHaichiKijun(new Code(div.getJigyoshaServiceShosai().getRadIshiHaichiKijun().getSelectedKey()));
-        beforeDiv.setSeisinkaIshiTeikitekiRyouyousidou_umu(new Code(div.getJigyoshaServiceShosai().getRadSeisinkaIshiTeikitekiRyouyousidouUmu().getSelectedKey()));
-        beforeDiv.setYakanKinmuJokenKijun(new Code(div.getJigyoshaServiceShosai().getDdlYakanKinmuJokenKijun().getSelectedKey()));
-        beforeDiv.setNinchishouSenmontou_umu(new Code(div.getJigyoshaServiceShosai().getRadNinchishouSenmontouUmu().getSelectedKey()));
-        beforeDiv.setShokujiTeikyoJokyo(new Code(div.getJigyoshaServiceShosai().getDdlShokujiTeikyoJokyo().getSelectedKey()));
-        beforeDiv.setSougeiTaisei(new Code(div.getJigyoshaServiceShosai().getRadSougeiTaisei().getSelectedKey()));
-        beforeDiv.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(new Code(div.getJigyoshaServiceShosai().getRadSogoRehaShisetsuUmu().getSelectedKey()));
-        beforeDiv.setRehaTeikyoTaisei_RigakuRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyohoIIUmu().getSelectedKey()));
-        beforeDiv.setRehaTeikyoTaisei_RigakuRyohoIII_umu(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyohoIIIUmu().getSelectedKey()));
-        beforeDiv.setRehaTeikyoTaisei_SagyoRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadSagyoRyohoIIUmu().getSelectedKey()));
-        beforeDiv.setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadSeisinkaSagyouRyohoUmu().getSelectedKey()));
-        beforeDiv.setRehaTeikyoTaisei_Sonota_umu(new Code(div.getJigyoshaServiceShosai().getRadSonotaUmu().getSelectedKey()));
-        beforeDiv.setRehabilitationKasanJokyo(new Code(div.getJigyoshaServiceShosai().getRadRehabilitationKasanJokyoUmu().getSelectedKey()));
-        beforeDiv.setRyoyoKankyoKijun(new Code(div.getJigyoshaServiceShosai().getDdlRyoyoKankyoKijun().getSelectedKey()));
-        beforeDiv.setIshiKetuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadIshiKetuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setKangoShokuinKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKangoShokuinKetsuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setRigakuRyouhousiKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyouhousiKetsuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setSagyouRyouhousiKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadSagyouRyouhousiKetsuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setKaigoShokuinKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKaigoShokuinKetsuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKaigoSienSenmoninShokuinKetsuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setKaigoJujishaKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKaigoJujishaKetsuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setKansenTaisakuSidoKanri_umu(new Code(div.getJigyoshaServiceShosai().getRadKansenTaisakuSidoKanriUmu().getSelectedKey()));
-        beforeDiv.setJushoHifuKaiyouShidoKanri_umu(new Code(div.getJigyoshaServiceShosai().getRadJushoHifuKaiyouShidoKanriUmu().getSelectedKey()));
-        beforeDiv.setYakuzaiKaniriShido_umu(new Code(div.getJigyoshaServiceShosai().getRadYakuzaiKaniriShidoUmu().getSelectedKey()));
-        beforeDiv.setShogaishaSeikatsuShienTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadShogaishaSeikatsuShienTaiseiUmu().getSelectedKey()));
-        beforeDiv.setChiikiKubunCode(new Code(div.getJigyoshaServiceShosai().getDdlChiikiKubun().getSelectedKey()));
-        beforeDiv.setJikanEnchoServiceTaisei(new Code(div.getJigyoshaServiceShosai().getRadJikanEnchoServiceTaisei().getSelectedKey()));
-        beforeDiv.setKobetsuRehabilitationTeikyoTaisei(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRehabilitationTeikyoTaisei().getSelectedKey()));
-        beforeDiv.setKyojuhiTaisaku(new Code(div.getJigyoshaServiceShosai().getRadKyojuhiTaisaku().getSelectedKey()));
-        beforeDiv.setYakanCare_umu(new Code(div.getJigyoshaServiceShosai().getRadYakanCareUmu().getSelectedKey()));
-        beforeDiv.setRehabilitationKinoKyoka_umu(new Code(div.getJigyoshaServiceShosai().getRadRehabilitationKinoKyokaUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSogoRehaShisetsuUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRigakuRyohoIIUmu1().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRigakuRyohoIIIUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSagyoRyohoIIUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuGengoChokakuRyohoIUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuGengoChokakuRyohoIIUmu().getSelectedKey()));
-        beforeDiv.setGengoChokakushiKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadGengoChokakushiKetsuinGenzanJokyoUmu().getSelectedKey()));
-        beforeDiv.setEiyouKanriHyoka(new Code(div.getJigyoshaServiceShosai().getDdlEiyouKanriHyoka().getSelectedKey()));
-        beforeDiv.setTokuteijigyoushoKasan_HomonKaigo_umu(new Code(div.getJigyoshaServiceShosai().getRadTokuteijigyoushoKasanHomonKaigoUmu().getSelectedKey()));
-        beforeDiv.setJakunenseiNinchishoCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadJakunenseiNinchishoCareTaiseiUmu().getSelectedKey()));
-        beforeDiv.setUndokiKinoKojoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadUndokiKinoKojoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setEiyoManagement_KaizenTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadEiyoManagementKaizenTaiseiUmu().getSelectedKey()));
-        beforeDiv.setKokuKinoKojoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadKokuKinoKojoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setJigyoshoHyokaKasan_Moshide_umu(new Code(div.getJigyoshaServiceShosai().getRadJigyoshoHyokaKasanMoshideUmu().getSelectedKey()));
-        beforeDiv.setJigyoshoHyokaKasan_Kettei_umu(new Code(div.getJigyoshaServiceShosai().getRadJigyoshoHyokaKasanKetteiUmu().getSelectedKey()));
-        beforeDiv.setKinkyuUkeireTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadKinkyuUkeireTaiseiUmu().getSelectedKey()));
-        beforeDiv.setYakanKangoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadYakanKangoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setTokuteijigyoshoKasan_Kyotakukaigoshien_umu(new Code(div.getJigyoshaServiceShosai().getDdlTokuteijigyoshoKasanKyotakukaigoshienUmu().getSelectedKey()));
-        beforeDiv.setKaigoShienSemmoninSenjuJokinshaNinsu(div.getJigyoshaServiceShosai().getTxtKaigoShienSemmoninSenjuJokinshaNinsu().getValue()
-                                                          == null ? 0 : div.getJigyoshaServiceShosai().getTxtKaigoShienSemmoninSenjuJokinshaNinsu().getValue().intValue());
-        beforeDiv.setKaigoSienSemmoninSenjuHijokinshaNinsu(div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninSenjuHijokinshaNinsu().getValue()
-                                                           == null ? 0 : div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninSenjuHijokinshaNinsu().getValue().intValue());
-        beforeDiv.setKaigoSienSemmoninKemmuJokinshaNinsu(div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninKemmuJokinshaNinsu().getValue()
-                                                         == null ? 0 : div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninKemmuJokinshaNinsu().getValue().intValue());
-        beforeDiv.setKaigoSienSemmoninKemmuHijokinshaNinsu(div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninKemmuHijokinshaNinsu().getValue()
-                                                           == null ? 0 : div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninKemmuHijokinshaNinsu().getValue().intValue());
-        beforeDiv.setHomonkaigoServiceTeikyoSekininshaNinsu(div.getJigyoshaServiceShosai().getTxtHomonkaigoServiceTeikyoSekininshaNinsu().getValue()
-                                                            == null ? 0 : div.getJigyoshaServiceShosai().getTxtHomonkaigoServiceTeikyoSekininshaNinsu().getValue().intValue());
-        beforeDiv.setHomonkaigoSenjuJokinshaNinsu(div.getJigyoshaServiceShosai().getTxtHomonkaigoSenjuJokinshaNinsu().getValue()
-                                                  == null ? 0 : div.getJigyoshaServiceShosai().getTxtHomonkaigoSenjuJokinshaNinsu().getValue().intValue());
-        beforeDiv.setHomonkaigoSenjuHijokinshaNinsu(div.getJigyoshaServiceShosai().getTxtHomonkaigoSenjuHijokinshaNinsu().getValue()
-                                                    == null ? 0 : div.getJigyoshaServiceShosai().getTxtHomonkaigoSenjuHijokinshaNinsu().getValue().intValue());
-        beforeDiv.setHomonkaigoKemmuJokinshaNinsu(div.getJigyoshaServiceShosai().getTxtHomonkaigoKemmuJokinshaNinsu().getValue()
-                                                  == null ? 0 : div.getJigyoshaServiceShosai().getTxtHomonkaigoKemmuJokinshaNinsu().getValue().intValue());
-        beforeDiv.setHomonkaigoKemmuHijokinshaNinsu(div.getJigyoshaServiceShosai().getTxtHomonkaigoKemmuHijokinshaNinsu().getValue()
-                                                    == null ? 0 : div.getJigyoshaServiceShosai().getTxtHomonkaigoKemmuHijokinshaNinsu().getValue().intValue());
-        beforeDiv.setHomonkaigoJokinKanzangoNinsu(div.getJigyoshaServiceShosai().getTxtHomonkaigoJokinKanzangoNinsu().getValue()
-                                                  == null ? 0 : div.getJigyoshaServiceShosai().getTxtHomonkaigoJokinKanzangoNinsu().getValue().intValue());
-        beforeDiv.setRiyoTeiinNinsu(div.getJigyoshaServiceShosai().getTxtRiyoTeiinNinsu().getValue()
-                                    == null ? 0 : div.getJigyoshaServiceShosai().getTxtRiyoTeiinNinsu().getValue().intValue());
-        beforeDiv.setShiteiYukoKaishiYMD(div.getJigyoshaServiceShosai().getTxtShiteiYukoKaishiYMD().getValue());
-        beforeDiv.setShiteiYukoShuryoYMD(div.getJigyoshaServiceShosai().getTxtShiteiYukoShuryoYMD().getValue());
-        beforeDiv.setShiteiKoshinShinseichuKubun(new Code(div.getJigyoshaServiceShosai().getRadShiteiKoshinShinseichuKubun().getSelectedKey()));
-        beforeDiv.setKoryokuTeishiKaishiYMD(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiKaishiYMD().getValue());
-        beforeDiv.setKoryokuTeishiShuryoYMD(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiShuryoYMD().getValue());
-        beforeDiv.setDaikiboJigyoshaGaito_umu(new Code(div.getJigyoshaServiceShosai().getRadDaikiboJigyoshaGaitoUmu().getSelectedKey()));
-        beforeDiv.setJunUnitCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadJunUnitCareTaiseiUmu().getSelectedKey()));
-        beforeDiv.setJudokaTaioTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadJudokaTaioTaiseiUmu().getSelectedKey()));
-        beforeDiv.setIryoRenkeiTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadIryoRenkeiTaiseiUmu().getSelectedKey()));
-        beforeDiv.setUnitCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadUnitCareTaiseiUmu().getSelectedKey()));
-        beforeDiv.setZaitaku_nyushoSogoRiyoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadZaitakuNyushoSogoRiyoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setTerminalCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadTerminalCareTaiseiUmu().getSelectedKey()));
-        beforeDiv.setShintaiKosokuHaishiTorikumi_umu(new Code(div.getJigyoshaServiceShosai().getRadShintaiKosokuHaishiTorikumiUmu().getSelectedKey()));
-        beforeDiv.setShokiboKyotenShugoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadShokiboKyotenShugoTaiseiUmu().getSelectedKey()));
-        beforeDiv.setNinchishoCareKasan_umu(new Code(div.getJigyoshaServiceShosai().getRadNinchishoCareKasanUmu().getSelectedKey()));
-        beforeDiv.setKobetsuKinoKunrenTaisei_umu(new Code(div.getJigyoshaServiceShosai().getDdlKobetsuKinoKunrenTaiseiUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRigakuRyohoIUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyohoIIUmu2().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSagyoRyohoUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuGengoChokakuRyohoUmu().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_Sonota_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSonotaUmu().getSelectedKey()));
-        beforeDiv.setSetsubiKijun(new Code(div.getJigyoshaServiceShosai().getRadSetsubiKijun().getSelectedKey()));
-        beforeDiv.setRyoyoTaiseiIjiTokubetsuKasan(new Code(div.getJigyoshaServiceShosai().getRadRyoyoTaiseiIjiTokubetsuKasan().getSelectedKey()));
-        beforeDiv.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRehaShidoKanriUmu().getSelectedKey()));
-        beforeDiv.setSankyuHelperTaisei(new Code(div.getJigyoshaServiceShosai().getRadSankyuHelperTaisei().getSelectedKey()));
-        beforeDiv.setChuSankanChiikiShokiboJigyoshoKasan_chiiki(new Code(div.getJigyoshaServiceShosai().getRadChuSankanChiikiShokiboJigyoshoKasanChiiki().getSelectedKey()));
-        beforeDiv.setChuSankanChiikiShokiboJigyoushoKasan_kibo(new Code(div.getJigyoshaServiceShosai().getRadChuSankanChiikiShokiboJigyoshoKasanKibo().getSelectedKey()));
-        beforeDiv.setServiceTeikyoTaiseiKyokaKasan(new Code(div.getJigyoshaServiceShosai().getDdlServiceTeikyoTaiseiKyokaKasan().getSelectedKey()));
-        beforeDiv.setNinchishoTankiShuchuRehabilitationKasan(new Code(div.getJigyoshaServiceShosai().getRadNinchishoTankiShuchuRehabilitationKasan().getSelectedKey()));
-        beforeDiv.setJakunenseiNinchishoRiyoushaUkeeireKasan(new Code(div.getJigyoshaServiceShosai().getRadKakunenseiNinchishoRiyoushaUkeeireKasan().getSelectedKey()));
-        beforeDiv.setKangoTaiseiKasan(new Code(div.getJigyoshaServiceShosai().getRadKangoTaiseiKasan().getSelectedKey()));
-        beforeDiv.setYakinShokuinHaichiKasan(new Code(div.getJigyoshaServiceShosai().getRadYakinShokuinHaichiKasan().getSelectedKey()));
-        beforeDiv.setRyoyoShokuKasan(new Code(div.getJigyoshaServiceShosai().getRadRyoyoShokuKasan().getSelectedKey()));
-        beforeDiv.setNichijoSeikatsuKeizokuShienKasan(new Code(div.getJigyoshaServiceShosai().getRadNichijoSeikatsuKeizokuShienKasan().getSelectedKey()));
-        beforeDiv.setNinchishoSemmonCareKasan(new Code(div.getJigyoshaServiceShosai().getRadNinchishoSemmonCareKasan().getSelectedKey()));
-        beforeDiv.setTwentyFourHoursTsuhoTaioKasan(new Code(div.getJigyoshaServiceShosai().getRad24JikanTsuhoTaioKasan().getSelectedKey()));
-        beforeDiv.setKangoShokuinHaichiKasan(new Code(div.getJigyoshaServiceShosai().getRadKangoShokuinHaichiKasan().getSelectedKey()));
-        beforeDiv.setYakanCareKasan(new Code(div.getJigyoshaServiceShosai().getRadYakanCareKasan().getSelectedKey()));
-        beforeDiv.setShudanCommunicationRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadShudanCommunicationRyohoUmu().getSelectedKey()));
-        beforeDiv.setServiceTeikyoTaiseiKyokaKasan_Karadokogata(new Code(div.getJigyoshaServiceShosai().getRadServiceTeikyoTaiseiKyokaKasanKaradokogata().getSelectedKey()));
-        beforeDiv.setNitchuShintaikaigoTaise_20funmiman_umu(new Code(div.getJigyoshaServiceShosai().getRadNitchuShintaikaigoTaise20funmimanUmu().getSelectedKey()));
-        beforeDiv.setServiceTeikyoSekininshaTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadServiceTeikyoSekininshaTaiseiUmu().getSelectedKey()));
-        beforeDiv.setDoitsuTatemonoKyojuRiyoshaGenzan_umu(new Code(div.getJigyoshaServiceShosai().getRadDoitsuTatemonoKyojuRiyoshaGenzanUmu().getSelectedKey()));
-        beforeDiv.setKinkyuTankiNyushoTaiseiKakuhoKasan(new Code(div.getJigyoshaServiceShosai().getRadKinkyuTankiNyushoTaiseiKakuhoKasan().getSelectedKey()));
-        beforeDiv.setZaitakuFukki_ZaitakuRyoyoShienKinoKasan(new Code(div.getJigyoshaServiceShosai().getRadZaitakuFukkiZaitakuRyoyoShienKinoKasan().getSelectedKey()));
-        beforeDiv.setSeikatuKinoKojoGroupKatsudoKasan(new Code(div.getJigyoshaServiceShosai().getRadSeikatuKinoKojoGroupKatsudoKasan().getSelectedKey()));
-        beforeDiv.setKaigoShokuinShoguKaizenKasan(new Code(div.getJigyoshaServiceShosai().getRadKaigoShokuinShoguKaizenKasan().getSelectedKey()));
+        DbT7063KaigoJigyoshaShiteiServiceEntity beforeDiv = toEntity();
         ViewStateHolder.put(ViewStateKeys.モード, beforeDiv);
+    }
 
+    /**
+     * @return DbT7063KaigoJigyoshaShiteiServiceEntity
+     */
+    public DbT7063KaigoJigyoshaShiteiServiceEntity toEntity() {
+        DbT7063KaigoJigyoshaShiteiServiceEntity entity = new DbT7063KaigoJigyoshaShiteiServiceEntity();
+        entity.setJigyoshaNo(new JigyoshaNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().getValue()));
+        entity.setServiceShuruiCode(new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey().toString()));
+        entity.setYukoKaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
+        entity.setYukoShuryoYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue());
+        entity.setKihonJohoJunkyoKubun(find基本情報準拠区分(div));
+        entity.setJigyoKaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD().getValue());
+        entity.setJigyoKyushiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD().getValue());
+        entity.setJigyoSaikaiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD().getValue());
+        entity.setJigyoHaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoHaishiYMD().getValue());
+        entity.setJigyoshaName(new AtenaMeisho(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaName().getValue()));
+        entity.setJigyoshaNameKana(new AtenaKanaMeisho(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNameKana().getValue()));
+        entity.setJigyoshaYubinNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaYubinNo().getValue());
+        entity.setJigyoshaAddress(new AtenaJusho(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().getValue()));
+        entity.setJigyoshaAddressKana(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddressKana().getValue());
+        entity.setJigyoshaTelNo(new TelNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaTelNo().getValue()));
+        entity.setJigyoshaFaxNo(new TelNo(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaFaxNo().getValue()));
+        entity.setTorokuHokenshaNo(div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue());
+        entity.setJuryoininUmu(new Code(div.getJigyoshaServiceKihon().getRadJuryoininUmu().getSelectedKey()));
+        entity.setTorokuKaishiYMD(div.getJigyoshaServiceKihon().getTxtTorokuKaishiYMD().getValue());
+        entity.setTorokuShuryoYMD(div.getJigyoshaServiceKihon().getTxtTorokuShuryoYMD().getValue());
+        entity.setKanrishaName(new AtenaMeisho(div.getJigyoshaServiceKihon().getTxtKanrishaName().getValue()));
+        entity.setKanrishaNameKana(new AtenaKanaMeisho(div.getJigyoshaServiceKihon().getTxtKanrishaNameKana().getValue()));
+        entity.setKanrishaYubinNo(div.getJigyoshaServiceKihon().getTxtKanrishaYubinNo().getValue());
+        entity.setKanrishaAddress(new AtenaJusho(div.getJigyoshaServiceKihon().getTxtKanrishaAddress().getValue()));
+        entity.setKanrishaAddressKana(div.getJigyoshaServiceKihon().getTxtKanrishaAddressKana().getValue());
+        entity.setShakaiFukushihoujinKeigenjigyouJisshi_umu(new Code(div.getJigyoshaServiceKihon().
+                getRadShakaiFukushihoujinKeigenjigyouJisshiUumu().getSelectedKey()));
+        entity.setSeikatsuhogohouShitei_umu(new Code(div.getJigyoshaServiceKihon().getRadSeikatsuhogohouShiteiUmu().getSelectedKey()));
+        entity.setShisetsunadoKubun(new Code(div.getJigyoshaServiceShosai().getDdlShisetsunadoKubun().getSelectedKey()));
+        entity.setJininHaichiKubun(new Code(div.getJigyoshaServiceShosai().getDdlJininHaichiKubun().getSelectedKey()));
+        entity.setTokubetsuChiikiKasan_umu(new Code(div.getJigyoshaServiceShosai().getRadTokubetsuChiikiKasanUmu().getSelectedKey()));
+        entity.setKinkyujiHomonkaigoKasan_umu(new Code(div.getJigyoshaServiceShosai().getRadKinkyujiHomonkaigoKasanUmu().getSelectedKey()));
+        entity.setTokubetsuKanriTaisei(new Code(div.getJigyoshaServiceShosai().getRadTokubetsuKanriTaisei().getSelectedKey()));
+        entity.setKinoKunrenShidoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadKinoKunrenShidoTaiseiUmu().getSelectedKey()));
+        entity.setShokujiTeikyoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadShokujiTeikyoTaiseiUmu().getSelectedKey()));
+        entity.setNyuyokuKaijoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadNyuyokuKaijoTaiseiUmu().getSelectedKey()));
+        entity.setTokubetsuNyuyokuKaijoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadTokubetsuNyuyokuKaijoTaiseiUmu().getSelectedKey()));
+        entity.setJoukinsenjuIshiHaichi_umu(new Code(div.getJigyoshaServiceShosai().getRadJoukinsenjuIshiHaichiUmu().getSelectedKey()));
+        entity.setIshiHaichiKijun(new Code(div.getJigyoshaServiceShosai().getRadIshiHaichiKijun().getSelectedKey()));
+        entity.setSeisinkaIshiTeikitekiRyouyousidou_umu(new Code(div.getJigyoshaServiceShosai().getRadSeisinkaIshiTeikitekiRyouyousidouUmu().getSelectedKey()));
+        entity.setYakanKinmuJokenKijun(new Code(div.getJigyoshaServiceShosai().getDdlYakanKinmuJokenKijun().getSelectedKey()));
+        entity.setNinchishouSenmontou_umu(new Code(div.getJigyoshaServiceShosai().getRadNinchishouSenmontouUmu().getSelectedKey()));
+        entity.setShokujiTeikyoJokyo(new Code(div.getJigyoshaServiceShosai().getDdlShokujiTeikyoJokyo().getSelectedKey()));
+        entity.setSougeiTaisei(new Code(div.getJigyoshaServiceShosai().getRadSougeiTaisei().getSelectedKey()));
+        entity.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(new Code(div.getJigyoshaServiceShosai().getRadSogoRehaShisetsuUmu().getSelectedKey()));
+        entity.setRehaTeikyoTaisei_RigakuRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyohoIIUmu().getSelectedKey()));
+        entity.setRehaTeikyoTaisei_RigakuRyohoIII_umu(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyohoIIIUmu().getSelectedKey()));
+        entity.setRehaTeikyoTaisei_SagyoRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadSagyoRyohoIIUmu().getSelectedKey()));
+        entity.setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadSeisinkaSagyouRyohoUmu().getSelectedKey()));
+        entity.setRehaTeikyoTaisei_Sonota_umu(new Code(div.getJigyoshaServiceShosai().getRadSonotaUmu().getSelectedKey()));
+        entity.setRehabilitationKasanJokyo(new Code(div.getJigyoshaServiceShosai().getRadRehabilitationKasanJokyoUmu().getSelectedKey()));
+        entity.setRyoyoKankyoKijun(new Code(div.getJigyoshaServiceShosai().getDdlRyoyoKankyoKijun().getSelectedKey()));
+        entity.setIshiKetuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadIshiKetuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setKangoShokuinKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKangoShokuinKetsuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setRigakuRyouhousiKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyouhousiKetsuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setSagyouRyouhousiKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadSagyouRyouhousiKetsuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setKaigoShokuinKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKaigoShokuinKetsuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKaigoSienSenmoninShokuinKetsuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setKaigoJujishaKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadKaigoJujishaKetsuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setKansenTaisakuSidoKanri_umu(new Code(div.getJigyoshaServiceShosai().getRadKansenTaisakuSidoKanriUmu().getSelectedKey()));
+        entity.setJushoHifuKaiyouShidoKanri_umu(new Code(div.getJigyoshaServiceShosai().getRadJushoHifuKaiyouShidoKanriUmu().getSelectedKey()));
+        entity.setYakuzaiKaniriShido_umu(new Code(div.getJigyoshaServiceShosai().getRadYakuzaiKaniriShidoUmu().getSelectedKey()));
+        entity.setShogaishaSeikatsuShienTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadShogaishaSeikatsuShienTaiseiUmu().getSelectedKey()));
+        entity.setChiikiKubunCode(new Code(div.getJigyoshaServiceShosai().getDdlChiikiKubun().getSelectedKey()));
+        entity.setJikanEnchoServiceTaisei(new Code(div.getJigyoshaServiceShosai().getRadJikanEnchoServiceTaisei().getSelectedKey()));
+        entity.setKobetsuRehabilitationTeikyoTaisei(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRehabilitationTeikyoTaisei().getSelectedKey()));
+        entity.setKyojuhiTaisaku(new Code(div.getJigyoshaServiceShosai().getRadKyojuhiTaisaku().getSelectedKey()));
+        entity.setYakanCare_umu(new Code(div.getJigyoshaServiceShosai().getRadYakanCareUmu().getSelectedKey()));
+        entity.setRehabilitationKinoKyoka_umu(new Code(div.getJigyoshaServiceShosai().getRadRehabilitationKinoKyokaUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSogoRehaShisetsuUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRigakuRyohoIIUmu1().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRigakuRyohoIIIUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSagyoRyohoIIUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuGengoChokakuRyohoIUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuGengoChokakuRyohoIIUmu().getSelectedKey()));
+        entity.setGengoChokakushiKetsuinGenzanJokyo_umu(new Code(div.getJigyoshaServiceShosai().getRadGengoChokakushiKetsuinGenzanJokyoUmu().getSelectedKey()));
+        entity.setEiyouKanriHyoka(new Code(div.getJigyoshaServiceShosai().getDdlEiyouKanriHyoka().getSelectedKey()));
+        entity.setTokuteijigyoushoKasan_HomonKaigo_umu(new Code(div.getJigyoshaServiceShosai().getRadTokuteijigyoushoKasanHomonKaigoUmu().getSelectedKey()));
+        entity.setJakunenseiNinchishoCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadJakunenseiNinchishoCareTaiseiUmu().getSelectedKey()));
+        entity.setUndokiKinoKojoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadUndokiKinoKojoTaiseiUmu().getSelectedKey()));
+        entity.setEiyoManagement_KaizenTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadEiyoManagementKaizenTaiseiUmu().getSelectedKey()));
+        entity.setKokuKinoKojoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadKokuKinoKojoTaiseiUmu().getSelectedKey()));
+        entity.setJigyoshoHyokaKasan_Moshide_umu(new Code(div.getJigyoshaServiceShosai().getRadJigyoshoHyokaKasanMoshideUmu().getSelectedKey()));
+        entity.setJigyoshoHyokaKasan_Kettei_umu(new Code(div.getJigyoshaServiceShosai().getRadJigyoshoHyokaKasanKetteiUmu().getSelectedKey()));
+        entity.setKinkyuUkeireTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadKinkyuUkeireTaiseiUmu().getSelectedKey()));
+        entity.setYakanKangoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadYakanKangoTaiseiUmu().getSelectedKey()));
+        entity.setTokuteijigyoshoKasan_Kyotakukaigoshien_umu(new Code(div.getJigyoshaServiceShosai().getDdlTokuteijigyoshoKasanKyotakukaigoshienUmu().getSelectedKey()));
+        entity.setKaigoShienSemmoninSenjuJokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtKaigoShienSemmoninSenjuJokinshaNinsu()));
+        entity.setKaigoSienSemmoninSenjuHijokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninSenjuHijokinshaNinsu()));
+        entity.setKaigoSienSemmoninKemmuJokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninKemmuJokinshaNinsu()));
+        entity.setKaigoSienSemmoninKemmuHijokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtKaigoSienSemmoninKemmuHijokinshaNinsu()));
+        entity.setHomonkaigoServiceTeikyoSekininshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtHomonkaigoServiceTeikyoSekininshaNinsu()));
+        entity.setHomonkaigoSenjuJokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtHomonkaigoSenjuJokinshaNinsu()));
+        entity.setHomonkaigoSenjuHijokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtHomonkaigoSenjuHijokinshaNinsu()));
+        entity.setHomonkaigoKemmuJokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtHomonkaigoKemmuJokinshaNinsu()));
+        entity.setHomonkaigoKemmuHijokinshaNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtHomonkaigoKemmuHijokinshaNinsu()));
+        entity.setHomonkaigoJokinKanzangoNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtHomonkaigoJokinKanzangoNinsu()));
+        entity.setRiyoTeiinNinsu(intValueOrZEROIfNull(div.getJigyoshaServiceShosai().getTxtRiyoTeiinNinsu()));
+        entity.setShiteiYukoKaishiYMD(div.getJigyoshaServiceShosai().getTxtShiteiYukoKaishiYMD().getValue());
+        entity.setShiteiYukoShuryoYMD(div.getJigyoshaServiceShosai().getTxtShiteiYukoShuryoYMD().getValue());
+        entity.setShiteiKoshinShinseichuKubun(new Code(div.getJigyoshaServiceShosai().getRadShiteiKoshinShinseichuKubun().getSelectedKey()));
+        entity.setKoryokuTeishiKaishiYMD(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiKaishiYMD().getValue());
+        entity.setKoryokuTeishiShuryoYMD(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiShuryoYMD().getValue());
+        entity.setDaikiboJigyoshaGaito_umu(new Code(div.getJigyoshaServiceShosai().getRadDaikiboJigyoshaGaitoUmu().getSelectedKey()));
+        entity.setJunUnitCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadJunUnitCareTaiseiUmu().getSelectedKey()));
+        entity.setJudokaTaioTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadJudokaTaioTaiseiUmu().getSelectedKey()));
+        entity.setIryoRenkeiTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadIryoRenkeiTaiseiUmu().getSelectedKey()));
+        entity.setUnitCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadUnitCareTaiseiUmu().getSelectedKey()));
+        entity.setZaitaku_nyushoSogoRiyoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadZaitakuNyushoSogoRiyoTaiseiUmu().getSelectedKey()));
+        entity.setTerminalCareTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadTerminalCareTaiseiUmu().getSelectedKey()));
+        entity.setShintaiKosokuHaishiTorikumi_umu(new Code(div.getJigyoshaServiceShosai().getRadShintaiKosokuHaishiTorikumiUmu().getSelectedKey()));
+        entity.setShokiboKyotenShugoTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadShokiboKyotenShugoTaiseiUmu().getSelectedKey()));
+        entity.setNinchishoCareKasan_umu(new Code(div.getJigyoshaServiceShosai().getRadNinchishoCareKasanUmu().getSelectedKey()));
+        entity.setKobetsuKinoKunrenTaisei_umu(new Code(div.getJigyoshaServiceShosai().getDdlKobetsuKinoKunrenTaiseiUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRigakuRyohoIUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(new Code(div.getJigyoshaServiceShosai().getRadRigakuRyohoIIUmu2().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSagyoRyohoUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuGengoChokakuRyohoUmu().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_Sonota_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuSonotaUmu().getSelectedKey()));
+        entity.setSetsubiKijun(new Code(div.getJigyoshaServiceShosai().getRadSetsubiKijun().getSelectedKey()));
+        entity.setRyoyoTaiseiIjiTokubetsuKasan(new Code(div.getJigyoshaServiceShosai().getRadRyoyoTaiseiIjiTokubetsuKasan().getSelectedKey()));
+        entity.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(new Code(div.getJigyoshaServiceShosai().getRadKobetsuRehaShidoKanriUmu().getSelectedKey()));
+        entity.setSankyuHelperTaisei(new Code(div.getJigyoshaServiceShosai().getRadSankyuHelperTaisei().getSelectedKey()));
+        entity.setChuSankanChiikiShokiboJigyoshoKasan_chiiki(new Code(div.getJigyoshaServiceShosai().getRadChuSankanChiikiShokiboJigyoshoKasanChiiki().getSelectedKey()));
+        entity.setChuSankanChiikiShokiboJigyoushoKasan_kibo(new Code(div.getJigyoshaServiceShosai().getRadChuSankanChiikiShokiboJigyoshoKasanKibo().getSelectedKey()));
+        entity.setServiceTeikyoTaiseiKyokaKasan(new Code(div.getJigyoshaServiceShosai().getDdlServiceTeikyoTaiseiKyokaKasan().getSelectedKey()));
+        entity.setNinchishoTankiShuchuRehabilitationKasan(new Code(div.getJigyoshaServiceShosai().getRadNinchishoTankiShuchuRehabilitationKasan().getSelectedKey()));
+        entity.setJakunenseiNinchishoRiyoushaUkeeireKasan(new Code(div.getJigyoshaServiceShosai().getRadKakunenseiNinchishoRiyoushaUkeeireKasan().getSelectedKey()));
+        entity.setKangoTaiseiKasan(new Code(div.getJigyoshaServiceShosai().getRadKangoTaiseiKasan().getSelectedKey()));
+        entity.setYakinShokuinHaichiKasan(new Code(div.getJigyoshaServiceShosai().getRadYakinShokuinHaichiKasan().getSelectedKey()));
+        entity.setRyoyoShokuKasan(new Code(div.getJigyoshaServiceShosai().getRadRyoyoShokuKasan().getSelectedKey()));
+        entity.setNichijoSeikatsuKeizokuShienKasan(new Code(div.getJigyoshaServiceShosai().getRadNichijoSeikatsuKeizokuShienKasan().getSelectedKey()));
+        entity.setNinchishoSemmonCareKasan(new Code(div.getJigyoshaServiceShosai().getRadNinchishoSemmonCareKasan().getSelectedKey()));
+        entity.setTwentyFourHoursTsuhoTaioKasan(new Code(div.getJigyoshaServiceShosai().getRad24JikanTsuhoTaioKasan().getSelectedKey()));
+        entity.setKangoShokuinHaichiKasan(new Code(div.getJigyoshaServiceShosai().getRadKangoShokuinHaichiKasan().getSelectedKey()));
+        entity.setYakanCareKasan(new Code(div.getJigyoshaServiceShosai().getRadYakanCareKasan().getSelectedKey()));
+        entity.setShudanCommunicationRyoho_umu(new Code(div.getJigyoshaServiceShosai().getRadShudanCommunicationRyohoUmu().getSelectedKey()));
+        entity.setServiceTeikyoTaiseiKyokaKasan_Karadokogata(new Code(div.getJigyoshaServiceShosai().getRadServiceTeikyoTaiseiKyokaKasanKaradokogata().getSelectedKey()));
+        entity.setNitchuShintaikaigoTaise_20funmiman_umu(new Code(div.getJigyoshaServiceShosai().getRadNitchuShintaikaigoTaise20funmimanUmu().getSelectedKey()));
+        entity.setServiceTeikyoSekininshaTaisei_umu(new Code(div.getJigyoshaServiceShosai().getRadServiceTeikyoSekininshaTaiseiUmu().getSelectedKey()));
+        entity.setDoitsuTatemonoKyojuRiyoshaGenzan_umu(new Code(div.getJigyoshaServiceShosai().getRadDoitsuTatemonoKyojuRiyoshaGenzanUmu().getSelectedKey()));
+        entity.setKinkyuTankiNyushoTaiseiKakuhoKasan(new Code(div.getJigyoshaServiceShosai().getRadKinkyuTankiNyushoTaiseiKakuhoKasan().getSelectedKey()));
+        entity.setZaitakuFukki_ZaitakuRyoyoShienKinoKasan(new Code(div.getJigyoshaServiceShosai().getRadZaitakuFukkiZaitakuRyoyoShienKinoKasan().getSelectedKey()));
+        entity.setSeikatuKinoKojoGroupKatsudoKasan(new Code(div.getJigyoshaServiceShosai().getRadSeikatuKinoKojoGroupKatsudoKasan().getSelectedKey()));
+        entity.setKaigoShokuinShoguKaizenKasan(new Code(div.getJigyoshaServiceShosai().getRadKaigoShokuinShoguKaizenKasan().getSelectedKey()));
+        return entity;
+    }
+
+    private static RString find基本情報準拠区分(JigyoshaServiceDiv div) {
+        if (!div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().isEmpty()) {
+            return div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().get(0);
+        }
+        return RString.EMPTY;
+    }
+
+    private int intValueOrZEROIfNull(TextBoxNum txtBoxNum) {
+        Decimal value = txtBoxNum.getValue();
+        return value == null ? 0 : value.intValue();
     }
 
     /**
