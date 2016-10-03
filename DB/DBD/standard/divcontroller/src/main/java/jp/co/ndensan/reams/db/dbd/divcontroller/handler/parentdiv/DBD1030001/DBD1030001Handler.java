@@ -238,8 +238,8 @@ public class DBD1030001Handler {
 
     private void setDataSource(dgShinseiList_Row dataSource, ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報) {
         if (社会福祉法人等利用者負担軽減情報.get軽減率_分子() != null
-                && 社会福祉法人等利用者負担軽減情報.get軽減率_分母() != null
-                && 社会福祉法人等利用者負担軽減情報.get軽減率_分母().compareTo(Decimal.ZERO) != 0) {
+            && 社会福祉法人等利用者負担軽減情報.get軽減率_分母() != null
+            && 社会福祉法人等利用者負担軽減情報.get軽減率_分母().compareTo(Decimal.ZERO) != 0) {
             dataSource.setKeigenRitsu(new RString(社会福祉法人等利用者負担軽減情報.get軽減率_分子().toString())
                     .concat("/").concat(社会福祉法人等利用者負担軽減情報.get軽減率_分母().toString()));
         }
@@ -472,11 +472,10 @@ public class DBD1030001Handler {
     private void 状態３画面表示(dgShinseiList_Row dataSouce, ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態, ShikibetsuCode 識別コード) {
         div.getCcdShinseiJoho().set減免減額申請情報(getShinseiJoho(情報と状態), dataSouce.getTxtShinseiYMD().getValue());
         承認情報エリア画面表示(dataSouce, 識別コード);
-        RString 状態 = 情報と状態.get状態();
-        状態３制御(状態);
+        状態３制御();
     }
 
-    private void 状態３制御(RString 状態) {
+    private void 状態３制御() {
         div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisabled(false);
         div.getShafukuRiyoshaKeigen().getBtnShowGenmenJoho().setDisabled(false);
         div.getTxtShinseiYMD().setDisabled(false);
@@ -955,7 +954,7 @@ public class DBD1030001Handler {
         } else {
             if (null == 情報.get非承認理由()) {
                 if (画面社会福祉法人等利用者負担軽減申請情報.get非承認理由() != null
-                        && !画面社会福祉法人等利用者負担軽減申請情報.get非承認理由().isEmpty()) {
+                    && !画面社会福祉法人等利用者負担軽減申請情報.get非承認理由().isEmpty()) {
                     builder.set非承認理由(画面社会福祉法人等利用者負担軽減申請情報.get非承認理由());
                     変更ある = true;
                 }
@@ -990,7 +989,7 @@ public class DBD1030001Handler {
         boolean 変更ある = false;
         if (null == 情報.get適用終了年月日()) {
             if (画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日() != null
-                    && !画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日().isEmpty()) {
+                && !画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日().isEmpty()) {
                 builder.set適用終了年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日());
                 変更ある = true;
             }
@@ -1000,7 +999,7 @@ public class DBD1030001Handler {
         }
         if (null == 情報.get適用開始年月日()) {
             if (画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日() != null
-                    && !画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日().isEmpty()) {
+                && !画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日().isEmpty()) {
                 builder.set適用開始年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日());
                 変更ある = true;
             }
@@ -1029,17 +1028,17 @@ public class DBD1030001Handler {
 
     private boolean 減免減額申請変更(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 画面減免減額申請) {
         if (null == 画面減免減額申請.get事業者区分() && 減免減額申請.get事業者区分() != null && !減免減額申請.get事業者区分().isEmpty()
-                || (画面減免減額申請.get事業者区分() != null && !画面減免減額申請.get事業者区分().equals(減免減額申請.get事業者区分()))) {
+            || (画面減免減額申請.get事業者区分() != null && !画面減免減額申請.get事業者区分().equals(減免減額申請.get事業者区分()))) {
             return true;
         }
         if (null == 画面減免減額申請.get申請届出代行事業者番号()
-                && 減免減額申請.get申請届出代行事業者番号() != null && !減免減額申請.get申請届出代行事業者番号().isEmpty()
-                || (画面減免減額申請.get申請届出代行事業者番号() != null
+            && 減免減額申請.get申請届出代行事業者番号() != null && !減免減額申請.get申請届出代行事業者番号().isEmpty()
+            || (画面減免減額申請.get申請届出代行事業者番号() != null
                 && !画面減免減額申請.get申請届出代行事業者番号().equals(減免減額申請.get申請届出代行事業者番号()))) {
             return true;
         }
         if (null == 画面減免減額申請.get申請届出代行区分() && 減免減額申請.get申請届出代行区分() != null && !減免減額申請.get申請届出代行区分().isEmpty()
-                || (画面減免減額申請.get申請届出代行区分() != null && !画面減免減額申請.get申請届出代行区分().equals(減免減額申請.get申請届出代行区分()))) {
+            || (画面減免減額申請.get申請届出代行区分() != null && !画面減免減額申請.get申請届出代行区分().equals(減免減額申請.get申請届出代行区分()))) {
             return true;
         }
         return 減免減額申請変更2(減免減額申請, 画面減免減額申請);
@@ -1047,16 +1046,16 @@ public class DBD1030001Handler {
 
     private boolean 減免減額申請変更2(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 画面減免減額申請) {
         if (null == 画面減免減額申請.get申請届出者住所() && 減免減額申請.get申請届出者住所() != null && !減免減額申請.get申請届出者住所().isEmpty()
-                || (画面減免減額申請.get申請届出者住所() != null && !画面減免減額申請.get申請届出者住所().equals(減免減額申請.get申請届出者住所()))) {
+            || (画面減免減額申請.get申請届出者住所() != null && !画面減免減額申請.get申請届出者住所().equals(減免減額申請.get申請届出者住所()))) {
             return true;
         }
         if (null == 画面減免減額申請.get申請届出者氏名() && 減免減額申請.get申請届出者氏名() != null && !減免減額申請.get申請届出者氏名().isEmpty()
-                || !画面減免減額申請.get申請届出者氏名().equals(減免減額申請.get申請届出者氏名())) {
+            || !画面減免減額申請.get申請届出者氏名().equals(減免減額申請.get申請届出者氏名())) {
             return true;
         }
         if (null == 画面減免減額申請.get申請届出者氏名カナ()
-                && 減免減額申請.get申請届出者氏名カナ() != null && !減免減額申請.get申請届出者氏名カナ().isEmpty()
-                || (画面減免減額申請.get申請届出者氏名カナ() != null
+            && 減免減額申請.get申請届出者氏名カナ() != null && !減免減額申請.get申請届出者氏名カナ().isEmpty()
+            || (画面減免減額申請.get申請届出者氏名カナ() != null
                 && !画面減免減額申請.get申請届出者氏名カナ().equals(減免減額申請.get申請届出者氏名カナ()))) {
             return true;
         }
@@ -1065,19 +1064,19 @@ public class DBD1030001Handler {
 
     private boolean 減免減額申請変更3(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 画面減免減額申請) {
         if (null == 画面減免減額申請.get申請届出者続柄() && 減免減額申請.get申請届出者続柄() != null && !減免減額申請.get申請届出者続柄().isEmpty()
-                || (画面減免減額申請.get申請届出者続柄() != null && !画面減免減額申請.get申請届出者続柄().equals(減免減額申請.get申請届出者続柄()))) {
+            || (画面減免減額申請.get申請届出者続柄() != null && !画面減免減額申請.get申請届出者続柄().equals(減免減額申請.get申請届出者続柄()))) {
             return true;
         }
         if (null == 画面減免減額申請.get申請届出者郵便番号()
-                && 減免減額申請.get申請届出者郵便番号() != null && !減免減額申請.get申請届出者郵便番号().isEmpty()
-                || (画面減免減額申請.get申請届出者郵便番号() != null
+            && 減免減額申請.get申請届出者郵便番号() != null && !減免減額申請.get申請届出者郵便番号().isEmpty()
+            || (画面減免減額申請.get申請届出者郵便番号() != null
                 && !画面減免減額申請.get申請届出者郵便番号().equals(減免減額申請.get申請届出者郵便番号()))) {
             return true;
         }
         return null == 画面減免減額申請.get申請届出者電話番号()
-                && 減免減額申請.get申請届出者電話番号() != null && !減免減額申請.get申請届出者電話番号().isEmpty()
-                || (画面減免減額申請.get申請届出者電話番号() != null
-                && !画面減免減額申請.get申請届出者電話番号().equals(減免減額申請.get申請届出者電話番号()));
+               && 減免減額申請.get申請届出者電話番号() != null && !減免減額申請.get申請届出者電話番号().isEmpty()
+               || (画面減免減額申請.get申請届出者電話番号() != null
+                   && !画面減免減額申請.get申請届出者電話番号().equals(減免減額申請.get申請届出者電話番号()));
     }
 
     private void set修正後社会福祉法人等利用者負担軽減申請情報_減免減額申請(
@@ -1194,7 +1193,7 @@ public class DBD1030001Handler {
             }
         } else {
             if (null == 情報.get軽減率_分子()
-                    || 情報.get軽減率_分子().compareTo(画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分子()) != 0) {
+                || 情報.get軽減率_分子().compareTo(画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分子()) != 0) {
                 builder.set軽減率_分子(画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分子());
                 変更ある = true;
             } else {
@@ -1207,7 +1206,7 @@ public class DBD1030001Handler {
             }
         } else {
             if (null == 情報.get軽減率_分母()
-                    || 情報.get軽減率_分母().compareTo(画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分母()) != 0) {
+                || 情報.get軽減率_分母().compareTo(画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分母()) != 0) {
                 builder.set軽減率_分母(画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分母());
                 変更ある = true;
             } else {

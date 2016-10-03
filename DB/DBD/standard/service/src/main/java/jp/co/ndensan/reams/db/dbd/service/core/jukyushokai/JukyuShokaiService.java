@@ -86,7 +86,7 @@ public class JukyuShokaiService {
     public List<JukyuShokaiShinseiNinteiJoho> find申請認定情報(RString 市町村コード,
             RString 履歴番号, RString 枝番, RString 受給申請事由, RString 被保険者番号) {
         IJukyushaShokaiMapper mapper = mapperProvider.create(IJukyushaShokaiMapper.class);
-        List<JukyuShokaiShinseiNinteiEntity> 申請認定情報EntityList = mapper.find申請認定情報(市町村コード, 履歴番号, 枝番, 受給申請事由,被保険者番号);
+        List<JukyuShokaiShinseiNinteiEntity> 申請認定情報EntityList = mapper.find申請認定情報(市町村コード, 履歴番号, 枝番, 受給申請事由, 被保険者番号);
         if (申請認定情報EntityList == null) {
             申請認定情報EntityList = new ArrayList<>();
         }

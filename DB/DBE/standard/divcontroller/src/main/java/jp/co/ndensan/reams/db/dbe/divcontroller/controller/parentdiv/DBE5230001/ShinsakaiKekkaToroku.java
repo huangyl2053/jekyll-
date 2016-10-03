@@ -72,7 +72,7 @@ public class ShinsakaiKekkaToroku {
     private static final RString 更新申請 = new RString("更新申請");
     private static final RString 新規申請 = new RString("新規申請");
     private static final RString 区分変更申請 = new RString("区分変更申請");
-    
+
     private final ShinsakaiKekkaTorokuManager manager;
 
     /**
@@ -129,7 +129,7 @@ public class ShinsakaiKekkaToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).setKobetsuHyojiArea();
             }
         } else {
@@ -195,7 +195,7 @@ public class ShinsakaiKekkaToroku {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             審査結果登録処理(div);
             前排他キーの解除(SHINSEISHOKANRINO);
             div.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
@@ -258,7 +258,7 @@ public class ShinsakaiKekkaToroku {
             法令コード = new Code(row.getShinseiKubunLawCode());
         }
         if (申請時コード_5.equals(row.getShinseiKubunShinseijiCode())
-                || 申請時コード_6.equals(row.getShinseiKubunShinseijiCode())) {
+            || 申請時コード_6.equals(row.getShinseiKubunShinseijiCode())) {
             法令コード = new Code("4");
         }
         if (HASDATA.equals(row.getUpDateFlag())) {
@@ -395,7 +395,7 @@ public class ShinsakaiKekkaToroku {
     public ResponseData onChange_NijiHantei(ShinsakaiKekkaTorokuDiv div) {
         getHandler(div).setNinteiKikan();
         getHandler(div).setHanteiKekka();
-        
+
         /** 二次判断が非該当の場合、認定期間の表示制御を設定 */
         if (div.getDdlNijiHantei().getSelectedKey().equals(非該当)) {
             div.getTxtNinteiKikanFrom().setDisabled(true);
@@ -404,54 +404,54 @@ public class ShinsakaiKekkaToroku {
             div.getTxtNinteiKikanFrom().setDisabled(false);
             div.getTxtNinteiKikanTo().setDisabled(false);
         }
-       
-       RString shinseiKubunShinseiji = div.getTxtShinseiKubunShinseiji().getText();
-       RString zenkaiNijiHantei = div.getDgTaishoshaIchiran().getActiveRow().getZenkaiNijiHanteiCode();
-       RString nijiHantei = div.getDdlNijiHantei().getSelectedKey();
-       FlexibleDate shinseiDay = div.getTxtShinseiDay().getValue();        
-       FlexibleDate zenkaiYukoKikanShuryoDay = div.getDgTaishoshaIchiran().getActiveRow().getZenkaiYukoKikanShuryoDay().getValue();
 
-       /** 申請区分（申請時）と二次判定より、申請区分（法令）を設定 */
-       if (新規申請.equals(shinseiKubunShinseiji)) {
-           if (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei)
-               || 要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei)) {
-               div.getTxtShinseiKubunLow().setValue(新規申請);
-           }
-       } else if (更新申請.equals(shinseiKubunShinseiji)) {
-           if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei)) ) {
-               div.getTxtShinseiKubunLow().setValue(更新申請);
-           } else if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) 
-                   && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-               div.getTxtShinseiKubunLow().setValue(新規申請);
-           } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei)) 
-                   && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-               div.getTxtShinseiKubunLow().setValue(更新申請);
-           } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei)) 
-                   && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
-               div.getTxtShinseiKubunLow().setValue(新規申請);
-           }
-       } else if (区分変更申請.equals(shinseiKubunShinseiji)) {
-           if (zenkaiNijiHantei.equals(nijiHantei)) {
-               if (shinseiDay.plusDay(61).isBeforeOrEquals(zenkaiYukoKikanShuryoDay)) {
-                   div.getTxtShinseiKubunLow().setValue(区分変更申請);
-               } else {
-                   div.getTxtShinseiKubunLow().setValue(更新申請);
-               }
-           } else {
-               if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei)) ) {
-                   div.getTxtShinseiKubunLow().setValue(区分変更申請);
-               } else if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) 
+        RString shinseiKubunShinseiji = div.getTxtShinseiKubunShinseiji().getText();
+        RString zenkaiNijiHantei = div.getDgTaishoshaIchiran().getActiveRow().getZenkaiNijiHanteiCode();
+        RString nijiHantei = div.getDdlNijiHantei().getSelectedKey();
+        FlexibleDate shinseiDay = div.getTxtShinseiDay().getValue();
+        FlexibleDate zenkaiYukoKikanShuryoDay = div.getDgTaishoshaIchiran().getActiveRow().getZenkaiYukoKikanShuryoDay().getValue();
+
+        /** 申請区分（申請時）と二次判定より、申請区分（法令）を設定 */
+        if (新規申請.equals(shinseiKubunShinseiji)) {
+            if (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei)
+                || 要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei)) {
+                div.getTxtShinseiKubunLow().setValue(新規申請);
+            }
+        } else if (更新申請.equals(shinseiKubunShinseiji)) {
+            if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
+                div.getTxtShinseiKubunLow().setValue(更新申請);
+            } else if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei))
                        && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-                   div.getTxtShinseiKubunLow().setValue(新規申請);
-               } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei)) 
+                div.getTxtShinseiKubunLow().setValue(新規申請);
+            } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
                        && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-                   div.getTxtShinseiKubunLow().setValue(区分変更申請);
-               } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei)) 
+                div.getTxtShinseiKubunLow().setValue(更新申請);
+            } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
                        && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
-                   div.getTxtShinseiKubunLow().setValue(新規申請);
-               }
-           }
-       }
+                div.getTxtShinseiKubunLow().setValue(新規申請);
+            }
+        } else if (区分変更申請.equals(shinseiKubunShinseiji)) {
+            if (zenkaiNijiHantei.equals(nijiHantei)) {
+                if (shinseiDay.plusDay(61).isBeforeOrEquals(zenkaiYukoKikanShuryoDay)) {
+                    div.getTxtShinseiKubunLow().setValue(区分変更申請);
+                } else {
+                    div.getTxtShinseiKubunLow().setValue(更新申請);
+                }
+            } else {
+                if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
+                    div.getTxtShinseiKubunLow().setValue(区分変更申請);
+                } else if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei))
+                           && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
+                    div.getTxtShinseiKubunLow().setValue(新規申請);
+                } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
+                           && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
+                    div.getTxtShinseiKubunLow().setValue(区分変更申請);
+                } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
+                           && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
+                    div.getTxtShinseiKubunLow().setValue(新規申請);
+                }
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -486,7 +486,7 @@ public class ShinsakaiKekkaToroku {
      */
     public ResponseData onOkClose_btnMemoTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
         RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtShinsakaiMemo().getValue() == null
-                ? RString.EMPTY : div.getTxtShinsakaiMemo().getValue());
+                                                          ? RString.EMPTY : div.getTxtShinsakaiMemo().getValue());
         serviceSakujo.append(div.getHdnSampleText());
         div.getTxtShinsakaiMemo().setValue(serviceSakujo.toRString());
 
@@ -514,7 +514,7 @@ public class ShinsakaiKekkaToroku {
     public ResponseData onOkClose_btnIkenTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
 
         RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtShinsakaiIken().getValue() == null
-                ? RString.EMPTY : div.getTxtShinsakaiIken().getValue());
+                                                          ? RString.EMPTY : div.getTxtShinsakaiIken().getValue());
         serviceSakujo.append(div.getHdnSampleText());
         div.getTxtShinsakaiIken().setValue(serviceSakujo.toRString());
 
@@ -542,7 +542,7 @@ public class ShinsakaiKekkaToroku {
     public ResponseData onOkClose_btnIChiTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
 
         RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtIchijiHanteiKekkaHenkoRiyu().getValue() == null
-                ? RString.EMPTY : div.getTxtIchijiHanteiKekkaHenkoRiyu().getValue());
+                                                          ? RString.EMPTY : div.getTxtIchijiHanteiKekkaHenkoRiyu().getValue());
         serviceSakujo.append(div.getHdnSampleText());
         div.getTxtIchijiHanteiKekkaHenkoRiyu().setValue(serviceSakujo.toRString());
 

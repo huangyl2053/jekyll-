@@ -55,7 +55,7 @@ public class YokaigoNinteiShinchokuJohoShokaiFinder {
     /**
      * 申請者一覧内容検索します。
      *
-     * @param paramter 申請者一覧内容検索のパラメータ
+     * @param parameter 申請者一覧内容検索のパラメータ
      * @return SearchResult<YokaigoNinteiShinchokuJoho>
      */
     public SearchResult<YokaigoNinteiShinchokuJoho> selectItirannJoho(YokaigoNinteiParamter parameter) {

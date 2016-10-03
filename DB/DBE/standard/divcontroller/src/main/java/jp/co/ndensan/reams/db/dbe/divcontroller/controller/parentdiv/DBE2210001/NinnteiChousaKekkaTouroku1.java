@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1.TempData;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
@@ -434,20 +435,20 @@ public class NinnteiChousaKekkaTouroku1 {
 
         if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
+            || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
 
         } else if (new RString(DbeWarningMessages.在宅で自宅外.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
-                || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
+                   || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedKey(元の実施場所);
             ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 元の実施場所);
             return ResponseData.of(div).respond();
         }
         ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
-        
+
         if (ChosaJisshiBashoCode.その他.getコード().equals(現在の実施場所)) {
             div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(false);
         } else {
@@ -623,7 +624,7 @@ public class NinnteiChousaKekkaTouroku1 {
         ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
 
         if (!第1群List.isEmpty() || 第2群List.isEmpty() || 第3群List.isEmpty() || 第4群List.isEmpty()
-                || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
+            || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
             WarningMessage message = new WarningMessage(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode(),
                     DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -660,7 +661,7 @@ public class NinnteiChousaKekkaTouroku1 {
         ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
 
         if (!第1群List.isEmpty() || 第2群List.isEmpty() || 第3群List.isEmpty() || 第4群List.isEmpty()
-                || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
+            || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
             WarningMessage message = new WarningMessage(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode(),
                     DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -870,7 +871,7 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         return 変更前の設定値;
     }
-    
+
     private Map<Integer, Decimal> get現在のサービス設定値(NinnteiChousaKekkaTouroku1Div div, RString 元の選択) {
         List<dgRiyoServiceJyokyo_Row> serviceJyokyo = div.getDgRiyoServiceJyokyo().getDataSource();
         if (serviceJyokyo == null) {
@@ -890,13 +891,13 @@ public class NinnteiChousaKekkaTouroku1 {
                 if (index == 13) {
                     map.put(index, new Decimal(0));
                     map.put(++index, 利用状況);
-                }else{
+                } else {
                     map.put(index, 利用状況);
                 }
                 合計値 = 合計値.add(利用状況);
                 index++;
             }
-            
+
             map.put(17, new Decimal(0));
             map.put(18, new Decimal(0));
             map.put(19, new Decimal(0));
@@ -914,11 +915,11 @@ public class NinnteiChousaKekkaTouroku1 {
         } else {
             return null;
         }
-        
-        if (合計値 == new Decimal(0)) {
+
+        if (Objects.equals(合計値, Decimal.ZERO)) {
             return null;
         }
-        
+
         return map;
     }
 
@@ -1007,10 +1008,10 @@ public class NinnteiChousaKekkaTouroku1 {
 
         RString temp_認定調査回数 = ViewStateHolder.get(ViewStateKeys.認定調査回数, RString.class);
         if (ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())
-                && 認定調査0回.equals(temp_認定調査回数)
-                || ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())
-                && 認定調査1回.equals(temp_認定調査回数)
-                || ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            && 認定調査0回.equals(temp_認定調査回数)
+            || ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())
+               && 認定調査1回.equals(temp_認定調査回数)
+            || ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
 
             現在の状況_在宅or施設の保存(div);
             認定調査依頼情報の更新();
@@ -1067,7 +1068,7 @@ public class NinnteiChousaKekkaTouroku1 {
         NinteichosahyoGaikyoChosaBuilder dbt5202builder = dbt5202.createBuilderForEdit();
 
         RString 認定調査区分コード = ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())
-                ? ChosaKubun.新規調査.getコード() : ChosaKubun.再調査.getコード();
+                            ? ChosaKubun.新規調査.getコード() : ChosaKubun.再調査.getコード();
         RString サービス区分コード = div.getRadGenzaiservis().getSelectedKey();
         if (予防給付サービス_選択.equals(サービス区分コード)) {
             サービス区分コード = ServiceKubunCode.予防給付サービス.getコード();

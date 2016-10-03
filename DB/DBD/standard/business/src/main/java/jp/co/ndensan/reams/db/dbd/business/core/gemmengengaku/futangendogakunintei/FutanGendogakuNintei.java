@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -141,21 +140,23 @@ public class FutanGendogakuNintei
     public int get履歴番号() {
         return entity.getRirekiNo();
     }
-    
+
     /**
      * 遺族年金受給申告を返します。
      *
      * @return 遺族年金受給申告
      */
+    @SuppressWarnings("PMD.BooleanGetMethodName")
     public boolean get遺族年金受給申告() {
         return entity.getIzokuNenkinJukyuFlag();
     }
- 
+
     /**
      * 障害年金受給申告を返します。
      *
      * @return 障害年金受給申告
      */
+    @SuppressWarnings("PMD.BooleanGetMethodName")
     public boolean get障害年金受給申告() {
         return entity.getShogaiNenkinJukyuFlag();
     }

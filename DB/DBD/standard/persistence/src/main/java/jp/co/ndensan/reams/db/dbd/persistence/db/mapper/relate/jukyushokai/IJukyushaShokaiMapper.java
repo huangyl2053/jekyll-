@@ -19,6 +19,7 @@ import org.apache.ibatis.annotations.Param;
  *
  * @reamsid_L DBD-3560-011 xuyue
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public interface IJukyushaShokaiMapper {
 
     /**

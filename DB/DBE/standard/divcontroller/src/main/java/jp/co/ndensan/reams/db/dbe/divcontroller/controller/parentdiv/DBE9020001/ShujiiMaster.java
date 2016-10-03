@@ -20,8 +20,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001.Shu
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001.ShujiiMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho.ShujiiMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
@@ -31,7 +29,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -46,9 +43,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -147,7 +142,7 @@ public class ShujiiMaster {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getShujiiSearch().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9020001StateName.検索);
             }
@@ -168,14 +163,14 @@ public class ShujiiMaster {
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
         }
-        
+
         RString 主治医医療機関コードFrom = RString.EMPTY;
         RString 主治医医療機関コードTo = RString.EMPTY;
-        
-        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isNullOrEmpty() 
-                && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isNullOrEmpty()) {
-            if (Long.valueOf(div.getTxtSearchShujiiIryokikanCodeFrom().getValue().toString()) 
-                    > Long.valueOf(div.getTxtSearchShujiiIryokikanCodeTo().getValue().toString())) {
+
+        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isNullOrEmpty()
+            && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchShujiiIryokikanCodeFrom().getValue().toString())
+                > Long.valueOf(div.getTxtSearchShujiiIryokikanCodeTo().getValue().toString())) {
                 主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
                 主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
             } else {
@@ -186,14 +181,14 @@ public class ShujiiMaster {
             主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
             主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
         }
-        
+
         RString 主治医コードFrom = RString.EMPTY;
         RString 主治医コードTo = RString.EMPTY;
-        
-        if (!div.getTxtSearchShujiiCodeFrom().getValue().isNullOrEmpty() 
-                && !div.getTxtSearchShujiiCodeTo().getValue().isNullOrEmpty()) {
-            if (Long.valueOf(div.getTxtSearchShujiiCodeFrom().getValue().toString()) 
-                    > Long.valueOf(div.getTxtSearchShujiiCodeTo().getValue().toString())) {
+
+        if (!div.getTxtSearchShujiiCodeFrom().getValue().isNullOrEmpty()
+            && !div.getTxtSearchShujiiCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchShujiiCodeFrom().getValue().toString())
+                > Long.valueOf(div.getTxtSearchShujiiCodeTo().getValue().toString())) {
                 主治医コードFrom = div.getTxtSearchShujiiCodeTo().getValue();
                 主治医コードTo = div.getTxtSearchShujiiCodeFrom().getValue();
             } else {
@@ -314,7 +309,7 @@ public class ShujiiMaster {
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnTorikeshi(ShujiiMasterDiv div) {
         if ((状態_追加.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())
-                || (状態_修正.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())) {
+            || (状態_修正.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -322,12 +317,12 @@ public class ShujiiMaster {
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getShujiiIchiran().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧);
             } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                       && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
             }
         }
@@ -578,7 +573,7 @@ public class ShujiiMaster {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             validPairs = validateForDelete(div);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -665,7 +660,7 @@ public class ShujiiMaster {
         }
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBE9020001TransitionEventName.医療機関登録へ戻る).respond();
         }
 

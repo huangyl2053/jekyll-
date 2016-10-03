@@ -39,7 +39,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
         ChushutsuKikanJohoData chushutsuKikanJohoData
                 = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
         getHandler(div).initialize(chushutsuKikanJohoData);
-        ViewStateHolder.put(ViewStateKeys.退避用データ,chushutsuKikanJohoData);
+        ViewStateHolder.put(ViewStateKeys.退避用データ, chushutsuKikanJohoData);
         return ResponseData.of(div).respond();
     }
 
@@ -62,7 +62,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
             ChushutsuKikanJohoData chushutsuKikanJohoData = ViewStateHolder.get(ViewStateKeys.退避用データ, ChushutsuKikanJohoData.class);
             YMDHMS 対象終了日時 = chushutsuKikanJohoData.get対象終了日時();
             if (対象終了日時 != null && !対象終了日時.isEmpty()) {
-             
+
                 div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
                         chushutsuKikanJohoData.get対象終了日時().getDate());
                 div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
@@ -102,7 +102,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
         RDate zenkaiToYMD = div.getChushutsuKikan().getTxtZenkaiChushutsuToYMD().getValue();
         RTime zenkaiToTime = div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().getValue();
         if ((konkaiFromYMD != null && konkaiFromTime != null && zenkaiToYMD != null && zenkaiToTime != null)
-                && (zenkaiToYMD.isBefore(konkaiFromYMD)
+            && (zenkaiToYMD.isBefore(konkaiFromYMD)
                 || (konkaiFromYMD.equals(zenkaiToYMD) && zenkaiToTime.isBefore(konkaiFromTime)))) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandler(div).開始日と終了日の比較チェック());
