@@ -131,7 +131,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
             source.ninteiKekka1 = new RString("（承認内容）");
             source.tekiyoYMD = 社会福祉法人等利用者負担軽減.get適用開始年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.shoninSuru = 決定区分_承認;
-            source.ninteiKekka2 = new RString(社会福祉法人等利用者負担軽減.get軽減率_分子().toString().concat("/0").concat(
+            source.ninteiKekka2 = new RString(社会福祉法人等利用者負担軽減.get軽減率_分子().toString().concat("/").concat(
                     社会福祉法人等利用者負担軽減.get軽減率_分母().toString()));
             source.yukoYMD = 社会福祉法人等利用者負担軽減.get適用終了年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka3 = new RString("居住費．食費のみ");
