@@ -265,6 +265,13 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnShinseiKakutei(FutangendogakuShinseiDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (!div.getTxtShinseiYMD().getValue().isEmpty()) {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+        }
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
@@ -276,13 +283,6 @@ public class FutangendogakuShinsei {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, getHandler(div).onClick_btnShinseiKakutei(list, 資格対象者));
         div.getShinseiDetail().setDisabled(true);
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (!div.getTxtShinseiYMD().getValue().isEmpty()) {
-            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
-        }
-        if (pairs.existsError()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
 
