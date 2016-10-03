@@ -91,6 +91,9 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
     private static final int TITLE_JOHO_3 = 3;
     private static final int TITLE_JOHO_4 = 4;
     private static final int TITLE_JOHO_5 = 5;
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+            value = "NP_UNWRITTEN_FIELD"
+    )
     private IdoCheckListGetDataProcessParameter param;
 
     @BatchWriter

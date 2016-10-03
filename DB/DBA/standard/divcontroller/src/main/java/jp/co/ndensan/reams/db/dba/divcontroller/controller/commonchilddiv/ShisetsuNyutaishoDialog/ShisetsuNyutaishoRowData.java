@@ -31,6 +31,11 @@ public class ShisetsuNyutaishoRowData implements Serializable {
     private final RString shisetsuShurui;
     private final RString rirekiNo;
 
+    /**
+     * {@link dgShisetsuNyutaishoRireki_Row}の情報を保持したインスタンスを生成します。
+     *
+     * @param row {@link dgShisetsuNyutaishoRireki_Row}
+     */
     public ShisetsuNyutaishoRowData(dgShisetsuNyutaishoRireki_Row row) {
         state = row.getState();
         nyushoDate = row.getNyushoDate().getValue();
@@ -45,19 +50,24 @@ public class ShisetsuNyutaishoRowData implements Serializable {
         rirekiNo = row.getRirekiNo();
     }
 
-    public static dgShisetsuNyutaishoRireki_Row toRow(ShisetsuNyutaishoRowData rowData) {
+    /**
+     * {@link dgShisetsuNyutaishoRireki_Row}へ変換します。
+     *
+     * @return {@link dgShisetsuNyutaishoRireki_Row}
+     */
+    public dgShisetsuNyutaishoRireki_Row toRow() {
         dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row();
-        row.setState(rowData.state);
-        row.getNyushoDate().setValue(rowData.nyushoDate);
-        row.getTaishoDate().setValue(rowData.taishoDate);
-        row.setShisetsuCode(rowData.shisetsuCode);
-        row.setShisetsuMeisho(rowData.shisetsuMeisho);
-        row.setShisetsu(rowData.shisetsu);
-        row.setDaichoShubetsuKey(rowData.daichoShubetsuKey);
-        row.setDaichoShubetsu(rowData.daichoShubetsu);
-        row.setShisetsuShuruiKey(rowData.shisetsuShuruiKey);
-        row.setShisetsuShurui(rowData.shisetsuShurui);
-        row.setRirekiNo(rowData.rirekiNo);
+        row.setState(this.state);
+        row.getNyushoDate().setValue(this.nyushoDate);
+        row.getTaishoDate().setValue(this.taishoDate);
+        row.setShisetsuCode(this.shisetsuCode);
+        row.setShisetsuMeisho(this.shisetsuMeisho);
+        row.setShisetsu(this.shisetsu);
+        row.setDaichoShubetsuKey(this.daichoShubetsuKey);
+        row.setDaichoShubetsu(this.daichoShubetsu);
+        row.setShisetsuShuruiKey(this.shisetsuShuruiKey);
+        row.setShisetsuShurui(this.shisetsuShurui);
+        row.setRirekiNo(this.rirekiNo);
         return row;
     }
 }

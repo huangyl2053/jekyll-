@@ -24,11 +24,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuK
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -43,16 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class HihokenshaShokaiTotal {
 
-    private static final RString 被保履歴 = new RString("tplHihokenshaRireki");
-    private static final RString 世帯照会 = new RString("tplSetaiShokai");
-    private static final RString 医療保険 = new RString("tplIryoHoken");
-    private static final RString 老福年金 = new RString("tplRofukuNenkin");
-    private static final RString 施設入退所 = new RString("tplShisetsuNyutaisho");
-    private static final RString 証交付回収 = new RString("tplShoKofuKaishu");
     private static final RString COMMON_BTN_PUBLISH = new RString("btnPublish");
-    private static final RString COMMON_BTN_KAKUTEI = new RString("btnKakutei");
     private static final RString 照会 = new RString("照会");
-    private static final RString LOAD済み = new RString("1");
 
     /**
      * 被保険者照会の初期化を処理します。

@@ -49,7 +49,7 @@ public class ShisetsuNyutaishoDialog {
             ArrayList<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
             ArrayList<ShisetsuNyutaishoRowData> rowDataList = DataPassingConverter.deserialize(div.getGridData(), ArrayList.class);
             for (ShisetsuNyutaishoRowData rowData : rowDataList) {
-                dgShisetsuNyutaishoRireki_Row row = ShisetsuNyutaishoRowData.toRow(rowData);
+                dgShisetsuNyutaishoRireki_Row row = rowData.toRow();
                 dataSource.add(row);
             }
 

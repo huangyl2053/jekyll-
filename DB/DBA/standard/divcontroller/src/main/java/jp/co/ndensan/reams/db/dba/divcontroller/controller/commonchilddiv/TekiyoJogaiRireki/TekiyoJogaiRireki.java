@@ -91,11 +91,11 @@ public class TekiyoJogaiRireki {
      */
     public ResponseData<TekiyoJogaiRirekiDiv> onClick_Torikeshi(TekiyoJogaiRirekiDiv requestDiv) {
         datagridTekiyoJogai_Row row = new datagridTekiyoJogai_Row();
-        if(requestDiv.getDatagridTekiyoJogai().getActiveRow() != null){
+        if (requestDiv.getDatagridTekiyoJogai().getActiveRow() != null) {
             row = requestDiv.getDatagridTekiyoJogai().getActiveRow();
         }
-        if (!ResponseHolder.isReRequest() 
-                && getHandler(requestDiv).onClick_Torikeshi_ForChange(row)) {
+        if (!ResponseHolder.isReRequest()
+            && getHandler(requestDiv).onClick_Torikeshi_ForChange(row)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
@@ -103,7 +103,7 @@ public class TekiyoJogaiRireki {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || !getHandler(requestDiv).onClick_Torikeshi_ForChange(row)) {
+            || !getHandler(requestDiv).onClick_Torikeshi_ForChange(row)) {
             getHandler(requestDiv).onClick_Torikeshi();
         }
         return ResponseData.of(requestDiv).respond();

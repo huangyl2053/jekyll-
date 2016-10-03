@@ -24,6 +24,12 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class IryoHokenRirekiDialog {
 
+    /**
+     * onLoad
+     *
+     * @param div IryoHokenRirekiDialogDiv
+     * @return ResponseData
+     */
     public ResponseData<IryoHokenRirekiDialogDiv> onLoad(IryoHokenRirekiDialogDiv div) {
         if (isHiddenInputEmpty(div)) {
             div.getCcdIryoHokenRireki().initialize(IryoHokenRirekiState.照会.getStateValue(), RString.EMPTY, HihokenshaNo.EMPTY);
@@ -41,7 +47,7 @@ public class IryoHokenRirekiDialog {
             ArrayList<IryoHokenRirekiRowData> dataList = DataPassingConverter.deserialize(div.getGridData(), ArrayList.class);
             List<dgIryohokenIchiran_Row> dataSource = new ArrayList<>();
             for (IryoHokenRirekiRowData rowData : dataList) {
-                dgIryohokenIchiran_Row row = IryoHokenRirekiRowData.toRow(rowData);
+                dgIryohokenIchiran_Row row = rowData.toRow();
                 dataSource.add(row);
             }
             div.getCcdIryoHokenRireki().initialize(mode, shikibetsuCode, hihokenshaNo, lasdecCode, dataSource);
@@ -67,6 +73,12 @@ public class IryoHokenRirekiDialog {
         return div.getGridData() == null || div.getGridData().isEmpty();
     }
 
+    /**
+     * onClick_btnClose
+     *
+     * @param div IryoHokenRirekiDialogDiv
+     * @return ResponseData
+     */
     public ResponseData<IryoHokenRirekiDialogDiv> onClick_btnClose(IryoHokenRirekiDialogDiv div) {
 
         ArrayList<IryoHokenRirekiRowData> dataList = new ArrayList<>();

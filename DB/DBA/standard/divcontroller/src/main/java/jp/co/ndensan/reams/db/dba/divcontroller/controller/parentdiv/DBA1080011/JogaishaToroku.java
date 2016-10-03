@@ -245,16 +245,16 @@ public class JogaishaToroku {
         builder.set市町村コード(new LasdecCode(row.getLasdecCode()));
         builder.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
         builder.set資格取得除外年月日(row.getJogaiTekiyoDate().getValue() == null
-                ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiTekiyoDate().getValue().toDateString()));
+                             ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiTekiyoDate().getValue().toDateString()));
         builder.set資格取得除外理由(row.getJogaiRiyu());
         builder.set資格取得除外解除年月日(row.getJogaiKaijyoDate().getValue() == null
-                ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiKaijyoDate().getValue().toDateString()));
+                               ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiKaijyoDate().getValue().toDateString()));
         return builder.build();
     }
 
     private ShikakuShutokuJogaisha createModifyData(dgNenreiTotatshusha_Row row, Models<ShikakuShutokuJogaishaIdentifier, ShikakuShutokuJogaisha> models) {
 
-        int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());// + 1;
+        int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString()); // + 1;
         ShikakuShutokuJogaishaIdentifier key = new ShikakuShutokuJogaishaIdentifier(new ShikibetsuCode(row.getShikibetsuCode()), 履歴番号);
         ShikakuShutokuJogaisha shikakuShutokuJogaisha = models.get(key);
         ShikakuShutokuJogaishaBuilder shikakubuilder = shikakuShutokuJogaisha.createBuilderForEdit();
@@ -262,10 +262,10 @@ public class JogaishaToroku {
         shikakubuilder.set市町村コード(new LasdecCode(row.getLasdecCode()));
         shikakubuilder.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
         shikakubuilder.set資格取得除外年月日(row.getJogaiTekiyoDate().getValue() == null
-                ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiTekiyoDate().getValue().toDateString()));
+                                    ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiTekiyoDate().getValue().toDateString()));
         shikakubuilder.set資格取得除外理由(row.getJogaiRiyu());
         shikakubuilder.set資格取得除外解除年月日(row.getJogaiKaijyoDate().getValue() == null
-                ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiKaijyoDate().getValue().toDateString()));
+                                      ? FlexibleDate.EMPTY : new FlexibleDate(row.getJogaiKaijyoDate().getValue().toDateString()));
         shikakuShutokuJogaisha.toEntity().setState(EntityDataState.Modified);
         return shikakubuilder.build();
     }

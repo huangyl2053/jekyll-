@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -120,7 +119,7 @@ public class TekiyoJogaishaIdoTeisei {
             }
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 一覧データの保存(div);
                 RealInitialLocker.release(前排他ロックキー);
                 div.getKaigoKanryoMessageJo().getCcdKaigoKanryoMessage().setSuccessMessage(
@@ -141,19 +140,6 @@ public class TekiyoJogaishaIdoTeisei {
 
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBA2050021TransitionEventName.終了する).respond();
-    }
-
-    private boolean is履歴期間重複(TekiyoJogaishaIdoTeiseiDiv div) {
-        TekiyoJogaishaIdoTeiseiFinder finder = new TekiyoJogaishaIdoTeiseiFinder();
-        List<TekiyoJogaishaIdoTeiseiBusiness> entitylist = new ArrayList<>();
-        for (datagridTekiyoJogai_Row row : div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().get適用情報一覧()) {
-            TekiyoJogaishaIdoTeiseiBusiness entity = new TekiyoJogaishaIdoTeiseiBusiness(new RString(row.getRowState().toString()),
-                    row.getTekiyoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoDate().getValue().toDateString()),
-                    row.getKayijoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getKayijoDate().getValue().toDateString())
-            );
-            entitylist.add(entity);
-        }
-        return !finder.checkTekiyoJogaiKikanByTeiseiMode(entitylist);
     }
 
     private boolean is適用情報一覧変更(TekiyoJogaishaIdoTeiseiDiv div) {

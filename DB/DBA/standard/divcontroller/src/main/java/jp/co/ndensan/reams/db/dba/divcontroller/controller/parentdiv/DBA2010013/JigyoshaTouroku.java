@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -138,7 +139,7 @@ public class JigyoshaTouroku {
         return ResponseData.of(div).respond();
     }
 
-        /**
+    /**
      * 事業者登録DivをonActiveします。
      *
      * @param div 事業者登録Div
@@ -150,11 +151,11 @@ public class JigyoshaTouroku {
         FlexibleDate 有効終了日 = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
         サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
                 事業者番号, 有効開始日, 有効終了日, RDate.getNowDate().getYearMonth());
-        List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = manager.getServiceItiranHyojiJoho(サービス一覧パラメータ).records(); 
-        getHandler(div).getサービス一覧情報(サービス一覧表示情報List); 
+        List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = manager.getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
+        getHandler(div).getサービス一覧情報(サービス一覧表示情報List);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * サービス一覧の「再表示」ボタンの押下を処理です。
      *
@@ -173,7 +174,7 @@ public class JigyoshaTouroku {
         サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
                 事業者番号, 有効開始日, 有効終了日, RDate.getNowDate().getYearMonth());
         List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = manager.getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
-        getHandler(div).getサービス一覧情報再表示(サービス一覧表示情報List,chkFlag);
+        getHandler(div).getサービス一覧情報再表示(サービス一覧表示情報List, chkFlag);
         return ResponseData.of(div).respond();
     }
 
@@ -199,7 +200,7 @@ public class JigyoshaTouroku {
         tourokuEntity.setTelNo(new TelNo(div.getServiceJigyoshaJoho().getTxtTelNo().getValue()));
         tourokuEntity.setYubinNo(div.getServiceJigyoshaJoho().getTxtYubinNo().getValue());
         tourokuEntity.setYukoKaishiYMD(div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue());
-        tourokuEntity.setYukoShuryoYMD(div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue());                
+        tourokuEntity.setYukoShuryoYMD(div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue());
         ViewStateHolder.put(ViewStateKeys.事業者登録情報, tourokuEntity);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス追加).respond();
     }
@@ -258,45 +259,45 @@ public class JigyoshaTouroku {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);       
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (初期_状態 == null || 状態_追加.equals(初期_状態)) {
             RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
             FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
             FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
             KaigoJogaiTokureiParameter parameter
-                = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD, null);
+                    = KaigoJogaiTokureiParameter.createParam(事業者番号, yukoKaishiYMD, yukoShuryoYMD, null);
             if (!manager.checkKikanGorisei(parameter)) {
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
                 validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正,
-                        div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD(),div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD()));
+                        div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD(), div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD()));
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }        
+            }
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の登録処理(div);
                 RealInitialLocker.release(前排他ロックキー);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
-        } else if (状態_修正.equals(初期_状態)) {            
+        } else if (状態_修正.equals(初期_状態)) {
             KaigoJigyosha 旧事業者情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
             FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
             FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();
             KaigoJogaiTokureiParameter parameter = KaigoJogaiTokureiParameter.createParam(
-                旧事業者情報.get事業者番号().getColumnValue(), yukoKaishiYMD, yukoShuryoYMD, null);
+                    旧事業者情報.get事業者番号().getColumnValue(), yukoKaishiYMD, yukoShuryoYMD, null);
             if (!manager.checkKikanGorisei(parameter)) {
                 ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
                 validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.期間が不正,
-                        div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD(),div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD()));
+                        div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD(), div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD()));
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 RealInitialLocker.release(前排他ロックキー);
                 get事業者情報の更新処理(div);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
@@ -306,7 +307,7 @@ public class JigyoshaTouroku {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
             }
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 RealInitialLocker.release(前排他ロックキー);
                 get事業者情報の削除処理(div);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
@@ -529,7 +530,7 @@ public class JigyoshaTouroku {
         Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービス一覧情報Model = ViewStateHolder.get(ViewStateKeys.サービス一覧情報, Models.class
         );
         for (KaigoJigyoshaShiteiService business
-                : サービス一覧情報Model.values()) {
+             : サービス一覧情報Model.values()) {
             deleteServiceFlag = jigyoshaTourokuFinder.isShiteiServiceDelete(business);
         }
         KaigoJigyosha 事業者情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
@@ -559,87 +560,131 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnBack(JigyoshaTourokuDiv div) {
-        boolean changeFlg = false;
         KaigoJigyosha kaigoJigyosha = ViewStateHolder.get(ViewStateKeys.事業者登録情報, KaigoJigyosha.class);
         KaigoJigyoshaDaihyosha daihyosha = null;
-        if(!kaigoJigyosha.getKaigoJigyoshaDaihyoshaList().isEmpty()){
+        if (!kaigoJigyosha.getKaigoJigyoshaDaihyoshaList().isEmpty()) {
             daihyosha = kaigoJigyosha.getKaigoJigyoshaDaihyoshaList().get(0);
         }
-        if(
-                 (!div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue().equals(kaigoJigyosha.get事業者番号().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtJigyoshaName().getValue().equals(kaigoJigyosha.get事業者名称().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtJigyoshaNameKana().getValue().equals(kaigoJigyosha.get事業者名称カナ().value()))
-                || ((div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get有効開始日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().isEmpty() && kaigoJigyosha.get有効開始日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get有効開始日().isEmpty()
-                                && div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().compareTo(kaigoJigyosha.get有効開始日()) !=0))
-                || ((div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().isEmpty() && !kaigoJigyosha.get有効終了日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().isEmpty() && kaigoJigyosha.get有効終了日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().isEmpty() && !kaigoJigyosha.get有効終了日().isEmpty()
-                                && div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().compareTo(kaigoJigyosha.get有効終了日()) !=0))
-                || ((div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業開始日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().isEmpty() && kaigoJigyosha.get事業開始日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業開始日().isEmpty()
-                                && div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().compareTo(kaigoJigyosha.get事業開始日()) !=0))
-                || ((div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().isEmpty() && !kaigoJigyosha.get事業休止日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().isEmpty() && kaigoJigyosha.get事業休止日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().isEmpty() && !kaigoJigyosha.get事業休止日().isEmpty()
-                                && div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().compareTo(kaigoJigyosha.get事業休止日()) !=0))
-                || ((div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業再開日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().isEmpty() && kaigoJigyosha.get事業再開日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業再開日().isEmpty()
-                                && div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().compareTo(kaigoJigyosha.get事業再開日()) !=0))
-                || ((div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業廃止日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().isEmpty() && kaigoJigyosha.get事業廃止日().isEmpty())
-                            || (!div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業廃止日().isEmpty()
-                                && div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().compareTo(kaigoJigyosha.get事業廃止日()) !=0))
-                || (!div.getServiceJigyoshaJoho().getTxtYubinNo().getValue().toString().equals(kaigoJigyosha.get郵便番号().value().toString()))
-                || (!div.getServiceJigyoshaJoho().getTxtJusho().getValue().equals(kaigoJigyosha.get事業者住所().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtJushoKana().getValue().equals(kaigoJigyosha.get事業者住所カナ()))
-                || (!div.getServiceJigyoshaJoho().getTxtTelNo().getValue().equals(kaigoJigyosha.get電話番号().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtFaxNo().getValue().equals(kaigoJigyosha.getFAX番号().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtShozaiShichoson().getValue().equals(kaigoJigyosha.get所在市町村()))
-                || (!div.getServiceJigyoshaJoho().getTxtServiceTiiki().getValue().equals(kaigoJigyosha.getサービス実施地域()))
-                || ((div.getServiceJigyoshaJoho().getTxtShozokuNum().getValue() 
-                    == null ? 0 : div.getServiceJigyoshaJoho().getTxtShozokuNum().getValue().intValue()) != kaigoJigyosha.get所属人数())
-                || ((div.getServiceJigyoshaJoho().getTxtRiyoshaNum().getValue() 
-                    == null ? 0 : div.getServiceJigyoshaJoho().getTxtRiyoshaNum().getValue().intValue()) != kaigoJigyosha.get利用者数())
-                || ((div.getServiceJigyoshaJoho().getTxtBedNum().getValue() 
-                    == null ? 0 : div.getServiceJigyoshaJoho().getTxtBedNum().getValue().intValue()) != kaigoJigyosha.getベッド数())
-                || (!div.getServiceJigyoshaJoho().getTxtAtesakininName().getValue().equals(kaigoJigyosha.get宛先人名().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtAtesakininNameKana().getValue().equals(kaigoJigyosha.get宛先人名カナ().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtAtesakiBusho().getValue().equals(kaigoJigyosha.get宛先部署()))
-                || (!div.getServiceJigyoshaJoho().getDdlHojinShubetsu().getSelectedKey().equals(kaigoJigyosha.get法人等種別().value()))
-                || (!div.getServiceJigyoshaJoho().getDdlShiteiKijungaitoKubun().getSelectedKey().equals(kaigoJigyosha.get指定_基準該当等事業所区分().value()))
-                || (!div.getServiceJigyoshaJoho().getTxtBiko().getValue().equals(kaigoJigyosha.get備考()))
-                || (!kaigoJigyosha.getKaigoJigyoshaDaihyoshaList().isEmpty() 
-                      && ((!div.getDaihyoshaJoho().getTxtDaihyoshaName().getValue().equals(daihyosha.get代表者名().value()))
-                          || (!div.getDaihyoshaJoho().getTxtDaihyoshaNameKana().getValue().equals(daihyosha.get代表者名カナ().value()))
-                          || (!div.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().getValue().equals(daihyosha.get代表者役職名()))
-                          || (!div.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().getValue().toString().equals(daihyosha.get代表者郵便番号().value().toString()))
-                          || (!div.getDaihyoshaJoho().getTxtDaihyoshaJusho().getValue().equals(daihyosha.get代表者住所().value()))
-                          || (!div.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().getValue().equals(daihyosha.get代表者住所カナ()))
-                          || (!div.getKaisetsushaJoho().getTxtKaisetsushaName().getValue().equals(daihyosha.get開設者名称().value()))
-                          || (!div.getKaisetsushaJoho().getTxtKaisetsushaNameKana().getValue().equals(daihyosha.get開設者名称カナ().value()))
-                          || (!div.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().getValue().toString().equals(daihyosha.get開設者郵便番号().value().toString()))
-                          || (!div.getKaisetsushaJoho().getTxtKaisetsushaTelNo().getValue().equals(daihyosha.get開設者電話番号().value()))
-                          || (!div.getKaisetsushaJoho().getTxtKaisetsushaFaxNo().getValue().equals(daihyosha.get開設者ＦＡＸ番号().value()))
-                          || (!div.getKaisetsushaJoho().getTxtKaisetsushaJusho().getValue().equals(daihyosha.get開設者住所().value()))
-                          || (!div.getKaisetsushaJoho().getTxtKaisetsushaJushoKana().getValue().equals(daihyosha.get開設者住所カナ()))))
 
-                ){
-                changeFlg = true;
-            }
-                
+        boolean changeFlg = hasChanged事業者(div, kaigoJigyosha) || hasChanged代表者(div, kaigoJigyosha, daihyosha);
+
         if (!ResponseHolder.isReRequest() && changeFlg) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || !changeFlg) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || !changeFlg) {
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean hasChanged事業者(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (!div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue().equals(kaigoJigyosha.get事業者番号().value()))
+               || hasChanged事業者名(div, kaigoJigyosha)
+               || hasChanged有効開始日(div, kaigoJigyosha)
+               || hasChanged有効終了日(div, kaigoJigyosha)
+               || hasChanged事業開始日(div, kaigoJigyosha)
+               || hasChanged事業休止日(div, kaigoJigyosha)
+               || hasChanged事業再開日(div, kaigoJigyosha)
+               || hasChanged事業廃止日(div, kaigoJigyosha)
+               || hasChanged事業者住所(div, kaigoJigyosha)
+               || hasChanged連絡先(div, kaigoJigyosha)
+               || (!div.getServiceJigyoshaJoho().getTxtShozaiShichoson().getValue().equals(kaigoJigyosha.get所在市町村()))
+               || (!div.getServiceJigyoshaJoho().getTxtServiceTiiki().getValue().equals(kaigoJigyosha.getサービス実施地域()))
+               || (toIntValueOrZREO(div.getServiceJigyoshaJoho().getTxtShozokuNum()) != kaigoJigyosha.get所属人数())
+               || (toIntValueOrZREO(div.getServiceJigyoshaJoho().getTxtRiyoshaNum()) != kaigoJigyosha.get利用者数())
+               || (toIntValueOrZREO(div.getServiceJigyoshaJoho().getTxtBedNum()) != kaigoJigyosha.getベッド数())
+               || hasChanged宛先(div, kaigoJigyosha)
+               || (!div.getServiceJigyoshaJoho().getDdlHojinShubetsu().getSelectedKey().equals(kaigoJigyosha.get法人等種別().value()))
+               || (!div.getServiceJigyoshaJoho().getDdlShiteiKijungaitoKubun().getSelectedKey().equals(kaigoJigyosha.get指定_基準該当等事業所区分().value()))
+               || (!div.getServiceJigyoshaJoho().getTxtBiko().getValue().equals(kaigoJigyosha.get備考()));
+    }
+
+    private boolean hasChanged連絡先(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (!div.getServiceJigyoshaJoho().getTxtTelNo().getValue().equals(kaigoJigyosha.get電話番号().value()))
+               || (!div.getServiceJigyoshaJoho().getTxtFaxNo().getValue().equals(kaigoJigyosha.getFAX番号().value()));
+    }
+
+    private boolean hasChanged事業者名(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (!div.getServiceJigyoshaJoho().getTxtJigyoshaName().getValue().equals(kaigoJigyosha.get事業者名称().value()))
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoshaNameKana().getValue().equals(kaigoJigyosha.get事業者名称カナ().value()));
+    }
+
+    private boolean hasChanged宛先(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (!div.getServiceJigyoshaJoho().getTxtAtesakininName().getValue().equals(kaigoJigyosha.get宛先人名().value()))
+               || (!div.getServiceJigyoshaJoho().getTxtAtesakininNameKana().getValue().equals(kaigoJigyosha.get宛先人名カナ().value()))
+               || (!div.getServiceJigyoshaJoho().getTxtAtesakiBusho().getValue().equals(kaigoJigyosha.get宛先部署()));
+    }
+
+    private int toIntValueOrZREO(TextBoxNum textBoxNum) {
+        Decimal value = textBoxNum.getValue();
+        return value == null ? 0 : value.intValue();
+    }
+
+    private boolean hasChanged事業者住所(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (!div.getServiceJigyoshaJoho().getTxtYubinNo().getValue().toString().equals(kaigoJigyosha.get郵便番号().value().toString()))
+               || (!div.getServiceJigyoshaJoho().getTxtJusho().getValue().equals(kaigoJigyosha.get事業者住所().value()))
+               || (!div.getServiceJigyoshaJoho().getTxtJushoKana().getValue().equals(kaigoJigyosha.get事業者住所カナ()));
+    }
+
+    private boolean hasChanged事業廃止日(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業廃止日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().isEmpty() && kaigoJigyosha.get事業廃止日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業廃止日().isEmpty()
+                   && div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD().getValue().compareTo(kaigoJigyosha.get事業廃止日()) != 0);
+    }
+
+    private boolean hasChanged事業再開日(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業再開日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().isEmpty() && kaigoJigyosha.get事業再開日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業再開日().isEmpty()
+                   && div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD().getValue().compareTo(kaigoJigyosha.get事業再開日()) != 0);
+    }
+
+    private boolean hasChanged事業休止日(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().isEmpty() && !kaigoJigyosha.get事業休止日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().isEmpty() && kaigoJigyosha.get事業休止日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().isEmpty() && !kaigoJigyosha.get事業休止日().isEmpty()
+                   && div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD().getValue().compareTo(kaigoJigyosha.get事業休止日()) != 0);
+    }
+
+    private boolean hasChanged事業開始日(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業開始日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().isEmpty() && kaigoJigyosha.get事業開始日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get事業開始日().isEmpty()
+                   && div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD().getValue().compareTo(kaigoJigyosha.get事業開始日()) != 0);
+    }
+
+    private boolean hasChanged有効終了日(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().isEmpty() && !kaigoJigyosha.get有効終了日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().isEmpty() && kaigoJigyosha.get有効終了日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().isEmpty() && !kaigoJigyosha.get有効終了日().isEmpty()
+                   && div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue().compareTo(kaigoJigyosha.get有効終了日()) != 0);
+    }
+
+    private boolean hasChanged有効開始日(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha) {
+        return (div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get有効開始日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().isEmpty() && kaigoJigyosha.get有効開始日().isEmpty())
+               || (!div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().isEmpty() && !kaigoJigyosha.get有効開始日().isEmpty()
+                   && div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue().compareTo(kaigoJigyosha.get有効開始日()) != 0);
+    }
+
+    private boolean hasChanged代表者(JigyoshaTourokuDiv div, KaigoJigyosha kaigoJigyosha, KaigoJigyoshaDaihyosha daihyosha) {
+        return !kaigoJigyosha.getKaigoJigyoshaDaihyoshaList().isEmpty()
+               && ((!div.getDaihyoshaJoho().getTxtDaihyoshaName().getValue().equals(daihyosha.get代表者名().value()))
+                   || (!div.getDaihyoshaJoho().getTxtDaihyoshaNameKana().getValue().equals(daihyosha.get代表者名カナ().value()))
+                   || (!div.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().getValue().equals(daihyosha.get代表者役職名()))
+                   || (!div.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().getValue().toString().equals(daihyosha.get代表者郵便番号().value().toString()))
+                   || (!div.getDaihyoshaJoho().getTxtDaihyoshaJusho().getValue().equals(daihyosha.get代表者住所().value()))
+                   || (!div.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().getValue().equals(daihyosha.get代表者住所カナ()))
+                   || (!div.getKaisetsushaJoho().getTxtKaisetsushaName().getValue().equals(daihyosha.get開設者名称().value()))
+                   || (!div.getKaisetsushaJoho().getTxtKaisetsushaNameKana().getValue().equals(daihyosha.get開設者名称カナ().value()))
+                   || (!div.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().getValue().toString().equals(daihyosha.get開設者郵便番号().value().toString()))
+                   || (!div.getKaisetsushaJoho().getTxtKaisetsushaTelNo().getValue().equals(daihyosha.get開設者電話番号().value()))
+                   || (!div.getKaisetsushaJoho().getTxtKaisetsushaFaxNo().getValue().equals(daihyosha.get開設者ＦＡＸ番号().value()))
+                   || (!div.getKaisetsushaJoho().getTxtKaisetsushaJusho().getValue().equals(daihyosha.get開設者住所().value()))
+                   || (!div.getKaisetsushaJoho().getTxtKaisetsushaJushoKana().getValue().equals(daihyosha.get開設者住所カナ())));
     }
 
     /**

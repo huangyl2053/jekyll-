@@ -17,6 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class ShikakuTokusoChecker {
 
+    private ShikakuTokusoChecker() {
+    }
+
     private enum ShutokuMenu {
 
         転入により取得("DBAMN21001"),
@@ -111,10 +114,10 @@ public final class ShikakuTokusoChecker {
                     return false;
                 }
                 if (JuminJotai.住民.equals(住民状態)
-                        || JuminJotai.住登外.equals(住民状態)
-                        || JuminJotai.消除者.equals(住民状態)
-                        || JuminJotai.転出者.equals(住民状態)
-                        || JuminJotai.死亡者.equals(住民状態)) {
+                    || JuminJotai.住登外.equals(住民状態)
+                    || JuminJotai.消除者.equals(住民状態)
+                    || JuminJotai.転出者.equals(住民状態)
+                    || JuminJotai.死亡者.equals(住民状態)) {
                     return true;
                 }
                 break;
@@ -147,13 +150,15 @@ public final class ShikakuTokusoChecker {
                     return false;
                 }
                 if (JuminJotai.住民.equals(住民状態)
-                        || JuminJotai.住登外.equals(住民状態)
-                        || JuminJotai.消除者.equals(住民状態)
-                        || JuminJotai.転出者.equals(住民状態)
-                        || JuminJotai.死亡者.equals(住民状態)) {
+                    || JuminJotai.住登外.equals(住民状態)
+                    || JuminJotai.消除者.equals(住民状態)
+                    || JuminJotai.転出者.equals(住民状態)
+                    || JuminJotai.死亡者.equals(住民状態)) {
                     return true;
                 }
                 break;
+            default:
+                return false;
         }
         return false;
     }
@@ -223,12 +228,14 @@ public final class ShikakuTokusoChecker {
                     return false;
                 }
                 if (JuminJotai.住民.equals(住民状態)
-                        || JuminJotai.住登外.equals(住民状態)
-                        || JuminJotai.消除者.equals(住民状態)
-                        || JuminJotai.転出者.equals(住民状態)
-                        || JuminJotai.死亡者.equals(住民状態)) {
+                    || JuminJotai.住登外.equals(住民状態)
+                    || JuminJotai.消除者.equals(住民状態)
+                    || JuminJotai.転出者.equals(住民状態)
+                    || JuminJotai.死亡者.equals(住民状態)) {
                     return true;
                 }
+                break;
+            default:
                 break;
         }
         return false;

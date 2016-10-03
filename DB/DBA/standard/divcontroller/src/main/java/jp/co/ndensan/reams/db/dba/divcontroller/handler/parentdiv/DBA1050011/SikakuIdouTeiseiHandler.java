@@ -12,19 +12,11 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFuk
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeiseiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.IShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
-import jp.co.ndensan.reams.db.dbz.service.core.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -32,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
-import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 資格異動訂正の画面処理Handlerクラスです。
@@ -44,7 +34,7 @@ public class SikakuIdouTeiseiHandler {
 
     private static final RString 認定履歴ボタン = new RString("HihokenrirekiNashiMode");
     private static final RString 被保履歴ボタン = new RString("NinteirirekiNashiMode");
-    private static final RString チェックNG = new RString("チェックNG");
+
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private final SikakuIdouTeiseiDiv div;
@@ -90,6 +80,9 @@ public class SikakuIdouTeiseiHandler {
         return joho;
     }
 
+    /**
+     * ButtonをDisableにします。
+     */
     public void setButtonDisable() {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().set追加するボタン(false);
         List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
@@ -134,15 +127,6 @@ public class SikakuIdouTeiseiHandler {
             roreiFukushiJohoList.add(joho);
         }
         return roreiFukushiJohoList;
-    }
-
-    private FlexibleDate stringToFlexibleDate(RString date) {
-        FlexibleDate flexDate = FlexibleDate.EMPTY;
-        if (!RString.isNullOrEmpty(date)) {
-            RDate date_tmp = new RDate(date.toString());
-            flexDate = new FlexibleDate(date_tmp.toDateString());
-        }
-        return flexDate;
     }
 
     private FlexibleDate rdateToFlexibleDate(RDate date) {

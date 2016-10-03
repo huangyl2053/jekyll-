@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochi
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.DBA2040021StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.TajutokuIdoTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040021.TajutokuIdoTeiseiHandler;
-import jp.co.ndensan.reams.db.dbz.service.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeisei;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
@@ -80,7 +79,7 @@ public class TajutokuIdoTeisei {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return set登録処理(requestDiv);
         }
         return ResponseData.of(requestDiv).respond();
@@ -109,9 +108,9 @@ public class TajutokuIdoTeisei {
                 入退所データリスト.add(shisetsuNyutaishoData);
             }
         }
-        TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
-                入退所データリスト,
-                適用情報グリッド);
+//        TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
+//                入退所データリスト,
+//                適用情報グリッド);
         //TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());

@@ -227,73 +227,72 @@ class TekiyoJogaiRirekiPersistor {
                 .build();
     }
 
-    private TekiyoJogaisha set適用状態適用除外者情報(
-            TekiyoJogaisha tekiyoJogaisha,
-            datagridTekiyoJogai_Row row) {
-        UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報(tekiyoJogaisha.get識別コード());
-        FlexibleDate 適用日 = FlexibleDate.EMPTY;
-        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
-        if (row.getTekiyoDate().getValue() != null) {
-            適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
-        }
-        if (row.getTekiyoTodokeDate().getValue() != null) {
-            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
-        }
-        return tekiyoJogaisha.createBuilderForEdit()
-                .set識別コード(tekiyoJogaisha.get識別コード())
-                .set異動日(適用日)
-                .set枝番(tekiyoJogaisha.get枝番())
-                .set異動事由コード(row.getTekiyoJiyuCode())
-                .set市町村コード(宛名情報.getGenLasdecCode())
-                .set適用除外適用事由コード(row.getTekiyoJiyuCode())
-                .set適用年月日(適用日)
-                .set適用届出年月日(適用届出日)
-                .set適用受付年月日(適用届出日)
-                .set適用除外解除事由コード(row.getKaijoJiyuCode())
-                .set論理削除フラグ(false)
-                .build();
-    }
-
-    private TekiyoJogaisha set解除状態適用除外者情報(
-            TekiyoJogaisha tekiyoJogaisha,
-            datagridTekiyoJogai_Row row) {
-        FlexibleDate 適用日 = FlexibleDate.EMPTY;
-        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
-        FlexibleDate 解除日 = FlexibleDate.EMPTY;
-        FlexibleDate 解除届出日 = FlexibleDate.EMPTY;
-        if (row.getTekiyoDate().getValue() != null) {
-            適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
-        }
-        if (row.getTekiyoTodokeDate().getValue() != null) {
-            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
-        }
-        if (row.getKayijoDate().getValue() != null) {
-            解除日 = new FlexibleDate(row.getKayijoDate().getValue().toDateString());
-        }
-        if (row.getKaijoTodokeDate().getValue() != null) {
-            解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toDateString());
-        }
-        return tekiyoJogaisha.createBuilderForEdit()
-                .set識別コード(tekiyoJogaisha.get識別コード())
-                .set異動日(解除日)
-                .set枝番(tekiyoJogaisha.get枝番())
-                .set異動事由コード(row.getKaijoJiyuCode())
-                .set市町村コード(new LasdecCode(row.getShichosonCode()))
-                .set適用除外適用事由コード(row.getTekiyoJiyuCode())
-                .set適用年月日(適用日)
-                .set適用届出年月日(適用届出日)
-                .set適用受付年月日(適用届出日)
-                .set適用除外解除事由コード(row.getKaijoJiyuCode())
-                .set解除年月日(解除日)
-                .set解除届出年月日(解除届出日)
-                .set解除受付年月日(解除届出日)
-                .set入所通知発行日(new FlexibleDate(row.getNyushoTsuchiHakkoYMD()))
-                .set退所通知発行日(new FlexibleDate(row.getTaishoTsuchiHakkoYMD()))
-                .set変更通知発行日(new FlexibleDate(row.getHenkoTsuchiHakkoYMD()))
-                .set論理削除フラグ(false)
-                .build();
-    }
-
+//    private TekiyoJogaisha set適用状態適用除外者情報(
+//            TekiyoJogaisha tekiyoJogaisha,
+//            datagridTekiyoJogai_Row row) {
+//        UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報(tekiyoJogaisha.get識別コード());
+//        FlexibleDate 適用日 = FlexibleDate.EMPTY;
+//        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
+//        if (row.getTekiyoDate().getValue() != null) {
+//            適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
+//        }
+//        if (row.getTekiyoTodokeDate().getValue() != null) {
+//            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
+//        }
+//        return tekiyoJogaisha.createBuilderForEdit()
+//                .set識別コード(tekiyoJogaisha.get識別コード())
+//                .set異動日(適用日)
+//                .set枝番(tekiyoJogaisha.get枝番())
+//                .set異動事由コード(row.getTekiyoJiyuCode())
+//                .set市町村コード(宛名情報.getGenLasdecCode())
+//                .set適用除外適用事由コード(row.getTekiyoJiyuCode())
+//                .set適用年月日(適用日)
+//                .set適用届出年月日(適用届出日)
+//                .set適用受付年月日(適用届出日)
+//                .set適用除外解除事由コード(row.getKaijoJiyuCode())
+//                .set論理削除フラグ(false)
+//                .build();
+//    }
+//
+//    private TekiyoJogaisha set解除状態適用除外者情報(
+//            TekiyoJogaisha tekiyoJogaisha,
+//            datagridTekiyoJogai_Row row) {
+//        FlexibleDate 適用日 = FlexibleDate.EMPTY;
+//        FlexibleDate 適用届出日 = FlexibleDate.EMPTY;
+//        FlexibleDate 解除日 = FlexibleDate.EMPTY;
+//        FlexibleDate 解除届出日 = FlexibleDate.EMPTY;
+//        if (row.getTekiyoDate().getValue() != null) {
+//            適用日 = new FlexibleDate(row.getTekiyoDate().getValue().toDateString());
+//        }
+//        if (row.getTekiyoTodokeDate().getValue() != null) {
+//            適用届出日 = new FlexibleDate(row.getTekiyoTodokeDate().getValue().toDateString());
+//        }
+//        if (row.getKayijoDate().getValue() != null) {
+//            解除日 = new FlexibleDate(row.getKayijoDate().getValue().toDateString());
+//        }
+//        if (row.getKaijoTodokeDate().getValue() != null) {
+//            解除届出日 = new FlexibleDate(row.getKaijoTodokeDate().getValue().toDateString());
+//        }
+//        return tekiyoJogaisha.createBuilderForEdit()
+//                .set識別コード(tekiyoJogaisha.get識別コード())
+//                .set異動日(解除日)
+//                .set枝番(tekiyoJogaisha.get枝番())
+//                .set異動事由コード(row.getKaijoJiyuCode())
+//                .set市町村コード(new LasdecCode(row.getShichosonCode()))
+//                .set適用除外適用事由コード(row.getTekiyoJiyuCode())
+//                .set適用年月日(適用日)
+//                .set適用届出年月日(適用届出日)
+//                .set適用受付年月日(適用届出日)
+//                .set適用除外解除事由コード(row.getKaijoJiyuCode())
+//                .set解除年月日(解除日)
+//                .set解除届出年月日(解除届出日)
+//                .set解除受付年月日(解除届出日)
+//                .set入所通知発行日(new FlexibleDate(row.getNyushoTsuchiHakkoYMD()))
+//                .set退所通知発行日(new FlexibleDate(row.getTaishoTsuchiHakkoYMD()))
+//                .set変更通知発行日(new FlexibleDate(row.getHenkoTsuchiHakkoYMD()))
+//                .set論理削除フラグ(false)
+//                .build();
+//    }
     private ShisetsuNyutaisho set適用状態介護保険施設入退所(
             ShisetsuNyutaisho taisho,
             datagridTekiyoJogai_Row row) {

@@ -165,7 +165,7 @@ public class JigyoshaTourokuHandler {
                 指定基準該当等事業所区分 == null ? RString.EMPTY : 指定基準該当等事業所区分.getColumnValue());
         panelDiv.getServiceJigyoshaJoho().getTxtBiko().setValue(
                 business.get備考() == null ? RString.EMPTY : business.get備考());
-        if(!business.getKaigoJigyoshaDaihyoshaList().isEmpty()){
+        if (!business.getKaigoJigyoshaDaihyoshaList().isEmpty()) {
             AtenaMeisho 代表者名 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者名();
             panelDiv.getDaihyoshaJoho().getTxtDaihyoshaName().setValue(代表者名 == null ? RString.EMPTY : 代表者名.getColumnValue());
             AtenaKanaMeisho 代表者名カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者名カナ();
@@ -192,7 +192,7 @@ public class JigyoshaTourokuHandler {
             panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJusho().setValue(開設者住所 == null ? RString.EMPTY : 開設者住所.getColumnValue());
             RString 開設者住所カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者住所カナ();
             panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJushoKana().setValue(開設者住所カナ == null ? RString.EMPTY : 開設者住所カナ);
-        }else{
+        } else {
             panelDiv.getDaihyoshaJoho().getTxtDaihyoshaName().setValue(RString.EMPTY);
             panelDiv.getDaihyoshaJoho().getTxtDaihyoshaNameKana().setValue(RString.EMPTY);
             panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().setValue(RString.EMPTY);
@@ -283,54 +283,56 @@ public class JigyoshaTourokuHandler {
      * 「再表示」ボタンを押下時、サービス一覧情報を設定します。
      *
      * @param サービス一覧情報List サービス一覧情報List
+     * @param chkFlg chkFlg
      */
-    public void getサービス一覧情報再表示(List<ServiceItiranHyojiJohoBusiness> サービス一覧情報List,boolean chkFlg) {
+    public void getサービス一覧情報再表示(List<ServiceItiranHyojiJohoBusiness> サービス一覧情報List, boolean chkFlg) {
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
         for (ServiceItiranHyojiJohoBusiness result : サービス一覧情報List) {
             dgServiceList_Row row = new dgServiceList_Row();
-            if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
-                if(!chkFlg){
-                    if(result.get削除フラグ()){
-                        row.setModifyButtonState(DataGridButtonState.Disabled);
-                        row.setDeleteButtonState(DataGridButtonState.Disabled);
-                    }else{
-                        row.setModifyButtonState(DataGridButtonState.Enabled);
-                        row.setDeleteButtonState(DataGridButtonState.Enabled);
-                    }
+            if (RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
+                continue;
+            }
+            if (!chkFlg) {
+                if (result.get削除フラグ()) {
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                } else {
+                    row.setModifyButtonState(DataGridButtonState.Enabled);
+                    row.setDeleteButtonState(DataGridButtonState.Enabled);
+                }
+                row.setServiceType(result.getサービス種類コード().getColumnValue());
+                row.setServiceType(result.getサービス種類略称());
+                TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
+                開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
+                TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
+                終了日.setValue(
+                        result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
+                row.setKaishiDate(開始日);
+                row.setShuryoDate(終了日);
+                row.setJigyoshaMei(
+                        result.get事業者名称() == null ? RString.EMPTY : result.get事業者名称().getColumnValue());
+                row.setKanrishaMei(
+                        result.get管理者氏名() == null ? RString.EMPTY : result.get管理者氏名().getColumnValue());
+
+                サービス一覧データ.add(row);
+            } else {
+                if (!result.get削除フラグ()) {
                     row.setServiceType(result.getサービス種類コード().getColumnValue());
                     row.setServiceType(result.getサービス種類略称());
                     TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
                     開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
                     TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
                     終了日.setValue(
-                        result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
+                            result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
                     row.setKaishiDate(開始日);
                     row.setShuryoDate(終了日);
-                    row.setJigyoshaMei(                            
+                    row.setJigyoshaMei(
                             result.get事業者名称() == null ? RString.EMPTY : result.get事業者名称().getColumnValue());
                     row.setKanrishaMei(
                             result.get管理者氏名() == null ? RString.EMPTY : result.get管理者氏名().getColumnValue());
-
+                    row.setModifyButtonState(DataGridButtonState.Enabled);
+                    row.setDeleteButtonState(DataGridButtonState.Enabled);
                     サービス一覧データ.add(row);
-                } else {                  
-                    if(!result.get削除フラグ()){
-                        row.setServiceType(result.getサービス種類コード().getColumnValue());
-                        row.setServiceType(result.getサービス種類略称());
-                        TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
-                        開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
-                        TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
-                        終了日.setValue(
-                            result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
-                        row.setKaishiDate(開始日);
-                        row.setShuryoDate(終了日);
-                        row.setJigyoshaMei(                            
-                                result.get事業者名称() == null ? RString.EMPTY : result.get事業者名称().getColumnValue());
-                        row.setKanrishaMei(
-                                result.get管理者氏名() == null ? RString.EMPTY : result.get管理者氏名().getColumnValue());
-                        row.setModifyButtonState(DataGridButtonState.Enabled);
-                        row.setDeleteButtonState(DataGridButtonState.Enabled);
-                        サービス一覧データ.add(row);
-                    }
                 }
             }
         }

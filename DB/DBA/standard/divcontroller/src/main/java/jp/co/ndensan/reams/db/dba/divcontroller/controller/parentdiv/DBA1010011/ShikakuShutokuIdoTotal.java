@@ -56,7 +56,6 @@ public class ShikakuShutokuIdoTotal {
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString 追加 = new RString("追加");
-    private static final RString 状態_照会 = new RString("照会");
 
     private static final RString COMMON_BUTTON_RESEARCH = new RString("btnUpdate");
 
@@ -82,12 +81,11 @@ public class ShikakuShutokuIdoTotal {
         }
 
         前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-        if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
-        } else {
-            if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-                div.setReadOnly(true);
-                throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-            }
+        if (!(hihokenshaNo == null || hihokenshaNo.isEmpty())
+            && !RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            div.setReadOnly(true);
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+
         }
 
         ShiKaKuSyuToKuIdouTotalHandler handler = createHandler(div);
@@ -338,12 +336,11 @@ public class ShikakuShutokuIdoTotal {
             }
             // 期間重複チェック
             if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
-                if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                        getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
-                    validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
-                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
-                }
+                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()
+                && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
+                validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
+                        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
             }
         }
 
@@ -436,13 +433,14 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onBlur_txtShutokuDate(ShikakuShutokuIdoTotalDiv div) {
-        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+        if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                 getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
-            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
-                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
-                        setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
-            }
+            return ResponseData.of(div).respond();
+        }
+        if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
+                    setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
         }
         return ResponseData.of(div).respond();
     }

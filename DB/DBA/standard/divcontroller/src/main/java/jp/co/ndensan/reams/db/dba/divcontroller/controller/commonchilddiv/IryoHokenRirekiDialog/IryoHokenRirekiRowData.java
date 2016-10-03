@@ -36,7 +36,7 @@ public class IryoHokenRirekiRowData implements Serializable {
     /**
      * グリッドの情報を元にシリアライズ可能なクラスを作成します。
      *
-     * @param row
+     * @param row {@link dgIryohokenIchiran_Row}
      */
     public IryoHokenRirekiRowData(dgIryohokenIchiran_Row row) {
         this.shikibetsuCode = row.getShikibetsuCode();
@@ -53,20 +53,25 @@ public class IryoHokenRirekiRowData implements Serializable {
         this.rirekiNo = row.getRirekiNo().getValue();
     }
 
-    public static dgIryohokenIchiran_Row toRow(IryoHokenRirekiRowData rowData) {
+    /**
+     * {@link dgIryohokenIchiran_Row}へ変換します。
+     *
+     * @return {@link dgIryohokenIchiran_Row}
+     */
+    public dgIryohokenIchiran_Row toRow() {
         dgIryohokenIchiran_Row row = new dgIryohokenIchiran_Row();
-        row.setShikibetsuCode(rowData.shikibetsuCode);
-        row.setShichosonCode(rowData.shichosonCode);
-        row.setState(rowData.state);
-        row.getKanyuDate().setValue(rowData.kanyuDate);
-        row.getDattaiDate().setValue(rowData.dattaiDate);
-        row.setShubetsu(rowData.shubetsu);
-        row.setShubetsuCode(rowData.shubetsuCode);
-        row.setHokensha(rowData.hokensha);
-        row.setHokenshaCode(rowData.hokenshaCode);
-        row.setHokenshaName(rowData.hokenshaName);
-        row.setKigoNo(rowData.kigoNo);
-        row.getRirekiNo().setValue(rowData.rirekiNo);
+        row.setShikibetsuCode(this.shikibetsuCode);
+        row.setShichosonCode(this.shichosonCode);
+        row.setState(this.state);
+        row.getKanyuDate().setValue(this.kanyuDate);
+        row.getDattaiDate().setValue(this.dattaiDate);
+        row.setShubetsu(this.shubetsu);
+        row.setShubetsuCode(this.shubetsuCode);
+        row.setHokensha(this.hokensha);
+        row.setHokenshaCode(this.hokenshaCode);
+        row.setHokenshaName(this.hokenshaName);
+        row.setKigoNo(this.kigoNo);
+        row.getRirekiNo().setValue(this.rirekiNo);
         return row;
     }
 }

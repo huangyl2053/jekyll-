@@ -67,6 +67,9 @@ public class ShikakuHenkouIdouHandler {
         }
     }
 
+    /**
+     * @return save可能な場合、{@code true}.
+     */
     public boolean isSavable() {
         return div.getCcdHihosyosai().is資格変更情報追加済み();
     }

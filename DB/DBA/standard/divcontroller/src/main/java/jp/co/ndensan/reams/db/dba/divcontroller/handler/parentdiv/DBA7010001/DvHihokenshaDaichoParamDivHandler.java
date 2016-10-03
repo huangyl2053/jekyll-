@@ -74,9 +74,8 @@ public class DvHihokenshaDaichoParamDivHandler {
     }
 
     /**
-     * 現在選択中の日付抽出区分(直近・基準日・範囲)を返却します。
+     * 現在選択中の日付抽出区分(直近・基準日・範囲)を返却します。DvHihokenshaDaichoParamDivValidationHandler
      *
-     * @param div DvHihokenshaDaichoParamDiv
      * @return 日付抽出区分. 未選択の場合は、{@code null}
      */
     @CheckForNull

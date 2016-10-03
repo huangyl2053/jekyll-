@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author 自動生成
  */
 public class ShisetsuNyutaishoDialogButtonDiv extends Panel implements IShisetsuNyutaishoDialogButtonDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
@@ -172,14 +174,14 @@ public class ShisetsuNyutaishoDialogButtonDiv extends Panel implements IShisetsu
     @Override
     public int save() {
         if (this.getSaveData() == null || this.getSaveData().isEmpty()
-                || this.getGridData() == null || this.getGridData().isEmpty()) {
+            || this.getGridData() == null || this.getGridData().isEmpty()) {
             return 0;
         }
 
         ArrayList<dgShisetsuNyutaishoRireki_Row> listRow = new ArrayList<>();
         ArrayList<ShisetsuNyutaishoRowData> rowDataList = DataPassingConverter.deserialize(this.getGridData(), ArrayList.class);
         for (ShisetsuNyutaishoRowData rowData : rowDataList) {
-            dgShisetsuNyutaishoRireki_Row row = ShisetsuNyutaishoRowData.toRow(rowData);
+            dgShisetsuNyutaishoRireki_Row row = rowData.toRow();
             listRow.add(row);
         }
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model = DataPassingConverter.deserialize(this.getSaveData(), Models.class);
