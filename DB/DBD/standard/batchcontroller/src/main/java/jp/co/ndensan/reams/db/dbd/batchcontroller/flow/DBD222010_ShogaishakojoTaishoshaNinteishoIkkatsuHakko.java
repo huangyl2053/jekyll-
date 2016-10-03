@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd4030011;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd4030011.ShogaishaKoujoTaishoNinteiShoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd222010.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3860-030 donghj
  */
-public class ShogaishaKojoTaishoshaListFlow extends BatchFlowBase<ShogaishaKojoTaishoshaListParameter> {
+public class DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakko extends BatchFlowBase<DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter> {
 
     private static final String 障がい者控除対象者認定書 = "shogaishaKoujoTaishoNinteiSho";
 

@@ -105,9 +105,11 @@ public class RiyoshaFutangakuGengakuPanel {
             if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
                 div.getRiyoshaFutangakuGengakuShinseiList().getBtnInputNew().setDisabled(true);
             } else {
-                row.setModifyButtonState(DataGridButtonState.Disabled);
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-                row.setSelectable(Boolean.FALSE);
+                if (!承認メニュー.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
             }
         }
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);

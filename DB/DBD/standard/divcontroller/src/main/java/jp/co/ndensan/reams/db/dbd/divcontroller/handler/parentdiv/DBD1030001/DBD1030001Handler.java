@@ -136,9 +136,11 @@ public class DBD1030001Handler {
             if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
                 div.getBtnAddShinsei().setDisabled(true);
             } else {
-                row.setModifyButtonState((DataGridButtonState.Disabled));
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-                row.setSelectable(Boolean.FALSE);
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
             }
         }
         return 情報と状態ArrayList;
