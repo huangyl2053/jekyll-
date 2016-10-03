@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd222010.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.NinteiNaiyoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.Ninteikubun;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -96,7 +96,6 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlSoshituJiyuDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ShikakuSoshitsuJiyu num : ShikakuSoshitsuJiyu.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -167,10 +166,11 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
     /**
      * バッチ用パラメータを作成します。
      *
-     * @return ShogaishaKojoTaishoshaListParameter 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
+     * @return ShogaishaKojoTaishoshaListParameter
+     * 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
      */
-    public ShogaishaKojoTaishoshaListParameter getParameter() {
-        ShogaishaKojoTaishoshaListParameter parameter = new ShogaishaKojoTaishoshaListParameter();
+    public DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter getParameter() {
+        DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter parameter = new DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter();
         parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString().substring(0, INT4)));
         if (div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue() != null) {
             parameter.set被保険者番号(new RString(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));
@@ -204,7 +204,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
     /**
      * 出力順を取得します。
      *
-     * @return ShogaishaKojoTaishoshaListParameter 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
+     * @return ShogaishaKojoTaishoshaListParameter
+     * 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
      */
     public RString get画面出力順() {
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();

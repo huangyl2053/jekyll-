@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD4030011;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd222010.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoHandler;
@@ -61,8 +61,8 @@ public class ShogaishaKoujoTaishoNinteiSho {
      * @param div ShogaishaKoujoTaishoNinteiShoDiv
      * @return ResponseData<ShogaishaKojoTaishoshaListParameter>
      */
-    public ResponseData<ShogaishaKojoTaishoshaListParameter> onClick_btnJiko(ShogaishaKoujoTaishoNinteiShoDiv div) {
-        ShogaishaKojoTaishoshaListParameter parameter = getHandler(div).getParameter();
+    public ResponseData<DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter> onClick_btnJiko(ShogaishaKoujoTaishoNinteiShoDiv div) {
+        DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 

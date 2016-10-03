@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd222010;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShogaishaKojoTaishoshaListParameter extends BatchParameterBase {
+public class DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter extends BatchParameterBase {
 
     @BatchParameter(key = "対象年度", name = "対象年度")
     private FlexibleYear 対象年度;
