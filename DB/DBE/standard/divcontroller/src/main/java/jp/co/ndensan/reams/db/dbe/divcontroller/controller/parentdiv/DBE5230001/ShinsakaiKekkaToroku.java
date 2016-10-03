@@ -72,6 +72,7 @@ public class ShinsakaiKekkaToroku {
     private static final RString 更新申請 = new RString("更新申請");
     private static final RString 新規申請 = new RString("新規申請");
     private static final RString 区分変更申請 = new RString("区分変更申請");
+    private static final int 更新申請可能日数 = 61;
 
     private final ShinsakaiKekkaTorokuManager manager;
 
@@ -413,46 +414,61 @@ public class ShinsakaiKekkaToroku {
 
         /** 申請区分（申請時）と二次判定より、申請区分（法令）を設定 */
         if (新規申請.equals(shinseiKubunShinseiji)) {
-            if (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei)
-                || 要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei)) {
-                div.getTxtShinseiKubunLow().setValue(新規申請);
-            }
+            set申請区分法令At新規申請(nijiHantei, div);
         } else if (更新申請.equals(shinseiKubunShinseiji)) {
-            if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
-                div.getTxtShinseiKubunLow().setValue(更新申請);
-            } else if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei))
-                       && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-                div.getTxtShinseiKubunLow().setValue(新規申請);
-            } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
-                       && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-                div.getTxtShinseiKubunLow().setValue(更新申請);
-            } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
-                       && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
-                div.getTxtShinseiKubunLow().setValue(新規申請);
-            }
+            set申請区分法令At更新申請(zenkaiNijiHantei, nijiHantei, div);
         } else if (区分変更申請.equals(shinseiKubunShinseiji)) {
-            if (zenkaiNijiHantei.equals(nijiHantei)) {
-                if (shinseiDay.plusDay(61).isBeforeOrEquals(zenkaiYukoKikanShuryoDay)) {
-                    div.getTxtShinseiKubunLow().setValue(区分変更申請);
-                } else {
-                    div.getTxtShinseiKubunLow().setValue(更新申請);
-                }
-            } else {
-                if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
-                    div.getTxtShinseiKubunLow().setValue(区分変更申請);
-                } else if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei))
-                           && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-                    div.getTxtShinseiKubunLow().setValue(新規申請);
-                } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
-                           && (要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei))) {
-                    div.getTxtShinseiKubunLow().setValue(区分変更申請);
-                } else if ((要介護1.equals(zenkaiNijiHantei) || 要介護2.equals(zenkaiNijiHantei) || 要介護3.equals(zenkaiNijiHantei) || 要介護4.equals(zenkaiNijiHantei) || 要介護5.equals(zenkaiNijiHantei))
-                           && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei))) {
-                    div.getTxtShinseiKubunLow().setValue(新規申請);
-                }
-            }
+            set申請区分法令At区分変更申請(zenkaiNijiHantei, nijiHantei, shinseiDay, zenkaiYukoKikanShuryoDay, div);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void set申請区分法令At区分変更申請(RString zenkaiNijiHantei, RString nijiHantei,
+            FlexibleDate shinseiDay, FlexibleDate zenkaiYukoKikanShuryoDay, ShinsakaiKekkaTorokuDiv div) throws IllegalStateException {
+        if (zenkaiNijiHantei.equals(nijiHantei)) {
+            if (shinseiDay.plusDay(更新申請可能日数).isBeforeOrEquals(zenkaiYukoKikanShuryoDay)) {
+                div.getTxtShinseiKubunLow().setValue(区分変更申請);
+            } else {
+                div.getTxtShinseiKubunLow().setValue(更新申請);
+            }
+            return;
+        }
+
+        if (is要支援(zenkaiNijiHantei) && is要支援(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(区分変更申請);
+        } else if (is要支援(zenkaiNijiHantei) && is要介護(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(新規申請);
+        } else if (is要介護(zenkaiNijiHantei) && is要介護(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(区分変更申請);
+        } else if (is要介護(zenkaiNijiHantei) && is要支援(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(新規申請);
+        }
+    }
+
+    private boolean is要介護(RString 二次判定結果コード) {
+        return 要介護1.equals(二次判定結果コード) || 要介護2.equals(二次判定結果コード) || 要介護3.equals(二次判定結果コード) || 要介護4.equals(二次判定結果コード) || 要介護5.equals(二次判定結果コード);
+    }
+
+    private boolean is要支援(RString 二次判定結果コード) {
+        return 要支援1.equals(二次判定結果コード) || 要支援2.equals(二次判定結果コード);
+    }
+
+    private void set申請区分法令At更新申請(RString zenkaiNijiHantei, RString nijiHantei, ShinsakaiKekkaTorokuDiv div) {
+        if (is要支援(zenkaiNijiHantei) && is要支援(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(更新申請);
+        } else if (is要支援(zenkaiNijiHantei) && is要介護(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(新規申請);
+        } else if (is要介護(zenkaiNijiHantei) && is要介護(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(更新申請);
+        } else if (is要介護(zenkaiNijiHantei) && is要支援(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(新規申請);
+        }
+    }
+
+    private void set申請区分法令At新規申請(RString nijiHantei, ShinsakaiKekkaTorokuDiv div) {
+        if (is要支援(nijiHantei) || is要介護(nijiHantei)) {
+            div.getTxtShinseiKubunLow().setValue(新規申請);
+        }
     }
 
     /**

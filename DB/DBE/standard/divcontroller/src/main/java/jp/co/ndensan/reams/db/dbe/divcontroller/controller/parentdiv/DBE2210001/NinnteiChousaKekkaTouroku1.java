@@ -104,6 +104,11 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final int 住宅改修_連番 = 1;
     private static final int 市町村特別給付_連番 = 1;
     private static final int 介護保険給付外の在宅サービス_連番 = 2;
+    private static final int 夜間対応型訪問介護 = 13;
+    private static final int 地域密着型特定施設入居者生活介護 = 17;
+    private static final int 地域密着型介護老人福祉施設入所者生活介護 = 18;
+    private static final int 定期巡回_随時対応型訪問介護看護 = 19;
+    private static final int 看護小規模多機能型居宅介護 = 20;
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -888,7 +893,7 @@ public class NinnteiChousaKekkaTouroku1 {
                     利用状況 = new Decimal(0);
                 }
 
-                if (index == 13) {
+                if (index == 夜間対応型訪問介護) {
                     map.put(index, new Decimal(0));
                     map.put(++index, 利用状況);
                 } else {
@@ -898,10 +903,10 @@ public class NinnteiChousaKekkaTouroku1 {
                 index++;
             }
 
-            map.put(17, new Decimal(0));
-            map.put(18, new Decimal(0));
-            map.put(19, new Decimal(0));
-            map.put(20, new Decimal(0));
+            map.put(地域密着型特定施設入居者生活介護, new Decimal(0));
+            map.put(地域密着型介護老人福祉施設入所者生活介護, new Decimal(0));
+            map.put(定期巡回_随時対応型訪問介護看護, new Decimal(0));
+            map.put(看護小規模多機能型居宅介護, new Decimal(0));
         } else if (介護給付サービス_選択.equals(元の選択)) {
             for (dgRiyoServiceJyokyo_Row secondRow : serviceJyokyo) {
                 利用状況 = secondRow.getServiceJokyo().getValue();

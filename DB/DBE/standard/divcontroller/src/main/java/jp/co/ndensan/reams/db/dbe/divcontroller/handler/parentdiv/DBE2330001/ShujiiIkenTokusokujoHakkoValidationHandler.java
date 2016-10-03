@@ -24,6 +24,7 @@ public class ShujiiIkenTokusokujoHakkoValidationHandler {
 
     private final ShujiiIkenshoTokusokujoHakkoDiv div;
     private static final RString OVER_CHOSAIRAI_DAY = new RString("作成期限からの日数には10年以内を設定してください。");
+    private static final int 十年の日数 = 3653;
 
     /**
      * コンストラクタ
@@ -49,7 +50,7 @@ public class ShujiiIkenTokusokujoHakkoValidationHandler {
 
     private void check_TxtOverChosaIraiDay(ValidationMessageControlPairs validationMessages) {
         if (div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().getValue().intValue() < 0
-            || div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().getValue().intValue() > 3653) {
+            || div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().getValue().intValue() > 十年の日数) {
             validationMessages.add(new ValidationMessageControlPair(ShujiiIkenTokusokujoHakkoValidationMessage.ValidateTxtOverChosaIraiDay,
                     div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay()));
         }
