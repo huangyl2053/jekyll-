@@ -29,7 +29,7 @@ public class JukyushaDaichoPanelHandler {
     private static final RString 項目名付加 = new RString("6");
     private static final RString 連番付加 = new RString("7");
     private static final RString 日付_編集 = new RString("8");
-    private static final RString 帳票ID = new RString("DBD130001_HanyoList_JukyushaDaicho2");
+    private static final RString 帳票ID = new RString("DBD701002_HanyoListJukyushaDaicho2");
     private static final RString 全履歴 = new RString("0");
 
     /**
@@ -178,9 +178,8 @@ public class JukyushaDaichoPanelHandler {
             parameter.setCyosaitakusakicodefto(null);
         }
         parameter.setAtenacyusyutsujyoken(RString.EMPTY);
-        //TODO 出力顺ID获取已提技术点待解决。
-        //parameter.setKaipejisyutsuryokujunid(new RSLtring(div.getCcdShutsuryokujun().get出力順ID().toString()));
-        //parameter.setSyutsuryokukomokuid(div.getCcdShutsuryokujun().get出力順ID());
+        parameter.setKaipejisyutsuryokujunid(div.getCcdShutsuryokujun().get出力順ID());
+        parameter.setSyutsuryokukomokuid(div.getCcdShutsuryokujun().get出力順ID());
         parameter.setCyohyoid(帳票ID);
         boolean 項目付加 = false;
         boolean 連番の付加 = false;
