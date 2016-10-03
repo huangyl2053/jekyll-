@@ -708,8 +708,10 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onOkClose_btnToSearchChosaItakusaki(NinteiChosainMasterDiv div) {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getChosainJohoInput().getTxtShichoson().setValue(dataPassModel.get市町村コード());
         div.getChosainJohoInput().getTxtChosaItakusaki().setValue(dataPassModel.get委託先コード());
         div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(dataPassModel.get委託先名());
+        onBlur_txtShichoson(div);
         return ResponseData.of(div).respond();
     }
 
