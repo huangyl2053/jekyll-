@@ -14,11 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
-import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
-import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
-import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -54,13 +50,9 @@ public class KiwarigakuHandler {
      * @param div 期割額Div
      * @param manager 期割額Manager
      * @param 賦課計算Config 賦課計算Config
-     * @param 日付Config 日付Config
-     * @param 普徴Config 普徴Config
-     * @param 特徴Config 特徴Config
-     * @param 過年度Config 過年度Config
      */
-    public KiwarigakuHandler(KiwarigakuDiv div, KiwarigakuManager manager,
-            FukaKeisanConfig 賦課計算Config, HizukeConfig 日付Config, FuchoConfig 普徴Config, TokuchoConfig 特徴Config, KanendoConfig 過年度Config) {
+    KiwarigakuHandler(KiwarigakuDiv div, KiwarigakuManager manager,
+            FukaKeisanConfig 賦課計算Config) {
         this.div = div;
         this.manager = manager;
         this.賦課計算Config = 賦課計算Config;
@@ -281,6 +273,7 @@ public class KiwarigakuHandler {
                 return;
             case 普通徴収:
                 set普通徴収(div, 期割額明細, 普徴期月リスト);
+            default:
         }
     }
 
@@ -309,7 +302,9 @@ public class KiwarigakuHandler {
             case 6:
                 div.getLblTokuKibetsuGaku11().setText(期割額明細.get調定額表記());
                 div.getLblTokuNofuGaku11().setText(期割額明細.get収入額表記());
+                return;
             default:
+                return;
         }
     }
 

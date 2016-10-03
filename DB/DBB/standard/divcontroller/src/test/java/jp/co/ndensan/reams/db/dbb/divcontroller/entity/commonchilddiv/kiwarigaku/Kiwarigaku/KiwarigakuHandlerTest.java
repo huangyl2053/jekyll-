@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +13,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.KiwarigakuDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.KiwarigakuHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblKiwariGaku1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblKiwariGaku2Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblKiwariGaku3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblKiwariGaku4Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblTsuki1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblTsuki2Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblTsuki3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblTsuki4Div;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
@@ -76,9 +66,6 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
             result = createNewDiv();
 //    public KiwarigakuHandler(KiwarigakuDiv div, KiwarigakuManager manager,
 //            FukaKeisanConfig 賦課計算Config, HizukeConfig 日付Config, FuchoConfig 普徴Config, TokuchoConfig 特徴Config, KanendoConfig 過年度Config) {
-            new KiwarigakuHandler(result, createManager(),
-                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
-                    .load(調定年度, 賦課年度, 通知書番号, 履歴番号);
         }
 
         @Test
@@ -140,7 +127,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 納期統一年度の時_loadは_月列を表示する() {
             result = createNewDiv();
             new KiwarigakuHandler(result, createManager(),
-                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config())
                     .load(納期統一年度, 納期統一年度, 通知書番号, 履歴番号);
 
             assertThat(result.getTblTsuki1().isVisible(), is(true));
@@ -158,7 +145,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 納期統一年度より後の時_loadは_月列を表示する() {
             result = createNewDiv();
             new KiwarigakuHandler(result, createManager(),
-                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config())
                     .load(納期統一年度.plusYear(1), 納期統一年度.plusYear(1), 通知書番号, 履歴番号);
 
             assertThat(result.getTblTsuki1().isVisible(), is(true));
@@ -176,7 +163,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 納期統一年度より前の時_loadは_月列を表示しない() {
             result = createNewDiv();
             new KiwarigakuHandler(result, createManager(),
-                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config())
                     .load(納期統一年度.minusYear(1), 納期統一年度.minusYear(1), 通知書番号, 履歴番号);
 
             assertThat(result.getTblTsuki1().isVisible(), is(false));
@@ -197,7 +184,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 調定年度と賦課年度が同じ時_loadは_普徴期情報を参照する() {
             result = createNewDiv();
             new KiwarigakuHandler(result, createManager(),
-                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config())
                     .load(調定年度, 賦課年度, 通知書番号, 履歴番号);
 
             assertThat(result.getTblTsuki2().isVisible(), is(true));
@@ -214,7 +201,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 調定年度と賦課年度が異なる時_loadは_過年度期情報を参照する() {
             result = createNewDiv();
             new KiwarigakuHandler(result, createManager(),
-                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config())
                     .load(調定年度, 賦課年度.plusYear(1), 通知書番号, 履歴番号);
 
             assertThat(result.getTblTsuki2().isVisible(), is(false));
