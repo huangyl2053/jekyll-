@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9020001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterMapperParameter;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001.ShujiiMasterHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001.ShujiiMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho.ShujiiMasterFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -533,12 +535,19 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onBlur_txtShichoson(ShujiiMasterDiv div) {
-        RString shichosonMeisho = ShujiiMasterFinder.createInstance().getShichosonMeisho(
-                ShujiiMasterSearchParameter.createParamForSelectShujiiJoho(
-                        new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue(),
-                        div.getShujiiJohoInput().getTxtShujiiCode().getValue()));
-        div.getShujiiJohoInput().getTxtShichosonmei().setValue(shichosonMeisho);
+        RString shichoson = div.getShujiiJohoInput().getTxtShichoson().getValue();
+        if (RString.isNullOrEmpty(shichoson)) {
+            div.getShujiiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+        } else {
+            RString shichosonMeisho = ShujiiMasterFinder.createInstance().getShichosonMeisho(ShujiiMasterSearchParameter.createParamForSelectShujiiJoho(new LasdecCode(shichoson),
+                    div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue(),
+                    div.getShujiiJohoInput().getTxtShujiiCode().getValue()));
+            if (!RString.isNullOrEmpty(shichosonMeisho)) {
+                div.getShujiiJohoInput().getTxtShichosonmei().setValue(shichosonMeisho);
+            } else {
+                div.getShujiiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -594,6 +603,7 @@ public class ShujiiMaster {
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(dataPassModel.get主治医医療機関コード());
         div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setValue(dataPassModel.get主治医医療機関名称());
         div.getShujiiJohoInput().getTxtShichoson().setValue(dataPassModel.get市町村コード());
+        onBlur_txtShichoson(div);
         return ResponseData.of(div).respond();
     }
 
