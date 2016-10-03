@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -369,7 +370,11 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnShinseiKakutei(RiyoshaFutangakuGengakuPanelDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor申請日の必須入力(pairs, div);
+        if (div.getTxtShinseiYmd().getValue().isEmpty()) {
+            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYmd()));
+        }
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
