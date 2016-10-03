@@ -94,8 +94,8 @@ public class RofukuNenkinDialog {
     public ResponseData<RofukuNenkinDialogDiv> onClick_btnClose(RofukuNenkinDialogDiv div) {
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
                 = div.getCcdRofukuNenkinRireki().getSaveData();
-        RString serialRoreiFukushiNenkinJukyusha = DataPassingConverter.serialize(roreiFukushiNenkinJukyusha);
-        div.setSaveData(serialRoreiFukushiNenkinJukyusha);
+        RString serialRofukuNenkinJukyusha = DataPassingConverter.serialize(roreiFukushiNenkinJukyusha);
+        div.setSaveData(serialRofukuNenkinJukyusha);
         return ResponseData.of(div).respond();
     }
 }

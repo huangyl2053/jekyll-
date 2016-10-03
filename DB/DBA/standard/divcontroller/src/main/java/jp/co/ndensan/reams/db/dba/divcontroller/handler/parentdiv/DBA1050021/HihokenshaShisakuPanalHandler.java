@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -54,7 +53,7 @@ public class HihokenshaShisakuPanalHandler {
     private final RString 合併情報区分 = new RString("1");
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
-    private final RString 照会 = new RString("shokai");
+//    private final RString 照会 = new RString("shokai");
     private final HihokenshaShikakuTeiseiManager manager = HihokenshaShikakuTeiseiManager.createInstance();
 
     /**
@@ -103,7 +102,21 @@ public class HihokenshaShisakuPanalHandler {
 
     private void get画面初期の削除照会モードの表示制御() {
         panelDiv.getKihonJoho().setDisabled(false);
-        panelDiv.getShikakuShosai().setDisabled(true);
+
+        panelDiv.getShikakuShosai().getTxtShutokuDate().setReadOnly(true);
+        panelDiv.getShikakuShosai().getTxtShutokuTodokedeDate().setReadOnly(true);
+        panelDiv.getShikakuShosai().getDdlShutokuJiyu().setReadOnly(true);
+        panelDiv.getShikakuShosai().getDdlHihoKubun().setReadOnly(true);
+        panelDiv.getShikakuShosai().getDdlShutokuShozaiHokensha().setReadOnly(true);
+        panelDiv.getShikakuShosai().getDdlShutokuSochimotoHokensha().setReadOnly(true);
+        panelDiv.getShikakuShosai().getDdlShutokuKyuHokensha().setReadOnly(true);
+        panelDiv.getShikakuShosai().getTxtShutokuShoriDate().setReadOnly(true);
+        panelDiv.getShikakuShosai().getTxtSoshitsuDate().setReadOnly(true);
+        panelDiv.getShikakuShosai().getTxtSoshitsuTodokedeDate().setReadOnly(true);
+        panelDiv.getShikakuShosai().getDdlSoshitsuJiyu().setReadOnly(true);
+        panelDiv.getShikakuShosai().getTxtSoshitsuShoriDate().setReadOnly(true);
+
+        panelDiv.getShikakuShosai().getShikakuShosaiDialogs().setReadOnly(false);
     }
 
     private void setドロップダウンリストの設定(RString viewState, ShikakuRirekiJoho 資格得喪情報, ShikibetsuCode 識別コード) {
@@ -223,7 +236,7 @@ public class HihokenshaShisakuPanalHandler {
     private RString 所在保険者の取得() {
         RString 所在保険者 = RString.EMPTY;
         if (単一保険者.equals(広域と市町村判断())) {
-              所在保険者 = panelDiv.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+            所在保険者 = panelDiv.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
                     .getShikibetsuTaishoHisory().get直近().get現全国地方公共団体コード().getColumnValue();
 
         } else if (広域保険者.equals(広域と市町村判断())) {
@@ -261,22 +274,22 @@ public class HihokenshaShisakuPanalHandler {
 
     private void 表示と非表示() {
         if (単一保険者.equals(広域と市町村判断())) {
-            panelDiv.getLblShutokuShozaiHokensha().setVisible(false);
-            panelDiv.getDdlShutokuShozaiHokensha().setVisible(false);
-            panelDiv.getLblShutokuSochimotoHokensha().setVisible(false);
-            panelDiv.getDdlShutokuSochimotoHokensha().setVisible(false);
+            panelDiv.getLblShutokuShozaiHokensha().setDisplayNone(true);
+            panelDiv.getDdlShutokuShozaiHokensha().setDisplayNone(true);
+            panelDiv.getLblShutokuSochimotoHokensha().setDisplayNone(true);
+            panelDiv.getDdlShutokuSochimotoHokensha().setDisplayNone(true);
         } else if (広域保険者.equals(広域と市町村判断())) {
-            panelDiv.getLblShutokuShozaiHokensha().setVisible(true);
-            panelDiv.getDdlShutokuShozaiHokensha().setVisible(true);
-            panelDiv.getLblShutokuSochimotoHokensha().setVisible(true);
-            panelDiv.getDdlShutokuSochimotoHokensha().setVisible(true);
+            panelDiv.getLblShutokuShozaiHokensha().setDisplayNone(false);
+            panelDiv.getDdlShutokuShozaiHokensha().setDisplayNone(false);
+            panelDiv.getLblShutokuSochimotoHokensha().setDisplayNone(false);
+            panelDiv.getDdlShutokuSochimotoHokensha().setDisplayNone(false);
         }
         if (is合併市町村()) {
-            panelDiv.getLblKyuHokensha().setVisible(true);
-            panelDiv.getDdlShutokuKyuHokensha().setVisible(true);
+            panelDiv.getLblKyuHokensha().setDisplayNone(false);
+            panelDiv.getDdlShutokuKyuHokensha().setDisplayNone(false);
         } else {
-            panelDiv.getLblKyuHokensha().setVisible(false);
-            panelDiv.getDdlShutokuKyuHokensha().setVisible(false);
+            panelDiv.getLblKyuHokensha().setDisplayNone(true);
+            panelDiv.getDdlShutokuKyuHokensha().setDisplayNone(true);
         }
     }
 
@@ -352,9 +365,9 @@ public class HihokenshaShisakuPanalHandler {
             ShikibetsuCode 識別コード,
             FlexibleDate 取得日) {
         set資格得喪情報設定(viewState, 識別コード, 資格得喪情報);
-        get住所地特例情報取得(viewState,被保険者番号, 識別コード, 取得日);
-        get資格変更履歴情報取得(viewState,被保険者番号, 識別コード, 取得日);
-        get施設入退所情報取得(viewState,識別コード);
+        get住所地特例情報取得(viewState, 被保険者番号, 識別コード, 取得日);
+        get資格変更履歴情報取得(viewState, 被保険者番号, 識別コード, 取得日);
+        get施設入退所情報取得(viewState, 識別コード);
     }
 
     private void set資格得喪情報設定(RString viewState, ShikibetsuCode 識別コード, ShikakuRirekiJoho 資格得喪情報) {
@@ -395,8 +408,8 @@ public class HihokenshaShisakuPanalHandler {
             RString 旧保険者 = 資格得喪情報.getKyuHokensha();
 
             DropDownList shutokuKeyHokensha = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha();
-            if (shutokuKeyHokensha.getDataSource().isEmpty()
-                    || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine() == true)) {
+            if ((shutokuKeyHokensha.getDataSource().isEmpty() || (shutokuKeyHokensha.getDataSource().size() == 1)
+                    && shutokuKeyHokensha.getIsBlankLine() == true)) {
                 panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setDisabled(true);
             } else {
                 panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
@@ -417,30 +430,30 @@ public class HihokenshaShisakuPanalHandler {
         return new FlexibleDate(date.toDateString());
     }
 
-    private void get住所地特例情報取得(RString viewState,HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
-        if (状態_照会.equals(viewState)) {
-            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.shokai);
-        }
-        panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().initialize(
-                被保険者番号, 識別コード, 取得日);
+    private void get住所地特例情報取得(RString viewState, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+//        if (状態_照会.equals(viewState)) {
+//            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.shokai);
+//        }
+//        panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().initialize(
+//                被保険者番号, 識別コード, 取得日);
 
     }
 
-    private void get資格変更履歴情報取得(RString viewState,HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
-        if (状態_照会.equals(viewState)) {
-            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().setDisplayTypeBykey(照会);
-        }
-        panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().initialize(
-                被保険者番号, 識別コード, 取得日);
+    private void get資格変更履歴情報取得(RString viewState, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+//        if (状態_照会.equals(viewState)) {
+//            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().setDisplayTypeBykey(照会);
+//        }
+//        panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().initialize(
+//                被保険者番号, 識別コード, 取得日);
 
     }
 
-    private void get施設入退所情報取得(RString viewState,ShikibetsuCode 識別コード) {
-        RString 台帳種別 = new RString("1");
-        if (状態_照会.equals(viewState)) {
-            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().setShokaiMode();
-        }
-        panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード, 台帳種別);
+    private void get施設入退所情報取得(RString viewState, ShikibetsuCode 識別コード) {
+//        RString 台帳種別 = new RString("1");
+//        if (状態_照会.equals(viewState)) {
+//            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().setShokaiMode();
+//        }
+//        panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード, 台帳種別);
 
     }
 

@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiState;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
@@ -30,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -82,10 +83,18 @@ public class HihokenshaShisakuPanal {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
 
+        //旧初期化方法
         ShikakuRirekiJoho 資格得喪情報
                 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
-
         getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
+
+        //新初期化方法
+        List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
+        FlexibleDate shikakuShutokuDate = ViewStateHolder.get(ViewStateKeys.対象者_資格取得日, FlexibleDate.class);
+        System.out.println(hihoDaicho.size());
+        div.getCcdJutokuDialogButton().initialize(ItemList.of(hihoDaicho), shikakuShutokuDate, JushochiTokureiState.照会);
+        div.getCcdShikakuHenkoDialogButton().initialize(ItemList.of(hihoDaicho), 識別コード, shikakuShutokuDate, ShikakuHenkoState.照会);
+
         if (状態_追加.equals(初期_状態)) {
             return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
         } else if (状態_修正.equals(初期_状態)) {
@@ -126,7 +135,7 @@ public class HihokenshaShisakuPanal {
         List<HihokenshaDaicho> 資格訂正情報 = 資格訂正登録リスト取得処理(div);
         manager.checkShikakuTorukuList(資格訂正情報, get当該識別対象の生年月日(div));
         資格訂正処理(div, 資格訂正情報);
-        div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+        //div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
     }
 
     private ValidationMessageControlPairs is暦上日(HihokenshaShisakuPanalDiv div) {
@@ -139,31 +148,31 @@ public class HihokenshaShisakuPanal {
     }
 
     private void 施設入退所履歴期間重複チェック処理(HihokenshaShisakuPanalDiv div) {
-        NyutaishoshaKanriFinder finder = NyutaishoshaKanriFinder.createInstance();
-        List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧List
-                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
-        for (dgShisetsuNyutaishoRireki_Row 施設入退所履歴 : 施設入退所履歴一覧List) {
-            TextBoxFlexibleDate nyushoDate = 施設入退所履歴.getNyushoDate();
-            TextBoxFlexibleDate taishoDate = 施設入退所履歴.getTaishoDate();
-            RString 入所施設種類 = 施設入退所履歴.getShisetsuShuruiKey();
-            boolean checkFlag = finder.isRirekiKikanJufukuFlag(
-                    nyushoDate.getValue(),
-                    taishoDate.getValue(),
-                    入所施設種類);
-            if (checkFlag) {
-                throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
-            }
-        }
+//        NyutaishoshaKanriFinder finder = NyutaishoshaKanriFinder.createInstance();
+//        List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧List
+//                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
+//        for (dgShisetsuNyutaishoRireki_Row 施設入退所履歴 : 施設入退所履歴一覧List) {
+//            TextBoxFlexibleDate nyushoDate = 施設入退所履歴.getNyushoDate();
+//            TextBoxFlexibleDate taishoDate = 施設入退所履歴.getTaishoDate();
+//            RString 入所施設種類 = 施設入退所履歴.getShisetsuShuruiKey();
+//            boolean checkFlag = finder.isRirekiKikanJufukuFlag(
+//                    nyushoDate.getValue(),
+//                    taishoDate.getValue(),
+//                    入所施設種類);
+//            if (checkFlag) {
+//                throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
+//            }
+//        }
     }
 
     private List<HihokenshaDaicho> 資格訂正登録リスト取得処理(HihokenshaShisakuPanalDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ShikakuRirekiJoho 資格詳細情報 = getHandler(div).get資格詳細情報();
-        List<HihokenshaDaicho> 住所地特例情報
-                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().getDataList();
-        List<HihokenshaDaicho> 資格変更履歴情報
-                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridDataFor資格詳細異動().records();
+        List<HihokenshaDaicho> 住所地特例情報 = null;
+//                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().getDataList();
+        List<HihokenshaDaicho> 資格変更履歴情報 = null;
+//                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridDataFor資格詳細異動().records();
         List<HihokenshaDaicho> 資格訂正登録リスト = new ArrayList<>();
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (状態_追加.equals(初期_状態)) {

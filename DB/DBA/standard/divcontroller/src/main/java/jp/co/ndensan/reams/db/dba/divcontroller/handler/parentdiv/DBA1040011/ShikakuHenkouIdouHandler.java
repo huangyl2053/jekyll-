@@ -67,6 +67,11 @@ public class ShikakuHenkouIdouHandler {
         }
     }
 
+    /**
+     * 資格変更情報が保存可能かチェックします。
+     *
+     * @return 保存可能な場合、<@code true>
+     */
     public boolean isSavable() {
         return div.getCcdHihosyosai().is資格変更情報追加済み();
     }

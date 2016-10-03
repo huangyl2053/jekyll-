@@ -55,7 +55,8 @@ public class HihokenshaDaichoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
      */
     public static HihokenshaDaichoManager createInstance() {
         return InstanceProvider.create(HihokenshaDaichoManager.class);

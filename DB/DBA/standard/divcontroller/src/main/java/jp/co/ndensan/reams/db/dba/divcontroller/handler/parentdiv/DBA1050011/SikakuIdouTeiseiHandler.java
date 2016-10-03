@@ -12,28 +12,24 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFuk
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeiseiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.IShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryoHokenRirekiState;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RofukuNenkinState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
-import jp.co.ndensan.reams.db.dbz.service.core.shikakutokuso.ShikakuTokusoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
-import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格異動訂正の画面処理Handlerクラスです。
@@ -44,8 +40,8 @@ public class SikakuIdouTeiseiHandler {
 
     private static final RString 認定履歴ボタン = new RString("HihokenrirekiNashiMode");
     private static final RString 被保履歴ボタン = new RString("NinteirirekiNashiMode");
-    private static final RString チェックNG = new RString("チェックNG");
-    private static final RString 状態_登録 = new RString("登録");
+//    private static final RString チェックNG = new RString("チェックNG");
+//    private static final RString 状態_登録 = new RString("登録");
     private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private final SikakuIdouTeiseiDiv div;
 
@@ -69,9 +65,18 @@ public class SikakuIdouTeiseiHandler {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(識別コード);
 
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
+        //新初期化
+        HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
+        List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(被保険者番号);
+        HihokenshaDaichoList sortedHihoDaichoList = new HihokenshaDaichoList(ItemList.of(hihoDaichoList));
+        IItemList<HihokenshaDaicho> tokusoList = sortedHihoDaichoList.to資格得喪List();
+        div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().initialize(tokusoList);
 
-        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
+        ArrayList<HihokenshaDaicho> serialHihoDaicho = new ArrayList<>();
+        serialHihoDaicho.addAll(hihoDaichoList);
+        ViewStateHolder.put(ViewStateKeys.対象者_被保険者台帳情報, serialHihoDaicho);
+
+        if (div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
             div.setReadOnly(true);
             throw new ApplicationException(
                     UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報"));
@@ -79,79 +84,81 @@ public class SikakuIdouTeiseiHandler {
 
         setButtonDisable();
 
-        div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().
-                initialize(状態_登録, 識別コード.getColumnValue(), 被保険者番号);
+        div.getCcdIryoHokenDialogButton().initialize(被保険者番号, 識別コード, IryoHokenRirekiState.登録);
+        div.getCcdRofukuNenkinDialogButton().initialize(被保険者番号, 識別コード, RofukuNenkinState.登録);
 
-        div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin()
-                .initialize(識別コード, 被保険者番号);
         SikakuIdouTeiseiJoho joho = new SikakuIdouTeiseiJoho();
         joho.setIryoHokenJohoList(set初期化時の医療保険情報());
         joho.setRoreiFukushiJohoList(set初期化時の老福年金情報(識別コード));
         return joho;
     }
 
+    /**
+     * ボタンの有効無効設定をおこないます。
+     */
     public void setButtonDisable() {
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().set追加するボタン(false);
+        div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().set追加するボタン(false);
         List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
         for (dgShikakuShutokuRireki_Row row : div.getShikakuShutokuJoho()
-                .getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().getDataGridDataSource()) {
+                .getCcdShikakuTokusoRireki().getDataGridDataSource()) {
             row.setDeleteButtonState(DataGridButtonState.Enabled);
             row.setModifyButtonState(DataGridButtonState.Enabled);
             dataSource.add(row);
         }
-        div.getShikakuShutokuJoho()
-                .getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().setDataGridDataSource(dataSource);
+        div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().setDataGridDataSource(dataSource);
     }
 
     private List<IryoHokenJoho> set初期化時の医療保険情報() {
         List<IryoHokenJoho> oldList = new ArrayList<>();
-        for (dgIryohokenIchiran_Row row : div.getShikakuShutokuJoho().getTplIryoHoken()
-                .getIryoHokenRirekii().getCcdIryoHokenRireki().getDataGridList()) {
-            IryoHokenJoho joho = new IryoHokenJoho();
-            joho.set医療保険加入年月日(row.getKanyuDate().getValue());
-            joho.set医療保険種別コード(row.getShubetsuCode());
-            joho.set医療保険者名称(row.getHokenshaName());
-            joho.set医療保険者番号(row.getHokenshaCode());
-            joho.set医療保険脱退年月日(row.getDattaiDate().getValue());
-            joho.set医療保険記号番号(row.getKigoNo());
-            joho.set履歴番号(row.getRirekiNo().getValue().intValue());
-            joho.set市町村コード(new LasdecCode(row.getShichosonCode()));
-            joho.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
-            oldList.add(joho);
-        }
+        //初期化はダイアログ内で行うので不要
+//        for (dgIryohokenIchiran_Row row : div.getShikakuShutokuJoho().getTplIryoHoken()
+//                .getIryoHokenRirekii().getCcdIryoHokenRireki().getDataGridList()) {
+//            IryoHokenJoho joho = new IryoHokenJoho();
+//            joho.set医療保険加入年月日(row.getKanyuDate().getValue());
+//            joho.set医療保険種別コード(row.getShubetsuCode());
+//            joho.set医療保険者名称(row.getHokenshaName());
+//            joho.set医療保険者番号(row.getHokenshaCode());
+//            joho.set医療保険脱退年月日(row.getDattaiDate().getValue());
+//            joho.set医療保険記号番号(row.getKigoNo());
+//            joho.set履歴番号(row.getRirekiNo().getValue().intValue());
+//            joho.set市町村コード(new LasdecCode(row.getShichosonCode()));
+//            joho.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
+//            oldList.add(joho);
+//        }
         return oldList;
     }
 
     private List<RoreiFukushiJoho> set初期化時の老福年金情報(ShikibetsuCode 識別コード) {
         List<RoreiFukushiJoho> roreiFukushiJohoList = new ArrayList<>();
-        for (datagridRireki_Row row : div.getShikakuShutokuJoho()
-                .getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().getDataGridList()) {
-            RoreiFukushiJoho joho = new RoreiFukushiJoho();
-            joho.set識別コード(識別コード);
-            joho.set状態(row.getJotai());
-            joho.set受給開始年月日(rdateToFlexibleDate(row.getStartDate().getValue()));
-            joho.set受給廃止年月日(rdateToFlexibleDate(row.getEndDate().getValue()));
-            roreiFukushiJohoList.add(joho);
-        }
+        //初期化はダイアログ内で行うので不要
+//        for (datagridRireki_Row row : div.getShikakuShutokuJoho()
+//                .getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().getDataGridList()) {
+//            RoreiFukushiJoho joho = new RoreiFukushiJoho();
+//            joho.set識別コード(識別コード);
+//            joho.set状態(row.getJotai());
+//            joho.set受給開始年月日(rdateToFlexibleDate(row.getStartDate().getValue()));
+//            joho.set受給廃止年月日(rdateToFlexibleDate(row.getEndDate().getValue()));
+//            roreiFukushiJohoList.add(joho);
+//        }
         return roreiFukushiJohoList;
     }
-
-    private FlexibleDate stringToFlexibleDate(RString date) {
-        FlexibleDate flexDate = FlexibleDate.EMPTY;
-        if (!RString.isNullOrEmpty(date)) {
-            RDate date_tmp = new RDate(date.toString());
-            flexDate = new FlexibleDate(date_tmp.toDateString());
-        }
-        return flexDate;
-    }
-
-    private FlexibleDate rdateToFlexibleDate(RDate date) {
-        FlexibleDate flexDate = FlexibleDate.EMPTY;
-        if (date != null) {
-            flexDate = new FlexibleDate(date.toDateString());
-        }
-        return flexDate;
-    }
+//
+//    private FlexibleDate stringToFlexibleDate(RString date) {
+//        FlexibleDate flexDate = FlexibleDate.EMPTY;
+//        if (!RString.isNullOrEmpty(date)) {
+//            RDate date_tmp = new RDate(date.toString());
+//            flexDate = new FlexibleDate(date_tmp.toDateString());
+//        }
+//        return flexDate;
+//    }
+//
+//    private FlexibleDate rdateToFlexibleDate(RDate date) {
+//        FlexibleDate flexDate = FlexibleDate.EMPTY;
+//        if (date != null) {
+//            flexDate = new FlexibleDate(date.toDateString());
+//        }
+//        return flexDate;
+//    }
 
     /**
      * 画面遷移のパラメータの設定します。
@@ -162,8 +169,7 @@ public class SikakuIdouTeiseiHandler {
     public ShikakuRirekiJoho setパラメータ(RString 状態) {
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
         if (!new RString("追加").equals(状態)) {
-            dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekii()
-                    .getCcdShikakuTokusoRireki().getDataGridSelectItem();
+            dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().getDataGridSelectItem();
             joho.setDaNo(row.getDaNo());
             joho.setHihokenshaKubun(row.getHihokenshaKubun());
             joho.setHihokenshaKubunKey(row.getHihokenshaKubunKey());
@@ -184,7 +190,11 @@ public class SikakuIdouTeiseiHandler {
             joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
             joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
             joho.setState(row.getState());
+
+            //選択した行の資格取得日を保持する。
+            ViewStateHolder.put(ViewStateKeys.対象者_資格取得日, row.getShutokuDate().getValue());
         }
+
         return joho;
     }
 
@@ -201,8 +211,10 @@ public class SikakuIdouTeiseiHandler {
 //                && チェックNG.equals(service.checkRofukuNenkin(joho.getRoreiFukushiJohoList(), set初期化時の老福年金情報(識別コード)))) {
 //            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
 //        }
-        div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().save();
-        div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().click_Save();
+        //div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().save();
+        //div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().click_Save();
+        div.getCcdIryoHokenDialogButton().save();
+        div.getCcdRofukuNenkinDialogButton().save();
     }
 
     private void kaigoShikakuKihon_onload(HihokenshaNo 被保険者番号, RString 表示モード) {

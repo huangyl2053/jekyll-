@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaManager;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
@@ -130,10 +132,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * @param データソース グリッドに設定するデータソース
      * @param 施設入退所情報Model 施設入退所情報Model
      */
-    public void initialize(List<dgShisetsuNyutaishoRireki_Row> データソース, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
+    public void initialize(Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
 
-        div.getDgShisetsuNyutaishoRireki().setDataSource(データソース);
         ViewStateHolder.put(ViewStateKeys.施設入退所情報, 施設入退所情報Model);
+        一覧の設定For施設入退所Model(施設入退所情報Model);
 
         switch (div.getMode_DisplayMode()) {
             case 照会:
@@ -393,6 +395,50 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
         Collections.sort(rowList, new ShisetsuNyutaishoRirekiKanriHandler.NyushoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(rowList);
+    }
+
+    private void 一覧の設定For施設入退所Model(Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
+        List<JigyoshaNo> jigyoshaNoList = new ArrayList<>();
+        for (ShisetsuNyutaisho nyutaisho : 施設入退所情報Model) {
+            jigyoshaNoList.add(nyutaisho.get入所施設コード());
+        }
+        List<KaigoJigyosha> kaigoJigyoshaList = KaigoJigyoshaManager.createInstance()
+                .select介護事業者ListBy申請日(jigyoshaNoList, FlexibleDate.getNowDate());
+
+        List<dgShisetsuNyutaishoRireki_Row> rowList = new ArrayList<>();
+        for (ShisetsuNyutaisho 施設入退所 : 施設入退所情報Model) {
+            JigyoshaNo settingJigyoshaNo = JigyoshaNo.EMPTY;
+            if (!(施設入退所.get入所施設コード() == null)) {
+                settingJigyoshaNo = 施設入退所.get入所施設コード();
+            }
+
+            dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row();
+            row.getNyushoDate().setValue(施設入退所.get入所年月日());
+            row.getTaishoDate().setValue(施設入退所.get退所年月日());
+            row.setShisetsu(get事業者名称(kaigoJigyoshaList, settingJigyoshaNo));
+            row.setDaichoShubetsu(get台帳種別(施設入退所.get台帳種別()));
+            row.setShisetsuShurui(get施設種類(施設入退所.get入所施設種類()));
+            row.setShisetsuCode(settingJigyoshaNo.getColumnValue());
+            row.setShisetsuMeisho(get事業者名称(kaigoJigyoshaList, settingJigyoshaNo));
+            row.setDaichoShubetsuKey(施設入退所.get台帳種別());
+            row.setShisetsuShuruiKey(施設入退所.get入所施設種類());
+            row.setRirekiNo(new RString(施設入退所.get履歴番号()));
+            施設種類(施設入退所.get台帳種別(), row);
+            rowList.add(row);
+
+            row.setState(RString.EMPTY);
+        }
+        Collections.sort(rowList, new ShisetsuNyutaishoRirekiKanriHandler.NyushoDateComparator());
+        div.getDgShisetsuNyutaishoRireki().setDataSource(rowList);
+    }
+
+    private RString get事業者名称(List<KaigoJigyosha> kaigoJigyoshaList, JigyoshaNo jigyoshaNo) {
+        for (KaigoJigyosha jigyosha : kaigoJigyoshaList) {
+            if (jigyosha.get事業者番号().equals(jigyoshaNo)) {
+                return jigyosha.get事業者名称().getColumnValue();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private List<KeyValueDataSource> get台帳種別DDL() {

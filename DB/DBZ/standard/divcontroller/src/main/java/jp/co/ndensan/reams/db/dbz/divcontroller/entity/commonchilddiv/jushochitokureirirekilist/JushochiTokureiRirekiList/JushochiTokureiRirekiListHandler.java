@@ -302,13 +302,22 @@ public class JushochiTokureiRirekiListHandler {
 
         // 画面に初期化表示制御
         initBtnDisplay();
-        
-        if (JushochiTokureiRirekiListDiv.DisplayType.shokai.equals(jutokuRirekiDiv.getMode_DisplayType())) {
-            jutokuRirekiDiv.getBtnAdd().setVisible(false);
-            jutokuRirekiDiv.getJutokuInput().setVisible(false);
-        }
-            
 
+    }
+
+    /**
+     * 共有子Divの状態を初期化します。引数からグリッド上に設定するデータを受け取り、それを元に初期化します。
+     *
+     * @param dataSource 住所地特例グリッドに設定するデータ
+     */
+    public void initialize(List<dgJutoku_Row> dataSource) {
+
+        jutokuRirekiDiv.getDgJutoku().setDataSource(dataSource);
+        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(DBACodeShubetsu.介護資格住特適用.getコード()));
+        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(DBACodeShubetsu.介護資格住特解除.getコード()));
+
+        // 画面に初期化表示制御
+        initBtnDisplay();
     }
 
     /**
@@ -419,11 +428,12 @@ public class JushochiTokureiRirekiListHandler {
     private void initBtnDisplay() {
 
         if (JushochiTokureiRirekiListDiv.DisplayType.shokai.equals(jutokuRirekiDiv.getMode_DisplayType())) {
-            jutokuRirekiDiv.getBtnAdd().setVisible(false);
-            jutokuRirekiDiv.getBtnJutokuKakutei().setVisible(false);
-            jutokuRirekiDiv.getBtnJutokuTorikeshi().setVisible(false);
-            jutokuRirekiDiv.getJutokuKaijoInput().setDisabled(true);
-            jutokuRirekiDiv.getJutokuTekiyoInput().setDisabled(true);
+            jutokuRirekiDiv.getBtnAdd().setDisplayNone(true);
+            jutokuRirekiDiv.getBtnJutokuKakutei().setDisplayNone(true);
+            jutokuRirekiDiv.getBtnJutokuTorikeshi().setDisplayNone(true);
+            jutokuRirekiDiv.getJutokuKaijoInput().setDisplayNone(true);
+            jutokuRirekiDiv.getJutokuTekiyoInput().setDisplayNone(true);
+            jutokuRirekiDiv.getJutokuInput().setDisplayNone(true);
         } else if (JushochiTokureiRirekiListDiv.DisplayType.tekiyo.equals(jutokuRirekiDiv.getMode_DisplayType())) {
             jutokuRirekiDiv.getJutokuKaijoInput().setDisplayNone(true);
         } else if (JushochiTokureiRirekiListDiv.DisplayType.kaijo.equals(jutokuRirekiDiv.getMode_DisplayType())) {
