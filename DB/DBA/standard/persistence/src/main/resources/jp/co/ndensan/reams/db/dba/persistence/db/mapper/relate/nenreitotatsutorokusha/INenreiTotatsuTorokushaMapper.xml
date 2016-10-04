@@ -322,7 +322,6 @@
         WHERE
         TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> dbT1001."lastUpdateTimestamp"
         AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
-        AND dbT1001."insertReamsLoginId" = 'anonymous'
         AND (
         dbT1001."idoJiyuCode" = #{shutokuJiyu_Hihokensha}
         OR dbT1001."idoJiyuCode" = #{henkoJiyu_Hihokensha}
