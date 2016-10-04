@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistfukadaicho.HanyoListFukaDaichoBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022001.DBB022001_FukaDaichoHanyoListSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.JukyushaHantei;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.KijunbiKubun;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220001.HanyoListFukaDaichoParamDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.JukyushaHantei;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.KijunbiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -75,10 +75,10 @@ public class HanyoListFukaDaichoParamHandler {
     /**
      * 実行ボタンイベント。
      *
-     * @return HanyoListFukaDaichoBatchParameter
+     * @return DBB022001_FukaDaichoHanyoListSakuseiParameter
      */
-    public HanyoListFukaDaichoBatchParameter onClick_btnExecute() {
-        HanyoListFukaDaichoBatchParameter parameter = new HanyoListFukaDaichoBatchParameter();
+    public DBB022001_FukaDaichoHanyoListSakuseiParameter onClick_btnExecute() {
+        DBB022001_FukaDaichoHanyoListSakuseiParameter parameter = new DBB022001_FukaDaichoHanyoListSakuseiParameter();
         parameter.set帳票ID(div.getCcdShutsuryokujun().get帳票ID());
         宛名抽出条件と出力順と出力項目(parameter);
         boolean 項目名付加 = false;
@@ -128,7 +128,7 @@ public class HanyoListFukaDaichoParamHandler {
      *
      * @param parameter HanyoListShotokuJohoBatchParameter
      */
-    private void 宛名抽出条件と出力順と出力項目(HanyoListFukaDaichoBatchParameter parameter) {
+    private void 宛名抽出条件と出力順と出力項目(DBB022001_FukaDaichoHanyoListSakuseiParameter parameter) {
         parameter.set宛名抽出条件(div.getChushutsuPanel2().getCcdAtenaJoken().get宛名抽出条件());
         if (div.getCcdShutsuryokujun() != null && div.getCcdShutsuryokujun().get出力順ID() != null) {
             long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();

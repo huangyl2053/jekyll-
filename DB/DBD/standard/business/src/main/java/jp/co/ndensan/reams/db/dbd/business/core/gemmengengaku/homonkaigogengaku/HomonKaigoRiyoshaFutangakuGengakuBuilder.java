@@ -125,7 +125,6 @@ public class HomonKaigoRiyoshaFutangakuGengakuBuilder {
      * @return {@link HomonKaigoRiyoshaFutangakuGengakuBuilder}
      */
     public HomonKaigoRiyoshaFutangakuGengakuBuilder set給付率(HokenKyufuRitsu 給付率) {
-        requireNonNull(給付率, UrSystemErrorMessages.値がnull.getReplacedMessage("給付率"));
         entity.setKyufuritsu(給付率);
         return this;
     }

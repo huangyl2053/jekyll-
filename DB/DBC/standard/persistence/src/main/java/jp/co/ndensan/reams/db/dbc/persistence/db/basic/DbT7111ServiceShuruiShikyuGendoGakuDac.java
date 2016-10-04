@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -93,5 +95,56 @@ public class DbT7111ServiceShuruiShikyuGendoGakuDac implements ISaveable<DbT7111
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * データを物理削除する
+     *
+     * @param entity DbT7112ShokanShuruiShikyuGendoGakuEntity
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public int delete(DbT7111ServiceShuruiShikyuGendoGakuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類支給限度額エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
+     * サービス種類支給限度額を全件返します。
+     *
+     * @return List<DbT7111ServiceShuruiShikyuGendoGakuEntity>
+     */
+    @Transaction
+    public List<DbT7111ServiceShuruiShikyuGendoGakuEntity> select種類支給限度額() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7111ServiceShuruiShikyuGendoGaku.class).
+                order(by(DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishiYM, Order.DESC),
+                        by(DbT7111ServiceShuruiShikyuGendoGaku.serviceShuruiCode, Order.ASC),
+                        by(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, Order.ASC)).
+                toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
+    }
+
+    /**
+     * サービス種類支給限度額を全件返します。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 適用終了年月 TekiyoKaishuYM
+     * @return List<DbT7111ServiceShuruiShikyuGendoGakuEntity>
+     */
+    @Transaction
+    public List<DbT7111ServiceShuruiShikyuGendoGakuEntity> selectByPama(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用終了年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7111ServiceShuruiShikyuGendoGaku.class).
+                where(and(
+                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(tekiyoKaishiYM, 適用終了年月))).
+                toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
     }
 }

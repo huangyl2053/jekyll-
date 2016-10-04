@@ -28,7 +28,7 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
     private final YMDHMS 帳票作成日時;
     private static final RString SAKUSEI = new RString("作成");
     private static final RString NUM = new RString("99");
-    private static final RString ST = new RString("ST");
+    private static final RString コード_ST = new RString("ST");
     private static final RString 総合計 = new RString("「＊＊　総合計　＊＊」");
 
     /**
@@ -63,13 +63,16 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.kanName = 総合計;
         }
 
+        source.kanCode = 請求額通知書情報.get款コード();
+        source.kouCode = 請求額通知書情報.get項コード();
+
         if (!NUM.equals(請求額通知書情報.get項コード())) {
             source.kouName = 請求額通知書情報.get項名();
         } else {
             source.kouName = RString.EMPTY;
         }
         source.kokuhorenName = 請求額通知書情報.get国保連合会名();
-        if (!ST.equals(請求額通知書情報.getサービス種類コード())) {
+        if (!コード_ST.equals(請求額通知書情報.getサービス種類コード())) {
             source.listMeisai_1 = 請求額通知書情報.getサービス種類名();
             source.listMeisai_3 = this.decimal_to_string(請求額通知書情報.get通常分_実日数());
         } else {
@@ -84,7 +87,7 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
         source.listMeisai_8 = this.decimal_to_string(請求額通知書情報.get再審査_過誤_調整額());
         source.listMeisai_9 = this.decimal_to_string(請求額通知書情報.get公費負担額());
         source.listMeisai_10 = this.decimal_to_string(請求額通知書情報.get利用者負担額());
-        if (請求額通知書情報.get合計_帳票レコード種別() != null && !請求額通知書情報.get合計_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(請求額通知書情報.get合計_帳票レコード種別())) {
             source.gokeiTsujoKensu = this.decimal_to_string(請求額通知書情報.get合計_通常分_件数());
             source.gokeiTsujoTanisu = this.decimal_to_string(請求額通知書情報.get合計_通常分_単位数());
             source.gokeiTsujoKingaku = this.decimal_to_string(請求額通知書情報.get合計_通常分_金額());
@@ -94,7 +97,7 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.gokeiKohiFutangaku = this.decimal_to_string(請求額通知書情報.get合計_公費負担額());
             source.gokeiRiyoshaFutangaku = this.decimal_to_string(請求額通知書情報.get合計_利用者負担額());
         }
-        if (請求額通知書情報.get累計_帳票レコード種別() != null && 請求額通知書情報.get累計_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(請求額通知書情報.get累計_帳票レコード種別())) {
             source.ruikeiTsujoKensu = this.decimal_to_string(請求額通知書情報.get累計_通常分_件数());
             source.ruikeiTsujoTanisu = this.decimal_to_string(請求額通知書情報.get累計_通常分_単位数());
             source.ruikeiTsujoKingaku = this.decimal_to_string(請求額通知書情報.get累計_通常分_金額());
@@ -104,7 +107,7 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.ruikeiKohiFutangaku = this.decimal_to_string(請求額通知書情報.get累計_公費負担額());
             source.ruikeiRiyoshaFutangaku = this.decimal_to_string(請求額通知書情報.get累計_利用者負担額());
         }
-        if (請求額通知書情報.get手数料_帳票レコード種別() != null && !請求額通知書情報.get手数料_帳票レコード種別().isEmpty()) {
+        if (!RString.isNullOrEmpty(請求額通知書情報.get手数料_帳票レコード種別())) {
             source.tesuryoSeikyugaku = this.decimal_to_string(請求額通知書情報.get手数料_請求額());
             source.tesuryoRuikeigaku = this.decimal_to_string(請求額通知書情報.get手数料_累計請求額());
         }

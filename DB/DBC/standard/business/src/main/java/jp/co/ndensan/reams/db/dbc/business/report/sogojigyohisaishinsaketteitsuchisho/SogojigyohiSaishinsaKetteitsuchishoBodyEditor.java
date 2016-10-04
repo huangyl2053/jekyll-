@@ -24,6 +24,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoBodyEditor
 
     private final SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity 帳票出力対象データ;
     private final boolean 集計Flag;
+    private final int 連番;
+    private final boolean データFlag;
     private static final RString 決定タイトル = new RString("＜再審査決定＞");
     private static final RString 決定件数タイトル = new RString("件数");
     private static final RString 決定単位数タイトル = new RString("単位数");
@@ -39,11 +41,16 @@ public class SogojigyohiSaishinsaKetteitsuchishoBodyEditor
      *
      * @param 帳票出力対象データ SaishinsaKetteiTsuchishoChohyoEntity
      * @param 集計Flag boolean
+     * @param 連番 int
+     * @param データFlag boolean
+     *
      */
     public SogojigyohiSaishinsaKetteitsuchishoBodyEditor(
-            SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity 帳票出力対象データ, boolean 集計Flag) {
+            SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity 帳票出力対象データ, boolean 集計Flag, int 連番, boolean データFlag) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.集計Flag = 集計Flag;
+        this.連番 = 連番;
+        this.データFlag = データFlag;
     }
 
     @Override
@@ -53,13 +60,18 @@ public class SogojigyohiSaishinsaKetteitsuchishoBodyEditor
         if (集計Flag) {
             edit集計(source);
         } else {
-            edit明細(source);
+            if (!データFlag) {
+                edit明細(source);
+            } else {
+                edit集計(source);
+                edit明細(source);
+            }
         }
         return source;
     }
 
     private void edit明細(SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource source) {
-        source.listUpper_1 = new RString(帳票出力対象データ.get連番());
+        source.listUpper_1 = new RString(連番);
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
         source.listUpper_3 = 帳票出力対象データ.get事業者番号().getColumnValue();
         source.listUpper_4 = 帳票出力対象データ.get事業者名();
@@ -79,6 +91,7 @@ public class SogojigyohiSaishinsaKetteitsuchishoBodyEditor
         source.listLower_4 = 帳票出力対象データ.get申立事由();
         source.listLower_5 = doカンマ編集(帳票出力対象データ.get原審単位数());
         source.listLower_6 = doカンマ編集(帳票出力対象データ.get調整単位数());
+        source.shikibetuCode = 帳票出力対象データ.get識別コード();
     }
 
     private void edit集計(SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource source) {

@@ -8,12 +8,20 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_DdlChiku(): string {
+                return "onChange_DdlChiku";
+            }
+
             public static onOkClose_btnChoikiGuide(): string {
                 return "onOkClose_btnChoikiGuide";
             }
 
             public static onOkClose_btnChikuNyuryokuGuide(): string {
                 return "onOkClose_btnChikuNyuryokuGuide";
+            }
+
+            public static onChange_市町村DDL(): string {
+                return "onChange_市町村DDL";
             }
 
         }

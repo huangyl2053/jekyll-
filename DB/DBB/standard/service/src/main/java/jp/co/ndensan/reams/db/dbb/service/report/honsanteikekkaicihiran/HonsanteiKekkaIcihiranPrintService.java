@@ -62,13 +62,13 @@ public class HonsanteiKekkaIcihiranPrintService {
     /**
      * printHonsanteiKekkaIcihiraのメソッド
      *
-     * @param 計算後情報_宛名_口座EntityList List<KeisangojohoAtenaKozaEntity>
+     * @param 計算後情報_宛名_口座Entity KeisangojohoAtenaKozaEntity
      * @param 賦課年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @param 出力順ID Long
      * @return SourceDataCollection
      */
-    public SourceDataCollection printHonsanteiKekkaIcihira(List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList,
+    public SourceDataCollection printHonsanteiKekkaIcihira(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity,
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
             Long 出力順ID) {
@@ -83,23 +83,16 @@ public class HonsanteiKekkaIcihiranPrintService {
 
         List<RString> 出力順項目リスト = get出力順(出力順ID);
         List<RString> 改頁項目リスト = get改頁項目(出力順ID);
-
-        List<RString> 住所編集リスト = new ArrayList<>();
-        for (KeisangojohoAtenaKozaEntity entity : 計算後情報_宛名_口座EntityList) {
-
-            IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
-            ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-            RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, AssociationFinderFactory.createInstance().getAssociation());
-            住所編集リスト.add(住所編集);
-        }
-
+        IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座Entity.get宛名Entity());
+        ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
+        RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, AssociationFinderFactory.createInstance().getAssociation());
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<HonsanteiKekkaIcihiranReportSource> assembler = createAssembler(property, reportManager)) {
 
                 ReportSourceWriter<HonsanteiKekkaIcihiranReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 new HonsanteiKekkaIcihiranReport(
-                        計算後情報_宛名_口座EntityList, 賦課年度, 調定日時,
-                        市町村コード, 市町村名, 住所編集リスト, 出力順項目リスト, 改頁項目リスト).writeBy(reportSourceWriter);
+                        計算後情報_宛名_口座Entity, 賦課年度, 調定日時,
+                        市町村コード, 市町村名, 住所編集, 出力順項目リスト, 改頁項目リスト).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
         }

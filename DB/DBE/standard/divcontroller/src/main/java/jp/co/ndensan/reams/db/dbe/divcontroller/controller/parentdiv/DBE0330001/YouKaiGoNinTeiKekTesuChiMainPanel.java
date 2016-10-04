@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0330001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChi;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe090001.YouKaiGoNinTeiKekTesuChiFlowParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090001.DBE090001_ShujiiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.DBE0330001StateName;
@@ -220,9 +220,9 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<YouKaiGoNinTeiKekTesuChiFlowParameter> onClick_btnBatchRegister(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-        ResponseData<YouKaiGoNinTeiKekTesuChiFlowParameter> response = new ResponseData<>();
-        YouKaiGoNinTeiKekTesuChiFlowParameter param = new YouKaiGoNinTeiKekTesuChiFlowParameter();
+    public ResponseData<DBE090001_ShujiiKekkaTsuchiParameter> onClick_btnBatchRegister(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        ResponseData<DBE090001_ShujiiKekkaTsuchiParameter> response = new ResponseData<>();
+        DBE090001_ShujiiKekkaTsuchiParameter param = new DBE090001_ShujiiKekkaTsuchiParameter();
 
         param.setNijiHanteiYMDFrom(div.getTxtNijiHanteiKikan().getFromValue() == null
                 ? RString.EMPTY : div.getTxtNijiHanteiKikan().getFromValue().toDateString());

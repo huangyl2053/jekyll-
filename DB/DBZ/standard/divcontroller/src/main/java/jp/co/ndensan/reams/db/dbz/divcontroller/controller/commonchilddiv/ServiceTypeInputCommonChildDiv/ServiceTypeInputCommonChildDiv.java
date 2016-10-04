@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservices
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ServiceTypeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -52,6 +54,22 @@ public class ServiceTypeInputCommonChildDiv {
                 new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
         SearchResult<KaigoServiceShurui> focusServiceTypeList = service.getFocusServiceTypeList(param);
         getHandler(div).setServiceTypeName(focusServiceTypeList.records());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * サービス種類コードのボタンを押します。
+     *
+     * @param div ServiceTypeInputCommonChildDivDiv
+     * @return ResponseData<ServiceTypeInputCommonChildDivDiv>
+     */
+    public ResponseData<ServiceTypeInputCommonChildDivDiv> onBeforeDialg(ServiceTypeInputCommonChildDivDiv div) {
+        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceModel(), ServiceTypeModel.class);
+        if (model == null) {
+            model = new ServiceTypeModel();
+        }
+        model.setサービス種類コード(div.getTxtServiceType().getValue());
+        div.setHdnServiceModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
 

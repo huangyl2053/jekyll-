@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3106-020 zhengsongling -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsamoshitate.ISaishinsaMoshitateMapper">
+    <resultMap id="get再審査申立情報Result" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitate.SaishinsaMoshitateRelateEntity">
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+    <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+    <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="資格取得年月日" column="資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="資格取得届出年月日" column="資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="資格喪失事由コード" column="資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="資格喪失届出年月日" column="資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="住所地特例フラグ" column="住所地特例フラグ" />
+    <result property="広域内住所地特例フラグ" column="広域内住所地特例フラグ" />
+    <result property="広住特措置元市町村コード" column="広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+    <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+    <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+    <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
+    <result property="サービス種類名" column="サービス種類名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="サービス項目コード" column="サービス項目コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler" />
+    <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+    <result property="申立年月日" column="申立年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="申立者区分コード" column="申立者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="申立単位数" column="申立単位数" />
+    <result property="申立事由コード" column="申立事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="申立事由" column="申立事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="国保連送付年月" column="国保連送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+    <result property="受給申請事由" column="受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    <result property="受給申請年月日" column="受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="要介護認定状態区分コード" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="認定年月日" column="認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    <result property="旧措置者フラグ" column="旧措置者フラグ"  />
+    <result property="みなし要介護区分コード" column="みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    <result property="直近異動事由コード" column="直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    <result property="要支援者認定申請区分" column="要支援者認定申請区分"/>
+    <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    <sql id="再審査申立情報">
+        再審査申立情報."shichosonCode" AS "市町村コード",
+        再審査申立情報."hihokenshaNo" AS "被保険者番号",
+        再審査申立情報."shikakuShutokuJiyuCode" AS "資格取得事由コード",
+        再審査申立情報."shikakuShutokuYMD" AS "資格取得年月日",
+        再審査申立情報."shikakuShutokuTodokedeYMD" AS "資格取得届出年月日",
+        再審査申立情報."shikakuSoshitsuJiyuCode" AS "資格喪失事由コード",
+        再審査申立情報."shikakuSoshitsuYMD" AS "資格喪失年月日",
+        再審査申立情報."shikakuSoshitsuTodokedeYMD" AS "資格喪失届出年月日",
+        再審査申立情報."hihokennshaKubunCode" AS "被保険者区分コード",
+        再審査申立情報."jushochiTokureiFlag" AS "住所地特例フラグ",
+        再審査申立情報."koikinaiJushochiTokureiFlag" AS "広域内住所地特例フラグ",
+        再審査申立情報."koikinaiTokureiSochimotoShichosonCode" AS "広住特措置元市町村コード",
+        再審査申立情報."jigyoshoNo" AS "事業所番号",
+        再審査申立情報."jigyoshaName" AS "事業者名称",
+        再審査申立情報."serviceTeikyoYM" AS "サービス提供年月",
+        再審査申立情報."serviceTeikyoShuruiCode" AS "サービス種類コード",
+        再審査申立情報."serviceShuruiMeisho" AS "サービス種類名",
+        再審査申立情報."serviceKomokuCode" AS "サービス項目コード",
+        再審査申立情報."shokisaiHokenshaNo" AS "証記載保険者番号",
+        再審査申立情報."moshitateYMD" AS "申立年月日",
+        再審査申立情報."moshitateshaKubunCode" AS "申立者区分コード",
+        再審査申立情報."moshitateTanisu" AS "申立単位数",
+        再審査申立情報."moshitateJiyuCode" AS "申立事由コード",
+        再審査申立情報."moshitateJiyu" AS "申立事由",
+        再審査申立情報."kokuhorenSofuYM" AS "国保連送付年月",
+        再審査申立情報."jukyuShinseiJiyu" AS "受給申請事由",
+        再審査申立情報."jukyuShinseiYMD" AS "受給申請年月日",
+        再審査申立情報."yokaigoJotaiKubunCode" AS "要介護認定状態区分コード",
+        再審査申立情報."ninteiYukoKikanKaishiYMD" AS "認定有効期間開始年月日",
+        再審査申立情報."ninteiYukoKikanShuryoYMD" AS "認定有効期間終了年月日",
+        再審査申立情報."ninteiYMD" AS "認定年月日",
+        再審査申立情報."kyuSochishaFlag" AS "旧措置者フラグ",
+        再審査申立情報."minashiCode" AS "みなし要介護区分コード",
+        再審査申立情報."chokkinIdoJiyuCode" AS "直近異動事由コード",
+        再審査申立情報."yoshienshaNinteiShinseiFlag" AS "要支援者認定申請区分"
+    </sql>
+    <select resultOrdered="true" id="get再審査申立情報" resultMap="get再審査申立情報Result"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saishinsamoshitate.SaishinsamoshitateMybatisParameter" fetchSize="500">
+        WITH 抽出対象 AS  (
+            SELECT
+                "DbT3062SaishinsaMoshitate"."jigyoshoNo" AS "jigyoshoNo",
+                "DbT3062SaishinsaMoshitate"."hiHokenshaNo" AS "hiHokenshaNo",
+                "DbT3062SaishinsaMoshitate"."serviceTeikyoYM" AS "serviceTeikyoYM",
+                "DbT3062SaishinsaMoshitate"."serviceTeikyoShuruiCode" AS "serviceTeikyoShuruiCode",
+                "DbT3062SaishinsaMoshitate"."serviceKomokuCode" AS "serviceKomokuCode",
+                "DbT3062SaishinsaMoshitate"."rirekiNo" AS "rirekiNo"
+            FROM
+                rgdb."DbT3062SaishinsaMoshitate"
+            WHERE
+                '1' = '1'
+                <if test="has国保連送付年月From">
+            AND
+                #{kokuhorensouhunengetsufrom} <![CDATA[<=]]> "DbT3062SaishinsaMoshitate"."kokuhorenSofuYM"
+                </if>
+                <if test="has国保連送付年月To">
+            AND        
+                "DbT3062SaishinsaMoshitate"."kokuhorenSofuYM" <![CDATA[<=]]> #{kokuhorensouhunengetsuto}
+                </if>
+                <if test="hasサービス提供年月From">
+            AND
+                #{severteikyounengetsufrom} <![CDATA[<=]]> "DbT3062SaishinsaMoshitate"."serviceTeikyoYM"
+                </if>
+                <if test="hasサービス提供年月To">
+            AND
+                "DbT3062SaishinsaMoshitate"."serviceTeikyoYM" <![CDATA[<=]]> #{severteikyounengetsuto}
+                </if>
+                <if test="has事業者番号">
+            AND        
+                "DbT3062SaishinsaMoshitate"."jigyoshoNo" = #{jigyoushabangou}  
+                </if>
+        )
+        SELECT
+                <include refid="再審査申立情報" />,
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            ( SELECT
+                被保険者台帳管理."shichosonCode" AS "shichosonCode", 
+                被保険者台帳管理."hihokenshaNo" AS "hihokenshaNo",
+                被保険者台帳管理."shikakuShutokuJiyuCode" AS "shikakuShutokuJiyuCode",
+                被保険者台帳管理."shikakuShutokuYMD" AS "shikakuShutokuYMD",
+                被保険者台帳管理."shikakuShutokuTodokedeYMD" AS "shikakuShutokuTodokedeYMD",
+                被保険者台帳管理."shikakuSoshitsuJiyuCode" AS "shikakuSoshitsuJiyuCode",
+                被保険者台帳管理."shikakuSoshitsuYMD" AS "shikakuSoshitsuYMD",
+                被保険者台帳管理."shikakuSoshitsuTodokedeYMD" AS "shikakuSoshitsuTodokedeYMD",
+                被保険者台帳管理."hihokennshaKubunCode" AS "hihokennshaKubunCode",
+                被保険者台帳管理."jushochiTokureiFlag" AS "jushochiTokureiFlag",
+                被保険者台帳管理."koikinaiJushochiTokureiFlag" AS "koikinaiJushochiTokureiFlag",
+                被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" AS "koikinaiTokureiSochimotoShichosonCode",
+                rgdb."DbT3062SaishinsaMoshitate"."jigyoshoNo" AS "jigyoshoNo",
+                再審査申立事業者."jigyoshaName" AS "jigyoshaName",
+                rgdb."DbT3062SaishinsaMoshitate"."serviceTeikyoYM" AS "serviceTeikyoYM",
+                rgdb."DbT3062SaishinsaMoshitate"."serviceTeikyoShuruiCode" AS "serviceTeikyoShuruiCode",
+                サービス種類."serviceShuruiMeisho" AS "serviceShuruiMeisho",
+                rgdb."DbT3062SaishinsaMoshitate"."serviceKomokuCode" AS "serviceKomokuCode",
+                rgdb."DbT3062SaishinsaMoshitate"."shokisaiHokenshaNo" AS "shokisaiHokenshaNo",
+                rgdb."DbT3062SaishinsaMoshitate"."moshitateYMD" AS "moshitateYMD",
+                rgdb."DbT3062SaishinsaMoshitate"."moshitateshaKubunCode" AS "moshitateshaKubunCode",
+                rgdb."DbT3062SaishinsaMoshitate"."moshitateTanisu" AS "moshitateTanisu",
+                rgdb."DbT3062SaishinsaMoshitate"."moshitateJiyuCode" AS "moshitateJiyuCode",
+                rgdb."DbT3062SaishinsaMoshitate"."moshitateJiyuCode" AS "moshitateJiyu",
+                rgdb."DbT3062SaishinsaMoshitate"."kokuhorenSofuYM" AS "kokuhorenSofuYM",
+                受給者台帳."jukyuShinseiJiyu" AS "jukyuShinseiJiyu",
+                受給者台帳."jukyuShinseiYMD" AS "jukyuShinseiYMD",
+                受給者台帳."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
+                受給者台帳."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+                受給者台帳."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+                受給者台帳."ninteiYMD" AS "ninteiYMD",
+                受給者台帳."kyuSochishaFlag" AS "kyuSochishaFlag",
+                受給者台帳."minashiCode" AS "minashiCode", 
+                受給者台帳."chokkinIdoJiyuCode" AS "chokkinIdoJiyuCode",
+                被保険者台帳管理."shikibetsuCode" AS "shikibetsuCode",
+                受給者台帳."yoshienshaNinteiShinseiFlag" AS "yoshienshaNinteiShinseiFlag"
+                FROM
+                抽出対象  AS  抽出対象
+        INNER JOIN
+            rgdb."DbT3062SaishinsaMoshitate"
+            ON
+                "DbT3062SaishinsaMoshitate"."jigyoshoNo" = 抽出対象."jigyoshoNo"
+            AND
+                "DbT3062SaishinsaMoshitate"."hiHokenshaNo" = 抽出対象."hiHokenshaNo"
+            AND
+                "DbT3062SaishinsaMoshitate"."serviceTeikyoYM" = 抽出対象."serviceTeikyoYM"
+            AND
+                "DbT3062SaishinsaMoshitate"."serviceTeikyoShuruiCode" = 抽出対象."serviceTeikyoShuruiCode"
+            AND
+                "DbT3062SaishinsaMoshitate"."serviceKomokuCode" = 抽出対象."serviceKomokuCode"
+            AND
+                "DbT3062SaishinsaMoshitate"."rirekiNo" = 抽出対象."rirekiNo"
+        INNER JOIN
+            rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理
+            ON
+                被保険者台帳管理."hihokenshaNo" = "DbT3062SaishinsaMoshitate"."hiHokenshaNo"
+        
+            LEFT JOIN  (
+            SELECT
+                    有効履歴."jigyoshoNo" AS "jigyoshoNo",
+                    有効履歴."hiHokenshaNo" AS "hiHokenshaNo",
+                    有効履歴."serviceTeikyoYM" AS "serviceTeikyoYM",
+                    有効履歴."serviceTeikyoShuruiCode" AS "serviceTeikyoShuruiCode",
+                    有効履歴."serviceKomokuCode" AS "serviceKomokuCode",
+                    有効履歴."rirekiNo" AS "rirekiNo",
+                    有効履歴."jukyuShinseiJiyu" AS "jukyuShinseiJiyu",
+                    有効履歴."jukyuShinseiYMD" AS "jukyuShinseiYMD",
+                    有効履歴."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
+                    有効履歴."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+                    有効履歴."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+                    有効履歴."ninteiYMD" AS "ninteiYMD",
+                    有効履歴."kyuSochishaFlag" AS "kyuSochishaFlag",
+                    有効履歴."minashiCode" AS "minashiCode",
+                    有効履歴."chokkinIdoJiyuCode" AS "chokkinIdoJiyuCode",
+                    有効履歴."yoshienshaNinteiShinseiFlag" AS "yoshienshaNinteiShinseiFlag"
+            FROM(
+                SELECT
+                    抽出対象."jigyoshoNo",
+                    抽出対象."hiHokenshaNo",
+                    抽出対象."serviceTeikyoYM",
+                    抽出対象."serviceTeikyoShuruiCode",
+                    抽出対象."serviceKomokuCode",
+                    抽出対象."rirekiNo",
+                    rgdb."DbT4001JukyushaDaicho"."jukyuShinseiJiyu",
+                    rgdb."DbT4001JukyushaDaicho"."jukyuShinseiYMD",
+                    rgdb."DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode",
+                    rgdb."DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+                    rgdb."DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+                    rgdb."DbT4001JukyushaDaicho"."ninteiYMD",
+                    rgdb."DbT4001JukyushaDaicho"."kyuSochishaFlag",
+                    rgdb."DbT4001JukyushaDaicho"."minashiCode",
+                    rgdb."DbT4001JukyushaDaicho"."chokkinIdoJiyuCode",
+                    rgdb."DbT4001JukyushaDaicho"."yoshienshaNinteiShinseiFlag",
+                    ROW_NUMBER() OVER (
+                    PARTITION BY rgdb."DbT4001JukyushaDaicho"."shichosonCode",
+                                 rgdb."DbT4001JukyushaDaicho"."hihokenshaNo"
+                    ORDER BY     rgdb."DbT4001JukyushaDaicho"."rirekiNo" DESC,
+                                 rgdb."DbT4001JukyushaDaicho"."edaban" DESC
+                                       ) AS 番号
+                FROM
+                    抽出対象
+                INNER JOIN
+                    rgdb."DbT4001JukyushaDaicho"
+                    ON
+                        "DbT4001JukyushaDaicho"."hihokenshaNo" =  抽出対象."hiHokenshaNo"
+                    AND
+                        "DbT4001JukyushaDaicho"."logicalDeletedFlag" = FALSE
+                    AND
+                        "DbT4001JukyushaDaicho"."yukoMukoKubun" = '1'
+                    AND
+                        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (抽出対象."serviceTeikyoYM" || '31')
+                    AND
+                        (抽出対象."serviceTeikyoYM" || '01') <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD"
+                )AS 有効履歴
+                WHERE
+                    有効履歴."番号" ='1'
+                    )AS  受給者台帳
+                    ON
+                        受給者台帳."jigyoshoNo"  =  抽出対象."jigyoshoNo"
+                    AND
+                        受給者台帳."hiHokenshaNo"  =  抽出対象."hiHokenshaNo"
+                    AND
+                        受給者台帳."serviceTeikyoYM"  =  抽出対象."serviceTeikyoYM"
+                    AND
+                        受給者台帳."serviceTeikyoShuruiCode"  =  抽出対象."serviceTeikyoShuruiCode"
+                    AND
+                        受給者台帳."serviceKomokuCode"  =  抽出対象."serviceKomokuCode"
+                    AND
+                        受給者台帳."rirekiNo"  =  抽出対象."rirekiNo"
+              LEFT JOIN
+                    rgdb."DbT7130KaigoServiceShurui" AS サービス種類
+                    ON
+                        サービス種類."serviceShuruiCd" = "DbT3062SaishinsaMoshitate"."serviceTeikyoShuruiCode"
+                    AND
+                        "DbT3062SaishinsaMoshitate"."serviceTeikyoYM" <![CDATA[<=]]> サービス種類."teikyoshuryoYM"
+                    AND 
+                        サービス種類."teikyoKaishiYM" <![CDATA[<=]]> "DbT3062SaishinsaMoshitate"."serviceTeikyoYM"
+              LEFT JOIN(
+                SELECT
+                    dbT7060."jigyoshaNo" AS "jigyoshaNo",
+                    dbT7060."jigyoshaName" AS "jigyoshaName"
+                FROM
+                    rgdb."DbT7060KaigoJigyosha" AS dbT7060
+                WHERE
+                    NOT EXISTS (
+                        SELECT  1
+                        FROM
+                            rgdb."DbT7060KaigoJigyosha" AS dbT7060_2
+                        WHERE
+                            dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
+                        AND
+                            dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
+                        )
+                )AS  再審査申立事業者
+                ON 
+                    再審査申立事業者."jigyoshaNo" = rgdb."DbT3062SaishinsaMoshitate"."jigyoshoNo"
+           WHERE
+                rgdb."DbT3062SaishinsaMoshitate"."isDeleted" = false
+                <if test="has保険者コード">
+                    AND(
+                        (被保険者台帳管理."koikinaiJushochiTokureiFlag" != '1'
+                        AND
+                            被保険者台帳管理."shichosonCode" = #{hokenshacode}
+                        )
+                    OR
+                        (被保険者台帳管理."koikinaiJushochiTokureiFlag" = '1'
+                        AND
+                            被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" =  #{hokenshacode}
+                        )
+                    )</if>
+                    ) AS 再審査申立情報
+         INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+        ON
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 再審査申立情報."shikibetsuCode"
+                
+    </select>
+</mapper>

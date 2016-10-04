@@ -302,6 +302,21 @@ public class TashichosonJushochiTokurei extends
 
     }
 
+    /**
+     * 他市町村住所地特例のみを変更対象とします。<br/>
+     * {@link DbT1003TashichosonJushochiTokureiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KyokaisoGaitosha}
+     */
+    public TashichosonJushochiTokurei modifiedModel() {
+        DbT1003TashichosonJushochiTokureiEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new TashichosonJushochiTokurei(
+                modifiedEntity, id);
+    }
+
     @Override
     public boolean hasChanged() {
         return hasChangedEntity();

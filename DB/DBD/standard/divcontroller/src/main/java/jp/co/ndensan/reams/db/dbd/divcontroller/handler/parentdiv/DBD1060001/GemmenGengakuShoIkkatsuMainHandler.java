@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD103010.DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD103020.DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902.FutanGenndoGakuTsuuchishoIkkatsuBatchParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902.ShakaiFukushiHoujinnKeigenBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.chohyoikkatsu.TaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.chohyoikkatsu.TanpyoHakkoKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1060001.DBD1060001StateName;
@@ -202,7 +202,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
      *
      * @return FutanGendogakuIkkatsuHakkoBatchParameter
      */
-    public FutanGenndoGakuTsuuchishoIkkatsuBatchParameter onClick_btnJikkouFtanSave() {
+    public DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter onClick_btnJikkouFtanSave() {
         RString 単票発行区分 = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuTanpyoHakkoKubun().getSelectedValue();
         RString 旧措置者区分 = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuKyusochishaKubun().getSelectedValue();
         RString 対象区分 = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuJoken().getSelectedValue();
@@ -218,12 +218,12 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         RString 通知書の文書番号 = div.getFutanGendogaku()
                 .getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号();
         RString 改頁出力順ID = new RString("");
-        FutanGenndoGakuTsuuchishoIkkatsuBatchParameter futanParameter = new FutanGenndoGakuTsuuchishoIkkatsuBatchParameter();
+        DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter futanParameter = new DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter();
         futanParameter.set単票発行区分(TanpyoHakkoKubun.出力しない);
         futanParameter.set旧措置者区分(KyusochishaKubun.旧措置者以外);
         Long 改頁ID = Long.valueOf("0");
         if (div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().isSelected()) {
-            改頁出力順ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().getSelected出力順().get改頁項目ID();
+            改頁出力順ID = div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().getSelected出力順().get改頁項目ID();
         }
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             futanParameter.set単票発行区分(TanpyoHakkoKubun.出力する);
@@ -258,7 +258,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
      *
      * @return FutanGendogakuIkkatsuHakkoBatchParameter
      */
-    public ShakaiFukushiHoujinnKeigenBatchParameter onClick_btnJikkouSkaiSave() {
+    public DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter onClick_btnJikkouSkaiSave() {
         RString 単票発行区分 = div.getShafukuKeigen().getShafukuKeigenChushutsuJoken().getRadShafukuKeigenTanpyoHakkoKubun().getSelectedValue();
         boolean 認定証発行フラグ = div.getShafukuKeigen().getShafukuKeigenKakuninSho().isIsPublish();
         boolean 通知書発行フラグ = div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().isIsPublish();
@@ -272,7 +272,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         RString 通知書の文書番号 = div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号();
         RString 改頁出力順ID = new RString("");
         Long 改頁ID = Long.valueOf("0");
-        ShakaiFukushiHoujinnKeigenBatchParameter shaParameter = new ShakaiFukushiHoujinnKeigenBatchParameter();
+        DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter shaParameter = new DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter();
         shaParameter.set単票発行区分(TanpyoHakkoKubun.出力しない);
         if (div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().isSelected()) {
             改頁出力順ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().getSelected出力順().get改頁項目ID();

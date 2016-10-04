@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 上乗せ償還払い給付種類支給限度額を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 jianglaisheng
  */
 public class UwanoseShokanShuruiShikyuGendoGaku
         extends

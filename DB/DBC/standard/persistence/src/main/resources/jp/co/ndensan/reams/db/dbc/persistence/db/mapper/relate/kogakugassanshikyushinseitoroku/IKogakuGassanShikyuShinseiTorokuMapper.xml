@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2040-040 huzongcheng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyushinseitoroku.IKogakuGassanShikyuShinseiTorokuMapper">
+    <select id="select被保険者番号"
+     resultType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo" 
+     parameterType="java.util.Map" fetchSize="500"  resultOrdered="true">
+        SELECT *
+        FROM rgdb."DbV1001HihokenshaDaicho" A
+        WHERE A."logicalDeletedFlag" = FALSE
+	AND A."shikibetsuCode" =  #{識別コード}
+        ORDER BY A."idoYMD" DESC,
+                 A."edaNo" DESC
+        FETCH FIRST 1 ROWS ONLY
+    </select>
+    
+    <select id="select申請書情報"
+     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.ResultMap_DbT3068KogakuGassanShinseishoEntity" 
+     parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.ShinseishoJohoSearchParameter"
+     fetchSize="500"  resultOrdered="true">
+        WITH T AS(
+        SELECT  A.*
+        FROM rgdb."DbT3068KogakuGassanShinseisho" AS A
+        WHERE A."isDeleted" = FALSE
+        <if test="申請状況区分 != null and !申請状況区分.isEmpty()">
+        AND A."shinseiJokyoKubun" = #{申請状況区分}
+        </if>
+        <if test="市町村コード != null and !市町村コード.isEmpty()">
+        AND A."hokenshaNo" = #{市町村コード}
+        </if>
+        <if test="申請対象年度 != null and !申請対象年度.isEmpty()">
+        AND A."taishoNendo" = #{申請対象年度}
+        </if>
+        <if test="申請日 != null and !申請日.isEmpty()">
+        AND A."shinseiYMD" = #{申請日}
+        </if>
+        <if test="介護支給申請書整理番号 != null and !介護支給申請書整理番号.isEmpty()">
+        AND A."shikyuShinseishoSeiriNo" = #{介護支給申請書整理番号}
+        </if>
+        <if test="医療支給申請書整理番号 != null and 医療支給申請書整理番号">
+        AND A."kokuhoShikyuShinseishoSeiriNo" = #{医療支給申請書整理番号}
+        </if>
+        <if test="申請基本情報検索有無 != null and 申請基本情報検索有無 == true
+            and 申請代表者氏名 != null and !申請代表者氏名.isEmpty()">
+            <if test="申請代表者氏名前方一致 != null and 申請代表者氏名前方一致 == true">
+                AND A."shinseiDaihyoshaShimei" LIKE #{申請代表者氏名} || '%'
+            </if>
+            <if test="申請代表者氏名前方一致 != null and 申請代表者氏名前方一致 == false">
+                AND A."shinseiDaihyoshaShimei" = #{申請代表者氏名}
+            </if>
+        </if>
+        <if test="被保険者情報検索有無 != null and 被保険者情報検索有無 == true
+            and 被保険者番号 != null and !被保険者番号.isEmpty()">
+            AND A."hihokenshaNo" = #{被保険者番号}
+            <if test="被保険者氏名前方一致 != null and 被保険者氏名前方一致 == true
+                and 被保険者番号リスト != null and !被保険者番号リスト.isEmpty()">
+                AND A."hihokenshaNo" IN 
+                <foreach item="被保険者番号リスト" index="index" collection="被保険者番号リスト"
+                open="(" separator="," close=")">
+                #{被保険者番号リスト}
+                </foreach>
+            </if>
+        </if>
+        )
+        SELECT M.*
+        FROM T AS M
+        WHERE M."rirekiNo" = (   
+                SELECT MAX(N."rirekiNo")
+                FROM T AS N
+                WHERE M."hihokenshaNo" = N."hihokenshaNo"
+                AND M."taishoNendo" = N."taishoNendo"
+                AND M."hokenshaNo" = N."hokenshaNo"
+                AND M."seiriNo" = N."seiriNo")
+        ORDER BY M."taishoNendo" DESC,
+                 M."hihokenshaNo" DESC,
+                 M."seiriNo" DESC,
+                 M."shinseiYMD" DESC
+    </select>
+    
+    <select id="select被保険者名" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.HihokenshaMeishoSearchParameter"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            fetchSize="500" resultOrdered="true">
+            WITH hihokenshaDaicho AS (
+                SELECT
+                    DbV1001."shikibetsuCode"
+                FROM   rgdb."DbV1001HihokenshaDaicho" as DbV1001
+                WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+                AND DbV1001."logicalDeletedFlag" = FALSE
+            )
+            SELECT
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            FROM
+                hihokenshaDaicho
+            LEFT OUTER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                (
+                    SELECT
+                        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+                    FROM
+                        hihokenshaDaicho
+                 )
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"
+              ON hihokenshaDaicho."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+    </select>
+    
+    <select id="select高額合算申請書加入歴"
+     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3069KogakuGassanShinseishoKanyurekiMapper.ResultMap_DbT3069KogakuGassanShinseishoKanyurekiEntity" 
+     parameterType="java.util.Map" fetchSize="500"  resultOrdered="true">
+        WITH T AS(
+        SELECT  A.*
+        FROM rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS A
+        WHERE A."isDeleted" = FALSE
+        AND A."taishoNendo" = #{対象年度}
+        AND A."hokenshaNo" = #{保険者番号}
+        AND A."seiriNo" = #{整理番号}
+        )
+        SELECT M.*
+        FROM T AS M
+        WHERE M."rirekiNo" = (   
+                SELECT MAX(N."rirekiNo")
+                FROM T AS N
+                WHERE M."taishoNendo" = N."taishoNendo"
+                AND M."hokenshaNo" = N."hokenshaNo"
+                AND M."seiriNo" = N."seiriNo")
+        ORDER BY M."hihokenshaNo" DESC,
+                 M."kanyurekiNo" DESC
+    </select>
+    
+    <select id="selectMax加入履歴番号"
+     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3069KogakuGassanShinseishoKanyurekiMapper.ResultMap_DbT3069KogakuGassanShinseishoKanyurekiEntity" 
+     parameterType="java.util.Map" fetchSize="500"  resultOrdered="true">
+        SELECT  A.*
+        FROM rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS A
+        WHERE 
+        A."taishoNendo" = #{対象年度}
+        AND A."hokenshaNo" = #{保険者番号}
+        AND A."seiriNo" = #{整理番号}
+        AND A."hihokenshaNo" = #{被保険者番号}
+        AND A."rirekiNo" = #{履歴番号}
+        ORDER BY A."kanyurekiNo" DESC
+        FETCH FIRST 1 ROWS ONLY
+    </select>
+</mapper>

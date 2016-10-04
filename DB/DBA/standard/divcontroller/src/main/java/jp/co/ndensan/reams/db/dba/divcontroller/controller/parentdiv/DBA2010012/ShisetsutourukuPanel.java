@@ -134,7 +134,7 @@ public class ShisetsutourukuPanel {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 事業者情報の追加処理(div);
                 RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
@@ -145,7 +145,7 @@ public class ShisetsutourukuPanel {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の修正処理(div);
                 RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
@@ -156,7 +156,7 @@ public class ShisetsutourukuPanel {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の削除処理(div);
                 RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
@@ -172,150 +172,20 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> onClick_Search(ShisetsutourukuPanelDiv div) {
-        
+
         if (ResponseHolder.isReRequest()) {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
             }
             return ResponseData.of(div).respond();
         }
-        // 編集有無フラグ
-        boolean changeflag = false;
+
         KaigoJogaiTokureiTaishoShisetsu business = ViewStateHolder.get(
                 ViewStateKeys.サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
-        // 事業者種類
-        if (!div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey()
-                .equals(business.get事業者種別())) {
-            changeflag = true;
-        // 有効開始日
-        } else if (!div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().isEmpty()
-                && !business.get有効開始年月日().isEmpty()
-                && div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().compareTo(
-                        business.get有効開始年月日()) != 0) {
-            changeflag = true;
-        } else if (!div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().isEmpty()
-                && business.get有効開始年月日().isEmpty()) {
-            changeflag = true;
-        } else if (div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().isEmpty()
-                && !business.get有効開始年月日().isEmpty()) {
-            changeflag = true;
-        // 有効終了日
-        } else if (!div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().isEmpty()
-                && !business.get有効終了年月日().isEmpty()
-                && div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().compareTo(
-                        business.get有効終了年月日()) != 0) {
-            changeflag = true;
-        } else if (!div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().isEmpty()
-                && business.get有効終了年月日().isEmpty()) {
-            changeflag = true;
-        } else if (div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().isEmpty()
-                && !business.get有効終了年月日().isEmpty()) {
-            changeflag = true;
-        // 管内・管外区分
-        } else if (!div.getShisetsuJoho().getRadShisetsuKannaiKangaiKubun().getSelectedKey()
-                .equals(business.get管内_管外区分())) {
-            changeflag = true;
-        // 事業者番号
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoshaNo().getText()
-                .equals(business.get事業者番号())) {
-            changeflag = true;
-        // 事業者名
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoshaName().getText().toString()
-                .equals(business.get事業者名称().toString())) {
-            changeflag = true;
-        // 事業者名(ｶﾅ)
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoshaNameKana().getText().toString()
-                .equals(business.get事業者名称カナ().toString())) {
-            changeflag = true;
-        // 事業開始日
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().isEmpty()
-                && !business.get事業開始年月日().isEmpty()
-                && div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().compareTo(
-                        business.get事業開始年月日()) != 0) {
-            changeflag = true;
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().isEmpty()
-                && business.get事業開始年月日().isEmpty()) {
-            changeflag = true;
-        } else if (div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().isEmpty()
-                && !business.get事業開始年月日().isEmpty()) {
-            changeflag = true;
-        // 事業休止日
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().isEmpty()
-                && !business.get事業休止年月日().isEmpty()
-                && div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().compareTo(
-                        business.get事業休止年月日()) != 0) {
-            changeflag = true;
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().isEmpty()
-                && business.get事業休止年月日().isEmpty()) {
-            changeflag = true;
-        } else if (div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().isEmpty()
-                && !business.get事業休止年月日().isEmpty()) {
-            changeflag = true;
-        // 事業再開日
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().isEmpty()
-                && !business.get事業再開年月日().isEmpty()
-                && div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().compareTo(
-                        business.get事業再開年月日()) != 0) {
-            changeflag = true;
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().isEmpty()
-                && business.get事業再開年月日().isEmpty()) {
-            changeflag = true;
-        } else if (div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().isEmpty()
-                && !business.get事業再開年月日().isEmpty()) {
-            changeflag = true;
-        // 事業廃止日
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().isEmpty()
-                && !business.get事業廃止年月日().isEmpty()
-                && div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().compareTo(
-                        business.get事業廃止年月日()) != 0) {
-            changeflag = true;
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().isEmpty()
-                && business.get事業廃止年月日().isEmpty()) {
-            changeflag = true;
-        } else if (div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().isEmpty()
-                && !business.get事業廃止年月日().isEmpty()) {
-            changeflag = true;
-        // 郵便番号
-        } else if (!div.getShisetsuJoho().getTxtShisetsuYubinNo().getText().toString()
-                .equals(business.get郵便番号().toString())) {
-            changeflag = true;
-        // 電話番号
-        } else if (!div.getShisetsuJoho().getTxtShisetsuTelNo().getText().toString()
-                .equals(business.get電話番号().toString())) {
-            changeflag = true;
-        // FAX番号
-        } else if (!div.getShisetsuJoho().getTxtShisetsuFaxNo().getText().toString()
-                .equals(business.getFAX番号().toString())) {
-            changeflag = true;
-        // 住所
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJusho().getText().toString()
-                .equals(business.get事業者住所().toString())) {
-            changeflag = true;
-        // 住所(ｶﾅ)
-        } else if (!div.getShisetsuJoho().getTxtShisetsuJushoKana().getText().toString()
-                .equals(business.get事業者住所カナ().toString())) {
-            changeflag = true;
-        // 代表者名
-        } else if (!div.getShisetsuJoho().getTxtShisetsuDaihyoshaName().getText().toString()
-                .equals(business.get代表者名称().toString())) {
-            changeflag = true;
-        // 代表者名(ｶﾅ)
-        } else if (!div.getShisetsuJoho().getTxtShisetsuDaihyoshaNameKana().getText().toString()
-                .equals(business.get代表者名称カナ().toString())) {
-            changeflag = true;
-        // 役職
-        } else if (!div.getShisetsuJoho().getTxtShisetsuYakushoku().getText().toString()
-                .equals(business.get役職().toString())) {
-            changeflag = true;
-        // 備考
-        } else if (!div.getShisetsuJoho().getTxtShisetsuBiko().getText().toString()
-                .equals(business.get備考().toString())) {
-            changeflag = true;
-        }
-        
-        if (changeflag) {
+
+        if (hasChanged(div, business)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
@@ -326,6 +196,228 @@ public class ShisetsutourukuPanel {
             return ResponseData.of(div).forwardWithEventName(DBA2010012TransitionEventName.再検索).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean hasChanged(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        // 事業者種類
+        if (!div.getJigyoshaShurui().getRadServiceShurui().getSelectedKey()
+                .equals(business.get事業者種別())) {
+            return true;
+        }
+        // 有効開始日
+        if (hasChanged有効開始日(div, business)) {
+            return true;
+        }
+        // 有効終了日
+        if (hasChanged有効終了日(div, business)) {
+            return true;
+        }
+        // 管内・管外区分
+        if (!div.getShisetsuJoho().getRadShisetsuKannaiKangaiKubun().getSelectedKey()
+                .equals(business.get管内_管外区分())) {
+            return true;
+        }
+        // 事業者番号
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoshaNo().getText()
+                .equals(business.get事業者番号())) {
+            return true;
+        }
+        // 事業者名
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoshaName().getText().toString()
+                .equals(business.get事業者名称().toString())) {
+            return true;
+        }
+        // 事業者名(ｶﾅ)
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoshaNameKana().getText().toString()
+                .equals(business.get事業者名称カナ().toString())) {
+            return true;
+        }
+        // 事業開始日
+        if (hasChanged事業開始日(div, business)) {
+            return true;
+        }
+        // 事業休止日
+        if (hasChanged事業休止日(div, business)) {
+            return true;
+        }
+        // 事業再開日
+        if (hasChanged事業再開日(div, business)) {
+            return true;
+        }
+        // 事業廃止日
+        if (hasChanged事業廃止日(div, business)) {
+            return true;
+        }
+        // 電話番号
+        if (!div.getShisetsuJoho().getTxtShisetsuTelNo().getText().toString()
+                .equals(business.get電話番号().toString())) {
+            return true;
+        }
+        // FAX番号
+        if (!div.getShisetsuJoho().getTxtShisetsuFaxNo().getText().toString()
+                .equals(business.getFAX番号().toString())) {
+            return true;
+        }
+        //郵便番号、住所、住所(ｶﾅ)
+        if (hasChanged住所(div, business)) {
+            return true;
+        }
+        //代表者名、代表者名(ｶﾅ)、役職
+        if (hasChanged代表者(div, business)) {
+            return true;
+        }
+        // 備考
+        if (!div.getShisetsuJoho().getTxtShisetsuBiko().getText().toString()
+                .equals(business.get備考().toString())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged代表者(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        // 代表者名
+        if (!div.getShisetsuJoho().getTxtShisetsuDaihyoshaName().getText().toString()
+                .equals(business.get代表者名称().toString())) {
+            return true;
+        }
+        // 代表者名(ｶﾅ)
+        if (!div.getShisetsuJoho().getTxtShisetsuDaihyoshaNameKana().getText().toString()
+                .equals(business.get代表者名称カナ().toString())) {
+            return true;
+        }
+        // 役職
+        if (!div.getShisetsuJoho().getTxtShisetsuYakushoku().getText().toString()
+                .equals(business.get役職().toString())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged住所(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        // 郵便番号
+        if (!div.getShisetsuJoho().getTxtShisetsuYubinNo().getText().toString()
+                .equals(business.get郵便番号().toString())) {
+            return true;
+        }
+        // 住所
+        if (!div.getShisetsuJoho().getTxtShisetsuJusho().getText().toString()
+                .equals(business.get事業者住所().toString())) {
+            return true;
+        }
+        // 住所(ｶﾅ)
+        if (!div.getShisetsuJoho().getTxtShisetsuJushoKana().getText().toString()
+                .equals(business.get事業者住所カナ().toString())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged事業廃止日(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().isEmpty()
+            && !business.get事業廃止年月日().isEmpty()
+            && div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().compareTo(
+                business.get事業廃止年月日()) != 0) {
+            return true;
+        }
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().isEmpty()
+            && business.get事業廃止年月日().isEmpty()) {
+            return true;
+        }
+        if (div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD().getValue().isEmpty()
+            && !business.get事業廃止年月日().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged事業再開日(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().isEmpty()
+            && !business.get事業再開年月日().isEmpty()
+            && div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().compareTo(
+                business.get事業再開年月日()) != 0) {
+            return true;
+        }
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().isEmpty()
+            && business.get事業再開年月日().isEmpty()) {
+            return true;
+        }
+        if (div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD().getValue().isEmpty()
+            && !business.get事業再開年月日().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged事業休止日(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().isEmpty()
+            && !business.get事業休止年月日().isEmpty()
+            && div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().compareTo(
+                business.get事業休止年月日()) != 0) {
+            return true;
+        }
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().isEmpty()
+            && business.get事業休止年月日().isEmpty()) {
+            return true;
+        }
+        if (div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD().getValue().isEmpty()
+            && !business.get事業休止年月日().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged事業開始日(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().isEmpty()
+            && !business.get事業開始年月日().isEmpty()
+            && div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().compareTo(
+                business.get事業開始年月日()) != 0) {
+            return true;
+        }
+        if (!div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().isEmpty()
+            && business.get事業開始年月日().isEmpty()) {
+            return true;
+        }
+        if (div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD().getValue().isEmpty()
+            && !business.get事業開始年月日().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged有効終了日(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        if (!div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().isEmpty()
+            && !business.get有効終了年月日().isEmpty()
+            && div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().compareTo(
+                business.get有効終了年月日()) != 0) {
+            return true;
+        }
+        if (!div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().isEmpty()
+            && business.get有効終了年月日().isEmpty()) {
+            return true;
+        }
+        if (div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD().getValue().isEmpty()
+            && !business.get有効終了年月日().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasChanged有効開始日(ShisetsutourukuPanelDiv div, KaigoJogaiTokureiTaishoShisetsu business) {
+        if (!div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().isEmpty()
+            && !business.get有効開始年月日().isEmpty()
+            && div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().compareTo(
+                business.get有効開始年月日()) != 0) {
+            return true;
+        }
+        if (!div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().isEmpty()
+            && business.get有効開始年月日().isEmpty()) {
+            return true;
+        }
+        if (div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD().getValue().isEmpty()
+            && !business.get有効開始年月日().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     private ShisetsutourukuPanelHandler getHandler(ShisetsutourukuPanelDiv div) {

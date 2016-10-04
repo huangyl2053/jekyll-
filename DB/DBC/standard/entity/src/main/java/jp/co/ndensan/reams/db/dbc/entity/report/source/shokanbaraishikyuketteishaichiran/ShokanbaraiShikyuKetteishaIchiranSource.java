@@ -1,8 +1,11 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyuketteishaichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 償還払支給決定者一覧表帳票Source
@@ -16,10 +19,10 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
     public RString printTimeStamp;
     @ReportItem(name = "kokuhorenName", length = 15, order = 2)
     public RString kokuhorenName;
-    @ReportItem(name = "shoHokenshaNo", length = 6, order = 3)
-    public RString shoHokenshaNo;
-    @ReportItem(name = "shoHokenshaName", length = 20, order = 4)
-    public RString shoHokenshaName;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 6, order = 3)
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "shoKisaiHokenshaName", length = 20, order = 4)
+    public RString shoKisaiHokenshaName;
     @ReportItem(name = "shutsuryokujun1", length = 10, order = 5)
     public RString shutsuryokujun1;
     @ReportItem(name = "shutsuryokujun2", length = 10, order = 6)
@@ -44,6 +47,9 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
     public RString listDBKoshinUmu_1;
     @ReportItem(name = "listUpper_1", length = 6, order = 16)
     public RString listUpper_1;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 10, order = 17)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 20, order = 18)
@@ -80,6 +86,18 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
     public RString listLower_8;
     @ReportItem(name = "listLower_9", length = 9, order = 34)
     public RString listLower_9;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 69)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 70)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 10, order = 72)
+    public RString shichosonCode;
+    @ReportItem(name = "serviceShuruiCode", length = 10, order = 73)
+    public RString serviceShuruiCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -93,8 +111,8 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
 
         printTimeStamp,
         kokuhorenName,
-        shoHokenshaNo,
-        shoHokenshaName,
+        shoKisaiHokenshaNo,
+        shoKisaiHokenshaName,
         shutsuryokujun1,
         shutsuryokujun2,
         shutsuryokujun3,
@@ -124,7 +142,13 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
         listLower_6,
         listLower_7,
         listLower_8,
-        listLower_9
+        listLower_9,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode,
+        serviceShuruiCode
     }
 // </editor-fold>
 }

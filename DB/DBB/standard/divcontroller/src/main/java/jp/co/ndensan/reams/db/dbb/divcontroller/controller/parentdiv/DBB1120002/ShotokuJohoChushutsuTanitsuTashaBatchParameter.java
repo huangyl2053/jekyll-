@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120002;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112001.DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -20,10 +22,12 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 所得情報抽出・連携（単一他社）のクラスです。
@@ -40,7 +44,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     private static final RString BBKAIGO = new RString("BBKAIGO");
     private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
     private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
-    private static final RString 所得情報ファイル = new RString("BBKAIGO.CSV");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -96,10 +99,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
         FilesystemName sharedFileName = new FilesystemName(ファイル付箋);
         SharedFile.defineSharedFile(sharedFileName);
         FilesystemPath 絶対パス = new FilesystemPath(files[0].getFilePath());
-        SharedFile.copyToSharedFile(絶対パス, sharedFileName);
-        RString path = new RString(SharedFile.getBasePath() + File.separator + 所得情報ファイル);
-        File file = new File(path.toString());
-        if (file.exists() && file.getName().contains(所得情報ファイル)) {
+        RDateTime 共有ファイルID = SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+        ViewStateHolder.put(ViewStateKeys.イメージ共有ファイルID, 共有ファイルID);
+        File file = new File(絶対パス.toString());
+        if (file.exists() && file.getName().contains(BBKAIGO)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
         } else {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(RString.EMPTY);
@@ -132,15 +135,30 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     }
 
     /**
-     * 「実行する」を押下場合、バリデーション、バッチパラメータの設定とバッチを起動します。
+     * 「実行する」を押下場合、DBB112001 バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
-     * @return ResponseData<ShotokuJohoBatchresultTanituParameter>
+     * @return
+     * ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter>
      */
-    public ResponseData<ShutokuJohoChushutsuRenkeiBatchParameter> onclick_batchRegister(
+    public ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister_DBB112001(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
-        ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
-        ShutokuJohoChushutsuRenkeiBatchParameter parameter = handler.getBatchParamter();
+        RDateTime 共有ファイルID = ViewStateHolder.get(ViewStateKeys.イメージ共有ファイルID, RDateTime.class);
+        DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParamter_DBB112001(共有ファイルID);
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 「実行する」を押下場合、DBB112003 バリデーション、バッチパラメータの設定とバッチを起動します。
+     *
+     * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
+     * @return
+     * ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter>
+     */
+    public ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister_DBB112003(
+            ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
+        RDateTime 共有ファイルID = ViewStateHolder.get(ViewStateKeys.イメージ共有ファイルID, RDateTime.class);
+        DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParameter_DBB112003(共有ファイルID);
         return ResponseData.of(parameter).respond();
     }
 

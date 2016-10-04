@@ -295,6 +295,22 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 被保険者番号、論理削除フラグで被保険者台帳から最新データを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public HihokenshaDaicho selectByHihokenshaNo(HihokenshaNo 被保険者番号) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectByHihokenshaNo(被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
      * 被保険者台帳管理{@link HihokenshaDaicho}を保存します。
      *
      * @param 被保険者台帳管理 {@link HihokenshaDaicho}

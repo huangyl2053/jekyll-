@@ -77,7 +77,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
         } else if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
-                || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
+                   || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
             RString parameter = ViewStateHolder.get(ViewStateKeys.各種通知書作成戻るフラグ, RString.class);
             if (戻るフラグ.equals(parameter)) {
                 // TODO
@@ -323,7 +323,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
      */
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onClick_btnBack(KakushuTsuchishoSakuseiKobetsuDiv div) {
         if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
-                || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
+            || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
             RString parameter = ViewStateHolder.get(ViewStateKeys.各種通知書作成戻るフラグ, RString.class);
             return ResponseData.of(div).forwardWithEventName(DBB8110001TransitionEventName.戻る).parameter(parameter);
         }

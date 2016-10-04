@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 概要： 総合照会_賦課情報 用XMLです。 -->
+<!-- @reamsid_L DBU-4100-050 houtianpeng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sogosyokaifukajyoho.ISoGoSyoKaiFuKaJyoHoMapper">
+    <resultMap id="resultMap_SoGoSyoKaiFuKaJyoHoEntity" 
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.sogosyokaifukajyoho.SoGoSyoKaiFuKaJyoHoEntity" autoMapping="true">
+        <result property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ki" column="ki" />
+        <result property="choteiId" column="choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="shunoId" column="shunoId"/>
+        <result property="choteigaku" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    </resultMap>
+
+    <select id="get調定情報" resultMap="resultMap_SoGoSyoKaiFuKaJyoHoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sogosyokaifukajyoho.SoGoSyoKaiFuKaJyoHoParameter" 
+            resultOrdered="true" fetchSize="500">
+       SELECT
+           DbT2003."choshuHouhou",
+           DbT2003.ki,
+           DbT2003."choteiId",
+           UrT0705."shunoId",
+           UrT0705."choteigaku"
+       FROM
+           rgdb."DbT2003Kibetsu" DbT2003
+       INNER JOIN
+           rgdb."UrT0705ChoteiKyotsu" UrT0705
+       ON 
+           DbT2003."choteiId" = UrT0705."choteiId"
+       WHERE
+           DbT2003."choteiNendo" = #{調定年度} AND
+           DbT2003."fukaNendo" = #{賦課年度} AND
+           DbT2003."tsuchishoNo" = #{通知書番号} AND
+           DbT2003."rirekiNo" = #{履歴番号}
+</select>
+</mapper>

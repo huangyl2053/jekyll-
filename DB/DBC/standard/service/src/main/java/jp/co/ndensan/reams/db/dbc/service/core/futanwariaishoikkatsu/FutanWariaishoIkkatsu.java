@@ -212,11 +212,11 @@ public class FutanWariaishoIkkatsu {
         if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getKey())) {
             List<KoikiZenShichosonJoho> 市町村情報 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
-            return 市町村情報.get(0).get証記載保険者番号();
+            return 市町村情報.isEmpty() ? null : 市町村情報.get(0).get証記載保険者番号();
         } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())) {
             List<ShichosonCodeYoriShichoson> 市町村コードによる市町村情報
                     = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(市町村コード).records();
-            return 市町村コードによる市町村情報.get(0).get証記載保険者番号();
+            return 市町村コードによる市町村情報.isEmpty() ? null : 市町村コードによる市町村情報.get(0).get証記載保険者番号();
         }
         return null;
     }

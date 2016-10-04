@@ -11,18 +11,23 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.Nin
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  *
@@ -33,6 +38,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class NinteiShinseiTorokuUketsuke {
 
     private final RString 表示パターン_新規 = new RString("0");
+    private final RString 照会 = new RString("照会");
+    private static final RString SELECT_KEY0 = new RString("key0");
+    private static final RString 要介護認定申請情報登録 = new RString("要介護認定申請情報登録");
 
     /**
      * 画面初期化
@@ -69,18 +77,7 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnIryoHokenGuide(NinteiShinseiTorokuUketsukeDiv div) {
 
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 医療保険OkCloseの処理を行う
-     *
-     * @param div NinteiShinseiTorokuUketsukeDiv
-     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
-     */
-    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_IryoHoken(NinteiShinseiTorokuUketsukeDiv div) {
-
-        div.getBtnIryohokenGuide().setIconNameEnum(IconName.Complete);
+        div.setHdnMode(照会);
         return ResponseData.of(div).respond();
     }
 
@@ -115,6 +112,7 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuUketsukeDiv div) {
 
+        div.setHdnMode(照会);
         return ResponseData.of(div).respond();
     }
 
@@ -126,6 +124,9 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShisetsuNyutaisho(NinteiShinseiTorokuUketsukeDiv div) {
 
+        Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
+                = ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
+        this.getHandler(div).onOkClose_ShisetsuNyutaisho(施設入退所情報Model);
         div.getBtnNyuinAndShisetsuNyusho().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
@@ -138,6 +139,10 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
 
+        NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
+        model.set表示モード(HyojiMode.InputMode);
+        model.set連絡事項(div.getHdnShichosonRenrakuJiko());
+        ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();
     }
 
@@ -148,6 +153,9 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
+
+        NinteiShinseiCodeModel shinseiCodeModel = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
+        div.setHdnShichosonRenrakuJiko(shinseiCodeModel.get連絡事項());
 
         div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
@@ -161,6 +169,7 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnChosaJokyo(NinteiShinseiTorokuUketsukeDiv div) {
 
+        getHandler(div).onBeforeOpenDialog_btnChosaJokyo();
         return ResponseData.of(div).respond();
     }
 
@@ -209,10 +218,8 @@ public class NinteiShinseiTorokuUketsuke {
 
         if (new RString("2").equals(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey())) {
-            div.getBtnIryohokenGuide().setDisabled(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setRequired(true);
         } else {
-            div.getBtnIryohokenGuide().setDisabled(true);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setRequired(false);
         }
         return ResponseData.of(div).respond();
@@ -232,13 +239,20 @@ public class NinteiShinseiTorokuUketsuke {
             氏名.setValue(div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名());
             div.getCcdShinseiTodokedesha().setTxtShimei(氏名);
             //カナ氏名TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-            TextBoxTelNo 電話番号 = new TextBoxTelNo();
-            電話番号.setDomain(new TelNo(div.getCcdKaigoNinteiAtenaInfo().get電話番号()));
-            div.getCcdShinseiTodokedesha().setTxtTelNo(電話番号);
+            div.getCcdShinseiTodokedesha().getTxtTelNo().setDomain(new TelNo(div.getCcdKaigoNinteiAtenaInfo().get電話番号()));
 
-            TextBoxYubinNo 郵便番号 = new TextBoxYubinNo();
-            郵便番号.setValue(div.getCcdKaigoNinteiAtenaInfo().get郵便番号());
-            div.getCcdShinseiTodokedesha().setTxtYubinNo(郵便番号);
+            if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
+
+                YubinNo 郵便番号 = div.getCcdKaigoNinteiAtenaInfo().get郵便番号();
+                div.getCcdShinseiTodokedesha().getTxtYubinNo().setValue(郵便番号);
+
+                //div.getCcdShinseiTodokedesha().getCcdChoikiInput().load(new ChoikiCode(div.getCcdKaigoNinteiAtenaInfo().get住所()));
+            }
+//            else if (SELECT_KEY1.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
+//
+//                YubinNo 郵便番号 = result.getEntity().get申請届出者郵便番号();
+//                div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput().;
+//            }
         }
         return ResponseData.of(div).respond();
     }
@@ -383,8 +397,15 @@ public class NinteiShinseiTorokuUketsuke {
 //            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
 //        }
         getHandler(div).onClick_btnUpdate();
-
-        return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
+        getHandler(div).edit状態_完了();
+        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                UrInformationMessages.正常終了.getMessage().replace(要介護認定申請情報登録.toString()).evaluate()));
+        RString 表示パターン = getHandler(div).get表示パターン();
+        if (表示パターン_新規.equals(表示パターン)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
+        } else {
+            return ResponseData.of(div).setState(DBD5120001StateName.削除修正完了);
+        }
     }
 
     private NinteiShinseiTorokuUketsukeHandler getHandler(NinteiShinseiTorokuUketsukeDiv div) {

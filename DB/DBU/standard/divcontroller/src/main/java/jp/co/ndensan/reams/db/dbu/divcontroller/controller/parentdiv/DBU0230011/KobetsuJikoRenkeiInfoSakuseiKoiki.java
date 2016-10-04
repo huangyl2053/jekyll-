@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0230011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyokoukiu.KaiGoJuminHyokouKiuBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070020.DBU070020_KobetsujikoRenkei_KoikiParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KaigoJuminhyoKobetsuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.KobetsuJikoRenkeiInfoSakuseiKoikiDiv;
@@ -115,7 +115,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
      * @param div div
      * @return ResponseData<KobetsuKoikiunyoBatchParameter>
      */
-    public ResponseData<KaiGoJuminHyokouKiuBatchParameter> onClick_JikkouButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
+    public ResponseData<DBU070020_KobetsujikoRenkei_KoikiParameter> onClick_JikkouButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
         KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder finder = KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder
                 .createInstance();
         List<KaigoJuminhyoKobetsuParameter> kobetsuLsit = new ArrayList<>();
@@ -129,7 +129,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
             }
         }
         List<KobetsuKoikiunyoParameter> businessList = finder.getKaigoJuminhyoKobetsuKoikiunyoBatchParameter(kobetsuLsit).records();
-        KaiGoJuminHyokouKiuBatchParameter parameter = new KaiGoJuminHyokouKiuBatchParameter(businessList);
+        DBU070020_KobetsujikoRenkei_KoikiParameter parameter = new DBU070020_KobetsujikoRenkei_KoikiParameter(businessList);
         return ResponseData.of(parameter).respond();
     }
 

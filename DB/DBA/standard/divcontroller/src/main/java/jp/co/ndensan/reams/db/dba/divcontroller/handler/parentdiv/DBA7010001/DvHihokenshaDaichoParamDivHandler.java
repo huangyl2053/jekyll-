@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoBatchParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHihokenshaDaichoParamDiv;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -74,9 +74,8 @@ public class DvHihokenshaDaichoParamDivHandler {
     }
 
     /**
-     * 現在選択中の日付抽出区分(直近・基準日・範囲)を返却します。
+     * 現在選択中の日付抽出区分(直近・基準日・範囲)を返却します。DvHihokenshaDaichoParamDivValidationHandler
      *
-     * @param div DvHihokenshaDaichoParamDiv
      * @return 日付抽出区分. 未選択の場合は、{@code null}
      */
     @CheckForNull

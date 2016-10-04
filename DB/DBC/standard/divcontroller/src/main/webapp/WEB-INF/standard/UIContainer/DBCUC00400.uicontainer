@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
      "toLayoutTitle": "受給者異動連絡票変更登録",
-     "toState": ""
+     "toState": "対象者検索"
     },
     {
      "id": "2",
@@ -22,13 +22,13 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0220011",
      "layoutTitle": "受給者異動連絡票変更登録",
-     "eventName": "連絡票情報照会",
+     "eventName": "連絡票変更",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220014",
      "toLayoutTitle": "受給者異動連絡票情報照会",
-     "toState": ""
+     "toState": "受給者異動連絡票情報照会"
     },
     {
      "id": "3",
@@ -46,13 +46,27 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0220014",
      "layoutTitle": "受給者異動連絡票情報照会",
-     "eventName": "対象者検索へ",
-     "destroy": false,
+     "eventName": "再検索",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
      "toLayoutTitle": "受給者異動連絡票変更登録",
-     "toState": ""
+     "toState": "対象者検索"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220014",
+     "layoutTitle": "受給者異動連絡票情報照会",
+     "eventName": "検索結果一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220011",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
+     "toState": "対象者一覧"
     }
    ]
   }

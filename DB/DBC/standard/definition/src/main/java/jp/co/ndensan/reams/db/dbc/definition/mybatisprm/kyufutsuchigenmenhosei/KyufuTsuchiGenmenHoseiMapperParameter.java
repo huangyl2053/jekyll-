@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufutsuchigenmenhosei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付費通知減免補正一覧表のMapper用パラメータです。
@@ -22,7 +22,7 @@ public class KyufuTsuchiGenmenHoseiMapperParameter implements IMyBatisParameter 
 
     private final FlexibleYearMonth サービス開始年月;
     private final FlexibleYearMonth サービス終了年月;
-    private final List<HokenshaNo> 市町村コードList;
+    private final List<RString> 市町村コードList;
 
     /**
      * コンストラクタです
@@ -34,7 +34,7 @@ public class KyufuTsuchiGenmenHoseiMapperParameter implements IMyBatisParameter 
     public KyufuTsuchiGenmenHoseiMapperParameter(
             FlexibleYearMonth サービス開始年月,
             FlexibleYearMonth サービス終了年月,
-            List<HokenshaNo> 市町村コードList) {
+            List<RString> 市町村コードList) {
         this.サービス開始年月 = サービス開始年月;
         this.サービス終了年月 = サービス終了年月;
         this.市町村コードList = 市町村コードList;

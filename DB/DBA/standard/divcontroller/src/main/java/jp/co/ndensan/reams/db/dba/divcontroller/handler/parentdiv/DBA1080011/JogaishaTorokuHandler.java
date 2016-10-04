@@ -292,7 +292,7 @@ public class JogaishaTorokuHandler {
     /**
      * 保存するボタンを押下した際の、更新可能チェックを行います。
      *
-     * @return
+     * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validate更新可能() {
         return createValidationHandler(div).validate更新可能();

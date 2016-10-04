@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -44,6 +45,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     @InjectSession
     private SqlSession session;
     private static final int INT_3 = 3;
+    private static final int INT_1 = 1;
 
     /**
      * 主キーで介護保険施設入退所を取得します。
@@ -57,7 +59,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     public DbT1004ShisetsuNyutaishoEntity selectByKey(
             ShikibetsuCode 識別コード,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -135,6 +137,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      *
      * @return 最大履歴番号
      */
+    @Transaction
     public DbT1004ShisetsuNyutaishoEntity selectRirekiNoMax() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(rirekiNo)).
@@ -147,7 +150,9 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      * @param 識別コード ShikibetsuCode
      * @return 最大履歴番号
      */
+    @Transaction
     public DbT1004ShisetsuNyutaishoEntity get最大履歴番号(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(rirekiNo)).
                 table(DbT1004ShisetsuNyutaisho.class).
@@ -187,9 +192,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     public List<DbT1004ShisetsuNyutaishoEntity> selectFor施設入退所データ(
             ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
         return accessor.select().
                 table(DbT1004ShisetsuNyutaisho.class).
                 where(and(
@@ -197,6 +200,46 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
                                 eq(daichoShubetsu, DaichoType.被保険者.getコード()))).
                 order(by(taishoYMD, DESC)).
                 limit(INT_3).
+                toList(DbT1004ShisetsuNyutaishoEntity.class);
+    }
+
+    /**
+     * 施設入退所Orderの取得です。
+     *
+     * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
+     * @return DbT1004ShisetsuNyutaishoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1004ShisetsuNyutaishoEntity get施設入退所Order(ShikibetsuCode 識別コード,
+            RString 台帳種別) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
+        requireNonNull(台帳種別, UrSystemErrorMessages.値がnull.getReplacedMessage("台帳種別"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1004ShisetsuNyutaisho.class).
+                where(and(eq(DbT1004ShisetsuNyutaisho.shikibetsuCode, 識別コード),
+                                eq(DbT1004ShisetsuNyutaisho.daichoShubetsu, 台帳種別))).
+                order(by(DbT1004ShisetsuNyutaisho.rirekiNo)).
+                limit(INT_1).
+                toObject(DbT1004ShisetsuNyutaishoEntity.class);
+    }
+
+    /**
+     * 識別コードにより、介護保険施設入退所の取得。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return 介護保険施設入退所
+     */
+    @Transaction
+    public List<DbT1004ShisetsuNyutaishoEntity> get介護保険施設入退所(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1004ShisetsuNyutaisho.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(by(shikibetsuCode), by(rirekiNo, Order.DESC)).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);
     }
 }

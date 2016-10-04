@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.fuka;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHaakuResultEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHakuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiShotokuEntity;
 
 /**
  * 世帯所得・課税判定のマッパーインタフェースです。
@@ -24,16 +24,19 @@ public interface ISetaiShotokuKazeiHanteiMapper {
     void createTmpSetaiShotoku();
 
     /**
-     * 世帯員所得情報一時が1を作成します
+     * 世帯員把握入力住所地特例該当が１
+     *
+     * @return List<SetaiHaakuEntity>
      */
-    void insert世帯員所得情報一時が1();
+    List<SetaiHakuEntity> select世帯員把握入力_1();
 
     /**
-     * insert世帯員所得情報一時が1以外を作成します
+     * select世帯員把握入力
      *
      * @param parameter SetaiShotokuKazeiHanteiMybatisParameter
+     * @return List<SetaiHaakuResultEntity>
      */
-    void insert世帯員所得情報一時が1以外(SetaiShotokuKazeiHanteiMybatisParameter parameter);
+    List<SetaiHaakuResultEntity> select世帯員把握入力(SetaiShotokuKazeiHanteiMybatisParameter parameter);
 
     /**
      * 世帯員把握入力Tempのデータの取得
@@ -41,13 +44,6 @@ public interface ISetaiShotokuKazeiHanteiMapper {
      * @return 世帯員把握入力Tempのデータ
      */
     List<SetaiHakuEntity> get世帯員把握入力Temp();
-
-    /**
-     * 世帯員所得情報一時を作成します
-     *
-     * @param 世帯員所得情報Entity SetaiShotokuEntity
-     */
-    void insert世帯員所得情報一時(SetaiShotokuEntity 世帯員所得情報Entity);
 
     /**
      * 介護所得のデータの取得

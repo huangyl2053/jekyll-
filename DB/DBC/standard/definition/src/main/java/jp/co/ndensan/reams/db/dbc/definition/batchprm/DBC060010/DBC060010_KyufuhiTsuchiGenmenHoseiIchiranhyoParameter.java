@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiProcessParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -31,16 +30,9 @@ public class DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter extends Batch
     @BatchParameter(key = "サービス終了年月", name = "サービス終了年月")
     private FlexibleYearMonth サービス終了年月;
     @BatchParameter(key = "市町村コード", name = "市町村コードList")
-    private List<HokenshaNo> 市町村コードList;
+    private List<RString> 市町村コードList;
     @BatchParameter(key = "帳票出力順ID", name = "帳票出力順ID")
     private RString 帳票出力順ID;
-
-    /**
-     * プロセスパラメータを作成します。
-     *
-     */
-    public DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter() {
-    }
 
     /**
      * プロセスパラメータを作成します。

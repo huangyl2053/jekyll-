@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0220001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistfukadaicho.HanyoListFukaDaichoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022001.DBB022001_FukaDaichoHanyoListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220001.HanyoListFukaDaichoParamDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220001.HanyoListFukaDaichoParamHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220001.HanyoListFukaDaichoParamValidationHandler;
@@ -61,8 +61,8 @@ public class HanyoListFukaDaichoParam {
      * @param div HanyoListFukaDaichoParamDiv
      * @return ResponseData<HanyoListFukaDaichoBatchParameter>
      */
-    public ResponseData<HanyoListFukaDaichoBatchParameter> onClick_btnExecute(HanyoListFukaDaichoParamDiv div) {
-        HanyoListFukaDaichoBatchParameter parameter = getHandler(div).onClick_btnExecute();
+    public ResponseData<DBB022001_FukaDaichoHanyoListSakuseiParameter> onClick_btnExecute(HanyoListFukaDaichoParamDiv div) {
+        DBB022001_FukaDaichoHanyoListSakuseiParameter parameter = getHandler(div).onClick_btnExecute();
         return ResponseData.of(parameter).respond();
     }
 

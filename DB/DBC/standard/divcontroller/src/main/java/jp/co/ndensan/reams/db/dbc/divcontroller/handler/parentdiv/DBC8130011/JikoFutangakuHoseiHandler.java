@@ -11,10 +11,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHosei;
-import jp.co.ndensan.reams.db.dbc.definition.core.jigyougassan.ShoumeishoyouDataKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassanIdokubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassanShotokuKbn;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.OverSeventyShotokuKbn;
+import jp.co.ndensan.reams.db.dbc.definition.core.jigyougassan.JigyouGassan_ShoumeishoyouDataKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.JikoFutangakuHoseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.JikoFutangakuHoseiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.dgJohoIchiran_Row;
@@ -129,7 +129,7 @@ public class JikoFutangakuHoseiHandler {
         KogakuGassanJikoFutanGaku 高額合算自己負担額 = manager.getMax履歴番号(
                 被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
         return 履歴番号 - 高額合算自己負担額.get履歴番号() == 0
-                && ShoumeishoyouDataKubun.証明書用.get名称().equals(row.getTxtDataKBN());
+                && JigyouGassan_ShoumeishoyouDataKubun.証明書用.get名称().equals(row.getTxtDataKBN());
     }
 
     /**
@@ -210,7 +210,7 @@ public class JikoFutangakuHoseiHandler {
             row.setTxtHokenshaNo(result.get保険者番号().getColumnValue());
             row.setTxtShikyuShinseishoSeiriNo(result.get支給申請書整理番号());
             row.setTxtIdoKubun(result.get異動区分() == null ? RString.EMPTY
-                    : KaigoGassanIdokubun.toValue(result.get異動区分()).get名称());
+                    : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
             row.setTxtRirekiNo(new RString(result.get履歴番号()));
             row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null ? RString.EMPTY
                     : result.get自己負担額証明書情報受取年月().toDateString());
@@ -218,7 +218,7 @@ public class JikoFutangakuHoseiHandler {
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.get自己負担額計算年月日().toString())));
             row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
-                    : ShoumeishoyouDataKubun.toValue(result.getデータ作成区分()).get名称());
+                    : JigyouGassan_ShoumeishoyouDataKubun.toValue(result.getデータ作成区分()).get名称());
             row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getリアル補正実施年月日().toString())));
@@ -276,7 +276,7 @@ public class JikoFutangakuHoseiHandler {
         tplJikofutanKanriJoho1Div kanriJohoDiv1
                 = div.getJikoFutangakuHoseiDetail().getTplJikofutanKanriJoho1();
         kanriJohoDiv1.getTxtIdouKBN().setValue(result.get異動区分() == null ? RString.EMPTY
-                : KaigoGassanIdokubun.toValue(result.get異動区分()).get名称());
+                : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
         kanriJohoDiv1.getDdlShotokuKBN().setDataSource(set所得区分(result.get対象年度()));
         if (result.get所得区分() == null) {
             kanriJohoDiv1.getDdlShotokuKBN().setSelectedIndex(0);
@@ -361,17 +361,17 @@ public class JikoFutangakuHoseiHandler {
         List<KeyValueDataSource> h25年度以前 = new ArrayList();
         h25年度以前.add(new KeyValueDataSource(所得区分_課税, 課税));
         h25年度以前.add(new KeyValueDataSource(所得区分_非課税, 非課税));
-        h25年度以前.add(new KeyValueDataSource(KaigoGassanShotokuKbn.上位所得者.getCode(),
-                KaigoGassanShotokuKbn.上位所得者.get名称()));
+        h25年度以前.add(new KeyValueDataSource(KaigoGassan_ShotokuKbn.上位所得者.getCode(),
+                KaigoGassan_ShotokuKbn.上位所得者.get名称()));
         List<KeyValueDataSource> h26年度以降 = new ArrayList();
         List<KeyValueDataSource> h27年1月以降 = new ArrayList();
-        for (KaigoGassanShotokuKbn type : KaigoGassanShotokuKbn.values()) {
+        for (KaigoGassan_ShotokuKbn type : KaigoGassan_ShotokuKbn.values()) {
             h27年1月以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
-            if (KaigoGassanShotokuKbn.区分ア.get名称().equals(type.get名称())
-                    || KaigoGassanShotokuKbn.区分イ.get名称().equals(type.get名称())
-                    || KaigoGassanShotokuKbn.区分ウ.get名称().equals(type.get名称())
-                    || KaigoGassanShotokuKbn.区分エ.get名称().equals(type.get名称())
-                    || KaigoGassanShotokuKbn.区分オ.get名称().equals(type.get名称())) {
+            if (KaigoGassan_ShotokuKbn.区分ア.get名称().equals(type.get名称())
+                    || KaigoGassan_ShotokuKbn.区分イ.get名称().equals(type.get名称())
+                    || KaigoGassan_ShotokuKbn.区分ウ.get名称().equals(type.get名称())
+                    || KaigoGassan_ShotokuKbn.区分エ.get名称().equals(type.get名称())
+                    || KaigoGassan_ShotokuKbn.区分オ.get名称().equals(type.get名称())) {
                 h26年度以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
             }
         }
@@ -386,7 +386,7 @@ public class JikoFutangakuHoseiHandler {
 
     private List<KeyValueDataSource> set70歳以上所得区分() {
         List<KeyValueDataSource> dataSource = new ArrayList();
-        for (OverSeventyShotokuKbn type : OverSeventyShotokuKbn.values()) {
+        for (KaigoGassan_Over70_ShotokuKbn type : KaigoGassan_Over70_ShotokuKbn.values()) {
             dataSource.add(new KeyValueDataSource(type.getCode(), type.get名称()));
         }
         return dataSource;

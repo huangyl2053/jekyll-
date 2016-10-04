@@ -138,6 +138,7 @@ public class IdoCheckListItem {
      * @param listLower_14 異動情報データ6
      * @param fuseigoCountTitle 不整合合計タイトル
      * @param fuseigoCount 不整合数
+     * @param tyusyutsukikanT 抽出期間
      */
     public IdoCheckListItem(
             RString printTimeStamp,
@@ -202,8 +203,8 @@ public class IdoCheckListItem {
     ) {
         this.printTimeStamp = printTimeStamp;
         this.pageCount = pageCount;
-        this.tyusyutsukikanF=tyusyutsukikanF;
-        this.tyusyutsukikanT=tyusyutsukikanT;
+        this.tyusyutsukikanF = tyusyutsukikanF;
+        this.tyusyutsukikanT = tyusyutsukikanT;
         this.taishoJohotitle = taishoJohotitle;
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;

@@ -61,15 +61,15 @@
     <select resultOrdered="true" id="get判定結果被保険一時" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT
         DbWT3036."renban" as dbWT3036_連番,
-        DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
-        DbWT3036."shokisaiHokenshaMei" as dbWT3036_証記載保険者名,
-        DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
-        DbWT3036."kokuhoRengokaiMei" as dbWT3036_国保連合会名,
+        DbWT3036."shoKisaiHokenshaNo" as dbWT3036_証記載保険者番号,
+        DbWT3036."shoKisaiHokenshaName" as dbWT3036_証記載保険者名,
+        DbWT3036."sakuseiYMD" as dbWT3036_作成年月日,
+        DbWT3036."kokuhorenName" as dbWT3036_国保連合会名,
         DbWT3036."tsuchishoNo" as dbWT3036_No,
         DbWT3036."seiriNo" as dbWT3036_整理番号,
-        DbWT3036."serviceTeikyoYm" as dbWT3036_サービス提供年月,
+        DbWT3036."serviceTeikyoYM" as dbWT3036_サービス提供年月,
         DbWT3036."jigyoshoNo" as dbWT3036_事業所番号,
-        DbWT3036."jigyoshoMei" as dbWT3036_事業所名,
+        DbWT3036."jigyoshoName" as dbWT3036_事業所名,
         DbWT3036."serviceShuruiCode" as dbWT3036_サービス種類コード,
         DbWT3036."serviceShuruiMei" as dbWT3036_サービス種類名,
         DbWT3036."tanisuKingaku" as dbWT3036_単位数,
@@ -85,7 +85,7 @@
         DbWT0001."orgHihokenshaNo" as dbWT0001_被保険者番号,
         DbWT0001."serviceTeikyoYmd" as dbWT0001_サービス提供年月末日,
         DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者カナ氏名,
-        DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者氏名,
+        DbWT0001."orgHihokenshaShimei" as dbWT0001_被保険者氏名,
         DbWT0001."oldShichosonCode" as dbWT0001_旧市町村コード,
         DbWT0001."henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
         DbWT0001."hihokenshaNo" as dbWT0001_登録被保険者番号,
@@ -107,49 +107,49 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE NOT EXISTS (SELECT DbT3034.* FROM rgdb."DbT3034ShokanShinsei" AS DbT3034
         WHERE DbWT0001. "hihokenshaNo" = DbT3034. "hiHokenshaNo"
-            AND DbWT3036. "serviceTeikyoYm" = DbT3034. "serviceTeikyoYM"
+            AND DbWT3036. "serviceTeikyoYM" = DbT3034. "serviceTeikyoYM"
             AND DbWT3036. "seiriNo" = DbT3034. "seiriNo")
     </select>
     
     <select resultOrdered="true" id="get償還払支給判定結果集計" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT
-        DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
-        DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
+        DbWT3036."shoKisaiHokenshaNo" as dbWT3036_証記載保険者番号,
+        DbWT3036."sakuseiYMD" as dbWT3036_作成年月日,
         DbWT3036."tsuchishoNo" as dbWT3036_No,
         DbWT3036."seiriNo" as dbWT3036_整理番号,
-        DbWT3036."serviceTeikyoYm" as dbWT3036_サービス提供年月,
+        DbWT3036."serviceTeikyoYM" as dbWT3036_サービス提供年月,
         SUM(DbWT3036."shiharaiKingaku") as dbWT3036_支払金額,
         DbWT0001."hihokenshaNo" as dbWT0001_登録被保険者番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."koshinDBumu" = '0'
         GROUP BY DbWT0001."hihokenshaNo",
-        DbWT3036."shokisaiHokenshaNo",
-        DbWT3036."sakuseiYmd",
+        DbWT3036."shoKisaiHokenshaNo",
+        DbWT3036."sakuseiYMD",
         DbWT3036."tsuchishoNo",
         DbWT3036."seiriNo",
-        DbWT3036."serviceTeikyoYm"
+        DbWT3036."serviceTeikyoYM"
     </select>
     
     
     <update id="update償還払支給判定結果一時_更新DB有無" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiInResultEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '1'
         where "renban" = #{dbWT3036_連番}
-        AND "serviceTeikyoYm" = #{dbWT3036_サービス提供年月}
+        AND "serviceTeikyoYM" = #{dbWT3036_サービス提供年月}
         AND "seiriNo" = #{dbWT3036_整理番号}
     </update>
     
    <update id="insert処理結果リスト一時TBL_申請" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyuketteiin.DbWT0002InsertParameter">
-        INSERT INTO  rgdb."DbWT0002KokuhorenTorikomiErrorTemp"("errorKubun","shoHokanehshaNo","hihokenshaNo","key1","key2",
+        INSERT INTO  "DbWT0002KokuhorenTorikomiError"("errorKubun","shoHokanehshaNo","hihokenshaNo","key1","key2",
         "key3","key4","key5","hihokenshaKanaShimei","hihokenshaShimei","biko")
         VALUES(
         '62',
@@ -168,7 +168,7 @@
     
      <update id="insert処理結果リスト一時TBL_再処理" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyuketteiin.DbWT0002InsertParameter">
-        INSERT INTO  rgdb."DbWT0002KokuhorenTorikomiErrorTemp"("errorKubun","shoHokanehshaNo","hihokenshaNo","key1","key2",
+        INSERT INTO  "DbWT0002KokuhorenTorikomiError"("errorKubun","shoHokanehshaNo","hihokenshaNo","key1","key2",
         "key3","key4","key5","hihokenshaKanaShimei","hihokenshaShimei","biko")
         VALUES(
         '61',
@@ -187,15 +187,15 @@
     
     <select resultOrdered="true" id="get警告エラーデータ" resultMap="resultMap_ShokanShikyuKetteiIn" fetchSize="500">
         SELECT DbWT3036."renban" as dbWT3036_連番,
-        DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
-        DbWT3036."shokisaiHokenshaMei" as dbWT3036_証記載保険者名,
-        DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
-        DbWT3036."kokuhoRengokaiMei" as dbWT3036_国保連合会名,
+        DbWT3036."shoKisaiHokenshaNo" as dbWT3036_証記載保険者番号,
+        DbWT3036."shoKisaiHokenshaName" as dbWT3036_証記載保険者名,
+        DbWT3036."sakuseiYMD" as dbWT3036_作成年月日,
+        DbWT3036."kokuhorenName" as dbWT3036_国保連合会名,
         DbWT3036."tsuchishoNo" as dbWT3036_No,
         DbWT3036."seiriNo" as dbWT3036_整理番号,
-        DbWT3036."serviceTeikyoYm" as dbWT3036_サービス提供年月,
+        DbWT3036."serviceTeikyoYM" as dbWT3036_サービス提供年月,
         DbWT3036."jigyoshoNo" as dbWT3036_事業所番号,
-        DbWT3036."jigyoshoMei" as dbWT3036_事業所名,
+        DbWT3036."jigyoshoName" as dbWT3036_事業所名,
         DbWT3036."serviceShuruiCode" as dbWT3036_サービス種類コード,
         DbWT3036."serviceShuruiMei" as dbWT3036_サービス種類名,
         DbWT3036."tanisuKingaku" as dbWT3036_単位数,
@@ -211,7 +211,7 @@
         DbWT0001."orgHihokenshaNo" as dbWT0001_被保険者番号,
         DbWT0001."serviceTeikyoYmd" as dbWT0001_サービス提供年月末日,
         DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者カナ氏名,
-        DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者氏名,
+        DbWT0001."orgHihokenshaShimei" as dbWT0001_被保険者氏名,
         DbWT0001."oldShichosonCode" as dbWT0001_旧市町村コード,
         DbWT0001."henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
         DbWT0001."hihokenshaNo" as dbWT0001_登録被保険者番号,
@@ -233,12 +233,12 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         AND DbWT3036."biko1" LIKE '警告エラー%'
         ORDER BY DbWT0001."hihokenshaNo" ASC,
-        DbWT3036."serviceTeikyoYm" ASC,
+        DbWT3036."serviceTeikyoYM" ASC,
         DbWT3036."seiriNo" ASC,
         DbWT3036."serviceShuruiCode" ASC,
         DbWT3036."jigyoshoNo" ASC,
@@ -248,10 +248,10 @@
     
     <update id="update重複データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiInResultEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '1'
         where "renban" = #{dbWT3036_連番}
-        AND "serviceTeikyoYm" = #{dbWT3036_サービス提供年月}
+        AND "serviceTeikyoYM" = #{dbWT3036_サービス提供年月}
         AND "seiriNo" = #{dbWT3036_整理番号}
         AND "serviceShuruiCode" = #{dbWT3036_サービス種類コード}
         AND "jigyoshoNo" = #{dbWT3036_事業所番号}
@@ -311,15 +311,15 @@
         DbT3048.*
         FROM
         (SELECT DbWT3036."renban" as dbWT3036_連番,
-        DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
-        DbWT3036."shokisaiHokenshaMei" as dbWT3036_証記載保険者名,
-        DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
-        DbWT3036."kokuhoRengokaiMei" as dbWT3036_国保連合会名,
+        DbWT3036."shoKisaiHokenshaNo" as dbWT3036_証記載保険者番号,
+        DbWT3036."shoKisaiHokenshaName" as dbWT3036_証記載保険者名,
+        DbWT3036."sakuseiYMD" as dbWT3036_作成年月日,
+        DbWT3036."kokuhorenName" as dbWT3036_国保連合会名,
         DbWT3036."tsuchishoNo" as dbWT3036_No,
         DbWT3036."seiriNo" as 整理番号,
-        DbWT3036."serviceTeikyoYm" as サービス提供年月,
+        DbWT3036."serviceTeikyoYM" as サービス提供年月,
         DbWT3036."jigyoshoNo" as dbWT3036_事業所番号,
-        DbWT3036."jigyoshoMei" as dbWT3036_事業所名,
+        DbWT3036."jigyoshoName" as dbWT3036_事業所名,
         DbWT3036."serviceShuruiCode" as dbWT3036_サービス種類コード,
         DbWT3036."serviceShuruiMei" as dbWT3036_サービス種類名,
         DbWT3036."tanisuKingaku" as 単位数,
@@ -335,7 +335,7 @@
         DbWT0001."orgHihokenshaNo" as dbWT0001_被保険者番号,
         DbWT0001."serviceTeikyoYmd" as dbWT0001_サービス提供年月末日,
         DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者カナ氏名,
-        DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者氏名,
+        DbWT0001."orgHihokenshaShimei" as dbWT0001_被保険者氏名,
         DbWT0001."oldShichosonCode" as dbWT0001_旧市町村コード,
         DbWT0001."henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
         DbWT0001."hihokenshaNo" as 登録被保険者番号,
@@ -357,8 +357,8 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."serviceShuruiCode" IN ('41','44') 
         AND DbWT3036."jigyoshoNo" is null or DbWT3036."jigyoshoNo" = '') AS 一時TBL
@@ -372,23 +372,23 @@
     
    <update id="update償還払支給判定結果一時_福祉用具事業者番号" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "wrkJigyoshoNo" = #{jigyoshaNo}
         where "tanisuKingaku" = #{kounyuKingaku}
         AND "serviceShuruiCode" IN ('41','44')
         AND "jigyoshoNo" is null or "jigyoshoNo" = ''
-        AND "serviceTeikyoYm" = #{serviceTeikyoYM}
+        AND "serviceTeikyoYM" = #{serviceTeikyoYM}
         AND "seiriNo" = #{seiriNo}
     </update>
     
     <update id="update償還払支給判定結果一時_住宅改修事業者番号" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "wrkJigyoshoNo" = #{jigyoshaNo}
         where "tanisuKingaku" = #{kaishuKingaku}
          AND "serviceShuruiCode" IN ('42','45')
         AND "jigyoshoNo" is null or  "jigyoshoNo" = ''
-        AND "serviceTeikyoYm" = #{serviceTeikyoYM}
+        AND "serviceTeikyoYM" = #{serviceTeikyoYM}
         AND "seiriNo" = #{seiriNo}
     </update>
     
@@ -444,15 +444,15 @@
         DbT3049.*
         FROM
         (SELECT DbWT3036."renban" as dbWT3036_連番,
-        DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
-        DbWT3036."shokisaiHokenshaMei" as dbWT3036_証記載保険者名,
-        DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
-        DbWT3036."kokuhoRengokaiMei" as dbWT3036_国保連合会名,
+        DbWT3036."shoKisaiHokenshaNo" as dbWT3036_証記載保険者番号,
+        DbWT3036."shoKisaiHokenshaName" as dbWT3036_証記載保険者名,
+        DbWT3036."sakuseiYMD" as dbWT3036_作成年月日,
+        DbWT3036."kokuhorenName" as dbWT3036_国保連合会名,
         DbWT3036."tsuchishoNo" as dbWT3036_No,
         DbWT3036."seiriNo" as 整理番号,
-        DbWT3036."serviceTeikyoYm" as サービス提供年月,
+        DbWT3036."serviceTeikyoYM" as サービス提供年月,
         DbWT3036."jigyoshoNo" as dbWT3036_事業所番号,
-        DbWT3036."jigyoshoMei" as dbWT3036_事業所名,
+        DbWT3036."jigyoshoName" as dbWT3036_事業所名,
         DbWT3036."serviceShuruiCode" as dbWT3036_サービス種類コード,
         DbWT3036."serviceShuruiMei" as dbWT3036_サービス種類名,
         DbWT3036."tanisuKingaku" as 単位数,
@@ -468,7 +468,7 @@
         DbWT0001."orgHihokenshaNo" as dbWT0001_被保険者番号,
         DbWT0001."serviceTeikyoYmd" as dbWT0001_サービス提供年月末日,
         DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者カナ氏名,
-        DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者氏名,
+        DbWT0001."orgHihokenshaShimei" as dbWT0001_被保険者氏名,
         DbWT0001."oldShichosonCode" as dbWT0001_旧市町村コード,
         DbWT0001."henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
         DbWT0001."hihokenshaNo" as 登録被保険者番号,
@@ -490,8 +490,8 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."serviceShuruiCode" IN ('42','45') 
         AND DbWT3036."jigyoshoNo" is null or DbWT3036."jigyoshoNo" = '') AS 一時TBL
@@ -713,17 +713,17 @@
     
     <update id="update償還払支給判定結果一時_更新DBあり" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '0'
         where "renban" = #{renban}
-        AND "serviceTeikyoYm" = #{serviceTeikyoYm}
+        AND "serviceTeikyoYM" = #{serviceTeikyoYM}
         AND "seiriNo" = #{seiriNo}
         AND "wrkJigyoshoNo" = #{wrkJigyoshoNo}
         AND "serviceShuruiCode" = #{serviceShuruiCode}
     </update>
     
     <update id="update償還払支給判定結果一時">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '1'
         where "koshinDBumu" = '' or "koshinDBumu" is null
     </update>
@@ -737,11 +737,11 @@
         FROM rgdb."DbT3036ShokanHanteiKekka" as DbT3036
         WHERE NOT EXISTS (
         SELECT DbWT3036.*,DbWT0001.*
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbT3036."hiHokenshaNo" = DbWT0001."hihokenshaNo"
-        AND DbT3036."serviceTeikyoYM" = DbWT3036."serviceTeikyoYm"
+        AND DbT3036."serviceTeikyoYM" = DbWT3036."serviceTeikyoYM"
         AND DbT3036."seiriNo" = DbWT3036."seiriNo"
         AND DbWT3036."koshinDBumu" = '0'
         )

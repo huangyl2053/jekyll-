@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060012.Kag
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060012.KagoMoshitatePanelValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -40,12 +39,9 @@ public class KagoMoshitatePanel {
      * @return 居宅サービスの給付管理照会
      */
     public ResponseData<KagoMoshitatePanelDiv> onLoad(KagoMoshitatePanelDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode 識別コード = key.get識別コード();
-        div.getCommonKaigpAtenainfoChildDiv1().initialize(識別コード);
-
         KyufuKanrihyoShokaiDataModel 給付管理票 = ViewStateHolder.get(
                 ViewStateKeys.給付管理票200604Entity, KyufuKanrihyoShokaiDataModel.class);
+        div.getCommonKaigpAtenainfoChildDiv1().initialize(new ShikibetsuCode(給付管理票.get識別コード()));
         ValidationMessageControlPairs pairs = getValidationHandler().validateFor被保険者番号(給付管理票);
         if (pairs.iterator().hasNext()) {
             div.getCommonKaigoshikakuKihonChildDiv2().setVisible(false);

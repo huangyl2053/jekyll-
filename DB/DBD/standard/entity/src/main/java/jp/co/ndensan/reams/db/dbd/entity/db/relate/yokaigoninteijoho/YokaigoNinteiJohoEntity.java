@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
@@ -39,6 +40,7 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
     private DbT4913ChosainJohoEntity 調査員情報Entity;
     private DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
     private DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
+    private DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity;
 
     /**
      * コンストラクタです。
@@ -55,6 +57,7 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
         調査員情報Entity = new DbT4913ChosainJohoEntity();
         要介護認定結果情報Entity = new DbT4102NinteiKekkaJohoEntity();
         要介護認定インターフェース情報Entity = new DbT4003YokaigoNinteiInterfaceEntity();
+        構成市町村マスタEntity = new DbT7051KoseiShichosonMasterEntity();
     }
 
     /**
@@ -74,6 +77,7 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
         this.調査員情報Entity.initializeMd5();
         this.要介護認定結果情報Entity.initializeMd5();
         this.要介護認定インターフェース情報Entity.initializeMd5();
+        this.構成市町村マスタEntity.initializeMd5();
     }
 
     /**
@@ -92,5 +96,6 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
         this.調査員情報Entity.initializeMd5();
         this.要介護認定結果情報Entity.initializeMd5();
         this.要介護認定インターフェース情報Entity.initializeMd5();
+        this.構成市町村マスタEntity.initializeMd5();
     }
 }

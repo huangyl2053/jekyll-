@@ -108,4 +108,10 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
      */
     void set様式番号(RString 様式番号);
 
+    /**
+     * 要介護度を取得します。
+     *
+     * @return 要介護度 要介護度
+     */
+    RString get要介護度();
 }

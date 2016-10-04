@@ -49,8 +49,6 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty
             BreakerCatalog<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> occuredBreak(
@@ -74,6 +72,26 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty
          * 公費負担者番号
          */
         公費負担者番号(new RString("0134"), new RString("kohiFutanshaNo"), new RString("DbWT3063.\"shoKisaiHokenshaNo\"")),
+        /**
+         * 郵便番号
+         */
+        郵便番号(new RString("0019"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
+        /**
+         * 町域コード
+         */
+        町域コード(new RString("0020"), new RString("choikiCode"), new RString("DbWT0001.\"choikiCode\"")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0021"), new RString("gyoseikuCode"), new RString("DbWT0001.\"gyoseikuCode\"")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0022"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0023"), new RString("shichosonCode"), new RString("DbWT0001.\"shichosonCode\"")),
         /**
          * 被保険者番号
          */

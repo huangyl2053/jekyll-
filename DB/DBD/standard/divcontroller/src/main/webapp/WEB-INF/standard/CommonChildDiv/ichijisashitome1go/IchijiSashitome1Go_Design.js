@@ -32,6 +32,10 @@ var DBD;
                 return "onBeforeOpenDialog_BtnTainoJokyo";
             };
 
+            Events.onClick_btnSashitomeClose = function () {
+                return "onClick_btnSashitomeClose";
+            };
+
             Events.onClick_SashitomeToRokuKaKuTei = function () {
                 return "onClick_SashitomeToRokuKaKuTei";
             };

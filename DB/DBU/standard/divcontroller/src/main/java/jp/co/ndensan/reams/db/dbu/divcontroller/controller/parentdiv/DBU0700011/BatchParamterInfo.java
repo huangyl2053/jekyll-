@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0700011;
 
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.hiroshimadomain.HiroshimaDomainBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050020.DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0700011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0700011.BatchParamterInfoHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -64,9 +64,9 @@ public class BatchParamterInfo {
      * @param div BatchParamterInfoDiv
      * @return バッチを起動する
      */
-    public ResponseData<HiroshimaDomainBatchParameter> onClick_btnBatchRegister(BatchParamterInfoDiv div) {
-        HiroshimaDomainBatchParameter paramter = getHandler(div).setBatchParamter();
-        ResponseData<HiroshimaDomainBatchParameter> responseData = new ResponseData<>();
+    public ResponseData<DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter> onClick_btnBatchRegister(BatchParamterInfoDiv div) {
+        DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter paramter = getHandler(div).setBatchParamter();
+        ResponseData<DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter> responseData = new ResponseData<>();
         responseData.data = getHandler(div).setBatchParamter();
         return ResponseData.of(paramter).respond();
     }

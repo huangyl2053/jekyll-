@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-2110-010 LDNS shaotw -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shikakusoushitsudata.IShikakuSoushitsuDataMapper">
+    <select id="getShikakuSoshitsuEntity"
+            resultMap="resultMap_ChohyoShuchiryokuyoShiseiJyohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5190003.RenkeiDataShutsuryokuSikakuSakuseiSoshitsuMybatisParameter"
+            fetchSize="500" resultOrdered="true">
+        SELECT AA.*,BB.*
+        FROM(
+            SELECT
+            A."hihokenshaNo",
+            A."edaNo",
+            A."shikibetsuCode",
+            A."shikakuSoshitsuJiyuCode",
+            A."shikakuSoshitsuYMD",
+            A."hihokennshaKubunCode",
+            B."seinengappiYMD",
+            B."meisho",
+            B."kanaMeisho",
+            B."seibetsuCode",
+            B."jusho",
+            C."shoKisaiHokenshaNo",
+            C."shichosonMeisho",
+            E."zenkaiShinseishoKanriNo",
+            F."shinseiTodokedeDaikoKubunCode"
+        FROM
+            rgdb."DbT1001HihokenshaDaicho" AS A
+        INNER JOIN 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS B
+            ON A."shikibetsuCode" = B."shikibetsuCode"
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS C
+            ON C."shichosonCode" = A."shichosonCode"
+        INNER JOIN
+            rgdb."DbT4001JukyushaDaicho" AS D
+            ON D."shichosonCode" = C."shichosonCode"
+        INNER JOIN
+            rgdb."DbT4121ShinseiRirekiJoho" AS E
+            ON E."shinseishoKanriNo" = D."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT4120ShinseitodokedeJoho" AS F
+            ON F."shinseishoKanriNo" = E."shinseishoKanriNo"
+         WHERE A."shikakuSoshitsuJiyuCode" = '52'
+         AND A."shikakuHenkoYMD" <![CDATA[>]]> #{今回開始日時}
+         AND A."shikakuHenkoYMD" <![CDATA[<=]]> #{今回終了日時}
+         AND D."ninteiYukoKikanKaishiYMD" <![CDATA[<]]> A."shikakuSoshitsuYMD"
+         AND D."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> A."shikakuSoshitsuYMD") AS AA
+         LEFT OUTER JOIN (
+         SELECT 
+            D."yokaigoJotaiKubunCode",
+            D."ninteiYukoKikanKaishiYMD",
+            D."ninteiYukoKikanShuryoYMD",
+            D."shinseishoKanriNo"
+         FROM rgdb."DbT4001JukyushaDaicho" AS D)  AS BB
+         ON AA."zenkaiShinseishoKanriNo" = BB."shinseishoKanriNo"	
+    </select>
+    
+    <resultMap id="resultMap_ChohyoShuchiryokuyoShiseiJyohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity" autoMapping="true">
+        <result property="保険者名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者氏名" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="被保険者氏名カナ" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分コード" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回要介護状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="前回認定有効期間開始" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回認定有効期間終了" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="枝番" column="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出代行区分コード" column="shinseiTodokedeDaikoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+</mapper>

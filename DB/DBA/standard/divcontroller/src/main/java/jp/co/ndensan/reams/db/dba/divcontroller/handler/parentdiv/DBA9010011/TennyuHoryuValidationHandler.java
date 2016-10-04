@@ -30,7 +30,6 @@ public class TennyuHoryuValidationHandler {
 
     private final TennyuHoryuTokuteiJushoDiv div;
     private static final RString SHICHOSONCODE_VALUE = new RString("11");
-    private static final int 桁数_5 = 5;
 
     /**
      * コンストラクタです。

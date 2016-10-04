@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.jukyushajaicho.JukyushaDaichoParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 
 /**
@@ -22,4 +25,12 @@ public interface IJukyushaDaichoMapper {
      * @return DbT4001JukyushaDaichoEntity
      */
     DbT4001JukyushaDaichoEntity get受給者台帳(JukyushaDaichoParameter parameter);
+
+    /**
+     * 異動抽出台帳情報を取得。
+     *
+     * @param parameter IdoChushutsuDaishoParameter
+     * @return 異動抽出台帳リスト
+     */
+    List<IdoChushutsuDaichoEntity> get異動抽出台帳リスト(IdoChushutsuDaichoMybatisParameter parameter);
 }

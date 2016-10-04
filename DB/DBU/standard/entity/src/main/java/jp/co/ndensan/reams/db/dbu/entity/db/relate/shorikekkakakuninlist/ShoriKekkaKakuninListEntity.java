@@ -27,13 +27,11 @@ public class ShoriKekkaKakuninListEntity {
     private RString 項目コード2;
     private RString 項目コード3;
     private RString 項目コード4;
-    private RString 項目コード5;
     private RString プログラムID;
     private RString 項目値1;
     private RString 項目値2;
     private RString 項目値3;
     private RString 項目値4;
-    private RString 項目値5;
     private RString 内容1;
     private RString 処理名称;
     private RString 内容2;

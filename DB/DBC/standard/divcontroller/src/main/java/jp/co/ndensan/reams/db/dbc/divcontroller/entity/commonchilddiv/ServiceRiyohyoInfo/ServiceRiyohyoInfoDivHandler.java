@@ -92,7 +92,6 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final Decimal 二割 = new Decimal(20);
     private static final RString 負担割合区分_1割 = new RString("10");
     private static final RString 負担割合区分_2割 = new RString("20");
-    private static final RString 選択 = new RString("選択");
     private static final RString 汎用キー_明細番号 = new RString("明細番号");
     private static final RString 居宅予防区分_0 = new RString("0");
     private static final RString 居宅予防区分_1 = new RString("1");
@@ -374,6 +373,26 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getChkZanteiKubun().setSelectedItemsByKey(new ArrayList<RString>());
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList()
                 .setDataSource(new ArrayList<dgServiceRiyohyoBeppyoList_Row>());
+        事業者サービスクリア();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().clearValue();
     }
 
     private void 非活性または活性(boolean flg) {
@@ -559,6 +578,7 @@ public class ServiceRiyohyoInfoDivHandler {
                 : result.getサービス種類コード().getColumnValue());
         row.setHdnGendogakuTaishogaiFlag(result.get限度額対象外フラグ());
         row.setHdnRiyoshaFutanTeiritsuTeigakuKbn(result.get利用者負担定率定額区分());
+        row.setHdnMeisaiNo(new RString(String.valueOf(result.get明細番号())));
         row.setHdnServiceKomokuCode(result.getサービス項目コード() == null ? null
                 : result.getサービス項目コード().getColumnValue());
         row.setHdnGokeiFlag(result.is合計フラグ() ? 合計有り : 合計なし);
@@ -1223,9 +1243,7 @@ public class ServiceRiyohyoInfoDivHandler {
 
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei().setDisabled(false);
         }
-        if (row.getRowState() == null) {
-            row.setRowState(RowState.valueOf(選択.toString()));
-        }
+        row.setRowState(RowState.Modified);
     }
 
     /**
@@ -1604,7 +1622,7 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private boolean isFlexibleYearMonthNullOrEmpty(FlexibleYearMonth data) {
-        return data == null || RString.isNullOrEmpty(data.toDateString());
+        return data == null || data.isEmpty();
     }
 
     /**

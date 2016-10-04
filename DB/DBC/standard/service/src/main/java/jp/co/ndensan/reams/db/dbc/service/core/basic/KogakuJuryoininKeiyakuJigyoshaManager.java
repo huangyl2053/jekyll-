@@ -94,4 +94,19 @@ public class KogakuJuryoininKeiyakuJigyoshaManager {
         }
         return 1 == dac.save(高額受領委任契約事業者.toEntity());
     }
+
+    /**
+     * 高額受領委任契約事業者{@link KogakuJuryoininKeiyakuJigyosha}を保存します。
+     *
+     * @param 高額受領委任契約事業者 {@link KogakuJuryoininKeiyakuJigyosha}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDeletePhysical高額受領委任契約事業者(KogakuJuryoininKeiyakuJigyosha 高額受領委任契約事業者) {
+        requireNonNull(高額受領委任契約事業者, UrSystemErrorMessages.値がnull.getReplacedMessage("高額受領委任契約事業者"));
+        if (!高額受領委任契約事業者.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDeletePhysical(高額受領委任契約事業者.toEntity());
+    }
 }

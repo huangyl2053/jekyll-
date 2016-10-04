@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.TyouhyouPara
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031001.DBB031001_HonsanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiFukaKeisanTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.dgHonsanteiShoriKakunin_Row;
@@ -425,10 +426,10 @@ public class HonsanteiFukaKeisanTotalHandler {
      * @param 調定年度 RString
      * @param 算定期 RString
      * @param 遷移元区分 RString
-     * @return HonsanteifukaBatchParameter バッチパラメータ
+     * @return DBB031003_HonsanteiTsuchishoHakkoParameter バッチパラメータ
      *
      */
-    public HonsanteifukaBatchParameter setバッチパラメータ(RString 調定年度, RString 算定期, RString 遷移元区分) {
+    public DBB031003_HonsanteiTsuchishoHakkoParameter setバッチパラメータ_本算定通知書(RString 調定年度, RString 算定期, RString 遷移元区分) {
 
         List<TyouhyouParameter> parameterList = new ArrayList<>();
         TyouhyouParameter chohyoMeter;
@@ -467,6 +468,57 @@ public class HonsanteiFukaKeisanTotalHandler {
         paramter.set算定期(算定期);
         paramter.set出力帳票一覧List(parameterList);
         Honsanteifuka honsanteifuka = Honsanteifuka.createInstance();
-        return honsanteifuka.createhonsanteifukaBatchParameter(paramter);
+        return honsanteifuka.create本算定通知書パラメータ(paramter);
+    }
+
+    /**
+     * バッチパラメータの設定するメソッドです。
+     *
+     * @param 調定年度 RString
+     * @param 算定期 RString
+     * @param 遷移元区分 RString
+     * @return DBB031001_HonsanteiFukaParameter バッチパラメータ
+     *
+     */
+    public DBB031001_HonsanteiFukaParameter setバッチパラメータ_本算定賦課(RString 調定年度, RString 算定期, RString 遷移元区分) {
+
+        List<TyouhyouParameter> parameterList = new ArrayList<>();
+        TyouhyouParameter chohyoMeter;
+        Map<RString, RString> 帳票一覧Map = div.getHonsanteiChohyoHakko2().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Set<Map.Entry<RString, RString>> set = 帳票一覧Map.entrySet();
+        Iterator<Map.Entry<RString, RString>> it = set.iterator();
+        while (it.hasNext()) {
+            chohyoMeter = new TyouhyouParameter();
+            Map.Entry<RString, RString> entry = it.next();
+            chohyoMeter.set帳票分類ID(new ReportId(entry.getKey()));
+            chohyoMeter.set出力順ID(entry.getValue());
+            parameterList.add(chohyoMeter);
+        }
+        HonsanteifukaParameter paramter = new HonsanteifukaParameter();
+        paramter.set調定年度(new FlexibleYear(調定年度));
+        paramter.set賦課年度(new FlexibleYear(調定年度));
+        paramter.set資格基準日(FlexibleDate.getNowDate());
+        paramter.set特徴_出力対象(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().getSelectedValue());
+        paramter.set特徴_発行日(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue());
+        paramter.set文書番号(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getCcdBunshoBangoKetteiTsuchi().get文書番号());
+        paramter.set決定変更_発行日(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtKetteTsuchiHakkoYMD2().getValue());
+        paramter.set納入_出力方法(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtShutsuryokuHoho().getValue());
+        paramter.set出力期(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().getSelectedKey());
+        paramter.set納入_対象者(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2().getSelectedValues());
+        paramter.set納入_発行日(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2().getValue());
+        paramter.set納入_生活保護対象者をまとめて先頭に出力(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho()
+                .getRadNotsuSeikatsuHogo2().getSelectedValue());
+        paramter.set納入_ページごとに山分け(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getRadNotsuYamawake2().getSelectedValue());
+        paramter.set打分け条件情報(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtKetteiTsuchiYousikiSettei().getValue());
+
+        if (定数_0.equals(遷移元区分)) {
+            paramter.set一括発行起動フラグ(false);
+        } else if (定数_1.equals(遷移元区分)) {
+            paramter.set一括発行起動フラグ(true);
+        }
+        paramter.set算定期(算定期);
+        paramter.set出力帳票一覧List(parameterList);
+        Honsanteifuka honsanteifuka = Honsanteifuka.createInstance();
+        return honsanteifuka.create本算定賦課パラメータ(paramter);
     }
 }

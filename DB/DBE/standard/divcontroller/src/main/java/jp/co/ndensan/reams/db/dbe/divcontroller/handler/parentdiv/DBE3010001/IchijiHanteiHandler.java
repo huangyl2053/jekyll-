@@ -277,7 +277,7 @@ public class IchijiHanteiHandler {
             } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
                 return IchijiHanteiKekkaCode06.toValue(一次判定結果コード.getKey()).get名称();
             } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
-                       || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
+                    || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
                 return IchijiHanteiKekkaCode09.toValue(一次判定結果コード.getKey()).get名称();
             }
         }
@@ -295,7 +295,7 @@ public class IchijiHanteiHandler {
             } else if (認定ｿﾌﾄ2006.value().equals(厚労省IF識別コード)) {
                 return new Code(IchijiHanteiKekkaCode06.valueOf(要介護認定一次判定結果コード06の名称(一次判定結果名称)).getコード());
             } else if (認定ｿﾌﾄ2009_A.value().equals(厚労省IF識別コード)
-                       || 認定ｿﾌﾄ2009_B.value().equals(厚労省IF識別コード)) {
+                    || 認定ｿﾌﾄ2009_B.value().equals(厚労省IF識別コード)) {
                 return new Code(IchijiHanteiKekkaCode09.valueOf(要介護認定一次判定結果コード09の名称(一次判定結果名称)).getコード());
             }
         }
@@ -380,6 +380,8 @@ public class IchijiHanteiHandler {
             return IchijiHanteiKekkaCode09.要介護5.toString();
 //        } else if (IchijiHanteiKekkaCode09.送付済.get名称().equals(一次判定結果名称)) {
 //            return IchijiHanteiKekkaCode09.送付済.toString();
+        } else if (IchijiHanteiKekkaCode09.要支援1.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.要支援1.toString();
         } else if (IchijiHanteiKekkaCode09.非該当.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode09.非該当.toString();
         } else if (IchijiHanteiKekkaCode09.要支援2.get名称().equals(一次判定結果名称)) {

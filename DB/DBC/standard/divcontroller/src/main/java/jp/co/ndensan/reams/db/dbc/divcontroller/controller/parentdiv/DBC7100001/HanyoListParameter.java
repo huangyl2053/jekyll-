@@ -27,7 +27,6 @@ public class HanyoListParameter {
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
-    //TODO
 
     /**
      * 「実行ボタン押下した時の処理」ボタンのメソッドです。

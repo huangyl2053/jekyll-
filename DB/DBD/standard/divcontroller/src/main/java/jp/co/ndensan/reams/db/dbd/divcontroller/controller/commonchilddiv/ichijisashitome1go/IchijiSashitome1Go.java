@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ichijisash
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -91,8 +92,6 @@ public class IchijiSashitome1Go {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
-        div.getIchijiSashitome1GoKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -161,6 +160,17 @@ public class IchijiSashitome1Go {
     }
 
     /**
+     * 「閉じる」ボタンを押下します。
+     *
+     * @param div IchijiSashitome1GoDiv
+     * @return ResponseData<IchijiSashitome1GoDiv>
+     */
+    public ResponseData<IchijiSashitome1GoDiv> onClick_btnSashitomeClose(IchijiSashitome1GoDiv div) {
+        getHandler(div).onClick_btnSashitomeClose();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「(差止登録)取消」ボタンの処理です
      *
      * @param div IchijiSashitome1GoDiv
@@ -169,6 +179,9 @@ public class IchijiSashitome1Go {
     public ResponseData<IchijiSashitome1GoDiv> onClick_SashitomeToRokuToRiKeShi(IchijiSashitome1GoDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().replace("処理中のデータ")).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).onClick_SashitomeToRokuToRiKeShi();
         }
         return ResponseData.of(div).respond();
     }
@@ -186,7 +199,7 @@ public class IchijiSashitome1Go {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         response.data = div;
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     private IchijiSashitome1GoHandler getHandler(IchijiSashitome1GoDiv div) {

@@ -31,6 +31,7 @@ public class UpperEntity {
     private AtenaKanaMeisho フリガナ;
     private FlexibleDate 生年月日;
     private RString 異動区分;
+    private RString 処理種別;
     private FlexibleDate 受給申請日;
     private FlexibleDate 認定日;
     private FlexibleDate 認定有効開始日;

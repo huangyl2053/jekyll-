@@ -15,7 +15,7 @@ public enum DBD5190002StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    All("All");
+    Default("default");
 
     private final RString name;
 

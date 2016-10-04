@@ -624,7 +624,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp,
             UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者entity,
             FlexibleDate 判定基準日) {
-        //TODO 対象月
+        //TODO 対象月 QA1177
         生活保護該当情報Temp.setTaishoTsuki(new RString(判定基準日.getMonthValue()));
         生活保護該当情報Temp.setShikibetsuCode(生活保護受給者entity.getShikibetsuCode());
         FlexibleDate jukyuKaishiYMD = 生活保護受給者entity.getJukyuKaishiYMD();

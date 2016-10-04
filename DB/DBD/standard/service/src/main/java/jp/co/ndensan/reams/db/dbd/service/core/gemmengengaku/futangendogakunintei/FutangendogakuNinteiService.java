@@ -154,10 +154,14 @@ public class FutangendogakuNinteiService {
                 return RiyoshaFutanDankai.第四段階;
             }
         }
-        return 利用者負担段階の再判定(識別コード, 世帯員所得情報リスト, 処理日);
+        return 利用者負担段階の再判定(被保険者番号, 識別コード, 世帯員所得情報リスト, 処理日);
     }
 
-    private RiyoshaFutanDankai 利用者負担段階の再判定(ShikibetsuCode 識別コード, List<SetaiinShotoku> 世帯員所得情報リスト, FlexibleDate 処理日) {
+    private RiyoshaFutanDankai 利用者負担段階の再判定(
+            HihokenshaNo 被保険者番号,
+            ShikibetsuCode 識別コード,
+            List<SetaiinShotoku> 世帯員所得情報リスト,
+            FlexibleDate 処理日) {
         DbT7006RoreiFukushiNenkinJukyushaDac dbT7006Dac = InstanceProvider.create(DbT7006RoreiFukushiNenkinJukyushaDac.class);
         List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006Entity = dbT7006Dac.selectfor老齢福祉年金受給者の判定(識別コード, 処理日);
         if (dbT7006Entity != null && !dbT7006Entity.isEmpty()) {
@@ -174,7 +178,11 @@ public class FutangendogakuNinteiService {
         }
         Decimal 合計所得金額 = null == 世帯員所得情報.get合計所得金額() ? Decimal.ZERO : 世帯員所得情報.get合計所得金額();
         Decimal 年金収入額 = null == 世帯員所得情報.get年金収入額() ? Decimal.ZERO : 世帯員所得情報.get年金収入額();
-        int result = 合計所得金額.add(年金収入額).compareTo(Decimal.valueOf(LONG_80000));
+
+        IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
+        RString result金額 = mapper.get非課税年金勘案額(被保険者番号, 処理日.getYear().minusYear(1).toDateString());
+        Decimal 非課税年金勘案額 = (null == result金額 || RString.isNullOrEmpty(result金額)) ? Decimal.ZERO : new Decimal(result金額.toString());
+        int result = 合計所得金額.add(年金収入額).add(非課税年金勘案額).compareTo(Decimal.valueOf(LONG_80000));
         if (result <= 0) {
             return RiyoshaFutanDankai.第二段階;
         } else {

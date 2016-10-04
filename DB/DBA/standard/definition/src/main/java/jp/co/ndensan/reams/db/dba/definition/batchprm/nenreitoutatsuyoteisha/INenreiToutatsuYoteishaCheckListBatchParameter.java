@@ -18,6 +18,7 @@ import lombok.Setter;
  * 年齢到達予定者チェックリストのBatchParameterクラスです。
  *
  * @reamsid_L DBA-0580-020 yaodongsheng
+ * @deprecated 削除予定。{@link jp.co.ndensan.reams.db.dba.definition.batchprm.DBA120010.DBA120010_NenreitotatsuYoteishaListParameter}を利用してください。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -18,7 +18,23 @@ public enum SogojigyohiKagoKetteInOutPutOrder implements IReportItems {
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3060.\"hdrShoHokenshaNo\"")),
+    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3060.\"shoKisaiHokenshaNo\"")),
+    /**
+     * 郵便番号
+     */
+    郵便番号(new RString("0019"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
+    /**
+     * 町域コード
+     */
+    町域コード(new RString("0020"), new RString("choikiCode"), new RString("DbWT0001.\"choikiCode\"")),
+    /**
+     * 行政区コード
+     */
+    行政区コード(new RString("0021"), new RString("gyoseikuCode"), new RString("DbWT0001.\"gyoseikuCode\"")),
+    /**
+     * 氏名５０音カナ
+     */
+    氏名５０音カナ(new RString("0022"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
     /**
      * 被保険者番号
      */
@@ -26,7 +42,7 @@ public enum SogojigyohiKagoKetteInOutPutOrder implements IReportItems {
     /**
      * サービス提供年月
      */
-    サービス提供年月(new RString("0361"), new RString("listUpper_6"), new RString("DbWT3061.\"serviceTeikyoYm\"")),
+    サービス提供年月(new RString("0361"), new RString("listUpper_6"), new RString("DbWT3061.\"serviceTeikyoYM\"")),
     /**
      * 事業所番号
      */
@@ -34,7 +50,7 @@ public enum SogojigyohiKagoKetteInOutPutOrder implements IReportItems {
     /**
      * 取り扱い年月
      */
-    取り扱い年月(new RString("0363"), new RString("listUpper_2"), new RString("DbWT3061.\"toriatsukaiYm\""));
+    取り扱い年月(new RString("0363"), new RString("listUpper_2"), new RString("DbWT3061.\"toriatsukaiYM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

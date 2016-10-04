@@ -651,7 +651,7 @@ public class ShinseiKensakuHandler {
     /**
      * 申請一覧Gridにデータを設定します。
      *
-     * @param list 検索結果
+     * @param searchResult 検索結果
      */
     public void setShinseiJohoIchiran(SearchResult<ShinseiKensakuBusiness> searchResult) {
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
@@ -676,7 +676,7 @@ public class ShinseiKensakuHandler {
                 row.setHihokenshaSeibetsu(Seibetsu.toValue(性別.value()).get名称());
             }
             FlexibleDate 認定申請年月日 = business.get認定申請年月日();
-            if (認定申請年月日 != null) {
+            if (認定申請年月日 != null && !認定申請年月日.isEmpty()) {
                 TextBoxDate shinseiDay = new TextBoxDate();
                 shinseiDay.setValue(new RDate(認定申請年月日.toString()));
                 row.setShinseiDay(shinseiDay);

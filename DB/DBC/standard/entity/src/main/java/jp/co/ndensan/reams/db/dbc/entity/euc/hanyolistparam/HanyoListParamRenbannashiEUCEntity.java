@@ -178,9 +178,9 @@ public class HanyoListParamRenbannashiEUCEntity {
     @CsvField(order = 75, name = "宛先印字対象者")
     private RString 宛先印字対象者;
     @CsvField(order = 76, name = "年少扶養控除１６歳未満")
-    private int 年少扶養控除16歳未満;
+    private RString 年少扶養控除16歳未満;
     @CsvField(order = 77, name = "年少扶養控除１６～１８歳")
-    private int 年少扶養控除16_18歳;
+    private RString 年少扶養控除16_18歳;
     @CsvField(order = 78, name = "世帯員の総収入額")
     private Decimal 世帯員の総収入額;
     @CsvField(order = 79, name = "世帯主区分")

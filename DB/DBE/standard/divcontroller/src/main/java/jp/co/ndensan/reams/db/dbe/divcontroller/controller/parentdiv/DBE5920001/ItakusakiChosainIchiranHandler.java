@@ -40,7 +40,7 @@ public class ItakusakiChosainIchiranHandler {
     /**
      * 一覧表を発行するボタン押下処理です。
      *
-     * @return ItakusakiChosainIchiranBatchParamter
+     * @return DBE592001_ItakusakiChosainParameter
      */
     public DBE592001_ItakusakiChosainParameter onclick_Publis() {
         DBE592001_ItakusakiChosainParameter param = new DBE592001_ItakusakiChosainParameter();

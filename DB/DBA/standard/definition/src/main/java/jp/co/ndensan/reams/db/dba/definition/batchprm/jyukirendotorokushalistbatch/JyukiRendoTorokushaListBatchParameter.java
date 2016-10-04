@@ -20,6 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
+@Deprecated("削除予定。DBA140010_JukiRendoTorokushaListParameter を利用してください。")
 public class JyukiRendoTorokushaListBatchParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;

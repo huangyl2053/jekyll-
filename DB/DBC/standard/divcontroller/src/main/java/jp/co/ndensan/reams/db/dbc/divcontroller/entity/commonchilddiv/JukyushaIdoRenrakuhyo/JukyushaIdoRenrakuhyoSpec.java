@@ -347,7 +347,7 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
 
         private static final RString 空KEY = new RString("space");
 
-        private static final RString 画面ID_DBC0220012 = new RString("DBC0220012");
+        private static final RString 画面ID_DBC0220012 = new RString("DBCMN81002");
 
         /**
          * 異動日の必須チェックです。

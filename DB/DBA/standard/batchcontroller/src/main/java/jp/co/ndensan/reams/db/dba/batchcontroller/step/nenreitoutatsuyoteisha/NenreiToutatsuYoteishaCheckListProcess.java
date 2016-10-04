@@ -72,6 +72,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  * 年齢到達予定者チェックリストProcessクラスです。
  *
  * @reamsid_L DBA-0580-020 yaodongsheng
+ * @deprecated 削除予定
  */
 public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBase {
 
@@ -234,11 +235,11 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiCheckListEntity2) {
             RString juminShubetsuCode = entity.getJuminShubetsuCode();
             if (住民種別_日本人のみ.equals(juminShubetsu) && !住登内日本人.equals(juminShubetsuCode)
-                    && !住登外日本人.equals(juminShubetsuCode)) {
+                && !住登外日本人.equals(juminShubetsuCode)) {
                 removeListEntity.add(entity);
             } else if (住民種別_外国人のみ.equals(juminShubetsu) && !住登内外国人
                     .equals(juminShubetsuCode)
-                    && !住登外外国人.equals(juminShubetsuCode)) {
+                       && !住登外外国人.equals(juminShubetsuCode)) {
                 removeListEntity.add(entity);
             }
         }
@@ -264,8 +265,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
             for (UrT0508SeikatsuHogoJukyushaEntity urT0508Sei : urT0508Seika) {
                 if (urT0508Sei.getJukyuKaishiYMD()
                         .isBeforeOrEquals(entity.getNenreiyotainichi())
-                        && entity.getNenreiyotainichi().isBeforeOrEquals(
-                                urT0508Sei.getJukyuHaishiYMD())) {
+                    && entity.getNenreiyotainichi().isBeforeOrEquals(
+                        urT0508Sei.getJukyuHaishiYMD())) {
                     entity.setSeikatsu(生活);
                     break;
                 }
@@ -290,7 +291,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         FlexibleDate 年齢到達日 = ageCalculator.get年齢到達日(NENREI_TOUTATSU);
         entity.setNenreiyotainichi(年齢到達日);
         if (processParameter.getKonkaisyuryo().isBefore(年齢到達日)
-                || (年齢到達日.isBefore(processParameter.getKonkaikaishi()))) {
+            || (年齢到達日.isBefore(processParameter.getKonkaikaishi()))) {
             removeListEntity.add(entity);
         }
     }
@@ -299,8 +300,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         getTekiyoJogaiList();
         for (DbT1002TekiyoJogaishaEntity dbT1002entity : dbT1002TekiyoJogaishaEntity) {
             if (dbT1002entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
-                    && dbT1002entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
-                    && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1002entity.getKaijoYMD())) {
+                && dbT1002entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
+                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1002entity.getKaijoYMD())) {
                 entity.setJyotei(状態_適用除外者);
                 break;
             }
@@ -308,8 +309,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         getTashichosonJushochi();
         for (DbT1003TashichosonJushochiTokureiEntity dbT1003entity : dbT1003Entity) {
             if (dbT1003entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
-                    && dbT1003entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
-                    && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1003entity.getKaijoYMD())) {
+                && dbT1003entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
+                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1003entity.getKaijoYMD())) {
                 entity.setJyotei(状態_他市町村住所地特例者);
                 break;
             }
@@ -317,8 +318,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         getTennyushutsuHoryuTaishosha();
         for (DbT1010TennyushutsuHoryuTaishoshaEntity dbT1010entity : dbT1010Entity) {
             if (dbT1010entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
-                    && entity.getNenreiyotainichi() != null && dbT1010entity.getTorokuIdoYMD() != null
-                    && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1010entity.getTorokuIdoYMD())) {
+                && entity.getNenreiyotainichi() != null && dbT1010entity.getTorokuIdoYMD() != null
+                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1010entity.getTorokuIdoYMD())) {
                 entity.setJyotei(状態_転入保留対象者);
                 break;
             }

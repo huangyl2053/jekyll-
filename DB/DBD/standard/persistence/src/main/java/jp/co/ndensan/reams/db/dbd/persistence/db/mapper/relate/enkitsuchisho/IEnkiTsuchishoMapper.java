@@ -19,7 +19,15 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity
 public interface IEnkiTsuchishoMapper {
 
     /**
-     * 延期通知書発行一覧表情報を取得する。
+     * 延期通知書発行一覧表（広域）の場合情報を取得する。
+     *
+     * @param parameter EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter
+     * @return List<EnkiTsuchishoEntity>
+     */
+    List<EnkiTsuchishoEntity> get延期通知書発行一覧表情報広域(EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter parameter);
+
+    /**
+     * 延期通知書発行一覧表（単一）の場合情報を取得する。
      *
      * @param parameter EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter
      * @return List<EnkiTsuchishoEntity>

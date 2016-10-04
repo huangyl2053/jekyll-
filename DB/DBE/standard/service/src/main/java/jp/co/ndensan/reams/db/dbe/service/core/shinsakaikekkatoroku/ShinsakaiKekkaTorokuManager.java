@@ -113,7 +113,7 @@ public class ShinsakaiKekkaTorokuManager {
         IShinsakaiKekkaTorokuMapper mapper = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class);
         List<ShinsakaiKekkaTorokuIChiRanRelateEntity> entityList = mapper
                 .get審査会委員一覧検索(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (entityList.size() == 0 || null == entityList.get(0)) {
+        if (entityList.isEmpty() || null == entityList.get(0)) {
             return SearchResult.of(Collections.<ShinsakaiKekkaTorokuIChiRanBusiness>emptyList(), 0, false);
         }
         List<ShinsakaiKekkaTorokuIChiRanBusiness> ichiRanBusinessList = new ArrayList();

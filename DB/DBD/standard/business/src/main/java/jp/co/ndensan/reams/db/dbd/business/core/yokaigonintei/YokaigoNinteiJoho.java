@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
@@ -50,6 +51,7 @@ public class YokaigoNinteiJoho implements Serializable {
     private DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
     private DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity;
+    private DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity;
 
     /**
      * コンストラクタです。<br/>
@@ -67,6 +69,7 @@ public class YokaigoNinteiJoho implements Serializable {
      * @param 要介護認定結果情報Entity DbT4102NinteiKekkaJohoEntity
      * @param 要介護認定インターフェース情報Entity DbT4003YokaigoNinteiInterfaceEntity
      * @param 登録用受給者台帳Entity DbT4001JukyushaDaichoEntity
+     * @param 構成市町村マスタEntity DbT7051KoseiShichosonMasterEntity
      */
     public YokaigoNinteiJoho(
             DbT5101NinteiShinseiJohoEntity 要介護認定申請情報認定Entity,
@@ -80,7 +83,8 @@ public class YokaigoNinteiJoho implements Serializable {
             DbT4913ChosainJohoEntity 調査員情報Entity,
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity,
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,
-            DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity
+            DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity,
+            DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity
     ) {
 
         this.要介護認定申請情報認定Entity = 要介護認定申請情報認定Entity;
@@ -95,6 +99,7 @@ public class YokaigoNinteiJoho implements Serializable {
         this.要介護認定結果情報Entity = 要介護認定結果情報Entity;
         this.要介護認定インターフェース情報Entity = 要介護認定インターフェース情報Entity;
         this.登録用受給者台帳Entity = 登録用受給者台帳Entity;
+        this.構成市町村マスタEntity = 構成市町村マスタEntity;
     }
 
     /**
@@ -116,6 +121,7 @@ public class YokaigoNinteiJoho implements Serializable {
         this.要介護認定結果情報Entity = 介護認定処理情報.get要介護認定結果情報Entity();
         this.要介護認定インターフェース情報Entity = 介護認定処理情報.get要介護認定インターフェース情報Entity();
         this.登録用受給者台帳Entity = new DbT4001JukyushaDaichoEntity();
+        this.構成市町村マスタEntity = 介護認定処理情報.get構成市町村マスタEntity();
     }
 
     /**
@@ -1296,7 +1302,8 @@ public class YokaigoNinteiJoho implements Serializable {
                 調査員情報Entity,
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
-                登録用受給者台帳Entity);
+                登録用受給者台帳Entity,
+                構成市町村マスタEntity);
     }
 
     /**
@@ -1319,7 +1326,8 @@ public class YokaigoNinteiJoho implements Serializable {
                 調査員情報Entity,
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
-                登録用受給者台帳Entity);
+                登録用受給者台帳Entity,
+                構成市町村マスタEntity);
     }
 
     /**
@@ -1343,7 +1351,8 @@ public class YokaigoNinteiJoho implements Serializable {
                 調査員情報Entity,
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
-                登録用受給者台帳Entity);
+                登録用受給者台帳Entity,
+                構成市町村マスタEntity);
     }
 
     /**
@@ -1369,6 +1378,7 @@ public class YokaigoNinteiJoho implements Serializable {
                 調査員情報Entity,
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
-                登録用受給者台帳Entity);
+                登録用受給者台帳Entity,
+                構成市町村マスタEntity);
     }
 }

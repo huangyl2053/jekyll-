@@ -80,7 +80,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class NinteiChosaKekkaTorikomiOcr {
 
-    private static final RString 初期状態_メニューから = new RString("DBEMN31010");
+    private static final RString 初期状態_メニューから = new RString("DBEMN41010");
     private static final RString チェックOK = new RString("OK");
     private static final RString チェックNG = new RString("NG");
     private static final RString ファイル名 = new RString("OCRCHOSA.CSV");

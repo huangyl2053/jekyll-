@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe090001;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090001;
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.johoteikyoshiryo.JohoTeikyoShiryoChange;

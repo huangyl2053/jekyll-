@@ -22,7 +22,7 @@
         "sakuseiYMD",
         "torikomiYM") 
         SELECT
-            TEMP."hdrToriatsukaiYm",
+            TEMP."hdrToriatsukaiYM",
             #{保険者区分},
             TEMP."hdrRirekiNo",
             TEMP."kaigoKyufuhiKensu",
@@ -34,9 +34,9 @@
             TEMP."tokuteiNyushoshaServicehiKensu",
             TEMP."tokuteiNyushoshaServicehiTanisu",
             TEMP."tokuteiNyushoshaServicehiFutangaku",
-            TEMP."hdrShoHokenshaNo",
-            TEMP."sakuseiYmd",
-            TEMP."hdrTorikomiYm"
+            TEMP."shoKisaiHokenshaNo",
+            TEMP."sakuseiYMD",
+            TEMP."hdrTorikomiYM"
         FROM  "DbWT3060KagoKetteiShukei" AS TEMP
     </select>
     
@@ -61,44 +61,48 @@
         "torikomiYM"
         )
         SELECT
-            TEMP."toriatsukaiYm",
+            TEMP."toriatsukaiYM",
             #{保険者区分},
             TEMP."rirekiNo",
             TEMP."jigyoshoNo",
-            TEMP."jigyoshoMei",
+            TEMP."jigyoshoName",
             TEMP."hihokenshaNo",
             TEMP."kohiJukyushaNo",
             TEMP."kohiShokisaiHokenshaNo",
-            TEMP."serviceTeikyoYm",
+            TEMP."serviceTeikyoYM",
             TEMP."serviceShuruiCode",
             TEMP."serviceShuruiName",
             TEMP."kagomoushitateJiyuCode",
             TEMP."kagomoushitateJiyu",
             TEMP."tanisu",
             TEMP."hokenshaFutangaku",
-            TEMP."torikomiYm"
+            TEMP."torikomiYM"
         FROM(SELECT 
-            DbWT3061."toriatsukaiYm",
+            DbWT3061."toriatsukaiYM",
             DbWT3061."rirekiNo",
             DbWT3061."jigyoshoNo",
-            DbWT3061."jigyoshoMei",
+            DbWT3061."jigyoshoName",
             DbWT0001."hihokenshaNo",
             DbWT3061."kohiJukyushaNo",
             DbWT3061."kohiShokisaiHokenshaNo",
-            DbWT3061."serviceTeikyoYm",
+            DbWT3061."serviceTeikyoYM",
             DbWT3061."serviceShuruiCode",
             DbWT3061."serviceShuruiName",
             DbWT3061."kagomoushitateJiyuCode",
             DbWT3061."kagomoushitateJiyu",
             DbWT3061."tanisu",
             DbWT3061."hokenshaFutangaku",
-            DbWT3061."torikomiYm"
+            DbWT3061."torikomiYM"
         
         FROM "DbWT3061KagoKetteiMeisai" AS DbWT3061,
              "DbWT0001Hihokensha" AS DbWT0001
         WHERE 
             DbWT3061."renban" = DbWT0001."meisaiRenban") AS TEMP
-      
-        
     </select>
+    
+    <delete id="再処理準備" parameterType="java.util.Map">
+        DELETE FROM rgdb."DbT3061KagoKetteiMeisai"
+        WHERE "torikomiYM" = #{処理年月}
+        AND "hokenshaKubun" = #{保険者区分KEY}
+    </delete>
 </mapper>

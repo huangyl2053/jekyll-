@@ -176,7 +176,7 @@ public class ShikakuShutokuIdoTotal {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
             releaseLock(div);
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
@@ -338,7 +338,7 @@ public class ShikakuShutokuIdoTotal {
             // 期間重複チェック
             if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()
-                    && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
                 validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
                         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));

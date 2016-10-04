@@ -25,7 +25,7 @@
         <where>
             1=1
             <if test="旧措置者区分 ==3">
-                AND (受給者台帳."logicalDeletedFlag" = false AND 受給者台帳."kyuSochishaFlag" = false)
+                AND (受給者台帳."logicalDeletedFlag" = false AND 受給者台帳."kyuSochishaFlag" = true)
             </if>
             <if test="旧措置者区分 ==2">
                 AND NOT EXISTS (								
@@ -74,7 +74,7 @@
                         AND 受給者台帳."yukoMukoKubun" = '1'
                      )                      
                 </if>
-                <if test="対象期間指定==3">
+                <if test="受給者区分==3">
                     AND(
                         総合事業対象者."tekiyoKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
                         AND #{課税判定等基準日}<![CDATA[<=]]> 総合事業対象者."tekiyoShuryoYMD"

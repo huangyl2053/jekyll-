@@ -33,9 +33,9 @@ public class ShoKaishuKirokuRowData implements Serializable {
     private final RString kaishuJiyuNo;
 
     /**
-     * コンストラクタです。
+     * {@link dgKoufuKaishu_Row}の情報を保持したインスタンスを生成します。
      *
-     * @param row 証回収グリッドRow
+     * @param row {@link dgKoufuKaishu_Row}
      */
     public ShoKaishuKirokuRowData(dgKoufuKaishu_Row row) {
         status = row.getStatus();
@@ -54,143 +54,25 @@ public class ShoKaishuKirokuRowData implements Serializable {
     }
 
     /**
-     * 状態を取得します。
+     * {@link dgKoufuKaishu_Row}へ変換します。
      *
-     * @return
+     * @return {@link dgKoufuKaishu_Row}
      */
-    public RString getStatus() {
-        return status;
-    }
-
-    /**
-     * 交付種類を取得します。
-     *
-     * @return
-     */
-    public RString getKoufuType() {
-        return koufuType;
-    }
-
-    /**
-     * 交付日を取得します。
-     *
-     * @return
-     */
-    public RDate getKoufuDate() {
-        return koufuDate;
-    }
-
-    /**
-     * 交付事由を取得します。
-     *
-     * @return
-     */
-    public RString getKoufuJiyu() {
-        return koufuJiyu;
-    }
-
-    /**
-     * 回収日を取得します。
-     *
-     * @return
-     */
-    public RDate getKaishuDate() {
-        return kaishuDate;
-    }
-
-    /**
-     * 回収事由を取得します。
-     *
-     * @return
-     */
-    public RString getKaishuJiyu() {
-        return kaishuJiyu;
-    }
-
-    /**
-     * 有効期限を取得します。
-     *
-     * @return
-     */
-    public RDate getYukoKigen() {
-        return yukoKigen;
-    }
-
-    /**
-     * 交付理由を取得します。
-     *
-     * @return
-     */
-    public RString getKofuRiyu() {
-        return kofuRiyu;
-    }
-
-    /**
-     * 回収理由を取得します。
-     *
-     * @return
-     */
-    public RString getKaishuRiyu() {
-        return kaishuRiyu;
-    }
-
-    /**
-     * 履歴番号を取得します。
-     *
-     * @return
-     */
-    public RString getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 交付種類コードを取得します。
-     *
-     * @return
-     */
-    public RString getKoufuTypeNo() {
-        return koufuTypeNo;
-    }
-
-    /**
-     * 交付事由コードを取得します。
-     *
-     * @return
-     */
-    public RString getKoufuJiyuNo() {
-        return koufuJiyuNo;
-    }
-
-    /**
-     * 回収事由コードを取得します。
-     *
-     * @return
-     */
-    public RString getKaishuJiyuNo() {
-        return kaishuJiyuNo;
-    }
-
-    /**
-     * 引数から受け取ったデータを元にグリッドに設定するデータを用意します。
-     *
-     * @param rowData 証回収記録データ
-     * @return 証回収グリッドRow
-     */
-    public static dgKoufuKaishu_Row toRow(ShoKaishuKirokuRowData rowData) {
+    public dgKoufuKaishu_Row toRow() {
         dgKoufuKaishu_Row row = new dgKoufuKaishu_Row();
-        row.setStatus(rowData.status);
-        row.setKoufuType(rowData.koufuType);
-        row.getKoufuDate().setValue(rowData.koufuDate);
-        row.setKoufuJiyu(rowData.koufuJiyu);
-        row.getKaishuDate().setValue(rowData.kaishuDate);
-        row.setKaishuJiyu(rowData.kaishuJiyu);
-        row.getYukoKigen().setValue(rowData.yukoKigen);
-        row.setKofuRiyu(rowData.kofuRiyu);
-        row.setKaishuRiyu(rowData.kaishuRiyu);
-        row.setRirekiNo(rowData.rirekiNo);
-        row.setKoufuTypeNo(rowData.koufuTypeNo);
-        row.setKoufuJiyuNo(rowData.koufuJiyuNo);
-        row.setKaishuJiyuNo(rowData.kaishuJiyuNo);
+        row.setStatus(this.status);
+        row.setKoufuType(this.koufuType);
+        row.getKoufuDate().setValue(this.koufuDate);
+        row.setKoufuJiyu(this.koufuJiyu);
+        row.getKaishuDate().setValue(this.kaishuDate);
+        row.setKaishuJiyu(this.kaishuJiyu);
+        row.getYukoKigen().setValue(this.yukoKigen);
+        row.setKofuRiyu(this.kofuRiyu);
+        row.setKaishuRiyu(this.kaishuRiyu);
+        row.setRirekiNo(this.rirekiNo);
+        row.setKoufuTypeNo(this.koufuTypeNo);
+        row.setKoufuJiyuNo(this.koufuJiyuNo);
+        row.setKaishuJiyuNo(this.kaishuJiyuNo);
         return row;
     }
 }

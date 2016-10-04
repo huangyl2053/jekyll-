@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 一次判定結果を扱うユーティリティです。
  */
-public class IchijiHanteiKekkaSupport {
+public final class IchijiHanteiKekkaSupport {
 
     private IchijiHanteiKekkaSupport() {
     }
@@ -74,7 +74,7 @@ public class IchijiHanteiKekkaSupport {
     /**
      * 指定の厚労省IF識別コード時点での一次判定結果コードに対する名称や略称を返却します。
      *
-     * @param コード 一次判定結果コード
+     * @param code 一次判定結果コード
      * @return 入力のコードに対応する名称や略称
      */
     public static IIchijiHanteiKekkaCode toValueOrEmpty(RString code) {

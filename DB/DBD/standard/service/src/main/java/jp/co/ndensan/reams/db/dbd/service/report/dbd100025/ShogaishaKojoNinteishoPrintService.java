@@ -5,19 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.dbd100025;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100025.ShogaishaKojoNinteishoProperty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100025.ShogaishaKojoNinteishoReport;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
-import jp.co.ndensan.reams.db.dbd.service.core.ninteishojoho.NinteiShoJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -38,24 +44,27 @@ public class ShogaishaKojoNinteishoPrintService {
      * 帳票を出力します。
      *
      * @param target 認定書情報Entity
+     * @param iKojin iKojin
+     * @param iAtesaki iAtesaki
+     * @param 帳票制御共通 帳票制御共通
+     * @param 帳票制御汎用 帳票制御汎用
+     * @param 地方公共団体 地方公共団体
+     * @param 交付日 交付日
      * @param reportManager 帳票発行処理の制御機能
+     * @param 文書番号 文書番号
+     * @param 通知書定型文List 通知書定型文List
      */
-    public void print(NinteishoJohoBusiness target, ReportManager reportManager) {
+    public void print(NinteishoJohoBusiness target, IKojin iKojin, IAtesaki iAtesaki,
+            ChohyoSeigyoKyotsu 帳票制御共通, List<ChohyoSeigyoHanyo> 帳票制御汎用, Association 地方公共団体,
+            RDate 交付日, RString 文書番号, List<RString> 通知書定型文List, ReportManager reportManager) {
         ShogaishaKojoNinteishoProperty property = new ShogaishaKojoNinteishoProperty();
         try (ReportAssembler<NinteishoJohoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<NinteishoJohoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            target.set文書番号(NinteiShoJohoFinder.createInstance().文書番号取得());
-            NinteishoJohoEntity ninteishoJohoentity = NinteiShoJohoFinder.createInstance().set障がい者控除と認定年月日(target.get被保険者番号());
-            if (ninteishoJohoentity != null) {
-                target.set障害理由区分(ninteishoJohoentity.get障害理由区分());
-                target.set障害理由内容(ninteishoJohoentity.get障害理由内容());
-                target.set要介護認定日(ninteishoJohoentity.get要介護認定日());
-                target.set対象年度(ninteishoJohoentity.get対象年度());
-            }
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100025.getReportId(),
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            ShogaishaKojoNinteishoReport report = new ShogaishaKojoNinteishoReport(target.getNinteishoJohoEntity(), ninshoshaSource);
+            ShogaishaKojoNinteishoReport report = ShogaishaKojoNinteishoReport.createReport(target.getNinteishoJohoEntity(), iKojin, iAtesaki, 帳票制御共通,
+                    地方公共団体, 文書番号, 通知書定型文List, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }

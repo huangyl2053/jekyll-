@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 帳票設計_DBBPR81003_2_特別徴収未同定一覧表のReportです。
@@ -21,7 +20,7 @@ import lombok.NonNull;
 public class TokubetsuChoshuMidoteiIchiranReport extends
         Report<TokubetsuChoshuMidoteiIchiranSource> {
 
-    private final List<TokushoTaishioIchiranMidoteiEntity> 特徴対象一覧未同定リスト;
+    private final TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定;
     private final List<RString> 出力順項目リスト;
     private final List<RString> 改頁項目リスト;
     private final Association association;
@@ -31,7 +30,7 @@ public class TokubetsuChoshuMidoteiIchiranReport extends
      * コンストラクタです.
      *
      * @param 出力順項目リスト List<RString>
-     * @param 特徴対象一覧未同定リスト 特徴対象一覧未同定リスト
+     * @param 特徴対象一覧未同定 特徴対象一覧未同定
      * @param 改頁項目リスト List<RString>
      * @param 特徴開始月 特徴開始月
      * @param association Association
@@ -39,9 +38,9 @@ public class TokubetsuChoshuMidoteiIchiranReport extends
     public TokubetsuChoshuMidoteiIchiranReport(Association association,
             List<RString> 出力順項目リスト,
             List<RString> 改頁項目リスト,
-            List<TokushoTaishioIchiranMidoteiEntity> 特徴対象一覧未同定リスト,
+            TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定,
             RString 特徴開始月) {
-        this.特徴対象一覧未同定リスト = 特徴対象一覧未同定リスト;
+        this.特徴対象一覧未同定 = 特徴対象一覧未同定;
         this.出力順項目リスト = 出力順項目リスト;
         this.改頁項目リスト = 改頁項目リスト;
         this.association = association;
@@ -50,27 +49,11 @@ public class TokubetsuChoshuMidoteiIchiranReport extends
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuMidoteiIchiranSource> writer) {
-        for (TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定 : 特徴対象一覧未同定リスト) {
-            ITokubetsuChoshuMidoteiIchiranEditor editor = new TokubetsuChoshuMidoteiIchiranEditor(
-                    特徴対象一覧未同定, 出力順項目リスト, 改頁項目リスト, 特徴開始月, association);
-            TokubetsuChoshuMidoteiIchiranBuilder builder = new TokubetsuChoshuMidoteiIchiranBuilder(editor);
-            writer.writeLine(builder);
-        }
+        ITokubetsuChoshuMidoteiIchiranEditor editor = new TokubetsuChoshuMidoteiIchiranEditor(
+                特徴対象一覧未同定, 出力順項目リスト, 改頁項目リスト, 特徴開始月, association);
+        TokubetsuChoshuMidoteiIchiranBuilder builder = new TokubetsuChoshuMidoteiIchiranBuilder(editor);
+        writer.writeLine(builder);
+
     }
 
-    /**
-     * 特別徴収未同定一覧表
-     *
-     * @param 特徴対象一覧リスト List<TokushoTaishioIchiranMidoteiEntity>
-     * @param 出力順項目リスト 出力順項目リスト
-     * @param 改頁項目リスト 改頁項目リスト
-     * @param association Association
-     * @param 特徴開始月 特徴開始月
-     * @return TokubetsuChoshuMidoteiIchiranReport
-     */
-    public static TokubetsuChoshuMidoteiIchiranReport createForm(
-            @NonNull List<TokushoTaishioIchiranMidoteiEntity> 特徴対象一覧リスト, List<RString> 出力順項目リスト,
-            List<RString> 改頁項目リスト, Association association, RString 特徴開始月) {
-        return new TokubetsuChoshuMidoteiIchiranReport(association, 出力順項目リスト, 改頁項目リスト, 特徴対象一覧リスト, 特徴開始月);
-    }
 }

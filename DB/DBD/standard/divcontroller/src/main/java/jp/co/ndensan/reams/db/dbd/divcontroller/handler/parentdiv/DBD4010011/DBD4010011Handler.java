@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4010011;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD221010.DBD221010_ShogaishaKojoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4010011.DBD4010011Div;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 障がい者控除対象者认定のハンドラクラスです。
+ * 障がい者控除対象者認定のハンドラクラスです。
  *
  * @reamsid_L DBD-3850-010 liuwei2
  */
@@ -33,10 +33,10 @@ public class DBD4010011Handler {
     /**
      * バッチ用パラメータを作成します。
      *
-     * @return ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter 障がい者控除対象者认定_バッチ用のパラメータです。
+     * @return DBD221010_ShogaishaKojoTaishoshaHaakuParameter 障がい者控除対象者認定_バッチ用のパラメータです。
      */
-    public ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter getParameter() {
-        ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter parameter = new ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter();
+    public DBD221010_ShogaishaKojoTaishoshaHaakuParameter getParameter() {
+        DBD221010_ShogaishaKojoTaishoshaHaakuParameter parameter = new DBD221010_ShogaishaKojoTaishoshaHaakuParameter();
 
         RDate 対象年度 = dBD4010011Div.getShogaishaKojoNinteiJoho().getTaishoNendo().getValue();
         RDate 申請年月日 = dBD4010011Div.getShogaishaKojoNinteiJoho().getSinseiNengabi().getValue();

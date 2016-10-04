@@ -380,6 +380,22 @@ public final class DateConverter {
     }
 
     /**
+     * パターン12 <br/>
+     * wareki() / EraType.KANJI / Separator.JAPANESE/ fillType.BLANK
+     *
+     * @param date 年月日
+     * @return パターン32 年月日
+     */
+    public static RString getDate12(RDate date) {
+        if (date != null) {
+            return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+
+    }
+
+    /**
      * パターン32 スラッシュ 1989/01/08の形式に編集を行い返却します。 <br/>
      * seireki() / Separator.SLASH/ fillType.ZERO
      *
@@ -451,7 +467,20 @@ public final class DateConverter {
     }
 
     /**
-     * 1989/01/08（共通ポリシー パターン32）<br/>
+     * 12時00分00秒（共通ポリシー　パターン142）
+     *
+     * @param time RTime
+     * @return RString
+     */
+    public static RString getTime142(RTime time) {
+        if (time == null) {
+            return RString.EMPTY;
+        }
+        return time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+    }
+
+    /**
+     * 1989/01/08（共通ポリシー パターン1）<br/>
      * 12:00:00（共通ポリシー　パターン141） <br/>
      *
      * @param dt RDateTime
@@ -462,6 +491,20 @@ public final class DateConverter {
             return RString.EMPTY;
         }
         return toWarekiHalf_Zero(dt.getDate()).concat(RString.HALF_SPACE).concat(getTime141(dt.getTime()));
+    }
+
+    /**
+     * 1989/01/08（共通ポリシー パターン32）<br/>
+     * 12:00:00（共通ポリシー　パターン141） <br/>
+     *
+     * @param dt RDateTime
+     * @return RString
+     */
+    public static RString getDate12Time142(RDateTime dt) {
+        if (dt == null || dt.getDate() == null || dt.getTime() == null) {
+            return RString.EMPTY;
+        }
+        return getDate12(dt.getDate()).concat(RString.HALF_SPACE).concat(getTime142(dt.getTime()));
     }
 
     /**
@@ -504,5 +547,32 @@ public final class DateConverter {
             return null;
         }
         return new RDate(fd.getYearValue(), fd.getMonthValue(), fd.getDayValue());
+    }
+
+    /**
+     * 共通ポリシー　パターン4を取得します。
+     *
+     * @param date RDate
+     * @return RString
+     */
+    public static RString getDate4(RDate date) {
+        if (date == null || RString.EMPTY.equals(date.toDateString())) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    /**
+     * 共通ポリシー　パターン53を取得します。
+     *
+     * @param date RYearMonth
+     * @return RString
+     */
+    public static RString getDate53(RYearMonth date) {
+        if (date == null || RString.EMPTY.equals(date.toDateString())) {
+            return RString.EMPTY;
+        }
+        return date.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
     }
 }

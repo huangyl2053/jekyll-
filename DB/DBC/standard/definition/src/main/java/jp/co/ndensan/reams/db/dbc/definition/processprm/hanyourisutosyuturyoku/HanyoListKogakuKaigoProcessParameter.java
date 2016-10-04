@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParameter {
 
+    private int modo;
     private LasdecCode kouseiShichosonCode;
     private FlexibleYearMonth serviceYmFrom;
     private FlexibleYearMonth serviceYmTo;
@@ -51,6 +52,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private FlexibleYearMonth kokuhoreSofuYMTo;
     private FlexibleYearMonth keteijohoUketoriymFrom;
     private FlexibleYearMonth keteijohoUketoriymTo;
+    private FlexibleYearMonth shinsaYM;
     private Long shutsuryokuju;
     private RString shutsuryokuTomoku;
     private boolean tomokumeFuka;
@@ -71,6 +73,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     /**
      * コンストラクタです。
      *
+     * @param modo modo
      * @param kouseiShichosonCode kouseiShichosonCode
      * @param serviceYmFrom serviceYmFrom
      * @param serviceYmTo serviceYmTo
@@ -95,6 +98,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
      * @param kokuhoreSofuYMTo kokuhoreSofuYMTo
      * @param keteijohoUketoriymFrom keteijohoUketoriymFrom
      * @param keteijohoUketoriymTo keteijohoUketoriymTo
+     * @param shinsaYM shinsaYM
      * @param shutsuryokuju shutsuryokuju
      * @param shutsuryokuTomoku shutsuryokuTomoku
      * @param tomokumeFuka tomokumeFuka
@@ -106,6 +110,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
      * @param reamsLoginId RString
      */
     public HanyoListKogakuKaigoProcessParameter(
+            int modo,
             LasdecCode kouseiShichosonCode,
             FlexibleYearMonth serviceYmFrom,
             FlexibleYearMonth serviceYmTo,
@@ -130,6 +135,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             FlexibleYearMonth kokuhoreSofuYMTo,
             FlexibleYearMonth keteijohoUketoriymFrom,
             FlexibleYearMonth keteijohoUketoriymTo,
+            FlexibleYearMonth shinsaYM,
             Long shutsuryokuju,
             RString shutsuryokuTomoku,
             boolean tomokumeFuka,
@@ -139,7 +145,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             List<KamokuCode> list,
             List<KamokuCode> kamokuCodelist,
             RString reamsLoginId) {
-
+        this.modo = modo;
         this.kouseiShichosonCode = kouseiShichosonCode;
         this.serviceYmFrom = serviceYmFrom;
         this.serviceYmTo = serviceYmTo;
@@ -164,6 +170,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
         this.kokuhoreSofuYMTo = kokuhoreSofuYMTo;
         this.keteijohoUketoriymFrom = keteijohoUketoriymFrom;
         this.keteijohoUketoriymTo = keteijohoUketoriymTo;
+        this.shinsaYM = shinsaYM;
         this.shutsuryokuju = shutsuryokuju;
         this.shutsuryokuTomoku = shutsuryokuTomoku;
         this.tomokumeFuka = tomokumeFuka;
@@ -224,6 +231,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 kokuhoreSofuYMTo,
                 keteijohoUketoriymFrom,
                 keteijohoUketoriymTo,
+                shinsaYM,
                 shutsuryokuju,
                 shutsuryokuTomoku,
                 tomokumeFuka,

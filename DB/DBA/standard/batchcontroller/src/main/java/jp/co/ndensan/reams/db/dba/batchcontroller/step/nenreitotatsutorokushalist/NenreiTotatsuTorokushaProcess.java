@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * 年齢到達登録者リストを作成します。
  *
  * @reamsid_L DBA-0570-020 xuyannan
+ * @deprecated 削除予定
  */
 public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotatsushaJouhouEntity> {
 

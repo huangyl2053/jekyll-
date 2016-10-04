@@ -34,13 +34,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public final class YokaigoJotaiKubunSupport {
 
-    private final static IYokaigoJotaiKubun EMPTY;
+    private static final IYokaigoJotaiKubun EMPTY;
 
     static {
         EMPTY = new Empty();
     }
 
-    private static class Empty implements IYokaigoJotaiKubun {
+    private static final class Empty implements IYokaigoJotaiKubun {
 
         private final RString aCode;
         private final RString aName;
@@ -142,6 +142,9 @@ public final class YokaigoJotaiKubunSupport {
      * @throws IllegalArgumentException 変換不可の場合
      */
     public static IYokaigoJotaiKubun toValue(KoroshoInterfaceShikibetsuCode koroshoIfCode, RString code) throws IllegalArgumentException {
+        if (code.equals(new RString("06"))) {
+            return YokaigoJotaiKubun.toValue(code);
+        }
         // 各Enumでの変換で失敗する場合がある。例外発生個所を明確にするため、toValueOrEmptyとロジックを共有しない。
         switch (koroshoIfCode) {
             case V09B:
@@ -209,6 +212,9 @@ public final class YokaigoJotaiKubunSupport {
      * @throws IllegalArgumentException 変換不可の場合
      */
     public static IYokaigoJotaiKubun toValue(FlexibleDate 基準日, RString code) throws IllegalArgumentException {
+        if (code.equals(new RString("06"))) {
+            return YokaigoJotaiKubun.toValue(code);
+        }
         // 各Enumでの変換で失敗する場合がある。例外発生個所を明確にするため、toValueOrEmptyとロジックを共有しない。
         if (KoroshoInterfaceShikibetsuCode.V09B.isValidOn(基準日)) {
             return YokaigoJotaiKubun09B.toValue(code);

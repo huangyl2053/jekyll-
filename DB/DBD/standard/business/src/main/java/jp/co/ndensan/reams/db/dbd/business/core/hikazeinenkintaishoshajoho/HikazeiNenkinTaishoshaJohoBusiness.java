@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 非課税年金対象者情報取込を取得するEntityクラスです。
  *
- * @reamsid_L DBB-4910-010 huangh
+ * @reamsid_L DBD-4910-010 huangh
  */
 @lombok.Getter
 @lombok.Setter

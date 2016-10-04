@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanShikyuFushikyuKettei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 chenyadong
  */
 public class KogakuGassanShikyuFushikyuKetteiBuilder {
 
@@ -375,6 +377,18 @@ public class KogakuGassanShikyuFushikyuKetteiBuilder {
     public KogakuGassanShikyuFushikyuKetteiBuilder set受取年月(FlexibleYearMonth 受取年月) {
         requireNonNull(受取年月, UrSystemErrorMessages.値がnull.getReplacedMessage("受取年月"));
         entity.setUketoriYM(受取年月);
+        return this;
+    }
+
+    /**
+     * 口座IDを設定します。
+     *
+     * @param 口座ID 口座ID
+     * @return {@link KogakuGassanShikyuFushikyuKetteiBuilder}
+     */
+    public KogakuGassanShikyuFushikyuKetteiBuilder set口座ID(long 口座ID) {
+        requireNonNull(口座ID, UrSystemErrorMessages.値がnull.getReplacedMessage("口座ID"));
+        entity.setKozaID(口座ID);
         return this;
     }
 

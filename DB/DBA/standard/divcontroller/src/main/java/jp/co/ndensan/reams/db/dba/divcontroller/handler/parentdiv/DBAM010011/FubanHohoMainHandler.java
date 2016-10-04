@@ -34,7 +34,6 @@ public class FubanHohoMainHandler {
     private static final RString カスタマイズ付番 = new RString("4");
     private static final RString 自動連番付番 = new RString("2");
     private static final RString 自動連番_MCD10付番 = new RString("5");
-    private static final RString 任意手入力付番 = new RString("3");
     private static final RString 未設定 = new RString("0");
     private static final RString 住民コード = new RString("1");
     private static final RString 被保険者番号自動採番 = new RString("被保険者番号自動採番");
@@ -89,21 +88,21 @@ public class FubanHohoMainHandler {
         RString 開始位置 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, RDate.getNowDate(),
                 SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getFubanMotoJoho().getTxtKaishiKetaIchi().setValue(RString.isNullOrEmpty(開始位置)
-                ? Decimal.ZERO : new Decimal(開始位置.toString()));
+                                                                              ? Decimal.ZERO : new Decimal(開始位置.toString()));
         RString 有効桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, RDate.getNowDate(),
                 SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setValue(RString.isNullOrEmpty(有効桁数)
-                ? Decimal.ZERO : new Decimal(有効桁数.toString()));
+                                                                          ? Decimal.ZERO : new Decimal(有効桁数.toString()));
         RString 前付加桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数, RDate.getNowDate(),
                 SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().setValue(RString.isNullOrEmpty(前付加桁数)
-                ? Decimal.ZERO : new Decimal(前付加桁数.toString()));
+                                                                           ? Decimal.ZERO : new Decimal(前付加桁数.toString()));
         div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().setValue(DbBusinessConfig.get(
                 ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
         RString 後付加桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, RDate.getNowDate(),
                 SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().setValue(RString.isNullOrEmpty(後付加桁数)
-                ? Decimal.ZERO : new Decimal(後付加桁数.toString()));
+                                                                           ? Decimal.ZERO : new Decimal(後付加桁数.toString()));
         div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().setValue(DbBusinessConfig.get(
                 ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
     }
@@ -208,7 +207,7 @@ public class FubanHohoMainHandler {
                     未設定, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
         if (カスタマイズ付番.equals(被保険者番号付番方法) && 住民コード.equals(付番元情報)
-                || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
+            || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
             BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置,
                     flexRString(div.getFubanHoho().getFubanMotoJoho().getTxtKaishiKetaIchi().getValue()), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
@@ -225,7 +224,7 @@ public class FubanHohoMainHandler {
                     new RString("00"), 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
         if (カスタマイズ付番.equals(被保険者番号付番方法) && 住民コード.equals(付番元情報)
-                || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
+            || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
             BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数,
                     flexRString(div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue()), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
@@ -239,7 +238,7 @@ public class FubanHohoMainHandler {
                     new RString("00"), 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
         if (カスタマイズ付番.equals(被保険者番号付番方法) && 住民コード.equals(付番元情報)
-                || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
+            || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
             if (new Decimal(0).equals(div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue())) {
                 BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号,
                         RString.EMPTY, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());

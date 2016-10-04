@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-1980-010 yuqingzhang--> 
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakujuryoininkeiyakujigyosha.IKogakuJuryoininKeiyakuJigyoshaMapper">
+    <select id="select高額受領委任契約事業者情報" resultOrdered="true" resultMap="allColumns_KogakuJuryoininKeiyakuJigyoshaEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaParameter"  fetchSize="500">
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3076KogakuJuryoininKeiyakuJigyoshaMapper.allColumns_DbT3076KogakuJuryoininKeiyakuJigyosha" />,
+        "dbt7060"."jigyoshaNo" AS "jigyoshaNo",
+        "dbt7060"."jigyoshaName" AS "jigyoshaName"
+        FROM "rgdb"."DbT3076KogakuJuryoininKeiyakuJigyosha" AS "DbT3076KogakuJuryoininKeiyakuJigyosha"
+        INNER JOIN "rgdb"."DbT7060KaigoJigyosha" AS "dbt7060"
+        ON "DbT3076KogakuJuryoininKeiyakuJigyosha"."jigyoshaNo" = "dbt7060"."jigyoshaNo"
+        WHERE "DbT3076KogakuJuryoininKeiyakuJigyosha"."isDeleted" = false
+        <if test="被保険者番号 != null">
+            AND "DbT3076KogakuJuryoininKeiyakuJigyosha"."hihokenshaNo" = #{被保険者番号}
+        </if>
+    </select>
+    <resultMap id= "allColumns_KogakuJuryoininKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaEntity"
+               autoMapping="true">
+        <id property="kogakuJuryoininKeiyakuJigyoshaEntity.rirekiNo" column="dbT3076KogakuJuryoininKeiyakuJigyosha_rirekiNo"/>
+        <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="kogakuJuryoininKeiyakuJigyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3076KogakuJuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3076KogakuJuryoininKeiyakuJigyoshaEntity"/>
+    </resultMap>
+</mapper>

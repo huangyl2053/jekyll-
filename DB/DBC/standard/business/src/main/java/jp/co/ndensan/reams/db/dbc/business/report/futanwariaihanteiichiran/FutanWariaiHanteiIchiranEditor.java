@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -51,6 +52,8 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
+    private static final RString 状態区分コード = new RString("06");
+    private static final RString 認定申請中 = new RString("認定申請中");
     private static final RString HALFMONTH = new RString("#0");
     private RString 利用者負担割合判定管理_年度終了月日;
     private final FutanWariaiHanteiIchiranProcessParameter processParameter;
@@ -80,7 +83,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
         source.kijunYmd = edit基準日(entity.get今回年度());
         source.listList1_1 = entity.get今回被保険者番号().value();
         source.listList1_2 = edit被保険者区分コード(entity.get被保険者区分コード());
-        // source.listList1_3  =
+        source.listList1_3 = edit要介護度();
         source.listList1_4 = edit負担割合区分(entity.get今回負担割合区分());
         source.listList1_5 = DateConverter.decimalFormat(entity.get今回本人合計所得金額());
         source.listList1_6 = new RString(entity.get今回世帯１号被保険者数());
@@ -102,10 +105,14 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
         source.listList3_3 = getWarekiYmd(entity.get今回有効終了日());
         source.listList3_4 = edit更正事由(entity.get今回更正事由().value());
         source.listList3_5 = getWarekiYmd(entity.get前回有効終了日());
-        source.listList3_6 = edit更正事由(entity.get前回更正事由().value());
+        if (entity.get前回更正事由() != null) {
+            source.listList3_6 = edit更正事由(entity.get前回更正事由().value());
+        }
         source.listList3_7 = editその他();
-        source.listList4_1 = new RString(entity.get連番()).padZeroToLeft(2);
-        source.listList5_1 = entity.get名称().value();
+        source.listList4_1 = new RString(entity.get連番());
+        if (entity.get名称() != null) {
+            source.listList5_1 = entity.get名称();
+        }
         source.nendo = edit年度();
         source.shori = edit処理名();
         source.shoriYmd = edit処理日(processParameter.get処理日時());
@@ -133,8 +140,22 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
             return RString.EMPTY;
         }
     }
-//    private RString edit要介護度(){
-//    }
+
+    private RString edit要介護度() {
+        if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
+            return YokaigoJotaiKubunSupport.toValue(entity.get認定有効期間開始年月日(),
+                    entity.get要介護認定状態区分コード()).getName();
+        } else {
+            if (処理区分2.equals(entity.getデータ区分())) {
+                return YokaigoJotaiKubunSupport.toValue(entity.get認定有効期間開始年月日(),
+                        状態区分コード).getName();
+            } else if (処理区分3.equals(entity.getデータ区分())) {
+                return 認定申請中;
+            } else {
+                return RString.EMPTY;
+            }
+        }
+    }
 
     private RString edit負担割合区分(RString code) {
         if (FutanwariaiKubun._１割.getコード().equals(code)) {
@@ -159,7 +180,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     }
 
     private RString edit減免(RString 給付率) {
-        if (!給付率.isEmpty()) {
+        if (給付率 != null) {
             return 利.concat(給付率).concat(率);
         } else {
             return RString.EMPTY;
@@ -203,12 +224,11 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
 
     private RString edit処理名() {
         if (処理区分1.equals(processParameter.get処理区分())) {
-            return ShoriName.年次負担割合判定.get名称();
+            return ShoriName.年次利用者負担割合判定.get名称();
         } else if (処理区分2.equals(processParameter.get処理区分())) {
-            return ShoriName.異動分負担割合判定.get名称();
+            return ShoriName.異動分利用者負担割合判定.get名称();
         } else if (処理区分3.equals(processParameter.get処理区分())) {
-            // TODO 異動分利用者負担割合判定（過年度）なし
-            return ShoriName.異動分負担割合判定.get名称();
+            return ShoriName.異動分利用者負担割合判定_過年度.get名称();
         } else {
             return RString.EMPTY;
         }
@@ -217,9 +237,9 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     private RString edit処理日(RDateTime dateTime) {
         RString wareki = RString.EMPTY;
         if (dateTime != null) {
-            wareki = dateTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO)
+            wareki = dateTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK)
                     .getYear().concat(年).concat(dateTime.getDate().wareki().separator(Separator.JAPANESE)
-                            .fillType(FillType.ZERO).getMonthDay())
+                            .fillType(FillType.BLANK).getMonthDay())
                     .concat(new RString(new Decimal(dateTime.getHour()).toString(HALFMONTH.toString()))).concat(時)
                     .concat(new RString(new Decimal(dateTime.getMinute()).toString(HALFMONTH.toString()))).concat(分)
                     .concat(new RString(new Decimal(dateTime.getSecond()).toString(HALFMONTH.toString()))).concat(秒);
@@ -231,8 +251,8 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     private RString getWarekiYmd(FlexibleDate date) {
         RString wareki = RString.EMPTY;
         if (date != null) {
-            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).getYear()
-                    .concat(年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonthDay());
+            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear()
+                    .concat(年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).getMonthDay());
         }
         return wareki;
     }

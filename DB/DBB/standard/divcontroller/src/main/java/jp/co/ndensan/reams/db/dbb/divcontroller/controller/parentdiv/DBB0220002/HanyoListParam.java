@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0220002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho.HanyoListShotokuJohoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022002.DBB022002_ShotokuJohoHanyoListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220002.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002.HanyoListParamHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -34,8 +34,8 @@ public class HanyoListParam {
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamBatchParameter>
      */
-    public ResponseData<HanyoListShotokuJohoBatchParameter> onClick_btnExecute(HanyoListParamDiv div) {
-        HanyoListShotokuJohoBatchParameter parameter = getHandler(div).onClick_btnExecute();
+    public ResponseData<DBB022002_ShotokuJohoHanyoListSakuseiParameter> onClick_btnExecute(HanyoListParamDiv div) {
+        DBB022002_ShotokuJohoHanyoListSakuseiParameter parameter = getHandler(div).onClick_btnExecute();
         return ResponseData.of(parameter).respond();
     }
 

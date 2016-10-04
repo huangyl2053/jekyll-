@@ -8,8 +8,11 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekka;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekka.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekka.isDeleted;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekka.seiriNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekka.serviceTeikyoYM;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekka.shiharaiKingaku;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekka.shikyuHushikyuKetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -17,11 +20,14 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -29,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払支給判定結果のデータアクセスクラスです。
  *
- * @reamsid_L DBC-9999-012 xicongwang
+ * @reamsid_L DBD-9999-012 xicongwang
  */
 public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHanteiKekkaEntity> {
 
@@ -159,5 +165,27 @@ public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHante
                                 eq(seiriNo, 整理番号))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3036ShokanHanteiKekkaEntity.class);
+    }
+
+    /**
+     * 償還払支給判定結果を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT3036ShokanHanteiKekkaEntity>
+     */
+    @Transaction
+    public List<DbT3036ShokanHanteiKekkaEntity> select償還払支給判定結果(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3036ShokanHanteiKekka.class).
+                where(
+                        and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                or(and(eq(shikyuHushikyuKetteiKubun, new RString("1")), not(eq(shiharaiKingaku, new Decimal(0)))),
+                                        eq(shikyuHushikyuKetteiKubun, new RString("0"))),
+                                eq(isDeleted, false)
+                        )).toList(DbT3036ShokanHanteiKekkaEntity.class);
+
     }
 }

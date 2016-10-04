@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryo
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -77,6 +78,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
     private static final RString 連絡符号 = new RString(",");
     private static int index = 0;
+    private static final int INT_4 = 4;
     private static final int 年の月数 = 12;
 
     /**
@@ -167,7 +169,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         setHdnArea(今回情報, 申請書管理番号);
 
-        ヘッダ初期化();
+        ヘッダ初期化(今回情報.get受給者台帳Entity().getShikibetsuCode(), 今回情報.get構成市町村マスタEntity().getShichosonCode());
         認定申請情報初期化(今回情報, 市町村セキュリティ情報.get導入形態コード());
         認定情報初期化(今回情報, 前回情報, 市町村セキュリティ情報.get導入形態コード());
 
@@ -281,16 +283,13 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         div.getTxtShinsakaiIkenKonkai().setValue(認定内容.get審査会意見());
     }
 
-    private void ヘッダ初期化() {
+    private void ヘッダ初期化(ShikibetsuCode 識別コード, LasdecCode 市町村コード) {
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(
                 new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()),
                 new ShikibetsuCode(div.getHdnShikibetsuCode()));
-        // TODO. initialize方法がない。　
-//        div.getCcdKaigoNinteiShikakuInfo().initialize(
-//                association.get地方公共団体コード().value(), RString.EMPTY,
-//                RString.EMPTY, div.getHdnHihokenshaNo());
 
+        div.getCcdKaigoNinteiShikakuInfo().initialize(市町村コード.getColumnValue(), 識別コード.getColumnValue());
         div.getBtnIryohokenGuide().setDisabled(true);
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinShisetsuNyujo().setDisabled(false);
@@ -729,7 +728,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         if (null == 最大履歴番号 || 最大履歴番号.isEmpty()) {
             return new RString("0001");
         }
-        return new RString(String.format("%04d", Integer.parseInt(最大履歴番号.toString()) + 1));
+        return new RString(Integer.parseInt(最大履歴番号.toString()) + 1).padZeroToLeft(INT_4);
     }
 
     private int get有効期間月数(FlexibleDate 開始年月日, FlexibleDate 終了年月日) {

@@ -43,7 +43,6 @@ public class SaishinsaKetteiTsuchishoChohyoEntity implements Serializable {
     private Code 申立事由コード;
     private RString 申立事由;
     private Code 再審査結果コード;
-//    private RString 再審査結果;
     private Decimal 当初請求単位数;
     private Decimal 原審単位数;
     private Decimal 申立単位数;

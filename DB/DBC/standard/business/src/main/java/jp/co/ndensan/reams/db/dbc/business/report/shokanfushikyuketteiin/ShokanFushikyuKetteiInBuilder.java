@@ -21,8 +21,8 @@ public class ShokanFushikyuKetteiInBuilder implements IShokanFushikyuKetteiInBui
     /**
      * コンストラクタです
      *
-     * @param headerEditor headerEditor
-     * @param bodyEditor bodyEditor
+     * @param headerEditor {@link IShokanFushikyuKetteiInEditor}
+     * @param bodyEditor {@link IShokanFushikyuKetteiInEditor}
      */
     public ShokanFushikyuKetteiInBuilder(IShokanFushikyuKetteiInEditor headerEditor, IShokanFushikyuKetteiInEditor bodyEditor) {
         this.headerEditor = headerEditor;
@@ -31,6 +31,7 @@ public class ShokanFushikyuKetteiInBuilder implements IShokanFushikyuKetteiInBui
 
     @Override
     public ShokanbaraiFushikyuKetteishaIchiranSource build() {
-        return ReportEditorJoiner.from(new ShokanbaraiFushikyuKetteishaIchiranSource()).join(headerEditor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new ShokanbaraiFushikyuKetteishaIchiranSource())
+                .join(headerEditor).join(bodyEditor).buildSource();
     }
 }

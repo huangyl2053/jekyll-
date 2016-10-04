@@ -11,7 +11,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.DBB014003_FuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanHasuChosei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoZanteiKeisanHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoKaishiMaeFucho6Gatsu;
@@ -263,9 +263,9 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     /**
      * バッチパラメータを作成する。
      *
-     * @return バッチパラメータ FuchoKarisanteiBatchParameter
+     * @return バッチパラメータ DBB014003_FuchoKarisanteiTsuchishoHakkoParameter
      */
-    public FuchoKarisanteiBatchParameter getバッチパラメータ() {
+    public DBB014003_FuchoKarisanteiTsuchishoHakkoParameter getバッチパラメータ() {
         FuchoKariSanteiFukaEntity condition = new FuchoKariSanteiFukaEntity();
         FuchoTsuchiKobetsuJohoDiv 帳票作成個別情報Panel = div
                 .getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho();

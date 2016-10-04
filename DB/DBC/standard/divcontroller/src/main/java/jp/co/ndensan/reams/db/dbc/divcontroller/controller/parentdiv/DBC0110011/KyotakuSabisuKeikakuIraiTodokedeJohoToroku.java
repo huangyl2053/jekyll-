@@ -297,7 +297,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
         if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.対象者検索).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.再検索).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -335,6 +335,28 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
     public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnComplete(
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.完了).respond();
+    }
+
+    /**
+     * 「資格者証発行へ」ボタン押下時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnToShikakushaSho(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.資格者証発行).respond();
+    }
+
+    /**
+     * 「被保険者証発行へ」ボタン押下時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnToHihokenshaSho(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.被保険者証発行).respond();
     }
 
     private boolean isBeforeMessage(Message message, boolean isSelectedResultYes) {

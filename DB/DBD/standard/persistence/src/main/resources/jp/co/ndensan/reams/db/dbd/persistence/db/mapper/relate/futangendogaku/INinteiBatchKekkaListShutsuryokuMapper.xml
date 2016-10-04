@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3710-070 chenxin -->
+<!-- 概要： 負担限度額認定申請一括承認（バッチ）_結果一覧出力用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogaku.INinteiBatchKekkaListShutsuryokuMapper" >       
+    <resultMap id="ResultMap_KekkaIchiranData" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListEntity">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="資格取得日" column="資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+<!--        <result property="住所地特例該当" column="住所地特例該当" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
+        <result property="認定開始日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定終了日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="要介護状態区分コード" column="要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧措置" column="旧措置者フラグ" />
+        <result property="is生活保護受給者" column="is生活保護受給者" />
+        <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者" />
+        <result property="合計所得金額" column="合計所得金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="世帯課税区分" column="世帯課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.shoKisaiHokenshaNo" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="今回認定結果.hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="今回認定結果.rirekiNo" column="履歴番号" />
+        <result property="今回認定結果.kyusochishaKubun" column="旧措置者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.shinseiRiyuKubun" column="申請理由区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.riyoshaFutanDankai" column="利用者負担段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.kyokaisoGaitoshaKubun" column="境界層該当者区分" />
+        <result property="今回認定結果.gekihenKanwaSochiTaishoshaKubun" column="激変緩和措置対象者区分" />
+        <result property="今回認定結果.kyoshitsuShubetsu" column="居室種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.shokuhiFutanGendogaku" column="食費負担限度額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.unitTypeKoshitsu" column="ユニット型個室" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.unitTypeJunKoshitsu" column="ユニット型準個室" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.juraiTypeKoshitsu_Tokuyo" column="従来型個室特養等" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.juraiTypeKoshitsu_Roken_Ryoyo" column="従来型個室老健療養等" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.tashoshitsu" column="多床室" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.haigushaUmuFlag" column="配偶者の有無" />
+        <result property="今回認定結果.haigushaShimei" column="配偶者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="今回認定結果.haigushaShimeiKana" column="配偶者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="今回認定結果.haigushaSeinenGappiYMD" column="配偶者生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回認定結果.haigushaJusho" column="配偶者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="今回認定結果.haigushaRenrakusaki" column="配偶者連絡先" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.haigushaJusho2" column="配偶者住所２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="今回認定結果.haigushaKazeiKubun" column="配偶者課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.haigushaShikibetsuCd" column="配偶者識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="今回認定結果.yochokinShinkokuKubun" column="預貯金申告区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.yochokinGaku" column="預貯金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.yukashoukenGaisangaku" column="有価証券評価概算額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.sonotaKingaku" column="その他金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="今回認定結果.shinseiYMD" column="申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回認定結果.ketteiYMD" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回認定結果.tekiyoKaishiYMD" column="適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回認定結果.tekiyoShuryoYMD" column="適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="今回認定結果.ketteiKubun" column="決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.hiShoninRiyu" column="非承認理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認定結果.ninteiBatchExecutedTimestamp" column="一括認定バッチ処理日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
+        <result property="今回認定結果.izokuNenkinJukyuFlag" column="遺族年金受給フラグ" />
+        <result property="今回認定結果.shogaiNenkinJukyuFlag" column="障害年金受給フラグ" />
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+        <association property="前回認定結果" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
+        <collection property="利用軽減"  resultMap="Result_BooleanRiyoshaFutangakuGengaku" />
+        <collection property="訪問減額"  resultMap="Result_BooleanHomonKaigoRiyoshaFutangakuGengaku" />
+        <collection property="社福軽減"  resultMap="Result_BooleanShakaiFukushiHojinRiyoshaFutanKeigen" />
+        <collection property="特地減免"  resultMap="Result_BooleanTokubetsuchiikiKasanGemmen" />
+    </resultMap>
+    
+    <resultMap id="Result_BooleanRiyoshaFutangakuGengaku" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity">
+        <result property="is申請" column="利用減額申請"/>
+    </resultMap>
+    <resultMap id="Result_BooleanHomonKaigoRiyoshaFutangakuGengaku" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity">
+        <result property="is申請" column="訪問減額申請"/>
+    </resultMap>
+    <resultMap id="Result_BooleanShakaiFukushiHojinRiyoshaFutanKeigen" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity">
+        <result property="is申請" column="社福軽減申請"/>
+    </resultMap>
+    <resultMap id="Result_BooleanTokubetsuchiikiKasanGemmen" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity">
+        <result property="is申請" column="特地減免申請"/>
+    </resultMap>
+    
+    <select id="get結果一覧データ"  fetchSize="500" resultOrdered="true"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt22006.NinteiBatchKekkaListShutsuryokuMybatisParameter"
+        resultMap="ResultMap_KekkaIchiranData">
+        SELECT
+            被保険者台帳."hihokenshaNo" AS 被保険者番号,
+            被保険者台帳."shikakuShutokuYMD" AS 資格取得年月日,
+            被保険者台帳."shikakuSoshitsuYMD" AS 資格喪失年月日,
+<!--            被保険者台帳."住所地特例該当" AS 住所地特例該当,-->
+            受給者台帳."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
+            受給者台帳."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日,
+            受給者台帳."yokaigoJotaiKubunCode" AS 要介護状態区分コード,
+            受給者台帳.koroshoIfShikibetsuCode AS 厚労省IF識別コード,
+            受給者台帳."kyuSochishaFlag" AS 旧措置者フラグ,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
+            利用減額.is申請 AS 利用減額申請,
+            訪問減額.is申請 AS 訪問減額申請,
+            社福軽減.is申請 AS 社福軽減申請,
+            特地減免.is申請 AS 特地減免申請,
+            所得等情報."is生活保護受給者" AS is生活保護受給者,
+            所得等情報."is老齢福祉年金受給者" AS is老齢福祉年金受給者,
+            (所得等情報."合計所得金額" 
+             + 所得等情報."年金収入額" 
+             + 所得等情報."非課税年金勘案額" ) AS 合計所得金額,
+            所得等情報."世帯課税区分" AS 世帯課税区分,
+            今回認定結果."shoKisaiHokenshaNo" AS 証記載保険者番号,
+            今回認定結果."hihokenshaNo" AS 被保険者番号,
+            今回認定結果."rirekiNo" AS 履歴番号,
+            今回認定結果."kyusochishaKubun" AS 旧措置者区分,
+            今回認定結果."shinseiRiyuKubun" AS 申請理由区分,
+            今回認定結果."riyoshaFutanDankai" AS 利用者負担段階,
+            今回認定結果."kyokaisoGaitoshaKubun" AS 境界層該当者区分,
+            今回認定結果."gekihenKanwaSochiTaishoshaKubun" AS 激変緩和措置対象者区分,
+            今回認定結果."kyoshitsuShubetsu" AS 居室種別,
+            今回認定結果."shokuhiFutanGendogaku" AS 食費負担限度額,
+            今回認定結果."unitTypeKoshitsu" AS ユニット型個室,
+            今回認定結果."unitTypeJunKoshitsu" AS ユニット型準個室,
+            今回認定結果."juraiTypeKoshitsu_Tokuyo" AS 従来型個室特養等,
+            今回認定結果."juraiTypeKoshitsu_Roken_Ryoyo" AS 従来型個室老健療養等,
+            今回認定結果."tashoshitsu" AS 多床室,
+            今回認定結果."haigushaUmuFlag" AS 配偶者の有無,
+            今回認定結果."haigushaShimei" AS 配偶者氏名,
+            今回認定結果."haigushaShimeiKana" AS 配偶者氏名カナ,
+            今回認定結果."haigushaSeinenGappiYMD" AS 配偶者生年月日,
+            今回認定結果."haigushaJusho" AS 配偶者住所,
+            今回認定結果."haigushaRenrakusaki" AS 配偶者連絡先,
+            今回認定結果."haigushaJusho2" AS 配偶者住所２,
+            今回認定結果."haigushaKazeiKubun" AS 配偶者課税区分,
+            今回認定結果."haigushaShikibetsuCd" AS 配偶者識別コード,
+            今回認定結果."yochokinShinkokuKubun" AS 預貯金申告区分,
+            今回認定結果."yochokinGaku" AS 預貯金額,
+            今回認定結果."yukashoukenGaisangaku" AS 有価証券評価概算額,
+            今回認定結果."sonotaKingaku" AS その他金額,
+            今回認定結果."shinseiYMD" AS 申請年月日,
+            今回認定結果."ketteiYMD" AS 決定年月日,
+            今回認定結果."tekiyoKaishiYMD" AS 適用開始年月日,
+            今回認定結果."tekiyoShuryoYMD" AS 適用終了年月日,
+            今回認定結果."ketteiKubun" AS 決定区分,
+            今回認定結果."hiShoninRiyu" AS 非承認理由,
+            今回認定結果."batchShoriNitiji" AS 一括認定バッチ処理日時,
+            今回認定結果."izokuNenkinJukyuFlag" AS 遺族年金受給フラグ,
+            今回認定結果."shogaiNenkinJukyuFlag" AS 障害年金受給フラグ,
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+        FROM
+            "shoninKekkaTempEntity" AS 今回認定結果
+        INNER JOIN  rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
+            ON  今回認定結果."hihokenshaNo" = 被保険者台帳."hihokenshaNo" 
+        INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+      '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+            ON  被保険者台帳."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        LEFT JOIN(
+            SELECT
+                V4001.*,
+                T4101."koroshoIfShikibetsuCode" AS koroshoIfShikibetsuCode
+            FROM
+                rgdb."DbV4001JukyushaDaicho" AS V4001
+            LEFT JOIN   rgdb."DbT4101NinteiShinseiJoho" AS T4101
+                ON  T4101."shinseishoKanriNo" = V4001."shinseishoKanriNo"
+        )  AS 受給者台帳
+            ON  今回認定結果."hihokenshaNo" = 受給者台帳."hihokenshaNo"
+        LEFT JOIN(
+            SELECT
+                temp前回.*
+            FROM 
+                rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS temp前回
+<!--            WHERE   
+                temp前回."hihokenshaNo" = 今回認定結果."hihokenshaNo"
+                AND temp前回."rirekiNo" = 今回認定結果."rirekiNo" - 1-->
+        ) AS "DbT4018KaigoHokenFutanGendogakuNintei"
+            ON  今回認定結果."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        INNER JOIN  "taishoShaHanteiYoukonkyoItokiTemp" AS 所得等情報
+            ON  今回認定結果."hihokenshaNo" = 所得等情報."被保険者番号"
+        LEFT JOIN(
+            SELECT
+                temp利用者."hihokenshaNo" AS 被保険者番号,
+                (CASE WHEN temp利用者."ketteiKubun" IS NULL OR temp利用者."ketteiKubun" = ''
+                THEN true
+                ELSE false
+                END) AS is申請
+            FROM
+                rgdb."DbT4014RiyoshaFutangakuGengaku" AS temp利用者
+            WHERE
+                (temp利用者."ketteiKubun" IS NULL OR temp利用者."ketteiKubun" = '')
+                OR(temp利用者."ketteiKubun" = '1'
+                AND #{認定期間_開始日} <![CDATA[<=]]> temp利用者."tekiyoKaishiYMD"
+                AND  temp利用者."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
+        ) AS 利用減額
+            ON 今回認定結果."hihokenshaNo" = 利用減額.被保険者番号 
+        LEFT JOIN(
+            SELECT
+                temp訪問."hihokenshaNo" AS 被保険者番号,
+                (CASE WHEN temp訪問."ketteiKubun" IS NULL OR temp訪問."ketteiKubun" = ''
+                THEN true
+                ELSE false
+                END) AS is申請
+            FROM
+                rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku" AS temp訪問
+            WHERE
+                (temp訪問."ketteiKubun" IS NULL OR temp訪問."ketteiKubun" = '')
+                OR(temp訪問."ketteiKubun"='1'
+                AND #{認定期間_開始日} <![CDATA[<=]]> temp訪問."tekiyoKaishiYMD"
+                AND  temp訪問."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
+        ) AS 訪問減額
+            ON 今回認定結果."hihokenshaNo" = 訪問減額.被保険者番号
+       LEFT JOIN(
+            SELECT
+                temp社福."hihokenshaNo" AS 被保険者番号,
+                (CASE WHEN temp社福."ketteiKubun" IS NULL OR temp社福."ketteiKubun" = ''
+                THEN true
+                ELSE false
+                END) AS is申請
+            FROM
+                rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS temp社福
+            WHERE
+                (temp社福."ketteiKubun" IS NULL OR temp社福."ketteiKubun" = '')
+                OR(temp社福."ketteiKubun"='1'
+                AND #{認定期間_開始日} <![CDATA[<=]]> temp社福."tekiyoKaishiYMD"
+                AND  temp社福."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
+        ) AS 社福軽減
+            ON 今回認定結果."hihokenshaNo" = 社福軽減.被保険者番号
+       LEFT JOIN(
+            SELECT
+                temp特地."hihokenshaNo" AS 被保険者番号,
+                (CASE WHEN temp特地."ketteiKubun" IS NULL OR temp特地."ketteiKubun" = ''
+                THEN true
+                ELSE false
+                END) AS is申請
+            FROM
+                rgdb."DbT4020TokubetsuchiikiKasanGemmen" AS temp特地
+            WHERE
+                (temp特地."ketteiKubun" IS NULL OR temp特地."ketteiKubun" = '')
+                OR(temp特地."ketteiKubun"='1'
+                AND #{認定期間_開始日} <![CDATA[<=]]> temp特地."tekiyoKaishiYMD"
+                AND  temp特地."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
+        ) AS 特地減免
+            ON 今回認定結果."hihokenshaNo" = 特地減免.被保険者番号
+    </select>
+
+</mapper>

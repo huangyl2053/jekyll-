@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBU-5530-030 wangxiaodong -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper">
+
+    <update
+        id="createTempJigyoHokokuHihokenshaTokeiMotoData">
+        CREATE TEMPORARY TABLE "tempJigyoHokokuHihokenshaTokeiMotoData"
+        (
+        "dataShuruiKubun" character varying(2) NOT NULL,                      <!-- データ種類区分 -->
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo" NOT NULL,                  <!-- 被保険者番号 -->
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode" NOT NULL,              <!-- 識別コード -->
+        "setaiCode" character varying(16),                                    <!-- 仮世帯コード -->
+        "shichosonCode" rshare."UDD023LasdecCode",                            <!-- 市町村コード -->
+        "kyuShichosonCode" rshare."UDD023LasdecCode",                         <!-- 旧市町村コード    合併市町村の時は、旧市町村コードを設定 -->
+        "kijunYMD" rshare."UDD015YMD",                                        <!-- 基準日 -->
+        "idoYMD" rshare."UDD015YMD",                                          <!-- 異動日 -->
+        "edaNo" character(4),                                                 <!-- 枝番 -->
+        "idoJiyuCode" character varying(2),                                   <!-- 異動事由コード -->
+        "shikakuShutokuJiyuCode" character varying(2),                        <!-- 資格取得事由コード -->
+        "shikakuShutokuYMD" rshare."UDD015YMD",                               <!-- 資格取得年月日 -->
+        "shikakuShutokuTodokedeYMD" rshare."UDD015YMD",                       <!-- 資格取得届出年月日 -->
+        "ichigoShikakuShutokuYMD" rshare."UDD015YMD",                         <!-- 第1号資格取得年月日 -->
+        "hihokennshaKubunCode" character varying(1),                          <!-- 被保険者区分コード    １号・２号 -->
+        "shikakuSoshitsuJiyuCode" character varying(2),                       <!-- 資格喪失事由コード -->
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",                              <!-- 資格喪失年月日 -->
+        "shikakuSoshitsuTodokedeYMD" rshare."UDD015YMD",                      <!-- 資格喪失届出年月日 -->
+        "shikakuHenkoJiyuCode" character varying(2),                          <!-- 資格変更事由コード -->
+        "shikakuHenkoYMD" rshare."UDD015YMD",                                 <!-- 資格変更年月日 -->
+        "shikakuHenkoTodokedeYMD" rshare."UDD015YMD",                         <!-- 資格変更届出年月日 -->
+        "jushochitokureiTekiyoJiyuCode" character varying(2),                 <!-- 住所地特例適用事由コード -->
+        "jushochitokureiTekiyoYMD" rshare."UDD015YMD",                        <!-- 適用年月日 -->
+        "jushochitokureiTekiyoTodokedeYMD" rshare."UDD015YMD",                <!-- 適用届出年月日 -->
+        "jushochitokureiKaijoJiyuCode" character varying(2),                  <!-- 住所地特例解除事由コード -->
+        "jushochitokureiKaijoYMD" rshare."UDD015YMD",                         <!-- 解除年月日 -->
+        "jushochitokureiKaijoTodokedeYMD" rshare."UDD015YMD",                 <!-- 解除届出年月日 -->
+        "jushochiTokureiFlag" character varying(1),                           <!-- 住所地特例フラグ -->
+        "koikinaiJushochiTokureiFlag" character varying(1),                   <!-- 広域内住所地特例フラグ -->
+        "koikinaiTokureiSochimotoShichosonCode" rshare."UDD023LasdecCode",    <!-- 広住特措置元市町村コード -->
+        "shoriTimestamp" rshare."UDD018YMDHMS",                               <!-- 作成日時 -->
+        "seinengappiYMD" rshare."UDD015YMD"                                   <!-- 生年月日 -->
+        );
+    </update>
+
+    <update
+        id="createTempJigyoHokokuNinteiTokeiMotoData">
+        CREATE TEMPORARY TABLE "tempJigyoHokokuNinteiTokeiMotoData"
+        (
+        "dataShuruiKubun" character varying(2) NOT NULL,                      <!-- データ種類区分 -->
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",                           <!-- 被保険者番号 -->
+        "rirekiNo" smallint,                                                  <!-- 履歴番号     -->
+        "shinseiYMD" rshare."UDD015YMD",                                      <!-- 申請年月日   -->
+        "gengakuKubun" character varying(2),                                  <!-- 減額区分  DBDEnum.減額区分...-->
+        "ketteiYMD" rshare."UDD015YMD",                                       <!-- 決定年月日   -->
+        "ketteiKubun" character varying(1),                                   <!-- 決定区分     -->
+        "hiShoninRiyu" character varying(200),                                <!-- 非承認理由   -->
+        "tekiyoKaishiYMD" rshare."UDD015YMD",                                 <!-- 適用開始年月日 -->
+        "tekiyoShuryoYMD" rshare."UDD015YMD",                                 <!-- 適用終了年月日  -->
+        "gengakugoKingaku" numeric(5,0),                                      <!-- 減額後金額      -->
+        "jukyushaDaichoRirekiNo" character(4),                                <!-- 受給者台帳履歴番号  -->
+        "yokaigoJotaiKubunCode" rshare."UDD035Code",                          <!-- 要介護認定状態区分コード  Enum（DBZ：要介護状態区分コード99）  -->
+        "jukyuShinseiYMD" rshare."UDD015YMD",                                 <!-- 受給申請年月日           -->
+        "ninteiYukoKikanKaishiYMD" rshare."UDD015YMD",                        <!-- 認定有効期間開始年月日   -->
+        "ninteiYukoKikanShuryoYMD" rshare."UDD015YMD",                        <!-- 認定有効期間終了年月日   -->
+        "ninteiYMD" rshare."UDD015YMD",                                       <!-- 認定年月日    認定年月日、却下年月日 -->
+        "yukoMukoKubun" rshare."UDD035Code",                                  <!-- 有効無効区分  Enum（DBD：有効無効区分）0：申請中、1：有効、2：無効   -->
+        "dataKubun" rshare."UDD035Code",                                      <!-- データ区分    Enum（DBD：データ区分）           -->
+        "kyuSochishaFlag" boolean,                                            <!-- 旧措置者フラグ    Enum（DBD：旧措置適用フラグ） -->
+        "logicalDeletedFlag" boolean,                                         <!-- 論理削除フラグ    True：論理削除 False：未削除  -->
+        "idoYMD" rshare."UDD015YMD",                                          <!-- 異動日                           -->
+        "edaNo" character(4),                                                 <!-- 枝番                             -->
+        "idoJiyuCode" character varying(2),                                   <!-- 異動事由コード                   -->
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",                       <!-- 識別コード                       -->
+        "shikakuShutokuJiyuCode" character varying(2),                        <!-- 資格取得事由コード               -->
+        "shikakuShutokuYMD" rshare."UDD015YMD",                               <!-- 資格取得年月日                   -->
+        "shikakuShutokuTodokedeYMD" rshare."UDD015YMD",                       <!-- 資格取得届出年月日               -->
+        "ichigoShikakuShutokuYMD" rshare."UDD015YMD",                         <!-- 第1号資格取得年月日              -->
+        "hihokennshaKubunCode" character varying(1),                          <!-- 被保険者区分コード    １号・２号 -->
+        "shikakuSoshitsuJiyuCode" character varying(2),                       <!-- 資格喪失事由コード               -->
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",                              <!-- 資格喪失年月日                   -->
+        "shikakuSoshitsuTodokedeYMD" rshare."UDD015YMD",                      <!-- 資格喪失届出年月日               -->
+        "jushochiTokureiFlag" character varying(1),                           <!-- 住所地特例フラグ                 -->
+        "koikinaiJushochiTokureiFlag" character varying(1),                   <!-- 広域内住所地特例フラグ           -->
+        "koikinaiTokureiSochimotoShichosonCode" rshare."UDD023LasdecCode",    <!-- 広住特措置元市町村コード         -->
+        "shichosonCode" rshare."UDD023LasdecCode",                            <!-- 市町村コード                     -->
+        "kyuShichosonCode" rshare."UDD023LasdecCode",                         <!-- 旧市町村コード    合併市町村の時は、旧市町村コードを設定 -->
+        "nyushoShisetsuCode" rgdb."DbUDD004JigyoshaNo",                       <!-- 入所施設コード               -->
+        "nyushoShoriYMD" rshare."UDD015YMD",                                  <!-- 入所処理年月日               -->
+        "nyushoYMD" rshare."UDD015YMD",                                       <!-- 入所年月日                   -->
+        "taishoShoriYMD" rshare."UDD015YMD",                                  <!-- 退所処理年月日               -->
+        "taishoYMD" rshare."UDD015YMD",                                       <!-- 退所年月日                   -->
+        "jigyoshaNo" rgdb."DbUDD004JigyoshaNo",                               <!-- 事業者番号                   -->
+        "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",                 <!-- サービス種類コード           -->
+        "kihonJohoJunkyoKubun" character(1),                                  <!-- 基本情報準拠区分             -->
+        "yukoKaishiYMD" rshare."UDD015YMD",                                   <!-- 有効開始日                   -->
+        "yukoShuryoYMD" rshare."UDD015YMD",                                   <!-- 有効終了日                   -->
+        "jigyoKaishiYMD" rshare."UDD015YMD",                                  <!-- 事業開始日                   -->
+        "jigyoKyushiYMD" rshare."UDD015YMD",                                  <!-- 事業休止日                   -->
+        "jigyoSaikaiYMD" rshare."UDD015YMD",                                  <!-- 事業再開日                   -->
+        "jigyoHaishiYMD" rshare."UDD015YMD",                                  <!-- 事業廃止日                   -->
+        "juryoininUmu" rshare."UDD035Code",                                   <!-- 受領委任の有無               -->
+        "torokuKaishiYMD" rshare."UDD015YMD",                                 <!-- 登録開始日                   -->
+        "torokuShuryoYMD" rshare."UDD015YMD",                                 <!-- 登録終了日                   -->
+        "seikatsuhogohouShitei_umu" rshare."UDD035Code" DEFAULT 0,            <!-- 生活保護法による指定の有無   -->
+        "idoJiyu" character varying(2),                                       <!-- 異動事由                     -->
+        "kanrishaName" rshare."UDD042AtenaMeisho",                            <!-- 管理者氏名                   -->
+        "kanrishaNameKana" rshare."UDD043AtenaKanaMeisho",                    <!-- 管理者氏名カナ               -->
+        "kanrishaYubinNo" rshare."UDD003YubinNo",                             <!-- 管理者住所郵便番号           -->
+        "kanrishaAddress" rshare."UDD046AtenaJusho",                          <!-- 管理者住所                   -->
+        "kanrishaAddressKana" character varying(50),                          <!-- 管理者住所カナ               -->
+        "jigyoshaName" rshare."UDD042AtenaMeisho",                            <!-- 事業者名称                   -->
+        "jigyoshaNameKana" rshare."UDD043AtenaKanaMeisho",                    <!-- 事業者名称カナ               -->
+        "jigyoshaYubinNo" rshare."UDD003YubinNo",                             <!-- 事業者郵便番号               -->
+        "jigyoshaAddress" rshare."UDD046AtenaJusho",                          <!-- 事業者住所                   -->
+        "jigyoshaAddressKana" character varying(100),                         <!-- 事業者住所カナ               -->
+        "jigyoshaTelNo" rshare."UDD026TelNo",                                 <!-- 事業者電話番号               -->
+        "jigyoshaFaxNo" rshare."UDD026TelNo",                                 <!-- 事業者FAX番号                -->
+        kyuhuritsu rgdb."DbUDD011HokenKyufuRitsu",                            <!-- 給付率                       -->
+        "shinseiRiyuKubun" character varying(2),                              <!-- 申請理由区分  DBDEnum.申請理由区分 ... -->
+        "riyoshaFutanDankai" character varying(1),                            <!-- 利用者負担段階    DBDEnum.利用者負担段階... -->
+        "shokuhiFutanGendogaku" numeric(5,0),                                 <!-- 食費負担限度額              -->
+        "unitTypeKoshitsu" numeric(5,0),                                      <!-- ユニット型個室              -->
+        "unitTypeJunKoshitsu" numeric(5,0),                                   <!-- ユニット型準個室            -->
+        "juraiTypeKoshitsu_Tokuyo" numeric(5,0),                              <!-- 従来型個室（特養等）        -->
+        "juraiTypeKoshitsu_Roken_Ryoyo" numeric(5,0),                         <!-- 従来型個室（老健・療養等）  -->
+        tashoshitsu numeric(5,0),                                             <!-- 多床室                      -->
+        "kyoshitsuShubetsu" character varying(1),                             <!-- 居室種別  DBDEnum.居室種別...  -->
+        "kyokaisoGaitoshaKubun" boolean,                                      <!-- 境界層該当者区分  trueの場合、境界層該当者 -->
+        "gekihenKanwaSochiTaishoshaKubun" boolean,                            <!-- 激変緩和措置対象者区分    trueの場合、激変緩和対象者 -->
+        "kyusochishaKubun" character varying(1),                              <!-- 旧措置者区分                -->
+        "shoriTimestamp" rshare."UDD018YMDHMS",                               <!-- 作成日時                    -->
+        "seinengappiYMD" rshare."UDD015YMD"                                   <!-- 生年月日                    -->
+        );
+    </update>
+
+    <insert id="exeShotaiDataInsert"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter">
+        SELECT rgdb."DbFt7021ShotaiDataInsert"(#{syukeiYM});
+    </insert>
+
+    <select id="getShotaiJohoKonkyoCSV"
+            resultOrdered="true"
+            resultMap="resultMap_ShotaiJohoKonkyoCSV"
+            fetchSize="500">
+        SELECT
+        "dataKubun"
+        , "shukeiKubun"
+        , "hyouNo"
+        , "shukeiNo"
+        , "shukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "setaiCode"
+        , "shichosonCode"
+        , "kyuShichosonCode"
+        FROM
+        rgdb."DbFt7022ShotaiJohoKonkyoCSV"();
+    </select>
+
+    <resultMap id="resultMap_ShotaiJohoKonkyoCSV"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.SyotaiJohoCsvEntity"
+               autoMapping="true">
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計区分" column="shukeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="表番号" column="hyouNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計番号" column="shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計単位" column="shukeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="縦番号" column="tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="横番号" column="yokoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <insert id="exeIchigoHihokenshaDataInsert"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDMybatisParameter">
+        SELECT rgdb."DbFt7024IchigoHihokenshaDataInsert"(#{syoriNitiji});
+    </insert>
+
+    <select id="getIchigoHihokenshaJohoKonkyoCSV"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDMybatisParameter"
+            resultMap="resultMap_IchigoHihokenshaJohoKonkyoCSV"
+            fetchSize="500">
+        SELECT
+        "dataKubun"
+        , "shukeiKubun"
+        , "hyouNo"
+        , "shukeiNo"
+        , "shukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "hihokenshaNo"
+        , "idoYMD"
+        , "edaNo"
+        , "shichosonCode"
+        , "shikibetsuCode"
+        , "idoJiyuCode"
+        , "shikakuShutokuYMD"
+        , "shikakuShutokuTodokedeYMD"
+        , "shikakuSoshitsuJiyuCode"
+        , "shikakuSoshitsuYMD"
+        , "shikakuSoshitsuTodokedeYMD"
+        , "hihokennshaKubunCode"
+        , "jushochiTokureiFlag"
+        , "koikinaiJushochiTokureiFlag"
+        , "koikinaiTokureiSochimotoShichosonCode"
+        , "kyuShichosonCode"
+        , "shoriTimestamp"
+        , "seinengappiYMD"
+        FROM
+        rgdb."DbFt7025IchigoHihokenshaJohoKonkyoCSV"(#{syukeiYM}, #{shukeiNo});
+    </select>
+
+    <resultMap id="resultMap_IchigoHihokenshaJohoKonkyoCSV"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.IchigoHihokenshaJohoKonkyoCSVEntity"
+               autoMapping="true">
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計区分" column="shukeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="表番号" column="hyouNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計番号" column="shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計単位" column="shukeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="縦番号" column="tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="横番号" column="yokoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="異動日" column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="枝番" column="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="異動事由コード" column="idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得年月日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得届出年月日" column="shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失事由コード" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失年月日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失届出年月日" column="shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分コード" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例フラグ" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="作成日時" column="shoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <insert id="exeRiyoshaFutangakuGemmenDataInsert"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.RiyoshaFutangakuKanriJohoSyoriMybatisParameter">
+        SELECT rgdb."DbFt7027RiyoshaFutangakuGemmenDataInsert"(#{syukeiYM}, #{kyuSochishaYMD});
+    </insert>
+
+    <select id="getRiyoshaFutangakuGemmenJohoKonkyoCSV"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.RiyoshaFutangakuKanriJohoSyoriMybatisParameter"
+            resultMap="resultMap_RiyoshaFutangakuGemmenJohoKonkyoCSV"
+            fetchSize="500">
+        SELECT
+        "dataKubun"
+        , "shukeiKubun"
+        , "hyouNo"
+        , "shukeiNo"
+        , "shukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "hihokenshaNo"
+        , "rirekiNo"
+        , "shichosonCode"
+        , "shinseiYMD"
+        , "ketteiYMD"
+        , "ketteiKubun"
+        , "hiShoninRiyu"
+        , "tekiyoKaishiYMD"
+        , "tekiyoShuryoYMD"
+        , "kyuhuritsu"
+        , "kyuShichosonCode"
+        FROM
+        rgdb."DbFt7028RiyoshaFutangakuGemmenJohoKonkyoCSV"(#{syukeiYM}, #{shukeiNo});
+    </select>
+
+    <resultMap id="resultMap_RiyoshaFutangakuGemmenJohoKonkyoCSV"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.RiyoshaFutangakuGemmenJohoKonkyoCSVEntity"
+               autoMapping="true">
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計区分" column="shukeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="表番号" column="hyouNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計番号" column="shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計単位" column="shukeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="縦番号" column="tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="横番号" column="yokoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請年月日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="決定年月日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="決定区分" column="ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="非承認理由" column="hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="適用開始年月日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="適用終了年月日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率" column="kyuhuritsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <insert id="exeTokuteiNyushoshaDataInsert"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.TokuteiNyushoshaJohoSyoriMybatisParameter">
+        SELECT rgdb."DbFt7030TokuteiNyushoshaDataInsert"(#{syukeiYM});
+    </insert>
+
+    <select id="getTokuteiNyushoshaGengakuNinteiJohoCSV"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.TokuteiNyushoshaJohoSyoriMybatisParameter"
+            resultMap="resultMap_TokuteiNyushoshaGengakuNinteiJohoCSV"
+            fetchSize="500">
+        SELECT
+        "dataKubun"
+        , "shukeiKubun"
+        , "hyouNo"
+        , "shukeiNo"
+        , "shukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "hihokenshaNo"
+        , "rirekiNo"
+        , "shichosonCode"
+        , "shinseiYMD"
+        , "ketteiYMD"
+        , "ketteiKubun"
+        , "hiShoninRiyu"
+        , "tekiyoKaishiYMD"
+        , "tekiyoShuryoYMD"
+        , "kyusochishaKubun"
+        , "shokuhiFutanGendogaku"
+        , "unitTypeKoshitsu"
+        , "unitTypeJunKoshitsu"
+        , "juraiTypeKoshitsu_Tokuyo"
+        , "juraiTypeKoshitsu_Roken_Ryoyo"
+        , "tashoshitsu"
+        , "kyoshitsuShubetsu"
+        , "kyokaisoGaitoshaKubun"
+        , "gekihenKanwaSochiTaishoshaKubun"
+        , "shichosonCode"
+        , "kyuShichosonCode"
+        FROM
+        rgdb."DbFt7031TokuteiNyushoshaGengakuNinteiJohoKonkyoCSV"(#{syukeiYM}, #{shukeiNo});
+    </select>
+
+    <resultMap id="resultMap_TokuteiNyushoshaGengakuNinteiJohoCSV"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.TokuteiNyushoshaGengakuNinteiJohoCSVEntity"
+               autoMapping="true">
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計区分" column="shukeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="表番号" column="hyouNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計番号" column="shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計単位" column="shukeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="縦番号" column="tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="横番号" column="yokoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請年月日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="決定年月日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="決定区分" column="ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="非承認理由" column="hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="適用開始年月日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="適用終了年月日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧措置者" column="kyusochishaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="食費負担限度額" column="shokuhiFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ユニット型個室" column="unitTypeKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ユニット型準個室" column="unitTypeJunKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="従来型個室_特養等" column="juraiTypeKoshitsu_Tokuyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="従来型個室_老健療養等" column="juraiTypeKoshitsu_Roken_Ryoyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="多床室" column="tashoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居室種別" column="kyoshitsuShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="境界層該当者" column="kyokaisoGaitoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="激変緩和対象者" column="gekihenKanwaSochiTaishoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <insert id="exeYokaigoNinteishaDataInsert"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriMybatisParameter">
+        SELECT rgdb."DbFt7033YokaigoNinteishaDataInsert"(#{syukeiYM});
+    </insert>
+
+    <select id="getYokaigoNinteishaJohoKonkyoCSV"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriMybatisParameter"
+            resultMap="resultMap_YokaigoNinteishaJohoKonkyoCSV"
+            fetchSize="500">
+        SELECT
+        "dataTypeKubun"
+        , "shukeiKubun"
+        , "hyouNo"
+        , "shukeiNo"
+        , "shukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "hihokenshaNo"
+        , "rirekiNo"
+        , "yokaigoJotaiKubunCode"
+        , "jukyuShinseiYMD"
+        , "ninteiYukoKikanKaishiYMD"
+        , "ninteiYukoKikanShuryoYMD"
+        , "ninteiYMD"
+        , "yukoMukoKubun"
+        , "dataKubun"
+        , "kyuSochishaFlag"
+        , "logicalDeletedFlag"
+        , "shichosonCode"
+        , "kyuShichosonCode"
+        FROM
+        rgdb."DbFt7034YokaigoNinteishaJohoKonkyoCSV"(#{syukeiYM});
+    </select>
+
+    <resultMap id="resultMap_YokaigoNinteishaJohoKonkyoCSV"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.YokaigoNinteishaJohoKonkyoCSVEntity"
+               autoMapping="true">
+        <result property="集計データ区分" column="dataTypeKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計区分" column="shukeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="表番号" column="hyouNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計番号" column="shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計単位" column="shukeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="縦番号" column="tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="横番号" column="yokoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給申請年月日" column="jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定年月日" column="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="有効無効区分" column="yukoMukoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧措置者フラグ" column="kyuSochishaFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="論理削除フラグ" column="logicalDeletedFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <delete id="exeJigyouHoukokuTokeiDelete"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyouHoukokuTokeiMybatisParameter">
+        SELECT rgdb."DbFx7020JigyouHoukokuTokeiDelete"(
+        ARRAY<foreach
+            collection="shichosoncodeList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syukeiYM},
+        ARRAY<foreach
+            collection="shukeinoList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        ARRAY<foreach
+            collection="hyonoList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </delete>
+
+    <select id="getIppanJokyoJigyouHoukokuTokei"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyouHoukokuTokeiMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.IppanJokyoJigyouHoukokuTokeiEntity"
+            fetchSize="500">
+        SELECT
+        "shukeiYM"
+        , "ShichosonCode"
+        , "toukeiTaishoKubun"
+        , "hyoNo"
+        , "shukeiNo"
+        , "shukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "shukeiKekkaAtai"
+        , "tateKomokuCode"
+        , "yokoKomokuCode"
+        FROM
+        rgdb."DbFt7036IppanJokyoJigyouHoukokuTokei"(
+        #{syukeiYM},
+        ARRAY<foreach
+            collection="shichosoncodeList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </select>
+
+    <update id="exeShoriDateKanriUpdate"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyouHoukokuTokeiMybatisParameter">
+        SELECT rgdb."DbFx7014ShoriDateKanriUpdate"(#{subGyomuCode},
+        ARRAY<foreach
+            collection="shichosoncodeList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syoriName},
+        #{shoriEdaban},
+        #{nendo},
+        #{kijunYMD},
+        #{kijunTimestamp});
+    </update>
+
+    <select id="getJigyouHoukokuTokeiTyouhyou"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoIppanReportMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity"
+            fetchSize="500">
+        SELECT
+        "syukeiYM"
+        , "ShichosonCode"
+        , "toukeiTaishoKubun"
+        , "hyoNo"
+        , "syukeiNo"
+        , "syukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "sukeiKekkaAtai"
+        , "tateKomokuCode"
+        , "yokoKomokuCode"
+        FROM
+        rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
+        ARRAY<foreach
+            collection="shichosoncodeList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syukeiYM},
+        ARRAY<foreach
+            collection="shukeinoList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        ARRAY<foreach
+            collection="hyonoList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </select>
+
+    <select id="getHihokenshaDaichoSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7023HihokenshaDaichoSyoriKakuninRisuto"(
+        ARRAY<foreach
+            collection="koseiShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </select>
+
+    <select id="getIchigoHihokenshaSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7026IchigoHihokenshaSyoriKakuninRisuto"(#{syukeiYM},
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </select>
+
+    <select id="getRiyoshaFutangakuGemmenHihokenshaDaichoSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7029RiyoshaFutangakuGemmenSyoriKakuninRisuto"(
+        ARRAY<foreach
+            collection="koseiShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syukeiYM});
+    </select>
+
+    <select id="getTokuteiNyushoshaGengakuNinteiSyoriKakuninRisuto"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7032TokuteiNyushoshaGengakuNinteiSyoriKakuninList"();
+    </select>
+
+    <select id="getYokaigoNinteishaSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7035YokaigoNinteishaSyoriKakuninRisuto"(
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syukeiYM});
+    </select>
+
+</mapper>

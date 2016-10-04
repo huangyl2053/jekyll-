@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8178
  */
-public class TaJushochiTokureiChecker {
+public final class TaJushochiTokureiChecker {
 
     private final TaJushochiTokureisyaKanriManager manager;
 
@@ -22,6 +22,11 @@ public class TaJushochiTokureiChecker {
         manager = TaJushochiTokureisyaKanriManager.createInstance();
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @return {@link TaJushochiTokureiChecker}
+     */
     public static TaJushochiTokureiChecker createInstance() {
         return new TaJushochiTokureiChecker();
     }
@@ -29,7 +34,7 @@ public class TaJushochiTokureiChecker {
     /**
      * 適用除外者の最新情報を取得・確認し、対象者が資格しゅ
      *
-     * @param shikibetsuCode
+     * @param shikibetsuCode 識別コード
      * @return 他市町村住所地特例者と判定された場合{@code true}
      */
     @Transaction

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KouhoushaJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshaHaakuBatch;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho.KouhoushaJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.ShinseishoIkkatsuHakkoDiv;
@@ -102,8 +102,8 @@ public class ShinseishoIkkatsuHakkoHandler {
         List<YMDHMS> バッチ処理日時リスト = new ArrayList<>();
         List<KeyValueDataSource> result = new ArrayList<>();
         List<ShinseishoHakkoTaishoshaHaakuBatch> 基準日時リスト = manager.select基準日時(減免減額種類);
-        for (int i = 0; i < 基準日時リスト.size(); i++) {
-            バッチ処理日時リスト.add(基準日時リスト.get(i).getバッチ処理日時());
+        for (ShinseishoHakkoTaishoshaHaakuBatch shi : 基準日時リスト) {
+            バッチ処理日時リスト.add(shi.getバッチ処理日時());
         }
         for (int i = 0; i < バッチ処理日時リスト.size(); i++) {
             KeyValueDataSource keyValues = new KeyValueDataSource(new RString("key" + i), new RString(バッチ処理日時リスト.get(i).toString()));

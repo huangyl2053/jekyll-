@@ -372,7 +372,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
     /**
      * 利用サービスGrid表示を行います。（初期の値を表示する）
-     * 
+     *
      * @param 現在の選択 現在サービス区分の選択値
      * @param is再調査の場合 true:再調査の場合
      * @param 厚労省IF識別コード 厚労省IF識別コード
@@ -723,7 +723,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * @param 変更前の設定値 変更前の設定値
      * @param map 切り替え前の設定値
      */
-    public void 利用サービスの切り替え(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値,  Map<Integer, Decimal> map) {
+    public void 利用サービスの切り替え(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値, Map<Integer, Decimal> map) {
         if (なし_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
             利用サービスGrid非表示();
             利用サービスGridのクリア();
@@ -900,7 +900,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             自立度 = 自立度.concat(障害高齢者.get障害高齢者自立度().getKey()).concat(認知症高齢者.get認知症高齢者自立度().getKey());
 
             if ((第7群.get前回認知症高齢者自立度() != null && !第7群.get前回認知症高齢者自立度().isEmpty())
-                    || (第7群.get前回障害高齢者自立度() != null && !第7群.get前回障害高齢者自立度().isEmpty())) {
+                || (第7群.get前回障害高齢者自立度() != null && !第7群.get前回障害高齢者自立度().isEmpty())) {
                 前回基本調査項目値あり = true;
             }
         }
@@ -996,7 +996,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<Integer> 連番List = new ArrayList<>();
 
         if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード)
-                || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
+            || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
             連番List.add(データベース内連番_1);
             連番List.add(データベース内連番_2);
             連番List.add(データベース内連番_3);
@@ -1026,7 +1026,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<Integer> 連番List = new ArrayList<>();
 
         if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード)
-                || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
+            || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
             連番List.add(データベース内連番_1);
             連番List.add(データベース内連番_2);
             連番List.add(データベース内連番_3);
@@ -1065,7 +1065,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<Integer> 連番List = new ArrayList<>();
 
         if (厚労省IF識別コード_02A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)
-                || 厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
+            || 厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
             連番List.add(データベース内連番_2);
             連番List.add(データベース内連番_3);
             連番List.add(データベース内連番_4);
@@ -1118,7 +1118,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         boolean サービス区分等しい = is等しい(初期のサービス区分, 現在のサービス区分);
 
         return is在宅等しい && is市町村特別給付_等しい && is介護保険給付以外の在宅サービス_等しい && is特記等しい
-                && is施設等しい && is施設連絡先 && is状況コード等しい && サービス区分等しい;
+               && is施設等しい && is施設連絡先 && is状況コード等しい && サービス区分等しい;
 
     }
 
@@ -1316,7 +1316,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         for (KihonChosaInput joho : 第1群List) {
             連番 = joho.get調査連番();
             if (連番 != INDEX_1 && 連番 != INDEX_2 && 連番 != INDEX_3 && 連番 != INDEX_4 && 連番 != INDEX_5
-                    && 連番 != INDEX_6 && 連番 != INDEX_7 && 連番 != INDEX_8 && 連番 != INDEX_9) {
+                && 連番 != INDEX_6 && 連番 != INDEX_7 && 連番 != INDEX_8 && 連番 != INDEX_9) {
                 size++;
             }
         }

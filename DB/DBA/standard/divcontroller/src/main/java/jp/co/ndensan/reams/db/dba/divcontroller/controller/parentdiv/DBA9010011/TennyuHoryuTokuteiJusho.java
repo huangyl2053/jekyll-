@@ -79,16 +79,23 @@ public class TennyuHoryuTokuteiJusho {
         return ResponseData.of(requestDiv).respond();
     }
 
+    /**
+     * @param requestDiv TennyuHoryuTokuteiJushoDiv
+     * @return ResponseData
+     */
     public ResponseData<TennyuHoryuTokuteiJushoDiv> onClick_btnTorikeshi(TennyuHoryuTokuteiJushoDiv requestDiv) {
-        if (!ResponseHolder.isReRequest()) {
-            if (createHandlerOf(requestDiv).is入力済()) {
-                return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            }
+        if (!ResponseHolder.isReRequest() && createHandlerOf(requestDiv).is入力済()) {
+            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+
         }
         clearValue(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
 
+    /**
+     * @param requestDiv TennyuHoryuTokuteiJushoDiv
+     * @return ResponseData
+     */
     public ResponseData<TennyuHoryuTokuteiJushoDiv> onChange_ddlShichosonCode(TennyuHoryuTokuteiJushoDiv requestDiv) {
         LasdecCode 団体コード = new LasdecCode(requestDiv.getDdlShichosonCode().getSelectedKey());
         Association association = AssociationFinderFactory.createInstance().getAssociation(団体コード);

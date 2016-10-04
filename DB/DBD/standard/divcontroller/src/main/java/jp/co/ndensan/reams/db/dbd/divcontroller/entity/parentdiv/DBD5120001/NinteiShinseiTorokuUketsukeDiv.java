@@ -5,9 +5,10 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitaku
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * NinteiShinseiTorokuUketsuke のクラスファイル
@@ -30,13 +30,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class NinteiShinseiTorokuUketsukeDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("btnIryohokenGuide")
     private ButtonDialog btnIryohokenGuide;
     @JsonProperty("btnRenrakusaki")
@@ -51,10 +53,10 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     private ButtonDialog btnTainoJokyo;
     @JsonProperty("tabShinseishaJoho")
     private tabShinseishaJohoDiv tabShinseishaJoho;
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
     @JsonProperty("ccdKaigoNinteiShikakuInfo")
     private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
     @JsonProperty("hdnShinseishoKanriNo")
     private RString hdnShinseishoKanriNo;
     @JsonProperty("hdnShichosonCode")
@@ -89,6 +91,22 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     private RString hdn登録グループコード;
     @JsonProperty("hdnサンプル文書")
     private RString hdnサンプル文書;
+    @JsonProperty("hdnMode")
+    private RString hdnMode;
+    @JsonProperty("hdn今回履歴情報")
+    private RString hdn今回履歴情報;
+    @JsonProperty("hdn前回履歴情報")
+    private RString hdn前回履歴情報;
+    @JsonProperty("hdn表示判定キー")
+    private RString hdn表示判定キー;
+    @JsonProperty("hdnSubGyomuCd")
+    private RString hdnSubGyomuCd;
+    @JsonProperty("hdnRirekiNo")
+    private RString hdnRirekiNo;
+    @JsonProperty("hdnEdaban")
+    private RString hdnEdaban;
+    @JsonProperty("hdnJukyuShinseiJiyu")
+    private RString hdnJukyuShinseiJiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -97,6 +115,15 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
  /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
+    }
+
+    /*
      * getbtnIryohokenGuide
      * @return btnIryohokenGuide
      */
@@ -223,21 +250,21 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiAtenaInfo
-     * @return ccdKaigoNinteiAtenaInfo
-     */
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
-        return ccdKaigoNinteiAtenaInfo;
-    }
-
-    /*
      * getccdKaigoNinteiShikakuInfo
      * @return ccdKaigoNinteiShikakuInfo
      */
     @JsonProperty("ccdKaigoNinteiShikakuInfo")
     public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
         return ccdKaigoNinteiShikakuInfo;
+    }
+
+    /*
+     * getccdKaigoNinteiAtenaInfo
+     * @return ccdKaigoNinteiAtenaInfo
+     */
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
+        return ccdKaigoNinteiAtenaInfo;
     }
 
     /*
@@ -547,6 +574,150 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     /*
+     * gethdnMode
+     * @return hdnMode
+     */
+    @JsonProperty("hdnMode")
+    public RString getHdnMode() {
+        return hdnMode;
+    }
+
+    /*
+     * sethdnMode
+     * @param hdnMode hdnMode
+     */
+    @JsonProperty("hdnMode")
+    public void setHdnMode(RString hdnMode) {
+        this.hdnMode = hdnMode;
+    }
+
+    /*
+     * gethdn今回履歴情報
+     * @return hdn今回履歴情報
+     */
+    @JsonProperty("hdn今回履歴情報")
+    public RString getHdn今回履歴情報() {
+        return hdn今回履歴情報;
+    }
+
+    /*
+     * sethdn今回履歴情報
+     * @param hdn今回履歴情報 hdn今回履歴情報
+     */
+    @JsonProperty("hdn今回履歴情報")
+    public void setHdn今回履歴情報(RString hdn今回履歴情報) {
+        this.hdn今回履歴情報 = hdn今回履歴情報;
+    }
+
+    /*
+     * gethdn前回履歴情報
+     * @return hdn前回履歴情報
+     */
+    @JsonProperty("hdn前回履歴情報")
+    public RString getHdn前回履歴情報() {
+        return hdn前回履歴情報;
+    }
+
+    /*
+     * sethdn前回履歴情報
+     * @param hdn前回履歴情報 hdn前回履歴情報
+     */
+    @JsonProperty("hdn前回履歴情報")
+    public void setHdn前回履歴情報(RString hdn前回履歴情報) {
+        this.hdn前回履歴情報 = hdn前回履歴情報;
+    }
+
+    /*
+     * gethdn表示判定キー
+     * @return hdn表示判定キー
+     */
+    @JsonProperty("hdn表示判定キー")
+    public RString getHdn表示判定キー() {
+        return hdn表示判定キー;
+    }
+
+    /*
+     * sethdn表示判定キー
+     * @param hdn表示判定キー hdn表示判定キー
+     */
+    @JsonProperty("hdn表示判定キー")
+    public void setHdn表示判定キー(RString hdn表示判定キー) {
+        this.hdn表示判定キー = hdn表示判定キー;
+    }
+
+    /*
+     * gethdnSubGyomuCd
+     * @return hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public RString getHdnSubGyomuCd() {
+        return hdnSubGyomuCd;
+    }
+
+    /*
+     * sethdnSubGyomuCd
+     * @param hdnSubGyomuCd hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public void setHdnSubGyomuCd(RString hdnSubGyomuCd) {
+        this.hdnSubGyomuCd = hdnSubGyomuCd;
+    }
+
+    /*
+     * gethdnRirekiNo
+     * @return hdnRirekiNo
+     */
+    @JsonProperty("hdnRirekiNo")
+    public RString getHdnRirekiNo() {
+        return hdnRirekiNo;
+    }
+
+    /*
+     * sethdnRirekiNo
+     * @param hdnRirekiNo hdnRirekiNo
+     */
+    @JsonProperty("hdnRirekiNo")
+    public void setHdnRirekiNo(RString hdnRirekiNo) {
+        this.hdnRirekiNo = hdnRirekiNo;
+    }
+
+    /*
+     * gethdnEdaban
+     * @return hdnEdaban
+     */
+    @JsonProperty("hdnEdaban")
+    public RString getHdnEdaban() {
+        return hdnEdaban;
+    }
+
+    /*
+     * sethdnEdaban
+     * @param hdnEdaban hdnEdaban
+     */
+    @JsonProperty("hdnEdaban")
+    public void setHdnEdaban(RString hdnEdaban) {
+        this.hdnEdaban = hdnEdaban;
+    }
+
+    /*
+     * gethdnJukyuShinseiJiyu
+     * @return hdnJukyuShinseiJiyu
+     */
+    @JsonProperty("hdnJukyuShinseiJiyu")
+    public RString getHdnJukyuShinseiJiyu() {
+        return hdnJukyuShinseiJiyu;
+    }
+
+    /*
+     * sethdnJukyuShinseiJiyu
+     * @param hdnJukyuShinseiJiyu hdnJukyuShinseiJiyu
+     */
+    @JsonProperty("hdnJukyuShinseiJiyu")
+    public void setHdnJukyuShinseiJiyu(RString hdnJukyuShinseiJiyu) {
+        this.hdnJukyuShinseiJiyu = hdnJukyuShinseiJiyu;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -620,13 +791,13 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiSonotaJohoInput();
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
     }
 
     @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
+    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiSonotaJohoInput();
     }
 
     @JsonIgnore

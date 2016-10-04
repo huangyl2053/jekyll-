@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD8010003;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.houshold.HousholdBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
@@ -27,10 +28,12 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -78,6 +81,8 @@ public class HikazeiNenkinKenJoho {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧へ, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(再検索する, true);
+            List<KeyValueDataSource> source = new ArrayList<>();
+            div.getDdlYear().setDataSource(source);
         }
         return ResponseData.of(div).setState(Default);
     }
@@ -216,12 +221,12 @@ public class HikazeiNenkinKenJoho {
             if (削除解除モード.equals(div.getHiddenModel())) {
                 return ResponseData.of(div).addMessage(get削除解除Message(div)).respond();
             }
-            if (!handler.画面項目と比較(非課税年金対象者一時)) {
+            if (!新規モード.equals(div.getHiddenModel()) && !handler.画面項目と比較(非課税年金対象者一時)) {
                 throw new ApplicationException(DbdErrorMessages.変更無し.getMessage());
             }
             int 重複チェック = handler.重複チェック();
-            int pk変更 = handler.pk変更チェック(非課税年金対象者一時) ? 0 : 1;
             if (修正モード.equals(div.getHiddenModel())) {
+                int pk変更 = handler.pk変更チェック(非課税年金対象者一時) ? 0 : 1;
                 return ResponseData.of(div).addMessage(get修正モードMessage(div, 重複チェック, pk変更)).respond();
             }
             if (新規モード.equals(div.getHiddenModel())) {
@@ -304,7 +309,8 @@ public class HikazeiNenkinKenJoho {
     private Message get新規モードMessage(HikazeiNenkinKenJohoDiv div, int 重複チェック) {
         if (重複チェック >= 1) {
             throw new ApplicationException(DbdErrorMessages.データ重複チェック
-                    .getMessage().replace(div.getTbTaishoNen().getValue().toString()));
+                    .getMessage().replace(div.getTbTaishoNen().getValue().getYear()
+                            .wareki().eraType(EraType.KANJI).toDateString().concat("年").toString()));
         }
         return UrQuestionMessages.保存の確認.getMessage();
     }
@@ -312,7 +318,8 @@ public class HikazeiNenkinKenJoho {
     private Message get修正モードMessage(HikazeiNenkinKenJohoDiv div, int 重複チェック, int pk変更) {
         if (重複チェック - pk変更 >= 1) {
             throw new ApplicationException(DbdErrorMessages.データ重複チェック
-                    .getMessage().replace(div.getTbTaishoNen().getValue().toString()));
+                    .getMessage().replace(div.getTbTaishoNen().getValue().getYear().wareki()
+                            .eraType(EraType.KANJI).toDateString().concat("年").toString()));
         }
         return UrQuestionMessages.保存の確認.getMessage();
     }

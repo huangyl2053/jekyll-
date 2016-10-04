@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -66,17 +68,17 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
     @BatchParameter(key = KEY_SOFU_TAISHOGAI_FUKUMU, name = "送付対象外")
     private boolean sofuTaishogaiFukumu;
     @BatchParameter(key = KEY_JIKO_FROM, name = "自己負担額確認情報受取年月From")
-    private FlexibleDate jikoFutangakuKakuninFrom;
+    private FlexibleYearMonth jikoFutangakuKakuninFrom;
     @BatchParameter(key = KEY_JIKO_TO, name = "自己負担額確認情報受取年月To")
-    private FlexibleDate sofuTaishogaiFukumuTo;
+    private FlexibleYearMonth sofuTaishogaiFukumuTo;
     @BatchParameter(key = KEY_HOSEIZUMI_FROM, name = "補正済自己負担額情報送付年月From")
-    private FlexibleDate hoseizumiJikoFutangakuFrom;
+    private FlexibleYearMonth hoseizumiJikoFutangakuFrom;
     @BatchParameter(key = KEY_HOSEIZUMI_TO, name = "補正済自己負担額情報送付年月To")
-    private FlexibleDate hoseizumiJikoFutangakuTo;
+    private FlexibleYearMonth hoseizumiJikoFutangakuTo;
     @BatchParameter(key = KEY_JIKO_FUTANNGAKU_FROM, name = "自己負担額証明書情報受取年月From")
-    private FlexibleDate jikoFutanngakuShoumeishoFrom;
+    private FlexibleYearMonth jikoFutanngakuShoumeishoFrom;
     @BatchParameter(key = KEY_JIKO_FUTANNGAKU_TO, name = "自己負担額証明書情報受取年月To")
-    private FlexibleDate jikoFutanngakuShoumeishoTo;
+    private FlexibleYearMonth jikoFutanngakuShoumeishoTo;
     @BatchParameter(key = KEY_TOMOKUME_FUKA, name = "項目名付加")
     private boolean tomokumeFuka;
     @BatchParameter(key = KEY_REBAN_FUKA, name = "連番付加")
@@ -91,90 +93,12 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
     private RString shutsuryokuTomoku;
 
     /**
-     * コンストラクタです。
-     */
-    public DBC710150_HanyoListKogakuGassanJikoFutangakuParameter() {
-    }
-
-    /**
+     * mybatisのパラメータを生成します。
      *
-     * @param chushutsuKubun 抽出区分
-     * @param detaSakuseiKubun データ作成区分
-     * @param dataShurui データ種類
-     * @param hoseuJokyo 補正状況
-     * @param flexibleYear 対象年度
-     * @param flexibleDateFrom 申請年月日From
-     * @param flexibleDateTo 申請年月日To
-     * @param shikyuShinseishoSeiriNoFrom 支給申請書整理番号From
-     * @param shikyuShinseishoSeiriNoTo 支給申請書整理番号To
-     * @param sofuTaishogaiFukumu 送付対象外
-     * @param jikoFutangakuKakuninFrom 自己負担額確認情報受取年月From
-     * @param sofuTaishogaiFukumuTo 自己負担額確認情報受取年月To
-     * @param hoseizumiJikoFutangakuFrom 補正済自己負担額情報送付年月From
-     * @param hoseizumiJikoFutangakuTo 補正済自己負担額情報送付年月To
-     * @param jikoFutanngakuShoumeishoFrom 自己負担額証明書情報受取年月From
-     * @param jikoFutanngakuShoumeishoTo 自己負担額証明書情報受取年月To
-     * @param tomokumeFuka 項目名付加
-     * @param rebanFuka 連番付加
-     * @param slashDate 日付スラッシュ付加
-     * @param hokenshaNo 保険者コード
-     * @param shutsuryokuju 出力順
-     * @param shutsuryokuTomoku 出力項目
+     * @return mybatisパラメータ
      */
-    private DBC710150_HanyoListKogakuGassanJikoFutangakuParameter(
-            RString chushutsuKubun,
-            RString detaSakuseiKubun,
-            RString dataShurui,
-            RString hoseuJokyo,
-            RString flexibleYear,
-            FlexibleDate flexibleDateFrom,
-            FlexibleDate flexibleDateTo,
-            RString shikyuShinseishoSeiriNoFrom,
-            RString shikyuShinseishoSeiriNoTo,
-            boolean sofuTaishogaiFukumu,
-            FlexibleDate jikoFutangakuKakuninFrom,
-            FlexibleDate sofuTaishogaiFukumuTo,
-            FlexibleDate hoseizumiJikoFutangakuFrom,
-            FlexibleDate hoseizumiJikoFutangakuTo,
-            FlexibleDate jikoFutanngakuShoumeishoFrom,
-            FlexibleDate jikoFutanngakuShoumeishoTo,
-            boolean tomokumeFuka,
-            boolean rebanFuka,
-            boolean slashDate,
-            RString hokenshaNo,
-            Long shutsuryokuju,
-            RString shutsuryokuTomoku) {
-        this.chushutsuKubun = chushutsuKubun;
-        this.detaSakuseiKubun = detaSakuseiKubun;
-        this.dataShurui = dataShurui;
-        this.hoseuJokyo = hoseuJokyo;
-        this.flexibleYear = flexibleYear;
-        this.flexibleDateFrom = flexibleDateFrom;
-        this.flexibleDateTo = flexibleDateTo;
-        this.shikyuShinseishoSeiriNoFrom = shikyuShinseishoSeiriNoFrom;
-        this.shikyuShinseishoSeiriNoTo = shikyuShinseishoSeiriNoTo;
-        this.sofuTaishogaiFukumu = sofuTaishogaiFukumu;
-        this.jikoFutangakuKakuninFrom = jikoFutangakuKakuninFrom;
-        this.sofuTaishogaiFukumuTo = sofuTaishogaiFukumuTo;
-        this.hoseizumiJikoFutangakuFrom = hoseizumiJikoFutangakuFrom;
-        this.hoseizumiJikoFutangakuTo = hoseizumiJikoFutangakuTo;
-        this.jikoFutanngakuShoumeishoFrom = jikoFutanngakuShoumeishoFrom;
-        this.jikoFutanngakuShoumeishoTo = jikoFutanngakuShoumeishoTo;
-        this.tomokumeFuka = tomokumeFuka;
-        this.rebanFuka = rebanFuka;
-        this.slashDate = slashDate;
-        this.hokenshaNo = hokenshaNo;
-        this.shutsuryokuju = shutsuryokuju;
-        this.shutsuryokuTomoku = shutsuryokuTomoku;
-    }
-
-    /**
-     * 汎用リスト出力(高額合算申請書情報)_バッチ用のパラメータラス作成
-     *
-     * @return 汎用リスト出力(高額合算申請書情報)_バッチ用のパラメータラス
-     */
-    public DBC710150_HanyoListKogakuGassanJikoFutangakuParameter toDBC710150_HanyoListKogakuGassanJikoFutangakuParameter() {
-        return new DBC710150_HanyoListKogakuGassanJikoFutangakuParameter(
+    public HanyoListKogakuGassanJikoFutangakuProcessParameter toProcessParam() {
+        return new HanyoListKogakuGassanJikoFutangakuProcessParameter(
                 chushutsuKubun,
                 detaSakuseiKubun,
                 dataShurui,
@@ -196,7 +120,7 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
                 slashDate,
                 hokenshaNo,
                 shutsuryokuju,
-                shutsuryokuTomoku
-        );
+                shutsuryokuTomoku);
     }
+
 }

@@ -60,9 +60,9 @@
             resultType="int" fetchSize="500">
       SELECT COUNT(*) 
         FROM (
-              SELECT row_number() OVER (PARTITION BY B."shichosonCode" ORDER BY B."idoYMD" DESC, B."edaNo" DESC) AS 履歴番号
+              SELECT row_number() OVER (PARTITION BY B."shikibetsuCode" ORDER BY B."idoYMD" DESC, B."edaNo" DESC) AS 履歴番号
               FROM (
-                    SELECT A."shichosonCode"
+                    SELECT A."shikibetsuCode"
                            ,A."idoYMD"
                            ,A."edaNo"
                     FROM rgdb."DbT1003TashichosonJushochiTokurei" AS A

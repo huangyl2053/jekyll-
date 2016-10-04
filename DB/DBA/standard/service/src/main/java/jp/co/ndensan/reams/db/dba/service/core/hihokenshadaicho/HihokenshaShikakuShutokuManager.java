@@ -131,7 +131,6 @@ public class HihokenshaShikakuShutokuManager {
         entity.setHihokenshaNo(hihokenshaNo);
         entity.setEdaNo(getSaidaiEdaban(hihokenshaNo, entity.getIdoYMD()));
         entity.setLogicalDeletedFlag(false);
-        // TODO １．５　前排他制御 QA:152回復時、2015/10/29仕様書の変更仕様です。2015/12/18納品にしばらく対応しない
         dbT1001Dac.save(entity);
     }
 

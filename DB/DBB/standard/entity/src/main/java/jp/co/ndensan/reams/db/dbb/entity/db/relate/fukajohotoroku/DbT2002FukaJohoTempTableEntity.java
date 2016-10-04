@@ -81,7 +81,7 @@ public class DbT2002FukaJohoTempTableEntity extends DbTableEntityBase<DbT2002Fuk
     private Decimal gokeiShotokuGaku;
     @TempTableColumnOrder(22)
     private Decimal nenkinShunyuGaku;
-    @TempTableColumnOrder(22)
+    @TempTableColumnOrder(23)
     private RString hokenryoDankai;
     @TempTableColumnOrder(24)
     private RString hokenryoDankai1;

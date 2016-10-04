@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA120010.DBA120010_NenreitotatsuYoteishaListParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -39,9 +39,9 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
      * @param 今回終了日 今回終了日
      * @param 編集方法 編集方法
      * @param 出力順ID 出力順ID
-     * @return INenreiToutatsuYoteishaCheckListBatchParameter
+     * @return DBA120010_NenreitotatsuYoteishaListParameter
      */
-    public INenreiToutatsuYoteishaCheckListBatchParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
+    public DBA120010_NenreitotatsuYoteishaListParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
             RString 出力対象, RString 住民種別, FlexibleDate 今回開始日, FlexibleDate 今回終了日, List<RString> 編集方法,
             Long 出力順ID) {
         if (今回開始日 == null || 今回開始日.isEmpty() || 今回終了日 == null || 今回終了日.isEmpty()) {
@@ -71,7 +71,7 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
                 日付編集フラグ = true;
             }
         }
-        return new INenreiToutatsuYoteishaCheckListBatchParameter(出力対象, 項目名付加フラグ, 連番付加フラグ,
+        return new DBA120010_NenreitotatsuYoteishaListParameter(出力対象, 項目名付加フラグ, 連番付加フラグ,
                 日付編集フラグ, 住民種別, 今回開始日, 今回終了日, 出力順ID);
     }
 }

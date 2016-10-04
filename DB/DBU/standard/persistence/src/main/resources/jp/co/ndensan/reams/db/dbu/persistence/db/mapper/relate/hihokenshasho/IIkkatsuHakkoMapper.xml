@@ -326,8 +326,8 @@ and open the template in the editor.
         a."hihokenshaNo",
         c."shikibetsuCode" AS "shikibetsuCode_view",
         c."shichosonCode" AS "shichosonCode_view",
-        a."lastUpdateTimestamp" AS "lastUpdateTimestamp_Juji",
-        a."insertTimestamp" AS "insertTimestamp_Juji"
+        a."lastUpdateTimestamp" AS "lastUpdateTimestamp_Sogo",
+        a."insertTimestamp" AS "insertTimestamp_Sogo"
         FROM
         総合事業対象者Temp AS a
         LEFT OUTER JOIN
@@ -2671,6 +2671,20 @@ and open the template in the editor.
         #{shoYoshikiKubunCode},
         #{logicalDeletedFlag})
     </insert>
+
+    <!-- 一時テーブル情報を取得します -->
+    <select resultOrdered="true" id="getDbT7022ShoriDateKanri"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        "subGyomuCode" = 'DBU'
+        AND "shoriName"= '被保険者証一括発行'
+        AND "shoriEdaban" = #{shutsuryokuJokenCode}
+    </select>
 
     <!-- 処理日付管理マスタテーブル更新 -->
     <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >

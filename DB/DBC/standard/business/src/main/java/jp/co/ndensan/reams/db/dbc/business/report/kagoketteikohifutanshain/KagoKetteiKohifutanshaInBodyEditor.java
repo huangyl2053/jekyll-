@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -43,22 +44,23 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
         if (集計Flag) {
             edit集計(source);
         }
+        source.shikibetuCode = 帳票出力対象データ.get識別コード();
         return source;
     }
 
     private void edit明細(KagoKetteiKohifutanshaInSource source) {
         source.listUpper_1 = new RString(帳票出力対象データ.getNo());
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
-        source.listUpper_3 = 帳票出力対象データ.get事業者番号().getColumnValue();
+        source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業者番号());
         source.listUpper_4 = 帳票出力対象データ.get公費受給者番号();
         source.listUpper_5 = 帳票出力対象データ.get公費受給者名();
         source.listUpper_6 = doパターン54(帳票出力対象データ.getサービ提供年月());
-        source.listUpper_7 = 帳票出力対象データ.getサービス種類コード().getColumnValue();
-        source.listUpper_8 = 帳票出力対象データ.get過誤申立事由コード().getColumnValue();
+        source.listUpper_7 = getColumnValue(帳票出力対象データ.getサービス種類コード());
+        source.listUpper_8 = 帳票出力対象データ.getサービス種類名();
         source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get単位数(), 0);
         source.listLower_1 = 帳票出力対象データ.get事業者名();
-        source.listLower_2 = 帳票出力対象データ.get被保険者番号().getColumnValue();
-        source.listLower_3 = 帳票出力対象データ.getサービス種類名();
+        source.listLower_2 = getColumnValue(帳票出力対象データ.get被保険者番号());
+        source.listLower_3 = getColumnValue(帳票出力対象データ.get過誤申立事由コード());
         source.listLower_4 = 帳票出力対象データ.get過誤申立事由();
         source.listLower_5 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get公費負担額(), 0);
     }
@@ -91,5 +93,12 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
             return RString.EMPTY;
         }
         return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString getColumnValue(IDbColumnMappable column) {
+        if (null == column) {
+            return RString.EMPTY;
+        }
+        return column.getColumnValue();
     }
 }

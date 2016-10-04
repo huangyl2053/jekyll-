@@ -49,18 +49,16 @@ public class ShotokuJokyo {
      * @param div ShotokuJokyoDiv
      * @return ResponseData
      */
-    public ResponseData<ShotokuJokyoDiv> onClickBtnKakutei(ShotokuJokyoDiv div) {
-
+    public ResponseData<ShotokuJokyoDiv> onClick_btnKakutei(ShotokuJokyoDiv div) {
         ValidationMessageControlPairs messages = getValidationHandler(div).validate();
         if (messages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(messages).respond();
         }
-        // TODO 問題がある？
         ResponseData<ShotokuJokyoDiv> response = new ResponseData<>();
         List<KijunShunyugakuDate> list = getHandler(div).set世帯員情報クラス格納リスト();
         div.setHdnDaialogSelectSetaiinJoho(DataPassingConverter.serialize((Serializable) list));
         response.data = div;
-        return response;
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**
@@ -69,7 +67,7 @@ public class ShotokuJokyo {
      * @param div ShotokuJokyoDiv
      * @return ResponseData
      */
-    public ResponseData<ShotokuJokyoDiv> onClickBtnClose(ShotokuJokyoDiv div) {
+    public ResponseData<ShotokuJokyoDiv> onClick_btnClose(ShotokuJokyoDiv div) {
         return ResponseData.of(div).respond();
     }
 

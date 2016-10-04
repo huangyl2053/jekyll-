@@ -113,6 +113,11 @@ public class FukaShokaiMainHandler {
                 .get賦課履歴(fukaNendo, choteiNendo, tsuchishoNo, rirekiNo);
     }
 
+    /**
+     * 選択された賦課の賦課照会キーを返します。
+     *
+     * @return 賦課照会キー
+     */
     public Optional<FukaShokaiKey> getClicked賦課履歴Key() {
         Optional<Fuka> atoFuka = clicked賦課(div);
         if (atoFuka.isPresent()) {
@@ -121,6 +126,12 @@ public class FukaShokaiMainHandler {
         return Optional.empty();
     }
 
+    /**
+     * 指定の賦課について、直前の賦課履歴のキーを返します。
+     *
+     * @param 後賦課 前履歴のキーを取得したい、賦課履歴のキー
+     * @return 指定の賦課（後履歴）に対応する前履歴のキー
+     */
     public Optional<FukaShokaiKey> get前賦課履歴Key(Optional<? extends FukaShokaiKey> 後賦課) {
         if (!後賦課.isPresent()) {
             return Optional.empty();

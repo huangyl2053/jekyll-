@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -45,7 +44,10 @@ public class KogakuGassanKyufuJisseki {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            div.getDgRireki().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
+            div.getKogakuGassanKyufuJissekiKihon().setVisible(false);
+            div.getKogakuGassanKyufuJissekiKaigoKihon().setVisible(false);
+            div.getKogakuGassanKyufuJissekiList().setVisible(false);
+            div.getKogakuGassanKyufuJissekiDetail().setVisible(false);
             return ResponseData.of(div).addMessage(new InformationMessage(
                     DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
                     DbcInformationMessages.被保険者でないデータ.getMessage().evaluate())).respond();
@@ -62,6 +64,23 @@ public class KogakuGassanKyufuJisseki {
         if (is高額合算給付実績チェック) {
             return ResponseData.of(div).addValidationMessages(getValidationHandler().do高額合算給付実績チェック()).respond();
         }
+        return ResponseData.of(div).setState(DBC1270011StateName.給付実績一覧);
+    }
+
+    /**
+     * オンに変更する場合、給付実績一覧を再表示する。
+     *
+     * @param div KogakuGassanKyufuJissekiDiv
+     * @return ResponseData<KogakuGassanKyufuJissekiDiv>
+     */
+    public ResponseData<KogakuGassanKyufuJissekiDiv> onClick_onChangeRirekiHyoji(KogakuGassanKyufuJissekiDiv div) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
+        List<jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki> 高額合算給付実績情報
+                = KogakuGassanKyufuJissekiFinder.createInstance().getKogakuGassanKyufuJisseki(被保険者番号).records();
+        boolean isデータ存在 = KogakuGassanKyufuJissekiFinder.createInstance().isデータ存在チェック(被保険者番号);
+        getHandler(div).onLoad(被保険者番号, 識別コード, 高額合算給付実績情報, isデータ存在);
         return ResponseData.of(div).setState(DBC1270011StateName.給付実績一覧);
     }
 

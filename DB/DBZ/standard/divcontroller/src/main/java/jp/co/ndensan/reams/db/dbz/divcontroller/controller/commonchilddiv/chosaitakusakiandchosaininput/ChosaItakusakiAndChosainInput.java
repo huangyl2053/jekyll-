@@ -5,12 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.chosaitakusakiandchosaininput;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -124,6 +128,35 @@ public class ChosaItakusakiAndChosainInput {
         div.getTxtChosaItakusakiName().setValue(modle.get委託先名());
         div.getTxtChosainCode().setValue(modle.get調査員コード());
         div.getTxtChosainName().setValue(modle.get調査員名());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査員への連絡事項のデータを設定します。
+     *
+     * @param div 調査委託先/調査員入力共有子Div
+     * @return ResponseData<ChosaItakusakiAndChosainInputDiv>
+     */
+    public ResponseData<ChosaItakusakiAndChosainInputDiv> onBefore_btnChosainRenrakuJiko(ChosaItakusakiAndChosainInputDiv div) {
+        NinteiShinseiCodeModel ninteiShinseiCodeModel = new NinteiShinseiCodeModel();
+        if (!RString.isNullOrEmpty(div.getHdnChosainRenrakuJiko())) {
+            ninteiShinseiCodeModel.set連絡事項(div.getHdnChosainRenrakuJiko());
+        }
+        ninteiShinseiCodeModel.set表示モード(HyojiMode.InputMode);
+        ViewStateHolder.put(ViewStateKeys.モード, ninteiShinseiCodeModel);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査員への連絡事項のデータを設定します。
+     *
+     * @param div 調査委託先/調査員入力共有子Div
+     * @return ResponseData<ChosaItakusakiAndChosainInputDiv>
+     */
+    public ResponseData<ChosaItakusakiAndChosainInputDiv> onOKClose_btnChosainRenrakuJiko(ChosaItakusakiAndChosainInputDiv div) {
+        NinteiShinseiCodeModel ninteiShinseiCodeModel = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
+        div.setHdnChosainRenrakuJiko(ninteiShinseiCodeModel.get連絡事項());
         return ResponseData.of(div).respond();
     }
 

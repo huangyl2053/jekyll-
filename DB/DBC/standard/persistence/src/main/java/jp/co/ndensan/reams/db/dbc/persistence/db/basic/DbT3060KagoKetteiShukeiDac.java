@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.hokenshaKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.toriatsukaiYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.torikomiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukeiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -66,16 +67,16 @@ public class DbT3060KagoKetteiShukeiDac implements ISaveable<DbT3060KagoKetteiSh
     /**
      * selectByKey
      *
-     * @param 取扱年月 FlexibleYearMonth
+     * @param 取込年月 FlexibleYearMonth
      * @param 保険者区分 RString
      * @return DbT3060KagoKetteiShukeiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT3060KagoKetteiShukeiEntity> selectByKey(
-            FlexibleYearMonth 取扱年月,
+            FlexibleYearMonth 取込年月,
             RString 保険者区分) throws NullPointerException {
-        requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
+        requireNonNull(取込年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取込年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -83,7 +84,7 @@ public class DbT3060KagoKetteiShukeiDac implements ISaveable<DbT3060KagoKetteiSh
         return accessor.select().
                 table(DbT3060KagoKetteiShukei.class).
                 where(and(
-                                eq(toriatsukaiYM, 取扱年月),
+                                eq(torikomiYM, 取込年月),
                                 eq(hokenshaKubun, 保険者区分))).
                 toList(DbT3060KagoKetteiShukeiEntity.class);
     }

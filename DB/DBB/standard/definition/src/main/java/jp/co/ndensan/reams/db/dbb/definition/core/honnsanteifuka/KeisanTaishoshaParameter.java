@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class KeisanTaishoshaParameter {
+public final class KeisanTaishoshaParameter implements IMyBatisParameter {
 
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;

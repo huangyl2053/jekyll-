@@ -16,6 +16,7 @@ import lombok.Setter;
  * 年齢到達登録者リストバッチのパラメータ。
  *
  * @reamsid_L DBA-0570-010 xuyannan
+ * @deprecated 削除予定。{@link jp.co.ndensan.reams.db.dba.definition.batchprm.DBA150010.DBA150010_NenreitotatsuTorokuListParameter}を利用してください。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

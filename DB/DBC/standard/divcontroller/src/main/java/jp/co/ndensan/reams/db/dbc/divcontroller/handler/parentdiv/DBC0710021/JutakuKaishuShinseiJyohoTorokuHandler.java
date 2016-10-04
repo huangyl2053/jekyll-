@@ -420,7 +420,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請, RString 画面モード,
             JutakuGaisuViewStateHolderParameter param) {
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString());
+                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), サービス提供年月.getNendo()).nextString());
         ShokanJutakuKaishuJizenShinsei 申請情報 = 住宅改修費事前申請.getJutakuKaishuJizenShinseiJyoho(被保険者番号,
                 サービス提供年月, 整理番号);
         if (申請情報 == null) {
@@ -456,8 +456,13 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private void 登録モード画面初期化(ShikibetsuCode 識別コード, JutakuKaishuJizenShinsei 住宅改修費事前申請,
             HihokenshaNo 被保険者番号, JutakukaishuSikyuShinseiManager 住宅改修費支給申請, RString 画面モード,
             FukushiyoguKonyuhiShikyuShinsei 保険者, JutakuGaisuViewStateHolderParameter param) {
+        RString month = DbBusinessConfig.get(
+                ConfigNameDBC.初期表示_償還支給申請登録初期, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RDate 提供着工年月 = new RDate(
+                FlexibleDate.getNowDate().getYearMonth().minusMonth(Integer.parseInt(month.toString())).toString());
+        div.getTxtTeikyoYM().setValue(提供着工年月);
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString());
+                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 提供着工年月.getYearValue()).nextString());
         JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
         model.set被保険者番号(被保険者番号);
         model.set状態(改修状態_登録);
@@ -468,11 +473,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(支給申請情報, 支払方法状態_登録);
         ShiharaiKekkaResult 最新住宅改修費支払結果 = 住宅改修費事前申請.getNewJutakuKaishuHi(被保険者番号);
         param.set過去住宅改修費支払結果(最新住宅改修費支払結果);
-        RString month = DbBusinessConfig.get(
-                ConfigNameDBC.初期表示_償還支給申請登録初期, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        RDate 提供着工年月 = new RDate(
-                FlexibleDate.getNowDate().getYearMonth().minusMonth(Integer.parseInt(month.toString())).toString());
-        div.getTxtTeikyoYM().setValue(提供着工年月);
         前回まで支払結果の初期化(最新住宅改修費支払結果, false, 被保険者番号);
         List<ShichosonResult> 元保険者リスト = 保険者.getHokensyaList(
                 被保険者番号, new FlexibleYearMonth(提供着工年月.getYearMonth().toDateString()));

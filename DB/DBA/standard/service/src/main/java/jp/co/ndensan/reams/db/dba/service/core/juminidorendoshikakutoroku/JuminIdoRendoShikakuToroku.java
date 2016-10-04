@@ -51,11 +51,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -63,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -97,11 +92,8 @@ public class JuminIdoRendoShikakuToroku {
     private static final RString 転入保留作成事由_特定住所への転入 = new RString("0006");
     private static final RString 転入保留作成事由_広域内転入 = new RString("0001");
     private static final RString 自動 = new RString("1");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString FILENAME = new RString("fuseigoList.csv");
     private static final int LENGTH4 = 4;
     private static final int LENGTH5 = 5;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA800001");
     private final DbV1001HihokenshaDaichoAliveDac dbv1001dac;
     private final DbT1001HihokenshaDaichoDac dbt1001dac;
     private final DbT1010TennyushutsuHoryuTaishoshaDac dbt1010dac;
@@ -160,7 +152,6 @@ public class JuminIdoRendoShikakuToroku {
         this.dbt1003dac = dbt1003dac;
         this.dbt1002dac = dbt1002dac;
         this.dbt1004dac = dbt1004dac;
-
     }
 
     /**
@@ -168,9 +159,14 @@ public class JuminIdoRendoShikakuToroku {
      *
      * @param 住民異動情報リスト 住民異動情報リスト
      */
-    public void juminIdoRendoKyotsu(List<UaFt200FindShikibetsuTaishoEntity> 住民異動情報リスト) {
-        requireNonNull(住民異動情報リスト);
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+    /**
+     * 住民異動連動共通です。
+     *
+     * @param 住民異動情報 住民異動情報
+     * @param csvWriter csvWriter
+     */
+    public void juminIdoRendoKyotsu(UaFt200FindShikibetsuTaishoEntity 住民異動情報, CsvWriter<FuseigoListCsvEntity> csvWriter) {
+        requireNonNull(住民異動情報);
         RString 介護保険施行日 = DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 広域システム構成 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_広域システム構成, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 自動資格異動連動区分 = DbBusinessConfig.get(ConfigNameDBU.広域保険者運用設定_広域内転入異動_自動資格異動連動区分,
@@ -179,46 +175,39 @@ public class JuminIdoRendoShikakuToroku {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 第２号被保険者到達基準年齢 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第２号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), FILENAME);
-        CsvWriter<FuseigoListCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(getEncode()).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build();
-        for (UaFt200FindShikibetsuTaishoEntity 住民異動情報 : 住民異動情報リスト) {
-            RString 異動事由コード = 住民異動情報.getIdoJiyuCode();
-            JuminIdoRendoShikakuTorokuEntity tennyuEntity = new JuminIdoRendoShikakuTorokuEntity();
-            if (isShoriTaisho(住民異動情報)) {
-                List<DbV1001HihokenshaDaichoEntity> dbv1001EntityList = dbv1001dac
-                        .selectBy識別コード(住民異動情報.getShikibetsuCode());
-                DbV1001HihokenshaDaichoEntity dbv1001Entity = dbv1001EntityList.get(0);
-                if (転入.equals(異動事由コード)) {
-                    tennyuEntity = tennyu(住民異動情報, dbv1001Entity,
-                            介護保険施行日, 第２号被保険者到達基準年齢, 広域システム構成, 自動資格異動連動区分);
-                } else if (転出.equals(異動事由コード) || 死亡.equals(異動事由コード) || 転入通知受理.equals(異動事由コード)) {
-                    tennyuEntity = sonotaIdo(住民異動情報, dbv1001Entity, 介護保険施行日, 広域システム構成);
-                } else if (転居.equals(異動事由コード)) {
-                    tennyuEntity = tenkyo(住民異動情報, dbv1001Entity, 介護保険施行日, 第１号被保険者到達基準年齢);
-                }
-                if (!RString.isNullOrEmpty(tennyuEntity.get不整合コード())) {
-                    csvWriter.writeLine(new FuseigoListHenshu().setEucCsvEntity(tennyuEntity.get不整合コード(), dbv1001Entity, 住民異動情報));
-                    AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, toPersonalData(dbv1001Entity, 住民異動情報));
-                }
-                set被保険者台帳(tennyuEntity);
-                RString 転入保留作成事由コード = tennyuEntity.get転入保留作成事由コード();
-                if (!RString.isNullOrEmpty(転入保留作成事由コード)) {
-                    set転入保留対象者(住民異動情報, 転入保留作成事由コード);
-                }
-                RString 転出保留作成事由コード = tennyuEntity.get転出保留作成事由コード();
-                if (!RString.isNullOrEmpty(転出保留作成事由コード)) {
-                    set転出保留対象者(住民異動情報, 転出保留作成事由コード);
-                }
-                set適用除外者(tennyuEntity);
-                set他市町村住所地特例(tennyuEntity);
-                set介護保険施設入退所(tennyuEntity);
+        RString 異動事由コード = 住民異動情報.getIdoJiyuCode();
+        JuminIdoRendoShikakuTorokuEntity tennyuEntity = new JuminIdoRendoShikakuTorokuEntity();
+        if (isShoriTaisho(住民異動情報)) {
+            List<DbV1001HihokenshaDaichoEntity> dbv1001EntityList = dbv1001dac
+                    .selectBy識別コード(住民異動情報.getShikibetsuCode());
+            DbV1001HihokenshaDaichoEntity dbv1001Entity = null;
+            if (!dbv1001EntityList.isEmpty()) {
+                dbv1001Entity = dbv1001EntityList.get(0);
             }
-        }
-        if (csvWriter.getCount() != 0) {
-            csvWriter.close();
-            manager.spool(filePath);
+            if (転入.equals(異動事由コード)) {
+                tennyuEntity = tennyu(住民異動情報, dbv1001Entity,
+                        介護保険施行日, 第２号被保険者到達基準年齢, 広域システム構成, 自動資格異動連動区分);
+            } else if (転出.equals(異動事由コード) || 死亡.equals(異動事由コード) || 転入通知受理.equals(異動事由コード)) {
+                tennyuEntity = sonotaIdo(住民異動情報, dbv1001Entity, 介護保険施行日, 広域システム構成);
+            } else if (転居.equals(異動事由コード)) {
+                tennyuEntity = tenkyo(住民異動情報, dbv1001Entity, 介護保険施行日, 第１号被保険者到達基準年齢);
+            }
+            if (!RString.isNullOrEmpty(tennyuEntity.get不整合コード())) {
+                csvWriter.writeLine(new FuseigoListHenshu().setEucCsvEntity(tennyuEntity.get不整合コード(), dbv1001Entity, 住民異動情報));
+                AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, toPersonalData(dbv1001Entity, 住民異動情報));
+            }
+            set被保険者台帳(tennyuEntity);
+            RString 転入保留作成事由コード = tennyuEntity.get転入保留作成事由コード();
+            if (!RString.isNullOrEmpty(転入保留作成事由コード)) {
+                set転入保留対象者(住民異動情報, 転入保留作成事由コード);
+            }
+            RString 転出保留作成事由コード = tennyuEntity.get転出保留作成事由コード();
+            if (!RString.isNullOrEmpty(転出保留作成事由コード)) {
+                set転出保留対象者(住民異動情報, 転出保留作成事由コード);
+            }
+            set適用除外者(tennyuEntity);
+            set他市町村住所地特例(tennyuEntity);
+            set介護保険施設入退所(tennyuEntity);
         }
     }
 

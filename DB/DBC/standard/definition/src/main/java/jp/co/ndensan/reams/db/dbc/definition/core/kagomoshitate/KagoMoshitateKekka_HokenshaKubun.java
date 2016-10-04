@@ -16,10 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KagoMoshitateKekka_HokenshaKubun {
 
     /**
-     * コード:0 名称:すべて 略称:すべて
-     */
-    すべて("0", "すべて", "すべて"),
-    /**
      * コード:1 名称:保険者 略称:保険者分
      */
     保険者("1", "保険者", "保険者分"),

@@ -4,6 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shogaishakoujohaaku.IShogaishaKojoTaishoshaHaakuKekkaIchiranMapper">
 
     <select id="get障がい者控除対象者出力一覧情報"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranMapperParameter"
             resultMap="ResultMap_ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity" fetchSize="500">
 

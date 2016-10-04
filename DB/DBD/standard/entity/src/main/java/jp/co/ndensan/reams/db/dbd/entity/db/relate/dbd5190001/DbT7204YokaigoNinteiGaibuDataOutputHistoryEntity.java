@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001;
 import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -40,8 +40,8 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private Code dataKubun;
-    private YMDHM dataOutputKaishiYMDHM;
-    private YMDHM dataOutputShuryoYMDHM;
+    private YMDHMS dataOutputKaishiYMDHMS;
+    private YMDHMS dataOutputShuryoYMDHMS;
 
     static {
         TABLE_NAME = new RString("DbT7204YokaigoNinteiGaibuDataOutputHistory");
@@ -119,17 +119,17 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity
      *
      * @return データ出力開始年月日時分
      */
-    public YMDHM getDataOutputKaishiYMDHM() {
-        return dataOutputKaishiYMDHM;
+    public YMDHMS getDataOutputKaishiYMDHMS() {
+        return dataOutputKaishiYMDHMS;
     }
 
     /**
      * データ出力開始年月日時分のsetメソッドです。
      *
-     * @param dataOutputKaishiYMDHM データ出力開始年月日時分
+     * @param dataOutputKaishiYMDHMS データ出力開始年月日時分
      */
-    public void setDataOutputKaishiYMDHM(YMDHM dataOutputKaishiYMDHM) {
-        this.dataOutputKaishiYMDHM = dataOutputKaishiYMDHM;
+    public void setDataOutputKaishiYMDHMS(YMDHMS dataOutputKaishiYMDHMS) {
+        this.dataOutputKaishiYMDHMS = dataOutputKaishiYMDHMS;
     }
 
     /**
@@ -137,17 +137,17 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity
      *
      * @return データ出力終了年月日時分
      */
-    public YMDHM getDataOutputShuryoYMDHM() {
-        return dataOutputShuryoYMDHM;
+    public YMDHMS getDataOutputShuryoYMDHMS() {
+        return dataOutputShuryoYMDHMS;
     }
 
     /**
      * データ出力終了年月日時分のsetメソッドです。
      *
-     * @param dataOutputShuryoYMDHM データ出力終了年月日時分
+     * @param dataOutputShuryoYMDHMS データ出力終了年月日時分
      */
-    public void setDataOutputShuryoYMDHM(YMDHM dataOutputShuryoYMDHM) {
-        this.dataOutputShuryoYMDHM = dataOutputShuryoYMDHM;
+    public void setDataOutputShuryoYMDHMS(YMDHMS dataOutputShuryoYMDHMS) {
+        this.dataOutputShuryoYMDHMS = dataOutputShuryoYMDHMS;
     }
 
     /**
@@ -173,8 +173,8 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity
     @Override
     public void shallowCopy(DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity entity) {
         this.dataKubun = entity.dataKubun;
-        this.dataOutputKaishiYMDHM = entity.dataOutputKaishiYMDHM;
-        this.dataOutputShuryoYMDHM = entity.dataOutputShuryoYMDHM;
+        this.dataOutputKaishiYMDHMS = entity.dataOutputKaishiYMDHMS;
+        this.dataOutputShuryoYMDHMS = entity.dataOutputShuryoYMDHMS;
     }
 
     /**
@@ -184,7 +184,7 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(dataKubun, dataOutputKaishiYMDHM, dataOutputShuryoYMDHM);
+        return super.toMd5(dataKubun, dataOutputKaishiYMDHMS, dataOutputShuryoYMDHMS);
     }
 
 }

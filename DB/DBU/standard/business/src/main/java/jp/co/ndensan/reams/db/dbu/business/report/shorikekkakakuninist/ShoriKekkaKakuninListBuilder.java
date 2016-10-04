@@ -15,8 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class ShoriKekkaKakuninListBuilder implements IShoriKekkaKakuninListBuidler {
 
-    private final IShoriKekkaKakuninListEditor headerEditor;
-    private final IShoriKekkaKakuninListEditor bodyEditor;
+    private final IShoriKekkaKakuninListEditor editor;
 
     /**
      * インスタンスを生成します。
@@ -24,9 +23,8 @@ class ShoriKekkaKakuninListBuilder implements IShoriKekkaKakuninListBuidler {
      * @param headerEditor {@link IShoriKekkaKakuninListEditor}
      * @param bodyEditor {@link IShoriKekkaKakuninListEditor}
      */
-    public ShoriKekkaKakuninListBuilder(IShoriKekkaKakuninListEditor headerEditor, IShoriKekkaKakuninListEditor bodyEditor) {
-        this.headerEditor = headerEditor;
-        this.bodyEditor = bodyEditor;
+    public ShoriKekkaKakuninListBuilder(IShoriKekkaKakuninListEditor editor) {
+        this.editor = editor;
     }
 
     /**
@@ -36,7 +34,7 @@ class ShoriKekkaKakuninListBuilder implements IShoriKekkaKakuninListBuidler {
      */
     @Override
     public ShoriKekkaKakuninListReportSource build() {
-        return ReportEditorJoiner.from(new ShoriKekkaKakuninListReportSource()).join(headerEditor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new ShoriKekkaKakuninListReportSource()).join(editor).buildSource();
     }
 
 }

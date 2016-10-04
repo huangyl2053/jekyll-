@@ -47,16 +47,16 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
-        if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
-            if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                    && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
-                    isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        RRVMessages.前後関係逆転,
-                        div.getShisetsuNyutaishoInput().getTxtTaishoDate(),
-                        div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
-            }
+        if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()
+            && div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
+            && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
+            && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
+                isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    RRVMessages.前後関係逆転,
+                    div.getShisetsuNyutaishoInput().getTxtTaishoDate(),
+                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+
         }
 
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
@@ -153,15 +153,29 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
                 }
             }
 
-            if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
-                if (rowId != 0) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.退所日,
-                            div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
-                }
+            if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty() && rowId != 0) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.退所日,
+                        div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
+
             }
         }
         return validPairs;
+//      return check保険者番号(validPairs, 住所地特例フラグ); ※以下のメソッドを利用、住所地特例フラグはこのメソッドのパラメータ。
     }
+//TODO n3327 この必要性を確認する。
+//    private ValidationMessageControlPairs check保険者番号(ValidationMessageControlPairs validPairs, RString 住所地特例フラグ) {
+//        if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())
+//                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())
+//                && (DaichoType.被保険者.getコード().equals(div.getCcdShisetsuJoho().getDaichoShubetsu())
+//                || KEY.equals(div.getCcdShisetsuJoho().getDaichoShubetsu()))
+//                && (ShisetsuType.介護保険施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類())
+//                || ShisetsuType.住所地特例対象施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類()))
+//                && RString.isNullOrEmpty(div.getTxtHokensha().getValue()) && RS_ICHI.equals(住所地特例フラグ)) {
+//            validPairs.add(new ValidationMessageControlPair(RRVMessages.保険者番号, div.getTxtHokensha()));
+//        }
+//        return validPairs;
+//    }
+//
 
     private static enum RRVMessages implements IValidationMessage {
 

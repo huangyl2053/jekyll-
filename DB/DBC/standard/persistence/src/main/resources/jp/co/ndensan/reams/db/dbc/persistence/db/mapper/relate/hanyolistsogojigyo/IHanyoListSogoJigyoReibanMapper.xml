@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3107-020 wanghuafeng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistsogojigyo.IHanyoListSogoJigyoReibanMapper">
+
+    <resultMap id="get総合事業費" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistsogojigyohi.HanyoListSogoJigyoHiRelateEntity">
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="給付実績情報作成区分コード" column="給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="給付実績区分" column="給付実績区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス提供年月" column="serviceYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="整理番号" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="性別コード" column="性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護状態区分コード" column="要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="老人保健市町村番号" column="老人保健市町村番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="老人保健受給者番号" column="老人保健受給者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="保険者番号後期" column="保険者番号後期" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号後期" column="被保険者番号後期" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="保険者番号国保" column="保険者番号国保" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者証番号国保" column="被保険者証番号国保" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="個人番号国保" column="個人番号国保" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="開始年月日" column="開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="中止年月日" column="中止年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前保険サービス単位数" column="前保険サービス単位数" />
+        <result property="前保険請求額" column="前保険請求額" />
+        <result property="前保険利用者負担額" column="前保険利用者負担額" />
+        <result property="後保険サービス単位数" column="後保険サービス単位数" />
+        <result property="後保険請求額" column="後保険請求額" />
+        <result property="後保険利用者負担額" column="後保険利用者負担額"/>
+        <result property="警告区分コード" column="警告区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="審査年月" column="審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="取込年月" column="取込年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="明細サービス種類コード" column="明細サービス種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="明細サービス種類名称" column="明細サービス種類名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="明細サービス項目コード" column="明細サービス項目コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="明細サービス名称" column="明細サービス名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="明細単位数" column="明細単位数" />
+        <result property="明細日数回数" column="明細日数回数" />
+        <result property="明細サービス単位数" column="明細サービス単位数" />
+        <result property="明細摘要" column="明細摘要" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="明細後単位数" column="明細後単位数"/>
+        <result property="明細後日数回数" column="明細後日数回数"  />
+        <result property="明細後サービス単位数" column="明細後サービス単位数"  />
+        <result property="明細再審査回数" column="明細再審査回数"  />
+        <result property="明細過誤回数" column="明細過誤回数" />
+        <result property="集計サービス種類コード" column="集計サービス種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="集計サービス種類名称" column="集計サービス種類名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="集計サービス実日数" column="集計サービス実日数" />
+        <result property="集計計画単位数" column="集計計画単位数"  />
+        <result property="集計限度額管理対象単位数" column="集計限度額管理対象単位数" />
+        <result property="集計限度額管理対象外単位数" column="集計限度額管理対象外単位数"  />
+        <result property="集計保険単位数合計" column="集計保険単位数合計" />
+        <result property="集計保険単位数単価" column="集計保険単位数単価"  />
+        <result property="集計保険請求額" column="集計保険請求額" />
+        <result property="集計保険利用者負担額" column="集計保険利用者負担額" />
+        <result property="集計後単位数合計" column="集計後単位数合計"  />
+        <result property="集計後保険請求分請求額" column="集計後保険請求分請求額" />
+        <result property="集計再審査回数" column="集計再審査回数" />
+        <result property="集計過誤回数" column="集計過誤回数"  />
+        <result property="ケアマネジメント費指定基準該当事業所区分" column="指定基準該当事業所区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ケアマネジメント費単位数単価" column="マネジメント単位数単価" />
+        <result property="ケアマネジメント費サービスコード" column="マネジメントサービスコード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ケアマネジメント費サービス種類名称" column="サービス種類名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ケアマネジメント費単位数" column="マネジメント単位数"  />
+        <result property="ケアマネジメント費回数" column="マネジメント回数" />
+        <result property="ケアマネジメント費サービス単位数" column="マネジメントサービス単位数"  />
+        <result property="ケアマネジメント費サービス単位数合計" column="マネジメントサービス単位数合計"/>
+        <result property="ケアマネジメント費請求金額" column="マネジメント請求金額"  />
+        <result property="ケアマネジメント費摘要" column="マネジメント摘要" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ケアマネジメント費利用者負担額" column="マネジメント利用者負担額" />
+        <result property="ケアマネジメント費後単位数" column="マネジメント後単位数"/>
+        <result property="ケアマネジメント費後回数" column="マネジメント後回数"  />
+        <result property="ケアマネジメント費後サービス単位数" column="マネジメント後サービス単位数"  />
+        <result property="ケアマネジメント費後サービス単位数合計" column="マネジメント後サービス単位数合計"  />
+        <result property="ケアマネジメント費後請求金額" column="マネジメント後請求金額" />
+        <result property="ケアマネジメント費後利用者負担額" column="マネジメント後利用者負担額" />
+        <result property="ケアマネジメント費再審査回数" column="マネジメント再審査回数" />
+        <result property="ケアマネジメント費過誤回数" column="マネジメント過誤回数" />
+        <association property="宛名Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get総合事業費" resultMap="get総合事業費"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistsogojigyo.HanyoListSogoJigyoMybatisParameter" fetchSize="500">
+        SELECT
+        最新被保台帳."hihokenshaNo" AS "hihokenshaNo"
+        ,最新被保台帳."shichosonCode" AS "市町村コード"
+        ,給付実績基本."kyufuSakuseiKubunCode" AS "給付実績情報作成区分コード"
+        ,給付実績基本."kyufuJissekiKubunCode" AS "給付実績区分"
+        ,給付実績基本."shokisaiHokenshaNo" AS "証記載保険者番号"
+        ,給付実績基本."serviceTeikyoYM" AS "serviceYM"
+        ,給付実績基本."jigyoshoNo" AS "事業所番号"
+        ,介護事業者."jigyoshaName" AS "事業者名称"
+        ,給付実績基本."seiriNo" AS "seiriNo"
+        ,給付実績基本."umareYMD" AS "生年月日"
+        ,給付実績基本."seibetsuCode" AS "性別コード"
+        ,給付実績基本."yoKaigoJotaiKubunCode" AS "要介護状態区分コード"
+        ,給付実績基本."ninteiYukoKaishiYMD" AS "認定有効期間開始年月日"
+        ,給付実績基本."ninteiYukoShuryoYMD" AS "認定有効期間終了年月日"
+        ,給付実績基本."rojinHokenShichosonNo" AS "老人保健市町村番号"
+        ,給付実績基本."rojinhokenJukyushaNo" AS "老人保健受給者番号"
+        ,給付実績基本."kokiHokenshaNo" AS "保険者番号後期"
+        ,給付実績基本."kokiHiHokenshaNo" AS "被保険者番号後期"
+        ,給付実績基本."kokuhoHokenshaNo" AS "保険者番号国保"
+        ,給付実績基本."kokuhoHiHokenshashoNo" AS "被保険者証番号国保"
+        ,給付実績基本."kokuhoKojinNo" AS "個人番号国保"
+        ,給付実績基本."kaishiYMD" AS "開始年月日"
+        ,給付実績基本."chushiYMD" AS "中止年月日" 
+        ,給付実績基本."maeHokenServiceTanisu" AS "前保険サービス単位数"
+        ,給付実績基本."maeHokenSeikyugaku" AS "前保険請求額"
+        ,給付実績基本."maeHokenRiyoshaFutangaku" AS "前保険利用者負担額"
+        ,給付実績基本."atoHokenServiceTanisu" AS "後保険サービス単位数"
+        ,給付実績基本."atoHokenSeikyugaku" AS "後保険請求額"
+        ,給付実績基本."atoHokenRiyoshaFutangaku" AS "後保険利用者負担額"
+        ,給付実績基本."keikaiKubunCode" AS "警告区分コード"
+        ,給付実績基本."shinsaYM" AS "審査年月"
+        ,給付実績基本."torikomiYM" AS "取込年月"
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        <if test="is基本情報明細情報">
+            ,給付実績明細.*
+        </if>
+        <if test="is基本情報集計情報">
+            ,給付実績集計.*
+        </if>
+        <if test="is基本情報ケアマネジメント費情報">
+            ,給付実績ケアマネジメント費.*
+        </if>
+        
+        FROM
+            rgdb."DbT3017KyufujissekiKihon" AS 給付実績基本 
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳 
+        ON 最新被保台帳."hihokenshaNo" = 給付実績基本."hiHokenshaNo" 
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+        ON 最新被保台帳."shikibetsuCode" = 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS 介護事業者 
+        ON 介護事業者."jigyoshaNo" = 給付実績基本."jigyoshoNo" 
+        AND SUBSTR(介護事業者."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> 給付実績基本."serviceTeikyoYM" 
+        AND 給付実績基本."serviceTeikyoYM" <![CDATA[<=]]> SUBSTR(介護事業者."yukoShuryoYMD", 1, 6)  
+        
+        <if test="is基本情報明細情報">
+        RIGHT JOIN ( 
+            SELECT
+                給付実績明細."serviceShuruiCode" AS "明細サービス種類コード"
+                , 給付実績明細."serviceKomokuCode" AS "明細サービス項目コード"
+                , 給付実績明細."tanisu" AS "明細単位数"
+                , 給付実績明細."nissuKaisu" AS "明細日数回数"
+                , 給付実績明細."serviceTanisu" AS "明細サービス単位数"
+                , 給付実績明細."tekiyo" AS "明細摘要"
+                , 給付実績明細."atoTanisu" AS "明細後単位数"
+                , 給付実績明細."atoNissuKaisu" AS "明細後日数回数"
+                , 給付実績明細."atoServiceTanisu" AS "明細後サービス単位数"
+                , 給付実績明細."saishinsaKaisu" AS "明細再審査回数"
+                , 給付実績明細."kagoKaisu" AS "明細過誤回数"
+                , 給付実績明細."kokanJohoShikibetsuNo" AS "交換情報識別番号"
+                , 給付実績明細."inputShikibetsuNo" AS "入力識別番号"
+                , 給付実績明細."recodeShubetsuCode" AS "レコード種別コード"
+                , 給付実績明細."shokisaiHokenshaNo" AS "証記載保険者番号"
+                , 給付実績明細."hiHokenshaNo" AS "被保険者番号"
+                , 給付実績明細."serviceTeikyoYM" AS "サービス提供年月"
+                , 給付実績明細."jigyoshoNo" AS "事業所番号"
+                , 給付実績明細."toshiNo" AS "通し番号"
+                , 給付実績明細."isDeleted" AS "明細論理削除フラグ"
+                , 明細介護サービス種類."serviceShuruiMeisho" AS "明細サービス種類名称"
+                , サービスコード."serviceMeisho" AS "明細サービス名称" 
+            FROM
+                rgdb."DbT3018KyufujissekiMeisai" AS 給付実績明細 
+            LEFT JOIN rgdb."DbT7130KaigoServiceShurui" AS 明細介護サービス種類 
+            ON 明細介護サービス種類."serviceShuruiCd" = 給付実績明細."serviceShuruiCode" 
+            AND SUBSTR(明細介護サービス種類."teikyoKaishiYM", 1, 6) <![CDATA[<=]]> 給付実績明細."serviceTeikyoYM" 
+            AND 給付実績明細."serviceTeikyoYM" <![CDATA[<=]]> SUBSTR(明細介護サービス種類."teikyoshuryoYM", 1, 6)   
+            LEFT JOIN rgdb."DbT7122SogoJigyoServiceCode" AS サービスコード 
+            ON サービスコード."serviceShuruiCode" = 給付実績明細."serviceShuruiCode" 
+            AND サービスコード."serviceKomokuCode" = 給付実績明細."serviceKomokuCode" 
+            AND SUBSTR(サービスコード."tekiyoKaishiYM", 1, 6) <![CDATA[<=]]> 給付実績明細."serviceTeikyoYM" 
+            AND 給付実績明細."serviceTeikyoYM" <![CDATA[<=]]> SUBSTR(サービスコード."tekiyoShuryoYM", 1, 6)   
+        WHERE
+            給付実績明細."isDeleted" = false 
+        ORDER BY
+           給付実績明細."serviceShuruiCode"
+            , 給付実績明細."serviceKomokuCode"
+            ) AS 給付実績明細 
+            ON 給付実績明細."交換情報識別番号" = 給付実績基本."kokanShikibetsuNo" 
+            AND 給付実績明細."入力識別番号" = 給付実績基本."inputShikibetsuNo" 
+            AND 給付実績明細."レコード種別コード" = 給付実績基本."recodeShubetsuCode" 
+            AND 給付実績明細."証記載保険者番号" = 給付実績基本."shokisaiHokenshaNo" 
+            AND 給付実績明細."被保険者番号" = 給付実績基本."hiHokenshaNo" 
+            AND 給付実績明細."サービス提供年月" = 給付実績基本."serviceTeikyoYM" 
+            AND 給付実績明細."事業所番号" = 給付実績基本."jigyoshoNo" 
+            AND 給付実績明細."通し番号" = 給付実績基本."toshiNo" 
+       </if>
+       <if test="is基本情報集計情報">
+       RIGHT JOIN( 
+           SELECT
+           給付実績集計."serviceSyuruiCode" AS "集計サービス種類コード"
+           , 給付実績集計."serviceJitsunissu" AS "集計サービス実日数"
+           , 給付実績集計."planTanisu" AS "集計計画単位数"
+           , 給付実績集計."gendogakuKanriTaishoTanisu" AS "集計限度額管理対象単位数"
+           , 給付実績集計."gendogakuKanritaishogaiTanisu" AS "集計限度額管理対象外単位数"
+           , 給付実績集計."hokenTanisuTotal" AS "集計保険単位数合計"
+           , 給付実績集計."hokenTanisuTani" AS "集計保険単位数単価"
+           , 給付実績集計."hokenSeikyugaku" AS "集計保険請求額"
+           , 給付実績集計."hokenRiyoshaFutangaku" AS "集計保険利用者負担額"
+           , 給付実績集計."atoHokenTanisuTotal" AS "集計後単位数合計"
+           , 給付実績集計."atoHokenSeikyugaku" AS "集計後保険請求分請求額" 
+           , 給付実績集計."saishinsaKaisu" AS "集計再審査回数"
+           , 給付実績集計."kagoKaisu" AS "集計過誤回数"
+           , 給付実績集計."kokanJohoShikibetsuNo" AS "交換情報識別番号"
+           , 給付実績集計."inputShikibetsuNo" AS "入力識別番号" 
+           , 給付実績集計."recodeShubetsuCode" AS "レコード種別コード" 
+           , 給付実績集計."shokisaiHokenshaNo" AS "証記載保険者番号" 
+           , 給付実績集計."hiHokenshaNo" AS "被保険者番号" 
+           , 給付実績集計."serviceTeikyoYM" AS "サービス提供年月" 
+           , 給付実績集計."jigyoshoNo" AS "事業所番号" 
+           , 給付実績集計."toshiNo" AS "通し番号" 
+           , 給付実績集計."isDeleted" AS "集計論理削除フラグ"
+           , 集計介護サービス種類."serviceShuruiMeisho" AS "集計サービス種類名称"
+       FROM
+           rgdb."DbT3033KyufujissekiShukei" AS 給付実績集計
+      LEFT JOIN rgdb."DbT7130KaigoServiceShurui" AS 集計介護サービス種類 
+        ON 集計介護サービス種類."serviceShuruiCd" = 給付実績集計."serviceSyuruiCode"
+        AND SUBSTR(集計介護サービス種類."teikyoKaishiYM", 1, 6) <![CDATA[<=]]> 給付実績集計."serviceTeikyoYM" 
+        AND 給付実績集計."serviceTeikyoYM" <![CDATA[<=]]> SUBSTR(集計介護サービス種類."teikyoshuryoYM", 1, 6) 
+      WHERE
+          給付実績集計."isDeleted" = false 
+      ORDER BY
+          給付実績集計."serviceSyuruiCode"
+        ) AS 給付実績集計 
+      ON 給付実績集計."交換情報識別番号" = 給付実績基本."kokanShikibetsuNo" 
+      AND 給付実績集計."入力識別番号" = 給付実績基本."inputShikibetsuNo" 
+      AND 給付実績集計."レコード種別コード" = 給付実績基本."recodeShubetsuCode" 
+      AND 給付実績集計."証記載保険者番号" = 給付実績基本."shokisaiHokenshaNo" 
+      AND 給付実績集計."被保険者番号" = 給付実績基本."hiHokenshaNo" 
+      AND 給付実績集計."サービス提供年月" = 給付実績基本."serviceTeikyoYM" 
+      AND 給付実績集計."事業所番号" = 給付実績基本."jigyoshoNo" 
+      AND 給付実績集計."通し番号" = 給付実績基本."toshiNo"
+  </if>
+  <if test="is基本情報ケアマネジメント費情報">
+     RIGHT JOIN(
+         SELECT
+             給付実績ケアマネジメント費."shiteiKijungaitoJigyoshoKubunCode" AS "指定基準該当事業所区分"
+           , 給付実績ケアマネジメント費."tanisuTanka" AS "マネジメント単位数単価"
+           , 給付実績ケアマネジメント費."serviceCode" AS "マネジメントサービスコード"
+           , 給付実績ケアマネジメント費."tanisu" AS "マネジメント単位数"
+           , 給付実績ケアマネジメント費."kaisu" AS "マネジメント回数"
+           , 給付実績ケアマネジメント費."serviceTanisu" AS "マネジメントサービス単位数"
+           , 給付実績ケアマネジメント費."serivceTanisuTotal" AS "マネジメントサービス単位数合計"
+           , 給付実績ケアマネジメント費."seikyuKingaku" AS "マネジメント請求金額"
+           , 給付実績ケアマネジメント費."tekiyo" AS "マネジメント摘要"
+           , 給付実績ケアマネジメント費."riyoushaFutangaku" AS "マネジメント利用者負担額"
+           , 給付実績ケアマネジメント費."atoTanisu" AS "マネジメント後単位数"
+           , 給付実績ケアマネジメント費."atoKaisu" AS "マネジメント後回数"
+           , 給付実績ケアマネジメント費."atoServiceTanisu" AS "マネジメント後サービス単位数"
+           , 給付実績ケアマネジメント費."atoServiceTanisuTotal" AS "マネジメント後サービス単位数合計"
+           , 給付実績ケアマネジメント費."atoSeikyuKingaku" AS "マネジメント後請求金額"
+           , 給付実績ケアマネジメント費."atoRiyoshaFutangaku" AS "マネジメント後利用者負担額"
+           , 給付実績ケアマネジメント費."saishinsaKaisu" AS "マネジメント再審査回数"
+           , 給付実績ケアマネジメント費."kagoKaisu" AS "マネジメント過誤回数"
+           , 給付実績ケアマネジメント費."kokanJohoShikibetsuNo" AS "交換情報識別番号" 
+           , 給付実績ケアマネジメント費."inputShikibetsuNo" AS "入力識別番号" 
+           , 給付実績ケアマネジメント費."recodeShubetsuCode" AS "レコード種別コード"
+           , 給付実績ケアマネジメント費."shokisaiHokenshaNo" AS "証記載保険者番号"
+           , 給付実績ケアマネジメント費."hiHokenshaNo" AS "被保険者番号"
+           , 給付実績ケアマネジメント費."serviceTeikyoYM" AS "サービス提供年月" 
+           , 給付実績ケアマネジメント費."jigyoshoNo" AS "事業所番号" 
+           , 給付実績ケアマネジメント費."toshiNo" AS "通し番号" 
+           , ケアマネジメント介護サービス種類."serviceShuruiMeisho" AS "サービス種類名称" 
+       FROM
+           rgdb."DbT3031KyufuJissekiCareManagementHi" AS 給付実績ケアマネジメント費 
+       LEFT JOIN rgdb."DbT7130KaigoServiceShurui" AS ケアマネジメント介護サービス種類 
+       ON ケアマネジメント介護サービス種類."serviceShuruiCd" = 給付実績ケアマネジメント費."serviceCode" 
+        AND SUBSTR(ケアマネジメント介護サービス種類."teikyoKaishiYM", 1, 6) <![CDATA[<=]]> 給付実績ケアマネジメント費."serviceTeikyoYM" 
+        AND 給付実績ケアマネジメント費."serviceTeikyoYM" <![CDATA[<=]]> SUBSTR(ケアマネジメント介護サービス種類."teikyoshuryoYM", 1, 6)  
+       WHERE
+           給付実績ケアマネジメント費."isDeleted" = false 
+       ORDER BY
+       給付実績ケアマネジメント費."serviceCode" 
+       )AS 給付実績ケアマネジメント費 
+
+        ON 給付実績ケアマネジメント費."交換情報識別番号" = 給付実績基本."kokanShikibetsuNo" 
+        AND 給付実績ケアマネジメント費."入力識別番号" = 給付実績基本."inputShikibetsuNo" 
+        AND 給付実績ケアマネジメント費."レコード種別コード" = 給付実績基本."recodeShubetsuCode" 
+        AND 給付実績ケアマネジメント費."証記載保険者番号" = 給付実績基本."shokisaiHokenshaNo" 
+        AND 給付実績ケアマネジメント費."被保険者番号" = 給付実績基本."hiHokenshaNo" 
+        AND 給付実績ケアマネジメント費."サービス提供年月" = 給付実績基本."serviceTeikyoYM" 
+        AND 給付実績ケアマネジメント費."事業所番号" = 給付実績基本."jigyoshoNo" 
+        AND 給付実績ケアマネジメント費."通し番号" = 給付実績基本."toshiNo" 
+        </if>
+    WHERE
+      (給付実績基本."inputShikibetsuNo" = '71P1'
+    OR  給付実績基本."inputShikibetsuNo" = '8161') 
+    AND 給付実績基本."isDeleted" = false
+    AND 給付実績基本."hokenshaHoyuKyufujissekiJohoSakujoFlag" = false
+    <if test="サービス開始年月Flag">
+    AND #{サービス提供年月開始年月} <![CDATA[<=]]> 給付実績基本."serviceTeikyoYM" 
+    </if>
+    <if test="サービス終了年月Flag">
+    AND 給付実績基本."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月終了年月}
+    </if>
+    <if test="審査年月開始年月Flag">
+    AND #{審査年月開始年月} <![CDATA[<=]]> 給付実績基本."shinsaYM"
+    </if>
+    <if test="審査年月終了年月Flag">
+    AND 給付実績基本."shinsaYM" <![CDATA[<=]]> #{審査年月終了年月}
+    </if>
+    <if test="取込年月開始年月Flag">
+    AND #{取込年月開始年月} <![CDATA[<=]]>  給付実績基本."torikomiYM"
+    </if>
+    <if test="取込年月終了年月Flag">
+    AND 給付実績基本."torikomiYM" <![CDATA[<=]]> #{取込年月終了年月}
+    </if>
+    <if test="事業者コードFlag">
+    AND 給付実績基本."jigyoshoNo" = #{事業者コード}
+    </if>
+       <if test="サービス種類コードFlag">
+           <if test="is基本情報明細情報">
+               AND 給付実績明細."明細サービス種類コード" = #{サービス種類コード}
+           </if>
+           <if test="is基本情報集計情報">
+               AND 給付実績集計."集計サービス種類コード" = #{サービス種類コード}
+           </if>
+           <if test="is基本情報ケアマネジメント費情報">
+               AND 給付実績ケアマネジメント費."マネジメントサービスコード" = #{サービス種類コード}
+           </if>
+       </if>
+       
+    <if test="保険者コードFlag">
+    AND 最新被保台帳."shichosonCode" = #{保険者コード}
+    </if>
+    ${出力順}
+    </select>
+
+</mapper>

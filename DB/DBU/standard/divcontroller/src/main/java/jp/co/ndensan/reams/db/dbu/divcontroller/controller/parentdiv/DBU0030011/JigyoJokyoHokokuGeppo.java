@@ -8,15 +8,19 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0030011
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU020010.DBU020010_JigyoHokokuRenkei_MainParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.yoshikibetsurenkeijoho.ShukeiYearMouthGetterFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -31,6 +35,9 @@ public class JigyoJokyoHokokuGeppo {
     private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
     private static final RString KOUSEI_MODO_KYU = new RString("0");
     private static final RString 旧市町村 = new RString("kyuShichoson");
+    private static final RString 保険者分 = new RString("gappei");
+    private static final RString 広域分 = new RString("koiki");
+    private static final RString 構成市町村分 = new RString("koseiShichoson");
 
     /**
      * 様式別連携情報作成の初期化処理です。
@@ -138,7 +145,8 @@ public class JigyoJokyoHokokuGeppo {
         ShichosonSelectorModel model = new ShichosonSelectorModel();
         if (div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey().contains(旧市町村)) {
             model.setShichosonModel(KOUSEI_MODO_KYU);
-        } else {
+        }
+        if (div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey().contains(構成市町村分)) {
             model.setShichosonModel(KOUSEI_MODO_KOUSEI);
         }
         div.setKyuShichoson(DataPassingConverter.serialize(model));
@@ -163,8 +171,12 @@ public class JigyoJokyoHokokuGeppo {
      * @param div 様式別連携情報Div
      * @return ResponseData<JigyoHokokuRenkeiBatchParameter>
      */
-    public ResponseData<JigyoHokokuRenkeiBatchParameter> onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
-        return ResponseData.of(getHandler(div).onClick_btnJikko()).respond();
+    public ResponseData<DBU020010_JigyoHokokuRenkei_MainParameter> onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
+        if (div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey().contains(保険者分)
+                || div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey().contains(広域分)) {
+            div.setShichosonCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        }
+        return ResponseData.of(getHandler(div).onClick_btnJikko(div)).respond();
     }
 
     /**
@@ -179,10 +191,10 @@ public class JigyoJokyoHokokuGeppo {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-//        validPairs = getValidationHandler(div).市町村チェック(validationMessages);
-//        if (validPairs.iterator().hasNext()) {
-//            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-//        }
+        validPairs = getValidationHandler(div).市町村チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

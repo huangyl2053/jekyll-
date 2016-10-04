@@ -106,6 +106,12 @@ public enum IchijiHanteiKekkaCode99 implements IIchijiHanteiKekkaCode {
         return value;
     }
 
+    /**
+     * 要介護認定一次判定結果コード99のコードと一致する内容を探します。
+     *
+     * @param code 要介護認定一次判定結果コード99のコード
+     * @return {@code code} に対応する要介護認定一次判定結果コード99
+     */
     public static IchijiHanteiKekkaCode99 toValueOrNull(RString code) {
         for (IchijiHanteiKekkaCode99 ichijiHanteiKekkaCode99 : IchijiHanteiKekkaCode99.values()) {
             if (ichijiHanteiKekkaCode99.code.equals(code)) {

@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1270011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
@@ -22,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -94,6 +98,12 @@ public class KogakuGassanKyufuJissekiHandler {
 
     private void set一覧(List<KogakuGassanKyufuJisseki> 高額合算給付実績情報, boolean isデータ存在) {
         List<dgRireki_Row> rowList = new ArrayList<>();
+        List<dgRireki_Row> 一覧データ = new ArrayList<>();
+        if (!div.getChkRirekiHyoji().isAllSelected()) {
+            高額合算給付実績情報 = get履歴を抽出チェックオフ(高額合算給付実績情報);
+        } else {
+            一覧データ = div.getDgRireki().getDataSource();
+        }
         for (KogakuGassanKyufuJisseki 高額合算給付実績 : 高額合算給付実績情報) {
             dgRireki_Row row = new dgRireki_Row();
             if (isデータ存在) {
@@ -110,21 +120,81 @@ public class KogakuGassanKyufuJissekiHandler {
             row.setTxtShoriYM(get日期転換(高額合算給付実績.get処理年月()));
             row.setTxtUketoriNengetsu(get日期転換(高額合算給付実績.get受取年月()));
             row.setTxtSofuNengetsu(get日期転換(高額合算給付実績.get送付年月()));
+            row.setTxtHihokenshaNo(高額合算給付実績.get被保険者番号().value());
+            row.setTxtSeiriNo(高額合算給付実績.get整理番号());
+            if (div.getChkRirekiHyoji().isAllSelected() && is履歴を抽出チェックオン(get交換情報識別番号(高額合算給付実績.get交換情報識別番号()),
+                    高額合算給付実績.get被保険者番号().value(), 高額合算給付実績.get支給申請書整理番号(),
+                    高額合算給付実績.get整理番号(), 一覧データ)) {
+                row.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
+            }
             rowList.add(row);
         }
         div.getDgRireki().setDataSource(rowList);
     }
-//    private List<KogakuGassanKyufuJisseki> get履歴を抽出チェックオフ(List<KogakuGassanKyufuJisseki> 高額合算給付実績情報) {
-//        List<KogakuGassanKyufuJisseki> チェックオフデータ = new ArrayList<>();
-//        // TODO 凌護行　QA:1532_#96172回答待ち、実装が不可です。
-//        return チェックオフデータ;
-//    }
-//
-//    private List<KogakuGassanKyufuJisseki> get履歴を抽出チェックオン(List<KogakuGassanKyufuJisseki> 高額合算給付実績情報) {
-//        List<KogakuGassanKyufuJisseki> チェックオンデータ = new ArrayList<>();
-//        // TODO 凌護行　QA:1532_#96172回答待ち、実装が不可です。
-//        return チェックオンデータ;
-//    }
+
+    private List<KogakuGassanKyufuJisseki> get履歴を抽出チェックオフ(List<KogakuGassanKyufuJisseki> 高額合算給付実績情報) {
+        List<KogakuGassanKyufuJisseki> チェックオフデータ = new ArrayList<>();
+        List<KogakuGassanKyufuJisseki> チェックオフ = new ArrayList<>();
+        RString 同支給申請書整理番号 = RString.EMPTY;
+        RString 最大整理番号 = RString.EMPTY;
+        int 高額合算給付実績件数 = 0;
+        for (KogakuGassanKyufuJisseki 高額合算給付実績 : 高額合算給付実績情報) {
+            if (高額合算給付実績.get処理年月() == null || 高額合算給付実績.get処理年月().isEmpty()) {
+                チェックオフデータ.add(高額合算給付実績);
+            }
+        }
+        if (!チェックオフデータ.isEmpty()) {
+            Collections.sort(チェックオフデータ, new KogakuGassanKyufuJissekiHandler.DateComparator());
+            for (KogakuGassanKyufuJisseki 高額合算給付実績 : チェックオフデータ) {
+                if (高額合算給付実績件数 == 0) {
+                    最大整理番号 = 高額合算給付実績.get整理番号();
+                    チェックオフ.add(高額合算給付実績);
+                }
+                if (!RString.isNullOrEmpty(同支給申請書整理番号) && (!同支給申請書整理番号.equals(高額合算給付実績.get支給申請書整理番号())
+                        || 最大整理番号.equals(高額合算給付実績.get整理番号()))) {
+                    最大整理番号 = 高額合算給付実績.get整理番号();
+                    チェックオフ.add(高額合算給付実績);
+                }
+                同支給申請書整理番号 = 高額合算給付実績.get支給申請書整理番号();
+                高額合算給付実績件数 = 高額合算給付実績件数 + 1;
+            }
+        }
+        最大整理番号 = RString.EMPTY;
+        同支給申請書整理番号 = RString.EMPTY;
+        FlexibleYearMonth 最大処理年月 = FlexibleYearMonth.EMPTY;
+        if (チェックオフ.isEmpty()) {
+            Collections.sort(高額合算給付実績情報, new KogakuGassanKyufuJissekiHandler.SyoliDateComparator());
+            高額合算給付実績件数 = 0;
+            for (KogakuGassanKyufuJisseki kyufuJisseki : 高額合算給付実績情報) {
+                if (高額合算給付実績件数 == 0) {
+                    最大整理番号 = kyufuJisseki.get整理番号();
+                    最大処理年月 = kyufuJisseki.get処理年月();
+                    チェックオフ.add(kyufuJisseki);
+                }
+                if (!RString.isNullOrEmpty(同支給申請書整理番号) && 最大処理年月.equals(kyufuJisseki.get処理年月())
+                        && (!同支給申請書整理番号.equals(kyufuJisseki.get支給申請書整理番号())
+                        || 最大整理番号.equals(kyufuJisseki.get整理番号()))) {
+                    最大整理番号 = kyufuJisseki.get整理番号();
+                    最大処理年月 = kyufuJisseki.get処理年月();
+                    チェックオフ.add(kyufuJisseki);
+                }
+                同支給申請書整理番号 = kyufuJisseki.get支給申請書整理番号();
+                高額合算給付実績件数 = 高額合算給付実績件数 + 1;
+            }
+        }
+        return チェックオフ;
+    }
+
+    private boolean is履歴を抽出チェックオン(RString 交換情報識別番号, RString 被保険者番号,
+            RString 支給申請書整理番号, RString 整理番号, List<dgRireki_Row> rowList) {
+        for (dgRireki_Row row : rowList) {
+            if (交換情報識別番号.equals(row.getTxtKokanShikibetsu()) && 被保険者番号.equals(row.getTxtHihokenshaNo())
+                    && 支給申請書整理番号.equals(row.getTxtShikyuShinseishoSeiriNo()) && 整理番号.equals(row.getTxtSeiriNo())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private RString get交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         if (交換情報識別番号 != null && !交換情報識別番号.isEmpty()) {
@@ -175,5 +245,33 @@ public class KogakuGassanKyufuJissekiHandler {
             builder.append(kinn);
         }
         return new Decimal(builder.toString());
+    }
+
+    private static class DateComparator implements Comparator<KogakuGassanKyufuJisseki>, Serializable {
+
+        @Override
+        public int compare(KogakuGassanKyufuJisseki o1, KogakuGassanKyufuJisseki o2) {
+            int 高額合算給付実績 = o2.get支給申請書整理番号().compareTo(o1.get支給申請書整理番号());
+            if (高額合算給付実績 == 0) {
+                return o2.get整理番号().compareTo(o1.get整理番号());
+            }
+            return 高額合算給付実績;
+        }
+    }
+
+    private static class SyoliDateComparator implements Comparator<KogakuGassanKyufuJisseki>, Serializable {
+
+        @Override
+        public int compare(KogakuGassanKyufuJisseki o1, KogakuGassanKyufuJisseki o2) {
+            int 高額合算給付実績 = o2.get支給申請書整理番号().compareTo(o1.get支給申請書整理番号());
+            if (高額合算給付実績 == 0) {
+                int 処理年月 = o2.get処理年月().compareTo(o1.get処理年月());
+                if (処理年月 == 0) {
+                    return o2.get整理番号().compareTo(o1.get整理番号());
+                }
+                return 処理年月;
+            }
+            return 高額合算給付実績;
+        }
     }
 }

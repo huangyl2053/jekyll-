@@ -83,6 +83,7 @@ public class FutangendogakuShinsei {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
 
+        div.setHihokenshaNo(被保険者番号.getColumnValue());
         List<FutanGendogakuNintei> 申請一覧情報 = getHandler(div).get申請一覧情報(被保険者番号);
         ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
         ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, 申請一覧情報ArrayList);

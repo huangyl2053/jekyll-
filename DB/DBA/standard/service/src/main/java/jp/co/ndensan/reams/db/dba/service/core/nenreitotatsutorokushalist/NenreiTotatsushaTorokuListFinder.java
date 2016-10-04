@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.service.core.nenreitotatsutorokushalist;
 
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsutoroku.DbT7022ShoriDateKanriBusiness;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA150010.DBA150010_NenreitotatsuTorokuListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -80,15 +80,15 @@ public class NenreiTotatsushaTorokuListFinder {
      * @param 今回開始日 今回開始日
      * @param 今回終了日 今回終了日
      * @param 出力順ID 出力順ID
-     * @return NenreiTotatsuTorokushaListBatchParameter 年齢到達登録者リスト作成バッチパラメータクラス
+     * @return DBA150010_NenreitotatsuTorokuListParameter 年齢到達登録者リスト作成バッチパラメータクラス
      */
-    public NenreiTotatsuTorokushaListBatchParameter getNenreiTotatsushaTorokuListBatchParameter(
+    public DBA150010_NenreitotatsuTorokuListParameter getNenreiTotatsushaTorokuListBatchParameter(
             FlexibleDate 前回開始日,
             FlexibleDate 前回終了日,
             FlexibleDate 今回開始日,
             FlexibleDate 今回終了日,
             Long 出力順ID) {
-        NenreiTotatsuTorokushaListBatchParameter parameter = new NenreiTotatsuTorokushaListBatchParameter();
+        DBA150010_NenreitotatsuTorokuListParameter parameter = new DBA150010_NenreitotatsuTorokuListParameter();
         RStringBuilder 今回開始日Builder = new RStringBuilder();
         RStringBuilder 今回終了日Builder = new RStringBuilder();
 

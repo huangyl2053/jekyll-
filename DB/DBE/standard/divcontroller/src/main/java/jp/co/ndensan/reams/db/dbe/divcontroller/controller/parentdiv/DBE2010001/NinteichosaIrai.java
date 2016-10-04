@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2010001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.IkenshoPrintParameterModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiChosainBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.gamensenikbn.GamenSeniKbn;
+import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.ChosainInfoMobileCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairailist.NinteichosaIr
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
@@ -183,7 +182,7 @@ public class NinteichosaIrai {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnIraiAuto();
             ValidationMessageControlPair 自動割付可能チェック = 自動割付可能チェック(requestDiv);
             if (自動割付可能チェック != null) {
@@ -205,7 +204,7 @@ public class NinteichosaIrai {
         }
         if (new RString(DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(前排他ロックキー);
             getHandler(requestDiv).onLoad();
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
@@ -255,25 +254,25 @@ public class NinteichosaIrai {
                             RString 調査項目連番 = new RString(data.get調査項目連番());
                             RString 調査項目文言 = get調査項目文言(厚労省IF識別コード, 調査項目連番);
                             RString 概況特記テキスト_イメージ区分 = RString.isNullOrEmpty(data.get概況特記テキスト_イメージ区分())
-                                    ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
+                                                      ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
                             csvWriter.writeLine(getChosaCsvData_99A(data, 厚労省IF識別コード, 調査項目連番, 調査項目文言, 概況特記テキスト_イメージ区分));
                         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
                             RString 調査項目連番 = new RString(data.get調査項目連番());
                             RString 調査項目文言 = get調査項目文言(厚労省IF識別コード, 調査項目連番);
                             RString 概況特記テキスト_イメージ区分 = RString.isNullOrEmpty(data.get概況特記テキスト_イメージ区分())
-                                    ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
+                                                      ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
                             csvWriter.writeLine(getChosaCsvData_02A(data, 厚労省IF識別コード, 調査項目連番, 調査項目文言, 概況特記テキスト_イメージ区分));
                         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
                             RString 調査項目連番 = new RString(data.get調査項目連番());
                             RString 調査項目文言 = get調査項目文言(厚労省IF識別コード, 調査項目連番);
                             RString 概況特記テキスト_イメージ区分 = RString.isNullOrEmpty(data.get概況特記テキスト_イメージ区分())
-                                    ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
+                                                      ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
                             csvWriter.writeLine(getChosaCsvData_06A(data, 厚労省IF識別コード, 調査項目連番, 調査項目文言, 概況特記テキスト_イメージ区分));
                         } else {
                             RString 調査項目連番 = new RString(data.get調査項目連番());
                             RString 調査項目文言 = get調査項目文言(厚労省IF識別コード, 調査項目連番);
                             RString 概況特記テキスト_イメージ区分 = RString.isNullOrEmpty(data.get概況特記テキスト_イメージ区分())
-                                    ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
+                                                      ? RString.EMPTY : TokkijikoTextImageKubun.toValue(data.get概況特記テキスト_イメージ区分()).get名称();
                             csvWriter.writeLine(getChosaCsvData(data, 厚労省IF識別コード, 調査項目連番, 調査項目文言, 概況特記テキスト_イメージ区分));
                         }
                         AccessLogger.log(AccessLogType.照会, personalData);
@@ -347,7 +346,7 @@ public class NinteichosaIrai {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnWaritukeShudo();
             if (vallidation.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
@@ -370,19 +369,19 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
-            List<dgNinteiTaskList_Row> rowList = requestDiv.getCcdTaskList().getCheckbox();
-            IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
-            List<ShinseishoKanriNo> list = new ArrayList<>();
-            for (dgNinteiTaskList_Row row : rowList) {
-                if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                    list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                }
+        List<dgNinteiTaskList_Row> rowList = requestDiv.getCcdTaskList().getCheckbox();
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        List<ShinseishoKanriNo> list = new ArrayList<>();
+        for (dgNinteiTaskList_Row row : rowList) {
+            if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
+                list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             }
-            model.set申請書管理番号リスト(list);
-            model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
-            requestDiv.setHiddenIuputModel(DataPassingConverter.serialize(model));
-            RealInitialLocker.release(前排他ロックキー);
-            return ResponseData.of(requestDiv).respond();
+        }
+        model.set申請書管理番号リスト(list);
+        model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
+        requestDiv.setHiddenIuputModel(DataPassingConverter.serialize(model));
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
@@ -410,7 +409,7 @@ public class NinteichosaIrai {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChousaIraiKanryo();
             if (vallidation.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
@@ -435,27 +434,27 @@ public class NinteichosaIrai {
                 row.getHokensha(),
                 row.getNinteiShinseiDay().getValue() != null
                 ? row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
                 row.getShinseiKubunShinseiji(),
                 row.getChosaIraiKanryoDay().getValue() != null
                 ? row.getChosaIraiKanryoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraishoHakkoDay().getValue() != null
                 ? row.getChosaIraishoHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChousahyoOutput().getValue() != null
                 ? row.getChousahyoOutput().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiDataShutsuryokuDay().getValue() != null
                 ? row.getChosaIraiDataShutsuryokuDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiKigen().getValue() != null
                 ? row.getChosaIraiKigen().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiKubun(),
                 row.getKonkaiChosaItakusaki(),
                 row.getKonkaiChosain(),
@@ -469,12 +468,12 @@ public class NinteichosaIrai {
                 row.getNyushoShisetsu(),
                 row.getChosaTokusokuHakkoDay().getValue() != null
                 ? row.getChosaTokusokuHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaTokusokuHoho(),
                 row.getChosaTokusokuCount() != null ? new RString(row.getChosaTokusokuCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraiKigen().getValue() != null
                 ? row.getChosaIraiKigen().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChikuCode(),
                 row.getChosaTokusokuChiku());
         return data;
@@ -1069,7 +1068,7 @@ public class NinteichosaIrai {
                 ? 調査結果入力用調査員データ.get割付地区コード().value() : RString.EMPTY,
                 調査結果入力用調査員データ.get割付地区コード() != null
                 ? CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
-                        new Code(調査結果入力用調査員データ.get割付地区コード().value()), FlexibleDate.getNowDate()) : RString.EMPTY,
+                new Code(調査結果入力用調査員データ.get割付地区コード().value()), FlexibleDate.getNowDate()) : RString.EMPTY,
                 AutoWaritsukeFlag.toValue(調査結果入力用調査員データ.is自動割付フラグ()).get名称(),
                 RString.isNullOrEmpty(調査結果入力用調査員データ.get機関の区分()) ? RString.EMPTY
                 : ChosaKikanKubun.toValue(調査結果入力用調査員データ.get機関の区分()).get名称(),

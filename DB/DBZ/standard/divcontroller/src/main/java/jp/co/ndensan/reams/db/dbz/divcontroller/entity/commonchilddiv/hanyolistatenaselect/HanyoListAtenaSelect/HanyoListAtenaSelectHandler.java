@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoCh
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -73,7 +74,7 @@ public class HanyoListAtenaSelectHandler {
     public void initialize() {
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村情報 != null && 市町村情報.get導入形態コード() != null
-            && DonyuKeitaiCode.toValue(市町村情報.get導入形態コード().getColumnValue()).is広域()) {
+                && DonyuKeitaiCode.toValue(市町村情報.get導入形態コード().getColumnValue()).is広域()) {
             setPanelVisibilityAt広域(div);
         } else {
             setPanelVisibilityAt単一(div);
@@ -323,6 +324,15 @@ public class HanyoListAtenaSelectHandler {
      */
     public void set保険者() {
         div.getCcdHokenshaList().loadHokenshaList();
+    }
+
+    /**
+     * 汎用リスト宛名抽出条件共有子Divの保険者の値（選択項）を設定します。
+     *
+     * @param 市町村コード
+     */
+    public void set保険者(LasdecCode 市町村コード) {
+        div.getCcdHokenshaList().setSelectedShichosonIfExist(市町村コード);
     }
 
     /**

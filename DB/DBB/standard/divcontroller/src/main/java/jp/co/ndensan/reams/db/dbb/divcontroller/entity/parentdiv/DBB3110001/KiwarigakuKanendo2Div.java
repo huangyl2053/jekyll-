@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * KiwarigakuKanendo2 のクラスファイル
@@ -136,8 +137,8 @@ public class KiwarigakuKanendo2Div extends Panel {
     }
 
     @JsonIgnore
-    public Label getGo2() {
-        return this.getKiwarigakuPanel3().getGo2();
+    public TextBoxNum getTxtGo2() {
+        return this.getKiwarigakuPanel3().getTxtGo2();
     }
 
     @JsonIgnore

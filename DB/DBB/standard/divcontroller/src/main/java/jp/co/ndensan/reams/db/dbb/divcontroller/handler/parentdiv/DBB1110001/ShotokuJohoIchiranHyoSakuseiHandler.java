@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohoichiranhyo.TaishoShuryoYmd;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShotokujohoIchiranhyoSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB111001.DBB111001_ShotokujohoIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.ShotokuJohoIchiranHyoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.dgShichosonIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyo;
@@ -261,10 +261,10 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
     /**
      * BatchParameterを作成のメソッドです。
      *
-     * @return ShotokujohoIchiranhyoSakuseiBatchParameter
+     * @return DBB111001_ShotokujohoIchiranhyoSakuseiParameter
      */
-    public ShotokujohoIchiranhyoSakuseiBatchParameter creatBatchParameter() {
-        ShotokujohoIchiranhyoSakuseiBatchParameter parameter = new ShotokujohoIchiranhyoSakuseiBatchParameter();
+    public DBB111001_ShotokujohoIchiranhyoSakuseiParameter creatBatchParameter() {
+        DBB111001_ShotokujohoIchiranhyoSakuseiParameter parameter = new DBB111001_ShotokujohoIchiranhyoSakuseiParameter();
         RString 導入形態コード = get導入形態コード();
         parameter.set導入形態コード(導入形態コード);
         RYear 処理年度 = new RYear(div.getDdlShoriNendo().getSelectedKey());

@@ -104,7 +104,7 @@ public class DbT4037HikazeNenkinTaishoshaDac {
      *
      * @param 被保番号 被保番号
      * @param 年金保険者コード 年金保険者コード
-     * @param 年金コード 年金コード
+     * @param 年金コードの先頭３桁 年金コードの先頭３桁
      * @param 現基礎年金番号 現基礎年金番号
      * @param 対象年 対象年
      * @param 作成年月日 作成年月日
@@ -112,7 +112,7 @@ public class DbT4037HikazeNenkinTaishoshaDac {
      */
     @Transaction
     public List<DbT4037HikazeNenkinTaishoshaEntity> select重複チェックデータ(RString 被保番号,
-            RString 年金保険者コード, RString 年金コード, RString 現基礎年金番号, RString 対象年, RString 作成年月日) {
+            RString 年金保険者コード, RString 年金コードの先頭３桁, RString 現基礎年金番号, RString 対象年, RString 作成年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -121,7 +121,7 @@ public class DbT4037HikazeNenkinTaishoshaDac {
                         and(
                                 eq(DbT4037HikazeNenkinTaishosha.hihokenshano, 被保番号),
                                 eq(DbT4037HikazeNenkinTaishosha.dtnenkinhokenshacode, 年金保険者コード),
-                                eq(DbT4037HikazeNenkinTaishosha.nenkincode, 年金コード),
+                                startsWith(DbT4037HikazeNenkinTaishosha.nenkincode, 年金コードの先頭３桁.toString()),
                                 eq(DbT4037HikazeNenkinTaishosha.genkisonenkinno, 現基礎年金番号),
                                 eq(DbT4037HikazeNenkinTaishosha.dttaishoy, 対象年),
                                 eq(DbT4037HikazeNenkinTaishosha.dtsakuseiymd, 作成年月日))).
@@ -162,14 +162,14 @@ public class DbT4037HikazeNenkinTaishoshaDac {
      *
      * @param 被保番号 被保番号
      * @param 年金保険者コード 年金保険者コード
-     * @param 年金コードの先頭３桁 年金コードの先頭３桁
+     * @param 年金コード 年金コード
      * @param 基礎年金番号 基礎年金番号
      * @param 対象年 対象年
      * @return List<DbT4037HikazeNenkinTaishoshaEntity>
      */
     @Transaction
     public List<DbT4037HikazeNenkinTaishoshaEntity> select訂正区分また各種区分(RString 被保番号,
-            RString 年金保険者コード, RString 年金コードの先頭３桁, RString 基礎年金番号, RString 対象年) {
+            RString 年金保険者コード, RString 年金コード, RString 基礎年金番号, RString 対象年) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -178,7 +178,7 @@ public class DbT4037HikazeNenkinTaishoshaDac {
                         and(
                                 eq(DbT4037HikazeNenkinTaishosha.hihokenshano, 被保番号),
                                 eq(DbT4037HikazeNenkinTaishosha.dtnenkinhokenshacode, 年金保険者コード),
-                                startsWith(DbT4037HikazeNenkinTaishosha.dtnenkincode, 年金コードの先頭３桁.toString()),
+                                eq(DbT4037HikazeNenkinTaishosha.dtnenkincode, 年金コード.toString()),
                                 eq(DbT4037HikazeNenkinTaishosha.kisonenkinno, 基礎年金番号),
                                 eq(DbT4037HikazeNenkinTaishosha.dttaishoy, 対象年))).
                 toList(DbT4037HikazeNenkinTaishoshaEntity.class);

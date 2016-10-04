@@ -427,12 +427,12 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
         DbT4102NinteiKekkaJoho 要介護認定結果情報 = 今回情報.get要介護認定結果情報();
         if (メニュID_職権取消一部喪失.equals(menuId) || outModel == null || 要介護認定結果情報.get申請書管理番号() == null
-                || outModel.get理由().equals(要介護認定結果情報.get審査会メモ())) {
+                || outModel.get認定内容().get審査会意見().equals(要介護認定結果情報.get介護認定審査会意見())) {
             return null;
         }
         if (メニュID_職権修正.equals(menuId) || (!メニュID_職権修正.equals(menuId) && !認定区分_却.equals(div.getTxtKubunKonkai().getValue()))) {
             DbT4102NinteiKekkaJohoBuilder build = 要介護認定結果情報.createBuilderForEdit();
-            build.set審査会メモ(outModel.get認定内容().get審査会意見());
+            build.set介護認定審査会意見(outModel.get認定内容().get審査会意見());
             return build.build();
         }
         return null;
@@ -1125,6 +1125,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         }
         if (!認定区分_却.equals(div.getTxtKubunKonkai().getValue()) && 受給者台帳.is直近フラグ()) {
             修正用builder.set認定有効期間終了年月日(div.getTxtYukoShuryobiZenkai().getValue());
+            修正用builder.set直近フラグ(false);
             if (outModel != null && outModel.get認定内容().get有効開始年月日().equals(div.getTxtYukoKaishibiZenkai().getValue())) {
                 修正用builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
                 修正用builder.setデータ区分(new Code(Datakubun.開始日同日の区分変更前情報.getコード()));

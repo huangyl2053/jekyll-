@@ -12,11 +12,16 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoFuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuBuilder;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKousei;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.YokunenFukaKoseiResult;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
@@ -54,12 +59,15 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -83,13 +91,25 @@ public class SokujiFukaKouseiMain {
     private static final RString メニューID_通知書発行後異動把握 = new RString("DBBMN32001");
     private static final RString メニューID_特徴仮算定賦課エラー一覧 = new RString("DBBMN33004");
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
+    private static final RString メニューID_特殊処理 = new RString("DBBMNC3001");
     private static final Code CODE_003 = new Code("0003");
-    private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
-    private static final int INT_3 = 3;
-    private static final int INT_4 = 4;
-    private static final int INT_5 = 5;
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
+    private static final int NUM_7 = 7;
+    private static final int NUM_8 = 8;
+    private static final int NUM_9 = 9;
+    private static final int NUM_10 = 10;
+    private static final int NUM_11 = 11;
+    private static final int NUM_12 = 12;
+    private static final int NUM_13 = 13;
+    private static final int NUM_14 = 14;
     private static final RString FLAG_CHANGE = new RString("1");
+    private static final RString TEXT_期 = new RString("期");
+    private static final RString 調定事由コード_更正 = new RString("04");
 
     /**
      * 画面の初期化メソッドです。
@@ -206,6 +226,7 @@ public class SokujiFukaKouseiMain {
         }
         NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
+        set画面入力項目を反映(div, 更正後);
         SokujiFukaKousei sokujiFukaKousei = handler.set保存処理(is特殊処理(), 更正前, 更正後, 更正前後徴収方法);
         if (sokujiFukaKousei.get賦課の情報リスト().isEmpty()) {
             throw new ApplicationException(DbbErrorMessages.賦課変更なしで保存不可.getMessage());
@@ -290,11 +311,10 @@ public class SokujiFukaKouseiMain {
     public ResponseData<SokujiFukaKouseiMainDiv> onChange_ddlKoseigoTsuchishoNo(SokujiFukaKouseiMainDiv div) {
         KoseiZengoChoshuHoho 更正前後徴収方法 = ViewStateHolder.get(ViewStateKeys.更正前後徴収方法, KoseiZengoChoshuHoho.class);
         List<KoseiZengoFuka> 更正前後賦課のリスト = ViewStateHolder.get(ViewStateKeys.更正前後賦課のリスト, List.class);
-        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         boolean is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
-        handler.set画面入力項目を反映(更正前, 更正後);
+        set画面入力項目を反映(div, 更正後);
         KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
         for (KoseiZengoFuka koseiZengoFuka : 更正前後賦課のリスト) {
             if (更正後.get通知書番号().getColumnValue().equals(koseiZengoFuka.get更正後().get通知書番号().getColumnValue())) {
@@ -352,7 +372,7 @@ public class SokujiFukaKouseiMain {
         List<KoseiZengoFuka> 更正前後賦課のリスト = ViewStateHolder.get(ViewStateKeys.更正前後賦課のリスト, List.class);
         FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
         if (前年度の情報を表示する.equals(div.getBtnYokunendoHyoji().getText())) {
-            賦課年度 = 賦課年度.plusYear(INT_1);
+            賦課年度 = 賦課年度.plusYear(NUM_1);
         }
         TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
@@ -397,10 +417,9 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnYokunendoHyoji(SokujiFukaKouseiMainDiv div) {
-        NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         SokujiFukaKouseiMainHandler handler = getHandler(div);
-        boolean isChange = handler.set画面入力項目を反映(更正前, 更正後);
+        boolean isChange = set画面入力項目を反映(div, 更正後);
         if (isChange) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzQuestionMessages.変更未保存の確認.getMessage()).respond();
@@ -421,7 +440,7 @@ public class SokujiFukaKouseiMain {
             div.getBtnYokunendoHyoji().setText(前年度の情報を表示する);
             is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
             SokujiFukaKoseiService service = SokujiFukaKoseiService.createInstance();
-            賦課年度 = 賦課年度.plusYear(INT_1);
+            賦課年度 = 賦課年度.plusYear(NUM_1);
             YokunenFukaKoseiResult result = service.do翌年度更正(賦課年度, 被保険者番号);
             更正前後賦課のリスト = result.get更正前後賦課のリスト();
             handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
@@ -433,7 +452,7 @@ public class SokujiFukaKouseiMain {
                     更正後賦課リスト.get通知書番号(), 更正前後徴収方法);
             handler.initialize更正前後データ(is特殊処理(), 更正前賦課リスト, 更正後賦課リスト,
                     更正前後徴収方法, is本算定処理済フラグ);
-            handler.set画面項目入力不可();
+            set画面項目入力不可(div);
             if (!is特徴異動情報作成が処理済み()) {
                 SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
                 tablePanel.getTxtTokuchoKoseiGo04().setReadOnly(false);
@@ -509,11 +528,11 @@ public class SokujiFukaKouseiMain {
         年度分賦課リスト.set賦課年度(賦課年度);
         年度分賦課リスト.set通知書番号(通知書番号);
         FukaJoho 最新賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度);
-        FukaJoho 過年度1賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_1));
-        FukaJoho 過年度2賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_2));
-        FukaJoho 過年度3賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_3));
-        FukaJoho 過年度4賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_4));
-        FukaJoho 過年度5賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(INT_5));
+        FukaJoho 過年度1賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(NUM_1));
+        FukaJoho 過年度2賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(NUM_2));
+        FukaJoho 過年度3賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(NUM_3));
+        FukaJoho 過年度4賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(NUM_4));
+        FukaJoho 過年度5賦課の情報 = get賦課の情報By調定年度(賦課の情報リスト, 賦課年度.plusYear(NUM_5));
         boolean has過年度賦課 = Boolean.FALSE;
         年度分賦課リスト.set現年度(最新賦課の情報);
         年度分賦課リスト.set賦課期日(最新賦課の情報.get賦課期日());
@@ -569,7 +588,8 @@ public class SokujiFukaKouseiMain {
     }
 
     private boolean is特殊処理() {
-        return メニューID_即時賦課更正.equals(ResponseHolder.getMenuID());
+        return メニューID_即時賦課更正.equals(ResponseHolder.getMenuID())
+                || メニューID_特殊処理.equals(ResponseHolder.getMenuID());
     }
 
     private boolean is更正前と状態変更なし(List<KoseiZengoFuka> 更正前後賦課のリスト) {
@@ -608,7 +628,8 @@ public class SokujiFukaKouseiMain {
             通知書番号 = 賦課エラー情報.get通知書番号();
             被保険者番号 = 賦課エラー情報.get被保険者番号();
             識別コード = 賦課エラー情報.get識別コード();
-        } else if (メニューID_即時賦課更正.equals(メニューID)) {
+        } else if (メニューID_即時賦課更正.equals(メニューID)
+                || メニューID_特殊処理.equals(メニューID)) {
             FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             賦課年度 = 賦課対象者.get賦課年度();
             通知書番号 = 賦課対象者.get通知書番号();
@@ -693,5 +714,295 @@ public class SokujiFukaKouseiMain {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         RealInitialLocker.release(前排他キー);
+    }
+
+    private void set画面項目入力不可(SokujiFukaKouseiMainDiv div) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getTxtTokuchoKoseiGo04().setReadOnly(true);
+        tablePanel.getTxtTokuchoKoseiGo06().setReadOnly(true);
+        tablePanel.getTxtTokuchoKoseiGo08().setReadOnly(true);
+        tablePanel.getTxtTokuchoKoseiGo10().setReadOnly(true);
+        tablePanel.getTxtTokuchoKoseiGo12().setReadOnly(true);
+        tablePanel.getTxtTokuchoKoseiGo02().setReadOnly(true);
+
+        tablePanel.getTxtFuchoKoseiGo04().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo05().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo06().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo07().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo08().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo09().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo10().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo11().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo12().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo01().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo02().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGo03().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGoYoku04().setReadOnly(true);
+        tablePanel.getTxtFuchoKoseiGoYoku05().setReadOnly(true);
+
+        tablePanel.getTxtFuchoNokigen04().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen05().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen06().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen07().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen08().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen09().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen10().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen11().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen12().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen01().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen02().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigen03().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigenYoku04().setReadOnly(true);
+        tablePanel.getTxtFuchoNokigenYoku05().setReadOnly(true);
+    }
+
+    private boolean set画面入力項目を反映(SokujiFukaKouseiMainDiv div, NendobunFukaList 更正後) {
+        Boolean is差異がある = Boolean.FALSE;
+        FukaJoho 最新賦課の情報 = 更正後.get最新賦課の情報();
+        is差異がある = set期別金額(最新賦課の情報, NUM_1, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_1),
+                null, is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_2, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_2),
+                null, is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_3, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_3),
+                null, is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_4, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_4),
+                null, is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_5, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_5),
+                null, is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_6, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_6),
+                null, is差異がある);
+
+        is差異がある = set期別金額(最新賦課の情報, NUM_1, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_1),
+                get普通徴収期TextBoxDate(div, NUM_1), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_2, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_2),
+                get普通徴収期TextBoxDate(div, NUM_2), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_3, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_3),
+                get普通徴収期TextBoxDate(div, NUM_3), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_4, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_4),
+                get普通徴収期TextBoxDate(div, NUM_4), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_5, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_5),
+                get普通徴収期TextBoxDate(div, NUM_5), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_6, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_6),
+                get普通徴収期TextBoxDate(div, NUM_6), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_7, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_7),
+                get普通徴収期TextBoxDate(div, NUM_7), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_8, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_8),
+                get普通徴収期TextBoxDate(div, NUM_8), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_9, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_9),
+                get普通徴収期TextBoxDate(div, NUM_9), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_10, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_10),
+                get普通徴収期TextBoxDate(div, NUM_10), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_11, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_11),
+                get普通徴収期TextBoxDate(div, NUM_11), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_12, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_12),
+                get普通徴収期TextBoxDate(div, NUM_12), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_13, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_13),
+                get普通徴収期TextBoxDate(div, NUM_13), is差異がある);
+        is差異がある = set期別金額(最新賦課の情報, NUM_14, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_14),
+                get普通徴収期TextBoxDate(div, NUM_14), is差異がある);
+        boolean is過年度を反映 = Boolean.FALSE;
+        if (更正後.get過年度5() != null) {
+            is過年度を反映 = Boolean.TRUE;
+            更正後.set過年度5(最新賦課の情報);
+        }
+        if (!is過年度を反映 && 更正後.get過年度4() != null) {
+            is過年度を反映 = Boolean.TRUE;
+            更正後.set過年度4(最新賦課の情報);
+        }
+        if (!is過年度を反映 && 更正後.get過年度3() != null) {
+            is過年度を反映 = Boolean.TRUE;
+            更正後.set過年度3(最新賦課の情報);
+        }
+        if (!is過年度を反映 && 更正後.get過年度2() != null) {
+            is過年度を反映 = Boolean.TRUE;
+            更正後.set過年度2(最新賦課の情報);
+        }
+        if (!is過年度を反映 && 更正後.get過年度1() != null) {
+            is過年度を反映 = Boolean.TRUE;
+            更正後.set過年度1(最新賦課の情報);
+        }
+        if (!is過年度を反映) {
+            更正後.set現年度(最新賦課の情報);
+        } else {
+            更正後.set現年度(更正後.get現年度());
+        }
+        return is差異がある;
+    }
+
+    private TextBoxNum get特別徴収期TextBoxNum(SokujiFukaKouseiMainDiv div, int 期) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        if (is有効の期(tablePanel.getLblTokuchoKi04().getText(), 期)) {
+            return tablePanel.getTxtTokuchoKoseiGo04();
+        }
+        if (is有効の期(tablePanel.getLblTokuchoKi06().getText(), 期)) {
+            return tablePanel.getTxtTokuchoKoseiGo06();
+        }
+        if (is有効の期(tablePanel.getLblTokuchoKi08().getText(), 期)) {
+            return tablePanel.getTxtTokuchoKoseiGo08();
+        }
+        if (is有効の期(tablePanel.getLblTokuchoKi10().getText(), 期)) {
+            return tablePanel.getTxtTokuchoKoseiGo10();
+        }
+        if (is有効の期(tablePanel.getLblTokuchoKi12().getText(), 期)) {
+            return tablePanel.getTxtTokuchoKoseiGo12();
+        }
+        if (is有効の期(tablePanel.getLblTokuchoKi02().getText(), 期)) {
+            return tablePanel.getTxtTokuchoKoseiGo02();
+        }
+        return null;
+    }
+
+    private TextBoxNum get普通徴収期TextBoxNum(SokujiFukaKouseiMainDiv div, int 期) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        if (is有効の期(tablePanel.getLblFuchoKi04().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo04();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi05().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo05();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi06().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo06();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi07().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo07();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi08().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo08();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi09().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo09();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi10().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo10();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi11().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo11();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi12().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo12();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi01().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo01();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi02().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo02();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi03().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGo03();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKiYoku04().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGoYoku04();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKiYoku05().getText(), 期)) {
+            return tablePanel.getTxtFuchoKoseiGoYoku05();
+        }
+        return null;
+    }
+
+    private TextBoxDate get普通徴収期TextBoxDate(SokujiFukaKouseiMainDiv div, int 期) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        if (is有効の期(tablePanel.getLblFuchoKi04().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen04();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi05().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen05();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi06().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen06();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi07().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen07();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi08().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen08();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi09().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen09();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi10().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen10();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi11().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen11();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi12().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen12();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi01().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen01();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi02().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen02();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKi03().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigen03();
+        }
+        if (is有効の期(tablePanel.getTxtFuchoNokigenYoku04().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigenYoku04();
+        }
+        if (is有効の期(tablePanel.getLblFuchoKiYoku05().getText(), 期)) {
+            return tablePanel.getTxtFuchoNokigenYoku05();
+        }
+        return null;
+    }
+
+    private boolean is有効の期(RString text, int 期) {
+        return !RString.EMPTY.equals(text)
+                && 期 == Integer.valueOf(text.replace(TEXT_期, RString.EMPTY).toString());
+    }
+
+    private boolean set期別金額(FukaJoho 賦課の情報, int 期, RString 徴収方法期別, TextBoxNum textBoxNum,
+            TextBoxDate textBoxDate, Boolean is差異がある) {
+        if (賦課の情報 == null || 賦課の情報.getKibetsuList().isEmpty() || textBoxNum == null) {
+            return is差異がある;
+        }
+        Decimal 期別金額 = textBoxNum.getValue() == null ? Decimal.ZERO : textBoxNum.getValue();
+        List<Kibetsu> 介護期別List = new ArrayList<>(賦課の情報.getKibetsuList());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            if (徴収方法期別.equals(介護期別.get徴収方法())
+                    && 期 == 介護期別.get期()) {
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+                ChoteiKyotsuBuilder choteiKyotsuBuilder = 介護期別.getChoteiKyotsu(identifier).createBuilderForEdit();
+                boolean isChange = Boolean.FALSE;
+                if (!期別金額.equals(介護期別.getChoteiKyotsu(identifier).get調定額()) && !textBoxNum.isReadOnly()) {
+                    is差異がある = Boolean.TRUE;
+                    isChange = Boolean.TRUE;
+                    choteiKyotsuBuilder.set調定額(期別金額);
+                }
+                if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法期別)
+                        && !介護期別.getChoteiKyotsu(identifier).get納期限().equals(textBoxDate.getValue())
+                        && !textBoxDate.isReadOnly()) {
+                    is差異がある = Boolean.TRUE;
+                    isChange = Boolean.TRUE;
+                    choteiKyotsuBuilder.set納期限(textBoxDate.getValue());
+                }
+                if (isChange) {
+                    Kibetsu 介護期別情報 = 介護期別.createBuilderForEdit().setKibetsu(choteiKyotsuBuilder.build().modifiedModel()).build();
+                    賦課の情報.createBuilderForEdit().setKibetsu(介護期別情報);
+                }
+                return is差異がある;
+            }
+        }
+        if (Decimal.ZERO.compareTo(textBoxNum.getValue()) < 0) {
+            ChoteiKyotsu 調定共通 = new ChoteiKyotsu(0L).createBuilderForEdit().
+                    set収納ID(0L).
+                    set会計年度(new RYear(賦課の情報.get賦課年度().getYearValue())).
+                    set処理年度(new RYear(賦課の情報.get賦課年度().getYearValue())).
+                    set調定事由コード(調定事由コード_更正).
+                    set調定年月日(賦課の情報.get調定日時().getDate()).
+                    set調定額(textBoxNum.getValue()).
+                    set消費税額(Decimal.ZERO).
+                    set納期限(textBoxDate.getValue()).
+                    set賦課処理状況(Boolean.FALSE).build();
+            Kibetsu 介護期別情報 = new Kibetsu(
+                    賦課の情報.get調定年度(),
+                    賦課の情報.get賦課年度(),
+                    賦課の情報.get通知書番号(),
+                    賦課の情報.get履歴番号(),
+                    徴収方法期別,
+                    期).createBuilderForEdit().set調定ID(Decimal.ZERO).setKibetsu(調定共通).build();
+            賦課の情報.createBuilderForEdit().setKibetsu(介護期別情報);
+        }
+        return is差異がある;
     }
 }

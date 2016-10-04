@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 /**
  * 認定用の保険者リストを取得します。
  */
-class KaigoNinteiHokenshaListLoader {
+final class KaigoNinteiHokenshaListLoader {
 
     private KaigoNinteiHokenshaListLoader() {
     }

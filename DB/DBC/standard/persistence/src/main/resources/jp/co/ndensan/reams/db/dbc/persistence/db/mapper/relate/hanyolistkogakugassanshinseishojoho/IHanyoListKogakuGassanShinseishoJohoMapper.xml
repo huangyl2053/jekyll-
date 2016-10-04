@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-3103-020 fuyanling -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkogakugassanshinseishojoho.IHanyoListKogakuGassanShinseishoJohoMapper">
+    <select resultOrdered="true" id="getCSVData"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoMybatisParameter"
+            resultMap="resultMap_HanyoListKogakuGassanShinseishoJohoEntity" fetchSize="500">
+        <include refid="selectHanyoListKogakuGassanShinseishoJohoEntity" />
+    </select>
+    <sql id="selectHanyoListKogakuGassanShinseishoJohoEntity">
+       WITH 高額合算申請書1 AS(
+        SELECT DISTINCT
+        最新被保台帳."shikibetsuCode" AS 最新被保台帳_識別コード,
+        高額合算申請書."taishoNendo" AS 高額合算申請書_対象年度,
+        高額合算申請書."hokenshaNo" AS 高額合算申請書_保険者番号,
+        高額合算申請書."seiriNo" AS 高額合算申請書_整理番号,
+        高額合算申請書."rirekiNo" AS 高額合算申請書_履歴番号,
+        高額合算申請書."shinseiJokyoKubun" AS 高額合算申請書_申請状況区分,
+        高額合算申請書."shinseiYMD" AS 高額合算申請書_申請年月日,
+        高額合算申請書."shikyuShinseishoSeiriNo" AS 高額合算申請書_支給申請書整理番号,
+        高額合算申請書."kokuhoShikyuShinseishoSeiriNo" AS 高額合算申請書_国保支給申請書整理番号,
+        高額合算申請書."shikyuShinseiKubun" AS 高額合算申請書_支給申請区分,
+        高額合算申請書."taishoKeisanKaishiYMD" AS 高額合算申請書_対象計算期間開始年月日,
+        高額合算申請書."taishoKeisanShuryoYMD" AS 高額合算申請書_対象計算期間終了年月日,
+        高額合算申請書."shikyuShinseiKeitai" AS 高額合算申請書_支給申請形態,
+        高額合算申請書."jikoFutanKofuUmu" AS 高額合算申請書_交付申請の有無,
+        高額合算申請書."shinseiDaihyoshaShimei" AS 高額合算申請書_申請代表者氏名,
+        高額合算申請書."shotokuKubun" AS 高額合算申請書_所得区分,
+        高額合算申請書."over70_ShotokuKubun" AS 高額合算申請書_70歳以上の者に係る所得区分,
+        高額合算申請書."shikakuSoshitsuYMD" AS 高額合算申請書_資格喪失年月日,
+        高額合算申請書."shikakuSoshitsuJiyu" AS 高額合算申請書_資格喪失事由,
+        高額合算申請書."kanyuKaishiYMD" AS 高額合算申請書_加入期間開始年月日,
+        高額合算申請書."kanyuShuryoYMD" AS 高額合算申請書_加入期間終了年月日,
+        高額合算申請書."kokuho_HokenshaNo" AS 高額合算申請書_国保保険者番号,
+        高額合算申請書."kokuho_HihokenshaShoNo" AS 高額合算申請書_国保保険者名称,
+        高額合算申請書."kokuho_HihokenshaShoKigo" AS 高額合算申請書_国保被保険者証記号,
+        高額合算申請書."kokuho_HihokenshaShoNo" AS 高額合算申請書_国保被保険者証番号,
+        高額合算申請書."kokuho_SetaiNo" AS 高額合算申請書_国保世帯番号,
+        高額合算申請書."kokuho_Zokugara" AS 高額合算申請書_国保続柄,
+        高額合算申請書."kokuho_KanyuKaishiYMD" AS 高額合算申請書_国保加入期間開始年月日,
+        高額合算申請書."kokuho_KanyuShuryoYMD" AS 高額合算申請書_国保加入期間終了年月日,
+        高額合算申請書."koki_HokenshaNo" AS 高額合算申請書_後期保険者番号,
+        高額合算申請書."koki_KoikiRengoMeisho" AS 高額合算申請書_後期広域連合名称,
+        高額合算申請書."koki_HihokenshaNo" AS 高額合算申請書_後期被保険者番号,
+        高額合算申請書."koki_KanyuKaishiYMD" AS 高額合算申請書_後期加入期間開始年月日,
+        高額合算申請書."koki_KanyuShuryoYMD" AS 高額合算申請書_後期加入期間終了年月日,
+        高額合算申請書."shiharaiHohoKubun" AS 高額合算申請書_支払方法区分,
+        高額合算申請書."shiharaiBasho" AS 高額合算申請書_支払場所,
+        高額合算申請書."shiharaiKaishiYMD" AS 高額合算申請書_支払期間開始年月日,
+        高額合算申請書."shiharaiShuryoYMD" AS 高額合算申請書_支払期間終了年月日,
+        高額合算申請書."shiharaiKaishiTime" AS 高額合算申請書_支払期間開始時間,
+        高額合算申請書."shiharaiShuryoTime" AS 高額合算申請書_支払期間終了時間,
+        高額合算申請書."kozaID" AS 高額合算申請書_口座ID,
+        高額合算申請書."shikyuShinseisho_SofuYM"  AS 高額合算申請書_支給申請書情報送付年月,
+        高額合算申請書."jikoFutan_KeisanYM" AS 高額合算申請書_自己負担額計算年月, 
+        高額合算申請書."hihokenshaNo" AS 高額合算申請書_被保険者番号,
+        高額合算申請書加入歴01."hokenshaMei" AS 高額合算申請書加入歴01_保険者名 ,
+        高額合算申請書加入歴01."kanyuKaishiYMD" AS 高額合算申請書加入歴01_加入期間開始年月日 ,
+        高額合算申請書加入歴01."kanyuShuryoYMD" AS 高額合算申請書加入歴01_加入期間終了年月日 ,
+        高額合算申請書加入歴01."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴01_整理番号 ,
+        高額合算申請書加入歴02."hokenshaMei" AS 高額合算申請書加入歴02_保険者名 ,
+        高額合算申請書加入歴02."kanyuKaishiYMD" AS 高額合算申請書加入歴02_加入期間開始年月日 ,
+        高額合算申請書加入歴02."kanyuShuryoYMD" AS 高額合算申請書加入歴02_加入期間終了年月日 ,
+        高額合算申請書加入歴02."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴02_整理番号 ,
+        高額合算申請書加入歴03."hokenshaMei" AS 高額合算申請書加入歴03_保険者名 ,
+        高額合算申請書加入歴03."kanyuKaishiYMD" AS 高額合算申請書加入歴03_加入期間開始年月日 ,
+        高額合算申請書加入歴03."kanyuShuryoYMD" AS 高額合算申請書加入歴03_加入期間終了年月日 ,
+        高額合算申請書加入歴03."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴03_整理番号 ,
+        高額合算申請書加入歴04."hokenshaMei" AS 高額合算申請書加入歴04_保険者名 ,
+        高額合算申請書加入歴04."kanyuKaishiYMD" AS 高額合算申請書加入歴04_加入期間開始年月日 ,
+        高額合算申請書加入歴04."kanyuShuryoYMD" AS 高額合算申請書加入歴04_加入期間終了年月日 ,
+        高額合算申請書加入歴04."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴04_整理番号 ,
+        高額合算申請書加入歴05."hokenshaMei" AS 高額合算申請書加入歴05_保険者名 ,
+        高額合算申請書加入歴05."kanyuKaishiYMD" AS 高額合算申請書加入歴05_加入期間開始年月日 ,
+        高額合算申請書加入歴05."kanyuShuryoYMD" AS 高額合算申請書加入歴05_加入期間終了年月日 ,
+        高額合算申請書加入歴05."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴05_整理番号 ,
+        高額合算申請書加入歴06."hokenshaMei" AS 高額合算申請書加入歴06_保険者名 ,
+        高額合算申請書加入歴06."kanyuKaishiYMD" AS 高額合算申請書加入歴06_加入期間開始年月日 ,
+        高額合算申請書加入歴06."kanyuShuryoYMD" AS 高額合算申請書加入歴06_加入期間終了年月日 ,
+        高額合算申請書加入歴06."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴06_整理番号 ,
+        高額合算申請書加入歴07."hokenshaMei" AS 高額合算申請書加入歴07_保険者名 ,
+        高額合算申請書加入歴07."kanyuKaishiYMD" AS 高額合算申請書加入歴07_加入期間開始年月日 ,
+        高額合算申請書加入歴07."kanyuShuryoYMD" AS 高額合算申請書加入歴07_加入期間終了年月日 ,
+        高額合算申請書加入歴07."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴07_整理番号 ,
+        高額合算申請書加入歴08."hokenshaMei" AS 高額合算申請書加入歴08_保険者名 ,
+        高額合算申請書加入歴08."kanyuKaishiYMD" AS 高額合算申請書加入歴08_加入期間開始年月日 ,
+        高額合算申請書加入歴08."kanyuShuryoYMD" AS 高額合算申請書加入歴08_加入期間終了年月日 ,
+        高額合算申請書加入歴08."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴08_整理番号 ,
+        高額合算申請書加入歴09."hokenshaMei" AS 高額合算申請書加入歴09_保険者名 ,
+        高額合算申請書加入歴09."kanyuKaishiYMD" AS 高額合算申請書加入歴09_加入期間開始年月日 ,
+        高額合算申請書加入歴09."kanyuShuryoYMD" AS 高額合算申請書加入歴09_加入期間終了年月日 ,
+        高額合算申請書加入歴09."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴09_整理番号 ,
+        高額合算申請書加入歴10."hokenshaMei" AS 高額合算申請書加入歴10_保険者名 ,
+        高額合算申請書加入歴10."kanyuKaishiYMD" AS 高額合算申請書加入歴10_加入期間開始年月日 ,
+        高額合算申請書加入歴10."kanyuShuryoYMD" AS 高額合算申請書加入歴10_加入期間終了年月日 ,
+        高額合算申請書加入歴10."jikoFutanShomeisho_SeiriNo" AS 高額合算申請書加入歴10_整理番号 ,
+        高額合算申請書加入歴10."hokenshaNo" AS 高額合算申請書加入歴_保険者番号,
+        最新被保台帳."shichosonCode" AS 最新被保台帳_市町村コード,
+        最新被保台帳."hihokenshaNo" AS 最新被保台帳_被保険者番号,
+        最新被保台帳."shikakuShutokuJiyuCode" AS 最新被保台帳_資格取得事由コード,
+        最新被保台帳."shikakuShutokuYMD" AS 最新被保台帳_資格取得年月日,
+        最新被保台帳."shikakuShutokuTodokedeYMD" AS 最新被保台帳_資格取得届出年月日,
+        最新被保台帳."shikakuSoshitsuJiyuCode" AS 最新被保台帳_資格喪失事由コード,
+        最新被保台帳."shikakuSoshitsuYMD" AS 最新被保台帳_資格喪失年月日,
+        最新被保台帳."shikakuSoshitsuTodokedeYMD" AS 最新被保台帳_資格喪失届出年月日,
+        最新被保台帳."hihokennshaKubunCode" AS 最新被保台帳_被保険者区分コード,
+        最新被保台帳."jushochiTokureiFlag" AS 最新被保台帳_住所地特例フラグ,
+        受給者台帳_受給申請事由 AS 受給者台帳_受給申請事由,
+        受給者台帳_要支援者認定申請区分 AS 受給者台帳_要支援者認定申請区分,
+        受給者台帳_受給申請年月日 AS 受給者台帳_受給申請年月日,
+        受給者台帳_要介護認定状態区分コード AS 受給者台帳_要介護認定状態区分コード,
+        受給者台帳_認定有効期間開始年月日 AS 受給者台帳_認定有効期間開始年月日,
+        受給者台帳_認定有効期間終了年月日 AS 受給者台帳_認定有効期間終了年月日,
+        受給者台帳_認定年月日 AS 受給者台帳_認定年月日,
+        受給者台帳_旧措置者フラグ AS 受給者台帳_旧措置者フラグ,
+        受給者台帳_みなし要介護区分コード AS 受給者台帳_みなし要介護区分コード,
+        受給者台帳_直近異動事由コード AS 受給者台帳_直近異動事由コード
+        FROM 
+        rgdb."DbT3068KogakuGassanShinseisho" AS 高額合算申請書 
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴01 
+        ON 高額合算申請書加入歴01."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴01."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴01."hokenshaNo" = 高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴01."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴01."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴01."kanyurekiNo" = '01'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴02 
+        ON 高額合算申請書加入歴02."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴02."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴02."hokenshaNo" = 高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴02."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴02."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴02."kanyurekiNo" ='02'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴03 
+        ON 高額合算申請書加入歴03."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴03."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴03."hokenshaNo" =高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴03."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴03."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴03."kanyurekiNo" = '03'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴04 
+        ON 高額合算申請書加入歴04."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴04."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴04."hokenshaNo" =高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴04."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴04."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴04."kanyurekiNo" = '04'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴05 
+        ON 高額合算申請書加入歴05."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴05."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴05."hokenshaNo" =高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴05."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴05."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴05."kanyurekiNo" = '05'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴06 
+        ON 高額合算申請書加入歴06."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴06."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴06."hokenshaNo" =高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴06."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴06."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴06."kanyurekiNo" = '06'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴07 
+        ON 高額合算申請書加入歴07."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴07."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴07."hokenshaNo" =高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴07."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴07."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴07."kanyurekiNo" = '07'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴08 
+        ON 高額合算申請書加入歴08."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴08."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴08."hokenshaNo" =高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴08."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴08."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴08."kanyurekiNo" = '08'  
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴09 
+        ON 高額合算申請書加入歴09."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴09."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴09."hokenshaNo" =高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴09."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴09."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴09."kanyurekiNo" = '09'
+        LEFT JOIN 
+        rgdb."DbT3069KogakuGassanShinseishoKanyureki" AS 高額合算申請書加入歴10 
+        ON 高額合算申請書加入歴10."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+        高額合算申請書加入歴10."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+        高額合算申請書加入歴10."hokenshaNo" = 高額合算申請書."hokenshaNo" AND 
+        高額合算申請書加入歴10."seiriNo" = 高額合算申請書."seiriNo" AND 
+        高額合算申請書加入歴10."rirekiNo" = 高額合算申請書."rirekiNo" AND 
+        高額合算申請書加入歴10."kanyurekiNo" = '10'  
+        INNER JOIN 
+        rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳 
+        ON 最新被保台帳."hihokenshaNo" = 高額合算申請書."hihokenshaNo"  
+       
+        LEFT JOIN (
+        SELECT * 
+        FROM (SELECT 
+        合算申請書_受給."hihokenshaNo" AS 被保険者番号_受給者台帳, 
+        合算申請書_受給."taishoNendo" AS 受給者台帳_対象年度, 
+        合算申請書_受給."hokenshaNo" AS 受給者台帳_保険者番号, 
+        合算申請書_受給."seiriNo" AS 受給者台帳_整理番号, 
+        合算申請書_受給."taishoKeisanKaishiYMD" AS 受給者台帳_対象計算期間開始年月日,
+        合算申請書_受給."taishoKeisanShuryoYMD" AS 受給者台帳_対象計算期間終了年月日, 
+        受給JOIN."shichosonCode" AS 受給者台帳_市町村コード,
+        受給JOIN."hihokenshaNo" AS 受給者台帳_被保険者番号,
+        受給JOIN."rirekiNo" AS 受給者台帳_履歴番号,
+        受給JOIN."edaban" AS 受給者台帳_枝番, 
+        受給JOIN."jukyuShinseiJiyu" AS 受給者台帳_受給申請事由,
+        受給JOIN."yoshienshaNinteiShinseiFlag" AS 受給者台帳_要支援者認定申請区分,
+        受給JOIN."jukyuShinseiYMD" AS 受給者台帳_受給申請年月日, 
+        受給JOIN."yokaigoJotaiKubunCode" AS 受給者台帳_要介護認定状態区分コード,
+        受給JOIN."ninteiYukoKikanKaishiYMD" AS 受給者台帳_認定有効期間開始年月日,
+        受給JOIN."ninteiYukoKikanShuryoYMD" AS 受給者台帳_認定有効期間終了年月日, 
+        受給JOIN."ninteiYMD" AS 受給者台帳_認定年月日,
+        受給JOIN."kyuSochishaFlag" AS 受給者台帳_旧措置者フラグ,
+        受給JOIN."minashiCode" AS 受給者台帳_みなし要介護区分コード,
+        受給JOIN."chokkinIdoJiyuCode" AS 受給者台帳_直近異動事由コード, 
+        row_number() over(partition by 受給JOIN."shichosonCode",
+        受給JOIN."hihokenshaNo"
+        order by 受給JOIN."rirekiNo" DESC ,
+        受給JOIN."edaban" DESC) AS 受給者台帳_番号 
+        FROM rgdb."DbT3068KogakuGassanShinseisho" AS 合算申請書_受給 
+        INNER JOIN 
+        rgdb."DbT4001JukyushaDaicho" AS 受給JOIN 
+        ON 受給JOIN."hihokenshaNo" = 合算申請書_受給."hihokenshaNo" AND 
+        受給JOIN."yukoMukoKubun" = '1' AND 
+        受給JOIN."logicalDeletedFlag" = False
+        <!--TODO QA1350-->
+<!--        AND  SUBSTR(受給JOIN."ninteiYukoKikanKaishiYMD",1, 6)  <![CDATA[<=]]> 合算申請書_受給.サービス提供年月
+        AND  SUBSTR(受給JOIN."ninteiYukoKikanShuryoYMD", 1,6)  <![CDATA[>=]]> 合算申請書_受給.サービス提供年月 -->
+        ) AS 受給者台帳Tmp 
+        WHERE 受給者台帳Tmp.受給者台帳_番号 = '1' )  AS 受給者台帳
+        ON 被保険者番号_受給者台帳 = 高額合算申請書."hihokenshaNo" AND
+        受給者台帳_対象年度 = 高額合算申請書."taishoNendo" AND
+        受給者台帳_保険者番号 = 高額合算申請書."hokenshaNo" AND
+        受給者台帳_整理番号 = 高額合算申請書."seiriNo"
+
+        <if test="抽出区分 != null and !抽出区分.isEmpty()"> 
+            INNER JOIN (
+            SELECT 
+            "hihokenshaNo",
+            "taishoNendo",
+            "hokenshaNo",
+            "seiriNo" ,
+            "rirekiNo" ,
+            高額合算申請書_番号
+            FROM ( 
+            SELECT 
+            *,
+            ROW_NUMBER() OVER (PARTITION BY DbT3068."hihokenshaNo",
+            DbT3068."taishoNendo",
+            DbT3068."hokenshaNo",
+            DbT3068."seiriNo" 
+            ORDER BY DbT3068."rirekiNo" DESC) AS 高額合算申請書_番号 
+            FROM 
+            rgdb."DbT3068KogakuGassanShinseisho" AS DbT3068 
+            WHERE 
+            DbT3068."isDeleted" = false 
+            ) AS 高額合算申請書2 
+            WHERE 
+            高額合算申請書2.高額合算申請書_番号 = 1 
+            )  AS 高額合算申請書3 
+            ON (高額合算申請書3."hihokenshaNo" = 高額合算申請書."hihokenshaNo" AND 
+            高額合算申請書3."taishoNendo" = 高額合算申請書."taishoNendo" AND 
+            高額合算申請書3."hokenshaNo" = 高額合算申請書."hokenshaNo" AND 
+            高額合算申請書3."seiriNo" = 高額合算申請書."seiriNo" AND 
+            高額合算申請書3."rirekiNo" = 高額合算申請書."rirekiNo") 
+        </if> 
+        WHERE 高額合算申請書."isDeleted" = false 
+ 
+        <if test=" 申請状況区分 !=null and !申請状況区分.isEmpty()"> 
+            AND 高額合算申請書."shinseiJokyoKubun" = #{申請状況区分} 
+        </if> 
+        <if test=" 対象年度 !=null and ! 対象年度.isEmpty()"> 
+            AND 高額合算申請書."taishoNendo" = #{対象年度}
+        </if> 
+        <if test=" 申請年月日From!=null and !申請年月日From .isEmpty()"> 
+            AND 高額合算申請書."shinseiYMD" <![CDATA[>=]]> #{申請年月日From} 
+        </if> 
+        <if test=" 申請年月日To!=null and !申請年月日To .isEmpty()"> 
+            AND 高額合算申請書."shinseiYMD" <![CDATA[<=]]> #{申請年月日To} 
+        </if> 
+        <if test=" 支給申請書整理番号From!=null and ! 支給申請書整理番号From.isEmpty()"> 
+            AND 高額合算申請書."seiriNo" <![CDATA[>=]]> #{支給申請書整理番号From} 
+        </if> 
+        <if test=" 支給申請書整理番号To!=null and !支給申請書整理番号To .isEmpty()"> 
+            AND 高額合算申請書."seiriNo" <![CDATA[<=]]> #{支給申請書整理番号To} 
+        </if> 
+        <if test=" 送付年月From!=null and ! 送付年月From.isEmpty()"> 
+            AND 高額合算申請書."shikyuShinseisho_SofuYM" <![CDATA[>=]]> #{送付年月From} 
+        </if> 
+        <if test=" 送付年月To!=null and !送付年月To .isEmpty()"> 
+            AND 高額合算申請書."shikyuShinseisho_SofuYM" <![CDATA[<=]]> #{送付年月To} 
+        </if> 
+        )
+        SELECT 
+            高額合算申請書.*,
+            <if test=" hasValidKamoku ">
+            koza.*,
+            </if> 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+        FROM 高額合算申請書1 AS 高額合算申請書
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
+        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"= 最新被保台帳_識別コード
+        INNER JOIN 
+        rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode"= 最新被保台帳_識別コード
+        <if test=" hasValidKamoku ">
+        LEFT JOIN 
+       (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        ON 最新被保台帳_識別コード = koza."uaT0310Koza_shikibetsuCode"
+        </if> 
+<!--        TODO QA1490
+        ${出力順}-->
+    </sql>
+        
+    <resultMap id="resultMap_HanyoListKogakuGassanShinseishoJohoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoEntity">
+           <result property="高額合算申請書加入歴_保険者番号" column="高額合算申請書加入歴_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+           <result property="高額合算申請書_対象年度" column="高額合算申請書_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+           <result property="高額合算申請書_整理番号" column="高額合算申請書_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_履歴番号" column="高額合算申請書_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_被保険者番号" column="高額合算申請書_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_申請状況区分" column="高額合算申請書_申請状況区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_申請年月日" column="高額合算申請書_申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支給申請書整理番号" column="高額合算申請書_支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保支給申請書整理番号" column="高額合算申請書_国保支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支給申請区分" column="高額合算申請書_支給申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_対象計算期間開始年月日" column="高額合算申請書_対象計算期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_対象計算期間終了年月日" column="高額合算申請書_対象計算期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支給申請形態" column="高額合算申請書_支給申請形態" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_自己負担額証明書交付申請の有無" column="高額合算申請書_交付申請の有無" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_申請代表者氏名" column="高額合算申請書_申請代表者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_所得区分" column="高額合算申請書_所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_70歳以上の者に係る所得区分" column="高額合算申請書_70歳以上の者に係る所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_資格喪失年月日" column="高額合算申請書_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_資格喪失事由" column="高額合算申請書_資格喪失事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_加入期間開始年月日" column="高額合算申請書_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_加入期間終了年月日" column="高額合算申請書_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_国保保険者番号" column="高額合算申請書_国保保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保保険者名称" column="高額合算申請書_国保保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保被保険者証記号" column="高額合算申請書_国保被保険者証記号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保被保険者証番号" column="高額合算申請書_国保被保険者証番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保世帯番号" column="高額合算申請書_国保世帯番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保続柄" column="高額合算申請書_国保続柄" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保加入期間開始年月日" column="高額合算申請書_国保加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_国保加入期間終了年月日" column="高額合算申請書_国保加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_後期保険者番号" column="高額合算申請書_後期保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_後期広域連合名称" column="高額合算申請書_後期広域連合名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_後期被保険者番号" column="高額合算申請書_後期被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_後期加入期間開始年月日" column="高額合算申請書_後期加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_後期加入期間終了年月日" column="高額合算申請書_後期加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支払方法区分" column="高額合算申請書_支払方法区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支払場所" column="高額合算申請書_支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支払期間開始年月日" column="高額合算申請書_支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支払期間終了年月日" column="高額合算申請書_支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支払期間開始時間" column="高額合算申請書_支払期間開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支払期間終了時間" column="高額合算申請書_支払期間終了時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_口座ID" column="高額合算申請書_口座ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支給申請書情報送付年月" column="高額合算申請書_支給申請書情報送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+           <result property="高額合算申請書_自己負担額計算年月"  column="高額合算申請書_自己負担額計算年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+           <result property="高額合算申請書加入歴01_保険者名" column="高額合算申請書加入歴01_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴01_加入期間開始年月日" column="高額合算申請書加入歴01_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴01_加入期間終了年月日" column="高額合算申請書加入歴01_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴01_自己負担額証明書整理番号" column="高額合算申請書加入歴01_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴02_保険者名" column="高額合算申請書加入歴02_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴02_加入期間開始年月日" column="高額合算申請書加入歴02_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴02_加入期間終了年月日" column="高額合算申請書加入歴02_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴02_自己負担額証明書整理番号" column="高額合算申請書加入歴02_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴03_保険者名" column="高額合算申請書加入歴03_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴03_加入期間開始年月日" column="高額合算申請書加入歴03_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴03_加入期間終了年月日" column="高額合算申請書加入歴03_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴03_自己負担額証明書整理番号" column="高額合算申請書加入歴03_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴04_保険者名" column="高額合算申請書加入歴04_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴04_加入期間開始年月日" column="高額合算申請書加入歴04_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴04_加入期間終了年月日" column="高額合算申請書加入歴04_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴04_自己負担額証明書整理番号" column="高額合算申請書加入歴04_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴05_保険者名" column="高額合算申請書加入歴05_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴05_加入期間開始年月日" column="高額合算申請書加入歴05_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴05_加入期間終了年月日" column="高額合算申請書加入歴05_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴05_自己負担額証明書整理番号" column="高額合算申請書加入歴05_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴06_保険者名" column="高額合算申請書加入歴06_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴06_加入期間開始年月日" column="高額合算申請書加入歴06_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴06_加入期間終了年月日" column="高額合算申請書加入歴06_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴06_自己負担額証明書整理番号" column="高額合算申請書加入歴06_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴07_保険者名" column="高額合算申請書加入歴07_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴07_加入期間開始年月日" column="高額合算申請書加入歴07_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴07_加入期間終了年月日" column="高額合算申請書加入歴07_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴07_自己負担額証明書整理番号" column="高額合算申請書加入歴07_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴08_保険者名" column="高額合算申請書加入歴08_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴08_加入期間開始年月日" column="高額合算申請書加入歴08_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴08_加入期間終了年月日" column="高額合算申請書加入歴08_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴08_自己負担額証明書整理番号" column="高額合算申請書加入歴08_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴09_保険者名" column="高額合算申請書加入歴09_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴09_加入期間開始年月日" column="高額合算申請書加入歴09_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴09_加入期間終了年月日" column="高額合算申請書加入歴09_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴09_自己負担額証明書整理番号" column="高額合算申請書加入歴09_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴10_保険者名" column="高額合算申請書加入歴10_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴10_加入期間開始年月日" column="高額合算申請書加入歴10_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴10_加入期間終了年月日" column="高額合算申請書加入歴10_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴10_自己負担額証明書整理番号" column="高額合算申請書加入歴10_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_市町村コード" column="最新被保台帳_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+           <result property="最新被保台帳_被保険者番号" column="最新被保台帳_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+           <result property="最新被保台帳_資格取得事由コード" column="最新被保台帳_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_資格取得年月日" column="最新被保台帳_資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_資格取得届出年月日" column="最新被保台帳_資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_資格喪失事由コード" column="最新被保台帳_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_資格喪失年月日" column="最新被保台帳_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_資格喪失届出年月日" column="最新被保台帳_資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_被保険者区分コード" column="最新被保台帳_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_住所地特例フラグ" column="最新被保台帳_住所地特例フラグ" />
+           <result property="受給者台帳_受給申請事由" column="受給者台帳_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_要支援者認定申請区分" column="受給者台帳_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_受給申請年月日" column="受給者台帳_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_要介護認定状態区分コード" column="受給者台帳_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_認定有効期間開始年月日" column="受給者台帳_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_認定有効期間終了年月日" column="受給者台帳_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_認定年月日" column="受給者台帳_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_旧措置者フラグ" column="受給者台帳_旧措置者フラグ"/>
+           <result property="受給者台帳_みなし要介護区分コード" column="受給者台帳_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_直近異動事由コード" column="受給者台帳_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <association property="口座情報Entity"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+        <association property="宛名Entity" 
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="宛先Entity" 
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+
+    </resultMap>  
+</mapper>

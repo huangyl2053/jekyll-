@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShikakuKihonJohoiValidationHandler {
 
     private final ShikakuKihonJohoDiv div;
+    private static final int 役所名と御中の桁数_チェック = 30;
+    private static final int 担当課名と様の桁数_チェック = 15;
 
     /**
      * コンストラクタです。
@@ -37,29 +39,25 @@ public class ShikakuKihonJohoiValidationHandler {
      *
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForReportPublish() { 
-        
-       RString yakushoMei = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYakushoMei().getValue();
-       RString onchu = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtOnchu().getValue();
-       RString tantokamei = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtTantokamei().getValue();
-       RString samu = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam().getValue();
-       
+    public ValidationMessageControlPairs validateForReportPublish() {
+
+        RString yakushoMei = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYakushoMei().getValue();
+        RString onchu = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtOnchu().getValue();
+        RString tantokamei = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtTantokamei().getValue();
+        RString samu = div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam().getValue();
+
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        
-        if ((!yakushoMei.isNullOrEmpty()) &&
-               (!onchu.isNullOrEmpty())){
-            if ((yakushoMei.length() + onchu.length())>30) {
-                validPairs.add(new ValidationMessageControlPair(KETMessages.役所名と御中の桁数));
-              }
+
+        if ((!yakushoMei.isNullOrEmpty()) && (!onchu.isNullOrEmpty())
+                && (yakushoMei.length() + onchu.length()) > 役所名と御中の桁数_チェック) {
+            validPairs.add(new ValidationMessageControlPair(KETMessages.役所名と御中の桁数));
         }
-        
-         if ((!tantokamei.isNullOrEmpty()) &&
-               (!samu.isNullOrEmpty())){
-            if ((tantokamei.length() + samu.length())>15) {
-                validPairs.add(new ValidationMessageControlPair(KETSMessages.担当課名と様の桁数));
-              }
+
+        if ((!tantokamei.isNullOrEmpty()) && (!samu.isNullOrEmpty())
+                && (tantokamei.length() + samu.length()) > 担当課名と様の桁数_チェック) {
+            validPairs.add(new ValidationMessageControlPair(KETSMessages.担当課名と様の桁数));
         }
-                
+
         if (!div.getTajutokuTekiyoJohoIchiran().getReportPublish().isIsPublish()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.出力チェックボックス));
         }

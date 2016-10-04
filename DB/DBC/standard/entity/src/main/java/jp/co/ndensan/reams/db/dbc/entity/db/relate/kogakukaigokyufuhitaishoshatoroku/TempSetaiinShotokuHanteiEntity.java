@@ -42,6 +42,7 @@ public class TempSetaiinShotokuHanteiEntity extends DbTableEntityBase<TempSetaii
     private RString shoboKubun;
     private RString roreiFukushi;
     private HihokenshaNo setaiinHihokenshaNo;
+    private RString setaiinHihokenshakubun;
     private RString honninKazeiKubun;
     private RString setaiKazeiKubun;
     private FlexibleYear tsuzukigaraCodeNen;

@@ -10,6 +10,7 @@ and open the template in the editor.-->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IKousinSinseiTaishougaishaJohoMapper">
     <select id="get更新申請対象外者情報_負担限度額認定"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
@@ -45,6 +46,7 @@ and open the template in the editor.-->
         )
     </select>
     <select id="get更新申請対象外者情報_利用者負担額減額"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
@@ -79,6 +81,7 @@ and open the template in the editor.-->
         )
     </select>
     <select id="get更新申請対象外者情報_訪問介護利用者負担額減額"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
@@ -113,6 +116,7 @@ and open the template in the editor.-->
         )
     </select>
     <select id="get更新申請対象外者情報_社会福祉法人等利用者負担軽減"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -26,8 +25,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Setter
 public class KogakuServicehiTaishoshaIchiranEntity {
 
-    private RDate 審査年月From;
-    private RDate 審査年月To;
+    private FlexibleYearMonth 審査年月From;
+    private FlexibleYearMonth 審査年月To;
     private LasdecCode 市町村コード;
     private HihokenshaNo 被保険者番号;
     private RString 被保険者名;

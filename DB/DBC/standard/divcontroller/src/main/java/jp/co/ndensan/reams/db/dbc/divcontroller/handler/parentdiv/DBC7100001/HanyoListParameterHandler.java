@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710100.DBC710100_HanyoListKagoKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKekka_HokenshaKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.ChushutsuJokenPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.HanyoListParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,9 +30,15 @@ public class HanyoListParameterHandler {
     private static final RString 項目名 = new RString("1");
     private static final RString 日付 = new RString("3");
     private static final RString 事務広域 = new RString("111");
-    private static final ReportId 帳票ID = new ReportId("DBC701010_HanyoList_KagoKekka");
+    private static final RString 全市町村 = new RString("全市町村");
+    private static final RString すべて = new RString("key0");
+    private static final RString 保険者 = new RString("key1");
+    private static final RString 公費負担者 = new RString("key2");
+    private static final RString 経過措置_総合事業費 = new RString("key3");
+    private static final RString 保険者_総合事業費 = new RString("key4");
 
     /**
+     * コンストラクタ。
      *
      * @param div HanyoListParameterDiv
      *
@@ -41,11 +48,9 @@ public class HanyoListParameterHandler {
     }
 
     /**
-     * initializeのメソッドます。
-     *
+     * initializeのメソッドです。
      */
     public void initialize() {
-        div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
 
         List<RString> selectKey = new ArrayList<>();
         selectKey.add(項目名);
@@ -54,36 +59,65 @@ public class HanyoListParameterHandler {
 
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (事務広域.equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
+            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(false);
         } else {
-            //TODO QA1292
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
         }
 
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701010.getReportId());
     }
 
     /**
-     * バッチパラメータ
+     * バッチパラメータ設定するメソッド。
      *
      * @return DBC710100_HanyoListKagoKekkaParameter
      */
     public DBC710100_HanyoListKagoKekkaParameter setBatchParameter() {
         DBC710100_HanyoListKagoKekkaParameter parameter = new DBC710100_HanyoListKagoKekkaParameter();
+        ChushutsuJokenPanelDiv panel = div.getChushutsuJokenPanel();
 
-        parameter.set国保連取扱年月From(new FlexibleDate(div.getChushutsuJokenPanel().getTxtKokuhorenToriatukaiNengetu().getFromValue().toString()));
-        parameter.set国保連取扱年月To(new FlexibleDate(div.getChushutsuJokenPanel().getTxtKokuhorenToriatukaiNengetu().getToValue().toString()));
-
-        if (div.getChushutsuJokenPanel().getRadHokenshaKubun().getSelectedKey().equals(KagoMoshitateKekka_HokenshaKubun.すべて.getコード())) {
-            parameter.set保険者区分(null);
+        if (panel.getTxtKokuhorenToriatukaiNengetu().getFromValue() != null) {
+            parameter.set国保連取扱年月From(new FlexibleYearMonth(panel.getTxtKokuhorenToriatukaiNengetu().getFromValue().getYearMonth().toDateString()));
         } else {
-            parameter.set保険者区分(div.getChushutsuJokenPanel().getRadHokenshaKubun().getSelectedKey());
+            parameter.set国保連取扱年月From(FlexibleYearMonth.EMPTY);
         }
 
-        parameter.setサービス提供年月From(new FlexibleDate(div.getChushutsuJokenPanel().getTxtSabisuTeikyoNengetu().getFromValue().toString()));
-        parameter.setサービス提供年月To(new FlexibleDate(div.getChushutsuJokenPanel().getTxtSabisuTeikyoNengetu().getToValue().toString()));
-        parameter.set事業者コード(div.getChushutsuJokenPanel().getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
-        parameter.set事業者名(div.getChushutsuJokenPanel().getCcdJigyoshaBango().getNyuryokuShisetsuMeisho());
+        if (panel.getTxtKokuhorenToriatukaiNengetu().getToValue() != null) {
+            parameter.set国保連取扱年月To(new FlexibleYearMonth(panel.getTxtKokuhorenToriatukaiNengetu().getToValue().getYearMonth().toDateString()));
+        } else {
+            parameter.set国保連取扱年月To(FlexibleYearMonth.EMPTY);
+        }
+
+        if (すべて.equals(panel.getRadHokenshaKubun().getSelectedKey())) {
+            parameter.set保険者区分(RString.EMPTY);
+        } else if (保険者.equals(panel.getRadHokenshaKubun().getSelectedKey())) {
+            parameter.set保険者区分(KagoMoshitateKekka_HokenshaKubun.保険者.getコード());
+        } else if (公費負担者.equals(panel.getRadHokenshaKubun().getSelectedKey())) {
+            parameter.set保険者区分(KagoMoshitateKekka_HokenshaKubun.公費負担者.getコード());
+        } else if (経過措置_総合事業費.equals(panel.getRadHokenshaKubun().getSelectedKey())) {
+            parameter.set保険者区分(KagoMoshitateKekka_HokenshaKubun.経過措置_総合事業費.getコード());
+        } else if (保険者_総合事業費.equals(panel.getRadHokenshaKubun().getSelectedKey())) {
+            parameter.set保険者区分(KagoMoshitateKekka_HokenshaKubun.保険者_総合事業費.getコード());
+        } else {
+            parameter.set保険者区分(KagoMoshitateKekka_HokenshaKubun.公費負担者_総合事業費.getコード());
+        }
+
+        if (panel.getTxtSabisuTeikyoNengetu().getFromValue() != null) {
+            parameter.setサービス提供年月From(new FlexibleYearMonth(panel.getTxtSabisuTeikyoNengetu().getFromValue().getYearMonth().toDateString()));
+        } else {
+            parameter.setサービス提供年月From(FlexibleYearMonth.EMPTY);
+        }
+
+        if (panel.getTxtSabisuTeikyoNengetu().getToValue() != null) {
+            parameter.setサービス提供年月To(new FlexibleYearMonth(panel.getTxtSabisuTeikyoNengetu().getToValue().getYearMonth().toDateString()));
+        } else {
+            parameter.setサービス提供年月To(FlexibleYearMonth.EMPTY);
+        }
+
+        parameter.set事業者コード(panel.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
+        parameter.set事業者名(panel.getCcdJigyoshaBango().getNyuryokuShisetsuMeisho());
 
         boolean is項目名付加 = false;
         boolean is連番付加 = false;
@@ -101,14 +135,18 @@ public class HanyoListParameterHandler {
         parameter.set項目名付加(is項目名付加);
         parameter.set連番付加(is連番付加);
         parameter.set日付スラッシュ付加(is日付編集);
-        parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
+
+        if (!panel.getCcdHokenshaList().isDisabled() && !panel.getCcdHokenshaList().getSelectedItem().get市町村名称().equals(全市町村)) {
+            parameter.set保険者コード(panel.getCcdHokenshaList().getSelectedItem().get市町村コード());
+
+        }
 
         if (div.getCcdShutsuryokujun().get出力順ID() == null) {
-            parameter.set出力順(null);
+            parameter.set出力順(RString.EMPTY);
         } else {
             parameter.set出力順(new RString(div.getCcdShutsuryokujun().get出力順ID()));
         }
-        parameter.set出力項目(null);
+        parameter.set出力項目(RString.EMPTY);
         return parameter;
     }
 }

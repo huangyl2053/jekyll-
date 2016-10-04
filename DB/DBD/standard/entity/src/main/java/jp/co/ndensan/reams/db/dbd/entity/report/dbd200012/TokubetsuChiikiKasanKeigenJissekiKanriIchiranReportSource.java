@@ -82,4 +82,13 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource implement
     @ReportItem(name = "title", order = 32)
     public RString title;
 // </editor-fold>
+
+    @ReportItem(name = "gyouseikuCode", order = 33)
+    public RString gyouseikuCode;
+    @ReportItem(name = "hiHokenshaNo", order = 34)
+    public RString hiHokenshaNo;
+    @ReportItem(name = "shinnsaYM", order = 35)
+    public RString shinnsaYM;
+    @ReportItem(name = "serviceTeikyoYM", order = 36)
+    public RString serviceTeikyoYM;
 }

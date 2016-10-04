@@ -38,32 +38,58 @@ public class KyufujissekiKoshinkekkaIchiranPageBreak extends PageBreaker<Kyufuji
     @Override
     public boolean isBreak(ReportLineRecord<KyufujissekiKoshinkekkaIchiranSource> currentSource,
             ReportLineRecord<KyufujissekiKoshinkekkaIchiranSource> nextSource) {
-        boolean flg = false;
         if (this.breakKeysList.contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.保険者番号.get項目ID())
                 && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
-            flg = true;
+            return true;
         } else if (this.breakKeysList
+                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.郵便番号.get項目ID())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
+            return true;
+        } else if (this.breakKeysList
+                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            return true;
+        } else if (this.breakKeysList
+                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.行政区コード.get項目ID())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            return true;
+        } else if (this.breakKeysList
+                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            return true;
+        } else if (this.breakKeysList
+                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.市町村コード.get項目ID())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+            return true;
+        } else {
+            return isBreakMore(currentSource, nextSource);
+        }
+    }
+
+    private boolean isBreakMore(ReportLineRecord<KyufujissekiKoshinkekkaIchiranSource> currentSource,
+            ReportLineRecord<KyufujissekiKoshinkekkaIchiranSource> nextSource) {
+        if (this.breakKeysList
                 .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.被保険者番号.get項目ID())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
-            flg = true;
+            return true;
         } else if (this.breakKeysList
                 .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listUpper_7.equals(nextSource.getSource().listUpper_7)) {
-            flg = true;
+            return true;
         } else if (this.breakKeysList
                 .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.事業者番号.get項目ID())
                 && !currentSource.getSource().listUpper_9.equals(nextSource.getSource().listUpper_9)) {
-            flg = true;
+            return true;
         } else if (this.breakKeysList
                 .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.入力識別番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
-            flg = true;
+            return true;
         } else if (this.breakKeysList
                 .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.整理番号.get項目ID())
                 && !currentSource.getSource().listUpper_10.equals(nextSource.getSource().listUpper_10)) {
-            flg = true;
+            return true;
         }
-        return flg;
+        return false;
     }
 
     /**
@@ -78,7 +104,7 @@ public class KyufujissekiKoshinkekkaIchiranPageBreak extends PageBreaker<Kyufuji
         boolean flg = false;
         if (this.breakKeysList.contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.保険者番号.get項目ID())
                 && !currentSource.get給付実績_コントロールレコード保険者番号().equals(nextSource.get給付実績_コントロールレコード保険者番号())) {
-            flg = true;
+            return true;
         }
         return flg;
     }

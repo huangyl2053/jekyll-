@@ -201,4 +201,45 @@ public class KokuhorenInterfaceKanriManager {
         entity.initializeMd5();
         return new KokuhorenInterfaceKanri(entity);
     }
+
+    /**
+     * get最新の処理年月。
+     *
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @param 送付取込区分 sofuTorikomiKubun
+     * @param 処理状態区分 shoriJotaiKubun
+     * @return KokuhorenInterfaceKanri
+     */
+    @Transaction
+    public KokuhorenInterfaceKanri get最新の処理年月(
+            RString 交換情報識別番号,
+            RString 送付取込区分,
+            RString 処理状態区分) {
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(送付取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage("送付取込区分"));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
+
+        DbT3104KokuhorenInterfaceKanriEntity entity = dac.get最新の処理年月(
+                交換情報識別番号,
+                送付取込区分,
+                処理状態区分);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KokuhorenInterfaceKanri(entity);
+    }
+
+    /**
+     * 国保連インターフェース管理{@link KokuhorenInterfaceKanri}を保存します。
+     *
+     * @param 国保連インターフェース管理 {@link KokuhorenInterfaceKanri}
+     *
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save(KokuhorenInterfaceKanri 国保連インターフェース管理) {
+        requireNonNull(国保連インターフェース管理, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連インターフェース管理"));
+        return 1 == dac.save(国保連インターフェース管理.toEntity());
+    }
 }

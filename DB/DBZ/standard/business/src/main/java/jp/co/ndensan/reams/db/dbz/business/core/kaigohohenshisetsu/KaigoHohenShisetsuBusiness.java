@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -135,5 +136,14 @@ public class KaigoHohenShisetsuBusiness {
      */
     public RString get事業者名称() {
         return entity.getJigyoshaName();
+    }
+
+    /**
+     * 保険者番号のgetメソッドです。
+     *
+     * @return 保険者番号
+     */
+    public HokenshaNo get保険者番号() {
+        return entity.getHokenshaNo();
     }
 }

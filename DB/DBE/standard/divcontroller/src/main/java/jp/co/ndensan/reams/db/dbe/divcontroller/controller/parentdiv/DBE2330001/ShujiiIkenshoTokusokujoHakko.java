@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2330001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.Dbe233001FlowParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.DBE233001_IkenshoTokusokujyoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenshoTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001.ShujiiIkenTokusokujoHakkoHandler;
@@ -105,8 +105,8 @@ public class ShujiiIkenshoTokusokujoHakko {
      * @param div ShujiiIkenshoTokusokujoHakkoDiv
      * @return ResponseData<ShujiiIkenTokusokujoHakkoDiv>
      */
-    public ResponseData<Dbe233001FlowParameter> hakkou(ShujiiIkenshoTokusokujoHakkoDiv div) {
-        Dbe233001FlowParameter parameter = new Dbe233001FlowParameter();
+    public ResponseData<DBE233001_IkenshoTokusokujyoParameter> hakkou(ShujiiIkenshoTokusokujoHakkoDiv div) {
+        DBE233001_IkenshoTokusokujyoParameter parameter = new DBE233001_IkenshoTokusokujyoParameter();
         ShujiiIkenTokusokujoHakkoTempData tempData = getHandler(div).getTempData();
         parameter.toDBE233001Parameter(tempData);
         return ResponseData.of(parameter).respond();

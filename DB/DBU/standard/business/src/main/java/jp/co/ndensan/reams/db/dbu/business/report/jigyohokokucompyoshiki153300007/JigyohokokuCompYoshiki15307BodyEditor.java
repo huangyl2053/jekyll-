@@ -31,7 +31,7 @@ public class JigyohokokuCompYoshiki15307BodyEditor implements IJigyohokokuCompYo
         source.list_2 = item.getListList_2();
         source.list_3 = item.getListList_3();
         source.list_4 = item.getListList_4();
-        source.list_5 = item.getListList_6();
+        source.list_5 = item.getListList_5();
         source.list_6 = item.getListList_6();
         source.list_7 = item.getListList_7();
         source.list_8 = item.getListList_8();

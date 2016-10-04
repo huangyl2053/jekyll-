@@ -601,6 +601,7 @@ public class HihokenshashoBReportResult {
         入退所年月日Pram.set入所施設コード(entity.getNyushoShisetsuCode() != null
                 && !entity.getNyushoShisetsuCode().isEmpty() ? entity.getNyushoShisetsuCode().value() : RString.EMPTY);
         入退所年月日Pram.set入所施設種類(entity.getNyushoShisetsuShurui());
+        入退所年月日List.add(入退所年月日Pram);
         return 入退所年月日List;
     }
 

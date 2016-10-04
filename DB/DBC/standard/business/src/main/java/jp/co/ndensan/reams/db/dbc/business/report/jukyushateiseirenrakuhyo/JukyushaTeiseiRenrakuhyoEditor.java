@@ -57,18 +57,18 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.hihokenshaNo = 出力用受給者訂正情報Entity.get被保険者番号();
         source.idoJiyu = 出力用受給者訂正情報Entity.get異動事由();
         source.hyodai1_1 = RString.EMPTY;
-        source.Hyodai1_2 = 区分;
-        source.Hyodai2_1 = 支給限度基準額;
+        source.hyodai1_2 = 区分;
+        source.hyodai2_1 = 支給限度基準額;
         source.minashiKbn = 出力用受給者訂正情報Entity.getみなし区分();
         source.yoKaigoJotaiKbn = 出力用受給者訂正情報Entity.get要介護状態区分();
         if (出力用受給者訂正情報Entity.get公費負担上限額減額() != null) {
             source.kohiFutanJogenGaku = new RString(出力用受給者訂正情報Entity.get公費負担上限額減額().toString());
         }
         source.sikyuGendoKijunGaKu1 = 出力用受給者訂正情報Entity.get支給限度基準額1();
-        source.Hyodai2_2 = 旧訪問通所;
-        source.Hyodai3_1 = 支給限度基準額;
+        source.hyodai2_2 = 旧訪問通所;
+        source.hyodai3_1 = 支給限度基準額;
         source.sikyuGendoKijunGaKu2 = 出力用受給者訂正情報Entity.get支給限度基準額２();
-        source.Hyodai3_2 = 旧短期入所;
+        source.hyodai3_2 = 旧短期入所;
         source.keikakuSakuseiKbn = 出力用受給者訂正情報Entity.get計画作成区分();
         source.kyotakuShienJigyoshaNO = 出力用受給者訂正情報Entity.get居宅支援事業者番号();
         source.genShinseichuKbn = 出力用受給者訂正情報Entity.get減免申請中区分();

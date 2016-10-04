@@ -41,6 +41,10 @@
         </dependency>
         <!-- DBZ -->
         <!-- 公開系 -->
+         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBatchController</artifactId>
+        </dependency>
         <!-- テスト -->
         <!-- ツール -->
         <dependency>

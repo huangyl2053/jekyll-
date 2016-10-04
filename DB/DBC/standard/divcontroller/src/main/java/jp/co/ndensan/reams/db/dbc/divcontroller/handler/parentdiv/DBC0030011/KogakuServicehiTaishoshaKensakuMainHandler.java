@@ -187,7 +187,10 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         if (該当者一覧情報 == null || 該当者一覧情報.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage().evaluate());
         } else if (該当者一覧情報.size() == INDEX_イチ) {
+            List<dgKogakuServicehiRireki_Row> dataSource = new ArrayList<>();
             dgKogakuServicehiRireki_Row row = setRow(該当者一覧情報.get(0));
+            dataSource.add(row);
+            div.getKogakuServicehiResult().getDgKogakuServicehiRireki().setDataSource(dataSource);
             return set該当者一覧キー(row);
         } else {
             List<dgKogakuServicehiRireki_Row> dataSource = new ArrayList<>();

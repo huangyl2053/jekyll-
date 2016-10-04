@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.TsuchishoUchiwakeJoken;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.BatchTyouhyouResult;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.HonsanteifukaParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.TyouhyouParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031001.DBB031001_HonsanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -164,7 +165,7 @@ public class Honsanteifuka {
         if (区分_ゼロ.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況_賦課(調定年度);
         } else if (区分_イチ.equals(遷移元区分)) {
-            entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.本算定賦課.get名称());
+            entityList = 処理日付管理Dac.select処理状況(調定年度, ShoriName.本算定賦課.get名称(), new RString("0001"));
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
@@ -609,7 +610,7 @@ public class Honsanteifuka {
      * @param parameter parameter
      * @return BatchresultParameter
      */
-    public HonsanteifukaBatchParameter createhonsanteifukaBatchParameter(HonsanteifukaParameter parameter) {
+    public DBB031003_HonsanteiTsuchishoHakkoParameter create本算定通知書パラメータ(HonsanteifukaParameter parameter) {
         List<BatchTyouhyouResult> resultList
                 = getChohyoID(parameter.get調定年度(), parameter.get算定期(), parameter.get出力帳票一覧List());
         List<HonsanteifukaBatchTyouhyou> honsanteifukaBatchTyouhyouList = new ArrayList<>();
@@ -625,7 +626,75 @@ public class Honsanteifuka {
                 honsanteifukaBatchTyouhyouList.add(honsanteifukaBatchTyouhyou);
             }
         }
-        HonsanteifukaBatchParameter result = new HonsanteifukaBatchParameter();
+        DBB031003_HonsanteiTsuchishoHakkoParameter result = new DBB031003_HonsanteiTsuchishoHakkoParameter();
+        result.set調定年度(parameter.get調定年度());
+        result.set賦課年度(parameter.get賦課年度());
+        result.set資格基準日(parameter.get資格基準日());
+        result.set出力帳票一覧(honsanteifukaBatchTyouhyouList);
+        if (特徴出力対象_本算定.equals(parameter.get特徴_出力対象())) {
+            result.set特徴_出力対象(区分_イチ);
+        }
+        result.set特徴_発行日(parameter.get特徴_発行日());
+        result.set決定変更_文書番号(parameter.get文書番号());
+        result.set決定変更_発行日(parameter.get決定変更_発行日());
+        if (納入出力方法_別々出力.equals(parameter.get納入_出力方法())) {
+            result.set納入_出力方法(区分_ゼロ);
+        } else if (納入出力方法_全件出力.equals(parameter.get納入_出力方法())) {
+            result.set納入_出力方法(区分_イチ);
+        }
+        result.set納入_出力期(parameter.get出力期());
+        if (parameter.get納入_対象者() != null && !parameter.get納入_対象者().isEmpty()) {
+            for (RString 納入_対象者 : parameter.get納入_対象者()) {
+                if (納入対象者_すべて.equals(納入_対象者)) {
+                    result.set納入_対象者(区分_二);
+                    break;
+                } else if (納入対象者_現金.equals(納入_対象者)) {
+                    result.set納入_対象者(区分_ゼロ);
+                } else if (納入対象者_口座.equals(納入_対象者)) {
+                    result.set納入_対象者(区分_イチ);
+                }
+            }
+        }
+        result.set納入_発行日(parameter.get納入_発行日());
+        if (区分_する.equals(parameter.get納入_生活保護対象者をまとめて先頭に出力())) {
+            result.set納入_生活保護対象者をまとめて先頭に出力(区分_ゼロ);
+        } else if (区分_しない.equals(parameter.get納入_生活保護対象者をまとめて先頭に出力())) {
+            result.set納入_生活保護対象者をまとめて先頭に出力(区分_イチ);
+        }
+        if (区分_する.equals(parameter.get納入_ページごとに山分け())) {
+            result.set納入_ページごとに山分け(区分_ゼロ);
+        } else if (区分_しない.equals(parameter.get納入_ページごとに山分け())) {
+            result.set納入_ページごとに山分け(区分_イチ);
+        }
+        result.set打分け条件情報(parameter.get打分け条件情報());
+        result.set処理日時(RDate.getNowDateTime());
+        result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
+        return result;
+    }
+
+    /**
+     * バッチ用パラメータ作成メソッドです。
+     *
+     * @param parameter parameter
+     * @return BatchresultParameter
+     */
+    public DBB031001_HonsanteiFukaParameter create本算定賦課パラメータ(HonsanteifukaParameter parameter) {
+        List<BatchTyouhyouResult> resultList
+                = getChohyoID(parameter.get調定年度(), parameter.get算定期(), parameter.get出力帳票一覧List());
+        List<HonsanteifukaBatchTyouhyou> honsanteifukaBatchTyouhyouList = new ArrayList<>();
+        if (resultList == null || resultList.isEmpty()) {
+            return null;
+        }
+        for (BatchTyouhyouResult result : resultList) {
+            HonsanteifukaBatchTyouhyou honsanteifukaBatchTyouhyou = new HonsanteifukaBatchTyouhyou();
+            if (result != null) {
+                honsanteifukaBatchTyouhyou.set帳票分類ID(result.getEntity().get帳票分類ID());
+                honsanteifukaBatchTyouhyou.set帳票ID(result.getEntity().get帳票ID());
+                honsanteifukaBatchTyouhyou.set出力順ID(result.getEntity().get出力順ID());
+                honsanteifukaBatchTyouhyouList.add(honsanteifukaBatchTyouhyou);
+            }
+        }
+        DBB031001_HonsanteiFukaParameter result = new DBB031001_HonsanteiFukaParameter();
         result.set調定年度(parameter.get調定年度());
         result.set賦課年度(parameter.get賦課年度());
         result.set資格基準日(parameter.get資格基準日());

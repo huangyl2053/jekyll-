@@ -6,16 +6,22 @@ package jp.co.ndensan.reams.db.dbx.divcontroller.entity.commonchilddiv.KaigoHoke
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * KaigoHokenFukaKonkyo のクラスファイル 
- * 
- * @author 自動生成
+ * KaigoHokenFukaKonkyo のクラスファイルです。
+ *
+ * @reamsid_L DBB-5723-010 xuxin
  */
 public class KaigoHokenFukaKonkyoDiv extends Panel implements IKaigoHokenFukaKonkyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -56,6 +62,8 @@ public class KaigoHokenFukaKonkyoDiv extends Panel implements IKaigoHokenFukaKon
     private TextBox txtChoteiJiyu4;
     @JsonProperty("btnClose")
     private Button btnClose;
+    @JsonProperty("識別コード")
+    private RString 識別コード;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -367,6 +375,24 @@ public class KaigoHokenFukaKonkyoDiv extends Panel implements IKaigoHokenFukaKon
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
         this.btnClose = btnClose;
+    }
+
+    /*
+     * get識別コード
+     * @return 識別コード
+     */
+    @JsonProperty("識別コード")
+    public RString get識別コード() {
+        return 識別コード;
+    }
+
+    /*
+     * set識別コード
+     * @param 識別コード 識別コード
+     */
+    @JsonProperty("識別コード")
+    public void set識別コード(RString 識別コード) {
+        this.識別コード = 識別コード;
     }
 
     /*
