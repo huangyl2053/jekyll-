@@ -77,14 +77,6 @@ public class HihokenshaShisakuPanal {
         HihokenshaNo 被保番号 = 対象者キー.get被保険者番号();
         ShikibetsuCode 識別コード = 対象者キー.get識別コード();
 
-        //この画面は、被保険者照会（照会画面なのでロック不要）と、資格異動訂正（前画面でノック済みのはずなので再度ロックは不要）から呼ばれるため、ロックを行わない。
-        //また、プロファイラで確認したところ、ここのロックで4秒ほどかかっていたため、レスポンスの観点からも無い方が良い。
-//        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-//            div.setReadOnly(true);
-//            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-//            validationMessages.add(new ValidationMessageControlPair(HihokenshaShisakuPanalErrorMessage.排他_他のユーザが使用中));
-//            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-//        }
         List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
         FlexibleDate shikakuShutokuDate = ViewStateHolder.get(ViewStateKeys.対象者_資格取得日, FlexibleDate.class);
         getHandler(div).initialize(初期_状態, hihoDaicho, 識別コード, 被保番号, shikakuShutokuDate);
@@ -118,7 +110,6 @@ public class HihokenshaShisakuPanal {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             資格異動訂正の保存処理(div);
-            RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.資格異動の訂正を保存する).respond();
         }
         return ResponseData.of(div).respond();
