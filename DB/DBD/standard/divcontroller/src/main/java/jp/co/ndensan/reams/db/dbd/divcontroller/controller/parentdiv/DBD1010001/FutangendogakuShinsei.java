@@ -53,6 +53,7 @@ public class FutangendogakuShinsei {
     private final RString 文字列_承認情報を表示する = new RString("承認情報を表示する");
     private final RString 承認タイトル = new RString("負担限度額認定申請承認（個別）");
     private static final RString 共通エリア_保存する = new RString("btnUpdate");
+    private static final RString SELECT_KEY1 = new RString("key1");
 
     /**
      * 画面初期化
@@ -285,6 +286,8 @@ public class FutangendogakuShinsei {
         if (!div.getTxtShinseiYMD().getValue().isEmpty()) {
             pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
         }
+        NinteiShinseiValidationHandler validationHandler = getValidationHandler();
+        pairs = validationHandler.預貯金_チェック(pairs, div);
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

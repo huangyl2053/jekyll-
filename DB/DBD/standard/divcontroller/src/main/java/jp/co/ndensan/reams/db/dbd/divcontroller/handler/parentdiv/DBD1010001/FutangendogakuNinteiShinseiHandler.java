@@ -444,6 +444,10 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHaigushaJusho2().clearDomain();
             div.getRadHaigushaKazeiKubun().setDisabled(true);
             div.getRadHaigushaKazeiKubun().setSelectedKey(SELECT_KEY0);
+            div.getTxtHaigushaShikibetsuCode().clearDomain();
+            div.getTxtHaigushaShikibetsuCode().setDisabled(true);
+            div.getBtnHaigushaJohoSet().setDisabled(true);
+            div.getBtnHaigushaClear().setDisabled(true);
         } else {
             div.getTxtHaigushaShimeiKana().setDisabled(false);
             div.getTxtHaigushaShimei().setDisabled(false);
@@ -452,6 +456,9 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHaigushaJusho1().setDisabled(false);
             div.getTxtHaigushaJusho2().setDisabled(false);
             div.getRadHaigushaKazeiKubun().setDisabled(false);
+            div.getTxtHaigushaShikibetsuCode().setDisabled(false);
+            div.getBtnHaigushaJohoSet().setDisabled(false);
+            div.getBtnHaigushaClear().setDisabled(false);
         }
     }
 
