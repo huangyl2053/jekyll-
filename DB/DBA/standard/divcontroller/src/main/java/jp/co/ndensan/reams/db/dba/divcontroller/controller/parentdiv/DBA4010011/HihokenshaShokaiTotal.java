@@ -75,9 +75,6 @@ public class HihokenshaShokaiTotal {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
 
-        //旧初期化処理
-        //div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-        //新初期化処理
         HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
         List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(hihokenshaNo);
         HihokenshaDaichoList sortedHihoDaichoList = new HihokenshaDaichoList(ItemList.of(hihoDaichoList));
@@ -191,7 +188,6 @@ public class HihokenshaShokaiTotal {
         ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
         ViewStateHolder.put(ViewStateKeys.状態, 照会);
 
-        //選択した行の資格取得日を保持する。
         ViewStateHolder.put(ViewStateKeys.対象者_資格取得日, row.getShutokuDate().getValue());
 
         return ResponseData.of(div).forwardWithEventName(DBA4010011TransitionEventName.被保険者詳細).respond();

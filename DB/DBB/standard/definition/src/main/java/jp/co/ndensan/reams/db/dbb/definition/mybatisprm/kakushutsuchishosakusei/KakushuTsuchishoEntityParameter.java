@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,10 +31,12 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
     private final TsuchishoNo 通知書番号;
     private final int 履歴番号;
     private final YMDHMS 調定日時;
+    private final RString psmShikibetsuTaisho;
     private final RString 調定日;
     private final RString 処理日;
     private final RString 科目コード;
-
+    private final ShikibetsuCode 識別コード;
+    private final RString psmTotalShunyu;
     /**
      * コンストラクタです。
      *
@@ -42,11 +45,14 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
      * @param 通知書番号 通知書番号
      * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
-     * @param 調定日 RString
+     * @param psmShikibetsuTaisho 宛名識別対象抽出PSM
      * @param 処理日 RString
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
+     * @param ShikibetsuCode 識別コード
+     * @param psmTotalShunyu 収入情報取得PSM
+     * @param 調定日 調定日
      */
     public KakushuTsuchishoEntityParameter(
             FlexibleYear 調定年度,
@@ -54,11 +60,15 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
             TsuchishoNo 通知書番号,
             int 履歴番号,
             YMDHMS 調定日時,
-            RString 調定日,
+            RString psmShikibetsuTaisho,
             RString 処理日,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
-            RString 科目コード) {
+            RString 科目コード,
+            ShikibetsuCode 識別コード,
+            RString psmTotalShunyu,
+            RString 調定日
+    ) {
         super(searchkey, list);
         this.科目コード = 科目コード;
         this.調定年度 = 調定年度;
@@ -66,8 +76,11 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
         this.通知書番号 = 通知書番号;
         this.履歴番号 = 履歴番号;
         this.調定日時 = 調定日時;
-        this.調定日 = 調定日;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.処理日 = 処理日;
+        this.識別コード = 識別コード;
+        this.psmTotalShunyu = psmTotalShunyu;
+        this.調定日 = 調定日;
     }
 
     /**
@@ -78,11 +91,14 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
      * @param 通知書番号 通知書番号
      * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
-     * @param 調定日 RString
+     * @param psmShikibetsuTaisho 宛名識別対象抽出PSM
      * @param 処理日 RString
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
+     * @param ShikibetsuCode 識別コード
+     * @param psmTotalShunyu 収入情報取得PSM
+     * @param 調定日 調定日
      * @return パラメータ
      */
     public static KakushuTsuchishoEntityParameter createSelectByKeyParam(
@@ -91,12 +107,16 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
             TsuchishoNo 通知書番号,
             int 履歴番号,
             YMDHMS 調定日時,
-            RString 調定日,
+            RString psmShikibetsuTaisho,
             RString 処理日,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
-            RString 科目コード) {
+            RString 科目コード,
+            ShikibetsuCode 識別コード,
+            RString psmTotalShunyu,
+            RString 調定日
+    ) {
         return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 履歴番号,
-                調定日時, 調定日, 処理日, searchkey, list, 科目コード);
+                調定日時, psmShikibetsuTaisho, 処理日, searchkey, list, 科目コード,識別コード, psmTotalShunyu, 調定日);
     }
 }

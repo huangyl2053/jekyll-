@@ -625,6 +625,18 @@ public class DBD1030001Handler {
         }
         List<dgShinseiList_Row> newDataSouceList = getDataSource(情報と状態ArrayList);
         div.getDgShinseiList().setDataSource(newDataSouceList);
+        div.getBtnAddShinsei().setDisabled(false);
+        for (dgShinseiList_Row row : newDataSouceList) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
         return 情報と状態ArrayList;
     }
 
@@ -691,6 +703,18 @@ public class DBD1030001Handler {
         情報エリアクリア();
         一覧パネルをClose状態表示か(false);
         入力パネルをClose状態表示か(true);
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
         return new情報と状態ArrayList;
     }
 

@@ -11,6 +11,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ca.cax.business.search.CaFt702FindTotalShunyuFunction;
+import jp.co.ndensan.reams.ca.cax.business.search.TotalShunyuSearchKeyBuilder;
+import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSaishutsuKubun;
+import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSokuhoKubun;
 import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
@@ -118,17 +122,25 @@ import jp.co.ndensan.reams.ua.uax.business.core.dainonin.DainoninRelate;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.dainonin.DainoninRelateFinderFactory;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.IKozaManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
+import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
@@ -218,7 +230,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     private final DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac;
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final DbT2018RealHakkoRirekiDac リアル発行履歴Dac;
-
+    private RString psmShikibetsuTaisho;
+    private RString psmTotalShunyu;
     /**
      * コンストラクタです。
      */
@@ -1615,16 +1628,37 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         rStringBuilder.append(RIGHT_FORMAT);
         RString 科目コード = rStringBuilder.toRString();
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        //key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        key.set基準日(賦課の情報_更正後.get調定日時().getDate().toFlexibleDate());
+        key.set識別コード(賦課の情報_更正後.get識別コード());
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        
+        TotalShunyuSearchKeyBuilder caFt702SearchKey = new TotalShunyuSearchKeyBuilder(SearchSokuhoKubun.全て, SearchSaishutsuKubun.全て);
+        caFt702SearchKey.set通知書番号From(new TsuchishoNo(new Decimal(賦課の情報_更正後.get通知書番号().toString())));
+        caFt702SearchKey.set通知書番号To(new TsuchishoNo(new Decimal(賦課の情報_更正後.get通知書番号().toString())));
+        caFt702SearchKey.set調定年度From(new RYear(賦課の情報_更正後.get調定年度().toString()));
+        caFt702SearchKey.set調定年度To(new RYear(賦課の情報_更正後.get調定年度().toString()));
+        caFt702SearchKey.set課税年度From(new RYear(賦課の情報_更正後.get賦課年度().toString()));
+        caFt702SearchKey.set課税年度To(new RYear(賦課の情報_更正後.get賦課年度().toString()));
+        caFt702SearchKey.set識別コードFrom(new ShikibetsuCode(賦課の情報_更正後.get識別コード().value()));
+        caFt702SearchKey.set識別コードTo(new ShikibetsuCode(賦課の情報_更正後.get識別コード().value()));
+        caFt702SearchKey.set科目リスト(get検索用科目リスト());
+        CaFt702FindTotalShunyuFunction psmEntity = new CaFt702FindTotalShunyuFunction(caFt702SearchKey);
+        psmTotalShunyu = new RString(psmEntity.toString());
+        
         KakushuTsuchishoEntityParameter 更正後
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正後.get調定年度(),
                         賦課の情報_更正後.get賦課年度(), 賦課の情報_更正後.get通知書番号(),
                         賦課の情報_更正後.get履歴番号(), 賦課の情報_更正後.get調定日時(),
-                        賦課の情報_更正後.get調定日時().getDate().toDateString(), 処理日, kozaSearchKey, list, 科目コード);
+                        psmShikibetsuTaisho, 処理日, kozaSearchKey, list, 科目コード,賦課の情報_更正後.get識別コード(),psmTotalShunyu,賦課の情報_更正後.get調定日時().getDate().toDateString());
         KakushuTsuchishoEntity 更正後entity = mapper.get更正前後賦課の情報(更正後);
         KakushuTsuchishoEntity 更正前entity = get賦課の情報更正前(賦課の情報_更正前, 処理日, kozaSearchKey, list, 科目コード);
         FukaAtena 賦課の情報更正後 = get賦課の情報_宛名(更正後entity);
         FukaAtena 賦課の情報更正前 = get賦課の情報_宛名(更正前entity);
-
+        
         KakushuTsuchishoFindEntity 宛名納組宛先口座entity = mapper.get宛名納組宛先口座(更正後);
 
         List<NokiJoho> 普徴納期情報List = new ArrayList<>();
@@ -1647,6 +1681,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             for (Kitsuki 期月 : 期月リスト) {
                 NokiJoho nokiJoho = new NokiJoho();
                 nokiJoho.set期月(期月);
+                if(期月.get期AsInt()==0){
+                     break;
+                 }
                 nokiJoho.set納期(fukaNokiResearcher.get普徴納期(期月.get期AsInt()));
                 普徴納期情報List.add(nokiJoho);
             }
@@ -1660,6 +1697,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         for (Kitsuki 期月 : 期月リスト) {
             NokiJoho nokiJoho = new NokiJoho();
             nokiJoho.set期月(期月);
+            if(期月.get期AsInt()==0){
+                break;
+            }
             nokiJoho.set納期(fukaNokiResearcher.get特徴納期(期月.get期AsInt()));
             特徴収入情報List.add(nokiJoho);
         }
@@ -1725,7 +1765,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正前.get調定年度(),
                         賦課の情報_更正前.get賦課年度(), 賦課の情報_更正前.get通知書番号(),
                         賦課の情報_更正前.get履歴番号(), 賦課の情報_更正前.get調定日時(),
-                        賦課の情報_更正前.get調定日時().getDate().toDateString(), 処理日, kozaSearchKey, list, 科目コード);
+                        psmShikibetsuTaisho, 処理日, kozaSearchKey, list ,科目コード,賦課の情報_更正前.get識別コード(),psmTotalShunyu,賦課の情報_更正前.get調定日時().getDate().toDateString());
         return mapper.get更正前後賦課の情報(更正前);
     }
 
@@ -1907,4 +1947,15 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             }
         }
     }
+    
+    private List<RString> get検索用科目リスト() {
+   // 科目に国保特徴と国保普徴を指定する場合の例。
+   ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+   IShunoKamoku 介護保険料_特別徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+   IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+   List<RString> kamokuList = new ArrayList<>();
+   kamokuList.add(介護保険料_特別徴収.get表示用コードwithハイフン());
+   kamokuList.add(介護保険料_普通徴収.get表示用コードwithハイフン());
+   return kamokuList;
+}
 }
