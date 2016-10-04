@@ -47,16 +47,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class HihokenshaShokaiTotal {
 
-    private static final RString 被保履歴 = new RString("tplHihokenshaRireki");
-    private static final RString 世帯照会 = new RString("tplSetaiShokai");
-    private static final RString 医療保険 = new RString("tplIryoHoken");
-    private static final RString 老福年金 = new RString("tplRofukuNenkin");
-    private static final RString 施設入退所 = new RString("tplShisetsuNyutaisho");
-    private static final RString 証交付回収 = new RString("tplShoKofuKaishu");
     private static final RString COMMON_BTN_PUBLISH = new RString("btnPublish");
-    private static final RString COMMON_BTN_KAKUTEI = new RString("btnKakutei");
     private static final RString 照会 = new RString("照会");
-    private static final RString LOAD済み = new RString("1");
 
     /**
      * 被保険者照会の初期化を処理します。
@@ -83,9 +75,6 @@ public class HihokenshaShokaiTotal {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
 
-        //旧初期化処理
-        //div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-        //新初期化処理
         HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
         List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(hihokenshaNo);
         HihokenshaDaichoList sortedHihoDaichoList = new HihokenshaDaichoList(ItemList.of(hihoDaichoList));
@@ -199,7 +188,6 @@ public class HihokenshaShokaiTotal {
         ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
         ViewStateHolder.put(ViewStateKeys.状態, 照会);
 
-        //選択した行の資格取得日を保持する。
         ViewStateHolder.put(ViewStateKeys.対象者_資格取得日, row.getShutokuDate().getValue());
 
         return ResponseData.of(div).forwardWithEventName(DBA4010011TransitionEventName.被保険者詳細).respond();
