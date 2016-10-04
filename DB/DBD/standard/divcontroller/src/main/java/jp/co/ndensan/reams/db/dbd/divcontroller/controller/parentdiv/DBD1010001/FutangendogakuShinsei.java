@@ -219,6 +219,19 @@ public class FutangendogakuShinsei {
             ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
             ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, getHandler(div).onSelectByDeleteButton(list));
         }
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        div.getBtnAddShinsei().setDisabled(false);
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -284,6 +297,18 @@ public class FutangendogakuShinsei {
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, getHandler(div).onClick_btnShinseiKakutei(list, 資格対象者));
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
         div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
