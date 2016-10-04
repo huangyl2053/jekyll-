@@ -7,11 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9020001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.DBE9020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.DBE9020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiMasterCsvEntity;
@@ -92,21 +89,21 @@ public class ShujiiMaster {
         if (医療機関登録から主治医医療機関コード != null && !医療機関登録から主治医医療機関コード.isEmpty()) {
             LasdecCode 医療機関登録から市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
             ShujiiMasterMapperParameter parameter = ShujiiMasterMapperParameter.createSelectByKeyParam(
-            医療機関登録から市町村コード,
-            true,
-            医療機関登録から主治医医療機関コード,
-            医療機関登録から主治医医療機関コード,
-            RString.EMPTY,
-            RString.EMPTY,
-            RString.EMPTY,
-            RString.EMPTY,
-            RString.EMPTY,
-            RString.EMPTY,
-            RString.EMPTY,
-            RString.EMPTY,
-            new AtenaKanaMeisho(RString.EMPTY),
-            RString.EMPTY,
-            div.getTxtSaidaiHyojiKensu().getValue());
+                    医療機関登録から市町村コード,
+                    true,
+                    医療機関登録から主治医医療機関コード,
+                    医療機関登録から主治医医療機関コード,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    new AtenaKanaMeisho(RString.EMPTY),
+                    RString.EMPTY,
+                    div.getTxtSaidaiHyojiKensu().getValue());
             ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
             List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
                     = shujiiMasterFinder.getShujiiIchiranList(
@@ -348,9 +345,9 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnTorikeshi(ShujiiMasterDiv div) {
-        
+
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
-        
+
         if ((状態_追加.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())
             || (状態_修正.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())) {
             if (!ResponseHolder.isReRequest()) {
@@ -362,7 +359,7 @@ public class ShujiiMaster {
                     .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getShujiiIchiran().setDisabled(false);
-                
+
                 if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
                     return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
                 }

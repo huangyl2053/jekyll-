@@ -49,11 +49,9 @@ public class ChosaItakusakiGuideHandler {
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        if (dataPassModel != null) {
-            if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
-                div.getHokensha().setSelectedShichosonIfExist(市町村コード);
-            }
+        if (dataPassModel != null && !RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+            LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
+            div.getHokensha().setSelectedShichosonIfExist(市町村コード);
         }
         List<KeyValueDataSource> ddlShoriKubun = new ArrayList<>();
         ddlShoriKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
@@ -95,9 +93,9 @@ public class ChosaItakusakiGuideHandler {
                 kensakuKekkaIchiran_Row.setItakusakiKanaMeisho(nullToEmpty(business.get事業者名称カナ()));
                 kensakuKekkaIchiran_Row.setItakusakiKubun(nullToEmpty(business.get調査委託区分()));
                 kensakuKekkaIchiran_Row.setItakusakiJokyo(nullToEmpty(business.is状況フラグ()
-                        ? new RString("有効") : new RString("無効")));
+                                                                      ? new RString("有効") : new RString("無効")));
                 kensakuKekkaIchiran_Row.setShichosonCode(business.get市町村コード());
-                if (!business.is状況フラグ() ) {
+                if (!business.is状況フラグ()) {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
                     kensakuKekkaIchiran_Row.setSelectButtonState(DataGridButtonState.Disabled);
                 }

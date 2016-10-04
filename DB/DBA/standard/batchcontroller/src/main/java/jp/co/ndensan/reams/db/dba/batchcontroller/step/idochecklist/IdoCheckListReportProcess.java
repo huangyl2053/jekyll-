@@ -62,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  * 異動チェックリスト帳票データ作成のプロセスクラス
  *
  * @reamsid_L DBA-0530-020 chengsanyuan
+ * @deprecated 削除予定. {@link jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA130010.IdoCheckListReportProcess}を利用してください。
  */
 public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
 

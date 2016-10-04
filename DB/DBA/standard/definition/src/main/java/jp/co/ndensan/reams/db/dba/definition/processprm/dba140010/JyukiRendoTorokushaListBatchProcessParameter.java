@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.definition.processprm.dba140010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter;
+
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,7 +31,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private boolean hihokenshadaichoFLG;
     private boolean tajushochitokureishakanriFLG;
     private boolean tekiyojogaishadaichoFLG;
-    private RString shuturyokujunID;
+    private Long shuturyokujunID;
     private RString loginId;
     private List<Code> shutokuJiyu_Hihokensha;
     private List<Code> tekiyoJiyu_TaTokureisha;
@@ -41,6 +42,10 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private List<Code> henkoJiyu_Hihokensha;
     private List<Code> jutokuTekiyo;
     private List<Code> jutokuKaijo;
+    private Code idouJiyu_tennyu;
+    private Code idouJiyu_tensyutu;
+    private Code idouJiyu_sibou;
+    private Code idouJiyu_tenkyo;
 
     /**
      * コンストラクタ。
@@ -63,7 +68,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
             boolean hihokenshadaichoFLG,
             boolean tajushochitokureishakanriFLG,
             boolean tekiyojogaishadaichoFLG,
-            RString shuturyokujunID,
+            Long shuturyokujunID,
             RString loginId) {
         this.zenkaikaishiYMDHMS = zenkaikaishiYMDHMS;
         this.zenkaishuryoYMDHMS = zenkaishuryoYMDHMS;
@@ -94,6 +99,11 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
                 kaijoJiyu_Jogaisha,
                 henkoJiyu_Hihokensha,
                 jutokuTekiyo,
-                jutokuKaijo);
+                jutokuKaijo,
+                idouJiyu_tennyu,
+                idouJiyu_tensyutu,
+                idouJiyu_sibou,
+                idouJiyu_tenkyo
+        );
     }
 }

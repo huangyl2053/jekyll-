@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * 年齢到達登録者リストを作成します。
  *
  * @reamsid_L DBA-0570-020 xuyannan
- * @deprecated 削除予定
+ * @deprecated 削除予定. {@link jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA150010.NenreiTotatsuTorokushaProcess}を使用してください。
  */
 public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotatsushaJouhouEntity> {
 
@@ -96,7 +96,8 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
 
     @Override
     protected IBatchReader createReader() {
-        processParameter = business.setParameter(processParameter);
+//XXX n3327 エラー回避のためのコメントアウト。削除予定のクラスのため、本対応は不要。
+//        processParameter = business.setParameter(processParameter);
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toNenreiTotatsushaTorokuListMybatisParameter());
     }
 

@@ -16,11 +16,11 @@ import lombok.Setter;
  * 住基連動登録者リストバッチのパラメータ。
  *
  * @reamsid_L DBA-0560-020 xuyannan
+ * @deprecated 削除予定。{@link jp.co.ndensan.reams.db.dba.definition.processprm.dba140010.JyukiRendoTorokushaListBatchProcessParameter}を利用してください。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-@Deprecated("削除予定。DBA140010_JukiRendoTorokushaListParameter を利用してください。")
 public class JyukiRendoTorokushaListBatchParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;

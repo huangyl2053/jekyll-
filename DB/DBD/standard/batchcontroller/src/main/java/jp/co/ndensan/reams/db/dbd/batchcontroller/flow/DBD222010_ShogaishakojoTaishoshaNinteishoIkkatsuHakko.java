@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd4030011.ShogaishaKoujoTaishoNinteiShoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd222010.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD222010.ShogaishaKoujoTaishoNinteiShoProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD222010.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
