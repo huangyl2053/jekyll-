@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -138,11 +138,15 @@ public class KoseiShujiiIryoKikanMasterFinder {
      * @return 市町村名
      */
     @Transaction
-    public RString getShichosonMeisho(LasdecCode 市町村コード) {
-        List<DbT7051KoseiShichosonMasterEntity> shichosonCodeYoriShichosonJoho = dac.shichosonCodeYoriShichosonJoho(市町村コード);
-        if (!shichosonCodeYoriShichosonJoho.isEmpty()) {
-            return shichosonCodeYoriShichosonJoho.get(0).getShichosonMeisho();
+    public SearchResult<ShichosonMeishoBusiness> getShichosonMeisho(LasdecCode 市町村コード) {
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dac.selectByshichosonCode(市町村コード);
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShichosonMeishoBusiness>emptyList(), 0, false);
         }
-        return RString.EMPTY;
+        List<ShichosonMeishoBusiness> shichosonMeisho = new ArrayList<>();
+        for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
+            shichosonMeisho.add(new ShichosonMeishoBusiness(entity));
+        }
+        return SearchResult.of(shichosonMeisho, 0, false);
     }
 }
