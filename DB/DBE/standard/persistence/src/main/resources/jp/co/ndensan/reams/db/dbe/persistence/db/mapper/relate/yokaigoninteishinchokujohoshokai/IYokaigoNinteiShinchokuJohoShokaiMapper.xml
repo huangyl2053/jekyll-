@@ -307,7 +307,7 @@
                 AND DbT5121."shinseishoKanriNo" IS NULL
             </if>
             <if test="kensakuOptionKey2">
-                AND DbT5101."torisageKubunCode" = #{torisageKubunCode}
+                AND DbT5101."torisageKubunCode" <![CDATA[<>]]>  #{torisageKubunCode}
             </if>
             AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
             AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"

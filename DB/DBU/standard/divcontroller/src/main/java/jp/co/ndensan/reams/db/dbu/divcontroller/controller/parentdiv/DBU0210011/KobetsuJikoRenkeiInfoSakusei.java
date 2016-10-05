@@ -12,11 +12,14 @@ import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070010.DBU070010_Kobets
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyo.KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -36,6 +39,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
         ChushutsuKikanJohoData chushutsuKikanJohoData
                 = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
         getHandler(div).initialize(chushutsuKikanJohoData);
+        ViewStateHolder.put(ViewStateKeys.退避用データ, chushutsuKikanJohoData);
         return ResponseData.of(div).respond();
     }
 
@@ -55,6 +59,15 @@ public class KobetsuJikoRenkeiInfoSakusei {
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setReadOnly(true);
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setReadOnly(true);
         } else {
+            ChushutsuKikanJohoData chushutsuKikanJohoData = ViewStateHolder.get(ViewStateKeys.退避用データ, ChushutsuKikanJohoData.class);
+            YMDHMS 対象終了日時 = chushutsuKikanJohoData.get対象終了日時();
+            if (対象終了日時 != null && !対象終了日時.isEmpty()) {
+
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
+                        chushutsuKikanJohoData.get対象終了日時().getDate());
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
+                        chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
+            }
             div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkKikanHenko().setDisabled(false);
         }
         return ResponseData.of(div).respond();
@@ -89,7 +102,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
         RDate zenkaiToYMD = div.getChushutsuKikan().getTxtZenkaiChushutsuToYMD().getValue();
         RTime zenkaiToTime = div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().getValue();
         if ((konkaiFromYMD != null && konkaiFromTime != null && zenkaiToYMD != null && zenkaiToTime != null)
-                && (zenkaiToYMD.isBefore(konkaiFromYMD)
+            && (zenkaiToYMD.isBefore(konkaiFromYMD)
                 || (konkaiFromYMD.equals(zenkaiToYMD) && zenkaiToTime.isBefore(konkaiFromTime)))) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandler(div).開始日と終了日の比較チェック());

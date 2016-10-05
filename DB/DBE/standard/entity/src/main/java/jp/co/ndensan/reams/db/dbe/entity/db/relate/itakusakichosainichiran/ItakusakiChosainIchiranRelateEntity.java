@@ -19,7 +19,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ItakusakiChosainIchiranRelateEntity {
-
+    private RString dbT7051_ShichosonCode;
+    private RString dbT7051_ShichosonMeisho;
     private RString dbT5910_NinteichosaItakusakiCode;
     private RString dbT5910_JigyoshaMeishoKana;
     private RString dbT5910_JigyoshaMeisho;

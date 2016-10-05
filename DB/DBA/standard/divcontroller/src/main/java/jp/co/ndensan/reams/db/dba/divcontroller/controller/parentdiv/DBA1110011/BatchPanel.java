@@ -54,6 +54,10 @@ public class BatchPanel {
             throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
         }
         getHandler(div).initialize(kouFuJiyuuList, kayiSyuuJiyuuList);
+        List<RString> selectedKey = new ArrayList<>();
+        RString 項目名付加 = new RString("key1");
+        selectedKey.add(項目名付加);
+        div.getChkHenshuHoho().setSelectedItemsByKey(selectedKey);
         return ResponseData.of(div).respond();
     }
 

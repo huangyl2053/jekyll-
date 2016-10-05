@@ -95,7 +95,7 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         } else {
             source.shujiiJokyo = JyoukyouType.全て.toRString();
         }
-        source.dataShubetsu = RString.EMPTY;
+        source.dataShubetsu = new RString("調査委託先マスタ");
         source.cityCode = item.getCityCode();
         source.cityName = item.getCityName();
         source.sort1 = NarabiJunType.toValue(item.getSort()).toRString();

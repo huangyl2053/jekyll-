@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShafukuRiyoshaKeigenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -54,8 +54,8 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     private KaigoAtenaInfoDiv ccdAtenaInfo;
     @JsonProperty("hihokenshaNo")
     private RString hihokenshaNo;
-    @JsonProperty("subGyomuCode")
-    private RString subGyomuCode;
+    @JsonProperty("GyomuCode")
+    private RString GyomuCode;
     @JsonProperty("sampleBunshoGroupCode")
     private RString sampleBunshoGroupCode;
 
@@ -246,21 +246,21 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     /*
-     * getsubGyomuCode
-     * @return subGyomuCode
+     * getGyomuCode
+     * @return GyomuCode
      */
-    @JsonProperty("subGyomuCode")
-    public RString getSubGyomuCode() {
-        return subGyomuCode;
+    @JsonProperty("GyomuCode")
+    public RString getGyomuCode() {
+        return GyomuCode;
     }
 
     /*
-     * setsubGyomuCode
-     * @param subGyomuCode subGyomuCode
+     * setGyomuCode
+     * @param GyomuCode GyomuCode
      */
-    @JsonProperty("subGyomuCode")
-    public void setSubGyomuCode(RString subGyomuCode) {
-        this.subGyomuCode = subGyomuCode;
+    @JsonProperty("GyomuCode")
+    public void setGyomuCode(RString GyomuCode) {
+        this.GyomuCode = GyomuCode;
     }
 
     /*

@@ -5,14 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShisetsuNyutaishoRirekiKanri;
 
-import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
-import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -61,8 +57,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectBySelectButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-        dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
-        getHandler(requestDiv).onSelectBySelectButton_dgShisetsuNyutaishoRireki(row);
+        getHandler(requestDiv).onSelectBySelectButton_dgShisetsuNyutaishoRireki(requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow());
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -73,8 +68,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByModifyButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-        dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
-        getHandler(requestDiv).onSelectByModifyButton_dgShisetsuNyutaishoRireki(row);
+        getHandler(requestDiv).onSelectByModifyButton_dgShisetsuNyutaishoRireki(requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow());
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -85,8 +79,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByDeleteButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-        dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
-        getHandler(requestDiv).onSelectByDeleteButton_dgShisetsuNyutaishoRireki(row);
+        getHandler(requestDiv).onSelectByDeleteButton_dgShisetsuNyutaishoRireki(requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow());
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -108,9 +101,10 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-        RString 住所地特例フラグ = KaigoHohenShisetsuNyutaishoshaKanriManager.
-                createInstance().get被保険者台帳管理の直近データ(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate(住所地特例フラグ);
+//TODO n3327 オフショアで追加された保険者番号のチェックが無い。追加要否の判断が必要。
+//        RString 住所地特例フラグ = KaigoHohenShisetsuNyutaishoshaKanriManager.
+//                createInstance().get被保険者台帳管理の直近データ(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate(/*住所地特例フラグ*/);
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         } else {
@@ -118,53 +112,6 @@ public class ShisetsuNyutaishoRirekiKanri {
             getHandler(requestDiv).onClick_btnShisetsuNyutaishoKakutei(row);
         }
         return ResponseData.of(requestDiv).respond();
-    }
-
-    /**
-     * 保険者入力ダイアログ画面開く前に処理します。
-     *
-     * @param div {@link ShisetsuNyutaishoRirekiKanriDiv 保険者入力補助Div}
-     * @return 保険者入力補助Divを持つResponseData
-     */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onBeforeOpenDialog_btnSearch(ShisetsuNyutaishoRirekiKanriDiv div) {
-        div.setTxtHokensha(div.getTxtHokensha());
-        div.setTxtHokensyaMeisho(div.getTxtHokensyaMeisho());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 保険者入力ダイアログ画面閉じる前に処理します。
-     *
-     * @param div {@link ShisetsuNyutaishoRirekiKanriDiv 保険者入力補助Div}
-     * @return 保険者入力補助Divを持つResponseData
-     */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onOkClose_btnSearch(ShisetsuNyutaishoRirekiKanriDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 保険者コードを入れる、保険者名を自動表示します。
-     *
-     * @param div {@link ShisetsuNyutaishoRirekiKanriDiv 保険者入力補助Div}
-     * @return 保険者入力補助Divを持つResponseData
-     */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> lostfocus_txtHokenshaNo(ShisetsuNyutaishoRirekiKanriDiv div) {
-        if (div.getTxtHokensha().getValue().isEmpty()) {
-            div.getTxtHokensyaMeisho().setValue(RString.EMPTY);
-            return ResponseData.of(div).respond();
-        }
-        div.getTxtHokensyaMeisho().setValue(get保険者名(div.getTxtHokensha().getValue()));
-        return ResponseData.of(div).respond();
-    }
-
-    private RString get保険者名(RString 保険者番号) {
-        if (!RString.isNullOrEmpty(保険者番号)) {
-            Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(保険者番号));
-            if (hokensha != null) {
-                return hokensha.get保険者名();
-            }
-        }
-        return RString.EMPTY;
     }
 
     private ShisetsuNyutaishoRirekiKanriHandler getHandler(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {

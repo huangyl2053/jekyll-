@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
@@ -42,7 +43,8 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                  * 負担限度額認定_適用開始日が法施行以前チェックです。
                  *
                  * @param div TaishouWaritsukeDiv
-                 * @return true:負担限度額認定_適用開始日が法施行以後の場合です、false:負担限度額認定_適用開始日が法施行以前の場合です。
+                 * @return
+                 * true:負担限度額認定_適用開始日が法施行以後の場合です、false:負担限度額認定_適用開始日が法施行以前の場合です。
                  */
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
@@ -60,7 +62,8 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                  * 負担限度額認定_適用終了日が年度外チェックです。
                  *
                  * @param div TaishouWaritsukeDiv
-                 * @return true:負担限度額認定_適用終了日が年度内の場合です、false:負担限度額認定_適用終了日が年度外の場合です。
+                 * @return
+                 * true:負担限度額認定_適用終了日が年度内の場合です、false:負担限度額認定_適用終了日が年度外の場合です。
                  */
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
@@ -77,7 +80,8 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                  * 負担限度額認定_適用終了日が開始日以前チェックです。
                  *
                  * @param div TaishouWaritsukeDiv
-                 * @return true:負担限度額認定_適用終了日が開始日以後です、false:負担限度額認定_適用終了日が開始日以前です。
+                 * @return
+                 * true:負担限度額認定_適用終了日が開始日以後です、false:負担限度額認定_適用終了日が開始日以前です。
                  */
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
@@ -87,6 +91,51 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                         return false;
                     }
                     return 適用日.isBeforeOrEquals(有効期限);
+                }
+            },
+    預貯金_1000万以下_Or_2000万以下 {
+                /**
+                 * 預貯金チェックです。
+                 *
+                 * @param div TaishouWaritsukeDiv
+                 * @return true:配偶者「無」のとき預貯金合計が1001万円以上（配偶者「有」のとき2001万円以上）
+                 * false:配偶者「無」のとき預貯金合計が1000万円以下（配偶者「有」のとき2000万円以下）
+                 */
+                @Override
+                public boolean apply(FutangendogakuShinseiDiv div) {
+
+                    RString SELECT_KEY1 = new RString("key1");
+                    Decimal 預貯金_配偶者_無 = new Decimal(10000000);
+                    Decimal 預貯金_配偶者_有 = new Decimal(20000000);
+
+                    if (div.getTxtYochokinGaku().getText().isEmpty()
+                    && div.getTxtYukaShoken().getText().isEmpty()
+                    && div.getTxtSonota().getText().isEmpty()) {
+                        return true;
+                    } else {
+                        if (div.getTxtYochokinGaku().getText().isEmpty()) {
+                            div.getTxtYochokinGaku().setValue(Decimal.ZERO);
+                        }
+                        if (div.getTxtYukaShoken().getText().isEmpty()) {
+                            div.getTxtYukaShoken().setValue(Decimal.ZERO);
+                        }
+                        if (div.getTxtSonota().getText().isEmpty()) {
+                            div.getTxtSonota().setValue(Decimal.ZERO);
+                        }
+                    }
+
+                    if (SELECT_KEY1.equals(div.getRadHaigushaUmu().getSelectedKey())) {
+                        if (預貯金_配偶者_無.compareTo(div.getTxtYochokinGaku().getValue().add(div.getTxtYukaShoken().getValue()).add(div.getTxtSonota().getValue())) >= 0
+                        && !div.getChkYochokinKijunIka().isAllSelected()) {
+                            return false;
+                        }
+                    } else {
+                        if (預貯金_配偶者_有.compareTo(div.getTxtYochokinGaku().getValue().add(div.getTxtYukaShoken().getValue()).add(div.getTxtSonota().getValue())) >= 0
+                        && !div.getChkYochokinKijunIka().isAllSelected()) {
+                            return false;
+                        }
+                    }
+                    return true;
                 }
             },
     減免減額_適用期間重複 {

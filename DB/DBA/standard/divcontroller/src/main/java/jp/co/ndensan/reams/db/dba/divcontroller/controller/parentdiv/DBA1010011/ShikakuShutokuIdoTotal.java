@@ -56,7 +56,6 @@ public class ShikakuShutokuIdoTotal {
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString 追加 = new RString("追加");
-    private static final RString 状態_照会 = new RString("照会");
 
     private static final RString COMMON_BUTTON_RESEARCH = new RString("btnUpdate");
 
@@ -82,35 +81,41 @@ public class ShikakuShutokuIdoTotal {
         }
 
         前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-        if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
-        } else {
-            if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-                div.setReadOnly(true);
-                throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-            }
+        if ((!(hihokenshaNo == null || hihokenshaNo.isEmpty()))
+            && !RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            div.setReadOnly(true);
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
 
         ShiKaKuSyuToKuIdouTotalHandler handler = createHandler(div);
-        handler.load(ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class));
+
+        handler.load(ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class
+        ));
 
         if (!handler.is資格取得可能()) {
             releaseLock(div);
             return setNotExecutableAndReturnMessage(div, handler.get資格取得不可時エラーメッセージ());
         }
+
         if (handler.is資格取得中()) {
             releaseLock(div);
             return setNotExecutableAndReturnMessage(div, DbzInformationMessages.資格取得済み.getMessage());
         }
-        if (TaJushochiTokureiChecker.createInstance().is他市町村住所地特例者(shikibetsuCode)) {
+
+        if (TaJushochiTokureiChecker.createInstance()
+                .is他市町村住所地特例者(shikibetsuCode)) {
             releaseLock(div);
             return setNotExecutableAndReturnMessage(div, DbzInformationMessages.他特例者登録済み.getMessage());
         }
-        if (TekiyoJogaishaChecker.createInstance().is適用除外者(shikibetsuCode)) {
+
+        if (TekiyoJogaishaChecker.createInstance()
+                .is適用除外者(shikibetsuCode)) {
             releaseLock(div);
             return setNotExecutableAndReturnMessage(div, DbzInformationMessages.適用除外者登録済み.getMessage());
         }
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div)
+                .respond();
     }
 
     private boolean validateShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -338,12 +343,12 @@ public class ShikakuShutokuIdoTotal {
             }
             // 期間重複チェック
             if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
-                if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                        getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
-                    validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
-                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
-                }
+                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()
+                && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
+                validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
+                        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+
             }
         }
 
@@ -437,12 +442,11 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onBlur_txtShutokuDate(ShikakuShutokuIdoTotalDiv div) {
         if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
-            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                    .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
-                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
-                        setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
-            }
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()
+            && !div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
+                    setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
         }
         return ResponseData.of(div).respond();
     }

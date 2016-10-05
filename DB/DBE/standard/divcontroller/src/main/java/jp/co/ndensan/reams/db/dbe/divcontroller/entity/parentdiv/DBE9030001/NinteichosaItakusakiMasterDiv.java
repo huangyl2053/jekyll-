@@ -4,24 +4,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteichosaItakusakiMaster のクラスファイル
- *
+ * NinteichosaItakusakiMaster のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteichosaItakusakiMasterDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,10 +29,10 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
      */
     @JsonProperty("ChosainSearch")
     private ChosainSearchDiv ChosainSearch;
-    @JsonProperty("ChosaitakusakiJohoInput")
-    private ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput;
     @JsonProperty("Chosaitakusakichiran")
     private ChosaitakusakichiranDiv Chosaitakusakichiran;
+    @JsonProperty("ChosaitakusakiJohoInput")
+    private ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("状態")
@@ -84,24 +83,6 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     /*
-     * getChosaitakusakiJohoInput
-     * @return ChosaitakusakiJohoInput
-     */
-    @JsonProperty("ChosaitakusakiJohoInput")
-    public ChosaitakusakiJohoInputDiv getChosaitakusakiJohoInput() {
-        return ChosaitakusakiJohoInput;
-    }
-
-    /*
-     * setChosaitakusakiJohoInput
-     * @param ChosaitakusakiJohoInput ChosaitakusakiJohoInput
-     */
-    @JsonProperty("ChosaitakusakiJohoInput")
-    public void setChosaitakusakiJohoInput(ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput) {
-        this.ChosaitakusakiJohoInput = ChosaitakusakiJohoInput;
-    }
-
-    /*
      * getChosaitakusakichiran
      * @return Chosaitakusakichiran
      */
@@ -117,6 +98,24 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     @JsonProperty("Chosaitakusakichiran")
     public void setChosaitakusakichiran(ChosaitakusakichiranDiv Chosaitakusakichiran) {
         this.Chosaitakusakichiran = Chosaitakusakichiran;
+    }
+
+    /*
+     * getChosaitakusakiJohoInput
+     * @return ChosaitakusakiJohoInput
+     */
+    @JsonProperty("ChosaitakusakiJohoInput")
+    public ChosaitakusakiJohoInputDiv getChosaitakusakiJohoInput() {
+        return ChosaitakusakiJohoInput;
+    }
+
+    /*
+     * setChosaitakusakiJohoInput
+     * @param ChosaitakusakiJohoInput ChosaitakusakiJohoInput
+     */
+    @JsonProperty("ChosaitakusakiJohoInput")
+    public void setChosaitakusakiJohoInput(ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput) {
+        this.ChosaitakusakiJohoInput = ChosaitakusakiJohoInput;
     }
 
     /*
@@ -335,7 +334,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiCodeFrom(TextBoxCode txtSearchChosaItakusakiCodeFrom) {
+    public void  setTxtSearchChosaItakusakiCodeFrom(TextBoxCode txtSearchChosaItakusakiCodeFrom) {
         this.getChosainSearch().setTxtSearchChosaItakusakiCodeFrom(txtSearchChosaItakusakiCodeFrom);
     }
 
@@ -345,7 +344,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiCodeTo(TextBoxCode txtSearchChosaItakusakiCodeTo) {
+    public void  setTxtSearchChosaItakusakiCodeTo(TextBoxCode txtSearchChosaItakusakiCodeTo) {
         this.getChosainSearch().setTxtSearchChosaItakusakiCodeTo(txtSearchChosaItakusakiCodeTo);
     }
 
@@ -355,7 +354,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiMeisho(TextBox txtSearchChosaItakusakiMeisho) {
+    public void  setTxtSearchChosaItakusakiMeisho(TextBox txtSearchChosaItakusakiMeisho) {
         this.getChosainSearch().setTxtSearchChosaItakusakiMeisho(txtSearchChosaItakusakiMeisho);
     }
 
@@ -365,7 +364,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
+    public void  setDdlItakusakiMeisho(DropDownList ddlItakusakiMeisho) {
         this.getChosainSearch().setDdlItakusakiMeisho(ddlItakusakiMeisho);
     }
 
@@ -375,7 +374,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
+    public void  setTxtSearchChosaItakusakiKanaMeisho(TextBoxKana txtSearchChosaItakusakiKanaMeisho) {
         this.getChosainSearch().setTxtSearchChosaItakusakiKanaMeisho(txtSearchChosaItakusakiKanaMeisho);
     }
 
@@ -385,7 +384,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
+    public void  setDdlItakusakiKanaMeisho(DropDownList ddlItakusakiKanaMeisho) {
         this.getChosainSearch().setDdlItakusakiKanaMeisho(ddlItakusakiKanaMeisho);
     }
 
@@ -395,7 +394,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlitakukubun(DropDownList ddlitakukubun) {
+    public void  setDdlitakukubun(DropDownList ddlitakukubun) {
         this.getChosainSearch().setDdlitakukubun(ddlitakukubun);
     }
 
@@ -405,7 +404,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlkikankubun(DropDownList ddlkikankubun) {
+    public void  setDdlkikankubun(DropDownList ddlkikankubun) {
         this.getChosainSearch().setDdlkikankubun(ddlkikankubun);
     }
 
@@ -415,7 +414,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
+    public void  setRadSearchChosainJokyo(RadioButton radSearchChosainJokyo) {
         this.getChosainSearch().setRadSearchChosainJokyo(radSearchChosainJokyo);
     }
 
@@ -425,7 +424,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.getChosainSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
@@ -435,7 +434,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSearchShujii(Button btnSearchShujii) {
+    public void  setBtnSearchShujii(Button btnSearchShujii) {
         this.getChosainSearch().setBtnSearchShujii(btnSearchShujii);
     }
 
@@ -445,7 +444,7 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
+    public void  setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.getChosainSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
     }
 

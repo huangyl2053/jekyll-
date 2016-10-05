@@ -54,7 +54,8 @@ public class ShikakuTokusoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShikakuTokusoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShikakuTokusoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShikakuTokusoFinder}のインスタンス
      */
     public static ShikakuTokusoFinder createInstance() {
         return InstanceProvider.create(ShikakuTokusoFinder.class);

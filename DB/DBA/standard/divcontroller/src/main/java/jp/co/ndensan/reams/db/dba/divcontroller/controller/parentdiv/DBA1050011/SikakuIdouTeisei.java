@@ -70,13 +70,13 @@ public class SikakuIdouTeisei {
      * 現在、更新した被保険者台帳情報をメイン画面に反映していない為、onLoad時に行っている資格得喪履歴の初期化と同様の処理を
      * こちらでも行う。更新中のデータをメモリで持回るように修正された後に処理の修正を検討する。
      *
-     * @param div
-     * @return
+     * @param div 資格異動訂正Div
+     * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onActive(SikakuIdouTeiseiDiv div) {
         if (ResponseHolder.getBeforeEvent().equals(new RString("DBA1050021_資格異動の訂正を保存する"))) {
             TaishoshaKey key = getKey();
-            div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki()
+            div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki()
                     .initialize(key.get被保険者番号(), key.get識別コード());
             getHandler(div).setButtonDisable();
         }

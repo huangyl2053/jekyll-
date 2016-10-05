@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -41,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -54,16 +56,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class RiyoshaFutangakuGengakuPanel {
 
-    private static final RString 申請メニュー = new RString("DBDMN21002");
     private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 追加 = new RString("追加");
     private static final RString BTNUPDATE_FIELDNAME = new RString("btnUpdate");
-    private static final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
-    private static final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
-    private static final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
-    private static final RString 申請メニュー_タイトル = new RString("利用者負担額減額申請");
-    private static final RString 承認メニュー_タイトル = new RString("利用者負担額減額申請承認");
+    private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
+    private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
+    private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
 
     /**
      * 利用者負担額減額申請の初期化。(オンロード)
@@ -101,16 +100,19 @@ public class RiyoshaFutangakuGengakuPanel {
         }
         getHandler(div).初期処理(taishoshaKey);
         ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 0);
-
-        RString rootTitle;
-        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
-            rootTitle = 申請メニュー_タイトル;
-        } else {
-            rootTitle = 承認メニュー_タイトル;
+        List<ddlShinseiIchiran_Row> rows = div.getRiyoshaFutangakuGengakuShinseiList().getDdlShinseiIchiran().getDataSource();
+        for (ddlShinseiIchiran_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getRiyoshaFutangakuGengakuShinseiList().getBtnInputNew().setDisabled(true);
+            } else {
+                if (!承認メニュー.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
         }
-        ResponseData<RiyoshaFutangakuGengakuPanelDiv> responseData = ResponseData.of(div).setState(DBD1020001StateName.一覧);
-        responseData.setRootTitle(rootTitle);
-        return responseData;
+        return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
 
     /**
@@ -370,7 +372,11 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnShinseiKakutei(RiyoshaFutangakuGengakuPanelDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor申請日の必須入力(pairs, div);
+        if (div.getTxtShinseiYmd().getValue().isEmpty()) {
+            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYmd()));
+        }
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

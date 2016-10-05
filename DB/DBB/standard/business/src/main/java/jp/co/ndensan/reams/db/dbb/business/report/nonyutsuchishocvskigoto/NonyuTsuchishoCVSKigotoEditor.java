@@ -17,8 +17,12 @@ import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskigoto.NonyuTsu
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 保険料納入通知書（本算定）【コンビニ期毎タイプ】のEditorです。
@@ -196,7 +200,8 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
 
         if (item.get納付書共通() != null) {
             source.kamokumei = item.get納付書共通().get科目名称();
-            source.shimei = item.get納付書共通().get納付者氏名();
+            source.shimei = item.get納付書共通().get納付者氏名().concat(RString.HALF_SPACE)
+                    .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(item.get納付書共通().get被代納人敬称());
             source.gimushaShimei = item.get納付書共通().get被代納人氏名();
         }
         NonyuTsuchiShoKiJoho 納付書 = null;
@@ -214,6 +219,7 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
             source.cvsBarcodeNaiyo3 = 納付書.getバーコード情報上段();
             source.cvsBarcodeNaiyo4 = 納付書.getバーコード情報下段();
             source.kibetsu = 納付書.get期表記();
+            source.ryosyusyohitsukein = 納付書.get領収書日付欄期月();
             source.gokeigaku = 納付書.get納付額表記();
             source.nokigenYmd = 納付書.get納期限表記();
             source.honzei = 納付書.get納付額表記();
@@ -222,7 +228,10 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
                 source.ocr2 = 納付書.getOcr().get(2);
             }
             if (納付書.getコンビニ支払期限() != null) {
-                source.cvsToriatsukaikigen = 納付書.getコンビニ支払期限().toDateString();
+                source.cvsToriatsukaikigen = 納付書.getコンビニ支払期限().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK)
+                        .toDateString();
             }
             if (item.get納付書共通() != null) {
                 source.ryoshushoNendo = item.get納付書共通().get調定年度表記();
@@ -313,7 +322,7 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
         }
 
         if (納入通知書期情報リスト.size() >= リストサイズ１) {
-            source.ki1 = 納入通知書期情報リスト.get(0).get期表記().padLeft(RString.HALF_SPACE, INT_2);
+            source.ki1 = new RString(納入通知書期情報リスト.get(0).get期()).padLeft(RString.HALF_SPACE, INT_2);
             source.tsuki1 = 納入通知書期情報リスト.get(0).get月表記().padLeft(RString.HALF_SPACE, INT_2);
             source.nofuGaku1 = 納入通知書期情報リスト.get(0).get納付額表記();
             source.nokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();

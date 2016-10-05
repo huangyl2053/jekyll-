@@ -102,24 +102,21 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         List<TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/> 広域保留対象者情報 = manager.getKoikiHoryuTaishoshas/*getKoikiHoryuTaishoshaList*/().records();
         boolean 比較結果 = false;
         for (TenshutsuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転出対象者情報 : 転出保留対象者情報) {
-            if ((転出対象者情報.get識別コード() != null) && (!転出対象者情報.get識別コード().isEmpty())) {
-                if (転出対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
-                    比較結果 = true;
-                }
+            if ((転出対象者情報.get識別コード() != null) && (!転出対象者情報.get識別コード().isEmpty())
+                && 転出対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                比較結果 = true;
             }
         }
         for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転入対象者情報 : 転入保留対象者情報) {
-            if ((転入対象者情報.get識別コード() != null) && (!転入対象者情報.get識別コード().isEmpty())) {
-                if (転入対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
-                    比較結果 = true;
-                }
+            if ((転入対象者情報.get識別コード() != null) && (!転入対象者情報.get識別コード().isEmpty())
+                && 転入対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                比較結果 = true;
             }
         }
         for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 広域対象者情報 : 広域保留対象者情報) {
-            if ((広域対象者情報.get識別コード() != null) && (!広域対象者情報.get識別コード().isEmpty())) {
-                if (広域対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
-                    比較結果 = true;
-                }
+            if ((広域対象者情報.get識別コード() != null) && (!広域対象者情報.get識別コード().isEmpty())
+                && 広域対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                比較結果 = true;
             }
         }
         if (!比較結果) {
@@ -334,24 +331,6 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         ViewStateHolder.put(ViewStateKeys.被保険者台帳情報, 被保険者台帳情報);
         Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報 = Models.create(転出保留対象者List);
         ViewStateHolder.put(ViewStateKeys.転出保留対象者, 転出保留対象者情報);
-    }
-
-    private void save転入保留対象者情報ToViewState(List<TennyuHoryuTaisho> 対象者情報) {
-        List<TennyushutsuHoryuTaishosha> 転入保留対象者List = new ArrayList<>();
-        for (TennyuHoryuTaisho tennyuHoryuTaisho : 対象者情報) {
-            転入保留対象者List.add(tennyuHoryuTaisho.get転入保留対象者());
-        }
-        Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報 = Models.create(転入保留対象者List);
-        ViewStateHolder.put(ViewStateKeys.転入保留対象者, 転入保留対象者情報);
-    }
-
-    private void save広域保留対象者情報ToViewState(List<TennyuHoryuTaisho> 対象者情報) {
-        List<TennyushutsuHoryuTaishosha> 広域保留対象者情報List = new ArrayList<>();
-        for (TennyuHoryuTaisho tennyuHoryuTaisho : 対象者情報) {
-            広域保留対象者情報List.add(tennyuHoryuTaisho.get転入保留対象者());
-        }
-        Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報 = Models.create(広域保留対象者情報List);
-        ViewStateHolder.put(ViewStateKeys.広域転入保留対象者, 広域保留対象者情報);
     }
 
     private void loadTplTenshutsu(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {

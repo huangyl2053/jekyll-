@@ -197,6 +197,11 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+                <artifactId>AaxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.aaxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.aa.aax</groupId>
                 <artifactId>AaxService</artifactId>
                 <version>${jp.co.ndensan.reams.aaxVersion}</version>
             </dependency>

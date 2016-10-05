@@ -147,7 +147,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
         Ninshosha ninshosha = get認証者情報(new FlexibleDate(発行日.toDateString()));
 
-        if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
+        if (new RString("DBD100008_FutanGendoGakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
             int パターン番号;
             if (介護保険負担限度額認定.get旧措置者区分() == null || 介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
                 パターン番号 = 1;

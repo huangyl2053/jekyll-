@@ -19,7 +19,12 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 利用者負担額減額･免除認定決定通知書ボディEditorです。
@@ -119,13 +124,16 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         source.hihokenshaNo8 = 利用者負担額減額情報.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
         source.hihokenshaNo9 = 利用者負担額減額情報.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
         source.hihokenshaNo10 = 利用者負担額減額情報.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
-        source.ketteiYMD = 利用者負担額減額情報.get決定年月日().wareki().toDateString();
+        source.ketteiYMD = 利用者負担額減額情報.get決定年月日().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
         if (KetteiKubun.承認する.getコード().equals(利用者負担額減額情報.get決定区分())) {
-            source.tekiyoYMD = 利用者負担額減額情報.get適用開始年月日().wareki().toDateString();
+            source.tekiyoYMD = 利用者負担額減額情報.get適用開始年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka1 = new RString("（承認内容）");
             source.shoninSuru = マル;
-            source.yukoYMD = 利用者負担額減額情報.get適用終了年月日().wareki().toDateString();
+            source.yukoYMD = 利用者負担額減額情報.get適用終了年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka3
                     = new RString("　　　給付率　　".concat(利用者負担額減額情報.get給付率().getColumnValue().toString().concat("　/　100")));
             source.shoninShinai = RString.EMPTY;
@@ -344,6 +352,7 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
         source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
         source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
         source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
         source.koinShoryaku = ninshoshaSource.koinShoryaku;
@@ -360,7 +369,12 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         // source.jusho4 = sofubutsuAtesakiSource.j;
-        source.jushoText = sofubutsuAtesakiSource.jushoText;
+        if (sofubutsuAtesakiSource.jushoText == null) {
+            RStringBuilder jusho1 = new RStringBuilder(sofubutsuAtesakiSource.jusho1);
+            source.jushoText = jusho1.append(sofubutsuAtesakiSource.jusho2).append(sofubutsuAtesakiSource.jusho3).toRString();
+        } else {
+            source.jushoText = sofubutsuAtesakiSource.jushoText;
+        }
         // source.jusho5 = RString.EMPTY;
         // source.jusho6 = RString.EMPTY;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;

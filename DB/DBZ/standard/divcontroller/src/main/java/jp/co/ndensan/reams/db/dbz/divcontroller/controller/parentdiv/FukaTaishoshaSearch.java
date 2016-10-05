@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.DbV7902FukaSearchBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.FukaTaishoshaRelateBusiness;
-import jp.co.ndensan.reams.db.dbz.business.core.view.FukaSearchAlive;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.search.FukaSearchItem;
 import jp.co.ndensan.reams.db.dbz.service.core.util.SearchResult;
-import jp.co.ndensan.reams.db.dbz.service.core.view.FukaSearchAliveManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createKojin;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createShikibetsuTaisho;
@@ -370,7 +368,16 @@ public class FukaTaishoshaSearch {
 //        } else {
 //
 //        }
-        return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数);
+        RString 通知書番号 = div.get通知書番号();
+        if (通知書番号 == null) {
+            通知書番号 = RString.EMPTY;
+        }
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        if (div.get被保険者番号() != null && !div.get被保険者番号().isEmpty()) {
+            被保険者番号 = new HihokenshaNo(div.get被保険者番号());
+        }
+
+        return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数, 通知書番号, 被保険者番号);
     }
 
     private ISearchCondition get介護条件(HihokenshaFinderDiv div) {

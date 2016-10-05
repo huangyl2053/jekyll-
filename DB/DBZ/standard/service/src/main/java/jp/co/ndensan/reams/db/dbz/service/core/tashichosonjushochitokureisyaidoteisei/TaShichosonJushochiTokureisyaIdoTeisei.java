@@ -48,7 +48,8 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンス
      */
     public static TaShichosonJushochiTokureisyaIdoTeisei createInstance() {
         return InstanceProvider.create(TaShichosonJushochiTokureisyaIdoTeisei.class);
@@ -67,7 +68,7 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
             }
             for (TekiyouJouhou tekiyou : paramter.get適用情報グリッド()) {
                 if (解除日_判断(dbT1004.get入所日(), new FlexibleDate(tekiyou.get解除日()))
-                        && 適用日_判断(dbT1004.get退所日(), new FlexibleDate(tekiyou.get適用日()))) {
+                    && 適用日_判断(dbT1004.get退所日(), new FlexibleDate(tekiyou.get適用日()))) {
                     count++;
                 }
             }
@@ -78,8 +79,12 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
         for (TekiyouJouhou tekiyou : paramter.get適用情報グリッド()) {
             int count = 0;
             for (ShisetsuNyutaishoData dbT1004 : paramter.get入退所データリスト()) {
-                if (rStringTOFlexStart(tekiyou.get適用日()).isBeforeOrEquals(dbT1004.get退所日())
-                        && dbT1004.get入所日().isBeforeOrEquals(rStringTOFlexEnd(tekiyou.get解除日()))) {
+                FlexibleDate tekiyoDate = rStringTOFlexStart(tekiyou.get適用日());
+                if (tekiyoDate == null || tekiyoDate.isEmpty() || dbT1004.get退所日() == null || dbT1004.get退所日().isEmpty()) {
+                    continue;
+                }
+                if (tekiyoDate.isBeforeOrEquals(dbT1004.get退所日())
+                    && dbT1004.get入所日().isBeforeOrEquals(rStringTOFlexEnd(tekiyou.get解除日()))) {
                     count++;
                 }
             }
@@ -129,8 +134,8 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
         FlexibleDate 検索用適用年月日 = 現在の他特の情報.get適用年月日();
         List<DbT1003TashichosonJushochiTokureiEntity> クローンList = new ArrayList<>();
         if (!現在の他特の情報.get適用年月日().equals(修正後の他特の情報.get適用年月日())
-                || !現在の他特の情報.get適用届出年月日().equals(修正後の他特の情報.get適用届出年月日())
-                || !現在の他特の情報.get他市町村住所地特例適用事由コード().equals(修正後の他特の情報.get他市町村住所地特例適用事由コード())) {
+            || !現在の他特の情報.get適用届出年月日().equals(修正後の他特の情報.get適用届出年月日())
+            || !現在の他特の情報.get他市町村住所地特例適用事由コード().equals(修正後の他特の情報.get他市町村住所地特例適用事由コード())) {
             クローンList = dac.get訂正対象の履歴(現在の他特の情報.get識別コード(), 検索用適用年月日);
         }
         for (DbT1003TashichosonJushochiTokureiEntity entity : クローンList) {

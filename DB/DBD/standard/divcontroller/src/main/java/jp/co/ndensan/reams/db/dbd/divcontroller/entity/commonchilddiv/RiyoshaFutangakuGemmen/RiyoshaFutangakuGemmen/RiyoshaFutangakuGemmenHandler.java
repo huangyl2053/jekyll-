@@ -128,8 +128,14 @@ public class RiyoshaFutangakuGemmenHandler {
             div.getRiyoshaFutangakuGemmenDetail()
                     .getRiyoshaFutangakuGemmenRiyoshaFutan().getTxtKyufuRitsu().clearValue();
         }
+        if (dataSource.getFushoninRiyu() != null) {
         div.getRiyoshaFutangakuGemmenDetail()
                 .getRiyoshaFutangakuGemmenRiyoshaFutan().getTxtFushoninRiyu().setValue(dataSource.getFushoninRiyu());
+        } else {
+        // 内容をクリア
+        div.getRiyoshaFutangakuGemmenDetail()
+                .getRiyoshaFutangakuGemmenRiyoshaFutan().getTxtFushoninRiyu().clearValue();
+        }
     }
 
 }

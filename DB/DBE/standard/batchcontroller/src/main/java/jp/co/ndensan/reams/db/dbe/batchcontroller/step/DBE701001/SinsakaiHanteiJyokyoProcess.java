@@ -38,8 +38,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHanteiJyokyoHeaderEntity> {
 
-    private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
-                                                             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getSinsakaiHanteiJyokyoHeader");
+    private static final int 桁数_市町村コード_CD除く = 5;
+
+    private static final RString SELECT_HEADER
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence"
+                          + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getSinsakaiHanteiJyokyoHeader");
     private static final RString 帳票タイトル = new RString("介護認定審査会判定状況表");
     private static final RString JIGYOJYOKYOHOKOKU = new RString("【事業状況報告出力区分】");
     private static final RString JISSIJYOKYOTOKEI = new RString("【実施状況統計出力区分】");
@@ -299,7 +302,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
     }
 
     private static RString to五桁(RString rstr) {
-        return rstr.substringReturnAsPossible(0, 5);
+        return rstr.substringReturnAsPossible(0, 桁数_市町村コード_CD除く);
     }
 
     private ShinsaHanteiJokyoItem get一次判定要支援1(List<SinsakaiHanteiJyokyoEntity> 審査判定状況,
@@ -859,26 +862,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 二次判定要介護4計 = Integer.parseInt(合計.getListHantei_8().toString());
         int 二次判定要介護5計 = Integer.parseInt(合計.getListHantei_9().toString());
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
-        RString shichosonCode;
-        RString shichosonName;
-        if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
-            shichosonCode = 全市町村コード;
-            shichosonName = 全市町村;
-        } else {
-            shichosonCode = paramter.getShichosonCode().value();
-            shichosonName = paramter.getShichosonName();
-        }
+        RString shichosonName = find市町村名(this.paramter);
         ShinsaHanteiJokyoItem 割合Item = new ShinsaHanteiJokyoItem(
-                帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                帳票タイトル, find合議体名(this.paramter),
                 get対象開始年月日(),
                 get対象終了年月日(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                //<<<<<<< HEAD
                 to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
-                //=======
-                //                shichosonCode,
-                //>>>>>>> origin/sync
                 RDate.getNowDate().toDateString(),
                 shichosonName,
                 非該当,
@@ -917,6 +907,18 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 RString.EMPTY,
                 RString.EMPTY);
         return 割合Item;
+    }
+
+    private RString find合議体名(SinsakaiHanteiJyokyoProcessParameter parameter) {
+        return paramter.isEmptyGogitaiNo() ? 全合議体 : parameter.getGogitaiName();
+    }
+
+    private RString find市町村名(SinsakaiHanteiJyokyoProcessParameter parameter) {
+        if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
+            return 全市町村;
+        } else {
+            return parameter.getShichosonName();
+        }
     }
 
     private RString get対象開始年月日() {

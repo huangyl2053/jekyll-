@@ -57,6 +57,18 @@ module DBD {
                 return new UZA.TextBox(this.convFiledName("txtShinseiRiyu"));
             }
 
+            public izokuNenkinJukyuShinkoku(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("izokuNenkinJukyuShinkoku"));
+            }
+
+            public shogaiNenkinJukyuShinkoku(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("shogaiNenkinJukyuShinkoku"));
+            }
+
+            public HiKazeiNenkinjoho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("HiKazeiNenkinjoho"));
+            }
+
             public FutanGendogakuNinteiRiyoshaFutan(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiRiyoshaFutan"));
             }

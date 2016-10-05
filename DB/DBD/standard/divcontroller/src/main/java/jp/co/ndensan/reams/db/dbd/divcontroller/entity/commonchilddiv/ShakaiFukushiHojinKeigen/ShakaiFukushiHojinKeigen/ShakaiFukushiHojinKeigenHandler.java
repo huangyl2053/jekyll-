@@ -171,9 +171,19 @@ public class ShakaiFukushiHojinKeigenHandler {
             div.getShakaiFukushiHojinKeigenDetail()
                     .getShakaiFukushiHojinKeigenRiyoshaFutan().getTxtKeigenRitsuBunbo().clearValue();
         }
-        div.getShakaiFukushiHojinKeigenDetail()
-                .getShakaiFukushiHojinKeigenRiyoshaFutan().getTxtKakuninNo().setValue(dataSource.getKakuninNo());
-        div.getShakaiFukushiHojinKeigenDetail()
-                .getShakaiFukushiHojinKeigenRiyoshaFutan().getTxtFushoninRiyu().setValue(dataSource.getFushoninRiyu());
+        if (dataSource.getKakuninNo()!= null) {
+            div.getShakaiFukushiHojinKeigenDetail()
+                    .getShakaiFukushiHojinKeigenRiyoshaFutan().getTxtKakuninNo().setValue(dataSource.getKakuninNo());
+        } else {
+            div.getShakaiFukushiHojinKeigenDetail()
+                    .getShakaiFukushiHojinKeigenRiyoshaFutan().getTxtKakuninNo().clearValue();
+        }
+        if (dataSource.getFushoninRiyu()!= null) {
+            div.getShakaiFukushiHojinKeigenDetail()
+                    .getShakaiFukushiHojinKeigenRiyoshaFutan().getTxtFushoninRiyu().setValue(dataSource.getFushoninRiyu());
+        } else {
+            div.getShakaiFukushiHojinKeigenDetail()
+                    .getShakaiFukushiHojinKeigenRiyoshaFutan().getTxtFushoninRiyu().clearValue();
+        }
     }
 }

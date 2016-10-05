@@ -3,33 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.definition.core;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *要介護状態区分の列挙型です。
- * 
+ * 要介護状態区分の列挙型です。
+ *
  * @author n8407 陳
- * 
+ *
  * @jpName
  * @bizDomain
  * @category
  * @subCategory
  * @mainClass
  * @reference
- * 
+ *
  */
-public enum YokaigoJotaiKubun implements IYokaigoJotaiKubun{
+public enum YokaigoJotaiKubun implements IYokaigoJotaiKubun {
 
     /**
      * 要介護状態区分が「事業対象者」であることを表します。<br />
      * コード：06
      */
     事業対象者("06");
-    
+
     private final RString code;
     private final RString name;
 

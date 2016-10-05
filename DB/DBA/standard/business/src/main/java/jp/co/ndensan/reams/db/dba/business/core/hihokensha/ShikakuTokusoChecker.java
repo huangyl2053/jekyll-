@@ -17,6 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class ShikakuTokusoChecker {
 
+    private ShikakuTokusoChecker() {
+    }
+
     private enum ShutokuMenu {
 
         転入により取得("DBAMN21001"),
@@ -83,79 +86,88 @@ public final class ShikakuTokusoChecker {
 
         switch (ShutokuMenu.toValue(メニューID)) {
             case 転入により取得:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得At転入(住民種別, 住民状態);
             case 第2号被保険者取得申請により取得:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得At第2号被保険者取得申請(住民種別, 住民状態);
             case 外国人申請により取得:
-                if (!is外国人(住民種別)) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得At外国人申請(住民種別, 住民状態);
             case 年齢到達により取得:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態)
-                        || JuminJotai.住登外.equals(住民状態)
-                        || JuminJotai.消除者.equals(住民状態)
-                        || JuminJotai.転出者.equals(住民状態)
-                        || JuminJotai.死亡者.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得At年齢到達(住民種別, 住民状態);
             case 転居により取得_施設退所等:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得At転居(住民種別, 住民状態);
             case 帰化により取得:
-                if (!is日本人(住民種別)) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得At帰化(住民種別, 住民状態);
             case 職権により取得:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得By職権(住民種別, 住民状態);
             case その他事由により取得:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態)
-                        || JuminJotai.住登外.equals(住民状態)
-                        || JuminJotai.消除者.equals(住民状態)
-                        || JuminJotai.転出者.equals(住民状態)
-                        || JuminJotai.死亡者.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格取得BecauseOfその他事由(住民種別, 住民状態);
+            default:
+                return false;
         }
-        return false;
+    }
+
+    private static boolean can資格取得At第2号被保険者取得申請(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格取得At外国人申請(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!is外国人(住民種別)) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格取得At年齢到達(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態)
+               || JuminJotai.住登外.equals(住民状態)
+               || JuminJotai.消除者.equals(住民状態)
+               || JuminJotai.転出者.equals(住民状態)
+               || JuminJotai.死亡者.equals(住民状態);
+    }
+
+    private static boolean can資格取得At転入(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格取得At転居(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格取得At帰化(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!is日本人(住民種別)) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格取得By職権(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格取得BecauseOfその他事由(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態)
+               || JuminJotai.住登外.equals(住民状態)
+               || JuminJotai.消除者.equals(住民状態)
+               || JuminJotai.転出者.equals(住民状態)
+               || JuminJotai.死亡者.equals(住民状態);
     }
 
     /**
@@ -171,67 +183,75 @@ public final class ShikakuTokusoChecker {
 
         switch (SoshitsuMenu.toValue(メニューID)) {
             case 転出により喪失:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.転出者.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格喪失At転出(住民種別, 住民状態);
             case 死亡により喪失:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.死亡者.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格喪失At死亡(住民種別, 住民状態);
             case 転居により喪失_施設入所等:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格喪失At転居(住民種別, 住民状態);
             case 国籍喪失により喪失:
-                if (!(is日本人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.消除者.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格喪失At国籍喪失(住民種別, 住民状態);
             case 医療保険未加入により喪失:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格喪失At医療保険未加入(住民種別, 住民状態);
             case 職権により喪失:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.消除者.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格喪失By職権(住民種別, 住民状態);
             case その他事由により喪失:
-                if (!(is日本人(住民種別) || is外国人(住民種別))) {
-                    return false;
-                }
-                if (JuminJotai.住民.equals(住民状態)
-                        || JuminJotai.住登外.equals(住民状態)
-                        || JuminJotai.消除者.equals(住民状態)
-                        || JuminJotai.転出者.equals(住民状態)
-                        || JuminJotai.死亡者.equals(住民状態)) {
-                    return true;
-                }
-                break;
+                return can資格喪失BecauseOfその他事由(住民種別, 住民状態);
+            default:
+                return false;
         }
-        return false;
+    }
+
+    private static boolean can資格喪失At転出(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.転出者.equals(住民状態);
+    }
+
+    private static boolean can資格喪失At死亡(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.死亡者.equals(住民状態);
+    }
+
+    private static boolean can資格喪失At転居(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格喪失At国籍喪失(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.消除者.equals(住民状態);
+    }
+
+    private static boolean can資格喪失At医療保険未加入(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態) || JuminJotai.住登外.equals(住民状態);
+    }
+
+    private static boolean can資格喪失By職権(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.消除者.equals(住民状態);
+    }
+
+    private static boolean can資格喪失BecauseOfその他事由(JuminShubetsu 住民種別, JuminJotai 住民状態) {
+        if (!(is日本人(住民種別) || is外国人(住民種別))) {
+            return false;
+        }
+        return JuminJotai.住民.equals(住民状態)
+               || JuminJotai.住登外.equals(住民状態)
+               || JuminJotai.消除者.equals(住民状態)
+               || JuminJotai.転出者.equals(住民状態)
+               || JuminJotai.死亡者.equals(住民状態);
     }
 
     private static boolean is日本人(JuminShubetsu 住民種別) {

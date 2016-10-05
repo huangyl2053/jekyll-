@@ -8,18 +8,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2040021
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.tashichosonjushochitokureisyaidoteisei.ShisetsuNyutaishoData;
-import jp.co.ndensan.reams.db.dbz.definition.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeiseiParamter;
 import jp.co.ndensan.reams.db.dbz.definition.core.tashichosonjushochitokureisyaidoteisei.TekiyouJouhou;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.dgJushochiTokureiRireki_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.DBA2040021StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.TajutokuIdoTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040021.TajutokuIdoTeiseiHandler;
-import jp.co.ndensan.reams.db.dbz.service.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeisei;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -79,10 +78,8 @@ public class TajutokuIdoTeisei {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            set登録処理(requestDiv);
-            RealInitialLocker.release(LOCKINGKEY);
-            return ResponseData.of(requestDiv).setState(DBA2040021StateName.完了状態);
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return set登録処理(requestDiv);
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -110,13 +107,14 @@ public class TajutokuIdoTeisei {
                 入退所データリスト.add(shisetsuNyutaishoData);
             }
         }
-        TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
-                入退所データリスト,
-                適用情報グリッド);
-        TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
+//        TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
+//                入退所データリスト,
+//                適用情報グリッド);
+        //TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+        requestDiv.getTajutokuIdoTeiseiComplete().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
         RealInitialLocker.release(LOCKINGKEY);
         return ResponseData.of(requestDiv).setState(DBA2040021StateName.完了状態);
     }

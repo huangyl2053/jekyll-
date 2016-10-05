@@ -30,7 +30,7 @@ public class KaigoJigyoshaMapperParameterTest extends DbxTestBase {
 
         @Test(expected = NullPointerException.class)
         public void jigyoshaNoにNullを指定すると_NullPointerExceptionが発生する() {
-            KaigoJigyoshaMapperParameter sut = KaigoJigyoshaMapperParameter.createSelectByKeyParam(null, yukoKaishiYMD);
+            KaigoJigyoshaMapperParameter sut = KaigoJigyoshaMapperParameter.createSelectByKeyParam((JigyoshaNo) null, yukoKaishiYMD);
         }
 
         @Test(expected = NullPointerException.class)

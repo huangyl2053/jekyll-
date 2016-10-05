@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 老齢福祉年金画面のハンドラークラスです。
@@ -63,6 +65,8 @@ public class RoreiFukushiNenkinShokaiHandler {
             if (busiRoreiFukushiNenkin.get受給終了年月日() != null && busiRoreiFukushiNenkin.get受給終了年月日().isValid()) {
                 row.getEndDate().setValue(new RDate(busiRoreiFukushiNenkin.get受給終了年月日().toString()));
             }
+            ViewExecutionStatus status = ViewExecutionStatus.toValue(new RString(busiRoreiFukushiNenkin.toEntity().getState().name()));
+            row.setJotai(status.get名称());
             rowList.add(row);
         }
         Collections.sort(rowList, new ComparatorByStartDateSort());

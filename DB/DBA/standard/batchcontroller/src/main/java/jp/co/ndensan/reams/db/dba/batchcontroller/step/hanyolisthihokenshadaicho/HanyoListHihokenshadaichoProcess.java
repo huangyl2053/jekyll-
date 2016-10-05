@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.association.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -638,7 +637,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     get略称(new CodeShubetsu(shikakShutokuHantei.getCodeShubetsu()), shikakShutokuHantei.getJiyuCode()),
                     getパターン32(shikakShutokuHantei.getTekiyoYMD()),
                     getパターン32(shikakShutokuHantei.getTodokedeYMD()),
-                    get略称(new CodeShubetsu("0010"), t.getShikakuShutokuJiyuCode()),
+                    get略称(new CodeShubetsu("0010"), t.getShikakuSoshitsuJiyuCode()),
                     getパターン32(t.getShikakuSoshitsuYMD()),
                     getパターン32(t.getShikakuSoshitsuTodokedeYMD()),
                     HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).get名称(),
@@ -694,7 +693,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     get略称(new CodeShubetsu(shikakShutokuHantei.getCodeShubetsu()), shikakShutokuHantei.getJiyuCode()),
                     getYYYYMMDD(shikakShutokuHantei.getTekiyoYMD()),
                     getYYYYMMDD(shikakShutokuHantei.getTodokedeYMD()),
-                    get略称(new CodeShubetsu("0010"), t.getShikakuShutokuJiyuCode()),
+                    get略称(new CodeShubetsu("0010"), t.getShikakuSoshitsuJiyuCode()),
                     getYYYYMMDD(t.getShikakuSoshitsuYMD()),
                     getYYYYMMDD(t.getShikakuSoshitsuTodokedeYMD()),
                     HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).get名称(),

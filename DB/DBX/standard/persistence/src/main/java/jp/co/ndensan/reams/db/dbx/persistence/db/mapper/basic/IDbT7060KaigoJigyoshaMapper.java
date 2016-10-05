@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 
@@ -29,4 +30,13 @@ public interface IDbT7060KaigoJigyoshaMapper {
      * @return {@link DbT7060KaigoJigyoshaEntity}
      */
     DbT7060KaigoJigyoshaEntity select介護事業者By申請日(KaigoJigyoshaMapperParameter 介護事業者検索条件);
+
+    /**
+     * 事業者番号と申請日より、{@link DbT7060KaigoJigyoshaEntity}を取得します。
+     *
+     * @param 介護事業者検索条件 介護事業者検索条件
+     * @return {@link DbT7060KaigoJigyoshaEntity}
+     */
+    List<DbT7060KaigoJigyoshaEntity> select介護事業者ListBy申請日(KaigoJigyoshaMapperParameter 介護事業者検索条件);
+
 }

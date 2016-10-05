@@ -128,11 +128,11 @@
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName"  LIKE '%' || #{主治医氏名}
                 </if>
-                <if test="uses主治医氏名">
+                <if test="uses2主治医氏名">
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName" = #{主治医氏名}
                 </if>
-                <if test="uses主治医氏名">
+                <if test="uses3主治医氏名">
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiName"  LIKE '%' || #{主治医氏名} || '%'
                 </if>
@@ -142,15 +142,15 @@
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE #{主治医カナ氏名} || '%'
                 </if>
-                <if test="uses主治医カナ氏名">
+                <if test="uses1主治医カナ氏名">
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE '%' || #{主治医カナ氏名}
                 </if>
-                <if test="uses主治医カナ氏名">
+                <if test="uses2主治医カナ氏名">
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana" = #{主治医カナ氏名}
                 </if>
-                <if test="uses主治医カナ氏名">
+                <if test="uses3主治医カナ氏名">
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE '%' || #{主治医カナ氏名} || '%'
                 </if>
@@ -296,11 +296,13 @@
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter">
         SELECT
-        "UrT0516IryoKikan"."iryoKikanMeisho"
+          "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho"
         FROM
-        rgur."UrT0516IryoKikan"
+         rgdb."DbT5911ShujiiIryoKikanJoho"
         WHERE
-        "UrT0516IryoKikan"."iryoKikanCode" = #{主治医医療機関コード}
+         "DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
+        AND  "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = #{市町村コード}
+        AND  "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
     </select>
 
     <select resultOrdered="true" id="selectShichosonMeisho"

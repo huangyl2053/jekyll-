@@ -23,7 +23,7 @@ public class HihokenshaShoBatchPrmHandler {
     private static final RString JYUKYUMONO_RADIO_SENTAKU = new RString("2");
     private static final RString GAITOMONO_RADIO_SENTAKU = new RString("3");
     private static final RString JNENNREI_RADIO_SENTAKU = new RString("4");
-
+    
     /**
      * HihokenshaShoBatchPrmHandlerの引入です。
      *
@@ -123,44 +123,53 @@ public class HihokenshaShoBatchPrmHandler {
      */
     public void saihakkoSelect(List<HihokenshashoIkkatsuHakkoModel> resultList) {
         HihokenshashoIkkatsuHakkoModel hakkoModel = resultList.get(0);
-        if (hakkoModel.getTaishoKaishiTimestamp() != null) {
-            div.getTxtZenkaiChushutsuFromYMD().setValue(hakkoModel.getTaishoKaishiTimestamp().getDate());
-            div.getTxtZenkaiChushutsuFromTime().setValue(hakkoModel.getTaishoKaishiTimestamp().getRDateTime().getTime());
-        }
-        div.getTxtZenkaiChushutsuFromYMD().setDisabled(true);
-        div.getTxtZenkaiChushutsuFromTime().setDisabled(true);
-        if (hakkoModel.getTaishoShuryoTimestamp() != null) {
-            div.getTxtZenkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
-            div.getTxtZenkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
-        }
-        div.getTxtZenkaiShoriKijunYMD().setDisabled(true);
-        if (hakkoModel.getKijunTimestamp() != null) {
-            div.getTxtZenkaiShoriKijunTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
-        }
-        div.getTxtZenkaiShoriKijunTime().setDisabled(true);
-        if (hakkoModel.getTaishoKaishiTimestamp() != null) {
-            div.getTxtKonkaiChushutsuFromYMD().setValue(hakkoModel.getTaishoKaishiTimestamp().getDate());
-            div.getTxtKonkaiChushutsuFromTime().setValue(hakkoModel.getTaishoKaishiTimestamp().getRDateTime().getTime());
-        }
-        div.getTxtKonkaiChushutsuFromYMD().setDisabled(true);
-        div.getTxtKonkaiChushutsuFromTime().setDisabled(true);
-        if (hakkoModel.getTaishoShuryoTimestamp() != null) {
-            div.getTxtKonkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
-            div.getTxtKonkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
-            div.getTxtKonkaiShoriKijunYMD().setValue(hakkoModel.getKijunTimestamp().getDate());
-            div.getTxtKonkaiShoriKijunTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
-        }
-        if (div.getChkSaiHakko().isAllSelected()) {
 
-            div.getTxtHakkoYMD().setValue(div.getTxtKonkaiShoriKijunYMD().getValue());
-            div.getTxtHakkoTime().setValue(div.getTxtKonkaiShoriKijunTime().getValue());
+        if (div.getChkSaiHakko().isAllSelected()) {
+            div.getTxtKonkaiShoriKijunYMDBack().setValue(div.getTxtKonkaiShoriKijunYMD().getValue());
+            div.getTxtKonkaiShoriKijunTimeBack().setValue(div.getTxtKonkaiShoriKijunTime().getValue());
+            div.getTxtKonkaiChushutsuFromYMDBack().setValue(div.getTxtKonkaiChushutsuFromYMD().getValue());
+            div.getTxtKonkaiChushutsuFromTimeBack().setValue(div.getTxtKonkaiChushutsuFromTime().getValue());
+            div.getTxtKonkaiChushutsuToYMDBack().setValue(div.getTxtKonkaiChushutsuToYMD().getValue());
+            div.getTxtKonkaiChushutsuToTimeBack().setValue(div.getTxtKonkaiChushutsuToTime().getValue());
+        
+            if (hakkoModel.getTaishoKaishiTimestamp() != null) {
+                div.getTxtKonkaiChushutsuFromYMD().setValue(hakkoModel.getTaishoKaishiTimestamp().getDate());
+                div.getTxtKonkaiChushutsuFromTime().setValue(hakkoModel.getTaishoKaishiTimestamp().getRDateTime().getTime());
+            }
+
+            div.getTxtKonkaiChushutsuFromYMD().setDisabled(true);
+            div.getTxtKonkaiChushutsuFromTime().setDisabled(true);
+            
+            if (hakkoModel.getTaishoShuryoTimestamp() != null) {
+                div.getTxtKonkaiChushutsuToYMD().setValue(hakkoModel.getTaishoShuryoTimestamp().getDate());
+                div.getTxtKonkaiChushutsuToTime().setValue(hakkoModel.getTaishoShuryoTimestamp().getRDateTime().getTime());
+            }
+
+            div.getTxtKonkaiChushutsuToYMD().setDisabled(true);
+            div.getTxtKonkaiChushutsuToTime().setDisabled(true);
+            
+            if (hakkoModel.getKijunTimestamp() != null) {
+                div.getTxtKonkaiShoriKijunYMD().setValue(hakkoModel.getKijunTimestamp().getDate());
+                div.getTxtKonkaiShoriKijunTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
+                div.getTxtHakkoYMD().setValue(hakkoModel.getKijunTimestamp().getDate());
+                div.getTxtHakkoTime().setValue(hakkoModel.getKijunTimestamp().getRDateTime().getTime());
+            }
+
         } else {
+            
+            div.getTxtKonkaiChushutsuFromYMD().setValue(div.getTxtKonkaiChushutsuFromYMDBack().getValue());
+            div.getTxtKonkaiChushutsuFromTime().setValue(div.getTxtKonkaiChushutsuFromTimeBack().getValue());
+            div.getTxtKonkaiChushutsuToYMD().setValue(div.getTxtKonkaiChushutsuToYMDBack().getValue());
+            div.getTxtKonkaiChushutsuToTime().setValue(div.getTxtKonkaiChushutsuToTimeBack().getValue());
+            div.getTxtKonkaiShoriKijunYMD().setValue(div.getTxtKonkaiShoriKijunYMDBack().getValue());
+            div.getTxtKonkaiShoriKijunTime().setValue(div.getTxtKonkaiShoriKijunTimeBack().getValue());
             div.getTxtHakkoYMD().clearValue();
             div.getTxtHakkoTime().clearValue();
+            
+            div.getTxtKonkaiChushutsuFromYMD().setDisabled(false);
+            div.getTxtKonkaiChushutsuFromTime().setDisabled(false);
+            div.getTxtKonkaiChushutsuToYMD().setDisabled(false);
+            div.getTxtKonkaiChushutsuToTime().setDisabled(false);
         }
-        div.getTxtKonkaiChushutsuToYMD().setDisabled(true);
-        div.getTxtKonkaiChushutsuToTime().setDisabled(true);
-        div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
-        div.getTxtKonkaiShoriKijunTime().setDisabled(true);
     }
 }

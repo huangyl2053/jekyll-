@@ -658,7 +658,7 @@ public class GogitaiJohoSakusei {
         return gogitaiJoho;
     }
 
-    private static class EdittingRow {
+    private static final class EdittingRow {
 
         private final dgGogitaiIchiran_Row row;
         private final int index;
