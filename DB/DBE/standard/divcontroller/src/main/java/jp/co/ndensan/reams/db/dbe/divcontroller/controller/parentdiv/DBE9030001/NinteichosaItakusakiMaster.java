@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9030001.NinteichosaItakusakiMasterHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
@@ -45,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -72,7 +75,13 @@ public class NinteichosaItakusakiMaster {
     private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
     private static final RString その他状態コード = new RString("その他");
     private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
-
+    private static final RString 構成市町村マスタ市町村コード重複種別 = 
+            DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+    private static final RString 四マスタ優先表示市町村識別ID = 
+            DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    
     /**
      * 画面初期化処理です。
      *
@@ -202,6 +211,7 @@ public class NinteichosaItakusakiMaster {
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnChosaininsert(NinteichosaItakusakiMasterDiv div) {
         ViewStateHolder.put(SaibanHanyokeyName.調査委託先コード, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
+        ViewStateHolder.put(ViewStateKeys.市町村コード, div.getChosaitakusakiJohoInput().getTxtShichoson().getValue());
         return ResponseData.of(div).forwardWithEventName(DBE9030001TransitionEventName.認定調査員へ遷移).respond();
     }
 
@@ -411,6 +421,14 @@ public class NinteichosaItakusakiMaster {
             List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
             if (!list.isEmpty()) {
                 div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+                if (!構成市町村マスタ市町村コード重複種別.equals(new RString("0"))) {
+                    for (ShichosonMeishoBusiness item : list) {
+                        if (四マスタ優先表示市町村識別ID.equals(item.getShichosonShikibetuID())) {
+                            div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(item.getShichosonMeisho());
+                            break;
+                        }
+                    }
+                }
             } else {
                 div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
             }

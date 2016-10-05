@@ -296,11 +296,13 @@
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter">
         SELECT
-        "UrT0516IryoKikan"."iryoKikanMeisho"
+          "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho"
         FROM
-        rgur."UrT0516IryoKikan"
+         rgdb."DbT5911ShujiiIryoKikanJoho"
         WHERE
-        "UrT0516IryoKikan"."iryoKikanCode" = #{主治医医療機関コード}
+         "DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
+        AND  "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = #{市町村コード}
+        AND  "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
     </select>
 
     <select resultOrdered="true" id="selectShichosonMeisho"
