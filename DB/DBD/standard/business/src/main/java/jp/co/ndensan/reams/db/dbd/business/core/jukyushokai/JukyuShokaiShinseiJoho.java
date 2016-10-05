@@ -21,17 +21,21 @@ public class JukyuShokaiShinseiJoho {
 
     private final DbT4001JukyushaDaichoEntity 受給者台帳Entity;
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
+    private final Code 厚労省IF識別コード;
 
     /**
      * コンストラクタです。
      *
      * @param 受給者台帳Entity 受給者台帳Entity
      * @param 要介護認定インターフェース情報Entity 要介護認定インターフェース情報Entity
+     * @param 厚労省IF識別コード 厚労省IF識別コード
      */
     public JukyuShokaiShinseiJoho(DbT4001JukyushaDaichoEntity 受給者台帳Entity,
-            DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity) {
+            DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,
+            Code 厚労省IF識別コード) {
         this.受給者台帳Entity = 受給者台帳Entity;
         this.要介護認定インターフェース情報Entity = 要介護認定インターフェース情報Entity;
+        this.厚労省IF識別コード = 厚労省IF識別コード;
     }
 
     /**
@@ -185,5 +189,14 @@ public class JukyuShokaiShinseiJoho {
      */
     public RString get受給者台帳_被保険者番号() {
         return 受給者台帳Entity.getHihokenshaNo().getColumnValue();
+    }
+
+    /**
+     * 要介護認定申請情報_厚労省IF識別コードを取得します。
+     *
+     * @return 要介護認定申請情報_厚労省IF識別コード
+     */
+    public Code get要介護認定申請情報_厚労省IF識別コード() {
+        return this.厚労省IF識別コード;
     }
 }

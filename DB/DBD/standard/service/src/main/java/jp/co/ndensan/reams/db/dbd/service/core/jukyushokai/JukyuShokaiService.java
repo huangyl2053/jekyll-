@@ -66,7 +66,7 @@ public class JukyuShokaiService {
         List<JukyuShokaiShinseiJoho> johoList = new ArrayList<>();
         JukyuShokaiShinseiJoho joho;
         for (JukyuShokaiShinseiEntity entity : 申請情報EntityList) {
-            joho = new JukyuShokaiShinseiJoho(entity.get受給者台帳Entity(), entity.get要介護認定インターフェース情報Entity());
+            joho = new JukyuShokaiShinseiJoho(entity.get受給者台帳Entity(), entity.get要介護認定インターフェース情報Entity(), entity.get厚労省IF識別コード());
             johoList.add(joho);
         }
         return johoList;

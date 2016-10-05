@@ -17,9 +17,14 @@
     <select resultOrdered="true" id="find申請情報" resultMap="resultMap_申請情報の取得" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />,
+        "DbT4101NinteiShinseiJoho"."koroshoIfShikibetsuCode" AS 厚労省IF識別コード
         FROM
         rgdb."DbT4001JukyushaDaicho" as "DbT4001JukyushaDaicho"
+        LEFT JOIN
+        rgdb."DbT4101NinteiShinseiJoho" as "DbT4101NinteiShinseiJoho"
+        ON
+        "DbT4001JukyushaDaicho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT4003YokaigoNinteiInterface" as "DbT4003YokaigoNinteiInterface"
         ON
@@ -53,7 +58,7 @@
         )
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />,
         "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS 医療機関名称,
         "DbT5912ShujiiJoho"."shujiiName" AS 主治医氏名,
@@ -63,32 +68,33 @@
         "前回認定情報"."前回認定年月日" AS 前回認定年月日,
         "前回認定情報"."前回有効期間開始" AS 前回有効期間開始,
         "前回認定情報"."前回有効期間終了" AS 前回有効期間終了,
+        "前回認定情報"."前回厚労省IF識別コード" AS 前回厚労省IF識別コード,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />,
         "資格者証交付情報".*
         FROM
         処理対象 as "DbT4001JukyushaDaicho"
         LEFT JOIN
-        rgdb."DbT5101NinteiShinseiJoho" as "DbT5101NinteiShinseiJoho"
+        rgdb."DbT4101NinteiShinseiJoho" as "DbT4101NinteiShinseiJoho"
         ON
-        "DbT4001JukyushaDaicho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        "DbT4001JukyushaDaicho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5120ShinseitodokedeJoho" as "DbT5120ShinseitodokedeJoho"
         ON
-        "DbT5120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        "DbT5120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5121ShinseiRirekiJoho" as "DbT5121ShinseiRirekiJoho"
         ON
-        "DbT5121ShinseiRirekiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        "DbT5121ShinseiRirekiJoho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" as "DbT5911ShujiiIryoKikanJoho"
         ON
         "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = "DbT4001JukyushaDaicho"."shichosonCode"
-        AND "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+        AND "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode"
         LEFT JOIN
         rgdb."DbT5912ShujiiJoho" as "DbT5912ShujiiJoho"
         ON "DbT5912ShujiiJoho"."shichosonCode" =  "DbT4001JukyushaDaicho"."shichosonCode"
-        AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
-        AND "DbT5912ShujiiJoho"."shujiiCode" = "DbT5101NinteiShinseiJoho"."shujiiCode"
+        AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode"
+        AND "DbT5912ShujiiJoho"."shujiiCode" = "DbT4101NinteiShinseiJoho"."shujiiCode"
         LEFT JOIN
         (
         SELECT
@@ -96,9 +102,14 @@
         A."yokaigoJotaiKubunCode" AS "前回要介護状態区分コード",
         A."ninteiYMD" AS "前回認定年月日",
         A."ninteiYukoKikanKaishiYMD" AS "前回有効期間開始",
-        A."ninteiYukoKikanShuryoYMD" AS "前回有効期間終了"
+        A."ninteiYukoKikanShuryoYMD" AS "前回有効期間終了",
+        "DbT4101NinteiShinseiJoho"."koroshoIfShikibetsuCode" AS "前回厚労省IF識別コード"
         FROM
         rgdb."DbT4001JukyushaDaicho" AS A
+        INNER JOIN
+        rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
+        ON
+        A."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
         ) as "前回認定情報"
         ON
         "前回認定情報"."申請書管理番号" = "DbT5121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo"
