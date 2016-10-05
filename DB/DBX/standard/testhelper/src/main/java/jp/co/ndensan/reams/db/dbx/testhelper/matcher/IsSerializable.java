@@ -22,6 +22,7 @@ public class IsSerializable extends BaseMatcher<Object> {
 
     private Result result;
 
+    /** コンストラクタ */
     public IsSerializable() {
     }
 
@@ -79,7 +80,7 @@ public class IsSerializable extends BaseMatcher<Object> {
         CanNotDeserialize("デシリアライズに失敗しました。readObject()やreadResolve()の実装を見直してください。"),
         NotEqual("デシリアライズの結果がシリアライズ前と異なります。(equals()は正しくオーバライドはされていますか？されているなら、readObject()やreadResolve()の実装を見直してください。)"),
         Success("");
-
+        //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
         private final String errorMessage;
 
         private Result(String message) {
