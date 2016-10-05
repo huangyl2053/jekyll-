@@ -46,13 +46,13 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoLower1_2 = item.getDaihyoshaName() == null ? RString.EMPTY : item.getDaihyoshaName().value();
         source.listIchiranhyoLower1_3 = item.getJusho();
         source.listIchiranhyoLower2_1 = item.getShujiiName() == null ? RString.EMPTY : item.getShujiiName().value();
-        source.listIchiranhyoLower2_2 = item.getShinryokaName()== null ? RString.EMPTY : item.getShinryokaName();
+        source.listIchiranhyoLower2_2 = item.getShinryokaName() == null ? RString.EMPTY : item.getShinryokaName();
         source.listIchiranhyoUpper_1 = item.getIryokikanCode();
         source.listIchiranhyoUpper_2 = item.getIryoKikanMeishoKana();
         source.listIchiranhyoUpper_3 = item.getDaihyoshaNameKana();
         RString yubinNo = item.getYubinNo() == null ? RString.EMPTY : item.getYubinNo().value();
         if (RString.isNullOrEmpty(yubinNo)
-                || item.getYubinNo().value().length() != 数値_7) {
+            || item.getYubinNo().value().length() != 数値_7) {
             source.listIchiranhyoUpper_4 = yubinNo;
         } else {
             RStringBuilder yubinBango = new RStringBuilder();
@@ -65,7 +65,7 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_7 = item.getShujiiCode();
         source.listIchiranhyoUpper_8 = item.getShujiiKana() == null ? RString.EMPTY : item.getShujiiKana().value();
         source.listIchiranhyoUpper_9 = item.getSeibetsu() == null ? RString.EMPTY
-                : Gender.toValue(item.getSeibetsu().value()).getName().getShortJapanese();
+                                       : Gender.toValue(item.getSeibetsu().value()).getName().getShortJapanese();
         source.listIchiranhyoUpper_6 = IryoKikanJokyo.toValue(item.isIryokikanJokyoFlag()).get名称();
         source.listIchiranhyoUpper_10 = ShujiiJokyo.toValue(item.isShujiiJokyoFlag()).get名称();
         return source;

@@ -1,4 +1,6 @@
+/** ワークフローに関する制御を行うオブジェクトを保持します。 */
 package jp.co.ndensan.reams.db.dbe.workflowcontroller;
+
 /**
  * パッケージJavaDocのための、ダミークラスです。
  * このクラスが必要な理由は、下記を参照してください。<br/>
