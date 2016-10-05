@@ -101,6 +101,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private static final RString 生活 = new RString("●");
     private static final RString PSMYO = new RString("psmShikibetsuTaisho");
     private static final int INDEX = 5;
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_UNWRITTEN_FIELD")
     private INenreiToutatsuYoteishaCheckListProcessParameter processParameter;
     private INenreiToutatsuYoteishaCheckListMapper nenreiCheckListMapper;
     private List<NenreiToutatsuYoteishaCheckListEntity> nenreiCheckListEntity;

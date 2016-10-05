@@ -37,6 +37,7 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
     private final RString 科目コード;
     private final ShikibetsuCode 識別コード;
     private final RString psmTotalShunyu;
+
     /**
      * コンストラクタです。
      *
@@ -50,7 +51,7 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
-     * @param ShikibetsuCode 識別コード
+     * @param 識別コード 識別コード
      * @param psmTotalShunyu 収入情報取得PSM
      * @param 調定日 調定日
      */
@@ -96,7 +97,7 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
-     * @param ShikibetsuCode 識別コード
+     * @param 識別コード 識別コード
      * @param psmTotalShunyu 収入情報取得PSM
      * @param 調定日 調定日
      * @return パラメータ
@@ -117,6 +118,6 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
             RString 調定日
     ) {
         return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 履歴番号,
-                調定日時, psmShikibetsuTaisho, 処理日, searchkey, list, 科目コード,識別コード, psmTotalShunyu, 調定日);
+                調定日時, psmShikibetsuTaisho, 処理日, searchkey, list, 科目コード, 識別コード, psmTotalShunyu, 調定日);
     }
 }

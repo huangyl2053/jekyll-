@@ -59,6 +59,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     private static final RString 年度内連番 = new RString("0000");
     private static final int 日付桁数 = 8;
     private INenreiTotatsuTorokushaMapper iNenreiTotatsuTorokushaMapper;
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_UNWRITTEN_FIELD")
     private NenreiTotatsuTorokushaListProcessParameter processParameter;
     private List<NenreitotatsuKakuninListItem> item;
     private List<NenreiTotatsushaJouhouEntity> nenreiTotatsushaJouhoulist;

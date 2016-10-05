@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//CHECKSTYLE IGNORE PackageName FOR NEXT 1 LINES
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiiryokikanGuide;
 
 import java.util.ArrayList;

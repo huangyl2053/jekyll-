@@ -110,7 +110,7 @@ public class HihokenshaShisakuPanal {
     }
 
     private void 資格異動訂正の保存処理(HihokenshaShisakuPanalDiv div) {
-        施設入退所履歴期間重複チェック処理(div);
+        施設入退所履歴期間重複チェック処理();
         List<HihokenshaDaicho> 資格訂正情報 = 資格訂正登録リスト取得処理(div);
         manager.checkShikakuTorukuList(資格訂正情報, get当該識別対象の生年月日(div));
         資格訂正処理(div, 資格訂正情報);
@@ -126,7 +126,7 @@ public class HihokenshaShisakuPanal {
         return pairs;
     }
 
-    private void 施設入退所履歴期間重複チェック処理(HihokenshaShisakuPanalDiv div) {
+    private void 施設入退所履歴期間重複チェック処理() {
 //        NyutaishoshaKanriFinder finder = NyutaishoshaKanriFinder.createInstance();
 //        List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧List
 //                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
