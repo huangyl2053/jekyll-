@@ -77,8 +77,6 @@ class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
 
         source.shujiiJokyo = ShujiiHateiJokyo.toValue(item.getShujiiJokyo()).get名称();
         source.dataShubetsu = new RString("医療機関マスタ");
-        source.cityCode = item.getCityCode();
-        source.cityName = item.getCityName();
         source.sort1 = ShujiiOutputSort.toValue(item.getSort()).get名称();
         source.sort2 = RString.EMPTY;
         source.sort3 = RString.EMPTY;

@@ -40,11 +40,13 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
 
     private ShujiiIryokikanShujiiIchiranhyoReportSource editBody(ShujiiIryokikanShujiiIchiranhyoReportSource source) {
 
+        source.cityCode = item.getShichosonCode();
+        source.cityName = item.getShichosonMeisho();
         source.listIchiranhyoLower1_1 = item.getIryoKikanMeisho();
         source.listIchiranhyoLower1_2 = item.getDaihyoshaName() == null ? RString.EMPTY : item.getDaihyoshaName().value();
         source.listIchiranhyoLower1_3 = item.getJusho();
-        source.listIchiranhyoLower2_1 = item.getTelNo() == null ? RString.EMPTY : item.getTelNo().value();
-        source.listIchiranhyoLower2_2 = item.getShujiiName() == null ? RString.EMPTY : item.getShujiiName().value();
+        source.listIchiranhyoLower2_1 = item.getShujiiName() == null ? RString.EMPTY : item.getShujiiName().value();
+        source.listIchiranhyoLower2_2 = item.getShinryokaName()== null ? RString.EMPTY : item.getShinryokaName();
         source.listIchiranhyoUpper_1 = item.getIryokikanCode();
         source.listIchiranhyoUpper_2 = item.getIryoKikanMeishoKana();
         source.listIchiranhyoUpper_3 = item.getDaihyoshaNameKana();
