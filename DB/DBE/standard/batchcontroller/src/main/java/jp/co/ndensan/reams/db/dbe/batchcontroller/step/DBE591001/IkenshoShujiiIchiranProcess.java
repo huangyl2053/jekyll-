@@ -70,8 +70,6 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     @Override
     protected void initialize() {
         headItem = new IkenshoShujiiIchiranHeadItem(
-                processParameter.getShichosonCode(),
-                processParameter.getShichosonName(),
                 processParameter.getIryoKikanCodeFrom(),
                 processParameter.getIryoKikanCodeTo(),
                 processParameter.getShujiiCodeFrom(),
