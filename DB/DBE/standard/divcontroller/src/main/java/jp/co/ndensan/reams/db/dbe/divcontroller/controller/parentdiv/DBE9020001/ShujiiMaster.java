@@ -70,13 +70,13 @@ public class ShujiiMaster {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CSVファイル名 = new RString("主治医情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 構成市町村マスタ市町村コード重複種別 = 
-            DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
-                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
-    private static final RString 四マスタ優先表示市町村識別ID = 
-            DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
-                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
-    
+    private static final RString 構成市町村マスタ市町村コード重複種別
+            = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+    private static final RString 四マスタ優先表示市町村識別ID
+            = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+
     /**
      * コンストラクタです。
      *
@@ -340,18 +340,17 @@ public class ShujiiMaster {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getShujiiIchiran().setDisabled(false);
-
-                if (!RString.isNullOrEmpty(主治医医療機関コード)) {
-                    return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
-                }
-                return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧);
+                responseWithSettingState(div, 主治医医療機関コード);
             } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
             }
         }
+        return responseWithSettingState(div, 主治医医療機関コード);
+    }
+
+    private ResponseData<ShujiiMasterDiv> responseWithSettingState(ShujiiMasterDiv div, RString 主治医医療機関コード) {
         div.getShujiiIchiran().setDisabled(false);
         if (!RString.isNullOrEmpty(主治医医療機関コード)) {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
@@ -512,20 +511,21 @@ public class ShujiiMaster {
         RString shichoson = div.getShujiiJohoInput().getTxtShichoson().getValue();
         if (RString.isNullOrEmpty(shichoson)) {
             div.getShujiiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
-        } else {
-            List<ShichosonMeishoBusiness> list = KoseiShujiiIryoKikanMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
-            if (!list.isEmpty()) {
-                div.getShujiiJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
-                if (!構成市町村マスタ市町村コード重複種別.equals(new RString("0"))) {
-                    for (ShichosonMeishoBusiness item : list) {
-                        if (四マスタ優先表示市町村識別ID.equals(item.getShichosonShikibetuID())) {
-                            div.getShujiiJohoInput().getTxtShichosonmei().setValue(item.getShichosonMeisho());
-                            break;
-                        }
-                    }
-                }
-            } else {
-                div.getShujiiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            return ResponseData.of(div).respond();
+        }
+        List<ShichosonMeishoBusiness> list = KoseiShujiiIryoKikanMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
+        if (list.isEmpty()) {
+            div.getShujiiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            return ResponseData.of(div).respond();
+        }
+        div.getShujiiJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+        if (構成市町村マスタ市町村コード重複種別.equals(new RString("0"))) {
+            return ResponseData.of(div).respond();
+        }
+        for (ShichosonMeishoBusiness item : list) {
+            if (四マスタ優先表示市町村識別ID.equals(item.getShichosonShikibetuID())) {
+                div.getShujiiJohoInput().getTxtShichosonmei().setValue(item.getShichosonMeisho());
+                break;
             }
         }
         return ResponseData.of(div).respond();
@@ -541,11 +541,11 @@ public class ShujiiMaster {
         RString txtShujiiIryoKikanCode = div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue();
         if (!RString.isNullOrEmpty(txtShujiiIryoKikanCode)) {
             RString shujiiIryoKikanMei = ShujiiMasterFinder.createInstance().getShujiiIryoKikanJoho(
-                ShujiiMasterSearchParameter.createParamForSelectShujiiJoho(
-                        new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue(),
-                        div.getShujiiJohoInput().getTxtShujiiCode().getValue()));
-            
+                    ShujiiMasterSearchParameter.createParamForSelectShujiiJoho(
+                            new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
+                            div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue(),
+                            div.getShujiiJohoInput().getTxtShujiiCode().getValue()));
+
             if (!RString.isNullOrEmpty(shujiiIryoKikanMei)) {
                 div.getShujiiJohoInput().getTxtShujiiIryoKikanMei().setValue(shujiiIryoKikanMei);
             } else {
