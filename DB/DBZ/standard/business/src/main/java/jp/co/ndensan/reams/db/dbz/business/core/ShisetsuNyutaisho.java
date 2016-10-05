@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -176,6 +177,15 @@ public class ShisetsuNyutaisho extends
     }
 
     /**
+     * 保険者番号を返します。
+     *
+     * @return 保険者番号
+     */
+    public HokenshaNo get保険者番号() {
+        return entity.getHokenshaNo();
+    }
+
+    /**
      * {@link DbT1004ShisetsuNyutaishoEntity}のクローンを返します。
      *
      * @return {@link DbT1004ShisetsuNyutaishoEntity}のクローン
@@ -226,6 +236,21 @@ public class ShisetsuNyutaisho extends
     @Override
     public boolean hasChanged() {
         return hasChangedEntity();
+    }
+
+    /**
+     * 他市町村住所地特例のみを変更対象とします。<br/>
+     * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KyokaisoGaitosha}
+     */
+    public ShisetsuNyutaisho modifiedModel() {
+        DbT1004ShisetsuNyutaishoEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new ShisetsuNyutaisho(
+                modifiedEntity, id);
     }
 
     private static final class _SerializationProxy implements Serializable {

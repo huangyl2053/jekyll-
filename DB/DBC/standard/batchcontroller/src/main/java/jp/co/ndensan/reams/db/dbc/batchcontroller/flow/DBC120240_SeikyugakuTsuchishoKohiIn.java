@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120240.SeikyugakuTsuchishoKohiInProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120240.SeikyugakuTsuchishoKohiInProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011.DbWT0002KokuhorenTorikomiErrorTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011.SeikyugakuTsuchishoFutanshaInProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120240.DBC120240_SeikyugakuTsuchishoKohiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-2790-010 surun
  */
 public class DBC120240_SeikyugakuTsuchishoKohiIn
-        extends BatchFlowBase<KokuhorenKyoutsuBatchParameter> {
+        extends BatchFlowBase<DBC120240_SeikyugakuTsuchishoKohiInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
@@ -68,18 +68,20 @@ public class DBC120240_SeikyugakuTsuchishoKohiIn
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            一時TBL登録件数 = NO_NUM;
             if (returnEntity != null && returnEntity.getFileNameList() != null && returnEntity.getFileNameList().size() > NO_NUM) {
                 for (int i = NO_NUM; i < returnEntity.getFileNameList().size(); i++) {
                     parameter = new SeikyugakuTsuchishoFutanshaInProcessParameter();
                     parameter.setPath(returnEntity.get保存先フォルダのパス().toRString());
                     parameter.setFileName(returnEntity.getFileNameList().get(i));
+                    parameter.setRenban(一時TBL登録件数);
                     executeStep(CSVファイル取込);
                     flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                             SeikyugakuTsuchishoFutanshaInProcess.PARAMETER_OUT_FLOWENTITY);
                     if (flowEntity != null) {
                         処理対象年月 = flowEntity.getShoriYM();
                         レコード件数の合計 = レコード件数の合計 + flowEntity.getCodeNum();
-                        一時TBL登録件数 = 一時TBL登録件数 + flowEntity.get明細データ登録件数();
+                        一時TBL登録件数 = flowEntity.get明細データ登録件数();
                     }
                 }
             }

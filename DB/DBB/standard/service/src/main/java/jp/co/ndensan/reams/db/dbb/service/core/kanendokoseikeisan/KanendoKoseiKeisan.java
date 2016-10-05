@@ -13,13 +13,13 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaRe
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.GennenZuijiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.SuitoSeiriTaishoNendo;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ZogakuGengakuKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendokoseikeisan.KanendoKoseiKeisanEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
-import jp.co.ndensan.reams.db.dbx.definition.core.ITsukiShorkiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -101,6 +101,7 @@ public class KanendoKoseiKeisan {
     private static final int INT_11 = 11;
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
+    private static final int INT_31 = 31;
 
     /**
      * 該当クラスの対象を返しメソッドです。
@@ -228,10 +229,12 @@ public class KanendoKoseiKeisan {
 
         int size = 調定年度期別クラス.size();
         if (idx == 0) {
-            List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
-            List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
-            賦課の情報1 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List).build();
-            賦課の情報リスト.add(賦課の情報1);
+            if (賦課の情報1 != null) {
+                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
+                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
+                賦課の情報1 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List).build();
+                賦課の情報リスト.add(賦課の情報1);
+            }
         } else if (idx == INT_1 && INT_1 < size) {
             if (賦課の情報2 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
@@ -388,6 +391,18 @@ public class KanendoKoseiKeisan {
                 .set普徴期別金額14(普徴期別額List.get(INT_13)).set調定日時(算定日時);
     }
 
+    private void set現在期月(KiwariKeisanInput kiwariKeisanInput, Kitsuki 出納整理期間増額用期月, Kitsuki 出納整理期間減額用期月,
+            Decimal 今回保険料, Decimal 前回保険料) {
+        Kitsuki 期月 = 出納整理期間増額用期月;
+        if (今回保険料.compareTo(前回保険料) == -1) {
+            期月 = 出納整理期間減額用期月;
+        }
+        kiwariKeisanInput.set現在月(get現在月(期月));
+        kiwariKeisanInput.set現在期(期月.get期AsInt());
+        kiwariKeisanInput.set現在過年期(new RString(期月.get期AsInt()));
+        kiwariKeisanInput.set現在過年期区分(期月.get月処理区分().get区分());
+    }
+
     private KiwariKeisanInput get期割計算の引数(ChoshuHoho 徴収方法の情報, FlexibleYear 調定年度, YMDHMS 算定日時,
             FukaJoho 賦課の情報1, FukaJoho 賦課の情報2, FukaJoho 賦課の情報3,
             FukaJoho 賦課の情報4, FukaJoho 賦課の情報5, FukaJoho 賦課の情報6,
@@ -396,18 +411,35 @@ public class KanendoKoseiKeisan {
         KiwariKeisanInput kiwariKeisanInput = new KiwariKeisanInput();
 
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
-        Kitsuki 過年度期月 = 更正月判定.find過年度更正月(算定日時.getDate());
-        int 過年度算定期 = 過年度期月.get期AsInt();
+        Kitsuki 過年度期月;
+        Kitsuki 出納整理期間増額用期月;
+        Kitsuki 出納整理期間減額用期月;
 
-        ITsukiShorkiKubun 過年期区分 = 過年度期月.get月処理区分();
+        RDate date1 = new RDate(算定日時.getYearValue(), INT_3, INT_1);
+        RDate date2 = new RDate(算定日時.getYearValue(), INT_5, INT_31);
+        if (算定日時.getDate().isBeforeOrEquals(date2) && date1.isBeforeOrEquals(算定日時.getDate())) {
+            出納整理期間増額用期月 = 更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.増額更正);
+            if (Tsuki._3月.equals(出納整理期間増額用期月.get月())) {
+                kiwariKeisanInput.set現在月(get現在月(出納整理期間増額用期月));
+                kiwariKeisanInput.set現在期(出納整理期間増額用期月.get期AsInt());
+                kiwariKeisanInput.set現在過年期(new RString(出納整理期間増額用期月.get期AsInt()));
+                kiwariKeisanInput.set現在過年期区分(出納整理期間増額用期月.get月処理区分().get区分());
+            } else if (Tsuki.翌年度4月.equals(出納整理期間増額用期月.get月()) || Tsuki.翌年度5月.equals(出納整理期間増額用期月.get月())) {
+                出納整理期間減額用期月 = 更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.減額更正);
+                set現在期月(kiwariKeisanInput, 出納整理期間増額用期月, 出納整理期間減額用期月, 今回保険料, 前回保険料);
+            }
+        } else {
+            過年度期月 = 更正月判定.find過年度更正月(算定日時.getDate());
+            kiwariKeisanInput.set現在月(get現在月(過年度期月));
+            kiwariKeisanInput.set現在期(過年度期月.get期AsInt());
+            kiwariKeisanInput.set現在過年期(new RString(過年度期月.get期AsInt()));
+            kiwariKeisanInput.set現在過年期区分(過年度期月.get月処理区分().get区分());
+        }
+
         kiwariKeisanInput.set現在調定年度(調定年度);
-        kiwariKeisanInput.set現在月(get現在月(過年度期月));
-        kiwariKeisanInput.set現在期(過年度算定期);
         kiwariKeisanInput.set現在期区分(INT_5);
         kiwariKeisanInput.set特徴停止可能期(0);
         kiwariKeisanInput.set現在特徴期区分(INT_4);
-        kiwariKeisanInput.set現在過年期(new RString(過年度算定期));
-        kiwariKeisanInput.set現在過年期区分(過年期区分.get区分());
         GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
         RDate 適用基準日 = RDate.getNowDate();
         RString 現年定例納期数 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_定例納期数, 適用基準日, SubGyomuCode.DBB介護賦課);
@@ -485,7 +517,7 @@ public class KanendoKoseiKeisan {
 
     private RString get現在月(Kitsuki 過年度期月) {
         if (Tsuki._1月.equals(過年度期月.get月()) || Tsuki._2月.equals(過年度期月.get月())
-            || Tsuki._3月.equals(過年度期月.get月())) {
+                || Tsuki._3月.equals(過年度期月.get月())) {
             return 定数_1.concat(new RString(過年度期月.get月AsInt()).padZeroToLeft(INT_2));
         } else if (Tsuki.翌年度4月.equals(過年度期月.get月())) {
             return 定数_翌年度4月;

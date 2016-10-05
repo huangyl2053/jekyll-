@@ -83,13 +83,13 @@ public class ItizihanteiIFtoriKomiBusiness {
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                   || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                   || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         dbt5010Entity.setKijunJikan(Integer.parseInt(entity.getKijunJikan().toString()));
@@ -128,13 +128,13 @@ public class ItizihanteiIFtoriKomiBusiness {
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                   || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                   || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         dbt5010Entity.setKijunJikan(Integer.parseInt(entity.getKijunJikan().toString()));
@@ -204,15 +204,15 @@ public class ItizihanteiIFtoriKomiBusiness {
     public boolean get連携対象項目一覧判定(IchijiHanteizumIfOutputEucCsvEntity entity) {
         boolean 連携対象項目一覧判定 = false;
         if ((get連携対象項目一覧Null(entity))
-            || (get項目の空判定(entity))
-            || (get項目の空判定_2(entity))
-            || (get項目の空判定_3(entity))
-            || (get項目の空判定_4(entity))
-            || (get項目の空判定_5(entity))
-            || (get項目の空判定_6(entity))
-            || (get項目の空判定_7(entity))
-            || (get項目の空判定_8(entity))
-            || (get項目の空判定_9(entity))) {
+                || (get項目の空判定(entity))
+                || (get項目の空判定_2(entity))
+                || (get項目の空判定_3(entity))
+                || (get項目の空判定_4(entity))
+                || (get項目の空判定_5(entity))
+                || (get項目の空判定_6(entity))
+                || (get項目の空判定_7(entity))
+                || (get項目の空判定_8(entity))
+                || (get項目の空判定_9(entity))) {
             連携対象項目一覧判定 = true;
         }
         return 連携対象項目一覧判定;
@@ -220,196 +220,196 @@ public class ItizihanteiIFtoriKomiBusiness {
 
     private boolean get連携対象項目一覧Null(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get中心静脈栄養())
-               || RString.isNullOrEmpty(entity.get透析())
-               || RString.isNullOrEmpty(entity.getストーマの処置())
-               || RString.isNullOrEmpty(entity.get酸素療法())
-               || RString.isNullOrEmpty(entity.getレスピレーター())
-               || RString.isNullOrEmpty(entity.get気管切開の処置())
-               || RString.isNullOrEmpty(entity.get疼痛の看護())
-               || RString.isNullOrEmpty(entity.get経管栄養())
-               || RString.isNullOrEmpty(entity.getモニター測定())
-               || RString.isNullOrEmpty(entity.getじょくそうの処置())
-               || RString.isNullOrEmpty(entity.getカテーテル())
-               || RString.isNullOrEmpty(entity.get障害高齢者自立度())
-               || RString.isNullOrEmpty(entity.get認知症高齢者自立度());
+                || RString.isNullOrEmpty(entity.get透析())
+                || RString.isNullOrEmpty(entity.getストーマの処置())
+                || RString.isNullOrEmpty(entity.get酸素療法())
+                || RString.isNullOrEmpty(entity.getレスピレーター())
+                || RString.isNullOrEmpty(entity.get気管切開の処置())
+                || RString.isNullOrEmpty(entity.get疼痛の看護())
+                || RString.isNullOrEmpty(entity.get経管栄養())
+                || RString.isNullOrEmpty(entity.getモニター測定())
+                || RString.isNullOrEmpty(entity.getじょくそうの処置())
+                || RString.isNullOrEmpty(entity.getカテーテル())
+                || RString.isNullOrEmpty(entity.get障害高齢者自立度())
+                || RString.isNullOrEmpty(entity.get認知症高齢者自立度());
 
     }
 
     private boolean get項目の空判定_6(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get昼夜逆転())
-               || RString.isNullOrEmpty(entity.get同じ話をする())
-               || RString.isNullOrEmpty(entity.get大声を出す())
-               || RString.isNullOrEmpty(entity.get介護に抵抗())
-               || RString.isNullOrEmpty(entity.get落ち着きなし())
-               || RString.isNullOrEmpty(entity.get一人で出たがる())
-               || RString.isNullOrEmpty(entity.get収集癖())
-               || RString.isNullOrEmpty(entity.get物や衣類を壊す())
-               || RString.isNullOrEmpty(entity.getひどい物忘れ())
-               || RString.isNullOrEmpty(entity.get独り言独り笑い())
-               || RString.isNullOrEmpty(entity.get自分勝手に行動する())
-               || RString.isNullOrEmpty(entity.get話がまとまらない())
-               || RString.isNullOrEmpty(entity.get薬の内服())
-               || RString.isNullOrEmpty(entity.get金銭の管理())
-               || RString.isNullOrEmpty(entity.get日常の意思決定())
-               || RString.isNullOrEmpty(entity.get集団への不適応())
-               || RString.isNullOrEmpty(entity.get買い物())
-               || RString.isNullOrEmpty(entity.get簡単な調理())
-               || RString.isNullOrEmpty(entity.get点滴の管理());
+                || RString.isNullOrEmpty(entity.get同じ話をする())
+                || RString.isNullOrEmpty(entity.get大声を出す())
+                || RString.isNullOrEmpty(entity.get介護に抵抗())
+                || RString.isNullOrEmpty(entity.get落ち着きなし())
+                || RString.isNullOrEmpty(entity.get一人で出たがる())
+                || RString.isNullOrEmpty(entity.get収集癖())
+                || RString.isNullOrEmpty(entity.get物や衣類を壊す())
+                || RString.isNullOrEmpty(entity.getひどい物忘れ())
+                || RString.isNullOrEmpty(entity.get独り言独り笑い())
+                || RString.isNullOrEmpty(entity.get自分勝手に行動する())
+                || RString.isNullOrEmpty(entity.get話がまとまらない())
+                || RString.isNullOrEmpty(entity.get薬の内服())
+                || RString.isNullOrEmpty(entity.get金銭の管理())
+                || RString.isNullOrEmpty(entity.get日常の意思決定())
+                || RString.isNullOrEmpty(entity.get集団への不適応())
+                || RString.isNullOrEmpty(entity.get買い物())
+                || RString.isNullOrEmpty(entity.get簡単な調理())
+                || RString.isNullOrEmpty(entity.get点滴の管理());
     }
 
     private boolean get項目の空判定_7(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.getシーケンシャル番号())
-               || RString.isNullOrEmpty(entity.get識別コード())
-               || RString.isNullOrEmpty(entity.get保険者番号())
-               || RString.isNullOrEmpty(entity.get被保険者番号())
-               || RString.isNullOrEmpty(entity.get認定申請日())
-               || RString.isNullOrEmpty(entity.get枝番())
-               || RString.isNullOrEmpty(entity.get申請区分法令コード())
-               || RString.isNullOrEmpty(entity.get申請区分申請時コード())
-               || RString.isNullOrEmpty(entity.get取下区分コード())
-               || RString.isNullOrEmpty(entity.get被保険者区分コード())
-               || RString.isNullOrEmpty(entity.get申請代行区分コード())
-               || RString.isNullOrEmpty(entity.get生年月日())
-               || RString.isNullOrEmpty(entity.get年齢())
-               || RString.isNullOrEmpty(entity.get性別コード())
-               || RString.isNullOrEmpty(entity.get前回の認定審査会結果())
-               || RString.isNullOrEmpty(entity.get主治医医療機関番号());
+                || RString.isNullOrEmpty(entity.get識別コード())
+                || RString.isNullOrEmpty(entity.get保険者番号())
+                || RString.isNullOrEmpty(entity.get被保険者番号())
+                || RString.isNullOrEmpty(entity.get認定申請日())
+                || RString.isNullOrEmpty(entity.get枝番())
+                || RString.isNullOrEmpty(entity.get申請区分法令コード())
+                || RString.isNullOrEmpty(entity.get申請区分申請時コード())
+                || RString.isNullOrEmpty(entity.get取下区分コード())
+                || RString.isNullOrEmpty(entity.get被保険者区分コード())
+                || RString.isNullOrEmpty(entity.get申請代行区分コード())
+                || RString.isNullOrEmpty(entity.get生年月日())
+                || RString.isNullOrEmpty(entity.get年齢())
+                || RString.isNullOrEmpty(entity.get性別コード())
+                || RString.isNullOrEmpty(entity.get前回の認定審査会結果())
+                || RString.isNullOrEmpty(entity.get主治医医療機関番号());
     }
 
     private boolean get項目の空判定_5(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get排便())
-               || RString.isNullOrEmpty(entity.get口腔清潔())
-               || RString.isNullOrEmpty(entity.get洗顔())
-               || RString.isNullOrEmpty(entity.get整髪())
-               || RString.isNullOrEmpty(entity.get上衣の着脱())
-               || RString.isNullOrEmpty(entity.getズボン等の着脱())
-               || RString.isNullOrEmpty(entity.get外出頻度())
-               || RString.isNullOrEmpty(entity.get意思の伝達())
-               || RString.isNullOrEmpty(entity.get毎日の日課を理解())
-               || RString.isNullOrEmpty(entity.get生年月日をいう())
-               || RString.isNullOrEmpty(entity.get短期記憶())
-               || RString.isNullOrEmpty(entity.get自分の名前をいう())
-               || RString.isNullOrEmpty(entity.get今の季節を理解())
-               || RString.isNullOrEmpty(entity.get場所の理解())
-               || RString.isNullOrEmpty(entity.get徘徊())
-               || RString.isNullOrEmpty(entity.get外出して戻れない())
-               || RString.isNullOrEmpty(entity.get被害的())
-               || RString.isNullOrEmpty(entity.get作話())
-               || RString.isNullOrEmpty(entity.get感情が不安定());
+                || RString.isNullOrEmpty(entity.get口腔清潔())
+                || RString.isNullOrEmpty(entity.get洗顔())
+                || RString.isNullOrEmpty(entity.get整髪())
+                || RString.isNullOrEmpty(entity.get上衣の着脱())
+                || RString.isNullOrEmpty(entity.getズボン等の着脱())
+                || RString.isNullOrEmpty(entity.get外出頻度())
+                || RString.isNullOrEmpty(entity.get意思の伝達())
+                || RString.isNullOrEmpty(entity.get毎日の日課を理解())
+                || RString.isNullOrEmpty(entity.get生年月日をいう())
+                || RString.isNullOrEmpty(entity.get短期記憶())
+                || RString.isNullOrEmpty(entity.get自分の名前をいう())
+                || RString.isNullOrEmpty(entity.get今の季節を理解())
+                || RString.isNullOrEmpty(entity.get場所の理解())
+                || RString.isNullOrEmpty(entity.get徘徊())
+                || RString.isNullOrEmpty(entity.get外出して戻れない())
+                || RString.isNullOrEmpty(entity.get被害的())
+                || RString.isNullOrEmpty(entity.get作話())
+                || RString.isNullOrEmpty(entity.get感情が不安定());
     }
 
     private boolean get項目の空判定_4(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get拘縮股関節())
-               || RString.isNullOrEmpty(entity.get拘縮膝関節())
-               || RString.isNullOrEmpty(entity.get拘縮その他())
-               || RString.isNullOrEmpty(entity.get寝返り())
-               || RString.isNullOrEmpty(entity.get起き上がり())
-               || RString.isNullOrEmpty(entity.get座位保持())
-               || RString.isNullOrEmpty(entity.get両足での立位())
-               || RString.isNullOrEmpty(entity.get歩行())
-               || RString.isNullOrEmpty(entity.get立ち上がり())
-               || RString.isNullOrEmpty(entity.get片足での立位())
-               || RString.isNullOrEmpty(entity.get洗身())
-               || RString.isNullOrEmpty(entity.getつめ切り())
-               || RString.isNullOrEmpty(entity.get視力())
-               || RString.isNullOrEmpty(entity.get聴力())
-               || RString.isNullOrEmpty(entity.get移乗())
-               || RString.isNullOrEmpty(entity.get移動())
-               || RString.isNullOrEmpty(entity.getえん下())
-               || RString.isNullOrEmpty(entity.get食事摂取())
-               || RString.isNullOrEmpty(entity.get排尿());
+                || RString.isNullOrEmpty(entity.get拘縮膝関節())
+                || RString.isNullOrEmpty(entity.get拘縮その他())
+                || RString.isNullOrEmpty(entity.get寝返り())
+                || RString.isNullOrEmpty(entity.get起き上がり())
+                || RString.isNullOrEmpty(entity.get座位保持())
+                || RString.isNullOrEmpty(entity.get両足での立位())
+                || RString.isNullOrEmpty(entity.get歩行())
+                || RString.isNullOrEmpty(entity.get立ち上がり())
+                || RString.isNullOrEmpty(entity.get片足での立位())
+                || RString.isNullOrEmpty(entity.get洗身())
+                || RString.isNullOrEmpty(entity.getつめ切り())
+                || RString.isNullOrEmpty(entity.get視力())
+                || RString.isNullOrEmpty(entity.get聴力())
+                || RString.isNullOrEmpty(entity.get移乗())
+                || RString.isNullOrEmpty(entity.get移動())
+                || RString.isNullOrEmpty(entity.getえん下())
+                || RString.isNullOrEmpty(entity.get食事摂取())
+                || RString.isNullOrEmpty(entity.get排尿());
     }
 
     private boolean get項目の空判定_3(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get介護予防居宅療養管理指導())
-               || RString.isNullOrEmpty(entity.get介護予防通所介護デイサービス())
-               || RString.isNullOrEmpty(entity.get介護予防通所リハビリテーション())
-               || RString.isNullOrEmpty(entity.get介護予防短期入所生活介護ショートステイ())
-               || RString.isNullOrEmpty(entity.get介護予防短期入所療養介護())
-               || RString.isNullOrEmpty(entity.get介護予防特定施設入居者生活介護())
-               || RString.isNullOrEmpty(entity.get介護予防福祉用具貸与())
-               || RString.isNullOrEmpty(entity.get特定介護予防福祉用具販売())
-               || RString.isNullOrEmpty(entity.get住宅改修予防給付())
-               || RString.isNullOrEmpty(entity.get介護予防認知症対応型通所介護())
-               || RString.isNullOrEmpty(entity.get介護予防小規模多機能型居宅介護())
-               || RString.isNullOrEmpty(entity.get介護予防認知症対応型共同生活介護グループホーム())
-               || RString.isNullOrEmpty(entity.get麻痺左上肢())
-               || RString.isNullOrEmpty(entity.get麻痺右上肢())
-               || RString.isNullOrEmpty(entity.get麻痺左下肢())
-               || RString.isNullOrEmpty(entity.get麻痺右下肢())
-               || RString.isNullOrEmpty(entity.get麻痺その他())
-               || RString.isNullOrEmpty(entity.get拘縮肩関節());
+                || RString.isNullOrEmpty(entity.get介護予防通所介護デイサービス())
+                || RString.isNullOrEmpty(entity.get介護予防通所リハビリテーション())
+                || RString.isNullOrEmpty(entity.get介護予防短期入所生活介護ショートステイ())
+                || RString.isNullOrEmpty(entity.get介護予防短期入所療養介護())
+                || RString.isNullOrEmpty(entity.get介護予防特定施設入居者生活介護())
+                || RString.isNullOrEmpty(entity.get介護予防福祉用具貸与())
+                || RString.isNullOrEmpty(entity.get特定介護予防福祉用具販売())
+                || RString.isNullOrEmpty(entity.get住宅改修予防給付())
+                || RString.isNullOrEmpty(entity.get介護予防認知症対応型通所介護())
+                || RString.isNullOrEmpty(entity.get介護予防小規模多機能型居宅介護())
+                || RString.isNullOrEmpty(entity.get介護予防認知症対応型共同生活介護グループホーム())
+                || RString.isNullOrEmpty(entity.get麻痺左上肢())
+                || RString.isNullOrEmpty(entity.get麻痺右上肢())
+                || RString.isNullOrEmpty(entity.get麻痺左下肢())
+                || RString.isNullOrEmpty(entity.get麻痺右下肢())
+                || RString.isNullOrEmpty(entity.get麻痺その他())
+                || RString.isNullOrEmpty(entity.get拘縮肩関節());
     }
 
     private boolean get項目の空判定_2(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get短期入所生活介護ショートステイ())
-               || RString.isNullOrEmpty(entity.get短期入所療養介護())
-               || RString.isNullOrEmpty(entity.get特定施設入居者生活介護())
-               || RString.isNullOrEmpty(entity.get福祉用具貸与())
-               || RString.isNullOrEmpty(entity.get特定福祉用具販売())
-               || RString.isNullOrEmpty(entity.get住宅改修介護給付())
-               || RString.isNullOrEmpty(entity.get夜間対応型訪問介護())
-               || RString.isNullOrEmpty(entity.get認知症対応型通所介護())
-               || RString.isNullOrEmpty(entity.get小規模多機能型居宅介護())
-               || RString.isNullOrEmpty(entity.get認知症対応型共同生活介護グループホーム())
-               || RString.isNullOrEmpty(entity.get地域密着型特定施設入居者生活介護())
-               || RString.isNullOrEmpty(entity.get地域密着型介護老人福祉施設入所者生活介護())
-               || RString.isNullOrEmpty(entity.get定期巡回随時対応型訪問介護看護())
-               || RString.isNullOrEmpty(entity.get複合型サービス())
-               || RString.isNullOrEmpty(entity.get介護予防訪問介護ホームヘルプサービス())
-               || RString.isNullOrEmpty(entity.get介護予防訪問入浴介護())
-               || RString.isNullOrEmpty(entity.get介護予防訪問看護())
-               || RString.isNullOrEmpty(entity.get介護予防訪問リハビリテーション());
+                || RString.isNullOrEmpty(entity.get短期入所療養介護())
+                || RString.isNullOrEmpty(entity.get特定施設入居者生活介護())
+                || RString.isNullOrEmpty(entity.get福祉用具貸与())
+                || RString.isNullOrEmpty(entity.get特定福祉用具販売())
+                || RString.isNullOrEmpty(entity.get住宅改修介護給付())
+                || RString.isNullOrEmpty(entity.get夜間対応型訪問介護())
+                || RString.isNullOrEmpty(entity.get認知症対応型通所介護())
+                || RString.isNullOrEmpty(entity.get小規模多機能型居宅介護())
+                || RString.isNullOrEmpty(entity.get認知症対応型共同生活介護グループホーム())
+                || RString.isNullOrEmpty(entity.get地域密着型特定施設入居者生活介護())
+                || RString.isNullOrEmpty(entity.get地域密着型介護老人福祉施設入所者生活介護())
+                || RString.isNullOrEmpty(entity.get定期巡回随時対応型訪問介護看護())
+                || RString.isNullOrEmpty(entity.get複合型サービス())
+                || RString.isNullOrEmpty(entity.get介護予防訪問介護ホームヘルプサービス())
+                || RString.isNullOrEmpty(entity.get介護予防訪問入浴介護())
+                || RString.isNullOrEmpty(entity.get介護予防訪問看護())
+                || RString.isNullOrEmpty(entity.get介護予防訪問リハビリテーション());
     }
 
     private boolean get項目の空判定(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get中間評価項目得点第１群())
-               || RString.isNullOrEmpty(entity.get中間評価項目得点第２群())
-               || RString.isNullOrEmpty(entity.get中間評価項目得点第３群())
-               || RString.isNullOrEmpty(entity.get中間評価項目得点第４群())
-               || RString.isNullOrEmpty(entity.get中間評価項目得点第５群())
-               || RString.isNullOrEmpty(entity.get一次判定警告配列コード())
-               || RString.isNullOrEmpty(entity.get状態の安定性())
-               || RString.isNullOrEmpty(entity.get認知症自立度Ⅱ以上の蓋然性())
-               || RString.isNullOrEmpty(entity.get認知機能及び状態安定性から推定される給付区分())
-               || RString.isNullOrEmpty(entity.get現在のサービス区分コード())
-               || RString.isNullOrEmpty(entity.get現在の状況())
-               || RString.isNullOrEmpty(entity.get訪問介護ホームヘルプサービス())
-               || RString.isNullOrEmpty(entity.get訪問入浴介護())
-               || RString.isNullOrEmpty(entity.get訪問看護())
-               || RString.isNullOrEmpty(entity.get訪問リハビリテーション())
-               || RString.isNullOrEmpty(entity.get居宅療養管理指導())
-               || RString.isNullOrEmpty(entity.get通所介護デイサービス())
-               || RString.isNullOrEmpty(entity.get通所リハビリテーション());
+                || RString.isNullOrEmpty(entity.get中間評価項目得点第２群())
+                || RString.isNullOrEmpty(entity.get中間評価項目得点第３群())
+                || RString.isNullOrEmpty(entity.get中間評価項目得点第４群())
+                || RString.isNullOrEmpty(entity.get中間評価項目得点第５群())
+                || RString.isNullOrEmpty(entity.get一次判定警告配列コード())
+                || RString.isNullOrEmpty(entity.get状態の安定性())
+                || RString.isNullOrEmpty(entity.get認知症自立度Ⅱ以上の蓋然性())
+                || RString.isNullOrEmpty(entity.get認知機能及び状態安定性から推定される給付区分())
+                || RString.isNullOrEmpty(entity.get現在のサービス区分コード())
+                || RString.isNullOrEmpty(entity.get現在の状況())
+                || RString.isNullOrEmpty(entity.get訪問介護ホームヘルプサービス())
+                || RString.isNullOrEmpty(entity.get訪問入浴介護())
+                || RString.isNullOrEmpty(entity.get訪問看護())
+                || RString.isNullOrEmpty(entity.get訪問リハビリテーション())
+                || RString.isNullOrEmpty(entity.get居宅療養管理指導())
+                || RString.isNullOrEmpty(entity.get通所介護デイサービス())
+                || RString.isNullOrEmpty(entity.get通所リハビリテーション());
     }
 
     private boolean get項目の空判定_8(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get要介護認定等基準時間食事())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間排泄())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間移動())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間清潔保持())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間間接ケア())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間BPSD関連())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間機能訓練())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間医療関連())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間認知症加算());
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間排泄())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間移動())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間清潔保持())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間間接ケア())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間BPSD関連())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間機能訓練())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間医療関連())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間認知症加算());
     }
 
     private boolean get項目の空判定_9(IchijiHanteizumIfOutputEucCsvEntity entity) {
         return RString.isNullOrEmpty(entity.get意見書依頼日())
-               || RString.isNullOrEmpty(entity.get意見書入手日())
-               || RString.isNullOrEmpty(entity.get意見書短期記憶())
-               || RString.isNullOrEmpty(entity.get意見書認知能力())
-               || RString.isNullOrEmpty(entity.get意見書伝達能力())
-               || RString.isNullOrEmpty(entity.get意見書食事行為())
-               || RString.isNullOrEmpty(entity.get意見書認知症高齢者の日常生活自立度())
-               || RString.isNullOrEmpty(entity.get調査依頼日())
-               || RString.isNullOrEmpty(entity.get調査実施日())
-               || RString.isNullOrEmpty(entity.get指定居宅介護支援事業者等番号())
-               || RString.isNullOrEmpty(entity.get一次判定日())
-               || RString.isNullOrEmpty(entity.get一次判定結果())
-               || RString.isNullOrEmpty(entity.get一次判定結果認知症加算())
-               || RString.isNullOrEmpty(entity.get要介護認定等基準時間());
+                || RString.isNullOrEmpty(entity.get意見書入手日())
+                || RString.isNullOrEmpty(entity.get意見書短期記憶())
+                || RString.isNullOrEmpty(entity.get意見書認知能力())
+                || RString.isNullOrEmpty(entity.get意見書伝達能力())
+                || RString.isNullOrEmpty(entity.get意見書食事行為())
+                || RString.isNullOrEmpty(entity.get意見書認知症高齢者の日常生活自立度())
+                || RString.isNullOrEmpty(entity.get調査依頼日())
+                || RString.isNullOrEmpty(entity.get調査実施日())
+                || RString.isNullOrEmpty(entity.get指定居宅介護支援事業者等番号())
+                || RString.isNullOrEmpty(entity.get一次判定日())
+                || RString.isNullOrEmpty(entity.get一次判定結果())
+                || RString.isNullOrEmpty(entity.get一次判定結果認知症加算())
+                || RString.isNullOrEmpty(entity.get要介護認定等基準時間());
     }
 
     /**
@@ -465,7 +465,9 @@ public class ItizihanteiIFtoriKomiBusiness {
         } else if (IchijiHanteiKekkaCode09.要介護5.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode09.要介護5.getコード();
 //        } else if (IchijiHanteiKekkaCode09.送付済.get名称().equals(一次判定結果名称)) {
-//            return IchijiHanteiKekkaCode09.送付済.getコード(); 
+//            return IchijiHanteiKekkaCode09.送付済.getコード();
+        } else if (IchijiHanteiKekkaCode09.要支援1.get名称().equals(一次判定結果名称)) {
+            return IchijiHanteiKekkaCode09.要支援1.getコード();
         } else if (IchijiHanteiKekkaCode09.非該当.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode09.非該当.getコード();
         } else if (IchijiHanteiKekkaCode09.要支援2.get名称().equals(一次判定結果名称)) {

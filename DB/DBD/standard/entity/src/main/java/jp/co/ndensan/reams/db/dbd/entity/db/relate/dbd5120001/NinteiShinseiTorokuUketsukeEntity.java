@@ -93,4 +93,8 @@ public class NinteiShinseiTorokuUketsukeEntity {
     private FlexibleDate 延期通知発行年月日;
     private int 延期通知発行回数;
 
+    private RString 履歴番号;
+    private RString 枝番;
+    private Code 受給申請事由;
+
 }

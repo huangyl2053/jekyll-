@@ -5,7 +5,7 @@
  "steps": [
   {
    "id": 1,
-   "name": "高額合算支給申請書登録新規",
+   "name": "新規申請",
    "transitionList": [
     {
      "id": "1",
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC1100011",
      "toLayoutTitle": "高額合算支給申請登録",
-     "toState": "申請情報"
+     "toState": "申請登録"
     },
     {
      "id": "2",
@@ -22,7 +22,7 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC1100011",
      "layoutTitle": "高額合算支給申請登録",
-     "eventName": "該当者検索",
+     "eventName": "対象者検索",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
@@ -42,116 +42,10 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC1100011",
      "toLayoutTitle": "高額合算支給申請登録",
-     "toState": "申請登録加入履歴一覧"
+     "toState": ""
     },
     {
      "id": "4",
-     "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1100011",
-     "layoutTitle": "高額合算支給申請登録",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 2,
-   "name": "高額合算支給申請書登録新規以外1",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1100012",
-     "toLayoutTitle": "高額合算支給申請登録（申請情報検索）",
-     "toState": "検索条件"
-    },
-    {
-     "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1100012",
-     "layoutTitle": "高額合算支給申請登録（申請情報検索）",
-     "eventName": "支給申請登録へ",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1100011",
-     "toLayoutTitle": "高額合算支給申請登録",
-     "toState": "申請情報"
-    },
-    {
-     "id": "3",
-     "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1100011",
-     "layoutTitle": "高額合算支給申請登録",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 3,
-   "name": "高額合算支給申請書登録新規以外2",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1100012",
-     "toLayoutTitle": "高額合算支給申請登録（申請情報検索）",
-     "toState": "検索条件"
-    },
-    {
-     "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1100012",
-     "layoutTitle": "対象者検索",
-     "eventName": "支給申請登録へ",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1100011",
-     "toLayoutTitle": "高額合算支給申請登録",
-     "toState": "申請情報"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1100011",
-     "layoutTitle": "高額合算支給申請登録",
-     "eventName": "該当者検索",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "検索条件"
-    },
-    {
-     "id": "4",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0200001",
-     "layoutTitle": "対象者検索",
-     "eventName": "対象者特定",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1100011",
-     "toLayoutTitle": "高額合算支給申請登録",
-     "toState": "申請登録加入履歴一覧"
-    },
-    {
-     "id": "5",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC1100011",

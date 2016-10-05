@@ -133,10 +133,11 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onBlur_txtHenkoDate(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
-        if (henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().getValue().isEmpty()) {
-            if (!henkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue().isEmpty()) {
-                henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().setValue(henkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
-            }
+        if (!henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().getValue().isEmpty()) {
+            return ResponseData.of(henkoRirekiDiv).respond();
+        }
+        if (!henkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue().isEmpty()) {
+            henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().setValue(henkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
         }
         return ResponseData.of(henkoRirekiDiv).respond();
     }

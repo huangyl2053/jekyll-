@@ -29,6 +29,15 @@ public class KyufuhiTuchiHoseiManager {
     private final DbT3067KyufuhiTuchiHoseiDac dac;
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link KyufuhiTuchiHoseiManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link KyufuhiTuchiHoseiManager}のインスタンス
+     */
+    public static KyufuhiTuchiHoseiManager createInstance() {
+        return InstanceProvider.create(KyufuhiTuchiHoseiManager.class);
+    }
+
+    /**
      * コンストラクタです。
      */
     public KyufuhiTuchiHoseiManager() {

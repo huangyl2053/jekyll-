@@ -43,6 +43,7 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
     private static final RString STR_ZERO = new RString("0");
     private static final RString STR_ONE = new RString("1");
     private static final RString 保存するKEY = new RString("btnUpdate");
+    private static final YMDHMS YMDHMS_EMPTY = new YMDHMS("");
 
     /**
      * コンストラクタです。
@@ -69,18 +70,6 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
             for (KokuhorenInterfaceKanri 履歴情報 : スケジュール履歴情報) {
                 row = new dgScheduleList_Row();
                 row.setShoriNengetsu(履歴情報.get処理年月().wareki().toDateString());
-                YMDHMS 抽出開始日時 = 履歴情報.get抽出開始日時();
-                if (抽出開始日時 != null && !抽出開始日時.isEmpty()) {
-                    row.setShinsaNengetsuFrom(抽出開始日時.wareki().toDateString());
-                } else {
-                    row.setShinsaNengetsuFrom(RString.EMPTY);
-                }
-                YMDHMS 抽出終了日時 = 履歴情報.get抽出終了日時();
-                if (抽出終了日時 != null && !抽出終了日時.isEmpty()) {
-                    row.setShinsaNengetsuTo(抽出終了日時.wareki().toDateString());
-                } else {
-                    row.setShinsaNengetsuTo(RString.EMPTY);
-                }
                 row.getDdlShoriJokyo().setDataSource(dataSource);
                 row.getDdlShoriJokyo().setSelectedKey(履歴情報.get処理状態区分());
                 YMDHMS 処理実施日時 = 履歴情報.get処理実施日時();
@@ -125,8 +114,6 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
      */
     public void set最新処理年月入力エリア状態(boolean 操作可否Flag) {
         div.getSaishinShoriNengetsuNyuryoku().getTxtShoriNengetsu().setDisabled(操作可否Flag);
-        div.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuFrom().setDisabled(操作可否Flag);
-        div.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuTo().setDisabled(操作可否Flag);
         div.getSaishinShoriNengetsuNyuryoku().getDdlShoriJokyo().setDisabled(操作可否Flag);
         div.getSaishinShoriNengetsuNyuryoku().getBtnTorikeshi().setDisabled(操作可否Flag);
         div.getSaishinShoriNengetsuNyuryoku().getBtnKakutei().setDisabled(操作可否Flag);
@@ -144,21 +131,12 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
     public void set最新処理年月入力エリア_初期化() {
         List<dgScheduleList_Row> rowList = div.getDgScheduleList().getDataSource();
         RDate 処理年月Date;
-        RDate 終了日時;
         FlexibleYearMonth 処理年月;
-        FlexibleYearMonth 抽出終了日時;
         if (rowList != null && !rowList.isEmpty()) {
             dgScheduleList_Row row = rowList.get(NUM_0);
             処理年月Date = new RDate(row.getShoriNengetsu().toString());
             処理年月 = new FlexibleYearMonth(処理年月Date.getYearMonth().plusMonth(NUM_1).toDateString());
             div.getSaishinShoriNengetsuNyuryoku().getTxtShoriNengetsu().setDomain(処理年月);
-            RString 終了Date = row.getShinsaNengetsuTo();
-            if (終了Date != null && !終了Date.isEmpty()) {
-                終了日時 = new RDate(終了Date.toString());
-                抽出終了日時 = new FlexibleYearMonth(終了日時.getYearMonth().plusMonth(NUM_1).toDateString());
-                div.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuFrom().setDomain(抽出終了日時);
-                div.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuTo().setDomain(抽出終了日時);
-            }
         }
         div.getSaishinShoriNengetsuNyuryoku().getDdlShoriJokyo().setDataSource(get最新処理年月入力エリアDropDownList());
         div.getSaishinShoriNengetsuNyuryoku().getDdlShoriJokyo().setSelectedKey(ShoriJotaiKubun.処理前.getコード());
@@ -170,21 +148,11 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
     public void set最新処理年月入力エリア_２回目以降() {
         List<dgScheduleList_Row> rowList = div.getDgScheduleList().getDataSource();
         RDate 処理年月Date;
-        RDate 開始日時;
-        RDate 終了日時;
         FlexibleYearMonth 処理年月;
-        FlexibleYearMonth 抽出開始日時;
-        FlexibleYearMonth 抽出終了日時;
         dgScheduleList_Row row = rowList.get(NUM_0);
         処理年月Date = new RDate(row.getShoriNengetsu().toString());
         処理年月 = new FlexibleYearMonth(処理年月Date.getYearMonth().toDateString());
         div.getSaishinShoriNengetsuNyuryoku().getTxtShoriNengetsu().setDomain(処理年月);
-        開始日時 = new RDate(row.getShinsaNengetsuFrom().toString());
-        抽出開始日時 = new FlexibleYearMonth(開始日時.getYearMonth().toDateString());
-        div.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuFrom().setDomain(抽出開始日時);
-        終了日時 = new RDate(row.getShinsaNengetsuTo().toString());
-        抽出終了日時 = new FlexibleYearMonth(終了日時.getYearMonth().toDateString());
-        div.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuTo().setDomain(抽出終了日時);
         div.getSaishinShoriNengetsuNyuryoku().getDdlShoriJokyo().setDataSource(get最新処理年月入力エリアDropDownList());
         div.getSaishinShoriNengetsuNyuryoku().getDdlShoriJokyo().setSelectedKey(row.getDdlShoriJokyo().getSelectedKey());
     }
@@ -226,15 +194,11 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
         }
         if (STR_ZERO.equals(div.getHdnFlag())) {
             row.setShoriNengetsu(処理年月.wareki().toDateString());
-            row.setShinsaNengetsuFrom(div.getTxtShinsaNengetsuFrom().getDomain().wareki().toDateString());
-            row.setShinsaNengetsuTo(div.getTxtShinsaNengetsuTo().getDomain().wareki().toDateString());
             row.getDdlShoriJokyo().setDataSource(get最新処理年月入力エリアDropDownList());
             row.getDdlShoriJokyo().setSelectedKey(div.getDdlShoriJokyo().getSelectedKey());
             rowList.add(NUM_0, row);
         } else {
             rowList.get(NUM_0).setShoriNengetsu(処理年月.wareki().toDateString());
-            rowList.get(NUM_0).setShinsaNengetsuFrom(div.getTxtShinsaNengetsuFrom().getDomain().wareki().toDateString());
-            rowList.get(NUM_0).setShinsaNengetsuTo(div.getTxtShinsaNengetsuTo().getDomain().wareki().toDateString());
             rowList.get(NUM_0).getDdlShoriJokyo().setDataSource(get最新処理年月入力エリアDropDownList());
             rowList.get(NUM_0).getDdlShoriJokyo().setSelectedKey(div.getDdlShoriJokyo().getSelectedKey());
         }
@@ -278,6 +242,12 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                         .set再処理可能区分(Boolean.FALSE)
                         .set処理実行回数(Decimal.ZERO)
                         .set再処理設定不可区分(Boolean.FALSE)
+                        .set処理実施日時(YMDHMS_EMPTY)
+                        .set抽出開始日時(YMDHMS_EMPTY)
+                        .set抽出終了日時(YMDHMS_EMPTY)
+                        .setコントロール上処理年月(FlexibleYearMonth.EMPTY)
+                        .set過誤コントロール上処理年月(FlexibleYearMonth.EMPTY)
+                        .set実績データ上審査年月(FlexibleYearMonth.EMPTY)
                         .build();
                 データ登録リスト.add(データ登録);
             }
@@ -313,20 +283,19 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
      * 処理状況変更チェックのメソッドです。
      *
      * @param map 変更前処理状況
+     * @return boolean
      */
-    public void to処理状況変更チェック(Map<Integer, RString> map) {
+    public boolean to処理状況変更チェック(Map<Integer, RString> map) {
         dgScheduleList_Row row = div.getDgScheduleList().getClickedItem();
         RString 変更前処理状況 = map.get(row.getId());
         RString 変更後処理状況 = row.getDdlShoriJokyo().getSelectedKey();
-        if (!((変更前処理状況.equals(ShoriJotaiKubun.処理前.getコード())
+        return !((変更前処理状況.equals(ShoriJotaiKubun.処理前.getコード())
                 && 変更後処理状況.equals(ShoriJotaiKubun.処理なし.getコード()))
                 || (変更前処理状況.equals(ShoriJotaiKubun.処理なし.getコード())
                 && 変更後処理状況.equals(ShoriJotaiKubun.処理前.getコード()))
                 || (変更前処理状況.equals(ShoriJotaiKubun.再処理前.getコード())
                 && 変更後処理状況.equals(ShoriJotaiKubun.終了.getコード()))
                 || (変更前処理状況.equals(ShoriJotaiKubun.終了.getコード())
-                && 変更後処理状況.equals(ShoriJotaiKubun.再処理前.getコード())))) {
-            throw new ApplicationException(DbcErrorMessages.設定不能状態への変更.getMessage());
-        }
+                && 変更後処理状況.equals(ShoriJotaiKubun.再処理前.getコード())));
     }
 }

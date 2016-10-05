@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaijushochitokurei.KoikinaiJushochiTokureiBatchParamter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050010.DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0710011.KoikinaiJushochiTokureiDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -125,10 +125,10 @@ public class KoikinaiJushochiTokureiHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
-     * @return KoikinaiJushochiTokureiBatchParamter 広域内住所地特例者一覧表_バッチパラメータクラスです
+     * @return DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter 広域内住所地特例者一覧表_バッチパラメータクラスです
      */
-    public KoikinaiJushochiTokureiBatchParamter click実行() {
-        KoikinaiJushochiTokureiBatchParamter batchparam = new KoikinaiJushochiTokureiBatchParamter();
+    public DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter click実行() {
+        DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter batchparam = new DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter();
         batchparam.setShichosonCode(div.getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().isEmpty() ? RString.EMPTY : div
                 .getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().substring(0, 市町村コード));
         batchparam.setShichosonName(div.getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().isEmpty() ? RString.EMPTY : div

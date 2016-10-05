@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -32,7 +31,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -181,19 +179,16 @@ public class DbT7130KaigoServiceShuruiDac {
     /**
      * 介護サービス種類を全件返します。
      *
-     * @param systemDate システム日付
+     * @param makeShuruiConditions ITrueFalseCriteria
      * @return List<DbT7130KaigoServiceShuruiEntity>
      */
     @Transaction
-    public List<DbT7130KaigoServiceShuruiEntity> selectServiceShurui(RYearMonth systemDate) {
-        requireNonNull(systemDate, UrSystemErrorMessages.値がnull.getReplacedMessage("システム日付"));
+    public List<DbT7130KaigoServiceShuruiEntity> selectServiceShurui(ITrueFalseCriteria makeShuruiConditions) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
-                where(and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
-                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
-                                leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM))).
+                where(makeShuruiConditions).
                 toList(DbT7130KaigoServiceShuruiEntity.class);
     }
 
@@ -283,4 +278,70 @@ public class DbT7130KaigoServiceShuruiDac {
                 toList(DbT7130KaigoServiceShuruiEntity.class);
     }
 
+    /**
+     * サービス種類支給限度額を全件返します。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 適用期間From FlexibleYearMonth
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     */
+    @Transaction
+    public List<DbT7130KaigoServiceShuruiEntity> select介護サービス種類データ(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用期間From) throws NullPointerException {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(適用期間From, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(
+                                eq(serviceShuruiCd, サービス種類コード),
+                                leq(serviceShuruiCd, 適用期間From)
+                        )).
+                order(by(DbT7130KaigoServiceShurui.serviceShuruiCd, Order.DESC)).
+                toList(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
+     * サービス種類名称Listを取得します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7130KaigoServiceShuruiEntity> getサービス種類名称List(
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(
+                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM)
+                        ))
+                .toList(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
+     * キーで介護サービス内容を取得します。
+     *
+     * @param list List<ServiceShuruiCode>
+     * @return DbT7131KaigoServiceNaiyouEntity
+     */
+    @Transaction
+    public DbT7130KaigoServiceShuruiEntity select介護サービス(List<ServiceShuruiCode> list) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(serviceShuruiMeisho).
+                table(DbT7130KaigoServiceShurui.class).
+                where(
+                        in(serviceShuruiCd, list)).
+                order(by(serviceShuruiCd, Order.ASC)).limit(1).
+                toObject(DbT7130KaigoServiceShuruiEntity.class);
+    }
 }

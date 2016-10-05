@@ -10,14 +10,15 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055001.DBB055001_KanendoIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -118,8 +119,8 @@ public class HonsanteiIdoKanendo {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
         List<ShoriDateKanri> kanriList = new ArrayList<>();
-        DbT7022ShoriDateKanriEntity shentity = 処理日付管理Dac.
-                select処理状況_本算定異動_過年度(調定年度);
+        DbT7022ShoriDateKanriEntity shentity = 処理日付管理Dac.selectByFourKeys(
+                SubGyomuCode.DBB介護賦課, ShoriName.過年度賦課.get名称(), new RString("0001"), 調定年度);
         if (shentity == null) {
             return new ArrayList<>();
         }
@@ -197,8 +198,8 @@ public class HonsanteiIdoKanendo {
      * @param parameter parameter
      * @return BatchParamResult
      */
-    public HonSanteiIdoKanendoFukaBatchParameter createBatchParam(HonsanteiIdoDivParameter parameter) {
-        HonSanteiIdoKanendoFukaBatchParameter result = new HonSanteiIdoKanendoFukaBatchParameter();
+    public DBB055003_KanendoIdoTsuchishoHakkoParameter createBatchParam(HonsanteiIdoDivParameter parameter) {
+        DBB055003_KanendoIdoTsuchishoHakkoParameter result = new DBB055003_KanendoIdoTsuchishoHakkoParameter();
         result.set調定年度(parameter.get調定年度());
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {
@@ -240,8 +241,8 @@ public class HonsanteiIdoKanendo {
      * @param parameter parameter
      * @return BatchParamResult
      */
-    public HonSanteiIdoFukaBatchParameter createIdoBatchParam(HonsanteiIdoDivParameter parameter) {
-        HonSanteiIdoFukaBatchParameter result = new HonSanteiIdoFukaBatchParameter();
+    public DBB055001_KanendoIdoFukaParameter createIdoBatchParam(HonsanteiIdoDivParameter parameter) {
+        DBB055001_KanendoIdoFukaParameter result = new DBB055001_KanendoIdoFukaParameter();
         result.set調定年度(parameter.get調定年度());
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {

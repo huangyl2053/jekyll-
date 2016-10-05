@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011;
 
+import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode3Entity;
@@ -19,12 +20,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,16 +39,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBC-2790-011 hemin
  */
-public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RString> {
+public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<RString>> {
 
     private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchisho");
-    private static final RString KEY_分離文字 = new RString("\\");
     private static final RString 帳票レコード種別_H1 = new RString("H1");
     private static final RString 帳票レコード種別_D1 = new RString("D1");
     private static final RString 帳票レコード種別_T1 = new RString("T1");
     private static final RString 帳票レコード種別_T2 = new RString("T2");
     private static final RString 帳票レコード種別_T3 = new RString("T3");
     private static final RString レコード種別 = new RString("1");
+    private static final RString レコード種別_3 = new RString("3");
     private static final RString 区切り文字 = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
@@ -84,16 +88,17 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     protected void initialize() {
         合計 = false;
         累計 = false;
-        renban = INDEX_0;
+        renban = parameter.getRenban();
         flowEntity = new FlowEntity();
         outFlowEntity = new OutputParameter<>();
-        csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
+        csvReaderPath = parameter.getPath().concat(File.separator).concat(parameter.getFileName());
         suchishoTempentity = new DbWT1511SeikyugakuTsuchishoTempEntity();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(csvReaderPath);
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(csvReaderPath)
+                .setDelimiter(区切り文字).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -103,9 +108,11 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(区切り文字.toString());
+    protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
+            if (レコード種別_3.equals(data.get(INDEX_0))) {
+                return;
+            }
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
@@ -240,8 +247,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
         suchishoTempentity.setS_Tanisu(getDecimal(meisaiEntity.get再審査_過誤_公費対象単位数()));
         suchishoTempentity.setS_Choseigaku(getDecimal(meisaiEntity.get再審査_過誤_公費対象調整額()));
         suchishoTempentity.setKaigokyufuSogojigyohi(Decimal.ZERO);
-        suchishoTempentity.setRiyoshaFutangaku(getDecimal(meisaiEntity.get負担額()));
-        suchishoTempentity.setKohiFutangaku(getDecimal(meisaiEntity.get公費分本人負担額()));
+        suchishoTempentity.setRiyoshaFutangaku(getDecimal(meisaiEntity.get公費分本人負担額()));
+        suchishoTempentity.setKohiFutangaku(getDecimal(meisaiEntity.get負担額()));
     }
 
     private void set合計レコード(DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity,
@@ -255,8 +262,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
             suchishoTempentity.setS_GokeiTanisu(getDecimal(gokeiCsvEntity.get再審査_過誤_公費対象単位数()));
             suchishoTempentity.setS_GokeiChoseigaku(getDecimal(gokeiCsvEntity.get再審査_過誤_公費対象調整額()));
             suchishoTempentity.setGokeiKaigokyufuSogojigyohi(Decimal.ZERO);
-            suchishoTempentity.setGokeiRiyoshaFutangaku(getDecimal(gokeiCsvEntity.get負担額()));
-            suchishoTempentity.setGokeiKohiFutangaku(getDecimal(gokeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setGokeiRiyoshaFutangaku(getDecimal(gokeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setGokeiKohiFutangaku(getDecimal(gokeiCsvEntity.get負担額()));
         } else {
             suchishoTempentity.setGokeiChohyoRecordShubetsu(RString.EMPTY);
             suchishoTempentity.setT_GokeiKensu(Decimal.ZERO);
@@ -283,8 +290,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
             suchishoTempentity.setS_RuisekiTanisu(getDecimal(ruikeiCsvEntity.get再審査_過誤_公費対象単位数()));
             suchishoTempentity.setS_RuisekiChoseigaku(getDecimal(ruikeiCsvEntity.get再審査_過誤_公費対象調整額()));
             suchishoTempentity.setRuisekiKaigokyufuSogojigyohi(Decimal.ZERO);
-            suchishoTempentity.setRuisekiRiyoshaFutangaku(getDecimal(ruikeiCsvEntity.get負担額()));
-            suchishoTempentity.setRuisekiKohiFutangaku(getDecimal(ruikeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setRuisekiRiyoshaFutangaku(getDecimal(ruikeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setRuisekiKohiFutangaku(getDecimal(ruikeiCsvEntity.get負担額()));
         } else {
             suchishoTempentity.setRuisekiChohyoRecordShubetsu(RString.EMPTY);
             suchishoTempentity.setT_RuisekiKensu(Decimal.ZERO);

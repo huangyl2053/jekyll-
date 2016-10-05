@@ -25,8 +25,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -89,7 +87,7 @@ public class SikakuIdouTeiseiHandler {
 
         SikakuIdouTeiseiJoho joho = new SikakuIdouTeiseiJoho();
         joho.setIryoHokenJohoList(set初期化時の医療保険情報());
-        joho.setRoreiFukushiJohoList(set初期化時の老福年金情報(識別コード));
+        joho.setRoreiFukushiJohoList(set初期化時の老福年金情報());
         return joho;
     }
 
@@ -128,7 +126,7 @@ public class SikakuIdouTeiseiHandler {
         return oldList;
     }
 
-    private List<RoreiFukushiJoho> set初期化時の老福年金情報(ShikibetsuCode 識別コード) {
+    private List<RoreiFukushiJoho> set初期化時の老福年金情報() {
         List<RoreiFukushiJoho> roreiFukushiJohoList = new ArrayList<>();
         //初期化はダイアログ内で行うので不要
 //        for (datagridRireki_Row row : div.getShikakuShutokuJoho()

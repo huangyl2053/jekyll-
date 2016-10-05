@@ -18,10 +18,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJusho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ShichosonInput.ShichosonInputDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -37,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -327,7 +324,7 @@ public class TennyuHoryuTokuteiHandler {
             if (RowState.Added.equals(list.getRowState())) {
                 RString 管理番号 = manager.getKanriNo();
                 RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(RString.isNullOrEmpty(管理番号) ? new RString("1")
-                        : new RString(String.valueOf(Integer.parseInt(管理番号.toString()) + 1)), new LasdecCode(list.getTxtShichosonCode()));
+                                                                               : new RString(String.valueOf(Integer.parseInt(管理番号.toString()) + 1)), new LasdecCode(list.getTxtShichosonCode()));
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 builder.set住所(new AtenaJusho(list.getTxtJusho()));
                 builder.set住所コード(new ChoikiCode(list.getTxtJushoCode()));
@@ -366,12 +363,15 @@ public class TennyuHoryuTokuteiHandler {
         }
     }
 
+    /**
+     * @return 入力済みなら{@code true}
+     */
     public boolean is入力済() {
         if (追加.equals(div.getTennyuHoryuTokuteiJushoNyuryoku().getTxtJotai())) {
 
             if (div.getCcdJushoInputGuide().get町域コード().isEmpty()
-                    && div.getCcdBunchiInput().get番地().isEmpty()
-                    && div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo().isEmpty()) {
+                && div.getCcdBunchiInput().get番地().isEmpty()
+                && div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo().isEmpty()) {
                 return false;
             }
             return true;
@@ -383,14 +383,12 @@ public class TennyuHoryuTokuteiHandler {
             row = div.getDdlTennyuHoryuTokuteiJushoIchiran().getDataSource().get(rowcount);
 
             if (div.getCcdJushoInputGuide().get町域コード().value().equals(row.getTxtJushoCode())
-                    && div.getCcdBunchiInput().get番地().value().equals(row.getTxtBanchi())
-                    && div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo().equals(
-                            row.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(0))) {
+                && div.getCcdBunchiInput().get番地().value().equals(row.getTxtBanchi())
+                && div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo().equals(
+                    row.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(0))) {
                 return false;
             }
             return true;
-        }
-        if (削除.equals(div.getTennyuHoryuTokuteiJushoNyuryoku().getTxtJotai())) {
         }
         return false;
     }

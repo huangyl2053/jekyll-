@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710140;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -53,9 +55,9 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
     @BatchParameter(key = KEY_SHIKYU_TO, name = "支給申請書整理番号To")
     private RString shikyuShinseishoSeiriNoTo;
     @BatchParameter(key = KEY_FLEXIBLE_FROM, name = "送付年月From")
-    private FlexibleDate flexibleYearMonthFrom;
+    private FlexibleYearMonth flexibleYearMonthFrom;
     @BatchParameter(key = KEY_FLEXIBLE_TO, name = "送付年月To")
-    private FlexibleDate flexibleYearMonthTo;
+    private FlexibleYearMonth flexibleYearMonthTo;
     @BatchParameter(key = KEY_TOMOKUME_FUKA, name = "項目名付加")
     private boolean tomokumeFuka;
     @BatchParameter(key = KEY_REBAN_FUKA, name = "連番付加")
@@ -70,69 +72,12 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
     private RString shutsuryokuTomoku;
 
     /**
-     * コンストラクタです。
-     */
-    public DBC710140_HanyoListKogakuGassanShinseishoJohoParameter() {
-    }
-
-    /**
+     * mybatisのパラメータを生成します。
      *
-     * @param chushutsuKubun 抽出区分
-     * @param kaigoGassanShinseiJokyoKubun 申請状況区分
-     * @param flexibleYear 対象年度
-     * @param flexibleDateFrom 申請年月日From
-     * @param flexibleDateTo 申請年月日To
-     * @param shikyuShinseishoSeiriNoFrom 支給申請書整理番号From
-     * @param shikyuShinseishoSeiriNoTo 支給申請書整理番号To
-     * @param flexibleYearMonthFrom 送付年月From
-     * @param flexibleYearMonthTo 送付年月To
-     * @param tomokumeFuka 項目名付加
-     * @param rebanFuka 連番付加
-     * @param slashDate 日付スラッシュ付加
-     * @param hokenshaNo 保険者コード
-     * @param shutsuryokuju 出力順
-     * @param shutsuryokuTomoku 出力項目
+     * @return mybatisパラメータ
      */
-    public DBC710140_HanyoListKogakuGassanShinseishoJohoParameter(
-            RString chushutsuKubun,
-            RString kaigoGassanShinseiJokyoKubun,
-            RString flexibleYear,
-            FlexibleDate flexibleDateFrom,
-            FlexibleDate flexibleDateTo,
-            RString shikyuShinseishoSeiriNoFrom,
-            RString shikyuShinseishoSeiriNoTo,
-            FlexibleDate flexibleYearMonthFrom,
-            FlexibleDate flexibleYearMonthTo,
-            boolean tomokumeFuka,
-            boolean rebanFuka,
-            boolean slashDate,
-            RString hokenshaNo,
-            Long shutsuryokuju,
-            RString shutsuryokuTomoku) {
-        this.chushutsuKubun = chushutsuKubun;
-        this.kaigoGassanShinseiJokyoKubun = kaigoGassanShinseiJokyoKubun;
-        this.flexibleYear = flexibleYear;
-        this.flexibleDateFrom = flexibleDateFrom;
-        this.flexibleDateTo = flexibleDateTo;
-        this.shikyuShinseishoSeiriNoFrom = shikyuShinseishoSeiriNoFrom;
-        this.shikyuShinseishoSeiriNoTo = shikyuShinseishoSeiriNoTo;
-        this.flexibleYearMonthFrom = flexibleYearMonthFrom;
-        this.flexibleYearMonthTo = flexibleYearMonthTo;
-        this.tomokumeFuka = tomokumeFuka;
-        this.rebanFuka = rebanFuka;
-        this.slashDate = slashDate;
-        this.hokenshaNo = hokenshaNo;
-        this.shutsuryokuju = shutsuryokuju;
-        this.shutsuryokuTomoku = shutsuryokuTomoku;
-    }
-
-    /**
-     * 汎用リスト出力(高額合算申請書情報)_バッチ用のパラメータラス作成
-     *
-     * @return 汎用リスト出力(高額合算申請書情報)_バッチ用のパラメータラス
-     */
-    public DBC710140_HanyoListKogakuGassanShinseishoJohoParameter toDBC710140_HanyoListKogakuGassanShinseishoJohoParameter() {
-        return new DBC710140_HanyoListKogakuGassanShinseishoJohoParameter(
+    public HanyoListKogakuGassanShinseishoJohoProcessParameter toProcessParam() {
+        return new HanyoListKogakuGassanShinseishoJohoProcessParameter(
                 chushutsuKubun,
                 kaigoGassanShinseiJokyoKubun,
                 flexibleYear,
@@ -147,7 +92,10 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
                 slashDate,
                 hokenshaNo,
                 shutsuryokuju,
-                shutsuryokuTomoku
+                shutsuryokuTomoku,
+                null,
+                null,
+                null
         );
     }
 }

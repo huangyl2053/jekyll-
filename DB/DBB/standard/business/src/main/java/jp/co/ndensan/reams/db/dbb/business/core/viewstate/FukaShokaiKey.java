@@ -26,6 +26,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class FukaShokaiKey implements Serializable {
 
+    /**
+     * 空のFukaShokaiKeyです。
+     */
     public static final FukaShokaiKey EMPTY;
 
     static {

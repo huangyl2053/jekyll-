@@ -6,16 +6,13 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1020011;
 
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsushikakuido.NenreitotatsuJoken;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA010010.DBA010010_NenreitotatsuShikakuIdoParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1020011.NenReiTotatsuSearchConditionDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1020011.NenReiTotatsuSearchConditionHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido.NenreitotatsuShikakuIdo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -69,9 +66,9 @@ public class NenReiTotatsuSearchCondition {
      * @param div NenReiTotatsuSearchCondition のクラスファイル。
      * @return ResponseData
      */
-    public ResponseData<NenreitotatsuShikakuIdoBatchFlowParameter> batchRegister(NenReiTotatsuSearchConditionDiv div) {
-        ResponseData<NenreitotatsuShikakuIdoBatchFlowParameter> response = new ResponseData<>();
-        NenreitotatsuShikakuIdoBatchFlowParameter param = new NenreitotatsuShikakuIdo()
+    public ResponseData<DBA010010_NenreitotatsuShikakuIdoParameter> batchRegister(NenReiTotatsuSearchConditionDiv div) {
+        ResponseData<DBA010010_NenreitotatsuShikakuIdoParameter> response = new ResponseData<>();
+        DBA010010_NenreitotatsuShikakuIdoParameter param = new NenreitotatsuShikakuIdo()
                 .getNenreitotatsuJokenBatchParameter(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
         response.data = param;

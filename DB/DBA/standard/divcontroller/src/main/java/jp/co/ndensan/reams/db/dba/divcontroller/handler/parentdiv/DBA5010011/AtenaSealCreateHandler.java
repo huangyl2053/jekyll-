@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA5010011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.atenasealcreate.AtenaSealCreateBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA090010.DBA090010_AtenaSeelParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA5010011.AtenaSealCreateDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -133,7 +133,6 @@ public class AtenaSealCreateHandler {
         if (listKey.contains(SHIKAKUSHUTOKU) && listKey.contains(NENREITOTATSU)) {
             div.getCyushutsuJoken().getDdlShikakuKubun().setSelectedKey(SUBETE);
         }
-
     }
 
     private void set抽出対象者() {
@@ -226,9 +225,9 @@ public class AtenaSealCreateHandler {
     /**
      * 実行ボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
      *
-     * @return parameter AtenaSealCreateBatchParameter
+     * @return parameter DBA090010_AtenaSeelParameter
      */
-    public AtenaSealCreateBatchParameter onclick_btnjikou() {
+    public DBA090010_AtenaSeelParameter onclick_btnjikou() {
         RString 抽出対象者;
         FlexibleDate 抽出期間開始日;
         FlexibleDate 抽出期間終了日;
@@ -261,7 +260,7 @@ public class AtenaSealCreateHandler {
             抽出期間終了日 = 終了日;
         }
         RString code = getCode(div.getCyushutsuJoken().getDdlShikakuKubun().getSelectedKey());
-        return new AtenaSealCreateBatchParameter(
+        return new DBA090010_AtenaSeelParameter(
                 抽出対象者,
                 抽出期間,
                 dateFormat(new RString(抽出期間開始日.toString())),
@@ -269,7 +268,7 @@ public class AtenaSealCreateHandler {
                 code,
                 div.getCyushutsuJoken().getDdlZensisyouson().getSelectedKey(),
                 div.getHensyuHoho().getDdlSaiyusenJusho().getSelectedKey(),
-                div.getHensyuHoho().getDdlKeisho().getSelectedKey(),
+                div.getHensyuHoho().getDdlKeisho().getSelectedValue(),
                 div.getHensyuHoho().getRadIsPrintHihokenshaNo().getSelectedKey(),
                 div.getHensyuHoho().getCcdJushoSettei().is方書表示(),
                 div.getHensyuHoho().getCcdJushoSettei().is市町村名表示(),

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5720001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5720001.JyukyushaDaichoIdoCheckListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD572001.DBD572001Parameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5720001.JyukyushaDaichoIdoCheckListDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.jyukyushadaichoidodhecklist.JyukyushaDaichoIdoCheckListManager;
@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class JyukyushaDaichoIdoCheckListHandler {
 
     private final JyukyushaDaichoIdoCheckListDiv div;
+    private final RString rString = new RString("0:00:00");
 
     /**
      *
@@ -57,8 +58,12 @@ public class JyukyushaDaichoIdoCheckListHandler {
                         new RDate(shoriDateKanri.get対象終了年月日().toString()));
                 div.getJhokenPancel().getTxtRangeZenkai().setToTimeValue(new RTime(shoriDateKanri.get対象終了日時().
                         getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+            }
+            if (div.getJhokenPancel().getTxtRangeZenkai().getToDateValue() != null) {
                 div.getJhokenPancel().getTxtRangeKonkai().setFromDateValue(
                         div.getJhokenPancel().getTxtRangeZenkai().getToDateValue());
+            }
+            if (div.getJhokenPancel().getTxtRangeZenkai().getToTimeValue() != null) {
                 div.getJhokenPancel().getTxtRangeKonkai().setFromTimeValue(
                         div.getJhokenPancel().getTxtRangeZenkai().getToTimeValue().plusSeconds(1));
             }
@@ -77,12 +82,12 @@ public class JyukyushaDaichoIdoCheckListHandler {
      *
      * @return JyukyushaDaichoIdoCheckListParameter
      */
-    public JyukyushaDaichoIdoCheckListParameter getParameter() {
-        JyukyushaDaichoIdoCheckListParameter parameter = new JyukyushaDaichoIdoCheckListParameter();
+    public DBD572001Parameter getParameter() {
+        DBD572001Parameter parameter = new DBD572001Parameter();
         parameter.set今回抽出開始年月日(div.getJhokenPancel().getTxtRangeKonkai().getFromDateValue());
         if (div.getJhokenPancel().getTxtRangeKonkai().getFromDateValue() != null
                 && div.getJhokenPancel().getTxtRangeKonkai().getFromTimeValue() == null) {
-            parameter.set今回抽出開始時分秒(new RTime(new RString("0:00:00")));
+            parameter.set今回抽出開始時分秒(new RTime(rString));
         } else {
             parameter.set今回抽出開始時分秒(div.getJhokenPancel().getTxtRangeKonkai().getFromTimeValue());
         }
@@ -90,13 +95,15 @@ public class JyukyushaDaichoIdoCheckListHandler {
 
         if (div.getJhokenPancel().getTxtRangeKonkai().getToDateValue() != null
                 && div.getJhokenPancel().getTxtRangeKonkai().getToTimeValue() == null) {
-            parameter.set今回抽出終了時分秒(new RTime(new RString("0:00:00")));
+            parameter.set今回抽出終了時分秒(new RTime(rString));
         } else {
             parameter.set今回抽出終了時分秒(div.getJhokenPancel().getTxtRangeKonkai().getToTimeValue());
         }
         parameter.set出力対象(div.getDdlShuturtokuTaisho().getSelectedValue());
+        if (div.getCcdShutsuryokujun().getSelected出力順() != null) {
+            parameter.set出力順ID(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
+        }
 
-        parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());
         return parameter;
     }
 

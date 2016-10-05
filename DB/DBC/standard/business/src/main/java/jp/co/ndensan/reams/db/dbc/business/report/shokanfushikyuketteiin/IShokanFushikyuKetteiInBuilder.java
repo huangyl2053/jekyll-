@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 帳票設計_DBC200022_償還払不支給決定者一覧表 IShokanFushikyuKetteiInBuilder
  *
- * @reamsid_L DBC-2590-040 xuhao
+ * @reamsid_L DBC-2590-040 liuxiaoyu
  */
-public interface IShokanFushikyuKetteiInBuilder extends IReportBuilder<ShokanbaraiFushikyuKetteishaIchiranSource> {
+public interface IShokanFushikyuKetteiInBuilder extends
+        IReportBuilder<ShokanbaraiFushikyuKetteishaIchiranSource> {
 
 }

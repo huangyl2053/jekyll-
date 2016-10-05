@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 二次予防事業対象者を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 public class NijiYoboJigyoTaishosha
         extends ModelBase<NijiYoboJigyoTaishoshaIdentifier, DbT3100NijiYoboJigyoTaishoshaEntity, NijiYoboJigyoTaishosha> implements Serializable {
@@ -73,7 +75,6 @@ public class NijiYoboJigyoTaishosha
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 被保険者番号を返します。
      *
@@ -129,6 +130,15 @@ public class NijiYoboJigyoTaishosha
     }
 
     /**
+     * 調査実施日を返します。
+     *
+     * @return 調査実施日
+     */
+    public FlexibleDate get調査実施日() {
+        return entity.getChosaJisshiYMD();
+    }
+
+    /**
      * {@link DbT3100NijiYoboJigyoTaishoshaEntity}のクローンを返します。
      *
      * @return {@link DbT3100NijiYoboJigyoTaishoshaEntity}のクローン
@@ -149,8 +159,7 @@ public class NijiYoboJigyoTaishosha
     }
 
     /**
-     * 保持する二次予防事業対象者を削除対象とします。<br/>
-     * {@link DbT3100NijiYoboJigyoTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する二次予防事業対象者を削除対象とします。<br/> {@link DbT3100NijiYoboJigyoTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NijiYoboJigyoTaishosha}
      */
@@ -160,7 +169,6 @@ public class NijiYoboJigyoTaishosha
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NijiYoboJigyoTaishosha(deletedEntity, id);
@@ -178,7 +186,7 @@ public class NijiYoboJigyoTaishosha
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     /**
@@ -226,5 +234,4 @@ public class NijiYoboJigyoTaishosha
         return new NijiYoboJigyoTaishoshaBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

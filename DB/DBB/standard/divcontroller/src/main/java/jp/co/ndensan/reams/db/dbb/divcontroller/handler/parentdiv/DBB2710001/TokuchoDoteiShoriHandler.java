@@ -18,10 +18,10 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.Toku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.dgTokuchoTaishoshaDoteiShoriKakuninKoiki_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.dgTokuchoTaishoshaDoteiShoriKakuninTanitsu_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoteishitaisyosyadoutei.TokuchoTeishiTaisyosyaDoutei;
+import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -216,9 +216,12 @@ public final class TokuchoDoteiShoriHandler {
         int 捕捉月1 = div.getTxtHosokuM1().getValue().getMonthValue();
         List<RString> 捕捉月 = new ArrayList<>();
         捕捉月.add(new RString(捕捉月1).padZeroToLeft(月字数));
-        捕捉月.add(div.getTxtHosokuM2().getValue());
-        捕捉月.add(div.getTxtHosokuM3().getValue());
-
+        if (!RString.isNullOrEmpty(div.getTxtHosokuM2().getValue())) {
+            捕捉月.add(div.getTxtHosokuM2().getValue());
+        }
+        if (!RString.isNullOrEmpty(div.getTxtHosokuM3().getValue())) {
+            捕捉月.add(div.getTxtHosokuM3().getValue());
+        }
         RString 開始月str;
         if (null == div.getTxtKaishiM().getValue()) {
             開始月str = RString.EMPTY;

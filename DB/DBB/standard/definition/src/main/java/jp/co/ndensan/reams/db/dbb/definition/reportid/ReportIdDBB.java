@@ -136,6 +136,10 @@ public enum ReportIdDBB {
      */
     DBB200009(new ReportId("DBB200009_HonsanteiKekkaIcihiran"), new RString("本算定結果一覧表")),
     /**
+     * 特別徴収平準化計算（特別徴収8月分）結果一覧表
+     */
+    DBB200005(new ReportId("DBB200005_TokubetsuChoshuHeijunkaKeisanAugustKekkaIchiran"), new RString("特別徴収平準化計算（特別徴収8月分）結果一覧表")),
+    /**
      * 保険料納入通知書（本算定）【コンビニ角公タイプ】
      */
     DBB100059(new ReportId("DBB100059_NonyuTsuchishoCVSKakuko"), new RString("保険料納入通知書（本算定）【コンビニ角公タイプ】")),
@@ -241,7 +245,7 @@ public enum ReportIdDBB {
     /**
      * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ（連帳）】
      */
-    DBB100044(new ReportId("DBB100044_KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateRencho"),
+    DBB100044(new ReportId("DBB100044_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4TateRn"),
             new RString("介護保険料額変更兼特別徴収中止通知書【A4縦タイプ（連帳）】")),
     /**
      * 特別徴収開始通知書（本算定）【B5横タイプ】
@@ -343,6 +347,10 @@ public enum ReportIdDBB {
      */
     DBB300002(new ReportId("DBB300002_TsukibetsuSuiihyo"), new RString("月別推移表")),
     /**
+     * 特別徴収異動情報件数表の帳票ID
+     */
+    DBB200022(new ReportId("DBB200022_TokubetsuChoshuIdojohoKensuhyo"), new RString("特別徴収異動情報件数表")),
+    /**
      * 通知書発行後異動対象者一覧の帳票ID
      */
     DBB200028(new ReportId("DBB200028_HakkogoIdoTaishoshaIchiran"), new RString("通知書発行後異動対象者一覧")),
@@ -420,6 +428,10 @@ public enum ReportIdDBB {
      */
     DBB200017(new ReportId("DBB200017_HonsanteiKanendoIdoNonyutsuchishoHakkoIchiran"), new RString("保険料納入通知書（本算定過年度異動）発行一覧表")),
     /**
+     * 特別徴収依頼情報一覧表の帳票ID
+     */
+    DBB200019(new ReportId("DBB200019_TokubetsuChoshuIraiJohoIchiran"), new RString("特別徴収依頼情報一覧表")),
+    /**
      * 特別徴収依頼金額明細一覧表の帳票ID
      */
     DBB200023(new ReportId("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran"), new RString("特別徴収依頼金額明細一覧表")),
@@ -441,9 +453,43 @@ public enum ReportIdDBB {
      */
     DBB200027(new ReportId("DBB200027_KanendoIdouKekkaIchiran"), new RString("本算定異動（過年度）結果一覧表")),
     /**
+     *
+     * 納付額一覧表（確定申告用）の帳票ID
+     */
+    DBB300005(new ReportId("DBB300005_NofugakuIchiran"), new RString("納付額一覧表（確定申告用）")),
+    /**
+     *
+     * 納付額一覧表（識別コード不明分）の帳票ID
+     */
+    DBB300006(new ReportId("DBB300006_NofugakuIchiranShikibetsuCodeFumei"), new RString("納付額一覧表（識別コード不明分）")),
+    /**
+     * 所得段階別被保険者数一覧表の帳票ID
+     */
+    DBB300004(new ReportId("DBB300004_ShotokuDankaiBetsuHihokenshasuIchiran"), new RString("所得段階別被保険者数一覧表")),
+    /**
      * 保険料納入通知書（仮算定）発行一覧表の帳票ID
      */
-    DBB200007(new ReportId("DBB200007_KariNonyuTsuchishoHakkoIchiran"), new RString("保険料納入通知書（仮算定）発行一覧表"));
+    DBB200007(new ReportId("DBB200007_KariNonyuTsuchishoHakkoIchiran"), new RString("保険料納入通知書（仮算定）発行一覧表")),
+    /**
+     * 宛名シール
+     */
+    DBZ100001(new ReportId("DBZ100001_AtenaSeal"), new RString("宛名シール")),
+    /**
+     * 特別徴収同定・未同定一覧
+     */
+    DBB200018(new ReportId("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran"), new RString("特別徴収同定・未同定一覧")),
+    /**
+     * 所得段階別収納率一覧表
+     */
+    DBB300003(new ReportId("DBB300003_ShotokuDankaiBetsuShunoritsuIchiran"), new RString("所得段階別収納率一覧表")),
+    /**
+     * 特別徴収依頼情報件数表の帳票ID
+     */
+    DBB200020(new ReportId("DBB200020_TokubetsuChoshuIraiJohoKensuhyo"), new RString("特別徴収依頼情報件数表")),
+    /**
+     * 特別徴収異動情報一覧表の帳票ID
+     */
+    DBB200021(new ReportId("DBB200021_TokubetsuChoshuIdojohoIchiran"), new RString("特別徴収異動情報一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

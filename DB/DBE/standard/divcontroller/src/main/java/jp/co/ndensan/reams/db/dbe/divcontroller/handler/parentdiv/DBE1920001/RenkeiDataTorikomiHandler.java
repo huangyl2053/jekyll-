@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.RenkeiDataTorikomiBatchParamter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.ShiseiDataParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE192001.DBE192001_NnteiShinseiInfoUploadParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE192001.ShiseiDataParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteiShinseiJohoDensanCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteiShinseiJohoKouroushouCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.RenkeiDataTorikomiDiv;
@@ -55,7 +55,7 @@ public class RenkeiDataTorikomiHandler {
     private static final RString 法改正後 = new RString("key1");
     private static final int 電算標準版_197 = 197;
     private static final int 厚労省_174 = 174;
-    private static final int 東芝版_87 = 87;
+    private static final int 東芝版_197 = 197;
     private static final RString 要介護認定申請連携データ取込みファイル名 = new RString("Z8NCI201.CSV");
     private static final RString フォーマット_要介護認定申請 = new RString("NCI201");
     private static final RString フォーマット_認定調査委託先 = new RString("NCI101");
@@ -95,6 +95,7 @@ public class RenkeiDataTorikomiHandler {
             div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正後);
         }
         div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setDisabled(true);
+        div.getRenkeiDataTorikomiBatchParameter().getBtnDataTorikomi().setDisabled(true);
         RString 要介護認定申請 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査委託先 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査員 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
@@ -155,8 +156,8 @@ public class RenkeiDataTorikomiHandler {
      *
      * @return RenkeiDataTorikomiBatchParamter
      */
-    public RenkeiDataTorikomiBatchParamter setBatchParameter() {
-        RenkeiDataTorikomiBatchParamter batchParameter = new RenkeiDataTorikomiBatchParamter();
+    public DBE192001_NnteiShinseiInfoUploadParameter setBatchParameter() {
+        DBE192001_NnteiShinseiInfoUploadParameter batchParameter = new DBE192001_NnteiShinseiInfoUploadParameter();
         List<RString> list = new ArrayList<>();
         List<ShiseiDataParameter> parameterList = new ArrayList<>();
         batchParameter.set市町村コード(div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value());
@@ -261,14 +262,13 @@ public class RenkeiDataTorikomiHandler {
                         AccessLogger.log(AccessLogType.照会, personalData);
                     }
                 }
-                // TODO
-            } else if (東芝版_87 == size) {
-                try (CsvReader<NinteiShinseiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class).setDelimiter(EUC_WRITER_DELIMITER)
+            } else if (東芝版_197 == size) {
+                try (CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoDensanCsvEntity.class).setDelimiter(EUC_WRITER_DELIMITER)
                         .setEncode(コード).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-                    List<NinteiShinseiJohoKouroushouCsvEntity> csvEntityList = new ArrayList<>();
+                    List<NinteiShinseiJohoDensanCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
-                        NinteiShinseiJohoKouroushouCsvEntity csventity = csvReader.readLine();
+                        NinteiShinseiJohoDensanCsvEntity csventity = csvReader.readLine();
                         if (csventity != null) {
                             csventity.set項目数(size);
                             csvEntityList.add(csventity);
@@ -276,7 +276,7 @@ public class RenkeiDataTorikomiHandler {
                             break;
                         }
                     }
-                    for (NinteiShinseiJohoKouroushouCsvEntity csvEntity : csvEntityList) {
+                    for (NinteiShinseiJohoDensanCsvEntity csvEntity : csvEntityList) {
                         dgtorikomidataichiran_Row row = new dgtorikomidataichiran_Row();
                         row.setSelected(Boolean.TRUE);
                         row.setKoroshoifshikibetsucode(csvEntity.get識別コード());

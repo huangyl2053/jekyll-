@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYearMonth;
 
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYearMonth;
  */
 public class SaishinShoriNengetsuNyuryokuDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,12 +27,6 @@ public class SaishinShoriNengetsuNyuryokuDiv extends Panel {
      */
     @JsonProperty("txtShoriNengetsu")
     private TextBoxFlexibleYearMonth txtShoriNengetsu;
-    @JsonProperty("lblShinsaNengetsuKikan")
-    private Label lblShinsaNengetsuKikan;
-    @JsonProperty("txtShinsaNengetsuFrom")
-    private TextBoxFlexibleYearMonth txtShinsaNengetsuFrom;
-    @JsonProperty("txtShinsaNengetsuTo")
-    private TextBoxFlexibleYearMonth txtShinsaNengetsuTo;
     @JsonProperty("ddlShoriJokyo")
     private DropDownList ddlShoriJokyo;
     @JsonProperty("btnKakutei")
@@ -63,60 +56,6 @@ public class SaishinShoriNengetsuNyuryokuDiv extends Panel {
     @JsonProperty("txtShoriNengetsu")
     public void setTxtShoriNengetsu(TextBoxFlexibleYearMonth txtShoriNengetsu) {
         this.txtShoriNengetsu = txtShoriNengetsu;
-    }
-
-    /*
-     * getlblShinsaNengetsuKikan
-     * @return lblShinsaNengetsuKikan
-     */
-    @JsonProperty("lblShinsaNengetsuKikan")
-    public Label getLblShinsaNengetsuKikan() {
-        return lblShinsaNengetsuKikan;
-    }
-
-    /*
-     * setlblShinsaNengetsuKikan
-     * @param lblShinsaNengetsuKikan lblShinsaNengetsuKikan
-     */
-    @JsonProperty("lblShinsaNengetsuKikan")
-    public void setLblShinsaNengetsuKikan(Label lblShinsaNengetsuKikan) {
-        this.lblShinsaNengetsuKikan = lblShinsaNengetsuKikan;
-    }
-
-    /*
-     * gettxtShinsaNengetsuFrom
-     * @return txtShinsaNengetsuFrom
-     */
-    @JsonProperty("txtShinsaNengetsuFrom")
-    public TextBoxFlexibleYearMonth getTxtShinsaNengetsuFrom() {
-        return txtShinsaNengetsuFrom;
-    }
-
-    /*
-     * settxtShinsaNengetsuFrom
-     * @param txtShinsaNengetsuFrom txtShinsaNengetsuFrom
-     */
-    @JsonProperty("txtShinsaNengetsuFrom")
-    public void setTxtShinsaNengetsuFrom(TextBoxFlexibleYearMonth txtShinsaNengetsuFrom) {
-        this.txtShinsaNengetsuFrom = txtShinsaNengetsuFrom;
-    }
-
-    /*
-     * gettxtShinsaNengetsuTo
-     * @return txtShinsaNengetsuTo
-     */
-    @JsonProperty("txtShinsaNengetsuTo")
-    public TextBoxFlexibleYearMonth getTxtShinsaNengetsuTo() {
-        return txtShinsaNengetsuTo;
-    }
-
-    /*
-     * settxtShinsaNengetsuTo
-     * @param txtShinsaNengetsuTo txtShinsaNengetsuTo
-     */
-    @JsonProperty("txtShinsaNengetsuTo")
-    public void setTxtShinsaNengetsuTo(TextBoxFlexibleYearMonth txtShinsaNengetsuTo) {
-        this.txtShinsaNengetsuTo = txtShinsaNengetsuTo;
     }
 
     /*

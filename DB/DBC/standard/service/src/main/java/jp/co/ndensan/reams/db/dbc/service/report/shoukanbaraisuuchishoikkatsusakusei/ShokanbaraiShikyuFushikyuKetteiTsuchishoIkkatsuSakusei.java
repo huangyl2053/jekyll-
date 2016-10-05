@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.shoukanbaraisuuchishoikkatsusakusei;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
 
 /**
@@ -20,11 +20,11 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei {
      * 償還払い支給不支給決定通知書作成画面入力を印刷します。
      *
      * @param paramter ShoukanBaraiSuuchiShoIkatsuParamter
-     * @return {@link ShoukanBaraiSuuchiShoIkatsuBatchParamter}
+     * @return {@link DBC030010_ShokanShikyuKetteiTsuchishoParameter}
      */
-    public ShoukanBaraiSuuchiShoIkatsuBatchParamter
+    public DBC030010_ShokanShikyuKetteiTsuchishoParameter
             getShokanbaraiShikyuFushikyuKetteiTsuchishoBatchParameter(ShoukanBaraiSuuchiShoIkatsuParamter paramter) {
-        ShoukanBaraiSuuchiShoIkatsuBatchParamter shoukanParamter = new ShoukanBaraiSuuchiShoIkatsuBatchParamter();
+        DBC030010_ShokanShikyuKetteiTsuchishoParameter shoukanParamter = new DBC030010_ShokanShikyuKetteiTsuchishoParameter();
         shoukanParamter.set抽出モード(paramter.get抽出モード());
         shoukanParamter.set決定日付From(paramter.get決定日付From());
         shoukanParamter.set決定日付To(paramter.get決定日付To());

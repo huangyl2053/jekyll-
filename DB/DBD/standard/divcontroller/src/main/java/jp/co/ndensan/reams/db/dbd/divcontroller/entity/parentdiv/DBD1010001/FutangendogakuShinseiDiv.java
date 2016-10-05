@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FutangendogakuShinseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -319,18 +319,28 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnHikazeiNenkinSho() {
+        return this.getHeader().getDialogs().getBtnHikazeiNenkinSho();
+    }
+
+    @JsonIgnore
+    public void  setBtnHikazeiNenkinSho(ButtonDialog btnHikazeiNenkinSho) {
+        this.getHeader().getDialogs().setBtnHikazeiNenkinSho(btnHikazeiNenkinSho);
+    }
+
+    @JsonIgnore
     public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
         return this.getHeader().getCcdAtenaInfo();
     }
 
     @JsonIgnore
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return this.getHeader().getCcdShisetsuNyushoInfo();
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getHeader().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return this.getHeader().getCcdKaigoShikakuKihon();
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return this.getHeader().getCcdShisetsuNyushoInfo();
     }
 
     @JsonIgnore
@@ -376,6 +386,26 @@ public class FutangendogakuShinseiDiv extends Panel {
     @JsonIgnore
     public void  setDdlShinseiRiyu(DropDownList ddlShinseiRiyu) {
         this.getShinseiDetail().setDdlShinseiRiyu(ddlShinseiRiyu);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getIzokuNenkinJukyu() {
+        return this.getShinseiDetail().getIzokuNenkinJukyu();
+    }
+
+    @JsonIgnore
+    public void  setIzokuNenkinJukyu(CheckBoxList izokuNenkinJukyu) {
+        this.getShinseiDetail().setIzokuNenkinJukyu(izokuNenkinJukyu);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getShogaiNenkinJukyu() {
+        return this.getShinseiDetail().getShogaiNenkinJukyu();
+    }
+
+    @JsonIgnore
+    public void  setShogaiNenkinJukyu(CheckBoxList shogaiNenkinJukyu) {
+        this.getShinseiDetail().setShogaiNenkinJukyu(shogaiNenkinJukyu);
     }
 
     @JsonIgnore

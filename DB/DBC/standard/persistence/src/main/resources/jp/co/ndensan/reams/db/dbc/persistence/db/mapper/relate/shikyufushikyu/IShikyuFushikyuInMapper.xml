@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2690-010 zhangrui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shikyufushikyu.IShikyuFushikyuInMapper">
+    
+    <select id="get通知書および一覧情報" resultMap="resultMap_ShikyuFushikyuTsuchishoIchiranEntity" fetchSize="500" resultOrdered="true">
+        select <include refid="allColumns_DbWT38B1KogakuGassanShikyuFushikyuKettei" />,
+            <include refid="allColumns_DbWT38G1KetteishaIchiran" />
+        from "DbWT38B1KogakuGassanShikyuFushikyuKettei" AS DbWT38B1 
+        left join 
+        "DbWT38G1KetteishaIchiran" AS DbWT38G1
+        on
+        DbWT38B1."chohyoKanrenzukeNo" = DbWT38G1."no"
+    </select>
+    
+    <select id="get一覧データのみ一覧情報" resultMap="resultMap_DbWT38G1KetteishaIchiranTempEntity" fetchSize="500" resultOrdered="true">
+        select <include refid="allColumns_DbWT38G1KetteishaIchiran" />
+        from "DbWT38G1KetteishaIchiran" AS DbWT38G1
+        WHERE NOT EXISTS (
+            SELECT 'X' FROM "DbWT38B1KogakuGassanShikyuFushikyuKettei" AS DbWT38B1
+            WHERE DbWT38B1."chohyoKanrenzukeNo" = DbWT38G1."no"
+        )
+    </select>
+    
+    <select id="get削除予定前回処理データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3074KogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3074KogakuGassanShikyuFushikyuKetteiEntity" 
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120140.ShikyuFushikyuMyBatisParameter"  fetchSize="500" resultOrdered="true">
+        SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3074KogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3074KogakuGassanShikyuFushikyuKettei" />
+     FROM
+         rgdb."DbT3074KogakuGassanShikyuFushikyuKettei"
+     WHERE
+         rgdb."DbT3074KogakuGassanShikyuFushikyuKettei"."isDeleted" = FALSE
+         AND rgdb."DbT3074KogakuGassanShikyuFushikyuKettei"."uketoriYM" = #{処理年月}
+         <if test="処理区分 == 1 || 処理区分 == 2">
+            AND EXISTS (
+             SELECT 'X' FROM rgdb."DbT3070KogakuGassanJikoFutanGaku" 
+             WHERE "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo" 
+             AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."taishoNendo"
+             AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hokenshaNo"
+             AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo"
+             AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."rirekiNo"
+             AND "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" = #{処理区分}
+             )
+        </if>
+    </select>
+    
+    <select id="get口座登録" resultMap="resultMap_ShikyuFushikyuKetteiKozaEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120140.ShikyuFushikyuKozaMyBatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT * FROM 
+        (select <include refid="allColumns_DbWT38B1KogakuGassanShikyuFushikyuKettei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+        FROM "DbWT38B1KogakuGassanShikyuFushikyuKettei" AS DbWT38B1 
+        INNER JOIN 
+        "DbWT0001Hihokensha" AS TEMP 
+        ON DbWT38B1."renban" = TEMP."meisaiRenban"
+        WHERE DbWT38B1."shikyuKubunCode" = '1' AND DbWT38B1."shiharaiHohoKubun" = '2') AS 高額合算
+        <if test="hasValidKamoku">
+        INNER JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch"/>) AS 口座取得SQL
+        ON  高額合算.dbWT0001HihokenshaTemp_shikibetsuCode = 口座取得SQL."uaT0310Koza_shikibetsuCode"
+        AND 高額合算.DbWT38B1_kinyuKikanCode = 口座取得SQL."uaT0310Koza_kinyuKikanCode"
+        AND 高額合算.DbWT38B1_kinyuKikanShitenCode = 口座取得SQL."uaT0310Koza_kinyuKikanShitenCode"
+        AND 高額合算.DbWT38B1_kozaShumoku = 口座取得SQL."uaT0310Koza_yokinShubetsu"
+        AND 高額合算.DbWT38B1_kozaNo = 口座取得SQL."uaT0310Koza_kozaNo"
+        </if>
+    </select>
+    
+    <select id="get業務別主キー" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120140.ShikyuFushikyuMyBatisParameter" fetchSize="1" resultOrdered="true">
+        SELECT "gyomubetsuPrimaryKey" 
+        FROM rgua."UaT0100GyomubetsuPrimaryKey"
+        WHERE "gyomuCode" = 'DB'
+        AND "subGyomuCode" = 'DBC'
+        AND "kamokuCode" = #{科目コード}
+    </select>
+    
+    <select id="get最大履歴番号" resultMap="resultMap_ShikyuFushikyuRirikoNoEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="allColumns_DbWT38B1KogakuGassanShikyuFushikyuKettei" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+            ,max_rrkno
+        FROM
+            "DbWT38B1KogakuGassanShikyuFushikyuKettei" AS DbWT38B1
+                INNER JOIN "DbWT0001Hihokensha" AS TEMP
+                    ON DbWT38B1. "renban" = TEMP. "meisaiRenban"
+                INNER JOIN (
+                        SELECT
+                            "hihokenshaNo"
+                            ,"taishoNendo"
+                            ,"hokenshaNo"
+                            ,"shikyuSeiriNo"
+                            ,MAX ("rirekiNo") AS max_rrkno
+                        FROM
+                            rgdb. "DbT3074KogakuGassanShikyuFushikyuKettei" AS DbT3074
+                        GROUP BY
+                            DbT3074. "hihokenshaNo"
+                            ,DbT3074. "taishoNendo"
+                            ,DbT3074. "hokenshaNo"
+                            ,DbT3074. "shikyuSeiriNo"
+                    ) AS 最大履歴
+                    ON DbWT38B1. "hihokenshaNoIn" = 最大履歴. "hihokenshaNo"
+            AND DbWT38B1. "taishoNendo" = 最大履歴. "taishoNendo"
+            AND DbWT38B1. "shoKisaiHokenshaNo" = 最大履歴. "hokenshaNo"
+            AND DbWT38B1. "shikyuShinseishoSeiriNo" = 最大履歴. "shikyuSeiriNo"
+    </select>
+    
+    <select id="get高額合算支給不支給決定一時データ全件" resultMap="resultMap_DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity" fetchSize="500" resultOrdered="true">
+        SELECT <include refid="allColumns_DbWT38B1KogakuGassanShikyuFushikyuKettei" />
+        FROM "DbWT38B1KogakuGassanShikyuFushikyuKettei" AS DbWT38B1
+    </select>
+    
+    <select id="get帳票出力対象データ" resultMap="resultMap_ShikyuFushikyuChohyoEntity" fetchSize="500" resultOrdered="true">
+        SELECT <include refid="allColumns_DbWT38B1KogakuGassanShikyuFushikyuKettei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+        FROM "DbWT38B1KogakuGassanShikyuFushikyuKettei" AS DbWT38B1 
+        INNER JOIN 
+        "DbWT0001Hihokensha" AS TEMP 
+        ON DbWT38B1."renban" = TEMP."meisaiRenban"
+        ${出力順}
+    </select>
+    
+    <resultMap id="resultMap_ShikyuFushikyuTsuchishoIchiranEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyuTsuchishoIchiranEntity" autoMapping="true">
+       <id column="DbWT38B1_renban" />
+       <association property="通知書データ" resultMap="resultMap_DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity"/>
+       <association property="一覧データ" resultMap="resultMap_DbWT38G1KetteishaIchiranTempEntity"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_ShikyuFushikyuKetteiKozaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyuKetteiKozaEntity" autoMapping="true">
+       <id column="DbWT38B1_renban" />
+       <association property="支給不支給決定" resultMap="resultMap_DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity"/>
+       <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity" autoMapping="true">
+        <id property="連番" column="DbWT38B1_renban" />
+        <result property="被保険者番号" column="DbWT38B1_hihokenshaNoIn" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="対象年度" column="DbWT38B1_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号" column="DbWT38B1_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="支給申請書整理番号" column="DbWT38B1_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="DbWT38B1_rirekiNo" />
+        <result property="自己負担額証明書整理番号" column="DbWT38B1_jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険制度コード" column="DbWT38B1_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者証記号" column="DbWT38B1_kokuho_HihokenshaShoKigo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="対象計算期間開始年月日" column="DbWT38B1_keisanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="対象計算期間終了年月日" column="DbWT38B1_keisanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請年月日" column="DbWT38B1_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="決定年月日" column="DbWT38B1_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="自己負担総額" column="DbWT38B1_jikoFutanSogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支給区分コード" column="DbWT38B1_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支給額" column="DbWT38B1_shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="給付の種類" column="DbWT38B1_kyufuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="不支給理由" column="DbWT38B1_fushikyuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考" column="DbWT38B1_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払方法区分" column="DbWT38B1_shiharaiHohoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払場所" column="DbWT38B1_shiharaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払期間開始年月日" column="DbWT38B1_shiharaiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払期間終了年月日" column="DbWT38B1_shiharaiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払期間開始時間" column="DbWT38B1_shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払期間終了時間" column="DbWT38B1_shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金融機関コード" column="DbWT38B1_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金融機関名" column="DbWT38B1_kinyuKikanMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金融機関支店コード" column="DbWT38B1_kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金融機関支店名" column="DbWT38B1_kinyuKikanShitenMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口座種目" column="DbWT38B1_kozaShumoku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口座種目名" column="DbWT38B1_kozaShumokuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口座番号" column="DbWT38B1_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口座名義人_カナ" column="DbWT38B1_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口座ID" column="DbWT38B1_kozaID" />
+        <result property="帳票関連付け番号" column="DbWT38B1_chohyoKanrenzukeNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_DbWT38G1KetteishaIchiranTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38G1KetteishaIchiranTempEntity" autoMapping="true">
+        <id property="申請対象年度" column="DbWT38G1_shinseiTaishoNendo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="no" column="DbWT38G1_no" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金融機関コード" column="DbWT38G1_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金融機関支店コード" column="DbWT38G1_kinyuKikanShitenCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口座種目" column="DbWT38G1_kozaShumoku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="DbWT38G1_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_ShikyuFushikyuRirikoNoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyuRirikoNoEntity" autoMapping="true">
+       <id column="DbWT38B1_renban" />
+       <result property="最大履歴番号" column="max_rrkno" />
+       <association property="被保険者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
+       <association property="通知書データ" resultMap="resultMap_DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_ShikyuFushikyuChohyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyuChohyoEntity" autoMapping="true">
+       <id column="DbWT38B1_renban" />
+       <association property="決定データ" resultMap="resultMap_DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity"/>
+       <association property="被保険者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
+    </resultMap>
+    
+    
+    <sql id="allColumns_DbWT38B1KogakuGassanShikyuFushikyuKettei">
+        DbWT38B1."renban" AS DbWT38B1_renban,
+        DbWT38B1."hihokenshaNoIn" AS DbWT38B1_hihokenshaNoIn,
+        DbWT38B1."taishoNendo" AS DbWT38B1_taishoNendo,
+        DbWT38B1."shoKisaiHokenshaNo" AS DbWT38B1_shoKisaiHokenshaNo,
+        DbWT38B1."shikyuShinseishoSeiriNo" AS DbWT38B1_shikyuShinseishoSeiriNo,
+        DbWT38B1."rirekiNo" AS DbWT38B1_rirekiNo,
+        DbWT38B1."jikoFutanSeiriNo" AS DbWT38B1_jikoFutanSeiriNo,
+        DbWT38B1."hokenSeidoCode" AS DbWT38B1_hokenSeidoCode,
+        DbWT38B1."kokuho_HihokenshaShoKigo" AS DbWT38B1_kokuho_HihokenshaShoKigo,
+        DbWT38B1."keisanKaishiYMD" AS DbWT38B1_keisanKaishiYMD,
+        DbWT38B1."keisanShuryoYMD" AS DbWT38B1_keisanShuryoYMD,
+        DbWT38B1."shinseiYMD" AS DbWT38B1_shinseiYMD,
+        DbWT38B1."ketteiYMD" AS DbWT38B1_ketteiYMD,
+        DbWT38B1."jikoFutanSogaku" AS DbWT38B1_jikoFutanSogaku,
+        DbWT38B1."shikyuKubunCode" AS DbWT38B1_shikyuKubunCode,
+        DbWT38B1."shikyugaku" AS DbWT38B1_shikyugaku,
+        DbWT38B1."kyufuShurui" AS DbWT38B1_kyufuShurui,
+        DbWT38B1."fushikyuRiyu" AS DbWT38B1_fushikyuRiyu,
+        DbWT38B1."biko" AS DbWT38B1_biko,
+        DbWT38B1."shiharaiHohoKubun" AS DbWT38B1_shiharaiHohoKubun,
+        DbWT38B1."shiharaiBasho" AS DbWT38B1_shiharaiBasho,
+        DbWT38B1."shiharaiKaishiYMD" AS DbWT38B1_shiharaiKaishiYMD,
+        DbWT38B1."shiharaiShuryoYMD" AS DbWT38B1_shiharaiShuryoYMD,
+        DbWT38B1."shiharaiKaishiTime" AS DbWT38B1_shiharaiKaishiTime,
+        DbWT38B1."shiharaiShuryoTime" AS DbWT38B1_shiharaiShuryoTime,
+        DbWT38B1."kinyuKikanCode" AS DbWT38B1_kinyuKikanCode,
+        DbWT38B1."kinyuKikanMei" AS DbWT38B1_kinyuKikanMei,
+        DbWT38B1."kinyuKikanShitenCode" AS DbWT38B1_kinyuKikanShitenCode,
+        DbWT38B1."kinyuKikanShitenMei" AS DbWT38B1_kinyuKikanShitenMei,
+        DbWT38B1."kozaShumoku" AS DbWT38B1_kozaShumoku,
+        DbWT38B1."kozaShumokuMei" AS DbWT38B1_kozaShumokuMei,
+        DbWT38B1."kozaNo" AS DbWT38B1_kozaNo,
+        DbWT38B1."kozaMeiginin" AS DbWT38B1_kozaMeiginin,
+        DbWT38B1."kozaID" AS DbWT38B1_kozaID,
+        DbWT38B1."chohyoKanrenzukeNo" AS DbWT38B1_chohyoKanrenzukeNo
+    </sql>
+    
+    <sql id="allColumns_DbWT38G1KetteishaIchiran">
+        DbWT38G1."shinseiTaishoNendo" AS DbWT38G1_shinseiTaishoNendo,
+        DbWT38G1."no" AS DbWT38G1_no,
+        DbWT38G1."kinyuKikanCode" AS DbWT38G1_kinyuKikanCode,
+        DbWT38G1."kinyuKikanShitenCode" AS DbWT38G1_kinyuKikanShitenCode,
+        DbWT38G1."kozaShumoku" AS DbWT38G1_kozaShumoku,
+        DbWT38G1."hihokenshaNo" AS DbWT38G1_hihokenshaNo
+    </sql>
+
+</mapper>

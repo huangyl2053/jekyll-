@@ -51,6 +51,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
     private final FlexibleYearMonth kokuhoreSofuYMTo;
     private final FlexibleYearMonth keteijohoUketoriymFrom;
     private final FlexibleYearMonth keteijohoUketoriymTo;
+    private final FlexibleYearMonth shinsaYM;
     private final Long shutsuryokuju;
     private final RString shutsuryokuTomoku;
     private final boolean tomokumeFuka;
@@ -88,6 +89,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
      * @param kokuhoreSofuYMTo kokuhoreSofuYMTo
      * @param keteijohoUketoriymFrom keteijohoUketoriymFrom
      * @param keteijohoUketoriymTo keteijohoUketoriymTo
+     * @param shinsaYM shinsaYM
      * @param shutsuryokuju shutsuryokuju
      * @param shutsuryokuTomoku shutsuryokuTomoku
      * @param tomokumeFuka tomokumeFuka
@@ -125,6 +127,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
             FlexibleYearMonth kokuhoreSofuYMTo,
             FlexibleYearMonth keteijohoUketoriymFrom,
             FlexibleYearMonth keteijohoUketoriymTo,
+            FlexibleYearMonth shinsaYM,
             Long shutsuryokuju,
             RString shutsuryokuTomoku,
             boolean tomokumeFuka,
@@ -162,6 +165,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
         this.kokuhoreSofuYMTo = kokuhoreSofuYMTo;
         this.keteijohoUketoriymFrom = keteijohoUketoriymFrom;
         this.keteijohoUketoriymTo = keteijohoUketoriymTo;
+        this.shinsaYM = shinsaYM;
         this.shutsuryokuju = shutsuryokuju;
         this.shutsuryokuTomoku = shutsuryokuTomoku;
         this.tomokumeFuka = tomokumeFuka;

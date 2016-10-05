@@ -48,8 +48,8 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
                 get印刷日時(), nenreiCheckListJyohoEntity.get市町村コード(), nenreiCheckListJyohoEntity.get市町村名(),
                 並び順.get(0), 並び順.get(INDEX_1), 並び順.get(INDEX_2), 並び順.get(INDEX_3), 並び順.get(INDEX_4),
                 改頁.get(0), 改頁.get(INDEX_1), 改頁.get(INDEX_2), 改頁.get(INDEX_3), 改頁.get(INDEX_4),
-                nenreiCheckListJyohoEntity.get抽出期間From(),nenreiCheckListJyohoEntity.get抽出期間To(),
-                nenreiCheckListJyohoEntity.get出力対象(),nenreiCheckListJyohoEntity.get住民種別());
+                nenreiCheckListJyohoEntity.get抽出期間From(), nenreiCheckListJyohoEntity.get抽出期間To(),
+                nenreiCheckListJyohoEntity.get出力対象(), nenreiCheckListJyohoEntity.get住民種別());
         if (nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト().isEmpty()) {
             NenreitotatsuYoteishaIchiranhyoBodyItem bodyItem = new NenreitotatsuYoteishaIchiranhyoBodyItem(
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -89,7 +89,7 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
         List<NenreiToutatsuYoteishaCheckListEntity> 年齢到達予定者チェックリスト = nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト();
         for (NenreiToutatsuYoteishaCheckListEntity checkList : 年齢到達予定者チェックリスト) {
             RString 被保険者番号 = checkList.getHihokenshaNo() == null || checkList.getHihokenshaNo().isEmpty()
-                    ? RString.EMPTY : checkList.getHihokenshaNo().value();
+                             ? RString.EMPTY : checkList.getHihokenshaNo().value();
             RString 識別コード = checkList.getShikibetsuCode().value();
             RString カナ氏名 = checkList.getKanaMeisho();
             RString 氏名 = checkList.getMeisho();
@@ -100,17 +100,17 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
                 性別 = Seibetsu.女.get名称();
             }
             RString 生年月日 = checkList.getSeinengappiYMD() == null || checkList.getSeinengappiYMD().isEmpty() ? RString.EMPTY
-                    : checkList.getSeinengappiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
+                           : checkList.getSeinengappiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                    FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
             RString 年齢到達日 = checkList.getNenreiyotainichi() == null || checkList.getNenreiyotainichi().isEmpty() ? RString.EMPTY
-                    : checkList.getNenreiyotainichi().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
+                            : checkList.getNenreiyotainichi().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                    FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
             RString 住民種別 = RString.EMPTY;
             if (JuminShubetsu.日本人.getCode().equals(checkList.getJuminShubetsuCode())
-                    || JuminShubetsu.住登外個人_日本人.getCode().equals(checkList.getJuminShubetsuCode())) {
+                || JuminShubetsu.住登外個人_日本人.getCode().equals(checkList.getJuminShubetsuCode())) {
                 住民種別 = JuminShubetsu.日本人.toRString();
             } else if (JuminShubetsu.外国人.getCode().equals(checkList.getJuminShubetsuCode())
-                    || JuminShubetsu.住登外個人_外国人.getCode().equals(checkList.getJuminShubetsuCode())) {
+                       || JuminShubetsu.住登外個人_外国人.getCode().equals(checkList.getJuminShubetsuCode())) {
                 住民種別 = JuminShubetsu.外国人.toRString();
             }
             RString 生活 = checkList.getSeikatsu();

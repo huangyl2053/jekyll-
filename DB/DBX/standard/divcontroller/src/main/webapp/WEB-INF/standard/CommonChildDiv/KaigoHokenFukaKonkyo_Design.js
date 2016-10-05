@@ -4,6 +4,29 @@ var DBX;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_ddlChoteiNendo = function () {
+                return "onChange_ddlChoteiNendo";
+            };
+
+            Events.onChange_ddlFukaNendo = function () {
+                return "onChange_ddlFukaNendo";
+            };
+
+            Events.onClick_btnSearch = function () {
+                return "onClick_btnSearch";
+            };
+
+            Events.onClick_btnAfter = function () {
+                return "onClick_btnAfter";
+            };
+
+            Events.onClick_btnBefore = function () {
+                return "onClick_btnBefore";
+            };
+
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
             return Events;
         })();
         KaigoHokenFukaKonkyo.Events = Events;

@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho.HanyoListShotokuJohoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022002.DBB022002_ShotokuJohoHanyoListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220002.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -74,10 +74,10 @@ public class HanyoListParamHandler {
     /**
      * 実行ボタンイベント。
      *
-     * @return HanyoListShotokuJohoBatchParameter
+     * @return DBB022002_ShotokuJohoHanyoListSakuseiParameter
      */
-    public HanyoListShotokuJohoBatchParameter onClick_btnExecute() {
-        HanyoListShotokuJohoBatchParameter parameter = new HanyoListShotokuJohoBatchParameter();
+    public DBB022002_ShotokuJohoHanyoListSakuseiParameter onClick_btnExecute() {
+        DBB022002_ShotokuJohoHanyoListSakuseiParameter parameter = new DBB022002_ShotokuJohoHanyoListSakuseiParameter();
         if (div.getCcdShutsuryokujun() != null) {
             ReportId 帳票ID = div.getCcdShutsuryokujun().get帳票ID();
             parameter.set帳票ID(帳票ID);
@@ -126,9 +126,9 @@ public class HanyoListParamHandler {
     /**
      * 課税区分減免前後
      *
-     * @param parameter HanyoListShotokuJohoBatchParameter
+     * @param parameter DBB022002_ShotokuJohoHanyoListSakuseiParameter
      */
-    private void 課税区分減免前後(HanyoListShotokuJohoBatchParameter parameter) {
+    private void 課税区分減免前後(DBB022002_ShotokuJohoHanyoListSakuseiParameter parameter) {
         RString code = DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         parameter.set住民税減免前後表示区分(code);
@@ -187,9 +187,9 @@ public class HanyoListParamHandler {
     /**
      * 宛名抽出条件と出力順と出力項目
      *
-     * @param parameter HanyoListShotokuJohoBatchParameter
+     * @param parameter DBB022002_ShotokuJohoHanyoListSakuseiParameter
      */
-    private void 宛名抽出条件と出力順と出力項目(HanyoListShotokuJohoBatchParameter parameter) {
+    private void 宛名抽出条件と出力順と出力項目(DBB022002_ShotokuJohoHanyoListSakuseiParameter parameter) {
         parameter.set宛名抽出条件(div.getChushutsuPanel2().getCcdAtenaJoken().get宛名抽出条件());
         if (div.getCcdShutsuryokujun() != null && div.getCcdShutsuryokujun().get出力順ID() != null) {
             long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();

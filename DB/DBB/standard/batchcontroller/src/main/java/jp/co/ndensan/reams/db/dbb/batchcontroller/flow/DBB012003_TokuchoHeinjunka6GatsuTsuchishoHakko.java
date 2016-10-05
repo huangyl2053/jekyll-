@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuIkatsuHakoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaZennendoTempTblCreateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo4gatsuKaishiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo6gatsuKaishiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.KeizokuHihokenshaKubunUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.SystemTimeShutokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TokuchoKibetsuKingaku06UpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoA4TypeProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoB5TypeProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.FukaJohoShutokuIkatsuHakoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.FukaJohoShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.FukaZennendoTempTblCreateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.HihokenshaKubunTo4gatsuKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.HihokenshaKubunTo6gatsuKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.KeizokuHihokenshaKubunUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.SystemTimeShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoHakoA4TypeProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoHakoB5TypeProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoIdoshaTorokuProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
@@ -32,35 +31,31 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBase<DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter> {
 
-    private static final String システム日時の取得 = "getSystemDate";
+    private static final String 基準日時とシステム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 仮算定額変更情報一時テーブル作成 = "fukaJohoShutoku";
     private static final String 仮算定額変更情報一時テーブル作成_一括発行 = "fukaJohoShutokuForIkatsuHako";
     private static final String 前年度賦課情報一時テーブル作成 = "zennendoJohoCreate";
-    private static final String 前年度特徴期別金額06の更新 = "karisanteigakuTempTblUpdate";
     private static final String 継続の被保険者区分の更新 = "keizokuHihokenshaKubunUpdate";
     private static final String 被保険者区分4月開始 = "hihokenshaKubunTo4gatsuKaishi";
     private static final String 被保険者区分6月開始 = "hihokenshaKubunTo6gatsuKaishi";
     private static final String 通知書の発行 = "tsuchishoHako";
     private static final String 通知書発行後異動者の登録 = "tsuchishoIdoshaToroku";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString 帳票分類ID = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
 
     @Override
     protected void defineFlow() {
 
-        executeStep(システム日時の取得);
+        executeStep(基準日時とシステム日時の取得);
         if (getParameter().is一括発行フラグ()) {
             executeStep(計算後情報作成);
-        }
-        if (getParameter().is一括発行フラグ()) {
             executeStep(仮算定額変更情報一時テーブル作成_一括発行);
         } else {
             executeStep(仮算定額変更情報一時テーブル作成);
         }
         executeStep(前年度賦課情報一時テーブル作成);
-        executeStep(前年度特徴期別金額06の更新);
         executeStep(継続の被保険者区分の更新);
         executeStep(被保険者区分4月開始);
         executeStep(被保険者区分6月開始);
@@ -73,7 +68,7 @@ public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBas
      *
      * @return バッチコマンド
      */
-    @Step(システム日時の取得)
+    @Step(基準日時とシステム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
         return simpleBatch(SystemTimeShutokuProcess.class)
                 .arguments(createFukaJohoShutokuParameter())
@@ -133,18 +128,7 @@ public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBas
     }
 
     /**
-     * 前年度特徴期別金額06の更新を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(前年度特徴期別金額06の更新)
-    protected IBatchFlowCommand karisanteigakuTempTblUpdate() {
-        return simpleBatch(TokuchoKibetsuKingaku06UpdateProcess.class)
-                .define();
-    }
-
-    /**
-     * 継続の被保険者区分を更新します。
+     * 前年度・特徴期別金額06の更新と継続の被保険者区分の更新を行います。
      *
      * @return バッチコマンド
      */
@@ -210,12 +194,11 @@ public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBas
                 .define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        KeisangoJohoSakuseiBatchParamter parameter = new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+        DBB003001_KeisangoJohoSakuseiParameter parameter = new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                 getParameter().get賦課年度().toDateString(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeShutokuProcess.KIJUN_TIME),
+                getResult(RString.class, new RString(基準日時とシステム日時の取得), SystemTimeShutokuProcess.KIJUN_TIME),
                 null, 帳票分類ID);
-
         return parameter;
     }
 
@@ -230,7 +213,7 @@ public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBas
     private TsuchishoIdoshaTorokuProcessParameter createTsuchishoIdoshaTorokuProcessParameter() {
 
         TsuchishoIdoshaTorokuProcessParameter parameter = new TsuchishoIdoshaTorokuProcessParameter();
-        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(基準日時とシステム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
 
         for (OutputChohyoIchiran order : getParameter().get出力帳票一覧List()) {
             if (帳票分類ID.equals(order.get帳票分類ID())) {
@@ -252,7 +235,7 @@ public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBas
         param.set賦課年度(getParameter().get賦課年度());
         param.set出力対象区分(Integer.valueOf(getParameter().get出力対象().toString()));
         param.set発行日(getParameter().get発行日());
-        param.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+        param.set帳票作成日時(getResult(RDateTime.class, new RString(基準日時とシステム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
         param.set出力順ID(出力帳票entity.get出力順ID());
         param.set帳票ID(出力帳票entity.get帳票ID());
         param.set一括発行フラグ(getParameter().is一括発行フラグ());

@@ -134,8 +134,37 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
                                 eq(johoBunruiKubun, new RString("1")),
                                 eq(sashitomeKojoJotaiKubun, new RString("01")),
                                 eq(sashitome_ShokanSeiriNo, 整理番号),
-                                eq(sashitome_ServiceTeikyoYM, サービス提供年月))).
+                                eq(sashitome_ServiceTeikyoYM, サービス提供年月))).limit(1).
                 toObject(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
+    }
+
+    /**
+     * 支払方法変更差止を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return 支払方法変更差止
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4024ShiharaiHohoHenkoSashitomeEntity> select支払方法変更差止(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4024ShiharaiHohoHenkoSashitome.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(johoBunruiKubun, new RString("1")),
+                                eq(sashitomeKojoJotaiKubun, new RString("01")),
+                                eq(sashitome_ShokanSeiriNo, 整理番号),
+                                eq(sashitome_ServiceTeikyoYM, サービス提供年月))).
+                toList(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
     }
 
     /**

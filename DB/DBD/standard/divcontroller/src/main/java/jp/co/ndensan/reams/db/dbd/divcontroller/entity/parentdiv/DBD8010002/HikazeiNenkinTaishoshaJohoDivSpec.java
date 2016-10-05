@@ -47,23 +47,34 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
         }
     },
     /**
-     * 処理状態チェック。
+     * 処理状態単一チェック。
      */
-    処理状態チェック {
+    処理状態単一チェック {
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
 
-            List<dgTanitsuTaishoShoriItchiran_Row> list = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems();
-            if (list.isEmpty()) {
-                return false;
-            } else {
-                return list.get(0).getTxtShoriJotai()
-                        .equals(SyoriJyoutaiCode.未処理.get名称())
-                        || list.get(0).getTxtShoriJotai()
-                        .equals(SyoriJyoutaiCode.再処理前.get名称())
-                        || list.get(0).getTxtShoriJotai()
-                        .equals(SyoriJyoutaiCode.追加取込前.get名称());
-            }
+            return div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori()
+                    .equals(SyoriJyoutaiCode.未処理.get名称())
+                    || div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori()
+                    .equals(SyoriJyoutaiCode.再処理前.get名称())
+                    || div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori()
+                    .equals(SyoriJyoutaiCode.追加取込前.get名称());
+
+        }
+    },
+    /**
+     * 処理状態広域チェック。
+     */
+    処理状態広域チェック {
+        @Override
+        public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
+
+            return div.getTxtShoriJotai().getValue()
+                    .equals(SyoriJyoutaiCode.未処理.get名称())
+                    || div.getTxtShoriJotai().getValue()
+                    .equals(SyoriJyoutaiCode.再処理前.get名称())
+                    || div.getTxtShoriJotai().getValue()
+                    .equals(SyoriJyoutaiCode.追加取込前.get名称());
 
         }
     },
@@ -130,7 +141,7 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
     アップロード済みファイル名チェック {
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
-            return !RString.EMPTY.equals(div.getTanitsuTaishoShoriIchiran().getHdnFileName())
+            return !RString.EMPTY.equals(div.getTanitsuTaishoShoriIchiran().getTxtFuairuMei().getValue())
                     && !SharedFile.searchSharedFile(div.getTanitsuTaishoShoriIchiran().getHdnFileName()).isEmpty();
         }
     },;

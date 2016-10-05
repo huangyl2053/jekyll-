@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihohokinokubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011.PanelnlTotalDiv;
@@ -190,7 +190,7 @@ public class PanelnlTotalHandler {
      *
      * @return ShoukanBaraiSuuchiShoIkatsuBatchParamter
      */
-    public ShoukanBaraiSuuchiShoIkatsuBatchParamter onClick_btnJikouBatch() {
+    public DBC030010_ShokanShikyuKetteiTsuchishoParameter onClick_btnJikouBatch() {
         ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei shokanbarai = new ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei();
         ShoukanBaraiSuuchiShoIkatsuParamter paramter = new ShoukanBaraiSuuchiShoIkatsuParamter();
         if (キー.equals(div.getRadUketsukebi().getSelectedKey())) {

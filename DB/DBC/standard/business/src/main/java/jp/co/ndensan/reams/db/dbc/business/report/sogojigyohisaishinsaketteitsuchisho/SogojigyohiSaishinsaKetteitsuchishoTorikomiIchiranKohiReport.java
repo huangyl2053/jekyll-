@@ -27,6 +27,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport
     private final FlexibleYearMonth 処理年月;
     private final RDateTime 作成日時;
     private final boolean 集計Flag;
+    private boolean データFlag = false;
+    private final int 連番;
 
     /**
      * インスタンスを生成します。
@@ -36,19 +38,25 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport
      * @param 処理年月 FlexibleDate
      * @param 作成日時 RDateTime
      * @param 集計Flag boolean
+     * @param 連番 int
+     * @param データFlag boolean
      */
     public SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
             SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity 帳票出力対象データ,
             Map<RString, RString> 出力順Map,
             FlexibleYearMonth 処理年月,
             RDateTime 作成日時,
-            boolean 集計Flag) {
+            boolean 集計Flag,
+            int 連番,
+            boolean データFlag
+    ) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.出力順Map = 出力順Map;
         this.処理年月 = 処理年月;
         this.作成日時 = 作成日時;
         this.集計Flag = 集計Flag;
-
+        this.連番 = 連番;
+        this.データFlag = データFlag;
     }
 
     @Override
@@ -58,7 +66,7 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport
         ISogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEditor headerEditor = new SogojigyohiSaishinsaKetteitsuchishoHeaderEditor(
                 帳票出力対象データ, 出力順Map, 処理年月, 作成日時);
         ISogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEditor bodyEditor = new SogojigyohiSaishinsaKetteitsuchishoBodyEditor(
-                帳票出力対象データ, 集計Flag);
+                帳票出力対象データ, 集計Flag, 連番, データFlag);
         ISogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiBuilder builder = new SogojigyohiSaishinsaKetteitsuchishoBuilder(
                 headerEditor, bodyEditor);
         reportSourceWriter.writeLine(builder);

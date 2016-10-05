@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -28,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -144,17 +147,19 @@ public class HikazeiNenkinKenJohoHandler {
         if (!調定年度.isWareki()) {
             return false;
         }
-        if (調定年度.isBefore(調定年度_2015)) {
+        RString selectKey = new RString(調定年度.getYearValue());
+        if (調定年度.isBeforeOrEquals(調定年度_2015)) {
             return true;
         }
-        FlexibleYear 平成年度 = 平成28年度;
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        while (調定年度.isBeforeOrEquals(平成年度)) {
-            dataSource.add(new KeyValueDataSource(new RString(平成年度.getYearValue()), 平成年度.wareki().eraType(EraType.KANJI).toDateString()));
-            平成年度 = 平成年度.minusYear(1);
+        while (平成28年度.isBeforeOrEquals(調定年度)) {
+            dataSource.add(new KeyValueDataSource(new RString(調定年度.getYearValue()),
+                    調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .fillType(FillType.BLANK).toDateString().concat("年度")));
+            調定年度 = 調定年度.minusYear(1);
         }
         div.getDdlYear().setDataSource(dataSource);
-        div.getDdlYear().setSelectedKey(調定年度.toDateString());
+        div.getDdlYear().setSelectedKey(selectKey);
         return false;
     }
 
@@ -236,8 +241,7 @@ public class HikazeiNenkinKenJohoHandler {
         } else {
             div.getTbCreateDate().clearValue();
         }
-        div.getTbTaishoNen()
-                .setValue(new FlexibleYear(div.getDdlYear().getSelectedKey()).minusYear(1).wareki().eraType(EraType.KANJI).toDateString());
+        div.getTbTaishoNen().setValue(new RDate(div.getDdlYear().getSelectedKey().concat("0101").toString()));
         div.getTbLoadCata().setValue(TorokuKubun.画面登録.get名称());
         div.setHiddenModel(新規モード);
         新規モード_表示();
@@ -316,7 +320,7 @@ public class HikazeiNenkinKenJohoHandler {
         div.getTbGenkisoNenkinNo().setValue(非課税年金対象情報.get現基礎年金番号());
         div.getTbNenkinCode().setValue(非課税年金対象情報.get年金コード());
         if (!isNullOrEmpty(非課税年金対象情報.get対象年())) {
-            div.getTbTaishoNen().setValue(非課税年金対象情報.get対象年());
+            div.getTbTaishoNen().setValue(new RDate(非課税年金対象情報.get対象年().concat("0101").toString()));
         }
         if (!isNullOrEmpty(非課税年金対象情報.get作成年月日())) {
             div.getTbCreateDate().setValue(new RDate(非課税年金対象情報.get作成年月日().toString()));
@@ -444,7 +448,8 @@ public class HikazeiNenkinKenJohoHandler {
     public int 重複チェック() {
         return HousholdFinder.createIntance().重複チェック(div.getCcdKaigoShikaku().get被保険者番号(),
                 div.getTbNenkinHokenshaCode().getValue(), div.getTbNenkinCode().getValue().substring(0, INT_3),
-                div.getTbGenkisoNenkinNo().getValue(), div.getTbTaishoNen().getValue(), div.getTbCreateDate().getValue().toDateString());
+                div.getTbGenkisoNenkinNo().getValue(), div.getTbTaishoNen().getValue().getYear().toDateString(),
+                div.getTbCreateDate().getValue().toDateString());
     }
 
     /**
@@ -458,7 +463,7 @@ public class HikazeiNenkinKenJohoHandler {
                 || !isEquals(div.getTbNenkinHokenshaCode().getValue(), 非課税年金対象者一時.get年金保険者())
                 || !div.getTbNenkinCode().getValue().substring(0, INT_3).equals(非課税年金対象者一時.get年金コード().substring(0, INT_3))
                 || !isEquals(div.getTbGenkisoNenkinNo().getValue(), 非課税年金対象者一時.get現基礎年金番号())
-                || !isEquals(div.getTbTaishoNen().getValue(), 非課税年金対象者一時.get対象年())
+                || !isEquals(div.getTbTaishoNen().getValue().getYear().toDateString(), 非課税年金対象者一時.get対象年())
                 || !isEquals(div.getTbCreateDate().getValue().toDateString(), 非課税年金対象者一時.get作成年月日());
     }
 
@@ -476,6 +481,7 @@ public class HikazeiNenkinKenJohoHandler {
      */
     public void 削除解除_登録区分_取込_保存処理(HousholdBusiness 非課税年金対象者一時) {
         HousholdFinder.createIntance().取込_保存処理(非課税年金対象者一時, null, null, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -485,6 +491,7 @@ public class HikazeiNenkinKenJohoHandler {
      */
     public void 削除解除_登録区分_画面登録_保存処理(HousholdBusiness 非課税年金対象者一時) {
         HousholdFinder.createIntance().削除解除_登録区分_画面登録_保存処理(非課税年金対象者一時, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -496,6 +503,7 @@ public class HikazeiNenkinKenJohoHandler {
         HousholdFinder.createIntance()
                 .取込_保存処理(非課税年金対象者一時, div.getTbGenkisoNenkinNo().getValue(),
                         div.getCcdKaigoShikaku().get被保険者番号(), ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -517,11 +525,12 @@ public class HikazeiNenkinKenJohoHandler {
         RString 氏名漢字 = div.getTbNameKanji().getValue();
         RString 住所カナ = div.getTbAddressKana().getValue();
         RString 住所漢字 = div.getTbAddressKanji().getValue();
-        RString 対象年 = div.getTbTaishoNen().getValue();
+        RString 対象年 = div.getTbTaishoNen().getValue().getYear().toDateString();
         RString 金額 = new RString(div.getTbKingaku().getValue().toString());
         HousholdFinder.createIntance()
                 .修正_登録区分_画面登録_保存処理(非課税年金対象者一時, 月, 現基礎年金番号, 被保番号,
                         作成年月日, 生年月日, 性別, 氏名カナ, 氏名漢字, 住所カナ, 住所漢字, 対象年, 金額, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -529,7 +538,7 @@ public class HikazeiNenkinKenJohoHandler {
      *
      */
     public void 新規_保存処理() {
-        RString 年度 = div.getTbYear().getValue();
+        RString 年度 = div.getShoSaiPanel().getHiddenTbNendon();
         RString 月 = div.getDdlTsuki().getSelectedKey();
         RString 基礎年金番号 = div.getTbKisoNenkinNo().getValue();
         RString 現基礎年金番号 = div.getTbGenkisoNenkinNo().getValue();
@@ -546,13 +555,14 @@ public class HikazeiNenkinKenJohoHandler {
         RString 氏名漢字 = div.getTbNameKanji().getValue();
         RString 住所カナ = div.getTbAddressKana().getValue();
         RString 住所漢字 = div.getTbAddressKanji().getValue();
-        RString 対象年 = div.getTbTaishoNen().getValue();
+        RString 対象年 = div.getTbTaishoNen().getValue().getYear().toDateString();
         RString 訂正区分 = get訂正区分();
         RString 各種区分 = get各種区分().getコード();
         RString 金額 = new RString(div.getTbKingaku().getValue().toString());
         HousholdFinder.createIntance().新規_保存処理(年度, 月, 基礎年金番号, 現基礎年金番号, 年金コード,
                 被保番号, 年金保険者コード, 作成年月日, 生年月日, 性別, 氏名カナ, 氏名漢字, 住所カナ,
                 住所漢字, 対象年, 訂正区分, 各種区分, 金額, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     private RString get訂正区分() {
@@ -560,12 +570,15 @@ public class HikazeiNenkinKenJohoHandler {
     }
 
     private KakushuKubun get各種区分() {
-        return KakushuKubun.toValue(new RString(select訂正区分また各種区分(false)));
+        if (select訂正区分また各種区分(false) == 0) {
+            return KakushuKubun.新規者;
+        }
+        return KakushuKubun.前年度継続者;
     }
 
     private int select訂正区分また各種区分(boolean is訂正区分) {
         HousholdFinder finder = HousholdFinder.createIntance();
-        RString 対象年 = div.getTbTaishoNen().getValue();
+        RString 対象年 = div.getTbTaishoNen().getValue().getYear().toDateString();
         if (!is訂正区分) {
             対象年 = new FlexibleYear(対象年).minusYear(1).toDateString();
         }

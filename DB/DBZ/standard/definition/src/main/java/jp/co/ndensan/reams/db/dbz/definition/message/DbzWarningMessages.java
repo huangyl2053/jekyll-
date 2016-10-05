@@ -18,7 +18,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 public enum DbzWarningMessages implements IMessageGettable {
 
     確認(1, "?よろしいですか？"),
-    文字切れ発行確認(2, "以下の項目で文字が切れています。発行してもよろしいですか？<br>\n %1");
+    文字切れ発行確認(2, "以下の項目で文字が切れています。発行してもよろしいですか？<br> %1");
 
     private final Message message;
 

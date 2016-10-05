@@ -8,6 +8,7 @@ and open the template in the editor.-->
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IGemmenGengakuTaishoGaiShaListCsvMapper">
     <select id="get減免減額更新申請対象外者一覧CSV情報_負担限度額認定"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
         SELECT
@@ -84,50 +85,50 @@ and open the template in the editor.-->
         AND #{システム日付} <![CDATA[<=]]> G."yukoShuryoYMD"
 
         LEFT JOIN
-          ( SELECT 事業対象者.*
-            FROM (
-            SELECT mst."hihokenshaNo" AS "hihokenshaNo",
-                   '06' AS "yokaigoJotaiKubunCode",
-                   mst."checklistJisshiYMD" AS "ninteiYMD",
-                   mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-                   mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-                   false AS "kyuSochishaFlag",
-                   '' AS "shinseishoKanriNo"
-              FROM 
-                    rgdb."DbT3105SogoJigyoTaishosha" AS mst
-              WHERE 
-                    NOT EXISTS(
-                    SELECT 'X'
-                    FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
-                    WHERE mst."hihokenshaNo" =slv."hihokenshaNo" 
-                    AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
-                    )
-               ) AS 事業対象者
-         INNER JOIN 
-         ( SELECT "hihokenshaNo"
-            FROM rgdb."DbV1001HihokenshaDaicho" 
-            WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL 
-            ) AS 被保
+        ( SELECT 事業対象者.*
+        FROM (
+        SELECT mst."hihokenshaNo" AS "hihokenshaNo",
+        '06' AS "yokaigoJotaiKubunCode",
+        mst."checklistJisshiYMD" AS "ninteiYMD",
+        mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        false AS "kyuSochishaFlag",
+        '' AS "shinseishoKanriNo"
+        FROM
+        rgdb."DbT3105SogoJigyoTaishosha" AS mst
+        WHERE
+        NOT EXISTS(
+        SELECT 'X'
+        FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
+        WHERE mst."hihokenshaNo" =slv."hihokenshaNo"
+        AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
+        )
+        ) AS 事業対象者
+        INNER JOIN
+        ( SELECT "hihokenshaNo"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
+        ) AS 被保
         ON 事業対象者."hihokenshaNo" = 被保."hihokenshaNo"
-        WHERE 事業対象者."hihokenshaNo" NOT IN 
+        WHERE 事業対象者."hihokenshaNo" NOT IN
         (SELECT "hihokenshaNo" FROM rgdb."DbV4001JukyushaDaicho" WHERE "yukoMukoKubun" ='1')
-        UNION 
+        UNION
         SELECT 受給者."hihokenshaNo",
-               受給者."yokaigoJotaiKubunCode",
-               受給者."ninteiYMD",
-               受給者."ninteiYukoKikanKaishiYMD",
-               受給者."ninteiYukoKikanShuryoYMD",
-               受給者."kyuSochishaFlag",
-               受給者."shinseishoKanriNo"
+        受給者."yokaigoJotaiKubunCode",
+        受給者."ninteiYMD",
+        受給者."ninteiYukoKikanKaishiYMD",
+        受給者."ninteiYukoKikanShuryoYMD",
+        受給者."kyuSochishaFlag",
+        受給者."shinseishoKanriNo"
         FROM   rgdb."DbV4001JukyushaDaicho" AS 受給者
-        INNER JOIN 
+        INNER JOIN
         (SELECT "hihokenshaNo"
         FROM rgdb."DbV1001HihokenshaDaicho"
         WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
         ) AS 被保
         ON 受給者."hihokenshaNo"=被保."hihokenshaNo"
         WHERE 受給者."yukoMukoKubun" ='1'
-     )AS H
+        )AS H
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
 
@@ -140,6 +141,7 @@ and open the template in the editor.-->
         B."honninKubun"
     </select>
     <select id="get減免減額更新申請対象外者一覧CSV情報_利用者負担額減額"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
         SELECT
@@ -216,50 +218,50 @@ and open the template in the editor.-->
         AND #{システム日付} <![CDATA[<=]]>  G."yukoShuryoYMD"
 
         LEFT JOIN
-                   ( SELECT 事業対象者.*
-            FROM (
-            SELECT mst."hihokenshaNo" AS "hihokenshaNo",
-                   '06' AS "yokaigoJotaiKubunCode",
-                   mst."checklistJisshiYMD" AS "ninteiYMD",
-                   mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-                   mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-                   false AS "kyuSochishaFlag",
-                   '' AS "shinseishoKanriNo"
-              FROM 
-                    rgdb."DbT3105SogoJigyoTaishosha" AS mst
-              WHERE 
-                    NOT EXISTS(
-                    SELECT 'X'
-                    FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
-                    WHERE mst."hihokenshaNo" =slv."hihokenshaNo" 
-                    AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
-                    )
-               ) AS 事業対象者
-         INNER JOIN 
-         ( SELECT "hihokenshaNo"
-            FROM rgdb."DbV1001HihokenshaDaicho" 
-            WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL 
-            ) AS 被保
+        ( SELECT 事業対象者.*
+        FROM (
+        SELECT mst."hihokenshaNo" AS "hihokenshaNo",
+        '06' AS "yokaigoJotaiKubunCode",
+        mst."checklistJisshiYMD" AS "ninteiYMD",
+        mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        false AS "kyuSochishaFlag",
+        '' AS "shinseishoKanriNo"
+        FROM
+        rgdb."DbT3105SogoJigyoTaishosha" AS mst
+        WHERE
+        NOT EXISTS(
+        SELECT 'X'
+        FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
+        WHERE mst."hihokenshaNo" =slv."hihokenshaNo"
+        AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
+        )
+        ) AS 事業対象者
+        INNER JOIN
+        ( SELECT "hihokenshaNo"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
+        ) AS 被保
         ON 事業対象者."hihokenshaNo" = 被保."hihokenshaNo"
-        WHERE 事業対象者."hihokenshaNo" NOT IN 
+        WHERE 事業対象者."hihokenshaNo" NOT IN
         (SELECT "hihokenshaNo" FROM rgdb."DbV4001JukyushaDaicho" WHERE "yukoMukoKubun" ='1')
-        UNION 
+        UNION
         SELECT 受給者."hihokenshaNo",
-               受給者."yokaigoJotaiKubunCode",
-               受給者."ninteiYMD",
-               受給者."ninteiYukoKikanKaishiYMD",
-               受給者."ninteiYukoKikanShuryoYMD",
-               受給者."kyuSochishaFlag",
-               受給者."shinseishoKanriNo"
+        受給者."yokaigoJotaiKubunCode",
+        受給者."ninteiYMD",
+        受給者."ninteiYukoKikanKaishiYMD",
+        受給者."ninteiYukoKikanShuryoYMD",
+        受給者."kyuSochishaFlag",
+        受給者."shinseishoKanriNo"
         FROM   rgdb."DbV4001JukyushaDaicho" AS 受給者
-        INNER JOIN 
+        INNER JOIN
         (SELECT "hihokenshaNo"
         FROM rgdb."DbV1001HihokenshaDaicho"
         WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
         ) AS 被保
         ON 受給者."hihokenshaNo"=被保."hihokenshaNo"
         WHERE 受給者."yukoMukoKubun" ='1'
-     )AS H  
+        )AS H
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
 
@@ -272,6 +274,7 @@ and open the template in the editor.-->
         B."honninKubun"
     </select>
     <select id="get減免減額更新申請対象外者一覧CSV情報_訪問介護利用者負担額減額"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
         SELECT
@@ -348,50 +351,50 @@ and open the template in the editor.-->
         AND #{システム日付} <![CDATA[<=]]>  G."yukoShuryoYMD"
 
         LEFT JOIN
-            ( SELECT 事業対象者.*
-            FROM (
-            SELECT mst."hihokenshaNo" AS "hihokenshaNo",
-                   '06' AS "yokaigoJotaiKubunCode",
-                   mst."checklistJisshiYMD" AS "ninteiYMD",
-                   mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-                   mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-                   false AS "kyuSochishaFlag",
-                   '' AS "shinseishoKanriNo"
-              FROM 
-                    rgdb."DbT3105SogoJigyoTaishosha" AS mst
-              WHERE 
-                    NOT EXISTS(
-                    SELECT 'X'
-                    FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
-                    WHERE mst."hihokenshaNo" =slv."hihokenshaNo" 
-                    AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
-                    )
-               ) AS 事業対象者
-         INNER JOIN 
-         ( SELECT "hihokenshaNo"
-            FROM rgdb."DbV1001HihokenshaDaicho" 
-            WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL 
-            ) AS 被保
+        ( SELECT 事業対象者.*
+        FROM (
+        SELECT mst."hihokenshaNo" AS "hihokenshaNo",
+        '06' AS "yokaigoJotaiKubunCode",
+        mst."checklistJisshiYMD" AS "ninteiYMD",
+        mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        false AS "kyuSochishaFlag",
+        '' AS "shinseishoKanriNo"
+        FROM
+        rgdb."DbT3105SogoJigyoTaishosha" AS mst
+        WHERE
+        NOT EXISTS(
+        SELECT 'X'
+        FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
+        WHERE mst."hihokenshaNo" =slv."hihokenshaNo"
+        AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
+        )
+        ) AS 事業対象者
+        INNER JOIN
+        ( SELECT "hihokenshaNo"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
+        ) AS 被保
         ON 事業対象者."hihokenshaNo" = 被保."hihokenshaNo"
-        WHERE 事業対象者."hihokenshaNo" NOT IN 
+        WHERE 事業対象者."hihokenshaNo" NOT IN
         (SELECT "hihokenshaNo" FROM rgdb."DbV4001JukyushaDaicho" WHERE "yukoMukoKubun" ='1')
-        UNION 
+        UNION
         SELECT 受給者."hihokenshaNo",
-               受給者."yokaigoJotaiKubunCode",
-               受給者."ninteiYMD",
-               受給者."ninteiYukoKikanKaishiYMD",
-               受給者."ninteiYukoKikanShuryoYMD",
-               受給者."kyuSochishaFlag",
-               受給者."shinseishoKanriNo"
+        受給者."yokaigoJotaiKubunCode",
+        受給者."ninteiYMD",
+        受給者."ninteiYukoKikanKaishiYMD",
+        受給者."ninteiYukoKikanShuryoYMD",
+        受給者."kyuSochishaFlag",
+        受給者."shinseishoKanriNo"
         FROM   rgdb."DbV4001JukyushaDaicho" AS 受給者
-        INNER JOIN 
+        INNER JOIN
         (SELECT "hihokenshaNo"
         FROM rgdb."DbV1001HihokenshaDaicho"
         WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
         ) AS 被保
         ON 受給者."hihokenshaNo"=被保."hihokenshaNo"
         WHERE 受給者."yukoMukoKubun" ='1'
-     )AS H    
+        )AS H
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
 
@@ -404,6 +407,7 @@ and open the template in the editor.-->
         B."honninKubun"
     </select>
     <select id="get減免減額更新申請対象外者一覧CSV情報_社会福祉法人等利用者負担軽減"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
         SELECT
@@ -480,50 +484,50 @@ and open the template in the editor.-->
         AND #{システム日付} <![CDATA[<=]]>  G."yukoShuryoYMD"
 
         LEFT JOIN
-                  ( SELECT 事業対象者.*
-            FROM (
-            SELECT mst."hihokenshaNo" AS "hihokenshaNo",
-                   '06' AS "yokaigoJotaiKubunCode",
-                   mst."checklistJisshiYMD" AS "ninteiYMD",
-                   mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-                   mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-                   false AS "kyuSochishaFlag",
-                   '' AS "shinseishoKanriNo"
-              FROM 
-                    rgdb."DbT3105SogoJigyoTaishosha" AS mst
-              WHERE 
-                    NOT EXISTS(
-                    SELECT 'X'
-                    FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
-                    WHERE mst."hihokenshaNo" =slv."hihokenshaNo" 
-                    AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
-                    )
-               ) AS 事業対象者
-         INNER JOIN 
-         ( SELECT "hihokenshaNo"
-            FROM rgdb."DbV1001HihokenshaDaicho" 
-            WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL 
-            ) AS 被保
+        ( SELECT 事業対象者.*
+        FROM (
+        SELECT mst."hihokenshaNo" AS "hihokenshaNo",
+        '06' AS "yokaigoJotaiKubunCode",
+        mst."checklistJisshiYMD" AS "ninteiYMD",
+        mst."tekiyoKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
+        mst."tekiyoShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
+        false AS "kyuSochishaFlag",
+        '' AS "shinseishoKanriNo"
+        FROM
+        rgdb."DbT3105SogoJigyoTaishosha" AS mst
+        WHERE
+        NOT EXISTS(
+        SELECT 'X'
+        FROM  rgdb."DbT3105SogoJigyoTaishosha" AS slv
+        WHERE mst."hihokenshaNo" =slv."hihokenshaNo"
+        AND  mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
+        )
+        ) AS 事業対象者
+        INNER JOIN
+        ( SELECT "hihokenshaNo"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
+        ) AS 被保
         ON 事業対象者."hihokenshaNo" = 被保."hihokenshaNo"
-        WHERE 事業対象者."hihokenshaNo" NOT IN 
+        WHERE 事業対象者."hihokenshaNo" NOT IN
         (SELECT "hihokenshaNo" FROM rgdb."DbV4001JukyushaDaicho" WHERE "yukoMukoKubun" ='1')
-        UNION 
+        UNION
         SELECT 受給者."hihokenshaNo",
-               受給者."yokaigoJotaiKubunCode",
-               受給者."ninteiYMD",
-               受給者."ninteiYukoKikanKaishiYMD",
-               受給者."ninteiYukoKikanShuryoYMD",
-               受給者."kyuSochishaFlag",
-               受給者."shinseishoKanriNo"
+        受給者."yokaigoJotaiKubunCode",
+        受給者."ninteiYMD",
+        受給者."ninteiYukoKikanKaishiYMD",
+        受給者."ninteiYukoKikanShuryoYMD",
+        受給者."kyuSochishaFlag",
+        受給者."shinseishoKanriNo"
         FROM   rgdb."DbV4001JukyushaDaicho" AS 受給者
-        INNER JOIN 
+        INNER JOIN
         (SELECT "hihokenshaNo"
         FROM rgdb."DbV1001HihokenshaDaicho"
         WHERE "shikakuSoshitsuYMD"  ='' OR "shikakuSoshitsuYMD" IS NULL
         ) AS 被保
         ON 受給者."hihokenshaNo"=被保."hihokenshaNo"
         WHERE 受給者."yukoMukoKubun" ='1'
-     )AS H
+        )AS H
         ON H."hihokenshaNo" = B."hihokenshaNo"
         AND H."ninteiYMD" <![CDATA[<=]]> #{基準日}
 

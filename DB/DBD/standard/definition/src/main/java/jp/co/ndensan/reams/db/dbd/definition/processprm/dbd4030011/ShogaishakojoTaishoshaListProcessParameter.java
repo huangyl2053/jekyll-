@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011;
 
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4030011.ShogaishaKojoTaishoshaListMyBatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -81,4 +83,19 @@ public class ShogaishakojoTaishoshaListProcessParameter implements IBatchProcess
         this.出力順 = 出力順;
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 出力順 RString
+     * @param shikibetsuTaishoPSMSearchKey IShikibetsuTaishoPSMSearchKey
+     * @return ShogaishaKojoTaishoshaListMyBatisParameter
+     */
+    public ShogaishaKojoTaishoshaListMyBatisParameter toShogaishaKojoTaishoshaListMyBatisParameter(RString 出力順,
+            IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
+        return new ShogaishaKojoTaishoshaListMyBatisParameter(対象年度, 被保険者番号,
+                氏名, 認定区分, 認定内容, 認知症高齢者の日常生活自立度,
+                障害高齢者の日常生活自立度, 障がい者手帳, 喪失事由,
+                喪失日FROM, 喪失日TO, 決定日FROM, 決定日TO,
+                交付日, 前回非該当者, 出力順, shikibetsuTaishoPSMSearchKey);
+    }
 }

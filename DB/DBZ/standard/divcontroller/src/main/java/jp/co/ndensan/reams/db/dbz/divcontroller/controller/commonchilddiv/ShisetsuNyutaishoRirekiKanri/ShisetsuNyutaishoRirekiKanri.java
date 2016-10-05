@@ -101,8 +101,10 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate();
+//TODO n3327 オフショアで追加された保険者番号のチェックが無い。追加要否の判断が必要。
+//        RString 住所地特例フラグ = KaigoHohenShisetsuNyutaishoshaKanriManager.
+//                createInstance().get被保険者台帳管理の直近データ(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate(/*住所地特例フラグ*/);
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         } else {

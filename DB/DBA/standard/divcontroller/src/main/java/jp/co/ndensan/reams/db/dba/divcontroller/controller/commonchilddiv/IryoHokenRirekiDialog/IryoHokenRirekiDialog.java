@@ -100,14 +100,14 @@ public class IryoHokenRirekiDialog {
     private dgIryohokenIchiran_Row toRow(IryohokenKanyuJokyo iryoHoken) {
         dgIryohokenIchiran_Row row = new dgIryohokenIchiran_Row();
         row.setShikibetsuCode(iryoHoken.get識別コード() == null
-                ? RString.EMPTY
-                : iryoHoken.get識別コード().getColumnValue());
+                              ? RString.EMPTY
+                              : iryoHoken.get識別コード().getColumnValue());
         row.setShichosonCode(iryoHoken.get市町村コード() == null
-                ? RString.EMPTY
-                : iryoHoken.get市町村コード().getColumnValue());
+                             ? RString.EMPTY
+                             : iryoHoken.get市町村コード().getColumnValue());
         ViewExecutionStatus status = iryoHoken.toEntity() == null
-                ? ViewExecutionStatus.None
-                : ViewExecutionStatus.toValue(new RString(iryoHoken.toEntity().getState().name()));
+                                     ? ViewExecutionStatus.None
+                                     : ViewExecutionStatus.toValue(new RString(iryoHoken.toEntity().getState().name()));
         row.setState(status.get名称());
         row.getKanyuDate().setValue(iryoHoken.get医療保険加入年月日());
         row.getDattaiDate().setValue(iryoHoken.get医療保険脱退年月日());

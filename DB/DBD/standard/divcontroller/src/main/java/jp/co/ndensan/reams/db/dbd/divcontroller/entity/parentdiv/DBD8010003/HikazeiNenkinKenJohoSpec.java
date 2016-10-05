@@ -107,7 +107,7 @@ public enum HikazeiNenkinKenJohoSpec implements IPredicate<HikazeiNenkinKenJohoD
                  */
                 @Override
                 public boolean apply(HikazeiNenkinKenJohoDiv div) {
-                    return !div.getTbTaishoNen().getValue().isNullOrEmpty();
+                    return div.getTbTaishoNen().getValue() != null;
                 }
             },
     氏名カナの非空チェック {

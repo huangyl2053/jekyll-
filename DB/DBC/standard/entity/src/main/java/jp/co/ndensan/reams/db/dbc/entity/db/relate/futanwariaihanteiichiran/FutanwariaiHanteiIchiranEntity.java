@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -54,7 +53,7 @@ public class FutanwariaiHanteiIchiranEntity {
     private boolean 旧措置者フラグ;
     private RString 生活保護受給者識別コード;
     private RString 給付率;
-    private AtenaMeisho 名称;
+    private RString 名称;
 
     private RString 地方公共団体コード;
     private RString 市町村名;

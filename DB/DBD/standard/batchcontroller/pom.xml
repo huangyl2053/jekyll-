@@ -49,6 +49,10 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzService</artifactId>
         </dependency>
+         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBatchController</artifactId>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>

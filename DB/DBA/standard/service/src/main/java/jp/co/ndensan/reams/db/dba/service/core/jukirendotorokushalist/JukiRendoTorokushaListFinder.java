@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.service.core.jukirendotorokushalist;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA140010.DBA140010_JukiRendoTorokushaListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -85,9 +85,9 @@ public class JukiRendoTorokushaListFinder {
      * @param 今回終了日 今回終了日
      * @param 対象台帳 対象台帳
      * @param 出力順ID 出力順ID
-     * @return JyukiRendoTorokushaListBatchParameter 住基連動登録者リスト作成バッチパラメータクラス
+     * @return DBA140010_JukiRendoTorokushaListParameter 住基連動登録者リスト作成バッチパラメータクラス
      */
-    public JyukiRendoTorokushaListBatchParameter getJukiRendoTorokushaListBatchParameter(
+    public DBA140010_JukiRendoTorokushaListParameter getJukiRendoTorokushaListBatchParameter(
             FlexibleDate 前回開始日,
             FlexibleDate 前回終了日,
             FlexibleDate 今回開始日,
@@ -107,7 +107,7 @@ public class JukiRendoTorokushaListFinder {
                 適用除外者台帳フラグ = true;
             }
         }
-        JyukiRendoTorokushaListBatchParameter parameter = new JyukiRendoTorokushaListBatchParameter();
+        DBA140010_JukiRendoTorokushaListParameter parameter = new DBA140010_JukiRendoTorokushaListParameter();
         RStringBuilder 今回開始日Builder = new RStringBuilder();
         RStringBuilder 今回終了日Builder = new RStringBuilder();
 

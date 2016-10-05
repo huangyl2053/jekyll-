@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者給付実績一覧表取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-3070-030 dangjingjing -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekiichiran.IJukyushaKyufujissekiIchiranMapper">
+    <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranRelateEntity">
+        <result property="入力識別番号" column="inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="DbT3017_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="DbT3017_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス提供年月" column="DbT3017_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業所番号" column="DbT3017_jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付実績区分コード" column="DbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費1_負担者番号" column="DbT3017_kohi1FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費1_受給者番号" column="DbT3017_kohi1JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費2_負担者番号" column="DbT3017_kohi2FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費2_受給者番号" column="DbT3017_kohi2JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費3_負担者番号" column="DbT3017_kohi3FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費3_受給者番号" column="DbT3017_kohi3JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="DbT3017_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_保険_サービス単位数" column="DbT3017_atoHokenServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_請求額" column="DbT3017_atoHokenSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_利用者負担額" column="DbT3017_atoHokenRiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_緊急時施設療養費請求額" column="DbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_特定診療費請求額" column="DbT3017_atoHokenTokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_特定入所者介護サービス費等請求額" column="DbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費1_サービス単位数" column="DbT3017_atoKohi1ServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費1_請求額" column="DbT3017_atoKohi1Seikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費1_本人負担額" column="DbT3017_atoKohi1RiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_緊急時施設療養費請求額" column="DbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_特定診療費請求額" column="DbT3017_atoKohi1TokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_特定入所者介護サービス費等請求額" column="DbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_サービス単位数" column="DbT3017_atoKohi2ServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費2_請求額" column="DbT3017_atoKohi2Seikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費2_本人負担額" column="DbT3017_atoKohi2RiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_緊急時施設療養費請求額" column="DbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_特定診療費請求額" column="DbT3017_atoKohi2TokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_特定入所者介護サービス費等請求額" column="DbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_サービス単位数" column="DbT3017_atoKohi3ServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費3_請求額" column="DbT3017_atoKohi3Seikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費3_本人負担額" column="DbT3017_atoKohi3RiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_緊急時施設療養費請求額" column="DbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_特定診療費請求額" column="DbT3017_atoKohi3TokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_特定入所者介護サービス費等請求額" column="DbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="審査年月" column="DbT3017_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="識別コード" column="T4_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="T4_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者氏名" column="PSM_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者カナ" column="PSM_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所" column="PSM_jusho_banchi_katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="町域コード" column="PSM_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="行政区コード" column="PSM_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="世帯コード" column="PSM_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="T2_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="入力識別番号" column="T1_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="T1_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="T1_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス提供年月" column="T1_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="給付実績区分コード" column="T1_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費1_負担者番号" column="T1_kohi1FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費2_負担者番号" column="T1_kohi2FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費3_負担者番号" column="T1_kohi3FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_請求額" column="T1_riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_利用者負担額" column="T1_shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_請求額" column="T1_kohi1Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_本人負担額" column="T1_kohi1Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_請求額" column="T1_kohi2Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_本人負担額" column="T1_kohi2Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_請求額" column="T1_kohi3Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_本人負担額" column="T1_kohi3Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="審査年月" column="T1_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="識別コード" column="T4_shikibetsuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="T4_hihokenshaNo_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者氏名" column="PSM_meisho_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者カナ" column="PSM_kanaMeisho_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所" column="PSM_jusho_banchi_katagaki_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="町域コード" column="PSM_choikiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="行政区コード" column="PSM_gyoseikuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="世帯コード" column="PSM_setaiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+     
+    <select resultOrdered="true" id="get受給者給付実績" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranMybatisParameter" 
+            resultMap="haishameigihenkouiraiResult" fetchSize="500">
+SELECT																												
+	DbT3017."inputShikibetsuNo" AS DbT3017_inputShikibetsuNo,																										
+	DbT3017."shokisaiHokenshaNo" AS DbT3017_shokisaiHokenshaNo,																											
+	DbT3017."hiHokenshaNo" AS DbT3017_hiHokenshaNo,	
+	DbT3017."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
+	DbT3017."jigyoshoNo" AS "DbT3017_jigyoshoNo",																								
+	DbT3017."kyufuJissekiKubunCode" AS DbT3017_kyufuJissekiKubunCode,																											
+	DbT3017."kohi1FutanshaNo" AS DbT3017_kohi1FutanshaNo,																											
+	DbT3017."kohi1JukyushaNo" AS DbT3017_kohi1JukyushaNo,
+	DbT3017."kohi2FutanshaNo" AS DbT3017_kohi2FutanshaNo,																											
+	DbT3017."kohi2JukyushaNo" AS DbT3017_kohi2JukyushaNo,																											
+	DbT3017."kohi3FutanshaNo" AS DbT3017_kohi3FutanshaNo,																											
+	DbT3017."kohi3JukyushaNo" AS DbT3017_kohi3JukyushaNo,	
+	DbT3017."yoKaigoJotaiKubunCode" AS DbT3017_yoKaigoJotaiKubunCode,																										
+	DbT3017."atoHokenServiceTanisu" AS DbT3017_atoHokenServiceTanisu,																											
+	DbT3017."atoHokenSeikyugaku" AS DbT3017_atoHokenSeikyugaku,																											
+	DbT3017."atoHokenRiyoshaFutangaku" AS DbT3017_atoHokenRiyoshaFutangaku,	
+	DbT3017."atoHokenKinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku,																											
+	DbT3017."atoHokenTokuteiShinryohiSeikyugaku" AS DbT3017_atoHokenTokuteiShinryohiSeikyugaku,																											
+	DbT3017."atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku,	
+	DbT3017."atoKohi1ServiceTanisu" AS DbT3017_atoKohi1ServiceTanisu,	
+	DbT3017."atoKohi1Seikyugaku" AS DbT3017_atoKohi1Seikyugaku,	
+	DbT3017."atoKohi1RiyoshaFutangaku" AS DbT3017_atoKohi1RiyoshaFutangaku,																											
+	DbT3017."atoKohi1KinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku,	
+	DbT3017."atoKohi1TokuteiShinryohiSeikyugaku" AS DbT3017_atoKohi1TokuteiShinryohiSeikyugaku,	
+	DbT3017."atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku,																											
+        DbT3017."atoKohi2ServiceTanisu" AS DbT3017_atoKohi2ServiceTanisu,																											
+	DbT3017."atoKohi2Seikyugaku" AS DbT3017_atoKohi2Seikyugaku,																											
+        DbT3017."atoKohi2RiyoshaFutangaku" AS DbT3017_atoKohi2RiyoshaFutangaku,	
+	DbT3017."atoKohi2KinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku,																											
+        DbT3017."atoKohi2TokuteiShinryohiSeikyugaku" AS DbT3017_atoKohi2TokuteiShinryohiSeikyugaku,																											
+	DbT3017."atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku,																											
+        DbT3017."atoKohi3ServiceTanisu" AS DbT3017_atoKohi3ServiceTanisu,
+	DbT3017."atoKohi3Seikyugaku" AS DbT3017_atoKohi3Seikyugaku,																											
+        DbT3017."atoKohi3RiyoshaFutangaku" AS DbT3017_atoKohi3RiyoshaFutangaku,																											
+	DbT3017."atoKohi3KinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku,																											
+        DbT3017."atoKohi3TokuteiShinryohiSeikyugaku" AS DbT3017_atoKohi3TokuteiShinryohiSeikyugaku,	
+	DbT3017."atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku,																											
+        DbT3017."shinsaYM" AS DbT3017_shinsaYM,	
+	T4."DbT1001_shikibetsuCode" AS T4_shikibetsuCode,
+        T4."DbT1001_shichosonCode" AS T4_shichosonCode,																										
+	PSM."meisho" AS PSM_meisho,
+	PSM."kanaMeisho" AS PSM_kanaMeisho,	
+        CONCAT(PSM."jusho",PSM."banchi",PSM."katagaki") AS PSM_jusho_banchi_katagaki,																																										
+	PSM."choikiCode" AS PSM_choikiCode,	
+	PSM."gyoseikuCode" AS PSM_gyoseikuCode,																											
+	PSM."setaiCode" AS PSM_setaiCode,																											
+	DbT7060A."jigyoshaName" AS DbT7060A_jigyoshaName,																										
+	'',																	
+	''															
+FROM																												
+	rgdb."DbT3017KyufujissekiKihon" AS DbT3017																											
+LEFT JOIN 
+        rgdb."DbT7060KaigoJigyosha" AS DbT7060A
+      ON  DbT3017."jigyoshoNo" = DbT7060A."jigyoshaNo"
+      AND DbT7060A."yukoKaishiYMD" <![CDATA[<=]]> DbT3017."serviceTeikyoYM" 
+      AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT7060A."yukoShuryoYMD" 
+      AND  NOT EXISTS
+   ( SELECT 1       
+      FROM 
+        rgdb."DbT7060KaigoJigyosha" AS DbT7060B       
+      WHERE DbT7060A."jigyoshaNo" = DbT7060B."jigyoshaNo"       
+      AND DbT7060A."yukoKaishiYMD" <![CDATA[<]]> DbT7060B."yukoKaishiYMD"       
+   )
+LEFT JOIN ( 
+        SELECT
+          DbT1001."shikibetsuCode" AS "DbT1001_shikibetsuCode"
+          , DbT1001."hihokenshaNo" AS "DbT1001_hihokenshaNo"
+          , DbT1001."shichosonCode" AS "DbT1001_shichosonCode"
+        FROM
+          rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+      ) AS T4 
+       ON  DbT3017."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"																										
+LEFT JOIN 																												
+	rgua.${psmShikibetsuTaisho} AS PSM
+        ON
+        T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"
+        <where>
+            <if test="対象年月flag">
+                #{年月範囲_開始} <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                AND 
+                DbT3017."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了} 
+            </if>
+            <if test="!対象年月flag">
+                AND
+                #{年月範囲_開始} <![CDATA[<=]]> DbT3017."shinsaYM"
+                AND 
+                DbT3017."shinsaYM" <![CDATA[<=]]> #{年月範囲_終了}
+            </if>
+            <if test="被保険者番号flag">
+                AND
+                #{被保険者番号_開始} <![CDATA[<=]]> DbT3017."hiHokenshaNo"
+                AND 
+                DbT3017."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
+            </if>
+            <if test="給付実績区分flag">
+                AND
+                DbT3017."kyufuJissekiKubunCode" = '1'
+            </if>
+            <if test="!給付実績区分flag">
+                AND
+                DbT3017."kyufuJissekiKubunCode" = '2'
+            </if>
+            <if test="要介護1flag">
+               AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('21')
+            </if>
+            <if test="要介護2flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('22')
+            </if>
+            <if test="要介護3flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('23')
+            </if>
+            <if test="要介護4flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('24')
+            </if>
+            <if test="要介護5flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('25')
+            </if>
+            <if test="要支援1flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('12')
+            </if>
+            <if test="要支援2flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('13')
+            </if>
+            <if test="経過的要介護flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('11')
+            </if>
+            <if test="自立flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('01')
+            </if>
+            <if test="訪問通所他flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7131','2131')
+            </if>
+            <if test="短期入所生活介護flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7141','7142','7143','2141','2142','2143')
+            </if>
+            <if test="短期入所療養介護_老健施設flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7151','7152','7153','7155','2151','2152','2153','2155')
+            </if>
+            <if test="短期入所療養介護_医療施設flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7161','7162','7163','7164','2161','2162','2163','2164')
+            </if>
+            <if test="認知症対応型共同生活flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7171','2171')
+            </if>
+            <if test="特定施設入居者生活介護flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7173','2173')
+            </if>
+            <if test="認知症対応型共同生活_短期flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7175','2175')
+            </if>
+            <if test="特定施設入居生活介護_短期flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7177','2177')
+            </if>
+            <if test="居宅介護支援flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('8121','8122','8124','21B1','21B2','21B4')
+            </if>
+            <if test="介護老人福祉施設サービスflag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7181','7182','7183','2181','2182','2183')
+            </if>
+            <if test="介護老人保健施設サービスflag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7191','7192','7193','7194','7195','2191','2192','2193','2194','2195')
+            </if>
+            <if test="介護療養型医療施設サービスflag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('71A1','71A2','71A3','21A1','21A2','21A3')
+            </if>
+            <if test="特定福祉用具販売費flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('21C1')
+            </if>
+            <if test="住宅改修費flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('21D1')
+            </if>
+            <if test="高額介護サービス費flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('3411')
+            </if>
+            <if test="予防訪問通所他flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7132','2132')
+            </if>
+            <if test="予防短期入所生活介護flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7144','2144')
+            </if>
+            <if test="予防短期入所療養介護_老健施設flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7154','7156','2154','2156')
+            </if>
+            <if test="予防短期入所療養介護_医療施設flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7165','2165')
+            </if>
+            <if test="予防認知症対応型共同生活flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7172','2172')
+            </if>
+            <if test="予防特定施設入居者生活介護flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7174','2174')
+            </if>
+             <if test="予防認知症対応型共同生活_短期flag">
+                 AND
+                DbT3017."inputShikibetsuNo" IN ('7176','2176')
+            </if>
+            <if test="予防支援flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('8123','8125','21B3','21B5')
+            </if>
+            <if test="予防特定福祉用具販売費flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('21C2')
+            </if>
+            <if test="予防住宅改修費flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('21D2')
+            </if>
+            <if test="介護予防_生活支援_経過flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('71P1')
+            </if>
+            <if test="経過措置ケアマネジメントflag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('8161')
+            </if>
+            <if test="介護予防_生活支援総合事業flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('71R1')
+            </if>
+            <if test="総合事業ケアマネジメントflag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('8171')
+            </if>
+            <if test="flag">
+                AND
+                DbT3017."inputShikibetsuNo" IN ('7131','2131','7141','7142','7143','2141','2142','2143')
+            </if>
+            <if test="旧措置特定有無flag">
+                AND
+                DbT3017."kyuSochiNyushoshaTokureiCode" = '0'
+            </if>
+            <if test="!旧措置特定有無flag">
+                AND
+                DbT3017."kyuSochiNyushoshaTokureiCode" = '1'
+            </if>
+            <if test="老人保健市町村番号有無flag">
+                AND
+                DbT3017."rojinHokenShichosonNo" = ''
+            </if>
+            <if test="!老人保健市町村番号有無flag">
+                AND
+                DbT3017."rojinHokenShichosonNo" <![CDATA[<>]]> ''
+                AND
+                #{老人保健市町村番号有_開始} <![CDATA[<=]]> DbT3017."rojinHokenShichosonNo" 
+                AND
+                DbT3017."rojinHokenShichosonNo" <![CDATA[<=]]> #{老人保健市町村番号有_終了}
+            </if>
+            <if test="老人保健受給者番号有無flag">
+                AND
+                DbT3017."rojinhokenJukyushaNo" = ''
+            </if>
+            <if test="!老人保健受給者番号有無flag">
+                AND
+                DbT3017."rojinhokenJukyushaNo" <![CDATA[<>]]> ''
+                AND
+                #{老人保健受給者番号有_開始} <![CDATA[<=]]> DbT3017."rojinhokenJukyushaNo" 
+                AND
+                DbT3017."rojinhokenJukyushaNo" <![CDATA[<=]]> #{老人保健受給者番号有_終了}
+            </if>
+            <if test="!公費負担者番号flag">
+                AND
+                DbT3017."kohi1FutanshaNo" = #{公費負担者番号} or DbT3017."kohi2FutanshaNo" = #{公費負担者番号} or DbT3017."kohi3FutanshaNo" = #{公費負担者番号}
+            </if>
+            <if test="!公費受給者番号flag">
+                AND
+                DbT3017."kohi1JukyushaNo" = #{公費受給者番号} or DbT3017."kohi2JukyushaNo" = #{公費受給者番号} or DbT3017."kohi3JukyushaNo" = #{公費受給者番号}
+            </if>
+            <if test="事業者番号flag">
+                AND
+                #{事業者番号_開始} <![CDATA[<=]]> DbT3017."jigyoshoNo"
+                AND 
+                DbT3017."jigyoshoNo" <![CDATA[<=]]> #{事業者番号_終了}
+            </if>
+            <if test="!計画作成事業者番号flag">
+                AND
+                DbT3017."kyotakuKaigoShienJigyoshoNo" = #{計画作成事業者番号}
+            </if>
+            <if test="!給付率flag">
+                <if test="給付率区分flag1">
+                    DbT3017."hokenKyufuritsu" = #{給付率}
+                </if>
+                <if test="給付率区分flag2">
+                    #{給付率} <![CDATA[<]]> DbT3017."hokenKyufuritsu"
+                </if>
+                <if test="給付率区分flag3">
+                    DbT3017."hokenKyufuritsu" <![CDATA[<]]> #{給付率}
+                </if>
+            </if>
+        </where>
+    </select>
+    
+     <select resultOrdered="true" id="get給付実績高額介護サービス費" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranMybatisParameter" 
+            resultMap="haishameigihenkouiraiResult" fetchSize="500">
+        SELECT																			
+	T1."inputShikibetsuNo" AS T1_inputShikibetsuNo,																		
+	T1."shokisaiHokenshaNo" AS T1_shokisaiHokenshaNo,																		
+	T1."hiHokenshaNo" AS T1_hiHokenshaNo,																		
+	T1."serviceTeikyoYM" AS T1_serviceTeikyoYM,																		
+	'',																		
+	T1."kyufuJissekiKubunCode" AS T1_kyufuJissekiKubunCode,																		
+	T1."kohi1FutanNo" AS T1_kohi1FutanNo,																		
+	'',																		
+	T1."kohi2FutanNo" AS T1_kohi2FutanNo,																		
+	'',																		
+	T1."kohi3FutanNo" AS T1_kohi3FutanNo,																		
+	'',																		
+	'',																		
+	'',																		
+	T1."riyoshaFutangaku" AS T1_riyoshaFutangaku,																		
+	T1."shikyugaku" AS T1_shikyugaku,																	
+	'',																		
+	'',																		
+	'',																		
+	'',																		
+	T1."kohi1Futangaku" AS T1_kohi1Futangaku,																		
+	T1."kohi1Shikyugaku" AS T1_kohi1Shikyugaku,																	
+	'',																		
+	'',																		
+	'',																		
+	'',																		
+	T1."kohi2Futangaku" AS T1_kohi2Futangaku,																		
+	T1."kohi2Shikyugaku" AS T1_kohi2Shikyugaku,																	
+	'',																		
+	'',																		
+	'',																		
+	'',																		
+	T1."kohi3Shikyugaku" AS T1_kohi3Shikyugaku,																		
+	T1."kohi3Futangaku" AS T1_kohi3Futangaku,																	
+	'',																		
+	'',																
+	'',																		
+	T1."shinsaYM" AS T1_shinsaYM,																		
+	T4."DbT1001_shikibetsuCode" AS T4_shikibetsuCode_2,																		
+	T4."DbT1001_hihokenshaNo" AS T4_hihokenshaNo_2,																			
+	PSM."meisho" AS PSM_meisho_2,
+	PSM."kanaMeisho" AS PSM_kanaMeisho_2,	
+        CONCAT(PSM."jusho",PSM."banchi",PSM."katagaki")	AS PSM_jusho_banchi_katagaki_2,																
+	PSM."choikiCode" AS PSM_choikiCode_2,	
+	PSM."gyoseikuCode" AS PSM_gyoseikuCode_2,																											
+	PSM."setaiCode" AS PSM_setaiCode_2,																		
+	'',								
+	'',									
+	''									
+FROM																			
+	rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS T1																		
+LEFT JOIN 																			
+	(SELECT 																		
+	DbT1001."shikibetsuCode" AS "DbT1001_shikibetsuCode",																		
+	DbT1001."hihokenshaNo" AS "DbT1001_hihokenshaNo"																
+	FROM rgdb."DbT1001HihokenshaDaicho" AS DbT1001 ) AS T4																		
+	ON T1."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"																		
+LEFT JOIN 																			
+	rgua.${psmShikibetsuTaisho} AS PSM
+        ON
+        T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"	
+         <where>
+            <if test="対象年月flag">
+                #{年月範囲_開始} <![CDATA[<=]]> T1."serviceTeikyoYM"
+                AND 
+                T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了} 
+            </if>
+            <if test="!対象年月flag">
+                AND
+                #{年月範囲_開始} <![CDATA[<=]]> T1."shinsaYM"
+                AND 
+                T1."shinsaYM" <![CDATA[<=]]> #{年月範囲_終了}
+            </if>
+            <if test="被保険者番号flag">
+                AND
+                #{被保険者番号_開始} <![CDATA[<=]]> T1."hiHokenshaNo"
+                AND 
+                T1."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
+            </if>
+            <if test="給付実績区分flag">
+                AND
+                T1."kyufuJissekiKubunCode" = '1'
+            </if>
+            <if test="!給付実績区分flag">
+                AND
+                T1."kyufuJissekiKubunCode" = '2'
+            </if>
+            <if test="訪問通所他flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7131','2131')
+            </if>
+            <if test="短期入所生活介護flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7141','7142','7143','2141','2142','2143')
+            </if>
+            <if test="短期入所療養介護_老健施設flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7151','7152','7153','7155','2151','2152','2153','2155')
+            </if>
+            <if test="短期入所療養介護_医療施設flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7161','7162','7163','7164','2161','2162','2163','2164')
+            </if>
+            <if test="認知症対応型共同生活flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7171','2171')
+            </if>
+            <if test="特定施設入居者生活介護flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7173','2173')
+            </if>
+            <if test="認知症対応型共同生活_短期flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7175','2175')
+            </if>
+            <if test="特定施設入居生活介護_短期flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7177','2177')
+            </if>
+            <if test="居宅介護支援flag">
+                AND
+                T1."inputShikibetsuNo" IN ('8121','8122','8124','21B1','21B2','21B4')
+            </if>
+            <if test="介護老人福祉施設サービスflag">
+                AND
+                T1."inputShikibetsuNo" IN ('7181','7182','7183','2181','2182','2183')
+            </if>
+            <if test="介護老人保健施設サービスflag">
+                AND
+                T1."inputShikibetsuNo" IN ('7191','7192','7193','7194','7195','2191','2192','2193','2194','2195')
+            </if>
+            <if test="介護療養型医療施設サービスflag">
+                AND
+                T1."inputShikibetsuNo" IN ('71A1','71A2','71A3','21A1','21A2','21A3')
+            </if>
+            <if test="特定福祉用具販売費flag">
+                AND
+                T1."inputShikibetsuNo" IN ('21C1')
+            </if>
+            <if test="住宅改修費flag">
+                AND
+                T1."inputShikibetsuNo" IN ('21D1')
+            </if>
+            <if test="高額介護サービス費flag">
+                AND
+                T1."inputShikibetsuNo" IN ('3411')
+            </if>
+            <if test="予防訪問通所他flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7132','2132')
+            </if>
+            <if test="予防短期入所生活介護flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7144','2144')
+            </if>
+            <if test="予防短期入所療養介護_老健施設flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7154','7156','2154','2156')
+            </if>
+            <if test="予防短期入所療養介護_医療施設flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7165','2165')
+            </if>
+            <if test="予防認知症対応型共同生活flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7172','2172')
+            </if>
+            <if test="予防特定施設入居者生活介護flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7174','2174')
+            </if>
+             <if test="予防認知症対応型共同生活_短期flag">
+                 AND
+                T1."inputShikibetsuNo" IN ('7176','2176')
+            </if>
+            <if test="予防支援flag">
+                AND
+                T1."inputShikibetsuNo" IN ('8123','8125','21B3','21B5')
+            </if>
+            <if test="予防特定福祉用具販売費flag">
+                AND
+                T1."inputShikibetsuNo" IN ('21C2')
+            </if>
+            <if test="予防住宅改修費flag">
+                AND
+                T1."inputShikibetsuNo" IN ('21D2')
+            </if>
+            <if test="介護予防_生活支援_経過flag">
+                AND
+                T1."inputShikibetsuNo" IN ('71P1')
+            </if>
+            <if test="経過措置ケアマネジメントflag">
+                AND
+                T1."inputShikibetsuNo" IN ('8161')
+            </if>
+            <if test="介護予防_生活支援総合事業flag">
+                AND
+                T1."inputShikibetsuNo" IN ('71R1')
+            </if>
+            <if test="総合事業ケアマネジメントflag">
+                AND
+                T1."inputShikibetsuNo" IN ('8171')
+            </if>
+            <if test="flag">
+                AND
+                T1."inputShikibetsuNo" IN ('7131','2131','7141','7142','7143','2141','2142','2143')
+            </if>
+            <if test="!公費負担者番号flag">
+                AND
+                T1."kohi1FutanNo" = #{公費負担者番号} or T1."kohi2FutanNo" = #{公費負担者番号} or T1."kohi3FutanNo" = #{公費負担者番号}
+            </if>
+       </where>																	
+ </select>
+    
+    <select resultOrdered="true" id="getSelectAll" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranRelateEntity" fetchSize="500">
+    SELECT		
+    JKJITable.入力識別番号,
+    JKJITable.証記載保険者番号,
+    JKJITable.被保険者番号,
+    JKJITable.サービス提供年月,
+    JKJITable.事業所番号,
+    JKJITable.給付実績区分コード,
+    JKJITable.公費1_負担者番号,
+    JKJITable.公費1_受給者番号,
+    JKJITable.公費2_負担者番号,
+    JKJITable.公費2_受給者番号,
+    JKJITable.公費3_負担者番号,
+    JKJITable.公費3_受給者番号,
+    JKJITable.要介護状態区分コード,
+    JKJITable.後_保険_サービス単位数,
+    JKJITable.後_保険_請求額,
+    JKJITable.後_保険_利用者負担額,
+    JKJITable.後_緊急時施設療養費請求額,
+    JKJITable.後_保険_特定診療費請求額,
+    JKJITable.後_保険_特定入所者介護サービス費等請求額,
+    JKJITable.後_公費1_サービス単位数,
+    JKJITable.後_公費1_請求額,
+    JKJITable.後_公費1_本人負担額,
+    JKJITable.後_公費1_緊急時施設療養費請求額,
+    JKJITable.後_公費1_特定診療費請求額,
+    JKJITable.後_公費1_特定入所者介護サービス費等請求額,
+    JKJITable.後_公費2_サービス単位数,
+    JKJITable.後_公費2_請求額,
+    JKJITable.後_公費2_本人負担額,
+    JKJITable.後_公費2_緊急時施設療養費請求額,
+    JKJITable.後_公費2_特定診療費請求額,
+    JKJITable.後_公費2_特定入所者介護サービス費等請求額,
+    JKJITable.後_公費3_サービス単位数,
+    JKJITable.後_公費3_請求額,
+    JKJITable.後_公費3_本人負担額,
+    JKJITable.後_公費3_緊急時施設療養費請求額,
+    JKJITable.後_公費3_特定診療費請求額,
+    JKJITable.後_公費3_特定入所者介護サービス費等請求額,
+    JKJITable.審査年月,
+    JKJITable.識別コード,
+    JKJITable.市町村コード,
+    JKJITable.被保険者氏名,
+    JKJITable.被保険者カナ,
+    JKJITable.住所,
+    JKJITable.町域コード,
+    JKJITable.行政区コード,
+    JKJITable.世帯コード,
+    JKJITable.事業者名称,
+    JKJITable.要介護状態区分名称,
+    JKJITable.給付実績区分名称	
+        FROM																			
+        "JukyusyaKyufuJiqsekiIchiranhyouTable"	AS JKJITable																	
+    </select>
+</mapper>

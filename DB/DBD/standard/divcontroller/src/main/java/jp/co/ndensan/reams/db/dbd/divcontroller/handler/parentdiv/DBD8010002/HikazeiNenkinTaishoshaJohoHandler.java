@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbd.business.core.hikazeinenkintaishoshajoho.HikazeiNenkinTaishoshaJohoBusiness;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -57,11 +57,14 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -81,8 +84,10 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private final RString 年次 = new RString("年次");
+    private final RString 年次_ = new RString("（年次）");
     private final RString 年度 = new RString("年度");
     private final RString 月次 = new RString("月次");
+    private final RString 月次_ = new RString("（月次）");
     private final RString 対象ファイル_Z51 = new RString("Z51*****.DTA");
     private final RString 対象ファイル_Z52 = new RString("Z52*****.DTA");
     private final RString 広域保険者 = new RString("1");
@@ -93,6 +98,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     private static final RString KEY1 = new RString("key1");
     private static final RString HOSHI = new RString("?");
     private final RString 対象ファイル終了 = new RString(".DTA");
+    private final RString 空白 = new RString(" ");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -178,9 +184,9 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
         SearchResult<ShoriDateKanri> 年次処理情報List = get処理日付管理マスタ情報for月DDL();
 
-        if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+        if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1))) {
             div.getTxtTaishoFuairu().setValue(対象ファイル_Z51);
-        } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+        } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1))) {
             div.getTxtTaishoFuairu().setValue(対象ファイル_Z52);
         }
 
@@ -191,7 +197,12 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             for (ShoriDateKanri shoriDateKanri : 年次処理情報List.records()) {
                 if (div.getDdlTuki().getSelectedKey().equals(shoriDateKanri.get年度内連番())) {
                     div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.toValue(shoriDateKanri.get処理枝番()).get名称());
-                    div.getTxtShoriNichiji().setValue(shoriDateKanri.get基準日時() == null ? RString.EMPTY : shoriDateKanri.get基準日時().toDateString());
+                    YMDHMS 基準日時 = shoriDateKanri.get基準日時();
+                    div.getTxtShoriNichiji().setValue(null != 基準日時 && !基準日時.isEmpty()
+                            ? 基準日時.getDate().wareki().eraType(EraType.KANJI)
+                            .firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString()
+                            .concat(空白).concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                            : RString.EMPTY);
                     break;
                 }
                 div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.未処理.get名称());
@@ -355,24 +366,33 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * @param 構成市町村コードリスト List<RString>
      * @return HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter
      */
-    public HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter createDBD301010BatchParamter(
+    public DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter createDBD301010BatchParamter(
             HikazeiNenkinTaishoshaJohoDiv div,
             List<RString> 構成市町村コードリスト) {
 
-        HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter parameter = new HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter();
+        DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter parameter = new DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter();
 
         parameter.set処理年度(new FlexibleYear(div.getDdlShoriNendo().getSelectedKey()));
-        parameter.set処理区分(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriCode());
-        parameter.set対象月(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnTukiCode());
+        if (単一保険者.equals(広域と市町村判断())) {
+            parameter.set処理区分(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriCode());
+            parameter.set対象月(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnTukiCode());
+            parameter.set処理日時(new YMDHMS(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriNichiji()));
+            parameter.set処理状態(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai());
+        } else {
+            parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1));
+            parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_1, INT_4));
+            parameter.set処理日時(new YMDHMS(div.getTxtShoriNichiji().getValue()));
+            parameter.set処理状態(div.getTxtShoriJotai().getValue());
+        }
         parameter.setテスト処理(div.getHeddaeria().getChkTesutoShoriTorikomi().isAllSelected() ? RSTRING_1 : RSTRING_0);
         if (KEY0.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
             parameter.set出力区分(RSTRING_1);
         } else if (KEY1.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
             parameter.set出力区分(RSTRING_0);
         }
-        parameter.set処理状態(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai());
+
         parameter.set構成市町村コードリスト(構成市町村コードリスト);
-        parameter.set処理日時(new YMDHMS(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriNichiji()));
+
         parameter.set出力順ID1(div.getCcdChohyoSyuturyokuJun1().get出力順ID());
         parameter.set出力順ID2(div.getCcdChohyoSyuturyokuJun2().get出力順ID());
         parameter.set出力順ID3(div.getCcdChohyoSyuturyokuJun3().get出力順ID());
@@ -387,10 +407,10 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * @param div JissiJyokyohyoDiv
      * @return SokyuHikazeiNenkinBatchParameter
      */
-    public SokyuHikazeiNenkinBatchParameter createDBD301020BatchParamter(
+    public DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter createDBD301020BatchParamter(
             HikazeiNenkinTaishoshaJohoDiv div) {
 
-        SokyuHikazeiNenkinBatchParameter parameter = new SokyuHikazeiNenkinBatchParameter();
+        DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter parameter = new DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter();
 
         parameter.set処理年度(new FlexibleYear(new RString("9999")));
         parameter.set処理区分(new RString("9"));
@@ -569,7 +589,12 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             対象処理年次.set処理状態コード(RSTRING_1);
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
         } else {
-            対象処理年次.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
+            対象処理年次.set処理日時(null != 年次処理情報.get基準日時() && !年次処理情報.get基準日時().isEmpty()
+                    ? 年次処理情報.get基準日時().getDate().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString()
+                    .concat(空白).concat(年次処理情報.get基準日時().getRDateTime().getTime().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                    : RString.EMPTY);
             対象処理年次.set処理状態コード(年次処理情報.get処理枝番());
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
         }
@@ -591,7 +616,12 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 対象処理.set処理状態コード(RSTRING_1);
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
             } else {
-                対象処理.set処理日時(月次処理情報.get基準日時() == null ? RString.EMPTY : 月次処理情報.get基準日時().toDateString());
+                対象処理.set処理日時(null != 月次処理情報.get基準日時() && !月次処理情報.get基準日時().isEmpty()
+                        ? 月次処理情報.get基準日時().getDate().wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString()
+                        .concat(空白).concat(月次処理情報.get基準日時().getRDateTime().getTime().
+                        toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                        : RString.EMPTY);
                 対象処理.set処理状態コード(月次処理情報.get処理枝番());
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(月次処理情報.get処理枝番()).get名称());
             }
@@ -620,14 +650,15 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     private List<RString> 広域年度DDLの選択処理() {
 
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(get月コード(-1, false, RSTRING_0), get月(-1)));
+        dataSource.add(new KeyValueDataSource(get月コード(-1, false, RSTRING_0), get月(-1).concat(年次_)));
         for (int i = 1; i <= INT_12; i++) {
-            dataSource.add(new KeyValueDataSource(get月コード(i, false, RSTRING_1), get月(i)));
+            dataSource.add(new KeyValueDataSource(get月コード(i, false, RSTRING_1), get月(i).concat(月次_)));
         }
 
         div.getDdlTuki().setDataSource(dataSource);
 
         SearchResult<ShoriDateKanri> 処理日付管理マスタList = get処理日付管理マスタ情報for広域();
+        boolean 存在フラグ = false;
         if (処理日付管理マスタList == null || 処理日付管理マスタList.totalCount() == 0) {
             div.getDdlTuki().setSelectedKey(dataSource.get(INT_0).getKey());
         } else {
@@ -635,11 +666,12 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 if (処理日付管理マスタList.records().get(INT_0).get年度内連番().equals(dataSource.get(i).getKey())
                         && (i <= dataSource.size() - 2)) {
                     div.getDdlTuki().setSelectedKey(dataSource.get(i + 1).getKey());
-                    break;
-                } else {
-                    div.getDdlTuki().setSelectedKey(dataSource.get(INT_0).getKey());
+                    存在フラグ = true;
                     break;
                 }
+            }
+            if (!存在フラグ) {
+                div.getDdlTuki().setSelectedKey(dataSource.get(INT_0).getKey());
             }
         }
 
@@ -771,15 +803,15 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             row.setTxtShichoson(master.get市町村名称());
 
             RString 年次月次 = RString.EMPTY;
-            if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+            if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1))) {
                 年次月次 = Z5100000;
-            } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+            } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1))) {
                 年次月次 = Z5200000;
             }
             List<UzT0885SharedFileEntryEntity> result = SharedFile.searchSharedFile(
                     年次月次.concat(div.getDdlShoriNendo().getSelectedKey()).
                     concat(div.getDdlTuki().getSelectedKey()).concat(new RString("_")).
-                    concat(master.get市町村コード().code市町村RString()).concat(new RString(".DTA")));
+                    concat(master.get市町村コード().getColumnValue()).concat(new RString(".DTA")));
 
             if (result == null || result.isEmpty()) {
                 this.setチェックボックスfor共有フォルダ無(master.get市町村コード(), row);

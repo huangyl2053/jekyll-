@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokushafuseigo.ShikakuShutokushaFuseigoListHenSyu;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokushafuseigoichiranhyo.ShikakushutokushaFuseigoIchiranhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokushafuseigo.ShikakuShutokushaFuseigoMybatisParameter;
-import jp.co.ndensan.reams.db.dba.definition.processprm.shikakushutokushafuseigo.ShikakuShutokushaFuseigoProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba320010.ShikakuShutokushaFuseigoProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokushafuseigoichiranhyo.ShikakuShutokushaFuseigoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokushafuseigoichiranhyo.ShikakushutokushaFuseigoIchiranCsvDataEntity;
@@ -25,12 +25,15 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 資格取得者不整合リストのバッチ処理クラスです。
@@ -41,12 +44,14 @@ public class ShikakuShutokushaFuseigoListProcess extends SimpleBatchProcessBase 
 
     private static final RString すべて対象 = new RString("1");
     private static final RString 資格重複者 = new RString("2");
+    private static final RString EUC_ENTITY_ID = new RString("DBA200014");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private ShikakuShutokushaFuseigoProcessParameter processParameter;
     private ShikakuShutokushaFuseigoMybatisParameter mybatisParameter;
     private IShikakuShutokushaFuseigoListMapper mapper;
     private RString eucFilename;
+    private FileSpoolManager manager;
 
     @BatchWriter
     private CsvWriter<ShikakushutokushaFuseigoIchiranCsvDataEntity> csvWriter;
@@ -56,7 +61,8 @@ public class ShikakuShutokushaFuseigoListProcess extends SimpleBatchProcessBase 
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
-        eucFilename = Path.combinePath(Path.getTmpDirectoryPath(), new RString("ShikakushutokushaFuseigoIchiran.csv"));
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        eucFilename = Path.combinePath(manager.getEucOutputDirectry(), new RString("資格取得者不整合一覧表.csv"));
         csvWriter = new CsvWriter.InstanceBuilder(eucFilename)
                 .setEncode(Encode.SJIS)
                 .setDelimiter(EUC_WRITER_DELIMITER)
@@ -96,6 +102,7 @@ public class ShikakuShutokushaFuseigoListProcess extends SimpleBatchProcessBase 
             renban = renban + 1;
         }
         csvWriter.close();
+        manager.spool(eucFilename);
         batchReportWriter.close();
     }
 }

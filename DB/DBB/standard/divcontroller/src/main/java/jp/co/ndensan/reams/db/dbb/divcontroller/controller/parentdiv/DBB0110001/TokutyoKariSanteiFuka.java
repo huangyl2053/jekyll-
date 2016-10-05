@@ -27,7 +27,7 @@ public class TokutyoKariSanteiFuka {
     private static final RString DBBMN33002 = new RString("DBBMN33002");
     private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
     private static final RString 特徴仮算定通知書一括発行 = new RString("特徴仮算定通知書一括発行");
-    
+
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード) .
      *
@@ -37,11 +37,11 @@ public class TokutyoKariSanteiFuka {
     public ResponseData<TokutyoKariSanteiFukaDiv> onLoad(TokutyoKariSanteiFukaDiv div) {
         TokutyoKariSanteiFukaHandler handler = getHandler(div);
         handler.initialize();
-        if(DBBMN33001.equals(ResponseHolder.getMenuID())){
+        if (DBBMN33001.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).rootTitle(特徴仮算定賦課).respond();
-        }else if(DBBMN33002.equals(ResponseHolder.getMenuID())){
+        } else if (DBBMN33002.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).rootTitle(特徴仮算定通知書一括発行).respond();
-        }else{
+        } else {
             return ResponseData.of(div).respond();
         }
     }

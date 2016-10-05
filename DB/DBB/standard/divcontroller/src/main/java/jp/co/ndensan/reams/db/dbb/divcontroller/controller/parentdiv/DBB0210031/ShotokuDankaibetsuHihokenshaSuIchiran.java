@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0210031;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.ShotokuDankaibetsuHihokenshaSuIchiran.ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021031.DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210031.ShotokuDankaibetsuHihokenshaSuIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210031.ShotokuDankaibetsuHihokenshaSuIchiranHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210031.ShotokuDankaibetsuHihokenshaSuIchiranValidationHandler;
@@ -22,7 +22,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
     /**
      * 画面初期化のメソッドです。
      *
-     * @param div ShinNendoKanriJohoSakuseiDiv
+     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
      * @return ResponseData
      */
     public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onLoad(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
@@ -52,28 +52,6 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
         return ResponseData.of(div).respond();
     }
 
-    //TODO QA.1203
-    /**
-     * btnShichosonSelectのonOkClose事件です。
-     *
-     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
-     * @return ResponseData
-     */
-    /* public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onOkClose_btnShichosonSelect(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-     getHandler(div).onOkCloseShichosonSelect();
-     return ResponseData.of(div).respond();
-     }*/
-    //TODO QA.1203
-    /**
-     * btnShichosonSelectのonBeforeOpenDialog事件です。
-     *
-     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
-     * @return ResponseData
-     */
-    /*public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onBeforeOpenDialog_btnSelect(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-     getHandler(div).onBeforeOpenDialog();
-     return ResponseData.of(div).respond();
-     }*/
     /**
      * chkChosaJokenのonChange事件です。
      *
@@ -102,22 +80,23 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
     /**
      * 「実行ボタン押下した時の処理」ボタンのメソッドです。
      *
-     * @param div ShinNendoKanriJohoSakuseiDiv
+     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
      * @return ResponseData
      */
-    public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter> onClick_btn(
+    public ResponseData<DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter> onClick_btn(
             ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-        ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter param = setBatchParameter(div);
+        DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter param = setBatchParameter(div);
         return ResponseData.of(param).respond();
     }
 
-    private ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter setBatchParameter(
+    private DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter setBatchParameter(
             ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-        ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter parameter
-                = new ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter();
+        DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter parameter
+                = new DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter();
         parameter.setSettingnendo(div.getDdlChoteiNendo().getSelectedKey());
         parameter.setTreatmentday(div.getTxtHonsanteiShoriYMD().getValue());
         parameter.setRegiondivision(div.getRadShichoson().getSelectedValue());
+        //TODO QA.1203
         parameter.setDantaiCd(null);
         parameter.setQkijund(div.getTxtShikakuKijunYMD().getValue());
         parameter.setAdjustedkijund(div.getTxtChoteiKijunYMD().getValue());

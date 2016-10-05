@@ -6,18 +6,18 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.InsKarisanteigakuHenkoTsuchishoHakkogoIdoshaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.InsNonyuTsuchishoHakkogoIdoshaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.InsTokuchouKaishiTutishoHakkougoIdoushaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.KarisanteiIdoTsuchishoTempCreatProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.KarisanteiIdoTsuchishoTempDropProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.PntKarisanteiNonyuTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.PntKarisanteigakuHenkoTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.PntTokuchouKaishiTutishoKarisanteiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.SystemTimeSyutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsKarisanteigakuHenkoTsuchishoHakkogoIdoshaProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsNonyuTsuchishoHakkogoIdoshaProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsTokuchouKaishiTutishoHakkougoIdoushaProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.KarisanteiIdoTsuchishoTempCreatProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.KarisanteiIdoTsuchishoTempDropProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntKarisanteiNonyuTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntKarisanteigakuHenkoTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntTokuchouKaishiTutishoKarisanteiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.SystemTimeSyutokuProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt36002.KarisanteiIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -73,7 +73,7 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
     private static final String 納入通知書仮算定発行 = "pntKarisanteiNonyuTsuchishoProcess";
     private static final String 納入通知書発行後異動者登録 = "insNonyuTsuchishoHakkogoIdoshaProcess";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private RString バッチフロー_帳票分類ID;
     private KarisanteiIdoFukaProcessParameter processParameter;
 
@@ -179,8 +179,8 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(バッチフロー_帳票分類ID)).define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(), getParameter().get賦課年度(),
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+        return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度(), getParameter().get賦課年度(),
                 null, ShoriName.仮算定異動賦課.get名称(), 帳票分類ID);
     }
 
@@ -248,15 +248,15 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
 
         RString 帳票タイプ = RString.EMPTY;
         if (ReportIdDBB.DBB100014.getReportId().equals(帳票ID) || ReportIdDBB.DBB100015.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100028.getReportId().equals(帳票ID) || ReportIdDBB.DBB100029.getReportId().equals(帳票ID)) {
+            || ReportIdDBB.DBB100028.getReportId().equals(帳票ID) || ReportIdDBB.DBB100029.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_期毎;
         } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID) || ReportIdDBB.DBB100019.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_銀振型4;
         } else if (ReportIdDBB.DBB100020.getReportId().equals(帳票ID) || ReportIdDBB.DBB100021.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100022.getReportId().equals(帳票ID) || ReportIdDBB.DBB100023.getReportId().equals(帳票ID)) {
+                   || ReportIdDBB.DBB100022.getReportId().equals(帳票ID) || ReportIdDBB.DBB100023.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_ブック;
         } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID) || ReportIdDBB.DBB100025.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100026.getReportId().equals(帳票ID) || ReportIdDBB.DBB100027.getReportId().equals(帳票ID)) {
+                   || ReportIdDBB.DBB100026.getReportId().equals(帳票ID) || ReportIdDBB.DBB100027.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_コンビニ;
         }
         return 帳票タイプ;

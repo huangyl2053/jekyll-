@@ -11,8 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KozaFurikaeOutputType;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.Kane
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.dgChushutsuKikan_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.dgShoriKakunin_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendo.HonsanteiIdoKanendo;
-import jp.co.ndensan.reams.db.dbb.service.core.tsuchisho.notsu.ShutsuryokuKiKohoFactory;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
@@ -101,7 +99,7 @@ public class KanendoFukaHandler {
         set抽出開始日時と終了日時(shoriDate3);
         set算定帳票作成();
         set対象賦課年度();
-        set帳票作成個別情報();
+        set帳票作成個別情報(div.getKanendoShoriNaiyo().getDdlShoritsuki().getSelectedKey());
         List<KeyValueDataSource> 対象者 = new ArrayList<>();
         List<KeyValueDataSource> 口座振替者 = new ArrayList<>();
         for (NotsuKozaShutsuryokuTaisho notko : NotsuKozaShutsuryokuTaisho.values()) {
@@ -126,16 +124,16 @@ public class KanendoFukaHandler {
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
-        RString 属する月 = new RString(String.valueOf(date.getMonthValue()));
-        dataSource.add(new KeyValueDataSource(属する月.padZeroToLeft(NUM_2), 属する月.concat(月分)));
+        RString 属する月 = new RString(date.getMonthValue()).padZeroToLeft(NUM_2);
+        dataSource.add(new KeyValueDataSource(属する月, 属する月.concat(月分)));
         if (日 < 境界日付 || date.getMonthValue() == NUM_3) {
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setDataSource(dataSource);
-            div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(属する月.padZeroToLeft(NUM_2));
+            div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(属する月);
         } else {
-            RString 翌月 = new RString(String.valueOf(date.plusMonth(NUM_1).getMonthValue()));
-            dataSource.add(new KeyValueDataSource(翌月.padZeroToLeft(NUM_2), 翌月.concat(月分)));
+            RString 翌月 = new RString(date.plusMonth(NUM_1).getMonthValue()).padZeroToLeft(NUM_2);
+            dataSource.add(new KeyValueDataSource(翌月, 翌月.concat(月分)));
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setDataSource(dataSource);
-            div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(翌月.padZeroToLeft(NUM_2));
+            div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(翌月);
         }
     }
 
@@ -245,45 +243,72 @@ public class KanendoFukaHandler {
 
     /**
      * set帳票作成個別情報
+     *
+     * @param 月 RString
      */
-    public void set帳票作成個別情報() {
-        try {
-            FuchoKiUtil util = new FuchoKiUtil();
-            KitsukiList 期月リスト = util.get期月リスト();
-            Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue((div.getKanendoShoriNaiyo().
-                    getDdlShoritsuki().getSelectedKey())));
-            List<HonsanteiIdoParameter> hoList = get各通知書の帳票ID();
-            FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                    RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
-            List<ChohyoResult> 帳票IDList = HonsanteiIdoKanendo.
-                    createInstance().getChohyoID(調定年度, new RString(月の期.get期AsInt()), hoList, ZERO_RS);
-            List<ShutsuryokuKiKoho> 出力期;
-            ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
-            RString 算定期 = 月の期.get期();
-            if (帳票IDList != null) {
-                boolean flag = false;
-                for (ChohyoResult result : 帳票IDList) {
-                    if (納入通知書.equals(result.get帳票ID())) {
-                        flag = true;
-                    }
-                }
-                出力期 = kohoFactory.create出力期候補(flag, 算定期);
-            } else {
-                出力期 = kohoFactory.create出力期候補(false, 算定期);
+    public void set帳票作成個別情報(RString 月) {
+        Kitsuki 月の期 = get月の期();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(月の期.get期(), get期名(月, 月の期.get期())));
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDataSource(dataSource);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getDdlNotsuShutsuryokuKi().setSelectedKey(月の期.get期());
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDisabled(true);
+
+    }
+
+    private Kitsuki get月の期() {
+        FuchoKiUtil util = new FuchoKiUtil();
+        KitsukiList 期月リスト = util.get期月リスト();
+        Kitsuki 最終法定納期 = 期月リスト.get最終法定納期();
+        for (Kitsuki 期月 : 期月リスト.toList()) {
+            if (期月.get期().compareTo(最終法定納期.get期()) > 0
+                    && 期月.get月().getコード().indexOf(new RString(Integer.valueOf(
+                                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
+                                            getSelectedKey().toString()).toString())) != -1) {
+                return 期月;
             }
-            List<KeyValueDataSource> dataSource = new ArrayList<>();
-            for (ShutsuryokuKiKoho entity : 出力期) {
-                if (div.getKanendoShoriNaiyo().getDdlShoritsuki().
-                        getSelectedKey().equals(entity.get期月().get月().getコード())) {
-                    dataSource.add(new KeyValueDataSource(entity.get期月().get月().getコード(), entity.get表示文字列()));
-                    div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDataSource(dataSource);
-                    div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                            getDdlNotsuShutsuryokuKi().setSelectedKey(div.getKanendoShoriNaiyo().getDdlShoritsuki().
-                                    getSelectedKey());
+        }
+        RDate sysTime = RDate.getNowDate();
+        return 期月リスト.get月の期(Tsuki.toValue(new RString(sysTime.getMonthValue()).padZeroToLeft(NUM_2)));
+    }
+
+    private RString get期名(RString 月, RString 期) {
+        return 期.concat(new RString("期（")).concat(月).concat(new RString("月）分"));
+    }
+
+    /**
+     * 帳票IDのチェック
+     */
+    public void get帳票IDのチェック() {
+        List<HonsanteiIdoParameter> hoList = get各通知書の帳票ID();
+        if (hoList == null || hoList.isEmpty()) {
+            return;
+        }
+        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
+        Kitsuki 月の期 = get月の期();
+        List<ChohyoResult> 帳票IDList = HonsanteiIdoKanendo.
+                createInstance().getChohyoID(調定年度, new RString(月の期.get期AsInt()), hoList, ZERO_RS);
+        Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        boolean 納入通知書Flag = false;
+        for (Map.Entry<RString, RString> entry : set) {
+            if (納入通知書.equals(entry.getKey())) {
+                納入通知書Flag = true;
+            }
+        }
+        if (帳票IDList != null) {
+            boolean flag = false;
+            for (ChohyoResult result : 帳票IDList) {
+                if (納入通知書.equals(result.get帳票分類ID().value())) {
+                    flag = true;
                 }
             }
-            div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDisabled(true);
-        } catch (ApplicationException e) {
+            if (!flag && 納入通知書Flag) {
+                throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
+            }
+        } else {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
         }
     }
@@ -444,12 +469,8 @@ public class KanendoFukaHandler {
         } else {
             parameter.set一括発行起動フラグ(false);
         }
-        FuchoKiUtil util = new FuchoKiUtil();
-        KitsukiList 期月リスト = util.get期月リスト();
-        Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue((div.getKanendoShoriNaiyo().
-                getDdlShoritsuki().getSelectedKey())));
-        RString 算定期 = 月の期.get期();
-        parameter.set算定期(算定期);
+        parameter.set算定期(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getDdlNotsuShutsuryokuKi().getSelectedKey());
         return parameter;
     }
 
@@ -461,18 +482,21 @@ public class KanendoFukaHandler {
     public List<HonsanteiIdoParameter> get各通知書の帳票ID() {
         Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
         List<HonsanteiIdoParameter> 出力帳票一覧 = new ArrayList<>();
-        HonsanteiIdoParameter chohyoMeter;
         Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
         for (Map.Entry<RString, RString> entry : set) {
-            chohyoMeter = new HonsanteiIdoParameter();
-            if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().isAllSelected()
+            if (決定変更通知書.equals(entry.getKey()) && div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                    getChkKetteiTsuchi().isAllSelected()
                     || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().isAllSelected()) {
+                HonsanteiIdoParameter chohyoMeter = new HonsanteiIdoParameter();
                 chohyoMeter.set帳票分類ID(決定変更通知書_帳票分類ID);
-            } else {
+                chohyoMeter.set出力順ID(entry.getValue());
+                出力帳票一覧.add(chohyoMeter);
+            } else if (納入通知書.equals(entry.getKey())) {
+                HonsanteiIdoParameter chohyoMeter = new HonsanteiIdoParameter();
                 chohyoMeter.set帳票分類ID(納入通知書_帳票分類ID);
+                chohyoMeter.set出力順ID(entry.getValue());
+                出力帳票一覧.add(chohyoMeter);
             }
-            chohyoMeter.set出力順ID(entry.getValue());
-            出力帳票一覧.add(chohyoMeter);
         }
         return 出力帳票一覧;
     }

@@ -8,21 +8,23 @@ package jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
+import jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu.ShotokuJohoChushutsuGamenParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112002.DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112004.DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShoriHizukeKanriMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -46,12 +48,10 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     private static final RString SPLIT = new RString("_");
     private static final RString 当初所得情報ファイル名 = new RString("DEC05F001");
     private static final RString 異動所得情報ファイル名 = new RString("DEE01F001");
-    private static final RString 共有ファイル名 = new RString("DEC05F001");
-    private static final RString 共有ファイルID = new RString("C:\\Users\\LDNS\\shared\\sharedFiles");
-    private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
-    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
     private static final RString 当初_広域 = new RString("1");
     private static final RString 異動_広域 = new RString("2");
+    private static final RString RSTRING_00 = new RString("00");
+    private static final RString RSTRING_0001 = new RString("0001");
 
     /**
      * コンストラクタです。
@@ -72,7 +72,8 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeiKoiki}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeiKoiki}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeiKoiki}のインスタンス
      */
     public static ShotokuJohoChushutsuRenkeiKoiki createInstance() {
         return InstanceProvider.create(ShotokuJohoChushutsuRenkeiKoiki.class);
@@ -95,8 +96,8 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity;
             kanriMasterEntity = new ShoriHizukeKanriMaster();
             if (遷移区分_0.equals(遷移区分)) {
-                処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_所得情報抽出連携当初(
-                        年度, entity.get市町村コード(), entity.get市町村識別ID());
+                処理日付管理異動情報Entity = 処理日付管理Dac.selectByKey(SubGyomuCode.DBB介護賦課, entity.get市町村コード(),
+                        ShoriName.当初所得引出.get名称(), RSTRING_00.concat(entity.get市町村識別ID()), 年度, RSTRING_0001);
                 if (処理日付管理異動情報Entity == null) {
                     kanriMasterEntity.set処理状態(処理済);
                     kanriMasterEntity.set表示用処理状態(正常終了);
@@ -138,27 +139,40 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     }
 
     /**
-     * バッチ用パラメータ作成します。
+     * 当初_広域 バッチ用パラメータ作成します。
      *
-     * @param parameter ShotokuJohoTyushutuRenkeiKoikiParameter
-     * @return ShotokuJohoBatchresultParameter
+     * @param parameter ShotokuJohoChushutsuGamenParameter
+     * @return DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter
      */
-    public ShotokuJohoBatchresultKoikiParameter createShotokuJohoParameter(
-            ShotokuJohoTyushutuRenkeiKoikiParameter parameter) {
-        ShotokuJohoBatchresultKoikiParameter result = new ShotokuJohoBatchresultKoikiParameter();
+    public DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter createShotokuJoho_DBB112002Parameter(
+            ShotokuJohoChushutsuGamenParameter parameter) {
+        DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter result = new DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter();
         result.set処理年度(parameter.get処理年度());
         result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
-        result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
-        result.set共有ファイル名(共有ファイル名);
-        result.set共有ファイルID(共有ファイルID);
-        RString メニューID = ResponseHolder.getMenuID();
-        if (所得情報抽出_連携当初.equals(メニューID)) {
-            result.set処理区分(当初_広域);
-        } else if (所得情報抽出_連携異動.equals(メニューID)) {
-            result.set処理区分(異動_広域);
-        }
-        result.set処理区分(parameter.get処理区分());
+        result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
+        result.set処理区分(当初_広域);
+        return result;
+    }
+
+    /**
+     * 異動_広域 バッチ用パラメータ作成します。
+     *
+     * @param parameter ShotokuJohoChushutsuGamenParameter
+     * @return DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter
+     */
+    public DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter createShotokuJoho_DBB112004Parameter(
+            ShotokuJohoChushutsuGamenParameter parameter) {
+        DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter result = new DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter();
+        result.set処理年度(parameter.get処理年度());
+        result.set市町村情報List(parameter.get市町村情報List());
+        result.set出力順ID(parameter.get出力順ID());
+        result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
+        result.set処理区分(異動_広域);
         return result;
     }
 

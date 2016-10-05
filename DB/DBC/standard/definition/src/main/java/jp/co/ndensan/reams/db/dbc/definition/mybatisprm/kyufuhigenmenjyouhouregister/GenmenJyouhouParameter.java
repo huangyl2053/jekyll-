@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -31,7 +30,6 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
     private final Decimal riyoshaFutangaku;
     private final Decimal serviceHiyoTotal;
     private final Decimal rirekiNo;
-    private final RString state;
 
     /**
      * コンストラクタです。
@@ -44,7 +42,6 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
      * @param riyoshaFutangaku 利用者負担額合計額
      * @param serviceHiyoTotal サービス費用合計額
      * @param rirekiNo 履歴番号
-     * @param state 状態
      */
     protected GenmenJyouhouParameter(HihokenshaNo hiHokenshaNo,
             HokenshaNo shokisaiHokenshaNo,
@@ -53,8 +50,7 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
             ServiceShuruiCode serviceShuruiCode,
             Decimal riyoshaFutangaku,
             Decimal serviceHiyoTotal,
-            Decimal rirekiNo,
-            RString state) {
+            Decimal rirekiNo) {
         this.hiHokenshaNo = hiHokenshaNo;
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
         this.serviceTeikyoYM = serviceTeikyoYM;
@@ -63,7 +59,6 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
         this.riyoshaFutangaku = riyoshaFutangaku;
         this.serviceHiyoTotal = serviceHiyoTotal;
         this.rirekiNo = rirekiNo;
-        this.state = state;
     }
 
     /**
@@ -77,7 +72,6 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
      * @param riyoshaFutangaku 利用者負担額合計額
      * @param serviceHiyoTotal サービス費用合計額
      * @param rirekiNo 履歴番号
-     * @param state 状態
      * @return GenmenJyouhouParameter
      */
     public static GenmenJyouhouParameter createByKeyParam(HihokenshaNo hiHokenshaNo,
@@ -87,8 +81,7 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
             ServiceShuruiCode serviceShuruiCode,
             Decimal riyoshaFutangaku,
             Decimal serviceHiyoTotal,
-            Decimal rirekiNo,
-            RString state) {
+            Decimal rirekiNo) {
         serviceShuruiCode = new ServiceShuruiCode(serviceShuruiCode.value().toString().substring(0, 2));
         return new GenmenJyouhouParameter(hiHokenshaNo,
                 shokisaiHokenshaNo,
@@ -97,7 +90,6 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
                 serviceShuruiCode,
                 riyoshaFutangaku,
                 serviceHiyoTotal,
-                Decimal.ONE,
-                state);
+                Decimal.ONE);
     }
 }

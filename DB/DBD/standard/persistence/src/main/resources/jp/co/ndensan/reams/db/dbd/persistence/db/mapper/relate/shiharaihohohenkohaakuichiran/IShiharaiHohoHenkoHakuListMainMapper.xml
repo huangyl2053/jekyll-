@@ -619,7 +619,7 @@
         LEFT JOIN "TainoCountermeasureTempTable" AS 滞納者対策情報一時テーブル
         ON 	支払方法変更情報一時テーブル."taisyo_hihokenshaNo" = 滞納者対策情報一時テーブル."hihokenshaNo"
         WHERE
-        支払方法変更情報一時テーブル."dbT4023_fukaNendo" <![CDATA[>=]]> #{業務コンフィグ_日付関連_調定年度}
+        支払方法変更情報一時テーブル."dbT2002_fukaNendo" <![CDATA[>=]]> #{業務コンフィグ_日付関連_調定年度}
         ORDER BY
         支払方法変更情報一時テーブル."taisyo_hihokenshaNo",
         収納状況一時テーブル."choteiNendo",

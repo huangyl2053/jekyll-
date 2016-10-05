@@ -138,7 +138,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
                         .set設定値(item.get設定値())
                         .set説明(item.get説明())
                         .set変更可否(item.is変更可否())
-                        .setコードマスタサブ業務コード(item.getサブ業務コード())
+                        .setコードマスタサブ業務コード(item.getコードマスタサブ業務コード())
                         .setコードマスタコード種別(item.getコードマスタコード種別()).build();
                 新帳票制御汎用List.add(帳票制御汎用);
             }

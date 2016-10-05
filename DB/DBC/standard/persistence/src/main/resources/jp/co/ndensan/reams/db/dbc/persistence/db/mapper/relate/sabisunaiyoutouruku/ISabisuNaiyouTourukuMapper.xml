@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-3320-010 chenhui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sabisunaiyoutouruku.ISabisuNaiyouTourukuMapper">
+    
+    <select id="getサービス内容" resultMap="resultMap_SabisuNaiyouTourukuEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sabisunaiyoutouruku.SabisuNaiyouTourukuMyBatisParameter"  fetchSize="500" resultOrdered="true">
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou"/>,
+            rgdb."DbT7131KaigoServiceNaiyou"."serviceShuruiCd" || rgdb."DbT7131KaigoServiceNaiyou"."serviceKoumokuCd" AS サービスコード,
+            T7130."serviceBunrruicode" AS サービス分類コード,
+            T7130."serviceShoBunrui" AS サービス小分類
+        FROM 
+            rgdb."DbT7131KaigoServiceNaiyou"
+        INNER JOIN 
+                rgdb."DbT7130KaigoServiceShurui" T7130
+             ON T7130."serviceShuruiCd" = rgdb."DbT7131KaigoServiceNaiyou"."serviceShuruiCd"
+             AND NOT EXISTS (
+                        SELECT 'X' FROM 
+                            rgdb."DbT7130KaigoServiceShurui" A  
+                         WHERE T7130."serviceShuruiCd" = A."serviceShuruiCd"
+                            AND A."teikyoKaishiYM" <![CDATA[>]]> T7130."teikyoKaishiYM" 
+            )
+         INNER JOIN   
+             rgdb."UzT0007Code" T0007_1
+             ON T0007_1."schemaName" = 'rgdb'
+             AND T0007_1."subGyomuCode" = 'DBC'
+             AND T0007_1."codeShubetsu" = '0027'
+             AND T0007_1.code = rgdb."DbT7131KaigoServiceNaiyou"."tanisuShikibetsuCode"
+         INNER JOIN   
+             rgdb."UzT0007Code" T0007_2
+             ON T0007_2."schemaName" = 'rgdb'
+             AND T0007_2."subGyomuCode" = 'DBC'
+             AND T0007_2."codeShubetsu" = '0025'
+             AND T0007_2.code = rgdb."DbT7131KaigoServiceNaiyou"."tanisuSanteiTaniCode"
+        INNER JOIN   
+             rgdb."UzT0007Code" T0007_3
+             ON T0007_3."schemaName" = 'rgdb'
+             AND T0007_3."subGyomuCode" = 'DBC'
+             AND T0007_3."codeShubetsu" = '0055'
+             AND T0007_3.code = rgdb."DbT7131KaigoServiceNaiyou"."idouJiyuCode"
+        WHERE 
+                rgdb."DbT7131KaigoServiceNaiyou"."serviceShuruiCd" = #{サービス種類コード}
+            AND rgdb."DbT7131KaigoServiceNaiyou"."serviceKoumokuCd" LIKE #{サービス項目コード}
+        ORDER BY     
+            "サービスコード" ASC,
+            rgdb."DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" DESC
+    </select>
+    
+    <resultMap id="resultMap_SabisuNaiyouTourukuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.sabisunaiyoutouruku.SabisuNaiyouTourukuEntity" autoMapping="true">
+        <id column="DbT7131KaigoServiceNaiyou_serviceShuruiCd"/>
+        <id column="DbT7131KaigoServiceNaiyou_serviceKoumokuCd"/>
+        <id column="DbT7131KaigoServiceNaiyou_teikyoKaishiYM"/>
+        <id column="DbT7131KaigoServiceNaiyou_rirekiNo"/>
+        <result property="サービス分類コード" column="サービス分類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス小分類" column="サービス小分類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="介護サービス内容" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"/>
+    </resultMap>
+</mapper>

@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FutanGendogakuNintei {
 
+    private static final int 編集後和暦年_元号年数まで = 3;
+
     /**
      * 初期化処理です。
      *
@@ -70,20 +72,20 @@ public class FutanGendogakuNintei {
 
         ArrayList<jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei> 表示リスト
                 = ViewStateHolder.get(ViewStateKeys.負担限度額認定申請の情報, ArrayList.class);
-        
+
         RString 被保険者番号 = div.getTxtHiddenHihokenshaNo();
         RString configValue = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        List<HikazeNenkinTaishosha> List非課税年金情報 = HikazeNenkinTaishoshaFinder.createInstance().
+        List<HikazeNenkinTaishosha> 非課税年金情報s = HikazeNenkinTaishoshaFinder.createInstance().
                 select非課税年金情報(被保険者番号, new RYear(configValue.toString()));
         RString 非課税年金情報;
-        String Str1 = "無(";
-        String Str2 = "有(";
-        String Str3 = "年度)";
-        RDate R年月日 = new RDate(configValue.toString().concat("0801"));
-        if (List非課税年金情報.isEmpty()) {
-            非課税年金情報 = new RString(Str1).concat(DateEditor.to和暦(R年月日).toString().substring(0, 3)).concat(Str3);
+        RString str1 = new RString("無(");
+        RString str2 = new RString("有(");
+        RString str3 = new RString("年度");
+        RDate 年月日 = new RDate(configValue.toString().concat("0801"));
+        if (非課税年金情報s.isEmpty()) {
+            非課税年金情報 = str1.concat(DateEditor.to和暦(年月日).toString().substring(0, 編集後和暦年_元号年数まで)).concat(str3);
         } else {
-            非課税年金情報 = new RString(Str2).concat(DateEditor.to和暦(R年月日).toString().substring(0, 3)).concat(Str3);
+            非課税年金情報 = str2.concat(DateEditor.to和暦(年月日).toString().substring(0, 編集後和暦年_元号年数まで)).concat(str3);
         }
         getHandler(div).詳細表示(表示リスト, 非課税年金情報);
         return ResponseData.of(div).respond();

@@ -24,4 +24,12 @@ public interface IHanyoListKogakuServiceHiMapper {
      */
     List<HanyouRisutoSyuturyokuEntity> selectAllデータ(HanyoListKogakuKaigoMybatisParameter parameter);
 
+    /**
+     * Mode データの取得
+     *
+     * @param parameter HanyouRisutoSyuturyokuMybatisParameter
+     * @return HanyouRisutoSyuturyokuEntity
+     */
+    List<HanyouRisutoSyuturyokuEntity> selectAllModeデータ(HanyoListKogakuKaigoMybatisParameter parameter);
+
 }

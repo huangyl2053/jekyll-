@@ -6,11 +6,11 @@
     <insert id="create過誤決定集計一時TBL">
         CREATE TEMP TABLE "DbWT3060KagoKetteiShukei"
         (
-        "hdrToriatsukaiYm" rshare."UDD014YM",
+        "hdrToriatsukaiYM" rshare."UDD014YM",
         "hdrRirekiNo" smallint,
-        "hdrShoHokenshaNo" rgdb."DbUDD003HokenshaNo",
-        "hdrShoHokenshaMei" character varying(40),
-        "sakuseiYmd" rshare."UDD015YMD",
+        "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "shoKisaiHokenshaName" character varying(40),
+        "sakuseiYMD" rshare."UDD015YMD",
         "kaigoKyufuhiKensu" integer,
         "kaigoKyufuhiTanisu" numeric(13,0),
         "kaigoKyufuhiFutangaku" numeric(13,0),
@@ -20,9 +20,9 @@
         "tokuteiNyushoshaServicehiKensu" integer,
         "tokuteiNyushoshaServicehiTanisu" numeric(13,0),
         "tokuteiNyushoshaServicehiFutangaku" numeric(13,0),
-        "hdrTorikomiYm" rshare."UDD014YM",
+        "hdrTorikomiYM" rshare."UDD014YM",
         "hokenshaNo" rgdb."DbUDD003HokenshaNo",
-        "hokenshaMei" character varying(40)
+        "hokenshaName" character varying(40)
         )
     </insert>
     
@@ -30,22 +30,22 @@
     <insert id="create過誤決定明細一時TBL">
         CREATE TEMP TABLE "DbWT3061KagoKetteiMeisai"
         (
-        "toriatsukaiYm" rshare."UDD014YM",
+        "toriatsukaiYM" rshare."UDD014YM",
         "rirekiNo" smallint,
         "renban" smallint,
         "jigyoshoNo" rgdb."DbUDD004JigyoshaNo",
-        "jigyoshoMei" character varying(40),
+        "jigyoshoName" character varying(40),
         "kohiFutanshaNo" character varying(40),
         "kohiJukyushaNo" character varying(40),
         "kohiShokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
-        "serviceTeikyoYm" rshare."UDD014YM",
+        "serviceTeikyoYM" rshare."UDD014YM",
         "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
         "serviceShuruiName" character varying(40),
         "kagomoushitateJiyuCode" rshare."UDD035Code",
         "kagomoushitateJiyu" character varying(40),
         "tanisu" numeric(13,0),
         "hokenshaFutangaku" numeric(13,0),
-        "torikomiYm" rshare."UDD014YM"
+        "torikomiYM" rshare."UDD014YM"
         )
     </insert>
     

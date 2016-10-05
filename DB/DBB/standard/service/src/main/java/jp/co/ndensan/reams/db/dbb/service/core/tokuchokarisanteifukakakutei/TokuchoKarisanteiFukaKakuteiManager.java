@@ -102,7 +102,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     public int updateKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
         if (処理名.equals(ShoriName.特徴仮算定賦課確定.get名称())
                 || 処理名.equals(ShoriName.普徴仮算定賦課確定.get名称()) || 処理名.equals(ShoriName.本算定賦課確定.get名称())) {
-            List<DbT7022ShoriDateKanriEntity> entityList = 介護賦課Dac.select処理状況_通知書作成(賦課年度, 処理名);
+            List<DbT7022ShoriDateKanriEntity> entityList = 介護賦課Dac.select処理状況(賦課年度, 処理名, 最大年度内連番);
             entityList.get(0).setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
             entityList.get(0).setState(EntityDataState.Modified);
             return 介護賦課Dac.save(entityList.get(0));

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import java.io.Serializable;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufuJissekiCommonHeader {
+public class KyufuJissekiCommonHeader implements Serializable {
+
+    private static final long serialVersionUID = -8491925320782267526L;
 
     private List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1;
     private List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2;

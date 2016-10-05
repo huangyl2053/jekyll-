@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 前年度賦課Temp
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ZennNenndoFukaTempEntity implements Serializable {
+public class ZennNenndoFukaTempEntity implements IDbAccessable, Serializable {
 
     private FlexibleYear choteiNendo;
     private FlexibleYear fukaNendo;

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.view.ShisetsuNyutaishoAlive;
 import jp.co.ndensan.reams.db.dbx.business.core.view.TashichosonJushochiTokureiAlive;
 import jp.co.ndensan.reams.db.dbx.business.core.view.TekiyoJogaishaAlive;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
@@ -43,9 +44,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
  */
 public class KaigoSikakuTokusouHandler {
 
-    private static final RString 施設種類_11 = new RString("11");
-    private static final RString 事業者種別_01 = new RString("01");
-    private static final RString 事業者種別_02 = new RString("02");
     private final KaigoSikakuTokusouDiv div;
 
     /**
@@ -76,7 +74,7 @@ public class KaigoSikakuTokusouHandler {
      */
     public void set被保険者(HihokenshaDaichoAlive hihokenshadaicho) {
         if (hihokenshadaicho != null) {
-            if (hihokenshadaicho.get資格取得年月日() != null) {
+            if (hihokenshadaicho.get資格取得年月日() != null && !hihokenshadaicho.get資格取得年月日().isEmpty()) {
                 div.getSyutokuYYMMDD().setValue(new RDate(hihokenshadaicho.get資格取得年月日().toString()));
             }
             if (hihokenshadaicho.get資格取得事由コード() != null) {
@@ -88,13 +86,13 @@ public class KaigoSikakuTokusouHandler {
             if (hihokenshadaicho.get市町村コード() != null) {
                 div.getSyozaiHokensya().setValue(hihokenshadaicho.get市町村コード().value());
             }
-            if (hihokenshadaicho.get資格喪失年月日() != null) {
+            if (hihokenshadaicho.get資格喪失年月日() != null && !hihokenshadaicho.get資格喪失年月日().isEmpty()) {
                 div.getSosituYYMMDD().setValue(new RDate(hihokenshadaicho.get資格喪失年月日().toString()));
             }
             if (hihokenshadaicho.get資格喪失事由コード() != null) {
                 div.getSosituJiyu().setValue(ShikakuSoshitsuJiyu.toValue(hihokenshadaicho.get資格喪失事由コード()).get名称());
             }
-            if (hihokenshadaicho.get適用年月日() != null) {
+            if (hihokenshadaicho.get適用年月日() != null && !hihokenshadaicho.get適用年月日().isEmpty()) {
                 div.getJyusyoTokureiTekiyouYYMMDD().setValue(new RDate(hihokenshadaicho.get適用年月日().toString()));
             }
             if (hihokenshadaicho.get住所地特例適用事由コード() != null) {
@@ -104,21 +102,7 @@ public class KaigoSikakuTokusouHandler {
             if (hihokenshadaicho.get旧市町村コード() != null) {
                 div.getKyuHokensya().setValue(hihokenshadaicho.get旧市町村コード().value());
             }
-            if (hihokenshadaicho.get資格変更年月日() != null) {
-                div.getHenkoYYMMDD().setValue(new RDate(hihokenshadaicho.get資格変更年月日().toString()));
-            }
-            if (hihokenshadaicho.get資格変更事由コード() != null) {
-                div.getHenkoJiyu().setValue(ShikakuHenkoJiyu.toValue(hihokenshadaicho.get資格変更事由コード()).get名称());
-            }
-            if (hihokenshadaicho.get解除年月日() != null) {
-                div.getJyusyoTokureiKaijoYYMMDD().setValue(new RDate(hihokenshadaicho.get解除年月日().toString()));
-            }
-            if (hihokenshadaicho.get住所地特例解除事由コード() != null) {
-                div.getJyusyoTokureiKaijoJiyu().setValue(ShikakuJutokuKaijoJiyu.toValue(hihokenshadaicho.get住所地特例解除事由コード()).get名称());
-            }
-            if (hihokenshadaicho.get広住特措置元市町村コード() != null) {
-                div.getHiroSotiMotoHokensya().setValue(hihokenshadaicho.get広住特措置元市町村コード().value());
-            }
+            set被保険者1(hihokenshadaicho);
         }
     }
 
@@ -129,7 +113,7 @@ public class KaigoSikakuTokusouHandler {
      */
     public void set施設入退所(ShisetsuNyutaishoAlive shisetsunyutaisho) {
         if (shisetsunyutaisho != null) {
-            if (shisetsunyutaisho.get入所年月日() != null) {
+            if (shisetsunyutaisho.get入所年月日() != null && !shisetsunyutaisho.get入所年月日().isEmpty()) {
                 div.getNyusyoYYMMDD().setValue(new RDate(shisetsunyutaisho.get入所年月日().toString()));
             }
             if (shisetsunyutaisho.get台帳種別() != null) {
@@ -138,14 +122,15 @@ public class KaigoSikakuTokusouHandler {
             if (shisetsunyutaisho.get入所施設種類() != null) {
                 div.getSisetuSyubetu().setValue(ShisetsuType.toValue(shisetsunyutaisho.get入所施設種類()).get名称());
             }
-            if (shisetsunyutaisho.get退所年月日() != null) {
+            if (shisetsunyutaisho.get退所年月日() != null && !shisetsunyutaisho.get退所年月日().isEmpty()) {
                 div.getTaisyoYYMMDD().setValue(new RDate(shisetsunyutaisho.get退所年月日().toString()));
             }
             if (shisetsunyutaisho.get入所施設コード() != null) {
                 div.getNyusyoSisetuCode().setValue(shisetsunyutaisho.get入所施設コード().value());
             }
             if (shisetsunyutaisho.get入所施設コード() != null) {
-                div.getHokaSityosonSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value()));
+                div.getNyusyoSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value(),
+                        shisetsunyutaisho.get入所施設種類()));
             }
         }
     }
@@ -158,7 +143,7 @@ public class KaigoSikakuTokusouHandler {
      */
     public void set他市町村住所地特例情報(TashichosonJushochiTokureiAlive tashichosonjushochitokurei, ShikibetsuCode 識別コード) {
         if (tashichosonjushochitokurei != null) {
-            if (tashichosonjushochitokurei.get適用年月日() != null) {
+            if (tashichosonjushochitokurei.get適用年月日() != null && !tashichosonjushochitokurei.get適用年月日().isEmpty()) {
                 div.getHokaSityosonTekiyoYYMMDD().setValue(new RDate(tashichosonjushochitokurei.get適用年月日().toString()));
             }
             if (tashichosonjushochitokurei.get他市町村住所地特例適用事由コード() != null) {
@@ -171,7 +156,7 @@ public class KaigoSikakuTokusouHandler {
             if (tashichosonjushochitokurei.get措置被保険者番号() != null) {
                 div.getSotiMotoHihokensya().setValue(tashichosonjushochitokurei.get措置被保険者番号().value());
             }
-            if (tashichosonjushochitokurei.get解除年月日() != null) {
+            if (tashichosonjushochitokurei.get解除年月日() != null && !tashichosonjushochitokurei.get解除年月日().isEmpty()) {
                 div.getHokaSityosonKaijoYYMMDD().setValue(new RDate(tashichosonjushochitokurei.get解除年月日().toString()));
             }
             if (tashichosonjushochitokurei.get他市町村住所地特例解除事由コード() != null) {
@@ -179,7 +164,7 @@ public class KaigoSikakuTokusouHandler {
                         get他市町村住所地特例解除事由コード()).get名称());
             }
         }
-        ShisetsuNyutaishoAlive shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード,
+        ShisetsuNyutaisho shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード,
                 DaichoType.他市町村住所地特例者.getコード());
         if (shisetsunyutaisho != null) {
             if (shisetsunyutaisho.get入所施設種類() != null) {
@@ -189,7 +174,8 @@ public class KaigoSikakuTokusouHandler {
                 div.getHokaSityosonSisetuCode().setValue(shisetsunyutaisho.get入所施設コード().value());
             }
             if (shisetsunyutaisho.get入所施設コード() != null) {
-                div.getNyusyoSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value()));
+                div.getHokaSityosonSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value(),
+                        shisetsunyutaisho.get入所施設種類()));
             }
         }
     }
@@ -202,20 +188,20 @@ public class KaigoSikakuTokusouHandler {
      */
     public void set適用除外者情報(TekiyoJogaishaAlive tekiyojogaisha, ShikibetsuCode 識別コード) {
         if (tekiyojogaisha != null) {
-            if (tekiyojogaisha.get適用年月日() != null) {
+            if (tekiyojogaisha.get適用年月日() != null && !tekiyojogaisha.get適用年月日().isEmpty()) {
                 div.getTekiyoJyogaisyaTekiyoYYMMDD().setValue(new RDate(tekiyojogaisha.get適用年月日().toString()));
             }
             if (tekiyojogaisha.get適用除外適用事由コード() != null) {
                 div.getTekiyoJyogaisyaTekiyouJiyu().setValue(JogaiTekiyoJiyu.toValue(tekiyojogaisha.get適用除外適用事由コード()).get名称());
             }
-            if (tekiyojogaisha.get解除年月日() != null) {
+            if (tekiyojogaisha.get解除年月日() != null && !tekiyojogaisha.get解除年月日().isEmpty()) {
                 div.getTekiyoJyogaisyaKaijoYYMMDD().setValue(new RDate(tekiyojogaisha.get解除年月日().toString()));
             }
             if (tekiyojogaisha.get適用除外解除事由コード() != null) {
                 div.getTekiyoJyogaisyaKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(tekiyojogaisha.get適用除外解除事由コード()).get名称());
             }
         }
-        ShisetsuNyutaishoAlive shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード, DaichoType.適用除外者.getコード());
+        ShisetsuNyutaisho shisetsunyutaisho = SoyoSyokaiService.createInstance().get施設入退所Order(識別コード, DaichoType.適用除外者.getコード());
         if (shisetsunyutaisho != null) {
             if (shisetsunyutaisho.get入所施設種類() != null) {
                 div.getTekiyoJyogaisyaSisetuSyubetu().setValue(ShisetsuType.toValue(shisetsunyutaisho.get入所施設種類()).get名称());
@@ -224,26 +210,27 @@ public class KaigoSikakuTokusouHandler {
                 div.getTekiyoJyogaisyaSisetuCode().setValue(shisetsunyutaisho.get入所施設コード().value());
             }
             if (shisetsunyutaisho.get入所施設コード() != null) {
-                div.getTekiyoJyogaisyaSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value()));
+                div.getTekiyoJyogaisyaSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value(),
+                        shisetsunyutaisho.get入所施設種類()));
             }
         }
     }
 
-    private RString set事業者名称(RString 入所施設コード) {
-        if (施設種類_11.equals(ShisetsuType.介護保険施設.getコード())) {
+    private RString set事業者名称(RString 入所施設コード, RString 入所施設種類) {
+        if (入所施設種類.equals(ShisetsuType.介護保険施設.getコード())) {
             KaigoJigyosha kaigoJigyosha = SoyoSyokaiService.createInstance().get事業者名称_入所施設コード(入所施設コード);
             if (kaigoJigyosha != null && kaigoJigyosha.get事業者名称() != null) {
                 return new RString(kaigoJigyosha.get事業者名称().toString());
             }
             return RString.EMPTY;
-        } else if (事業者種別_01.equals(JigyosyaType.住所地特例対象施設.getコード())) {
+        } else if (入所施設種類.equals(ShisetsuType.住所地特例対象施設.getコード())) {
             KaigoJogaiTokureiTaishoShisetsu tokureitaishoshisetsu = SoyoSyokaiService.createInstance().
                     get事業者名称_住所地特例対象施設(入所施設コード, JigyosyaType.住所地特例対象施設.getコード());
             if (tokureitaishoshisetsu != null && tokureitaishoshisetsu.get事業者名称() != null) {
                 return new RString(tokureitaishoshisetsu.get事業者名称().toString());
             }
             return RString.EMPTY;
-        } else if (事業者種別_02.equals(JigyosyaType.適用除外施設.getコード())) {
+        } else if (入所施設種類.equals(ShisetsuType.適用除外施設.getコード())) {
             KaigoJogaiTokureiTaishoShisetsu tokureitaishoshisetsu = SoyoSyokaiService.createInstance()
                     .get事業者名称_住所地特例対象施設(入所施設コード, JigyosyaType.適用除外施設.getコード());
             if (tokureitaishoshisetsu != null && tokureitaishoshisetsu.get事業者名称() != null) {
@@ -258,5 +245,25 @@ public class KaigoSikakuTokusouHandler {
     private PersonalData toPersonalData(TaishoshaKey key) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), key.get被保険者番号().value());
         return PersonalData.of(key.get識別コード(), expandedInfo);
+    }
+
+    private void set被保険者1(HihokenshaDaichoAlive hihokenshadaicho) {
+        if (hihokenshadaicho != null) {
+            if (hihokenshadaicho.get資格変更年月日() != null && !hihokenshadaicho.get資格変更年月日().isEmpty()) {
+                div.getHenkoYYMMDD().setValue(new RDate(hihokenshadaicho.get資格変更年月日().toString()));
+            }
+            if (hihokenshadaicho.get資格変更事由コード() != null) {
+                div.getHenkoJiyu().setValue(ShikakuHenkoJiyu.toValue(hihokenshadaicho.get資格変更事由コード()).get名称());
+            }
+            if (hihokenshadaicho.get解除年月日() != null && !hihokenshadaicho.get解除年月日().isEmpty()) {
+                div.getJyusyoTokureiKaijoYYMMDD().setValue(new RDate(hihokenshadaicho.get解除年月日().toString()));
+            }
+            if (hihokenshadaicho.get住所地特例解除事由コード() != null) {
+                div.getJyusyoTokureiKaijoJiyu().setValue(ShikakuJutokuKaijoJiyu.toValue(hihokenshadaicho.get住所地特例解除事由コード()).get名称());
+            }
+            if (hihokenshadaicho.get広住特措置元市町村コード() != null) {
+                div.getHiroSotiMotoHokensya().setValue(hihokenshadaicho.get広住特措置元市町村コード().value());
+            }
+        }
     }
 }

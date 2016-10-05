@@ -169,23 +169,19 @@ public class HihokenshaShoBatchPrm {
         RDate konkaiChushutsuToYMD = div.getTxtKonkaiChushutsuToYMD().getValue();
         RTime konkaiChushutsuToTime = div.getTxtKonkaiChushutsuToTime().getValue();
         if ((JYUKYUMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())
-             && (konkaiChushutsuFromYMD != null && konkaiChushutsuFromTime != null && zenkaiShoriKijunYMD != null && zenkaiShoriKijunTime != null)
-             && (zenkaiShoriKijunYMD.isBefore(konkaiChushutsuFromYMD)
-             || (konkaiChushutsuFromYMD.equals(zenkaiShoriKijunYMD) && zenkaiShoriKijunTime.isBefore(konkaiChushutsuFromTime)))) {
+            && has開始日Changed(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, zenkaiShoriKijunYMD, zenkaiShoriKijunTime)) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if ((GAITOMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if ((konkaiChushutsuFromYMD != null && konkaiChushutsuFromTime != null && zenkaiShoriKijunYMD != null && zenkaiShoriKijunTime != null)
-                 && (zenkaiShoriKijunYMD.isBefore(konkaiChushutsuFromYMD)
-                 || (konkaiChushutsuFromYMD.equals(zenkaiShoriKijunYMD) && zenkaiShoriKijunTime.isBefore(konkaiChushutsuFromTime)))) {
+            if (has開始日Changed(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, zenkaiShoriKijunYMD, zenkaiShoriKijunTime)) {
                 validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
             }
-            if ((konkaiChushutsuToYMD != null && konkaiChushutsuToTime != null && konkaiShoriKijunYMD != null && konkaiShoriKijunTime != null)
-                 && (konkaiChushutsuToYMD.isBefore(konkaiShoriKijunYMD)
-                 || (konkaiChushutsuToYMD.equals(konkaiShoriKijunYMD) && konkaiChushutsuToTime.isBefore(konkaiShoriKijunTime)))) {
+            if (isNoneAbsent(konkaiChushutsuToYMD, konkaiChushutsuToTime, konkaiShoriKijunYMD, konkaiShoriKijunTime)
+                && (konkaiChushutsuToYMD.isBefore(konkaiShoriKijunYMD)
+                    || (konkaiChushutsuToYMD.equals(konkaiShoriKijunYMD) && konkaiChushutsuToTime.isBefore(konkaiShoriKijunTime)))) {
                 validationMessages.add(getHandlerValidation(div).終了日変更のチェック());
             }
             if (validationMessages.iterator().hasNext()) {
@@ -193,14 +189,29 @@ public class HihokenshaShoBatchPrm {
             }
         }
         if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())
-             && (konkaiChushutsuFromYMD != null && konkaiChushutsuFromTime != null && konkaiChushutsuToYMD != null && konkaiChushutsuToTime != null)
-             && (konkaiChushutsuToYMD.isBefore(konkaiChushutsuFromYMD)
-             || (konkaiChushutsuToYMD.equals(konkaiChushutsuFromYMD) && konkaiChushutsuToTime.isBefore(konkaiChushutsuFromTime)))) {
+            && isNoneAbsent(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, konkaiChushutsuToYMD, konkaiChushutsuToTime)
+            && (konkaiChushutsuToYMD.isBefore(konkaiChushutsuFromYMD)
+                || (konkaiChushutsuToYMD.equals(konkaiChushutsuFromYMD) && konkaiChushutsuToTime.isBefore(konkaiChushutsuFromTime)))) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandlerValidation(div).開始日と終了日の比較チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean has開始日Changed(RDate konkaiChushutsuFromYMD, RTime konkaiChushutsuFromTime, RDate zenkaiShoriKijunYMD, RTime zenkaiShoriKijunTime) {
+        return isNoneAbsent(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, zenkaiShoriKijunYMD, zenkaiShoriKijunTime)
+               && (zenkaiShoriKijunYMD.isBefore(konkaiChushutsuFromYMD)
+                   || (konkaiChushutsuFromYMD.equals(zenkaiShoriKijunYMD) && zenkaiShoriKijunTime.isBefore(konkaiChushutsuFromTime)));
+    }
+
+    private boolean isNoneAbsent(Object... values) {
+        for (Object o : values) {
+            if (o == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private FlexibleDate getFlexibleDate(RDate date) {

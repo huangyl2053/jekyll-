@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD8010002
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
@@ -37,6 +37,8 @@ public class HikazeiNenkinTaishoshaJoho {
 
     private static final RString DBDMN81002 = new RString("DBDMN81002");
     private final RString 単一保険者 = new RString("2");
+    private final RString 非課税年金対象者情報取込 = new RString("非課税年金対象者情報取込");
+    private final RString 遡及非課税年金対象者同定 = new RString("遡及非課税年金対象者同定");
 
     /**
      * 画面初期化処理です。
@@ -55,6 +57,24 @@ public class HikazeiNenkinTaishoshaJoho {
             return ResponseData.of(div).setState(DBD8010002StateName.非課税年金対象者情報_広域用);
         } else if (DBD8010002StateName.遡及非課税年金対象者同定.getName().equals(div.getHdnState())) {
             return ResponseData.of(div).setState(DBD8010002StateName.遡及非課税年金対象者同定);
+
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面初期化処理です。
+     *
+     * @param div JissiJyokyohyoDiv
+     * @return ResponseData<HikazeiNenkinTaishoshaJohoDiv>
+     */
+    public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onStateTransition(HikazeiNenkinTaishoshaJohoDiv div) {
+        if (DBD8010002StateName.非課税年金対象者情報_単一用.getName().equals(div.getHdnState())) {
+            return ResponseData.of(div).rootTitle(非課税年金対象者情報取込).respond();
+        } else if (DBD8010002StateName.非課税年金対象者情報_広域用.getName().equals(div.getHdnState())) {
+            return ResponseData.of(div).rootTitle(非課税年金対象者情報取込).respond();
+        } else if (DBD8010002StateName.遡及非課税年金対象者同定.getName().equals(div.getHdnState())) {
+            return ResponseData.of(div).rootTitle(遡及非課税年金対象者同定).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -111,10 +131,10 @@ public class HikazeiNenkinTaishoshaJoho {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 
             if (単一保険者.equals(getHandler(div).広域と市町村判断())) {
-                getValidationHandler(div).validateFor処理状態(pairs);
+                getValidationHandler(div).validateFor処理状態単一(pairs);
                 getValidationHandler(div).validateForアップロード済みファイル名(pairs);
             } else {
-                getValidationHandler(div).validateFor処理状態(pairs);
+                getValidationHandler(div).validateFor処理状態広域(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);
             }
             if (pairs.iterator().hasNext()) {
@@ -139,7 +159,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * @param div JissiJyokyohyoDiv
      * @return HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter
      */
-    public ResponseData<HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter> createDBD301010BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
+    public ResponseData<DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter> createDBD301010BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
 
         List<RString> 構成市町村コードリスト = ViewStateHolder.
                 get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
@@ -153,7 +173,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * @param div JissiJyokyohyoDiv
      * @return SokyuHikazeiNenkinBatchParameter
      */
-    public ResponseData<SokyuHikazeiNenkinBatchParameter> createDBD301020BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
+    public ResponseData<DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter> createDBD301020BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
 
         return ResponseData.of(getHandler(div).createDBD301020BatchParamter(div)).respond();
     }
@@ -211,6 +231,12 @@ public class HikazeiNenkinTaishoshaJoho {
      * @return ResponseData
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onSelectBySelectButton(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        div.getTxtShoriNendo().clearValue();
+        div.getTxtTuki().clearValue();
+        div.getTxtShori().clearValue();
+        div.getTxtFuairuMei().clearValue();
+
         setDisplayOrOpen(div, true);
         return ResponseData.of(div).respond();
     }
@@ -227,7 +253,7 @@ public class HikazeiNenkinTaishoshaJoho {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         if (files.length > 0) {
-            getValidationHandler(div).validateFor処理状態(pairs);
+            getValidationHandler(div).validateFor処理状態単一(pairs);
             getValidationHandler(div).validateForアップロードファイル未指定(pairs);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -240,8 +266,8 @@ public class HikazeiNenkinTaishoshaJoho {
             ValidationMessageControlPairs newPairs = new ValidationMessageControlPairs();
             getValidationHandler(div).validateFor年次ファイル通知内容(newPairs);
             getValidationHandler(div).validateFor月次ファイル通知内容(newPairs);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            if (newPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(newPairs).respond();
             }
 
             Message message = getValidationHandler(div).validate作成年月日();

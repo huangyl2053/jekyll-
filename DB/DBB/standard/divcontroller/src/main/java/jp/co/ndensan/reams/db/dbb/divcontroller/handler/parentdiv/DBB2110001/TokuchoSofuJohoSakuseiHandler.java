@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosofu.TokuChoSoufuJohoSakuseiParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchosofu.TokuChoSoufuJohoSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001.DBB211001_TokuchoSofuJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchosofu.TokuChoSoufuJohoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -457,9 +457,9 @@ public final class TokuchoSofuJohoSakuseiHandler {
     /**
      * 「実行」ボタンを押下して、バッチパラメータを設定します。
      *
-     * @return TokuChoSoufuJohoSakuseiBatchParameter
+     * @return DBB211001_TokuchoSofuJohoSakuseiParameter
      */
-    public TokuChoSoufuJohoSakuseiBatchParameter getバッチパラメータ() {
+    public DBB211001_TokuchoSofuJohoSakuseiParameter getバッチパラメータ() {
         TokuChoSoufuJohoSakusei manager = TokuChoSoufuJohoSakusei.createInstance();
         TokuChoSoufuJohoSakuseiParameter param = new TokuChoSoufuJohoSakuseiParameter();
         param.set賦課年度(new RDate(div.getDdlFukaNendo().getSelectedValue().toString()).getYear());

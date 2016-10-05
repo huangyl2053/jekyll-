@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshoshujiiichiran.IkenshoShujiiIchiranProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE591001.IkenshoShujiiIchiranProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE591001.DBE591001_IryokikanShujiiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

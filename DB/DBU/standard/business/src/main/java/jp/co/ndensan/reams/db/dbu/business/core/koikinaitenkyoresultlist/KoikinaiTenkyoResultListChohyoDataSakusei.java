@@ -32,7 +32,6 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
      * @return List
      */
     public List<KoikinaiTenkyoResultEntity> getKoikinai(KoikinaiTenkyoListEntity entity) {
-
         List<KoikinaiTenkyoResultEntity> lists = new ArrayList<>();
         if (entity.getEntity() == null || entity.getEntity().isEmpty()) {
             KoikinaiTenkyoResultEntity koikiEntity = new KoikinaiTenkyoResultEntity();
@@ -41,17 +40,13 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
             koikiEntity.setページ数(new RString(Integer.valueOf(1).toString()));
             koikiEntity.set市町村コード(entity.get市町村コード().value());
             koikiEntity.set市町村名(entity.get市町村名());
-
             lists.add(koikiEntity);
             return lists;
-
         } else {
             for (KoikinaiTenkyoEntity kokiten : entity.getEntity()) {
-
                 KoikinaiTenkyoResultEntity koikiEntity = new KoikinaiTenkyoResultEntity();
                 koikiEntity.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                         separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(" 00:00:00"));
-                //TODO ページ数具体怎么获取不明确
                 koikiEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
                 koikiEntity.set市町村名(entity.get市町村名());
                 if (kokiten.get被保険者番号() != null) {
@@ -84,7 +79,6 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
                     koikiEntity.set処理日(kokiten.get処理日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                             separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
                 }
-
                 if (kokiten.get氏名() != null) {
                     koikiEntity.set氏名(new RString(kokiten.get氏名().toString()));
                 }
@@ -105,12 +99,9 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
                 if (kokiten.get異動情報() != null) {
                     koikiEntity.set異動情報(new RString(kokiten.get異動情報().toString()));
                 }
-
                 lists.add(koikiEntity);
             }
-
             return lists;
         }
     }
-
 }

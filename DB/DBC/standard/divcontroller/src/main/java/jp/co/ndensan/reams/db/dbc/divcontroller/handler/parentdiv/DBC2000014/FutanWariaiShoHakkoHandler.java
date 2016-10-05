@@ -125,9 +125,7 @@ public class FutanWariaiShoHakkoHandler {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             div.getPanelJoken().getRadKubun().setDisabledItem(dataSource);
             setRadKubun();
-            div.getPanelJoken().getRadKubun().setSelectedKey(ONE);
             setRadHakkoKubun();
-            div.getPanelJoken().getRadHakkoKubun().setSelectedKey(ZERO);
         } else if (ONE.equals(今回処理区分)) {
             setRadKubun();
             setDisableRadKubun();
@@ -135,8 +133,7 @@ public class FutanWariaiShoHakkoHandler {
             setRadHakkoKubun();
             div.getPanelJoken().getRadHakkoKubun().setSelectedKey(TWO);
         }
-        抽出期間の設定(年度, ONE, 今回処理区分);
-
+        抽出期間の設定(年度, 出力対象, 今回処理区分);
     }
 
     private void setDisableRadKubun() {

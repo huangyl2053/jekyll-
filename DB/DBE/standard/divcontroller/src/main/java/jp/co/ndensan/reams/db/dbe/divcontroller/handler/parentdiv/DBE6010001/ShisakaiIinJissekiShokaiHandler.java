@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiran;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001.DBE601001_IkenshoSakuseiJIssekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
@@ -115,8 +115,8 @@ public class ShisakaiIinJissekiShokaiHandler {
      * @param 帳票出力区分 帳票出力区分
      * @return バッチパラメータ
      */
-    public ShinsaiinJissekiIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
-        ShinsaiinJissekiIchiranBatchParameter param = new ShinsaiinJissekiIchiranBatchParameter();
+    public DBE601001_IkenshoSakuseiJIssekiParameter createBatchParam(RString 帳票出力区分) {
+        DBE601001_IkenshoSakuseiJIssekiParameter param = new DBE601001_IkenshoSakuseiJIssekiParameter();
         List<ShinsaiinJissekiIchiranKey> keyJoho = new ArrayList<>();
         for (dgShisakaiIinJisseki_Row row : div.getDgShisakaiIinJisseki().getSelectedItems()) {
             if (row.getSelected()) {

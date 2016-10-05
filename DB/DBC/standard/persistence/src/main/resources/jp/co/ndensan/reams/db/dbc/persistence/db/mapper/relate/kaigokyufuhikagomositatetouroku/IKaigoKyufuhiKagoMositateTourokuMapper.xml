@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2220-030 dongyabin -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufuhikagomositatetouroku.IKaigoKyufuhiKagoMositateTourokuMapper">
+    
+    <resultMap id="resultMap_KaigoKyufuhiKagoMositateTourokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuEntity" autoMapping="true">
+        <id property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="様式番号" column="様式番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="審査年月" column="審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績作成区分コード" column="給付実績作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付区分" column="給付区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="行番号" column="行番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="事業者名" column="事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbT3059" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.ResultMap_DbT3059KagoMoshitateEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id = "get給付実績一覧" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomositatetouroku.KaigoKyufuhiParamter"
+            resultMap="resultMap_KaigoKyufuhiKagoMositateTourokuEntity"
+            fetchSize="500">
+        WITH master AS ( 
+        SELECT
+          給付実績情報.*
+          , 過誤申立情報.*
+          , 介護事業者A."jigyoshaName" AS 事業者名
+          , 被保険者台帳."shikibetsuCode" AS 識別コード
+        FROM
+          ( 
+            SELECT
+              * 
+            FROM
+              ( 
+                SELECT
+                  基本."jigyoshoNo" AS 事業所番号
+                  , 基本."hiHokenshaNo" AS 被保険者番号
+                  , 識別番号."kagoMoshitateYoshikiNo" AS 様式番号
+                  , 基本."serviceTeikyoYM" AS サービス提供年月
+                  , 基本."shinsaYM" AS 審査年月
+                  , 基本."kyufuSakuseiKubunCode" AS 給付実績作成区分コード
+                  , 識別番号."kyufuBunruiKubun" AS 給付区分
+                  , 基本."shokisaiHokenshaNo" AS 証記載保険者番号
+                  , ROW_NUMBER() OVER ( 
+                    PARTITION BY
+                      基本."jigyoshoNo"
+                      , 基本."hiHokenshaNo"
+                      , 識別番号."kagoMoshitateYoshikiNo"
+                      , 基本."serviceTeikyoYM" 
+                    ORDER BY
+                      基本."shinsaYM" DESC
+                  ) AS 行番号 
+                FROM
+                  rgdb."DbT3017KyufujissekiKihon" AS 基本
+                  , rgdb."DbT3118ShikibetsuNoKanri" AS 識別番号 
+                WHERE
+                  基本."kokanShikibetsuNo" = 識別番号."shikibetsuNo" 
+                  AND 識別番号."shikibetsuNoKubon" = '2' 
+                  AND 識別番号."tekiyoKaishiYM" <![CDATA[<=]]> 基本."serviceTeikyoYM" 
+                  AND 基本."serviceTeikyoYM" <![CDATA[<]]>   識別番号."tekiyoShuryoYM"
+                  AND 識別番号."kagoMoshitateYoshikiNo" IS NOT NULL
+                  <if test="meunID_91001">
+                      AND 識別番号."kyufuBunruiKubun" IN (#{介護給付}, #{予防給付}, #{介護給付と予防給付})
+                  </if>
+                  <if test="meunID_91002">
+                      AND 識別番号."kyufuBunruiKubun" = #{総合事業_経過措置}
+                  </if>
+		  <if test="meunID_91003">
+                      AND 識別番号."kyufuBunruiKubun" = #{総合事業}
+                  </if>
+              ) AS 給付実績情報1 
+            WHERE
+              給付実績情報1.行番号 = 1
+          ) AS 給付実績情報 
+          LEFT JOIN rgdb."DbT3059KagoMoshitate" AS 過誤申立情報 
+            ON 給付実績情報.事業所番号 = 過誤申立情報."jigyoshoNo" 
+            AND 給付実績情報.被保険者番号 = 過誤申立情報."hiHokenshaNo" 
+            AND 給付実績情報.サービス提供年月 = 過誤申立情報."serviceTeikyoYM" 
+            AND 給付実績情報.様式番号 = substring(過誤申立情報."moshitateJiyuCode", 0, 3) 
+          LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳 
+            ON 被保険者台帳."hihokenshaNo" = 給付実績情報.被保険者番号 
+          LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS 介護事業者A 
+            ON 給付実績情報."事業所番号" = 介護事業者A."jigyoshaNo" 
+            AND substring(介護事業者A."yukoKaishiYMD", 0, 7) <![CDATA[<=]]> 給付実績情報.サービス提供年月 
+            AND CASE 
+              WHEN 介護事業者A."yukoShuryoYMD" IS NOT NULL 
+              THEN 給付実績情報.サービス提供年月 <![CDATA[<=]]> substring(介護事業者A."yukoShuryoYMD", 0, 7) 
+              END 
+            AND NOT EXISTS ( 
+              SELECT
+                1 
+              FROM
+                rgdb."DbT7060KaigoJigyosha" AS 介護事業者B 
+              WHERE
+                介護事業者A."jigyoshaNo" = 介護事業者B."jigyoshaNo" 
+                AND 介護事業者A."yukoKaishiYMD" <![CDATA[<]]> 介護事業者B."yukoKaishiYMD"
+            ) 
+        WHERE
+         
+        <if test="被保番号NOTEMPTY">
+            給付実績情報.被保険者番号 = #{被保番号} AND
+        </if>
+        <if test="事業者NOTEMPTY">
+            給付実績情報.事業所番号 = #{事業者} AND  
+        </if> 
+        <if test="保険者番号NOTEMPTY">
+            substring(給付実績情報.証記載保険者番号, 0, 6) = substring(#{保険者番号}, 0, 6) AND
+        </if>  
+        <if test="申立書作成済みのみフラグ">
+            過誤申立情報."jigyoshoNo" IS NOT NULL AND
+        </if>   
+          #{提供年月開始} <![CDATA[<=]]> 給付実績情報.サービス提供年月 
+          AND 給付実績情報.サービス提供年月 <![CDATA[<=]]> #{提供年月終了} 
+        ORDER BY
+          給付実績情報.事業所番号
+          , 給付実績情報.被保険者番号
+          , 給付実績情報.様式番号
+          , 給付実績情報.サービス提供年月
+      )
+     
+      SELECT
+        master.*
+        ,"ShikibetsuTaisho"."meisho" AS 氏名
+      FROM
+        master 
+        LEFT JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','',
+        '',true,'','','','','','','',true,'','','','','','','','','','','',true,true,true,
+        true,true,true,true,true,true,true,true,'','','','','','','','',true,'','',true,
+        true,true,'','','','','','','','','','','','','','','','','','',
+            (
+                SELECT
+                    ARRAY_AGG(CAST (master.識別コード AS TEXT))
+                FROM
+                    master
+             )
+        
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> 
+        AS "ShikibetsuTaisho"
+           ON master.識別コード = "ShikibetsuTaisho"."shikibetsuCode";
+    </select>
+</mapper>

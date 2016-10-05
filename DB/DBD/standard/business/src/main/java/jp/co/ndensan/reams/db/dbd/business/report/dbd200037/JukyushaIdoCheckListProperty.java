@@ -26,63 +26,59 @@ public class JukyushaIdoCheckListProperty {
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        郵便番号(new RString("0001"), new RString("郵便番号"), new RString("B.\"yubinNo\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("町域コード"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        町域コード(new RString("0002"), new RString("町域コード"), new RString("B.\"choikiCode\"")),
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("番地コード"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        番地コード(new RString("0003"), new RString("番地コード"), new RString("B.\"banchiCode1\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        行政区コード(new RString("0004"), new RString("行政区コード"), new RString("B.\"gyoseikuCode\"")),
         /**
          * 地区１
          */
-        地区１(new RString("0005"), new RString("地区１"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        地区１(new RString("0005"), new RString("地区１"), new RString("B.\"chikuCode1\"")),
         /**
          * 地区２
          */
-        地区２(new RString("0006"), new RString("地区２"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        地区２(new RString("0006"), new RString("地区２"), new RString("B.\"chikuCode2\"")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("B.\"setaiCode\"")),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString("識別コード"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        識別コード(new RString("0009"), new RString("識別コード"), new RString("DbV4001.\"shikibetsuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("B.\"gaikokujinKanaShimei\"")),
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString("生年月日"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        生年月日(new RString("0012"), new RString("生年月日"), new RString("B.\"seinengappiYMD\"")),
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString("性別"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        性別(new RString("0013"), new RString("性別"), new RString("B.\"seibetsuCode\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("DbT7051.\"shichosonCode\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("DbV4001.\"hihokenshaNo\"")),
         /**
          * 処理年月日
          */
-        処理年月日(new RString("0317"), new RString("処理年月日"), new RString("\"").concat(new RString("")).concat(new RString("\""))),
-        /**
-         * 処理種別
-         */
-        処理種別(new RString("0317"), new RString("処理種別"), new RString("\"").concat(new RString("")).concat(new RString("\"")));
+        処理年月日(new RString("0317"), new RString("処理年月日"), new RString("B.\"shoriYMD\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

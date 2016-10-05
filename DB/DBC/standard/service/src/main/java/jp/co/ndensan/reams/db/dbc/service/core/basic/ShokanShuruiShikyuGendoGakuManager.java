@@ -149,6 +149,24 @@ public class ShokanShuruiShikyuGendoGakuManager {
     /**
      * 償還払い給付種類支給限度額{@link ShokanShuruiShikyuGendoGaku}を保存します。
      *
+     * @param 償還List {@link ShokanShuruiShikyuGendoGaku}
+     */
+    @Transaction
+    public void save償還List(List<ShokanShuruiShikyuGendoGaku> 償還List) {
+        if (!償還List.isEmpty()) {
+            for (ShokanShuruiShikyuGendoGaku 償還 : 償還List) {
+                requireNonNull(償還, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_償還払い給付種類支給限度額.toString()));
+                if (!償還.hasChanged()) {
+                    continue;
+                }
+                dac.save(償還.toEntity());
+            }
+        }
+    }
+
+    /**
+     * 償還払い給付種類支給限度額{@link ShokanShuruiShikyuGendoGaku}を保存します。
+     *
      * @param insert償還List {@link ShokanShuruiShikyuGendoGaku}
      * @param update償還List {@link ShokanShuruiShikyuGendoGaku}
      */

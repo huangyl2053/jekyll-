@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者異動検索処理のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2101-040 quxiaodong -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushateiseirenrakuhyotorokumanager.IJukyushaTeiseiRenrakuhyoTorokuManagerMapper">
+    <select resultOrdered="true" id="selectMaxRirekiNoByMinIdoYMD"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushateiseirenrakuhyotorokumanager.JukyushaTeiseiRenrakuhyoTorokuManagerParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity"
+            fetchSize="500">
+        SELECT "B".*
+        FROM
+        (
+        SELECT
+        "C"."idoYMD",
+        MAX("C"."rirekiNo") AS 履歴番号
+        FROM
+        rgdb."DbT3001JukyushaIdoRenrakuhyo" AS "C"
+        WHERE
+        "C"."isDeleted"='false'
+        AND "C"."hiHokenshaNo"=#{被保険者番号}
+        AND  #{異動年月日}<![CDATA[<]]>"C"."idoYMD"
+        GROUP BY
+        "C"."idoYMD"
+        ) AS "A"
+        INNER JOIN
+        rgdb."DbT3001JukyushaIdoRenrakuhyo" AS "B"
+        ON
+        "B"."hiHokenshaNo"=#{被保険者番号}
+        AND "A"."idoYMD"="B"."idoYMD"
+        AND "A"."履歴番号"="B"."rirekiNo"
+        ORDER BY
+        "B"."idoYMD" ASC
+        LIMIT 1
+    </select>
+</mapper>

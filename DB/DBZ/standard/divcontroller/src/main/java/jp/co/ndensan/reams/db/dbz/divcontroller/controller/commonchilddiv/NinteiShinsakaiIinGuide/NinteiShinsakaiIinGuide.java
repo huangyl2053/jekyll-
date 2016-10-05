@@ -200,7 +200,7 @@ public class NinteiShinsakaiIinGuide {
         div.setHdnShinsakaiIinCode(介護認定審査会委員コード);
         div.setHdnShinsakaiIinName(審査会委員名称);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員コード, 介護認定審査会委員コード);
-        ViewStateHolder.put(ViewStateKeys.審査会委員名称,審査会委員名称);
+        ViewStateHolder.put(ViewStateKeys.審査会委員名称, 審査会委員名称);
         return ResponseData.of(div).respond();
     }
 

@@ -34,7 +34,7 @@ public class NaiyoAreaDiv extends Panel {
     @JsonProperty("tbCreateDate")
     private TextBoxDate tbCreateDate;
     @JsonProperty("tbTaishoNen")
-    private TextBox tbTaishoNen;
+    private TextBoxDate tbTaishoNen;
     @JsonProperty("tbLoadCata")
     private TextBox tbLoadCata;
 
@@ -157,7 +157,7 @@ public class NaiyoAreaDiv extends Panel {
      * @return tbTaishoNen
      */
     @JsonProperty("tbTaishoNen")
-    public TextBox getTbTaishoNen() {
+    public TextBoxDate getTbTaishoNen() {
         return tbTaishoNen;
     }
 
@@ -166,7 +166,7 @@ public class NaiyoAreaDiv extends Panel {
      * @param tbTaishoNen tbTaishoNen
      */
     @JsonProperty("tbTaishoNen")
-    public void setTbTaishoNen(TextBox tbTaishoNen) {
+    public void setTbTaishoNen(TextBoxDate tbTaishoNen) {
         this.tbTaishoNen = tbTaishoNen;
     }
 

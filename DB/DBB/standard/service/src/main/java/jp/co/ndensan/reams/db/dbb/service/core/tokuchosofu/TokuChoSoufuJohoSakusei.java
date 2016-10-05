@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosofu.TokuChoSoufuJohoSakuseiParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchosofu.TokuChoSoufuJohoSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001.DBB211001_TokuchoSofuJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -142,13 +142,13 @@ public class TokuChoSoufuJohoSakusei {
      * バッチ用パラメータ作成
      *
      * @param divParam TokuChoSoufuJohoSakuseiParameter
-     * @return TokuChoSoufuJohoSakuseiBatchParameter
+     * @return DBB211001_TokuchoSofuJohoSakuseiParameter
      */
-    public TokuChoSoufuJohoSakuseiBatchParameter createTokuChoSoufuJohoParameter(TokuChoSoufuJohoSakuseiParameter divParam) {
+    public DBB211001_TokuchoSofuJohoSakuseiParameter createTokuChoSoufuJohoParameter(TokuChoSoufuJohoSakuseiParameter divParam) {
         requireNonNull(divParam, UrSystemErrorMessages.値がnull.getReplacedMessage(バッチパラメータメッセージ.toString()));
         requireNonNull(divParam.get賦課年度(), UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度メッセージ.toString()));
         requireNonNull(divParam.get処理対象月(), UrSystemErrorMessages.値がnull.getReplacedMessage(処理対象月メッセージ.toString()));
-        TokuChoSoufuJohoSakuseiBatchParameter parameter = new TokuChoSoufuJohoSakuseiBatchParameter();
+        DBB211001_TokuchoSofuJohoSakuseiParameter parameter = new DBB211001_TokuchoSofuJohoSakuseiParameter();
         parameter.set賦課年度(divParam.get賦課年度());
         RString 処理対象月 = divParam.get処理対象月();
         parameter.set処理対象月(処理対象月);

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,7 +22,7 @@ public class KyuhuJissekiShukei {
     private static final int NOCOUNT_9 = 9;
     private static final int NOCOUNT_10 = 10;
 
-    private RString サービス種類コード;
+    private ServiceShuruiCode サービス種類コード;
     private RString 保険請求額;
     private int 利用者負担額;
 

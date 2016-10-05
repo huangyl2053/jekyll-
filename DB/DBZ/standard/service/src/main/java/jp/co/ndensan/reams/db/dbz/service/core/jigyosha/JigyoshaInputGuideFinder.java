@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbz.service.core.jigyosha;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.definition.core.servicechushutsukbn.ServiceChushutsuKbn;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jigyosha.IJigyoshaInputGuideMapper;
@@ -24,6 +26,12 @@ import jp.co.ndensan.reams.ur.urz.service.core.gunshiku.GunshikuFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -105,12 +113,77 @@ public class JigyoshaInputGuideFinder {
      * サービス種類取得リストを取得する。
      *
      * @param systemDate システム日付
+     * @param サービス種類抽出区分 RString
+     * @param サービス種類 List<RString>
+     *
      * @return サービス種類取得リスト
      */
-    public SearchResult<ServiceShuruiJigyoshaInputGuide> getServiceShuruiJigyoshaInputGuide(RYearMonth systemDate) {
+    public SearchResult<ServiceShuruiJigyoshaInputGuide> getServiceShuruiJigyoshaInputGuide(RYearMonth systemDate,
+            RString サービス種類抽出区分, List<RString> サービス種類) {
         List<ServiceShuruiJigyoshaInputGuide> serviceShuruiList = new ArrayList<>();
 
-        List<DbT7130KaigoServiceShuruiEntity> dbt7130List = dbT7130Dac.selectServiceShurui(systemDate);
+        ITrueFalseCriteria makeShuruiConditions = null;
+        List<RString> list = new ArrayList<>();
+        if (ServiceChushutsuKbn.分類指定なし_全て.getコード().equals(サービス種類抽出区分)) {
+
+            makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                    leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM));
+        } else if (ServiceChushutsuKbn.保険給付.getコード().equals(サービス種類抽出区分)) {
+
+            list.add(new RString("10"));
+            list.add(new RString("11"));
+            list.add(new RString("12"));
+            list.add(new RString("13"));
+            makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                    leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM), not(in(DbT7130KaigoServiceShurui.serviceBunrruicode, list)));
+        } else if (ServiceChushutsuKbn.総合事業費_経過措置.getコード().equals(サービス種類抽出区分)) {
+
+            list.add(new RString("10"));
+            list.add(new RString("11"));
+            makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                    leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM), in(DbT7130KaigoServiceShurui.serviceBunrruicode, list));
+        } else if (ServiceChushutsuKbn.総合事業費.getコード().equals(サービス種類抽出区分)) {
+
+            list.add(new RString("12"));
+            list.add(new RString("13"));
+            makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                    leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM), in(DbT7130KaigoServiceShurui.serviceBunrruicode, list));
+        } else if (ServiceChushutsuKbn.総合事業費_経過措置含む.getコード().equals(サービス種類抽出区分)) {
+
+            list.add(new RString("10"));
+            list.add(new RString("11"));
+            list.add(new RString("12"));
+            list.add(new RString("13"));
+            makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                    leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM), in(DbT7130KaigoServiceShurui.serviceBunrruicode, list));
+        } else if (ServiceChushutsuKbn.種類指定.getコード().equals(サービス種類抽出区分)) {
+            if (サービス種類.isEmpty()) {
+                list.add(new RString("10"));
+                list.add(new RString("11"));
+                list.add(new RString("12"));
+                list.add(new RString("13"));
+                makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                        leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                        leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM),
+                        in(DbT7130KaigoServiceShurui.serviceBunrruicode, list));
+            } else {
+                makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                        leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                        leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM),
+                        in(DbT7130KaigoServiceShurui.serviceBunrruicode, サービス種類));
+            }
+        } else {
+            makeShuruiConditions = and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                    leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM));
+        }
+
+        List<DbT7130KaigoServiceShuruiEntity> dbt7130List = dbT7130Dac.selectServiceShurui(makeShuruiConditions);
         if (dbt7130List == null || dbt7130List.isEmpty()) {
             return SearchResult.of(Collections.<ServiceShuruiJigyoshaInputGuide>emptyList(), 0, false);
         }

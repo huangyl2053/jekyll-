@@ -47,6 +47,7 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor implements ISogoji
     @Override
     public SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource edit(SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource source) {
         if (集計Flag) {
+            edit明細(source);
             edit集計(source);
         } else {
             edit明細(source);
@@ -60,6 +61,7 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor implements ISogoji
      * @param source 総合事業費過誤決定通知書情報取込（公費負担者分）一覧表帳票ソース
      */
     private void edit明細(SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource source) {
+        source.shikibetsuCode = 帳票出力対象データ.get識別コード();
         source.listUpper_1 = new RString(連番);
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
         source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業所番号());

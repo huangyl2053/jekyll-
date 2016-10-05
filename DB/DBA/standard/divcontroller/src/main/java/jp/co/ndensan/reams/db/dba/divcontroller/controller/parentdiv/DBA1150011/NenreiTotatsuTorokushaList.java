@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1150011;
 
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsutoroku.DbT7022ShoriDateKanriBusiness;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListBatchParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA150010.DBA150010_NenreitotatsuTorokuListParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.NenreiTotatsuTorokushaListDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1150011.NenreiTotatsuTorokuValidationHandler;
@@ -47,7 +47,7 @@ public class NenreiTotatsuTorokushaList {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
         if (business == null || (business.getTaishoKaishiYMD() == null
-                && business.getTaishoShuryoYMD() == null)) {
+                                 && business.getTaishoShuryoYMD() == null)) {
             div.getBatchParamterInfo().getTxtkonkaikaishi().setValue(nowDate);
             div.getBatchParamterInfo().getTxtkonkaishuryo().setValue(nowDate);
 
@@ -99,8 +99,8 @@ public class NenreiTotatsuTorokushaList {
      * @param div バッチパラメータ情報Div
      * @return ResponseData<NenreiTotatsuTorokushaListBatchParameter>
      */
-    public ResponseData<NenreiTotatsuTorokushaListBatchParameter> onClick_btnAction(BatchParamterInfoDiv div) {
-        NenreiTotatsuTorokushaListBatchParameter parameter = finder.getNenreiTotatsushaTorokuListBatchParameter(
+    public ResponseData<DBA150010_NenreitotatsuTorokuListParameter> onClick_btnAction(BatchParamterInfoDiv div) {
+        DBA150010_NenreitotatsuTorokuListParameter parameter = finder.getNenreiTotatsushaTorokuListBatchParameter(
                 div.getTxtzenkaikaishi().getValue(),
                 div.getTxtzenkaishuryo().getValue(),
                 div.getTxtkonkaikaishi().getValue(),

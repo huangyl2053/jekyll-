@@ -20,6 +20,14 @@ module DBZ {
                 return "onClick_BtnChosaItakusakiGuide";
             }
 
+            public static onOKClose_btnChosainRenrakuJiko(): string {
+                return "onOKClose_btnChosainRenrakuJiko";
+            }
+
+            public static onBefore_btnChosainRenrakuJiko(): string {
+                return "onBefore_btnChosainRenrakuJiko";
+            }
+
             public static onClick_BtnZenkaiFukusha(): string {
                 return "onClick_BtnZenkaiFukusha";
             }

@@ -59,6 +59,10 @@ public class TekiyoJogaishaIdoTeiseiHandler {
         div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード, DaichoType.適用除外者.getコード());
     }
 
+    /**
+     * @param 識別コード 識別コード
+     * @return 適用除外者の場合、{@code true}.
+     */
     public boolean is適用除外者(ShikibetsuCode 識別コード) {
         TekiyoJogaishaManager manager = TekiyoJogaishaManager.createInstance();
         TekiyoJogaisha tekiyoJogaisha = manager.getNewestTekiyoJogaisha(識別コード);

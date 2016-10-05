@@ -77,11 +77,12 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * gettxtIryoKikanCode
      * @return txtIryoKikanCode
      */
     @JsonProperty("txtIryoKikanCode")
+    @Override
     public TextBoxCode getTxtIryoKikanCode() {
         return txtIryoKikanCode;
     }
@@ -118,6 +119,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @return txtIryoKikanName
      */
     @JsonProperty("txtIryoKikanName")
+    @Override
     public TextBox getTxtIryoKikanName() {
         return txtIryoKikanName;
     }
@@ -172,6 +174,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @return txtShujiiCode
      */
     @JsonProperty("txtShujiiCode")
+    @Override
     public TextBoxCode getTxtShujiiCode() {
         return txtShujiiCode;
     }
@@ -208,6 +211,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @return txtShujiiName
      */
     @JsonProperty("txtShujiiName")
+    @Override
     public TextBox getTxtShujiiName() {
         return txtShujiiName;
     }

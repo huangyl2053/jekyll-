@@ -99,8 +99,10 @@ public class KaigoNinteiShikakuInfoHandler {
         if (ninteiShikakuInfoBusiness.get認定有効期間終了年月日() != null) {
             div.getTxtNinteiShuryoYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間終了年月日().toString()));
         }
-        div.getTxtHookenshaCode().setValue(codeYoriShichoson.get(0).get証記載保険者番号().getColumnValue());
-        div.getTxtHokensha().setValue(new RString(codeYoriShichoson.get(0).get市町村名称().toString()));
+        if (codeYoriShichoson != null && !codeYoriShichoson.isEmpty()) {
+            div.getTxtHookenshaCode().setValue(codeYoriShichoson.get(0).get証記載保険者番号().getColumnValue());
+            div.getTxtHokensha().setValue(new RString(codeYoriShichoson.get(0).get市町村名称().toString()));
+        }
         div.setHdnShinchsonCode(hdnShinchsonCode);
         div.setHdnHihokenShaNo(hdnHihokenShaNo);
     }

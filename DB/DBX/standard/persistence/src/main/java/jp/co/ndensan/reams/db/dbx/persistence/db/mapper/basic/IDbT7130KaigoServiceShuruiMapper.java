@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -30,4 +31,12 @@ public interface IDbT7130KaigoServiceShuruiMapper {
      * @return List<DbT7130KaigoServiceShuruiEntity>
      */
     List<DbT7130KaigoServiceShuruiEntity> getserviceShuruiCdDDL(RString systemDate);
+
+    /**
+     * 親画面より引き渡されたパラメータのサービス種類コードより、サービス種類情報を取得します。
+     *
+     * @param param param
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     */
+    List<DbT7130KaigoServiceShuruiEntity> getServiceTypeList2(SabisuKodoParameter param);
 }

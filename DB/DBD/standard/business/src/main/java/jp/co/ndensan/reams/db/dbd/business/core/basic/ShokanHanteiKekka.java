@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -137,6 +138,15 @@ public class ShokanHanteiKekka
     }
 
     /**
+     * 差額金額合計を返します。
+     *
+     * @return 差額金額合計
+     */
+    public Decimal get差額金額合計() {
+        return entity.getSagakuKingakuGokei();
+    }
+
+    /**
      * 支払金額を返します。
      *
      * @return 支払金額
@@ -161,6 +171,15 @@ public class ShokanHanteiKekka
      */
     public FlexibleYearMonth get決定一覧取込年月() {
         return entity.getKetteiIchiranTorikomiYM();
+    }
+
+    /**
+     * 決定通知書作成年月日を返します。
+     *
+     * @return 決定通知書作成年月日
+     */
+    public FlexibleDate get決定通知書作成年月日() {
+        return entity.getKetteiTsuchishoSakuseiYMD();
     }
 
     /**
@@ -234,7 +253,7 @@ public class ShokanHanteiKekka
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -262,6 +281,28 @@ public class ShokanHanteiKekka
      */
     public ShokanHanteiKekkaBuilder createBuilderForEdit() {
         return new ShokanHanteiKekkaBuilder(entity, id);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShokanHanteiKekka other = (ShokanHanteiKekka) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。

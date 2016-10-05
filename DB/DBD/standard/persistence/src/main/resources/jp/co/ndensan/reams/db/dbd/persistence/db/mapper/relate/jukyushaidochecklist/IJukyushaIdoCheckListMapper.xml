@@ -70,7 +70,14 @@
             B."zenkokuJushoCode",
             B."jusho",
             B."gyoseikuCode",
-            B."gyoseikuName"
+            B."gyoseikuName",
+            B."banchiCode1",
+            B."chikuCode1",
+            B."chikuCode2",
+            B."setaiCode",
+            B."gaikokujinKanaShimei",
+            B."shoriYMD",
+            B."yubinNo"
         FROM 
             rgdb."DbV4001JukyushaDaicho" AS DbV4001
         INNER JOIN
@@ -90,24 +97,23 @@
             rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
             ON DbT5101."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo"
         WHERE 1 = 1
-            <if test="#{今回抽出開始年月日} != null">
+            <if test="has今回抽出開始年月日">
                 AND #{行挿入日時開始} <![CDATA[<=]]> DbT4001."insertTimestamp"
             </if>
-            <if test="#{今回抽出終了年月日} != null">
+            <if test="has今回抽出終了年月日">
                 AND DbT4001."insertTimestamp" <![CDATA[<=]]> #{行挿入日時終了}
             </if>
-            <if test="#{出力対象} == '全て'">
+            <if test="is全て">
                 AND 1=1
             </if>
-            <if test="#{出力対象} == '申請者異動以外全て'">
+            <if test="is申請者異動以外全て">
                 AND DbV4001."chokkinIdoJiyuCode" IS NULL
             </if>
-            <if test="#{出力対象} == '申請者異動のみ'">
+            <if test="is申請者異動のみ">
                 AND DbV4001."chokkinIdoJiyuCode" IS NOT NULL
             </if>
             
-        ORDER BY
-            #{出力順}    
+            ${出力順}    
         
     </select>
     

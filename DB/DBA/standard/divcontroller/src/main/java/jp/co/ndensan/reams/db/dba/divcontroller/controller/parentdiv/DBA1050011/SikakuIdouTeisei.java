@@ -70,7 +70,7 @@ public class SikakuIdouTeisei {
      * 現在、更新した被保険者台帳情報をメイン画面に反映していない為、onLoad時に行っている資格得喪履歴の初期化と同様の処理を
      * こちらでも行う。更新中のデータをメモリで持回るように修正された後に処理の修正を検討する。
      *
-     * @param div　資格異動訂正Div
+     * @param div 資格異動訂正Div
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onActive(SikakuIdouTeiseiDiv div) {
@@ -145,7 +145,7 @@ public class SikakuIdouTeisei {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save(getKey().get識別コード(), joho);
             RealInitialLocker.release(create排他キー());
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));

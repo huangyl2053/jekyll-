@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者突合依頼情報作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2750-030 xuyongchao -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushatotsugoiraiout.IJukyushaTotsugoIraiOutMapper">
+
+    <select id="get最新情報"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushatotsugoiraiout.JukyushaTotsugoIraiOutMybatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+           DbT3001tmp.*
+        FROM
+                (
+                        SELECT
+                                DbT3001.*,
+                                row_number() over( partition by DbT3001."hiHokenshaNo" order by DbT3001."idoYMD" desc,DbT3001."rirekiNo" desc) AS rank_number
+                        FROM
+                                rgdb."DbT3001JukyushaIdoRenrakuhyo" AS DbT3001
+                        WHERE
+                                DbT3001."logicalDeletedFlag" = FALSE
+                                AND substring(DbT3001."ninteiYukoKikankaishiYMD" from 0 for 7) <![CDATA[<=]]> #{ninteiNengetu}
+                                AND #{ninteiNengetu} <![CDATA[<=]]> substring(DbT3001."ninteiYukoKikanShuryoYMD" from 0 for 7)
+                ) AS DbT3001tmp
+        WHERE
+                rank_number = '1'
+    </select>
+    
+    
+    
+    <select id="get全情報"
+             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushatotsugoiraiout.JukyushaTotsugoIraiOutMybatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+			DbT3001.*
+		FROM
+			rgdb."DbT3001JukyushaIdoRenrakuhyo" AS DbT3001
+		WHERE
+			DbT3001."logicalDeletedFlag" = FALSE
+			AND DbT3001."ninteiYukoKikankaishiYMD" <![CDATA[<=]]> #{ninteiNengetu}
+			AND #{ninteiNengetu} <![CDATA[<=]]> DbT3001."ninteiYukoKikanShuryoYMD"
+    </select>
+    
+    <select id="get一定期間内最新情報"
+             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushatotsugoiraiout.JukyushaTotsugoIraiOutMybatisParameter" fetchSize="500" resultOrdered="true">
+       SELECT
+            DbT3001tmp.*
+        FROM
+                (
+                        SELECT
+                                DbT3001.*,
+                                row_number() over( partition by DbT3001."hiHokenshaNo" order by DbT3001."idoYMD" desc,DbT3001."rirekiNo" desc) AS rank_number
+                        FROM
+                                rgdb."DbT3001JukyushaIdoRenrakuhyo" AS DbT3001
+                        WHERE
+                                DbT3001."logicalDeletedFlag" = FALSE
+                                AND substring(DbT3001."ninteiYukoKikankaishiYMD" from 0 for 7) <![CDATA[<=]]> #{taishouKaishiNengetu}
+                                AND #{taishouShuuryouNengetu} <![CDATA[<=]]> substring(DbT3001."ninteiYukoKikanShuryoYMD" from 0 for 7)
+                ) AS DbT3001tmp
+        WHERE
+                rank_number = '1'
+    </select>
+    
+    <select id="get一定期間内全情報"
+             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushatotsugoiraiout.JukyushaTotsugoIraiOutMybatisParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+			DbT3001.*
+		FROM
+			rgdb."DbT3001JukyushaIdoRenrakuhyo" AS DbT3001
+		WHERE
+			DbT3001."logicalDeletedFlag" = FALSE
+			AND substring(DbT3001."ninteiYukoKikankaishiYMD" from 0 for 7) <![CDATA[<=]]> #{taishouKaishiNengetu}
+                        AND #{taishouShuuryouNengetu} <![CDATA[<=]]> substring(DbT3001."ninteiYukoKikanShuryoYMD" from 0 for 7)
+    </select>
+</mapper>

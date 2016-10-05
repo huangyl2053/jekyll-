@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0490011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020060.DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -57,8 +57,7 @@ public class ShikyuketteituchishoSakuseiJyoken {
      * 「実行する」ボタン１を押下のメソッドです。
      *
      * @param div 高額サービス費支給決定通知書作成DIV
-     * @return
-     * ResponseData<DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter>
+     * @return ResponseData<DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter>
      */
     public ResponseData<DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter>
             onClick_batch1(ShikyuketteituchishoSakuseiJyokenDiv div) {
@@ -70,12 +69,11 @@ public class ShikyuketteituchishoSakuseiJyoken {
      * 「実行する」ボタン2を押下のメソッドです。
      *
      * @param div 高額サービス費支給決定通知書作成DIV
-     * @return
-     * ResponseData<DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter>
+     * @return ResponseData<DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter>
      */
-    public ResponseData<DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter>
+    public ResponseData<DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter>
             onClick_batch2(ShikyuketteituchishoSakuseiJyokenDiv div) {
-        DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter parameter = getHandler(div).creatBatchParameter2();
+        DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter = getHandler(div).creatBatchParameter2();
         return ResponseData.of(parameter).respond();
     }
 

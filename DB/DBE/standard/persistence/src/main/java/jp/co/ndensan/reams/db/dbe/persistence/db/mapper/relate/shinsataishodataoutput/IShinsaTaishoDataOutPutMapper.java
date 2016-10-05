@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileShinsaiinRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.SaikaiObjectOutPutEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定審査会割当委員情報出力（モバイル）のマッパーインタフェースです。
@@ -32,5 +34,13 @@ public interface IShinsaTaishoDataOutPutMapper {
      * @return List<NijihanteiKekkaTorokuMobileRelateEntity>
      */
     List<NijihanteiKekkaTorokuMobileRelateEntity> get二次判定結果登録用データ出力(ShinsaTaishoDataOutPutMybatisParameter param);
+
+    /**
+     * 審査対象データを取得します。
+     *
+     * @param kaisaiBangou 審査対象データを取得のパラメータ
+     * @return NijihanteiKekkaTorokuMobileRelateEntity
+     */
+    SaikaiObjectOutPutEntity get審査対象(RString kaisaiBangou);
 
 }

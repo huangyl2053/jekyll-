@@ -61,37 +61,39 @@ public class NinteiChosaJokyoHandler {
         div.getDdlNinteiChosaItakusakiKubun().setDataSource(keyValueList);
         if (konkaiDataPass != null) {
             List<KeyValueDataSource> yokaigodoList = new ArrayList<>();
-            switch (KoroshoIfShikibetsuCode.toValue(konkaiDataPass.get厚労省IF識別コード().value())) {
-                case 認定ｿﾌﾄ2009:
-                case 認定ｿﾌﾄ2009_SP3:
-                    for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
-                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun09.getコード(),
-                                yokaigoJotaiKubun09.get名称()));
-                    }
-                    break;
-                case 認定ｿﾌﾄ2002:
-                    for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
-                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun02.getコード(),
-                                yokaigoJotaiKubun02.get名称()));
-                    }
-                    break;
-                case 認定ｿﾌﾄ2006_新要介護認定適用区分が未適用:
-                    for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
-                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun06.getコード(),
-                                yokaigoJotaiKubun06.get名称()));
-                    }
-                    break;
-                case 認定ｿﾌﾄ99:
-                    for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
-                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun99.getコード(),
-                                yokaigoJotaiKubun99.get名称()));
-                    }
-                    break;
-                default:
+            if (konkaiDataPass.get厚労省IF識別コード() != null && !konkaiDataPass.get厚労省IF識別コード().isEmpty()) {
+                switch (KoroshoIfShikibetsuCode.toValue(konkaiDataPass.get厚労省IF識別コード().value())) {
+                    case 認定ｿﾌﾄ2009:
+                    case 認定ｿﾌﾄ2009_SP3:
+                        for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
+                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun09.getコード(),
+                                    yokaigoJotaiKubun09.get名称()));
+                        }
+                        break;
+                    case 認定ｿﾌﾄ2002:
+                        for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
+                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun02.getコード(),
+                                    yokaigoJotaiKubun02.get名称()));
+                        }
+                        break;
+                    case 認定ｿﾌﾄ2006_新要介護認定適用区分が未適用:
+                        for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
+                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun06.getコード(),
+                                    yokaigoJotaiKubun06.get名称()));
+                        }
+                        break;
+                    case 認定ｿﾌﾄ99:
+                        for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
+                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun99.getコード(),
+                                    yokaigoJotaiKubun99.get名称()));
+                        }
+                        break;
+                    default:
+                }
+                div.getDdlYokaigodo().setDataSource(yokaigodoList);
+                div.getDdlNinchishoKasangoYokaigodo().setDataSource(yokaigodoList);
+                div.getDdlNijiHanteiKekka().setDataSource(yokaigodoList);
             }
-            div.getDdlYokaigodo().setDataSource(yokaigodoList);
-            div.getDdlNinchishoKasangoYokaigodo().setDataSource(yokaigodoList);
-            div.getDdlNijiHanteiKekka().setDataSource(yokaigodoList);
             set画面項目(konkaiDataPass);
             div.setHdnInput(get画面項目());
         }

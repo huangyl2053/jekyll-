@@ -90,7 +90,7 @@ public enum KazeiKubun {
      *
      * @param code コード
      * @param defaultValue コードに該当する項目が見つからなかった場合に返却される値(デフォルト値)
-     * @return 課税区分コードと一致する名称、もしくは第2引数と同じ値
+     * @return 課税区分名称
      */
     public static RString to名称OrDefault(RString code, RString defaultValue) {
         KazeiKubun kazeiKubun = toValueOrNull(code);

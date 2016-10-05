@@ -15,7 +15,11 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 償還払支給決定者一覧表帳票のプロパティです。
@@ -44,7 +48,7 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200021.getReportId());
 
         pageBreakKeys = new ArrayList<>();
-        pageBreakKeys.add(new RString(ShokanbaraiShikyuKetteishaIchiranSource.ReportSourceFields.shoHokenshaNo.name()));
+        pageBreakKeys.add(new RString(ShokanbaraiShikyuKetteishaIchiranSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
         RString 改頁２ = RString.EMPTY;
         RString 改頁３ = RString.EMPTY;
         RString 改頁４ = RString.EMPTY;
@@ -92,6 +96,30 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         }
     }
 
+    @Override
+    public Breakers<ShokanbaraiShikyuKetteishaIchiranSource> defineBreakers(
+            Breakers<ShokanbaraiShikyuKetteishaIchiranSource> breakers,
+            BreakerCatalog<ShokanbaraiShikyuKetteishaIchiranSource> catalog) {
+        return breakers.add(catalog.new SimplePageBreaker(
+
+
+
+
+
+            pageBreakKeys) {
+            @Override
+            public ReportLineRecord<ShokanbaraiShikyuKetteishaIchiranSource> occuredBreak(
+                    ReportLineRecord<ShokanbaraiShikyuKetteishaIchiranSource> currentRecord,
+                    ReportLineRecord<ShokanbaraiShikyuKetteishaIchiranSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+                    return currentRecord;
+                }
+                return currentRecord;
+            }
+        }).fixed();
+    }
+
     private RString to帳票物理名(RString 項目ID) {
 
         RString 帳票物理名 = RString.EMPTY;
@@ -100,12 +128,18 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
             帳票物理名 = new RString(ReportSourceFields.listLower_2.name());
         } else if (DBC200021ShutsuryokujunEnum.行政区コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listLower_4.name());
+        } else if (DBC200021ShutsuryokujunEnum.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.yubinNo.name());
+        } else if (DBC200021ShutsuryokujunEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.shimei50onKana.name());
         } else if (DBC200021ShutsuryokujunEnum.被保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_2.name());
         } else if (DBC200021ShutsuryokujunEnum.通知書番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_1.name());
         } else if (DBC200021ShutsuryokujunEnum.整理番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listLower_1.name());
+        } else if (DBC200021ShutsuryokujunEnum.サービス種類コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.serviceShuruiCode.name());
         }
 
         return 帳票物理名;
@@ -119,7 +153,11 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("shoHokenshaNo"), new RString("DbWT3036.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3036.\"shoKisaiHokenshaNo\"")),
+        /**
+         * 郵便番号
+         */
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
         /**
          * 町域コード
          */
@@ -128,6 +166,10 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
          * 行政区コード
          */
         行政区コード(new RString("0004"), new RString("listLower_4"), new RString("DbWT0001.\"gyoseikuCode\"")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
         /**
          * 被保険者番号
          */
@@ -139,7 +181,11 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         /**
          * 整理番号
          */
-        整理番号(new RString("0305"), new RString("listLower_1"), new RString("DbWT3036.\"seiriNo\""));
+        整理番号(new RString("0305"), new RString("listLower_1"), new RString("DbWT3036.\"seiriNo\"")),
+        /**
+         * サービス種類コード
+         */
+        サービス種類コード(new RString("0308"), new RString("serviceShuruiCode"), new RString("DbWT3036.\"serviceShuruiCode\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

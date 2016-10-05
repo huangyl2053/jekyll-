@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 利用負担額減額免除認定証Editorのクラスです。
  *
- * @reamsid_L DBD-3980-050 x_youyj
+ * @reamsid_L DBD-3980-060 x_youyj
  */
 public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyoshaFutangakuGemmenGaitoshaIchiranEditor {
 
@@ -82,7 +82,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             }
         }
         source.listUpper_7 = eidt空白と空白以外(entity.is老齢福祉年金受給者());
-        if (ONE.equals(entity.get本人課税区分())) { 
+        if (ONE.equals(entity.get本人課税区分())) {
             source.listUpper_8 = 課;
         } else {
             source.listUpper_8 = 空白;

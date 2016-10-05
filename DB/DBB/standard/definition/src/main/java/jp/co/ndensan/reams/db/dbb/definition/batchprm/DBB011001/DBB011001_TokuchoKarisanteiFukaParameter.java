@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.ShuturyokuTyoutuke;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.CreateFukaJohoJuneProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.CreateFukaJohoKeizokuProcessParameter;
@@ -117,8 +116,8 @@ public class DBB011001_TokuchoKarisanteiFukaParameter extends BatchParameterBase
      * @param システム日時 YMDHMS
      * @return processパラメータ
      */
-    public KeisangoJohoSakuseiBatchParamter toKeisangoJohoSakuseiBatchParamter(YMDHMS システム日時) {
-        return new KeisangoJohoSakuseiBatchParamter(調定年度.toDateString(), 賦課年度.toDateString(), new RString(システム日時.toString()),
+    public DBB003001_KeisangoJohoSakuseiParameter toKeisangoJohoSakuseiBatchParamter(YMDHMS システム日時) {
+        return new DBB003001_KeisangoJohoSakuseiParameter(調定年度.toDateString(), 賦課年度.toDateString(), new RString(システム日時.toString()),
                 ShoriName.特徴仮算定賦課.get名称(), RString.EMPTY);
     }
 
@@ -127,7 +126,7 @@ public class DBB011001_TokuchoKarisanteiFukaParameter extends BatchParameterBase
      *
      * @return FukaJohoTorokuBatchParameter
      */
-    public FukaJohoTorokuBatchParameter toFukaJohoTorokuBatchParameter() {
-        return new FukaJohoTorokuBatchParameter(true);
+    public DBB004001_FukaJohoTorokuParameter toFukaJohoTorokuBatchParameter() {
+        return new DBB004001_FukaJohoTorokuParameter(true);
     }
 }

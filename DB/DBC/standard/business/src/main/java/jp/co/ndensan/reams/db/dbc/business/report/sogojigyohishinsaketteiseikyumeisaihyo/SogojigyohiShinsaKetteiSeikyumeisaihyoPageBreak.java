@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohishinsaketteiseikyu
 
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohishinsaketteiseikyumeisaihyo.SogojigyohiShinsaKetteiSeikyumeisaihyoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
@@ -48,6 +49,9 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoPageBreak extends PageBreaker
             flag = true;
         } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaihyoOutPutOrder.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listMeisai_3.equals(nextSource.getSource().listMeisai_3)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KyufuhiShinsaKetteiSeikyuMeisaihyoOutPutOrder.サービス種類コード.get項目ID())
+                && !currentSource.getSource().listMeisai_11.equals(nextSource.getSource().listMeisai_11)) {
             flag = true;
         }
         return flag;

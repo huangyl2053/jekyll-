@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0210011;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021011.DBB021011_TsukibetsuSuiihyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterValidationHandler;
@@ -101,7 +101,7 @@ public class TsukibetsuSuiihyoSakuseiParameter {
      * @param div {@link TsukibetsuSuiihyoSakuseiParameterDiv  月別推移表Div}
      * @return 月別推移表作成Divを持つResponseData
      */
-    public ResponseData<CreateTsukibetsuSuiihyoBatchParameter> onClick_btnJikou(TsukibetsuSuiihyoSakuseiParameterDiv div) {
+    public ResponseData<DBB021011_TsukibetsuSuiihyoSakuseiParameter> onClick_btnJikou(TsukibetsuSuiihyoSakuseiParameterDiv div) {
         return ResponseData.of(getHandler(div).batchParameter()).respond();
     }
 

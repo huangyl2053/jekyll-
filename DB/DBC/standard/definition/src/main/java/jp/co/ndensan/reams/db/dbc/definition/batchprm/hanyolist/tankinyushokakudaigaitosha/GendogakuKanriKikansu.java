@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum GendogakuKanriKikansu {
 
     /**
-     * コード:0 名称:すべて 略称:定義なし
+     * コード:1 名称:入力済みを含む 略称:定義なし
      */
-    すべて("0", "すべて"),
+    入力済みを含む("1", "入力済みを含む"),
     /**
-     * コード:1 名称:最新拡大データ 略称:定義なし
+     * コード:2 名称:入力済みを含まない 略称:定義なし
      */
-    最新拡大データ("1", "最新拡大データ");
+    入力済みを含まない("2", "入力済みを含まない");
 
     private final RString code;
     private final RString fullName;

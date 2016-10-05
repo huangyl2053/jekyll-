@@ -45,6 +45,6 @@ public class IdoRiyoshaFutanwariaiHanteiProcessParameter implements IBatchProces
      * @return MYBATISパラメータ
      */
     public IdoRiyoshaFutanwariaiHanteiMybatisParameter toMybatisParameter() {
-        return new IdoRiyoshaFutanwariaiHanteiMybatisParameter(taishoNendo, ShoriName.異動分負担割合判定.get名称());
+        return new IdoRiyoshaFutanwariaiHanteiMybatisParameter(taishoNendo, ShoriName.異動分利用者負担割合判定.get名称());
     }
 }

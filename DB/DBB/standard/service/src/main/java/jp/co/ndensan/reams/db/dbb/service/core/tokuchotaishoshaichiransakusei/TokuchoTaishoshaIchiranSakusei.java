@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.T
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoMiDouteiListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271003.DBB271003_TokuchoTaishoshaIchiranSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019TokuchoMidoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
@@ -763,14 +763,14 @@ public class TokuchoTaishoshaIchiranSakusei {
      * 画面divより、バッチパラメータを用意する.
      *
      * @param result TokuchoTaishoshaIchiranSakuseiResult
-     * @return TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter
+     * @return DBB271003_TokuchoTaishoshaIchiranSakuseiParameter
      */
-    public TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter getBatchiPara(TokuchoTaishoshaIchiranSakuseiResult result) {
+    public DBB271003_TokuchoTaishoshaIchiranSakuseiParameter getBatchiPara(TokuchoTaishoshaIchiranSakuseiResult result) {
         if (result == null) {
             return null;
         }
         RDateTime nowDateTime = RDateTime.now();
-        TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter param = new TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter();
+        DBB271003_TokuchoTaishoshaIchiranSakuseiParameter param = new DBB271003_TokuchoTaishoshaIchiranSakuseiParameter();
         param.setShoriNendo(new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 nowDateTime.getDate(), SubGyomuCode.DBB介護賦課)));
         param.setHosokudukiList(new ArrayList());

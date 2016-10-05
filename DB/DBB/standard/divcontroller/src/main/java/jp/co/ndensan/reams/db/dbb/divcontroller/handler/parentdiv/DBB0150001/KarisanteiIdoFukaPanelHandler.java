@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanIdoHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoKarisanteiIdoShinkiShikakuFuka;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoZanteiKeisanHoho;
@@ -314,9 +314,9 @@ public class KarisanteiIdoFukaPanelHandler {
             boolean flag = false;
             for (TyouhyouResult result : 帳票IDList) {
                 if (帳票ID_14.equals(result.getEntity().get帳票ID())
-                        || 帳票ID_15.equals(result.getEntity().get帳票ID())
-                        || 帳票ID_28.equals(result.getEntity().get帳票ID())
-                        || 帳票ID_29.equals(result.getEntity().get帳票ID())) {
+                    || 帳票ID_15.equals(result.getEntity().get帳票ID())
+                    || 帳票ID_28.equals(result.getEntity().get帳票ID())
+                    || 帳票ID_29.equals(result.getEntity().get帳票ID())) {
                     flag = true;
                 }
             }
@@ -351,7 +351,7 @@ public class KarisanteiIdoFukaPanelHandler {
                     帳票ID = idoFuka.getChohyoID(調定年度, 仮算定額変更通知書_帳票分類ＩＤ,
                             算定期, 通知書の帳票ID.get出力順ID());
                 } else if (納入通知書.equals(通知書の帳票ID.get帳票分類ID())
-                        || 納入通知書_DBB100014.equals(通知書の帳票ID.get帳票分類ID())) {
+                           || 納入通知書_DBB100014.equals(通知書の帳票ID.get帳票分類ID())) {
                     帳票ID = idoFuka.getChohyoID(調定年度, 保険料納入通知書_本算定_帳票分類ＩＤ,
                             算定期, 通知書の帳票ID.get出力順ID());
                 }
@@ -542,10 +542,10 @@ public class KarisanteiIdoFukaPanelHandler {
         YMDHMS 異動賦課の基準日時 = dbT7022Entity.get基準日時();
         dbT7022Entity = idoFuka.get基準日時(年度, 仮算定異動賦課確定_処理名);
         YMDHMS 異動賦課確定の基準日時 = dbT7022Entity.get基準日時();
-        if(異動賦課の基準日時 == null || 異動賦課の基準日時.isEmpty()){
+        if (異動賦課の基準日時 == null || 異動賦課の基準日時.isEmpty()) {
             異動賦課の基準日時 = new YMDHMS(RDateTime.MIN);
         }
-        if(異動賦課確定の基準日時 == null || 異動賦課確定の基準日時.isEmpty()){
+        if (異動賦課確定の基準日時 == null || 異動賦課確定の基準日時.isEmpty()) {
             異動賦課確定の基準日時 = new YMDHMS(RDateTime.MIN);
         }
         return 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
@@ -650,9 +650,9 @@ public class KarisanteiIdoFukaPanelHandler {
         for (Map.Entry<RString, RString> entry : set) {
             出力帳票一覧.add(new TyouhyouEntity(new ReportId(entry.getKey()), null, entry.getValue()));
             if (特徴開始通知書_仮算定.value().equals(entry.getKey())
-                    || 仮算定額変更通知書.value().equals(entry.getKey())
-                    || 納入通知書.value().equals(entry.getKey())
-                    || 納入通知書_DBB100014.value().equals(entry.getKey())) {
+                || 仮算定額変更通知書.value().equals(entry.getKey())
+                || 納入通知書.value().equals(entry.getKey())
+                || 納入通知書_DBB100014.value().equals(entry.getKey())) {
                 parameter.setバッチ起動フラグ(true);
             }
         }

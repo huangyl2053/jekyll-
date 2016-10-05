@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShotokuManager {
 
+    private static final RString 所得年度_名称 = new RString("所得年度");
     private final DbV2502KaigoShotokuAliveDac dac;
     private final MapperProvider mapperProvider;
 
@@ -69,7 +70,7 @@ public class ShotokuManager {
     @Transaction
     public KaigoShotokuAlive get介護所得Alive(ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage(所得年度_名称.toString()));
         if (所得基準年月日 == null) {
             所得基準年月日 = YMDHMS.now();
         }
@@ -80,7 +81,7 @@ public class ShotokuManager {
         entity.initializeMd5();
         return new KaigoShotokuAlive(entity);
     }
-    
+
     /**
      * 主キーに合致する賦課Aliveを全件返します。
      *
@@ -92,7 +93,7 @@ public class ShotokuManager {
     @Transaction
     public List<KaigoShotokuAlive> get介護所得AliveAll(ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage(所得年度_名称.toString()));
         if (所得基準年月日 == null) {
             所得基準年月日 = YMDHMS.now();
         }
@@ -100,7 +101,7 @@ public class ShotokuManager {
         識別コードList.add(識別コード);
         List<DbV2502KaigoShotokuEntity> result = mapperProvider.create(IDbV2502KaigoShotokuMapper.class)
                 .getShotokuJohoList(所得年度, 所得基準年月日, 識別コードList);
-        
+
         Collections.sort(result, new Comparator<DbV2502KaigoShotokuEntity>() {
             @Override
             public int compare(DbV2502KaigoShotokuEntity entity1, DbV2502KaigoShotokuEntity entity2) {
@@ -109,7 +110,7 @@ public class ShotokuManager {
                 return str2.compareTo(str1);
             }
         });
-        
+
         List<KaigoShotokuAlive> businessList = new ArrayList<>();
         for (DbV2502KaigoShotokuEntity entity : result) {
             entity.initializeMd5();
@@ -156,7 +157,7 @@ public class ShotokuManager {
     @Transaction
     public List<KaigoShotokuAlive> get介護所得AlivesFromMapper(FlexibleYear 所得年度, YMDHMS 所得基準年月日, List<ShikibetsuCode> 識別コードList) {
         requireNonNull(識別コードList, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コードList"));
-        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage(所得年度_名称.toString()));
         if (所得基準年月日 == null) {
             所得基準年月日 = YMDHMS.now();
         }
@@ -169,8 +170,8 @@ public class ShotokuManager {
         }
         return businessList;
     }
-    
-        /**
+
+    /**
      * 介護所得Aliveを複数件取得します。検索対象の識別コードを1件指定。
      *
      * @param 所得年度 所得年度
@@ -181,7 +182,7 @@ public class ShotokuManager {
     @Transaction
     public List<KaigoShotokuAlive> get介護所得AliveFromMapper(FlexibleYear 所得年度, YMDHMS 所得基準年月日, List<ShikibetsuCode> 識別コードList) {
         requireNonNull(識別コードList, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コードList"));
-        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage(所得年度_名称.toString()));
         if (所得基準年月日 == null) {
             所得基準年月日 = YMDHMS.now();
         }
@@ -196,8 +197,6 @@ public class ShotokuManager {
         }
         return businessList;
     }
-    
-    
 
     /**
      * 識別コードから、対象の最新履歴を取得します。

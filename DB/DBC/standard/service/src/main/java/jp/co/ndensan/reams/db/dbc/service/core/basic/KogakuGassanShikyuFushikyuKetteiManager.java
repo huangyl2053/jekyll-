@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyu
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -25,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KogakuGassanShikyuFushikyuKetteiManager {
 
     private final DbT3074KogakuGassanShikyuFushikyuKetteiDac dac;
+    private static final RString RSTRING_1 = new RString("1");
+    private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -59,7 +63,7 @@ public class KogakuGassanShikyuFushikyuKetteiManager {
             HokenshaNo 保険者番号,
             RString 支給申請書整理番号,
             int 履歴番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
         requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
         requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
@@ -118,7 +122,7 @@ public class KogakuGassanShikyuFushikyuKetteiManager {
      */
     @Transaction
     public List<KogakuGassanShikyuFushikyuKettei> get高額合算支給不支給決定一覧(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         List<KogakuGassanShikyuFushikyuKettei> businessList = new ArrayList<>();
 
         for (DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity : dac.selectAll(被保険者番号)) {
@@ -127,5 +131,43 @@ public class KogakuGassanShikyuFushikyuKetteiManager {
         }
 
         return businessList;
+    }
+
+    /**
+     * 高額合算支給不支給決定{@link KijunShunyugakuTekiyoKanri}を保存します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @param 履歴番号 int
+     * @param 発行日 FlexibleDate
+     */
+    @Transaction
+    public void update決定通知書作成年月日(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号,
+            int 履歴番号,
+            FlexibleDate 発行日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(発行日, UrSystemErrorMessages.値がnull.getReplacedMessage("発行日"));
+        DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity = dac.selectByKey(
+                被保険者番号,
+                対象年度,
+                保険者番号,
+                支給申請書整理番号,
+                履歴番号);
+        if (entity != null) {
+            entity.setKetteiTsuchiSakuseiYMD(発行日);
+            entity.setKetteiTsuchiRealHakkoFlag(RSTRING_1);
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
     }
 }

@@ -27,4 +27,6 @@ public class JigyoshaMode implements Serializable {
     private RString jigyoshaShubetsu;
     private RString yukoKaishiYMD;
     private List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide;
+    private RString サービス種類抽出区分;
+    private List<RString> サービス種類;
 }

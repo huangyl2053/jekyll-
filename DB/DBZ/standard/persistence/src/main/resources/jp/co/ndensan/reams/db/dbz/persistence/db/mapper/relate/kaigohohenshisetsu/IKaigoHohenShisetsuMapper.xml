@@ -29,6 +29,7 @@ and open the template in the editor.
         <result property="taishoShoriYMD" column="dbT1004ShisetsuNyutaisho_taishoShoriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="taishoYMD" column="dbT1004ShisetsuNyutaisho_taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="roomKigoNo" column="dbT1004ShisetsuNyutaisho_roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaNo" column="dbT1004ShisetsuNyutaisho_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
     </resultMap>
     
     <select resultOrdered="true" id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
@@ -51,7 +52,8 @@ and open the template in the editor.
             DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
             DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
             DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-            DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+            DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo",
+            DbT1004."hokenshaNo" as "dbT1004ShisetsuNyutaisho_hokenshaNo"
         FROM      
             rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
         LEFT JOIN 
@@ -86,7 +88,8 @@ and open the template in the editor.
                 DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
                 DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
                 DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo",
+                DbT1004."hokenshaNo" as "dbT1004ShisetsuNyutaisho_hokenshaNo"
             FROM 
                 rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
             LEFT JOIN 
@@ -122,7 +125,8 @@ and open the template in the editor.
                 DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
                 DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
                 DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo",
+                DbT1004."hokenshaNo" as "dbT1004ShisetsuNyutaisho_hokenshaNo"
             FROM      
                 rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
             LEFT JOIN 
@@ -161,7 +165,8 @@ and open the template in the editor.
                 DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
                 DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
                 DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+                DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo",
+                DbT1004."hokenshaNo" as "dbT1004ShisetsuNyutaisho_hokenshaNo"
             FROM      
                 rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
             LEFT JOIN 
@@ -196,7 +201,8 @@ and open the template in the editor.
                DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
                DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
                DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-               DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+               DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo",
+               DbT1004."hokenshaNo" as "dbT1004ShisetsuNyutaisho_hokenshaNo"
             FROM 
                 rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
             LEFT JOIN 
@@ -234,7 +240,8 @@ and open the template in the editor.
                DbT1004."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
                DbT1004."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
                DbT1004."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-               DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+               DbT1004."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo",
+               DbT1004."hokenshaNo" as "dbT1004ShisetsuNyutaisho_hokenshaNo"
             FROM      
                 rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
             LEFT JOIN 
@@ -265,6 +272,7 @@ and open the template in the editor.
         <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="roomKigoNo" column="roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
     </resultMap>
     
     <!--施設情報の取得を取得します-->
@@ -282,6 +290,7 @@ and open the template in the editor.
           , DbT1004."taishoYMD"              AS  taishoYMD
           , DbT1004."roomKigoNo"             AS  roomKigoNo
           , DbT7060."jigyoshaName"           AS  jigyoshaName
+          , DbT1004."hokenshaNo"             AS  hokenshaNo
         FROM      
             rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
         LEFT JOIN 
@@ -309,6 +318,7 @@ and open the template in the editor.
         , DbT1004."taishoYMD"              AS  taishoYMD
         , DbT1004."roomKigoNo"             AS  roomKigoNo
         , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+        , DbT1004."hokenshaNo"             AS  hokenshaNo
         FROM 
             rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
         LEFT JOIN 
@@ -338,6 +348,7 @@ and open the template in the editor.
         , DbT1004."taishoYMD"              AS  taishoYMD
         , DbT1004."roomKigoNo"             AS  roomKigoNo
         , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+        , DbT1004."hokenshaNo"             AS  hokenshaNo
         FROM      
             rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
         LEFT JOIN 
@@ -371,6 +382,7 @@ and open the template in the editor.
               , DbT1004."taishoYMD"              AS  taishoYMD
               , DbT1004."roomKigoNo"             AS  roomKigoNo
               , DbT7060."jigyoshaName"           AS  jigyoshaName
+              , DbT1004."hokenshaNo"             AS  hokenshaNo
             FROM      
                 rgdb."DbT1004ShisetsuNyutaisho"   AS DbT1004
             LEFT JOIN 
@@ -399,6 +411,7 @@ and open the template in the editor.
               , DbT1004."taishoYMD"              AS  taishoYMD
               , DbT1004."roomKigoNo"             AS  roomKigoNo
               , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+              , DbT1004."hokenshaNo"             AS  hokenshaNo
             FROM 
                 rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
             LEFT JOIN 
@@ -431,6 +444,7 @@ and open the template in the editor.
                 , DbT1004."taishoYMD"              AS  taishoYMD
                 , DbT1004."roomKigoNo"             AS  roomKigoNo
                 , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
+                , DbT1004."hokenshaNo"             AS  hokenshaNo
             FROM      
                 rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004
             LEFT JOIN 

@@ -405,4 +405,22 @@ public class DbT7051KoseiShichosonMasterDac {
                 order(by(DbT7051KoseiShichosonMaster.shoKisaiHokenshaNo, Order.DESC))
                 .toList(DbT7051KoseiShichosonMasterEntity.class);
     }
+
+    /**
+     * 証記載保険者番号による市町村情報の検索します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return List<DbT7051KoseiShichosonMasterEntity> 市町村情報
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> get市町村名称(RString 証記載保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(shoKisaiHokenshaNo, 証記載保険者番号)).
+                order(by(gappeiKyuShichosonKubun, Order.ASC),
+                        by(kanyuYMD, Order.DESC)).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
 }

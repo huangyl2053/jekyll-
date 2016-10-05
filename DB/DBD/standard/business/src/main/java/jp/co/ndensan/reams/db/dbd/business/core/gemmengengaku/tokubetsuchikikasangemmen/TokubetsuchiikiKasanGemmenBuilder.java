@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link TokubetsuchiikiKasanGemmen}の編集を行うビルダークラスです。
@@ -152,6 +153,29 @@ public class TokubetsuchiikiKasanGemmenBuilder {
     public TokubetsuchiikiKasanGemmenBuilder set非承認理由(RString 非承認理由) {
         requireNonNull(非承認理由, UrSystemErrorMessages.値がnull.getReplacedMessage("非承認理由"));
         entity.setHiShoninRiyu(非承認理由);
+        return this;
+    }
+
+    /**
+     * 履歴番号を設定します。
+     *
+     * @param 履歴番号 履歴番号
+     * @return {@link TokubetsuchiikiKasanGemmenBuilder}
+     */
+    public TokubetsuchiikiKasanGemmenBuilder set履歴番号(int 履歴番号) {
+        entity.setRirekiNo(履歴番号);
+        return this;
+    }
+
+    /**
+     * EntityDataStateを設定します
+     *
+     * @param state EntityDataState
+     * @return {@link RiyoshaFutangakuGengakuBuilder}
+     */
+    public TokubetsuchiikiKasanGemmenBuilder setState(EntityDataState state) {
+        requireNonNull(state, UrSystemErrorMessages.値がnull.getReplacedMessage("EntityDataState"));
+        entity.setState(state);
         return this;
     }
 

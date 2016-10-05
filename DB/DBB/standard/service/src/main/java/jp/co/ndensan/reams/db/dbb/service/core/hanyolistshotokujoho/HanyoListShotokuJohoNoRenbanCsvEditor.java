@@ -191,13 +191,13 @@ public class HanyoListShotokuJohoNoRenbanCsvEditor {
         RString 地区2 = RString.EMPTY;
         RString 地区3 = RString.EMPTY;
         if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku1() != null) {
-            地区1 = 宛名.get行政区画().getChiku1().get名称();
+            地区1 = 宛名.get行政区画().getChiku1().getコード().getColumnValue();
         }
         if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku2() != null) {
-            地区2 = 宛名.get行政区画().getChiku2().get名称();
+            地区2 = 宛名.get行政区画().getChiku2().getコード().getColumnValue();
         }
         if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku3() != null) {
-            地区3 = 宛名.get行政区画().getChiku3().get名称();
+            地区3 = 宛名.get行政区画().getChiku3().getコード().getColumnValue();
         }
         csvEntity.set地区１(地区1);
         csvEntity.set地区２(地区2);

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.tokuchosedokaniftanichu;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.tokuchosedokaniftanichu.TokuchoSedokanIFTanichuResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB231001.DBB231001_TokuchoSeidokanIFSakuseiParameter;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -99,7 +99,7 @@ public class TokuchoSedokanIFTanichu {
      */
     public List<ShoriDateKanri> getSyoriKanrenJoho(FlexibleYear 処理年度, RString 年度内連番) {
         RString 処理名 = ShoriName.特別徴収制度間ＩＦ作成.get名称();
-        List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタList = 処理日付管理マスタdac.select基準日時toupdate(処理名, 年度内連番, 処理年度);
+        List<DbT7022ShoriDateKanriEntity> 処理日付管理マスタList = 処理日付管理マスタdac.select処理状況(処理年度, 処理名, 年度内連番);
         List<ShoriDateKanri> shoridatekanriList = new ArrayList();
         if (処理日付管理マスタList.isEmpty()) {
             return null;
@@ -117,8 +117,8 @@ public class TokuchoSedokanIFTanichu {
      * @param result TokuchoSedokanIFTanichuResult
      * @return TokuchoSeidokanIFSakuseiBatchParameter
      */
-    public TokuchoSeidokanIFSakuseiBatchParameter getBatchiPara(TokuchoSedokanIFTanichuResult result) {
-        TokuchoSeidokanIFSakuseiBatchParameter param = new TokuchoSeidokanIFSakuseiBatchParameter();
+    public DBB231001_TokuchoSeidokanIFSakuseiParameter getBatchiPara(TokuchoSedokanIFTanichuResult result) {
+        DBB231001_TokuchoSeidokanIFSakuseiParameter param = new DBB231001_TokuchoSeidokanIFSakuseiParameter();
         param.set処理年度(result.get年度());
         param.set特別徴収開始年月(result.get特徴開始年月());
         param.set遷移元メニュー(result.get遷移元メニュー());

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 振込データ登録のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2180-030 x_lilh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IFurikomiDataTourokuMapper">
+    
+    <select id="select口座振込一時情報"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaFurikomiTempTableEntity" 
+            fetchSize="500" resultOrdered="true">
+       SELECT
+        *
+       FROM "DbWT0511KozaFurikomi"
+    </select>
+    <select id="select依頼済_償還払支給判定結果情報"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+            償還払支給判定結果.* 
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細
+        INNER JOIN
+            rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果
+        ON 振込明細."hihokenshaNo" = 償還払支給判定結果."hiHokenshaNo"
+            AND 振込明細."serviceTeikyoYM" = 償還払支給判定結果."serviceTeikyoYM"
+            AND 振込明細."seiriNo" = 償還払支給判定結果."seiriNo"
+        WHERE 
+            振込明細."dataKubun" = '1'
+        AND 振込明細."furikomiKingaku" <![CDATA[>]]> 0
+        AND 振込明細."kozaDataFlag" = TRUE
+    </select>
+    <select id="select依頼済_高額介護サービス費支給判定結果情報"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+            高額支給判定結果.* 
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細
+        INNER JOIN
+            rgdb."DbT3057KogakuShikyuHanteiKekka" AS 高額支給判定結果
+        ON 振込明細."hihokenshaNo" = 高額支給判定結果."hihokenshaNo"
+            AND 振込明細."serviceTeikyoYM" = 高額支給判定結果."serviceTeikyoYM"
+            AND 振込明細."shoKisaiHokenshaNo" = 高額支給判定結果."shoKisaiHokenshaNo"
+            AND 振込明細."rirekiNo" = 高額支給判定結果."rirekiNo"
+        WHERE 
+            振込明細."dataKubun" = '2'
+        AND 振込明細."furikomiKingaku" <![CDATA[>]]> 0
+        AND 振込明細."kozaDataFlag" = TRUE
+    </select>
+    <select id="select依頼済取消_償還払支給判定結果情報"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+            償還払支給判定結果.* 
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細
+        INNER JOIN
+            rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果
+        ON 振込明細."hihokenshaNo" = 償還払支給判定結果."hiHokenshaNo"
+            AND 振込明細."serviceTeikyoYM" = 償還払支給判定結果."serviceTeikyoYM"
+            AND 振込明細."seiriNo" = 償還払支給判定結果."seiriNo"
+        WHERE 
+            振込明細."dataKubun" = '1'
+        AND (振込明細."furikomiKingaku" = 0 OR 振込明細."kozaDataFlag" = FALSE)
+    </select>
+    <select id="select依頼済取消_高額介護サービス費支給判定結果情報"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT 
+            高額支給判定結果.* 
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細
+        INNER JOIN
+            rgdb."DbT3057KogakuShikyuHanteiKekka" AS 高額支給判定結果
+        ON 振込明細."hihokenshaNo" = 高額支給判定結果."hihokenshaNo"
+            AND 振込明細."serviceTeikyoYM" = 高額支給判定結果."serviceTeikyoYM"
+            AND 振込明細."shoKisaiHokenshaNo" = 高額支給判定結果."shoKisaiHokenshaNo"
+            AND 振込明細."rirekiNo" = 高額支給判定結果."rirekiNo"
+        WHERE 
+            振込明細."dataKubun" = '2'
+        AND (振込明細."furikomiKingaku" = 0 OR 振込明細."kozaDataFlag" = FALSE)
+        AND 高額支給判定結果."furikomiMeisaishoSakuseiYMD" IS NOT NULL
+        AND 高額支給判定結果."furikomiMeisaishoSakuseiYMD" != ''
+    </select>
+</mapper>

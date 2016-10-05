@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 利用者負担割合のデータアクセスクラスです。
  *
- * @reamsid_L DBC-5010-011 zhaowei
+ * @reamsid_L DBD-9999-011 zhaowei
  */
 public class DbT3113RiyoshaFutanWariaiDac implements ISaveable<DbT3113RiyoshaFutanWariaiEntity> {
 

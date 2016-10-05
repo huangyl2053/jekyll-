@@ -76,6 +76,10 @@ public class DBB0320001KihonJoho {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * @param div DBB0320001KihonJohoDiv
+     * @return ResponseData
+     */
     public ResponseData<DBB0320001KihonJohoDiv> onClick_btnZenkairesultHyoji(DBB0320001KihonJohoDiv div) {
         return clearViewStateKeys(div);
     }
@@ -85,6 +89,10 @@ public class DBB0320001KihonJoho {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * @param div DBB0320001KihonJohoDiv
+     * @return ResponseData
+     */
     public ResponseData<DBB0320001KihonJohoDiv> onClick_btnResearch(DBB0320001KihonJohoDiv div) {
         return clearViewStateKeys(div);
     }

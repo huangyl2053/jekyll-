@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
-     "toState": ""
+     "toState": "検索条件"
     },
     {
      "id": "2",
@@ -36,7 +36,7 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC1140011",
      "layoutTitle": "自己負担額情報補正",
-     "eventName": "自己負担額入力へ",
+     "eventName": "自己負担額入力",
      "destroy": false,
      "condition": "平成２０年度",
      "toLayoutSubGyomuCode": "DBC",
@@ -48,25 +48,29 @@
      "id": "4",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1140011",
+     "layoutTitle": "自己負担額情報補正",
+     "eventName": "自己負担額入力",
+     "destroy": false,
+     "condition": "平成２０年度以外",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1140012",
+     "toLayoutTitle": "自己負担額情報入力",
+     "toState": "平成２０年度以外"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC1140012",
      "layoutTitle": "自己負担額情報入力",
-     "eventName": "一覧へ",
+     "eventName": "戻る",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC1140011",
      "toLayoutTitle": "自己負担額情報補正",
-     "toState": "自己負担額管理情報入力"
-    },
-    {
-     "id": "5",
-     "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1140011",
-     "layoutTitle": "自己負担額情報補正",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
+     "toState": ""
     },
     {
      "id": "6",
@@ -74,13 +78,37 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC1140011",
      "layoutTitle": "自己負担額情報補正",
-     "eventName": "自己負担額入力へ",
-     "destroy": false,
-     "condition": "平成２０年度以外",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1140012",
-     "toLayoutTitle": "自己負担額情報入力",
-     "toState": "平成２０年度以外"
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1140011",
+     "layoutTitle": "自己負担額情報補正",
+     "eventName": "検索結果一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "8",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1140011",
+     "layoutTitle": "自己負担額情報補正",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
     }
    ]
   }

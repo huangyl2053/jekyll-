@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka;
 import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -23,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HonsenteiKeisangojohoParameter extends KozaSearchParameter {
+public class HonsenteiKeisangojohoParameter extends KozaSearchParameter implements IMyBatisParameter {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;

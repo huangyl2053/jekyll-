@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -33,8 +32,6 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
     private final ShinsakaiJIzenShinsakekkaTorokuDiv div;
     private static final int ZERO = 0;
     private static final int ITI = 1;
-    private static final RString KAKO_MIGI = new RString(")");
-    private static final RString KAKO_HITARI = new RString("(");
 
     /**
      * 画面初期状態の設定です。
@@ -156,8 +153,7 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
             return RString.EMPTY;
         } else {
             try {
-                return new RStringBuilder(YokaigoJotaiKubun09.toValue(状態)
-                        .get略称()).append(KAKO_HITARI).append(状態).append(KAKO_MIGI).toRString();
+                return YokaigoJotaiKubun09.toValue(状態).get名称();
             } catch (Exception e) {
                 return RString.EMPTY;
             }

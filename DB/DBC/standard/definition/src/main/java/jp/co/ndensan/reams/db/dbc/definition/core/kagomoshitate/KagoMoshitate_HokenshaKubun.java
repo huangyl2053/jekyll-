@@ -16,10 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KagoMoshitate_HokenshaKubun {
 
     /**
-     * コード:0 名称:すべて 略称:すべて
-     */
-    すべて("0", "すべて", "すべて"),
-    /**
      * コード:1 名称:介護給付費 略称:介護（予防）給付費情報
      */
     介護給付費("1", "介護給付費", "介護（予防）給付費情報"),

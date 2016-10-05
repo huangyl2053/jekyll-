@@ -373,17 +373,17 @@ public class JimuShinsakaishiryoBusiness {
     private RString get要介護状態区分(Code 厚労省IF識別コード, Code 状態区分コード) {
         if (状態区分コード != null && !状態区分コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun99.toValue(状態区分コード.value()).get略称();
+                return YokaigoJotaiKubun99.toValue(状態区分コード.value()).get名称();
             }
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun02.toValue(状態区分コード.value()).get略称();
+                return YokaigoJotaiKubun02.toValue(状態区分コード.value()).get名称();
             }
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun06.toValue(状態区分コード.value()).get略称();
+                return YokaigoJotaiKubun06.toValue(状態区分コード.value()).get名称();
             }
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun09.toValue(状態区分コード.value()).get略称();
+                return YokaigoJotaiKubun09.toValue(状態区分コード.value()).get名称();
             }
         }
         return RString.EMPTY;

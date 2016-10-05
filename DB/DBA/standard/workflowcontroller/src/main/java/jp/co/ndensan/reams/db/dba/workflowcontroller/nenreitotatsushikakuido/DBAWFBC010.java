@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.workflowcontroller.nenreitotatsushikakuido;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA010010.DBA010010_NenreitotatsuShikakuIdoParameter;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
@@ -19,11 +19,11 @@ public class DBAWFBC010 {
      * 65歳年齢到達資格異動バッチパラメータ生成する処理メソッド
      *
      * @param flowparam フローパラメータ
-     * @return nenreitotatsuShikakuIdoParameter バッチパラメータクラス
+     * @return paramter バッチパラメータクラス
      */
-    public NenreitotatsuShikakuIdoBatchFlowParameter createBPForNenreitotatsuShikakuIdo(FlowParameters flowparam) {
-        NenreitotatsuShikakuIdoBatchFlowParameter nenreitotatsuShikakuIdoParameter = new NenreitotatsuShikakuIdoBatchFlowParameter();
+    public DBA010010_NenreitotatsuShikakuIdoParameter createBPForNenreitotatsuShikakuIdo(FlowParameters flowparam) {
+        DBA010010_NenreitotatsuShikakuIdoParameter parameter = new DBA010010_NenreitotatsuShikakuIdoParameter();
 
-        return nenreitotatsuShikakuIdoParameter;
+        return parameter;
     }
 }

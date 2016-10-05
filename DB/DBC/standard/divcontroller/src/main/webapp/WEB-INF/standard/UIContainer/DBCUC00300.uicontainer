@@ -89,7 +89,7 @@
      "layoutName": "DBC0030013",
      "layoutTitle": "高額介護サービス費照会",
      "eventName": "戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0030012",

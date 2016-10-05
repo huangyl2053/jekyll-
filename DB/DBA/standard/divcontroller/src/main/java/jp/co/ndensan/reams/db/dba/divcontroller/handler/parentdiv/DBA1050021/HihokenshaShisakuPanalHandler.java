@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochito
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoState;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
-import jp.co.ndensan.reams.ua.uax.business.core.IAtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -89,7 +88,7 @@ public class HihokenshaShisakuPanalHandler {
             HihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
 
         HihokenshaDaicho 資格得喪情報 = get最新資格得喪データ(被保険者台帳情報, 資格取得日);
-        setドロップダウンリストの設定(viewState, 資格得喪情報, 識別コード);
+        setドロップダウンリストの設定(viewState, 資格得喪情報);
 
         get宛名基本情報取得(識別コード);
         get資格系基本情報取得(被保険者番号);
@@ -134,8 +133,7 @@ public class HihokenshaShisakuPanalHandler {
             return null;
         }
         Optional<HihokenshaDaicho> 最新データ = oneSeasonList.findFirst();
-        HihokenshaDaicho 資格得喪情報 = 最新データ.get();
-        return 資格得喪情報;
+        return 最新データ.get();
     }
 
     private void get画面初期の追加更新モードの表示制御() {
@@ -162,10 +160,10 @@ public class HihokenshaShisakuPanalHandler {
         panelDiv.getShikakuShosai().getShikakuShosaiDialogs().setReadOnly(false);
     }
 
-    private void setドロップダウンリストの設定(RString viewState, HihokenshaDaicho 資格得喪情報, ShikibetsuCode 識別コード) {
+    private void setドロップダウンリストの設定(RString viewState, HihokenshaDaicho 資格得喪情報) {
         get取得事由();
         get被保区分();
-        get所在保険者と措置元保険者(viewState, 資格得喪情報, 識別コード);
+        get所在保険者と措置元保険者(viewState, 資格得喪情報);
         表示と非表示();
         get旧保険者(viewState, 資格得喪情報);
         get喪失事由();
@@ -196,7 +194,7 @@ public class HihokenshaShisakuPanalHandler {
         panelDiv.getShikakuShosai().getDdlHihoKubun().setDataSource(被保区分リスト);
     }
 
-    private void get所在保険者と措置元保険者(RString viewState, HihokenshaDaicho 資格得喪情報, ShikibetsuCode 識別コード) {
+    private void get所在保険者と措置元保険者(RString viewState, HihokenshaDaicho 資格得喪情報) {
         List<KeyValueDataSource> 所在保険者List = new ArrayList<>();
         List<KeyValueDataSource> 措置元保険者List = new ArrayList<>();
         if (単一保険者.equals(広域と市町村判断())) {
@@ -365,7 +363,7 @@ public class HihokenshaShisakuPanalHandler {
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getCode())) {
             return 広域保険者;
         } else if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getCode())
-                || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getCode())) {
+                   || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getCode())) {
             return 単一保険者;
         }
         return RString.EMPTY;
@@ -397,10 +395,6 @@ public class HihokenshaShisakuPanalHandler {
         panelDiv.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
     }
 
-    private void get宛名基本情報取得(IAtenaShokaiSimple 宛名データ) {
-        panelDiv.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv().setAtenaShokaiSimpleData(宛名データ);
-    }
-
     private void get資格系基本情報取得(HihokenshaNo 被保番号) {
         panelDiv.getKihonJoho().getCcdKaigoShikakuKihon().initialize(被保番号);
     }
@@ -408,12 +402,10 @@ public class HihokenshaShisakuPanalHandler {
     private void set資格得喪情報設定(RString viewState, List<HihokenshaDaicho> 被保険者台帳情報, FlexibleDate 資格取得日) {
         if (状態_追加.equals(viewState)) {
             RString 所在保険者 = 所在保険者の取得();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuShozaiHokensha().setSelectedKey(
-                    所在保険者.isEmpty() ? RString.EMPTY : 所在保険者);
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuShozaiHokensha().setSelectedKey(所在保険者);
             panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuSochimotoHokensha().setSelectedKey(RString.EMPTY);
             RString 旧保険者 = 旧保険者の取得();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
-                    旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(旧保険者);
         } else {
             HihokenshaDaichoList hihoList = new HihokenshaDaichoList(ItemList.of(被保険者台帳情報));
             IItemList<HihokenshaDaicho> oneSeasonList = hihoList.toOneSeasonList(資格取得日);
@@ -423,42 +415,35 @@ public class HihokenshaShisakuPanalHandler {
             Optional<HihokenshaDaicho> 最新データ = oneSeasonList.findFirst();
             HihokenshaDaicho 資格得喪情報 = 最新データ.get();
 
-            FlexibleDate 取得日 = 資格得喪情報.get資格取得年月日();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuDate().setValue(
-                    取得日 == null || 取得日.isEmpty() ? FlexibleDate.EMPTY : 取得日);
-            FlexibleDate 取得届出日 = 資格得喪情報.get資格取得届出年月日();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuTodokedeDate().setValue(
-                    取得届出日 == null || 取得届出日.isEmpty() ? FlexibleDate.EMPTY : 取得届出日);
-            RString 取得事由 = 資格得喪情報.get資格取得事由コード();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuJiyu().setSelectedKey(
-                    取得事由 == null || 取得事由.isEmpty() ? RString.EMPTY : 取得事由);
-            FlexibleDate 喪失日 = 資格得喪情報.get資格喪失年月日();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuDate().setValue(
-                    喪失日 == null || 喪失日.isEmpty() ? FlexibleDate.EMPTY : 喪失日);
-            FlexibleDate 喪失届出日 = 資格得喪情報.get資格喪失届出年月日();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuTodokedeDate().setValue(
-                    喪失届出日 == null || 喪失届出日.isEmpty() ? FlexibleDate.EMPTY : 喪失届出日);
-            RString 喪失事由 = 資格得喪情報.get資格喪失事由コード();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlSoshitsuJiyu().setSelectedKey(
-                    喪失事由 == null || 喪失事由.isEmpty() ? RString.EMPTY : 喪失事由);
-            RString 被保区分 = 資格得喪情報.get被保険者区分コード();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlHihoKubun().setSelectedKey(
-                    被保区分 == null || 被保区分.isEmpty() ? RString.EMPTY : 被保区分);
+            FlexibleDate 取得日 = valueOrEmptyIfNull(資格得喪情報.get資格取得年月日());
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuDate().setValue(取得日);
+            FlexibleDate 取得届出日 = valueOrEmptyIfNull(資格得喪情報.get資格取得届出年月日());
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuTodokedeDate().setValue(取得届出日);
+            RString 取得事由 = valueOrEmptyIfNull(資格得喪情報.get資格取得事由コード());
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuJiyu().setSelectedKey(取得事由);
+            FlexibleDate 喪失日 = valueOrEmptyIfNull(資格得喪情報.get資格喪失年月日());
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuDate().setValue(喪失日);
+            FlexibleDate 喪失届出日 = valueOrEmptyIfNull(資格得喪情報.get資格喪失届出年月日());
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuTodokedeDate().setValue(喪失届出日);
+            RString 喪失事由 = valueOrEmptyIfNull(資格得喪情報.get資格喪失事由コード());
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlSoshitsuJiyu().setSelectedKey(喪失事由);
+            RString 被保区分 = valueOrEmptyIfNull(資格得喪情報.get被保険者区分コード());
+            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlHihoKubun().setSelectedKey(被保区分);
             LasdecCode 所在保険者 = 資格得喪情報.get市町村コード();
             panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuShozaiHokensha().setSelectedKey(
-                    所在保険者 == null || 所在保険者.isEmpty() ? RString.EMPTY : 所在保険者.getColumnValue());
+                    所在保険者 == null ? RString.EMPTY : 所在保険者.getColumnValue());
             LasdecCode 措置元保険者 = 資格得喪情報.get広住特措置元市町村コード();
             panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuSochimotoHokensha().setSelectedKey(
-                    措置元保険者 == null || 措置元保険者.isEmpty() ? RString.EMPTY : 措置元保険者.getColumnValue());
+                    措置元保険者 == null ? RString.EMPTY : 措置元保険者.getColumnValue());
             LasdecCode 旧保険者 = 資格得喪情報.get旧市町村コード();
 
             DropDownList shutokuKeyHokensha = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha();
             if (shutokuKeyHokensha.getDataSource().isEmpty()
-                    || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine() == true)) {
+                || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine())) {
                 panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setDisabled(true);
             } else {
                 panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
-                        旧保険者 == null || 旧保険者.isEmpty() ? RString.EMPTY : 旧保険者.getColumnValue());
+                        旧保険者 == null ? RString.EMPTY : 旧保険者.getColumnValue());
             }
 
             RDateTime 処理日時 = 資格得喪情報.toEntity().getLastUpdateTimestamp();
@@ -474,6 +459,14 @@ public class HihokenshaShisakuPanalHandler {
             panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuShoriDate().setValue(rStringToFlexibleDate(処理日時Str));
             panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuShoriDate().setValue(rStringToFlexibleDate(処理日時Str));
         }
+    }
+
+    private RString valueOrEmptyIfNull(RString rString) {
+        return rString == null ? RString.EMPTY : rString;
+    }
+
+    private FlexibleDate valueOrEmptyIfNull(FlexibleDate fDate) {
+        return fDate == null ? FlexibleDate.EMPTY : fDate;
     }
 
     private FlexibleDate rStringToFlexibleDate(RString 処理日時) {

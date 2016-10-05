@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5110001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5110001.KoshinShinseishaHaakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511003.DBD511003_KoshinMiShinseishaHaakuParameter;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5110001.DBD5110001StateName.初期表示;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5110001.DBD5110001StateName.対象期間;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5110001.DBD5110001StateName.未申請者;
@@ -89,8 +89,8 @@ public class KoshinShinseishaHaakuList {
      * @param div KoshinShinseishaHaakuListDiv
      * @return ResponseData<KoshinShinseishaHaakuListDiv>
      */
-    public ResponseData<KoshinShinseishaHaakuListParameter> onClick_btnprint(KoshinShinseishaHaakuListDiv div) {
-        KoshinShinseishaHaakuListParameter parameter = getHandler(div).getParameter();
+    public ResponseData<DBD511003_KoshinMiShinseishaHaakuParameter> onClick_btnprint(KoshinShinseishaHaakuListDiv div) {
+        DBD511003_KoshinMiShinseishaHaakuParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 

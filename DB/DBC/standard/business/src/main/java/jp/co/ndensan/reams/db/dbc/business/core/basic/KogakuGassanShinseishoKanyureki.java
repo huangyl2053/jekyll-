@@ -20,11 +20,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算申請書加入歴を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
-public class KogakuGassanShinseishoKanyureki 
-    extends ModelBase<KogakuGassanShinseishoKanyurekiIdentifier,
-        DbT3069KogakuGassanShinseishoKanyurekiEntity, KogakuGassanShinseishoKanyureki> 
-    implements Serializable {
+public class KogakuGassanShinseishoKanyureki
+        extends ModelBase<KogakuGassanShinseishoKanyurekiIdentifier, DbT3069KogakuGassanShinseishoKanyurekiEntity, KogakuGassanShinseishoKanyureki>
+        implements Serializable {
 
     private final DbT3069KogakuGassanShinseishoKanyurekiEntity entity;
     private final KogakuGassanShinseishoKanyurekiIdentifier id;
@@ -242,7 +243,7 @@ public class KogakuGassanShinseishoKanyureki
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

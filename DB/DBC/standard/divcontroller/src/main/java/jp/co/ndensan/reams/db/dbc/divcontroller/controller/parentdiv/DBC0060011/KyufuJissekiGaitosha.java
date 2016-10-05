@@ -54,8 +54,8 @@ public class KyufuJissekiGaitosha {
         List<KyufuKanrihyoShokaiBusiness> 給付管理票一覧 = KyufuKanrihyoShokai.createInstance().selectKyufuKanrihyoList(
                 div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue(),
                 div.getSearchToKyufujissekiPanel().getTxtJigyoshaNo().getValue(),
-                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue().toDateString(),
-                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getToValue().toDateString());
+                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue().getYearMonth().toDateString(),
+                div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getToValue().getYearMonth().toDateString());
         getHandler(div).onClick_btnSearch(給付管理票一覧);
         return ResponseData.of(div).respond();
     }

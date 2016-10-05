@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207011.DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001.ShiharaiHohoHenkoHaakuIchiran;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -92,7 +92,7 @@ public class DBD2020001ValidationHandler {
      *
      * @return バッチパラメター
      */
-    public ShiharaiHohoHenkoHaakuIchiranBatchParameter setBatchParameter() {
+    public DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter setBatchParameter() {
 
         ShiharaiHohoHenkoHaakuIchiran shiharaiHohoHenkoHaakuIchiran = new ShiharaiHohoHenkoHaakuIchiran();
         return shiharaiHohoHenkoHaakuIchiran.createShiharaiHohoHenkoHaakuIchiranParameter(div);

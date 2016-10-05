@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525002.DBE525002_HanteiKekkaHokenshaParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.dgTaishoshaIchiran_Row;
@@ -194,17 +194,17 @@ public class NijihanteiKekkaOutputHandler {
     /**
      * 判定結果情報出力(保険者)作成画面入力するデータより、バッチ用パラメータクラスを作成します。
      *
-     * @return HanteiKekkaJohoShutsuryokuBatchParamter
+     * @return DBE525002_HanteiKekkaHokenshaParameter
      */
-    public HanteiKekkaJohoShutsuryokuBatchParamter setBatchParameter() {
+    public DBE525002_HanteiKekkaHokenshaParameter setBatchParameter() {
         List<RString> shinseishoKanriNo = new ArrayList<>();
         for (dgTaishoshaIchiran_Row row : nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource()) {
             if (row.getSelected()) {
                 shinseishoKanriNo.add(row.getShinseishoKanriNo());
             }
         }
-        HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
-                = new HanteiKekkaJohoShutsuryokuBatchParamter();
+        DBE525002_HanteiKekkaHokenshaParameter hanteibatchParameter
+                = new DBE525002_HanteiKekkaHokenshaParameter();
         hanteibatchParameter.setShinseishoKanriNo(shinseishoKanriNo);
         hanteibatchParameter.setNijiHanteiYMDFrom(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
                 : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
@@ -216,17 +216,17 @@ public class NijihanteiKekkaOutputHandler {
     /**
      * 判定結果情報出力(保険者)作成画面入力するデータより、バッチ用パラメータクラスを作成します。
      *
-     * @return HanteiKekkaJohoShutsuryokuBatchParamter
+     * @return DBE525002_HanteiKekkaHokenshaParameter
      */
-    public HanteiKekkaJohoShutsuryokuBatchParamter setCSVBatchParameter() {
+    public DBE525002_HanteiKekkaHokenshaParameter setCSVBatchParameter() {
         List<RString> shinseishoKanriNo = new ArrayList<>();
         for (dgTaishoshaIchiran_Row row : nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource()) {
             if (row.getSelected()) {
                 shinseishoKanriNo.add(row.getShinseishoKanriNo());
             }
         }
-        HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
-                = new HanteiKekkaJohoShutsuryokuBatchParamter();
+        DBE525002_HanteiKekkaHokenshaParameter hanteibatchParameter
+                = new DBE525002_HanteiKekkaHokenshaParameter();
         hanteibatchParameter.setShinseishoKanriNo(shinseishoKanriNo);
         hanteibatchParameter.setNijiHanteiYMDFrom(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
                 : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));

@@ -44,6 +44,7 @@
         <result property="当初登録年月日" column="toshoTorokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="取込年月" column="torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="select給付管理票一覧" resultMap="resultMap_select給付管理票一覧"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoshokai.KyufuKanrihyoShokaiMapperParameter" fetchSize="500" resultOrdered="true" >
@@ -88,6 +89,7 @@
         SELECT
           Temp.*
           , 宛名."meisho" AS 氏名
+          , 被保険者台帳."shikibetsuCode" AS 識別コード
         FROM
           Temp 
           LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳 

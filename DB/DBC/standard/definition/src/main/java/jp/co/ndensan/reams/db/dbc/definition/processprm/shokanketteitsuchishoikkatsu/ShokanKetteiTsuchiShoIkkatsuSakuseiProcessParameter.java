@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishoikkatsu;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -52,7 +52,7 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
      * @return Process用パラメータ
      */
     public static ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter
-            createProcessParam(ShoukanBaraiSuuchiShoIkatsuBatchParamter batchParamter) {
+            createProcessParam(DBC030010_ShokanShikyuKetteiTsuchishoParameter batchParamter) {
 
         FlexibleDate dataFrom = FlexibleDate.EMPTY;
         FlexibleDate dataTo = FlexibleDate.MAX;

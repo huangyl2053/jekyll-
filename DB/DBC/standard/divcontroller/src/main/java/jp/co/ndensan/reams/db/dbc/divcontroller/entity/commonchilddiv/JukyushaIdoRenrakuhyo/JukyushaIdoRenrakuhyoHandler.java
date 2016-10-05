@@ -189,7 +189,12 @@ public class JukyushaIdoRenrakuhyoHandler {
         set二割負担エリア(受給者異動情報);
         set二次予防事業エリア(受給者異動情報);
         set老人保健エリア(受給者異動情報);
-        onClick_計画作成区分();
+        if (新規モード.equals(処理モード) || 訂正モード.equals(処理モード)) {
+            onClick_計画作成区分();
+        }
+        if (新規モード.equals(処理モード)) {
+            onClick_事業区分();
+        }
         return 受給者異動情報;
     }
 
@@ -563,7 +568,6 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToValue(
                     new RDate(受給者異動情報.get二次予防事業有効期間終了年月日().toString()));
         }
-        onClick_事業区分();
 
     }
 

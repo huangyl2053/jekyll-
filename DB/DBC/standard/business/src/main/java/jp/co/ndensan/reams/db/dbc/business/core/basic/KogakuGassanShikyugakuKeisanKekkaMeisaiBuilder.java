@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanShikyugakuKeisanKekkaMeisai}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
 public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
 
@@ -121,7 +123,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set保険制度コード(RString 保険制度コード) {
-        requireNonNull(保険制度コード, UrSystemErrorMessages.値がnull.getReplacedMessage("保険制度コード"));
         entity.setHokenSeidoCode(保険制度コード);
         return this;
     }
@@ -133,7 +134,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set内訳保険者番号(RString 内訳保険者番号) {
-        requireNonNull(内訳保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("内訳保険者番号"));
         entity.setUchiwakeHokenshaNo(内訳保険者番号);
         return this;
     }
@@ -145,7 +145,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set国保被保険者証記号(RString 国保被保険者証記号) {
-        requireNonNull(国保被保険者証記号, UrSystemErrorMessages.値がnull.getReplacedMessage("国保被保険者証記号"));
         entity.setKokuho_HihokenshaShoKigo(国保被保険者証記号);
         return this;
     }
@@ -157,7 +156,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set被保険者_証番号(RString 被保険者_証番号) {
-        requireNonNull(被保険者_証番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者_証番号"));
         entity.setHiHokenshaShoNo(被保険者_証番号);
         return this;
     }
@@ -169,7 +167,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set内訳保険者名(RString 内訳保険者名) {
-        requireNonNull(内訳保険者名, UrSystemErrorMessages.値がnull.getReplacedMessage("内訳保険者名"));
         entity.setUchiwakeHokenshaMei(内訳保険者名);
         return this;
     }
@@ -181,7 +178,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set自己負担額証明書整理番号(RString 自己負担額証明書整理番号) {
-        requireNonNull(自己負担額証明書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("自己負担額証明書整理番号"));
         entity.setJikoFutanSeiriNo(自己負担額証明書整理番号);
         return this;
     }
@@ -193,7 +189,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set対象者氏名_漢字(RString 対象者氏名_漢字) {
-        requireNonNull(対象者氏名_漢字, UrSystemErrorMessages.値がnull.getReplacedMessage("対象者氏名_漢字"));
         entity.setTaishoshaShimei(対象者氏名_漢字);
         return this;
     }
@@ -205,7 +200,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上負担額(RString 負担額_70歳以上) {
-        requireNonNull(負担額_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上負担額"));
         entity.setOver70_Futangaku(負担額_70歳以上);
         return this;
     }
@@ -217,7 +211,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上按分率(RString 按分率_70歳以上) {
-        requireNonNull(按分率_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上按分率"));
         entity.setOver70_AmbunRitsu(按分率_70歳以上);
         return this;
     }
@@ -229,7 +222,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上支給額(RString 支給額_70歳以上) {
-        requireNonNull(支給額_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上支給額"));
         entity.setOver70_Shikyugaku(支給額_70歳以上);
         return this;
     }
@@ -241,7 +233,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳未満負担額(RString 負担額_70歳未満) {
-        requireNonNull(負担額_70歳未満, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満負担額"));
         entity.setUnder70_Futangaku(負担額_70歳未満);
         return this;
     }
@@ -253,7 +244,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set負担額(RString 負担額) {
-        requireNonNull(負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("負担額"));
         entity.setFutangaku(負担額);
         return this;
     }
@@ -265,7 +255,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set按分率(RString 按分率) {
-        requireNonNull(按分率, UrSystemErrorMessages.値がnull.getReplacedMessage("按分率"));
         entity.setAmbunRitsu(按分率);
         return this;
     }
@@ -277,7 +266,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳未満支給額(RString 支給額_70歳未満) {
-        requireNonNull(支給額_70歳未満, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満支給額"));
         entity.setUnder70_Shikyugaku(支給額_70歳未満);
         return this;
     }
@@ -289,7 +277,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set支給額(RString 支給額) {
-        requireNonNull(支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("支給額"));
         entity.setShikyugaku(支給額);
         return this;
     }
@@ -301,7 +288,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set備考欄記載70歳以上負担額(RString 備考欄記載70歳以上負担額) {
-        requireNonNull(備考欄記載70歳以上負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("備考欄記載70歳以上負担額"));
         entity.setOver70_Biko(備考欄記載70歳以上負担額);
         return this;
     }
@@ -313,7 +299,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set備考欄記載70歳未満負担額(RString 備考欄記載70歳未満負担額) {
-        requireNonNull(備考欄記載70歳未満負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("備考欄記載70歳未満負担額"));
         entity.setUnder70_Biko(備考欄記載70歳未満負担額);
         return this;
     }
@@ -325,7 +310,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder setデータ区分(RString データ区分) {
-        requireNonNull(データ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("データ区分"));
         entity.setDataKubun(データ区分);
         return this;
     }
@@ -337,7 +321,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set受取年月(FlexibleYearMonth 受取年月) {
-        requireNonNull(受取年月, UrSystemErrorMessages.値がnull.getReplacedMessage("受取年月"));
         entity.setUketoriYM(受取年月);
         return this;
     }
@@ -349,7 +332,6 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
     public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set送付年月(FlexibleYearMonth 送付年月) {
-        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         entity.setSofuYM(送付年月);
         return this;
     }

@@ -4,12 +4,20 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onOkClose = function () {
-                return "onOkClose";
+            Events.onOkClose_btnChosaJokyo = function () {
+                return "onOkClose_btnChosaJokyo";
             };
 
-            Events.onCancelClose = function () {
-                return "onCancelClose";
+            Events.onBefore_btnChosaJokyo = function () {
+                return "onBefore_btnChosaJokyo";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
+            };
+
+            Events.onClick_btnCancel = function () {
+                return "onClick_btnCancel";
             };
             return Events;
         })();

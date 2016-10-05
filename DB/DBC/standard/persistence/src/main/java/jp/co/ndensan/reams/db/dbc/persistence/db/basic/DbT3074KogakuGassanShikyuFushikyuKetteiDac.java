@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額合算支給不支給決定のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> {
 
@@ -105,6 +107,18 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT
     }
 
     /**
+     * DbT3074KogakuGassanShikyuFushikyuKetteiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給不支給決定エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 高額合算支給不支給決定を全件返します。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -123,4 +137,40 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT
                 order(by(taishoNendo, Order.DESC), by(shikyuSeiriNo, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT3074KogakuGassanShikyuFushikyuKetteiEntity.class);
     }
+
+    /**
+     * 高額合算支給不支給決定を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 ShikyuSeiriNo
+     * @return DbT3074KogakuGassanShikyuFushikyuKetteiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> getAll(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3074KogakuGassanShikyuFushikyuKettei.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoNendo, 対象年度),
+                                eq(hokenshaNo, 保険者番号),
+                                eq(shikyuSeiriNo, 支給申請書整理番号),
+                                eq(isDeleted, false))).
+                order(by(rirekiNo, Order.DESC)).
+                toList(DbT3074KogakuGassanShikyuFushikyuKetteiEntity.class);
+    }
+
 }

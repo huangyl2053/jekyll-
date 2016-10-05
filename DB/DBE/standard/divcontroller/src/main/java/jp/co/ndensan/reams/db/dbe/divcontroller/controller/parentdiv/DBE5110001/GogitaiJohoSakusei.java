@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJ
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.gogitaijohosakusei.GogitaiJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE511001.DBE511001_GogitaiIkkatuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.GogitaiJohoSakuseiDiv;
@@ -521,9 +521,9 @@ public class GogitaiJohoSakusei {
      * @param div 合議体情報作成Div
      * @return ResponseData<GogitaiJohoSakuseiBatchParamter>
      */
-    public ResponseData<GogitaiJohoSakuseiBatchParamter> onClick_btnBatchRegister(GogitaiJohoSakuseiDiv div) {
-        ResponseData<GogitaiJohoSakuseiBatchParamter> responseData = new ResponseData<>();
-        GogitaiJohoSakuseiBatchParamter batchParam = new GogitaiJohoSakuseiBatchParamter();
+    public ResponseData<DBE511001_GogitaiIkkatuParameter> onClick_btnBatchRegister(GogitaiJohoSakuseiDiv div) {
+        ResponseData<DBE511001_GogitaiIkkatuParameter> responseData = new ResponseData<>();
+        DBE511001_GogitaiIkkatuParameter batchParam = new DBE511001_GogitaiIkkatuParameter();
         batchParam.setSharedFileID(RDateTime.parse(div.getHiddenFileId().toString()));
         batchParam.setSharedFileName(KyoyuFileName.合議体情報作成一括登録ファイル.get名称());
         batchParam.setInputFileName(div.getHiddenFileName());
@@ -658,7 +658,7 @@ public class GogitaiJohoSakusei {
         return gogitaiJoho;
     }
 
-    private static class EdittingRow {
+    private static final class EdittingRow {
 
         private final dgGogitaiIchiran_Row row;
         private final int index;

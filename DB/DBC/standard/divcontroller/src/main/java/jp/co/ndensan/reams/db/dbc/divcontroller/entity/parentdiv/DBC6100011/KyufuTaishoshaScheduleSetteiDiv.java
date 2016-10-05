@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYearMonth;
 
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYearMonth;
  */
 public class KyufuTaishoshaScheduleSetteiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -106,36 +105,6 @@ public class KyufuTaishoshaScheduleSetteiDiv extends Panel {
     @JsonIgnore
     public void setTxtShoriNengetsu(TextBoxFlexibleYearMonth txtShoriNengetsu) {
         this.getSaishinShoriNengetsuNyuryoku().setTxtShoriNengetsu(txtShoriNengetsu);
-    }
-
-    @JsonIgnore
-    public Label getLblShinsaNengetsuKikan() {
-        return this.getSaishinShoriNengetsuNyuryoku().getLblShinsaNengetsuKikan();
-    }
-
-    @JsonIgnore
-    public void setLblShinsaNengetsuKikan(Label lblShinsaNengetsuKikan) {
-        this.getSaishinShoriNengetsuNyuryoku().setLblShinsaNengetsuKikan(lblShinsaNengetsuKikan);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleYearMonth getTxtShinsaNengetsuFrom() {
-        return this.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuFrom();
-    }
-
-    @JsonIgnore
-    public void setTxtShinsaNengetsuFrom(TextBoxFlexibleYearMonth txtShinsaNengetsuFrom) {
-        this.getSaishinShoriNengetsuNyuryoku().setTxtShinsaNengetsuFrom(txtShinsaNengetsuFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleYearMonth getTxtShinsaNengetsuTo() {
-        return this.getSaishinShoriNengetsuNyuryoku().getTxtShinsaNengetsuTo();
-    }
-
-    @JsonIgnore
-    public void setTxtShinsaNengetsuTo(TextBoxFlexibleYearMonth txtShinsaNengetsuTo) {
-        this.getSaishinShoriNengetsuNyuryoku().setTxtShinsaNengetsuTo(txtShinsaNengetsuTo);
     }
 
     @JsonIgnore

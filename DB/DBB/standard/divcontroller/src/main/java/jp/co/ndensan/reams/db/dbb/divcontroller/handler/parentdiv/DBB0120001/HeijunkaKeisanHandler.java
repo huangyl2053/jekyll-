@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6.KaigoFu
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -54,7 +53,6 @@ public class HeijunkaKeisanHandler {
     private static final RString 遷移元区分_1 = new RString("1");
     private static final RString 帳票グループコード_DBB0120001 = new RString("DBB0120001");
     private static final RString 帳票グループコード_DBB0120003 = new RString("DBB0120003");
-    private static final ReportId REPORTID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final RString 選択列表示 = new RString("1");
     private static final RString 設定ボタン列表示 = new RString("1");
 

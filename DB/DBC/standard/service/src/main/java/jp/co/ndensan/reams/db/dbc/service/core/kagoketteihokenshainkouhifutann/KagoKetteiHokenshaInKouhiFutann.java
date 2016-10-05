@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kagoketteihokenshainkouhifutann;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3060KagoKetteiShukeiTempEntity;
@@ -59,13 +60,13 @@ public class KagoKetteiHokenshaInKouhiFutann {
     private List<KagoKetteiHokenshaInKouhiFutannDataEntity> dataList;
     private List<KagoKetteiHokenshaInKouhiFutannCsvMeisaiEntity> meisaiList;
     private final RString レコード種別 = new RString("1");
+    private final RString エンドレコード種別 = new RString("3");
     private final RString 帳票レコード種別_H1 = new RString("H1");
     private final RString 帳票レコード種別_D1 = new RString("D1");
     private final RString 帳票レコード種別_T1 = new RString("T1");
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
-    private static final RString NUM = new RString("99");
 
     /**
      * コンストラクタです。
@@ -115,7 +116,7 @@ public class KagoKetteiHokenshaInKouhiFutann {
         List<KagoKetteiHokenshaInKouhiFutannEntity> csvlist = csvファイル読込(保存先フォルダ, エントリ情報List);
         IKagoKetteiHokenshaInKouhiFutannMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInKouhiFutannMapper.class);
         DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-        errorTempentity.setエラー区分(NUM);
+        errorTempentity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         int 集計データ登録件数 = INDEX_0;
         int 明細データ登録件数 = INDEX_0;
         FlowEntity getEntity = バッチフロ(csvlist);
@@ -391,6 +392,9 @@ public class KagoKetteiHokenshaInKouhiFutann {
                 while (true) {
                     List<RString> data = csvReader.readLine();
                     if (data != null && !data.isEmpty()) {
+                        if (エンドレコード種別.equals(data.get(INDEX_0))) {
+                            continue;
+                        }
                         if (レコード種別.equals(data.get(INDEX_0))) {
                             controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
                         } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {

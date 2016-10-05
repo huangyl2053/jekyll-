@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki272;
 
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 介護事業状況報告月報・保険給付決定状況（様式2-7） のBuilderのインタ—フェ—スです。
+ * 介護事業状況報告月報・保険給付決定状況（様式2-7） のBuilderのインタフェースです。
  *
  * @reamsid_L DBU-5590-050 wanghuafeng
  */

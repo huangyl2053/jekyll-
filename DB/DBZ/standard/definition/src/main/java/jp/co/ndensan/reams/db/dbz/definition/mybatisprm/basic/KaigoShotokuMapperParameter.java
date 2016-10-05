@@ -20,6 +20,13 @@ public class KaigoShotokuMapperParameter {
     private final YMDHMS shiteiShoriYMDHMS;
     private final List<ShikibetsuCode> shikibetsuCodeList;
 
+    /**
+     * 指定のパラメータを保持したインスタンスを生成します。
+     *
+     * @param shiteiNendo 指定年度
+     * @param shiteiShoriYMDHMS 指定処理日時
+     * @param shikibetsuCodeList 識別コードリスト
+     */
     public KaigoShotokuMapperParameter(FlexibleYear shiteiNendo, YMDHMS shiteiShoriYMDHMS, List<ShikibetsuCode> shikibetsuCodeList) {
         this.shiteiNendo = shiteiNendo;
         this.shiteiShoriYMDHMS = shiteiShoriYMDHMS;

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2660-030 gongliang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper">
+
+    <select resultOrdered="true" id="get高額合算自己負担額データ"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassan.KogakugassanMybatisParameter" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
+        FROM
+            (SELECT 
+            "DbT3070".*
+            ,ROW_NUMBER() OVER (PARTITION BY "DbT3070"."hihokenshaNo", "DbT3070"."taishoNendo", 
+                    "DbT3070"."hokenshaNo", "DbT3070"."shikyuShinseishoSeiriNo"
+                ORDER BY "DbT3070"."rirekiNo" DESC) AS rowNum
+            FROM
+                rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070"
+            WHERE
+                "DbT3070"."dataSakuseiKubun" IN (#{データ区分_1}, #{データ区分_3})
+            AND "DbT3070"."isDeleted" = FALSE) AS "DbT3070KogakuGassanJikoFutanGaku"
+        WHERE
+            "DbT3070KogakuGassanJikoFutanGaku".rowNum = 1
+        AND ("DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> #{介護合算_送付対象外})
+        AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
+            OR "DbT3070KogakuGassanJikoFutanGaku"."saisoFlag" = #{国保連データ再送フラグ_再送要}
+            <if test="saishoriKubun == 1">
+                OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = #{shoriYM}
+            </if>)
+        <if test="shoriKunbun == null or shoriKunbun.isEmpty()">
+            AND ("DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" = '')
+        </if>
+        <if test="shoriKunbun != null and !shoriKunbun.isEmpty()">
+            AND "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" = #{shoriKunbun}
+        </if>
+        ORDER BY
+            "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" ASC,
+            "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" ASC, 
+            "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" ASC,
+            "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" ASC,
+            "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo"
+    </select>
+
+        <select resultOrdered="true" id="get明細データ" fetchSize="500"
+            resultMap="ResultMap_DbWT37K1KogakuGassanJikoFutanGakuTempEntity">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT37K1KogakuGassanJikoFutanGaku" />
+        FROM
+            "DbWT37K1KogakuGassanJikoFutanGaku" AS "DbWT37K1KogakuGassanJikoFutanGaku"
+        WHERE 
+            NOT EXISTS(
+                SELECT * FROM rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071KogakuGassanJikoFutanGakuMeisai"
+                WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"
+                AND  "DbWT37K1KogakuGassanJikoFutanGaku"."taishoNendo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo"
+                AND  "DbWT37K1KogakuGassanJikoFutanGaku"."hokenshaNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
+                AND  "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
+                AND  "DbWT37K1KogakuGassanJikoFutanGaku"."rirekiNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo")
+    </select>
+
+    <select resultOrdered="true" id="get識別コードがないデータ" fetchSize="500"
+            resultMap="ResultMap_DbWT37K1KogakuGassanJikoFutanGakuTempEntity">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT37K1KogakuGassanJikoFutanGaku" />
+        FROM
+            "DbWT37K1KogakuGassanJikoFutanGaku"
+        INNER JOIN
+            "DbWT1001Hihokensha"
+        ON "DbWT1001Hihokensha"."exRenban" = "DbWT37K1KogakuGassanJikoFutanGaku"."renban"
+        WHERE "DbWT1001Hihokensha"."shikibetsuCode" IS NULL OR "DbWT1001Hihokensha"."shikibetsuCode" = ''
+    </select>
+
+    <select resultOrdered="true" id="get出力対象データ" fetchSize="500"
+            resultMap="ResultMap_DBWT37K1ToDbWT1001ToMeisai">
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT37K1KogakuGassanJikoFutanGaku" />,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT1001Hihokensha" />,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        FROM "DbWT37K1KogakuGassanJikoFutanGaku"
+        INNER JOIN "DbWT1001Hihokensha"
+               ON "DbWT1001Hihokensha"."exRenban" = "DbWT37K1KogakuGassanJikoFutanGaku"."renban"
+        INNER JOIN rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071KogakuGassanJikoFutanGakuMeisai"
+               ON "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"
+             AND  "DbWT37K1KogakuGassanJikoFutanGaku"."taishoNendo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo"
+             AND  "DbWT37K1KogakuGassanJikoFutanGaku"."hokenshaNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
+             AND  "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
+             AND  "DbWT37K1KogakuGassanJikoFutanGaku"."rirekiNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo"
+        WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
+          AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NOT NULL
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[<>]]> '')
+           OR  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NOT NULL
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[<>]]> ''))
+        ORDER BY "DbWT37K1KogakuGassanJikoFutanGaku"."renban" ASC, "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM" ASC
+    </select>
+
+    <resultMap id="ResultMap_DBWT37K1ToDbWT1001ToMeisai" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassan.SyuturyokuEntity" autoMapping="true">
+        <id column="dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaNo" />
+        <id column="dbWT37K1KogakuGassanJikoFutanGaku_taishoNendo" />
+        <id column="dbWT37K1KogakuGassanJikoFutanGaku_hokenshaNo" />
+        <id column="dbWT37K1KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo" />
+        <id column="dbWT37K1KogakuGassanJikoFutanGaku_rirekiNo" />
+        <id column="dbWT37K1KogakuGassanJikoFutanGaku_renban" />
+        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" />
+        <association property="高額合算自己負担額一時Entity" resultMap="ResultMap_DbWT37K1KogakuGassanJikoFutanGakuTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="高額合算自己負担額明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get送付一覧表出力対象データ" fetchSize="500"
+            resultMap="ResultMap_DBWT37K1ToDbWT1001ToMeisai">
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT37K1KogakuGassanJikoFutanGaku" />,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT1001Hihokensha" />
+        FROM "DbWT37K1KogakuGassanJikoFutanGaku"
+        INNER JOIN "DbWT1001Hihokensha"
+               ON "DbWT1001Hihokensha"."exRenban" = "DbWT37K1KogakuGassanJikoFutanGaku"."renban"
+        WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
+          AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NOT NULL
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[<>]]> '')
+           OR  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NOT NULL
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[<>]]> ''))
+        ${出力順},
+        "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo",
+        "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+    </select>
+
+    <select resultOrdered="true" id="get未送付一覧表出力対象データ" fetchSize="500"
+            resultMap="ResultMap_DBWT37K1ToDbWT1001ToMeisai">
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT37K1KogakuGassanJikoFutanGaku" />,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT1001Hihokensha" />
+        FROM "DbWT37K1KogakuGassanJikoFutanGaku"
+        INNER JOIN "DbWT1001Hihokensha"
+               ON "DbWT1001Hihokensha"."exRenban" = "DbWT37K1KogakuGassanJikoFutanGaku"."renban"
+        WHERE ("DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
+          AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NULL
+           OR  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" = '')
+           AND  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NULL
+           OR  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" = '')))
+         OR  "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = TRUE
+        ${出力順},
+        "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo",
+        "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+    </select>
+
+    <select resultOrdered="true" id="get送付済高額合算自己負担額データ" fetchSize="500"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity">
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
+        FROM rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
+        INNER JOIN "DbWT37K1KogakuGassanJikoFutanGaku"
+               ON  "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "DbWT37K1KogakuGassanJikoFutanGaku"."taishoNendo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."hokenshaNo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."rirekiNo"
+        WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
+          AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NOT NULL
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[<>]]> '')
+           OR  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NOT NULL
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[<>]]> ''))
+    </select>
+
+    <select resultOrdered="true" id="get未送付高額合算自己負担額データ" fetchSize="500"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity">
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
+        FROM rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
+        INNER JOIN "DbWT37K1KogakuGassanJikoFutanGaku"
+               ON  "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "DbWT37K1KogakuGassanJikoFutanGaku"."taishoNendo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."hokenshaNo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+               AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."rirekiNo"
+        WHERE ("DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
+          AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NULL
+           OR  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" = '')
+           AND  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NULL
+           OR  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" = '')))
+        OR "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = TRUE
+    </select>
+
+    <sql id="allColumns_DbWT37K1KogakuGassanJikoFutanGaku">
+         "DbWT37K1KogakuGassanJikoFutanGaku"."renban" as "dbWT37K1KogakuGassanJikoFutanGaku_renban",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo" as "dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."taishoNendo" as "dbWT37K1KogakuGassanJikoFutanGaku_taishoNendo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hokenshaNo" as "dbWT37K1KogakuGassanJikoFutanGaku_hokenshaNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" as "dbWT37K1KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."rirekiNo" as "dbWT37K1KogakuGassanJikoFutanGaku_rirekiNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hokenSeidoCode" as "dbWT37K1KogakuGassanJikoFutanGaku_hokenSeidoCode",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hokenshaMei" as "dbWT37K1KogakuGassanJikoFutanGaku_hokenshaMei",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."kokuho_HihokenshaShoKigo" as "dbWT37K1KogakuGassanJikoFutanGaku_kokuho_HihokenshaShoKigo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaShimeiKana" as "dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaShimeiKana",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaShimei" as "dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaShimei",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."umareYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_umareYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."seibetsuCode" as "dbWT37K1KogakuGassanJikoFutanGaku_seibetsuCode",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shotokuKubun" as "dbWT37K1KogakuGassanJikoFutanGaku_shotokuKubun",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."over70_ShotokuKubun" as "dbWT37K1KogakuGassanJikoFutanGaku_over70_ShotokuKubun",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."jikoFutanSeiriNo" as "dbWT37K1KogakuGassanJikoFutanGaku_jikoFutanSeiriNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."koki_HokenshaNo" as "dbWT37K1KogakuGassanJikoFutanGaku_koki_HokenshaNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."koki_HihokenshaNo" as "dbWT37K1KogakuGassanJikoFutanGaku_koki_HihokenshaNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."kokuho_HokenshaNo" as "dbWT37K1KogakuGassanJikoFutanGaku_kokuho_HokenshaNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."kokuho_HihokenshaShoNo" as "dbWT37K1KogakuGassanJikoFutanGaku_kokuho_HihokenshaShoNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."kokuho_KojinNo" as "dbWT37K1KogakuGassanJikoFutanGaku_kokuho_KojinNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."idoKubun" as "dbWT37K1KogakuGassanJikoFutanGaku_idoKubun",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hoseiZumiSofuKubun" as "dbWT37K1KogakuGassanJikoFutanGaku_hoseiZumiSofuKubun",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."taishoKeisanKaishiYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_taishoKeisanKaishiYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."taishoKeisanShuryoYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_taishoKeisanShuryoYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaKaishiYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaKaishiYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaShuryoYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaShuryoYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shinseiYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_shinseiYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."gokei_JikoFutanGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_gokei_JikoFutanGaku",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."gokei_70_74JikoFutanGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_gokei_70_74JikoFutanGaku",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."gokei_Under70KogakuShikyuGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_gokei_Under70KogakuShikyuGaku",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."gokei_70_74KogakuShikyuGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_gokei_70_74KogakuShikyuGaku",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."sumi_Gokei_JikoFutanGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_JikoFutanGaku",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."sumi_Gokei_70_74JikoFutanGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_70_74JikoFutanGaku",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."sumi_Gokei_Under70KogakuShikyuGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_Under70",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."sumi_Gokei_70_74KogakuShikyuGaku" as "dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_70_74",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."atesakiShimei" as "dbWT37K1KogakuGassanJikoFutanGaku_atesakiShimei",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."atesakiYubinNo" as "dbWT37K1KogakuGassanJikoFutanGaku_atesakiYubinNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."atesakiJusho" as "dbWT37K1KogakuGassanJikoFutanGaku_atesakiJusho",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."madoguchi_TaishoshaHanteiCode" as "dbWT37K1KogakuGassanJikoFutanGaku_madoguchi_TaishoshaHanteiCode",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shiharaiBasho" as "dbWT37K1KogakuGassanJikoFutanGaku_shiharaiBasho",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shikaraiKaishiYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_shikaraiKaishiYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shiharaiShuryoYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_shiharaiShuryoYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."heichoNaiyo" as "dbWT37K1KogakuGassanJikoFutanGaku_heichoNaiyo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shiharaiKaishiTime" as "dbWT37K1KogakuGassanJikoFutanGaku_shiharaiKaishiTime",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shiharaiShuryoTime" as "dbWT37K1KogakuGassanJikoFutanGaku_shiharaiShuryoTime",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."biko" as "dbWT37K1KogakuGassanJikoFutanGaku_biko",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."dataSakuseiKubun" as "dbWT37K1KogakuGassanJikoFutanGaku_dataSakuseiKubun",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."kakunin_UketoriYM" as "dbWT37K1KogakuGassanJikoFutanGaku_kakunin_UketoriYM",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" as "dbWT37K1KogakuGassanJikoFutanGaku_hoseiZumi_SofuYM",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shomeisho_UketoriYM" as "dbWT37K1KogakuGassanJikoFutanGaku_shomeisho_UketoriYM",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."saisoFlag" as "dbWT37K1KogakuGassanJikoFutanGaku_saisoFlag",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" as "dbWT37K1KogakuGassanJikoFutanGaku_sofuTaishoGaiFlag",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."jikoFutanKeisanYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_jikoFutanKeisanYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shomeiShoSakuseiYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_shomeiShoSakuseiYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" as "dbWT37K1KogakuGassanJikoFutanGaku_koki_KokuhoShoriKubun",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."jikoFutangakuShomeishoRealHakkoFlag" as "dbWT37K1KogakuGassanJikoFutanGaku_jikoFutangakuHakkoFlag",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_batchHoseiJissiYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" as "dbWT37K1KogakuGassanJikoFutanGaku_realHoseiJissiYMD",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."shoKisaiHokenshaNo" as "dbWT37K1KogakuGassanJikoFutanGaku_shoKisaiHokenshaNo",
+         "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" as "dbWT37K1KogakuGassanJikoFutanGaku_sofuJogaiFlag"
+    </sql>
+
+    <resultMap id="ResultMap_DbWT37K1KogakuGassanJikoFutanGakuTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangaku.DbWT37K1KogakuGassanJikoFutanGakuTempEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="dbWT37K1KogakuGassanJikoFutanGaku_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokenshaNo" column="dbWT37K1KogakuGassanJikoFutanGaku_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="shikyuShinseishoSeiriNo" column="dbWT37K1KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbWT37K1KogakuGassanJikoFutanGaku_rirekiNo" />
+        <id property="renban" column="dbWT37K1KogakuGassanJikoFutanGaku_renban" />
+        <result property="hokenSeidoCode" column="dbWT37K1KogakuGassanJikoFutanGaku_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaMei" column="dbWT37K1KogakuGassanJikoFutanGaku_hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_HihokenshaShoKigo" column="dbWT37K1KogakuGassanJikoFutanGaku_kokuho_HihokenshaShoKigo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaShimeiKana" column="dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="hihokenshaShimei" column="dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="umareYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_umareYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="dbWT37K1KogakuGassanJikoFutanGaku_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shotokuKubun" column="dbWT37K1KogakuGassanJikoFutanGaku_shotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="over70_ShotokuKubun" column="dbWT37K1KogakuGassanJikoFutanGaku_over70_ShotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanSeiriNo" column="dbWT37K1KogakuGassanJikoFutanGaku_jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koki_HokenshaNo" column="dbWT37K1KogakuGassanJikoFutanGaku_koki_HokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koki_HihokenshaNo" column="dbWT37K1KogakuGassanJikoFutanGaku_koki_HihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_HokenshaNo" column="dbWT37K1KogakuGassanJikoFutanGaku_kokuho_HokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_HihokenshaShoNo" column="dbWT37K1KogakuGassanJikoFutanGaku_kokuho_HihokenshaShoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_KojinNo" column="dbWT37K1KogakuGassanJikoFutanGaku_kokuho_KojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoKubun" column="dbWT37K1KogakuGassanJikoFutanGaku_idoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hoseiZumiSofuKubun" column="dbWT37K1KogakuGassanJikoFutanGaku_hoseiZumiSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoKeisanKaishiYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_taishoKeisanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKeisanShuryoYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_taishoKeisanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaKaishiYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaShuryoYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_hihokenshaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseiYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gokei_JikoFutanGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_70_74JikoFutanGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_Under70KogakuShikyuGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_70_74KogakuShikyuGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_gokei_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_JikoFutanGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_70_74JikoFutanGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_Under70KogakuShikyuGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_Under70" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_70_74KogakuShikyuGaku" column="dbWT37K1KogakuGassanJikoFutanGaku_sumi_Gokei_70_74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="atesakiShimei" column="dbWT37K1KogakuGassanJikoFutanGaku_atesakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="atesakiYubinNo" column="dbWT37K1KogakuGassanJikoFutanGaku_atesakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="atesakiJusho" column="dbWT37K1KogakuGassanJikoFutanGaku_atesakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="madoguchi_TaishoshaHanteiCode" column="dbWT37K1KogakuGassanJikoFutanGaku_madoguchi_TaishoshaHanteiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiBasho" column="dbWT37K1KogakuGassanJikoFutanGaku_shiharaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikaraiKaishiYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_shikaraiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiShuryoYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_shiharaiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="heichoNaiyo" column="dbWT37K1KogakuGassanJikoFutanGaku_heichoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiKaishiTime" column="dbWT37K1KogakuGassanJikoFutanGaku_shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiShuryoTime" column="dbWT37K1KogakuGassanJikoFutanGaku_shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="biko" column="dbWT37K1KogakuGassanJikoFutanGaku_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dataSakuseiKubun" column="dbWT37K1KogakuGassanJikoFutanGaku_dataSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kakunin_UketoriYM" column="dbWT37K1KogakuGassanJikoFutanGaku_kakunin_UketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hoseiZumi_SofuYM" column="dbWT37K1KogakuGassanJikoFutanGaku_hoseiZumi_SofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shomeisho_UketoriYM" column="dbWT37K1KogakuGassanJikoFutanGaku_shomeisho_UketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="saisoFlag" column="dbWT37K1KogakuGassanJikoFutanGaku_saisoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuTaishoGaiFlag" column="dbWT37K1KogakuGassanJikoFutanGaku_sofuTaishoGaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanKeisanYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_jikoFutanKeisanYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shomeiShoSakuseiYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_shomeiShoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="koki_KokuhoShoriKubun" column="dbWT37K1KogakuGassanJikoFutanGaku_koki_KokuhoShoriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutangakuShomeishoRealHakkoFlag" column="dbWT37K1KogakuGassanJikoFutanGaku_jikoFutangakuHakkoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="batchHoseiJissiYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_batchHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="realHoseiJissiYMD" column="dbWT37K1KogakuGassanJikoFutanGaku_realHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="dbWT37K1KogakuGassanJikoFutanGaku_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="sofuJogaiFlag" column="dbWT37K1KogakuGassanJikoFutanGaku_sofuJogaiFlag" />
+    </resultMap>
+
+    <resultMap id="ResultMap_DbWT1001HihokenshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity" autoMapping="true">
+        <id property="exRenban" column="dbWT1001Hihokensha_exRenban" />
+        <result property="exHokenshaNo" column="dbWT1001Hihokensha_exHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="exHokenshaName" column="dbWT1001Hihokensha_exHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exShoHokenshaNo" column="dbWT1001Hihokensha_exShoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="exHihokenshaNo" column="dbWT1001Hihokensha_exHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="exServiceTeikyoYm" column="dbWT1001Hihokensha_exServiceTeikyoYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="henkanFlag" column="dbWT1001Hihokensha_henkanFlag" />
+        <result property="oldShichosonCode" column="dbWT1001Hihokensha_oldShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="sofuHihokenshaNo" column="dbWT1001Hihokensha_sofuHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shichosonCode" column="dbWT1001Hihokensha_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kannaiKangaiKubun" column="dbWT1001Hihokensha_kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="dbWT1001Hihokensha_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode" column="dbWT1001Hihokensha_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuCode" column="dbWT1001Hihokensha_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuMei" column="dbWT1001Hihokensha_gyoseikuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jusho" column="dbWT1001Hihokensha_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="banchi" column="dbWT1001Hihokensha_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="katagaki" column="dbWT1001Hihokensha_katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanaMeisho" column="dbWT1001Hihokensha_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisho" column="dbWT1001Hihokensha_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shimei50onKana" column="dbWT1001Hihokensha_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="dbWT1001Hihokensha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikakuShutokuYmd" column="dbWT1001Hihokensha_shikakuShutokuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="dbWT1001Hihokensha_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYmd" column="dbWT1001Hihokensha_shikakuSoshitsuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="dbWT1001Hihokensha_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiShuyakuNo" column="dbWT1001Hihokensha_setaiShuyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinenYmd" column="dbWT1001Hihokensha_seinenYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="dbWT1001Hihokensha_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonKanyuYmd" column="dbWT1001Hihokensha_shichosonKanyuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shichosonDattaiYmd" column="dbWT1001Hihokensha_shichosonDattaiYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+    <sql id="allColumns_DbWT1001Hihokensha">
+        "DbWT1001Hihokensha"."exRenban" as "dbWT1001Hihokensha_exRenban",
+        "DbWT1001Hihokensha"."exHokenshaNo" as "dbWT1001Hihokensha_exHokenshaNo",
+        "DbWT1001Hihokensha"."exHokenshaName" as "dbWT1001Hihokensha_exHokenshaName",
+        "DbWT1001Hihokensha"."exShoHokenshaNo" as "dbWT1001Hihokensha_exShoHokenshaNo",
+        "DbWT1001Hihokensha"."exHihokenshaNo" as "dbWT1001Hihokensha_exHihokenshaNo",
+        "DbWT1001Hihokensha"."exServiceTeikyoYm" as "dbWT1001Hihokensha_exServiceTeikyoYm",
+        "DbWT1001Hihokensha"."henkanFlag" as "dbWT1001Hihokensha_henkanFlag",
+        "DbWT1001Hihokensha"."oldShichosonCode" as "dbWT1001Hihokensha_oldShichosonCode",
+        "DbWT1001Hihokensha"."sofuHihokenshaNo" as "dbWT1001Hihokensha_sofuHihokenshaNo",
+        "DbWT1001Hihokensha"."shichosonCode" as "dbWT1001Hihokensha_shichosonCode",
+        "DbWT1001Hihokensha"."kannaiKangaiKubun" as "dbWT1001Hihokensha_kannaiKangaiKubun",
+        "DbWT1001Hihokensha"."yubinNo" as "dbWT1001Hihokensha_yubinNo",
+        "DbWT1001Hihokensha"."choikiCode" as "dbWT1001Hihokensha_choikiCode",
+        "DbWT1001Hihokensha"."gyoseikuCode" as "dbWT1001Hihokensha_gyoseikuCode",
+        "DbWT1001Hihokensha"."gyoseikuMei" as "dbWT1001Hihokensha_gyoseikuMei",
+        "DbWT1001Hihokensha"."jusho" as "dbWT1001Hihokensha_jusho",
+        "DbWT1001Hihokensha"."banchi" as "dbWT1001Hihokensha_banchi",
+        "DbWT1001Hihokensha"."katagaki" as "dbWT1001Hihokensha_katagaki",
+        "DbWT1001Hihokensha"."kanaMeisho" as "dbWT1001Hihokensha_kanaMeisho",
+        "DbWT1001Hihokensha"."meisho" as "dbWT1001Hihokensha_meisho",
+        "DbWT1001Hihokensha"."shimei50onKana" as "dbWT1001Hihokensha_shimei50onKana",
+        "DbWT1001Hihokensha"."shikibetsuCode" as "dbWT1001Hihokensha_shikibetsuCode",
+        "DbWT1001Hihokensha"."shikakuShutokuYmd" as "dbWT1001Hihokensha_shikakuShutokuYmd",
+        "DbWT1001Hihokensha"."shikakuShutokuJiyuCode" as "dbWT1001Hihokensha_shikakuShutokuJiyuCode",
+        "DbWT1001Hihokensha"."shikakuSoshitsuYmd" as "dbWT1001Hihokensha_shikakuSoshitsuYmd",
+        "DbWT1001Hihokensha"."shikakuSoshitsuJiyuCode" as "dbWT1001Hihokensha_shikakuSoshitsuJiyuCode",
+        "DbWT1001Hihokensha"."setaiShuyakuNo" as "dbWT1001Hihokensha_setaiShuyakuNo",
+        "DbWT1001Hihokensha"."seinenYmd" as "dbWT1001Hihokensha_seinenYmd",
+        "DbWT1001Hihokensha"."seibetsuCode" as "dbWT1001Hihokensha_seibetsuCode",
+        "DbWT1001Hihokensha"."shichosonKanyuYmd" as "dbWT1001Hihokensha_shichosonKanyuYmd",
+        "DbWT1001Hihokensha"."shichosonDattaiYmd" as "dbWT1001Hihokensha_shichosonDattaiYmd"
+    </sql>
+
+</mapper>

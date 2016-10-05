@@ -20,5 +20,6 @@ public class SeikyugakuTsuchishoFutanshaInProcessParameter implements IBatchProc
 
     private RString path;
     private RString fileName;
+    private int renban;
 
 }

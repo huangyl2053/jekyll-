@@ -69,6 +69,5 @@ public class ShakaiFukushiHojinKeigenReport extends Report<ShakaiFukushiHojinRep
                 index += NUM_4;
             }
         }
-
     }
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-2180-030 donghj-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IFurikomiDataMapper">
+    
+    <resultMap id="resultMap_FurikomiDataEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDataEntity" autoMapping="true">
+        <result property="比較キー" column="比較キー" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNayoseKey" column="kozaNayoseKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="件数" column="件数" />
+        <result property="合計振込金額" column="合計振込金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="データ区分件数" column="データ区分件数" />
+        <association property="振込明細一時Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IKozaJohoMapper.resultMap_FurikomiDetailTempTableEntity"/>
+        
+    </resultMap>
+    
+    <select resultOrdered="true" id="get振込対象データ" resultMap="resultMap_FurikomiDataEntity" fetchSize="500">
+        
+        WITH 振込対象 AS
+        (SELECT
+            振込明細一時TBL.*,
+            振込明細一時TBL."hihokenshaNo"||振込明細一時TBL."serviceTeikyoYM"||振込明細一時TBL."dataKubun"||振込明細一時TBL."seiriNo"||振込明細一時TBL."rirekiNo" AS "比較キー"
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
+        WHERE
+           '0' <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku" 
+           AND 振込明細一時TBL."kozaDataFlag" = TRUE
+        )
+        
+        SELECT
+            振込明細1.*,
+            振込明細2.*
+        FROM
+            (SELECT
+                mst.*
+            FROM
+                振込対象 AS mst
+            WHERE NOT EXISTS(
+                SELECT *
+                FROM 振込対象 AS slv
+                WHERE slv."kozaNayoseKey" = mst."kozaNayoseKey"
+                AND slv."比較キー" <![CDATA[<=]]> mst."比較キー"
+                )
+            ) AS 振込明細1,
+
+            (SELECT
+                振込明細一時TBL."kozaNayoseKey",
+                COUNT(*) AS 件数,
+                SUM(振込明細一時TBL."furikomiKingaku") AS 合計振込金額,
+                COUNT(DISTINCT(振込明細一時TBL."dataKubun")) AS データ区分件数
+            FROM
+                "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
+            WHERE
+                '0' <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku"
+                AND 振込明細一時TBL."kozaDataFlag" = TRUE
+            GROUP BY
+                振込明細一時TBL."kozaNayoseKey"
+            ) AS 振込明細2
+        WHERE
+            振込明細1."kozaNayoseKey" = 振込明細2."kozaNayoseKey"
+        ORDER BY
+            振込明細1."kozaNayoseKey" ASC,
+            振込明細1."比較キー" ASC
+        
+        
+    </select>
+    
+</mapper>

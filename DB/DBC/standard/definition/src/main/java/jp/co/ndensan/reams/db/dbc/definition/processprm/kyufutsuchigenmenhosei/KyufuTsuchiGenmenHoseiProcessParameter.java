@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.kyufutsuchigenmenhosei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiMapperParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +23,7 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
 
     private FlexibleYearMonth サービス開始年月;
     private FlexibleYearMonth サービス終了年月;
-    private List<HokenshaNo> 市町村コードList;
+    private List<RString> 市町村コードList;
     private RString 帳票出力順ID;
 
     /**
@@ -37,7 +36,7 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
      */
     public KyufuTsuchiGenmenHoseiProcessParameter(
             FlexibleYearMonth サービス開始年月, FlexibleYearMonth サービス終了年月,
-            List<HokenshaNo> 市町村コードList, RString 帳票出力順ID) {
+            List<RString> 市町村コードList, RString 帳票出力順ID) {
         this.サービス開始年月 = サービス開始年月;
         this.サービス終了年月 = サービス終了年月;
         this.市町村コードList = 市町村コードList;

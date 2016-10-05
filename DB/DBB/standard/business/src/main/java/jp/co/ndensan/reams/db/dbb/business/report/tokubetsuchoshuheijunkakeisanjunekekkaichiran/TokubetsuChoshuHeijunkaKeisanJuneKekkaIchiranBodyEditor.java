@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,17 +42,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private final TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表;
     private final TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表;
     private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
-    private static final int NUM_6 = 6;
-    private static final RString 編集コード_併徴者 = new RString("併徴者");
-    private static final RString 編集コード_仮徴収額修正者 = new RString("仮徴収額修正者");
-    private static final RString 編集コード_対象外_減額 = new RString("対象外_減額");
-    private static final RString 編集コード_対象外_増額 = new RString("象外_増額");
-    private static final RString 編集コード_特徴6月開始者 = new RString("特徴6月開始者");
     private final Association association;
 
     protected TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(
@@ -79,7 +70,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private void 対象者項目編集(TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者,
             TokuChoHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishoshaEntity item = 特徴平準化結果対象者.get特徴平準化結果対象者();
-        RString 編集備考 = 備考名を転換(item.get備考コード());
+        RString 編集備考 = item.get備考コード();
         TsuchishoNo 通知書番号 = item.get通知書番号();
         if (通知書番号 != null) {
             source.listUpper_1 = 通知書番号.value();
@@ -89,6 +80,10 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         }
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
+            final ShikibetsuCode shikibetsuCode = 宛名の情報.getShikibetsuCode();
+            if (shikibetsuCode != null) {
+                source.shikibetsuCode = shikibetsuCode.getColumnValue();
+            }
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
             source.listUpper_4 = JushoHenshu.editJusho(帳票制御共通, iKojin, association);
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
@@ -181,7 +176,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private void 対象外項目編集(TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外,
             TokuChoHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishogaiEntity item = 特徴平準化結果対象外.get特徴平準化結果対象外();
-        RString 編集備考 = 備考名を転換(item.get備考コード());
+        RString 編集備考 = item.get備考コード();
         TsuchishoNo 通知書番号 = item.get通知書番号();
         if (通知書番号 != null) {
             source.listUpper_1 = 通知書番号.value();
@@ -191,6 +186,10 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         }
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
+            final ShikibetsuCode shikibetsuCode = 宛名の情報.getShikibetsuCode();
+            if (shikibetsuCode != null) {
+                source.shikibetsuCode = shikibetsuCode.getColumnValue();
+            }
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
             source.listUpper_4 = JushoHenshu.editJusho(帳票制御共通, iKojin, association);
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
@@ -256,35 +255,5 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         if (item.get特徴期期別金額06() != null) {
             source.listLower_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
         }
-    }
-
-    private RString 備考名を転換(RString 編集コード) {
-        RString 備考名 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(編集コード)) {
-            switch (Integer.parseInt(編集コード.toString())) {
-                case NUM_1:
-                    備考名 = 編集コード_併徴者;
-                    break;
-                case NUM_2:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_3:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_4:
-                    備考名 = 編集コード_対象外_減額;
-                    break;
-                case NUM_5:
-                    備考名 = 編集コード_対象外_増額;
-                    break;
-                case NUM_6:
-                    備考名 = 編集コード_特徴6月開始者;
-                    break;
-                default:
-                    break;
-            }
-            return 備考名;
-        }
-        return RString.EMPTY;
     }
 }

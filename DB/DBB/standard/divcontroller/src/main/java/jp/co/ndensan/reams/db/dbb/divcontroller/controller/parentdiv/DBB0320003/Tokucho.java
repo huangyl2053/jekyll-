@@ -156,8 +156,8 @@ public class Tokucho {
     private void setDivFor翌年度(TokuchoDiv div, ChoshuHoho model) {
         // 翌年度情報に値がなく、本徴収情報に値がある 場合
         if ((model.get翌年度仮徴収_基礎年金番号() == null || model.get翌年度仮徴収_基礎年金番号().isEmpty())
-                && (model.get翌年度仮徴収_年金コード() == null || model.get翌年度仮徴収_年金コード().isEmpty())
-                && (model.get翌年度仮徴収_捕捉月() == null || model.get翌年度仮徴収_捕捉月().isEmpty())) {
+            && (model.get翌年度仮徴収_年金コード() == null || model.get翌年度仮徴収_年金コード().isEmpty())
+            && (model.get翌年度仮徴収_捕捉月() == null || model.get翌年度仮徴収_捕捉月().isEmpty())) {
             // 介護徴収方法．特別徴収停止事由コード=空白 のとき、翌年度選択も本徴収情報と同じ内容を画面表示する。
             if (model.get特別徴収停止事由コード() == null || model.get特別徴収停止事由コード().isEmpty()) {
                 setDivFor本算定(div, model);
@@ -269,9 +269,9 @@ public class Tokucho {
                 kaifuJoho.getDT各種金額欄２() != null ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
                 kaifuJoho.getDT各種金額欄３() != null ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY);
     }
-    
-    private Decimal changeStrToDecimal(String str){
-        Long val = str.isEmpty()? Long.parseLong("0"):new Long (str);
+
+    private Decimal changeStrToDecimal(String str) {
+        long val = str.isEmpty() ? Long.parseLong("0") : Long.valueOf(str);
         return new Decimal(val);
     }
 

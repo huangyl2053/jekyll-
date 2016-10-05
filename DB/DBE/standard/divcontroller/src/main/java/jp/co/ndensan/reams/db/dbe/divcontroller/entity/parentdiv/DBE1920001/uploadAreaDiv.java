@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class uploadAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +23,8 @@ public class uploadAreaDiv extends Panel {
      */
     @JsonProperty("uploadTool")
     private UploadPanel uploadTool;
-    @JsonProperty("btnDataTorikomi")
-    private Button btnDataTorikomi;
+    @JsonProperty("btnUpload")
+    private Button btnUpload;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,21 +51,21 @@ public class uploadAreaDiv extends Panel {
     }
 
     /*
-     * getbtnDataTorikomi
-     * @return btnDataTorikomi
+     * getbtnUpload
+     * @return btnUpload
      */
-    @JsonProperty("btnDataTorikomi")
-    public Button getBtnDataTorikomi() {
-        return btnDataTorikomi;
+    @JsonProperty("btnUpload")
+    public Button getBtnUpload() {
+        return btnUpload;
     }
 
     /*
-     * setbtnDataTorikomi
-     * @param btnDataTorikomi btnDataTorikomi
+     * setbtnUpload
+     * @param btnUpload btnUpload
      */
-    @JsonProperty("btnDataTorikomi")
-    public void setBtnDataTorikomi(Button btnDataTorikomi) {
-        this.btnDataTorikomi = btnDataTorikomi;
+    @JsonProperty("btnUpload")
+    public void setBtnUpload(Button btnUpload) {
+        this.btnUpload = btnUpload;
     }
 
     // </editor-fold>

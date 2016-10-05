@@ -12,14 +12,22 @@ import jp.co.ndensan.reams.db.dbd.business.core.ninteienkitsuchishohakko.NinteiE
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteienkitsuchishohakko.INinteiEnkiTsuchishoHakkoMapper;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -71,11 +79,24 @@ public class NinteiEnkiTsuchishoHakkoManager {
     public List<NinteiEnkiTsuchishoHakkoBusiness> get発行対象者一覧情報(int 経過日数, List<RString> 申請区分KeyList, List<RString> 発行有無KeyList,
             RString みなし２号Key, RDate 処理見込み日From, RDate 処理見込み日To, RString 延期の理由, LasdecCode 市町村コード,
             List<RString> 認定調査KeyList, List<RString> 意見書受領KeyList, List<RString> 一次判定KeyList, List<RString> 審査会割付KeyList) {
+        ShichosonSecurityJoho 市町村セキュリティ情報
+                = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         NinteiEnkiTsuchishoHakkoParameter parameter = new NinteiEnkiTsuchishoHakkoParameter(経過日数, 申請区分KeyList,
                 発行有無KeyList, みなし２号Key, 処理見込み日From, 処理見込み日To, 延期の理由, 市町村コード,
                 認定調査KeyList, 意見書受領KeyList, 一次判定KeyList, 審査会割付KeyList);
         INinteiEnkiTsuchishoHakkoMapper mapper = mapperProvider.create(INinteiEnkiTsuchishoHakkoMapper.class);
-        List<NinteiEnkiTsuchishoHakkoEntity> entityList = mapper.get発行対象者一覧情報(parameter);
+        if (null == 市町村セキュリティ情報) {
+            return new ArrayList<>();
+        }
+        List<NinteiEnkiTsuchishoHakkoEntity> entityList = new ArrayList<>();
+        if (DonyuKeitaiCode.事務広域.equals(市町村セキュリティ情報.get導入形態コード())
+                || DonyuKeitaiCode.事務構成市町村.equals(市町村セキュリティ情報.get導入形態コード())) {
+            parameter.set単一(false);
+            entityList = mapper.get発行対象者一覧情報_広域(parameter);
+        } else if (DonyuKeitaiCode.事務単一.equals(市町村セキュリティ情報.get導入形態コード())) {
+            parameter.set単一(true);
+            entityList = mapper.get発行対象者一覧情報_単一(parameter);
+        }
         List<NinteiEnkiTsuchishoHakkoBusiness> 居宅サービス計画情報 = new ArrayList<>();
         for (NinteiEnkiTsuchishoHakkoEntity entity : entityList) {
             居宅サービス計画情報.add(new NinteiEnkiTsuchishoHakkoBusiness(entity));
@@ -141,6 +162,23 @@ public class NinteiEnkiTsuchishoHakkoManager {
             return FlexibleDate.EMPTY;
         }
         return new FlexibleDate(date.toDateString());
+    }
+
+    /**
+     * 延期の理由を取得します。
+     *
+     *
+     * @return 延期の理由
+     */
+    @Transaction
+    public List<RString> get延期の理由() {
+        List<UzT0007CodeEntity> entityList
+                = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, DBECodeShubetsu.消費税率.getコード());
+        List<RString> 延期の理由 = new ArrayList<>();
+        for (UzT0007CodeEntity entity : entityList) {
+            延期の理由.add(entity.getコード名称());
+        }
+        return 延期の理由;
     }
 
 }

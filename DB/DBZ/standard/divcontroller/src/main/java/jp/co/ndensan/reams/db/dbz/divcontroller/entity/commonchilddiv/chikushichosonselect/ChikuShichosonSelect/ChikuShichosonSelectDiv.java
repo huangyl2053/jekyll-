@@ -7,17 +7,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushic
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChikuShichosonSelect のクラスファイル 
- * 
- * @author 自動生成
+ * ChikuShichosonSelect のクラスファイルです。
+ *
+ * @reamsid_L DBB-5720-010 xuxin
  */
 public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSelectDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -200,7 +210,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlChiku(DropDownList ddlChiku) {
+    public void setDdlChiku(DropDownList ddlChiku) {
         this.getTanitsuShichoson().setDdlChiku(ddlChiku);
     }
 
@@ -210,7 +220,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setBtnChoikiGuide(ButtonDialog btnChoikiGuide) {
+    public void setBtnChoikiGuide(ButtonDialog btnChoikiGuide) {
         this.getTanitsuShichoson().setBtnChoikiGuide(btnChoikiGuide);
     }
 
@@ -220,7 +230,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setBtnChikuNyuryokuGuide(ButtonDialog btnChikuNyuryokuGuide) {
+    public void setBtnChikuNyuryokuGuide(ButtonDialog btnChikuNyuryokuGuide) {
         this.getTanitsuShichoson().setBtnChikuNyuryokuGuide(btnChikuNyuryokuGuide);
     }
 
@@ -230,7 +240,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setSelectedResult(SelectedResultDiv SelectedResult) {
+    public void setSelectedResult(SelectedResultDiv SelectedResult) {
         this.getTanitsuShichoson().setSelectedResult(SelectedResult);
     }
 
@@ -240,7 +250,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlCodeList(DataGrid<ddlCodeList_Row> ddlCodeList) {
+    public void setDdlCodeList(DataGrid<ddlCodeList_Row> ddlCodeList) {
         this.getTanitsuShichoson().getSelectedResult().setDdlCodeList(ddlCodeList);
     }
 
@@ -250,7 +260,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlShichoson(DropDownList ddlShichoson) {
+    public void setDdlShichoson(DropDownList ddlShichoson) {
         this.getKoikiShichoson().setDdlShichoson(ddlShichoson);
     }
 
@@ -260,11 +270,129 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlKyushichosonKoiki(DropDownList ddlKyushichosonKoiki) {
+    public void setDdlKyushichosonKoiki(DropDownList ddlKyushichosonKoiki) {
         this.getKoikiShichoson().setDdlKyushichosonKoiki(ddlKyushichosonKoiki);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    @JsonIgnore
+    public void initialize() {
+        ChikuShichosonSelectHandler.of(this).init();
+    }
+
+    @Override
+    @JsonIgnore
+    public RString get選択対象() {
+        if (this.getTanitsuShichoson().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            return this.getDdlChiku().getSelectedKey();
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public Map<RString, RString> get選択結果() {
+        if (this.getTanitsuShichoson().isDisplayNone()) {
+            return null;
+        } else {
+            Map<RString, RString> map = new HashMap();
+            List<ddlCodeList_Row> dataSource = this.getDdlCodeList().getDataSource();
+            if (!dataSource.isEmpty()) {
+                for (ddlCodeList_Row row : dataSource) {
+                    map.put(row.getCode(), row.getName());
+                }
+            }
+            return map;
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public RString get市町村コード() {
+        if (this.getKoikiShichoson().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            return this.getDdlShichoson().getSelectedKey();
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public RString get市町村名称() {
+        if (this.getKoikiShichoson().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            int length = this.getDdlShichoson().getSelectedValue().length();
+            return this.getDdlShichoson().getSelectedValue().substring(7, length);
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public RString get旧市町村コード() {
+        if (this.getKoikiShichoson().isDisplayNone() || this.getDdlKyushichosonKoiki().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            return this.getDdlKyushichosonKoiki().getSelectedKey();
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public RString get旧市町村名称() {
+        if (this.getKoikiShichoson().isDisplayNone() || this.getDdlKyushichosonKoiki().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            return this.getDdlKyushichosonKoiki().getSelectedValue();
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public RString get導入形態コード() {
+        return this.getHdnTxtDonyuKeitaiCode();
+    }
+
+    @Override
+    @JsonIgnore
+    public void set選択対象(RString 選択対象) {
+        this.getDdlChiku().setSelectedKey(選択対象);
+    }
+
+    @Override
+    @JsonIgnore
+    public void set選択結果(Map<RString, RString> 選択結果) {
+        if (選択結果 == null) {
+            return;
+        }
+        List<ddlCodeList_Row> dataSource = new ArrayList<>();
+        Set<Entry<RString, RString>> set = 選択結果.entrySet();
+        for (Entry<RString, RString> entry : set) {
+            ddlCodeList_Row row = new ddlCodeList_Row();
+            row.setCode(entry.getKey());
+            row.setName(entry.getValue());
+            dataSource.add(row);
+        }
+        this.getDdlCodeList().setDataSource(dataSource);
+    }
+
+    @Override
+    @JsonIgnore
+    public void set市町村コード(RString 市町村コード) {
+        if (!RString.isNullOrEmpty(市町村コード)) {
+            this.getDdlShichoson().setSelectedKey(市町村コード);
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public void set旧市町村コード(RString 旧市町村コード) {
+        if (!RString.isNullOrEmpty(旧市町村コード)) {
+            this.getDdlKyushichosonKoiki().setSelectedKey(旧市町村コード);
+        }
+    }
 
 }

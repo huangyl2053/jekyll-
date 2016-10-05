@@ -47,9 +47,11 @@ public class TokubetsuChoshuDoteiIchiranPrintService {
         try (ReportAssembler<TokubetsuChoshuDoteiIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuDoteiIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            TokubetsuChoshuDoteiIchiranReport report = TokubetsuChoshuDoteiIchiranReport.createForm(
-                    特別徴収同定一覧情報entityList, 出力順リスト, 改頁リスト, association, 特徴開始月);
-            report.writeBy(reportSourceWriter);
+            for (TokushoTaishioIchiranEntity entity : 特別徴収同定一覧情報entityList) {
+                TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
+                        association, 出力順リスト, 改頁リスト, entity, 特徴開始月);
+                report.writeBy(reportSourceWriter);
+            }
         }
     }
 

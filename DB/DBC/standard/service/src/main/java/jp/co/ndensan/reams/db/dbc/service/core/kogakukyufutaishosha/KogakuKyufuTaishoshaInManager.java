@@ -78,6 +78,7 @@ public class KogakuKyufuTaishoshaInManager {
     private List<KogakuKyufuTaishoshaGroupCsvEntity> groupList;
     private List<KogakuKyufuTaishoshaMeisaiCsvEntity> meisaiList;
     private final RString レコード種別 = new RString("1");
+    private final RString エンドレコード種別 = new RString("3");
     private final RString 帳票レコード種別_H1 = new RString("H1");
     private final RString 帳票レコード種別_D1 = new RString("D1");
     private final RString 帳票レコード種別_T1 = new RString("T1");
@@ -173,7 +174,7 @@ public class KogakuKyufuTaishoshaInManager {
         for (KogakuKyufuTaishoshaCsvEntity csvEntity : csvlist) {
             KagoKetteiHokenshaInControlCsvEntity コントロールレコード = csvEntity.getControlCsvEntity();
             コントロールレコードのレコード件数の合計 = コントロールレコードのレコード件数の合計
-                                   + Integer.valueOf(コントロールレコード.getCodeNum().toString());
+                    + Integer.valueOf(コントロールレコード.getCodeNum().toString());
             if (FlexibleYearMonth.EMPTY.equals(処理対象年月)) {
                 処理対象年月 = new FlexibleYearMonth(コントロールレコード.getShoriYM());
             }
@@ -361,6 +362,9 @@ public class KogakuKyufuTaishoshaInManager {
                 while (true) {
                     List<RString> data = csvReader.readLine();
                     if (data != null && !data.isEmpty()) {
+                        if (エンドレコード種別.equals(data.get(INDEX_0))) {
+                            continue;
+                        }
                         if (レコード種別.equals(data.get(INDEX_0))) {
                             controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
                         } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
@@ -395,6 +399,7 @@ public class KogakuKyufuTaishoshaInManager {
             dataEntity.setHeadCsvEntity(csvHeadEntity);
             dataEntity.setListGroupCsvEntity(groupList);
             dataList.add(dataEntity);
+            dataEntity = new KogakuKyufuTaishoshaDataCsvEntity();
             csvHeadEntity = new KogakuKyufuTaishoshaHeadCsvEntity();
             csvGroupEntity = new KogakuKyufuTaishoshaGroupCsvEntity();
             csvMeisaiEntity = new KogakuKyufuTaishoshaMeisaiCsvEntity();

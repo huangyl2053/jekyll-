@@ -26,8 +26,8 @@ public final class AtenaMybatisParameter extends UaFt200FindShikibetsuTaishoPara
      * 宛名識別対象PSMの取得のパラメータ作成を行います。
      *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
-     * @param 開始日
-     * @param 終了日
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
      */
     public AtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey, FlexibleDate 開始日, FlexibleDate 終了日) {
         super(shikibetsuTaishoPSMSearchKey);

@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.JyukyushaDaichoOrderKey;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.JyukyushaDaichoDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.ShoriDateKanriService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -15,11 +18,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 受給者台帳リスト作成画面のHandlerクラスです。
@@ -54,7 +60,14 @@ public class JyukyushaDaichoHandler {
 
     private final JyukyushaDaichoDiv div;
     private static final RString 対象者 = new RString("0");
-    private static final RString 対象期間 = new RString("NOCOUNT_1");
+    private static final RString 対象期間 = new RString("1");
+    private static final RString 全てのページを印刷する = new RString("0");
+    private static final RString KEY0 = new RString("0");
+    private static final RString KEY1 = new RString("1");
+    private RString 出力順;
+    private LasdecCode 市町村コード;
+    private ShoriDateKanri shoriDateKanri;
+    private ShoriDateKanriService shoriDateKanriService;
 
     /**
      *
@@ -68,30 +81,23 @@ public class JyukyushaDaichoHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonSecurityJoho != null) {
-            LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
-            ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
-            ShoriDateKanri shoriDateKanri = shoriDateKanriService.get一件取得(市町村コード);
-
-            if (shoriDateKanri != null && shoriDateKanri.get対象開始日時() != null) {
-                div.getTaishouKikan().getTxtZenkaiymdtime().setFromDateValue(shoriDateKanri.get対象開始日時().getDate());
-                div.getTaishouKikan().getTxtZenkaiymdtime().setFromTimeValue(new RTime(shoriDateKanri.get対象開始日時().toDateString()));
-            } else if (shoriDateKanri != null && shoriDateKanri.get対象終了日時() != null) {
-                div.getTaishouKikan().getTxtZenkaiymdtime().setToDateValue(shoriDateKanri.get対象終了日時().getDate());
-                div.getTaishouKikan().getTxtZenkaiymdtime().setToTimeValue(new RTime(shoriDateKanri.get対象終了日時().toDateString()));
-                div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(
-                        new RTime(shoriDateKanri.get対象終了日時().toDateString()).plusSeconds(1));
-                div.getTaishouKikan().getTxtKonkaiymdtime().setFromDateValue(shoriDateKanri.get対象終了日時().getDate());
-                div.getTaishouKikan().getTxtKonkaiymdtime().setToDateValue(RDate.getNowDate());
-                div.getTaishouKikan().getTxtKonkaiymdtime().setToTimeValue(RDate.getNowDateTime().getTime());
+        get画面初期();
+        if (shoriDateKanri != null && shoriDateKanri.get対象開始日時() != null
+                && shoriDateKanri.get対象終了日時() != null) {
+            div.getTaishouKikan().getTxtZenkaiymdtime().setFromDateValue(shoriDateKanri.get対象開始日時().getDate());
+            div.getTaishouKikan().getTxtZenkaiymdtime().setFromTimeValue(shoriDateKanri.get対象開始日時().getRDateTime().getTime());
+            div.getTaishouKikan().getTxtZenkaiymdtime().setToDateValue(shoriDateKanri.get対象終了日時().getDate());
+            div.getTaishouKikan().getTxtZenkaiymdtime().setToTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
+            if (対象期間.equals(div.getRadChushutsuJyouken().getSelectedKey())) {
+                set今回抽出日付();
+                div.getTaishouSha().getTxtHihokenshaBangou().clearFromValue();
+                div.getTaishouSha().getTxtHihokenshaBangou().clearToValue();
             } else {
-                div.getTaishouKikan().getTxtZenkaiymdtime().clearFromDateValue();
-                div.getTaishouKikan().getTxtZenkaiymdtime().clearToDateValue();
+                div.getTaishouKikan().getTxtKonkaiymdtime().clearFromValue();
+                div.getTaishouKikan().getTxtKonkaiymdtime().clearToValue();
+                div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(false);
+                div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(true);
             }
-        } else {
-            div.getTaishouKikan().getTxtZenkaiymdtime().clearFromDateValue();
-            div.getTaishouKikan().getTxtZenkaiymdtime().clearToDateValue();
         }
         List<RString> chkIdouChushutsuTaishou = new ArrayList();
         RString value = DbBusinessConfig.get(ConfigNameDBD.受給者台帳初期値_抽出条件, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
@@ -129,43 +135,99 @@ public class JyukyushaDaichoHandler {
             chkIdouChushutsuTaishou.add(抽出条件_11);
         }
         div.getTaishouKikan().getChkIdouChushutsuTaishou().setSelectedItemsByKey(chkIdouChushutsuTaishou);
+    }
 
-        /* div.getShutsuryokuSort().load(サブ業務コード, 帳票ID);
-         出力順ID = div.getShutsuryokuSort().get出力順ID();
-         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();*/
-        /* if (div.getShutsuryokuSort().get出力順ID() != null) {
-         long 帳票出力順ID = Long.valueOf(div.getShutsuryokuSort().get出力順ID().toString());
-         IOutputOrder chohyoShuturyokujun = chohyoShutsuryokujunFinder.get出力順(
-         サブ業務コード,
-         帳票ID,
-         reamsLoginID,
-         帳票出力順ID);
-         if (chohyoShuturyokujun != null) {
-         orderby = MyBatisOrderByClauseCreator.create(DBD5710001JyukyushaDaichoEnum.class, chohyoShuturyokujun);
-         }
-         }*/
+    /**
+     * 出力順を取得します。
+     *
+     * @return 受給者台帳リスト出力順です。
+     */
+    public RString get画面出力順() {
+        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        Long 出力順ID = div.getShutsuryokuSort().getSelected出力順().get出力順ID();
+        IOutputOrder chohyoShuturyokujun = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
+                ReportIdDBD.DBD100026.getReportId(), reamsLoginID, 出力順ID);
+        if (chohyoShuturyokujun != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(JyukyushaDaichoOrderKey.class, chohyoShuturyokujun);
+        }
+        return 出力順;
     }
 
     /**
      * 「抽出条件設定」ラジオボタン
      *
      */
-    public void onChange_radChushutsuJyouken() {
+    public void radChushutsuJyouken_onChange() {
 
-        if (対象期間.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
-            div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(true);
-            div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(false);
-        } else if (対象者.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
+        if (対象者.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
             div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(false);
             div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(true);
+            div.getTaishouKikan().getTxtKonkaiymdtime().clearFromValue();
+            div.getTaishouKikan().getTxtKonkaiymdtime().clearToValue();
+        } else if (対象期間.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
+            get画面初期();
+            set今回抽出日付();
+            div.getTaishouSha().getTxtHihokenshaBangou().clearFromValue();
+            div.getTaishouSha().getTxtHihokenshaBangou().clearToValue();
         }
     }
 
     /**
-     * 画面側からバッチパラメータを取得します。
+     * バッチパラメータを設定します。
      *
-     * @param shoriDateKanri ShoriDateKanri
-     * @return
+     * @param div JyukyushaDaichoDiv
+     * @param parameter DBD571001Parameter
      */
+    public void onCilck_btnBatchRegister(JyukyushaDaichoDiv div, DBD571001Parameter parameter) {
+        if (対象期間.equals(div.getRadChushutsuJyouken().getSelectedKey())) {
+            parameter.set抽出条件設定区分(KEY0);
+        } else {
+            parameter.set抽出条件設定区分(KEY1);
+        }
+        parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
+        parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
+        parameter.set今回抽出開始年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getFromDateValue());
+        parameter.set今回抽出開始時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getFromTimeValue());
+        parameter.set今回抽出終了年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getToDateValue());
+        parameter.set今回抽出終了時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getToTimeValue());
+        parameter.set異動抽出対象リスト(setparameter_異動抽出());
+        if (div.getRadShutsuryokuOption().getSelectedKey().equals(全てのページを印刷する)) {
+            parameter.set出力オプション区分(KEY0);
+        } else {
+            parameter.set出力オプション区分(KEY1);
+        }
+        parameter.set出力順設定リスト(get画面出力順());
+        get画面初期();
+        if (shoriDateKanri != null) {
+            parameter.set市町村コード(shoriDateKanri.get市町村コード().value());
+        }
+    }
+
+    private ShoriDateKanri get画面初期() {
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (shichosonSecurityJoho != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+            shoriDateKanriService = ShoriDateKanriService.createInstance();
+            shoriDateKanri = shoriDateKanriService.get一件取得(市町村コード);
+        }
+        return shoriDateKanri;
+    }
+
+    private void set今回抽出日付() {
+        div.getTaishouKikan().getTxtKonkaiymdtime().setFromDateValue(shoriDateKanri.get対象終了日時().getDate());
+        div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime().plusSeconds(1));
+        div.getTaishouKikan().getTxtKonkaiymdtime().setToDateValue(RDate.getNowDate());
+        div.getTaishouKikan().getTxtKonkaiymdtime().setToTimeValue(RDate.getNowDateTime().getTime());
+        div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(true);
+        div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(false);
+    }
+
+    private List<RString> setparameter_異動抽出() {
+        List<RString> list異動 = new ArrayList<>();
+        List<RString> 異動抽出list = div.getTaishouKikan().getChkIdouChushutsuTaishou().getSelectedValues();
+        for (RString list抽出 : 異動抽出list) {
+            list異動.add(list抽出.trim());
+        }
+        return list異動;
+    }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-5310-010 liuyl-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteitsuchishohakkou.IShokanShikyuKetteiTsuchishoHakkouMapper">
+    <resultMap id="resultMap_ShokanShikyuKetteiTsuchishoHakkouEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouEntity">
+        <id property="dbT3036Entity.hiHokenshaNo" column="dbT3036ShokanHanteiKekka_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dbT3036Entity.serviceTeikyoYM" column="dbT3036ShokanHanteiKekka_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="dbT3036Entity.seiriNo" column="dbT3036ShokanHanteiKekka_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbT3034Entity.hiHokenshaNo" column="dbT3034ShokanShinsei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dbT3034Entity.serviceTeikyoYM" column="dbT3034ShokanShinsei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="dbT3034Entity.seiriNo" column="dbT3034ShokanShinsei_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbT3036Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
+        <association property="dbT3034Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
+    </resultMap>
+    <select id="get償還払支給判定結果" resultMap="resultMap_ShokanShikyuKetteiTsuchishoHakkouEntity"
+        fetchSize="500" resultOrdered="true">
+    SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.allColumns_DbT3036ShokanHanteiKekka"/>,
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.allColumns_DbT3034ShokanShinsei"/>
+    FROM 
+        rgdb."DbT3036ShokanHanteiKekka",
+        rgdb."DbT3034ShokanShinsei"
+    WHERE
+         rgdb."DbT3036ShokanHanteiKekka"."hiHokenshaNo" = #{被保険者番号}
+         AND (  (rgdb."DbT3036ShokanHanteiKekka"."shikyuHushikyuKetteiKubun" = '1' 
+                 AND rgdb."DbT3036ShokanHanteiKekka"."shiharaiKingaku" <![CDATA[<>]]> '0' )
+                 OR (rgdb."DbT3036ShokanHanteiKekka"."shikyuHushikyuKetteiKubun" = '0') )
+         AND rgdb."DbT3036ShokanHanteiKekka"."isDeleted" = FALSE
+         AND rgdb."DbT3036ShokanHanteiKekka"."hiHokenshaNo" = rgdb."DbT3034ShokanShinsei"."hiHokenshaNo"
+         AND rgdb."DbT3036ShokanHanteiKekka"."serviceTeikyoYM" =rgdb."DbT3034ShokanShinsei"."serviceTeikyoYM"
+         AND rgdb."DbT3036ShokanHanteiKekka"."seiriNo" =rgdb."DbT3034ShokanShinsei"."seiriNo"
+    ORDER BY 
+            rgdb."DbT3036ShokanHanteiKekka"."serviceTeikyoYM" DESC,
+            rgdb."DbT3036ShokanHanteiKekka"."seiriNo" DESC
+    </select>
+</mapper>

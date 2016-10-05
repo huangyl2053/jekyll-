@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -48,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * 年齢到達登録者リストを作成します。
  *
  * @reamsid_L DBA-0570-020 xuyannan
+ * @deprecated 削除予定. {@link jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA150010.NenreiTotatsuTorokushaProcess}を使用してください。
  */
 public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotatsushaJouhouEntity> {
 
@@ -60,13 +60,12 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     private static final RString 年度内連番 = new RString("0000");
     private static final int 日付桁数 = 8;
     private INenreiTotatsuTorokushaMapper iNenreiTotatsuTorokushaMapper;
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_UNWRITTEN_FIELD")
     private NenreiTotatsuTorokushaListProcessParameter processParameter;
     private List<NenreitotatsuKakuninListItem> item;
     private List<NenreiTotatsushaJouhouEntity> nenreiTotatsushaJouhoulist;
     private NenreiTotatsuTorokushaBusiness business;
     private ShikibetsuCode old識別コード;
-    private IOutputOrder chohyoShuturyokujun;
-    private RString 出力順;
 
     @BatchWriter
     private BatchReportWriter<NenreitotatsuKakuninListReportSource> batchReportWriter;
@@ -80,7 +79,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         nenreiTotatsushaJouhoulist = new ArrayList<>();
         business = new NenreiTotatsuTorokushaBusiness();
         old識別コード = new ShikibetsuCode("");
-//        TODO:修正中
+//        TODO 修正中
 //        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
 //        if (processParameter.getShuturyokujunID() != null) {
 //            chohyoShuturyokujun = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
@@ -95,7 +94,8 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
 
     @Override
     protected IBatchReader createReader() {
-        processParameter = business.setParameter(processParameter);
+//XXX n3327 エラー回避のためのコメントアウト。削除予定のクラスのため、本対応は不要。
+//        processParameter = business.setParameter(processParameter);
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toNenreiTotatsushaTorokuListMybatisParameter());
     }
 

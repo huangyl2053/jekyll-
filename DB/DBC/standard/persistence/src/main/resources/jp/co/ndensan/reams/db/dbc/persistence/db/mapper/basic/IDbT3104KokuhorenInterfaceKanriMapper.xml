@@ -51,6 +51,28 @@
          "DbT3104KokuhorenInterfaceKanri"."kagoCtrlShoriYM" as "dbT3104KokuhorenInterfaceKanri_kagoCtrlShoriYM",
          "DbT3104KokuhorenInterfaceKanri"."jissekiDataShinsaYM" as "dbT3104KokuhorenInterfaceKanri_jissekiDataShinsaYM"
     </sql>
+    
+    <select id="getスケジュール履歴情報初期_送付"
+           resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" fetchSize="500" resultOrdered="true">
+            SELECT TAB.*
+            FROM rgdb."DbT3104KokuhorenInterfaceKanri" as TAB 
+            WHERE TAB."sofuTorikomiKubun" = '1' 
+              AND TAB."shoriYM" = (
+                SELECT MAX(TempTAB."shoriYM")
+                FROM rgdb."DbT3104KokuhorenInterfaceKanri" AS TempTAB
+                WHERE TempTAB."sofuTorikomiKubun" = '1')
+    </select>
+    
+    <select id="getスケジュール履歴情報初期_取込"
+           resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" fetchSize="500" resultOrdered="true">
+            SELECT TAB.*
+            FROM rgdb."DbT3104KokuhorenInterfaceKanri" as TAB 
+            WHERE TAB."sofuTorikomiKubun" = '2' 
+              AND TAB."shoriYM" = (
+                SELECT MAX(TempTAB."shoriYM")
+                FROM rgdb."DbT3104KokuhorenInterfaceKanri" AS TempTAB
+                WHERE TempTAB."sofuTorikomiKubun" = '1')  
+    </select>
 
 
     <!--テーブルDbT3104KokuhorenInterfaceKanriの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->

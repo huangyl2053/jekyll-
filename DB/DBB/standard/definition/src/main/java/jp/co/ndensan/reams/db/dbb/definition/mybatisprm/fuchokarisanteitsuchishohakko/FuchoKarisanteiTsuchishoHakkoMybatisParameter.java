@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuchokarisanteitsuchishohakko;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko.BatchFuchoKariSanteiEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.BatchFuchoKariSanteiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FuchoKarisanteiTsuchishoHakkoMybatisParameter {
 
-    private RDateTime システム日時;
+    private YMDHMS システム日時;
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
     private List<BatchFuchoKariSanteiEntity> 出力帳票一覧List;
@@ -38,7 +38,7 @@ public class FuchoKarisanteiTsuchishoHakkoMybatisParameter {
     /**
      * コンストラクタです
      *
-     * @param システム日時 RDate
+     * @param システム日時 YMDHMS
      * @param 調定年度 FlexibleYear
      * @param 賦課年度 FlexibleYear
      * @param 出力帳票一覧List List<BatchFuchoKariSanteiEntity>
@@ -52,7 +52,7 @@ public class FuchoKarisanteiTsuchishoHakkoMybatisParameter {
      * @param 一括発行起動フラグ boolean
      */
     public FuchoKarisanteiTsuchishoHakkoMybatisParameter(
-            RDateTime システム日時,
+            YMDHMS システム日時,
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             List<BatchFuchoKariSanteiEntity> 出力帳票一覧List,

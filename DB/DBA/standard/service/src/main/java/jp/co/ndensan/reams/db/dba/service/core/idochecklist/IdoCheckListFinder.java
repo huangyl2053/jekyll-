@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListParameter;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListResult;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.idochecklist.IdoCheckListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA130010.DBA130010_IdoCheckListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -85,12 +85,12 @@ public class IdoCheckListFinder {
      * 異動チェックリスト作成画面入力するデータより、バッチ用パラメータクラスを作成します。
      *
      * @param param 異動チェックリストパラメータ
-     * @return IdoCheckListBatchParameter
+     * @return DBA130010_IdoCheckListParameter
      *
      */
-    public IdoCheckListBatchParameter getIdoCheckListBatchParameter(IdoCheckListParameter param) {
+    public DBA130010_IdoCheckListParameter getIdoCheckListBatchParameter(IdoCheckListParameter param) {
 
-        IdoCheckListBatchParameter retParam = new IdoCheckListBatchParameter();
+        DBA130010_IdoCheckListParameter retParam = new DBA130010_IdoCheckListParameter();
         if (param.isすべて選択()) {
             retParam.setHihokenshaDaichouFlag(true);
             retParam.setRoreiFukushiNenkinFlag(true);

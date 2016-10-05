@@ -9,9 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3060KagoKetteiShukeiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3061KagoKetteiMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshainmasterinsert.IKagoKetteiHokenshaInMasterInsertMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -39,7 +37,6 @@ public class KagoKetteiHokenshaInMasterInsert {
     private static final RString 総合事業費公費負担者 = new RString("5");
     private final MapperProvider mapperProvider;
     private final DbT3060KagoKetteiShukeiDac dbt3060Dac;
-    private final DbT3061KagoKetteiMeisaiDac dbt3061Dac;
 
     /**
      * コンストラクタです。
@@ -47,19 +44,17 @@ public class KagoKetteiHokenshaInMasterInsert {
     public KagoKetteiHokenshaInMasterInsert() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbt3060Dac = InstanceProvider.create(DbT3060KagoKetteiShukeiDac.class);
-        this.dbt3061Dac = InstanceProvider.create(DbT3061KagoKetteiMeisaiDac.class);
     }
 
     /**
      * コンストラクタです。
      *
+     * @param mapperProvider MapperProvider
      * @param dbt3060Dac DbT3060KagoKetteiShukeiDac
-     * @param dbt3061Dac DbT3061KagoKetteiMeisaiDac
      */
-    KagoKetteiHokenshaInMasterInsert(MapperProvider mapperProvider, DbT3060KagoKetteiShukeiDac dbt3060Dac, DbT3061KagoKetteiMeisaiDac dbt3061Dac) {
+    KagoKetteiHokenshaInMasterInsert(MapperProvider mapperProvider, DbT3060KagoKetteiShukeiDac dbt3060Dac) {
         this.mapperProvider = mapperProvider;
         this.dbt3060Dac = dbt3060Dac;
-        this.dbt3061Dac = dbt3061Dac;
     }
 
     /**
@@ -86,12 +81,11 @@ public class KagoKetteiHokenshaInMasterInsert {
                 list.get(i).setState(EntityDataState.Deleted);
                 dbt3060Dac.delete(list.get(i));
             }
-
-            List<DbT3061KagoKetteiMeisaiEntity> listTwo = dbt3061Dac.selectByKey(処理年月, 保険者区分);
-            for (int j = 0; j < listTwo.size(); j++) {
-                listTwo.get(j).setState(EntityDataState.Deleted);
-                dbt3061Dac.delete(listTwo.get(j));
-            }
+            IKagoKetteiHokenshaInMasterInsertMapper mapper = mapperProvider.create(IKagoKetteiHokenshaInMasterInsertMapper.class);
+            Map<String, Object> map1 = new HashMap<>();
+            map1.put("保険者区分KEY", 保険者区分);
+            map1.put("処理年月", 処理年月);
+            mapper.再処理準備(map1);
         }
         過誤決定集計TBLに登録(交換情報識別番号);
         過誤決定明細TBLに登録(交換情報識別番号);

@@ -195,7 +195,7 @@ public class ShoKaishuKirokuKanriHandler {
         }
     }
 
-    private class GridComparator implements Comparator<dgKoufuKaishu_Row> {
+    private static class GridComparator implements Comparator<dgKoufuKaishu_Row> {
 
         @Override
         public int compare(dgKoufuKaishu_Row o1, dgKoufuKaishu_Row o2) {
@@ -239,16 +239,16 @@ public class ShoKaishuKirokuKanriHandler {
 
             if (追加.equals(dgKoufuKaishu.getStatus())) {
                 builder.set交付年月日(dgKoufuKaishu.getKoufuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set有効期限(dgKoufuKaishu.getYukoKigen().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
+                                : FlexibleDate.EMPTY);
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
                 builder.set回収年月日(dgKoufuKaishu.getKaishuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());
@@ -256,16 +256,16 @@ public class ShoKaishuKirokuKanriHandler {
             }
             if (更新.equals(dgKoufuKaishu.getStatus())) {
                 builder.set交付年月日(dgKoufuKaishu.getKoufuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set有効期限(dgKoufuKaishu.getYukoKigen().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
+                                : FlexibleDate.EMPTY);
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
                 builder.set回収年月日(dgKoufuKaishu.getKaishuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());

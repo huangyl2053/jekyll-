@@ -119,7 +119,7 @@ public class KetteiTsuchishoInfoTempEntity extends DbTableEntityBase<KetteiTsuch
     @TempTableColumnOrder(29)
     private RString kozaNo;
     @TempTableColumnOrder(30)
-    private ShikibetsuCode kozaMeigininShikibetsuCode;
+    private AtenaMeisho kozaMeigininKanji;
     @TempTableColumnOrder(31)
     private FlexibleDate shuryoYMD;
     @TempTableColumnOrder(32)

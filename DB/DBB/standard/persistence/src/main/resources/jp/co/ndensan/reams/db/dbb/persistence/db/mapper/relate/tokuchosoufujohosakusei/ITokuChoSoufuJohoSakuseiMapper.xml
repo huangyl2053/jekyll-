@@ -1,71 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBB-1830-050 liuyang -->
+<!-- @reamsid_L DBB-1830-040 liuyang -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.ITokuChoSoufuJohoSakuseiMapper">
-
+    <insert id="insertTorikomiRireki" 
+            parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity">
+        INSERT INTO 
+            rgue."UeT1704KaigoTokuchoTorikomiRireki"("renban","dataShubetsu","shoriTimestamp","fileName","fileTimestamp")
+        VALUES
+        (#{renban},
+        #{dataShubetsu},
+        #{shoriTimestamp},
+        #{fileName},
+        #{fileTimestamp})
+    </insert>
+    <select resultOrdered="true" id="getDbT7022Entities" resultMap ="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+        parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.UpdateShorikanriMyBatisParameter">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        FROM
+            rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
+        WHERE
+                "DbT7022ShoriDateKanri"."subGyomuCode"='DBB'
+            AND
+                "DbT7022ShoriDateKanri"."shoriName"=#{処理名}
+            AND
+                "DbT7022ShoriDateKanri"."nendo"=#{年度}
+            AND
+                "DbT7022ShoriDateKanri"."nendoNaiRenban"=#{年度内連番}
+    </select>
+    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.UpdateShorikanriMyBatisParameter">
+        UPDATE
+            rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
+        SET
+            "lastUpdateTimestamp" = #{lastUpdateTimestamp},
+            "updateCount"="DbT7022ShoriDateKanri"."updateCount"+1,
+            "kijunTimestamp"=#{システム日時}
+        WHERE
+                "DbT7022ShoriDateKanri"."subGyomuCode"='DBB'
+            AND
+                "DbT7022ShoriDateKanri"."shoriName"=#{処理名}
+            AND
+               "DbT7022ShoriDateKanri"."nendo"=#{年度}
+            AND
+                "DbT7022ShoriDateKanri"."nendoNaiRenban"=#{年度内連番}
+    </update>
+    <select resultOrdered="true" id="selectMaxRenbanUeT1704" resultType="java.lang.Integer">
+        SELECT MAX(renban) FROM rgue."UeT1704KaigoTokuchoTorikomiRireki"
+    </select>
     <select resultOrdered="true" id="selectUe10122T0511NenkinTokuchoKaifuJohotemp" resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
          SELECT
-        <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
-        <include refid="allColumns_DbV2001ChoshuHoho" />,
-        <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
-        <include refid="allColumns_DbV2002Fuka" />,
-        "DbT2003Kibetsu"."ki"  AS "DbT2003_ki",
-        "UrT0705"."choteigaku"  AS "UrT0705_choteigaku",
-        "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
-        "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
-        "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
+            <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
+            <include refid="allColumns_DbV2001ChoshuHoho" />,
+            <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
+            <include refid="allColumns_DbV2002Fuka" />,
+            "DbT2003Kibetsu"."ki"  AS "DbT2003_ki",
+            "UrT0705"."choteigaku"  AS "UrT0705_choteigaku",
+            "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+            "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
+            "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
-        "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
-        LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
-        ON "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbT2001ChoshuHoho"."fukaNendo"
-        AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."honNenkinNo"
-        AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."honNenkinCode"
-        AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."honHosokuM"
-        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
-        ON "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
-        INNER JOIN rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-        ON "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."choteiNendo"
-        AND "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
-        AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
-        ON "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."choteiNendo"
-        AND "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
-        AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
-        AND "DbT2002Fuka"."rirekiNo"= "DbT2003Kibetsu"."rirekiNo"
-        INNER JOIN rgdb."UrT0705ChoteiKyotsu"  AS  "UrT0705"
+            "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
+        LEFT JOIN 
+                rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
+            ON 
+                "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbT2001ChoshuHoho"."fukaNendo"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."honNenkinNo"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."honNenkinCode"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."honHosokuM"
+        INNER JOIN 
+                rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+            ON 
+                "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        INNER JOIN 
+                rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+            ON 
+                "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."choteiNendo"
+                AND "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
+                AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
+        INNER JOIN 
+                rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+            ON 
+                "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."choteiNendo"
+                AND "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
+                AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
+                AND "DbT2002Fuka"."rirekiNo"= "DbT2003Kibetsu"."rirekiNo"
+                AND "DbT2003Kibetsu"."choshuHouhou"='1'
+        INNER JOIN 
+            rgdb."UrT0705ChoteiKyotsu"  AS  "UrT0705"
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
     </select>
     <select resultOrdered="true" id="select46UeT0511NenkinTokuchoKaifuJohotemp" resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
         SELECT
-        <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
-        <include refid="allColumns_DbV2001ChoshuHoho" />,
-        <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
-        <include refid="allColumns_DbV2002Fuka" />,
-        "DbT2003Kibetsu"."ki"  AS DbT2003_ki,
-        "UrT0705"."choteigaku"  AS UrT0705_choteigaku,
-        "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
-        "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
-        "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
+            <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
+            <include refid="allColumns_DbV2001ChoshuHoho" />,
+            <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
+            <include refid="allColumns_DbV2002Fuka" />,
+            "DbT2003Kibetsu"."ki"  AS DbT2003_ki,
+            "UrT0705"."choteigaku"  AS UrT0705_choteigaku,
+            "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+            "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
+            "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
-        "NenkinTokuchoKaifuJohoTemp" as "UeT0511NenkinTokuchoKaifuJoho"
-        LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
-        ON "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbT2001ChoshuHoho"."fukaNendo"
-        AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."yokunendoKariNenkinNo"
-        AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."yokunendoKariNenkinCode"
-        AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."yokunendoKariHosokuM"
+            "NenkinTokuchoKaifuJohoTemp" as "UeT0511NenkinTokuchoKaifuJoho"
+        LEFT JOIN 
+                rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
+            ON 
+                "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbT2001ChoshuHoho"."fukaNendo"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."yokunendoKariNenkinNo"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."yokunendoKariNenkinCode"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."yokunendoKariHosokuM"
         INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
-        ON "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+            ON "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
         INNER JOIN rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-        ON "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
-        AND "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."choteiNendo"
-        AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
+            ON 
+                "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
+                AND "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."choteiNendo"
+                AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
         INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
-        ON "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."choteiNendo"
-        AND "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
-        AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
-        AND "DbT2002Fuka"."rirekiNo"= "DbT2003Kibetsu"."rirekiNo"
+            ON 
+                "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."choteiNendo"
+                AND "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
+                AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
+                AND "DbT2002Fuka"."rirekiNo"= "DbT2003Kibetsu"."rirekiNo"
+                AND "DbT2003Kibetsu"."choshuHouhou"='1'
         INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS  "UrT0705"
-        ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
+            ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
     </select>
     <select resultOrdered="true"  id="select8UeT0511NenkinTokuchoKaifuJohotemp"  resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
        SELECT
@@ -96,6 +155,7 @@
         AND "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
         AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
         AND "DbT2002Fuka"."rirekiNo"= "DbT2003Kibetsu"."rirekiNo"
+        AND "DbT2003Kibetsu"."choshuHouhou"='1'
         INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
     </select>
@@ -117,17 +177,21 @@
         <id column="ueT0511NenkinTokuchoKaifuJoho_koseiCityCode" />
         <id column="ueT0511NenkinTokuchoKaifuJoho_renban"/>
         <id column="dbT2001ChoshuHoho_hihokenshaNo" />
-        <id column="dbT2002Fuka_choteiNendo" />
+        <id column="dbT2001ChoshuHoho_fukaNendo" />
         <id column="dbT2002Fuka_tsuchishoNo" />
-        <id column="DbT2003_rirekiNo" />
-        <id property="ki" column="DbT2003_ki"/>
-        <id property="choteiId" column="DbT2003_choteiId" typeHandler="org.apache.ibatis.type.LongTypeHandler" />
-        <result property="choteigaku" column="UrT0705_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="choshuHouhou" column="DbT2003_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id column="DbT2003_choshuHouhou" />
+        <id column="DbT2003_ki"/>
         <association property="uet0511entity" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="dbt2001entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="dbt1001entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="dbt2002entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
+        <collection property="dbt2003entities" resultMap="resultMap_DbT2003FukaJohoEntity" />
+    </resultMap>
+    <resultMap id="resultMap_DbT2003FukaJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.DbT2003FukaJohoEntity" autoMapping="true">
+        <id property="choshuHouhou" column="DbT2003_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="ki" column="DbT2003_ki"/>
+        <result property="choteiId" column="DbT2003_choteiId" typeHandler="org.apache.ibatis.type.LongTypeHandler" />
+        <result property="choteigaku" column="UrT0705_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
     <sql id="allColumns_UeT0511NenkinTokuchoKaifuJoho">

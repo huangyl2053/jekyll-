@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
@@ -76,19 +77,21 @@ class YokaigoNinteiEnkiTshuchishoEditor implements IYokaigoNinteiEnkiTshuchishoE
                 source.hihokenshaNo8 = dbT4101entity.getHihokenshaNo().substring(INT_7, INT_8);
                 source.hihokenshaNo9 = dbT4101entity.getHihokenshaNo().substring(INT_8, INT_9);
                 source.hihokenshaNo10 = dbT4101entity.getHihokenshaNo().substring(INT_9, INT_10);
+                source.shikibetsuCode = RString.EMPTY;
+                source.hihokenshaNo = dbT4101entity.getHihokenshaNo();
             }
             if (dbT4101entity.getHihokenshaName() != null) {
                 source.hihokenshaName = dbT4101entity.getHihokenshaName().getColumnValue();
             }
             source.riyu1 = dbT4101entity.getEnkiRiyu();
             FlexibleDate enkiMikomiKaishiYMD = dbT4101entity.getEnkiMikomiKaishiYMD();
-            if (enkiMikomiKaishiYMD != null && enkiMikomiKaishiYMD.isWareki()) {
+            if (enkiMikomiKaishiYMD != null && !enkiMikomiKaishiYMD.isEmpty() && enkiMikomiKaishiYMD.isWareki()) {
                 source.shoriMikomiKaishiYMD = enkiMikomiKaishiYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
             }
             FlexibleDate enkiMikomiShuryoYMD = dbT4101entity.getEnkiMikomiShuryoYMD();
-            if (enkiMikomiShuryoYMD != null && enkiMikomiShuryoYMD.isWareki()) {
+            if (enkiMikomiShuryoYMD != null && !enkiMikomiShuryoYMD.isEmpty() && enkiMikomiShuryoYMD.isWareki()) {
                 source.shoriMikomiShuryoYMD = enkiMikomiShuryoYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
