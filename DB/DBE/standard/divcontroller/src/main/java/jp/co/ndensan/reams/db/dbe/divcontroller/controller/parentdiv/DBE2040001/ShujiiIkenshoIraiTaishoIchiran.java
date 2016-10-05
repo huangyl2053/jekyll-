@@ -138,31 +138,22 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnShujiiIrai(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
+            getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
-                getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
-                getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getCcdTaskList().getCheckbox().size() > 1) {
-                getValidationHandler().主治医意見書作成依頼一覧データの複数行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
-            RealInitialLocker.release(排他キー);
-            return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
+        if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
+            getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        return ResponseData.of(div).respond();
+        if (div.getCcdTaskList().getCheckbox().size() > 1) {
+            getValidationHandler().主治医意見書作成依頼一覧データの複数行選択チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+        RealInitialLocker.release(排他キー);
+        return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
     }
 
     /**
