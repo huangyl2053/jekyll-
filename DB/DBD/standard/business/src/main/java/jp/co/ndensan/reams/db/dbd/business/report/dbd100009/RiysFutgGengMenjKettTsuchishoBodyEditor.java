@@ -124,13 +124,16 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         source.hihokenshaNo8 = 利用者負担額減額情報.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
         source.hihokenshaNo9 = 利用者負担額減額情報.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
         source.hihokenshaNo10 = 利用者負担額減額情報.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
-        source.ketteiYMD = 利用者負担額減額情報.get決定年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.ketteiYMD = 利用者負担額減額情報.get決定年月日().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
         if (KetteiKubun.承認する.getコード().equals(利用者負担額減額情報.get決定区分())) {
-            source.tekiyoYMD = 利用者負担額減額情報.get適用開始年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.tekiyoYMD = 利用者負担額減額情報.get適用開始年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka1 = new RString("（承認内容）");
             source.shoninSuru = マル;
-            source.yukoYMD = 利用者負担額減額情報.get適用終了年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.yukoYMD = 利用者負担額減額情報.get適用終了年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka3
                     = new RString("　　　給付率　　".concat(利用者負担額減額情報.get給付率().getColumnValue().toString().concat("　/　100")));
             source.shoninShinai = RString.EMPTY;
