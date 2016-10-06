@@ -109,6 +109,8 @@ public class ShinseiKensaku {
         ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(searchResult.records()));
         if (!searchResult.records().isEmpty()) {
             getHandler(div).setShinseiJohoIchiran(searchResult);
+        } else {
+            div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
         }
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
