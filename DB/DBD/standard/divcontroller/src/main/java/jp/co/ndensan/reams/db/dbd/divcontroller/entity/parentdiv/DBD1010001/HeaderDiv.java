@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HeaderDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,12 +34,12 @@ public class HeaderDiv extends Panel {
     private HosokuJohoDiv HosokuJoho;
     @JsonProperty("Dialogs")
     private DialogsDiv Dialogs;
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
-    @JsonProperty("ccdShisetsuNyushoInfo")
-    private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,6 +102,15 @@ public class HeaderDiv extends Panel {
     }
 
     /*
+     * getccdShisetsuNyushoInfo
+     * @return ccdShisetsuNyushoInfo
+     */
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return ccdShisetsuNyushoInfo;
+    }
+
+    /*
      * getccdAtenaInfo
      * @return ccdAtenaInfo
      */
@@ -117,15 +126,6 @@ public class HeaderDiv extends Panel {
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
-    }
-
-    /*
-     * getccdShisetsuNyushoInfo
-     * @return ccdShisetsuNyushoInfo
-     */
-    @JsonProperty("ccdShisetsuNyushoInfo")
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return ccdShisetsuNyushoInfo;
     }
 
     /*

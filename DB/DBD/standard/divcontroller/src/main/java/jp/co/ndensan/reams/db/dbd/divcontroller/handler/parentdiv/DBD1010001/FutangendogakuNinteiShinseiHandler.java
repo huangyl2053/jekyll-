@@ -255,9 +255,9 @@ public class FutangendogakuNinteiShinseiHandler {
         } else {
             List<KeyValueDataSource> dataSources = new ArrayList<>();
             dataSources.add(new KeyValueDataSource());
-            div.getTxtTekiyoYMD().setDisabled(true);
+            div.getTxtTekiyoYMD().setDisabled(false);
             div.getTxtTekiyoYMD().clearValue();
-            div.getTxtYukoKigenYMD().setDisabled(true);
+            div.getTxtYukoKigenYMD().setDisabled(false);
             div.getTxtYukoKigenYMD().clearValue();
             div.getDdlKyusochisha().setDisabled(true);
             div.getDdlKyusochisha().setIsBlankLine(true);
@@ -475,7 +475,7 @@ public class FutangendogakuNinteiShinseiHandler {
             gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
             ShinseiJoho shinseiJoho = new ShinseiJoho(
                     gemmenGengakuShinsei.get申請届出代行区分() == null
-                            ? null : ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
+                    ? null : ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
                     gemmenGengakuShinsei.get申請届出者氏名(), gemmenGengakuShinsei.get申請届出者氏名カナ(), gemmenGengakuShinsei.get申請届出者続柄(),
                     gemmenGengakuShinsei.get申請届出代行事業者番号(),
                     gemmenGengakuShinsei.get事業者区分() == null ? null : JigyoshaKubun.toValue(gemmenGengakuShinsei.get事業者区分()),
@@ -615,22 +615,22 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set居室種別(div.getDdlKyoshitsuShubetsu().getSelectedKey());
         builder.set食費負担限度額(
                 div.getDdlShokuhi().getSelectedValue().isNullOrEmpty()
-                        ? null : new Decimal(div.getDdlShokuhi().getSelectedValue().toString()));
+                ? null : new Decimal(div.getDdlShokuhi().getSelectedValue().toString()));
         builder.setユニット型個室(
                 div.getDdlUnitGataKoshitsu().getSelectedValue().isNullOrEmpty()
-                        ? null : new Decimal(div.getDdlUnitGataKoshitsu().getSelectedValue().toString()));
+                ? null : new Decimal(div.getDdlUnitGataKoshitsu().getSelectedValue().toString()));
         builder.setユニット型準個室(
                 div.getDdlUnitGataJunKoshitsu().getSelectedValue().isNullOrEmpty()
-                        ? null : new Decimal(div.getDdlUnitGataJunKoshitsu().getSelectedValue().toString()));
+                ? null : new Decimal(div.getDdlUnitGataJunKoshitsu().getSelectedValue().toString()));
         builder.set従来型個室_特養等(
                 div.getDdlJuraiGataKoshitsuTokuyo().getSelectedValue().isNullOrEmpty()
-                        ? null : new Decimal(div.getDdlJuraiGataKoshitsuTokuyo().getSelectedValue().toString()));
+                ? null : new Decimal(div.getDdlJuraiGataKoshitsuTokuyo().getSelectedValue().toString()));
         builder.set従来型個室_老健_療養等(
                 div.getDdlJuraiGataKoshitsuRoken().getSelectedValue().isNullOrEmpty()
-                        ? null : new Decimal(div.getDdlJuraiGataKoshitsuRoken().getSelectedValue().toString()));
+                ? null : new Decimal(div.getDdlJuraiGataKoshitsuRoken().getSelectedValue().toString()));
         builder.set多床室(
                 div.getDdlTashoshitsu().getSelectedValue().isNullOrEmpty()
-                        ? null : new Decimal(div.getDdlTashoshitsu().getSelectedValue().toString()));
+                ? null : new Decimal(div.getDdlTashoshitsu().getSelectedValue().toString()));
         builder.set非承認理由(div.getTxtHiShoninRiyu().getValue() == null ? RString.EMPTY : div.getTxtHiShoninRiyu().getValue());
         builder.set境界層該当者区分(!div.getChkKyokaiso().getSelectedValues().isEmpty());
         builder.set激変緩和措置対象者区分(!div.getChkGekihenKanwa().getSelectedValues().isEmpty());
@@ -942,7 +942,7 @@ public class FutangendogakuNinteiShinseiHandler {
             }
             FutanGendogakuNintei futanGendogakuNintei
                     = new FutanGendogakuNintei(get証記載保険者番号(
-                            div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(資格対象者), 履歴番号);
+                                    div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(資格対象者), 履歴番号);
             FutanGendogakuNintei 申請情報 = 申請情報Builder(futanGendogakuNintei);
             if (list.isEmpty()) {
                 list.add(new FutanGendogakuNinteiViewState(申請情報, EntityDataState.Added, 履歴番号));
