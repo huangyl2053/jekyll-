@@ -123,6 +123,9 @@ public class ShinseiKensaku {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
         }
         if (searchResult.records().size() == 1) {
+            div.getBtnClear().setDisabled(false);
+            div.getTxtMaxDisp().setDisabled(false);
+            div.getBtnKensaku().setDisabled(false);
             return forwardNextOrStay(div, Events.検索結果1件);
         }
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
