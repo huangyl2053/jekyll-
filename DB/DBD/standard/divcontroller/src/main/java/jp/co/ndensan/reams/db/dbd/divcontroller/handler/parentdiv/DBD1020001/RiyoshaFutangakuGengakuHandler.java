@@ -501,8 +501,8 @@ public class RiyoshaFutangakuGengakuHandler {
             }
 
         } else {
-            div.getTxtTekiyoYmd().setDisabled(true);
-            div.getTxtYukoKigenYmd().setDisabled(true);
+            div.getTxtTekiyoYmd().setDisabled(false);
+            div.getTxtYukoKigenYmd().setDisabled(false);
             div.getDdlKyusochiKubun().setDisabled(true);
             div.getTxtKyufuRitsu().setDisabled(true);
             div.getBtnHiShoninRiyu().setDisabled(false);
