@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,11 +50,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         if (dataPassModel != null) {
             div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
             div.getTxtChosainCodeFrom().setValue(dataPassModel.get調査員コード());
-            if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
-                div.getHokensha().setSelectedShichosonIfExist(市町村コード);
             }
-        }
         List<KeyValueDataSource> ddlShoriKubun = new ArrayList<>();
         ddlShoriKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaItakuKubunCode code : ChosaItakuKubunCode.values()) {

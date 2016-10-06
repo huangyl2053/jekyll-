@@ -59,35 +59,11 @@
                     DbT5911."shujiiIryokikanCode" = DbT5912."shujiiIryokikanCode"
                     AND
                     DbT5911."shichosonCode" = DbT5912."shichosonCode"
-            <if test = "shujiiCodeFromFlag">
-                AND
-                DbT5912."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
-            </if>
-            <if test = "shujiiCodeToFlag">
-                AND
-                DbT5912."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
-            </if>
-            <if test = "shujiiJokyoFlag">
-                AND
-                DbT5912."jokyoFlag" = true
-            </if>
-            <if test = "!shujiiJokyoFlag">
-                AND
-                DbT5912."jokyoFlag" = false
-            </if>
-            <if test = "shujiiNameFlag">
-                AND
-                DbT5912."shujiiName" LIKE '%' || #{shujiiName} || '%'
-            </if>
-            <if test = "shujiiKanaFlag">
-                AND
-                DbT5912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
-            </if>
         WHERE
             1 = 1
             <if test = "hokenshaFlag">
                 AND
-                DbT5911."shichosonCode" = #{hokensha}
+                DbT5912."shichosonCode" = #{hokensha}
             </if>
             <if test = "shujiiIryokikanCodeFromFlag">
                 AND
@@ -112,6 +88,30 @@
             <if test = "iryoKikanMeishoKanaFlag">
                 AND
                 DbT5911."iryoKikanMeishoKana" LIKE '%' || #{iryoKikanMeishoKana} || '%'
+            </if>
+            <if test = "shujiiCodeFromFlag">
+                AND
+                DbT5912."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
+            </if>
+            <if test = "shujiiCodeToFlag">
+                AND
+                DbT5912."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
+            </if>
+            <if test = "shujiiJokyoFlag">
+                AND
+                DbT5912."jokyoFlag" = true
+            </if>
+            <if test = "!shujiiJokyoFlag">
+                AND
+                DbT5912."jokyoFlag" = false
+            </if>
+            <if test = "shujiiNameFlag">
+                AND
+                DbT5912."shujiiName" LIKE '%' || #{shujiiName} || '%'
+            </if>
+            <if test = "shujiiKanaFlag">
+                AND
+                DbT5912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
             </if>
         LIMIT #{maxCount}
     </select>

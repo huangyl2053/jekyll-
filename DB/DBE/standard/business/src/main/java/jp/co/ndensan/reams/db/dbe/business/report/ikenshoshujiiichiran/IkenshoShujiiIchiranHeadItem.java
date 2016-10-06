@@ -17,8 +17,6 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoShujiiIchiranHeadItem {
 
-    private final RString cityCode;
-    private final RString cityName;
     private final RString iryoKikanCodeFrom;
     private final RString iryoKikanCodeTo;
     private final RString shujiiCodeFrom;
@@ -30,8 +28,6 @@ public class IkenshoShujiiIchiranHeadItem {
     /**
      * インスタンスを生成します。
      *
-     * @param cityCode 市町村コード
-     * @param cityName 市町村名称
      * @param iryoKikanCodeFrom 主治医医療機関コードFrom
      * @param iryoKikanCodeTo 主治医医療機関コードTo
      * @param shujiiCodeFrom 主治医コードFrom
@@ -41,8 +37,6 @@ public class IkenshoShujiiIchiranHeadItem {
      * @param page 改頁
      */
     public IkenshoShujiiIchiranHeadItem(
-            RString cityCode,
-            RString cityName,
             RString iryoKikanCodeFrom,
             RString iryoKikanCodeTo,
             RString shujiiCodeFrom,
@@ -50,9 +44,7 @@ public class IkenshoShujiiIchiranHeadItem {
             RString shujiiJokyo,
             RString sort,
             RString page) {
-
-        this.cityCode = cityCode;
-        this.cityName = cityName;
+        
         this.iryoKikanCodeFrom = iryoKikanCodeFrom;
         this.iryoKikanCodeTo = iryoKikanCodeTo;
         this.shujiiCodeFrom = shujiiCodeFrom;

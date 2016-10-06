@@ -75,13 +75,13 @@ public class NinteichosaItakusakiMaster {
     private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
     private static final RString その他状態コード = new RString("その他");
     private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
-    private static final RString 構成市町村マスタ市町村コード重複種別 = 
-            DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
-                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
-    private static final RString 四マスタ優先表示市町村識別ID = 
-            DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
-                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
-    
+    private static final RString 構成市町村マスタ市町村コード重複種別
+            = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+    private static final RString 四マスタ優先表示市町村識別ID
+            = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+
     /**
      * 画面初期化処理です。
      *
@@ -417,20 +417,24 @@ public class NinteichosaItakusakiMaster {
         RString shichoson = div.getChosaitakusakiJohoInput().getTxtShichoson().getValue();
         if (RString.isNullOrEmpty(shichoson)) {
             div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
-        } else {
-            List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
-            if (!list.isEmpty()) {
-                div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
-                if (!構成市町村マスタ市町村コード重複種別.equals(new RString("0"))) {
-                    for (ShichosonMeishoBusiness item : list) {
-                        if (四マスタ優先表示市町村識別ID.equals(item.getShichosonShikibetuID())) {
-                            div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(item.getShichosonMeisho());
-                            break;
-                        }
-                    }
-                }
-            } else {
-                div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            return ResponseData.of(div).respond();
+        }
+
+        List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
+        if (list.isEmpty()) {
+            div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            return ResponseData.of(div).respond();
+        }
+
+        div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+        if (構成市町村マスタ市町村コード重複種別.equals(new RString("0"))) {
+            return ResponseData.of(div).respond();
+        }
+
+        for (ShichosonMeishoBusiness item : list) {
+            if (四マスタ優先表示市町村識別ID.equals(item.getShichosonShikibetuID())) {
+                div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(item.getShichosonMeisho());
+                break;
             }
         }
         return ResponseData.of(div).respond();
@@ -439,7 +443,7 @@ public class NinteichosaItakusakiMaster {
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
         return new NinteichosaItakusakiMasterHandler(div);
     }
-    
+
     private boolean is一覧エリア編集有り(NinteichosaItakusakiMasterDiv div) {
         for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
             if (!row.getJotai().isEmpty()) {

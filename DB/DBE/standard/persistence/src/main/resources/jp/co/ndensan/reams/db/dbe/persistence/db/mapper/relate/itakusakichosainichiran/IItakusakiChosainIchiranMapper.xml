@@ -4,6 +4,8 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.itakusakichosainichiran.IItakusakiChosainIchiranMapper">
     
     <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.itakusakichosainichiran.ItakusakiChosainIchiranRelateEntity">
+        <result property="dbT7051_ShichosonCode" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbT7051_ShichosonMeisho" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dbT5910_NinteichosaItakusakiCode" column="調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dbT5910_JigyoshaMeishoKana" column="名称_ｶﾅ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dbT5910_JigyoshaMeisho" column="名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -25,6 +27,8 @@
     <select resultOrdered="true" id="getNinteiChoSain"             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran.ItakusakiChosainIchiranMybitisParamter" 
             resultMap="haishameigihenkouiraiResult" fetchSize="500">
         SELECT
+            DbT7051."shichosonCode" AS 市町村コード,
+            DbT7051."shichosonMeisho" AS 市町村名称,
             DbT5910."ninteichosaItakusakiCode" AS "調査委託先コード",
             DbT5910."jigyoshaMeishoKana" AS "名称_ｶﾅ",
             DbT5910."jigyoshaMeisho" AS "名称",
@@ -43,10 +47,12 @@
             DbT5913."jokyoFlag" AS "調査員状況"
         FROM
             rgdb."DbT5913ChosainJoho" AS DbT5913,
-            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910,
+            rgdb."DbT7051KoseiShichosonMaster"  AS DbT7051
         WHERE
             DbT5910."shichosonCode" = DbT5913."shichosonCode"
             AND DbT5910."ninteichosaItakusakiCode" = DbT5913."ninteiChosaItakusakiCode"
+            AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
             <if test="shichosonCodeFlag">
             AND DbT5913."shichosonCode" = #{shichosonCode}
             </if>

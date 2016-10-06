@@ -120,7 +120,8 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
         source.hihokenshaNo8 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
         source.hihokenshaNo9 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
         source.hihokenshaNo10 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
-        source.ketteiYMD = 社会福祉法人等利用者負担軽減.get決定年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.ketteiYMD = 社会福祉法人等利用者負担軽減.get決定年月日().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
         source.ninteiKekka4 = RString.EMPTY;
         source.ninteiKekka5 = RString.EMPTY;
@@ -129,11 +130,13 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
 
         if (KetteiKubun.承認する.getコード().equals(社会福祉法人等利用者負担軽減.get決定区分())) {
             source.ninteiKekka1 = new RString("（承認内容）");
-            source.tekiyoYMD = 社会福祉法人等利用者負担軽減.get適用開始年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.tekiyoYMD = 社会福祉法人等利用者負担軽減.get適用開始年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.shoninSuru = 決定区分_承認;
             source.ninteiKekka2 = new RString(社会福祉法人等利用者負担軽減.get軽減率_分子().toString().concat("/").concat(
                     社会福祉法人等利用者負担軽減.get軽減率_分母().toString()));
-            source.yukoYMD = 社会福祉法人等利用者負担軽減.get適用終了年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.yukoYMD = 社会福祉法人等利用者負担軽減.get適用終了年月日().wareki().eraType(EraType.KANJI
+            ).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka3 = new RString("居住費．食費のみ");
             source.kakuninNoTitle = new RString("確　認　番　号");
             source.kakuninNo1 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_0, INDEX_1);

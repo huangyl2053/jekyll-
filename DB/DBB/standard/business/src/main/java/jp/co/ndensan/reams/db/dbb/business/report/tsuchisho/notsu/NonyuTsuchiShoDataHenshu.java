@@ -858,7 +858,7 @@ public class NonyuTsuchiShoDataHenshu {
     private SeikyuForPrinting get請求情報By期(List<SeikyuForPrinting> 請求情報リスト, RString 期別) {
         for (SeikyuForPrinting 請求情報 : 請求情報リスト) {
             if (期別.padLeft("0", 整数2)
-                    .equals(請求情報.get請求対象情報().get請求明細リスト().get(0).get収納期別明細().get期別().padLeft("0", 整数2))) {
+                    .equals(new RString(請求情報.get請求対象情報().get請求明細リスト().get(0).get収納期別明細().get期別()).padLeft("0", 整数2))) {
                 return 請求情報;
             }
         }

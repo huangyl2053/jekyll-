@@ -9,6 +9,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+//CHECKSTYLE IGNORE ImportControl FOR NEXT 1 LINES
 import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -117,7 +118,7 @@ public class CSVDataUtil extends CSVDataUtilBase {
         //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
         for (String str : tableNames) {
             RString tableName = new RString(str);
-            this.backup(code, tableName);
+            this._backup(code, tableName);
         }
     }
 
@@ -137,7 +138,7 @@ public class CSVDataUtil extends CSVDataUtilBase {
         //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
         for (String str : tableNames) {
             RString tableName = new RString(str);
-            this.backup(code, tableName);
+            this._backup(code, tableName);
             RString path = createTestFilePath(tableName);
             if (File.exists(path)) {
                 this.populate(code, tableName);
@@ -160,6 +161,7 @@ public class CSVDataUtil extends CSVDataUtilBase {
      * @param tableNames テーブル名
      */
     public void prepare(GyomuCode code, List<String> tableNames) {
+        //CHECKSTYLE IGNORE IllegalToken FOR NEXT 1 LINES
         this.prepare(code, tableNames.toArray(new String[tableNames.size()]));
     }
 
@@ -223,6 +225,7 @@ public class CSVDataUtil extends CSVDataUtilBase {
      * @param tableNames テーブル名
      */
     public void rollback(GyomuCode code, List<String> tableNames) {
+        //CHECKSTYLE IGNORE IllegalToken FOR NEXT 1 LINES
         this.rollback(code, tableNames.toArray(new String[tableNames.size()]));
     }
 
@@ -254,7 +257,7 @@ public class CSVDataUtil extends CSVDataUtilBase {
         this.rollback(targetCode, tableNames);
     }
 
-    private void backup(GyomuCode code, RString tableName) {
+    private void _backup(GyomuCode code, RString tableName) {
         getHelper().exportTableData(code, tableName, createBackUpFilePath(tableName));
     }
 

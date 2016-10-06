@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoShujiiIchiranRelateEntity {
 
+    private RString shichosonCode;
+    private RString shichosonMeisho;
     private RString iryokikanCode;
     private RString iryoKikanMeishoKana;
     private RString iryoKikanMeisho;
