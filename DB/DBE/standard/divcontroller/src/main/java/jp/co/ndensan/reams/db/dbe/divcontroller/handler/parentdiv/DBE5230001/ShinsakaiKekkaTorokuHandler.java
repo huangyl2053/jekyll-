@@ -26,9 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -225,7 +222,7 @@ public class ShinsakaiKekkaTorokuHandler {
         row.setKonkaiNijiHantei(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedValue());
         row.getNinteiKikanKaishi().setValue(new FlexibleDate(div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue().toDateString()));
         row.getNinteiKikanShuryo().setValue(new FlexibleDate(div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue().toDateString()));
-        row.setNinteiKikanTukisu(new RString(div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().toString()));
+        row.setNinteiKikanTukisu(new RString(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString()));
         row.setHidMemo(div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue());
         row.setHidIkenCode(div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey());
         row.setHidIken(div.getKobetsuHyojiArea().getTxtShinsakaiIken().getValue());
@@ -276,9 +273,9 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getTxtNinteiKikanTo().clearValue();
         }
         if (!RString.isNullOrEmpty(row.getNinteiKikanTukisu())) {
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setValue(new Decimal(row.getNinteiKikanTukisu().toString()));
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(new RString("key").concat(row.getNinteiKikanTukisu()));
         } else {
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().clearValue();
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(new RString("key0"));
         }
         if (!RString.isNullOrEmpty(row.getHidMemo())) {
             div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setValue(row.getHidMemo());
@@ -363,9 +360,8 @@ public class ShinsakaiKekkaTorokuHandler {
         } else {
             div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getNinteiKikanShuryo().setValue(FlexibleDate.EMPTY);
         }
-        Decimal 月数 = div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue();
-        if (月数 != null) {
-            div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().setNinteiKikanTukisu(new RString(月数.toString()));
+        if (RString.isNullOrEmpty(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue())) {
+            div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().setNinteiKikanTukisu(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue());
         } else {
             div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().setNinteiKikanTukisu(RString.EMPTY);
         }
@@ -422,7 +418,7 @@ public class ShinsakaiKekkaTorokuHandler {
         div.getKobetsuHyojiArea().getDdlNijiHantei();
         div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().clearValue();
         div.getKobetsuHyojiArea().getTxtNinteiKikanTo().clearValue();
-        div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().clearValue();
+        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString("key0"));
         div.getKobetsuHyojiArea().getTxtShinsakaiMemo().clearValue();
         div.getKobetsuHyojiArea().getTxtShinsakaiIken().clearValue();
         div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setSelectedKey(RString.EMPTY);
@@ -461,7 +457,7 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(row.getHidIchiHenKou());
         return rsb.toRString();
     }
-
+    
     private RString getInputItem() {
         RStringBuilder rsb = new RStringBuilder();
         TextBoxDate kikanFrom = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom();
@@ -486,7 +482,7 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
                 .append(ninteiKikanKaishi)
                 .append(ninteiKikanShuryo)
-                .append(div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() != null ? div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() : RString.EMPTY)
+                .append(RString.isNullOrEmpty(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue()) ? div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue() : RString.EMPTY)
                 .append(div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue())
                 .append(div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getTxtShinsakaiIken().getValue())
@@ -555,7 +551,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(false);
             div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(false);
             div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(false);
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setReadOnly(false);
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setReadOnly(false);
             div.getKobetsuHyojiArea().getBtnShinsakaiMemoTeikeibunGuide().setDisabled(false);
             div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setReadOnly(false);
             div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setReadOnly(false);
@@ -568,7 +564,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(true);
             div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(true);
             div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(true);
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setReadOnly(true);
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setReadOnly(true);
             div.getKobetsuHyojiArea().getBtnShinsakaiMemoTeikeibunGuide().setDisabled(true);
             div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setReadOnly(true);
             div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setReadOnly(true);
@@ -590,31 +586,26 @@ public class ShinsakaiKekkaTorokuHandler {
             if (shinseiKubun != null) {
                 setShinseiKubun(shinseiKubun);
             } else {
-                div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setValue(
-                        new Decimal(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
             }
             FlexibleDate shinseiDay = div.getKobetsuHyojiArea().getTxtShinseiDay().getValue();
             if (shinseiDay != null && !shinseiDay.isEmpty()) {
                 div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setValue(new RDate(shinseiDay.toString()));
-                div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(
-                        div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().intValue()).toString()));
+                int ninteiKikanMonth = Integer.valueOf(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
+                div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(ninteiKikanMonth).toString()));
             }
         }
     }
 
     private void setShinseiKubun(TextBox shinseiKubun) {
         if (更新申請.equals(shinseiKubun.getValue())) {
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setValue(
-                    new Decimal(DbBusinessConfig.get(ConfigNameDBE.更新申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.更新申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         } else if (新規申請.equals(shinseiKubun.getValue())) {
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setValue(
-                    new Decimal(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         } else if (区分変更申請有効期間.equals(shinseiKubun.getValue())) {
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setValue(
-                    new Decimal(DbBusinessConfig.get(ConfigNameDBE.区分変更申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.区分変更申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         } else {
-            div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().setValue(
-                    new Decimal(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         }
     }
 
@@ -641,8 +632,10 @@ public class ShinsakaiKekkaTorokuHandler {
      *
      */
     public void setShinsakaiIken() {
-        Decimal month = div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue();
-        if (month != null) {
+        if (div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().isNullOrEmpty()) {
+            div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(RString.EMPTY);
+        } else {
+            Decimal month = new Decimal(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
             if ((月_6.compareTo(month) == 0 || 月_6.compareTo(month) == -1) && (月_12.compareTo(month) == 0 || 月_12.compareTo(month) == 1)) {
                 div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(
                         DbBusinessConfig.get(ConfigNameDBE.審査会意見12, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
@@ -652,28 +645,6 @@ public class ShinsakaiKekkaTorokuHandler {
             } else {
                 div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(RString.EMPTY);
             }
-        } else {
-            div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(RString.EMPTY);
-
         }
     }
-
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            if (replacements.length == 0) {
-                this.message = message.getMessage();
-            } else {
-                this.message = message.getMessage().replace(replacements);
-            }
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
-    }
-
 }

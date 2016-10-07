@@ -68,8 +68,9 @@ public class ShinsakaiKekkaTorokuValidationHandler {
      * @return ValidationMessageControlPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 有効月数チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() == null
-                || div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ZERO) == 0) {
+        Decimal ninteiKikanMonth = new Decimal(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
+        if (div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().isNullOrEmpty()
+                || ninteiKikanMonth.compareTo(Decimal.ONE) >= 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
         }
@@ -83,15 +84,16 @@ public class ShinsakaiKekkaTorokuValidationHandler {
      * @return validPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 有効月数範囲チェック(ValidationMessageControlPairs validPairs) {
+        Decimal ninteiKikanMonth = new Decimal(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
         if ((NinteiShinseiShinseijiKubunCode.新規申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
                 || NinteiShinseiShinseijiKubunCode.区分変更申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue()))
-                && !((div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ONE) >= 0)
-                && (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(new Decimal("12"))) <= 0)) {
+                && !((ninteiKikanMonth.compareTo(Decimal.ONE) >= 0)
+                && (ninteiKikanMonth.compareTo(new Decimal("12"))) <= 0)) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
         } else if (NinteiShinseiShinseijiKubunCode.更新申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
-                && !((div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ONE) >= 0)
-                && (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(new Decimal("24"))) <= 0)) {
+                && !((ninteiKikanMonth.compareTo(Decimal.ONE) >= 0)
+                && (ninteiKikanMonth.compareTo(new Decimal("24"))) <= 0)) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
         }
