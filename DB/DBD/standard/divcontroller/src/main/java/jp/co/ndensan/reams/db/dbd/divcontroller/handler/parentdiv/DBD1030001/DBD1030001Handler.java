@@ -883,8 +883,7 @@ public class DBD1030001Handler {
             ShakaifukuRiyoshaFutanKeigenToJotai 編集情報, ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList) {
         ShakaifukuRiyoshaFutanKeigen 修正後情報 = 修正後社会福祉法人等利用者負担軽減申請情報.get社会福祉法人等利用者負担軽減情報();
         int 履歴番号 = 編集情報.get新履歴番号();
-        boolean is申請年月日変更 = !編集情報.get社会福祉法人等利用者負担軽減情報().get申請年月日()
-                .equals(修正後社会福祉法人等利用者負担軽減申請情報.get社会福祉法人等利用者負担軽減情報().get申請年月日());
+
         int 削除位置 = 0;
         for (int 位置 = 0; 位置 < 情報と状態ArrayList.size(); 位置++) {
             ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態ArrayList.get(位置);
@@ -893,19 +892,32 @@ public class DBD1030001Handler {
             }
         }
         情報と状態ArrayList.remove(削除位置);
-        FlexibleDate 申請日 = 修正後情報.get申請年月日();
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList = new ArrayList<>();
-        if (情報と状態ArrayList.isEmpty()) {
-            new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(
-                    修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号));
+        if (申請情報を追加する.equals(div.getBtnAddShinsei().getText())) {
+            if (情報と状態ArrayList.isEmpty()) {
+                new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(
+                        修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 0));
+            } else {
+                new情報と状態ArrayList.addAll(情報と状態ArrayList);
+                new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                        修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 0));
+            }
             List<dgShinseiList_Row> newDataSouceList = getDataSource(new情報と状態ArrayList);
             div.getDgShinseiList().setDataSource(newDataSouceList);
             return new情報と状態ArrayList;
         }
-        boolean isAdded = false;
-        int length = 情報と状態ArrayList.size();
-        new情報と状態ArrayList.addAll(情報と状態ArrayList);
-        if (!is申請年月日変更) {
+
+        boolean is適用開始年月日変更 = 編集情報.get社会福祉法人等利用者負担軽減情報().get適用開始年月日() == null
+                ? Boolean.TRUE : !編集情報.get社会福祉法人等利用者負担軽減情報().get適用開始年月日()
+                .equals(修正後社会福祉法人等利用者負担軽減申請情報.get社会福祉法人等利用者負担軽減情報().get適用開始年月日());
+        boolean is決定区分変更 = 編集情報.get社会福祉法人等利用者負担軽減情報().get決定区分() == null
+                ? Boolean.TRUE : !編集情報.get社会福祉法人等利用者負担軽減情報().get決定区分()
+                .equals(修正後社会福祉法人等利用者負担軽減申請情報.get社会福祉法人等利用者負担軽減情報().get決定区分());
+        if (情報と状態ArrayList.isEmpty()) {
+            new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(
+                    修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 1));
+        } else if (!is適用開始年月日変更 && !is決定区分変更) {
+            int length = 情報と状態ArrayList.size();
             if (削除位置 > length - 1) {
                 new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(
                         修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号));
@@ -913,38 +925,37 @@ public class DBD1030001Handler {
                 new情報と状態ArrayList.add(削除位置, new ShakaifukuRiyoshaFutanKeigenToJotai(
                         修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号));
             }
-            List<dgShinseiList_Row> newDataSouceList = getDataSource(new情報と状態ArrayList);
-            div.getDgShinseiList().setDataSource(newDataSouceList);
-            return new情報と状態ArrayList;
-        }
-        new情報と状態ArrayList.add(null);
-        for (int index = length - 1; index >= 0; index--) {
-            ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態ArrayList.get(index);
-            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
-            int 履歴番号1 = 情報と状態.get新履歴番号();
-            if (isAdded) {
-                new情報と状態ArrayList.add(index, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                        社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号1 + 1));
-                new情報と状態ArrayList.remove(index + 1);
-            } else {
-                if (申請日.isBefore(社会福祉法人等利用者負担軽減情報.get申請年月日())) {
-                    new情報と状態ArrayList.add(index + 1, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                            修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号1));
-                    new情報と状態ArrayList.remove(index + 2);
-                    new情報と状態ArrayList.add(index, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                            社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号1 + 1));
-                    new情報と状態ArrayList.remove(index + 1);
-                    isAdded = true;
+        } else {
+            boolean isAdded = false;
+            int length = 情報と状態ArrayList.size();
+            FlexibleDate 適用開始年月日 = 修正後情報.get適用開始年月日();
+            RString 決定区分 = 修正後情報.get決定区分();
+
+            for (int index = length - 1; index >= 0; index--) {
+                ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態ArrayList.get(index);
+                ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
+                履歴番号 = 情報と状態.get新履歴番号();
+                if (isAdded) {
+                    new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                            社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号 + 1));
                 } else {
-                    new情報と状態ArrayList.add(index + 1, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                            社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号1));
-                    new情報と状態ArrayList.remove(index + 2);
+                    if (適用開始年月日.isBefore(社会福祉法人等利用者負担軽減情報.get適用開始年月日())
+                            || (適用開始年月日.isBefore(社会福祉法人等利用者負担軽減情報.get適用開始年月日())
+                            && 決定区分.equals(承認しない))) {
+                        new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                                修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号));
+                        new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                                社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号 + 1));
+                        isAdded = true;
+                    } else {
+                        new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                                社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号));
+                    }
                 }
-            }
-            if (!isAdded && index == 0) {
-                new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                        修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号1 + 1));
-                new情報と状態ArrayList.remove(1);
+                if (!isAdded && index == 0) {
+                    new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                            修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号 + 1));
+                }
             }
         }
         List<dgShinseiList_Row> newDataSouceList = getDataSource(new情報と状態ArrayList);
@@ -1261,45 +1272,55 @@ public class DBD1030001Handler {
     private ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 追加社会福祉法人等利用者負担軽減申請の情報(
             ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減申請情報,
             ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList) {
-        FlexibleDate 申請日 = 社会福祉法人等利用者負担軽減申請情報.get申請年月日();
+
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList = new ArrayList<>();
-        if (情報と状態ArrayList.isEmpty()) {
-            new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(社会福祉法人等利用者負担軽減申請情報, 状態_追加, 0));
+
+        if (申請情報を追加する.equals(div.getBtnAddShinsei().getText())) {
+            if (情報と状態ArrayList.isEmpty()) {
+                new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(社会福祉法人等利用者負担軽減申請情報, 状態_追加, 0));
+            } else {
+                new情報と状態ArrayList.addAll(情報と状態ArrayList);
+                new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                        社会福祉法人等利用者負担軽減申請情報, 状態_追加, 0));
+            }
             List<dgShinseiList_Row> newDataSouceList = getDataSource(new情報と状態ArrayList);
             div.getDgShinseiList().setDataSource(newDataSouceList);
             return new情報と状態ArrayList;
         }
-        boolean isAdded = false;
-        int length = 情報と状態ArrayList.size();
-        new情報と状態ArrayList.addAll(情報と状態ArrayList);
-        new情報と状態ArrayList.add(null);
-        for (int index = length - 1; index >= 0; index--) {
-            ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態ArrayList.get(index);
-            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
-            int 履歴番号 = 情報と状態.get新履歴番号();
-            if (isAdded) {
-                new情報と状態ArrayList.add(index, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                        社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号 + 1));
-                new情報と状態ArrayList.remove(index + 1);
-            } else {
-                if (申請日.isBefore(社会福祉法人等利用者負担軽減情報.get申請年月日())) {
-                    new情報と状態ArrayList.add(index + 1, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                            社会福祉法人等利用者負担軽減申請情報, 状態_追加, 履歴番号));
-                    new情報と状態ArrayList.remove(index + 2);
-                    new情報と状態ArrayList.add(index, new ShakaifukuRiyoshaFutanKeigenToJotai(
+
+        if (情報と状態ArrayList.isEmpty()) {
+            new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(社会福祉法人等利用者負担軽減申請情報, 状態_追加, 1));
+        } else {
+            FlexibleDate 適用開始年月日 = 社会福祉法人等利用者負担軽減申請情報.get適用開始年月日();
+            RString 決定区分 = 社会福祉法人等利用者負担軽減申請情報.get決定区分();
+            boolean isAdded = false;
+            int length = 情報と状態ArrayList.size();
+
+            for (int index = length - 1; index >= 0; index--) {
+                ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態ArrayList.get(index);
+                ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
+                int 履歴番号 = 情報と状態.get新履歴番号();
+                if (isAdded) {
+                    new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
                             社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号 + 1));
-                    new情報と状態ArrayList.remove(index + 1);
-                    isAdded = true;
                 } else {
-                    new情報と状態ArrayList.add(index + 1, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                            社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号));
-                    new情報と状態ArrayList.remove(index + 2);
+                    if (適用開始年月日.isBefore(社会福祉法人等利用者負担軽減情報.get適用開始年月日())
+                            || (適用開始年月日.equals(社会福祉法人等利用者負担軽減情報.get適用開始年月日())
+                            && 決定区分.equals(承認しない))) {
+                        new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                                社会福祉法人等利用者負担軽減申請情報, 状態_追加, 履歴番号));
+                        new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                                社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号 + 1));
+                        isAdded = true;
+                    } else {
+                        new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                                社会福祉法人等利用者負担軽減情報, 情報と状態.get状態(), 履歴番号));
+                    }
                 }
-            }
-            if (!isAdded && index == 0) {
-                new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
-                        社会福祉法人等利用者負担軽減申請情報, 状態_追加, 履歴番号 + 1));
-                new情報と状態ArrayList.remove(1);
+                if (!isAdded && index == 0) {
+                    new情報と状態ArrayList.add(0, new ShakaifukuRiyoshaFutanKeigenToJotai(
+                            社会福祉法人等利用者負担軽減申請情報, 状態_追加, 履歴番号 + 1));
+                }
             }
         }
         List<dgShinseiList_Row> newDataSouceList = getDataSource(new情報と状態ArrayList);
