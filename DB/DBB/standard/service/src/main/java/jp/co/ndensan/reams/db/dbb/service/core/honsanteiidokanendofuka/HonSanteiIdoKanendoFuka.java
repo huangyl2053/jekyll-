@@ -892,12 +892,10 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         entity.setChoshuHohoRirekiNo(更新後.get徴収方法履歴番号());
         if (!is普徴期別金額あり(更新後)) {
             entity.setKozaKubun(KozaKubun.現金納付.getコード());
+        } else if (has口座) {
+            entity.setKozaKubun(KozaKubun.口座振替.getコード());
         } else {
-            if (has口座) {
-                entity.setKozaKubun(KozaKubun.口座振替.getコード());
-            } else {
-                entity.setKozaKubun(KozaKubun.現金納付.getコード());
-            }
+            entity.setKozaKubun(KozaKubun.現金納付.getコード());
         }
         entity.setFukaShichosonCode(更新後.get賦課市町村コード());
         entity.setTkKibetsuGaku01(更新後.get特徴期別金額01());
@@ -1315,6 +1313,9 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         parameter.set更正後徴収方法(調定計算Result.getChoshuHoho());
         parameter.set現年度(入力_現年度);
         FukaJoho 更正後_過年度 = get賦課情報_過年度(賦課情報リスト_結果);
+        更正後賦課.set過年度(更正後_過年度);
+        更正後賦課List.add(更正後賦課);
+        parameter.set更正後賦課リスト(更正後賦課List);
         FukaJoho 更正前_過年度 = null;
         if (更正後_過年度 != null && 賦課の情報リスト != null && !賦課の情報リスト.isEmpty()) {
             for (FukaJoho 賦課情報 : 賦課の情報リスト) {
@@ -1325,13 +1326,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         }
         if ((更正後_年額 == null && 更正前_年額 != null && Decimal.ZERO.compareTo(更正前_年額) < ゼロ_定値)
                 || (更正前_年額 != null && 更正後_年額 != null && 更正後_年額.compareTo(更正前_年額) < ゼロ_定値)) {
-            更正後賦課.set過年度(更正後_過年度);
-            更正後賦課List.add(更正後賦課);
-            parameter.set更正後賦課リスト(更正後賦課List);
             parameter.set過年度(更正前_過年度);
-        } else {
-            更正後賦課List.add(更正後賦課);
-            parameter.set更正後賦課リスト(更正後賦課List);
         }
 
         List<FukaJohoList> 調定事由 = ChoteiJiyuHantei.createInstance().set調定事由(parameter);
