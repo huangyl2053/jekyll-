@@ -38,7 +38,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private static final RString 法別区分_全て_コード = new RString("0");
     private static final RString 法別区分_施行時_いち = new RString("1");
     private static final RString 法別区分_障害時_に = new RString("2");
-    private static final RString 法別区分_障害時_さん = new RString("3");
+    private static final RString 法別区分_障害時_全額免除 = new RString("3");
     private static final RString 対象期間指定_対象年度_いち = new RString("1");
     private static final RString 対象期間指定_基準日_に = new RString("2");
     private static final RString 対象リスト_認定者リスト_いち = new RString("1");
@@ -131,9 +131,9 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
             RDateTime 帳票作成日時,
             RString psmShikibetsuTaisho,
             RString 出力順) {
-        法別区分障害時 = RString.EMPTY;
-        法別区分施行時 = RString.EMPTY;
-        法別区分障害全額免除 = RString.EMPTY;
+        法別区分障害時 = HobetsuKubun.障害時ホームヘルプ.getコード();
+        法別区分施行時 = HobetsuKubun.施行時ホームヘルプ.getコード();
+        法別区分障害全額免除 = HobetsuKubun.障害ヘルプ全額免除.getコード();
         this.対象年度 = 対象年度;
         this.対象年度の開始年月日 = 対象年度の開始年月日;
         this.対象年度の終了年月日 = 対象年度の終了年月日;
@@ -186,15 +186,12 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
                 is法別区分_全て = true;
             }
             if (法別区分_施行時_いち.equals(法別区分.getコード())) {
-                法別区分施行時 = 法別区分_施行時_いち;
                 is法別区分_施行時 = true;
             }
             if (法別区分_障害時_に.equals(法別区分.getコード())) {
-                法別区分障害時 = 法別区分_障害時_に;
                 is法別区分_障害時 = true;
             }
-            if (法別区分_障害時_さん.equals(法別区分.getコード())) {
-                法別区分障害全額免除 = 法別区分_障害時_さん;
+            if (法別区分_障害時_全額免除.equals(法別区分.getコード())) {
                 is法別区分_障害ヘルプ全額免除 = true;
             }
 
