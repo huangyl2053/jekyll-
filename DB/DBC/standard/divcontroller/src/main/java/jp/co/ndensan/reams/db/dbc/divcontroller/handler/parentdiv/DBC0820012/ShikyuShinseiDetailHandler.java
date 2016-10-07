@@ -58,7 +58,9 @@ public final class ShikyuShinseiDetailHandler {
     private static final RString 受託なし = new RString("1");
     private static final RString 整理番号_ADD = new RString("0000");
     private static final RString 証記載保険者番号 = new RString("000011");
-
+    private static final RString 本人 = new RString("本人");
+    private static final RString 代理人 = new RString("代理人");
+    
     /**
      * コンストラクタです。
      *
@@ -595,5 +597,18 @@ public final class ShikyuShinseiDetailHandler {
         ShikyuShinseiDetailParameter parameter = new ShikyuShinseiDetailParameter(
                 処理モード, null, サービス提供年月, 整理番号, null);
         return parameter;
+    }
+    
+     /**
+     * 申請者区分が変更されたときに、本人情報を設定する
+     */
+    public void set本人情報() {
+        if (本人.equals(div.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue())) {
+            div.getPnlShinsei().getTxtShimeikana().setDomain(new AtenaKanaMeisho(div.getPanelUp().getCcdKaigoAtenaInfo().get氏名カナ()));
+            div.getPnlShinsei().getTxtShimeiKanji().setDomain(new AtenaMeisho(div.getPanelUp().getCcdKaigoAtenaInfo().get氏名漢字()));
+        } else if (代理人.equals(div.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue())) {
+            div.getPnlShinsei().getTxtShimeikana().setDomain(AtenaKanaMeisho.EMPTY);
+            div.getPnlShinsei().getTxtShimeiKanji().setDomain(AtenaMeisho.EMPTY);
+        }
     }
 }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.FutanGend
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.hikazenenkintaishosha.HikazeNenkinTaishosha;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KyoshitsuShubetsu;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
@@ -55,7 +56,7 @@ public class FutanGendogakuNinteiHandler {
     public List<FutanGendogakuNintei> 表示リスト取得(HihokenshaNo 被保険者番号) {
         return FutanGendogakuNinteiManager.createInstance().get負担限度額認定リストBy被保険者番号(被保険者番号);
     }
-
+    
     /**
      * 共有子Divの状態を初期化します。
      *
@@ -142,8 +143,9 @@ public class FutanGendogakuNinteiHandler {
      * 共有子Divの状態を初期化します。
      *
      * @param list ArrayList<FutanGendogakuNintei>
+     * @param HiKazeiNenkinjoho
      */
-    public void 詳細表示(ArrayList<FutanGendogakuNintei> list) {
+    public void 詳細表示(ArrayList<FutanGendogakuNintei> list, RString HiKazeiNenkinjoho) {
 
         div.getFutanGendogakuNinteiDetail().setDisplayNone(false);
         FutanGendogakuNintei futanGendogakuNintei = list.get(div.getDgFutanGendogakuNinteiList().getClickedRowId());
@@ -151,6 +153,20 @@ public class FutanGendogakuNinteiHandler {
             div.getFutanGendogakuNinteiDetail().getTxtShinseiDate().setValue(futanGendogakuNintei.get申請年月日());
             div.getFutanGendogakuNinteiDetail().getTxtShinseiRiyu().
                     setValue(div.getDgFutanGendogakuNinteiList().getClickedItem().getShinseiRiyu());
+            // 遺族年金受給申告
+            List<RString> IzokuNenkinJukyuShinkokukeys = new ArrayList<>();
+            if (futanGendogakuNintei.get遺族年金受給申告()) {
+                IzokuNenkinJukyuShinkokukeys.add(new RString("key0"));
+            }
+            div.getFutanGendogakuNinteiDetail().getIzokuNenkinJukyuShinkoku().setSelectedItemsByKey(IzokuNenkinJukyuShinkokukeys);
+            // 障害年金受給申告
+            List<RString> ShogaiNenkinJukyuShinkokukeys = new ArrayList<>();
+            if (futanGendogakuNintei.get障害年金受給申告()) {
+                ShogaiNenkinJukyuShinkokukeys.add(new RString("key0"));
+            }
+            div.getFutanGendogakuNinteiDetail().getShogaiNenkinJukyuShinkoku().setSelectedItemsByKey(ShogaiNenkinJukyuShinkokukeys);
+            // 非課税年金情報
+            div.getFutanGendogakuNinteiDetail().getHiKazeiNenkinjoho().setValue(HiKazeiNenkinjoho);
             div.getFutanGendogakuNinteiDetail().getFutanGendogakuNinteiRiyoshaFutan().getTxtKetteiDate().
                     setValue(futanGendogakuNintei.get決定年月日());
             div.getFutanGendogakuNinteiDetail().getFutanGendogakuNinteiRiyoshaFutan().getTxtKetteiKubun().
@@ -195,8 +211,12 @@ public class FutanGendogakuNinteiHandler {
                     setValue(futanGendogakuNintei.get非承認理由());
             div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getRadHaigushaUmu().
                     setSelectedKey(futanGendogakuNintei.is配偶者の有無() ? KEY1 : KEY2);
-            div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtShikibetsuCode().
-                    setDomain(futanGendogakuNintei.get配偶者識別コード());
+            if (futanGendogakuNintei.get配偶者識別コード() != null) {
+                div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtShikibetsuCode().
+                        setDomain(futanGendogakuNintei.get配偶者識別コード());
+            } else {
+                div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtShikibetsuCode().clearDomain();
+            }
             div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtShimeiKana().
                     setValue(futanGendogakuNintei.get配偶者氏名カナ().value());
             div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtShimei().
@@ -207,10 +227,18 @@ public class FutanGendogakuNinteiHandler {
                     setValue(futanGendogakuNintei.get配偶者生年月日());
             div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtRenrakusaki().
                     setDomain(new TelNo(futanGendogakuNintei.get配偶者連絡先()));
-            div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtJusho1().
-                    setDomain(futanGendogakuNintei.get配偶者住所());
-            div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtGenjusho().
-                    setDomain(futanGendogakuNintei.get配偶者住所２());
+            if (futanGendogakuNintei.get配偶者住所() != null) {
+                div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtJusho1().
+                        setDomain(futanGendogakuNintei.get配偶者住所());
+            } else {
+                div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtJusho1().clearDomain();
+            }
+            if (futanGendogakuNintei.get配偶者住所２() != null) {
+                div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtGenjusho().
+                        setDomain(futanGendogakuNintei.get配偶者住所２());
+            } else {
+                div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getTxtGenjusho().clearDomain();
+            }
             div.getFutanGendogakuNinteiDetail().getHaigushaJoho().getRadKazeiKubun().
                     setSelectedKey(HaigushaKazeiKubun.課税.getコード().equals(futanGendogakuNintei.get配偶者課税区分()) ? KEY0 : KEY1);
 

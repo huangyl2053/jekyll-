@@ -155,7 +155,7 @@ public class KaigoShotokuAlive
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return new Decimal(entity.getRirekino());
+        return new Decimal(entity.getRirekiNo());
     }
 
     /**

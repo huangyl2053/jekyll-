@@ -27,7 +27,7 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
     private RString zenkaishuryoYMDHMS;
     private RString konkaikaishiYMDHMS;
     private RString konkaishuryoYMDHMS;
-    private RString shuturyokujunID;
+    private Long shuturyokujunID;
     private RString psmShikibetsuTaisho;
     private Code shutokuJiyu_Hihokensha;
     private List<Code> soshitsuJiyu_Hihokensha;
@@ -49,7 +49,7 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
             RString zenkaishuryoYMDHMS,
             RString konkaikaishiYMDHMS,
             RString konkaishuryoYMDHMS,
-            RString shuturyokujunID) {
+            Long shuturyokujunID) {
         this.zenkaikaishiYMDHMS = zenkaikaishiYMDHMS;
         this.zenkaishuryoYMDHMS = zenkaishuryoYMDHMS;
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;

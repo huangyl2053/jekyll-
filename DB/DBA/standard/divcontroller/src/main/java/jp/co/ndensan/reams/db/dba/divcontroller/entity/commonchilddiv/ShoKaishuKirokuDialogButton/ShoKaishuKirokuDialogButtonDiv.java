@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author 自動生成
  */
 public class ShoKaishuKirokuDialogButtonDiv extends Panel implements IShoKaishuKirokuDialogButtonDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
@@ -154,15 +156,15 @@ public class ShoKaishuKirokuDialogButtonDiv extends Panel implements IShoKaishuK
     @Override
     public int save() {
         if (this.getHihokenshaNo() == null || this.getHihokenshaNo().isEmpty()
-                || this.getGridData() == null || this.getGridData().isEmpty()
-                || this.getSaveData() == null || this.getSaveData().isEmpty()) {
+            || this.getGridData() == null || this.getGridData().isEmpty()
+            || this.getSaveData() == null || this.getSaveData().isEmpty()) {
             return 0;
         }
 
         ArrayList<dgKoufuKaishu_Row> listRow = new ArrayList<>();
         ArrayList<ShoKaishuKirokuRowData> rowDataList = DataPassingConverter.deserialize(this.getGridData(), ArrayList.class);
         for (ShoKaishuKirokuRowData rowData : rowDataList) {
-            dgKoufuKaishu_Row row = ShoKaishuKirokuRowData.toRow(rowData);
+            dgKoufuKaishu_Row row = rowData.toRow();
             listRow.add(row);
         }
         Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> 証交付回収情報Model = DataPassingConverter.deserialize(this.getSaveData(), Models.class);
@@ -178,16 +180,16 @@ public class ShoKaishuKirokuDialogButtonDiv extends Panel implements IShoKaishuK
 
             if (ViewExecutionStatus.Add.get名称().equals(dgKoufuKaishu.getStatus())) {
                 builder.set交付年月日(dgKoufuKaishu.getKoufuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set有効期限(dgKoufuKaishu.getYukoKigen().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
+                                : FlexibleDate.EMPTY);
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
                 builder.set回収年月日(dgKoufuKaishu.getKaishuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());
@@ -196,16 +198,16 @@ public class ShoKaishuKirokuDialogButtonDiv extends Panel implements IShoKaishuK
             }
             if (ViewExecutionStatus.Modify.get名称().equals(dgKoufuKaishu.getStatus())) {
                 builder.set交付年月日(dgKoufuKaishu.getKoufuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set有効期限(dgKoufuKaishu.getYukoKigen().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
+                                : FlexibleDate.EMPTY);
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
                 builder.set回収年月日(dgKoufuKaishu.getKaishuDate().getValue() != null
-                        ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
-                        : FlexibleDate.EMPTY);
+                                 ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
+                                 : FlexibleDate.EMPTY);
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());

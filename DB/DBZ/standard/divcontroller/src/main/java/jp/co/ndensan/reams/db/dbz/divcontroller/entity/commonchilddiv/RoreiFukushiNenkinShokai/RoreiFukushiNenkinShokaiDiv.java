@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  * @author 自動生成
  */
 public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiNenkinShokaiDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
@@ -154,7 +152,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             ModeC[] enumArray = ModeC.values();
 
             for (ModeC enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -169,11 +167,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     public ModeC getMode_ModeC() {
-        return (ModeC) _CommonChildDivModeUtil.getMode(this.modes, ModeC.class);
+        return (ModeC) _CommonChildDivModeUtil.getMode( this.modes, ModeC.class );
     }
 
-    public void setMode_ModeC(ModeC value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ModeC.class, value);
+    public void setMode_ModeC( ModeC value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ModeC.class , value );
     }
 
     public static enum ModeA implements ICommonChildDivMode {
@@ -190,7 +188,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             ModeA[] enumArray = ModeA.values();
 
             for (ModeA enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -205,11 +203,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     public ModeA getMode_ModeA() {
-        return (ModeA) _CommonChildDivModeUtil.getMode(this.modes, ModeA.class);
+        return (ModeA) _CommonChildDivModeUtil.getMode( this.modes, ModeA.class );
     }
 
-    public void setMode_ModeA(ModeA value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ModeA.class, value);
+    public void setMode_ModeA( ModeA value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ModeA.class , value );
     }
 
     public static enum ModeB implements ICommonChildDivMode {
@@ -226,7 +224,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             ModeB[] enumArray = ModeB.values();
 
             for (ModeB enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -241,11 +239,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     public ModeB getMode_ModeB() {
-        return (ModeB) _CommonChildDivModeUtil.getMode(this.modes, ModeB.class);
+        return (ModeB) _CommonChildDivModeUtil.getMode( this.modes, ModeB.class );
     }
 
-    public void setMode_ModeB(ModeB value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ModeB.class, value);
+    public void setMode_ModeB( ModeB value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ModeB.class , value );
     }
 
     /*
@@ -257,7 +255,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     @JsonIgnore
-    public void setBtnAdd(Button btnAdd) {
+    public void  setBtnAdd(Button btnAdd) {
         this.getPanelRireki().setBtnAdd(btnAdd);
     }
 
@@ -267,7 +265,7 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     @JsonIgnore
-    public void setDatagridRireki(DataGrid<datagridRireki_Row> datagridRireki) {
+    public void  setDatagridRireki(DataGrid<datagridRireki_Row> datagridRireki) {
         this.getPanelRireki().setDatagridRireki(datagridRireki);
     }
 

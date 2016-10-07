@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC24200",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "請求情報修正登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC2410011",
+     "toLayoutTitle": "住宅改修理由書作成手数料  請求審査修正登録",
+     "toState": "審査結果登録検索"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC2410011",
+     "layoutTitle": "住宅改修理由書作成手数料  請求審査修正登録",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

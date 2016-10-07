@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8178
  */
-public class TekiyoJogaishaChecker {
+public final class TekiyoJogaishaChecker {
 
     private final TekiyoJogaishaManager manager;
 
@@ -22,6 +22,11 @@ public class TekiyoJogaishaChecker {
         manager = TekiyoJogaishaManager.createInstance();
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @return {@link TekiyoJogaishaChecker}
+     */
     public static TekiyoJogaishaChecker createInstance() {
         return new TekiyoJogaishaChecker();
     }
@@ -29,7 +34,7 @@ public class TekiyoJogaishaChecker {
     /**
      * 適用除外者の最新情報を取得・確認し、対象者が資格しゅ
      *
-     * @param shikibetsuCode
+     * @param shikibetsuCode 識別コード
      * @return 適用除外者と判定された場合{@code true}
      */
     @Transaction

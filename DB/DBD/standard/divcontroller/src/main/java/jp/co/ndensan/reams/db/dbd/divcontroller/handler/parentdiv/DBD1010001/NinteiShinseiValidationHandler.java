@@ -41,6 +41,22 @@ public class NinteiShinseiValidationHandler {
     }
 
     /**
+     * 配偶者の有無による預貯金チェックです。
+     *
+     * @param pairs ValidationMessageControlPairs
+     * @param div TaishouWaritsukeDiv
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 預貯金_チェック(ValidationMessageControlPairs pairs, FutangendogakuShinseiDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(FutangendogakuShinseiDivSpec.預貯金_1000万以下_Or_2000万以下)
+                .thenAdd(NinteiShinseiValidationMessages.預貯金チェック).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().
+                add(NinteiShinseiValidationMessages.預貯金チェック).build().check(messages));
+        return pairs;
+    }
+
+    /**
      * 負担限度額認定_適用開始日が法施行以前チェックです。
      *
      * @param pairs ValidationMessageControlPairs
@@ -110,7 +126,8 @@ public class NinteiShinseiValidationHandler {
         減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
         減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
         減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),
-        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複);
+        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複),
+        預貯金チェック(DbdErrorMessages.預貯金チェック);
 
         private final Message message;
 

@@ -8,6 +8,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.Chos
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -17,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -94,6 +97,8 @@ public class NinteiChosainMasterHandler {
         div.getDdlItakusakiKanaMeisho().setSelectedIndex(0);
         div.getDdlChosainMeisho().setSelectedIndex(0);
         div.getDdlChosainKanaMeisho().setSelectedIndex(0);
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
+                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値")).toString()));
     }
 
     /**
@@ -169,6 +174,10 @@ public class NinteiChosainMasterHandler {
                 new Code(chiku), FlexibleDate.getNowDate());
         if (!RString.isNullOrEmpty(chikuName)) {
             row.setChiku(chikuName);
+        }
+        
+        if (!RString.isNullOrEmpty(chosainShikaku)) {
+            chosainShikaku = chosainShikaku.trim();
         }
         row.setChosainShikaku(RString.isNullOrEmpty(chosainShikaku) ? RString.EMPTY : Sikaku.toValue(chosainShikaku).get名称());
         row.setChosainShikakuCode(chosainShikaku);

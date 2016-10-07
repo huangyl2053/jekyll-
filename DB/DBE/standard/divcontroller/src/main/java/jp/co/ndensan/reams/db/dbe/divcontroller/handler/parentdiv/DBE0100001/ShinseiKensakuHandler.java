@@ -651,7 +651,7 @@ public class ShinseiKensakuHandler {
     /**
      * 申請一覧Gridにデータを設定します。
      *
-     * @param list 検索結果
+     * @param searchResult 検索結果
      */
     public void setShinseiJohoIchiran(SearchResult<ShinseiKensakuBusiness> searchResult) {
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();

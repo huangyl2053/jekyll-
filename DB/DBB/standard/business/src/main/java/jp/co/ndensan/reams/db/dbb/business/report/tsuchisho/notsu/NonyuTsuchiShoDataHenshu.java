@@ -421,7 +421,8 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.setブック開始位置(ブック開始位置);
         納入通知書期情報.set期(出力期.get期AsInt());
         納入通知書期情報.set月(出力期.get月());
-        納入通知書期情報.set期表記(new RString(String.valueOf(出力期.get期AsInt())).padLeft(RString.HALF_SPACE, 2));
+        納入通知書期情報.set期表記(new RString(String.valueOf(出力期.get期AsInt()).concat("期").concat(RString.HALF_SPACE.toString())
+                .concat("(").concat(String.valueOf(出力期.get月AsInt())).concat("月分)")).padLeft(RString.HALF_SPACE, 2));
         納入通知書期情報.set月表記(new RString(String.valueOf(出力期.get月AsInt())).padLeft(RString.HALF_SPACE, 2));
         納入通知書期情報.set随時表記(KanendoMongon.随時.equals(納入通知書制御情報.get過年度文言1()) ? KanendoMongon.随時.get名称() : RString.EMPTY);
         納入通知書期情報.set納期開始日(納期.get納期開始日());
@@ -455,8 +456,8 @@ public class NonyuTsuchiShoDataHenshu {
                 OCRShutsuryokuHoho 口座振替のOCR出力方法 = 納入通知書制御情報.get口座振替のOCR出力方法();
                 納入通知書期情報.setOcr(getOCRBy口座振替のOCR出力方法(請求情報, 口座振替のOCR出力方法));
             } else if (is現金納付) {
-                納入通知書期情報.setOcrid(空白);
-                納入通知書期情報.setOcr(getNewOCR(請求情報, 空白));
+                納入通知書期情報.setOcrid(請求情報.getOcr().getOCRID());
+                納入通知書期情報.setOcr(請求情報.getOcr().getOcr());
             }
             納入通知書期情報.setバーコード情報((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニバーコード表示())
                     ? 請求情報.getCvs().getバーコード情報() : 空白));
@@ -857,7 +858,7 @@ public class NonyuTsuchiShoDataHenshu {
     private SeikyuForPrinting get請求情報By期(List<SeikyuForPrinting> 請求情報リスト, RString 期別) {
         for (SeikyuForPrinting 請求情報 : 請求情報リスト) {
             if (期別.padLeft("0", 整数2)
-                    .equals(請求情報.get請求対象情報().get請求明細リスト().get(0).get収納期別明細().get期別().padLeft("0", 整数2))) {
+                    .equals(new RString(請求情報.get請求対象情報().get請求明細リスト().get(0).get収納期別明細().get期別()).padLeft("0", 整数2))) {
                 return 請求情報;
             }
         }
@@ -911,10 +912,10 @@ public class NonyuTsuchiShoDataHenshu {
             NonyuTsuchiShoSeigyoJoho 納入通知書制御情報) {
         NofuShoKyotsu 納付書共通 = new NofuShoKyotsu();
         納付書共通.set調定年度(調定年度);
-        納付書共通.set調定年度表記(get共通ポリシーターン107(調定年度));
         納付書共通.set賦課年度(賦課年度);
-        納付書共通.set調定年度表記(get共通ポリシーターン107(賦課年度).concat("分"));
-        納付書共通.set年度年分表記(get共通ポリシーターン107(調定年度).concat("△").concat(get共通ポリシーターン107(賦課年度)).concat("分"));
+        納付書共通.set調定年度表記(get共通ポリシーターン107(調定年度).concat("年度"));
+        納付書共通.set年度年分表記(get共通ポリシーターン107(調定年度).concat("年度").concat(RString.HALF_SPACE).concat("(").concat(get共通ポリシーターン107(賦課年度)).concat("年度分)"));
+        納付書共通.set賦課年度表記(new RString("(").concat(get共通ポリシーターン107(賦課年度).concat("年度分)")));
         納付書共通.set通知書番号(通知書番号);
         納付書共通.set世帯コード(世帯コード);
         納付書共通.set表示コード(表示コード);
@@ -928,13 +929,14 @@ public class NonyuTsuchiShoDataHenshu {
             納付書共通.set郵便番号(編集後宛先.get郵便番号());
             納付書共通.set行政区名(編集後宛先.get行政区名());
             納付書共通.set方書(編集後宛先.get方書());
+            
             納付書共通.set代納人氏名(null == 代納人氏名 ? AtenaMeisho.EMPTY : 代納人氏名.getName());
-            納付書共通.set被保険者氏名(編集後宛先.get本人名称().getName());
+            納付書共通.set被保険者氏名(編集後宛先.get宛先名称().getName());
             if (AtesakiShubetsu.代納人送付先.equals(編集後宛先.get宛先種別()) || AtesakiShubetsu.代納人.equals(編集後宛先.get宛先種別())) {
                 納付書共通.set納付者氏名(null == 代納人氏名 ? RString.EMPTY : 代納人氏名.getName().getColumnValue());
                 納付書共通.set被代納人氏名(納付書共通.get被保険者氏名().getColumnValue());
             } else {
-                納付書共通.set納付者氏名(空白);
+                納付書共通.set納付者氏名(納付書共通.get被保険者氏名().getColumnValue());
                 納付書共通.set被代納人氏名(空白);
             }
             納付書共通.set被代納人敬称(編集後宛先.get本人敬称());

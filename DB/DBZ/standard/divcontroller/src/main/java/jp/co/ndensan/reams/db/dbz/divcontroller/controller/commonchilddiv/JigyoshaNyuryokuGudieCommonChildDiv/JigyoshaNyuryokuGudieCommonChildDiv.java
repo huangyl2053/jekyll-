@@ -48,8 +48,8 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onclick_BtnTaishoJigyoshaKensaku(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
         if ((requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() != null
-                && requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null)
-                && (!requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
+             && requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null)
+            && (!requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
                 isBeforeOrEquals(requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue()))) {
 
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -84,13 +84,13 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onBlur_JigyoshaNo(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
-        if(!requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJIgyoshaNo().getValue().isEmpty()){
+        if (!requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJIgyoshaNo().getValue().isEmpty()) {
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(true);
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(true);
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(true);
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJusho().setDisabled(true);
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getServiceJigyosha().setDisabled(true);
-        }else{
+        } else {
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(false);
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(false);
             requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(false);
@@ -99,7 +99,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
         }
         return createResponseData(requestDiv);
     }
-    
+
     /**
      * 県コードと郡市コードの連動。<br/>
      *

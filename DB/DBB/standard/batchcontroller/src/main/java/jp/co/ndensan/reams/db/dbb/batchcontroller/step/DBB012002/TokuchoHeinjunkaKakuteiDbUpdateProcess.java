@@ -34,6 +34,7 @@ public class TokuchoHeinjunkaKakuteiDbUpdateProcess extends SimpleBatchProcessBa
     private final RString 遷移区分_1 = new RString("1");
     private final RString 枝番 = new RString("0001");
 
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_UNWRITTEN_FIELD")
     InputParameter<DBB012002_TokuchoHeinjunkaKakuteiParameter> parameter;
 
     @Override

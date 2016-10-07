@@ -15,8 +15,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -110,9 +108,14 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
                 div.getSerchFromHohokensha().setIsOpen(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(true);
                 div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
+                return;
+            default:
         }
     }
 
+    /**
+     * @return 検索方法
+     */
     public KensakuHoho get検索方法() {
         if (KensakuHoho.進捗状況から検索する場合.key.equals(div.getRadKensakuHoho().getSelectedKey())) {
             return KensakuHoho.進捗状況から検索する場合;
@@ -143,7 +146,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     /**
      * 「検索する」ボタン押下します。
      *
-     * @param serchResult 要介護認定進捗状況照会情報
+     * @param searchResult 要介護認定進捗状況照会情報
      */
     public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> searchResult) {
         div.getDgShinseiJoho().getDataSource().clear();
@@ -330,6 +333,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     }
 
     private void clearBotton() {
+        boolean is被保険者から検索 = (get検索方法() == KensakuHoho.被保険者から検索する場合);
         onload();
         div.getTxtHihokenshaNo().clearValue();
         div.getTxtShikibetsuCode().clearValue();
@@ -347,10 +351,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getChkShinsakaiJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkKensakuOption().setSelectedItemsByKey(CHK_BOX_NASI);
         init最大表示件数();
-
-        boolean is被保険者から検索 = (get検索方法() == KensakuHoho.被保険者から検索する場合);
-        div.getSerchFromHohokensha().setDisplayNone(is被保険者から検索);
-        div.getSerchFromShinchokuJokyo().setDisplayNone(!is被保険者から検索);
         div.getShinseiJohoIchiran().setIsOpen(false);
+        if (!is被保険者から検索) {
+            div.getRadKensakuHoho().setSelectedKey(KensakuHoho.進捗状況から検索する場合.key);
+            div.getSerchFromHohokensha().setDisplayNone(true);
+            div.getSerchFromShinchokuJokyo().setDisplayNone(false);
+            div.getSerchFromShinchokuJokyo().setIsOpen(true);
+            div.getDgShinseiJoho().setHeight(KensakuHoho.進捗状況から検索する場合.dgShinseiJohoHeigh);
+        }
     }
 }

@@ -61,6 +61,24 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
     }
 
     /**
+     * 実施場所名称の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor実施場所名称の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.実施場所名称の非空チェック)
+                .thenAdd(NoInputMessages.実施場所名称の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.実施場所名称の必須入力,
+                div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho()).build().check(messages));
+        return pairs;
+    }
+    
+    /**
      * 所属機関の必須入力チェックを行います。
      *
      * @param pairs バリデーションコントロール
@@ -208,6 +226,7 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
 
         調査実施日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "調査実施日"),
         実施場所の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "実施場所"),
+        実施場所名称の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "実施場所名称"),
         所属機関の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "所属機関"),
         記入者の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "記入者"),
         第1群の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の第1群"),

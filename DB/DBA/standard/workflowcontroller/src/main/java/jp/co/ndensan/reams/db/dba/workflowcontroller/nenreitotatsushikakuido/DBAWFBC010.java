@@ -19,11 +19,11 @@ public class DBAWFBC010 {
      * 65歳年齢到達資格異動バッチパラメータ生成する処理メソッド
      *
      * @param flowparam フローパラメータ
-     * @return nenreitotatsuShikakuIdoParameter バッチパラメータクラス
+     * @return paramter バッチパラメータクラス
      */
     public DBA010010_NenreitotatsuShikakuIdoParameter createBPForNenreitotatsuShikakuIdo(FlowParameters flowparam) {
-        DBA010010_NenreitotatsuShikakuIdoParameter nenreitotatsuShikakuIdoParameter = new DBA010010_NenreitotatsuShikakuIdoParameter();
+        DBA010010_NenreitotatsuShikakuIdoParameter parameter = new DBA010010_NenreitotatsuShikakuIdoParameter();
 
-        return nenreitotatsuShikakuIdoParameter;
+        return parameter;
     }
 }

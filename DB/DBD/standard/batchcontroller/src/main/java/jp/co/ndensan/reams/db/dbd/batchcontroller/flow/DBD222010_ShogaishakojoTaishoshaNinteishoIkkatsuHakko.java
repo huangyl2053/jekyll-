@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3860-030 donghj
  */
-public class DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakko extends
-        BatchFlowBase<DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter> {
+public class DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakko
+        extends BatchFlowBase<DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter> {
 
     private static final String 障がい者控除対象者認定書 = "shogaishaKoujoTaishoNinteiSho";
 

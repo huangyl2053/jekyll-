@@ -129,10 +129,22 @@ public class TokubetsuChiikiKasanGemmenHandler {
             div.getTokubetsuChiikiKasanGemmenDetail()
                     .getTokubetsuChiikiKasanGemmenRiyoshaFutan().getTxtGengakuRitsu().clearValue();
         }
-        div.getTokubetsuChiikiKasanGemmenDetail()
-                .getTokubetsuChiikiKasanGemmenRiyoshaFutan().getTxtKakuninNo().setValue(dataSource.getKakuninNo());
-        div.getTokubetsuChiikiKasanGemmenDetail()
-                .getTokubetsuChiikiKasanGemmenRiyoshaFutan().getTxtFushoninRiyu().setValue(dataSource.getFushoninRiyu());
+        if (dataSource.getKakuninNo() != null) {
+            div.getTokubetsuChiikiKasanGemmenDetail()
+                    .getTokubetsuChiikiKasanGemmenRiyoshaFutan().getTxtKakuninNo().setValue(dataSource.getKakuninNo());
+        } else {
+            // 内容をクリック
+            div.getTokubetsuChiikiKasanGemmenDetail()
+                    .getTokubetsuChiikiKasanGemmenRiyoshaFutan().getTxtKakuninNo().clearValue();
+        }
+        if (dataSource.getFushoninRiyu() != null) {
+            div.getTokubetsuChiikiKasanGemmenDetail()
+                    .getTokubetsuChiikiKasanGemmenRiyoshaFutan().getTxtFushoninRiyu().setValue(dataSource.getFushoninRiyu());
+        } else {
+            // 内容をクリック
+            div.getTokubetsuChiikiKasanGemmenDetail()
+                    .getTokubetsuChiikiKasanGemmenRiyoshaFutan().getTxtFushoninRiyu().clearValue();
+        }
     }
 
 }
