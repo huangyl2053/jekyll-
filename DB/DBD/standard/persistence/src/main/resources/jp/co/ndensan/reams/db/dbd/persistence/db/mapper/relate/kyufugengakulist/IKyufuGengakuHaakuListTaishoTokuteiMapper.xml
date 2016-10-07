@@ -8,7 +8,7 @@
     <select id="get対象者把握情報" 
             resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListTaishoTokuteiEntity"
             resultOrdered="true" fetchSize="500"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32003.KyufuGengakuHaakuListTaishoTokuteiMybatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011.KyufuGengakuHaakuListTaishoTokuteiMybatisParameter">
         SELECT
         DISTINCT 
         "ShunoJokyoTemp"."tmp_hihokenshaNo" AS "hihokenshaNo"
@@ -47,7 +47,7 @@
             AND A."tmp_fukaNendo" = 時効起算日管理."fukaNendo"
             AND A."tmp_tsuchishoNo" = 時効起算日管理."tsuchishoNo"
             AND A."tmp_kibetsu" = 時効起算日管理."shuno_Ki_Tsuki"
-            AND A."tmp_tokucho_FuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
+            AND A."tmp_tokucho_fuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
             )
         </if>
         <if test="is時効起算日登録者以外"> 
@@ -80,7 +80,7 @@
             AND A."tmp_fukaNendo" = 時効起算日管理."fukaNendo"
             AND A."tmp_tsuchishoNo" = 時効起算日管理."tsuchishoNo"
             AND cast(A."tmp_kibetsu" AS "char") = 時効起算日管理."shuno_Ki_Tsuki" 
-            AND A."tmp_tokucho_FuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
+            AND A."tmp_tokucho_fuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
             )
         </if>
         <if test="is被保険者全員以外">

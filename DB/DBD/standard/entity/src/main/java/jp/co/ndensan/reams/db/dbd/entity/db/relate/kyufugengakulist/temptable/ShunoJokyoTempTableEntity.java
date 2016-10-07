@@ -100,7 +100,7 @@ public class ShunoJokyoTempTableEntity extends DbTableEntityBase<ShunoJokyoTempT
     @PrimaryKey
     private FlexibleYear tmp_fukaNendo;
     @TempTableColumnOrder(26)
-    private RString tmp_tokucho_FuchoKubun;
+    private RString tmp_tokucho_fuchoKubun;
     @TempTableColumnOrder(27)
     @PrimaryKey
     private TsuchishoNo tmp_tsuchishoNo;

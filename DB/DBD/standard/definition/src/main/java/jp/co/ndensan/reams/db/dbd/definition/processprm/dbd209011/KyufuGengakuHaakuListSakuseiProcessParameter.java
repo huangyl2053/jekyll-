@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003;
+package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011;
 
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32003.KyufuGengakuHaakuListSakuseiMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011.KyufuGengakuHaakuListSakuseiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,7 +35,7 @@ public class KyufuGengakuHaakuListSakuseiProcessParameter implements IBatchProce
     private RString 保険料完納者も出力;
     private Long 改頁出力順ID;
     private ReportId 帳票ID;
-    private RDateTime 帳票作成日時;
+    private RString 帳票作成日時;
 
     /**
      * コンストラクタです。
@@ -71,7 +70,7 @@ public class KyufuGengakuHaakuListSakuseiProcessParameter implements IBatchProce
             RString 保険料完納者も出力,
             Long 改頁出力順ID,
             ReportId 帳票ID,
-            RDateTime 帳票作成日時) {
+            RString 帳票作成日時) {
         this.基準日 = 基準日;
         this.時効起算日登録者の選択 = 時効起算日登録者の選択;
         this.被保険者選択 = 被保険者選択;
