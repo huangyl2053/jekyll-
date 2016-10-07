@@ -370,6 +370,8 @@ public class NonyuTsuchishoCVSKigotoSource implements IReportSource {
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 179)
     public RString koinShoryaku;
+    @ReportItem(name = "ryosyusyohitsukein", length = 2, order = 180)
+    public RString ryosyusyohitsukein;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -30,7 +30,6 @@ public class TennyuHoryuValidationHandler {
 
     private final TennyuHoryuTokuteiJushoDiv div;
     private static final RString SHICHOSONCODE_VALUE = new RString("11");
-    private static final int 桁数_5 = 5;
 
     /**
      * コンストラクタです。
@@ -47,8 +46,9 @@ public class TennyuHoryuValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateCheck() {
+        RString strLasdecCode = div.getTennyuHoryuTokuteiJushoNyuryoku().getDdlShichosonCode().getSelectedKey();
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().get市町村コード())) {
+        if (RString.isNullOrEmpty(strLasdecCode)) {
             validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
                     UrErrorMessages.必須項目_追加メッセージあり, "市町村コード")));
         }
@@ -56,22 +56,29 @@ public class TennyuHoryuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
                     UrErrorMessages.必須項目_追加メッセージあり, "番地")));
         }
+
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+
+        System.out.println("strLasdecCode:" + strLasdecCode);
+
         if (SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
+
             List<KoseiShichoson> koseiShichosonList = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
             List list = new ArrayList();
             for (KoseiShichoson koseiList : koseiShichosonList) {
-                list.add(koseiList.get市町村コード().value().substring(0, 桁数_5));
+                list.add(koseiList.get市町村コード().value());
+                System.out.println("listMenbers:" + koseiList.get市町村コード().value());
             }
-            if (!list.contains(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().get市町村コード())) {
+
+            if (!list.contains(strLasdecCode)) {
                 validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
                         UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード")));
             }
         } else {
-            if (!div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide()
-                    .get市町村コード().equals(市町村セキュリティ情報.get市町村情報().get市町村コード()
-                            .getColumnValue().substring(0, 桁数_5))) {
+
+            System.out.println("shichosonSecurity:" + 市町村セキュリティ情報.get市町村情報().get市町村コード());
+            if (!strLasdecCode.equals(市町村セキュリティ情報.get市町村情報().get市町村コード().value())) {
                 validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
                         UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード")));
             }

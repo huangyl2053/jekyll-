@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.message.NotificationMessage;
  */
 public enum DbzNotificationMessage implements IMessageGettable {
 
-    該当データなし(1, "該当データはありませんでした。"),;
+    該当データなし(1, "該当データはありませんでした。");
 
     private final Message message;
 

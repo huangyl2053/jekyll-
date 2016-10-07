@@ -18,7 +18,7 @@ import lombok.Setter;
 /**
  * 受給者減免実施状況のバッチパラメタークラスです。//TODO このクラスを使用しないて下さい、これは一時のものです。
  *
- * @reamsid_L　DBD-3770-030 x_liuwei
+ * @reamsid_L DBD-3770-030 x_liuwei
  */
 @Getter
 @Setter

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.Toku
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -21,6 +23,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class TokutyoKariSanteiFuka {
 
+    private static final RString DBBMN33001 = new RString("DBBMN33001");
+    private static final RString DBBMN33002 = new RString("DBBMN33002");
+    private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
+    private static final RString 特徴仮算定通知書一括発行 = new RString("特徴仮算定通知書一括発行");
+
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード) .
      *
@@ -30,7 +37,13 @@ public class TokutyoKariSanteiFuka {
     public ResponseData<TokutyoKariSanteiFukaDiv> onLoad(TokutyoKariSanteiFukaDiv div) {
         TokutyoKariSanteiFukaHandler handler = getHandler(div);
         handler.initialize();
-        return ResponseData.of(div).respond();
+        if (DBBMN33001.equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).rootTitle(特徴仮算定賦課).respond();
+        } else if (DBBMN33002.equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).rootTitle(特徴仮算定通知書一括発行).respond();
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**

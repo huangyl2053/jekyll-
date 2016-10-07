@@ -19,7 +19,6 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE591001_IryokikanShujiiParameter extends BatchParameterBase {
 
     /**

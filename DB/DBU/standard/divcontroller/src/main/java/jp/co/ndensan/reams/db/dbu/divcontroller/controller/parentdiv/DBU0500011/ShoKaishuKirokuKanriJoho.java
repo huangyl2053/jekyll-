@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -93,18 +95,41 @@ public class ShoKaishuKirokuKanriJoho {
      * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriJohoDiv> onClick_Hozon(ShoKaishuKirokuKanriJohoDiv div) {
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            setHozon(div);
-            RealInitialLocker.release(LOCKINGKEY);
-            div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-            アクセスログ(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
-            return ResponseData.of(div).setState(DBU0500011StateName.完了状態);
-        }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
+        if (!is画面内容の変更有無(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(
+                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+            }
+        } else {
+            if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                setHozon(div);
+                RealInitialLocker.release(LOCKINGKEY);
+                div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+                アクセスログ(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+                return ResponseData.of(div).setState(DBU0500011StateName.完了状態);
+            }
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
+            }
         }
         return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 画面内容の変更有無チェック。
+     *
+     * @return 画面内容の変更有無
+     */
+    private boolean is画面内容の変更有無(ShoKaishuKirokuKanriJohoDiv div) {
+        List<dgKoufuKaishu_Row> dgkoufuKaishuList = div.getShoKaishuList().getCcdShokaishuKirokuKanri().get証交付回収情報一覧();
+        for (dgKoufuKaishu_Row dgKoufuKaishu : dgkoufuKaishuList) {
+            if (!RowState.Unchanged.equals(dgKoufuKaishu.getRowState())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

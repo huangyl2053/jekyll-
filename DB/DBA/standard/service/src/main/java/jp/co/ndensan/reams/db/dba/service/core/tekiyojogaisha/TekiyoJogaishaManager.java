@@ -66,11 +66,6 @@ public class TekiyoJogaishaManager {
 
     private static final int AGE_65 = 65;
     private static final RString 識別コード = new RString("識別コード");
-    private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_修正 = new RString("修正");
-    private static final RString 状態_削除 = new RString("削除");
-    private static final RString 状態_適用登録 = new RString("適用登録モード");
-    private static final RString 状態_解除 = new RString("解除モード");
     private static final RString 登録不可 = new RString("0");
     private static final RString 登録可能で資格喪失不要 = new RString("1");
     private static final RString 登録可能で資格喪失必要 = new RString("2");
@@ -78,7 +73,7 @@ public class TekiyoJogaishaManager {
     private final DbT1002TekiyoJogaishaDac 適用除外者Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
     private final DbV1002TekiyoJogaishaAliveDac viewDac;
-    private boolean 退所日ありフラグ;
+//    private boolean 退所日ありフラグ;
 
     /**
      * コンストラクタです。
@@ -138,7 +133,7 @@ public class TekiyoJogaishaManager {
 
         List<TekiyoJogaishaRelate> tekiyoJogaishaRelateList = new ArrayList<>();
         for (TekiyoJogaishaRelateEntity entity : 適用除外者List) {
-            退所日ありフラグ = true;
+//            退所日ありフラグ = true;
             TekiyoJogaishaMapperParameter 施設情報Parameter = TekiyoJogaishaMapperParameter.createParam_get施設情報(
                     entity.getShikibetsuCode(),
                     entity.getKaijoYMD(),

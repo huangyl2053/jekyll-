@@ -16,6 +16,11 @@ public class HokenshaListLoader {
     HokenshaListLoader() {
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @return {@link HokenshaListLoader}
+     */
     public static HokenshaListLoader createInstance() {
         return new HokenshaListLoader();
     }

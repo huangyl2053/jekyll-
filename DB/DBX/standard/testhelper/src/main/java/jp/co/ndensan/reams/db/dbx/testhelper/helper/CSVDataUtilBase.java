@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+//CHECKSTYLE IGNORE ImportControl FOR NEXT 1 LINES
 import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

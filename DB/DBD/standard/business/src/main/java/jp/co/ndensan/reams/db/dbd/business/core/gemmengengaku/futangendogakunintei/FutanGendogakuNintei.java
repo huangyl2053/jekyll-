@@ -142,6 +142,26 @@ public class FutanGendogakuNintei
     }
 
     /**
+     * 遺族年金受給申告を返します。
+     *
+     * @return 遺族年金受給申告
+     */
+    @SuppressWarnings("PMD.BooleanGetMethodName")
+    public boolean get遺族年金受給申告() {
+        return entity.getIzokuNenkinJukyuFlag();
+    }
+
+    /**
+     * 障害年金受給申告を返します。
+     *
+     * @return 障害年金受給申告
+     */
+    @SuppressWarnings("PMD.BooleanGetMethodName")
+    public boolean get障害年金受給申告() {
+        return entity.getShogaiNenkinJukyuFlag();
+    }
+
+    /**
      * 旧措置者区分を返します。
      *
      * @return 旧措置者区分

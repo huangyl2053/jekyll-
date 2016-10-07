@@ -35,6 +35,20 @@ public interface IJushochiTokureiRirekiListDiv extends ICommonChildDivBaseProper
     void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日);
 
     /**
+     * 住所地特例履歴Divについて、市町村情報が「広域/合併有り」である場合の初期設定を行います。<br/>
+     * 初期設定を行う項目は以下のとおりです。
+     * <ul>
+     * <li>処理ステータスの設定</li>
+     * <li>保険者情報表示モード（HikenshaJohoDisplayMode）に引数から指定した項目を設定</li>
+     * <li>措置元保険者DDL・旧保険者DDLの選択項目の設定（選択項目の候補を市町村情報から取得）</li>
+     * <li>適用事由DDL・解除事由DDLの選択項目の設定（コードマスタからの取得）</li>
+     * </ul>
+     *
+     * @param dataSource
+     */
+    void initialize(List<dgJutoku_Row> dataSource);
+
+    /**
      * 明細パネルの表示モードを設定します。<br/>
      * 以下のモードが設定できます。
      * <ul>
@@ -85,6 +99,11 @@ public interface IJushochiTokureiRirekiListDiv extends ICommonChildDivBaseProper
 
     JutokuInputDiv getJutokuInput();
 
+    /**
+     * 住所地特例グリッド上を返す。
+     *
+     * @return 住所地特定グリッド
+     */
     DataGrid<dgJutoku_Row> getDgJutoku();
 
     List<HihokenshaDaicho> getDataList();

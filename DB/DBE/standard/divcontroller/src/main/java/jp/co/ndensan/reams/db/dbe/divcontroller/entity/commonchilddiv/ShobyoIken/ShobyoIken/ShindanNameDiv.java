@@ -7,21 +7,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * ShindanName のクラスファイル
  *
  */
 public class ShindanNameDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -184,7 +180,7 @@ public class ShindanNameDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnAdd(Button btnAdd) {
+    public void  setBtnAdd(Button btnAdd) {
         this.getGeninShikkanPanel().setBtnAdd(btnAdd);
     }
 
@@ -194,7 +190,7 @@ public class ShindanNameDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgGenyin(DataGrid<dgGenyin_Row> dgGenyin) {
+    public void  setDgGenyin(DataGrid<dgGenyin_Row> dgGenyin) {
         this.getGeninShikkanPanel().setDgGenyin(dgGenyin);
     }
 
@@ -204,7 +200,7 @@ public class ShindanNameDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setGeninShikkanShosai(geninShikkanShosaiDiv geninShikkanShosai) {
+    public void  setGeninShikkanShosai(geninShikkanShosaiDiv geninShikkanShosai) {
         this.getGeninShikkanPanel().setGeninShikkanShosai(geninShikkanShosai);
     }
 
@@ -219,7 +215,7 @@ public class ShindanNameDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadIsShutaruGeninShikkan(RadioButton radIsShutaruGeninShikkan) {
+    public void  setRadIsShutaruGeninShikkan(RadioButton radIsShutaruGeninShikkan) {
         this.getGeninShikkanPanel().getGeninShikkanShosai().setRadIsShutaruGeninShikkan(radIsShutaruGeninShikkan);
     }
 
@@ -229,7 +225,7 @@ public class ShindanNameDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnNo(Button btnNo) {
+    public void  setBtnNo(Button btnNo) {
         this.getGeninShikkanPanel().getGeninShikkanShosai().setBtnNo(btnNo);
     }
 
@@ -239,7 +235,7 @@ public class ShindanNameDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnOK(Button btnOK) {
+    public void  setBtnOK(Button btnOK) {
         this.getGeninShikkanPanel().getGeninShikkanShosai().setBtnOK(btnOK);
     }
 

@@ -5,14 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001.old;
 
-import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
-import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaComparators;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001StateName.賦課根拠期割;
@@ -21,20 +15,11 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.Fuka
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.dgFukaRirekiFukaRireki_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
-import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**

@@ -80,7 +80,7 @@ public final class TekiyoJogaishaMapperParameter {
         return new TekiyoJogaishaMapperParameter(
                 /*識別コード*/識別コード, /*異動日*/ FlexibleDate.MAX, /*枝番*/ RString.EMPTY, /*uses識別コード*/ true,
                 /*uses異動日*/ true, /*uses枝番*/ true, /*kaijoYMD*/ FlexibleDate.MAX, /*tekiyoYMD*/ FlexibleDate.MAX,
-                /*論理削除フラグ*/ true, /*解除日あり*/ true,/*解除日なし*/ true, /*psmShikibetsuTaisho*/ RString.EMPTY);
+                /*論理削除フラグ*/ true, /*解除日あり*/ true, /*解除日なし*/ true, /*psmShikibetsuTaisho*/ RString.EMPTY);
     }
 
     /**
@@ -94,9 +94,9 @@ public final class TekiyoJogaishaMapperParameter {
             ShikibetsuCode 識別コード,
             RString psmShikibetsuTaisho) {
         return new TekiyoJogaishaMapperParameter(
-                /*識別コード*/識別コード, /*異動日*/ FlexibleDate.MAX, /*枝番*/ RString.EMPTY,/*uses識別コード*/ true,
+                /*識別コード*/識別コード, /*異動日*/ FlexibleDate.MAX, /*枝番*/ RString.EMPTY, /*uses識別コード*/ true,
                 /*uses異動日*/ true, /*uses枝番*/ true, /*kaijoYMD*/ FlexibleDate.MAX, /*tekiyoYMD*/ FlexibleDate.MAX,
-                /*論理削除フラグ*/ true,/*解除日あり*/ true, /*解除日なし*/ true, /*psmShikibetsuTaisho*/ psmShikibetsuTaisho);
+                /*論理削除フラグ*/ true, /*解除日あり*/ true, /*解除日なし*/ true, /*psmShikibetsuTaisho*/ psmShikibetsuTaisho);
     }
 
     /**

@@ -59,6 +59,7 @@
         ,DbT5101NinteiShinseiJoho."seinengappiYMD" AS "seinengappiYMD"
         ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd" AS "zenkaiYukoKikanEnd"
         ,TB."ichijiHanteiKekkaCode"  AS "zenichijiHanteiKekkaCode"
+        ,TB."nijiHanteiYokaigoJotaiKubunCode" AS "zenkaiNijiHanteiYokaigoJotaiKubunCode"
         ,DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode" AS "ichijiHanteiKekkaCode"
         ,DbT5102NinteiKekkaJoho."nijiHanteiYokaigoJotaiKubunCode"  AS "nijiHanteiYokaigoJotaiKubunCode"
         ,DbT5502ShinsakaiWariateJoho."hanteiKekkaCode"  AS "hanteiKekkaCode"
@@ -112,6 +113,7 @@
         ( SELECT
         DbT5116."ichijiHanteiKekkaCode" AS "ichijiHanteiKekkaCode"
         ,DbT5502."shinseishoKanriNo" AS "shinseishoKanriNo"
+        ,DbT5102NinteiKekkaJohoZenkai."nijiHanteiYokaigoJotaiKubunCode"
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho"  DbT5502
         INNER
@@ -122,6 +124,10 @@
         rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116
         ON
         DbT5116."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5102NinteiKekkaJoho" DbT5102NinteiKekkaJohoZenkai
+        ON
+        DbT5102NinteiKekkaJohoZenkai."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
         ) AS  TB
         ON
         TB."shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."shinseishoKanriNo"
@@ -146,6 +152,7 @@
         <result property="前回一次判定" column="zenichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="要介護認定一次判定結果コード" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="二次判定要介護状態区分コード" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="前回二次判定要介護状態区分コード" column="zenkaiNijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="判定結果コード" column="hanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="二次判定年月日" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="コード_２号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>

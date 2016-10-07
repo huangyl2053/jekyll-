@@ -55,7 +55,7 @@ public class ShujiiDataCsvProcess extends BatchProcessBase<ShujiiEntity> {
     private static final RString 出力件数_状況フラグ = new RString("【状況フラグ】 TRUE");
     private static final RString 出力件数_今回処理日時開始日時 = new RString("【今回処理日時開始日時】 ");
     private static final RString 出力件数_今回処理日時終了日時 = new RString("【今回処理日時終了日時】 ");
-    private static final RString 申請書管理番号 = new RString("申請書管理番号");
+    private static final RString 主治医コード = new RString("主治医コード");
     private static final Code ログコード = new Code("0001");
     private Association association;
     private FileSpoolManager fileSpoolmanager;
@@ -108,6 +108,9 @@ public class ShujiiDataCsvProcess extends BatchProcessBase<ShujiiEntity> {
             csvReamsWriter.writeLine(manager.toShujiiDataReamsCsvEntity(entity, シーケンシャル番号, para.getShikibetsucode()));
         } else {
             csvWriter.writeLine(manager.toShujiiDataCsvEntity(entity, シーケンシャル番号, para.getShikibetsucode()));
+            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
+                    new ExpandedInformation(ログコード, 主治医コード, entity.get主治医コード().value()));
+            AccessLogger.log(AccessLogType.照会, personalData);
         }
     }
 
@@ -119,8 +122,6 @@ public class ShujiiDataCsvProcess extends BatchProcessBase<ShujiiEntity> {
             csvWriter.close();
         }
         バッチ出力条件リストの出力();
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(ログコード, 申請書管理番号, 申請書管理番号));
-        AccessLogger.log(AccessLogType.照会, personalData);
         fileSpoolmanager.spool(SubGyomuCode.DBD介護受給, csvFilePath);
     }
 

@@ -481,6 +481,105 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
+     * 処理日付管理マスタテーブルから、処理状況取得します。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理状況_異動通知書作成(FlexibleYear 調定年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.仮算定異動賦課.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度),
+                                eq(shoriEdaban, 年度内連番_1))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、処理状況取得します。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select抽出開始日時(FlexibleYear 調定年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.仮算定異動賦課.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度),
+                                eq(shoriEdaban, 年度内連番_1))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタから特徴対象者同定のデータを取得します。
+     *
+     * @param 調定年度 調定年度
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> get特徴対象者同定(FlexibleYear 調定年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度),
+                                eq(shoriName, ShoriName.特徴対象者同定.get名称()),
+                                eq(nendoNaiRenban, 年度内連番_1))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタから依頼金額計算のデータを取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> get依頼金額計算(FlexibleYear 調定年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度),
+                                eq(shoriName, ShoriName.依頼金額計算.get名称()),
+                                eq(nendoNaiRenban, 年度内連番_2))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタ.最新調定日時を取得します。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理名 RString
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectMax基準日(FlexibleYear 調定年度, RString 処理名) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(kijunTimestamp)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriEdaban, 年度内連番_1),
+                                eq(nendo, 調定年度),
+                                eq(shoriName, 処理名))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
      * 本算定異動_過年度_抽出開始日時取得する。
      *
      * @param 調定年度 調定年度

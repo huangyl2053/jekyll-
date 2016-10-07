@@ -207,10 +207,10 @@
             ON "ShikibetsuTaisho"."shikibetsuCode" = DbT1001."shikibetsuCode"
         <if test="is年齢">
             <if test="has年齢開始">
-                AND "ShikibetsuTaisho"."seinengappiYMD"  <![CDATA[<=]]> #{宛名抽出年齢開始}
+                AND "ShikibetsuTaisho"."seinengappiYMD"  <![CDATA[>=]]> #{宛名抽出年齢開始}
             </if>
             <if test="has年齢終了">
-                AND #{宛名抽出年齢終了} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD"
+                AND #{宛名抽出年齢終了} <![CDATA[>=]]> "ShikibetsuTaisho"."seinengappiYMD"
             </if>
         </if>
         <if test="is生年月日">

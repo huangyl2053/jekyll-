@@ -52,6 +52,10 @@ public class JyukiRendoJouhouBusiness {
     private static final RString 適用削除 = new RString("適用削除");
     private static final RString 解除削除 = new RString("解除削除");
     private static final RString 資格 = new RString("資格");
+    private static final Code 転入 = new Code("01");
+    private static final Code 転出 = new Code("51");
+    private static final Code 死亡 = new Code("52");
+    private static final Code 転居 = new Code("21");
 
     /**
      * パラメータを作成します。
@@ -125,6 +129,10 @@ public class JyukiRendoJouhouBusiness {
         processParameter.setHenkoJiyu_Hihokensha(変更事由被保険者Codes);
         processParameter.setJutokuTekiyo(住特適用Codes);
         processParameter.setJutokuKaijo(住特解除Codes);
+        processParameter.setIdouJiyu_tennyu(転入);
+        processParameter.setIdouJiyu_tensyutu(転出);
+        processParameter.setIdouJiyu_sibou(死亡);
+        processParameter.setIdouJiyu_tenkyo(転居);
         return processParameter;
     }
 

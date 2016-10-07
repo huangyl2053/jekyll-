@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -29,6 +30,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * 賦課照会メインパネル
  */
 public class FukaShokaiMain {
+
+    private static final RString RAML_ID_賦課照会_世帯員所得 = new RString("DBB0320002");
+    private static final RString RAML_ID_賦課照会_特別徴収 = new RString("DBB0320003");
+    private static final RString RAML_ID_賦課照会_減免徴収猶予 = new RString("DBB0320004");
 
     /**
      * @param div {@link FukaShokaiMainDiv}
@@ -51,31 +56,31 @@ public class FukaShokaiMain {
      * @return レスポンス
      */
     public ResponseData<FukaShokaiMainDiv> onActive(FukaShokaiMainDiv div) {
-        if (comesFrom("DBB0320002", DBB0320002TransitionEventName.一覧に戻る)) {
+        if (comesFrom(RAML_ID_賦課照会_世帯員所得.toString(), DBB0320002TransitionEventName.一覧に戻る)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.一覧に戻る).respond();
         }
-        if (comesFrom("DBB0320002", DBB0320002TransitionEventName.検索に戻る)) {
+        if (comesFrom(RAML_ID_賦課照会_世帯員所得.toString(), DBB0320002TransitionEventName.検索に戻る)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.検索に戻る).respond();
         }
-        if (comesFrom("DBB0320002", DBB0320002TransitionEventName.履歴一覧)) {
+        if (comesFrom(RAML_ID_賦課照会_世帯員所得.toString(), DBB0320002TransitionEventName.履歴一覧)) {
             return onClick_btnRirekiHyoji(div);
         }
-        if (comesFrom("DBB0320003", DBB0320003TransitionEventName.一覧に戻る)) {
+        if (comesFrom(RAML_ID_賦課照会_特別徴収.toString(), DBB0320003TransitionEventName.一覧に戻る)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.一覧に戻る).respond();
         }
-        if (comesFrom("DBB0320003", DBB0320003TransitionEventName.検索に戻る)) {
+        if (comesFrom(RAML_ID_賦課照会_特別徴収.toString(), DBB0320003TransitionEventName.検索に戻る)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.検索に戻る).respond();
         }
-        if (comesFrom("DBB0320003", DBB0320003TransitionEventName.履歴一覧)) {
+        if (comesFrom(RAML_ID_賦課照会_特別徴収.toString(), DBB0320003TransitionEventName.履歴一覧)) {
             return onClick_btnRirekiHyoji(div);
         }
-        if (comesFrom("DBB0320004", DBB0320004TransitionEventName.一覧に戻る)) {
+        if (comesFrom(RAML_ID_賦課照会_減免徴収猶予.toString(), DBB0320004TransitionEventName.一覧に戻る)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.一覧に戻る).respond();
         }
-        if (comesFrom("DBB0320004", DBB0320004TransitionEventName.検索に戻る)) {
+        if (comesFrom(RAML_ID_賦課照会_減免徴収猶予.toString(), DBB0320004TransitionEventName.検索に戻る)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.検索に戻る).respond();
         }
-        if (comesFrom("DBB0320004", DBB0320004TransitionEventName.履歴一覧)) {
+        if (comesFrom(RAML_ID_賦課照会_減免徴収猶予.toString(), DBB0320004TransitionEventName.履歴一覧)) {
             return onClick_btnRirekiHyoji(div);
         }
         return ResponseData.of(div).setState(DBB0320001StateName.賦課根拠期割);
@@ -160,13 +165,13 @@ public class FukaShokaiMain {
      * @return レスポンス
      */
     public ResponseData<FukaShokaiMainDiv> onClick_btnCommonBack(FukaShokaiMainDiv div) {
-        if (comesFrom("DBB0320002", DBB0320002TransitionEventName.履歴一覧)) {
+        if (comesFrom(RAML_ID_賦課照会_世帯員所得.toString(), DBB0320002TransitionEventName.履歴一覧)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.世帯員所得).respond();
         }
-        if (comesFrom("DBB0320003", DBB0320003TransitionEventName.履歴一覧)) {
+        if (comesFrom(RAML_ID_賦課照会_特別徴収.toString(), DBB0320003TransitionEventName.履歴一覧)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.特別徴収).respond();
         }
-        if (comesFrom("DBB0320004", DBB0320004TransitionEventName.履歴一覧)) {
+        if (comesFrom(RAML_ID_賦課照会_減免徴収猶予.toString(), DBB0320004TransitionEventName.履歴一覧)) {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.減免).respond();
         }
         return ResponseData.of(div).setState(DBB0320001StateName.賦課根拠期割);

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FutanGendogakuNinteiDetailDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,12 @@ public class FutanGendogakuNinteiDetailDiv extends Panel {
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("txtShinseiRiyu")
     private TextBox txtShinseiRiyu;
+    @JsonProperty("izokuNenkinJukyuShinkoku")
+    private CheckBoxList izokuNenkinJukyuShinkoku;
+    @JsonProperty("shogaiNenkinJukyuShinkoku")
+    private CheckBoxList shogaiNenkinJukyuShinkoku;
+    @JsonProperty("HiKazeiNenkinjoho")
+    private TextBox HiKazeiNenkinjoho;
     @JsonProperty("FutanGendogakuNinteiRiyoshaFutan")
     private FutanGendogakuNinteiRiyoshaFutanDiv FutanGendogakuNinteiRiyoshaFutan;
     @JsonProperty("haigushaJoho")
@@ -74,6 +80,60 @@ public class FutanGendogakuNinteiDetailDiv extends Panel {
     @JsonProperty("txtShinseiRiyu")
     public void setTxtShinseiRiyu(TextBox txtShinseiRiyu) {
         this.txtShinseiRiyu = txtShinseiRiyu;
+    }
+
+    /*
+     * getizokuNenkinJukyuShinkoku
+     * @return izokuNenkinJukyuShinkoku
+     */
+    @JsonProperty("izokuNenkinJukyuShinkoku")
+    public CheckBoxList getIzokuNenkinJukyuShinkoku() {
+        return izokuNenkinJukyuShinkoku;
+    }
+
+    /*
+     * setizokuNenkinJukyuShinkoku
+     * @param izokuNenkinJukyuShinkoku izokuNenkinJukyuShinkoku
+     */
+    @JsonProperty("izokuNenkinJukyuShinkoku")
+    public void setIzokuNenkinJukyuShinkoku(CheckBoxList izokuNenkinJukyuShinkoku) {
+        this.izokuNenkinJukyuShinkoku = izokuNenkinJukyuShinkoku;
+    }
+
+    /*
+     * getshogaiNenkinJukyuShinkoku
+     * @return shogaiNenkinJukyuShinkoku
+     */
+    @JsonProperty("shogaiNenkinJukyuShinkoku")
+    public CheckBoxList getShogaiNenkinJukyuShinkoku() {
+        return shogaiNenkinJukyuShinkoku;
+    }
+
+    /*
+     * setshogaiNenkinJukyuShinkoku
+     * @param shogaiNenkinJukyuShinkoku shogaiNenkinJukyuShinkoku
+     */
+    @JsonProperty("shogaiNenkinJukyuShinkoku")
+    public void setShogaiNenkinJukyuShinkoku(CheckBoxList shogaiNenkinJukyuShinkoku) {
+        this.shogaiNenkinJukyuShinkoku = shogaiNenkinJukyuShinkoku;
+    }
+
+    /*
+     * getHiKazeiNenkinjoho
+     * @return HiKazeiNenkinjoho
+     */
+    @JsonProperty("HiKazeiNenkinjoho")
+    public TextBox getHiKazeiNenkinjoho() {
+        return HiKazeiNenkinjoho;
+    }
+
+    /*
+     * setHiKazeiNenkinjoho
+     * @param HiKazeiNenkinjoho HiKazeiNenkinjoho
+     */
+    @JsonProperty("HiKazeiNenkinjoho")
+    public void setHiKazeiNenkinjoho(TextBox HiKazeiNenkinjoho) {
+        this.HiKazeiNenkinjoho = HiKazeiNenkinjoho;
     }
 
     /*

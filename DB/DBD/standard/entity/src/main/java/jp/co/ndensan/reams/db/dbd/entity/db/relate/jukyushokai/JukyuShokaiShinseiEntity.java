@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 申請情報RelateEntityクラスです。
@@ -20,6 +22,7 @@ public class JukyuShokaiShinseiEntity {
 
     private DbT4001JukyushaDaichoEntity 受給者台帳Entity;
     private DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
+    private Code 厚労省IF識別コード;
 
     /**
      * コンストラクタです。
@@ -27,6 +30,7 @@ public class JukyuShokaiShinseiEntity {
     public JukyuShokaiShinseiEntity() {
         受給者台帳Entity = new DbT4001JukyushaDaichoEntity();
         要介護認定インターフェース情報Entity = new DbT4003YokaigoNinteiInterfaceEntity();
+        厚労省IF識別コード = new DbT4101NinteiShinseiJohoEntity().getKoroshoIfShikibetsuCode();
     }
 
 }

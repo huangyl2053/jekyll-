@@ -84,10 +84,6 @@ public final class PtnTotalHandler {
                 JuryoIninKeiyakuShurui.福祉用具.getコード(), JuryoIninKeiyakuShurui.福祉用具.get名称()));
         keiyakuSyuruList.add(new KeyValueDataSource(
                 JuryoIninKeiyakuShurui.住宅改修_福祉用具.getコード(), JuryoIninKeiyakuShurui.住宅改修_福祉用具.get名称()));
-        keiyakuSyuruList.add(new KeyValueDataSource(
-                JuryoIninKeiyakuShurui.償還払給付.getコード(), JuryoIninKeiyakuShurui.償還払給付.get名称()));
-        keiyakuSyuruList.add(new KeyValueDataSource(
-                JuryoIninKeiyakuShurui.高額給付費.getコード(), JuryoIninKeiyakuShurui.高額給付費.get名称()));
         div.getPnlCondition().getDdlKeiyakuSyurui().setDataSource(keiyakuSyuruList);
         div.getPnlCondition().getDdlKeiyakuSyurui().setSelectedKey(RString.EMPTY);
         div.getPnlCondition().getDdlKeiyakuSyurui().setDisabled(true);
@@ -143,11 +139,19 @@ public final class PtnTotalHandler {
 
         div.getPnlCondition().getTxtMeisyoKana().clearValue();
         div.getPnlCondition().getTxtMeisyoKana().setDisabled(false);
-        div.getPnlCondition().getChkMeisyoKana().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getPnlCondition().getChkMeisyoKana().setSelectedItemsByKey(new ArrayList<RString>() {
+            {
+                add(KEY_1);
+            }
+        });
         div.getPnlCondition().getChkMeisyoKana().setDisabled(false);
         div.getPnlCondition().getTxtMeisyoKanji().clearValue();
         div.getPnlCondition().getTxtMeisyoKanji().setDisabled(false);
-        div.getPnlCondition().getChkMeisyoKanji().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getPnlCondition().getChkMeisyoKanji().setSelectedItemsByKey(new ArrayList<RString>() {
+            {
+                add(KEY_1);
+            }
+        });
         div.getPnlCondition().getChkMeisyoKanji().setDisabled(false);
         div.getPnlCondition().getDdlKeiyakuSyurui().setSelectedKey(RString.EMPTY);
         div.getPnlCondition().getDdlKeiyakuSyurui().setDisabled(false);
@@ -182,7 +186,11 @@ public final class PtnTotalHandler {
         div.getPnlCondition().getTxtYubin().setDisabled(false);
         div.getPnlCondition().getTxtJyusyoKanji().clearValue();
         div.getPnlCondition().getTxtJyusyoKanji().setDisabled(false);
-        div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(new ArrayList<RString>() {
+            {
+                add(KEY_1);
+            }
+        });
         div.getPnlCondition().getChkJyusyoKanji().setDisabled(false);
     }
 

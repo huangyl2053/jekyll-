@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ChosaitakusakiJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,7 +33,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("txtChosaItakusaki")
     private TextBoxCode txtChosaItakusaki;
     @JsonProperty("txtjigyoshano")
-    private TextBoxNum txtjigyoshano;
+    private TextBoxCode txtjigyoshano;
     @JsonProperty("btnToSearchjigyosha")
     private ButtonDialog btnToSearchjigyosha;
     @JsonProperty("txtChosaitakusakiname")
@@ -51,7 +51,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("txtdaihyoshaname")
     private TextBox txtdaihyoshaname;
     @JsonProperty("txtdaihyoshakananame")
-    private TextBox txtdaihyoshakananame;
+    private TextBoxKana txtdaihyoshakananame;
     @JsonProperty("ddlItakusakikubun")
     private DropDownList ddlItakusakikubun;
     @JsonProperty("ddltokuteichosain")
@@ -158,7 +158,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @return txtjigyoshano
      */
     @JsonProperty("txtjigyoshano")
-    public TextBoxNum getTxtjigyoshano() {
+    public TextBoxCode getTxtjigyoshano() {
         return txtjigyoshano;
     }
 
@@ -167,7 +167,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @param txtjigyoshano txtjigyoshano
      */
     @JsonProperty("txtjigyoshano")
-    public void setTxtjigyoshano(TextBoxNum txtjigyoshano) {
+    public void setTxtjigyoshano(TextBoxCode txtjigyoshano) {
         this.txtjigyoshano = txtjigyoshano;
     }
 
@@ -320,7 +320,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @return txtdaihyoshakananame
      */
     @JsonProperty("txtdaihyoshakananame")
-    public TextBox getTxtdaihyoshakananame() {
+    public TextBoxKana getTxtdaihyoshakananame() {
         return txtdaihyoshakananame;
     }
 
@@ -329,7 +329,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @param txtdaihyoshakananame txtdaihyoshakananame
      */
     @JsonProperty("txtdaihyoshakananame")
-    public void setTxtdaihyoshakananame(TextBox txtdaihyoshakananame) {
+    public void setTxtdaihyoshakananame(TextBoxKana txtdaihyoshakananame) {
         this.txtdaihyoshakananame = txtdaihyoshakananame;
     }
 

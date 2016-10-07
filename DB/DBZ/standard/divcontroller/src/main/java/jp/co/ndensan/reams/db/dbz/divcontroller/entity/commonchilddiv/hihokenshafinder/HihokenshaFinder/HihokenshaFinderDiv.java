@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinder.AtenaFinderDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinder.IAtenaFinderDiv;
@@ -31,8 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author 自動生成
  */
 public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -60,7 +58,6 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
      * getKaigoFinder
      * @return KaigoFinder
      */
-    @Override
     @JsonProperty("KaigoFinder")
     public KaigoFinderDiv getKaigoFinder() {
         return KaigoFinder;
@@ -79,7 +76,6 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
      * getccdAtenaFinder
      * @return ccdAtenaFinder
      */
-    @Override
     @JsonProperty("ccdAtenaFinder")
     public IAtenaFinderDiv getCcdAtenaFinder() {
         return ccdAtenaFinder;
@@ -89,7 +85,6 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
      * getButtonsForHihokenshaFinder
      * @return ButtonsForHihokenshaFinder
      */
-    @Override
     @JsonProperty("ButtonsForHihokenshaFinder")
     public ButtonsForHihokenshaFinderDiv getButtonsForHihokenshaFinder() {
         return ButtonsForHihokenshaFinder;
@@ -152,7 +147,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
             Hokensha[] enumArray = Hokensha.values();
 
             for (Hokensha enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -167,11 +162,11 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
     }
 
     public Hokensha getMode_Hokensha() {
-        return (Hokensha) _CommonChildDivModeUtil.getMode(this.modes, Hokensha.class);
+        return (Hokensha) _CommonChildDivModeUtil.getMode( this.modes, Hokensha.class );
     }
 
-    public void setMode_Hokensha(Hokensha value) {
-        _CommonChildDivModeUtil.setMode(this.modes, Hokensha.class, value);
+    public void setMode_Hokensha( Hokensha value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, Hokensha.class , value );
     }
 
     public static enum HyojiMode implements ICommonChildDivMode {
@@ -189,7 +184,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
             HyojiMode[] enumArray = HyojiMode.values();
 
             for (HyojiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -204,11 +199,11 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
     }
 
     public HyojiMode getMode_HyojiMode() {
-        return (HyojiMode) _CommonChildDivModeUtil.getMode(this.modes, HyojiMode.class);
+        return (HyojiMode) _CommonChildDivModeUtil.getMode( this.modes, HyojiMode.class );
     }
 
-    public void setMode_HyojiMode(HyojiMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, HyojiMode.class, value);
+    public void setMode_HyojiMode( HyojiMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, HyojiMode.class , value );
     }
 
     // </editor-fold>

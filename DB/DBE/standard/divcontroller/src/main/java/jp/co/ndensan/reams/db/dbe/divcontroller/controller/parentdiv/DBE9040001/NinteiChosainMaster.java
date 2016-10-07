@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9040001;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
@@ -21,6 +20,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001.Nin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001.NinteiChosainMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
@@ -28,7 +29,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -47,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -71,6 +71,12 @@ public class NinteiChosainMaster {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CSVファイル名 = new RString("調査員情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString 構成市町村マスタ市町村コード重複種別
+            = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+    private static final RString 四マスタ優先表示市町村識別ID
+            = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
 
     /**
      * コンストラクタです。
@@ -88,13 +94,18 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onLoad(NinteiChosainMasterDiv div) {
         getHandler(div).load();
         getHandler(div).clearKensakuJoken();
+
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
+            LasdecCode 市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
+
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().setValue(認定調査委託先コード);
+            div.getChosainSearch().getHokenshaList().setSelectedShichosonIfExist(市町村コード);
             onClick_btnSearchShujii(div);
             return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9040001StateName.検索);
     }
 
     /**
@@ -117,6 +128,9 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onClick_btnSearchShujii(NinteiChosainMasterDiv div) {
 
         searchChosainInfo(div);
+        if (div.getChosainIchiran().getDgChosainIchiran().getDataSource().isEmpty()) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validateBtnReSearchNoResult()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -144,7 +158,7 @@ public class NinteiChosainMaster {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 onLoad(div);
                 div.getChosainSearch().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9040001StateName.検索);
@@ -162,16 +176,53 @@ public class NinteiChosainMaster {
         if (div.getRadSearchChosainJokyo().getSelectedIndex() == 0) {
             chosainJokyo = true;
         }
+
+        RString 調査委託先コードFrom = RString.EMPTY;
+        RString 調査委託先コードTo = RString.EMPTY;
+
+        if (!div.getTxtSearchChosaItakusakiCodeFrom().getValue().isNullOrEmpty()
+            && !div.getTxtSearchChosaItakusakiCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchChosaItakusakiCodeFrom().getValue().toString())
+                > Long.valueOf(div.getTxtSearchChosaItakusakiCodeTo().getValue().toString())) {
+                調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeTo().getValue();
+                調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
+            } else {
+                調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
+                調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeTo().getValue();
+            }
+        } else {
+            調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
+            調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeTo().getValue();
+        }
+
+        RString 調査員コードFrom = RString.EMPTY;
+        RString 調査員コードTo = RString.EMPTY;
+
+        if (!div.getTxtSearchChosainCodeFrom().getValue().isNullOrEmpty()
+            && !div.getTxtSearchChosainCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtSearchChosainCodeFrom().getValue().toString())
+                > Long.valueOf(div.getTxtSearchChosainCodeTo().getValue().toString())) {
+                調査員コードFrom = div.getTxtSearchChosainCodeTo().getValue();
+                調査員コードTo = div.getTxtSearchChosainCodeFrom().getValue();
+            } else {
+                調査員コードFrom = div.getTxtSearchChosainCodeFrom().getValue();
+                調査員コードTo = div.getTxtSearchChosainCodeTo().getValue();
+            }
+        } else {
+            調査員コードFrom = div.getTxtSearchChosainCodeFrom().getValue();
+            調査員コードTo = div.getTxtSearchChosainCodeTo().getValue();
+        }
+
         NinteiChosainMasterMapperParameter parameter = NinteiChosainMasterMapperParameter.createParamForSelectChosainJohoList(chosainJokyo,
                 div.getHokenshaList().getSelectedItem().get市町村コード(),
-                new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeFrom().getValue()),
-                new ChosaItakusakiCode(div.getTxtSearchChosaItakusakiCodeTo().getValue()),
+                new ChosaItakusakiCode(調査委託先コードFrom),
+                new ChosaItakusakiCode(調査委託先コードTo),
                 div.getTxtSearchChosaItakusakiMeisho().getValue(),
                 div.getDdlItakusakiMeisho().getSelectedKey(),
                 div.getTxtSearchChosaItakusakiKanaMeisho().getValue(),
                 div.getDdlItakusakiKanaMeisho().getSelectedKey(),
-                new ChosainCode(div.getTxtSearchChosainCodeFrom().getValue()),
-                new ChosainCode(div.getTxtSearchChosainCodeTo().getValue()),
+                new ChosainCode(調査員コードFrom),
+                new ChosainCode(調査員コードTo),
                 div.getTxtSearchChosainShimei().getValue(),
                 div.getDdlChosainMeisho().getSelectedKey(),
                 div.getTxtSearchChosainKanaShimei().getValue(),
@@ -182,10 +233,6 @@ public class NinteiChosainMaster {
         List<jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster> 調査員情報List
                 = ninteiChosainMasterFinder.getChosainJohoIchiranList(
                         parameter).records();
-        if (調査員情報List.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.認定調査員マスタ検索結果, Models.create(new ArrayList<ChosainJoho>()));
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
         div.getChosainSearch().setDisabled(true);
         div.getChosainIchiran().setDisabled(false);
         getHandler(div).setChosainIchiran(調査員情報List);
@@ -205,8 +252,14 @@ public class NinteiChosainMaster {
         getHandler(div).setDisabledFalseToChosainJohoToMeisai();
         getHandler(div).clearChosainJohoToMeisai();
         div.getChosainJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
+
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
+            RString 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
+            div.getChosainJohoInput().getTxtShichoson().setValue(市町村コード);
+            div.getChosainJohoInput().getTxtChosaItakusaki().setValue(認定調査委託先コード);
+            onBlur_txtShichoson(div);
+            onBlur_txtChosaItakusaki(div);
             return ResponseData.of(div).setState(DBE9040001StateName.詳細_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).respond();
@@ -273,9 +326,10 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnTorikeshi(NinteiChosainMasterDiv div) {
+        RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
         if ((状態_追加.equals(div.getChosainJohoInput().getState())
-                || 状態_修正.equals(div.getChosainJohoInput().getState()))
-                && getValidationHandler(div).isUpdate()) {
+             || 状態_修正.equals(div.getChosainJohoInput().getState()))
+            && getValidationHandler(div).isUpdate()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -283,15 +337,17 @@ public class NinteiChosainMaster {
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getChosainIchiran().setDisabled(false);
-                return ResponseData.of(div).setState(DBE9040001StateName.一覧);
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                resposneSettingState(div, 認定調査委託先コード);
             }
         }
+        return resposneSettingState(div, 認定調査委託先コード);
+    }
 
+    private ResponseData<NinteiChosainMasterDiv> resposneSettingState(NinteiChosainMasterDiv div, RString 認定調査委託先コード) {
         div.getChosainIchiran().setDisabled(false);
-        RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).setState(DBE9040001StateName.一覧);
@@ -349,7 +405,7 @@ public class NinteiChosainMaster {
         div.getChosainIchiran().setDisabled(false);
         getHandler(div).setChosainJohoToIchiran(イベント状態);
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).respond();
@@ -377,7 +433,7 @@ public class NinteiChosainMaster {
         }
         div.getChosainIchiran().setDisabled(true);
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             return ResponseData.of(div).setState(DBE9040001StateName.詳細_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).respond();
@@ -402,7 +458,7 @@ public class NinteiChosainMaster {
         div.getChosainIchiran().setDisabled(true);
         div.getChosainJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             return ResponseData.of(div).setState(DBE9040001StateName.詳細_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).respond();
@@ -422,7 +478,7 @@ public class NinteiChosainMaster {
         div.getChosainJohoInput().getBtnKakutei().setDisabled(false);
         div.getChosainIchiran().setDisabled(true);
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             return ResponseData.of(div).setState(DBE9040001StateName.詳細_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).respond();
@@ -438,12 +494,24 @@ public class NinteiChosainMaster {
         RString shichoson = div.getChosainJohoInput().getTxtShichoson().getValue();
         if (RString.isNullOrEmpty(shichoson)) {
             div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
-        } else {
-            List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
-            if (!list.isEmpty()) {
-                div.getChosainJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
-            } else {
-                div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            return ResponseData.of(div).respond();
+        }
+
+        List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
+        if (!list.isEmpty()) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            return ResponseData.of(div).respond();
+        }
+
+        div.getChosainJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+        if (構成市町村マスタ市町村コード重複種別.equals(new RString("0"))) {
+            return ResponseData.of(div).respond();
+        }
+
+        for (ShichosonMeishoBusiness item : list) {
+            if (四マスタ優先表示市町村識別ID.equals(item.getShichosonShikibetuID())) {
+                div.getChosainJohoInput().getTxtShichosonmei().setValue(item.getShichosonMeisho());
+                break;
             }
         }
         return ResponseData.of(div).respond();
@@ -505,7 +573,7 @@ public class NinteiChosainMaster {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             validPairs = validateForDelete(div);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -518,7 +586,7 @@ public class NinteiChosainMaster {
             div.getCcdKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
             RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-            if (認定調査委託先コード != null && !認定調査委託先コード.isEmpty()) {
+            if (!RString.isNullOrEmpty(認定調査委託先コード)) {
                 return ResponseData.of(div).setState(DBE9040001StateName.完了_認定調査委託先マスタから遷移);
             }
             return ResponseData.of(div).setState(DBE9040001StateName.完了);
@@ -591,7 +659,7 @@ public class NinteiChosainMaster {
         }
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBE9040001TransitionEventName.認定調査委託先マスタに戻る).respond();
         }
 
@@ -606,10 +674,10 @@ public class NinteiChosainMaster {
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnBackItakusakiMasterToToroku(NinteiChosainMasterDiv div) {
         if (状態_削除.equals(div.getChosainJohoInput().getState())
-                || RString.EMPTY.equals(div.getChosainJohoInput().getState())
-                || ((状態_修正.equals(div.getChosainJohoInput().getState())
-                || 状態_追加.equals(div.getChosainJohoInput().getState())
-                && !getValidationHandler(div).isUpdate()))) {
+            || RString.EMPTY.equals(div.getChosainJohoInput().getState())
+            || ((状態_修正.equals(div.getChosainJohoInput().getState())
+                 || 状態_追加.equals(div.getChosainJohoInput().getState())
+                    && !getValidationHandler(div).isUpdate()))) {
             return ResponseData.of(div).forwardWithEventName(DBE9040001TransitionEventName.認定調査委託先マスタに戻る).respond();
         } else if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -619,7 +687,7 @@ public class NinteiChosainMaster {
 
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBE9040001TransitionEventName.認定調査委託先マスタに戻る).respond();
         }
 
@@ -672,8 +740,10 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onOkClose_btnToSearchChosaItakusaki(NinteiChosainMasterDiv div) {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getChosainJohoInput().getTxtShichoson().setValue(dataPassModel.get市町村コード());
         div.getChosainJohoInput().getTxtChosaItakusaki().setValue(dataPassModel.get委託先コード());
         div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(dataPassModel.get委託先名());
+        onBlur_txtShichoson(div);
         return ResponseData.of(div).respond();
     }
 

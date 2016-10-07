@@ -504,7 +504,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection get更正後(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         FukaJoho 更正後_賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection();
-        if (更正後_賦課情報.get算定年額保険料2() != null) {
+        if (更正後_賦課情報.get算定年額保険料2() != null && 更正後_賦課情報.get算定年額保険料2().intValue() != 0) {
             更正後.set保険料率(更正後_賦課情報.get算定年額保険料2());
         } else {
             更正後.set保険料率(更正後_賦課情報.get算定年額保険料1());

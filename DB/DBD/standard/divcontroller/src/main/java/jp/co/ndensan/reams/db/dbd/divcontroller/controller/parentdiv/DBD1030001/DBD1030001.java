@@ -27,10 +27,11 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001.DBD
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
@@ -40,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -238,7 +238,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_onBeforeOpenDialog(DBD1030001Div div) {
-        div.getShafukuRiyoshaKeigen().setSubGyomuCode(DataPassingConverter.serialize(SubGyomuCode.DBD介護受給));
+        div.getShafukuRiyoshaKeigen().setGyomuCode(GyomuCode.DB介護保険.value());
         div.getShafukuRiyoshaKeigen().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
         return ResponseData.of(div).respond();
     }
@@ -269,16 +269,20 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnShinseiKakutei(DBD1030001Div div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (div.getTxtShinseiYMD().getValue().isEmpty()) {
+            getValidationHandler().申請日の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+        }
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().申請日の未入力チェック(pairs, div);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
             ShakaifukuRiyoshaFutanKeigenToJotai 編集情報
                     = ViewStateHolder.get(ViewStateKeys.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
             Integer 追加履歴番号 = ViewStateHolder.get(ViewStateKeys.追加履歴番号, Integer.class);
@@ -321,16 +325,17 @@ public class DBD1030001 {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             DBD1030001ValidationHandler validationHandler = getValidationHandler();
-            validationHandler.申請日の未入力チェック(pairs, div);
+            if (div.getTxtShinseiYMD().getValue().isEmpty()) {
+                validationHandler.申請日の未入力チェック(pairs, div);
+            } else {
+                pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+            }
             if (KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
                 validationHandler.決定区分の未入力チェック(pairs, div);
-                validationHandler.決定日の未入力チェック(pairs, div);
-                validationHandler.適用日の未入力チェック(pairs, div);
-                validationHandler.有効期限の未入力チェック(pairs, div);
-                validationHandler.軽減事由の未入力チェック(pairs, div);
-                validationHandler.軽減率_分子の未入力チェック(pairs, div);
-                validationHandler.軽減率_分母の未入力チェック(pairs, div);
-                validationHandler.確認番号の未入力チェック(pairs, div);
+                入力チェック(div, validationHandler, pairs);
+            }
+            if (pairs.existsError()) {
+                ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -358,6 +363,33 @@ public class DBD1030001 {
             return ResponseData.of(div).setState(一覧);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「承認情報を確定する」ボタン押下時に入力チェックを行うbr/>
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     */
+    private void 入力チェック(DBD1030001Div div, DBD1030001ValidationHandler validationHandler, ValidationMessageControlPairs pairs) {
+        if (div.getTxtKetteiYMD().getValue().isEmpty()) {
+            validationHandler.決定日の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtKetteiYMD()));
+        }
+        if (div.getTxtTekiyoYMD().getValue().isEmpty()) {
+            validationHandler.適用日の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtTekiyoYMD()));
+        }
+        if (div.getTxtYukoKigenYMD().getValue().isEmpty()) {
+            validationHandler.有効期限の未入力チェック(pairs, div);
+        } else {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getTxtYukoKigenYMD()));
+        }
+        validationHandler.軽減事由の未入力チェック(pairs, div);
+        validationHandler.軽減率_分子の未入力チェック(pairs, div);
+        validationHandler.軽減率_分母の未入力チェック(pairs, div);
+        validationHandler.確認番号の未入力チェック(pairs, div);
     }
 
     private ShakaifukuRiyoshaFutanKeigenToJotai get最初情報(ShakaifukuRiyoshaFutanKeigenToJotai 編集情報) {
