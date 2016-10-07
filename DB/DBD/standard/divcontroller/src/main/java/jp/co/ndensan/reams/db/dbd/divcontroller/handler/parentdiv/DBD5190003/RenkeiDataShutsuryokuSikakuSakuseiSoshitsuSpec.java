@@ -22,8 +22,10 @@ public enum RenkeiDataShutsuryokuSikakuSakuseiSoshitsuSpec implements IPredicate
     今回処理日時_終了日時が開始日時以前チェック {
                 @Override
                 public boolean apply(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuDiv div) {
-                    return RDateTime.convertFrom(div.getTxtKonkaiKaishiDay().getValue(), div.getTxtKonkaiKaishiTime().getValue())
-                    .isBefore(RDateTime.convertFrom(div.getTxtKonkaiShuryoDay().getValue(), div.getTxtKonkaiShuryoTime().getValue()));
+                    return div.getTxtKonkaiKaishiDay() == null || div.getTxtKonkaiKaishiTime() == null
+                    || div.getTxtKonkaiShuryoDay() == null || div.getTxtKonkaiShuryoTime() == null
+                    || (RDateTime.convertFrom(div.getTxtKonkaiKaishiDay().getValue(), div.getTxtKonkaiKaishiTime().getValue())
+                    .isBefore(RDateTime.convertFrom(div.getTxtKonkaiShuryoDay().getValue(), div.getTxtKonkaiShuryoTime().getValue())));
                 }
             },
     /**
