@@ -248,6 +248,10 @@ public enum ReportIdDBD {
      */
     DBD200012(new ReportId("DBD200012_TokubetsuChiikiKasanKeigenJissekiKanriIchiran"), new RString("特別地域加算軽減実績管理リスト")),
     /**
+     * 利用者負担額減免認定者リストの帳票ＩＤです。
+     */
+    DBD200013(new ReportId("DBD200013_RiyoshaFutangakuGemmenNinteishaIchiran"), new RString("利用者負担額減免認定者リスト")),
+    /**
      * 訪問介護利用者負担額減額認定者リストの帳票ＩＤです。
      */
     DBD200014(new ReportId("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran"), new RString("訪問介護利用者負担額減額認定者リスト")),
