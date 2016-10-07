@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListCsvEnti
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListNoRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinnteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakuseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd202010.NinteishaListSakuseiManager;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
@@ -194,7 +193,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         i++;
         if (SetaiHyoji.表示しない.equals(parameter.get世帯表示())
                 && (t.get世帯員リスト() != null && !t.get世帯員リスト().isEmpty())) {
-            List<SetaiInRisutoEntity> 世帯員リスト = new ArrayList<>();
             t.get世帯員リスト().clear();
         }
         edit帳票用データ(t);
