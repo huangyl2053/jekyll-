@@ -81,6 +81,17 @@ public class HanyoListParam {
     }
 
     /**
+     * 出力方法選択ラジオボタンonSelect画面項目制御
+     *
+     * @param div ドメインオブジェクトを取り出したい {@link HanyoListParamDiv}
+     * @return ResponseData<HanyoListParamDiv>
+     */
+    public ResponseData<HanyoListParamDiv> onSelect_radShuturyokuHoho(HanyoListParamDiv div) {
+        getHandler(div).onSelect_radShuturyokuHoho();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 年度RbGr onclick画面項目制御
      *
      * @param div ドメインオブジェクトを取り出したい {@link HanyoListParamDiv}

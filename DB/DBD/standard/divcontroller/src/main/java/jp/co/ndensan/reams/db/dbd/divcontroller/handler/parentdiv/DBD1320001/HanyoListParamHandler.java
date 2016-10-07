@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyak
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.KyuShochiSha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1320001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -98,9 +99,13 @@ public class HanyoListParamHandler {
 
     private static final RString 利用者負担額減額データ種別名 = new RString("利用者負担額減額");
     private static final RString 訪問介護利用者負担額減額データ種別名 = new RString("訪問介護利用者負担額減額");
-    //private static final RString 社会福祉法人等利用者負担軽減データ種別名 = new RString("社会福祉法人等利用者負担軽減");
+    private static final RString 社会福祉法人等利用者負担軽減データ種別名 = new RString("社会福祉法人等利用者負担軽減");
     private static final RString 特別地域加算減免データ種別名 = new RString("特別地域加算減免");
     private static final RString 介護保険負担限度額認定データ種別名 = new RString("介護保険負担限度額認定");
+    private static final RString 国保資格情報データ種別名 = new RString("国保資格情報");
+    private static final RString 後期高齢者情報データ種別名 = new RString("後期高齢者情報");
+    private static final RString 利用者負担割合情報データ種別名 = new RString("利用者負担割合");
+    private static final RString 二次予防事業対象者情報データ種別名 = new RString("二次予防事業対象者");
     private static final RString 年度KEY = new RString("key0");
     private static final RString 年度基準日KEY = new RString("key1");
     private static final RString 基準日KEY = new RString("key0");
@@ -176,6 +181,7 @@ public class HanyoListParamHandler {
     private static final RString 帳票IDパラメータ名称2 = new RString("帳票ID");
     private static final RString 出力順パラメータ名称1 = new RString("syutsuryokujunparameter");
     private static final RString 出力順パラメータ名称2 = new RString("出力順");
+    private static final RString 出力順パラメータ名称3 = new RString("syutsuryokujun");
     private static final RString 出力項目パラメータ名称1 = new RString("syutsuryokukomoku");
     private static final RString 出力項目パラメータ名称2 = new RString("出力項目");
     private static final RString 特定入所者旧措置者パラメータ名称 = new RString("shiteinyushoshakyusochisha");
@@ -237,47 +243,74 @@ public class HanyoListParamHandler {
             喪失区分DDL.add(new KeyValueDataSource(soshitsuKubun.getコード(), soshitsuKubun.get名称()));
         }
         div.getDdlSoshitsuKubun().setDataSource(喪失区分DDL);
+        List<KeyValueDataSource> 出力方法list = new ArrayList<>();
+        for (Outputs outputs : Outputs.values()) {
+            出力方法list.add(new KeyValueDataSource(outputs.getコード(), outputs.get名称()));
+        }
+        div.getRadShuturyokuHoho().setDataSource(出力方法list);
         if (汎用リスト_施設入退所メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_施設入退所帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_施設入退所表題);
             初期化_施設入退所();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_利用者負担額減免メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_利用者負担額減免帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_利用者負担額減免表題);
             初期化_利用者負担額減免();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_訪問介護利用者負担額減額メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_訪問介護利用者負担額減額帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_訪問介護利用者負担額減額表題);
             初期化_訪問介護利用者負担額減額();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_社会福祉法人軽減メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_社会福祉法人軽減帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_社会福祉法人軽減表題);
             初期化_社会福祉法人軽減();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_特別地域加算減免メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_特別地域加算減免帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_特別地域加算減免表題);
             初期化_特別地域加算減免();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_負担限度額認定メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_負担限度額認定帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_負担限度額認定表題);
             初期化_負担限度額認定();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_国保メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_国保帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_国保表題);
             初期化_国保();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_後期高齢者メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_後期高齢者帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_後期高齢者表題);
             初期化_後期高齢者();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_事業対象者メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_事業対象者帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_事業対象者表題);
             初期化_事業対象者();
+            onClick_radChushutsuJokenB();
         } else if (汎用リスト_利用者負担割合メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_利用者負担割合帳票ID));
+            set表題パネルis非表示(非表示);
             set表題パネル(汎用リスト_利用者負担割合表題);
             初期化_利用者負担割合();
+            onClick_radChushutsuJokenA();
         }
+        onSelect_radShuturyokuHoho();
+        onClick_radHaniJoken2();
     }
 
     /**
@@ -363,6 +396,23 @@ public class HanyoListParamHandler {
     }
 
     /**
+     * 出力方法選択ラジオボタンonSelect画面項目制御
+     */
+    public void onSelect_radShuturyokuHoho() {
+        RString selectedKey = div.getRadShuturyokuHoho().getSelectedKey();
+        if (Outputs.帳票_CSV出力.getコード().equals(selectedKey)) {
+            set表題パネルis非表示(表示);
+            setCSV編集条件パネルis非表示(表示);
+        } else if (Outputs.帳票のみ出力.getコード().equals(selectedKey)) {
+            set表題パネルis非表示(表示);
+            setCSV編集条件パネルis非表示(非表示);
+        } else {
+            set表題パネルis非表示(非表示);
+            setCSV編集条件パネルis非表示(表示);
+        }
+    }
+
+    /**
      * 年度RbGr onclick画面項目制御
      */
     public void onClick_radChushutsuJokenA() {
@@ -399,6 +449,11 @@ public class HanyoListParamHandler {
         } else {
             申請日RbGr_非申請日RbSelected();
         }
+    }
+
+    private void setCSV編集条件パネルis非表示(boolean is非表示) {
+        div.getCsvHenshuHoho().setDisplayNone(is非表示);
+        div.getCsvHenshuHoho().setDisabled(is非表示);
     }
 
     private void 申請日RbGr_非申請日RbSelected() {
@@ -471,8 +526,8 @@ public class HanyoListParamHandler {
     public DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter get汎用リスト_利用者負担額減免BatchParameter() {
         DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter para = new DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter();
         para.setHyoudai(get表題());
-        para.setDetasyubetsumesyo(利用者負担額減額データ種別名); //TODO
-        para.setSyutsuryoku(RString.EMPTY); //TODO 出力方法
+        para.setDetasyubetsumesyo(利用者負担額減額データ種別名);
+        para.setSyutsuryoku(get出力方法());
         para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
         para.setCyusyutsukomokukubun(get申請日RbGr抽出項目区分().getコード());
         para.setKizyunnichi(get基準日());
@@ -501,8 +556,8 @@ public class HanyoListParamHandler {
     public DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter get汎用リスト_訪問介護利用者負担額減額BatchParameter() {
         DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter para = new DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter();
         para.setHyoudai(get表題());
-        para.setDetasyubetsumesyo(訪問介護利用者負担額減額データ種別名);  //TODO
-        para.setSyutsuryoku(RString.EMPTY);  //TODO
+        para.setDetasyubetsumesyo(訪問介護利用者負担額減額データ種別名);
+        para.setSyutsuryoku(get出力方法());
         para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
         para.setCyusyutsukomokukubun(get申請日RbGr抽出項目区分().getコード());
         para.setKizyunnichi(get基準日());
@@ -529,25 +584,25 @@ public class HanyoListParamHandler {
      */
     public DBD710060_HanyoListShakaiFukushiHojinKeigenParameter get汎用リスト_社会福祉法人軽減BatchParameter() {
         DBD710060_HanyoListShakaiFukushiHojinKeigenParameter para = new DBD710060_HanyoListShakaiFukushiHojinKeigenParameter();
-//            para.setHyoudai(get表題());
-//            para.setDetasyubetsumesyo(社会福祉法人等利用者負担軽減データ種別名);//TODO
-//            para.setSyutsuryoku(menuID);//TODO
-//            para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
-//            para.setCyusyutsukomokukubun(get申請日RbGr抽出項目区分().getコード());
-//            para.setKizyunnichi(get基準日());
-//            para.setHitsukehanifrom(get日付範囲From());
-//            para.setHitsukehanito(get日付範囲To());
-//            para.setChokindatacyusyutsu(get基準日範囲パネル直近データ抽出());
-//            para.setHobetsukubun(get法別区分().getコード());
-//            para.setKyakasha(get却下者().getコード());
-//            para.setSoshitsukubun(get喪失区分().getコード());
-//            para.setCsvkomokumeifuka(get項目名付加());
-//            para.setCsvrenbanfuka(get連番付加());
-//            para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
-//            para.setAtenacyusyutsujyoken(get宛名抽出条件());
-//            para.setCyohyoid(汎用リスト_訪問介護利用者負担額減額帳票ID);
-//            para.setSyutsuryokujunparameter(get出力順());
-//            para.setSyutsuryokukomoku(get出力項目());
+        para.setHyoudai(get表題());
+        para.setDetasyubetsumesyo(社会福祉法人等利用者負担軽減データ種別名);
+        para.setSyutsuryoku(get出力方法());
+        para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
+        para.setCyusyutsukomokukubun(get申請日RbGr抽出項目区分().getコード());
+        para.setKizyunnichi(get基準日());
+        para.setHitsukehanifrom(get日付範囲From());
+        para.setHitsukehanito(get日付範囲To());
+        para.setChokindatacyusyutsu(get基準日範囲パネル直近データ抽出());
+        para.setShinseishadatacyushutsu(get申請者データ抽出());
+        para.setKyakasha(get却下者());
+        para.setSoshitsukubun(get喪失区分());
+        para.setCsvkomokumeifuka(get項目名付加());
+        para.setCsvrenbanfuka(get連番付加());
+        para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
+        para.setAtenacyusyutsujyoken(get宛名抽出条件());
+        para.setCyohyoid(汎用リスト_社会福祉法人軽減帳票ID);
+        para.setSyutsuryokujunparameter(get出力順());
+        para.setSyutsuryokukomoku(get出力項目());
         return para;
     }
 
@@ -559,8 +614,8 @@ public class HanyoListParamHandler {
     public DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter get汎用リスト_特別地域加算減免BatchParameter() {
         DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter para = new DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter();
         para.setHyoudai(get表題());
-        para.setDetasyubetsumesyo(特別地域加算減免データ種別名); //TODO
-        para.setSyutsuryoku(RString.EMPTY); //TODO
+        para.setDetasyubetsumesyo(特別地域加算減免データ種別名);
+        para.setSyutsuryoku(get出力方法());
         para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
         para.setCyusyutsukomokukubun(get申請日RbGr抽出項目区分().getコード());
         para.setKizyunnichi(get基準日());
@@ -588,8 +643,8 @@ public class HanyoListParamHandler {
     public DBD710080_HanyoListFutanGendoGakuNinteiParameter get汎用リスト_負担限度額認定BatchParameter() {
         DBD710080_HanyoListFutanGendoGakuNinteiParameter para = new DBD710080_HanyoListFutanGendoGakuNinteiParameter();
         para.setHyoudai(get表題());
-        para.setDetasyubetsumesyo(介護保険負担限度額認定データ種別名);  //TODO
-        para.setSyutsuryoku(RString.EMPTY);  //TODO
+        para.setDetasyubetsumesyo(介護保険負担限度額認定データ種別名);
+        para.setSyutsuryoku(get出力方法());
         para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
         para.setCyusyutsukomokukubun(get申請日RbGr抽出項目区分().getコード());
         para.setKizyunnichi(get基準日());
@@ -623,6 +678,22 @@ public class HanyoListParamHandler {
      */
     public DBD710110_HanyoListKokuhoParameter get汎用リスト_国保BatchParameter() {
         DBD710110_HanyoListKokuhoParameter para = new DBD710110_HanyoListKokuhoParameter();
+        para.setHyoudai(get表題());
+        para.setDetasyubetsumesyo(国保資格情報データ種別名);
+        para.setSyutsuryoku(get出力方法());
+        para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
+        para.setCyusyutsukomokukubun(get取得喪失RbGr抽出項目区分().getコード());
+        para.setKizyunnichi(get基準日());
+        para.setHitsukehanifrom(get日付範囲From());
+        para.setHitsukehanito(get日付範囲To());
+        para.setSoshitsukubun(get喪失区分());
+        para.setCsvkomokumeifuka(get項目名付加());
+        para.setCsvrenbanfuka(get連番付加());
+        para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
+        para.setAtenacyusyutsujyoken(get宛名抽出条件());
+        para.setCyohyoid(汎用リスト_国保帳票ID);
+        para.setSyutsuryokujun(div.getCcdShutsuryokujun().get出力順ID());
+        para.setSyutsuryokukomoku(get出力項目());
         return para;
     }
 
@@ -633,6 +704,22 @@ public class HanyoListParamHandler {
      */
     public DBD710120_HanyoListKokiKoreishaParameter get汎用リスト_後期高齢者BatchParameter() {
         DBD710120_HanyoListKokiKoreishaParameter para = new DBD710120_HanyoListKokiKoreishaParameter();
+        para.setHyoudai(get表題());
+        para.setDetasyubetsumesyo(後期高齢者情報データ種別名);
+        para.setSyutsuryoku(get出力方法());
+        para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
+        para.setCyusyutsukomokukubun(get取得喪失RbGr抽出項目区分().getコード());
+        para.setKizyunnichi(get基準日());
+        para.setHitsukehanifrom(get日付範囲From());
+        para.setHitsukehanito(get日付範囲To());
+        para.setSoshitsukubun(get喪失区分());
+        para.setCsvkomokumeifuka(get項目名付加());
+        para.setCsvrenbanfuka(get連番付加());
+        para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
+        para.setAtenacyusyutsujyoken(get宛名抽出条件());
+        para.setCyohyoid(汎用リスト_後期高齢者帳票ID);
+        para.setSyutsuryokujun(div.getCcdShutsuryokujun().get出力順ID());
+        para.setSyutsuryokukomoku(get出力項目());
         return para;
     }
 
@@ -642,8 +729,23 @@ public class HanyoListParamHandler {
      * @return 事業対象者バッチパラメータ
      */
     public DBD710130_HanyoListJigyoTaishoshaParameter get汎用リスト_事業対象者BatchParameter() {
-        //TODO
         DBD710130_HanyoListJigyoTaishoshaParameter para = new DBD710130_HanyoListJigyoTaishoshaParameter();
+        para.setHyoudai(get表題());
+        para.setDetasyubetsumesyo(二次予防事業対象者情報データ種別名);
+        para.setSyutsuryoku(get出力方法());
+        para.setCyusyutsuhohokubun(get基準日範囲抽出方法区分().getコード());
+        para.setCyusyutsukomokukubun(get適用開始日RbGr抽出項目区分().getコード());
+        para.setKizyunnichi(get基準日());
+        para.setHitsukehanifrom(get日付範囲From());
+        para.setHitsukehanito(get日付範囲To());
+        para.setJigyotaishoshacyusyutsu(直近データKEY.equals(div.getRadChusyutuKubun().getSelectedKey()));
+        para.setCsvkomokumeifuka(get項目名付加());
+        para.setCsvrenbanfuka(get連番付加());
+        para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
+        para.setAtenacyusyutsujyoken(get宛名抽出条件());
+        para.setCyohyoid(汎用リスト_後期高齢者帳票ID);
+        para.setSyutsuryokujun(div.getCcdShutsuryokujun().get出力順ID());
+        para.setSyutsuryokukomoku(get出力項目());
         return para;
     }
 
@@ -653,8 +755,42 @@ public class HanyoListParamHandler {
      * @return 利用者負担割合バッチパラメータ
      */
     public DBD710140_HanyoListRiyoshaFutanwariaiParameter get汎用リスト_利用者負担割合BatchParameter() {
-        //TODO
         DBD710140_HanyoListRiyoshaFutanwariaiParameter para = new DBD710140_HanyoListRiyoshaFutanwariaiParameter();
+        para.setHyoudai(get表題());
+        para.setDetasyubetsumesyo(利用者負担割合情報データ種別名);
+        para.setSyutsuryoku(get出力方法());
+        if (年度KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey())) {
+            para.setCyusyutsuhohokubun(ChushutsuHohoKubun.年度.getコード());
+        } else {
+            para.setCyusyutsuhohokubun(ChushutsuHohoKubun.基準日.getコード());
+        }
+        if (年度基準日KEY.equals(div.getRadChushutsuJokenA2().getSelectedKey())) {
+            RString 年度 = div.getDdlKijunNendo().getSelectedValue();
+            RDate date = div.getTxtKijunDateA().getValue();
+            if (!RString.isNullOrEmpty(年度)) {
+                para.setNendo(new FlexibleYear(年度));
+            } else {
+                para.setNendo(FlexibleYear.EMPTY);
+            }
+            if (date != null) {
+                para.setKizyunnichi(new FlexibleDate(date.getYearValue(), date.getMonthValue(), date.getDayValue()));
+            } else {
+                para.setKizyunnichi(FlexibleDate.EMPTY);
+            }
+        } else {
+            para.setNendo(FlexibleYear.EMPTY);
+            para.setKizyunnichi(FlexibleDate.EMPTY);
+        }
+        para.setNendochokindatacyusyutsu(div.getChkChokkinNomiA().isAllSelected());
+        para.setJigyotaishoshafutanichiwari(div.getChkFutanWariaiKubun().getSelectedKeys().contains(事業対象者負担１割KEY));
+        para.setJigyotaishoshafutanniwari(div.getChkFutanWariaiKubun().getSelectedKeys().contains(事業対象者負担２割KEY));
+        para.setCsvkomokumeifuka(get項目名付加());
+        para.setCsvrenbanfuka(get連番付加());
+        para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
+        para.setAtenacyusyutsujyoken(get宛名抽出条件());
+        para.setCyohyoid(汎用リスト_後期高齢者帳票ID);
+        para.setSyutsuryokujun(div.getCcdShutsuryokujun().get出力順ID());
+        para.setSyutsuryokukomoku(get出力項目());
         return para;
     }
 
@@ -688,6 +824,7 @@ public class HanyoListParamHandler {
         restore却下者(batchParameterMap, 却下者パラメータ名称1);
         restore喪失区分(batchParameterMap, 喪失区分パラメータ名称1);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称1, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_訪問介護利用者負担額減額BatchParameter(BatchParameterMap batchParameterMap) {
@@ -696,6 +833,7 @@ public class HanyoListParamHandler {
         restore却下者(batchParameterMap, 却下者パラメータ名称1);
         restore喪失区分(batchParameterMap, 喪失区分パラメータ名称1);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称1, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_社会福祉法人軽減BatchParameter(BatchParameterMap batchParameterMap) {
@@ -704,6 +842,7 @@ public class HanyoListParamHandler {
         restore却下者(batchParameterMap, 却下者パラメータ名称1);
         restore喪失区分(batchParameterMap, 喪失区分パラメータ名称1);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称1, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_特別地域加算減免BatchParameter(BatchParameterMap batchParameterMap) {
@@ -712,6 +851,7 @@ public class HanyoListParamHandler {
         restore却下者(batchParameterMap, 却下者パラメータ名称1);
         restore喪失区分(batchParameterMap, 喪失区分パラメータ名称1);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称1, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_負担限度額認定BatchParameter(BatchParameterMap batchParameterMap) {
@@ -723,27 +863,30 @@ public class HanyoListParamHandler {
         restore却下者(batchParameterMap, 却下者パラメータ名称1);
         restore喪失区分(batchParameterMap, 喪失区分パラメータ名称1);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称1, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_国保BatchParameter(BatchParameterMap batchParameterMap) {
         restore喪失区分(batchParameterMap, 喪失区分パラメータ名称1);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_後期高齢者BatchParameter(BatchParameterMap batchParameterMap) {
         restore喪失区分(batchParameterMap, 喪失区分パラメータ名称1);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_事業対象者BatchParameter(BatchParameterMap batchParameterMap) {
         restore事業対象者データ抽出(batchParameterMap, 事業対象者データ抽出パラメータ名称);
         restore共通(batchParameterMap);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore汎用リスト_利用者負担割合BatchParameter(BatchParameterMap batchParameterMap) {
         restore表題(batchParameterMap, 表題パラメータ名称);
-        //para.setDetasyubetsumesyo(利用者負担額減額データ種別名);   //TODO
-        restore出力方法(batchParameterMap, 出力方法パラメータ名称);    //TODO 出力方法
+        restore出力方法(batchParameterMap, 出力方法パラメータ名称);
         restore抽出方法区分(batchParameterMap, 抽出方法区分パラメータ名称1);
         FlexibleYear 年度 = batchParameterMap.getParameterValue(FlexibleYear.class, 年度パラメータ名称);
         div.getDdlKijunNendo().setSelectedKey(年度.toDateString());
@@ -767,13 +910,12 @@ public class HanyoListParamHandler {
         div.getChkFutanWariaiKubun().setSelectedItemsByKey(事業対象者負担selectedKeys);
         restoreCSV編集方法(batchParameterMap, 項目名付加パラメータ名称1, 連番付加パラメータ名称1, 日付スラッシュ付加パラメータ名称1);
         restore宛名抽出条件(batchParameterMap, 宛名抽出条件パラメータ名称1);
-        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称1, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
+        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private void restore共通(BatchParameterMap batchParameterMap) {
         restore表題(batchParameterMap, 表題パラメータ名称);
-        //para.setDetasyubetsumesyo(利用者負担額減額データ種別名); //TODO
-        restore出力方法(batchParameterMap, 出力方法パラメータ名称); //TODO 出力方法
+        restore出力方法(batchParameterMap, 出力方法パラメータ名称);
         restore抽出方法区分(batchParameterMap, 抽出方法区分パラメータ名称1);
         restore抽出項目区分(batchParameterMap, 抽出項目区分パラメータ名称1);
         restore基準日(batchParameterMap, 基準日パラメータ名称1);
@@ -781,11 +923,14 @@ public class HanyoListParamHandler {
         restore日付範囲To(batchParameterMap, 日付範囲終了パラメータ名称1);
         restoreCSV編集方法(batchParameterMap, 項目名付加パラメータ名称1, 連番付加パラメータ名称1, 日付スラッシュ付加パラメータ名称1);
         restore宛名抽出条件(batchParameterMap, 宛名抽出条件パラメータ名称1);
-        restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称1, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
     private RString get表題() {
         return div.getTxtHyodaiMeisho().getValue();
+    }
+
+    private RString get出力方法() {
+        return div.getRadShuturyokuHoho().getSelectedKey();
     }
 
     private ChushutsuHohoKubun get基準日範囲抽出方法区分() {
@@ -811,6 +956,24 @@ public class HanyoListParamHandler {
             return ChushutsuKomokuKubun.有効期限;
         } else {
             return ChushutsuKomokuKubun.決定日;
+        }
+    }
+
+    private ChushutsuKomokuKubun get取得喪失RbGr抽出項目区分() {
+        if (取得日KEY.equals(div.getRadHaniJoken3().getSelectedKey())) {
+            return ChushutsuKomokuKubun.取得日;
+        } else {
+            return ChushutsuKomokuKubun.喪失日;
+        }
+    }
+
+    private ChushutsuKomokuKubun get適用開始日RbGr抽出項目区分() {
+        if (適用開始日KEY.equals(div.getRadHaniJoken4().getSelectedKey())) {
+            return ChushutsuKomokuKubun.適用開始日;
+        } else if (適用終了日KEY.equals(div.getRadHaniJoken4().getSelectedKey())) {
+            return ChushutsuKomokuKubun.適用終了日;
+        } else {
+            return ChushutsuKomokuKubun.チェックリスト実施日;
         }
     }
 
@@ -915,7 +1078,8 @@ public class HanyoListParamHandler {
     }
 
     private void restore出力方法(BatchParameterMap map, RString fieldName) {
-        //TODO
+        RString 出力方法 = map.getParameterValue(RString.class, fieldName);
+        div.getRadShuturyokuHoho().setSelectedKey(出力方法);
     }
 
     private void restore抽出方法区分(BatchParameterMap map, RString fieldName) {
@@ -986,7 +1150,7 @@ public class HanyoListParamHandler {
         if (直近データ抽出) {
             selectedKeys.add(直近データのみKEY);
         }
-        div.getChkChokkinNomi2().setSelectedItemsByKey(selectedKeys); //TODO
+        div.getChkChokkinNomi2().setSelectedItemsByKey(selectedKeys);
 
     }
 
@@ -996,7 +1160,7 @@ public class HanyoListParamHandler {
         if (申請者データ抽出) {
             selectedKeys.add(申請者データ抽出KEY);
         }
-        div.getChkShinseishaNomi().setSelectedItemsByKey(selectedKeys); //TODO
+        div.getChkShinseishaNomi().setSelectedItemsByKey(selectedKeys);
     }
 
     private void restore旧措置者(BatchParameterMap map, RString fieldName) {
@@ -1119,7 +1283,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_施設入退所() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(表示, 非表示, 非表示, 非表示);
@@ -1140,7 +1304,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_利用者負担額減免() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1163,7 +1327,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_訪問介護利用者負担額減額() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1186,7 +1350,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_社会福祉法人軽減() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1208,8 +1372,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_特別地域加算減免() {
-        set出力方法ラジオボタン_グループ();
-        set年度基準日パネル(非表示);
+        init出力方法ラジオボタン_グループ();
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
         div.getRadHaniJoken2().setSelectedKey(申請日KEY);
@@ -1230,7 +1393,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_負担限度額認定() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1252,7 +1415,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_国保() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 表示, 非表示, 非表示);
@@ -1273,7 +1436,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_後期高齢者() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 表示, 非表示, 非表示);
@@ -1294,7 +1457,7 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_事業対象者() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 非表示, 表示);
@@ -1322,10 +1485,9 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_利用者負担割合() {
-        set出力方法ラジオボタン_グループ();
+        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(表示);
         div.getRadChushutsuJokenA1().setSelectedKey(年度KEY);
-        div.getRadChushutsuJokenA2().setSelectedKey(年度KEY);
         div.getDdlKijunNendo().setSelectedKey(NendoUtil.getNendo(RDate.getNowDate()).toDateString());
         div.getTxtKijunDateA().clearValue();
         set基準日RbGr();
@@ -1361,14 +1523,16 @@ public class HanyoListParamHandler {
     }
 
     private void set表題パネル(RString 表題) {
-        div.getTxtHyodaiMeisho().setDisplayNone(true);
-        div.getTxtHyodaiMeisho().setDisabled(true);
         div.getTxtHyodaiMeisho().setValue(表題);
     }
 
-    //TODO 　出力方法ラジオボタン・グループ
-    private void set出力方法ラジオボタン_グループ() {
+    private void set表題パネルis非表示(boolean is非表示) {
+        div.getTxtHyodaiMeisho().setDisplayNone(is非表示);
+        div.getTxtHyodaiMeisho().setDisabled(is非表示);
+    }
 
+    private void init出力方法ラジオボタン_グループ() {
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.帳票_CSV出力.getコード());
     }
 
     private void set年度基準日パネル(boolean is非表示) {
@@ -1378,7 +1542,6 @@ public class HanyoListParamHandler {
 
     private void set基準日RbGr() {
         div.getRadChushutsuJokenB1().setSelectedKey(基準日KEY);
-        div.getRadChushutsuJokenB2().setSelectedKey(基準日KEY);
     }
 
     private void set基準日範囲パネル(boolean 入所is非表示, boolean 取得喪失is非表示, boolean 申請日is非表示, boolean 適用開始日is非表示) {
