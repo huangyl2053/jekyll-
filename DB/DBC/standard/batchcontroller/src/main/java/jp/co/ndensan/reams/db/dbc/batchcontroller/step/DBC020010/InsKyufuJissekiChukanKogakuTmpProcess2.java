@@ -28,9 +28,12 @@ public class InsKyufuJissekiChukanKogakuTmpProcess2 extends BatchProcessBase<Kyu
             + "kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
             + "select給付実績中間高額一時の作成2");
     private static final RString TABLE_給付実績中間高額一時2 = new RString("TempKyufujissekiTyukann2");
+    private static final RString TABLE_給付実績中間高額一時3 = new RString("TempKyufujissekiTyukann3");
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter;
+    private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter2;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter3;
 
     @Override
     protected void beforeExecute() {
@@ -44,8 +47,10 @@ public class InsKyufuJissekiChukanKogakuTmpProcess2 extends BatchProcessBase<Kyu
 
     @Override
     protected void createWriter() {
-        kyufujissekiTyukannWriter = new BatchEntityCreatedTempTableWriter(
+        kyufujissekiTyukannWriter2 = new BatchEntityCreatedTempTableWriter(
                 TABLE_給付実績中間高額一時2, TempKyufujissekiTyukannEntity.class);
+        kyufujissekiTyukannWriter3 = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績中間高額一時3, TempKyufujissekiTyukannEntity.class);
     }
 
     @Override
@@ -53,11 +58,12 @@ public class InsKyufuJissekiChukanKogakuTmpProcess2 extends BatchProcessBase<Kyu
         TempKyufujissekiTyukannEntity data = new TempKyufujissekiTyukannEntity();
         set給付実績基本情報(data, entity.get給付実績基本情報高額一時());
         set世帯員所得判定明細高額一時(data, entity.get世帯員所得判定明細高額一時());
-        kyufujissekiTyukannWriter.insert(data);
+        kyufujissekiTyukannWriter2.insert(data);
     }
 
     @Override
     protected void afterExecute() {
+        kyufujissekiTyukannWriter3.getInsertCount();
     }
 
     private void set給付実績基本情報(TempKyufujissekiTyukannEntity entity, DbT3017KyufujissekiKihonEntity 実績基本) {

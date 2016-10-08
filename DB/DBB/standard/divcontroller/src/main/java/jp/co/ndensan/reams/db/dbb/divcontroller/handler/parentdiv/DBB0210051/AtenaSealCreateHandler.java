@@ -144,7 +144,7 @@ public class AtenaSealCreateHandler {
         RString 資格区分 = get資格区分(div.getDdlShikakuKubun().getSelectedKey());
         RString 市町村指定のkey = div.getDdlShicyouson().getSelectedKey();
         RString 市町村指定のvalue = div.getDdlShicyouson().getSelectedValue();
-        RString 市町村指定;
+        RString 市町村指定 = null;
         if (市町村指定のkey != null) {
             市町村指定 = 市町村指定のkey.concat(RString.HALF_SPACE).concat(市町村指定のvalue);
         }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseis
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -20,10 +21,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KijunShunyugakuTekiyoShinseishoHakkoIchiranReport extends Report<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> {
 
     private final KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者;
-    private final RString 市町村番号;
-    private final RString 市町村名;
+    private final RString 保険者番号;
+    private final RString 保険者名称;
     private final List<RString> 出力順リスト;
     private final List<RString> 改頁リスト;
+    private final FlexibleYear 年度;
 
     /**
      * コンストラクタです。
@@ -33,34 +35,38 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranReport extends Report<Ki
      * @param 市町村名 RString
      * @param 出力順リスト List<RString>
      * @param 改頁リスト List<RString>
+     * @param 処理年度 FlexibleYear
      */
     public KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
             KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者,
             RString 市町村番号,
             RString 市町村名,
             List<RString> 出力順リスト,
-            List<RString> 改頁リスト) {
+            List<RString> 改頁リスト,
+            FlexibleYear 処理年度) {
         this.発行対象者 = 発行対象者;
-        this.市町村番号 = 市町村番号;
-        this.市町村名 = 市町村名;
+        this.保険者番号 = 市町村番号;
+        this.保険者名称 = 市町村名;
         this.出力順リスト = 出力順リスト;
         this.改頁リスト = 改頁リスト;
+        this.年度 = 処理年度;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> writer) {
-        writeLine(writer, 発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト);
+        writeLine(writer, 発行対象者, 保険者番号, 保険者名称, 出力順リスト, 改頁リスト, 年度);
     }
 
     private void writeLine(ReportSourceWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> writer,
             KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者,
-            RString 市町村番号,
-            RString 市町村名,
+            RString 保険者番号,
+            RString 保険者名称,
             List<RString> 出力順リスト,
-            List<RString> 改頁リスト) {
+            List<RString> 改頁リスト,
+            FlexibleYear 年度) {
 
         IKijunShunyugakuTekiyoShinseishoHakkoIchiranEditor editor
-                = new KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor(発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト);
+                = new KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor(発行対象者, 保険者番号, 保険者名称, 出力順リスト, 改頁リスト, 年度);
 
         IKijunShunyugakuTekiyoShinseishoHakkoIchiranBuilder builder = new KijunShunyugakuTekiyoShinseishoHakkoIchiranBuilder(editor);
         writer.writeLine(builder);

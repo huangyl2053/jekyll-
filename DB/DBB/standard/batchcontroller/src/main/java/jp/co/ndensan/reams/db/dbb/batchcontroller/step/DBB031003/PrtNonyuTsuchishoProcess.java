@@ -241,7 +241,6 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         出力帳票一覧 = processParameter.get出力帳票一覧();
         帳票名 = manager.get帳票名_納入(出力帳票一覧.get帳票ID().getColumnValue());
         通知書共通情報entity = manager.get通知書共通情報(processParameter.get調定年度(), processParameter.get納入_出力期());
-        出力帳票一覧 = processParameter.get出力帳票一覧();
 
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
@@ -271,10 +270,10 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         NonyuTsuchiShoSeigyoJohoLoaderFinder finder = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance(processParameter.get調定年度());
         本算定納入通知書制御情報 = finder.get本算定納入通知書制御情報();
 
+        帳票タイプ = manager.get帳票タイプ(出力帳票一覧.get帳票ID());
+
         出力期リスト = manager.get出力期リスト(processParameter.get調定年度(), processParameter.get納入_出力方法(),
                 帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);
-
-        帳票タイプ = manager.get帳票タイプ(出力帳票一覧.get帳票ID());
 
         List<NokiJoho> 期月List = manager.get期月リスト(processParameter.get調定年度(), processParameter.get納入_出力方法(),
                 帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);

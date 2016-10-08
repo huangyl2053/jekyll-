@@ -53,13 +53,16 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onLoad(IryouhiKoujyoDiv div) {
-        TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
+        if (!ResponseHolder.isReRequest()) {
+            TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
+                return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
+            }
+            List<IryohiKojoEntityResult> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
+            ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList(医療費控除リスト));
+            return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
         }
-        List<IryohiKojoEntityResult> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
-        ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList(医療費控除リスト));
-        return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -165,15 +168,6 @@ public class IryouhiKoujyo {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             getHandler(div).init詳細データ();
             return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
-        }
-        RString データ区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
-        if (IryoHiKojoNaiyo.主治医意見書確認書.getコード().equals(データ区分)) {
-            div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD()
-                    .setValue(治医意見書受領年月日 != null && !治医意見書受領年月日.isEmpty() ? new RDate(治医意見書受領年月日.toString()) : null);
-            div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD()
-                    .setValue(認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty() ? new RDate(認定有効期間終了年月日.toString()) : null);
-            div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD()
-                    .setValue(認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty() ? new RDate(認定有効期間開始年月日.toString()) : null);
         }
         return ResponseData.of(div).respond();
     }

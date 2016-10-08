@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicehitaishoshaichiran.KogakuServicehiTaishoshaIchiranOutput;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakusogojigyoservicehihanteierrorichiran.KogakuSogoJigyoServicehiHanteiErrorIchiranReport;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.KogakuServicehiHanteiErrorCSVEntity;
@@ -19,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakusogojigyoservicehihante
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -42,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -90,7 +88,6 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
     private FileSpoolManager manager;
     private Association 地方公共団体;
     private List<PersonalData> personalDataList;
-    private RString 出力順;
     private List<RString> 出力項目リスト;
     private List<RString> 改頁項目リスト;
     private List<KogakuSogoJigyoServicehiHanteiErrorListEntity> errorList;
@@ -116,9 +113,7 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
 
     @Override
     protected IBatchReader createReader() {
-        KyufuJissekiKihonKogakuMybatisParameter param = new KyufuJissekiKihonKogakuMybatisParameter();
-        param.set出力順(出力順);
-        return new BatchDbReader(MYBATISPATH, param);
+        return new BatchDbReader(MYBATISPATH);
     }
 
     @Override
@@ -178,8 +173,7 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
         RString 帳票作成日時 = YMDHMS.now().getRDateTime().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
         csvEntity.set作成日時(作成年月日.concat(帳票作成日時).concat(RString.FULL_SPACE).concat(作成));
-        //TODO
-        csvEntity.set審査年月(format審査年月(parameter.get審査年月From(), parameter.get審査年月To()));
+        csvEntity.set審査年月(format審査年月(parameter.get処理年月()));
         csvEntity.set市町村コード(getColumnValue(entity.get市町村コード()));
         csvEntity.set市町村名称(地方公共団体.get市町村名());
         if (INT_0 < 出力項目リスト.size()) {
@@ -241,13 +235,13 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
         return RString.EMPTY;
     }
 
-    private RString format審査年月(FlexibleYearMonth 審査年月From, FlexibleYearMonth 審査年月To) {
+    private RString format審査年月(FlexibleYearMonth 審査年月) {
 
-        if (審査年月From != null && 審査年月To != null) {
-            RString format審査年月From = 審査年月From.wareki().firstYear(FirstYear.ICHI_NEN)
+        if (審査年月 != null) {
+            RString format審査年月From = 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
-            RString format審査年月To = 審査年月To.wareki().firstYear(FirstYear.ICHI_NEN)
+            RString format審査年月To = RDate.getNowDate().getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN)
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             return format審査年月From.concat(RString.FULL_SPACE)
@@ -263,8 +257,6 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
         if (outputOrder == null || outputOrder.get設定項目リスト() == null) {
             return;
         }
-        出力順 = MyBatisOrderByClauseCreator.create(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.class,
-                outputOrder);
         int i = INT_1;
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
             if (i <= INT_5) {

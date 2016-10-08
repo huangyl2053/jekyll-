@@ -104,16 +104,6 @@ public class tabChushutsuJokenDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public Button getBtnHihokenshaNoFromSearch() {
-        return this.getTplChushutsuJoken1().getBtnHihokenshaNoFromSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
-        this.getTplChushutsuJoken1().setBtnHihokenshaNoFromSearch(btnHihokenshaNoFromSearch);
-    }
-
-    @JsonIgnore
     public TextBoxCode getTxtRangeHihokenshaNoTo() {
         return this.getTplChushutsuJoken1().getTxtRangeHihokenshaNoTo();
     }
@@ -121,6 +111,16 @@ public class tabChushutsuJokenDiv extends TabContainer {
     @JsonIgnore
     public void  setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
         this.getTplChushutsuJoken1().setTxtRangeHihokenshaNoTo(txtRangeHihokenshaNoTo);
+    }
+
+    @JsonIgnore
+    public Button getBtnHihokenshaNoFromSearch() {
+        return this.getTplChushutsuJoken1().getBtnHihokenshaNoFromSearch();
+    }
+
+    @JsonIgnore
+    public void  setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
+        this.getTplChushutsuJoken1().setBtnHihokenshaNoFromSearch(btnHihokenshaNoFromSearch);
     }
 
     @JsonIgnore

@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
@@ -20,9 +18,7 @@ public class UpdSetaiinHaakuNyuryokuKogakuTmpProcess extends SimpleBatchProcessB
 
     @Override
     protected void process() {
-        MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
-        IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper = mapperProvider.
-                create(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
+        IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
         mapper.世帯員把握入力一時の更新1();
         mapper.世帯員把握入力一時の更新2();
         mapper.世帯員把握入力一時の更新3();

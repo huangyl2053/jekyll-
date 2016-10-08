@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.HihokenSeikatsuRoreiRelateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiinShotokuHanteiMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2010-040 chenaoqi
  */
-public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<SetaiinShotokuHanteiMeisaiTempEntity> {
+public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<TempSetaiinShotokuHanteiEntity> {
 
     private static final RString MYBATISPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
             + ".kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.select世帯員所得情報一時");
@@ -69,11 +69,11 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Se
     @Override
     protected void createWriter() {
         tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細一時,
-                SetaiinShotokuHanteiMeisaiTempEntity.class);
+                TempSetaiinShotokuHanteiEntity.class);
     }
 
     @Override
-    protected void process(SetaiinShotokuHanteiMeisaiTempEntity entity) {
+    protected void process(TempSetaiinShotokuHanteiEntity entity) {
         if (区分_1.equals(減免前後課税区分)) {
             entity.setHonninKazeiKubun(entity.getKazeiKubun());
         } else if (区分_2.equals(減免前後課税区分)) {
@@ -96,14 +96,14 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Se
         List<HihokenSeikatsuRoreiRelateEntity> 被保生保老齢情報List = mapper.select被保生保老齢情報();
         boolean 課税区分flag = false;
         for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
-            SetaiinShotokuHanteiMeisaiTempEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
+            TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
             if (KazeiKubun.課税.getコード().equals(判定明細Entity.getHonninKazeiKubun())) {
                 課税区分flag = true;
                 break;
             }
         }
         for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
-            SetaiinShotokuHanteiMeisaiTempEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
+            TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
             List<UrT0508SeikatsuHogoJukyushaEntity> 生保情報List = 被保生保老齢情報.get生保情報List();
             DbT7006RoreiFukushiNenkinJukyushaEntity 老齢情報Entity = 被保生保老齢情報.get老齢情報Entity();
             boolean flag = false;
@@ -118,7 +118,7 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Se
             }
             if (老齢情報Entity != null && 老齢情報Entity.getShikibetsuCode() != null
                     && !老齢情報Entity.getShikibetsuCode().isEmpty()) {
-                判定明細Entity.setRoreiFukushiKubun(区分_1);
+                判定明細Entity.setRoreiFukushi(区分_1);
             }
             if (被保生保老齢情報.get被保険者情報Entity() != null) {
                 HihokenshaDaicho 被保険者情報 = new HihokenshaDaicho(被保生保老齢情報.get被保険者情報Entity());
@@ -129,7 +129,7 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Se
                 if (被保険者番号 != null && !被保険者番号.isEmpty() && 資格取得日 != null
                         && 資格取得日.isBeforeOrEquals(基準年月日) && 基準年月日 != null && 基準年月日.isBefore(資格喪失年月日)) {
                     判定明細Entity.setSetaiinHihokenshaNo(被保険者番号);
-                    判定明細Entity.setSetaiinHihokenshaKubun(被保険者情報.get被保険者区分コード());
+                    判定明細Entity.setSetaiinHihokenshakubun(被保険者情報.get被保険者区分コード());
                 }
             }
             if (課税区分flag) {
