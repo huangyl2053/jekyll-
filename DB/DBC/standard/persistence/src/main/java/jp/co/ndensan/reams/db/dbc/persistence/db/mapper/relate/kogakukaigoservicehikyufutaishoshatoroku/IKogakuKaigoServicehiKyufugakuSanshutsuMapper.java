@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanKogakuTmpProcess7Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.HanteiEraaResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.HihokenSeikatsuRoreiRelateEntity;
@@ -555,17 +557,18 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      * @return {@link  List<TempSetaiinShotokuHanteiEntity>}
      */
     List<TempSetaiinShotokuHanteiEntity> select世帯員所得判定明細高額一時２と宛名情報(KyufuJissekiKihonKogakuMybatisParameter param);
-//    /**
-//     * select給付実績中間高額一時の作成7メソッドです。
-//     *
-//     * @return List<InsKyufuJissekiChukanKogakuTmpProcess7Entity>
-//     */
-//    List<InsKyufuJissekiChukanKogakuTmpProcess7Entity> select給付実績中間高額一時の作成7();
-//
-//    /**
-//     * insert給付実績中間高額一時７メソッドです。
-//     *
-//     * @param entity InsKyufuJissekiChukanKogakuTmpProcess7Entity
-//     */
-//    void insert給付実績中間高額一時７(InsKyufuJissekiChukanKogakuTmpProcess7Entity entity);
+
+    /**
+     * select給付実績中間高額一時の作成7メソッドです。
+     *
+     * @return List<InsKyufuJissekiChukanKogakuTmpProcess7Entity>
+     */
+    List<InsKyufuJissekiChukanKogakuTmpProcess7Entity> select給付実績中間高額一時の作成7();
+
+    /**
+     * select給付実績中間事業高額一時の作成7メソッドです。
+     *
+     * @return List<InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity>
+     */
+    List<InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity> select給付実績中間事業高額一時の作成7();
 }
