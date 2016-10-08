@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.definition.processprm.hokenkyufushokankettei;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -26,7 +27,7 @@ public class JigyoHokokuRenkeiHokenkyufuShokanKetteiProcessParameter implements 
     private final RString 集計年月;
     private final RString 報告年月;
     private final RString 作成日付;
-    private final RString 処理日時;
+    private final YMDHMS 処理日時;
     private final RString 統計対象区分;
     private final RString 市町村コード;
     private final RString 構成市町村区分;
@@ -63,7 +64,7 @@ public class JigyoHokokuRenkeiHokenkyufuShokanKetteiProcessParameter implements 
             RString 集計年月,
             RString 報告年月,
             RString 作成日付,
-            RString 処理日時,
+            YMDHMS 処理日時,
             RString 統計対象区分,
             RString 市町村コード,
             RString 構成市町村区分,

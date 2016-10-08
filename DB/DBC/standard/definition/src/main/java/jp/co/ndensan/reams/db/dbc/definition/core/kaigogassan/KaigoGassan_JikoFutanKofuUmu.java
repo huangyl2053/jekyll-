@@ -62,6 +62,6 @@ public enum KaigoGassan_JikoFutanKofuUmu {
                 return jikoFutanKofuUmu;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_異動区分"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_自己負担額証明書交付申請の有無"));
     }
 }

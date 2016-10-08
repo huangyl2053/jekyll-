@@ -26,16 +26,11 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninshoResult {
     private RString 承認不承認;
     private RString 承認年月日;
     private RString 不承認の理由;
-    private RString 給付の種類;
     private RString 事業所名;
     private RString 代表者氏名;
     private RString 事業所郵便番号;
     private RString 事業所電話番号;
     private RString 事業所所在地;
-    private RString 費用額合計;
-    private RString 保険対象費用額;
-    private RString 介護保険利用者自己負担額;
-    private RString 保険給付費額;
     private RString 通知文2;
     private RString 郵便番号;
     private RString 行政区名;

@@ -46,16 +46,16 @@ public class KaigokyufuhiKagoMoshitateshoOutPageBreak extends PageBreaker<KyufuK
                 && !currentSource.getSource().listUpper_11.equals(nextSource.getSource().listUpper_11)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.町域コード.get項目ID())
-                && !currentSource.getSource().listUpper_12.equals(nextSource.getSource().listUpper_11)) {
+                && !currentSource.getSource().listUpper_12.equals(nextSource.getSource().listUpper_12)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.行政区コード.get項目ID())
-                && !currentSource.getSource().listUpper_13.equals(nextSource.getSource().listUpper_11)) {
+                && !currentSource.getSource().listUpper_13.equals(nextSource.getSource().listUpper_13)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.氏名５０音カナ.get項目ID())
-                && !currentSource.getSource().listUpper_14.equals(nextSource.getSource().listUpper_11)) {
+                && !currentSource.getSource().listUpper_14.equals(nextSource.getSource().listUpper_14)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.市町村コード.get項目ID())
-                && !currentSource.getSource().listUpper_15.equals(nextSource.getSource().listUpper_11)) {
+                && !currentSource.getSource().listUpper_15.equals(nextSource.getSource().listUpper_15)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {

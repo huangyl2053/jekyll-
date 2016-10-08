@@ -74,10 +74,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
 
-    private static final RString 給付の種類_高額介護サービス費 = new RString("高額介護サービス費");
     private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
     private static final RString 帳票制御共通_首長名印字位置_公印にかける = new RString("1");
-    private static final RString 帳票タイトル = new RString("介護保険給付費 受領委任承認（不承認）確認書 ");
     private ReportSourceWriter<KogakuServiceJyuryoKakuninShoSource> reportSourceWriter;
     private DbT7060KaigoJigyoshaDac 介護事業者情報DAC;
     private DbT7062KaigoJigyoshaDaihyoshaDac 介護事業者代表者情報DAC;
@@ -113,8 +111,6 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
                 result.set承認不承認(param.get決定区分());
                 result.set承認年月日(param.get決定日().wareki().eraType(EraType.KANJI_RYAKU).toDateString());
                 result.set不承認の理由(param.get承認しない理由());
-                result.set給付の種類(給付の種類_高額介護サービス費);
-                result.set介護保険利用者自己負担額(param.get利用者負担上限額());
 
                 介護事業者情報を取得する(result, param.get事業者番号());
                 介護事業者代表者情報を取得する(result, param.get事業者番号());
@@ -297,7 +293,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         entity.set住所1(result.get住所5());
         entity.set住所2(result.get住所6());
         entity.set住所3(result.get住所4());
-        //      entity.set方書Text(result.get方書());
+        entity.set方書Text(result.get方書());
         entity.set方書1(result.get方書4());
         entity.set方書2(result.get方書3());
         entity.set方書Small1(result.get方書小1());
@@ -323,27 +319,20 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         entity.set括弧Right2(result.get右括弧2());
         entity.setカスタマバーコード(result.getカスタマーバーコード());
 
-//        entity.setタイトル(帳票タイトル);
         entity.set通知文1(result.get通知文1());
         entity.set通知文2(result.get通知文2());
         entity.set被保険者氏名(result.get被保険者氏名());
         entity.set被保険者番号(result.get被保険者番号());
-        entity.set被保険者氏名カナ(RString.EMPTY);
         entity.set被保険者氏名フリガナ(result.get被保険者氏名フリガナ());
-        entity.set受付日(result.get受付年月日());
-        entity.set承認区分(result.get承認不承認());
+        entity.set受付年月日(result.get受付年月日());
+        entity.set承認不承認(result.get承認不承認());
         entity.set承認年月日(result.get承認年月日());
         entity.set不承認理由(result.get不承認の理由());
-//        entity.set給付の種類(result.get給付の種類());
         entity.set事業所名(result.get事業所名());
         entity.set代表者名(result.get代表者氏名());
         entity.set事業所郵便番号(result.get事業所郵便番号());
         entity.set事業所電話番号(result.get事業所電話番号());
         entity.set事業所所在地(result.get事業所所在地());
-//        entity.set費用額合計(result.get費用額合計());
-//        entity.set保険対象費用額(result.get保険対象費用額());
-        entity.set利用者負担上限額(result.get介護保険利用者自己負担額());
-//        entity.set保険給付額(result.get保険給付費額());
 
         return entity;
     }

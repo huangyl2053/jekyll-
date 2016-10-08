@@ -31,7 +31,12 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -234,19 +239,31 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
             抽出条件.add(temp);
         }
 
-        if (HizukeChushutsuKubun.範囲指定.getコード().equals(parameter.get日付抽出区分())) {
-            if (!RString.isNullOrEmpty(parameter.get処理対象年月From()) && RString.isNullOrEmpty(parameter.get処理対象年月To())) {
-                temp = TITLE_処理対象年月;
-                temp = temp.concat(parameter.get処理対象年月From()).concat(RString.FULL_SPACE).concat(TILDE)
-                        .concat(RString.FULL_SPACE).concat(parameter.get処理対象年月To());
-                抽出条件.add(temp);
+        if (!RString.isNullOrEmpty(parameter.get日付抽出区分()) && HizukeChushutsuKubun.範囲指定.getコード().equals(parameter.get日付抽出区分())) {
+            FlexibleYearMonth 処理対象年月From = null;
+            FlexibleYearMonth 処理対象年月To = null;
+            FlexibleYearMonth 異動年月From = null;
+            FlexibleYearMonth 異動年月To = null;
+            if (!RString.isNullOrEmpty(parameter.get処理対象年月From())) {
+                処理対象年月From = new FlexibleYearMonth(parameter.get処理対象年月From());
             }
-            if (!RString.isNullOrEmpty(parameter.get異動年月From()) && RString.isNullOrEmpty(parameter.get異動年月To())) {
-                temp = TITLE_異動年月;
-                temp = temp.concat(parameter.get異動年月From()).concat(RString.FULL_SPACE).concat(TILDE)
-                        .concat(RString.FULL_SPACE).concat(parameter.get異動年月To());
-                抽出条件.add(temp);
+            if (!RString.isNullOrEmpty(parameter.get処理対象年月To())) {
+                処理対象年月To = new FlexibleYearMonth(parameter.get処理対象年月To());
             }
+            if (!RString.isNullOrEmpty(parameter.get異動年月From())) {
+                異動年月From = new FlexibleYearMonth(parameter.get異動年月From());
+            }
+            if (!RString.isNullOrEmpty(parameter.get異動年月To())) {
+                異動年月To = new FlexibleYearMonth(parameter.get異動年月To());
+            }
+            temp = TITLE_処理対象年月;
+            temp = temp.concat(do日付編集(処理対象年月From).concat(RString.FULL_SPACE).concat(TILDE)
+                    .concat(RString.FULL_SPACE).concat(do日付編集(処理対象年月To)));
+            抽出条件.add(temp);
+            temp = TITLE_異動年月;
+            temp = temp.concat(do日付編集(異動年月From)).concat(RString.FULL_SPACE).concat(TILDE)
+                    .concat(RString.FULL_SPACE).concat(do日付編集(異動年月To));
+            抽出条件.add(temp);
             if (parameter.is各異動月の最新のみ()) {
                 抽出条件.add(各異動月の最新情報のみ);
             } else {
@@ -363,5 +380,13 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
             }
             抽出条件.add(temp);
         }
+    }
+
+    private RString do日付編集(FlexibleYearMonth date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                fillType(FillType.ZERO).toDateString();
     }
 }
