@@ -32,12 +32,12 @@ public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiK
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get取込国保情報Temp");
     @BatchWriter
     private CsvWriter<KokuhoJyohoTorikomiKakuNinCsvEntity> csvWriter;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC130010"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBZ000001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
-    private static final RString CSVファイル名 = new RString("torikomikakuninkekka.csv");
+    private static final RString CSVファイル名 = new RString("ShoriKekkaKakuninList.csv");
 
     @Override
     protected IBatchReader createReader() {

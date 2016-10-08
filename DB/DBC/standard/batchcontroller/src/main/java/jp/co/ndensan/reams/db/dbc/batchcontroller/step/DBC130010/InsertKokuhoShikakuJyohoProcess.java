@@ -21,24 +21,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-3020-030 dengwei
  */
-public class InsKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShikakuJyohoInpotoyoEntity> {
+public class InsertKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShikakuJyohoInpotoyoEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get国保資格情報インポート用Entitｙリスト");
     private IBatchTableWriter<DbT7123KokuhoShikakuInfoEntity> 国保資格情報Writer;
 
     @Override
-    protected void initialize() {
-        国保資格情報Writer = BatchWriters.batchPermanentTableWriter(DbT7123KokuhoShikakuInfoEntity.class).build();
-    }
-
-    @Override
     protected void beforeExecute() {
         IKokuhoShikakuIdoInMapper mapper = getMapper(IKokuhoShikakuIdoInMapper.class);
         if (!mapper.get国保資格情報インポート用Entitｙリスト().isEmpty()) {
-            for (DbT7123KokuhoShikakuInfoEntity entity : mapper.get国保資格情報の全データ()) {
-                国保資格情報Writer.delete(entity);
-            }
+            mapper.delete国保資格情報();
         }
     }
 
@@ -49,6 +42,7 @@ public class InsKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShikaku
 
     @Override
     protected void createWriter() {
+        国保資格情報Writer = BatchWriters.batchPermanentTableWriter(DbT7123KokuhoShikakuInfoEntity.class).build();
     }
 
     @Override
