@@ -78,6 +78,7 @@
         <result property="町域コード" column="PSM_choikiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="行政区コード" column="PSM_gyoseikuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="世帯コード" column="PSM_setaiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="様式" column="DbT3118_meisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
      
     <select resultOrdered="true" id="get受給者給付実績" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranMybatisParameter" 
@@ -132,7 +133,7 @@ SELECT
 	DbT7060A."jigyoshaName" AS T2_jigyoshaName,																										
 	'',																	
 	'',
-        ''															
+        DbT3118."meisho2" AS DbT3118_meisho2															
 FROM																												
 	rgdb."DbT3017KyufujissekiKihon" AS DbT3017																											
 LEFT JOIN 
@@ -155,7 +156,13 @@ LEFT JOIN (
         FROM
           rgdb."DbT1001HihokenshaDaicho" AS DbT1001
       ) AS T4 
-       ON  DbT3017."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"																										
+       ON  DbT3017."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"
+LEFT JOIN 
+      rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+     ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo"
+     AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+     AND (DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+     or DbT3118."tekiyoShuryoYM" = '')																										
 LEFT JOIN 																												
 	rgua.${psmShikibetsuTaisho} AS PSM
         ON
@@ -461,7 +468,7 @@ LEFT JOIN
 	'',								
 	'',									
 	'',
-        ''									
+        DbT3118."meisho2" AS DbT3118_meisho2							
 FROM																			
 	rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS T1																		
 LEFT JOIN 																			
@@ -469,9 +476,15 @@ LEFT JOIN
 	DbT1001."shikibetsuCode" AS "DbT1001_shikibetsuCode",																		
 	DbT1001."hihokenshaNo" AS "DbT1001_hihokenshaNo"																
 	FROM rgdb."DbT1001HihokenshaDaicho" AS DbT1001 ) AS T4																		
-	ON T1."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"																		
+	ON T1."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"
+LEFT JOIN 
+       rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+       ON DbT3118."shikibetsuNo" = T1."inputShikibetsuNo"
+       AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> T1."serviceTeikyoYM"
+       AND (T1."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+       OR DbT3118."tekiyoShuryoYM" = '')																		
 LEFT JOIN 																			
-	rgua.${psmShikibetsuTaisho} AS PSM
+	rgua.${psmShikibetsuTaisho} AS PSM 
         ON
         T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"	
          <where>
