@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 住宅改修理由書作成手数料請求書兼申請書作成のマッピング用XMLです。--> 
+<!-- @reamsid_L DBC-2860-010 dangjingjing -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.tesuryoseikyukenshinseishosakusei.ITesuryoSeikyuKenShinseishoSakuseiMapper">
+               
+    <resultMap id="resultMap_selectKetteiTimestamp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiRelateEntity" 
+               autoMapping="true">
+        <result property="対象開始日時" column="DbT7022_Temp_対象開始日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="対象終了日時" column="DbT7022_Temp_対象終了日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="select日時" resultMap="resultMap_selectKetteiTimestamp" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiMybatisParameter" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+          DbT7022."taishoKaishiTimestamp" AS DbT7022_Temp_対象開始日時,
+          DbT7022."taishoShuryoTimestamp" AS DbT7022_Temp_対象終了日時 
+        FROM
+          rgdb."DbT7022ShoriDateKanri" AS DbT7022 
+        WHERE
+          DbT7022."subGyomuCode" = #{サブ業務コード}
+          AND 
+          DbT7022."shichosonCode" = #{市町村コード}
+          AND
+          DbT7022."shoriName" = #{処理名}
+          AND 
+          DbT7022."shoriEdaban" = ( 
+            SELECT
+              MAX(DbT7022."shoriEdaban") 
+            FROM
+              rgdb."DbT7022ShoriDateKanri" AS DbT7022
+          ) 
+          AND 
+          DbT7022."nendo" = ( 
+            SELECT
+              MAX(DbT7022."nendo") 
+            FROM
+              rgdb."DbT7022ShoriDateKanri" AS DbT7022
+          ) 
+          AND 
+          DbT7022."nendoNaiRenban" = ( 
+            SELECT
+              MAX(DbT7022."nendoNaiRenban") 
+            FROM
+              rgdb."DbT7022ShoriDateKanri" AS DbT7022
+          ) 
+    </select>
+</mapper>

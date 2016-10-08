@@ -450,7 +450,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         RString 帳票物理名 = RString.EMPTY;
 
         if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.郵便番号.get項目ID() == 項目ID) {
-            帳票物理名 = new RString("listUpper_2");
+            帳票物理名 = new RString("listCenter_2");
         } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.行政区コード.
                 get項目ID() == 項目ID) {
             帳票物理名 = new RString("listLower_2");

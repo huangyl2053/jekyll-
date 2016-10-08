@@ -42,11 +42,11 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private boolean is対象リスト_認定者リスト;
     private boolean is世帯表示_表示する;
     private boolean is世帯表示_表示しない;
-    private boolean is利用者負担1から3段階;
-    private boolean is利用者負担1段階;
-    private boolean is利用者負担2段階;
-    private boolean is利用者負担3段階;
-    private boolean is利用者負担4段階_高齢者複数世帯;
+    private boolean 利用者負担1から3段階is;
+    private boolean 利用者負担1段階is;
+    private boolean 利用者負担2段階is;
+    private boolean 利用者負担3段階is;
+    private boolean 利用者負担4段階_高齢者複数世帯is;
     private RString 利用者負担1から3段階;
     private RString 利用者負担1段階;
     private RString 利用者負担2段階;
@@ -162,28 +162,28 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     }
 
     private void edit利用者負担段階(RiyoshaFutanDankaiHanni 利用者負担段階) {
-        if (RiyoshaFutanDankaiHanni.利用者負担1から3段階.getコード().equals(利用者負担段階.getコード())) {
-            is利用者負担1から3段階 = true;
+        if (RiyoshaFutanDankaiHanni.利用者負担1から3段階.getコード() == 利用者負担段階.getコード()) {
+            利用者負担1から3段階is = true;
         }
-        if (RiyoshaFutanDankaiHanni.利用者負担1段階.getコード().equals(利用者負担段階.getコード())) {
-            is利用者負担1段階 = true;
+        if (RiyoshaFutanDankaiHanni.利用者負担1段階.getコード() == 利用者負担段階.getコード()) {
+            利用者負担1段階is = true;
         }
-        if (RiyoshaFutanDankaiHanni.利用者負担2段階.getコード().equals(利用者負担段階.getコード())) {
-            is利用者負担2段階 = true;
+        if (RiyoshaFutanDankaiHanni.利用者負担2段階.getコード() == 利用者負担段階.getコード()) {
+            利用者負担2段階is = true;
         }
-        if (RiyoshaFutanDankaiHanni.利用者負担3段階.getコード().equals(利用者負担段階.getコード())) {
-            is利用者負担3段階 = true;
+        if (RiyoshaFutanDankaiHanni.利用者負担3段階.getコード() == 利用者負担段階.getコード()) {
+            利用者負担3段階is = true;
         }
-        if (RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード().equals(利用者負担段階.getコード())) {
-            is利用者負担4段階_高齢者複数世帯 = true;
+        if (RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード() == 利用者負担段階.getコード()) {
+            利用者負担4段階_高齢者複数世帯is = true;
         }
     }
 
     private void edit世帯表示(SetaiHyoji 世帯表示) {
-        if (SetaiHyoji.表示する.getコード().equals(世帯表示.getコード())) {
+        if (SetaiHyoji.表示する.getコード() == 世帯表示.getコード()) {
             is世帯表示_表示する = true;
         }
-        if (SetaiHyoji.表示しない.getコード().equals(世帯表示.getコード())) {
+        if (SetaiHyoji.表示しない.getコード() == 世帯表示.getコード()) {
             is世帯表示_表示しない = true;
         }
     }
