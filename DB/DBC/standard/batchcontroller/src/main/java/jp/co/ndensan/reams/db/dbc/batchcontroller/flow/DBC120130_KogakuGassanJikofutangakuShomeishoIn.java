@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -219,7 +218,7 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
         KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter processparameter
                 = new KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter();
         processparameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        processparameter.set帳票ID(new ReportId(ReportIdDBC.DBC200034.getReportId().getColumnValue()));
+        processparameter.set帳票ID(ReportIdDBC.DBC200034.getReportId());
         processparameter.set出力順ID(Long.valueOf(getParameter().getShutsuryokujunId().toString()));
         processparameter.set処理年月(getParameter().getShoriYM());
         processparameter.setシステム日付(RDateTime.now());

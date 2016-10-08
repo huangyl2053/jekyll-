@@ -9,13 +9,9 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokub
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufujissekikoshinin.KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity;
-import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -49,10 +45,16 @@ public class KogakuGassanJikofutangakuShomeiService {
      * @param entity SogojigyohiSaishinsaKetteiHokenshaInEntity
      * @param parameter KohifutanshaDoIchiranhyoSakuseiProcessParameter
      * @param 連番 int
+     * @param 保険者番号 RString
+     * @param 保険者名称 RString
      * @return SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity
      */
-    public KogakuGassanJikofutangakuCsvEntity
-            toヘッダのデータ(KogakuGassanJikofutangakuShomeishoDateEntity entity, KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter parameter, int 連番) {
+    public KogakuGassanJikofutangakuCsvEntity toヘッダのデータ(
+            KogakuGassanJikofutangakuShomeishoDateEntity entity,
+            KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter parameter,
+            int 連番,
+            RString 保険者番号,
+            RString 保険者名称) {
 
         KogakuGassanJikofutangakuCsvEntity returnEntity
                 = to明細項目(entity, 連番);
@@ -64,6 +66,8 @@ public class KogakuGassanJikofutangakuShomeiService {
         RString 作成時 = parameter.getシステム日付().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(作成);
         returnEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+        returnEntity.set保険者番号(保険者番号);
+        returnEntity.set保険者名(保険者名称);
         return returnEntity;
 
     }
@@ -79,10 +83,6 @@ public class KogakuGassanJikofutangakuShomeiService {
 
         KogakuGassanJikofutangakuCsvEntity resultEntity
                 = new KogakuGassanJikofutangakuCsvEntity();
-        resultEntity.set保険者番号(
-                DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
-        resultEntity.set保険者名(
-                DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         resultEntity.setNo(new RString(連番));
         resultEntity.set証記載保険者番号(entity.get高額合算自己負担額_保険者番号());
         resultEntity.set証記載保険者名(entity.get高額合算自己負担額_保険者名());
