@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.report.KogakuGassanJikofutangaku;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.GassanJikofutangakuShomeishoTorikomiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -23,49 +23,44 @@ public class KogakuGassanJikofutangakuShomeiReport extends Report<GassanJikofuta
 
     private final KogakuGassanJikofutangakuShomeishoDateEntity entity;
     private final FlexibleYearMonth 処理年月;
-    private final RString 並び順の１件目;
-    private final RString 並び順の２件目;
-    private final RString 並び順の３件目;
-    private final RString 並び順の４件目;
-    private final RString 並び順の５件目;
     private final List<RString> 改頁項目List;
-    private final YMDHMS システム日時;
+    private final RDateTime システム日時;
     private final int 連番;
+    private final RString 保険者番号;
+    private final RString 保険者名称;
 
     /**
      * インスタンスを生成します。
      *
      * @param 処理年月 FlexibleYearMonth
      * @param entity ChohyoShutsuryokuTaishoDateEntity
-     * @param 並び順の１件目 RString
-     * @param 並び順の２件目 RString
-     * @param 並び順の３件目 RString
-     * @param 並び順の４件目 RString
-     * @param 並び順の５件目 RString
      * @param 改頁項目List List<RString>
-     * @param システム日時 YMDHMS
+     * @param システム日時 RDateTime
      * @param 連番 int
+     * @param 保険者番号 RString
+     * @param 保険者名称 RString
      */
-    public KogakuGassanJikofutangakuShomeiReport(FlexibleYearMonth 処理年月, KogakuGassanJikofutangakuShomeishoDateEntity entity,
-            RString 並び順の１件目, RString 並び順の２件目, RString 並び順の３件目,
-            RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List, YMDHMS システム日時, int 連番) {
+    public KogakuGassanJikofutangakuShomeiReport(
+            FlexibleYearMonth 処理年月,
+            KogakuGassanJikofutangakuShomeishoDateEntity entity,
+            List<RString> 改頁項目List,
+            RDateTime システム日時,
+            int 連番,
+            RString 保険者番号,
+            RString 保険者名称) {
         this.処理年月 = 処理年月;
         this.entity = entity;
-        this.並び順の１件目 = 並び順の１件目;
-        this.並び順の２件目 = 並び順の２件目;
-        this.並び順の３件目 = 並び順の３件目;
-        this.並び順の４件目 = 並び順の４件目;
-        this.並び順の５件目 = 並び順の５件目;
         this.改頁項目List = 改頁項目List;
         this.システム日時 = システム日時;
         this.連番 = 連番;
+        this.保険者番号 = 保険者番号;
+        this.保険者名称 = 保険者名称;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<GassanJikofutangakuShomeishoTorikomiIchiranSource> reportSourceWriter) {
         IKogakuGassanJikofutangakuShomeiEditor editor
-                = new KogakuGassanJikofutangakuShomeiEditor(処理年月, entity, 並び順の１件目, 並び順の２件目,
-                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, 連番);
+                = new KogakuGassanJikofutangakuShomeiEditor(処理年月, entity, 改頁項目List, システム日時, 連番, 保険者番号, 保険者名称);
         IKogakuGassanJikofutangakuShomeiBuilder builder
                 = new KogakuGassanJikofutangakuShomeiBuilder(editor);
         reportSourceWriter.writeLine(builder);

@@ -37,7 +37,7 @@
      "layoutName": "DBD9010003",
      "layoutTitle": "主治医意見書確認書発行",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakukakuninsho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc100029.JyuryoItakuKeiyakuKakuninShoProperty;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc100029.JyuryoItakuKeiyakuKakuninShoReport;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoProperty;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100029.JyuryoItakuKeiyakuKakuninShoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.dbc100029.JyuryoItakuKeiyakuKakuninShoSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
@@ -78,7 +78,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
     private static final RString 帳票分類ID = new RString("DBC100029_JyuryoItakuKeiyakuKakuninSho");
     private static final RString 帳票制御共通_首長名印字位置_公印にかける = new RString("1");
     private static final RString 帳票タイトル = new RString("介護保険給付費 受領委任承認（不承認）確認書 ");
-    private ReportSourceWriter<JyuryoItakuKeiyakuKakuninShoSource> reportSourceWriter;
+    private ReportSourceWriter<KogakuServiceJyuryoKakuninShoSource> reportSourceWriter;
     private DbT7060KaigoJigyoshaDac 介護事業者情報DAC;
     private DbT7062KaigoJigyoshaDaihyoshaDac 介護事業者代表者情報DAC;
     private DbT7065ChohyoSeigyoKyotsuDac 帳票制御情報DAC;
@@ -99,9 +99,9 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
      * @param param KogakuServiceHiJuryoininKeiyakuKakuninshoParameter
      */
     public void getKogakuServiceHiJuryoininKeiyakuKakuninshoData(KogakuServiceHiJuryoininKeiyakuKakuninshoParameter param) {
-        JyuryoItakuKeiyakuKakuninShoProperty property = new JyuryoItakuKeiyakuKakuninShoProperty();
+        KogakuServiceJyuryoKakuninShoProperty property = new KogakuServiceJyuryoKakuninShoProperty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<JyuryoItakuKeiyakuKakuninShoSource> assembler
+            try (ReportAssembler<KogakuServiceJyuryoKakuninShoSource> assembler
                     = createAssembler(property, reportManager)) {
                 reportSourceWriter = new ReportSourceWriter(assembler);
                 KogakuServiceHiJuryoininKeiyakuKakuninshoResult result = new KogakuServiceHiJuryoininKeiyakuKakuninshoResult();
@@ -122,10 +122,9 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
                 通知書定型文情報を取得する(result);
                 送付物宛先情報を取得する(result, param.get決定日());
 
-                JyuryoItakuKeiyakuKakuninShoReport report = new JyuryoItakuKeiyakuKakuninShoReport(get帳票出力対象データ(result));
+                KogakuServiceJyuryoKakuninShoReport report = new KogakuServiceJyuryoKakuninShoReport(get帳票出力対象データ(result));
                 report.writeBy(reportSourceWriter);
             }
-            reportManager.publish();
         }
     }
 
@@ -168,7 +167,8 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
     private void 介護事業者代表者情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result, RString 事業者番号) {
         this.介護事業者代表者情報DAC = InstanceProvider.create(DbT7062KaigoJigyoshaDaihyoshaDac.class);
         DbT7062KaigoJigyoshaDaihyoshaEntity entity = 介護事業者代表者情報DAC.select介護事業者代表者情報の最新(new JigyoshaNo(事業者番号));
-        result.set代表者氏名(null == entity.getDaihyoshaShimei() ? RString.EMPTY : entity.getDaihyoshaShimei().getColumnValue());
+        result.set代表者氏名((null == entity || null == entity.getDaihyoshaShimei())
+                ? RString.EMPTY : entity.getDaihyoshaShimei().getColumnValue());
     }
 
     private void 認証者情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result, FlexibleDate 通知日) {
@@ -277,8 +277,8 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         result.setカスタマーバーコード(null == 宛先Source.customerBarCode ? RString.EMPTY : 宛先Source.customerBarCode);
     }
 
-    private JyuryoItakuKeiyakuKakuninShoEntity get帳票出力対象データ(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result) {
-        JyuryoItakuKeiyakuKakuninShoEntity entity = new JyuryoItakuKeiyakuKakuninShoEntity();
+    private KogakuServiceJyuryoKakuninShoEntity get帳票出力対象データ(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result) {
+        KogakuServiceJyuryoKakuninShoEntity entity = new KogakuServiceJyuryoKakuninShoEntity();
         entity.set文書番号(result.get文書番号());
 
         entity.set電子公印(result.get電子公印());
@@ -297,7 +297,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         entity.set住所1(result.get住所5());
         entity.set住所2(result.get住所6());
         entity.set住所3(result.get住所4());
-        entity.set方書Text(result.get方書());
+        //      entity.set方書Text(result.get方書());
         entity.set方書1(result.get方書4());
         entity.set方書2(result.get方書3());
         entity.set方書Small1(result.get方書小1());
@@ -323,25 +323,27 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         entity.set括弧Right2(result.get右括弧2());
         entity.setカスタマバーコード(result.getカスタマーバーコード());
 
-        entity.setタイトル(帳票タイトル);
+//        entity.setタイトル(帳票タイトル);
         entity.set通知文1(result.get通知文1());
         entity.set通知文2(result.get通知文2());
         entity.set被保険者氏名(result.get被保険者氏名());
         entity.set被保険者番号(result.get被保険者番号());
+        entity.set被保険者氏名カナ(RString.EMPTY);
+        entity.set被保険者氏名フリガナ(result.get被保険者氏名フリガナ());
         entity.set受付日(result.get受付年月日());
         entity.set承認区分(result.get承認不承認());
         entity.set承認年月日(result.get承認年月日());
         entity.set不承認理由(result.get不承認の理由());
-        entity.set給付の種類(result.get給付の種類());
+//        entity.set給付の種類(result.get給付の種類());
         entity.set事業所名(result.get事業所名());
-        entity.set代表者氏名(result.get代表者氏名());
+        entity.set代表者名(result.get代表者氏名());
         entity.set事業所郵便番号(result.get事業所郵便番号());
         entity.set事業所電話番号(result.get事業所電話番号());
         entity.set事業所所在地(result.get事業所所在地());
-        entity.set費用額合計(result.get費用額合計());
-        entity.set保険対象費用額(result.get保険対象費用額());
-        entity.set利用者負担額(result.get介護保険利用者自己負担額());
-        entity.set保険給付額(result.get保険給付費額());
+//        entity.set費用額合計(result.get費用額合計());
+//        entity.set保険対象費用額(result.get保険対象費用額());
+        entity.set利用者負担上限額(result.get介護保険利用者自己負担額());
+//        entity.set保険給付額(result.get保険給付費額());
 
         return entity;
     }

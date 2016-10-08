@@ -19,21 +19,19 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DBC0330011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DvKogakuServiceJuryoIninDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.dgHaraiKettei_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuJuryoininKeiyakuJigyoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninsho;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -44,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class DvKogakuServiceJuryoIninHandler {
 
-    private static final RString 帳票分類ID = new RString("DBC100029_JyuryoItakuKeiyakuKakuninSho");
+    private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
     private static final RString 空白 = RString.EMPTY;
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
@@ -80,7 +78,7 @@ public class DvKogakuServiceJuryoIninHandler {
      */
     public void onLoad(TaishoshaKey 引き継ぎデータ, DBC0330011StateName 画面タイトル, List<KogakuJuryoininKeiyakuJigyoshaResult> resultList) {
         initialize(引き継ぎデータ);
-        setHiddenInput(引き継ぎデータ);
+        div.setOperateState(空白);
 
         if (DBC0330011StateName.修正 == 画面タイトル) {
             グリッドに高額受領委任契約事業者情報を表示する(resultList);
@@ -95,18 +93,6 @@ public class DvKogakuServiceJuryoIninHandler {
         div.getCddAtenaInfo().initialize(引き継ぎデータ.get識別コード());
         div.getCddShikakuKihon().initialize(引き継ぎデータ.get被保険者番号());
         div.getDvKakuninsho().getCcdBunshoBango().initialize(new ReportId(帳票分類ID), FlexibleDate.getNowDate());
-    }
-
-    private void setHiddenInput(TaishoshaKey 引き継ぎデータ) {
-        RDateTime 現在時刻 = RDate.getNowDateTime();
-        RYear 年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, 現在時刻.getDate(),
-                SubGyomuCode.DBB介護賦課).toString());
-        div.set識別コード(引き継ぎデータ.get識別コード().getColumnValue());
-        div.set世帯基準年月日(new RString(現在時刻.getDate().toString()));
-        div.set所得年度(new RString(年度.toString()));
-        div.set所得基準日時(new RString(現在時刻.toString()));
-
-        div.setOperateState(空白);
     }
 
     private void グリッドに高額受領委任契約事業者情報を表示する(List<KogakuJuryoininKeiyakuJigyoshaResult> resultList) {
@@ -127,11 +113,11 @@ public class DvKogakuServiceJuryoIninHandler {
                         ? FlexibleDate.EMPTY : result.getKogakuJuryoininKeiyakuJigyosha().get受領委任払適用終了年月日());
                 row.setJigyoshaNo(result.get所属事業者番号());
                 row.setJigyoshaName(result.get事業者名称());
-                row.setKetteiKubun(RString.isNullOrEmpty(result.getKogakuJuryoininKeiyakuJigyosha().get承認結果区分()) ? RString.EMPTY
+                row.setKetteiKubun(RString.isNullOrEmpty(result.getKogakuJuryoininKeiyakuJigyosha().get承認結果区分()) ? 空白
                         : ShoninKubun.toValue(result.getKogakuJuryoininKeiyakuJigyosha().get承認結果区分()).get名称());
-                row.setJogenGaku(null == result.getKogakuJuryoininKeiyakuJigyosha().get利用者負担上限額() ? RString.EMPTY
+                row.setJogenGaku(null == result.getKogakuJuryoininKeiyakuJigyosha().get利用者負担上限額() ? 空白
                         : SanteiKijungaku.toValue(new RString(result.getKogakuJuryoininKeiyakuJigyosha().get利用者負担上限額().toString()))
-                        .get略称().replace(円単位, RString.EMPTY));
+                        .get略称().replace(円単位, 空白));
                 row.setRiyu(result.getKogakuJuryoininKeiyakuJigyosha().get不承認理由());
                 rowList.add(row);
             }
@@ -156,7 +142,7 @@ public class DvKogakuServiceJuryoIninHandler {
         div.getDvHaraiKetteiShusei().getBtnShoninDate().clearFromValue();
         div.getDvHaraiKetteiShusei().getBtnShoninDate().clearToValue();
         div.getDvHaraiKetteiShusei().getCcdJigyosha().initialize();
-        div.getDvHaraiKetteiShusei().getCcdJigyosha().clear();
+        div.getDvHaraiKetteiShusei().getCcdJigyosha().setNyuryokuShisetsuKodo(空白);
         div.getDvHaraiKetteiShusei().getRadKetteiKubun().setSelectedKey(KEY_決定区分_承認する);
         onChange_radKetteiKubun();
     }
@@ -194,7 +180,7 @@ public class DvKogakuServiceJuryoIninHandler {
                 return keyValue.getKey();
             }
         }
-        return RString.EMPTY;
+        return 空白;
     }
 
     /**
@@ -224,12 +210,11 @@ public class DvKogakuServiceJuryoIninHandler {
         if (null != row.getShoninEndDate().getValue() && (!FlexibleDate.EMPTY.equals(row.getShoninEndDate().getValue()))) {
             div.getBtnShoninDate().setToValue(new RDate(row.getShoninEndDate().getValue().toString()));
         }
-        div.getCcdJigyosha().initialize();
         div.getCcdJigyosha().setNyuryokuShisetsuKodo(row.getJigyoshaNo());
         div.getRadKetteiKubun().setSelectedKey(VALUE_決定区分_承認する.equals(row.getKetteiKubun())
                 ? KEY_決定区分_承認する : KEY_決定区分_承認しない);
         onChange_radKetteiKubun();
-        div.getTxtShoninShinaiRiyu().setValue(RString.isNullOrEmpty(row.getRiyu()) ? RString.EMPTY : row.getRiyu());
+        div.getTxtShoninShinaiRiyu().setValue(RString.isNullOrEmpty(row.getRiyu()) ? 空白 : row.getRiyu());
 
         if (!RString.isNullOrEmpty(row.getJogenGaku())) {
             RString 上限額 = row.getJogenGaku().concat(円単位);
@@ -242,7 +227,7 @@ public class DvKogakuServiceJuryoIninHandler {
             div.getDdlRiyoshafutanJogenGaku().setSelectedKey(get利用者負担上限額Key(上限額));
         }
         if (!追加.equals(div.getOperateState())) {
-            div.getDvHaraiKetteiShusei().getRirekiNo().setValue(RString.isNullOrEmpty(row.getRirekiNo()) ? RString.EMPTY : row.getRirekiNo());
+            div.getDvHaraiKetteiShusei().getTxtRirekiNo().setValue(RString.isNullOrEmpty(row.getRirekiNo()) ? 空白 : row.getRirekiNo());
         }
     }
 
@@ -271,6 +256,21 @@ public class DvKogakuServiceJuryoIninHandler {
     }
 
     /**
+     * ｢世帯一覧を表示する｣ボタンの変更を処理します。
+     *
+     * @return KogakuServiceData
+     */
+    public KogakuServiceData onClick_btnSeitaiIchiran() {
+        KogakuServiceData 引き継ぎ情報 = new KogakuServiceData();
+        引き継ぎ情報.set被保険者番号(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号()));
+        引き継ぎ情報.setサービス提供年月(FlexibleDate.getNowDate().getYearMonth());
+        引き継ぎ情報.set履歴番号(null);
+        引き継ぎ情報.set証記載保険者番号(HokenshaNo.EMPTY);
+        引き継ぎ情報.set識別コード(ShikibetsuCode.EMPTY);
+        return 引き継ぎ情報;
+    }
+
+    /**
      * 「決定一覧へ戻る」ボタンを処理します。
      *
      * @return boolean
@@ -288,25 +288,25 @@ public class DvKogakuServiceJuryoIninHandler {
                 && getRStringByRDate(div.getBtnShoninDate().getToValue()).equals(getRStringByFlexibleDate(row.getShoninEndDate().getValue()))
                 && div.getCcdJigyosha().getNyuryokuShisetsuKodo().equals(row.getJigyoshaNo())
                 && div.getRadKetteiKubun().getSelectedValue().equals(
-                        RString.isNullOrEmpty(row.getKetteiKubun()) ? RString.EMPTY : row.getKetteiKubun())
+                        RString.isNullOrEmpty(row.getKetteiKubun()) ? 空白 : row.getKetteiKubun())
                 && (div.getTxtShoninShinaiRiyu().isDisabled() || div.getTxtShoninShinaiRiyu().getValue().equals(row.getRiyu()))
                 && (div.getDdlRiyoshafutanJogenGaku().isDisabled()
                 || div.getDdlRiyoshafutanJogenGaku().getSelectedValue().equals(
-                        RString.isNullOrEmpty(row.getJogenGaku()) ? RString.EMPTY : row.getJogenGaku().concat(円単位)));
+                        RString.isNullOrEmpty(row.getJogenGaku()) ? 空白 : row.getJogenGaku().concat(円単位)));
     }
 
     private RString getRStringByRDate(RDate date) {
         if (null != date) {
             return new RString(date.toString());
         }
-        return RString.EMPTY;
+        return 空白;
     }
 
     private RString getRStringByFlexibleDate(FlexibleDate date) {
         if (null != date && (!FlexibleDate.EMPTY.equals(date))) {
             return new RString(date.toString());
         }
-        return RString.EMPTY;
+        return 空白;
     }
 
     /**
@@ -353,7 +353,7 @@ public class DvKogakuServiceJuryoIninHandler {
         if (追加.equals(div.getOperateState())) {
             KogakuJuryoininKeiyakuJigyosha business = getBusinessBy追加(holder);
             businessList.add(business);
-            div.getDvHaraiKetteiShusei().getRirekiNo().setValue(new RString(business.get履歴番号()));
+            div.getDvHaraiKetteiShusei().getTxtRirekiNo().setValue(new RString(business.get履歴番号()));
         }
         if (修正.equals(div.getOperateState())) {
             KogakuJuryoininKeiyakuJigyosha business = getBusinessBy修正(holder);
@@ -362,7 +362,7 @@ public class DvKogakuServiceJuryoIninHandler {
         if (削除.equals(div.getOperateState())) {
             KogakuJuryoininKeiyakuJigyosha business = holder.getKogakuJuryoininKeiyakuJigyosha(
                     new KogakuJuryoininKeiyakuJigyoshaIdentifier(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号().toString()),
-                            Integer.parseInt(div.getDvHaraiKetteiShusei().getRirekiNo().getValue().toString()))).deleted();
+                            Integer.parseInt(div.getDvHaraiKetteiShusei().getTxtRirekiNo().getValue().toString()))).deleted();
             businessList.add(business);
         }
         boolean isSuccess = false;
@@ -378,7 +378,7 @@ public class DvKogakuServiceJuryoIninHandler {
     private KogakuJuryoininKeiyakuJigyosha getBusinessBy修正(KogakuJuryoininKeiyakuJigyoshaHolder holder) {
         return holder.getKogakuJuryoininKeiyakuJigyosha(
                 new KogakuJuryoininKeiyakuJigyoshaIdentifier(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号().toString()),
-                        Integer.parseInt(div.getDvHaraiKetteiShusei().getRirekiNo().getValue().toString()))).createBuilderForEdit()
+                        Integer.parseInt(div.getDvHaraiKetteiShusei().getTxtRirekiNo().getValue().toString()))).createBuilderForEdit()
                 .set申請年月日(null == div.getDvHaraiKetteiShusei().getBtnShinseiDate().getValue() ? FlexibleDate.EMPTY
                         : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnShinseiDate().getValue().toString()))
                 .set受付年月日(null == div.getDvHaraiKetteiShusei().getTxtUketsukeDate().getValue() ? FlexibleDate.EMPTY
@@ -465,7 +465,7 @@ public class DvKogakuServiceJuryoIninHandler {
     public void onClick_btnHakko(KogakuJuryoininKeiyakuJigyoshaHolder holder) {
         KogakuJuryoininKeiyakuJigyosha newBusiness = holder.getKogakuJuryoininKeiyakuJigyosha(
                 new KogakuJuryoininKeiyakuJigyoshaIdentifier(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号().toString()),
-                        Integer.parseInt(div.getDvHaraiKetteiShusei().getRirekiNo().getValue().toString()))).createBuilderForEdit()
+                        Integer.parseInt(div.getDvHaraiKetteiShusei().getTxtRirekiNo().getValue().toString()))).createBuilderForEdit()
                 .set承認結果通知書作成日(null == div.getDvHakko().getTxtTsuchiDate().getValue() ? FlexibleDate.EMPTY
                         : new FlexibleDate(div.getDvHakko().getTxtTsuchiDate().getValue().toString()))
                 .build();
@@ -490,7 +490,7 @@ public class DvKogakuServiceJuryoIninHandler {
         param.set承認終了日(business.get受領委任払適用終了年月日());
         param.set事業者番号(business.get事業者番号().value());
         param.set決定区分(business.get承認結果区分());
-        param.set承認しない理由(RString.isNullOrEmpty(business.get不承認理由()) ? RString.EMPTY : business.get不承認理由());
+        param.set承認しない理由(RString.isNullOrEmpty(business.get不承認理由()) ? 空白 : business.get不承認理由());
         param.set利用者負担上限額(null == business.get利用者負担上限額() ? null
                 : SanteiKijungaku.toValue(new RString(business.get利用者負担上限額().intValue())).get略称());
         param.set通知日(new FlexibleDate(div.getDvKakuninsho().getTxtTsuchiDate().getValue().toString()));

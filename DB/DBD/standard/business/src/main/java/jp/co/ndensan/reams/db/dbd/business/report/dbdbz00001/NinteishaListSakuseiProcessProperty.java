@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteishaListSakuseiProcessProperty {
 
     /**
-     * 帳票分類ID「DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran」(DBD介護受給) 出力順設定可能項目です。
+     * 帳票分類ID「DBD200016_FutanGendogakuNinteishaIchiran」(DBD介護受給) 出力順設定可能項目です。
      */
     public enum DBD200001_FutanGendogakuNinteiGaitoshaIchiran implements IReportItems {
 

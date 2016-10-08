@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 住宅改修理由書作成手数料請求書兼申請書
+     *
+     */
+    DBC100045(new ReportId("DBC100045_JutakuKaishuRiyushoSakuseiTesuryoSeikyuKenShinseisho"), new RString("住宅改修理由書作成手数料請求書兼申請書")),
+    /**
      * DBC701019_HanyoListJigyoKogakuServiceHiJokyo
      *
      */
@@ -31,7 +36,7 @@ public enum ReportIdDBC {
      */
     DBC100055(new ReportId("DBC100055_JukyushaKyufuJissekidaicho"), new RString("受給者給付実績台帳作成")),
     /**
-     * 利用状況統計表
+     * 住宅改修理由書作成手数料請求書兼申請書作成
      */
     DBC200064(new ReportId("DBC200064_JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiran"), new RString("住宅改修理由書作成手数料請求書兼申請書作成")),
     /**

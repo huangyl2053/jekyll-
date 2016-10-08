@@ -56,7 +56,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     private static final RString 照会 = new RString("照会");
     private static final RString 処理不可 = new RString("処理不可");
     private static final int NUM_FOUR = 4;
-    private static final int NUM_SIX = 6;
+    private static final int NUM_FIVE = 5;
     private static final int NUM_ELEVEN = 11;
 
     /**
@@ -110,6 +110,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         if (div.get事業分フラグ().equals(new RString(Boolean.TRUE.toString()))) {
             事業分フラグ = true;
         }
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYear 対象年度 = FlexibleYear.EMPTY;
         HokenshaNo 証記載保険者番号 = HokenshaNo.EMPTY;
         if (div.getSearchPanel().getTxtKensakuTaishoNendo().getValue() != null) {
@@ -121,7 +122,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             証記載保険者番号 = new HokenshaNo(div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue());
         }
         List<KogakuGassanShikyuKetteiHoseiResult> result = KogakuGassanShikyuKetteiHosei.createInstance().
-                selectShikyuKetteiHoseiList(対象年度, 証記載保険者番号, div.getSearchPanel().
+                selectShikyuKetteiHoseiList(被保険者番号, 対象年度, 証記載保険者番号, div.getSearchPanel().
                         getTxtKensakuShikyuSeiriNo().getValue(), 事業分フラグ);
         if (result == null || result.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
@@ -185,7 +186,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                 && div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
                 && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()) {
             div.getShinkiPanel().getTxtShinkiHihokenshaNo().setValue(div.getShinkiPanel().
-                    getTxtShinkiShikyuSeiriNo().getValue().substring(NUM_SIX, NUM_ELEVEN));
+                    getTxtShinkiShikyuSeiriNo().getValue().substring(NUM_FIVE, NUM_ELEVEN));
         }
         return ResponseData.of(div).respond();
     }
@@ -490,13 +491,13 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_btnSave(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (削除.equals(画面モード) || 照会.equals(画面モード)) {
+            return save決定情報登録(div, 画面モード);
+        }
         KogakuGassanShikyuKetteiHoseiDetailParameter para = ViewStateHolder.get(
                 ViewStateKeys.詳細データ, KogakuGassanShikyuKetteiHoseiDetailParameter.class);
         boolean flag = getHandler(div).is決定情報内容変更状態(para);
         ValidationMessageControlPairs validPairs = getCheckHandler(div).check決定情報保存();
-        if (削除.equals(画面モード) || 照会.equals(画面モード)) {
-            return save決定情報登録(div, 画面モード);
-        }
         if (flag) {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();

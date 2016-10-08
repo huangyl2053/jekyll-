@@ -24,7 +24,7 @@ public class TaishoshaIchijiTokuteiTableEntity extends DbTableEntityBase<Taishos
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("genmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp");
+        TABLE_NAME = new RString("gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp");
     }
     private HihokenshaNo hihokenshaNo;
     private FlexibleDate kijunYMD;

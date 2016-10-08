@@ -219,7 +219,7 @@ public class HanyoListParamHandler {
             List<KeyValueDataSource> 年度選択肢 = new ArrayList<>();
             for (int i = 1; i <= 年度_10; i++) {
                 年度選択肢.add(new KeyValueDataSource(開始年度.toDateString(), 開始年度.wareki().eraType(EraType.KANJI).toDateString()));
-                開始年度.minusYear(年度_1);
+                開始年度 = 開始年度.minusYear(年度_1);
             }
             div.getDdlKijunNendo().setDataSource(年度選択肢);
         } else {
