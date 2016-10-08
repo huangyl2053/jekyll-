@@ -80,7 +80,9 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
             riyoshaFutanWariaiHanteiEntity.setHihokenshaNo(今回利用者負担割合判定List.get(0).getHihokenshaNo());
             riyoshaFutanWariaiHanteiEntity.setFutanWariaiKubun(今回利用者負担割合判定List.get(0).getFutanWariaiKubun());
             riyoshaFutanWariaiHanteiEntity.setHonninGoukeiShotokuGaku(今回利用者負担割合判定List.get(0).getHoninGokeishotokuKingaku());
-            riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(今回利用者負担割合判定List.get(0).getKoseiJiyu()));
+            if (!RString.isNullOrEmpty(今回利用者負担割合判定List.get(0).getKoseiJiyu())) {
+                riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(今回利用者負担割合判定List.get(0).getKoseiJiyu()));
+            }
             riyoshaFutanWariaiHanteiEntity.setNendo(今回利用者負担割合判定List.get(0).getNendo());
             riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(今回利用者負担割合判定List.get(0).getNenkinShunyuGoukei());
             riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(今回利用者負担割合判定List.get(0).getSetaiIchigouHihokenshaSu());
@@ -96,8 +98,9 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
                     .getFutanWariaiKubun());
             riyoshaFutanWariaiHanteiEntity.setHonninGoukeiShotokuGaku(今回利用者負担割合判定List.get(0)
                     .getHoninGokeishotokuKingaku());
-            riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(今回利用者負担割合判定List.get(0)
-                    .getKoseiJiyu()));
+            if (!RString.isNullOrEmpty(今回利用者負担割合判定List.get(0).getKoseiJiyu())) {
+                riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(今回利用者負担割合判定List.get(0).getKoseiJiyu()));
+            }
             riyoshaFutanWariaiHanteiEntity.setNendo(今回利用者負担割合判定List.get(0).getNendo());
             riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(今回利用者負担割合判定List.get(0)
                     .getNenkinShunyuGoukei());
