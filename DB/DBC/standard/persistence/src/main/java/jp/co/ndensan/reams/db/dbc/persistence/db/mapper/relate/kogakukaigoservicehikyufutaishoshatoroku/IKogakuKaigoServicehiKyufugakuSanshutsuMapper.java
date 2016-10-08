@@ -238,7 +238,7 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     List<HanteiEraaResultEntity> select高額総合事業サービス費判定エラーリスト();
 
     /**
-     * select管理データ一時
+     * select高額判定結果全件一時
      *
      * @return TyukannKekkaZenRelateEntity
      */
@@ -286,6 +286,13 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      */
     List<DbT3017KyufujissekiKihonEntity> select給付実績基本情報事業高額一時2(
             KogakuKaigoServicehiKyufutaishoshaTorokuMybatisParameter パラメータ);
+
+    /**
+     * 被保険者台帳情報一時1テーブルを取得する。
+     *
+     * @return List<DbT1001HihokenshaDaichoEntity> 被保険者台帳情報一時1リスト
+     */
+    List<DbT1001HihokenshaDaichoEntity> select被保険者台帳情報一時1();
 
     /**
      * 被保険者台帳情報一時2テーブルを取得する。
