@@ -40,74 +40,78 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity
 public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
 
     /**
-     * 前回処理高額介護サービス費支給申請全件一時の削除のメソッドです。
+     * 高額介護サービス費関連のテーブルのデータを削除するためのキーを取得し、削除キー一時に格納する。
      *
      * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理高額介護サービス費支給申請全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void insert高額介護削除キー一時(KyufuJissekiKihonKogakuMybatisParameter param);
 
     /**
-     * 前回処理高額介護サービス費支給判定結果全件一時の削除のメソッドです。
+     * 事業高額介護サービス費関連のテーブルのデータを削除するためのキーを取得し、削除キー一時に格納する。
      *
      * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理高額介護サービス費支給判定結果全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void insert事業高額介護削除キー一時(KyufuJissekiKihonKogakuMybatisParameter param);
 
     /**
-     * 前回処理高額介護サービス費支給審査決定全件一時の削除のメソッドです。
+     * 前回処理高額介護サービス費支給申請の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理高額介護サービス費支給審査決定全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理高額介護サービス費支給申請();
 
     /**
-     * 前回処理高額介護サービス費給付対象者合計全件一時の削除のメソッドです。
+     * 前回処理高額介護サービス費支給判定結果の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理高額介護サービス費給付対象者合計全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理高額介護サービス費支給判定結果();
 
     /**
-     * 前回処理高額介護サービス費給付対象者明細全件一時の削除のメソッドです。
+     * 前回処理高額介護サービス費支給審査決定の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理高額介護サービス費給付対象者明細全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理高額介護サービス費支給審査決定();
 
     /**
-     * 前回処理高額介護サービス費支給申請全件一時の削除のメソッドです。
+     * 前回処理高額介護サービス費給付対象者合計の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理事業高額介護サービス費支給申請全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理高額介護サービス費給付対象者合計();
 
     /**
-     * 前回処理事業高額介護サービス費支給判定結果全件一時の削除のメソッドです。
+     * 前回処理高額介護サービス費給付対象者明細の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理事業高額介護サービス費支給判定結果全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理高額介護サービス費給付対象者明細();
 
     /**
-     * 前回処理事業高額介護サービス費支給審査決定全件一時の削除のメソッドです。
+     * 前回処理高額介護サービス費支給申請の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理事業高額介護サービス費支給審査決定全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理事業高額介護サービス費支給申請();
 
     /**
-     * 前回処理高額介護サービス費給付対象者合計全件一時の削除のメソッドです。
+     * 前回処理事業高額介護サービス費支給判定結果の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理事業高額介護サービス費給付対象者合計全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理事業高額介護サービス費支給判定結果();
 
     /**
-     * 前回処理高額介護サービス費給付対象者明細全件一時の削除のメソッドです。
+     * 前回処理事業高額介護サービス費支給審査決定の削除のメソッドです。
      *
-     * @param param KyufuJissekiKihonKogakuMybatisParameter
      */
-    void delete前回処理事業高額介護サービス費給付対象者明細全件一時(KyufuJissekiKihonKogakuMybatisParameter param);
+    void delete前回処理事業高額介護サービス費支給審査決定();
+
+    /**
+     * 前回処理高額介護サービス費給付対象者合計の削除のメソッドです。
+     *
+     */
+    void delete前回処理事業高額介護サービス費給付対象者合計();
+
+    /**
+     * 前回処理高額介護サービス費給付対象者明細の削除のメソッドです。
+     *
+     */
+    void delete前回処理事業高額介護サービス費給付対象者明細();
 
     /**
      *
@@ -551,24 +555,31 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     void insert事業高額介護サービス給付対象者明細();
 
     /**
-     * 世帯員所得判定明細高額一時２と宛名情報の抽出メソッドです。
+     * 高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出メソッドです。
      *
      * @param param KyufuJissekiKihonKogakuMybatisParameter
      * @return {@link  List<TempSetaiinShotokuHanteiEntity>}
      */
-    List<TempSetaiinShotokuHanteiEntity> select世帯員所得判定明細高額一時２と宛名情報(KyufuJissekiKihonKogakuMybatisParameter param);
+    List<TempSetaiinShotokuHanteiEntity> select高額介護サービス世帯員所得判定明細高額一時２と宛名情報(KyufuJissekiKihonKogakuMybatisParameter param);
 
     /**
-     * select給付実績中間高額一時の作成7メソッドです。
+     * 事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出メソッドです。
      *
-     * @return List<InsKyufuJissekiChukanKogakuTmpProcess7Entity>
+     * @param param KyufuJissekiKihonKogakuMybatisParameter
+     * @return {@link  List<TempSetaiinShotokuHanteiEntity>}
      */
-    List<InsKyufuJissekiChukanKogakuTmpProcess7Entity> select給付実績中間高額一時の作成7();
-
-    /**
-     * select給付実績中間事業高額一時の作成7メソッドです。
-     *
-     * @return List<InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity>
-     */
-    List<InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity> select給付実績中間事業高額一時の作成7();
+    List<TempSetaiinShotokuHanteiEntity> select事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報(KyufuJissekiKihonKogakuMybatisParameter param);
+//    /**
+//     * select給付実績中間高額一時の作成7メソッドです。
+//     *
+//     * @return List<InsKyufuJissekiChukanKogakuTmpProcess7Entity>
+//     */
+//    List<InsKyufuJissekiChukanKogakuTmpProcess7Entity> select給付実績中間高額一時の作成7();
+//
+//    /**
+//     * insert給付実績中間高額一時７メソッドです。
+//     *
+//     * @param entity InsKyufuJissekiChukanKogakuTmpProcess7Entity
+//     */
+//    void insert給付実績中間高額一時７(InsKyufuJissekiChukanKogakuTmpProcess7Entity entity);
 }
