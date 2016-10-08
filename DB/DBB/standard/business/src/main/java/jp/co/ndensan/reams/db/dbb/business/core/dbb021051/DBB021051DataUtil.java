@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB021051DataUtil {
 
+    private static final RString ERROR_市町村コード = new RString("000000");
     private static final int 市町村コード長さ = 6;
     private final RString str都道府県 = new RString("都道府県");
     private final RString str郡 = new RString("郡");
@@ -98,10 +99,11 @@ public class DBB021051DataUtil {
             DBB021051ProcessParameter parameter) {
         最優先住所がニ = TWO.equals(parameter.get最優先住所());
         DBB021051TableJohoTempEntity result = new DBB021051TableJohoTempEntity();
-        result.set市町村コード(parameter.get市町村指定に市町村コード());
         result.set被保険者番号(entity.get被保険者番号());
         UaFt200FindShikibetsuTaishoEntity 宛名PSM = get宛名PSM(entity);
         UaFt250FindAtesakiEntity 宛先PSM = get宛先PSM(entity);
+        LasdecCode lasdecCode = 宛名PSM.getGenLasdecCode();
+        result.set市町村コード(lasdecCode == null || lasdecCode.isEmpty() ? ERROR_市町村コード : lasdecCode.value());
         if (宛先PSM != null) {
             result.set代納区分名称(AtesakiShubetsu.toValue(宛先PSM.getAtesakiShubetsu()).toRString());
         }
@@ -210,7 +212,7 @@ public class DBB021051DataUtil {
      * @return RString
      */
     public RString get市町村指定に市町村コード(RString 市町村指定) {
-        if (RString.isNullOrEmpty(市町村指定)) {
+        if (RString.isNullOrEmpty(市町村指定) || RString.isNullOrEmpty(市町村指定.trim())) {
             return RString.EMPTY;
         }
         return 市町村指定.substring(0, 市町村コード長さ);
