@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110050;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenDataSofuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranParam;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanrenrakuhyooutputreport.ShokanRenrakuhyoOutputReportProcessParam;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoSofuIchiranParam;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110050.ShokanRenrakuhyoOutputReportProcessParam;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -25,10 +25,9 @@ public class ShokanRenrakuhyoUpdateDBProcess extends BatchProcessBase<DbT3034Sho
 
     private static final RString 送付済の登録 = new RString("jp.co.ndensan.reams.db.dbc.persistence"
             + ".db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper.get償還払支給申請データ");
-    private static final RString 償還払支給申請 = new RString("DbT3034ShokanShinsei");
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter 償還払支給申請TBL;
+    private BatchPermanentTableWriter 償還払支給申請TBL;
     private ShokanRenrakuhyoOutputReportProcessParam processParameter;
 
     @Override
@@ -40,8 +39,7 @@ public class ShokanRenrakuhyoUpdateDBProcess extends BatchProcessBase<DbT3034Sho
 
     @Override
     protected void createWriter() {
-        償還払支給申請TBL = new BatchEntityCreatedTempTableWriter(償還払支給申請,
-                DbT3034ShokanShinseiEntity.class);
+        償還払支給申請TBL = new BatchPermanentTableWriter(DbT3034ShokanShinseiEntity.class);
     }
 
     @Override

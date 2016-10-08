@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbc.business.report.dbc200025.ShokanRenrakuhyoSofu
 import jp.co.ndensan.reams.db.dbc.business.report.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranPageBreak;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranParam;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanrenrakuhyooutputreport.ShokanRenrakuhyoOutputReportProcessParam;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoSofuIchiranParam;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110050.ShokanRenrakuhyoOutputReportProcessParam;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200025.ShokanRenrakuhyoSofuIchiranEntity;
@@ -31,10 +31,9 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderBy
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -66,7 +65,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-2570-030 jianglaisheng
  */
-public class ShokanRenrakuhyoOutputReportProcess extends BatchProcessBase<ShokanRenrakuhyoOutputReportEntity> {
+public class ShokanRenrakuhyoOutputReportProcess extends BatchKeyBreakBase<ShokanRenrakuhyoOutputReportEntity> {
 
     private static final RString ERROR_出力順 = new RString("帳票出力順の取得");
     private static final RString ORDER_BY = new RString("order by");
@@ -96,10 +95,8 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchProcessBase<Shokan
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
 
-    @BatchWriter
     private BatchReportWriter<ShokanRenrakuhyoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<ShokanRenrakuhyoSofuIchiranSource> reportSourceWriter;
-    @BatchWriter
     private CsvWriter<ShokanRenrakuhyoSofuIchiranCsvEntity> csvWriter;
     private List<PersonalData> personalDataList;
     private Set<RString> 識別コードset;
@@ -111,6 +108,7 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchProcessBase<Shokan
     private FileSpoolManager manager;
     private RDateTime システム日付;
     private int count;
+    private RString csvFilePath;
 
     @Override
     protected void initialize() {
@@ -158,22 +156,28 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchProcessBase<Shokan
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200025.getReportId().value())
-                .addBreak(new ShokanRenrakuhyoSofuIchiranPageBreak(breakItemIds)).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
-        csvWriter = new CsvWriter.InstanceBuilder(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME)).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(true).
-                build();
+        csvFilePath = Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME);
     }
 
     @Override
-    protected void process(ShokanRenrakuhyoOutputReportEntity entity) {
+    protected void keyBreakProcess(ShokanRenrakuhyoOutputReportEntity entity) {
+    }
+
+    @Override
+    protected void usualProcess(ShokanRenrakuhyoOutputReportEntity entity) {
+        if (count == INDEX_0) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200025.getReportId().value())
+                    .addBreak(new ShokanRenrakuhyoSofuIchiranPageBreak(breakItemIds)).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+            csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(true).
+                    build();
+        }
         count = count + INDEX_1;
         ShokanRenrakuhyoSofuIchiranParameter reportParam = new ShokanRenrakuhyoSofuIchiranParameter();
         ShokanRenrakuhyoSofuIchiranEntity reportEntity = new ShokanRenrakuhyoSofuIchiranEntity();
@@ -196,12 +200,15 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchProcessBase<Shokan
 
     @Override
     protected void afterExecute() {
-        csvWriter.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME), accessLogUUID);
-        } else {
-            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
+        if (INDEX_0 < count) {
+            batchReportWriter.close();
+            csvWriter.close();
+            if (!personalDataList.isEmpty()) {
+                AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+                manager.spool(csvFilePath, accessLogUUID);
+            } else {
+                manager.spool(csvFilePath);
+            }
         }
     }
 
