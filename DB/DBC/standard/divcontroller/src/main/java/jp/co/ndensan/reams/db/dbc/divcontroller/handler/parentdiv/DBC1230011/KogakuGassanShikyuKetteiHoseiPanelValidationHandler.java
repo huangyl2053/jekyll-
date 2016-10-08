@@ -32,6 +32,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
 
     private final KogakuGassanShikyuKetteiHoseiPanelDiv div;
     private static final int NUM_THREE = 3;
+    private static final int NUM_FIVE = 5;
     private static final int NUM_SIX = 6;
     private static final int NUM_ELEVEN = 11;
     private static final int NUM_SEVENTEEN = 17;
@@ -174,8 +175,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
                 && div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
                 && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
                 && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().
-                substring(NUM_SIX, NUM_ELEVEN).equals(div.getShinkiPanel().
-                        getTxtShinkiHihokenshaNo().getValue().substring(NUM_SIX, NUM_ELEVEN))) {
+                substring(NUM_FIVE, NUM_ELEVEN).equals(div.getShinkiPanel().
+                        getTxtShinkiHihokenshaNo().getValue())) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
                             DbcErrorMessages.支給申請書整理番号_不一致,
@@ -282,8 +283,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
                 && div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
                 && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
                 && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().
-                substring(NUM_SIX, NUM_ELEVEN).equals(div.getSearchPanel().getTxtKensakuHihokenshaNo()
-                        .getValue().substring(NUM_SIX, NUM_ELEVEN))) {
+                substring(NUM_FIVE, NUM_ELEVEN).equals(div.getSearchPanel().getTxtKensakuHihokenshaNo()
+                        .getValue())) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
                             DbcErrorMessages.支給申請書整理番号_不一致,

@@ -89,8 +89,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_5 = 5;
-    private static final int NUM_EIGHT = 8;
-    private static final int NUM_SEVEN = 7;
+    private static final int NUM_8 = 8;
+    private static final int NUM_7 = 7;
 
     /**
      * 初期化
@@ -174,9 +174,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     public void set新規と検索条件登録パネル() {
         RDate システムタイム = RDate.getNowDate();
         RYear システム年度 = システムタイム.getYear();
-        if (NUM_EIGHT <= システムタイム.getMonthValue()) {
+        if (NUM_8 <= システムタイム.getMonthValue()) {
             システム年度 = システム年度.minusYear(1);
-        } else if (システムタイム.getMonthValue() <= NUM_SEVEN) {
+        } else if (システムタイム.getMonthValue() <= NUM_7) {
             システム年度 = システム年度.minusYear(2);
         }
         div.getShinkiPanel().getTxtShinkiTaishoNendo().setValue(new RDate(システム年度.toString()));
@@ -565,6 +565,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      */
     public RString get処理モード(HihokenshaNo 被保険者番号, RString モード) {
         ShoriModeHanteiResult shmoResult = new ShoriModeHanteiResult();
+        FlexibleYearMonth 受取年月 = FlexibleYearMonth.EMPTY;
         if (新規.equals(モード)) {
             shmoResult = KogakuGassanShikyuKetteiHosei.createInstance().shoriModeHantei(
                     被保険者番号, new HokenshaNo(div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue()),
@@ -574,14 +575,16 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (修正.equals(モード)) {
             dgKogakuGassanShikyuFushikyuKettei_Row 選択行データ
                     = div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
+            if (選択行データ.getTxtUketoriNengetsu().getValue() != null && !選択行データ.
+                    getTxtUketoriNengetsu().getValue().isEmpty()) {
+                受取年月 = 選択行データ.getTxtUketoriNengetsu().getValue().getYearMonth();
+            }
             shmoResult = KogakuGassanShikyuKetteiHosei.createInstance().shoriModeHantei(
                     被保険者番号, new HokenshaNo(選択行データ.getTxtShokisaiNo()),
                     選択行データ.getTxtRenrakuhyoSeiriNo(),
                     new FlexibleYear(選択行データ.getTxtTaishoNendo().getValue().getYear().toDateString()),
-                    選択行データ.getTxtUketoriNengetsu().getValue().getYearMonth(),
-                    選択行データ.getTxtShikyuKubun(), TWO);
+                    受取年月, 選択行データ.getTxtShikyuKubun(), TWO);
         } else if (削除.equals(モード)) {
-            FlexibleYearMonth 受取年月 = FlexibleYearMonth.EMPTY;
             dgKogakuGassanShikyuFushikyuKettei_Row 選択行データ
                     = div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
             if (選択行データ.getTxtUketoriNengetsu().getValue() != null && !選択行データ.
