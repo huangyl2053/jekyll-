@@ -23,9 +23,9 @@ public class KogakuServiceJyuryoKakuninShoEntity {
     private RString 住所1;
     private RString 住所2;
     private RString 住所3;
+    private RString 方書Text;
     private RString 方書1;
     private RString 方書2;
-    private RString 方書3;
     private RString 方書Small1;
     private RString 方書Small2;
     private RString 代納人区分;
@@ -50,7 +50,6 @@ public class KogakuServiceJyuryoKakuninShoEntity {
     private RString カスタマバーコード;
 
     private RString 文書番号;
-    private RString 通知文１;
     private RString 被保険者氏名フリガナ;
     private RString 受付年月日;
     private RString 承認不承認;
@@ -68,9 +67,7 @@ public class KogakuServiceJyuryoKakuninShoEntity {
     private RString 被保険者氏名カナ;
     private RString 被保険者氏名;
     private RString 被保険者番号;
-    private RString 受付日;
     private RString 承認年月日;
-    private RString 承認区分;
     private RString 不承認理由;
     private RString 事業所名;
     private RString 代表者名;
