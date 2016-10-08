@@ -123,30 +123,27 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
             executeStep(資格喪失等_追加用データ作成);
             executeStep(住所地特例該当のデータ抽出);
             executeStep(住所地特例該当_追加用データ作成);
-        }
-        if (is処理対象月が４月から６月まで()) {
-            executeStep(最新の賦課の情報を取得);
-            executeStep(仮徴収額変更データ抽出);
-            executeStep(仮徴収額変更_追加用データ作成);
-        }
+            if (is処理対象月が４月から６月まで()) {
+                executeStep(最新の賦課の情報を取得);
+                executeStep(仮徴収額変更データ抽出);
+                executeStep(仮徴収額変更_追加用データ作成);
+            }
 
-        if (is処理対象月は８月を除く偶数月の場合()) {
-            executeStep(特徴追加依頼のデータ抽出);
-            executeStep(特徴追加依頼_追加用データ作成);
-        }
-        if (!is処理対象月が7月()) {
+            if (is処理対象月は８月を除く偶数月の場合()) {
+                executeStep(特徴追加依頼のデータ抽出);
+                executeStep(特徴追加依頼_追加用データ作成);
+            }
             executeStep(特徴異動情報_追加用データの取得);
-        }
 
-        if (is処理対象月は８月を除く偶数月の場合()) {
-            executeStep(特徴異動_徴収方法の追加);
-        }
-        if (!is処理対象月が7月()) {
+            if (is処理対象月は８月を除く偶数月の場合()) {
+                executeStep(特徴異動_徴収方法の追加);
+            }
             executeStep(介護特別徴収情報取込履歴の登録);
             executeStep(特徴異動_年金特徴対象者情報の登録);
             executeStep(特別徴収異動情報一覧表の発行);
             executeStep(特徴異動情報件数表の発行);
         }
+
         executeStep(処理日付管理テーブル更新);
     }
 
@@ -189,7 +186,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
      */
     @Step(介護特別徴収情報取込履歴の登録)
     protected IBatchFlowCommand insTorikomiRirekiProcess() {
-        return loopBatch(InsTorikomiRirekiProcess.class)
+        return simpleBatch(InsTorikomiRirekiProcess.class)
                 .arguments(getParameter().toInsTorikomiRirekiProcessParameter(システム日時)).define();
     }
 
