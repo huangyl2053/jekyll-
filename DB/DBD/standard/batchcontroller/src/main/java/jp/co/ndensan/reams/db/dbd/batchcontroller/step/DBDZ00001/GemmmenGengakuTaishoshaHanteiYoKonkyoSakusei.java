@@ -108,7 +108,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             List<RString> kuBunList, List<Decimal> kingakuList) {
         TaishoShaHanteiYoukonkyoItokiTempTableEntity entity = new TaishoShaHanteiYoukonkyoItokiTempTableEntity();
         entity.set世帯課税区分(SetaiKazeiKubun.非課税.getコード());
-        entity.setIs所得税課税世帯(Boolean.FALSE);
+        entity.set所得税課税世帯(Boolean.FALSE);
         for (TaishouJohoEntity item : recordList) {
             if (本人.equals(item.get本人区分()) && ((item.get識別コード_生活保護受給者() != null
                     && !item.get識別コード_生活保護受給者().isEmpty())
@@ -133,7 +133,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
                 entity.set世帯課税区分(SetaiKazeiKubun.課税.getコード());
             }
             if (item.get課税所得額() != null && 0 < item.get課税所得額().longValue()) {
-                entity.setIs所得税課税者(Boolean.TRUE);
+                entity.set所得税課税者(Boolean.TRUE);
             }
         }
         return entity;
@@ -193,14 +193,14 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         }
 
         if (item.get識別コード_生活保護受給者() != null && !item.get識別コード_生活保護受給者().isEmpty()) {
-            entity.setIs生活保護受給者(Boolean.TRUE);
+            entity.set生活保護受給者(Boolean.FALSE);
         } else {
-            entity.setIs生活保護受給者(Boolean.FALSE);
+            entity.set生活保護受給者(Boolean.FALSE);
         }
         if (item.get識別コード_老齢福祉年金受給者() != null && !item.get識別コード_老齢福祉年金受給者().isEmpty()) {
-            entity.setIs老齢福祉年金受給者(Boolean.TRUE);
+            entity.set老齢福祉年金受給者(Boolean.TRUE);
         } else {
-            entity.setIs老齢福祉年金受給者(Boolean.FALSE);
+            entity.set老齢福祉年金受給者(Boolean.FALSE);
         }
 
         if (entity.get合計所得金額() == null) {
@@ -243,9 +243,9 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         RString up年齢範囲 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         Range<Integer> 年齢範囲 = new Range(Integer.parseInt(up年齢範囲.toString()), Integer.parseInt("200"));
         if (!date.isEmpty() && 1 < get世帯(shikibetsuCode, date).get世帯員リスト(年齢範囲, new RDate(date.toString())).size()) {
-            tempTable.setIs高齢者複数世帯(Boolean.TRUE);
+            tempTable.set高齢者複数世帯(Boolean.TRUE);
         } else {
-            tempTable.setIs高齢者複数世帯(Boolean.FALSE);
+            tempTable.set高齢者複数世帯(Boolean.FALSE);
         }
     }
 
