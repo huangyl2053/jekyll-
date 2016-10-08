@@ -155,33 +155,7 @@ public class GemmenJisshiJokyoMainHandler {
 
     private void 宛名抽出条件保存(DBD104010_JukyushaGemmenJisshiJokyoParameter parameter) {
         AtenaSelectBatchParameter 宛名抽出条件 = div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().get宛名抽出条件();
-        parameter.setPsmChushutsu_Kubun(宛名抽出条件.getAgeSelectKijun().getコード());
-        parameter.setPsmChushutsuAge_Start(宛名抽出条件.getNenreiRange().getFrom());
-        parameter.setPsmChushutsuAge_End(宛名抽出条件.getNenreiRange().getTo());
-        parameter.setPsmSeinengappiYMD_Start(宛名抽出条件.getSeinengappiRange().getFrom());
-        parameter.setPsmSeinengappiYMD_End(宛名抽出条件.getSeinengappiRange().getTo());
-        parameter.setPsmAgeKijunni(宛名抽出条件.getNenreiKijunbi());
-        parameter.setPsmChiku_Kubun(宛名抽出条件.getChiku_Kubun().getコード());
-        parameter.setPsmJusho_From(宛名抽出条件.getJusho_From());
-        parameter.setPsmJusho_From_Name(宛名抽出条件.getJusho_FromMesho());
-        parameter.setPsmJusho_To(宛名抽出条件.getJusho_To());
-        parameter.setPsmJusho_To_Name(宛名抽出条件.getJusho_ToMesho());
-        parameter.setPsmGyoseiku_From(宛名抽出条件.getGyoseiku_From());
-        parameter.setPsmGyoseiku_From_Name(宛名抽出条件.getGyoseiku_FromMesho());
-        parameter.setPsmGyoseiku_To(宛名抽出条件.getGyoseiku_To());
-        parameter.setPsmGyoseiku_To_Name(宛名抽出条件.getGyoseiku_ToMesho());
-        parameter.setPsmChiku1_From(宛名抽出条件.getChiku1_From());
-        parameter.setPsmChiku1_To(宛名抽出条件.getChiku1_To());
-        parameter.setPsmChiku2_From(宛名抽出条件.getChiku2_From());
-        parameter.setPsmChiku2_To(宛名抽出条件.getChiku2_To());
-        parameter.setPsmChiku3_From(宛名抽出条件.getChiku3_From());
-        parameter.setPsmChiku3_To(宛名抽出条件.getChiku3_To());
-        parameter.setPsmChiku1_From_Name(宛名抽出条件.getChiku1_FromMesho());
-        parameter.setPsmChiku1_To_Name(宛名抽出条件.getChiku1_ToMesho());
-        parameter.setPsmChiku2_From_Name(宛名抽出条件.getChiku2_FromMesho());
-        parameter.setPsmChiku2_To_Name(宛名抽出条件.getChiku2_ToMesho());
-        parameter.setPsmChiku3_From_Name(宛名抽出条件.getChiku3_FromMesho());
-        parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
+        parameter.set宛名抽出条件(宛名抽出条件);
     }
 
     private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
