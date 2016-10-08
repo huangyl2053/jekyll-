@@ -28,8 +28,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -106,8 +106,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 社会福祉法人等利用者負担軽減申請画面を「世帯情報を表示する」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 社会福祉法人等利用者負担軽減申請画面Div}
-     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請Div}
+     * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnShowSetaiJoho(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
         div.getBtnShowSetaiJoho().setDisplayNone(true);
@@ -132,8 +132,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 社会福祉法人等利用者負担軽減申請画面を「申請一覧を表示する」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 社会福祉法人等利用者負担軽減申請画面Div}
-     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請Div}
+     * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnCloseSetaiJoho(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
         div.getBtnShowSetaiJoho().setDisplayNone(false);
@@ -317,7 +317,7 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 「申請情報を保存する」（また「承認情報を保存する」）ボタンを押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 障がい者控除対象者申請登録画面Div}
+     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請Div}
      * @return 障がい者控除対象者申請登録Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnUpdate(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -350,24 +350,26 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 「承認しない理由」を押下し、URZ.SampleBunshoToroku　をダイアログで表示する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 障がい者控除対象者申請登録画面Div}
+     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請Div}
      * @return 障がい者控除対象者申請登録Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onOpenBefore_btnOpenHiShoninRiyu(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
         div.getHomonKaigoGengakuShinseiDetail()
-                .setSubGyomuCode(SubGyomuCode.DBD介護受給.getColumnValue());
+                .setSubGyomuCode(GyomuCode.DB介護保険.getColumnValue());
         div.getHomonKaigoGengakuShinseiDetail()
                 .setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        div.getHomonKaigoGengakuShinseiDetail().setTeikeibun(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
     /**
      * URZ.SampleBunshoToroku　をダイアログで表示し、選択する。
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 障がい者控除対象者申請登録画面Div}
+     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請Div}
      * @return 障がい者控除対象者申請登録Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClose_btnOpenHiShoninRiyu(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
+        div.getTxtHiShoninRiyu().setValue(div.getHomonKaigoGengakuShinseiDetail().getTeikeibun());
         return ResponseData.of(div).respond();
     }
 
