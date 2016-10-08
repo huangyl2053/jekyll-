@@ -79,7 +79,7 @@ public class JigyoHokokuShiryouReportDBU300017Process extends BatchProcessBase<J
     protected void process(JigyoHokokuShiryouRelateEntity entity) {
         JigyohokokuCompYoshiki201Business business = new JigyohokokuCompYoshiki201Business();
         business.set年報月報区分(new RString("1"));
-        business.set処理日時(processParameter.get処理日時());
+        business.set処理日時(new RString(processParameter.get処理日時().toString()));
         if (new RString("1").equals(引数Flag)) {
             business.set旧市町村区分(new RString("0"));
             business.set保険者コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value());

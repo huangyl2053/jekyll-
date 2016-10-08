@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010010.DBU010010_JigyoH
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020.DBU010020_JigyoHokokuGeppo_IppanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010030.DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010050.DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010080.DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYMParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010090.DBU010090_JigyoHokokuGeppo_HokenkyufuKogakuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010100.DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -30,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_JigyoHokokuGeppo_MainParameter> {
 
+    private static final String CALL_FLOW_DBU010080 = "DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYM";
+    private static final RString DBU010080FLOW_FLOWID = new RString("DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYM");
     private static final String CALL_FLOW_DBU010090 = "DBU010090_JigyoHokokuGeppo_HokenkyufuKogaku";
     private static final RString DBU010090FLOW_FLOWID = new RString("DBU010090_JigyoHokokuGeppo_HokenkyufuKogaku");
     private static final String CALL_FLOW_DBU010100 = "DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan";
@@ -44,9 +47,10 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
     private static final int 連番_1 = 1;
     private static final int 連番_2 = 2;
     private static final int 連番_3 = 3;
+    private static final int 連番_5 = 5;
     private static final int 連番_6 = 6;
     private static final int 連番_7 = 7;
-    private static final int 連番_8 = 7;
+    private static final int 連番_8 = 8;
 
     @Override
     protected void defineFlow() {
@@ -58,6 +62,9 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
         }
         if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_3))) {
             executeStep(CALL_FLOW_DBU010050);
+        }
+        if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_5))) {
+            executeStep(CALL_FLOW_DBU010080);
         }
         if (出力区分_1.equals(getParameter().getSyutyoryokuKubun().get(連番_7))) {
             executeStep(CALL_FLOW_DBU010090);
@@ -91,6 +98,31 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
         parameter.setSakuseiCSVFileID(getParameter().getCsvID().get(0));
         parameter.setBatchID(getParameter().getBatchID().get(0));
         return otherBatchFlow(事業報告月報_一般状況_FLOWID, SubGyomuCode.DBU介護統計報告, parameter).define();
+    }
+
+    /**
+     * 保険給付【償還_決定】です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(CALL_FLOW_DBU010080)
+    protected IBatchFlowCommand callDBU010080Flow() {
+        DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYMParameter parameter
+                = new DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYMParameter();
+        parameter.setプリントコントロール区分(getParameter().getPrintControlKbn());
+        parameter.set集計年月(getParameter().getShuukeiNengetu().get(連番_5));
+        parameter.set報告年月(getParameter().getHoukokuNengetu());
+        parameter.set作成日付(new RString(getParameter().getSakuseiNitizi().get(連番_5).toString()));
+        parameter.set処理日時(new YMDHMS(getParameter().getSyoriNitizi().getDate(), getParameter().getSyoriNitizi().getTime()));
+        parameter.set市町村コード(getParameter().getShichosonCode().value());
+        parameter.set構成市町村区分(getParameter().getKouseiShichosonKubun());
+        parameter.set旧市町村区分(getParameter().getOldShichosonKubun());
+        parameter.set構成市町村コードリスト(codeList(getParameter().getKouseiShichosonCode()));
+        parameter.set旧市町村コードリスト(codeList(getParameter().getOldShichosonCode()));
+        parameter.set過去集計分市町村コードリスト(getParameter().getShuukeibunShichosonCode());
+        parameter.set過去集計分旧市町村区分(getParameter().getShuukeibunShichosonKubun());
+        parameter.setバッチID(getParameter().getBatchID().get(連番_5));
+        return otherBatchFlow(DBU010080FLOW_FLOWID, SubGyomuCode.DBU介護統計報告, parameter).define();
     }
 
     /**
