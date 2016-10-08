@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyodojukyushakogaku.HanyoListKyodoJukyushaKogakuCsvEditor;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyodoshoriyojukyushajoho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710060.HanyoListKyodoJukyushaKogakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710060.HanyoListKyodoJukyushaKogakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -221,19 +222,19 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
         抽出条件.add(empty);
         if (parameter.get日付抽出区分() != null && !RString.EMPTY.equals(parameter.get日付抽出区分())) {
             temp = TITLE_日付抽出区分;
-            if (すべて.equals(parameter.get日付抽出区分())) {
-                temp = temp.concat(すべて);
+            if (HizukeChushutsuKubun.すべて.getコード().equals(parameter.get日付抽出区分())) {
+                temp = temp.concat(HizukeChushutsuKubun.すべて.get名称());
             }
-            if (直近のみ.equals(parameter.get日付抽出区分())) {
-                temp = temp.concat(直近のみ);
+            if (HizukeChushutsuKubun.直近のみ.getコード().equals(parameter.get日付抽出区分())) {
+                temp = temp.concat(HizukeChushutsuKubun.直近のみ.get名称());
             }
-            if (範囲指定.equals(parameter.get日付抽出区分())) {
-                temp = temp.concat(範囲指定);
+            if (HizukeChushutsuKubun.範囲指定.getコード().equals(parameter.get日付抽出区分())) {
+                temp = temp.concat(HizukeChushutsuKubun.範囲指定.get名称());
             }
             抽出条件.add(temp);
         }
 
-        if (範囲指定.equals(parameter.get日付抽出区分())) {
+        if (HizukeChushutsuKubun.範囲指定.getコード().equals(parameter.get日付抽出区分())) {
             if (!RString.isNullOrEmpty(parameter.get処理対象年月From()) && RString.isNullOrEmpty(parameter.get処理対象年月To())) {
                 temp = TITLE_処理対象年月;
                 temp = temp.concat(parameter.get処理対象年月From()).concat(RString.FULL_SPACE).concat(TILDE)
