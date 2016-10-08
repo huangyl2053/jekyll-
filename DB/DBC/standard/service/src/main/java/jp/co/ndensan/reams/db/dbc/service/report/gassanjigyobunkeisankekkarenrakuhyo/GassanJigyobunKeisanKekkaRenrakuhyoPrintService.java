@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunkeisankekkarenrakuhyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -57,7 +57,8 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
     /**
      * print
      *
-     * @param entityList List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
+     * @param entityList
+     * List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      * @param 宛名データ IShikibetsuTaisho
      * @param 作成日 FlexibleDate
      * @return SourceDataCollection
@@ -76,7 +77,8 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
     /**
      * printSingle
      *
-     * @param entityList List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
+     * @param entityList
+     * List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      * @param 宛名データ IShikibetsuTaisho
      * @param 作成日 FlexibleDate
      * @param reportManager ReportManager

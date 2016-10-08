@@ -5,7 +5,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo.IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper">
       
     <resultMap id="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity">
+               type="jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="taishoNendo" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -61,5 +61,43 @@
         K."taishoNendo" DESC,
         K."shikyuShinseishoSeiriNo" DESC,
         K."shoKisaiHokenshaNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResultEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity">
+        <result property="hokenSeidoCode" column="dbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisai_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbt3172Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper.resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity"/>
+        <association property="dbt3173Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiMapper.ResultMap_DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get処理対象データ" 
+            resultMap="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResultEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter" 
+            fetchSize="500">
+        select 
+        dbt3172.*,
+        dbt3173.*,
+        case dbt3173."hokenSeidoCode"
+        WHEN '3' THEN '4'
+        WHEN '4' THEN '3'
+        ELSE DbT3173."hokenSeidoCode" END AS ソートキー
+        FROM (SELECT * FROM rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS mst
+        WHERE NOT EXISTS (SELECT 'X' FROM rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS slv
+        WHERE mst."hihokenshaNo" = slv."hihokenshaNo"
+        and mst."taishoNendo" = slv."taishoNendo"
+        and mst."shoKisaiHokenshaNo" = slv."shoKisaiHokenshaNo"
+        and mst."shikyuShinseishoSeiriNo" = slv."shikyuShinseishoSeiriNo"
+        and mst."rirekiNo" <![CDATA[ < ]]> slv."rirekiNo")
+        and mst."hihokenshaNo" = #{被保険者番号}
+        and mst."taishoNendo" = #{対象年度}
+        and mst."shoKisaiHokenshaNo" = #{証記載保険者番号}
+        and mst."shikyuShinseishoSeiriNo" = #{連絡票整理番号}) as dbt3172
+        left join rgdb."DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisai" as dbt3173
+        on dbt3172."hihokenshaNo" = dbt3173."hihokenshaNo"
+        AND dbt3172."taishoNendo" = dbt3173."taishoNendo"
+        AND dbt3172."shoKisaiHokenshaNo" = dbt3173."shoKisaiHokenshaNo"
+        AND dbt3172."shikyuShinseishoSeiriNo" = dbt3173."shikyuShinseishoSeiriNo"
+        AND dbt3172."rirekiNo" = dbt3173."rirekiNo"
+        ORDER BY ソートキー ASC,
+        dbt3173."hiHokenshaShoNo" ASC
     </select>
 </mapper>
