@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5830001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001_NenreiKaikyuBetsuYokaigodoJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.chiku.ChikuKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5830001.NenreiKaikyubetsuYokaigodoJokyoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5830001.NenreiKaikyubetsuYokaigodoJokyoHandler;
@@ -80,8 +80,8 @@ public class NenreiKaikyubetsuYokaigodoJokyo {
      * @param div NenreiKaikyubetsuYokaigodoJokyoDiv
      * @return ResponseData<NenreiKaikyubetsuYokaigodoJokyoParameter>
      */
-    public ResponseData<DBD583001Parameter> onClick_btnBatchRegister(NenreiKaikyubetsuYokaigodoJokyoDiv div) {
-        DBD583001Parameter parameter = getHandler(div).getParameter();
+    public ResponseData<DBD583001_NenreiKaikyuBetsuYokaigodoJokyoParameter> onClick_btnBatchRegister(NenreiKaikyubetsuYokaigodoJokyoDiv div) {
+        DBD583001_NenreiKaikyuBetsuYokaigodoJokyoParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 

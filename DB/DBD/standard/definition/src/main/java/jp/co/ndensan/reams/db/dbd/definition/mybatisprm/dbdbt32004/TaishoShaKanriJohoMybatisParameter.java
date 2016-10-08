@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32004;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugengakukanrilist.TaishoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,7 +33,7 @@ public class TaishoShaKanriJohoMybatisParameter implements IMyBatisParameter {
     private boolean is保険料完納者出力;
     private boolean is対象区分_全登録者以外;
     private RString 未納完納区分_未納あり;
-    private YMDHMS システム日付;
+    private FlexibleDate システム日付;
 
     /**
      * コンストラクタです。
@@ -58,7 +58,7 @@ public class TaishoShaKanriJohoMybatisParameter implements IMyBatisParameter {
             FlexibleDate 減額終了日範囲From,
             FlexibleDate 減額終了日範囲To,
             boolean 保険料完納者出力,
-            YMDHMS システム日付) {
+            RDate システム日付) {
         this.基準日 = 基準日;
         if (基準日 != null && 基準日.isWareki()) {
             this.基準日の2年前 = 基準日.plusYear(2);
@@ -72,10 +72,8 @@ public class TaishoShaKanriJohoMybatisParameter implements IMyBatisParameter {
         this.減額終了日範囲From = 減額終了日範囲From;
         this.減額終了日範囲To = 減額終了日範囲To;
         this.is保険料完納者出力 = 保険料完納者出力;
-        this.システム日付 = システム日付;
-        this.未納完納区分_未納あり = MinoKannoKubun.未納あり.get名称();
-        if (TaishoKubun.全登録者以外.getコード().equals(対象区分.getコード())) {
-            is対象区分_全登録者以外 = true;
-        }
+        this.システム日付 = new FlexibleDate(システム日付.toDateString());
+        this.未納完納区分_未納あり = MinoKannoKubun.未納あり.getコード();
+        is対象区分_全登録者以外 = TaishoKubun.全登録者以外.equals(対象区分);
     }
 }

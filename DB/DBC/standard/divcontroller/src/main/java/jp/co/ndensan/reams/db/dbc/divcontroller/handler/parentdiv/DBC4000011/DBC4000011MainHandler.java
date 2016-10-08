@@ -296,7 +296,12 @@ public class DBC4000011MainHandler {
             row.setDeleteButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
-        定率定額区分選択();
+        RString 選択Key = div.getServiceShosai().getRadTeiritsuOrTeigaku().getSelectedKey();
+        if (RST_1.equals(選択Key)) {
+            div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
+        } else if (RST_2.equals(選択Key)) {
+            div.getServiceShosai().getTxtKyufuritsu().clearValue();
+        }
         return identifier;
     }
 
@@ -324,6 +329,12 @@ public class DBC4000011MainHandler {
             return null;
         }
         詳細パネル設定(サービス内容);
+        RString 選択Key = div.getServiceShosai().getRadTeiritsuOrTeigaku().getSelectedKey();
+        if (RST_1.equals(選択Key)) {
+            div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
+        } else if (RST_2.equals(選択Key)) {
+            div.getServiceShosai().getTxtKyufuritsu().clearValue();
+        }
         return identifier;
 
     }
@@ -361,44 +372,44 @@ public class DBC4000011MainHandler {
         }
         div.getServiceShosai().getDdlSanteiKaisuSeigenKikanKubun().setSelectedKey(サービス内容.get算定回数制限期間区分());
         RString 対象事業者実施区分 = サービス内容.get対象事業者実施区分();
-        if (対象事業者実施区分.equals(RST_1) || 対象事業者実施区分.equals(RST_2)) {
+        if (RST_1.equals(対象事業者実施区分) || RST_2.equals(対象事業者実施区分)) {
             div.getServiceShosai().getSegTaishoJigyoJishiKubun().setSelectedKey(対象事業者実施区分);
         } else {
             div.getServiceShosai().getSegTaishoJigyoJishiKubun().clearSelectedItem();
         }
         RString 要支援１ = サービス内容.get要支援１受給者実施区分();
-        if (要支援１.equals(RST_1) || 要支援１.equals(RST_2)) {
+        if (RST_1.equals(要支援１) || RST_2.equals(要支援１)) {
             div.getServiceShosai().getSegYoshien1().setSelectedKey(要支援１);
         } else {
             div.getServiceShosai().getSegTaishoJigyoJishiKubun().clearSelectedItem();
         }
         RString 要支援２ = サービス内容.get要支援２受給者実施区分();
-        if (要支援２.equals(RST_1) || 要支援２.equals(RST_2)) {
+        if (RST_1.equals(要支援２) || RST_2.equals(要支援２)) {
             div.getServiceShosai().getSegYoshien2().setSelectedKey(要支援２);
         } else {
             div.getServiceShosai().getSegYoshien2().clearSelectedItem();
         }
         RString 二次予防 = サービス内容.get二次予防事業対象者実施区分非該当();
-        if (二次予防.equals(RST_1) || 二次予防.equals(RST_2)) {
+        if (RST_1.equals(二次予防) || RST_2.equals(二次予防)) {
             div.getServiceShosai().getSegNijiYobosha().setSelectedKey(二次予防);
         } else {
             div.getServiceShosai().getSegNijiYobosha().clearSelectedItem();
         }
         RString 限度額対象外 = サービス内容.get限度額対象外フラグ();
         List<RString> selectList限度額対象外 = new ArrayList<>();
-        if (限度額対象外.equals(RST_1)) {
+        if (RST_1.equals(限度額対象外)) {
             selectList限度額対象外.add(限度額対象外);
         }
         div.getServiceShosai().getChkGendogakuTaishogai().setSelectedItemsByKey(selectList限度額対象外);
         RString 外部サービス利用型区分 = サービス内容.get外部サービス利用型区分();
         List<RString> selectList外部サービス利用型区分 = new ArrayList<>();
-        if (外部サービス利用型区分.equals(RST_2)) {
+        if (RST_2.equals(外部サービス利用型区分)) {
             selectList外部サービス利用型区分.add(外部サービス利用型区分);
         }
         div.getServiceShosai().getChkGaibuService().setSelectedItemsByKey(selectList外部サービス利用型区分);
         RString 特別地域 = サービス内容.get特別地域加算フラグ();
         List<RString> selectList = new ArrayList<>();
-        if (特別地域.equals(RST_1)) {
+        if (RST_1.equals(特別地域)) {
             selectList.add(特別地域);
         }
         div.getServiceShosai().getChkTokubetsuChiikiKasn().setSelectedItemsByKey(selectList);

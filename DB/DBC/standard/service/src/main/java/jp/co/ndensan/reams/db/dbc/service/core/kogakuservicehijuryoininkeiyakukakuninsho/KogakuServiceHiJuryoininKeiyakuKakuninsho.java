@@ -75,7 +75,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
 
     private static final RString 給付の種類_高額介護サービス費 = new RString("高額介護サービス費");
-    private static final RString 帳票分類ID = new RString("DBC100029_JyuryoItakuKeiyakuKakuninSho");
+    private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
     private static final RString 帳票制御共通_首長名印字位置_公印にかける = new RString("1");
     private static final RString 帳票タイトル = new RString("介護保険給付費 受領委任承認（不承認）確認書 ");
     private ReportSourceWriter<KogakuServiceJyuryoKakuninShoSource> reportSourceWriter;

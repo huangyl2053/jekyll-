@@ -215,7 +215,12 @@ public class ScheduleSetting {
             return ResponseData.of(div).addMessage(保存終了MESSAGE).respond();
         }
         if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            return ResponseData.of(div).forwardWithEventName(DBC6000011TransitionEventName.メニューへ戻る).respond();
+            RString menuID = ResponseHolder.getMenuID();
+            if (メニューID_DBCMNH1001.equals(menuID)) {
+                return ResponseData.of(div).forwardWithEventName(DBC6000011TransitionEventName.メニューへ戻る).respond();
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBC6000011TransitionEventName.情報送付取込へ戻る).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHakuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -42,7 +42,7 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess2 extends BatchProcessBase<S
 
     @Override
     protected void createWriter() {
-        tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員把握, SetaiHakuEntity.class);
+        tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員把握, TempSetaiinHaakuNyuryokuEntity.class);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess2 extends BatchProcessBase<S
         FlexibleDate 資格取得年月日 = 被保険者情報.get資格取得年月日();
         FlexibleDate 基準年月日 = entity.get世帯員所得情報Entity().getKijunYMD();
         FlexibleDate 世帯員基準日 = null;
-        SetaiHakuEntity 世帯員把握Entity = new SetaiHakuEntity();
+        TempSetaiinHaakuNyuryokuEntity 世帯員把握Entity = new TempSetaiinHaakuNyuryokuEntity();
         if (資格取得年月日 != null && 基準年月日 != null && 資格取得年月日.getYearMonth().equals(基準年月日.getYearMonth())) {
             世帯員基準日 = 資格取得年月日;
             世帯員把握Entity.setKijunYMD(世帯員基準日);

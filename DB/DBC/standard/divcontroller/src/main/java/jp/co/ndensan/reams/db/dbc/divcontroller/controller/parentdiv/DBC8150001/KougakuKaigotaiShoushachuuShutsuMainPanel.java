@@ -45,6 +45,7 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
     private static final RString 処理枝番 = new RString("0000");
     private static final RString 年度 = new RString("0000");
     private static final RString 年度内連番 = new RString("0001");
+    private static final RString 実行 = new RString("btnBatchRegister");
 
     /**
      * 初期化状態です。
@@ -58,13 +59,12 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
         set国保連管理(div);
         RString 年月範囲 = DbBusinessConfig.get(ConfigNameDBC.高額対象者抽出再計算_年月範囲, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         getHandler(div).set計算対象期間パネル(年月範囲);
-        List<KokuhorenInterfaceKanri> 国保連インターフェース管理 = DBC5100011MainPanelFinder.createInstance().get処理番号(交換情報識別番号, 処理状態区分).records();
+        List<KokuhorenInterfaceKanri> 国保連インターフェース管理 = DBC5100011MainPanelFinder.createInstance()
+                .get処理番号(交換情報識別番号, 処理状態区分).records();
         if (国保連インターフェース管理 == null || 国保連インターフェース管理.isEmpty()) {
             ValidationMessageControlPairs validPairs = getValidatisonHandler(div).国保連インターフェース管理テーブルチェック();
-            if (validPairs.iterator().hasNext()) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -75,7 +75,8 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
      * @param div div
      * @return ResponseData<DBC815001_KogakuKaigoTaishoshaChushutsuSokyubun>
      */
-    public ResponseData<DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter> onClick_btnBatchRegister(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
+    public ResponseData<DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter>
+            onClick_btnBatchRegister(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
         IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
         IOutputOrder 出力順 = div.getCcdChohyoShutsuryokujun().getSelected出力順();
         manager.save前回出力順(出力順);
@@ -120,7 +121,8 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
 
     private void set国保連管理(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
         RString 連絡票情報 = ConfigKeysKokuhorenTorikomi.高額合算支給額計算結果連絡票情報.getコード();
-        RString 識別番号 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算自己負担額確認情報_交換情報識別番号, RDate.getNowDate(), SubGyomuCode.DBC介護給付, 連絡票情報);
+        RString 識別番号 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算自己負担額確認情報_交換情報識別番号,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付, 連絡票情報);
         List<KokuhorenInterfaceKanri> kokuhorenInterfaceKanri = DBC5100011MainPanelFinder.createInstance().
                 get国保連インターフェース管理(KougakuKaigotaiShouMainPanelMapperParameter.createSelectListParam(null,
                                 null, null, null, null, null, 終了, 識別番号)).records();

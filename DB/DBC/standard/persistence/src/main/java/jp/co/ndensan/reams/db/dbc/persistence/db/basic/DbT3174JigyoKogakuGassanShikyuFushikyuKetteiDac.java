@@ -192,7 +192,6 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac implements ISaveabl
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<ITrueFalseCriteria> criteria = new ArrayList<>();
         criteria.add(eq(hihokenshaNo, 被保険者番号));
-        criteria.add(eq(isDeleted, false));
         if (対象年度 != null && !対象年度.isEmpty()) {
             criteria.add(eq(taishoNendo, 対象年度));
         }

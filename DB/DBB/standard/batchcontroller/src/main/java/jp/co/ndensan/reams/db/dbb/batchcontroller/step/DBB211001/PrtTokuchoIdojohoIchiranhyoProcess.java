@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran.DBB200021_TokubetsuChoshuIdojohoIchiranEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran.TokuChoYidoIchiranEntity;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran.TokubetsuChoshuIdojohoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuidojohoichiran.TokubetsuChoshuIdojohoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.PrtTokuchoIdojohoIchiranhyoProcessParameter;
@@ -70,11 +70,13 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 特別徴収異動情報一覧表の発行します。
@@ -89,6 +91,7 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     private static final RString RIGHT_FORMAT = new RString("}'");
     private static final RString MIDDLE_FORMAT = new RString(",");
     private static final RString 出力ファイル名 = new RString("TokubetsuChoshuIdojohoIchiranData.csv");
+    private static final RString 出力ファイル名_出力条件 = new RString("特別徴収異動情報一覧表");
     private static final RString 出力ファイル名_NO_DATA = new RString("-");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200021");
     private static final RString コンマ = new RString(",");
@@ -97,7 +100,6 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     private static final RString 年金保険者名称_地共済 = new RString("地共済");
     private static final RString CSV出力有無_無り = new RString("なし");
     private static final RString CSV出力有無_有り = new RString("あり");
-    private static final RString ZERO = new RString("0");
 
     private PrtTokuchoIdojohoIchiranhyoProcessParameter parameter;
     private IOutputOrder suturyokujun;
@@ -106,6 +108,8 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     private RString 特別徴収異動情報一覧表ＣＳＶFilePath;
     private FileSpoolManager manager;
     private PrtTokuchoIdojohoIchiranhyoProcessCore processCore;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private Association 地方公共団体;
     private boolean isHasData;
 
     @BatchWriter
@@ -119,11 +123,13 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     protected void initialize() {
         isHasData = false;
         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        if (!RString.isNullOrEmpty(parameter.get出力順ID()) && !ZERO.equals(parameter.get出力順ID())) {
+        if (!RString.isNullOrEmpty(parameter.get出力順ID())) {
             suturyokujun = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBB介護賦課,
                     new ReportId(parameter.get帳票ID()), Long.valueOf(parameter.get出力順ID().toString()));
         }
         processCore = new PrtTokuchoIdojohoIchiranhyoProcessCore(suturyokujun);
+        帳票制御共通情報 = get帳票制御共通情報();
+        地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         保険者情報_保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 parameter.getシステム日時().getDate(), SubGyomuCode.DBU介護統計報告);
         保険者情報_保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称,
@@ -133,7 +139,7 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     @Override
     protected IBatchReader createReader() {
         RString 出力順 = MyBatisOrderByClauseCreator.create(
-                TokubetsuChoshuIdojohoIchiranProperty.DBB200021_TokubetsuChoshuIdojohoIchiranEnum.class, suturyokujun);
+                DBB200021_TokubetsuChoshuIdojohoIchiranEnum.class, suturyokujun);
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         RStringBuilder rStringBuilder = new RStringBuilder();
@@ -187,7 +193,7 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
         if (t.get宛先() != null) {
             宛先情報 = AtesakiFactory.createInstance(t.get宛先());
         }
-        ChohyoSeigyoKyotsu 帳票制御共通情報 = get帳票制御共通情報();
+
         EditedAtesaki 編集後宛先 = get編集後宛先(宛先情報, 帳票制御共通情報);
         RString 行政区コード = 行政区コードの編集(編集後宛先);
         HyojiCodes 表示コード = get表示コード(t, 帳票制御共通情報);
@@ -216,7 +222,7 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
         if (isHasData) {
             manager.spool(特別徴収異動情報一覧表ＣＳＶFilePath);
             csv出力有無 = CSV出力有無_有り;
-            csvファイル名 = 出力ファイル名;
+            csvファイル名 = 出力ファイル名_出力条件;
         }
         loadバッチ出力条件リスト(出力条件リスト, new ReportId(parameter.get帳票ID()),
                 出力ページ数, csv出力有無, csvファイル名, 帳票名);
@@ -225,13 +231,12 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
 
     private ChohyoSeigyoKyotsu get帳票制御共通情報() {
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
-        ChohyoSeigyoKyotsu 帳票制御共通情報 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課,
+        return chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課,
                 new ReportId(parameter.get帳票ID()));
-        return 帳票制御共通情報;
     }
 
     private EditedAtesaki get編集後宛先(IAtesaki 宛先情報, ChohyoSeigyoKyotsu 帳票制御共通情報) {
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+
         EditedAtesaki 編集後宛先 = null;
         if (宛先情報 != null && 地方公共団体 != null
                 && 帳票制御共通情報 != null) {
@@ -332,9 +337,9 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
         csvEntity.setカナ氏名(特徴異動追加情報.getDtKanaShimei());
         csvEntity.set生年月日(特徴異動追加情報.getDtBirthDay());
         csvEntity.set行政区コード(行政区コード);
-        csvEntity.set金額1(特徴異動追加情報.getDtKakushuKingaku1());
-        csvEntity.set金額2(特徴異動追加情報.getDtKakushuKingaku2());
-        csvEntity.set金額3(特徴異動追加情報.getDtKakushuKingaku3());
+        csvEntity.set金額1(金額の編集(特徴異動追加情報.getDtKakushuKingaku1()));
+        csvEntity.set金額2(金額の編集(特徴異動追加情報.getDtKakushuKingaku2()));
+        csvEntity.set金額3(金額の編集(特徴異動追加情報.getDtKakushuKingaku3()));
         if (識別コード != null) {
             csvEntity.set識別コード(識別コード.value());
         } else {
@@ -351,10 +356,16 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
         return csvEntity;
     }
 
+    private RString 金額の編集(RString 金額) {
+        Decimal 編集金額 = Decimal.ZERO;
+        if (!RString.isNullOrEmpty(金額)) {
+            編集金額 = new Decimal(金額.toString());
+        }
+        return DecimalFormatter.toコンマ区切りRString(編集金額, 0);
+    }
+
     private void loadバッチ出力条件リスト(List<RString> 出力条件リスト,
             ReportId 帳票ID, int 出力ページ数, RString csv出力有無, RString csvファイル名, RString 帳票名) {
-
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         RString 導入団体コード = 地方公共団体.getLasdecCode_().value();
         RString 市町村名 = 地方公共団体.get市町村名();
 

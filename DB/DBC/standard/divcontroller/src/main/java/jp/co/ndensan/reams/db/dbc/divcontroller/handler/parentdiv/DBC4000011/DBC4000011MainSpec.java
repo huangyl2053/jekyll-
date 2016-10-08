@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4000011;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4000011.DBC4000011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4000011.dgService_Row;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,30 +41,18 @@ public enum DBC4000011MainSpec implements IPredicate<DBC4000011MainDiv> {
             if (allRows == null || allRows.isEmpty()) {
                 return false;
             }
-            RString サービスコード = new RString(div.getKensakuJoken().getCcdServiceCdInput().getサービスコード1().toString()
-                    + div.getKensakuJoken().getCcdServiceCdInput().getサービスコード2().toString());
-            List<dgService_Row> 同サービスRow = new ArrayList<>();
             dgService_Row 直近データ = null;
+            FlexibleDate 提供開始年月 = new FlexibleDate(div.getServiceShosai().getTxtTeikyoKikanYM().getFromValue().toDateString());
             for (dgService_Row row : allRows) {
-                if (!サービスコード.equals(row.getServiceCd())) {
-                    continue;
-                }
                 if (RString.isNullOrEmpty(row.getTeikyoShuryoYM())) {
                     直近データ = row;
-                } else {
-                    同サービスRow.add(row);
                 }
             }
             if (直近データ == null) {
                 return false;
             }
-            if (同サービスRow.isEmpty()) {
-                return false;
-            }
-            for (dgService_Row row : 同サービスRow) {
-                if (row.getTeikyoKaishiKey().getValue().isBeforeOrEquals(直近データ.getTeikyoKaishiKey().getValue())) {
-                    return true;
-                }
+            if (提供開始年月.isBeforeOrEquals(直近データ.getTeikyoKaishiKey().getValue())) {
+                return true;
             }
             return false;
         }

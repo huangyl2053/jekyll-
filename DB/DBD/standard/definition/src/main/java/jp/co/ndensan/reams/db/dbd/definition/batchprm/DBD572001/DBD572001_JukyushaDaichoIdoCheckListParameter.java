@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD572001Parameter extends BatchParameterBase {
+public class DBD572001_JukyushaDaichoIdoCheckListParameter extends BatchParameterBase {
 
     @BatchParameter(key = "今回抽出開始年月日", name = "今回抽出開始年月日")
     private RDate 今回抽出開始年月日;

@@ -28,10 +28,10 @@ public class tplChushutsuJoken1Div extends TabPanel {
     private TextBoxDateRange txtRangeYM;
     @JsonProperty("txtRangeHihokenshaNoFrom")
     private TextBoxCode txtRangeHihokenshaNoFrom;
-    @JsonProperty("btnHihokenshaNoFromSearch")
-    private Button btnHihokenshaNoFromSearch;
     @JsonProperty("txtRangeHihokenshaNoTo")
     private TextBoxCode txtRangeHihokenshaNoTo;
+    @JsonProperty("btnHihokenshaNoFromSearch")
+    private Button btnHihokenshaNoFromSearch;
     @JsonProperty("btnHihokenshaNoToSearch")
     private Button btnHihokenshaNoToSearch;
     @JsonProperty("radKyufuJissekiKubun")
@@ -104,24 +104,6 @@ public class tplChushutsuJoken1Div extends TabPanel {
     }
 
     /*
-     * getbtnHihokenshaNoFromSearch
-     * @return btnHihokenshaNoFromSearch
-     */
-    @JsonProperty("btnHihokenshaNoFromSearch")
-    public Button getBtnHihokenshaNoFromSearch() {
-        return btnHihokenshaNoFromSearch;
-    }
-
-    /*
-     * setbtnHihokenshaNoFromSearch
-     * @param btnHihokenshaNoFromSearch btnHihokenshaNoFromSearch
-     */
-    @JsonProperty("btnHihokenshaNoFromSearch")
-    public void setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
-        this.btnHihokenshaNoFromSearch = btnHihokenshaNoFromSearch;
-    }
-
-    /*
      * gettxtRangeHihokenshaNoTo
      * @return txtRangeHihokenshaNoTo
      */
@@ -137,6 +119,24 @@ public class tplChushutsuJoken1Div extends TabPanel {
     @JsonProperty("txtRangeHihokenshaNoTo")
     public void setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
         this.txtRangeHihokenshaNoTo = txtRangeHihokenshaNoTo;
+    }
+
+    /*
+     * getbtnHihokenshaNoFromSearch
+     * @return btnHihokenshaNoFromSearch
+     */
+    @JsonProperty("btnHihokenshaNoFromSearch")
+    public Button getBtnHihokenshaNoFromSearch() {
+        return btnHihokenshaNoFromSearch;
+    }
+
+    /*
+     * setbtnHihokenshaNoFromSearch
+     * @param btnHihokenshaNoFromSearch btnHihokenshaNoFromSearch
+     */
+    @JsonProperty("btnHihokenshaNoFromSearch")
+    public void setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
+        this.btnHihokenshaNoFromSearch = btnHihokenshaNoFromSearch;
     }
 
     /*
