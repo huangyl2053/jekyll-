@@ -297,6 +297,14 @@ public class ShinsakaiKekkaTorokuHandler {
         } else {
             div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setValue(RString.EMPTY);
         }
+        /**
+         * 二次判断が「要介護１」の場合のみ、状態像の入力が必須となるがを設定
+         */
+        if (div.getDdlNijiHantei().getSelectedKey().equals(new RString("21"))) {
+            div.getDdlJotaiZo().setRequired(true);
+        } else {
+            div.getDdlJotaiZo().setRequired(false);
+        }
         div.getBtnNinteiChosaJokyoShokai().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.setHdnHasChanged(getSelectItem());
