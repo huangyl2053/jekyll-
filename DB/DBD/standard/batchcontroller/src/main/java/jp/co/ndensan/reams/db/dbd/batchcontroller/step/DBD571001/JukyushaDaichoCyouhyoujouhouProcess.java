@@ -193,7 +193,20 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         資格情報EntityList = new ArrayList();
         老齢福祉年金情報EntityList = new ArrayList();
         生活保護情報EntityList = new ArrayList();
+        ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村セキュリティ情報 != null) {
+            導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+        }
+        if (導入形態コード.equals(DonyuKeitaiCode.事務広域)
+                || 導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)) {
+            is広域 = true;
+        }
+        if (導入形態コード.equals(DonyuKeitaiCode.事務単一)) {
+            is単一 = true;
+        }
     }
+
     @BatchWriter
     private BatchReportWriter<JukyushaDaichoReportSource> batchReportWrite;
     private ReportSourceWriter<JukyushaDaichoReportSource> reportSourceWriter;
@@ -215,18 +228,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
 
             }
         }
-        ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
-        ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村セキュリティ情報 != null) {
-            導入形態コード = 市町村セキュリティ情報.get導入形態コード();
-        }
-        if (導入形態コード.equals(DonyuKeitaiCode.事務広域)
-                || 導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)) {
-            is広域 = true;
-        }
-        if (導入形態コード.equals(DonyuKeitaiCode.事務単一)) {
-            is単一 = true;
-        }
+
         保険者番号の取得 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         保険者名称の取得 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
