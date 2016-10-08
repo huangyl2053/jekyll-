@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBC-2570-030 wangxue -->
 
  <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper">
-    <!-- <select resultOrdered="true" id="get償還払支給申請データ" 
+    <select resultOrdered="true" id="get送付対象取得のデータ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
             resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500">
         SELECT
@@ -18,6 +18,14 @@
             AND dbt3034."shinseiYMD" <![CDATA[<>]]> '')
             OR dbt3034."kaishuShinseiKubun" = '2')
             AND dbt3034."serviceTeikyoYM" <![CDATA[<]]> #{処理年月}
+            AND NOT EXISTS (
+                SELECT 'X'
+                FROM rgdb."DbT3036ShokanHanteiKekka" AS 判定結果
+                WHERE 判定結果."hiHokenshaNo" = dbt3034."hiHokenshaNo"
+                 AND 判定結果."serviceTeikyoYM" = dbt3034."serviceTeikyoYM"
+                 AND 判定結果."seiriNo" = dbt3034."seiriNo"
+                 AND 判定結果."ketteiYMD" <![CDATA[<>]]> ''
+                 AND 判定結果."ketteiYMD" IS NOT NULL)
         </if>
         <if test="再処理区分 == 1">
             (dbt3034."sofuYM" IS NULL OR dbt3034."sofuYM" = ''
@@ -28,11 +36,19 @@
             AND dbt3034."shinseiYMD" <![CDATA[<>]]> '')
             OR dbt3034."kaishuShinseiKubun" = '2')
             AND dbt3034."serviceTeikyoYM" <![CDATA[<]]> #{処理年月}
+            AND NOT EXISTS (
+                SELECT 'X'
+                FROM rgdb."DbT3036ShokanHanteiKekka" AS 判定結果
+                WHERE 判定結果."hiHokenshaNo" = dbt3034."hiHokenshaNo"
+                 AND 判定結果."serviceTeikyoYM" = dbt3034."serviceTeikyoYM"
+                 AND 判定結果."seiriNo" = dbt3034."seiriNo"
+                 AND 判定結果."ketteiYMD" <![CDATA[<>]]> ''
+                 AND 判定結果."ketteiYMD" IS NOT NULL)
         </if>
     </select>
     
     <select resultOrdered="true" id="get被保険者がないのデータ"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity" fetchSize="500">
         SELECT 
             申請.*
         FROM "DbWT2111ShokanShinsei" AS 申請
@@ -46,5 +62,1047 @@
                 OR CONCAT(申請."serviceTeikyoYM",'01') <![CDATA[<]]> 被保険者."shikakuSoshitsuYMD"
                 )
         )
-    </select> -->
+    </select>
+    
+    <select resultOrdered="true" id="get受給者の判定と受給者台帳" resultMap="result_GetPanTeiToDaiSyouEntity">
+        SELECT SUB.*
+        FROM(
+            SELECT
+               A.*,
+               ROW_NUMBER() OVER (PARTITION BY A."renban"
+                                 ORDER BY A."dbT4001JukyushaDaicho_rirekiNo" DESC,
+                                          A."dbT4001JukyushaDaicho_edaban" DESC ) AS rowNum
+            FROM(
+               SELECT
+                   <include refid="allColumns_DbWT2111ShokanShinsei" />,
+                   受給者.*
+               FROM
+                   "DbWT2111ShokanShinsei"
+               INNER JOIN(
+                   SELECT
+                       <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />
+                   FROM
+                       rgdb."DbT4001JukyushaDaicho"
+                   WHERE
+                       "logicalDeletedFlag" = FALSE) AS 受給者
+                   ON
+                       "DbWT2111ShokanShinsei"."hiHokenshaNo" = 受給者."dbT4001JukyushaDaicho_hihokenshaNo"
+               WHERE(
+                   受給者."dbT4001JukyushaDaicho_yukoMukoKubun" = '1' AND
+                   SUBSTR(受給者."dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",0,6) <![CDATA[ <= ]]> "DbWT2111ShokanShinsei"."serviceTeikyoYM" AND
+                   "DbWT2111ShokanShinsei"."serviceTeikyoYM" <![CDATA[ <= ]]> SUBSTR(受給者."dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",0,6)) OR
+                   (受給者."dbT4001JukyushaDaicho_kyuSochishaFlag" = TRUE AND
+                   受給者."dbT4001JukyushaDaicho_yokaigoJotaiKubunCode" = '01')) AS A) AS SUB
+         WHERE
+            SUB.rowNum = 1
+     </select>
+     
+     <resultMap id="result_GetPanTeiToDaiSyouEntity" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.getpanteitodaisyou.GetPanTeiToDaiSyouEntity" autoMapping="true">
+        <association property="償還払支給申請一時TBL" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="受給者台帳TBL" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+    </resultMap>
+     
+     <select resultOrdered="true" id="get償還払支給申請一時" 
+             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity">
+         SELECT 
+            申請.*
+         FROM "DbWT2111ShokanShinsei" AS 申請
+         WHERE 申請."jukyushaDaichoFlag" = FALSE
+     </select>
+     
+    <select resultOrdered="true" id="get保険者番号取込データ"
+            resultMap="resultMap_HokenshaTorikomiEntity" fetchSize="500">
+        SELECT 
+            "DbWT1001Hihokensha"."exHokenshaNo",
+            "DbWT1001Hihokensha"."exHokenshaName",
+            <include refid="allColumns_DbWT2111ShokanShinsei" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_HokenshaTorikomiEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.HokenshaTorikomiEntity">
+        <id column="renban" />
+        <result property="保険者番号" column="exHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="保険者名" column="exHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="償還一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get保険者番号データ"
+            resultMap="resultMap_HokenshaNoShutokuEntity" fetchSize="500" >
+        SELECT 
+            dbwt2111."hokenshaNo",
+            COUNT(DISTINCT(dbwt2111."hiHokenshaNo" || dbwt2111."serviceTeikyoYM" || dbwt2111."seiriNo")) AS num_count
+        FROM "DbWT2111ShokanShinsei" AS dbwt2111
+        WHERE 
+            dbwt2111."sofuJogaiFlag" = false
+        GROUP BY
+            dbwt2111."hokenshaNo"
+    </select>
+    <resultMap autoMapping="true" id="resultMap_HokenshaNoShutokuEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.HokenshaNoShutokuEntity">
+        <id property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="count" column="num_count" />
+    </resultMap> 
+    
+    <select resultOrdered="true" id="get償還払請求基本情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsKihonTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.allColumns_DbT3038ShokanKihon" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3038ShokanKihon"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3038ShokanKihon"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3038ShokanKihon"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3038ShokanKihon"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3038ShokanKihon"."jigyoshaNo" ASC,
+            "DbT3038ShokanKihon"."yoshikiNo" ASC,
+            "DbT3038ShokanKihon"."meisaiNo" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsKihonTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsKihonTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3038ShokanKihon_jigyoshaNo" />
+        <id column="dbT3038ShokanKihon_yoshikiNo" />
+        <id column="dbT3038ShokanKihon_meisaiNo" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="基本Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get償還払請求明細情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsMeisaiTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3039ShokanMeisaiMapper.allColumns_DbT3039ShokanMeisai" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3039ShokanMeisai"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3039ShokanMeisai"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3039ShokanMeisai"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3039ShokanMeisai"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3039ShokanMeisai"."jigyoshaNo" ASC,
+            "DbT3039ShokanMeisai"."yoshikiNo" ASC,
+            "DbT3039ShokanMeisai"."meisaiNo" ASC,
+            "DbT3039ShokanMeisai"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsMeisaiTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsMeisaiTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3039ShokanMeisai_jigyoshaNo" />
+        <id column="dbT3039ShokanMeisai_yoshikiNo" />
+        <id column="dbT3039ShokanMeisai_meisaiNo" />
+        <id column="dbT3039ShokanMeisai_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="明細Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3039ShokanMeisaiMapper.ResultMap_DbT3039ShokanMeisaiEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get償還払請求住所地特例情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsMeisaiJutokuTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.allColumns_DbT3107ShokanMeisaiJushochiTokurei" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3107ShokanMeisaiJushochiTokurei"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3107ShokanMeisaiJushochiTokurei"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3107ShokanMeisaiJushochiTokurei"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3107ShokanMeisaiJushochiTokurei"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3107ShokanMeisaiJushochiTokurei"."jigyoshaNo" ASC,
+            "DbT3107ShokanMeisaiJushochiTokurei"."yoshikiNo" ASC,
+            "DbT3107ShokanMeisaiJushochiTokurei"."meisaiNo" ASC,
+            "DbT3107ShokanMeisaiJushochiTokurei"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsMeisaiJutokuTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsMeisaiJutokuTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo" />
+        <id column="dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo" />
+        <id column="dbT3107ShokanMeisaiJushochiTokurei_meisaiNo" />
+        <id column="dbT3107ShokanMeisaiJushochiTokurei_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="明細_住所地特例Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.ResultMap_DbT3107ShokanMeisaiJushochiTokureiEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get緊急時施設療養情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsShisetsuRyoyoTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3040ShokanKinkyuShisetsuRyoyoMapper.allColumns_DbT3040ShokanKinkyuShisetsuRyoyo" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3040ShokanKinkyuShisetsuRyoyo"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3040ShokanKinkyuShisetsuRyoyo"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3040ShokanKinkyuShisetsuRyoyo"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3040ShokanKinkyuShisetsuRyoyo"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3040ShokanKinkyuShisetsuRyoyo"."jigyoshaNo" ASC,
+            "DbT3040ShokanKinkyuShisetsuRyoyo"."yoshikiNo" ASC,
+            "DbT3040ShokanKinkyuShisetsuRyoyo"."meisaiNo" ASC,
+            "DbT3040ShokanKinkyuShisetsuRyoyo"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsShisetsuRyoyoTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsShisetsuRyoyoTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3040ShokanKinkyuShisetsuRyoyo_jigyoshaNo" />
+        <id column="dbT3040ShokanKinkyuShisetsuRyoyo_yoshikiNo" />
+        <id column="dbT3040ShokanKinkyuShisetsuRyoyo_meisaiNo" />
+        <id column="dbT3040ShokanKinkyuShisetsuRyoyo_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="緊急時施設療養Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3040ShokanKinkyuShisetsuRyoyoMapper.ResultMap_DbT3040ShokanKinkyuShisetsuRyoyoEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get所定疾患施設療養費情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsShoteiShikkanTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3052ShokanShoteiShikkanShisetsuRyoyoMapper.allColumns_DbT3052ShokanShoteiShikkanShisetsuRyoyo" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3052ShokanShoteiShikkanShisetsuRyoyo"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."jigyoshaNo" ASC,
+            "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."yoshikiNo" ASC,
+            "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."meisaiNo" ASC,
+            "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsShoteiShikkanTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsShoteiShikkanTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_jigyoshaNo" />
+        <id column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_yoshikiNo" />
+        <id column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_meisaiNo" />
+        <id column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="所定疾患施設療養費Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3052ShokanShoteiShikkanShisetsuRyoyoMapper.ResultMap_DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get特定診療費情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsTokuteiShiryohiTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3041ShokanTokuteiShinryohiMapper.allColumns_DbT3041ShokanTokuteiShinryohi" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3041ShokanTokuteiShinryohi"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3041ShokanTokuteiShinryohi"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3041ShokanTokuteiShinryohi"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3041ShokanTokuteiShinryohi"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3041ShokanTokuteiShinryohi"."jigyoshaNo" ASC,
+            "DbT3041ShokanTokuteiShinryohi"."yoshikiNo" ASC,
+            "DbT3041ShokanTokuteiShinryohi"."meisaiNo" ASC,
+            "DbT3041ShokanTokuteiShinryohi"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsTokuteiShiryohiTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsTokuteiShiryohiTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3041ShokanTokuteiShinryohi_jigyoshaNo" />
+        <id column="dbT3041ShokanTokuteiShinryohi_yoshikiNo" />
+        <id column="dbT3041ShokanTokuteiShinryohi_meisaiNo" />
+        <id column="dbT3041ShokanTokuteiShinryohi_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="特定診療費Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3041ShokanTokuteiShinryohiMapper.ResultMap_DbT3041ShokanTokuteiShinryohiEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get特定診療費_特別療養費情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsTokubetsuRyoyohiTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3042ShokanTokuteiShinryoTokubetsuRyoyoMapper.allColumns_DbT3042ShokanTokuteiShinryoTokubetsuRyoyo" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"."jigyoshaNo" ASC,
+            "DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"."yoshikiNo" ASC,
+            "DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"."meisaiNo" ASC,
+            "DbT3042ShokanTokuteiShinryoTokubetsuRyoyo"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsTokubetsuRyoyohiTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsTokubetsuRyoyohiTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3042ShokanTokuteiShinryoTokubetsuRyoyo_jigyoshaNo" />
+        <id column="dbT3042ShokanTokuteiShinryoTokubetsuRyoyo_yoshikiNo" />
+        <id column="dbT3042ShokanTokuteiShinryoTokubetsuRyoyo_meisaiNo" />
+        <id column="dbT3042ShokanTokuteiShinryoTokubetsuRyoyo_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="特別療養費Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3042ShokanTokuteiShinryoTokubetsuRyoyoMapper.ResultMap_DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get償還払請求食事費用情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsShokujiTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3043ShokanShokujiHiyoMapper.allColumns_DbT3043ShokanShokujiHiyo" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3043ShokanShokujiHiyo"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3043ShokanShokujiHiyo"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3043ShokanShokujiHiyo"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3043ShokanShokujiHiyo"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3043ShokanShokujiHiyo"."jigyoshaNo" ASC,
+            "DbT3043ShokanShokujiHiyo"."yoshikiNo" ASC,
+            "DbT3043ShokanShokujiHiyo"."meisaiNo" ASC,
+            "DbT3043ShokanShokujiHiyo"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsShokujiTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsShokujiTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3043ShokanShokujiHiyo_jigyoshaNo" />
+        <id column="dbT3043ShokanShokujiHiyo_yoshikiNo" />
+        <id column="dbT3043ShokanShokujiHiyo_meisaiNo" />
+        <id column="dbT3043ShokanShokujiHiyo_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="食事費用Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3043ShokanShokujiHiyoMapper.ResultMap_DbT3043ShokanShokujiHiyoEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get福祉用具販売費情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsFukushiYoguTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.allColumns_DbT3048ShokanFukushiYoguHanbaihi" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3048ShokanFukushiYoguHanbaihi"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3048ShokanFukushiYoguHanbaihi"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3048ShokanFukushiYoguHanbaihi"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3048ShokanFukushiYoguHanbaihi"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3048ShokanFukushiYoguHanbaihi"."jigyoshaNo" ASC,
+            "DbT3048ShokanFukushiYoguHanbaihi"."yoshikiNo" ASC,
+            "DbT3048ShokanFukushiYoguHanbaihi"."meisaiNo" ASC,
+            "DbT3048ShokanFukushiYoguHanbaihi"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsFukushiYoguTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsFukushiYoguTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3048ShokanFukushiYoguHanbaihi_jigyoshaNo" />
+        <id column="dbT3048ShokanFukushiYoguHanbaihi_yoshikiNo" />
+        <id column="dbT3048ShokanFukushiYoguHanbaihi_meisaiNo" />
+        <id column="dbT3048ShokanFukushiYoguHanbaihi_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="福祉用具販売費Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.ResultMap_DbT3048ShokanFukushiYoguHanbaihiEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get住宅改修情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsJutakuTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.allColumns_DbT3049ShokanJutakuKaishu" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3049ShokanJutakuKaishu"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3049ShokanJutakuKaishu"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3049ShokanJutakuKaishu"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3049ShokanJutakuKaishu"."jigyoshaNo" ASC,
+            "DbT3049ShokanJutakuKaishu"."yoshikiNo" ASC,
+            "DbT3049ShokanJutakuKaishu"."meisaiNo" ASC,
+            "DbT3049ShokanJutakuKaishu"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsJutakuTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsJutakuTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3049ShokanJutakuKaishu_jigyoshaNo" />
+        <id column="dbT3049ShokanJutakuKaishu_yoshikiNo" />
+        <id column="dbT3049ShokanJutakuKaishu_meisaiNo" />
+        <id column="dbT3049ShokanJutakuKaishu_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="住宅改修Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.ResultMap_DbT3049ShokanJutakuKaishuEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get償還払請求集計情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsShukeiTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.allColumns_DbT3053ShokanShukei" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3053ShokanShukei"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3053ShokanShukei"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3053ShokanShukei"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3053ShokanShukei"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3053ShokanShukei"."jigyoshaNo" ASC,
+            "DbT3053ShokanShukei"."yoshikiNo" ASC,
+            "DbT3053ShokanShukei"."meisaiNo" ASC,
+            "DbT3053ShokanShukei"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsShukeiTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsShukeiTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3053ShokanShukei_jigyoshaNo" />
+        <id column="dbT3053ShokanShukei_yoshikiNo" />
+        <id column="dbT3053ShokanShukei_meisaiNo" />
+        <id column="dbT3053ShokanShukei_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="集計Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get特定入所者介護サービス費用データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsTokuteiNyushoTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoMapper.allColumns_DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."jigyoshaNo" ASC,
+            "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."yoshikiNo" ASC,
+            "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."meisaiNo" ASC,
+            "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsTokuteiNyushoTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsTokuteiNyushoTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_jigyoshaNo" />
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_yoshikiNo" />
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_meisaiNo" />
+        <id column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="特定入所者介護サービス費用Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoMapper.ResultMap_DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get社会福祉法人軽減額データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsShafukuTempEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT2111ShokanShinsei" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3051ShokanShakaiFukushiHojinKeigengaku" />
+        FROM "DbWT2111ShokanShinsei"
+        INNER JOIN "DbWT1001Hihokensha"
+        ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+        INNER JOIN rgdb."DbT3051ShokanShakaiFukushiHojinKeigengaku"
+        ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = "DbT3051ShokanShakaiFukushiHojinKeigengaku"."hiHokenshaNo"
+        AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = "DbT3051ShokanShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"
+        AND "DbWT2111ShokanShinsei"."seiriNo" = "DbT3051ShokanShakaiFukushiHojinKeigengaku"."seiriNo"
+        WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+        AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+        ORDER BY
+            "DbWT2111ShokanShinsei"."hiHokenshaNo" ASC,
+            "DbWT2111ShokanShinsei"."serviceTeikyoYM" ASC,
+            "DbWT2111ShokanShinsei"."seiriNo" ASC,
+            "DbT3051ShokanShakaiFukushiHojinKeigengaku"."jigyoshaNo" ASC,
+            "DbT3051ShokanShakaiFukushiHojinKeigengaku"."yoshikiNo" ASC,
+            "DbT3051ShokanShakaiFukushiHojinKeigengaku"."meisaiNo" ASC,
+            "DbT3051ShokanShakaiFukushiHojinKeigengaku"."renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsShafukuTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsShafukuTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id column="dbT3051ShokanShakaiFukushiHojinKeigengaku_jigyoshaNo" />
+        <id column="dbT3051ShokanShakaiFukushiHojinKeigengaku_yoshikiNo" />
+        <id column="dbT3051ShokanShakaiFukushiHojinKeigengaku_meisaiNo" />
+        <id column="dbT3051ShokanShakaiFukushiHojinKeigengaku_renban" />
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="社会福祉法人軽減額Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper.ResultMap_DbT3051ShokanShakaiFukushiHojinKeigengakuEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="getサービス計画情報データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_InsKeikakuTempEntity" fetchSize="500" >
+        SELECT allService.*
+        FROM(
+            SELECT
+                <include refid="allColumns_DbWT2111ShokanShinsei" />,
+                <include refid="allColumns_DbWT1001Hihokensha" />,
+                <include refid="allColumns_ShokanServicePlan" />,
+                '',
+                '',
+                0,
+                0,
+                0
+            FROM "DbWT2111ShokanShinsei"
+            INNER JOIN "DbWT1001Hihokensha"
+            ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+            INNER JOIN rgdb."DbT3045ShokanServicePlan200004" as servicePlan
+            ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = servicePlan."hiHokenshaNo"
+            AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = servicePlan."serviceTeikyoYM"
+            AND "DbWT2111ShokanShinsei"."seiriNo" = servicePlan."seiriNo"
+            WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+            AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+           UNION(
+                SELECT
+                    <include refid="allColumns_DbWT2111ShokanShinsei" />,
+                    <include refid="allColumns_DbWT1001Hihokensha" />,
+                    <include refid="allColumns_ShokanServicePlan" />,
+                    servicePlan."tantokangoshienSemmoninNo" AS "servicePlan_tantokangoshienSemmoninNo",
+                    servicePlan."tekiyo" AS "servicePlan_tekiyo",
+                    0,
+                    0,
+                    0
+                FROM "DbWT2111ShokanShinsei"
+                INNER JOIN "DbWT1001Hihokensha"
+                ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+                INNER JOIN rgdb."DbT3046ShokanServicePlan200604" as servicePlan
+                ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = servicePlan."hiHokenshaNo"
+                AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = servicePlan."serviceTeikyoYM"
+                AND "DbWT2111ShokanShinsei"."seiriNo" = servicePlan."seiriNo"
+                WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+                AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+                )
+           UNION(
+                SELECT
+                    <include refid="allColumns_DbWT2111ShokanShinsei" />,
+                    <include refid="allColumns_DbWT1001Hihokensha" />,
+                    <include refid="allColumns_ShokanServicePlan" />,
+                    servicePlan."tantokangoshienSemmoninNo" AS "servicePlan_tantokangoshienSemmoninNo",
+                    servicePlan."tekiyo" AS "servicePlan_tekiyo",
+                    servicePlan."kaisu" AS "servicePlan_kaisu",
+                    servicePlan."serviceTanisu" AS "servicePlan_serviceTanisu",
+                    servicePlan."serviceTanisuTotal" AS "servicePlan_serviceTanisuTotal"
+                FROM "DbWT2111ShokanShinsei"
+                INNER JOIN "DbWT1001Hihokensha"
+                ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
+                INNER JOIN rgdb."DbT3047ShokanServicePlan200904" as servicePlan
+                ON "DbWT2111ShokanShinsei"."hiHokenshaNo" = servicePlan."hiHokenshaNo"
+                AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = servicePlan."serviceTeikyoYM"
+                AND "DbWT2111ShokanShinsei"."seiriNo" = servicePlan."seiriNo"
+                WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
+                AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false )) AS allService
+           ORDER BY
+                allService."hiHokenshaNo" ASC,
+                allService."serviceTeikyoYM" ASC,
+                allService."seiriNo" ASC,
+                allService."servicePlan_jigyoshaNo" ASC,
+                allService."servicePlan_yoshikiNo" ASC,
+                allService."servicePlan_meisaiNo" ASC,
+                allService."servicePlan_renban" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_InsKeikakuTempEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsKeikakuTempEntity">
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
+        <id property="hiHokenshaNo" column="servicePlan_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="servicePlan_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="servicePlan_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jigyoshaNo" column="servicePlan_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="yoshikiNo" column="servicePlan_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="meisaiNo" column="servicePlan_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="servicePlan_renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiKijunGaitoJigyoshaKubunCode" column="servicePlan_shiteiKijunGaitoJigyoshaKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuServiceSakuseiIraiYMD" column="servicePlan_kyotakuServiceSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="serviceCode" column="servicePlan_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
+        <result property="tanisu" column="servicePlan_tanisu" />
+        <result property="kaisu" column="servicePlan_kaisu" />
+        <result property="serviceTanisu" column="servicePlan_serviceTanisu" />
+        <result property="tanisuTanka" column="servicePlan_tanisuTanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="serviceTanisuTotal" column="servicePlan_serviceTanisuTotal" />
+        <result property="seikyuKingaku" column="servicePlan_seikyuKingaku" />
+        <result property="tantokangoshienSemmoninNo" column="servicePlan_tantokangoshienSemmoninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyo" column="servicePlan_tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaHohoKubunCode" column="servicePlan_shinsaHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaYM" column="servicePlan_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shikyuKubunCode" column="servicePlan_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tensuKingaku" column="servicePlan_tensuKingaku" />
+        <result property="shikyuKingaku" column="servicePlan_shikyuKingaku" />
+        <result property="zougenTen" column="servicePlan_zougenTen" />
+        <result property="sagakuKingaku" column="servicePlan_sagakuKingaku" />
+        <result property="zougenRiyu" column="servicePlan_zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fushikyuRiyu" column="servicePlan_fushikyuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kounyuKaishuRireki" column="servicePlan_kounyuKaishuRireki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="償還払支給申請一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get送付ファイルのレコード件数" fetchSize="500" resultType="int">
+        SELECT count(*)
+        FROM "DbWT2112ShokanMeisai"
+        WHERE
+            "DbWT2112ShokanMeisai"."hokenshaNo" = #{保険者番号}
+    </select>
+    
+    <select resultOrdered="true" id="get送付ファイルデータ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2112ShokanMeisaiTempEntity" fetchSize="500" >
+        SELECT dbwt2112.*
+        FROM "DbWT2112ShokanMeisai" AS dbwt2112
+        WHERE
+            dbwt2112."hokenshaNo" = #{保険者番号}
+        ORDER BY 
+            dbwt2112."hiHokenshaNo" ASC,
+            dbwt2112."serviceTeikyoYM" ASC,
+            dbwt2112."seiriNo" ASC,
+            dbwt2112."jigyoshaNo" ASC,
+            dbwt2112."yoshikiNo" ASC,
+            dbwt2112."meisaiNo" ASC,
+            dbwt2112."dataKubun" ASC,
+            dbwt2112."renban" ASC
+    </select>
+    
+    <select resultOrdered="true" id="get送付一覧表出力対象データ" resultMap="result_ShokanRenrakuhyoOutputReportEntity"
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoSofuIchiranParam">
+         SELECT
+            申請.*,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            基本."jigyoshaNo",
+            基本."yoshikiNo",
+            識別番号."ryakusho"
+         FROM(
+            SELECT
+                <include refid="allColumns_DbWT2111ShokanShinsei" />
+            FROM
+                "DbWT2111ShokanShinsei"
+            WHERE
+                "DbWT2111ShokanShinsei"."sofuJogaiFlag" = ${ 送付除外フラグ }) AS 申請
+         INNER JOIN
+            "DbWT1001Hihokensha"
+         ON
+            申請."renban" = "DbWT1001Hihokensha"."exRenban"
+         INNER JOIN(
+            SELECT A.*
+            FROM(
+                SELECT
+                    償還払請求基本TBL.*,
+                    ROW_NUMBER() OVER (PARTITION BY 償還払請求基本TBL."hiHokenshaNo",
+                                                    償還払請求基本TBL."serviceTeikyoYM",
+                                                    償還払請求基本TBL."seiriNo"
+                                      ORDER BY 償還払請求基本TBL."meisaiNo" DESC) AS rowNum
+                FROM
+                    rgdb."DbT3038ShokanKihon" AS 償還払請求基本TBL) AS A
+            WHERE
+                A.rowNum = 1) AS 基本
+         ON
+            申請."hiHokenshaNo" = 基本."hiHokenshaNo" AND
+            申請."serviceTeikyoYM" = 基本."serviceTeikyoYM" AND
+            申請."seiriNo" = 基本."seiriNo"
+         LEFT JOIN(
+           SELECT B.*
+           FROM(
+            SELECT
+                識別番号管理TBL.*,
+                ROW_NUMBER() OVER (PARTITION BY 識別番号管理TBL."shikibetsuNo"
+                                  ORDER BY 識別番号管理TBL."tekiyoKaishiYM" DESC) AS rowNum
+            FROM
+                rgdb."DbT3118ShikibetsuNoKanri" AS 識別番号管理TBL) AS B
+            WHERE
+                B.rowNum = 1) AS 識別番号
+         ON
+            基本."yoshikiNo" = 識別番号."shikibetsuNo"
+         ORDER BY
+            <if test="orderBy != null and orderBy.toString() != ''.toString()">
+            ${ orderBy }
+            </if>
+     </select>
+     
+     <resultMap id="result_ShokanRenrakuhyoOutputReportEntity" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanrenrakuhyooutputreport.ShokanRenrakuhyoOutputReportEntity" autoMapping="true">
+        <result property="基本_事業者番号" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="基本_様式番号" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別番号_略称" column="ryakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="償還払支給申請一時TBL" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
+        <association property="被保険者一時TBL" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+    </resultMap>
+     
+     <select resultOrdered="true" id="get償還払支給申請データ" resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity"
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoSofuIchiranParam">
+         SELECT
+            償還払支給申請.*
+         FROM
+            rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
+         INNER JOIN(
+            SELECT
+                *
+            FROM
+                "DbWT2111ShokanShinsei"
+            WHERE
+                "DbWT2111ShokanShinsei"."sofuJogaiFlag" = ${ 送付除外フラグ }) AS 償還払支給申請一時TBL
+         ON
+            償還払支給申請一時TBL."hiHokenshaNo" = 償還払支給申請."hiHokenshaNo" AND
+            償還払支給申請一時TBL."serviceTeikyoYM" = 償還払支給申請."serviceTeikyoYM" AND
+            償還払支給申請一時TBL."seiriNo" = 償還払支給申請."seiriNo"
+     </select>
+    
+    <sql id="allColumns_ShokanServicePlan">
+        servicePlan."hiHokenshaNo" AS "servicePlan_hiHokenshaNo",
+        servicePlan."serviceTeikyoYM" AS "servicePlan_serviceTeikyoYM",
+        servicePlan."seiriNo" AS "servicePlan_seiriNo",
+        servicePlan."jigyoshaNo" AS "servicePlan_jigyoshaNo",
+        servicePlan."yoshikiNo" AS "servicePlan_yoshikiNo",
+        servicePlan."meisaiNo" AS "servicePlan_meisaiNo",
+        servicePlan."renban" AS "servicePlan_renban",
+        servicePlan."shiteiKijunGaitoJigyoshaKubunCode" AS "servicePlan_shiteiKijunGaitoJigyoshaKubunCode",
+        servicePlan."kyotakuServiceSakuseiIraiYMD" AS "servicePlan_kyotakuServiceSakuseiIraiYMD",
+        servicePlan."tanisu" AS "servicePlan_tanisu",
+        servicePlan."tanisuTanka" AS "servicePlan_tanisuTanka",
+        servicePlan."seikyuKingaku" AS "servicePlan_seikyuKingaku",
+        servicePlan."shinsaHohoKubunCode" AS "servicePlan_shinsaHohoKubunCode",
+        servicePlan."shinsaYM" AS "servicePlan_shinsaYM",
+        servicePlan."shikyuKubunCode" AS "servicePlan_shikyuKubunCode",
+        servicePlan."tensuKingaku" AS "servicePlan_tensuKingaku",
+        servicePlan."shikyuKingaku" AS "servicePlan_shikyuKingaku",
+        servicePlan."zougenTen" AS "servicePlan_zougenTen",
+        servicePlan."sagakuKingaku" AS "servicePlan_sagakuKingaku",
+        servicePlan."zougenRiyu" AS "servicePlan_zougenRiyu",
+        servicePlan."fushikyuRiyu" AS "servicePlan_fushikyuRiyu",
+        servicePlan."kounyuKaishuRireki" AS "servicePlan_kounyuKaishuRireki"
+    </sql>
+    
+    <sql id="allColumns_DbWT2111ShokanShinsei">
+        "DbWT2111ShokanShinsei"."renban",
+        "DbWT2111ShokanShinsei"."hiHokenshaNo",
+        "DbWT2111ShokanShinsei"."serviceTeikyoYM",
+        "DbWT2111ShokanShinsei"."seiriNo",
+        "DbWT2111ShokanShinsei"."shoKisaiHokenshaNo",
+        "DbWT2111ShokanShinsei"."uketsukeYMD",
+        "DbWT2111ShokanShinsei"."shinseiYMD",
+        "DbWT2111ShokanShinsei"."shinseiRiyu",
+        "DbWT2111ShokanShinsei"."shinseishaKubun",
+        "DbWT2111ShokanShinsei"."shinseishaNameKanji",
+        "DbWT2111ShokanShinsei"."shinseishaNameKana",
+        "DbWT2111ShokanShinsei"."shinseishaYubinNo",
+        "DbWT2111ShokanShinsei"."shinseishaAddress",
+        "DbWT2111ShokanShinsei"."shinseishaTelNo",
+        "DbWT2111ShokanShinsei"."shinseiJigyoshaNo",
+        "DbWT2111ShokanShinsei"."riyushoSakuseiYMD",
+        "DbWT2111ShokanShinsei"."riyushoSakuseishaName",
+        "DbWT2111ShokanShinsei"."riyushoSakuseishaKanaName",
+        "DbWT2111ShokanShinsei"."riyushoSakuseiJigyoshaNo",
+        "DbWT2111ShokanShinsei"."shiharaiKingakuTotal",
+        "DbWT2111ShokanShinsei"."hokenTaishoHiyogaku",
+        "DbWT2111ShokanShinsei"."hokenKyufugaku",
+        "DbWT2111ShokanShinsei"."riyoshaFutangaku",
+        "DbWT2111ShokanShinsei"."shikyuShinseiShinsaKubun",
+        "DbWT2111ShokanShinsei"."shinsaHohoKubun",
+        "DbWT2111ShokanShinsei"."sofuKubun",
+        "DbWT2111ShokanShinsei"."sofuYM",
+        "DbWT2111ShokanShinsei"."kokuhorenSaisofuFlag",
+        "DbWT2111ShokanShinsei"."shiharaiHohoKubunCode",
+        "DbWT2111ShokanShinsei"."shiharaiBasho",
+        "DbWT2111ShokanShinsei"."shiharaiKaishiYMD",
+        "DbWT2111ShokanShinsei"."shiharaiShuryoYMD",
+        "DbWT2111ShokanShinsei"."shiharaiKaishiTime",
+        "DbWT2111ShokanShinsei"."shiharaiShuryoTime",
+        "DbWT2111ShokanShinsei"."kozaID",
+        "DbWT2111ShokanShinsei"."juryoininKeiyakuNo",
+        "DbWT2111ShokanShinsei"."jutakuShoyusha",
+        "DbWT2111ShokanShinsei"."hihokenshaKankei",
+        "DbWT2111ShokanShinsei"."yokaigo3DankaiHenko",
+        "DbWT2111ShokanShinsei"."jutakuJushoHenko",
+        "DbWT2111ShokanShinsei"."shinsaYMD",
+        "DbWT2111ShokanShinsei"."shinsaKekka",
+        "DbWT2111ShokanShinsei"."jizenServiceTeikyoYM",
+        "DbWT2111ShokanShinsei"."jizenSeiriNo",
+        "DbWT2111ShokanShinsei"."kaishuShinseiKubun",
+        "DbWT2111ShokanShinsei"."kaishuShinseiTorikeshijiyuCode",
+        "DbWT2111ShokanShinsei"."ryoshuYMD",
+        "DbWT2111ShokanShinsei"."sofuJogaiFlag",
+        "DbWT2111ShokanShinsei"."hokenshaNo",
+        "DbWT2111ShokanShinsei"."hokenshaName",
+        "DbWT2111ShokanShinsei"."jukyushaDaichoFlag",
+        "DbWT2111ShokanShinsei"."kyuSochishaFlag",
+        "DbWT2111ShokanShinsei"."yokaigoJotaiKubunCode",
+        "DbWT2111ShokanShinsei"."ninteiYukoKikanKaishiYMD",
+        "DbWT2111ShokanShinsei"."ninteiYukoKikanShuryoYMD"
+    </sql>
+    
+    <sql id="allColumns_DbWT1001Hihokensha">
+        "DbWT1001Hihokensha"."exRenban",
+        "DbWT1001Hihokensha"."exHokenshaNo",
+        "DbWT1001Hihokensha"."exHokenshaName",
+        "DbWT1001Hihokensha"."exShoHokenshaNo",
+        "DbWT1001Hihokensha"."exHihokenshaNo",
+        "DbWT1001Hihokensha"."exServiceTeikyoYm",
+        "DbWT1001Hihokensha"."henkanFlag",
+        "DbWT1001Hihokensha"."oldShichosonCode",
+        "DbWT1001Hihokensha"."sofuHihokenshaNo",
+        "DbWT1001Hihokensha"."shichosonCode",
+        "DbWT1001Hihokensha"."kannaiKangaiKubun",
+        "DbWT1001Hihokensha"."yubinNo",
+        "DbWT1001Hihokensha"."choikiCode",
+        "DbWT1001Hihokensha"."gyoseikuCode",
+        "DbWT1001Hihokensha"."gyoseikuMei",
+        "DbWT1001Hihokensha"."jusho",
+        "DbWT1001Hihokensha"."banchi",
+        "DbWT1001Hihokensha"."katagaki",
+        "DbWT1001Hihokensha"."kanaMeisho",
+        "DbWT1001Hihokensha"."meisho",
+        "DbWT1001Hihokensha"."shimei50onKana",
+        "DbWT1001Hihokensha"."shikibetsuCode",
+        "DbWT1001Hihokensha"."shikakuShutokuYmd",
+        "DbWT1001Hihokensha"."shikakuShutokuJiyuCode",
+        "DbWT1001Hihokensha"."shikakuSoshitsuYmd",
+        "DbWT1001Hihokensha"."shikakuSoshitsuJiyuCode",
+        "DbWT1001Hihokensha"."setaiShuyakuNo",
+        "DbWT1001Hihokensha"."seinenYmd",
+        "DbWT1001Hihokensha"."seibetsuCode",
+        "DbWT1001Hihokensha"."shichosonKanyuYmd",
+        "DbWT1001Hihokensha"."shichosonDattaiYmd"
+    </sql>
+    
+    <resultMap id="resultMap_DbWT2111ShokanShinseiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity" autoMapping="true">
+        <id property="renban" column="renban" />
+        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="uketsukeYMD" column="uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseiYMD" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseiRiyu" column="shinseiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishaKubun" column="shinseishaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishaNameKanji" column="shinseishaNameKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishaNameKana" column="shinseishaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishaYubinNo" column="shinseishaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="shinseishaAddress" column="shinseishaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishaTelNo" column="shinseishaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shinseiJigyoshaNo" column="shinseiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="riyushoSakuseiYMD" column="riyushoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="riyushoSakuseishaName" column="riyushoSakuseishaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyushoSakuseishaKanaName" column="riyushoSakuseishaKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyushoSakuseiJigyoshaNo" column="riyushoSakuseiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="shiharaiKingakuTotal" column="shiharaiKingakuTotal" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hokenTaishoHiyogaku" column="hokenTaishoHiyogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hokenKyufugaku" column="hokenKyufugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="riyoshaFutangaku" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shikyuShinseiShinsaKubun" column="shikyuShinseiShinsaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaHohoKubun" column="shinsaHohoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuKubun" column="sofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuYM" column="sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kokuhorenSaisofuFlag" column="kokuhorenSaisofuFlag" />
+        <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiBasho" column="shiharaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiKaishiYMD" column="shiharaiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiShuryoYMD" column="shiharaiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiKaishiTime" column="shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiShuryoTime" column="shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaID" column="kozaID" />
+        <result property="juryoininKeiyakuNo" column="juryoininKeiyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jutakuShoyusha" column="jutakuShoyusha" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaKankei" column="hihokenshaKankei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokaigo3DankaiHenko" column="yokaigo3DankaiHenko" />
+        <result property="jutakuJushoHenko" column="jutakuJushoHenko" />
+        <result property="shinsaYMD" column="shinsaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsaKekka" column="shinsaKekka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jizenServiceTeikyoYM" column="jizenServiceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="jizenSeiriNo" column="jizenSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishuShinseiKubun" column="kaishuShinseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishuShinseiTorikeshijiyuCode" column="kaishuShinseiTorikeshijiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ryoshuYMD" column="ryoshuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sofuJogaiFlag" column="sofuJogaiFlag" />
+        <result property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="hokenshaName" column="hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyushaDaichoFlag" column="jukyushaDaichoFlag" />
+        <result property="kyuSochishaFlag" column="kyuSochishaFlag" />
+        <result property="yokaigoJotaiKubunCode" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_DbWT1001HihokenshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity" autoMapping="true">
+        <id property="exRenban" column="exRenban" />
+        <result property="exHokenshaNo" column="exHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="exHokenshaName" column="exHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exShoHokenshaNo" column="exShoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="exHihokenshaNo" column="exHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="exServiceTeikyoYm" column="exServiceTeikyoYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="henkanFlag" column="henkanFlag" />
+        <result property="oldShichosonCode" column="oldShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="sofuHihokenshaNo" column="sofuHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuMei" column="gyoseikuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="banchi" column="banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="katagaki" column="katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanaMeisho" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisho" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shimei50onKana" column="shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikakuShutokuYmd" column="shikakuShutokuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYmd" column="shikakuSoshitsuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiShuyakuNo" column="setaiShuyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinenYmd" column="seinenYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonKanyuYmd" column="shichosonKanyuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shichosonDattaiYmd" column="shichosonDattaiYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
 </mapper>

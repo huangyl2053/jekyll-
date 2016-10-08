@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.processprm.shokanrenrakuhyooutputreport;
+package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110050;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -30,6 +30,10 @@ public class ShokanRenrakuhyoOutputReportProcessParam implements IBatchProcessPa
     public ShokanRenrakuhyoOutputReportProcessParam(FlexibleYearMonth syoriYM, Long shutsuryokujunId) {
         this.syoriYM = syoriYM;
         this.shutsuryokujunId = shutsuryokujunId;
+    }
+
+    public ShokanRenrakuhyoOutputReportProcessParam() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -18,51 +18,51 @@ public enum ShokanRenrakuhyoSofuIchiranOrder implements IReportItems {
     /**
      * 保険者番号 です。
      */
-    保険者番号(new RString("0365"), new RString(""), new RString("\"hokenshaNo\"")),
+    保険者番号(new RString("0365"), new RString(""), new RString("申請.\"hokenshaNo\"")),
     /**
      * 郵便番号 です。
      */
-    郵便番号(new RString("0001"), new RString(""), new RString("\"yubinNo\"")),
+    郵便番号(new RString("0001"), new RString(""), new RString("\"DbWT1001Hihokensha\".\"yubinNo\"")),
     /**
      * 町域コード です。
      */
-    町域コード(new RString("0002"), new RString(""), new RString("\"choikiCode\"")),
+    町域コード(new RString("0002"), new RString(""), new RString("\"DbWT1001Hihokensha\".\"choikiCode\"")),
     /**
      * 行政区コード です。
      */
-    行政区コード(new RString("0004"), new RString(""), new RString("\"gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString(""), new RString("\"DbWT1001Hihokensha\".\"gyoseikuCode\"")),
     /**
      * 氏名５０音カナ です。
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"shimei50onKana\"")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"DbWT1001Hihokensha\".\"shimei50onKana\"")),
     /**
      * 市町村コード です。
      */
-    市町村コード(new RString("0016"), new RString(""), new RString("\"shichosonCode\"")),
+    市町村コード(new RString("0016"), new RString(""), new RString("\"DbWT1001Hihokensha\".\"shichosonCode\"")),
     /**
      * 被保険者番号 です。
      */
-    被保険者番号(new RString("0104"), new RString(""), new RString("\"hiHokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString(""), new RString("申請.\"hiHokenshaNo\"")),
     /**
      * サービス提供年月 です。
      */
-    サービス提供年月(new RString("0364"), new RString(""), new RString("\"serviceTeikyoYM\"")),
+    サービス提供年月(new RString("0364"), new RString(""), new RString("申請.\"serviceTeikyoYM\"")),
     /**
      * 整理番号 です。
      */
-    整理番号(new RString("0305"), new RString(""), new RString("\"seiriNo\"")),
+    整理番号(new RString("0305"), new RString(""), new RString("申請.\"seiriNo\"")),
     /**
      * 償還払申請日 です。
      */
-    償還払申請日(new RString("0313"), new RString(""), new RString("\"shinseiYMD\"")),
+    償還払申請日(new RString("0313"), new RString(""), new RString("申請.\"shinseiYMD\"")),
     /**
      * 指定事業者番号 です。
      */
-    指定事業者番号(new RString("0303"), new RString(""), new RString("\"shinseiJigyoshaNo\"")),
+    指定事業者番号(new RString("0303"), new RString(""), new RString("基本.\"jigyoshaNo\"")),
     /**
      * 様式番号 です。
      */
-    様式番号(new RString("0315"), new RString(""), new RString("\"yoshikiNo\""));
+    様式番号(new RString("0315"), new RString(""), new RString("基本.\"yoshikiNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
