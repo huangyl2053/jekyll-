@@ -281,11 +281,16 @@ public class IryouhiKoujyoHandler {
             row.setHiddennitijyoSekatuJiritudoCode(entity.get日常生活自立度());
             row.setHiddennyosikinFlg(entity.is尿失禁の有無() ? キー0 : キー1);
             row.getHiddentaisyouYY().setValue(new RDate(控除対象年.getYearValue()));
-            row.getHiddentorokuDD().setValue(entity.get登録年月日().toRDate());
-            row.getHiddensinseiDD().setValue(entity.get申請年月日().toRDate());
-            row.getHiddenninteFromDD().setValue(entity.get認定有効期間開始年月日().toRDate());
-            row.getHiddenninteEndDD().setValue(entity.get認定有効期間終了年月日().toRDate());
-            row.getHiddenikensyoSakuseDD().setValue(entity.get主治医意見書受領年月日().toRDate());
+            row.getHiddentorokuDD().setValue(entity.get登録年月日().isEmpty() || entity.get登録年月日() == null ? null
+                    : new RDate(entity.get登録年月日().toString()));
+            row.getHiddensinseiDD().setValue(entity.get申請年月日().isEmpty() || entity.get申請年月日() == null ? null
+                    : new RDate(entity.get申請年月日().toString()));
+            row.getHiddenninteFromDD().setValue(entity.get認定有効期間開始年月日().isEmpty() || entity.get認定有効期間開始年月日() == null ? null
+                    : new RDate(entity.get認定有効期間開始年月日().toString()));
+            row.getHiddenninteEndDD().setValue(entity.get認定有効期間終了年月日().isEmpty() || entity.get認定有効期間終了年月日() == null ? null
+                    : new RDate(entity.get認定有効期間終了年月日().toString()));
+            row.getHiddenikensyoSakuseDD().setValue(entity.get主治医意見書受領年月日().isEmpty() || entity.get主治医意見書受領年月日() == null ? null
+                    : new RDate(entity.get主治医意見書受領年月日().toString()));
             dataSource.add(row);
         }
         div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().setDataSource(dataSource);
