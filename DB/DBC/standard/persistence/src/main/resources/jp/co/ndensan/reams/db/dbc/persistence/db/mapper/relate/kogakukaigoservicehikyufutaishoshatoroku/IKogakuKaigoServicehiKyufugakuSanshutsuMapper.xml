@@ -2235,7 +2235,7 @@
          "TempSetaiinShotokuHanteiMeisai"."shoboKubun" as "tmpSetaiinShotokuHanteiMeisai_shoboKubun",
          "TempSetaiinShotokuHanteiMeisai"."roreiFukushi" as "tmpSetaiinShotokuHanteiMeisai_roreiFukushiKubun",
          "TempSetaiinShotokuHanteiMeisai"."setaiinHihokenshaNo" as "tmpSetaiinShotokuHanteiMeisai_setaiinHihokenshaNo",
-         "TempSetaiinShotokuHanteiMeisai"."setaiinHihokenshaKubun" as "tmpSetaiinShotokuHanteiMeisai_setaiinHihokenshaKubun",
+         "TempSetaiinShotokuHanteiMeisai"."setaiinHihokenshakubun" as "tmpSetaiinShotokuHanteiMeisai_setaiinHihokenshaKubun",
          "TempSetaiinShotokuHanteiMeisai"."honninKazeiKubun" as "tmpSetaiinShotokuHanteiMeisai_honninKazeiKubun",
          "TempSetaiinShotokuHanteiMeisai"."setaiKazeiKubun" as "tmpSetaiinShotokuHanteiMeisai_setaiKazeiKubun",
          "TempSetaiinShotokuHanteiMeisai"."tsuzukigaraCodeNen" as "tmpSetaiinShotokuHanteiMeisai_tsuzukigaraCodeNen",
@@ -2457,7 +2457,7 @@
         <result property="shoboKubun" column="tmpSetaiinShotokuHanteiMeisai_shoboKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="roreiFukushi" column="tmpSetaiinShotokuHanteiMeisai_roreiFukushiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="setaiinHihokenshaNo" column="tmpSetaiinShotokuHanteiMeisai_setaiinHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="setaiinHihokenshaKubun" column="tmpSetaiinShotokuHanteiMeisai_setaiinHihokenshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiinHihokenshakubun" column="tmpSetaiinShotokuHanteiMeisai_setaiinHihokenshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="honninKazeiKubun" column="tmpSetaiinShotokuHanteiMeisai_honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tsuzukigaraCodeNen" column="tmpSetaiinShotokuHanteiMeisai_tsuzukigaraCodeNen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="atena_tsuzukigaraCode" column="tmpSetaiinShotokuHanteiMeisai_tsuzukigaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TsuzukigaraCodeTypeHandler"/>
