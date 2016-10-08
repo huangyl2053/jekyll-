@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 資格喪失（死亡）データ作成フロークラスです。
  *
- * @reamsid_L DBD-2110-010 LDNS shaotw
+ * @reamsid_L DBD-2110-020 LDNS shaotw
  */
 public class DBD519003_YokaigoNinteiSoshitsuDataSakusei extends
         BatchFlowBase<jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519003.DBD519003_YokaigoNinteiSoshitsuDataSakusei> {

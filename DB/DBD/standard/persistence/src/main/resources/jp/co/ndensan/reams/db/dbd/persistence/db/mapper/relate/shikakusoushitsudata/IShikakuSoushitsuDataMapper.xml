@@ -8,6 +8,9 @@
             resultMap="resultMap_ChohyoShuchiryokuyoShiseiJyohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5190003.RenkeiDataShutsuryokuSikakuSakuseiSoshitsuMybatisParameter"
             fetchSize="500" resultOrdered="true">
+        WITH master AS(
+	SELECT *
+	FROM rgdb."DbT1001HihokenshaDaicho")
         SELECT AA.*,BB.*
         FROM(
             SELECT
@@ -27,10 +30,17 @@
             E."zenkaiShinseishoKanriNo",
             F."shinseiTodokedeDaikoKubunCode"
         FROM
-            rgdb."DbT1001HihokenshaDaicho" AS A
-        INNER JOIN 
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS B
-            ON A."shikibetsuCode" = B."shikibetsuCode"
+            master AS A
+        LEFT JOIN 
+         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (
+         SELECT ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+         FROM master
+         )
+         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS B
+        ON
+        A."shikibetsuCode" =  B."shikibetsuCode"     
         INNER JOIN
             rgdb."DbT7051KoseiShichosonMaster" AS C
             ON C."shichosonCode" = A."shichosonCode"
@@ -55,7 +65,7 @@
             D."ninteiYukoKikanShuryoYMD",
             D."shinseishoKanriNo"
          FROM rgdb."DbT4001JukyushaDaicho" AS D)  AS BB
-         ON AA."zenkaiShinseishoKanriNo" = BB."shinseishoKanriNo"	
+         ON AA."zenkaiShinseishoKanriNo" = BB."shinseishoKanriNo"
     </select>
     
     <resultMap id="resultMap_ChohyoShuchiryokuyoShiseiJyohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity" autoMapping="true">
