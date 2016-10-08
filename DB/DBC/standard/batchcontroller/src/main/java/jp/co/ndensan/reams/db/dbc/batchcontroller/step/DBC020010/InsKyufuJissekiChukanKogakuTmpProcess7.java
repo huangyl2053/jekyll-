@@ -29,7 +29,7 @@ public class InsKyufuJissekiChukanKogakuTmpProcess7 extends BatchProcessBase<Ins
 
     static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
             + ".kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.select給付実績中間高額一時の作成7");
-    static final RString 給付実績中間高額一時7_TABLE_NAME = new RString("TempKyufujissekiTyukann");
+    static final RString 給付実績中間高額一時7_TABLE_NAME = new RString("TempKyufujissekiTyukann7");
 
     @Override
     protected void beforeExecute() {

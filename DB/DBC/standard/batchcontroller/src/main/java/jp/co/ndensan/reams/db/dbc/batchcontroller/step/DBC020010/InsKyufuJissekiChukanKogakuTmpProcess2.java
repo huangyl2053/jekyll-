@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKogakuHanteiEraaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity;
@@ -29,11 +30,17 @@ public class InsKyufuJissekiChukanKogakuTmpProcess2 extends BatchProcessBase<Kyu
             + "select給付実績中間高額一時の作成2");
     private static final RString TABLE_給付実績中間高額一時2 = new RString("TempKyufujissekiTyukann2");
     private static final RString TABLE_給付実績中間高額一時3 = new RString("TempKyufujissekiTyukann3");
+    private static final RString TABLE_給付実績中間高額一時5 = new RString("TempKyufujissekiTyukann5");
+    private static final RString TABLE_高額判定エラー一時 = new RString("TempKogakuHanteiEraa");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter2;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter3;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter5;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter kogakuHanteiEraaWriter;
 
     @Override
     protected void beforeExecute() {
@@ -51,6 +58,12 @@ public class InsKyufuJissekiChukanKogakuTmpProcess2 extends BatchProcessBase<Kyu
                 TABLE_給付実績中間高額一時2, TempKyufujissekiTyukannEntity.class);
         kyufujissekiTyukannWriter3 = new BatchEntityCreatedTempTableWriter(
                 TABLE_給付実績中間高額一時3, TempKyufujissekiTyukannEntity.class);
+        kyufujissekiTyukannWriter5 = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績中間高額一時5, TempKyufujissekiTyukannEntity.class);
+        kyufujissekiTyukannWriter5 = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績中間高額一時5, TempKyufujissekiTyukannEntity.class);
+        kogakuHanteiEraaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額判定エラー一時, TempKogakuHanteiEraaEntity.class);
     }
 
     @Override
@@ -64,6 +77,8 @@ public class InsKyufuJissekiChukanKogakuTmpProcess2 extends BatchProcessBase<Kyu
     @Override
     protected void afterExecute() {
         kyufujissekiTyukannWriter3.getInsertCount();
+        kyufujissekiTyukannWriter5.getInsertCount();
+        kogakuHanteiEraaWriter.getInsertCount();
     }
 
     private void set給付実績基本情報(TempKyufujissekiTyukannEntity entity, DbT3017KyufujissekiKihonEntity 実績基本) {

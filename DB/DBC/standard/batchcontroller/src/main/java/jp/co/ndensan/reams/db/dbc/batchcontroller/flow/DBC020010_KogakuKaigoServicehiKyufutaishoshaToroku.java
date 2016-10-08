@@ -55,9 +55,12 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJisseki
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanKogakuTmpProcess5;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdSetaiinHaakuNyuryokuKogakuTmpProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess7;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiChukanKogakuTmpProcess7;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020010.KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.InsKyufuJissekiKihonKogakuTmpProcess4Param;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.InsSetaiinHaakuNyuryokuKogakuFlowEntity1;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
@@ -735,7 +738,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(給付実績集計のバックアップ)
     protected IBatchFlowCommand callInsKyufuJissekiShukeiTmpProcess() {
-        return loopBatch(InsKyufuJissekiShukeiTmpProcess.class).define();
+        return loopBatch(InsKyufuJissekiShukeiTmpProcess.class).
+                arguments(getKogakuKaigoKyufuhiTaishoshaTorokuProcessParameter()).define();
     }
 
     /**
@@ -745,7 +749,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(給付実績社会福祉法人軽減額のバックアップ)
     protected IBatchFlowCommand callInsKyufuJissekiShafukuKeigenTmpProcess() {
-        return loopBatch(InsKyufuJissekiShafukuKeigenTmpProcess.class).define();
+        return loopBatch(InsKyufuJissekiShafukuKeigenTmpProcess.class).
+                arguments(getKogakuKaigoKyufuhiTaishoshaTorokuProcessParameter()).define();
     }
 
     /**
@@ -758,25 +763,26 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
         return loopBatch(InsKijunShunyugakuTekiyoKanriTmpProcess.class).define();
     }
 
-//    /**
-//     * 給付実績中間高額一時の作成7のメソッドです。
-//     *
-//     * @return IBatchFlowCommand
-//     */
-//    @Step(給付実績中間高額一時の作成7)
-//    protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess7() {
-//        return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess7.class).define();
-//    }
-//
-//    /**
-//     * 給付実績中間事業高額一時の作成7のメソッドです。
-//     *
-//     * @return IBatchFlowCommand
-//     */
-//    @Step(給付実績中間事業高額一時の作成7)
-//    protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess7() {
-//        return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess7.class).define();
-//    }
+    /**
+     * 給付実績中間高額一時の作成7のメソッドです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(給付実績中間高額一時の作成7)
+    protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess7() {
+        return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess7.class).define();
+    }
+
+    /**
+     * 給付実績中間事業高額一時の作成7のメソッドです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(給付実績中間事業高額一時の作成7)
+    protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess7() {
+        return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess7.class).define();
+    }
+
     /**
      * 世帯員把握入力一時の更新のメソッドです。
      *
@@ -941,6 +947,13 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
                 returnEntity.get最古のサービス提供年月(),
                 returnEntity.get最新のサービス提供年月(),
                 getParameter().getShoriYM());
+        return param;
+    }
+
+    private KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter getKogakuKaigoKyufuhiTaishoshaTorokuProcessParameter() {
+        KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter param = new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
+                returnEntity.get最古のサービス提供年月(),
+                returnEntity.get最新のサービス提供年月());
         return param;
     }
 }
