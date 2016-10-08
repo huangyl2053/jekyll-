@@ -274,7 +274,8 @@ public class IryouhiKoujyoHandler {
             row.setNinteFromDD(entity.get認定有効期間開始年月日().wareki().toDateString());
             row.setNinteEndDD(entity.get認定有効期間終了年月日().wareki().toDateString());
             row.setIkensyoSakuseDD(entity.get主治医意見書受領年月日().wareki().toDateString());
-            row.setNitijyoSekatuJiritudo(NichijoSeikatsuJiritsudo.toValue(entity.get日常生活自立度()).get名称());
+            row.setNitijyoSekatuJiritudo(entity.get日常生活自立度().isNullOrEmpty() || entity.get日常生活自立度().equals(NichijoSeikatsuJiritsudo.その他.getコード())
+                    ? RString.EMPTY : NichijoSeikatsuJiritsudo.toValue(entity.get日常生活自立度()).get名称());
             row.setNyosikinFlg(entity.is尿失禁の有無() ? 有 : RString.EMPTY);
             row.setHiddenCodeKubun(entity.getデータ区分());
             row.setHiddennitijyoSekatuJiritudoCode(entity.get日常生活自立度());
