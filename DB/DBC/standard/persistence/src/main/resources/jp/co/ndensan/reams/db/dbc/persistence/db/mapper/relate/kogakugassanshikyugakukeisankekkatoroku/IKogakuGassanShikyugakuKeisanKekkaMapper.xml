@@ -29,7 +29,7 @@
 		 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" DESC,
                  "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" DESC,
                  "DbT3072KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" DESC,
-                 "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."meisanNo" DESC
+                 "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."meisanNo" ASC
     </select>
     
     <select id="select支給額計算結果履歴チェックオフ"
@@ -70,7 +70,7 @@
 		 "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" DESC,
                  "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" DESC,
                  "DbT3072KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" DESC,
-                 "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."meisanNo" DESC
+                 "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."meisanNo" ASC
     </select>
     
     <resultMap id="resultMap_ShikyuGakuKeisanKekka"

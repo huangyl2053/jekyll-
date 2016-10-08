@@ -408,9 +408,9 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisai
             this.id = id;
         }
 
-//        private Object readResolve() {
-//            return new KogakuGassanShikyugakuKeisanKekkaMeisai(this.entity, this.id);
-//        }
+        private Object readResolve() {
+            return new KogakuGassanShikyugakuKeisanKekkaMeisai(this.entity, this.id);
+        }
     }
 
     /**
