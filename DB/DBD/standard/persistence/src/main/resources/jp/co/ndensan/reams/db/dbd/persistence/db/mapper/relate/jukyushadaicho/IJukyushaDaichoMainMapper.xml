@@ -614,7 +614,7 @@
                           T4102."nijiHanteiYMD",
                           T4102."shinsakaiIken",
                           X4201."ninteichosaIraiYMD",
-                          X4202"ninteichosaJisshiYMD",
+                          X4202."ninteichosaJisshiYMD",
                           X4301."ikenshoSakuseiIraiYMD",
                           X4302."ikenshoJuryoYMD",
                           T4116."ichijiHanteiKekkaCode",
@@ -651,7 +651,7 @@
                          SELECT *
                            FROM (
                                 SELECT 
-                                    T4301."shinseishoKanriNo"，
+                                    T4301."shinseishoKanriNo",
                                     T4301."ikenshoSakuseiIraiYMD",
                                     row_number() over(partition by T4301."shinseishoKanriNo" order by T4301."ikenshoIraiRirekiNo" desc) rank_number
                                 FROM rgdb."DbT4301ShujiiIkenshoIraiJoho" AS T4301
@@ -664,11 +664,10 @@
                           SELECT *
                            FROM (
                                 SELECT 
-                                    T4302."shinseishoKanriNo"，
+                                    T4302."shinseishoKanriNo",
                                     T4302."ikenshoJuryoYMD",
                                     row_number() over(partition by T4302."shinseishoKanriNo" order by T4302."ikenshoIraiRirekiNo" desc) rank_number
                                 FROM rgdb."DbT4302ShujiiIkenshoJoho" AS T4302
-                                WHERE T4302."logicalDeletedFlag" = FALSE
                                ) AS T4302_1
                                   WHERE rank_number = 1
                                ) AS X4302
