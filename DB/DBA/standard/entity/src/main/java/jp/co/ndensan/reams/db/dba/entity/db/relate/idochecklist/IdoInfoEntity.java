@@ -72,5 +72,5 @@ public class IdoInfoEntity implements Serializable {
     private FlexibleDate 喪失情報_後_届出年月日;
     private RString 区分_前_資格;
     private RString 区分_後_資格;
-
+    
 }

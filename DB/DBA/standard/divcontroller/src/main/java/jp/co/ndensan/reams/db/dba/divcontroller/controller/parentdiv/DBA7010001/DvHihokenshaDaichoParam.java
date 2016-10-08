@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class DvHihokenshaDaichoParam {
 
+    private static final RString タイトル = new RString("汎用リスト　被保険者台帳");
+
     /**
      * 汎用リスト被保険者台帳に初期化を設定します。
      *
@@ -30,7 +32,7 @@ public class DvHihokenshaDaichoParam {
      */
     public ResponseData<DvHihokenshaDaichoParamDiv> onLoad(DvHihokenshaDaichoParamDiv div) {
         getHandler(div).initialize();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).rootTitle(タイトル).respond();
     }
 
     /**

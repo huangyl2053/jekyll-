@@ -49,9 +49,9 @@
 
     <select resultOrdered="true" id="ninteichosaItakusakiSearch" parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500">
         SELECT
-        dbt5051."shichosonShokibetsuID" dbT5051KoseiShichosonMaster_shichosonShokibetsuID,
+        dbt7051."shichosonShokibetsuID" dbT5051KoseiShichosonMaster_shichosonShokibetsuID,
         dbt5910."shichosonCode",
-        dbt5051."shichosonMeisho" dbT5051KoseiShichosonMaster_shichosonMeisho,
+        dbt7051."shichosonMeisho" dbT5051KoseiShichosonMaster_shichosonMeisho,
         dbt5910."ninteichosaItakusakiCode",
         dbt5910."jigyoshaNo",
         dbt5910."jigyoshaMeisho",
@@ -71,8 +71,8 @@
         dbt5910."jokyoFlag"
         FROM
         rgdb."DbT5910NinteichosaItakusakiJoho" AS dbt5910
-        INNER JOIN rgdb."DbT5051KoseiShichosonMaster" AS dbt5051
-        ON dbt5051."shichosonCode" = dbt5910."shichosonCode"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
+        ON dbt7051."shichosonCode" = dbt5910."shichosonCode"
         WHERE
         1 = 1
         <if test="jokyoFlag == true">
@@ -82,7 +82,7 @@
             AND dbt5910."jokyoFlag" = false
         </if>
         <if test="shichosonCode != null">
-            AND dbt5051."shichosonCode" = #{shichosonCode}
+            AND dbt7051."shichosonCode" = #{shichosonCode}
         </if>
         <if test="searchChosaItakusakiCodeFrom!=null">
             AND #{searchChosaItakusakiCodeFrom} &lt;= dbt5910."ninteichosaItakusakiCode"

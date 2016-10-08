@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.FukaTaishoshaRelateBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.TaishoshaRelateBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibe
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -58,23 +60,25 @@ public class TaishoshaFinder {
     }
 
     /**
-     * 条件に該当する資格対象者を取得します。
+     * 条件に該当する資格対象者を取得します。検索にDBAccessorを使用します。
      *
      * @param 条件 介護の検索条件
      * @param 除外条件 介護の検索除外条件
      * @param 宛名キー 宛名の検索キー
      * @param 最大件数 最大取得件数
+     * @param 被保険者番号 被保険者番号
      * @return 資格対象者
      */
     @Transaction
-    public SearchResult<TaishoshaRelateBusiness> get資格対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+    public SearchResult<TaishoshaRelateBusiness> get資格対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー,
+            int 最大件数, HihokenshaNo 被保険者番号) {
 
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(宛名キー.getPSMSearchKey());
 
-        if (条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
+        if (!被保険者番号.isEmpty() && 条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
             IItemList<ShikibetsuCode> shikibetsuCodeList = dac.get資格対象識別コードリスト(介護条件);
-
+            System.out.println(shikibetsuCodeList.size());
             builder.set識別コードリスト(shikibetsuCodeList.toList());
         }
 
@@ -110,6 +114,23 @@ public class TaishoshaFinder {
     @Transaction
     public SearchResult<FukaTaishoshaRelateBusiness> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件,
             IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+        return get賦課対象者(条件, 除外条件, 宛名キー, 最大件数, RString.EMPTY, HihokenshaNo.EMPTY);
+    }
+
+    /**
+     * 条件に該当する賦課対象者を取得します。
+     *
+     * @param 条件 介護の検索条件
+     * @param 除外条件 介護の検索除外条件
+     * @param 宛名キー 宛名の検索キー
+     * @param 最大件数 最大取得件数
+     * @param 通知書番号 通知書番号
+     * @param 被保険者番号 被保険者番号
+     * @return 賦課対象者
+     */
+    @Transaction
+    public SearchResult<FukaTaishoshaRelateBusiness> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件,
+            IShikibetsuTaishoSearchKey 宛名キー, int 最大件数, RString 通知書番号, HihokenshaNo 被保険者番号) {
 
         FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
@@ -117,7 +138,8 @@ public class TaishoshaFinder {
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(宛名キー.getPSMSearchKey());
 
-        if (条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
+        if ((!通知書番号.isEmpty() || !被保険者番号.isEmpty())
+                && 条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
             IItemList<ShikibetsuCode> shikibetsuCodeList = dac.get賦課対象識別コードリスト(介護条件);
             builder.set識別コードリスト(shikibetsuCodeList.toList());
         }
@@ -145,9 +167,9 @@ public class TaishoshaFinder {
 
     private ITrueFalseCriteria getCriteria(ISearchCondition 条件, ISearchCondition 除外条件) {
         return (条件 != null && 除外条件 != null) ? and(条件.makeSearchCondition(), not(除外条件.makeSearchCondition()))
-               : (条件 != null) ? 条件.makeSearchCondition()
-                 : (除外条件 != null) ? not(除外条件.makeSearchCondition())
-                   : null;
+                : (条件 != null) ? 条件.makeSearchCondition()
+                : (除外条件 != null) ? not(除外条件.makeSearchCondition())
+                : null;
     }
 
     private IPsmCriteria getPsmCriteria(IShikibetsuTaishoSearchKey 条件) {
@@ -155,8 +177,7 @@ public class TaishoshaFinder {
     }
 
     /**
-     * 指定の識別コードに該当する最大の賦課年度を取得して返します。
-     * 存在しない場合は、{@link FlexibleYear#EMPTY}を返します。
+     * 指定の識別コードに該当する最大の賦課年度を取得して返します。 存在しない場合は、{@link FlexibleYear#EMPTY}を返します。
      *
      * @param 識別コード 識別コード
      * @return 指定の識別コードに該当する最大の賦課年度.もしくは{@link FlexibleYear#EMPTY}.

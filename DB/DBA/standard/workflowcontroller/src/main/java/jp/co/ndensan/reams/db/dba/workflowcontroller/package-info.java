@@ -1,3 +1,6 @@
+/**
+ * ワークフローに関する操作を扱います。
+ */
 package jp.co.ndensan.reams.db.dba.workflowcontroller;
 
 /**

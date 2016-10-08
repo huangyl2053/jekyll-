@@ -137,7 +137,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
 
     @Override
     protected void process(TokuchoSofuJohoRenkeiEntity entity) {
-        ファイル出力Z12Map.get(entity.get市町村コードDT()).writeLine(new CheckFileCsvEntity(
+        ファイル出力Z12Map.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
                 RString.EMPTY,
                 new RString(RDateTime.now().toString()),
                 Z12,
@@ -146,7 +146,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
                 RDate.getNowDate().toDateString(),
                 RString.EMPTY
         ));
-        ファイル出力Z1AMap.get(entity.get市町村コードDT()).writeLine(new CheckFileCsvEntity(
+        ファイル出力Z1AMap.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
                 RString.EMPTY,
                 new RString(RDateTime.now().toString()),
                 Z12,

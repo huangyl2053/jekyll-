@@ -23,8 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class SinsaSeikyusyoMeisaiValidationHandler {
 
     private final SinsaSeikyusyoMeisaiPanelDiv div;
-    private static final RString 追加 = new RString("追加");
-    private static final RString 修正 = new RString("修正");
+    private static final RString 追加 = new RString("追加状態");
+    private static final RString 修正 = new RString("修正状態");
 
     /**
      * コンストラクタです。

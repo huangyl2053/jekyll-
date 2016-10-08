@@ -163,6 +163,29 @@ public class DbV1001HihokenshaDaichoAliveDac {
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
+    public DbV1001HihokenshaDaichoEntity select被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false)))
+                .order(by(DbV1001HihokenshaDaicho.idoYMD, Order.DESC),
+                        by(DbV1001HihokenshaDaicho.edaNo, Order.DESC)).limit(1).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号により、被保険者台帳管理Aliveを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbV1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
     public DbV1001HihokenshaDaichoEntity get被保険者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
 

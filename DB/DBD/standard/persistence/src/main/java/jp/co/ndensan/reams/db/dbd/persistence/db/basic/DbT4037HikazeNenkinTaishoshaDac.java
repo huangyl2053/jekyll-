@@ -75,6 +75,30 @@ public class DbT4037HikazeNenkinTaishoshaDac {
         return mapper.select同一年金単位最新履歴(被保険者番号, 年度);
     }
 
+     /**
+     * 非課税年金情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 年度 年度
+     * @return List<DbT4037HikazeNenkinTaishoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4037HikazeNenkinTaishoshaEntity> select非課税年金情報(RString 被保険者番号, RYear 年度) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4037HikazeNenkinTaishosha.class).
+                where(
+                        and(
+                                eq(DbT4037HikazeNenkinTaishosha.hihokenshano, 被保険者番号),
+                                eq(DbT4037HikazeNenkinTaishosha.nendo, new RString(年度.minusYear(1).toString())))).
+                order(new OrderBy(DbT4037HikazeNenkinTaishosha.dtsakuseiymd, Order.DESC, NullsOrder.FIRST)).
+                toList(DbT4037HikazeNenkinTaishoshaEntity.class);
+    }
+    
     /**
      * 重複チェックデータを取得します。
      *

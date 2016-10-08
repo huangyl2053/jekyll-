@@ -68,9 +68,9 @@ public class ValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        ValidateA(DbzErrorMessages.期間が不正_未来日付不可, "開始日に", "前回の基準日"),
-        ValidateB(DbzErrorMessages.期間が不正_未来日付不可, "終了日時に", "今回の基準日時"),
-        ValidateC(DbzErrorMessages.期間が不正_未来日付不可, "開始日に", "終了日時");
+        ValidateA(DbzErrorMessages.期間が不正_未来日時入力不可, "開始日時に", "前回の基準日時"),
+        ValidateB(DbzErrorMessages.期間が不正_過去日時入力不可, "終了日時に", "今回の基準日時"),
+        ValidateC(DbzErrorMessages.期間が不正_未来日時入力不可, "開始日時に", "終了日時");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

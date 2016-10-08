@@ -19,19 +19,19 @@ public enum ViewExecutionStatus {
     /**
      * 追加状態を表します。
      */
-    Add("Add", "追加"),
+    Add("Added", "追加"),
     /**
      * 修正状態を表します。
      */
-    Modify("Modify", "修正"),
+    Modify("Modified", "修正"),
     /**
      * 削除状態を表します。
      */
-    Delete("Delete", "削除"),
+    Delete("Deleted", "削除"),
     /**
      * 初期状態、もしくはいずれの操作も行っていない状態を表します。
      */
-    None("None", "");
+    None("Unchanged", "");
     private final RString statusValue;
     private final RString statusName;
 

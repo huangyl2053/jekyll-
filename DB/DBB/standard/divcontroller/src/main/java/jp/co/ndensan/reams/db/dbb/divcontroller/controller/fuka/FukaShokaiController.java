@@ -66,6 +66,9 @@ public final class FukaShokaiController {
         return ViewStateHolder.get(ViewStateKeys.賦課照会キー, FukaShokaiKey.class);
     }
 
+    /**
+     * ViewStateから賦課対象者、賦課照会キーをクリアします。
+     */
     public static void clearFukaTaishoshaKeyAndFukaShokaiKey() {
         ViewStateHolder.remove(ViewStateKeys.賦課対象者.toString());
         ViewStateHolder.remove(ViewStateKeys.賦課照会キー.toString());

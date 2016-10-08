@@ -1,0 +1,6 @@
+﻿tokuteiKojinJohoMeiCode,varchar,RString,,,,,特定個人情報名コード,A
+dataSetNo,varchar,RString,,,,,データセット番号,A
+hanNo,varchar,RString,,,,,版番号,A
+hanStYMD,UDD015YMD,FlexibleDate,,,,,版有効開始年月日,A
+hanEdYMD,UDD015YMD,FlexibleDate,,,,,版有効終了年月日,A
+shokaiTeikyoKubun,varchar,RString,,,,,初回提供区分,A

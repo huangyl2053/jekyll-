@@ -424,6 +424,9 @@ public class ShikakuSoshitsuIdoTotalHandler {
                 kojin.get住民状態().住民状態略称().toString());
     }
 
+    /**
+     * @return save可能な場合、{@code true}
+     */
     public boolean isSavable() {
         return is資格喪失中();
     }

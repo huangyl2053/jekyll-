@@ -17,10 +17,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -77,13 +75,13 @@ public class ShokujiHiyo {
 
             List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                     .getShokujiHiyoDataList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (shokanMeisaiList == null || shokanMeisaiList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+
+            if (!(shokanMeisaiList == null || shokanMeisaiList.isEmpty())) {
+                List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
+                        .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                                null);
+                getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList);
             }
-            List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
-                    .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                            null);
-            getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList);
         }
 
         if (平成17年10月.isBeforeOrEquals(サービス年月)) {
@@ -97,10 +95,9 @@ public class ShokujiHiyo {
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
                             null);
-            if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            if (!(shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty())) {
+                getHandler(div).set食事費用合計設定パネル(shokanShokujiHiyoList.get(0));
             }
-            getHandler(div).set食事費用合計設定パネル(shokanShokujiHiyoList.get(0));
         }
 
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
@@ -113,17 +110,14 @@ public class ShokujiHiyo {
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
                             null);
-            if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            if (!(shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty())) {
+                getHandler(div).set食事費用パネル１(shokanShokujiHiyoList.get(0));
             }
-            getHandler(div).set食事費用パネル１(shokanShokujiHiyoList.get(0));
         }
 
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
-        if (shikibetsuNoKanriEntity == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
+
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
         return createResponse(div);
     }

@@ -762,6 +762,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         date = RDate.getNowDate();
         RString 年月 = date.getYearMonth().toDateString();
         div.getLblMonth().setText(setLblMonth(date.getYearMonth()));
+        div.getLblMonth2().setText(setLblMonth(date.getYearMonth()));
         モード = モード_初期化;
         set介護認定審査会開催予定一覧(年月);
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList = gogitaiManager.get合議体情報();
@@ -787,6 +788,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) - 1, 1);
         }
         div.getLblMonth().setText(setLblMonth(date2.getYearMonth()));
+        div.getLblMonth2().setText(setLblMonth(date2.getYearMonth()));
         モード = モード_月;
         set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         clear入力();
@@ -801,6 +803,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) + 1, 1);
         }
         div.getLblMonth().setText(setLblMonth(date2.getYearMonth()));
+        div.getLblMonth2().setText(setLblMonth(date2.getYearMonth()));
         モード = モード_月;
         set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         clear入力();

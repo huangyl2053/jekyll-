@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist;
 import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,4 +33,6 @@ public class IdoCheckListEntity implements Serializable {
 
     private List<IdoInfoEntity> idoInfoList;
 
+    private FlexibleDate 抽出期間F;
+    private FlexibleDate 抽出期間T;
 }

@@ -32,7 +32,6 @@
         <association property="要介護認定申請Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
     </resultMap>
     
-    <!--  テーブルDbT2002Fuka、DbT2003Kibetsu、UrT0705ChoteiKyotsu、DbT4023JikoKisambiKanriの項目をEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_ShunoJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoJohoEntity" autoMapping="true">
         <id property="賦課Entity.choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="賦課Entity.fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -70,7 +69,7 @@
     </resultMap>
        
     <select id="get収納状況把握情報" resultMap="ResultMap_ShunoJokyoHaakuEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32003.ShunoJokyoHaakuMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011.ShunoJokyoHaakuMybatisParameter"
             resultOrdered="true" fetchSize="500">
         SELECT
         資格情報.*,
@@ -195,8 +194,10 @@
         収納情報."dbT2002Fuka_fukaNendo" <![CDATA[>=]]> #{日付関連_調定年度}
         AND (資格情報."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" IS NULL OR 資格情報."dbT1001HihokenshaDaicho_shikakuSoshitsuYMD"='')
         AND 生保情報."urV0508SeikatsuHogoJukyusha_gyomuCode" = 'DB'
-<!-- Test data       AND 生保情報."urV0508SeikatsuHogoJukyusha_jukyuKaishiYMD" <![CDATA[<=]]> #{基準日RDATE}
-        AND #{基準日} <![CDATA[<=]]> (CASE WHEN 生保情報."urV0508SeikatsuHogoJukyusha_jukyuHaishiYMD" IS NULL THEN '99999999' WHEN 生保情報."urV0508SeikatsuHogoJukyusha_jukyuHaishiYMD" = '' THEN '99999999' ELSE 生保情報."urV0508SeikatsuHogoJukyusha_jukyuHaishiYMD" END)-->
+        AND 生保情報."urV0508SeikatsuHogoJukyusha_jukyuKaishiYMD" <![CDATA[<=]]> #{基準日RDATE}
+        AND #{基準日} <![CDATA[<=]]> (CASE WHEN 生保情報."urV0508SeikatsuHogoJukyusha_jukyuHaishiYMD" IS NULL THEN '99999999' 
+                                        WHEN 生保情報."urV0508SeikatsuHogoJukyusha_jukyuHaishiYMD" = '' THEN '99999999' 
+                                        ELSE 生保情報."urV0508SeikatsuHogoJukyusha_jukyuHaishiYMD" END)
         ORDER BY
         収納情報."dbT2002Fuka_hihokenshaNo",
         収納情報."dbT2002Fuka_choteiNendo",

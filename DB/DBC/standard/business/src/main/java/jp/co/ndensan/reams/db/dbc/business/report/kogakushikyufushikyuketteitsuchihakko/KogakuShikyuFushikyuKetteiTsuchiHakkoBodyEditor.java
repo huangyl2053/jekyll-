@@ -20,6 +20,9 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor implements IKogakuS
     private final KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity;
     private final int 連番;
     private final boolean flag;
+    private final int INT_0 = 0;
+    private final int INT_3 = 3;
+    private final RString 記号 = new RString("-");
 
     /**
      * コンストラクタです
@@ -43,7 +46,11 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor implements IKogakuS
                 source.listUpper_2 = entity.get決定通知No();
                 source.listUpper_3 = entity.get被保険者番号();
                 source.listUpper_4 = entity.get被保険者氏名();
-                source.listUpper_5 = entity.get郵便番号();
+                if (entity.get郵便番号() != null) {
+                    RString 郵便番号1 = entity.get郵便番号().substring(INT_0, INT_3);
+                    RString 郵便番号2 = entity.get郵便番号().substring(INT_3);
+                    source.listUpper_5 = 郵便番号1.concat(記号).concat(郵便番号2);
+                }
                 source.listLower_1 = entity.get住所();
                 source.listUpper_6 = entity.get提供年月();
                 source.listLower_2 = entity.get要介護度();

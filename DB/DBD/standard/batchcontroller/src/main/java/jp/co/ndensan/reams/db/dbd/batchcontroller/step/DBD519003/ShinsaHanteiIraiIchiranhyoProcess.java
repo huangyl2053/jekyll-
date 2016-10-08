@@ -76,6 +76,7 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
     @Override
     protected void process(ChohyoShuchiryokuyoShiseiJyohoEntity entity) {
         entity.setIndex(连番);
+        entity.set出力CSV状況申請(RString.EMPTY);
         ShinsaHanteiIraiIchiranhyoReport report = new ShinsaHanteiIraiIchiranhyoReport(entity);
         report.writeBy(reportSourceWriter);
         连番++;

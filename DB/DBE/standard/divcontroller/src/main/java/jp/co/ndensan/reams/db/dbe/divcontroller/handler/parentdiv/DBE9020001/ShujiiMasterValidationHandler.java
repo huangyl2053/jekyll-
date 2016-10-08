@@ -136,6 +136,17 @@ public class ShujiiMasterValidationHandler {
         }
         return validPairs;
     }
+    
+     /**
+     * 検索ボタンを押下するとき、検索結果がゼロ件の場合チェックを行う。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateBtnReSearchNoResult() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし)));
+        return validPairs;
+    }
 
     /**
      * 主治医情報登録エリアの編集チェック処理です。

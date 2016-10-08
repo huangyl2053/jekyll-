@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050021;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiDiv;
+import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaManager;
+import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -57,4 +59,17 @@ public class TekiyoJogaishaIdoTeiseiHandler {
         div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード, DaichoType.適用除外者.getコード());
     }
 
+    /**
+     * @param 識別コード 識別コード
+     * @return 適用除外者の場合、{@code true}.
+     */
+    public boolean is適用除外者(ShikibetsuCode 識別コード) {
+        TekiyoJogaishaManager manager = TekiyoJogaishaManager.createInstance();
+        TekiyoJogaisha tekiyoJogaisha = manager.getNewestTekiyoJogaisha(識別コード);
+        if (tekiyoJogaisha == null) {
+            return false;
+        }
+        return (!(tekiyoJogaisha.get適用年月日() == null || tekiyoJogaisha.get適用年月日().isEmpty())
+                && (tekiyoJogaisha.get解除年月日() == null || tekiyoJogaisha.get解除年月日().isEmpty()));
+    }
 }

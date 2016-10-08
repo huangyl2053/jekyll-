@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShobunShuruiCode;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 審査請求書登録_一覧情報の取得処理。
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class SinsaSeikyusyoJohoHandler {
 
     private final SinsaSeikyusyoPanelDiv sinsadiv;
-    private static final RString 共通ボタン = new RString("Element2");
+    private static final RString 審査請求書登録 = new RString("DBUUC09000");
 
     /**
      * コンストラクタです。
@@ -42,19 +41,22 @@ public class SinsaSeikyusyoJohoHandler {
      */
     public void onLoad(List<FufukuMoshitate> sinsaSeikyusyoJohoList) {
         sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(setDataSourcre(sinsaSeikyusyoJohoList));
-        if (UrControlDataFactory.createInstance().getMenuID().equals(new RString("DBUMN71001"))) {
+        if (this.getUIContainerId().equals(審査請求書登録)) {
             sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(true);
         } else {
             sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(false);
         }
-        if (UrControlDataFactory.createInstance().getMenuID().equals(new RString("DBUMN71002"))) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(共通ボタン, true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
-        } else {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(共通ボタン, false);
-        }
     }
-
+    
+    /**
+     * UIコンテナID取得処理です。
+     * 
+     * @return UIコンテナID
+     */
+    public RString getUIContainerId() {
+        return UrControlDataFactory.createInstance().getUIContainerId();      
+    }
+    
     private RString nullToEmpty(RString obj) {
         if (obj == null) {
             return RString.EMPTY;

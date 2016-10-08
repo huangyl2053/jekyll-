@@ -11,13 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ca.cax.business.core.shuno.ShunoKanri;
-import jp.co.ndensan.reams.ca.cax.business.core.shuno.ShunoKey;
+import jp.co.ndensan.reams.ca.cax.business.core.shunokanri.shunokanri.ShunoKanri;
 import jp.co.ndensan.reams.ca.cax.business.report.seikyu.SeikyuForPrinting;
 import jp.co.ndensan.reams.ca.cax.business.report.seikyu.SeikyuItem;
+import jp.co.ndensan.reams.ca.cax.business.report.seikyu.SeikyuItemFactory;
 import jp.co.ndensan.reams.ca.cax.business.report.seikyu.SeikyuItemMeisai;
-import jp.co.ndensan.reams.ca.cax.definition.core.nofusho.FukusuKibetsuShuyakuKamoku;
-import jp.co.ndensan.reams.ca.cax.definition.core.nofusho.FukusuKibetsuShuyakuNendo;
 import jp.co.ndensan.reams.ca.cax.definition.core.seikyu.SeikyushoType;
 import jp.co.ndensan.reams.ca.cax.definition.core.seikyu.ToriatsukaiKigenCheckKubun;
 import jp.co.ndensan.reams.ca.cax.definition.core.seikyu.ocr.OcrPattern;
@@ -45,6 +43,7 @@ import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoK
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.noki.nokitsuki.NokitsukiManager;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.shunokamoku.ShunoKamokuManager;
+import jp.co.ndensan.reams.ur.urz.definition.core.code.RyokinShubetsuCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -52,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -320,40 +320,32 @@ public class NonyuTsuchiShoJohoFactory {
         List<SeikyuForPrinting> 請求情報リスト = new ArrayList<>();
         for (NokiJoho 納期情報 : 普徴納期情報リスト) {
             int 期 = 納期情報.get期月().get期AsInt();
-            ShunoKanri.Builder builder = ShunoKanri.newBuilder();
-            builder.setKamokuCode(収納科目.getコード());
-            builder.setKamokuEdabanCode(収納科目.get枝番コード());
-            builder.setChoteiNendo(new RYear(調定年度.toDateString()));
-            builder.setKazeiNendo(new RYear(賦課年度.toDateString()));
-            builder.setTsuchishoNo(new jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo(
-                    new Decimal(通知書番号.getColumnValue().toString())));
-            builder.setShikibetsuCode(識別コード);
-            builder.setJigyoKubunCode(JigyoKubun.未使用);
-            builder.setChoshukenUmu(true);
-            builder.setKibetsu(期);
             FukaJoho 賦課情報 = 賦課の情報.get賦課情報();
+            Long 収納ID = Long.MIN_VALUE;
             if (賦課情報 != null) {
                 List<Kibetsu> kibetsuList = 賦課情報.getKibetsuList();
                 if (!is該当期ある(期, kibetsuList)) {
                     continue;
                 }
-                Long 収納ID = get収納IDBy期(期, 賦課情報);
-                builder.setShunoId(収納ID);
+                収納ID = get収納IDBy期(期, 賦課情報);
+                
             } else {
-                builder.setShunoId(Long.MIN_VALUE);
+                収納ID = Long.MIN_VALUE;
             }
-            ShunoKanri shunoKanri = builder.build();
-            ShunoKey 収納キー = new ShunoKey(shunoKanri, 収納科目, 納期月リスト.get納期月From期(期));
+           
+            ShunoKanri shunoKanri = new ShunoKanri(収納ID, 収納科目.getコード(), 収納科目.get枝番コード(), 
+                    new RyokinShubetsuCodeValue(Code.EMPTY), JigyoKubun.未使用.getJigyoKubunCd(), new RYear(調定年度.toDateString()), 
+                    new RYear(賦課年度.toDateString()), new jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo(
+                    new Decimal(通知書番号.getColumnValue().toString())), 期, true, 0);
+            
             Decimal 普徴期別金額 = get金額By期(普徴期別金額リスト, 期);
             SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
-                    収納キー, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
+                    shunoKanri, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
             List<SeikyuItemMeisai> 請求明細リスト = new ArrayList<>();
             請求明細リスト.add(請求明細);
-            SeikyuItem 編集元情報 = new SeikyuItem(地方公共団体コード, SeikyushoType.納付書, new RYear(調定年度.toDateString()),
-                    納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null,
-                    ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, false, RString.EMPTY, false,
-                    0, FukusuKibetsuShuyakuKamoku.複数科目を集約しない, FukusuKibetsuShuyakuNendo.年度毎に集約する, 請求明細リスト,
-                    納期情報.get納期().get現年過年区分(), null, null);
+            SeikyuItem 編集元情報 = SeikyuItemFactory.createInsance期別(地方公共団体コード, SeikyushoType.納付書, 納期情報.get納期().get通知書発行日().getYear(), 
+                    納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null, 
+                    ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, 請求明細リスト, RDate.getNowDate());
             SeikyuManager seikyuManager = new SeikyuManager();
             if (納付書タイプ != null && 編集元情報 != null) {
                 List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);

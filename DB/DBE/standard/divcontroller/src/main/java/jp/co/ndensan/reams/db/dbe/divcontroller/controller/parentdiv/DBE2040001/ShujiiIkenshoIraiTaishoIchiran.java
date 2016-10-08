@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.Shu
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
@@ -139,31 +138,22 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnShujiiIrai(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
+            getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
-                getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
-                getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getCcdTaskList().getCheckbox().size() > 1) {
-                getValidationHandler().主治医意見書作成依頼一覧データの複数行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
-            RealInitialLocker.release(排他キー);
-            return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
+        if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
+            getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        return ResponseData.of(div).respond();
+        if (div.getCcdTaskList().getCheckbox().size() > 1) {
+            getValidationHandler().主治医意見書作成依頼一覧データの複数行選択チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+        RealInitialLocker.release(排他キー);
+        return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
     }
 
     /**
@@ -189,24 +179,17 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
-            List<ShinseishoKanriNo> list = new ArrayList<>();
-            for (dgNinteiTaskList_Row row : rowList) {
-                if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                    list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                }
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        List<ShinseishoKanriNo> list = new ArrayList<>();
+        for (dgNinteiTaskList_Row row : rowList) {
+            if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
+                list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             }
-            model.set申請書管理番号リスト(list);
-            model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
-            div.setHiddenIuputModel(DataPassingConverter.serialize(model));
-            RealInitialLocker.release(排他キー);
-            return ResponseData.of(div).respond();
         }
+        model.set申請書管理番号リスト(list);
+        model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
+        div.setHiddenIuputModel(DataPassingConverter.serialize(model));
+        RealInitialLocker.release(排他キー);
         return ResponseData.of(div).respond();
     }
 
@@ -234,7 +217,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
                 getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);

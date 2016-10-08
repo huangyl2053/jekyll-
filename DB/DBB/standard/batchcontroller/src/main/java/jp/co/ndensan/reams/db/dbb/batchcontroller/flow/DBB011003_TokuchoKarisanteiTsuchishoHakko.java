@@ -73,7 +73,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
      *
      * @return バッチコマンド
      */
-    @Step (計算後情報作成)
+    @Step(計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getKeisangoJohoSakuseiBatchParamter(特別徴収開始通知書仮算定_帳票分類ID)).define();
@@ -84,7 +84,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
      *
      * @return バッチコマンド
      */
-    @Step (仮算定一括発行一時テーブル作成)
+    @Step(仮算定一括発行一時テーブル作成)
     protected IBatchFlowCommand karisanteiShutoku() {
         return loopBatch(KarisanteiIkkatsuHakkoTempInsertProcess.class)
                 .arguments(createProcessParameter())
@@ -96,7 +96,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
      *
      * @return バッチコマンド
      */
-    @Step (前年度賦課情報一時テーブル作成)
+    @Step(前年度賦課情報一時テーブル作成)
     protected IBatchFlowCommand fukaZennendoShutoku() {
         return loopBatch(DbT2002FukaZennendoTempInsertProcess.class)
                 .arguments(createProcessParameter())
@@ -108,7 +108,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
      *
      * @return バッチコマンド
      */
-    @Step (更新前年度賦課情報)
+    @Step(更新前年度賦課情報)
     protected IBatchFlowCommand updFukaJoho() {
         return simpleBatch(UpdFukaJohoProcess.class).define();
     }
@@ -118,7 +118,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
      *
      * @return バッチコマンド
      */
-    @Step (更新特徴調定額)
+    @Step(更新特徴調定額)
     protected IBatchFlowCommand updChoteiGaku() {
         return simpleBatch(UpdChoteiGakuProcess.class).define();
     }
@@ -128,7 +128,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
      *
      * @return バッチコマンド
      */
-    @Step (更新被保険者区分)
+    @Step(更新被保険者区分)
     protected IBatchFlowCommand updHihokenshaKubun() {
         return simpleBatch(UpdHihokenshaKubunProcess.class).define();
     }
@@ -138,7 +138,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
      *
      * @return バッチコマンド
      */
-    @Step (通知書の発行)
+    @Step(通知書の発行)
     protected IBatchFlowCommand printTsuchisho() {
         return loopBatch(PrintTsuchishoProcess.class)
                 .arguments(createProcessParameter())

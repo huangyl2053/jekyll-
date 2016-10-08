@@ -289,6 +289,15 @@ public class JogaishaTorokuHandler {
         return createValidationHandler(div).juufukuCheck();
     }
 
+    /**
+     * 保存するボタンを押下した際の、更新可能チェックを行います。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validate更新可能() {
+        return createValidationHandler(div).validate更新可能();
+    }
+
     private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("識別コード"), 識別コード.value());
         return PersonalData.of(識別コード, expandedInfo);

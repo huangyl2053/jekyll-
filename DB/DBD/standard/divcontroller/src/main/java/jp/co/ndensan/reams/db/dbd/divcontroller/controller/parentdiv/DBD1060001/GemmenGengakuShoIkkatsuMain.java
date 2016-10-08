@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1060001.Gemm
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -33,6 +34,52 @@ public class GemmenGengakuShoIkkatsuMain {
      */
     public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onLoad(GemmenGengakuShoIkkatsuMainDiv div) {
         getHandler(div).初期化画面の表示();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「負担条件を保存する」ボタンのonClickイベント処理です。
+     *
+     * @param div GemmenGengakuShoIkkatsuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnFutanBatchParameterSave(GemmenGengakuShoIkkatsuMainDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = getHandler(div).onClick_btnBatchFutanParameterSave();
+        return responseData;
+    }
+
+    /**
+     * 「社会条件を保存する」ボタンのonClickイベント処理です。
+     *
+     * @param div GemmenGengakuShoIkkatsuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchShakaiParameterSave(GemmenGengakuShoIkkatsuMainDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = getHandler(div).onClick_btnBatchShakaiParameterSave();
+        return responseData;
+    }
+
+    /**
+     * 「負担条件を復元する」ボタンのonClickイベント処理です。
+     *
+     * @param div MemoListOutputDiv
+     * @return ResponseData
+     */
+    public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onClick_btnBatchFutanParameterRestore(GemmenGengakuShoIkkatsuMainDiv div) {
+        getHandler(div).onClick_btnBatchFutanParameterRestore();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「社会条件を復元する」ボタンのonClickイベント処理です。
+     *
+     * @param div MemoListOutputDiv
+     * @return ResponseData
+     */
+    public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onClick_btnBatchShakaiParameterRestore(GemmenGengakuShoIkkatsuMainDiv div) {
+        getHandler(div).onClick_btnBatchShakaiParameterRestore();
         return ResponseData.of(div).respond();
     }
 

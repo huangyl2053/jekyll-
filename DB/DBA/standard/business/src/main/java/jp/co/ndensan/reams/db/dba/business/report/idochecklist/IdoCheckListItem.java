@@ -19,6 +19,8 @@ public class IdoCheckListItem {
 
     private final RString printTimeStamp;
     private final RString pageCount;
+    private final RString tyusyutsukikanF;
+    private final RString tyusyutsukikanT;
     private final RString taishoJohotitle;
     private final RString shichosonCode;
     private final RString shichosonName;
@@ -79,6 +81,8 @@ public class IdoCheckListItem {
      *
      * @param printTimeStamp 印刷日時
      * @param pageCount ページ数
+     * @param tyusyutsukikanF 抽出期間F
+     * @param tyusyutsukikanT　抽出期間T
      * @param taishoJohotitle 対象情報タイトル
      * @param shichosonCode 市町村コード
      * @param shichosonName 市町村名
@@ -134,10 +138,13 @@ public class IdoCheckListItem {
      * @param listLower_14 異動情報データ6
      * @param fuseigoCountTitle 不整合合計タイトル
      * @param fuseigoCount 不整合数
+     * @param tyusyutsukikanT 抽出期間
      */
     public IdoCheckListItem(
             RString printTimeStamp,
             RString pageCount,
+            RString tyusyutsukikanF,
+            RString tyusyutsukikanT,
             RString taishoJohotitle,
             RString shichosonCode,
             RString shichosonName,
@@ -196,6 +203,8 @@ public class IdoCheckListItem {
     ) {
         this.printTimeStamp = printTimeStamp;
         this.pageCount = pageCount;
+        this.tyusyutsukikanF = tyusyutsukikanF;
+        this.tyusyutsukikanT = tyusyutsukikanT;
         this.taishoJohotitle = taishoJohotitle;
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;

@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.GengakuTaishoSaishinJoho;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.NinteiJoho;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShikakuJoho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -50,8 +47,5 @@ public class HihokenshaJohoEntity {
     private RString 徴収権消滅期間;
     private RString 納付済み期間;
     private RString 給付額減額期間;
-    private GengakuTaishoSaishinJoho 減額対象最新情報;
-    private NinteiJoho 認定情報;
-    private ShikakuJoho 資格情報;
 
 }

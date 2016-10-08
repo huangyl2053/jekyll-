@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011.ShunoTainoJokyo
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209012.KyufuGakuGengakuTainoShaProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209012.TaishoShaKanriJohoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012.DBD209012_KyufuGakuGengakuKanriListParameter;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoJokyoHaakuProcessParameter;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoTainoJokyoHaakuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.ShunoJokyoHaakuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.ShunoTainoJokyoHaakuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

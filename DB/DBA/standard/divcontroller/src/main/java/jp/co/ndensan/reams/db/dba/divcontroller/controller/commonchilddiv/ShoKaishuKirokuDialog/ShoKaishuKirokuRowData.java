@@ -32,6 +32,11 @@ public class ShoKaishuKirokuRowData implements Serializable {
     private final RString koufuJiyuNo;
     private final RString kaishuJiyuNo;
 
+    /**
+     * {@link dgKoufuKaishu_Row}の情報を保持したインスタンスを生成します。
+     *
+     * @param row {@link dgKoufuKaishu_Row}
+     */
     public ShoKaishuKirokuRowData(dgKoufuKaishu_Row row) {
         status = row.getStatus();
         koufuType = row.getKoufuType();
@@ -48,21 +53,26 @@ public class ShoKaishuKirokuRowData implements Serializable {
         kaishuJiyuNo = row.getKaishuJiyuNo();
     }
 
-    public static dgKoufuKaishu_Row toRow(ShoKaishuKirokuRowData rowData) {
+    /**
+     * {@link dgKoufuKaishu_Row}へ変換します。
+     *
+     * @return {@link dgKoufuKaishu_Row}
+     */
+    public dgKoufuKaishu_Row toRow() {
         dgKoufuKaishu_Row row = new dgKoufuKaishu_Row();
-        row.setStatus(rowData.status);
-        row.setKoufuType(rowData.koufuType);
-        row.getKoufuDate().setValue(rowData.koufuDate);
-        row.setKoufuJiyu(rowData.koufuJiyu);
-        row.getKaishuDate().setValue(rowData.kaishuDate);
-        row.setKaishuJiyu(rowData.kaishuJiyu);
-        row.getYukoKigen().setValue(rowData.yukoKigen);
-        row.setKofuRiyu(rowData.kofuRiyu);
-        row.setKaishuRiyu(rowData.kaishuRiyu);
-        row.setRirekiNo(rowData.rirekiNo);
-        row.setKoufuTypeNo(rowData.koufuTypeNo);
-        row.setKoufuJiyuNo(rowData.koufuJiyuNo);
-        row.setKaishuJiyuNo(rowData.kaishuJiyuNo);
+        row.setStatus(this.status);
+        row.setKoufuType(this.koufuType);
+        row.getKoufuDate().setValue(this.koufuDate);
+        row.setKoufuJiyu(this.koufuJiyu);
+        row.getKaishuDate().setValue(this.kaishuDate);
+        row.setKaishuJiyu(this.kaishuJiyu);
+        row.getYukoKigen().setValue(this.yukoKigen);
+        row.setKofuRiyu(this.kofuRiyu);
+        row.setKaishuRiyu(this.kaishuRiyu);
+        row.setRirekiNo(this.rirekiNo);
+        row.setKoufuTypeNo(this.koufuTypeNo);
+        row.setKoufuJiyuNo(this.koufuJiyuNo);
+        row.setKaishuJiyuNo(this.kaishuJiyuNo);
         return row;
     }
 }

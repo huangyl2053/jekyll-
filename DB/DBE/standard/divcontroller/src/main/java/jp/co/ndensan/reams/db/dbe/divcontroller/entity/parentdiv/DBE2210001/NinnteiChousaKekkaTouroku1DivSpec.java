@@ -140,6 +140,17 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                     RString 基本調査入力OK = new RString("1");
                     return 基本調査入力OK.equals(div.getHiddenKihonChosaInput7Flag());
                 }
+            },
+    実施場所名称の非空チェック {
+                /**
+                 * 実施場所名称の非空チェックです。
+                 *
+                 * @param div SaiketukekaTorokuPanelDiv
+                 * @return true:実施場所名称が非空です、false:実施場所名称が空です。
+                 */
+                @Override
+                public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
+                    return !div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue().isNullOrEmpty();
+                }
             }
-
 }

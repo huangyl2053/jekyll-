@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7304TokuteiKojinJohoTeikyoKanriマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： @reamsid_L DBU- 9999-021 sunhaidi -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7304TokuteiKojinJohoTeikyoKanriMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7304TokuteiKojinJohoTeikyoKanri">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7304TokuteiKojinJohoTeikyoKanriMapper.allColumns_DbT7304TokuteiKojinJohoTeikyoKanri" />
+     FROM
+         rgdb."DbT7304TokuteiKojinJohoTeikyoKanri"
+     WHERE
+         rgdb."DbT7304TokuteiKojinJohoTeikyoKanri"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7304TokuteiKojinJohoTeikyoKanri">
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."hihokenshaNo" as "dbT7304TokuteiKojinJohoTeikyoKanri_hihokenshaNo",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."dataSetRecordKey" as "dbT7304TokuteiKojinJohoTeikyoKanri_dataSetRecordKey",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."insertDantaiCd" as "dbT7304TokuteiKojinJohoTeikyoKanri_insertDantaiCd",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."insertTimestamp" as "dbT7304TokuteiKojinJohoTeikyoKanri_insertTimestamp",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."insertReamsLoginId" as "dbT7304TokuteiKojinJohoTeikyoKanri_insertReamsLoginId",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."insertContextId" as "dbT7304TokuteiKojinJohoTeikyoKanri_insertContextId",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."isDeleted" as "dbT7304TokuteiKojinJohoTeikyoKanri_isDeleted",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."updateCount" as "dbT7304TokuteiKojinJohoTeikyoKanri_updateCount",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."lastUpdateTimestamp" as "dbT7304TokuteiKojinJohoTeikyoKanri_lastUpdateTimestamp",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."lastUpdateReamsLoginId" as "dbT7304TokuteiKojinJohoTeikyoKanri_lastUpdateReamsLoginId",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."teikyoNichiji" as "dbT7304TokuteiKojinJohoTeikyoKanri_teikyoNichiji",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."shinkiIdoKubun" as "dbT7304TokuteiKojinJohoTeikyoKanri_shinkiIdoKubun",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."teikyoKubun" as "dbT7304TokuteiKojinJohoTeikyoKanri_teikyoKubun",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."tokuteiKojinJohoMeiCode" as "dbT7304TokuteiKojinJohoTeikyoKanri_tokuteiKojinJohoMeiCode",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."hanNo" as "dbT7304TokuteiKojinJohoTeikyoKanri_hanNo",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."dataSetNo" as "dbT7304TokuteiKojinJohoTeikyoKanri_dataSetNo",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."kokaiYMD" as "dbT7304TokuteiKojinJohoTeikyoKanri_kokaiYMD",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."tateNo" as "dbT7304TokuteiKojinJohoTeikyoKanri_tateNo",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo01" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo01",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu01" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu01",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo02" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo02",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu02" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu02",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo03" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo03",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu03" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu03",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo04" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo04",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu04" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu04",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo05" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo05",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu05" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu05",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo06" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo06",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu06" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu06",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo07" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo07",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu07" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu07",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo08" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo08",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu08" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu08",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo09" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo09",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu09" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu09",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."soshinNaiyo10" as "dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo10",
+         "DbT7304TokuteiKojinJohoTeikyoKanri"."misetteiJiyu10" as "dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu10"
+    </sql>
+
+
+    <!--テーブルDbT7304TokuteiKojinJohoTeikyoKanriの項目をDbT7304TokuteiKojinJohoTeikyoKanriEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7304TokuteiKojinJohoTeikyoKanriEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7304TokuteiKojinJohoTeikyoKanriEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT7304TokuteiKojinJohoTeikyoKanri_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dataSetRecordKey" column="dbT7304TokuteiKojinJohoTeikyoKanri_dataSetRecordKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7304TokuteiKojinJohoTeikyoKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7304TokuteiKojinJohoTeikyoKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7304TokuteiKojinJohoTeikyoKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7304TokuteiKojinJohoTeikyoKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7304TokuteiKojinJohoTeikyoKanri_isDeleted" />
+        <result property="updateCount" column="dbT7304TokuteiKojinJohoTeikyoKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7304TokuteiKojinJohoTeikyoKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7304TokuteiKojinJohoTeikyoKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNichiji" column="dbT7304TokuteiKojinJohoTeikyoKanri_teikyoNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="shinkiIdoKubun" column="dbT7304TokuteiKojinJohoTeikyoKanri_shinkiIdoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoKubun" column="dbT7304TokuteiKojinJohoTeikyoKanri_teikyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiKojinJohoMeiCode" column="dbT7304TokuteiKojinJohoTeikyoKanri_tokuteiKojinJohoMeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hanNo" column="dbT7304TokuteiKojinJohoTeikyoKanri_hanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dataSetNo" column="dbT7304TokuteiKojinJohoTeikyoKanri_dataSetNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokaiYMD" column="dbT7304TokuteiKojinJohoTeikyoKanri_kokaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tateNo" column="dbT7304TokuteiKojinJohoTeikyoKanri_tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="soshinNaiyo01" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu01" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo02" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu02" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo03" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu03" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo04" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu04" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo05" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu05" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo06" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu06" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo07" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu07" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo08" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu08" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo09" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu09" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="soshinNaiyo10" column="dbT7304TokuteiKojinJohoTeikyoKanri_soshinNaiyo10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu10" column="dbT7304TokuteiKojinJohoTeikyoKanri_misetteiJiyu10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -64,7 +64,7 @@ var DBZ;
             };
 
             Controls.prototype.txtNyuryokuShisetsuKodo = function () {
-                return new UZA.TextBox(this.convFiledName("txtNyuryokuShisetsuKodo"));
+                return new UZA.TextBoxCode(this.convFiledName("txtNyuryokuShisetsuKodo"));
             };
 
             Controls.prototype.btnJigyoshaKensaku = function () {

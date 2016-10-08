@@ -51,6 +51,18 @@ var DBD;
                 return new UZA.TextBox(this.convFiledName("txtShinseiRiyu"));
             };
 
+            Controls.prototype.izokuNenkinJukyuShinkoku = function () {
+                return new UZA.CheckBoxList(this.convFiledName("izokuNenkinJukyuShinkoku"));
+            };
+
+            Controls.prototype.shogaiNenkinJukyuShinkoku = function () {
+                return new UZA.CheckBoxList(this.convFiledName("shogaiNenkinJukyuShinkoku"));
+            };
+
+            Controls.prototype.HiKazeiNenkinjoho = function () {
+                return new UZA.TextBox(this.convFiledName("HiKazeiNenkinjoho"));
+            };
+
             Controls.prototype.FutanGendogakuNinteiRiyoshaFutan = function () {
                 return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiRiyoshaFutan"));
             };

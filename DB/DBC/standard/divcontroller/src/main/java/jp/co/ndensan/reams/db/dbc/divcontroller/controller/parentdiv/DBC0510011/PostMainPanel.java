@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0510011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc130010.DBC130010_KokuhoShikakuIdoInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC130010.DBC130010_KokuhoShikakuIdoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc130020.DBC130020_KokikoreishaShikakuIdoInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.DBC0510011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.PostMainPanelDiv;

@@ -94,6 +94,18 @@ public class ShikakuHenkoRirekiHandler {
      * @param 取得日 取得日
      */
     public void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+
+        div.getDgHenko().setDataSource(get資格変更履歴(被保険者番号, 識別コード, 取得日));
+        initialize(識別コード);
+    }
+
+    public void initialize(ShikibetsuCode 識別コード, List<dgHenko_Row> henkoData) {
+        div.getDgHenko().setDataSource(henkoData);
+        initialize(識別コード);
+    }
+
+    private void initialize(ShikibetsuCode 識別コード) {
+
         Boolean is単一 = !ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().equals(広域);
         Boolean is合併有り = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告).equals(合併有り);
@@ -106,13 +118,14 @@ public class ShikakuHenkoRirekiHandler {
         } else if (!is単一 && is合併有り) {
             div.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
         }
-        div.getDgHenko().setDataSource(get資格変更履歴(被保険者番号, 識別コード, 取得日));
+
         if (!is単一) {
             div.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setDataSource(get措置元保険者DDL());
         }
         if (is合併有り) {
             div.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setDataSource(get旧保険者リスト情報());
         }
+
         div.getDdlHenkoJiyu().setDataSource(get変更事由リスト情報());
         div.getHenkoHokenshaJoho().getDdlJuminJoho().setDataSource(get住民情報DDL(識別コード));
         if (ShikakuHenkoRirekiDiv.DisplayType.shokai.equals(div.getMode_DisplayType())) {
@@ -122,6 +135,8 @@ public class ShikakuHenkoRirekiHandler {
             div.getDgHenko().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDgHenko().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgHenko().getGridSetting().setIsShowRowState(false);
+            div.getBtnAdd().setDisplayNone(true);
+            div.getHenkoInput().setDisplayNone(true);
         } else if (ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(div.getMode_DisplayType())) {
             div.getBtnAdd().setDisabled(false);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
@@ -133,8 +148,8 @@ public class ShikakuHenkoRirekiHandler {
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
-            div.getBtnHenkoKakutei().setVisible(true);
-            div.getBtnHenkoTorikeshi().setVisible(true);
+            div.getBtnHenkoKakutei().setDisplayNone(false);
+            div.getBtnHenkoTorikeshi().setDisplayNone(false);
         }
         div.getHenkoInput().setDisabled(true);
         div.setInputMode(ViewExecutionStatus.Add.getValue());
@@ -587,15 +602,15 @@ public class ShikakuHenkoRirekiHandler {
     public boolean checkInputNewData() {
         for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
             if (row.getState().equals(追加状態)
-                || row.getState().equals(修正状態)
-                || row.getState().equals(削除状態)) {
+                    || row.getState().equals(修正状態)
+                    || row.getState().equals(削除状態)) {
                 return true;
             }
         }
         return false;
     }
 
-    private class HenkoRirekiComparator implements Comparator<dgHenko_Row> {
+    private static class HenkoRirekiComparator implements Comparator<dgHenko_Row> {
 
         @Override
         public int compare(dgHenko_Row o1, dgHenko_Row o2) {

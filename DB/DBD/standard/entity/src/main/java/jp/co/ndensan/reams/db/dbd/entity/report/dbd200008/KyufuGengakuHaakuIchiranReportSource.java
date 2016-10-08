@@ -14,6 +14,26 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    public static final RString 改頁_郵便番号;
+    public static final RString 改頁_町域コード;
+    public static final RString 改頁_行政区コード;
+    public static final RString 改頁_世帯コード;
+    public static final RString 改頁_識別コード;
+    public static final RString 改頁_氏名５０音カナ;
+    public static final RString 改頁_市町村コード;
+    public static final RString 改頁_被保険者番号;
+
+    static {
+        改頁_郵便番号 = new RString("listUpper2_5");
+        改頁_町域コード = new RString("atena_choikiCode"); // #103476
+        改頁_行政区コード = new RString("listUpper1_4");
+        改頁_世帯コード = new RString("listUpper1_3");
+        改頁_識別コード = new RString("listUpper2_1");
+        改頁_氏名５０音カナ = new RString("listUpper1_2");
+        改頁_市町村コード = new RString("atesaki_chiku3"); // #103476
+        改頁_被保険者番号 = new RString("hokenshaNo");
+    }
+
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
     @ReportItem(name = "title", length = 19, order = 2)

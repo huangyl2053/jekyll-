@@ -16,8 +16,8 @@
         <result property="要介護認定状態区分コード" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
     <resultMap id="resultMap_FutanGendogakuNinteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity" autoMapping="true">
-        <id property="介護保険負担限度額認定Entity.hihokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="介護保険負担限度額認定Entity.rirekiNo" column="dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" />
+        <id property="介護保険負担限度額認定Entity.hihokenshaNo" column="dbT4018KaigohFutanGengkNint_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="介護保険負担限度額認定Entity.rirekiNo" column="dbT4018KaigohFutanGengkNint_rirekiNo" />
         <association property="介護保険負担限度額認定Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
@@ -70,10 +70,10 @@
         LEFT JOIN (SELECT *
                    FROM (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS B
                    WHERE B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類コード}) AS C
-             ON A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = C."dbT4010GemmenGengakuShinsei_hihokenshaNo"
-                AND A."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = C."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
-        WHERE A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
-        ORDER BY A."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" DESC
+             ON A."dbT4018KaigohFutanGengkNint_hihokenshaNo" = C."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+                AND A."dbT4018KaigohFutanGengkNint_rirekiNo" = C."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        WHERE A."dbT4018KaigohFutanGengkNint_hihokenshaNo" = #{被保険者番号}
+        ORDER BY A."dbT4018KaigohFutanGengkNint_rirekiNo" DESC
         LIMIT 1
     </select>
     <select id="get利用者負担額減額の情報"

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JutakuGaikyoChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,10 +23,8 @@ public class JutakuGaikyoChosaDiv extends Panel {
      */
     @JsonProperty("radJutakuKaishu")
     private RadioButton radJutakuKaishu;
-    @JsonProperty("dgRiyoSerViceFirstHalf")
-    private DataGrid<dgRiyoSerViceFirstHalf_Row> dgRiyoSerViceFirstHalf;
-    @JsonProperty("dgRiyoSerViceSecondHalf")
-    private DataGrid<dgRiyoSerViceSecondHalf_Row> dgRiyoSerViceSecondHalf;
+    @JsonProperty("dgRiyoServiceJyokyo")
+    private DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo;
     @JsonProperty("txtShichosonTokubetsuKyufu")
     private TextBox txtShichosonTokubetsuKyufu;
     @JsonProperty("txtKyufuIgaiJutakuService")
@@ -57,39 +55,21 @@ public class JutakuGaikyoChosaDiv extends Panel {
     }
 
     /*
-     * getdgRiyoSerViceFirstHalf
-     * @return dgRiyoSerViceFirstHalf
+     * getdgRiyoServiceJyokyo
+     * @return dgRiyoServiceJyokyo
      */
-    @JsonProperty("dgRiyoSerViceFirstHalf")
-    public DataGrid<dgRiyoSerViceFirstHalf_Row> getDgRiyoSerViceFirstHalf() {
-        return dgRiyoSerViceFirstHalf;
+    @JsonProperty("dgRiyoServiceJyokyo")
+    public DataGrid<dgRiyoServiceJyokyo_Row> getDgRiyoServiceJyokyo() {
+        return dgRiyoServiceJyokyo;
     }
 
     /*
-     * setdgRiyoSerViceFirstHalf
-     * @param dgRiyoSerViceFirstHalf dgRiyoSerViceFirstHalf
+     * setdgRiyoServiceJyokyo
+     * @param dgRiyoServiceJyokyo dgRiyoServiceJyokyo
      */
-    @JsonProperty("dgRiyoSerViceFirstHalf")
-    public void setDgRiyoSerViceFirstHalf(DataGrid<dgRiyoSerViceFirstHalf_Row> dgRiyoSerViceFirstHalf) {
-        this.dgRiyoSerViceFirstHalf = dgRiyoSerViceFirstHalf;
-    }
-
-    /*
-     * getdgRiyoSerViceSecondHalf
-     * @return dgRiyoSerViceSecondHalf
-     */
-    @JsonProperty("dgRiyoSerViceSecondHalf")
-    public DataGrid<dgRiyoSerViceSecondHalf_Row> getDgRiyoSerViceSecondHalf() {
-        return dgRiyoSerViceSecondHalf;
-    }
-
-    /*
-     * setdgRiyoSerViceSecondHalf
-     * @param dgRiyoSerViceSecondHalf dgRiyoSerViceSecondHalf
-     */
-    @JsonProperty("dgRiyoSerViceSecondHalf")
-    public void setDgRiyoSerViceSecondHalf(DataGrid<dgRiyoSerViceSecondHalf_Row> dgRiyoSerViceSecondHalf) {
-        this.dgRiyoSerViceSecondHalf = dgRiyoSerViceSecondHalf;
+    @JsonProperty("dgRiyoServiceJyokyo")
+    public void setDgRiyoServiceJyokyo(DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo) {
+        this.dgRiyoServiceJyokyo = dgRiyoServiceJyokyo;
     }
 
     /*

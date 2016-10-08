@@ -154,7 +154,9 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcess extends BatchProcessBase<Chohy
         csvEntity.set申請代行区分コード(ShinseiTodokedeDaikoKubunCode.toValue(entity.get申請届出代行区分コード().value()).get名称());
         csvEntity.set生年月日(entity.get生年月日().wareki().toDateString());
         csvEntity.set性別コード(Seibetsu.toValue(entity.get性別()).get名称());
-        csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).get名称());
+        if (entity.get前回要介護状態区分コード() != null) {
+            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).get名称());
+        }
         return csvEntity;
     }
 

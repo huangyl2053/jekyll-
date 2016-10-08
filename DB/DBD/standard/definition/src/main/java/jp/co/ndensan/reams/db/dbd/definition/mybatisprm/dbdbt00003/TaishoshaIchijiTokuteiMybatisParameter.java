@@ -31,8 +31,6 @@ public class TaishoshaIchijiTokuteiMybatisParameter implements IMyBatisParameter
     private static final RString 受給者区分_事業対象者_に = new RString("3");
     private static final RString 対象期間指定_対象年度_いち = new RString("1");
     private static final RString 対象期間指定_基準日_に = new RString("2");
-    private static final RString 旧措置者区分_旧措置者以外_いち = new RString("1");
-    private static final RString 旧措置者区分_旧措置者_に = new RString("2");
 
     private boolean is対象リスト_該当者リスト;
     private boolean is受給者区分_受給者;
@@ -103,10 +101,10 @@ public class TaishoshaIchijiTokuteiMybatisParameter implements IMyBatisParameter
 
     private void edit旧措置者区分(KyusochishaJukyushaKubun 旧措置者区分) {
         if (旧措置者区分 != null) {
-            if (旧措置者区分_旧措置者以外_いち.equals(旧措置者区分.getコード())) {
+            if (KyusochishaJukyushaKubun.旧措置者以外.equals(旧措置者区分)) {
                 is旧措置者区分_旧措置者以外 = true;
             }
-            if (旧措置者区分_旧措置者_に.equals(旧措置者区分.getコード())) {
+            if (KyusochishaJukyushaKubun.旧措置者のみ.equals(旧措置者区分)) {
                 is旧措置者区分_旧措置者 = true;
             }
         }

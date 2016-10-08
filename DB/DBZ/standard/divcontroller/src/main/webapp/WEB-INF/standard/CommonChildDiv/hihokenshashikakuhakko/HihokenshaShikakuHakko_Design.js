@@ -32,6 +32,14 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("YukoKigenInfo"));
             };
 
+            Controls.prototype.btnTyokuzenRireki = function () {
+                return new UZA.Button(this.convFiledName("btnTyokuzenRireki"));
+            };
+
+            Controls.prototype.btnSaishin = function () {
+                return new UZA.Button(this.convFiledName("btnSaishin"));
+            };
+
             Controls.prototype.txtYukoKigen = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtYukoKigen"));
             };

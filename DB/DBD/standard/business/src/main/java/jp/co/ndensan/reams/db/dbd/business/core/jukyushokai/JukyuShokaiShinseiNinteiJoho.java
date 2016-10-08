@@ -89,7 +89,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      * @return 要介護認定申請情報_厚労省IF識別コード
      */
     public Code get要介護認定申請情報_厚労省IF識別コード() {
-        return 申請認定情報Entity.getDbT5101NinteiShinseiJoho_koroshoIfShikibetsuCode();
+        return 申請認定情報Entity.getDbT4101NinteiShinseiJoho_koroshoIfShikibetsuCode();
     }
 
     /**
@@ -143,7 +143,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      * @return 要介護認定申請情報_認定申請理由
      */
     public RString get要介護認定申請情報_認定申請理由() {
-        return 申請認定情報Entity.getDbT5101NinteiShinseiJoho_ninteiShinseiRiyu();
+        return 申請認定情報Entity.getDbT4101NinteiShinseiJoho_ninteiShinseiRiyu();
     }
 
     /**
@@ -260,7 +260,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      * @return 要介護認定申請情報_認定申請区分申請時コード
      */
     public Code get要介護認定申請情報_認定申請区分申請時コード() {
-        return 申請認定情報Entity.getDbT5101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode();
+        return 申請認定情報Entity.getDbT4101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode();
     }
 
     /**
@@ -269,7 +269,7 @@ public class JukyuShokaiShinseiNinteiJoho {
      * @return 要介護認定申請情報_認定申請区分法令コード
      */
     public Code get要介護認定申請情報_認定申請区分法令コード() {
-        return 申請認定情報Entity.getDbT5101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode();
+        return 申請認定情報Entity.getDbT4101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode();
     }
 
     /**
@@ -315,6 +315,15 @@ public class JukyuShokaiShinseiNinteiJoho {
      */
     public FlexibleDate get前回認定有効期間終了() {
         return 申請認定情報Entity.get前回有効期間終了();
+    }
+    
+    /**
+     * 前回厚労省IF識別コードを取得します。
+     * 
+     * @return 前回厚労省IF識別コード
+     */
+    public Code get前回厚労省IF識別コード() {
+        return 申請認定情報Entity.get前回厚労省IF識別コード();
     }
 
     /**

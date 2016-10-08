@@ -67,6 +67,7 @@ public class FukakonkyoAndKiwariPresenter {
      * 指定の{@link FukaTaishoshaKey}に該当する賦課を画面へ表示します。
      *
      * @param taishoshaKey {@link FukaTaishoshaKey}
+     * @return 賦課照会キー
      */
     public FukaShokaiKey set賦課(FukaTaishoshaKey taishoshaKey) {
         final FukaMiscManager fukaManager = new FukaMiscManager();
@@ -81,6 +82,7 @@ public class FukakonkyoAndKiwariPresenter {
      * 指定の賦課履歴を画面へ設定します。{@code null}が指定された場合は、何も表示されません。
      *
      * @param model 賦課履歴
+     * @return 賦課照会キー
      */
     public FukaShokaiKey set賦課Nullable(Fuka model) {
         FukaShokaiKey key = model == null ? FukaShokaiKey.EMPTY : createFukaShokaiKey(model);

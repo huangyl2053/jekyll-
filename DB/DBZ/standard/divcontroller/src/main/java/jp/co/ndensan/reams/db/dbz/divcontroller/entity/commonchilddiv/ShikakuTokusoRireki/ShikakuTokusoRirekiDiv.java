@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import static jp.co.ndensan.reams.db.dbz.definition.core.GappeiJohoKubun.合併あり;
 import static jp.co.ndensan.reams.db.dbz.definition.core.GappeiJohoKubun.合併なし;
@@ -26,7 +28,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.Jushochitok
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -420,17 +425,17 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    /**
-     * initialize時の処理です。<br/>
-     *
-     * @param hihokenshaNo 被保険者番号
-     * @param shikibetsuCode 識別コード
-     */
     @Override
     public void initialize(HihokenshaNo hihokenshaNo,
             ShikibetsuCode shikibetsuCode) {
         initializeShichosonSecurity();
         getShikakuShutokuRireki(hihokenshaNo, shikibetsuCode);
+    }
+
+    @Override
+    public void initialize(IItemList<HihokenshaDaicho> hihoData) {
+        initializeShichosonSecurity();
+        getShikakuShutokuRireki(hihoData);
     }
 
     @Override
@@ -491,6 +496,57 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
         // 「ビジネス設計_DBAMN00000_資格得喪履歴」の「一覧データ取得」を参照する
         SearchResult<ShikakuTokuso> result = shikakuTokusoFinder.getShikakuTokuso(parmeter);
+        createGridData(result);
+        this.getBtnAddShikakuShutoku().setDisabled(true);
+    }
+
+    @Override
+    public void getShikakuShutokuRireki(IItemList<HihokenshaDaicho> hihoData) {
+        List<ShikakuTokuso> shikakuTokusoData = new ArrayList<>();
+        SearchResult<KoikiZenShichosonJoho> shichosons = KoikiShichosonJohoFinder.createInstance().getZenShichosonJoho();
+
+        for (HihokenshaDaicho daicho : hihoData) {
+            ServiceShikakuRelateEntity entity = new ServiceShikakuRelateEntity();
+            entity.setHihokenshaNo(daicho.get被保険者番号());
+            entity.setIdoYMD(daicho.get異動日());
+            entity.setEdaNo(daicho.get枝番());
+            entity.setShikibetsuCode(daicho.get識別コード());
+            entity.setShikakuShutokuYMD(daicho.get資格取得年月日());
+            entity.setShikakuShutokuTodokedeYMD(daicho.get資格取得届出年月日());
+            entity.setShikakuShutokuJiyuCode(daicho.get資格取得事由コード());
+            entity.setHihokennshaKubunCode(daicho.get被保険者区分コード());
+            entity.setShikakuSoshitsuYMD(daicho.get資格喪失年月日());
+            entity.setShikakuSoshitsuTodokedeYMD(daicho.get資格喪失届出年月日());
+            entity.setShikakuSoshitsuJiyuCode(daicho.get資格喪失事由コード());
+            entity.setJushochiTokureiFlag(daicho.get住所地特例フラグ());
+            entity.setShichosonCode(daicho.get市町村コード());
+            entity.setShichosonMeisho(searchShichosonName(shichosons, daicho.get市町村コード()));
+            entity.setShichosonCode2(daicho.get広住特措置元市町村コード());
+            entity.setShichosonMeisho2(searchShichosonName(shichosons, daicho.get広住特措置元市町村コード()));
+            entity.setKyuShichosonCode(daicho.get旧市町村コード());
+            entity.setKyuShichosonMeisho(searchShichosonName(shichosons, daicho.get旧市町村コード()));
+            entity.setLastUpdateTimestamp(daicho.toEntity().getLastUpdateTimestamp());
+            shikakuTokusoData.add(new ShikakuTokuso(entity));
+        }
+        SearchResult<ShikakuTokuso> result = SearchResult.of(shikakuTokusoData, shikakuTokusoData.size(), false);
+        createGridData(result);
+        this.getBtnAddShikakuShutoku().setDisabled(true);
+    }
+
+    private RString searchShichosonName(SearchResult<KoikiZenShichosonJoho> shichosonList, LasdecCode lasdecCode) {
+        if (lasdecCode == null || lasdecCode.isEmpty()) {
+            return RString.EMPTY;
+        }
+
+        for (KoikiZenShichosonJoho shichoson : shichosonList.records()) {
+            if (shichoson.get市町村コード().equals(lasdecCode)) {
+                return shichoson.get市町村名称();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private void createGridData(SearchResult<ShikakuTokuso> result) {
 
         List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
         for (ShikakuTokuso shikakuTokuso : result.records()) {
@@ -560,7 +616,6 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         }
 
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
-        this.getBtnAddShikakuShutoku().setDisabled(true);
     }
 
     private RString codeToRString(LasdecCode code) {

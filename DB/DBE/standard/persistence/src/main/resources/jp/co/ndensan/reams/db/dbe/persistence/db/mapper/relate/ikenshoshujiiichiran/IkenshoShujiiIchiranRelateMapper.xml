@@ -8,6 +8,8 @@
 
     <!-- IkenshoShujiiIchiranRelateEntityの項目にマッピングします。-->
     <resultMap id="resultMap_getIkenshoShujiiIchiranRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity" autoMapping="true">
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryokikanCode" column="iryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeishoKana" column="iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -29,6 +31,8 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter"
             fetchSize="500">
         SELECT
+        DbT7051KoseiShichosonMaster."shichosonCode",
+        DbT7051KoseiShichosonMaster."shichosonMeisho",
         DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"  AS iryokikanCode,
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeishoKana",
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
@@ -46,10 +50,12 @@
         DbT5912ShujiiJoho."jokyoFlag"  AS shujiiJokyoFlag
         FROM
         rgdb."DbT5911ShujiiIryoKikanJoho"   AS DbT5911ShujiiIryoKikanJoho,
-        rgdb."DbT5912ShujiiJoho"            AS DbT5912ShujiiJoho
+        rgdb."DbT5912ShujiiJoho"            AS DbT5912ShujiiJoho,
+        rgdb."DbT7051KoseiShichosonMaster"  AS DbT7051KoseiShichosonMaster
         WHERE
         DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5912ShujiiJoho."shujiiIryokikanCode"
         AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5912ShujiiJoho."shichosonCode"
+        AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         <if test="!isShichosonCodeFlag">
             AND DbT5912ShujiiJoho."shichosonCode" = #{shichosonCode}
         </if>

@@ -120,6 +120,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
      * @param psmChiku2_To_Name 地区２To名称
      * @param psmChiku3_From_Name 地区３From名称
      * @param psmChiku3_To_Name 地区３To名称
+     * @param jobId ジョブID
      */
     public HanyoListHihokenshadaichoProcessParameter(
             boolean komukuFukaMeyi,

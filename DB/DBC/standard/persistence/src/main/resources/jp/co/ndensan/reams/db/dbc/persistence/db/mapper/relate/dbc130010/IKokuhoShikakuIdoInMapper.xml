@@ -2,32 +2,30 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-3020-030 dengwei-->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper">
-    <select resultOrdered="true" id="get宛名識別コードリスト" resultType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" fetchSize="500">
+    <select resultOrdered="true" id = "get取込国保情報Temp" resultMap="取込国保情報_ResultMap" fetchSize="500">
         SELECT
-        宛名PSM."shikibetsuCode"
-        FROM
-        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM
-    </select> 
-    
-    <select resultOrdered="true" id = "get取込国保情報Temp" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoEntity" fetchSize="500">
-        SELECT
-        T1.*
+        T1.*,
+        T2.件数
         FROM
         "tempTorikomiKokuhoJyoho" AS T1
+        LEFT OUTER JOIN
+        (SELECT
+        T1."iN住民コード",
+        COUNT(T1."iN住民コード") AS 件数
+        FROM
+        "tempTorikomiKokuhoJyoho" AS T1
+        GROUP BY
+        T1."iN住民コード") AS T2
+        ON T1."iN住民コード" = T2."iN住民コード"
         ORDER BY
-        T1."IN住民コード" ASC
+        T1."iN住民コード" ASC
     </select>
     
-    <select resultOrdered="true" id = "get構成市町村マスタ" resultType="java.lang.Integer" 
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+    <select resultOrdered="true" id = "get構成市町村マスタ" resultType="jp.co.ndensan.reams.uz.uza.biz.LasdecCode" fetchSize="500">
         SELECT
-        COUNT(D1.*)
+        D1."shichosonCode"
         FROM
         rgdb."DbT5051KoseiShichosonMaster" as D1
-        WHERE
-        D1."shichosonCode" = #{市町村コード}
     </select>
     
     <select resultOrdered="true" id = "get国保管理データ作成用データ" 
@@ -46,10 +44,10 @@
         FROM
         "tempTorikomiKokuhoJyoho" AS T1,
         rgdb. "DbT7123KokuhoShikakuInfo" AS D2
-        WHERE D2. "shikibetsuCode" = T1. "IN住民コード"
+        WHERE D2. "shikibetsuCode" = T1. "iN住民コード"
         GROUP BY D2. "shikibetsuCode"
         ) AS D3
-        ON D3. "shikibetsuCode" = T1. "IN住民コード"
+        ON D3. "shikibetsuCode" = T1. "iN住民コード"
         )
 
         SELECT
@@ -61,19 +59,29 @@
         rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode" = master."IN住民コード"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = master."iN住民コード"
     </select>
     
     <select resultOrdered="true" id = "get国保資格情報インポート用データ" 
             resultMap="国保資格情報インポート用データResultMap" fetchSize="500">
-        SELECT
+        (SELECT
         T1.*,
         D1.*
         FROM
         "tempTorikomiKokuhoJyoho" AS T1
         LEFT OUTER JOIN
         rgdb."DbT7123KokuhoShikakuInfo" AS D1
-        ON D1."shikibetsuCode" = T1."IN住民コード"
+        ON D1."shikibetsuCode" = T1."iN住民コード")
+        UNION
+        (SELECT
+        T1.*,
+        D1.*
+        FROM
+        rgdb."DbT7123KokuhoShikakuInfo" AS D1
+        LEFT OUTER JOIN
+        "tempTorikomiKokuhoJyoho" AS T1
+        ON D1."shikibetsuCode" = T1."iN住民コード")
+        
     </select>
     
     <select resultOrdered="true" id = "get国保資格情報インポート用Entitｙリスト" 
@@ -84,21 +92,15 @@
         "tempKokuhoShikakuJyohoInpotoyo"
     </select>
     
-    <select resultOrdered="true" id = "get国保資格情報の全データ" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity" fetchSize="500">
-        SELECT
-        *
-        FROM
-        rgdb."DbT7123KokuhoShikakuInfo"
-    </select>
+    <delete id = "delete国保資格情報">
+        DELETE FROM rgdb."DbT7123KokuhoShikakuInfo"
+    </delete>
     
     <select resultOrdered="true" id = "up処理管理日付マスタ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc130010.UpdShoriDateKanriMybatisParameter" fetchSize="500">
         UPDATE
         rgdb."DbT7022ShoriDateKanri" AS D1
         SET 
-        "shoriName" = #{処理名},
-        "shoriEdaban" = #{処理枝番},
         "kijunYMD" = #{基準年月日},
         "kijunTimestamp" = #{基準日時},
         "taishoKaishiYMD" = #{対象開始年月日},
@@ -110,21 +112,37 @@
         D1."shoriEdaban" = #{処理枝番}
     </select>
     
-    <resultMap  id="国保管理データ作成用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoKannriDataYoEntity" autoMapping="true">
+    <resultMap  id="取込国保情報_ResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoResultEntity" autoMapping="false">
+        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="iN住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="件数" column="件数"/>
+        <association property="取込国保情報Entity" resultMap="ResultMap_取込国保情報"/>
+    </resultMap>
+    
+    <resultMap  id="国保管理データ作成用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoKannriDataYoEntity" autoMapping="false">
+        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="iN住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="データ件数" column="データ件数"/>
         <association property="取込国保情報Entity" resultMap="ResultMap_取込国保情報"/>
         <association property="宛名識別対象Entity"  resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
     <resultMap  id="国保資格情報インポート用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoYoResultEntity" autoMapping="true">
+        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="iN住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT7123KokuhoShikakuInfo_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id column="dbT7123KokuhoShikakuInfo_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="取込国保情報Entity" resultMap="ResultMap_取込国保情報"/>
         <association property="現在国保資格情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7123KokuhoShikakuInfoMapper.ResultMap_DbT7123KokuhoShikakuInfoEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_取込国保情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoEntity" autoMapping="true">
         <id property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="IN住民コード" column="IN住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="iN住民コード" column="iN住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="国保番号" column="国保番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="国保資格取得年月日" column="国保資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="国保資格喪失年月日" column="国保資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

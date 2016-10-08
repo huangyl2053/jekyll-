@@ -318,6 +318,7 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     /**
      * 汎用リスト_被保険者台帳_バッチ用のパラメータラス作成
      *
+     * @param jobId ジョブID
      * @return 汎用リスト_被保険者台帳_バッチ用のパラメータラス
      */
     public HanyoListHihokenshadaichoProcessParameter toHanyoListHihokenshadaichoProcessParameter(long jobId) {

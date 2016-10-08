@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0900011",
      "toLayoutTitle": "審査請求書登録",
-     "toState": "default"
+     "toState": "Default"
     },
     {
      "id": "3",
@@ -38,7 +38,7 @@
      "layoutTitle": "審査請求書登録",
      "eventName": "登録画面に遷移",
      "destroy": false,
-     "condition": "",
+     "condition": "修正状態",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0900041",
      "toLayoutTitle": "裁決結果登録",
@@ -51,12 +51,12 @@
      "layoutName": "DBU0900041",
      "layoutTitle": "裁決結果登録",
      "eventName": "一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0900011",
      "toLayoutTitle": "審査請求書登録",
-     "toState": "default"
+     "toState": "Default"
     },
     {
      "id": "5",
@@ -67,6 +67,20 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0900011",
+     "layoutTitle": "審査請求書登録",
+     "eventName": "登録画面に遷移",
+     "destroy": false,
+     "condition": "削除状態",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0900041",
+     "toLayoutTitle": "裁決結果登録",
+     "toState": "削除状態"
     }
    ]
   }
