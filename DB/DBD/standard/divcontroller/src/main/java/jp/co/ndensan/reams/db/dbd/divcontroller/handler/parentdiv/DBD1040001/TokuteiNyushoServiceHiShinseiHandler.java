@@ -101,13 +101,13 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             div.getShinseiDetail().setTitle(申請情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 申請情報を.toString());
             div.getShinsei().getShinseiList().setDisplayNone(false);
-            div.getShinsei().getShinseiDetail().setDisplayNone(true);
+            div.getShinsei().getShinseiDetail().setDisabled(true);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             div.getShinsei().getShinseiList().getBtnAddShinsei().setText(承認情報を追加する);
             div.getShinseiDetail().setTitle(承認情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString());
             div.getShinsei().getShinseiList().setDisplayNone(false);
-            div.getShinsei().getShinseiDetail().setDisplayNone(true);
+            div.getShinsei().getShinseiDetail().setDisabled(true);
         }
         set初期状態制御();
     }

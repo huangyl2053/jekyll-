@@ -162,7 +162,6 @@ public class DbWT3470chohyouShutsuryokuTempEntity
     private ServiceShuruiCode serviceShuruiCode;
     @TempTableColumnOrder(60)
     private ServiceKomokuCode serviceKomokuCode;
-    //TODO serviceCode
     @TempTableColumnOrder(61)
     private RString serviceCode;
     @TempTableColumnOrder(62)

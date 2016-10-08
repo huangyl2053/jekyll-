@@ -61,12 +61,13 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
                 性別名称 = Seibetsu.toValue(性別).get名称();
             }
             source.listIraiichiranhyo2_2 = 性別名称;
-            RString 認定申請区分_申請時コード = this.帳票出力用申請情報Entityリスト.get認定申請区分_申請時コード().value();
-            RString 認定申請区分_申請時名称 = RString.EMPTY;
-            if (null != 認定申請区分_申請時コード && !認定申請区分_申請時コード.isEmpty()) {
+            if (null != this.帳票出力用申請情報Entityリスト.get認定申請区分_申請時コード()
+                    && !this.帳票出力用申請情報Entityリスト.get認定申請区分_申請時コード().isEmpty()) {
+                RString 認定申請区分_申請時コード = this.帳票出力用申請情報Entityリスト.get認定申請区分_申請時コード().value();
+                RString 認定申請区分_申請時名称 = RString.EMPTY;
                 認定申請区分_申請時名称 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分_申請時コード).get名称();
+                source.listIraiichiranhyo2_3 = 認定申請区分_申請時名称;
             }
-            source.listIraiichiranhyo2_3 = 認定申請区分_申請時名称;
             RString 被保険者区分コード = this.帳票出力用申請情報Entityリスト.get被保険者区分コード();
             RString 被保険者区分名称 = RString.EMPTY;
             if (null != 被保険者区分コード && !被保険者区分コード.isEmpty()) {

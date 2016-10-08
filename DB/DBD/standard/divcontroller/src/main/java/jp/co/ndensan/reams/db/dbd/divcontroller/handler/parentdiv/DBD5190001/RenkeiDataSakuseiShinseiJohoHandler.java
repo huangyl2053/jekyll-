@@ -163,6 +163,11 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         }
     }
 
+    /**
+     * バッチパラメターを保存処理です。
+     *
+     * @return バッチパラメター
+     */
     public DBD519001_NinteishinseiInfoIfParameter batchParameterSave() {
         DBD519001_NinteishinseiInfoIfParameter parameter = new DBD519001_NinteishinseiInfoIfParameter();
         RDate fromdate = RDate.getNowDate();

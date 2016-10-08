@@ -2,14 +2,18 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-2640-010 zhengshenlei -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanjikofutangaku.IKogakuGassanJSaiSyoriJyunbiMapper">
-    <update id="do再処理準備" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter" >
-        UPDATE rgdb."DbT3070KogakuGassanJikoFutanGaku"
-        SET    "jikoFutanSeiriNo" = '',
-               "shomeisho_UketoriYM" = ''
+    <select id="do再処理準備" 
+        resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter" fetchSize="500" resultOrdered="true">
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" /> 
+        FROM
+            rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
         WHERE  "dataSakuseiKubun" = '1'
-        AND    "shomeisho_UketoriYM" = #{処理年月}
-        AND    "jikoFutanSeiriNo" is not null
-    </update>
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."shomeisho_UketoriYM" = #{処理年月}
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."jikoFutanSeiriNo" is not null
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."jikoFutanSeiriNo" <![CDATA[<>]]> ''
+    </select>
     
      <select id="select高額合算自己負担額一時と明細データ" resultMap="ResultMap_KogakuGassanJSaiSyoriJyunbiEntity" fetchSize="500" resultOrdered="true">
          SELECT 
@@ -34,7 +38,9 @@
                     WHERE
                         A."dataSakuseiKubun" = '1'
                     AND A."shomeisho_UketoriYM" is null
+                    OR  A."shomeisho_UketoriYM" = ''
                     AND A."hoseiZumi_SofuYM" is not null
+                    AND A."hoseiZumi_SofuYM" <![CDATA[<>]]> ''
                     AND A.rowNum = 1
          )AS "DbT3070KogakuGassanJikoFutanGaku"
          ON "DbWT37H1"."hokenshaNoIn"  = "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"
@@ -44,9 +50,9 @@
     </select>
     
     <select id="select連番" resultMap="ResultMap_DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity"
-            parameterType="java.util.Map" fetchSize="500" resultOrdered="true"> 
+        fetchSize="500" resultOrdered="true"> 
         SELECT
-        "DbWT37H2"."renban" AS dbWT37H2_renban
+        <include refid="allColumns_DbWT37H2" />
         FROM(
             SELECT "DbWT37H2".*,
                    "DbWT37H1"."rirekiNo" as "DbWT37H1_rirekiNo"
@@ -75,7 +81,6 @@
             "DbWT37H2"."taishoM" = "DbT3071"."taishoM"
         WHERE 
             "DbWT37H2"."jikoFutanGaku" <![CDATA[<>]]> ("DbT3071"."sumi_JikoFutanGaku" - "DbT3071"."sumi_under_70KogakuShikyuGaku")
-        GROUP BY "DbWT37H2"."renban"
     </select>
     
     <select id="get帳票出力対象データ" resultMap="resultMap_KogakuGassanJikofutangakuShomeishoDateEntity" 

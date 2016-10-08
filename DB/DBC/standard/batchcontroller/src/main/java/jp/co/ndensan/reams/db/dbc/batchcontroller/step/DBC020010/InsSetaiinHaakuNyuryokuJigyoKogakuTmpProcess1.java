@@ -32,7 +32,7 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1 extends BatchProcessB
     private static final RString 給付実績基本情報事業高額一時 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db."
             + "mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
             + "get給付実績基本情報事業高額一時3");
-    private static final RString TABLE_世帯員把握入力一時 = new RString("TempSetaiinHaakuNyuryoku");
+    private static final RString TABLE_世帯員把握入力一時 = new RString("TmpSetaiHaaku");
     private static final RString RS_01 = new RString("01");
     private static final int YEAR_2006 = 2006;
     private static final int YEAR_2015 = 2015;

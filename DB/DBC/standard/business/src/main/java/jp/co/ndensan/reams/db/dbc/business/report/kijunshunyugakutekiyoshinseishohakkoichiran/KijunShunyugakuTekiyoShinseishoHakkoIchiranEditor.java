@@ -30,8 +30,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
     private final KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者;
     private static final RString 年度作成 = new RString("年度");
     private static final RString 日時作成 = new RString("作成");
-    private final RString 市町村番号;
-    private final RString 市町村名;
+    private final RString 保険者番号;
+    private final RString 保険者名称;
     private final List<RString> 出力順リスト;
     private final List<RString> 改頁リスト;
     private static final int NUM_0 = 0;
@@ -56,8 +56,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
             List<RString> 出力順リスト,
             List<RString> 改頁リスト) {
         this.発行対象者 = 発行対象者;
-        this.市町村番号 = 市町村番号;
-        this.市町村名 = 市町村名;
+        this.保険者番号 = 市町村番号;
+        this.保険者名称 = 市町村名;
         this.出力順リスト = 出力順リスト;
         this.改頁リスト = 改頁リスト;
 
@@ -69,8 +69,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         if (発行対象者.get年度() != null) {
             source.nendo = 発行対象者.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度作成);
         }
-        source.hokenshaNo = 市町村番号;
-        source.hokenshaName = 市町村名;
+        source.hokenshaNo = 保険者番号;
+        source.hokenshaName = 保険者名称;
         edit出力順(source);
         edit改ページ(source);
 

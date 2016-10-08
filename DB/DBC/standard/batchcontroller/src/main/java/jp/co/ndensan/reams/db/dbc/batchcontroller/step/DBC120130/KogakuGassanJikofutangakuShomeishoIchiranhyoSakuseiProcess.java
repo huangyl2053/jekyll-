@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import jp.co.ndensan.reams.db.dbc.business.report.KogakuGassanJikofutangaku.KogakuGassanJikofutangakuShomeiOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.KogakuGassanJikofutangaku.KogakuGassanJikofutangakuShomeiPageBreak;
-import jp.co.ndensan.reams.db.dbc.business.report.KogakuGassanJikofutangaku.KogakuGassanJikofutangakuShomeiProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.KogakuGassanJikofutangaku.KogakuGassanJikofutangakuShomeiReport;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufujissekikoshinin.KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter;
@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeishoi
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.GassanJikofutangakuShomeishoTorikomiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanjikofutangaku.KogakuGassanJikofutangakuShomeiService;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -34,13 +36,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -65,7 +68,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
     private KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter parameter;
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200034");
-    private final List<PersonalData> personalDataList = new ArrayList<>();
+    private List<PersonalData> personalDataList = new ArrayList<>();
     private BatchReportWriter<GassanJikofutangakuShomeishoTorikomiIchiranSource> batchReportWriter;
     private ReportSourceWriter<GassanJikofutangakuShomeishoTorikomiIchiranSource> reportSourceWriter;
     private FileSpoolManager manager;
@@ -80,20 +83,14 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
     private Set<ShikibetsuCode> 識別コードset;
     private List<RString> 改頁項目リスト;
     private List<RString> 改頁リスト;
-    private RString 並び順の１件目 = RString.EMPTY;
-    private RString 並び順の２件目 = RString.EMPTY;
-    private RString 並び順の３件目 = RString.EMPTY;
-    private RString 並び順の４件目 = RString.EMPTY;
-    private RString 並び順の５件目 = RString.EMPTY;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
     private int 連番 = 0;
     private int 連番_NO = 0;
     private static final RString CODE = new RString("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");
-
+    private static final RString 保険者番号
+            = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+    private static final RString 保険者名称
+            = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     private KogakuGassanJikofutangakuShomeiService service;
 
     private static final RString 出力ファイル名
@@ -118,24 +115,11 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         } else {
-            int i = 0;
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     改頁項目リスト.add(item.get項目名());
                     改頁リスト.add(item.get項目ID());
                 }
-                if (i == 0) {
-                    並び順の１件目 = item.get項目名();
-                } else if (i == INDEX_1) {
-                    並び順の２件目 = item.get項目名();
-                } else if (i == INDEX_2) {
-                    並び順の３件目 = item.get項目名();
-                } else if (i == INDEX_3) {
-                    並び順の４件目 = item.get項目名();
-                } else if (i == INDEX_4) {
-                    並び順の５件目 = item.get項目名();
-                }
-                i = i + 1;
             }
         }
         出力順 = get出力順();
@@ -173,12 +157,18 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
         連番 = 連番 + 1;
         KogakuGassanJikofutangakuShomeishoDateEntity beforeEntity = getBefore();
         if (null == beforeEntity) {
-            csvWriter.writeLine(service.toヘッダのデータ(entity, parameter, 連番));
+            csvWriter.writeLine(service.toヘッダのデータ(entity, parameter, 連番, 保険者番号, 保険者名称));
         } else {
             連番_NO = 連番_NO + 1;
-            KogakuGassanJikofutangakuShomeiReport report = new KogakuGassanJikofutangakuShomeiReport(parameter.get処理年月(),
-                    beforeEntity, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), 連番_NO);
+            KogakuGassanJikofutangakuShomeiReport report
+                    = new KogakuGassanJikofutangakuShomeiReport(
+                            parameter.get処理年月(),
+                            beforeEntity,
+                            改頁項目リスト,
+                            parameter.getシステム日付(),
+                            連番_NO,
+                            保険者番号,
+                            保険者名称);
             report.writeBy(reportSourceWriter);
             csvWriter.writeLine(service.to明細項目(entity, 連番));
         }
@@ -196,18 +186,24 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
 
         if (null != lastEntity) {
             連番_NO = 連番_NO + 1;
-            KogakuGassanJikofutangakuShomeiReport report = new KogakuGassanJikofutangakuShomeiReport(parameter.get処理年月(),
-                    lastEntity, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), 連番_NO);
+            KogakuGassanJikofutangakuShomeiReport report
+                    = new KogakuGassanJikofutangakuShomeiReport(
+                            parameter.get処理年月(),
+                            lastEntity,
+                            改頁項目リスト,
+                            parameter.getシステム日付(),
+                            連番_NO,
+                            保険者番号,
+                            保険者名称);
             report.writeBy(reportSourceWriter);
         }
+        batchReportWriter.close();
         if (null != personalDataList && !personalDataList.isEmpty()) {
             AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, log);
         } else {
             manager.spool(eucFilePath);
         }
-        batchReportWriter.close();
     }
 
     private PersonalData getPersonalData(KogakuGassanJikofutangakuShomeishoDateEntity entity) {
@@ -233,7 +229,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
 
     private RString get出力順() {
         RString syuturyokuJun = MyBatisOrderByClauseCreator
-                .create(KogakuGassanJikofutangakuShomeiProperty.DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran.class, 並び順);
+                .create(KogakuGassanJikofutangakuShomeiOutputOrder.class, 並び順);
         if (RString.isNullOrEmpty(syuturyokuJun)) {
             syuturyokuJun = デフォルト出力順;
         } else {
