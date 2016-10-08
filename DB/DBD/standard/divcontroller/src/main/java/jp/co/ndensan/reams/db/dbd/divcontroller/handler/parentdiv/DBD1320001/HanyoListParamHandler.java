@@ -197,6 +197,7 @@ public class HanyoListParamHandler {
     private static final RString 事業対象者負担１割パラメータ名称 = new RString("isJigyotaishoshafutanichiwari");
     private static final RString 事業対象者負担２割パラメータ名称 = new RString("isJigyotaishoshafutanniwari");
     private static final int 年度_10 = 10;
+    private static final int 年度_1 = 1;
 
     /**
      * コンストラクタです。
@@ -218,6 +219,7 @@ public class HanyoListParamHandler {
             List<KeyValueDataSource> 年度選択肢 = new ArrayList<>();
             for (int i = 1; i <= 年度_10; i++) {
                 年度選択肢.add(new KeyValueDataSource(開始年度.toDateString(), 開始年度.wareki().eraType(EraType.KANJI).toDateString()));
+                開始年度.minusYear(年度_1);
             }
             div.getDdlKijunNendo().setDataSource(年度選択肢);
         } else {
@@ -250,61 +252,61 @@ public class HanyoListParamHandler {
         div.getRadShuturyokuHoho().setDataSource(出力方法list);
         if (汎用リスト_施設入退所メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_施設入退所帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_施設入退所帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_施設入退所表題);
             初期化_施設入退所();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_利用者負担額減免メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_利用者負担額減免帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_利用者負担額減免帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_利用者負担額減免表題);
             初期化_利用者負担額減免();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_訪問介護利用者負担額減額メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_訪問介護利用者負担額減額帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_訪問介護利用者負担額減額帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_訪問介護利用者負担額減額表題);
             初期化_訪問介護利用者負担額減額();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_社会福祉法人軽減メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_社会福祉法人軽減帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_社会福祉法人軽減帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_社会福祉法人軽減表題);
             初期化_社会福祉法人軽減();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_特別地域加算減免メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_特別地域加算減免帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_特別地域加算減免帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_特別地域加算減免表題);
             初期化_特別地域加算減免();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_負担限度額認定メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_負担限度額認定帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_負担限度額認定帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_負担限度額認定表題);
             初期化_負担限度額認定();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_国保メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_国保帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_国保帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_国保表題);
             初期化_国保();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_後期高齢者メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_後期高齢者帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_後期高齢者帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_後期高齢者表題);
             初期化_後期高齢者();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_事業対象者メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_事業対象者帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_事業対象者帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_事業対象者表題);
             初期化_事業対象者();
             onClick_radChushutsuJokenB();
         } else if (汎用リスト_利用者負担割合メニューID.equals(menuID)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_利用者負担割合帳票ID));
-            set表題パネルis非表示(非表示);
+            div.getCcdShutsuryokuKomoku().load(汎用リスト_利用者負担割合帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_利用者負担割合表題);
             初期化_利用者負担割合();
             onClick_radChushutsuJokenA();
@@ -1473,6 +1475,7 @@ public class HanyoListParamHandler {
         set利用者負担段階(表示);
         div.getChushutsuJokenC5().setDisplayNone(非表示);
         div.getChushutsuJokenC5().setDisabled(非表示);
+        get宛名抽出条件div().initialize();
         get宛名抽出条件子Div().getRadSelectKijun().setDisplayNone(非表示);
         get宛名抽出条件子Div().getRadSelectKijun().setDisabled(非表示);
         get宛名抽出条件子Div().getTxtNenrei().setDisplayNone(非表示);
