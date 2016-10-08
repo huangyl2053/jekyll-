@@ -54,7 +54,6 @@ public class DBC150050_ServicecodeTaniMeisaiIchiran
 
     private FlowEntity flowEntity;
     private int 明細件数;
-    private static final RString アンダーライン = new RString("_");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
     private RString 種別;
