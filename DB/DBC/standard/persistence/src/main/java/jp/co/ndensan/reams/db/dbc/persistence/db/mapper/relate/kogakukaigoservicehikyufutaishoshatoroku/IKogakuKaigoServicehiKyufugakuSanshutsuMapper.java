@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiReportEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiinShotokuHanteiMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannKekkaZenRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity;
@@ -185,7 +184,7 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      *
      * @return 世帯員所得情報一時
      */
-    List<SetaiinShotokuHanteiMeisaiTempEntity> select世帯員所得情報一時();
+    List<TempSetaiinShotokuHanteiEntity> select世帯員所得情報一時();
 
     /**
      * select被保生保老齢情報
@@ -197,9 +196,9 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     /**
      * select世帯員所得判定明細一時
      *
-     * @return SetaiinShotokuHanteiMeisaiTempEntity
+     * @return TempSetaiinShotokuHanteiEntity
      */
-    List<SetaiinShotokuHanteiMeisaiTempEntity> select世帯員所得判定明細一時();
+    List<TempSetaiinShotokuHanteiEntity> select世帯員所得判定明細一時();
 
     /**
      * select続柄コード参照年
@@ -243,7 +242,14 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      *
      * @return TyukannKekkaZenRelateEntity
      */
-    List<TyukannKekkaZenRelateEntity> select管理データ一時();
+    List<TyukannKekkaZenRelateEntity> select高額判定結果全件一時();
+
+    /**
+     * select事業高額判定結果全件一時
+     *
+     * @return TyukannKekkaZenRelateEntity
+     */
+    List<TyukannKekkaZenRelateEntity> select事業高額判定結果全件一時();
 
     /**
      * 給付実績基本情報高額一時1テーブルを取得する。
@@ -280,13 +286,6 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      */
     List<DbT3017KyufujissekiKihonEntity> select給付実績基本情報事業高額一時2(
             KogakuKaigoServicehiKyufutaishoshaTorokuMybatisParameter パラメータ);
-
-    /**
-     * 被保険者台帳情報一時1テーブルを取得する。
-     *
-     * @return List<DbT1001HihokenshaDaichoEntity> 被保険者台帳情報一時1リスト
-     */
-    List<DbT1001HihokenshaDaichoEntity> select被保険者台帳情報一時1();
 
     /**
      * 被保険者台帳情報一時2テーブルを取得する。
