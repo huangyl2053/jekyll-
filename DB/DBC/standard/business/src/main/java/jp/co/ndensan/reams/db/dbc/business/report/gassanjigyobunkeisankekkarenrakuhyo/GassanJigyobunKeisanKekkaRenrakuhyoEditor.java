@@ -208,7 +208,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         source.hihokenshaKigo = RString.EMPTY;
         if (dataEntity.getDbt3172Entity().getHihokenshaNo() != null) {
             HihokenshaNo 被保険者番号 = dataEntity.getDbt3172Entity().getHihokenshaNo();
-            source.HihokenshaNo = 被保険者番号.getColumnValue();
+            source.hihokenshaNo = 被保険者番号.getColumnValue();
         }
         source.taishoNendo = dataEntity.getDbt3172Entity().getTaishoNendo().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
