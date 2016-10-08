@@ -400,6 +400,7 @@ public class TokuteiNyushoServiceHiShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             RString selectKey = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            getValidationHandler().validateFor申請日の必須入力(pairs, div);
             if (承認する_KEY.equals(selectKey)) {
                 getValidationHandler().validateFor特別地域加算減免_適用開始日が法施行以前(pairs, div);
                 getValidationHandler().validateFor特別地域加算減免_適用終了日が年度外(pairs, div);
