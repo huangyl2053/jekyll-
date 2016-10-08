@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 public class KijunShunyugakuTekiyoOshiraseTsuchishoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    public static final String ITEM_HIHOKENSHANO1 = "hihokenshaNo1";
+
     @ReportItem(name = "bunshoNo", length = 36, order = 1)
     public RString bunshoNo;
     @ReportItem(name = "title", length = 45, order = 2)
