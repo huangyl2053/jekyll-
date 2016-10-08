@@ -9,7 +9,7 @@
                 resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.TaishoshaIchijiTokuteiEntity" 
                 fetchSize="500" resultOrdered="true">
         SELECT DISTINCT
-        A."hihokenshaNo"
+        被保険者台帳."hihokenshaNo"
         FROM
         rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
         LEFT  JOIN   rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS 介護保険負担限度額認定
@@ -101,26 +101,26 @@
             A.合計所得金額 + A.年金収入額 + A.非課税年金勘案額 AS 合計所得_含年金収入,
             A.非課税年金勘案額,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-            介護保険施設入退所.入所施設コード,
-            介護事業者.入所施設名称,
+            施設入所情報.入所施設コード,
+            施設入所情報.入所施設名称,
             認定情報.*,
             要介護認定申請情報."koroshoIfShikibetsuCode" AS 要介護認定申請情報_厚労省IF識別コード,
             (CASE WHEN 受給者台帳Newest."kyuSochishaFlag" IS NULL 
                   THEN false 
                   ELSE 受給者台帳Newest."kyuSochishaFlag" 
                   END) AS 受給者台帳Newest_旧措置者フラグ,
-            被保険者台帳情報.住所地特例フラグ AS 被保険者台帳情報_住所地特例フラグ,
+            被保険者台帳情報."jushochiTokureiFlag" AS 被保険者台帳情報_住所地特例フラグ,
             介護保険負担限度額認定.*,
             減免減額申請.*,
             世帯員情報.*,
-            有効受給認定結果.*
+            認定情報.*
         FROM
-            "taishoShaHanteiYoukonkyoItokiTemp" A
+            "taishoShaHanteiYoukonkyoItokiTemp" AS A
             INNER JOIN  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
             ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> ."shikibetsuCode" = A."本人識別コード"
         LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest
-            ON 受給者台帳Newest.被保険者番号＝A.被保険者番号
+            ON 受給者台帳Newest."hihokenshaNo" = A.被保険者番号
         
         <if test="is対象リスト_認定者リスト">
             <if test="is対象期間指定_基準日">
@@ -141,7 +141,7 @@
                                             THEN '99999999' 
                                           ELSE X."shikakuSoshitsuYMD" END) <![CDATA[>]]> #{基準日}
             ) AS 被保険者台帳情報 
-            ON 被保険者台帳情報."hihokenshaNo"＝A.被保険者番号
+            ON 被保険者台帳情報."hihokenshaNo" = A.被保険者番号
             </if>
             <if test="is対象期間指定_対象年度">
                 LEFT  JOIN 
@@ -161,7 +161,7 @@
                                             THEN '99999999' 
                                           ELSE X."shikakuSoshitsuYMD" END) <![CDATA[>]]> #{課税判定等基準日}
             ) AS 被保険者台帳情報 
-            ON 被保険者台帳情報."hihokenshaNo"＝A.被保険者番号
+            ON 被保険者台帳情報."hihokenshaNo" = A.被保険者番号
             </if>
         </if>
         <if test="is対象リスト_該当者リスト">
@@ -182,7 +182,7 @@
                                             THEN '99999999' 
                                           ELSE X."shikakuSoshitsuYMD" END) <![CDATA[>]]> #{課税判定等基準日}
             ) AS 被保険者台帳情報 
-            ON 被保険者台帳情報."hihokenshaNo"＝A.被保険者番号
+            ON 被保険者台帳情報."hihokenshaNo" = A.被保険者番号
         </if>    
         <!--受給認定の情報を取得-->
         LEFT JOIN (
@@ -191,7 +191,8 @@
                         有効受給認定結果."yokaigoJotaiKubunCode" AS 認定情報_要介護状態区分コード,
                         有効受給認定結果."ninteiYMD"  AS 認定情報_認定年月日,
                         有効受給認定結果."ninteiYukoKikanKaishiYMD" AS 認定情報_認定有効期間開始年月日,
-                        有効受給認定結果."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日
+                        有効受給認定結果."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日,
+                        有効受給認定結果."shinseishoKanriNo" AS 認定情報_申請書管理番号
                     FROM (
                         SELECT
                         *,
@@ -207,10 +208,10 @@
                     WHERE
                     有効受給認定結果.受給者台帳_番号 = 1
                 ) AS 認定情報
-        ON 認定情報."認定情報_被保険者番号" = A."被保険者番号"
+        ON 認定情報.認定情報_被保険者番号 = A."被保険者番号"
         LEFT JOIN
                 rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報
-                ON 認定情報."認定情報_申請書管理番号"  = 要介護認定申請情報."shinseishoKanriNo"
+                ON 認定情報.認定情報_申請書管理番号  = 要介護認定申請情報."shinseishoKanriNo"
         LEFT JOIN
                 rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS 介護保険負担限度額認定
                 ON 介護保険負担限度額認定."hihokenshaNo" = A."被保険者番号"
@@ -222,16 +223,16 @@
             SELECT
                 介護保険施設入退所."shikibetsuCode",
                 介護保険施設入退所."nyushoShisetsuCode" AS 入所施設コード,
-                入所施設."kazeiKubun"
+                入所施設."jigyoshaName" AS 入所施設名称
             FROM 
                 rgdb."DbT1004ShisetsuNyutaisho" AS 介護保険施設入退所
             INNER JOIN (
-                SELECT *,ROWNUM() OVER (ORDER BY 介護事業者."yukoKaishiYMD" DESC) AS 入所施設_番号
-                FROM rgdb."DbT7060KaigoJigyosha"
+                SELECT *,ROW_NUMBER() OVER (ORDER BY 介護事業者."yukoKaishiYMD" DESC) AS 入所施設_番号
+                FROM rgdb."DbT7060KaigoJigyosha" AS 介護事業者
                 WHERE 
                 介護事業者."yukoKaishiYMD" <![CDATA[<=]]> #{課税判定等基準日} 
             ) AS 入所施設
-            ON 入所施設."jigyoshaNo" = 介護保険施設入退所.入所施設コード
+            ON 入所施設."jigyoshaNo" = 介護保険施設入退所."nyushoShisetsuCode"
             WHERE
                 入所施設.入所施設_番号 = 1
                 AND 介護保険施設入退所."nyushoYMD" <![CDATA[<=]]> #{課税判定等基準日}
@@ -240,7 +241,7 @@
             ON 施設入所情報."shikibetsuCode" = A."本人識別コード"
          LEFT JOIN  (
              SELECT
-                世帯員所得情報一時."hihokenshaNo",
+                世帯員所得情報一時."hihokenshaNo" AS 被保険者番号,
                 世帯員所得情報一時."shikibetsuCode",
                 世帯員所得情報一時."kazeiKubun",
                 世帯員所得情報一時."kazeiShotokuGaku",
@@ -253,8 +254,8 @@
                     ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> ."shikibetsuCode" = 世帯員所得情報一時."shikibetsuCode"
                 LEFT JOIN (
                     SELECT
-                        識別コード,
-                        被保険者番号
+                        有効受給認定結果2.識別コード AS 識別コード,
+                        有効受給認定結果2.被保険者番号 AS 被保険者番号
                     FROM (
                         SELECT 
                             受給者台帳."shikibetsuCode" AS 識別コード,
@@ -270,7 +271,7 @@
                         WHERE 
                         有効受給認定結果2.受給者台帳_番号 = 1
                    ) AS 世帯員受給情報 
-                        ON 世帯員所得情報一時."shikibetsuCode"　= 世帯員受給情報.識別コード
+                        ON 世帯員所得情報一時."shikibetsuCode" = 世帯員受給情報.識別コード
                     WHERE 
                         世帯員所得情報一時."honninKubun" <![CDATA[<>]]> '1'
                     <if test="is世帯表示_表示しない">
@@ -301,23 +302,23 @@
                             )
                       )      
         <if test="is対象リスト_認定者リスト">
-            <if test="is利用者負担1から3段階">
+            <if test="利用者負担1から3段階is">
                 AND A.利用者負担段階 in (#{利用者負担1段階},#{利用者負担2段階},#{利用者負担3段階})
             </if>
-            <if test="is利用者負担1段階">
+            <if test="利用者負担1段階is">
                 AND A.利用者負担段階 = #{利用者負担1段階}
             </if>
-            <if test="is利用者負担2段階">
+            <if test="利用者負担2段階is">
                 AND A.利用者負担段階 = #{利用者負担2段階}
             </if>
-            <if test="is利用者負担3段階">
-                AND A.利用者負担段階 = #{利用者負担3段階}
+            <if test="利用者負担3段階is">
+                AND A.利用者負担段階 = #{利用者負担3段階CODE}
             </if>
-            <if test="is利用者負担4段階_高齢者複数世帯">
+            <if test="利用者負担4段階_高齢者複数世帯is">
                 AND A.利用者負担段階 = #{利用者負担4段階_高齢者複数世帯} 
                 AND A.is高齢者複数世帯 = true
             </if>
         </if>         
-        ORDER BY ${出力順}
+        ${出力順}
 </select>
 </mapper>
