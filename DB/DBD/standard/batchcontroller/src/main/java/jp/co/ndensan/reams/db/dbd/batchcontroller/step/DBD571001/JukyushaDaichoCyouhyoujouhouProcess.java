@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KyoshitsuShubets
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd571001.IdoChushutsuDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity;
@@ -44,6 +43,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho.IJ
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -434,7 +434,9 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             要介護認定情報.set明細番号(new RString(String.valueOf(明細++)));
             要介護認定情報.set認定日(t.get要介護認定情報().get受給者台帳_認定年月日());
             要介護認定情報.set申請事由(JukyuShinseiJiyu.toValue(t.get要介護認定情報().get受給者台帳_受給申請事由().getColumnValue()).get名称());
-            要介護認定情報.set異動事由(Datakubun.toValue(t.get要介護認定情報().get受給者台帳_データ区分()).get名称());
+            if (t.get要介護認定情報().get受給者台帳_データ区分() != null && !t.get要介護認定情報().get受給者台帳_データ区分().isEmpty()) {
+                要介護認定情報.set異動事由(Datakubun.toValue(t.get要介護認定情報().get受給者台帳_データ区分()).get名称());
+            }
             set要介護度(要介護認定情報, t);
             要介護認定情報.set認定開始日(t.get要介護認定情報().get受給者台帳_認定有効期間開始年月日());
             要介護認定情報.set認定終了日(t.get要介護認定情報().get受給者台帳_認定有効期間終了年月日());
@@ -786,7 +788,9 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             支払方法変更情報.set差止状況(t.get支払方法変更List().get支払方法変更_管理区分().equals(区分_2) ? new RString("差止") : RString.EMPTY);
             支払方法変更情報.set提供年月(t.get支払方法変更List().get支払方法変更_差止サービス提供年月());
             支払方法変更情報.set整理番号(t.get支払方法変更List().get支払方法変更_差止償還整理番号());
-            支払方法変更情報.set控除(t.get支払方法変更List().get支払方法変更_差止解除年月日().isEmpty() ? RString.EMPTY : new RString("控除"));
+            if (t.get支払方法変更List().get支払方法変更_差止解除年月日() != null) {
+                支払方法変更情報.set控除(t.get支払方法変更List().get支払方法変更_差止解除年月日().isEmpty() ? RString.EMPTY : new RString("控除"));
+            }
             支払方法変更情報EntityList.add(支払方法変更情報);
         }
     }
@@ -913,15 +917,17 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         先頭Entity.set住所(t.get要介護認定情報().getPsm_住所());
         先頭Entity.set世帯コード(t.get要介護認定情報().getPsm_世帯コード());
         先頭Entity.set住民コード(t.get要介護認定情報().getPsm_識別コード().getColumnValue());
-        if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_1)) {
-            先頭Entity.set現状態(new RString("職権取消者"));
-        } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_2)
-                || t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(new RString("9"))) {
-            先頭Entity.set現状態(new RString("受給資格者"));
-        } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_3)) {
-            先頭Entity.set現状態(new RString("認定取消者"));
-        } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_4)) {
-            先頭Entity.set現状態(new RString("申請取消者"));
+        if (t.get要介護認定情報().get受給者台帳_データ区分() != null && !t.get要介護認定情報().get受給者台帳_データ区分().isEmpty()) {
+            if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_1)) {
+                先頭Entity.set現状態(new RString("職権取消者"));
+            } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_2)
+                    || t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(new RString("9"))) {
+                先頭Entity.set現状態(new RString("受給資格者"));
+            } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_3)) {
+                先頭Entity.set現状態(new RString("認定取消者"));
+            } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_4)) {
+                先頭Entity.set現状態(new RString("申請取消者"));
+            }
         }
         先頭Entity.set行政区コード(t.get要介護認定情報().getPsm_行政区コード());
         先頭Entity.set行政区名称(t.get要介護認定情報().getPsm_行政区名称());
@@ -948,7 +954,9 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         先頭Entity.set直近実績(t.get要介護認定情報().getX3017_サービス提供年月());
         先頭Entity.set直近高額(t.get要介護認定情報().getX3056_サービス提供年月());
         先頭Entity.set直近償還(t.get要介護認定情報().getX3034_サービス提供年月());
-        先頭Entity.set直近所得段階(t.get要介護認定情報().getX2002_調定年度().concat(t.get要介護認定情報().getX2002_保険料段階()));
+        if (t.get要介護認定情報().getX2002_調定年度() != null && t.get要介護認定情報().getX2002_保険料段階() != null) {
+            先頭Entity.set直近所得段階(t.get要介護認定情報().getX2002_調定年度().concat(t.get要介護認定情報().getX2002_保険料段階()));
+        }
         先頭Entity.set調査先住所(t.get要介護認定情報().getT4101_訪問調査先郵便番号());
         先頭Entity.set調査先名称(t.get要介護認定情報().getT4101_訪問調査先名称());
         先頭Entity.set調査先電話番号(t.get要介護認定情報().getT4101_訪問調査先電話番号());
