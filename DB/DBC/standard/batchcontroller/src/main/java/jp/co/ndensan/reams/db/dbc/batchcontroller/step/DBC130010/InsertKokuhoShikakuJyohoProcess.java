@@ -30,7 +30,7 @@ public class InsertKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShik
     @Override
     protected void beforeExecute() {
         IKokuhoShikakuIdoInMapper mapper = getMapper(IKokuhoShikakuIdoInMapper.class);
-        if (!mapper.get国保資格情報インポート用Entitｙリスト().isEmpty()) {
+        if (mapper.get国保資格情報インポート用Entitｙ件数() > 0) {
             mapper.delete国保資格情報();
         }
     }

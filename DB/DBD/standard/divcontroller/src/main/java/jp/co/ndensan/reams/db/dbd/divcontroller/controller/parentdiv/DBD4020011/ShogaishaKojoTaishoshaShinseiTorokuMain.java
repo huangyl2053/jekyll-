@@ -28,8 +28,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -241,8 +241,20 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
      * @return 障がい者控除対象者申請登録Divを持つResponseData
      */
     public ResponseData<ShogaishaKojoTaishoshaShinseiTorokuMainDiv> onClick_btnHiShoninRiyu(ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
-        div.getShogaishaKojoTaishoshaShinseiToroku().setSubGyomuCode(SubGyomuCode.DBD介護受給.getColumnValue());
+        div.getShogaishaKojoTaishoshaShinseiToroku().setSubGyomuCode(GyomuCode.DB介護保険.getColumnValue());
         div.getShogaishaKojoTaishoshaShinseiToroku().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        div.getShogaishaKojoTaishoshaShinseiToroku().setTeikeibun(RString.EMPTY);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * URZ.SampleBunshoToroku　をダイアログで表示し、選択する。
+     *
+     * @param div {@link ShogaishaKojoTaishoshaShinseiTorokuMainDiv 障がい者控除対象者申請登録画面Div}
+     * @return 障がい者控除対象者申請登録Divを持つResponseData
+     */
+    public ResponseData<ShogaishaKojoTaishoshaShinseiTorokuMainDiv> onClose_btnOpenHiShoninRiyu(ShogaishaKojoTaishoshaShinseiTorokuMainDiv div) {
+        div.getTxtHiShoninRiyu().setValue(div.getShogaishaKojoTaishoshaShinseiToroku().getTeikeibun());
         return ResponseData.of(div).respond();
     }
 
