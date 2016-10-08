@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kogakuservicehitaishoshaichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KogakuServicehiTaishoshaIchiranOutput;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuservicehitaishoshaichiran.KogakuServicehiTaishoshaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;

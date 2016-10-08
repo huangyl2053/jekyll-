@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHo
 @SuppressWarnings ("PMD.UnusedPrivateField")
 public class HihokenSeikatsuRoreiRelateEntity {
 
-    private SetaiinShotokuHanteiMeisaiTempEntity 判定明細Entity;
+    private TempSetaiinShotokuHanteiEntity 判定明細Entity;
     private DbT1001HihokenshaDaichoEntity 被保険者情報Entity;
     private List<UrT0508SeikatsuHogoJukyushaEntity> 生保情報List;
     private DbT7006RoreiFukushiNenkinJukyushaEntity 老齢情報Entity;
