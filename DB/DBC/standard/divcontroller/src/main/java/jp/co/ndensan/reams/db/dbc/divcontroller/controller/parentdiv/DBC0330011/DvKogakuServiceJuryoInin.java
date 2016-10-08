@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DvKogakuServiceJuryoIninDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0330011.DvKogakuServiceJuryoIninHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0330011.DvKogakuServiceJuryoIninValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuJuryoininKeiyakuJigyoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -163,6 +164,18 @@ public class DvKogakuServiceJuryoInin {
     public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_dgDelete(DvKogakuServiceJuryoIninDiv div) {
         getHandler(div).onClick_dgDelete();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ｢世帯一覧を表示する｣ボタンの変更を処理します。
+     *
+     * @param div KaigoSienSenmonkaTorokuDiv
+     * @return 画面
+     */
+    public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_btnSeitaiIchiran(DvKogakuServiceJuryoIninDiv div) {
+        KogakuServiceData 引き継ぎ情報 = getHandler(div).onClick_btnSeitaiIchiran();
+        ViewStateHolder.put(ViewStateKeys.該当者一覧キー, 引き継ぎ情報);
+        return ResponseData.of(div).forwardWithEventName(DBC0330011TransitionEventName.世帯情報表示).respond();
     }
 
     /**
@@ -314,7 +327,7 @@ public class DvKogakuServiceJuryoInin {
         KogakuJuryoininKeiyakuJigyoshaManager manager = new KogakuJuryoininKeiyakuJigyoshaManager();
         KogakuJuryoininKeiyakuJigyosha business
                 = manager.get高額受領委任契約事業者(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号().toString()),
-                        Integer.parseInt(div.getDvHaraiKetteiShusei().getRirekiNo().getValue().toString()));
+                        Integer.parseInt(div.getDvHaraiKetteiShusei().getTxtRirekiNo().getValue().toString()));
         List<KogakuJuryoininKeiyakuJigyosha> businessList = new ArrayList<>();
         businessList.add(business);
         if (!businessList.isEmpty()) {
