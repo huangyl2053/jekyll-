@@ -101,6 +101,7 @@ public class NinteiChosainMaster {
             LasdecCode 市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
 
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().setValue(認定調査委託先コード);
+            div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().setValue(認定調査委託先コード);
             div.getChosainSearch().getHokenshaList().setSelectedShichosonIfExist(市町村コード);
             onClick_btnSearchShujii(div);
             return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
