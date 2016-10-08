@@ -77,6 +77,16 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     public RString list_13;
     @ReportItem(name = "list_14", length = 4, order = 30)
     public RString list_14;
+    @ReportItem(name = "yubinNo", length = 4, order = 31)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 4, order = 32)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 4, order = 33)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 4, order = 34)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 4, order = 35)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -118,6 +128,11 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
         list_11,
         list_12,
         list_13,
-        list_14
+        list_14,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 }
