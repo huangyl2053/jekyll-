@@ -27,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler {
 
     private final KougakuKaigotaiShoushachuuShutsuMainPanelDiv div;
+    private static final RString ZERO_TIME = new RString("000000");
+    private static final RString コンマ = new RString(":");
+    private static final RString TIME_ZERO = new RString("0");
 
     /**
      * コンストラクタです。
@@ -45,13 +48,14 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler {
     public ValidationMessageControlPairs 今回終了日時チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString 終了日付 = toRStringDate(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getToDatePlaceHolder());
-        RString 終了時刻 = get時刻(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getFromPlaceHolder());
+        RString 終了時刻 = get時刻(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getToPlaceHolder());
         RString 今回終了日時 = 終了日付.concat(終了時刻);
         RString 処理日付 = div.getChushutsuKikanPanel().getTxtShoriYMDKonkai().getValue().toDateString();
         RString 処理時刻 = div.getChushutsuKikanPanel().getTxtShoriHMKonkai().getText();
         RString 処理日時 = 処理日付.concat(処理時刻);
         if (今回終了日時.compareTo(処理日時) > 0) {
-            validPairs.add(new ValidationMessageControlPair(KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler.RRVMessages.Validate今回終了日時チェック));
+            validPairs.add(new ValidationMessageControlPair(
+                    KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler.RRVMessages.Validate今回終了日時チェック));
             return validPairs;
         } else {
             return validPairs;
@@ -66,13 +70,14 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler {
     public ValidationMessageControlPairs 今回開始日時チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString 開始日付 = toRStringDate(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getFromDatePlaceHolder());
-        RString 開始時刻 = get時刻(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getFromPlaceHolder());
+        RString 開始時刻 = get時刻(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getToPlaceHolder());
         RString 今回開始日時 = 開始日付.concat(開始時刻);
         RString 終了日付 = toRStringDate(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getToDatePlaceHolder());
         RString 終了時刻 = get時刻(div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().getToPlaceHolder());
         RString 今回終了日時 = 終了日付.concat(終了時刻);
         if (今回開始日時.compareTo(今回終了日時) > 0) {
-            validPairs.add(new ValidationMessageControlPair(KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler.RRVMessages.Validate今回開始日時チェック));
+            validPairs.add(new ValidationMessageControlPair(
+                    KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler.RRVMessages.Validate今回開始日時チェック));
             return validPairs;
         } else {
             return validPairs;
@@ -81,13 +86,13 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler {
 
     private RString get時刻(RString value) {
         if (RString.isNullOrEmpty(value)) {
-            return new RString("00:00:00");
+            return ZERO_TIME;
         }
         RStringBuilder jokenBuilder = new RStringBuilder();
-        List<RString> listvalue = value.split(new RString(":").toString());
+        List<RString> listvalue = value.split(コンマ.toString());
         for (RString list : listvalue) {
             if (list.length() != 2) {
-                jokenBuilder.append(new RString("0")).append(list);
+                jokenBuilder.append(TIME_ZERO).append(list);
             } else {
                 jokenBuilder.append(list);
             }
