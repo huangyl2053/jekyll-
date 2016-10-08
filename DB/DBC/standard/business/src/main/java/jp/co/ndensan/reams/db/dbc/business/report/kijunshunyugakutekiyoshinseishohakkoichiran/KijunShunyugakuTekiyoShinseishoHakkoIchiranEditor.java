@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -34,6 +35,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
     private final RString 保険者名称;
     private final List<RString> 出力順リスト;
     private final List<RString> 改頁リスト;
+    private final FlexibleYear 年度;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -44,30 +46,33 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
      * コンストラクタです。
      *
      * @param 発行対象者 KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity
-     * @param 市町村番号 RString
-     * @param 市町村名 RString
+     * @param 保険者番号 RString
+     * @param 保険者名称 RString
      * @param 出力順リスト List<RString>
      * @param 改頁リスト List<RString>
+     * @param 年度 FlexibleYear
      */
     public KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor(
             KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者,
-            RString 市町村番号,
-            RString 市町村名,
+            RString 保険者番号,
+            RString 保険者名称,
             List<RString> 出力順リスト,
-            List<RString> 改頁リスト) {
+            List<RString> 改頁リスト,
+            FlexibleYear 年度) {
         this.発行対象者 = 発行対象者;
-        this.保険者番号 = 市町村番号;
-        this.保険者名称 = 市町村名;
+        this.保険者番号 = 保険者番号;
+        this.保険者名称 = 保険者名称;
         this.出力順リスト = 出力順リスト;
         this.改頁リスト = 改頁リスト;
+        this.年度 = 年度;
 
     }
 
     @Override
     public KijunShunyugakuTekiyoShinseishoHakkoIchiranSource edit(KijunShunyugakuTekiyoShinseishoHakkoIchiranSource source) {
         source.printTimeStamp = get印刷日時(YMDHMS.now());
-        if (発行対象者.get年度() != null) {
-            source.nendo = 発行対象者.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度作成);
+        if (年度 != null) {
+            source.nendo = 年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度作成);
         }
         source.hokenshaNo = 保険者番号;
         source.hokenshaName = 保険者名称;
@@ -99,6 +104,11 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         if (発行対象者.get識別コード() != null) {
             source.shikibetsuCode = 発行対象者.get識別コード().value();
         }
+        source.yubinNo = 発行対象者.get郵便番号();
+        source.choikiCode = 発行対象者.get町域コード();
+        source.gyoseikuCode = 発行対象者.get行政区コード();
+        source.setaiCode = 発行対象者.get世帯コード();
+        source.shichosonCode = 発行対象者.get市町村コード();
         return source;
     }
 

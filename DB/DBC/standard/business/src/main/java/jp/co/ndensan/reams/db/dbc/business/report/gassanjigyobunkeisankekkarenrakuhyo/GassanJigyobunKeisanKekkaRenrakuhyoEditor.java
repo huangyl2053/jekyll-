@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkare
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -38,21 +37,21 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
     private final RString 通知書定型文2;
     private final JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity dataEntity;
     private final NinshoshaSource 認証者;
-    private final Association 地方公共団体;
     private final IShikibetsuTaisho 宛名データ;
     private final ToiawasesakiSource 問い合わせ先;
     private final boolean flag;
     private final boolean isBreak;
+    private final int count;
     private static final RString FORMAT = new RString("※");
     private static final RString 小計 = new RString("小計");
     private static final int INDEX_0 = 0;
-    private static final int INDEX_14 = 14;
-    private static final int INDEX_15 = 15;
+    private static final int INDEX_3 = 3;
     private static final int INDEX_25 = 25;
     private static final int INDEX_50 = 50;
     private static final int INDEX_75 = 75;
     private static final RString 文_被保険者番号 = new RString("被保険者番号");
     private static final RString NENDO = new RString("年度");
+    private final RString 記号 = new RString("-");
 
     /**
      * コンストラクタです
@@ -61,31 +60,32 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
      * @param 通知書定型文2 RString
      * @param dataEntity JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity
      * @param 認証者 NinshoshaSource
-     * @param 地方公共団体 Association
      * @param 宛名データ IShikibetsuTaisho
      * @param 問い合わせ先 IToiawasesakiSourceBuilder
      * @param flag boolean
      * @param isBreak boolean
+     * @param count int
      */
     public GassanJigyobunKeisanKekkaRenrakuhyoEditor(RString 通知書定型文1, RString 通知書定型文2,
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity dataEntity, NinshoshaSource 認証者,
-            Association 地方公共団体,
             IShikibetsuTaisho 宛名データ,
-            ToiawasesakiSource 問い合わせ先, boolean flag, boolean isBreak) {
+            ToiawasesakiSource 問い合わせ先, boolean flag, boolean isBreak, int count) {
         this.通知書定型文1 = 通知書定型文1;
         this.通知書定型文2 = 通知書定型文2;
         this.dataEntity = dataEntity;
         this.認証者 = 認証者;
-        this.地方公共団体 = 地方公共団体;
         this.宛名データ = 宛名データ;
         this.問い合わせ先 = 問い合わせ先;
         this.flag = flag;
         this.isBreak = isBreak;
+        this.count = count;
 
     }
 
     @Override
     public GassanJigyobunKeisanKekkaRenrakuhyoSource edit(GassanJigyobunKeisanKekkaRenrakuhyoSource source) {
+
+        source.pageBonbo = new RString(count);
         source.title = 通知書定型文1;
         edit結果連絡先住所(source);
         edit保険者住所(source);
@@ -96,7 +96,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
             RString fullspace = RString.FULL_SPACE;
             RString full3space = RString.FULL_SPACE.concat(fullspace).concat(fullspace);
             RString 小計表示 = full3space.concat(FORMAT).concat(fullspace).concat(小計).concat(fullspace).concat(FORMAT).concat(full3space);
-            source.List1_3 = 小計表示;
+            source.list1_3 = 小計表示;
             edit小計(source);
         } else {
             edit計算結果の内訳(source);
@@ -135,22 +135,22 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
             return;
         }
         if (dataEntity.getDbt3172Entity().getOver70_FutangakuGokei() != null) {
-            source.Over70_Futangaku_Gokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getOver70_FutangakuGokei(), 0);
+            source.over70FutangakuGokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getOver70_FutangakuGokei(), 0);
         }
         if (dataEntity.getDbt3172Entity().getOver70_ShikyugakuGokei() != null) {
-            source.Over70_Shikyugaku_Gokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getOver70_ShikyugakuGokei(), 0);
+            source.over70ShikyugakuGokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getOver70_ShikyugakuGokei(), 0);
         }
         if (dataEntity.getDbt3172Entity().getUnder70_FutangakuGokei() != null) {
-            source.Under70_Futangaku_Gokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getUnder70_FutangakuGokei(), 0);
+            source.under70FutangakuGokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getUnder70_FutangakuGokei(), 0);
         }
         if (dataEntity.getDbt3172Entity().getFutangakuGokei() != null) {
-            source.Futangaku_Gokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getFutangakuGokei(), 0);
+            source.futangakuGokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getFutangakuGokei(), 0);
         }
         if (dataEntity.getDbt3172Entity().getUnder70_ShikyugakuGokei() != null) {
-            source.Under70_Shikyugaku_Gokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getUnder70_ShikyugakuGokei(), 0);
+            source.under70ShikyugakuGokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getUnder70_ShikyugakuGokei(), 0);
         }
         if (dataEntity.getDbt3172Entity().getShikyugakuGokei() != null) {
-            source.Shikyugaku_Gokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getShikyugakuGokei(), 0);
+            source.shikyugakuGokei = DecimalFormatter.toコンマ区切りRString(dataEntity.getDbt3172Entity().getShikyugakuGokei(), 0);
         }
     }
 
@@ -158,37 +158,37 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         if (null == dataEntity || null == dataEntity.getDbt3173Entity()) {
             return;
         }
-        source.List1_1 = dataEntity.getDbt3173Entity().getUchiwakeHokenshaMei();
-        source.List1_2 = dataEntity.getDbt3173Entity().getJikoFutanSeiriNo();
-        source.List1_3 = dataEntity.getDbt3173Entity().getTaishoshaShimei();
-        source.List1_4 = dataEntity.getDbt3173Entity().getUchiwakeHokenshaNo();
-        source.List1_5 = dataEntity.getDbt3173Entity().getKokuho_HihokenshaShoKigo();
-        source.List1_6 = dataEntity.getDbt3173Entity().getHiHokenshaShoNo();
+        source.list1_1 = dataEntity.getDbt3173Entity().getUchiwakeHokenshaMei();
+        source.list1_2 = dataEntity.getDbt3173Entity().getJikoFutanSeiriNo();
+        source.list1_3 = dataEntity.getDbt3173Entity().getTaishoshaShimei();
+        source.list1_4 = dataEntity.getDbt3173Entity().getUchiwakeHokenshaNo();
+        source.list1_5 = dataEntity.getDbt3173Entity().getKokuho_HihokenshaShoKigo();
+        source.list1_6 = dataEntity.getDbt3173Entity().getHiHokenshaShoNo();
         RString over70futangaku = dataEntity.getDbt3173Entity().getOver70_Futangaku();
         if (over70futangaku != null) {
-            source.List1_7 = DecimalFormatter.toコンマ区切りRString(new Decimal(over70futangaku.toString()), 0);
+            source.list1_7 = DecimalFormatter.toコンマ区切りRString(new Decimal(over70futangaku.toString()), 0);
         }
-        source.List1_8 = dataEntity.getDbt3173Entity().getOver70_AmbunRitsu();
+        source.list1_8 = dataEntity.getDbt3173Entity().getOver70_AmbunRitsu();
         RString over70shikyugaku = dataEntity.getDbt3173Entity().getOver70_Shikyugaku();
         if (over70shikyugaku != null) {
-            source.List1_9 = DecimalFormatter.toコンマ区切りRString(new Decimal(over70shikyugaku.toString()), 0);
+            source.list1_9 = DecimalFormatter.toコンマ区切りRString(new Decimal(over70shikyugaku.toString()), 0);
         }
         RString under70futangaku = dataEntity.getDbt3173Entity().getUnder70_Futangaku();
         if (under70futangaku != null) {
-            source.List1_10 = DecimalFormatter.toコンマ区切りRString(new Decimal(under70futangaku.toString()), 0);
+            source.list1_10 = DecimalFormatter.toコンマ区切りRString(new Decimal(under70futangaku.toString()), 0);
         }
         RString futangaku = dataEntity.getDbt3173Entity().getFutangaku();
         if (futangaku != null) {
-            source.List1_11 = DecimalFormatter.toコンマ区切りRString(new Decimal(futangaku.toString()), 0);
+            source.list1_11 = DecimalFormatter.toコンマ区切りRString(new Decimal(futangaku.toString()), 0);
         }
-        source.List1_12 = dataEntity.getDbt3173Entity().getAmbunRitsu();
+        source.list1_12 = dataEntity.getDbt3173Entity().getAmbunRitsu();
         RString under70shikyugaku = dataEntity.getDbt3173Entity().getUnder70_Shikyugaku();
         if (under70shikyugaku != null) {
-            source.List1_13 = DecimalFormatter.toコンマ区切りRString(new Decimal(under70shikyugaku.toString()), 0);
+            source.list1_13 = DecimalFormatter.toコンマ区切りRString(new Decimal(under70shikyugaku.toString()), 0);
         }
         RString shikyugaku = dataEntity.getDbt3173Entity().getShikyugaku();
         if (shikyugaku != null) {
-            source.List1_14 = DecimalFormatter.toコンマ区切りRString(new Decimal(shikyugaku.toString()), 0);
+            source.list1_14 = DecimalFormatter.toコンマ区切りRString(new Decimal(shikyugaku.toString()), 0);
         }
 
     }
@@ -289,32 +289,28 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         if (null == dataEntity || null == dataEntity.getDbt3173Entity()) {
             return;
         }
-        source.List1_7 = dataEntity.getDbt3173Entity().getOver70_Futangaku();
-        source.List1_9 = dataEntity.getDbt3173Entity().getOver70_Shikyugaku();
-        source.List1_10 = dataEntity.getDbt3173Entity().getUnder70_Futangaku();
-        source.List1_11 = dataEntity.getDbt3173Entity().getFutangaku();
-        source.List1_13 = dataEntity.getDbt3173Entity().getUnder70_Shikyugaku();
-        source.List1_14 = dataEntity.getDbt3173Entity().getShikyugaku();
+        source.list1_7 = dataEntity.getDbt3173Entity().getOver70_Futangaku();
+        source.list1_9 = dataEntity.getDbt3173Entity().getOver70_Shikyugaku();
+        source.list1_10 = dataEntity.getDbt3173Entity().getUnder70_Futangaku();
+        source.list1_11 = dataEntity.getDbt3173Entity().getFutangaku();
+        source.list1_13 = dataEntity.getDbt3173Entity().getUnder70_Shikyugaku();
+        source.list1_14 = dataEntity.getDbt3173Entity().getShikyugaku();
     }
 
     private void edit保険者住所(GassanJigyobunKeisanKekkaRenrakuhyoSource source) {
+        source.hakkosha = 通知書定型文2;
         if (認証者 != null) {
             source.denshiKoin = 認証者.denshiKoin;
-            source.kouin = 認証者.koinMojiretsu;
-        }
-        source.hakkosha = 通知書定型文2;
-        if (地方公共団体 == null || 地方公共団体.get市町村名() == null) {
-            return;
-        }
-        int 市町村length = 地方公共団体.get市町村名().toString().toCharArray().length;
-        if (市町村length <= INDEX_14) {
-            source.shichosonmeisho1 = 地方公共団体.get市町村名();
-        } else if (INDEX_15 <= 市町村length) {
-            source.shichosonmeisho2 = 地方公共団体.get市町村名();
+            source.koinShoryaku = 認証者.koinShoryaku;
+            source.koinMojiretsu = 認証者.koinMojiretsu;
+            source.ninshoshaYakushokuMei = 認証者.ninshoshaYakushokuMei;
+            source.ninshoshaYakushokuMei1 = 認証者.ninshoshaYakushokuMei1;
+            source.ninshoshaYakushokuMei2 = 認証者.ninshoshaYakushokuMei2;
+            source.ninshoshaShimeiKakenai = 認証者.ninshoshaShimeiKakenai;
+            source.ninshoshaShimeiKakeru = 認証者.ninshoshaShimeiKakeru;
+
         }
 
-        //TODO QA1609
-//        source.shuchomei = 帳票制御共通.get首長名印字位置();
     }
 
     private void edit結果連絡先住所(GassanJigyobunKeisanKekkaRenrakuhyoSource source) {
@@ -323,7 +319,9 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         }
         YubinNo yubinNo = dataEntity.getDbt3172Entity().getKekkaRenrakusakiYubinNo();
         if (yubinNo != null) {
-            source.kekkaRenrakuYubinNO = yubinNo.value();
+            RString 郵便番号1 = yubinNo.value().substring(INDEX_0, INDEX_3);
+            RString 郵便番号2 = yubinNo.value().substring(INDEX_3);
+            source.kekkaRenrakuYubinNO = 郵便番号1.concat(記号).concat(郵便番号2);
         }
         RString 支給額計算結果連絡先住所 = dataEntity.getDbt3172Entity().getKekkaRenrakusakiJusho();
         if (支給額計算結果連絡先住所 != null) {

@@ -473,7 +473,7 @@ public class GemmenJuminKihonHandler {
         int 月_期 = 期の月List.get(0).get月AsInt();
         RString 月 = new RString(月_期).concat(月R);
         過年度1パネル.getLblKiwarigaku24Gatsu().setText(月);
-        過年度1パネル.getKiwarigakuPanel2().getKi1().setText(new RString(期).concat(期R));
+        過年度1パネル.getKiwarigakuPanel2().getKi1().setText(get期(new RString(期)));
         Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(期), 過年度1);
         if (普徴期別金額 != null) {
             過年度1パネル.getKiwarigakuPanel2().getMae1().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
@@ -507,7 +507,7 @@ public class GemmenJuminKihonHandler {
         int 月_期 = 期の月List.get(0).get月AsInt();
         RString 月 = new RString(月_期).concat(月R);
         過年度2パネル.getLblKiwarigaku34Gatsu().setText(月);
-        過年度2パネル.getKiwarigakuPanel3().getKi2().setText(new RString(期).concat(期R));
+        過年度2パネル.getKiwarigakuPanel3().getKi2().setText(get期(new RString(期)));
         Decimal 普徴期別金額 = get減免前普徴期別金額(new RString(期), 過年度2);
         if (普徴期別金額 != null) {
             過年度2パネル.getKiwarigakuPanel3().getMae2().setText(DecimalFormatter.toコンマ区切りRString(普徴期別金額, ゼロ_定値));
@@ -647,7 +647,7 @@ public class GemmenJuminKihonHandler {
 
     private RString get期(RString 期) {
         if (期 != null && !期.isEmpty()) {
-            return 期.concat(期R);
+            return 期.padZeroToLeft(二_定値).concat(期R);
         }
         return null;
     }

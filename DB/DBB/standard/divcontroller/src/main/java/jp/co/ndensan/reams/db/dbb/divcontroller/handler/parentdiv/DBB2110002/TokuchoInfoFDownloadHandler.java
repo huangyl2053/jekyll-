@@ -324,6 +324,9 @@ public class TokuchoInfoFDownloadHandler {
             return RString.EMPTY;
         }
         YMDHMS 基準日時 = shoriDateKanri.get基準日時();
+        if (基準日時.isEmpty()) {
+            return RString.EMPTY;
+        }
         RDate 年月日 = 基準日時.getDate();
         RTime 時刻 = 基準日時.getRDateTime().getTime();
         RString 前回処理日時 = new RString(年月日.wareki().toDateString().toString() + SPACE
@@ -459,9 +462,14 @@ public class TokuchoInfoFDownloadHandler {
      *
      */
     public void onChange_dgkoikiShoriSelect() {
-        if (div.getKoikiShoriSelect().getDgkoikiShoriSelect().getSelectedItems().isEmpty()) {
+        List<dgkoikiShoriSelect_Row> 処理対象Rows = div.getKoikiShoriSelect().getDgkoikiShoriSelect().getSelectedItems();
+        if (処理対象Rows.isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
         } else {
+            dgkoikiShoriSelect_Row 選択Row = div.getKoikiShoriSelect().getDgkoikiShoriSelect().getActiveRow();
+            処理対象Rows.clear();
+            処理対象Rows.add(選択Row);
+            div.getKoikiShoriSelect().getDgkoikiShoriSelect().setSelectedItems(処理対象Rows);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
         }
     }
@@ -471,9 +479,14 @@ public class TokuchoInfoFDownloadHandler {
      *
      */
     public void onChange_dgTsukiShoriSelect() {
-        if (div.getTsukiShoriSelect().getDgTsukiShoriSelect().getSelectedItems().isEmpty()) {
+        List<dgTsukiShoriSelect_Row> 処理対象Rows = div.getTsukiShoriSelect().getDgTsukiShoriSelect().getSelectedItems();
+        if (処理対象Rows.isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
         } else {
+            dgTsukiShoriSelect_Row 選択Row = div.getTsukiShoriSelect().getDgTsukiShoriSelect().getActiveRow();
+            処理対象Rows.clear();
+            処理対象Rows.add(選択Row);
+            div.getTsukiShoriSelect().getDgTsukiShoriSelect().setSelectedItems(処理対象Rows);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
         }
     }

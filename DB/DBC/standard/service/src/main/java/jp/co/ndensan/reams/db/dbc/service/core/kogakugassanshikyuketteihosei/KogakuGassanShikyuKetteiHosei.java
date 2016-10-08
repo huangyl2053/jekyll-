@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushi
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3075KogakuGassanKyufuJissekiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei.IKogakuGassanShikyuKetteiHoseiMapper;
@@ -70,7 +71,7 @@ public class KogakuGassanShikyuKetteiHosei {
     private final DbT3105SogoJigyoTaishoshaDac 総合事業対象者dac;
     private final DbT3074KogakuGassanShikyuFushikyuKetteiDac 高額合算支給不支給決定dac;
     private final DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac 事業高額合算支給不支給決定dac;
-    private static final Decimal ZERO = new Decimal(0);
+    private final DbT3075KogakuGassanKyufuJissekiDac 高額合算給付実績dac;
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
@@ -108,6 +109,7 @@ public class KogakuGassanShikyuKetteiHosei {
         this.被保険者台帳管理dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
         this.受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.総合事業対象者dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
+        this.高額合算給付実績dac = InstanceProvider.create(DbT3075KogakuGassanKyufuJissekiDac.class);
         this.高額合算支給不支給決定dac = InstanceProvider.create(DbT3074KogakuGassanShikyuFushikyuKetteiDac.class);
         this.事業高額合算支給不支給決定dac = InstanceProvider.create(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac.class);
     }
@@ -115,6 +117,7 @@ public class KogakuGassanShikyuKetteiHosei {
     /**
      * 高額合算支給額計算結果テーブルから取得する。
      *
+     * @param 被保険者番号 HihokenshaNo
      * @param 対象年度 FlexibleYear
      * @param 証記載保険者番号 HokenshaNo
      * @param 支給申請書整理番号 RString
@@ -122,6 +125,7 @@ public class KogakuGassanShikyuKetteiHosei {
      * @return List<KogakuGassanShikyuKetteiHoseiResult>
      */
     public List<KogakuGassanShikyuKetteiHoseiResult> selectShikyuKetteiHoseiList(
+            HihokenshaNo 被保険者番号,
             FlexibleYear 対象年度,
             HokenshaNo 証記載保険者番号,
             RString 支給申請書整理番号,
@@ -129,7 +133,7 @@ public class KogakuGassanShikyuKetteiHosei {
         List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
         if (事業分フラグ) {
             List<DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity> 事業高額合算list
-                    = 事業高額合算支給不支給決定dac.getAllByKey(対象年度, 証記載保険者番号, 支給申請書整理番号);
+                    = 事業高額合算支給不支給決定dac.getAllByKey(被保険者番号, 対象年度, 証記載保険者番号, 支給申請書整理番号);
             if (事業高額合算list == null || 事業高額合算list.isEmpty()) {
                 return result;
             } else {
@@ -142,7 +146,7 @@ public class KogakuGassanShikyuKetteiHosei {
             return result;
         }
         List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> 高額合算list
-                = 高額合算支給不支給決定dac.getAllByKey(対象年度, 証記載保険者番号, 支給申請書整理番号);
+                = 高額合算支給不支給決定dac.getAllByKey(被保険者番号, 対象年度, 証記載保険者番号, 支給申請書整理番号);
         if (高額合算list == null || 高額合算list.isEmpty()) {
             return result;
         } else {
@@ -536,7 +540,7 @@ public class KogakuGassanShikyuKetteiHosei {
             KogakuGassanKyufuJisseki 給付実績基本情報) {
         boolean flag = false;
         if (高額合算決定情報 != null && !高額合算決定情報.isEmpty()) {
-            Decimal 支給額 = ZERO;
+            Decimal 支給額 = Decimal.ZERO;
             for (KogakuGassanShikyuFushikyuKettei entity : 高額合算決定情報) {
                 if (ONE.equals(entity.get支給区分コード())) {
                     支給額 = 支給額.add(entity.get支給額());

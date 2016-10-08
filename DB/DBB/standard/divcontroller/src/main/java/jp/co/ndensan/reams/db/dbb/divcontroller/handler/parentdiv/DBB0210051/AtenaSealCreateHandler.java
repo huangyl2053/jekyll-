@@ -115,7 +115,6 @@ public class AtenaSealCreateHandler {
         }
         div.getTxtKijyunnengatu().setYmdKubunEnum(YmdKubun.年月);
         div.getCcdJushoSettei().initialize(SubGyomuCode.DBZ介護共通.getColumnValue(), 帳票ID.getColumnValue());
-        //TODO QA1568
         div.getCcdAtenaSealPosition().load(定数_12);
         div.getCcdShutsuryokuJun().load(SubGyomuCode.DBZ介護共通, 帳票ID);
     }
@@ -145,7 +144,10 @@ public class AtenaSealCreateHandler {
         RString 資格区分 = get資格区分(div.getDdlShikakuKubun().getSelectedKey());
         RString 市町村指定のkey = div.getDdlShicyouson().getSelectedKey();
         RString 市町村指定のvalue = div.getDdlShicyouson().getSelectedValue();
-        RString 市町村指定 = 市町村指定のkey.concat(RString.HALF_SPACE).concat(市町村指定のvalue);
+        RString 市町村指定 = null;
+        if (市町村指定のkey != null) {
+            市町村指定 = 市町村指定のkey.concat(RString.HALF_SPACE).concat(市町村指定のvalue);
+        }
         RString 最優先住所 = div.getDdlSaiyusenJusho().getSelectedValue();
         RString 敬称 = div.getDdlKeisho().getSelectedValue();
         RString 被保番号表示 = div.getRadIsPrintHihokenshaNo().getSelectedValue();

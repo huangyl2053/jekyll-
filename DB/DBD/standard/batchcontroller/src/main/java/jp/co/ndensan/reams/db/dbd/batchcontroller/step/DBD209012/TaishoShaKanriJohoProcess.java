@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209012;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32004.TaishoShaKanriJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt32004.TaishoShaKanriJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt32004.TaishoShaKanriJohoTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.TaishoshaJohoTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,11 +29,11 @@ public class TaishoShaKanriJohoProcess extends BatchProcessBase<TaishoShaKanriJo
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
     private TaishoShaKanriJohoProcessParameter processParameter;
-    private YMDHMS システム日付;
+    private RDate システム日付;
 
     @Override
     protected void initialize() {
-        システム日付 = YMDHMS.now();
+        システム日付 = RDate.getNowDate();
     }
 
     @Override
@@ -43,20 +43,20 @@ public class TaishoShaKanriJohoProcess extends BatchProcessBase<TaishoShaKanriJo
 
     @Override
     protected void createWriter() {
-        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(TaishoShaKanriJohoTableEntity.class)
-                .tempTableName(TaishoShaKanriJohoTableEntity.TABLE_NAME)
+        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(TaishoshaJohoTempTableEntity.class)
+                .tempTableName(TaishoshaJohoTempTableEntity.TABLE_NAME)
                 .build();
     }
 
     @Override
     protected void process(TaishoShaKanriJohoEntity t) {
-        TaishoShaKanriJohoTableEntity insertEntity = create対象者情報一時テーブルを登録Entity(t);
+        TaishoshaJohoTempTableEntity insertEntity = create対象者情報一時テーブルを登録Entity(t);
         tmpTableWriter.insert(insertEntity);
     }
 
-    private TaishoShaKanriJohoTableEntity create対象者情報一時テーブルを登録Entity(TaishoShaKanriJohoEntity t) {
-        TaishoShaKanriJohoTableEntity data = new TaishoShaKanriJohoTableEntity();
-        data.setHihokenshaNo(t.getHihokenshaNo());
+    private TaishoshaJohoTempTableEntity create対象者情報一時テーブルを登録Entity(TaishoShaKanriJohoEntity t) {
+        TaishoshaJohoTempTableEntity data = new TaishoshaJohoTempTableEntity();
+        data.setHihokenshaNo2(t.getHihokenshaNo());
         return data;
 
     }

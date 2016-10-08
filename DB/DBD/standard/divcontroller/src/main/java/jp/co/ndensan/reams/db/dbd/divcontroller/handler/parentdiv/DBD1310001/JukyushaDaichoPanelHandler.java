@@ -130,6 +130,7 @@ public class JukyushaDaichoPanelHandler {
         setCSV編集条件();
         div.getCcdShutsuryokujun().setDisabled(false);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID));
+        div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給);
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
 
     }

@@ -47,7 +47,6 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
     private int 连番;
     private static final int 连番_INITIALIZE = 1;
     private static final int 先頭9桁 = 9;
-    private static final int PAGE_MAXNUMBER = 15;
     private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
 
     @BatchWriter
@@ -84,7 +83,6 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
 
     @Override
     protected void afterExecute() {
-        int pageNumber = 连番 % PAGE_MAXNUMBER == 0 ? (连番 / PAGE_MAXNUMBER) : (连番 / PAGE_MAXNUMBER + 1);
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 REPORT_DBD503001.getColumnValue().substring(0, 先頭9桁),
@@ -92,7 +90,7 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD503001.getReportName(),
-                new RString(pageNumber),
+                new RString(batchReportWriter.getPageCount()),
                 new RString("なし"),
                 new RString("なし"),
                 contribute());

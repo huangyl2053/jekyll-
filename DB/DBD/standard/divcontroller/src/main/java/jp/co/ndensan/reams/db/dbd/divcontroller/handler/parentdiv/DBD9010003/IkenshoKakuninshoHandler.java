@@ -51,9 +51,9 @@ public class IkenshoKakuninshoHandler {
         div.getPanelKakuninsho().getCcdKaigoShikakuKihon().initialize(taishoshaKey.get被保険者番号());
         div.getPanelShosaiEria().getCcdBunshoBangoInput().initialize(new ReportId(帳票分類ID));
         div.getPanelShosaiEria().getTxtCyouhyou().setValue(帳票);
+        div.getPanelShosaiEria().getTxtSakuseiBi().setValue(new RDate(RDate.getNowDate().wareki().toDateString().toString()));
         if (医療費控除情報リスト.get(NOM_0).get控除対象年() != null) {
             RYear 控除対象年 = new RYear(医療費控除情報リスト.get(NOM_0).get控除対象年());
-            div.getPanelShosaiEria().getTxtSakuseiBi().setValue(new RDate(控除対象年.wareki().toDateString().toString()));
             div.getPanelShosaiEria().getDdlTaishonen().setSelectedKey(控除対象年.toDateString());
         }
         if (医療費控除情報リスト.get(NOM_0).get発行年月日() != null) {
@@ -73,7 +73,7 @@ public class IkenshoKakuninshoHandler {
                     wareki().toDateString().toString()));
         }
         if (医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日() != null) {
-            div.getPanelShosaiEria().getTxtNinteiKikan().setFromValue(new RDate(医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日().
+            div.getPanelShosaiEria().getTxtNinteiKikan().setToValue(new RDate(医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日().
                     wareki().toDateString().toString()));
         }
         if (医療費控除情報リスト.get(NOM_0).get日常生活自立度() != null) {

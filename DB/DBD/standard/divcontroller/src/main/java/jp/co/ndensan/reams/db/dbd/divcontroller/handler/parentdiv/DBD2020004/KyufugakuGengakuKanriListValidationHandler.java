@@ -5,16 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020004;
 
+import static jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan.基準日;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.KyufugakuGengakuKanriListDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.KyufugakuGengakuKanriListDivSpec;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -25,49 +23,41 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KyufugakuGengakuKanriListValidationHandler {
 
     /**
-     * 基準日の必須入力チェックを行います。
+     * 基準日の必須入力と減額日期のチェックを行います。
      *
-     * @param pairs バリデーションコントロール
      * @param div KyufugakuGengakuKanriListDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor基準日の必須入力(ValidationMessageControlPairs pairs, KyufugakuGengakuKanriListDiv div) {
+    public ValidationMessageControlPairs validateForバッチ実行前チェック(KyufugakuGengakuKanriListDiv div) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getChushutuJoken().getTxtKijunDate().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, 基準日.toString())));
+        }
 
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(KyufugakuGengakuKanriListDivSpec.基準日の非空チェック)
-                .thenAdd(NoInputMessages.基準日の必須入力).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.基準日の必須入力, div.getChushutuJoken().getTxtKijunDate()).build().check(messages));
-        return pairs;
+        if (is期間が不正(div.getTxtGengakuShuryoRange().getFromValue(), div.getTxtGengakuShuryoRange().getToValue())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正)));
+        }
+
+        return validPairs;
     }
 
-    /**
-     * 減額終了日抽出_終了日が開始日以前のチェックを行います。
-     *
-     * @param pairs バリデーションコントロール
-     * @param div KyufugakuGengakuKanriListDiv
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateFor減額終了日抽出_終了日が開始日以前(ValidationMessageControlPairs pairs,
-            KyufugakuGengakuKanriListDiv div) {
-
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(KyufugakuGengakuKanriListDivSpec.減額終了日抽出_終了日が開始日以前のチェック)
-                .thenAdd(NoInputMessages.減額終了日抽出_終了日が開始日以前).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.減額終了日抽出_終了日が開始日以前, div.getTxtGengakuShuryoRange()).build().check(messages));
-        return pairs;
+    private boolean is期間が不正(RDate 開始日, RDate 終了日) {
+        if (開始日 == null || 終了日 == null) {
+            return false;
+        }
+        return !開始日.isBeforeOrEquals(終了日);
     }
 
-    private static enum NoInputMessages implements IValidationMessage {
-
-        基準日の必須入力(UrErrorMessages.必須, "基準日"),
-        減額終了日抽出_終了日が開始日以前(UrErrorMessages.期間が不正);
+    private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;
 
-        private NoInputMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            if (replacements.length == 0) {
+                this.message = message.getMessage();
+            } else {
+                this.message = message.getMessage().replace(replacements);
+            }
         }
 
         @Override
@@ -75,5 +65,4 @@ public class KyufugakuGengakuKanriListValidationHandler {
             return message;
         }
     }
-
 }

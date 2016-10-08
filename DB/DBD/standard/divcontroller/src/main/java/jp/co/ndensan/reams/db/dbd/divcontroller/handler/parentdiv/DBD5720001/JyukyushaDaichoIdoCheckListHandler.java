@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5720001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD572001.DBD572001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD572001.DBD572001_JukyushaDaichoIdoCheckListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5720001.JyukyushaDaichoIdoCheckListDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.jyukyushadaichoidodhecklist.JyukyushaDaichoIdoCheckListManager;
@@ -82,8 +82,8 @@ public class JyukyushaDaichoIdoCheckListHandler {
      *
      * @return JyukyushaDaichoIdoCheckListParameter
      */
-    public DBD572001Parameter getParameter() {
-        DBD572001Parameter parameter = new DBD572001Parameter();
+    public DBD572001_JukyushaDaichoIdoCheckListParameter getParameter() {
+        DBD572001_JukyushaDaichoIdoCheckListParameter parameter = new DBD572001_JukyushaDaichoIdoCheckListParameter();
         parameter.set今回抽出開始年月日(div.getJhokenPancel().getTxtRangeKonkai().getFromDateValue());
         if (div.getJhokenPancel().getTxtRangeKonkai().getFromDateValue() != null
                 && div.getJhokenPancel().getTxtRangeKonkai().getFromTimeValue() == null) {

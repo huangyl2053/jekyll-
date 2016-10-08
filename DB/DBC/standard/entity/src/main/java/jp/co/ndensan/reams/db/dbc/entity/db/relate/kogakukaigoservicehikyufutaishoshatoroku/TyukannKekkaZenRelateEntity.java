@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekka;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannEntity;
 
 /**
@@ -19,6 +19,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshato
 public class TyukannKekkaZenRelateEntity {
 
     private TempKyufujissekiTyukannEntity 給付実績中間高額Entity;
-    private DbT3111JigyoKogakuShikyuHanteiKekka 高額判定結果全件Entity;
+    private DbT3111JigyoKogakuShikyuHanteiKekkaEntity 高額判定結果全件Entity;
 
 }

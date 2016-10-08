@@ -219,7 +219,7 @@ public class HanyoListParamHandler {
             List<KeyValueDataSource> 年度選択肢 = new ArrayList<>();
             for (int i = 1; i <= 年度_10; i++) {
                 年度選択肢.add(new KeyValueDataSource(開始年度.toDateString(), 開始年度.wareki().eraType(EraType.KANJI).toDateString()));
-                開始年度.minusYear(年度_1);
+                開始年度 = 開始年度.plusYear(年度_1);
             }
             div.getDdlKijunNendo().setDataSource(年度選択肢);
         } else {
@@ -1375,6 +1375,7 @@ public class HanyoListParamHandler {
 
     private void 初期化_特別地域加算減免() {
         init出力方法ラジオボタン_グループ();
+        set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
         div.getRadHaniJoken2().setSelectedKey(申請日KEY);
@@ -1506,6 +1507,7 @@ public class HanyoListParamHandler {
         set利用者負担段階(表示);
         div.getChushutsuJokenC5().setDisplayNone(非表示);
         div.getChushutsuJokenC5().setDisabled(非表示);
+        get宛名抽出条件div().initialize();
         get宛名抽出条件子Div().getRadSelectKijun().setDisplayNone(非表示);
         get宛名抽出条件子Div().getRadSelectKijun().setDisabled(非表示);
         get宛名抽出条件子Div().getTxtNenrei().setDisplayNone(非表示);

@@ -134,6 +134,9 @@ public class KanendoKoseiKeisan {
         FukaJoho 賦課の情報5 = null;
         FukaJoho 賦課の情報6 = null;
         for (FukaJoho 賦課の情報 : 賦課の情報List) {
+            if (賦課の情報 == null) {
+                continue;
+            }
             if (賦課の情報.get賦課年度().equals(賦課の情報.get調定年度())) {
                 賦課の情報1 = 賦課の情報;
             } else if (賦課の情報.get賦課年度().equals(賦課の情報.get調定年度().minusYear(INT_1))) {
@@ -789,7 +792,7 @@ public class KanendoKoseiKeisan {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(徴収方法の情報_空白メッセージ.toString()).evaluate());
         }
         for (FukaJoho fukaJoho : 賦課の情報List) {
-            if (fukaJoho.get賦課年度().isBefore(調定年度.minusYear(INT_5)) || 調定年度.isBefore(fukaJoho.get賦課年度())) {
+            if (fukaJoho != null && (fukaJoho.get賦課年度().isBefore(調定年度.minusYear(INT_5)) || 調定年度.isBefore(fukaJoho.get賦課年度()))) {
                 throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage()
                         .replace(関係_メッセージ.toString()).evaluate());
             }

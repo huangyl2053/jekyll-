@@ -11,14 +11,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4100011.Sabi
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4100011.ShoriNaiyoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * SabisuKodoIdoRenrakuhyo_サービスコード異動連絡票作成のcontrollerクラスです。
@@ -45,24 +41,6 @@ public class SabisuKodoIdoRenrakuhyo {
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         shoriNaiyoDiv.getTxtFuairuMei().setValue(ファイル名);
         shoriNaiyoDiv.getTxtShoriTaishoNengetsu().setValue(RDate.getNowDate());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「実行する」ボタンを押下,実行確認メッセージ。
-     *
-     * @param div 画面div
-     *
-     * @return ResponseData<SabisuKodoIdoRenrakuhyoDiv>
-     */
-    public ResponseData<SabisuKodoIdoRenrakuhyoDiv> onClick_checkMessage(SabisuKodoIdoRenrakuhyoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage 確認MESSAGE = new QuestionMessage(
-                    UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate(),
-                    ButtonSelectPattern.OKCancel);
-            return ResponseData.of(div).addMessage(確認MESSAGE).respond();
-        }
         return ResponseData.of(div).respond();
     }
 

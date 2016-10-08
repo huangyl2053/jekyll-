@@ -94,7 +94,7 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
     }
 
     /**
-     * 抽出期間パネルの設定です
+     * 抽出期間パネルの設定です。
      *
      * @param shoriDateKanriEntity shoriDateKanriEntity
      */
@@ -105,13 +105,12 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
     }
 
     /**
-     * 計算対象期間パネルの設定です
+     * 計算対象期間パネルの設定です。
      *
      * @param 年月範囲 年月範囲
      */
     public void set計算対象期間パネル(RString 年月範囲) {
         RDate 審査年月 = div.getKogakuTaishoshaShoriPanel().getTxtShinsaYM().getValue();
-//        RString 年月範囲 = DbBusinessConfig.get(ConfigNameDBC.高額対象者抽出再計算_年月範囲, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (審査年月 != null) {
             RDate 開始年月 = 審査年月.minusMonth(1);
             RDate 終了年月 = 審査年月.minusMonth(1).minusMonth(Integer.valueOf(年月範囲.toString()));
@@ -178,7 +177,8 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
 
     private void set今回() {
         div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().setToDatePlaceHolder(RDate.getNowDate().wareki().toDateString());
-        div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().setToPlaceHolder(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
+        div.getChushutsuKikanPanel().getTxtChushutsuKikanKonkai().setToPlaceHolder(
+                RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         div.getChushutsuKikanPanel().getTxtShoriYMDKonkai().setValue(RDate.getNowDate());
         div.getChushutsuKikanPanel().getTxtShoriHMKonkai().setValue(new RTime(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
     }

@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
@@ -48,7 +49,7 @@ public class DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYMParameter exten
     @BatchParameter(key = SAKUSEIDATE, name = "作成日付")
     private RString 作成日付;
     @BatchParameter(key = SHORITIME, name = "処理日時")
-    private RString 処理日時;
+    private YMDHMS 処理日時;
     @BatchParameter(key = TOUKEITAISHOUKBN, name = "統計対象区分")
     private RString 統計対象区分;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")

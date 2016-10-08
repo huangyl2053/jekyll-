@@ -213,18 +213,20 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT
     /**
      * 高額合算支給不支給決定を全件返します。
      *
+     * @param 被保険者番号 HihokenshaNo
      * @param 対象年度 FlexibleYear
      * @param 保険者番号 HokenshaNo
      * @param 支給申請書整理番号 RString
      * @return List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity>
      */
     @Transaction
-    public List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> getAllByKey(FlexibleYear 対象年度,
+    public List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> getAllByKey(HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
             HokenshaNo 保険者番号,
             RString 支給申請書整理番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<ITrueFalseCriteria> criteria = new ArrayList<>();
-        criteria.add(eq(isDeleted, false));
+        criteria.add(eq(hihokenshaNo, 被保険者番号));
         if (対象年度 != null && !対象年度.isEmpty()) {
             criteria.add(eq(taishoNendo, 対象年度));
         }
