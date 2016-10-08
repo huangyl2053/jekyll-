@@ -18,11 +18,11 @@ public enum ShinseishoTorokuChushutsuTaisho {
     /**
      * コード:0001 名称:基準収入額適用申請書の該当のみ抽出 略称:満たす時に出力
      */
-    処理年度("0001", "基準収入額適用申請書の該当のみ抽出", "満たす時に出力"),
+    基準収入額適用申請書の該当のみ抽出("0001", "基準収入額適用申請書の該当のみ抽出", "満たす時に出力"),
     /**
      * コード:0002 名称:無条件抽出 略称:満たさなくても出力
      */
-    被保険者番号("0002", "無条件抽出", "満たさなくても出力");
+    無条件抽出("0002", "無条件抽出", "満たさなくても出力");
     private final RString code;
     private final RString shortName;
     private final RString fullName;
