@@ -64,9 +64,12 @@ public class IkenshoKakuninsho {
      */
     public ResponseData<IkenshoKakuninshoDiv> onLoad(IkenshoKakuninshoDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (taishoshaKey.get被保険者番号().isEmpty()) {
+        if (!ResponseHolder.isReRequest() && taishoshaKey.get被保険者番号().isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), true);
             return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
+        }
+        if (new RString(DbdInformationMessages.被保険者でないデータ.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
         }
         RString 被保険者番号 = taishoshaKey.get被保険者番号().value();
         RString メニューID = ResponseHolder.getMenuID();
