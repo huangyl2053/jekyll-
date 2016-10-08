@@ -71,6 +71,7 @@ public class KyufuGengakuHaakuListSakuseiService {
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
+    private static final int NUM_12 = 12;
     private static final RString SIGN = new RString(" ＞ ");
 
     /**
@@ -192,7 +193,7 @@ public class KyufuGengakuHaakuListSakuseiService {
 
         if (!Decimal.ZERO.equals(徴収権消滅期間_すべて合計)) {
             給付額減額期間 = 徴収権消滅期間_すべて合計.multiply(徴収権消滅期間_すべて合計.divide(
-                    徴収権消滅期間_すべて合計.add(納付済み期間の合計_すべて合計))).divide(2).multiply(12);
+                    徴収権消滅期間_すべて合計.add(納付済み期間の合計_すべて合計))).divide(2).multiply(NUM_12);
         }
 
         KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = new KyufuGengakuHaakuIchiranEntity();
