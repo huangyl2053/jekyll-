@@ -13,12 +13,10 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050021.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050021.HihokenshaShisakuPanalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050021.HihokenshaShisakuPanalHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
-import jp.co.ndensan.reams.db.dba.service.core.nyutaishoshakanri.NyutaishoshaKanriFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
@@ -30,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -40,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -75,17 +71,10 @@ public class HihokenshaShisakuPanal {
         HihokenshaNo 被保番号 = 対象者キー.get被保険者番号();
         ShikibetsuCode 識別コード = 対象者キー.get識別コード();
 
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            div.setReadOnly(true);
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(new ValidationMessageControlPair(HihokenshaShisakuPanalErrorMessage.排他_他のユーザが使用中));
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
+        List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
+        FlexibleDate shikakuShutokuDate = ViewStateHolder.get(ViewStateKeys.対象者_資格取得日, FlexibleDate.class);
+        getHandler(div).initialize(初期_状態, hihoDaicho, 識別コード, 被保番号, shikakuShutokuDate);
 
-        ShikakuRirekiJoho 資格得喪情報
-                = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
-
-        getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
         if (状態_追加.equals(初期_状態)) {
             return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
         } else if (状態_修正.equals(初期_状態)) {
@@ -113,20 +102,19 @@ public class HihokenshaShisakuPanal {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             資格異動訂正の保存処理(div);
-            RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.資格異動の訂正を保存する).respond();
         }
         return ResponseData.of(div).respond();
     }
 
     private void 資格異動訂正の保存処理(HihokenshaShisakuPanalDiv div) {
-        施設入退所履歴期間重複チェック処理(div);
+        施設入退所履歴期間重複チェック処理();
         List<HihokenshaDaicho> 資格訂正情報 = 資格訂正登録リスト取得処理(div);
         manager.checkShikakuTorukuList(資格訂正情報, get当該識別対象の生年月日(div));
         資格訂正処理(div, 資格訂正情報);
-        div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+        //div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
     }
 
     private ValidationMessageControlPairs is暦上日(HihokenshaShisakuPanalDiv div) {
@@ -138,32 +126,32 @@ public class HihokenshaShisakuPanal {
         return pairs;
     }
 
-    private void 施設入退所履歴期間重複チェック処理(HihokenshaShisakuPanalDiv div) {
-        NyutaishoshaKanriFinder finder = NyutaishoshaKanriFinder.createInstance();
-        List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧List
-                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
-        for (dgShisetsuNyutaishoRireki_Row 施設入退所履歴 : 施設入退所履歴一覧List) {
-            TextBoxFlexibleDate nyushoDate = 施設入退所履歴.getNyushoDate();
-            TextBoxFlexibleDate taishoDate = 施設入退所履歴.getTaishoDate();
-            RString 入所施設種類 = 施設入退所履歴.getShisetsuShuruiKey();
-            boolean checkFlag = finder.isRirekiKikanJufukuFlag(
-                    nyushoDate.getValue(),
-                    taishoDate.getValue(),
-                    入所施設種類);
-            if (checkFlag) {
-                throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
-            }
-        }
+    private void 施設入退所履歴期間重複チェック処理() {
+//        NyutaishoshaKanriFinder finder = NyutaishoshaKanriFinder.createInstance();
+//        List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧List
+//                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
+//        for (dgShisetsuNyutaishoRireki_Row 施設入退所履歴 : 施設入退所履歴一覧List) {
+//            TextBoxFlexibleDate nyushoDate = 施設入退所履歴.getNyushoDate();
+//            TextBoxFlexibleDate taishoDate = 施設入退所履歴.getTaishoDate();
+//            RString 入所施設種類 = 施設入退所履歴.getShisetsuShuruiKey();
+//            boolean checkFlag = finder.isRirekiKikanJufukuFlag(
+//                    nyushoDate.getValue(),
+//                    taishoDate.getValue(),
+//                    入所施設種類);
+//            if (checkFlag) {
+//                throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
+//            }
+//        }
     }
 
     private List<HihokenshaDaicho> 資格訂正登録リスト取得処理(HihokenshaShisakuPanalDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ShikakuRirekiJoho 資格詳細情報 = getHandler(div).get資格詳細情報();
-        List<HihokenshaDaicho> 住所地特例情報
-                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().getDataList();
-        List<HihokenshaDaicho> 資格変更履歴情報
-                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridDataFor資格詳細異動().records();
+        List<HihokenshaDaicho> 住所地特例情報 = null;
+//                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().getDataList();
+        List<HihokenshaDaicho> 資格変更履歴情報 = null;
+//                = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridDataFor資格詳細異動().records();
         List<HihokenshaDaicho> 資格訂正登録リスト = new ArrayList<>();
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (状態_追加.equals(初期_状態)) {
@@ -221,7 +209,7 @@ public class HihokenshaShisakuPanal {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
             manager.deleteHihokenshaShikakuTeisei(被保険者番号, 取得日);
@@ -265,7 +253,6 @@ public class HihokenshaShisakuPanal {
      * @return ResponseData<HihokenshaShisakuPanalDiv> 被保険者資格詳細異動Div
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onClick_btnBack(HihokenshaShisakuPanalDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
     }
 

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.I
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -83,7 +84,9 @@ public class IryohokenKanyuJokyoManager {
     public int saveAllIryoHokenJoho(List<IryohokenKanyuJokyo> 医療保険情報List) {
         int count = 0;
         for (IryohokenKanyuJokyo 医療保険情報 : 医療保険情報List) {
-            count = count + dac.saveOrDeletePhysicalBy(医療保険情報.toEntity());
+            if (!EntityDataState.Unchanged.equals(医療保険情報.toEntity().getState())) {
+                count = count + dac.saveOrDeletePhysicalBy(医療保険情報.toEntity());
+            }
         }
         return count;
     }

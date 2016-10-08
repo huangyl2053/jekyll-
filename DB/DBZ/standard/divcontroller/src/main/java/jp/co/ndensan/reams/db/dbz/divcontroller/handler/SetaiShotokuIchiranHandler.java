@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuChecker;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiShotokuIchiranComparators;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShotokuRirekiIchiranComparators;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
@@ -482,13 +480,8 @@ public class SetaiShotokuIchiranHandler {
      */
     public List<KaigoShotokuAlive> get所得情報履歴(ShikibetsuCode 識別コード) {
         ShotokuManager 介護所得Finder = ShotokuManager.createInstance();
-        KaigoShotokuAlive shotokuAlive = 介護所得Finder.get介護所得Alive(識別コード,
-                new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
-                        .getYear().toDateString()));
-
-        return shotokuAlive == null
-               ? Collections.<KaigoShotokuAlive>emptyList()
-               : ItemList.of(shotokuAlive).sorted(ShotokuRirekiIchiranComparators.orderBy履歴番号.desc()).toList();
+        return 介護所得Finder.get介護所得AliveAll(識別コード, new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
+                .getYear().toDateString()), YMDHMS.now());
     }
 
     /**
@@ -591,15 +584,16 @@ public class SetaiShotokuIchiranHandler {
         RString selectedIndex = new RString("key0");
         FlexibleYear 日付関連_所得年度
                 = new FlexibleYear(DbBusinessConfig.get(ConfigKeysHizuke.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+
         for (FlexibleYear 年度 = 日付関連_所得年度; 基準年度.isBefore(年度); 年度 = 年度.minusYear(1)) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(new RString("key" + index));
             keyValue.setValue(new RString(年度.wareki().getYear().toString()));
-            index++;
             kazeiNendoList.add(keyValue);
             if (年度.equals(所得年度)) {
                 selectedIndex = new RString("key" + index);
             }
+            index++;
         }
         div.getDdlSetaiIchiranKazeiNendo().setDataSource(kazeiNendoList);
         div.getDdlSetaiIchiranKazeiNendo().setSelectedKey(selectedIndex);
@@ -609,6 +603,11 @@ public class SetaiShotokuIchiranHandler {
         return new RString(NumberFormat.getNumberInstance(Locale.JAPAN).format(new BigDecimal(target.toString())));
     }
 
+    /**
+     * 一覧で選択された世帯員同士が比較可能かどうかをチェックします。
+     *
+     * @return バリデーションの結果
+     */
     public ValidationMessageControlPairs validate比較対象() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         if (div.getDgSetaiShotoku().getSelectedItems().size() != 2) {

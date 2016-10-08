@@ -49,13 +49,13 @@ public class OmutsusiyoSyomeisho {
         if (!ResponseHolder.isReRequest()) {
             TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), true);
                 return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
             }
             List<IryohiKojoEntityResult> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
             ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList(医療費控除リスト));
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), false);
         }
-        return ResponseData.of(div).setState(DBD9010002StateName.初期状態);
+        return ResponseData.of(div).respond();
     }
 
     /**

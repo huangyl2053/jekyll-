@@ -238,7 +238,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .setDataSource(更正後Data);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto()
                     .setSelectedKey(new RString(調定日時List.get(0).toString()));
-
             List<YMDHMS> 更正前調定日時List = new ArrayList<>();
             更正前調定日時List.addAll(調定日時List);
             更正前調定日時List.remove(調定日時List.get(0));
@@ -251,7 +250,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .setDataSource(更正前Data);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae()
                     .setSelectedKey(new RString(更正前調定日時List.get(0).toString()));
-
             FukaJoho 更正後賦課の情報 = 賦課の情報List.get(0);
             FukaJoho 更正前賦課の情報 = 賦課の情報List.get(1);
             set更正後賦課根拠(更正後賦課の情報);
@@ -353,14 +351,18 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae7().setText(DateEditor.to和暦(賦課の情報.get老年廃止日()));
         }
-        if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+        if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty() && !賦課の情報.get課税区分().equals(new RString("0"))) {
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae8().setText(KazeiKubun.toValue(賦課の情報.get課税区分()).get名称());
         }
-        if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+        if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty() && !賦課の情報.get世帯課税区分().equals(new RString("0"))) {
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae9().setText(SetaiKazeiKubun.toValue(賦課の情報.get世帯課税区分()).get名称());
         }
+        set更正前賦課根拠1(賦課の情報);
+    }
+    
+    private void set更正前賦課根拠1(FukaJoho 賦課の情報) {
         Decimal 合計所得金額 = 賦課の情報.get合計所得金額();
         if (合計所得金額 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
@@ -418,14 +420,18 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto7().setText(DateEditor.to和暦(賦課の情報.get老年廃止日()));
         }
-        if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+        if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty() && !賦課の情報.get課税区分().equals(new RString("0"))) {
+                 div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto8().setText(KazeiKubun.toValue(賦課の情報.get課税区分()).get名称());
         }
-        if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty()) {
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+        if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty() && !賦課の情報.get世帯課税区分().equals(new RString("0"))) {
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto9().setText(SetaiKazeiKubun.toValue(賦課の情報.get世帯課税区分()).get名称());
         }
+        set更正後賦課根拠1(賦課の情報);
+    }
+    
+    private void set更正後賦課根拠1(FukaJoho 賦課の情報) {
         Decimal 合計所得金額 = 賦課の情報.get合計所得金額();
         if (合計所得金額 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
@@ -517,7 +523,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                 .getLblZengoTokuchoAtoKei().setText(DecimalFormatter.toコンマ区切りRString(更正後合計, 0));
-
         if (更正前情報 != null) {
             set特徴_更正前期割額(更正前情報, 期_4月, 期_6月, 期_8月, 期_10月, 期_12月, 期_2月);
         }
@@ -1939,7 +1944,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
         }
-
         if ((!div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().isDisplayNone()
                 || !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isDisplayNone())
                 && (div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().isDisplayNone()

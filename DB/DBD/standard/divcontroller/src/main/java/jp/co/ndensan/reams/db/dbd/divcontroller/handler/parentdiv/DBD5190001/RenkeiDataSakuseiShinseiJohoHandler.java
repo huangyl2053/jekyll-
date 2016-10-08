@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.NinteiShinseiJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519001.DBD519001_NinteishinseiInfoIfParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5190001.RenkeiDataSakuseiShinseiJohoManager;
@@ -160,6 +161,44 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             div.getBtnhihokensha().setDisabled(false);
             div.getBtnhihokensha().setDisabled(false);
         }
+    }
+
+    /**
+     * バッチパラメターを保存処理です。
+     *
+     * @return バッチパラメター
+     */
+    public DBD519001_NinteishinseiInfoIfParameter batchParameterSave() {
+        DBD519001_NinteishinseiInfoIfParameter parameter = new DBD519001_NinteishinseiInfoIfParameter();
+        RDate fromdate = RDate.getNowDate();
+        RDate todate = RDate.getNowDate().plusDay(1);
+        RTime fromtime = RTime.of(0, 0, 0);
+        RTime totime = RTime.of(0, 0, 0);
+        if (div.getTxtKonkaiKaishiDay().getValue() != null) {
+            fromdate = div.getTxtKonkaiKaishiDay().getValue();
+        }
+        if (div.getTxtKonkaiShuryoDay().getValue() != null) {
+            todate = div.getTxtKonkaiShuryoDay().getValue();
+        }
+        if (div.getTxtKonkaiKaishiTime().getValue() != null) {
+            fromtime = div.getTxtKonkaiKaishiTime().getValue();
+        }
+        if (div.getTxtKonkaiShuryoTime().getValue() != null) {
+            totime = div.getTxtKonkaiShuryoTime().getValue();
+        }
+        RDateTime konkaikaishiFrom = RDateTime.of(fromdate.getYearValue(), fromdate.getMonthValue(), fromdate.getDayValue(),
+                fromtime.getHour(), fromtime.getMinute(), fromtime.getSecond());
+        RDateTime konkaikaishiTo = RDateTime.of(todate.getYearValue(), todate.getMonthValue(), todate.getDayValue(),
+                totime.getHour(), totime.getMinute(), totime.getSecond());
+        parameter.set証記載保険者番号(div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value());
+        parameter.set市町村コード(div.getCommonChildDiv1().getSelectedItem().get市町村コード());
+        parameter.set被保険者番号(new HihokenshaNo(div.getTxtHihokenshaNo().getValue()));
+        parameter.set今回開始期間FROM(konkaikaishiFrom);
+        parameter.set今回開始期間TO(konkaikaishiTo);
+        parameter.set新ファイル名(div.getTxtNewFileName().getValue());
+        List<HihokenshaNo> hihokenshaNoList = getHihokenshaNoList(div);
+        parameter.set対象外被保険者番号リスト(hihokenshaNoList);
+        return parameter;
     }
 
     /**

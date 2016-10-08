@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyosha;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
@@ -67,7 +68,8 @@ public class KaigoJigyoshaManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンス
      */
     public static KaigoJigyoshaManager createInstance() {
         return InstanceProvider.create(KaigoJigyoshaManager.class);
@@ -114,6 +116,35 @@ public class KaigoJigyoshaManager {
         KaigoJigyoshaEntity kaigoJigyoshaEntity = new KaigoJigyoshaEntity();
         kaigoJigyoshaEntity.set介護事業者Entity(entity);
         return new KaigoJigyosha(kaigoJigyoshaEntity);
+    }
+
+    /**
+     * 事業者番号を複数件指定し、合致する介護事業者番号を取得します。
+     *
+     * @param 事業者番号List 事業者番号List
+     * @param 申請日 申請日
+     * @return KaigoJigyosha nullが返る可能性があります。
+     */
+    @Transaction
+    public List<KaigoJigyosha> select介護事業者ListBy申請日(List<JigyoshaNo> 事業者番号List, FlexibleDate 申請日) {
+        requireNonNull(事業者番号List, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(申請日, UrSystemErrorMessages.値がnull.getReplacedMessage("申請日"));
+
+        IDbT7060KaigoJigyoshaMapper mapper = mapperProvider.create(IDbT7060KaigoJigyoshaMapper.class);
+        KaigoJigyoshaMapperParameter param = KaigoJigyoshaMapperParameter.createSelectByKeyParam(事業者番号List, 申請日);
+        List<DbT7060KaigoJigyoshaEntity> entityList = mapper.select介護事業者ListBy申請日(param);
+
+        if (entityList == null) {
+            return null;
+        }
+
+        List<KaigoJigyosha> jigyoshaList = new ArrayList<>();
+        for (DbT7060KaigoJigyoshaEntity entity : entityList) {
+            KaigoJigyoshaEntity kaigoJigyoshaEntity = new KaigoJigyoshaEntity();
+            kaigoJigyoshaEntity.set介護事業者Entity(entity);
+            jigyoshaList.add(new KaigoJigyosha(kaigoJigyoshaEntity));
+        }
+        return jigyoshaList;
     }
 
     /**

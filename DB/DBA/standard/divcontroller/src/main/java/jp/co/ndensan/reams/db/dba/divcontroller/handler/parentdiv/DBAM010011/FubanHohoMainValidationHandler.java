@@ -40,13 +40,13 @@ public class FubanHohoMainValidationHandler {
     public ValidationMessageControlPairs validateForMaeFukaCode() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         Decimal maeFukaCode = div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode() == null ? Decimal.ZERO
-                : new Decimal(div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().getValue().length());
+                              : new Decimal(div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().getValue().length());
         Decimal maeFukaKetasu = div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu() == null ? Decimal.ZERO
-                : div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue();
+                                : div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue();
         Decimal atoFukaCode = div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode() == null ? Decimal.ZERO
-                : new Decimal(div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().getValue().length());
+                              : new Decimal(div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().getValue().length());
         Decimal atoFukaKetasu = div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu() == null ? Decimal.ZERO
-                : div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().getValue();
+                                : div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().getValue();
         if (!maeFukaCode.equals(maeFukaKetasu)) {
             validPairs.add(new ValidationMessageControlPair(new FubanHohoMainValidationHandler.IdocheckMessages(
                     UrErrorMessages.桁数が不正, "前付加コード", div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue().toString())));
@@ -58,11 +58,20 @@ public class FubanHohoMainValidationHandler {
         return validPairs;
     }
 
-    private static class IdocheckMessages implements IValidationMessage {
+    /**
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateForHenkouKakiKubun() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.更新不可, "被保険者番号付番方法は変更不可の設定")));
+        return validPairs;
+    }
+
+    private static final class IdocheckMessages implements IValidationMessage {
 
         private final Message message;
 
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
+        private IdocheckMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

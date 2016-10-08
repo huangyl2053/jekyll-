@@ -29,7 +29,8 @@ class IdoCheckListHeaderEditor implements IIdoCheckListEditor {
     private void editHeader(IdoCheckListReportSource source) {
         source.taishoJohotitle = item.getTaishoJohotitle();
         source.printTimeStamp = item.getPrintTimeStamp();
-
+        source.tyusyutsukikanF = item.getTyusyutsukikanF();
+        source.tyusyutsukikanT = item.getTyusyutsukikanT();
     }
 
 }

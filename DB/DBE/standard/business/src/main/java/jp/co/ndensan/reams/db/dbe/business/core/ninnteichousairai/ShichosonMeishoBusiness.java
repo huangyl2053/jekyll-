@@ -34,4 +34,13 @@ public class ShichosonMeishoBusiness {
     public RString getShichosonMeisho() {
         return entity.getShichosonMeisho();
     }
+    
+    /**
+     * 市町村識別IDを返します。
+     *
+     * @return 市町村識別ID
+     */
+    public RString getShichosonShikibetuID() {
+        return entity.getShichosonShokibetsuID();
+    }
 }

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -53,6 +52,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString 星 = new RString("＊");
+    private static final RString 記号 = new RString("※");
     private static final RString 課 = new RString("課");
     private static final RString 承認 = new RString("承認");
     private static final RString 却下 = new RString("却下");
@@ -104,10 +104,8 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         source.printTimeStamp = new RStringBuilder()
                 .append(作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString())
-                .append(RString.FULL_SPACE)
                 .append(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
-                .append(RString.FULL_SPACE)
-                .append(作成).toRString();
+                .append(RString.FULL_SPACE).append(作成).toRString();
         if (null != this.対象リスト && this.対象リスト.getコード().equals(ONE)) {
             source.title = 認定者リスト;
         }
@@ -170,8 +168,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
                 && this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日() != null) {
             source.listUpper_12 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    wareki().toDateString();
         }
     }
 
@@ -214,8 +211,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
                 && this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日() != null) {
             source.listCenter_10 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    wareki().toDateString();
         }
     }
 
@@ -247,17 +243,13 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             }
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード()) {
-            source.listLower_7 = RString.isNullOrEmpty(this.訪問介護利用者負担額減額認定者Entity.
-                    get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
-                    : TokuteiShippei.toValue(this.訪問介護利用者負担額減額認定者Entity.
-                            get要介護認定申請情報_2号特定疾病コード()).get名称();
+            source.listLower_7 = 記号;
         }
         source.listLower_8 = RString.EMPTY;
         if (訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
                 && null != this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日()) {
             source.listLower_9 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    wareki().toDateString();
         }
     }
 
@@ -393,8 +385,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get申請日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate shinseiYMD) {
         if (null != shinseiYMD) {
-            source.listUpper_5 = shinseiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listUpper_5 = shinseiYMD.wareki().toDateString();
         }
         return source;
     }
@@ -402,8 +393,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get決定日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate ketteiYMD) {
         if (null != ketteiYMD) {
-            source.listUpper_6 = ketteiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listUpper_6 = ketteiYMD.wareki().toDateString();
         }
         return source;
     }
@@ -411,8 +401,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get適用開始日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate tekiyoKaishiYMD) {
         if (null != tekiyoKaishiYMD) {
-            source.listCenter_5 = tekiyoKaishiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listCenter_5 = tekiyoKaishiYMD.wareki().toDateString();
         }
         return source;
     }
@@ -420,8 +409,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get適用終了日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate tekiyoShuryoYMD) {
         if (null != tekiyoShuryoYMD) {
-            source.listCenter_6 = tekiyoShuryoYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listCenter_6 = tekiyoShuryoYMD.wareki().toDateString();
         }
         return source;
     }

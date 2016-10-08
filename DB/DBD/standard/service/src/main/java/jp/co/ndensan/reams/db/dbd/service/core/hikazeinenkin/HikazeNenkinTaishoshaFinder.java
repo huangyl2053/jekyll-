@@ -86,4 +86,23 @@ public class HikazeNenkinTaishoshaFinder {
         }
         return 非課税年金対象者List;
     }
+    
+    /**
+     * 非課税年金情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 年度 年度
+     * @return List<HikazeNenkinTaishosha>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<HikazeNenkinTaishosha> select非課税年金情報(RString 被保険者番号, RYear 年度) {
+        List<DbT4037HikazeNenkinTaishoshaEntity> list
+                = 非課税年金対象者Dac.select非課税年金情報(被保険者番号, 年度);
+        List<HikazeNenkinTaishosha> 非課税年金情報List = new ArrayList<>();
+        for (DbT4037HikazeNenkinTaishoshaEntity entity : list) {
+            非課税年金情報List.add(new HikazeNenkinTaishosha(entity));
+        }
+        return 非課税年金情報List;
+    }
 }

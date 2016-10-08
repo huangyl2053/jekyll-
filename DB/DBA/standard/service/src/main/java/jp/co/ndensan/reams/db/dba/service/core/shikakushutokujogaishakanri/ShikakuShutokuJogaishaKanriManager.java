@@ -12,10 +12,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaE
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1009ShikakuShutokuJogaishaDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -126,12 +128,20 @@ public class ShikakuShutokuJogaishaKanriManager {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        ShikakuShutokuJogaishaKanriParameter parameter = new ShikakuShutokuJogaishaKanriParameter(
-                識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
-        ShikakuShutokuJogaishaKanriEntity entity = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class).get宛名情報(parameter);
-        if (entity == null) {
-            entity = new ShikakuShutokuJogaishaKanriEntity();
+        key.set識別コード(識別コード);
+
+        IKojin kojin = null;
+        List<IKojin> kojins = ShikibetsuTaishoService.getKojinFinder().get個人s(key.build());
+        if (kojins != null && !kojins.isEmpty()) {
+            kojin = kojins.get(0);
+        }
+
+        ShikakuShutokuJogaishaKanriEntity entity = new ShikakuShutokuJogaishaKanriEntity();
+        if (kojin != null) {
+            entity.setJuminJotaiCode(kojin.get住民状態().コード());
+            entity.setMeisho(kojin.get名称().getName());
+            entity.setSeibetsuCode(kojin.get性別().code());
+            entity.setSeinengappiYMD(kojin.get生年月日().toFlexibleDate());
         }
         return new ShikakuShutokuJogaishaKanri(entity);
     }

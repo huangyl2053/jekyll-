@@ -66,7 +66,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class TaJushochiTokureisyaKanriManager {
 
-    private static final RString 他特例居住 = new RString("05");
     private static final int 年齢_65 = 65;
     private static final int 枝番 = 4;
     private static final RString 識別コード = new RString("識別コード");

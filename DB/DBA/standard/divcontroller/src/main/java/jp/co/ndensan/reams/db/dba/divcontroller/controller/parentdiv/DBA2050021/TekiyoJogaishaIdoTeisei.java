@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2050021;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.datagridTekiyoJogai_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.DBA2050021StateName;
@@ -13,19 +12,16 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.service.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -33,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -46,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TekiyoJogaishaIdoTeisei {
 
     private static final LockingKey 前排他ロックキー = new LockingKey("TekiyoJogaiIdoTeisei");
+    private static final RString COMMON_BUTTON_UPDATE = new RString("btnUpdate");
 
     /**
      * 該当者検索画面でグリッドから対象者を選択した際に実行されます。
@@ -54,15 +52,32 @@ public class TekiyoJogaishaIdoTeisei {
      * @return レスポンス
      */
     public ResponseData onLoad(TekiyoJogaishaIdoTeiseiDiv div) {
-        new TekiyoJogaishaIdoTeiseiHandler(div).initLoad(
-                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
+        TekiyoJogaishaIdoTeiseiHandler handler = new TekiyoJogaishaIdoTeiseiHandler(div);
+        ShikibetsuCode shikibetsuCode = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        handler.initLoad(shikibetsuCode);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(ShisetsuNyutaishoIdoErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+
+        if (!handler.is適用除外者(shikibetsuCode)) {
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.適用除外者未登録.getMessage());
+        }
+
         return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<TekiyoJogaishaIdoTeiseiDiv> setNotExecutableAndReturnMessage(TekiyoJogaishaIdoTeiseiDiv div, Message message) {
+        div.setDisabled(true);
+        RealInitialLocker.release(前排他ロックキー);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**
@@ -89,9 +104,10 @@ public class TekiyoJogaishaIdoTeisei {
                         DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
         } else {
-            if (is履歴期間重複(div)) {
-                throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("適用日", "解除日"));
-            }
+            //TODO n8178 城間 適用除外の履歴が正しく生成されるかを確認するために、施設入退所と適用除外の比較チェックを一時除外
+//            if (is履歴期間重複(div)) {
+//                throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("適用日", "解除日"));
+//            }
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                         UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -99,7 +115,7 @@ public class TekiyoJogaishaIdoTeisei {
             }
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 一覧データの保存(div);
                 RealInitialLocker.release(前排他ロックキー);
                 div.getKaigoKanryoMessageJo().getCcdKaigoKanryoMessage().setSuccessMessage(
@@ -120,19 +136,6 @@ public class TekiyoJogaishaIdoTeisei {
 
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBA2050021TransitionEventName.終了する).respond();
-    }
-
-    private boolean is履歴期間重複(TekiyoJogaishaIdoTeiseiDiv div) {
-        TekiyoJogaishaIdoTeiseiFinder finder = new TekiyoJogaishaIdoTeiseiFinder();
-        List<TekiyoJogaishaIdoTeiseiBusiness> entitylist = new ArrayList<>();
-        for (datagridTekiyoJogai_Row row : div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().get適用情報一覧()) {
-            TekiyoJogaishaIdoTeiseiBusiness entity = new TekiyoJogaishaIdoTeiseiBusiness(new RString(row.getRowState().toString()),
-                    row.getTekiyoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoDate().getValue().toDateString()),
-                    row.getKayijoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getKayijoDate().getValue().toDateString())
-                    );
-            entitylist.add(entity);
-        }
-        return finder.checkTekiyoJogaiKikanByTeiseiMode(entitylist);
     }
 
     private boolean is適用情報一覧変更(TekiyoJogaishaIdoTeiseiDiv div) {

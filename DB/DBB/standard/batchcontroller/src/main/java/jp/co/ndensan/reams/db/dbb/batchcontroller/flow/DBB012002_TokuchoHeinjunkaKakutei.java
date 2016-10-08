@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012002.TokuchoHeinjunkaKakuteiDbUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb0120002.TokuchoHeinjunkaKakuteiDbUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002.DBB012002_TokuchoHeinjunkaKakuteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

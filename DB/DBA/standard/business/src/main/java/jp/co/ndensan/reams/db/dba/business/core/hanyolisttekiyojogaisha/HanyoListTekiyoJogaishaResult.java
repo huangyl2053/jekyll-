@@ -175,7 +175,7 @@ public class HanyoListTekiyoJogaishaResult {
         eucCsvEntity.set適用除外適用日(set年月日(processParameter, entity.get適用除外適用日()));
         eucCsvEntity.set適用除外適用届出日(set年月日(processParameter, entity.get適用除外適用届出日()));
         RString 適用除外解除事由 = entity.get適用除外解除事由();
-        if (適用除外解除事由 == null) {
+        if (適用除外解除事由.isNullOrEmpty()) {
             eucCsvEntity.set適用除外解除事由(RString.EMPTY);
         } else {
             eucCsvEntity.set適用除外解除事由(JogaiKaijoJiyu.toValue(entity.get適用除外解除事由()).get名称());

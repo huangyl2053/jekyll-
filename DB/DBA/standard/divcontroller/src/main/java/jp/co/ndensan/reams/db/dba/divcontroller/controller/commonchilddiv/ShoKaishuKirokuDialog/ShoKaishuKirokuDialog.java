@@ -46,7 +46,7 @@ public class ShoKaishuKirokuDialog {
             ArrayList<dgKoufuKaishu_Row> dataSource = new ArrayList<>();
             ArrayList<ShoKaishuKirokuRowData> rowDataList = DataPassingConverter.deserialize(div.getGridData(), ArrayList.class);
             for (ShoKaishuKirokuRowData rowData : rowDataList) {
-                dgKoufuKaishu_Row row = ShoKaishuKirokuRowData.toRow(rowData);
+                dgKoufuKaishu_Row row = rowData.toRow();
                 dataSource.add(row);
             }
 

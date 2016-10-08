@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0150001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015001.DBB015001_KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001.DBB0150001StateName;
@@ -67,25 +66,14 @@ public class KarisanteiIdoFukaPanel {
     }
 
     /**
-     * 仮算定異動賦課「実行する」ボタンのメソッドます。
+     * 「実行する」ボタンのメソッドます。
      *
      * @param div KarisanteiIdoFukaPanelDiv
      * @return ResponseData
      */
-    public ResponseData<DBB015001_KarisanteiIdoFukaParameter> onClick_btnSantei(KarisanteiIdoFukaPanelDiv div) {
-        DBB015001_KarisanteiIdoFukaParameter paramter = getHandler(div).getバッチパラメータ();
+    public ResponseData<DBB015003_KarisanteiIdoTsuchishoHakkoParameter> onClick_btnSantei(KarisanteiIdoFukaPanelDiv div) {
+        DBB015003_KarisanteiIdoTsuchishoHakkoParameter paramter = getHandler(div).getバッチパラメータ();
         return ResponseData.of(paramter).respond();
-    }
-
-    /**
-     * 仮算定異動通知書一括発行「実行する」ボタンのメソッドます。
-     *
-     * @param div KarisanteiIdoFukaPanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<DBB015003_KarisanteiIdoTsuchishoHakkoParameter> onClick_btnIkkatsuHakko(KarisanteiIdoFukaPanelDiv div) {
-        DBB015001_KarisanteiIdoFukaParameter paramter = getHandler(div).getバッチパラメータ();
-        return ResponseData.of(paramter.toDBB015003_KarisanteiIdoTsuchishoHakkoParameter()).respond();
     }
 
     /**

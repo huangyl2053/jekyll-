@@ -6,12 +6,10 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.ShisetsuNyutaishoDialog;
 
 import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialog.ShisetsuNyutaishoDialogDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoState;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,16 +44,9 @@ public class ShisetsuNyutaishoDialog {
 
             div.getCcdShisetsuNyutaisho().initialize(shikibetsuCode, daichoShubetsu);
         } else {
-            ArrayList<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
-            ArrayList<ShisetsuNyutaishoRowData> rowDataList = DataPassingConverter.deserialize(div.getGridData(), ArrayList.class);
-            for (ShisetsuNyutaishoRowData rowData : rowDataList) {
-                dgShisetsuNyutaishoRireki_Row row = ShisetsuNyutaishoRowData.toRow(rowData);
-                dataSource.add(row);
-            }
-
             Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model = DataPassingConverter.deserialize(div.getSaveData(), Models.class);
             setState(div);
-            div.getCcdShisetsuNyutaisho().initialize(dataSource, 施設入退所情報Model);
+            div.getCcdShisetsuNyutaisho().initialize(施設入退所情報Model);
         }
 
         return ResponseData.of(div).respond();
@@ -72,9 +63,6 @@ public class ShisetsuNyutaishoDialog {
     }
 
     private boolean isEmptyGridAndSaveData(ShisetsuNyutaishoDialogDiv div) {
-        if (div.getGridData() == null || div.getGridData().isEmpty()) {
-            return true;
-        }
         return (div.getSaveData() == null || div.getSaveData().isEmpty());
     }
 
@@ -102,15 +90,10 @@ public class ShisetsuNyutaishoDialog {
      * @return ResponseData
      */
     public ResponseData<ShisetsuNyutaishoDialogDiv> onClick_btnClose(ShisetsuNyutaishoDialogDiv div) {
-        List<dgShisetsuNyutaishoRireki_Row> dataSource = div.getCcdShisetsuNyutaisho().get施設入退所履歴一覧();
-
-        ArrayList<ShisetsuNyutaishoRowData> rowDataList = new ArrayList<>();
-        for (dgShisetsuNyutaishoRireki_Row row : dataSource) {
-            rowDataList.add(new ShisetsuNyutaishoRowData(row));
-        }
-        div.setGridData(DataPassingConverter.serialize(rowDataList));
-
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model = div.getCcdShisetsuNyutaisho().getSaveData();
+        if (施設入退所情報Model == null) {
+            施設入退所情報Model = Models.create(new ArrayList<ShisetsuNyutaisho>());
+        }
         div.setSaveData(DataPassingConverter.serialize(施設入退所情報Model));
 
         return ResponseData.of(div).respond();

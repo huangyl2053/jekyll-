@@ -56,5 +56,14 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzService</artifactId>
         </dependency>
+        <!-- AAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+            <artifactId>AaxBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+            <artifactId>AaxService</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -353,7 +353,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuKetteibi().setValue(riyoshaFutangakuGengaku.get決定年月日());
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuTekiyobi().setValue(riyoshaFutangakuGengaku.get適用開始年月日());
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuYukoKigen().setValue(riyoshaFutangakuGengaku.get適用終了年月日());
-        div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuShoninShinaiRiyu().setValue(riyoshaFutangakuGengaku.get非承認理由());
+        if (riyoshaFutangakuGengaku.get非承認理由() != null) {
+            div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuShoninShinaiRiyu().setValue(riyoshaFutangakuGengaku.get非承認理由());
+        } else {
+            div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuShoninShinaiRiyu().clearValue();
+        }
     }
 
     private void クリア負担限度額認定エリア() {
@@ -389,7 +393,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getFutanGendogakuNintei().getFutanGendogakuNinteiKetteibi().setValue(futanGendogakuNintei.get決定年月日());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiTekiyobi().setValue(futanGendogakuNintei.get適用開始年月日());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiYukoKigen().setValue(futanGendogakuNintei.get適用終了年月日());
-        div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShoninShinsaiRiyu().setValue(futanGendogakuNintei.get非承認理由());
+        if (futanGendogakuNintei.get非承認理由() != null) {
+            div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShoninShinsaiRiyu().setValue(futanGendogakuNintei.get非承認理由());
+        } else {
+            div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShoninShinsaiRiyu().clearValue();
+        }
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShinseiRiyu().setValue(
                 futanGendogakuNintei.get申請理由区分() == null || futanGendogakuNintei.get申請理由区分().isEmpty()
                         ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
@@ -487,13 +495,21 @@ public class GemmenGengakuShoHakkoMainHandler {
                 setValue(shakaifukuRiyoshaFutanKeigen.get適用開始年月日());
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenYukoKigen().
                 setValue(shakaifukuRiyoshaFutanKeigen.get適用終了年月日());
-        div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu().
-                setValue(shakaifukuRiyoshaFutanKeigen.get非承認理由());
+        if (shakaifukuRiyoshaFutanKeigen.get非承認理由() != null) {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu().
+                    setValue(shakaifukuRiyoshaFutanKeigen.get非承認理由());
+        } else {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu().clearValue();
+        }
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu().
                 setValue(shakaifukuRiyoshaFutanKeigen.get申請事由());
-        div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu().setValue(
-                new RString(shakaifukuRiyoshaFutanKeigen.get軽減率_分子().toString().concat("/").
-                        concat(shakaifukuRiyoshaFutanKeigen.get軽減率_分母().toString())));
+        if (shakaifukuRiyoshaFutanKeigen.get軽減率_分母() != null && shakaifukuRiyoshaFutanKeigen.get軽減率_分子() != null) {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu().setValue(
+                    new RString(shakaifukuRiyoshaFutanKeigen.get軽減率_分子().toString().concat("/").
+                            concat(shakaifukuRiyoshaFutanKeigen.get軽減率_分母().toString())));
+        } else {
+            div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu().clearValue();
+        }
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKakuninNo().
                 setValue(shakaifukuRiyoshaFutanKeigen.get確認番号());
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei().
@@ -527,7 +543,11 @@ public class GemmenGengakuShoHakkoMainHandler {
                         ? RString.EMPTY : KetteiKubun.toValue(tokubetsuchiikiKasanGemmen.get決定区分()).get名称());
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShinseibi().setValue(tokubetsuchiikiKasanGemmen.get申請年月日());
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenTekiyobi().setValue(tokubetsuchiikiKasanGemmen.get適用開始年月日());
-        div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu().setValue(tokubetsuchiikiKasanGemmen.get非承認理由());
+        if (tokubetsuchiikiKasanGemmen.get非承認理由() != null) {
+            div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu().setValue(tokubetsuchiikiKasanGemmen.get非承認理由());
+        } else {
+            div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu().clearValue();
+        }
         if (tokubetsuchiikiKasanGemmen.get減額率() != null) {
             div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenKeigenritsu().
                     setValue(new RString(tokubetsuchiikiKasanGemmen.get減額率().getColumnValue().toString()));

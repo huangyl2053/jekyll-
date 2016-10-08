@@ -37,6 +37,7 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
     private static final int SECOND_ONE = 1;
     private static final RString IF種別_新 = new RString("0");
     private static final RString IF種別_旧 = new RString("1");
+    private static final RString 印刷する = new RString("1");
 
     /**
      * コンストラクタです。
@@ -83,15 +84,15 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
 
     private void 初期活性制御() {
         div.getRadIfShubetu().setSelectedKey(IF種別_旧);
+        div.getRadInsatsuDay().setSelectedKey(印刷する);
         div.getRadIfShubetu().setDisabled(false);
         div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_旧));
-        RDateTime date = RDate.getNowDateTime();
-        div.getTxtKonkaiShuryoDay().setValue(date.getDate());
-        div.getTxtKonkaiShuryoTime().setValue(date.getTime());
-        div.getTxtZenkaiKaishiDay().setDisabled(true);
-        div.getTxtZenkaiKaishiTime().setDisabled(true);
-        div.getTxtZenkaiShuryoDay().setDisabled(true);
-        div.getTxtZenkaiShuryoTime().setDisabled(true);
+        div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
+        div.getTxtKonkaiShuryoTime().setValue(RDate.getNowTime());
+        div.getTxtZenkaiKaishiDay().setReadOnly(true);
+        div.getTxtZenkaiKaishiTime().setReadOnly(true);
+        div.getTxtZenkaiShuryoDay().setReadOnly(true);
+        div.getTxtZenkaiShuryoTime().setReadOnly(true);
         div.getTxtNewFileName().setDisabled(true);
     }
 
@@ -102,8 +103,10 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
     public void onClick_radIfShubetu() {
         if (IF種別_新.equals(div.getRadIfShubetu().getSelectedKey())) {
             div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_新));
-        } else if (div.getRadIfShubetu().getSelectedKey() == IF種別_旧) {
+            div.getTxtNewFileName().setDisabled(true);
+        } else {
             div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_旧));
+            div.getTxtNewFileName().setDisabled(true);
         }
     }
 

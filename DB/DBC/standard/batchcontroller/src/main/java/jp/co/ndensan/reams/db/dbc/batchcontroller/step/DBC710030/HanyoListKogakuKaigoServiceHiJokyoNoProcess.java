@@ -107,10 +107,6 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     private static final RString CODE = new RString("0003");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
-    private static final RString SPLIT = new RString("|");
-    private static final RString 区分_1 = new RString("1");
-    private static final RString 区分_2 = new RString("2");
-    private RString preBreakKey;
     private HanyoListKogakuKaigoProcessParameter parameter;
     private HanyoListKogakuKaigoEucCsvNoEntityEditor dataNoCreate;
 //    private HanyouRisutoSyuturyokuEntity preEntity;

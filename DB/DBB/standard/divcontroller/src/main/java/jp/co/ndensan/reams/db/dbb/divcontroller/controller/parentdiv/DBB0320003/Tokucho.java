@@ -156,8 +156,8 @@ public class Tokucho {
     private void setDivFor翌年度(TokuchoDiv div, ChoshuHoho model) {
         // 翌年度情報に値がなく、本徴収情報に値がある 場合
         if ((model.get翌年度仮徴収_基礎年金番号() == null || model.get翌年度仮徴収_基礎年金番号().isEmpty())
-                && (model.get翌年度仮徴収_年金コード() == null || model.get翌年度仮徴収_年金コード().isEmpty())
-                && (model.get翌年度仮徴収_捕捉月() == null || model.get翌年度仮徴収_捕捉月().isEmpty())) {
+            && (model.get翌年度仮徴収_年金コード() == null || model.get翌年度仮徴収_年金コード().isEmpty())
+            && (model.get翌年度仮徴収_捕捉月() == null || model.get翌年度仮徴収_捕捉月().isEmpty())) {
             // 介護徴収方法．特別徴収停止事由コード=空白 のとき、翌年度選択も本徴収情報と同じ内容を画面表示する。
             if (model.get特別徴収停止事由コード() == null || model.get特別徴収停止事由コード().isEmpty()) {
                 setDivFor本算定(div, model);
@@ -262,12 +262,17 @@ public class Tokucho {
         return new dgTokuChoIdoAndIrai_Row(
                 kaifuJoho.get処理対象年月() != null ? kaifuJoho.get処理対象年月().wareki().toDateString() : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null
-                ? kaifuJoho.get通知内容コード().value().get通知内容コード().concat(kaifuJoho.get通知内容コード().value().get通知内容名称()) : RString.EMPTY,
+                ? kaifuJoho.get通知内容コード().value().get通知内容コード().concat(RString.HALF_SPACE).concat(kaifuJoho.get通知内容コード().value().get通知内容名称()) : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null && kaifuJoho.getDT各種区分() != null
                 ? (各種区分 != null ? 各種区分.get各種区分名称() : RString.EMPTY) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄１() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄２() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄３() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY);
+                kaifuJoho.getDT各種金額欄１() != null ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄２() != null ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄３() != null ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY);
+    }
+
+    private Decimal changeStrToDecimal(String str) {
+        long val = str.isEmpty() ? Long.parseLong("0") : Long.valueOf(str);
+        return new Decimal(val);
     }
 
     private dgTokuchoKekka_Row toDgTokuchoKekka_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
@@ -276,14 +281,14 @@ public class Tokucho {
         return new dgTokuchoKekka_Row(
                 kaifuJoho.get処理対象年月() != null ? kaifuJoho.get処理対象年月().wareki().toDateString() : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null
-                ? kaifuJoho.get通知内容コード().value().get通知内容コード().concat(kaifuJoho.get通知内容コード().value().get通知内容名称()) : RString.EMPTY,
+                ? kaifuJoho.get通知内容コード().value().get通知内容コード().concat(RString.HALF_SPACE).concat(kaifuJoho.get通知内容コード().value().get通知内容名称()) : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null && kaifuJoho.getDT各種区分() != null
-                ? (各種区分 != null ? 各種区分.get各種区分名称() : RString.EMPTY) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄１() != null && !kaifuJoho.getDT各種金額欄１().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄２() != null && !kaifuJoho.getDT各種金額欄２().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄３() != null && !kaifuJoho.getDT各種金額欄３().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY,
+                ? (各種区分 != null ? 各種区分.get各種区分コード().concat(RString.HALF_SPACE).concat(各種区分.get各種区分名称()) : RString.EMPTY) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄１() != null && !kaifuJoho.getDT各種金額欄１().isEmpty() ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄２() != null && !kaifuJoho.getDT各種金額欄２().isEmpty() ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄３() != null && !kaifuJoho.getDT各種金額欄３().isEmpty() ? FukaMapper.addComma(changeStrToDecimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null && kaifuJoho.getDT処理結果() != null
-                ? (処理結果 != null ? 処理結果.get処理結果名称() : RString.EMPTY) : RString.EMPTY);
+                ? (処理結果 != null ? 処理結果.get処理結果コード().concat(RString.HALF_SPACE).concat(処理結果.get処理結果名称()) : RString.EMPTY) : RString.EMPTY);
     }
 
     private void clearDiv(TokuchoDiv div) {

@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * おむつ使用証明書画面のHandlerです。
@@ -70,12 +69,10 @@ public class OmutsusiyoSyomeishoHandler {
         RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
         if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), true);
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
         List<IryohiKojoEntityResult> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(被保険者番号, IryoHiKojoNaiyo.おむつ使用証明書.getコード());
         if (医療費控除リスト.isEmpty()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), true);
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("おむつ使用証明書"));
         }
 

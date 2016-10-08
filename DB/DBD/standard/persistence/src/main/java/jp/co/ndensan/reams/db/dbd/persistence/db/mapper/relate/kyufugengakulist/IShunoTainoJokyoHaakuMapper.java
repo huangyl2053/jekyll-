@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32003.ShunoJokyoHaakuMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011.ShunoJokyoHaakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoJokyoHaakuEntity;
 
 /**

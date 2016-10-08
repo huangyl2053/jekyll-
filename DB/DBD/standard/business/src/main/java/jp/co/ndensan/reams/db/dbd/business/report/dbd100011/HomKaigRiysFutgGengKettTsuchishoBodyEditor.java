@@ -18,7 +18,11 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 訪問介護等利用者負担額減額決定通知書ボディEditorです。
@@ -116,7 +120,8 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         source.hihokenshaNo8 = 訪問介護利用者負担額減額.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
         source.hihokenshaNo9 = 訪問介護利用者負担額減額.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
         source.hihokenshaNo10 = 訪問介護利用者負担額減額.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
-        source.ketteiYMD = 訪問介護利用者負担額減額.get決定年月日().wareki().toDateString();
+        source.ketteiYMD = 訪問介護利用者負担額減額.get決定年月日().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
         source.ninteiKekka3 = RString.EMPTY;
         source.ninteiKekka4 = RString.EMPTY;
@@ -124,12 +129,14 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         source.ninteiKekka6 = RString.EMPTY;
         source.ninteiKekka7 = RString.EMPTY;
         if (KetteiKubun.承認する.getコード().equals(訪問介護利用者負担額減額.get決定区分())) {
-            source.tekiyoYMD = 訪問介護利用者負担額減額.get適用開始年月日().wareki().toDateString();
+            source.tekiyoYMD = 訪問介護利用者負担額減額.get適用開始年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.ninteiKekka1 = new RString("（承認内容）");
             source.shoninSuru = 決定区分_承認;
             source.ninteiKekka2 = new RString(
                     "　　　給付率　　".concat(訪問介護利用者負担額減額.get給付率().getColumnValue().toString().concat("　/　100")));
-            source.yukoYMD = 訪問介護利用者負担額減額.get適用終了年月日().wareki().toDateString();
+            source.yukoYMD = 訪問介護利用者負担額減額.get適用終了年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
             source.futanshaNo1 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_0, INDEX_1);
             source.futanshaNo2 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_1, INDEX_2);
@@ -341,6 +348,7 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
         source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
         source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
         source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
         source.koinShoryaku = ninshoshaSource.koinShoryaku;

@@ -69,7 +69,7 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(RDate.getNowTime());
         }
     }
-
+    
     /**
      * 「今回開始日、今回開始時」＞「前回終了日、前回終了時」の場合、エラーとする。
      *
@@ -83,7 +83,7 @@ public class KobetsuJikoRenkeiInfoSakuseiHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        Validate(DbzErrorMessages.期間が不正_未来日付不可, "今回開始日と今回開始時", "前回終了日と前回終了時");
+        Validate(DbzErrorMessages.期間が不正_未来日付不可, "今回開始日時", "前回終了日時");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakuninte
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -88,8 +90,19 @@ public class FutangendogakuShinsei {
 
         ArrayList<FutanGendogakuNinteiViewState> resultList = getHandler(div).onLoad(識別コード, 被保険者番号, 申請一覧情報ArrayList);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, resultList);
-
         div.getShinseiDetail().setDisabled(true);
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getShinseiList().getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).respond();
         } else {
@@ -207,6 +220,19 @@ public class FutangendogakuShinsei {
             ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
             ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, getHandler(div).onSelectByDeleteButton(list));
         }
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        div.getBtnAddShinsei().setDisabled(false);
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -255,6 +281,15 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnShinseiKakutei(FutangendogakuShinseiDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (!div.getTxtShinseiYMD().getValue().isEmpty()) {
+            pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShinseiYMD()));
+        }
+        NinteiShinseiValidationHandler validationHandler = getValidationHandler();
+        pairs = validationHandler.預貯金_チェック(pairs, div);
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
@@ -265,6 +300,18 @@ public class FutangendogakuShinsei {
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, getHandler(div).onClick_btnShinseiKakutei(list, 資格対象者));
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        for (dgShinseiList_Row row : rows) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
         div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }

@@ -14,7 +14,7 @@ and open the template in the editor.-->
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.KousinSinseiTaishougaishaJohoMyBatisParameter"
             resultMap="ResultMap_KousinSinseiTaishougaishaJohoEntity" fetchSize="500">
         SELECT
-        A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" AS hihokenshaNo
+        A."dbT4018KaigohFutanGengkNint_hihokenshaNo" AS hihokenshaNo
         FROM (
         SELECT
         <include refid="allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
@@ -41,7 +41,7 @@ and open the template in the editor.-->
         SELECT
         <include refid="allColumns_DbT4031ShinseishoHakkoKohoshas" />
         FROM  rgdb."DbT4031ShinseishoHakkoKohoshas" AS "DbT4031ShinseishoHakkoKohoshas"
-        WHERE "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" = A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo"
+        WHERE "DbT4031ShinseishoHakkoKohoshas"."hihokenshaNo" = A."dbT4018KaigohFutanGengkNint_hihokenshaNo"
         AND "DbT4031ShinseishoHakkoKohoshas"."haakuShoriID" = #{把握処理ID}
         )
     </select>
@@ -195,51 +195,51 @@ and open the template in the editor.-->
         "DbT4031ShinseishoHakkoKohoshas"."jigyoshaNo" as "dbT4031ShinseishoHakkoKohoshas_jigyoshaNo"
     </sql>
     <sql id="allColumns_DbT4018KaigoHokenFutanGendogakuNintei">
-        "DbT4018KaigoHokenFutanGendogakuNintei"."shoKisaiHokenshaNo" as "dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" as "dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo" as "dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."insertDantaiCd" as "dbT4018KaigoHokenFutanGendogakuNintei_insertDantaiCd",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."insertTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_insertTimestamp",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."insertReamsLoginId" as "dbT4018KaigoHokenFutanGendogakuNintei_insertReamsLoginId",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."insertContextId" as "dbT4018KaigoHokenFutanGendogakuNintei_insertContextId",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."isDeleted" as "dbT4018KaigoHokenFutanGendogakuNintei_isDeleted",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."updateCount" as "dbT4018KaigoHokenFutanGendogakuNintei_updateCount",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateTimestamp",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateReamsLoginId" as "dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateReamsLoginId",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."hiShoninRiyu" as "dbT4018KaigoHokenFutanGendogakuNintei_hiShoninRiyu",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_kyusochishaKubun",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiRiyuKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_shinseiRiyuKubun",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai" as "dbT4018KaigoHokenFutanGendogakuNintei_riyoshaFutanDankai",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_kyokaisoGaitoshaKubun",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_gekihenKanwaSochiTaishoshaKubun",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."kyoshitsuShubetsu" as "dbT4018KaigoHokenFutanGendogakuNintei_kyoshitsuShubetsu",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."shokuhiFutanGendogaku" as "dbT4018KaigoHokenFutanGendogakuNintei_shokuhiFutanGendogaku",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeKoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_unitTypeKoshitsu",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeJunKoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_unitTypeJunKoshitsu",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Tokuyo" as "dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Tokuyo",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Roken_Ryoyo" as "dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Roken_Ryoyo",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."tashoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_tashoshitsu",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaUmuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaUmuFlag",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimei" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimei",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimeiKana" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimeiKana",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaSeinenGappiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaSeinenGappiYMD",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaRenrakusaki" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaRenrakusaki",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho2" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho2",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaKazeiKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaKazeiKubun",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShikibetsuCd" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShikibetsuCd",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinShinkokuKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_yochokinShinkokuKubun",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinGaku" as "dbT4018KaigoHokenFutanGendogakuNintei_yochokinGaku",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."yukashoukenGaisangaku" as "dbT4018KaigoHokenFutanGendogakuNintei_yukashoukenGaisangaku",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."sonotaKingaku" as "dbT4018KaigoHokenFutanGendogakuNintei_sonotaKingaku",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."ninteiBatchExecutedTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_ninteiBatchExecutedTimestamp",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."izokuNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_izokuNenkinJukyuFlag",
-        "DbT4018KaigoHokenFutanGendogakuNintei"."shogaiNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_shogaiNenkinJukyuFlag"
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shoKisaiHokenshaNo" as "dbT4018KaigohFutanGengkNint_shoKisaiHokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" as "dbT4018KaigohFutanGengkNint_hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo" as "dbT4018KaigohFutanGengkNint_rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertDantaiCd" as "dbT4018KaigohFutanGengkNint_insertDantaiCd",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertTimestamp" as "dbT4018KaigohFutanGengkNint_insertTimestamp",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertReamsLoginId" as "dbT4018KaigohFutanGengkNint_insertReamsLoginId",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."insertContextId" as "dbT4018KaigohFutanGengkNint_insertContextId",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."isDeleted" as "dbT4018KaigohFutanGengkNint_isDeleted",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."updateCount" as "dbT4018KaigohFutanGengkNint_updateCount",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateTimestamp" as "dbT4018KaigohFutanGengkNint_lastUpdateTimestamp",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateReamsLoginId" as "dbT4018KaigohFutanGengkNint_lastUpdateReamsLoginId",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD" as "dbT4018KaigohFutanGengkNint_shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" as "dbT4018KaigohFutanGengkNint_ketteiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" as "dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD" as "dbT4018KaigohFutanGengkNint_tekiyoShuryoYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" as "dbT4018KaigohFutanGengkNint_ketteiKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hiShoninRiyu" as "dbT4018KaigohFutanGengkNint_hiShoninRiyu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun" as "dbT4018KaigohFutanGengkNint_kyusochishaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiRiyuKubun" as "dbT4018KaigohFutanGengkNint_shinseiRiyuKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai" as "dbT4018KaigohFutanGengkNint_riyoshaFutanDankai",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun" as "dbT4018KaigohFutanGengkNint_kyokaisoGaitoshaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun" as "dbT4018KaigohFutanGengkNint_gekihenKanwaSochiTaishoshaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyoshitsuShubetsu" as "dbT4018KaigohFutanGengkNint_kyoshitsuShubetsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shokuhiFutanGendogaku" as "dbT4018KaigohFutanGengkNint_shokuhiFutanGendogaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeKoshitsu" as "dbT4018KaigohFutanGengkNint_unitTypeKoshitsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeJunKoshitsu" as "dbT4018KaigohFutanGengkNint_unitTypeJunKoshitsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Tokuyo" as "dbT4018KaigohFutanGengkNint_juraiTypeKoshitsu_Tokuyo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Roken_Ryoyo" as "dbT4018KaigohFutanGengkNint_juraiTypeKoshitsu_Roken_Ryoyo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tashoshitsu" as "dbT4018KaigohFutanGengkNint_tashoshitsu",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaUmuFlag" as "dbT4018KaigohFutanGengkNint_haigushaUmuFlag",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimei" as "dbT4018KaigohFutanGengkNint_haigushaShimei",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimeiKana" as "dbT4018KaigohFutanGengkNint_haigushaShimeiKana",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaSeinenGappiYMD" as "dbT4018KaigohFutanGengkNint_haigushaSeinenGappiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho" as "dbT4018KaigohFutanGengkNint_haigushaJusho",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaRenrakusaki" as "dbT4018KaigohFutanGengkNint_haigushaRenrakusaki",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho2" as "dbT4018KaigohFutanGengkNint_haigushaJusho2",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaKazeiKubun" as "dbT4018KaigohFutanGengkNint_haigushaKazeiKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShikibetsuCd" as "dbT4018KaigohFutanGengkNint_haigushaShikibetsuCd",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinShinkokuKubun" as "dbT4018KaigohFutanGengkNint_yochokinShinkokuKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinGaku" as "dbT4018KaigohFutanGengkNint_yochokinGaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."yukashoukenGaisangaku" as "dbT4018KaigohFutanGengkNint_yukashoukenGaisangaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."sonotaKingaku" as "dbT4018KaigohFutanGengkNint_sonotaKingaku",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ninteiBatchExecutedTimestamp" as "dbT4018KaigohFutanGengkNint_ninteiBatchExecutedTimestamp",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."izokuNenkinJukyuFlag" as "dbT4018KaigohFutanGengkNint_izokuNenkinJukyuFlag",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shogaiNenkinJukyuFlag" as "dbT4018KaigohFutanGengkNint_shogaiNenkinJukyuFlag"
     </sql>
     <sql id="allColumns_DbT4014RiyoshaFutangakuGengaku">
         "DbT4014RiyoshaFutangakuGengaku"."shoKisaiHokenshaNo" as "dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo",

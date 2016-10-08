@@ -26,7 +26,7 @@ public class DBD519003_YokaigoNinteiSoshitsuDataSakusei extends
 
     @Override
     protected void defineFlow() {
-        if (印刷する == getParameter().toRenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter().getHanteiiraiichiranhyou()) {
+        if (印刷する.equals(getParameter().toRenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter().getHanteiiraiichiranhyou())) {
             executeStep(資格喪失情報PROCESSを実行);
         }
         executeStep(資格喪失情報CSVPROCESSを実行);

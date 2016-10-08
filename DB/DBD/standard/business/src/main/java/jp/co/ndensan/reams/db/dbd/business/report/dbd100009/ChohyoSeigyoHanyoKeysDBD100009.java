@@ -25,7 +25,7 @@ public enum ChohyoSeigyoHanyoKeysDBD100009 {
     /**
      * コード:なし 名称:帳票タイトル__旧措置者用 略称:定義なし
      */
-    帳票タイトル__旧措置者用("帳票タイトル__旧措置者用");
+    帳票タイトル__旧措置者用("帳票タイトル_旧措置者用");
 
     private final RString fullName;
 

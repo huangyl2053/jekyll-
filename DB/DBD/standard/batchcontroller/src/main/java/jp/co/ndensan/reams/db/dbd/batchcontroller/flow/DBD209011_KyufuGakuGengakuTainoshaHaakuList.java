@@ -13,7 +13,13 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuG
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 給付額減額滞納者把握リスト（バッチ）フロークラスです．
@@ -26,6 +32,26 @@ public class DBD209011_KyufuGakuGengakuTainoshaHaakuList extends BatchFlowBase<D
     private static final String 対象者把握情報の取得 = "kyufuGengakuHaakuListTaishoTokutei";
     private static final String 収納滞納状況把握情報の取得 = "shunoTainoJokyoHaaku";
     private static final String 給付額減額滞納者把握情報取得 = "kyufuGengakuHaakuListSakusei";
+
+    private RString バッチ起動時処理日時;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_8 = 8;
+
+    @Override
+    protected void initialize() {
+        RTime time = RDate.getNowTime();
+        RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
+        RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
+        RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
+        RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
+        バッチ起動時処理日時 = new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                fillType(FillType.ZERO).toDateString().toString() + RString.HALF_SPACE + timeFormat);
+    }
 
     @Override
     protected void defineFlow() {
@@ -76,6 +102,6 @@ public class DBD209011_KyufuGakuGengakuTainoshaHaakuList extends BatchFlowBase<D
     @Step(給付額減額滞納者把握情報取得)
     protected IBatchFlowCommand kyufuGengakuHaakuListSakusei() {
         return loopBatch(KyufuGengakuHaakuListSakuseiProcess.class)
-                .arguments(getParameter().toKyufuGengakuHaakuListSakuseiProcessParameter(RDateTime.MAX)).define();
+                .arguments(getParameter().toKyufuGengakuHaakuListSakuseiProcessParameter(バッチ起動時処理日時)).define();
     }
 }

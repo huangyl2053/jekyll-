@@ -7,9 +7,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Iryohoken
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -27,8 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  */
 public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohokenRirekiCommonChildDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -151,7 +151,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void setBtnIryohokenTsuika(Button btnIryohokenTsuika) {
+    public void  setBtnIryohokenTsuika(Button btnIryohokenTsuika) {
         this.getPlIryohokenRireki().setBtnIryohokenTsuika(btnIryohokenTsuika);
     }
 
@@ -161,7 +161,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void setDgIryohokenIchiran(DataGrid<dgIryohokenIchiran_Row> dgIryohokenIchiran) {
+    public void  setDgIryohokenIchiran(DataGrid<dgIryohokenIchiran_Row> dgIryohokenIchiran) {
         this.getPlIryohokenRireki().setDgIryohokenIchiran(dgIryohokenIchiran);
     }
 
@@ -171,7 +171,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void setPnlIryohokenJoho(pnlIryohokenJohoDiv pnlIryohokenJoho) {
+    public void  setPnlIryohokenJoho(pnlIryohokenJohoDiv pnlIryohokenJoho) {
         this.getPlIryohokenRireki().setPnlIryohokenJoho(pnlIryohokenJoho);
     }
 
@@ -181,7 +181,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void setBtnIryohokenKakute(Button btnIryohokenKakute) {
+    public void  setBtnIryohokenKakute(Button btnIryohokenKakute) {
         this.getPlIryohokenRireki().setBtnIryohokenKakute(btnIryohokenKakute);
     }
 
@@ -191,7 +191,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     }
 
     @JsonIgnore
-    public void setBtnCancel(Button btnCancel) {
+    public void  setBtnCancel(Button btnCancel) {
         this.getPlIryohokenRireki().setBtnCancel(btnCancel);
     }
 

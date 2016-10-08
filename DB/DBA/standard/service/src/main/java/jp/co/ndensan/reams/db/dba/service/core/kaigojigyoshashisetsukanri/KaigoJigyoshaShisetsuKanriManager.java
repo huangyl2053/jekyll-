@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -92,7 +93,8 @@ public class KaigoJigyoshaShisetsuKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaShisetsuKanriManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaShisetsuKanriManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaShisetsuKanriManager}のインスタンス
      */
     public static KaigoJigyoshaShisetsuKanriManager createInstance() {
         return InstanceProvider.create(KaigoJigyoshaShisetsuKanriManager.class);
@@ -150,8 +152,8 @@ public class KaigoJigyoshaShisetsuKanriManager {
                 break;
             }
             if (count != relateEntityList.size() && relateEntity.getYukoShuryoYMD() != null
-                    && relateEntityList.get(count).getYukoKaishiYMD() != null
-                    && relateEntityList.get(count).getYukoKaishiYMD().isBeforeOrEquals(relateEntity.getYukoShuryoYMD())) {
+                && relateEntityList.get(count).getYukoKaishiYMD() != null
+                && relateEntityList.get(count).getYukoKaishiYMD().isBeforeOrEquals(relateEntity.getYukoShuryoYMD())) {
                 重複チェックフラグ = true;
                 break;
             }
@@ -170,20 +172,35 @@ public class KaigoJigyoshaShisetsuKanriManager {
     @Transaction
     public void サービスと事業者期間関連のチェック(List<ServiceJohoBusiness> サービス一覧List,
             FlexibleDate 事業者の有効開始日, FlexibleDate 事業者の有効終了日) {
-        StringBuilder エラーメッセージ = new StringBuilder();
+        if (事業者の有効終了日 == null || 事業者の有効終了日.isEmpty()) {
+            事業者の有効終了日 = FlexibleDate.MAX;
+        }
+
+        RStringBuilder エラーメッセージ = new RStringBuilder();
         for (ServiceJohoBusiness サービス一覧 : サービス一覧List) {
+            RString サービス略称 = サービス一覧.getサービス種類略称();
             FlexibleDate 有効開始日 = サービス一覧.get有効開始日();
             FlexibleDate 有効終了日 = サービス一覧.get有効終了日();
-            if (有効終了日 != null && 有効終了日.isEmpty() && 事業者の有効開始日.isBefore(有効終了日)) {
-                エラーメッセージ.append(サービス一覧.getサービス種類略称());
-                throw new ApplicationException(DbzErrorMessages.適用期間対象外.getMessage().replace(エラーメッセージ.toString()));
+
+            if (事業者の有効開始日 == null || 事業者の有効開始日.isEmpty()) {
+                エラーメッセージ.append(サービス略称);
+                エラーメッセージ.append(new RString(" "));
+                continue;
             }
-            if (有効終了日 != null && 有効終了日.isEmpty() && 事業者の有効終了日.isBefore(有効開始日)) {
-                エラーメッセージ.append(サービス一覧.getサービス種類略称());
-                throw new ApplicationException(DbzErrorMessages.適用期間対象外.getMessage().replace(エラーメッセージ.toString()));
+            if (有効終了日 != null && !有効終了日.isEmpty() && 事業者の有効開始日.isBefore(有効終了日)) {
+                エラーメッセージ.append(サービス略称);
+                エラーメッセージ.append(new RString(" "));
+                continue;
             }
-            エラーメッセージ.append(new RString(" "));
+            if (有効開始日 != null && !有効開始日.isEmpty() && 事業者の有効終了日.isBefore(有効開始日)) {
+                エラーメッセージ.append(サービス略称);
+                エラーメッセージ.append(new RString(" "));
+            }
         }
+        if (エラーメッセージ.toRString().isEmpty()) {
+            return;
+        }
+        throw new ApplicationException(DbzErrorMessages.適用期間対象外.getMessage().replace(エラーメッセージ.toRString().toString()));
     }
 
     /**

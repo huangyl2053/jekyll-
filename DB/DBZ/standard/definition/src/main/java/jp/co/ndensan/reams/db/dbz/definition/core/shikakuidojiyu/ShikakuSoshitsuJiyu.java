@@ -10,6 +10,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShikakuSoshitsuJiyu {
 
     /**
+     * 空の場合に設定される項目
+     */
+    EMPTY("", "", ""),
+    /**
      * コード:51 名称:転出 備考:転出【資格喪失】
      */
     転出("51", "転出", "転出【資格喪失】"),
@@ -40,11 +44,7 @@ public enum ShikakuSoshitsuJiyu {
     /**
      * コード:99 名称:その他 備考:その他の理由により資格を喪失【資格喪失】
      */
-    その他("99", "その他", "その他の理由により資格を喪失【資格喪失】"),
-    /**
-     * 空の場合に設定される項目
-     */
-    EMPTY("", "", "");
+    その他("99", "その他", "その他の理由により資格を喪失【資格喪失】");
 
     private final RString code;
     private final RString fullName;

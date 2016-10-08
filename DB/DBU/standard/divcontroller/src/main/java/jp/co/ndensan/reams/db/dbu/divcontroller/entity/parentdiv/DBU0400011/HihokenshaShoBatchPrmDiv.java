@@ -4,27 +4,20 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * HihokenshaShoBatchPrm のクラスファイル
- *
- * @reamsid_L DBU-0420-010 duanzhanli
+ * HihokenshaShoBatchPrm のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class HihokenshaShoBatchPrmDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -49,6 +42,18 @@ public class HihokenshaShoBatchPrmDiv extends PanelBatchParameter {
     private HorizontalLine lin3;
     @JsonProperty("hihokenshaShoShutsuryokuJun")
     private ChohyoShutsuryokujunDiv hihokenshaShoShutsuryokuJun;
+    @JsonProperty("txtKonkaiChushutsuFromYMDBack")
+    private TextBoxDate txtKonkaiChushutsuFromYMDBack;
+    @JsonProperty("txtKonkaiChushutsuFromTimeBack")
+    private TextBoxTime txtKonkaiChushutsuFromTimeBack;
+    @JsonProperty("txtKonkaiChushutsuToYMDBack")
+    private TextBoxDate txtKonkaiChushutsuToYMDBack;
+    @JsonProperty("txtKonkaiChushutsuToTimeBack")
+    private TextBoxTime txtKonkaiChushutsuToTimeBack;
+    @JsonProperty("txtKonkaiShoriKijunYMDBack")
+    private TextBoxDate txtKonkaiShoriKijunYMDBack;
+    @JsonProperty("txtKonkaiShoriKijunTimeBack")
+    private TextBoxTime txtKonkaiShoriKijunTimeBack;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -210,6 +215,114 @@ public class HihokenshaShoBatchPrmDiv extends PanelBatchParameter {
     }
 
     /*
+     * gettxtKonkaiChushutsuFromYMDBack
+     * @return txtKonkaiChushutsuFromYMDBack
+     */
+    @JsonProperty("txtKonkaiChushutsuFromYMDBack")
+    public TextBoxDate getTxtKonkaiChushutsuFromYMDBack() {
+        return txtKonkaiChushutsuFromYMDBack;
+    }
+
+    /*
+     * settxtKonkaiChushutsuFromYMDBack
+     * @param txtKonkaiChushutsuFromYMDBack txtKonkaiChushutsuFromYMDBack
+     */
+    @JsonProperty("txtKonkaiChushutsuFromYMDBack")
+    public void setTxtKonkaiChushutsuFromYMDBack(TextBoxDate txtKonkaiChushutsuFromYMDBack) {
+        this.txtKonkaiChushutsuFromYMDBack = txtKonkaiChushutsuFromYMDBack;
+    }
+
+    /*
+     * gettxtKonkaiChushutsuFromTimeBack
+     * @return txtKonkaiChushutsuFromTimeBack
+     */
+    @JsonProperty("txtKonkaiChushutsuFromTimeBack")
+    public TextBoxTime getTxtKonkaiChushutsuFromTimeBack() {
+        return txtKonkaiChushutsuFromTimeBack;
+    }
+
+    /*
+     * settxtKonkaiChushutsuFromTimeBack
+     * @param txtKonkaiChushutsuFromTimeBack txtKonkaiChushutsuFromTimeBack
+     */
+    @JsonProperty("txtKonkaiChushutsuFromTimeBack")
+    public void setTxtKonkaiChushutsuFromTimeBack(TextBoxTime txtKonkaiChushutsuFromTimeBack) {
+        this.txtKonkaiChushutsuFromTimeBack = txtKonkaiChushutsuFromTimeBack;
+    }
+
+    /*
+     * gettxtKonkaiChushutsuToYMDBack
+     * @return txtKonkaiChushutsuToYMDBack
+     */
+    @JsonProperty("txtKonkaiChushutsuToYMDBack")
+    public TextBoxDate getTxtKonkaiChushutsuToYMDBack() {
+        return txtKonkaiChushutsuToYMDBack;
+    }
+
+    /*
+     * settxtKonkaiChushutsuToYMDBack
+     * @param txtKonkaiChushutsuToYMDBack txtKonkaiChushutsuToYMDBack
+     */
+    @JsonProperty("txtKonkaiChushutsuToYMDBack")
+    public void setTxtKonkaiChushutsuToYMDBack(TextBoxDate txtKonkaiChushutsuToYMDBack) {
+        this.txtKonkaiChushutsuToYMDBack = txtKonkaiChushutsuToYMDBack;
+    }
+
+    /*
+     * gettxtKonkaiChushutsuToTimeBack
+     * @return txtKonkaiChushutsuToTimeBack
+     */
+    @JsonProperty("txtKonkaiChushutsuToTimeBack")
+    public TextBoxTime getTxtKonkaiChushutsuToTimeBack() {
+        return txtKonkaiChushutsuToTimeBack;
+    }
+
+    /*
+     * settxtKonkaiChushutsuToTimeBack
+     * @param txtKonkaiChushutsuToTimeBack txtKonkaiChushutsuToTimeBack
+     */
+    @JsonProperty("txtKonkaiChushutsuToTimeBack")
+    public void setTxtKonkaiChushutsuToTimeBack(TextBoxTime txtKonkaiChushutsuToTimeBack) {
+        this.txtKonkaiChushutsuToTimeBack = txtKonkaiChushutsuToTimeBack;
+    }
+
+    /*
+     * gettxtKonkaiShoriKijunYMDBack
+     * @return txtKonkaiShoriKijunYMDBack
+     */
+    @JsonProperty("txtKonkaiShoriKijunYMDBack")
+    public TextBoxDate getTxtKonkaiShoriKijunYMDBack() {
+        return txtKonkaiShoriKijunYMDBack;
+    }
+
+    /*
+     * settxtKonkaiShoriKijunYMDBack
+     * @param txtKonkaiShoriKijunYMDBack txtKonkaiShoriKijunYMDBack
+     */
+    @JsonProperty("txtKonkaiShoriKijunYMDBack")
+    public void setTxtKonkaiShoriKijunYMDBack(TextBoxDate txtKonkaiShoriKijunYMDBack) {
+        this.txtKonkaiShoriKijunYMDBack = txtKonkaiShoriKijunYMDBack;
+    }
+
+    /*
+     * gettxtKonkaiShoriKijunTimeBack
+     * @return txtKonkaiShoriKijunTimeBack
+     */
+    @JsonProperty("txtKonkaiShoriKijunTimeBack")
+    public TextBoxTime getTxtKonkaiShoriKijunTimeBack() {
+        return txtKonkaiShoriKijunTimeBack;
+    }
+
+    /*
+     * settxtKonkaiShoriKijunTimeBack
+     * @param txtKonkaiShoriKijunTimeBack txtKonkaiShoriKijunTimeBack
+     */
+    @JsonProperty("txtKonkaiShoriKijunTimeBack")
+    public void setTxtKonkaiShoriKijunTimeBack(TextBoxTime txtKonkaiShoriKijunTimeBack) {
+        this.txtKonkaiShoriKijunTimeBack = txtKonkaiShoriKijunTimeBack;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -350,11 +463,6 @@ public class HihokenshaShoBatchPrmDiv extends PanelBatchParameter {
     @JsonIgnore
     public Label getLblComment() {
         return this.getTblChushutsuKikan().getLblComment();
-    }
-
-    @JsonIgnore
-    public Label getLblKofuYMDTitel() {
-        return this.getTblKofuSaiHakko().getLblKofuYMDTitel();
     }
 
     @JsonIgnore

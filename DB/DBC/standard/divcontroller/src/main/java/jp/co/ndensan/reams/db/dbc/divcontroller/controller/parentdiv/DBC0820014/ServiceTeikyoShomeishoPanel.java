@@ -50,15 +50,27 @@ public class ServiceTeikyoShomeishoPanel {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
-                toString())).getYearMonth().toDateString());
+        FlexibleYearMonth サービス年月;
+        try {
+            サービス年月 = new FlexibleYearMonth((new RDate(
+                    ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
+                    toString())).getYearMonth().toDateString());
+        } catch (ClassCastException e) {
+            サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+            ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月.toDateString());
+        }
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
 
         List<ShikibetsuNoKanri> 証明書リスト = SyokanbaraihiShikyuShinseiKetteManager
                 .createInstance().getShikibetsuNoKanri(サービス年月);
-        RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.申請日, RString.class).toString());
+        RDate 申請日;
+        try {
+            申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.申請日, RString.class).toString());
+        } catch (ClassCastException e) {
+            申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
+            ViewStateHolder.put(ViewStateKeys.申請日, 申請日.toDateString());
+        }
         ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
         ViewStateHolder.put(ViewStateKeys.詳細データ, 償還払支給申請);
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai

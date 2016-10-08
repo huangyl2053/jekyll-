@@ -51,7 +51,8 @@ public class NenreiTotatsushaTorokuListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NenreiTotatsushaTorokuListFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NenreiTotatsushaTorokuListFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NenreiTotatsushaTorokuListFinder}のインスタンス
      */
     public static NenreiTotatsushaTorokuListFinder createInstance() {
         return InstanceProvider.create(NenreiTotatsushaTorokuListFinder.class);
@@ -86,7 +87,7 @@ public class NenreiTotatsushaTorokuListFinder {
             FlexibleDate 前回終了日,
             FlexibleDate 今回開始日,
             FlexibleDate 今回終了日,
-            RString 出力順ID) {
+            Long 出力順ID) {
         DBA150010_NenreitotatsuTorokuListParameter parameter = new DBA150010_NenreitotatsuTorokuListParameter();
         RStringBuilder 今回開始日Builder = new RStringBuilder();
         RStringBuilder 今回終了日Builder = new RStringBuilder();
@@ -125,7 +126,7 @@ public class NenreiTotatsushaTorokuListFinder {
         今回終了日Builder.append(MAX_日時.toString());
         parameter.setKonkaikaishiYMDHMS(今回開始日Builder.toRString());
         parameter.setKonkaishuryoYMDHMS(今回終了日Builder.toRString());
-        parameter.setShuturyokujunID(RString.EMPTY);
+        parameter.setShuturyokujunID(出力順ID);
         return parameter;
     }
 }

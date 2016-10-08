@@ -17,101 +17,101 @@
     </sql>
 
     <sql id="allColumns_DbT4018KaigoHokenFutanGendogakuNintei">
-         "DbT4018KaigoHokenFutanGendogakuNintei"."shoKisaiHokenshaNo" as "dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" as "dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo" as "dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."insertDantaiCd" as "dbT4018KaigoHokenFutanGendogakuNintei_insertDantaiCd",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."insertTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_insertTimestamp",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."insertReamsLoginId" as "dbT4018KaigoHokenFutanGendogakuNintei_insertReamsLoginId",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."insertContextId" as "dbT4018KaigoHokenFutanGendogakuNintei_insertContextId",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."isDeleted" as "dbT4018KaigoHokenFutanGendogakuNintei_isDeleted",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."updateCount" as "dbT4018KaigoHokenFutanGendogakuNintei_updateCount",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateTimestamp",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateReamsLoginId" as "dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateReamsLoginId",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."hiShoninRiyu" as "dbT4018KaigoHokenFutanGendogakuNintei_hiShoninRiyu",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_kyusochishaKubun",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiRiyuKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_shinseiRiyuKubun",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai" as "dbT4018KaigoHokenFutanGendogakuNintei_riyoshaFutanDankai",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_kyokaisoGaitoshaKubun",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_gekihenKanwaSochiTaishoshaKubun",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."kyoshitsuShubetsu" as "dbT4018KaigoHokenFutanGendogakuNintei_kyoshitsuShubetsu",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."shokuhiFutanGendogaku" as "dbT4018KaigoHokenFutanGendogakuNintei_shokuhiFutanGendogaku",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeKoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_unitTypeKoshitsu",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeJunKoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_unitTypeJunKoshitsu",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Tokuyo" as "dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Tokuyo",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Roken_Ryoyo" as "dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Roken_Ryoyo",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."tashoshitsu" as "dbT4018KaigoHokenFutanGendogakuNintei_tashoshitsu",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaUmuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaUmuFlag",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimei" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimei",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimeiKana" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimeiKana",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaSeinenGappiYMD" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaSeinenGappiYMD",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaRenrakusaki" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaRenrakusaki",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho2" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho2",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaKazeiKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaKazeiKubun",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShikibetsuCd" as "dbT4018KaigoHokenFutanGendogakuNintei_haigushaShikibetsuCd",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinShinkokuKubun" as "dbT4018KaigoHokenFutanGendogakuNintei_yochokinShinkokuKubun",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinGaku" as "dbT4018KaigoHokenFutanGendogakuNintei_yochokinGaku",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."yukashoukenGaisangaku" as "dbT4018KaigoHokenFutanGendogakuNintei_yukashoukenGaisangaku",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."sonotaKingaku" as "dbT4018KaigoHokenFutanGendogakuNintei_sonotaKingaku",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."ninteiBatchExecutedTimestamp" as "dbT4018KaigoHokenFutanGendogakuNintei_ninteiBatchExecutedTimestamp",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."izokuNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_izokuNenkinJukyuFlag",
-         "DbT4018KaigoHokenFutanGendogakuNintei"."shogaiNenkinJukyuFlag" as "dbT4018KaigoHokenFutanGendogakuNintei_shogaiNenkinJukyuFlag"
+         "DbT4018KaigoHokenFutanGendogakuNintei"."shoKisaiHokenshaNo" as "dbT4018KaigohFutanGengkNint_shoKisaiHokenshaNo",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" as "dbT4018KaigohFutanGengkNint_hihokenshaNo",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo" as "dbT4018KaigohFutanGengkNint_rirekiNo",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."insertDantaiCd" as "dbT4018KaigohFutanGengkNint_insertDantaiCd",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."insertTimestamp" as "dbT4018KaigohFutanGengkNint_insertTimestamp",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."insertReamsLoginId" as "dbT4018KaigohFutanGengkNint_insertReamsLoginId",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."insertContextId" as "dbT4018KaigohFutanGengkNint_insertContextId",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."isDeleted" as "dbT4018KaigohFutanGengkNint_isDeleted",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."updateCount" as "dbT4018KaigohFutanGengkNint_updateCount",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateTimestamp" as "dbT4018KaigohFutanGengkNint_lastUpdateTimestamp",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."lastUpdateReamsLoginId" as "dbT4018KaigohFutanGengkNint_lastUpdateReamsLoginId",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD" as "dbT4018KaigohFutanGengkNint_shinseiYMD",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" as "dbT4018KaigohFutanGengkNint_ketteiYMD",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" as "dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD" as "dbT4018KaigohFutanGengkNint_tekiyoShuryoYMD",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" as "dbT4018KaigohFutanGengkNint_ketteiKubun",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."hiShoninRiyu" as "dbT4018KaigohFutanGengkNint_hiShoninRiyu",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun" as "dbT4018KaigohFutanGengkNint_kyusochishaKubun",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiRiyuKubun" as "dbT4018KaigohFutanGengkNint_shinseiRiyuKubun",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai" as "dbT4018KaigohFutanGengkNint_riyoshaFutanDankai",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun" as "dbT4018KaigohFutanGengkNint_kyokaisoGaitoshaKubun",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun" as "dbT4018KaigohFutanGengkNint_gekihenKanwaSochiTaishoshaKubun",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."kyoshitsuShubetsu" as "dbT4018KaigohFutanGengkNint_kyoshitsuShubetsu",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."shokuhiFutanGendogaku" as "dbT4018KaigohFutanGengkNint_shokuhiFutanGendogaku",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeKoshitsu" as "dbT4018KaigohFutanGengkNint_unitTypeKoshitsu",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."unitTypeJunKoshitsu" as "dbT4018KaigohFutanGengkNint_unitTypeJunKoshitsu",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Tokuyo" as "dbT4018KaigohFutanGengkNint_juraiTypeKoshitsu_Tokuyo",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."juraiTypeKoshitsu_Roken_Ryoyo" as "dbT4018KaigohFutanGengkNint_juraiTypeKoshitsu_Roken_Ryoyo",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."tashoshitsu" as "dbT4018KaigohFutanGengkNint_tashoshitsu",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaUmuFlag" as "dbT4018KaigohFutanGengkNint_haigushaUmuFlag",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimei" as "dbT4018KaigohFutanGengkNint_haigushaShimei",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShimeiKana" as "dbT4018KaigohFutanGengkNint_haigushaShimeiKana",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaSeinenGappiYMD" as "dbT4018KaigohFutanGengkNint_haigushaSeinenGappiYMD",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho" as "dbT4018KaigohFutanGengkNint_haigushaJusho",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaRenrakusaki" as "dbT4018KaigohFutanGengkNint_haigushaRenrakusaki",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaJusho2" as "dbT4018KaigohFutanGengkNint_haigushaJusho2",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaKazeiKubun" as "dbT4018KaigohFutanGengkNint_haigushaKazeiKubun",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."haigushaShikibetsuCd" as "dbT4018KaigohFutanGengkNint_haigushaShikibetsuCd",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinShinkokuKubun" as "dbT4018KaigohFutanGengkNint_yochokinShinkokuKubun",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."yochokinGaku" as "dbT4018KaigohFutanGengkNint_yochokinGaku",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."yukashoukenGaisangaku" as "dbT4018KaigohFutanGengkNint_yukashoukenGaisangaku",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."sonotaKingaku" as "dbT4018KaigohFutanGengkNint_sonotaKingaku",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."ninteiBatchExecutedTimestamp" as "dbT4018KaigohFutanGengkNint_ninteiBatchExecutedTimestamp",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."izokuNenkinJukyuFlag" as "dbT4018KaigohFutanGengkNint_izokuNenkinJukyuFlag",
+         "DbT4018KaigoHokenFutanGendogakuNintei"."shogaiNenkinJukyuFlag" as "dbT4018KaigohFutanGengkNint_shogaiNenkinJukyuFlag"
     </sql>
 
 
     <!--テーブルDbT4018KaigoHokenFutanGendogakuNinteiの項目をDbT4018KaigoHokenFutanGendogakuNinteiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity" autoMapping="true">
-        <id property="shoKisaiHokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <id property="hihokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="rirekiNo" column="dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" />
-        <result property="insertDantaiCd" column="dbT4018KaigoHokenFutanGendogakuNintei_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertTimestamp" column="dbT4018KaigoHokenFutanGendogakuNintei_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="insertReamsLoginId" column="dbT4018KaigoHokenFutanGendogakuNintei_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertContextId" column="dbT4018KaigoHokenFutanGendogakuNintei_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
-        <result property="isDeleted" column="dbT4018KaigoHokenFutanGendogakuNintei_isDeleted" />
-        <result property="updateCount" column="dbT4018KaigoHokenFutanGendogakuNintei_updateCount" />
-        <result property="lastUpdateTimestamp" column="dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="lastUpdateReamsLoginId" column="dbT4018KaigoHokenFutanGendogakuNintei_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiYMD" column="dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ketteiYMD" column="dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="tekiyoKaishiYMD" column="dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="tekiyoShuryoYMD" column="dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ketteiKubun" column="dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hiShoninRiyu" column="dbT4018KaigoHokenFutanGendogakuNintei_hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyusochishaKubun" column="dbT4018KaigoHokenFutanGendogakuNintei_kyusochishaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiRiyuKubun" column="dbT4018KaigoHokenFutanGendogakuNintei_shinseiRiyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="riyoshaFutanDankai" column="dbT4018KaigoHokenFutanGendogakuNintei_riyoshaFutanDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyokaisoGaitoshaKubun" column="dbT4018KaigoHokenFutanGendogakuNintei_kyokaisoGaitoshaKubun" />
-        <result property="gekihenKanwaSochiTaishoshaKubun" column="dbT4018KaigoHokenFutanGendogakuNintei_gekihenKanwaSochiTaishoshaKubun" />
-        <result property="kyoshitsuShubetsu" column="dbT4018KaigoHokenFutanGendogakuNintei_kyoshitsuShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shokuhiFutanGendogaku" column="dbT4018KaigoHokenFutanGendogakuNintei_shokuhiFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="unitTypeKoshitsu" column="dbT4018KaigoHokenFutanGendogakuNintei_unitTypeKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="unitTypeJunKoshitsu" column="dbT4018KaigoHokenFutanGendogakuNintei_unitTypeJunKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="juraiTypeKoshitsu_Tokuyo" column="dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Tokuyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="juraiTypeKoshitsu_Roken_Ryoyo" column="dbT4018KaigoHokenFutanGendogakuNintei_juraiTypeKoshitsu_Roken_Ryoyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="tashoshitsu" column="dbT4018KaigoHokenFutanGendogakuNintei_tashoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="haigushaUmuFlag" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaUmuFlag" />
-        <result property="haigushaShimei" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="haigushaShimeiKana" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="haigushaSeinenGappiYMD" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaSeinenGappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="haigushaJusho" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
-        <result property="haigushaRenrakusaki" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaRenrakusaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="haigushaJusho2" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaJusho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
-        <result property="haigushaKazeiKubun" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="haigushaShikibetsuCd" column="dbT4018KaigoHokenFutanGendogakuNintei_haigushaShikibetsuCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="yochokinShinkokuKubun" column="dbT4018KaigoHokenFutanGendogakuNintei_yochokinShinkokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yochokinGaku" column="dbT4018KaigoHokenFutanGendogakuNintei_yochokinGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="yukashoukenGaisangaku" column="dbT4018KaigoHokenFutanGendogakuNintei_yukashoukenGaisangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="sonotaKingaku" column="dbT4018KaigoHokenFutanGendogakuNintei_sonotaKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="ninteiBatchExecutedTimestamp" column="dbT4018KaigoHokenFutanGendogakuNintei_ninteiBatchExecutedTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-        <result property="izokuNenkinJukyuFlag" column="dbT4018KaigoHokenFutanGendogakuNintei_izokuNenkinJukyuFlag" />
-        <result property="shogaiNenkinJukyuFlag" column="dbT4018KaigoHokenFutanGendogakuNintei_shogaiNenkinJukyuFlag" />
+        <id property="shoKisaiHokenshaNo" column="dbT4018KaigohFutanGengkNint_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4018KaigohFutanGengkNint_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT4018KaigohFutanGengkNint_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT4018KaigohFutanGengkNint_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4018KaigohFutanGengkNint_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4018KaigohFutanGengkNint_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4018KaigohFutanGengkNint_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4018KaigohFutanGengkNint_isDeleted" />
+        <result property="updateCount" column="dbT4018KaigohFutanGengkNint_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4018KaigohFutanGengkNint_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4018KaigohFutanGengkNint_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="dbT4018KaigohFutanGengkNint_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD" column="dbT4018KaigohFutanGengkNint_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="dbT4018KaigohFutanGengkNint_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiKubun" column="dbT4018KaigohFutanGengkNint_ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiShoninRiyu" column="dbT4018KaigohFutanGengkNint_hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyusochishaKubun" column="dbT4018KaigohFutanGengkNint_kyusochishaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiRiyuKubun" column="dbT4018KaigohFutanGengkNint_shinseiRiyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanDankai" column="dbT4018KaigohFutanGengkNint_riyoshaFutanDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyokaisoGaitoshaKubun" column="dbT4018KaigohFutanGengkNint_kyokaisoGaitoshaKubun" />
+        <result property="gekihenKanwaSochiTaishoshaKubun" column="dbT4018KaigohFutanGengkNint_gekihenKanwaSochiTaishoshaKubun" />
+        <result property="kyoshitsuShubetsu" column="dbT4018KaigohFutanGengkNint_kyoshitsuShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokuhiFutanGendogaku" column="dbT4018KaigohFutanGengkNint_shokuhiFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="unitTypeKoshitsu" column="dbT4018KaigohFutanGengkNint_unitTypeKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="unitTypeJunKoshitsu" column="dbT4018KaigohFutanGengkNint_unitTypeJunKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="juraiTypeKoshitsu_Tokuyo" column="dbT4018KaigohFutanGengkNint_juraiTypeKoshitsu_Tokuyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="juraiTypeKoshitsu_Roken_Ryoyo" column="dbT4018KaigohFutanGengkNint_juraiTypeKoshitsu_Roken_Ryoyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tashoshitsu" column="dbT4018KaigohFutanGengkNint_tashoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="haigushaUmuFlag" column="dbT4018KaigohFutanGengkNint_haigushaUmuFlag" />
+        <result property="haigushaShimei" column="dbT4018KaigohFutanGengkNint_haigushaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="haigushaShimeiKana" column="dbT4018KaigohFutanGengkNint_haigushaShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="haigushaSeinenGappiYMD" column="dbT4018KaigohFutanGengkNint_haigushaSeinenGappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="haigushaJusho" column="dbT4018KaigohFutanGengkNint_haigushaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="haigushaRenrakusaki" column="dbT4018KaigohFutanGengkNint_haigushaRenrakusaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="haigushaJusho2" column="dbT4018KaigohFutanGengkNint_haigushaJusho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="haigushaKazeiKubun" column="dbT4018KaigohFutanGengkNint_haigushaKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="haigushaShikibetsuCd" column="dbT4018KaigohFutanGengkNint_haigushaShikibetsuCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="yochokinShinkokuKubun" column="dbT4018KaigohFutanGengkNint_yochokinShinkokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yochokinGaku" column="dbT4018KaigohFutanGengkNint_yochokinGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yukashoukenGaisangaku" column="dbT4018KaigohFutanGengkNint_yukashoukenGaisangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sonotaKingaku" column="dbT4018KaigohFutanGengkNint_sonotaKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="ninteiBatchExecutedTimestamp" column="dbT4018KaigohFutanGengkNint_ninteiBatchExecutedTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="izokuNenkinJukyuFlag" column="dbT4018KaigohFutanGengkNint_izokuNenkinJukyuFlag" />
+        <result property="shogaiNenkinJukyuFlag" column="dbT4018KaigohFutanGengkNint_shogaiNenkinJukyuFlag" />
     </resultMap>
 
 </mapper>

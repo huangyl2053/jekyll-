@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -180,10 +179,10 @@ public class TeikiyoJogaishaShokai {
             RString 入所年月日, AtenaMeisho 事業者名称, TelNo 電話番号, RString 解除年月日, RString 解除届出年月日, RString 適用除外解除事由コード,
             RString 適用除外解除事由名称, RString 退所年月日, RString 事業者住所, RString 郵便番号, int size) {
         if (size == 0 && RString.isNullOrEmpty(適用年月日) && RString.isNullOrEmpty(適用届出年月日) && RString.isNullOrEmpty(適用除外適用事由コード)
-                && RString.isNullOrEmpty(適用除外適用事由名称) && RString.isNullOrEmpty(入所年月日) && (事業者名称 == null || 事業者名称.isEmpty())
-                && (電話番号 == null || 電話番号.isEmpty()) && RString.isNullOrEmpty(解除年月日) && RString.isNullOrEmpty(解除届出年月日)
-                && RString.isNullOrEmpty(適用除外解除事由コード) && RString.isNullOrEmpty(適用除外解除事由名称) && RString.isNullOrEmpty(退所年月日)
-                && RString.isNullOrEmpty(事業者住所) && RString.isNullOrEmpty(郵便番号)) {
+            && RString.isNullOrEmpty(適用除外適用事由名称) && RString.isNullOrEmpty(入所年月日) && (事業者名称 == null || 事業者名称.isEmpty())
+            && (電話番号 == null || 電話番号.isEmpty()) && RString.isNullOrEmpty(解除年月日) && RString.isNullOrEmpty(解除届出年月日)
+            && RString.isNullOrEmpty(適用除外解除事由コード) && RString.isNullOrEmpty(適用除外解除事由名称) && RString.isNullOrEmpty(退所年月日)
+            && RString.isNullOrEmpty(事業者住所) && RString.isNullOrEmpty(郵便番号)) {
             return RString.EMPTY;
         }
         return new RString(String.valueOf(size + 1));
