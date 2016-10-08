@@ -168,6 +168,22 @@ public class IryouhiKoujyo {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             getHandler(div).init詳細データ();
             div.getIryohiKojyoSyosai().setIsOpen(false);
+            return ResponseData.of(div).respond();
+        }
+        RString データ区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
+        if (IryoHiKojoNaiyo.主治医意見書確認書.getコード().equals(データ区分)) {
+            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().getValue() == null) {
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD()
+                        .setValue(治医意見書受領年月日 != null && !治医意見書受領年月日.isEmpty() ? new RDate(治医意見書受領年月日.toString()) : null);
+            }
+            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() == null) {
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD()
+                        .setValue(認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty() ? new RDate(認定有効期間終了年月日.toString()) : null);
+            }
+            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() == null) {
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD()
+                        .setValue(認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty() ? new RDate(認定有効期間開始年月日.toString()) : null);
+            }
         }
         return ResponseData.of(div).respond();
     }
