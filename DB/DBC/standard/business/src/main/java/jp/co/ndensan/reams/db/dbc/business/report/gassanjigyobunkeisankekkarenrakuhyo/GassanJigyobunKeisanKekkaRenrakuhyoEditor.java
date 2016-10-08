@@ -45,11 +45,13 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
     private static final RString FORMAT = new RString("※");
     private static final RString 小計 = new RString("小計");
     private static final int INDEX_0 = 0;
+    private static final int INDEX_3 = 3;
     private static final int INDEX_25 = 25;
     private static final int INDEX_50 = 50;
     private static final int INDEX_75 = 75;
     private static final RString 文_被保険者番号 = new RString("被保険者番号");
     private static final RString NENDO = new RString("年度");
+    private final RString 記号 = new RString("-");
 
     /**
      * コンストラクタです
@@ -206,7 +208,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         source.hihokenshaKigo = RString.EMPTY;
         if (dataEntity.getDbt3172Entity().getHihokenshaNo() != null) {
             HihokenshaNo 被保険者番号 = dataEntity.getDbt3172Entity().getHihokenshaNo();
-            source.hihokenshaNo = 被保険者番号.getColumnValue();
+            source.HihokenshaNo = 被保険者番号.getColumnValue();
         }
         source.taishoNendo = dataEntity.getDbt3172Entity().getTaishoNendo().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(NENDO);
@@ -317,7 +319,9 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         }
         YubinNo yubinNo = dataEntity.getDbt3172Entity().getKekkaRenrakusakiYubinNo();
         if (yubinNo != null) {
-            source.kekkaRenrakuYubinNO = yubinNo.value();
+            RString 郵便番号1 = yubinNo.value().substring(INDEX_0, INDEX_3);
+            RString 郵便番号2 = yubinNo.value().substring(INDEX_3);
+            source.kekkaRenrakuYubinNO = 郵便番号1.concat(記号).concat(郵便番号2);
         }
         RString 支給額計算結果連絡先住所 = dataEntity.getDbt3172Entity().getKekkaRenrakusakiJusho();
         if (支給額計算結果連絡先住所 != null) {

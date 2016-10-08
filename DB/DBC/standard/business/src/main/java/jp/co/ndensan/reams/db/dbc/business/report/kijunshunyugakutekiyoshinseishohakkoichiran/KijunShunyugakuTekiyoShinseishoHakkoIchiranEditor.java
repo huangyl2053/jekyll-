@@ -104,6 +104,11 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         if (発行対象者.get識別コード() != null) {
             source.shikibetsuCode = 発行対象者.get識別コード().value();
         }
+        source.yubinNo = 発行対象者.get郵便番号();
+        source.choikiCode = 発行対象者.get町域コード();
+        source.gyoseikuCode = 発行対象者.get行政区コード();
+        source.setaiCode = 発行対象者.get世帯コード();
+        source.shichosonCode = 発行対象者.get市町村コード();
         return source;
     }
 

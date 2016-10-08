@@ -105,7 +105,7 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
     帳票出力項目チェック２ {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
-                    return !RString.isNullOrEmpty(new RString(div.getCcdShutsuryokujun().get出力順ID().toString()));
+                    return !RString.isNullOrEmpty(new RString(div.getCcdShutsuryokujun().get出力順ID()));
                 }
             },
     /**
@@ -125,11 +125,11 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
         static final RString 基準日RB_KEY = new RString("key0");
 
         static boolean is年度Rbが選択されている(HanyoListParamDiv div) {
-            return 年度RB_KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey());
+            return !div.getChushutsuJokenA().isDisabled() && 年度RB_KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey());
         }
 
         static boolean is年度基準日Rbが選択されている(HanyoListParamDiv div) {
-            return 年度基準日RB_KEY.equals(div.getRadChushutsuJokenA2().getSelectedKey());
+            return !div.getChushutsuJokenA().isDisabled() && 年度基準日RB_KEY.equals(div.getRadChushutsuJokenA2().getSelectedKey());
         }
 
         static boolean is基準日Rbが選択されている(HanyoListParamDiv div) {
