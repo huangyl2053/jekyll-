@@ -29,7 +29,6 @@ public class KoseiTaishoJissekiIchiranEditor implements
         IKoseiTaishoJissekiIchiranEditor {
 
     private static final RString INDEX_1 = new RString("1");
-    private static final RString 明細タイトル = new RString("M");
     private static final RString 前符号タイトル = new RString("※");
     private static final RString 年度タイトル = new RString("年度");
     private static final RString 被保険者番号タイトル = new RString("被保険者番号");
@@ -98,26 +97,21 @@ public class KoseiTaishoJissekiIchiranEditor implements
         source.listKyufuJisseki_8 = entity.get整理番号();
         source.listKyufuJisseki_9 = entity.getサービス種類();
 
-        if (entity.getデータ区分().equals(明細タイトル)) {
-            source.listKyufuJisseki_10 = doカンマ編集(entity.getサービス費用額());
-            if (!doカンマ編集(entity.get軽減率()).isEmpty()) {
-                source.listKyufuJisseki_11 = 前符号タイトル.concat(doカンマ編集(entity.get軽減率()));
-            }
-
-            source.listKyufuJisseki_13 = doカンマ編集(entity.get更正前給付率());
-            source.listKyufuJisseki_14 = doカンマ編集(entity.get更正前請求額());
-            source.listKyufuJisseki_15 = doカンマ編集(entity.get更正前自己負担額());
-            source.listKyufuJisseki_16 = doカンマ編集(entity.get更正後給付率());
-            source.listKyufuJisseki_17 = doカンマ編集(entity.get更正後請求額());
-            source.listKyufuJisseki_18 = doカンマ編集(entity.get更正後自己負担額());
-            source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());
-        } else {
-            if (!doカンマ編集(entity.get高額サービス費用額()).isEmpty()) {
-                source.listKyufuJisseki_12 = 前符号タイトル.concat(doカンマ編集(entity.get高額サービス費用額()));
-            }
-            source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());
+        source.listKyufuJisseki_10 = doカンマ編集(entity.getサービス費用額());
+        if (!doカンマ編集(entity.get軽減率()).isEmpty()) {
+            source.listKyufuJisseki_11 = 前符号タイトル.concat(doカンマ編集(entity.get軽減率()));
         }
-
+        source.listKyufuJisseki_13 = doカンマ編集(entity.get更正前給付率());
+        source.listKyufuJisseki_14 = doカンマ編集(entity.get更正前請求額());
+        source.listKyufuJisseki_15 = doカンマ編集(entity.get更正前自己負担額());
+        source.listKyufuJisseki_16 = doカンマ編集(entity.get更正後給付率());
+        source.listKyufuJisseki_17 = doカンマ編集(entity.get更正後請求額());
+        source.listKyufuJisseki_18 = doカンマ編集(entity.get更正後自己負担額());
+        source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());
+        if (!doカンマ編集(entity.get高額サービス費用額()).isEmpty()) {
+            source.listKyufuJisseki_12 = 前符号タイトル.concat(doカンマ編集(entity.get高額サービス費用額()));
+        }
+        source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());
         return source;
 
     }
