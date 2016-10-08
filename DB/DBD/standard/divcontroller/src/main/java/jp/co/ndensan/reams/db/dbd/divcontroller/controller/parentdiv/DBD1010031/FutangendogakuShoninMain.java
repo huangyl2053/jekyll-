@@ -21,6 +21,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class FutangendogakuShoninMain {
 
+    private static final int NO_0 = 0;
+    private static final int NO_2 = 2;
+
     /**
      * 画面初期化処理です。
      *
@@ -39,7 +42,7 @@ public class FutangendogakuShoninMain {
      * @return 負担限度額認定申請承認（一括）Divを持つResponseData
      */
     public ResponseData<FutangendogakuShoninMainDiv> onOpenBefore_btnOpenHiShoninRiyu(FutangendogakuShoninMainDiv div) {
-        div.getFutangendogakuShonin().setSubGyomuCode(SubGyomuCode.DBD介護受給.value());
+        div.getFutangendogakuShonin().setSubGyomuCode(SubGyomuCode.DBD介護受給.value().substring(NO_0, NO_2));
         div.getFutangendogakuShonin().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
         return ResponseData.of(div).respond();
     }
