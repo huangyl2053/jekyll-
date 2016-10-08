@@ -248,11 +248,9 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private void エラーチェック処理_電算() {
         RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
         IKokuhoShikakuIdoInMapper mapper = getMapper(IKokuhoShikakuIdoInMapper.class);
-        Integer 件数 = mapper.get構成市町村マスタ(市町村コード);
         if (is空白(市町村コード) || !Pattern.compile(正則表現.toString()).matcher(市町村コード).matches()
                 || (市町村コード.length() != INDEX_5 && 市町村コード.length() != INDEX_6)
-                || (保険者区分_広域保険者.equals(processParameter.get保険者区分())
-                && 0 == 件数)) {
+                || (保険者区分_広域保険者.equals(processParameter.get保険者区分()))) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_02);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
