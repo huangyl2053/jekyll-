@@ -233,8 +233,10 @@ public class IryouhiKoujyoHandler {
                 FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
                 IryohiKojo 医療費控除 = new IryohiKojo(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
                 IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
-                builder.set登録年月日(new FlexibleDate(row.getHiddentorokuDD().getValue().toDateString()));
-                builder.set申請年月日(new FlexibleDate(row.getHiddensinseiDD().getValue().toDateString()));
+                builder.set登録年月日(row.getHiddentorokuDD().getValue() == null ? FlexibleDate.EMPTY
+                        : new FlexibleDate(row.getHiddentorokuDD().getValue().toDateString()));
+                builder.set申請年月日(row.getHiddensinseiDD().getValue() == null ? FlexibleDate.EMPTY
+                        : new FlexibleDate(row.getHiddensinseiDD().getValue().toDateString()));
                 builder.set発行年月日(FlexibleDate.EMPTY);
                 builder.set論理削除フラグ(false);
                 set医療費控除画面項目(builder, row);
@@ -251,7 +253,7 @@ public class IryouhiKoujyoHandler {
                 FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
                 IryohiKojo 医療費控除 = manager.get医療費控除(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
                 IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
-                manager.save医療費控除(builder.build().deleted());
+                manager.delete医療費控除(builder.build().deleted());
             }
         }
         AccessLogger.log(AccessLogType.更新, PersonalData.of(引き継ぎEntity.get識別コード(),
@@ -334,7 +336,7 @@ public class IryouhiKoujyoHandler {
             builder.set認定有効期間終了年月日(new FlexibleDate(row.getHiddenninteEndDD().getValue().toDateString()));
             builder.set主治医意見書受領年月日(new FlexibleDate(row.getHiddenikensyoSakuseDD().getValue().toDateString()));
             builder.set日常生活自立度(row.getHiddennitijyoSekatuJiritudoCode());
-            builder.set尿失禁の発生(false);
+            builder.set尿失禁の発生(row.getHiddennyosikinFlg().equals(キー0));
         }
     }
 }
