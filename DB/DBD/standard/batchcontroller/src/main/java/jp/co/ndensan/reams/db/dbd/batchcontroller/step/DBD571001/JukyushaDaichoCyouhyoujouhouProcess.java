@@ -806,10 +806,14 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
                     ? ShiharaiHenkoTorokuKubun._１号給付額減額登録 : ShiharaiHenkoTorokuKubun._空);
             給付額減額情報.set開始日(t.get給付額減額情報List().get給付額減額情報_適用開始年月日());
             給付額減額情報.set終了日(t.get給付額減額情報List().get給付額減額情報_適用終了年月日());
-            給付額減額情報.set給付率(new RString(t.get給付額減額情報List().get給付額減額情報_給付率().toString()));
-            給付額減額情報.set徴収権消滅期間(new RString(t.get給付額減額情報List().get給付額減額情報_徴収権消滅期間().toString()));
-            給付額減額情報.set納付済期間(new RString(t.get給付額減額情報List().get給付額減額情報_納付済期間().toString()));
-            給付額減額情報.set減額期間(new RString(t.get給付額減額情報List().get給付額減額情報_納付済減額期間().toString()));
+            給付額減額情報.set給付率(t.get給付額減額情報List().get給付額減額情報_給付率() == null
+                    ? RString.EMPTY : new RString(t.get給付額減額情報List().get給付額減額情報_給付率().toString()));
+            給付額減額情報.set徴収権消滅期間(t.get給付額減額情報List().get給付額減額情報_徴収権消滅期間() == null
+                    ? RString.EMPTY : new RString(t.get給付額減額情報List().get給付額減額情報_徴収権消滅期間().toString()));
+            給付額減額情報.set納付済期間(t.get給付額減額情報List().get給付額減額情報_納付済期間() == null
+                    ? RString.EMPTY : new RString(t.get給付額減額情報List().get給付額減額情報_納付済期間().toString()));
+            給付額減額情報.set減額期間(t.get給付額減額情報List().get給付額減額情報_納付済減額期間() == null
+                    ? RString.EMPTY : new RString(t.get給付額減額情報List().get給付額減額情報_納付済減額期間().toString()));
             給付額減額情報EntityList.add(給付額減額情報);
         }
     }
