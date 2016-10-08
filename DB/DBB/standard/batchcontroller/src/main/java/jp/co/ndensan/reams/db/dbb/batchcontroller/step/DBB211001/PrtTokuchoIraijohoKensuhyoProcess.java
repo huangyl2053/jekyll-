@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 特徴依頼情報件数表の発行します。
@@ -65,6 +66,7 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
             + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get依頼情報件数表出力対象データ");
     private static final RString 出力ファイル名 = new RString("TokubetsuChoshuIraiJohoKensuhyoData.csv");
+    private static final RString 出力ファイル名_出力条件 = new RString("特別徴収依頼情報件数表");
     private static final RString 出力ファイル名_NO_DATA = new RString("-");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200020");
     private static final RString コンマ = new RString(",");
@@ -93,6 +95,8 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
     private List<TokubetsuChoshuIraiJohoKensuhyoEntity> reportEntityList;
     private List<TokubetsuChoshuIraiJohoKensuhyoDataCSVEntity> csvEntityList;
     private boolean isHasData;
+    private RString 保険者情報_保険者番号;
+    private RString 保険者情報_保険者名称;
 
     @BatchWriter
     private BatchReportWriter<TokubetsuChoshuIraiJohoKensuhyoSource> batchReportWriter;
@@ -116,6 +120,10 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
         csvEntityList = new ArrayList<>();
         reportEntityList = new ArrayList<>();
         出力ページ数 = 0;
+        保険者情報_保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
+                parameter.getシステム日時().getDate(), SubGyomuCode.DBU介護統計報告);
+        保険者情報_保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称,
+                parameter.getシステム日時().getDate(), SubGyomuCode.DBU介護統計報告);
     }
 
     @Override
@@ -161,16 +169,7 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
             csv合計金額2 = csv合計金額2.add(new Decimal(t.get金額2().toString()));
             report合計金額2 = report合計金額2.add(new Decimal(t.get金額2().toString()));
         }
-        if (count > HALF_PAGE_COUNT) {
-            TokubetsuChoshuIraiJohoKensuhyoEntity reportEntity = reportEntityList.get(count - HALF_PAGE_COUNT);
-            reportEntity.set市町村名称(t.get市町村名称());
-            reportEntity.set年金保険者名称(年金保険者名称の編集(new Code(t.getDT特別徴収義務者コード())));
-            reportEntity.set構成市町村コード(t.get構成市町村コード());
-            reportEntity.setRight件数(t.get件数());
-            reportEntity.setRight特別徴収義務者コード(new Code(t.getDT特別徴収義務者コード()));
-            reportEntity.setRight金額1(t.get金額1());
-            reportEntity.setRight金額2(t.get金額2());
-        } else {
+        if (count <= HALF_PAGE_COUNT) {
             TokubetsuChoshuIraiJohoKensuhyoEntity reportEntity = new TokubetsuChoshuIraiJohoKensuhyoEntity();
             reportEntity.set市町村名称(t.get市町村名称());
             reportEntity.set年金保険者名称(年金保険者名称の編集(new Code(t.getDT特別徴収義務者コード())));
@@ -180,6 +179,15 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
             reportEntity.setLeft金額1(t.get金額1());
             reportEntity.setLeft金額2(t.get金額2());
             reportEntityList.add(reportEntity);
+        } else {
+            TokubetsuChoshuIraiJohoKensuhyoEntity reportEntity = reportEntityList.get(count - HALF_PAGE_COUNT);
+            reportEntity.set市町村名称(t.get市町村名称());
+            reportEntity.set年金保険者名称(年金保険者名称の編集(new Code(t.getDT特別徴収義務者コード())));
+            reportEntity.set構成市町村コード(t.get構成市町村コード());
+            reportEntity.setRight件数(t.get件数());
+            reportEntity.setRight特別徴収義務者コード(new Code(t.getDT特別徴収義務者コード()));
+            reportEntity.setRight金額1(t.get金額1());
+            reportEntity.setRight金額2(t.get金額2());
         }
         if (getBefore() != null && (count == ONE_PAGE_COUNT
                 || new TokubetsuChoshuIraiJohoKensuhyoPageBreak(改頁List)
@@ -197,21 +205,20 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
 
     @Override
     protected void afterExecute() {
-
         List<RString> 出力条件リスト = parameter.get出力条件リスト();
         RString 帳票名 = ReportIdDBB.DBB200020.getReportName();
         RString csv出力有無 = CSV出力有無_無り;
         RString csvファイル名 = 出力ファイル名_NO_DATA;
         if (isHasData) {
             ファイル出力();
+            特徴依頼情報件数表ＣＳＶ.close();
             csv出力有無 = CSV出力有無_有り;
-            csvファイル名 = 出力ファイル名;
+            csvファイル名 = 出力ファイル名_出力条件;
             manager.spool(特徴依頼情報件数表ＣＳＶFilePath);
         }
         if (!reportEntityList.isEmpty()) {
             特徴依頼情報件数表の発行();
         }
-        特徴依頼情報件数表ＣＳＶ.close();
         loadバッチ出力条件リスト(出力条件リスト, new ReportId(parameter.get件数表帳票ID()),
                 出力ページ数, csv出力有無, csvファイル名, 帳票名);
 
@@ -225,11 +232,15 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
     private void ファイル出力() {
         for (TokubetsuChoshuIraiJohoKensuhyoDataCSVEntity csvEntity : csvEntityList) {
             csvEntity.set合計件数(new RString(csv件数の合計));
-            csvEntity.set合計金額1(new RString(csv合計金額1.toString()));
-            csvEntity.set合計金額2(new RString(csv合計金額2.toString()));
+            csvEntity.set合計金額1(金額の編集(csv合計金額1));
+            csvEntity.set合計金額2(金額の編集(csv合計金額2));
             特徴依頼情報件数表ＣＳＶ.writeLine(csvEntity);
         }
         csvEntityList.clear();
+    }
+
+    private RString 金額の編集(Decimal 金額) {
+        return DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
 
     private void 特徴依頼情報件数表の発行() {
@@ -264,11 +275,6 @@ public class PrtTokuchoIraijohoKensuhyoProcess extends BatchKeyBreakBase<TokuCho
 
     private TokubetsuChoshuIraiJohoKensuhyoDataCSVEntity csvEntityの編集(
             TokuChoIraiKensu 特徴依頼件数Entity, RString 年金保険者名称) {
-        RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
-                parameter.getシステム日時().getDate(), SubGyomuCode.DBU介護統計報告);
-        RString 保険者情報_保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称,
-                parameter.getシステム日時().getDate(), SubGyomuCode.DBU介護統計報告);
-
         RString 作成日 = parameter.getシステム日時().getRDateTime().getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = parameter.getシステム日時().getRDateTime().getTime()

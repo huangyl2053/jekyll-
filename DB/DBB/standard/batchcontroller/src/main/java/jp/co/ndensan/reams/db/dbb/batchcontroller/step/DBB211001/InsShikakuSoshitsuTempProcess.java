@@ -50,6 +50,7 @@ public class InsShikakuSoshitsuTempProcess extends BatchProcessBase<ShikakuSoshi
     private static final RString 特別徴収停止事由コード_資格喪失特徴中止 = new RString("T6");
     private static final RString 各種金額_全桁0設定 = new RString("00000000000");
     private static final RString DT媒体コード_回線 = new RString("6");
+    private static final RString 国保世帯コードが0 = new RString("0");
 
     private InsShikakuSoshitsuTempProcessParameter parameter;
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者の情報;
@@ -115,7 +116,7 @@ public class InsShikakuSoshitsuTempProcess extends BatchProcessBase<ShikakuSoshi
         RString dT作成年月日 = parameter.getシステム日時().getDate().toDateString();
         RString dT各種区分 = getDT各種区分(資格情報);
         RString dT各種年月日 = getDT各種年月日(徴収方法情報, 資格情報);
-        SetaiCode 国保世帯コード = new SetaiCode(new RString("0"));
+        SetaiCode 国保世帯コード = new SetaiCode(国保世帯コードが0);
         対象者情報.setShoriNendo(処理年度);
         対象者情報.setTsuchiNaiyoCode(通知内容コード);
         対象者情報.setShoriTaishoYM(処理対象年月);
@@ -124,27 +125,27 @@ public class InsShikakuSoshitsuTempProcess extends BatchProcessBase<ShikakuSoshi
         対象者情報.setDtTsuchiNaiyoCode(dT通知内容コード);
         対象者情報.setDtBaitaiCode(DT媒体コード_回線);
         対象者情報.setDtSakuseiYMD(dT作成年月日);
-        対象者情報.setDtYobi1(RString.HALF_SPACE);
+        対象者情報.setDtYobi1(RString.EMPTY);
         対象者情報.setDtKakushuKubun(dT各種区分);
-        対象者情報.setDtShoriKekka(RString.HALF_SPACE);
-        対象者情報.setDtKokiIkanCode(RString.HALF_SPACE);
+        対象者情報.setDtShoriKekka(RString.EMPTY);
+        対象者情報.setDtKokiIkanCode(RString.EMPTY);
         対象者情報.setDtKakushuYMD(dT各種年月日);
         対象者情報.setDtKakushuKingaku1(各種金額_全桁0設定);
         対象者情報.setDtKakushuKingaku2(各種金額_全桁0設定);
         対象者情報.setDtKakushuKingaku3(各種金額_全桁0設定);
-        対象者情報.setDtYobi2(RString.HALF_SPACE);
-        対象者情報.setDtKyosaiNenkinshoshoKigoNo(RString.HALF_SPACE);
+        対象者情報.setDtYobi2(RString.EMPTY);
+        対象者情報.setDtKyosaiNenkinshoshoKigoNo(RString.EMPTY);
         対象者情報.setShikibetsuCode(資格情報.getShikibetsuCode());
         対象者情報.setHihokenshaNo(資格情報.getHihokenshaNo().value());
         対象者情報.setKokuhoSetaiCode(国保世帯コード);
-        対象者情報.setDtKakushuKingaku4(RString.HALF_SPACE);
-        対象者情報.setDtKakushuKingaku5(RString.HALF_SPACE);
-        対象者情報.setDtKakushuKingaku6(RString.HALF_SPACE);
-        対象者情報.setDtKakushuKingaku7(RString.HALF_SPACE);
-        対象者情報.setDtKakushuKingaku8(RString.HALF_SPACE);
-        対象者情報.setDtTeishiYM(RString.HALF_SPACE);
-        対象者情報.setDtYobi4Juminzei(RString.HALF_SPACE);
-        対象者情報.setDtKojinNo(RString.HALF_SPACE);
+        対象者情報.setDtKakushuKingaku4(RString.EMPTY);
+        対象者情報.setDtKakushuKingaku5(RString.EMPTY);
+        対象者情報.setDtKakushuKingaku6(RString.EMPTY);
+        対象者情報.setDtKakushuKingaku7(RString.EMPTY);
+        対象者情報.setDtKakushuKingaku8(RString.EMPTY);
+        対象者情報.setDtTeishiYM(RString.EMPTY);
+        対象者情報.setDtYobi4Juminzei(RString.EMPTY);
+        対象者情報.setDtKojinNo(RString.EMPTY);
         return 対象者情報;
     }
 

@@ -18,10 +18,11 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuMybatisParameter implements IMyBatisParameter {
 
     private final FlexibleDate 今回開始日時;
     private final FlexibleDate 今回終了日時;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタ。
@@ -32,8 +33,8 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuMybatisParameter extends 
      */
     public RenkeiDataShutsuryokuSikakuSakuseiSoshitsuMybatisParameter(FlexibleDate 今回開始日時, FlexibleDate 今回終了日時,
             IShikibetsuTaishoPSMSearchKey searchKey) {
-        super(searchKey);
         this.今回開始日時 = 今回開始日時;
         this.今回終了日時 = 今回終了日時;
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 }
