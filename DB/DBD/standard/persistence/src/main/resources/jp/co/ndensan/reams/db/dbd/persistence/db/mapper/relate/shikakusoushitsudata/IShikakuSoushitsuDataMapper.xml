@@ -31,7 +31,7 @@
             F."shinseiTodokedeDaikoKubunCode"
         FROM
             master AS A
-        LEFT JOIN 
+        INNER JOIN 
          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
         (
          SELECT ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))

@@ -7,15 +7,10 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519003;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd519003.ShinsaHanteiIraiIchiranhyoCsvProcessCore;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5190003.RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190003.ShinsaHanteiIraiIchiranhyoCsvEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiYukoKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -38,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -65,6 +59,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcess extends BatchProcessBase<Chohy
     private static final RString 今回開始日時 = new RString("【今回開始日時】");
     private static final RString 今回終了日時 = new RString("【今回終了日時】");
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
+    private ShinsaHanteiIraiIchiranhyoCsvProcessCore core;
     private int 连番;
     private static final int COUNT_ZERO = 0;
     private FileSpoolManager manager;
@@ -79,6 +74,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcess extends BatchProcessBase<Chohy
         连番 = COUNT_ZERO;
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
         shikibetsuTaishoPSMSearchKey = key.build();
+        core = new ShinsaHanteiIraiIchiranhyoCsvProcessCore();
     }
 
     @Override
@@ -102,7 +98,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcess extends BatchProcessBase<Chohy
     @Override
     protected void process(ChohyoShuchiryokuyoShiseiJyohoEntity entity) {
         连番++;
-        ShinsaHanteiIraiIchiranhyoCsvEntity csvEntity = getCsvEntity(entity);
+        ShinsaHanteiIraiIchiranhyoCsvEntity csvEntity = core.toCsvEntity(entity);
         csvWriter.writeLine(csvEntity);
     }
 
@@ -137,31 +133,4 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcess extends BatchProcessBase<Chohy
         }
         return 出力条件;
     }
-
-    private ShinsaHanteiIraiIchiranhyoCsvEntity getCsvEntity(ChohyoShuchiryokuyoShiseiJyohoEntity entity) {
-        ShinsaHanteiIraiIchiranhyoCsvEntity csvEntity = new ShinsaHanteiIraiIchiranhyoCsvEntity();
-        csvEntity.set識別コード(entity.get識別コード().value());
-        csvEntity.set保険者番号(entity.get証記載保険者番号().value());
-        csvEntity.set被保険者番号(entity.get被保険者番号().value());
-        FlexibleDate date = entity.get認定申請年月日();
-        FlexibleDate newdate = new FlexibleDate(date.getYearValue(), date.getMonthValue(), 1);
-        csvEntity.set認定申請日(new RString(newdate.wareki().toString()));
-        csvEntity.set枝番(entity.get枝番());
-        csvEntity.set申請区分法令コード(new RString(NinteiShinseiKubunShinsei.職権.toString()));
-        csvEntity.set申請区分申請時コード(new RString(NinteiShinseiKubunShinsei.資格喪失_死亡.toString()));
-        csvEntity.set取下区分コード(new RString(NinteiShinseiYukoKubunCode.有効.toString()));
-        csvEntity.set被保険者区分コード(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
-        csvEntity.set申請代行区分コード(ShinseiTodokedeDaikoKubunCode.toValue(entity.get申請届出代行区分コード().value()).get名称());
-        if (entity.get生年月日() != null) {
-            csvEntity.set生年月日(entity.get生年月日().wareki().toDateString());
-        }
-        if (entity.get性別() != null) {
-            csvEntity.set性別コード(Seibetsu.toValue(entity.get性別()).get名称());
-        }
-        if (entity.get前回要介護状態区分コード() != null) {
-            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).get名称());
-        }
-        return csvEntity;
-    }
-
 }
