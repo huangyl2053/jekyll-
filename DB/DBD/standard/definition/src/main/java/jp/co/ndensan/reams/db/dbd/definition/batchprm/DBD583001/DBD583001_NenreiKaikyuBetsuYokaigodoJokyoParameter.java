@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD583001Parameter extends BatchParameterBase {
+public class DBD583001_NenreiKaikyuBetsuYokaigodoJokyoParameter extends BatchParameterBase {
 
     @BatchParameter(key = "基準日", name = "基準日")
     private RDate 基準日;

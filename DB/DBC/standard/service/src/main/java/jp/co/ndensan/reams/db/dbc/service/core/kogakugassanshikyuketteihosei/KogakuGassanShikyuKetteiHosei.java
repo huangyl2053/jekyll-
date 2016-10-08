@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushi
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3075KogakuGassanKyufuJissekiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei.IKogakuGassanShikyuKetteiHoseiMapper;
@@ -70,6 +71,7 @@ public class KogakuGassanShikyuKetteiHosei {
     private final DbT3105SogoJigyoTaishoshaDac 総合事業対象者dac;
     private final DbT3074KogakuGassanShikyuFushikyuKetteiDac 高額合算支給不支給決定dac;
     private final DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac 事業高額合算支給不支給決定dac;
+    private final DbT3075KogakuGassanKyufuJissekiDac 高額合算給付実績dac;
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
@@ -107,6 +109,7 @@ public class KogakuGassanShikyuKetteiHosei {
         this.被保険者台帳管理dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
         this.受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.総合事業対象者dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
+        this.高額合算給付実績dac = InstanceProvider.create(DbT3075KogakuGassanKyufuJissekiDac.class);
         this.高額合算支給不支給決定dac = InstanceProvider.create(DbT3074KogakuGassanShikyuFushikyuKetteiDac.class);
         this.事業高額合算支給不支給決定dac = InstanceProvider.create(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac.class);
     }

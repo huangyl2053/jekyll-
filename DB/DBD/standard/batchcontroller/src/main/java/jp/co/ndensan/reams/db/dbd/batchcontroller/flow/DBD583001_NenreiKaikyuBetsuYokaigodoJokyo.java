@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD583001.NenreiKaikyubetsuYokaigodoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001_NenreiKaikyuBetsuYokaigodoJokyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1790-020 donghj
  */
-public class DBD583001 extends BatchFlowBase<DBD583001Parameter> {
+public class DBD583001_NenreiKaikyuBetsuYokaigodoJokyo extends BatchFlowBase<DBD583001_NenreiKaikyuBetsuYokaigodoJokyoParameter> {
 
     private static final String 集計表出力 = "get集計表出力";
 

@@ -134,6 +134,9 @@ public class KanendoKoseiKeisan {
         FukaJoho 賦課の情報5 = null;
         FukaJoho 賦課の情報6 = null;
         for (FukaJoho 賦課の情報 : 賦課の情報List) {
+            if (賦課の情報 == null) {
+                continue;
+            }
             if (賦課の情報.get賦課年度().equals(賦課の情報.get調定年度())) {
                 賦課の情報1 = 賦課の情報;
             } else if (賦課の情報.get賦課年度().equals(賦課の情報.get調定年度().minusYear(INT_1))) {
