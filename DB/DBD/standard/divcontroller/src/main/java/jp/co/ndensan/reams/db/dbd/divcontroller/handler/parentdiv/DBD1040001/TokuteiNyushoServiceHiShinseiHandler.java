@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1040001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
@@ -46,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -87,8 +88,9 @@ public class TokuteiNyushoServiceHiShinseiHandler {
      * 初期化の処理です。
      *
      * @param taishoshaKey 前画面から渡された「対象者キー」
+     * @param menuID menuID
      */
-    public void initialize(TaishoshaKey taishoshaKey) {
+    public void initialize(TaishoshaKey taishoshaKey, RString menuID) {
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         div.getCcdAtenaInfo().initialize(識別コード);
@@ -96,18 +98,18 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             div.getCcdKaigoKihon().initialize(被保険者番号);
         }
-        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
+        if (menuID.equals(申請メニュー)) {
             div.getShinsei().getShinseiList().getBtnAddShinsei().setText(申請情報を追加する);
             div.getShinseiDetail().setTitle(申請情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 申請情報を.toString());
             div.getShinsei().getShinseiList().setDisplayNone(false);
-            div.getShinsei().getShinseiDetail().setDisabled(true);
-        } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
+            set情報クリア制御();
+        } else if (menuID.equals(承認メニュー)) {
             div.getShinsei().getShinseiList().getBtnAddShinsei().setText(承認情報を追加する);
             div.getShinseiDetail().setTitle(承認情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString());
             div.getShinsei().getShinseiList().setDisplayNone(false);
-            div.getShinsei().getShinseiDetail().setDisabled(true);
+            set情報クリア制御();
         }
         set初期状態制御();
     }
@@ -156,14 +158,15 @@ public class TokuteiNyushoServiceHiShinseiHandler {
      * 「申請情報を追加する/承認情報を追加する」ボタン押下の処理です。
      *
      * @param 資格対象者 資格対象者
+     * @param menuID menuID
      */
-    public void set追加するボタン押下(TaishoshaKey 資格対象者) {
+    public void set追加するボタン押下(TaishoshaKey 資格対象者, RString menuID) {
         set情報クリア(資格対象者);
         div.getShinseiDetail().getRadKettaiKubun().setSelectedKey(承認する_KEY);
         div.getShinseiDetail().getTxtKettaiYMD().setValue(FlexibleDate.getNowDate());
         div.getShinseiDetail().setDisplayNone(false);
         div.getShinseiList().setDisplayNone(true);
-        set情報エリア追加状態制御();
+        set情報エリア追加状態制御(menuID);
     }
 
     /**
@@ -210,15 +213,17 @@ public class TokuteiNyushoServiceHiShinseiHandler {
      * @param row 選択行
      * @param 資格対象者 前画面から渡された「対象者キー」
      * @param 特別地域加算減免ViewState 特別地域加算減免の情報のViewState
+     * @param menuID menuID
      */
-    public void set申請一覧の修正ボタンをクリック(dgShinseiList_Row row, TaishoshaKey 資格対象者, TokubetsuChiikiKasanGemmenViewState 特別地域加算減免ViewState) {
+    public void set申請一覧の修正ボタンをクリック(dgShinseiList_Row row, TaishoshaKey 資格対象者, TokubetsuChiikiKasanGemmenViewState 特別地域加算減免ViewState,
+            RString menuID) {
         set情報クリア(資格対象者);
         div.getShinseiDetail().setDisplayNone(false);
         div.getShinseiList().setDisplayNone(true);
         if (特別地域加算減免ViewState != null) {
             div.getCcdShinseiJoho().set減免減額申請情報(get減免減額申請情報(特別地域加算減免ViewState), FlexibleDate.getNowDate());
         }
-        set情報エリア修正状態制御();
+        set情報エリア修正状態制御(menuID);
         set情報エリア(row);
     }
 
@@ -290,11 +295,12 @@ public class TokuteiNyushoServiceHiShinseiHandler {
      * 申請情報についてい、変更のところがあるか判断します。
      *
      * @param 特別地域加算減免申請の情報 特別地域加算減免申請の情報
+     * @param menuID menuID
      * @return 判断結果 true:変更あり
      */
-    public boolean 申請情報_変更あり(TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報) {
+    public boolean 申請情報_変更あり(TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報, RString menuID) {
 
-        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
+        if (menuID.equals(申請メニュー)) {
             return !(is等しい(特別地域加算減免申請の情報.get申請事由(), div.getShinseiDetail().getTxtShinseiRiyu().getValue())
                     && 特別地域加算減免申請の情報.get申請年月日().equals(div.getShinseiDetail().getTxtShinseiYMD().getValue())
                     && is減免減額申請共有子Div等しい(特別地域加算減免申請の情報)
@@ -398,6 +404,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
             newRowList.add(row);
         }
+        Collections.sort(newRowList, new TokuteiNyushoServiceHiShinseiRowComparator());
         div.getShinseiList().getDgShinseiList().setDataSource(newRowList);
         set情報クリア(taishoshaKey);
         set初期状態制御();
@@ -510,6 +517,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
             newRowList.add(row);
         }
+        Collections.sort(newRowList, new TokuteiNyushoServiceHiShinseiRowComparator());
         div.getShinseiList().getDgShinseiList().setDataSource(newRowList);
         set情報クリア(taishoshaKey);
         set初期状態制御();
@@ -596,6 +604,20 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         return gemmenGengakuShinseiBuilder;
     }
 
+    private void set情報クリア制御() {
+        div.getShinseiDetail().getTxtShinseiYMD().setDisabled(true);
+        div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(true);
+        div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
+        div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
+        div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
+        div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
+        div.getShinseiDetail().getTxtYukoKigenYMD().setDisabled(true);
+        div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(true);
+        div.getShinseiDetail().getTxtKakuninNo().setDisabled(true);
+        div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(true);
+        div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
+    }
+
     private void set初期状態制御() {
         div.getShinsei().getBtnDispSetaiJoho().setDisabled(false);
         div.getShinsei().getBtnDispGemmenJoho().setDisabled(false);
@@ -619,7 +641,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinseiDetail().getTxtHiShoninRiyu().clearValue();
     }
 
-    private void set情報エリア追加状態制御() {
+    private void set情報エリア追加状態制御(RString menuID) {
         div.getShinsei().getBtnDispSetaiJoho().setDisabled(false);
         div.getShinsei().getBtnDispGemmenJoho().setDisabled(false);
         div.getShinseiDetail().getTxtShinseiYMD().setDisabled(false);
@@ -634,10 +656,10 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
         div.getShinseiDetail().getBtnBackToShinseiList().setDisabled(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
-        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
+        if (menuID.equals(申請メニュー)) {
             div.getShinseiDetail().getTxtDetermineShinsei().setDisplayNone(false);
             div.getShinseiDetail().getBtnConfirm().setDisplayNone(true);
-        } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
+        } else if (menuID.equals(承認メニュー)) {
             div.getShinseiDetail().getTxtDetermineShinsei().setDisplayNone(true);
             div.getShinseiDetail().getBtnConfirm().setDisplayNone(false);
         }
@@ -679,10 +701,10 @@ public class TokuteiNyushoServiceHiShinseiHandler {
 
     }
 
-    private void set情報エリア修正状態制御() {
+    private void set情報エリア修正状態制御(RString menuID) {
         div.getShinsei().getBtnDispSetaiJoho().setDisabled(false);
         div.getShinsei().getBtnDispGemmenJoho().setDisabled(false);
-        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
+        if (menuID.equals(申請メニュー)) {
             div.getShinseiDetail().getTxtShinseiYMD().setDisabled(true);
             div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(true);
             div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
@@ -695,7 +717,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
             div.getShinseiDetail().getTxtDetermineShinsei().setDisplayNone(false);
             div.getShinseiDetail().getBtnConfirm().setDisplayNone(true);
-        } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
+        } else if (menuID.equals(承認メニュー)) {
             div.getShinseiDetail().getTxtShinseiYMD().setDisabled(false);
             div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(false);
             div.getShinseiDetail().getRadKettaiKubun().setDisabled(false);
@@ -716,10 +738,18 @@ public class TokuteiNyushoServiceHiShinseiHandler {
     private void set情報エリア(dgShinseiList_Row row) {
         div.getShinsei().getShinseiDetail().getTxtShinseiYMD().setValue(row.getTxtShinseiYMD().getValue());
         div.getShinsei().getShinseiDetail().getTxtShinseiRiyu().setValue(row.getShinseiRiyu());
-        div.getShinsei().getShinseiDetail().getRadKettaiKubun().setSelectedKey(row.getKetteiKubun());
-        div.getShinsei().getShinseiDetail().getTxtKettaiYMD().setValue(row.getTxtKetteiYMD().getValue());
-        div.getShinsei().getShinseiDetail().getTxtTekiyoYMD().setValue(row.getTxtTekiyoYMD().getValue());
-        div.getShinsei().getShinseiDetail().getTxtYukoKigenYMD().setValue(row.getTxtYukoKigenYMD().getValue());
+        if (row.getKetteiKubun() != null) {
+            div.getShinsei().getShinseiDetail().getRadKettaiKubun().setSelectedKey(row.getKetteiKubun());
+        }
+        if (row.getTxtKetteiYMD() != null && row.getTxtKetteiYMD().getValue() != null) {
+            div.getShinsei().getShinseiDetail().getTxtKettaiYMD().setValue(row.getTxtKetteiYMD().getValue());
+        }
+        if (row.getTxtTekiyoYMD() != null && row.getTxtTekiyoYMD().getValue() != null) {
+            div.getShinsei().getShinseiDetail().getTxtTekiyoYMD().setValue(row.getTxtTekiyoYMD().getValue());
+        }
+        if (row.getTxtYukoKigenYMD() != null && row.getTxtYukoKigenYMD().getValue() != null) {
+            div.getShinsei().getShinseiDetail().getTxtYukoKigenYMD().setValue(row.getTxtYukoKigenYMD().getValue());
+        }
         if (row.getKeigenritsu() != null) {
             div.getShinsei().getShinseiDetail().getTxtKeigenRitsu().setValue(new Decimal(row.getKeigenritsu().toString()));
         } else {
@@ -876,5 +906,28 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             return false;
         }
         return beforeVal.equals(afterVal);
+    }
+
+    /**
+     * 申請一覧エリアデータのComparatorです。（「申請年月日」の降順でソート）
+     */
+    public static class TokuteiNyushoServiceHiShinseiRowComparator implements Comparator<dgShinseiList_Row> {
+
+        @Override
+        public int compare(dgShinseiList_Row row1, dgShinseiList_Row row2) {
+
+            int result = !row2.getTxtShinseiYMD().getValue().isBeforeOrEquals(row1.getTxtShinseiYMD().getValue())
+                    ? 1 : (row2.getTxtShinseiYMD().getValue().equals(row1.getTxtShinseiYMD().getValue()) ? 0 : -1);
+
+            if (result == 0 && 追加.equals(row1.getJotai()) && 追加.equals(row2.getJotai())) {
+                result = row2.getHiddenShinseiRirekiNo().compareTo(row1.getHiddenShinseiRirekiNo());
+            }
+            if (result == 0 && 追加.equals(row2.getJotai())) {
+                result = 1;
+            } else if (result == 0 && 追加.equals(row1.getJotai())) {
+                result = -1;
+            }
+            return result;
+        }
     }
 }

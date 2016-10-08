@@ -167,7 +167,7 @@ public class IryouhiKoujyo {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             getHandler(div).init詳細データ();
-            return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
+            div.getIryohiKojyoSyosai().setIsOpen(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -180,7 +180,8 @@ public class IryouhiKoujyo {
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_CancleButton(IryouhiKoujyoDiv div) {
         getHandler(div).init詳細エリア();
-        return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
+        div.getIryohiKojyoSyosai().setIsOpen(false);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -207,7 +208,7 @@ public class IryouhiKoujyo {
             RString データ区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
             for (IryohiKojyoItiranDataGrid_Row row : dataSource) {
                 if (row.getHiddenCodeKubun().equals(データ区分) && row.getHiddentaisyouYY().getValue().equals(対象年)) {
-                    throw new ApplicationException(DbdErrorMessages.確認書_証明書発行不可.getMessage()
+                    throw new ApplicationException(DbdErrorMessages.被保_受給者登録なし.getMessage()
                             .replace(IryoHiKojoNaiyo.toValue(データ区分).get名称().toString()));
                 }
             }

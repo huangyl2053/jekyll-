@@ -47,7 +47,7 @@ public class InsTokuchoTsuikaIraiTempProcess extends BatchProcessBase<UeT0511Nen
 
     @Override
     protected IBatchReader createReader() {
-        RString 通知内容コード = TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード();
+        RString 通知内容コード = TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード();
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 parameter.toSelectTokuchoTsuikaIraiTempMyBatisParameter(通知内容コード));
     }

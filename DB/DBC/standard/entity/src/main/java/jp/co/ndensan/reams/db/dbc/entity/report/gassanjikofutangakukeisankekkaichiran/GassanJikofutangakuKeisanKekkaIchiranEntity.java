@@ -39,6 +39,7 @@ public class GassanJikofutangakuKeisanKekkaIchiranEntity {
     private RString 備考資格期間不正;
     private RString 備考高額支給額確認データ;
     private RString 識別コード;
+    private RString 住民種別コード;
     private RString 一覧用確認区分;
     private RString 一覧用確認区分２;
 

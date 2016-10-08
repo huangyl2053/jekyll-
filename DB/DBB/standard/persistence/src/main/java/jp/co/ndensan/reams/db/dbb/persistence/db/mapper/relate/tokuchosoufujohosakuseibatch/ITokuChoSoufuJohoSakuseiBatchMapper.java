@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.InsTorikomiRirekiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectChoshuHohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectFukaTempJouhouMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectJushochiDataMyBatisParameter;
@@ -69,6 +70,13 @@ public interface ITokuChoSoufuJohoSakuseiBatchMapper {
      * @return Integer
      */
     Integer getMAX連番();
+
+    /**
+     * 介護特別徴収情報取込履歴の登録です。
+     *
+     * @param parameter InsTorikomiRirekiMyBatisParameter
+     */
+    void 介護特別徴収情報取込履歴の登録(InsTorikomiRirekiMyBatisParameter parameter);
 
     /**
      * 介護保険年金特徴対象者情報追加用データを抽出する。

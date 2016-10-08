@@ -55,11 +55,11 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
             <include refid="allColumns_徴収方法Newest" />
         FROM
             rgdb."DbV2001ChoshuHoho" AS 徴収方法Newest
-        INNER JOIN "特徴依頼Temp" AS 特徴依頼Temp
-            ON 徴収方法Newest."fukaNendo" = 特徴依頼Temp."処理年度"
-            AND 徴収方法Newest."honHosokuM" = 特徴依頼Temp."捕捉月"
-            AND 徴収方法Newest."honNenkinNo" = 特徴依頼Temp."基礎年金番号"
-            AND 徴収方法Newest."honNenkinCode" = 特徴依頼Temp."年金コード"
+        INNER JOIN "特徴依頼追加Temp" AS 特徴依頼追加Temp
+            ON 徴収方法Newest."fukaNendo" = 特徴依頼追加Temp."shoriNendo"
+            AND 徴収方法Newest."honHosokuM" = 特徴依頼追加Temp."hosokuTsuki"
+            AND 徴収方法Newest."honNenkinNo" = 特徴依頼追加Temp."kisoNenkinNo"
+            AND 徴収方法Newest."honNenkinCode" = 特徴依頼追加Temp."nenkinCode"
 </select>
 
 <select resultOrdered="true" id="getMAX連番" 
@@ -69,6 +69,13 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
         FROM
             rgue."UeT1704KaigoTokuchoTorikomiRireki" AS 介護特別徴収情報
 </select>
+
+<insert id="介護特別徴収情報取込履歴の登録"
+    parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.InsTorikomiRirekiMyBatisParameter">
+    INSERT INTO rgue."UeT1704KaigoTokuchoTorikomiRireki"
+    ("renban","dataShubetsu","shoriTimestamp") 
+    VALUES (${連番},#{データ種別},#{処理日時})
+</insert>
 
 <select resultOrdered="true" id="get対象者情報追加用データ" 
         resultMap="resultMap_対象者情報追加用データ" fetchSize="500">
@@ -81,7 +88,6 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
         rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理Newest
     ON 特徴依頼追加Temp."hihokenshaNo" = 被保険者台帳管理Newest."hihokenshaNo"
     ORDER BY
-       特徴依頼追加Temp."renban",
        特徴依頼追加Temp."kisoNenkinNo",
        特徴依頼追加Temp."nenkinCode"
 </select>
@@ -105,7 +111,7 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
         ON "Nokumi"."CaT0714shikibetsuCode" = 特徴依頼追加Temp."shikibetsuCode"
         LEFT JOIN
             rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
-        ON 構成市町村マスタ."shichosonCode" = 特徴依頼追加Temp."koseiCityCode"
+        ON substring(構成市町村マスタ."shichosonCode",0,5)  = 特徴依頼追加Temp."koseiCityCode"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
     )
@@ -145,7 +151,7 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
         master
     LEFT JOIN
             rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
-        ON 構成市町村マスタ."shichosonCode" = master."構成市町村コード"
+        ON substring(構成市町村マスタ."shichosonCode",0,5) = master."構成市町村コード"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
 </select>
@@ -162,8 +168,10 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
     WHERE
         徴収方法Newest."tokuchoTeishiNichiji" IS NOT NULL
         AND 徴収方法Newest."tokuchoTeishiNichiji" <![CDATA[>=]]> master."対象開始日時"
-        AND 徴収方法Newest."tokuchoTeishiNichiji" <![CDATA[<]]> #{処理日時}
+        AND 徴収方法Newest."tokuchoTeishiNichiji" <![CDATA[<]]> to_char(to_date(#{処理日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD hhmmss')
         AND 徴収方法Newest."tokuchoTeishiJiyuCode" IS NOT NULL
+        AND 徴収方法Newest."tokuchoTeishiNichiji" <![CDATA[<>]]> ''
+        AND 徴収方法Newest."tokuchoTeishiJiyuCode" <![CDATA[<>]]> ''
         AND 徴収方法Newest."tokuchoTeishiJiyuCode" <![CDATA[<>]]> 'T1'
         AND 徴収方法Newest."tokuchoTeishiJiyuCode" <![CDATA[<>]]> 'T5'
         AND 徴収方法Newest."tokuchoTeishiJiyuCode" <![CDATA[<>]]> 'T7'
@@ -289,7 +297,8 @@ resultMap="resultMap_追加用データ" >
             </if>)
       WHERE
         被保険者台帳管理Newest."hihokennshaKubunCode" = '1'
-        AND 被保険者台帳管理Newest."shikakuSoshitsuJiyuCode" IS NULL
+        AND (被保険者台帳管理Newest."shikakuSoshitsuJiyuCode" IS NULL
+        OR 被保険者台帳管理Newest."shikakuSoshitsuJiyuCode" = '')
         AND 被保険者台帳管理Newest."jushochiTokureiFlag" = '1'
         AND 被保険者台帳管理."idoJiyuCode" = #{異動事由コード}
         AND to_char(被保険者台帳管理."lastUpdateTimestamp",'yyyyMMddHH24MISS') <![CDATA[>=]]> master."対象開始日時"
@@ -651,7 +660,6 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
             AND 徴収方法Newest."yokunendoKariNenkinCode" = 特徴追加依頼追加Temp."nenkinCode"
         </if>
         <if test="!is処理対象月が2月 and !is処理対象月が4月_6月">
-
             AND 徴収方法Newest."honHosokuM" = 特徴追加依頼追加Temp."hosokuTsuki"
             AND 徴収方法Newest."honNenkinNo" = 特徴追加依頼追加Temp."kisoNenkinNo"
             AND 徴収方法Newest."honNenkinCode" = 特徴追加依頼追加Temp."nenkinCode"
@@ -669,7 +677,6 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理Newest
     ON 特徴異動追加Temp."hihokenshaNo" = 被保険者台帳管理Newest."hihokenshaNo"
     ORDER BY
-       特徴異動追加Temp."renban",
        特徴異動追加Temp."kisoNenkinNo",
        特徴異動追加Temp."nenkinCode"
 </select>
@@ -751,6 +758,7 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
     UPDATE
         rgdb."DbT7022ShoriDateKanri"
     SET "kijunTimestamp" = #{処理日時},
+        "updateCount" = "updateCount" + 1,
         "lastUpdateTimestamp" = CURRENT_TIMESTAMP
     WHERE
         "subGyomuCode" = 'DBB'
