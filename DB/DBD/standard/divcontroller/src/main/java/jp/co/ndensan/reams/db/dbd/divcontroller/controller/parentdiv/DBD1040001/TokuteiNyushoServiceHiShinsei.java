@@ -80,7 +80,8 @@ public class TokuteiNyushoServiceHiShinsei {
 //                new HihokenshaNo(new RString("2190000001")),
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));
-        getHandler(div).initialize(資格対象者);
+        RString menuID = ResponseHolder.getMenuID();
+        getHandler(div).initialize(資格対象者, menuID);
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         if (!ResponseHolder.isReRequest()
@@ -97,7 +98,7 @@ public class TokuteiNyushoServiceHiShinsei {
             return ResponseData.of(div).respond();
         }
         List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = TokubetsuChiikiKasanGemmenService.createIntance()
-                .get特別地域加算減免申請の情報(被保険者番号);
+                .load特別地域加算減免申請All(被保険者番号);
         if (特別地域加算減免申請の情報List != null) {
             ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請の情報List, new ArrayList<>(特別地域加算減免申請の情報List));
             ArrayList<TokubetsuChiikiKasanGemmenViewState> viewStateList = new ArrayList<>();
@@ -109,7 +110,7 @@ public class TokuteiNyushoServiceHiShinsei {
         getHandler(div).前排他の設定(被保険者番号);
         ViewStateHolder.put(ViewStateKeys.新規履歴番号, 0);
         RString rootTitle;
-        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
+        if (menuID.equals(申請メニュー)) {
             rootTitle = 申請メニュー_タイトル;
         } else {
             rootTitle = 承認メニュー_タイトル;
@@ -173,7 +174,8 @@ public class TokuteiNyushoServiceHiShinsei {
 //                new HihokenshaNo(new RString("2190000001")),
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));
-        getHandler(div).set追加するボタン押下(資格対象者);
+        RString menuID = ResponseHolder.getMenuID();
+        getHandler(div).set追加するボタン押下(資格対象者, menuID);
         return ResponseData.of(div).setState(DBD1040001StateName.詳細);
     }
 
@@ -200,7 +202,8 @@ public class TokuteiNyushoServiceHiShinsei {
 //                new HihokenshaNo(new RString("2190000001")),
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));
-        getHandler(div).set申請一覧の修正ボタンをクリック(row, 資格対象者, 特別地域加算減免ViewState);
+        RString menuID = ResponseHolder.getMenuID();
+        getHandler(div).set申請一覧の修正ボタンをクリック(row, 資格対象者, 特別地域加算減免ViewState, menuID);
         return ResponseData.of(div).setState(DBD1040001StateName.詳細);
     }
 
@@ -347,7 +350,8 @@ public class TokuteiNyushoServiceHiShinsei {
         if (特別地域加算減免申請の情報 != null) {
             証記載保険者番号 = 特別地域加算減免申請の情報.get証記載保険者番号();
             履歴番号 = 特別地域加算減免申請の情報.get履歴番号();
-            boolean 変更あり = getHandler(div).申請情報_変更あり(特別地域加算減免申請の情報);
+            RString menuID = ResponseHolder.getMenuID();
+            boolean 変更あり = getHandler(div).申請情報_変更あり(特別地域加算減免申請の情報, menuID);
             if (変更あり) {
                 state = EntityDataState.Modified;
             } else {
@@ -456,7 +460,8 @@ public class TokuteiNyushoServiceHiShinsei {
         if (特別地域加算減免申請の情報 != null) {
             証記載保険者番号 = 特別地域加算減免申請の情報.get証記載保険者番号();
             履歴番号 = 特別地域加算減免申請の情報.get履歴番号();
-            boolean 変更あり = getHandler(div).申請情報_変更あり(特別地域加算減免申請の情報);
+            RString menuID = ResponseHolder.getMenuID();
+            boolean 変更あり = getHandler(div).申請情報_変更あり(特別地域加算減免申請の情報, menuID);
             if (変更あり) {
                 state = EntityDataState.Modified;
             } else {

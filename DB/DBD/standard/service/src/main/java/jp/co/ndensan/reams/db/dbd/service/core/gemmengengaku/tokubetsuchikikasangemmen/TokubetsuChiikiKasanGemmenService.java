@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,7 +79,7 @@ public class TokubetsuChiikiKasanGemmenService {
      * @return List<TokubetsuchiikiKasanGemmen>
      */
     @Transaction
-    public List<TokubetsuchiikiKasanGemmen> get特別地域加算減免申請の情報(HihokenshaNo 被保険者番号) {
+    public List<TokubetsuchiikiKasanGemmen> load特別地域加算減免申請All(HihokenshaNo 被保険者番号) {
         List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = new ArrayList<>();
         TokubetsuChiikiKasanGemmenParameter 検索条件 = new TokubetsuChiikiKasanGemmenParameter(
                 被保険者番号, GemmenGengakuShurui.特別地域加算減免.getコード());
@@ -133,7 +134,7 @@ public class TokubetsuChiikiKasanGemmenService {
         FlexibleDate 年度終了日 = estimate有効期限(適用日);
         FlexibleDate 年度終了日の前年;
         if (年度終了日.isEmpty()) {
-            年度終了日の前年 = FlexibleDate.EMPTY;
+            throw new ApplicationException("年度の取得に失敗しました。 年度終了日の設定を見直してください");
         } else {
             年度終了日の前年 = new FlexibleDate(年度終了日.getYearValue() - 1, 1, 1);
         }
