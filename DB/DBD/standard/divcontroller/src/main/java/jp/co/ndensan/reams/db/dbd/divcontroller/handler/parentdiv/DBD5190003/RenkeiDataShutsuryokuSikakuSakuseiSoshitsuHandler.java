@@ -19,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
  * 資格喪失（死亡）データ作成画面のハンドラークラスです。
@@ -57,12 +55,12 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
             YMDHMS 前回開始年月日時分 = history.getDataOutputKaishiYMDHMS();
             YMDHMS 前回終了年月日時分 = history.getDataOutputShuryoYMDHMS();
             if (前回開始年月日時分 != null) {
-                div.setTxtZenkaiKaishiDay(setTextBoxDate(前回開始年月日時分.getDate()));
-                div.setTxtZenkaiKaishiTime(setTextBoxTime(前回開始年月日時分.getRDateTime().getTime()));
+                div.getTxtZenkaiKaishiDay().setValue(前回開始年月日時分.getDate());
+                div.getTxtZenkaiKaishiTime().setValue(前回開始年月日時分.getRDateTime().getTime());
             }
             if (前回終了年月日時分 != null) {
-                div.setTxtZenkaiShuryoDay(setTextBoxDate(前回終了年月日時分.getDate()));
-                div.setTxtZenkaiShuryoTime(setTextBoxTime(前回終了年月日時分.getRDateTime().getTime()));
+                div.getTxtZenkaiShuryoDay().setValue(前回終了年月日時分.getDate());
+                div.getTxtZenkaiShuryoTime().setValue(前回終了年月日時分.getRDateTime().getTime());
                 今回開始データ処理(前回終了年月日時分);
             }
         }
@@ -108,18 +106,6 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
             div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_旧));
             div.getTxtNewFileName().setDisabled(true);
         }
-    }
-
-    private TextBoxDate setTextBoxDate(RDate rDate) {
-        TextBoxDate date = new TextBoxDate();
-        date.setValue(rDate);
-        return date;
-    }
-
-    private TextBoxTime setTextBoxTime(RTime rTime) {
-        TextBoxTime time = new TextBoxTime();
-        time.setValue(rTime);
-        return time;
     }
 
     private YokaigoNinteiGaibuDataOutputHistory get要介護認定外部データ出力履歴() {
