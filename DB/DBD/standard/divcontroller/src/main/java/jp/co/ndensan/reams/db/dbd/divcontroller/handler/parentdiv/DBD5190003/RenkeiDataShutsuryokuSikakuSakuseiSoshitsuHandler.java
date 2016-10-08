@@ -89,10 +89,10 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
         div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_旧));
         div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
         div.getTxtKonkaiShuryoTime().setValue(RDate.getNowTime());
-        div.getTxtZenkaiKaishiDay().setDisabled(true);
-        div.getTxtZenkaiKaishiTime().setDisabled(true);
-        div.getTxtZenkaiShuryoDay().setDisabled(true);
-        div.getTxtZenkaiShuryoTime().setDisabled(true);
+        div.getTxtZenkaiKaishiDay().setReadOnly(true);
+        div.getTxtZenkaiKaishiTime().setReadOnly(true);
+        div.getTxtZenkaiShuryoDay().setReadOnly(true);
+        div.getTxtZenkaiShuryoTime().setReadOnly(true);
         div.getTxtNewFileName().setDisabled(true);
     }
 

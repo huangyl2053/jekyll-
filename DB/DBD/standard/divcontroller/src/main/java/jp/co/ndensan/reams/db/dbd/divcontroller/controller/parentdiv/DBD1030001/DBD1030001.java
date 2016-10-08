@@ -240,6 +240,18 @@ public class DBD1030001 {
     public ResponseData<DBD1030001Div> onClick_onBeforeOpenDialog(DBD1030001Div div) {
         div.getShafukuRiyoshaKeigen().setGyomuCode(GyomuCode.DB介護保険.value());
         div.getShafukuRiyoshaKeigen().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        div.getShafukuRiyoshaKeigen().setTeikeibun(RString.EMPTY);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * URZ.SampleBunshoToroku　をダイアログで表示し、選択する。
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     */
+    public ResponseData<DBD1030001Div> onClose_btnOpenHiShoninRiyu(DBD1030001Div div) {
+        div.getTxtHiShoninRiyu().setValue(div.getShafukuRiyoshaKeigen().getTeikeibun());
         return ResponseData.of(div).respond();
     }
 

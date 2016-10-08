@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShogaishaKojoTaishoshaShinseiTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -59,6 +59,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuDiv extends Panel {
     private RString subGyomuCode;
     @JsonProperty("sampleBunshoGroupCode")
     private RString sampleBunshoGroupCode;
+    @JsonProperty("teikeibun")
+    private RString teikeibun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -280,6 +282,24 @@ public class ShogaishaKojoTaishoshaShinseiTorokuDiv extends Panel {
     @JsonProperty("sampleBunshoGroupCode")
     public void setSampleBunshoGroupCode(RString sampleBunshoGroupCode) {
         this.sampleBunshoGroupCode = sampleBunshoGroupCode;
+    }
+
+    /*
+     * getteikeibun
+     * @return teikeibun
+     */
+    @JsonProperty("teikeibun")
+    public RString getTeikeibun() {
+        return teikeibun;
+    }
+
+    /*
+     * setteikeibun
+     * @param teikeibun teikeibun
+     */
+    @JsonProperty("teikeibun")
+    public void setTeikeibun(RString teikeibun) {
+        this.teikeibun = teikeibun;
     }
 
     /*
