@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 事業高額介護サービス費追加のProcessフロークラスです。
@@ -19,8 +17,7 @@ public class InsJigyoKogakuKaigoServiceHiProcess extends SimpleBatchProcessBase 
 
     @Override
     protected void process() {
-        IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper = InstanceProvider.create(MapperProvider.class).
-                create(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
+        IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
         mapper.insert事業高額介護サービス費支給申請();
         mapper.insert事業高額介護サービス費支給判定結果();
         mapper.insert事業高額介護サービス費支給審査決定();

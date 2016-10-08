@@ -143,32 +143,32 @@
     <select resultOrdered="true" id="select給付実績中間高額一時の作成１"
             resultMap="result_KyufujissekiTyukannInsertEntity" fetchSize="500">
         SELECT
-        A.*,
-        B.*
-        FROM "TempKyufujissekiKihon4" AS A
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+        <include refid="allColumns_TempSetaiinShotokuHanteiEntity"/>
+        FROM "TempKyufujissekiKihon4" AS "DbT3017KyufujissekiKihon"
         INNER JOIN
-        "TempSetaiinShotokuHantei1" AS B
+        "TempSetaiinShotokuHantei1" AS "TempSetaiinShotokuHantei"
         ON
-        A."hiHokenshaNo" = B."hihokenshaNo"
-        AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
+        "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "TempSetaiinShotokuHantei"."hihokenshaNo"
+        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = substring("TempSetaiinShotokuHantei"."kijunYMD",1,6)
         WHERE
-        B."honninKubun" = '1'
+        "TempSetaiinShotokuHantei"."honninKubun" = '1'
     </select>
 
     <!-- 給付実績中間高額一時の作成2をINSERT用のデータの取得 -->
     <select resultOrdered="true" id="select給付実績中間高額一時の作成2"
             resultMap="result_KyufujissekiTyukannInsertEntity" fetchSize="500">
         SELECT
-        A.*,
-        B.*
-        FROM "TempKyufujissekiKihon3" AS A
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+        <include refid="allColumns_TempSetaiinShotokuHanteiEntity"/>
+        FROM "TempKyufujissekiKihon3" AS "DbT3017KyufujissekiKihon"
         INNER JOIN
-        "TempSetaiinShotokuHantei1" AS B
+        "TempSetaiinShotokuHantei1" AS "TempSetaiinShotokuHantei"
         ON
-        A."hiHokenshaNo" = B."hihokenshaNo"
-        AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
+        "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "TempSetaiinShotokuHantei"."hihokenshaNo"
+        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = substring("TempSetaiinShotokuHantei"."kijunYMD",1,6)
         WHERE
-        B."honninKubun" = '1'
+        "TempSetaiinShotokuHantei"."honninKubun" = '1'
     </select>
 
     <insert id="insert給付実績中間高額一時の作成31">
@@ -199,32 +199,32 @@
     <select resultOrdered="true" id="select給付実績中間事業高額一時の作成１"
             resultMap="result_KyufujissekiTyukannInsertEntity" fetchSize="500">
         SELECT
-        A.*,
-        B.*
-        FROM "TempKyufujissekiKihonJigyo4" AS A
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+        <include refid="allColumns_TempSetaiinShotokuHanteiEntity"/>
+        FROM "TempKyufujissekiKihonJigyo4" AS "DbT3017KyufujissekiKihon"
         INNER JOIN
-        "TempSetaiinShotokuHanteiJigyo1" AS B
+        "TempSetaiinShotokuHanteiJigyo1" AS "TempSetaiinShotokuHantei"
         ON
-        A."hiHokenshaNo" = B."hihokenshaNo"
-        AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
+        "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "TempSetaiinShotokuHantei"."hihokenshaNo"
+        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = substring("TempSetaiinShotokuHantei"."kijunYMD",1,6)
         WHERE
-        B."honninKubun" = '1'
+        "TempSetaiinShotokuHantei"."honninKubun" = '1'
     </select>
 
     <!-- 給付実績中間事業高額一時の作成2をINSERT用のデータの取得 -->
     <select resultOrdered="true" id="select給付実績中間事業高額一時の作成2"
             resultMap="result_KyufujissekiTyukannInsertEntity" fetchSize="500">
         SELECT
-        A.*,
-        B.*
-        FROM "TempKyufujissekiKihonJigyo3" AS A
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+        <include refid="allColumns_TempSetaiinShotokuHanteiEntity"/>
+        FROM "TempKyufujissekiKihonJigyo3" AS "DbT3017KyufujissekiKihon"
         INNER JOIN
-        "TempSetaiinShotokuHanteiJigyo1" AS B
+        "TempSetaiinShotokuHanteiJigyo1" AS "TempSetaiinShotokuHantei"
         ON
-        A."hiHokenshaNo" = B."hihokenshaNo"
-        AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
+        "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "TempSetaiinShotokuHantei"."hihokenshaNo"
+        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = substring("TempSetaiinShotokuHantei"."kijunYMD",1,6)
         WHERE
-        B."honninKubun" = '1'
+        "TempSetaiinShotokuHantei"."honninKubun" = '1'
     </select>
 
     <insert id="insert給付実績中間事業高額一時の作成31">
@@ -472,147 +472,67 @@
     </resultMap>
 
     <resultMap id="result_KyufujissekiTyukannInsertEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity" autoMapping="true">
-        <association property="給付実績基本情報高額一時" resultMap="ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="給付実績基本情報高額一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
         <association property="世帯員所得判定明細高額一時" resultMap="ResultMap_TempSetaiinShotokuHanteiEntity"/>
     </resultMap>
 
-    <resultMap id="ResultMap_DbT3017KyufujissekiKihonEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity" autoMapping="true">
-        <result property="insertDantaiCd" column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertTimestamp" column="insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="insertReamsLoginId" column="insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertContextId" column="insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
-        <result property="isDeleted" column="isDeleted" />
-        <result property="updateCount" column="updateCount" />
-        <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="lastUpdateReamsLoginId" column="lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kokanShikibetsuNo" column="kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
-        <result property="inputShikibetsuNo" column="inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
-        <result property="recodeShubetsuCode" column="recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shokisaiHokenshaNo" column="shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="jigyoshoNo" column="jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="kyufuSakuseiKubunCode" column="kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyufuJissekiKubunCode" column="kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="toshiNo" column="toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kohi1FutanshaNo" column="kohi1FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kohi1JukyushaNo" column="kohi1JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kohi2FutanshaNo" column="kohi2FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kohi2JukyushaNo" column="kohi2JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kohi3FutanshaNo" column="kohi3FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kohi3JukyushaNo" column="kohi3JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="umareYMD" column="umareYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yoKaigoJotaiKubunCode" column="yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyuSochiNyushoshaTokureiCode" column="kyuSochiNyushoshaTokureiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteiYukoKaishiYMD" column="ninteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ninteiYukoShuryoYMD" column="ninteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="rojinHokenShichosonNo" column="rojinHokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="rojinhokenJukyushaNo" column="rojinhokenJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kokiHokenshaNo" column="kokiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kokiHiHokenshaNo" column="kokiHiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kokuhoHokenshaNo" column="kokuhoHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kokuhoHiHokenshashoNo" column="kokuhoHiHokenshashoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kokuhoKojinNo" column="kokuhoKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyotakuServiceSakuseiKubunCode" column="kyotakuServiceSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyotakuKaigoShienJigyoshoNo" column="kyotakuKaigoShienJigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="kaishiYMD" column="kaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="chushiYMD" column="chushiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="chushiRiyuNyushomaeJyokyoCode" column="chushiRiyuNyushomaeJyokyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="nyushoYMD" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="nyushoJitsunissu" column="nyushoJitsunissu" />
-        <result property="gaihakuNissu" column="gaihakuNissu" />
-        <result property="taishogoJotaiCode" column="taishogoJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hokenKyufuritsu" column="hokenKyufuritsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
-        <result property="kohi1Kyufuritsu" column="kohi1Kyufuritsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
-        <result property="kohi2Kyufuritsu" column="kohi2Kyufuritsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
-        <result property="kohi3Kyufuritsu" column="kohi3Kyufuritsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
-        <result property="maeHokenServiceTanisu" column="maeHokenServiceTanisu" />
-        <result property="maeHokenSeikyugaku" column="maeHokenSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="maeHokenRiyoshaFutangaku" column="maeHokenRiyoshaFutangaku" />
-        <result property="maeHokenKinkyuShisetsuRyoyoSeikyugaku" column="maeHokenKinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="maeHokenTokuteiShinryohiSeikyugaku" column="maeHokenTokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" column="maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="maeKohi1ServiceTanisu" column="maeKohi1ServiceTanisu" />
-        <result property="maeKohi1Seikyugaku" column="maeKohi1Seikyugaku" />
-        <result property="maeKohi1RiyoshaFutangaku" column="maeKohi1RiyoshaFutangaku" />
-        <result property="maeKohi1KinkyuShisetsuRyoyoSeikyugaku" column="maeKohi1KinkyuShisetsuRyoyoSeikyugaku" />
-        <result property="maeKohi1TokuteiShinryohiSeikyugaku" column="maeKohi1TokuteiShinryohiSeikyugaku" />
-        <result property="maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" column="maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="maeKohi2ServiceTanisu" column="maeKohi2ServiceTanisu" />
-        <result property="maeKohi2Seikyugaku" column="maeKohi2Seikyugaku" />
-        <result property="maeKohi2RiyoshaFutangaku" column="maeKohi2RiyoshaFutangaku" />
-        <result property="maeKohi2KinkyuShisetsuRyoyoSeikyugaku" column="maeKohi2KinkyuShisetsuRyoyoSeikyugaku" />
-        <result property="maeKohi2TokuteiShinryohiSeikyugaku" column="maeKohi2TokuteiShinryohiSeikyugaku" />
-        <result property="maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" column="maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="maeKohi3ServiceTanisu" column="maeKohi3ServiceTanisu" />
-        <result property="maeKohi3Seikyugaku" column="maeKohi3Seikyugaku" />
-        <result property="maeKohi3RiyoshaFutangaku" column="maeKohi3RiyoshaFutangaku" />
-        <result property="maeKohi3KinkyuShisetsuRyoyoSeikyugaku" column="maeKohi3KinkyuShisetsuRyoyoSeikyugaku" />
-        <result property="maeKohi3TokuteiShinryohiSeikyugaku" column="maeKohi3TokuteiShinryohiSeikyugaku" />
-        <result property="maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" column="maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="atoHokenServiceTanisu" column="atoHokenServiceTanisu" />
-        <result property="atoHokenSeikyugaku" column="atoHokenSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="atoHokenRiyoshaFutangaku" column="atoHokenRiyoshaFutangaku" />
-        <result property="atoHokenKinkyuShisetsuRyoyoSeikyugaku" column="atoHokenKinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="atoHokenTokuteiShinryohiSeikyugaku" column="atoHokenTokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" column="atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="atoKohi1ServiceTanisu" column="atoKohi1ServiceTanisu" />
-        <result property="atoKohi1Seikyugaku" column="atoKohi1Seikyugaku" />
-        <result property="atoKohi1RiyoshaFutangaku" column="atoKohi1RiyoshaFutangaku" />
-        <result property="atoKohi1KinkyuShisetsuRyoyoSeikyugaku" column="atoKohi1KinkyuShisetsuRyoyoSeikyugaku" />
-        <result property="atoKohi1TokuteiShinryohiSeikyugaku" column="atoKohi1TokuteiShinryohiSeikyugaku" />
-        <result property="atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" column="atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="atoKohi2ServiceTanisu" column="atoKohi2ServiceTanisu" />
-        <result property="atoKohi2Seikyugaku" column="atoKohi2Seikyugaku" />
-        <result property="atoKohi2RiyoshaFutangaku" column="atoKohi2RiyoshaFutangaku" />
-        <result property="atoKohi2KinkyuShisetsuRyoyoSeikyugaku" column="atoKohi2KinkyuShisetsuRyoyoSeikyugaku" />
-        <result property="atoKohi2TokuteiShinryohiSeikyugaku" column="atoKohi2TokuteiShinryohiSeikyugaku" />
-        <result property="atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" column="atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="atoKohi3ServiceTanisu" column="atoKohi3ServiceTanisu" />
-        <result property="atoKohi3Seikyugaku" column="atoKohi3Seikyugaku" />
-        <result property="atoKohi3RiyoshaFutangaku" column="atoKohi3RiyoshaFutangaku" />
-        <result property="atoKohi3KinkyuShisetsuRyoyoSeikyugaku" column="atoKohi3KinkyuShisetsuRyoyoSeikyugaku" />
-        <result property="atoKohi3TokuteiShinryohiSeikyugaku" column="atoKohi3TokuteiShinryohiSeikyugaku" />
-        <result property="atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" column="atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
-        <result property="keikaiKubunCode" column="keikaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinsaYM" column="shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="sofuYM" column="sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="torikomiYM" column="torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="dokujiSakuseiKubun" column="dokujiSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hokenshaHoyuKyufujissekiJohoSakujoFlag" column="hokenshaHoyuKyufujissekiJohoSakujoFlag" />
+    <resultMap id="ResultMap_TempSetaiinShotokuHanteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="tempSetaiinShotokuHantei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="tempSetaiinShotokuHantei_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="tempSetaiinShotokuHantei_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shotokuNendo" column="tempSetaiinShotokuHantei_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="tempSetaiinShotokuHantei_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="tempSetaiinShotokuHantei_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="honninKubun" column="tempSetaiinShotokuHantei_honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubun" column="tempSetaiinShotokuHantei_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="tempSetaiinShotokuHantei_kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="tempSetaiinShotokuHantei_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="tempSetaiinShotokuHantei_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="tempSetaiinShotokuHantei_nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="tempSetaiinShotokuHantei_nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="tempSetaiinShotokuHantei_kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="torokuGyomu" column="tempSetaiinShotokuHantei_torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="tempSetaiinShotokuHantei_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shoboKubun" column="tempSetaiinShotokuHantei_shoboKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="roreiFukushi" column="tempSetaiinShotokuHantei_roreiFukushi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiinHihokenshaNo" column="tempSetaiinShotokuHantei_setaiinHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="setaiinHihokenshakubun" column="tempSetaiinShotokuHantei_setaiinHihokenshakubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninKazeiKubun" column="tempSetaiinShotokuHantei_honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiKazeiKubun" column="tempSetaiinShotokuHantei_setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuzukigaraCodeNen" column="tempSetaiinShotokuHantei_tsuzukigaraCodeNen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="atena_tsuzukigaraCode" column="tempSetaiinShotokuHantei_atena_tsuzukigaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TsuzukigaraCodeTypeHandler" />
+        <result property="atena_juminShubetsuCode" column="tempSetaiinShotokuHantei_atena_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="atena_seinengappiYMD" column="tempSetaiinShotokuHantei_atena_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
-    <resultMap id="ResultMap_TempSetaiinShotokuHanteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity" autoMapping="true">
-        <result property="hihokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
-        <result property="honninKubun" column="honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kazeiKubun" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kazeiKubunGemmenGo" column="kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gekihenKanwaKubun" column="gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gokeiShotokuGaku" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="nenkiniShunyuGaku" column="nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="torokuGyomu" column="torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="shoboKubun" column="shoboKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="roreiFukushi" column="roreiFukushi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="setaiinHihokenshaNo" column="setaiinHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="setaiinHihokenshakubun" column="setaiinHihokenshakubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="honninKazeiKubun" column="honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="setaiKazeiKubun" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="tsuzukigaraCodeNen" column="tsuzukigaraCodeNen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="atena_tsuzukigaraCode" column="atena_tsuzukigaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TsuzukigaraCodeTypeHandler" />
-        <result property="atena_juminShubetsuCode" column="atena_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="atena_seinengappiYMD" column="atena_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-    </resultMap>
+    <sql id="allColumns_TempSetaiinShotokuHanteiEntity">
+         "TempSetaiinShotokuHantei"."hihokenshaNo" as "tempSetaiinShotokuHantei_hihokenshaNo",
+         "TempSetaiinShotokuHantei"."shikibetsuCode" as "tempSetaiinShotokuHantei_shikibetsuCode",
+         "TempSetaiinShotokuHantei"."kijunYMD" as "tempSetaiinShotokuHantei_kijunYMD",
+         "TempSetaiinShotokuHantei"."shotokuNendo" as "tempSetaiinShotokuHantei_shotokuNendo",
+         "TempSetaiinShotokuHantei"."jushochiTokureiFlag" as "tempSetaiinShotokuHantei_jushochiTokureiFlag",
+         "TempSetaiinShotokuHantei"."setaiCode" as "tempSetaiinShotokuHantei_setaiCode",
+         "TempSetaiinShotokuHantei"."honninKubun" as "tempSetaiinShotokuHantei_honninKubun",
+         "TempSetaiinShotokuHantei"."kazeiKubun" as "tempSetaiinShotokuHantei_kazeiKubun",
+         "TempSetaiinShotokuHantei"."kazeiKubunGemmenGo" as "tempSetaiinShotokuHantei_kazeiKubunGemmenGo",
+         "TempSetaiinShotokuHantei"."gekihenKanwaKubun" as "tempSetaiinShotokuHantei_gekihenKanwaKubun",
+         "TempSetaiinShotokuHantei"."gokeiShotokuGaku" as "tempSetaiinShotokuHantei_gokeiShotokuGaku",
+         "TempSetaiinShotokuHantei"."nenkiniShunyuGaku" as "tempSetaiinShotokuHantei_nenkiniShunyuGaku",
+         "TempSetaiinShotokuHantei"."nenkiniShotokuGaku" as "tempSetaiinShotokuHantei_nenkiniShotokuGaku",
+         "TempSetaiinShotokuHantei"."kazeiShotokuGaku" as "tempSetaiinShotokuHantei_kazeiShotokuGaku",
+         "TempSetaiinShotokuHantei"."torokuGyomu" as "tempSetaiinShotokuHantei_torokuGyomu",
+         "TempSetaiinShotokuHantei"."shichosonCode" as "tempSetaiinShotokuHantei_shichosonCode",
+         "TempSetaiinShotokuHantei"."shoboKubun" as "tempSetaiinShotokuHantei_shoboKubun",
+         "TempSetaiinShotokuHantei"."roreiFukushi" as "tempSetaiinShotokuHantei_roreiFukushi",
+         "TempSetaiinShotokuHantei"."setaiinHihokenshaNo" as "tempSetaiinShotokuHantei_setaiinHihokenshaNo",
+         "TempSetaiinShotokuHantei"."setaiinHihokenshakubun" as "tempSetaiinShotokuHantei_setaiinHihokenshakubun",
+         "TempSetaiinShotokuHantei"."honninKazeiKubun" as "tempSetaiinShotokuHantei_honninKazeiKubun",
+         "TempSetaiinShotokuHantei"."setaiKazeiKubun" as "tempSetaiinShotokuHantei_setaiKazeiKubun",
+         "TempSetaiinShotokuHantei"."tsuzukigaraCodeNen" as "tempSetaiinShotokuHantei_tsuzukigaraCodeNen",
+         "TempSetaiinShotokuHantei"."atena_tsuzukigaraCode" as "tempSetaiinShotokuHantei_atena_tsuzukigaraCode",
+         "TempSetaiinShotokuHantei"."atena_juminShubetsuCode" as "tempSetaiinShotokuHantei_atena_juminShubetsuCode",
+         "TempSetaiinShotokuHantei"."atena_seinengappiYMD" as "tempSetaiinShotokuHantei_atena_seinengappiYMD"
+    </sql>
     <!--tianshuai END-->
 
     <!--lifei START-->
