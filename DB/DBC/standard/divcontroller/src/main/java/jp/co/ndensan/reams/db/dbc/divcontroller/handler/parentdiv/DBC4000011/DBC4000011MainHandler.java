@@ -296,6 +296,7 @@ public class DBC4000011MainHandler {
             row.setDeleteButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
+        定率定額区分選択();
         return identifier;
     }
 
@@ -335,6 +336,8 @@ public class DBC4000011MainHandler {
         if (サービス内容.get提供終了年月() != null && !サービス内容.get提供終了年月().isEmpty()) {
             RDate 提供終了年月 = new RDate(サービス内容.get提供終了年月().getYearValue(), サービス内容.get提供終了年月().getMonthValue());
             div.getServiceShosai().getTxtTeikyoKikanYM().setToValue(提供終了年月);
+        } else {
+            div.getServiceShosai().getTxtTeikyoKikanYM().clearToValue();
         }
         div.getServiceShosai().getTxtTani().setValue(new Decimal(サービス内容.get単位数()));
         div.getServiceShosai().getDdlTanisuShikibetsu().setSelectedKey(サービス内容.get単位数識別().getColumnValue());
@@ -342,49 +345,63 @@ public class DBC4000011MainHandler {
         div.getServiceShosai().getRadTeiritsuOrTeigaku().setSelectedKey(サービス内容.get利用者負担定率定額区分());
         if (!RString.isNullOrEmpty(サービス内容.get給付率())) {
             div.getServiceShosai().getTxtKyufuritsu().setValue(new Decimal(サービス内容.get給付率().toString()));
+        } else {
+            div.getServiceShosai().getTxtKyufuritsu().clearValue();
         }
         if (!RString.isNullOrEmpty(サービス内容.get利用者負担額())) {
             div.getServiceShosai().getTxtRiyoshaFutangaku().setValue(new Decimal(サービス内容.get利用者負担額().toString()));
+        } else {
+            div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
         }
         div.getServiceShosai().getDdlTanisuSanteiTaniCode().setSelectedKey(サービス内容.get単位数算定単位().getColumnValue());
         if (!RString.isNullOrEmpty(サービス内容.get制限日数回数())) {
             div.getServiceShosai().getTxtSeigenNissuKaisu().setValue(new Decimal(サービス内容.get制限日数回数().toString()));
+        } else {
+            div.getServiceShosai().getTxtSeigenNissuKaisu().clearValue();
         }
         div.getServiceShosai().getDdlSanteiKaisuSeigenKikanKubun().setSelectedKey(サービス内容.get算定回数制限期間区分());
         RString 対象事業者実施区分 = サービス内容.get対象事業者実施区分();
         if (対象事業者実施区分.equals(RST_1) || 対象事業者実施区分.equals(RST_2)) {
             div.getServiceShosai().getSegTaishoJigyoJishiKubun().setSelectedKey(対象事業者実施区分);
+        } else {
+            div.getServiceShosai().getSegTaishoJigyoJishiKubun().clearSelectedItem();
         }
         RString 要支援１ = サービス内容.get要支援１受給者実施区分();
         if (要支援１.equals(RST_1) || 要支援１.equals(RST_2)) {
             div.getServiceShosai().getSegYoshien1().setSelectedKey(要支援１);
+        } else {
+            div.getServiceShosai().getSegTaishoJigyoJishiKubun().clearSelectedItem();
         }
         RString 要支援２ = サービス内容.get要支援２受給者実施区分();
         if (要支援２.equals(RST_1) || 要支援２.equals(RST_2)) {
             div.getServiceShosai().getSegYoshien2().setSelectedKey(要支援２);
+        } else {
+            div.getServiceShosai().getSegYoshien2().clearSelectedItem();
         }
         RString 二次予防 = サービス内容.get二次予防事業対象者実施区分非該当();
         if (二次予防.equals(RST_1) || 二次予防.equals(RST_2)) {
             div.getServiceShosai().getSegNijiYobosha().setSelectedKey(二次予防);
+        } else {
+            div.getServiceShosai().getSegNijiYobosha().clearSelectedItem();
         }
         RString 限度額対象外 = サービス内容.get限度額対象外フラグ();
+        List<RString> selectList限度額対象外 = new ArrayList<>();
         if (限度額対象外.equals(RST_1)) {
-            List<RString> selectList = new ArrayList<>();
-            selectList.add(限度額対象外);
-            div.getServiceShosai().getChkGendogakuTaishogai().setSelectedItemsByKey(selectList);
+            selectList限度額対象外.add(限度額対象外);
         }
+        div.getServiceShosai().getChkGendogakuTaishogai().setSelectedItemsByKey(selectList限度額対象外);
         RString 外部サービス利用型区分 = サービス内容.get外部サービス利用型区分();
+        List<RString> selectList外部サービス利用型区分 = new ArrayList<>();
         if (外部サービス利用型区分.equals(RST_2)) {
-            List<RString> selectList = new ArrayList<>();
-            selectList.add(外部サービス利用型区分);
-            div.getServiceShosai().getChkGaibuService().setSelectedItemsByKey(selectList);
+            selectList外部サービス利用型区分.add(外部サービス利用型区分);
         }
+        div.getServiceShosai().getChkGaibuService().setSelectedItemsByKey(selectList外部サービス利用型区分);
         RString 特別地域 = サービス内容.get特別地域加算フラグ();
+        List<RString> selectList = new ArrayList<>();
         if (特別地域.equals(RST_1)) {
-            List<RString> selectList = new ArrayList<>();
             selectList.add(特別地域);
-            div.getServiceShosai().getChkTokubetsuChiikiKasn().setSelectedItemsByKey(selectList);
         }
+        div.getServiceShosai().getChkTokubetsuChiikiKasn().setSelectedItemsByKey(selectList);
     }
 
     private void clear詳細パネル() {
