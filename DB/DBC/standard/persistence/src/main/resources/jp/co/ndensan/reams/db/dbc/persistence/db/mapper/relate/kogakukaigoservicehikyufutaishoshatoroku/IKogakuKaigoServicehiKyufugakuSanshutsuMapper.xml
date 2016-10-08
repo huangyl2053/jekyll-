@@ -687,7 +687,7 @@
    <!--高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
     <select resultOrdered="true" id="select高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
-            resultMap="世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
+            resultMap="高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
         SELECT
             A.*,
             宛名PSM.*
@@ -699,7 +699,7 @@
         ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
         WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
     </select>
-    <resultMap id="世帯員所得判定明細高額一時２と宛名情報ResultMap" 
+    <resultMap id="高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
@@ -709,7 +709,7 @@
    <!--事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
     <select resultOrdered="true" id="select事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
-            resultMap="世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
+            resultMap="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
         SELECT
             A.*,
             宛名PSM.*
@@ -721,7 +721,7 @@
         ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
         WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
     </select>
-    <resultMap id="世帯員所得判定明細高額一時２と宛名情報ResultMap" 
+    <resultMap id="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
