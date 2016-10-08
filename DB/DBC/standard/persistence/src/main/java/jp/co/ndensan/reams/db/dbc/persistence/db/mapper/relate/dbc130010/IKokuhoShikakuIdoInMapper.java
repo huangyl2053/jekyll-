@@ -56,6 +56,13 @@ public interface IKokuhoShikakuIdoInMapper {
     List<KokuhoShikakuJyohoInpotoyoEntity> get国保資格情報インポート用Entitｙリスト();
 
     /**
+     * 一時表国保資格情報インポート用Entitｙリストデータ件数を取得。
+     *
+     * @return Integer
+     */
+    Integer get国保資格情報インポート用Entitｙ件数();
+
+    /**
      * 国保資格情報を削除する。
      *
      */

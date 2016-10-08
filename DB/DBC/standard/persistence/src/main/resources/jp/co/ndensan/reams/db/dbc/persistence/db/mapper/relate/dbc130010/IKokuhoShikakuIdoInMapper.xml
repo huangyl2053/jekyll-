@@ -92,6 +92,14 @@
         "tempKokuhoShikakuJyohoInpotoyo"
     </select>
     
+    <select resultOrdered="true" id = "get国保資格情報インポート用Entitｙ件数" 
+            resultType="java.lang.Integer" fetchSize="500">
+        SELECT
+        COUNT(*)
+        FROM
+        "tempKokuhoShikakuJyohoInpotoyo"
+    </select>
+    
     <delete id = "delete国保資格情報">
         DELETE FROM rgdb."DbT7123KokuhoShikakuInfo"
     </delete>
