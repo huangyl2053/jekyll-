@@ -46,10 +46,26 @@ public class ItakusakiChosainIchiranHandler {
         DBE592001_ItakusakiChosainParameter param = new DBE592001_ItakusakiChosainParameter();
         param.setShichosonCode(div.getHokensha().getSelectedItem().get市町村コード().getColumnValue());
         param.setShichosonMeisho(div.getHokensha().getSelectedItem().get市町村名称());
-        param.setItakusakiCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
-        param.setItakusakiCodeTo(div.getTxtIryoKikanCodeTo().getValue());
-        param.setChosainNoFrom(div.getTxtShujiiCodeFrom().getValue());
-        param.setChosainNoTo(div.getTxtShujiiCodeTo().getValue());
+        if (RString.isNullOrEmpty(div.getTxtIryoKikanCodeFrom().getValue())) {
+            param.setItakusakiCodeFrom(new RString("0000000000"));
+        } else {
+            param.setItakusakiCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
+        }
+        if (RString.isNullOrEmpty(div.getTxtIryoKikanCodeTo().getValue())) {
+            param.setItakusakiCodeTo(new RString("9999999999"));
+        } else {
+            param.setItakusakiCodeTo(div.getTxtIryoKikanCodeTo().getValue());
+        }
+        if (RString.isNullOrEmpty(div.getTxtShujiiCodeFrom().getValue())) {
+            param.setChosainNoFrom(new RString("00000000"));
+        } else {
+            param.setChosainNoFrom(div.getTxtShujiiCodeFrom().getValue());
+        }
+        if (RString.isNullOrEmpty(div.getTxtShujiiCodeTo().getValue())) {
+            param.setChosainNoTo(new RString("99999999"));
+        } else {
+            param.setChosainNoTo(div.getTxtShujiiCodeTo().getValue());
+        }
         setパラメータ状況(param);
         setパラメータ並び順(param);
         setパラメータ改頁(param);
