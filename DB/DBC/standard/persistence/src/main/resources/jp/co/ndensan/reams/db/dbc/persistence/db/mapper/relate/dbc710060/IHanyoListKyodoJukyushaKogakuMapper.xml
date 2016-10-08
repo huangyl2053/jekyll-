@@ -205,7 +205,7 @@
         <result property="setaiShuyakuNo" column="dbT3004KyodoShoriyoJukyushaIdoKogakuSofu_setaiShuyakuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="setaiShotokuKubunCode" column="dbT3004KyodoShoriyoJukyushaIdoKogakuSofu_setaiShotokuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shotokuKubunCode" column="dbT3004KyodoShoriyoJukyushaIdoKogakuSofu_shotokuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="roureiFukushiNenkinJukyuAriFlag" column="dbT3004KyodoShoriyoJukyushaIdoKogakuSofu_roureiFukushiNenkinJukyuAriFlag" />
+        <result property="roureiFukushiNenkinJukyuAriFlag" column="dbT3004_roureiFukushiNenkinJukyuAriFlag" />
         <result property="riyoshaFutan2DankaiAriFlag" column="dbT3004_riyoshaFutan2DankaiAriFlag" />
         <result property="shikyuShinseishoOutputAriFlag" column="dbT3004_shikyuShinseishoOutputAriFlag" />
         <result property="teiseiRenrakuhyoFlag" column="dbT3004_teiseiRenrakuhyoFlag" />
