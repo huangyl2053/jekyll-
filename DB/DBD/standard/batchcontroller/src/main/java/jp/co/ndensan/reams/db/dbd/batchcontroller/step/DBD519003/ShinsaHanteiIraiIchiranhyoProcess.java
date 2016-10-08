@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519003;
 
-import java.util.ArrayList;
-import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd519003.ShinsaHanteiIraiIchiranhyoCsvProcessCore;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd503001.ShinsaHanteiIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5190003.RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -15,11 +14,6 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchira
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -44,10 +38,12 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
     private static final ReportId REPORT_DBD503001 = ReportIdDBD.DBD503001.getReportId();
     private static final RString 今回開始日時 = new RString("【今回開始日時】");
     private static final RString 今回終了日時 = new RString("【今回終了日時】");
+    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private int 连番;
     private static final int 连番_INITIALIZE = 1;
     private static final int 先頭9桁 = 9;
     private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
+    private ShinsaHanteiIraiIchiranhyoCsvProcessCore core;
 
     @BatchWriter
     private BatchReportWriter<ShinsaHanteiIraiIchiranhyoReportSource> batchReportWriter;
@@ -58,6 +54,7 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
         连番 = 连番_INITIALIZE;
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
         shikibetsuTaishoPSMSearchKey = key.build();
+        core = new ShinsaHanteiIraiIchiranhyoCsvProcessCore();
     }
 
     @Override
@@ -83,29 +80,6 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
 
     @Override
     protected void afterExecute() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                REPORT_DBD503001.getColumnValue().substring(0, 先頭9桁),
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBD.DBD503001.getReportName(),
-                new RString(batchReportWriter.getPageCount()),
-                new RString("なし"),
-                new RString("なし"),
-                contribute());
-        OutputJokenhyoFactory.createInstance(item).print();
+        core.資格喪失帳票出力(batchReportWriter, para);
     }
-
-    private List<RString> contribute() {
-        List<RString> 出力条件 = new ArrayList<>();
-        if (para.getKonkaikaishidatetime() != null && para.getKonkaikaishidatetime().getDate().isWareki()) {
-            出力条件.add(今回開始日時.concat(para.getKonkaikaishidatetime().getDate().wareki().toDateString()));
-        }
-        if (para.getKonkaishoridatetime() != null && para.getKonkaishoridatetime().getDate().isWareki()) {
-            出力条件.add(今回終了日時.concat(para.getKonkaishoridatetime().getDate().wareki().toDateString()));
-        }
-        return 出力条件;
-    }
-
 }
