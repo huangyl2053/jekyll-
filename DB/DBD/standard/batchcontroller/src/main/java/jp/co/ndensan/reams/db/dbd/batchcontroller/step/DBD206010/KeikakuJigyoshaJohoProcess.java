@@ -56,7 +56,7 @@ public class KeikakuJigyoshaJohoProcess extends BatchProcessBase<KeikakuJigyosha
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toDBD206010MybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toDBD206010MybatisParameter(orderBy));
     }
 
     @Override
