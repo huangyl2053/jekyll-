@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraijohoichiran.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
@@ -54,31 +54,31 @@ public class PrtTokuchoIraijohoIchiranhyoProcessPageBreak extends PageBreaker<To
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuIraiJohoIchiranSource> currentRecord,
             ReportLineRecord<TokubetsuChoshuIraiJohoIchiranSource> nextRecord) {
         boolean flag = false;
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.行政区コード.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.行政区コード.get項目ID())) {
             flag = !currentRecord.getSource().listUpper_5.equals(nextRecord.getSource().listUpper_5);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.識別コード.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.識別コード.get項目ID())) {
             flag = !currentRecord.getSource().listLower_1.equals(nextRecord.getSource().listLower_1);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.氏名５０音カナ.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.氏名５０音カナ.get項目ID())) {
             flag = !currentRecord.getSource().listUpper_3.equals(nextRecord.getSource().listUpper_3);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.生年月日.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.生年月日.get項目ID())) {
             flag = !currentRecord.getSource().listUpper_4.equals(nextRecord.getSource().listUpper_4);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.性別.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.性別.get項目ID())) {
             flag = !currentRecord.getSource().listLower_4.equals(nextRecord.getSource().listLower_4);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.市町村コード.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.市町村コード.get項目ID())) {
             flag = !currentRecord.getSource().shichosonCode.equals(nextRecord.getSource().shichosonCode);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.被保険者番号.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.被保険者番号.get項目ID())) {
             flag = !currentRecord.getSource().listUpper_1.equals(nextRecord.getSource().listUpper_1);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.年金コード.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.年金コード.get項目ID())) {
             flag = !currentRecord.getSource().listLower_2.equals(nextRecord.getSource().listLower_2);
         }
-        if (!flag && this.keys.contains(TokubetsuChoshuIraiJohoIchiranProperty.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.年金番号.get項目ID())) {
+        if (!flag && this.keys.contains(DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.年金番号.get項目ID())) {
             flag = !currentRecord.getSource().listUpper_2.equals(nextRecord.getSource().listUpper_2);
         }
         return flag;

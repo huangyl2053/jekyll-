@@ -45,6 +45,8 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
     private static final RString 特別徴収_厚生労働省 = new RString("1");
     private static final RString 特別徴収_地共済 = new RString("2");
     private static final RString 住所地特例フラグ_1 = new RString("1");
+    private static final RString 国保世帯コードが0 = new RString("0");
+
     private static final int 期1 = 1;
     private static final int 期2 = 2;
     private static final int 期3 = 3;
@@ -116,7 +118,7 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
         RString dT各種区分 = getDT各種区分(徴収方法Newest, 被保険者台帳管理Newest);
         RString dT各種年月日 = parameter.getシステム日時().getDate().toDateString();
 
-        SetaiCode 国保世帯コード = new SetaiCode(new RString("0"));
+        SetaiCode 国保世帯コード = new SetaiCode(国保世帯コードが0);
         entity.setShoriNendo(処理年度);
         entity.setTsuchiNaiyoCode(通知内容コード);
         entity.setShoriTaishoYM(処理対象年月);
@@ -125,26 +127,26 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
         entity.setDtTsuchiNaiyoCode(dT通知内容コード);
         entity.setDtBaitaiCode(DT媒体コード_回線);
         entity.setDtSakuseiYMD(dT作成年月日);
-        entity.setDtYobi1(RString.HALF_SPACE);
+        entity.setDtYobi1(RString.EMPTY);
         entity.setDtKakushuKubun(dT各種区分);
-        entity.setDtShoriKekka(RString.HALF_SPACE);
-        entity.setDtKokiIkanCode(RString.HALF_SPACE);
+        entity.setDtShoriKekka(RString.EMPTY);
+        entity.setDtKokiIkanCode(RString.EMPTY);
         entity.setDtKakushuYMD(dT各種年月日);
 
-        entity.setDtYobi2(RString.HALF_SPACE);
+        entity.setDtYobi2(RString.EMPTY);
         if (!DT各種区分_03.equals(dT各種区分) && 被保険者台帳管理Newest != null) {
             entity.setShikibetsuCode(被保険者台帳管理Newest.getShikibetsuCode());
             entity.setHihokenshaNo(被保険者台帳管理Newest.getHihokenshaNo().value());
         }
         entity.setKokuhoSetaiCode(国保世帯コード);
-        entity.setDtKakushuKingaku4(RString.HALF_SPACE);
-        entity.setDtKakushuKingaku5(RString.HALF_SPACE);
-        entity.setDtKakushuKingaku6(RString.HALF_SPACE);
-        entity.setDtKakushuKingaku7(RString.HALF_SPACE);
-        entity.setDtKakushuKingaku8(RString.HALF_SPACE);
-        entity.setDtTeishiYM(RString.HALF_SPACE);
-        entity.setDtYobi4Juminzei(RString.HALF_SPACE);
-        entity.setDtKojinNo(RString.HALF_SPACE);
+        entity.setDtKakushuKingaku4(RString.EMPTY);
+        entity.setDtKakushuKingaku5(RString.EMPTY);
+        entity.setDtKakushuKingaku6(RString.EMPTY);
+        entity.setDtKakushuKingaku7(RString.EMPTY);
+        entity.setDtKakushuKingaku8(RString.EMPTY);
+        entity.setDtTeishiYM(RString.EMPTY);
+        entity.setDtYobi4Juminzei(RString.EMPTY);
+        entity.setDtKojinNo(RString.EMPTY);
         return entity;
     }
 
