@@ -1,0 +1,2488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3770-060 liuwei2 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushagenmenjkoujyotai.IJukyushagenmenshinseiMapper">
+    <select
+        resultOrdered="true"
+        id="get認定状況情報"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd104010.DBD104010MybatisParameter"
+        resultMap="ResultMap_NinteijyotaiEntity" fetchSize="500">
+        select
+        '1' as tableFlag,
+        '0' as flag,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報."shinseiYMD" end )as 月4件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報."shinseiYMD" end )as 月5件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報."shinseiYMD" end )as 月6件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報."shinseiYMD" end )as 月7件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報."shinseiYMD" end )as 月8件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報."shinseiYMD" end )as 月9件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報."shinseiYMD" end )as 月10件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報."shinseiYMD" end )as 月11件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報."shinseiYMD" end )as 月12件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報."shinseiYMD" end )as 月1件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報."shinseiYMD" end )as 月2件数,
+        count( case substring(受給者情報."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報."shinseiYMD" end )as 月3件数
+        from (SELECT
+        "DbT4012HyojunFutangakuGemmen"."hihokenshaNo",
+        "DbT4012HyojunFutangakuGemmen"."rirekiNo",
+        "DbT4012HyojunFutangakuGemmen"."shinseiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiKubun",
+        "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD",
+        "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD",
+        "DbT4012HyojunFutangakuGemmen"."gengakuKubun",
+        "DbT4012HyojunFutangakuGemmen"."gengakugoKingaku",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4012HyojunFutangakuGemmen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4012HyojunFutangakuGemmen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND  EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4012HyojunFutangakuGemmen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."shinseiYMD" AND
+        ("DbT4012HyojunFutangakuGemmen"."shinseiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4012HyojunFutangakuGemmen"."hihokenshaNo",
+        "DbT4012HyojunFutangakuGemmen"."rirekiNo",
+        "DbT4012HyojunFutangakuGemmen"."shinseiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiYMD")AS 受給者情報
+
+        union
+        SELECT
+        '1' as tableFlag,
+        (case when 受給者情報1."ketteiKubun" = '1' then '1' else '5' END)as flag,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報1."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報1."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報1."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報1."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報1."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報1."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報1."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報1."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報1."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報1."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報1."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報1."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報1."ketteiYMD" end )as 月3件数
+        from (SELECT
+        "DbT4012HyojunFutangakuGemmen"."hihokenshaNo",
+        "DbT4012HyojunFutangakuGemmen"."rirekiNo",
+        "DbT4012HyojunFutangakuGemmen"."shinseiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiKubun",
+        "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD",
+        "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD",
+        "DbT4012HyojunFutangakuGemmen"."gengakuKubun",
+        "DbT4012HyojunFutangakuGemmen"."gengakugoKingaku",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4012HyojunFutangakuGemmen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4012HyojunFutangakuGemmen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND  EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4012HyojunFutangakuGemmen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."ketteiYMD" AND
+        ("DbT4012HyojunFutangakuGemmen"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4012HyojunFutangakuGemmen"."hihokenshaNo",
+        "DbT4012HyojunFutangakuGemmen"."rirekiNo",
+        "DbT4012HyojunFutangakuGemmen"."shinseiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiYMD"
+        )AS  受給者情報1
+        group by tableFlag,flag
+
+        union
+        SELECT
+        '1' as tableFlag,
+        (CASE WHEN 受給者情報11."gengakuKubun" = '01' THEN '2' WHEN  受給者情報11."gengakuKubun" = '02' THEN '3'
+        ELSE '4' END)as flag,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報11."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報11."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報11."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報11."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報11."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報11."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報11."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報11."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報11."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報11."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報11."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報11."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報11."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4012HyojunFutangakuGemmen"."hihokenshaNo",
+        "DbT4012HyojunFutangakuGemmen"."rirekiNo",
+        "DbT4012HyojunFutangakuGemmen"."shinseiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiKubun",
+        "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD",
+        "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD",
+        "DbT4012HyojunFutangakuGemmen"."gengakuKubun",
+        "DbT4012HyojunFutangakuGemmen"."gengakugoKingaku",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4012HyojunFutangakuGemmen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4012HyojunFutangakuGemmen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS(
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4012HyojunFutangakuGemmen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."ketteiYMD" AND
+        ("DbT4012HyojunFutangakuGemmen"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4012HyojunFutangakuGemmen"."hihokenshaNo",
+        "DbT4012HyojunFutangakuGemmen"."rirekiNo",
+        "DbT4012HyojunFutangakuGemmen"."shinseiYMD",
+        "DbT4012HyojunFutangakuGemmen"."ketteiYMD"
+        )as  受給者情報11
+        group by tableFlag,flag
+
+        UNION ALL
+        select
+        '2' as tableFlag,
+        '0' as flag,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報2."shinseiYMD" end )as 月4件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報2."shinseiYMD" end )as 月5件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報2."shinseiYMD" end )as 月6件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報2."shinseiYMD" end )as 月7件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報2."shinseiYMD" end )as 月8件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報2."shinseiYMD" end )as 月9件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報2."shinseiYMD" end )as 月10件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報2."shinseiYMD" end )as 月11件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報2."shinseiYMD" end )as 月12件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報2."shinseiYMD" end )as 月1件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報2."shinseiYMD" end )as 月2件数,
+        count( case substring(受給者情報2."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報2."shinseiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."kyuhuritsu",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD" AND
+        ("DbT4014RiyoshaFutangakuGengaku"."shinseiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD"
+        )
+        as 受給者情報2
+
+        union
+        SELECT
+        '2' as tableFlag,
+        (case when 受給者情報22."ketteiKubun" = '1' then '1' else '5' END)as flag,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報22."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報22."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報22."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報22."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報22."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報22."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報22."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報22."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報22."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報22."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報22."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報22."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報22."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."kyuhuritsu",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" AND
+        ("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+
+        ORDER BY
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD"
+        )
+        as 受給者情報22
+        group by tableFlag,flag
+        union
+        SELECT
+        '2' as tableFlag,
+        (CASE WHEN '91' <![CDATA[<=]]> 受給者情報222."kyuhuritsu"  AND 受給者情報222."kyuhuritsu" <![CDATA[<=]]> '95' THEN '2'
+        WHEN  '96' <![CDATA[<=]]> 受給者情報222."kyuhuritsu"  AND 受給者情報222."kyuhuritsu" <![CDATA[<=]]> '99' THEN '3'
+        ELSE '4' END)as flag,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報222."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報222."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報222."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報222."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報222."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報222."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報222."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報222."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報222."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報222."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報222."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報222."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報222."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."kyuhuritsu",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" AND
+        ("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4014RiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD"
+        ) as  受給者情報222
+        group by tableFlag,flag
+
+
+
+        UNION ALL
+        select
+        '3' as tableFlag,
+        '0' as flag,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報3."shinseiYMD" end )as 月4件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報3."shinseiYMD" end )as 月5件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報3."shinseiYMD" end )as 月6件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報3."shinseiYMD" end )as 月7件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報3."shinseiYMD" end )as 月8件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報3."shinseiYMD" end )as 月9件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報3."shinseiYMD" end )as 月10件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報3."shinseiYMD" end )as 月11件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報3."shinseiYMD" end )as 月12件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報3."shinseiYMD" end )as 月1件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報3."shinseiYMD" end )as 月2件数,
+        count( case substring(受給者情報3."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報3."shinseiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."kyufuritsu",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hobetsuKubun",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD" AND
+        ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD"
+        )
+        as 受給者情報3
+
+        union
+        SELECT
+        '3' as tableFlag,
+        (case when 受給者情報33."ketteiKubun"<![CDATA[=]]> #{決定区分承認する} AND 受給者情報33."hobetsuKubun" <![CDATA[=]]> #{法別区分施行時ホームヘルプ} then '2'
+        when 受給者情報33."ketteiKubun" <![CDATA[=]]> #{決定区分承認する} AND 受給者情報33."hobetsuKubun" <![CDATA[<>]]> #{法別区分施行時ホームヘルプ} then '8'
+        when 受給者情報33."ketteiKubun" <![CDATA[<>]]> #{決定区分承認する} AND 受給者情報33."hobetsuKubun" <![CDATA[=]]> #{法別区分施行時ホームヘルプ} then '6'
+        when 受給者情報33."ketteiKubun" <![CDATA[<>]]> #{決定区分承認する} AND 受給者情報33."hobetsuKubun" <![CDATA[<>]]> #{法別区分施行時ホームヘルプ} then '12' END)as flag,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報33."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報33."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報33."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報33."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報33."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報33."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報33."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報33."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報33."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報33."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報33."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報33."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報33."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."kyufuritsu",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hobetsuKubun",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD" AND
+        ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD"
+        )as 受給者情報33
+        group by tableFlag,flag
+
+        union
+        SELECT
+        '3' as tableFlag,
+        (CASE WHEN '90' <![CDATA[<=]]> 受給者情報333."kyufuritsu"  AND 受給者情報333."kyufuritsu" <![CDATA[<=]]> '95'  AND 受給者情報333."hobetsuKubun" <![CDATA[=]]> #{法別区分施行時ホームヘルプ} THEN '3'
+        WHEN '90' <![CDATA[<=]]> 受給者情報333."kyufuritsu"  AND 受給者情報333."kyufuritsu" <![CDATA[<=]]> '95'  AND 受給者情報333."hobetsuKubun" <![CDATA[<>]]> #{法別区分施行時ホームヘルプ} THEN '9'
+        WHEN  '96' <![CDATA[<=]]> 受給者情報333."kyufuritsu"  AND 受給者情報333."kyufuritsu" <![CDATA[<=]]> '99'  AND 受給者情報333."hobetsuKubun" <![CDATA[=]]> #{法別区分施行時ホームヘルプ} THEN '4'
+        WHEN  '96' <![CDATA[<=]]> 受給者情報333."kyufuritsu"  AND 受給者情報333."kyufuritsu" <![CDATA[<=]]> '99'  AND 受給者情報333."hobetsuKubun" <![CDATA[<>]]> #{法別区分施行時ホームヘルプ} THEN '10'
+        WHEN  (受給者情報333."kyufuritsu" <![CDATA[<]]>  '96' OR '99'  <![CDATA[<]]>  受給者情報333."kyufuritsu") AND 受給者情報333."hobetsuKubun" <![CDATA[=]]> #{法別区分施行時ホームヘルプ} THEN '5'
+        WHEN  (受給者情報333."kyufuritsu" <![CDATA[<]]>  '96' OR '99'  <![CDATA[<]]>  受給者情報333."kyufuritsu") AND 受給者情報333."hobetsuKubun" <![CDATA[<>]]> #{法別区分施行時ホームヘルプ} THEN '11'
+        END)as flag,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報333."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報333."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報333."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報333."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報333."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報333."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報333."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報333."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報333."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報333."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報333."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報333."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報333."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."kyufuritsu",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hobetsuKubun",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS(
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD" AND
+        ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."rirekiNo",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."shinseiYMD",
+        "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD"
+        )
+        as  受給者情報333
+        group by tableFlag,flag
+
+
+
+        UNION ALL
+        select
+        '4' as tableFlag,
+        '0' as flag,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報4."shinseiYMD" end )as 月4件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報4."shinseiYMD" end )as 月5件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報4."shinseiYMD" end )as 月6件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報4."shinseiYMD" end )as 月7件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報4."shinseiYMD" end )as 月8件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報4."shinseiYMD" end )as 月9件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報4."shinseiYMD" end )as 月10件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報4."shinseiYMD" end )as 月11件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報4."shinseiYMD" end )as 月12件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報4."shinseiYMD" end )as 月1件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報4."shinseiYMD" end )as 月2件数,
+        count( case substring(受給者情報4."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報4."shinseiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kakuninNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."gemmenKubun",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyotakuServiceGentei",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+
+        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD" AND
+        ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD"
+        )
+        as 受給者情報4
+
+        union
+        SELECT
+        '4' as tableFlag,
+        (case when 受給者情報44."ketteiKubun" = '1' then '1' else '6' END)as flag,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報44."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報44."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報44."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報44."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報44."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報44."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報44."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報44."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報44."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報44."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報44."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報44."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報44."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kakuninNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."gemmenKubun",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyotakuServiceGentei",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD" AND
+        ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD"
+        )
+        as  受給者情報44
+        group by tableFlag,flag
+        union
+        SELECT
+        '4' as tableFlag,
+        (CASE WHEN 受給者情報444."keigenritsu_Bunshi" = '12.5' THEN '2'
+        WHEN  受給者情報444."keigenritsu_Bunshi" = '25' THEN '3'
+        WHEN  受給者情報444."keigenritsu_Bunshi" = '50' THEN '4'
+        ELSE '5' END)as flag,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報444."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報444."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報444."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報444."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報444."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報444."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報444."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報444."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報444."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報444."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報444."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報444."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報444."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kakuninNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."gemmenKubun",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyotakuServiceGentei",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD" AND
+        ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD",
+        "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD"
+        )
+        as 受給者情報444
+        group by tableFlag,flag
+
+
+        UNION ALL
+        select
+        '5' as tableFlag,
+        '0' as flag,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報5."shinseiYMD" end )as 月4件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報5."shinseiYMD" end )as 月5件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報5."shinseiYMD" end )as 月6件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報5."shinseiYMD" end )as 月7件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報5."shinseiYMD" end )as 月8件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報5."shinseiYMD" end )as 月9件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報5."shinseiYMD" end )as 月10件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報5."shinseiYMD" end )as 月11件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報5."shinseiYMD" end )as 月12件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報5."shinseiYMD" end )as 月1件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報5."shinseiYMD" end )as 月2件数,
+        count( case substring(受給者情報5."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報5."shinseiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun",
+
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+
+        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD" AND
+        ("DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD"
+        )
+        as 受給者情報5
+
+        union
+        SELECT
+        '5' as tableFlag,
+        (case when 受給者情報55."ketteiKubun" = '1' then '1' else '12' END)as flag,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報55."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報55."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報55."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報55."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報55."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報55."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報55."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報55."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報55."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報55."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報55."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報55."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報55."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun",
+
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+
+        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS(
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" AND
+        ("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD"
+        )
+        as  受給者情報55
+        group by tableFlag,flag
+
+        union
+        SELECT
+        '5' as tableFlag,
+        (CASE
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階1} AND 受給者情報555."kyusochishaKubun"  <![CDATA[=]]> #{旧措置者区分非該当} THEN '11'
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階1} AND 受給者情報555."kyusochishaKubun"  <![CDATA[<>]]> #{旧措置者区分非該当} THEN '6'
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階2} AND 受給者情報555."kyusochishaKubun"  <![CDATA[=]]> #{旧措置者区分非該当} THEN '10'
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階2} AND 受給者情報555."kyusochishaKubun"  <![CDATA[<>]]> #{旧措置者区分非該当} THEN '5'
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階3} AND 受給者情報555."kyusochishaKubun"  <![CDATA[=]]> #{旧措置者区分非該当} THEN '9'
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階3} AND 受給者情報555."kyusochishaKubun"  <![CDATA[<>]]> #{旧措置者区分非該当} THEN '4'
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階_課税層} AND 受給者情報555."kyusochishaKubun"  <![CDATA[=]]> #{旧措置者区分非該当} THEN '8'
+        WHEN 受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階_課税層} AND 受給者情報555."kyusochishaKubun"  <![CDATA[<>]]> #{旧措置者区分非該当} THEN '3'
+        WHEN (受給者情報555."riyoshaFutanDankai" <![CDATA[=]]> #{利用者負担段階4} OR 受給者情報555."riyoshaFutanDankai" = ''
+        OR 受給者情報555."riyoshaFutanDankai" IS NULL) AND 受給者情報555."kyusochishaKubun"  <![CDATA[=]]> #{旧措置者区分非該当} THEN '7'
+        ELSE '2' END)as flag,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報555."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報555."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報555."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報555."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報555."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報555."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報555."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報555."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報555."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報555."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報555."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報555."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報555."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyusochishaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."riyoshaFutanDankai",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."kyokaisoGaitoshaKubun",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."gekihenKanwaSochiTaishoshaKubun",
+
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+
+        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" AND
+        ("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD",
+        "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD"
+        )
+        as 受給者情報555
+        group by tableFlag,flag
+
+
+        UNION ALL
+        select
+        '6' as tableFlag,
+        '0' as flag,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報6."shinseiYMD" end )as 月4件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報6."shinseiYMD" end )as 月5件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報6."shinseiYMD" end )as 月6件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報6."shinseiYMD" end )as 月7件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報6."shinseiYMD" end )as 月8件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報6."shinseiYMD" end )as 月9件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報6."shinseiYMD" end )as 月10件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報6."shinseiYMD" end )as 月11件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報6."shinseiYMD" end )as 月12件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報6."shinseiYMD" end )as 月1件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報6."shinseiYMD" end )as 月2件数,
+        count( case substring(受給者情報6."shinseiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報6."shinseiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."rirekiNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiKubun",
+        "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."keigenritsu",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4020TokubetsuchiikiKasanGemmen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+
+        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS(
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD" AND
+        ("DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."rirekiNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD"
+        )
+        as 受給者情報6
+
+        union
+        SELECT
+        '6' as tableFlag,
+        (case when 受給者情報66."ketteiKubun" = '1' then '1' else '4' END)as flag,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報66."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報66."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報66."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報66."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報66."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報66."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報66."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報66."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報66."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報66."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報66."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報66."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報66."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."rirekiNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiKubun",
+        "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."keigenritsu",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4020TokubetsuchiikiKasanGemmen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+
+        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD" AND
+        ("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."rirekiNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD"
+        )
+        as  受給者情報66
+        group by tableFlag,flag
+
+        union
+        SELECT
+        '6' as tableFlag,
+        (CASE
+        WHEN 受給者情報666."keigenritsu" = 'keigenritsu' THEN '2'
+        ELSE '3' END)as flag,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'04') then 受給者情報666."ketteiYMD" end )as 月4件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'05') then 受給者情報666."ketteiYMD" end )as 月5件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'06') then 受給者情報666."ketteiYMD" end )as 月6件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'07') then 受給者情報666."ketteiYMD" end )as 月7件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'08') then 受給者情報666."ketteiYMD" end )as 月8件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'09') then 受給者情報666."ketteiYMD" end )as 月9件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'10') then 受給者情報666."ketteiYMD" end )as 月10件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'11') then 受給者情報666."ketteiYMD" end )as 月11件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間開始日},1,4),'12') then 受給者情報666."ketteiYMD" end )as 月12件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'01') then 受給者情報666."ketteiYMD" end )as 月1件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'02') then 受給者情報666."ketteiYMD" end )as 月2件数,
+        count( case substring(受給者情報666."ketteiYMD",1,6) when concat(substring(#{抽出期間終了日},1,4),'03') then 受給者情報666."ketteiYMD" end )as 月3件数
+        from
+        (SELECT
+        "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."rirekiNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiKubun",
+        "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."keigenritsu",
+        直近被保.*,
+        宛名."seinengappiYMD"
+        FROM rgdb."DbT4020TokubetsuchiikiKasanGemmen"
+        INNER JOIN(
+        SELECT
+        "DbV1001HihokenshaDaicho"."shichosonCode",
+        "DbV1001HihokenshaDaicho"."shikibetsuCode",
+        "DbV1001HihokenshaDaicho"."hihokenshaNo",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho"
+        )AS 直近被保
+        ON 直近被保."hihokenshaNo" =   "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
+
+
+        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        <if test="宛名生年月日1" >
+            AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日2" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]>  #{年齢基準日to}
+        </if>
+        <if test="宛名生年月日3" >
+            AND #{生年月日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
+        </if>
+        <if test="宛名生年月日4" >
+            AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
+        </if>
+        <if test="直近被保" >
+            AND  直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+        </if>
+        AND EXISTS (
+        SELECT
+        "DbT4001JukyushaDaicho"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",
+        "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD",
+        "DbT4001JukyushaDaicho"."ninteiYMD",
+        "DbT4001JukyushaDaicho"."kyuSochishaFlag",
+        "DbT4001JukyushaDaicho"."rirekiNo",
+        "DbT4001JukyushaDaicho"."edaban",
+        被保.*
+        FROM rgdb."DbT4001JukyushaDaicho"
+
+        INNER JOIN(
+        SELECT 受給2."hihokenshaNo",
+        受給2."rirekiNo",
+        受給2."edaban",
+        受給2."ninteiYukoKikanKaishiYMD",
+        受給2."ninteiYukoKikanShuryoYMD"
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給2
+        WHERE 受給2."hihokenshaNo" = "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo" AND
+        (受給2."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD" AND
+        ("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD" <![CDATA[<=]]> 受給2."ninteiYukoKikanShuryoYMD" OR
+        受給2."ninteiYukoKikanShuryoYMD" = ''))
+        )AS 受給4
+        ON 受給4."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" AND
+        受給4."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo" AND
+        受給4."edaban" = "DbT4001JukyushaDaicho"."edaban"
+
+        INNER JOIN (
+        SELECT
+        "DbT1001HihokenshaDaicho"."shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo"
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" AS 被保2
+        WHERE  被保2."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        AND 被保2."shikakuShutokuYMD" = "DbT1001HihokenshaDaicho"."shikakuShutokuYMD"
+        AND ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<]]> 被保2."idoYMD"
+        OR ("DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[=]]> 被保2."idoYMD"
+        AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
+        )
+        ) AS 被保
+        ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
+        OR  被保."shikakuSoshitsuYMD" = ''))
+        WHERE NOT EXISTS(
+        SELECT 1
+        FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
+        WHERE 受給3."hihokenshaNo" =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND (受給3."rirekiNo" <![CDATA[>]]>  "DbT4001JukyushaDaicho"."rirekiNo"
+        OR ( 受給3."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND 受給3."edaban" <![CDATA[>]]> "DbT4001JukyushaDaicho"."edaban"))
+        )
+        )
+        ORDER BY
+        "DbT4020TokubetsuchiikiKasanGemmen"."hihokenshaNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."rirekiNo",
+        "DbT4020TokubetsuchiikiKasanGemmen"."shinseiYMD",
+        "DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD"
+        )
+        as 受給者情報666
+        group by tableFlag,flag
+        ORDER BY tableFlag,flag
+    </select>
+
+    <select
+        resultOrdered="true"
+        id="get出力情報"
+        resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd104010.NinteijkouTempTableEntity" fetchSize="500">
+        select *
+        from "TmpNDecimaleijkou"
+    </select>
+
+    <resultMap id="ResultMap_NinteijyotaiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd104010.NinteijyotaiEntity" autoMapping="true">
+        <result property="sigatukensu" column="月4件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="gogatukensu" column="月5件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="lokugatukensu" column="月6件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="shichigatukensu" column="月7件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="hachigatukensu" column="月8件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="kugatukensu" column="月9件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="jyugatukensu" column="月10件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="jyuichigatukensu" column="月11件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="jyunigatukensu" column="月12件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="ichigatukensu" column="月1件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="nigatukensu" column="月2件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="sangatukensu" column="月3件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="flag" column="flag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="tableFlag" column="tableFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+
+    </resultMap>
+</mapper>
