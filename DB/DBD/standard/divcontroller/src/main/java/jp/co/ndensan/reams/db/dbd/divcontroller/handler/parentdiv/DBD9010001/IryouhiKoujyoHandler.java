@@ -209,10 +209,10 @@ public class IryouhiKoujyoHandler {
     public boolean 確定確認チェック() {
         if (div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey()
                 .equals(IryoHiKojoNaiyo.主治医意見書確認書.getコード())) {
-            return div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD() == null
-                    || div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD() == null
-                    || (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD() != null
-                    && div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD() == null)
+            return div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().getValue() == null
+                    || div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() == null
+                    || (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() != null
+                    && div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD().getValue() == null)
                     || div.getIryohiKojyoSyosai().getSyosaiPanel2().getNitijyoSekatuJiritudo().getSelectedKey()
                     .equals(NichijoSeikatsuJiritsudo.その他.getコード())
                     || div.getIryohiKojyoSyosai().getSyosaiPanel2().getNyosikin().getSelectedKey().equals(キー1);
@@ -307,7 +307,7 @@ public class IryouhiKoujyoHandler {
         row.getHiddensinseiDD().setValue(申請日);
         row.setTorokuDD(登録日.wareki().toDateString());
         row.getHiddentorokuDD().setValue(登録日);
-        row.setTaisyouYY(対象年.wareki().toDateString());
+        row.setTaisyouYY(対象年.getYear().wareki().toDateString());
         row.getHiddentaisyouYY().setValue(対象年);
 
         if (データ区分.equals(IryoHiKojoNaiyo.主治医意見書確認書.getコード())) {
