@@ -16,12 +16,10 @@ import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunkeisankekkarenraku
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.toiawasesaki.IToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.toiawasesaki.IToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilders.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
@@ -53,6 +51,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
+    private static final int INDEX_12 = 12;
     private static final RString INT_5 = new RString("5");
 
     /**
@@ -95,7 +94,6 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                     KamokuCode.EMPTY, INDEX_1, INDEX_1, 開始年月日);
             RString 通知書定型文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
                     KamokuCode.EMPTY, INDEX_2, INDEX_1, 開始年月日);
-            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
             IToiawasesakiSourceBuilderCreator creator = ReportSourceBuilders.toiawaseSourceBuilder();
             IToiawasesakiSourceBuilder builder = creator.create(GyomuCode.DB介護保険,
                     ReportIdDBC.DBC100204.getReportId(), BushoCode.EMPTY, RDate.getNowDate());
@@ -146,17 +144,9 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                     if (under70Futangaku != null) {
                         uederFutangaku = uederFutangaku.add(new Decimal(under70Futangaku.toString()));
                     }
-                    RString under70Shikyugaku = dbt3173Entity.getUnder70_Shikyugaku();
-                    if (under70Shikyugaku != null) {
-                        underShikyugaku = underShikyugaku.add(new Decimal(under70Shikyugaku.toString()));
-                    }
                     RString futangaku = dbt3173Entity.getFutangaku();
                     if (futangaku != null) {
                         futangakuDec = futangakuDec.add(new Decimal(futangaku.toString()));
-                    }
-                    RString shikyugaku = dbt3173Entity.getShikyugaku();
-                    if (shikyugaku != null) {
-                        shikyugakuDec = shikyugakuDec.add(new Decimal(shikyugaku.toString()));
                     }
                     mutiEntity.setOver70_Futangaku(decimal_to_string(overFutangaku));
                     mutiEntity.setOver70_Shikyugaku(decimal_to_string(overShikyugaku));
@@ -202,51 +192,56 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                     panelEntity2.setDbt3173Entity(singleEntity);
                     panelEntity2.setDbt3172Entity(dbt3172Entity);
                 }
+                int count = entityList.size() / INDEX_12;
+                if (entityList.size() % INDEX_12 != 0) {
+                    count = count + 1;
+                }
                 printOrder(保険制度コード, entityList, j, 通知書定型文1, 通知書定型文2,
-                        panelEntity1, 認証者, 地方公共団体, 宛名データ, 問い合わせ先, flag, reportSourceWriter, panelEntity2, isBreak);
+                        panelEntity1, 認証者, 宛名データ, 問い合わせ先, flag, reportSourceWriter, panelEntity2, isBreak, count);
 
             }
+
         }
     }
 
     private void printOrder(RString 保険制度コード, List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,
             int j, RString 通知書定型文1, RString 通知書定型文2, JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity1,
-            NinshoshaSource 認証者, Association 地方公共団体,
+            NinshoshaSource 認証者,
             IShikibetsuTaisho 宛名データ, ToiawasesakiSource 問い合わせ先, boolean flag,
             ReportSourceWriter<GassanJigyobunKeisanKekkaRenrakuhyoSource> reportSourceWriter,
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity2, boolean isBreak) {
+            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity2, boolean isBreak, int count) {
 
         if (保険制度コード.equals(INT_5)
                 && !(j - 1 < INDEX_0)
                 && !保険制度コード.equals(entityList.get(j - 1).getHokenSeidoCode())) {
             isBreak = true;
-            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity1, 認証者, 地方公共団体,
-                    宛名データ, 問い合わせ先, flag, isBreak).writeBy(reportSourceWriter);
+            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity1, 認証者,
+                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
             isBreak = false;
-            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者, 地方公共団体,
-                    宛名データ, 問い合わせ先, flag, isBreak).writeBy(reportSourceWriter);
+            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
+                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
 
         } else if (j == entityList.size() - INDEX_1
                 && !保険制度コード.equals(INT_5)) {
-            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者, 地方公共団体,
-                    宛名データ, 問い合わせ先, flag, isBreak).writeBy(reportSourceWriter);
+            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
+                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
             flag = true;
             isBreak = true;
-            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity1, 認証者, 地方公共団体,
-                    宛名データ, 問い合わせ先, flag, isBreak).writeBy(reportSourceWriter);
+            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity1, 認証者,
+                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
 
         } else if (j == entityList.size() - INDEX_1
                 && 保険制度コード.equals(INT_5)) {
-            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者, 地方公共団体,
-                    宛名データ, 問い合わせ先, flag, isBreak).writeBy(reportSourceWriter);
+            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
+                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
             flag = true;
             isBreak = true;
-            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity2, 認証者, 地方公共団体,
-                    宛名データ, 問い合わせ先, flag, isBreak).writeBy(reportSourceWriter);
+            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity2, 認証者,
+                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
 
         } else {
-            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者, 地方公共団体,
-                    宛名データ, 問い合わせ先, flag, isBreak).writeBy(reportSourceWriter);
+            new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
+                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
 
         }
     }

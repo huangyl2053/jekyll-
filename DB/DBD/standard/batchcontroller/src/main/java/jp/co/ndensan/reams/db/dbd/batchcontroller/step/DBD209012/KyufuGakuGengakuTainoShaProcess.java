@@ -15,17 +15,12 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugen
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32004.KyufuGakuGengakuTainoShaProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4025ShiharaiHohoHenkoGengakuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt32004.KyufuGakuGengakuTainoShaEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.GengakuTaishoJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.HihokenshaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.KyufuGengakuHaakuIchiranEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.ShunoJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.ShunoKibetsuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoTainoJokyoTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200008.KyufuGengakuHaakuIchiranReportSource;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.db.dbd.service.core.dbd209011.KyufuGengakuHaakuListSakuseiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -45,9 +40,12 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -55,14 +53,13 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-3800-050 x_xuliang
  */
-public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuGengakuTainoShaEntity> {
+public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGengakuHaakuListSakuseiEntity> {
 
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugakugengakukanririsutosakusei"
-            + ".IKyufuGakuGengakuKanriRisutoSakuseiMapper.get給付額減額滞納者把握情報取得");
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist."
+            + "IKyufuGengakuHaakuListSakuseiMapper.get給付額減額滞納者把握情報");
     private KyufuGakuGengakuTainoShaProcessParameter processParameter;
     private IOutputOrder outputOrder;
     private Association association;
-    private RString reamsLoginID;
     private RString 出力順;
 
     @BatchWriter
@@ -83,37 +80,52 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
-    private static final int INT_12 = 12;
-    private Map<RString, Decimal> 調定額年度Map;
-    private Map<RString, Decimal> 収入額Map;
-    private Map<RString, Decimal> 未納額Map;
-    private Map<RString, Decimal> 徴収権消滅期間Map;
-    private Map<RString, Decimal> 納付済み期間Map;
-    private Decimal 給付額減額期間;
+    private HihokenshaNo 当該被保険者番号;
+    private KyufuGengakuHaakuListSakuseiService service;
+    private Map<FlexibleYear, Decimal> 調定額Map;
+    private Map<FlexibleYear, Decimal> 収入額Map;
+    private Map<FlexibleYear, Decimal> 未納額Map;
+    private Map<FlexibleYear, Decimal> 徴収権消滅期間Map;
+    private Map<FlexibleYear, Decimal> 納付済み期間Map;
+    private List<DbT4025ShiharaiHohoHenkoGengakuEntity> 支払方法変更減額List;
+    private List<KyufuGengakuHaakuListSakuseiEntity> 把握情報List;
+    private Map<FlexibleYear, List<KyufuGengakuHaakuListSakuseiEntity>> 把握情報Map;
 
     @Override
     protected void initialize() {
 
         association = AssociationFinderFactory.createInstance().getAssociation();
-        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        調定額年度Map = new HashMap<>();
+        service = KyufuGengakuHaakuListSakuseiService.createInstance();
+        調定額Map = new HashMap<>();
         収入額Map = new HashMap<>();
         未納額Map = new HashMap<>();
-
         徴収権消滅期間Map = new HashMap<>();
         納付済み期間Map = new HashMap<>();
+
+        支払方法変更減額List = new ArrayList<>();
+        把握情報List = new ArrayList<>();
+        把握情報Map = new HashMap<>();
 
     }
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(processParameter.get帳票ID().value()).create();
+        List pageBreakKeys = new ArrayList<>();
+        service.set改頁Key(outputOrder, pageBreakKeys);
+        if (!pageBreakKeys.isEmpty()) {
+            batchReportWrite = BatchReportFactory.
+                    createBatchReportWriter(processParameter.get帳票ID().value(), SubGyomuCode.DBD介護受給)
+                    .addBreak(new BreakerCatalog<KyufuGengakuHaakuIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        } else {
+            batchReportWrite = BatchReportFactory.
+                    createBatchReportWriter(processParameter.get帳票ID().value(), SubGyomuCode.DBD介護受給).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
     private RString get出力順() {
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBD介護受給, processParameter.get帳票ID(), reamsLoginID, processParameter.get改頁出力順ID());
+                .get出力順(SubGyomuCode.DBD介護受給, processParameter.get帳票ID(), processParameter.get改頁出力順ID());
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator
                     .create(KyufuGakuGengakuTainoShaProcessProperty.DBD200009_KyufuGengakuKanriIchiran.class, outputOrder);
@@ -127,161 +139,59 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGakuG
     }
 
     @Override
-    protected void process(KyufuGakuGengakuTainoShaEntity t) {
-        List<ShunoTainoJokyoTempTableEntity> 収納滞納状況一時List = t.get収納滞納状況一時Entity();
+    protected void process(KyufuGengakuHaakuListSakuseiEntity haakuEntity) {
+        edit給付額減額滞納者把握情報(haakuEntity);
+    }
 
-        Decimal 調定額_合計;
-        Decimal 収入額_合計;
-        Decimal 未納額_合計;
-        Decimal 調定額_当該;
-        Decimal 収入額_当該;
-        Decimal 未納額_当該;
+    private void edit給付額減額滞納者把握情報(KyufuGengakuHaakuListSakuseiEntity entity) {
 
-        for (ShunoTainoJokyoTempTableEntity entity : 収納滞納状況一時List) {
-            RString 賦課年度 = entity.getTmp_fukaNendo().toDateString();
+        if (!entity.get対象者TmpTblEntity().getHihokenshaNo2().equals(当該被保険者番号)) {
 
-            調定額_当該 = entity.getTmp_choteigaku();
-            調定額_合計 = 調定額年度Map.get(賦課年度);
-            if (調定額_合計 != null) {
-                調定額_合計 = 調定額_合計.add(調定額_当該);
-                調定額年度Map.put(賦課年度, 調定額_合計);
-            } else {
-                調定額年度Map.put(賦課年度, 調定額_当該);
+            if (当該被保険者番号 != null) {
+                KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
+                        把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
+                KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(), HokenshaNo.EMPTY,
+                        RString.EMPTY, 給付額減額把握リストEntity, outputOrder);  // QA 保険者番号
+                report.writeBy(reportSourceWriter);
+
             }
+            当該被保険者番号 = entity.get対象者TmpTblEntity().getHihokenshaNo2();
+            支払方法変更減額List = new ArrayList<>();
+            把握情報List = new ArrayList<>();
+            把握情報Map = new HashMap<>();
 
-            収入額_当該 = entity.getTmp_shunyugaku();
-            収入額_合計 = 収入額Map.get(賦課年度);
-            if (収入額_合計 != null) {
-                収入額_合計 = 収入額_合計.add(収入額_当該);
-                収入額Map.put(賦課年度, 収入額_合計);
-            } else {
-                収入額Map.put(賦課年度, 収入額_当該);
-            }
-
-            未納額_当該 = entity.getTmp_minogaku();
-            未納額_合計 = 未納額Map.get(賦課年度);
-            if (未納額_合計 != null) {
-                未納額_合計 = 未納額_合計.add(未納額_当該);
-                収入額Map.put(賦課年度, 未納額_合計);
-            } else {
-                収入額Map.put(賦課年度, 未納額_当該);
-            }
+            調定額Map = new HashMap<>();
+            収入額Map = new HashMap<>();
+            未納額Map = new HashMap<>();
+            徴収権消滅期間Map = new HashMap<>();
+            納付済み期間Map = new HashMap<>();
         }
 
-        Decimal 徴収権消滅期間の合計 = Decimal.ZERO;
-        Decimal 納付済み期間の合計 = Decimal.ZERO;
-
-        Decimal 収入額_年度;
-        Decimal 未納額_年度;
-        for (RString key : 調定額年度Map.keySet()) {
-            収入額_年度 = 収入額Map.get(key);
-            未納額_年度 = 未納額Map.get(key);
-            徴収権消滅期間Map.put(key, 収入額_年度.divide(調定額年度Map.get(key)));
-            納付済み期間Map.put(key, 未納額_年度.divide(調定額年度Map.get(key)));
-
-            徴収権消滅期間の合計 = 徴収権消滅期間の合計.add(収入額_年度).divide(調定額年度Map.get(key));
-            納付済み期間の合計 = 納付済み期間の合計.add(未納額_年度).divide(調定額年度Map.get(key));
-
+        if (entity.get支払方法変更減額Entity() != null) {
+            支払方法変更減額List.add(entity.get支払方法変更減額Entity());
         }
-        給付額減額期間 = Decimal.ZERO;
-        給付額減額期間 = 徴収権消滅期間の合計.multiply(徴収権消滅期間の合計
-                .divide(徴収権消滅期間の合計.add(納付済み期間の合計)))
-                .multiply(1).divide(2).multiply(INT_12);
 
-        /**
-         * HokenshaNo.EMPTY, RString.EMPTY:QA TODO
-         */
-        KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(processParameter.get帳票作成日時(),
-                null, null, 帳票印字用データを取得(t, 徴収権消滅期間の合計, 納付済み期間の合計), outputOrder);
-        report.writeBy(reportSourceWriter);
+        service.減額対象最新情報の設定(entity, 調定額Map, 収入額Map, 未納額Map);
+
+        FlexibleYear 賦課年度 = entity.get収納滞納状況TmpTblEntity().getTmp_fukaNendo();
+        把握情報List = 把握情報Map.get(賦課年度);
+        if (把握情報List == null) {
+            把握情報List = new ArrayList<>();
+        }
+        把握情報List.add(entity);
+        把握情報Map.put(賦課年度, 把握情報List);
     }
 
     @Override
     protected void afterExecute() {
+        if (当該被保険者番号 != null) {
+            KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
+                    把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
+            KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(), HokenshaNo.EMPTY,
+                    RString.EMPTY, 給付額減額把握リストEntity, outputOrder);  // QA 保険者番号
+            report.writeBy(reportSourceWriter);
+        }
         バッチ出力条件リストの出力();
-    }
-
-    private KyufuGengakuHaakuIchiranEntity 帳票印字用データを取得(KyufuGakuGengakuTainoShaEntity entity,
-            Decimal 徴収権消滅期間, Decimal 納付済み期間) {
-        KyufuGengakuHaakuIchiranEntity t = new KyufuGengakuHaakuIchiranEntity();
-        HihokenshaJohoEntity 被保険者情報Entity = new HihokenshaJohoEntity();
-        IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
-        被保険者情報Entity.set被保険者番号(entity.get対象者情報一時Entity().getHihokenshaNo().getColumnValue());
-        被保険者情報Entity.set識別コード(kojin.get識別コード().getColumnValue());
-        被保険者情報Entity.set被保険者氏名カナ(kojin.get名称().getKana().getColumnValue());
-        被保険者情報Entity.set被保険者氏名(kojin.get名称().getName().getColumnValue());
-        被保険者情報Entity.set世帯番号(kojin.get世帯コード().getColumnValue());
-        被保険者情報Entity.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().getColumnValue());
-        被保険者情報Entity.set行政区(kojin.get行政区画().getGyoseiku().getコード().getColumnValue());
-        被保険者情報Entity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
-        被保険者情報Entity.set住所(kojin.get住所().get住所());
-        被保険者情報Entity.set郵便番号(kojin.get住所().get郵便番号().getColumnValue());
-
-        被保険者情報Entity.set資格取得日(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuShutokuYMD());
-        被保険者情報Entity.set資格喪失日(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuSoshitsuYMD());
-        被保険者情報Entity.set喪失事由(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuSoshitsuJiyuCode());
-        被保険者情報Entity.set資格区分(entity.get収納滞納状況一時Entity().get(0).getTmp_shikakuKubunCode());
-        被保険者情報Entity.set住特フラグ(entity.get収納滞納状況一時Entity().get(0).getTmp_koikinaiJushochiTokureiFlag());
-        被保険者情報Entity.set生保フラグ(entity.get収納滞納状況一時Entity().get(0).isTmp_seihoFlag());
-        被保険者情報Entity.set厚労省IF識別コード(entity.get収納滞納状況一時Entity().get(0).getTmp_koroshoIfShikibetsuCode().getColumnValue());
-        被保険者情報Entity.set要介護状態区分コード(entity.get収納滞納状況一時Entity().get(0).getTmp_yokaigoJotaiKubunCode().getColumnValue());
-        被保険者情報Entity.set認定有効期間開始年月日(entity.get収納滞納状況一時Entity().get(0).getTmp_ninteiYukoKikanKaishiYMD());
-        被保険者情報Entity.set認定有効期間終了年月日(entity.get収納滞納状況一時Entity().get(0).getTmp_ninteiYukoKikanShuryoYMD());
-        被保険者情報Entity.set認定日(entity.get収納滞納状況一時Entity().get(0).getTmp_ninteiYMD());
-        被保険者情報Entity.set申請中フラグ(entity.get収納滞納状況一時Entity().get(0).isTmp_shiseityuFlag());
-        被保険者情報Entity.set申請日(entity.get収納滞納状況一時Entity().get(0).getTmp_jukyuShinseiYMD());
-        被保険者情報Entity.set徴収権消滅期間(decimalToRString(徴収権消滅期間));
-        被保険者情報Entity.set納付済み期間(decimalToRString(納付済み期間));
-        被保険者情報Entity.set給付額減額期間(decimalToRString(給付額減額期間));
-        t.set被保険者情報Entity(被保険者情報Entity);
-
-        List<ShunoJohoEntity> 収納情報List = new ArrayList<>();
-        for (ShunoTainoJokyoTempTableEntity data : entity.get収納滞納状況一時Entity()) {
-            ShunoJohoEntity resultData = new ShunoJohoEntity();
-//            resultData.set調定年度(data.getTmp_choteiNendo());
-//            resultData.set賦課年度(data.getFukaNendo());
-            List<ShunoKibetsuEntity> 期別情報List = new ArrayList<>();
-            for (ShunoTainoJokyoTempTableEntity table : entity.get収納滞納状況一時Entity()) {
-                ShunoKibetsuEntity resulttable = new ShunoKibetsuEntity();
-                resulttable.set期別(new RString(table.getTmp_kibetsu()));
-                resulttable.set保険料金(table.getTmp_choteigaku());
-//QA                resulttable.set納期限(FlexibleDate.MAX);
-                resulttable.set滞納額(table.getTmp_minogaku());
-                resulttable.set滞納区分(table.getTmp_tainoKubun());
-                resulttable.set時効起算日(table.getTmp_jikoKisanYMD());
-                resulttable.set時効起算事由(table.getTmp_jikoKisanJiyu());
-                期別情報List.add(resulttable);
-            }
-            resultData.set期別情報(期別情報List);
-            resultData.set特徴普徴区分(data.getTmp_tokucho_FuchoKubun());
-            if (data.getTmp_fukaNendo() == null) {
-                resultData.set収納情報なし(new RString("true"));
-            }
-            収納情報List.add(resultData);
-        }
-        t.set収納情報リスト(収納情報List);
-
-        List<GengakuTaishoJohoEntity> 減額対象情報List = new ArrayList<>();
-        for (DbT4025ShiharaiHohoHenkoGengakuEntity data : entity.get支払方法変更減額Entity()) {
-            GengakuTaishoJohoEntity resultData = new GengakuTaishoJohoEntity();
-            resultData.set徴収権消滅期間(decimalToRString(data.getChoshukenShometsuKikan()));
-            resultData.set納付済み期間(decimalToRString(data.getNofusumiKikan()));
-            resultData.set給付額減額期間(decimalToRString(data.getNofusumiGengakuKikan()));
-            if (!entity.get支払方法変更減額Entity().isEmpty()) {
-                resultData.set確定減額期間開始年月日(entity.get支払方法変更減額Entity().get(0).getKakutei_GengakuKaishiYMD());
-                resultData.set確定減額期間終了年月日(entity.get支払方法変更減額Entity().get(0).getKakutei_GengakuShuryoYMD());
-            }
-            減額対象情報List.add(resultData);
-        }
-        t.set減額対象情報リスト(減額対象情報List);
-        return t;
-    }
-
-    private RString decimalToRString(Decimal value) {
-        if (null == value) {
-            return RString.EMPTY;
-        }
-        return new RString(value.toString());
     }
 
     private void バッチ出力条件リストの出力() {
