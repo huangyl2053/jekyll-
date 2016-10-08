@@ -684,11 +684,10 @@
     <!--lifei END-->
 
     <!--zhouchuanlin START-->
-   <!--世帯員所得判定明細高額一時２と宛名情報の抽出-->
-    <select resultOrdered="true" id="select世帯員所得判定明細高額一時２と宛名情報"
+   <!--高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
+    <select resultOrdered="true" id="select高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity"
-            fetchSize="500">
+            resultMap="世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
         SELECT
             A.*,
             宛名PSM.*
@@ -700,128 +699,186 @@
         ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
         WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
     </select>
-
-     <!--前回処理高額介護サービス費支給申請全件一時の削除 -->
-    <delete id="delete前回処理高額介護サービス費支給申請全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
+    <resultMap id="世帯員所得判定明細高額一時２と宛名情報ResultMap" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
+        <association property="世帯員所得判定明細高額一時Entity"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+    
+   <!--事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
+    <select resultOrdered="true" id="select事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
+            resultMap="世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
+        SELECT
+            A.*,
+            宛名PSM.*
+        FROM "TempSetaiinShotokuHantei2"  AS A
+        INNER JOIN
+            rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
+           '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM 
+        ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
+        WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
+    </select>
+    <resultMap id="世帯員所得判定明細高額一時２と宛名情報ResultMap" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
+        <association property="世帯員所得判定明細高額一時Entity"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+    
+    <!--高額介護サービス費関連のテーブルのデータを削除するためのキーを取得し、削除キー一時に格納する-->
+    <insert id="insert高額介護削除キー一時">
+        INSERT INTO "TempSakujyoKi"
+            SELECT  DISTINCT
+                    D."hihokenshaNo"
+                    D."serviceTeikyoYM"
+                    D."rirekiNo"
+            FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS D
+            INNER JOIN  rgdb."DbT3056KogakuShikyuShinsei" AS A
+            ON  D."hihokenshaNo" = A."hihokenshaNo" 
+            AND D."serviceTeikyoYM" = A."serviceTeikyoYM"
+            AND D."rirekiNo" = A."rirekiNo"
+            AND A."shinseiYMD" = ''
+            WHERE D."taishoshaHanteiShinsaYM" = #{処理年月}
+    </insert>
+    
+    <!--事業高額介護サービス費関連のテーブルのデータを削除するためのキーを取得し、削除キー一時に格納する-->
+    <insert id="insert事業高額介護削除キー一時">
+        INSERT INTO "TempSakujyoKi"
+            SELECT  DISTINCT
+                    D."hihokenshaNo"
+                    D."serviceTeikyoYM"
+                    D."rirekiNo"
+            FROM rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS D
+            INNER JOIN  rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A
+            ON  D."hihokenshaNo" = A."hihokenshaNo" 
+            AND D."serviceTeikyoYM" = A."serviceTeikyoYM"
+            AND D."rirekiNo" = A."rirekiNo"
+            AND A."shinseiYMD" = ''
+            WHERE D."taishoshaHanteiShinsaYM" = #{処理年月}
+    </insert>
+    
+     <!--前回処理高額介護サービス費支給申請の削除 -->
+    <delete id="delete前回処理高額介護サービス費支給申請">
         DELETE
-        FROM "TempKogakuShikyuShinseiZen"
-        WHERE "TempKogakuShikyuShinseiZen"."shinseiYMD" = ''
-     <!--TODO--> 
-        <!--AND "TempKogakuShikyuShinseiZen"."" = #{処理年月}-->
-     <!--TODO--> 
+            FROM rgdb."DbT3056KogakuShikyuShinsei" AS A
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE A."hihokenshaNo" = X."hihokenshaNo"
+        AND A."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND A."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理高額介護サービス費支給判定結果全件一時の削除-->
-    <delete id="delete前回処理高額介護サービス費支給判定結果全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
-        DELETE
-        FROM "TempKogakuShikyuHanteiKekkaZen"
-     <!--TODO--> 
-        WHERE "TempKogakuShikyuHanteiKekkaZen"."shinseiYMD" = ''
-        <!--AND "TempKogakuShikyuShinseiZen"."" = #{処理年月}-->
-      <!--TODO--> 
+    <!--前回処理高額介護サービス費支給判定結果の削除-->
+    <delete id="delete前回処理高額介護サービス費支給判定結果">
+       DELETE
+            FROM rgdb."DbT3057KogakuShikyuHanteiKekka" AS B
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE B."hihokenshaNo" = X."hihokenshaNo"
+        AND B."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND B."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理高額介護サービス費支給審査決定全件一時の削除-->
-    <delete id="delete前回処理高額介護サービス費支給審査決定全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
-        DELETE
-        FROM "TempKogakuShikyuShinsaKetteiZen"
-     <!--TODO--> 
-        WHERE "TempKogakuShikyuShinsaKetteiZen"."shinseiYMD" = ''
-        <!--AND "TempKogakuShikyuShinsaKetteiZen"."" = #{処理年月}-->
-      <!--TODO--> 
+    <!--前回処理高額介護サービス費支給審査決定の削除-->
+    <delete id="delete前回処理高額介護サービス費支給審査決定">
+       DELETE
+            FROM rgdb."DbT3058KogakuShikyuShinsaKettei" AS C
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE C."hihokenshaNo" = X."hihokenshaNo"
+        AND C."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND C."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理高額介護サービス費給付対象者合計全件一時の削除-->
-    <delete id="delete前回処理高額介護サービス費給付対象者合計全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
+    <!--前回処理高額介護サービス費給付対象者合計の削除-->
+    <delete id="delete前回処理高額介護サービス費給付対象者合計">
         DELETE
-        FROM "TempKogakuKyufuTaishoshaGokeiZen"
-         <!--TODO--> 
-        WHERE "TempKogakuKyufuTaishoshaGokeiZen"."shinseiYMD" = ''
-         <!--TODO--> 
-        AND "TempKogakuKyufuTaishoshaGokeiZen"."taishoshaHanteiShinsaYM" = #{処理年月}
+            FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS D
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE D."hihokenshaNo" = X."hihokenshaNo"
+        AND D."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND D."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理高額介護サービス費給付対象者明細全件一時の削除-->
-    <delete id="delete前回処理高額介護サービス費給付対象者明細全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
+    <!--前回処理高額介護サービス費給付対象者明細の削除-->
+    <delete id="delete前回処理高額介護サービス費給付対象者明細">
         DELETE
-        FROM "TempKogakuKyufuTaishoshaMeisaiZen"
-        <!--TODO-->
-        WHERE "TempKogakuKyufuTaishoshaMeisaiZen"."shinseiYMD" = ''
-        AND "TempKogakuKyufuTaishoshaMeisaiZen"."taishoshaHanteiShinsaYM" = #{処理年月}
-        <!--TODO-->
+            FROM rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS E
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE E."hihokenshaNo" = X."hihokenshaNo"
+        AND E."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND E."rirekiNo" = X."rirekiNo"
     </delete>
     
-     <!--前回処理事業高額介護サービス費支給申請全件一時の削除 -->
-    <delete id="delete前回処理事業高額介護サービス費支給申請全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
-        DELETE
-        FROM "TempJigyoKogakuShikyuShinseiZen"
-        WHERE "TempJigyoKogakuShikyuShinseiZen"."shinseiYMD" = ''
-     <!--TODO--> 
-        <!--AND "TempJigyoKogakuShikyuShinseiZen"."" = #{処理年月}-->
-     <!--TODO--> 
+     <!--前回処理事業高額介護サービス費支給申請の削除 -->
+    <delete id="delete前回処理事業高額介護サービス費支給申請">
+       DELETE
+            FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE A."hihokenshaNo" = X."hihokenshaNo"
+        AND A."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND A."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理事業高額介護サービス費支給判定結果全件一時の削除-->
-    <delete id="delete前回処理事業高額介護サービス費支給判定結果全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
+    <!--前回処理事業高額介護サービス費支給判定結果の削除-->
+    <delete id="delete前回処理事業高額介護サービス費支給判定結果">
         DELETE
-        FROM "TempJigyoKogakuShikyuHanteiKekkaZen"
-     <!--TODO--> 
-        WHERE "TempJigyoKogakuShikyuHanteiKekkaZen"."shinseiYMD" = ''
-        <!--AND "TempJigyoKogakuShikyuHanteiKekkaZen"."" = #{処理年月}-->
-      <!--TODO--> 
+            FROM rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS B
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE B."hihokenshaNo" = X."hihokenshaNo"
+        AND B."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND B."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理事業高額介護サービス費支給審査決定全件一時の削除-->
-    <delete id="delete前回処理事業高額介護サービス費支給審査決定全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
-        DELETE
-        FROM "TempJigyoKogakuShikyuShinsaKetteiZen"
-     <!--TODO--> 
-        WHERE "TempJigyoKogakuShikyuShinsaKetteiZen"."shinseiYMD" = ''
-        <!--AND "TempJigyoKogakuShikyuShinsaKetteiZen"."" = #{処理年月}-->
-      <!--TODO--> 
+    <!--前回処理事業高額介護サービス費支給審査決定の削除-->
+    <delete id="delete前回処理事業高額介護サービス費支給審査決定">
+       DELETE
+            FROM rgdb."DbT3112KogakuShikyuShinsaKettei" AS C
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE C."hihokenshaNo" = X."hihokenshaNo"
+        AND C."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND C."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理事業高額介護サービス費給付対象者合計全件一時の削除-->
-    <delete id="delete前回処理事業高額介護サービス費給付対象者合計全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
+    <!--前回処理事業高額介護サービス費給付対象者合計の削除-->
+    <delete id="delete前回処理事業高額介護サービス費給付対象者合計">
         DELETE
-        FROM "TempJigyoKogakuKyufuTaishoshaGokeiZen"
-         <!--TODO--> 
-        WHERE "TempJigyoKogakuKyufuTaishoshaGokeiZen"."shinseiYMD" = ''
-         <!--TODO--> 
-        AND "TempJigyoKogakuKyufuTaishoshaGokeiZen"."taishoshaHanteiShinsaYM" = #{処理年月}
+            FROM rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS D
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE D."hihokenshaNo" = X."hihokenshaNo"
+        AND D."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND D."rirekiNo" = X."rirekiNo"
     </delete>
     
-    <!--前回処理事業高額介護サービス費給付対象者明細全件一時の削除-->
-    <delete id="delete前回処理事業高額介護サービス費給付対象者明細全件一時"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter">
+    <!--前回処理事業高額介護サービス費給付対象者明細の削除-->
+    <delete id="delete前回処理事業高額介護サービス費給付対象者明細">
         DELETE
-        FROM "TempJigyoKogakuKyufuTaishoshaMeisaiZen"
-        <!--TODO-->
-        WHERE "TempJigyoKogakuKyufuTaishoshaMeisaiZen"."shinseiYMD" = ''
-        AND "TempJigyoKogakuKyufuTaishoshaMeisaiZen"."taishoshaHanteiShinsaYM" = #{処理年月}
-        <!--TODO-->
+            FROM rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai" AS E
+        USING 
+            "TempSakujyoKi" AS X
+        WHERE E."hihokenshaNo" = X."hihokenshaNo"
+        AND E."serviceTeikyoYM" = X."serviceTeikyoYM"
+        AND E."rirekiNo" = X."rirekiNo"
     </delete>
-
 
     <!--データの取得（高額介護サービス費支給判定結果、高額介護サービス費支給審査決定）-->
     <select resultOrdered="true" id="select高額介護サービス費支給判定結果と支給審査決定"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity"
-            fetchSize="500">
+            resultMap="高額介護サービス費支給判定結果と支給審査決定ResultMap" fetchSize="500">
         SELECT
-            A.*,
-            B.*,
-            C.*
-        FROM "TempKyufujissekiTyukannJigyo5"  AS A
+            <include refid="allColumns_TempKyufujissekiTyukannJigyo" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.allColumns_DbT3057KogakuShikyuHanteiKekka" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.allColumns_DbT3058KogakuShikyuShinsaKettei" />
+        FROM "TempKyufujissekiTyukann5"  AS A
         LEFT OUTER JOIN
             rgdb."DbT3057KogakuShikyuHanteiKekka" AS B
          ON A."hiHokenshaNo" = B."hiHokenshaNo"
@@ -844,15 +901,21 @@
             A."jigyoshoNo"
             A."toshiNo"
     </select>
+    <resultMap id="高額介護サービス費支給判定結果と支給審査決定ResultMap" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity" autoMapping="true">
+        <association property="給付実績中間事業高額一時５"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempKyufujissekiTyukannJigyo"/>
+        <association property="高額介護サービス費支給判定結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
+        <association property="高額介護サービス費支給審査決定" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
+    </resultMap>
     
      <!-- データの取得（高額介護サービス費給付対象者合計）-->
      <select resultOrdered="true" id="select高額介護サービス費給付対象者合計"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity"
-            fetchSize="500">
+            resultMap="高額介護サービス費給付対象者合計ResultMap" fetchSize="500">
         SELECT
-            A.*,
-            D.*
+            <include refid="allColumns_TempKyufujissekiTyukannJigyo" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3055KogakuKyufuTaishoshaGokei" />
         FROM "TempKyufujissekiTyukannJigyo5"  AS A
         LEFT OUTER JOIN(
             SELECT
@@ -881,6 +944,12 @@
             A."jigyoshoNo"
             A."toshiNo"
     </select>
+    <resultMap id="高額介護サービス費給付対象者合計ResultMap" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity" autoMapping="true">
+        <association property="給付実績中間事業高額一時５"
+                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempKyufujissekiTyukannJigyo"/>
+        <association property="高額介護サービス費支給判定結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
+    </resultMap>
     <!--zhouchuanlin END-->
 
     <!--shifengming START-->

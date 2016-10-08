@@ -30,11 +30,12 @@ public class DelSaishoriKogakuTmpProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         myBatisParameter = processParameter.toMybatisParameter();
-        mapper.delete前回処理高額介護サービス費支給申請全件一時(myBatisParameter);
-        mapper.delete前回処理高額介護サービス費支給判定結果全件一時(myBatisParameter);
-        mapper.delete前回処理高額介護サービス費支給審査決定全件一時(myBatisParameter);
-        mapper.delete前回処理高額介護サービス費給付対象者合計全件一時(myBatisParameter);
-        mapper.delete前回処理高額介護サービス費給付対象者明細全件一時(myBatisParameter);
+        mapper.insert高額介護削除キー一時(myBatisParameter);
+        mapper.delete前回処理高額介護サービス費支給申請();
+        mapper.delete前回処理高額介護サービス費支給判定結果();
+        mapper.delete前回処理高額介護サービス費支給審査決定();
+        mapper.delete前回処理高額介護サービス費給付対象者合計();
+        mapper.delete前回処理高額介護サービス費給付対象者明細();
     }
 
 }
