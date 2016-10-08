@@ -88,9 +88,7 @@ public class KyufugakuGengakuKanriList {
      * @return ResponseData
      */
     public ResponseData<KyufugakuGengakuKanriListDiv> onClick_btnCheck(KyufugakuGengakuKanriListDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor基準日の必須入力(pairs, div);
-        getValidationHandler().validateFor減額終了日抽出_終了日が開始日以前(pairs, div);
+        ValidationMessageControlPairs pairs = getValidationHandler().validateForバッチ実行前チェック(div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
