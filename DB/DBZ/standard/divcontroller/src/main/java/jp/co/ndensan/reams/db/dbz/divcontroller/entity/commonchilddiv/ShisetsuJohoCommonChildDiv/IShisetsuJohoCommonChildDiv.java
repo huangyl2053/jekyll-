@@ -4,6 +4,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
  * このコードはツールによって生成されました。
@@ -33,5 +34,13 @@ public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperti
 
     public abstract void clear();
 
-    public abstract void setサービス種類(RString サービス種類抽出区分, List<RString> サービス種類);
+    /**
+     * 入力した施設コード・名称が、施設種類にあっているかを検査します。
+     *
+     * @return 入力した施設コード・名称が選択されている施設種類と矛盾している場合、エラーメッセージを返す。
+     * 矛盾していない場合は、空のエラーメッセージが返る。
+     */
+    ValidationMessageControlPairs validate施設種類();
+
+    void setサービス種類(RString サービス種類抽出区分, List<RString> サービス種類);
 }

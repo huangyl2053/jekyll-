@@ -4,38 +4,38 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist.IKyufuGengakuHaakuListSakuseiMapper">
-    <resultMap id="ResultMap_KyufuGengakuHaakuListSakuseiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufugakuGengakuTainoshaHaakuEntity" autoMapping="true"> 
+    <resultMap id="ResultMap_KyufuGengakuHaakuListSakuseiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListSakuseiEntity" autoMapping="true"> 
         <id property="収納滞納状況TmpTblEntity.tmp_hihokenshaNo" column="tmp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <id property="収納滞納状況TmpTblEntity.tmp_choteiNendo" column="tmp_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
         <id property="収納滞納状況TmpTblEntity.tmp_fukaNendo" column="tmp_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
         <id property="収納滞納状況TmpTblEntity.tmp_tsuchishoNo" column="tmp_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler" />
         <id property="収納滞納状況TmpTblEntity.tmp_kibetsu" column="tmp_kibetsu" />
         <id property="対象者TmpTblEntity.hihokenshaNo2" column="hihokenshaNo2" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
-        <id property="支払方法変更滞納Entity.shoKisaiHokenshaNo" column="dbT4022ShiharaiHohoHenkoTaino_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <id property="支払方法変更滞納Entity.hihokenshaNo" column="dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="支払方法変更滞納Entity.kanriKubun" column="dbT4022ShiharaiHohoHenkoTaino_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="支払方法変更滞納Entity.rirekiNo" column="dbT4022ShiharaiHohoHenkoTaino_rirekiNo" />
+        <id property="支払方法変更減額Entity.shoKisaiHokenshaNo" column="dbT4025ShiharaiHohoHenkoGengaku_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="支払方法変更減額Entity.hihokenshaNo" column="dbT4025ShiharaiHohoHenkoGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="支払方法変更減額Entity.kanriKubun" column="dbT4025ShiharaiHohoHenkoGengaku_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="支払方法変更減額Entity.rirekiNo" column="dbT4025ShiharaiHohoHenkoGengaku_rirekiNo" />
         <association property="収納滞納状況TmpTblEntity" javaType="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoTainoJokyoTempTableEntity"/>
         <association property="対象者TmpTblEntity" javaType="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.TaishoshaJohoTempTableEntity"/>
-        <association property="支払方法変更滞納Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity"/>
+        <association property="支払方法変更減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.ResultMap_DbT4025ShiharaiHohoHenkoGengakuEntity"/>
     </resultMap>
     
     
-    <select id="get給付額減額滞納者把握情報" resultMap="ResultMap_KyufuGengakuHaakuListSakuseiEntity" resultOrdered="true" fetchSize="500">
-<!--            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd200008." -->
+    <select id="get給付額減額滞納者把握情報" resultMap="ResultMap_KyufuGengakuHaakuListSakuseiEntity" resultOrdered="true" fetchSize="500"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011.KyufuGengakuHaakuListSakuseiMybatisParameter" >
         SELECT
             収納滞納状況一時テーブル.*,
             対象者情報一時テーブル.*,
-            支払方法変更滞納.*
+            支払方法変更減額.*
         FROM
             "ShunoJokyoTemp" AS 収納滞納状況一時テーブル
         INNER JOIN
             "TaishoshaJohoTemp" AS 対象者情報一時テーブル
-        ON 
+        ON
             収納滞納状況一時テーブル."tmp_hihokenshaNo" = 対象者情報一時テーブル."hihokenshaNo2"
         LEFT JOIN (
             SELECT 
-                <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.allColumns_DbT4022ShiharaiHohoHenkoTaino" />
+                <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.allColumns_DbT4025ShiharaiHohoHenkoGengaku" />
             FROM (
                 SELECT
                     "DbT4021ShiharaiHohoHenko"."shoKisaiHokenshaNo",
@@ -53,18 +53,18 @@
                     AND "DbT4021ShiharaiHohoHenko"."logicalDeletedFlag" = FALSE
             ) AS １号給付額減額
             INNER JOIN
-                rgdb."DbT4022ShiharaiHohoHenkoTaino" AS "DbT4022ShiharaiHohoHenkoTaino"
+                rgdb."DbT4025ShiharaiHohoHenkoGengaku" AS "DbT4025ShiharaiHohoHenkoGengaku"
                 ON 
-                    "DbT4022ShiharaiHohoHenkoTaino"."hihokenshaNo" = １号給付額減額."hihokenshaNo"
-                    AND "DbT4022ShiharaiHohoHenkoTaino"."rirekiNo" = １号給付額減額."rirekiNo"
-                    AND "DbT4022ShiharaiHohoHenkoTaino"."kanriKubun" = １号給付額減額."kanriKubun"
+                    "DbT4025ShiharaiHohoHenkoGengaku"."hihokenshaNo" = １号給付額減額."hihokenshaNo"
+                    AND "DbT4025ShiharaiHohoHenkoGengaku"."rirekiNo" = １号給付額減額."rirekiNo"
+                    AND "DbT4025ShiharaiHohoHenkoGengaku"."kanriKubun" = １号給付額減額."kanriKubun"
                 ORDER BY
                     １号給付額減額."rirekiNo" DESC
-            ) AS 支払方法変更滞納
-        ON 対象者情報一時テーブル."hihokenshaNo2" = 支払方法変更滞納."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo"
+            ) AS 支払方法変更減額
+        ON 対象者情報一時テーブル."hihokenshaNo2" = 支払方法変更減額."dbT4025ShiharaiHohoHenkoGengaku_hihokenshaNo"
+        ORDER BY 対象者情報一時テーブル."hihokenshaNo2" ASC   <!-- #103476-->
 <!--        <if test="出力順 != null and !出力順.isEmpty()">
             ${出力順}
         </if>-->
-
     </select>
 </mapper>

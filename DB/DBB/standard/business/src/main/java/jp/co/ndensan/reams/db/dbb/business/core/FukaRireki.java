@@ -31,7 +31,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class FukaRireki implements Iterable<Fuka> {
 
-    public static FukaRireki EMPTY;
+    /**
+     * 空の賦課履歴です。
+     */
+    public static final FukaRireki EMPTY;
 
     static {
         EMPTY = new FukaRireki(Collections.<Fuka>emptyList());

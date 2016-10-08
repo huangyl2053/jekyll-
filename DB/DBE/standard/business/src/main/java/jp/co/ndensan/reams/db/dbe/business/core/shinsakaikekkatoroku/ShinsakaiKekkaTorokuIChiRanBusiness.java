@@ -170,13 +170,26 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 前回二次判定
      */
     public RString get前回二次判定() {
-        Code コード = entity.get二次判定要介護状態区分コード();
+        Code コード = entity.get前回二次判定要介護状態区分コード();
         if (コード != null && !コード.isEmpty()) {
-            return YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分コード().value()).get名称();
+            return YokaigoJotaiKubun09.toValue(entity.get前回二次判定要介護状態区分コード().value()).get名称();
         }
         return RString.EMPTY;
     }
 
+    /**
+     * 前回二次判定コードを取得します。
+     *
+     * @return 前回二次判定コード
+     */
+    public RString get前回二次判定コード() {
+        Code コード = entity.get前回二次判定要介護状態区分コード();
+        if (コード != null && !コード.isEmpty()) {
+            return entity.get前回二次判定要介護状態区分コード().value();
+        }
+        return RString.EMPTY;
+    }
+    
     /**
      * 今回二次判定を取得します。
      *

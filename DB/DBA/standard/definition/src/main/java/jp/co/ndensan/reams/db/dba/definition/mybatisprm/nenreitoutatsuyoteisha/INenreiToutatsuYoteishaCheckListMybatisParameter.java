@@ -27,7 +27,7 @@ public class INenreiToutatsuYoteishaCheckListMybatisParameter implements IMyBati
     private final RString juminShubetsu;
     private final FlexibleDate konkaikaishi;
     private final FlexibleDate konkaisyuryo;
-    private final RString shutsuryokujunId;
+    private final Long shutsuryokujunId;
 
     /**
      * コンストラクタです。<br/>
@@ -43,7 +43,7 @@ public class INenreiToutatsuYoteishaCheckListMybatisParameter implements IMyBati
      */
     public INenreiToutatsuYoteishaCheckListMybatisParameter(RString syutsuryokutaisyo, boolean koumokumeiflg,
             boolean renbanfukaflg, boolean nichihensyuflg, RString juminShubetsu, FlexibleDate konkaikaishi,
-            FlexibleDate konkaisyuryo, RString shutsuryokujunId) {
+            FlexibleDate konkaisyuryo, Long shutsuryokujunId) {
         this.syutsuryokutaisyo = syutsuryokutaisyo;
         this.koumokumeiflg = koumokumeiflg;
         this.renbanfukaflg = renbanfukaflg;

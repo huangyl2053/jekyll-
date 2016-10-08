@@ -97,6 +97,7 @@ public enum KoroshoInterfaceShikibetsuCode {
      * コードに対応する要素を返します。存在しない場合は、{@code defaultValue}を返します。
      *
      * @param code コード
+     * @param defaultValue デフォルト値
      * @return 指定のコードに対応する要素. 存在しない場合は、{@code defaultValue}を返します。
      */
     public static KoroshoInterfaceShikibetsuCode toValueOrDefault(RString code, KoroshoInterfaceShikibetsuCode defaultValue) {

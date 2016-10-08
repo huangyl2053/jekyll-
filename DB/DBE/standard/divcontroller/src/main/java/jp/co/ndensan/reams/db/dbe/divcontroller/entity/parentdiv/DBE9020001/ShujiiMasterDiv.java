@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -17,11 +18,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShujiiMaster のクラスファイル
  *
- * @reamsid_L DBE-0250-010 suguangjun
+ * @author 自動生成
  */
 public class ShujiiMasterDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,6 +41,8 @@ public class ShujiiMasterDiv extends Panel {
     private RString hdnTxtIryoKikanCode;
     @JsonProperty("hdnTxtIryoKikanName")
     private RString hdnTxtIryoKikanName;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -144,6 +147,24 @@ public class ShujiiMasterDiv extends Panel {
     @JsonProperty("hdnTxtIryoKikanName")
     public void setHdnTxtIryoKikanName(RString hdnTxtIryoKikanName) {
         this.hdnTxtIryoKikanName = hdnTxtIryoKikanName;
+    }
+
+    /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
     }
 
     /*

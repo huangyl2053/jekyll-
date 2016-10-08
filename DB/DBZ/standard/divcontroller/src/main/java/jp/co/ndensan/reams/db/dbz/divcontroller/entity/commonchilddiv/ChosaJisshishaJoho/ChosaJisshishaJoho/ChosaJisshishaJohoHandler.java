@@ -57,6 +57,7 @@ public class ChosaJisshishaJohoHandler {
 
         div.getTxtChosaJisshiDate().setValue(RString.isNullOrEmpty(key.get調査実施日()) ? RDate.getNowDate() : new RDate(key.get調査実施日().toString()));
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
+        chosaJisshiBasho.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaJisshiBashoCode code : ChosaJisshiBashoCode.values()) {
             KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get名称());
             chosaJisshiBasho.add(data);
@@ -66,6 +67,13 @@ public class ChosaJisshishaJohoHandler {
             div.getDdlChosaJisshiBasho().setSelectedValue(key.get調査実施場所());
         }
         div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
+        
+        if (ChosaJisshiBashoCode.その他.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
+            div.getTxtJisshiBashoMeisho().setDisabled(false);
+        } else {
+            div.getTxtJisshiBashoMeisho().setDisabled(true);
+        }
+        
         List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(key.
                 get申請書管理番号()).records();
         List<KeyValueDataSource> shozokuKikan = new ArrayList<>();

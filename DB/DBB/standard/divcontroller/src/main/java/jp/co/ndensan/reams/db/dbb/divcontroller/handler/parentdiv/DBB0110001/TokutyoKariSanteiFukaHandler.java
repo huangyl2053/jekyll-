@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.ShuturyokuTyoutu
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoIraikingakuKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo6Gatsu;
-import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.DBB0110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.TokutyoKariSanteiFukaDiv;
@@ -39,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -57,8 +55,8 @@ public final class TokutyoKariSanteiFukaHandler {
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
     private static final RString 状況未 = new RString("未");
-    private static final RString 特徴仮算定賦課 = new RString("0110001");
-    private static final RString 特徴仮算定通知書一括発行 = new RString("0110003");
+    private static final RString 特徴仮算定賦課 = new RString("DBB0110001");
+    private static final RString 特徴仮算定通知書一括発行 = new RString("DBB0110003");
     private static final RString 実行する = new RString("btnSantei");
     private static final RString 実行する1 = new RString("btnTsuchishoSakusei");
     private static final RString 年額基準年度 = new RString("年額基準年度");
@@ -107,14 +105,6 @@ public final class TokutyoKariSanteiFukaHandler {
         }
         HokenryoDankaiSettings 保険料段階取得Mgr = HokenryoDankaiSettings.createInstance();
         HokenryoDankaiList 保険料段階List = 保険料段階取得Mgr.get保険料段階ListIn(調定年度);
-        List<KeyValueDataSource> radTokuKaishiTsuchiTaishoList = new ArrayList();
-        for (TokuchoKaishiTsuhishoKariOutputJoken tokuchokai : TokuchoKaishiTsuhishoKariOutputJoken.values()) {
-            KeyValueDataSource keyvaluedatasource = new KeyValueDataSource();
-            keyvaluedatasource.setKey(tokuchokai.get名称());
-            keyvaluedatasource.setValue(tokuchokai.get名称());
-            radTokuKaishiTsuchiTaishoList.add(keyvaluedatasource);
-        }
-        div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setDataSource(radTokuKaishiTsuchiTaishoList);
         div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setSelectedIndex(NUM0);
         List<ShoriDateKanri> 処理状況List = tokuchokarisanteifuka.getShoriDateKanriList(遷移元区分, 調定年度);
         List<dgTokutyoKariSanteiShoriKakunin_Row> rowList = new ArrayList();
@@ -123,7 +113,7 @@ public final class TokutyoKariSanteiFukaHandler {
             for (HokenryoDankai hokenryodankai : 保険料段階List.asList()) {
                 dgKanrijoho1_Row newRow = new dgKanrijoho1_Row();
                 newRow.setTxtHokenryoDankai(hokenryodankai.get表記());
-                newRow.setTxtHokenryoritsu(new RString(hokenryodankai.get保険料率().toString()));
+                newRow.getTxtHokenryoritsu().setValue(hokenryodankai.get保険料率());
                 保険料RowLists.add(newRow);
             }
             div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho1().setDataSource(保険料RowLists);

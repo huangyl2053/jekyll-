@@ -109,8 +109,7 @@ public class FukaShokaiControl {
         if (model == null) {
             return null;
         }
-        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
-        return key;
+        return ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
     }
 
     private FukaShokaiControlDiv setButtonsDisabled(FukaShokaiControlDiv div, boolean disabled) {

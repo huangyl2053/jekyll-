@@ -85,7 +85,9 @@ public class ShinsakaiJohoKojinFinder {
     /**
      * 審査会委員情報を取得します。
      *
-     * @param 申請書管理番号 審査会開催年月日
+     * @param 合議体番号 合議体番号
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @param 介護認定審査会開催年月日 審査会開催年月日
      * @return WariateIinAndIinJohoEntity
      */
     public List<WariateIinAndIinJoho> onLoad2(int 合議体番号, RString 介護認定審査会開催番号, FlexibleDate 介護認定審査会開催年月日) {
@@ -104,7 +106,9 @@ public class ShinsakaiJohoKojinFinder {
     /**
      * 補欠委員情報を取得します。
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param 合議体番号 合議体番号
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @param 介護認定審査会開催年月日 介護認定審査会開催年月日
      * @return WariateIinAndIinJohoEntity
      */
     public List<WariateIinAndIinJoho> onLoad3(int 合議体番号, RString 介護認定審査会開催番号, FlexibleDate 介護認定審査会開催年月日) {

@@ -39,7 +39,8 @@
         AND "DbT4022ShiharaiHohoHenkoTaino"."fukaNendo" = 収納状況一時テーブル."tmp_fukaNendo"
         AND "DbT4022ShiharaiHohoHenkoTaino"."shuno_Ki_Tsuki" = cast(収納状況一時テーブル."tmp_kibetsu" AS "char")
         AND "DbT4022ShiharaiHohoHenkoTaino"."tsuchishoNo" = 収納状況一時テーブル."tmp_tsuchishoNo"
-        AND "DbT4022ShiharaiHohoHenkoTaino"."Tokucho_fuchoKubun" = 収納状況一時テーブル."tmp_tokucho_FuchoKubun"
+        AND "DbT4022ShiharaiHohoHenkoTaino"."Tokucho_fuchoKubun" = 収納状況一時テーブル."tmp_tokucho_fuchoKubun"
+        ORDER BY "tmp_hihokenshaNo" ASC, "tmp_nokigen" ASC
     </select>
     
 </mapper>

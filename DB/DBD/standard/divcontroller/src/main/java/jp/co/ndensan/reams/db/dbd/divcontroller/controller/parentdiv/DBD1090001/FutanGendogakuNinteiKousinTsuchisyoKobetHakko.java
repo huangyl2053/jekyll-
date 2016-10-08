@@ -81,8 +81,8 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList = getHandler().get介護負担限度額認定(被保険者番号, 識別コード);
         ViewStateHolder.put(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, futanGendogakuNinteiList);
         if (!futanGendogakuNinteiList.isEmpty()) {
-            set負担限度額認定エリア(div, futanGendogakuNinteiList.get(futanGendogakuNinteiList.size() - 1));
-            div.setListIndex(new RString(Integer.toString(futanGendogakuNinteiList.size() - 1)));
+            set負担限度額認定エリア(div, futanGendogakuNinteiList.get(0));
+            div.setListIndex(new RString(Integer.toString(0)));
             div.getBtnGoRireki().setDisabled(true);
             if (1 == futanGendogakuNinteiList.size()) {
                 div.getBtnZenRireki().setDisabled(true);
@@ -191,19 +191,19 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
             FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
 
         div.getBtnGoRireki().setDisabled(false);
-        int listIndex = Integer.valueOf(div.getListIndex().toString()) - 1;
-        if (listIndex == 0) {
-            div.getBtnZenRireki().setDisabled(true);
-        }
-        div.setListIndex(new RString(listIndex));
+        int listIndex = Integer.valueOf(div.getListIndex().toString());
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
-        set負担限度額認定エリア(div, futanGendogakuNinteiList.get(listIndex));
+        set負担限度額認定エリア(div, futanGendogakuNinteiList.get(listIndex + 1));
+        div.setListIndex(new RString(listIndex + 1));
+        if (Integer.valueOf(div.getListIndex().toString()) == (futanGendogakuNinteiList.size() - 1)) {
+            div.getBtnZenRireki().setDisabled(true);
+        }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「前履歴を表示する」ボタンをクリックする
+     * 「後履歴を表示する」ボタンをクリックする
      *
      * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
      * @return ResponseData
@@ -211,15 +211,15 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnGorireki(
             FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
 
-        int listIndex = Integer.valueOf(div.getListIndex().toString()) + 1;
+        int listIndex = Integer.valueOf(div.getListIndex().toString());
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
-        set負担限度額認定エリア(div, futanGendogakuNinteiList.get(listIndex));
+        set負担限度額認定エリア(div, futanGendogakuNinteiList.get(listIndex - 1));
         div.getBtnZenRireki().setDisabled(false);
-        if (listIndex == futanGendogakuNinteiList.size() - 1) {
+        div.setListIndex(new RString(listIndex - 1));
+        if (Integer.valueOf(div.getListIndex().toString()) == 0) {
             div.getBtnGoRireki().setDisabled(true);
         }
-        div.setListIndex(new RString(listIndex));
         return ResponseData.of(div).respond();
     }
 

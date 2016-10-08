@@ -149,7 +149,7 @@
         INNER JOIN
         "TempSetaiinShotokuHantei1" AS B
         ON
-        A."hihokenshaNo" = B."hihokenshaNo"
+        A."hiHokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
         WHERE
         B."honninKubun" = '1'
@@ -165,7 +165,7 @@
         INNER JOIN
         "TempSetaiinShotokuHantei1" AS B
         ON
-        A."hihokenshaNo" = B."hihokenshaNo"
+        A."hiHokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
         WHERE
         B."honninKubun" = '1'
@@ -191,8 +191,7 @@
         FROM
         "TempKyufujissekiTyukann2" AS "TempKyufujissekiTyukann2"
         ) AS TEMP2
-        WHERE
-        TEMP."serviceTeikyoYM" = TEMP2."serviceTeikyoYM"
+        ON TEMP."serviceTeikyoYM" = TEMP2."serviceTeikyoYM"
         AND TEMP."shotokuHantei_setaiCode" = TEMP2."shotokuHantei_setaiCode"
     </insert>
 
@@ -206,7 +205,7 @@
         INNER JOIN
         "TempSetaiinShotokuHanteiJigyo1" AS B
         ON
-        A."hihokenshaNo" = B."hihokenshaNo"
+        A."hiHokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
         WHERE
         B."honninKubun" = '1'
@@ -222,7 +221,7 @@
         INNER JOIN
         "TempSetaiinShotokuHanteiJigyo1" AS B
         ON
-        A."hihokenshaNo" = B."hihokenshaNo"
+        A."hiHokenshaNo" = B."hihokenshaNo"
         AND A."serviceTeikyoYM" = substring(B."kijunYMD",1,6)
         WHERE
         B."honninKubun" = '1'
@@ -248,8 +247,7 @@
         FROM
         "TempKyufujissekiTyukannJigyo2" AS "TempKyufujissekiTyukannJigyo2"
         ) AS TEMP2
-        WHERE
-        TEMP."serviceTeikyoYM" = TEMP2."serviceTeikyoYM"
+        ON TEMP."serviceTeikyoYM" = TEMP2."serviceTeikyoYM"
         AND TEMP."shotokuHantei_setaiCode" = TEMP2."shotokuHantei_setaiCode"
     </insert>
 
@@ -259,12 +257,12 @@
         TEMP.*
         FROM "TempKyufujissekiTyukann3" AS TEMP
         WHERE
-        NOT EXSIT(
+        NOT EXISTS(
         SELECT
         'X'
         FROM
         "TempShiharaiHohoHenko" AS TEMP2
-        WHERE TEMP."hiHokenshaNo" = TEMP2"hiHokenshaNo"
+        WHERE TEMP."hiHokenshaNo" = TEMP2."hihokenshaNo"
         AND substring(TEMP2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> TEMP."serviceTeikyoYM"
         AND TEMP."serviceTeikyoYM" <![CDATA[<=]]> substring(TEMP2."tekiyoShuryoYMD",1,6)
         )
@@ -324,12 +322,12 @@
         TEMP.*
         FROM "TempKyufujissekiTyukannJigyo3" AS TEMP
         WHERE
-        NOT EXSIT(
+        NOT EXISTS(
         SELECT
         'X'
         FROM
         "TempShiharaiHohoHenko" AS TEMP2
-        WHERE TEMP."hiHokenshaNo" = TEMP2"hiHokenshaNo"
+        WHERE TEMP."hiHokenshaNo" = TEMP2."hihokenshaNo"
         AND substring(TEMP2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> TEMP."serviceTeikyoYM"
         AND TEMP."serviceTeikyoYM" <![CDATA[<=]]> substring(TEMP2."tekiyoShuryoYMD",1,6)
         )
@@ -385,7 +383,7 @@
 
     <update id="世帯員把握入力一時の更新1">
         UPDATE
-        "TempSetaiinHaakuNyuryoku"
+        "TmpSetaiHaaku"
         SET "shotokuNendo" = to_char(to_number(substring("kijunYMD", 1, 4), '9999') - 1, '0000')
         "kijunYMD" = to_char(to_number(substring(基準年月日, 1, 4), '9999') - 1, '0000') || '1231'
         WHERE
@@ -395,7 +393,7 @@
 
     <update id="世帯員把握入力一時の更新2">
         UPDATE
-        "TempSetaiinHaakuNyuryoku"
+        "TmpSetaiHaaku"
         SET "shotokuNendo" = to_char(to_number(substring("kijunYMD", 1, 4), '9999') - 2, '0000')
         "kijunYMD" = to_char(to_number(substring(基準年月日, 1, 4), '9999') - 2, '0000') || '1231'
         WHERE
@@ -405,19 +403,19 @@
 
     <update id="世帯員把握入力一時の更新3">
         UPDATE
-        "TempSetaiinHaakuNyuryoku"
+        "TmpSetaiHaaku"
         SET "jushochiTokureiFlag" = ''
     </update>
 
     <update id="世帯員把握入力一時の更新4">
         UPDATE
-        "TempSetaiinHaakuNyuryoku" AS C
+        "TmpSetaiHaaku" AS C
         SET "jushochiTokureiFlag" = '1'
         FROM(
         SELECT
         A."hihokenshaNo",
         A."kijunYMD"
-        FROM "TempSetaiinHaakuNyuryoku" AS A
+        FROM "TmpSetaiHaaku" AS A
         INNRE JOIN rgdb."DbFt7802FindHihokenshaDaicho"(A."kijunYMD", A."hihokenshaNo") AS B
         ON A."hihokenshaNo" = B."hihokenshaNo"
         AND B."jushochiTokureiFlag" = '1'
@@ -434,7 +432,7 @@
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3116KijunShunyugakuTekiyoKanriMapper.allColumns_DbT3116KijunShunyugakuTekiyoKanri" />,
         C.*,
         D.*
-        FROM "TempKyufujissekiKihonJigyo" AS "TempKyufujissekiTyukann"
+        FROM "TempKyufujissekiKihonJigyo7" AS "TempKyufujissekiTyukann"
         LEFT JOIN
         "TempKijunShunyugakuTekiyoKanri" AS "DbT3116KijunShunyugakuTekiyoKanri"
         ON
@@ -588,7 +586,7 @@
     </resultMap>
 
     <resultMap id="ResultMap_TempSetaiinShotokuHanteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity" autoMapping="true">
-        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="hihokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>

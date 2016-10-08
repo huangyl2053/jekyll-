@@ -76,10 +76,9 @@ public class TokuteiShinryouhi {
             div.getPanelThree().getPanelFive().setDisplayNone(true);
             List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = ShokanbaraiJyokyoShokai.createInstance()
                     .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (shokanTokuteiShinryohiList == null || shokanTokuteiShinryohiList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
+            if (!(shokanTokuteiShinryohiList == null || shokanTokuteiShinryohiList.isEmpty())) {
             getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
+            }
         }
         if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelThree().getDgdTokuteiShinryohi().setVisible(true);
@@ -91,16 +90,14 @@ public class TokuteiShinryouhi {
             List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = ShokanbaraiJyokyoShokai
                     .createInstance().getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号, null);
-            if (shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
+            
+           if (!(shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty())) {
             getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
+           }
         }
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
-        if (shikibetsuNoKanriEntity == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
+        
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
 
         return createResponse(div);

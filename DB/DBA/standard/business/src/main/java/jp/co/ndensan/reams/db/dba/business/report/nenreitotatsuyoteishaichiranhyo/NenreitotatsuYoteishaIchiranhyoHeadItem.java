@@ -30,7 +30,11 @@ public class NenreitotatsuYoteishaIchiranhyoHeadItem {
     private final RString kaipage3;
     private final RString kaipage4;
     private final RString kaipage5;
-
+    private final RString tyusyutsukikanF;
+    private final RString tyusyutsukikanT;
+    private final RString shutsuRyokuTaisho;
+    private final RString juminShubetsu;
+    
     /**
      * インスタンスを生成します。
      *
@@ -47,6 +51,10 @@ public class NenreitotatsuYoteishaIchiranhyoHeadItem {
      * @param kaipage3 改頁３
      * @param kaipage4 改頁４
      * @param kaipage5 改頁５
+     * @param tyusyutsukikanF 抽出期間From
+     * @param tyusyutsukikanT 抽出期間To
+     * @param shutsuRyokuTaisho 出力対象
+     * @param juminShubetsu 住民種別
      */
     public NenreitotatsuYoteishaIchiranhyoHeadItem(
             RString printTimeStamp,
@@ -61,7 +69,12 @@ public class NenreitotatsuYoteishaIchiranhyoHeadItem {
             RString kaipage2,
             RString kaipage3,
             RString kaipage4,
-            RString kaipage5) {
+            RString kaipage5,
+            RString tyusyutsukikanF,
+            RString tyusyutsukikanT,
+            RString shutsuRyokuTaisho,
+            RString juminShubetsu
+    ) {
         this.printTimeStamp = printTimeStamp;
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;
@@ -75,5 +88,9 @@ public class NenreitotatsuYoteishaIchiranhyoHeadItem {
         this.kaipage3 = kaipage3;
         this.kaipage4 = kaipage4;
         this.kaipage5 = kaipage5;
+        this.tyusyutsukikanF = tyusyutsukikanF;
+        this.tyusyutsukikanT = tyusyutsukikanT;
+        this.shutsuRyokuTaisho = shutsuRyokuTaisho;
+        this.juminShubetsu = juminShubetsu;
     }
 }

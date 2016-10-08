@@ -37,6 +37,12 @@ public final class RStrings {
         }
     }
 
+    /**
+     * 指定の文字列からすべてのスペース（全角、半角どちらも）を削除した文字列を返します。
+     *
+     * @param aRawValue 編集対象の文字列
+     * @return 指定の文字列からすべてのスペース（全角、半角どちらも）を削除した文字列
+     */
     public static RString removedSpaces(RString aRawValue) {
         if (RString.isNullOrEmpty(aRawValue)) {
             return aRawValue;

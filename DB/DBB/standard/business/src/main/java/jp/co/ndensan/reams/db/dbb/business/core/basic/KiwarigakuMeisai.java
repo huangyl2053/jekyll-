@@ -60,8 +60,9 @@ public class KiwarigakuMeisai implements Serializable {
     }
 
     /**
+     * 調定額をカンマ編集して返します。調定額が存在しない場合は、空文字を返します。
      *
-     * @return
+     * @return 調定額表記
      */
     public RString get調定額表記() {
         return composedカンマ編集OrEmpty(this.get調定額());
@@ -81,8 +82,9 @@ public class KiwarigakuMeisai implements Serializable {
     }
 
     /**
+     * 収入額をカンマ編集して返します。収入額が存在しない場合は、空文字を返します。
      *
-     * @return
+     * @return 収入額表記
      */
     public RString get収入額表記() {
         return composedカンマ編集OrEmpty(this.get収入額());

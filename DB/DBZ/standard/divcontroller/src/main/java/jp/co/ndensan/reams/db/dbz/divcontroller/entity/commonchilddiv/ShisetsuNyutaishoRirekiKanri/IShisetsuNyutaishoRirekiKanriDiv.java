@@ -68,10 +68,9 @@ public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBasePro
     /**
      * 共通子DIVの初期化処理です。外部から保存対象データ・グリッドデータを受け取ります。
      *
-     * @param データソース グリッドに設定するデータソース
      * @param 施設入退所情報Model 施設入退所情報Model
      */
-    public void initialize(List<dgShisetsuNyutaishoRireki_Row> データソース, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model);
+    public void initialize(Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model);
 
     /**
      * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。

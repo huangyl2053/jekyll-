@@ -107,36 +107,30 @@ public class ShokanShinseiList {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            RString mode = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
-            SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
-            FlexibleYearMonth serviceYMFrom = null;
-            if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
-                serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
-            }
-            FlexibleYearMonth serviceYMTo = null;
-            if (requestDiv.getTxtServiceYMTo().getValue() != null) {
-                serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
-            }
-            if (照会.equals(mode)) {
-                shokandhinseiichiran = ShokanShinseiIchiranManager.
-                        createInstance().getShokanShinseiListSyokai(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                                serviceYMFrom,
-                                serviceYMTo);
-            } else {
-                shokandhinseiichiran = ShokanShinseiIchiranManager.
-                        createInstance().getShokanShinseiListShinsei(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                                serviceYMFrom,
-                                serviceYMTo);
-            }
-
-            getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
+        RString mode = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
+        FlexibleYearMonth serviceYMFrom = null;
+        if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
+            serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
         }
+        FlexibleYearMonth serviceYMTo = null;
+        if (requestDiv.getTxtServiceYMTo().getValue() != null) {
+            serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
+        }
+        if (照会.equals(mode)) {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListSyokai(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                            serviceYMFrom,
+                            serviceYMTo);
+        } else {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListShinsei(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                            serviceYMFrom,
+                            serviceYMTo);
+        }
+
+        getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
 
         return ResponseData.of(requestDiv)
                 .respond();

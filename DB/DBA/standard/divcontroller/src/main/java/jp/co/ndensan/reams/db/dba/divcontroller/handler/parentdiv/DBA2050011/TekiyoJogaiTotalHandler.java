@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.TekiyoJogaiRirekiDiv.DisplayMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTotalDiv;
+import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaManager;
+import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +22,6 @@ public class TekiyoJogaiTotalHandler {
 
     private final TekiyoJogaiTotalDiv div;
     private static final RString 遷移元メニューID_適用 = new RString("DBAMN32001");
-    private static final RString 遷移元メニューID_適用_転入転出保留対象者管理 = new RString("DBAMN61002");
     private static final RString 遷移元メニューID_解除 = new RString("DBAMN32002");
     private static final RString 遷移元メニューID_変更 = new RString("DBAMN32003");
 
@@ -41,23 +42,28 @@ public class TekiyoJogaiTotalHandler {
      */
     public void initialize(ShikibetsuCode 識別コード, RString 遷移元メニューID) {
         div.getShikakuKihonJoho().getCcdAtenaJoho().initialize(識別コード);
-//<<<<<<< HEAD
         if (遷移元メニューID_適用.equals(遷移元メニューID)) {
-//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.適用登録モード.toString()));
             div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().setDiplayMode(DisplayMode.適用登録モード);
-//=======
-//        if (遷移元メニューID_適用.equals(遷移元メニューID) || 遷移元メニューID_適用_転入転出保留対象者管理.equals(遷移元メニューID)) {
-//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.適用登録モード.toString()));
-//>>>>>>> origin/sync
         } else if (遷移元メニューID_解除.equals(遷移元メニューID)) {
-//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.解除モード.toString()));
             div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().setDiplayMode(DisplayMode.解除モード);
         } else if (遷移元メニューID_変更.equals(遷移元メニューID)) {
-//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.照会モード.toString()));
             div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().setDiplayMode(DisplayMode.照会モード);
         }
         div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().initialize(識別コード);
         div.getTekiyoJogaiJohoIchiran().getCddShisetsuNyutaishoRirekiKanri().initialize(識別コード, DaichoType.適用除外者.getコード());
     }
 
+    /**
+     * @param 識別コード 識別コード
+     * @return 適用除外者の場合、{@code true}.
+     */
+    public boolean is適用除外者(ShikibetsuCode 識別コード) {
+        TekiyoJogaishaManager manager = TekiyoJogaishaManager.createInstance();
+        TekiyoJogaisha tekiyoJogaisha = manager.getNewestTekiyoJogaisha(識別コード);
+        if (tekiyoJogaisha == null) {
+            return false;
+        }
+        return (!(tekiyoJogaisha.get適用年月日() == null || tekiyoJogaisha.get適用年月日().isEmpty())
+                && (tekiyoJogaisha.get解除年月日() == null || tekiyoJogaisha.get解除年月日().isEmpty()));
+    }
 }

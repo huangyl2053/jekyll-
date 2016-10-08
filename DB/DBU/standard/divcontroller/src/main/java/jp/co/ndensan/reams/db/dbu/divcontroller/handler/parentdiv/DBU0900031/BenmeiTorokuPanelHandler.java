@@ -21,8 +21,8 @@ public class BenmeiTorokuPanelHandler {
 
     private final BenmeiTorokuPanelDiv panelDiv;
     private static final RString 状態_登録 = new RString("登録");
-    private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
+    private static final RString 修正 = new RString("修正状態");
+    private static final RString 削除 = new RString("削除状態");
 
     /**
      * コンストラクタです。

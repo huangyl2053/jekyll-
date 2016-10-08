@@ -34,13 +34,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public final class YokaigoJotaiKubunSupport {
 
-    private final static IYokaigoJotaiKubun EMPTY;
+    private static final IYokaigoJotaiKubun EMPTY;
 
     static {
         EMPTY = new Empty();
     }
 
-    private static class Empty implements IYokaigoJotaiKubun {
+    private static final class Empty implements IYokaigoJotaiKubun {
 
         private final RString aCode;
         private final RString aName;

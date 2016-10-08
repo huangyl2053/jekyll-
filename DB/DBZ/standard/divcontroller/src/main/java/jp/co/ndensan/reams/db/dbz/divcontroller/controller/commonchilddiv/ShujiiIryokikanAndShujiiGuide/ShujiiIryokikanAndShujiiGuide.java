@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Shuji
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
-import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideHandler;
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 主治医医療機関＆主治医ガイドのコントローラです。
@@ -71,16 +69,7 @@ public class ShujiiIryokikanAndShujiiGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
-                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
-        RString 市町村コード = new RString("");
-        if (dataPassModel != null) {
-            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
-            } else {
-                市町村コード = dataPassModel.get市町村コード();
-            }
-        }
+        RString 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
         List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
                         市町村コード,

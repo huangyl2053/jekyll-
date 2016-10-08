@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1140011;
 
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA140010.DBA140010_JukiRendoTorokushaListParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1140011TransitionEventName;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011.Juk
 import jp.co.ndensan.reams.db.dba.service.core.jukirendotorokushalist.JukiRendoTorokushaListFinder;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -51,7 +53,7 @@ public class JukiNendoTorokushaList {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
         if (business == null || (business.getTaishoKaishiYMD() == null
-                && business.getTaishoShuryoYMD() == null)) {
+                                 && business.getTaishoShuryoYMD() == null)) {
             div.getBatchParamterInfo().getTxtkonkaikaishi().setValue(nowDate);
             div.getBatchParamterInfo().getTxtkonkaishuryo().setValue(nowDate);
 
@@ -79,6 +81,7 @@ public class JukiNendoTorokushaList {
         }
         // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
 //        loadChohyoMode(サブ業務コード, 帳票ID);
+        div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200007.getReportId());
         return ResponseData.of(div).respond();
     }
 
@@ -109,7 +112,7 @@ public class JukiNendoTorokushaList {
                 div.getTxtkonkaikaishi().getValue(),
                 div.getTxtkonkaishuryo().getValue(),
                 div.getChktaishodaicho().getSelectedKeys(),
-                RString.EMPTY);
+                div.getCcdChohyoShutsuryokujun().get出力順ID());
         IUrControlData controlData = UrControlDataFactory.createInstance();
         parameter.setLoginUserId(controlData.getLoginInfo().getUserId());
         return ResponseData.of(parameter).forwardWithEventName(DBA1140011TransitionEventName.処理終了).respond();

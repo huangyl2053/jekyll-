@@ -119,30 +119,29 @@ public class HihokenshashikakusoshitsuManager {
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @param 適用年月日 適用年月日
-     * @return
+     * @return ????の場合、true.
      */
     public boolean shikakuSoshitsuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 適用年月日) {
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
         HihokenshaShutokuJyoho hihokenshaShutokuJyoho = manager.getSaishinDeta(識別コード, 被保険者番号);
-        if (hihokenshaShutokuJyoho != null) {
-            FlexibleDate 資格取得年月日 = hihokenshaShutokuJyoho.get資格取得年月日();
-            FlexibleDate 資格喪失年月日 = hihokenshaShutokuJyoho.get資格喪失年月日();
-            if ((資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
-                boolean kekaCheck = 解除期間情報の判定(hihokenshaShutokuJyoho, 適用年月日);
-                if (!kekaCheck) {
-                    return (false);
-                }
-            }
-            if ((資格喪失年月日 == null || 資格喪失年月日.isEmpty())) {
-                解除期間情報の再判定(hihokenshaShutokuJyoho, 適用年月日);
-            }
-            if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
-                throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
-            }
-            return (true);
-        } else {
+        if (hihokenshaShutokuJyoho == null) {
             return (false);
         }
+        FlexibleDate 資格取得年月日 = hihokenshaShutokuJyoho.get資格取得年月日();
+        FlexibleDate 資格喪失年月日 = hihokenshaShutokuJyoho.get資格喪失年月日();
+        if ((資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
+            boolean kekaCheck = 解除期間情報の判定(hihokenshaShutokuJyoho, 適用年月日);
+            if (!kekaCheck) {
+                return (false);
+            }
+        }
+        if ((資格喪失年月日 == null || 資格喪失年月日.isEmpty())) {
+            解除期間情報の再判定(hihokenshaShutokuJyoho, 適用年月日);
+        }
+        if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
+            throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
+        }
+        return (true);
     }
 
     private boolean 解除期間情報の判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho, FlexibleDate 適用年月日) {

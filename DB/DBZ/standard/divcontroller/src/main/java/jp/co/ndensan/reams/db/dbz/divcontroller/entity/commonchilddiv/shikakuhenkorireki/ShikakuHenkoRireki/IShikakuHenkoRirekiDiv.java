@@ -1,10 +1,12 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -23,6 +25,14 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * @param 取得日
      */
     void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日);
+
+    /**
+     * 資格変更履歴の初期化処理をします。資格変更情報Gridに設定する情報を外部から受け取ります。
+     *
+     * @param 識別コード 対象者の識別コード
+     * @param henkoData 被保険者台帳情報から資格変更情報を抽出したデータ
+     */
+    void initialize(ShikibetsuCode 識別コード, List<dgHenko_Row> henkoData);
 
     /**
      * 変更履歴グリッドのデータを取得します。
@@ -59,4 +69,6 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * @return 状態が「追加」になっているデータが存在する場合、{@code true}
      */
     boolean is追加済み();
+
+    DataGrid<dgHenko_Row> getDgHenko();
 }

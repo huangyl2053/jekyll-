@@ -4,15 +4,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.IJushochiTokureiRirekiListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.IShikakuHenkoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JushochiTokureiDialogButton.IJushochiTokureiDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JushochiTokureiDialogButton.JushochiTokureiDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShikakuHenkoRirekiDialogButton.IShikakuHenkoRirekiDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShikakuHenkoRirekiDialogButton.ShikakuHenkoRirekiDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialogButton.IShisetsuNyutaishoDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialogButton.ShisetsuNyutaishoDialogButtonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShikakuShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,8 +30,8 @@ public class ShikakuShosaiDiv extends Panel {
      */
     @JsonProperty("tblShikakuShosai")
     private tblShikakuShosaiDiv tblShikakuShosai;
-    @JsonProperty("tabShisakuShosaiRireki")
-    private tabShisakuShosaiRirekiDiv tabShisakuShosaiRireki;
+    @JsonProperty("ShikakuShosaiDialogs")
+    private ShikakuShosaiDialogsDiv ShikakuShosaiDialogs;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,21 +58,21 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     /*
-     * gettabShisakuShosaiRireki
-     * @return tabShisakuShosaiRireki
+     * getShikakuShosaiDialogs
+     * @return ShikakuShosaiDialogs
      */
-    @JsonProperty("tabShisakuShosaiRireki")
-    public tabShisakuShosaiRirekiDiv getTabShisakuShosaiRireki() {
-        return tabShisakuShosaiRireki;
+    @JsonProperty("ShikakuShosaiDialogs")
+    public ShikakuShosaiDialogsDiv getShikakuShosaiDialogs() {
+        return ShikakuShosaiDialogs;
     }
 
     /*
-     * settabShisakuShosaiRireki
-     * @param tabShisakuShosaiRireki tabShisakuShosaiRireki
+     * setShikakuShosaiDialogs
+     * @param ShikakuShosaiDialogs ShikakuShosaiDialogs
      */
-    @JsonProperty("tabShisakuShosaiRireki")
-    public void setTabShisakuShosaiRireki(tabShisakuShosaiRirekiDiv tabShisakuShosaiRireki) {
-        this.tabShisakuShosaiRireki = tabShisakuShosaiRireki;
+    @JsonProperty("ShikakuShosaiDialogs")
+    public void setShikakuShosaiDialogs(ShikakuShosaiDialogsDiv ShikakuShosaiDialogs) {
+        this.ShikakuShosaiDialogs = ShikakuShosaiDialogs;
     }
 
     /*
@@ -200,78 +199,18 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public tplJutokuDiv getTplJutoku() {
-        return this.getTabShisakuShosaiRireki().getTplJutoku();
+    public IJushochiTokureiDialogButtonDiv getCcdJutokuDialogButton() {
+        return this.getShikakuShosaiDialogs().getCcdJutokuDialogButton();
     }
 
     @JsonIgnore
-    public void  setTplJutoku(tplJutokuDiv tplJutoku) {
-        this.getTabShisakuShosaiRireki().setTplJutoku(tplJutoku);
+    public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
+        return this.getShikakuShosaiDialogs().getCcdShikakuHenkoDialogButton();
     }
 
     @JsonIgnore
-    public JutokuDiv getJutoku() {
-        return this.getTabShisakuShosaiRireki().getTplJutoku().getJutoku();
-    }
-
-    @JsonIgnore
-    public void  setJutoku(JutokuDiv Jutoku) {
-        this.getTabShisakuShosaiRireki().getTplJutoku().setJutoku(Jutoku);
-    }
-
-    @JsonIgnore
-    public IJushochiTokureiRirekiListDiv getCcdJushochiTokureiRirekiList() {
-        return this.getTabShisakuShosaiRireki().getTplJutoku().getJutoku().getCcdJushochiTokureiRirekiList();
-    }
-
-    @JsonIgnore
-    public tplHenkoDiv getTplHenko() {
-        return this.getTabShisakuShosaiRireki().getTplHenko();
-    }
-
-    @JsonIgnore
-    public void  setTplHenko(tplHenkoDiv tplHenko) {
-        this.getTabShisakuShosaiRireki().setTplHenko(tplHenko);
-    }
-
-    @JsonIgnore
-    public ShikakuHenkoDiv getShikakuHenko() {
-        return this.getTabShisakuShosaiRireki().getTplHenko().getShikakuHenko();
-    }
-
-    @JsonIgnore
-    public void  setShikakuHenko(ShikakuHenkoDiv ShikakuHenko) {
-        this.getTabShisakuShosaiRireki().getTplHenko().setShikakuHenko(ShikakuHenko);
-    }
-
-    @JsonIgnore
-    public IShikakuHenkoRirekiDiv getCcdShikakuHenkoRireki() {
-        return this.getTabShisakuShosaiRireki().getTplHenko().getShikakuHenko().getCcdShikakuHenkoRireki();
-    }
-
-    @JsonIgnore
-    public tplShisetsuNyutaishoDiv getTplShisetsuNyutaisho() {
-        return this.getTabShisakuShosaiRireki().getTplShisetsuNyutaisho();
-    }
-
-    @JsonIgnore
-    public void  setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
-        this.getTabShisakuShosaiRireki().setTplShisetsuNyutaisho(tplShisetsuNyutaisho);
-    }
-
-    @JsonIgnore
-    public ShisetsuNyutaishoRirekiDiv getShisetsuNyutaishoRireki() {
-        return this.getTabShisakuShosaiRireki().getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki();
-    }
-
-    @JsonIgnore
-    public void  setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
-        this.getTabShisakuShosaiRireki().getTplShisetsuNyutaisho().setShisetsuNyutaishoRireki(ShisetsuNyutaishoRireki);
-    }
-
-    @JsonIgnore
-    public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
-        return this.getTabShisakuShosaiRireki().getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri();
+    public IShisetsuNyutaishoDialogButtonDiv getCcdShisetsuNyutaishoDialogButton() {
+        return this.getShikakuShosaiDialogs().getCcdShisetsuNyutaishoDialogButton();
     }
 
     // </editor-fold>

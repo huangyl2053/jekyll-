@@ -16,10 +16,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -66,10 +64,9 @@ public class KinkyujiShoteiShikan {
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
         List<ShokanShoteiShikkanShisetsuRyoyo> businessList = finder.getShoteiShikanShisetsuRyoyohiEtcData(
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        if (businessList == null || businessList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        if (!(businessList == null || businessList.isEmpty())) {
+            handler.initDgdKinkyujiShoteiList(businessList);
         }
-        handler.initDgdKinkyujiShoteiList(businessList);
         ShikibetsuNoKanriResult 識別番号 = finder.getShikibetsubangoKanri(サービス年月, 様式番号);
         handler.setボタン表示制御処理(識別番号);
         div.getPanelDetail().setDisplayNone(true);

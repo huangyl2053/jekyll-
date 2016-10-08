@@ -355,16 +355,10 @@
         AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
         AND dbT1001."insertReamsLoginId" = 'anonymous'
         AND (
-        dbT1001."idoJiyuCode" IN
-        <foreach collection="shutokuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        OR dbT1001."idoJiyuCode" IN
-        <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        OR dbT1001."idoJiyuCode" IN
-        <foreach collection="henkoJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        OR dbT1001."idoJiyuCode" IN
-        <foreach collection="jutokuTekiyo" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        OR dbT1001."idoJiyuCode" IN
-        <foreach collection="jutokuKaijo" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        dbT1001."idoJiyuCode" = #{idouJiyu_tennyu}
+        OR dbT1001."idoJiyuCode" = #{idouJiyu_tensyutu}
+        OR dbT1001."idoJiyuCode" = #{idouJiyu_sibou}
+        OR dbT1001."idoJiyuCode" = #{idouJiyu_tenkyo}
         )
     </select>
 

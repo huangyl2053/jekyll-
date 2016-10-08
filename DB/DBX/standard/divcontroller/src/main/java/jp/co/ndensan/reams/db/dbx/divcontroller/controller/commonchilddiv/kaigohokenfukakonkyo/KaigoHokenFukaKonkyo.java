@@ -50,6 +50,9 @@ public class KaigoHokenFukaKonkyo {
                 ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
                         get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
                 getHandler(div).init(処理日付管理情報, resultMax, resultList, 識別コード);
+            } else {
+                div.getBtnBefore().setDisabled(true);
+                div.getBtnAfter().setDisabled(true);
             }
         }
         return ResponseData.of(div).respond();

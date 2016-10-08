@@ -118,4 +118,25 @@
         WHERE tbl."rownum" = 1
     </select>
 
+
+
+    <select id="select介護事業者ListBy申請日"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter"
+            resultMap="ResultMap_DbT7060KaigoJigyoshaEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        tbl."jigyoshaName" as "dbT7060KaigoJigyosha_jigyoshaName"
+        FROM (
+        SELECT row_number() over() as rownum,
+        "jigyoshaName"
+        FROM
+        rgdb."DbT7060KaigoJigyosha"
+        WHERE
+        rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" IN
+        <foreach collection="jigyoshaNoList" item="no" open="(" separator="," close=")"> #{no} </foreach>
+        AND rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMD}
+        AND rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" <![CDATA[>]]> #{yukoKaishiYMD}
+        )tbl
+        WHERE tbl."rownum" = 1
+    </select>
+
 </mapper>

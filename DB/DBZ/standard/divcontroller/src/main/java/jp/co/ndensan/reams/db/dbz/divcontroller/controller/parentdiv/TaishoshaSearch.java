@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaFinder;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.search.ShikakuSearchItem;
 import jp.co.ndensan.reams.db.dbz.service.core.util.SearchResult;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createKojin;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createShikibetsuTaisho;
@@ -37,7 +38,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -57,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 対象者検索のコントローラークラスです。（資格系）
@@ -149,9 +152,9 @@ public class TaishoshaSearch {
         // 検索条件未指定チェック
         IHihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
+                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
+                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
+                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
 
         boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
 
@@ -229,7 +232,7 @@ public class TaishoshaSearch {
         IShikibetsuTaishoSearchKey 検索キー
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
         TaishoshaFinder finder = new TaishoshaFinder();
-        SearchResult<TaishoshaRelateBusiness> 対象者 = finder.get資格対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
+        SearchResult<TaishoshaRelateBusiness> 対象者 = finder.get資格対象者(条件無, 条件無, 検索キー, 最近処理者検索数, HihokenshaNo.EMPTY);
         if (!対象者.records().isEmpty()) {
             for (TaishoshaRelateBusiness entity : 対象者.records()) {
                 put対象者Key(create対象者Key(entity));
@@ -286,8 +289,13 @@ public class TaishoshaSearch {
     }
 
     private SearchResult<TaishoshaRelateBusiness> get対象者(IHihokenshaFinderDiv div) {
-        TaishoshaFinder finder = new TaishoshaFinder();
-        return finder.get資格対象者(get介護条件(div), get介護除外条件(div), div.get宛名条件(), 最大取得件数);
+        TaishoshaFinder finder = InstanceProvider.create(TaishoshaFinder.class);
+        HihokenshaNo hihokenshaNo = HihokenshaNo.EMPTY;
+        if (div.get被保険者番号() != null && !div.get被保険者番号().isEmpty()) {
+            hihokenshaNo = new HihokenshaNo(div.get被保険者番号());
+        }
+
+        return finder.get資格対象者(get介護条件(div), get介護除外条件(div), div.get宛名条件(), 最大取得件数, hihokenshaNo);
     }
 
     private ISearchCondition get介護条件(IHihokenshaFinderDiv div) {
@@ -312,7 +320,7 @@ public class TaishoshaSearch {
                     ShikakuSearchItem.住所地特例フラグ, StringOperator.完全一致, JushochitokureishaKubun.住所地特例者.getコード()));
         }
         ISearchCondition 介護条件 = null;
-        if (条件List.size() > 0) {
+        if (!条件List.isEmpty()) {
             for (INewSearchCondition 条件 : 条件List) {
                 介護条件 = (介護条件 == null) ? 条件 : 条件.and(介護条件);
             }
@@ -354,12 +362,11 @@ public class TaishoshaSearch {
     }
 
     private TaishoshaKey create対象者Key(TaishoshaRelateBusiness entity) {
-        UaFt200FindShikibetsuTaishoEntity shikibetsuTaisho = entity.get住基個人住登外エンティティ();
         DbV7901ShikakuSearchBusiness 資格検索 = new DbV7901ShikakuSearchBusiness(entity.get資格検索エンティティ());
         IKojin 個人 = createKojin(entity.get住基個人住登外エンティティ());
         return new TaishoshaKey(
                 資格検索.getHihokenshaNo() != null ? 資格検索.getHihokenshaNo() : new HihokenshaNo(RString.EMPTY),
-                shikibetsuTaisho.getShikibetsuCode() != null ? shikibetsuTaisho.getShikibetsuCode() : new ShikibetsuCode(RString.EMPTY),
+                個人.get識別コード() != null ? 個人.get識別コード() : new ShikibetsuCode(RString.EMPTY),
                 個人.get世帯コード() != null ? 個人.get世帯コード() : new SetaiCode(RString.EMPTY));
     }
 
@@ -409,7 +416,7 @@ public class TaishoshaSearch {
         } else if (資格検索.getJukyushaDaichoHihokenshaNo() != null && !資格検索.getJukyushaDaichoHihokenshaNo().isEmpty()) {
             被保険者区分 = HihoKubun.受給;
         } else if ((資格検索.getHihokenshaNo() != null && !資格検索.getHihokenshaNo().isEmpty())
-                && (資格検索.getShikakuSoshitsuYMD() == null || 資格検索.getShikakuSoshitsuYMD().isEmpty())) {
+                   && (資格検索.getShikakuSoshitsuYMD() == null || 資格検索.getShikakuSoshitsuYMD().isEmpty())) {
             被保険者区分 = HihoKubun.資格;
         }
         return 被保険者区分;
@@ -417,12 +424,12 @@ public class TaishoshaSearch {
 
     private dgGaitoshaList_Row createdgGaitoshaList_Row(DbV7901ShikakuSearchBusiness 資格検索結果, IKojin 個人, IShikibetsuTaisho 識別対象, HihoKubun 被保険者区分) {
 
-        RString 名称 = 識別対象.get名称() != null ? (識別対象.get名称().getName() != null ? 識別対象.get名称().getName().value() : RString.EMPTY) : RString.EMPTY;
-        RString 名称カナ = 識別対象.get名称() != null ? (識別対象.get名称().getKana() != null ? 識別対象.get名称().getKana().value() : RString.EMPTY) : RString.EMPTY;
-        RString 生年月日 = 個人.get生年月日() != null ? new RString(個人.get生年月日().toFlexibleDate().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY;
-        RString 郵便番号 = 識別対象.get住所() != null ? (識別対象.get住所().get郵便番号() != null ? 識別対象.get住所().get郵便番号().getEditedYubinNo() : RString.EMPTY) : RString.EMPTY;
-        RString 住所 = 識別対象.get住所() != null ? 識別対象.get住所().get住所() : RString.EMPTY;
-        RString 番地 = 識別対象.get住所().get番地() != null ? 識別対象.get住所().get番地().getBanchi().value() : RString.EMPTY;
+        RString 名称 = to名称(個人.get名称());
+        RString 名称カナ = to名称カナ(個人.get名称());
+        RString 生年月日 = to生年月日(個人.get生年月日());
+        RString 郵便番号 = to郵便番号(識別対象.get住所());
+        RString 住所 = to住所(識別対象.get住所());
+        RString 番地 = to番地(識別対象.get住所());
         RString 住所番地 = 住所.concat(番地);
 
         RString sort用生年月日 = 個人.get生年月日() != null ? new RString(個人.get生年月日().toFlexibleDate().toString()) : RString.EMPTY;
@@ -451,4 +458,39 @@ public class TaishoshaSearch {
         return newRow;
     }
 
+    private RString to名称(IName name) {
+        return name == null ? RString.EMPTY
+               : name.getName() == null ? RString.EMPTY
+                 : name.getName().value();
+    }
+
+    private RString to名称カナ(IName name) {
+        return name == null ? RString.EMPTY
+               : name.getKana() == null ? RString.EMPTY
+                 : name.getKana().value();
+    }
+
+    private RString to生年月日(IDateOfBirth 生年月日) {
+        return 生年月日 == null ? RString.EMPTY
+               : new RString(生年月日.toFlexibleDate().wareki().separator(Separator.PERIOD).toDateString().toString());
+    }
+
+    private RString to郵便番号(IJusho jusho) {
+        return jusho == null ? RString.EMPTY
+               : jusho.get郵便番号() == null ? RString.EMPTY
+                 : jusho.get郵便番号().getEditedYubinNo();
+    }
+
+    private RString to住所(IJusho jusho) {
+        return jusho == null ? RString.EMPTY
+               : jusho.get住所() == null ? RString.EMPTY
+                 : jusho.get住所();
+    }
+
+    private RString to番地(IJusho jusho) {
+        return jusho == null ? RString.EMPTY
+               : jusho.get番地() == null ? RString.EMPTY
+                 : jusho.get番地().getBanchi() == null ? RString.EMPTY
+                   : jusho.get番地().getBanchi().value();
+    }
 }

@@ -96,7 +96,6 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private List<KeyValueDataSource> setDdlSoshituJiyuDataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ShikakuSoshitsuJiyu num : ShikakuSoshitsuJiyu.values()) {
             dataSourceList.add(new KeyValueDataSource(num.getコード(), num.get名称()));
         }
@@ -167,7 +166,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
     /**
      * バッチ用パラメータを作成します。
      *
-     * @return ShogaishaKojoTaishoshaListParameter 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
+     * @return ShogaishaKojoTaishoshaListParameter
+     * 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
      */
     public DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter getParameter() {
         DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter parameter = new DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter();
@@ -204,7 +204,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
     /**
      * 出力順を取得します。
      *
-     * @return ShogaishaKojoTaishoshaListParameter 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
+     * @return ShogaishaKojoTaishoshaListParameter
+     * 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
      */
     public RString get画面出力順() {
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();

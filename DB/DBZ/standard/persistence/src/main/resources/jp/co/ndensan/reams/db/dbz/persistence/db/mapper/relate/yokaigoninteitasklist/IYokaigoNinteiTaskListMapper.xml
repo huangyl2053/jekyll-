@@ -903,6 +903,7 @@
         AND DbT5105."centerSoshinYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
+        AND DbT5105."ikenshoTorokuKanryoYMD" is NULL
     ORDER BY  DbT5101."hihokenshaKana",
               DbT5101."ninteiShinseiYMD",
               DbT5101."shoKisaiHokenshaNo"

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 調査委託先・調査員一覧表のバッチ処理クラスです。
+ *
  * @reamsid_L DBE-0290-030 dongyabin
  */
 public class DBE592001_ItakusakiChosain extends BatchFlowBase<DBE592001_ItakusakiChosainParameter> {

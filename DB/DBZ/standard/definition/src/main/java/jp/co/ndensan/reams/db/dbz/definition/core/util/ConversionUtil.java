@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 型変換に関するユーティリティです。
  */
-public class ConversionUtil {
+public final class ConversionUtil {
 
     private ConversionUtil() {
     }
