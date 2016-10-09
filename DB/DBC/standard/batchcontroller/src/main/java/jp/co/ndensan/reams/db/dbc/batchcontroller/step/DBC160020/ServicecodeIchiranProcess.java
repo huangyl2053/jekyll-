@@ -179,23 +179,20 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
                     UzUDE0831EucAccesslogFileType.Csv);
             eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                     csvFileName);
-            if (parameter.is項目名付加()) {
-                csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).
-                        setDelimiter(EUC_WRITER_DELIMITER).
-                        setEnclosure(EUC_WRITER_ENCLOSURE).
-                        setEncode(Encode.UTF_8withBOM).
-                        setNewLine(NewLine.CRLF).
-                        hasHeader(true).setHeader(headerList).
-                        build();
-            } else {
-                csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).
-                        setDelimiter(EUC_WRITER_DELIMITER).
-                        setEnclosure(EUC_WRITER_ENCLOSURE).
-                        setEncode(Encode.UTF_8withBOM).
-                        setNewLine(NewLine.CRLF).
-                        hasHeader(false).
-                        build();
-            }
+            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(false).
+                    build();
+        }
+    }
+
+    @Override
+    protected void beforeExecute() {
+        if (parameter.is項目名付加()) {
+            csvListWriter.writeLine(headerList);
         }
     }
 
