@@ -150,7 +150,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != this.負担限度額認定確認リスト.get利用軽減()
                     && Boolean.valueOf(this.負担限度額認定確認リスト.get利用軽減().toString())) {
                 source.list4_1 = 申;
-            } else if (this.負担限度額認定確認リスト.get利用軽減().isEmpty()) {
+            } else if (null != this.負担限度額認定確認リスト.get利用軽減()
+                    && this.負担限度額認定確認リスト.get利用軽減().isEmpty()) {
                 source.list4_1 = RString.EMPTY;
             } else {
                 source.list4_1 = 認;
@@ -158,7 +159,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != this.負担限度額認定確認リスト.get社福軽減()
                     && Boolean.valueOf(this.負担限度額認定確認リスト.get社福軽減().toString())) {
                 source.list4_2 = 申;
-            } else if (this.負担限度額認定確認リスト.get社福軽減().isEmpty()) {
+            } else if (null != this.負担限度額認定確認リスト.get社福軽減()
+                    && this.負担限度額認定確認リスト.get社福軽減().isEmpty()) {
                 source.list4_2 = RString.EMPTY;
             } else {
                 source.list4_2 = 認;
@@ -171,7 +173,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != this.負担限度額認定確認リスト.get訪問減額()
                     && Boolean.valueOf(this.負担限度額認定確認リスト.get訪問減額().toString())) {
                 source.list4_3 = 申;
-            } else if (this.負担限度額認定確認リスト.get訪問減額().isEmpty()) {
+            } else if (null != this.負担限度額認定確認リスト.get訪問減額()
+                    && this.負担限度額認定確認リスト.get訪問減額().isEmpty()) {
                 source.list4_3 = RString.EMPTY;
             } else {
                 source.list4_3 = 認;
@@ -179,7 +182,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != this.負担限度額認定確認リスト.get特地減免()
                     && Boolean.valueOf(this.負担限度額認定確認リスト.get特地減免().toString())) {
                 source.list4_4 = 申;
-            } else if (this.負担限度額認定確認リスト.get特地減免().isEmpty()) {
+            } else if (null != this.負担限度額認定確認リスト.get特地減免()
+                    && this.負担限度額認定確認リスト.get特地減免().isEmpty()) {
                 source.list4_4 = RString.EMPTY;
             } else {
                 source.list4_4 = 認;
@@ -198,9 +202,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != this.負担限度額認定確認リスト.get世帯課税区分()
                     && !this.負担限度額認定確認リスト.get世帯課税区分().isEmpty()) {
                 RString 世帯課税 = this.負担限度額認定確認リスト.get世帯課税区分();
-                RString 世帯課税名称 = RString.EMPTY;
-                世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
-                source.list3_2 = 世帯課税名称;
+                source.list3_2 = SetaiKazeiKubun.toValue(世帯課税).get名称();
             }
             source.list3_3 = RString.EMPTY;
             if (null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
@@ -427,9 +429,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果) {
         RString 申請理由区分 = 今回認定結果.getShinseiRiyuKubun();
         if (null != 申請理由区分 && !申請理由区分.isEmpty()) {
-            RString 申請理由区分名称 = RString.EMPTY;
-            申請理由区分名称 = ShinseiRiyuKubun.toValue(申請理由区分).get名称();
-            source.list1_3 = 申請理由区分名称;
+            source.list1_3 = ShinseiRiyuKubun.toValue(申請理由区分).get名称();
         }
     }
 
@@ -443,9 +443,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果) {
         RString 配偶者課税区分 = 今回認定結果.getHaigushaKazeiKubun();
         if (null != 配偶者課税区分 && !配偶者課税区分.isEmpty()) {
-            RString 配偶者課税区分名称 = RString.EMPTY;
-            配偶者課税区分名称 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
-            source.list3_2 = 配偶者課税区分名称;
+            source.list3_2 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
         }
     }
 }
