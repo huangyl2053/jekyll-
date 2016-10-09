@@ -11,7 +11,9 @@
             rgdb."DbT3070KogakuGassanJikoFutanGaku" 
         WHERE 
             "kakunin_UketoriYM" = #{確認情報受取年月}
-            AND "hoseiZumi_SofuYM" = ''
+            AND ("hoseiZumi_SofuYM" = ''
+                 OR "hoseiZumi_SofuYM" IS NULL
+                )
             AND "realHoseiJissiYMD" = ''
             AND "isDeleted" = false
     </select>
@@ -347,11 +349,11 @@
         AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
         WHERE  "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
         ORDER BY
-               "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo",
-               "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo",
-               "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo",
-               "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo",
-               "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2",
                "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM"
     </select>
     
