@@ -192,7 +192,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
                 totime.getHour(), totime.getMinute(), totime.getSecond());
         parameter.set証記載保険者番号(div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value());
         parameter.set市町村コード(div.getCommonChildDiv1().getSelectedItem().get市町村コード());
-        parameter.set被保険者番号(new HihokenshaNo(div.getTxtHihokenshaNo().getValue()));
+        parameter.set被保険者番号(div.getTxtHihokenshaNo().getValue());
         parameter.set今回開始期間FROM(konkaikaishiFrom);
         parameter.set今回開始期間TO(konkaikaishiTo);
         parameter.set新ファイル名(div.getTxtNewFileName().getValue());
