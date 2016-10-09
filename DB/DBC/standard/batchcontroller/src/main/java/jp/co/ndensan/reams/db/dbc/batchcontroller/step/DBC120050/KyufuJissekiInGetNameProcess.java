@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class KyufuJissekiInGetNameProcess extends BatchProcessBase<JigyoshaMeisyoAndShikibetsuNoKanrenEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kyufujissekikoshinin.IKyufuJissekiInJohoMapper.select入力識別名称関連リスト");
+            + "kyufujissekiin.IKyufuJissekiInJohoMapper.select入力識別名称関連リスト");
     @BatchWriter
     private IBatchTableWriter 給付実績一時tableWriter;
     private static final RString 給付実績一時_TABLE_NAME = new RString("DbWT1111KyufuJisseki");

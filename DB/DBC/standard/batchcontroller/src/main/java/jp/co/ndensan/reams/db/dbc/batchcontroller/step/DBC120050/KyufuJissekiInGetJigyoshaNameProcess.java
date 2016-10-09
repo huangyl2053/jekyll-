@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<JigyoshaMeisyoAndShikibetsuNoKanrenEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kyufujissekikoshinin.IKyufuJissekiInJohoMapper.select事業者名称関連リスト");
+            + "kyufujissekiin.IKyufuJissekiInJohoMapper.select事業者名称関連リスト");
     private static final RString エラー区分_名称取得エラー = new RString("05");
     @BatchWriter
     private IBatchTableWriter 処理結果リスト一時tableWriter;
