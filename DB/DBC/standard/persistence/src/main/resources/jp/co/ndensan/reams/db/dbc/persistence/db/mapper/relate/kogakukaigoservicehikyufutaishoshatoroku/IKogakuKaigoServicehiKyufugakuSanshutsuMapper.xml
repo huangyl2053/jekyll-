@@ -767,33 +767,33 @@
     <!--高額介護サービス費関連のテーブルのデータを削除するためのキーを取得し、削除キー一時に格納する-->
     <insert id="insert高額介護削除キー一時">
         INSERT INTO "TempSakujyoKi"
-            SELECT  DISTINCT
-                    D."hihokenshaNo"
-                    D."serviceTeikyoYM"
+            SELECT DISTINCT
+                    D."hihokenshaNo",
+                    D."serviceTeikyoYM",
                     D."rirekiNo"
             FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS D
             INNER JOIN  rgdb."DbT3056KogakuShikyuShinsei" AS A
             ON  D."hihokenshaNo" = A."hihokenshaNo" 
             AND D."serviceTeikyoYM" = A."serviceTeikyoYM"
             AND D."rirekiNo" = A."rirekiNo"
-            AND A."shinseiYMD" = ''
             WHERE D."taishoshaHanteiShinsaYM" = #{処理年月}
+            AND (A."shinseiYMD" = '' OR  A."shinseiYMD" IS NULL)
     </insert>
     
     <!--事業高額介護サービス費関連のテーブルのデータを削除するためのキーを取得し、削除キー一時に格納する-->
     <insert id="insert事業高額介護削除キー一時">
         INSERT INTO "TempSakujyoKi"
             SELECT  DISTINCT
-                    D."hihokenshaNo"
-                    D."serviceTeikyoYM"
+                    D."hihokenshaNo",
+                    D."serviceTeikyoYM",
                     D."rirekiNo"
             FROM rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS D
             INNER JOIN  rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A
             ON  D."hihokenshaNo" = A."hihokenshaNo" 
             AND D."serviceTeikyoYM" = A."serviceTeikyoYM"
             AND D."rirekiNo" = A."rirekiNo"
-            AND A."shinseiYMD" = ''
             WHERE D."taishoshaHanteiShinsaYM" = #{処理年月}
+            AND (A."shinseiYMD" = '' OR  A."shinseiYMD" IS NULL)
     </insert>
     
      <!--前回処理高額介護サービス費支給申請の削除 -->
@@ -1236,52 +1236,53 @@
     </update>
     
     <!-- 高額介護サービス費支給申請にinsertする。 -->
-    <insert id="insert高額介護サービス費支給申請">
-       INSERT INTO
-        rgdb."DbT3056KogakuShikyuShinsei"
-       SELECT 
-            "TempKogakuShikyuShinseiZen".*
+    <select id="get高額介護サービス費支給申請"
+         resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity">
+        SELECT 
+        "TempKogakuShikyuShinseiZen".*
         FROM "TempKogakuShikyuShinseiZen"
-    </insert>
-    
+        WHERE "insertTimestamp" IS NULL
+    </select>
+
      <!-- 高額介護サービス費支給判定結果にinsertする。 -->
-    <insert id="insert高額介護サービス費支給判定結果">
-       INSERT INTO
-        rgdb."DbT3057KogakuShikyuHanteiKekka"
-       SELECT 
-            "TempKogakuShikyuHanteiKekkaZen".*
+    <select id="get高額介護サービス費支給判定結果"
+         resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity">
+        SELECT 
+        "TempKogakuShikyuHanteiKekkaZen".*
         FROM "TempKogakuShikyuHanteiKekkaZen"
-    </insert>
-    
+        WHERE "insertTimestamp" IS NULL
+    </select>
+
     <!-- 高額介護サービス費支給審査決定にinsertする。 -->
-    <insert id="insert高額介護サービス費支給審査決定">
-       INSERT INTO
-        rgdb."DbT3058KogakuShikyuShinsaKettei"
-       SELECT 
-            "TempKogakuShikyuShinsaKetteiZen".*
+    <select id="get高額介護サービス費支給審査決定"
+        resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity">
+        SELECT
+        "TempKogakuShikyuShinsaKetteiZen".*
         FROM "TempKogakuShikyuShinsaKetteiZen"
-    </insert>
-    
+        WHERE "insertTimestamp" IS NULL
+    </select>
+
     <!-- 高額介護サービス費給付対象者合計にinsertする。 -->
-    <insert id="insert高額介護サービス費給付対象者合計">
-       INSERT INTO
-        rgdb."DbT3055KogakuKyufuTaishoshaGokei"
-            "TempKogakuKyufuTaishoshaGokeiZen".*
+    <select id="get高額介護サービス費給付対象者合計"
+        resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity">
+        SELECT
+        "TempKogakuKyufuTaishoshaGokeiZen".*
         FROM "TempKogakuKyufuTaishoshaGokeiZen"
-    </insert>
-    
+        WHERE "insertTimestamp" IS NULL
+    </select>
+
      <!-- 事業高額介護国保連IFマスタにupdateする。 -->
     <update id="update高額介護サービス費給付対象者合計">
        UPDATE rgdb."DbT3055KogakuKyufuTaishoshaGokei"
        SET 
-       "insertDantaiCd" = "TempKogakuKyufuTaishoshaGokeiZen"."insertDantaiCd",
+<!--       "insertDantaiCd" = "TempKogakuKyufuTaishoshaGokeiZen"."insertDantaiCd",
         "insertTimestamp" = "TempKogakuKyufuTaishoshaGokeiZen"."insertTimestamp",
         "insertReamsLoginId" = "TempKogakuKyufuTaishoshaGokeiZen"."insertReamsLoginId",
         "insertContextId" = "TempKogakuKyufuTaishoshaGokeiZen"."insertContextId",
         "isDeleted" = "TempKogakuKyufuTaishoshaGokeiZen"."isDeleted",
         "updateCount" = "TempKogakuKyufuTaishoshaGokeiZen"."updateCount",
         "lastUpdateTimestamp" = "TempKogakuKyufuTaishoshaGokeiZen"."lastUpdateTimestamp",
-        "lastUpdateReamsLoginId" = "TempKogakuKyufuTaishoshaGokeiZen"."lastUpdateReamsLoginId",
+        "lastUpdateReamsLoginId" = "TempKogakuKyufuTaishoshaGokeiZen"."lastUpdateReamsLoginId",-->
         "serviceHiyoGokeiGakuGokei" = "TempKogakuKyufuTaishoshaGokeiZen"."serviceHiyoGokeiGakuGokei",
         "riyoshaFutanGakuGokei" = "TempKogakuKyufuTaishoshaGokeiZen"."riyoshaFutanGakuGokei",
         "santeiKijunGaku" = "TempKogakuKyufuTaishoshaGokeiZen"."santeiKijunGaku",
@@ -1299,57 +1300,55 @@
        WHERE
         rgdb."DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = "TempKogakuKyufuTaishoshaGokeiZen"."hihokenshaNo" AND
         rgdb."DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = "TempKogakuKyufuTaishoshaGokeiZen"."serviceTeikyoYM" AND
-        rgdb."DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo" = "TempKogakuKyufuTaishoshaGokeiZen"."rirekiNo"
+        rgdb."DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo" = "TempKogakuKyufuTaishoshaGokeiZen"."rirekiNo" AND
+        "TempKogakuKyufuTaishoshaGokeiZen"."insertTimestamp" IS NULL
     </update>
     
-        <!-- 高額介護サービス給付対象者明細にinsertする。 -->
+    <!-- 高額介護サービス給付対象者明細にinsertする。 -->
     <insert id="insert高額介護サービス給付対象者明細">
-        INSERT INTO rgdb."DbT3054KogakuKyufuTaishoshaMeisai"(
-            "hihokenshaNo", "serviceTeikyoYM", "jigyoshaNo", "serviceShuruiCode", 
-            "rirekiNo", "serviceHiyoGokeiGaku", "riyoshaFutanGaku", "jigyoKogakuKyufuKonkyo", 
-            "taishoshaUketoriYM")
-        SELECT 
-            "TempKogakuKyufuTaishoshaMeisaiZenUpdate".* 
-            ,''
-        FROM "TempKogakuKyufuTaishoshaMeisaiZenUpdate"
+        INSERT INTO 
+        rgdb."DbT3054KogakuKyufuTaishoshaMeisai"
+        SELECT
+        "TempKogakuKyufuTaishoshaMeisaiZen".* 
+        FROM "TempKogakuKyufuTaishoshaMeisaiZen"
     </insert>
-    
+
      <!-- 事業高額介護サービス費支給申請にinsertする。 -->
-    <insert id="insert事業高額介護サービス費支給申請">
-       INSERT INTO
-        rgdb."DbT3110JigyoKogakuShikyuShinsei"
-       SELECT 
-            "TempJigyoKogakuShikyuShinseiZen".*
+    <select id="get事業高額介護サービス費支給申請"
+        resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity">
+        SELECT 
+        "TempJigyoKogakuShikyuShinseiZen".*
         FROM "TempJigyoKogakuShikyuShinseiZen"
-    </insert>
-    
-      <!-- 事業高額介護サービス費支給判定結果にinsertする。 -->
-    <insert id="insert事業高額介護サービス費支給判定結果">
-       INSERT INTO
-        rgdb."DbT3111JigyoKogakuShikyuHanteiKekka"
-       SELECT 
-            "TempJigyoKogakuShikyuHanteiKekkaZen".*
+        WHERE "insertTimestamp" IS NULL
+    </select>
+
+    <!-- 事業高額介護サービス費支給判定結果にinsertする。 -->
+    <select id="get事業高額介護サービス費支給判定結果"
+        resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity">
+        SELECT
+        "TempJigyoKogakuShikyuHanteiKekkaZen".*
         FROM "TempJigyoKogakuShikyuHanteiKekkaZen"
-    </insert>
-    
-      <!-- 事業高額介護サービス費支給審査決定にinsertする。 -->
-    <insert id="insert事業高額介護サービス費支給審査決定">
-       INSERT INTO
-        rgdb."DbT3112KogakuShikyuShinsaKettei"
-       SELECT 
-            "TempJigyoKogakuShikyuShinsaKetteiZen".*
+        WHERE "insertTimestamp" IS NULL
+    </select>
+
+    <!-- 事業高額介護サービス費支給審査決定にinsertする。 -->
+    <select id="get事業高額介護サービス費支給審査決定"
+        resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKetteiEntity">
+        SELECT
+        "TempJigyoKogakuShikyuShinsaKetteiZen".*
         FROM "TempJigyoKogakuShikyuShinsaKetteiZen"
-    </insert>
+        WHERE "insertTimestamp" IS NULL
+    </select>
     
-      <!-- 事業高額介護サービス費給付対象者合計にinsertする。 -->
-    <insert id="insert事業高額介護サービス費給付対象者合計">
-       INSERT INTO
-        rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"
-       SELECT 
-            "TempJigyoKogakuKyufuTaishoshaGokeiZen".*
+    <!-- 事業高額介護サービス費給付対象者合計にinsertする。 -->
+    <select id="get事業高額介護サービス費給付対象者合計"
+        resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity">
+        SELECT 
+        "TempJigyoKogakuKyufuTaishoshaGokeiZen".*
         FROM "TempJigyoKogakuKyufuTaishoshaGokeiZen"
-    </insert>
-    
+        WHERE "insertTimestamp" IS NULL
+    </select>
+
     <!-- 事業高額介護国保連IFマスタにupdateする。 -->
     <update id="update事業高額介護サービス費給付対象者合計">
        UPDATE rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"
