@@ -65,6 +65,17 @@
     
     <resultMap id="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResultEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity">
+        <id column="dbT3172_hihokenshaNo" />
+        <id column="dbT3172_taishoNendo" />
+        <id column="dbT3172_shoKisaiHokenshaNo" />
+        <id column="dbT3172_shikyuShinseishoSeiriNo" />
+        <id column="dbT3172_rirekiNo" />
+        <id column="DbT3173_hihokenshaNo" />
+        <id column="DbT3173_taishoNendo" />
+        <id column="DbT3173_shoKisaiHokenshaNo" />
+        <id column="DbT3173_shikyuShinseishoSeiriNo" />
+        <id column="DbT3173_meisanNo" />
+        <id column="DbT3173_rirekiNo" />
         <result property="hokenSeidoCode" column="ソートキー" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbt3172Entity" resultMap="resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity"/>
         <association property="dbt3173Entity" resultMap="ResultMap_DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity"/>
