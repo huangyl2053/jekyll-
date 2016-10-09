@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1040011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.Shik
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1040011.ShikakuHenkouIdouHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.shikakuhenkouidou.HihokenshaShikakuHenkoManager;
+import jp.co.ndensan.reams.db.dba.service.core.shikakuido.GappeijiJutokuKaijoRirekiCreator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -45,6 +47,9 @@ public class ShikakuHenkouIdou {
 
     private final HihokenshaShikakuHenkoManager henkoManager;
     private final HihokenshaShikakuShutokuManager shutokuManager;
+    private final GappeijiJutokuKaijoRirekiCreator rirekiCreator;
+
+    private static final RString MENUID_52002 = new RString("DBAMN52002");
 
     /**
      * コンストラクタです。
@@ -53,6 +58,7 @@ public class ShikakuHenkouIdou {
     public ShikakuHenkouIdou() {
         this.henkoManager = HihokenshaShikakuHenkoManager.createInstance();
         this.shutokuManager = HihokenshaShikakuShutokuManager.createInstance();
+        this.rirekiCreator = GappeijiJutokuKaijoRirekiCreator.createInstance();
     }
 
     /**
@@ -105,7 +111,7 @@ public class ShikakuHenkouIdou {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             saveGamenData(div);
             RealInitialLocker.release(create排他キー());
             div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
@@ -170,7 +176,17 @@ public class ShikakuHenkouIdou {
                 if (error != null) {
                     throw new ApplicationException(error.getMessage());
                 }
-                henkoManager.saveHihokenshaHenko(hihokensha);
+                if (MENUID_52002.equals(ResponseHolder.getMenuID())
+                        && ShikakuHenkoJiyu.合併.getコード().equals(hihokensha.get資格変更事由コード())) {
+                    List<HihokenshaDaicho> resList = rirekiCreator.release住所地特例(
+                            hihokensha.get被保険者番号(),
+                            hihokensha.get異動日(),
+                            hihokensha.get識別コード(),
+                            hihokensha.get市町村コード());
+                    rirekiCreator.saveHihokenshaHenkoFromList(resList);
+                } else {
+                    henkoManager.saveHihokenshaHenko(hihokensha);
+                }
             }
         }
         div.getCcdHihosyosai().施設入退所保存処理();

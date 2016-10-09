@@ -261,37 +261,49 @@ public class IryouhiKoujyoHandler {
         RealInitialLocker.release(new LockingKey(DB.concat(被保険者番号.value()).concat(医療費控除登録)));
     }
 
+    /**
+     * 「クリアする」ボタンクリックイベント。
+     *
+     * @param 医療費控除リスト 医療費控除リスト
+     */
+    public void onClick_ClearButton(List<IryohiKojoEntityResult> 医療費控除リスト) {
+        initGrid(医療費控除リスト);
+        init詳細エリア();
+    }
+
     private void initGrid(List<IryohiKojoEntityResult> 医療費控除リスト) {
         List<IryohiKojyoItiranDataGrid_Row> dataSource = new ArrayList<>();
-        for (IryohiKojoEntityResult entity : 医療費控除リスト) {
-            IryohiKojyoItiranDataGrid_Row row = new IryohiKojyoItiranDataGrid_Row();
-            row.setNaiyou(IryoHiKojoNaiyo.toValue(entity.getデータ区分()).get名称());
-            RYear 控除対象年 = new RYear(entity.get控除対象年());
-            row.setTaisyouYY(控除対象年.wareki().toDateString());
-            row.setTorokuDD(entity.get登録年月日().wareki().toDateString());
-            row.setSinseiDD(entity.get申請年月日().wareki().toDateString());
-            row.setHakouDD(entity.get発行年月日().wareki().toDateString());
-            row.setNinteFromDD(entity.get認定有効期間開始年月日().wareki().toDateString());
-            row.setNinteEndDD(entity.get認定有効期間終了年月日().wareki().toDateString());
-            row.setIkensyoSakuseDD(entity.get主治医意見書受領年月日().wareki().toDateString());
-            row.setNitijyoSekatuJiritudo(entity.get日常生活自立度().isNullOrEmpty() || entity.get日常生活自立度().equals(NichijoSeikatsuJiritsudo.その他.getコード())
-                    ? RString.EMPTY : NichijoSeikatsuJiritsudo.toValue(entity.get日常生活自立度()).get名称());
-            row.setNyosikinFlg(entity.is尿失禁の有無() ? 有 : RString.EMPTY);
-            row.setHiddenCodeKubun(entity.getデータ区分());
-            row.setHiddennitijyoSekatuJiritudoCode(entity.get日常生活自立度());
-            row.setHiddennyosikinFlg(entity.is尿失禁の有無() ? キー0 : キー1);
-            row.getHiddentaisyouYY().setValue(new RDate(控除対象年.getYearValue()));
-            row.getHiddentorokuDD().setValue(entity.get登録年月日().isEmpty() || entity.get登録年月日() == null ? null
-                    : new RDate(entity.get登録年月日().toString()));
-            row.getHiddensinseiDD().setValue(entity.get申請年月日().isEmpty() || entity.get申請年月日() == null ? null
-                    : new RDate(entity.get申請年月日().toString()));
-            row.getHiddenninteFromDD().setValue(entity.get認定有効期間開始年月日().isEmpty() || entity.get認定有効期間開始年月日() == null ? null
-                    : new RDate(entity.get認定有効期間開始年月日().toString()));
-            row.getHiddenninteEndDD().setValue(entity.get認定有効期間終了年月日().isEmpty() || entity.get認定有効期間終了年月日() == null ? null
-                    : new RDate(entity.get認定有効期間終了年月日().toString()));
-            row.getHiddenikensyoSakuseDD().setValue(entity.get主治医意見書受領年月日().isEmpty() || entity.get主治医意見書受領年月日() == null ? null
-                    : new RDate(entity.get主治医意見書受領年月日().toString()));
-            dataSource.add(row);
+        if (医療費控除リスト != null) {
+            for (IryohiKojoEntityResult entity : 医療費控除リスト) {
+                IryohiKojyoItiranDataGrid_Row row = new IryohiKojyoItiranDataGrid_Row();
+                row.setNaiyou(IryoHiKojoNaiyo.toValue(entity.getデータ区分()).get名称());
+                RYear 控除対象年 = new RYear(entity.get控除対象年());
+                row.setTaisyouYY(控除対象年.wareki().toDateString());
+                row.setTorokuDD(entity.get登録年月日().wareki().toDateString());
+                row.setSinseiDD(entity.get申請年月日().wareki().toDateString());
+                row.setHakouDD(entity.get発行年月日().wareki().toDateString());
+                row.setNinteFromDD(entity.get認定有効期間開始年月日().wareki().toDateString());
+                row.setNinteEndDD(entity.get認定有効期間終了年月日().wareki().toDateString());
+                row.setIkensyoSakuseDD(entity.get主治医意見書受領年月日().wareki().toDateString());
+                row.setNitijyoSekatuJiritudo(entity.get日常生活自立度().isNullOrEmpty() || entity.get日常生活自立度().equals(NichijoSeikatsuJiritsudo.その他.getコード())
+                        ? RString.EMPTY : NichijoSeikatsuJiritsudo.toValue(entity.get日常生活自立度()).get名称());
+                row.setNyosikinFlg(entity.is尿失禁の有無() ? 有 : RString.EMPTY);
+                row.setHiddenCodeKubun(entity.getデータ区分());
+                row.setHiddennitijyoSekatuJiritudoCode(entity.get日常生活自立度());
+                row.setHiddennyosikinFlg(entity.is尿失禁の有無() ? キー0 : キー1);
+                row.getHiddentaisyouYY().setValue(new RDate(控除対象年.getYearValue()));
+                row.getHiddentorokuDD().setValue(entity.get登録年月日().isEmpty() || entity.get登録年月日() == null ? null
+                        : new RDate(entity.get登録年月日().toString()));
+                row.getHiddensinseiDD().setValue(entity.get申請年月日().isEmpty() || entity.get申請年月日() == null ? null
+                        : new RDate(entity.get申請年月日().toString()));
+                row.getHiddenninteFromDD().setValue(entity.get認定有効期間開始年月日().isEmpty() || entity.get認定有効期間開始年月日() == null ? null
+                        : new RDate(entity.get認定有効期間開始年月日().toString()));
+                row.getHiddenninteEndDD().setValue(entity.get認定有効期間終了年月日().isEmpty() || entity.get認定有効期間終了年月日() == null ? null
+                        : new RDate(entity.get認定有効期間終了年月日().toString()));
+                row.getHiddenikensyoSakuseDD().setValue(entity.get主治医意見書受領年月日().isEmpty() || entity.get主治医意見書受領年月日() == null ? null
+                        : new RDate(entity.get主治医意見書受領年月日().toString()));
+                dataSource.add(row);
+            }
         }
         div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().setDataSource(dataSource);
     }

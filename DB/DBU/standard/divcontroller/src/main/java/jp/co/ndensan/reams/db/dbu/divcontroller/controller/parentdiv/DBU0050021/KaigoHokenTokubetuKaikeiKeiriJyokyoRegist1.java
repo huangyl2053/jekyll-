@@ -279,8 +279,32 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         if (!handler.is画面詳細エリア入力有(画面入力データ)) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         } else {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            合計値チェック_合計１(div, pairs);
+            合計値チェック_合計２(div, pairs);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             return ResponseData.of(div).addMessage(message).respond();
         }
+    }
+
+    private void 合計値チェック_合計１(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div, ValidationMessageControlPairs pairs) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        DBU0050021ErrorMessages 報告年度必須 = new DBU0050021ErrorMessages(UrErrorMessages.入力値が不正);
+        messages.add(ValidateChain.validateStart(div).ifNot(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1DivSpec.合計値チェック_合計１)
+                .thenAdd(報告年度必須).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                報告年度必須, div.getTxtsainyugokei()).build().check(messages));
+    }
+
+    private void 合計値チェック_合計２(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div, ValidationMessageControlPairs pairs) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        DBU0050021ErrorMessages 報告年度必須 = new DBU0050021ErrorMessages(UrErrorMessages.入力値が不正);
+        messages.add(ValidateChain.validateStart(div).ifNot(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1DivSpec.合計値チェック_合計２)
+                .thenAdd(報告年度必須).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                報告年度必須, div.getTxtsaishutsugoukei()).build().check(messages));
     }
 
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> getResponseData_btnSave_修正(

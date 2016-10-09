@@ -8,25 +8,29 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * DvKogakuServiceJuryoInin のクラスファイル 
- * 
- * @author 自動生成
+ * DvKogakuServiceJuryoInin のクラスファイル
+ *
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class DvKogakuServiceJuryoIninDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -180,7 +184,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTorokuSeitaiIchiran(Button btnTorokuSeitaiIchiran) {
+    public void setBtnTorokuSeitaiIchiran(Button btnTorokuSeitaiIchiran) {
         this.getDvHaraiKetteiToroku().setBtnTorokuSeitaiIchiran(btnTorokuSeitaiIchiran);
     }
 
@@ -190,7 +194,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLinLine2(HorizontalLine linLine2) {
+    public void setLinLine2(HorizontalLine linLine2) {
         this.getDvHaraiKetteiToroku().setLinLine2(linLine2);
     }
 
@@ -200,7 +204,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgHaraiKettei(DataGrid<dgHaraiKettei_Row> dgHaraiKettei) {
+    public void setDgHaraiKettei(DataGrid<dgHaraiKettei_Row> dgHaraiKettei) {
         this.getDvHaraiKetteiToroku().setDgHaraiKettei(dgHaraiKettei);
     }
 
@@ -210,7 +214,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShuseiSeitaiIchiran(Button btnShuseiSeitaiIchiran) {
+    public void setBtnShuseiSeitaiIchiran(Button btnShuseiSeitaiIchiran) {
         this.getDvHaraiKetteiShusei().setBtnShuseiSeitaiIchiran(btnShuseiSeitaiIchiran);
     }
 
@@ -220,7 +224,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtRirekiNo(TextBox txtRirekiNo) {
+    public void setTxtRirekiNo(TextBox txtRirekiNo) {
         this.getDvHaraiKetteiShusei().setTxtRirekiNo(txtRirekiNo);
     }
 
@@ -230,7 +234,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLinLine3(HorizontalLine linLine3) {
+    public void setLinLine3(HorizontalLine linLine3) {
         this.getDvHaraiKetteiShusei().setLinLine3(linLine3);
     }
 
@@ -240,7 +244,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShinseiDate(TextBoxDate btnShinseiDate) {
+    public void setBtnShinseiDate(TextBoxDate btnShinseiDate) {
         this.getDvHaraiKetteiShusei().setBtnShinseiDate(btnShinseiDate);
     }
 
@@ -250,7 +254,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUketsukeDate(TextBoxDate txtUketsukeDate) {
+    public void setTxtUketsukeDate(TextBoxDate txtUketsukeDate) {
         this.getDvHaraiKetteiShusei().setTxtUketsukeDate(txtUketsukeDate);
     }
 
@@ -260,7 +264,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKetteiDate(TextBoxDate btnKetteiDate) {
+    public void setBtnKetteiDate(TextBoxDate btnKetteiDate) {
         this.getDvHaraiKetteiShusei().setBtnKetteiDate(btnKetteiDate);
     }
 
@@ -270,7 +274,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShoninDate(TextBoxDateRange btnShoninDate) {
+    public void setBtnShoninDate(TextBoxDateRange btnShoninDate) {
         this.getDvHaraiKetteiShusei().setBtnShoninDate(btnShoninDate);
     }
 
@@ -285,7 +289,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKetteiKubun(RadioButton radKetteiKubun) {
+    public void setRadKetteiKubun(RadioButton radKetteiKubun) {
         this.getDvHaraiKetteiShusei().setRadKetteiKubun(radKetteiKubun);
     }
 
@@ -295,7 +299,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoninShinaiRiyu(TextBoxMultiLine txtShoninShinaiRiyu) {
+    public void setTxtShoninShinaiRiyu(TextBoxMultiLine txtShoninShinaiRiyu) {
         this.getDvHaraiKetteiShusei().setTxtShoninShinaiRiyu(txtShoninShinaiRiyu);
     }
 
@@ -305,7 +309,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLinLine5(HorizontalLine linLine5) {
+    public void setLinLine5(HorizontalLine linLine5) {
         this.getDvHaraiKetteiShusei().setLinLine5(linLine5);
     }
 
@@ -315,7 +319,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlRiyoshafutanJogenGaku(DropDownList ddlRiyoshafutanJogenGaku) {
+    public void setDdlRiyoshafutanJogenGaku(DropDownList ddlRiyoshafutanJogenGaku) {
         this.getDvHaraiKetteiShusei().setDdlRiyoshafutanJogenGaku(ddlRiyoshafutanJogenGaku);
     }
 
@@ -325,7 +329,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLinLine6(HorizontalLine linLine6) {
+    public void setLinLine6(HorizontalLine linLine6) {
         this.getDvHaraiKetteiShusei().setLinLine6(linLine6);
     }
 
@@ -335,7 +339,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDvKakuninsho(DvKakuninshoDiv DvKakuninsho) {
+    public void setDvKakuninsho(DvKakuninshoDiv DvKakuninsho) {
         this.getDvHakko().setDvKakuninsho(DvKakuninsho);
     }
 
@@ -345,7 +349,7 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTsuchiDate(TextBoxDate txtTsuchiDate) {
+    public void setTxtTsuchiDate(TextBoxDate txtTsuchiDate) {
         this.getDvHakko().getDvKakuninsho().setTxtTsuchiDate(txtTsuchiDate);
     }
 

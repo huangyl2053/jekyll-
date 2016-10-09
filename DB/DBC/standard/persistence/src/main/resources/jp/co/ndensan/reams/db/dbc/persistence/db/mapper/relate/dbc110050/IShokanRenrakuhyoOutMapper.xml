@@ -89,8 +89,8 @@
                        "DbWT2111ShokanShinsei"."hiHokenshaNo" = 受給者."dbT4001JukyushaDaicho_hihokenshaNo"
                WHERE(
                    受給者."dbT4001JukyushaDaicho_yukoMukoKubun" = '1' AND
-                   SUBSTR(受給者."dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",0,6) <![CDATA[ <= ]]> "DbWT2111ShokanShinsei"."serviceTeikyoYM" AND
-                   "DbWT2111ShokanShinsei"."serviceTeikyoYM" <![CDATA[ <= ]]> SUBSTR(受給者."dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",0,6)) OR
+                   SUBSTRING(受給者."dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",1,6) <![CDATA[ <= ]]> "DbWT2111ShokanShinsei"."serviceTeikyoYM" AND
+                   "DbWT2111ShokanShinsei"."serviceTeikyoYM" <![CDATA[ <= ]]> SUBSTRING(受給者."dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",1,6)) OR
                    (受給者."dbT4001JukyushaDaicho_kyuSochishaFlag" = TRUE AND
                    受給者."dbT4001JukyushaDaicho_yokaigoJotaiKubunCode" = '01')) AS A) AS SUB
          WHERE
@@ -895,6 +895,20 @@
             償還払支給申請一時TBL."serviceTeikyoYM" = 償還払支給申請."serviceTeikyoYM" AND
             償還払支給申請一時TBL."seiriNo" = 償還払支給申請."seiriNo"
      </select>
+     
+     <select resultOrdered="true" id="select帳票制御汎用キー"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoSofuIchiranParam"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7067ChohyoSeigyoHanyoMapper.ResultMap_DbT7067ChohyoSeigyoHanyoEntity" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7067ChohyoSeigyoHanyoMapper.allColumns_DbT7067ChohyoSeigyoHanyo" />
+        FROM
+            rgdb."DbT7067ChohyoSeigyoHanyo" AS  "DbT7067ChohyoSeigyoHanyo"
+        WHERE 
+            "DbT7067ChohyoSeigyoHanyo"."subGyomuCode"= #{サブ業務コード}   
+            AND  "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID"= #{帳票分類ID}   
+            AND  "DbT7067ChohyoSeigyoHanyo"."kanriNendo"= #{管理年度}  
+            AND  "DbT7067ChohyoSeigyoHanyo"."komokuName"= #{項目名}              
+    </select>
     
     <sql id="allColumns_ShokanServicePlan">
         servicePlan."hiHokenshaNo" AS "servicePlan_hiHokenshaNo",

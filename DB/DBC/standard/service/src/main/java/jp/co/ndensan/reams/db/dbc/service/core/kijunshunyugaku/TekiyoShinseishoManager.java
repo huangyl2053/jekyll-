@@ -28,8 +28,7 @@ public class TekiyoShinseishoManager {
     /**
      * 初期化メソッドです。
      *
-     * @return TekiyoShinseishoManager
-     * {@link InstanceProvider#create}にて生成した{@link TekiyoShinseishoManager}のインスタンス
+     * @return TekiyoShinseishoManager {@link InstanceProvider#create}にて生成した{@link TekiyoShinseishoManager}のインスタンス
      */
     public static TekiyoShinseishoManager createInstance() {
         return InstanceProvider.create(TekiyoShinseishoManager.class);
@@ -44,6 +43,20 @@ public class TekiyoShinseishoManager {
     public boolean isNenjiExecute(FlexibleYear 年度) {
 
         if (0 < dac.select処理日付管理マスタ(年度)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 異動処理実施判定メソッドです。
+     *
+     * @param 年度 FlexibleYear
+     * @return boolean 判定区分
+     */
+    public boolean isIdoExecute(FlexibleYear 年度) {
+
+        if (0 < dac.select処理日付管理マスタ取得件数(年度)) {
             return true;
         }
         return false;

@@ -100,7 +100,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         KogakuServiceJyuryoKakuninShoProperty property = new KogakuServiceJyuryoKakuninShoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KogakuServiceJyuryoKakuninShoSource> assembler
-                    = createAssembler(property, reportManager)) {
+                    = createAssembler(reportManager, property)) {
                 reportSourceWriter = new ReportSourceWriter(assembler);
                 KogakuServiceHiJuryoininKeiyakuKakuninshoResult result = new KogakuServiceHiJuryoininKeiyakuKakuninshoResult();
                 result.set文書番号(param.get文書番号());
@@ -125,14 +125,14 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
-            IReportProperty<T> property, ReportManager manager) {
-        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+            ReportManager manager, IReportProperty<T> property) {
+        ReportAssemblerBuilder reportBuilder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
         for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
-            builder.addBreak(breaker);
+            reportBuilder.addBreak(breaker);
         }
-        builder.isHojinNo(property.containsHojinNo());
-        builder.isKojinNo(property.containsKojinNo());
-        return builder.<T>create();
+        reportBuilder.isKojinNo(property.containsKojinNo());
+        reportBuilder.isHojinNo(property.containsHojinNo());
+        return reportBuilder.<T>create();
     }
 
     private void 介護事業者情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result, RString 事業者番号) {

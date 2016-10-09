@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2700011;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2700011.TorikomiFuairuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2700011.TorikomiFuairuDivSpec;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -60,6 +61,13 @@ public class TorikomiFuairuValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateForアップロードファイル項目数(ValidationMessageControlPairs pairs) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbcErrorMessages.介護給付費単位数表標準マスタ項目数相違);
+        messages.add(ValidateChain.validateStart(div).
+                ifNot(TorikomiFuairuDivSpec.アップロードファイル項目数チェック)
+                .thenAdd(checkMessage).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                checkMessage, div.getUplAppurodoFuairu()).build().check(messages));
         return pairs;
     }
 

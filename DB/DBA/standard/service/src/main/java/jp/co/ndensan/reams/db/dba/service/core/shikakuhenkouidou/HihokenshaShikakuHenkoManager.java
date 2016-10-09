@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dba.service.core.shikakuhenkouidou;
 
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
@@ -74,12 +74,15 @@ public class HihokenshaShikakuHenkoManager {
      */
     @Transaction
     public void saveHihokenshaHenko(HihokenshaDaicho 被保険者台帳管理変更情報) {
-        // TODO 前排他処理
         HihokenshaShutokuJyoho hihokensha = manager.getSaishinDeta(
                 被保険者台帳管理変更情報.get識別コード(), 被保険者台帳管理変更情報.get被保険者番号());
         DbT1001HihokenshaDaichoEntity entity = setEntity(hihokensha, 被保険者台帳管理変更情報);
         entity.setEdaNo(manager.getSaidaiEdaban(hihokensha.get被保険者番号(), hihokensha.get異動日()));
         if (ShikakuHenkoJiyu.広域内転居.getコード().equals(被保険者台帳管理変更情報.get資格変更事由コード())) {
+            entity.setShichosonCode(被保険者台帳管理変更情報.get市町村コード());
+            entity.setShikibetsuCode(被保険者台帳管理変更情報.get識別コード());
+        }
+        if (ShikakuHenkoJiyu.広住特転居.getコード().equals(被保険者台帳管理変更情報.get資格変更事由コード())) {
             entity.setShichosonCode(被保険者台帳管理変更情報.get市町村コード());
             entity.setShikibetsuCode(被保険者台帳管理変更情報.get識別コード());
         }

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.dbc200025.ShokanRenrakuhyoSofu
 import jp.co.ndensan.reams.db.dbc.business.report.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanrenrakuhyosofuichiran.ShokanRenrakuhyoSofuIchiranPageBreak;
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoSofuIchiranParam;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110050.ShokanRenrakuhyoOutputReportProcessParam;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -23,8 +24,10 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001Hih
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200025.ShokanRenrakuhyoSofuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanrenrakuhyooutputreport.ShokanRenrakuhyoOutputReportEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200025.ShokanRenrakuhyoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -47,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -71,11 +75,12 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchKeyBreakBase<Shoka
     private static final RString ORDER_BY = new RString("order by");
     private static final RString 送付一覧表出力対象データ取得 = new RString("jp.co.ndensan.reams.db.dbc.persistence"
             + ".db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper.get送付一覧表出力対象データ");
-    private static final RString KEY_並び順の1件目 = new RString("KEY_並び順の1件目");
-    private static final RString KEY_並び順の2件目 = new RString("KEY_並び順の2件目");
-    private static final RString KEY_並び順の3件目 = new RString("KEY_並び順の3件目");
-    private static final RString KEY_並び順の4件目 = new RString("KEY_並び順の4件目");
-    private static final RString KEY_並び順の5件目 = new RString("KEY_並び順の5件目");
+    private static final RString KEY_並び順の1件目 = new RString("KEY_並び順の１件目");
+    private static final RString KEY_並び順の2件目 = new RString("KEY_並び順の２件目");
+    private static final RString KEY_並び順の3件目 = new RString("KEY_並び順の３件目");
+    private static final RString KEY_並び順の4件目 = new RString("KEY_並び順の４件目");
+    private static final RString KEY_並び順の5件目 = new RString("KEY_並び順の５件目");
+    private static final RString KEY_並び順の6件目 = new RString("KEY_並び順の６件目");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -109,6 +114,7 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchKeyBreakBase<Shoka
     private RDateTime システム日付;
     private int count;
     private RString csvFilePath;
+    private RString 帳票タイトル;
 
     @Override
     protected void initialize() {
@@ -141,9 +147,12 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchKeyBreakBase<Shoka
                 出力順Map.put(KEY_並び順の4件目, item.get項目名());
             } else if (i == INDEX_4) {
                 出力順Map.put(KEY_並び順の5件目, item.get項目名());
+            } else if (i == INDEX_5) {
+                出力順Map.put(KEY_並び順の6件目, item.get項目名());
             }
             i = i + 1;
         }
+        帳票タイトル = get帳票タイトル();
     }
 
     @Override
@@ -190,6 +199,7 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchKeyBreakBase<Shoka
         reportParam.set出力順Map(出力順Map);
         reportParam.set処理年月(processParameter.getSyoriYM());
         reportParam.set作成日時(システム日付);
+        reportParam.set帳票タイトル(帳票タイトル);
         ShokanRenrakuhyoSofuIchiranReport report = new ShokanRenrakuhyoSofuIchiranReport(reportParam);
         report.writeBy(reportSourceWriter);
 
@@ -316,5 +326,19 @@ public class ShokanRenrakuhyoOutputReportProcess extends BatchKeyBreakBase<Shoka
         ExpandedInformation expandedInformations = new ExpandedInformation(コード, 漢字_被保険者番号,
                 entity.getExHihokenshaNo().getColumnValue());
         return PersonalData.of(new ShikibetsuCode(entity.getSeibetsuCode()), expandedInformations);
+    }
+
+    private RString get帳票タイトル() {
+        IShokanRenrakuhyoOutMapper mapper = getMapper(IShokanRenrakuhyoOutMapper.class);
+        ShokanRenrakuhyoSofuIchiranParam mybatisParam = new ShokanRenrakuhyoSofuIchiranParam();
+        mybatisParam.setサブ業務コード(SubGyomuCode.DBC介護給付.getColumnValue());
+        mybatisParam.set帳票分類ID(ReportIdDBC.DBC200025.getReportId().getColumnValue());
+        mybatisParam.set管理年度(FlexibleYear.MIN);
+        mybatisParam.set項目名(ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称());
+        DbT7067ChohyoSeigyoHanyoEntity entity = mapper.select帳票制御汎用キー(mybatisParam);
+        if (entity == null) {
+            return RString.EMPTY;
+        }
+        return entity.getKomokuValue();
     }
 }

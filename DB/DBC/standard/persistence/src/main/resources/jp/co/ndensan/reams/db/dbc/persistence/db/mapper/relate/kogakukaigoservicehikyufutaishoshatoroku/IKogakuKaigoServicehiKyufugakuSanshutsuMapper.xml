@@ -281,17 +281,17 @@
         FROM "TempKyufujissekiTyukann3" AS TEMP
         INNER JOIN
         "TempShiharaiHohoHenko" AS TEMP2
-        WHERE TEMP."hiHokenshaNo" = TEMP2."hiHokenshaNo"
+        ON TEMP."hiHokenshaNo" = TEMP2."hihokenshaNo"
         AND substring(TEMP2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> TEMP."serviceTeikyoYM"
         AND TEMP."serviceTeikyoYM" <![CDATA[<=]]> substring(TEMP2."tekiyoShuryoYMD",1,6)
     </insert>
 
     <update id="update給付実績中間高額一時5の更新1">
         UPDATE
-        T1
-        SET T1."kogakuServicehiJogengakuGengakuGaitoFlag" = T2."kyojuhinadoFutangakugengakuGaitoFlag"
-        T1."kogakuServicehiJogengakuGengakugoJogengaku" = T2."kogakuServicehiJogengakuGengakugoJogengaku"
-        FROM "TempKyufujissekiTyukann5" T1,"TempyokaisoGaitosha" T2
+        "TempKyufujissekiTyukann5" AS T1
+        SET "kogakuServicehiJogengakuGengakuGaitoFlag" = T2."kyojuhinadoFutangakugengakuGaitoFlag",
+        "kogakuServicehiJogengakuGengakugoJogengaku" = T2."kogakuServicehiJogengakuGengakugoJogengaku"
+        FROM "TempyokaisoGaitosha" AS T2
         WHERE
         T1."hiHokenshaNo" = T2."hihokenshaNo"
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
@@ -303,10 +303,12 @@
 
     <update id="update給付実績中間高額一時5の更新2">
         UPDATE
-        T1
-        SET T1."kogakuServicehiJogengakuGengakuGaitoFlag" = T2."kyojuhinadoFutangakugengakuGaitoFlag"
-        T1."kogakuServicehiJogengakuGengakugoJogengaku" = T2."kogakuServicehiJogengakuGengakugoJogengaku"
-        FROM "TempKyufujissekiTyukann5" T1,"TempyokaisoGaitosha" T2
+        "TempKyufujissekiTyukann5" AS T1
+        SET "kogakuServicehiJogengakuGengakuGaitoFlag" = '',
+        "kogakuServicehiJogengakuGengakugoJogengaku" = NULL
+        WHERE NOT EXISTS(
+        SELECT 'X'
+        FROM "TempyokaisoGaitosha" AS T2
         WHERE
         T1."hiHokenshaNo" = T2."hihokenshaNo"
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
@@ -314,6 +316,7 @@
         OR
         (substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND (T2."tekiyoShuryoYMD" IS NULL OR T2."tekiyoShuryoYMD" = '')))
+        )
     </update>
 
     <insert id="insert給付実績中間事業高額一時の作成5">
@@ -384,8 +387,8 @@
     <update id="世帯員把握入力一時の更新1">
         UPDATE
         "TmpSetaiHaaku"
-        SET "shotokuNendo" = to_char(to_number(substring("kijunYMD", 1, 4), '9999') - 1, '0000')
-        "kijunYMD" = to_char(to_number(substring(基準年月日, 1, 4), '9999') - 1, '0000') || '1231'
+        SET "shotokuNendo" = to_number(substring("kijunYMD", 1, 4), '9999') - 1,
+        "kijunYMD" = to_number(to_char(to_number(substring("kijunYMD", 1, 4), '9999') - 1, '0000') || '1231', '99999999')
         WHERE
         '08' <![CDATA[<=]]> substring("kijunYMD", 5, 2)
         AND substring("kijunYMD", 5, 2) <![CDATA[<=]]> '12'
@@ -394,8 +397,8 @@
     <update id="世帯員把握入力一時の更新2">
         UPDATE
         "TmpSetaiHaaku"
-        SET "shotokuNendo" = to_char(to_number(substring("kijunYMD", 1, 4), '9999') - 2, '0000')
-        "kijunYMD" = to_char(to_number(substring(基準年月日, 1, 4), '9999') - 2, '0000') || '1231'
+        SET "shotokuNendo" = to_number(substring("kijunYMD", 1, 4), '9999') - 2,
+        "kijunYMD" = to_number(to_char(to_number(substring("kijunYMD", 1, 4), '9999') - 2, '0000') || '1231', '99999999')
         WHERE
         '01' <![CDATA[<=]]> substring("kijunYMD", 5, 2)
         AND substring("kijunYMD", 5, 2) <![CDATA[<=]]> '07'
@@ -416,7 +419,7 @@
         A."hihokenshaNo",
         A."kijunYMD"
         FROM "TmpSetaiHaaku" AS A
-        INNRE JOIN rgdb."DbFt7802FindHihokenshaDaicho"(A."kijunYMD", A."hihokenshaNo") AS B
+        INNER JOIN rgdb."DbFt7802FindHihokenshaDaicho"(A."kijunYMD", A."hihokenshaNo") AS B
         ON A."hihokenshaNo" = B."hihokenshaNo"
         AND B."jushochiTokureiFlag" = '1'
         ) AS D
@@ -465,6 +468,9 @@
     </select>
 
     <resultMap id="result_KyufuJissekiChukanKogaku8Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiChukanKogaku8Entity" autoMapping="true">
+        <id  column="tmpSetaiinShotokuHanteiMeisai_hihokenshaNo"/>
+        <id  column="tmpSetaiinShotokuHanteiMeisai_kijunYMD"/>
+        <id  column="tmpSetaiinShotokuHanteiMeisai_setaiCode"/>
         <association property="給付実績中間高額一時" resultMap="ResultMap_TempKyufujissekiTyukann"/>
         <association property="基準収入額適用管理一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3116KijunShunyugakuTekiyoKanriMapper.ResultMap_DbT3116KijunShunyugakuTekiyoKanriEntity"/>
         <association property="世帯員所得判定明細高額一時１" resultMap="ResultMap_TempSetaiinShotokuHanteiEntity"/>
@@ -472,6 +478,16 @@
     </resultMap>
 
     <resultMap id="result_KyufujissekiTyukannInsertEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity" autoMapping="true">
+        <id column="dbT3017_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <id column="dbT3017_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <id column="dbT3017_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT3017_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id column="dbT3017_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="dbT3017_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id column="dbT3017_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id column="dbT3017_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT3017_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="給付実績基本情報高額一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
         <association property="世帯員所得判定明細高額一時" resultMap="ResultMap_TempSetaiinShotokuHanteiEntity"/>
     </resultMap>
@@ -687,7 +703,7 @@
    <!--高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
     <select resultOrdered="true" id="select高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
-            resultMap="世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
+            resultMap="高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
         SELECT
             A.*,
             宛名PSM.*
@@ -699,7 +715,7 @@
         ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
         WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
     </select>
-    <resultMap id="世帯員所得判定明細高額一時２と宛名情報ResultMap" 
+    <resultMap id="高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
@@ -709,7 +725,7 @@
    <!--事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
     <select resultOrdered="true" id="select事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
-            resultMap="世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
+            resultMap="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
         SELECT
             A.*,
             宛名PSM.*
@@ -721,7 +737,7 @@
         ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
         WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
     </select>
-    <resultMap id="世帯員所得判定明細高額一時２と宛名情報ResultMap" 
+    <resultMap id="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
@@ -1259,7 +1275,7 @@
         "kogakuTaishoGaiFlag" = "TempKogakuKyufuTaishoshaGokeiZen"."kogakuTaishoGaiFlag",
         "jidoShokanTaishoFlag" = "TempKogakuKyufuTaishoshaGokeiZen"."jidoShokanTaishoFlag"
        FROM 
-        "TempKogakuKyufuTaishoshaGokeiZen" AS "TempKogakuKyufuTaishoshaGokeiZen"
+        "TempKogakuKyufuTaishoshaGokeiZen"
        WHERE
         rgdb."DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = "TempKogakuKyufuTaishoshaGokeiZen"."hihokenshaNo" AND
         rgdb."DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = "TempKogakuKyufuTaishoshaGokeiZen"."serviceTeikyoYM" AND
@@ -1275,7 +1291,7 @@
         SELECT 
             "TempKogakuKyufuTaishoshaMeisaiZenUpdate".* 
             ,''
-        FROM rgdb."TempKogakuKyufuTaishoshaMeisaiZenUpdate" AS "TempKogakuKyufuTaishoshaMeisaiZenUpdate"
+        FROM "TempKogakuKyufuTaishoshaMeisaiZenUpdate"
     </insert>
     
      <!-- 事業高額介護サービス費支給申請にinsertする。 -->
@@ -1284,7 +1300,7 @@
         rgdb."DbT3110JigyoKogakuShikyuShinsei"
        SELECT 
             "TempJigyoKogakuShikyuShinseiZen".*
-        FROM rgdb."TempJigyoKogakuShikyuShinseiZen" AS "TempJigyoKogakuShikyuShinseiZen"
+        FROM "TempJigyoKogakuShikyuShinseiZen"
     </insert>
     
       <!-- 事業高額介護サービス費支給判定結果にinsertする。 -->
@@ -1293,7 +1309,7 @@
         rgdb."DbT3111JigyoKogakuShikyuHanteiKekka"
        SELECT 
             "TempJigyoKogakuShikyuHanteiKekkaZen".*
-        FROM rgdb."TempJigyoKogakuShikyuHanteiKekkaZen" AS "TempJigyoKogakuShikyuHanteiKekkaZen"
+        FROM "TempJigyoKogakuShikyuHanteiKekkaZen"
     </insert>
     
       <!-- 事業高額介護サービス費支給審査決定にinsertする。 -->
@@ -1302,7 +1318,7 @@
         rgdb."DbT3112KogakuShikyuShinsaKettei"
        SELECT 
             "TempJigyoKogakuShikyuShinsaKetteiZen".*
-        FROM rgdb."TempJigyoKogakuShikyuShinsaKetteiZen" AS "TempJigyoKogakuShikyuShinsaKetteiZen"
+        FROM "TempJigyoKogakuShikyuShinsaKetteiZen"
     </insert>
     
       <!-- 事業高額介護サービス費給付対象者合計にinsertする。 -->
@@ -1311,7 +1327,7 @@
         rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"
        SELECT 
             "TempJigyoKogakuKyufuTaishoshaGokeiZen".*
-        FROM rgdb."TempJigyoKogakuKyufuTaishoshaGokeiZen" AS "TempJigyoKogakuKyufuTaishoshaGokeiZen"
+        FROM "TempJigyoKogakuKyufuTaishoshaGokeiZen"
     </insert>
     
     <!-- 事業高額介護国保連IFマスタにupdateする。 -->
@@ -1339,7 +1355,7 @@
         "kogakuTaishoGaiFlag" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."kogakuTaishoGaiFlag",
         "jidoShokanTaishoFlag" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."jidoShokanTaishoFlag"
        FROM 
-        rgdb."TempJigyoKogakuKyufuTaishoshaGokeiZen" AS "TempJigyoKogakuKyufuTaishoshaGokeiZen"
+        "TempJigyoKogakuKyufuTaishoshaGokeiZen"
        WHERE
         rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"."hihokenshaNo" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."hihokenshaNo" AND
         rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."serviceTeikyoYM" AND
@@ -1361,7 +1377,7 @@
     
      <select resultOrdered="true" id="select給付実績中間高額一時の作成7" resultMap="ResultMap_給付実績中間高額一時の作成7" fetchSize="500">
        SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.allColumns_TempKyufujissekiTyukann" />
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.allColumns_TempKyufujissekiTyukann" />,
          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.allColumns_TempKyufujissekiShukei" />,
          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.allColumns_TempKyufuJissekiShakaiFukushiHojinKeigengaku" />        
         FROM "TempKyufujissekiTyukann5" AS "TempKyufujissekiTyukann"
@@ -1371,7 +1387,7 @@
             "TempKyufujissekiTyukann"."inputShikibetsuNo" = "TempKyufujissekiShukei"."inputShikibetsuNo" AND
             "TempKyufujissekiTyukann"."hiHokenshaNo" = "TempKyufujissekiShukei"."hiHokenshaNo" AND
             "TempKyufujissekiTyukann"."serviceTeikyoYM" = "TempKyufujissekiShukei"."serviceTeikyoYM" AND
-            "TempKyufujissekiTyukann"."jigyoshoNo" = "TempKyufujissekiShukei""jigyoshoNo" AND
+            "TempKyufujissekiTyukann"."jigyoshoNo" = "TempKyufujissekiShukei"."jigyoshoNo" AND
             "TempKyufujissekiTyukann"."toshiNo" = "TempKyufujissekiShukei"."toshiNo"
        LEFT OUTER JOIN
            "TempKyufuJissekiShakaiFukushiHojinKeigengaku" AS "TempKyufuJissekiShakaiFukushiHojinKeigengaku"
@@ -2329,7 +2345,7 @@
         <id  column="tmpSetaiinShotokuHanteiMeisai_kijunYMD"/>
         <id  column="tmpSetaiinShotokuHanteiMeisai_setaiCode"/>
         <association property="判定明細Entity" resultMap="ResultMap_SetaiinShotokuHanteiMeisai"/>
-        <association property="被保険者情報Entityl" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="被保険者情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="老齢情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"/>
         <collection property="生保情報List" resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity"/>
     </resultMap>
@@ -2501,14 +2517,14 @@
                CASE 
                 WHEN SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[>=]]>'08'
                 AND SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[<=]]>'12'
-                THEN to_char(CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1,'9999')
-                ELSE to_char(CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2,'9999')
+                THEN CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1
+                ELSE CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2
                 END AS 最小続柄コード参照年,
-                CASE 
+                CASE
                 WHEN SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[>=]]>'08'
                 AND SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[<=]]>'12'
-                THEN to_char(CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1,'9999')
-                ELSE to_char(CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2,'9999')
+                THEN CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1
+                ELSE CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2
                 END AS 最大続柄コード参照年
          FROM  "TempSetaiinShotokuHanteiMeisai" AS 世帯員所得判定明細一時
      </select>

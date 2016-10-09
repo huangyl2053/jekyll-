@@ -29,6 +29,7 @@ public class KyufuJisekiJohoSofuIchiranReport extends Report<KyufuJisekiJohoSofu
     private final RDateTime 作成日時;
     private final boolean 合計フラグ;
     private final Decimal 合計件数;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -40,6 +41,7 @@ public class KyufuJisekiJohoSofuIchiranReport extends Report<KyufuJisekiJohoSofu
      * @param 作成日時 RDateTime
      * @param 合計フラグ boolean
      * @param 合計件数 Decimal
+     * @param 連番 int
      */
     public KyufuJisekiJohoSofuIchiranReport(
             KyuufuJisekiKoshinnKekkaEntity 給付実績更新結果一覧表データ,
@@ -48,7 +50,8 @@ public class KyufuJisekiJohoSofuIchiranReport extends Report<KyufuJisekiJohoSofu
             FlexibleYearMonth 処理年月,
             RDateTime 作成日時,
             boolean 合計フラグ,
-            Decimal 合計件数) {
+            Decimal 合計件数,
+            int 連番) {
 
         this.給付実績更新結果一覧表データ = 給付実績更新結果一覧表データ;
         this.出力順リスト = 出力順リスト;
@@ -57,6 +60,7 @@ public class KyufuJisekiJohoSofuIchiranReport extends Report<KyufuJisekiJohoSofu
         this.作成日時 = 作成日時;
         this.合計フラグ = 合計フラグ;
         this.合計件数 = 合計件数;
+        this.連番 = 連番;
     }
 
     @Override
@@ -69,7 +73,7 @@ public class KyufuJisekiJohoSofuIchiranReport extends Report<KyufuJisekiJohoSofu
                 処理年月,
                 作成日時);
         IKyufuJisekiJohoSofuIchiranEditor bodyEditor
-                = new KyufuJisekiJohoSofuIchiranBodyEditor(給付実績更新結果一覧表データ, 合計フラグ, 合計件数);
+                = new KyufuJisekiJohoSofuIchiranBodyEditor(給付実績更新結果一覧表データ, 合計フラグ, 合計件数, 連番);
 
         IKyufuJisekiJohoSofuIchiranBuilder builder = new KyufuJisekiJohoSofuIchiranBuilder(headerEditor, bodyEditor);
         writer.writeLine(builder);

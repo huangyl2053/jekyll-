@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200061.ServiceCodeIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200061.ServiceCodeIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200061.ServiceCodeIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecodeichiran.ServicecodeIchiranProcessParameter;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -39,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -49,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  *
  * @reamsid_L DBC-3310-030 chenyadong
  */
-public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchiranEntity> {
+public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchiranEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc160022."
@@ -63,6 +65,7 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
     private List<RString> headerList;
     private List<TaniSuShikibetsuEntity> taniList;
     private List<ServiceBunruiEntity> serviceList;
+    private List<RString> 改頁リスト;
     private int 連番数;
     FileSpoolManager spoolManager;
     private RString eucFilePath;
@@ -154,6 +157,8 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
             };
             Collections.sort(serviceList, comparator);
         }
+        改頁リスト = new ArrayList<>();
+        改頁リスト.add(new RString(ServiceCodeIchiranSource.ReportSourceFields.List1_1.name()));
     }
 
     @Override
@@ -163,9 +168,10 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
 
     @Override
     protected void createWriter() {
+        PageBreaker<ServiceCodeIchiranSource> breaker = new ServiceCodeIchiranPageBreak(改頁リスト);
         if (parameter.is帳票で出力()) {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(
-                    ReportIdDBC.DBC200061.getReportId().value()).create();
+                    ReportIdDBC.DBC200061.getReportId().value()).addBreak(breaker).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         }
         if (parameter.isＣＳＶファイルで出力()) {
@@ -194,7 +200,7 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
     }
 
     @Override
-    protected void process(ServicecodeIchiranEntity entity) {
+    protected void usualProcess(ServicecodeIchiranEntity entity) {
         if (parameter.is帳票で出力()) {
             ServiceCodeIchiranParameter param = new ServiceCodeIchiranParameter();
             param.setサービスコード一覧表(entity);
@@ -210,6 +216,10 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
             List<RString> outputList = editorCsv(entity);
             csvListWriter.writeLine(this.toBodyList(outputList));
         }
+    }
+
+    @Override
+    protected void keyBreakProcess(ServicecodeIchiranEntity entity) {
     }
 
     @Override
@@ -381,4 +391,5 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
     private boolean isRstring_2(RString rString) {
         return !RString.isNullOrEmpty(rString) && RSTRING_2.equals(rString);
     }
+
 }

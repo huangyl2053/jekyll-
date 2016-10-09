@@ -388,10 +388,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             集計番号 = 集計番号_0303;
             詳細データエリア = get実質的な収支についてデータ();
         }
+        FlexibleYear 報告年 = FlexibleYear.EMPTY;
+        FlexibleYear 集計対象年 = FlexibleYear.EMPTY;
+        if (div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue() != null) {
+            報告年 = new FlexibleDate(div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue().toDateString()).getYear();
+            集計対象年 = new FlexibleDate(div.getYoshikiYonnosanMeisai().getTxtShukeiYM().getValue().toDateString()).getYear();
+        }
         KaigoHokenJigyoHokokuNenpo 画面入力データ = new KaigoHokenJigyoHokokuNenpo(
-                div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
-                div.getYoshikiYonnosanMeisai().getTxtShukeiYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
-                insuranceInfEntity.get統計対象区分(), insuranceInfEntity.get市町村コード(), new Code("09"), 集計番号, 集計単位_1, null, null, null, 詳細データエリア);
+                報告年, DOUBLE_ZEOR, 集計対象年, DOUBLE_ZEOR, insuranceInfEntity.get統計対象区分(),
+                insuranceInfEntity.get市町村コード(), new Code("09"), 集計番号, 集計単位_1, null, null, null, 詳細データエリア);
         return 画面入力データ;
     }
 
@@ -654,6 +659,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             if (!(null == 報告年度)) {
                 set集計年度(報告年度Year, 集計年度Box);
             }
+        } else {
+            集計年度Box.clearValue();
         }
     }
 
@@ -812,6 +819,77 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         } else {
             return new LasdecCode(市町村Key.split("_").get(0));
         }
+    }
+
+    /**
+     * 前年度以前歳入の決算額各項目の合計取得処理です。
+     *
+     * @return 前年度以前歳入の決算額各項目の合計
+     */
+    public Decimal get前年度以前_合計値1() {
+        return get額(div.getYoshikiYonnosanMeisai().getTxtsainkakyufuhifukin().getValue())
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainchoseikofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainchiikishienkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainkaigokyufuhikokin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainchiikishienkofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaintodofukenfutankin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainchiikishienjkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainippankaiekikin().getValue()));
+    }
+
+    /**
+     * 前年度以前歳出の決算額各項目の合計取得処理です。
+     *
+     * @return 前年度以前歳出の決算額各項目の合計
+     */
+    public Decimal get前年度以前_合計値2() {
+        return get額(div.getYoshikiYonnosanMeisai().getTxtsaitkakyufuhifukin().getValue())
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitchoseikofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitchiikishienkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitkaigokyufuhikokin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitchiikishienkofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaittodofukenfutankin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitchiikishienjkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitippankaiekikin().getValue()));
+    }
+
+    /**
+     * 今年度歳入の決算額各項目の合計取得処理です。
+     *
+     * @return 今年度歳入の決算額各項目の合計
+     */
+    public Decimal get今年度_合計値1() {
+        return get額(div.getYoshikiYonnosanMeisai().getTxtsainkkakyufuhifukin().getValue())
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainkchoseikofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainkchiikishienkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainkkaigokyufuhikokin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainkchiikishienkofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainktodofukenfutankin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainkchiikishienjkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsainkippankaiekikin().getValue()));
+    }
+
+    /**
+     * 今年度歳出の決算額各項目の合計取得処理です。
+     *
+     * @return 今年度歳出の決算額各項目の合計
+     */
+    public Decimal get今年度_合計値2() {
+        return get額(div.getYoshikiYonnosanMeisai().getTxtsaitkkakyufuhifukin().getValue())
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitkchoseikofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitkchiikishienkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitkkaigokyufuhikokin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitkchiikishienkofukin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitktodofukenfutankin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitkchiikishienjkin().getValue()))
+                .add(get額(div.getYoshikiYonnosanMeisai().getTxtsaitkippankaiekikin().getValue()));
+    }
+
+    private Decimal get額(Decimal 額) {
+        if (null == 額) {
+            return Decimal.ZERO;
+        }
+        return 額;
     }
 
 }

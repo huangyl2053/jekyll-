@@ -50,7 +50,6 @@ public class InsDbT3116KijunShunyugakuTekiyoKanriProcess extends BatchProcessBas
     @Override
     protected void createWriter() {
         this.dbT3166TableWriter = new BatchPermanentTableWriter<>(DbT3116KijunShunyugakuTekiyoKanriEntity.class);
-
     }
 
     @Override

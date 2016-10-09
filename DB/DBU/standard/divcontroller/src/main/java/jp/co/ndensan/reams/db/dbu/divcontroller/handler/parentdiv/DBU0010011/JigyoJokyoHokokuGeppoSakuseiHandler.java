@@ -126,8 +126,9 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     }
 
     private void set市町村選択ダイアログボタン() {
-        if (is合併あり() && is広域()) {
-            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
+        if (is合併あり() || is広域()) {
+            div.getTblJikkoTani().getBtnShichosonSelect().setVisible(true);
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(true);
         } else if (is単一()) {
             div.getTblJikkoTani().getBtnShichosonSelect().setVisible(false);
         }

@@ -11,22 +11,33 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum GengakuKubun {
 
     /**
-     * コード:なし 名称:市町村民税非課税 略称:定義なし
+     * コード:01 名称:市町村民税非課税 略称:定義なし
      */
-    市町村民税非課税("市町村民税非課税"),
+    市町村民税非課税("01", "市町村民税非課税"),
     /**
-     * コード:なし 名称:老齢福祉年金受給 略称:定義なし
+     * コード:02 名称:老齢福祉年金受給 略称:定義なし
      */
-    老齢福祉年金受給("老齢福祉年金受給"),
+    老齢福祉年金受給("02", "老齢福祉年金受給"),
     /**
-     * コード:なし 名称:その他 略称:定義なし
+     * コード:03 名称:その他 略称:定義なし
      */
-    その他("その他");
+    その他("03", "その他");
 
+    private final RString code;
     private final RString fullName;
 
-    private GengakuKubun(String fullname) {
+    private GengakuKubun(String code, String fullname) {
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
+    }
+
+    /**
+     * 減額区分のコードを返します。
+     *
+     * @return 減額区分のコード
+     */
+    public RString getコード() {
+        return code;
     }
 
     /**

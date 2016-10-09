@@ -25,5 +25,8 @@ public class HanyoListShutsuryokuKomokuList {
     private ShutsuryokuKomoku 出力項目日付区分;
     private RString 項目名称;
     private int 項目桁数;
+    private RString 項目位置;
+    private RString 編集方法;
+    private RString 金額編集;
 
 }

@@ -89,7 +89,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         getHandler(div).set新規と検索条件登録パネル();
         List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
         getHandler(div).set決定情報一覧グリッド(result);
-        if (div.get事業分フラグ().equals(new RString(Boolean.TRUE.toString()))) {
+        if (div.get事業分フラグ().equals(new RString(Boolean.FALSE.toString()))) {
             return ResponseData.of(ResponseData.of(div).setState(
                     DBC1230011StateName.支給決定情報一覧).data).rootTitle(高額合算支給決定情報補正).respond();
         } else {

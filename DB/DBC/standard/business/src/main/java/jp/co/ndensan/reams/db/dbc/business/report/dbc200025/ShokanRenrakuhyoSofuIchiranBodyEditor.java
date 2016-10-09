@@ -64,15 +64,31 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
         }
         DbWT2111ShokanShinseiTempEntity 償還払支給申請Entity = 償還連絡票一覧表データ.get償還払支給申請一時TBL();
         DbWT1001HihokenshaTempEntity get被保険者一時TBL = 償還連絡票一覧表データ.get被保険者一時TBL();
+        set償還払支給申請(source, 償還払支給申請Entity);
+        if (null != get被保険者一時TBL) {
+            source.list_6 = get被保険者一時TBL.getMeisho();
+            source.shikibetsuCode = getColumnValue(get被保険者一時TBL.getShikibetsuCode());
+            if (null != get被保険者一時TBL.getMeisho()) {
+                source.list_6 = get被保険者一時TBL.getMeisho().substringReturnAsPossible(NUM_0, NUM_15);
+            }
+        }
+        source.list_14 = 償還連絡票一覧表データ.get基本_様式番号();
+
+        if (null != 償還連絡票一覧表データ.get識別番号_略称()) {
+            source.list_15 = 償還連絡票一覧表データ.get識別番号_略称().substringReturnAsPossible(NUM_0, NUM_6);
+        }
+
+    }
+
+    private void set償還払支給申請(ShokanRenrakuhyoSofuIchiranSource source, DbWT2111ShokanShinseiTempEntity 償還払支給申請Entity) {
+        if (null == 償還払支給申請Entity) {
+            return;
+        }
         source.list_1 = new RString(償還払支給申請Entity.getRenban());
         source.list_2 = 償還払支給申請Entity.getSeiriNo();
         source.list_3 = doパターン54(償還払支給申請Entity.getServiceTeikyoYM());
         source.list_4 = getColumnValue(償還払支給申請Entity.getShoKisaiHokenshaNo());
         source.list_5 = getColumnValue(償還払支給申請Entity.getHiHokenshaNo());
-        source.list_6 = get被保険者一時TBL.getMeisho();
-        if (null != get被保険者一時TBL.getMeisho()) {
-            source.list_6 = get被保険者一時TBL.getMeisho().substringReturnAsPossible(NUM_0, NUM_15);
-        }
         if (償還払支給申請Entity.isKyuSochishaFlag()) {
             source.list_7 = YES;
         }
@@ -89,12 +105,6 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
         source.list_11 = get共通ポリシー金額1(償還払支給申請Entity.getHokenKyufugaku());
         source.list_12 = get共通ポリシー金額1(償還払支給申請Entity.getRiyoshaFutangaku());
         source.list_13 = get共通ポリシー金額1(償還払支給申請Entity.getShiharaiKingakuTotal());
-        source.list_14 = 償還連絡票一覧表データ.get基本_様式番号();
-
-        if (null != 償還連絡票一覧表データ.get識別番号_略称()) {
-            source.list_15 = 償還連絡票一覧表データ.get識別番号_略称().substringReturnAsPossible(NUM_0, NUM_6);
-        }
-
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

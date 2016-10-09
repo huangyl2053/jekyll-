@@ -177,7 +177,7 @@ public class KogakuGassanShikyuKetteiHosei {
         if (被保険者台帳管理entity.getShikakuSoshitsuYMD() != null) {
             result.set資格喪失年月日(new RDate(被保険者台帳管理entity.getShikakuSoshitsuYMD().toString()));
         }
-        result.set喪失事由コード(被保険者台帳管理entity.getShikakuShutokuJiyuCode());
+        result.set喪失事由コード(被保険者台帳管理entity.getShikakuSoshitsuJiyuCode());
         return result;
     }
 
@@ -197,7 +197,7 @@ public class KogakuGassanShikyuKetteiHosei {
             boolean 事業分フラグ) {
         RString 給付の種類 = null;
         if (事業分フラグ) {
-            給付の種類 = DbBusinessConfig.get(ConfigNameDBC.事業分高額合算支給額計算_給付の種類,
+            給付の種類 = DbBusinessConfig.get(ConfigNameDBC.支給決定情報補正_給付の種類_事業分,
                     RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             return 給付の種類;
         }
