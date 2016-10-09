@@ -302,7 +302,8 @@ public class TokuteiNyushoServiceHiShinsei {
 //                    new HihokenshaNo(new RString("2190000001")),
 //                    new ShikibetsuCode(new RString("000000000000010")),
 //                    new SetaiCode(new RString("000000000000100")));
-            getHandler(div).set申請一覧に戻る(資格対象者);
+            RString menuID = ResponseHolder.getMenuID();
+            getHandler(div).set申請一覧に戻る(資格対象者, menuID);
             return ResponseData.of(div).setState(DBD1040001StateName.一覧);
         } else {
             return ResponseData.of(div).respond();
