@@ -80,7 +80,7 @@ public class DBD101010_FutanGendogakuNinteiShinseiIkkatsuShoninParameter extends
      * @return GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter
      */
     public DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter toGemmenGengakuTaishoShaHanteiYoukonSakuseiParameter() {
-        return new DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(作成年度);
+        return new DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(null);
     }
 
     /**
