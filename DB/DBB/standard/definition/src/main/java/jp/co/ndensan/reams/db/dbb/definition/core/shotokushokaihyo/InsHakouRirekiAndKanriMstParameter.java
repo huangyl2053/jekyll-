@@ -5,23 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 再発行対象者Tempへ出力のパラメタ
+ * 所得照会票発行履歴、および介護所得管理マスタに登録のパラメタのクラスです。
  *
  * @reamsid_L DBB-1720-040 lijunjun
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SaihaqkouTaishoupParameter implements IMyBatisParameter {
+public class InsHakouRirekiAndKanriMstParameter implements IMyBatisParameter {
 
     private FlexibleYear 処理年度;
-    private List<YMDHMS> 作成日時List;
-    private List<RString> 発行ユーザーIDList;
 }

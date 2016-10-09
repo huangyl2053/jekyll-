@@ -71,8 +71,10 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -176,12 +178,12 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
 
     private InsSetaiinHaakuNyuryokuKogakuFlowEntity1 returnEntity;
     private KogakuFlowReturnEntity kogakuFlowReturnEntity;
-    private FlexibleDate sysDate;
+    private YMDHMS 処理日時;
     private int カウントアップ;
 
     @Override
     protected void initialize() {
-        sysDate = FlexibleDate.getNowDate();
+        処理日時 = YMDHMS.now();
     }
 
     @Override
@@ -226,7 +228,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             executeStep(世帯員把握フロー);
             executeStep(世帯員所得判定明細一時の作成);
             executeStep(世帯員所得判定明細高額一時の作成２);
-            if (!RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
+            if (kogakuFlowReturnEntity != null
+                    && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
                     && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最大続柄コード参照年())) {
                 int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString());
                 int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString());
@@ -498,7 +501,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(前回処理対象高額データの削除)
     protected IBatchFlowCommand callDelSaishoriKogakuTmpProcess() {
-        return simpleBatch(DelSaishoriKogakuTmpProcess.class).define();
+        return simpleBatch(DelSaishoriKogakuTmpProcess.class).
+                arguments(getDelSaishoriKogakuTmpProcessParameter()).define();
     }
 
     /**
@@ -508,7 +512,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(前回処理対象事業高額データの削除)
     protected IBatchFlowCommand callDelSaishoriJigyoKogakuTmpProcess() {
-        return simpleBatch(DelSaishoriJigyoKogakuTmpProcess.class).define();
+        return simpleBatch(DelSaishoriJigyoKogakuTmpProcess.class).
+                arguments(getDelSaishoriKogakuTmpProcessParameter()).define();
     }
 
     /**
@@ -917,7 +922,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(高額国保連ＩＦマスタ更新)
     protected IBatchFlowCommand callUpdKogakuKokuhorenIFMstProcess() {
-        return simpleBatch(UpdKogakuKokuhorenIFMstProcess.class).define();
+        return simpleBatch(UpdKogakuKokuhorenIFMstProcess.class).
+                arguments(getUpdKogakuKokuhorenIFMstProcessParameter()).define();
     }
 
     /**
@@ -927,7 +933,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(事業高額国保連ＩＦマスタ更新)
     protected IBatchFlowCommand callUpdJigyoKKogakuKokuhorenIFMstProcess() {
-        return simpleBatch(UpdJigyoKKogakuKokuhorenIFMstProcess.class).define();
+        return simpleBatch(UpdJigyoKKogakuKokuhorenIFMstProcess.class).
+                arguments(getUpdKogakuKokuhorenIFMstProcessParameter()).define();
     }
 
     /**
@@ -988,6 +995,19 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
         KyufuJissekiKihonKogakuProcessParameter parameter = new KyufuJissekiKihonKogakuProcessParameter();
         parameter.set続柄コード参照年(new FlexibleYear(new RString(カウントアップ)));
         parameter.set処理年月日(new FlexibleDate(new RString(カウントアップ).concat(日付_1231)));
+        return parameter;
+    }
+
+    private KyufuJissekiKihonKogakuProcessParameter getDelSaishoriKogakuTmpProcessParameter() {
+        KyufuJissekiKihonKogakuProcessParameter parameter = new KyufuJissekiKihonKogakuProcessParameter();
+        parameter.set処理年月(new FlexibleYearMonth(処理日時.getDate().getYearMonth().toDateString()));
+        return parameter;
+    }
+
+    private KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter getUpdKogakuKokuhorenIFMstProcessParameter() {
+        KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter parameter = new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter();
+        parameter.setSysDate(処理日時);
+        parameter.setSysYearMonth(new FlexibleYearMonth(処理日時.getDate().getYearMonth().toDateString()));
         return parameter;
     }
 }
