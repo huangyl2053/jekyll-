@@ -371,6 +371,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     public void lostFocus() {
         TextBoxFlexibleDate 報告年度Box = div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM();
         RString 報告年度String = 報告年度Box.getText();
+        if (RString.isNullOrEmpty(報告年度String)) {
+            div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().clearValue();
+            return;
+        }
         int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
         FlexibleDate 報告年度 = 報告年度Box.getValue();
         if (!報告年度.isEmpty()) {
@@ -900,5 +904,80 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtsainyushutsusa().setReadOnly(isReadOnly);
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtuchikikinkurigaku().setReadOnly(isReadOnly);
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtkaigokyufuhijunhoyu().setReadOnly(isReadOnly);
+    }
+
+    /**
+     * 歳入の決算額各項目の合計取得処理です。
+     *
+     * @return 歳入の決算額各項目の合計
+     */
+    public Decimal get合計値1() {
+        return get額(div.getTxthokenryo().getValue())
+                .add(get額(div.getTxtnintei().getValue()))
+                .add(get額(div.getTxtfuntansonota().getValue()))
+                .add(get額(div.getTxtshiyoo().getValue()))
+                .add(get額(div.getTxttesu().getValue()))
+                .add(get額(div.getTxtkyufu().getValue()))
+                .add(get額(div.getTxtchosei().getValue()))
+                .add(get額(div.getTxtkaigoyobo().getValue()))
+                .add(get額(div.getTxthokatsu().getValue()))
+                .add(get額(div.getTxtkokkosonota().getValue()))
+                .add(get額(div.getTxtkyufukofukin().getValue()))
+                .add(get額(div.getTxtchiikishienkofukin().getValue()))
+                .add(get額(div.getTxttodofukenfutankin().getValue()))
+                .add(get額(div.getTxtzaiseiantei().getValue()))
+                .add(get額(div.getTxtchiikishienyobo().getValue()))
+                .add(get額(div.getTxtchiikishienhokatsu().getValue()))
+                .add(get額(div.getTxttodofukensonota().getValue()))
+                .add(get額(div.getTxtzaisanshunyu().getValue()))
+                .add(get額(div.getTxtzaisanshuny().getValue()))
+                .add(get額(div.getTxtkifukin().getValue()))
+                .add(get額(div.getTxtippankaikei().getValue()))
+                .add(get額(div.getTxtsomuhi().getValue()))
+                .add(get額(div.getTxtjumbikikin().getValue()))
+                .add(get額(div.getTxtchiikishienkaigoyobo().getValue()))
+                .add(get額(div.getTxttiikikaigoyobo().getValue()))
+                .add(get額(div.getTxtkurichiikishienhokatsu().getValue()))
+                .add(get額(div.getTxtkurinyukinsonota().getValue()))
+                .add(get額(div.getTxtkurikoshikin().getValue()))
+                .add(get額(div.getTxtsaizaiseiantei().getValue()))
+                .add(get額(div.getTxtsaisonota().getValue()))
+                .add(get額(div.getTxtshoshunyu().getValue()));
+    }
+
+    /**
+     * 歳出の決算額各項目の合計取得処理です。
+     *
+     * @return 歳出の決算額各項目の合計
+     */
+    public Decimal get合計値2() {
+        return get額(div.getTxtsaishutsusomu().getValue())
+                .add(get額(div.getTxtlsabisunadoshohi().getValue()))
+                .add(get額(div.getTxtyobonadoshohi().getValue()))
+                .add(get額(div.getTxtkogakukaigo().getValue()))
+                .add(get額(div.getTxtlkogakuiryo().getValue()))
+                .add(get額(div.getTxttokuteinyusho().getValue()))
+                .add(get額(div.getTxtshinsashiharai().getValue()))
+                .add(get額(div.getTxtshichosontokubetsukyufu().getValue()))
+                .add(get額(div.getTxtkyusonota().getValue()))
+                .add(get額(div.getTxtchiikikaigoyobo().getValue()))
+                .add(get額(div.getTxtchiikihokatsujigyo().getValue()))
+                .add(get額(div.getTxtzaisanantei().getValue()))
+                .add(get額(div.getTxtkokkozaisan().getValue()))
+                .add(get額(div.getTxthokenfukushi().getValue()))
+                .add(get額(div.getTxtkikin().getValue()))
+                .add(get額(div.getTxtv().getValue()))
+                .add(get額(div.getTxtkosaikosaisonota().getValue()))
+                .add(get額(div.getTxtyobihi().getValue()))
+                .add(get額(div.getTxtkaigosabisukanjo().getValue()))
+                .add(get額(div.getTxttakaikei().getValue()))
+                .add(get額(div.getTxtshoshishutsusonota().getValue()));
+    }
+
+    private Decimal get額(Decimal 額) {
+        if (null == 額) {
+            return DECIMAL_0;
+        }
+        return 額;
     }
 }
