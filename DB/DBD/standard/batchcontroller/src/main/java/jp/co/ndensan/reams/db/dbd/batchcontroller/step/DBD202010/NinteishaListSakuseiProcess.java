@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListCsvEnti
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListNoRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinnteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakuseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd202010.NinteishaListSakuseiManager;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
@@ -289,7 +290,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
 
     private PersonalData toSiteiPersonalData(NinteishaListSakuseiEntity entity) {
         if (entity.get世帯員リスト() != null && !entity.get世帯員リスト().isEmpty()) {
-            return PersonalData.of(new ShikibetsuCode(entity.get世帯員リスト().get(0).get識別コード()));
+            SetaiInRisutoEntity 世帯員情報 = entity.get世帯員リスト().get(0);
+            if (世帯員情報 != null && 世帯員情報.get識別コード() != null && !RString.EMPTY.equals(世帯員情報.get識別コード())) {
+                return PersonalData.of(new ShikibetsuCode(entity.get世帯員リスト().get(0).get識別コード()));
+            }
+            return PersonalData.of(ShikibetsuCode.EMPTY);
         }
         return PersonalData.of(ShikibetsuCode.EMPTY);
     }
