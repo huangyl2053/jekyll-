@@ -112,7 +112,7 @@ public class GassanJigyobunKekkaIchiranEditor implements
             if (!RString.isNullOrEmpty(帳票用データ.get決定_支給区分コード())) {
                 if (区分コード_1.equals(帳票用データ.get決定_支給区分コード())) {
                     source.List1_4 = 支給結果;
-                } else if 区分コード_2.equals(帳票用データ.get決定_支給区分コード())) {
+                } else if (区分コード_2.equals(帳票用データ.get決定_支給区分コード())) {
                     source.List1_4 = 不支給結果;
                 }
             }
