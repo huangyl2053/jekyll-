@@ -53,7 +53,7 @@
          "DbT3028KyufujissekiKogakuKaigoServicehi"."torikomiYM" as "dbT3028KyufujissekiKogakuKaigoServicehi_torikomiYM",
          "DbT3028KyufujissekiKogakuKaigoServicehi"."sakuseiKubun" as "dbT3028KyufujissekiKogakuKaigoServicehi_sakuseiKubun",
          "DbT3028KyufujissekiKogakuKaigoServicehi"."kanriNo" as "dbT3028KyufujissekiKogakuKaigoServicehi_kanriNo",
-         "DbT3028KyufujissekiKogakuKaigoServicehi"."hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" as "dbT3028KyufujissekiKogakuKaigoServicehi_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag"
+         "DbT3028KyufujissekiKogakuKaigoServicehi"."hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" as "dbT3028clu_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag"
     </sql>
 
 
@@ -95,7 +95,7 @@
         <result property="torikomiYM" column="dbT3028KyufujissekiKogakuKaigoServicehi_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="sakuseiKubun" column="dbT3028KyufujissekiKogakuKaigoServicehi_sakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kanriNo" column="dbT3028KyufujissekiKogakuKaigoServicehi_kanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" column="dbT3028KyufujissekiKogakuKaigoServicehi_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" />
+        <result property="hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" column="dbT3028clu_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" />
     </resultMap>
 
 </mapper>
