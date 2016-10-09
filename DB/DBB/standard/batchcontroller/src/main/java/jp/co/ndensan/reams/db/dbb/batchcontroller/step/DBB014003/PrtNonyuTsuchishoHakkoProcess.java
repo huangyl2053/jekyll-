@@ -498,15 +498,13 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             総ページ数 = スプール.get(String.valueOf(0)).pageCount().value();
         }
         if (帳票制御共通.is代行プリント有無()) {
-//            代行プリント送付票の出力(processParameter.get調定年度(), processParameter.get賦課年度(), processParameter.get対象者(),
-//                    processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
-//                    processParameter.getページごとに山分け(), 市町村コード, 市町村名, 総ページ数);
+            代行プリント送付票の出力(processParameter.get調定年度(), processParameter.get賦課年度(), processParameter.get対象者(),
+                    processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
+                    processParameter.getページごとに山分け(), 市町村コード, 市町村名, 総ページ数);
         }
-//        バッチ出力条件リストの出力(processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
-//                processParameter.getページごとに山分け(), 市町村コード, 市町村名, new RString(総ページ数));
+        バッチ出力条件リストの出力(processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
+                processParameter.getページごとに山分け(), 市町村コード, 市町村名, new RString(総ページ数));
 
-//        batchReportWriter.close();
-//        csvListWriter.close();
         manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         close納入通知書();
     }
