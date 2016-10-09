@@ -49,13 +49,12 @@
          AND "DbWT37H1"."shikyuShinseishoSeiriNo" = "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
     </select>
     
-    <select id="select連番" resultMap="ResultMap_DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity"
+    <select id="select連番" resultMap="ResultMap_DbWT37H1KogakuGassanaJikofutangakuTempEntity"
         fetchSize="500" resultOrdered="true"> 
         SELECT
-        <include refid="allColumns_DbWT37H2" />
+        <include refid="allColumns_DbWT37H1" />
         FROM(
-            SELECT "DbWT37H2".*,
-                   "DbWT37H1"."rirekiNo" as "DbWT37H1_rirekiNo"
+            SELECT "DbWT37H1".*
             FROM 
                 "DbWT37H2KogakuGassanaJikofutangakuMeisai" AS "DbWT37H2"
             INNER JOIN 
@@ -64,23 +63,23 @@
                 "DbWT37H2"."renban" = "DbWT37H1"."renban"
             WHERE
                 "DbWT37H1"."koshinFlag" = true
-        ) AS "DbWT37H2"
+        ) AS "DbWT37H1"
         INNER JOIN 
             rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071"
         ON 
-            "DbWT37H2"."hokenshaNoIn" = "DbT3071"."hihokenshaNo"
+            "DbWT37H1"."hokenshaNoIn" = "DbT3071"."hihokenshaNo"
         AND 
-            "DbWT37H2"."taishoNendo" = "DbT3071"."taishoNendo"
+            "DbWT37H1"."taishoNendo" = "DbT3071"."taishoNendo"
         AND
-            "DbWT37H2"."shoKisaiHokenshaNo" = "DbT3071"."hokenshaNo"
+            "DbWT37H1"."shoKisaiHokenshaNo" = "DbT3071"."hokenshaNo"
         AND 
-            "DbWT37H2"."shikyuShinseishoSeiriNo" = "DbT3071"."shikyuShinseishoSeiriNo"
+            "DbWT37H1"."shikyuShinseishoSeiriNo" = "DbT3071"."shikyuShinseishoSeiriNo"
         AND
-            "DbWT37H2"."DbWT37H1_rirekiNo" = "DbT3071"."rirekiNo"
+            "DbWT37H1"."rirekiNo" = "DbT3071"."rirekiNo"
         AND 
-            "DbWT37H2"."taishoM" = "DbT3071"."taishoM"
+            "DbWT37H1"."taishoM" = "DbT3071"."taishoM"
         WHERE 
-            "DbWT37H2"."jikoFutanGaku" <![CDATA[<>]]> ("DbT3071"."sumi_JikoFutanGaku" - "DbT3071"."sumi_under_70KogakuShikyuGaku")
+            "DbWT37H1"."jikoFutanGaku" <![CDATA[<>]]> ("DbT3071"."sumi_JikoFutanGaku" - "DbT3071"."sumi_under_70KogakuShikyuGaku")
     </select>
     
     <select id="get帳票出力対象データ" resultMap="resultMap_KogakuGassanJikofutangakuShomeishoDateEntity" 
