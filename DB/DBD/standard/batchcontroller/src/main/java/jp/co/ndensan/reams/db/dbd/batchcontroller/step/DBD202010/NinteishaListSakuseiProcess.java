@@ -267,6 +267,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
             NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
                     parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, false, 0);
+            eucNoRenbanCsvWriter.writeLine(eucCsvEntity);
         }
     }
 
