@@ -11,9 +11,11 @@ var DBZ;
                     "State"
                 ];
             };
+
             ModeController.prototype.State = function () {
                 return new Modes.State(this.controls);
             };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
@@ -36,7 +38,6 @@ var DBZ;
                     this.controls.radOtherTokureiShisetsu().displayNone = false;
                     this.controls.radTekiyoJyogaiShisetsu().displayNone = false;
                 };
-
                 State.prototype.DaichoShubetsuNashiMode = function () {
                     this.controls.ddlDaichoShubetsu().displayNone = true;
                     this.controls.radKaigoHokenShisetsu().labelLText = " ";
@@ -51,7 +52,6 @@ var DBZ;
                     this.controls.radOtherTokureiShisetsu().displayNone = false;
                     this.controls.radTekiyoJyogaiShisetsu().displayNone = true;
                 };
-
                 State.prototype.OtherTokureiMode = function () {
                     this.controls.ddlDaichoShubetsu().displayNone = true;
                     this.controls.radKaigoHokenShisetsu().labelLText = " ";
@@ -103,14 +103,42 @@ var DBZ;
                 this.setNyuryokuShisetsuKodo_labelLWidth = function (value) {
                     this.controls.txtNyuryokuShisetsuKodo().labelLWidth = value;
                 };
+                this.getNyuryokuShisetsuMeisho_width = function () {
+                    return this.controls.txtNyuryokuShisetsuMeisho().width;
+                };
+                this.setNyuryokuShisetsuMeisho_width = function (value) {
+                    this.controls.txtNyuryokuShisetsuMeisho().width = value;
+                };
+                this.getNyuryokuShisetsuMeisho_marginLeft = function () {
+                    return this.controls.txtNyuryokuShisetsuMeisho().marginLeft;
+                };
+                this.setNyuryokuShisetsuMeisho_marginLeft = function (value) {
+                    this.controls.txtNyuryokuShisetsuMeisho().marginLeft = value;
+                };
+                this.getNyuryokuShisetsuMeisho_wrap = function () {
+                    return this.controls.txtNyuryokuShisetsuMeisho().wrap;
+                };
+                this.setNyuryokuShisetsuMeisho_wrap = function (value) {
+                    this.controls.txtNyuryokuShisetsuMeisho().wrap = value;
+                };
+                this.getShisetsuJohoCommonChildDiv_width = function () {
+                    return this.controls.ShisetsuJohoCommonChildDiv().width;
+                };
+                this.setShisetsuJohoCommonChildDiv_width = function (value) {
+                    this.controls.ShisetsuJohoCommonChildDiv().width = value;
+                };
                 this.fieldName = fieldName;
                 this.controls = new ShisetsuJohoCommonChildDiv.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
+                editTypes.addEditType("ShisetsuJohoCommonChildDiv_width", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("NyuryokuShisetsuKodo_labelLText", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("NyuryokuShisetsuKodo_labelLWidth", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("NyuryokuShisetsuKodo_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("NyuryokuShisetsuMeisho_width", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("NyuryokuShisetsuMeisho_wrap", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("NyuryokuShisetsuMeisho_marginLeft", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             };
             return PublicProperties;

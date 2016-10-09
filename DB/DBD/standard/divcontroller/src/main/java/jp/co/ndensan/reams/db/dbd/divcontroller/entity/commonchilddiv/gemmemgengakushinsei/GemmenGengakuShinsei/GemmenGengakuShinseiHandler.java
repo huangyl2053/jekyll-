@@ -88,11 +88,11 @@ public class GemmenGengakuShinseiHandler {
             kaigoJigyosha = manager.select介護事業者By申請日(減免減額申請情報.get申請届出代行事業者番号(), 申請日);
         }
         if (kaigoJigyosha != null) {
-            div.getTxtJigyoshaCode().setValue(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
-            div.getTxtJigyoshaName().setValue(kaigoJigyosha.get事業者名称().getColumnValue());
+            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
+            div.getCcdShisetsuJoho().setShisetsuMeisho(kaigoJigyosha.get事業者名称().getColumnValue());
         } else {
-            div.getTxtJigyoshaCode().clearValue();
-            div.getTxtJigyoshaName().clearValue();
+            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
+            div.getCcdShisetsuJoho().setShisetsuMeisho(RString.EMPTY);
         }
         div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
         div.getDdlJigyoshaKubun().setSelectedKey(空白KEY);
@@ -134,7 +134,7 @@ public class GemmenGengakuShinseiHandler {
         AtenaMeisho 申請届出者氏名 = div.getTxtShinseishaShimei().getDomain();
         AtenaKanaMeisho 申請届出者氏名カナ = new AtenaKanaMeisho(div.getTxtShinseishaShimeiKana().getValue());
         RString 申請届出者続柄 = div.getTxtShinseishaTsuzukigara().getValue();
-        JigyoshaNo 申請届出代行事業者番号 = new JigyoshaNo(div.getTxtJigyoshaCode().getValue());
+        JigyoshaNo 申請届出代行事業者番号 = new JigyoshaNo(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         JigyoshaKubun 事業者区分 = null;
         if (!div.getDdlJigyoshaKubun().getSelectedKey().isEmpty() && !空白KEY.equals(div.getDdlJigyoshaKubun().getSelectedKey())) {
             事業者区分 = JigyoshaKubun.toValue(div.getDdlJigyoshaKubun().getSelectedKey());
@@ -156,8 +156,8 @@ public class GemmenGengakuShinseiHandler {
         div.getTxtShinseishaYubinNo().clearValue();
         div.getTxtShinseishaTelNo().clearDomain();
         div.getTxtShinseishaJusho().clearDomain();
-        div.getTxtJigyoshaCode().clearValue();
-        div.getTxtJigyoshaName().clearValue();
+        div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
+        div.getCcdShisetsuJoho().setShisetsuMeisho(RString.EMPTY);
     }
 
     private List<KeyValueDataSource> getDdlShinseiDaikoKubun() {
