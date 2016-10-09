@@ -37,69 +37,69 @@ public enum TokuteiNyushoServiceHiShinseiPanelDivSpec implements IPredicate<Toku
                     && div.getShinseiDetail().getTxtShinseiYMD().getValue().isValid();
         }
     },
-    //    決定区分の非空チェック {
-    //        /**
-    //         * 決定区分の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:決定区分が非空です、false:決定区分が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getRadKettaiKubun().getSelectedKey() != null;
-    //        }
-    //    },
-    //    決定日の非空チェック {
-    //        /**
-    //         * 決定日の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:決定日が非空です、false:決定日が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtKettaiYMD().getValue() != null && !div.getShinseiDetail().getTxtKettaiYMD().getValue().isEmpty()
-    //                    && div.getShinseiDetail().getTxtKettaiYMD().getValue().isValid();
-    //        }
-    //    },
-    //    適用日の非空チェック {
-    //        /**
-    //         * 適用日の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:適用日が非空です、false:適用日が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()
-    //                    && div.getShinseiDetail().getTxtTekiyoYMD().getValue().isValid();
-    //        }
-    //    },
-    //    有効期限の非空チェック {
-    //        /**
-    //         * 有効期限の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:有効期限が非空です、false:有効期限が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()
-    //                    && div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isValid();
-    //        }
-    //    },
-    //    軽減率の非空チェック {
-    //        /**
-    //         * 軽減率の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:軽減率が非空です、false:軽減率が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null;
-    //        }
-    //    };
+    決定区分の非空チェック {
+        /**
+         * 決定区分の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:決定区分が非空です、false:決定区分が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getRadKettaiKubun().getSelectedKey() != null;
+        }
+    },
+    決定日の非空チェック {
+        /**
+         * 決定日の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:決定日が非空です、false:決定日が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtKettaiYMD().getValue() != null && !div.getShinseiDetail().getTxtKettaiYMD().getValue().isEmpty()
+                    && div.getShinseiDetail().getTxtKettaiYMD().getValue().isValid();
+        }
+    },
+    適用日の非空チェック {
+        /**
+         * 適用日の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:適用日が非空です、false:適用日が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()
+                    && div.getShinseiDetail().getTxtTekiyoYMD().getValue().isValid();
+        }
+    },
+    有効期限の非空チェック {
+        /**
+         * 有効期限の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:有効期限が非空です、false:有効期限が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()
+                    && div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isValid();
+        }
+    },
+    軽減率の非空チェック {
+        /**
+         * 軽減率の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:軽減率が非空です、false:軽減率が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null;
+        }
+    },
     特別地域加算減免_適用日が法施行以前のチェック {
         /**
          * 特別地域加算減免_適用日が法施行以前のチェック。
