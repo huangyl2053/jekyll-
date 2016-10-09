@@ -73,6 +73,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcess extends BatchProcessBase<Chohy
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
+                hasHeader(true).
                 build();
     }
 
