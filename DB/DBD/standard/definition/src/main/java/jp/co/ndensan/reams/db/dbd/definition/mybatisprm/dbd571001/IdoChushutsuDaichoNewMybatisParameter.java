@@ -87,7 +87,16 @@ public class IdoChushutsuDaichoNewMybatisParameter implements IMyBatisParameter 
     }
 
     private void get今回抽出日付() {
-        今回抽出開始日付 = RDateTime.convertFrom(今回抽出開始年月日, 今回抽出開始時分秒);
-        今回抽出終了日付 = RDateTime.convertFrom(今回抽出終了年月日, 今回抽出終了時分秒);
+        if (今回抽出開始年月日 == null || 今回抽出開始時分秒 == null) {
+            今回抽出開始日付 = RDateTime.now();
+        } else {
+            今回抽出開始日付 = RDateTime.convertFrom(今回抽出開始年月日, 今回抽出開始時分秒);
+        }
+        if (今回抽出終了年月日 == null || 今回抽出終了時分秒 == null) {
+            今回抽出終了日付 = RDateTime.now();
+        } else {
+            今回抽出終了日付 = RDateTime.convertFrom(今回抽出終了年月日, 今回抽出終了時分秒);
+        }
+
     }
 }

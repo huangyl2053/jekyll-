@@ -693,7 +693,9 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             利用者負担減免情報.set減免決定日(t.get利用者負担減免List().get利用者負担減免_決定年月日());
             利用者負担減免情報.set減免開始日(t.get利用者負担減免List().get利用者負担減免_適用開始年月日());
             利用者負担減免情報.set減免終了日(t.get利用者負担減免List().get利用者負担減免_適用終了年月日());
-            利用者負担減免情報.set給付率(new RString(String.valueOf(t.get利用者負担減免List().get利用者負担減免_給付率().value())));
+            if (t.get利用者負担減免List().get利用者負担減免_給付率() != null) {
+                利用者負担減免情報.set給付率(new RString(String.valueOf(t.get利用者負担減免List().get利用者負担減免_給付率().value())));
+            }
             利用者負担減免情報EntityList.add(利用者負担減免情報);
         }
     }
@@ -768,12 +770,14 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             居宅計画届出情報.set居宅計画区分(RString.EMPTY);
 //        居宅計画届出情報.set明細番号(RString.EMPTY);
             居宅計画届出情報.set対象年月(t.get居宅計画届出List().get居宅計画届出_対象年月());
-            if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_1)) {
-                居宅計画届出情報.set区分(new RString("新規"));
-            } else if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_2)) {
-                居宅計画届出情報.set区分(new RString("変更"));
-            } else if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_3)) {
-                居宅計画届出情報.set区分(new RString("暫定"));
+            if (t.get居宅計画届出List().get居宅計画届出_届出区分() != null && !t.get居宅計画届出List().get居宅計画届出_届出区分().isEmpty()) {
+                if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_1)) {
+                    居宅計画届出情報.set区分(new RString("新規"));
+                } else if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_2)) {
+                    居宅計画届出情報.set区分(new RString("変更"));
+                } else if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_3)) {
+                    居宅計画届出情報.set区分(new RString("暫定"));
+                }
             }
             if (t.get居宅計画届出List().get居宅計画届出_作成区分コード() != null
                     && !t.get居宅計画届出List().get居宅計画届出_作成区分コード().isEmpty()) {
