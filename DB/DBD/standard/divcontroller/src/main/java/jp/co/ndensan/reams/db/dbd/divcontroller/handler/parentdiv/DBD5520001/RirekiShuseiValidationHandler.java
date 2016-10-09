@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.RirekiShuseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.dgRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
-import jp.co.ndensan.reams.db.dbz.business.core.rirekishusei.RirekiShuseiDataPass;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 特殊修正画面のバリデーションハンドラークラスです。
@@ -100,29 +98,20 @@ public class RirekiShuseiValidationHandler {
      *
      * 申請中のデータが存在
      *
+     * @param rstList 受給履歴
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 申請中のデータが存在() {
+    public ValidationMessageControlPairs 申請中のデータが存在(List<RirekiShuseiBusiness> rstList) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean hasFlag = false;
-        for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (KU_BUN_追.equals(row.getKubun())) {
-                RirekiShuseiDataPass pass = DataPassingConverter.deserialize(row.getDataPass(), RirekiShuseiDataPass.class);
-                if (ShinseiJokyoKubun.申請中.getコード().equals(pass.get申請状況区分())) {
-                    hasFlag = true;
-                    break;
-                }
-            } else {
-                RirekiShuseiBusiness business = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-                if (ShinseiJokyoKubun.申請中.getコード().equals(business.get受給者台帳().get申請状況区分())) {
-                    hasFlag = true;
-                    break;
-                }
+        for (RirekiShuseiBusiness business : rstList) {
+            if (ShinseiJokyoKubun.申請中.getコード().equals(business.get受給者台帳().get申請状況区分())) {
+                hasFlag = true;
+                break;
             }
         }
         if (hasFlag) {
             validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.更新不可_汎用, div.getDgRirekiIchiran()));
-            return validationMessages;
         }
         return validationMessages;
     }
