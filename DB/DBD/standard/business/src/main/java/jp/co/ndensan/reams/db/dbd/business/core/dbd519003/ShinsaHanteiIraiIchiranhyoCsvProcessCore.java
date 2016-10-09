@@ -101,7 +101,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
                 REPORT_DBD503001.getColumnValue().substring(0, 先頭9桁),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
-                ジョブ番号.concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD503001.getReportName(),
                 new RString(batchReportWriter.getPageCount()),
                 new RString("なし"),
