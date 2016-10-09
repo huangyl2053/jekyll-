@@ -3,16 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.relate.tmpidofukajoho;
+package jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteitsuchishohakko;
 
-import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ShiharaiHohoCodeValue;
-import jp.co.ndensan.reams.ca.cax.definition.valueobject.code.ZennoKubunCodeValue;
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaTorokuKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.YokinShubetsuPatternCodeValue;
-import jp.co.ndensan.reams.ur.urz.definition.core.code.RyokinShubetsuCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.TorokuNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -59,7 +54,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 /**
  * DB出力(異動賦課情報一時テーブル)V1.03のEntityです。
  *
- * @reamsid_L DBB-0710-030 gongliang
+ * @reamsid_L DBB-0710-030 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
@@ -321,10 +316,12 @@ public class TmpIdoFukaJohoEntity extends DbTableEntityBase<TmpIdoFukaJohoEntity
     private GyomuCode ueT0511after_gyomuCode;
     private FlexibleYear ueT0511after_shoriNendo;
     private RString ueT0511after_tsuchiNaiyoCode;
+    @PrimaryKey
     private FlexibleYearMonth ueT0511after_shoriTaishoYM;
     private RString ueT0511after_kisoNenkinNo;
     private RString ueT0511after_nenkinCode;
     private RString ueT0511after_koseiCityCode;
+    @PrimaryKey
     private int ueT0511after_renban;
     private RDateTime ueT0511after_shoriTimestamp;
     private RString ueT0511after_renkeiShubetsu;
@@ -894,8 +891,8 @@ public class TmpIdoFukaJohoEntity extends DbTableEntityBase<TmpIdoFukaJohoEntity
     private ShikibetsuCode caT0714shikibetsuCode;
     private RString caT0714gyomubetsuPrimaryKey;
     private RString caT0714gyomuKoyuKey;
-    private ShiharaiHohoCodeValue caT0714shiharaiHoho;
-    private ZennoKubunCodeValue caT0714zennoKubun;
+    private Code caT0714shiharaiHoho;
+    private Code caT0714zennoKubun;
     private RString caT0714creditKeizokuTorokuKey;
     private FlexibleDate caT0714kaishiYMD;
     private FlexibleDate caT0714shuryoYMD;
@@ -911,12 +908,19 @@ public class TmpIdoFukaJohoEntity extends DbTableEntityBase<TmpIdoFukaJohoEntity
     private AtenaKanaMeisho caT0752kensakuyoKanaMeisho;
     private ShikibetsuCode caT0752daihyoshaShikibetsuCode;
     private AtenaMeisho caT0752daihyoshaShimei;
-
     private long uaT0310Koza_kozaId;
+    private RString uaT0310Koza_insertDantaiCd;
+    private RDateTime uaT0310Koza_insertTimestamp;
+    private RString uaT0310Koza_insertReamsLoginId;
+    private UUID uaT0310Koza_insertContextId;
+    private boolean uaT0310Koza_isDeleted;
+    private int uaT0310Koza_updateCount;
+    private RDateTime uaT0310Koza_lastUpdateTimestamp;
+    private RString uaT0310Koza_lastUpdateReamsLoginId;
     private ShikibetsuCode uaT0310Koza_shikibetsuCode;
     private RString uaT0310Koza_gyomubetsuPrimaryKey;
     private RString uaT0310Koza_gyomuKoyuKey;
-    private KozaYotoKubunCodeValue uaT0310Koza_yotoKubun;
+    private Code uaT0310Koza_yotoKubun;
     private int uaT0310Koza_torokuRenban;
     private FlexibleDate uaT0310Koza_kaishiYMD;
     private FlexibleDate uaT0310Koza_shuryoYMD;
@@ -935,28 +939,49 @@ public class TmpIdoFukaJohoEntity extends DbTableEntityBase<TmpIdoFukaJohoEntity
     private boolean uaT0310Koza_zumitsuHakkoYohi;
     private boolean uaT0310Koza_kozaFurikaeKaishiTsuchiHakkozumi;
     private RString uaT0310Koza_kozaTorokuNo;
-    private KozaTorokuKubunCodeValue uaT0310Koza_kozaTorokuKubunCode;
+    private Code uaT0310Koza_kozaTorokuKubunCode;
     private FlexibleDate uaT0310Koza_kozaKaishiUketsukeYMD;
     private FlexibleDate uaT0310Koza_kozaShuryoUketsukeYMD;
     private FlexibleDate uaT0310Koza_kozaTorokuYMD;
     private RString uaT0310Koza_temban;
-
     private KinyuKikanCode uaT0302KinyuKikan_kinyuKikanCode;
     private FlexibleDate uaT0302KinyuKikan_kaishiYMD;
+    private RString uaT0302KinyuKikan_insertDantaiCd;
+    private RDateTime uaT0302KinyuKikan_insertTimestamp;
+    private RString uaT0302KinyuKikan_insertReamsLoginId;
+    private UUID uaT0302KinyuKikan_insertContextId;
+    private boolean uaT0302KinyuKikan_isDeleted;
+    private int uaT0302KinyuKikan_updateCount;
+    private RDateTime uaT0302KinyuKikan_lastUpdateTimestamp;
+    private RString uaT0302KinyuKikan_lastUpdateReamsLoginId;
     private FlexibleDate uaT0302KinyuKikan_shuryoYMD;
     private RString uaT0302KinyuKikan_name;
     private RString uaT0302KinyuKikan_kanaName;
-    private YokinShubetsuPatternCodeValue uaT0302KinyuKikan_yokinShubetsuPatternCode;
+    private Code uaT0302KinyuKikan_yokinShubetsuPatternCode;
     private int uaT0302KinyuKikan_hyojijun;
-
-    private YokinShubetsuPatternCodeValue uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode;
+    private Code uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode;
     private RString uaT0301YokinShubetsuPattern_yokinShubetsuCode;
+    private RString uaT0301YokinShubetsuPattern_insertDantaiCd;
+    private RDateTime uaT0301YokinShubetsuPattern_insertTimestamp;
+    private RString uaT0301YokinShubetsuPattern_insertReamsLoginId;
+    private UUID uaT0301YokinShubetsuPattern_insertContextId;
+    private boolean uaT0301YokinShubetsuPattern_isDeleted;
+    private int uaT0301YokinShubetsuPattern_updateCount;
+    private RDateTime uaT0301YokinShubetsuPattern_lastUpdateTimestamp;
+    private RString uaT0301YokinShubetsuPattern_lastUpdateReamsLoginId;
     private RString uaT0301YokinShubetsuPattern_yokinShubetsuMeisho;
     private RString uaT0301YokinShubetsuPattern_yokinShubetsuRyakusho;
-
     private KinyuKikanCode uaT0303KinyuKikanShiten_kinyuKikanCode;
     private KinyuKikanShitenCode uaT0303KinyuKikanShiten_kinyuKikanShitenCode;
     private FlexibleDate uaT0303KinyuKikanShiten_kaishiYMD;
+    private RString uaT0303KinyuKikanShiten_insertDantaiCd;
+    private RDateTime uaT0303KinyuKikanShiten_insertTimestamp;
+    private RString uaT0303KinyuKikanShiten_insertReamsLoginId;
+    private UUID uaT0303KinyuKikanShiten_insertContextId;
+    private boolean uaT0303KinyuKikanShiten_isDeleted;
+    private int uaT0303KinyuKikanShiten_updateCount;
+    private RDateTime uaT0303KinyuKikanShiten_lastUpdateTimestamp;
+    private RString uaT0303KinyuKikanShiten_lastUpdateReamsLoginId;
     private FlexibleDate uaT0303KinyuKikanShiten_shuryoYMD;
     private RString uaT0303KinyuKikanShiten_name;
     private RString uaT0303KinyuKikanShiten_kanaName;
@@ -965,7 +990,7 @@ public class TmpIdoFukaJohoEntity extends DbTableEntityBase<TmpIdoFukaJohoEntity
     private Long urT0700ShunoKanri_shunoId;
     private KamokuCode urT0700ShunoKanri_kamokuCode;
     private EdabanCode urT0700ShunoKanri_kamokuEdabanCode;
-    private RyokinShubetsuCodeValue urT0700ShunoKanri_ryokinShubetsuCode;
+    private Code urT0700ShunoKanri_ryokinShubetsuCode;
     private RString urT0700ShunoKanri_jigyoKubunCode;
     private RYear urT0700ShunoKanri_choteiNendo;
     private RYear urT0700ShunoKanri_kazeiNendo;
@@ -979,6 +1004,11 @@ public class TmpIdoFukaJohoEntity extends DbTableEntityBase<TmpIdoFukaJohoEntity
     private FlexibleYear fuka_fukaNendo;
     private TsuchishoNo fuka_tsuchishoNo;
     private int fuka_rirekiNo;
+    private int ki;
+    private int shunoId;
+    private Decimal choteigaku;
+    private Decimal choteiId;
+    private RString choshuHouhou;
     private HihokenshaNo fuka_hihokenshaNo;
     private ShikibetsuCode fuka_shikibetsuCode;
     private SetaiCode fuka_setaiCode;
