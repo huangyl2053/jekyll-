@@ -19,15 +19,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC180060_KenkoKaruteRenkeiDataSakuseiParameter extends BatchParameterBase {
 
-    private static final String BATCHID = "KenkoKaruteRenkeiDataSakusei";
+    private static final String DUMMY = "Dummy";
 
-    @BatchParameter(key = BATCHID, name = "バッチID")
-    private RString batchID;
+    @BatchParameter(key = DUMMY, name = "Dummy")
+    private RString dummy;
 
     /**
      * コンストラクタです。
      */
     public DBC180060_KenkoKaruteRenkeiDataSakuseiParameter() {
-        batchID = new RString("DBC180060_KenkoKaruteRenkeiDataSakusei");
+        dummy = RString.EMPTY;
     }
 }
