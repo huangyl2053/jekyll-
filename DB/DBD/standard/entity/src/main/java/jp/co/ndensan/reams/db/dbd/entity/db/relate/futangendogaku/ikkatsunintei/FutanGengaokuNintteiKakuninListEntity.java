@@ -27,7 +27,7 @@ public class FutanGengaokuNintteiKakuninListEntity {
     private HihokenshaNo 被保険者番号;
     private FlexibleDate 資格取得日;
     private FlexibleDate 資格喪失日;
-    private RString 住所地特例該当;
+    private RString 住所地特例フラグ;
     private FlexibleDate 認定開始日;
     private FlexibleDate 認定終了日;
     private RString 要介護状態区分コード;
