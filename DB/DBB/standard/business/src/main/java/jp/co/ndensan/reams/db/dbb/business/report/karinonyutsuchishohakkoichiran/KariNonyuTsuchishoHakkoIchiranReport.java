@@ -24,7 +24,8 @@ import lombok.NonNull;
  */
 public class KariNonyuTsuchishoHakkoIchiranReport extends Report<KariNonyuTsuchishoHakkoIchiranSource> {
 
-    private final KariSanteiNonyuTsuchiShoJoho entity;
+    private KariSanteiNonyuTsuchiShoJoho entity;
+    private static final int NUM_0 = 0;
     private final List<KariSanteiNonyuTsuchiShoJoho> entityList;
     private final List<RString> 並び順List;
     private final YMDHMS 帳票作成日時;
@@ -109,6 +110,9 @@ public class KariNonyuTsuchishoHakkoIchiranReport extends Report<KariNonyuTsuchi
     @Override
     public void writeBy(ReportSourceWriter<KariNonyuTsuchishoHakkoIchiranSource> writer) {
         IKariNonyuTsuchishoHakkoIchiranEditor headerEditor = new KariNonyuTsuchishoHakkoIchiranHeaderEditor(帳票作成日時);
+        if (entityList != null && !entityList.isEmpty()) {
+            entity = entityList.get(NUM_0);
+        }
         IKariNonyuTsuchishoHakkoIchiranEditor bodyEditor = new KariNonyuTsuchishoHakkoIchiranBodyEditor(entity,
                 並び順List, 出力期, association, 連番);
         IKariNonyuTsuchishoHakkoIchiranBuilder builder = new KariNonyuTsuchishoHakkoIchiranBuilder(
