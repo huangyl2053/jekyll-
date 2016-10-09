@@ -65,7 +65,7 @@
     
     <resultMap id="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResultEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity">
-        <result property="hokenSeidoCode" column="dbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisai_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenSeidoCode" column="ソートキー" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbt3172Entity" resultMap="resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity"/>
         <association property="dbt3173Entity" resultMap="ResultMap_DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity"/>
     </resultMap>
@@ -79,7 +79,7 @@
         case dbt3173."hokenSeidoCode"
         WHEN '3' THEN '4'
         WHEN '4' THEN '3'
-        ELSE DbT3173."hokenSeidoCode" END AS ソートキー
+        ELSE DbT3173."hokenSeidoCode" END AS "ソートキー"
         FROM (SELECT * FROM rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS mst
         WHERE NOT EXISTS (SELECT 'X' FROM rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS slv
         WHERE mst."hihokenshaNo" = slv."hihokenshaNo"
@@ -97,7 +97,7 @@
         AND dbt3172."shoKisaiHokenshaNo" = dbt3173."shoKisaiHokenshaNo"
         AND dbt3172."shikyuShinseishoSeiriNo" = dbt3173."shikyuShinseishoSeiriNo"
         AND dbt3172."rirekiNo" = dbt3173."rirekiNo"
-        ORDER BY ソートキー ASC,
+        ORDER BY "ソートキー" ASC,
         dbt3173."hiHokenshaShoNo" ASC
     </select>
     
