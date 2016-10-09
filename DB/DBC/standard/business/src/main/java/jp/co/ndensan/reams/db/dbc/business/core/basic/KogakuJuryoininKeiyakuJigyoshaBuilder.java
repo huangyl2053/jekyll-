@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 高額受領委任契約事業者を管理のBuilderです。
  *
- * @reamsid_L DBC-1980-010 yuqingzhang
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 public class KogakuJuryoininKeiyakuJigyoshaBuilder {
 
