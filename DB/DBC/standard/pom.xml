@@ -24,6 +24,7 @@
         <module>divcontroller</module>
         <module>service</module>
         <module>batchcontroller</module>
+        <module>workflowcontroller</module>
     </modules>
     <dependencyManagement>
         <dependencies>

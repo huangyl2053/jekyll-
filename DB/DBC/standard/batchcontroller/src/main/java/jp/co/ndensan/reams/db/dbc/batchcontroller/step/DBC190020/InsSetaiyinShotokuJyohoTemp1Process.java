@@ -35,6 +35,13 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
     private BatchEntityCreatedTempTableWriter writer;
 
     @Override
+    protected void initialize() {
+        super.initialize();
+        this.para = new InsSetaiyinShotokuJyohoTemp1ProcessMybatisParameter();
+        this.para.set世帯員把握基準日(this.parameter.get世帯員把握基準日());
+    }
+
+    @Override
     protected IBatchReader createReader() {
         if (RSTRING_0.equals(this.parameter.get抽出条件())) {
             return new BatchDbReader(READ_DATA_ID0, para);

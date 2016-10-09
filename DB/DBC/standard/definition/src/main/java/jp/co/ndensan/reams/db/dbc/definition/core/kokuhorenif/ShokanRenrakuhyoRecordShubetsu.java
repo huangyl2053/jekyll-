@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還連絡票レコード種別を表す列挙型です。
  *
- * @reamsid_L DBC-2570-030 wangxue
+ * @reamsid_L DBC-9999-022 wangxue
  */
 public enum ShokanRenrakuhyoRecordShubetsu {
 

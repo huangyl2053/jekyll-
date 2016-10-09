@@ -579,8 +579,26 @@ public class KogakuGassanShikyuGakuKeisanKekkaRelateBuilder {
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 高額合算支給額計算結果明細を削除します。
+     *
+     * @param 高額合算支給額計算結果明細 {@link KogakuGassanShikyugakuKeisanKekkaMeisai}
+     * @return {@link Builder}
+     */
+    public KogakuGassanShikyuGakuKeisanKekkaRelateBuilder delete高額合算支給額計算結果明細(KogakuGassanShikyugakuKeisanKekkaMeisai 高額合算支給額計算結果明細) {
+        if (hasSameIdentifier(高額合算支給額計算結果明細.identifier())) {
+            this.高額合算支給額計算結果明細.deleteOrRemove(高額合算支給額計算結果明細.identifier());
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
     private boolean hasSameIdentifier(KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier 高額合算支給額計算結果明細識別子) {
-        return id.toString().equals(高額合算支給額計算結果明細識別子.toString());
+        return id.get被保険者番号().equals(高額合算支給額計算結果明細識別子.get被保険者番号())
+                && id.get対象年度().equals(高額合算支給額計算結果明細識別子.get対象年度())
+                && id.get支給申請書整理番号().equals(高額合算支給額計算結果明細識別子.get支給申請書整理番号())
+                && id.get証記載保険者番号().equals(高額合算支給額計算結果明細識別子.get証記載保険者番号())
+                && id.get履歴番号() == 高額合算支給額計算結果明細識別子.get履歴番号().intValue();
     }
 
     /**

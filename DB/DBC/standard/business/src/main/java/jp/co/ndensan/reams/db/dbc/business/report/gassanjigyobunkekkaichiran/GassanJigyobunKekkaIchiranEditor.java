@@ -124,14 +124,34 @@ public class GassanJigyobunKekkaIchiranEditor implements
             source.List1_12 = doカンマ編集(帳票用データ.get支給額_按分後支給額());
             source.List1_13 = doカンマ編集(帳票用データ.get支給額_うち70歳以上分按分後支給額());
 
-            if (帳票用データ.get決定_支払方法区分().equals(区分コード_1)) {
-                source.List1_14 = 口座方法.concat(帳票用データ.get金融機関コード()).concat(接続文字).
-                        concat(帳票用データ.get金融機関支店コード()).concat(RString.FULL_SPACE).concat(帳票用データ.get口座番号());
-            } else if (帳票用データ.get決定_支払方法区分().equals(区分コード_2)) {
-                source.List1_14 = 窓口方法.concat(帳票用データ.get決定_支払場所());
+            RString 口座番号 = RString.EMPTY;
+            if (!RString.isNullOrEmpty(帳票用データ.get口座番号())) {
+                口座番号 = 帳票用データ.get口座番号();
             }
 
-            if (帳票用データ.get支給額明細_自己負担額証明書整理番号().isNullOrEmpty()) {
+            RString 金融機関コード = RString.EMPTY;
+            if (!RString.isNullOrEmpty(帳票用データ.get金融機関コード())) {
+                金融機関コード = 帳票用データ.get金融機関コード();
+            }
+
+            RString 金融機関支店コード = RString.EMPTY;
+            if (!RString.isNullOrEmpty(帳票用データ.get金融機関支店コード())) {
+                金融機関支店コード = 帳票用データ.get金融機関支店コード();
+            }
+
+            RString 決定_支払場所 = RString.EMPTY;
+            if (!RString.isNullOrEmpty(帳票用データ.get決定_支払場所())) {
+                決定_支払場所 = 帳票用データ.get決定_支払場所();
+            }
+
+            if (帳票用データ.get決定_支払方法区分().equals(区分コード_1)) {
+                source.List1_14 = 口座方法.concat(金融機関コード).concat(接続文字).
+                        concat(金融機関支店コード).concat(RString.FULL_SPACE).concat(口座番号);
+            } else if (帳票用データ.get決定_支払方法区分().equals(区分コード_2)) {
+                source.List1_14 = 窓口方法.concat(決定_支払場所);
+            }
+
+            if (RString.isNullOrEmpty(帳票用データ.get支給額明細_自己負担額証明書整理番号())) {
                 source.List1_15 = 証明書なし;
             } else {
                 source.List1_15 = 証明書あり;

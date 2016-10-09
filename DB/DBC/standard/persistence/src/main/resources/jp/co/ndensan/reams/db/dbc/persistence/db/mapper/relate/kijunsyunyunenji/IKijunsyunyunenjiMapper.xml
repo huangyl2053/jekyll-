@@ -558,7 +558,7 @@
          FROM
            "TaishoSetaiin"  AS T1
          WHERE
-            T1."shuturyokuUmu" = '3'
+            T1."shuturyokuUmu" = '1'
          AND
             T1."hihokenshaNo" IS NOT NULL AND T1."hihokenshaNo" != ''
          AND

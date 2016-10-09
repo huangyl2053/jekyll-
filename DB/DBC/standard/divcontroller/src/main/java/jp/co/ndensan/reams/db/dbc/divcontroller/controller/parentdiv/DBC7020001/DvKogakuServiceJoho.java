@@ -47,7 +47,6 @@ public class DvKogakuServiceJoho {
      * @return ResponseData
      */
     public ResponseData<DvKogakuServiceJohoDiv> onLoad(DvKogakuServiceJohoDiv div) {
-        //TODO QA.1578
         RString state = ResponseHolder.getMenuID();
         DvKogakuServiceJohoHandler handler = getHandler(div);
         handler.initialize(state);

@@ -33,6 +33,18 @@ public class DBC5140011MainHandler {
 
     private DBC5140011MainDiv div;
     private static final RString アンだライン = new RString("_");
+    private static final RString 全て = new RString("全て");
+    private static final RString 町域 = new RString("町域");
+    private static final RString 行政区 = new RString("行政区");
+    private static final RString 地区1 = new RString("地区1");
+    private static final RString 地区2 = new RString("地区2");
+    private static final RString 地区3 = new RString("地区3");
+    private static final RString ゼロ1 = new RString("0");
+    private static final RString 一1 = new RString("1");
+    private static final RString 二1 = new RString("2");
+    private static final RString 三1 = new RString("3");
+    private static final RString 四1 = new RString("4");
+    private static final RString 五1 = new RString("5");
     private static final int 一 = 1;
     private static final int 二 = 2;
     private static final int 三 = 3;
@@ -130,7 +142,7 @@ public class DBC5140011MainHandler {
     private void saveParamater(DBC150050_ServicecodeTaniMeisaiIchiranParameter parameter) {
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().isEmpty()) {
-            parameter.set地区指定(div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象());
+            set地区(parameter);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果() != null
                 && !div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果().isEmpty()) {
@@ -165,6 +177,27 @@ public class DBC5140011MainHandler {
         }
     }
 
+    private void set地区(DBC150050_ServicecodeTaniMeisaiIchiranParameter parameter) {
+        if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(全て)) {
+            parameter.set地区指定(ゼロ1);
+        }
+        if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(町域)) {
+            parameter.set地区指定(一1);
+        }
+        if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(行政区)) {
+            parameter.set地区指定(二1);
+        }
+        if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(地区1)) {
+            parameter.set地区指定(三1);
+        }
+        if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(地区2)) {
+            parameter.set地区指定(四1);
+        }
+        if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(地区3)) {
+            parameter.set地区指定(五1);
+        }
+    }
+
     private List<RString> sort昇順ByKey(List<RString> list) {
         if (list.isEmpty()) {
             return list;
@@ -187,7 +220,11 @@ public class DBC5140011MainHandler {
 
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         pamaRestore1(restoreBatchParameterMap);
-        List<RString> 認定結果リスト = restoreBatchParameterMap.getParameterListValue(RString.class, new RString("認定結果リスト"));
+        List<RString> 認定結果リスト = new ArrayList();
+        if (restoreBatchParameterMap.getParameterListValue(RString.class, new RString("認定結果リスト")) != null) {
+
+            認定結果リスト = restoreBatchParameterMap.getParameterListValue(RString.class, new RString("認定結果リスト"));
+        }
         if (認定結果リスト != null && !認定結果リスト.isEmpty()) {
             div.getChkNinteiKekka().setSelectedItemsByKey(認定結果リスト);
         }

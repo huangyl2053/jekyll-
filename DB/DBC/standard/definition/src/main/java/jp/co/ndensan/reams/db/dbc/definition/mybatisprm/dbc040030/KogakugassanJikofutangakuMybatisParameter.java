@@ -30,4 +30,5 @@ public class KogakugassanJikofutangakuMybatisParameter implements IMyBatisParame
     private HokenshaNo hokenshaNo;
     private RString shikyuShinseishoSeiriNo;
     private int rirekiNo;
+    private RString 改頁出力順;
 }

@@ -25,7 +25,7 @@ public class InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess3 extends BatchPr
 
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
-            + "select世帯員所得判定明細高額一時２と宛名情報");
+            + "select事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報");
     private static final RString TABLE_世帯員所得判定明細事業高額一時３ = new RString("TempSetaiinShotokuHanteiJigyo3");
     private KyufuJissekiKihonKogakuProcessParameter processParameter;
 

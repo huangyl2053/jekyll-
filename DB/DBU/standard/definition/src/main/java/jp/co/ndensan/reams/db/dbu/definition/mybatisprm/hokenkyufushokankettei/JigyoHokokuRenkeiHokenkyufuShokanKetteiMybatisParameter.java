@@ -194,7 +194,7 @@ public final class JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter imple
         }
         if (PrintControlKubun.集計のみ.getコード().equals(プリントコントロール区分)
                 || PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
-            基準年月日 = 処理日時.toDateString();
+            基準年月日 = 処理日時.getDate().toDateString();
             基準日時 = new RString(処理日時.toString());
         } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
             基準年月日 = 作成日付.substring(0, INDEX8);

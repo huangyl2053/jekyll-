@@ -7,24 +7,30 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
-import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.ChohyoShutsuryokuKomokuDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.IChohyoShutsuryokuKomokuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterRestore;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterSave;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * DvKogakuServiceParam のクラスファイル 
- * 
- * @author 自動生成
+ * DvKogakuServiceParam のクラスファイル
+ *
+ * @reamsid_L DBC-5040-010 chenyadong
  */
 public class DvKogakuServiceParamDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -129,7 +135,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setBtnKogakuParamSave(ButtonBatchParameterSave btnKogakuParamSave) {
+    public void setBtnKogakuParamSave(ButtonBatchParameterSave btnKogakuParamSave) {
         this.getDvJokenFukugenHozon().setBtnKogakuParamSave(btnKogakuParamSave);
     }
 
@@ -139,7 +145,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setBtnKogakuParamRestore(ButtonBatchParameterRestore btnKogakuParamRestore) {
+    public void setBtnKogakuParamRestore(ButtonBatchParameterRestore btnKogakuParamRestore) {
         this.getDvJokenFukugenHozon().setBtnKogakuParamRestore(btnKogakuParamRestore);
     }
 
@@ -149,7 +155,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDvKogakuService(dvKogakuServiceDiv dvKogakuService) {
+    public void setDvKogakuService(dvKogakuServiceDiv dvKogakuService) {
         this.getDvKogakuChushutsuJoken().setDvKogakuService(dvKogakuService);
     }
 
@@ -159,7 +165,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuServiceTeikyoYM(TextBoxDateRange txtKogakuServiceTeikyoYM) {
+    public void setTxtKogakuServiceTeikyoYM(TextBoxDateRange txtKogakuServiceTeikyoYM) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuServiceTeikyoYM(txtKogakuServiceTeikyoYM);
     }
 
@@ -169,7 +175,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuShinseiDate(TextBoxDateRange txtKogakuShinseiDate) {
+    public void setTxtKogakuShinseiDate(TextBoxDateRange txtKogakuShinseiDate) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuShinseiDate(txtKogakuShinseiDate);
     }
 
@@ -179,7 +185,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDdlKogakuShoriJokyo(DropDownList ddlKogakuShoriJokyo) {
+    public void setDdlKogakuShoriJokyo(DropDownList ddlKogakuShoriJokyo) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setDdlKogakuShoriJokyo(ddlKogakuShoriJokyo);
     }
 
@@ -189,7 +195,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuHokenshaKetteiDate(TextBoxDateRange txtKogakuHokenshaKetteiDate) {
+    public void setTxtKogakuHokenshaKetteiDate(TextBoxDateRange txtKogakuHokenshaKetteiDate) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuHokenshaKetteiDate(txtKogakuHokenshaKetteiDate);
     }
 
@@ -199,7 +205,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDdlKogakuShinsaHoho(DropDownList ddlKogakuShinsaHoho) {
+    public void setDdlKogakuShinsaHoho(DropDownList ddlKogakuShinsaHoho) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setDdlKogakuShinsaHoho(ddlKogakuShinsaHoho);
     }
 
@@ -209,7 +215,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuKokuhorenKetteiYM(TextBoxDateRange txtKogakuKokuhorenKetteiYM) {
+    public void setTxtKogakuKokuhorenKetteiYM(TextBoxDateRange txtKogakuKokuhorenKetteiYM) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuKokuhorenKetteiYM(txtKogakuKokuhorenKetteiYM);
     }
 
@@ -219,7 +225,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDdlKogakuSanteiKijun(DropDownList ddlKogakuSanteiKijun) {
+    public void setDdlKogakuSanteiKijun(DropDownList ddlKogakuSanteiKijun) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setDdlKogakuSanteiKijun(ddlKogakuSanteiKijun);
     }
 
@@ -229,7 +235,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuTaishoshaUketoriYM(TextBoxDateRange txtKogakuTaishoshaUketoriYM) {
+    public void setTxtKogakuTaishoshaUketoriYM(TextBoxDateRange txtKogakuTaishoshaUketoriYM) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuTaishoshaUketoriYM(txtKogakuTaishoshaUketoriYM);
     }
 
@@ -239,7 +245,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadKogakuKokuhorenFuicchi(RadioButton radKogakuKokuhorenFuicchi) {
+    public void setRadKogakuKokuhorenFuicchi(RadioButton radKogakuKokuhorenFuicchi) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuKokuhorenFuicchi(radKogakuKokuhorenFuicchi);
     }
 
@@ -249,7 +255,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuKokuhorenSofuYM(TextBoxDateRange txtKogakuKokuhorenSofuYM) {
+    public void setTxtKogakuKokuhorenSofuYM(TextBoxDateRange txtKogakuKokuhorenSofuYM) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuKokuhorenSofuYM(txtKogakuKokuhorenSofuYM);
     }
 
@@ -259,7 +265,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadKogakuTaishosha(RadioButton radKogakuTaishosha) {
+    public void setRadKogakuTaishosha(RadioButton radKogakuTaishosha) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuTaishosha(radKogakuTaishosha);
     }
 
@@ -269,7 +275,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuKetteiJohoUketoriYM(TextBoxDateRange txtKogakuKetteiJohoUketoriYM) {
+    public void setTxtKogakuKetteiJohoUketoriYM(TextBoxDateRange txtKogakuKetteiJohoUketoriYM) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtKogakuKetteiJohoUketoriYM(txtKogakuKetteiJohoUketoriYM);
     }
 
@@ -279,7 +285,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadKogakuShinseiKubun(RadioButton radKogakuShinseiKubun) {
+    public void setRadKogakuShinseiKubun(RadioButton radKogakuShinseiKubun) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuShinseiKubun(radKogakuShinseiKubun);
     }
 
@@ -289,7 +295,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblKogakuShiharai(Label lblKogakuShiharai) {
+    public void setLblKogakuShiharai(Label lblKogakuShiharai) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setLblKogakuShiharai(lblKogakuShiharai);
     }
 
@@ -299,7 +305,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadKogakuShiharaisaki(RadioButton radKogakuShiharaisaki) {
+    public void setRadKogakuShiharaisaki(RadioButton radKogakuShiharaisaki) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setRadKogakuShiharaisaki(radKogakuShiharaisaki);
     }
 
@@ -309,7 +315,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblKogakuKetteiGaku(Label lblKogakuKetteiGaku) {
+    public void setLblKogakuKetteiGaku(Label lblKogakuKetteiGaku) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setLblKogakuKetteiGaku(lblKogakuKetteiGaku);
     }
 
@@ -319,7 +325,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShinsaNengetsu(TextBoxDate txtShinsaNengetsu) {
+    public void setTxtShinsaNengetsu(TextBoxDate txtShinsaNengetsu) {
         this.getDvKogakuChushutsuJoken().getDvKogakuService().setTxtShinsaNengetsu(txtShinsaNengetsu);
     }
 
@@ -339,7 +345,7 @@ public class DvKogakuServiceParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkCsvHenshuHoho(CheckBoxList chkCsvHenshuHoho) {
+    public void setChkCsvHenshuHoho(CheckBoxList chkCsvHenshuHoho) {
         this.getDvCsvHenshuHoho().setChkCsvHenshuHoho(chkCsvHenshuHoho);
     }
 

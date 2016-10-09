@@ -381,10 +381,10 @@ public class DvKogakuServiceJuryoIninHandler {
                         Integer.parseInt(div.getDvHaraiKetteiShusei().getTxtRirekiNo().getValue().toString()))).createBuilderForEdit()
                 .set申請年月日(null == div.getDvHaraiKetteiShusei().getBtnShinseiDate().getValue() ? FlexibleDate.EMPTY
                         : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnShinseiDate().getValue().toString()))
-                .set受付年月日(null == div.getDvHaraiKetteiShusei().getTxtUketsukeDate().getValue() ? FlexibleDate.EMPTY
-                        : new FlexibleDate(div.getDvHaraiKetteiShusei().getTxtUketsukeDate().getValue().toString()))
                 .set決定年月日(null == div.getDvHaraiKetteiShusei().getBtnKetteiDate().getValue() ? FlexibleDate.EMPTY
                         : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnKetteiDate().getValue().toString()))
+                .set受付年月日(null == div.getDvHaraiKetteiShusei().getTxtUketsukeDate().getValue() ? FlexibleDate.EMPTY
+                        : new FlexibleDate(div.getDvHaraiKetteiShusei().getTxtUketsukeDate().getValue().toString()))
                 .set受領委任払適用開始年月日(null == div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue() ? FlexibleDate.EMPTY
                         : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue().toString()))
                 .set受領委任払適用終了年月日(null == div.getDvHaraiKetteiShusei().getBtnShoninDate().getToValue() ? FlexibleDate.EMPTY

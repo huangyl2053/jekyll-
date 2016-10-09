@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額合算支給額計算結果を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
 public class KogakuGassanShikyuGakuKeisanKekkaManager {
 
@@ -186,5 +188,27 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
 
         return businessList;
 
+    }
+
+    /**
+     * 合致する高額合算支給額計算結果を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @return List<KogakuGassanShikyuGakuKeisanKekka>
+     */
+    @Transaction
+    public List<KogakuGassanShikyuGakuKeisanKekka> get高額合算支給額計算結果(
+            HihokenshaNo 被保険者番号,
+            RString 支給申請書整理番号) {
+        List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectBySeiriNo(被保険者番号,
+                支給申請書整理番号)) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanShikyuGakuKeisanKekka(entity));
+        }
+        return businessList;
     }
 }

@@ -39,6 +39,7 @@ public class KogakugassanJikofutangakuInfoHoseiProcessParameter implements IBatc
     public KogakugassanJikofutangakuMybatisParameter toKogakugassanJikofutangakuMybatisParameter() {
         KogakugassanJikofutangakuMybatisParameter param = new KogakugassanJikofutangakuMybatisParameter();
         param.set確認情報受取年月(this.kakunin_UketoriYM);
+        param.set改頁出力順(this.改頁出力順ID);
         return param;
     }
 }

@@ -26,7 +26,7 @@ public class TokuchoSofuJohoRenkeiKanriEntity {
     private RString 管理スペース;
     @FldField(order = 3, length = 3)
     private RString 管理媒体通番;
-    @FldField(order = 4, length = 10)
+    @FldField(order = 4, length = 8)
     private RString 管理作成年月日;
     @FldField(order = 5, length = 31)
     private RString 管理予備;

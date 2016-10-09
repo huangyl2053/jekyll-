@@ -36,7 +36,7 @@
         AND "B"."shoKisaiHokenshaNo"=#{証記載保険者番号}
         AND "B"."shikyuShinseiSeiriNo"=#{支給申請書整理番号}
         ORDER BY
-        "B"."shoriYM" DESC
+        COALESCE(CAST("B"."shoriYM" AS numeric),'999999') DESC
         LIMIT 1
     </select>
 

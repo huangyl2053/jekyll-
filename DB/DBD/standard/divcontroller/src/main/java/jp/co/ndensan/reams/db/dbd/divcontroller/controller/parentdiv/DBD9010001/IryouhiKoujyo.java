@@ -168,6 +168,22 @@ public class IryouhiKoujyo {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             getHandler(div).init詳細データ();
             div.getIryohiKojyoSyosai().setIsOpen(false);
+            return ResponseData.of(div).respond();
+        }
+        RString データ区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
+        if (IryoHiKojoNaiyo.主治医意見書確認書.getコード().equals(データ区分)) {
+            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().getValue() == null) {
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD()
+                        .setValue(治医意見書受領年月日 != null && !治医意見書受領年月日.isEmpty() ? new RDate(治医意見書受領年月日.toString()) : null);
+            }
+            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() == null) {
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD()
+                        .setValue(認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty() ? new RDate(認定有効期間終了年月日.toString()) : null);
+            }
+            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() == null) {
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD()
+                        .setValue(認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty() ? new RDate(認定有効期間開始年月日.toString()) : null);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -191,7 +207,8 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_ClearButton(IryouhiKoujyoDiv div) {
-        getHandler(div).init詳細エリア();
+        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        getHandler(div).onClick_ClearButton(医療費控除リスト);
         return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
     }
 
@@ -213,13 +230,16 @@ public class IryouhiKoujyo {
                 }
             }
         }
-        if (getHandler(div).確定確認チェック()) {
+        if (!ResponseHolder.isReRequest() && getHandler(div).確定確認チェック()) {
             return ResponseData.of(div).addMessage(DbdWarningMessages.発行対象外登録.getMessage()).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!ResponseHolder.isReRequest()
+                || (ResponseHolder.getMessageCode().equals(new RString(DbdWarningMessages.発行対象外登録.getMessage().getCode()))
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.確定の確認.getMessage().getCode()))
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).onClick_KakuteButton(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         }
         return ResponseData.of(div).respond();

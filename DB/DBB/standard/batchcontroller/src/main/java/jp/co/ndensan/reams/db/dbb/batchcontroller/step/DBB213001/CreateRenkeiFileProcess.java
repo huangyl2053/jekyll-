@@ -21,11 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.fld.FldWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -51,8 +47,10 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     private static final RString 七月 = new RString("7");
     private static final RString XX = new RString("xx");
     private static final RString YYYY = new RString("yyyy");
+    private static final RString ZZ = new RString("zz");
     private static final int INT_ZERO = 0;
     private static final int INT_FIVE = 5;
+    private static final int INT_TWO = 2;
     private TokuchoSofuJohoRenkeiProcessParameter proParameter;
     private FlexibleYear 処理年度;
     private RYearMonth 処理対象年月;
@@ -122,6 +120,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     @Override
     protected void createWriter() {
         for (RString 市町村コード : 市町村コードリスト) {
+            int count = 1;
             RString ファイル出力Z1A000 = Z1A000XXDTA.replace(XX, 市町村IDMap.get(市町村コード));
             ファイル出力Z1A000List.add(ファイル出力Z1A000);
             fldZ1A000Writer = new FldWriter.InstanceBuilder(ファイル出力Z1A000).
@@ -148,7 +147,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                     build();
             ファイル出力DE__Z12Map.put(市町村コード, fldDE__Z12Writer);
             RString ファイル出力DE__Z1A = DEXXZ1AYYYYZZDTA.replace(XX, 市町村IDMap.get(市町村コード)).replace(YYYY,
-                    処理年度.toDateString());
+                    処理年度.toDateString()).replace(ZZ, new RString(count).padZeroToLeft(INT_TWO));
             ファイル出力DE__Z1AList.add(ファイル出力DE__Z1A);
             fldDE__Z1AWriter = new FldWriter.InstanceBuilder(ファイル出力DE__Z1A).
                     setDelimiter(EUC_WRITER_DELIMITER).
@@ -156,6 +155,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                     setNewLine(NewLine.CRLF).
                     build();
             ファイル出力DE__Z1AMap.put(市町村コード, fldDE__Z1AWriter);
+            count++;
         }
     }
 
@@ -265,29 +265,29 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                             各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
                             count));
         }
-        for (RString fileName : ファイル出力Z1A000List) {
-            FilesystemName sharedFileName = new FilesystemName(fileName);
-            SharedFile.defineSharedFile(sharedFileName);
-            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
-            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
-        }
-        for (RString fileName : ファイル出力Z99_550List) {
-            FilesystemName sharedFileName = new FilesystemName(fileName);
-            SharedFile.defineSharedFile(sharedFileName);
-            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
-            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
-        }
-        for (RString fileName : ファイル出力DE__Z12List) {
-            FilesystemName sharedFileName = new FilesystemName(fileName);
-            SharedFile.defineSharedFile(sharedFileName);
-            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
-            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
-        }
-        for (RString fileName : ファイル出力DE__Z1AList) {
-            FilesystemName sharedFileName = new FilesystemName(fileName);
-            SharedFile.defineSharedFile(sharedFileName);
-            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
-            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
-        }
+//        for (RString fileName : ファイル出力Z1A000List) {
+//            FilesystemName sharedFileName = new FilesystemName(fileName);
+//            SharedFile.defineSharedFile(sharedFileName);
+//            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
+//            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+//        }
+//        for (RString fileName : ファイル出力Z99_550List) {
+//            FilesystemName sharedFileName = new FilesystemName(fileName);
+//            SharedFile.defineSharedFile(sharedFileName);
+//            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
+//            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+//        }
+//        for (RString fileName : ファイル出力DE__Z12List) {
+//            FilesystemName sharedFileName = new FilesystemName(fileName);
+//            SharedFile.defineSharedFile(sharedFileName);
+//            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
+//            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+//        }
+//        for (RString fileName : ファイル出力DE__Z1AList) {
+//            FilesystemName sharedFileName = new FilesystemName(fileName);
+//            SharedFile.defineSharedFile(sharedFileName);
+//            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
+//            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+//        }
     }
 }

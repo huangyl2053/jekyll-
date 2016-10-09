@@ -48,14 +48,15 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper"
                     + ".select特徴送付情報連携のデータ");
-    // TODO QA No1635 EucEntityId
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("CHKCSV"));
+    private static final EucEntityId Z12_EUC_ENTITY_ID = new EucEntityId(new RString("DBB300019"));
+    private static final EucEntityId Z1A_EUC_ENTITY_ID = new EucEntityId(new RString("DBB300020"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ファイル出力Z12 = new RString("Z12_nnnnnn_CHK.Csv");
     private static final RString ファイル出力Z1A = new RString("Z1A_nnnnnn_CHK.Csv");
     private static final RString NNNNNN = new RString("nnnnnn");
     private static final RString Z12 = new RString("Z12");
+    private static final RString Z1A = new RString("Z1A");
     private static final int INT_ZERO = 0;
     private static final int INT_FIVE = 5;
     private TokuchoSofuJohoRenkeiProcessParameter proParameter;
@@ -65,7 +66,8 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
     private List<RString> ファイル出力CHKZ12List;
     private List<RString> ファイル出力CHKZ1AList;
     private Map<RString, RString> 市町村IDMap;
-    private FileSpoolManager manager;
+    private FileSpoolManager z12Manager;
+    private FileSpoolManager z1AManager;
     private RString eucFilePath;
     private Map<RString, CsvWriter> ファイル出力Z12Map;
     private Map<RString, CsvWriter> ファイル出力Z1AMap;
@@ -101,12 +103,12 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
+        z12Manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, Z12_EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPathZ12 = z12Manager.getEucOutputDirectry();
         for (RString 市町村コード : 市町村コードリスト) {
             RString chkZ12 = ファイル出力Z12.replace(NNNNNN, 市町村コード);
             ファイル出力CHKZ12List.add(chkZ12);
-            eucFilePath = Path.combinePath(spoolWorkPath, chkZ12);
+            eucFilePath = Path.combinePath(spoolWorkPathZ12, chkZ12);
             z12Writer = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -117,7 +119,9 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
             ファイル出力Z12Map.put(市町村コード, z12Writer);
             RString chkZ1A = ファイル出力Z1A.replace(NNNNNN, 市町村コード);
             ファイル出力CHKZ1AList.add(chkZ1A);
-            eucFilePath = Path.combinePath(spoolWorkPath, chkZ1A);
+            z1AManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, Z1A_EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPathZ1A = z1AManager.getEucOutputDirectry();
+            eucFilePath = Path.combinePath(spoolWorkPathZ1A, chkZ1A);
             z1AWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -149,7 +153,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
         ファイル出力Z1AMap.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
                 RString.EMPTY,
                 new RString(RDateTime.now().toString()),
-                Z12,
+                Z1A,
                 処理対象年月.toDateString(),
                 entity.get市町村コードDT(),
                 RDate.getNowDate().toDateString(),

@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 高額受領委任契約事業者を管理するクラスです。
  *
- * @reamsid_L DBC-1980-010 yuqingzhang
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 public class KogakuJuryoininKeiyakuJigyosha
         extends ModelBase<KogakuJuryoininKeiyakuJigyoshaIdentifier, DbT3076KogakuJuryoininKeiyakuJigyoshaEntity, KogakuJuryoininKeiyakuJigyosha>

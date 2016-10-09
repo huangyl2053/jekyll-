@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額合算支給不支給決定を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
 public class KogakuGassanShikyuFushikyuKetteiManager {
 
@@ -126,6 +128,33 @@ public class KogakuGassanShikyuFushikyuKetteiManager {
         List<KogakuGassanShikyuFushikyuKettei> businessList = new ArrayList<>();
 
         for (DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity : dac.selectAll(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanShikyuFushikyuKettei(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 高額合算支給不支給決定を情報返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @return List<KogakuGassanShikyuFushikyuKettei>
+     */
+    @Transaction
+    public List<KogakuGassanShikyuFushikyuKettei> get高額合算支給不支給決定情報(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        List<KogakuGassanShikyuFushikyuKettei> businessList = new ArrayList<>();
+
+        for (DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity : dac.getAll(
+                被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号)) {
             entity.initializeMd5();
             businessList.add(new KogakuGassanShikyuFushikyuKettei(entity));
         }

@@ -23,7 +23,7 @@ public class InsKijunShunyugakuTekiyoKanriTmpProcess extends BatchProcessBase<Db
     @BatchWriter
     BatchEntityCreatedTempTableWriter 基準収入額適用管理一時;
 
-    private static final RString 基準収入額適用管理一時_TABLE_NAME = new RString("TempyokaisoGaitosha");
+    private static final RString 基準収入額適用管理一時_TABLE_NAME = new RString("TempKijunShunyugakuTekiyoKanri");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
             + ".kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
             + "select基準収入額適用管理一時");

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt22006;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt22006.NinteiBatchKekkaListShutsuryokuMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -42,6 +43,7 @@ public class NinteiBatchKekkaListShutsuryokuProcessParameter implements IBatchPr
     private RString 改頁出力順ID;
     private RString 帳票ID;
     private YMDHMS バッチ処理日時;
+    private IShikibetsuTaishoPSMSearchKey searchKey;
 
     /**
      * コンストラクタです。
@@ -109,7 +111,8 @@ public class NinteiBatchKekkaListShutsuryokuProcessParameter implements IBatchPr
      *
      * @return NinteiBatchKekkaListShutsuryokuMybatisParameter
      */
-    public NinteiBatchKekkaListShutsuryokuMybatisParameter toNinteiBatchKekkaListShutsuryokuMybatisParameter() {
-        return new NinteiBatchKekkaListShutsuryokuMybatisParameter(認定期間_開始日, 認定期間_終了日);
+    public NinteiBatchKekkaListShutsuryokuMybatisParameter toNinteiBatchKekkaListShutsuryokuMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey, RString orderBy) {
+        this.searchKey = searchKey;
+        return new NinteiBatchKekkaListShutsuryokuMybatisParameter(searchKey, orderBy, 認定期間_開始日, 認定期間_終了日);
     }
 }
