@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.service.core.dbd5190001.RenkeiDataSakuseiShins
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -196,7 +195,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         parameter.set今回開始期間FROM(konkaikaishiFrom);
         parameter.set今回開始期間TO(konkaikaishiTo);
         parameter.set新ファイル名(div.getTxtNewFileName().getValue());
-        List<HihokenshaNo> hihokenshaNoList = getHihokenshaNoList(div);
+        List<RString> hihokenshaNoList = getHihokenshaNoList(div);
         parameter.set対象外被保険者番号リスト(hihokenshaNoList);
         return parameter;
     }
@@ -272,12 +271,11 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      *
      * @return List<HihokenshaNo>
      */
-    public List<HihokenshaNo> getHihokenshaNoList(RenkeiDataSakuseiShinseiJohoDiv div) {
+    public List<RString> getHihokenshaNoList(RenkeiDataSakuseiShinseiJohoDiv div) {
         List<dgTaishoshaIchiran_Row> taishoList = div.getDgTaishoshaIchiran().getDataSource();
-        List<HihokenshaNo> hihokenshaNoList = new ArrayList<>();
+        List<RString> hihokenshaNoList = new ArrayList<>();
         for (dgTaishoshaIchiran_Row row : taishoList) {
-            HihokenshaNo hihokenshano = new HihokenshaNo(row.getHihokenshaNo());
-            hihokenshaNoList.add(hihokenshano);
+            hihokenshaNoList.add(row.getHihokenshaNo());
         }
         return hihokenshaNoList;
     }
