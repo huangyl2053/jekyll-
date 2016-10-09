@@ -4,19 +4,26 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * PostMainPanel のクラスファイル 
- * 
- * @author 自動生成
+ * PostMainPanel のクラスファイル
+ *
+ * @reamsid_L DBC-3020-010 chenyadong
  */
 public class PostMainPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -45,6 +52,10 @@ public class PostMainPanelDiv extends Panel {
     private TextBox hdnShichosonCD;
     @JsonProperty("hdnModl")
     private RString hdnModl;
+    @JsonProperty("hdnModl1")
+    private RString hdnModl1;
+    @JsonProperty("hdnModl2")
+    private RString hdnModl2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -251,6 +262,42 @@ public class PostMainPanelDiv extends Panel {
     }
 
     /*
+     * gethdnModl1
+     * @return hdnModl1
+     */
+    @JsonProperty("hdnModl1")
+    public RString getHdnModl1() {
+        return hdnModl1;
+    }
+
+    /*
+     * sethdnModl1
+     * @param hdnModl1 hdnModl1
+     */
+    @JsonProperty("hdnModl1")
+    public void setHdnModl1(RString hdnModl1) {
+        this.hdnModl1 = hdnModl1;
+    }
+
+    /*
+     * gethdnModl2
+     * @return hdnModl2
+     */
+    @JsonProperty("hdnModl2")
+    public RString getHdnModl2() {
+        return hdnModl2;
+    }
+
+    /*
+     * sethdnModl2
+     * @param hdnModl2 hdnModl2
+     */
+    @JsonProperty("hdnModl2")
+    public void setHdnModl2(RString hdnModl2) {
+        this.hdnModl2 = hdnModl2;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -259,7 +306,7 @@ public class PostMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShichoson(DataGrid<dgShichoson_Row> dgShichoson) {
+    public void setDgShichoson(DataGrid<dgShichoson_Row> dgShichoson) {
         this.getMeisaiPanel().setDgShichoson(dgShichoson);
     }
 
