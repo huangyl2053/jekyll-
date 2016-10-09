@@ -1275,7 +1275,7 @@
         "kogakuTaishoGaiFlag" = "TempKogakuKyufuTaishoshaGokeiZen"."kogakuTaishoGaiFlag",
         "jidoShokanTaishoFlag" = "TempKogakuKyufuTaishoshaGokeiZen"."jidoShokanTaishoFlag"
        FROM 
-        "TempKogakuKyufuTaishoshaGokeiZen" AS "TempKogakuKyufuTaishoshaGokeiZen"
+        "TempKogakuKyufuTaishoshaGokeiZen"
        WHERE
         rgdb."DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = "TempKogakuKyufuTaishoshaGokeiZen"."hihokenshaNo" AND
         rgdb."DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = "TempKogakuKyufuTaishoshaGokeiZen"."serviceTeikyoYM" AND
@@ -1291,7 +1291,7 @@
         SELECT 
             "TempKogakuKyufuTaishoshaMeisaiZenUpdate".* 
             ,''
-        FROM rgdb."TempKogakuKyufuTaishoshaMeisaiZenUpdate" AS "TempKogakuKyufuTaishoshaMeisaiZenUpdate"
+        FROM "TempKogakuKyufuTaishoshaMeisaiZenUpdate"
     </insert>
     
      <!-- 事業高額介護サービス費支給申請にinsertする。 -->
@@ -1300,7 +1300,7 @@
         rgdb."DbT3110JigyoKogakuShikyuShinsei"
        SELECT 
             "TempJigyoKogakuShikyuShinseiZen".*
-        FROM rgdb."TempJigyoKogakuShikyuShinseiZen" AS "TempJigyoKogakuShikyuShinseiZen"
+        FROM "TempJigyoKogakuShikyuShinseiZen"
     </insert>
     
       <!-- 事業高額介護サービス費支給判定結果にinsertする。 -->
@@ -1309,7 +1309,7 @@
         rgdb."DbT3111JigyoKogakuShikyuHanteiKekka"
        SELECT 
             "TempJigyoKogakuShikyuHanteiKekkaZen".*
-        FROM rgdb."TempJigyoKogakuShikyuHanteiKekkaZen" AS "TempJigyoKogakuShikyuHanteiKekkaZen"
+        FROM "TempJigyoKogakuShikyuHanteiKekkaZen"
     </insert>
     
       <!-- 事業高額介護サービス費支給審査決定にinsertする。 -->
@@ -1318,7 +1318,7 @@
         rgdb."DbT3112KogakuShikyuShinsaKettei"
        SELECT 
             "TempJigyoKogakuShikyuShinsaKetteiZen".*
-        FROM rgdb."TempJigyoKogakuShikyuShinsaKetteiZen" AS "TempJigyoKogakuShikyuShinsaKetteiZen"
+        FROM "TempJigyoKogakuShikyuShinsaKetteiZen"
     </insert>
     
       <!-- 事業高額介護サービス費給付対象者合計にinsertする。 -->
@@ -1327,7 +1327,7 @@
         rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"
        SELECT 
             "TempJigyoKogakuKyufuTaishoshaGokeiZen".*
-        FROM rgdb."TempJigyoKogakuKyufuTaishoshaGokeiZen" AS "TempJigyoKogakuKyufuTaishoshaGokeiZen"
+        FROM "TempJigyoKogakuKyufuTaishoshaGokeiZen"
     </insert>
     
     <!-- 事業高額介護国保連IFマスタにupdateする。 -->
@@ -1355,7 +1355,7 @@
         "kogakuTaishoGaiFlag" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."kogakuTaishoGaiFlag",
         "jidoShokanTaishoFlag" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."jidoShokanTaishoFlag"
        FROM 
-        rgdb."TempJigyoKogakuKyufuTaishoshaGokeiZen" AS "TempJigyoKogakuKyufuTaishoshaGokeiZen"
+        "TempJigyoKogakuKyufuTaishoshaGokeiZen"
        WHERE
         rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"."hihokenshaNo" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."hihokenshaNo" AND
         rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = "TempJigyoKogakuKyufuTaishoshaGokeiZen"."serviceTeikyoYM" AND
@@ -2517,14 +2517,14 @@
                CASE 
                 WHEN SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[>=]]>'08'
                 AND SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[<=]]>'12'
-                THEN to_char(CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1,'9999')
-                ELSE to_char(CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2,'9999')
+                THEN CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1
+                ELSE CAST(SUBSTRING(MIN(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2
                 END AS 最小続柄コード参照年,
-                CASE 
+                CASE
                 WHEN SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[>=]]>'08'
                 AND SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),5,2)<![CDATA[<=]]>'12'
-                THEN to_char(CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1,'9999')
-                ELSE to_char(CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2,'9999')
+                THEN CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-1
+                ELSE CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2
                 END AS 最大続柄コード参照年
          FROM  "TempSetaiinShotokuHanteiMeisai" AS 世帯員所得判定明細一時
      </select>
