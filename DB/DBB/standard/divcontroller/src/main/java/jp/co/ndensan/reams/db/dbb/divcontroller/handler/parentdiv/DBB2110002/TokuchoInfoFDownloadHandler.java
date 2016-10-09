@@ -119,15 +119,17 @@ public class TokuchoInfoFDownloadHandler {
             処理対象月制御();
             市町村制御(市町村識別ID.getItemId());
             div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().setDisabled(true);
-            市町村処理対象グリッド設定(市町村識別ID.getItemId());
+            RString selectKey = div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().getSelectedKey();
+            市町村処理対象グリッド設定(selectKey);
+            市町村処理状況グリッド設定(selectKey, year);
         } else {
             div.getTokuchoInfoDownloadShoriNaiyo().getRadShichosonSelect().setVisible(false);
             div.getTokuchoInfoDownloadShoriNaiyo().getDdlShichosonSelect().setVisible(false);
             div.getTokuchoInfoDownloadShoriNaiyo().getRadTsukiSelect().setVisible(false);
             div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().setVisible(false);
             単一処理対象グリッド設定();
+            市町村処理状況グリッド設定(市町村識別ID.getItemId(), year);
         }
-        市町村処理状況グリッド設定(市町村識別ID.getItemId(), year);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
     }
 
@@ -249,6 +251,9 @@ public class TokuchoInfoFDownloadHandler {
             }
         }
         div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().setDataSource(市町村DataSourceList);
+        if (!市町村DataSourceList.isEmpty()) {
+            div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().setSelectedIndex(INT_0);
+        }
     }
 
     private List<RString> get構成市町村IDList() {

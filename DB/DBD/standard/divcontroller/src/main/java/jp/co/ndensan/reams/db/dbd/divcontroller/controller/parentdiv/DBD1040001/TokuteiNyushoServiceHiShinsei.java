@@ -81,9 +81,13 @@ public class TokuteiNyushoServiceHiShinsei {
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));
         RString menuID = ResponseHolder.getMenuID();
-        getHandler(div).initialize(資格対象者, menuID);
-        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
-        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        if (資格対象者 != null) {
+            識別コード = 資格対象者.get識別コード();
+            被保険者番号 = 資格対象者.get被保険者番号();
+            getHandler(div).initialize(識別コード, 被保険者番号, menuID);
+        }
         if (!ResponseHolder.isReRequest()
                 && (被保険者番号 == null || 被保険者番号.getColumnValue().isEmpty())) {
             div.getShinsei().getBtnDispGemmenJoho().setDisabled(true);

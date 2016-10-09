@@ -67,7 +67,7 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     private static final RString TITLE_保険者 = new RString("保険者：");
     private static final RString TITLE_日付抽出区分 = new RString("日付抽出区分：");
     private static final RString TITLE_処理対象年月 = new RString("処理対象年月：");
-    private static final RString TITLE_異動年月 = new RString("異動年月　：");
+    private static final RString TITLE_異動年月 = new RString("異動年月　  ：");
     private static final RString TITLE_異動区分 = new RString("異動区分：");
     private static final RString TITLE_世帯所得区分 = new RString("世帯所得区分：");
     private static final RString TITLE_所得区分 = new RString("所得区分：");

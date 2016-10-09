@@ -87,14 +87,15 @@ public class TokuteiNyushoServiceHiShinseiHandler {
     /**
      * 初期化の処理です。
      *
-     * @param taishoshaKey 前画面から渡された「対象者キー」
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
      * @param menuID menuID
      */
-    public void initialize(TaishoshaKey taishoshaKey, RString menuID) {
-        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        div.getCcdAtenaInfo().initialize(識別コード);
-        div.getCcdShinseiJoho().initialize(識別コード);
+    public void initialize(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, RString menuID) {
+        if (識別コード != null && !識別コード.isEmpty()) {
+            div.getCcdAtenaInfo().initialize(識別コード);
+            div.getCcdShinseiJoho().initialize(識別コード);
+        }
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             div.getCcdKaigoKihon().initialize(被保険者番号);
         }
@@ -288,7 +289,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
     public void set申請一覧に戻る(TaishoshaKey 資格対象者) {
         set情報クリア(資格対象者);
         div.getShinsei().getShinseiList().setDisplayNone(false);
-        div.getShinsei().getShinseiDetail().setDisplayNone(true);
+        set情報クリア制御();
     }
 
     /**
