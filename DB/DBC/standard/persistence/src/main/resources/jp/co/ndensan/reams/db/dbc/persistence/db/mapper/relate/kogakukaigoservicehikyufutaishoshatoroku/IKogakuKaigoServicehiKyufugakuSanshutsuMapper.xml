@@ -704,44 +704,64 @@
     <select resultOrdered="true" id="select高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
             resultMap="高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
+        WITH master AS (
+            SELECT *
+            FROM "TempSetaiinShotokuHantei2" 
+            WHERE "TempSetaiinShotokuHantei2"."tsuzukigaraCodeNen" = #{続柄コード参照年}
+        )
         SELECT
-            A.*,
-            宛名PSM.*
-        FROM "TempSetaiinShotokuHantei2"  AS A
+            master.*,
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM master
         INNER JOIN
             rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM 
-        ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
-        WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
+           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                 )      ) AS "ShikibetsuTaisho" 
+        ON master."shikibetsuCode" = "ShikibetsuTaisho" ."shikibetsuCode"
     </select>
     <resultMap id="高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
-        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
    <!--事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
     <select resultOrdered="true" id="select事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
             resultMap="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
+       WITH master AS (
+            SELECT *
+            FROM "TempSetaiinShotokuHantei2" 
+            WHERE "TempSetaiinShotokuHantei2"."tsuzukigaraCodeNen" = #{続柄コード参照年}
+        )
         SELECT
-            A.*,
-            宛名PSM.*
-        FROM "TempSetaiinShotokuHantei2"  AS A
+            master.*,
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM master
         INNER JOIN
             rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM 
-        ON A."shikibetsuCode" = 宛名PSM."shikibetsuCode"
-        WHERE A."tsuzukigaraCodeNen" = #{続柄コード参照年}
+           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                 )      ) AS "ShikibetsuTaisho" 
+        ON master."shikibetsuCode" = "ShikibetsuTaisho" ."shikibetsuCode"
     </select>
     <resultMap id="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
-        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
     <!--高額介護サービス費関連のテーブルのデータを削除するためのキーを取得し、削除キー一時に格納する-->
