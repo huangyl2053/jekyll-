@@ -35,6 +35,7 @@ public class InsTaishoSeitaiyinTempProcessParameter implements IBatchProcessPara
     private RString 市町村名;
     private Boolean お知らせ通知書出力フラグ;
     private Boolean 一覧表CSV出力フラグ;
+    private Boolean 申請書出力フラグ;
     private FlexibleDate 処理年月日;
 
 }
