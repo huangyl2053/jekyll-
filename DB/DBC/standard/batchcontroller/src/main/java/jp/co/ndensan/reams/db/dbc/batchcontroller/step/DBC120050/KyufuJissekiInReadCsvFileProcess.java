@@ -446,7 +446,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         登録H11Entity.setRecordNo(new RString(レコード番号));
         登録H11Entity.setKokanShikibetsuNo(h11CsvEntity.get交換情報識別番号());
         登録H11Entity.setInputShikibetsuNo(h11CsvEntity.get入力識別番号());
-        登録H11Entity.setRecordShubetsuCode(h11CsvEntity.getレコード種別コード());
+        登録H11Entity.setRecodeShubetsuCode(h11CsvEntity.getレコード種別コード());
         登録H11Entity.setShokisaiHokenshaNo(h11CsvEntity.get証記載保険者番号());
         登録H11Entity.setHiHokenshaNo(h11CsvEntity.get被保険者番号());
         登録H11Entity.setServiceTeikyoYM(h11CsvEntity.getサービス提供年月());
@@ -551,7 +551,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         登録H11Entity.setRecordNo(new RString(レコード番号));
         登録H11Entity.setKokanShikibetsuNo(h12CsvEntity.get交換情報識別番号());
         登録H11Entity.setInputShikibetsuNo(h12CsvEntity.get入力識別番号());
-        登録H11Entity.setRecordShubetsuCode(h12CsvEntity.getレコード種別コード());
+        登録H11Entity.setRecodeShubetsuCode(h12CsvEntity.getレコード種別コード());
         登録H11Entity.setShokisaiHokenshaNo(h12CsvEntity.get証記載保険者番号());
         登録H11Entity.setHiHokenshaNo(h12CsvEntity.get被保険者番号());
         登録H11Entity.setServiceTeikyoYM(h12CsvEntity.getサービス提供年月());
@@ -655,7 +655,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d1Entity.setRecordNo(new RString(レコード番号));
         d1Entity.setKokanShikibetsuNo(d1CsvEntity.get交換情報識別番号());
         d1Entity.setInputShikibetsuNo(d1CsvEntity.get入力識別番号());
-        d1Entity.setRecordShubetsuCode(d1CsvEntity.getレコード種別コード());
+        d1Entity.setRecodeShubetsuCode(d1CsvEntity.getレコード種別コード());
         d1Entity.setShokisaiHokenshaNo(d1CsvEntity.get証記載保険者番号());
         d1Entity.setHiHokenshaNo(d1CsvEntity.get被保険者番号());
         d1Entity.setServiceTeikyoYM(d1CsvEntity.getサービス提供年月());
@@ -696,7 +696,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d2EnTity.setRecordNo(new RString(レコード番号));
         d2EnTity.setKokanShikibetsuNo(d2CsvEntity.get交換情報識別番号());
         d2EnTity.setInputShikibetsuNo(d2CsvEntity.get入力識別番号());
-        d2EnTity.setRecordShubetsuCode(d2CsvEntity.getレコード種別コード());
+        d2EnTity.setRecodeShubetsuCode(d2CsvEntity.getレコード種別コード());
         d2EnTity.setShokisaiHokenshaNo(d2CsvEntity.get証記載保険者番号());
         d2EnTity.setHiHokenshaNo(d2CsvEntity.get被保険者番号());
         d2EnTity.setServiceTeikyoYM(d2CsvEntity.getサービス提供年月());
@@ -765,7 +765,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d31Entity.setRecordNo(new RString(レコード番号));
         d31Entity.setKokanShikibetsuNo(d31CsvEntity.get交換情報識別番号());
         d31Entity.setInputShikibetsuNo(d31CsvEntity.get入力識別番号());
-        d31Entity.setRecordShubetsuCode(d31CsvEntity.getレコード種別コード());
+        d31Entity.setRecodeShubetsuCode(d31CsvEntity.getレコード種別コード());
         d31Entity.setShokisaiHokenshaNo(d31CsvEntity.get証記載保険者番号());
         d31Entity.setHiHokenshaNo(d31CsvEntity.get被保険者番号());
         d31Entity.setServiceTeikyoYM(d31CsvEntity.getサービス提供年月());
@@ -843,7 +843,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d32Entity.setRecordNo(new RString(レコード番号));
         d32Entity.setKokanShikibetsuNo(d32CsvEntity.get交換情報識別番号());
         d32Entity.setInputShikibetsuNo(d32CsvEntity.get入力識別番号());
-        d32Entity.setRecordShubetsuCode(d32CsvEntity.getレコード種別コード());
+        d32Entity.setRecodeShubetsuCode(d32CsvEntity.getレコード種別コード());
         d32Entity.setShokisaiHokenshaNo(d32CsvEntity.get証記載保険者番号());
         d32Entity.setHiHokenshaNo(d32CsvEntity.get被保険者番号());
         d32Entity.setServiceTeikyoYM(d32CsvEntity.getサービス提供年月());
@@ -890,7 +890,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d4Entity.setRecordNo(new RString(レコード番号));
         d4Entity.setKokanShikibetsuNo(d4CsvEntity.get交換情報識別番号());
         d4Entity.setInputShikibetsuNo(d4CsvEntity.get入力識別番号());
-        d4Entity.setRecordShubetsuCode(d4CsvEntity.getレコード種別コード());
+        d4Entity.setRecodeShubetsuCode(d4CsvEntity.getレコード種別コード());
         d4Entity.setShokisaiHokenshaNo(d4CsvEntity.get証記載保険者番号());
         d4Entity.setHiHokenshaNo(d4CsvEntity.get被保険者番号());
         d4Entity.setServiceTeikyoYM(d4CsvEntity.getサービス提供年月());
@@ -930,7 +930,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d5Entity.setRecordNo(new RString(レコード番号));
         d5Entity.setKokanShikibetsuNo(d51CsvEntity.get交換情報識別番号());
         d5Entity.setInputShikibetsuNo(d51CsvEntity.get入力識別番号());
-        d5Entity.setRecordShubetsuCode(d51CsvEntity.getレコード種別コード());
+        d5Entity.setRecodeShubetsuCode(d51CsvEntity.getレコード種別コード());
         d5Entity.setShokisaiHokenshaNo(d51CsvEntity.get証記載保険者番号());
         d5Entity.setHiHokenshaNo(d51CsvEntity.get被保険者番号());
         d5Entity.setServiceTeikyoYM(d51CsvEntity.getサービス提供年月());
@@ -967,7 +967,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d5Entity.setRecordNo(new RString(レコード番号));
         d5Entity.setKokanShikibetsuNo(d52CsvEntity.get交換情報識別番号());
         d5Entity.setInputShikibetsuNo(d52CsvEntity.get入力識別番号());
-        d5Entity.setRecordShubetsuCode(d52CsvEntity.getレコード種別コード());
+        d5Entity.setRecodeShubetsuCode(d52CsvEntity.getレコード種別コード());
         d5Entity.setShokisaiHokenshaNo(d52CsvEntity.get証記載保険者番号());
         d5Entity.setHiHokenshaNo(d52CsvEntity.get被保険者番号());
         d5Entity.setServiceTeikyoYM(d52CsvEntity.getサービス提供年月());
@@ -1004,7 +1004,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d5Entity.setRecordNo(new RString(レコード番号));
         d5Entity.setKokanShikibetsuNo(d53CsvEntity.get交換情報識別番号());
         d5Entity.setInputShikibetsuNo(d53CsvEntity.get入力識別番号());
-        d5Entity.setRecordShubetsuCode(d53CsvEntity.getレコード種別コード());
+        d5Entity.setRecodeShubetsuCode(d53CsvEntity.getレコード種別コード());
         d5Entity.setShokisaiHokenshaNo(d53CsvEntity.get証記載保険者番号());
         d5Entity.setHiHokenshaNo(d53CsvEntity.get被保険者番号());
         d5Entity.setServiceTeikyoYM(d53CsvEntity.getサービス提供年月());
@@ -1041,7 +1041,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d6Entity.setRecordNo(new RString(レコード番号));
         d6Entity.setKokanShikibetsuNo(d6CsvEntity.get交換情報識別番号());
         d6Entity.setInputShikibetsuNo(d6CsvEntity.get入力識別番号());
-        d6Entity.setRecordShubetsuCode(d6CsvEntity.getレコード種別コード());
+        d6Entity.setRecodeShubetsuCode(d6CsvEntity.getレコード種別コード());
         d6Entity.setShokisaiHokenshaNo(d6CsvEntity.get証記載保険者番号());
         d6Entity.setHiHokenshaNo(d6CsvEntity.get被保険者番号());
         d6Entity.setServiceTeikyoYM(d6CsvEntity.getサービス提供年月());
@@ -1070,7 +1070,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d7Entity.setRecordNo(new RString(レコード番号));
         d7Entity.setKokanShikibetsuNo(d7CsvEntity.get交換情報識別番号());
         d7Entity.setInputShikibetsuNo(d7CsvEntity.get入力識別番号());
-        d7Entity.setRecordShubetsuCode(d7CsvEntity.getレコード種別コード());
+        d7Entity.setRecodeShubetsuCode(d7CsvEntity.getレコード種別コード());
         d7Entity.setShokisaiHokenshaNo(d7CsvEntity.get証記載保険者番号());
         d7Entity.setHiHokenshaNo(d7CsvEntity.get被保険者番号());
         d7Entity.setServiceTeikyoYM(d7CsvEntity.getサービス提供年月());
@@ -1096,7 +1096,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d8Entity.setRecordNo(new RString(レコード番号));
         d8Entity.setKokanShikibetsuNo(d8CsvEntity.get交換情報識別番号());
         d8Entity.setInputShikibetsuNo(d8CsvEntity.get入力識別番号());
-        d8Entity.setRecordShubetsuCode(d8CsvEntity.getレコード種別コード());
+        d8Entity.setRecodeShubetsuCode(d8CsvEntity.getレコード種別コード());
         d8Entity.setShokisaiHokenshaNo(d8CsvEntity.get証記載保険者番号());
         d8Entity.setHiHokenshaNo(d8CsvEntity.get被保険者番号());
         d8Entity.setServiceTeikyoYM(d8CsvEntity.getサービス提供年月());
@@ -1132,7 +1132,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d9Entity.setRecordNo(new RString(レコード番号));
         d9Entity.setKokanShikibetsuNo(d9CsvEntity.get交換情報識別番号());
         d9Entity.setInputShikibetsuNo(d9CsvEntity.get入力識別番号());
-        d9Entity.setRecordShubetsuCode(d9CsvEntity.getレコード種別コード());
+        d9Entity.setRecodeShubetsuCode(d9CsvEntity.getレコード種別コード());
         d9Entity.setShokisaiHokenshaNo(d9CsvEntity.get証記載保険者番号());
         d9Entity.setHiHokenshaNo(d9CsvEntity.get被保険者番号());
         d9Entity.setServiceTeikyoYM(d9CsvEntity.getサービス提供年月());
@@ -1202,7 +1202,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         daEntity.setRecordNo(new RString(レコード番号));
         daEntity.setKokanShikibetsuNo(daCsvEntity.get交換情報識別番号());
         daEntity.setInputShikibetsuNo(daCsvEntity.get入力識別番号());
-        daEntity.setRecordShubetsuCode(daCsvEntity.getレコード種別コード());
+        daEntity.setRecodeShubetsuCode(daCsvEntity.getレコード種別コード());
         daEntity.setShokisaiHokenshaNo(daCsvEntity.get証記載保険者番号());
         daEntity.setHiHokenshaNo(daCsvEntity.get被保険者番号());
         daEntity.setServiceTeikyoYM(daCsvEntity.getサービス提供年月());
@@ -1232,7 +1232,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         dbEntity.setRecordNo(new RString(レコード番号));
         dbEntity.setKokanShikibetsuNo(dbCsvEntity.get交換情報識別番号());
         dbEntity.setInputShikibetsuNo(dbCsvEntity.get入力識別番号());
-        dbEntity.setRecordShubetsuCode(dbCsvEntity.getレコード種別コード());
+        dbEntity.setRecodeShubetsuCode(dbCsvEntity.getレコード種別コード());
         dbEntity.setShokisaiHokenshaNo(dbCsvEntity.get証記載保険者番号());
         dbEntity.setHiHokenshaNo(dbCsvEntity.get被保険者番号());
         dbEntity.setServiceTeikyoYM(dbCsvEntity.getサービス提供年月());
@@ -1272,7 +1272,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         dcEntity.setRecordNo(new RString(レコード番号));
         dcEntity.setKokanShikibetsuNo(dcCsvEntity.get交換情報識別番号());
         dcEntity.setInputShikibetsuNo(dcCsvEntity.get入力識別番号());
-        dcEntity.setRecordShubetsuCode(dcCsvEntity.getレコード種別コード());
+        dcEntity.setRecodeShubetsuCode(dcCsvEntity.getレコード種別コード());
         dcEntity.setShokisaiHokenshaNo(dcCsvEntity.get証記載保険者番号());
         dcEntity.setHiHokenshaNo(dcCsvEntity.get被保険者番号());
         dcEntity.setServiceTeikyoYM(dcCsvEntity.getサービス提供年月());
@@ -1352,7 +1352,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         ddEntity.setRecordNo(new RString(レコード番号));
         ddEntity.setKokanShikibetsuNo(ddCsvEntity.get交換情報識別番号());
         ddEntity.setInputShikibetsuNo(ddCsvEntity.get入力識別番号());
-        ddEntity.setRecordShubetsuCode(ddCsvEntity.getレコード種別コード());
+        ddEntity.setRecodeShubetsuCode(ddCsvEntity.getレコード種別コード());
         ddEntity.setShokisaiHokenshaNo(ddCsvEntity.get証記載保険者番号());
         ddEntity.setHiHokenshaNo(ddCsvEntity.get被保険者番号());
         ddEntity.setServiceTeikyoYM(ddCsvEntity.getサービス提供年月());
@@ -1394,7 +1394,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         t1Entity.setRecordNo(new RString(レコード番号));
         t1Entity.setKokanShikibetsuNo(t1CsvEntity.get交換情報識別番号());
         t1Entity.setInputShikibetsuNo(t1CsvEntity.get入力識別番号());
-        t1Entity.setRecordShubetsuCode(t1CsvEntity.getレコード種別コード());
+        t1Entity.setRecodeShubetsuCode(t1CsvEntity.getレコード種別コード());
         t1Entity.setShokisaiHokenshaNo(t1CsvEntity.get証記載保険者番号());
         t1Entity.setHiHokenshaNo(t1CsvEntity.get被保険者番号());
         t1Entity.setServiceTeikyoYM(t1CsvEntity.getサービス提供年月());
