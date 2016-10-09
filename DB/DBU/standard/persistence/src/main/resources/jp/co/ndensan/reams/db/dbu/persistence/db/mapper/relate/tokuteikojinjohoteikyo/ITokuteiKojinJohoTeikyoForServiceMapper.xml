@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBU-4880-090 wangxiaodong -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoForServiceMapper">
+
+    <select id="get有効な版番号"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
+            fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7301TokuteiKojinJohoHanKanriMapper.allColumns_DbT7301TokuteiKojinJohoHanKanri" />
+        FROM
+            rgdb."DbT7301TokuteiKojinJohoHanKanri" AS "DbT7301TokuteiKojinJohoHanKanri"
+        WHERE
+            "DbT7301TokuteiKojinJohoHanKanri"."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+        AND
+            "DbT7301TokuteiKojinJohoHanKanri"."dataSetNo" = #{データセット番号}
+        AND
+            "DbT7301TokuteiKojinJohoHanKanri"."hanStYMD" <![CDATA[<=]]> #{基準日}
+        AND
+            (DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NULL 
+            OR  ("DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NOT NULL 
+                AND #{基準日} <![CDATA[<=]]> "DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD"))
+    </select>
+    
+    <select id="get初回提供済である直近の版番号"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
+            fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7301TokuteiKojinJohoHanKanriMapper.allColumns_DbT7301TokuteiKojinJohoHanKanri" />
+        FROM
+            (SELECT * FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
+             WHERE "tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+             AND  "dataSetNo" = #{データセット番号}
+             AND  "shokaiTeikyoKubun" = #{初回提供済み}
+            ) AS "DbT7301TokuteiKojinJohoHanKanri"
+        WHERE 
+            NOT EXISTS (SELECT 1 FROM (SELECT * FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
+                                         WHERE "tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+                                         AND  "dataSetNo" = #{データセット番号}
+                                         AND  "shokaiTeikyoKubun" = #{初回提供済み}) AS dbT7301
+                        WHERE "DbT7301TokuteiKojinJohoHanKanri"."hanStYMD" <![CDATA[<]]> dbT7301."hanStYMD")
+    </select>
+    
+    <select id="get直近の版番号"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
+            fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7301TokuteiKojinJohoHanKanriMapper.allColumns_DbT7301TokuteiKojinJohoHanKanri" />
+        FROM
+            (SELECT * FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
+             WHERE "tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+             AND  "dataSetNo" = #{データセット番号}
+            ) AS "DbT7301TokuteiKojinJohoHanKanri"
+        WHERE 
+            NOT EXISTS (SELECT 1 FROM (SELECT * FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
+                                         WHERE "tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+                                         AND  "dataSetNo" = #{データセット番号}
+                                         AND  "shokaiTeikyoKubun" = #{初回提供済み}) AS dbT7301
+                        WHERE "DbT7301TokuteiKojinJohoHanKanri"."hanStYMD" <![CDATA[<]]> dbT7301."hanStYMD")
+    </select>
+    
+    <select id="get特定個人情報項目版管理"
+            resultOrdered="true"
+            resultMap="ResultMap_get特定個人情報項目版管理"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
+            fetchSize="500">
+        SELECT
+            TeikyoKomoku."tokuteiKojinJohoMeiCode",
+            TeikyoKomoku."tokuteiKojinJohoKomokuCode",
+            TeikyoKomoku."tokuteiKojinJohoKomokuKubun",
+            TeikyoKomoku."teikyoNaiyoKomokuNo",
+            HanKanri4."versionJoho",
+            HanKanri4."mukokaFlag"
+        FROM
+            rgdb."DbT7303TokuteiKojinJohoTeikyoKomoku" AS TeikyoKomoku
+        INNER JOIN
+            (SELECT "tokuteiKojinJohoKomokuCode",
+                    "tokuteiKojinJohoMeiCode",
+                    "versionJoho",
+                    "mukokaFlag"
+            FROM (SELECT   HanKanri1."tokuteiKojinJohoKomokuCode",
+                           HanKanri1."tokuteiKojinJohoMeiCode",
+                           HanKanri1."versionJoho",
+                           HanKanri1."mukokaFlag"
+                    FROM   rgdb."DbT7302TokuteiKojinJohoKoumokuHanKanri" AS HanKanri1
+                    WHERE  HanKanri1."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+                    AND    HanKanri1."yukoStNichiji" <![CDATA[<=]]> #{基準日}
+                    AND    #{基準日} <![CDATA[<=]]> HanKanri1."yukoEdNichiji") AS HanKanri
+                    WHERE  NOT EXISTS (SELECT 1 
+                                        FROM (SELECT HanKanri2."tokuteiKojinJohoKomokuCode",
+                                                     HanKanri2."tokuteiKojinJohoMeiCode",
+                                                     HanKanri2."versionJoho",
+                                                     HanKanri2."mukokaFlag"
+                                              FROM   rgdb."DbT7302TokuteiKojinJohoKoumokuHanKanri" AS HanKanri2
+                                              WHERE  HanKanri2."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+                                              AND    HanKanri2."yukoStNichiji" <![CDATA[<=]]> #{基準日}
+                                              AND    #{基準日} <![CDATA[<=]]> HanKanri2."yukoEdNichiji") AS HanKanri3
+                                        WHERE HanKanri3."tokuteiKojinJohoMeiCode" = HanKanri."tokuteiKojinJohoMeiCode"
+                                        AND   HanKanri3."tokuteiKojinJohoKomokuCode" = HanKanri."tokuteiKojinJohoKomokuCode"
+                                        AND   HanKanri3."versionJoho" = HanKanri."versionJoho")) AS HanKanri4
+        ON  HanKanri4."tokuteiKojinJohoMeiCode" = TeikyoKomoku."tokuteiKojinJohoMeiCode"
+        AND HanKanri4."tokuteiKojinJohoKomokuCode" = TeikyoKomoku."tokuteiKojinJohoKomokuCode"
+        WHERE 
+            TeikyoKomoku."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+        AND  TeikyoKomoku."dataSetNo" = #{データセット番号}
+        AND  TeikyoKomoku."hanNo" = #{版番号}
+        ORBER BY TeikyoKomoku."tokuteiKojinJohoKomokuCode"
+    </select>
+    
+    <resultMap id="ResultMap_get特定個人情報項目版管理" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TokuteiKojinJohoKoumokuHanKanriRelateEntity" autoMapping="true">
+        <result property="特定個人情報名コード" column="tokuteiKojinJohoMeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定個人情報項目コード" column="tokuteiKojinJohoKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特定個人情報項目区分" column="tokuteiKojinJohoKomokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="提供内容項目番号" column="teikyoNaiyoKomokuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="バージョン情報" column="versionJoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="無効化フラグ" column="mukokaFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>
