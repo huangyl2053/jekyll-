@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0050041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.YoshikiYonnosanDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050041.YoshikiYonnosanValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -189,6 +191,12 @@ public class YoshikiYonnosan {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<YoshikiYonnosanDiv> onClick_btnConfirm(YoshikiYonnosanDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        YoshikiYonnosanValidationHandler validationHandler = new YoshikiYonnosanValidationHandler();
+        validationHandler.報告年度の必須チェック(validationMessages, div);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         getHandler(div).onClick_btnConfirm(get引き継ぎデータ(div));
         return ResponseData.of(div).respond();
     }
@@ -284,6 +292,15 @@ public class YoshikiYonnosan {
         } else if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            YoshikiYonnosanValidationHandler validationHandler = new YoshikiYonnosanValidationHandler();
+            validationHandler.今年度_合計値チェック_合計１(validationMessages, div);
+            validationHandler.今年度_合計値チェック_合計２(validationMessages, div);
+            validationHandler.前年度以前_合計値チェック_合計１(validationMessages, div);
+            validationHandler.前年度以前_合計値チェック_合計２(validationMessages, div);
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
             getHandler(div).onClick_btnSave(get引き継ぎデータ(div));
             return ResponseData.of(div).setState(DBU0050041StateName.完了状態);
         }
