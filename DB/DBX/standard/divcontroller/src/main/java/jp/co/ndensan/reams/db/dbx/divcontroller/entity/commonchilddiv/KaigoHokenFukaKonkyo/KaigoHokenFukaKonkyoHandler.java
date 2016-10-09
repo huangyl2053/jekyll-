@@ -23,10 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -39,8 +35,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KaigoHokenFukaKonkyoHandler {
 
-    private static final Code 業務固有 = new Code("0003");
-    private static final RString 業務固有の識別情報名称 = new RString("被保険者番号");
     private static final RString 符号 = new RString("～");
     private static final int INT_12 = 12;
 
@@ -72,8 +66,7 @@ public class KaigoHokenFukaKonkyoHandler {
                 && resultMax.get介護賦課Result().get調定日時() != null
                 && 処理日付管理情報.get基準日時().isBeforeOrEquals(resultMax.get介護賦課Result().get調定日時())) {
             set本算定状態(resultMax);
-            setBtn状態(resultMax, resultList);
-            setAccessLog出力(識別コード, resultMax.get介護賦課Result().get被保険者番号());
+            setBtn状態_前へ(resultMax, resultList);
         } else {
             List<FukaJohoRelateSearchResult> resultList仮算定用 = new ArrayList<>();
             for (FukaJohoRelateSearchResult result : resultList) {
@@ -84,9 +77,20 @@ public class KaigoHokenFukaKonkyoHandler {
             }
             if (!resultList仮算定用.isEmpty()) {
                 FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
-                set仮算定状態(resultMax, resultMax仮算定用);
-                setBtn状態(resultMax仮算定用, resultList);
-                setAccessLog出力(識別コード, resultMax仮算定用.get介護賦課Result().get被保険者番号());
+                List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
+                for (FukaJohoRelateSearchResult item : resultList) {
+                    if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
+                            && resultMax仮算定用.get介護賦課Result().get賦課年度().
+                            equals(item.get介護賦課Result().get賦課年度())
+                            && resultMax仮算定用.get介護賦課Result().get通知書番号().
+                            equals(item.get介護賦課Result().get通知書番号())
+                            && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
+                            equals(new RString(item.get介護賦課Result().get履歴番号()))) {
+                        result仮算定用List.add(item);
+                    }
+                }
+                set仮算定状態(resultMax, resultMax仮算定用, result仮算定用List);
+                setBtn状態_前へ(resultMax, resultList);
             }
         }
         List<FlexibleYear> 調定年度List = new ArrayList<>();
@@ -135,25 +139,17 @@ public class KaigoHokenFukaKonkyoHandler {
         }
     }
 
-    private void setBtn状態(FukaJohoRelateSearchResult resultMax, List<FukaJohoRelateSearchResult> resultList) {
-        List<FukaJohoRelateSearchResult> 賦課根拠情報List = new ArrayList<>();
+    private void setBtn状態_前へ(FukaJohoRelateSearchResult resultMax, List<FukaJohoRelateSearchResult> resultList) {
+        List<FukaJohoRelateSearchResult> 計数List = new ArrayList<>();
         for (FukaJohoRelateSearchResult result : resultList) {
             if (resultMax.get介護賦課Result().get調定年度().equals(result.get介護賦課Result().get調定年度())
                     && resultMax.get介護賦課Result().get賦課年度().equals(result.get介護賦課Result().get賦課年度())
                     && resultMax.get介護賦課Result().get通知書番号().equals(result.get介護賦課Result().get通知書番号())) {
-                賦課根拠情報List.add(result);
+                計数List.add(result);
             }
         }
-        if (!賦課根拠情報List.isEmpty() && 賦課根拠情報List.size() > 1) {
+        if (計数List.size() > 1) {
             div.getBtnBefore().setDisabled(false);
-        }
-    }
-
-    private void setAccessLog出力(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        if (被保険者番号 != null) {
-            ExpandedInformation expandedInfo = new ExpandedInformation(業務固有, 業務固有の識別情報名称,
-                    被保険者番号.getColumnValue());
-            AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード, expandedInfo));
         }
     }
 
@@ -267,7 +263,8 @@ public class KaigoHokenFukaKonkyoHandler {
         }
     }
 
-    private void set仮算定状態(FukaJohoRelateSearchResult resultMax, FukaJohoRelateSearchResult resultMax仮算定用) {
+    private void set仮算定状態(FukaJohoRelateSearchResult resultMax, FukaJohoRelateSearchResult resultMax仮算定用,
+            List<FukaJohoRelateSearchResult> result仮算定用List) {
 
         init仮算定状態();
         HihokenshaNo 被保険者番号 = resultMax.get介護賦課Result().get被保険者番号();
@@ -302,8 +299,13 @@ public class KaigoHokenFukaKonkyoHandler {
         Decimal 前年度年額保険料 = resultMax仮算定用.get介護賦課Result().get確定介護保険料_年額();
         div.getLblFukaKonkyoData3().setText(doカンマ編集(前年度年額保険料));
         Decimal 減免額 = resultMax仮算定用.get介護賦課Result().get減免額();
-        Decimal 仮算定保険料額 = resultMax.get調定額();
-        if (減免額 != null && 仮算定保険料額 != null) {
+        Decimal 仮算定保険料額 = Decimal.ZERO;
+        if (!result仮算定用List.isEmpty()) {
+            for (FukaJohoRelateSearchResult result : result仮算定用List) {
+                仮算定保険料額 = 仮算定保険料額.add(result.get調定額());
+            }
+        }
+        if (減免額 != null) {
             div.getLblFukaKonkyoData6().setText(doカンマ編集(仮算定保険料額.add(減免額)));
         }
         div.getLblFukaKonkyoData7().setText(doカンマ編集(減免額));
@@ -379,7 +381,8 @@ public class KaigoHokenFukaKonkyoHandler {
             }
             if (!通知書番号List.isEmpty()) {
                 for (TsuchishoNo 通知書番号 : 通知書番号List) {
-                    dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(), 通知書番号.getColumnValue()));
+                    dataSource通知書番号.add(new KeyValueDataSource(通知書番号.getColumnValue(),
+                            通知書番号.getColumnValue()));
                 }
                 div.getDdlTsuchishoNo().setDataSource(sort降順ByKey(dataSource通知書番号));
                 div.getDdlTsuchishoNo().setSelectedIndex(0);
@@ -437,14 +440,21 @@ public class KaigoHokenFukaKonkyoHandler {
                         resultList仮算定用.add(result);
                     }
                 }
-                if (resultList仮算定用.size() == 1) {
-                    div.getBtnBefore().setDisabled(true);
-                }
                 if (!resultList仮算定用.isEmpty()) {
                     FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
-                    set仮算定状態(指定賦課情報, resultMax仮算定用);
-                } else {
-                    div.getBtnBefore().setDisabled(true);
+                    List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
+                    for (FukaJohoRelateSearchResult item : resultList) {
+                        if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
+                                && resultMax仮算定用.get介護賦課Result().get賦課年度().
+                                equals(item.get介護賦課Result().get賦課年度())
+                                && resultMax仮算定用.get介護賦課Result().get通知書番号().
+                                equals(item.get介護賦課Result().get通知書番号())
+                                && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
+                                equals(new RString(item.get介護賦課Result().get履歴番号()))) {
+                            result仮算定用List.add(item);
+                        }
+                    }
+                    set仮算定状態(指定賦課情報, resultMax仮算定用, result仮算定用List);
                 }
             }
         }
@@ -471,15 +481,13 @@ public class KaigoHokenFukaKonkyoHandler {
         }
         if (!指定賦課情報List.isEmpty()) {
             FukaJohoRelateSearchResult 指定賦課情報;
-            div.getBtnBefore().setDisabled(false);
-            div.getBtnAfter().setDisabled(false);
+            div.getBtnBefore().setDisabled(true);
+            div.getBtnAfter().setDisabled(true);
             if (指定賦課情報List.size() == 1) {
                 指定賦課情報 = 指定賦課情報List.get(0);
-                div.getBtnBefore().setDisabled(true);
-                div.getBtnAfter().setDisabled(true);
             } else {
-                指定賦課情報 = sort降順By履歴番号(指定賦課情報List).get(0);
-                div.getBtnAfter().setDisabled(true);
+                指定賦課情報 = 指定賦課情報List.get(指定賦課情報List.size() - 1);
+                div.getBtnBefore().setDisabled(false);
             }
             return 指定賦課情報;
         }
@@ -509,7 +517,19 @@ public class KaigoHokenFukaKonkyoHandler {
             }
             if (!resultList仮算定用.isEmpty()) {
                 FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1 - 1);
-                set仮算定状態(指定賦課情報, resultMax仮算定用);
+                List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
+                for (FukaJohoRelateSearchResult item : resultList) {
+                    if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
+                            && resultMax仮算定用.get介護賦課Result().get賦課年度().
+                            equals(item.get介護賦課Result().get賦課年度())
+                            && resultMax仮算定用.get介護賦課Result().get通知書番号().
+                            equals(item.get介護賦課Result().get通知書番号())
+                            && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
+                            equals(new RString(item.get介護賦課Result().get履歴番号()))) {
+                        result仮算定用List.add(item);
+                    }
+                }
+                set仮算定状態(指定賦課情報, resultMax仮算定用, result仮算定用List);
             }
         }
     }
@@ -526,28 +546,27 @@ public class KaigoHokenFukaKonkyoHandler {
         FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
         TsuchishoNo 画面通知書番号 = new TsuchishoNo(div.getDdlTsuchishoNo().getSelectedKey());
         RString 画面履歴番号 = div.getTxtRirekiNo().getValue();
-        List<FukaJohoRelateSearchResult> resultList = new ArrayList<>();
-        List<RString> 履歴番号List = new ArrayList<>();
+        List<FukaJohoRelateSearchResult> result指定賦課情報List = new ArrayList<>();
         for (FukaJohoRelateSearchResult result : 賦課根拠情報List) {
             if (画面調定年度.equals(result.get介護賦課Result().get調定年度())
                     && 画面賦課年度.equals(result.get介護賦課Result().get賦課年度())
                     && 画面通知書番号.equals(result.get介護賦課Result().get通知書番号())) {
-                resultList.add(result);
-                履歴番号List.add(new RString(result.get介護賦課Result().get履歴番号()));
+                result指定賦課情報List.add(result);
             }
         }
-        if (!履歴番号List.isEmpty() && 履歴番号List.size() > 1) {
-            if (画面履歴番号.equals(履歴番号List.get(1))) {
-                div.getBtnBefore().setDisabled(true);
-                div.getBtnAfter().setDisabled(false);
-                return resultList.get(0);
-            } else {
-                div.getBtnBefore().setDisabled(false);
-                div.getBtnAfter().setDisabled(false);
-                for (int i = 0; i < resultList.size(); i++) {
-                    if (i != 0 && 画面履歴番号.equals(履歴番号List.get(i))) {
-                        return resultList.get(i - 1);
-                    }
+        if (result指定賦課情報List.size() >= 2) {
+            for (int i = 1; i < result指定賦課情報List.size(); i++) {
+                if (画面履歴番号.equals(new RString(result指定賦課情報List.get(i).get介護賦課Result().get履歴番号()))
+                        && i == 1) {
+                    div.getBtnBefore().setDisabled(true);
+                    div.getBtnAfter().setDisabled(false);
+                    return result指定賦課情報List.get(0);
+                }
+                if (画面履歴番号.equals(new RString(result指定賦課情報List.get(i).get介護賦課Result().get履歴番号()))
+                        && i != 1) {
+                    div.getBtnBefore().setDisabled(false);
+                    div.getBtnAfter().setDisabled(false);
+                    return result指定賦課情報List.get(i - 1);
                 }
             }
         }
@@ -578,45 +597,22 @@ public class KaigoHokenFukaKonkyoHandler {
                 }
                 if (!resultList仮算定用.isEmpty()) {
                     FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
-                    set仮算定状態(指定賦課情報, setBtn状態仮算定用(resultMax仮算定用, resultList));
+                    List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
+                    for (FukaJohoRelateSearchResult item : resultList) {
+                        if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
+                                && resultMax仮算定用.get介護賦課Result().get賦課年度().
+                                equals(item.get介護賦課Result().get賦課年度())
+                                && resultMax仮算定用.get介護賦課Result().get通知書番号().
+                                equals(item.get介護賦課Result().get通知書番号())
+                                && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
+                                equals(new RString(item.get介護賦課Result().get履歴番号()))) {
+                            result仮算定用List.add(item);
+                        }
+                    }
+                    set仮算定状態(指定賦課情報, resultMax仮算定用, result仮算定用List);
                 }
             }
         }
-    }
-
-    private FukaJohoRelateSearchResult setBtn状態仮算定用(FukaJohoRelateSearchResult resultMax,
-            List<FukaJohoRelateSearchResult> resultList) {
-        div.getBtnBefore().setDisabled(true);
-        div.getBtnAfter().setDisabled(true);
-        RString 画面履歴番号 = div.getTxtRirekiNo().getValue();
-        List<FukaJohoRelateSearchResult> 賦課根拠情報List = new ArrayList<>();
-        List<RString> 履歴番号List = new ArrayList<>();
-        for (FukaJohoRelateSearchResult result : resultList) {
-            if (resultMax.get介護賦課Result().get調定年度().equals(result.get介護賦課Result().get調定年度())
-                    && resultMax.get介護賦課Result().get賦課年度().equals(result.get介護賦課Result().get賦課年度())
-                    && resultMax.get介護賦課Result().get通知書番号().equals(result.get介護賦課Result().get通知書番号())) {
-                賦課根拠情報List.add(result);
-                履歴番号List.add(new RString(result.get介護賦課Result().get履歴番号()));
-            }
-        }
-        if (履歴番号List.size() == 2) {
-            div.getBtnBefore().setDisabled(false);
-            div.getBtnAfter().setDisabled(true);
-            return resultMax;
-        } else {
-            for (int i = 0; i < 履歴番号List.size(); i++) {
-                if (!画面履歴番号.equals(履歴番号List.get(履歴番号List.size() - 1))) {
-                    div.getBtnBefore().setDisabled(false);
-                    div.getBtnAfter().setDisabled(false);
-                    return 賦課根拠情報List.get(i + 1);
-                } else {
-                    div.getBtnBefore().setDisabled(false);
-                    div.getBtnAfter().setDisabled(true);
-                    return resultMax;
-                }
-            }
-        }
-        return null;
     }
 
     /**
@@ -631,29 +627,27 @@ public class KaigoHokenFukaKonkyoHandler {
         FlexibleYear 画面賦課年度 = new FlexibleYear(div.getDdlFukaNendo().getSelectedKey());
         TsuchishoNo 画面通知書番号 = new TsuchishoNo(div.getDdlTsuchishoNo().getSelectedKey());
         RString 画面履歴番号 = div.getTxtRirekiNo().getValue();
-        List<FukaJohoRelateSearchResult> resultList = new ArrayList<>();
-        List<RString> 履歴番号List = new ArrayList<>();
+        List<FukaJohoRelateSearchResult> result指定賦課情報List = new ArrayList<>();
         for (FukaJohoRelateSearchResult result : 賦課根拠情報List) {
             if (画面調定年度.equals(result.get介護賦課Result().get調定年度())
                     && 画面賦課年度.equals(result.get介護賦課Result().get賦課年度())
                     && 画面通知書番号.equals(result.get介護賦課Result().get通知書番号())) {
-                resultList.add(result);
-                履歴番号List.add(new RString(result.get介護賦課Result().get履歴番号()));
+                result指定賦課情報List.add(result);
             }
         }
-        if (!履歴番号List.isEmpty() && 履歴番号List.size() > 1) {
-            int lastIndex = 履歴番号List.size() - 1;
-            if (画面履歴番号.equals(履歴番号List.get(lastIndex - 1))) {
-                div.getBtnBefore().setDisabled(false);
-                div.getBtnAfter().setDisabled(true);
-                return resultList.get(lastIndex);
-            } else {
-                div.getBtnBefore().setDisabled(false);
-                div.getBtnAfter().setDisabled(false);
-                for (int i = 0; i < resultList.size(); i++) {
-                    if (画面履歴番号.equals(履歴番号List.get(i))) {
-                        return resultList.get(i + 1);
-                    }
+        if (result指定賦課情報List.size() >= 2) {
+            for (int i = result指定賦課情報List.size() - 1 - 1; i >= 0; i--) {
+                if (画面履歴番号.equals(new RString(result指定賦課情報List.get(i).get介護賦課Result().get履歴番号()))
+                        && i == result指定賦課情報List.size() - 1 - 1) {
+                    div.getBtnBefore().setDisabled(false);
+                    div.getBtnAfter().setDisabled(true);
+                    return result指定賦課情報List.get(result指定賦課情報List.size() - 1);
+                }
+                if (画面履歴番号.equals(new RString(result指定賦課情報List.get(i).get介護賦課Result().get履歴番号()))
+                        && i != result指定賦課情報List.size() - 1 - 1) {
+                    div.getBtnBefore().setDisabled(false);
+                    div.getBtnAfter().setDisabled(false);
+                    return result指定賦課情報List.get(i + 1);
                 }
             }
         }
@@ -767,22 +761,6 @@ public class KaigoHokenFukaKonkyoHandler {
                 }
         );
         return dataSource;
-    }
-
-    private List<FukaJohoRelateSearchResult> sort降順By履歴番号(List<FukaJohoRelateSearchResult> resultList) {
-        if (resultList.isEmpty()) {
-            return resultList;
-        }
-        Collections.sort(resultList,
-                new Comparator<FukaJohoRelateSearchResult>() {
-                    @Override
-                    public int compare(FukaJohoRelateSearchResult arg0, FukaJohoRelateSearchResult arg1) {
-                        return new RString(arg1.get介護賦課Result().get履歴番号()).
-                        compareTo(new RString(arg0.get介護賦課Result().get履歴番号()));
-                    }
-                }
-        );
-        return resultList;
     }
 
 }
