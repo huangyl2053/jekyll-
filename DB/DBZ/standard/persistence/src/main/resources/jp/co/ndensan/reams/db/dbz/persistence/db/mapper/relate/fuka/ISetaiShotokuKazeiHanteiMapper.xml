@@ -49,7 +49,6 @@
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
         as 宛名
         on 宛名."shikibetsuCode" = A."shikibetsuCode"
-        and 宛名."shoriYMD" = A."kijunYMD"
         where A."jushochiTokureiFlag"= '1'
     </select>
     
@@ -74,17 +73,16 @@
         宛名."setaiCode",
         B."honninKubun"
         from "TmpSetaiHaaku" AS A
-        inner join rgdb."DbT7014KaigoSetai" AS B
+        left join rgdb."DbT7014KaigoSetai" AS B
         ON A."hihokenshaNo"=B."hihokenshaNo"
         AND A."kijunYMD" = B."setaiHaakuKijunYMD"
+        AND B."kanriShikibetsuKubun" = #{管理識別区分}
         inner join rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
         as 宛名
         on 宛名."shikibetsuCode" = A."shikibetsuCode"
-        and 宛名."shoriYMD" = A."kijunYMD"
         where A."jushochiTokureiFlag" <![CDATA[!=]]> '1'
-        AND B."kanriShikibetsuKubun" = #{管理識別区分}
     </select>
     
      <!-- 世帯員把握入力のデータの取得-->
