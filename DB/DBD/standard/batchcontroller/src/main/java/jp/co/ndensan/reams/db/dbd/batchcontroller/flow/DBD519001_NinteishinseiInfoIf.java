@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001.NinteiShinseiJ
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001.PntNinteiShinsaHanteiListProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -143,7 +144,7 @@ public class DBD519001_NinteishinseiInfoIf extends BatchFlowBase<DBD519001_Ninte
         DBD519001_NinteishinseiInfoIfParameter flowParameter = getParameter();
         NinteiShinseiJohoProcessParameter parameter = new NinteiShinseiJohoProcessParameter(
                 flowParameter.get証記載保険者番号(),
-                flowParameter.get被保険者番号(),
+                new HihokenshaNo(flowParameter.get被保険者番号()),
                 flowParameter.get今回開始期間FROM(),
                 flowParameter.get今回開始期間TO(),
                 flowParameter.get対象外被保険者番号リスト());
@@ -165,7 +166,7 @@ public class DBD519001_NinteishinseiInfoIf extends BatchFlowBase<DBD519001_Ninte
         parameter.set抽出終了日時(flowParameter.get今回開始期間TO());
         parameter.set抽出開始日時(flowParameter.get今回開始期間FROM());
         parameter.set編集状況フラグ(getResult(RString.class, new RString(申請情報IF編集), ModifyNinteiShinseiJohoProcess.OUT編集状況フラグ));
-        parameter.set被保険者番号(flowParameter.get被保険者番号());
+        parameter.set被保険者番号(new HihokenshaNo(flowParameter.get被保険者番号()));
         parameter.set証記載保険者番号(flowParameter.get証記載保険者番号());
         parameter.set認定申請IF種類(認定申請IF種類);
         return parameter;
@@ -177,7 +178,7 @@ public class DBD519001_NinteishinseiInfoIf extends BatchFlowBase<DBD519001_Ninte
         parameter.set市町村コード(flowParameter.get市町村コード());
         parameter.set抽出終了日時(flowParameter.get今回開始期間TO());
         parameter.set抽出開始日時(flowParameter.get今回開始期間FROM());
-        parameter.set被保険者番号(flowParameter.get被保険者番号());
+        parameter.set被保険者番号(new HihokenshaNo(flowParameter.get被保険者番号()));
         parameter.set証記載保険者番号(flowParameter.get証記載保険者番号());
         parameter.set連携データ種類(認定申請IF種類);
         parameter.set連携ファイル名(flowParameter.get新ファイル名());

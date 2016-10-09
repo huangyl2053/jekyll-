@@ -30,7 +30,7 @@ public class DBD519001_NinteishinseiInfoIfParameter extends BatchParameterBase {
     @BatchParameter(key = "市町村コード", name = "市町村コード")
     private LasdecCode 市町村コード;
     @BatchParameter(key = "被保険者番号", name = "被保険者番号")
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @BatchParameter(key = "今回開始期間FROM", name = "今回開始期間FROM")
     private RDateTime 今回開始期間FROM;
     @BatchParameter(key = "今回開始期間TO", name = "今回開始期間TO")
@@ -62,7 +62,7 @@ public class DBD519001_NinteishinseiInfoIfParameter extends BatchParameterBase {
     public DBD519001_NinteishinseiInfoIfParameter(
             RString 証記載保険者番号,
             LasdecCode 市町村コード,
-            HihokenshaNo 被保険者番号,
+            RString 被保険者番号,
             RDateTime 今回開始期間FROM,
             RDateTime 今回開始期間TO,
             RString 新ファイル名,
