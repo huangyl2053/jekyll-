@@ -334,6 +334,7 @@ public class TokuteiNyushoServiceHiShinsei {
     }
 
     private void set申請情報を確定す処理(TokuteiNyushoServiceHiShinseiDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
         ArrayList<TokubetsuChiikiKasanGemmenViewState> viewStateList = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請情報ListのViewState, ArrayList.class);
         if (viewStateList == null) {
             viewStateList = new ArrayList<>();
@@ -355,7 +356,7 @@ public class TokuteiNyushoServiceHiShinsei {
         if (特別地域加算減免申請の情報 != null) {
             証記載保険者番号 = 特別地域加算減免申請の情報.get証記載保険者番号();
             履歴番号 = 特別地域加算減免申請の情報.get履歴番号();
-            RString menuID = ResponseHolder.getMenuID();
+
             boolean 変更あり = getHandler(div).申請情報_変更あり(特別地域加算減免申請の情報, menuID);
             if (変更あり) {
                 state = EntityDataState.Modified;
@@ -389,7 +390,7 @@ public class TokuteiNyushoServiceHiShinsei {
         }
         ArrayList<TokubetsuChiikiKasanGemmenViewState> newViewStateList = new ArrayList<>();
         getHandler(div).申請情報を確定するボタン押下(viewStateList, newViewStateList,
-                state, gemmenGengakuShinsei, builder, 証記載保険者番号, 履歴番号, 資格対象者);
+                state, gemmenGengakuShinsei, builder, 証記載保険者番号, 履歴番号, 資格対象者, menuID);
 
         ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請情報ListのViewState, newViewStateList);
 
@@ -445,6 +446,7 @@ public class TokuteiNyushoServiceHiShinsei {
 
     private void set承認情報を確定する処理(TokuteiNyushoServiceHiShinseiDiv div) {
         ArrayList<TokubetsuChiikiKasanGemmenViewState> viewStateList = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請情報ListのViewState, ArrayList.class);
+        RString menuID = ResponseHolder.getMenuID();
         if (viewStateList == null) {
             viewStateList = new ArrayList<>();
         }
@@ -465,7 +467,6 @@ public class TokuteiNyushoServiceHiShinsei {
         if (特別地域加算減免申請の情報 != null) {
             証記載保険者番号 = 特別地域加算減免申請の情報.get証記載保険者番号();
             履歴番号 = 特別地域加算減免申請の情報.get履歴番号();
-            RString menuID = ResponseHolder.getMenuID();
             boolean 変更あり = getHandler(div).申請情報_変更あり(特別地域加算減免申請の情報, menuID);
             if (変更あり) {
                 state = EntityDataState.Modified;
@@ -499,7 +500,7 @@ public class TokuteiNyushoServiceHiShinsei {
         }
         ArrayList<TokubetsuChiikiKasanGemmenViewState> newViewStateList = new ArrayList<>();
         getHandler(div).承認情報を確定するボタン押下(viewStateList, newViewStateList,
-                state, gemmenGengakuShinsei, builder, 証記載保険者番号, 履歴番号, 資格対象者);
+                state, gemmenGengakuShinsei, builder, 証記載保険者番号, 履歴番号, 資格対象者, menuID);
 
         ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請情報ListのViewState, newViewStateList);
 
