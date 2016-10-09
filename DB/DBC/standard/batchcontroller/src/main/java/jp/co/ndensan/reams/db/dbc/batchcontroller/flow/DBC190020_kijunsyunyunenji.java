@@ -258,6 +258,7 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
         parameter.set処理年度(getParameter().get処理年度());
         parameter.setお知らせ通知書出力フラグ(getParameter().getお知らせ通知書出力フラグ());
         parameter.set一覧表CSV出力フラグ(getParameter().get一覧表CSV出力フラグ());
+        parameter.set申請書出力フラグ(getParameter().get申請書出力フラグ());
         parameter.set作成日(getParameter().get作成日());
         parameter.set世帯員把握基準日(getParameter().get世帯員把握基準日());
         parameter.set世帯員把握基準日2(getParameter().get世帯員把握基準日2());
