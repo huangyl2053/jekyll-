@@ -275,7 +275,9 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         List<dgTaishoshaIchiran_Row> taishoList = div.getDgTaishoshaIchiran().getDataSource();
         List<RString> hihokenshaNoList = new ArrayList<>();
         for (dgTaishoshaIchiran_Row row : taishoList) {
-            hihokenshaNoList.add(row.getHihokenshaNo());
+            if (!row.getSelected()) {
+                hihokenshaNoList.add(row.getHihokenshaNo());
+            }
         }
         return hihokenshaNoList;
     }
