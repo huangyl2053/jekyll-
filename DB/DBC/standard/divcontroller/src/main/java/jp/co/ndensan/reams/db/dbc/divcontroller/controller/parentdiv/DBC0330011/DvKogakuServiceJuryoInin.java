@@ -240,16 +240,14 @@ public class DvKogakuServiceJuryoInin {
         RString state1 = ResponseHolder.getState();
         if (追加.equals(state1)) {
             if ((!ResponseHolder.isReRequest()) && getHandler(div).onClick_btnShuseiBack(state1)) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+                return ResponseData.of(div).addMessage(new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate())).respond();
             }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            if (MessageDialogSelectedResult.No == ResponseHolder.getButtonType()) {
                 return ResponseData.of(div).respond();
             }
         }
-        LockingKey 前排他ロックキー = new LockingKey(div.getDvKyotsuJoho().getCddShikakuKihon().get被保険者番号());
-        RealInitialLocker.release(前排他ロックキー);
+        RealInitialLocker.release(new LockingKey(div.getDvKyotsuJoho().getCddShikakuKihon().get被保険者番号()));
         return ResponseData.of(div).forwardWithEventName(DBC0330011TransitionEventName.対象検索へ戻る).respond();
     }
 
