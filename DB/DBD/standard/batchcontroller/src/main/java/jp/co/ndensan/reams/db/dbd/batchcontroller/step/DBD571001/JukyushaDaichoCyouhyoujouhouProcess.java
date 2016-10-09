@@ -470,7 +470,9 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             要介護認定情報.set喪失日(t.get要介護認定情報().get受給者台帳_喪失年月日());
             要介護認定情報.set資格取得前申請(t.get要介護認定情報().is受給者台帳_資格取得前申請フラグ() ? new RString("取得前申請") : RString.EMPTY);
             要介護認定情報.set延期通知書発行日(t.get要介護認定情報().getT4101_延期通知発行年月日());
-            要介護認定情報.set延期通知書発行回数(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().getT4101_延期通知発行回数(), 0));
+            if (t.get要介護認定情報().getT4101_延期通知発行回数() != null) {
+                要介護認定情報.set延期通知書発行回数(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().getT4101_延期通知発行回数(), 0));
+            }
             要介護認定情報.set資格証明書発行日１(t.get要介護認定情報().get受給者台帳_受給資格証明書発行年月日１());
             要介護認定情報.set資格証明書発行日２(t.get要介護認定情報().get受給者台帳_受給資格証明書発行年月日２());
             要介護認定情報.set申請代行事業者((t.get要介護認定情報().get受給者台帳_届出者申請者関係コード() == null
