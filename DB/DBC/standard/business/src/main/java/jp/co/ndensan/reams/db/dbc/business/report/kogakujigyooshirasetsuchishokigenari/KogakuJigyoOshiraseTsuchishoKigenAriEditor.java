@@ -54,6 +54,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
         }
 
         if (entity.get申請情報帳票発行一時() != null && !entity.is空白()) {
+            source.shikibetsuCode = entity.get申請情報帳票発行一時().getShikibetsuCodeChohyo();
             source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
             source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
             if (entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo() != null) {
@@ -94,7 +95,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
         }
 
         if (entity.get送付別宛先()
-                != null) {
+                != null && !entity.is空白()) {
             source.customerBarCode = entity.get送付別宛先().customerBarCode;
             source.dainoKubunMei = entity.get送付別宛先().dainoKubunMei;
             source.gyoseiku = entity.get送付別宛先().gyoseiku;
