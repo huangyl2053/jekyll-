@@ -38,13 +38,28 @@ public class FutangendogakuShoninMainValidationHandler {
                 .ifNot(FutangendogakuShoninMainDivSpec.作成年度の未入力チェック)
                 .thenAdd(Messagescheck.作成年度の未入力チェック)
                 .ifNot(FutangendogakuShoninMainDivSpec.決定日の未入力チェック)
-                .thenAdd(Messagescheck.決定日の未入力チェック)
-                .ifNot(FutangendogakuShoninMainDivSpec.発行日の未入力チェック)
-                .thenAdd(Messagescheck.発行日の未入力チェック).messages()
+                .thenAdd(Messagescheck.決定日の未入力チェック).messages()
         );
         pairs.add(new ValidationMessageControlDictionaryBuilder()
                 .add(Messagescheck.作成年度の未入力チェック, div.getTxtSakuseiNendo())
-                .add(Messagescheck.決定日の未入力チェック, div.getTxtKetteibi())
+                .add(Messagescheck.決定日の未入力チェック, div.getTxtKetteibi()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 発行日の未入力チェック
+     *
+     * @param pairs バリデーションコントロール
+     * @param div FutangendogakuShoninMainDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor発行日の未入力チェック(ValidationMessageControlPairs pairs, FutangendogakuShoninMainDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(FutangendogakuShoninMainDivSpec.発行日の未入力チェック)
+                .thenAdd(Messagescheck.発行日の未入力チェック).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder()
                 .add(Messagescheck.発行日の未入力チェック, div.getTxtHakkoYMD()).build().check(messages));
         return pairs;
     }
