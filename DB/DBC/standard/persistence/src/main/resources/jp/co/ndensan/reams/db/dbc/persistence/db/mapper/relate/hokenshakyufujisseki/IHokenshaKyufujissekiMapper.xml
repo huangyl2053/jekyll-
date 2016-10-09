@@ -71,12 +71,12 @@
             resultMap="ResultMap_DbWT1131KyufujissekiKihonTempEntity"
             fetchSize="500">
         SELECT
-        "DbWT1131KyufujissekiKihon".*
+        <include refid="allColumns_DbWT1131KyufujissekiKihon" />
         FROM
         (SELECT 
-        <include refid="allColumns_DbWT1131KyufujissekiKihon" />
-        ,COUNT (*) OVER (PARTITION BY "DbWT1131KyufujissekiKihon"."seiriNo", "DbWT1131KyufujissekiKihon"."inputShikibetsuNo", "DbWT1131KyufujissekiKihon"."hiHokenshaNo", "DbWT1131KyufujissekiKihon"."serviceTeikyoYM",
-        "DbWT1131KyufujissekiKihon"."jigyoshoNo") AS cnt) AS "DbWT1131KyufujissekiKihon"
+        "DbWT1131".*
+        ,COUNT (*) OVER (PARTITION BY "DbWT1131"."seiriNo", "DbWT1131"."inputShikibetsuNo", "DbWT1131"."hiHokenshaNo", "DbWT1131"."serviceTeikyoYM",
+        "DbWT1131"."jigyoshoNo") AS cnt FROM "DbWT1131KyufujissekiKihon" AS "DbWT1131") AS "DbWT1131KyufujissekiKihon"
         WHERE
         3 <![CDATA[<=]]> "DbWT1131KyufujissekiKihon".cnt
         ORDER BY
@@ -92,12 +92,12 @@
              resultMap="ResultMap_DbWT1131KyufujissekiKihonTempEntity"
              fetchSize="500">
         SELECT
-        "DbWT1131KyufujissekiKihon".*
+        <include refid="allColumns_DbWT1131KyufujissekiKihon" />
         FROM
         (SELECT 
-        <include refid="allColumns_DbWT1131KyufujissekiKihon" />
-        ,COUNT (*) OVER (PARTITION BY "DbWT1131KyufujissekiKihon"."seiriNo", "DbWT1131KyufujissekiKihon"."inputShikibetsuNo", "DbWT1131KyufujissekiKihon"."hiHokenshaNo", "DbWT1131KyufujissekiKihon"."serviceTeikyoYM",
-        "DbWT1131KyufujissekiKihon"."jigyoshoNo", "DbWT1131KyufujissekiKihon"."shinsaYM") AS cnt) AS "DbWT1131KyufujissekiKihon"
+        "DbWT1131".*
+        ,COUNT (*) OVER (PARTITION BY "DbWT1131"."seiriNo", "DbWT1131"."inputShikibetsuNo", "DbWT1131"."hiHokenshaNo", "DbWT1131"."serviceTeikyoYM",
+        "DbWT1131"."jigyoshoNo", "DbWT1131"."shinsaYM") AS cnt FROM "DbWT1131KyufujissekiKihon" AS "DbWT1131") AS "DbWT1131KyufujissekiKihon"
         WHERE
         2 <![CDATA[<=]]> "DbWT1131KyufujissekiKihon".cnt
         ORDER BY
@@ -113,12 +113,12 @@
             resultMap="ResultMap_DbWT1131KyufujissekiKihonTempEntity"
             fetchSize="500">
         SELECT
-        "DbWT1131KyufujissekiKihon".*
+        <include refid="allColumns_DbWT1131KyufujissekiKihon" />
         FROM
         (SELECT 
-        <include refid="allColumns_DbWT1131KyufujissekiKihon" />
-        ,COUNT (*) OVER (PARTITION BY "DbWT1131KyufujissekiKihon"."seiriNo", "DbWT1131KyufujissekiKihon"."inputShikibetsuNo", "DbWT1131KyufujissekiKihon"."hiHokenshaNo", "DbWT1131KyufujissekiKihon"."serviceTeikyoYM",
-        "DbWT1131KyufujissekiKihon"."jigyoshoNo") AS cnt) AS "DbWT1131KyufujissekiKihon"
+        "DbWT1131".*
+        ,COUNT (*) OVER (PARTITION BY "DbWT1131"."seiriNo", "DbWT1131"."inputShikibetsuNo", "DbWT1131"."hiHokenshaNo", "DbWT1131"."serviceTeikyoYM",
+        "DbWT1131"."jigyoshoNo") AS cnt FROM "DbWT1131KyufujissekiKihon" AS "DbWT1131") AS "DbWT1131KyufujissekiKihon"
         WHERE
         "DbWT1131KyufujissekiKihon".cnt = 2
         ORDER BY
@@ -134,11 +134,12 @@
             resultMap="ResultMap_DbWT1132KyufujissekiKogakuKaigoServicehiTempEntity"
             fetchSize="500">
         SELECT
-        "DbWT1132KyufujissekiKogakuKaigoServicehi".*
+        <include refid="allColumns_DbWT1132KyufujissekiKogakuKaigoServicehi" />
         FROM
         (SELECT 
-        <include refid="allColumns_DbWT1132KyufujissekiKogakuKaigoServicehi" />
-        ,COUNT (*) OVER (PARTITION BY "DbWT1132KyufujissekiKogakuKaigoServicehi"."kanriNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."hiHokenshaNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM") AS cnt) AS "DbWT1132KyufujissekiKogakuKaigoServicehi"
+        "DbWT1132".*
+        ,COUNT (*) OVER (PARTITION BY "DbWT1132"."kanriNo", "DbWT1132"."inputShikibetsuNo", "DbWT1132"."hiHokenshaNo",
+            "DbWT1132"."serviceTeikyoYM") AS cnt FROM "DbWT1132KyufujissekiKogakuKaigoServicehi" AS "DbWT1132") AS "DbWT1132KyufujissekiKogakuKaigoServicehi"
         WHERE
         3 <![CDATA[<=]]> "DbWT1132KyufujissekiKogakuKaigoServicehi".cnt
         ORDER BY
@@ -153,12 +154,12 @@
             resultMap="ResultMap_DbWT1132KyufujissekiKogakuKaigoServicehiTempEntity"
             fetchSize="500">
         SELECT
-        "DbWT1132KyufujissekiKogakuKaigoServicehi".*
+        <include refid="allColumns_DbWT1132KyufujissekiKogakuKaigoServicehi" />
         FROM
         (SELECT 
-        <include refid="allColumns_DbWT1132KyufujissekiKogakuKaigoServicehi" />
-        ,COUNT (*) OVER (PARTITION BY "DbWT1132KyufujissekiKogakuKaigoServicehi"."kanriNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."hiHokenshaNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM"
-        , "DbWT1132KyufujissekiKogakuKaigoServicehi"."shinsaYM") AS cnt) AS "DbWT1132KyufujissekiKogakuKaigoServicehi"
+        "DbWT1132".*
+        ,COUNT (*) OVER (PARTITION BY "DbWT1132"."kanriNo", "DbWT1132"."inputShikibetsuNo", "DbWT1132"."hiHokenshaNo", "DbWT1132"."serviceTeikyoYM"
+        , "DbWT1132"."shinsaYM") AS cnt FROM "DbWT1132KyufujissekiKogakuKaigoServicehi" AS "DbWT1132") AS "DbWT1132KyufujissekiKogakuKaigoServicehi"
         WHERE
         2 <![CDATA[<=]]> "DbWT1132KyufujissekiKogakuKaigoServicehi".cnt
         ORDER BY
@@ -173,11 +174,12 @@
             resultMap="ResultMap_DbWT1132KyufujissekiKogakuKaigoServicehiTempEntity"
             fetchSize="500">
         SELECT
-        "DbWT1132KyufujissekiKogakuKaigoServicehi".*
+        <include refid="allColumns_DbWT1132KyufujissekiKogakuKaigoServicehi" />
         FROM
         (SELECT 
-        <include refid="allColumns_DbWT1132KyufujissekiKogakuKaigoServicehi" />
-        ,COUNT (*) OVER (PARTITION BY "DbWT1132KyufujissekiKogakuKaigoServicehi"."kanriNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."hiHokenshaNo", "DbWT1132KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM") AS cnt) AS "DbWT1132KyufujissekiKogakuKaigoServicehi"
+        "DbWT1132".*
+        ,COUNT (*) OVER (PARTITION BY "DbWT1132"."kanriNo", "DbWT1132"."inputShikibetsuNo", "DbWT1132"."hiHokenshaNo",
+        "DbWT1132"."serviceTeikyoYM") AS cnt FROM "DbWT1132KyufujissekiKogakuKaigoServicehi" AS "DbWT1132") AS "DbWT1132KyufujissekiKogakuKaigoServicehi"
         WHERE
         "DbWT1132KyufujissekiKogakuKaigoServicehi".cnt = 2
         ORDER BY
