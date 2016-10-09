@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
- * 受給者Temp
+ * 受給者Tempのクラスです。
  *
  * @reamsid_L DBB-1720-050 lijunjun
  */
@@ -28,12 +28,12 @@ public class JukyuusyaTempEntity implements IDbAccessable, Serializable {
     @TempTableColumnOrder(2)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(3)
-    private FlexibleDate jushochiTokureiFlag;
+    private RString jushochiTokureiFlag;
     @TempTableColumnOrder(4)
     private FlexibleDate jushochitokureiTekiyoYMD;
     @TempTableColumnOrder(5)
-    private RString jushochitokureiKaijoYMD;
+    private FlexibleDate jushochitokureiKaijoYMD;
     @TempTableColumnOrder(6)
-    private FlexibleDate hihokennshaKubunCode;
+    private RString hihokennshaKubunCode;
 
 }

@@ -13,6 +13,13 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyuf
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanKogakuTmpProcess7Entity;
@@ -30,6 +37,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 
 /**
@@ -485,26 +493,30 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     /**
      * insert高額介護サービス費支給申請メソッドです。
      *
+     * @return 高額介護サービス費支給申請 DbT3056KogakuShikyuShinseiEntity
      */
-    void insert高額介護サービス費支給申請();
+    List<DbT3056KogakuShikyuShinseiEntity> get高額介護サービス費支給申請();
 
     /**
      * insert高額介護サービス費支給判定結果メソッドです。
      *
+     * @return 高額介護サービス費支給判定結果 DbT3057KogakuShikyuHanteiKekkaEntity
      */
-    void insert高額介護サービス費支給判定結果();
+    List<DbT3057KogakuShikyuHanteiKekkaEntity> get高額介護サービス費支給判定結果();
 
     /**
      * insert高額介護サービス費支給審査決定メソッドです。
      *
+     * @return 高額介護サービス費支給審査決定 DbT3058KogakuShikyuShinsaKetteiEntity
      */
-    void insert高額介護サービス費支給審査決定();
+    List<DbT3058KogakuShikyuShinsaKetteiEntity> get高額介護サービス費支給審査決定();
 
     /**
      * insert高額介護サービス費支給審査決定メソッドです。
      *
+     * @return 高額介護サービス費給付対象者合計 DbT3055KogakuKyufuTaishoshaGokeiEntity
      */
-    void insert高額介護サービス費給付対象者合計();
+    List<DbT3055KogakuKyufuTaishoshaGokeiEntity> get高額介護サービス費給付対象者合計();
 
     /**
      * update高額介護サービス費給付対象者合計メソッドです。
@@ -521,26 +533,30 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     /**
      * insert事業高額介護サービス費支給申請メソッドです。
      *
+     * @return 事業高額介護サービス費支給申請 DbT3110JigyoKogakuShikyuShinseiEntity
      */
-    void insert事業高額介護サービス費支給申請();
+    List<DbT3110JigyoKogakuShikyuShinseiEntity> get事業高額介護サービス費支給申請();
 
     /**
      * insert事業高額介護サービス費支給判定結果メソッドです。
      *
+     * @return 事業高額介護サービス費支給判定結果 DbT3111JigyoKogakuShikyuHanteiKekkaEntity
      */
-    void insert事業高額介護サービス費支給判定結果();
+    List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> get事業高額介護サービス費支給判定結果();
 
     /**
      * insert事業高額介護サービス費支給審査決定メソッドです。
      *
+     * @return 事業高額介護サービス費支給審査決定 DbT3112KogakuShikyuShinsaKetteiEntity
      */
-    void insert事業高額介護サービス費支給審査決定();
+    List<DbT3112KogakuShikyuShinsaKetteiEntity> get事業高額介護サービス費支給審査決定();
 
     /**
      * insert事業高額介護サービス費給付対象者合計メソッドです。
      *
+     * @return 事業高額介護サービス費給付対象者合計 DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity
      */
-    void insert事業高額介護サービス費給付対象者合計();
+    List<DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity> get事業高額介護サービス費給付対象者合計();
 
     /**
      * update事業高額介護サービス費給付対象者合計メソッドです。

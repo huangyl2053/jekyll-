@@ -190,13 +190,12 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
 
     private void set生年月日(ShotokushokaihyoHakkoIchiranSource source) {
         RString 住民種別コード = 所得照会票発行一覧.getJuminShubetsuCode();
-        if (住民種別コード.equals(外国人)
-                || 住民種別コード.equals(住登外外国人)) {
-            source.listUpper_4 = 所得照会票発行一覧.getSeinengappiYMD().seireki().toDateString();
-        }
-        if (住民種別コード.equals(日本人)
-                || 住民種別コード.equals(住登外日本人)) {
-            source.listUpper_4 = 所得照会票発行一覧.getSeinengappiYMD().wareki().toDateString();
+        if (所得照会票発行一覧.getSeinengappiYMD() != null && 住民種別コード != null) {
+            if (外国人.equals(住民種別コード) || 住登外外国人.equals(住民種別コード)) {
+                source.listUpper_4 = 所得照会票発行一覧.getSeinengappiYMD().seireki().toDateString();
+            } else if (日本人.equals(住民種別コード) || 住登外日本人.equals(住民種別コード)) {
+                source.listUpper_4 = 所得照会票発行一覧.getSeinengappiYMD().wareki().toDateString();
+            }
         }
     }
 
@@ -266,8 +265,8 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private boolean is広域() {
         RString 市町村コード = RString.EMPTY;
         RString 構成市町村情報_市町村コード = RString.EMPTY;
-        if (所得照会票発行一覧.getShokaisakiLasdecCode() != null) {
-            市町村コード = new RString(所得照会票発行一覧.getShokaisakiLasdecCode().toString().substring(NUM_0, NUM_5));
+        if (所得照会票発行一覧.getZenkokuJushoCode() != null) {
+            市町村コード = new RString(所得照会票発行一覧.getZenkokuJushoCode().toString().substring(NUM_0, NUM_5));
         }
         List<RString> 市町村コードリスト = new ArrayList<>();
         for (KoikiZenShichosonJoho 構成市町村情報 : 構成市町村情報リスト) {
@@ -281,41 +280,41 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     }
 
     private boolean is２号住特(RString 候補者区分, RString 被保険者区分コード) {
-        return 候補者区分.equals(候補者区分_住特者) && 被保険者区分コード.equals(被保険者区分コード_NUM2);
+        return 候補者区分_住特者.equals(候補者区分) && 被保険者区分コード_NUM2.equals(被保険者区分コード);
     }
 
     private boolean is１号住特(RString 候補者区分, RString 被保険者区分コード) {
-        return 候補者区分.equals(候補者区分_住特者) && 被保険者区分コード.equals(被保険者区分コード_NUM1);
+        return 候補者区分_住特者.equals(候補者区分) && 被保険者区分コード_NUM1.equals(被保険者区分コード);
     }
 
     private boolean is世帯員予(RString 候補者区分,
             RString 本人区分, RString 被保険者区分コード) {
-        return 候補者区分.equals(候補者区分_転入者) && 本人区分.equals(世帯員)
-                && 被保険者区分コード.equals(被保険者区分コード_EMPTY);
+        return 候補者区分_転入者.equals(候補者区分) && 世帯員.equals(本人区分)
+                && 被保険者区分コード_EMPTY.equals(被保険者区分コード);
     }
 
     private boolean is世帯員(RString 候補者区分,
             RString 本人区分, RString 被保険者区分コード) {
-        return 候補者区分.equals(候補者区分_転入者) && 本人区分.equals(世帯員)
-                && 被保険者区分コード.equals(被保険者区分コード_NUM1);
+        return 候補者区分_転入者.equals(候補者区分) && 世帯員.equals(本人区分)
+                && 被保険者区分コード_NUM1.equals(被保険者区分コード);
     }
 
     private boolean is２号(RString 候補者区分,
             RString 本人区分, RString 被保険者区分コード) {
-        return 候補者区分.equals(候補者区分_転入者) && 本人区分.equals(本人)
-                && 被保険者区分コード.equals(被保険者区分コード_NUM2);
+        return 候補者区分_転入者.equals(候補者区分) && 本人.equals(本人区分)
+                && 被保険者区分コード_NUM2.equals(被保険者区分コード);
     }
 
     private boolean is１号予(RString 候補者区分,
             RString 本人区分, RString 被保険者区分コード) {
-        return 候補者区分.equals(候補者区分_転入者) && 本人区分.equals(本人)
-                && 被保険者区分コード.equals(被保険者区分コード_EMPTY);
+        return 候補者区分_転入者.equals(候補者区分) && 本人.equals(本人区分)
+                && 被保険者区分コード_EMPTY.equals(被保険者区分コード);
     }
 
     private boolean is１号(RString 候補者区分,
             RString 本人区分, RString 被保険者区分コード) {
-        return 候補者区分.equals(候補者区分_転入者) && 本人区分.equals(本人)
-                && 被保険者区分コード.equals(被保険者区分コード_NUM1);
+        return 候補者区分_転入者.equals(候補者区分) && 本人.equals(本人区分)
+                && 被保険者区分コード_NUM1.equals(被保険者区分コード);
     }
 
 }

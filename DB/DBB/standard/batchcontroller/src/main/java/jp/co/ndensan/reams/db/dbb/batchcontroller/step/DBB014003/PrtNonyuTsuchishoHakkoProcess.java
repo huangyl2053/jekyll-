@@ -440,7 +440,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
 
     private void 保険料納入通知書発行(
             FuchoKariTsuchishoIkkatsuHakkoTempEntity entity, FukaJohoRelateEntity fukaJohoRelateEntity) {
-        Long shunoId = new Long(entity.get賦課情報().getShunoId());
+        Long shunoId = Long.valueOf(entity.get賦課情報().getShunoId());
         市町村コード = 導入団体クラス.get地方公共団体コード();
         市町村名 = 導入団体クラス.get市町村名();
         List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
@@ -498,15 +498,13 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             総ページ数 = スプール.get(String.valueOf(0)).pageCount().value();
         }
         if (帳票制御共通.is代行プリント有無()) {
-//            代行プリント送付票の出力(processParameter.get調定年度(), processParameter.get賦課年度(), processParameter.get対象者(),
-//                    processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
-//                    processParameter.getページごとに山分け(), 市町村コード, 市町村名, 総ページ数);
+            代行プリント送付票の出力(processParameter.get調定年度(), processParameter.get賦課年度(), processParameter.get対象者(),
+                    processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
+                    processParameter.getページごとに山分け(), 市町村コード, 市町村名, 総ページ数);
         }
-//        バッチ出力条件リストの出力(processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
-//                processParameter.getページごとに山分け(), 市町村コード, 市町村名, new RString(総ページ数));
+        バッチ出力条件リストの出力(processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
+                processParameter.getページごとに山分け(), 市町村コード, 市町村名, new RString(総ページ数));
 
-//        batchReportWriter.close();
-//        csvListWriter.close();
         manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         close納入通知書();
     }
@@ -915,7 +913,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             UrT0705ChoteiKyotsuEntity choteiKyotsuEntity = new UrT0705ChoteiKyotsuEntity();
             choteiKyotsuEntity.setChoteiId(賦課情報.getChoteiId().longValue());
             choteiKyotsuEntity.setChoteigaku(賦課情報.getChoteigaku());
-            choteiKyotsuEntity.setShunoId(new Long(賦課情報.getShunoId()));
+            choteiKyotsuEntity.setShunoId(Long.valueOf(賦課情報.getShunoId()));
             choteiKyotsuEntityList.add(choteiKyotsuEntity);
             介護期別Relate.set調定共通Entity(choteiKyotsuEntityList);
             kibetsuEntityList.add(介護期別Relate);

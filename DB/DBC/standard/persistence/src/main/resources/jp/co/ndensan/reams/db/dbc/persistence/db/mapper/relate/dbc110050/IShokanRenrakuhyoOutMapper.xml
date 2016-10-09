@@ -45,6 +45,10 @@
                  AND 判定結果."ketteiYMD" <![CDATA[<>]]> ''
                  AND 判定結果."ketteiYMD" IS NOT NULL)
         </if>
+        ORDER BY
+            dbt3034."hiHokenshaNo" ASC,
+            dbt3034."serviceTeikyoYM" ASC,
+            dbt3034."seiriNo" ASC
     </select>
     
     <select resultOrdered="true" id="get被保険者がないのデータ"
