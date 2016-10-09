@@ -141,7 +141,8 @@ public class IryouhiKoujyoHandler {
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().setValue(主治医意見書作成日);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().setValue(認定期間_開始日);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD().setValue(認定期間_終了日);
-        div.getIryohiKojyoSyosai().getSyosaiPanel2().getNitijyoSekatuJiritudo().setSelectedKey(日常生活自立度);
+        div.getIryohiKojyoSyosai().getSyosaiPanel2().getNitijyoSekatuJiritudo().setSelectedKey(
+                日常生活自立度.isNullOrEmpty() ? NichijoSeikatsuJiritsudo.その他.getコード() : 日常生活自立度);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNyosikin().setSelectedKey(尿失禁の有無);
     }
 
@@ -328,11 +329,11 @@ public class IryouhiKoujyoHandler {
             RDate 認定期間_終了日 = div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD().getValue();
             RString 日常生活自立度 = div.getIryohiKojyoSyosai().getSyosaiPanel2().getNitijyoSekatuJiritudo().getSelectedKey();
             RString 尿失禁の有無 = div.getIryohiKojyoSyosai().getSyosaiPanel2().getNyosikin().getSelectedKey();
-            row.setIkensyoSakuseDD(主治医意見書作成日.wareki().toDateString());
+            row.setIkensyoSakuseDD(主治医意見書作成日 != null ? 主治医意見書作成日.wareki().toDateString() : RString.EMPTY);
             row.getHiddenikensyoSakuseDD().setValue(主治医意見書作成日);
-            row.setNinteFromDD(認定期間_開始日.wareki().toDateString());
+            row.setNinteFromDD(認定期間_開始日 != null ? 認定期間_開始日.wareki().toDateString() : RString.EMPTY);
             row.getHiddenninteFromDD().setValue(認定期間_開始日);
-            row.setNinteEndDD(認定期間_終了日.wareki().toDateString());
+            row.setNinteEndDD(認定期間_終了日 != null ? 認定期間_終了日.wareki().toDateString() : RString.EMPTY);
             row.getHiddenninteEndDD().setValue(認定期間_終了日);
             row.setNitijyoSekatuJiritudo(日常生活自立度.equals(NichijoSeikatsuJiritsudo.その他.getコード())
                     ? RString.EMPTY : NichijoSeikatsuJiritsudo.toValue(日常生活自立度).get名称());
