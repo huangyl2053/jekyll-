@@ -176,7 +176,7 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
         }
         parameter.set自市町村コード(地方公共団体.get地方公共団体コード().value());
         キー項目List = new ArrayList<>();
-        自市町村コード = 地方公共団体.get地方公共団体コード().code市町村RString();
+        自市町村コード = 地方公共団体.get地方公共団体コード().value();
         自市町村名 = 地方公共団体.get市町村名();
     }
 
@@ -242,11 +242,11 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             帳票用データ.set決定_支払方法区分(entity.getKettei_shiharaiHohoKubun());
             帳票用データ.set決定_支給区分コード(entity.getKettei_shikyuKubun());
             帳票用データ.set識別コード(entity.getShikibetsuCode());
-            帳票用データ.set金融機関コード(自市町村コード);
-            帳票用データ.set金融機関支店コード(自市町村コード);
+            帳票用データ.set金融機関コード(entity.getKinyukikanCode() == null ? RString.EMPTY : entity.getKinyukikanCode().value());
+            帳票用データ.set金融機関支店コード(entity.getKinyuKikanShitenCode() == null ? RString.EMPTY : entity.getKinyuKikanShitenCode().value());
             帳票用データ.setGyoseiCode(entity.getGyoseiCode());
             帳票用データ.setJushoCode(entity.getJushoCode());
-            帳票用データ.setShichosonCode(entity.getShichosonCode() == null ? RString.EMPTY : entity.getShichosonCode().code市町村RString());
+            帳票用データ.setShichosonCode(entity.getShichosonCode() == null ? RString.EMPTY : entity.getShichosonCode().value());
             帳票用データ.setTaishoNendo(entity.getTaishoNendo().toDateString());
             帳票用データ.setYubinNo(entity.getYubinNo() == null ? RString.EMPTY : entity.getYubinNo().value());
             帳票用データ.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo().getColumnValue());
