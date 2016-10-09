@@ -169,8 +169,7 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(taishoNendo, 対象年度),
                                 eq(hokenshaNo, 保険者番号),
-                                eq(shikyuSeiriNo, 支給申請書整理番号),
-                                eq(isDeleted, false))).
+                                eq(shikyuSeiriNo, 支給申請書整理番号))).
                 order(by(shikyuSeiriNo, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT3074KogakuGassanShikyuFushikyuKetteiEntity.class);
     }
