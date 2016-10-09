@@ -261,6 +261,16 @@ public class IryouhiKoujyoHandler {
         RealInitialLocker.release(new LockingKey(DB.concat(被保険者番号.value()).concat(医療費控除登録)));
     }
 
+    /**
+     * 「クリアする」ボタンクリックイベント。
+     *
+     * @param 医療費控除リスト 医療費控除リスト
+     */
+    public void onClick_ClearButton(List<IryohiKojoEntityResult> 医療費控除リスト) {
+        initGrid(医療費控除リスト);
+        init詳細エリア();
+    }
+
     private void initGrid(List<IryohiKojoEntityResult> 医療費控除リスト) {
         List<IryohiKojyoItiranDataGrid_Row> dataSource = new ArrayList<>();
         for (IryohiKojoEntityResult entity : 医療費控除リスト) {

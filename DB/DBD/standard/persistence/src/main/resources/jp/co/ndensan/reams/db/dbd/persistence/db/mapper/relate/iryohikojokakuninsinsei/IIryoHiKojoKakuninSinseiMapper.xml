@@ -6,7 +6,7 @@
     <select resultOrdered="true" id="受給者台帳抽出"
             resultType="Integer" fetchSize="500">
         SELECT
-        COUNT(DbV4001JukyushaDaicho."dbV4001JukyushaDaicho_hihokenshaNo")
+        COUNT(DbV4001JukyushaDaicho."hihokenshaNo")
         FROM
         rgdb."DbV4001JukyushaDaicho" AS DbV4001JukyushaDaicho
         WHERE

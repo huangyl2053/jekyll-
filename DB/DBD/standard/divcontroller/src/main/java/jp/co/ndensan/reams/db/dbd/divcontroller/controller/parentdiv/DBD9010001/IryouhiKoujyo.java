@@ -207,7 +207,8 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_ClearButton(IryouhiKoujyoDiv div) {
-        getHandler(div).init詳細エリア();
+        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        getHandler(div).onClick_ClearButton(医療費控除リスト);
         return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
     }
 
