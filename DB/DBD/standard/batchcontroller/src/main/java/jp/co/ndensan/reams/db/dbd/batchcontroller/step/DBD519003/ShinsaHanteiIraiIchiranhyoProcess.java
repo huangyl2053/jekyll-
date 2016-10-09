@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5190003.RenkeiDataShu
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,12 +38,8 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
             + ".db.mapper.relate.shikakusoushitsudata.IShikakuSoushitsuDataMapper.getShikakuSoshitsuEntity");
     private RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter para;
     private static final ReportId REPORT_DBD503001 = ReportIdDBD.DBD503001.getReportId();
-    private static final RString 今回開始日時 = new RString("【今回開始日時】");
-    private static final RString 今回終了日時 = new RString("【今回終了日時】");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private int 连番;
     private static final int 连番_INITIALIZE = 1;
-    private static final int 先頭9桁 = 9;
     private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
     private ShinsaHanteiIraiIchiranhyoCsvProcessCore core;
 
@@ -73,6 +71,7 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
     protected void process(ChohyoShuchiryokuyoShiseiJyohoEntity entity) {
         entity.setIndex(连番);
         entity.set出力CSV状況申請(RString.EMPTY);
+        entity.set認定申請区分_申請時コード(new Code(NinteiShinseiKubunShinsei.資格喪失_死亡.toString()));
         ShinsaHanteiIraiIchiranhyoReport report = new ShinsaHanteiIraiIchiranhyoReport(entity);
         report.writeBy(reportSourceWriter);
         连番++;
