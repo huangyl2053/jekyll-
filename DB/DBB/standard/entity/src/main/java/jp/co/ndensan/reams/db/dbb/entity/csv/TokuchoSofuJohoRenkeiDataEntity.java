@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.csv;
 
+import jp.co.ndensan.reams.uz.uza.io.fld.Align;
 import jp.co.ndensan.reams.uz.uza.io.fld.FldField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -48,7 +49,7 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ氏名カナ;
     @FldField(order = 29, length = 3)
     private RString データ氏名シフトコード1;
-    @FldField(order = 30, length = 50)
+    @FldField(order = 30, length = 50, align = Align.Right, paddingChar = "　")
     private RString データ氏名漢字1;
     @FldField(order = 31, length = 3)
     private RString データ氏名シフトコード2;
@@ -58,7 +59,7 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ住所カナ;
     @FldField(order = 34, length = 3)
     private RString データ住所シフトコード3;
-    @FldField(order = 35, length = 160)
+    @FldField(order = 35, length = 160, align = Align.Right, paddingChar = "　")
     private RString データ住所漢字2;
     @FldField(order = 36, length = 3)
     private RString データ住所シフトコード4;
@@ -70,11 +71,11 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ後期移管コード;
     @FldField(order = 40, length = 8)
     private RString データ各種年月日;
-    @FldField(order = 41, length = 11)
+    @FldField(order = 41, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額1;
-    @FldField(order = 42, length = 11)
+    @FldField(order = 42, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額2;
-    @FldField(order = 43, length = 11)
+    @FldField(order = 43, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額3;
     @FldField(order = 44, length = 58)
     private RString データ予備3;
