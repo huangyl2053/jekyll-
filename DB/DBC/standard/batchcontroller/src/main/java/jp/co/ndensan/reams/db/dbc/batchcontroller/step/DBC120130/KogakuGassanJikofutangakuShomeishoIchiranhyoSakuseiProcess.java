@@ -68,7 +68,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
     private KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter parameter;
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200034");
-    private List<PersonalData> personalDataList = new ArrayList<>();
+    private List<PersonalData> personalDataList;
     private BatchReportWriter<GassanJikofutangakuShomeishoTorikomiIchiranSource> batchReportWriter;
     private ReportSourceWriter<GassanJikofutangakuShomeishoTorikomiIchiranSource> reportSourceWriter;
     private FileSpoolManager manager;
@@ -87,28 +87,26 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
     private int 連番_NO = 0;
     private static final RString CODE = new RString("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");
-    private static final RString 保険者番号
-            = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-    private static final RString 保険者名称
-            = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+    private RString 保険者番号;
+    private RString 保険者名称;
     private KogakuGassanJikofutangakuShomeiService service;
 
     private static final RString 出力ファイル名
             = new RString("DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順
-            = new RString(" ORDER BY \"DbWT37H1\".\"hokenshaNoIn\" ASC ,\"DbWT37H1\".\"jikoFutangakuSaiFlag\" DESC");
     private static final RString コンマ = new RString(",");
-    private static final RString 固定改頁項目ID = new RString("0103");
 
     @Override
     protected void initialize() {
+        保険者番号
+                = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        保険者名称
+                = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         service = KogakuGassanJikofutangakuShomeiService.createInstance();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         識別コードset = new HashSet<>();
         改頁項目リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
-        改頁リスト.add(固定改頁項目ID);
         並び順 = get並び順();
 
         if (null == 並び順) {
@@ -230,17 +228,6 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
     private RString get出力順() {
         RString syuturyokuJun = MyBatisOrderByClauseCreator
                 .create(KogakuGassanJikofutangakuShomeiOutputOrder.class, 並び順);
-        if (RString.isNullOrEmpty(syuturyokuJun)) {
-            syuturyokuJun = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = syuturyokuJun.split(コンマ.toString());
-            syuturyokuJun = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    syuturyokuJun = syuturyokuJun.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
         return syuturyokuJun;
     }
 

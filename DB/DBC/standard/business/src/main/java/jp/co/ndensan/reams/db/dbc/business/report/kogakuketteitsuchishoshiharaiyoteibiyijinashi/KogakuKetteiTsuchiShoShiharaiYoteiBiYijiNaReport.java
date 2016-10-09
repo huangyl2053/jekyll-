@@ -27,6 +27,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport extends Report<Kog
     private final List<RString> 通知書定型文List;
     private final NinshoshaSource 認証者ソースデータ;
     private final ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private final RString 金融機関コード;
 
     /**
      * コンストラクタです。
@@ -37,6 +38,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport extends Report<Kog
      * @param 通知書定型文List List<RString>
      * @param 認証者ソースデータ NinshoshaSource
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
+     * @param 金融機関コード RString
      */
     public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報,
@@ -44,19 +46,22 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport extends Report<Kog
             List<RString> titleList,
             List<RString> 通知書定型文List,
             NinshoshaSource 認証者ソースデータ,
-            ChohyoSeigyoKyotsu 帳票制御共通情報) {
+            ChohyoSeigyoKyotsu 帳票制御共通情報,
+            RString 金融機関コード) {
         this.帳票情報 = 帳票情報;
         this.連番 = 連番;
         this.titleList = titleList;
         this.通知書定型文List = 通知書定型文List;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.帳票制御共通情報 = 帳票制御共通情報;
+        this.金融機関コード = 金融機関コード;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> writer) {
         IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor editor
-                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor(帳票情報, 連番, titleList, 通知書定型文List, 認証者ソースデータ, 帳票制御共通情報);
+                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor(
+                        帳票情報, 連番, titleList, 通知書定型文List, 認証者ソースデータ, 帳票制御共通情報, 金融機関コード);
         IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaBuilder builder = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaBuilder(editor);
         writer.writeLine(builder);
     }

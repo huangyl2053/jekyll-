@@ -45,6 +45,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
      * @param 通知書定型文List List<RString>
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      * @param titleList List<RString>
+     * @param 金融機関コード RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -54,10 +55,12 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
             Ninshosha 認証者,
             List<RString> 通知書定型文List,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
-            List<RString> titleList) {
+            List<RString> titleList,
+            RString 金融機関コード) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 連番, 発行日, 認証者, 通知書定型文List, 帳票制御共通情報, titleList, reportManager);
+            print(帳票情報, 連番, 発行日, 認証者, 通知書定型文List, 帳票制御共通情報, titleList, 金融機関コード, reportManager
+            );
             collection = reportManager.publish();
         }
         return collection;
@@ -73,6 +76,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
      * @param 通知書定型文List List<RString>
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      * @param titleList List<RString>
+     * @param 金融機関コード RString
      * @param reportManage ReportManager
      */
     public void print(
@@ -83,6 +87,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
             List<RString> 通知書定型文List,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
             List<RString> titleList,
+            RString 金融機関コード,
             ReportManager reportManage) {
         KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty property = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty();
         try (ReportAssembler<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> assembler = createAssembler(property, reportManage)) {
@@ -101,7 +106,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
                     titleList,
                     通知書定型文List,
                     認証者ソースデータ,
-                    帳票制御共通情報).writeBy(reportSourceWriter);
+                    帳票制御共通情報,
+                    金融機関コード).writeBy(reportSourceWriter);
         }
     }
 
