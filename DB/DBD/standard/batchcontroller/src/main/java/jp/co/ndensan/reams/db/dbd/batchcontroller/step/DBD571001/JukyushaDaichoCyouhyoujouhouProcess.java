@@ -630,9 +630,18 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             負担限度額認定情報.set決定年月日(t.get負担限度額認定情報List().get負担限度額_決定年月日());
             負担限度額認定情報.set適用年月日(t.get負担限度額認定情報List().get負担限度額_適用開始年月日());
             負担限度額認定情報.set有効期限(t.get負担限度額認定情報List().get負担限度額_適用終了年月日());
-            負担限度額認定情報.set負担段階(RiyoshaFutanDankai.toValue(t.get負担限度額認定情報List().get負担限度額_利用者負担段階()).get名称());
-            負担限度額認定情報.set旧措置(KyuSochishaKubun.toValue(t.get負担限度額認定情報List().get負担限度額_旧措置者区分()).get名称());
-            負担限度額認定情報.set居室種別(KyoshitsuShubetsu.toValue(t.get負担限度額認定情報List().get負担限度額_居室種別()).get名称());
+            if (t.get負担限度額認定情報List().get負担限度額_利用者負担段階() != null
+                    && !t.get負担限度額認定情報List().get負担限度額_利用者負担段階().isEmpty()) {
+                負担限度額認定情報.set負担段階(RiyoshaFutanDankai.toValue(t.get負担限度額認定情報List().get負担限度額_利用者負担段階()).get名称());
+            }
+            if (t.get負担限度額認定情報List().get負担限度額_旧措置者区分() != null
+                    && !t.get負担限度額認定情報List().get負担限度額_旧措置者区分().isEmpty()) {
+                負担限度額認定情報.set旧措置(KyuSochishaKubun.toValue(t.get負担限度額認定情報List().get負担限度額_旧措置者区分()).get名称());
+            }
+            if (t.get負担限度額認定情報List().get負担限度額_居室種別() != null
+                    && !t.get負担限度額認定情報List().get負担限度額_居室種別().isEmpty()) {
+                負担限度額認定情報.set居室種別(KyoshitsuShubetsu.toValue(t.get負担限度額認定情報List().get負担限度額_居室種別()).get名称());
+            }
             負担限度額認定情報.set食費(t.get負担限度額認定情報List().get負担限度額_食費負担限度額());
             負担限度額認定情報.setユ個(t.get負担限度額認定情報List().get負担限度額_ユニット型個室());
             負担限度額認定情報.setユ準(t.get負担限度額認定情報List().get負担限度額_ユニット型準個室());
@@ -687,8 +696,13 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             訪問介護等減額情報.set減免決定日(t.get訪問介護等減額情報List().get訪問介護等減額_決定年月日());
             訪問介護等減額情報.set減免開始日(t.get訪問介護等減額情報List().get訪問介護等減額_適用開始年月日());
             訪問介護等減額情報.set減免終了日(t.get訪問介護等減額情報List().get訪問介護等減額_適用終了年月日());
-            訪問介護等減額情報.set給付率(new RString(String.valueOf(t.get訪問介護等減額情報List().get訪問介護等減額_給付率().value())));
-            訪問介護等減額情報.set法別(HobetsuKubun.toValue(t.get訪問介護等減額情報List().get訪問介護等減額_法別区分()));
+            if (t.get訪問介護等減額情報List().get訪問介護等減額_給付率() != null) {
+                訪問介護等減額情報.set給付率(new RString(String.valueOf(t.get訪問介護等減額情報List().get訪問介護等減額_給付率().value())));
+            }
+            if (t.get訪問介護等減額情報List().get訪問介護等減額_法別区分() != null
+                    && !t.get訪問介護等減額情報List().get訪問介護等減額_法別区分().isEmpty()) {
+                訪問介護等減額情報.set法別(HobetsuKubun.toValue(t.get訪問介護等減額情報List().get訪問介護等減額_法別区分()));
+            }
             訪問介護等減額情報.set受給者番号(t.get訪問介護等減額情報List().get訪問介護等減額_公費受給者番号());
             訪問介護等減額情報EntityList.add(訪問介護等減額情報);
         }
@@ -750,14 +764,20 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             } else if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_3)) {
                 居宅計画届出情報.set区分(new RString("暫定"));
             }
-            居宅計画届出情報.set作成(t.get居宅計画届出List().get居宅計画届出_作成区分コード().equals(区分_3) ? new RString("自己作成") : RString.EMPTY);
+            if (t.get居宅計画届出List().get居宅計画届出_作成区分コード() != null
+                    && !t.get居宅計画届出List().get居宅計画届出_作成区分コード().isEmpty()) {
+                居宅計画届出情報.set作成(t.get居宅計画届出List().get居宅計画届出_作成区分コード().equals(区分_3) ? new RString("自己作成") : RString.EMPTY);
+            }
             居宅計画届出情報.set計画届出日(t.get居宅計画届出List().get居宅計画届出_届出年月日());
             居宅計画届出情報.set変更日(t.get居宅計画届出List().get居宅計画届出_計画変更年月日());
             居宅計画届出情報.set適用開始日(t.get居宅計画届出List().get居宅計画届出_適用開始年月日());
             居宅計画届出情報.set適用終了日(t.get居宅計画届出List().get居宅計画届出_適用終了年月日());
-            居宅計画届出情報.set事業所番号(t.get居宅計画届出List().get居宅計画届出_計画事業者番号());
-            居宅計画届出情報.set事業所名称(t.get居宅計画届出List().get居宅計画届出_事業者名称());
-            居宅計画届出情報.set電話番号(t.get居宅計画届出List().get居宅計画届出_電話番号());
+            居宅計画届出情報.set事業所番号(t.get居宅計画届出List().get居宅計画届出_計画事業者番号() != null
+                    ? t.get居宅計画届出List().get居宅計画届出_計画事業者番号() : RString.EMPTY);
+            居宅計画届出情報.set事業所名称(t.get居宅計画届出List().get居宅計画届出_事業者名称() != null
+                    ? t.get居宅計画届出List().get居宅計画届出_事業者名称() : RString.EMPTY);
+            居宅計画届出情報.set電話番号(t.get居宅計画届出List().get居宅計画届出_電話番号() != null
+                    ? t.get居宅計画届出List().get居宅計画届出_電話番号() : RString.EMPTY);
             居宅計画届出情報EntityList.add(居宅計画届出情報);
         }
     }
@@ -782,12 +802,15 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             ShiharaHohoHenkojohoEntity 支払方法変更情報 = new ShiharaHohoHenkojohoEntity();
             支払方法変更情報.set支払方法変更区分(RString.EMPTY);
 //        支払方法変更情報.set明細番号(RString.EMPTY);
-            支払方法変更情報.set給付制限(t.get支払方法変更List().get支払方法変更_登録区分().equals(ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード())
-                    ? ShiharaiHenkoTorokuKubun._空 : ShiharaiHenkoTorokuKubun.toValue(t.get支払方法変更List().get支払方法変更_登録区分()));
+            if (t.get支払方法変更List().get支払方法変更_登録区分() != null) {
+                支払方法変更情報.set給付制限(t.get支払方法変更List().get支払方法変更_登録区分().equals(ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード())
+                        ? ShiharaiHenkoTorokuKubun._空 : ShiharaiHenkoTorokuKubun.toValue(t.get支払方法変更List().get支払方法変更_登録区分()));
+            }
             支払方法変更情報.set開始日(t.get支払方法変更List().get支払方法変更_適用開始年月日());
             支払方法変更情報.set終了日(t.get支払方法変更List().get支払方法変更_適用終了年月日());
             支払方法変更情報.set終了事由(ShiharaiHenkoShuryoKubun.toValue(t.get支払方法変更List().get支払方法変更_終了区分()));
-            支払方法変更情報.set差止状況(t.get支払方法変更List().get支払方法変更_管理区分().equals(区分_2) ? new RString("差止") : RString.EMPTY);
+            支払方法変更情報.set差止状況((t.get支払方法変更List().get支払方法変更_管理区分() != null
+                    && t.get支払方法変更List().get支払方法変更_管理区分().equals(区分_2)) ? new RString("差止") : RString.EMPTY);
             支払方法変更情報.set提供年月(t.get支払方法変更List().get支払方法変更_差止サービス提供年月());
             支払方法変更情報.set整理番号(t.get支払方法変更List().get支払方法変更_差止償還整理番号());
             if (t.get支払方法変更List().get支払方法変更_差止解除年月日() != null) {
