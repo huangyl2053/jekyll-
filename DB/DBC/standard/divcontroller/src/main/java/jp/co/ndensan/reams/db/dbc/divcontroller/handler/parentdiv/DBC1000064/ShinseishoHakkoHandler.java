@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000064.ShinseishoHakkoDiv;
+import jp.co.ndensan.reams.db.dbc.service.core.kijunshunyugaku.TekiyoShinseishoManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -37,6 +38,8 @@ public class ShinseishoHakkoHandler {
     private static final int INDEX_1231 = 1231;
     private static final RString 日 = new RString("01");
     private static final RString 本年７月中 = new RString("本年７月中");
+    private static final RString ZERO = new RString("0");
+    private static final RString ONE = new RString("1");
 
     /**
      * コンストラクタです。
@@ -131,6 +134,15 @@ public class ShinseishoHakkoHandler {
             div.getTxtSetaiinHaakuKijunYMD().setDisabled(true);
         }
     }
-    //        TODO異動処理が実行済みか確認   「ビジネス設計_DBC110064_基準収入額適用申請書_年次分作成」
 
+    public boolean is異動処理が実施済みか判定() {
+        if (ZERO == div.getRadChushutsuJoken().getSelectedKey()) {
+            TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtShoriNendo().getValue().getYear());
+        }
+        if (ONE == div.getRadChushutsuJoken().getSelectedKey()) {
+            TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtSetaiinHaakuKijunYMD().getValue().getYear());
+        }
+        return false;
+
+    }
 }
