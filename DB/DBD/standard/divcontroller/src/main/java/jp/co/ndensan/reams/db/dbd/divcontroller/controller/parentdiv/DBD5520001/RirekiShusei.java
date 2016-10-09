@@ -101,6 +101,10 @@ public class RirekiShusei {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             getHandler(div).load(rstList, 介護導入形態, key);
+            validationMessages.add(getValidationHandler(div).申請中のデータが存在(rstList));
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -355,7 +359,6 @@ public class RirekiShusei {
             }
         }
         validationMessages.add(getValidationHandler(div).変更レコード無しチェック());
-        validationMessages.add(getValidationHandler(div).申請中のデータが存在());
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }

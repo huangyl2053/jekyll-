@@ -33,7 +33,7 @@ public class DbWT111JKyufuJissekiD8Entity extends DbTableEntityBase<DbWT111JKyuf
     @TempTableColumnOrder(2)
     private RString recordNo;
     @TempTableColumnOrder(3)
-    private KokanShikibetsuNo kokanShikibetsuNo;
+    private KokanShikibetsuNo kokanJohoShikibetsuNo;
     @TempTableColumnOrder(4)
     private NyuryokuShikibetsuNo inputShikibetsuNo;
     @TempTableColumnOrder(5)

@@ -574,9 +574,7 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
             param.setFileNameList(Collections.EMPTY_LIST);
         } else {
             for (SharedFileDescriptor entry : エントリ情報List) {
-                // TODO QA1149 value too long for type character varying(20)
                 list.add(entry.getSharedFileName().toRString());
-//                list.add(entry.getSharedFileName().toRString().substring(4));
                 param.setFileNameList(list);
             }
         }
