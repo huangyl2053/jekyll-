@@ -47,7 +47,7 @@ public enum RenkeiDataShutsuryokuSikakuSakuseiSoshitsuSpec implements IPredicate
                 }
             },
     /**
-     * 今回終了チェック_年月日
+     * 今回終了チェック（年月日）
      */
     今回終了チェック_年月日 {
                 @Override
