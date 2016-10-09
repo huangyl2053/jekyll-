@@ -41,6 +41,7 @@ public class KyufuJisekiJohoSofuIchiranPrintService {
      * @param 作成日時 RDateTime
      * @param 合計フラグ boolean
      * @param 合計件数 Decimal
+     * @param 連番 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -50,11 +51,12 @@ public class KyufuJisekiJohoSofuIchiranPrintService {
             FlexibleYearMonth 処理年月,
             RDateTime 作成日時,
             boolean 合計フラグ,
-            Decimal 合計件数) {
+            Decimal 合計件数,
+            int 連番) {
 
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(給付実績更新結果一覧表データ, 出力順リスト, 改頁リスト, 処理年月, 作成日時, 合計フラグ, 合計件数, reportManager);
+            print(給付実績更新結果一覧表データ, 出力順リスト, 改頁リスト, 処理年月, 作成日時, 合計フラグ, 合計件数, 連番, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -70,6 +72,7 @@ public class KyufuJisekiJohoSofuIchiranPrintService {
      * @param 作成日時 RDateTime
      * @param 合計フラグ boolean
      * @param 合計件数 Decimal
+     * @param 連番 int
      * @param reportManager ReportManager
      */
     public void print(
@@ -80,6 +83,7 @@ public class KyufuJisekiJohoSofuIchiranPrintService {
             RDateTime 作成日時,
             boolean 合計フラグ,
             Decimal 合計件数,
+            int 連番,
             ReportManager reportManager) {
         KyufuJisekiJohoSofuIchiranProperty property = new KyufuJisekiJohoSofuIchiranProperty();
 
@@ -91,7 +95,8 @@ public class KyufuJisekiJohoSofuIchiranPrintService {
                     改頁リスト, 処理年月,
                     作成日時,
                     合計フラグ,
-                    合計件数).writeBy(reportSourceWriter);
+                    合計件数,
+                    連番).writeBy(reportSourceWriter);
         }
 
     }
