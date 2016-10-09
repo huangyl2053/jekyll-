@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9010001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.DBE9010001StateName;
@@ -150,9 +151,11 @@ public class ShujiiIryoKikanMaster {
                         主治医医療機関コードTo,
                         div.getTxtSearchShujiiIryokikanMeisho().getValue(),
                         div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
-                        div.getTxtSaidaiHyojiKensu().getValue()
+                        四マスタ優先表示市町村識別ID,
+                        div.getTxtSaidaiHyojiKensu().getValue(),
+                        構成市町村マスタ市町村コード重複種別
                 );
-        List<jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報List
+        List<KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報List
                 = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter).records();
         getHandler(div).setShujiKikanJohoIchiran(主治医医療機関情報List);
         List<ShujiiIryoKikanJoho> 主治医医療機関マスタList

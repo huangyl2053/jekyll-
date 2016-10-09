@@ -21,12 +21,14 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
     private static final RString 後方一致KEY = new RString("1");
     private static final RString 完全一致KEY = new RString("2");
     private static final RString 部分一致KEY = new RString("3");
+    private static final RString 構成市町村マスタ市町村コード重複 = new RString("1");
     private final boolean 状況フラグ;
     private final LasdecCode 市町村コード;
     private final RString 主治医医療機関コードFrom;
     private final RString 主治医医療機関コードTo;
     private final RString 医療機関名称;
     private final RString 医療機関カナ名称;
+    private final RString 市町村識別ID;
     private final Decimal saidaiHyojiKensu;
     private final boolean uses市町村コード;
     private final boolean uses主治医医療機関コードFrom;
@@ -42,6 +44,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
     private final boolean 医療機関カナ名称後方一致Flag;
     private final boolean 医療機関カナ名称完全一致Flag;
     private final boolean 医療機関カナ名称部分一致Flag;
+    private final boolean 市町村識別ID利用Flag;
 
     private KoseiShujiiIryoKikanMasterMapperParameter(
             boolean 状況フラグ,
@@ -50,6 +53,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
             RString 主治医医療機関コードTo,
             RString 医療機関名称,
             RString 医療機関カナ名称,
+            RString 市町村識別ID,
             Decimal saidaiHyojiKensu,
             boolean uses市町村コード,
             boolean uses主治医医療機関コードFrom,
@@ -64,13 +68,15 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
             boolean 医療機関カナ名称前方一致Flag,
             boolean 医療機関カナ名称後方一致Flag,
             boolean 医療機関カナ名称完全一致Flag,
-            boolean 医療機関カナ名称部分一致Flag) {
+            boolean 医療機関カナ名称部分一致Flag,
+            boolean 市町村識別ID利用Flag) {
         this.状況フラグ = 状況フラグ;
         this.市町村コード = 市町村コード;
         this.主治医医療機関コードFrom = 主治医医療機関コードFrom;
         this.主治医医療機関コードTo = 主治医医療機関コードTo;
         this.医療機関名称 = 医療機関名称;
         this.医療機関カナ名称 = 医療機関カナ名称;
+        this.市町村識別ID = 市町村識別ID;
         this.saidaiHyojiKensu = saidaiHyojiKensu;
         this.uses市町村コード = uses市町村コード;
         this.uses主治医医療機関コードFrom = uses主治医医療機関コードFrom;
@@ -86,7 +92,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
         this.医療機関カナ名称後方一致Flag = 医療機関カナ名称後方一致Flag;
         this.医療機関カナ名称完全一致Flag = 医療機関カナ名称完全一致Flag;
         this.医療機関カナ名称部分一致Flag = 医療機関カナ名称部分一致Flag;
-
+        this.市町村識別ID利用Flag = 市町村識別ID利用Flag;
     }
 
     /**
@@ -100,7 +106,9 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
      * @param 主治医医療機関コードTo 主治医医療機関コードTo
      * @param 医療機関名称 医療機関名称
      * @param 医療機関カナ名称 医療機関カナ名称
+     * @param 市町村識別ID 市町村識別ID
      * @param 最大表示件数 最大表示件数
+     * @param 構成市町村マスタ市町村コード重複種別 構成市町村マスタ市町村コード重複種別
      *
      * @return 主治医医療機関情報パラメータ
      */
@@ -113,7 +121,9 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
             RString 主治医医療機関コードTo,
             RString 医療機関名称,
             RString 医療機関カナ名称,
-            Decimal 最大表示件数) {
+            RString 市町村識別ID,
+            Decimal 最大表示件数,
+            RString 構成市町村マスタ市町村コード重複種別) {
         return new KoseiShujiiIryoKikanMasterMapperParameter(
                 状況フラグ,
                 市町村コード,
@@ -121,6 +131,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
                 主治医医療機関コードTo,
                 医療機関名称,
                 医療機関カナ名称,
+                市町村識別ID,
                 最大表示件数,
                 市町村コード != null && !市町村コード.isEmpty(),
                 主治医医療機関コードFrom != null && !主治医医療機関コードFrom.isEmpty(),
@@ -135,6 +146,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
                 前方一致KEY.equals(医療機関カナ名称検索条件),
                 後方一致KEY.equals(医療機関カナ名称検索条件),
                 完全一致KEY.equals(医療機関カナ名称検索条件),
-                部分一致KEY.equals(医療機関カナ名称検索条件));
+                部分一致KEY.equals(医療機関カナ名称検索条件),
+                構成市町村マスタ市町村コード重複.equals(構成市町村マスタ市町村コード重複種別));
     }
 }

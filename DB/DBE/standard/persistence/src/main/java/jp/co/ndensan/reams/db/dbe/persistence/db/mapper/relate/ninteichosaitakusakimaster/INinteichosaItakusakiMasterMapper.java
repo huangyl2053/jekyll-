@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaitaku
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
 
 /**
  * 構成市町村マスタのマッパーインタフェースです。

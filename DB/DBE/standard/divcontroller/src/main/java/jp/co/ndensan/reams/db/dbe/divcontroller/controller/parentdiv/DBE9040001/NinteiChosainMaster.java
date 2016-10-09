@@ -229,7 +229,9 @@ public class NinteiChosainMaster {
                 div.getTxtSearchChosainKanaShimei().getValue(),
                 div.getDdlChosainKanaMeisho().getSelectedKey(),
                 div.getDdlChikuCode().getSelectedKey(),
-                div.getTxtSaidaiHyojiKensu().getValue());
+                div.getTxtSaidaiHyojiKensu().getValue(),
+                四マスタ優先表示市町村識別ID,
+                構成市町村マスタ市町村コード重複種別);
         NinteiChosainMasterFinder ninteiChosainMasterFinder = NinteiChosainMasterFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster> 調査員情報List
                 = ninteiChosainMasterFinder.getChosainJohoIchiranList(

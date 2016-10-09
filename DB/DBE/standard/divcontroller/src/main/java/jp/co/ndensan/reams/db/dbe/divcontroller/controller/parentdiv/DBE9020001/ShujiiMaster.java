@@ -231,7 +231,9 @@ public class ShujiiMaster {
                 div.getDdlShujiiMeisho().getSelectedKey(),
                 new AtenaKanaMeisho(div.getTxtSearchShujiiKanaShimei().getValue()),
                 div.getDdlShujiiKanaMeisho().getSelectedKey(),
-                div.getTxtSaidaiHyojiKensu().getValue());
+                div.getTxtSaidaiHyojiKensu().getValue(),
+                四マスタ優先表示市町村識別ID,
+                構成市町村マスタ市町村コード重複種別);
         ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
                 = shujiiMasterFinder.getShujiiIchiranList(

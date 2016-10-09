@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -68,6 +68,13 @@ public class NinteichosaItakusakiMasterHandler {
     private static final RString BOOLEAN_FALSE = new RString("FALSE");
     private static final RString 有効 = new RString("yuko");
     private static final RString 前方一致KEY = new RString("0");
+    private static final RString 構成市町村マスタ市町村コード重複種別
+            = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+    private static final RString 四マスタ優先表示市町村識別ID
+            = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    
     /**
      * コンストラクタです。
      *
@@ -163,7 +170,9 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue() == null
                 ? null : div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue().intValue(),
                 div.getChosainSearch().getDdlItakusakiMeisho().getSelectedKey(),
-                div.getChosainSearch().getDdlItakusakiKanaMeisho().getSelectedKey()
+                div.getChosainSearch().getDdlItakusakiKanaMeisho().getSelectedKey(),
+                四マスタ優先表示市町村識別ID,
+                構成市町村マスタ市町村コード重複種別
         );
 
         return NinteichosaItakusakiManager.createInstance().ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
