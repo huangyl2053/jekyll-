@@ -9,19 +9,31 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040030.KogakugassanJi
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.FutangakuTashoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 負担額補正対象者データプロセスです。
  *
- * @author LDNS 袁震霞
+ * @reamsid_L DBC-2320-060 yuanzhenxia
  */
 public class FutangakuTashoshaInsertProcess extends BatchProcessBase<KogakugassanJikofutangakuInfoHoseiTempEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030."
             + "IKogakugassanJikofutangakuInfoHoseiMapper.get中間DB");
+    private static final RString 負担額補正対象者データTEMP = new RString("FutangakuTaishoshaTemp");
     private KogakugassanJikofutangakuInfoHoseiProcessParameter processParameter;
+    @BatchWriter
+    private IBatchTableWriter tempDbWriter;
+
+    @Override
+    protected void createWriter() {
+        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(負担額補正対象者データTEMP, FutangakuTashoshaEntity.class);
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -77,6 +89,7 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
         futangakuTashoshaEntity.setKogakuShikyuGakuGakuHoseiJissi(entity.getKogakuShikyuGakuGakuHoseiJissi());
         futangakuTashoshaEntity.setIchiranKakuninKubun(entity.getIchiranKakuninKubun());
         futangakuTashoshaEntity.setIchiranKakuninKubun2(entity.getIchiranKakuninKubun2());
+        tempDbWriter.insert(futangakuTashoshaEntity);
     }
 
 }

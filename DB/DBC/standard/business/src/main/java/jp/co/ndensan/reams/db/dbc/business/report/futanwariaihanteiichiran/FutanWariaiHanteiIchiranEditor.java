@@ -103,7 +103,9 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
         source.listList3_1 = getWarekiYmd(entity.get資格喪失年月日());
         source.listList3_2 = getWarekiYmd(entity.get認定有効期間終了年月日());
         source.listList3_3 = getWarekiYmd(entity.get今回有効終了日());
-        source.listList3_4 = edit更正事由(entity.get今回更正事由().value());
+        if (entity.get今回更正事由() != null && !entity.get今回更正事由().isEmpty()) {
+            source.listList3_4 = edit更正事由(entity.get今回更正事由().value());
+        }
         source.listList3_5 = getWarekiYmd(entity.get前回有効終了日());
         if (entity.get前回更正事由() != null) {
             source.listList3_6 = edit更正事由(entity.get前回更正事由().value());
