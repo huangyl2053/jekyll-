@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -32,9 +33,10 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHakkoIchiranEditor {
 
-    private final List<KariSanteiNonyuTsuchiShoJoho> entityList;
+    private final KariSanteiNonyuTsuchiShoJoho entity;
     private final List<RString> 並び順List;
     private final int 出力期;
+    private final Decimal 連番;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -45,81 +47,81 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private static final RString HYPHEN = new RString("-");
     private final Association association;
 
-    protected KariNonyuTsuchishoHakkoIchiranBodyEditor(List<KariSanteiNonyuTsuchiShoJoho> entityList,
-            List<RString> 並び順List, int 出力期, Association association) {
-        this.entityList = entityList;
+    protected KariNonyuTsuchishoHakkoIchiranBodyEditor(KariSanteiNonyuTsuchiShoJoho entity,
+            List<RString> 並び順List, int 出力期, Association association, Decimal 連番) {
+        this.entity = entity;
         this.並び順List = 並び順List;
         this.出力期 = 出力期;
         this.association = association;
+        this.連番 = 連番;
     }
 
     @Override
     public KariNonyuTsuchishoHakkoIchiranSource edit(KariNonyuTsuchishoHakkoIchiranSource source) {
-        int 連番 = 1;
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
-        for (KariSanteiNonyuTsuchiShoJoho item : entityList) {
-            source.hokenshaNo = association.get地方公共団体コード().value();
-            source.hokenshaName = association.get市町村名();
-            出力帳票entities(source);
-            final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = item.get編集後仮算定通知書共通情報();
-            if (!isNull(編集後仮算定通知書共通情報)) {
-                source.hdrTytle1 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード１名());
-                source.hdrTytle2 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード２名());
-                source.hdrTytle3 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード３名());
-                source.listUpper_1 = new RString(連番);
-                連番++;
-                source.listUpper_2 = isNull(編集後仮算定通知書共通情報.get通知書番号()) ? RString.EMPTY
-                        : 編集後仮算定通知書共通情報.get通知書番号().value();
-                source.listUpper_3 = isNull(編集後仮算定通知書共通情報.get被保険者番号()) ? RString.EMPTY
-                        : 編集後仮算定通知書共通情報.get被保険者番号().value();
-                if (isNull(編集後仮算定通知書共通情報.get編集後個人())
-                        || isNull(編集後仮算定通知書共通情報.get編集後個人().get世帯コード())) {
-                    source.listUpper_4 = RString.EMPTY;
-                } else {
-                    source.listUpper_4 = 編集後仮算定通知書共通情報.get編集後個人().get世帯コード().value();
-                }
-                source.listUpper_5 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード1());
-                source.listUpper_6 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード２());
-                source.listUpper_7 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード３());
-                if (isNull(編集後仮算定通知書共通情報.get更正後())) {
-                    source.listUpper_9 = RString.EMPTY;
-                    source.listUpper_12 = RString.EMPTY;
-                    source.listUpper_13 = RString.EMPTY;
-                    source.listLower_5 = RString.EMPTY;
-                } else {
-                    編集後仮算定通知書共通情報設定(source, 編集後仮算定通知書共通情報);
-                    編集後宛先相関項目編集(編集後仮算定通知書共通情報, source);
-                    source.listLower_4 = isNull(編集後仮算定通知書共通情報.get前年度情報()) ? RString.EMPTY
-                            : 編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階();
-                    set編集後口座(編集後仮算定通知書共通情報, source);
-                }
-            } else {
-                source.hdrTytle1 = RString.EMPTY;
-                source.hdrTytle2 = RString.EMPTY;
-                source.hdrTytle3 = RString.EMPTY;
-                source.listUpper_1 = RString.EMPTY;
-                連番++;
-                source.listUpper_2 = RString.EMPTY;
-                source.listUpper_3 = RString.EMPTY;
+        source.hokenshaNo = association.get地方公共団体コード().value();
+        source.hokenshaName = association.get市町村名();
+        出力帳票entities(source);
+        final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = entity.get編集後仮算定通知書共通情報();
+        if (!isNull(編集後仮算定通知書共通情報)) {
+            source.hdrTytle1 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード１名());
+            source.hdrTytle2 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード２名());
+            source.hdrTytle3 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード３名());
+            final ShikibetsuCode 識別コード = 編集後仮算定通知書共通情報.get識別コード();
+            if (!isNull(識別コード)) {
+                source.shikibetsuCode = 識別コード.getColumnValue();
+            }
+            source.listUpper_1 = new RString(連番.toString());
+            source.listUpper_2 = isNull(編集後仮算定通知書共通情報.get通知書番号()) ? RString.EMPTY
+                    : 編集後仮算定通知書共通情報.get通知書番号().value();
+            source.listUpper_3 = isNull(編集後仮算定通知書共通情報.get被保険者番号()) ? RString.EMPTY
+                    : 編集後仮算定通知書共通情報.get被保険者番号().value();
+            if (isNull(編集後仮算定通知書共通情報.get編集後個人())
+                    || isNull(編集後仮算定通知書共通情報.get編集後個人().get世帯コード())) {
                 source.listUpper_4 = RString.EMPTY;
-                source.listUpper_5 = RString.EMPTY;
-                source.listUpper_6 = RString.EMPTY;
-                source.listUpper_7 = RString.EMPTY;
-                source.listUpper_8 = RString.EMPTY;
+            } else {
+                source.listUpper_4 = 編集後仮算定通知書共通情報.get編集後個人().get世帯コード().value();
+            }
+            source.listUpper_5 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード1());
+            source.listUpper_6 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード２());
+            source.listUpper_7 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード３());
+            if (isNull(編集後仮算定通知書共通情報.get更正後())) {
                 source.listUpper_9 = RString.EMPTY;
-                source.listUpper_10 = RString.EMPTY;
-                source.listUpper_11 = RString.EMPTY;
                 source.listUpper_12 = RString.EMPTY;
                 source.listUpper_13 = RString.EMPTY;
-                source.listLower_1 = RString.EMPTY;
-                source.listLower_2 = RString.EMPTY;
-                source.listLower_3 = RString.EMPTY;
-                source.listLower_4 = RString.EMPTY;
                 source.listLower_5 = RString.EMPTY;
-                source.listLower_6 = RString.EMPTY;
-                source.listLower_7 = RString.EMPTY;
+            } else {
+                編集後仮算定通知書共通情報設定(source, 編集後仮算定通知書共通情報);
+                編集後宛先相関項目編集(編集後仮算定通知書共通情報, source);
+                source.listLower_4 = isNull(編集後仮算定通知書共通情報.get前年度情報()) ? RString.EMPTY
+                        : 編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階();
+                set編集後口座(編集後仮算定通知書共通情報, source);
             }
+        } else {
+            source.hdrTytle1 = RString.EMPTY;
+            source.hdrTytle2 = RString.EMPTY;
+            source.hdrTytle3 = RString.EMPTY;
+            source.listUpper_1 = new RString(連番.toString());
+            source.listUpper_2 = RString.EMPTY;
+            source.listUpper_3 = RString.EMPTY;
+            source.listUpper_4 = RString.EMPTY;
+            source.listUpper_5 = RString.EMPTY;
+            source.listUpper_6 = RString.EMPTY;
+            source.listUpper_7 = RString.EMPTY;
+            source.listUpper_8 = RString.EMPTY;
+            source.listUpper_9 = RString.EMPTY;
+            source.listUpper_10 = RString.EMPTY;
+            source.listUpper_11 = RString.EMPTY;
+            source.listUpper_12 = RString.EMPTY;
+            source.listUpper_13 = RString.EMPTY;
+            source.listLower_1 = RString.EMPTY;
+            source.listLower_2 = RString.EMPTY;
+            source.listLower_3 = RString.EMPTY;
+            source.listLower_4 = RString.EMPTY;
+            source.listLower_5 = RString.EMPTY;
+            source.listLower_6 = RString.EMPTY;
+            source.listLower_7 = RString.EMPTY;
         }
         return source;
     }
@@ -244,17 +246,14 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
         }
     }
 
-    /**
-     * 出力帳票entityss
-     *
-     * @param source KariNonyuTsuchishoHakkoIchiranSource
-     */
     private void 出力帳票entities(KariNonyuTsuchishoHakkoIchiranSource source) {
-        source.shutsuryokujun1 = 並び順List.size() <= NUM_0 ? RString.EMPTY : 並び順List.get(NUM_0);
-        source.shutsuryokujun2 = 並び順List.size() <= NUM_1 ? RString.EMPTY : 並び順List.get(NUM_1);
-        source.shutsuryokujun3 = 並び順List.size() <= NUM_2 ? RString.EMPTY : 並び順List.get(NUM_2);
-        source.shutsuryokujun4 = 並び順List.size() <= NUM_3 ? RString.EMPTY : 並び順List.get(NUM_3);
-        source.shutsuryokujun5 = 並び順List.size() <= NUM_4 ? RString.EMPTY : 並び順List.get(NUM_4);
+        if (並び順List != null) {
+            source.shutsuryokujun1 = 並び順List.size() <= NUM_0 ? RString.EMPTY : 並び順List.get(NUM_0);
+            source.shutsuryokujun2 = 並び順List.size() <= NUM_1 ? RString.EMPTY : 並び順List.get(NUM_1);
+            source.shutsuryokujun3 = 並び順List.size() <= NUM_2 ? RString.EMPTY : 並び順List.get(NUM_2);
+            source.shutsuryokujun4 = 並び順List.size() <= NUM_3 ? RString.EMPTY : 並び順List.get(NUM_3);
+            source.shutsuryokujun5 = 並び順List.size() <= NUM_4 ? RString.EMPTY : 並び順List.get(NUM_4);
+        }
     }
 
     private boolean isNull(Object object) {
