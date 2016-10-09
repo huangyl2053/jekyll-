@@ -124,7 +124,6 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
     private int 総出力件数;
 
     @Override
-
     protected void initialize() {
         総出力件数 = INDEX_0;
         エントリ情報List = new ArrayList<>();
@@ -143,18 +142,7 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
             executeStep(受給者の判定);
             getCityVillagesInformation();
             getHihokenshaNoTimeInformation();
-            if (変換基準日.isEmpty()) {
-                executeStep(保険者番号の設定);
-            } else {
-                executeStep(被保険者番号変換対象データの取得);
-                flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(被保険者番号変換対象データの取得),
-                        HokenshaKyufujissekiOutGetHihokenshaNoProcess.PARAMETER_OUT_FLOWENTITY);
-                if (0 == flowEntity.getCodeNum()) {
-                    executeStep(保険者番号の設定);
-                } else {
-                    this.splitFlow();
-                }
-            }
+            transFlow();
             executeStep(保険者名の取得);
             executeStep(保険者番号取込);
             executeStep(被保険者_宛名情報取得);
@@ -195,6 +183,24 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
         }
         executeStep(国保連インタフェース管理更新);
         executeStep(処理結果リスト作成);
+    }
+
+    /**
+     * 新旧被保険者番号変換です。
+     */
+    private void transFlow() {
+        if (変換基準日.isEmpty()) {
+            executeStep(保険者番号の設定);
+        } else {
+            executeStep(被保険者番号変換対象データの取得);
+            flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(被保険者番号変換対象データの取得),
+                    HokenshaKyufujissekiOutGetHihokenshaNoProcess.PARAMETER_OUT_FLOWENTITY);
+            if (0 == flowEntity.getCodeNum()) {
+                executeStep(保険者番号の設定);
+            } else {
+                this.splitFlow();
+            }
+        }
     }
 
     private void splitFlow() {
