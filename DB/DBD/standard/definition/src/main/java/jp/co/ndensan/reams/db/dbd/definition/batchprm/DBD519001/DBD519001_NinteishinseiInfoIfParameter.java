@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -38,7 +37,7 @@ public class DBD519001_NinteishinseiInfoIfParameter extends BatchParameterBase {
     @BatchParameter(key = "新ファイル名", name = "新ファイル名")
     private RString 新ファイル名;
     @BatchParameter(key = "対象外被保険者番号リスト", name = "対象外被保険者番号リスト")
-    private List<HihokenshaNo> 対象外被保険者番号リスト;
+    private List<RString> 対象外被保険者番号リスト;
 
     /**
      * バーチのパラメータを作成します。
@@ -53,11 +52,11 @@ public class DBD519001_NinteishinseiInfoIfParameter extends BatchParameterBase {
      *
      * @param 証記載保険者番号 RString
      * @param 市町村コード LasdecCode
-     * @param 被保険者番号 HihokenshaNo
+     * @param 被保険者番号 RString
      * @param 今回開始期間FROM RDateTime
      * @param 今回開始期間TO RDateTime
      * @param 新ファイル名 RString
-     * @param 対象外被保険者番号リスト List<HihokenshaNo>
+     * @param 対象外被保険者番号リスト List<RString>
      */
     public DBD519001_NinteishinseiInfoIfParameter(
             RString 証記載保険者番号,
@@ -66,7 +65,7 @@ public class DBD519001_NinteishinseiInfoIfParameter extends BatchParameterBase {
             RDateTime 今回開始期間FROM,
             RDateTime 今回開始期間TO,
             RString 新ファイル名,
-            List<HihokenshaNo> 対象外被保険者番号リスト) {
+            List<RString> 対象外被保険者番号リスト) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.市町村コード = 市町村コード;
         this.被保険者番号 = 被保険者番号;
