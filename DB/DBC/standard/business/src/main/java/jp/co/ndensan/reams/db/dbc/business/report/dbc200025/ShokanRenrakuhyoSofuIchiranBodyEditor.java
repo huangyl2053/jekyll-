@@ -92,7 +92,8 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
         if (償還払支給申請Entity.isKyuSochishaFlag()) {
             source.list_7 = YES;
         }
-        if (null != 償還払支給申請Entity.getServiceTeikyoYM() && null != 償還払支給申請Entity.getYokaigoJotaiKubunCode()) {
+        if (null != 償還払支給申請Entity.getServiceTeikyoYM() && null != 償還払支給申請Entity.getYokaigoJotaiKubunCode()
+                && !償還払支給申請Entity.getYokaigoJotaiKubunCode().isEmpty()) {
             IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(償還払支給申請Entity.getServiceTeikyoYM(),
                     償還払支給申請Entity.getYokaigoJotaiKubunCode());
             if (null != 要介護状態区分) {

@@ -28,7 +28,7 @@ public class NinteiShinseiJohoProcessParameter implements IBatchProcessParameter
     private HihokenshaNo 被保険者番号;
     private RDateTime 今回開始期間FROM;
     private RDateTime 今回開始期間TO;
-    private List<HihokenshaNo> 対象外被保険者番号リスト;
+    private List<RString> 対象外被保険者番号リスト;
 
     /**
      * コンストラクタです。
@@ -40,7 +40,7 @@ public class NinteiShinseiJohoProcessParameter implements IBatchProcessParameter
      * @param 対象外被保険者番号リスト List<HihokenshaNo>
      */
     public NinteiShinseiJohoProcessParameter(RString 証記載保険者番号, HihokenshaNo 被保険者番号,
-            RDateTime 今回開始期間FROM, RDateTime 今回開始期間TO, List<HihokenshaNo> 対象外被保険者番号リスト) {
+            RDateTime 今回開始期間FROM, RDateTime 今回開始期間TO, List<RString> 対象外被保険者番号リスト) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.今回開始期間FROM = 今回開始期間FROM;

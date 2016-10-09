@@ -283,8 +283,8 @@ public class ShotokuShokaihyotoReportProcess extends SimpleBatchProcessBase {
             List<KoikiZenShichosonJoho> 構成市町村情報リスト) {
         RString 市町村コード = RString.EMPTY;
         RString 構成市町村情報_市町村コード = RString.EMPTY;
-        if (tempEntity.getShokaisakiLasdecCode() != null) {
-            市町村コード = new RString(tempEntity.getShokaisakiLasdecCode().toString().substring(INT_0, INT_5));
+        if (tempEntity.getZenkokuJushoCode() != null) {
+            市町村コード = new RString(tempEntity.getZenkokuJushoCode().toString().substring(INT_0, INT_5));
         }
         List<RString> 市町村コードリスト = new ArrayList<>();
         for (KoikiZenShichosonJoho 構成市町村情報 : 構成市町村情報リスト) {
@@ -394,7 +394,7 @@ public class ShotokuShokaihyotoReportProcess extends SimpleBatchProcessBase {
             } else {
                 result.set転入前住所(entity.getZenjusho());
             }
-            result.set氏名(entity.getHihokenshaName().getColumnValue());
+            result.set氏名(entity.getHihokenshaName());
             result.set世帯コード(entity.getSetaiCode());
             result.set前住所(entity.getZenjusho());
             result.set現住所(entity.getGenjusho());

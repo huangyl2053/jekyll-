@@ -69,6 +69,8 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
     private static final RString コンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString KANRINENDO = new RString("0000");
+    private static final RString 識別情報コード = new RString("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private IOutputOrder 並び順;
     private List<RString> pageBreakKeys;
     private KokuhorenKyodoJukyushaInGetIdProcessParameter parameter;
@@ -183,7 +185,7 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
         if (entity.get識別コード() != null && !entity.get識別コード().isEmpty()
                 && (!RString.isNullOrEmpty(entity.get宛名カナ名称()) || !RString.isNullOrEmpty(entity.get宛名名称()))
                 && !識別コードList.contains(entity.get識別コード())) {
-            ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+            ExpandedInformation expandedInformations = new ExpandedInformation(new Code(識別情報コード), 被保険者番号,
                     entity.get被保険者番号().value());
             PersonalData personalData = PersonalData.of(entity.get識別コード(), expandedInformations);
             personalDataList.add(personalData);
@@ -194,11 +196,6 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
 
     @Override
     protected void keyBreakProcess(KyodoJukyushaKoshinkekkaIchiranEntity current) {
-        hasBreak(getBefore(), current);
-    }
-
-    private boolean hasBreak(KyodoJukyushaKoshinkekkaIchiranEntity before, KyodoJukyushaKoshinkekkaIchiranEntity current) {
-        return before.get保険者番号() != current.get保険者番号();
     }
 
     @Override

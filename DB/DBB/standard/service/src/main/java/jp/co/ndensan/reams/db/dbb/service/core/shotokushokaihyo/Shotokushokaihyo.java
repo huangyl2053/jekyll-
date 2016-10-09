@@ -26,8 +26,8 @@ import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -138,9 +137,9 @@ public class Shotokushokaihyo {
         FlexibleDate 処理年度minus64の4月１日 = new FlexibleDate(処理年度.getYearValue() - NUM_64, 四月, NUM_1);
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         ShotokuNendoParameter param = new ShotokuNendoParameter();
-        param.set処理年度_４月１日(処理年度の４月１日);
-        param.set処理年度_plus1_４月１日(処理年度plus1の４月１日);
-        param.set処理年度_minus64_4月１日(処理年度minus64の4月１日);
+//        param.set処理年度_４月１日(処理年度の４月１日);
+//        param.set処理年度_plus1_４月１日(処理年度plus1の４月１日);
+//        param.set処理年度_minus64_4月１日(処理年度minus64の4月１日);
         param.setシステム日付(システム日付);
         IShotokushokaihyoMapper mapper = mapperProvider.create(IShotokushokaihyoMapper.class);
         List<HihokenshaDaichoEntity> 被保険者台帳管理リスト = mapper.select被保険者台帳管理(param);
@@ -161,7 +160,7 @@ public class Shotokushokaihyo {
         for (FukaKijunSetaiEntity setaiEntity : 賦課基準日時点の世帯員List) {
             mapper.insert世帯員把握入力Temp(setaiEntity.get所得年度());
         }
-        List<SetaiShotokuTempEntity> 世帯員所得_年度内有資格者List = mapper.select世帯員所得_年度内有資格者();
+        List<SetaiShotokuTempEntity> 世帯員所得_年度内有資格者List = mapper.select世帯員所得();
         for (SetaiShotokuTempEntity shotokuTempEntity : 世帯員所得_年度内有資格者List) {
             mapper.insert世帯員所得情報Temp1(shotokuTempEntity);
         }
@@ -180,8 +179,8 @@ public class Shotokushokaihyo {
         ShotokuNendoParameter param = new ShotokuNendoParameter();
         FlexibleDate 処理年度_8月１日 = new FlexibleDate(処理年度.getYearValue(), 八月, NUM_1);
         FlexibleDate 処理年度_plus１_７月31日 = new FlexibleDate(処理年度.getYearValue() + NUM_1, 七月, NUM_31);
-        param.set処理年度_8月１日(処理年度_8月１日);
-        param.set処理年度_plus１_７月３１日(処理年度_plus１_７月31日);
+//        param.set処理年度_8月１日(処理年度_8月１日);
+//        param.set処理年度_plus１_７月３１日(処理年度_plus１_７月31日);
         IShotokushokaihyoMapper mapper = mapperProvider.create(IShotokushokaihyoMapper.class);
         List<JukyuusyaEntity> 受給者抽出リスト = mapper.select受給者抽出(param);
         for (JukyuusyaEntity entity : 受給者抽出リスト) {
@@ -240,11 +239,11 @@ public class Shotokushokaihyo {
         }
         IShotokushokaihyoMapper mapper = mapperProvider.create(IShotokushokaihyoMapper.class);
         ShotokuNendoParameter param = new ShotokuNendoParameter();
-        param.set処理年度_1月２日(new FlexibleDate(処理年度.getYearValue(), 一月, NUM_2));
-        param.set処理年度_plus１_７月３１日(new FlexibleDate(処理年度.getYearValue() + NUM_1, 七月, NUM_31));
-        param.set処理年度_plus１_３月３１日(new FlexibleDate(処理年度.getYearValue() + NUM_1, 三月, NUM_31));
-        param.set処理年度_minus18_1月2日(new FlexibleDate(処理年度.getYearValue() - NUM_18, 一月, NUM_2));
-        param.set処理年度_minus39_4月１日(new FlexibleDate(処理年度.getYearValue() - NUM_39, 四月, NUM_1));
+//        param.set処理年度_1月２日(new FlexibleDate(処理年度.getYearValue(), 一月, NUM_2));
+//        param.set処理年度_plus１_７月３１日(new FlexibleDate(処理年度.getYearValue() + NUM_1, 七月, NUM_31));
+//        param.set処理年度_plus１_３月３１日(new FlexibleDate(処理年度.getYearValue() + NUM_1, 三月, NUM_31));
+//        param.set処理年度_minus18_1月2日(new FlexibleDate(処理年度.getYearValue() - NUM_18, 一月, NUM_2));
+//        param.set処理年度_minus39_4月１日(new FlexibleDate(処理年度.getYearValue() - NUM_39, 四月, NUM_1));
         List<KouhoshaTenyuEntity> 候補者転入者リスト = mapper.select候補者転入者(param);
         List<KouhoshaTenyuEntity> 候補者住特情報リスト = mapper.select候補者住特情報(param);
         List<ShikibetsuCode> 識別コードリスト = new ArrayList<>();
@@ -362,17 +361,17 @@ public class Shotokushokaihyo {
             RString 市町村名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
                     処理日付, SubGyomuCode.DBU介護統計報告);
             if (都道府県名付与有無.equals(表示する) && 郡名付与有無.equals(表示する) && 市町村名付与有無.equals(表示する)) {
-                RString 被保険者住所 = 都道府県名.concat(郡名).concat(市町村名).concat(所得照会票データ.getHihokenshajusho().getColumnValue());
-                所得照会票データ.setHihokenshajusho(new AtenaJusho(被保険者住所));
+                RString 被保険者住所 = 都道府県名.concat(郡名).concat(市町村名).concat(所得照会票データ.getHihokenshajusho());
+                所得照会票データ.setHihokenshajusho(被保険者住所);
             } else if (都道府県名付与有無.equals(表示しない) && 郡名付与有無.equals(表示しない) && 市町村名付与有無.equals(表示しない)) {
-                所得照会票データ.setHihokenshajusho(AtenaJusho.EMPTY);
+                所得照会票データ.setHihokenshajusho(RString.EMPTY);
             }
         } else if (導入形態コード.equals(導入形態コード_111)) {
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(所得照会票データ.getGenLasdecCode().getColumnValue());
             RString 都道府県名 = 構成市町村情報.get都道府県名称();
             RString 郡名 = 構成市町村情報.get郡名称();
-            RString 被保険者住所 = 都道府県名.concat(郡名).concat(所得照会票データ.getHihokenshajusho().getColumnValue());
-            所得照会票データ.setHihokenshajusho(new AtenaJusho(被保険者住所));
+            RString 被保険者住所 = 都道府県名.concat(郡名).concat(所得照会票データ.getHihokenshajusho());
+            所得照会票データ.setHihokenshajusho(被保険者住所);
         }
     }
 
@@ -402,8 +401,8 @@ public class Shotokushokaihyo {
             処理日時リスト.add(処理日時);
         }
         SaihaqkouTaishoupParameter param = new SaihaqkouTaishoupParameter();
-        param.set作成日時(処理日時リスト);
-        param.set発行ユーザーID(発行ユーザーIDリスト);
+//        param.set作成日時(処理日時リスト);
+//        param.set発行ユーザーID(発行ユーザーIDリスト);
         param.set処理年度(処理年度);
         List<SaihaqkouTaishouTempEntity> 再発行対象List = mapper.select再発行対象者Temp(param);
         for (SaihaqkouTaishouTempEntity 再発行対象entity : 再発行対象List) {
@@ -437,7 +436,7 @@ public class Shotokushokaihyo {
             所得照会票発行一覧Entity.setShoriNendo(処理年度);
             所得照会票発行一覧Entity.setShikibetsuCode(entity.getShikibetsuCode());
             所得照会票発行一覧Entity.setRirekiNo(set履歴番号(処理年度, entity.getShikibetsuCode()));
-            所得照会票発行一覧Entity.setShokaisakiLasdecCode(new LasdecCode(entity.getShokaisakiLasdecCode().getShichosonCode6()));
+            所得照会票発行一覧Entity.setShokaisakiLasdecCode(new LasdecCode(entity.getZenkokuJushoCode()));
             所得照会票発行一覧Entity.setSetaiCode(entity.getSetaiCode());
             所得照会票発行一覧Entity.setHakkoReamsLoginId(ControlDataHolder.getUserId());
             所得照会票発行一覧Entity.setHakkoYMD(照会年月日);

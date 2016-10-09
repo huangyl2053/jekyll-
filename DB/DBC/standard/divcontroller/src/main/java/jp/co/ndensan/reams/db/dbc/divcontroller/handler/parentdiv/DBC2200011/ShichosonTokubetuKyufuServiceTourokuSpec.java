@@ -41,7 +41,7 @@ public enum ShichosonTokubetuKyufuServiceTourokuSpec implements IPredicate<Shich
                 public boolean apply(ShichosonTokubetuKyufuServiceTourokuDiv div) {
                     RDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue();
                     RDate 有効期間終了年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue();
-                    return 有効期間終了年月日 == null || 有効期間開始年月日.isBeforeOrEquals(有効期間終了年月日);
+                    return 有効期間終了年月日 == null || 有効期間終了年月日.isBeforeOrEquals(有効期間開始年月日);
                 }
             },
     /**

@@ -99,14 +99,16 @@ public class KogakuGassanShikyuShinseiTorokuManager {
         高額合算支給額計算結果Dac.save(高額合算支給額計算結果情報.deleted().toEntity());
         DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity 計算結果Entity = 高額合算支給額計算結果情報.toEntity();
         計算結果Entity.setRirekiNo(計算結果Entity.getRirekiNo() + 1);
+        計算結果Entity.setState(EntityDataState.Added);
         高額合算支給額計算結果Dac.save(計算結果Entity);
         if (高額合算支給額計算結果情報.get高額合算支給額計算結果list() != null) {
             int 明細番号 = 1;
             for (KogakuGassanShikyugakuKeisanKekkaMeisai 明細 : 高額合算支給額計算結果情報.get高額合算支給額計算結果list()) {
-                if (EntityDataState.Deleted.equals(明細.toEntity().getState())) {
+                if (!EntityDataState.Deleted.equals(明細.toEntity().getState())) {
                     DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity 明細Entity = 明細.toEntity();
-                    明細Entity.setRirekiNo(明細Entity.getRirekiNo().add(Decimal.ZERO));
+                    明細Entity.setRirekiNo(明細Entity.getRirekiNo().add(Decimal.ONE));
                     明細Entity.setMeisanNo(new RString(明細番号));
+                    明細Entity.setState(EntityDataState.Added);
                     高額合算支給額計算結果明細Manager.save高額合算支給額計算結果明細(new KogakuGassanShikyugakuKeisanKekkaMeisai(明細Entity));
                     明細番号++;
                 }

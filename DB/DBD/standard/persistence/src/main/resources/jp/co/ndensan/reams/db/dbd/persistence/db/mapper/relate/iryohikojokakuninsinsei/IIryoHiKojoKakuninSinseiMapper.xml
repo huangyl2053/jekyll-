@@ -6,15 +6,15 @@
     <select resultOrdered="true" id="受給者台帳抽出"
             resultType="Integer" fetchSize="500">
         SELECT
-        COUNT(DbV4001JukyushaDaicho."dbV4001JukyushaDaicho_hihokenshaNo")
+        COUNT(DbV4001JukyushaDaicho."hihokenshaNo")
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbV4001JukyushaDaichoMapper.noDeleted_DbV4001JukyushaDaicho" />) AS DbV4001JukyushaDaicho
+        rgdb."DbV4001JukyushaDaicho" AS DbV4001JukyushaDaicho
         WHERE
-        DbV4001JukyushaDaicho."dbV4001JukyushaDaicho_hihokenshaNo" = #{被保険者番号}
+        DbV4001JukyushaDaicho."hihokenshaNo" = #{被保険者番号}
         AND
-        DbV4001JukyushaDaicho."dbV4001JukyushaDaicho_yukoMukoKubun" = '1'
+        DbV4001JukyushaDaicho."yukoMukoKubun" = '1'
         AND
-        DbV4001JukyushaDaicho."dbV4001JukyushaDaicho_logicalDeletedFlag" = false
+        DbV4001JukyushaDaicho."logicalDeletedFlag" = false
     </select>
 
     <select resultOrdered="true" id="select受給者台帳情報"

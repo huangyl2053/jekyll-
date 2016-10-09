@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiTolelaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
@@ -59,8 +57,8 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
      * @return DTAレコード
      */
     public TokuchoSofuJohoRenkeiKanriEntity edit管理(int 通番) {
-        return new TokuchoSofuJohoRenkeiKanriEntity(entity.get市町村コードDT(),
-                スペース, new RString(通番), editパターン3(RDate.getNowDate()), RString.EMPTY);
+        return new TokuchoSofuJohoRenkeiKanriEntity(entity.get構成市町村コード(),
+                スペース, new RString(通番), editパターン34(RDate.getNowDate()), RString.EMPTY);
     }
 
     /**
@@ -79,9 +77,13 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
      * @return DTAレコード
      */
     public TokuchoSofuJohoRenkeiHeadEntity editヘッダ() {
-        return new TokuchoSofuJohoRenkeiHeadEntity(ONESTRING, entity.get市町村コードDT(),
-                スペース, entity.get市町村コードDT(), entity.get媒体コードDT(), entity.get特別徴収制度コードDT(),
-                editパターン3(RDate.getNowDate()), entity.get通知内容コードDT());
+        RString 特別徴収義務者コード = RString.EMPTY;
+        if (entity.get特別徴収義務者コードDT() != null) {
+            特別徴収義務者コード = entity.get特別徴収義務者コードDT().value();
+        }
+        return new TokuchoSofuJohoRenkeiHeadEntity(ONESTRING, entity.get構成市町村コード(),
+                特別徴収義務者コード, entity.get通知内容コードDT(), entity.get媒体コードDT(), entity.get特別徴収制度コードDT(),
+                editパターン34(RDate.getNowDate()), スペース);
     }
 
     /**
@@ -92,16 +94,16 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
     public TokuchoSofuJohoRenkeiDataEntity editデータ() {
         return new TokuchoSofuJohoRenkeiDataEntity(
                 TWOSTRING,
-                entity.get市町村コードDT(),
+                entity.get構成市町村コード(),
                 edit特別徴収義務者コード(entity.get特別徴収義務者コードDT()),
                 entity.get通知内容コードDT(),
-                entity.get予備1DT(),
+                スペース,
                 entity.get特別徴収制度コードDT(),
-                editパターン3(RDate.getNowDate()),
+                editパターン34(RDate.getNowDate()),
                 entity.get基礎年金番号DT(),
                 entity.get年金コードDT(),
-                entity.get予備2DT(),
-                editパターン3(entity.get生年月日DT()),
+                スペース,
+                editパターン34(entity.get生年月日DT()),
                 entity.get性別DT(),
                 RStringUtil.convert全角to半角(entity.getカナ氏名DT()),
                 entity.getシフトコード1DT(),
@@ -115,7 +117,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
                 edit各種区分(entity.get各種区分DT()),
                 処理結果,
                 entity.get後期移管コードDT(),
-                editパターン3(entity.get各種年月日DT()),
+                editパターン34(entity.get各種年月日DT()),
                 entity.get各種金額欄1DT(),
                 entity.get各種金額欄2DT(),
                 entity.get各種金額欄3DT(),
@@ -131,16 +133,16 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
     public TokuchoSofuJohoRenkeiDataEntity editデータZ99_550_xx_DTAファイルのみ() {
         return new TokuchoSofuJohoRenkeiDataEntity(
                 TWOSTRING,
-                entity.get市町村コードDT(),
+                entity.get構成市町村コード(),
                 edit特別徴収義務者コード(entity.get特別徴収義務者コードDT()),
                 entity.get通知内容コードDT(),
                 entity.get予備1DT(),
                 entity.get特別徴収制度コードDT(),
-                editパターン3(RDate.getNowDate()),
+                editパターン34(RDate.getNowDate()),
                 entity.get基礎年金番号DT(),
                 entity.get年金コードDT(),
                 entity.get予備2DT(),
-                editパターン3(entity.get生年月日DT()),
+                editパターン34(entity.get生年月日DT()),
                 entity.get性別DT(),
                 entity.getカナ氏名DT(),
                 entity.getシフトコード1DT(),
@@ -154,7 +156,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
                 edit各種区分(entity.get各種区分DT()),
                 処理結果,
                 entity.get後期移管コードDT(),
-                editパターン3(entity.get各種年月日DT()),
+                editパターン34(entity.get各種年月日DT()),
                 entity.get各種金額欄1DT(),
                 entity.get各種金額欄2DT(),
                 entity.get各種金額欄3DT(),
@@ -185,7 +187,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
                 entity.get通知内容コードDT(),
                 RString.EMPTY,
                 entity.get特別徴収制度コードDT(),
-                editパターン3(RDate.getNowDate()),
+                editパターン34(RDate.getNowDate()),
                 new RString(格納件数),
                 new RString(各種金額欄合計1.toString()),
                 new RString(各種金額欄合計2.toString()),
@@ -194,18 +196,18 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
         );
     }
 
-    private RString editパターン3(RDate date) {
+    private RString editパターン34(RDate date) {
         if (date != null) {
-            return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+            return date.seireki().separator(Separator.NONE)
                     .fillType(FillType.ZERO).toDateString();
         } else {
             return RString.EMPTY;
         }
     }
 
-    private RString editパターン3(RString date) {
+    private RString editパターン34(RString date) {
         if (date != null) {
-            return new RDate(date.toString()).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+            return new RDate(date.toString()).seireki().separator(Separator.NONE)
                     .fillType(FillType.ZERO).toDateString();
         } else {
             return RString.EMPTY;
@@ -223,7 +225,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
     private RString edit郵便番号(RString string) {
         if (!RString.isNullOrEmpty(string)) {
             YubinNo 郵便番号 = new YubinNo(string);
-            return 郵便番号.getEditedYubinNo();
+            return 郵便番号.value();
         }
         return RString.EMPTY;
     }

@@ -66,7 +66,10 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2 extends BatchProcess
     protected void process(TempSetaiinShotokuHanteiEntity entity) {
         年調整フラグ = false;
         基準年月日 = entity.getKijunYMD();
-        FlexibleYear 年 = entity.getKijunYMD().getYear();
+        if (基準年月日 == null) {
+            return;
+        }
+        FlexibleYear 年 = 基準年月日.getYear();
         if (年.isBefore(YEAR_2006) && INT_4 <= 基準年月日.getMonthValue() && 基準年月日.getMonthValue() <= INT_5) {
             年調整フラグ = true;
         } else if (YEAR_2006.isBeforeOrEquals(年) && 年.isBefore(YEAR_2015)

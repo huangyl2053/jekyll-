@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import lombok.Getter;
@@ -21,8 +19,8 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoshaMeisyoAndShikibetsuNoKanrenEntity {
-    
+
     private DbWT1111KyufuJissekiEntity 給付実績;
-    private List<DbT7060KaigoJigyoshaEntity> 介護事業者List;
+    private DbT7060KaigoJigyoshaEntity 介護事業者;
     private DbT3118ShikibetsuNoKanriEntity 識別番号;
 }

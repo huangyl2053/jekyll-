@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Sep 29 20:12:49 CST 2016
+ * Sun Oct 09 13:14:52 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row のクラスファイル
@@ -24,14 +25,14 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
     private RString txtUchiwakeHokenshaNo;
     private RString txtKokuhoHihokenshaShoKigo;
     private RString txtHiHokenshaShoNo;
-    private RString txtOver70Futangaku;
+    private TextBoxNum txtOver70Futangaku;
     private RString txtOver70AmbunRitsu;
-    private RString txtOver70Shikyugaku;
-    private RString txtUnder70Futangaku;
-    private RString txtFutangaku;
+    private TextBoxNum txtOver70Shikyugaku;
+    private TextBoxNum txtUnder70Futangaku;
+    private TextBoxNum txtFutangaku;
     private RString txtAmbunRitsu;
-    private RString txtUnder70Shikyugaku;
-    private RString txtShikyugaku;
+    private TextBoxNum txtUnder70Shikyugaku;
+    private TextBoxNum txtShikyugaku;
     private RString txtTaishoNendo;
     private RString txtShikyuShinseishoSeiriNo;
     private RString txtHihokenshaNo;
@@ -47,14 +48,14 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         this.txtUchiwakeHokenshaNo = RString.EMPTY;
         this.txtKokuhoHihokenshaShoKigo = RString.EMPTY;
         this.txtHiHokenshaShoNo = RString.EMPTY;
-        this.txtOver70Futangaku = RString.EMPTY;
+        this.txtOver70Futangaku = new TextBoxNum();
         this.txtOver70AmbunRitsu = RString.EMPTY;
-        this.txtOver70Shikyugaku = RString.EMPTY;
-        this.txtUnder70Futangaku = RString.EMPTY;
-        this.txtFutangaku = RString.EMPTY;
+        this.txtOver70Shikyugaku = new TextBoxNum();
+        this.txtUnder70Futangaku = new TextBoxNum();
+        this.txtFutangaku = new TextBoxNum();
         this.txtAmbunRitsu = RString.EMPTY;
-        this.txtUnder70Shikyugaku = RString.EMPTY;
-        this.txtShikyugaku = RString.EMPTY;
+        this.txtUnder70Shikyugaku = new TextBoxNum();
+        this.txtShikyugaku = new TextBoxNum();
         this.txtTaishoNendo = RString.EMPTY;
         this.txtShikyuShinseishoSeiriNo = RString.EMPTY;
         this.txtHihokenshaNo = RString.EMPTY;
@@ -82,7 +83,7 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
     }
 
-    public dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row(RString txtHokenSeido, RString txtUchiwakeHokenshaMei, RString txtJikoFutanSeiriNo, RString txtTaishoshaShimei, RString txtUchiwakeHokenshaNo, RString txtKokuhoHihokenshaShoKigo, RString txtHiHokenshaShoNo, RString txtOver70Futangaku, RString txtOver70AmbunRitsu, RString txtOver70Shikyugaku, RString txtUnder70Futangaku, RString txtFutangaku, RString txtAmbunRitsu, RString txtUnder70Shikyugaku, RString txtShikyugaku, RString txtTaishoNendo, RString txtShikyuShinseishoSeiriNo, RString txtHihokenshaNo, RString txtMeisanNo, RString txtRirekiNo) {
+    public dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row(RString txtHokenSeido, RString txtUchiwakeHokenshaMei, RString txtJikoFutanSeiriNo, RString txtTaishoshaShimei, RString txtUchiwakeHokenshaNo, RString txtKokuhoHihokenshaShoKigo, RString txtHiHokenshaShoNo, TextBoxNum txtOver70Futangaku, RString txtOver70AmbunRitsu, TextBoxNum txtOver70Shikyugaku, TextBoxNum txtUnder70Futangaku, TextBoxNum txtFutangaku, RString txtAmbunRitsu, TextBoxNum txtUnder70Shikyugaku, TextBoxNum txtShikyugaku, RString txtTaishoNendo, RString txtShikyuShinseishoSeiriNo, RString txtHihokenshaNo, RString txtMeisanNo, RString txtRirekiNo) {
         super();
         this.setOriginalData("txtHokenSeido", txtHokenSeido);
         this.setOriginalData("txtUchiwakeHokenshaMei", txtUchiwakeHokenshaMei);
@@ -154,7 +155,7 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         return txtHiHokenshaShoNo;
     }
 
-    public RString getTxtOver70Futangaku() {
+    public TextBoxNum getTxtOver70Futangaku() {
         return txtOver70Futangaku;
     }
 
@@ -162,15 +163,15 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         return txtOver70AmbunRitsu;
     }
 
-    public RString getTxtOver70Shikyugaku() {
+    public TextBoxNum getTxtOver70Shikyugaku() {
         return txtOver70Shikyugaku;
     }
 
-    public RString getTxtUnder70Futangaku() {
+    public TextBoxNum getTxtUnder70Futangaku() {
         return txtUnder70Futangaku;
     }
 
-    public RString getTxtFutangaku() {
+    public TextBoxNum getTxtFutangaku() {
         return txtFutangaku;
     }
 
@@ -178,11 +179,11 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         return txtAmbunRitsu;
     }
 
-    public RString getTxtUnder70Shikyugaku() {
+    public TextBoxNum getTxtUnder70Shikyugaku() {
         return txtUnder70Shikyugaku;
     }
 
-    public RString getTxtShikyugaku() {
+    public TextBoxNum getTxtShikyugaku() {
         return txtShikyugaku;
     }
 
@@ -241,7 +242,7 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         this.txtHiHokenshaShoNo = txtHiHokenshaShoNo;
     }
 
-    public void setTxtOver70Futangaku(RString txtOver70Futangaku) {
+    public void setTxtOver70Futangaku(TextBoxNum txtOver70Futangaku) {
         this.setOriginalData("txtOver70Futangaku", txtOver70Futangaku);
         this.txtOver70Futangaku = txtOver70Futangaku;
     }
@@ -251,17 +252,17 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         this.txtOver70AmbunRitsu = txtOver70AmbunRitsu;
     }
 
-    public void setTxtOver70Shikyugaku(RString txtOver70Shikyugaku) {
+    public void setTxtOver70Shikyugaku(TextBoxNum txtOver70Shikyugaku) {
         this.setOriginalData("txtOver70Shikyugaku", txtOver70Shikyugaku);
         this.txtOver70Shikyugaku = txtOver70Shikyugaku;
     }
 
-    public void setTxtUnder70Futangaku(RString txtUnder70Futangaku) {
+    public void setTxtUnder70Futangaku(TextBoxNum txtUnder70Futangaku) {
         this.setOriginalData("txtUnder70Futangaku", txtUnder70Futangaku);
         this.txtUnder70Futangaku = txtUnder70Futangaku;
     }
 
-    public void setTxtFutangaku(RString txtFutangaku) {
+    public void setTxtFutangaku(TextBoxNum txtFutangaku) {
         this.setOriginalData("txtFutangaku", txtFutangaku);
         this.txtFutangaku = txtFutangaku;
     }
@@ -271,12 +272,12 @@ public class dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row extends DataRow {
         this.txtAmbunRitsu = txtAmbunRitsu;
     }
 
-    public void setTxtUnder70Shikyugaku(RString txtUnder70Shikyugaku) {
+    public void setTxtUnder70Shikyugaku(TextBoxNum txtUnder70Shikyugaku) {
         this.setOriginalData("txtUnder70Shikyugaku", txtUnder70Shikyugaku);
         this.txtUnder70Shikyugaku = txtUnder70Shikyugaku;
     }
 
-    public void setTxtShikyugaku(RString txtShikyugaku) {
+    public void setTxtShikyugaku(TextBoxNum txtShikyugaku) {
         this.setOriginalData("txtShikyugaku", txtShikyugaku);
         this.txtShikyugaku = txtShikyugaku;
     }

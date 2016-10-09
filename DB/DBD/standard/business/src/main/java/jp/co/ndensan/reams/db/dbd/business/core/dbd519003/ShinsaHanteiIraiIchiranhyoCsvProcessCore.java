@@ -47,14 +47,12 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
 
     private static final RString ファイル名_日本語 = new RString("資格喪失（死亡）データ送信ファイル");
-    private static final RString ファイル名_英数字 = new RString("NCI201.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBD519003"));
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
     private static final RString 今回開始日時 = new RString("【今回開始日時】");
     private static final RString 今回終了日時 = new RString("【今回終了日時】");
     private static final ReportId REPORT_DBD503001 = ReportIdDBD.DBD503001.getReportId();
     private static final int 先頭9桁 = 9;
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
 
     /**
      * 資格喪失（死亡）データのCSVEntityを作成する。
@@ -69,7 +67,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
         csvEntity.set被保険者番号(entity.get被保険者番号().value());
         FlexibleDate date = entity.get認定申請年月日();
         FlexibleDate newdate = new FlexibleDate(date.getYearValue(), date.getMonthValue(), 1);
-        csvEntity.set認定申請日(new RString(newdate.wareki().toString()));
+        csvEntity.set認定申請日(newdate.wareki().toDateString());
         csvEntity.set枝番(entity.get枝番());
         csvEntity.set申請区分法令コード(new RString(NinteiShinseiKubunShinsei.職権.toString()));
         csvEntity.set申請区分申請時コード(new RString(NinteiShinseiKubunShinsei.資格喪失_死亡.toString()));
@@ -101,7 +99,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
                 REPORT_DBD503001.getColumnValue().substring(0, 先頭9桁),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
-                ジョブ番号.concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD503001.getReportName(),
                 new RString(batchReportWriter.getPageCount()),
                 new RString("なし"),
@@ -126,7 +124,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                ファイル名_英数字,
+                para.getNewfilename(),
                 EUC_ENTITY_ID.toRString(),
                 new RString(连番),
                 contribute(para));

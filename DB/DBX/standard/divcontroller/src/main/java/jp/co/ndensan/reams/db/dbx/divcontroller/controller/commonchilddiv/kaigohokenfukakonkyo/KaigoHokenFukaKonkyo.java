@@ -9,14 +9,21 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.business.core.fukajoho.FukaJohoRelateSearchResult;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.divcontroller.entity.commonchilddiv.KaigoHokenFukaKonkyo.KaigoHokenFukaKonkyoDiv;
 import jp.co.ndensan.reams.db.dbx.divcontroller.entity.commonchilddiv.KaigoHokenFukaKonkyo.KaigoHokenFukaKonkyoHandler;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbx.service.core.fuka.FukaJohoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -26,6 +33,9 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @reamsid_L DBB-5723-010 xuxin
  */
 public class KaigoHokenFukaKonkyo {
+
+    private static final Code 業務固有 = new Code("0003");
+    private static final RString 業務固有の識別情報名称 = new RString("被保険者番号");
 
     private KaigoHokenFukaKonkyoHandler getHandler(KaigoHokenFukaKonkyoDiv div) {
         return new KaigoHokenFukaKonkyoHandler(div);
@@ -50,12 +60,21 @@ public class KaigoHokenFukaKonkyo {
                 ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
                         get最大基準日時(resultMax.get介護賦課Result().get賦課年度());
                 getHandler(div).init(処理日付管理情報, resultMax, resultList, 識別コード);
+                setAccessLog出力(識別コード, resultMax.get介護賦課Result().get被保険者番号());
             } else {
                 div.getBtnBefore().setDisabled(true);
                 div.getBtnAfter().setDisabled(true);
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setAccessLog出力(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        if (被保険者番号 != null) {
+            ExpandedInformation expandedInfo = new ExpandedInformation(業務固有, 業務固有の識別情報名称,
+                    被保険者番号.getColumnValue());
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード, expandedInfo));
+        }
     }
 
     /**

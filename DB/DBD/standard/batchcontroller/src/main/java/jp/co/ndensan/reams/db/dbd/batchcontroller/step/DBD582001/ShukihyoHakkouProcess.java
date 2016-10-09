@@ -464,7 +464,7 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
         if (parameter.get基準年月日04() == null) {
             出力条件.add(new RString("【基準日】 "));
         } else {
-            出力条件.add(new RString("【基準日】 ").concat(new RString(parameter.get基準年月日04().getDayValue())));
+            出力条件.add(new RString("【基準日】 ").concat(parameter.get基準年月日04().wareki().toDateString().substring(INDEX_7)));
         }
         出力条件.add(new RString("【集計単位】 " + parameter.get集計単位()));
         出力条件.add(new RString("【年齢From】 " + parameter.get年齢From()));

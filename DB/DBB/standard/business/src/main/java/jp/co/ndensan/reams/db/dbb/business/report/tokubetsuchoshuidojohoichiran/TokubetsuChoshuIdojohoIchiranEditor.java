@@ -152,7 +152,7 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
     }
 
     private RString getDT各種金額欄(RString dT各種金額欄) {
-        if (null != dT各種金額欄) {
+        if (null != dT各種金額欄 && !dT各種金額欄.isEmpty()) {
             return DecimalFormatter.toコンマ区切りRString(new Decimal(dT各種金額欄.toString()), NUM_0);
         } else {
             return RString.EMPTY;

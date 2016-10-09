@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokushokaihyo
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.JukyuusyaTyuushutuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.SaihaqkouTaishoupParameter;
+import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShikibetsuCodeListParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShotokuNendoParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.FukaKijunSetaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.JukyuusyaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.KouhoshaTenyuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.NendoNaiyuSikakuMonoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SaihaqkouTaishouTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SetaiShotokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SetaiSudeTempEntity;
@@ -110,6 +112,21 @@ public interface IShotokushokaihyoMapper {
      * @param 識別コード ShikibetsuCode
      */
     void delete住民情報(ShikibetsuCode 識別コード);
+
+    /**
+     * 所得照会候補者を削除します。
+     *
+     * @param 識別コードparameter ShikibetsuCodeListParameter
+     */
+    void delete所得照会候補者(ShikibetsuCodeListParameter 識別コードparameter);
+
+    /**
+     * 年度内有資格者抽出のメソッドです。
+     *
+     * @param parameter ShotokuNendoParameter
+     * @return List<NendoNaiyuSikakuMonoTempEntity>
+     */
+    List<NendoNaiyuSikakuMonoTempEntity> select年度内有資格者抽出(ShotokuNendoParameter parameter);
 
     /**
      * select所得情報
@@ -217,7 +234,7 @@ public interface IShotokushokaihyoMapper {
      *
      * @return List<SetaiShotokuTempEntity>
      */
-    List<SetaiShotokuTempEntity> select世帯員所得_年度内有資格者();
+    List<SetaiShotokuTempEntity> select世帯員所得();
 
     /**
      * 世帯員所得情報Tempを出力します。

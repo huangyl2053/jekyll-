@@ -39,7 +39,6 @@ public class KariNonyuTsuchishoHakkoIchiranSource implements IReportSource {
     public RString hdrDankai;
     @ReportItem(name = "listUpper_1", length = 6, order = 13)
     public RString listUpper_1;
-    @ReportPerson(id = "listUpper_2")
     @ReportItem(name = "listUpper_2", length = 20, order = 14)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 10, order = 15)
@@ -83,5 +82,8 @@ public class KariNonyuTsuchishoHakkoIchiranSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportPerson(id = "shikibetsuCode")
+    @ReportItem(name = "shikibetsuCode", length = 38, order = 32)
+    public RString shikibetsuCode;
 // </editor-fold>
 }

@@ -7,9 +7,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.IServiceTypeInputCommonChildDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * DBC5150011Main のクラスファイル
@@ -106,6 +111,31 @@ public class DBC5150011MainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
+    public ServiceCodeChushutsuJokenDiv getServiceCodeChushutsuJoken() {
+        return this.getChushutsuJoken().getServiceCodeChushutsuJoken();
+    }
+
+    @JsonIgnore
+    public void setServiceCodeChushutsuJoken(ServiceCodeChushutsuJokenDiv ServiceCodeChushutsuJoken) {
+        this.getChushutsuJoken().setServiceCodeChushutsuJoken(ServiceCodeChushutsuJoken);
+    }
+
+    @JsonIgnore
+    public TextBox get項目() {
+        return this.getChushutsuJoken().getServiceCodeChushutsuJoken().get項目();
+    }
+
+    @JsonIgnore
+    public void set項目(TextBox 項目) {
+        this.getChushutsuJoken().getServiceCodeChushutsuJoken().set項目(項目);
+    }
+
+    @JsonIgnore
+    public IServiceTypeInputCommonChildDiv getCcdServiceShurui() {
+        return this.getChushutsuJoken().getServiceCodeChushutsuJoken().getCcdServiceShurui();
+    }
+
+    @JsonIgnore
     public RadioButton getRadChushutsuJokenServiceBunrui() {
         return this.getChushutsuJoken().getRadChushutsuJokenServiceBunrui();
     }
@@ -133,11 +163,6 @@ public class DBC5150011MainDiv extends PanelBatchParameter {
     @JsonIgnore
     public void setDgServiceBunruiList(DataGrid<dgServiceBunruiList_Row> dgServiceBunruiList) {
         this.getChushutsuJoken().getPanServiceSyurui().setDgServiceBunruiList(dgServiceBunruiList);
-    }
-
-    @JsonIgnore
-    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
-        return this.getChushutsuJoken().getCcdServiceCodeInput();
     }
 
     @JsonIgnore

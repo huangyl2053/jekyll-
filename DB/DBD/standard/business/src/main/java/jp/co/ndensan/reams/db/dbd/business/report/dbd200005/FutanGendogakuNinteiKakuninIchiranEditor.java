@@ -96,83 +96,94 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
                 .append(RString.FULL_SPACE)
                 .append(作成).toRString();
         source.title = 負担限度額認定一括確認リスト;
-        if (null != 導入団体) {
-            source.hokenshaNo = this.導入団体.get地方公共団体コード().value();
-            source.hokenshaName = this.導入団体.get市町村名();
+        if (null != this.導入団体) {
+            if (null != this.導入団体.get地方公共団体コード()) {
+                source.hokenshaNo = this.導入団体.get地方公共団体コード().value();
+            }
+            if (null != this.導入団体.get市町村名()) {
+                source.hokenshaName = this.導入団体.get市町村名();
+            }
         }
-        if (null != 帳票出力順) {
-            source = set出力順改頁(source);
+        if (null != this.帳票出力順 && null != this.帳票出力順.get設定項目リスト()) {
+            List<ISetSortItem> 設定項目リスト = this.帳票出力順.get設定項目リスト();
+            source = set出力順改頁(source, 設定項目リスト);
         }
         source.hdrGekihenKanwa = RString.EMPTY;
     }
 
     private void setHihokenshaStep1(FutanGendogakuNinteiKakuninIchiranReportSource source) {
-        if (null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
-            IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(this.負担限度額認定確認リスト.getAtesakiEntity());
-            if (null != 宛名.get名称()) {
-                source.list1_2 = 宛名.get名称().getName().value();
+        if (null != this.負担限度額認定確認リスト) {
+            if (null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
+                IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(this.負担限度額認定確認リスト.getAtesakiEntity());
+                get名称(source, 宛名);
             }
-        }
-        if (null != this.負担限度額認定確認リスト.get被保険者番号()) {
-            source.list1_1 = this.負担限度額認定確認リスト.get被保険者番号().value();
-        }
-        if (null != this.負担限度額認定確認リスト.get資格取得日()) {
-            source.list2_1 = this.負担限度額認定確認リスト.get資格取得日().wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        }
-        if (null != this.負担限度額認定確認リスト.get資格喪失日()) {
-            source.list2_2 = this.負担限度額認定確認リスト.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        }
-        if (null != this.負担限度額認定確認リスト.get認定開始日()) {
-            source.list2_3 = this.負担限度額認定確認リスト.get認定開始日().wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        }
-        if (null != this.負担限度額認定確認リスト.get認定終了日()) {
-            source.list2_4 = this.負担限度額認定確認リスト.get認定終了日().wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        }
-        if (null != this.負担限度額認定確認リスト.get要介護状態区分コード()
-                && null != this.負担限度額認定確認リスト.get厚労省IF識別コード()) {
-            source.list2_5 = get要介護度();
-        }
-        RString 申請理由区分 = this.負担限度額認定確認リスト.get今回認定結果().getShinseiRiyuKubun();
-        RString 申請理由区分名称 = RString.EMPTY;
-        if (null != 申請理由区分 && !申請理由区分.isEmpty()) {
-            申請理由区分名称 = ShinseiRiyuKubun.toValue(申請理由区分).get名称();
-        }
-        source.list1_3 = 申請理由区分名称;
-        if (this.負担限度額認定確認リスト.is旧措置()) {
-            source.list2_6 = 星;
-        }
-        if (Boolean.valueOf(this.負担限度額認定確認リスト.get利用軽減().toString())) {
-            source.list4_1 = 申;
-        } else if (this.負担限度額認定確認リスト.get利用軽減().isEmpty()) {
-            source.list4_1 = RString.EMPTY;
-        } else {
-            source.list4_1 = 認;
-        }
-        if (Boolean.valueOf(this.負担限度額認定確認リスト.get社福軽減().toString())) {
-            source.list4_2 = 申;
-        } else if (this.負担限度額認定確認リスト.get社福軽減().isEmpty()) {
-            source.list4_2 = RString.EMPTY;
-        } else {
-            source.list4_2 = 認;
+            if (null != this.負担限度額認定確認リスト.get被保険者番号()) {
+                source.list1_1 = this.負担限度額認定確認リスト.get被保険者番号().value();
+            }
+            if (null != this.負担限度額認定確認リスト.get資格取得日()) {
+                source.list2_1 = this.負担限度額認定確認リスト.get資格取得日().wareki().eraType(EraType.KANJI_RYAKU).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
+            if (null != this.負担限度額認定確認リスト.get資格喪失日()) {
+                source.list2_2 = this.負担限度額認定確認リスト.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
+            if (null != this.負担限度額認定確認リスト.get認定開始日()) {
+                source.list2_3 = this.負担限度額認定確認リスト.get認定開始日().wareki().eraType(EraType.KANJI_RYAKU).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
+            if (null != this.負担限度額認定確認リスト.get認定終了日()) {
+                source.list2_4 = this.負担限度額認定確認リスト.get認定終了日().wareki().eraType(EraType.KANJI_RYAKU).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
+            if (null != this.負担限度額認定確認リスト.get要介護状態区分コード()
+                    && null != this.負担限度額認定確認リスト.get厚労省IF識別コード()) {
+                source.list2_5 = get要介護度();
+            }
+            DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果 = this.負担限度額認定確認リスト.get今回認定結果();
+            if (null != 今回認定結果) {
+                get申請理由区分名称(source, 今回認定結果);
+            }
+            if (this.負担限度額認定確認リスト.is旧措置()) {
+                source.list2_6 = 星;
+            }
+            if (null != this.負担限度額認定確認リスト.get利用軽減()
+                    && Boolean.valueOf(this.負担限度額認定確認リスト.get利用軽減().toString())) {
+                source.list4_1 = 申;
+            } else if (null != this.負担限度額認定確認リスト.get利用軽減()
+                    && this.負担限度額認定確認リスト.get利用軽減().isEmpty()) {
+                source.list4_1 = RString.EMPTY;
+            } else {
+                source.list4_1 = 認;
+            }
+            if (null != this.負担限度額認定確認リスト.get社福軽減()
+                    && Boolean.valueOf(this.負担限度額認定確認リスト.get社福軽減().toString())) {
+                source.list4_2 = 申;
+            } else if (null != this.負担限度額認定確認リスト.get社福軽減()
+                    && this.負担限度額認定確認リスト.get社福軽減().isEmpty()) {
+                source.list4_2 = RString.EMPTY;
+            } else {
+                source.list4_2 = 認;
+            }
         }
     }
 
     private void setHihokenshaStep2(FutanGendogakuNinteiKakuninIchiranReportSource source) {
-        if (null != 負担限度額認定確認リスト) {
-            if (Boolean.valueOf(this.負担限度額認定確認リスト.get訪問減額().toString())) {
+        if (null != this.負担限度額認定確認リスト) {
+            if (null != this.負担限度額認定確認リスト.get訪問減額()
+                    && Boolean.valueOf(this.負担限度額認定確認リスト.get訪問減額().toString())) {
                 source.list4_3 = 申;
-            } else if (this.負担限度額認定確認リスト.get訪問減額().isEmpty()) {
+            } else if (null != this.負担限度額認定確認リスト.get訪問減額()
+                    && this.負担限度額認定確認リスト.get訪問減額().isEmpty()) {
                 source.list4_3 = RString.EMPTY;
             } else {
                 source.list4_3 = 認;
             }
-            if (Boolean.valueOf(this.負担限度額認定確認リスト.get特地減免().toString())) {
+            if (null != this.負担限度額認定確認リスト.get特地減免()
+                    && Boolean.valueOf(this.負担限度額認定確認リスト.get特地減免().toString())) {
                 source.list4_4 = 申;
-            } else if (this.負担限度額認定確認リスト.get特地減免().isEmpty()) {
+            } else if (null != this.負担限度額認定確認リスト.get特地減免()
+                    && this.負担限度額認定確認リスト.get特地減免().isEmpty()) {
                 source.list4_4 = RString.EMPTY;
             } else {
                 source.list4_4 = 認;
@@ -180,39 +191,29 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
 
             if (this.負担限度額認定確認リスト.is生活保護受給者()) {
                 source.list1_4 = 星;
-            } else {
-                source.list1_4 = RString.EMPTY;
             }
             if (this.負担限度額認定確認リスト.is老齢福祉年金受給者()) {
                 source.list1_5 = 星;
-            } else {
-                source.list1_5 = RString.EMPTY;
             }
             if (null != this.負担限度額認定確認リスト.get合計所得金額()) {
                 source.list2_7 = DecimalFormatter.toコンマ区切りRString(this.負担限度額認定確認リスト.get合計所得金額(), 0);
             }
             source.list3_1 = RString.EMPTY;
-            RString 世帯課税 = this.負担限度額認定確認リスト.get世帯課税区分();
-            RString 世帯課税名称 = RString.EMPTY;
-            if (null != 世帯課税 && !世帯課税.isEmpty()) {
-                世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
+            if (null != this.負担限度額認定確認リスト.get世帯課税区分()
+                    && !this.負担限度額認定確認リスト.get世帯課税区分().isEmpty()) {
+                RString 世帯課税 = this.負担限度額認定確認リスト.get世帯課税区分();
+                source.list3_2 = SetaiKazeiKubun.toValue(世帯課税).get名称();
             }
-            source.list3_2 = 世帯課税名称;
             source.list3_3 = RString.EMPTY;
-            //TODO QA 住民となった日がバッチ設計書がない
-//            if (null != this.負担限度額認定確認リスト.get住民となった日()) {
-//                source.list5_1 = this.負担限度額認定確認リスト.get住民となった日().wareki().eraType(EraType.KANJI_RYAKU).
-//                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-//            }
-            RString 配偶者課税区分 = this.負担限度額認定確認リスト.get今回認定結果().getHaigushaKazeiKubun();
-            RString 配偶者課税区分名称 = RString.EMPTY;
-            if (null != 配偶者課税区分 && !配偶者課税区分.isEmpty()) {
-                配偶者課税区分名称 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
+            if (null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
+                IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(this.負担限度額認定確認リスト.getAtesakiEntity());
+                get登録異動年月日(source, 宛名);
             }
-            source.list3_2 = 配偶者課税区分名称;
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果 = this.負担限度額認定確認リスト.get今回認定結果();
             if (null != 今回認定結果) {
+                get配偶者課税区分名称(source, 今回認定結果);
                 get預貯金等合計(source, 今回認定結果);
+
             }
         }
     }
@@ -233,8 +234,6 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
                 source.list2_8 = 承認1;
             } else if (承認しない.equals(決定区分)) {
                 source.list2_8 = 却下;
-            } else {
-                source.list2_8 = RString.EMPTY;
             }
             FlexibleDate tekiyoKaishiYMD = 今回認定結果.getTekiyoKaishiYMD();
             source.list1_7 = (tekiyoKaishiYMD == null || tekiyoKaishiYMD.isEmpty()) ? RString.EMPTY : tekiyoKaishiYMD.
@@ -301,7 +300,6 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             source.list2_13 = (ketteiYMD == null || ketteiYMD.isEmpty()) ? RString.EMPTY : ketteiYMD.
                     wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-
             RString 決定区分 = 前回認定結果.getKetteiKubun();
             RString 承認 = KetteiKubun.承認する.getコード();
             RString 承認しない = KetteiKubun.承認しない.getコード();
@@ -359,6 +357,12 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         }
     }
 
+    private void get名称(FutanGendogakuNinteiKakuninIchiranReportSource source, IKojin 宛名) {
+        if (null != 宛名.get名称()) {
+            source.list1_2 = 宛名.get名称().getName().value();
+        }
+    }
+
     private RString get要介護度() {
         RString 要介護認定状態区分コード = this.負担限度額認定確認リスト.get要介護状態区分コード();
         KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
@@ -366,8 +370,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護認定状態区分コード).getName();
     }
 
-    private FutanGendogakuNinteiKakuninIchiranReportSource set出力順改頁(FutanGendogakuNinteiKakuninIchiranReportSource source) {
-        List<ISetSortItem> 設定項目リスト = this.帳票出力順.get設定項目リスト();
+    private FutanGendogakuNinteiKakuninIchiranReportSource set出力順改頁(FutanGendogakuNinteiKakuninIchiranReportSource source,
+            List<ISetSortItem> 設定項目リスト) {
+
         if (設定項目リスト.size() > LISTINDEX_0) {
             source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
             if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
@@ -420,4 +425,25 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         source.list6_2 = DecimalFormatter.toコンマ区切りRString(合計, 0);
     }
 
+    private void get申請理由区分名称(FutanGendogakuNinteiKakuninIchiranReportSource source,
+            DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果) {
+        RString 申請理由区分 = 今回認定結果.getShinseiRiyuKubun();
+        if (null != 申請理由区分 && !申請理由区分.isEmpty()) {
+            source.list1_3 = ShinseiRiyuKubun.toValue(申請理由区分).get名称();
+        }
+    }
+
+    private void get登録異動年月日(FutanGendogakuNinteiKakuninIchiranReportSource source, IKojin 宛名) {
+        if (null != 宛名.get登録異動年月日()) {
+            source.list5_1 = 宛名.get登録異動年月日().wareki().toDateString();
+        }
+    }
+
+    private void get配偶者課税区分名称(FutanGendogakuNinteiKakuninIchiranReportSource source,
+            DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果) {
+        RString 配偶者課税区分 = 今回認定結果.getHaigushaKazeiKubun();
+        if (null != 配偶者課税区分 && !配偶者課税区分.isEmpty()) {
+            source.list3_2 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
+        }
+    }
 }

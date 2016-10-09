@@ -34,40 +34,4 @@ public class ShotokuShokaihyoHakkoProcessParameter implements IBatchProcessParam
     private RString 出力順;
     private RString 改頁項目ID;
 
-    /**
-     * コンストラクタです。
-     *
-     * @param 処理年度 FlexibleYear
-     * @param 照会年月日 FlexibleDate
-     * @param 出力対象 RString
-     * @param テストプリント boolean
-     * @param 再発行対象リスト List<SaiHakkoParameter>
-     * @param 出力順ID Long
-     * @param 導入形態コード RString
-     * @param 構成市町村情報リスト List<KoikiZenShichosonJohoParameter>
-     * @param 出力順 RString
-     * @param 改頁項目ID RString
-     */
-    public ShotokuShokaihyoHakkoProcessParameter(FlexibleYear 処理年度,
-            FlexibleDate 照会年月日,
-            RString 出力対象,
-            boolean テストプリント,
-            List<SaiHakkoParameter> 再発行対象リスト,
-            Long 出力順ID,
-            RString 導入形態コード,
-            List<KoikiZenShichosonJohoParameter> 構成市町村情報リスト,
-            RString 出力順,
-            RString 改頁項目ID) {
-        this.処理年度 = 処理年度;
-        this.照会年月日 = 照会年月日;
-        this.出力対象 = 出力対象;
-        this.テストプリント = テストプリント;
-        this.再発行対象リスト = 再発行対象リスト;
-        this.出力順ID = 出力順ID;
-        this.導入形態コード = 導入形態コード;
-        this.構成市町村情報リスト = 構成市町村情報リスト;
-        this.出力順 = 出力順;
-        this.改頁項目ID = 改頁項目ID;
-    }
-
 }
