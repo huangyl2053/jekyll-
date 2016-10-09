@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.Kog
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -119,8 +117,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      * @return Boolean
      */
     public Boolean is前排他キーのセット(HihokenshaNo 被保険者番号) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
+        LockingKey 排他キー = new LockingKey(被保険者番号);
         return RealInitialLocker.tryGetLock(排他キー);
     }
 
@@ -158,7 +155,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             List<SogoJigyoTaishosha> 総合事業対象者データ = KogakuGassanShikyuKetteiHosei.
                     createInstance().get総合事業対象者データ(被保険者番号);
             if ((受給者台帳データ == null || 受給者台帳データ.isEmpty())
-                    && (総合事業対象者データ == null || 総合事業対象者データ.isEmpty())) {
+                    || (総合事業対象者データ == null || 総合事業対象者データ.isEmpty())) {
                 throw new ApplicationException(DbcInformationMessages.被保険者または事業対象者でないデータ.getMessage());
             }
         } else {
