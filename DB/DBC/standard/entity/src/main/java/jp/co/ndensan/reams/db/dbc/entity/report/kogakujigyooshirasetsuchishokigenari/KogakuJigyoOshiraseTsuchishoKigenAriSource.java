@@ -1,9 +1,11 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 高額総合事業サービス費給付お知らせ通知書（提出期限あり）Sourceクラスです。
@@ -27,7 +29,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriSource implements IReportSource
     public RString hihokenshaName;
     @ReportItem(name = "seibetsu", length = 1, order = 7)
     public RString seibetsu;
-    @ReportExpandedInfo(id = "hihokenshaNo")
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 8)
     public RString hihokenshaNo;
     @ReportItem(name = "birthYMD", length = 11, order = 9)
@@ -126,6 +128,8 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriSource implements IReportSource
     public RString samabunShimeiSmall1;
     @ReportItem(name = "customerBarCode", order = 56)
     public RString customerBarCode;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetsuCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
