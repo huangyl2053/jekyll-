@@ -71,7 +71,7 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
     protected void process(ChohyoShuchiryokuyoShiseiJyohoEntity entity) {
         entity.setIndex(连番);
         entity.set出力CSV状況申請(RString.EMPTY);
-        entity.set認定申請区分_申請時コード(new Code(NinteiShinseiKubunShinsei.資格喪失_死亡.toString()));
+        entity.set認定申請区分_申請時コード(new Code(String.valueOf(NinteiShinseiKubunShinsei.資格喪失_死亡.コード())));
         ShinsaHanteiIraiIchiranhyoReport report = new ShinsaHanteiIraiIchiranhyoReport(entity);
         report.writeBy(reportSourceWriter);
         连番++;
