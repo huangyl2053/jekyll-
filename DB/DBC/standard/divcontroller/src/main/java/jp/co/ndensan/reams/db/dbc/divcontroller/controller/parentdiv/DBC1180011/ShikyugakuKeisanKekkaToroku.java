@@ -144,8 +144,6 @@ public class ShikyugakuKeisanKekkaToroku {
         } else {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(計算結果を保存する, false);
         }
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeList().setIsOpen(true);
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setIsOpen(false);
         return ResponseData.of(div).respond();
     }
 
@@ -165,7 +163,7 @@ public class ShikyugakuKeisanKekkaToroku {
         handler.照会状態設定(false);
         handler.onClick_btnKeisanKekka();
         div.getChkSaiso().setReadOnly(true);
-        div.getBtnAddKeisanKekka().setDisabled(false);
+        div.getBtnUchiwakeAdd().setDisabled(false);
         ViewStateHolder.put(ViewStateKeys.支給額計算結果状態, 追加);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowModifyButtonColumn(true);
@@ -198,7 +196,7 @@ public class ShikyugakuKeisanKekkaToroku {
                 = ViewStateHolder.get(ViewStateKeys.支給額計算結果情報, KogakuGassanShikyuGakuKeisanKekkaHosei.class);
         dgKogakuGassanShikyuGakuKeisanKekka_Row row = div.getDgKogakuGassanShikyuGakuKeisanKekka().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo().getValue().getYear().toDateString());
         HokenshaNo 証記載保険者番号 = new HokenshaNo(row.getTxtShoKisaiHokenshaNo());
         RString 支給申請書整理番号 = row.getTxtShikyuShinseishoSeiriNo();
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
@@ -215,7 +213,7 @@ public class ShikyugakuKeisanKekkaToroku {
         handler.照会状態設定(true);
         handler.onClick_dgShikyuGakuKeisanKekkaSelect(支給額計算結果);
         div.getChkSaiso().setReadOnly(true);
-        div.getBtnAddKeisanKekka().setDisabled(true);
+        div.getBtnUchiwakeAdd().setDisabled(true);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowDeleteButtonColumn(false);
@@ -235,7 +233,7 @@ public class ShikyugakuKeisanKekkaToroku {
                 = ViewStateHolder.get(ViewStateKeys.支給額計算結果情報, KogakuGassanShikyuGakuKeisanKekkaHosei.class);
         dgKogakuGassanShikyuGakuKeisanKekka_Row row = div.getDgKogakuGassanShikyuGakuKeisanKekka().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo().getValue().getYear().toDateString());
         HokenshaNo 証記載保険者番号 = new HokenshaNo(row.getTxtShoKisaiHokenshaNo());
         RString 支給申請書整理番号 = row.getTxtShikyuShinseishoSeiriNo();
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
@@ -256,7 +254,7 @@ public class ShikyugakuKeisanKekkaToroku {
         } else {
             div.getChkSaiso().setReadOnly(true);
         }
-        div.getBtnAddKeisanKekka().setDisabled(true);
+        div.getBtnUchiwakeAdd().setDisabled(true);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowDeleteButtonColumn(true);
@@ -276,7 +274,7 @@ public class ShikyugakuKeisanKekkaToroku {
                 = ViewStateHolder.get(ViewStateKeys.支給額計算結果情報, KogakuGassanShikyuGakuKeisanKekkaHosei.class);
         dgKogakuGassanShikyuGakuKeisanKekka_Row row = div.getDgKogakuGassanShikyuGakuKeisanKekka().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo().getValue().getYear().toDateString());
         HokenshaNo 証記載保険者番号 = new HokenshaNo(row.getTxtShoKisaiHokenshaNo());
         RString 支給申請書整理番号 = row.getTxtShikyuShinseishoSeiriNo();
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
@@ -296,7 +294,7 @@ public class ShikyugakuKeisanKekkaToroku {
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getChkSaiso().setReadOnly(true);
-        div.getBtnAddKeisanKekka().setDisabled(true);
+        div.getBtnUchiwakeAdd().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.支給額計算結果, 支給額計算結果);
         ViewStateHolder.put(ViewStateKeys.支給額計算結果状態, 削除);
         return ResponseData.of(div).respond();
@@ -489,7 +487,7 @@ public class ShikyugakuKeisanKekkaToroku {
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onChange_tab(ShikyugakuKeisanKekkaTorokuDiv div) {
         if (!div.getShikyugakuKeisanKekkaTorokuDetailPanel().isReadOnly()
-                && div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isIsOpen()) {
+                && !div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone()) {
             throw new ApplicationException(DbcErrorMessages.内訳入力途中.getMessage());
         }
         return ResponseData.of(div).respond();
@@ -502,7 +500,7 @@ public class ShikyugakuKeisanKekkaToroku {
      * @return ResponseData
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnBackToIchiran(ShikyugakuKeisanKekkaTorokuDiv div) {
-        if (div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isIsOpen()) {
+        if (!div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone()) {
             throw new ApplicationException(DbcErrorMessages.内訳入力途中.getMessage());
         }
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果状態, RString.class);
@@ -547,7 +545,7 @@ public class ShikyugakuKeisanKekkaToroku {
      * @return ResponseData
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnSave(ShikyugakuKeisanKekkaTorokuDiv div) {
-        if (div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isIsOpen()) {
+        if (!div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone()) {
             throw new ApplicationException(DbcErrorMessages.内訳入力途中.getMessage());
         }
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果状態, RString.class);
@@ -586,8 +584,8 @@ public class ShikyugakuKeisanKekkaToroku {
             }
             前排他解除();
             アクセスログを出力_更新(対象者);
-            div.getCcdKanryoMessage().setSuccessMessage(完了メッセージ,
-                    対象者.get被保険者番号().getColumnValue(), div.getCcdKaigoAtenaInfo().get氏名漢字());
+            div.getCcdKanryoMessage().setMessage(完了メッセージ,
+                    対象者.get被保険者番号().getColumnValue(), div.getCcdKaigoAtenaInfo().get氏名漢字(), true);
             return ResponseData.of(div).setState(DBC1180011StateName.処理完了);
         }
         return ResponseData.of(div).respond();

@@ -269,7 +269,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         private static boolean is金額チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             Decimal 按分後支給額 = div.getTxtHonninShikyugaku().getValue();
             Decimal うち70歳以上分按分後支給額 = div.getTxtOver70HonninShikyugaku().getValue();
-            return うち70歳以上分按分後支給額.compareTo(按分後支給額) <= 0;
+            return うち70歳以上分按分後支給額 == null || うち70歳以上分按分後支給額.compareTo(按分後支給額) <= 0;
         }
 
         private static boolean is高額合算支給不支給決定データの存在チェック(ShikyugakuKeisanKekkaTorokuDiv div) {

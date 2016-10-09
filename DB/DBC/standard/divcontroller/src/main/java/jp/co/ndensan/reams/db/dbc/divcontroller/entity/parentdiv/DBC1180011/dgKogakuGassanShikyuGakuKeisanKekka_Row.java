@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Sep 29 20:12:49 CST 2016
+ * Sun Oct 09 13:14:52 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * dgKogakuGassanShikyuGakuKeisanKekka_Row のクラスファイル
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 public class dgKogakuGassanShikyuGakuKeisanKekka_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
-    private RString txtTaishoNendo;
+    private TextBoxDate txtTaishoNendo;
     private RString txtSanteiKubun;
     private RString txtShikyuShinseishoSeiriNo;
     private RString txtJikoFutanSeiriNo;
@@ -31,7 +32,7 @@ public class dgKogakuGassanShikyuGakuKeisanKekka_Row extends DataRow {
 
     public dgKogakuGassanShikyuGakuKeisanKekka_Row() {
         super();
-        this.txtTaishoNendo = RString.EMPTY;
+        this.txtTaishoNendo = new TextBoxDate();
         this.txtSanteiKubun = RString.EMPTY;
         this.txtShikyuShinseishoSeiriNo = RString.EMPTY;
         this.txtJikoFutanSeiriNo = RString.EMPTY;
@@ -55,7 +56,7 @@ public class dgKogakuGassanShikyuGakuKeisanKekka_Row extends DataRow {
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
     }
 
-    public dgKogakuGassanShikyuGakuKeisanKekka_Row(RString txtTaishoNendo, RString txtSanteiKubun, RString txtShikyuShinseishoSeiriNo, RString txtJikoFutanSeiriNo, RString txtDataShurui, RString txtUketoriYM, RString txtSofuYM, Boolean chkisDeleted, RString txtHihokenshaNo, RString txtShoKisaiHokenshaNo, RString txtRirekiNo) {
+    public dgKogakuGassanShikyuGakuKeisanKekka_Row(TextBoxDate txtTaishoNendo, RString txtSanteiKubun, RString txtShikyuShinseishoSeiriNo, RString txtJikoFutanSeiriNo, RString txtDataShurui, RString txtUketoriYM, RString txtSofuYM, Boolean chkisDeleted, RString txtHihokenshaNo, RString txtShoKisaiHokenshaNo, RString txtRirekiNo) {
         super();
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
         this.setOriginalData("txtSanteiKubun", txtSanteiKubun);
@@ -81,7 +82,7 @@ public class dgKogakuGassanShikyuGakuKeisanKekka_Row extends DataRow {
         this.txtRirekiNo = txtRirekiNo;
     }
 
-    public RString getTxtTaishoNendo() {
+    public TextBoxDate getTxtTaishoNendo() {
         return txtTaishoNendo;
     }
 
@@ -125,7 +126,7 @@ public class dgKogakuGassanShikyuGakuKeisanKekka_Row extends DataRow {
         return txtRirekiNo;
     }
 
-    public void setTxtTaishoNendo(RString txtTaishoNendo) {
+    public void setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
         this.txtTaishoNendo = txtTaishoNendo;
     }

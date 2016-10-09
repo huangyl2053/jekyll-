@@ -48,8 +48,10 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private static final RString 非課税 = new RString("非課税");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_5 = 5;
+    private static final int INT_8 = 8;
     private static final int INT_11 = 11;
     private static final int 年度_2008 = 2008;
     private static final int 年度_2013 = 2013;
@@ -92,6 +94,16 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().init();
         div.getCcdKaigoAtenaInfo().initialize(対象者.get識別コード());
         div.getCcdKaigoShikakuKihon().initialize(対象者.get被保険者番号());
+        RDate システム日付 = RDate.getNowDate();
+        int システム年度 = システム日付.getNendo().getYearValue();
+        int システム月 = システム日付.getMonthValue();
+        if (INT_8 - システム月 <= INT_0) {
+            div.getTxtKensakuTaishoNendo().setFromValue(new RDate(システム年度 - INT_1));
+            div.getTxtKensakuTaishoNendo().setToValue(new RDate(システム年度 - INT_1));
+        } else {
+            div.getTxtKensakuTaishoNendo().setFromValue(new RDate(システム年度 - INT_2));
+            div.getTxtKensakuTaishoNendo().setToValue(new RDate(システム年度 - INT_2));
+        }
         ドロップダウンリスト項目セット();
     }
 
@@ -116,8 +128,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
                 row.setModifyButtonState(DataGridButtonState.Disabled);
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
             }
-            row.setTxtTaishoNendo(result.get対象年度().toDateString());
-            row.setTxtSanteiKubun(郵便番号MAX.equals(
+            row.getTxtTaishoNendo().setValue(new RDate(result.get対象年度().getYearValue()));
+            row.setTxtSanteiKubun(result.get支給額計算結果連絡先郵便番号() != null && 郵便番号MAX.equals(
                     result.get支給額計算結果連絡先郵便番号().getYubinNo()) ? 仮データ : RString.EMPTY);
             row.setTxtShikyuShinseishoSeiriNo(result.get支給申請書整理番号());
             row.setTxtJikoFutanSeiriNo(result.get自己負担額証明書整理番号());
@@ -164,14 +176,14 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             row.setTxtUchiwakeHokenshaNo(item.get証記載保険者番号().getColumnValue());
             row.setTxtKokuhoHihokenshaShoKigo(item.get国保被保険者証記号());
             row.setTxtHiHokenshaShoNo(item.get被保険者_証番号());
-            row.setTxtOver70Futangaku(item.get70歳以上負担額());
+            row.getTxtOver70Futangaku().setValue(item.get70歳以上負担額() == null ? Decimal.ZERO : new Decimal(item.get70歳以上負担額().toString()));
             row.setTxtOver70AmbunRitsu(item.get70歳以上按分率());
-            row.setTxtOver70Shikyugaku(item.get70歳以上支給額());
-            row.setTxtUnder70Futangaku(item.get70歳未満負担額());
-            row.setTxtFutangaku(item.get負担額());
+            row.getTxtOver70Shikyugaku().setValue(item.get70歳以上支給額() == null ? Decimal.ZERO : new Decimal(item.get70歳以上支給額().toString()));
+            row.getTxtUnder70Futangaku().setValue(item.get70歳未満負担額() == null ? Decimal.ZERO : new Decimal(item.get70歳未満負担額().toString()));
+            row.getTxtFutangaku().setValue(item.get負担額() == null ? Decimal.ZERO : new Decimal(item.get負担額().toString()));
             row.setTxtAmbunRitsu(item.get按分率());
-            row.setTxtUnder70Shikyugaku(item.get70歳未満支給額());
-            row.setTxtShikyugaku(item.get支給額());
+            row.getTxtUnder70Shikyugaku().setValue(item.get70歳未満支給額() == null ? Decimal.ZERO : new Decimal(item.get70歳未満支給額().toString()));
+            row.getTxtShikyugaku().setValue(item.get支給額() == null ? Decimal.ZERO : new Decimal(item.get支給額().toString()));
             row.setTxtHihokenshaNo(item.get被保険者番号().getColumnValue());
             row.setTxtMeisanNo(item.get明細番号());
             row.setTxtRirekiNo(new RString(item.get履歴番号().intValue()));
@@ -243,6 +255,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
      * 画面項目クリアのメソッドです。
      */
     public void 画面項目クリア() {
+        div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().init();
         支給額計算結果登録入力パネルクリア();
         計算内訳情報パネルクリア();
         支給額情報パネルクリア();
@@ -263,9 +276,18 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
      * 「内訳を追加する」ボタンのメソッドです。
      */
     public void onClick_btnUchiwakeAdd() {
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeList().setIsOpen(false);
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setIsOpen(true);
+        div.getShikyugakuKeisanKekkaTorokuUchiwakeList().setDisplayNone(true);
+        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setDisplayNone(false);
+        int 年度 = div.getTxtTaishoNendo().getValue().getNendo().getYearValue();
+        if (年度_2008 == 年度) {
+            div.getTxtOver70Biko().setVisible(true);
+            div.getTxtUnder70Biko().setVisible(true);
+        } else {
+            div.getTxtOver70Biko().setVisible(false);
+            div.getTxtUnder70Biko().setVisible(false);
+        }
         内訳入力パネルクリア();
+        明細照会状態設定(false);
     }
 
     /**
@@ -276,7 +298,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     public void onClick_dgShikyugakuKeisanKekkaMeisaiSelect(KogakuGassanShikyugakuKeisanKekkaMeisai 支給額計算結果明細) {
         onClick_btnUchiwakeAdd();
         内訳入力パネルデータ設定(支給額計算結果明細);
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setReadOnly(true);
+        明細照会状態設定(true);
     }
 
     /**
@@ -287,7 +309,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     public void onClick_dgShikyugakuKeisanKekkaMeisaiModify(KogakuGassanShikyugakuKeisanKekkaMeisai 支給額計算結果明細) {
         onClick_btnUchiwakeAdd();
         内訳入力パネルデータ設定(支給額計算結果明細);
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setReadOnly(false);
+        明細照会状態設定(false);
     }
 
     /**
@@ -298,7 +320,27 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     public void onClick_dgShikyugakuKeisanKekkaMeisaiDelete(KogakuGassanShikyugakuKeisanKekkaMeisai 支給額計算結果明細) {
         onClick_btnUchiwakeAdd();
         内訳入力パネルデータ設定(支給額計算結果明細);
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setReadOnly(true);
+        明細照会状態設定(true);
+        div.getBtnUchiwakeKakutei().setDisabled(false);
+    }
+
+    private void 明細照会状態設定(boolean flg) {
+        div.getDdlHokenSeido().setReadOnly(flg);
+        div.getTxtShoKisaiHokenshaNo().setReadOnly(flg);
+        div.getTxtHokenshaMei().setReadOnly(flg);
+        div.getTxtKokuhoHihokenshaShoKigo().setReadOnly(flg);
+        div.getTxtTaishoshaShimei().setReadOnly(flg);
+        div.getTxtHiHokenshaShoNo().setReadOnly(flg);
+        div.getTxtJikoFutanSeiriNom().setReadOnly(flg);
+        div.getTxtOver70Futangaku().setReadOnly(flg);
+        div.getTxtOver70AmbunRitsu().setReadOnly(flg);
+        div.getTxtOver70Shikyugaku().setReadOnly(flg);
+        div.getTxtUnder70Futangaku().setReadOnly(flg);
+        div.getTxtAmbunRitsu().setReadOnly(flg);
+        div.getTxtUnder70Shikyugaku().setReadOnly(flg);
+        div.getTxtOver70Biko().setReadOnly(flg);
+        div.getTxtUnder70Biko().setReadOnly(flg);
+        div.getBtnUchiwakeKakutei().setDisabled(flg);
     }
 
     /**
@@ -324,8 +366,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
      * 「内訳一覧に戻る」ボタンのメソッドです。
      */
     public void onClick_btnUchiwakeIchiramModoru() {
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeList().setIsOpen(true);
-        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setIsOpen(false);
+        div.getShikyugakuKeisanKekkaTorokuUchiwakeList().setDisplayNone(false);
+        div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setDisplayNone(true);
         内訳入力パネルクリア();
     }
 
@@ -363,18 +405,26 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
                 .set内訳保険者名(div.getTxtHokenshaMei().getValue())
                 .set自己負担額証明書整理番号(div.getTxtJikoFutanSeiriNom().getValue())
                 .set対象者氏名_漢字(div.getTxtTaishoshaShimei().getValue())
-                .set70歳以上負担額(new RString(div.getTxtOver70Futangaku().getValue().toString()))
+                .set70歳以上負担額(div.getTxtOver70Futangaku().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtOver70Futangaku().getValue().toString()))
                 .set70歳以上按分率(横線.equals(div.getTxtOver70AmbunRitsu().getValue()) ? 按分率
-                        : new RString(div.getTxtOver70AmbunRitsu().getValue().toString()))
-                .set70歳以上支給額(new RString(div.getTxtOver70Shikyugaku().getValue().toString()))
-                .set70歳未満負担額(new RString(div.getTxtUnder70Futangaku().getValue().toString()))
-                .set負担額(new RString(div.getTxtFutangaku().getValue().toString()))
+                        : div.getTxtOver70AmbunRitsu().getValue())
+                .set70歳以上支給額(div.getTxtOver70Shikyugaku().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtOver70Shikyugaku().getValue().toString()))
+                .set70歳未満負担額(div.getTxtUnder70Futangaku().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtUnder70Futangaku().getValue().toString()))
+                .set負担額(div.getTxtFutangaku().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtFutangaku().getValue().toString()))
                 .set按分率(横線.equals(div.getTxtAmbunRitsu().getValue()) ? 按分率
-                        : new RString(div.getTxtAmbunRitsu().getValue().toString()))
-                .set70歳未満支給額(new RString(div.getTxtUnder70Shikyugaku().getValue().toString()))
-                .set支給額(new RString(div.getTxtShikyuGaku().getValue().toString()))
-                .set備考欄記載70歳以上負担額(new RString(div.getTxtOver70Biko().getValue().toString()))
-                .set備考欄記載70歳未満負担額(new RString(div.getTxtUnder70Biko().getValue().toString()))
+                        : div.getTxtAmbunRitsu().getValue())
+                .set70歳未満支給額(div.getTxtUnder70Shikyugaku().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtUnder70Shikyugaku().getValue().toString()))
+                .set支給額(div.getTxtShikyuGaku().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtShikyuGaku().getValue().toString()))
+                .set備考欄記載70歳以上負担額(div.getTxtOver70Biko().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtOver70Biko().getValue().toString()))
+                .set備考欄記載70歳未満負担額(div.getTxtUnder70Biko().getValue() == null ? RSTRING_ZERO
+                        : new RString(div.getTxtUnder70Biko().getValue().toString()))
                 .setデータ区分(RSTRING_TWO)
                 .build();
     }
@@ -392,18 +442,18 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getDataSource();
         for (dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row : rowList) {
             if (!RowState.Deleted.equals(row.getRowState())) {
-                内訳WK1 = 内訳WK1.add(RString.isNullOrEmpty(row.getTxtOver70Futangaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtOver70Futangaku().toString()));
-                内訳WK3 = 内訳WK3.add(RString.isNullOrEmpty(row.getTxtOver70Shikyugaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtOver70Shikyugaku().toString()));
-                内訳WK4 = 内訳WK4.add(RString.isNullOrEmpty(row.getTxtUnder70Futangaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtUnder70Futangaku().toString()));
-                内訳WK5 = 内訳WK5.add(RString.isNullOrEmpty(row.getTxtFutangaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().toString()));
-                内訳WK7 = 内訳WK7.add(RString.isNullOrEmpty(row.getTxtUnder70Shikyugaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtUnder70Shikyugaku().toString()));
-                内訳WK8 = 内訳WK8.add(RString.isNullOrEmpty(row.getTxtShikyugaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtShikyugaku().toString()));
+                内訳WK1 = 内訳WK1.add(RString.isNullOrEmpty(row.getTxtOver70Futangaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtOver70Futangaku().getValue().toString()));
+                内訳WK3 = 内訳WK3.add(RString.isNullOrEmpty(row.getTxtOver70Shikyugaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtOver70Shikyugaku().getValue().toString()));
+                内訳WK4 = 内訳WK4.add(RString.isNullOrEmpty(row.getTxtUnder70Futangaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtUnder70Futangaku().getValue().toString()));
+                内訳WK5 = 内訳WK5.add(RString.isNullOrEmpty(row.getTxtFutangaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().getValue().toString()));
+                内訳WK7 = 内訳WK7.add(RString.isNullOrEmpty(row.getTxtUnder70Shikyugaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtUnder70Shikyugaku().getValue().toString()));
+                内訳WK8 = 内訳WK8.add(RString.isNullOrEmpty(row.getTxtShikyugaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtShikyugaku().getValue().toString()));
             }
         }
         div.getTxtJohoOver70FutangakuGokei().setValue(内訳WK1);
@@ -559,11 +609,11 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         int 年度 = div.getTxtTaishoNendo().getValue().getYearValue();
         RDate 計算期間FROM;
         if (年度_2008 == 年度) {
-            計算期間FROM = new RDate(new RString(年度_2008).concat(DATE_0401).toString());
+            計算期間FROM = new RDate(new RString(年度).concat(DATE_0401).toString());
         } else {
-            計算期間FROM = new RDate(new RString(年度_2008).concat(DATE_0801).toString());
+            計算期間FROM = new RDate(new RString(年度).concat(DATE_0801).toString());
         }
-        RDate 計算期間TO = new RDate(new RString(年度_2008 + INT_1).concat(DATE_0731).toString());
+        RDate 計算期間TO = new RDate(new RString(年度 + INT_1).concat(DATE_0731).toString());
         div.getTxtTaishoKeisanKikan().setFromValue(計算期間FROM);
         div.getTxtTaishoKeisanKikan().setToValue(計算期間TO);
     }
@@ -601,6 +651,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private void 支給額情報パネルクリア() {
         div.getTxtTaishoKeisanKikan().clearFromValue();
         div.getTxtTaishoKeisanKikan().clearToValue();
+        div.getTxtJikoFutanSeiriNo().clearValue();
         div.getDdlShotokuKubun().setSelectedIndex(INT_0);
         div.getDdlOver70ShotokuKubun().setSelectedIndex(INT_0);
         div.getTxtSetaiFutanSogaku().clearValue();
@@ -666,7 +717,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     }
 
     private void 支給額計算結果登録入力パネル項目設定(KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果) {
-        RString 支給額計算結果連絡先郵便番号 = 支給額計算結果.get支給額計算結果連絡先郵便番号().getYubinNo();
+        RString 支給額計算結果連絡先郵便番号 = 支給額計算結果.get支給額計算結果連絡先郵便番号() == null
+                ? null : 支給額計算結果.get支給額計算結果連絡先郵便番号().getYubinNo();
         div.getTxtSanteiKubun().setValue(郵便番号MAX.equals(支給額計算結果連絡先郵便番号) ? 仮データ : RString.EMPTY);
         int 対象年度 = 支給額計算結果.get対象年度().getYearValue();
         div.getTxtTaishoNendo().setValue(new RDate(支給額計算結果.get対象年度().getYearValue()));
@@ -702,6 +754,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private void 支給額情報パネル項目設定(KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果) {
         div.getTxtTaishoKeisanKikan().setFromValue(flexibleDateToRDate(支給額計算結果.get対象計算期間開始年月日()));
         div.getTxtTaishoKeisanKikan().setToValue(flexibleDateToRDate(支給額計算結果.get対象計算期間終了年月日()));
+        div.getTxtJikoFutanSeiriNo().setValue(支給額計算結果.get自己負担額証明書整理番号());
         設定所得区分DDL();
         div.getDdlShotokuKubun().setSelectedKey(支給額計算結果.get所得区分());
         div.getDdlOver70ShotokuKubun().setSelectedKey(支給額計算結果.get70歳以上の者に係る所得区分());
@@ -767,15 +820,15 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     }
 
     private void 処理1() {
-        Decimal 未満負担額 = div.getTxtUnder70Futangaku().getValue();
-        Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue();
-        Decimal 以上支給額 = div.getTxtOver70Shikyugaku().getValue();
+        Decimal 未満負担額 = div.getTxtUnder70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtUnder70Futangaku().getValue();
+        Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();
+        Decimal 以上支給額 = div.getTxtOver70Shikyugaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Shikyugaku().getValue();
         div.getTxtFutangaku().setValue(未満負担額.add((以上負担額.multiply(以上支給額))));
     }
 
     private void 処理2() {
-        Decimal 以上支給額 = div.getTxtOver70Shikyugaku().getValue();
-        Decimal 未満支給額 = div.getTxtUnder70Shikyugaku().getValue();
+        Decimal 以上支給額 = div.getTxtOver70Shikyugaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Shikyugaku().getValue();
+        Decimal 未満支給額 = div.getTxtUnder70Shikyugaku().getValue() == null ? Decimal.ZERO : div.getTxtUnder70Shikyugaku().getValue();
         div.getTxtShikyuGaku().setValue(以上支給額.add(未満支給額));
     }
 
@@ -785,21 +838,21 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         Decimal 負担額合計 = Decimal.ZERO;
         for (dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row : rowList) {
             if (!RowState.Deleted.equals(row.getRowState())) {
-                以上負担額合計 = 以上負担額合計.add(RString.isNullOrEmpty(row.getTxtOver70Futangaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtOver70Futangaku().toString()));
-                負担額合計 = 負担額合計.add(RString.isNullOrEmpty(row.getTxtFutangaku())
-                        ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().toString()));
+                以上負担額合計 = 以上負担額合計.add(RString.isNullOrEmpty(row.getTxtOver70Futangaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtOver70Futangaku().getValue().toString()));
+                負担額合計 = 負担額合計.add(RString.isNullOrEmpty(row.getTxtFutangaku().getText())
+                        ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().getValue().toString()));
             }
         }
         if (!追加.equals(状態)) {
             dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row clickedRow = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem();
-            以上負担額合計 = 以上負担額合計.multiply(RString.isNullOrEmpty(clickedRow.getTxtOver70Futangaku())
-                    ? Decimal.ZERO : new Decimal(clickedRow.getTxtOver70Futangaku().toString()));
-            負担額合計 = 負担額合計.multiply(RString.isNullOrEmpty(clickedRow.getTxtFutangaku())
-                    ? Decimal.ZERO : new Decimal(clickedRow.getTxtFutangaku().toString()));
+            以上負担額合計 = 以上負担額合計.multiply(RString.isNullOrEmpty(clickedRow.getTxtOver70Futangaku().getText())
+                    ? Decimal.ZERO : new Decimal(clickedRow.getTxtOver70Futangaku().getValue().toString()));
+            負担額合計 = 負担額合計.multiply(RString.isNullOrEmpty(clickedRow.getTxtFutangaku().getText())
+                    ? Decimal.ZERO : new Decimal(clickedRow.getTxtFutangaku().getValue().toString()));
         }
-        Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue();
-        Decimal 負担額 = div.getTxtFutangaku().getValue();
+        Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();
+        Decimal 負担額 = div.getTxtFutangaku().getValue() == null ? Decimal.ZERO : div.getTxtFutangaku().getValue();
         div.getTxtOver70AmbunRitsu().setValue(Decimal.ZERO.equals(以上負担額) || Decimal.ZERO.equals(以上負担額合計)
                 ? 横線 : new RString(以上負担額.toString()).concat(スラッシュ).concat(new RString(負担額合計.toString())));
         div.getTxtAmbunRitsu().setValue(Decimal.ZERO.equals(負担額) || Decimal.ZERO.equals(負担額合計)
