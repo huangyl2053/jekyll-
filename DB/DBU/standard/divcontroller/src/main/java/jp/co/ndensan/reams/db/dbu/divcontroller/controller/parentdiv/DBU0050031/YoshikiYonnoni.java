@@ -299,6 +299,9 @@ public class YoshikiYonnoni {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         ValidationHandler validationHandler = new ValidationHandler(div);
         validationHandler.報告年度の必須チェック(validationMessages);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
 
         List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
         TokeiTaishoKubun tokeiTaishoKubun = TokeiTaishoKubun.空;
@@ -384,6 +387,37 @@ public class YoshikiYonnoni {
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
 
+    private ResponseData<YoshikiYonnoniDiv> get追加ResponseData(YoshikiYonnoniDiv div,
+            InsuranceInformation insuranceInf, KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationHandler validationHandler = new ValidationHandler(div);
+        validationHandler.合計値チェック_合計１(validationMessages);
+        validationHandler.合計値チェック_合計２(validationMessages);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        Map<RString, Decimal> 詳細データエリア = new HashMap<>();
+
+        this.put詳細データエリア(詳細データエリア, div);
+
+        KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
+                new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
+                new RString("00"),
+                new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText().toString()).toString()).getYear(),
+                new RString("00"),
+                insuranceInf.get統計対象区分(),
+                new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
+                new Code("09"),
+                CODE_0200,
+                new Code("1"),
+                div.getShoriMode(),
+                Code.EMPTY,
+                Code.EMPTY,
+                詳細データエリア);
+
+        return this.regKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
+    }
+
     /**
      * 保存するボタンを押す。
      *
@@ -400,26 +434,7 @@ public class YoshikiYonnoni {
 
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
-                Map<RString, Decimal> 詳細データエリア = new HashMap<>();
-
-                this.put詳細データエリア(詳細データエリア, div);
-
-                KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
-                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
-                        new RString("00"),
-                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText().toString()).toString()).getYear(),
-                        new RString("00"),
-                        insuranceInf.get統計対象区分(),
-                        new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
-                        new Code("09"),
-                        CODE_0200,
-                        new Code("1"),
-                        div.getShoriMode(),
-                        Code.EMPTY,
-                        Code.EMPTY,
-                        詳細データエリア);
-
-                return this.regKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
+                return get追加ResponseData(div, insuranceInf, manager);
             }
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
@@ -535,6 +550,8 @@ public class YoshikiYonnoni {
             int 集計年度 = Integer.parseInt(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().substring(0, INT_4).toString()) - 1;
             shukeiY.setValue(new FlexibleDate(new StringBuilder(String.valueOf(集計年度)).append("0101").toString()));
             div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
+        } else {
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().clearValue();
         }
 
         return ResponseData.of(div).respond();

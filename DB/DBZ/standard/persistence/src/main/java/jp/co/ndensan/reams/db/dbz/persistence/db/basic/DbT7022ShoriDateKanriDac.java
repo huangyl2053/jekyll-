@@ -67,6 +67,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 処理日付管理マスタエンティティ = new RString("処理日付管理マスタエンティティ");
     private static final RString 介護住民票個別事項連携情報作成_他社住基 = new RString("介護住民票個別事項連携情報作成【他社住基】");
     private static final RString 定数_基準収入額適用申請書発行 = new RString("基準収入額適用申請書発行");
+    private static final RString 基準収入額適用申請書異動 = new RString("基準収入額適用申請書異動");
     private static final RString 年度内連番_0 = new RString("0000");
     private static final RString 年度内連番_1 = new RString("0001");
     private static final RString 年度内連番_2 = new RString("0002");
@@ -323,6 +324,25 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
                                 eq(shoriName, 定数_基準収入額適用申請書発行),
+                                eq(nendo, 年度))).getCount();
+    }
+
+    /**
+     * 処理日付管理マスタ取得件数情報作成するメソッドです。
+     *
+     * @param 年度 FlexibleYear
+     * @return int 取得件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int select処理日付管理マスタ取得件数(FlexibleYear 年度) throws NullPointerException {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, 基準収入額適用申請書異動),
                                 eq(nendo, 年度))).getCount();
     }
 

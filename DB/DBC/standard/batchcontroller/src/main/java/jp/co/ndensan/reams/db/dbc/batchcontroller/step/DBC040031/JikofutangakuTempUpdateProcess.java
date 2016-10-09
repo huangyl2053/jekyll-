@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorListType;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc040031.TyukonShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040031.KogakugassanJikofutangakuInfoHoseiSubEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040031.IKogakugassanJikofutangakuInfoHoseiSubMapper;
@@ -19,8 +21,24 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 高額支給額集計処理データ更新プロセスです。
@@ -33,6 +51,11 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040031.IKogakugassanJikofutangakuInfoHoseiSubMapper"
             + ".get高額支給額集計データ");
     private static final RString 自己負担額データTEMP = new RString("KogakugassanJikofutangakuInfoHoseiTemp");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB300019"));
+    private static final RString 処理名 = new RString("高額合算自己負担額情報一括補正（サブ処理）");
+    private static final RString ファイル出力 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
     private static final RString 当年4月 = new RString("04");
     private static final RString 当年5月 = new RString("05");
     private static final RString 当年6月 = new RString("06");
@@ -75,12 +98,25 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     private Decimal 翌年07月高額支給額;
     private List<HihokenshaNo> 被保険者番号List;
     private boolean 処理結果確認リスト中間ファイルFLAG;
+    private FileSpoolManager manager;
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
+    @BatchWriter
+    private CsvWriter<TyukonShoriKekkaKakuninListEntity> csvWriter;
 
     @Override
     protected void createWriter() {
         this.tempDbWriter = new BatchEntityCreatedTempTableWriter(自己負担額データTEMP, KogakugassanJikofutangakuInfoHoseiTempEntity.class);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        RString eucFilePath = Path.combinePath(spoolWorkPath, ファイル出力);
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
     }
 
     @Override
@@ -132,7 +168,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
                         .add(翌年05月高額支給額)
                         .add(翌年06月高額支給額)
                         .add(翌年07月高額支給額);
-                処理結果確認リスト中間ファイルを出力();
+                処理結果確認リスト中間ファイルを出力(entity);
                 高額支給額.put(当年4月, 当年04月高額支給額);
                 高額支給額.put(当年5月, 当年05月高額支給額);
                 高額支給額.put(当年6月, 当年06月高額支給額);
@@ -174,7 +210,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
         }
     }
 
-    private void 処理結果確認リスト中間ファイルを出力() {
+    private void 処理結果確認リスト中間ファイルを出力(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
         if (当年04月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年04月高額支給額 = Decimal.ZERO;
             処理結果確認リスト中間ファイルFLAG = true;
@@ -239,7 +275,41 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
             翌年07月高額支給額 = Decimal.ZERO;
             処理結果確認リスト中間ファイルFLAG = true;
         }
-        //TODO QA No1657
+        if (処理結果確認リスト中間ファイルFLAG) {
+            csvWriter.writeLine(new TyukonShoriKekkaKakuninListEntity(
+                    getDate12Time142(RDateTime.now()),
+                    処理名,
+                    entity.get中間DB証記載保険者番号().value(),
+                    entity.get被保険者番号().value(),
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    entity.get被保険者番号().value(),
+                    entity.get中間DB対象年度().toDateString(),
+                    KaigoGassan_ErrorListType.リストタイプ2.get表示名称()
+            ));
+        }
+    }
+
+    private RString getDate12Time142(RDateTime dt) {
+        if (dt == null || dt.getDate() == null || dt.getTime() == null) {
+            return RString.EMPTY;
+        }
+        return getDate12(dt.getDate()).concat(RString.HALF_SPACE).concat(getTime142(dt.getTime()));
+    }
+
+    private RString getDate12(RDate date) {
+        if (date != null) {
+            return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getTime142(RTime time) {
+        if (time == null) {
+            return RString.EMPTY;
+        }
+        return time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
     }
 
     private void initialize月高額支給額() {

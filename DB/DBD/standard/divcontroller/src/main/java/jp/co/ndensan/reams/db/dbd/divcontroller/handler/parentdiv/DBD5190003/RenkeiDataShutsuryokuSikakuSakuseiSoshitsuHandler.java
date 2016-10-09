@@ -36,6 +36,8 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
     private static final RString IF種別_新 = new RString("0");
     private static final RString IF種別_旧 = new RString("1");
     private static final RString 印刷する = new RString("1");
+    private static final RString 資格喪失_死亡_データ送信ファイル名_新 = new RString("Z8NCI252.CSV");
+    private static final RString 資格喪失_死亡_データ送信ファイル名_旧 = new RString("Z7NCI252.CSV");
 
     /**
      * コンストラクタです。
@@ -125,7 +127,11 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
         DBD519003_YokaigoNinteiSoshitsuDataSakusei parameter = new DBD519003_YokaigoNinteiSoshitsuDataSakusei();
         parameter.setKonkaikaishidatetime(RDateTime.convertFrom(div.getTxtKonkaiKaishiDay().getValue(), div.getTxtKonkaiKaishiTime().getValue()));
         parameter.setKonkaishoridatetime(RDateTime.convertFrom(div.getTxtKonkaiShuryoDay().getValue(), div.getTxtKonkaiShuryoTime().getValue()));
-        parameter.setNewfilename(div.getTxtNewFileName().getValue());
+        if (IF種別_新.equals(div.getRadIfShubetu().getSelectedKey())) {
+            parameter.setNewfilename(資格喪失_死亡_データ送信ファイル名_新);
+        } else {
+            parameter.setNewfilename(資格喪失_死亡_データ送信ファイル名_旧);
+        }
         parameter.setHanteiiraiichiranhyou(div.getRadInsatsuDay().getSelectedKey());
         return parameter;
     }

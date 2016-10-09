@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,10 +27,26 @@ public class JukyushaDaichoProcess extends BatchProcessBase<IdoChushutsuDaichoEn
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho."
             + "IJukyushaDaichoMapper.get異動抽出台帳リスト");
+    /**
+     * OutputParameter用キー outTemptable
+     */
+    public static final RString OUT_TEMP_TABLE;
+
+    static {
+        OUT_TEMP_TABLE = new RString("outTemptable");
+    }
+    private OutputParameter<RString> outTemptable;
+    private RString outtable;
     private IdoChushutsuDaichoProcessParameter processParamter;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
+
+    @Override
+    protected void initialize() {
+        outTemptable = new OutputParameter<>();
+        outtable = new RString("0");
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -45,7 +62,15 @@ public class JukyushaDaichoProcess extends BatchProcessBase<IdoChushutsuDaichoEn
     @Override
     protected void process(IdoChushutsuDaichoEntity t) {
         KensakuJyoukenTempTableEntity tempTableEntity = create検索条件一時テーブル情報(t);
-        tmpTableWriter.insert(tempTableEntity);
+        if (!tempTableEntity.getHihokenshaNo().isEmpty() && !tempTableEntity.getShikibetsuCode().isEmpty()) {
+            tmpTableWriter.insert(tempTableEntity);
+            outtable = new RString("1");
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+        outTemptable.setValue(outtable);
     }
 
     private KensakuJyoukenTempTableEntity create検索条件一時テーブル情報(IdoChushutsuDaichoEntity t) {

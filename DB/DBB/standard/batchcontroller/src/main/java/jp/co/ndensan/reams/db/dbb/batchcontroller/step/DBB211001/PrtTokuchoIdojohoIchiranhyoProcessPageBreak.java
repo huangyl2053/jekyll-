@@ -69,10 +69,6 @@ public class PrtTokuchoIdojohoIchiranhyoProcessPageBreak extends PageBreaker<Tok
         if (!flag && this.keys.contains(DBB200021_TokubetsuChoshuIdojohoIchiranEnum.性別.get項目ID())) {
             flag = !currentRecord.getSource().listLower_4.equals(nextRecord.getSource().listLower_4);
         }
-//        if (!flag && this.keys.contains(TokubetsuChoshuIdojohoIchiranProperty
-//                .DBB200021_TokubetsuChoshuIdojohoIchiranEnum.市町村コード.get項目ID())) {
-//            flag = !currentRecord.getSource().listUpper_5.equals(nextRecord.getSource().listUpper_5);
-//        }
         if (!flag && this.keys.contains(DBB200021_TokubetsuChoshuIdojohoIchiranEnum.被保険者番号.get項目ID())) {
             flag = !currentRecord.getSource().listUpper_1.equals(nextRecord.getSource().listUpper_1);
         }

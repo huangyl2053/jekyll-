@@ -40,12 +40,13 @@ public class TokubetsuChoshuIraiJohoKensuhyoPageBreak extends PageBreaker<Tokube
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuIraiJohoKensuhyoSource> currentSource,
             ReportLineRecord<TokubetsuChoshuIraiJohoKensuhyoSource> nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(年金保険者名称)
-                || this.breakKeysList.contains(市町村コード)) {
-            if (currentSource.getSource().nenkinHokenshaName.equals(nextSource.getSource().nenkinHokenshaName)) {
+        if (this.breakKeysList.contains(年金保険者名称)) {
+            if (!currentSource.getSource().nenkinHokenshaName.equals(nextSource.getSource().nenkinHokenshaName)) {
                 flag = true;
             }
-            if (currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+        }
+        if (this.breakKeysList.contains(市町村コード)) {
+            if (!currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
                 flag = true;
             }
         }

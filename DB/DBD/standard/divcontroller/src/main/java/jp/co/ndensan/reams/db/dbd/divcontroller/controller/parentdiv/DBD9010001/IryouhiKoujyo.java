@@ -230,13 +230,16 @@ public class IryouhiKoujyo {
                 }
             }
         }
-        if (getHandler(div).確定確認チェック()) {
+        if (!ResponseHolder.isReRequest() && getHandler(div).確定確認チェック()) {
             return ResponseData.of(div).addMessage(DbdWarningMessages.発行対象外登録.getMessage()).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!ResponseHolder.isReRequest()
+                || (ResponseHolder.getMessageCode().equals(new RString(DbdWarningMessages.発行対象外登録.getMessage().getCode()))
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.確定の確認.getMessage().getCode()))
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).onClick_KakuteButton(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         }
         return ResponseData.of(div).respond();

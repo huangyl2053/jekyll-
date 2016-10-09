@@ -94,6 +94,6 @@ public class DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsu extends BatchFlow
      */
     @Step(処理日付管理マスタの更新)
     protected IBatchFlowCommand callUpdShoriHidukeKanriProcess() {
-        return loopBatch(UpdShoriHidukeKanriProcess.class).arguments(processParameter).define();
+        return simpleBatch(UpdShoriHidukeKanriProcess.class).arguments(processParameter).define();
     }
 }
