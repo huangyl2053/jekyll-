@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.FutangakuTashoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
 
@@ -79,5 +80,13 @@ public interface IKogakugassanJikofutangakuInfoHoseiMapper {
      * @return KogakugassanJikofutangakuInfoHoseiTempEntity
      */
     KogakugassanJikofutangakuInfoHoseiTempEntity get中間DB(KogakugassanJikofutangakuMybatisParameter parameter);
+
+    /**
+     * get負担額補正対象者データを取得する。
+     *
+     * @param parameter KogakugassanJikofutangakuMybatisParameter
+     * @return FutangakuTashoshaEntity
+     */
+    FutangakuTashoshaEntity get負担額補正対象者データ(KogakugassanJikofutangakuMybatisParameter parameter);
 
 }
