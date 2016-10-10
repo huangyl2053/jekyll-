@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.InsTokuchoTsuikaIraiTsuikaTempProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.ShikakuSoshitsuDataEntity;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
@@ -98,6 +98,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
     protected void process(ShikakuSoshitsuDataEntity t) {
         if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
             if (通知書番号 != null) {
+                setDT各種金額欄(対象者の情報);
                 特徴追加依頼追加Temp.insert(対象者の情報);
             }
             業務概念_賦課の情報 = new DbT2002FukaJohoTempTableEntity();
@@ -111,6 +112,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
     @Override
     protected void afterExecute() {
         if (通知書番号 != null) {
+            setDT各種金額欄(対象者の情報);
             特徴追加依頼追加Temp.insert(対象者の情報);
         }
     }
@@ -142,7 +144,6 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
         対象者情報.setDtShoriKekka(RString.EMPTY);
         対象者情報.setDtKokiIkanCode(RString.EMPTY);
         対象者情報.setDtKakushuYMD(parameter.getシステム日時().getDate().toDateString());
-        対象者情報.setDtKakushuKingaku1(getDT各種金額欄(対象者情報.getDtKakushuKubun(), 対象者情報.getHosokuTsuki()));
         対象者情報.setDtKakushuKingaku2(各種金額_全桁0設定);
         対象者情報.setDtYobi2(RString.EMPTY);
         対象者情報.setDtKyosaiNenkinshoshoKigoNo(RString.EMPTY);
@@ -164,6 +165,10 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
 
     private FlexibleYearMonth get処理対象年月() {
         return new FlexibleYearMonth(parameter.get賦課年度().toDateString().concat(parameter.get処理対象月()));
+    }
+
+    private void setDT各種金額欄(UeT0511NenkinTokuchoKaifuJohoEntity 対象者情報) {
+        対象者情報.setDtKakushuKingaku1(getDT各種金額欄(対象者情報.getDtKakushuKubun(), 対象者情報.getHosokuTsuki()));
     }
 
     private RString getDT各種区分(DbT2001ChoshuHohoEntity 徴収方法の情報,
@@ -240,7 +245,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
 
     private RString getDT各種金額欄(RString dT各種区分, RString 捕捉月) {
         if (DT各種区分_01.equals(dT各種区分) || DT各種区分_02.equals(dT各種区分)) {
-            KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
+            KitsukiList 期月リスト = new TokuchoKiUtil().get期月リスト();
             RYearMonth 年月 = new RYearMonth(parameter.get賦課年度().toDateString().concat(捕捉月));
             RString 特徴開始月 = new RString(年月.plusMonth(捕捉月の６カ月後の取得用).getMonthValue()).padZeroToLeft(TWO);
             Tsuki 月 = Tsuki.toValue(特徴開始月);
