@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -192,9 +193,8 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         setCsvEntity(csvEntity, entity);
         今回と前回情報設定(csvEntity, entity);
         csvWriter.writeLine(csvEntity);
-        FutanGengaokuNintteiKakuninListEntity reportEntity = new FutanGengaokuNintteiKakuninListEntity();
         FutanGendogakuNinteiKakuninIchiranReport report
-                = new FutanGendogakuNinteiKakuninIchiranReport(reportEntity, 導入団体, outputOrder, parameter.getバッチ処理日時().getRDateTime());
+                = new FutanGendogakuNinteiKakuninIchiranReport(entity, 導入団体, outputOrder, parameter.getバッチ処理日時().getRDateTime());
         report.writeBy(reportSourceWriter);
     }
 
@@ -286,7 +286,7 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         } else {
             csvEntity.set老齡(RString.EMPTY);
         }
-        csvEntity.set合計所得_含年金収入(DecimalFormatter.toRString(entity.get合計所得金額(), 0));
+        csvEntity.set合計所得_含年金収入(DecimalFormatter.toRString(nullToZero(entity.get合計所得金額()), 0));
         csvEntity.set空白(RString.EMPTY);
         RString 世帯課税 = entity.get世帯課税区分();
         RString 世帯課税名称 = RString.EMPTY;
@@ -311,14 +311,12 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
             配偶者課税区分名称 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
         }
         csvEntity.set配偶者課税区分(配偶者課税区分名称);
-        if (entity.get今回認定結果().getYochokinGaku() != null) {
-            csvEntity.set預貯金額(DecimalFormatter.toRString(entity.get今回認定結果().getYochokinGaku(), 0));
-        }
-        csvEntity.set有価証券評価概算額(DecimalFormatter.toRString(entity.get今回認定結果().getYukashoukenGaisangaku(), 0));
-        csvEntity.setその他金額(DecimalFormatter.toRString(entity.get今回認定結果().getSonotaKingaku(), 0));
-        csvEntity.set預貯金等合計(DecimalFormatter.toRString(entity.get今回認定結果().getYochokinGaku()
-                .add(entity.get今回認定結果().getYukashoukenGaisangaku())
-                .add(entity.get今回認定結果().getSonotaKingaku()), 0));
+        csvEntity.set預貯金額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYochokinGaku()), 0));
+        csvEntity.set有価証券評価概算額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYukashoukenGaisangaku()), 0));
+        csvEntity.setその他金額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getSonotaKingaku()), 0));
+        csvEntity.set預貯金等合計(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYochokinGaku())
+                .add(nullToZero(entity.get今回認定結果().getYukashoukenGaisangaku()))
+                .add(nullToZero(entity.get今回認定結果().getSonotaKingaku())), 0));
         if (entity.getAtesakiEntity() != null && entity.getAtesakiEntity().getTorokuIdoYMD() != null
                 && !entity.getAtesakiEntity().getTorokuIdoYMD().isEmpty()) {
             csvEntity.set住民となった日(entity.getAtesakiEntity().getTorokuIdoYMD()
@@ -368,12 +366,12 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
             csvEntity.set今回_前回との比較(RString.EMPTY);
         }
         csvEntity.set今回_負担段階(entity.get今回認定結果().getRiyoshaFutanDankai());
-        csvEntity.set今回_食費負担額(DecimalFormatter.toRString(entity.get今回認定結果().getShokuhiFutanGendogaku(), 0));
-        csvEntity.set今回_ユニット個(DecimalFormatter.toRString(entity.get今回認定結果().getUnitTypeKoshitsu(), 0));
-        csvEntity.set今回_ユニット準(DecimalFormatter.toRString(entity.get今回認定結果().getUnitTypeJunKoshitsu(), 0));
-        csvEntity.set今回_従来型特養(DecimalFormatter.toRString(entity.get今回認定結果().getJuraiTypeKoshitsu_Tokuyo(), 0));
-        csvEntity.set今回_従来型老健(DecimalFormatter.toRString(entity.get今回認定結果().getJuraiTypeKoshitsu_Roken_Ryoyo(), 0));
-        csvEntity.set今回_多床室(DecimalFormatter.toRString(entity.get今回認定結果().getTashoshitsu(), 0));
+        csvEntity.set今回_食費負担額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getShokuhiFutanGendogaku()), 0));
+        csvEntity.set今回_ユニット個(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getUnitTypeKoshitsu()), 0));
+        csvEntity.set今回_ユニット準(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getUnitTypeJunKoshitsu()), 0));
+        csvEntity.set今回_従来型特養(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getJuraiTypeKoshitsu_Tokuyo()), 0));
+        csvEntity.set今回_従来型老健(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getJuraiTypeKoshitsu_Roken_Ryoyo()), 0));
+        csvEntity.set今回_多床室(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getTashoshitsu()), 0));
         if (RiyoshaFutanDankai.第三段階.getコード().equals(entity.get今回認定結果().getRiyoshaFutanDankai())) {
             csvEntity.set今回_特例減額(該当);
         } else {
@@ -402,14 +400,12 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
             }
             csvEntity.set前回_旧措置(entity.get前回認定結果().getKyusochishaKubun());
             csvEntity.set前回_負担段階(entity.get前回認定結果().getRiyoshaFutanDankai());
-            csvEntity.set前回_食費負担額(DecimalFormatter.toRString(entity.get前回認定結果().getShokuhiFutanGendogaku(), 0));
-            csvEntity.set前回_ユニット個(DecimalFormatter.toRString(entity.get前回認定結果().getUnitTypeKoshitsu(), 0));
-            csvEntity.set前回_ユニット準(DecimalFormatter.toRString(entity.get前回認定結果().getUnitTypeJunKoshitsu(), 0));
-            csvEntity.set前回_従来型特養(DecimalFormatter.toRString(entity.get前回認定結果().getJuraiTypeKoshitsu_Tokuyo(), 0));
-            if (entity.get前回認定結果().getJuraiTypeKoshitsu_Roken_Ryoyo() != null) {
-                csvEntity.set前回_従来型老健(DecimalFormatter.toRString(entity.get前回認定結果().getJuraiTypeKoshitsu_Roken_Ryoyo(), 0));
-            }
-            csvEntity.set前回_多床室(DecimalFormatter.toRString(entity.get前回認定結果().getTashoshitsu(), 0));
+            csvEntity.set前回_食費負担額(DecimalFormatter.toRString(nullToZero(entity.get前回認定結果().getShokuhiFutanGendogaku()), 0));
+            csvEntity.set前回_ユニット個(DecimalFormatter.toRString(nullToZero(entity.get前回認定結果().getUnitTypeKoshitsu()), 0));
+            csvEntity.set前回_ユニット準(DecimalFormatter.toRString(nullToZero(entity.get前回認定結果().getUnitTypeJunKoshitsu()), 0));
+            csvEntity.set前回_従来型特養(DecimalFormatter.toRString(nullToZero(entity.get前回認定結果().getJuraiTypeKoshitsu_Tokuyo()), 0));
+            csvEntity.set前回_従来型老健(DecimalFormatter.toRString(nullToZero(entity.get前回認定結果().getJuraiTypeKoshitsu_Roken_Ryoyo()), 0));
+            csvEntity.set前回_多床室(DecimalFormatter.toRString(nullToZero(entity.get前回認定結果().getTashoshitsu()), 0));
             if (RiyoshaFutanDankai.第三段階.getコード().equals(entity.get前回認定結果().getRiyoshaFutanDankai())) {
                 csvEntity.set前回_特例減額(該当);
             } else {
@@ -533,10 +529,12 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         }
         出力条件.add(発行日.concat(parameter.get発行日().wareki().toDateString()));
         出力条件.add(改頁出力順ID.concat(parameter.get改頁出力順ID()));
-        出力条件.add(帳票分類ID);
         出力条件.add(帳票ID.concat(parameter.get帳票ID()));
-        出力条件.add(帳票作成日時);
         出力条件.add(負担限度額認定申請承認一括.concat(出力順));
         return 出力条件;
+    }
+
+    private Decimal nullToZero(Decimal 金額) {
+        return 金額 == null ? Decimal.ZERO : 金額;
     }
 }
