@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorK
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc020080.DBC020080ShoriKekkaCSVEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity;
@@ -68,15 +66,23 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class DBC020080DataUtil {
 
+    private static final int ERRORINDEX = -1;
+    private static final int NUM_3 = 3;
+
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
+    private static final int NUM_8 = 8;
+    private static final int NUM_15 = 15;
+
     private static final int NUM_70 = 70;
 
     private static final int NUM_75 = 75;
-
+    private static final RString INITSERVICETEIKYOYMS = new RString("0000000000000000");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
+
     private static final RString THREE = new RString("3");
     private static final RString LINE = new RString("|");
     private static final RString 当年 = new RString("0");
@@ -94,6 +100,7 @@ public class DBC020080DataUtil {
     private static final RString SUMI_TEKIYO = new RString("Sumi_Tekiyo");
     private static final RString JIKOFUTANGAKUWORK = new RString("JikoFutangakuWork");
     private static final RString UCHISUJIKOFUTANGAKU = new RString("UchisuJikoFutanGaku");
+    private static final RString BIKO = new RString("Biko");
     private static final RString 当年4月 = new RString("004");
     private static final RString 当年5月 = new RString("005");
     private static final RString 当年6月 = new RString("006");
@@ -342,6 +349,19 @@ public class DBC020080DataUtil {
         }
     }
 
+    private void singleSetDecimal(JissekiFutangakuDataTempEntity 実績負担額, RString tokenSet, RString tokenGet, int index) {
+        RString suffix = suffixList.get(index);
+        Method method;
+        try {
+            method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+            Decimal dec = (Decimal) method.invoke(実績負担額);
+            method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), DECIMALCLS);
+            method.invoke(実績負担額, dec);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void loopSetDecimal(JissekiFutangakuDataTempEntity 実績負担額, RString tokenSet, RString tokenGet) {
         Method method;
         try {
@@ -364,6 +384,52 @@ public class DBC020080DataUtil {
                 RString str = (RString) method.invoke(実績負担額);
                 method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), RSTRINGCLS);
                 method.invoke(実績負担額, str);
+            }
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void loopSetDecimal(JissekiFutangakuDataTempEntity 実績負担額Set, RString tokenSet,
+            JissekiFutangakuDataTempEntity 実績負担額Get, RString tokenGet) {
+        Method method;
+        try {
+            for (RString suffix : suffixList) {
+                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                Decimal dec = (Decimal) method.invoke(実績負担額Get);
+                method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), DECIMALCLS);
+                method.invoke(実績負担額Set, dec);
+            }
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private Decimal loopAddDecimal(JissekiFutangakuDataTempEntity 実績負担額Get, RString tokenGet) {
+        Decimal sum = Decimal.ZERO;
+        Method method;
+        try {
+            for (RString suffix : suffixList) {
+                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                Decimal dec = (Decimal) method.invoke(実績負担額Get);
+                sum = sum.add(dec);
+            }
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return sum;
+        }
+    }
+
+    private void loopSetRString(JissekiFutangakuDataTempEntity 実績負担額Set, RString tokenSet,
+            JissekiFutangakuDataTempEntity 実績負担額Get, RString tokenGet) {
+        Method method;
+        try {
+            for (RString suffix : suffixList) {
+                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                RString str = (RString) method.invoke(実績負担額Get);
+                method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), RSTRINGCLS);
+                method.invoke(実績負担額Set, str);
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
@@ -482,12 +548,125 @@ public class DBC020080DataUtil {
     }
 
     /**
-     * judgeAgeのメソッドです。
+     * updJIssekiFutangakuTempのメソッドです。
      *
      * @param 実績負担額 JissekiFutangakuDataTempEntity
      * @return boolean
      */
-    public boolean judgeAgeLessThan75(JissekiFutangakuDataTempEntity 実績負担額) {
+    public boolean updJIssekiFutangakuTemp(JissekiFutangakuDataTempEntity 実績負担額) {
+        if (!judgeAgeLessThan75(実績負担額)) {
+            return false;
+        }
+        List<Integer> indexs = getSuffixIndexs(実績負担額);
+        if (indexs.isEmpty()) {
+            return false;
+        }
+        FlexibleYear 対象年度 = new FlexibleYear(実績負担額.getTaishoNendo());
+        FlexibleYearMonth 算出した年月の翌月 = get70歳年齢到達日前日の翌月(実績負担額);
+        FlexibleYearMonth 被保険者期間終了 = new FlexibleYearMonth(実績負担額.getHihokenshaShuryoYMD());
+        FlexibleYearMonth サービス提供年月;
+        for (int index : indexs) {
+            サービス提供年月 = getYMFromIndex(index, 対象年度);
+            if (サービス提供年月 == null) {
+                continue;
+            }
+            if (算出した年月の翌月.isBeforeOrEquals(サービス提供年月) && サービス提供年月.isBeforeOrEquals(被保険者期間終了)) {
+                singleSetDecimal(実績負担額, UCHISUJIKOFUTANGAKU, JIKOFUTANGAKUWORK, index);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * updJIssekiFutangakuTempAfterProcessのメソッドです。
+     *
+     * @param 実績負担額Set JissekiFutangakuDataTempEntity
+     * @param 実績負担額Get JissekiFutangakuDataTempEntity
+     * @param parameter DBC020080ProcessParameter
+     */
+    public void updJIssekiFutangakuTemp償還受託あり(JissekiFutangakuDataTempEntity 実績負担額Set,
+            JissekiFutangakuDataTempEntity 実績負担額Get, DBC020080ProcessParameter parameter) {
+        loopSetDecimal(実績負担額Set, JIKOFUTANGAKU, 実績負担額Get, JIKOFUTANGAKUWORK);
+        loopSetDecimal(実績負担額Set, UCHISU_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
+        loopSetRString(実績負担額Set, TEKIYO, 実績負担額Get, BIKO);
+        実績負担額Set.setGokei_JikoFutanGaku(loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK));
+        実績負担額Set.setGokei_70_74KogakuShikyuGaku(loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU));
+        実績負担額Set.setDataSakuseiKubun(TWO);
+        実績負担額Set.setJikoFutanKeisanYMD2(TEKIYO);
+        実績負担額Set.setJikoFutanKeisanYMD(nonullRStr(getRDate(parameter.get処理日時())));
+    }
+
+    /**
+     * updJIssekiFutangakuTempAfterProcessのメソッドです。
+     *
+     * @param 実績負担額Set JissekiFutangakuDataTempEntity
+     * @param 実績負担額Get JissekiFutangakuDataTempEntity
+     * @param parameter DBC020080ProcessParameter
+     */
+    public void updJIssekiFutangakuTemp呼び出し元自己負担額計算(JissekiFutangakuDataTempEntity 実績負担額Set,
+            JissekiFutangakuDataTempEntity 実績負担額Get, DBC020080ProcessParameter parameter) {
+        loopSetDecimal(実績負担額Set, JIKOFUTANGAKU, 実績負担額Get, JIKOFUTANGAKUWORK);
+        loopSetDecimal(実績負担額Set, UCHISU_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
+        loopSetRString(実績負担額Set, TEKIYO, 実績負担額Get, BIKO);
+        Decimal sum1 = loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK);
+        Decimal sum2 = loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU);
+        実績負担額Set.setGokei_JikoFutanGaku(sum1);
+        実績負担額Set.setGokei_70_74KogakuShikyuGaku(sum2);
+        loopSetDecimal(実績負担額Set, SUMI_JIKOFUTANGAKU, 実績負担額Get, JIKOFUTANGAKUWORK);
+        loopSetDecimal(実績負担額Set, SUMI_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
+        loopSetRString(実績負担額Set, SUMI_TEKIYO, 実績負担額Get, BIKO);
+        実績負担額Set.setSumi_Gokei_JikoFutanGaku(sum1);
+        実績負担額Set.setSumi_Gokei_70_74JikoFutanGaku(sum2);
+        loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK);
+        loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU);
+        実績負担額Set.setDataSakuseiKubun(TWO);
+        実績負担額Set.setJikoFutanKeisanYMD2(TEKIYO);
+        RString 処理日時 = nonullRStr(getRDate(parameter.get処理日時()));
+        実績負担額Set.setJikoFutanKeisanYMD(処理日時);
+        実績負担額Set.setBatchHoseiJissiYMD(処理日時);
+    }
+
+    private FlexibleYearMonth getYMFromIndex(int index, FlexibleYear taishoNendo) {
+        if (index == ERRORINDEX) {
+            return null;
+        }
+        RString suffix = suffixList.get(index);
+        FlexibleYear 年 = ONE.equals(suffix.substring(0, 1)) ? taishoNendo.plusYear(1) : taishoNendo;
+        RString 月 = suffix.substring(1, NUM_3);
+        return new FlexibleYearMonth(年.toDateString().concat(月));
+    }
+
+    private List<Integer> getSuffixIndexs(JissekiFutangakuDataTempEntity 実績負担額) {
+        List<Integer> indexs = new ArrayList<>();
+        RString yms = 実績負担額.getServiceTeikyoYMs();
+        int index = ERRORINDEX;
+        for (int i = 0; i < yms.length(); i++) {
+            index = yms.indexOf(ONE, index + 1);
+            if (index == ERRORINDEX) {
+                break;
+            }
+            indexs.add(index);
+        }
+        return indexs;
+    }
+
+//    private int getSuffixIndex(JissekiFutangakuDataTempEntity 実績負担額) {
+//        FlexibleYearMonth 翌月前日 = get70歳年齢到達日前日の翌月(実績負担額);
+//        int 翌月前日年 = 翌月前日.getYearValue();
+//        int 翌月前日月 = 翌月前日.getMonthValue();
+//        RString 対象年度 = 実績負担額.getTaishoNendo();
+//        boolean is翌年 = is翌年(対象年度, 翌月前日年);
+//        boolean is当年 = is当年(対象年度, 翌月前日年);
+//        if (!is当年 && !is翌年) {
+//            return ERRORINDEX;
+//        }
+//        int index = is当年 ? 翌月前日月 - NUM_4 : 翌月前日月 + NUM_8;
+//        if (index > NUM_15 || index < 0) {
+//            return ERRORINDEX;
+//        }
+//        return index;
+//    }
+    private boolean judgeAgeLessThan75(JissekiFutangakuDataTempEntity 実績負担額) {
         RString umareYMD = 実績負担額.getUmareYMD();
         RString hihokenshaShuryoYMD = 実績負担額.getHihokenshaShuryoYMD();
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
@@ -496,7 +675,7 @@ public class DBC020080DataUtil {
         return age < NUM_75;
     }
 
-    private RString get70歳年齢到達日前日の翌月(JissekiFutangakuDataTempEntity 実績負担額) {
+    private FlexibleYearMonth get70歳年齢到達日前日の翌月(JissekiFutangakuDataTempEntity 実績負担額) {
         RString umareYMD = 実績負担額.getUmareYMD();
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
         AgeCalculator ageCalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
@@ -505,7 +684,7 @@ public class DBC020080DataUtil {
         前到達70翌月 = getRealDateCalendar(age);
         前到達70翌月.set(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH) + 1, 1);
         FlexibleYearMonth ym = new FlexibleDate(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH), 1).getYearMonth();
-        return ym.toDateString();
+        return ym;
     }
 
     private Calendar getRealDateCalendar(FlexibleDate date) {
@@ -629,10 +808,15 @@ public class DBC020080DataUtil {
         }
         loopInitDecimal(insEntity, JIKOFUTANGAKUWORK);
         loopInitDecimal(insEntity, UCHISUJIKOFUTANGAKU);
+        insEntity.setServiceTeikyoYMs(INITSERVICETEIKYOYMS);
         if (該当する年月 == null) {
             return;
         }
-        RString suffix = getSuffix(insEntity.getTaishoNendo(), 該当する年月);
+        int index = getSuffixIndex(insEntity.getTaishoNendo(), 該当する年月);
+        if (index == ERRORINDEX) {
+            return;
+        }
+        RString suffix = suffixList.get(index);
         try {
             Method method = CLS.getMethod(SETBIKO.concat(suffix).toString(), RSTRINGCLS);
             method.invoke(insEntity, 給付額減額);
@@ -652,7 +836,19 @@ public class DBC020080DataUtil {
         if (updEntity == null || 利用者負担 == null) {
             return;
         }
-        RString suffix = getSuffix(updEntity.getTaishoNendo(), 利用者負担.getServiceTeikyoYM());
+        RString 対象年度 = updEntity.getTaishoNendo();
+        RString 該当する年月 = 利用者負担.getServiceTeikyoYM();
+        if (RString.isNullOrEmpty(対象年度) || RString.isNullOrEmpty(該当する年月)) {
+            return;
+        }
+        int index = getSuffixIndex(対象年度, 該当する年月);
+        if (index == ERRORINDEX) {
+            return;
+        }
+        RStringBuilder ymsBuilder = new RStringBuilder(updEntity.getServiceTeikyoYMs());
+        ymsBuilder.replace(index, index + 1, ONE);
+        updEntity.setServiceTeikyoYMs(ymsBuilder.toRString());
+        RString suffix = suffixList.get(index);
         Decimal sum = Decimal.ZERO;
         Method method;
         try {
@@ -663,69 +859,6 @@ public class DBC020080DataUtil {
         }
         try {
             method = CLS.getMethod(SETJIKOFUTANGAKUWORK.concat(suffix).toString(), DECIMALCLS);
-            method.invoke(updEntity, sum);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * 自己負担額ワークエリア加算のメソッドです。
-     *
-     * @param updEntity JissekiFutangakuDataTempEntity
-     * @param 給付実績社会福祉法人軽減額 DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity
-     */
-    public void add自己負担額ワークエリア(JissekiFutangakuDataTempEntity updEntity,
-            DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity 給付実績社会福祉法人軽減額) {
-        if (updEntity == null || 給付実績社会福祉法人軽減額 == null) {
-            return;
-        }
-        RString 該当する年月 = 給付実績社会福祉法人軽減額.getServiceTeikyoYM().toDateString();
-        RString suffix = getSuffix(updEntity.getTaishoNendo(), 該当する年月);
-        RString sum = null;
-        Method method;
-        try {
-            method = CLS.getMethod(GETJIKOFUTANGAKUWORK.concat(suffix).toString());
-            sum = addDecimalNonull((RString) method.invoke(updEntity), 給付実績社会福祉法人軽減額.getAtoKeigengoRiyoshaFutangaku());
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (sum == null) {
-            return;
-        }
-        try {
-            method = CLS.getMethod(SETJIKOFUTANGAKUWORK.concat(suffix).toString(), RSTRINGCLS);
-            method.invoke(updEntity, sum);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * 自己負担額ワークエリア加算のメソッドです。
-     *
-     * @param updEntity JissekiFutangakuDataTempEntity
-     * @param 給付実績集計 DbT3033KyufujissekiShukeiEntity
-     */
-    public void add自己負担額ワークエリア(JissekiFutangakuDataTempEntity updEntity,
-            DbT3033KyufujissekiShukeiEntity 給付実績集計) {
-        if (updEntity == null || 給付実績集計 == null) {
-            return;
-        }
-        RString 該当する年月 = 給付実績集計.getServiceTeikyoYM().toDateString();
-        RString suffix = getSuffix(updEntity.getTaishoNendo(), 該当する年月);
-        Decimal sum0 = nonullDecimal(給付実績集計.getHokenRiyoshaFutangaku()).
-                add(nonullDecimal(給付実績集計.getHokenDekidakaIryohiRiyoshaFutangaku()));
-        RString sum = null;
-        Method method;
-        try {
-            method = CLS.getMethod(GETJIKOFUTANGAKUWORK.concat(suffix).toString());
-            sum = addDecimalNonull((RString) method.invoke(updEntity), sum0);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            method = CLS.getMethod(SETJIKOFUTANGAKUWORK.concat(suffix).toString(), RSTRINGCLS);
             method.invoke(updEntity, sum);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
@@ -765,33 +898,47 @@ public class DBC020080DataUtil {
         return 該当SuffixList;
     }
 
-    private RString getSuffix(RString 対象年度, RString 該当する年月) {
-        if (対象年度 == null || 該当する年月 == null) {
-            return RString.EMPTY;
+    private int getSuffixIndex(RString 対象年度, RString 該当する年月) {
+        if (RString.isNullOrEmpty(対象年度) || RString.isNullOrEmpty(該当する年月)) {
+            return ERRORINDEX;
         }
-        RString 該当する月 = 該当する年月.substring(NUM_4, NUM_6);
+        int 該当する月 = Integer.parseInt(該当する年月.substring(NUM_4, NUM_6).toString());
         RString 該当する年 = 該当する年月.substring(0, NUM_4);
-        RStringBuilder suffix = new RStringBuilder();
-        if (is翌年(該当する年, 対象年度)) {
-            suffix.append(翌年);
-        } else if (is当年(該当する年, 対象年度)) {
-            suffix.append(当年);
-        } else {
-            return RString.EMPTY;
+        boolean is当年 = is当年(該当する年, 対象年度);
+        boolean is翌年 = is翌年(該当する年, 対象年度);
+        if (!is当年 && !is翌年) {
+            return ERRORINDEX;
+
         }
-        suffix.append(該当する月);
-        return suffix.toRString();
+        int index = is当年 ? 該当する月 - NUM_4 : 該当する月 + NUM_8;
+        if (index < 0 || index > NUM_15) {
+            return ERRORINDEX;
+        }
+        return index;
     }
 
-    private boolean is翌年(RString year1, RString year2) {
-        Decimal dec1 = nonullDecimal(year1);
-        Decimal dec2 = nonullDecimal(year2);
-        Decimal sub1 = dec1.subtract(dec2);
-        Decimal sub2 = dec2.subtract(dec1);
-        return Decimal.ONE.equals(sub1) || Decimal.ONE.equals(sub2);
+    private boolean is翌年(RString 対象年度, RString year) {
+        Decimal dec1 = nonullDecimal(対象年度);
+        Decimal dec2 = nonullDecimal(year);
+        Decimal sub = dec2.subtract(dec1);
+        return Decimal.ONE.equals(sub);
     }
 
     private boolean is当年(RString year1, RString year2) {
+        Decimal dec1 = nonullDecimal(year1);
+        Decimal dec2 = nonullDecimal(year2);
+        Decimal sub = dec1.subtract(dec2);
+        return Decimal.ZERO.equals(sub);
+    }
+
+    private boolean is翌年(RString 対象年度, int year) {
+        Decimal dec1 = nonullDecimal(対象年度);
+        Decimal dec2 = nonullDecimal(year);
+        Decimal sub = dec2.subtract(dec1);
+        return Decimal.ONE.equals(sub);
+    }
+
+    private boolean is当年(RString year1, int year2) {
         Decimal dec1 = nonullDecimal(year1);
         Decimal dec2 = nonullDecimal(year2);
         Decimal sub = dec1.subtract(dec2);
@@ -1065,12 +1212,16 @@ public class DBC020080DataUtil {
         return new Decimal(rstring.trim().toString());
     }
 
+    private Decimal nonullDecimal(Integer integer) {
+        if (integer == null) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(integer);
+    }
+
     private RString addDecimalNonull(RString dec1, Decimal dec2) {
         return nonullRStr(nonullDecimal(dec2).add(nonullDecimal(dec1)));
     }
-//    private RString addDecimalNonull(RString dec1, RString dec2) {
-//        return nonullRStr(nonullDecimal(dec2).add(nonullDecimal(dec1)));
-//    }
 
     private Decimal addDecimalNonull(Decimal dec1, Decimal dec2) {
         return nonullDecimal(dec1).subtract(nonullDecimal(dec2));
