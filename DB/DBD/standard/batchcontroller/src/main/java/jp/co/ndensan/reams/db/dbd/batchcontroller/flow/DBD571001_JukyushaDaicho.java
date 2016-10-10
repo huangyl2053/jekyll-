@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001_Jukyus
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受給者台帳バッチのフロークラスです。
@@ -24,8 +25,13 @@ public class DBD571001_JukyushaDaicho extends BatchFlowBase<DBD571001_JukyushaDa
 
     @Override
     protected void defineFlow() {
+        RString temptable;
         executeStep(受給者台帳処理一時テーブル);
-        executeStep(受給者台帳処理帳票出力用情報);
+        temptable = getResult(RString.class, new RString(受給者台帳処理一時テーブル), JukyushaDaichoProcess.OUT_TEMP_TABLE);
+        if (temptable.equals(new RString("1"))) {
+            executeStep(受給者台帳処理帳票出力用情報);
+        }
+
     }
 
     /**

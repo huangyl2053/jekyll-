@@ -140,9 +140,9 @@ public class InsKariHenkoTsuikaTempProcess extends BatchProcessBase<KariHenkoTsu
     private RString getDT各種金額欄(DbT2002FukaJohoTempTableEntity 賦課情報) {
         Decimal 金額;
         if (parameter.is処理対象月が5月_6月()) {
-            金額 = 賦課情報.getFuKibetsuGaku02();
+            金額 = 賦課情報.getTkKibetsuGaku02();
         } else {
-            金額 = 賦課情報.getFuKibetsuGaku01();
+            金額 = 賦課情報.getTkKibetsuGaku01();
         }
         if (金額 != null) {
             return new RString(金額.toString());

@@ -38,7 +38,7 @@ public class DvKogakuServiceJoho {
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final RString BTNEXECUTE = new RString("btnExecute");
-    private static final RString BTNELEMENT = new RString("btnElement");
+    private static final RString BTNELEMENT = new RString("btnExecuteJigyobun");
 
     /**
      * 画面初期化のonLoadメソッドです。

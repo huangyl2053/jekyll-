@@ -23,7 +23,7 @@
             AND 受給者台帳."kyuSochishaFlag" = true)
         </if>
         <if test="is旧措置者区分_旧措置者以外">
-            AND NOT EXIST (
+            AND NOT EXISTS (
             SELECT 1
             FROM
             rgdb."DbT4001JukyushaDaicho" AS J

@@ -19,4 +19,21 @@
            WHERE B."setaiCode" = #{世帯コード}
              AND B."nendo" = #{処理年度}) AS A
 </select>
+
+<select resultOrdered="true" id="select基準収入額適用管理情報"
+         resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity"
+         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishosetaiinido.TaishoSetaiinIdoMybatisParameter">
+    SELECT *
+    FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS T
+    WHERE T."setaiCode" = #{世帯コード}
+        AND T."nendo" = #{処理年度}
+        AND T."isDeleted" = FALSE
+</select>
+<select resultOrdered="true" id="select基準収入額適用管理マスタ"
+         resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity"
+         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishosetaiinido.TaishoSetaiinIdoMybatisParameter">
+    SELECT *
+    FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS A
+    WHERE T."nendo" = #{処理年度}
+</select>
 </mapper>

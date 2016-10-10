@@ -110,22 +110,17 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     }
 
     @Override
-    protected void createWriter() {
-        pageBreakKeys.add(固定改頁項目);
-        eucManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = eucManager.getEucOutputDirectry();
-        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-
-    }
-
-    @Override
     protected void usualProcess(KogakugassanShikyushinseishoOutFileEntity entity) {
         if (index == INT_1) {
+            pageBreakKeys.add(固定改頁項目);
             PageBreaker<GassanShikyuShinseishoJohoSofuIchiranSource> breaker
                     = new GassanShikyuShinseishoJohoSofuIchiranPageBreak(pageBreakKeys);
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200027.getReportId().getColumnValue())
                     .addBreak(breaker).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+            eucManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = eucManager.getEucOutputDirectry();
+            eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
             eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                     .setDelimiter(コンマ)
                     .setEnclosure(ダブル引用符)

@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 給付費通知補正を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 xuyongchao
  */
 public class KyufuhiTuchiHoseiManager {
 

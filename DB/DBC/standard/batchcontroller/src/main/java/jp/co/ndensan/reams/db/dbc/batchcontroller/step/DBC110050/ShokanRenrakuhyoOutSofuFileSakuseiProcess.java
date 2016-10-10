@@ -211,12 +211,12 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             addMeisaiEntityWriter(beforeEntity, true);
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
+            csvWriter.close();
             SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
             sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
             SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(csvFilePath), opts);
             entryList.add(sfd);
-            csvWriter.close();
         }
         outputCount.setValue(総出力件数);
         outputEntry.setValue(entryList);

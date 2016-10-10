@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010001.DBD9
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010001.IryohiKojyoItiranDataGrid_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010001.IryouhiKoujyoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010001.IryouhiKoujyoHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010001.IryouhiKoujyoValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei.IryoHiKojoKakuninSinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -176,12 +178,12 @@ public class IryouhiKoujyo {
                 div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD()
                         .setValue(治医意見書受領年月日 != null && !治医意見書受領年月日.isEmpty() ? new RDate(治医意見書受領年月日.toString()) : null);
             }
-            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() == null) {
-                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD()
+            if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD().getValue() == null) {
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD()
                         .setValue(認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty() ? new RDate(認定有効期間終了年月日.toString()) : null);
             }
             if (div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().getValue() == null) {
-                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD()
+                div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD()
                         .setValue(認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty() ? new RDate(認定有効期間開始年月日.toString()) : null);
             }
         }
@@ -219,6 +221,11 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_KakuteButton(IryouhiKoujyoDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor申請年月日と対象年の未入力チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getReadOnly()) {
             List<IryohiKojyoItiranDataGrid_Row> dataSource = div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getDataSource();
             RDate 対象年 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue();
@@ -230,13 +237,16 @@ public class IryouhiKoujyo {
                 }
             }
         }
-        if (getHandler(div).確定確認チェック()) {
+        if (!ResponseHolder.isReRequest() && getHandler(div).確定確認チェック()) {
             return ResponseData.of(div).addMessage(DbdWarningMessages.発行対象外登録.getMessage()).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!ResponseHolder.isReRequest()
+                || (ResponseHolder.getMessageCode().equals(new RString(DbdWarningMessages.発行対象外登録.getMessage().getCode()))
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.確定の確認.getMessage().getCode()))
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).onClick_KakuteButton(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         }
         return ResponseData.of(div).respond();
@@ -277,5 +287,9 @@ public class IryouhiKoujyo {
 
     private IryouhiKoujyoHandler getHandler(IryouhiKoujyoDiv div) {
         return new IryouhiKoujyoHandler(div);
+    }
+
+    private IryouhiKoujyoValidationHandler getValidationHandler() {
+        return new IryouhiKoujyoValidationHandler();
     }
 }

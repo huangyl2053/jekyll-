@@ -30,7 +30,6 @@ public class JigyohokokuCompYoshiki152Change {
     private final RString list1_9;
     private final RString list1_10;
     private final RString list1_11;
-    private final RString list1_12;
     private final RString list2_1;
     private final RString list2_2;
     private final RString list2_3;
@@ -57,7 +56,6 @@ public class JigyohokokuCompYoshiki152Change {
      * @param list1_9 居宅介護_要介護5
      * @param list1_10 居宅介護_要介護合計
      * @param list1_11 居宅介護_サービス受給者数合計
-     * @param list1_12 予備
      * @param list2_1 地域密着型_要支援1
      * @param list2_2 地域密着型_要支援2
      * @param list2_3 地域密着型_要支援合計
@@ -82,7 +80,6 @@ public class JigyohokokuCompYoshiki152Change {
             RString list1_9,
             RString list1_10,
             RString list1_11,
-            RString list1_12,
             RString list2_1,
             RString list2_2,
             RString list2_3,
@@ -106,7 +103,6 @@ public class JigyohokokuCompYoshiki152Change {
         this.list1_9 = list1_9;
         this.list1_10 = list1_10;
         this.list1_11 = list1_11;
-        this.list1_12 = list1_12;
         this.list2_1 = list2_1;
         this.list2_2 = list2_2;
         this.list2_3 = list2_3;

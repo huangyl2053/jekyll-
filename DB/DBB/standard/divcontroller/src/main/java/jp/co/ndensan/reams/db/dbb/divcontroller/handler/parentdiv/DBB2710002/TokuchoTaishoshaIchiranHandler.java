@@ -381,7 +381,10 @@ public class TokuchoTaishoshaIchiranHandler {
                         UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(特別徴収義務者コード));
                 newRow.getTxtTokuchoGimusha().setValue(codeMeisho);
             }
-            newRow.getTxtShimeiKana().setValue(result.get(i).getカナ氏名());
+            RString カナ氏名 = result.get(i).getカナ氏名();
+            if (カナ氏名 != null) {
+                newRow.getTxtShimeiKana().setValue(カナ氏名);
+            }
             if (result.get(i).get生年月日() != null) {
                 newRow.getTxtUmareYMD().setValue(new RDate(result.get(i).get生年月日().toString()));
             }

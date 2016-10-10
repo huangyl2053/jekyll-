@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.KoikiZenShichosonJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.SaiHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -67,13 +66,4 @@ public class DBB114001_ShotokuShokaihyoHakkoParameter extends BatchParameterBase
     @BatchParameter(key = KEY_改頁項目ID, name = NAME_改頁項目ID)
     private RString 改頁項目ID;
 
-    /**
-     * toProcessParameter
-     *
-     * @return ShotokuShokaihyoHakkoProcessParameter
-     */
-    public ShotokuShokaihyoHakkoProcessParameter toProcessParameter() {
-        return new ShotokuShokaihyoHakkoProcessParameter(処理年度, 照会年月日, 出力対象, テストプリント, 再発行対象リスト,
-                出力順ID, 導入形態コード, 構成市町村情報リスト, 出力順, 改頁項目ID);
-    }
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.JigyoshaMeisyoAndShikibetsuNoKanrenEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
@@ -28,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<JigyoshaMeisyoAndShikibetsuNoKanrenEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kyufujissekikoshinin.IKyufuJissekiInJohoMapper.select事業者名称関連リスト");
+            + "kyufujissekiin.IKyufuJissekiInJohoMapper.select事業者名称関連リスト");
     private static final RString エラー区分_名称取得エラー = new RString("05");
     @BatchWriter
     private IBatchTableWriter 処理結果リスト一時tableWriter;
@@ -54,9 +53,9 @@ public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<Jigyo
     @Override
     protected void process(JigyoshaMeisyoAndShikibetsuNoKanrenEntity t) {
         DbWT1111KyufuJissekiEntity 給付実績 = t.get給付実績();
-        List<DbT7060KaigoJigyoshaEntity> 介護事業者リスト = t.get介護事業者List();
-        if (null != 介護事業者リスト && !介護事業者リスト.isEmpty()) {
-            給付実績.setJigyoshaName(getColumnValue(介護事業者リスト.get(0).getJigyoshaName()));
+        DbT7060KaigoJigyoshaEntity 介護事業者リスト = t.get介護事業者();
+        if (null != 介護事業者リスト) {
+            給付実績.setJigyoshaName(getColumnValue(介護事業者リスト.getJigyoshaName()));
             給付実績.setState(EntityDataState.Modified);
             給付実績一時tableWriter.update(給付実績);
         } else {

@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.InsTokuteiShiryohiT
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.getpanteitodaisyou.GetPanTeiToDaiSyouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanrenrakuhyooutputreport.ShokanRenrakuhyoOutputReportEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 
 /**
  * 償還連絡票情報作成バッチのDB操作です。
@@ -222,5 +223,13 @@ public interface IShokanRenrakuhyoOutMapper {
      * @return DbT3034ShokanShinseiEntity
      */
     DbT3034ShokanShinseiEntity get償還払支給申請データ(ShokanRenrakuhyoSofuIchiranParam parameter);
+
+    /**
+     * 帳票制御汎用キー取得です。
+     *
+     * @param para {@link ShokanRenrakuhyoSofuIchiranParam}
+     * @return {@link DbT7067ChohyoSeigyoHanyoEntity}
+     */
+    DbT7067ChohyoSeigyoHanyoEntity select帳票制御汎用キー(ShokanRenrakuhyoSofuIchiranParam para);
 
 }

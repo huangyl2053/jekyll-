@@ -109,10 +109,12 @@ public class GassanJigyobunKekkaIchiranEditor implements
                 source.List1_2 = 無関連データ;
             }
             source.List1_3 = 帳票用データ.get支給額_支給申請書整理番号();
-            if (帳票用データ.get決定_支給区分コード().equals(区分コード_1)) {
-                source.List1_4 = 支給結果;
-            } else if (帳票用データ.get決定_支給区分コード().equals(区分コード_2)) {
-                source.List1_4 = 不支給結果;
+            if (!RString.isNullOrEmpty(帳票用データ.get決定_支給区分コード())) {
+                if (区分コード_1.equals(帳票用データ.get決定_支給区分コード())) {
+                    source.List1_4 = 支給結果;
+                } else if (区分コード_2.equals(帳票用データ.get決定_支給区分コード())) {
+                    source.List1_4 = 不支給結果;
+                }
             }
             source.List1_5 = doカンマ編集(帳票用データ.get支給額_世帯負担総額());
             source.List1_6 = doカンマ編集(帳票用データ.get支給額_介護等合算一部負担金等世帯合算額());

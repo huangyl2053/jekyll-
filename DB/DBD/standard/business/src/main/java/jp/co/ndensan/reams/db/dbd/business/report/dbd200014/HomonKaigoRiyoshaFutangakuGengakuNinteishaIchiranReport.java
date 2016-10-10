@@ -55,15 +55,25 @@ public final class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport exten
      */
     @Override
     public void writeBy(ReportSourceWriter<HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource> writer) {
-        int index = 1;
-        for (int i = NUM_0; i < 訪問介護利用者負担額減額認定者Entity.get世帯員リスト().size(); i += NUM_3) {
+        if (null != 訪問介護利用者負担額減額認定者Entity.get世帯員リスト() && !訪問介護利用者負担額減額認定者Entity.get世帯員リスト().isEmpty()) {
+            int index = 1;
+            for (int i = NUM_0; i < 訪問介護利用者負担額減額認定者Entity.get世帯員リスト().size(); i += NUM_3) {
+                IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor editor
+                        = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor(作成日時, 対象リスト,
+                                訪問介護利用者負担額減額認定者Entity, 導入団体, 出力順, index);
+                IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder builder
+                        = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder(editor);
+                writer.writeLine(builder);
+                index++;
+            }
+        } else {
+            int index = 1;
             IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor editor
                     = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor(作成日時, 対象リスト,
                             訪問介護利用者負担額減額認定者Entity, 導入団体, 出力順, index);
             IHomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder builder
                     = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranBuilder(editor);
             writer.writeLine(builder);
-            index++;
         }
     }
 }

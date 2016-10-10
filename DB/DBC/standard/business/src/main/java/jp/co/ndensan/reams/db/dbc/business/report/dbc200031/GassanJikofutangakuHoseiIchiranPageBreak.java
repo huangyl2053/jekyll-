@@ -39,7 +39,6 @@ public class GassanJikofutangakuHoseiIchiranPageBreak extends PageBreaker<Gassan
     public boolean isBreak(ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> currentSource,
             ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> nextSource) {
         boolean flag = false;
-
         if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listList1_1.equals(nextSource.getSource().listList1_1)) {
             flag = true;
@@ -49,7 +48,16 @@ public class GassanJikofutangakuHoseiIchiranPageBreak extends PageBreaker<Gassan
         } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.対象年度.get項目ID())
                 && !currentSource.getSource().listList1_6.equals(nextSource.getSource().listList1_6)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.証記載保険者番号.get項目ID())
+        } else {
+            flag = isFlag(currentSource, nextSource);
+        }
+        return flag;
+    }
+
+    private boolean isFlag(ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> currentSource,
+            ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().add_hokenshaNo.equals(nextSource.getSource().add_hokenshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.申請年月日.get項目ID())

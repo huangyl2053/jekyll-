@@ -27,7 +27,7 @@ public class NinteiShinseiJohoMybatisParameter implements IMyBatisParameter {
     private final HihokenshaNo 被保険者番号;
     private final RDateTime 今回開始期間FROM;
     private final RDateTime 今回開始期間TO;
-    private final List<HihokenshaNo> 対象外被保険者番号リスト;
+    private final List<RString> 対象外被保険者番号リスト;
     private boolean is対象外被保険者番号リスト非空 = true;
     private boolean is被保険者番号非空 = true;
     private boolean is今回開始期間FROM非空 = true;
@@ -43,7 +43,7 @@ public class NinteiShinseiJohoMybatisParameter implements IMyBatisParameter {
      * @param 対象外被保険者番号リスト List<HihokenshaNo>
      */
     public NinteiShinseiJohoMybatisParameter(RString 証記載保険者番号, HihokenshaNo 被保険者番号,
-            RDateTime 今回開始期間FROM, RDateTime 今回開始期間TO, List<HihokenshaNo> 対象外被保険者番号リスト) {
+            RDateTime 今回開始期間FROM, RDateTime 今回開始期間TO, List<RString> 対象外被保険者番号リスト) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.今回開始期間FROM = 今回開始期間FROM;

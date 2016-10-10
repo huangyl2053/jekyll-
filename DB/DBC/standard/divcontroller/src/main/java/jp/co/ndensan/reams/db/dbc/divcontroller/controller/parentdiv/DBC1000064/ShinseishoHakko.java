@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000064.Shi
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000064.ShinseishoHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -36,6 +37,8 @@ public class ShinseishoHakko {
     private static final ReportId 帳票ID = new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho");
     private static final RString 十二月三十一 = new RString("1231");
     private static final RString 出力順を = new RString("出力順を");
+    private static final RString 異動処理が実施済みの = new RString("異動処理が実施済みの");
+    private static final RString 実行 = new RString("実行");
 
     /**
      * onLoadです。
@@ -115,7 +118,10 @@ public class ShinseishoHakko {
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
-//        TODO異動処理が実行済みか確認
+        if (!getHandler(div).is異動処理が実施済みか判定()) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().
+                    replace(異動処理が実施済みの.toString(), 実行.toString()));
+        }
         return ResponseData.of(div).respond();
     }
 

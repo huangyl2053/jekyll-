@@ -195,7 +195,7 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
     private KogakugassanSoufuFairuSakuseiCsvEntity getCsvEntity(int flag, SyuturyokuEntity entity) {
         KogakugassanSoufuFairuSakuseiCsvEntity csvEntity = new KogakugassanSoufuFairuSakuseiCsvEntity();
         if (flag == INT_1) {
-            RString 処理年月 = processParameter.getShoriYM().wareki().eraType(EraType.KANJI_RYAKU)
+            RString 処理年月 = processParameter.getShoriYM().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             csvEntity.set送付年月(処理年月);
             csvEntity.set作成日時(getSakuseiYmhm(processParameter.getNow().getRDateTime()));

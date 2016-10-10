@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 /**
  * バッチ出力帳票一覧Entityクラスです。
  *
- * @reamsid_L DBB-0710-030 gongliang
+ * @reamsid_L DBB-0710-030 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter

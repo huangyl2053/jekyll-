@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBA-1390-010 wanghuafeng -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.syoritaisyoshichoson.ISyoriTaisyoShichosonMapper">
+ <select resultOrdered="true" id="get宛名連動介護保険更新" 
+         resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+        parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotorokukoiki.JuminkirokuIdojohoTorokuKoikiMybatisParameter" 
+         fetchSize="500">
+        SELECT 
+        "subGyomuCode"
+        ,"shichosonCode"
+        ,"shoriName"
+        ,"shoriEdaban"
+        ,"nendo"
+        ,"nendoNaiRenban"
+        ,"kijunYMD"
+        ,"kijunTimestamp"
+        ,"taishoKaishiYMD"
+        ,"taishoShuryoYMD"
+        ,"taishoKaishiTimestamp"
+        ,"taishoShuryoTimestamp"
+        FROM
+        rgdb."DbT7022ShoriDateKanri" as DbT7022
+        WHERE
+            DbT7022."subGyomuCode" = 'DBA' 
+        AND
+            DbT7022."shoriName" = '広域住基連動' 
+        AND  
+            DbT7022.nendo = '0000'
+        AND  
+       <foreach  
+            collection="shichosonCode"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+                DbT7022."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7022."shoriEdaban" =
+        (SELECT
+            MAX(A."shoriEdaban")
+            FROM
+            rgdb."DbT7022ShoriDateKanri" as A
+          WHERE
+            A."shoriName" = DbT7022."shoriName"
+            AND
+             A.nendo = DbT7022.nendo)
+         AND DbT7022."nendoNaiRenban" =
+        (SELECT
+            MAX(B."nendoNaiRenban")
+            FROM
+            rgdb."DbT7022ShoriDateKanri" as B
+          WHERE
+            B."shoriName" = DbT7022."shoriName"
+            AND
+            B.nendo = DbT7022.nendo)
+    </select>
+</mapper>

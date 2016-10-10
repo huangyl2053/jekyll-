@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5520001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiBusiness;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.RirekiShuseiDiv;
@@ -497,7 +498,8 @@ public class RirekiShuseiHandler {
         List<dgRirekiIchiran_Row> rowList = new ArrayList<>();
         for (RirekiShuseiBusiness business : rstList) {
             if (ShinseiJokyoKubun.申請中.getコード().equals(business.get受給者台帳().get申請状況区分())) {
-                continue;
+                div.getDgRirekiIchiran().setDataSource(Collections.<dgRirekiIchiran_Row>emptyList());
+                return;
             }
             dgRirekiIchiran_Row row = new dgRirekiIchiran_Row();
             row.getShusei().setDisabled(true);

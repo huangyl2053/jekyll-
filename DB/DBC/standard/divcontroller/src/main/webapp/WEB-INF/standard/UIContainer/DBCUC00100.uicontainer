@@ -219,7 +219,7 @@
      "layoutName": "DBC0010011",
      "layoutTitle": "給付実績照会",
      "eventName": "給付実績照会検索一覧",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0010000",

@@ -67,17 +67,18 @@ public class KogakuServicehiTaishoshaManager {
     public boolean is高額対象者有無(HihokenshaNo 被保険者番号, FlexibleDate サービス提供年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        FlexibleYearMonth 提供年月 = サービス提供年月.getYearMonth();
 
         RString config高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
 
-        dbt3055Entity = dac3055.get最大履歴番号(被保険者番号, サービス提供年月);
-        if (dbt3055Entity != null) {
-            dbt3055Entity = dac3055.selectByKeyNew(被保険者番号, サービス提供年月, dbt3055Entity.getRirekiNo());
+        dbt3055Entity = dac3055.get最大履歴番号(被保険者番号, 提供年月);
+        if (dbt3055Entity != null && dbt3055Entity.getRirekiNo() != null) {
+            dbt3055Entity = dac3055.selectByKeyNew(被保険者番号, 提供年月, dbt3055Entity.getRirekiNo());
 
             対象者受取年月 = dbt3055Entity.getTashoshaUketoriYM();
 
-            dbt3054Entity = dac3054.selectByKogakuKyufuKonkyo(被保険者番号, サービス提供年月, dbt3055Entity.getRirekiNo());
+            dbt3054Entity = dac3054.selectByKogakuKyufuKonkyo(被保険者番号, 提供年月, dbt3055Entity.getRirekiNo());
             高額給付根拠 = dbt3054Entity.getKogakuKyufuKonkyo();
         } else {
             高額給付根拠 = RString.EMPTY;

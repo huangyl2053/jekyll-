@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,4 +21,9 @@ public class ShokanRenrakuhyoSofuIchiranParam implements IMyBatisParameter {
 
     private boolean 送付除外フラグ;
     private RString orderBy;
+
+    private RString サブ業務コード;
+    private RString 帳票分類ID;
+    private FlexibleYear 管理年度;
+    private RString 項目名;
 }

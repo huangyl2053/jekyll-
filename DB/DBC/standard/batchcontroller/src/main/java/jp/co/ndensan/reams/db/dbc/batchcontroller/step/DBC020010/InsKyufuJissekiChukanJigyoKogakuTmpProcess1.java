@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -45,7 +46,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess1 extends BatchProcessBas
     @Override
     protected void createWriter() {
         kyufujissekiTyukannWriter = new BatchEntityCreatedTempTableWriter(
-                TABLE_給付実績中間事業高額一時１, TempKyufujissekiTyukannEntity.class);
+                TABLE_給付実績中間事業高額一時１, TempKyufujissekiTyukannJigyoEntity.class);
     }
 
     @Override

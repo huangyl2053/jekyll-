@@ -40,7 +40,7 @@ public class DbWT111AKyufuJissekiH1Entity extends DbTableEntityBase<DbWT111AKyuf
     @TempTableColumnOrder(4)
     private NyuryokuShikibetsuNo inputShikibetsuNo;
     @TempTableColumnOrder(5)
-    private RString recordShubetsuCode;
+    private RString recodeShubetsuCode;
     @TempTableColumnOrder(6)
     private HokenshaNo shokisaiHokenshaNo;
     @TempTableColumnOrder(7)

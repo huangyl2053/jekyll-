@@ -10,6 +10,7 @@
             parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" fetchSize="500" resultOrdered="true">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />,
+        B."choshuHouhou" as "徴収方法",
         B."ki" as "期",
         C."choteigaku" as "調定額"
         FROM
@@ -35,7 +36,8 @@
         <id  column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id  column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <id  column="dbT2002Fuka_rirekiNo" />
-        <result property="期" column="期" />
+        <id  column="徴収方法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="期" column="期" />
         <result property="調定額" column="調定額" 
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <association property="介護賦課Entity" 

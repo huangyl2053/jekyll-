@@ -37,7 +37,6 @@
         AND "B"."shikyuShinseiSeiriNo"=#{支給申請書整理番号}
         ORDER BY
         "B"."shoriYM" DESC
-        LIMIT 1
     </select>
 
     <select resultOrdered="true" id="get高額合算支給額計算結果"

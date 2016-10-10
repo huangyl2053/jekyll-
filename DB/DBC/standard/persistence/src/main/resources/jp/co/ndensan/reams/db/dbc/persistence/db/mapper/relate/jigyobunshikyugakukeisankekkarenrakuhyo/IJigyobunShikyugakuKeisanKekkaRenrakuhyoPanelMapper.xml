@@ -65,7 +65,18 @@
     
     <resultMap id="resultMap_JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResultEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity">
-        <result property="hokenSeidoCode" column="dbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisai_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT3172_hihokenshaNo" />
+        <id column="dbT3172_taishoNendo" />
+        <id column="dbT3172_shoKisaiHokenshaNo" />
+        <id column="dbT3172_shikyuShinseishoSeiriNo" />
+        <id column="dbT3172_rirekiNo" />
+        <id column="DbT3173_hihokenshaNo" />
+        <id column="DbT3173_taishoNendo" />
+        <id column="DbT3173_shoKisaiHokenshaNo" />
+        <id column="DbT3173_shikyuShinseishoSeiriNo" />
+        <id column="DbT3173_meisanNo" />
+        <id column="DbT3173_rirekiNo" />
+        <result property="hokenSeidoCode" column="ソートキー" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbt3172Entity" resultMap="resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity"/>
         <association property="dbt3173Entity" resultMap="ResultMap_DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity"/>
     </resultMap>
@@ -79,7 +90,7 @@
         case dbt3173."hokenSeidoCode"
         WHEN '3' THEN '4'
         WHEN '4' THEN '3'
-        ELSE DbT3173."hokenSeidoCode" END AS ソートキー
+        ELSE DbT3173."hokenSeidoCode" END AS "ソートキー"
         FROM (SELECT * FROM rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS mst
         WHERE NOT EXISTS (SELECT 'X' FROM rgdb."DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka" AS slv
         WHERE mst."hihokenshaNo" = slv."hihokenshaNo"
@@ -97,7 +108,7 @@
         AND dbt3172."shoKisaiHokenshaNo" = dbt3173."shoKisaiHokenshaNo"
         AND dbt3172."shikyuShinseishoSeiriNo" = dbt3173."shikyuShinseishoSeiriNo"
         AND dbt3172."rirekiNo" = dbt3173."rirekiNo"
-        ORDER BY ソートキー ASC,
+        ORDER BY "ソートキー" ASC,
         dbt3173."hiHokenshaShoNo" ASC
     </select>
     
@@ -218,40 +229,40 @@
     </resultMap>
     
     <sql id="allColumns_DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity">
-        "DbT3173"."hihokenshaNo" as "DbT3173_hihokenshaNo",
-        "DbT3173"."taishoNendo" as "DbT3173_taishoNendo",
-        "DbT3173"."shoKisaiHokenshaNo" as "DbT3173_shoKisaiHokenshaNo",
-        "DbT3173"."shikyuShinseishoSeiriNo" as "DbT3173_shikyuShinseishoSeiriNo",
-        "DbT3173"."meisanNo" as "DbT3173_meisanNo",
-        "DbT3173"."rirekiNo" as "DbT3173_rirekiNo",
-        "DbT3173"."hokenSeidoCode" as "DbT3173_hokenSeidoCode",
-        "DbT3173"."uchiwakeHokenshaNo" as "DbT3173_uchiwakeHokenshaNo",
-        "DbT3173"."kokuho_HihokenshaShoKigo" as "DbT3173_kokuho_HihokenshaShoKigo",
-        "DbT3173"."hiHokenshaShoNo" as "DbT3173_hiHokenshaShoNo",
-        "DbT3173"."uchiwakeHokenshaMei" as "DbT3173_uchiwakeHokenshaMei",
-        "DbT3173"."jikoFutanSeiriNo" as "DbT3173_jikoFutanSeiriNo",
-        "DbT3173"."taishoshaShimei" as "DbT3173_taishoshaShimei",
-        "DbT3173"."over70_Futangaku" as "DbT3173_over70_Futangaku",
-        "DbT3173"."over70_AmbunRitsu" as "DbT3173_over70_AmbunRitsu",
-        "DbT3173"."over70_Shikyugaku" as "DbT3173_over70_Shikyugaku",
-        "DbT3173"."under70_Futangaku" as "DbT3173_under70_Futangaku",
-        "DbT3173"."futangaku" as "DbT3173_futangaku",
-        "DbT3173"."ambunRitsu" as "DbT3173_ambunRitsu",
-        "DbT3173"."under70_Shikyugaku" as "DbT3173_under70_Shikyugaku",
-        "DbT3173"."shikyugaku" as "DbT3173_shikyugaku",
-        "DbT3173"."over70_Biko" as "DbT3173_over70_Biko",
-        "DbT3173"."under70_Biko" as "DbT3173_under70_Biko",
-        "DbT3173"."dataKubun" as "DbT3173_dataKubun",
-        "DbT3173"."uketoriYM" as "DbT3173_uketoriYM",
-        "DbT3173"."sofuYM" as "DbT3173_sofuYM",
-        "DbT3173"."insertDantaiCd" as "DbT3173_insertDantaiCd",
-        "DbT3173"."insertTimestamp" as "DbT3173_insertTimestamp",
-        "DbT3173"."insertReamsLoginId" as "DbT3173_insertReamsLoginId",
-        "DbT3173"."insertContextId" as "DbT3173_insertContextId",
-        "DbT3173"."isDeleted" as "DbT3173_isDeleted",
-        "DbT3173"."updateCount" as "DbT3173_updateCount",
-        "DbT3173"."lastUpdateTimestamp" as "DbT3173_lastUpdateTimestamp",
-        "DbT3173"."lastUpdateReamsLoginId" as "DbT3173_lastUpdateReamsLoginId"
+        dbt3173."hihokenshaNo" as "DbT3173_hihokenshaNo",
+        dbt3173."taishoNendo" as "DbT3173_taishoNendo",
+        dbt3173."shoKisaiHokenshaNo" as "DbT3173_shoKisaiHokenshaNo",
+        dbt3173."shikyuShinseishoSeiriNo" as "DbT3173_shikyuShinseishoSeiriNo",
+        dbt3173."meisanNo" as "DbT3173_meisanNo",
+        dbt3173."rirekiNo" as "DbT3173_rirekiNo",
+        dbt3173."hokenSeidoCode" as "DbT3173_hokenSeidoCode",
+        dbt3173."uchiwakeHokenshaNo" as "DbT3173_uchiwakeHokenshaNo",
+        dbt3173."kokuho_HihokenshaShoKigo" as "DbT3173_kokuho_HihokenshaShoKigo",
+        dbt3173."hiHokenshaShoNo" as "DbT3173_hiHokenshaShoNo",
+        dbt3173."uchiwakeHokenshaMei" as "DbT3173_uchiwakeHokenshaMei",
+        dbt3173."jikoFutanSeiriNo" as "DbT3173_jikoFutanSeiriNo",
+        dbt3173."taishoshaShimei" as "DbT3173_taishoshaShimei",
+        dbt3173."over70_Futangaku" as "DbT3173_over70_Futangaku",
+        dbt3173."over70_AmbunRitsu" as "DbT3173_over70_AmbunRitsu",
+        dbt3173."over70_Shikyugaku" as "DbT3173_over70_Shikyugaku",
+        dbt3173."under70_Futangaku" as "DbT3173_under70_Futangaku",
+        dbt3173."futangaku" as "DbT3173_futangaku",
+        dbt3173."ambunRitsu" as "DbT3173_ambunRitsu",
+        dbt3173."under70_Shikyugaku" as "DbT3173_under70_Shikyugaku",
+        dbt3173."shikyugaku" as "DbT3173_shikyugaku",
+        dbt3173."over70_Biko" as "DbT3173_over70_Biko",
+        dbt3173."under70_Biko" as "DbT3173_under70_Biko",
+        dbt3173."dataKubun" as "DbT3173_dataKubun",
+        dbt3173."uketoriYM" as "DbT3173_uketoriYM",
+        dbt3173."sofuYM" as "DbT3173_sofuYM",
+        dbt3173."insertDantaiCd" as "DbT3173_insertDantaiCd",
+        dbt3173."insertTimestamp" as "DbT3173_insertTimestamp",
+        dbt3173."insertReamsLoginId" as "DbT3173_insertReamsLoginId",
+        dbt3173."insertContextId" as "DbT3173_insertContextId",
+        dbt3173."isDeleted" as "DbT3173_isDeleted",
+        dbt3173."updateCount" as "DbT3173_updateCount",
+        dbt3173."lastUpdateTimestamp" as "DbT3173_lastUpdateTimestamp",
+        dbt3173."lastUpdateReamsLoginId" as "DbT3173_lastUpdateReamsLoginId"
     </sql>
 
 

@@ -77,6 +77,8 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     @BatchWriter
     private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101TableWriter;
     private SofubutsuAtesakiSource sofubutsuAtesakiSource;
+    private static final RString 申請書管理番号リスト = new RString("【申請書管理番号】");
+    private static final RString 申請書管理番号空白 = new RString("　　　　　　　　　　　　");
 
     @Override
     protected IBatchReader createReader() {
@@ -221,9 +223,15 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
+        boolean 空白Flag = Boolean.FALSE;
         if (parameter.get申請書管理番号リスト() != null) {
             for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {
-                出力条件.add(申請書管理番号);
+                if (!空白Flag) {
+                    出力条件.add(申請書管理番号リスト.concat(申請書管理番号));
+                    空白Flag = Boolean.TRUE;
+                } else {
+                    出力条件.add(申請書管理番号空白.concat(申請書管理番号));
+                }
             }
         }
         return 出力条件;

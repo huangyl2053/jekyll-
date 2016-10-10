@@ -235,8 +235,8 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(entity.get支払期間開始年月日());
         reportEntity.set支払期間終了年月日(entity.get支払期間終了年月日());
-        reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
-        reportEntity.set支払窓口終了時間(entity.get支払窓口終了期間());
+//        reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
+//        reportEntity.set支払窓口終了時間(entity.get支払窓口終了期間());
         set口座情報(reportEntity);
         return reportEntity;
     }

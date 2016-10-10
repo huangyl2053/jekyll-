@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001.DbT5101DensanErrorCheckProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001.DbT5101DensanErrorTempOutputProcess;
@@ -57,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -92,7 +92,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     @Override
     protected void defineFlow() {
         RDate 基準日 = RDate.getNowDate();
-        path = Directory.createTmpDirectory().concat(File.separator);
+        path = Directory.createTmpDirectory();
         List<RString> 取込み対象ファイルリスト = getParameter().get取込み対象ファイルリスト();
         if (取込み対象ファイルリスト != null && !取込み対象ファイルリスト.isEmpty()) {
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援);
@@ -102,12 +102,11 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
             医療機関ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
             認定調査員ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
             調査委託先ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-
-            主治医情報ファイル = path.concat(主治医情報ファイル名);
-            医療機関ファイル = path.concat(医療機関ファイル名);
-            認定調査員ファイル = path.concat(認定調査員ファイル名);
-            調査委託先ファイル = path.concat(調査委託先ファイル名);
-            認定申請ファイル = path.concat(認定申請ファイル名);
+            主治医情報ファイル = Path.combinePath(path, 主治医情報ファイル名);
+            医療機関ファイル = Path.combinePath(path, 医療機関ファイル名);
+            認定調査員ファイル = Path.combinePath(path, 認定調査員ファイル名);
+            調査委託先ファイル = Path.combinePath(path, 調査委託先ファイル名);
+            認定申請ファイル = Path.combinePath(path, 認定申請ファイル名);
             if (IF種類_電算.equals(認定申請IF種類)) {
                 call電算標準版_認定申請IF種類(取込み対象ファイルリスト);
             }
@@ -124,12 +123,12 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
             }
             if (IF種類_東芝版.equals(認定申請IF種類)) {
                 getParameter().set東芝版フラグ(true);
-                call東芝版(取込み対象ファイルリスト, 基準日);
+                call東芝版(取込み対象ファイルリスト);
             }
         }
     }
 
-    private void call東芝版(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
+    private void call東芝版(List<RString> 取込み対象ファイルリスト) {
         if (取込み対象ファイルリスト.contains(認定申請ファイル名)) {
             call要介護認定申請情報_東芝版();
         }
@@ -167,7 +166,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert要介護認定申請一時テーブル_東芝版() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -246,7 +245,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert主治医情報一時TBL_厚労省() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -304,7 +303,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert主治医医療機関一時TBL_厚労省() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -362,7 +361,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert認定調査員一時TBL_厚労省() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -420,7 +419,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert認定調査委託先一時TBL_厚労() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -477,7 +476,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert認定申請一時中間テーブル_厚労省() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     private void call電算標準版_認定申請IF種類(List<RString> 取込み対象ファイルリスト) {
@@ -535,7 +534,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert主治医情報一時TBL_電算() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -605,7 +604,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert主治医医療機関一時TBL_電算() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -675,7 +674,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert認定調査員一時TBL_電算() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -745,7 +744,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert認定調査委託先一時TBL_電算() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -819,7 +818,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     protected IBatchFlowCommand insert認定申請一時中間テーブル_電算標準版() {
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                 getParameter().get共有ファイルID()), new FilesystemPath(path));
-        return importCsv(認定申請ファイル, 認定申請中間一時テーブルNAME, DbTableType.TEMPORARY).define();
+        return importCsv(認定申請ファイル, 認定申請中間一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
