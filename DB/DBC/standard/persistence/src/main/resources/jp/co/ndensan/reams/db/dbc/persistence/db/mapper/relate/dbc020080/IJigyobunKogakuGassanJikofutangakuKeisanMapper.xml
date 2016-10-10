@@ -529,42 +529,6 @@
         ) AS "Shukei"                       
         ) AS "riyoshaFutan"
         ON "temp"."hihokenshaNo"＝ "riyoshaFutan"."hiHokenshaNo"
-        <!--        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
-        FROM "JissekiFutangakuDataTemp2" AS "temp"
-        INNER JOIN rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        ON "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
-        LEFT JOIN   rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"
-        ON  "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."isDeleted"= False
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceSyuruiCode" IN <include refid="WKサービス種類コード集計対象事業分" />
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"= "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"= "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        LEFT JOIN   rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
-        ON      "DbT3033KyufujissekiShukei"."isDeleted"= False
-        AND "DbT3033KyufujissekiShukei"."serviceSyuruiCode" IN <include refid="WKサービス種類コード集計対象事業分" />
-        AND "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3033KyufujissekiShukei"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3033KyufujissekiShukei"."serviceTeikyoYM" = "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3033KyufujissekiShukei"."jigyoshoNo" = "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3033KyufujissekiShukei"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        AND substring("DbT3033KyufujissekiShukei"."inputShikibetsuNo" from 1 for 3)= '71R'
-        WHERE "DbT3017KyufujissekiKihon"."isDeleted"= False
-        AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]> '3'
-        AND     substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1) <![CDATA[<>]]> 'H'
-        AND     "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode"  IN ('1','2')
-        AND     substring("DbT3017KyufujissekiKihon"."inputShikibetsuNo" from 1 for 3)= '71R'
-        ORDER BY
-        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" ASC
-        ,"DbT3017KyufujissekiKihon"."jigyoshoNo" ASC
-        ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo" ASC
-        ,"DbT3017KyufujissekiKihon"."seiriNo" ASC-->
     </select>
     
     <!--BatchStep2.5 TODO Parameter-->
@@ -1081,7 +1045,7 @@
         <result property="biko105" column="temp_biko105" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="biko106" column="temp_biko106" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="biko107" column="temp_biko107" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-
+        <result property="serviceTeikyoYMs" column="temp_serviceTeikyoYMs" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <!--TODO QA 審査支払区分-->
@@ -1398,6 +1362,7 @@
         ,"temp"."biko105"as "temp_biko105"
         ,"temp"."biko106"as "temp_biko106"
         ,"temp"."biko107"as "temp_biko107"
+        ,"temp"."serviceTeikyoYMs"as "temp_serviceTeikyoYMs"
     </sql>
 
 </mapper>  

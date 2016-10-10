@@ -24,15 +24,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 public class DBC020080ProcessParameter implements IBatchProcessParameter {
 
-    private final RDateTime 処理日時;
-    private final RDate 申請対象開始日;
-    private final RDate 申請対象終了日;
-    private final boolean 出力フラグ;
-    private final Long 帳票出力順ID;
-    private final LasdecCode 市町村コード;
-    private final boolean 事業分フラグ;
+    private RDateTime 処理日時;
+    private RDate 申請対象開始日;
+    private RDate 申請対象終了日;
+    private boolean 出力フラグ;
+    private Long 帳票出力順ID;
+    private LasdecCode 市町村コード;
+    private boolean 事業分フラグ;
     private RString 出力順;
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    private RString 処理区分;
+
+    /**
+     * DBC020080ProcessParameterのコンストラクタです。
+     */
+    public DBC020080ProcessParameter() {
+    }
 
     /**
      * DBC020080ProcessParameterのコンストラクタです。

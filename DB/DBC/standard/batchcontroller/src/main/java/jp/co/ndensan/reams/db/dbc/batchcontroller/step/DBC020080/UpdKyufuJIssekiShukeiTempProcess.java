@@ -91,7 +91,7 @@ public class UpdKyufuJIssekiShukeiTempProcess extends BatchKeyBreakBase<DbT3030M
     private void loopeHandle(DbT3030MatchingEntity entity) {
         DbT3033KyufujissekiShukeiEntity 給付実績集計 = entity.get給付実績集計();
         if (給付実績集計 != null) {
-            util.add自己負担額ワークエリア(updEntity, 給付実績集計);
+//            util.add自己負担額ワークエリア(updEntity, 給付実績集計);
         }
     }
 }
