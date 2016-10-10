@@ -44,7 +44,6 @@ public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranEditor implemen
 
     private JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource editSource(
             JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource source) {
-        source.pageAll = data.get総ページ();
         source.printTimeStamp = set平成年月日(data.get作成年月日());
         source.jigyoshaMeisho = data.get事業者名();
         source.kaishiYM = set平成年月日(data.get集計期間開始());
