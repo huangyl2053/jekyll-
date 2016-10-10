@@ -135,8 +135,6 @@ public class JukyushaDaichoPanelHandler {
         div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給);
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
         onChange_chkSaisin();
-        onSelect_radChushutsuTaisho();
-
     }
 
     /**
@@ -189,6 +187,7 @@ public class JukyushaDaichoPanelHandler {
         RString 出力項目 = map.getParameterValue(RString.class, 出力項目名);
         div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
         onChange_chkSaisin();
+        onSelect_radChushutsuTaisho();
     }
 
     /**
