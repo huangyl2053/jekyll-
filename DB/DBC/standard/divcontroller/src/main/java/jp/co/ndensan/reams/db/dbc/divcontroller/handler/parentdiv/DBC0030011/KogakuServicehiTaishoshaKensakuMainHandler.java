@@ -386,12 +386,16 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         } else {
             該当者一覧キー.set証記載保険者番号(HokenshaNo.EMPTY);
         }
-        RString 識別コード = row.getTxtHdnShikibetsuCode();
-        if (識別コード != null && !識別コード.isEmpty()) {
-            該当者一覧キー.set識別コード(new ShikibetsuCode(識別コード));
-        } else {
-            該当者一覧キー.set識別コード(ShikibetsuCode.EMPTY);
-        }
+        // TODO 上の画面の識別コードの取得は問題があります。Redmine#89690
+//        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        該当者一覧キー.set識別コード(識別コード);
+//        RString 識別コード = row.getTxtHdnShikibetsuCode();
+//        if (識別コード != null && !識別コード.isEmpty()) {
+//            該当者一覧キー.set識別コード(new ShikibetsuCode(識別コード));
+//        } else {
+//            該当者一覧キー.set識別コード(ShikibetsuCode.EMPTY);
+//        }
         return 該当者一覧キー;
     }
 

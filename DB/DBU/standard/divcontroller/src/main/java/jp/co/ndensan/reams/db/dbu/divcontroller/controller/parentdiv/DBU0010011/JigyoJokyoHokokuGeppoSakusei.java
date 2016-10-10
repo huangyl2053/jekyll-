@@ -67,14 +67,16 @@ public class JigyoJokyoHokokuGeppoSakusei {
             div.getRadlblShukeiType4().setSelectedKey(決定年月で集計);
             div.getCblOutputTaisho5().setVisible(true);
             div.getRadlblShukeiType5().setSelectedKey(給付決定年月で集計);
+            div.getRadKoikiRengo().setDisabled(true);
             getHandler(div).set日付時刻();
         }
         if (過去の集計結果を印刷.equals(jkkouTani)) {
-            onLoad(div);
+            getHandler(div).onLoad(get過去集計情報の取得());
         }
         div.getBtnKakutei().setDisabled(false);
         div.getTxtHokokuYM().setDisabled(false);
         div.getDdlKakoHokokuYM().setDisabled(true);
+        div.getRadKoikiRengo().setDisabled(true);
         div.setHdnJkkoutani(集計のみ);
         return ResponseData.of(div).respond();
     }
@@ -94,15 +96,17 @@ public class JigyoJokyoHokokuGeppoSakusei {
             div.getRadlblShukeiType4().setSelectedKey(決定年月で集計);
             div.getCblOutputTaisho5().setVisible(true);
             div.getRadlblShukeiType5().setSelectedKey(給付決定年月で集計);
+            div.getRadKoikiRengo().setDisabled(true);
             getHandler(div).set日付時刻();
         }
         if (過去の集計結果を印刷.equals(jkkouTani)) {
-            onLoad(div);
+            getHandler(div).onLoad(get過去集計情報の取得());
         }
         div.getBtnKakutei().setDisabled(false);
         div.getTxtHokokuYM().setDisabled(false);
         div.getDdlKakoHokokuYM().setDisabled(true);
         div.setHdnJkkoutani(集計後に印刷);
+        div.getRadKoikiRengo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -115,13 +119,14 @@ public class JigyoJokyoHokokuGeppoSakusei {
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_kakoShukeiOutput(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RString jkkouTani = div.getHdnJkkoutani();
         if (集計のみ.equals(jkkouTani) || 集計後に印刷.equals(jkkouTani)) {
-            onLoad(div);
+            getHandler(div).onLoad(get過去集計情報の取得());
             div.setShichosonList(null);
             getHandler(div).set日付時刻の空白設定();
         }
         div.getBtnKakutei().setDisabled(true);
         div.getTxtHokokuYM().setDisabled(true);
         div.getDdlKakoHokokuYM().setDisabled(false);
+        div.getRadKoikiRengo().setDisabled(false);
         div.setHdnJkkoutani(過去の集計結果を印刷);
         return ResponseData.of(div).respond();
     }
@@ -153,14 +158,16 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).set月報報告_一般状況1_11onClick();
-        getHandler(div).set月報報告_一般状況12_14_現物分onClick();
-        getHandler(div).set月報報告_保険給付決定_現物分_onClick();
-        getHandler(div).set月報報告_一般状況12_14_償還分();
-        getHandler(div).set月報報告_保険給付決定_償還分();
-        getHandler(div).set月報報告_保険給付決定_高額分();
-        getHandler(div).set月報報告_保険給付決定_高額分算分();
-        getHandler(div).setチェックボックス設定();
+        if (!RString.isNullOrEmpty(div.getDdlKakoHokokuYM().getSelectedValue())) {
+            getHandler(div).set月報報告_一般状況1_11onClick();
+            getHandler(div).set月報報告_一般状況12_14_現物分onClick();
+            getHandler(div).set月報報告_保険給付決定_現物分_onClick();
+            getHandler(div).set月報報告_一般状況12_14_償還分();
+            getHandler(div).set月報報告_保険給付決定_償還分();
+            getHandler(div).set月報報告_保険給付決定_高額分();
+            getHandler(div).set月報報告_保険給付決定_高額分算分();
+            getHandler(div).setチェックボックス設定();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -174,6 +181,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         RString 旧市町村分 = new RString("kyuShichoson");
         if (div.getTblJikkoTani().getRadGappeiShichoson().getSelectedKey().equals(旧市町村分)) {
             div.setShichosonKubun(new RString("2"));
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -188,6 +196,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         RString 構成市町村分 = new RString("koseiShichoson");
         if (div.getTblJikkoTani().getRadKoikiRengo().getSelectedKey().equals(構成市町村分)) {
             div.setShichosonKubun(new RString("1"));
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
         }
         return ResponseData.of(div).respond();
     }
