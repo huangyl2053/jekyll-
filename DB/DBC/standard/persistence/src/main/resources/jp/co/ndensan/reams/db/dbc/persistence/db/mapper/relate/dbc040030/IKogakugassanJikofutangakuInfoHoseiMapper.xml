@@ -367,61 +367,6 @@
         <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
         <association property="dbt3071Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
     </resultMap>
-    <select id="select高額合算自己負担額データ" resultOrdered="true"
-            resultMap="resultMap_高額合算自己負担額" fetchSize="500">
-        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
-               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
-        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
-        LEFT JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
-        ON     "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
-        AND    "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo"
-        AND    "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo"
-        AND    "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo"
-        AND    "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
-        WHERE  "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
-    </select>
-     <resultMap id="resultMap_高額合算自己負担額" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="taishoNendo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="hokenshaNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <id property="shikyuShinseishoSeiriNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="rirekiNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_rirekiNo" />
-        <id property="taishoM" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="中間ＤＢ自己負担額データ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
-        <association property="高額合算自己負担額" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
-    </resultMap>
-  <select id="select高額合算自己負担額明細データ" resultOrdered="true"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
-            resultMap="resultMap_高額合算自己負担額明細" fetchSize="500">
-        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
-               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
-        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
-        LEFT JOIN ( SELECT * FROM rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
-                    WHERE 
-                           rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
-                   )AS "DbT3071KogakuGassanJikoFutanGakuMeisai"                    
-        ON     "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
-        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo"
-        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo"
-        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo"
-        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
-        WHERE  "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
-       <if test="改頁出力順 != null">
-            ORDER BY
-             ${改頁出力順}
-       </if>
-    </select>
-    
-    <resultMap id="resultMap_高額合算自己負担額明細" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="taishoNendo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="hokenshaNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <id property="shikyuShinseishoSeiriNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="rirekiNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_rirekiNo" />
-        <id property="taishoM" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="中間ＤＢ自己負担額データ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
-        <association property="高額合算自己負担額明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
-    </resultMap>
      <select id="get中間DB" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
             resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" fetchSize="500">
@@ -499,5 +444,48 @@
         <result property="kogakuShikyuGakuGakuHoseiJissi" column="kogakuShikyuGakuGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ichiranKakuninKubun" column="ichiranKakuninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ichiranKakuninKubun2" column="ichiranKakuninKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+    </resultMap>
+     <select id="select高額合算自己負担額データ" resultOrdered="true"
+            resultMap="resultMap_高額合算自己負担額" fetchSize="500">
+        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
+        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
+        LEFT JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
+        ON     "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
+        WHERE  "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
+    </select>
+     <resultMap id="resultMap_高額合算自己負担額" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
+        <association property="中間ＤＢ自己負担額データ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+        <association property="高額合算自己負担額" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
+    </resultMap>
+  <select id="select高額合算自己負担額明細データ" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
+            resultMap="resultMap_高額合算自己負担額明細" fetchSize="500">
+        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
+        LEFT JOIN ( SELECT * FROM rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
+                    WHERE 
+                           rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+                   )AS "DbT3071KogakuGassanJikoFutanGakuMeisai"                    
+        ON     "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
+        WHERE  "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+       <if test="改頁出力順 != null">
+            ORDER BY
+             ${改頁出力順}
+       </if>
+    </select>
+    
+    <resultMap id="resultMap_高額合算自己負担額明細" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
+        <association property="中間ＤＢ自己負担額データ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+        <association property="高額合算自己負担額明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
     </resultMap>
 </mapper>
