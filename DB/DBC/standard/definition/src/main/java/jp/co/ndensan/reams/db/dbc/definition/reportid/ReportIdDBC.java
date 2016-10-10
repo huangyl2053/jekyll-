@@ -76,6 +76,10 @@ public enum ReportIdDBC {
      */
     DBC200096(new ReportId("DBC200096_KoseiTaishoKyufuJissekiIchiran"), new RString("更正対象給付実績一覧表")),
     /**
+     * 給付実績取消一覧表
+     */
+    DBC200097(new ReportId("DBC200097_KyufuJissekiTorikeshiIchiran"), new RString("給付実績取消一覧表")),
+    /**
      * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
      */
     DBC100011_申請分(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAriShoShokai"),
