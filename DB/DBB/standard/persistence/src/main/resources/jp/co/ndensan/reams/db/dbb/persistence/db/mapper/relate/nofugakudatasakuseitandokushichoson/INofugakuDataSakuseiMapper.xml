@@ -49,8 +49,7 @@
         "DbT2003Kibetsu"."choteiNendo" = "DbV2002Fuka"."choteiNendo" and
         "DbT2003Kibetsu"."fukaNendo" = "DbV2002Fuka"."fukaNendo" and
         "DbT2003Kibetsu"."tsuchishoNo" = "DbV2002Fuka"."tsuchishoNo" and
-        "DbT2003Kibetsu"."rirekiNo" = "DbV2002Fuka"."rirekiNo" and
-        "DbT2003Kibetsu"."choshuHouhou" = '1'
+        "DbT2003Kibetsu"."rirekiNo" = "DbV2002Fuka"."rirekiNo" 
         INNER JOIN
         rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON

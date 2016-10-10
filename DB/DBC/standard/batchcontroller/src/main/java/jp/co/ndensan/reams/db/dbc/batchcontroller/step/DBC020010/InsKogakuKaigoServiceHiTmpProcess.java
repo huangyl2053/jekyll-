@@ -134,7 +134,7 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
             flag = getFlag(flag, 結果Entity);
             高額支給額合計 = get高額支給額合計(結果Entity, 高額支給額合計, flag);
         }
-
+        TyukannKogakuRelateEntity 結果Entity = 結果全件List.get(0);
         TempKyufujissekiTyukannEntity 給付実績中間高額Entity = 結果全件List.get(0).get給付実績中間高額Entity();
         if (!マッチFlag) {
             insert高額全件一時(給付実績中間高額Entity);
@@ -153,7 +153,7 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                 給付実績中間高額Entity.setSikyugaku(Decimal.ZERO);
                 中間高額一時Writer.insert(給付実績中間高額Entity);
             } else {
-                update高額全件一時_作成区分コードが3以外(高額支給額合計, 給付実績中間高額Entity, 作成区分Flag_0);
+                update高額全件一時_作成区分コードが3以外(高額支給額合計, 給付実績中間高額Entity, 結果Entity, 作成区分Flag_0);
             }
         }
         結果全件List.clear();
@@ -178,7 +178,7 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
             flag = getFlag(flag, 結果Entity);
             高額支給額合計 = get高額支給額合計(結果Entity, 高額支給額合計, flag);
         }
-
+        TyukannKogakuRelateEntity 結果Entity = 結果全件List.get(0);
         TempKyufujissekiTyukannEntity 給付実績中間高額Entity = 結果全件List.get(0).get給付実績中間高額Entity();
         if (!マッチFlag) {
             insert高額全件一時(給付実績中間高額Entity);
@@ -197,7 +197,7 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                 給付実績中間高額Entity.setSikyugaku(Decimal.ZERO);
                 中間高額一時Writer.insert(給付実績中間高額Entity);
             } else {
-                update高額全件一時_作成区分コードが3以外(高額支給額合計, 給付実績中間高額Entity, 作成区分Flag_0);
+                update高額全件一時_作成区分コードが3以外(高額支給額合計, 給付実績中間高額Entity, 結果Entity, 作成区分Flag_0);
             }
         }
     }
@@ -223,7 +223,7 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
     }
 
     private void update高額全件一時_作成区分コードが3以外(Decimal 高額支給額合計,
-            TempKyufujissekiTyukannEntity 給付実績中間高額Entity, boolean 作成区分Flag_0) {
+            TempKyufujissekiTyukannEntity 給付実績中間高額Entity, TyukannKogakuRelateEntity 結果Entity, boolean 作成区分Flag_0) {
         if (高額支給額合計.compareTo(給付実績中間高額Entity.getSikyugaku()) == 0
                 || 高額支給額合計.compareTo(給付実績中間高額Entity.getSikyugaku()) == 1) {
             if (Decimal.ZERO.equals(給付実績中間高額Entity.getSikyugaku())) {
@@ -253,10 +253,10 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                 }
                 if (区分コード_1.equals(国保連共同処理受託区分_高額)
                         && 区分コード_1.equals(給付実績中間高額Entity.getDataKubun())) {
-                    申請全件一時Writer.insert(get申請全件一時_3(給付実績中間高額Entity));
-                    判定結果全件一時Writer.insert(get判定結果全件一時_3(給付実績中間高額Entity));
-                    審査決定全件一時Writer.insert(get審査決定全件一時_3(給付実績中間高額Entity));
-                    合計全件一時Writer.insert(get合計全件一時_3(給付実績中間高額Entity));
+                    申請全件一時Writer.insert(get申請全件一時_3(給付実績中間高額Entity, 結果Entity));
+                    判定結果全件一時Writer.insert(get判定結果全件一時_3(給付実績中間高額Entity, 結果Entity));
+                    審査決定全件一時Writer.insert(get審査決定全件一時_3(給付実績中間高額Entity, 結果Entity));
+                    合計全件一時Writer.insert(get合計全件一時_3(給付実績中間高額Entity, 結果Entity));
                     明細全件更新一時Writer.insert(get明細全件更新一時(給付実績中間高額Entity));
                 }
             }
@@ -272,13 +272,13 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
         return 申請全件一時Entity;
     }
 
-    private DbT3056KogakuShikyuShinseiEntity get申請全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity) {
+    private DbT3056KogakuShikyuShinseiEntity get申請全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity,
+            TyukannKogakuRelateEntity 結果Entity) {
         DbT3056KogakuShikyuShinseiEntity 申請全件一時Entity = new DbT3056KogakuShikyuShinseiEntity();
         申請全件一時Entity.setHihokenshaNo(給付実績中間高額Entity.getHiHokenshaNo());
         申請全件一時Entity.setServiceTeikyoYM(給付実績中間高額Entity.getServiceTeikyoYM());
         申請全件一時Entity.setShoKisaiHokenshaNo(給付実績中間高額Entity.getShokisaiHokenshaNo());
-        //TODO
-        申請全件一時Entity.setRirekiNo(Decimal.ONE);
+        申請全件一時Entity.setRirekiNo(結果Entity.get高額申請全件Entity().getRirekiNo().add(Decimal.ONE));
         return 申請全件一時Entity;
     }
 
@@ -291,13 +291,13 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
         return 判定結果全件一時Entity;
     }
 
-    private DbT3057KogakuShikyuHanteiKekkaEntity get判定結果全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity) {
+    private DbT3057KogakuShikyuHanteiKekkaEntity get判定結果全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity,
+            TyukannKogakuRelateEntity 結果Entity) {
         DbT3057KogakuShikyuHanteiKekkaEntity 判定結果全件一時Entity = new DbT3057KogakuShikyuHanteiKekkaEntity();
         判定結果全件一時Entity.setHihokenshaNo(給付実績中間高額Entity.getHiHokenshaNo());
         判定結果全件一時Entity.setServiceTeikyoYM(給付実績中間高額Entity.getServiceTeikyoYM());
         判定結果全件一時Entity.setShoKisaiHokenshaNo(給付実績中間高額Entity.getShokisaiHokenshaNo());
-        //RODO
-        判定結果全件一時Entity.setRirekiNo(1);
+        判定結果全件一時Entity.setRirekiNo(結果Entity.get高額判定結果全件Entity().getRirekiNo() + 1);
         return 判定結果全件一時Entity;
     }
 
@@ -310,13 +310,14 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
         return 審査決定全件一時Entity;
     }
 
-    private DbT3058KogakuShikyuShinsaKetteiEntity get審査決定全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity) {
+    private DbT3058KogakuShikyuShinsaKetteiEntity get審査決定全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity,
+            TyukannKogakuRelateEntity 結果Entity) {
         DbT3058KogakuShikyuShinsaKetteiEntity 審査決定全件一時Entity = new DbT3058KogakuShikyuShinsaKetteiEntity();
         審査決定全件一時Entity.setHihokenshaNo(給付実績中間高額Entity.getHiHokenshaNo());
         審査決定全件一時Entity.setServiceTeikyoYM(給付実績中間高額Entity.getServiceTeikyoYM());
         審査決定全件一時Entity.setShoKisaiHokenshaNo(給付実績中間高額Entity.getShokisaiHokenshaNo());
         //TODO
-        審査決定全件一時Entity.setRirekiNo(1);
+        審査決定全件一時Entity.setRirekiNo(結果Entity.get高額審査決定全件Entity().getRirekiNo() + 1);
         return 審査決定全件一時Entity;
     }
 
@@ -342,24 +343,25 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
         return 合計全件一時Entity;
     }
 
-    private DbT3055KogakuKyufuTaishoshaGokeiEntity get合計全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity) {
+    private DbT3055KogakuKyufuTaishoshaGokeiEntity get合計全件一時_3(TempKyufujissekiTyukannEntity 給付実績中間高額Entity,
+            TyukannKogakuRelateEntity 結果Entity) {
         DbT3055KogakuKyufuTaishoshaGokeiEntity 合計全件一時Entity = new DbT3055KogakuKyufuTaishoshaGokeiEntity();
         合計全件一時Entity.setHihokenshaNo(給付実績中間高額Entity.getHiHokenshaNo());
         合計全件一時Entity.setServiceTeikyoYM(給付実績中間高額Entity.getServiceTeikyoYM());
-        合計全件一時Entity.setRirekiNo(Decimal.ONE);
+        合計全件一時Entity.setRirekiNo(結果Entity.get高額合計全件Entity().getRirekiNo().add(Decimal.ONE));
         合計全件一時Entity.setServiceHiyoGokeiGakuGokei(給付実績中間高額Entity.getHokenRiyoshaFutangaku());
         合計全件一時Entity.setRiyoshaFutanGakuGokei(給付実績中間高額Entity.getHokenRiyoshaFutangaku());
         合計全件一時Entity.setSanteiKijunGaku(給付実績中間高額Entity.getSanteiKijungaku());
-        //TODO
+        //TODO 支払済金額合計
         合計全件一時Entity.setShiharaiSumiKingakuGokei(Decimal.ZERO);
-        //TODO
+        //TODO 高額支給額
         合計全件一時Entity.setKogakuShikyuGaku(給付実績中間高額Entity.getSikyugaku());
         合計全件一時Entity.setTaishoshaHanteiShinsaYM(parameter.get処理年月日().getYearMonth());
         合計全件一時Entity.setTashoshaUketoriYM(FlexibleYearMonth.EMPTY);
-        //TODO
+        //TODO 世帯集約番号
         合計全件一時Entity.setSetaiShuyakuNo(RString.EMPTY);
         //合計全件一時Entity.setKyokaisoTaishoshaFlag(給付実績中間高額Entity.getKogakuServicehiJogengakuGengakuGaitoFlag());
-        //TODO
+        //TODO 社会福祉法人軽減対象フラグ
         合計全件一時Entity.setHojinKeigenTaishoFlag(true);
         合計全件一時Entity.setKogakuTaishoGaiFlag(false);
         合計全件一時Entity.setJidoShokanTaishoFlag(false);
