@@ -59,7 +59,7 @@ public class ShinsaHanteiIraiIchiranhyoReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "reportId", order = 19)
     public RString reportId;
-    @ReportPerson(id = "003", order = 21)
+    @ReportPerson(id = "003")
     public RString shikibetsuCode;
 
 // </editor-fold>
