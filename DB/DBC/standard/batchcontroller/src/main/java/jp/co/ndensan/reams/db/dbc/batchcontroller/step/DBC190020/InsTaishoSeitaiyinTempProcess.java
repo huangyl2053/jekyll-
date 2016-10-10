@@ -101,11 +101,11 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
 
         taiShoEntity.setShotaiCode(getColumnValue(世帯員所得情報一時.getSetaiCode()));
         if (null != 被保険者台帳管理Newest.getKyuShichosonCode()) {
-            taiShoEntity.setRannkuShichosonCode(被保険者台帳管理Newest.getKyuShichosonCode().getColumnValue());
+            taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getKyuShichosonCode()));
         } else if (null != 被保険者台帳管理Newest.getKoikinaiTokureiSochimotoShichosonCode()) {
-            taiShoEntity.setRannkuShichosonCode(被保険者台帳管理Newest.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
+            taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getKoikinaiTokureiSochimotoShichosonCode()));
         } else {
-            taiShoEntity.setRannkuShichosonCode(被保険者台帳管理Newest.getShichosonCode().getColumnValue());
+            taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getShichosonCode()));
         }
         taiShoEntity.setHihokenshaNo(世帯員所得情報一時.getHihokenshaNo());
         taiShoEntity.setShikibetsuCode(世帯員所得情報一時.getShikibetsuCode());
