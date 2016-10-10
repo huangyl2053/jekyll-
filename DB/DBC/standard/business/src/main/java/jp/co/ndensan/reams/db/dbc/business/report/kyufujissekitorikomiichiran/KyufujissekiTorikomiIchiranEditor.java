@@ -61,7 +61,11 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private static final RString 事業者名不明タイトル = new RString(" 事業者名不明");
 
     private final List<RString> 改頁リスト;
-    private final List<RString> 並び順リスト;
+    private final RString 並び順の１件目;
+    private final RString 並び順の２件目;
+    private final RString 並び順の３件目;
+    private final RString 並び順の４件目;
+    private final RString 並び順の５件目;
     private final FlexibleYearMonth 処理年月;
     private final RDateTime 作成日時;
     private final int 連番;
@@ -71,16 +75,25 @@ public class KyufujissekiTorikomiIchiranEditor implements
      * コンストラクタです
      *
      * @param entity KogakuGassanDataEntity
-     * @param 並び順リスト List<RString>
+     * @param 並び順の１件目 RString
+     * @param 並び順の２件目 RString
+     * @param 並び順の３件目 RString
+     * @param 並び順の４件目 RString
+     * @param 並び順の５件目 RString
      * @param 改頁リスト List<RString>
      * @param 処理年月 FlexibleYearMonth
      * @param 作成日時 RDateTime
      * @param 連番 int
      */
-    public KyufujissekiTorikomiIchiranEditor(KyufujissekiTorikomiIchiranEntity entity, List<RString> 並び順リスト,
+    public KyufujissekiTorikomiIchiranEditor(KyufujissekiTorikomiIchiranEntity entity, RString 並び順の１件目, RString 並び順の２件目,
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目,
             List<RString> 改頁リスト, FlexibleYearMonth 処理年月, RDateTime 作成日時, int 連番) {
         this.entity = entity;
-        this.並び順リスト = 並び順リスト;
+        this.並び順の１件目 = 並び順の１件目;
+        this.並び順の２件目 = 並び順の２件目;
+        this.並び順の３件目 = 並び順の３件目;
+        this.並び順の４件目 = 並び順の４件目;
+        this.並び順の５件目 = 並び順の５件目;
         this.改頁リスト = 改頁リスト;
         this.処理年月 = 処理年月;
         this.作成日時 = 作成日時;
@@ -98,11 +111,11 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.hokenshaNo = entity.get給付実績_保険者番号().value();
         source.hokenshaName = entity.get給付実績_保険者名();
 
-        source.shutsuryokujun1 = get並び順(INDEX_1);
-        source.shutsuryokujun2 = get並び順(INDEX_2);
-        source.shutsuryokujun3 = get並び順(INDEX_3);
-        source.shutsuryokujun4 = get並び順(INDEX_4);
-        source.shutsuryokujun5 = get並び順(INDEX_5);
+        source.shutsuryokujun1 = 並び順の１件目;
+        source.shutsuryokujun2 = 並び順の２件目;
+        source.shutsuryokujun3 = 並び順の３件目;
+        source.shutsuryokujun4 = 並び順の４件目;
+        source.shutsuryokujun5 = 並び順の５件目;
         source.kaiPege1 = get改頁(INDEX_1);
         source.kaiPege2 = get改頁(INDEX_2);
         source.kaiPege3 = get改頁(INDEX_3);
@@ -230,10 +243,6 @@ public class KyufujissekiTorikomiIchiranEditor implements
             return 中空まる;
         }
         return RString.EMPTY;
-    }
-
-    private RString get並び順(int index) {
-        return index < 並び順リスト.size() ? 並び順リスト.get(index) : RString.EMPTY;
     }
 
     private RString get改頁(int index) {
