@@ -69,6 +69,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private final FlexibleYearMonth 処理年月;
     private final RDateTime 作成日時;
     private final int 連番;
+    private final int 集計flag;
+    private final int 合計件数;
     private final KyufujissekiTorikomiIchiranEntity entity;
 
     /**
@@ -87,7 +89,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
      */
     public KyufujissekiTorikomiIchiranEditor(KyufujissekiTorikomiIchiranEntity entity, RString 並び順の１件目, RString 並び順の２件目,
             RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目,
-            List<RString> 改頁リスト, FlexibleYearMonth 処理年月, RDateTime 作成日時, int 連番) {
+            List<RString> 改頁リスト, FlexibleYearMonth 処理年月, RDateTime 作成日時, int 連番, boolean 集計flag, int 合計件数) {
         this.entity = entity;
         this.並び順の１件目 = 並び順の１件目;
         this.並び順の２件目 = 並び順の２件目;
@@ -98,6 +100,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
         this.処理年月 = 処理年月;
         this.作成日時 = 作成日時;
         this.連番 = 連番;
+        this.集計flag = 集計flag;
+        this.合計件数 = 合計件数;
 
     }
 
@@ -195,10 +199,10 @@ public class KyufujissekiTorikomiIchiranEditor implements
         } else {
             source.listLower_3 = RString.EMPTY;
         }
-        if (entity.isコントロール()) {
+        if (集計flag) {
             source.gokeiKensuTitle = 合計件数タイトル;
             if (entity.get給付実績_出力データ件数() != null) {
-                source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(entity.get給付実績_出力データ件数(), 0).concat(件タイトル);
+                source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(合計件数, 0).concat(件タイトル);
             }
         }
 
