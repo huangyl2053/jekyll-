@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -31,21 +32,15 @@ public class KogakuKetteiTsuchiShoEntity {
     private RString 被保険者氏名;
     private HihokenshaNo 被保険者番号;
     private FlexibleDate 受付年月日;
+    private FlexibleYearMonth 対象年月1;
     private FlexibleYearMonth 提供年月;
-    private FlexibleYearMonth 提供年月IDX1;
-    private FlexibleYearMonth 提供年月IDX2;
-    private FlexibleYearMonth 提供年月IDX3;
-    private FlexibleYearMonth 提供年月IDX4;
     private FlexibleDate 決定年月日;
     private Decimal 本人支払額;
+    private Decimal 支払金額合計;
     private FlexibleYearMonth 対象年月;
     private RString 給付の種類;
     private RString 支給結果;
     private Decimal 決定額;
-    private Decimal 決定額IDX1;
-    private Decimal 決定額IDX2;
-    private Decimal 決定額IDX3;
-    private Decimal 決定額IDX4;
     private RString 審査方法区分;
     private Decimal 支給金額;
     private RString 不支給理由;
@@ -58,8 +53,9 @@ public class KogakuKetteiTsuchiShoEntity {
     private FlexibleDate 支払期間;
     private FlexibleDate 支払期間開始年月日;
     private FlexibleDate 支払期間終了年月日;
-    private RString 支払窓口開始時間;
-    private RString 支払窓口終了時間;
+    private RDateTime 支払窓口開始時間;
+    private RDateTime 支払窓口終了時間;
+    private RString 金融機関コード;
     private RString 口座種別;
     private RString 通帳記号;
     private RString 通帳番号;
@@ -69,15 +65,11 @@ public class KogakuKetteiTsuchiShoEntity {
     private RString 決定通知書番号;
     private RString 支払方法区分;
     private RString 支払方法;
+    private Decimal 支給金額1;
     private Decimal 支給額;
-    private Decimal 支給額IDX1;
-    private Decimal 支給額IDX2;
-    private Decimal 支給額IDX3;
-    private Decimal 支給額IDX4;
     private RString 金融機関上段;
     private RString 金融機関下段;
     private ShoKisaiHokenshaNo 証記載保険者番号;
     private RString 支給不支給決定区分;
-    private int 通番;
     private int 連番;
 }

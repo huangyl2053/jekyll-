@@ -43,6 +43,7 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
      * @param 帳票ID RString
      * @param 認証者 Ninshosha
      * @param titleList List<RString>
+     * @param 連番 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -51,10 +52,11 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
             RString 文書番号,
             RString 帳票ID,
             Ninshosha 認証者,
-            List<RString> titleList) {
+            List<RString> titleList,
+            int 連番) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, titleList, reportManager);
+            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, titleList, 連番, reportManager);
             collection = reportManager.publish();
         }
 
@@ -70,6 +72,7 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
      * @param 帳票ID RString
      * @param 認証者 Ninshosha
      * @param titleList List<RString>
+     * @param 連番 int
      * @param reportManager ReportManager
      */
     public void print(
@@ -79,6 +82,7 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
             RString 帳票ID,
             Ninshosha 認証者,
             List<RString> titleList,
+            int 連番,
             ReportManager reportManager) {
 
         KogakuKetteiTsuchiShoSealer2Property property = new KogakuKetteiTsuchiShoSealer2Property();
@@ -100,7 +104,8 @@ public class KogakuKetteiTsuchiShoSealer2PrintService {
                     titleList,
                     帳票情報,
                     認証者ソースデータ,
-                    文書番号).writeBy(reportSourceWriter);
+                    文書番号,
+                    連番).writeBy(reportSourceWriter);
         }
     }
 

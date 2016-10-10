@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishosealer2;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Source;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -31,15 +34,17 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
     private final KogakuKetteiTsuchiShoEntity 帳票情報;
     private final NinshoshaSource 認証者ソースデータ;
     private final RString 文書番号;
+    private final int 連番;
     private static final RString テスト印刷 = new RString("テスト印刷");
     private static final RString 支給 = new RString("1");
     private static final RString 不支給 = new RString("2");
     private static final RString 増減の理由 = new RString("増減の理由");
     private static final RString 不支給の理由 = new RString("不支給の理由");
     private static final RString 窓口払い値 = new RString("1");
-    private static final RString 窓口払い = new RString("窓口払い");
-    private static final RString 口座払いでゆうちょ = new RString("口座払いでゆうちょ");
+    private static final RString 口座払い値 = new RString("2");
+    private static final RString 金融機関コード = new RString("9900");
     private static final RString 半角アスタリスク = new RString("************");
+    private static final RString 半角アスタリスク2 = new RString("**************");
     private static final RString 口座種別 = new RString("口座種別");
     private static final RString 通帳記号 = new RString("通帳記号");
     private static final RString 口座番号 = new RString("口座番号");
@@ -47,6 +52,9 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
     private static final RString 対象 = new RString("対象");
     private static final RString 対象外 = new RString("対象外");
     private static final RString 接続文字 = new RString("～");
+    private static final RString 支払方法区分コードONE = new RString("1");
+    private static final RString 支払方法区分コードTWO = new RString("2");
+    private static final RString 支払方法区分ONE = new RString("1");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
@@ -68,18 +76,20 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
      * @param 帳票情報 KogakuKetteiTsuchiShoEntity
      * @param 認証者ソースデータ NinshoshaSource
      * @param 文書番号 RString
-     *
+     * @param 連番 int
      */
     public KogakuKetteiTsuchiShoSealer2Editor(
             List<RString> titleList,
             KogakuKetteiTsuchiShoEntity 帳票情報,
             NinshoshaSource 認証者ソースデータ,
-            RString 文書番号) {
+            RString 文書番号,
+            int 連番) {
 
         this.titleList = titleList;
         this.帳票情報 = 帳票情報;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.文書番号 = 文書番号;
+        this.連番 = 連番;
     }
 
     @Override
@@ -88,7 +98,7 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
             source.shikibetsuCode = 帳票情報.get識別コード().value();
         }
         source.bunshoNo = 文書番号;
-        source.tsuban = new RString(帳票情報.get連番());
+        source.tsuban = new RString(連番);
 
         if (帳票情報.isテスト出力フラグ()) {
             source.testPrint = テスト印刷;
@@ -109,83 +119,52 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
         source.ketteiYMD = 年月日編集(帳票情報.get決定年月日());
         source.shiharaiGaku = doカンマ編集(帳票情報.get本人支払額());
         source.taishoYM = 年月編集(帳票情報.get対象年月());
-        source.kyufuShurui1 = 帳票情報.get給付の種類();
-        source.kyufuShurui2 = 帳票情報.get給付の種類();
-        source.kyufuShurui3 = 帳票情報.get給付の種類();
-        source.kekka = 帳票情報.get支給不支給決定区分();
-        source.ketteiGaku = get変換値金額(帳票情報.get決定額());
+        source.kyufuShurui = 帳票情報.get給付の種類();
+
+        if (帳票情報.get支給不支給決定区分() != null) {
+            source.kekka = ShikyuKubun.toValue(帳票情報.get支給不支給決定区分()).get名称();
+        }
+        source.ketteiGaku = doカンマ編集(帳票情報.get決定額());
         source.shikyuGaku = doカンマ編集(帳票情報.get支給金額());
 
-        if (支給.equals(帳票情報.get支給不支給区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分())) {
             source.riyuTitle = 増減の理由;
-        } else if (不支給.equals(帳票情報.get支給不支給区分())) {
+        } else if (不支給.equals(帳票情報.get支給不支給決定区分())) {
             source.riyuTitle = 不支給の理由;
         }
 
-        source.riyu1 = 帳票情報.get不支給理由();
-        source.riyu2 = 帳票情報.get不支給理由();
-        source.riyu3 = 帳票情報.get不支給理由();
-        source.torikeshi1 = 帳票情報.get窓口払();
-        source.torikeshi2 = 帳票情報.get口座払();
+        source.riyu = 帳票情報.get不支給理由();
 
-        if (支給.equals(帳票情報.get支給不支給区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
-                || 不支給.equals(帳票情報.get支給不支給区分())) {
+        set窓口払と口座払(source);
+
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
+                || 不支給.equals(帳票情報.get支給不支給決定区分())) {
             source.torikeshiMochimono1 = 半角アスタリスク;
             source.torikeshiMochimono2 = 半角アスタリスク;
             source.torikeshiShiharaibasho = 半角アスタリスク;
             source.torikeshiShiharaikikan = 半角アスタリスク;
         }
 
-        source.mochimono1 = 帳票情報.get持ちもの();
-        source.mochimono2 = 帳票情報.get持ちもの();
-        source.mochimono3 = 帳票情報.get持ちもの();
-        source.shiharaiBasho = 帳票情報.get支払場所();
+        set持ちものと支払場所と期間(source);
+        set金融機関(source);
 
-        source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間());
-        source.karaFugo = 接続文字;
-        source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間());
-        source.shiharaiStartHMS = 年月日編集(帳票情報.get支払期間());
-        source.shiharaiEndHMS = 年月日編集(帳票情報.get支払期間());
+        setTitle(source);
 
-        source.bankName = 帳票情報.get金融機関上段();
-        source.branchBankName = 帳票情報.get金融機関下段();
-
-        if (支給.equals(帳票情報.get支給不支給区分())) {
-            if (窓口払い.equals(帳票情報.get支払方法())) {
-                source.shumokuTitle = 口座種別;
-                source.bangoTitle = 口座番号;
-            } else if (口座払いでゆうちょ.equals(帳票情報.get支払方法())) {
-                source.shumokuTitle = 通帳記号;
-                source.bangoTitle = 通帳番号;
-            } else {
-                source.shumokuTitle = 口座種別;
-                source.bangoTitle = 口座番号;
-            }
-        }
-        if (支給.equals(帳票情報.get支給不支給区分()) && 帳票情報.get支給額() != null && 帳票情報.get支給額().compareTo(Decimal.ZERO) < 0
-                || 不支給.equals(帳票情報.get支給不支給区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && 帳票情報.get支給金額() != null && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0
+                || 不支給.equals(帳票情報.get支給不支給決定区分())) {
             source.shumokuTitle = 口座種別;
             source.bangoTitle = 口座番号;
         }
 
-        if (!帳票情報.isゆうちょ銀行フラグ()) {
-            source.kouzaShu = 帳票情報.get口座種別();
-            source.kouzaNo = 帳票情報.get口座番号();
-        } else {
-            source.kouzaShu = 帳票情報.get通帳記号();
-            source.kouzaNo = 帳票情報.get通帳番号();
-        }
+        set種別と番号と口座名義(source);
 
         if (帳票情報.get証記載保険者番号() != null) {
-            source.shoHokenshaNo = 帳票情報.get証記載保険者番号().value();
+            source.shokisaiHokenshaNo = 帳票情報.get証記載保険者番号().value();
         }
         if (帳票情報.get被保険者番号() != null) {
-            source.hihokenshaNo21 = 帳票情報.get被保険者番号().value();
+            source.hihokenshaNo = 帳票情報.get被保険者番号().value();
         }
         source.serviceYM = 年月編集(帳票情報.get提供年月());
-        source.tsuban2 = new RString(帳票情報.get通番());
-
-        source.kouzaMeigi = 帳票情報.get口座名義人();
 
         if (帳票情報.is自動償還対象フラグ()) {
             source.jidoshokanfg = 対象;
@@ -214,10 +193,87 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
         }
     }
 
+    private void set種別と番号と口座名義(KogakuKetteiTsuchiShoSealer2Source source) {
+
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())) {
+            source.kouzaMeigi = 帳票情報.get口座名義人();
+
+            if (!帳票情報.isゆうちょ銀行フラグ()) {
+                source.kouzaShu = 帳票情報.get口座種別();
+                source.kouzaNo = 帳票情報.get口座番号();
+            } else {
+                source.kouzaShu = 帳票情報.get通帳記号();
+                source.kouzaNo = 帳票情報.get通帳番号();
+            }
+        }
+
+    }
+
+    private void set金融機関(KogakuKetteiTsuchiShoSealer2Source source) {
+        if (支給.equals(帳票情報.get支給不支給区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
+            source.bankName = 帳票情報.get金融機関上段();
+            source.branchBankName = 帳票情報.get金融機関下段();
+        }
+    }
+
+    private void setTitle(KogakuKetteiTsuchiShoSealer2Source source) {
+        if (支給.equals(帳票情報.get支給不支給決定区分())) {
+            if (窓口払い値.equals(帳票情報.get支払方法区分())) {
+                source.shumokuTitle = 口座種別;
+                source.bangoTitle = 口座番号;
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())) {
+                source.shumokuTitle = 通帳記号;
+                source.bangoTitle = 通帳番号;
+            } else {
+                source.shumokuTitle = 口座種別;
+                source.bangoTitle = 口座番号;
+            }
+        }
+    }
+
+    private void set持ちものと支払場所と期間(KogakuKetteiTsuchiShoSealer2Source source) {
+        if (支給.equals(帳票情報.get支給不支給区分()) && 支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
+            source.mochimono = 帳票情報.get持ちもの();
+            source.shiharaiBasho = 帳票情報.get支払場所();
+            RString 開始週間 = 週間編集(帳票情報.get支払期間開始年月日());
+            RString 終了週間 = 週間編集(帳票情報.get支払期間終了年月日());
+            source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日()).concat(開始週間).concat(接続文字);
+            source.karaFugo = 接続文字;
+            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日()).concat(終了週間);
+            source.shiharaiStartHMS = 帳票情報.get支払窓口開始時間().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            source.shiharaiEndHMS = 帳票情報.get支払窓口終了時間().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        }
+    }
+
+    private void set窓口払と口座払(KogakuKetteiTsuchiShoSealer2Source source) {
+
+        if (帳票情報.get支払方法区分() != null) {
+
+            if (支払方法区分コードONE.equals(ShiharaiHohoKubun.toValue(帳票情報.get支払方法区分()).getコード())) {
+                source.torikeshi1 = RString.EMPTY;
+            } else {
+                source.torikeshi1 = 半角アスタリスク2;
+            }
+            if (支払方法区分コードTWO.equals(ShiharaiHohoKubun.toValue(帳票情報.get支払方法区分()).getコード())) {
+                source.torikeshi2 = RString.EMPTY;
+            } else {
+                source.torikeshi2 = 半角アスタリスク2;
+            }
+        }
+
+    }
+
     private RString 年月日編集(FlexibleDate 年月日) {
         if (年月日 != null) {
             return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString 週間編集(FlexibleDate 年月日) {
+        if (年月日 != null) {
+            return new RString(年月日.getDayOfWeek().getInFullParentheses());
         }
         return RString.EMPTY;
     }
@@ -235,10 +291,6 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
-    }
-
-    private RString get変換値金額(Decimal 金額) {
-        return 金額 != null ? new RString(金額.toString()) : RString.EMPTY;
     }
 
     private RString set被保険者番号(List<RString> 被保険者番号List, int index) {

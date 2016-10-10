@@ -55,16 +55,17 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
      * @param 帳票分類ID ReportId
      * @param 認証者 Ninshosha
      * @param 発行日 RDate
+     * @param 通番 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(KogakuKetteiTsuchiShoEntity 帳票情報,
             RString 文書番号,
             List<RString> 通知書定型文list,
             List<RString> インフォlist,
-            ReportId 帳票分類ID, Ninshosha 認証者, RDate 発行日) {
+            ReportId 帳票分類ID, Ninshosha 認証者, RDate 発行日, int 通番) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 文書番号, 通知書定型文list, インフォlist, 帳票分類ID, 認証者, 発行日, reportManager);
+            print(帳票情報, 文書番号, 通知書定型文list, インフォlist, 帳票分類ID, 認証者, 発行日, 通番, reportManager);
             collection = reportManager.publish();
         }
 
@@ -81,6 +82,7 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
      * @param 帳票分類ID ReportId
      * @param 認証者 Ninshosha
      * @param 発行日 RDate
+     * @param 通番 int
      * @param reportManager ReportManager
      */
     public void print(
@@ -91,6 +93,7 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
             ReportId 帳票分類ID,
             Ninshosha 認証者,
             RDate 発行日,
+            int 通番,
             ReportManager reportManager) {
 
         RString title = RString.EMPTY;
@@ -118,6 +121,7 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
                     地方公共団体,
                     帳票イメージフォルダパス,
                     発行日).buildSource();
+
             ReportSourceWriter<KogakuKetteiTsuchiShoSealerSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
 
@@ -127,7 +131,8 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
                     通知書定型文list,
                     インフォlist,
                     認証者ソースデータ,
-                    titleList).writeBy(reportSourceWriter);
+                    titleList,
+                    通番).writeBy(reportSourceWriter);
         }
     }
 
