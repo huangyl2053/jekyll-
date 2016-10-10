@@ -617,7 +617,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinsei().getDgShinseiList().setDisabled(false);
         div.getShinseiDetail().getTxtShinseiYMD().setDisabled(true);
         div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(true);
-        div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
+        //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
         div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
         div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
         div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
@@ -668,7 +668,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinsei().getDgShinseiList().setDisabled(true);
         div.getShinseiDetail().getTxtShinseiYMD().setDisabled(false);
         div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(false);
-        div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
+        //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
         div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
         div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
         div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
@@ -734,7 +734,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         if (menuID.equals(申請メニュー)) {
             div.getShinseiDetail().getTxtShinseiYMD().setDisabled(false);
             div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(false);
-            div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
+            //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
             div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
             div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
             div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
@@ -749,7 +749,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         } else if (menuID.equals(承認メニュー)) {
             div.getShinseiDetail().getTxtShinseiYMD().setDisabled(true);
             div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(true);
-            div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
+            //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
             div.getShinseiDetail().getRadKettaiKubun().setDisabled(false);
             div.getShinseiDetail().getTxtKettaiYMD().setDisabled(false);
             div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(false);
