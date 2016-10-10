@@ -276,7 +276,9 @@ public class TokuchoTaishoshaIchiranHandler {
      */
     public List<TokuchoDouteiListJoho> 特別徴収同定一覧initialize1(RString 特別徴収開始月, List<RString> 捕捉月リスト) {
         RDate nowDate = RDate.getNowDate();
-        div.getTokuchoTaishoshaIchiranSelectJokenPanel().getTxtKaishiYM().setValue(特別徴収開始月);
+        if (!RString.isNullOrEmpty(特別徴収開始月)) {
+            div.getTokuchoTaishoshaIchiranSelectJokenPanel().getTxtKaishiYM().setValue(特別徴収開始月);
+        }
         RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課);
         RString 開始月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月.startsWith(RString.FULL_SPACE)
@@ -298,7 +300,9 @@ public class TokuchoTaishoshaIchiranHandler {
             dgTokubetChoshuTaishoshaIchiran_Row newRow = new dgTokubetChoshuTaishoshaIchiran_Row();
             newRow.setHihokenshaNo(result.get(i).get被保険者番号());
             newRow.setShikibetsuCode(result.get(i).get識別コード());
-            newRow.setShimei(result.get(i).get漢字氏名());
+            if (result.get(i).get漢字氏名() != null) {
+                newRow.setShimei(result.get(i).get漢字氏名());
+            }
             if (!RString.isNullOrEmpty(result.get(i).get捕捉月())) {
                 RString 捕捉月 = result.get(i).get捕捉月().replace(KEY0, RString.EMPTY).concat(月);
                 newRow.setHosokuM(捕捉月);
@@ -435,27 +439,7 @@ public class TokuchoTaishoshaIchiranHandler {
                 newRow.setTxtFuitchiRiyu(DoteiFuitchiRiyu.toValue(result.get不一致理由コード()).get不一致理由名());
             }
             models.add(getModel(result));
-            newRow.getTxtNenkinKaifukuInfoKisoNenkinNo().setValue(result.get年金情報_基礎年金番号());
-            newRow.getTxtNenkinKaifukuInfoNenkinCode().setValue(result.get年金情報_年金コード());
-            newRow.getTxtNenkinKaifukuInfoShimei().setValue(result.get年金情報_氏名());
-            if (result.get年金情報_生年月日() != null) {
-                newRow.getTxtNenkinKaifukuInfoUmareYMD().setValue(new RDate(result.get年金情報_生年月日().toString()));
-            }
-            if (result.get年金情報_性別() != null) {
-                newRow.getTxtNenkinKaifukuInfoSeibetsu().setValue(SeibetsuCodeNenkinTokuchoType.toValue(
-                        result.get年金情報_性別()).get性別名称());
-            }
-            newRow.setTxtHihokenshaNo(result.get被保険者台帳_被保険者番号());
-            newRow.setTxtShikibetsuCode(result.get住基情報_識別コード());
-            newRow.setTxtShimei(result.get住基情報_漢字氏名());
-            newRow.setTxtBirthDay(result.get住基情報_生年月日());
-            if (result.get住基情報_性別() != null) {
-                newRow.setTxtSeibetsu(SeibetsuCodeNenkinTokuchoType.toValue(
-                        result.get住基情報_性別()).get性別名称());
-            }
-            if (result.get住基情報_住民種別() != null) {
-                newRow.setTxtJuminshu(JuminShubetsu.toValue(result.get住基情報_住民種別()).toRString());
-            }
+            特別徴収同定候補者一覧initialize1(result, newRow);
             rowList.add(newRow);
         }
         div.getDgTokuchoDoteiKohoshaIchiran().setDataSource(rowList);
@@ -483,32 +467,55 @@ public class TokuchoTaishoshaIchiranHandler {
         return models;
     }
 
+    private void 特別徴収同定候補者一覧initialize1(TokuchoDouteiKouhoshaListJoho result, dgTokuchoDoteiKohoshaIchiran_Row newRow) throws IllegalArgumentException, NullPointerException {
+        if (result.get年金情報_基礎年金番号() != null) {
+            newRow.getTxtNenkinKaifukuInfoKisoNenkinNo().setValue(result.get年金情報_基礎年金番号());
+        }
+        if (result.get年金情報_年金コード() != null) {
+            newRow.getTxtNenkinKaifukuInfoNenkinCode().setValue(result.get年金情報_年金コード());
+        }
+        if (result.get年金情報_氏名() != null) {
+            newRow.getTxtNenkinKaifukuInfoShimei().setValue(result.get年金情報_氏名());
+        }
+        if (result.get年金情報_生年月日() != null) {
+            newRow.getTxtNenkinKaifukuInfoUmareYMD().setValue(new RDate(result.get年金情報_生年月日().toString()));
+        }
+        if (result.get年金情報_性別() != null) {
+            newRow.getTxtNenkinKaifukuInfoSeibetsu().setValue(SeibetsuCodeNenkinTokuchoType.toValue(
+                    result.get年金情報_性別()).get性別名称());
+        }
+        if (result.get被保険者台帳_被保険者番号() != null) {
+            newRow.setTxtHihokenshaNo(result.get被保険者台帳_被保険者番号());
+        }
+        if (result.get住基情報_識別コード() != null) {
+            newRow.setTxtShikibetsuCode(result.get住基情報_識別コード());
+        }
+        if (result.get住基情報_漢字氏名() != null) {
+            newRow.setTxtShimei(result.get住基情報_漢字氏名());
+        }
+        if (result.get住基情報_生年月日() != null) {
+            newRow.setTxtBirthDay(result.get住基情報_生年月日());
+        }
+        if (result.get住基情報_性別() != null) {
+            newRow.setTxtSeibetsu(SeibetsuCodeNenkinTokuchoType.toValue(
+                    result.get住基情報_性別()).get性別名称());
+        }
+        if (result.get住基情報_住民種別() != null) {
+            newRow.setTxtJuminshu(JuminShubetsu.toValue(result.get住基情報_住民種別()).toRString());
+        }
+    }
+
     private void set特別徴収同定候補者詳細情報(TokuchoDouteiKouhoshaShousaiJoho result) {
-        div.setHiddenFukaNendo(result.get登録済年金情報_賦課年度());
-        div.getTxtKisoNenkinNo().setValue(result.get未同定年金情報_基礎年金番号());
-        div.getTxtNenkinCode().setValue(result.get未同定年金情報_年金コード());
-        RString 特別徴収義務者コード = result.get未同定年金情報_特別徴収義務者コード();
-        if (特別徴収義務者コード != null) {
-            div.setHiddenTokubetsuChoshuGimushaCode(特別徴収義務者コード);
-            RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(特別徴収義務者コード));
-            div.getTxtTokuchoGimusha().setValue(codeMeisho);
+        set特別徴収同定候補者詳細情報1(result);
+        if (result.get住基情報_カナ氏名() != null) {
+            div.getTxtAtenaShimeiKana().setValue(result.get住基情報_カナ氏名());
         }
-        if (result.get未同定年金情報_生年月日() != null) {
-            div.getTxtUmareYMD().setValue(new RDate(result.get未同定年金情報_生年月日().toString()));
+        if (result.get住基情報_生年月日() != null) {
+            div.getTxtAtenaUmareYMD().setValue(result.get住基情報_生年月日());
         }
-        if (result.get未同定年金情報_性別() != null) {
-            div.getTxtSebetsu().setValue(SeibetsuCodeNenkinTokuchoType
-                    .toValue(result.get未同定年金情報_性別()).get性別名称());
+        if (result.get住基情報_漢字氏名() != null) {
+            div.getTxtAtenaShimeiKanji().setValue(result.get住基情報_漢字氏名());
         }
-        div.getTxtShimeiKana().setValue(result.get未同定年金情報_氏名カナ());
-        div.getTxtShimeiKanji().setValue(result.get未同定年金情報_氏名漢字());
-        div.getTxtJushoKana().setValue(result.get未同定年金情報_住所カナ());
-        div.getTxtJushoKanji().setValue(result.get未同定年金情報_住所漢字());
-        div.getTxtShikibetsuCode().setValue(result.get住基情報_識別コード());
-        div.getTxtAtenaShimeiKana().setValue(result.get住基情報_カナ氏名());
-        div.getTxtAtenaUmareYMD().setValue(result.get住基情報_生年月日());
-        div.getTxtAtenaShimeiKanji().setValue(result.get住基情報_漢字氏名());
         if (result.get住基情報_性別() != null) {
             div.getTxtAtenaSebetsu().setValue(SeibetsuCodeNenkinTokuchoType
                     .toValue(result.get住基情報_性別()).get性別名称());
@@ -516,11 +523,21 @@ public class TokuchoTaishoshaIchiranHandler {
         if (result.get住基情報_住民種別() != null) {
             div.getTxtJuminshu().setValue(JuminShubetsu.toValue(result.get住基情報_住民種別()).toRString());
         }
-        div.getTxtJutoYMD().setValue(result.get住基情報_住登日());
-        div.getTxtShojoYMD().setValue(result.get住基情報_消除日());
-        div.getTxtAtenaJushoKanji().setValue(result.get住基情報_漢字住所());
-        div.getTxtHihokenshaNo().setValue(result.get被保険者台帳_被保険者番号());
-        div.getTxtShutokuYMD().setValue(DateConverter.flexibleDateToRDate(result.get被保険者台帳_資格取得年月日()));
+        if (result.get住基情報_住登日() != null) {
+            div.getTxtJutoYMD().setValue(result.get住基情報_住登日());
+        }
+        if (result.get住基情報_消除日() != null) {
+            div.getTxtShojoYMD().setValue(result.get住基情報_消除日());
+        }
+        if (result.get住基情報_漢字住所() != null) {
+            div.getTxtAtenaJushoKanji().setValue(result.get住基情報_漢字住所());
+        }
+        if (result.get被保険者台帳_被保険者番号() != null) {
+            div.getTxtHihokenshaNo().setValue(result.get被保険者台帳_被保険者番号());
+        }
+        if (result.get被保険者台帳_資格取得年月日() != null) {
+            div.getTxtShutokuYMD().setValue(DateConverter.flexibleDateToRDate(result.get被保険者台帳_資格取得年月日()));
+        }
         if (result.get被保険者台帳_資格取得事由() != null) {
             div.getTxtShutokuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
                     DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(),
@@ -547,6 +564,49 @@ public class TokuchoTaishoshaIchiranHandler {
         }
     }
 
+    private void set特別徴収同定候補者詳細情報1(TokuchoDouteiKouhoshaShousaiJoho result) throws IllegalArgumentException, NullPointerException {
+        if (result.get登録済年金情報_賦課年度() != null) {
+            div.setHiddenFukaNendo(result.get登録済年金情報_賦課年度());
+        }
+        if (result.get未同定年金情報_基礎年金番号() != null) {
+            div.getTxtKisoNenkinNo().setValue(result.get未同定年金情報_基礎年金番号());
+        }
+        if (result.get未同定年金情報_年金コード() != null) {
+            div.getTxtNenkinCode().setValue(result.get未同定年金情報_年金コード());
+        }
+        RString 特別徴収義務者コード = result.get未同定年金情報_特別徴収義務者コード();
+        if (特別徴収義務者コード != null) {
+            div.setHiddenTokubetsuChoshuGimushaCode(特別徴収義務者コード);
+            RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(特別徴収義務者コード));
+            if (codeMeisho != null) {
+                div.getTxtTokuchoGimusha().setValue(codeMeisho);
+            }
+        }
+        if (result.get未同定年金情報_生年月日() != null) {
+            div.getTxtUmareYMD().setValue(new RDate(result.get未同定年金情報_生年月日().toString()));
+        }
+        if (result.get未同定年金情報_性別() != null) {
+            div.getTxtSebetsu().setValue(SeibetsuCodeNenkinTokuchoType
+                    .toValue(result.get未同定年金情報_性別()).get性別名称());
+        }
+        if (result.get未同定年金情報_氏名カナ() != null) {
+            div.getTxtShimeiKana().setValue(result.get未同定年金情報_氏名カナ());
+        }
+        if (result.get未同定年金情報_氏名漢字() != null) {
+            div.getTxtShimeiKanji().setValue(result.get未同定年金情報_氏名漢字());
+        }
+        if (result.get未同定年金情報_住所カナ() != null) {
+            div.getTxtJushoKana().setValue(result.get未同定年金情報_住所カナ());
+        }
+        if (result.get未同定年金情報_住所漢字() != null) {
+            div.getTxtJushoKanji().setValue(result.get未同定年金情報_住所漢字());
+        }
+        if (result.get住基情報_識別コード() != null) {
+            div.getTxtShikibetsuCode().setValue(result.get住基情報_識別コード());
+        }
+    }
+
     /**
      * 対象者検索戻る値の処理のメソドです。
      *
@@ -565,10 +625,18 @@ public class TokuchoTaishoshaIchiranHandler {
             div.getTxtSoshitsuJiyu().clearValue();
         } else {
             div.getTxtHihokenshaNo().setValue(hihokenshaDaicho.get被保険者番号().value());
-            div.getTxtShutokuYMD().setValue(DateConverter.flexibleDateToRDate(hihokenshaDaicho.get資格取得年月日()));
-            div.getTxtShutokuJiyu().setValue(hihokenshaDaicho.get資格取得事由コード());
-            div.getTxtSoshitsuYMD().setValue(DateConverter.flexibleDateToRDate(hihokenshaDaicho.get資格喪失年月日()));
-            div.getTxtSoshitsuJiyu().setValue(hihokenshaDaicho.get資格喪失事由コード());
+            if (hihokenshaDaicho.get資格取得年月日() != null) {
+                div.getTxtShutokuYMD().setValue(DateConverter.flexibleDateToRDate(hihokenshaDaicho.get資格取得年月日()));
+            }
+            if (hihokenshaDaicho.get資格取得事由コード() != null) {
+                div.getTxtShutokuJiyu().setValue(hihokenshaDaicho.get資格取得事由コード());
+            }
+            if (hihokenshaDaicho.get資格喪失年月日() != null) {
+                div.getTxtSoshitsuYMD().setValue(DateConverter.flexibleDateToRDate(hihokenshaDaicho.get資格喪失年月日()));
+            }
+            if (hihokenshaDaicho.get資格喪失事由コード() != null) {
+                div.getTxtSoshitsuJiyu().setValue(hihokenshaDaicho.get資格喪失事由コード());
+            }
         }
         RString 処理年度
                 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
