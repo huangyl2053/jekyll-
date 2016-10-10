@@ -1457,8 +1457,8 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         <id column="dbT2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id column="dbT2001ChoshuHoho_rirekiNo" />
-        <id property="期" column="ki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="期" column="ki" />
+        <id property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="対象者情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="被保険者台帳管理Newest" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="賦課Newest" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
@@ -1531,8 +1531,8 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         <id column="dbT2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id column="dbT2001ChoshuHoho_rirekiNo" />
-        <id property="期" column="ki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="期" column="ki" />
+        <id property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="徴収方法情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="資格情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="賦課情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
@@ -1544,8 +1544,8 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         <id column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <id column="dbT2002Fuka_rirekiNo" />
-        <id property="期" column="ki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="期" column="ki" />
+        <id property="調定額" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="賦課情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
     </resultMap>
     
