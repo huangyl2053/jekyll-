@@ -36,7 +36,7 @@ public class ShinseishoHakkoHandler {
     private static final int INDEX_731 = 731;
     private static final int INDEX_801 = 801;
     private static final int INDEX_1231 = 1231;
-    private static final RString 日 = new RString("01");
+    private static final RString 日 = new RString("0801");
     private static final RString 本年７月中 = new RString("本年７月中");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
@@ -66,7 +66,7 @@ public class ShinseishoHakkoHandler {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate());
         }
         FlexibleDate 世帯員把握基準日基準日 = new FlexibleDate(YMDHMS.now().getYear()
-                .toDateString().concat(new RString(YMDHMS.now().getMonthValue()).padZeroToLeft(2).concat(日)));
+                .toDateString().concat(日));
         div.getTxtSetaiinHaakuKijunYMD().setValue(世帯員把握基準日基準日);
         div.getTxtTeishutsuKigen().setValue(本年７月中);
         FlexibleDate 作成日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
@@ -135,6 +135,11 @@ public class ShinseishoHakkoHandler {
         }
     }
 
+    /**
+     * 異動処理が実施済みか判定
+     *
+     * @return boolean
+     */
     public boolean is異動処理が実施済みか判定() {
         if (ZERO == div.getRadChushutsuJoken().getSelectedKey()) {
             TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtShoriNendo().getValue().getYear());
