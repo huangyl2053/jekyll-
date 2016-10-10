@@ -12,9 +12,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 
 /**
  * 画面設計_DBCMN62004_DBCMNN1005_支給決定情報補正（単）(事業分兼)
@@ -242,8 +245,8 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
                     && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
                     && NUM_THREE <= div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().length()
                     && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().
-                    substring(0, NUM_THREE).equals(div.getShinkiPanel().
-                            getTxtShinkiTaishoNendo().getValue().toDateString().substring(0, NUM_THREE)));
+                    substring(0, NUM_THREE).equals(trimYear(div.getShinkiPanel().
+                                    getTxtShinkiTaishoNendo().getValue().getYear())));
         }
 
         public static boolean is新規登録_連絡票整理番号不一致_先頭6桁目から11桁目(
@@ -340,8 +343,8 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
                     && NUM_THREE <= div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length()
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().
-                    substring(0, NUM_THREE).equals(div.getSearchPanel().getTxtKensakuTaishoNendo().
-                            getValue().toDateString().substring(0, NUM_THREE)));
+                    substring(0, NUM_THREE).equals(trimYear(div.getSearchPanel().getTxtKensakuTaishoNendo().
+                                    getValue().getYear())));
         }
 
         public static boolean is検索条件_連絡票整理番号不一致_先頭6桁目から11桁目(
@@ -358,7 +361,16 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
                     && NUM_ELEVEN <= div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length()
                     && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().
-                    substring(NUM_FIVE, NUM_ELEVEN).equals(div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue()));
+                    substring(NUM_FIVE, NUM_ELEVEN).equals(div.getSearchPanel().
+                            getTxtKensakuHihokenshaNo().getValue()));
+        }
+
+        private static RString trimYear(RYear year) {
+            if (year == null) {
+                return RString.EMPTY;
+            } else {
+                return year.wareki().eraType(EraType.NUMBER).firstYear(FirstYear.GAN_NEN).toDateString();
+            }
         }
     }
 
