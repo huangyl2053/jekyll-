@@ -36,15 +36,8 @@ public class InsDbT3116KijunShunyugakuTekiyoKanriProcess extends BatchProcessBas
     BatchPermanentTableWriter<DbT3116KijunShunyugakuTekiyoKanriEntity> dbT3166TableWriter;
 
     @Override
-    protected void initialize() {
-
-    }
-
-    @Override
     protected IBatchReader createReader() {
-
         return new BatchDbReader(READ_DATA_ID);
-
     }
 
     @Override
@@ -85,11 +78,6 @@ public class InsDbT3116KijunShunyugakuTekiyoKanriProcess extends BatchProcessBas
         dbT3116Entity.setKazeiShotokugaku(entity.getKazeiShotokuGaku());
         dbT3116Entity.setKazeiShotokugakuKojogo(entity.getKazeiShotokuGakuAfter());
         this.dbT3166TableWriter.insert(dbT3116Entity);
-    }
-
-    @Override
-    protected void afterExecute() {
-
     }
 
 }

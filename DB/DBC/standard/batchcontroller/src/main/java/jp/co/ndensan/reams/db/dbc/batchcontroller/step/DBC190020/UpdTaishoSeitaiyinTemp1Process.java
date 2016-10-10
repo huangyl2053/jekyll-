@@ -92,9 +92,4 @@ public class UpdTaishoSeitaiyinTemp1Process extends BatchProcessBase<UpdTaishoSe
         this.taiShoTableWriter.update(対象世帯員);
     }
 
-    @Override
-    protected void afterExecute() {
-
-    }
-
 }

@@ -162,9 +162,9 @@
            FROM
                "DbV1001HihokenshaDaicho"  AS T1
           WHERE 
-               T1."shikakuSoshitsuYMD" <![CDATA[<=]]>  #{世帯員把握基準日}
+               T1."shikakuShutokuYMD" <![CDATA[<=]]>  #{世帯員把握基準日}
           AND 
-              #{世帯員把握基準日}  <![CDATA[<]]> T1."jushochiTokureiFlag"      
+              #{世帯員把握基準日}  <![CDATA[<]]> T1."shikakuSoshitsuYMD"      
           ) AS HIHOKENSHA   
             
          RIGHT JOIN
@@ -394,6 +394,9 @@
         <id column="T1.shotaiCode" />
         <id column="T1.hihokenshaNo" />
         <id column="T1.shikibetsuCode" />
+        <id column="TaishoSetaiin1.shotaiCode" />
+        <id column="TaishoSetaiin1.hihokenshaNo" />
+        <id column="TaishoSetaiin1.shikibetsuCode" />
         <association property="対象世帯員1" resultMap="resultMap_TaishoSetaiinEntity"/>
         <association property="対象世帯員2" resultMap="resultMap_TaishoSetaiin2Entity"/>
     </resultMap>
@@ -502,8 +505,8 @@
      </select>
      
      <select resultOrdered="true" id="get該当件数" 
-             resultType="java.lang.Integer"
-             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter"
+              resultType="java.lang.Integer"
+              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter"
               fetchSize="500">
          SELECT 
            count(*)
@@ -567,10 +570,10 @@
      
      <select resultOrdered="true" id="select処理日付管理マスタ" 
               parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter"
-              resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+              resultType="java.lang.Integer"
               fetchSize="500">
          SELECT 
-          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+            COUNT(*)
          FROM
           rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
          WHERE 

@@ -36,9 +36,14 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
 
     @Override
     protected void initialize() {
-        super.initialize();
         this.para = new InsSetaiyinShotokuJyohoTemp1ProcessMybatisParameter();
         this.para.set世帯員把握基準日(this.parameter.get世帯員把握基準日());
+        if (RString.isNullOrEmpty(this.parameter.get被保険者番号().getColumnValue())) {
+            this.para.set被保険者番号(null);
+        } else {
+            this.para.set被保険者番号(this.parameter.get被保険者番号());
+        }
+
     }
 
     @Override
@@ -65,11 +70,6 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
         hakuEntity.setShotokuNendo(parameter.get世帯員把握基準日().getNendo());
         hakuEntity.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
         writer.insert(hakuEntity);
-
-    }
-
-    @Override
-    protected void afterExecute() {
 
     }
 

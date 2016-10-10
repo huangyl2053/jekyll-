@@ -71,6 +71,8 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -85,6 +87,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -145,6 +149,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private static final RString ファイル名_前 = new RString("KijunShunyugakuTekiyoShinseishoHakkoIchiran_");
     private static final RString 記号_ = new RString("_");
     private static final RString ファイル名_後 = new RString(".csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200088");
 
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private boolean is公印に掛ける;
@@ -152,13 +157,14 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private CreateTaishoSetaiyinEntity exEntity;
     private static int index;
     private static int index164;
-    private RString eucFilePath;
     private RString 出力ファイル名;
 
     private List<RString> 出力順リスト;
     private List<RString> 改頁項目リスト;
     private List<RString> 改頁項目名リスト;
     private IOutputOrder 並び順;
+    private FileSpoolManager manager;
+    private RString eucFilePath;
     private int 通番 = 1;
 
     @BatchWriter
@@ -263,15 +269,19 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         dBC200088ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200088.getReportId().value()).addBreak(breaker).create();
         dBC200088SourceWriter = new ReportSourceWriter<>(dBC200088ReportWriter);
 
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
-        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
-                .build();
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
+                UzUDE0831EucAccesslogFileType.Csv);
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
+                出力ファイル名);
+        eucCsvWriter = BatchWriters.csvWriter(TaishoSetaiyinCsvEntity.class).
+                filePath(eucFilePath).
+                setDelimiter(コンマ).
+                setEnclosure(ダブル引用符).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
+
     }
 
     @Override
@@ -344,6 +354,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         }
 
         eucCsvWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private void write帳票(int 文字列長, TaishoSetaiinEntity 対象世帯員,
@@ -670,7 +681,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity set申請一覧Entity(CreateTaishoSetaiyinEntity entity) {
         KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = new KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity();
-        if (0 == index) {
+        if (1 == index) {
             申請一覧Entity.set通番(new RString(通番));
             申請一覧Entity.set世帯番号(entity.get対象世帯員().getShotaiCode());
             通番++;
