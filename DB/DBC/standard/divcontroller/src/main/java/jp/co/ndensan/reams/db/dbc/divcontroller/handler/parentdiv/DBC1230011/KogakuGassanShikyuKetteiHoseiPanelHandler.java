@@ -56,7 +56,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
 
     private final KogakuGassanShikyuKetteiHoseiPanelDiv div;
     private static final RString 事業分支給決定情報補正 = new RString("DBCMNN1005");
-    private static final RString CODE_ミ = new RString("0003");
+    private static final RString CODE_ミ = new RString("003");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
@@ -204,11 +204,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 row.setTxtRenrakuhyoSeiriNo(entity.get事業高額合算決定entity().get支給申請書整理番号());
                 row.setTxtRirekiNo(new RString(entity.get事業高額合算決定entity().get履歴番号()));
                 if (entity.get事業高額合算決定entity().get自己負担総額() != null) {
-                    row.setTxtJikoFutangaku(new RString(entity.get事業高額合算決定entity().get自己負担総額().intValue()));
+                    row.getTxtJikoFutangaku().setValue(entity.get事業高額合算決定entity().get自己負担総額());
                 }
-                row.setTxtShikyuKubun(entity.get事業高額合算決定entity().get支払方法区分());
+                row.setTxtShikyuKubun(entity.get事業高額合算決定entity().get支給区分コード());
                 if (entity.get事業高額合算決定entity().get支給額() != null) {
-                    row.setTxtShikyugaku(new RString(entity.get事業高額合算決定entity().get支給額().intValue()));
+                    row.getTxtShikyugaku().setValue(entity.get事業高額合算決定entity().get支給額());
                 }
                 if (entity.get事業高額合算決定entity().get受取年月() != null
                         && !entity.get事業高額合算決定entity().get受取年月().isEmpty()) {
@@ -236,11 +236,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 row.setTxtRenrakuhyoSeiriNo(entity.get高額合算決定entity().get支給申請書整理番号());
                 row.setTxtRirekiNo(new RString(entity.get高額合算決定entity().get履歴番号()));
                 if (entity.get高額合算決定entity().get自己負担総額() != null) {
-                    row.setTxtJikoFutangaku(new RString(entity.get高額合算決定entity().get自己負担総額().intValue()));
+                    row.getTxtJikoFutangaku().setValue(entity.get高額合算決定entity().get自己負担総額());
                 }
-                row.setTxtShikyuKubun(entity.get高額合算決定entity().get支払方法区分());
+                row.setTxtShikyuKubun(entity.get高額合算決定entity().get支給区分コード());
                 if (entity.get高額合算決定entity().get支給額() != null) {
-                    row.setTxtShikyugaku(new RString(entity.get高額合算決定entity().get支給額().intValue()));
+                    row.getTxtShikyugaku().setValue(entity.get高額合算決定entity().get支給額());
                 }
                 if (entity.get高額合算決定entity().get受取年月() != null
                         && !entity.get高額合算決定entity().get受取年月().isEmpty()) {
@@ -358,7 +358,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKetteiYMD().
                     setValue(new RDate(row.getKetteiYMD().getValue().toString()));
         }
-        if (row.getTxtJikoFutangaku() != null && !row.getTxtJikoFutangaku().isEmpty()) {
+        if (row.getTxtJikoFutangaku().getValue() != null) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtJikoFutanSogaku().setValue(new Decimal(row.getTxtJikoFutangaku().toString()));
         }
@@ -378,7 +378,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setLabelLText(不支給の理由);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setValue(row.getFushikyuRiyu());
         }
-        if (row.getTxtShikyugaku() != null && !row.getTxtShikyugaku().isEmpty()) {
+        if (row.getTxtShikyugaku().getValue() != null) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtShikyugaku().setValue(new Decimal(row.getTxtShikyugaku().toString()));
         }
@@ -651,7 +651,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         parameter.set対象計算期間終了年月日(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtKeisanYMD().getToValue());
         parameter.set自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                getTxtJikoFutanSeiriNo().getValue());
+                getTxtJikoFutanSeiriNo().getText());
         parameter.set申請日(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtShinseiYMD().getValue());
         parameter.set決定日(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
@@ -974,7 +974,15 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
     }
 
-    private void set支払方法タブ(
+    /**
+     * 支払方法タブ
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 処理モデル RString
+     * @param 識別コード ShikibetsuCode
+     * @param row dgKogakuGassanShikyuFushikyuKettei_Row
+     */
+    public void set支払方法タブ(
             HihokenshaNo 被保険者番号,
             RString 処理モデル,
             ShikibetsuCode 識別コード,

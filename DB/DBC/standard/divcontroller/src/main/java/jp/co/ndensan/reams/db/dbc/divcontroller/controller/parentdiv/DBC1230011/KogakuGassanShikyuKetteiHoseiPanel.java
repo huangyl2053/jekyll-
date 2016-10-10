@@ -53,6 +53,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 削除照会モード = new RString("削除照会モード");
     private static final RString 口座修正モード = new RString("口座修正モード");
+    private static final RString フォーカスを = new RString("txtKensakuTaishoNendo");
     private static final RString 照会 = new RString("照会");
     private static final RString 処理不可 = new RString("処理不可");
     private static final int NUM_FOUR = 4;
@@ -91,10 +92,12 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         getHandler(div).set決定情報一覧グリッド(result);
         if (div.get事業分フラグ().equals(new RString(Boolean.FALSE.toString()))) {
             return ResponseData.of(ResponseData.of(div).setState(
-                    DBC1230011StateName.支給決定情報一覧).data).rootTitle(高額合算支給決定情報補正).respond();
+                    DBC1230011StateName.支給決定情報一覧).data).rootTitle(高額合算支給決定情報補正).
+                    focusId(フォーカスを).respond();
         } else {
             return ResponseData.of(ResponseData.of(div).setState(
-                    DBC1230011StateName.支給決定情報一覧).data).rootTitle(事業高額合算支給決定情報補正).respond();
+                    DBC1230011StateName.支給決定情報一覧).data).rootTitle(事業高額合算支給決定情報補正).
+                    focusId(フォーカスを).respond();
         }
     }
 
@@ -140,7 +143,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onChange_txtShinkiTaishoNendo(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getCheckHandler(div).check新規登録_対象年度();
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).validate新規登録対象年度();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -155,7 +158,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onChange_txtShinkiHihokenshaNo(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getCheckHandler(div).check新規登録_証記載保険者番号();
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).validate新規登録証記載保険者番号();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -170,7 +173,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onChange_txtShinkiShikyuSeiriNo(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getCheckHandler(div).check新規登録_連絡票整理番号();
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).validate新規登録連絡票整理番号();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -199,7 +202,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onChange_txtKensakuTaishoNendo(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getCheckHandler(div).check検索条件_対象年度();
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).validate検索条件対象年度();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -214,7 +217,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onChange_txtKensakuHihokenshaNo(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getCheckHandler(div).check検索条件_証記載保険者番号();
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).validate検索条件証記載保険者番号();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -229,7 +232,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onChange_txtKensakuShikyuSeiriNo(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getCheckHandler(div).check検索条件_連絡票整理番号();
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).validate検索条件連絡票整理番号();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
