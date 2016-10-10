@@ -81,7 +81,11 @@ public enum ReportIdDBZ {
     /**
      * 宛名シールの帳票ＩＤです。
      */
-    DBZ100001(new ReportId("DBZ100001_AtenaSeal"), new RString("宛名シール"));
+    DBZ100001(new ReportId("DBZ100001_AtenaSeal"), new RString("宛名シール")),
+    /**
+     * 汎用リストの帳票ＩＤです。
+     */
+    DBZ700001(new ReportId("DBZ700001_HanyoList"), new RString("汎用リスト"));
 
     private final ReportId reportId;
     private final RString reportName;
