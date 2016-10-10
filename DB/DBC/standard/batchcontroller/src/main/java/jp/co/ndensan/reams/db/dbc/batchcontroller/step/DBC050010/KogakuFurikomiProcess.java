@@ -70,12 +70,12 @@ public class KogakuFurikomiProcess extends BatchProcessBase<GdaekomiDetaiResultE
         data.setRirekiNo(fdre.get高額介護サービス費支給判定結果Entity().getRirekiNo());
         data.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(fdre.get高額介護サービス費支給判定結果Entity().getShoKisaiHokenshaNo().getColumnValue()));
         if (ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
-            data.setKetteiTsuchiNo(fdre.get高額介護サービス費支給審査決定list().get(0).getTsuchishoNo());
+            data.setKetteiTsuchiNo(fdre.get高額介護サービス費支給審査決定Entity().getTsuchishoNo());
         } else if (!ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
             data.setKetteiTsuchiNo(RString.EMPTY);
         }
         if (ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
-            data.setFurikomiKingaku(fdre.get高額介護サービス費支給審査決定list().get(0).getKogakuShikyuGaku());
+            data.setFurikomiKingaku(fdre.get高額介護サービス費支給審査決定Entity().getKogakuShikyuGaku());
         } else if (!ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
             data.setFurikomiKingaku(fdre.get高額介護サービス費支給判定結果Entity().getShikyuKingaku());
         }
