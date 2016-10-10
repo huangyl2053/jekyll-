@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoJyohoTorikomiKakuNinCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoResultEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -26,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBC-3020-030 dengwei
  */
-public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiKokuhoJyohoEntity> {
+public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiKokuhoJyohoResultEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get取込国保情報Temp");
@@ -59,8 +60,8 @@ public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiK
     }
 
     @Override
-    protected void process(TorikomiKokuhoJyohoEntity entity) {
-        csvWriter.writeLine(getCsvEntity(entity));
+    protected void process(TorikomiKokuhoJyohoResultEntity entity) {
+        csvWriter.writeLine(getCsvEntity(entity.get取込国保情報Entity()));
     }
 
     @Override

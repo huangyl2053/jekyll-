@@ -61,7 +61,7 @@ public class TaishoShaKanriJohoMybatisParameter implements IMyBatisParameter {
             RDate システム日付) {
         this.基準日 = 基準日;
         if (基準日 != null && 基準日.isWareki()) {
-            this.基準日の2年前 = 基準日.plusYear(2);
+            this.基準日の2年前 = 基準日.minusYear(2);
         } else {
             this.基準日の2年前 = FlexibleDate.EMPTY;
         }

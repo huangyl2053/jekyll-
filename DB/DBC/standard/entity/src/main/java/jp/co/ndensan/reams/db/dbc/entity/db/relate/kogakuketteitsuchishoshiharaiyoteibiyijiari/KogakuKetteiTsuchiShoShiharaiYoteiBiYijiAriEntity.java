@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshihara
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -44,8 +43,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity {
     private RDate 支払期間;
     private RDate 支払期間開始年月日;
     private RDate 支払期間終了年月日;
-    private RDateTime 支払窓口開始時間;
-    private RDateTime 支払窓口終了時間;
+    private RString 支払窓口開始時間;
+    private RString 支払窓口終了時間;
     private RString 金融機関上段;
     private RString 金融機関下段;
     private RString 支払方法;

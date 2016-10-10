@@ -41,21 +41,20 @@
         A."kijunYMD",
         A."shotokuNendo",
         A."jushochiTokureiFlag",
-        宛名."setaiCode",
-	'1'
-        from "TmpSetaiHaaku" AS A
-        inner join rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+        宛名."setaiCode"
+        FROM "TmpSetaiHaaku" AS A
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        as 宛名
-        on 宛名."shikibetsuCode" = A."shikibetsuCode"
-        where A."jushochiTokureiFlag"= '1'
+        AS 宛名
+        ON 宛名."shikibetsuCode" = A."shikibetsuCode"
+        WHERE A."jushochiTokureiFlag"= '1'
     </select>
     
      <resultMap id="resultMap_SetaiHaakuResultEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHaakuResultEntity" autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="世帯員識別コード" column="setaiInshikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="世帯把握基準日" column="setaiHaakuKijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="世帯員識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="世帯把握基準日" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="所得年度" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="住所地特例該当" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
@@ -64,25 +63,20 @@
     
      <select resultOrdered="true" id="select世帯員把握入力" resultMap="resultMap_SetaiHaakuResultEntity" fetchSize="500"
                       parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
-       SELECT
+        SELECT
         A."hihokenshaNo",
-        B."setaiInshikibetsuCode",
-        B."setaiHaakuKijunYMD",
+        A."shikibetsuCode",
+        A."kijunYMD",
         A."shotokuNendo",
         A."jushochiTokureiFlag",
-        宛名."setaiCode",
+        B."setaiCode",
         B."honninKubun"
-        from "TmpSetaiHaaku" AS A
-        left join rgdb."DbT7014KaigoSetai" AS B
-        ON A."hihokenshaNo"=B."hihokenshaNo"
+        FROM "TmpSetaiHaaku" AS A
+        INNER JOIN rgdb."DbT7014KaigoSetai" AS B
+        ON A."hihokenshaNo" = B."hihokenshaNo"
         AND A."kijunYMD" = B."setaiHaakuKijunYMD"
         AND B."kanriShikibetsuKubun" = #{管理識別区分}
-        inner join rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        as 宛名
-        on 宛名."shikibetsuCode" = A."shikibetsuCode"
-        where A."jushochiTokureiFlag" <![CDATA[!=]]> '1'
+        AND A."jushochiTokureiFlag" <![CDATA[!=]]> '1'
     </select>
     
      <!-- 世帯員把握入力のデータの取得-->

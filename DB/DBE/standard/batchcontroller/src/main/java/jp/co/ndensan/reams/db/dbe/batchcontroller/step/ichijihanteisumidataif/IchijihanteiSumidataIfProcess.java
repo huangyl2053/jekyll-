@@ -167,13 +167,21 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         if (RString.isNullOrEmpty(koroshoIfShikibetsuCode)) {
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
-            ファイル名 = ファイル09Aエラ;
+            if (ファイル名.equals(entity.get厚労省IF識別コード())) {
+                ファイル名 = ファイル09Bエラ;
+            } else {
+                ファイル名 = ファイル09Aエラ;
+            }
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         }
         if (!koroshoIfShikibetsuCode.equals(entity.get厚労省IF識別コード())) {
             eucCsvWriterJunitoJugo.close();
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
-            ファイル名 = ファイル09Bエラ;
+            if (ファイル名.equals(entity.get厚労省IF識別コード())) {
+                ファイル名 = ファイル09Bエラ;
+            } else {
+                ファイル名 = ファイル09Aエラ;
+            }
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         }
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());

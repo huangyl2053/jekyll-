@@ -35,16 +35,16 @@
                 AND 受給者台帳."logicalDeletedFlag" = false
                 AND 受給者台帳."yukoMukoKubun" = #{有効無効区分_有効})
             </if>
-            <if test="is旧措置者区分_旧措置者">
+        </if>
+        <if test="is旧措置者区分_旧措置者">
                 AND (受給者台帳."logicalDeletedFlag" = false
                 AND 受給者台帳."kyuSochishaFlag" = true )
-            </if>
-            <if test="is旧措置者区分_旧措置者以外">
+        </if>
+        <if test="is旧措置者区分_旧措置者以外">
                 AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4001JukyushaDaicho" J
                 WHERE J."hihokenshaNo" = A."hihokenshaNo"
                 AND J."logicalDeletedFlag" = false 
                 AND J."kyuSochishaFlag" = true)
-            </if>
         </if>
         <if test="is対象リスト_認定者リスト">
             <if test="is対象期間指定_対象年度">

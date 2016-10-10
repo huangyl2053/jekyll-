@@ -56,7 +56,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     private static final RString フォーカスを = new RString("txtKensakuTaishoNendo");
     private static final RString 照会 = new RString("照会");
     private static final RString 処理不可 = new RString("処理不可");
-    private static final int NUM_FOUR = 4;
+    private static final int NUM_THREE = 3;
     private static final int NUM_FIVE = 5;
     private static final int NUM_ELEVEN = 11;
 
@@ -180,9 +180,9 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         if (div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() == null
                 && div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
                 && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()) {
-            //TODO
-            div.getShinkiPanel().getTxtShinkiTaishoNendo().setValue(new RDate(div.getShinkiPanel().
-                    getTxtShinkiShikyuSeiriNo().getValue().substring(0, NUM_FOUR).toString()));
+            RDate date = new RDate(div.getShinkiPanel().
+                    getTxtShinkiShikyuSeiriNo().getValue().substring(0, NUM_THREE).toString());
+            div.getShinkiPanel().getTxtShinkiTaishoNendo().setValue(date);
         }
         if ((div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() == null
                 || div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty())

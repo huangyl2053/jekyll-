@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -25,6 +26,7 @@ public class InsertKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShik
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get国保資格情報インポート用Entitｙリスト");
+    @BatchWriter
     private IBatchTableWriter<DbT7123KokuhoShikakuInfoEntity> 国保資格情報Writer;
 
     @Override

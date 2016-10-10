@@ -15,10 +15,12 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 資格取得者不整合リストのデータ処理クラスです。
@@ -117,9 +119,8 @@ public class ShikakuShutokushaFuseigoListHenSyu {
     }
 
     private RString get生年月日(FlexibleDate 生年月日) {
-        //TODO 仕様変更1.01　対応待ち　ＱＡ1800回答待ち
         if (生年月日 != null && !生年月日.isEmpty()) {
-            return 生年月日.wareki().toDateString();
+            return 生年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
         return RString.EMPTY;
     }

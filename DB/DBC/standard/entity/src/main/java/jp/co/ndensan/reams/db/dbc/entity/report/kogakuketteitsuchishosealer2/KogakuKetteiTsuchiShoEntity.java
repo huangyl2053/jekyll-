@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Setter
 public class KogakuKetteiTsuchiShoEntity {
 
-    private RString 文書番号;
     private ShikibetsuCode 識別コード;
     private boolean テスト出力フラグ;
     private boolean 自動償還対象フラグ;
@@ -40,13 +39,11 @@ public class KogakuKetteiTsuchiShoEntity {
     private RString 給付の種類;
     private RString 支給結果;
     private Decimal 決定額;
-    private RString 審査方法区分;
     private Decimal 支給金額;
     private RString 不支給理由;
     private RString 窓口払;
     private RString 口座払;
     private RString 金融機関;
-    private RString 支給不支給区分;
     private RString 持ちもの;
     private RString 支払場所;
     private FlexibleDate 支払期間;
@@ -63,12 +60,9 @@ public class KogakuKetteiTsuchiShoEntity {
     private FlexibleDate 支払予定日;
     private RString 決定通知書番号;
     private RString 支払方法区分;
-    private RString 支払方法;
     private Decimal 支給金額1;
-    private Decimal 支給額;
     private RString 金融機関上段;
     private RString 金融機関下段;
     private ShoKisaiHokenshaNo 証記載保険者番号;
     private RString 支給不支給決定区分;
-    private int 連番;
 }

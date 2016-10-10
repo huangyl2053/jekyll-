@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -55,7 +55,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private static final RString 不支給 = new RString("2");
     private static final RString 窓口払い区分 = new RString("1");
     private static final RString 口座払い区分 = new RString("2");
-    private static final RString 窓口払い = new RString("1");
     private static final RString 半角アスタリスク = new RString("************");
     private static final RString 半角アスタリスク2 = new RString("**************");
     private static final RString 口座種別 = new RString("口座種別");
@@ -410,8 +409,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
-    private RString 時分秒編集(RDateTime 日付) {
-        return 日付.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+    private RString 時分秒編集(RString 時間) {
+        RTime 時間時分秒 = new RTime(時間);
+        return 時間時分秒.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
     }
 
     private RString 年月編集(FlexibleYearMonth 日付) {

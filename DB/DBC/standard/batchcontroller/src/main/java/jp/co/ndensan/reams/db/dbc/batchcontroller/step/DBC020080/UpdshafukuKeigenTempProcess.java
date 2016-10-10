@@ -29,15 +29,14 @@ public class UpdshafukuKeigenTempProcess extends BatchKeyBreakBase<RiyoshaFutanM
     private static final RString TABLE_NAME2 = new RString("JissekiFutangakuDataTemp2");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
-    private static final RString PATH1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
-    private static final RString PATH2 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTempJigyobun");
+//    private static final RString PATH1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+//            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
+//    private static final RString PATH2 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+//            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTempJigyobun");
     private DBC020080ProcessParameter parameter;
     private DBC020080DataUtil util;
     private JissekiFutangakuDataTempEntity updEntity;
     private boolean isあり;
-
     @BatchWriter
     private IBatchTableWriter 実績負担額Writer;
 
@@ -92,8 +91,9 @@ public class UpdshafukuKeigenTempProcess extends BatchKeyBreakBase<RiyoshaFutanM
 
     private void loopeHandle(RiyoshaFutanMatchingEntity entity) {
         RiyoshaFutangakuEntity 利用者負担 = entity.get利用者負担();
-        if (利用者負担 != null) {
-            util.add自己負担額ワークエリア(updEntity, 利用者負担);
+        if (利用者負担 == null) {
+            return;
         }
+        util.add自己負担額ワークエリア(updEntity, 利用者負担);
     }
 }

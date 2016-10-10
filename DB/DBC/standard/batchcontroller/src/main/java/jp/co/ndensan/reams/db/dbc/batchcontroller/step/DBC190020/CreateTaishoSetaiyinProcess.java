@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseish
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.CreateTaishoSetaiyinProcessMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -70,6 +71,8 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -84,6 +87,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -133,7 +138,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString RSTRING_1 = new RString("1");
-    private static final RString RSTRING_0 = new RString("0");
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.get宛先宛名");
@@ -143,8 +147,9 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private static final RString チェック項目名 = new RString("住所");
     private static final RString 定数_住所 = new RString("住所");
     private static final RString ファイル名_前 = new RString("KijunShunyugakuTekiyoShinseishoHakkoIchiran_");
-    private static final RString 記号_ = new RString("KijunShunyugakuTekiyoShinseishoHakkoIchiran_");
+    private static final RString 記号_ = new RString("_");
     private static final RString ファイル名_後 = new RString(".csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200088");
 
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private boolean is公印に掛ける;
@@ -152,13 +157,14 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private CreateTaishoSetaiyinEntity exEntity;
     private static int index;
     private static int index164;
-    private RString eucFilePath;
     private RString 出力ファイル名;
 
     private List<RString> 出力順リスト;
     private List<RString> 改頁項目リスト;
     private List<RString> 改頁項目名リスト;
     private IOutputOrder 並び順;
+    private FileSpoolManager manager;
+    private RString eucFilePath;
     private int 通番 = 1;
 
     @BatchWriter
@@ -263,15 +269,19 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         dBC200088ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200088.getReportId().value()).addBreak(breaker).create();
         dBC200088SourceWriter = new ReportSourceWriter<>(dBC200088ReportWriter);
 
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
-        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
-                .build();
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
+                UzUDE0831EucAccesslogFileType.Csv);
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
+                出力ファイル名);
+        eucCsvWriter = BatchWriters.csvWriter(TaishoSetaiyinCsvEntity.class).
+                filePath(eucFilePath).
+                setDelimiter(コンマ).
+                setEnclosure(ダブル引用符).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
+
     }
 
     @Override
@@ -297,7 +307,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
             this.write帳票(文字列長, 対象世帯員, kijunEntity, kijunEntity1);
 
-            if (this.parameter.get一覧表CSV出力フラグ() && RSTRING_0.equals(this.parameter.get抽出条件())) {
+            if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
                 TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(対象世帯員);
                 eucCsvWriter.writeLine(申請書発行一覧CSV);
             }
@@ -309,7 +319,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             }
             this.exEntity = entity;
         }
-        if (this.parameter.get一覧表CSV出力フラグ() && RSTRING_0.equals(this.parameter.get抽出条件())) {
+        if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
             申請一覧Entity = this.set申請一覧Entity(entity);
             KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
                     申請一覧Entity, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目リスト, parameter.get処理年度());
@@ -336,7 +346,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
             this.write帳票(文字列長, 対象世帯員, kijunEntity, kijunEntity1);
 
-            if (this.parameter.get一覧表CSV出力フラグ() && RSTRING_1.equals(this.parameter.get抽出条件())) {
+            if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
                 TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(対象世帯員);
                 eucCsvWriter.writeLine(申請書発行一覧CSV);
             }
@@ -344,6 +354,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         }
 
         eucCsvWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private void write帳票(int 文字列長, TaishoSetaiinEntity 対象世帯員,
@@ -355,7 +366,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
                 kijunReport.writeBy(dBC100063SourceWriter1);
                 index++;
-            } else if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
+            }
+            if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter1);
                 index164++;
@@ -367,7 +379,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
                 kijunReport.writeBy(dBC100063SourceWriter0);
                 index++;
-            } else if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
+            }
+            if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter0);
                 index164++;
@@ -668,7 +681,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity set申請一覧Entity(CreateTaishoSetaiyinEntity entity) {
         KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = new KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity();
-        if (0 == index) {
+        if (1 == index) {
             申請一覧Entity.set通番(new RString(通番));
             申請一覧Entity.set世帯番号(entity.get対象世帯員().getShotaiCode());
             通番++;

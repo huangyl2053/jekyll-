@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012.DBD209012_KyufuG
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugengakukanrilist.TaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.KyufugakuGengakuKanriListDiv;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,6 +51,7 @@ public class KyufugakuGengakuKanriListHandler {
         div.getChkGengakuShuryoDate().setSelectedItemsByKey(keys2);
         List<RString> keys3 = new ArrayList<>();
         div.getChushutuJoken().getChkOutputsHokenryoKannosha().setSelectedItemsByKey(keys3);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200009.getReportId());
     }
 
     /**

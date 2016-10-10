@@ -48,7 +48,8 @@ public class KogakuShikyuFushikyuKetteiUpdateShikyugakuUpdateTempProcess extends
     @Override
     protected void process(ShikyugakuUpdateTempRelateEntity entity) {
         ShikyugakuUpdateTempEntity 更新用一時 = entity.get更新用一時();
-        更新用一時.setKettei_rirekiNo(entity.get高額合算支給不支給決定().getRirekiNo() + 1);
+        更新用一時.setKettei_rirekiNo(更新用一時.getKettei_rirekiNo() == 0
+                ? entity.get高額合算支給不支給決定().getRirekiNo() + 1 : 更新用一時.getKettei_rirekiNo());
         更新用一時.setKettei_shiharaiHohoKubun(entity.get高額合算支給不支給決定().getShiharaiHohoKubun());
         更新用一時.setKettei_shiharaiBasho(entity.get高額合算支給不支給決定().getShiharaiBasho());
         更新用一時.setKettei_shiharaikikanKaishiYMD(entity.get高額合算支給不支給決定().getShiharaiKaishiYMD());

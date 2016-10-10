@@ -4,21 +4,31 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000064;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * ShinseishoHakko のクラスファイル 
- * 
- * @author 自動生成
+ * ShinseishoHakko のクラスファイル
+ *
+ * @reamsid_L DBC-4630-010 lihang
  */
 public class ShinseishoHakkoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -42,14 +52,16 @@ public class ShinseishoHakkoDiv extends Panel {
     private CheckBoxList chkShinseisho;
     @JsonProperty("chkTsuchisho")
     private CheckBoxList chkTsuchisho;
+    @JsonProperty("txtTeishutsuKigen")
+    private TextBox txtTeishutsuKigen;
     @JsonProperty("chkIchiranhyoCsv")
     private CheckBoxList chkIchiranhyoCsv;
     @JsonProperty("lin2")
     private HorizontalLine lin2;
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
     @JsonProperty("ccdBunshoBangoInput")
     private BunshoBangoInputDiv ccdBunshoBangoInput;
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -202,6 +214,24 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     /*
+     * gettxtTeishutsuKigen
+     * @return txtTeishutsuKigen
+     */
+    @JsonProperty("txtTeishutsuKigen")
+    public TextBox getTxtTeishutsuKigen() {
+        return txtTeishutsuKigen;
+    }
+
+    /*
+     * settxtTeishutsuKigen
+     * @param txtTeishutsuKigen txtTeishutsuKigen
+     */
+    @JsonProperty("txtTeishutsuKigen")
+    public void setTxtTeishutsuKigen(TextBox txtTeishutsuKigen) {
+        this.txtTeishutsuKigen = txtTeishutsuKigen;
+    }
+
+    /*
      * getchkIchiranhyoCsv
      * @return chkIchiranhyoCsv
      */
@@ -238,21 +268,21 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
-     */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
-    }
-
-    /*
      * getccdBunshoBangoInput
      * @return ccdBunshoBangoInput
      */
     @JsonProperty("ccdBunshoBangoInput")
     public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
         return ccdBunshoBangoInput;
+    }
+
+    /*
+     * getccdChohyoShutsuryokujun
+     * @return ccdChohyoShutsuryokujun
+     */
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+        return ccdChohyoShutsuryokujun;
     }
 
     /*
@@ -264,7 +294,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuJoken(Label lblChushutsuJoken) {
+    public void setLblChushutsuJoken(Label lblChushutsuJoken) {
         this.getChushutsuJoken().setLblChushutsuJoken(lblChushutsuJoken);
     }
 
@@ -274,7 +304,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadChushutsuJoken(RadioButton radChushutsuJoken) {
+    public void setRadChushutsuJoken(RadioButton radChushutsuJoken) {
         this.getChushutsuJoken().setRadChushutsuJoken(radChushutsuJoken);
     }
 
@@ -284,7 +314,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBlank1(Space blank1) {
+    public void setBlank1(Space blank1) {
         this.getChushutsuJoken2().setBlank1(blank1);
     }
 
@@ -294,7 +324,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBlank2(Space blank2) {
+    public void setBlank2(Space blank2) {
         this.getChushutsuJoken2().setBlank2(blank2);
     }
 
@@ -304,7 +334,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoriNendo(TextBoxFlexibleDate txtShoriNendo) {
+    public void setTxtShoriNendo(TextBoxFlexibleDate txtShoriNendo) {
         this.getChushutsuJoken2().setTxtShoriNendo(txtShoriNendo);
     }
 
@@ -314,7 +344,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSearchHihokensha(Button btnSearchHihokensha) {
+    public void setBtnSearchHihokensha(Button btnSearchHihokensha) {
         this.getChushutsuJoken2().setBtnSearchHihokensha(btnSearchHihokensha);
     }
 
@@ -324,7 +354,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
         this.getChushutsuJoken2().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
@@ -334,7 +364,7 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBlank3(Space blank3) {
+    public void setBlank3(Space blank3) {
         this.getHaakuKijunbiAndTeishutsuKigen().setBlank3(blank3);
     }
 
@@ -344,18 +374,8 @@ public class ShinseishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiinHaakuKijunYMD(TextBoxFlexibleDate txtSetaiinHaakuKijunYMD) {
+    public void setTxtSetaiinHaakuKijunYMD(TextBoxFlexibleDate txtSetaiinHaakuKijunYMD) {
         this.getHaakuKijunbiAndTeishutsuKigen().setTxtSetaiinHaakuKijunYMD(txtSetaiinHaakuKijunYMD);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTeishutsuKigen() {
-        return this.getHaakuKijunbiAndTeishutsuKigen().getTxtTeishutsuKigen();
-    }
-
-    @JsonIgnore
-    public void  setTxtTeishutsuKigen(TextBox txtTeishutsuKigen) {
-        this.getHaakuKijunbiAndTeishutsuKigen().setTxtTeishutsuKigen(txtTeishutsuKigen);
     }
 
     // </editor-fold>

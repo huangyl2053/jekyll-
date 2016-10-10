@@ -35,7 +35,7 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
     実行するボタンクリック2 {
                 @Override
                 public boolean apply(JukyushaDaichoDiv div) {
-                    if (SpecHelper.is基準日Rbが選択されている(div)) {
+                    if (SpecHelper.is範囲Rbが選択されている(div)) {
                         return SpecHelper.is範囲From_範囲Toが共に入力(div);
                     }
                     return true;
@@ -47,7 +47,7 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
     実行するボタンクリック3 {
                 @Override
                 public boolean apply(JukyushaDaichoDiv div) {
-                    if (SpecHelper.is基準日Rbが選択されている(div)) {
+                    if (SpecHelper.is範囲Rbが選択されている(div) && SpecHelper.is範囲From_範囲Toが共に入力(div)) {
                         return div.getTxtNinteiYmdHani().getFromValue().isBeforeOrEquals(div.getTxtNinteiYmdHani().getToValue());
                     }
                     return true;
@@ -118,6 +118,10 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
 
         static boolean is基準日Rbが選択されている(JukyushaDaichoDiv div) {
             return div.getRadChushutsuTaisho().getSelectedKey().equals(ChushutsuHohoKubun.基準日.getコード());
+        }
+
+        static boolean is範囲Rbが選択されている(JukyushaDaichoDiv div) {
+            return div.getRadChushutsuTaisho().getSelectedKey().equals(ChushutsuHohoKubun.範囲.getコード());
         }
 
         static boolean is範囲From_範囲Toが共に入力(JukyushaDaichoDiv div) {

@@ -336,7 +336,7 @@ public class DBC8010001MainHandler {
             div.getTxtTaishoSakuseiYMD().setDisabled(true);
         } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey() && new RString("2").equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
             div.getTxtFurikomiShiteiYMD().setDisabled(true);
-            div.getChkSaisakusei().setSelectedItems(null);
+            div.getChkSaisakusei().setSelectedItems(new ArrayList<KeyValueDataSource>());
             div.getChkSaisakusei().setDisabled(true);
             div.getTxtWrongFurikomiShiteiYMD().setDisabled(false);
             div.getTxtCorrectFurikomiShiteiYMD().setDisabled(false);
@@ -350,7 +350,7 @@ public class DBC8010001MainHandler {
             div.getTxtTaishoSakuseiYMD().setRequired(true);
         } else {
             div.getTxtFurikomiShiteiYMD().setDisabled(true);
-            div.getChkSaisakusei().setSelectedItems(null);
+            div.getChkSaisakusei().setSelectedItems(new ArrayList<KeyValueDataSource>());
             div.getChkSaisakusei().setDisabled(true);
             div.getTxtWrongFurikomiShiteiYMD().clearValue();
             div.getTxtWrongFurikomiShiteiYMD().setDisabled(true);
@@ -370,7 +370,7 @@ public class DBC8010001MainHandler {
      * 再作成するチェックボックスonClick。
      */
     public void onClick_ChkSaisakusei() {
-        if (null != div.getChkSaisakusei().getSelectedKeys() && div.getChkSaisakusei().getSelectedKeys().get(0).equals(new RString("1"))) {
+        if (!div.getChkSaisakusei().getSelectedKeys().isEmpty() && div.getChkSaisakusei().getSelectedKeys().get(0).equals(new RString("1"))) {
             div.getRadChushutsuTaisho().setSelectedKey(Furikomi_MeisaiIchiranChushutsuTaisho.全て.getコード());
             div.getRadChushutsuTaisho().setDisabled(true);
             div.getTxtTaishoSakuseiYMD().setDisabled(false);

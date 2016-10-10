@@ -60,7 +60,7 @@ public class ShoriKekkaKakuninListZengoKyufurituProcess extends BatchProcessBase
     @Override
     protected void process(TempDwbTKyufujissekiShukeiKonkyo1Entity entity) {
         ShoriKekkaKakuninListEntity listEntity = new ShoriKekkaKakuninListEntity();
-        listEntity.set作成日時(new RString(processParameter.get処理日時().toString()));
+        listEntity.set作成日時(processParameter.get処理日時().getRDateTime());
         listEntity.set保険者番号(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value());
         listEntity.set保険者名(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
         listEntity.set項目コード1(項目コード1);

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1180011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011.ShikyugakuKeisanKekkaTorokuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1100011.KogakuGassanShikyuShinseiTorokuValidationMessage;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -79,9 +78,8 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
 
     private ValidationDictionary create計算結果を追加するDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(ShikyugakuKeisanKekkaTorokuMessage.連絡票整理番号既に存在, div.getTxtShikyuShinseishoSeiriNoInput())
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.証明書整理番号桁数が不正,
-                        div.getTxtShikyuShinseishoSeiriNoInput()).build();
+                .add(ShikyugakuKeisanKekkaTorokuMessage.連絡票整理番号年度が不正, div.getTxtShikyuShinseishoSeiriNoInput())
+                .build();
     }
 
     /**

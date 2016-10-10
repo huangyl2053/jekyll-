@@ -58,7 +58,8 @@ public class HanyoListReportUtil {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HanyoListReportUtil}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HanyoListReportUtil}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HanyoListReportUtil}のインスタンス
      */
     public static HanyoListReportUtil createInstance() {
         return InstanceProvider.create(HanyoListReportUtil.class);
@@ -75,14 +76,19 @@ public class HanyoListReportUtil {
         List<UrT0073ShutsuryokuKomokuSetteiEntity> urT0073Entity = urT0073dac.selectByKey(サブ業務コード, 帳票ID, 出力項目ID, 業務コード);
         List<RString> 項目ID = new ArrayList();
         if (urT0073Entity != null && !urT0073Entity.isEmpty()) {
+            List<HanyoListShutsuryokuKomokuList> 汎用リスト出力項目リスト = new ArrayList();
             for (int index = 0; index < urT0073Entity.size(); index++) {
-                hanyoList.get汎用リスト出力項目リスト().get(index).set項目ID(urT0073Entity.get(index).getShutsuryokuKomokuId());
-                hanyoList.get汎用リスト出力項目リスト().get(index).set出力項目順位(urT0073Entity.get(index).getShutsuryokuKomokuJuni());
-                hanyoList.get汎用リスト出力項目リスト().get(index).set省略区分(urT0073Entity.get(index).getShoryakuKubun());
-                hanyoList.get汎用リスト出力項目リスト().get(index).set出力項目文字数(urT0073Entity.get(index).getShutsuryokuKomokuMojisu());
-                hanyoList.get汎用リスト出力項目リスト().get(index).set出力項目日付区分(urT0073Entity.get(index).getShutsuryokuKomokuHizukeKubun());
+                HanyoListShutsuryokuKomokuList 汎用リスト出力項目 = new HanyoListShutsuryokuKomokuList();
+
+                汎用リスト出力項目.set項目ID(urT0073Entity.get(index).getShutsuryokuKomokuId());
+                汎用リスト出力項目.set出力項目順位(urT0073Entity.get(index).getShutsuryokuKomokuJuni());
+                汎用リスト出力項目.set省略区分(urT0073Entity.get(index).getShoryakuKubun());
+                汎用リスト出力項目.set出力項目文字数(urT0073Entity.get(index).getShutsuryokuKomokuMojisu());
+                汎用リスト出力項目.set出力項目日付区分(urT0073Entity.get(index).getShutsuryokuKomokuHizukeKubun());
                 項目ID.add(new RString(urT0073Entity.get(index).getShutsuryokuKomokuId()));
+                汎用リスト出力項目リスト.add(汎用リスト出力項目);
             }
+            hanyoList.set汎用リスト出力項目リスト(汎用リスト出力項目リスト);
         } else {
             return null;
         }

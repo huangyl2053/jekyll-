@@ -6,15 +6,21 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsKarisanteigakuHenkoTsuchishoHakkogoIdoshaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsNonyuTsuchishoHakkogoIdoshaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsTokuchouKaishiTutishoHakkougoIdoushaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.KarisanteiIdoTsuchishoTempCreatProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.GetChoteiNichijiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsIdoFukaTemp1Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsIdoFukaTemp2Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.InsZenkenFukaTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.KarisanteiIdoTsuchishoTempDropProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntKarisanteiNonyuTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntKarisanteigakuHenkoTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PntTokuchouKaishiTutishoKarisanteiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.SystemTimeSyutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PrtKariHenkoTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.PrtTokuchoKariTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.UpdIdoFukaTemp1Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.UpdIdoFukaTemp2Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.UpdIdoFukaTemp3Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.UpdIdoFukaTemp4Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.UpdZenkenFukaTemp1Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.UpdZenkenFukaTemp2Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015003.UpdZenkenFukaTemp3Process;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
@@ -62,16 +68,25 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
     private static final ReportId 特別徴収開始通知書仮算定帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 仮算定額変更通知書_帳票分類ID = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 納入通知書仮算定_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    private static final String システム日時の取得 = "getSystemDate";
-    private static final String CREAT_PROCESS = "creatTmpProcess";
+
+    private static final String 全件賦課情報一時に登録 = "insZenkenFukaTempProcess";
+    private static final String 全件賦課情報一時を更新_更正前計算後情報 = "updZenkenFukaTemp1Process";
+    private static final String 全件賦課情報一時を更新_更正前対象者情報 = "updZenkenFukaTemp2Process";
+    private static final String 全件賦課情報一時を更新_生活保護区分 = "updZenkenFukaTemp3Process";
+
+    private static final String 最新調定日時の取得 = "getkijunTimestamp";
+    private static final String 異動賦課情報一時に登録 = "insIdoFukaTemp1Process";
+    private static final String 異動賦課情報一時を更新_更正前計算後情報 = "updIdoFukaTemp1Process";
+    private static final String 異動賦課情報一時に登録_賦課計算と別起動 = "insIdoFukaTemp2Process";
+    private static final String 更正前計算後情報更新_賦課計算と別起動 = "updIdoFukaTemp2Process";
+    private static final String 異動賦課情報一時を更新_更正前対象者情報 = "updIdoFukaTemp3Process";
+    private static final String 異動賦課情報一時を更新_生活保護区分 = "updIdoFukaTemp4Process";
+
     private static final String 計算後情報一時テーブル削除 = "dropKeisangoJohoTempProcess";
     private static final String 計算後情報作成 = "keisangoJohoSakuseiProcess";
     private static final String 特徴開始通知書仮算定発行 = "pntTokuchouKaishiTutishoKarisanteiProcess";
-    private static final String 特徴開始通知書発行後異動者登録 = "insTokuchouKaishiTutishoHakkougoIdoushaProcess";
     private static final String 仮算定額変更通知書発行 = "pntKarisanteigakuHenkoTsuchishoProcess";
-    private static final String 仮算定額変更通知書発行後異動者登録 = "insKarisanteigakuHenkoTsuchishoHakkogoIdoshaProcess";
     private static final String 納入通知書仮算定発行 = "pntKarisanteiNonyuTsuchishoProcess";
-    private static final String 納入通知書発行後異動者登録 = "insNonyuTsuchishoHakkogoIdoshaProcess";
 
     private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private RString バッチフロー_帳票分類ID;
@@ -79,14 +94,20 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
 
     private DBB015003_KarisanteiIdoTsuchishoHakkoParameter parameter;
 
+    private YMDHMS システム日時;
+
+    @Override
+    protected void initialize() {
+        システム日時 = YMDHMS.now();
+    }
+
     @Override
     protected void defineFlow() {
         parameter = getParameter();
         if (parameter == null || parameter.get出力帳票一覧List() == null || parameter.get出力帳票一覧List().isEmpty()) {
             return;
         }
-        executeStep(システム日時の取得);
-        executeStep(CREAT_PROCESS);
+        executeStep(最新調定日時の取得);
         List<TyouhyouEntity> 出力帳票一覧List = parameter.get出力帳票一覧List();
         for (TyouhyouEntity 出力帳票一覧 : 出力帳票一覧List) {
             if (出力帳票一覧.get帳票ID() == null) {
@@ -98,21 +119,30 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
                     new RDate(parameter.get仮算定額変更_発行日().toString()), parameter.get文書番号(), parameter.get納入_出力期(),
                     parameter.get納入_出力方式(), new RDate(parameter.get納入_発行日().toString()), parameter.get納入_対象者(),
                     parameter.get納入_生活保護対象者(), parameter.get納入_ページごとに山分け(), parameter.is一括発行起動フラグ(),
-                    getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeSyutokuProcess.SYSTEM_TIME));
+                    システム日時, getResult(YMDHMS.class, new RString(最新調定日時の取得), GetChoteiNichijiProcess.KIJUN_TIME));
             if (特別徴収開始通知書仮算定帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
                 計算後情報作成区分 = true;
                 バッチフロー_帳票分類ID = 特別徴収開始通知書仮算定帳票分類ID.getColumnValue();
                 executeStep(計算後情報作成);
+                executeStep(全件賦課情報一時に登録);
+                executeStep(全件賦課情報一時を更新_更正前計算後情報);
+                executeStep(全件賦課情報一時を更新_更正前対象者情報);
+                executeStep(全件賦課情報一時を更新_生活保護区分);
                 executeStep(特徴開始通知書仮算定発行);
-                executeStep(特徴開始通知書発行後異動者登録);
             } else if (仮算定額変更通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
                 if (parameter.is一括発行起動フラグ()) {
                     計算後情報作成区分 = true;
                     バッチフロー_帳票分類ID = 仮算定額変更通知書_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成);
+                    executeStep(異動賦課情報一時に登録_賦課計算と別起動);
+                    executeStep(更正前計算後情報更新_賦課計算と別起動);
+                } else {
+                    executeStep(異動賦課情報一時に登録);
+                    executeStep(異動賦課情報一時を更新_更正前計算後情報);
                 }
+                executeStep(異動賦課情報一時を更新_更正前対象者情報);
+                executeStep(異動賦課情報一時を更新_生活保護区分);
                 executeStep(仮算定額変更通知書発行);
-                executeStep(仮算定額変更通知書発行後異動者登録);
             } else if (納入通知書仮算定_帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
                 RString 帳票タイプ = get帳票タイプBy通知書帳票ID(出力帳票一覧.get帳票ID());
                 RString 普徴期情報_処理対象 = get普徴期情報(parameter.get納入_出力期());
@@ -120,13 +150,25 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
                     計算後情報作成区分 = true;
                     バッチフロー_帳票分類ID = 納入通知書仮算定_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成);
+                    executeStep(全件賦課情報一時に登録);
+                    executeStep(全件賦課情報一時を更新_更正前計算後情報);
+                    executeStep(全件賦課情報一時を更新_更正前対象者情報);
+                    executeStep(全件賦課情報一時を更新_生活保護区分);
                 } else if (parameter.is一括発行起動フラグ()) {
                     計算後情報作成区分 = true;
                     バッチフロー_帳票分類ID = 納入通知書仮算定_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成);
+                    executeStep(異動賦課情報一時に登録_賦課計算と別起動);
+                    executeStep(更正前計算後情報更新_賦課計算と別起動);
+                    executeStep(異動賦課情報一時を更新_更正前対象者情報);
+                    executeStep(異動賦課情報一時を更新_生活保護区分);
+                } else {
+                    executeStep(異動賦課情報一時に登録);
+                    executeStep(異動賦課情報一時を更新_更正前計算後情報);
+                    executeStep(異動賦課情報一時を更新_更正前対象者情報);
+                    executeStep(異動賦課情報一時を更新_生活保護区分);
                 }
                 executeStep(納入通知書仮算定発行);
-                executeStep(納入通知書発行後異動者登録);
             }
             if (計算後情報作成区分) {
                 executeStep(計算後情報一時テーブル削除);
@@ -135,28 +177,19 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
     }
 
     /**
-     * システム日時の取得を行います。
+     * 最新調定日時の取得を行います。
      *
      * @return バッチコマンド
      */
-    @Step(システム日時の取得)
-    protected IBatchFlowCommand getSystemDate() {
+    @Step(最新調定日時の取得)
+    protected IBatchFlowCommand getkijunTimestamp() {
         KarisanteiIdoFukaProcessParameter para = new KarisanteiIdoFukaProcessParameter(new FlexibleYear(parameter.get調定年度()),
                 new FlexibleYear(parameter.get賦課年度()), null, new RDate(parameter.get特徴_発行日().toString()),
                 new RDate(parameter.get仮算定額変更_発行日().toString()), parameter.get文書番号(), parameter.get納入_出力期(),
                 parameter.get納入_出力方式(), new RDate(parameter.get納入_発行日().toString()), parameter.get納入_対象者(),
-                parameter.get納入_生活保護対象者(), parameter.get納入_ページごとに山分け(), parameter.is一括発行起動フラグ(), null);
-        return simpleBatch(SystemTimeSyutokuProcess.class).arguments(para).define();
-    }
-
-    /**
-     * 全件賦課情報一時テーブル/異動賦課情報一時テーブル作成するメソッドです。
-     *
-     * @return バッチコマンド
-     */
-    @Step(CREAT_PROCESS)
-    protected IBatchFlowCommand creatTmpProcess() {
-        return simpleBatch(KarisanteiIdoTsuchishoTempCreatProcess.class).define();
+                parameter.get納入_生活保護対象者(), parameter.get納入_ページごとに山分け(), parameter.is一括発行起動フラグ(),
+                システム日時, null);
+        return simpleBatch(GetChoteiNichijiProcess.class).arguments(para).define();
     }
 
     /**
@@ -185,23 +218,113 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
     }
 
     /**
+     * 全件賦課情報一時に登録するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(全件賦課情報一時に登録)
+    protected IBatchFlowCommand insZenkenFukaTempProcess() {
+        return loopBatch(InsZenkenFukaTempProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 全件賦課情報一時テーブルを更新（更正前情報）するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(全件賦課情報一時を更新_更正前計算後情報)
+    protected IBatchFlowCommand updZenkenFukaTemp1Process() {
+        return simpleBatch(UpdZenkenFukaTemp1Process.class).define();
+    }
+
+    /**
+     * 全件賦課情報一時テーブルを更新（更正前対象者情報）するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(全件賦課情報一時を更新_更正前対象者情報)
+    protected IBatchFlowCommand updZenkenFukaTemp2Process() {
+        return simpleBatch(UpdZenkenFukaTemp2Process.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 全件賦課情報一時テーブルを更新（生活保護区分）するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(全件賦課情報一時を更新_生活保護区分)
+    protected IBatchFlowCommand updZenkenFukaTemp3Process() {
+        return simpleBatch(UpdZenkenFukaTemp3Process.class).define();
+    }
+
+    /**
+     * 異動賦課情報一時テーブルに登録(賦課計算と同時起動)するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(異動賦課情報一時に登録)
+    protected IBatchFlowCommand insIdoFukaTemp1Process() {
+        return loopBatch(InsIdoFukaTemp1Process.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 異動賦課情報一時テーブルを更新（更正前情報）するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(異動賦課情報一時を更新_更正前計算後情報)
+    protected IBatchFlowCommand updIdoFukaTemp1Process() {
+        return simpleBatch(UpdIdoFukaTemp1Process.class).define();
+    }
+
+    /**
+     * 異動賦課情報一時テーブルに登録(賦課計算と別起動)するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(異動賦課情報一時に登録_賦課計算と別起動)
+    protected IBatchFlowCommand insIdoFukaTemp2Process() {
+        return loopBatch(InsIdoFukaTemp2Process.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 異動賦課情報一時テーブルを更新（更正前情報）するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(更正前計算後情報更新_賦課計算と別起動)
+    protected IBatchFlowCommand updIdoFukaTemp2Process() {
+        return simpleBatch(UpdIdoFukaTemp2Process.class).define();
+    }
+
+    /**
+     * 異動賦課情報一時テーブルを更新（更正前対象者情報）するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(異動賦課情報一時を更新_更正前対象者情報)
+    protected IBatchFlowCommand updIdoFukaTemp3Process() {
+        return simpleBatch(UpdIdoFukaTemp3Process.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 異動賦課情報一時テーブルを更新（生活保護区分）するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(異動賦課情報一時を更新_生活保護区分)
+    protected IBatchFlowCommand updIdoFukaTemp4Process() {
+        return simpleBatch(UpdIdoFukaTemp4Process.class).define();
+    }
+
+    /**
      * 特徴開始通知書(仮算定）の発行するメソッドです。
      *
      * @return バッチコマンド
      */
     @Step(特徴開始通知書仮算定発行)
     protected IBatchFlowCommand prtTokuchoKaishiTsuchishoHonsanteiProcess() {
-        return simpleBatch(PntTokuchouKaishiTutishoKarisanteiProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 特徴開始通知書発行後異動者登録するメソッドです。
-     *
-     * @return バッチコマンド
-     */
-    @Step(特徴開始通知書発行後異動者登録)
-    protected IBatchFlowCommand insTsuchishoHakkogoIdoshaTokuchoKaishiProcess() {
-        return simpleBatch(InsTokuchouKaishiTutishoHakkougoIdoushaProcess.class).arguments(processParameter).define();
+        return loopBatch(PrtTokuchoKariTsuchishoProcess.class).arguments(processParameter).define();
     }
 
     /**
@@ -211,17 +334,7 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
      */
     @Step(仮算定額変更通知書発行)
     protected IBatchFlowCommand pntKarisanteigakuHenkoTsuchishoProcess() {
-        return simpleBatch(PntKarisanteigakuHenkoTsuchishoProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 仮算定額変更通知書発行後異動者登録するメソッドです。
-     *
-     * @return バッチコマンド
-     */
-    @Step(仮算定額変更通知書発行後異動者登録)
-    protected IBatchFlowCommand insKarisanteigakuHenkoTsuchishoHakkogoIdoshaProcess() {
-        return simpleBatch(InsKarisanteigakuHenkoTsuchishoHakkogoIdoshaProcess.class).arguments(processParameter).define();
+        return loopBatch(PrtKariHenkoTsuchishoProcess.class).arguments(processParameter).define();
     }
 
     /**
@@ -231,32 +344,22 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
      */
     @Step(納入通知書仮算定発行)
     protected IBatchFlowCommand pntKarisanteiNonyuTsuchishoProcess() {
-        return simpleBatch(PntKarisanteiNonyuTsuchishoProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 納入通知書発行後異動者登録するメソッドです。
-     *
-     * @return バッチコマンド
-     */
-    @Step(納入通知書発行後異動者登録)
-    protected IBatchFlowCommand insNonyuTsuchishoHakkogoIdoshaProcess() {
-        return simpleBatch(InsNonyuTsuchishoHakkogoIdoshaProcess.class).arguments(processParameter).define();
+        return loopBatch(PntKarisanteiNonyuTsuchishoProcess.class).arguments(processParameter).define();
     }
 
     private RString get帳票タイプBy通知書帳票ID(ReportId 帳票ID) {
 
         RString 帳票タイプ = RString.EMPTY;
         if (ReportIdDBB.DBB100014.getReportId().equals(帳票ID) || ReportIdDBB.DBB100015.getReportId().equals(帳票ID)
-            || ReportIdDBB.DBB100028.getReportId().equals(帳票ID) || ReportIdDBB.DBB100029.getReportId().equals(帳票ID)) {
+                || ReportIdDBB.DBB100028.getReportId().equals(帳票ID) || ReportIdDBB.DBB100029.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_期毎;
         } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID) || ReportIdDBB.DBB100019.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_銀振型4;
         } else if (ReportIdDBB.DBB100020.getReportId().equals(帳票ID) || ReportIdDBB.DBB100021.getReportId().equals(帳票ID)
-                   || ReportIdDBB.DBB100022.getReportId().equals(帳票ID) || ReportIdDBB.DBB100023.getReportId().equals(帳票ID)) {
+                || ReportIdDBB.DBB100022.getReportId().equals(帳票ID) || ReportIdDBB.DBB100023.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_ブック;
         } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID) || ReportIdDBB.DBB100025.getReportId().equals(帳票ID)
-                   || ReportIdDBB.DBB100026.getReportId().equals(帳票ID) || ReportIdDBB.DBB100027.getReportId().equals(帳票ID)) {
+                || ReportIdDBB.DBB100026.getReportId().equals(帳票ID) || ReportIdDBB.DBB100027.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_コンビニ;
         }
         return 帳票タイプ;

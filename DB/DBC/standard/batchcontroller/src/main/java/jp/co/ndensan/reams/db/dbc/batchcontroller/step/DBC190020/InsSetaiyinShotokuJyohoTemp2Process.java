@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.InsSetaiyinShotokuJyohoTemp1ProcessMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsSetaiyinShotokuJyohoTemp1ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity;
@@ -26,7 +27,6 @@ public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<Hihoke
     private InsSetaiyinShotokuJyohoTemp1ProcessParameter parameter;
     private InsSetaiyinShotokuJyohoTemp1ProcessMybatisParameter para;
     private static final RString 世帯員把握入力テーブル = new RString("TmpSetaiHaaku");
-    private static final RString RSTRING_0 = new RString("0");
     private static final RString READ_DATA_ID0 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.select処理年度の対象者2");
     private static final RString READ_DATA_ID1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
@@ -36,14 +36,18 @@ public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<Hihoke
 
     @Override
     protected void initialize() {
-        super.initialize();
         this.para = new InsSetaiyinShotokuJyohoTemp1ProcessMybatisParameter();
         this.para.set世帯員把握基準日2(this.parameter.get世帯員把握基準日2());
+        if (RString.isNullOrEmpty(this.parameter.get被保険者番号().getColumnValue())) {
+            this.para.set被保険者番号(null);
+        } else {
+            this.para.set被保険者番号(this.parameter.get被保険者番号());
+        }
     }
 
     @Override
     protected IBatchReader createReader() {
-        if (RSTRING_0.equals(this.parameter.get抽出条件())) {
+        if (ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
             return new BatchDbReader(READ_DATA_ID0, para);
         } else {
             return new BatchDbReader(READ_DATA_ID1, para);
@@ -65,11 +69,6 @@ public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<Hihoke
         hakuEntity.setShotokuNendo(parameter.get世帯員把握基準日2().getNendo());
         hakuEntity.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
         writer.insert(hakuEntity);
-    }
-
-    @Override
-    protected void afterExecute() {
-
     }
 
 }

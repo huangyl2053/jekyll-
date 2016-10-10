@@ -31,7 +31,7 @@ public class DBD710070_HanyoListTokubetsuChiikiKasanGemmen extends BatchFlowBase
      * @return IBatchFlowCommand
      */
     @Step(CSV_PROCESS)
-    protected IBatchFlowCommand reportProcess() {
+    protected IBatchFlowCommand reportCsvProcess() {
         return loopBatch(HanyoListTokubetsuChiikiKasanGemmenProcess.class)
                 .arguments(getParameter().toHanyoListTokubetsuChiikiKasanGemmenProcessParameter())
                 .define();
