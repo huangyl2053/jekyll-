@@ -79,42 +79,42 @@ public class RenkeiDataTorikomi {
     public ResponseData<RenkeiDataTorikomiDiv> onClick_TorikomiBtn(RenkeiDataTorikomiDiv div, FileData[] files) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         // TODO 内部QA：1610 Redmine#98087 文字コードはS-JISの場合、CSVファイルに上3バイトのUNICODEが知らないので、実装できない。
-        RString 要介護認定申請 = DbBusinessConfig.get(
-                ConfigNameDBE.要介護認定申請連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 認定調査委託先 = DbBusinessConfig.get(
-                ConfigNameDBE.認定調査委託先データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 認定調査員 = DbBusinessConfig.get(
-                ConfigNameDBE.認定調査員データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 主治医医療機関 = DbBusinessConfig.get(
-                ConfigNameDBE.主治医医療機関データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 主治医 = DbBusinessConfig.get(
-                ConfigNameDBE.主治医データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        boolean is認定申請情報ファイル = false;
-        boolean is認定調査委託先情報ファイル = false;
-        boolean is認定調査員情報ファイル = false;
-        boolean is主治医医療機関情報ファイル = false;
-        boolean is主治医情報ファイル = false;
-        for (FileData file : files) {
-            if (要介護認定申請.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, file.getFilePath(), true);
-                is認定申請情報ファイル = true;
-            } else if (認定調査委託先.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, file.getFilePath(), true);
-                is認定調査委託先情報ファイル = true;
-            } else if (認定調査員.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, file.getFilePath(), true);
-                is認定調査員情報ファイル = true;
-            } else if (主治医医療機関.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, file.getFilePath(), true);
-                is主治医医療機関情報ファイル = true;
-            } else if (主治医.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, file.getFilePath(), true);
-                is主治医情報ファイル = true;
-            }
-        }
-        validPairs = getValidationHandler(div).checkFileName(validPairs,
-                is認定申請情報ファイル, is認定調査委託先情報ファイル, is認定調査員情報ファイル,
-                is主治医医療機関情報ファイル, is主治医情報ファイル);
+//        RString 要介護認定申請 = DbBusinessConfig.get(
+//                ConfigNameDBE.要介護認定申請連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 認定調査委託先 = DbBusinessConfig.get(
+//                ConfigNameDBE.認定調査委託先データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 認定調査員 = DbBusinessConfig.get(
+//                ConfigNameDBE.認定調査員データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 主治医医療機関 = DbBusinessConfig.get(
+//                ConfigNameDBE.主治医医療機関データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 主治医 = DbBusinessConfig.get(
+//                ConfigNameDBE.主治医データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        boolean is認定申請情報ファイル = false;
+//        boolean is認定調査委託先情報ファイル = false;
+//        boolean is認定調査員情報ファイル = false;
+//        boolean is主治医医療機関情報ファイル = false;
+//        boolean is主治医情報ファイル = false;
+//        for (FileData file : files) {
+//            if (要介護認定申請.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, file.getFilePath(), true);
+//                is認定申請情報ファイル = true;
+//            } else if (認定調査委託先.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, file.getFilePath(), true);
+//                is認定調査委託先情報ファイル = true;
+//            } else if (認定調査員.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, file.getFilePath(), true);
+//                is認定調査員情報ファイル = true;
+//            } else if (主治医医療機関.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, file.getFilePath(), true);
+//                is主治医医療機関情報ファイル = true;
+//            } else if (主治医.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, file.getFilePath(), true);
+//                is主治医情報ファイル = true;
+//            }
+//        }
+//        validPairs = getValidationHandler(div).checkFileName(validPairs,
+//                is認定申請情報ファイル, is認定調査委託先情報ファイル, is認定調査員情報ファイル,
+//                is主治医医療機関情報ファイル, is主治医情報ファイル);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

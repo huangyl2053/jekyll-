@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.CountedItem;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * （特徴異動情報）追加用データ作成します。
@@ -34,6 +38,7 @@ public class InsNenkinTokuchoKaifuJoho2Process extends BatchProcessBase<UeT0511N
             + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_10_12_2月");
 
     private static final RString TEMP_TABLE = new RString("特徴異動追加Temp");
+    private static final RString 汎用キー_連番 = new RString("連番");
 
     private InsNenkinTokuchoKaifuJoho2ProcessParameter parameter;
 
@@ -67,7 +72,10 @@ public class InsNenkinTokuchoKaifuJoho2Process extends BatchProcessBase<UeT0511N
 
     @Override
     protected void process(UeT0511NenkinTokuchoKaifuJohoEntity t) {
-        年金特徴回付情報TableWriter.insert(t);
         特徴異動追加Temp.insert(t);
+        CountedItem saiban = Saiban.get(SubGyomuCode.DBB介護賦課, 汎用キー_連番, FlexibleDate.getNowDate().getNendo());
+        t.setRenban(Integer.parseInt(saiban.nextString().trim().toString()));
+        年金特徴回付情報TableWriter.insert(t);
+
     }
 }

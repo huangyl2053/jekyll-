@@ -180,11 +180,12 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @Override
     protected void process(ShikyugakuJohoEntity t) {
+        様式連番 = 0;
         RString 制度改正施行年月日
                 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         boolean flag = false;
-        様式連番++;
+
         if (t.get様式番号別金額EntityList().isEmpty()) {
             t.set様式番号別金額EntityList(Collections.EMPTY_LIST);
         }
@@ -194,6 +195,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
             MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
             振込明細一覧表明細.set様式別集計金額(Decimal.ZERO);
             for (InjiYoushikiBangouBetuKingaku 印字様式番号別金額 : 印字様式番号別金額List) {
+                様式連番++;
                 振込明細一覧表明細.set様式連番(様式連番);
                 振込明細一覧表明細.set名寄せ件数(t.get名寄せ件数());
                 振込明細一覧表明細.set印字様式名称(様式名称MAP.get(印字様式番号別金額.get印字様式番号()));

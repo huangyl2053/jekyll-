@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShikakuChushutsuKubun {
 
     /**
-     * コード:1 名称:資格取得者のみ 略称:定義なし
+     * コード:1 名称:資格取得者のみ 略称:資格取得者のみ
      */
-    資格取得者のみ("1", "資格取得者のみ"),
+    資格取得者のみ("1", "資格取得者のみ", "資格取得者のみ"),
     /**
-     * コード:2 名称:資格喪失者のみ 略称:定義なし
+     * コード:2 名称:資格喪失者のみ 略称:資格喪失者のみ
      */
-    資格喪失者のみ("2", "資格喪失者のみ"),
+    資格喪失者のみ("2", "資格喪失者のみ", "資格喪失者のみ"),
     /**
-     * コード:0 名称:両方 略称:定義なし
+     * コード:0 名称:両方 略称:両方
      */
-    両方("0", "両方");
+    両方("0", "両方", "両方");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private ShikakuChushutsuKubun(String code, String fullname) {
+    private ShikakuChushutsuKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum ShikakuChushutsuKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 資格抽出区分の略称を返します。
+     *
+     * @return 資格抽出区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

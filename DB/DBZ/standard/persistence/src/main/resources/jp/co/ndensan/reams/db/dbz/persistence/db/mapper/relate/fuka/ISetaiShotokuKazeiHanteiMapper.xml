@@ -53,7 +53,7 @@
     
      <resultMap id="resultMap_SetaiHaakuResultEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHaakuResultEntity" autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="世帯員識別コード" column="setaiInshikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="世帯員識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="世帯把握基準日" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="所得年度" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="住所地特例該当" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -63,9 +63,9 @@
     
      <select resultOrdered="true" id="select世帯員把握入力" resultMap="resultMap_SetaiHaakuResultEntity" fetchSize="500"
                       parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
-       SELECT
+        SELECT
         A."hihokenshaNo",
-        A."setaiInshikibetsuCode",
+        A."shikibetsuCode",
         A."kijunYMD",
         A."shotokuNendo",
         A."jushochiTokureiFlag",

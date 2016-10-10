@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelec
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -97,6 +98,8 @@ public class FutanGendoGakuNinteiMybatisParameter implements IMyBatisParameter {
     private boolean has地区3To;
     private final IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final RString 出力順;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -120,6 +123,7 @@ public class FutanGendoGakuNinteiMybatisParameter implements IMyBatisParameter {
      * @param atenacyusyutsujyoken 宛名抽出条件
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
+     * @param 出力順 出力順
      */
     public FutanGendoGakuNinteiMybatisParameter(
             RString cyusyutsuhohokubun,
@@ -140,7 +144,8 @@ public class FutanGendoGakuNinteiMybatisParameter implements IMyBatisParameter {
             RString kyakasha,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
             IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
@@ -162,6 +167,8 @@ public class FutanGendoGakuNinteiMybatisParameter implements IMyBatisParameter {
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
+        shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(psmShikibetsuTaisho);
+        this.出力順 = 出力順;
         set抽出方法区分();
         set年齢層抽出方法();
         set地区区分();

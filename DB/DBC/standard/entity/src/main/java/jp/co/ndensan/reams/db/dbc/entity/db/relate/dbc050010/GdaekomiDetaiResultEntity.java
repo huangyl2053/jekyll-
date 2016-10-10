@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
@@ -24,6 +23,6 @@ public class GdaekomiDetaiResultEntity {
 
     private DbT3057KogakuShikyuHanteiKekkaEntity 高額介護サービス費支給判定結果Entity;
     private DbT3056KogakuShikyuShinseiEntity 高額介護サービス費支給申請Entity;
-    private List<DbT3058KogakuShikyuShinsaKetteiEntity> 高額介護サービス費支給審査決定list;
+    private DbT3058KogakuShikyuShinsaKetteiEntity 高額介護サービス費支給審査決定Entity;
 
 }

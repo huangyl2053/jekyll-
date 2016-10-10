@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001.DBC8010001MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8010001.DBC8010001MainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8010001.DBC8010001MainValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunManagerFactory;
@@ -18,7 +19,10 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsury
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 振込明細・振込みデータ作成のDivControllerです。
@@ -26,6 +30,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-2180-010 x_liuwei
  */
 public class DBC8010001Main {
+
+    private final RString 今回対象日開始日未入力value = new RString("今回対象日開始日未入力flag");
+    private final RString 決定者受取年月開始年月未入力value = new RString("決定者受取年月開始年月未入力value");
 
     /**
      * 画面初期化です。
@@ -100,7 +107,7 @@ public class DBC8010001Main {
         boolean flag2 = new RString("2").equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
         boolean flag3 = false;
         List<RString> list = div.getChkSaisakusei().getSelectedKeys();
-        if (null != list && list.get(0).equals(new RString("1"))) {
+        if (!list.isEmpty() && list.get(0).equals(new RString("1"))) {
             flag3 = true;
         }
         if (flag1) {
@@ -120,12 +127,33 @@ public class DBC8010001Main {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        if (!div.getTxtKonkaiTaishoYmdRange().isDisabled() && getValidationHandler(div).validateFor今回対象日開始日未入力()) {
-            return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
+        if (!(決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) == null ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)))) {
+            if (!ResponseHolder.isReRequest() && !div.getTxtKonkaiTaishoYmdRange().isDisabled() && getValidationHandler(div).validateFor今回対象日開始日未入力()) {
+                ViewStateHolder.put(ViewStateKeys.今回対象日開始日未入力flag, 今回対象日開始日未入力value);
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
+            } else {
+                if (null != ViewStateHolder.get(ViewStateKeys.今回対象日開始日未入力flag, RString.class) && 今回対象日開始日未入力value.equals(ViewStateHolder.get(ViewStateKeys.今回対象日開始日未入力flag, RString.class)) && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).respond();
+                }
+            }
         }
-        if (!div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+
+        if ((null == ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) || !決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) == null ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class))) && !div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+            ViewStateHolder.put(ViewStateKeys.決定者受取年月開始年月未入力flag, 決定者受取年月開始年月未入力value);
             return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
+        } else {
+            if (!ResponseHolder.isReRequest()) {
+                if (!div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+                    return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
+                }
+            } else {
+                if (null != ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) && 決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)) && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).respond();
+                }
+            }
+
         }
+
         return ResponseData.of(div).respond();
     }
 

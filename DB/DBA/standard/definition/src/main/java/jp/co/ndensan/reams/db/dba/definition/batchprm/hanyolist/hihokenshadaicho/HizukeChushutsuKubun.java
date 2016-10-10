@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HizukeChushutsuKubun {
 
     /**
-     * コード:1 名称:直近 略称:定義なし
+     * コード:1 名称:直近 略称:直近
      */
-    直近("1", "直近"),
+    直近("1", "直近", "直近"),
     /**
-     * コード:2 名称:基準日 略称:定義なし
+     * コード:2 名称:基準日 略称:基準日
      */
-    基準日("2", "基準日"),
+    基準日("2", "基準日", "基準日"),
     /**
-     * コード:3 名称:範囲 略称:定義なし
+     * コード:3 名称:範囲 略称:範囲
      */
-    範囲("3", "範囲");
+    範囲("3", "範囲", "範囲");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private HizukeChushutsuKubun(String code, String fullname) {
+    private HizukeChushutsuKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum HizukeChushutsuKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 日付抽出区分の略称を返します。
+     *
+     * @return 日付抽出区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

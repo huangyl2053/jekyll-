@@ -11,28 +11,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HaniChushutsubiKubun {
 
     /**
-     * コード:1 名称:適用日 略称:定義なし
+     * コード:1 名称:適用日 略称:適用日
      */
-    適用日("1", "適用日"),
+    適用日("1", "適用日", "適用日"),
     /**
-     * コード:2 名称:適用届出日 略称:定義なし
+     * コード:2 名称:適用届出日 略称:適用届出日
      */
-    適用届出日("2", "適用届出日"),
+    適用届出日("2", "適用届出日", "適用届出日"),
     /**
-     * コード:3 名称:解除日 略称:定義なし
+     * コード:4 名称:解除日 略称:解除日
      */
-    解除日("3", "解除日"),
+    解除日("4", "解除日", "解除日"),
     /**
-     * コード:4 名称:解除届出日 略称:定義なし
+     * コード:5 名称:解除届出日 略称:解除届出日
      */
-    解除届出日("4", "解除届出日");
+    解除届出日("5", "解除届出日", "解除届出日");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private HaniChushutsubiKubun(String code, String fullname) {
+    private HaniChushutsubiKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -51,6 +53,15 @@ public enum HaniChushutsubiKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 範囲抽出日区分の略称を返します。
+     *
+     * @return 範囲抽出日区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**
