@@ -360,7 +360,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
         if (row.getTxtJikoFutangaku().getValue() != null) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtJikoFutanSogaku().setValue(new Decimal(row.getTxtJikoFutangaku().toString()));
+                    getTxtJikoFutanSogaku().setValue(row.getTxtJikoFutangaku().getValue());
         }
         set新規以外の決定情報初期値_Two(row);
 //        set支払方法タブ(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row);
@@ -380,7 +380,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
         if (row.getTxtShikyugaku().getValue() != null) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtShikyugaku().setValue(new Decimal(row.getTxtShikyugaku().toString()));
+                    getTxtShikyugaku().setValue(row.getTxtShikyugaku().getValue());
         }
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setValue(row.getKyufuShurui());
         if (row.getTxtUketoriNengetsu().getValue() != null && !row.getTxtUketoriNengetsu().getValue().isEmpty()) {

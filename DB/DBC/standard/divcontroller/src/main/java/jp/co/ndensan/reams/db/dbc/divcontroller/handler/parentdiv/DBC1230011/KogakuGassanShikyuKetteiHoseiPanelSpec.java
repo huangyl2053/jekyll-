@@ -207,6 +207,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
             if (ONE.equals(wk保険者構成)) {
                 if (div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
                         && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
+                        && 市町村情報.getWk保険者番号() != null && !市町村情報.getWk保険者番号().value().isEmpty()
                         && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().
                         equals(市町村情報.getWk保険者番号().value())) {
                     flag = false;
