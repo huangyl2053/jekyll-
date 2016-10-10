@@ -16,20 +16,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KozaIdoNomiPrint {
 
     /**
-     * コード:0 名称:発行しない 略称:無
+     * コード:0 名称:口座異動のみの場合にﾌﾟﾘﾝﾄは不要 略称:発行しない
      */
-    口座異動のみの場合にﾌﾟﾘﾝﾄは不要("0", "発行しない"),
+    口座異動のみの場合にﾌﾟﾘﾝﾄは不要("0", "口座異動のみの場合にﾌﾟﾘﾝﾄは不要", "発行しない"),
     /**
-     * コード:1 名称:発行する 略称:無
+     * コード:1 名称:口座異動のみの場合にﾌﾟﾘﾝﾄを行う 略称:発行する
      */
-    口座異動のみの場合にﾌﾟﾘﾝﾄを行う("1", "発行する");
+    口座異動のみの場合にﾌﾟﾘﾝﾄを行う("1", "口座異動のみの場合にﾌﾟﾘﾝﾄを行う", "発行する");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KozaIdoNomiPrint(String code, String fullname) {
+    private KozaIdoNomiPrint(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -48,6 +50,15 @@ public enum KozaIdoNomiPrint {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 口座異動のみプリントの略称を返します。
+     *
+     * @return 口座異動のみプリントの略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

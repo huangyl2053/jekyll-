@@ -116,11 +116,11 @@ public class ShikyugakuKeisanKekkaToroku {
         KogakuGassanShikyugakuKeisanKekkaToroku service = KogakuGassanShikyugakuKeisanKekkaToroku.createInstance();
         List<KogakuGassanShikyuGakuKeisanKekkaRelate> resultList
                 = service.selectShikyugakuKeisanKekka(被保険者番号, 検索年度開始, 検索年度終了, 履歴表示);
-        if (resultList == null) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
         ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
         handler.setRow(resultList);
+        if (resultList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
         KogakuGassanShikyuGakuKeisanKekkaHosei 支給額計算結果情報 = new KogakuGassanShikyuGakuKeisanKekkaHosei();
         支給額計算結果情報.set高額合算支給額計算結果データ(resultList);
         ViewStateHolder.put(ViewStateKeys.支給額計算結果情報, 支給額計算結果情報);
@@ -555,6 +555,8 @@ public class ShikyugakuKeisanKekkaToroku {
             if (保存Pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(保存Pairs).respond();
             }
+        }
+        if (!ResponseHolder.isReRequest() && 削除.equals(状態)) {
             ValidationMessageControlPairs 整合性Pairs = validationhandler.validate整合性チェック();
             if (整合性Pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(整合性Pairs).respond();
@@ -575,12 +577,15 @@ public class ShikyugakuKeisanKekkaToroku {
             ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
             KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果
                     = ViewStateHolder.get(ViewStateKeys.支給額計算結果, KogakuGassanShikyuGakuKeisanKekkaRelate.class);
-            支給額計算結果 = handler.支給額計算結果編集(支給額計算結果, 状態);
             KogakuGassanShikyuShinseiTorokuManager maneger = KogakuGassanShikyuShinseiTorokuManager.createInstance();
             if (修正.equals(状態)) {
+                支給額計算結果 = handler.支給額計算結果編集(支給額計算結果, 状態);
                 maneger.saveModify(支給額計算結果);
+            } else if (削除.equals(状態)) {
+                maneger.saveDelete(支給額計算結果);
             } else {
-                maneger.saveAddOrDelete(支給額計算結果);
+                支給額計算結果 = handler.支給額計算結果編集(支給額計算結果, 状態);
+                maneger.saveAdd(支給額計算結果);
             }
             前排他解除();
             アクセスログを出力_更新(対象者);

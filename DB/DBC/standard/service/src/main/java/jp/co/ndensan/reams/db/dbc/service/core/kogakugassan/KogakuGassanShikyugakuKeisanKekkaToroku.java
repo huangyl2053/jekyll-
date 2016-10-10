@@ -79,13 +79,13 @@ public class KogakuGassanShikyugakuKeisanKekkaToroku {
         List<KogakuGassanShikyuGakuKeisanKekkaRelateEntity> entityList;
         if (履歴表示) {
             entityList = mapper.select支給額計算結果履歴チェックオン(pram);
-            if (entityList == null) {
-                return null;
+            if (entityList.isEmpty()) {
+                return resultList;
             }
         } else {
             entityList = mapper.select支給額計算結果履歴チェックオフ(pram);
-            if (entityList == null) {
-                return null;
+            if (entityList.isEmpty()) {
+                return resultList;
             }
         }
         for (KogakuGassanShikyuGakuKeisanKekkaRelateEntity entity : entityList) {

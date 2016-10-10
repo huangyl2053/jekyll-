@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class RiyoshaFutangakuGemmenNinteishaList {
 
-    private final DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter batchparameter
-            = new DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter();
     private static final RString 認定者リスト = new RString("ninteisha");
     private static final RString 両方 = new RString("ryoho");
     private static final RString 旧措置者のみ = new RString("kyusochishaNomi");
@@ -58,6 +56,8 @@ public class RiyoshaFutangakuGemmenNinteishaList {
      * @return 利用者負担額減免認定者リスト（画面）バッチパラメター
      */
     public DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter createRiyoshaFutangakuGemmenNinteishaIchiranParameter(RiyoshaFutanGenmenListDiv div) {
+        DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter batchparameter
+                = new DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter();
         if (div.getRadTaishoList().getSelectedKey().equals(認定者リスト)) {
             batchparameter.set対象リスト(TargetList.認定者リスト);
             batchparameter.set帳票ID(ReportIdDBD.DBD200013.getReportId().value());
@@ -131,6 +131,8 @@ public class RiyoshaFutangakuGemmenNinteishaList {
      * @return bparamt
      */
     public DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter set受給者区分の設定(RiyoshaFutanGenmenListDiv div) {
+        DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter batchparameter
+                = new DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter();
         RString jukyushakubun = div.getRadJukyushaKubun().getSelectedKey();
         if (jukyushakubun.equals(被保険者)) {
             batchparameter.set受給者区分(JukyushaKubun2.被保険者);
