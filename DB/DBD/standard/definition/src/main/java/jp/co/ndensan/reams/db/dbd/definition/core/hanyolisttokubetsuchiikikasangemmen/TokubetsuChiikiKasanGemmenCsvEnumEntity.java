@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 汎用リスト出力(特別地域加算減免)_EnumEntity処理クラスです。
  *
- * @author x_wangtt2
+ * @reamsid_L DBD-3910-030 panxiaobo
  */
 public enum TokubetsuChiikiKasanGemmenCsvEnumEntity {
 
