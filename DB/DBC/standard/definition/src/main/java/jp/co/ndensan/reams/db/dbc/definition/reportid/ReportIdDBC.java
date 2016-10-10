@@ -758,7 +758,15 @@ public enum ReportIdDBC {
     /**
      * 住宅改修理由書作成手数料支給（不支給）決定通知書 帳票ＩＤです。
      */
-    DBC100044(new ReportId("DBC100044_JutakuKaishuRiyushoSakuseiTesuryoKetteiTsuchisho"), new RString("住宅改修理由書作成手数料支給（不支給）決定通知書"));
+    DBC100044(new ReportId("DBC100044_JutakuKaishuRiyushoSakuseiTesuryoKetteiTsuchisho"), new RString("住宅改修理由書作成手数料支給（不支給）決定通知書")),
+    /**
+     * 振込明細一覧表（事業高額） 帳票ＩＤです。
+     */
+    DBC200102(new ReportId("DBC200102_FurikomiMeisaiIchiranJigyoKogaku"), new RString("振込明細一覧表（事業高額）")),
+    /**
+     * 振込明細一覧表（事業高額合算） 帳票ＩＤです。
+     */
+    DBC200103(new ReportId("DBC200103_FurikomiMeisaiIchiranJigyoKogakuGassan"), new RString("振込明細一覧表（事業高額合算）"));
 
     private final ReportId reportId;
 

@@ -40,25 +40,20 @@ public class HokenshaKyufujissekiOutPageBreak extends PageBreaker<KyufuJisekiJoh
         if (this.breakKeysList.contains(HokenshaKyufujissekiOutOrder.保険者番号.get項目ID())
                 && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
             return true;
-            // TODO 帳票に郵便番号がない。
         } else if (this.breakKeysList.contains(HokenshaKyufujissekiOutOrder.郵便番号.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
             return true;
-            // TODO 帳票に町域コードがない。
         } else if (this.breakKeysList.contains(HokenshaKyufujissekiOutOrder.町域コード.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
             return true;
-            // TODO 帳票に行政区コードがない。
         } else if (this.breakKeysList.contains(HokenshaKyufujissekiOutOrder.行政区コード.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
             return true;
-            // TODO 帳票に氏名５０音カナがない。
         } else if (this.breakKeysList.contains(HokenshaKyufujissekiOutOrder.氏名５０音カナ.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
             return true;
-            // TODO 帳票に市町村コードがない。
         } else if (this.breakKeysList.contains(HokenshaKyufujissekiOutOrder.市町村コード.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             return true;
         } else if (this.breakKeysList.contains(HokenshaKyufujissekiOutOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
