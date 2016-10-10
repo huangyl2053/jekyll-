@@ -999,14 +999,14 @@ public class HanyoListParamHandler {
     }
 
     private FlexibleDate get日付範囲From() {
-        if (範囲KEY.equals(div.getRadChushutsuJokenB2().getSelectedKey())) {
+        if (範囲KEY.equals(div.getRadChushutsuJokenB2().getSelectedKey()) && div.getTxtChushutsuHani().getFromValue() != null) {
             return new FlexibleDate(div.getTxtChushutsuHani().getFromValue().toDateString());
         }
         return FlexibleDate.EMPTY;
     }
 
     private FlexibleDate get日付範囲To() {
-        if (範囲KEY.equals(div.getRadChushutsuJokenB2().getSelectedKey())) {
+        if (範囲KEY.equals(div.getRadChushutsuJokenB2().getSelectedKey()) && div.getTxtChushutsuHani().getToValue() != null) {
             return new FlexibleDate(div.getTxtChushutsuHani().getToValue().toDateString());
         }
         return FlexibleDate.EMPTY;
