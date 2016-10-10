@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyin
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp3Entity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp4Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 基準収入額適用申請書_年次分作成のMapperです
@@ -149,7 +148,7 @@ public interface IKijunsyunyunenjiMapper {
      * @param para UpdTaishoSeitaiyinTemp5ProcessMybatisParameter
      * @return 件数 int
      */
-    List<DbT7022ShoriDateKanriEntity> select処理日付管理マスタ(UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para);
+    int select処理日付管理マスタ(UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para);
 
     /**
      * 対象世帯員クラスTempに更新。
