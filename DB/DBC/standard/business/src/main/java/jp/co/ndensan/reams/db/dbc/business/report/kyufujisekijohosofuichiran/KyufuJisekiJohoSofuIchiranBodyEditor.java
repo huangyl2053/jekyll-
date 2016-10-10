@@ -133,6 +133,14 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
             source.gokeiKensu = doカンマ編集(合計件数).concat(件数);
         }
 
+        source.yubinNo = 被保険者一時.getYubinNo();
+        source.choikiCode = 被保険者一時.getChoikiCode();
+        source.gyoseikuCode = 被保険者一時.getGyoseikuCode();
+        source.shimei50onKana = 被保険者一時.getShimei50onKana();
+        if (被保険者一時.getShichosonCode() != null) {
+            source.shichosonCode = 被保険者一時.getShichosonCode().value();
+        }
+
         return source;
     }
 

@@ -102,6 +102,16 @@ public class KyufuJisekiJohoSofuIchiranSource implements IReportSource {
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportItem(name = "yubinNo", length = 8, order = 43)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 8, order = 44)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 8, order = 45)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 8, order = 46)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 8, order = 47)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

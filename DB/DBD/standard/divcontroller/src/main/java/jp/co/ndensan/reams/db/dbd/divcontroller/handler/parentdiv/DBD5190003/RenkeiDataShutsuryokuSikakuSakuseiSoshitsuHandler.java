@@ -5,16 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190003;
 
+import jp.co.ndensan.reams.db.dbd.business.core.kaigoninteihokaiseikanri.HokaiseiShikoYMDToKoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519003.DBD519003_YokaigoNinteiSoshitsuDataSakusei;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190003.RenkeiDataShutsuryokuSikakuSakuseiSoshitsuDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5190001.RenkeiDataSakuseiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbd.service.core.dbd5190002.RenekeiDataSakuseiFourMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -67,6 +70,7 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
             }
         }
         初期活性制御();
+        出力対象IF制御();
     }
 
     private void 今回開始データ処理(YMDHMS yMDHMS) {
@@ -102,11 +106,9 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
      */
     public void onClick_radIfShubetu() {
         if (IF種別_新.equals(div.getRadIfShubetu().getSelectedKey())) {
-            div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_新));
-            div.getTxtNewFileName().setDisabled(true);
+            iF種別新画面表示();
         } else {
-            div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_旧));
-            div.getTxtNewFileName().setDisabled(true);
+            iF種別旧画面表示();
         }
     }
 
@@ -134,6 +136,33 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
         }
         parameter.setHanteiiraiichiranhyou(div.getRadInsatsuDay().getSelectedKey());
         return parameter;
+    }
+
+    private void 出力対象IF制御() {
+        FlexibleDate 法改正施行年月日 = get法改正施行年月日と厚労省IF識別コード().get法改正施行年月日();
+        if (法改正施行年月日.isBefore(FlexibleDate.getNowDate())) {
+            div.getRadIfShubetu().setSelectedKey(IF種別_新);
+            div.getRadIfShubetu().setDisabled(true);
+            iF種別新画面表示();
+        } else {
+            div.getRadIfShubetu().setSelectedKey(IF種別_旧);
+            div.getRadIfShubetu().setDisabled(false);
+            iF種別旧画面表示();
+        }
+    }
+
+    private HokaiseiShikoYMDToKoroshoIfShikibetsuCode get法改正施行年月日と厚労省IF識別コード() {
+        return RenekeiDataSakuseiFourMasterManager.createInstance().get法改正施行年月日と厚労省IF識別コード();
+    }
+
+    private void iF種別新画面表示() {
+        div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_新));
+        div.getTxtNewFileName().setDisabled(true);
+    }
+
+    private void iF種別旧画面表示() {
+        div.getTxtNewFileName().setValue(getDBEConfigValue(ConfigNameDBE.資格喪失_死亡_データ送信ファイル名_旧));
+        div.getTxtNewFileName().setDisabled(true);
     }
 
 }
