@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKogakuHanteiEraaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -29,11 +31,17 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess2 extends BatchProcessBas
             + "select給付実績中間事業高額一時の作成2");
     private static final RString TABLE_給付実績中間事業高額一時2 = new RString("TempKyufujissekiTyukannJigyo2");
     private static final RString TABLE_給付実績中間事業高額一時3 = new RString("TempKyufujissekiTyukannJigyo3");
+    private static final RString TABLE_給付実績中間事業高額一時5 = new RString("TempKyufujissekiTyukannJigyo5");
+    private static final RString TABLE_事業高額判定エラー一時 = new RString("TempJigyoKogakuHanteiEraa");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter2;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter3;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter kyufujissekiTyukannWriter5;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter jigyoKogakuHanteiEraaWriter;
 
     @Override
     protected void beforeExecute() {
@@ -48,9 +56,13 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess2 extends BatchProcessBas
     @Override
     protected void createWriter() {
         kyufujissekiTyukannWriter2 = new BatchEntityCreatedTempTableWriter(
-                TABLE_給付実績中間事業高額一時2, TempKyufujissekiTyukannEntity.class);
+                TABLE_給付実績中間事業高額一時2, TempKyufujissekiTyukannJigyoEntity.class);
         kyufujissekiTyukannWriter3 = new BatchEntityCreatedTempTableWriter(
-                TABLE_給付実績中間事業高額一時3, TempKyufujissekiTyukannEntity.class);
+                TABLE_給付実績中間事業高額一時3, TempKyufujissekiTyukannJigyoEntity.class);
+        kyufujissekiTyukannWriter5 = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績中間事業高額一時5, TempKyufujissekiTyukannJigyoEntity.class);
+        jigyoKogakuHanteiEraaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額判定エラー一時, TempKogakuHanteiEraaEntity.class);
     }
 
     @Override
@@ -64,6 +76,8 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess2 extends BatchProcessBas
     @Override
     protected void afterExecute() {
         kyufujissekiTyukannWriter3.getInsertCount();
+        kyufujissekiTyukannWriter5.getInsertCount();
+        jigyoKogakuHanteiEraaWriter.getInsertCount();
     }
 
     private void set給付実績基本情報(TempKyufujissekiTyukannEntity entity, DbT3017KyufujissekiKihonEntity 実績基本) {
