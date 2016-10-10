@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseish
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.CreateTaishoSetaiyinProcessMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -133,7 +134,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString RSTRING_1 = new RString("1");
-    private static final RString RSTRING_0 = new RString("0");
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.get宛先宛名");
@@ -143,7 +143,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private static final RString チェック項目名 = new RString("住所");
     private static final RString 定数_住所 = new RString("住所");
     private static final RString ファイル名_前 = new RString("KijunShunyugakuTekiyoShinseishoHakkoIchiran_");
-    private static final RString 記号_ = new RString("KijunShunyugakuTekiyoShinseishoHakkoIchiran_");
+    private static final RString 記号_ = new RString("_");
     private static final RString ファイル名_後 = new RString(".csv");
 
     private ChohyoSeigyoKyotsu 帳票制御共通;
@@ -297,7 +297,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
             this.write帳票(文字列長, 対象世帯員, kijunEntity, kijunEntity1);
 
-            if (this.parameter.get一覧表CSV出力フラグ() && RSTRING_0.equals(this.parameter.get抽出条件())) {
+            if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
                 TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(対象世帯員);
                 eucCsvWriter.writeLine(申請書発行一覧CSV);
             }
@@ -309,7 +309,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             }
             this.exEntity = entity;
         }
-        if (this.parameter.get一覧表CSV出力フラグ() && RSTRING_0.equals(this.parameter.get抽出条件())) {
+        if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
             申請一覧Entity = this.set申請一覧Entity(entity);
             KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
                     申請一覧Entity, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目リスト, parameter.get処理年度());
@@ -336,7 +336,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
             this.write帳票(文字列長, 対象世帯員, kijunEntity, kijunEntity1);
 
-            if (this.parameter.get一覧表CSV出力フラグ() && RSTRING_1.equals(this.parameter.get抽出条件())) {
+            if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
                 TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(対象世帯員);
                 eucCsvWriter.writeLine(申請書発行一覧CSV);
             }
@@ -355,7 +355,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
                 kijunReport.writeBy(dBC100063SourceWriter1);
                 index++;
-            } else if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
+            }
+            if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter1);
                 index164++;
@@ -367,7 +368,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
                 kijunReport.writeBy(dBC100063SourceWriter0);
                 index++;
-            } else if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
+            }
+            if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter0);
                 index164++;
