@@ -11,76 +11,76 @@
         <id property="高額介護サービス費支給申請Entity.hihokenshaNo" column="dbT3056KogakuShikyuShinsei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="高額介護サービス費支給判定結果Entity.serviceTeikyoYM" column="dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="高額介護サービス費支給申請Entity.serviceTeikyoYM" column="dbT3056KogakuShikyuShinsei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="高額介護サービス費支給判定結果Entity.shoKisaiHokenshaNo" column="dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <id property="高額介護サービス費支給申請Entity.shoKisaiHokenshaNo" column="dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <id property="高額介護サービス費支給判定結果Entity.rirekiNo" column="dbT3057KogakuShikyuHanteiKekka_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="高額介護サービス費支給判定結果Entity.shoKisaiHokenshaNo" column="dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給申請Entity.shoKisaiHokenshaNo" column="dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給判定結果Entity.rirekiNo" column="dbT3057KogakuShikyuHanteiKekka_rirekiNo" />
         <id property="高額介護サービス費支給申請Entity.rirekiNo" column="dbT3056KogakuShikyuShinsei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <id property="高額介護サービス費支給審査決定Entity.hihokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="高額介護サービス費支給審査決定Entity.serviceTeikyoYM" column="dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="高額介護サービス費支給審査決定Entity.shoKisaiHokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <id property="高額介護サービス費支給審査決定Entity.rirekiNo" column="dbT3058KogakuShikyuShinsaKettei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="高額介護サービス費支給審査決定Entity.shoKisaiHokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給審査決定Entity.rirekiNo" column="dbT3058KogakuShikyuShinsaKettei_rirekiNo" />
         <association property="高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
-       <association property="高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"/>
-       <association property="高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
-    </resultMap> 
+        <association property="高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"/>
+        <association property="高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
+    </resultMap>
     <select id="get高額データ取得"
             resultMap="resultMap_HanyouRisutoSyuturyokuEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KogakuFurikomiMybatisParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KogakuFurikomiMybatisParameter"
             fetchSize="500" resultOrdered="true">
         SELECT
-            判定結果.*,
-            支給申請.*,
-            審査決定.*
+        判定結果.*,
+        支給申請.*,
+        審査決定.*
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.noDeleted_DbT3057KogakuShikyuHanteiKekka" />) AS 判定結果
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.noDeleted_DbT3057KogakuShikyuHanteiKekka" />) AS 判定結果
         INNER JOIN
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.noDeleted_DbT3056KogakuShikyuShinsei" />) AS 支給申請
-            ON
-              判定結果."dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" = 支給申請."dbT3056KogakuShikyuShinsei_hihokenshaNo"
-            AND  判定結果."dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" = 支給申請."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
-            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" = 支給申請."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo"
-            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_rirekiNo" = 支給申請."dbT3056KogakuShikyuShinsei_rirekiNo"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.noDeleted_DbT3056KogakuShikyuShinsei" />) AS 支給申請
+        ON
+        判定結果."dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" = 支給申請."dbT3056KogakuShikyuShinsei_hihokenshaNo"
+        AND  判定結果."dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" = 支給申請."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
+        AND 判定結果."dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" = 支給申請."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo"
+        AND 判定結果."dbT3057KogakuShikyuHanteiKekka_rirekiNo" = 支給申請."dbT3056KogakuShikyuShinsei_rirekiNo"
         LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.noDeleted_DbT3058KogakuShikyuShinsaKettei" />) AS 審査決定
-            ON  判定結果."dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" = 審査決定."dbT3058KogakuShikyuShinsaKettei_hihokenshaNo"
-            AND  判定結果."dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" = 審査決定."dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM"
-            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" = 審査決定."dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo"
-            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_rirekiNo" = 審査決定."dbT3058KogakuShikyuShinsaKettei_rirekiNo"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.noDeleted_DbT3058KogakuShikyuShinsaKettei" />) AS 審査決定
+        ON  判定結果."dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" = 審査決定."dbT3058KogakuShikyuShinsaKettei_hihokenshaNo"
+        AND  判定結果."dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" = 審査決定."dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM"
+        AND 判定結果."dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" = 審査決定."dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo"
+        AND 判定結果."dbT3057KogakuShikyuHanteiKekka_rirekiNo" = 審査決定."dbT3058KogakuShikyuShinsaKettei_rirekiNo"
         WHERE
-            ((判定結果."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" ='1'
-                AND 審査決定."dbT3058KogakuShikyuShinsaKettei_shikyuKubunCode"='1')
-            OR (判定結果."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" ='2'
-                AND (判定結果."dbT3057KogakuShikyuHanteiKekka_shikyuKubunCode"='1')))
-           <if test="口座の場合">
-           AND 支給申請."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" ='2'
-           </if> 
-           <if test="窓口の場合">
-           AND 支給申請."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode"='1'
-           </if> 
-           <if test="振込データ作成済を除く">
-           AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" =''
-           </if>     
-           <if test="振込データ作成済のみ">
-           AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" =#{対象作成年月日}
-           </if> 
-           <if test="全て">
-           AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]>''
-           </if>   
-           <if test="再処理フラグT">
-           AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" IN('',#{対象作成年月日})
-           </if>  
-           <if test="開始年月日T">
-           AND #{開始年月日}<![CDATA[<=]]>判定結果."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD"
-           </if> 
-           <if test="終了年月日T">
-           AND 判定結果."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" <![CDATA[<=]]> #{終了年月日}
-           </if> 
-           <if test="開始受取年月T">
-           AND  #{開始受取年月}<![CDATA[<=]]>審査決定."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"
-           </if> 
-           <if test="終了受取年月T">
-           AND 審査決定."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<=]]> #{終了受取年月}
-           </if> 
-           AND 判定結果."dbT3057KogakuShikyuHanteiKekka_isDeleted" = FALSE
+        ((判定結果."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" ='1'
+        AND 審査決定."dbT3058KogakuShikyuShinsaKettei_shikyuKubunCode"='1')
+        OR (判定結果."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" ='2'
+        AND (判定結果."dbT3057KogakuShikyuHanteiKekka_shikyuKubunCode"='1')))
+        <if test="口座の場合">
+            AND 支給申請."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" ='2'
+        </if>
+        <if test="窓口の場合">
+            AND 支給申請."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode"='1'
+        </if>
+        <if test="振込データ作成済を除く">
+            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" =''
+        </if>
+        <if test="振込データ作成済のみ">
+            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" =#{対象作成年月日}
+        </if>
+        <if test="全て">
+            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]>''
+        </if>
+        <if test="再処理フラグT">
+            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" IN('',#{対象作成年月日})
+        </if>
+        <if test="開始年月日T">
+            AND #{開始年月日}<![CDATA[<=]]>判定結果."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD"
+        </if>
+        <if test="終了年月日T">
+            AND 判定結果."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" <![CDATA[<=]]> #{終了年月日}
+        </if>
+        <if test="開始受取年月T">
+            AND  #{開始受取年月}<![CDATA[<=]]>審査決定."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"
+        </if>
+        <if test="終了受取年月T">
+            AND 審査決定."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<=]]> #{終了受取年月}
+        </if>
+        AND 判定結果."dbT3057KogakuShikyuHanteiKekka_isDeleted" = FALSE
     </select>
 </mapper>

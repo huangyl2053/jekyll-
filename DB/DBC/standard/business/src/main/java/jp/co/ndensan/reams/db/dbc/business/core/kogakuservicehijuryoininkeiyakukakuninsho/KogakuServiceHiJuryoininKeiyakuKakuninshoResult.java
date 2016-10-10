@@ -31,6 +31,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninshoResult {
     private RString 事業所郵便番号;
     private RString 事業所電話番号;
     private RString 事業所所在地;
+    private RString 利用者負担上限額;
     private RString 通知文2;
     private RString 郵便番号;
     private RString 行政区名;

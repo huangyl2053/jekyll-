@@ -162,7 +162,12 @@ public class RenkeiDataTorikomiHandler {
         DBE192001_NnteiShinseiInfoUploadParameter batchParameter = new DBE192001_NnteiShinseiInfoUploadParameter();
         List<RString> list = new ArrayList<>();
         List<ShiseiDataParameter> parameterList = new ArrayList<>();
-        batchParameter.set市町村コード(div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value());
+        RString 市町村コード = div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value();
+        if (RString.isNullOrEmpty(市町村コード)) {
+            batchParameter.set市町村コード(new RString("000000"));
+        } else {
+            batchParameter.set市町村コード(市町村コード);
+        }
         for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems()) {
             list.add(row.getFileName());
         }
@@ -172,7 +177,7 @@ public class RenkeiDataTorikomiHandler {
             dataParameter.set保険者番号(row.getHokenshano());
             dataParameter.set被保険者番号(row.getHihono());
             dataParameter.set認定申請日(row.getNinteishinseiymd().getValue().toDateString());
-            dataParameter.set申請種別コード(row.getShinseikubunshinseiji());
+            dataParameter.set申請種別コード(NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseikubunshinseiji().toString()).getコード());
             parameterList.add(dataParameter);
         }
         batchParameter.set申請情報データリスト(parameterList);
