@@ -88,8 +88,7 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
             賦課Temp情報 = new DbT2002FukaJohoTempTableEntity();
             対象者の情報 = 対象者の情報を編集(t);
         }
-        set特徴期期別金額(new Decimal(t.get調定額().toString()),
-                Integer.parseInt(t.get期().toString()), 賦課Temp情報);
+        set特徴期期別金額(t.get調定額(), t.get期(), 賦課Temp情報);
         通知書番号 = t.get賦課Newest().getTsuchishoNo();
 
     }

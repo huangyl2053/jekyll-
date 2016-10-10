@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport;
 
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -155,8 +155,7 @@ public class FuchoKariKeisanGoFukaEntity {
     private Decimal 普徴収入額14;
     private UaFt200FindShikibetsuTaishoEntity 宛名の情報;
     private RString 特別徴収業務者コード;
-    //TODO 介護賦課前年度Tempと同じ
-    private DbT2002FukaEntity 前年度賦課の情報;
+    private FukaJohoTempEntity 前年度賦課の情報;
     private TsuchishoNo 資格適用対象の通知書番号;
 
 }

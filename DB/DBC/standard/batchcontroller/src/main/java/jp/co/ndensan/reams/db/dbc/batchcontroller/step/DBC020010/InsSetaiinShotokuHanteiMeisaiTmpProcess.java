@@ -137,7 +137,7 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Te
             } else {
                 判定明細Entity.setSetaiKazeiKubun(KazeiKubun.非課税.getコード());
             }
-            tableWriter.update(判定明細Entity);
+            mapper.update世帯員所得判定明細一時(判定明細Entity);
         }
     }
 }

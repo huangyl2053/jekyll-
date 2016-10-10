@@ -24,6 +24,7 @@ public class KogakuKetteiTsuchiShoSealer2Report extends Report<KogakuKetteiTsuch
     private final KogakuKetteiTsuchiShoEntity 帳票情報;
     private final NinshoshaSource 認証者ソースデータ;
     private final RString 文書番号;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -32,18 +33,20 @@ public class KogakuKetteiTsuchiShoSealer2Report extends Report<KogakuKetteiTsuch
      * @param 帳票情報 KogakuKetteiTsuchiShoEntity
      * @param 認証者ソースデータ NinshoshaSource
      * @param 文書番号 RString
-     *
+     * @param 連番 int
      */
     public KogakuKetteiTsuchiShoSealer2Report(
             List<RString> titleList,
             KogakuKetteiTsuchiShoEntity 帳票情報,
             NinshoshaSource 認証者ソースデータ,
-            RString 文書番号) {
+            RString 文書番号,
+            int 連番) {
 
         this.titleList = titleList;
         this.帳票情報 = 帳票情報;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.文書番号 = 文書番号;
+        this.連番 = 連番;
     }
 
     @Override
@@ -52,7 +55,8 @@ public class KogakuKetteiTsuchiShoSealer2Report extends Report<KogakuKetteiTsuch
                 titleList,
                 帳票情報,
                 認証者ソースデータ,
-                文書番号);
+                文書番号,
+                連番);
         IKogakuKetteiTsuchiShoSealer2Builder builder = new KogakuKetteiTsuchiShoSealer2Builder(editor);
         writer.writeLine(builder);
     }

@@ -62,8 +62,7 @@ public class InsFukaTempProcess extends BatchProcessBase<FukaTempJouhouEntity> {
             賦課Temp情報 = new DbT2002FukaJohoTempTableEntity();
             get処理前賦課Temp情報(賦課Temp情報, t.get賦課情報());
         }
-        set特徴期期別金額(new Decimal(t.get調定額().toString()),
-                Integer.parseInt(t.get期().toString()), 賦課Temp情報);
+        set特徴期期別金額(t.get調定額(), t.get期(), 賦課Temp情報);
         通知書番号 = t.get賦課情報().getTsuchishoNo();
 
     }

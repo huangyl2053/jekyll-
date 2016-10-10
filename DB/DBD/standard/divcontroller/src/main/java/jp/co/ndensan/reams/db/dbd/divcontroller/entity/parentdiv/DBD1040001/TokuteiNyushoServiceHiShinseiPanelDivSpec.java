@@ -157,7 +157,7 @@ public enum TokuteiNyushoServiceHiShinseiPanelDivSpec implements IPredicate<Toku
         @Override
         public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
             TokubetsuChiikiKasanGemmenService service = TokubetsuChiikiKasanGemmenService.createIntance();
-            return service.exists確認番号In同一年度(div.getShinseiDetail().getTxtTekiyoYMD().getValue(),
+            return !service.exists確認番号In同一年度(div.getShinseiDetail().getTxtTekiyoYMD().getValue(),
                     div.getShinseiDetail().getTxtKakuninNo().getValue());
         }
     },

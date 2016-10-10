@@ -281,6 +281,7 @@ public class JissekiFutangakuDataTempEntity
     private Decimal jikoFutangakuWork105;
     private Decimal jikoFutangakuWork106;
     private Decimal jikoFutangakuWork107;
+    private RString serviceTeikyoYMs;
     private Decimal uchisuJikoFutanGaku004;
     private Decimal uchisuJikoFutanGaku005;
     private Decimal uchisuJikoFutanGaku006;

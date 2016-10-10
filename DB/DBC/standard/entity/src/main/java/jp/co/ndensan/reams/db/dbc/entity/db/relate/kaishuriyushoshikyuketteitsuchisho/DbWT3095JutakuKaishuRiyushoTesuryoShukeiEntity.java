@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 請求集計一時テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBC-2850-030 zuotao
  */
 @lombok.Getter
 @lombok.Setter

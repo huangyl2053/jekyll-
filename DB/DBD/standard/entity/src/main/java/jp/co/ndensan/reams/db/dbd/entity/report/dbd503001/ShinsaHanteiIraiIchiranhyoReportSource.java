@@ -19,12 +19,14 @@ public class ShinsaHanteiIraiIchiranhyoReportSource implements IReportSource {
     @ReportItem(name = "cityName", length = 20, order = 2)
     public RString cityName;
     @ReportItem(name = "hokenshaNo", length = 6, order = 3)
+    @ReportExpandedInfo(id = "001", code = "0003", name = "保険者番号")
     public RString hokenshaNo;
     @ReportItem(name = "printTimeStamp", length = 34, order = 4)
     public RString printTimeStamp;
     @ReportItem(name = "listIraiichiranhyo1_1", length = 3, order = 5)
     public RString listIraiichiranhyo1_1;
     @ReportItem(name = "listIraiichiranhyo1_2", length = 10, order = 6)
+    @ReportExpandedInfo(id = "002", code = "0003", name = "被保険者番号")
     public RString listIraiichiranhyo1_2;
     @ReportItem(name = "listIraiichiranhyo3_1", length = 20, order = 7)
     public RString listIraiichiranhyo3_1;
@@ -57,9 +59,7 @@ public class ShinsaHanteiIraiIchiranhyoReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "reportId", order = 19)
     public RString reportId;
-    @ReportExpandedInfo(id = "001", code = "0003", name = "被保険者番号")
-    public RString hihokenshaNo;
-    @ReportPerson(id = "001", order = 21)
+    @ReportPerson(id = "003")
     public RString shikibetsuCode;
 
 // </editor-fold>

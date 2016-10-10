@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.InsSetaiyinShotokuJyohoTemp1ProcessMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsSetaiyinShotokuJyohoTemp1ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity;
@@ -26,7 +27,6 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
     private InsSetaiyinShotokuJyohoTemp1ProcessParameter parameter;
     private InsSetaiyinShotokuJyohoTemp1ProcessMybatisParameter para;
     private static final RString 世帯員把握入力テーブル = new RString("TmpSetaiHaaku");
-    private static final RString RSTRING_0 = new RString("0");
     private static final RString READ_DATA_ID0 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.select処理年度の対象者");
     private static final RString READ_DATA_ID1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
@@ -43,7 +43,7 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
 
     @Override
     protected IBatchReader createReader() {
-        if (RSTRING_0.equals(this.parameter.get抽出条件())) {
+        if (ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
             return new BatchDbReader(READ_DATA_ID0, para);
         } else {
             return new BatchDbReader(READ_DATA_ID1, para);

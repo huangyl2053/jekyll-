@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitai
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp4Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp5Process;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190020.DBC190020_kijunsyunyunenjiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsSetaiyinShotokuJyohoTemp1ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -62,7 +63,7 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
 
     @Override
     protected void defineFlow() {
-        if (!RSTRING_2.equals(getParameter().get抽出条件())) {
+        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
             executeStep(世帯員所得情報一時テーブルに登録1);
             executeStep(世帯員把握_TEMP_2);
             executeStep(世帯員所得情報一時テーブルに更新);

@@ -99,12 +99,28 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
      * @param shoriDateKanriList <ShoriDateKanri>
      */
     public void onLoad(List<ShoriDateKanri> shoriDateKanriList) {
+        if (is合併あり()) {
+            div.getTblJikkoTani().getRadGappeiShichoson().setVisible(true);
+            div.getTblJikkoTani().getRadGappeiShichoson().setDisabled(true);
+            div.getTblJikkoTani().getRadKoikiRengo().setDisplayNone(true);
+            if (!RString.isNullOrEmpty(div.getRadJikkoTaniKakoShukeiKekka().getSelectedKey())) {
+                div.getTblJikkoTani().getRadGappeiShichoson().setDisabled(false);
+            }
+        } else if (is広域()) {
+            div.getTblJikkoTani().getRadKoikiRengo().setVisible(true);
+            div.getTblJikkoTani().getRadKoikiRengo().setDisabled(true);
+            div.getTblJikkoTani().getRadGappeiShichoson().setDisplayNone(true);
+            if (!RString.isNullOrEmpty(div.getRadJikkoTaniKakoShukeiKekka().getSelectedKey())) {
+                div.getTblJikkoTani().getRadKoikiRengo().setDisabled(false);
+            }
+        }
         set合併市町村用保険者選択ラジオボタン();
         set広域構成市町村用保険者選択ラジオボタン();
         set市町村選択ダイアログボタン();
         set過去報告年月(shoriDateKanriList);
         set審査年月決定年月();
         set日付時刻();
+        setすべて選択();
         setすべて選択チェックボックス();
     }
 
@@ -113,7 +129,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             div.getTblJikkoTani().getRadGappeiShichoson().setVisible(true);
         } else if (!is合併あり() && is単一()
                 || is広域()) {
-            div.getTblJikkoTani().getRadGappeiShichoson().setVisible(false);
+            div.getTblJikkoTani().getRadGappeiShichoson().setDisplayNone(true);
         }
     }
 
@@ -121,7 +137,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         if (is広域()) {
             div.getTblJikkoTani().getRadKoikiRengo().setVisible(true);
         } else if (is単一()) {
-            div.getTblJikkoTani().getRadKoikiRengo().setVisible(false);
+            div.getTblJikkoTani().getRadKoikiRengo().setDisplayNone(true);
         }
     }
 
@@ -1013,7 +1029,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         param.setShusyoYm(div.getTxtShukeiYM5Bak());
         param.setKetteiYm(get決定年月());
         if (div.getTxtShukeiYM7().getValue() != null) {
-            param.setShukeiNendo(div.getTxtShukeiYM7().getValue().seireki().toDateString());
+            param.setShukeiNendo(div.getTxtShukeiYM7().getValue().getYearMonth().toDateString());
         }
         return getバッチID(param);
     }
@@ -1033,37 +1049,37 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private List<RString> get集計年月() {
         List<RString> shuukeiNengetu = new ArrayList<>();
         if (div.getTxtShukeiYM1().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().getYearMonth());
+            shuukeiNengetu.add(new RString(div.getTxtShukeiYM1().getValue().getYearMonth().toString()));
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM2().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM1().getValue().seireki().getYearMonth());
-        } else {
-            shuukeiNengetu.add(RString.EMPTY);
-        }
-        if (div.getTxtShukeiYM4().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM4().getValue().seireki().getYearMonth());
+            shuukeiNengetu.add(new RString(div.getTxtShukeiYM2().getValue().getYearMonth().toString()));
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM3().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM3().getValue().seireki().getYearMonth());
+            shuukeiNengetu.add(new RString(div.getTxtShukeiYM3().getValue().getYearMonth().toString()));
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
+        if (div.getTxtShukeiYM4().getValue() != null) {
+            shuukeiNengetu.add(new RString(div.getTxtShukeiYM4().getValue().getYearMonth().toString()));
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM5().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM5().getValue().seireki().getYearMonth());
+            shuukeiNengetu.add(new RString(div.getTxtShukeiYM5().getValue().getYearMonth().toString()));
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM6().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM6().getValue().seireki().getYearMonth());
+            shuukeiNengetu.add(new RString(div.getTxtShukeiYM6().getValue().getYearMonth().toString()));
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM7().getValue() != null) {
-            shuukeiNengetu.add(div.getTxtShukeiYM7().getValue().seireki().getYearMonth());
+            shuukeiNengetu.add(new RString(div.getTxtShukeiYM7().getValue().getYearMonth().toString()));
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
@@ -1083,7 +1099,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             nendo.add(RString.EMPTY);
         }
         if (!div.getTxtShukeiYM6().getValue().isEmpty()) {
-            nendo.add(div.getTxtShukeiYM6().getValue().seireki().toDateString());
+            nendo.add(div.getTxtShukeiYM6().getValue().getYear().toDateString());
         } else {
             nendo.add(RString.EMPTY);
         }
@@ -1300,12 +1316,12 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private List<RString> get決定年月() {
         List<RString> 決定年月 = new ArrayList<>();
         if (div.getTxtShukeiYM4().getValue() != null) {
-            決定年月.add(div.getTxtShukeiYM4().getValue().seireki().toDateString());
+            決定年月.add(div.getTxtShukeiYM4().getValue().getYearMonth().toDateString());
         } else {
             決定年月.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM7().getValue() != null) {
-            決定年月.add(div.getTxtShukeiYM7().getValue().seireki().toDateString());
+            決定年月.add(div.getTxtShukeiYM7().getValue().getYearMonth().toDateString());
         } else {
             決定年月.add(RString.EMPTY);
         }

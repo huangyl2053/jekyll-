@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080;
 
 import jp.co.ndensan.reams.db.dbc.business.core.dbc020080.DBC020080DataUtil;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.InsShiharaihohoHenkoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -24,20 +23,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class UpdJIssekiFutangakuTempProcess extends BatchProcessBase<JissekiFutangakuDataTempEntity> {
 
     private static final RString TABLE_NAME2 = new RString("JissekiFutangakuDataTemp2");
-    private static final RString PATH1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
-    private static final RString PATH2 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTempJigyobun");
-    private InsShiharaihohoHenkoTempProcessParameter parameter;
+    private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.get実績負担額データ2");
     private DBC020080DataUtil util;
-    private boolean isあり;
 
     @BatchWriter
     private IBatchTableWriter 実績負担額Writer;
 
     @Override
     protected void initialize() {
-        isあり = false;
         util = new DBC020080DataUtil();
     }
 
@@ -48,24 +42,18 @@ public class UpdJIssekiFutangakuTempProcess extends BatchProcessBase<JissekiFuta
 
     @Override
     protected IBatchReader createReader() {
-        RString path = parameter.is事業分フラグ() ? PATH2 : PATH1;
-        return new BatchDbReader(path);
+        return new BatchDbReader(PATH);
     }
 
     @Override
     protected void process(JissekiFutangakuDataTempEntity 実績負担額) {
-        loopeHandle(実績負担額);
-        実績負担額Writer.update(実績負担額);
+        if (loopeHandle(実績負担額)) {
+            実績負担額Writer.update(実績負担額);
+        }
     }
 
     private boolean loopeHandle(JissekiFutangakuDataTempEntity 実績負担額) {
         util.init自己負担額内数ワークエリア(実績負担額);
-        if (!util.judgeAgeLessThan75(実績負担額)) {
-            return false;
-        }
-
-//        TODO
-        return true;
-
+        return util.updJIssekiFutangakuTemp(実績負担額);
     }
 }

@@ -597,12 +597,12 @@ public class IryoHiKojoKakuninSinsei {
             おむつ使用証明書Entity.set住所２(編集後住所.substring(サーティ, シックスティ));
         }
         RString 氏名 = RString.EMPTY;
-        if (宛名情報.get住民種別().equals(JuminShubetsu.日本人)) {
+        if (宛名情報.get住民種別().equals(JuminShubetsu.日本人) || 宛名情報.get住民種別().equals(JuminShubetsu.住登外個人_日本人)) {
             氏名 = 宛名情報.get日本人氏名().getName().value();
             おむつ使用証明書Entity.set生年月日(宛名情報.get生年月日().toFlexibleDate()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        } else if (宛名情報.get住民種別().equals(JuminShubetsu.外国人)) {
+        } else if (宛名情報.get住民種別().equals(JuminShubetsu.外国人) || 宛名情報.get住民種別().equals(JuminShubetsu.住登外個人_外国人)) {
             氏名 = 宛名情報.get外国人氏名().getName().value();
             おむつ使用証明書Entity.set生年月日(宛名情報.get生年月日().toFlexibleDate().seireki()
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());

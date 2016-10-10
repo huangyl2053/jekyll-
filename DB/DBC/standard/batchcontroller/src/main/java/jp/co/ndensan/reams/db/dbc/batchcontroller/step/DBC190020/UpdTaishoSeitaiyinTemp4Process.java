@@ -37,6 +37,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.対象世帯員クラスTempに更新4");
     private UpdTaishoSeitaiyinTemp4Entity exEntity;
+    private static final int INT_0 = 0;
     private int index = 0;
     private List<UpdTaishoSeitaiyinTemp4Entity> entityList;
     private int ageLess16;
@@ -67,7 +68,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
 
     @Override
     protected void process(UpdTaishoSeitaiyinTemp4Entity entity) {
-        if (0 == index) {
+        if (INT_0 == index) {
             this.exEntity = entity;
             index++;
         } else {
@@ -95,7 +96,11 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
 
     @Override
     protected void afterExecute() {
-
+        if (INT_0 == this.entityList.size()) {
+            this.entityList.add(exEntity);
+            this.getAge(exEntity);
+            this.get課税所得_控除後Flage(exEntity);
+        }
         for (UpdTaishoSeitaiyinTemp4Entity forEntity : entityList) {
             TaishoSetaiinEntity 対象世帯員1 = forEntity.get対象世帯員1();
             対象世帯員1.setNennshouLess16Num(ageLess16);

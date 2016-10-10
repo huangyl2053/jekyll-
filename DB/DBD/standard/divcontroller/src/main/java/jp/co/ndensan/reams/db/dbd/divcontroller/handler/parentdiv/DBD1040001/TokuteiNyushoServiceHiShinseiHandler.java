@@ -617,7 +617,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinsei().getDgShinseiList().setDisabled(false);
         div.getShinseiDetail().getTxtShinseiYMD().setDisabled(true);
         div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(true);
-        div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
+        //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
         div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
         div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
         div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
@@ -668,7 +668,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinsei().getDgShinseiList().setDisabled(true);
         div.getShinseiDetail().getTxtShinseiYMD().setDisabled(false);
         div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(false);
-        div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
+        //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
         div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
         div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
         div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
@@ -734,7 +734,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         if (menuID.equals(申請メニュー)) {
             div.getShinseiDetail().getTxtShinseiYMD().setDisabled(false);
             div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(false);
-            div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
+            //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
             div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
             div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
             div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
@@ -749,7 +749,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         } else if (menuID.equals(承認メニュー)) {
             div.getShinseiDetail().getTxtShinseiYMD().setDisabled(true);
             div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(true);
-            div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
+            //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(true);
             div.getShinseiDetail().getRadKettaiKubun().setDisabled(false);
             div.getShinseiDetail().getTxtKettaiYMD().setDisabled(false);
             div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(false);
@@ -961,4 +961,28 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             return result;
         }
     }
+
+    /**
+     * ViewStateのComparatorです。
+     */
+    public static class TokuteiNyushoServiceHiShinseiComparator implements Comparator<TokubetsuChiikiKasanGemmenViewState> {
+
+        @Override
+        public int compare(TokubetsuChiikiKasanGemmenViewState s1, TokubetsuChiikiKasanGemmenViewState s2) {
+
+            int result = !s1.getTokubetsuchiikiKasanGemmen().get申請年月日().isBeforeOrEquals(s2.getTokubetsuchiikiKasanGemmen().get申請年月日())
+                    ? 1 : (s1.getTokubetsuchiikiKasanGemmen().get申請年月日().equals(s2.getTokubetsuchiikiKasanGemmen().get申請年月日()) ? 0 : -1);
+
+            if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
+                result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
+            }
+            if (result == 0 && EntityDataState.Added == s1.getState()) {
+                result = 1;
+            } else if (result == 0 && EntityDataState.Added == s2.getState()) {
+                result = -1;
+            }
+            return result;
+        }
+    }
+
 }
