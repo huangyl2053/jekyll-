@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * ＜中間DB＞高額合算支給決定通知書データentityクラスです。
@@ -49,10 +50,15 @@ public class KogakugassanJikofutangakuInfoHoseiTempEntity implements IDbAccessab
     /**
      * 《高額合算自己負担額エリア》
      */
+    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
+    @PrimaryKey
     private FlexibleYear taishoNendo;
+    @PrimaryKey
     private HokenshaNo hokenshaNo;
+    @PrimaryKey
     private RString shikyuShinseishoSeiriNo;
+    @PrimaryKey
     private int rirekiNo2;
     /**
      * 【連合会キー情報】
@@ -339,6 +345,7 @@ public class KogakugassanJikofutangakuInfoHoseiTempEntity implements IDbAccessab
     private Decimal yokunen_07_sumi_under_70KogakuShikyuGaku;
     private Decimal yokunen_07_sumi_70_74KogakuShikyuGaku;
     private RString yokunen_07_sumi_Tekiyo;
+
     private Decimal sumi_Gokei_JikoFutanGaku;
     private Decimal sumi_Gokei_70_74JikoFutanGaku;
     private Decimal sumi_Gokei_Under70KogakuShikyuGaku;
