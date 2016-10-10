@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KyufuJissekiRecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukyufuketteiin.KogakuKyufuKetteiReadCsvFileProcessParameter;
@@ -119,10 +120,6 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
     private RString 必須レコードなしの備考 = RString.EMPTY;
     private boolean 複数レコード不可フラグ = false;
     private RString 複数レコード不可の備考 = RString.EMPTY;
-    private static final RString エラー区分_キー項目不一致 = new RString("01");
-    private static final RString エラー区分_レコード構成不正 = new RString("02");
-    private static final RString エラー区分_必須レコードなし = new RString("03");
-    private static final RString エラー区分_複数レコード不可 = new RString("04");
 
     @Override
     protected void initialize() {
@@ -367,7 +364,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
 
     private void 組み合わせ不正登録(DbWT0002KokuhorenTorikomiErrorEntity errorTempentity, IBatchTableWriter tableWriter) {
         if (組み合わせ不正フラグ) {
-            errorTempentity.setErrorKubun(エラー区分_レコード構成不正);
+            errorTempentity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.レコード構成不正.getコード());
             errorTempentity.setBiko(組み合わせ不正の備考.substring(1));
             errorTempentity.setState(EntityDataState.Added);
             tableWriter.insert(errorTempentity);
@@ -376,7 +373,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
 
     private void 必須レコードなし登録(DbWT0002KokuhorenTorikomiErrorEntity errorTempentity, IBatchTableWriter tableWriter) {
         if (必須レコードなしフラグ) {
-            errorTempentity.setErrorKubun(エラー区分_必須レコードなし);
+            errorTempentity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.必須レコードなし.getコード());
             errorTempentity.setBiko(必須レコードなしの備考.substring(1));
             errorTempentity.setState(EntityDataState.Added);
             tableWriter.insert(errorTempentity);
@@ -385,7 +382,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
 
     private void 複数レコード不可登録(DbWT0002KokuhorenTorikomiErrorEntity errorTempentity, IBatchTableWriter tableWriter) {
         if (複数レコード不可フラグ) {
-            errorTempentity.setErrorKubun(エラー区分_複数レコード不可);
+            errorTempentity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.複数レコード不可.getコード());
             errorTempentity.setBiko(複数レコード不可の備考.substring(1));
             errorTempentity.setState(EntityDataState.Added);
             tableWriter.insert(errorTempentity);
@@ -410,7 +407,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
                     errorTempentity.setKey3(jouhouCsvEntity.getサービス提供年月());
                     errorTempentity.setKey4(jouhouCsvEntity.get事業所番号());
                     errorTempentity.setKey5(jouhouCsvEntity.get整理番号());
-                    errorTempentity.setErrorKubun(エラー区分_キー項目不一致);
+                    errorTempentity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.キー項目不一致.getコード());
                     errorTempentity.setState(EntityDataState.Added);
                     tableWriter.insert(errorTempentity);
                     listCsvShinseiJouhouCsvEntity.remove(index);
