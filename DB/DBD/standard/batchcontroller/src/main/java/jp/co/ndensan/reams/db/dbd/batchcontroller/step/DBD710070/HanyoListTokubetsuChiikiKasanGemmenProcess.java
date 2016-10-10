@@ -5,12 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710070;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbd.business.report.HanyoListTokubetsuChiikiKasanGemmenOrderby;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenCsvEnumEntity;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710070.HanyoListTokubetsuChiikiKasanGemmenProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenEucCsvEntity;
@@ -24,6 +29,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKomoku;
+import jp.co.ndensan.reams.db.dbz.business.report.hanyolist.HanyoListReport;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
@@ -37,6 +44,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Ninchish
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
+import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -54,6 +64,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder._SetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.PageBreakType;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.SortOrder;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.NewpageType;
@@ -65,9 +76,14 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -85,6 +101,8 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -97,6 +115,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -183,24 +202,53 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     private static final RString カラ = new RString("～");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
+    private final List<RString> csvHeader = new ArrayList<>();
+    private List<RString> csvContent = new ArrayList<>();
     private FileSpoolManager manager;
     private RString eucFilePath;
     private HanyoListTokubetsuChiikiKasanGemmenProcessParameter processParamter;
     private CsvWriter<TokubetsuChiikiKasanGemmenEucCsvEntity> eucCsvWriter;
+    private CsvListWriter eucCsvWriter1;
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
+    private boolean is帳票出力;
+    private boolean isCSV出力;
+    private RString csvFilePath1;
+    private RString 項目見出し;
+    private int 項目名称;
+    private int 出力文字の開始位置;
+    private int 出力桁数;
+    private RString 項目内容;
+    private IOutputOrder outputOrder;
+    private int 連番;
+    @BatchWriter
+    private BatchReportWriter<HanyoListReportSource> batchReportWrite;
+    private ReportSourceWriter<HanyoListReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
         hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         personalDataList = new ArrayList<>();
+        連番 = 0;
+        項目見出し = RString.EMPTY;
+        項目内容 = RString.EMPTY;
+        出力文字の開始位置 = 0;
+        出力桁数 = 0;
+        set帳表CSV出力();
+
     }
 
     @Override
     protected IBatchReader createReader() {
-        RString 出力順 = get出力順();
+//        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+//        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
+//                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
+                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
+        RString 出力順 = get出力順(outputOrder);
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別List = new ArrayList<>();
         List<JuminJotai> 住民状態List = new ArrayList<>();
@@ -215,7 +263,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         key.set地区コード1終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_To()));
         key.set地区コード2開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
         key.set地区コード2終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_To()));
-        key.set地区コード3開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
+        key.set地区コード3開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_From()));
         key.set地区コード3終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_To()));
         key.set町域コード開始値(ChoikiCode.EMPTY);
         key.set町域コード終了値(ChoikiCode.EMPTY);
@@ -240,6 +288,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBD_TokubetsuChiikiKasanGemmen_Temp.csv"));
+        csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBD_TokubetsuChiikiKasanGemmen.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -247,14 +296,106 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
                 setNewLine(NewLine.CRLF).
                 hasHeader(processParamter.isCsvkomokumeifuka()).
                 build();
+        eucCsvWriter1 = new CsvListWriter.InstanceBuilder(csvFilePath1).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                build();
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value(),
+                SubGyomuCode.DBZ介護共通).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
+
     }
 
     @Override
     protected void process(TokubetsuChiikiKasanGemmenEntity entity) {
+        連番 = 連番 + 1;
         TokubetsuChiikiKasanGemmenEucCsvEntity eucCsvEntity = new TokubetsuChiikiKasanGemmenEucCsvEntity();
         setEucCsvEntity(eucCsvEntity, entity);
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
+        Class clazz = eucCsvEntity.getClass();
+        RString 項目内容new = RString.EMPTY;
+        HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance().get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
+                new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
+        for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+            try {
+                Method getMethod = clazz.getDeclaredMethod(TokubetsuChiikiKasanGemmenCsvEnumEntity
+                        .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
+                                                .get(i).get出力項目順位()))).get名称().toString());
+                項目内容new = (RString) getMethod.invoke(eucCsvEntity);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(HanyoListTokubetsuChiikiKasanGemmenProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (is帳票出力) {
+                RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+                int get項目桁数 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目桁数();
+                if (get項目名称.length()
+                        > get項目桁数) {
+                    get項目名称 = get項目名称.substring(0, get項目桁数);
+                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目位置().equals(new RString("左詰め(0)"))) {
+                    for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+                        get項目名称 = RString.HALF_SPACE.concat(get項目名称);
+                    }
+                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目位置().equals(new RString("右詰め(1)"))) {
+                    for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+                        get項目名称 = get項目名称.concat(RString.HALF_SPACE);
+                    }
+                }
+                if (i == 0) {
+                    項目見出し = 項目見出し.concat(get項目名称);
+//                    if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("02"))) {
+//                        項目内容new = new RString(new FlexibleDate(項目内容new.toString()).wareki().firstYear(FirstYear.ICHI_NEN).toString());
+//                    } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("03"))) {
+//                        項目内容new = new RString(new FlexibleDate(項目内容new.toString()).wareki().firstYear(FirstYear.ICHI_NEN).toString());
+//                    } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("04"))) {
+//                        項目内容new = new RString(new FlexibleDate(項目内容new.toString()).wareki().toString());
+//                    }
+                    if (項目内容new == null) {
+                        項目内容 = 項目内容.concat(RString.EMPTY);
+                    } else {
+                        項目内容 = 項目内容.concat(項目内容new);
+                    }
+                    出力桁数 = get項目桁数;
+                    項目名称 = 出力文字の開始位置 + hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称().length();
+                } else {
+                    出力文字の開始位置 = 出力桁数 + hanyoListShutsuryokuKomoku.get項目間スペース数();
+                    項目見出し = get項目見出し(項目見出し, 出力文字の開始位置 - 項目名称);
+                    項目見出し = 項目見出し.concat(get項目名称);
+                    項目内容 = get項目見出し(項目内容, 出力文字の開始位置 - 項目名称);
+                    項目内容 = 項目内容.concat(項目内容new);
+                    出力桁数 = 出力文字の開始位置 + get項目桁数;
+                }
+                HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(), processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+                report.writeBy(reportSourceWriter);
+                項目見出し = RString.EMPTY;
+                項目内容 = RString.EMPTY;
+
+            }
+            if (isCSV出力) {
+                if (processParamter.isCsvrenbanfuka()) {
+                    if (i == 0) {
+                        csvHeader.add(new RString("連番"));
+                        csvContent.add(new RString(String.valueOf(連番)));
+                    }
+                    if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称() == null) {
+                        csvHeader.add(RString.EMPTY);
+                    } else {
+                        csvHeader.add(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称());
+                    }
+                    csvContent.add(項目内容new);
+                } else {
+                    csvHeader.add(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称());
+                    csvContent.add(項目内容new);
+                }
+            }
+            if (連番 == 1 && processParamter.isCsvkomokumeifuka()) {
+                eucCsvWriter1.writeLine(csvHeader);
+            }
+            eucCsvWriter1.writeLine(csvContent);
+            csvContent = new ArrayList();
+        }
     }
 
     @Override
@@ -263,17 +404,29 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             eucCsvWriter.writeLine(setBlank());
         }
         eucCsvWriter.close();
+        eucCsvWriter1.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-        manager.spool(eucFilePath, log);
-//        processParamter.getSyutsuryoku().equals(CSVSettings.日付スラッシュ編集)
+        if (isCSV出力) {
+            manager.spool(eucFilePath, log);
+        }
         バッチ出力条件リストの出力();
     }
 
-    private RString get出力順() {
+    private void set帳表CSV出力() {
+        if (processParamter.getSyutsuryoku().equals(new RString("帳表・CSV出力"))
+                || processParamter.getSyutsuryoku().equals(new RString("CSVのみ出力"))) {
+            isCSV出力 = true;
+        }
+        if (processParamter.getSyutsuryoku().equals(new RString("帳表・CSV出力"))
+                || processParamter.getSyutsuryoku().equals(new RString("帳票のみ出力"))) {
+            is帳票出力 = true;
+        }
+
+    }
+
+    private RString get出力順(IOutputOrder order) {
         List<RString> 出力DB項目名 = new ArrayList();
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
-                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
+
         List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
         for (ISetSortItem item : 設定項目リスト) {
             出力DB項目名.add(item.getDB項目名());
@@ -289,7 +442,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
                     true, true, PageBreakType.設定なし, 0, 0));
         }
         RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListTokubetsuChiikiKasanGemmenOrderby.class, order);
-        return 出力順;
+        return 出力順.concat(",特別地域加算減免_履歴番号");
     }
 
     private TokubetsuChiikiKasanGemmenEucCsvEntity setBlank() {
@@ -1106,7 +1259,6 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
-//        RString csv出力有無 = new RString("無し");
         RString 日本語ファイル名 = new RString("汎用リスト 特別地域加算減免CSV");
         RString 英数字ファイル名 = new RString("HanyoList_TokubetsuChiikiKasanGemmen.csv");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
@@ -1162,16 +1314,40 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
                 出力条件.add(build);
             }
         }
-        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                日本語ファイル名,
-                導入団体コード,
-                市町村名,
-                ジョブ番号,
-                英数字ファイル名,
-                new RString("DBD701007"),
-                出力ページ数,
-                出力条件);
-        EucFileOutputJokenhyoFactory.createInstance(item).print();
+        if (is帳票出力) {
+            RString csv出力有無;
+            RString csvファイル名;
+            if (processParamter.getSyutsuryoku().equals(new RString("帳表・CSV出力"))) {
+                csv出力有無 = new RString("あり");
+                csvファイル名 = 英数字ファイル名;
+            } else {
+                csv出力有無 = new RString("なし");
+                csvファイル名 = RString.EMPTY;
+            }
+            ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                    new RString("DBD701007"),
+                    導入団体コード,
+                    市町村名,
+                    ジョブ番号,
+                    processParamter.getHyoudai(),
+                    出力ページ数,
+                    csv出力有無,
+                    csvファイル名,
+                    出力条件);
+            IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
+            printer.print();
+        } else if (processParamter.getSyutsuryoku().equals(new RString("CSVのみ出力"))) {
+            EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                    日本語ファイル名,
+                    導入団体コード,
+                    市町村名,
+                    ジョブ番号,
+                    英数字ファイル名,
+                    new RString("DBD701007"),
+                    出力ページ数,
+                    出力条件);
+            EucFileOutputJokenhyoFactory.createInstance(item).print();
+        }
     }
 
     private RStringBuilder get日付範囲(RStringBuilder builder) {
@@ -1445,5 +1621,18 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         住民状態List.add(JuminJotai.転出者);
         住民状態List.add(JuminJotai.死亡者);
         return 住民状態List;
+    }
+
+    private RString get項目見出し(RString 項目見出し, int 出力文字の開始位置) {
+        for (int i = 0; i < 出力文字の開始位置; i++) {
+            項目見出し.concat(RString.HALF_SPACE);
+        }
+        return 項目見出し;
+    }
+
+    private CsvReader<TokubetsuChiikiKasanGemmenEucCsvEntity> createCsvReader() {
+        return new CsvReader.InstanceBuilder(csvFilePath1, TokubetsuChiikiKasanGemmenEucCsvEntity.class)
+                .setDelimiter(new RString(",")).setEnclosure(new RString("\""))
+                .hasHeader(false).setEncode(Encode.UTF_8withBOM).build();
     }
 }
