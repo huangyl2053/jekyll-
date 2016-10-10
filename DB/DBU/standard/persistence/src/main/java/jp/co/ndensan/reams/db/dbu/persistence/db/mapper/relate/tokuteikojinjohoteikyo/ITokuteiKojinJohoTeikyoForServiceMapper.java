@@ -18,35 +18,35 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.Tokute
 public interface ITokuteiKojinJohoTeikyoForServiceMapper {
 
     /**
-     * 有効な版番号情報取得します。
+     * 有効な版番号情報を取得します。
      *
      * @param paramater パラメータ
-     * @return 情報
+     * @return 有効な版番号情報
      */
     List<DbT7301TokuteiKojinJohoHanKanriEntity> get有効な版番号(TokuteiKojinJohoTeikyoParamater paramater);
 
     /**
-     * 初回提供済情報取得します。
+     * 初回提供済情報を取得します。
      *
      * @param paramater パラメータ
-     * @return 情報
+     * @return 初回提供済である直近の版番号情報
      */
-    List<DbT7301TokuteiKojinJohoHanKanriEntity> get初回提供済(TokuteiKojinJohoTeikyoParamater paramater);
+    List<DbT7301TokuteiKojinJohoHanKanriEntity> get初回提供済である直近の版番号(TokuteiKojinJohoTeikyoParamater paramater);
 
     /**
-     * 直近の版番号情報取得します。
+     * 直近の版番号情報を取得します。
      *
      * @param paramater パラメータ
-     * @return 情報
+     * @return 直近の版番号情報
      */
     List<DbT7301TokuteiKojinJohoHanKanriEntity> get直近の版番号(TokuteiKojinJohoTeikyoParamater paramater);
 
     /**
-     * 特定個人情報項目版管理情報取得します。
+     * 特定個人情報項目版管理情報を取得します。
      *
      * @param paramater パラメータ
-     * @return 情報
+     * @return 特定個人情報項目版管理情報
      */
-    List<TokuteiKojinJohoKoumokuHanKanriRelateEntity> select特定個人情報項目版管理(TokuteiKojinJohoTeikyoParamater paramater);
+    List<TokuteiKojinJohoKoumokuHanKanriRelateEntity> get特定個人情報項目版管理(TokuteiKojinJohoTeikyoParamater paramater);
 
 }

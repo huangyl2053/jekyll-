@@ -78,7 +78,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101TableWriter;
     private SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private static final RString 申請書管理番号リスト = new RString("【申請書管理番号】");
-    private static final RString 申請書管理番号空白 = new RString("　　　　　　　　　");
+    private static final RString 申請書管理番号空白 = new RString("　　　　　　　　　　　　");
 
     @Override
     protected IBatchReader createReader() {

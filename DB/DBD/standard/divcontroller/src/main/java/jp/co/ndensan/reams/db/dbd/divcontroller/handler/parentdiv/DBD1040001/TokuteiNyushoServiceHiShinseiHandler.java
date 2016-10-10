@@ -961,4 +961,28 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             return result;
         }
     }
+
+    /**
+     * ViewStateのComparatorです。
+     */
+    public static class TokuteiNyushoServiceHiShinseiComparator implements Comparator<TokubetsuChiikiKasanGemmenViewState> {
+
+        @Override
+        public int compare(TokubetsuChiikiKasanGemmenViewState s1, TokubetsuChiikiKasanGemmenViewState s2) {
+
+            int result = !s1.getTokubetsuchiikiKasanGemmen().get申請年月日().isBeforeOrEquals(s2.getTokubetsuchiikiKasanGemmen().get申請年月日())
+                    ? 1 : (s1.getTokubetsuchiikiKasanGemmen().get申請年月日().equals(s2.getTokubetsuchiikiKasanGemmen().get申請年月日()) ? 0 : -1);
+
+            if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
+                result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
+            }
+            if (result == 0 && EntityDataState.Added == s1.getState()) {
+                result = 1;
+            } else if (result == 0 && EntityDataState.Added == s2.getState()) {
+                result = -1;
+            }
+            return result;
+        }
+    }
+
 }

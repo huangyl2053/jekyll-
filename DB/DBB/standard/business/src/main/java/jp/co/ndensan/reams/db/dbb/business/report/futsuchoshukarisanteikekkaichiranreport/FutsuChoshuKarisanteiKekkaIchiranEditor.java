@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.futsuchoshukarisanteikekkaichiranreport;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FuchoKariKeisanGoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranSource;
@@ -230,8 +231,7 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
                 source.listLower_2 = DecimalFormatter.toコンマ区切りRString(普徴仮算定計算後賦課.get前年度賦課の情報().getNengakuHokenryo1(), 0);
             }
         }
-        //TODO
-        source.listLower_3 = null;
+        source.listLower_3 = 最後の普徴期別金額();
         if (普徴仮算定計算後賦課 != null && 普徴仮算定計算後賦課.get前年度賦課の情報() != null
                 && 普徴仮算定計算後賦課.get前年度賦課の情報().getGemmenMaeHokenryo() != null) {
             source.listLower_4 = DecimalFormatter.toコンマ区切りRString(普徴仮算定計算後賦課.get前年度賦課の情報().getGemmenMaeHokenryo(), 0);
@@ -255,6 +255,35 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
             }
         }
 
+    }
+
+    private RString 最後の普徴期別金額() {
+        List<Decimal> 前期別金額list = new ArrayList<>();
+        List<Decimal> 後期別金額list = new ArrayList<>();
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku01());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku02());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku03());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku04());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku05());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku06());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku07());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku08());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku09());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku10());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku11());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku12());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku13());
+        前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku14());
+        for (int i = NUM0; i < 前期別金額list.size(); i++) {
+            if (Decimal.ZERO.compareTo(前期別金額list.get(i)) < NUM0) {
+                後期別金額list.add(前期別金額list.get(i));
+            }
+        }
+        if (後期別金額list.size() < NUM1) {
+            return null;
+        }
+        Decimal 最後普徴期別金額 = 後期別金額list.get(後期別金額list.size() - NUM1);
+        return DecimalFormatter.toコンマ区切りRString(最後普徴期別金額, 0);
     }
 
     /**
