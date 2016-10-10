@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001;
 
 import java.util.List;
+import jp.co.ndensan.reams.bb.bbx.definition.core.kazeishiryo.ShiryoKisaiSeibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraijohoichiran.DBB200019_TokubetsuChoshuIraiJohoIchiranEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranReport;
@@ -314,10 +315,9 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
         }
         特徴依頼情報Entity.set年金コード(特徴依頼追加情報.getNenkinCode());
         特徴依頼情報Entity.set漢字氏名(特徴依頼追加情報.getDtKanjiShimei());
-        特徴依頼情報Entity.set性別(特徴依頼追加情報.getDtSeibetsu());
+        特徴依頼情報Entity.set性別(get性別(特徴依頼追加情報.getDtSeibetsu()));
         特徴依頼情報Entity.set郵便番号(特徴依頼追加情報.getDtYubinNo());
         特徴依頼情報Entity.set住所(特徴依頼追加情報.getDtKanaJusho());
-
         return 特徴依頼情報Entity;
     }
 
@@ -361,11 +361,22 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
         }
         csvEntity.set年金コード(特徴依頼追加情報.getNenkinCode());
         csvEntity.set漢字氏名(特徴依頼追加情報.getDtKanjiShimei());
-        csvEntity.set性別(特徴依頼追加情報.getDtSeibetsu());
+        csvEntity.set性別(get性別(特徴依頼追加情報.getDtSeibetsu()));
         csvEntity.set郵便番号(特徴依頼追加情報.getDtYubinNo());
         csvEntity.set住所(特徴依頼追加情報.getDtKanaJusho());
-
         return csvEntity;
+    }
+
+    private RString get性別(RString 性別コード) {
+        if (RString.isNullOrEmpty(性別コード)) {
+            return RString.EMPTY;
+        }
+        for (ShiryoKisaiSeibetsu 性別enum : ShiryoKisaiSeibetsu.values()) {
+            if (new RString(性別enum.getCode()).equals(性別コード)) {
+                return new RString(性別enum.name());
+            }
+        }
+        return RString.EMPTY;
     }
 
     private RString 金額の編集(RString 金額) {

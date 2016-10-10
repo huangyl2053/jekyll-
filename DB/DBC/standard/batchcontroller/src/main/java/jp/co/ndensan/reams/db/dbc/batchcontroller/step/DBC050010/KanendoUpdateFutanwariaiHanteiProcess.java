@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIchiranChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_SaishoriShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
@@ -175,7 +176,10 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
         editバッチ出力条件_処理区分(list, parameter);
         editバッチ出力条件_決定通知書発行日(list, parameter);
         editバッチ出力条件_決定者受取年月(list, parameter);
-        list.add(抽出対象.concat(parameter.get抽出対象().get名称()));
+        if (parameter.get抽出対象() != null
+                && Furikomi_MeisaiIchiranChushutsuTaisho.振込データ作成済のみ.getコード().equals(parameter.get抽出対象().getコード())) {
+            list.add(抽出対象.concat(parameter.get抽出対象().get名称()));
+        }
         if (parameter.get対象作成年月日() == null || parameter.get対象作成年月日().isEmpty()) {
             list.add(対象作成日.concat(符号));
         } else {
