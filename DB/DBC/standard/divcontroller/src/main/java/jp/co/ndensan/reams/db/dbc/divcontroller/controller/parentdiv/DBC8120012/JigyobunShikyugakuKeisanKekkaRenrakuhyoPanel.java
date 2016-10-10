@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC8120012;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuGakuKeisanKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
@@ -43,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
 
     private static final RString この連絡票は既に印刷されていますが = new RString("この連絡票は既に印刷されていますが");
-    private static final RString 事業高額合算支給額計算結果データ = new RString("事業高額合算支給額計算結果データ");
 
     /**
      * 画面を初期化します
@@ -143,7 +144,11 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
                         div.getDdlShikyuShinseishoSeiriNo().getSelectedValue(),
                         new HokenshaNo(div.getDdlShoKisaiHokenshaNo().getSelectedValue()));
         List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> panelResultList = createHandler(div).処理対象データ取得(parameter);
-        ViewStateHolder.put(事業高額合算支給額計算結果データ, panelResultList);
+        List<JigyoKogakuGassanShikyuGakuKeisanKekka> list = new ArrayList();
+        for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity : panelResultList) {
+            list.add(new JigyoKogakuGassanShikyuGakuKeisanKekka(entity.getDbt3172Entity()));
+        }
+        ViewStateHolder.put(ViewStateKeys.事業高額合算支給額計算結果データ, (Serializable) list);
         IShikibetsuTaishoFinder findler = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
         IShikibetsuTaisho 宛名識別対象情報 = findler.get識別対象(GyomuCode.DB介護保険, new ShikibetsuCode(
                 div.getCclKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode()), KensakuYusenKubun.住登外優先);
@@ -161,11 +166,11 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
     public ResponseData<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv> onClick_afterprint(
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
 
-        List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> panelResultList = ViewStateHolder.get(
-                事業高額合算支給額計算結果データ, List.class);
-        if (panelResultList != null) {
-            for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelResult : panelResultList) {
-                createHandler(div).afterprint(new JigyoKogakuGassanShikyuGakuKeisanKekka(panelResult.getDbt3172Entity()));
+        List<JigyoKogakuGassanShikyuGakuKeisanKekka> list = ViewStateHolder.get(
+                ViewStateKeys.事業高額合算支給額計算結果データ, List.class);
+        if (list != null) {
+            for (JigyoKogakuGassanShikyuGakuKeisanKekka panelResult : list) {
+                createHandler(div).afterprint(new JigyoKogakuGassanShikyuGakuKeisanKekka(panelResult.toEntity()));
             }
         }
         return ResponseData.of(div).setState(DBC8120012StateName.計算結果連絡票作成);
