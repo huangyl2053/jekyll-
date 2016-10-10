@@ -60,7 +60,7 @@ public class TokubetsuChoshuMidoteiIchiranSource implements IReportSource {
     public RString listList1_8;
     @ReportItem(name = "listList1_9", length = 3, order = 23)
     public RString listList1_9;
-    @ReportItem(name = "listList2_1", length = 9, order = 24)
+    @ReportItem(name = "listList2_1", length = 10, order = 24)
     public RString listList2_1;
     @ReportItem(name = "listList2_2", length = 30, order = 25)
     public RString listList2_2;
