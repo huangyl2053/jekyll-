@@ -514,13 +514,22 @@ public class KogakuGassanShikyuKetteiHosei {
         if (ONE.equals(処理区分) && (!支給額フラグ || get受取年月フラグ(高額合算決定情報, 支給額フラグ))) {
             result.setWkモード(処理不可);
             result.setWkメッセージ(支給決定情報補正判定MSG4);
-        } else if (TWO.equals(処理区分) && (!支給額フラグ || get受取年月フラグ(高額合算決定情報, 支給額フラグ))) {
+        } else if (TWO.equals(処理区分) && (!支給額フラグ || is受取年月フラ(高額合算決定情報))) {
             result.setWkモード(口座修正モード);
             result.setWkメッセージ(支給決定情報補正判定MSG5);
-        } else if (THREE.equals(処理区分) && (!支給額フラグ || get受取年月フラグ(高額合算決定情報, 支給額フラグ))) {
+        } else if (THREE.equals(処理区分) && (!支給額フラグ || is受取年月フラ(高額合算決定情報))) {
             result.setWkモード(削除照会モード);
             result.setWkメッセージ(支給決定情報補正判定MSG6);
         }
+    }
+
+    private boolean is受取年月フラ(List<KogakuGassanShikyuFushikyuKettei> 高額合算決定情報) {
+        for (KogakuGassanShikyuFushikyuKettei entity : 高額合算決定情報) {
+            if (entity.get受取年月() == null || entity.get受取年月().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean get受取年月フラグ(
