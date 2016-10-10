@@ -132,6 +132,8 @@ public class JukyushaDaichoPanelHandler {
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID));
         div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給);
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
+        onChange_chkSaisin();
+        onSelect_radChushutsuTaisho();
 
     }
 
@@ -184,6 +186,8 @@ public class JukyushaDaichoPanelHandler {
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), 出力順ID);
         RString 出力項目 = map.getParameterValue(RString.class, 出力項目名);
         div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        onChange_chkSaisin();
+        onSelect_radChushutsuTaisho();
     }
 
     /**
@@ -304,7 +308,7 @@ public class JukyushaDaichoPanelHandler {
         get宛名抽出条件div().set地区２終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
         get宛名抽出条件div().set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
         get宛名抽出条件div().set地区３終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
-        //get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
+        get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
     }
 
     private IHanyoListAtenaSelectDiv get宛名抽出条件div() {
@@ -327,7 +331,7 @@ public class JukyushaDaichoPanelHandler {
     }
 
     private RDate flexibleDateToRDate(FlexibleDate date) {
-        if (date != null) {
+        if (date != null && date.isValid()) {
             return new RDate(date.getYearValue(), date.getMonthValue(), date.getDayValue());
         }
         return null;
