@@ -170,12 +170,24 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
     /**
      * 事業報告月報_一般状況mybatisのパラメータを生成します。
      *
-     * @param 対象市町村コードList 対象市町村コードList
+     * @param プリントコントロール区分 プリントコントロール区分
+     * @param 市町村コード 市町村コード
+     * @param 過去集計分市町村コードList 過去集計分市町村コードList
      * @param 決定年月 決定年月
      * @return JigyoHokokuGeppoIppanShokanMybatisParamter
      */
     public static JigyoHokokuGeppoIppanShokanMybatisParamter create事業報告統計データ_12_13Param(
-            RString 決定年月, List<RString> 対象市町村コードList) {
+            RString 決定年月, RString プリントコントロール区分, RString 市町村コード, List<RString> 過去集計分市町村コードList) {
+        List<RString> 市町村コードList = new ArrayList<>();
+        if (PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
+            市町村コードList.add(市町村コード);
+        } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
+            if (過去集計分市町村コードList == null || 過去集計分市町村コードList.isEmpty()) {
+                市町村コードList.add(市町村コード);
+            } else {
+                市町村コードList.addAll(過去集計分市町村コードList);
+            }
+        }
         List<RString> 集計番号List = new ArrayList<>();
         集計番号List.add(ShukeiNo.一般状況_12_居宅介護_介護予防_サービス受給者数.getコード());
         集計番号List.add(ShukeiNo.一般状況_13_地域密着型_介護予防_サービス受給者数.getコード());
@@ -183,7 +195,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
         表番号List.add(HyoNo.償還_決定年月_一般状況.getコード());
         表番号List.add(HyoNo.償還_決定年月_一般状況_旧市町村.getコード());
         return new JigyoHokokuGeppoIppanShokanMybatisParamter(Code.EMPTY,
-                決定年月, RString.EMPTY, null, 対象市町村コードList,
+                決定年月, RString.EMPTY, null, 市町村コードList,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, 集計番号List, 表番号List, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
@@ -191,12 +203,24 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
     /**
      * 事業報告月報_一般状況mybatisのパラメータを生成します。
      *
-     * @param 対象市町村コードList 対象市町村コードList
+     * @param プリントコントロール区分 プリントコントロール区分
+     * @param 市町村コード 市町村コード
+     * @param 過去集計分市町村コードList 過去集計分市町村コードList
      * @param 決定年月 決定年月
      * @return JigyoHokokuGeppoIppanShokanMybatisParamter
      */
     public static JigyoHokokuGeppoIppanShokanMybatisParamter create事業報告統計データ_14Param(
-            RString 決定年月, List<RString> 対象市町村コードList) {
+            RString 決定年月, RString プリントコントロール区分, RString 市町村コード, List<RString> 過去集計分市町村コードList) {
+        List<RString> 市町村コードList = new ArrayList<>();
+        if (PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
+            市町村コードList.add(市町村コード);
+        } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
+            if (過去集計分市町村コードList == null || 過去集計分市町村コードList.isEmpty()) {
+                市町村コードList.add(市町村コード);
+            } else {
+                市町村コードList.addAll(過去集計分市町村コードList);
+            }
+        }
         List<RString> 集計番号List = new ArrayList<>();
         集計番号List.add(ShukeiNo.一般状況_14_施設介護サービス受給者数_介護老人福祉施設.getコード());
         集計番号List.add(ShukeiNo.一般状況_15_施設介護サービス受給者数_介護老人保健施設.getコード());
@@ -205,7 +229,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
         表番号List.add(HyoNo.償還_決定年月_一般状況.getコード());
         表番号List.add(HyoNo.償還_決定年月_一般状況_旧市町村.getコード());
         return new JigyoHokokuGeppoIppanShokanMybatisParamter(Code.EMPTY,
-                決定年月, RString.EMPTY, null, 対象市町村コードList,
+                決定年月, RString.EMPTY, null, 市町村コードList,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, 集計番号List, 表番号List, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }

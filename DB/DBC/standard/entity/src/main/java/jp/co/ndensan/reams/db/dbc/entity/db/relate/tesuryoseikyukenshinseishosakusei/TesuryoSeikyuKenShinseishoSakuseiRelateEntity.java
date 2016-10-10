@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.tesuryoseikyukenshinseishosakusei;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 住宅改修理由書作成手数料請求書兼申請書作成 のRelateEntityです。
@@ -16,6 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 public class TesuryoSeikyuKenShinseishoSakuseiRelateEntity {
 
-    private RString 対象開始日時;
-    private RString 対象終了日時;
+    private YMDHMS 対象開始日時;
+    private YMDHMS 対象終了日時;
 }

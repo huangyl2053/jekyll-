@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.tesuryoseikyukenshinseishosakusei;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.tesuryoseikyukenshinseishosakusei.ITesuryoSeikyuKenShinseishoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -49,19 +51,19 @@ public class TesuryoSeikyuKenShinseishoSakuseiManager {
     }
 
     /**
-     * 審査会自動割付を検索します。
+     * 住宅改修理由書作成手数料請求書兼申請書を検索します。
      *
-     * @param 市町村コード 市町村コード
+     * @param mybitisParamter 住宅改修理由書作成手数料請求書兼申請書作成のパラメータ
      * @return TesuryoSeikyuKenShinseishoSakuseiBusiness
      */
     @Transaction
-    public TesuryoSeikyuKenShinseishoSakuseiBusiness getTemp_市町村コード(RString 市町村コード) {
-        TesuryoSeikyuKenShinseishoSakuseiMybatisParameter mybitisParamter = new TesuryoSeikyuKenShinseishoSakuseiMybatisParameter(市町村コード);
+    public SearchResult<TesuryoSeikyuKenShinseishoSakuseiBusiness> getTemp_市町村コード(TesuryoSeikyuKenShinseishoSakuseiMybatisParameter mybitisParamter) {
         ITesuryoSeikyuKenShinseishoSakuseiMapper mapper = mapperProvider.create(ITesuryoSeikyuKenShinseishoSakuseiMapper.class);
         TesuryoSeikyuKenShinseishoSakuseiRelateEntity relateEntity = mapper.select日時(mybitisParamter);
-        if (relateEntity == null) {
-            return null;
+        List<TesuryoSeikyuKenShinseishoSakuseiBusiness> businessList = new ArrayList<>();
+        if (relateEntity != null) {
+            businessList.add(new TesuryoSeikyuKenShinseishoSakuseiBusiness(relateEntity));
         }
-        return new TesuryoSeikyuKenShinseishoSakuseiBusiness(relateEntity);
+        return SearchResult.of(businessList, 0, false);
     }
 }

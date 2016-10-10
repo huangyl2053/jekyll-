@@ -8,8 +8,8 @@
                
     <resultMap id="resultMap_selectKetteiTimestamp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiRelateEntity" 
                autoMapping="true">
-        <result property="対象開始日時" column="DbT7022_Temp_対象開始日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="対象終了日時" column="DbT7022_Temp_対象終了日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="対象開始日時" column="DbT7022_Temp_対象開始日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
+        <result property="対象終了日時" column="DbT7022_Temp_対象終了日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
     </resultMap>
     <select id="select日時" resultMap="resultMap_selectKetteiTimestamp" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiMybatisParameter" 
@@ -26,25 +26,10 @@
           AND
           DbT7022."shoriName" = #{処理名}
           AND 
-          DbT7022."shoriEdaban" = ( 
-            SELECT
-              MAX(DbT7022."shoriEdaban") 
-            FROM
-              rgdb."DbT7022ShoriDateKanri" AS DbT7022
-          ) 
+          DbT7022."shoriEdaban" = #{処理枝番}
           AND 
-          DbT7022."nendo" = ( 
-            SELECT
-              MAX(DbT7022."nendo") 
-            FROM
-              rgdb."DbT7022ShoriDateKanri" AS DbT7022
-          ) 
+          DbT7022."nendo" = #{年度}
           AND 
-          DbT7022."nendoNaiRenban" = ( 
-            SELECT
-              MAX(DbT7022."nendoNaiRenban") 
-            FROM
-              rgdb."DbT7022ShoriDateKanri" AS DbT7022
-          ) 
+          DbT7022."nendoNaiRenban" = #{年度内連番}
     </select>
 </mapper>

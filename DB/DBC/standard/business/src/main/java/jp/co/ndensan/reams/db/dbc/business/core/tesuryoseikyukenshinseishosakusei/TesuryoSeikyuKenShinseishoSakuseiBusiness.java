@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.tesuryoseikyukenshinseishosakusei;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiRelateEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 住宅改修理由書作成手数料請求書兼申請書作成 のコントローラです。
@@ -34,7 +34,7 @@ public class TesuryoSeikyuKenShinseishoSakuseiBusiness {
      *
      * @return 対象開始日時
      */
-    public RString get対象開始日時() {
+    public YMDHMS get対象開始日時() {
         return entity.get対象開始日時();
     }
 
@@ -43,7 +43,7 @@ public class TesuryoSeikyuKenShinseishoSakuseiBusiness {
      *
      * @return 対象終了日時
      */
-    public RString get対象終了日時() {
+    public YMDHMS get対象終了日時() {
         return entity.get対象終了日時();
     }
 }
