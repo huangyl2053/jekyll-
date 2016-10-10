@@ -171,11 +171,11 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
 
             KogakuKetteiTsuchiShoEntity reportEntity3 = getShoSealerReportEntity(entity);
             KogakuKetteiTsuchiShoSealerReport report3 = new KogakuKetteiTsuchiShoSealerReport(reportEntity3, parameter.get文書番号(),
-                    通知書定型文, インフォ, ninshoshaSource3, タイトルlist);
+                    通知書定型文, インフォ, ninshoshaSource3, タイトルlist, 連番);
             report3.writeBy(reportSourceWriter3);
             KogakuKetteiTsuchiShoEntity reportEntity4 = getShoSealer2ReportEntity(entity);
             KogakuKetteiTsuchiShoSealer2Report report4
-                    = new KogakuKetteiTsuchiShoSealer2Report(getタイトル(entity), reportEntity4, ninshoshaSource4, parameter.get文書番号());
+                    = new KogakuKetteiTsuchiShoSealer2Report(getタイトル(entity), reportEntity4, ninshoshaSource4, parameter.get文書番号(), 連番);
             report4.writeBy(reportSourceWriter4);
             条件set.add(tempStr);
             連番 = 連番 + INT_1;
@@ -314,17 +314,11 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(entity.get支払期間開始年月日());
         reportEntity.set支払期間終了年月日(entity.get支払期間終了年月日());
-        reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
-        reportEntity.set支払窓口終了時間(entity.get支払窓口終了期間());
         return reportEntity;
     }
 
     private KogakuKetteiTsuchiShoEntity getShoSealerReportEntity(KetteiTsuchishoInfoTempResultEntity entity) {
         KogakuKetteiTsuchiShoEntity reportEntity = new KogakuKetteiTsuchiShoEntity();
-        reportEntity.set提供年月IDX1(entity.getサービス提供年月());
-        reportEntity.set提供年月IDX2(entity.getサービス提供年月());
-        reportEntity.set提供年月IDX3(entity.getサービス提供年月());
-        reportEntity.set提供年月IDX4(entity.getサービス提供年月());
         reportEntity.set支給額IDX1(entity.get支払金額());
         reportEntity.set支給額IDX2(entity.get支払金額());
         reportEntity.set支給額IDX3(entity.get支払金額());
@@ -332,10 +326,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
 
         // TODO QA1560 審査方法区分と決定額が設定しない
         reportEntity.set審査方法区分(entity.get審査方法区分());
-        reportEntity.set決定額IDX1(entity.get高額支給額());
-        reportEntity.set決定額IDX2(entity.get高額支給額());
-        reportEntity.set決定額IDX3(entity.get高額支給額());
-        reportEntity.set決定額IDX4(entity.get高額支給額());
         setKogakuKetteiTsuchiShoEntity(reportEntity, entity);
         set口座情報_1(reportEntity);
         return reportEntity;
