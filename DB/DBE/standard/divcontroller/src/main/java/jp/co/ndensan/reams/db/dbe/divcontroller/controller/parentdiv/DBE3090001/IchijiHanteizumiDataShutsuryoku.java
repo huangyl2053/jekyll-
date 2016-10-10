@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE3090001
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE309003.DBE309003_IchijihanteiSumidataIfParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3090001.DBE3090001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3090001.IchijiHanteizumiDataShutsuryokuDiv;
@@ -16,6 +18,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3090001.Ich
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3090001.IchijiHanteizumiDataShutsuryokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3090001.ItiziHanteiZumiItiranEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyoFlag;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -146,7 +151,15 @@ public class IchijiHanteizumiDataShutsuryoku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         List<IchijiHanteizumiDataBusiness> 一次判定結果list = finder.get一次判定結果情報(getHandler(div).createParam帳票()).records();
-        getHandler(div).set帳票(一次判定結果list);
+        List<NinteichosahyoServiceJokyo> 認定調査票概況調査リスト = finder.get認定調査票概況調査(getHandler(div).createParam帳票()).records();
+        List<NinteichosahyoServiceJokyoFlag> 認定調査票フラグリスト = finder.get認定調査票フラグ(getHandler(div).createParam帳票()).records();
+        List<NinteichosahyoChosaItem> 認定調査票調査項目リスト = finder.get認定調査票調査項目(getHandler(div).createParam帳票()).records();
+        List<NinteichosahyoChosaItem> 前回調査票調査項目リスト = finder.get前回認定調査票調査項目(getHandler(div).createParam帳票()).records();
+        List<ShujiiIkenshoIkenItem> 主治医意見書意見項目リスト = finder.get主治医意見書意見項目(getHandler(div).createParam帳票()).records();
+        List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目リスト = finder.get前回主治医意見書意見項目(getHandler(div).createParam帳票()).records();
+        List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト = finder.get認定調査特記事項番号(getHandler(div).createParam帳票()).records();
+        getHandler(div).set帳票(一次判定結果list, 認定調査票概況調査リスト, 認定調査票フラグリスト, 認定調査票調査項目リスト, 前回調査票調査項目リスト,
+                主治医意見書意見項目リスト, 前回主治医意見書意見項目リスト, 認定調査特記事項番号リスト);
         return ResponseData.of(div).respond();
     }
 
