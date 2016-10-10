@@ -197,7 +197,7 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
             コントロールレコード出力();
         }
         エンドレコード出力();
-        manager.spool(eucFilePath);
+        manager.spool(eucCsvFilePath);
         eucCsvWriter.close();
         eucCsvWriter２.close();
         do外字類似変換();

@@ -267,8 +267,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(toRDate(entity.get支払期間開始年月日()));
         reportEntity.set支払期間終了年月日(toRDate(entity.get支払期間終了年月日()));
-//        reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
-//        reportEntity.set支払窓口終了時間(entity.get支払窓口終了期間());
         set口座情報_3(reportEntity);
         return reportEntity;
     }
@@ -319,11 +317,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
 
     private KogakuKetteiTsuchiShoEntity getShoSealerReportEntity(KetteiTsuchishoInfoTempResultEntity entity) {
         KogakuKetteiTsuchiShoEntity reportEntity = new KogakuKetteiTsuchiShoEntity();
-        reportEntity.set支給額IDX1(entity.get支払金額());
-        reportEntity.set支給額IDX2(entity.get支払金額());
-        reportEntity.set支給額IDX3(entity.get支払金額());
-        reportEntity.set支給額IDX4(entity.get支払金額());
-
         // TODO QA1560 審査方法区分と決定額が設定しない
         reportEntity.set審査方法区分(entity.get審査方法区分());
         setKogakuKetteiTsuchiShoEntity(reportEntity, entity);

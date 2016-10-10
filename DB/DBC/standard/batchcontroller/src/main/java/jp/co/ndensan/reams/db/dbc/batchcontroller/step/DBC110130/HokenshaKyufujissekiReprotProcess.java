@@ -162,7 +162,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
             eucCsvWriter.writeLine(csvEntity);
             KyufuJisekiJohoSofuIchiranReport report = new KyufuJisekiJohoSofuIchiranReport(
                     一覧表entity, 出力順リスト, 改頁リスト, processParameter.getShoriYM(),
-                    processParameter.getNow().getRDateTime(), true, new Decimal(合計件数), index);
+                    processParameter.getNow().getRDateTime(), true, new Decimal(合計件数), index - INT_1);
             report.writeBy(reportSourceWriter);
             保険者番号 = entity.get給付実績一時Entity().getコントロールレコード保険者番号();
             合計件数 = INT_0;
@@ -170,7 +170,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
             if (一覧表entity != null) {
                 KyufuJisekiJohoSofuIchiranReport report = new KyufuJisekiJohoSofuIchiranReport(
                         一覧表entity, 出力順リスト, 改頁リスト, processParameter.getShoriYM(),
-                        processParameter.getNow().getRDateTime(), false, new Decimal(合計件数), index);
+                        processParameter.getNow().getRDateTime(), false, new Decimal(合計件数), index - INT_1);
                 report.writeBy(reportSourceWriter);
             }
         }
@@ -193,7 +193,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
             eucCsvWriter.writeLine(csvEntity);
             KyufuJisekiJohoSofuIchiranReport report = new KyufuJisekiJohoSofuIchiranReport(
                     一覧表entity, 出力順リスト, 改頁リスト, processParameter.getShoriYM(),
-                    processParameter.getNow().getRDateTime(), true, new Decimal(合計件数), index);
+                    processParameter.getNow().getRDateTime(), true, new Decimal(合計件数), index - INT_1);
             report.writeBy(reportSourceWriter);
             if (!personalDataList.isEmpty()) {
                 AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);

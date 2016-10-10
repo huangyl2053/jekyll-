@@ -1176,5 +1176,6 @@ WITH master AS (
                         AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
                     </if>
                 </if>
+                ${出力順}
      </select>
 </mapper>

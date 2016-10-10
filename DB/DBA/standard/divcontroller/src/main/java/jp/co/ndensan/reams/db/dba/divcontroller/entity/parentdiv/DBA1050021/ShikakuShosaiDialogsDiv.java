@@ -19,17 +19,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShikakuShosaiDialogsDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdJutokuDialogButton")
-    private JushochiTokureiDialogButtonDiv ccdJutokuDialogButton;
     @JsonProperty("ccdShikakuHenkoDialogButton")
     private ShikakuHenkoRirekiDialogButtonDiv ccdShikakuHenkoDialogButton;
+    @JsonProperty("ccdJutokuDialogButton")
+    private JushochiTokureiDialogButtonDiv ccdJutokuDialogButton;
     @JsonProperty("ccdShisetsuNyutaishoDialogButton")
     private ShisetsuNyutaishoDialogButtonDiv ccdShisetsuNyutaishoDialogButton;
 
@@ -40,21 +40,21 @@ public class ShikakuShosaiDialogsDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdJutokuDialogButton
-     * @return ccdJutokuDialogButton
-     */
-    @JsonProperty("ccdJutokuDialogButton")
-    public IJushochiTokureiDialogButtonDiv getCcdJutokuDialogButton() {
-        return ccdJutokuDialogButton;
-    }
-
-    /*
      * getccdShikakuHenkoDialogButton
      * @return ccdShikakuHenkoDialogButton
      */
     @JsonProperty("ccdShikakuHenkoDialogButton")
     public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
         return ccdShikakuHenkoDialogButton;
+    }
+
+    /*
+     * getccdJutokuDialogButton
+     * @return ccdJutokuDialogButton
+     */
+    @JsonProperty("ccdJutokuDialogButton")
+    public IJushochiTokureiDialogButtonDiv getCcdJutokuDialogButton() {
+        return ccdJutokuDialogButton;
     }
 
     /*

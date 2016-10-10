@@ -30,7 +30,7 @@ and open the template in the editor.
             
         <if test="is対象区分_全登録者以外">
             <if test="is通知書未発行者抽出">
-                AND (支払方法変更."gemmen_TsuchiHakkoYMD" is null or rgdb.支払方法変更."gemmen_TsuchiHakkoYMD"='')
+                AND (支払方法変更."gemmen_TsuchiHakkoYMD" is null or 支払方法変更."gemmen_TsuchiHakkoYMD"='')
             </if>
             <if test="is減額適用中者抽出">
                 INNER JOIN rgdb."DbT4025ShiharaiHohoHenkoGengaku" AS 支払方法変更減額1

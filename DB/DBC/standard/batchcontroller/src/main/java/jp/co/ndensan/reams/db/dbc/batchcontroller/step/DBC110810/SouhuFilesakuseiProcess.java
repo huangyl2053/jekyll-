@@ -28,12 +28,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
 import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -124,8 +123,8 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
             ninteiNengetu = new RString(processParameter.getNinteiNengetu().toString());
         }
         csvFileName = new RString("10_536" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告)
-                + ninteiNengetu + ".csv");
-        RString spoolWorkPath = Directory.createTmpDirectory();
+                + ninteiNengetu + 拡張子_TEMP + ".csv");
+        RString spoolWorkPath = Path.getTmpDirectoryPath();
         eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
     }
 
@@ -173,10 +172,11 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
             getEndCSV出力();
             eucCsvWriter.close();
             do外字類似変換();
-            SharedFileDescriptor sfd = new ReadOnlySharedFileDescriptor(new FilesystemName(csvFileName));
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                    FilesystemName.fromString(csvFileName.replace(拡張子_TEMP, RString.EMPTY)));
             sfd = SharedFile.defineSharedFile(sfd, 世代管理する, SharedFile.GROUP_ALL, null, true, null);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
         } else {
             処理結果リスト一時TBL.insert(getErrorEntity());
             hasError.setValue(!existingFlag);

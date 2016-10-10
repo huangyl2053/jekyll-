@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -121,8 +123,15 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
         SyoriTaisyoShichoson syoritaisyoshichoson = new SyoriTaisyoShichoson();
         for (int i = 0; i < processParameter.getShichosonCode().size(); i++) {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-            a = syoritaisyoshichoson.データ編集(processParameter, a, i, dbT7022List, shichosonCodeList, entity);
-            tableWrite.insert(entity);
+            entity.setShichosonCode(new LasdecCode(processParameter.getShichosonCode().get(i).toString()));
+            processParameter.setSyorinichiji(YMDHMS.now());
+            if (shichosonCodeList.contains(processParameter.getShichosonCode().get(i))) {
+                syoritaisyoshichoson.データ更新(processParameter, a, dbT7022List, entity);
+                tableWrite.update(entity);
+            } else {
+                syoritaisyoshichoson.データ登録(processParameter, entity);
+                tableWrite.insert(entity);
+            }
         }
     }
 

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuJuryoininKeiyakuJigy
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuJuryoininKeiyakuJigyoshaHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuJuryoininKeiyakuJigyoshaIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaResult;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.santeikijungaku.SanteiKijungaku;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
@@ -461,8 +462,9 @@ public class DvKogakuServiceJuryoIninHandler {
      * 「発行する」ボタンを処理します。
      *
      * @param holder KogakuJuryoininKeiyakuJigyoshaHolder
+     * @return result KogakuServiceHiJuryoininKeiyakuKakuninshoResult
      */
-    public void onClick_btnHakko(KogakuJuryoininKeiyakuJigyoshaHolder holder) {
+    public KogakuServiceHiJuryoininKeiyakuKakuninshoResult onClick_btnHakko(KogakuJuryoininKeiyakuJigyoshaHolder holder) {
         KogakuJuryoininKeiyakuJigyosha newBusiness = holder.getKogakuJuryoininKeiyakuJigyosha(
                 new KogakuJuryoininKeiyakuJigyoshaIdentifier(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号().toString()),
                         Integer.parseInt(div.getDvHaraiKetteiShusei().getTxtRirekiNo().getValue().toString()))).createBuilderForEdit()
@@ -473,8 +475,9 @@ public class DvKogakuServiceJuryoIninHandler {
         if (null != newBusiness) {
             manager.saveOrDeletePhysical高額受領委任契約事業者(newBusiness);
             KogakuServiceHiJuryoininKeiyakuKakuninsho 帳票発行処理Business = KogakuServiceHiJuryoininKeiyakuKakuninsho.createInstance();
-            帳票発行処理Business.getKogakuServiceHiJuryoininKeiyakuKakuninshoData(getParameter(newBusiness));
+            return 帳票発行処理Business.getKogakuServiceHiJuryoininKeiyakuKakuninshoData(getParameter(newBusiness));
         }
+        return new KogakuServiceHiJuryoininKeiyakuKakuninshoResult();
     }
 
     private KogakuServiceHiJuryoininKeiyakuKakuninshoParameter getParameter(KogakuJuryoininKeiyakuJigyosha business) {

@@ -64,6 +64,7 @@ public class JigyoHokokuNenpoHokenkyufuGenbutsuUpdateProcess extends BatchProces
         dbT7021Entity.setTateNo(entity.getTateNo());
         dbT7021Entity.setYokoNo(entity.getYokoNo());
         dbT7021Entity.setShukeiKekkaAtai(entity.getSukeiKekkaAtai());
+        dbT7021Entity.setShukeiKomokuMeisho(RString.EMPTY);
         dbT7021Entity.setTateKomokuCode(Code.EMPTY);
         dbT7021Entity.setYokoKomokuCode(Code.EMPTY);
         dbT7021EntityWriter.insert(dbT7021Entity);
