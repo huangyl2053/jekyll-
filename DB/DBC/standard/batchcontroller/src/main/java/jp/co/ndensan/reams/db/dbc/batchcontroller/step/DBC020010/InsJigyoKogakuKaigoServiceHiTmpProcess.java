@@ -109,7 +109,10 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         RString 被保険者番号 = getColumnValue(entity.get給付実績中間事業高額Entity().getHiHokenshaNo());
         RString サービス提供年月 = entity.get給付実績中間事業高額Entity().getServiceTeikyoYM() != null
                 ? entity.get給付実績中間事業高額Entity().getServiceTeikyoYM().toDateString() : RString.EMPTY;
-        RString nowKeyBreak = 被保険者番号.concat(DELIMITER).concat(サービス提供年月);
+        RString データ区分 = entity.get給付実績中間事業高額Entity().getDataKubun();
+        RString サービス種類コード = getColumnValue(entity.get給付実績中間事業高額Entity().getServiceSyuruiCode());
+        RString nowKeyBreak = 被保険者番号.concat(DELIMITER).concat(サービス提供年月).concat(DELIMITER)
+                .concat(データ区分).concat(DELIMITER).concat(サービス種類コード);
         if (keyBreak == null || nowKeyBreak.equals(keyBreak)) {
             結果全件List.add(entity);
             keyBreak = nowKeyBreak;
@@ -139,6 +142,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
             if (区分コード_3.equals(給付実績中間事業高額Entity.getKyufuSakuseiKubunCode())) {
                 給付実績中間事業高額Entity.setSikyugaku(Decimal.ZERO);
                 給付実績中間事業高額Entity.setKoogakuKetteiKubun(区分コード_2);
+
             } else {
                 給付実績中間事業高額Entity.setSikyugaku(給付実績中間事業高額Entity.getSikyugaku());
                 給付実績中間事業高額Entity.setKoogakuKetteiKubun(区分コード_2);

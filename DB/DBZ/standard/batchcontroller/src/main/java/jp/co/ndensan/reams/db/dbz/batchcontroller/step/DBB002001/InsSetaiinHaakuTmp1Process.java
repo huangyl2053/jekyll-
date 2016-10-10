@@ -24,6 +24,8 @@ public class InsSetaiinHaakuTmp1Process extends BatchProcessBase<SetaiHakuEntity
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.fuka."
             + "ISetaiShotokuKazeiHanteiMapper.select世帯員把握入力_1");
 
+    private static final RString 本人区分 = new RString("1");
+
     @BatchWriter
     BatchEntityCreatedTempTableWriter tableWriter;
 
@@ -42,7 +44,24 @@ public class InsSetaiinHaakuTmp1Process extends BatchProcessBase<SetaiHakuEntity
 
     @Override
     protected void process(SetaiHakuEntity entity) {
-        tableWriter.insert(entity.to世帯員所得情報(entity));
+        tableWriter.insert(to世帯員所得情報(entity));
     }
 
+    /**
+     * create世帯員所得情報
+     *
+     * @param entity SetaiHaakuEntity
+     * @return 世帯員所得情報
+     */
+    private SetaiShotokuEntity to世帯員所得情報(SetaiHakuEntity entity) {
+        SetaiShotokuEntity 世帯員所得情報 = new SetaiShotokuEntity();
+        世帯員所得情報.setHihokenshaNo(entity.getHihokenshaNo());
+        世帯員所得情報.setShikibetsuCode(entity.getShikibetsuCode());
+        世帯員所得情報.setShotokuNendo(entity.getShotokuNendo());
+        世帯員所得情報.setKijunYMD(entity.getKijunYMD());
+        世帯員所得情報.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
+        世帯員所得情報.setSetaiCode(entity.getSetaiCode());
+        世帯員所得情報.setHonninKubun(本人区分);
+        return 世帯員所得情報;
+    }
 }
