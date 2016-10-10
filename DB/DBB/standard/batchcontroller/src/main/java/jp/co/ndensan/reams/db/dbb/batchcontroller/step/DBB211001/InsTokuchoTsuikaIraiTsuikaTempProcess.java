@@ -53,6 +53,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
     private static final int 期4 = 4;
     private static final int 期5 = 5;
     private static final int 期6 = 6;
+    private static final int TWO = 2;
     private static final int 捕捉月の６カ月後_1月 = 1;
     private static final int 捕捉月の６カ月後_2月 = 2;
     private static final int 捕捉月の６カ月後_3月 = 3;
@@ -102,8 +103,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
             業務概念_賦課の情報 = new DbT2002FukaJohoTempTableEntity();
             対象者の情報 = 対象者の情報を編集(t);
         }
-        set特徴期期別金額(new Decimal(t.get調定額().toString()),
-                Integer.parseInt(t.get期().toString()), 業務概念_賦課の情報);
+        set特徴期期別金額(t.get調定額(), t.get期(), 業務概念_賦課の情報);
         通知書番号 = t.get賦課情報().getTsuchishoNo();
 
     }
@@ -242,12 +242,7 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
         if (DT各種区分_01.equals(dT各種区分) || DT各種区分_02.equals(dT各種区分)) {
             KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
             RYearMonth 年月 = new RYearMonth(parameter.get賦課年度().toDateString().concat(捕捉月));
-            RString 特徴開始月;
-            if (new RString(年月.plusMonth(捕捉月の６カ月後の取得用).getMonthValue()).length() == 1) {
-                特徴開始月 = new RString("0").concat(new RString(年月.plusMonth(捕捉月の６カ月後の取得用).getMonthValue()));
-            } else {
-                特徴開始月 = new RString(年月.plusMonth(捕捉月の６カ月後の取得用).getMonthValue());
-            }
+            RString 特徴開始月 = new RString(年月.plusMonth(捕捉月の６カ月後の取得用).getMonthValue()).padZeroToLeft(TWO);
             Tsuki 月 = Tsuki.toValue(特徴開始月);
             RString 期 = 期月リスト.get月の期(月).get期();
             return get特徴期期別金額(Integer.parseInt(期.toString()));

@@ -131,7 +131,7 @@ public class InsKariHenkoTsuikaTempProcess extends BatchProcessBase<KariHenkoTsu
 
     private RString getDT各種年月日(DbT2002FukaJohoTempTableEntity 賦課情報) {
         YMDHMS ymdhms = 賦課情報.getChoteiNichiji();
-        if (ymdhms != null) {
+        if (ymdhms != null && !ymdhms.isEmpty()) {
             return ymdhms.getDate().toDateString();
         }
         return RString.EMPTY;
