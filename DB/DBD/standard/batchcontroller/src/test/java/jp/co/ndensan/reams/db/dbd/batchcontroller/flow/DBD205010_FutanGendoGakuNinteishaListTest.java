@@ -82,6 +82,7 @@ public class DBD205010_FutanGendoGakuNinteishaListTest {
         parameter.set利用者負担段階(RiyoshaFutanDankaiHanni.利用者負担1段階);
         parameter.set受給者区分(JukyushaKubun2.被保険者);
         parameter.set基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
+        parameter.set課税判定等基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
         parameter.set対象リスト(TargetList.該当者リスト);
         parameter.set帳票ID(new ReportId("DBD200001_FutanGendogakuNinteiGaitoshaIchiran"));
         parameter.set所得年度(new FlexibleYear("2016"));
