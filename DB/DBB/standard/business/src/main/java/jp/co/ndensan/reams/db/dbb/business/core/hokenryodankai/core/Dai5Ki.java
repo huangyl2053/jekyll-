@@ -15,14 +15,14 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * 第4期というクラスです。
  *
  */
-class Dai4Ki extends HokenryoDankaiHanteiHohoHozon {
+class Dai5Ki extends HokenryoDankaiHanteiHohoHozon {
 
     /**
      * 第4期
      *
      * @param hokenryoDankaiHanteiParameter
      */
-    public Dai4Ki(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
+    public Dai5Ki(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
 
         Decimal 基準年金収入1 = hokenryoDankaiHanteiParameter.getSeigyoJoho().getKijunNenkinShunyu01();
         Decimal 基準年金収入2 = hokenryoDankaiHanteiParameter.getSeigyoJoho().getKijunNenkinShunyu02();
