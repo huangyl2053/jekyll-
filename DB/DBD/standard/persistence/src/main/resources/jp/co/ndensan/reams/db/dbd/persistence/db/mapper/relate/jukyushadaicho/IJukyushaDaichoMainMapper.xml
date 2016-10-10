@@ -1284,7 +1284,7 @@
             rgur."UrT0508SeikatsuHogoJukyusha" T0508
         LEFT JOIN rgur."UrT0526SeikatsuHogoFujoShurui" T0526
              ON T0508."shikibetsuCode" = T0526."shikibetsuCode"
-             AND T0508."gyomuCode" = T0526."fujoShuruiCode"
+             AND T0508."gyomuCode" = T0526."gyomuCode"
              AND T0508."jukyuKaishiYMD" = T0526."jukyuKaishiYMD"
         WHERE T0508."shikibetsuCode" IN 
            <foreach collection="識別コードリスト" index="index" item="識別コード" open="(" separator="," close=")">
