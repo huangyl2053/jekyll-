@@ -263,6 +263,7 @@ public class ChikuShichosonSelectHandler {
                 List<KyuShichosonCode> 旧市町村コード情報List = 旧市町村情報.get旧市町村コード情報List();
                 if (旧市町村コード情報List != null && !旧市町村コード情報List.isEmpty()) {
                     List<KeyValueDataSource> dataSource = new ArrayList<>();
+                    dataSource.add(new KeyValueDataSource(KEY, 文字_全市町村));
                     for (KyuShichosonCode item : 旧市町村コード情報List) {
                         dataSource.add(new KeyValueDataSource(item.get旧市町村コード().getColumnValue(),
                                 item.get旧市町村名称()));
