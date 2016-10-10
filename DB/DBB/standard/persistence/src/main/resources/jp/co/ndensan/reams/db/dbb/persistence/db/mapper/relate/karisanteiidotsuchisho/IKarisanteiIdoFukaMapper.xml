@@ -48,36 +48,14 @@
     <select id="select計算後情報" resultMap="resultMap_dbT2015KeisangoJohoTemp"
      parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter"
      fetchSize="500" resultOrdered="true">
+        WITH master AS (
         SELECT
-             <include refid="allColumns_DbT2015KeisangoJoho" />,
-            年金特徴回付情報.*,
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-            <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
-             <include refid="allColumns_AtesakiDaino" />
-            koza.*
-        FROM 
-          rgdb."DbT2015KeisangoJoho" AS 計算後情報
-          INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-              ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-              ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
-              ON "AtesakiDaino"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-                  AND "AtesakiDaino"."atesakiShubetsu" = '3'
-          LEFT JOIN
-            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
-             ON "Nokumi"."CaT0714shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
-             ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+            <include refid="allColumns_DbT2015KeisangoJoho" />,
+            年金特徴回付情報.*
+        FROM
+            rgdb."DbT2015KeisangoJoho" AS 計算後情報
+        INNER JOIN
+            rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
@@ -90,40 +68,52 @@
             AND 計算後情報."koseiZengoKubun" = '2'
             AND 計算後情報."sakuseiShoriName" = #{作成処理名}
             AND 計算後情報."choteiNichiji" = #{調定日時}
+        )
+        SELECT    
+             master.*,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
+             <include refid="allColumns_AtesakiDaino" />
+             koza.*
+        FROM 
+             master 
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                   (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        INNER JOIN
+             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+              ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
+             rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
+              ON "AtesakiDaino"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+                  AND "AtesakiDaino"."atesakiShubetsu" = '3'
+        LEFT JOIN
+            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
+             ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
+             ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
     </select>
 
     <select id="select計算後情報一時"  resultMap="resultMap_dbT2015KeisangoJohoTemp"
      parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter"
      fetchSize="500" resultOrdered="true">
+        WITH master AS (
         SELECT
-             <include refid="allColumns_DbT2015KeisangoJoho" />,
-            年金特徴回付情報.*,
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-            <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
-             <include refid="allColumns_AtesakiDaino" />
-            koza.*
-        FROM 
-          "DbT2015KeisangoJohoTemp" AS 計算後情報
-          INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-              ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-              ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
-              ON "AtesakiDaino"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-                  AND "AtesakiDaino"."atesakiShubetsu" = '3'
-          LEFT JOIN
-            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
-             ON "Nokumi"."CaT0714shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
-             ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN 
+            <include refid="allColumns_DbT2015KeisangoJoho" />,
+            年金特徴回付情報.*
+        FROM
+            "DbT2015KeisangoJohoTemp" AS 計算後情報
+        INNER JOIN
               rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -135,6 +125,40 @@
             計算後情報."choteiNendo" = #{調定年度}
             AND 計算後情報."fukaNendo" = #{賦課年度}
             AND 計算後情報."koseiZengoKubun" = '2'
+        )
+        SELECT    
+             master.*,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
+             <include refid="allColumns_AtesakiDaino" />
+             koza.*
+        FROM 
+             master 
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                    (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        INNER JOIN
+             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+              ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
+             rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
+              ON "AtesakiDaino"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+                  AND "AtesakiDaino"."atesakiShubetsu" = '3'
+        LEFT JOIN
+            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
+             ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
+             ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
     </select>
 
     <update id="update異動賦課情報一時テーブルFROM計算後情報一時">
