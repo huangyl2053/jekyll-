@@ -35,7 +35,7 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
                 }
             },
     /**
-     * 振込指定日休日チェック。TODO Holidaylist.isHolidayを利用するかどうか？
+     * 振込指定日休日チェック。
      */
     振込指定日休日チェック {
                 @Override
