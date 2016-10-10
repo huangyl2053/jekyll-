@@ -42,10 +42,7 @@ public class TekiyoShinseishoManager {
      */
     public boolean isNenjiExecute(FlexibleYear 年度) {
 
-        if (0 < dac.select処理日付管理マスタ(年度)) {
-            return true;
-        }
-        return false;
+        return (0 < dac.select処理日付管理マスタ(年度));
     }
 
     /**
@@ -56,9 +53,6 @@ public class TekiyoShinseishoManager {
      */
     public boolean isIdoExecute(FlexibleYear 年度) {
 
-        if (0 < dac.select処理日付管理マスタ取得件数(年度)) {
-            return true;
-        }
-        return false;
+        return (0 < dac.select処理日付管理マスタ取得件数(年度));
     }
 }
