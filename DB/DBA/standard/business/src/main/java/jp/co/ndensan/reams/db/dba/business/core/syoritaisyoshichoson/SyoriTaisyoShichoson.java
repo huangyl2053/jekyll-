@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dba.business.core.syoritaisyoshichoson;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba050010.JuminkirokuIdojohoTorokuKoikiProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JutogaiIdoJiyu;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class SyoriTaisyoShichoson {
 
     /**
+     * 宛名識別対象異動分取得します。
      *
      * @param entity DbT7022ShoriDateKanriEntity
      * @return keyBuilder
@@ -85,44 +86,47 @@ public class SyoriTaisyoShichoson {
     }
 
     /**
+     * データ更新します。
      *
      * @param processParameter JuminkirokuIdojohoTorokuKoikiProcessParameter
      * @param a int
-     * @param i int
      * @param dbT7022List List<DbT7022ShoriDateKanriEntity>
-     * @param shichosonCodeList List<RString>
      * @param entity DbT7022ShoriDateKanriEntity
      * @return int
      */
-    public int データ編集(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, int a,
-            int i, List<DbT7022ShoriDateKanriEntity> dbT7022List, List<RString> shichosonCodeList,
-            DbT7022ShoriDateKanriEntity entity) {
-        processParameter.setSyorinichiji(YMDHMS.now());
+    public int データ更新(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, int a,
+            List<DbT7022ShoriDateKanriEntity> dbT7022List, DbT7022ShoriDateKanriEntity entity) {
         entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
-        entity.setShichosonCode(new LasdecCode(processParameter.getShichosonCode().get(i).toString()));
-//        TODO 1831未回答ので、実装しない
-//        entity.setShoriName(ShoriName.広域住基連動.get名称());
-        if (shichosonCodeList.contains(processParameter.getShichosonCode().get(i))) {
-            entity.setShoriEdaban(new RString(String.valueOf(Integer.valueOf(dbT7022List.get(a).getShoriEdaban().toString()))));
-            entity.setNendoNaiRenban(new RString(String.valueOf(Integer.valueOf(dbT7022List.get(a).getNendoNaiRenban().toString()))));
-            entity.setNendo(new FlexibleYear(dbT7022List.get(a).getNendo().toString()));
-            entity.setKijunTimestamp(processParameter.getSyorinichiji());
-            entity.setTaishoKaishiTimestamp(dbT7022List.get(a).getTaishoKaishiTimestamp());
-            entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
-            a++;
-        } else {
-            entity.setShoriEdaban(new RString("01"));
-            entity.setNendoNaiRenban(new RString("01"));
-            entity.setNendo(new FlexibleYear("0000"));
-            entity.setKijunYMD(FlexibleDate.EMPTY);
-            entity.setKijunTimestamp(processParameter.getSyorinichiji());
-            entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
-            entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
+        entity.setShoriName(ShoriName.広域住基連動.get名称());
+        entity.setShoriEdaban(dbT7022List.get(a).getShoriEdaban());
+        entity.setNendoNaiRenban(dbT7022List.get(a).getNendoNaiRenban());
+        entity.setNendo(dbT7022List.get(a).getNendo());
+        entity.setKijunTimestamp(processParameter.getSyorinichiji());
+        entity.setTaishoKaishiTimestamp(dbT7022List.get(a).getTaishoKaishiTimestamp());
+        entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
+        return a;
+    }
+
+    /**
+     * データ登録します。
+     *
+     * @param processParameter JuminkirokuIdojohoTorokuKoikiProcessParameter
+     * @param entity DbT7022ShoriDateKanriEntity
+     */
+    public void データ登録(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, DbT7022ShoriDateKanriEntity entity) {
+        entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
+        entity.setShoriName(ShoriName.広域住基連動.get名称());
+        entity.setShoriEdaban(new RString("01"));
+        entity.setNendoNaiRenban(new RString("01"));
+        entity.setNendo(new FlexibleYear("0000"));
+        entity.setKijunYMD(FlexibleDate.EMPTY);
+        entity.setKijunTimestamp(processParameter.getSyorinichiji());
+        entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
+        entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
 //            TODO 1826未回答ので、実装しない
 //            entity.setTaishoKaishiTimestamp(new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
 //                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
-            entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
-        }
-        return a;
+        entity.setTaishoKaishiTimestamp(YMDHMS.now());
+        entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
     }
 }

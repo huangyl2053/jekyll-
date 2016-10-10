@@ -743,8 +743,8 @@
             resultMap="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" fetchSize="500">
        WITH master AS (
             SELECT *
-            FROM "TempSetaiinShotokuHantei2" 
-            WHERE "TempSetaiinShotokuHantei2"."tsuzukigaraCodeNen" = #{続柄コード参照年}
+            FROM "TempSetaiinShotokuHanteiJigyo2" 
+            WHERE "TempSetaiinShotokuHanteiJigyo2"."tsuzukigaraCodeNen" = #{続柄コード参照年}
         )
         SELECT
             master.*,
@@ -986,8 +986,21 @@
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity" autoMapping="true">
         <association property="給付実績中間事業高額一時５"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempKyufujissekiTyukannJigyo"/>
-        <association property="高額介護サービス費支給判定結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
+        <association property="高額介護サービス費給付対象者合計" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
     </resultMap>
+    
+    <!--DB出力(給付実績中間事業高額一時） の更新-->
+    <update id="update給付実績中間事業高額一時" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity">
+        UPDATE
+        "TempKyufujissekiTyukannJigyo5"
+        SET "kogakuKaigoServicehi" = #{kogakuKaigoServicehi}
+        WHERE "inputShikibetsuNo" = #{inputShikibetsuNo}
+         AND "hiHokenshaNo" = #{hiHokenshaNo}
+         AND "serviceTeikyoYM" = #{serviceTeikyoYM}
+         AND "shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
+         AND "jigyoshoNo" = #{jigyoshoNo}
+         AND "toshiNo" = #{toshiNo}
+    </update>
     <!--zhouchuanlin END-->
 
     <!--shifengming START-->
@@ -2429,7 +2442,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
             fetchSize="500">
         SELECT   A."hiHokenshaNo" AS 被保険者番号,
-        A."shikibetsuCode" AS 識別コード,
+        A."shotokuHantei_shikibetsuCode" AS 識別コード,
         A."serviceTeikyoYM" AS サービス提供年月,
         A."shotokuHantei_setaiCode" AS 世帯コード,
         A."hokenRiyoshaFutangaku" AS 利用者負担額,
@@ -2454,7 +2467,7 @@
         LEFT OUTER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,'','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
         '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }') AS "ShikibetsuTaisho"
-        ON A."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        ON A."shotokuHantei_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         WHERE C."yukoMukoKubun" = '1'
         AND C."chokkinFlag" = true
         <if test="出力順 != null">
@@ -2467,7 +2480,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
             fetchSize="500">
         SELECT   A."hiHokenshaNo" AS 被保険者番号,
-        A."shikibetsuCode" AS 識別コード,
+        A."shotokuHantei_shikibetsuCode" AS 識別コード,
         A."serviceTeikyoYM" AS サービス提供年月,
         A."shotokuHantei_setaiCode" AS 世帯コード,
         A."hokenRiyoshaFutangaku" AS 利用者負担額,
@@ -2491,7 +2504,7 @@
          LEFT OUTER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,'','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
         '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }') AS "ShikibetsuTaisho"
-        ON A."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        ON A."shotokuHantei_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         WHERE C."yukoMukoKubun" = '1'
         AND C."chokkinFlag" = true
         <if test="出力順 != null">
@@ -2507,12 +2520,12 @@
         A."serviceTeikyoYM" AS サービス提供年月,
         A."eraaCode" AS エラーコード,
         A."setaiCode" AS 世帯コード,
-        A."setaiinShikibetsuCode" AS 世帯員識別コード
+        A."setaiinShikibetsuCode" AS 世帯員識別コード,
         宛名."meisho" AS 被保険者名
         FROM "TempKogakuHanteiEraa" AS A
         INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,'','',
         '','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }') AS 宛名
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{ }') AS 宛名
         ON A."shikibetsuCode" = 宛名."shikibetsuCode"
         ORDER BY A."hiHokenshaNo" ASC,
                  A."shikibetsuCode" ASC,
@@ -2528,12 +2541,12 @@
         A."serviceTeikyoYM" AS サービス提供年月,
         A."eraaCode" AS エラーコード,
         A."setaiCode" AS 世帯コード,
-        A."setaiinShikibetsuCode" AS 世帯員識別コード
+        A."setaiinShikibetsuCode" AS 世帯員識別コード,
         宛名."meisho" AS 被保険者名
         FROM "TempJigyoKogakuHanteiEraa" AS A
         INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,'','',
         '','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }') AS 宛名
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{ }') AS 宛名
         ON A."shikibetsuCode" = 宛名."shikibetsuCode"
         ORDER BY A."hiHokenshaNo" ASC,
                  A."shikibetsuCode" ASC,

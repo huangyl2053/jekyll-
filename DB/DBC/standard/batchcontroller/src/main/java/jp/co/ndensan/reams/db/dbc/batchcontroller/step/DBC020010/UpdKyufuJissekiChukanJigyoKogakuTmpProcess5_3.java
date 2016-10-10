@@ -9,11 +9,10 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyuf
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -28,14 +27,12 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
             + "select高額介護サービス費給付対象者合計");
-    private static final RString TABLE_給付実績中間事業高額一時5 = new RString("TempKyufujissekiTyukannJigyo5");
     private KyufuJissekiKihonKogakuProcessParameter processParameter;
-
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter kyufujissekiTyukannJigyo5Writer;
+    private IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper;
 
     @Override
     protected void initialize() {
+        mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
     }
 
     @Override
@@ -51,12 +48,6 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
     }
 
     @Override
-    protected void createWriter() {
-        kyufujissekiTyukannJigyo5Writer = new BatchEntityCreatedTempTableWriter(
-                TABLE_給付実績中間事業高額一時5, TempKyufujissekiTyukannJigyoEntity.class);
-    }
-
-    @Override
     protected void process(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity entity) {
         TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時５ = entity.get給付実績中間事業高額一時５();
         DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計 = entity.get高額介護サービス費給付対象者合計();
@@ -66,11 +57,11 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
         if (給付対象者合計 != null) {
             高額支給額 = 給付対象者合計.getKogakuShikyuGaku();
         }
-        if (高額支給額 != null) {
+        if (給付実績中間事業高額一時５_高額介護サービス費 != null) {
             高額介護サービス費 = 給付実績中間事業高額一時５_高額介護サービス費.add(高額支給額);
         }
         給付実績中間事業高額一時５.setKogakuKaigoServicehi(高額介護サービス費);
-        kyufujissekiTyukannJigyo5Writer.update(給付実績中間事業高額一時５);
+        mapper.update給付実績中間事業高額一時(給付実績中間事業高額一時５);
     }
 
     @Override

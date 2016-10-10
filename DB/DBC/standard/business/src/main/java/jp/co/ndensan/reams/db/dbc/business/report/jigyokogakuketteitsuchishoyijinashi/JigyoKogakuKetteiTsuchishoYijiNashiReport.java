@@ -27,6 +27,7 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiReport extends Report<JigyoKogak
     private final RString 文書番号;
     private final List<RString> 通知書定型文List;
     private final ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -37,6 +38,7 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiReport extends Report<JigyoKogak
      * @param 文書番号 RString
      * @param 通知書定型文List List<RString>
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
+     * @param 連番 int
      */
     public JigyoKogakuKetteiTsuchishoYijiNashiReport(
             List<RString> titleList,
@@ -44,7 +46,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiReport extends Report<JigyoKogak
             NinshoshaSource 認証者ソースデータ,
             RString 文書番号,
             List<RString> 通知書定型文List,
-            ChohyoSeigyoKyotsu 帳票制御共通情報) {
+            ChohyoSeigyoKyotsu 帳票制御共通情報,
+            int 連番) {
 
         this.titleList = titleList;
         this.帳票情報 = 帳票情報;
@@ -52,6 +55,7 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiReport extends Report<JigyoKogak
         this.文書番号 = 文書番号;
         this.通知書定型文List = 通知書定型文List;
         this.帳票制御共通情報 = 帳票制御共通情報;
+        this.連番 = 連番;
     }
 
     @Override
@@ -63,7 +67,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiReport extends Report<JigyoKogak
                 認証者ソースデータ,
                 文書番号,
                 通知書定型文List,
-                帳票制御共通情報);
+                帳票制御共通情報,
+                連番);
         IJigyoKogakuKetteiTsuchishoYijiNashiBuilder builder = new JigyoKogakuKetteiTsuchishoYijiNashiBuilder(editor);
 
         writer.writeLine(builder);

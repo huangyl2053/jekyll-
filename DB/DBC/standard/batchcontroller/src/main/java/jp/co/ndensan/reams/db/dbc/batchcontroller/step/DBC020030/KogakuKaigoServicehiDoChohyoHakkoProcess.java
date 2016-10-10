@@ -267,8 +267,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(toRDate(entity.get支払期間開始年月日()));
         reportEntity.set支払期間終了年月日(toRDate(entity.get支払期間終了年月日()));
-//        reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
-//        reportEntity.set支払窓口終了時間(entity.get支払窓口終了期間());
         set口座情報_3(reportEntity);
         return reportEntity;
     }
@@ -287,7 +285,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         reportEntity.set支給不支給決定区分(entity.get支給結果());
         reportEntity.set決定額(entity.get高額支給額());
         reportEntity.set支給金額(entity.get支払金額());
-        reportEntity.set支給不支給区分(entity.get支給区分コード());
+        //reportEntity.set支給不支給区分(entity.get支給区分コード());
         reportEntity.set不支給理由(entity.get不支給理由());
         if (entity.get支払方法区分コード() != null) {
             ShiharaiHohoKubun 支払方法 = ShiharaiHohoKubun.toValue(entity.get支払方法区分コード());
@@ -319,27 +317,22 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
 
     private KogakuKetteiTsuchiShoEntity getShoSealerReportEntity(KetteiTsuchishoInfoTempResultEntity entity) {
         KogakuKetteiTsuchiShoEntity reportEntity = new KogakuKetteiTsuchiShoEntity();
-        reportEntity.set支給額IDX1(entity.get支払金額());
-        reportEntity.set支給額IDX2(entity.get支払金額());
-        reportEntity.set支給額IDX3(entity.get支払金額());
-        reportEntity.set支給額IDX4(entity.get支払金額());
-
         // TODO QA1560 審査方法区分と決定額が設定しない
-        reportEntity.set審査方法区分(entity.get審査方法区分());
+        //reportEntity.set審査方法区分(entity.get審査方法区分());
         setKogakuKetteiTsuchiShoEntity(reportEntity, entity);
         set口座情報_1(reportEntity);
         return reportEntity;
     }
 
     private void setKogakuKetteiTsuchiShoEntity(KogakuKetteiTsuchiShoEntity reportEntity, KetteiTsuchishoInfoTempResultEntity entity) {
-        reportEntity.set連番(連番);
+        //reportEntity.set連番(連番);
         reportEntity.set識別コード(entity.get識別コード());
         if (フラグ_TRUE.equals(parameter.getテスト出力フラグ())) {
             reportEntity.setテスト出力フラグ(true);
         } else {
             reportEntity.setテスト出力フラグ(false);
         }
-        reportEntity.set文書番号(parameter.get文書番号());
+        //reportEntity.set文書番号(parameter.get文書番号());
         if (entity.get宛名() != null && entity.get宛名().getKanjiShimei() != null) {
             reportEntity.set被保険者氏名(RString.EMPTY);
         }

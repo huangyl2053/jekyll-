@@ -73,7 +73,7 @@ public class TokuchouSeidoKanIFRenkeiDTAEntity {
     private RString 金額1;
     @FldField(order = 27, length = 11)
     private RString 金額2;
-    @FldField(order = 28, length = 11, align = Align.Left, paddingChar = "0")
+    @FldField(order = 28, length = 11, align = Align.Right, paddingChar = "0")
     private RString 金額3;
     @FldField(order = 29, length = 58)
     private RString 予備3;
@@ -83,7 +83,7 @@ public class TokuchouSeidoKanIFRenkeiDTAEntity {
     private RString 介護被保険者番号;
     @FldField(order = 32, length = 1)
     private RString 個人コード区分;
-    @FldField(order = 33, length = 16, align = Align.Left, paddingChar = "0")
+    @FldField(order = 33, length = 16, align = Align.Right, paddingChar = "0")
     private RString 個人コード;
     @FldField(order = 34, length = 1)
     private RString 介護住所地特例;

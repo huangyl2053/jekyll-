@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -36,6 +37,8 @@ public class InsFukaTempProcess extends BatchProcessBase<FukaTempJouhouEntity> {
     private static final int 期6 = 6;
     private InsFukaTempProcessParameter parameter;
     private TsuchishoNo 通知書番号;
+    private FlexibleYear 賦課年度;
+    private FlexibleYear 調定年度;
     private DbT2002FukaJohoTempTableEntity 賦課Temp情報;
 
     @BatchWriter
@@ -55,7 +58,9 @@ public class InsFukaTempProcess extends BatchProcessBase<FukaTempJouhouEntity> {
     @Override
     protected void process(FukaTempJouhouEntity t) {
 
-        if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
+        if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)
+                || !t.get賦課情報().getFukaNendo().equals(賦課年度)
+                || !t.get賦課情報().getChoteiNendo().equals(調定年度)) {
             if (通知書番号 != null) {
                 賦課Temp.insert(賦課Temp情報);
             }
@@ -64,7 +69,8 @@ public class InsFukaTempProcess extends BatchProcessBase<FukaTempJouhouEntity> {
         }
         set特徴期期別金額(t.get調定額(), t.get期(), 賦課Temp情報);
         通知書番号 = t.get賦課情報().getTsuchishoNo();
-
+        賦課年度 = t.get賦課情報().getFukaNendo();
+        調定年度 = t.get賦課情報().getChoteiNendo();
     }
 
     @Override

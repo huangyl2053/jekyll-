@@ -54,6 +54,17 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     private static final RString 該当 = new RString("該当");
     private static final RString 却下 = new RString("却下");
     private static final RString 非該当 = new RString("非該当");
+    private static final RString 世帯非課税８０万以下 = new RString("世帯非課税８０万以下");
+    private static final RString 世帯非課税８０万超 = new RString("世帯非課税８０万超");
+    private static final RString 生保 = new RString("生保");
+    private static final RString 世帯非課税 = new RString("世帯非課税");
+    private static final RString 老齢 = new RString("老齢");
+    private static final RString 特例減額措置 = new RString("特例減額措置");
+    private static final RString その他 = new RString("その他");
+    private static final RString 第２段階 = new RString("第２段階");
+    private static final RString 第３段階 = new RString("第３段階");
+    private static final RString 第１段階 = new RString("第１段階");
+    private static final RString 課税第３ = new RString("課税第３");
 
     private final FutanGengaokuNintteiKakuninListEntity 負担限度額認定確認リスト;
     private final Association 導入団体;
@@ -167,15 +178,16 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             source.list1_6 = (shinseiYMD == null || shinseiYMD.isEmpty()) ? RString.EMPTY : shinseiYMD.wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             FlexibleDate ketteiYMD = 今回認定結果.getKetteiYMD();
-            source.list3_4 = (ketteiYMD == null || ketteiYMD.isEmpty()) ? RString.EMPTY : ketteiYMD.wareki().eraType(EraType.KANJI_RYAKU).
+            //ここで、QAがあります。list2_8とlist3_4の逆転。自分の理解で実装した。
+            source.list2_8 = (ketteiYMD == null || ketteiYMD.isEmpty()) ? RString.EMPTY : ketteiYMD.wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             RString 決定区分 = 今回認定結果.getKetteiKubun();
             RString 承認 = KetteiKubun.承認する.getコード();
             RString 承認しない = KetteiKubun.承認しない.getコード();
             if (承認.equals(決定区分)) {
-                source.list2_8 = 承認1;
+                source.list3_4 = 承認1;
             } else if (承認しない.equals(決定区分)) {
-                source.list2_8 = 却下;
+                source.list3_4 = 却下;
             }
             FlexibleDate tekiyoKaishiYMD = 今回認定結果.getTekiyoKaishiYMD();
             source.list1_7 = (tekiyoKaishiYMD == null || tekiyoKaishiYMD.isEmpty()) ? RString.EMPTY : tekiyoKaishiYMD.
@@ -374,7 +386,22 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果) {
         RString 申請理由区分 = 今回認定結果.getShinseiRiyuKubun();
         if (null != 申請理由区分 && !申請理由区分.isEmpty()) {
-            source.list1_3 = ShinseiRiyuKubun.toValue(申請理由区分).get名称();
+            RString 申請理由区分名称 = ShinseiRiyuKubun.toValue(申請理由区分).get名称();
+            if (申請理由区分名称.equals(世帯非課税８０万以下)) {
+                source.list1_3 = 第２段階;
+            } else if (申請理由区分名称.equals(世帯非課税８０万超)) {
+                source.list1_3 = 第３段階;
+            } else if (申請理由区分名称.equals(生保)) {
+                source.list1_3 = 第１段階;
+            } else if (申請理由区分名称.equals(世帯非課税)) {
+                source.list1_3 = RString.EMPTY;
+            } else if (申請理由区分名称.equals(老齢)) {
+                source.list1_3 = 第１段階;
+            } else if (申請理由区分名称.equals(特例減額措置)) {
+                source.list1_3 = 課税第３;
+            } else if (申請理由区分名称.equals(その他)) {
+                source.list1_3 = その他;
+            }
         }
     }
 
@@ -382,7 +409,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果) {
         RString 配偶者課税区分 = 今回認定結果.getHaigushaKazeiKubun();
         if (null != 配偶者課税区分 && !配偶者課税区分.isEmpty()) {
-            source.list3_2 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
+            source.list6_1 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
         }
     }
 

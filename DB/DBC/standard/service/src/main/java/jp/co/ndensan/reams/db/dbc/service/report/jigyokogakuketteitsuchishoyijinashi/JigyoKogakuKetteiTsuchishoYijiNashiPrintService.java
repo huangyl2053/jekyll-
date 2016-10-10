@@ -46,6 +46,7 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
      * @param 通知書定型文List List<RString>
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      * @param titleList List<RString>
+     * @param 連番 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -56,10 +57,11 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
             Ninshosha 認証者,
             List<RString> 通知書定型文List,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
-            List<RString> titleList) {
+            List<RString> titleList,
+            int 連番) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, 通知書定型文List, 帳票制御共通情報, titleList, reportManager);
+            print(帳票情報, 発行日, 文書番号, 帳票ID, 認証者, 通知書定型文List, 帳票制御共通情報, titleList, 連番, reportManager);
             collection = reportManager.publish();
         }
 
@@ -78,6 +80,7 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
      * @param 通知書定型文List List<RString>
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      * @param titleList List<RString>
+     * @param 連番 int
      * @param reportManager ReportManager
      */
     public void print(
@@ -89,6 +92,7 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
             List<RString> 通知書定型文List,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
             List<RString> titleList,
+            int 連番,
             ReportManager reportManager) {
 
         JigyoKogakuKetteiTsuchishoYijiNashiProperty property = new JigyoKogakuKetteiTsuchishoYijiNashiProperty();
@@ -111,7 +115,9 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
                     帳票情報,
                     認証者ソースデータ,
                     文書番号,
-                    通知書定型文List, 帳票制御共通情報).writeBy(reportSourceWriter);
+                    通知書定型文List,
+                    帳票制御共通情報,
+                    連番).writeBy(reportSourceWriter);
         }
     }
 

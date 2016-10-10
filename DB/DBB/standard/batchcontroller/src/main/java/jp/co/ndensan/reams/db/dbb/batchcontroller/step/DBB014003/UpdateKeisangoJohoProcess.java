@@ -25,8 +25,14 @@ public class UpdateKeisangoJohoProcess extends BatchProcessBase<DbT2015KeisangoJ
     private static final RString 異動賦課情報一時テーブル = new RString("TmpIdoFukaJoho");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "fuchokaritsuchishoikkatsuhakko.IFuchoKarisanteiTsuchishoHakkoMapper.select異動賦課情報_計算後情報_計算後情報更正前");
+    private IdoFukaJohoTempEntitySet entitySet;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動賦課情報一時tableWriter;
+
+    @Override
+    protected void initialize() {
+        entitySet = new IdoFukaJohoTempEntitySet();
+    }
 
     @Override
     protected void createWriter() {
@@ -41,7 +47,6 @@ public class UpdateKeisangoJohoProcess extends BatchProcessBase<DbT2015KeisangoJ
 
     @Override
     protected void process(DbT2015KeisangoJohoTempEntity keisangoJohoEntity) {
-        IdoFukaJohoTempEntitySet entitySet = new IdoFukaJohoTempEntitySet();
         DbT2015KeisangoJohoEntity 計算後情報_更正前 = keisangoJohoEntity.get計算後情報_更正前();
         TmpIdoFukaJohoEntity 異動賦課情報一時 = keisangoJohoEntity.get異動賦課情報一時テーブル();
         if (異動賦課情報一時 != null && 計算後情報_更正前 != null) {

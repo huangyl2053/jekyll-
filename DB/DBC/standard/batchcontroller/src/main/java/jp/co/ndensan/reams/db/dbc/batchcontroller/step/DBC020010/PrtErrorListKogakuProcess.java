@@ -121,7 +121,7 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200077.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
+        RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
@@ -153,7 +153,7 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
 
     private KogakuServicehiHanteiErrorListEntity createReportData(HanteiEraaResultEntity entity) {
         KogakuServicehiHanteiErrorListEntity 高額介護サービス費判定エラーEntity = new KogakuServicehiHanteiErrorListEntity();
-        高額介護サービス費判定エラーEntity.set審査年月From(parameter.get審査年月From());
+        高額介護サービス費判定エラーEntity.set審査年月From(parameter.get処理年月());
         高額介護サービス費判定エラーEntity.set審査年月To(parameter.get審査年月To());
         高額介護サービス費判定エラーEntity.set市町村コード(getColumnValue(entity.get市町村コード()));
         高額介護サービス費判定エラーEntity.set被保険者番号(getColumnValue(entity.get被保険者番号()));

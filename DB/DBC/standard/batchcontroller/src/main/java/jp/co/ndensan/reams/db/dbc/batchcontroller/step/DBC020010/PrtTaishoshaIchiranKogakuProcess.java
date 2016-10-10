@@ -129,7 +129,7 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
                 .addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
+        RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
@@ -160,7 +160,7 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
 
     private KogakuServicehiTaishoshaIchiranEntity createReportData(KogakuKaigoServicehiReportEntity entity) {
         KogakuServicehiTaishoshaIchiranEntity 対象者一覧表Entity = new KogakuServicehiTaishoshaIchiranEntity();
-        対象者一覧表Entity.set審査年月From(parameter.get審査年月From());
+        対象者一覧表Entity.set審査年月From(parameter.get処理年月());
         対象者一覧表Entity.set審査年月To(parameter.get審査年月To());
         対象者一覧表Entity.set市町村コード(entity.get市町村コード());
         対象者一覧表Entity.set被保険者番号(entity.get被保険者番号());

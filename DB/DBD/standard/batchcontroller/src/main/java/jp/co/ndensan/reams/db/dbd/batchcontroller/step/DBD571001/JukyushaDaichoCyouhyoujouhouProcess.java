@@ -329,8 +329,12 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         dbT7022entity.setShoriName(ShoriName.受給者台帳.get名称());
         dbT7022entity.setShichosonCode(new LasdecCode(parameter.get市町村コード().toString()));
         dbT7022entity.setNendoNaiRenban(new RString("0001"));
-        dbT7022entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get今回抽出開始年月日(), parameter.get今回抽出開始時分秒()));
-        dbT7022entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get今回抽出終了年月日(), parameter.get今回抽出終了時分秒()));
+        if (parameter.get今回抽出開始年月日() != null && parameter.get今回抽出開始時分秒() != null) {
+            dbT7022entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get今回抽出開始年月日(), parameter.get今回抽出開始時分秒()));
+        }
+        if (parameter.get今回抽出終了年月日() != null && parameter.get今回抽出終了時分秒() != null) {
+            dbT7022entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get今回抽出終了年月日(), parameter.get今回抽出終了時分秒()));
+        }
         dbT7022entity.setLastUpdateTimestamp(RDate.getNowDateTime());
         dbT7022entity.setLastUpdateReamsLoginId(ControlDataHolder.getUserId());
         return dbT7022entity;

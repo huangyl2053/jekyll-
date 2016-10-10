@@ -62,12 +62,12 @@ public class KogakuGassanShikyuShinseiTorokuManager {
     }
 
     /**
-     * 追加まだは削除処理を保存します。
+     * 追加処理を保存します。
      *
      * @param 高額合算支給額計算結果情報 KogakuGassanShikyuGakuKeisanKekkaRelate
      */
     @Transaction
-    public void saveAddOrDelete(KogakuGassanShikyuGakuKeisanKekkaRelate 高額合算支給額計算結果情報) {
+    public void saveAdd(KogakuGassanShikyuGakuKeisanKekkaRelate 高額合算支給額計算結果情報) {
         requireNonNull(高額合算支給額計算結果情報, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果情報"));
         if (!高額合算支給額計算結果情報.hasChanged()) {
             return;
@@ -88,9 +88,6 @@ public class KogakuGassanShikyuShinseiTorokuManager {
     @Transaction
     public void saveModify(KogakuGassanShikyuGakuKeisanKekkaRelate 高額合算支給額計算結果情報) {
         requireNonNull(高額合算支給額計算結果情報, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果情報"));
-        if (!高額合算支給額計算結果情報.hasChanged()) {
-            return;
-        }
         if (高額合算支給額計算結果情報.get高額合算支給額計算結果list() != null) {
             for (KogakuGassanShikyugakuKeisanKekkaMeisai 明細 : 高額合算支給額計算結果情報.get高額合算支給額計算結果list()) {
                 高額合算支給額計算結果明細Manager.save高額合算支給額計算結果明細(明細.deleted());
@@ -114,5 +111,21 @@ public class KogakuGassanShikyuShinseiTorokuManager {
                 }
             }
         }
+    }
+
+    /**
+     * 削除処理を保存します。
+     *
+     * @param 高額合算支給額計算結果情報 KogakuGassanShikyuGakuKeisanKekkaRelate
+     */
+    @Transaction
+    public void saveDelete(KogakuGassanShikyuGakuKeisanKekkaRelate 高額合算支給額計算結果情報) {
+        requireNonNull(高額合算支給額計算結果情報, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果情報"));
+        if (高額合算支給額計算結果情報.get高額合算支給額計算結果list() != null) {
+            for (KogakuGassanShikyugakuKeisanKekkaMeisai 明細 : 高額合算支給額計算結果情報.get高額合算支給額計算結果list()) {
+                高額合算支給額計算結果明細Manager.save高額合算支給額計算結果明細(明細.deleted());
+            }
+        }
+        高額合算支給額計算結果Dac.save(高額合算支給額計算結果情報.deleted().toEntity());
     }
 }

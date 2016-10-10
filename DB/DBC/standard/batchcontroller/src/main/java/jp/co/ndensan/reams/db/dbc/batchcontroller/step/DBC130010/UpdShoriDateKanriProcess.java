@@ -33,7 +33,6 @@ public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
             mybatisParameter.set処理枝番(零零.concat(市町村識別ID));
             RDateTime 処理日時 = RDateTime.parse(processParameter.get処理日時().toString());
             mybatisParameter.set基準年月日(処理日時.getDate().toDateString());
-            // TODO バッチパラメータ.処理日時から、基準日時の値を取得すると思います、QAを提出する必要があります。
             mybatisParameter.set基準日時(new YMDHMS(処理日時));
             mybatisParameter.set対象開始年月日(new RString(FlexibleDate.getNowDate().toString()));
             mybatisParameter.set対象開始日時(YMDHMS.now());
