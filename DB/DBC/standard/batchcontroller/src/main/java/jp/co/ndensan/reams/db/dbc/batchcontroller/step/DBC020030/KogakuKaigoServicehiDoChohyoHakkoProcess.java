@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujigyoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Report;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijinashi.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport;
 import jp.co.ndensan.reams.db.dbc.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KogakuKetteiTsuchiShoSealerReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
@@ -163,13 +161,13 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         if (!条件set.contains(tempStr)) {
 
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity = getReportEntity(entity);
-            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport report1
-                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(reportEntity, 連番, getタイトル(entity), 通知書定型文, ninshoshaSource1, 帳票制御共通情報);
-            report1.writeBy(reportSourceWriter1);
-
-            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport report2
-                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity, 連番, getタイトル(entity), 通知書定型文, ninshoshaSource2, 帳票制御共通情報);
-            report2.writeBy(reportSourceWriter2);
+//            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport report1
+//                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(reportEntity, 連番, getタイトル(entity), 通知書定型文, ninshoshaSource1, 帳票制御共通情報);
+//            report1.writeBy(reportSourceWriter1);
+//
+//            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport report2
+//                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity, 連番, getタイトル(entity), 通知書定型文, ninshoshaSource2, 帳票制御共通情報);
+//            report2.writeBy(reportSourceWriter2);
 
             KogakuKetteiTsuchiShoEntity reportEntity3 = getShoSealerReportEntity(entity);
             KogakuKetteiTsuchiShoSealerReport report3 = new KogakuKetteiTsuchiShoSealerReport(reportEntity3, parameter.get文書番号(),
@@ -269,8 +267,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         // TODO QA1560 支払期間
         reportEntity.set支払期間開始年月日(toRDate(entity.get支払期間開始年月日()));
         reportEntity.set支払期間終了年月日(toRDate(entity.get支払期間終了年月日()));
-        reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
-        reportEntity.set支払窓口終了時間(entity.get支払窓口終了期間());
+//        reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());
+//        reportEntity.set支払窓口終了時間(entity.get支払窓口終了期間());
         set口座情報_3(reportEntity);
         return reportEntity;
     }

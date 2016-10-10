@@ -55,7 +55,7 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
     private OutputParameter<Integer> 取得件数;
     private int 高額合算自己負担額件数;
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030."
-            + "IKogakugassanJikofutangakuInfoHoseiMapper.selectDB");
+            + "IKogakugassanJikofutangakuInfoHoseiMapper.get負担額補正対象者データ");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -107,7 +107,7 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         } else {
             parameter.set改頁出力順(null);
         }
-        return new BatchDbReader(READ_DATA_ID);
+        return new BatchDbReader(READ_DATA_ID, parameter);
     }
 
     @Override
@@ -167,6 +167,7 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
     @Override
     protected void afterExecute() {
         取得件数.setValue(高額合算自己負担額件数);
+        batchReportWriter.close();
     }
 
     private void set出力順() {

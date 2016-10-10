@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo;
 
+import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -42,14 +43,13 @@ public final class TokuteiKojinJohoTeikyoParamater {
      * @param 特定個人情報名コード 特定個人情報名コード
      * @param データセット番号 データセット番号
      * @param 基準日 基準日
-     * @param 初回提供済み 初回提供済み
      *
      * @return 版番号取得のParamter
      */
     public static TokuteiKojinJohoTeikyoParamater createParamter版番号取得(RString 特定個人情報名コード,
-            RString データセット番号, FlexibleDate 基準日, RString 初回提供済み) {
+            RString データセット番号, FlexibleDate 基準日) {
         return new TokuteiKojinJohoTeikyoParamater(特定個人情報名コード, データセット番号, 基準日, RString.EMPTY,
-                初回提供済み, RString.EMPTY, RString.EMPTY);
+                ShokaiTeikyoKubun.初回提供済み.getコード(), RString.EMPTY, RString.EMPTY);
     }
 
     /**

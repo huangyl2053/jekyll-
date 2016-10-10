@@ -77,9 +77,6 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     @BatchWriter
     private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101TableWriter;
     private SofubutsuAtesakiSource sofubutsuAtesakiSource;
-    private static final RString 処理見込み日From = new RString("【処理見込み日From】");
-    private static final RString 処理見込み日To = new RString("【処理見込み日To】");
-    private static final RString 通知書発行日 = new RString("【通知書発行日】");
     private static final RString 申請書管理番号リスト = new RString("【申請書管理番号】");
     private static final RString 申請書管理番号空白 = new RString("　　　　　　　　　");
 
@@ -226,15 +223,6 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        if (parameter.get処理見込み日From() != null) {
-            出力条件.add(処理見込み日From.concat(parameter.get処理見込み日From().wareki().toDateString()));
-        }
-        if (parameter.get処理見込み日To() != null) {
-            出力条件.add(処理見込み日To.concat(parameter.get処理見込み日To().wareki().toDateString()));
-        }
-        if (parameter.get通知書発行日() != null) {
-            出力条件.add(通知書発行日.concat(parameter.get通知書発行日().wareki().toDateString()));
-        }
         boolean 空白Flag = Boolean.FALSE;
         if (parameter.get申請書管理番号リスト() != null) {
             for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {

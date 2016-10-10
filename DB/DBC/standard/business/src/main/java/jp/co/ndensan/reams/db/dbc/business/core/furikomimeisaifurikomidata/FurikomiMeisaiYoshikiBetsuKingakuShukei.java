@@ -35,7 +35,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         List<InjiYoushikiBangouBetuKingaku> outList = new ArrayList<>();
         Map<RString, List<YoushikiBangouBetuKingakuEntity>> map = separateIntoPieces(inList);
         Set<RString> keyset = map.keySet();
-        if (null != inList && !inList.isEmpty()) {
+        if (inList != null && !inList.isEmpty()) {
             for (RString key : keyset) {
                 outList.addAll(divide(map.get(key)));
             }
@@ -57,7 +57,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         List<RString> list = new ArrayList<>();
         for (YoushikiBangouBetuKingakuEntity entity : inList) {
             RString groupRS = entity.get被保険者番号().concat(entity.getサービス提供年月().toDateString()).concat(entity.get整理番号());
-            if (inList.isEmpty()) {
+            if (list.isEmpty()) {
                 list.add(groupRS);
             } else {
                 boolean flag = false;
@@ -111,7 +111,10 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
 
     private InjiYoushikiBangouBetuKingaku getOutItem(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
         InjiYoushikiBangouBetuKingaku out = new InjiYoushikiBangouBetuKingaku();
-        out.set集計様式番号(group.get(0).get様式番号().substring(0, 2));
+        out.set被保険者番号(group.get(0).get被保険者番号());
+        out.setサービス提供年月(group.get(0).getサービス提供年月());
+        out.set整理番号(group.get(0).get整理番号());
+        out.set集計様式番号(group.get(0).get様式番号().substring(0, 3));
         out.set印字様式番号(get印字様式番号(group));
         out.set支給金額計(calculate支給金額計(group));
         out.set差額金額計(calculate差額金額計(group));
@@ -119,7 +122,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
     }
 
     private RString get印字様式番号(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
-        RString rs = new RString("");
+        RString rs = RString.EMPTY;
         List<RString> list = getGroup様式番号(group);
         for (int i = list.size() - 1; i >= 0; i--) {
             for (YoushikiBangouBetuKingakuEntity entity : group) {
@@ -133,17 +136,17 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
     }
 
     private Decimal calculate支給金額計(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
-        Decimal 支給金額計 = new Decimal(0);
+        Decimal 支給金額計 = Decimal.ZERO;
         for (int i = 0; i < group.size(); i++) {
-            支給金額計.add(group.get(i).get支給金額計());
+            支給金額計 = 支給金額計.add(group.get(i).get支給金額計());
         }
         return 支給金額計;
     }
 
     private Decimal calculate差額金額計(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
-        Decimal 差額金額計 = new Decimal(0);
+        Decimal 差額金額計 = Decimal.ZERO;
         for (int i = 0; i < group.size(); i++) {
-            差額金額計.add(group.get(i).get差額金額計());
+            差額金額計 = 差額金額計.add(group.get(i).get差額金額計());
         }
         return 差額金額計;
     }
