@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3090001;
 
-import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryoku;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumidatashutsuryoku.IchijihanteikekkahyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE309003.DBE309003_IchijihanteiSumidataIfParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3090001.IchijiHanteizumiDataShutsuryokuDiv;
@@ -20,11 +21,13 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.ichijihanteikekkahyo.Ichiji
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyoFlag;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser01;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser10;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser11;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser12;
@@ -32,10 +35,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser14;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser20;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser22;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser31;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser33;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser34;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
@@ -194,8 +195,71 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
     private static final RString 印刷する = new RString("1");
     private static final RString 印刷しない = new RString("2");
     private static final RString 差分のみ印刷 = new RString("3");
-    private List<RString> 特記事項番号List;
     private static final int 元号 = 4;
+    private static final int 連番13 = 13;
+    private static final int 連番14 = 14;
+    private static final int 連番15 = 15;
+    private static final int 連番16 = 16;
+    private static final int 連番17 = 17;
+    private static final int 連番18 = 18;
+    private static final int 連番20 = 20;
+    private static final int 連番21 = 21;
+    private static final int 連番22 = 22;
+    private static final int 連番23 = 23;
+    private static final int 連番24 = 24;
+    private static final int 連番25 = 25;
+    private static final int 連番26 = 26;
+    private static final int 連番27 = 27;
+    private static final int 連番28 = 28;
+    private static final int 連番29 = 29;
+    private static final int 連番30 = 30;
+    private static final int 連番31 = 31;
+    private static final int 連番32 = 32;
+    private static final int 連番33 = 33;
+    private static final int 連番34 = 34;
+    private static final int 連番35 = 35;
+    private static final int 連番36 = 36;
+    private static final int 連番37 = 37;
+    private static final int 連番38 = 38;
+    private static final int 連番39 = 39;
+    private static final int 連番40 = 40;
+    private static final int 連番42 = 42;
+    private static final int 連番43 = 43;
+    private static final int 連番44 = 44;
+    private static final int 連番45 = 45;
+    private static final int 連番46 = 46;
+    private static final int 連番47 = 47;
+    private static final int 連番48 = 48;
+    private static final int 連番49 = 49;
+    private static final int 連番50 = 50;
+    private static final int 連番51 = 51;
+    private static final int 連番52 = 52;
+    private static final int 連番53 = 53;
+    private static final int 連番57 = 57;
+    private static final int 連番59 = 59;
+    private static final int 連番62 = 62;
+    private static final int 連番63 = 63;
+    private static final int 連番64 = 64;
+    private static final int 連番65 = 65;
+    private static final int 連番66 = 66;
+    private static final int 連番67 = 67;
+    private static final int 連番68 = 68;
+    private static final int 連番69 = 69;
+    private static final int 連番70 = 70;
+    private static final int 連番71 = 71;
+    private static final int 連番72 = 72;
+    private static final int 連番73 = 73;
+    private static final int 連番74 = 74;
+    private static final int 連番75 = 75;
+    private static final int 連番76 = 76;
+    private static final int 連番77 = 77;
+    private static final int 連番78 = 78;
+    private static final int 連番79 = 79;
+    private static final int 連番80 = 80;
+    private static final int 連番81 = 81;
+    private static final int 連番82 = 82;
+    private static final int 連番83 = 83;
+    private static final int 連番84 = 84;
 
     /**
      * コンストラクタです。
@@ -312,6 +376,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             一次判定日To = div.getTxtIchijiHanteibi().getToValue().toDateString();
         }
         RString 総合事業開始区分 = DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate());
+        RString 仮一次判定区分 = KariIchijiHanteiKubun.本一次判定.get名称();
         return IchijiHanteizumiDataShutsuryokuMybitisParamter.createParam(
                 div.getRadJyoken().getSelectedKey(),
                 申請日From,
@@ -321,8 +386,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
                 div.getTextBoxNum().getValue(),
                 総合事業開始区分,
                 null,
-                false);
-
+                Boolean.valueOf(仮一次判定区分.toString()));
     }
 
     /**
@@ -396,13 +460,20 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
      * 帳票印刷の設定します。
      *
      * @param 一次判定結果list 一次判定済みデータ
+     * @param 認定調査票概況調査リスト List<NinteichosahyoServiceJokyo>
+     * @param 認定調査票フラグリスト List<NinteichosahyoServiceJokyoFlag>
+     * @param 認定調査票調査項目リスト List<NinteichosahyoChosaItem>
+     * @param 前回調査項目リスト List<NinteichosahyoChosaItem>
+     * @param dbt5304Entity List<ShujiiIkenshoIkenItem>
+     * @param 前回dbt5304Entity List<ShujiiIkenshoIkenItem>
+     * @param 認定調査特記事項番号リスト List<NinteichosahyoTokkijiko>
      */
-    public void set帳票(List<IchijiHanteizumiDataBusiness> 一次判定結果list) {
-        特記事項番号List = new ArrayList<>();
+    public void set帳票(List<IchijiHanteizumiDataBusiness> 一次判定結果list,
+            List<NinteichosahyoServiceJokyo> 認定調査票概況調査リスト, List<NinteichosahyoServiceJokyoFlag> 認定調査票フラグリスト,
+            List<NinteichosahyoChosaItem> 認定調査票調査項目リスト, List<NinteichosahyoChosaItem> 前回調査項目リスト,
+            List<ShujiiIkenshoIkenItem> dbt5304Entity, List<ShujiiIkenshoIkenItem> 前回dbt5304Entity,
+            List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト) {
         IchijiHanteizumiDataShutsuryoku shutsuryoku = new IchijiHanteizumiDataShutsuryoku();
-        for (IchijiHanteizumiDataBusiness business : 一次判定結果list) {
-            特記事項番号List.add(business.get一次判定結果情報().getNinteichosaTokkijikoNo());
-        }
         IchijihanteikekkahyoBusiness a4Data = new IchijihanteikekkahyoBusiness();
         for (IchijiHanteizumiDataBusiness business : 一次判定結果list) {
             IchijihanteikekkahyoPrintService printService = new IchijihanteikekkahyoPrintService();
@@ -446,22 +517,22 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set現在の状況(GenzainoJokyoCode.toValue(business.get一次判定結果情報().get施設利用()).get名称());
             a4Data.set前々回要介護度(shutsuryoku.set要介護状態区分コード(business.get一次判定結果情報().get厚労省IF識別コード(),
                     business.get一次判定結果情報().get前々回要介護度()));
-            a4Data.set前々回認定有効期間(business.get一次判定結果情報().get前々回認定有効期間());
+            a4Data.set前々回認定有効期間(business.get一次判定結果情報().get前々回認定有効期間開始());
             a4Data.set前々回認定有効期間開始年月日(business.get一次判定結果情報().get前々回認定有効期間開始());
             a4Data.set前々回認定有効期間終了年月日(business.get一次判定結果情報().get前々回認定有効期間終了());
             a4Data.set前回要介護度(shutsuryoku.set要介護状態区分コード(business.get一次判定結果情報().get厚労省IF識別コード(),
                     business.get一次判定結果情報().get前回認定結果()));
-            a4Data.set前回認定有効期間(business.get一次判定結果情報().get前回認定有効期間());
-            a4Data.set前回認定有効期間開始年月日(business.get一次判定結果情報().get前回認定有効期間開始());
-            a4Data.set前回認定有効期間終了年月日(business.get一次判定結果情報().get前回認定有効期間終了());
-            a4Data.set前回認定日(business.get一次判定結果情報().get前回二次判定年月日());
+            a4Data.set前回認定有効期間(business.get一次判定結果情報().get二次判定認定有効期間());
+            a4Data.set前回認定有効期間開始年月日(business.get一次判定結果情報().get前々回認定有効期間開始());
+            a4Data.set前回認定有効期間終了年月日(business.get一次判定結果情報().get前々回認定有効期間終了());
+            a4Data.set前回認定日(business.get一次判定結果情報().get二次判定年月日());
             if (business.get一次判定結果情報().get前回状態像() != null) {
                 a4Data.set前回状態像(YokaigoJotaizoReiCode.toValue(business.get一次判定結果情報().get前回状態像()).get名称());
             }
             a4Data.set管理番号(business.get一次判定結果情報().get申請書管理番号());
             a4Data.set氏名(business.get一次判定結果情報().get被保険者氏名());
             a4Data.set被保険者番号(business.get一次判定結果情報().get被保険者番号());
-            a4Data.set保険者番号(business.get一次判定結果情報().get保険者番号());
+            a4Data.set保険者番号(business.get一次判定結果情報().get証記載保険者番号());
             a4Data.set所属(申請日);
             a4Data.set市町村名(business.get一次判定結果情報().get市町村名());
             a4Data.set事業者番号(business.get一次判定結果情報().get事業者番号());
@@ -494,13 +565,13 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set要介護認定等基準時間_機能訓練(business.get一次判定結果情報().get要介護認定等基準時間機能訓練());
             a4Data.set要介護認定等基準時間_医療関連(business.get一次判定結果情報().get要介護認定等基準時間医療関連());
             a4Data.set要介護認定等基準時間_認知症加算(business.get一次判定結果情報().get要介護認定等基準時間認知症加算());
-            a4Data.set警告コード(business.get一次判定結果情報().get警告コード());
+            a4Data.set警告コード(business.get一次判定結果情報().get要介護認定一次判定警告コード());
             a4Data.set中間評価項目得点第1群(business.get一次判定結果情報().get中間評価項目得点第1群());
             a4Data.set中間評価項目得点第2群(business.get一次判定結果情報().get中間評価項目得点第2群());
             a4Data.set中間評価項目得点第3群(business.get一次判定結果情報().get中間評価項目得点第3群());
             a4Data.set中間評価項目得点第4群(business.get一次判定結果情報().get中間評価項目得点第4群());
             a4Data.set中間評価項目得点第5群(business.get一次判定結果情報().get中間評価項目得点第5群());
-            a4Data.set日常生活自立度リスト(set日常生活自立度リスト(特記事項番号List, business));
+            a4Data.set日常生活自立度リスト(set日常生活自立度リスト(認定調査特記事項番号リスト, business));
             a4Data.set認定調査結果認知症高齢者自立度(business.get一次判定結果情報().get認知症高齢者自立度日常生活自立度());
             List<RString> 高齢者自立度リスト = new ArrayList<>();
             高齢者自立度リスト.add(RString.isNullOrEmpty(business.get一次判定結果情報().get障害高齢者自立度日常生活自立度()) ? RString.EMPTY
@@ -510,49 +581,53 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set高齢者自立度リスト(高齢者自立度リスト);
             a4Data.set意見書認知症高齢者自立度(business.get一次判定結果情報().get障害高齢者自立度日常生活自立度());
             a4Data.set現在のサービス利用状況名(business.get一次判定結果情報().getサービス区分コード());
-            a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business));
-            set帳票印刷(a4Data, business, shutsuryoku);
+            a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business, 認定調査票概況調査リスト, 認定調査票フラグリスト));
+            set帳票印刷(a4Data, business, shutsuryoku, 認定調査票調査項目リスト, 前回調査項目リスト,
+                    dbt5304Entity, 前回dbt5304Entity, 認定調査特記事項番号リスト);
             printService.print(a4Data);
         }
     }
 
     private void set帳票印刷(IchijihanteikekkahyoBusiness a4Data, IchijiHanteizumiDataBusiness business,
-            IchijiHanteizumiDataShutsuryoku shutsuryoku) {
-        a4Data.set主治医意見書項目1リスト(set主治医意見書項目1リスト(business));
-        a4Data.set主治医意見書項目2リスト(set主治医意見書項目2リスト(business));
-        a4Data.set主治医意見書項目3リスト(set主治医意見書項目3リスト(business));
-        a4Data.set主治医意見書項目4リスト(set主治医意見書項目4リスト(business));
-        a4Data.set身体機能_起居動作リスト(set身体機能_起居動作リスト(特記事項番号List, business));
-        a4Data.set身体機能_起居動作1リスト(shutsuryoku.set身体機能_起居動作1リスト(business));
-        a4Data.set身体機能_起居動作2リスト(shutsuryoku.set精神_行動障害2リスト(business));
-        a4Data.set身体機能_起居動作3リスト(shutsuryoku.set精神_行動障害3リスト(business));
-        a4Data.set身体機能_起居動作4リスト(shutsuryoku.set精神_行動障害4リスト(business));
-        a4Data.set生活機能リスト(set生活機能リスト(特記事項番号List, business));
-        a4Data.set生活機能1リスト(set生活機能1リスト(business));
-        a4Data.set生活機能2リスト(set生活機能2リスト(business));
-        a4Data.set生活機能3リスト(set生活機能3リスト(business));
-        a4Data.set生活機能4リスト(set生活機能4リスト(business));
-        a4Data.set認知機能リスト(set認知機能リスト(特記事項番号List, business));
-        a4Data.set認知機能1リスト(set認知機能1リスト(business));
-        a4Data.set認知機能2リスト(set認知機能2リスト(business));
-        a4Data.set認知機能3リスト(set認知機能3リスト(business));
-        a4Data.set認知機能4リスト(set認知機能4リスト(business));
-        a4Data.set精神_行動障害リスト(set精神_行動障害リスト(特記事項番号List, business));
-        a4Data.set精神_行動障害1リスト(shutsuryoku.set精神_行動障害1リスト(business));
-        a4Data.set精神_行動障害2リスト(shutsuryoku.set精神_行動障害2リスト(business));
-        a4Data.set精神_行動障害3リスト(shutsuryoku.set精神_行動障害3リスト(business));
-        a4Data.set精神_行動障害4リスト(shutsuryoku.set精神_行動障害4リスト(business));
-        a4Data.set社会生活への適応リスト(set社会生活への適応リスト(特記事項番号List, business));
-        a4Data.set社会生活への適応1リスト(set社会生活への適応1リスト(business));
-        a4Data.set社会生活への適応2リスト(set社会生活への適応2リスト(business));
-        a4Data.set社会生活への適応3リスト(set社会生活への適応3リスト(business));
-        a4Data.set社会生活への適応4リスト(set社会生活への適応4リスト(business));
-        a4Data.set特別な医療1リスト(set特別な医療1リスト(特記事項番号List, business));
-        a4Data.set特別な医療2リスト(set特別な医療2リスト(特記事項番号List, business));
-        a4Data.set特別な医療3_1リスト(set特別な医療3_1リスト(business));
-        a4Data.set特別な医療3_2リスト(set特別な医療3_2リスト(business));
-        a4Data.set特別な医療4_1リスト(set特別な医療4_1リスト(business));
-        a4Data.set特別な医療4_2リスト(set特別な医療4_2リスト(business));
+            IchijiHanteizumiDataShutsuryoku shutsuryoku, List<NinteichosahyoChosaItem> 認定調査票調査項目リスト,
+            List<NinteichosahyoChosaItem> 前回調査項目リスト, List<ShujiiIkenshoIkenItem> dbt5304Entity,
+            List<ShujiiIkenshoIkenItem> 前回dbt5304Entity,
+            List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト) {
+        a4Data.set主治医意見書項目1リスト(set主治医意見書項目1リスト(business, dbt5304Entity));
+        a4Data.set主治医意見書項目2リスト(set主治医意見書項目2リスト(business, dbt5304Entity, 前回dbt5304Entity));
+        a4Data.set主治医意見書項目3リスト(shutsuryoku.set主治医意見書項目3リスト(business, dbt5304Entity, 前回dbt5304Entity));
+        a4Data.set主治医意見書項目4リスト(shutsuryoku.set主治医意見書項目4リスト(business, dbt5304Entity, 前回dbt5304Entity));
+        a4Data.set身体機能_起居動作リスト(set身体機能_起居動作リスト(認定調査特記事項番号リスト, business));
+        a4Data.set身体機能_起居動作1リスト(shutsuryoku.set身体機能_起居動作1リスト(business, 認定調査票調査項目リスト));
+        a4Data.set身体機能_起居動作2リスト(shutsuryoku.set身体機能_起居動作2リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set身体機能_起居動作3リスト(shutsuryoku.set身体機能_起居動作3リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set身体機能_起居動作4リスト(shutsuryoku.set身体機能_起居動作4リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set生活機能リスト(set生活機能リスト(認定調査特記事項番号リスト, business));
+        a4Data.set生活機能1リスト(set生活機能1リスト(business, 認定調査票調査項目リスト));
+        a4Data.set生活機能2リスト(set生活機能2リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set生活機能3リスト(set生活機能3リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set生活機能4リスト(set生活機能4リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set認知機能リスト(set認知機能リスト(認定調査特記事項番号リスト, business));
+        a4Data.set認知機能1リスト(set認知機能1リスト(business, 認定調査票調査項目リスト));
+        a4Data.set認知機能2リスト(set認知機能2リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set認知機能3リスト(set認知機能3リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set認知機能4リスト(set認知機能4リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set精神_行動障害リスト(set精神_行動障害リスト(認定調査特記事項番号リスト, business));
+        a4Data.set精神_行動障害1リスト(shutsuryoku.set精神_行動障害1リスト(business, 認定調査票調査項目リスト));
+        a4Data.set精神_行動障害2リスト(shutsuryoku.set精神_行動障害2リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set精神_行動障害3リスト(shutsuryoku.set精神_行動障害3リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set精神_行動障害4リスト(shutsuryoku.set精神_行動障害4リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set社会生活への適応リスト(set社会生活への適応リスト(認定調査特記事項番号リスト, business));
+        a4Data.set社会生活への適応1リスト(shutsuryoku.set社会生活への適応1リスト(business, 認定調査票調査項目リスト));
+        a4Data.set社会生活への適応2リスト(shutsuryoku.set社会生活への適応2リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set社会生活への適応3リスト(shutsuryoku.set社会生活への適応3リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set社会生活への適応4リスト(shutsuryoku.set社会生活への適応4リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set特別な医療1リスト(set特別な医療1リスト(business, 認定調査特記事項番号リスト));
+        a4Data.set特別な医療2リスト(set特別な医療2リスト(business, 認定調査特記事項番号リスト));
+        a4Data.set特別な医療3_1リスト(set特別な医療3_1リスト(business, 認定調査票調査項目リスト));
+        a4Data.set特別な医療3_2リスト(set特別な医療3_2リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
+        a4Data.set特別な医療4_1リスト(set特別な医療4_1リスト(business, 認定調査票調査項目リスト));
+        a4Data.set特別な医療4_2リスト(set特別な医療4_2リスト(business, 認定調査票調査項目リスト, 前回調査項目リスト));
     }
 
     private RString nullOrEmpty(RString obj) {
@@ -564,59 +639,125 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
 
     }
 
-    private List<RString> set特別な医療4_2リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set特別な医療4_2リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目) {
         List<RString> 特別な医療4_2リスト = new ArrayList<>();
-        特別な医療4_2リスト.add(get状況改善(business.get一次判定結果情報().get気管切開の処置(),
-                business.get一次判定結果情報().get前回気管切開の処置()));
-        特別な医療4_2リスト.add(get状況改善(business.get一次判定結果情報().get疼痛の看護(),
-                business.get一次判定結果情報().get前回疼痛の看護()));
-        特別な医療4_2リスト.add(get状況改善(business.get一次判定結果情報().get経管栄養(),
-                business.get一次判定結果情報().get前回経管栄養()));
-        特別な医療4_2リスト.add(get状況改善(business.get一次判定結果情報().getモニター測定(),
-                business.get一次判定結果情報().get前回モニター測定()));
-        特別な医療4_2リスト.add(get状況改善(business.get一次判定結果情報().getじょくそうの処置(),
-                business.get一次判定結果情報().get前回じょくそうの処置()));
-        特別な医療4_2リスト.add(get状況改善(business.get一次判定結果情報().getカテーテル(),
-                business.get一次判定結果情報().get前回カテーテル()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番68));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番69));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番70));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番71));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番72));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番73));
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番73));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番74));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番75));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番76));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番77));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番78));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番79));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番80));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番81));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番82));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番83));
+            特別な医療4_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番84));
+        }
         return 特別な医療4_2リスト;
     }
 
-    private List<RString> set特別な医療4_1リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set特別な医療4_1リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> dbt5211Entity) {
         List<RString> 特別な医療4_1リスト = new ArrayList<>();
-        特別な医療4_1リスト.add(get名称01(business.get一次判定結果情報().get気管切開の処置()));
-        特別な医療4_1リスト.add(get名称01(business.get一次判定結果情報().get疼痛の看護()));
-        特別な医療4_1リスト.add(get名称01(business.get一次判定結果情報().get経管栄養()));
-        特別な医療4_1リスト.add(get名称01(business.get一次判定結果情報().getモニター測定()));
-        特別な医療4_1リスト.add(get名称01(business.get一次判定結果情報().getじょくそうの処置()));
-        特別な医療4_1リスト.add(get名称01(business.get一次判定結果情報().getカテーテル()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番68));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番69));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番70));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番71));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番72));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番73));
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番73));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番74));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番75));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番76));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番77));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番78));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番79));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番80));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番81));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番82));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番83));
+            特別な医療4_1リスト.add(get名称01(dbt5211Entity, 連番84));
+        }
         return 特別な医療4_1リスト;
     }
 
-    private List<RString> set特別な医療3_2リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set特別な医療3_2リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目) {
         List<RString> 特別な医療3_2リスト = new ArrayList<>();
-        特別な医療3_2リスト.add(get状況改善(business.get一次判定結果情報().get点滴の管理(),
-                business.get一次判定結果情報().get前回点滴の管理()));
-        特別な医療3_2リスト.add(get状況改善(business.get一次判定結果情報().get中心静脈栄養(),
-                business.get一次判定結果情報().get前回中心静脈栄養()));
-        特別な医療3_2リスト.add(get状況改善(business.get一次判定結果情報().get透析(),
-                business.get一次判定結果情報().get前回透析()));
-        特別な医療3_2リスト.add(get状況改善(business.get一次判定結果情報().getストーマの処置(),
-                business.get一次判定結果情報().get前回ストーマの処置()));
-        特別な医療3_2リスト.add(get状況改善(business.get一次判定結果情報().get酸素療法(),
-                business.get一次判定結果情報().get前回酸素療法()));
-        特別な医療3_2リスト.add(get状況改善(business.get一次判定結果情報().getレスピレーター(),
-                business.get一次判定結果情報().get前回レスピレーター()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番62));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番63));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番64));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番65));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番66));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番67));
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番67));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番68));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番69));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番70));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番71));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番72));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番73));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番74));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番75));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番76));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番77));
+            特別な医療3_2リスト.add(get調査連番(調査項目, 前回調査項目, 連番78));
+        }
         return 特別な医療3_2リスト;
     }
 
-    private List<RString> set特別な医療3_1リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set特別な医療3_1リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> dbt5211Entity) {
         List<RString> 特別な医療3_1リスト = new ArrayList<>();
-        特別な医療3_1リスト.add(get名称01(business.get一次判定結果情報().get点滴の管理()));
-        特別な医療3_1リスト.add(get名称01(business.get一次判定結果情報().get中心静脈栄養()));
-        特別な医療3_1リスト.add(get名称01(business.get一次判定結果情報().get透析()));
-        特別な医療3_1リスト.add(get名称01(business.get一次判定結果情報().getストーマの処置()));
-        特別な医療3_1リスト.add(get名称01(business.get一次判定結果情報().get酸素療法()));
-        特別な医療3_1リスト.add(get名称01(business.get一次判定結果情報().getレスピレーター()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番62));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番63));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番64));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番65));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番66));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番67));
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番67));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番68));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番69));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番70));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番71));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番72));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番73));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番74));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番75));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番76));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番77));
+            特別な医療3_1リスト.add(get名称01(dbt5211Entity, 連番78));
+        }
         return 特別な医療3_1リスト;
     }
 
@@ -627,342 +768,115 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
      * @param bodyItem 一次判定結果Entity
      * @return 日常生活自立度リスト
      */
-    private List<RString> set日常生活自立度リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set日常生活自立度リスト(List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト, IchijiHanteizumiDataBusiness business) {
         List<RString> 日常生活自立度リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード)
                 || 識別コード09A.equals(厚労省IF識別コード)) {
-            日常生活自立度リスト.add(get特記事項有無(list, 特記事項番号_701));
-            日常生活自立度リスト.add(get特記事項有無(list, 特記事項番号_702));
+            日常生活自立度リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_701, business));
+            日常生活自立度リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_702, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)
                 || 識別コード99A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            日常生活自立度リスト.add(get特記事項有無(list, 特記事項番号_901));
-            日常生活自立度リスト.add(get特記事項有無(list, 特記事項番号_902));
+            日常生活自立度リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_901, business));
+            日常生活自立度リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_902, business));
         }
         return 日常生活自立度リスト;
     }
 
-    private RString get特記事項有無(List<RString> list, RString 番号) {
+    private RString get特記事項有無(List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト,
+            RString 番号, IchijiHanteizumiDataBusiness business) {
+        List<RString> list = new ArrayList<>();
+        for (NinteichosahyoTokkijiko tokkijiko : 認定調査特記事項番号リスト) {
+
+            if (business.get一次判定結果情報().get申請書管理番号().equals(tokkijiko.get申請書管理番号().value())) {
+
+                list.add(tokkijiko.get認定調査特記事項番号());
+            }
+        }
         if (list.contains(番号)) {
             return new RString("※");
         }
         return RString.EMPTY;
     }
 
-    private List<RString> set社会生活への適応4リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 社会生活への適応4リスト = new ArrayList<>();
-        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        if (差分のみ印刷.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            return 社会生活機能(business);
-        }
-        if (印刷しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-        }
-        if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            if (識別コード09B.equals(厚労省IF識別コード)
-                    || 識別コード09A.equals(厚労省IF識別コード)) {
-                社会生活への適応4リスト.add(get名称12(business.get一次判定結果情報().get薬の内服()));
-                社会生活への適応4リスト.add(get名称12(business.get一次判定結果情報().get金銭の管理()));
-                社会生活への適応4リスト.add(get名称17(business.get一次判定結果情報().get日常の意思決定()));
-                社会生活への適応4リスト.add(get名称16(business.get一次判定結果情報().get集団への不適応()));
-                社会生活への適応4リスト.add(get名称10(business.get一次判定結果情報().get買い物()));
-                社会生活への適応4リスト.add(get名称10(business.get一次判定結果情報().get簡単な調理()));
-            }
-            if (識別コード06A.equals(厚労省IF識別コード)
-                    || 識別コード02A.equals(厚労省IF識別コード)) {
-                社会生活への適応4リスト.add(get名称22(business.get一次判定結果情報().get薬の内服()));
-                社会生活への適応4リスト.add(get名称22(business.get一次判定結果情報().get金銭の管理()));
-                社会生活への適応4リスト.add(get名称17(business.get一次判定結果情報().get日常の意思決定()));
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-            }
-            if (識別コード99A.equals(厚労省IF識別コード)) {
-                社会生活への適応4リスト.add(get名称22(business.get一次判定結果情報().get薬の内服()));
-                社会生活への適応4リスト.add(get名称22(business.get一次判定結果情報().get金銭の管理()));
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-            }
-        }
-        return 社会生活への適応4リスト;
-    }
-
-    private List<RString> 社会生活機能(IchijiHanteizumiDataBusiness business) {
-        List<RString> 社会生活への適応4リスト = new ArrayList<>();
-        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        if (識別コード09B.equals(厚労省IF識別コード)
-                || 識別コード09A.equals(厚労省IF識別コード)) {
-            社会生活への適応4リスト.add(nullOrEmpty(差分結果(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服())).isEmpty()
-                    ? RString.EMPTY : get名称12(business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()).isEmpty()
-                    ? RString.EMPTY : get名称12(business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get日常の意思決定(),
-                    business.get一次判定結果情報().get前回日常の意思決定()).isEmpty()
-                    ? RString.EMPTY : get名称17(business.get一次判定結果情報().get前回日常の意思決定()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get集団への不適応(),
-                    business.get一次判定結果情報().get前回集団への不適応()).isEmpty()
-                    ? RString.EMPTY : get名称16(business.get一次判定結果情報().get前回集団への不適応()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get買い物(),
-                    business.get一次判定結果情報().get前回買い物()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回買い物()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get簡単な調理(),
-                    business.get一次判定結果情報().get前回簡単な調理()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回簡単な調理()));
-        }
-        if (識別コード06A.equals(厚労省IF識別コード)
-                || 識別コード02A.equals(厚労省IF識別コード)) {
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服()).isEmpty()
-                    ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()).isEmpty()
-                    ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get日常の意思決定(),
-                    business.get一次判定結果情報().get前回日常の意思決定()).isEmpty()
-                    ? RString.EMPTY : get名称17(business.get一次判定結果情報().get前回日常の意思決定()));
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-        }
-        if (識別コード06A.equals(厚労省IF識別コード)
-                || 識別コード02A.equals(厚労省IF識別コード)) {
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服()).isEmpty()
-                    ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応4リスト.add(差分結果(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()).isEmpty()
-                    ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-        }
-        return 社会生活への適応4リスト;
-    }
-
-    private List<RString> set社会生活への適応3リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 社会生活への適応3リスト = new ArrayList<>();
-        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        if (識別コード09B.equals(厚労省IF識別コード)
-                || 識別コード09A.equals(厚労省IF識別コード)) {
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get日常の意思決定(),
-                    business.get一次判定結果情報().get前回日常の意思決定()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get集団への不適応(),
-                    business.get一次判定結果情報().get前回集団への不適応()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get買い物(),
-                    business.get一次判定結果情報().get前回買い物()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get簡単な調理(),
-                    business.get一次判定結果情報().get前回簡単な調理()));
-        }
-        if (識別コード06A.equals(厚労省IF識別コード)
-                || 識別コード02A.equals(厚労省IF識別コード)) {
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get日常の意思決定(),
-                    business.get一次判定結果情報().get前回日常の意思決定()));
-            社会生活への適応3リスト.add(RString.EMPTY);
-            社会生活への適応3リスト.add(RString.EMPTY);
-            社会生活への適応3リスト.add(RString.EMPTY);
-        }
-        if (識別コード99A.equals(厚労省IF識別コード)) {
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get薬の内服(), business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応3リスト.add(get意見書状況結果(business.get一次判定結果情報().get金銭の管理(), business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応3リスト.add(RString.EMPTY);
-            社会生活への適応3リスト.add(RString.EMPTY);
-            社会生活への適応3リスト.add(RString.EMPTY);
-            社会生活への適応3リスト.add(RString.EMPTY);
-        }
-        return 社会生活への適応3リスト;
-    }
-
-    private List<RString> set社会生活への適応2リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 社会生活への適応2リスト = new ArrayList<>();
-        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        if (識別コード09B.equals(厚労省IF識別コード)
-                || 識別コード09A.equals(厚労省IF識別コード)) {
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get日常の意思決定(),
-                    business.get一次判定結果情報().get前回日常の意思決定()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get集団への不適応(),
-                    business.get一次判定結果情報().get前回集団への不適応()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get買い物(),
-                    business.get一次判定結果情報().get前回買い物()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get簡単な調理(),
-                    business.get一次判定結果情報().get前回簡単な調理()));
-        }
-        if (識別コード06A.equals(厚労省IF識別コード)
-                || 識別コード02A.equals(厚労省IF識別コード)) {
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get日常の意思決定(),
-                    business.get一次判定結果情報().get前回日常の意思決定()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get集団への不適応(),
-                    business.get一次判定結果情報().get前回集団への不適応()));
-            社会生活への適応2リスト.add(RString.EMPTY);
-            社会生活への適応2リスト.add(RString.EMPTY);
-            社会生活への適応2リスト.add(RString.EMPTY);
-        }
-        if (識別コード99A.equals(厚労省IF識別コード)) {
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get薬の内服(),
-                    business.get一次判定結果情報().get前回薬の内服()));
-            社会生活への適応2リスト.add(get状況改善(business.get一次判定結果情報().get金銭の管理(),
-                    business.get一次判定結果情報().get前回金銭の管理()));
-            社会生活への適応2リスト.add(RString.EMPTY);
-            社会生活への適応2リスト.add(RString.EMPTY);
-            社会生活への適応2リスト.add(RString.EMPTY);
-            社会生活への適応2リスト.add(RString.EMPTY);
-        }
-        return 社会生活への適応2リスト;
-    }
-
-    private List<RString> set社会生活への適応1リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 社会生活への適応1リスト = new ArrayList<>();
-        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        if (識別コード09B.equals(厚労省IF識別コード)
-                || 識別コード09A.equals(厚労省IF識別コード)) {
-            社会生活への適応1リスト.add(get名称12(business.get一次判定結果情報().get薬の内服()));
-            社会生活への適応1リスト.add(get名称12(business.get一次判定結果情報().get金銭の管理()));
-            社会生活への適応1リスト.add(get名称17(business.get一次判定結果情報().get日常の意思決定()));
-            社会生活への適応1リスト.add(get名称16(business.get一次判定結果情報().get集団への不適応()));
-            社会生活への適応1リスト.add(get名称10(business.get一次判定結果情報().get買い物()));
-            社会生活への適応1リスト.add(get名称10(business.get一次判定結果情報().get簡単な調理()));
-        }
-        if (識別コード06A.equals(厚労省IF識別コード)
-                || 識別コード02A.equals(厚労省IF識別コード)) {
-            社会生活への適応1リスト.add(get名称22(business.get一次判定結果情報().get薬の内服()));
-            社会生活への適応1リスト.add(get名称22(business.get一次判定結果情報().get金銭の管理()));
-            社会生活への適応1リスト.add(get名称17(business.get一次判定結果情報().get日常の意思決定()));
-            社会生活への適応1リスト.add(RString.EMPTY);
-            社会生活への適応1リスト.add(RString.EMPTY);
-            社会生活への適応1リスト.add(RString.EMPTY);
-        }
-        if (識別コード99A.equals(厚労省IF識別コード)) {
-            社会生活への適応1リスト.add(get名称22(business.get一次判定結果情報().get薬の内服()));
-            社会生活への適応1リスト.add(get名称22(business.get一次判定結果情報().get金銭の管理()));
-            社会生活への適応1リスト.add(RString.EMPTY);
-            社会生活への適応1リスト.add(RString.EMPTY);
-            社会生活への適応1リスト.add(RString.EMPTY);
-            社会生活への適応1リスト.add(RString.EMPTY);
-        }
-        return 社会生活への適応1リスト;
-    }
-
-    /**
-     * 特別な医療2リストを設定します。
-     *
-     * @param list 特記事項番号
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 特別な医療2リスト
-     */
-    public List<RString> set特別な医療2リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set特別な医療2リスト(IchijiHanteizumiDataBusiness business,
+            List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト) {
         List<RString> 特別な医療2リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード)
                 || 識別コード09A.equals(厚労省IF識別コード)) {
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_607));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_608));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_609));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_610));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_611));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_612));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_607, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_608, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_609, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_610, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_611, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_612, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)
                 || 識別コード99A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_807));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_808));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_809));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_810));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_811));
-            特別な医療2リスト.add(get特記事項有無(list, 特記事項番号_812));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_807, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_808, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_809, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_810, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_811, business));
+            特別な医療2リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_812, business));
         }
         return 特別な医療2リスト;
     }
 
-    /**
-     * 特別な医療1リストを設定します。
-     *
-     * @param list 特記事項番号
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 特別な医療1リスト
-     */
-    public List<RString> set特別な医療1リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set特別な医療1リスト(IchijiHanteizumiDataBusiness business,
+            List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト) {
         List<RString> 特別な医療1リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_601));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_602));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_603));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_604));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_605));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_606));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_601, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_602, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_603, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_604, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_605, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_606, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)
                 || 識別コード99A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_801));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_802));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_803));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_804));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_805));
-            特別な医療1リスト.add(get特記事項有無(list, 特記事項番号_806));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_801, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_802, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_803, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_804, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_805, business));
+            特別な医療1リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_806, business));
         }
         return 特別な医療1リスト;
     }
 
-    /**
-     * 社会生活への適応リストを設定します。
-     *
-     * @param list 特記事項番号
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 社会生活への適応リスト
-     */
-    public List<RString> set社会生活への適応リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set社会生活への適応リスト(List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト,
+            IchijiHanteizumiDataBusiness business) {
         List<RString> 社会生活への適応リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード)
                 || 識別コード09A.equals(厚労省IF識別コード)) {
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_501));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_502));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_503));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_504));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_505));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_506));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_501, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_502, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_503, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_504, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_505, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_506, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_503));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_504));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_506));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_503, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_504, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_506, business));
             社会生活への適応リスト.add(RString.EMPTY);
             社会生活への適応リスト.add(RString.EMPTY);
             社会生活への適応リスト.add(RString.EMPTY);
         }
         if (識別コード99A.equals(厚労省IF識別コード)) {
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_510));
-            社会生活への適応リスト.add(get特記事項有無(list, 特記事項番号_511));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_510, business));
+            社会生活への適応リスト.add(get特記事項有無(認定調査特記事項番号リスト, 特記事項番号_511, business));
             社会生活への適応リスト.add(RString.EMPTY);
             社会生活への適応リスト.add(RString.EMPTY);
             社会生活への適応リスト.add(RString.EMPTY);
@@ -971,222 +885,204 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
         return 社会生活への適応リスト;
     }
 
-    /**
-     * 生活機能リストを設定します。
-     *
-     * @param list 特記事項番号
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 生活機能リスト
-     */
-    public List<RString> set生活機能リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set生活機能リスト(List<NinteichosahyoTokkijiko> list,
+            IchijiHanteizumiDataBusiness business) {
         List<RString> 生活機能リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード)
                 || 識別コード09A.equals(厚労省IF識別コード)) {
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_201));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_202));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_203));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_204));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_205));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_206));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_208));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_209));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_210));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_211));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_212));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_201, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_202, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_203, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_204, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_205, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_206, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_208, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_209, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_210, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_211, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_212, business));
         }
         if (識別コード06A.equals(厚労省IF識別コード)) {
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_206));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_402));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_403));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_405));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_406));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5011));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5012));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5013));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5021));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5022));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_1002));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_206, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_402, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_403, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_405, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_406, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5011, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5012, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5013, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5021, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5022, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_1002, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)) {
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_206));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_402));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_403));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_405));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_406));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5011));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5012));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5013));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5021));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5022));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_206, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_402, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_403, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_405, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_406, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5011, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5012, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5013, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5021, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_5022, business));
             生活機能リスト.add(RString.EMPTY);
         }
         if (識別コード99A.equals(厚労省IF識別コード)) {
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_207, business));
             生活機能リスト.add(RString.EMPTY);
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_404));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_409));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_405));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_406));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_501));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_502));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_503));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_506));
-            生活機能リスト.add(get特記事項有無(list, 特記事項番号_507));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_404, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_409, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_405, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_406, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_501, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_502, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_503, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_506, business));
+            生活機能リスト.add(get特記事項有無(list, 特記事項番号_507, business));
             生活機能リスト.add(RString.EMPTY);
         }
         return 生活機能リスト;
     }
 
-    /**
-     * 身体機能起居動作リストを設定します。
-     *
-     * @param list 特記事項番号
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 身体機能起居動作リスト
-     */
-    public List<RString> set身体機能_起居動作リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set身体機能_起居動作リスト(List<NinteichosahyoTokkijiko> list,
+            IchijiHanteizumiDataBusiness business) {
         List<RString> 身体機能_起居動作リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
+        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101, business));
+        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101, business));
+        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101, business));
+        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101, business));
+        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101, business));
         if (識別コード09B.equals(厚労省IF識別コード)
                 || 識別コード09A.equals(厚労省IF識別コード)) {
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_103));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_104));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_105));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_106));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_107));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_108));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_109));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_110));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_111));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_112));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_113));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_103, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_104, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_105, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_106, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_107, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_108, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_109, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_110, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_111, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_112, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_113, business));
         }
         if (識別コード06A.equals(厚労省IF識別コード)) {
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_201));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_202));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_203));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_204));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_205));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_301));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_302));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_303));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_5014));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_601));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_602));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_201, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_202, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_203, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_204, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_205, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_301, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_302, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_303, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_5014, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_601, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_602, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)) {
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_201));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_202));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_203));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_204));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_205));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_301));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_302));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_303));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_504));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_601));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_602));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_201, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_202, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_203, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_204, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_205, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_301, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_302, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_303, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_504, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_601, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_602, business));
         }
         if (識別コード99A.equals(厚労省IF識別コード)) {
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(RString.EMPTY);
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_201));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_202));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_203));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_205));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_206));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_301));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_302));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_304));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_504));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_601));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_602));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_201, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_202, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_203, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_205, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_206, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_301, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_302, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_304, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_504, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_601, business));
+            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_602, business));
         }
         return 身体機能_起居動作リスト;
     }
 
-    /**
-     * 精神行動障害リストを設定します。
-     *
-     * @param list 特記事項番号
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 精神行動障害リスト
-     */
-    public List<RString> set精神_行動障害リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set精神_行動障害リスト(List<NinteichosahyoTokkijiko> list,
+            IchijiHanteizumiDataBusiness business) {
         List<RString> 精神_行動障害リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード)
                 || 識別コード09A.equals(厚労省IF識別コード)) {
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_401));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_402));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_403));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_404));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_405));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_406));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_407));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_408));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_409));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_410));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_411));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_412));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_413));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_414));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_415));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_401, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_402, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_403, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_404, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_405, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_406, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_407, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_408, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_409, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_410, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_411, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_412, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_413, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_414, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_415, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_701));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_702));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_704));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_705));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_707));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_708));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_709));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_711));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_713));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_714));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_716));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_719));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_701, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_702, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_704, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_705, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_707, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_708, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_709, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_711, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_713, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_714, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_716, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_719, business));
             精神_行動障害リスト.add(RString.EMPTY);
             精神_行動障害リスト.add(RString.EMPTY);
             精神_行動障害リスト.add(RString.EMPTY);
         }
         if (識別コード99A.equals(厚労省IF識別コード)) {
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_701));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_702));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_704));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_705));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_707));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_708));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_709));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_711));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_713));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_714));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_716));
-            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_512));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_701, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_702, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_704, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_705, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_707, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_708, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_709, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_711, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_713, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_714, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_716, business));
+            精神_行動障害リスト.add(get特記事項有無(list, 特記事項番号_512, business));
             精神_行動障害リスト.add(RString.EMPTY);
             精神_行動障害リスト.add(RString.EMPTY);
             精神_行動障害リスト.add(RString.EMPTY);
@@ -1194,150 +1090,130 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
         return 精神_行動障害リスト;
     }
 
-    /**
-     * 主治医意見書項目3リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 主治医意見書項目3リスト
-     */
-    public List<RString> set主治医意見書項目3リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 主治医意見書項目3リスト = new ArrayList<>();
-        主治医意見書項目3リスト.add(get意見書状況結果(business.get一次判定結果情報().get意見書認知症高齢者自立度(),
-                business.get一次判定結果情報().get前回意見書認知症高齢者自立度()));
-        主治医意見書項目3リスト.add(get意見書状況結果(business.get一次判定結果情報().get短期記憶(),
-                business.get一次判定結果情報().get前回短期記憶()));
-        主治医意見書項目3リスト.add(get意見書状況結果(business.get一次判定結果情報().get日常の意思決定を行うための認知能力(),
-                business.get一次判定結果情報().get前回日常の意思決定を行うための認知能力()));
-        主治医意見書項目3リスト.add(get意見書状況結果(business.get一次判定結果情報().get自分の意思の伝達能力(),
-                business.get一次判定結果情報().get前回自分の意思の伝達能力()));
-        主治医意見書項目3リスト.add(get意見書状況結果(business.get一次判定結果情報().get食事行為(),
-                business.get一次判定結果情報().get前回食事行為()));
-        return 主治医意見書項目3リスト;
-    }
-
-    /**
-     * 主治医意見書項目4リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 主治医意見書項目4リスト
-     */
-    public List<RString> set主治医意見書項目4リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 主治医意見書項目4リスト = new ArrayList<>();
-        RString 結果印刷有無 = DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate());
-        if (差分のみ印刷.equals(結果印刷有無)) {
-            return 主治医差分(business);
-        }
-        if (印刷しない.equals(結果印刷有無)) {
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
-        }
-        if (印刷する.equals(結果印刷有無)) {
-            主治医意見書項目4リスト.add(IkenKomoku03.toValue(business.get一次判定結果情報().get意見書認知症高齢者自立度()).get名称());
-            主治医意見書項目4リスト.add(IkenKomoku04.toValue(business.get一次判定結果情報().get短期記憶()).get名称());
-            主治医意見書項目4リスト.add(IkenKomoku05.toValue(business.get一次判定結果情報().get日常の意思決定を行うための認知能力()).get名称());
-            主治医意見書項目4リスト.add(IkenKomoku06.toValue(business.get一次判定結果情報().get自分の意思の伝達能力()).get名称());
-            主治医意見書項目4リスト.add(IkenKomoku14.toValue(business.get一次判定結果情報().get食事行為()).get名称());
-        }
-        return 主治医意見書項目4リスト;
-    }
-
-    /**
-     * 主治医意見書項目2リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 主治医意見書項目2リスト
-     */
-    public List<RString> set主治医意見書項目2リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set主治医意見書項目2リスト(IchijiHanteizumiDataBusiness business, List<ShujiiIkenshoIkenItem> 意見書項目,
+            List<ShujiiIkenshoIkenItem> 前回意見書項目) {
         List<RString> 主治医意見書項目2リスト = new ArrayList<>();
-        主治医意見書項目2リスト.add(get状況改善(business.get一次判定結果情報().get意見書認知症高齢者自立度(),
-                business.get一次判定結果情報().get前回意見書認知症高齢者自立度()));
-        主治医意見書項目2リスト.add(get状況改善(business.get一次判定結果情報().get短期記憶(),
-                business.get一次判定結果情報().get前回短期記憶()));
-        主治医意見書項目2リスト.add(get状況改善(business.get一次判定結果情報().get日常の意思決定を行うための認知能力(),
-                business.get一次判定結果情報().get前回日常の意思決定を行うための認知能力()));
-        主治医意見書項目2リスト.add(get状況改善(business.get一次判定結果情報().get自分の意思の伝達能力(),
-                business.get一次判定結果情報().get前回自分の意思の伝達能力()));
-        主治医意見書項目2リスト.add(get状況改善(business.get一次判定結果情報().get食事行為(),
-                business.get一次判定結果情報().get前回食事行為()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
+                || 識別コード06A.equals(厚労省IF識別コード)) {
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番13));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番14));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番15));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番16));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番68));
+        }
+        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番14));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番15));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番16));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番17));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番18));
+        }
         return 主治医意見書項目2リスト;
     }
 
-    /**
-     * 主治医意見書項目2リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 主治医意見書項目2リスト
-     */
-    public List<RString> set主治医意見書項目1リスト(IchijiHanteizumiDataBusiness business) {
+    private static RString get状況改善(List<ShujiiIkenshoIkenItem> 調査項目,
+            List<ShujiiIkenshoIkenItem> 前回調査項目, int 連番) {
+        RString 状況改善 = RString.EMPTY;
+        RString 今回調査 = RString.EMPTY;
+        RString 前回調査 = RString.EMPTY;
+        if (連番 < 調査項目.size() && !RString.isNullOrEmpty(調査項目.get(連番).get意見項目())) {
+            今回調査 = 調査項目.get(連番).get意見項目();
+        }
+        if (連番 < 前回調査項目.size() && !RString.isNullOrEmpty(前回調査項目.get(連番).get意見項目())) {
+            前回調査 = 前回調査項目.get(連番).get意見項目();
+        }
+        if (RString.isNullOrEmpty(前回調査)) {
+            return 状況改善;
+        }
+        if ((RString.isNullOrEmpty(今回調査) ? 0 : Integer.parseInt(今回調査.toString())) < Integer.parseInt(前回調査.toString())) {
+            状況改善 = new RString("▽");
+        }
+        if ((RString.isNullOrEmpty(今回調査) ? 0 : Integer.parseInt(今回調査.toString())) > Integer.parseInt(前回調査.toString())) {
+            状況改善 = new RString("▲");
+        }
+        return 状況改善;
+    }
+
+    private List<RString> set主治医意見書項目1リスト(IchijiHanteizumiDataBusiness business, List<ShujiiIkenshoIkenItem> dbt5304Entity) {
         List<RString> 主治医意見書項目1リスト = new ArrayList<>();
-        主治医意見書項目1リスト.add(get名称03(business.get一次判定結果情報().get意見書認知症高齢者自立度()));
-        主治医意見書項目1リスト.add(get名称03(business.get一次判定結果情報().get短期記憶()));
-        主治医意見書項目1リスト.add(get名称03(business.get一次判定結果情報().get日常の意思決定を行うための認知能力()));
-        主治医意見書項目1リスト.add(get名称03(business.get一次判定結果情報().get自分の意思の伝達能力()));
-        主治医意見書項目1リスト.add(get名称03(business.get一次判定結果情報().get食事行為()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
+                || 識別コード06A.equals(厚労省IF識別コード)) {
+            主治医意見書項目1リスト.add(get意見書名称03(dbt5304Entity, 連番13));
+            主治医意見書項目1リスト.add(get意見書名称04(dbt5304Entity, 連番14));
+            主治医意見書項目1リスト.add(get意見書名称05(dbt5304Entity, 連番15));
+            主治医意見書項目1リスト.add(get意見書名称06(dbt5304Entity, 連番16));
+            主治医意見書項目1リスト.add(get意見書名称14(dbt5304Entity, 連番68));
+        }
+        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
+            主治医意見書項目1リスト.add(get意見書名称03(dbt5304Entity, 連番14));
+            主治医意見書項目1リスト.add(get意見書名称04(dbt5304Entity, 連番15));
+            主治医意見書項目1リスト.add(get意見書名称05(dbt5304Entity, 連番16));
+            主治医意見書項目1リスト.add(get意見書名称06(dbt5304Entity, 連番17));
+            主治医意見書項目1リスト.add(get意見書名称14(dbt5304Entity, 連番18));
+        }
         return 主治医意見書項目1リスト;
     }
 
-    /**
-     * 主治医意見書項目2リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 主治医意見書項目2リスト
-     */
-    public List<RString> set生活機能1リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set生活機能1リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目リスト) {
         List<RString> 生活機能1リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        if (識別コード09B.equals(厚労省IF識別コード)
-                || 識別コード09A.equals(厚労省IF識別コード)) {
-            生活機能1リスト.add(get名称10(business.get一次判定結果情報().get移乗()));
-            生活機能1リスト.add(get名称10(business.get一次判定結果情報().get移動()));
-            生活機能1リスト.add(get名称11(business.get一次判定結果情報().getえん下()));
-            生活機能1リスト.add(get名称10(business.get一次判定結果情報().get食事摂取()));
-            生活機能1リスト.add(get名称10(business.get一次判定結果情報().get排尿()));
-            生活機能1リスト.add(get名称10(business.get一次判定結果情報().get排便()));
-            生活機能1リスト.add(get名称12(business.get一次判定結果情報().get口腔清潔()));
-            生活機能1リスト.add(get名称12(business.get一次判定結果情報().get洗顔()));
-            生活機能1リスト.add(get名称12(business.get一次判定結果情報().get整髪()));
-            生活機能1リスト.add(get名称10(business.get一次判定結果情報().get上衣の着脱()));
-            生活機能1リスト.add(get名称10(business.get一次判定結果情報().getズボン等の着脱()));
-            生活機能1リスト.add(get名称13(business.get一次判定結果情報().get外出頻度()));
-        }
-        if (識別コード06A.equals(厚労省IF識別コード)
-                || 識別コード02A.equals(厚労省IF識別コード)) {
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().get移乗()));
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().get移動()));
-            生活機能1リスト.add(get名称11(business.get一次判定結果情報().getえん下()));
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().get食事摂取()));
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().get排尿()));
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().get排便()));
-            生活機能1リスト.add(get名称22(business.get一次判定結果情報().get口腔清潔()));
-            生活機能1リスト.add(get名称22(business.get一次判定結果情報().get洗顔()));
-            生活機能1リスト.add(get名称22(business.get一次判定結果情報().get整髪()));
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().get上衣の着脱()));
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().getズボン等の着脱()));
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            生活機能1リスト.add(get名称10(調査項目リスト, 連番20));
+            生活機能1リスト.add(get名称10(調査項目リスト, 連番21));
+            生活機能1リスト.add(get名称11(調査項目リスト, 連番22));
+            生活機能1リスト.add(get名称10(調査項目リスト, 連番23));
+            生活機能1リスト.add(get名称10(調査項目リスト, 連番24));
+            生活機能1リスト.add(get名称10(調査項目リスト, 連番25));
+            生活機能1リスト.add(get名称12(調査項目リスト, 連番26));
+            生活機能1リスト.add(get名称12(調査項目リスト, 連番27));
+            生活機能1リスト.add(get名称12(調査項目リスト, 連番28));
+            生活機能1リスト.add(get名称10(調査項目リスト, 連番29));
+            生活機能1リスト.add(get名称10(調査項目リスト, 連番30));
+            生活機能1リスト.add(get名称13(調査項目リスト, 連番31));
         }
         if (識別コード99A.equals(厚労省IF識別コード)) {
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().get移乗()));
-            生活機能1リスト.add(business.get一次判定結果情報().get移動());
-            生活機能1リスト.add(get名称31(business.get一次判定結果情報().getえん下()));
-            生活機能1リスト.add(get名称33(business.get一次判定結果情報().get食事摂取()));
-            生活機能1リスト.add(business.get一次判定結果情報().get排尿());
-            生活機能1リスト.add(business.get一次判定結果情報().get排便());
-            生活機能1リスト.add(get名称22(business.get一次判定結果情報().get口腔清潔()));
-            生活機能1リスト.add(get名称22(business.get一次判定結果情報().get洗顔()));
-            生活機能1リスト.add(get名称22(business.get一次判定結果情報().get整髪()));
-            生活機能1リスト.add(get名称34(business.get一次判定結果情報().get上衣の着脱()));
-            生活機能1リスト.add(get名称20(business.get一次判定結果情報().getズボン等の着脱()));
-            生活機能1リスト.add(business.get一次判定結果情報().get外出頻度());
-        }
-        if (識別コード06A.equals(厚労省IF識別コード)) {
-            生活機能1リスト.add(get名称13(business.get一次判定結果情報().get外出頻度()));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番17));
+            生活機能1リスト.add(RString.EMPTY);
+            生活機能1リスト.add(get名称33(調査項目リスト, 連番25));
+            生活機能1リスト.add(get名称33(調査項目リスト, 連番30));
+            生活機能1リスト.add(RString.EMPTY);
+            生活機能1リスト.add(RString.EMPTY);
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番31));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番32));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番33));
+            生活機能1リスト.add(get名称34(調査項目リスト, 連番36));
+            生活機能1リスト.add(get名称34(調査項目リスト, 連番37));
+            生活機能1リスト.add(RString.EMPTY);
         }
         if (識別コード02A.equals(厚労省IF識別コード)) {
-            生活機能1リスト.add(business.get一次判定結果情報().get外出頻度());
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番16));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番17));
+            生活機能1リスト.add(get名称11(調査項目リスト, 連番23));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番24));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番26));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番27));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番28));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番29));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番30));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番32));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番33));
+            生活機能1リスト.add(RString.EMPTY);
+        }
+        if (識別コード06A.equals(厚労省IF識別コード)) {
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番16));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番17));
+            生活機能1リスト.add(get名称11(調査項目リスト, 連番23));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番24));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番26));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番27));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番28));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番29));
+            生活機能1リスト.add(get名称22(調査項目リスト, 連番30));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番32));
+            生活機能1リスト.add(get名称20(調査項目リスト, 連番33));
+            生活機能1リスト.add(get名称13(調査項目リスト, 連番80));
         }
         return 生活機能1リスト;
     }
@@ -1346,86 +1222,144 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
      * 主治医意見書項目2リストを設定します。
      *
      * @param business IchijiHanteizumiDataBusiness
+     * @param 調査項目 List<NinteichosahyoChosaItem>
+     * @param 前回調査項目 List<NinteichosahyoChosaItem>
      * @return 主治医意見書項目2リスト
      */
-    public List<RString> set生活機能2リスト(IchijiHanteizumiDataBusiness business) {
+    public List<RString> set生活機能2リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目) {
         List<RString> 生活機能2リスト = new ArrayList<>();
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get移乗(),
-                business.get一次判定結果情報().get前回移乗()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get移動(),
-                business.get一次判定結果情報().get前回移動()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().getえん下(),
-                business.get一次判定結果情報().get前回えん下()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get食事摂取(),
-                business.get一次判定結果情報().get前回食事摂取()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get排尿(),
-                business.get一次判定結果情報().get前回排尿()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get排便(),
-                business.get一次判定結果情報().get前回排便()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get口腔清潔(),
-                business.get一次判定結果情報().get前回口腔清潔()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get洗顔(),
-                business.get一次判定結果情報().get前回洗顔()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get整髪(),
-                business.get一次判定結果情報().get前回整髪()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get上衣の着脱(),
-                business.get一次判定結果情報().get前回上衣の着脱()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().getズボン等の着脱(),
-                business.get一次判定結果情報().get前回ズボン等の着脱()));
-        生活機能2リスト.add(get状況改善(business.get一次判定結果情報().get外出頻度(),
-                business.get一次判定結果情報().get前回外出頻度()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番20));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番21));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番22));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番23));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番24));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番25));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番26));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番27));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番28));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番29));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番30));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番31));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番17));
+            生活機能2リスト.add(RString.EMPTY);
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番25));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番30));
+            生活機能2リスト.add(RString.EMPTY);
+            生活機能2リスト.add(RString.EMPTY);
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番31));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番32));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番33));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番36));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番37));
+            生活機能2リスト.add(RString.EMPTY);
+        }
+        if (識別コード02A.equals(厚労省IF識別コード)) {
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番16));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番17));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番23));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番24));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番26));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番27));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番28));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番29));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番30));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番32));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番33));
+            生活機能2リスト.add(RString.EMPTY);
+        }
+        if (識別コード06A.equals(厚労省IF識別コード)) {
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番16));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番17));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番23));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番24));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番26));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番27));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番28));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番29));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番30));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番32));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番33));
+            生活機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番80));
+        }
         return 生活機能2リスト;
     }
 
-    /**
-     * 主治医意見書項目2リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 主治医意見書項目2リスト
-     */
-    public List<RString> set生活機能3リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set生活機能3リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目) {
         List<RString> 生活機能3リスト = new ArrayList<>();
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get移乗(),
-                business.get一次判定結果情報().get前回移乗()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get移動(),
-                business.get一次判定結果情報().get前回移動()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().getえん下(),
-                business.get一次判定結果情報().get前回えん下()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get食事摂取(),
-                business.get一次判定結果情報().get前回食事摂取()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get排尿(),
-                business.get一次判定結果情報().get前回排尿()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get排便(),
-                business.get一次判定結果情報().get前回排便()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get口腔清潔(),
-                business.get一次判定結果情報().get前回口腔清潔()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get洗顔(),
-                business.get一次判定結果情報().get前回洗顔()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get整髪(),
-                business.get一次判定結果情報().get前回整髪()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get上衣の着脱(),
-                business.get一次判定結果情報().get前回上衣の着脱()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().getズボン等の着脱(),
-                business.get一次判定結果情報().get前回ズボン等の着脱()));
-        生活機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get外出頻度(),
-                business.get一次判定結果情報().get前回外出頻度()));
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番20));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番21));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番22));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番23));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番24));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番25));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番26));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番27));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番28));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番29));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番30));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番31));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番17));
+            生活機能3リスト.add(RString.EMPTY);
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番25));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番30));
+            生活機能3リスト.add(RString.EMPTY);
+            生活機能3リスト.add(RString.EMPTY);
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番31));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番32));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番33));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番36));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番37));
+            生活機能3リスト.add(RString.EMPTY);
+        }
+        if (識別コード02A.equals(厚労省IF識別コード)) {
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番16));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番17));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番23));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番24));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番26));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番27));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番28));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番29));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番30));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番32));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番33));
+            生活機能3リスト.add(RString.EMPTY);
+        }
+        if (識別コード06A.equals(厚労省IF識別コード)) {
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番16));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番17));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番23));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番24));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番26));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番27));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番28));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番29));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番30));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番32));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番33));
+            生活機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番80));
+        }
         return 生活機能3リスト;
     }
 
-    /**
-     * 主治医意見書項目4リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 主治医意見書項目4リスト
-     */
-    public List<RString> set生活機能4リスト(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set生活機能4リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> dbt5211Entity) {
         List<RString> 生活機能4リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        RString 結果印刷有無 = DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate());
-        if (差分のみ印刷.equals(結果印刷有無)) {
-            return 生活機能(business);
+        if (差分のみ印刷.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            return 生活機能(business, 調査項目, dbt5211Entity);
         }
-        if (印刷しない.equals(結果印刷有無)) {
+        if (印刷しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             生活機能4リスト.add(RString.EMPTY);
             生活機能4リスト.add(RString.EMPTY);
             生活機能4リスト.add(RString.EMPTY);
@@ -1439,544 +1373,624 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             生活機能4リスト.add(RString.EMPTY);
             生活機能4リスト.add(RString.EMPTY);
         }
-        if (印刷する.equals(結果印刷有無)) {
-            if (識別コード09B.equals(厚労省IF識別コード)
-                    || 識別コード09A.equals(厚労省IF識別コード)) {
-                生活機能4リスト.add(get名称10(business.get一次判定結果情報().get移乗()));
-                生活機能4リスト.add(get名称10(business.get一次判定結果情報().get移動()));
-                生活機能4リスト.add(get名称11(business.get一次判定結果情報().getえん下()));
-                生活機能4リスト.add(get名称10(business.get一次判定結果情報().get食事摂取()));
-                生活機能4リスト.add(get名称10(business.get一次判定結果情報().get排尿()));
-                生活機能4リスト.add(get名称10(business.get一次判定結果情報().get排便()));
-                生活機能4リスト.add(get名称12(business.get一次判定結果情報().get口腔清潔()));
-                生活機能4リスト.add(get名称12(business.get一次判定結果情報().get洗顔()));
-                生活機能4リスト.add(get名称12(business.get一次判定結果情報().get整髪()));
-                生活機能4リスト.add(get名称10(business.get一次判定結果情報().get上衣の着脱()));
-                生活機能4リスト.add(get名称10(business.get一次判定結果情報().getズボン等の着脱()));
-                生活機能4リスト.add(get名称13(business.get一次判定結果情報().get外出頻度()));
-            }
-            if (識別コード06A.equals(厚労省IF識別コード)
-                    || 識別コード02A.equals(厚労省IF識別コード)) {
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().get移乗()));
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().get移動()));
-                生活機能4リスト.add(get名称11(business.get一次判定結果情報().getえん下()));
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().get食事摂取()));
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().get排尿()));
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().get排便()));
-                生活機能4リスト.add(get名称22(business.get一次判定結果情報().get口腔清潔()));
-                生活機能4リスト.add(get名称22(business.get一次判定結果情報().get洗顔()));
-                生活機能4リスト.add(get名称22(business.get一次判定結果情報().get整髪()));
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().get上衣の着脱()));
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().getズボン等の着脱()));
+        if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+                生活機能4リスト.add(get名称10(dbt5211Entity, 連番20));
+                生活機能4リスト.add(get名称10(dbt5211Entity, 連番21));
+                生活機能4リスト.add(get名称11(dbt5211Entity, 連番22));
+                生活機能4リスト.add(get名称10(dbt5211Entity, 連番23));
+                生活機能4リスト.add(get名称10(dbt5211Entity, 連番24));
+                生活機能4リスト.add(get名称10(dbt5211Entity, 連番25));
+                生活機能4リスト.add(get名称12(dbt5211Entity, 連番26));
+                生活機能4リスト.add(get名称12(dbt5211Entity, 連番27));
+                生活機能4リスト.add(get名称12(dbt5211Entity, 連番28));
+                生活機能4リスト.add(get名称10(dbt5211Entity, 連番29));
+                生活機能4リスト.add(get名称10(dbt5211Entity, 連番30));
+                生活機能4リスト.add(get名称13(dbt5211Entity, 連番31));
             }
             if (識別コード99A.equals(厚労省IF識別コード)) {
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().get移乗()));
-                生活機能4リスト.add(business.get一次判定結果情報().get移動());
-                生活機能4リスト.add(get名称31(business.get一次判定結果情報().getえん下()));
-                生活機能4リスト.add(get名称33(business.get一次判定結果情報().get食事摂取()));
-                生活機能4リスト.add(business.get一次判定結果情報().get排尿());
-                生活機能4リスト.add(business.get一次判定結果情報().get排便());
-                生活機能4リスト.add(get名称22(business.get一次判定結果情報().get口腔清潔()));
-                生活機能4リスト.add(get名称22(business.get一次判定結果情報().get洗顔()));
-                生活機能4リスト.add(get名称22(business.get一次判定結果情報().get整髪()));
-                生活機能4リスト.add(get名称34(business.get一次判定結果情報().get上衣の着脱()));
-                生活機能4リスト.add(get名称20(business.get一次判定結果情報().getズボン等の着脱()));
-                生活機能4リスト.add(business.get一次判定結果情報().get外出頻度());
-            }
-            if (識別コード06A.equals(厚労省IF識別コード)) {
-                生活機能4リスト.add(get名称13(business.get一次判定結果情報().get外出頻度()));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番17));
+                生活機能4リスト.add(RString.EMPTY);
+                生活機能4リスト.add(get名称33(dbt5211Entity, 連番25));
+                生活機能4リスト.add(get名称33(dbt5211Entity, 連番30));
+                生活機能4リスト.add(RString.EMPTY);
+                生活機能4リスト.add(RString.EMPTY);
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番31));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番32));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番33));
+                生活機能4リスト.add(get名称34(dbt5211Entity, 連番36));
+                生活機能4リスト.add(get名称34(dbt5211Entity, 連番37));
+                生活機能4リスト.add(RString.EMPTY);
             }
             if (識別コード02A.equals(厚労省IF識別コード)) {
-                生活機能4リスト.add(business.get一次判定結果情報().get外出頻度());
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番16));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番17));
+                生活機能4リスト.add(get名称11(dbt5211Entity, 連番23));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番24));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番26));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番27));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番28));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番29));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番30));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番32));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番33));
+                生活機能4リスト.add(RString.EMPTY);
+            }
+            if (識別コード06A.equals(厚労省IF識別コード)) {
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番16));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番17));
+                生活機能4リスト.add(get名称11(dbt5211Entity, 連番23));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番24));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番26));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番27));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番28));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番29));
+                生活機能4リスト.add(get名称22(dbt5211Entity, 連番30));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番32));
+                生活機能4リスト.add(get名称20(dbt5211Entity, 連番33));
+                生活機能4リスト.add(get名称13(dbt5211Entity, 連番80));
             }
         }
         return 生活機能4リスト;
     }
 
-    /**
-     * 認知機能1リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 認知機能1リスト
-     */
-    public List<RString> set認知機能1リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 認知機能1リスト = new ArrayList<>();
-        認知機能1リスト.add(get名称14(business.get一次判定結果情報().get意思の伝達()));
-        認知機能1リスト.add(get名称15(business.get一次判定結果情報().get毎日の日課を理解()));
-        認知機能1リスト.add(get名称15(business.get一次判定結果情報().get生年月日をいう()));
-        認知機能1リスト.add(get名称15(business.get一次判定結果情報().get短期記憶()));
-        認知機能1リスト.add(get名称15(business.get一次判定結果情報().get自分の名前をいう()));
-        認知機能1リスト.add(get名称15(business.get一次判定結果情報().get今の季節を理解()));
-        認知機能1リスト.add(get名称15(business.get一次判定結果情報().get場所の理解()));
-        認知機能1リスト.add(get名称16(business.get一次判定結果情報().get徘徊()));
-        認知機能1リスト.add(get名称16(business.get一次判定結果情報().get外出して戻れない()));
-        return 認知機能1リスト;
-    }
-
-    /**
-     * 認知機能1リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 認知機能1リスト
-     */
-    public List<RString> set認知機能2リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 認知機能2リスト = new ArrayList<>();
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get意思の伝達(),
-                business.get一次判定結果情報().get前回意思の伝達()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get毎日の日課を理解(),
-                business.get一次判定結果情報().get前回毎日の日課を理解()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get生年月日をいう(),
-                business.get一次判定結果情報().get前回生年月日をいう()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get短期記憶(),
-                business.get一次判定結果情報().get前回短期記憶()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get自分の名前をいう(),
-                business.get一次判定結果情報().get前回自分の名前をいう()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get今の季節を理解(),
-                business.get一次判定結果情報().get前回今の季節を理解()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get場所の理解(),
-                business.get一次判定結果情報().get前回場所の理解()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get徘徊(),
-                business.get一次判定結果情報().get前回徘徊()));
-        認知機能2リスト.add(get状況改善(business.get一次判定結果情報().get外出して戻れない(),
-                business.get一次判定結果情報().get前回外出して戻れない()));
-        return 認知機能2リスト;
-    }
-
-    /**
-     * 認知機能3リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 認知機能3リスト
-     */
-    public List<RString> set認知機能3リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 認知機能3リスト = new ArrayList<>();
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get意思の伝達(),
-                business.get一次判定結果情報().get前回意思の伝達()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get毎日の日課を理解(),
-                business.get一次判定結果情報().get前回毎日の日課を理解()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get生年月日をいう(),
-                business.get一次判定結果情報().get前回生年月日をいう()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get短期記憶(),
-                business.get一次判定結果情報().get前回短期記憶()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get自分の名前をいう(),
-                business.get一次判定結果情報().get前回自分の名前をいう()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get今の季節を理解(),
-                business.get一次判定結果情報().get前回今の季節を理解()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get場所の理解(),
-                business.get一次判定結果情報().get前回場所の理解()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get徘徊(),
-                business.get一次判定結果情報().get前回徘徊()));
-        認知機能3リスト.add(get意見書状況結果(business.get一次判定結果情報().get外出して戻れない(),
-                business.get一次判定結果情報().get前回外出して戻れない()));
-        return 認知機能3リスト;
-    }
-
-    /**
-     * 認知機能4リストを設定します。
-     *
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 認知機能4リスト
-     */
-    public List<RString> set認知機能4リスト(IchijiHanteizumiDataBusiness business) {
-        List<RString> 認知機能4リスト = new ArrayList<>();
-        RString 結果印刷有無 = DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate());
-        if (差分のみ印刷.equals(結果印刷有無)) {
-            return 認知機能(business);
-        }
-        if (印刷しない.equals(結果印刷有無)) {
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-        }
-        if (印刷する.equals(結果印刷有無)) {
-            認知機能4リスト.add(get名称14(business.get一次判定結果情報().get意思の伝達()));
-            認知機能4リスト.add(get名称15(business.get一次判定結果情報().get毎日の日課を理解()));
-            認知機能4リスト.add(get名称15(business.get一次判定結果情報().get生年月日をいう()));
-            認知機能4リスト.add(get名称15(business.get一次判定結果情報().get短期記憶()));
-            認知機能4リスト.add(get名称15(business.get一次判定結果情報().get自分の名前をいう()));
-            認知機能4リスト.add(get名称15(business.get一次判定結果情報().get今の季節を理解()));
-            認知機能4リスト.add(get名称15(business.get一次判定結果情報().get場所の理解()));
-            認知機能4リスト.add(get名称16(business.get一次判定結果情報().get徘徊()));
-            認知機能4リスト.add(get名称16(business.get一次判定結果情報().get外出して戻れない()));
-        }
-        return 認知機能4リスト;
-    }
-
-    private RString get状況改善(RString 今回調査, RString 前回調査) {
-        RString 状況改善 = RString.EMPTY;
-        if (RString.isNullOrEmpty(前回調査) || RString.isNullOrEmpty(今回調査)) {
-            return 状況改善;
-        }
-        if ((Integer.parseInt(今回調査.toString())) < Integer.parseInt(前回調査.toString())) {
-            状況改善 = new RString("▽");
-        }
-        if ((Integer.parseInt(今回調査.toString())) > Integer.parseInt(前回調査.toString())) {
-            状況改善 = new RString("▲");
-        }
-        return 状況改善;
-    }
-
-    private RString get意見書状況結果(RString 今回調査, RString 前回調査) {
-        if (RString.isNullOrEmpty(前回調査) || 今回調査.equals(前回調査) || RString.isNullOrEmpty(今回調査)) {
-            return RString.EMPTY;
-        }
-        return new RString(abs((Integer.parseInt(今回調査.toString()) - Integer.parseInt(前回調査.toString()))));
-    }
-
-    private List<RString> 主治医差分(IchijiHanteizumiDataBusiness business) {
-        List<RString> 主治医意見書項目4リスト = new ArrayList<>();
-        主治医意見書項目4リスト.add(差分結果(business.get一次判定結果情報().get意見書認知症高齢者自立度(),
-                business.get一次判定結果情報().get前回意見書認知症高齢者自立度()).isEmpty() ? RString.EMPTY
-                : IkenKomoku03.toValue(business.get一次判定結果情報().get前回意見書認知症高齢者自立度()).get名称());
-        主治医意見書項目4リスト.add(差分結果(business.get一次判定結果情報().get短期記憶(),
-                business.get一次判定結果情報().get前回短期記憶()).isEmpty() ? RString.EMPTY
-                : IkenKomoku04.toValue(business.get一次判定結果情報().get前回短期記憶()).get名称());
-        主治医意見書項目4リスト.add(差分結果(business.get一次判定結果情報().get日常の意思決定を行うための認知能力(),
-                business.get一次判定結果情報().get前回日常の意思決定を行うための認知能力()).isEmpty() ? RString.EMPTY
-                : IkenKomoku05.toValue(business.get一次判定結果情報().get前回日常の意思決定を行うための認知能力()).get名称());
-        主治医意見書項目4リスト.add(差分結果(business.get一次判定結果情報().get自分の意思の伝達能力(),
-                business.get一次判定結果情報().get前回自分の意思の伝達能力()).isEmpty() ? RString.EMPTY
-                : IkenKomoku06.toValue(business.get一次判定結果情報().get前回自分の意思の伝達能力()).get名称());
-        主治医意見書項目4リスト.add(差分結果(business.get一次判定結果情報().get食事行為(),
-                business.get一次判定結果情報().get前回食事行為()).isEmpty() ? RString.EMPTY
-                : IkenKomoku14.toValue(business.get一次判定結果情報().get前回食事行為()).get名称());
-        return 主治医意見書項目4リスト;
-    }
-
-    private List<RString> 生活機能(IchijiHanteizumiDataBusiness business) {
+    private List<RString> 生活機能(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> dbt5211Entity) {
         List<RString> 生活機能4リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get移乗(),
-                    business.get一次判定結果情報().get前回移乗()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回移乗()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get移動(),
-                    business.get一次判定結果情報().get前回移動()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回移動()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().getえん下(),
-                    business.get一次判定結果情報().get前回えん下()).isEmpty()
-                    ? RString.EMPTY : get名称11(business.get一次判定結果情報().get前回えん下()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get食事摂取(),
-                    business.get一次判定結果情報().get前回食事摂取()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回食事摂取()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get排尿(),
-                    business.get一次判定結果情報().get前回排尿()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回排尿()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get排便(),
-                    business.get一次判定結果情報().get前回排便()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回排便()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get口腔清潔(),
-                    business.get一次判定結果情報().get前回口腔清潔()).isEmpty()
-                    ? RString.EMPTY : get名称12(business.get一次判定結果情報().get前回口腔清潔()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get洗顔(),
-                    business.get一次判定結果情報().get前回洗顔()).isEmpty()
-                    ? RString.EMPTY : get名称12(business.get一次判定結果情報().get前回洗顔()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get整髪(),
-                    business.get一次判定結果情報().get前回整髪()).isEmpty()
-                    ? RString.EMPTY : get名称12(business.get一次判定結果情報().get前回整髪()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get上衣の着脱(),
-                    business.get一次判定結果情報().get前回上衣の着脱()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回上衣の着脱()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().getズボン等の着脱(),
-                    business.get一次判定結果情報().get前回ズボン等の着脱()).isEmpty()
-                    ? RString.EMPTY : get名称10(business.get一次判定結果情報().get前回ズボン等の着脱()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get外出頻度(),
-                    business.get一次判定結果情報().get前回外出頻度()).isEmpty()
-                    ? RString.EMPTY : get名称13(business.get一次判定結果情報().get前回外出頻度()));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番20).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番20));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番21).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番21));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番22).isEmpty() ? RString.EMPTY : get名称11(dbt5211Entity, 連番22));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番23).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番23));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番24).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番24));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番25).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番25));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番26).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番26));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番27).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番27));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番28).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番28));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番29).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番29));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番30).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番30));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番31).isEmpty() ? RString.EMPTY : get名称13(dbt5211Entity, 連番31));
         }
         if (識別コード99A.equals(厚労省IF識別コード)) {
-            return set生活機能差分99A(business);
+            return set生活機能差分99A(調査項目, dbt5211Entity);
         }
-        if (識別コード02A.equals(厚労省IF識別コード)
-                || 識別コード06A.equals(厚労省IF識別コード)) {
-            return set生活機能差分02A(business);
+        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード06A.equals(厚労省IF識別コード)) {
+            return set生活機能差分02A(business, 調査項目, dbt5211Entity);
         }
         return 生活機能4リスト;
     }
 
-    private List<RString> set生活機能差分99A(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set生活機能差分99A(List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> dbt5211Entity) {
         List<RString> 生活機能4リスト = new ArrayList<>();
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().get移乗(), business.get一次判定結果情報().get前回移乗()).isEmpty()
-                ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回移乗()));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番17).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番17));
         生活機能4リスト.add(RString.EMPTY);
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().getえん下(), business.get一次判定結果情報().get前回えん下()).isEmpty()
-                ? RString.EMPTY : get名称33(business.get一次判定結果情報().get前回えん下()));
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().get食事摂取(), business.get一次判定結果情報().get前回食事摂取()).isEmpty()
-                ? RString.EMPTY : get名称33(business.get一次判定結果情報().get前回食事摂取()));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番25).isEmpty() ? RString.EMPTY : get名称33(dbt5211Entity, 連番25));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番30).isEmpty() ? RString.EMPTY : get名称33(dbt5211Entity, 連番30));
         生活機能4リスト.add(RString.EMPTY);
         生活機能4リスト.add(RString.EMPTY);
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().get口腔清潔(), business.get一次判定結果情報().get前回口腔清潔()).isEmpty()
-                ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回口腔清潔()));
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().get洗顔(), business.get一次判定結果情報().get前回洗顔()).isEmpty()
-                ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回洗顔()));
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().get整髪(), business.get一次判定結果情報().get前回整髪()).isEmpty()
-                ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回整髪()));
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().get上衣の着脱(),
-                business.get一次判定結果情報().get前回上衣の着脱()).isEmpty()
-                ? RString.EMPTY : get名称34(business.get一次判定結果情報().get前回上衣の着脱()));
-        生活機能4リスト.add(差分結果(business.get一次判定結果情報().getズボン等の着脱(),
-                business.get一次判定結果情報().get前回ズボン等の着脱()).isEmpty()
-                ? RString.EMPTY : get名称34(business.get一次判定結果情報().get前回ズボン等の着脱()));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番31).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番31));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番32).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番32));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番33).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番33));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番36).isEmpty() ? RString.EMPTY : get名称34(dbt5211Entity, 連番36));
+        生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番37).isEmpty() ? RString.EMPTY : get名称34(dbt5211Entity, 連番37));
         生活機能4リスト.add(RString.EMPTY);
         return 生活機能4リスト;
     }
 
-    private List<RString> set生活機能差分02A(IchijiHanteizumiDataBusiness business) {
+    private List<RString> set生活機能差分02A(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> dbt5211Entity) {
         List<RString> 生活機能4リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
-        if (識別コード02A.equals(厚労省IF識別コード)
-                || 識別コード06A.equals(厚労省IF識別コード)) {
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get移乗(),
-                    business.get一次判定結果情報().get前回移乗()).isEmpty()
-                    ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回移乗()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get移動(),
-                    business.get一次判定結果情報().get前回移動()).isEmpty()
-                    ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回移動()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().getえん下(),
-                    business.get一次判定結果情報().get前回えん下()).isEmpty()
-                    ? RString.EMPTY : get名称11(business.get一次判定結果情報().get前回えん下()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get食事摂取(),
-                    business.get一次判定結果情報().get前回食事摂取()).isEmpty()
-                    ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回食事摂取()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get排尿(),
-                    business.get一次判定結果情報().get前回排尿()).isEmpty()
-                    ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回排尿()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get排便(),
-                    business.get一次判定結果情報().get前回排便()).isEmpty()
-                    ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回排便()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get口腔清潔(),
-                    business.get一次判定結果情報().get前回口腔清潔()).isEmpty()
-                    ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回口腔清潔()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get洗顔(),
-                    business.get一次判定結果情報().get前回洗顔()).isEmpty()
-                    ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回洗顔()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get整髪(),
-                    business.get一次判定結果情報().get前回整髪()).isEmpty()
-                    ? RString.EMPTY : get名称22(business.get一次判定結果情報().get前回整髪()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get上衣の着脱(),
-                    business.get一次判定結果情報().get前回上衣の着脱()).isEmpty()
-                    ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回上衣の着脱()));
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().getズボン等の着脱(),
-                    business.get一次判定結果情報().get前回ズボン等の着脱()).isEmpty()
-                    ? RString.EMPTY : get名称20(business.get一次判定結果情報().get前回ズボン等の着脱()));
+        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード06A.equals(厚労省IF識別コード)) {
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番16).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番16));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番17).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番17));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番23).isEmpty() ? RString.EMPTY : get名称11(dbt5211Entity, 連番23));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番24).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番24));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番26).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番26));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番27).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番27));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番28).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番28));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番29).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番29));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番30).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番30));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番32).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番32));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番33).isEmpty() ? RString.EMPTY : get名称20(dbt5211Entity, 連番33));
         }
         if (識別コード02A.equals(厚労省IF識別コード)) {
             生活機能4リスト.add(RString.EMPTY);
         }
         if (識別コード06A.equals(厚労省IF識別コード)) {
-            生活機能4リスト.add(差分結果(business.get一次判定結果情報().get外出頻度(),
-                    business.get一次判定結果情報().get前回外出頻度()).isEmpty()
-                    ? RString.EMPTY : get名称13(business.get一次判定結果情報().get前回外出頻度()));
+            生活機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番80).isEmpty() ? RString.EMPTY : get名称13(dbt5211Entity, 連番80));
         }
         return 生活機能4リスト;
     }
 
-    private List<RString> 認知機能(IchijiHanteizumiDataBusiness business) {
-        List<RString> 認知機能4リスト = new ArrayList<>();
+    private List<RString> set認知機能1リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> dbt5211Entity) {
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        List<RString> 認知機能1リスト = new ArrayList<>();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            認知機能1リスト.add(get名称14(dbt5211Entity, 連番32));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番33));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番34));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番35));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番36));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番37));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番38));
+            認知機能1リスト.add(get名称16(dbt5211Entity, 連番39));
+            認知機能1リスト.add(get名称16(dbt5211Entity, 連番40));
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            認知機能1リスト.add(get名称14(dbt5211Entity, 連番40));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番42));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番43));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番44));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番45));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番46));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番47));
+            認知機能1リスト.add(get名称16(dbt5211Entity, 連番57));
+            認知機能1リスト.add(get名称16(dbt5211Entity, 連番59));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            認知機能1リスト.add(get名称14(dbt5211Entity, 連番46));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番48));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番49));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番50));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番51));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番52));
+            認知機能1リスト.add(get名称15(dbt5211Entity, 連番53));
+            認知機能1リスト.add(get名称16(dbt5211Entity, 連番63));
+            認知機能1リスト.add(get名称16(dbt5211Entity, 連番65));
+        }
+        return 認知機能1リスト;
+    }
+
+    private List<RString> set認知機能2リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目) {
+        List<RString> 認知機能2リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get意思の伝達(),
-                    business.get一次判定結果情報().get前回意思の伝達()).isEmpty()
-                    ? RString.EMPTY : get名称14(business.get一次判定結果情報().get前回意思の伝達()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get毎日の日課を理解(),
-                    business.get一次判定結果情報().get前回毎日の日課を理解()).isEmpty()
-                    ? RString.EMPTY : get名称15(business.get一次判定結果情報().get前回毎日の日課を理解()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get生年月日をいう(),
-                    business.get一次判定結果情報().get前回生年月日をいう()).isEmpty()
-                    ? RString.EMPTY : get名称15(business.get一次判定結果情報().get前回生年月日をいう()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get短期記憶(),
-                    business.get一次判定結果情報().get前回短期記憶()).isEmpty()
-                    ? RString.EMPTY : get名称15(business.get一次判定結果情報().get前回短期記憶()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get自分の名前をいう(),
-                    business.get一次判定結果情報().get前回自分の名前をいう()).isEmpty()
-                    ? RString.EMPTY : get名称15(business.get一次判定結果情報().get前回自分の名前をいう()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get今の季節を理解(),
-                    business.get一次判定結果情報().get前回今の季節を理解()).isEmpty()
-                    ? RString.EMPTY : get名称15(business.get一次判定結果情報().get前回今の季節を理解()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get場所の理解(),
-                    business.get一次判定結果情報().get前回場所の理解()).isEmpty()
-                    ? RString.EMPTY : get名称15(business.get一次判定結果情報().get前回場所の理解()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get徘徊(),
-                    business.get一次判定結果情報().get前回徘徊()).isEmpty()
-                    ? RString.EMPTY : get名称16(business.get一次判定結果情報().get前回徘徊()));
-            認知機能4リスト.add(差分結果(business.get一次判定結果情報().get外出して戻れない(),
-                    business.get一次判定結果情報().get前回外出して戻れない()).isEmpty()
-                    ? RString.EMPTY : get名称16(business.get一次判定結果情報().get前回外出して戻れない()));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番32));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番33));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番34));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番35));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番36));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番37));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番38));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番39));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番40));
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番40));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番42));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番43));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番44));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番45));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番46));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番47));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番57));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番59));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番46));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番48));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番49));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番50));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番51));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番52));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番53));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番63));
+            認知機能2リスト.add(get調査連番(調査項目, 前回調査項目, 連番65));
+        }
+        return 認知機能2リスト;
+    }
+
+    private List<RString> set認知機能3リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目) {
+        List<RString> 認知機能3リスト = new ArrayList<>();
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番32));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番33));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番34));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番35));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番36));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番37));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番38));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番39));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番40));
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番40));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番42));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番43));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番44));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番45));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番46));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番47));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番57));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番59));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番46));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番48));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番49));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番50));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番51));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番52));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番53));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番63));
+            認知機能3リスト.add(get状況結果(調査項目, 前回調査項目, 連番65));
+        }
+        return 認知機能3リスト;
+    }
+
+    private List<RString> set認知機能4リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目) {
+        List<RString> 認知機能4リスト = new ArrayList<>();
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (差分のみ印刷.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            return 認知機能(調査項目, 前回調査項目, business);
+        }
+        if (印刷しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(RString.EMPTY);
+        }
+        if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+                認知機能4リスト.add(get名称14(調査項目, 連番32));
+                認知機能4リスト.add(get名称15(調査項目, 連番33));
+                認知機能4リスト.add(get名称15(調査項目, 連番34));
+                認知機能4リスト.add(get名称15(調査項目, 連番35));
+                認知機能4リスト.add(get名称15(調査項目, 連番36));
+                認知機能4リスト.add(get名称15(調査項目, 連番37));
+                認知機能4リスト.add(get名称15(調査項目, 連番38));
+                認知機能4リスト.add(get名称16(調査項目, 連番39));
+                認知機能4リスト.add(get名称16(調査項目, 連番40));
+            }
+            if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+                認知機能4リスト.add(get名称14(調査項目, 連番40));
+                認知機能4リスト.add(get名称15(調査項目, 連番42));
+                認知機能4リスト.add(get名称15(調査項目, 連番43));
+                認知機能4リスト.add(get名称15(調査項目, 連番44));
+                認知機能4リスト.add(get名称15(調査項目, 連番45));
+                認知機能4リスト.add(get名称15(調査項目, 連番46));
+                認知機能4リスト.add(get名称15(調査項目, 連番47));
+                認知機能4リスト.add(get名称16(調査項目, 連番57));
+                認知機能4リスト.add(get名称16(調査項目, 連番59));
+            }
+            if (識別コード99A.equals(厚労省IF識別コード)) {
+                認知機能4リスト.add(get名称14(調査項目, 連番46));
+                認知機能4リスト.add(get名称15(調査項目, 連番48));
+                認知機能4リスト.add(get名称15(調査項目, 連番49));
+                認知機能4リスト.add(get名称15(調査項目, 連番50));
+                認知機能4リスト.add(get名称15(調査項目, 連番51));
+                認知機能4リスト.add(get名称15(調査項目, 連番52));
+                認知機能4リスト.add(get名称15(調査項目, 連番53));
+                認知機能4リスト.add(get名称16(調査項目, 連番63));
+                認知機能4リスト.add(get名称16(調査項目, 連番65));
+            }
         }
         return 認知機能4リスト;
     }
 
-    private RString 差分結果(RString 今回調査, RString 前回調査) {
-        if (RString.isNullOrEmpty(今回調査) || RString.isNullOrEmpty(前回調査)) {
+    private List<RString> 認知機能(List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> dbt5211Entity, IchijiHanteizumiDataBusiness business) {
+        List<RString> 認知機能4リスト = new ArrayList<>();
+        RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
+        if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番32).isEmpty() ? RString.EMPTY : get名称14(dbt5211Entity, 連番32));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番33).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番33));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番34).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番34));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番35).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番35));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番36).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番36));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番37).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番37));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番38).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番38));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番39).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番39));
+            認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番40).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番40));
+        }
+        if (識別コード99A.equals(厚労省IF識別コード)) {
+            return set認知機能差分99A(調査項目, dbt5211Entity);
+        }
+        if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
+            return set認知機能差分02A(調査項目, dbt5211Entity);
+        }
+        return 認知機能4リスト;
+    }
+
+    private List<RString> set認知機能差分02A(List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> dbt5211Entity) {
+        List<RString> 認知機能4リスト = new ArrayList<>();
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番40).isEmpty() ? RString.EMPTY : get名称14(dbt5211Entity, 連番40));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番42).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番42));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番43).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番43));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番44).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番44));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番45).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番45));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番46).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番46));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番47).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番47));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番57).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番57));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番59).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番59));
+        return 認知機能4リスト;
+    }
+
+    private List<RString> set認知機能差分99A(List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> dbt5211Entity) {
+        List<RString> 認知機能4リスト = new ArrayList<>();
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番46).isEmpty() ? RString.EMPTY : get名称14(dbt5211Entity, 連番46));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番48).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番48));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番49).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番49));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番50).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番50));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番51).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番51));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番52).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番52));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番53).isEmpty() ? RString.EMPTY : get名称15(dbt5211Entity, 連番53));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番63).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番63));
+        認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番65).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番65));
+        return 認知機能4リスト;
+    }
+
+    private RString get調査連番(List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目, int 連番) {
+        RString 状況改善 = RString.EMPTY;
+        RString 今回調査 = RString.EMPTY;
+        RString 前回調査 = RString.EMPTY;
+        if (連番 < 調査項目.size() && !RString.isNullOrEmpty(調査項目.get(連番).get調査項目())) {
+            今回調査 = 調査項目.get(連番).get調査項目();
+        }
+        if (連番 < 前回調査項目.size() && !RString.isNullOrEmpty(前回調査項目.get(連番).get調査項目())) {
+            前回調査 = 前回調査項目.get(連番).get調査項目();
+        }
+        if (RString.isNullOrEmpty(前回調査)) {
+            return 状況改善;
+        }
+        if ((RString.isNullOrEmpty(今回調査) ? 0 : Integer.parseInt(今回調査.toString())) < Integer.parseInt(前回調査.toString())) {
+            状況改善 = new RString("▽");
+        }
+        if ((RString.isNullOrEmpty(今回調査) ? 0 : Integer.parseInt(今回調査.toString())) > Integer.parseInt(前回調査.toString())) {
+            状況改善 = new RString("▲");
+        }
+        return 状況改善;
+    }
+
+    private RString get状況結果(List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoChosaItem> 前回調査項目, int 連番) {
+        RString 今回調査 = RString.EMPTY;
+        RString 前回調査 = RString.EMPTY;
+        if (連番 < 調査項目.size() && !RString.isNullOrEmpty(調査項目.get(連番).get調査項目())) {
+            今回調査 = 調査項目.get(連番).get調査項目();
+        }
+        if (連番 < 前回調査項目.size() && !RString.isNullOrEmpty(前回調査項目.get(連番).get調査項目())) {
+            前回調査 = 前回調査項目.get(連番).get調査項目();
+        }
+        if (RString.isNullOrEmpty(前回調査) || 今回調査.equals(前回調査)) {
             return RString.EMPTY;
         }
-        if (!今回調査.equals(前回調査)) {
-            return 前回調査;
+        int 結果 = (RString.isNullOrEmpty(今回調査) ? 0 : Integer.parseInt(今回調査.toString())) - Integer.parseInt(前回調査.toString());
+        if (結果 < 0) {
+            return new RString(結果).substring(1);
+        }
+        return new RString(結果);
+    }
+
+    private RString 機能差分結果(List<NinteichosahyoChosaItem> 意見書項目,
+            List<NinteichosahyoChosaItem> 前回意見書項目, int 連番) {
+        RString 今回調査 = RString.EMPTY;
+        if (連番 < 意見書項目.size() && !RString.isNullOrEmpty(意見書項目.get(連番).get調査項目())) {
+            今回調査 = 意見書項目.get(連番).get調査項目();
+        }
+        if (連番 < 前回意見書項目.size() && !RString.isNullOrEmpty(前回意見書項目.get(連番).get調査項目())) {
+            RString 前回調査 = 前回意見書項目.get(連番).get調査項目();
+            if (!今回調査.equals(前回調査)) {
+                return 前回調査;
+            }
         }
         return RString.EMPTY;
     }
 
-    /**
-     * 認知機能リストを設定します。
-     *
-     * @param list 特記事項番号
-     * @param business IchijiHanteizumiDataBusiness
-     * @return 認知機能リスト
-     */
-    public List<RString> set認知機能リスト(List<RString> list, IchijiHanteizumiDataBusiness business) {
+    private List<RString> set認知機能リスト(List<NinteichosahyoTokkijiko> list,
+            IchijiHanteizumiDataBusiness business) {
         List<RString> 認知機能リスト = new ArrayList<>();
         RString 厚労省IF識別コード = business.get一次判定結果情報().get厚労省IF識別コード();
         if (識別コード09B.equals(厚労省IF識別コード)
                 || 識別コード09A.equals(厚労省IF識別コード)) {
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_301));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_302));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_303));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_304));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_305));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_306));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_307));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_308));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_309));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_301, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_302, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_303, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_304, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_305, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_306, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_307, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_308, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_309, business));
         }
         if (識別コード02A.equals(厚労省IF識別コード)
                 || 識別コード99A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_603));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6051));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6052));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6053));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6054));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6055));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6056));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_710));
-            認知機能リスト.add(get特記事項有無(list, 特記事項番号_712));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_603, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6051, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6052, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6053, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6054, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6055, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_6056, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_710, business));
+            認知機能リスト.add(get特記事項有無(list, 特記事項番号_712, business));
         }
         return 認知機能リスト;
     }
 
-    private RString get名称01(RString 名称01) {
-        if (RString.isNullOrEmpty(名称01)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser01.toValue(名称01).get名称();
+    private RString get名称34(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser34.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称03(RString 名称03) {
-        if (RString.isNullOrEmpty(名称03)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser03.toValue(名称03).get名称();
+    private RString get名称33(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser33.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称14(RString 名称14) {
-        if (RString.isNullOrEmpty(名称14)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser14.toValue(名称14).get名称();
+    private RString get名称22(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser22.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称15(RString 名称15) {
-        if (RString.isNullOrEmpty(名称15)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser15.toValue(名称15).get名称();
+    private RString get名称20(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser20.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称16(RString 名称16) {
-        if (RString.isNullOrEmpty(名称16)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser16.toValue(名称16).get名称();
+    private RString get名称16(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser16.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称22(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser22.toValue(名称22).get名称();
+    private RString get名称13(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser13.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称10(RString 名称07) {
-        if (RString.isNullOrEmpty(名称07)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser10.toValue(名称07).get名称();
+    private RString get名称11(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser11.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称20(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser20.toValue(名称22).get名称();
+    private RString get名称10(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser10.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称11(RString 名称07) {
-        if (RString.isNullOrEmpty(名称07)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser11.toValue(名称07).get名称();
+    private RString get名称12(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser12.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称31(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser31.toValue(名称22).get名称();
+    private RString get名称01(List<NinteichosahyoChosaItem> dbt5211Entity, int 連番) {
+        if (連番 < dbt5211Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5211Entity.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser01.toValue(dbt5211Entity.get(連番).get調査項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称33(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser33.toValue(名称22).get名称();
+    private static RString get意見書名称03(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
+        if (連番 < dbt5304Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+                return RString.EMPTY;
+            }
+            return IkenKomoku03.toValue(dbt5304Entity.get(連番).get意見項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称12(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser12.toValue(名称22).get名称();
+    private static RString get意見書名称14(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
+        if (連番 < dbt5304Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+                return RString.EMPTY;
+            }
+            return IkenKomoku14.toValue(dbt5304Entity.get(連番).get意見項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称34(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser34.toValue(名称22).get名称();
+    private static RString get意見書名称06(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
+        if (連番 < dbt5304Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+                return RString.EMPTY;
+            }
+            return IkenKomoku06.toValue(dbt5304Entity.get(連番).get意見項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称13(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser13.toValue(名称22).get名称();
+    private static RString get意見書名称05(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
+        if (連番 < dbt5304Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+                return RString.EMPTY;
+            }
+            return IkenKomoku05.toValue(dbt5304Entity.get(連番).get意見項目()).get名称();
         }
+        return RString.EMPTY;
     }
 
-    private RString get名称17(RString 名称22) {
-        if (RString.isNullOrEmpty(名称22)) {
-            return RString.EMPTY;
-        } else {
-            return ChosaAnser17.toValue(名称22).get名称();
+    private static RString get意見書名称04(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
+        if (連番 < dbt5304Entity.size()) {
+            if (RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+                return RString.EMPTY;
+            }
+            return IkenKomoku04.toValue(dbt5304Entity.get(連番).get意見項目()).get名称();
         }
+        return RString.EMPTY;
+    }
+
+    private static RString get名称14(List<NinteichosahyoChosaItem> 認定調査票調査項目リスト, int 連番) {
+        if (連番 < 認定調査票調査項目リスト.size()) {
+            if (RString.isNullOrEmpty(認定調査票調査項目リスト.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser14.toValue(認定調査票調査項目リスト.get(連番).get調査項目()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    private static RString get名称15(List<NinteichosahyoChosaItem> 認定調査票調査項目リスト, int 連番) {
+        if (連番 < 認定調査票調査項目リスト.size()) {
+            if (RString.isNullOrEmpty(認定調査票調査項目リスト.get(連番).get調査項目())) {
+                return RString.EMPTY;
+            }
+            return ChosaAnser15.toValue(認定調査票調査項目リスト.get(連番).get調査項目()).get名称();
+        }
+        return RString.EMPTY;
     }
 }
