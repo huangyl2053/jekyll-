@@ -46,7 +46,9 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
     INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
         ON 調定共通_介護継承."choteiId" = 介護期別."choteiId"
     ORDER BY
-        賦課Newest."hihokenshaNo"
+        賦課Newest."choteiNendo",
+        賦課Newest."fukaNendo",
+        賦課Newest."tsuchishoNo"
 </select>
 
 <select resultOrdered="true" id="get特徴依頼追加一時表による徴収方法情報" 
@@ -123,7 +125,10 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
         LEFT JOIN
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                       true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+                       true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                    (SELECT ARRAY_AGG(CAST ("ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode" AS TEXT))
+                    FROM master)
+            ) AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = master."ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode"
         <if test="出力順Flag">
                 ${出力順}
@@ -231,6 +236,8 @@ resultMap="resultMap_追加用データ" >
              </foreach>
         </if>
      ORDER BY
+        賦課Newest."choteiNendo",
+        賦課Newest."fukaNendo",
         賦課Newest."tsuchishoNo"
 </select>
 
@@ -349,6 +356,8 @@ resultMap="resultMap_追加用データ" >
              </foreach>
         </if>
     ORDER BY
+        賦課Newest."choteiNendo",
+        賦課Newest."fukaNendo",
         賦課Newest."tsuchishoNo"
 </select>
 
@@ -373,6 +382,8 @@ resultMap="resultMap_最新の賦課の情報" >
         賦課Newest."choteiNendo" = #{賦課年度}
         AND 賦課Newest."fukaNendo" = #{賦課年度}
     ORDER BY
+        賦課Newest."choteiNendo",
+        賦課Newest."fukaNendo",
         賦課Newest."tsuchishoNo"
 </select>
 
@@ -493,6 +504,8 @@ resultMap="resultMap_追加用データ" >
     INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
         ON 調定共通_介護継承."choteiId" = 介護期別."choteiId"
     ORDER BY
+        賦課Newest."choteiNendo",
+        賦課Newest."fukaNendo",
         賦課Newest."tsuchishoNo"
 </select>
 
@@ -706,7 +719,10 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         LEFT JOIN
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                       true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+                       true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                    (SELECT ARRAY_AGG(CAST ("ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode" AS TEXT))
+                    FROM master)
+            ) AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = master."ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode"
         <if test="出力順Flag">
                 ${出力順}

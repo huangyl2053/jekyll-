@@ -75,6 +75,8 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
     private DbT2002FukaJohoTempTableEntity 業務概念_賦課の情報;
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者の情報;
     private TsuchishoNo 通知書番号;
+    private FlexibleYear 賦課年度;
+    private FlexibleYear 調定年度;
     @BatchWriter
     BatchEntityCreatedTempTableWriter<UeT0511NenkinTokuchoKaifuJohoEntity> 特徴追加依頼追加Temp;
 
@@ -96,7 +98,9 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
 
     @Override
     protected void process(ShikakuSoshitsuDataEntity t) {
-        if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
+        if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)
+                || !t.get賦課情報().getFukaNendo().equals(賦課年度)
+                || !t.get賦課情報().getChoteiNendo().equals(調定年度)) {
             if (通知書番号 != null) {
                 setDT各種金額欄(対象者の情報);
                 特徴追加依頼追加Temp.insert(対象者の情報);
@@ -106,7 +110,8 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
         }
         set特徴期期別金額(t.get調定額(), t.get期(), 業務概念_賦課の情報);
         通知書番号 = t.get賦課情報().getTsuchishoNo();
-
+        賦課年度 = t.get賦課情報().getFukaNendo();
+        調定年度 = t.get賦課情報().getChoteiNendo();
     }
 
     @Override
