@@ -39,7 +39,7 @@
                autoMapping="true">
         <id column="dbWT1111_連番" />
         <association property="給付実績" resultMap="ResultMap_DbWT1111KyufuJissekiEntity"/>
-        <collection property="介護事業者List"
+        <association property="介護事業者"
                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
     </resultMap>
     
