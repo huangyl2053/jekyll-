@@ -4,9 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2400011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
@@ -47,39 +45,6 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterDiv extends PanelBatchPar
     @JsonProperty("ChushutsuJokenPanel")
     public void setChushutsuJokenPanel(ChushutsuJokenPanelDiv ChushutsuJokenPanel) {
         this.ChushutsuJokenPanel = ChushutsuJokenPanel;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public Label getLblRiyushoSakusei() {
-        return this.getChushutsuJokenPanel().getLblRiyushoSakusei();
-    }
-
-    @JsonIgnore
-    public void  setLblRiyushoSakusei(Label lblRiyushoSakusei) {
-        this.getChushutsuJokenPanel().setLblRiyushoSakusei(lblRiyushoSakusei);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtZenkaiRiyushoSakuseiShinseiYMD() {
-        return this.getChushutsuJokenPanel().getTxtZenkaiRiyushoSakuseiShinseiYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtZenkaiRiyushoSakuseiShinseiYMD(TextBoxDateRange txtZenkaiRiyushoSakuseiShinseiYMD) {
-        this.getChushutsuJokenPanel().setTxtZenkaiRiyushoSakuseiShinseiYMD(txtZenkaiRiyushoSakuseiShinseiYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtRiyushoSakuseiShinseiYMD() {
-        return this.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtRiyushoSakuseiShinseiYMD(TextBoxDateRange txtRiyushoSakuseiShinseiYMD) {
-        this.getChushutsuJokenPanel().setTxtRiyushoSakuseiShinseiYMD(txtRiyushoSakuseiShinseiYMD);
     }
 
     // </editor-fold>
