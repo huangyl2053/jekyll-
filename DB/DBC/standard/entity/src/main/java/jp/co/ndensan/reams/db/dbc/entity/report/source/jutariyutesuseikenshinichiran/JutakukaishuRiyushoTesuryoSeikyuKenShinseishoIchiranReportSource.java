@@ -16,31 +16,29 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    @ReportItem(name = "pageAll", length = 6, order = 1)
-    public RString pageAll;
-    @ReportItem(name = "kaishiYM", length = 11, order = 2)
+    @ReportItem(name = "kaishiYM", length = 11, order = 1)
     public RString kaishiYM;
-    @ReportItem(name = "syuryoYM", length = 11, order = 3)
+    @ReportItem(name = "syuryoYM", length = 11, order = 2)
     public RString syuryoYM;
-    @ReportItem(name = "jigyoshaMeisho", length = 15, order = 4)
+    @ReportItem(name = "jigyoshaMeisho", length = 15, order = 3)
     public RString jigyoshaMeisho;
-    @ReportItem(name = "printTimeStamp", length = 21, order = 5)
+    @ReportItem(name = "printTimeStamp", length = 21, order = 4)
     public RString printTimeStamp;
-    @ReportItem(name = "list1_1", length = 3, order = 6)
+    @ReportItem(name = "list1_1", length = 3, order = 5)
     public RString list1_1;
-    @ReportItem(name = "list1_2", length = 12, order = 7)
+    @ReportItem(name = "list1_2", length = 12, order = 6)
     public RString list1_2;
-    @ReportItem(name = "list1_3", length = 10, order = 8)
+    @ReportItem(name = "list1_3", length = 10, order = 7)
     public RString list1_3;
-    @ReportItem(name = "list1_4", length = 15, order = 9)
+    @ReportItem(name = "list1_4", length = 15, order = 8)
     public RString list1_4;
-    @ReportItem(name = "list1_5", length = 45, order = 10)
+    @ReportItem(name = "list1_5", length = 45, order = 9)
     public RString list1_5;
-    @ReportItem(name = "list1_6", length = 30, order = 11)
+    @ReportItem(name = "list1_6", length = 30, order = 10)
     public RString list1_6;
-    @ReportItem(name = "list1_7", length = 15, order = 12)
+    @ReportItem(name = "list1_7", length = 15, order = 11)
     public RString list1_7;
-    @ReportItem(name = "list1_8", length = 35, order = 13)
+    @ReportItem(name = "list1_8", length = 35, order = 12)
     public RString list1_8;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;

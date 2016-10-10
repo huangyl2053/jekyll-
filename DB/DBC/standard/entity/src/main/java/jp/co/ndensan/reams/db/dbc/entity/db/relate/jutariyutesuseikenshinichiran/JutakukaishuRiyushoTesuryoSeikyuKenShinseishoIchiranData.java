@@ -21,7 +21,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranData {
 
-    private RString 総ページ;
     private FlexibleDate 作成年月日;
     private RString 事業者名;
     private FlexibleDate 集計期間開始;
