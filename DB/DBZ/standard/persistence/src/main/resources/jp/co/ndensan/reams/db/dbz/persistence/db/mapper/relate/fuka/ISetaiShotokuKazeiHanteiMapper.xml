@@ -65,7 +65,7 @@
      <select resultOrdered="true" id="select世帯員把握入力" resultMap="resultMap_SetaiHaakuResultEntity" fetchSize="500"
                       parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
        SELECT
-        B."hihokenshaNo",
+        A."hihokenshaNo",
         B."setaiInshikibetsuCode",
         B."setaiHaakuKijunYMD",
         A."shotokuNendo",
@@ -108,7 +108,7 @@
         "jushochiTokureiFlag",
         "shotokuNendo"
         FROM "TmpSetaiHaaku"
-        WHERE "shotokuNendo" is not null
+        WHERE "shotokuNendo" is not null and  "shotokuNendo" <![CDATA[!=]]> ''
     </select> 
     
     <resultMap id="resultMap_DbV2502KaigoShotokuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity" autoMapping="true">
@@ -166,6 +166,6 @@
     <update id="update世帯員把握入力Temp" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHakuEntity">
        UPDATE "TmpSetaiHaaku"
        SET "shotokuNendo" = #{shotokuNendo}
-       WHERE "shotokuNendo" IS NULL
+       WHERE "shotokuNendo" IS NULL OR "shotokuNendo" = ''
     </update>
 </mapper>

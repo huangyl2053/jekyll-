@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -53,8 +52,8 @@ public class KogakuKetteiTsuchiShoEntity {
     private FlexibleDate 支払期間;
     private FlexibleDate 支払期間開始年月日;
     private FlexibleDate 支払期間終了年月日;
-    private RDateTime 支払窓口開始時間;
-    private RDateTime 支払窓口終了時間;
+    private RString 支払窓口開始時間;
+    private RString 支払窓口終了時間;
     private RString 金融機関コード;
     private RString 口座種別;
     private RString 通帳記号;
