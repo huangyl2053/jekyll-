@@ -988,6 +988,19 @@
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempKyufujissekiTyukannJigyo"/>
         <association property="高額介護サービス費支給判定結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
     </resultMap>
+    
+    <!--DB出力(給付実績中間事業高額一時） の更新-->
+    <update id="update給付実績中間事業高額一時" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity">
+        UPDATE
+        "TempKyufujissekiTyukannJigyo5"
+        SET "kogakuKaigoServicehi" = #{kogakuKaigoServicehi}
+        WHERE "inputShikibetsuNo" = #{inputShikibetsuNo}
+         AND "hihokenshaNo" = #{hihokenshaNo}
+         AND "serviceTeikyoYM" = #{serviceTeikyoYM}
+         AND "shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
+         AND "jigyoshoNo" = #{jigyoshoNo}
+         AND "toshiNo" = #{toshiNo}
+    </update>
     <!--zhouchuanlin END-->
 
     <!--shifengming START-->
