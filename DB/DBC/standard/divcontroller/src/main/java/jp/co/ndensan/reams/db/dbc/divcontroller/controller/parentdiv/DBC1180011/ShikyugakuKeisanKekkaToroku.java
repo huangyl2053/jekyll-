@@ -567,9 +567,7 @@ public class ShikyugakuKeisanKekkaToroku {
                 .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
-        if (!ResponseHolder.isReRequest() || new RString(
-                DbcWarningMessages.高額合算支給額計算結果削除確認_支給決定情報あり
-                .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+        if (!ResponseHolder.isReRequest() || ResponseHolder.isWarningIgnoredRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
