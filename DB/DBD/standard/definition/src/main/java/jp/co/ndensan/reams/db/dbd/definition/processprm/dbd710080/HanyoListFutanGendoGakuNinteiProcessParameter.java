@@ -126,11 +126,13 @@ public class HanyoListFutanGendoGakuNinteiProcessParameter implements IBatchProc
      *
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
+     * @param 出力順 出力順
      * @return TokubetsuChiikiKasanGemmenMybatisParameter
      */
     public FutanGendoGakuNinteiMybatisParameter toFutanGendoGakuNinteiMybatisParameter(
             IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         return new FutanGendoGakuNinteiMybatisParameter(
                 cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
@@ -150,6 +152,7 @@ public class HanyoListFutanGendoGakuNinteiProcessParameter implements IBatchProc
                 kyakasha,
                 atenacyusyutsujyoken,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }
