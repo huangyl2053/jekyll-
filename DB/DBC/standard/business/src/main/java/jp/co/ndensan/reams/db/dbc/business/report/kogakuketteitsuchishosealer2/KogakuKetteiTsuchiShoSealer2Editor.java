@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -240,8 +241,12 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
             source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日()).concat(開始週間).concat(接続文字);
             source.karaFugo = 接続文字;
             source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日()).concat(終了週間);
-            source.shiharaiStartHMS = 帳票情報.get支払窓口開始時間().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            source.shiharaiEndHMS = 帳票情報.get支払窓口終了時間().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            if (帳票情報.get支払窓口開始時間() != null) {
+                source.shiharaiStartHMS = new RTime(帳票情報.get支払窓口開始時間()).toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            }
+            if (帳票情報.get支払窓口終了時間() != null) {
+                source.shiharaiEndHMS = new RTime(帳票情報.get支払窓口終了時間()).toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            }
         }
     }
 
