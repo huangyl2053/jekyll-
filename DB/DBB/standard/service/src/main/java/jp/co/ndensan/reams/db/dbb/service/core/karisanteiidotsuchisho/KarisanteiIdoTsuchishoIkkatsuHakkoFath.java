@@ -782,6 +782,44 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
     /**
      * 賦課情報を取得するメソッドです。
      *
+     * @param entity HonsanteiTsuchishoTempEntity
+     * @return HonsanteiTsuchishoTempResult 賦課情報
+     * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
+     */
+    public HonsanteiTsuchishoTempResult get賦課情報(HonsanteiTsuchishoTempEntity entity) throws InvocationTargetException {
+
+        HonsanteiTsuchishoTempResult result = new HonsanteiTsuchishoTempResult();
+        result.set計算後情報_更正後(entity.get計算後情報_更正後());
+        result.set計算後情報_更正前(entity.get計算後情報_更正前());
+        result.set賦課の情報_更正前(get賦課の情報_更正前後(entity, false));
+        result.set賦課の情報_更正後(get賦課の情報_更正前後(entity, true));
+        result.set納組情報(entity.get納組());
+        IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先());
+        result.set宛先情報(宛先);
+        if (entity.get宛先代納() != null && entity.get宛先代納().getShikibetsuCode() != null) {
+            IAtesaki 宛先代納 = AtesakiFactory.createInstance(entity.get宛先代納());
+            result.set宛先代納(宛先代納);
+        }
+
+        if (entity.get特定口座() != null && entity.get特定口座().getUaT0310KozaEntity().getKozaId() != 0) {
+            result.set口座情報(new Koza(entity.get特定口座()));
+        }
+
+        result.set徴収方法情報_更正前(get徴収方法情報_更正前後(entity, false));
+        result.set徴収方法情報_更正後(get徴収方法情報_更正前後(entity, true));
+        if (entity.get対象者_追加含む_情報_更正前() != null) {
+            result.set対象者_追加含む_情報_更正前(new NenkinTokuchoKaifuJoho(entity.get対象者_追加含む_情報_更正前()));
+        }
+        if (entity.get対象者_追加含む_情報_更正後() != null) {
+            result.set対象者_追加含む_情報_更正後(new NenkinTokuchoKaifuJoho(entity.get対象者_追加含む_情報_更正後()));
+        }
+        result.set収入情報(get収入情報(entity));
+        return result;
+    }
+
+    /**
+     * 賦課情報を取得するメソッドです。
+     *
      * @param entityList List<HonsanteiTsuchishoTempEntity>
      * @return List<HonsanteiTsuchishoTempResult> 賦課情報リスト
      * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
