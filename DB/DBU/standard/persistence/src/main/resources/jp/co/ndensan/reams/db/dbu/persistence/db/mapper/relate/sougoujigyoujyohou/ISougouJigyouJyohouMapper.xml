@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 総合事業情報の用XMLです。 -->
+<!-- @reamsid_L DBU-4880-080 lishengli -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper">
+    <select resultOrdered="true" id="get当初_版改定_異動分データ" resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.SougouJigyouJyohouRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter" fetchSize="500">
+        SELECT
+            futanGaku."hihokenshaNo",
+            futanGaku."shikibetsuCode",
+            futanGaku."taishoNendo",
+            futanGaku."shikyuShinseishoSeiriNo",
+            futanGaku."taishoKeisanKaishiYMD",
+            futanGaku."taishoKeisanShuryoYMD",
+            futanGaku."hihokenshaKaishiYMD",
+            futanGaku."hihokenshaShuryoYMD",
+            futanGaku."sumi_Gokei_JikoFutanGaku",
+            futanGaku."sumi_Gokei_70_74JikoFutanGaku",
+            futanGaku."lastUpdateTimestamp"
+        FROM <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku
+        <if test = "is当初または版改定">
+            WHERE
+               #{対象開始日時} <![CDATA[<]]> futanGaku."lastUpdateTimestamp"
+               AND futanGaku."lastUpdateTimestamp" <![CDATA[<=]]> #{対象終了日時}
+        </if>
+        <if test = "is再登録">
+            WHERE futanGaku."hihokenshaNo" = #{個人番号付替対象者被保険者番号}
+        </if>
+        <if test = "is異動">
+            WHERE
+               #{対象開始日時} <![CDATA[<]]> futanGaku."lastUpdateTimestamp"
+               AND futanGaku."lastUpdateTimestamp" <![CDATA[<=]]> #{対象終了日時}
+            UNION 
+            SELECT
+                futanGaku1."hihokenshaNo",
+                futanGaku1."shikibetsuCode",
+                futanGaku1."taishoNendo",
+                futanGaku1."shikyuShinseishoSeiriNo",
+                futanGaku1."taishoKeisanKaishiYMD",
+                futanGaku1."taishoKeisanShuryoYMD",
+                futanGaku1."hihokenshaKaishiYMD",
+                futanGaku1."hihokenshaShuryoYMD",
+                futanGaku1."sumi_Gokei_JikoFutanGaku",
+                futanGaku1."sumi_Gokei_70_74JikoFutanGaku",
+                futanGaku1."lastUpdateTimestamp"
+            FROM <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku1
+            INNER JOIN (SELECT 
+                            dbT7304."hihokenshaNo",
+                            dbT7304."tokuteiKojinJohoMeiCode",
+                            dbT7304."dataSetRecordKey",
+                            dbT7304."hanNo",
+                            dbT7304."teikyoNichiji"
+                        FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" as dbT7304
+                        WHERE dbT7304."tokuteiKojinJohoMeiCode" = #{特定個人情報版管理番号04}
+                            AND dbT7304."dataSetRecordKey" = #{住所地特例情報_0102}
+                            AND dbT7304."hanNo" = #{版番号}
+                            AND (dbT7304."teikyoKubun" = #{個人番号未設定により未提供} OR dbT7304."teikyoKubun" = #{その他エラーにより未提供})
+                            AND NOT EXISTS(SELECT 1
+                                            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" as t7304
+                                           WHERE t7304."hihokenshaNo" = dbT7304."hihokenshaNo"
+                                                AND t7304."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
+                                                AND t7304."dataSetRecordKey" = dbT7304."dataSetRecordKey"
+                                                AND t7304."hanNo" = dbT7304."hanNo"
+                                                AND t7304."teikyoNichiji" = dbT7304."teikyoNichiji")) AS dbT7304TokuteiKojinJohoTeikyoKanri
+                ON futanGaku1."hihokenshaNo" = dbT7304TokuteiKojinJohoTeikyoKanri."hihokenshaNo"
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get提供対象者" resultMap="ResultMap_TeikyoKihonJohoEntity"
+            fetchSize="500">
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.allColumns_TeikyoKihonJoho" />
+         FROM "TeikyoKihonJoho" AS teikyoKihonJoho
+        WHERE NOT EXISTS(SELECT 1
+                          FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
+                         WHERE teikyoKihonJoho."hihokenshaNo" = dbT7304."hihokenshaNo"
+                            AND teikyoKihonJoho."dataSetRecordKey" = dbT7304."dataSetRecordKey"
+                            AND teikyoKihonJoho."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
+                            AND teikyoKihonJoho."hanNo" = dbT7304."hanNo"
+                            AND teikyoKihonJoho."teikyoNaiyo01" = dbT7304."soshinNaiyo01"
+                            AND teikyoKihonJoho."teikyoNaiyo02" = dbT7304."soshinNaiyo02"
+                            AND teikyoKihonJoho."teikyoNaiyo03" = dbT7304."soshinNaiyo03"
+                            AND teikyoKihonJoho."teikyoNaiyo04" = dbT7304."soshinNaiyo04"
+                            AND teikyoKihonJoho."teikyoNaiyo05" = dbT7304."soshinNaiyo05"
+                            AND teikyoKihonJoho."teikyoNaiyo06" = dbT7304."soshinNaiyo06"
+                            AND teikyoKihonJoho."teikyoNaiyo07" = dbT7304."soshinNaiyo07"
+                            AND teikyoKihonJoho."teikyoNaiyo08" = dbT7304."soshinNaiyo08"
+                            AND teikyoKihonJoho."teikyoNaiyo09" = dbT7304."soshinNaiyo09"
+                            AND teikyoKihonJoho."teikyoNaiyo10" = dbT7304."soshinNaiyo10")
+    </select>
+    
+    <sql id="allColumns_TeikyoKihonJoho">
+         teikyoKihonJoho."hiHokenshaNo" as "teikyoKihonJoho_hihokenshaNo",
+         teikyoKihonJoho."dataSetRecordKey" as "teikyoKihonJoho_dataSetRecordKey",
+         teikyoKihonJoho."teikyoKubun" as "teikyoKihonJoho_teikyoKubun",
+         teikyoKihonJoho."shikibetsuCode" as "teikyoKihonJoho_shikibetsuCode",
+         teikyoKihonJoho."kojinnNo" as "teikyoKihonJoho_kojinnNo",
+         teikyoKihonJoho."tokuteiKojinJohoMeiCode" as "teikyoKihonJoho_tokuteiKojinJohoMeiCode",
+         teikyoKihonJoho."hanNo" as "teikyoKihonJoho_hanNo",
+         teikyoKihonJoho."teikyoNaiyo01" as "teikyoKihonJoho_teikyoNaiyo01",
+         teikyoKihonJoho."misetteiJiyu01" as "teikyoKihonJoho_misetteiJiyu01",
+         teikyoKihonJoho."teikyoNaiyo02" as "teikyoKihonJoho_teikyoNaiyo02",
+         teikyoKihonJoho."misetteiJiyu02" as "teikyoKihonJoho_misetteiJiyu02",
+         teikyoKihonJoho."teikyoNaiyo03" as "teikyoKihonJoho_teikyoNaiyo03",
+         teikyoKihonJoho."misetteiJiyu03" as "teikyoKihonJoho_misetteiJiyu03",
+         teikyoKihonJoho."teikyoNaiyo04" as "teikyoKihonJoho_teikyoNaiyo04",
+         teikyoKihonJoho."misetteiJiyu04" as "teikyoKihonJoho_misetteiJiyu04",
+         teikyoKihonJoho."teikyoNaiyo05" as "teikyoKihonJoho_teikyoNaiyo05",
+         teikyoKihonJoho."misetteiJiyu05" as "teikyoKihonJoho_misetteiJiyu05",
+         teikyoKihonJoho."teikyoNaiyo06" as "teikyoKihonJoho_teikyoNaiyo06",
+         teikyoKihonJoho."misetteiJiyu06" as "teikyoKihonJoho_misetteiJiyu06",
+         teikyoKihonJoho."teikyoNaiyo07" as "teikyoKihonJoho_teikyoNaiyo07",
+         teikyoKihonJoho."misetteiJiyu07" as "teikyoKihonJoho_misetteiJiyu07",
+         teikyoKihonJoho."teikyoNaiyo08" as "teikyoKihonJoho_teikyoNaiyo08",
+         teikyoKihonJoho."misetteiJiyu08" as "teikyoKihonJoho_misetteiJiyu08",
+         teikyoKihonJoho."teikyoNaiyo09" as "teikyoKihonJoho_teikyoNaiyo09",
+         teikyoKihonJoho."misetteiJiyu09" as "teikyoKihonJoho_misetteiJiyu09",
+         teikyoKihonJoho."teikyoNaiyo10" as "teikyoKihonJoho_teikyoNaiyo10",
+         teikyoKihonJoho."misetteiJiyu10" as "teikyoKihonJoho_misetteiJiyu10",
+         teikyoKihonJoho."kokaiYMD" as "teikyoKihonJoho_kokaiYMD"
+    </sql>
+
+
+    <!--テーブルTeikyoKihonJohoの項目をTeikyoKihonJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_TeikyoKihonJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeikyoKihonJohoEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="teikyoKihonJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dataSetRecordKey" column="teikyoKihonJoho_dataSetRecordKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoKubun" column="teikyoKihonJoho_teikyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="teikyoKihonJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kojinnNo" column="teikyoKihonJoho_kojinnNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiKojinJohoMeiCode" column="teikyoKihonJoho_tokuteiKojinJohoMeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hanNo" column="teikyoKihonJoho_hanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dataSetNo" column="teikyoKihonJoho_dataSetNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokaiYMD" column="teikyoKihonJoho_kokaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tateNo" column="teikyoKihonJoho_tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="teikyoNaiyo01" column="teikyoKihonJoho_teikyoNaiyo01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu01" column="teikyoKihonJoho_misetteiJiyu01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo02" column="teikyoKihonJoho_teikyoNaiyo02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu02" column="teikyoKihonJoho_misetteiJiyu02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo03" column="teikyoKihonJoho_teikyoNaiyo03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu03" column="teikyoKihonJoho_misetteiJiyu03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo04" column="teikyoKihonJoho_teikyoNaiyo04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu04" column="teikyoKihonJoho_misetteiJiyu04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo05" column="teikyoKihonJoho_teikyoNaiyo05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu05" column="teikyoKihonJoho_misetteiJiyu05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo06" column="teikyoKihonJoho_teikyoNaiyo06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu06" column="teikyoKihonJoho_misetteiJiyu06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo07" column="teikyoKihonJoho_teikyoNaiyo07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu07" column="teikyoKihonJoho_misetteiJiyu07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo08" column="teikyoKihonJoho_teikyoNaiyo08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu08" column="teikyoKihonJoho_misetteiJiyu08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo09" column="teikyoKihonJoho_teikyoNaiyo09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu09" column="teikyoKihonJoho_misetteiJiyu09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoNaiyo10" column="teikyoKihonJoho_teikyoNaiyo10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="misetteiJiyu10" column="teikyoKihonJoho_misetteiJiyu10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokaiYMD" column="teikyoKihonJoho_kokaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <sql id="総合事業">
+         (SELECT
+                    dbT1001HihokenshaDaicho."hihokenshaNo",
+                    dbT1001HihokenshaDaicho."shikibetsuCode",
+                    dbT3170."taishoNendo",
+                    dbT3170."shikyuShinseishoSeiriNo",
+                    dbT3170."taishoKeisanKaishiYMD",
+                    dbT3170."taishoKeisanShuryoYMD",
+                    dbT3170."hihokenshaKaishiYMD",
+                    dbT3170."hihokenshaShuryoYMD",
+                    dbT3170."sumi_Gokei_JikoFutanGaku",
+                    dbT3170."sumi_Gokei_70_74JikoFutanGaku",
+                    dbT3170."lastUpdateTimestamp"
+            FROM rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS dbT3170
+            INNER JOIN (SELECT dbT1001."hihokenshaNo", dbT1001."shikibetsuCode"
+                        FROM rgdb."DbT1001HihokenshaDaicho" AS dbT1001
+                        WHERE dbT1001."logicalDeletedFlag" = false
+                                AND NOT EXISTS (SELECT 1
+                                                FROM rgdb."DbT1001HihokenshaDaicho" t1001
+                                                WHERE t1001."hihokenshaNo" = dbT1001."hihokenshaNo"
+                                                       AND t1001."logicalDeletedFlag" = false
+                                                       AND( t1001."idoYMD" > dbT1001."idoYMD" OR
+                                                        (t1001."idoYMD" = dbT1001."idoYMD" AND t1001."edaNo" > dbT1001."edaNo")))
+                        ) AS dbT1001HihokenshaDaicho
+                    ON dbT3170."hihokenshaNo" = dbT1001HihokenshaDaicho."hihokenshaNo"
+            WHERE dbT3170."idoKubun" = #{仮データ}
+                    AND (dbT3170."dataSakuseiKubun" = #{自己負担額確認情報_括} OR
+                                    (dbT3170."dataSakuseiKubun" = #{国保連} AND
+                                            (dbT3170."dataSakuseiKubun" != '' OR dbT3170."realHoseiJissiYMD" != '' )))
+                    AND NOT EXISTS (SELECT 1
+                                                            FROM rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS t3170
+                                                            WHERE t3170."hihokenshaNo" = dbT3170."hihokenshaNo"
+                                                                    AND t3170."shikyuShinseishoSeiriNo" = dbT3170."shikyuShinseishoSeiriNo"
+                                                                    AND t3170."rirekiNo" > dbT3170."rirekiNo"))
+    </sql>
+</mapper>
