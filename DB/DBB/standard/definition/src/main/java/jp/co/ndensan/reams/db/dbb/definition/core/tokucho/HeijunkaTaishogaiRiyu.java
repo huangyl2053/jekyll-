@@ -33,7 +33,11 @@ public enum HeijunkaTaishogaiRiyu {
     /**
      * コード:6 名称:特徴6月開始者 略称:特徴6月開始者
      */
-    特徴6月開始者("6", "特徴6月開始者", "特徴6月開始者");
+    特徴6月開始者("6", "特徴6月開始者", "特徴6月開始者"),
+    /**
+     * コード:7 名称:変更なし 略称:変更なし
+     */
+    変更なし("7", "変更なし", "変更なし");
 
     private final RString code;
     private final RString fullName;

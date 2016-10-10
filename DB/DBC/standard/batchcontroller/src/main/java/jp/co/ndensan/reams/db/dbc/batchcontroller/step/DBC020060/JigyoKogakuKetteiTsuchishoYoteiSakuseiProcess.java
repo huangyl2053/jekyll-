@@ -10,8 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujigyoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoOutputOrder;
-import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriReport;
-import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
@@ -140,12 +138,12 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         if (!条件set.contains(tempStr)) {
             連番 = 連番 + INT_1;
             KogakuKetteiTsuchiShoEntity reportEntity = getReportEntity(entity);
-            JigyoKogakuKetteiTsuchishoYijiNashiReport report1 = new JigyoKogakuKetteiTsuchishoYijiNashiReport(getタイトル(entity),
-                    reportEntity, ninshoshaSource1, parameter.get文書番号(), 通知書定型文, 帳票制御共通情報);
-            report1.writeBy(reportSourceWriter1);
-            JigyoKogakuKetteiTsuchishoYijiAriReport report2 = new JigyoKogakuKetteiTsuchishoYijiAriReport(getタイトル(entity),
-                    reportEntity, ninshoshaSource2, parameter.get文書番号(), 通知書定型文, 帳票制御共通情報);
-            report2.writeBy(reportSourceWriter2);
+//            JigyoKogakuKetteiTsuchishoYijiNashiReport report1 = new JigyoKogakuKetteiTsuchishoYijiNashiReport(getタイトル(entity),
+//                    reportEntity, ninshoshaSource1, parameter.get文書番号(), 通知書定型文, 帳票制御共通情報);
+//            report1.writeBy(reportSourceWriter1);
+//            JigyoKogakuKetteiTsuchishoYijiAriReport report2 = new JigyoKogakuKetteiTsuchishoYijiAriReport(getタイトル(entity),
+//                    reportEntity, ninshoshaSource2, parameter.get文書番号(), 通知書定型文, 帳票制御共通情報);
+//            report2.writeBy(reportSourceWriter2);
             条件set.add(tempStr);
 
         }
@@ -183,14 +181,14 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
 
     private KogakuKetteiTsuchiShoEntity getReportEntity(KetteiTsuchishoInfoTempResultEntity entity) {
         KogakuKetteiTsuchiShoEntity reportEntity = new KogakuKetteiTsuchiShoEntity();
-        reportEntity.set連番(連番);
+//        reportEntity.set連番(連番);
         reportEntity.set識別コード(entity.get識別コード());
         if (フラグ_TRUE.equals(parameter.getテスト出力フラグ())) {
             reportEntity.setテスト出力フラグ(true);
         } else {
             reportEntity.setテスト出力フラグ(false);
         }
-        reportEntity.set文書番号(parameter.get文書番号());
+        //      reportEntity.set文書番号(parameter.get文書番号());
         if (entity.get宛名() != null && entity.get宛名().getKanjiShimei() != null) {
             reportEntity.set被保険者氏名(RString.EMPTY);
         }
@@ -209,7 +207,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         reportEntity.set支給不支給決定区分(entity.get支給結果());
         reportEntity.set決定額(entity.get高額支給額());
         reportEntity.set支給金額(entity.get支払金額());
-        reportEntity.set支給不支給区分(entity.get支給区分コード());
+//        reportEntity.set支給不支給区分(entity.get支給区分コード());
         reportEntity.set不支給理由(entity.get不支給理由());
         if (entity.get支払方法区分コード() != null) {
             ShiharaiHohoKubun 支払方法 = ShiharaiHohoKubun.toValue(entity.get支払方法区分コード());

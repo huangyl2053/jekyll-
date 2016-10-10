@@ -56,14 +56,13 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
 
     @Override
     protected void initialize() {
-        super.initialize();
         if (RSTRING_1.equals(parameter.get処理区分())) {
             tableName = TABLE_NAME;
         } else if (RSTRING_2.equals(parameter.get処理区分())) {
             tableName = TABLE_NAME1;
         }
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別List = new ArrayList();
         List<JuminJotai> 住民状態List = new ArrayList();
         住民種別List.add(JuminShubetsu.日本人);
@@ -126,11 +125,6 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
             this.editTaishoSetaiin(taiShoEntity, 宛名);
         }
         this.taiShoTableWriter.insert(taiShoEntity);
-    }
-
-    @Override
-    protected void afterExecute() {
-
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

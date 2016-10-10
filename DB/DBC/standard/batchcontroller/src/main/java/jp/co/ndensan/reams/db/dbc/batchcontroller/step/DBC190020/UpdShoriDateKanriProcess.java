@@ -5,11 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
@@ -28,8 +26,8 @@ public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
         UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para = new UpdTaishoSeitaiyinTemp5ProcessMybatisParameter();
         para.set処理年度(parameter.get処理年度());
         para.set市町村コード(parameter.get市町村コード());
-        List<DbT7022ShoriDateKanriEntity> entityList = getMapper(IKijunsyunyunenjiMapper.class).select処理日付管理マスタ(para);
-        if (INT_0 == entityList.size()) {
+        int 件数 = getMapper(IKijunsyunyunenjiMapper.class).select処理日付管理マスタ(para);
+        if (INT_0 == 件数) {
             getMapper(IKijunsyunyunenjiMapper.class).insert処理日付管理マスタ(para);
         } else {
             getMapper(IKijunsyunyunenjiMapper.class).update処理日付管理マスタ(para);

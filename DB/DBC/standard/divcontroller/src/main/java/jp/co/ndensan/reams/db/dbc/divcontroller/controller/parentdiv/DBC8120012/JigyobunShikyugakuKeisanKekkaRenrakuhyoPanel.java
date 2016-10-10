@@ -146,7 +146,15 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
         List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> panelResultList = createHandler(div).処理対象データ取得(parameter);
         List<JigyoKogakuGassanShikyuGakuKeisanKekka> list = new ArrayList();
         for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity : panelResultList) {
-            list.add(new JigyoKogakuGassanShikyuGakuKeisanKekka(entity.getDbt3172Entity()));
+            int i = 0;
+            for (JigyoKogakuGassanShikyuGakuKeisanKekka kekka : list) {
+                if (kekka.toEntity().equals(entity.getDbt3172Entity())) {
+                    i++;
+                }
+            }
+            if (i == 0) {
+                list.add(new JigyoKogakuGassanShikyuGakuKeisanKekka(entity.getDbt3172Entity()));
+            }
         }
         ViewStateHolder.put(ViewStateKeys.事業高額合算支給額計算結果データ, (Serializable) list);
         IShikibetsuTaishoFinder findler = ShikibetsuTaishoService.getShikibetsuTaishoFinder();

@@ -86,7 +86,7 @@ public class JigyoHokokuDataReportDBU300019Process extends BatchProcessBase<Jigy
     protected void afterExecute() {
         JigyohokokuCompYoshiki271Data reportData = new JigyohokokuCompYoshiki271Data();
         reportData.set年報月報区分(年報月報区分);
-        reportData.set作成日時(processParameter.get処理日時());
+        reportData.set作成日時(processParameter.get処理日時().getRDateTime());
         reportData.set集計年月(processParameter.get集計年月());
         reportData.set事業報告統計データ(entityData);
         reportData.set過去集計分旧市町村区分(processParameter.get過去集計分旧市町村区分());

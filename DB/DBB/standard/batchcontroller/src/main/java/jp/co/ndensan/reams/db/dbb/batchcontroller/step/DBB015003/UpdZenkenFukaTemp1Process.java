@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidotsuc
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
- * 全件賦課情報一時テーブル/異動賦課情報一時テーブル作成するクラスです。
+ * 「計算後情報「更正前」情報を更新」処理クラスです。
  *
  * @reamsid_L DBB-0890-030 xicongwang
  */
-public class KarisanteiIdoTsuchishoTempCreatProcess extends SimpleBatchProcessBase {
+public class UpdZenkenFukaTemp1Process extends SimpleBatchProcessBase {
 
     private IKarisanteiIdoFukaMapper mapper;
 
@@ -24,6 +24,10 @@ public class KarisanteiIdoTsuchishoTempCreatProcess extends SimpleBatchProcessBa
 
     @Override
     protected void process() {
-        mapper.creat賦課情報一時();
+        mapper.update異動賦課情報一時テーブルFROM計算後情報一時();
+    }
+
+    @Override
+    protected void afterExecute() {
     }
 }

@@ -136,7 +136,7 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
         parameter.setバッチID(getParameter().getBatchID().get(連番_7));
         parameter.setプリントコントロール区分(getParameter().getPrintControlKbn());
         parameter.set作成日時(new RString(getParameter().getSakuseiNitizi().get(連番_7).toString()));
-        parameter.set処理日時(new RString(getParameter().getSyoriNitizi().toString()));
+        parameter.set処理日時(new YMDHMS(getParameter().getSyoriNitizi().getDate(), getParameter().getSyoriNitizi().getTime()));
         parameter.set報告年月(getParameter().getHoukokuNengetu());
         parameter.set市町村コード(getParameter().getShichosonCode().value());
         parameter.set年度(getParameter().getNendo().get(連番_2));
@@ -169,7 +169,7 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
         parameter.set集計開始年月(getParameter().getKaishiYm());
         parameter.set集計終了年月(getParameter().getShusyoYm());
         parameter.set作成日時(new RString(getParameter().getSakuseiNitizi().get(連番_8).toString()));
-        parameter.set処理日時(new RString(getParameter().getSyoriNitizi().toString()));
+        parameter.set処理日時(new YMDHMS(getParameter().getSyoriNitizi().getDate(), getParameter().getSyoriNitizi().getTime()));
         parameter.set市町村コード(getParameter().getShichosonCode().value());
         parameter.set構成市町村区分(getParameter().getKouseiShichosonKubun());
         parameter.set旧市町村区分(getParameter().getOldShichosonKubun());

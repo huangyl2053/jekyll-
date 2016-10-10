@@ -127,6 +127,8 @@ public class JukyushaDaichoPanelHandler {
         div.getCcdAtenaJoken().set保険者();
         div.getCcdAtenaJoken().set地区(Chiku.全て.getコード());
         div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdGyoseikuFrom().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdJushoFrom().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdJushoTo().setDisabled(false);
         setCSV編集条件();
         div.getCcdShutsuryokujun().setDisabled(false);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID));
@@ -187,7 +189,6 @@ public class JukyushaDaichoPanelHandler {
         RString 出力項目 = map.getParameterValue(RString.class, 出力項目名);
         div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
         onChange_chkSaisin();
-        onSelect_radChushutsuTaisho();
     }
 
     /**

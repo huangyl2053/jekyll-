@@ -29,8 +29,14 @@ public class UpdateNenkenKoseigoJohoProcess extends BatchProcessBase<NenkenKosei
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "fuchokaritsuchishoikkatsuhakko.IFuchoKarisanteiTsuchishoHakkoMapper.select異動賦課情報_対象者仮徴収更正前");
     private FuchoKarisanteiTsuchishoHakkoProcessParameter processParameter;
+    private IdoFukaJohoTempEntitySet entitySet;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動賦課情報一時tableWriter;
+
+    @Override
+    protected void initialize() {
+        entitySet = new IdoFukaJohoTempEntitySet();
+    }
 
     @Override
     protected void createWriter() {
@@ -50,7 +56,6 @@ public class UpdateNenkenKoseigoJohoProcess extends BatchProcessBase<NenkenKosei
         UeT0511NenkinTokuchoKaifuJohoEntity 年金特徴回付情報_更正前 = nenkenJohoEntity.get年金特徴回付情報_更正前();
         TmpIdoFukaJohoEntity 異動賦課情報一時 = nenkenJohoEntity.get異動賦課情報一時テーブル();
         if (異動賦課情報一時 != null && 年金特徴回付情報_更正前 != null) {
-            IdoFukaJohoTempEntitySet entitySet = new IdoFukaJohoTempEntitySet();
             entitySet.update異動賦課情報一時_年金Entity(異動賦課情報一時, 年金特徴回付情報_更正前);
             if (異動賦課情報一時.getDbT2015KeisangoJoho_seihoKaishiYMD() != null) {
                 異動賦課情報一時.setSeikatsuHogoKubun(生活保護区分);

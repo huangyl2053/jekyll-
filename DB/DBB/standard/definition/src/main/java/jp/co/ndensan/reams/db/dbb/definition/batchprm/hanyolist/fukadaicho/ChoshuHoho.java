@@ -16,32 +16,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ChoshuHoho {
 
     /**
-     * コード:1 名称:全て 略称:定義なし
+     * コード:1 名称:全て 略称:全て
      */
-    全て("1", "全て"),
+    全て("1", "全て", "全て"),
     /**
-     * コード:2 名称:特徴のみ 略称:定義なし
+     * コード:2 名称:特徴のみ 略称:特徴のみ
      */
-    特徴のみ("2", "特徴のみ"),
+    特徴のみ("2", "特徴のみ", "特徴のみ"),
     /**
-     * コード:3 名称:普徴のみ 略称:定義なし
+     * コード:3 名称:普徴のみ 略称:普徴のみ
      */
-    普徴のみ("3", "普徴のみ"),
+    普徴のみ("3", "普徴のみ", "普徴のみ"),
     /**
-     * コード:4 名称:併徴者のみ 略称:定義なし
+     * コード:4 名称:併徴者のみ 略称:併徴者のみ
      */
-    併徴者のみ("4", "併徴者のみ"),
+    併徴者のみ("4", "併徴者のみ", "併徴者のみ"),
     /**
-     * コード:5 名称:前半普徴・後半特徴 略称:定義なし
+     * コード:5 名称:前半普後半特 略称:前半普徴・後半特徴
      */
-    前半普後半特("5", "前半普徴・後半特徴");
+    前半普後半特("5", "前半普後半特", "前半普徴・後半特徴");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private ChoshuHoho(String code, String fullname) {
+    private ChoshuHoho(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -60,6 +62,15 @@ public enum ChoshuHoho {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 徴収方法の略称を返します。
+     *
+     * @return 徴収方法の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

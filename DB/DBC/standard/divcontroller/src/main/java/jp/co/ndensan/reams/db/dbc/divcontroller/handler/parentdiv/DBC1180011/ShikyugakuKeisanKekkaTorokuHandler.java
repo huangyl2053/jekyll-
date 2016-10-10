@@ -41,9 +41,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class ShikyugakuKeisanKekkaTorokuHandler {
 
     private final ShikyugakuKeisanKekkaTorokuDiv div;
-    private static final RString 空白 = new RString("空白");
-    private static final RString 所得区分_課税 = new RString("10");
-    private static final RString 所得区分_非課税 = new RString("11");
+    private static final RString 空白 = new RString("-");
+    private static final RString 所得区分_課税 = new RString("0");
+    private static final RString 所得区分_非課税 = new RString("4");
     private static final RString 課税 = new RString("課税");
     private static final RString 非課税 = new RString("非課税");
     private static final int INT_0 = 0;
@@ -71,7 +71,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private static final RString 保険者作成 = new RString("保険者作成");
     private static final RString 新規 = new RString("新規");
     private static final RString KEY_0 = new RString("key0");
-    private static final RString 按分率 = new RString("999999999/999999999");
+    private static final RString 按分率 = new RString("99999999/99999999");
     private static final RString スラッシュ = new RString("/");
     private static final RString 横線 = new RString("-");
 

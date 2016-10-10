@@ -38,6 +38,7 @@ public class KarisanteiIdoFukaProcessParameter implements IBatchProcessParameter
     private RString 納入_ページごとに山分け;
     private boolean 一括発行起動フラグ;
     private YMDHMS 帳票作成日時;
+    private YMDHMS 最新調定日時;
 
     /**
      * コンストラクタ
@@ -56,6 +57,7 @@ public class KarisanteiIdoFukaProcessParameter implements IBatchProcessParameter
      * @param 納入_ページごとに山分け RString
      * @param 一括発行起動フラグ boolean
      * @param 帳票作成日時 YMDHMS
+     * @param 最新調定日時 YMDHMS
      */
     public KarisanteiIdoFukaProcessParameter(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
@@ -70,7 +72,8 @@ public class KarisanteiIdoFukaProcessParameter implements IBatchProcessParameter
             RString 納入_生活保護対象者,
             RString 納入_ページごとに山分け,
             boolean 一括発行起動フラグ,
-            YMDHMS 帳票作成日時) {
+            YMDHMS 帳票作成日時,
+            YMDHMS 最新調定日時) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.出力帳票一覧 = 出力帳票一覧;
@@ -85,5 +88,6 @@ public class KarisanteiIdoFukaProcessParameter implements IBatchProcessParameter
         this.納入_ページごとに山分け = 納入_ページごとに山分け;
         this.一括発行起動フラグ = 一括発行起動フラグ;
         this.帳票作成日時 = 帳票作成日時;
+        this.最新調定日時 = 最新調定日時;
     }
 }

@@ -96,7 +96,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
 
     @Override
     protected void afterExecute() {
-        if (INT_0 == this.entityList.size()) {
+        if (exEntity != null && INT_0 == this.entityList.size()) {
             this.entityList.add(exEntity);
             this.getAge(exEntity);
             this.get課税所得_控除後Flage(exEntity);
@@ -118,13 +118,15 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private void getAge(UpdTaishoSeitaiyinTemp4Entity entity) {
         TaishoSetaiinEntity 対象世帯員2 = entity.get対象世帯員2();
         if ((null != 対象世帯員2.getAge() && 対象世帯員2.getAge().compareTo(RSTRING_16) < 0)
-                && (対象世帯員2.getNenkinShunyuGaku().add(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei()).compareTo(DECIMAL_38) <= 0)
+                && (this.getDecimal(対象世帯員2.getNenkinShunyuGaku())
+                .add(this.getDecimal(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei())).compareTo(DECIMAL_38) <= 0)
                 && (対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_10) || 対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_20))) {
             ageLess16++;
         }
 
         if ((RSTRING_16.compareTo(対象世帯員2.getAge()) <= 0 && 対象世帯員2.getAge().compareTo(RSTRING_18) <= 0)
-                && (対象世帯員2.getNenkinShunyuGaku().add(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei()).compareTo(DECIMAL_38) <= 0)
+                && (this.getDecimal(対象世帯員2.getNenkinShunyuGaku())
+                .add(this.getDecimal(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei())).compareTo(DECIMAL_38) <= 0)
                 && (対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_10) || 対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_20))) {
             age16_18++;
         }
@@ -152,6 +154,13 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
             控除後 = 対象世帯員1.getKazeiShotokuGaku();
         }
         対象世帯員1.setKazeiShotokuGakuAfter(控除後);
+    }
+
+    private Decimal getDecimal(Decimal decimal) {
+        if (null != decimal) {
+            return decimal;
+        }
+        return Decimal.ZERO;
     }
 
 }

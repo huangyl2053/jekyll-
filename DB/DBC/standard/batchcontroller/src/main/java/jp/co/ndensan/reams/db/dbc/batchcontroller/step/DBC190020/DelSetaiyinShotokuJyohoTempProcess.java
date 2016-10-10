@@ -49,9 +49,4 @@ public class DelSetaiyinShotokuJyohoTempProcess extends BatchProcessBase<SetaiSh
         i++;
     }
 
-    @Override
-    protected void afterExecute() {
-
-    }
-
 }

@@ -53,12 +53,11 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
     private boolean 課税区分flg = false;
     private boolean 課税所得flg = false;
     private boolean 世帯出力flg = false;
-    private Decimal 総収入額;
+    private Decimal 総収入額 = Decimal.ZERO;
     private int 該当件数;
 
     @Override
     protected void initialize() {
-        super.initialize();
         this.entityList = new ArrayList<>();
     }
 
@@ -109,8 +108,9 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
 
     @Override
     protected void afterExecute() {
-        if (INT_0 == this.entityList.size()) {
+        if (exEntity != null && INT_0 == this.entityList.size()) {
             this.entityList.add(exEntity);
+            this.設定flg(exEntity);
         }
         if (null != this.exEntity) {
             if (RSTRING_0.equals(parameter.get抽出条件())) {
@@ -138,10 +138,10 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
         }
 
         if ((RSTRING_1.equals(entity.getHihokennshaKubun()) || RSTRING_3.equals(entity.getHihokennshaKubun()))) {
-            if (DECIMAL_145.compareTo(entity.getKazeiShotokuGakuAfter()) <= 0) {
+            if (DECIMAL_145.compareTo(getDecimal(entity.getKazeiShotokuGakuAfter())) <= 0) {
                 this.課税所得flg = true;
             }
-            this.総収入額 = this.総収入額.add(entity.getNenkinShunyuGaku()).add(entity.getSonotanoGoukeiShotokuKingakuGoukei());
+            this.総収入額 = this.総収入額.add(getDecimal(entity.getNenkinShunyuGaku())).add(getDecimal(entity.getSonotanoGoukeiShotokuKingakuGoukei()));
         }
 
         if (RSTRING_1.equals(entity.getHihokennshaKubun())) {
@@ -230,6 +230,13 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
         para.set世帯コード(世帯コード);
         para.set処理年度(parameter.get処理年度());
         this.該当件数 = getMapper(IKijunsyunyunenjiMapper.class).get該当件数(para);
+    }
+
+    private Decimal getDecimal(Decimal decimal) {
+        if (null != decimal) {
+            return decimal;
+        }
+        return Decimal.ZERO;
     }
 
 }

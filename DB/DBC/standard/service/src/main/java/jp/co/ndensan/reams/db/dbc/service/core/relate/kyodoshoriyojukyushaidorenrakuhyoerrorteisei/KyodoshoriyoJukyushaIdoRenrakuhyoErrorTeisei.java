@@ -52,7 +52,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei {
      * @return KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei
      */
     public static KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei createInstance() {
-
         return InstanceProvider.create(KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei.class);
     }
 
@@ -87,7 +86,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei {
                     for (Integer k = INDEX_THIRTY_SEVEN; k < INDEX_THIRTY_SEVEN + NUM_TEN; k++) {
                         訂正情報の訂正内容List.add(data.get(k));
                     }
-
                     RString 項目 = RString.EMPTY;
                     for (Integer i = INDEX_ZERO; i < NUM_TEN; i++) {
                         項目 = 項目.concat(訂正情報の項目List.get(i)).concat(スラッシュ)

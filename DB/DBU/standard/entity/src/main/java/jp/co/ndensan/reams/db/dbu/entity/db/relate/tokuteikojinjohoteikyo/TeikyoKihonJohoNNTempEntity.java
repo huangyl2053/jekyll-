@@ -31,14 +31,14 @@ public class TeikyoKihonJohoNNTempEntity extends DbTableEntityBase<TeikyoKihonJo
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private RString dataSetNo;
+    private RString dataSetKey;
     @TempTableColumnOrder(10)
     private RString teikyoKubun;
     @TempTableColumnOrder(20)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(30)
     private RString kojinNo;
-    @TempTableColumnOrder(40)
+    @PrimaryKey
     private RString tokuteiKojinJohoMeiCode;
     @TempTableColumnOrder(50)
     private RString hanNo;
@@ -93,7 +93,7 @@ public class TeikyoKihonJohoNNTempEntity extends DbTableEntityBase<TeikyoKihonJo
     @Override
     public void shallowCopy(TeikyoKihonJohoNNTempEntity entity) {
         this.setHihokenshaNo(entity.getHihokenshaNo());
-        this.setDataSetNo(entity.getDataSetNo());
+        this.setDataSetKey(entity.getDataSetKey());
         this.setTeikyoKubun(entity.getTeikyoKubun());
         this.setShikibetsuCode(entity.getShikibetsuCode());
         this.setKojinNo(entity.getKojinNo());
@@ -127,7 +127,7 @@ public class TeikyoKihonJohoNNTempEntity extends DbTableEntityBase<TeikyoKihonJo
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, dataSetNo, teikyoKubun, shikibetsuCode, kojinNo, tokuteiKojinJohoMeiCode,
+        return super.toMd5(hihokenshaNo, dataSetKey, teikyoKubun, shikibetsuCode, kojinNo, tokuteiKojinJohoMeiCode,
                 hanNo, teikyoNaiyo01, misetteiJiyu01, teikyoNaiyo02, misetteiJiyu02, teikyoNaiyo03, misetteiJiyu03,
                 teikyoNaiyo04, misetteiJiyu04, teikyoNaiyo05, misetteiJiyu05, teikyoNaiyo06, misetteiJiyu06,
                 teikyoNaiyo07, misetteiJiyu07, teikyoNaiyo08, misetteiJiyu08, teikyoNaiyo09, misetteiJiyu09,
@@ -152,15 +152,15 @@ public class TeikyoKihonJohoNNTempEntity extends DbTableEntityBase<TeikyoKihonJo
     /**
      * @return the dataSetNo
      */
-    public RString getDataSetNo() {
-        return dataSetNo;
+    public RString getDataSetKey() {
+        return dataSetKey;
     }
 
     /**
-     * @param dataSetNo the dataSetNo to set
+     * @param dataSetKey the dataSetKey to set
      */
-    public void setDataSetNo(RString dataSetNo) {
-        this.dataSetNo = dataSetNo;
+    public void setDataSetKey(RString dataSetKey) {
+        this.dataSetKey = dataSetKey;
     }
 
     /**

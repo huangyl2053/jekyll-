@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki272.Jigyoh
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -26,8 +25,6 @@ public class JigyohokokuCompYoshiki272BodyEditor implements IJigyohokokuCompYosh
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final int ゼロ = 0;
-    private static final int ハチ = 8;
 
     /**
      * インスタンスを生成します。
@@ -62,16 +59,15 @@ public class JigyohokokuCompYoshiki272BodyEditor implements IJigyohokokuCompYosh
 
     private RString set処理日時() {
         RStringBuilder printTimeStampSb = new RStringBuilder();
-        RDateTime printdate = RDateTime.of(change.get作成日時().substring(ゼロ, ハチ), change.get作成日時().substring(ハチ));
-        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+        printTimeStampSb.append(change.get作成日時().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(String.format("%02d", change.get作成日時().getHour()));
         printTimeStampSb.append(DATE_時);
-        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(String.format("%02d", change.get作成日時().getMinute()));
         printTimeStampSb.append(DATE_分);
-        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(String.format("%02d", change.get作成日時().getSecond()));
         printTimeStampSb.append(DATE_秒);
         return printTimeStampSb.toRString();
     }

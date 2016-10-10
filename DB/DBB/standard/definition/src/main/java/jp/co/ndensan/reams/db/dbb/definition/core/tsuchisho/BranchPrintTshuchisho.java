@@ -16,18 +16,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum BranchPrintTshuchisho {
 
     /**
-     * コード:無 名称:発行しない 略称:無
+     * コード:無 名称:発行しない 略称:発行処理する
      */
-    発行処理する("発行処理する"),
+    発行処理する("発行処理する", "発行処理する"),
     /**
-     * コード:無 名称:発行する 略称:無
+     * コード:無 名称:発行する 略称:発行処理しない
      */
-    発行処理しない("発行処理しない");
+    発行処理しない("発行処理しない", "発行処理しない");
 
     private final RString fullName;
+    private final RString shortName;
 
-    private BranchPrintTshuchisho(String fullname) {
+    private BranchPrintTshuchisho(String fullname, String shortName) {
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -37,6 +39,15 @@ public enum BranchPrintTshuchisho {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * バッチ分岐通知書発行の略称を返します。
+     *
+     * @return バッチ分岐通知書発行の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

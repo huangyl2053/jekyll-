@@ -46,6 +46,8 @@ public class InsJushochiTokureiTsuikaTempProcess extends BatchProcessBase<Shikak
     private InsJushochiTokureiTsuikaTempProcessParameter parameter;
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者の情報;
     private TsuchishoNo 通知書番号;
+    private FlexibleYear 賦課年度;
+    private FlexibleYear 調定年度;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter<UeT0511NenkinTokuchoKaifuJohoEntity> 住所地特例該当追加Temp;
@@ -76,13 +78,17 @@ public class InsJushochiTokureiTsuikaTempProcess extends BatchProcessBase<Shikak
 
     @Override
     protected void process(ShikakuSoshitsuDataEntity t) {
-        if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)) {
+        if (!t.get賦課情報().getTsuchishoNo().equals(通知書番号)
+                || !t.get賦課情報().getFukaNendo().equals(賦課年度)
+                || !t.get賦課情報().getChoteiNendo().equals(調定年度)) {
             if (通知書番号 != null) {
                 住所地特例該当追加Temp.insert(対象者の情報);
             }
             対象者の情報 = 対象者の情報を編集(t);
         }
         通知書番号 = t.get賦課情報().getTsuchishoNo();
+        賦課年度 = t.get賦課情報().getFukaNendo();
+        調定年度 = t.get賦課情報().getChoteiNendo();
     }
 
     @Override

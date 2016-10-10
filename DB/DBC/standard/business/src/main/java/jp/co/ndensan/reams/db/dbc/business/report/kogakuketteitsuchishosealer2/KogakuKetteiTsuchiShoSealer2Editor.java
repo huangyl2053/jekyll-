@@ -56,6 +56,8 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
     private static final RString 支払方法区分コードONE = new RString("1");
     private static final RString 支払方法区分コードTWO = new RString("2");
     private static final RString 支払方法区分ONE = new RString("1");
+    private static final RString 支給金額 = new RString("支給金額");
+    private static final RString 決定額 = new RString("決定額");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
@@ -125,7 +127,13 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
         if (帳票情報.get支給不支給決定区分() != null) {
             source.kekka = ShikyuKubun.toValue(帳票情報.get支給不支給決定区分()).get名称();
         }
-        source.ketteiGaku = doカンマ編集(帳票情報.get決定額());
+
+        if (帳票情報.get支給金額() != null && 0 <= 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
+            source.ketteiGaku = 支給金額;
+        } else {
+            source.ketteiGaku = 決定額;
+        }
+
         source.shikyuGaku = doカンマ編集(帳票情報.get支給金額());
 
         if (支給.equals(帳票情報.get支給不支給決定区分())) {
@@ -148,15 +156,7 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
 
         set持ちものと支払場所と期間(source);
         set金融機関(source);
-
         setTitle(source);
-
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && 帳票情報.get支給金額() != null && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0
-                || 不支給.equals(帳票情報.get支給不支給決定区分())) {
-            source.shumokuTitle = 口座種別;
-            source.bangoTitle = 口座番号;
-        }
-
         set種別と番号と口座名義(source);
 
         if (帳票情報.get証記載保険者番号() != null) {
@@ -211,7 +211,7 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
     }
 
     private void set金融機関(KogakuKetteiTsuchiShoSealer2Source source) {
-        if (支給.equals(帳票情報.get支給不支給区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
             source.bankName = 帳票情報.get金融機関上段();
             source.branchBankName = 帳票情報.get金融機関下段();
         }
@@ -230,10 +230,16 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
                 source.bangoTitle = 口座番号;
             }
         }
+
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && 帳票情報.get支給金額() != null && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0
+                || 不支給.equals(帳票情報.get支給不支給決定区分())) {
+            source.shumokuTitle = 口座種別;
+            source.bangoTitle = 口座番号;
+        }
     }
 
     private void set持ちものと支払場所と期間(KogakuKetteiTsuchiShoSealer2Source source) {
-        if (支給.equals(帳票情報.get支給不支給区分()) && 支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && 支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
             source.mochimono = 帳票情報.get持ちもの();
             source.shiharaiBasho = 帳票情報.get支払場所();
             RString 開始週間 = 週間編集(帳票情報.get支払期間開始年月日());

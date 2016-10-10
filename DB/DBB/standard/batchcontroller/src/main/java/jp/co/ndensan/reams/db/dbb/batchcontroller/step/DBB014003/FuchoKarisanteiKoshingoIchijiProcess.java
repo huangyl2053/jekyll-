@@ -27,8 +27,14 @@ public class FuchoKarisanteiKoshingoIchijiProcess extends BatchProcessBase<Fucho
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "fuchokaritsuchishoikkatsuhakko.IFuchoKarisanteiTsuchishoHakkoMapper.get普徴仮算定の更新後データ_計算後情報一時");
     private FuchoKarisanteiTsuchishoHakkoProcessParameter processParameter;
+    private IdoFukaJohoTempEntitySet entitySet;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動賦課情報一時tableWriter;
+
+    @Override
+    protected void initialize() {
+        entitySet = new IdoFukaJohoTempEntitySet();
+    }
 
     @Override
     protected void createWriter() {
@@ -38,14 +44,12 @@ public class FuchoKarisanteiKoshingoIchijiProcess extends BatchProcessBase<Fucho
 
     @Override
     protected IBatchReader createReader() {
-        IdoFukaJohoTempEntitySet entitySet = new IdoFukaJohoTempEntitySet();
         FuchNokumiParameter myBatisParameter = entitySet.createReader(processParameter);
         return new BatchDbReader(MAPPERPATH, myBatisParameter);
     }
 
     @Override
     protected void process(FuchoKariTsuchishoIkkatsuHakkoTempEntity idoFukaJohoTempEntity) {
-        IdoFukaJohoTempEntitySet entitySet = new IdoFukaJohoTempEntitySet();
         TmpIdoFukaJohoEntity entity = entitySet.toIdoFukaJohoTmpEntity(idoFukaJohoTempEntity);
         異動賦課情報一時tableWriter.insert(entity);
     }
