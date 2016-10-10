@@ -15,10 +15,10 @@
         <id property="高額介護サービス費支給申請Entity.shoKisaiHokenshaNo" column="dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <id property="高額介護サービス費支給判定結果Entity.rirekiNo" column="dbT3057KogakuShikyuHanteiKekka_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <id property="高額介護サービス費支給申請Entity.rirekiNo" column="dbT3056KogakuShikyuShinsei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <id property="高額介護サービス費支給審査決定list.hihokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="高額介護サービス費支給審査決定list.serviceTeikyoYM" column="dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="高額介護サービス費支給審査決定list.shoKisaiHokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <id property="高額介護サービス費支給審査決定list.rirekiNo" column="dbT3058KogakuShikyuShinsaKettei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="高額介護サービス費支給審査決定Entity.hihokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給審査決定Entity.serviceTeikyoYM" column="dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="高額介護サービス費支給審査決定Entity.shoKisaiHokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給審査決定Entity.rirekiNo" column="dbT3058KogakuShikyuShinsaKettei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
        <association property="高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"/>
        <association property="高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
