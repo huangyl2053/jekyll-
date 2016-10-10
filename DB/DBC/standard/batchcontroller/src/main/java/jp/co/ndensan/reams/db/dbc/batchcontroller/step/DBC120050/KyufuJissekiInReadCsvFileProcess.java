@@ -29,8 +29,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120050.DbWT111MKyufuJissek
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120050.DbWT111NKyufuJissekiDCCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120050.DbWT111OKyufuJissekiDDCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120050.DbWT111ZKyufuJissekiT1CsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111AKyufuJissekiH1Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111BKyufuJissekiD1Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111CKyufuJissekiD2Entity;
@@ -148,11 +146,6 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
     private DbWT111ZKyufuJissekiT1CsvEntity t1CsvEntity;
 
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 被保険者一時tableWriter;
-
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 給付実績一時tableWriter;
-    @BatchWriter
     BatchEntityCreatedTempTableWriter 給付実績H1一時tableWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 給付実績D1一時tableWriter;
@@ -188,8 +181,6 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
-    private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
-    private static final RString 給付実績一時_TABLE_NAME = new RString("DbWT1111KyufuJisseki");
     private static final RString 給付実績H1一時_TABLE_NAME = new RString("DbWT111AKyufuJissekiH1");
     private static final RString 給付実績D1一時_TABLE_NAME = new RString("DbWT111BKyufuJissekiD1");
     private static final RString 給付実績D2一時_TABLE_NAME = new RString("DbWT111CKyufuJissekiD2");
@@ -239,10 +230,6 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
 
     @Override
     protected void createWriter() {
-        被保険者一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(被保険者一時_TABLE_NAME, DbWT0001HihokenshaIchijiEntity.class);
-        給付実績一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(給付実績一時_TABLE_NAME, DbWT1111KyufuJissekiEntity.class);
         給付実績H1一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(給付実績H1一時_TABLE_NAME, DbWT111AKyufuJissekiH1Entity.class);
         給付実績D1一時tableWriter
