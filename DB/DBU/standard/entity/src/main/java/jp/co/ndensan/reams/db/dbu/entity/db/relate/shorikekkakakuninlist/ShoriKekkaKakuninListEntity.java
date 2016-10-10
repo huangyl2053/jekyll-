@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.db.relate.shorikekkakakuninlist;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShoriKekkaKakuninListEntity {
 
-    private RString 作成日時;
+    private RDateTime 作成日時;
     private RString 頁数;
     private RString 保険者番号;
     private RString 保険者名;

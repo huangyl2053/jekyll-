@@ -93,7 +93,7 @@ public class JigyoHokokuDataReportDBU300020Process extends BatchProcessBase<Jigy
             reportData.set年報月報区分(年報区分);
         }
         reportData.set事業報告統計データ(entityData);
-        reportData.set作成日時(processParameter.get処理日時());
+        reportData.set作成日時(processParameter.get処理日時().getRDateTime());
         reportData.set集計年度(processParameter.get集計年度());
         reportData.set集計期間FROM(processParameter.get集計開始年月());
         reportData.set集計期間TO(processParameter.get集計終了年月());
