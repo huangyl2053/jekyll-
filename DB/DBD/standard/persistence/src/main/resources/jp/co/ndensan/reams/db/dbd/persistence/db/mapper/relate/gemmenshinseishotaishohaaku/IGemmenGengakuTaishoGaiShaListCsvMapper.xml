@@ -75,7 +75,7 @@ and open the template in the editor.-->
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN
@@ -208,7 +208,7 @@ and open the template in the editor.-->
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN
@@ -341,7 +341,7 @@ and open the template in the editor.-->
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN
@@ -474,7 +474,7 @@ and open the template in the editor.-->
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN

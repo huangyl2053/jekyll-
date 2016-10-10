@@ -6,10 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakukakuninsho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoProperty;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
@@ -57,14 +54,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Report;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -95,44 +85,27 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
      * 高額サービス費等受領委任払管理登録パネルから取った入力パラメータ等により、帳票データを作成します。
      *
      * @param param KogakuServiceHiJuryoininKeiyakuKakuninshoParameter
+     * @return result KogakuServiceHiJuryoininKeiyakuKakuninshoResult
      */
-    public void getKogakuServiceHiJuryoininKeiyakuKakuninshoData(KogakuServiceHiJuryoininKeiyakuKakuninshoParameter param) {
-        KogakuServiceJyuryoKakuninShoProperty property = new KogakuServiceJyuryoKakuninShoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KogakuServiceJyuryoKakuninShoSource> assembler
-                    = createAssembler(reportManager, property)) {
-                reportSourceWriter = new ReportSourceWriter(assembler);
-                KogakuServiceHiJuryoininKeiyakuKakuninshoResult result = new KogakuServiceHiJuryoininKeiyakuKakuninshoResult();
-                result.set文書番号(param.get文書番号());
-                result.set被保険者番号(param.get被保険者番号().getColumnValue());
-                result.set被保険者氏名(param.get被保険者氏名());
-                result.set被保険者氏名フリガナ(param.get被保険者氏名フリガナ());
-                result.set受付年月日(param.get受付日().wareki().eraType(EraType.KANJI_RYAKU).toDateString());
-                result.set承認不承認(param.get決定区分());
-                result.set承認年月日(param.get決定日().wareki().eraType(EraType.KANJI_RYAKU).toDateString());
-                result.set不承認の理由(param.get承認しない理由());
+    public KogakuServiceHiJuryoininKeiyakuKakuninshoResult getKogakuServiceHiJuryoininKeiyakuKakuninshoData(
+            KogakuServiceHiJuryoininKeiyakuKakuninshoParameter param) {
+        KogakuServiceHiJuryoininKeiyakuKakuninshoResult result = new KogakuServiceHiJuryoininKeiyakuKakuninshoResult();
+        result.set文書番号(param.get文書番号());
+        result.set被保険者番号(param.get被保険者番号().getColumnValue());
+        result.set被保険者氏名(param.get被保険者氏名());
+        result.set被保険者氏名フリガナ(param.get被保険者氏名フリガナ());
+        result.set受付年月日(param.get受付日().wareki().eraType(EraType.KANJI_RYAKU).toDateString());
+        result.set承認不承認(param.get決定区分());
+        result.set承認年月日(param.get決定日().wareki().eraType(EraType.KANJI_RYAKU).toDateString());
+        result.set不承認の理由(param.get承認しない理由());
 
-                介護事業者情報を取得する(result, param.get事業者番号());
-                介護事業者代表者情報を取得する(result, param.get事業者番号());
-                認証者情報を取得する(result, param.get決定日());
-                通知書定型文情報を取得する(result);
-                送付物宛先情報を取得する(result, param.get決定日());
+        介護事業者情報を取得する(result, param.get事業者番号());
+        介護事業者代表者情報を取得する(result, param.get事業者番号());
+        認証者情報を取得する(result, param.get決定日());
+        通知書定型文情報を取得する(result);
+        送付物宛先情報を取得する(result, param.get決定日());
 
-                KogakuServiceJyuryoKakuninShoReport report = new KogakuServiceJyuryoKakuninShoReport(get帳票出力対象データ(result));
-                report.writeBy(reportSourceWriter);
-            }
-        }
-    }
-
-    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
-            ReportManager manager, IReportProperty<T> property) {
-        ReportAssemblerBuilder reportBuilder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
-        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
-            reportBuilder.addBreak(breaker);
-        }
-        reportBuilder.isKojinNo(property.containsKojinNo());
-        reportBuilder.isHojinNo(property.containsHojinNo());
-        return reportBuilder.<T>create();
+        return result;
     }
 
     private void 介護事業者情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result, RString 事業者番号) {
@@ -271,69 +244,5 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         result.set右括弧1(null == 宛先Source.kakkoRight1 ? RString.EMPTY : 宛先Source.kakkoRight1);
         result.set右括弧2(null == 宛先Source.kakkoRight2 ? RString.EMPTY : 宛先Source.kakkoRight2);
         result.setカスタマーバーコード(null == 宛先Source.customerBarCode ? RString.EMPTY : 宛先Source.customerBarCode);
-    }
-
-    private KogakuServiceJyuryoKakuninShoEntity get帳票出力対象データ(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result) {
-        KogakuServiceJyuryoKakuninShoEntity entity = new KogakuServiceJyuryoKakuninShoEntity();
-        entity.set文書番号(result.get文書番号());
-
-        entity.set電子公印(result.get電子公印());
-        entity.set発行日(result.get発行日());
-        entity.set認証者役職名(result.get認証者役職名());
-        entity.set認証者役職名1(result.get認証者役職名1());
-        entity.set認証者役職名2(result.get認証者役職名2());
-        entity.set認証者氏名掛けない(result.get認証者氏名掛けない());
-        entity.set認証者氏名掛ける(result.get認証者氏名掛ける());
-        entity.set公印省略(result.get公印省略());
-        entity.set公印文字列(result.get公印文字列());
-
-        entity.set郵便番号(result.get郵便番号());
-        entity.set行政区(result.get行政区名());
-        entity.set住所Text(result.get住所());
-        entity.set住所1(result.get住所5());
-        entity.set住所2(result.get住所6());
-        entity.set住所3(result.get住所4());
-        entity.set方書Text(result.get方書());
-        entity.set方書1(result.get方書4());
-        entity.set方書2(result.get方書3());
-        entity.set方書Small1(result.get方書小1());
-        entity.set方書Small2(result.get方書小2());
-        entity.set代納人区分(result.get代納人区分());
-        entity.set氏名Text(result.get氏名());
-        entity.set氏名1(result.get氏名6());
-        entity.set氏名2(result.get氏名5());
-        entity.set氏名Small1(result.get氏名小1());
-        entity.set氏名Small2(result.get氏名小2());
-        entity.set氏名samabunText(result.get様文氏名());
-        entity.set氏名samabun1(result.get様文氏名1());
-        entity.set氏名samabun2(result.get様文氏名2());
-        entity.set氏名samabunSmall1(result.get様文氏名小1());
-        entity.set氏名samabunSmall2(result.get様文氏名小2());
-        entity.set名称付与1(result.get名称付与1());
-        entity.set名称付与2(result.get名称付与2());
-        entity.set様文1(result.get様文1());
-        entity.set様文2(result.get様文2());
-        entity.set括弧Left1(result.get左括弧1());
-        entity.set括弧Left2(result.get左括弧2());
-        entity.set括弧Right1(result.get右括弧1());
-        entity.set括弧Right2(result.get右括弧2());
-        entity.setカスタマバーコード(result.getカスタマーバーコード());
-
-        entity.set通知文1(result.get通知文1());
-        entity.set通知文2(result.get通知文2());
-        entity.set被保険者氏名(result.get被保険者氏名());
-        entity.set被保険者番号(result.get被保険者番号());
-        entity.set被保険者氏名フリガナ(result.get被保険者氏名フリガナ());
-        entity.set受付年月日(result.get受付年月日());
-        entity.set承認不承認(result.get承認不承認());
-        entity.set承認年月日(result.get承認年月日());
-        entity.set不承認理由(result.get不承認の理由());
-        entity.set事業所名(result.get事業所名());
-        entity.set代表者名(result.get代表者氏名());
-        entity.set事業所郵便番号(result.get事業所郵便番号());
-        entity.set事業所電話番号(result.get事業所電話番号());
-        entity.set事業所所在地(result.get事業所所在地());
-
-        return entity;
     }
 }

@@ -60,6 +60,7 @@ public class KaigokyufuhiKagoMoshitateshoOutGetKagoMoshitateListProcess extends 
     private int 連番 = 1;
     private static final RString 送付対象データなしのコード = new RString("01");
     private static final RString 同月審査区分_1 = new RString("1");
+    private static final RString RSTRING_0 = new RString("0");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter dbWT1731TableWriter;
@@ -75,7 +76,11 @@ public class KaigokyufuhiKagoMoshitateshoOutGetKagoMoshitateListProcess extends 
         mybatisParameter.set再処理区分(parameter.get再処理区分());
         mybatisParameter.set処理年月(parameter.get処理年月());
         mybatisParameter.set申立書区分コード(parameter.get申立書区分コード());
-        mybatisParameter.set送付対象情報(parameter.get送付対象情報());
+        if (RSTRING_0.equals(parameter.get送付対象情報())) {
+            mybatisParameter.set送付対象情報(RString.EMPTY);
+        } else {
+            mybatisParameter.set送付対象情報(parameter.get送付対象情報());
+        }
         returnEntity = new FlowEntity();
     }
 

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 請求明細一時テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBC-2850-030 zuotao
  */
 public class DbWT3095JutakuKaishuRiyushoTesuryoMeisaiEntity extends
         DbTableEntityBase<DbWT3095JutakuKaishuRiyushoTesuryoMeisaiEntity> implements IDbAccessable {

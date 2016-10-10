@@ -42,6 +42,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
     private static final Decimal DECIMAL_145 = new Decimal(1450000);
     private static final Decimal DECIMAL_383 = new Decimal(3830000);
     private static final Decimal DECIMAL_520 = new Decimal(5200000);
+    private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.対象世帯員クラスTempに更新5");
@@ -77,7 +78,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
 
     @Override
     protected void process(TaishoSetaiinEntity entity) {
-        if (0 == index) {
+        if (INT_0 == index) {
             this.exEntity = entity;
             this.firstEntity = entity;
             index++;
@@ -108,6 +109,9 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
 
     @Override
     protected void afterExecute() {
+        if (INT_0 == this.entityList.size()) {
+            this.entityList.add(exEntity);
+        }
         if (null != this.exEntity) {
             if (RSTRING_0.equals(parameter.get抽出条件())) {
                 this.get該当件数(exEntity.getShotaiCode());

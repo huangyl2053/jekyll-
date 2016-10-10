@@ -32,7 +32,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiReportEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannKekkaZenRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannJigyoKogakuRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannKogakuRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -254,16 +255,16 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     /**
      * select高額判定結果全件一時
      *
-     * @return TyukannKekkaZenRelateEntity
+     * @return TyukannKogakuRelateEntity
      */
-    List<TyukannKekkaZenRelateEntity> select高額判定結果全件一時();
+    List<TyukannKogakuRelateEntity> select高額判定結果全件一時();
 
     /**
      * select事業高額判定結果全件一時
      *
-     * @return TyukannKekkaZenRelateEntity
+     * @return TyukannJigyoKogakuRelateEntity
      */
-    List<TyukannKekkaZenRelateEntity> select事業高額判定結果全件一時();
+    List<TyukannJigyoKogakuRelateEntity> select事業高額判定結果全件一時();
 
     /**
      * 給付実績基本情報高額一時1テーブルを取得する。
@@ -599,4 +600,11 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      * @return List<InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity>
      */
     List<InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity> select給付実績中間事業高額一時の作成7();
+
+    /**
+     * update世帯員所得判定明細一時
+     *
+     * @param entity TempSetaiinShotokuHanteiEntity
+     */
+    void update世帯員所得判定明細一時(TempSetaiinShotokuHanteiEntity entity);
 }

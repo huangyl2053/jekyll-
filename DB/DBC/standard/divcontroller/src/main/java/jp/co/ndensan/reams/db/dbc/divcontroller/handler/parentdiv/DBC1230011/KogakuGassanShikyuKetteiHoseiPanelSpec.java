@@ -1,0 +1,364 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230011;
+
+import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.AuthorityItemResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.KogakuGassanShikyuKetteiHoseiPanelDiv;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+
+/**
+ * 画面設計_DBCMN62004_DBCMNN1005_支給決定情報補正（単）(事業分兼)
+ *
+ * @reamsid_L DBC-2290-010 quxiaodong
+ */
+public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuGassanShikyuKetteiHoseiPanelDiv> {
+
+    /**
+     * 新規登録_対象年度必須チェック
+     */
+    新規登録_対象年度入力値が不正 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is新規登録_対象年度入力値が不正(div);
+                }
+            },
+    /**
+     * 新規登録_対象年度必須チェック
+     */
+    新規登録_対象年度_未指定 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is新規登録_対象年度_未指定(div);
+                }
+            },
+    /**
+     * 新規登録_証記載保険者番号必須チェック
+     */
+    新規登録_証記載保険者番号入力値が不正 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is新規登録_証記載保険者番号が不正(div);
+                }
+            },
+    /**
+     * 新規登録_証記載保険者番号必須チェック
+     */
+    新規登録_証記載保険者番号存在しない {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is新規登録_証記載保険者番号存在しない(div);
+                }
+            },
+    /**
+     * 新規登録_連絡票整理番号必須チェック
+     */
+    新規登録_連絡票整理番号入力値が不正 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is新規登録_連絡票整理番号入力値が不正(div);
+                }
+            },
+    /**
+     * 新規登録_連絡票整理番号必須チェック
+     */
+    新規登録_連絡票整理番号不一致_先頭3桁 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is新規登録_連絡票整理番号不一致_先頭3桁(div);
+                }
+            },
+    /**
+     * 新規登録_連絡票整理番号必須チェック
+     */
+    新規登録_連絡票整理番号不一致_先頭6桁目から11桁目 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is新規登録_連絡票整理番号不一致_先頭6桁目から11桁目(div);
+                }
+            },
+    /**
+     * 検索条件_対象年度必須チェック
+     */
+    検索条件_対象年度入力値が不正 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is検索条件_対象年度入力値が不正(div);
+                }
+            },
+    /**
+     * 検索条件_対象年度必須チェック
+     */
+    検索条件_対象年度_未指定 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is検索条件_対象年度_未指定(div);
+                }
+            },
+    /**
+     * 検索条件_証記載保険者番号必須チェック
+     */
+    検索条件_証記載保険者番号入力値が不正 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is検索条件_証記載保険者番号入力値が不正(div);
+                }
+            },
+    /**
+     * 検索条件_証記載保険者番号必須チェック
+     */
+    検索条件_証記載保険者番号存在しない {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is検索条件_証記載保険者番号存在しない(div);
+                }
+            },
+    /**
+     * 検索条件_連絡票整理番号必須チェック
+     */
+    検索条件_連絡票整理番号入力値が不正 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is検索条件_連絡票整理番号入力値が不正(div);
+                }
+            },
+    /**
+     * 検索条件_連絡票整理番号必須チェック
+     */
+    検索条件_連絡票整理番号不一致_先頭3桁 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is検索条件_連絡票整理番号不一致_先頭3桁(div);
+                }
+            },
+    /**
+     * 検索条件_連絡票整理番号必須チェック
+     */
+    検索条件_連絡票整理番号不一致_先頭6桁目から11桁目 {
+                @Override
+                public boolean apply(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+                    return SpecHelper.is検索条件_連絡票整理番号不一致_先頭6桁目から11桁目(div);
+                }
+            };
+
+    private static class SpecHelper {
+
+        private static final RDate 定値_年度年度1 = new RDate("2008");
+        private static final RString 定値導入形態コード1 = new RString("111");
+        private static final RString 定値導入形態コード2 = new RString("112");
+        private static final RString 定値導入形態コード3 = new RString("120");
+        private static final RString ONE = new RString("1");
+        private static final RString TWO = new RString("2");
+        private static final int NUM_THREE = 3;
+        private static final int NUM_FIVE = 5;
+        private static final int NUM_SIX = 6;
+        private static final int NUM_ELEVEN = 11;
+        private static final int NUM_SEVENTEEN = 17;
+
+        public static boolean is新規登録_対象年度入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            return !(div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() != null
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue().toDateString()));
+        }
+
+        public static boolean is新規登録_対象年度_未指定(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            if (div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() != null
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue().toDateString())) {
+                return true;
+            }
+            return !(div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() != null
+                    && div.getShinkiPanel().getTxtShinkiTaishoNendo().
+                    getValue().getYear().isBefore(定値_年度年度1.getYear()));
+        }
+
+        public static boolean is新規登録_証記載保険者番号が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            return !(div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue())
+                    || div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
+                    && NUM_SIX != div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().length());
+        }
+
+        public static boolean is新規登録_証記載保険者番号存在しない(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            boolean flag = true;
+            RString wk保険者構成 = RString.EMPTY;
+            ShichosonSecurityJoho shseJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+            if (shseJoho != null && (定値導入形態コード2.equals(shseJoho.get導入形態コード().value())
+                    || 定値導入形態コード3.equals(shseJoho.get導入形態コード().value()))) {
+                wk保険者構成 = ONE;
+            } else if (shseJoho != null && 定値導入形態コード1.equals(shseJoho.get導入形態コード().value())) {
+                wk保険者構成 = TWO;
+            }
+            RString ログインユーザID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+            AuthorityItemResult 市町村情報 = KogakuGassanShikyuKetteiHosei.createInstance().
+                    get市町村セキュリティ情報(ログインユーザID, wk保険者構成);
+            if (ONE.equals(wk保険者構成)) {
+                if (div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
+                        && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
+                        && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().
+                        equals(市町村情報.getWk保険者番号().value())) {
+                    flag = false;
+                }
+            } else if (TWO.equals(wk保険者構成) && (市町村情報.getWk構成市町村情報() == null
+                    || 市町村情報.getWk構成市町村情報().isEmpty())) {
+                flag = false;
+            }
+            return flag;
+        }
+
+        public static boolean is新規登録_連絡票整理番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            return !(div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue())
+                    || div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
+                    && NUM_SEVENTEEN != div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().length());
+        }
+
+        public static boolean is新規登録_連絡票整理番号不一致_先頭3桁(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            if (div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue())) {
+                return true;
+            }
+            return !(div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() != null
+                    && NUM_THREE <= div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue().toString().length()
+                    && div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
+                    && NUM_THREE <= div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().length()
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().
+                    substring(0, NUM_THREE).equals(div.getShinkiPanel().
+                            getTxtShinkiTaishoNendo().getValue().toDateString().substring(0, NUM_THREE)));
+        }
+
+        public static boolean is新規登録_連絡票整理番号不一致_先頭6桁目から11桁目(
+                KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            if (div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue())) {
+                return true;
+            }
+            return !(div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
+                    && div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
+                    && NUM_ELEVEN <= div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().length()
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().
+                    substring(NUM_FIVE, NUM_ELEVEN).equals(div.getShinkiPanel().
+                            getTxtShinkiHihokenshaNo().getValue()));
+        }
+
+        public static boolean is検索条件_対象年度入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            return !(div.getSearchPanel().getTxtKensakuTaishoNendo().getValue() != null
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getSearchPanel().getTxtKensakuTaishoNendo().getValue().toDateString()));
+        }
+
+        public static boolean is検索条件_対象年度_未指定(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            if (div.getSearchPanel().getTxtKensakuTaishoNendo().getValue() != null
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getSearchPanel().getTxtKensakuTaishoNendo().getValue().toDateString())) {
+                return true;
+            }
+            return !(div.getSearchPanel().getTxtKensakuTaishoNendo().getValue() != null
+                    && div.getSearchPanel().getTxtKensakuTaishoNendo().getValue().isBefore(定値_年度年度1));
+        }
+
+        public static boolean is検索条件_証記載保険者番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            return !(div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue())
+                    || div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
+                    && NUM_SIX != div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().length());
+        }
+
+        public static boolean is検索条件_証記載保険者番号存在しない(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            boolean flag = true;
+            RString wk保険者構成 = RString.EMPTY;
+            ShichosonSecurityJoho shseJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+            if (shseJoho != null && (定値導入形態コード2.equals(shseJoho.get導入形態コード().value())
+                    || 定値導入形態コード3.equals(shseJoho.get導入形態コード().value()))) {
+                wk保険者構成 = ONE;
+            } else if (shseJoho != null && 定値導入形態コード1.equals(shseJoho.get導入形態コード().value())) {
+                wk保険者構成 = TWO;
+            }
+            RString ログインユーザID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+            AuthorityItemResult 市町村情報 = KogakuGassanShikyuKetteiHosei.createInstance().
+                    get市町村セキュリティ情報(ログインユーザID, wk保険者構成);
+            if (ONE.equals(wk保険者構成)) {
+                if (div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
+                        && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
+                        && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().
+                        equals(市町村情報.getWk保険者番号().value())) {
+                    flag = false;
+                }
+            } else if (TWO.equals(wk保険者構成) && (市町村情報.getWk構成市町村情報() == null
+                    || 市町村情報.getWk構成市町村情報().isEmpty())) {
+                flag = false;
+            }
+            return flag;
+        }
+
+        public static boolean is検索条件_連絡票整理番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            return !(div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue())
+                    || div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
+                    && NUM_SEVENTEEN != div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length());
+        }
+
+        public static boolean is検索条件_連絡票整理番号不一致_先頭3桁(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            if (div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue())) {
+                return true;
+            }
+            return !(div.getSearchPanel().getTxtKensakuTaishoNendo().getValue() != null
+                    && NUM_THREE <= div.getSearchPanel().getTxtKensakuTaishoNendo().getValue().toString().length()
+                    && div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
+                    && NUM_THREE <= div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length()
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().
+                    substring(0, NUM_THREE).equals(div.getSearchPanel().getTxtKensakuTaishoNendo().
+                            getValue().toDateString().substring(0, NUM_THREE)));
+        }
+
+        public static boolean is検索条件_連絡票整理番号不一致_先頭6桁目から11桁目(
+                KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+            if (div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
+                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                            div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue())) {
+                return true;
+            }
+            return !(div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
+                    && div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
+                    && NUM_ELEVEN <= div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length()
+                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().
+                    substring(NUM_FIVE, NUM_ELEVEN).equals(div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue()));
+        }
+    }
+
+}

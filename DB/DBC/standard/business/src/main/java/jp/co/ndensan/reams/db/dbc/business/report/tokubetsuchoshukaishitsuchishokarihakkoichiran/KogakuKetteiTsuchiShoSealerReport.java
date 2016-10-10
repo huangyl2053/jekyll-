@@ -26,6 +26,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
     private final List<RString> インフォlist;
     private final NinshoshaSource 認証者ソースデータ;
     private final List<RString> titleList;
+    private final int 通番;
 
     /**
      * コンストラクタです。
@@ -36,6 +37,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
      * @param インフォlist List<RString>
      * @param 認証者ソースデータ NinshoshaSource
      * @param titleList List<RString>
+     * @param 通番 int
      */
     public KogakuKetteiTsuchiShoSealerReport(
             KogakuKetteiTsuchiShoEntity 帳票情報,
@@ -43,7 +45,8 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
             List<RString> 通知書定型文list,
             List<RString> インフォlist,
             NinshoshaSource 認証者ソースデータ,
-            List<RString> titleList) {
+            List<RString> titleList,
+            int 通番) {
 
         this.帳票情報 = 帳票情報;
         this.文書番号 = 文書番号;
@@ -51,6 +54,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
         this.インフォlist = インフォlist;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.titleList = titleList;
+        this.通番 = 通番;
     }
 
     @Override
@@ -61,7 +65,8 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
                 通知書定型文list,
                 インフォlist,
                 認証者ソースデータ,
-                titleList);
+                titleList,
+                通番);
         IKogakuKetteiTsuchiShoSealerBuilder builder = new KogakuKetteiTsuchiShoSealerBuilder(editor);
         writer.writeLine(builder);
     }

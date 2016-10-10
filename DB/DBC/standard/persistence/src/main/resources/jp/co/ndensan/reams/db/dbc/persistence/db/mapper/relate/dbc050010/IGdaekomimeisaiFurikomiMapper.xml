@@ -7,7 +7,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IGdaekomimeisaiFurikomiMapper">
 
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.GdaekomiDetaiResultEntity" autoMapping="true">
-        <id property="高額介護サービス費支給判定結果Entity.hiHokenshaNo" column="dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="高額介護サービス費支給判定結果Entity.hihokenshaNo" column="dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="高額介護サービス費支給申請Entity.hiHokenshaNo" column="dbT3056KogakuShikyuShinsei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="高額介護サービス費支給判定結果Entity.serviceTeikyoYM" column="dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="高額介護サービス費支給申請Entity.serviceTeikyoYM" column="dbT3056KogakuShikyuShinsei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>

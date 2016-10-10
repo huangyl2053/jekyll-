@@ -286,7 +286,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             executeStep(世帯員把握フロー);
             executeStep(世帯員所得判定明細一時の作成);
             executeStep(世帯員所得判定明細事業高額一時の作成２);
-            if (!RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
+            if (kogakuFlowReturnEntity != null && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
                     && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最大続柄コード参照年())) {
                 int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString());
                 int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString());
@@ -309,7 +309,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額介護サービス費支給申請のバックアップ)
+    @Step (高額介護サービス費支給申請のバックアップ)
     protected IBatchFlowCommand backupKogakuShikyuShinsei() {
         return backupToTemporaryTable(TABLE_高額介護サービス費支給申請, TABLE_高額介護サービス費支給申請全件一時).
                 define();
@@ -320,7 +320,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額介護サービス費支給判定結果のバックアップ)
+    @Step (高額介護サービス費支給判定結果のバックアップ)
     protected IBatchFlowCommand backupKogakuShikyuHanteiKekka() {
         return backupToTemporaryTable(TABLE_高額介護サービス費支給判定結果, TABLE_高額介護サービス費支給判定結果全件一時).
                 define();
@@ -331,7 +331,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額介護サービス費支給審査決定のバックアップ)
+    @Step (高額介護サービス費支給審査決定のバックアップ)
     protected IBatchFlowCommand backupKogakuShikyuShinsaKettei() {
         return backupToTemporaryTable(TABLE_高額介護サービス費支給審査決定, TABLE_高額介護サービス費支給審査決定全件一時).
                 define();
@@ -342,7 +342,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額介護サービス費給付対象者合計のバックアップ)
+    @Step (高額介護サービス費給付対象者合計のバックアップ)
     protected IBatchFlowCommand backupKogakuKyufuTaishoshaGokei() {
         return backupToTemporaryTable(TABLE_高額介護サービス費給付対象者合計, TABLE_高額介護サービス費給付対象者合計全件一時).
                 define();
@@ -353,7 +353,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額介護サービス費給付対象者明細のバックアップ)
+    @Step (高額介護サービス費給付対象者明細のバックアップ)
     protected IBatchFlowCommand backupKogakuKyufuTaishoshaMeisai() {
         return backupToTemporaryTable(TABLE_高額介護サービス費給付対象者明細, TABLE_高額介護サービス費給付対象者明細全件一時).
                 define();
@@ -364,7 +364,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額介護サービス費支給申請のバックアップ)
+    @Step (事業高額介護サービス費支給申請のバックアップ)
     protected IBatchFlowCommand backupJigyoKogakuShikyuShinsei() {
         return backupToTemporaryTable(TABLE_事業高額介護サービス費支給申請, TABLE_事業高額介護サービス費支給申請全件一時).
                 define();
@@ -375,7 +375,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額介護サービス費支給判定のバックアップ)
+    @Step (事業高額介護サービス費支給判定のバックアップ)
     protected IBatchFlowCommand backupJigyoKogakuShikyuHanteiKekka() {
         return backupToTemporaryTable(TABLE_事業高額介護サービス費支給判定, TABLE_事業高額介護サービス費支給判定結果全件一時).
                 define();
@@ -386,7 +386,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額介護サービス費支給審査決定のバックアップ)
+    @Step (事業高額介護サービス費支給審査決定のバックアップ)
     protected IBatchFlowCommand backupJigyoKogakuShikyuShinsaKettei() {
         return backupToTemporaryTable(TABLE_事業高額介護サービス費支給審査決定, TABLE_事業高額介護サービス費支給審査決定全件一時).
                 define();
@@ -397,7 +397,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額介護サービス費給付対象者合計のバックアップ)
+    @Step (事業高額介護サービス費給付対象者合計のバックアップ)
     protected IBatchFlowCommand backupJigyoKogakuKyufuTaishoshaGokei() {
         return backupToTemporaryTable(TABLE_事業高額介護サービス費給付対象者合計, TABLE_事業高額介護サービス費給付対象者合計全件一時).
                 define();
@@ -408,7 +408,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額介護サービス費給付対象者明細のバックアップ)
+    @Step (事業高額介護サービス費給付対象者明細のバックアップ)
     protected IBatchFlowCommand backupJigyoKogakuKyufuTaishoshaMeisai() {
         return backupToTemporaryTable(TABLE_事業高額介護サービス費給付対象者明細, TABLE_事業高額介護サービス費給付対象者明細全件一時).
                 define();
@@ -419,7 +419,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績基本データのバックアップ1)
+    @Step (給付実績基本データのバックアップ1)
     protected IBatchFlowCommand callInsKyufuJissekiKihonKogakuTmpProcess1() {
         return loopBatch(InsKyufuJissekiKihonKogakuTmpProcess1.class).arguments(setParameter()).define();
     }
@@ -429,7 +429,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績基本データのバックアップ2)
+    @Step (給付実績基本データのバックアップ2)
     protected IBatchFlowCommand callInsKyufuJissekiKihonKogakuTmpProcess2() {
         return loopBatch(InsKyufuJissekiKihonKogakuTmpProcess2.class).arguments(setParameter()).define();
     }
@@ -439,7 +439,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業給付実績基本データのバックアップ1)
+    @Step (事業給付実績基本データのバックアップ1)
     protected IBatchFlowCommand callInsKyufuJissekiKihonJigyoKogakuTmpProcess1() {
         return loopBatch(InsKyufuJissekiKihonJigyoKogakuTmpProcess1.class).arguments(setParameter()).define();
     }
@@ -449,7 +449,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業給付実績基本データのバックアップ2)
+    @Step (事業給付実績基本データのバックアップ2)
     protected IBatchFlowCommand callInsKyufuJissekiKihonJigyoKogakuTmpProcess2() {
         return loopBatch(InsKyufuJissekiKihonJigyoKogakuTmpProcess2.class).arguments(setParameter()).define();
     }
@@ -459,7 +459,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(被保険者台帳のバックアップ1)
+    @Step (被保険者台帳のバックアップ1)
     protected IBatchFlowCommand callInsHihokenshaDaichoTmpProcess1() {
         return loopBatch(InsHihokenshaDaichoTmpProcess1.class).define();
     }
@@ -469,7 +469,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(被保険者台帳のバックアップ2)
+    @Step (被保険者台帳のバックアップ2)
     protected IBatchFlowCommand callInsHihokenshaDaichoTmpProcess2() {
         return loopBatch(InsHihokenshaDaichoTmpProcess2.class).define();
     }
@@ -479,7 +479,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(支払方法変更管理のバックアップ)
+    @Step (支払方法変更管理のバックアップ)
     protected IBatchFlowCommand callInsShiharaiHohoHenkoKanriTmpProcess() {
         return loopBatch(InsShiharaiHohoHenkoKanriTmpProcess.class).define();
     }
@@ -489,7 +489,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(境界層該当者のバックアップ)
+    @Step (境界層該当者のバックアップ)
     protected IBatchFlowCommand callInsKyokaisoGaitoshaTmpProcess() {
         return loopBatch(InsKyokaisoGaitoshaTmpProcess.class).define();
     }
@@ -499,7 +499,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(前回処理対象高額データの削除)
+    @Step (前回処理対象高額データの削除)
     protected IBatchFlowCommand callDelSaishoriKogakuTmpProcess() {
         return simpleBatch(DelSaishoriKogakuTmpProcess.class).
                 arguments(getDelSaishoriKogakuTmpProcessParameter()).define();
@@ -510,7 +510,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(前回処理対象事業高額データの削除)
+    @Step (前回処理対象事業高額データの削除)
     protected IBatchFlowCommand callDelSaishoriJigyoKogakuTmpProcess() {
         return simpleBatch(DelSaishoriJigyoKogakuTmpProcess.class).
                 arguments(getDelSaishoriKogakuTmpProcessParameter()).define();
@@ -521,7 +521,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績基本情報高額一時３の作成)
+    @Step (給付実績基本情報高額一時３の作成)
     protected IBatchFlowCommand callInsKyufuJissekiKihonKogakuTmpProcess3() {
         return loopBatch(InsKyufuJissekiKihonKogakuTmpProcess3.class).define();
     }
@@ -531,7 +531,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績基本情報事業高額一時３の作成)
+    @Step (給付実績基本情報事業高額一時３の作成)
     protected IBatchFlowCommand callInsKyufuJissekiKihonJigyoKogakuTmpProcess3() {
         return loopBatch(InsKyufuJissekiKihonJigyoKogakuTmpProcess3.class).define();
     }
@@ -541,7 +541,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額用世帯員把握入力一時の作成１)
+    @Step (高額用世帯員把握入力一時の作成１)
     protected IBatchFlowCommand callInsSetaiinHaakuNyuryokuKogakuTmpProcess1() {
         return loopBatch(InsSetaiinHaakuNyuryokuKogakuTmpProcess1.class).define();
     }
@@ -551,7 +551,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額用世帯員把握入力一時の作成１)
+    @Step (事業高額用世帯員把握入力一時の作成１)
     protected IBatchFlowCommand callInsJigyoKogakuSetaiinHaakuNyuryokuTmpProcess() {
         return loopBatch(InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1.class).define();
     }
@@ -561,7 +561,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績基本情報高額一時４の作成)
+    @Step (給付実績基本情報高額一時４の作成)
     protected IBatchFlowCommand callInsKyufuJissekiKihonKogakuTmpProcess4() {
         return loopBatch(InsKyufuJissekiKihonKogakuTmpProcess4.class)
                 .arguments(get給付実績基本情報高額一時４バッチパラメータ())
@@ -573,7 +573,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績基本情報事業高額一時４の作成)
+    @Step (給付実績基本情報事業高額一時４の作成)
     protected IBatchFlowCommand callInsKyufuJissekiKihonJigyoKogakuTmpProcess4() {
         return loopBatch(InsKyufuJissekiKihonJigyoKogakuTmpProcess4.class)
                 .arguments(get給付実績基本情報高額一時４バッチパラメータ())
@@ -585,7 +585,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握フロー)
+    @Step (世帯員把握フロー)
     protected IBatchFlowCommand callSetaiShotokuKazeiHanteiFlow() {
         return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBB介護賦課,
                 getSetaiShotokuKazeiHanteiBatchParameter()).define();
@@ -596,7 +596,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握入力高額一時の作成2)
+    @Step (世帯員把握入力高額一時の作成2)
     protected IBatchFlowCommand callInsSetaiinHaakuNyuryokuKogakuTmpProcess2() {
         return loopBatch(InsSetaiinHaakuNyuryokuKogakuTmpProcess2.class).define();
     }
@@ -606,7 +606,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握入力事業高額一時の作成2)
+    @Step (世帯員把握入力事業高額一時の作成2)
     protected IBatchFlowCommand callInsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2() {
         return loopBatch(InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2.class).define();
     }
@@ -616,7 +616,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(世帯員所得判定明細一時の作成)
+    @Step (世帯員所得判定明細一時の作成)
     protected IBatchFlowCommand callInsSetaiinShotokuHanteiMeisaiTmpProcess() {
         return loopBatch(InsSetaiinShotokuHanteiMeisaiTmpProcess.class).define();
     }
@@ -626,7 +626,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(世帯員所得判定明細高額一時１の作成)
+    @Step (世帯員所得判定明細高額一時１の作成)
     protected IBatchFlowCommand callInsSetaiinShotokuHanteiMeisaiKogakuTmpProcess1() {
         return loopBatch(InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess1.class).define();
     }
@@ -636,7 +636,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return バッチコマンド
      */
-    @Step(世帯員所得判定明細事業高額一時１の作成)
+    @Step (世帯員所得判定明細事業高額一時１の作成)
     protected IBatchFlowCommand callInsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess1() {
         return loopBatch(InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess1.class).define();
     }
@@ -646,7 +646,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間高額一時の作成１)
+    @Step (給付実績中間高額一時の作成１)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess1() {
         return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess1.class).define();
     }
@@ -656,7 +656,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間高額一時の作成2)
+    @Step (給付実績中間高額一時の作成2)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess2() {
         return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess2.class).define();
     }
@@ -666,7 +666,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間高額一時の作成3)
+    @Step (給付実績中間高額一時の作成3)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess3() {
         return simpleBatch(InsKyufuJissekiChukanKogakuTmpProcess3.class).define();
     }
@@ -676,7 +676,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の作成１)
+    @Step (給付実績中間事業高額一時の作成１)
     protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess1() {
         return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess1.class).define();
     }
@@ -686,7 +686,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の作成2)
+    @Step (給付実績中間事業高額一時の作成2)
     protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess2() {
         return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess2.class).define();
     }
@@ -696,7 +696,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の作成3)
+    @Step (給付実績中間事業高額一時の作成3)
     protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess3() {
         return simpleBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess3.class).define();
     }
@@ -706,7 +706,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間高額一時の作成5)
+    @Step (給付実績中間高額一時の作成5)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess5() {
         return simpleBatch(InsKyufuJissekiChukanKogakuTmpProcess5.class).define();
     }
@@ -716,7 +716,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間高額一時の更新１)
+    @Step (給付実績中間高額一時の更新１)
     protected IBatchFlowCommand callUpdKyufuJissekiChukanKogakuTmpProcess5() {
         return simpleBatch(UpdKyufuJissekiChukanKogakuTmpProcess5.class).define();
     }
@@ -726,7 +726,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の作成5)
+    @Step (給付実績中間事業高額一時の作成5)
     protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess5() {
         return simpleBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess5.class).define();
     }
@@ -736,7 +736,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の更新１)
+    @Step (給付実績中間事業高額一時の更新１)
     protected IBatchFlowCommand callUpdKyufuJissekiChukanJigyoKogakuTmpProcess5() {
         return simpleBatch(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5.class).define();
     }
@@ -746,9 +746,12 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の更新２)
+    @Step (給付実績中間事業高額一時の更新２)
     protected IBatchFlowCommand callUpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2() {
-        return loopBatch(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2.class).define();
+        KyufuJissekiKihonKogakuProcessParameter processParameter = new KyufuJissekiKihonKogakuProcessParameter();
+        processParameter.set最古のサービス高額提供年月(returnEntity.get最古のサービス提供年月());
+        processParameter.set最新のサービス高額提供年月(returnEntity.get最新のサービス提供年月());
+        return loopBatch(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2.class).arguments(processParameter).define();
     }
 
     /**
@@ -756,9 +759,12 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の更新３)
+    @Step (給付実績中間事業高額一時の更新３)
     protected IBatchFlowCommand callUpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3() {
-        return loopBatch(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3.class).define();
+        KyufuJissekiKihonKogakuProcessParameter processParameter = new KyufuJissekiKihonKogakuProcessParameter();
+        processParameter.set最古のサービス高額提供年月(returnEntity.get最古のサービス提供年月());
+        processParameter.set最新のサービス高額提供年月(returnEntity.get最新のサービス提供年月());
+        return loopBatch(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3.class).arguments(processParameter).define();
     }
 
     /**
@@ -766,7 +772,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績集計のバックアップ)
+    @Step (給付実績集計のバックアップ)
     protected IBatchFlowCommand callInsKyufuJissekiShukeiTmpProcess() {
         return loopBatch(InsKyufuJissekiShukeiTmpProcess.class).
                 arguments(getKogakuKaigoKyufuhiTaishoshaTorokuProcessParameter()).define();
@@ -777,7 +783,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績社会福祉法人軽減額のバックアップ)
+    @Step (給付実績社会福祉法人軽減額のバックアップ)
     protected IBatchFlowCommand callInsKyufuJissekiShafukuKeigenTmpProcess() {
         return loopBatch(InsKyufuJissekiShafukuKeigenTmpProcess.class).
                 arguments(getKogakuKaigoKyufuhiTaishoshaTorokuProcessParameter()).define();
@@ -788,7 +794,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(基準収入額適用管理のバックアップ)
+    @Step (基準収入額適用管理のバックアップ)
     protected IBatchFlowCommand callInsKijunShunyugakuTekiyoKanriTmpProcess() {
         return loopBatch(InsKijunShunyugakuTekiyoKanriTmpProcess.class).define();
     }
@@ -798,7 +804,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間高額一時の作成7)
+    @Step (給付実績中間高額一時の作成7)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess7() {
         return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess7.class).define();
     }
@@ -808,7 +814,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間事業高額一時の作成7)
+    @Step (給付実績中間事業高額一時の作成7)
     protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess7() {
         return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess7.class).define();
     }
@@ -818,7 +824,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員把握入力一時の更新)
+    @Step (世帯員把握入力一時の更新)
     protected IBatchFlowCommand callUpdSetaiinHaakuNyuryokuKogakuTmpProcess() {
         return simpleBatch(UpdSetaiinHaakuNyuryokuKogakuTmpProcess.class).define();
     }
@@ -828,7 +834,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員所得判定明細高額一時の作成２)
+    @Step (世帯員所得判定明細高額一時の作成２)
     protected IBatchFlowCommand callInsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2() {
         return loopBatch(InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2.class).define();
     }
@@ -838,7 +844,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員所得判定明細事業高額一時の作成２)
+    @Step (世帯員所得判定明細事業高額一時の作成２)
     protected IBatchFlowCommand callInsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess2() {
         return loopBatch(InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess2.class).define();
     }
@@ -848,7 +854,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員所得判定明細高額一時の作成３)
+    @Step (世帯員所得判定明細高額一時の作成３)
     protected IBatchFlowCommand callInsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3() {
         return loopBatch(InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3.class).
                 arguments(getKyufuJissekiKihonKogakuProcessParameter()).define();
@@ -859,7 +865,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(世帯員所得判定明細事業高額一時の作成３)
+    @Step (世帯員所得判定明細事業高額一時の作成３)
     protected IBatchFlowCommand callInsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess3() {
         return loopBatch(InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess3.class).
                 arguments(getKyufuJissekiKihonKogakuProcessParameter()).define();
@@ -870,7 +876,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(給付実績中間高額一時の作成8)
+    @Step (給付実績中間高額一時の作成8)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess8() {
         return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess8.class).define();
     }
@@ -880,7 +886,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額対象者一覧表発行処理)
+    @Step (高額対象者一覧表発行処理)
     protected IBatchFlowCommand callPrtTaishoshaIchiranKogakuProcess() {
         return loopBatch(PrtTaishoshaIchiranKogakuProcess.class).define();
     }
@@ -890,7 +896,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額対象者一覧表発行処理)
+    @Step (事業高額対象者一覧表発行処理)
     protected IBatchFlowCommand callPrtTaishoshaIchiranJigyoProcess() {
         return loopBatch(PrtTaishoshaIchiranJigyoProcess.class).define();
     }
@@ -900,7 +906,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額エラーリストの発行)
+    @Step (高額エラーリストの発行)
     protected IBatchFlowCommand callPrtErrorListKogakuProcess() {
         return loopBatch(PrtErrorListKogakuProcess.class).define();
     }
@@ -910,7 +916,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額エラーリストの発行)
+    @Step (事業高額エラーリストの発行)
     protected IBatchFlowCommand callPrtErrorListJigyoProcess() {
         return loopBatch(PrtErrorListJigyoProcess.class).define();
     }
@@ -920,7 +926,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額国保連ＩＦマスタ更新)
+    @Step (高額国保連ＩＦマスタ更新)
     protected IBatchFlowCommand callUpdKogakuKokuhorenIFMstProcess() {
         return simpleBatch(UpdKogakuKokuhorenIFMstProcess.class).
                 arguments(getUpdKogakuKokuhorenIFMstProcessParameter()).define();
@@ -931,7 +937,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額国保連ＩＦマスタ更新)
+    @Step (事業高額国保連ＩＦマスタ更新)
     protected IBatchFlowCommand callUpdJigyoKKogakuKokuhorenIFMstProcess() {
         return simpleBatch(UpdJigyoKKogakuKokuhorenIFMstProcess.class).
                 arguments(getUpdKogakuKokuhorenIFMstProcessParameter()).define();
@@ -942,7 +948,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(高額介護サービス費追加)
+    @Step (高額介護サービス費追加)
     protected IBatchFlowCommand callInsKogakuKaigoServiceHiProcess() {
         return simpleBatch(InsKogakuKaigoServiceHiProcess.class).define();
     }
@@ -952,7 +958,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      *
      * @return IBatchFlowCommand
      */
-    @Step(事業高額介護サービス費追加)
+    @Step (事業高額介護サービス費追加)
     protected IBatchFlowCommand callInsJigyoKogakuKaigoServiceHiProcess() {
         return simpleBatch(InsJigyoKogakuKaigoServiceHiProcess.class).define();
     }

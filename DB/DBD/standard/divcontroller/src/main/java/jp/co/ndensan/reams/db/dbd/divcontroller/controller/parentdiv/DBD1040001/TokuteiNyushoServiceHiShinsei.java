@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1040001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenViewState;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.DBD1
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.dgShinseiList_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiHandler.TokuteiNyushoServiceHiShinseiComparator;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenService;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
@@ -645,7 +647,7 @@ public class TokuteiNyushoServiceHiShinsei {
 
         ArrayList<TokubetsuChiikiKasanGemmenViewState> viewStateList
                 = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請情報ListのViewState, ArrayList.class);
-        //Collections.sort(viewStateList, new RiyoshaFutangakuGengakuComparator());
+        Collections.sort(viewStateList, new TokuteiNyushoServiceHiShinseiComparator());
 
         int size = viewStateList.size();
         int minRirekiNo = Integer.MAX_VALUE;

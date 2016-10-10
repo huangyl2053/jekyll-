@@ -258,6 +258,8 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     private static final RString パラメータ名_出力期 = new RString("出力期");
     private static final RString パラメータ名_生活保護対象者をまとめて先頭に出力 = new RString("生活保護対象者をまとめて先頭に出力");
     private static final RString パラメータ名_ページごとに山分け = new RString("ページごとに山分け");
+    private static final RString CSV出力有無_なし = new RString("なし");
+    private static final RString CSVファイル名_なし = new RString("なし");
     private static final RString 処理名 = new RString("普徴仮算定通知書一括発行");
     private static final RString 出力条件_左括弧 = new RString("【");
     private static final RString 出力条件_右括弧 = new RString("】");
@@ -538,6 +540,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_発行日).concat(出力条件_右括弧).concat(
                 発行日.wareki().toDateString()));
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_出力期).concat(出力条件_右括弧).concat(new RString(出力期)));
+        出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_対象者).concat(出力条件_右括弧).concat(processParameter.get対象者()));
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_生活保護対象者をまとめて先頭に出力).concat(出力条件_右括弧)
                 .concat(生活保護者先頭出力フラグ));
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_ページごとに山分け).concat(出力条件_右括弧).
@@ -546,11 +549,11 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
                 帳票ID.value(),
                 市町村コード.value(),
                 市町村名,
-                ジョブ番号.concat(RString.FULL_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
-                RString.EMPTY,
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                帳票名,
                 ページ数,
-                RString.EMPTY,
-                RString.EMPTY,
+                CSV出力有無_なし,
+                CSVファイル名_なし,
                 出力条件リスト);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
