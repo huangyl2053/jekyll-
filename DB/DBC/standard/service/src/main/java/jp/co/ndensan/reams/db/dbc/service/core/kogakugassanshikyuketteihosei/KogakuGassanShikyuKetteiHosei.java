@@ -577,11 +577,24 @@ public class KogakuGassanShikyuKetteiHosei {
         IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(IKogakuGassanShikyuKetteiHoseiMapper.class);
         ShoriModeHanteiParameter parameter = new ShoriModeHanteiParameter(
                 被保険者番号, 証記載保険者番号, 支給申請書整理番号);
-        DbT3075KogakuGassanKyufuJissekiEntity 高額合算給付実績entity = mapper.get高額合算給付実績(parameter);
-        if (高額合算給付実績entity == null) {
+        List<DbT3075KogakuGassanKyufuJissekiEntity> 高額合算給付実績list = mapper.get高額合算給付実績(parameter);
+        if (高額合算給付実績list == null || 高額合算給付実績list.isEmpty()) {
             return null;
         }
-        return new KogakuGassanKyufuJisseki(高額合算給付実績entity);
+        if (高額合算給付実績list.size() == 1) {
+            return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(0));
+        }
+        if (高額合算給付実績list.get(0).getShoriYM() == null
+                || 高額合算給付実績list.get(0).getShoriYM().isEmpty()) {
+            return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(0));
+        } else {
+            if (高額合算給付実績list.get(高額合算給付実績list.size() - 1).getShoriYM() == null
+                    || 高額合算給付実績list.get(高額合算給付実績list.size() - 1).getShoriYM().isEmpty()) {
+                return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(高額合算給付実績list.size() - 1));
+            } else {
+                return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(0));
+            }
+        }
     }
 
     private KogakuGassanShikyuGakuKeisanKekka getshoriModeHantei_Three(

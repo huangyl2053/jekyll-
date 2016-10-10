@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.ShoriModeHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
@@ -23,7 +24,7 @@ public interface IKogakuGassanShikyuKetteiHoseiMapper {
      * @param 高額合算給付実績 ShoriModeHanteiParameter
      * @return DbT3075KogakuGassanKyufuJissekiEntity
      */
-    DbT3075KogakuGassanKyufuJissekiEntity get高額合算給付実績(
+    List<DbT3075KogakuGassanKyufuJissekiEntity> get高額合算給付実績(
             ShoriModeHanteiParameter 高額合算給付実績);
 
     /**
