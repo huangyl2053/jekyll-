@@ -28,8 +28,14 @@ public class UpdateFukaZenendoProcess extends BatchProcessBase<KaigoFukaZenedoTe
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "fuchokaritsuchishoikkatsuhakko.IFuchoKarisanteiTsuchishoHakkoMapper.select異動賦課情報_前年度賦課情報");
     private FuchoKarisanteiTsuchishoHakkoProcessParameter processParameter;
+    private IdoFukaJohoTempEntitySet entitySet;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動賦課情報一時tableWriter;
+
+    @Override
+    protected void initialize() {
+        entitySet = new IdoFukaJohoTempEntitySet();
+    }
 
     @Override
     protected void createWriter() {
@@ -49,7 +55,6 @@ public class UpdateFukaZenendoProcess extends BatchProcessBase<KaigoFukaZenedoTe
         FukaJohoZenendoTmpEntity 介護賦課前年度 = kaigoFukaZenedoTempEntity.get介護賦課前年度();
         TmpIdoFukaJohoEntity 異動賦課情報一時 = kaigoFukaZenedoTempEntity.get異動賦課情報一時テーブル();
         if (介護賦課前年度 != null && 異動賦課情報一時 != null) {
-            IdoFukaJohoTempEntitySet entitySet = new IdoFukaJohoTempEntitySet();
             entitySet.update異動賦課情報一時_賦課Entity(異動賦課情報一時, 介護賦課前年度);
             異動賦課情報一時tableWriter.update(異動賦課情報一時);
         }
