@@ -134,13 +134,20 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
         this.利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.getコード();
         this.利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.getコード();
         this.利用者負担4段階_高齢者複数世帯 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード();
-        edit対象期間指定(対象期間指定);
-        edit対象リスト(対象リスト);
-        edit利用者負担段階(利用者負担段階);
-        edit世帯表示(世帯表示);
+        if (null != 対象期間指定) {
+            edit対象期間指定(対象期間指定);
+        }
+        if (null != 対象リスト) {
+            edit対象リスト(対象リスト);
+        }
+        if (null != 利用者負担段階) {
+            edit利用者負担段階(利用者負担段階);
+        }
+        if (null != 世帯表示) {
+            edit世帯表示(世帯表示);
+        }
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.出力順 = 出力順;
-
     }
 
     private void edit対象期間指定(TaishoKikan 対象期間指定) {
