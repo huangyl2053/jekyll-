@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum JiyuChushutsuKubun {
 
     /**
-     * コード:1 名称:適用除外者のみ 略称:定義なし
+     * コード:1 名称:適用除外者のみ 略称:適用除外者のみ
      */
-    適用除外者のみ("1", "適用除外者のみ"),
+    適用除外者のみ("1", "適用除外者のみ", "適用除外者のみ"),
     /**
-     * コード:2 名称:適用除外解除者のみ 略称:定義なし
+     * コード:2 名称:適用除外解除者のみ 略称:適用除外解除者のみ
      */
-    適用除外解除者のみ("2", "適用除外解除者のみ"),
+    適用除外解除者のみ("2", "適用除外解除者のみ", "適用除外解除者のみ"),
     /**
-     * コード:0 名称:両方 略称:定義なし
+     * コード:0 名称:両方 略称:両方
      */
-    両方("0", "両方");
+    両方("0", "両方", "両方");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private JiyuChushutsuKubun(String code, String fullname) {
+    private JiyuChushutsuKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum JiyuChushutsuKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 事由抽出区分の略称を返します。
+     *
+     * @return 事由抽出区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**
