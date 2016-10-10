@@ -77,19 +77,7 @@ public class KaigoHokenFukaKonkyoHandler {
             }
             if (!resultList仮算定用.isEmpty()) {
                 FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
-                List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
-                for (FukaJohoRelateSearchResult item : resultList) {
-                    if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
-                            && resultMax仮算定用.get介護賦課Result().get賦課年度().
-                            equals(item.get介護賦課Result().get賦課年度())
-                            && resultMax仮算定用.get介護賦課Result().get通知書番号().
-                            equals(item.get介護賦課Result().get通知書番号())
-                            && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
-                            equals(new RString(item.get介護賦課Result().get履歴番号()))) {
-                        result仮算定用List.add(item);
-                    }
-                }
-                set仮算定状態(resultMax, resultMax仮算定用, result仮算定用List);
+                set仮算定状態(resultMax, resultMax仮算定用);
                 setBtn状態_前へ(resultMax, resultList);
             }
         }
@@ -263,8 +251,7 @@ public class KaigoHokenFukaKonkyoHandler {
         }
     }
 
-    private void set仮算定状態(FukaJohoRelateSearchResult resultMax, FukaJohoRelateSearchResult resultMax仮算定用,
-            List<FukaJohoRelateSearchResult> result仮算定用List) {
+    private void set仮算定状態(FukaJohoRelateSearchResult resultMax, FukaJohoRelateSearchResult resultMax仮算定用) {
 
         init仮算定状態();
         HihokenshaNo 被保険者番号 = resultMax.get介護賦課Result().get被保険者番号();
@@ -299,13 +286,8 @@ public class KaigoHokenFukaKonkyoHandler {
         Decimal 前年度年額保険料 = resultMax仮算定用.get介護賦課Result().get確定介護保険料_年額();
         div.getLblFukaKonkyoData3().setText(doカンマ編集(前年度年額保険料));
         Decimal 減免額 = resultMax仮算定用.get介護賦課Result().get減免額();
-        Decimal 仮算定保険料額 = Decimal.ZERO;
-        if (!result仮算定用List.isEmpty()) {
-            for (FukaJohoRelateSearchResult result : result仮算定用List) {
-                仮算定保険料額 = 仮算定保険料額.add(result.get調定額());
-            }
-        }
-        if (減免額 != null) {
+        Decimal 仮算定保険料額 = resultMax仮算定用.get調定額();
+        if (減免額 != null && 仮算定保険料額 != null) {
             div.getLblFukaKonkyoData6().setText(doカンマ編集(仮算定保険料額.add(減免額)));
         }
         div.getLblFukaKonkyoData7().setText(doカンマ編集(減免額));
@@ -442,19 +424,7 @@ public class KaigoHokenFukaKonkyoHandler {
                 }
                 if (!resultList仮算定用.isEmpty()) {
                     FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
-                    List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
-                    for (FukaJohoRelateSearchResult item : resultList) {
-                        if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
-                                && resultMax仮算定用.get介護賦課Result().get賦課年度().
-                                equals(item.get介護賦課Result().get賦課年度())
-                                && resultMax仮算定用.get介護賦課Result().get通知書番号().
-                                equals(item.get介護賦課Result().get通知書番号())
-                                && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
-                                equals(new RString(item.get介護賦課Result().get履歴番号()))) {
-                            result仮算定用List.add(item);
-                        }
-                    }
-                    set仮算定状態(指定賦課情報, resultMax仮算定用, result仮算定用List);
+                    set仮算定状態(指定賦課情報, resultMax仮算定用);
                 }
             }
         }
@@ -517,19 +487,7 @@ public class KaigoHokenFukaKonkyoHandler {
             }
             if (!resultList仮算定用.isEmpty()) {
                 FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1 - 1);
-                List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
-                for (FukaJohoRelateSearchResult item : resultList) {
-                    if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
-                            && resultMax仮算定用.get介護賦課Result().get賦課年度().
-                            equals(item.get介護賦課Result().get賦課年度())
-                            && resultMax仮算定用.get介護賦課Result().get通知書番号().
-                            equals(item.get介護賦課Result().get通知書番号())
-                            && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
-                            equals(new RString(item.get介護賦課Result().get履歴番号()))) {
-                        result仮算定用List.add(item);
-                    }
-                }
-                set仮算定状態(指定賦課情報, resultMax仮算定用, result仮算定用List);
+                set仮算定状態(指定賦課情報, resultMax仮算定用);
             }
         }
     }
@@ -597,19 +555,7 @@ public class KaigoHokenFukaKonkyoHandler {
                 }
                 if (!resultList仮算定用.isEmpty()) {
                     FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
-                    List<FukaJohoRelateSearchResult> result仮算定用List = new ArrayList<>();
-                    for (FukaJohoRelateSearchResult item : resultList) {
-                        if (resultMax仮算定用.get介護賦課Result().get調定年度().equals(item.get介護賦課Result().get調定年度())
-                                && resultMax仮算定用.get介護賦課Result().get賦課年度().
-                                equals(item.get介護賦課Result().get賦課年度())
-                                && resultMax仮算定用.get介護賦課Result().get通知書番号().
-                                equals(item.get介護賦課Result().get通知書番号())
-                                && new RString(resultMax仮算定用.get介護賦課Result().get履歴番号()).
-                                equals(new RString(item.get介護賦課Result().get履歴番号()))) {
-                            result仮算定用List.add(item);
-                        }
-                    }
-                    set仮算定状態(指定賦課情報, resultMax仮算定用, result仮算定用List);
+                    set仮算定状態(指定賦課情報, resultMax仮算定用);
                 }
             }
         }
