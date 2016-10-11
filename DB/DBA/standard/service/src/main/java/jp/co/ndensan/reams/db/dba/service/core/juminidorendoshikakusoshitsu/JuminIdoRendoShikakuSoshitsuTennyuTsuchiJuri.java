@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuShutokuJiyu;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBAMN00000_住民異動連動資格登録（転出・死亡・転入通知受理）のビジネスクラスです。
@@ -93,7 +95,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
 
         NaiBushoRyouParamter paramter = new NaiBushoRyouParamter();
         被保台帳転出処理_到達日転出予定日翌日の算出(住民異動情報, storeConfigParamter, paramter);
-        searchHihodaicho(entity, 直近);
+        JuminIdoRendoShikakuSoshitsu.createInstance().getSearchHihodaicho(entity, 直近);
         if (!被保台帳転出処理_被保険者処理要否判定(entity, paramter, storeConfigParamter)) {
             return;
         }
@@ -114,7 +116,8 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             JuminIdoRendoShikakuTorokuEntity entity,
             NaiBushoRyouParamter naiBushoRyouParamter) {
         TemParamter temparamter = new TemParamter();
-        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().getMaxKaijoYmd(entity, 住民異動情報, temparamter);
+        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance()
+                .getMaxKaijoYmd(entity, FlexibleDate.EMPTY, FlexibleDate.EMPTY, 住民異動情報, temparamter);
         if (!temparamter.get登録届出日().isEmpty()
                 && nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(temparamter.get登録異動日()))) {
             住民異動情報.setTorokuIdoYMD(temparamter.get登録異動日());
@@ -240,13 +243,12 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                     isBeforeOrEquals(nullToMin(naiBushoRyouParamter.get補正後転出予定日翌日()))) {
                 temparamter.setTmp取得事由(ShikakuShutokuJiyu.その他.getコード());
                 temparamter.setTmp日付(住民異動情報.getTorokuIdoYMD());
-            }
-            if (naiBushoRyouParamter.get補正後転出予定日翌日().isBefore(temparamter.get登録異動日())) {
+            } else {
                 戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
                 return true;
             }
         }
-        if (temparamter.get登録異動日().isBefore(naiBushoRyouParamter.get補正後65歳到達日())) {
+        if (nullToMin(temparamter.get登録異動日()).isBefore(nullToMin(naiBushoRyouParamter.get補正後65歳到達日()))) {
             if (nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(naiBushoRyouParamter.get補正後転出予定日翌日()))) {
                 temparamter.setTmp取得事由(ShikakuShutokuJiyu.年齢到達.getコード());
                 temparamter.setTmp日付(naiBushoRyouParamter.get到達日_65歳());
@@ -339,34 +341,36 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             JuminIdoRendoShikakuTorokuEntity entity,
             NaiBushoRyouParamter naiBushoRyouParamter) {
         TemParamter temparamter = new TemParamter();
-        searchHihodaicho(entity, 直近);
+        JuminIdoRendoShikakuSoshitsu.createInstance().getSearchHihodaicho(entity, 直近);
         DbT1001HihokenshaDaichoEntity dbT1001Entity = new DbT1001HihokenshaDaichoEntity();
         if (entity.get被保険者台帳EntityList() != null) {
             dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
             if (ShikakuSoshitsuJiyu.転出.getコード().equals(dbT1001Entity.getShikakuSoshitsuJiyuCode())
                     && nullToMin(dbT1001Entity.getShikakuSoshitsuYMD()).equals(naiBushoRyouParamter.get転出予定日翌日())
-                    && nullToEmpty(住民異動情報.getAimaiShojobiMongon()).equals(nullToEmpty(dbT1001Entity.getShikakuSoshitsuTodokedeYMD()))) {
+                    && nullToEmpty(住民異動情報.getShojoTodokedeYMD()).equals(nullToEmpty(dbT1001Entity.getShikakuSoshitsuTodokedeYMD()))) {
                 戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
                 return;
             }
         }
-        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().getMaxKaijoYmd(entity, 住民異動情報, temparamter);
-        if (!temparamter.get登録届出日().isEmpty()
+        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance()
+                .getMaxKaijoYmd(entity, dbT1001Entity.getShikakuSoshitsuYMD(),
+                        dbT1001Entity.getShikakuSoshitsuTodokedeYMD(), 住民異動情報, temparamter);
+        if (temparamter.get登録届出日() != null && !temparamter.get登録届出日().isEmpty()
                 && nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(temparamter.get登録異動日()))) {
             住民異動情報.setTorokuIdoYMD(temparamter.get登録異動日());
             住民異動情報.setTorokuTodokedeYMD(temparamter.get登録届出日());
         }
-        if (naiBushoRyouParamter.get補正後転出予定日翌日().isBeforeOrEquals(temparamter.get登録異動日())) {
+        if (nullToMin(naiBushoRyouParamter.get補正後転出予定日翌日()).isBeforeOrEquals(nullToMin(temparamter.get登録異動日()))) {
             if (nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(naiBushoRyouParamter.get補正後転出予定日翌日()))) {
                 temparamter.setTmp取得事由(ShikakuShutokuJiyu.その他.getコード());
                 temparamter.setTmp日付(住民異動情報.getTorokuIdoYMD());
             }
-            if (naiBushoRyouParamter.get補正後転出予定日翌日().isBefore(temparamter.get登録異動日())) {
+            if (nullToMin(naiBushoRyouParamter.get補正後転出予定日翌日()).isBefore(nullToMin(temparamter.get登録異動日()))) {
                 戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
                 return;
             }
         }
-        if (temparamter.get登録異動日().isBefore(naiBushoRyouParamter.get補正後65歳到達日())) {
+        if (nullToMin(temparamter.get登録異動日()).isBefore(nullToMin(naiBushoRyouParamter.get補正後65歳到達日()))) {
             if (nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(naiBushoRyouParamter.get補正後転出予定日翌日()))) {
                 temparamter.setTmp取得事由(ShikakuShutokuJiyu.年齢到達.getコード());
                 temparamter.setTmp日付(naiBushoRyouParamter.get到達日_65歳());
@@ -404,14 +408,20 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             JuminIdoRendoShikakuTorokuEntity entity,
             NaiBushoRyouParamter naiBushoRyouParamter) {
         TemParamter temparamter = new TemParamter();
-        searchHihodaicho(entity, 直近);
-        DbT1001HihokenshaDaichoEntity dbT1001Entity直近 = entity.get被保険者台帳EntityList().get(0);
-        searchHihodaicho(entity, 転出);
-        DbT1001HihokenshaDaichoEntity dbT1001Entity転出 = entity.get被保険者台帳EntityList().get(0);
+        List<DbT1001HihokenshaDaichoEntity> dbT1001Entity直近List = searchHihodaicho(entity, 直近);
+        DbT1001HihokenshaDaichoEntity dbT1001Entity直近 = new DbT1001HihokenshaDaichoEntity();
+        if (dbT1001Entity直近List != null && !dbT1001Entity直近List.isEmpty()) {
+            dbT1001Entity直近 = dbT1001Entity直近List.get(0);
+        }
+        List<DbT1001HihokenshaDaichoEntity> dbT1001Entity転出List = searchHihodaicho(entity, 転出);
+        DbT1001HihokenshaDaichoEntity dbT1001Entity転出 = new DbT1001HihokenshaDaichoEntity();
+        if (dbT1001Entity転出List != null && !dbT1001Entity転出List.isEmpty()) {
+            dbT1001Entity転出 = dbT1001Entity転出List.get(0);
+        }
         if (dbT1001Entity転出 != null
-                && nullToMin(dbT1001Entity転出.getShikakuSoshitsuYMD()).equals(naiBushoRyouParamter.get転出予定日翌日())
-                && nullToMin(dbT1001Entity転出.getShikakuSoshitsuTodokedeYMD()).equals(住民異動情報.getShojoTodokedeYMD())
-                && flag_ON.equals(dbT1001Entity直近.getKoikinaiJushochiTokureiFlag())) {
+                && nullToMin(dbT1001Entity転出.getShikakuSoshitsuYMD()).equals(nullToMin(naiBushoRyouParamter.get転出予定日翌日()))
+                && nullToMin(dbT1001Entity転出.getShikakuSoshitsuTodokedeYMD()).equals(nullToMin(住民異動情報.getShojoTodokedeYMD()))
+                && flag_ON.equals(dbT1001Entity直近.getJushochiTokureiFlag())) {
             戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
         }
         if (被保台帳取得中転出処理_不整合チェック(dbT1001Entity直近, entity)) {
@@ -430,6 +440,32 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         }
         被保台帳取得中転出処理_被保台帳生成(dbT1001Entity直近, naiBushoRyouParamter, 住民異動情報, entity,
                 temparamter);
+    }
+
+    private List<DbT1001HihokenshaDaichoEntity> searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
+
+        List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
+        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
+        HihokenshaNo 被保険者 = HihokenshaNo.EMPTY;
+
+        if (直近.equals(データ抽出ＰＴＮ)) {
+            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
+                if (!被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
+                    list.add(dbT1001Entity);
+                    被保険者 = dbT1001Entity.getHihokenshaNo();
+                }
+            }
+        }
+        if (転出.equals(データ抽出ＰＴＮ)) {
+            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
+                if (ShikakuSoshitsuJiyu.転出.getコード().equals(dbT1001Entity.getIdoJiyuCode())
+                        && !被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
+                    list.add(dbT1001Entity);
+                    被保険者 = dbT1001Entity.getHihokenshaNo();
+                }
+            }
+        }
+        return list;
     }
 
     private boolean 被保台帳取得中転出処理_被保台帳生成(
@@ -500,7 +536,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity) {
         if (HihokenshaKubunCode.第２号被保険者.getコード().equals(dbT1001Entity直近.getHihokennshaKubunCode())
-                && naiBushoRyouParamter.get補正後65歳到達日().isBeforeOrEquals(naiBushoRyouParamter.get補正後消除異動日翌日())) {
+                && nullToEmpty(naiBushoRyouParamter.get補正後65歳到達日()).isBeforeOrEquals(nullToEmpty(naiBushoRyouParamter.get補正後消除異動日翌日()))) {
             DbT1001HihokenshaDaichoEntity hihokenshaDaicho
                     = 被保台帳取得中転出処理_被保険者台帳_年齢到達_転出被保取得中(dbT1001Entity直近, naiBushoRyouParamter, 住民異動情報, entity);
             hihokenshaDaicho.setState(EntityDataState.Added);
@@ -552,13 +588,25 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             JuminIdoRendoShikakuTorokuEntity entity) {
         if (ShikakuKubun._１号.getコード().equals(dbT1001Entity直近.getHihokennshaKubunCode())
                 && ShikakuShutokuJiyu.年齢到達.getコード().equals(dbT1001Entity直近.getShikakuShutokuJiyuCode())
-                && naiBushoRyouParamter.get補正後消除異動日翌日().isBefore(naiBushoRyouParamter.get補正後65歳到達日())) {
-            DbT1001HihokenshaDaichoEntity hihokenshaDaicho = 被保台帳取得中転出処理_被保険者台帳_削除_転出被保取得中(dbT1001Entity直近);
-            hihokenshaDaicho.setState(EntityDataState.Modified);
-            dbT1001Dac.save(hihokenshaDaicho);
-            searchHihodaicho(entity, 直近);
-            DbT1001HihokenshaDaichoEntity dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
-            if (RString.isNullOrEmpty(dbT1001Entity.getShikakuSoshitsuJiyuCode())) {
+                && nullToMin(naiBushoRyouParamter.get補正後消除異動日翌日()).isBefore(nullToMin(naiBushoRyouParamter.get補正後65歳到達日()))) {
+            Iterator<DbT1001HihokenshaDaichoEntity> iterator = entity.get被保険者台帳EntityList().iterator();
+            while (iterator.hasNext()) {
+                DbT1001HihokenshaDaichoEntity daichoEntity = iterator.next();
+                if (dbT1001Entity直近.getHihokennshaKubunCode().equals(daichoEntity.getHihokennshaKubunCode())
+                        && nullToEmpty(dbT1001Entity直近.getShikakuShutokuJiyuCode()).equals(nullToEmpty(daichoEntity.getShikakuShutokuJiyuCode()))
+                        && nullToEmpty(dbT1001Entity直近.getShikakuShutokuYMD()).equals(nullToEmpty(daichoEntity.getShikakuShutokuYMD()))) {
+                    DbT1001HihokenshaDaichoEntity hihokenshaDaicho = 被保台帳取得中転出処理_被保険者台帳_削除_転出被保取得中(daichoEntity);
+                    hihokenshaDaicho.setState(EntityDataState.Modified);
+                    dbT1001Dac.save(hihokenshaDaicho);
+                    iterator.remove();
+                }
+            }
+            JuminIdoRendoShikakuSoshitsu.createInstance().getSearchHihodaicho(entity, 直近);
+            DbT1001HihokenshaDaichoEntity dbT1001Entity = new DbT1001HihokenshaDaichoEntity();
+            if (entity.get被保険者台帳EntityList() != null && !entity.get被保険者台帳EntityList().isEmpty()) {
+                dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
+            }
+            if (!RString.isNullOrEmpty(dbT1001Entity.getShikakuSoshitsuJiyuCode())) {
                 戻り値の編集(entity, JuminRendoFuseigo.被保険者台帳_転出登録不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY);
                 return true;
             }
@@ -570,9 +618,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
 
     private DbT1001HihokenshaDaichoEntity 被保台帳取得中転出処理_被保険者台帳_削除_転出被保取得中(
             DbT1001HihokenshaDaichoEntity dbT1001Entity直近) {
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity直近.getHihokenshaNo(),
-                dbT1001Entity直近.getIdoYMD(),
-                dbT1001Entity直近.getEdaNo());
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity直近);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
         builder.set論理削除フラグ(true);
         return builder.build().toEntity();
@@ -581,7 +627,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
     private boolean 被保台帳取得中転出処理_不整合チェック(
             DbT1001HihokenshaDaichoEntity dbT1001Entity直近,
             JuminIdoRendoShikakuTorokuEntity entity) {
-        if (flag_ON.equals(dbT1001Entity直近.getKoikinaiJushochiTokureiFlag())) {
+        if (flag_ON.equals(dbT1001Entity直近.getJushochiTokureiFlag())) {
             戻り値の編集(entity, JuminRendoFuseigo.被保険者台帳_更新不能_前後関係不整合.getコード(), RString.EMPTY);
             return true;
         }
@@ -603,13 +649,13 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         builder.set市町村コード(dbT1001Entity.getShichosonCode());
         builder.set識別コード(住民異動情報.getShikibetsuCode());
         builder.set資格取得事由コード(temparamter.getTmp取得事由());
-        builder.set資格取得年月日(temparamter.getTmp日付());
-        builder.set資格取得届出年月日(住民異動情報.getTorokuTodokedeYMD());
-        builder.set第1号資格取得年月日(dbT1001Entity.getIchigoShikakuShutokuYMD());
+        builder.set資格取得年月日(nullToEmpty(temparamter.getTmp日付()));
+        builder.set資格取得届出年月日(nullToEmpty(住民異動情報.getTorokuTodokedeYMD()));
+        builder.set第1号資格取得年月日(nullToEmpty(dbT1001Entity.getIchigoShikakuShutokuYMD()));
         builder.set被保険者区分コード(HihokenshaKubunCode.第１号被保険者.getコード());
         builder.set資格喪失事由コード(ShikakuSoshitsuJiyu.転出.getコード());
-        builder.set資格喪失年月日(naiBushoRyouParamter.get転出予定日翌日());
-        builder.set資格喪失届出年月日(住民異動情報.getShojoTodokedeYMD());
+        builder.set資格喪失年月日(nullToEmpty(naiBushoRyouParamter.get転出予定日翌日()));
+        builder.set資格喪失届出年月日(nullToEmpty(住民異動情報.getShojoTodokedeYMD()));
         builder.set資格変更事由コード(RString.EMPTY);
         builder.set資格変更年月日(FlexibleDate.EMPTY);
         builder.set資格変更届出年月日(FlexibleDate.EMPTY);
@@ -622,7 +668,8 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         builder.set住所地特例フラグ(flag_OFF);
         builder.set広域内住所地特例フラグ(flag_OFF);
         builder.set広住特措置元市町村コード(LasdecCode.EMPTY);
-        builder.set旧市町村コード(dbT1001Entity.getKyuShichosonCode());
+        builder.set旧市町村コード(dbT1001Entity.getKyuShichosonCode() == null
+                ? LasdecCode.EMPTY : dbT1001Entity.getKyuShichosonCode());
         builder.set論理削除フラグ(false);
         return builder.build().toEntity();
     }
@@ -641,9 +688,9 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         builder.set市町村コード(dbT1001Entity.getShichosonCode());
         builder.set識別コード(住民異動情報.getShikibetsuCode());
         builder.set資格取得事由コード(temparamter.getTmp取得事由());
-        builder.set資格取得年月日(temparamter.getTmp日付());
-        builder.set資格取得届出年月日(住民異動情報.getTorokuTodokedeYMD());
-        builder.set第1号資格取得年月日(dbT1001Entity.getIchigoShikakuShutokuYMD());
+        builder.set資格取得年月日(nullToEmpty(temparamter.getTmp日付()));
+        builder.set資格取得届出年月日(nullToEmpty(住民異動情報.getTorokuTodokedeYMD()));
+        builder.set第1号資格取得年月日(nullToEmpty(dbT1001Entity.getIchigoShikakuShutokuYMD()));
         builder.set被保険者区分コード(HihokenshaKubunCode.第１号被保険者.getコード());
         builder.set資格喪失事由コード(RString.EMPTY);
         builder.set資格喪失年月日(FlexibleDate.EMPTY);
@@ -660,7 +707,8 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         builder.set住所地特例フラグ(flag_OFF);
         builder.set広域内住所地特例フラグ(flag_OFF);
         builder.set広住特措置元市町村コード(LasdecCode.EMPTY);
-        builder.set旧市町村コード(dbT1001Entity.getKyuShichosonCode());
+        builder.set旧市町村コード(dbT1001Entity.getKyuShichosonCode() == null
+                ? LasdecCode.EMPTY : dbT1001Entity.getKyuShichosonCode());
         builder.set論理削除フラグ(false);
         return builder.build().toEntity();
     }
@@ -670,7 +718,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             DbT1001HihokenshaDaichoEntity dbT1001Entity,
             JuminIdoRendoShikakuTorokuEntity entity,
             TemParamter temparamter) {
-        if (naiBushoRyouParamter.get転出予定日翌日().isBefore(temparamter.get登録異動日())) {
+        if (nullToMin(naiBushoRyouParamter.get転出予定日翌日()).isBefore(nullToMin(temparamter.get登録異動日()))) {
             戻り値の編集(entity, JuminRendoFuseigo.転出_喪失不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY);
             return true;
         }
@@ -678,7 +726,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             戻り値の編集(entity, JuminRendoFuseigo.転入_取得不能_死亡者.getコード(), RString.EMPTY);
             return true;
         }
-        if (temparamter.getTmp日付().isBefore(dbT1001Entity.getShikakuSoshitsuYMD())) {
+        if (nullToMin(temparamter.getTmp日付()).isBefore(nullToMin(dbT1001Entity.getShikakuSoshitsuYMD()))) {
             戻り値の編集(entity, JuminRendoFuseigo.転入_取得不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY);
             return true;
         }
@@ -731,20 +779,20 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             StoreConfigParamter storeConfigParamter,
             JuminIdoRendoShikakuTorokuEntity entity) {
         NaiBushoRyouParamter naiBushoRyouParamter = 被保台帳転入通知受理処理_内部処理用パラメータの編集(住民異動情報, storeConfigParamter);
-        searchHihodaicho(entity, 直近);
-        DbT1001HihokenshaDaichoEntity dbT1001EntityCyokkin = null;
-        if (entity.get被保険者台帳EntityList() != null) {
-            dbT1001EntityCyokkin = entity.get被保険者台帳EntityList().get(0);
+        List<DbT1001HihokenshaDaichoEntity> dbT1001Entity直近List = searchHihodaicho(entity, 直近);
+        DbT1001HihokenshaDaichoEntity dbT1001Entity直近 = new DbT1001HihokenshaDaichoEntity();
+        if (dbT1001Entity直近List != null && !dbT1001Entity直近List.isEmpty()) {
+            dbT1001Entity直近 = dbT1001Entity直近List.get(0);
         }
-        searchHihodaicho(entity, 転出);
-        DbT1001HihokenshaDaichoEntity dbT1001EntityTensyutsu = null;
-        if (entity.get被保険者台帳EntityList() != null) {
-            dbT1001EntityTensyutsu = entity.get被保険者台帳EntityList().get(0);
+        List<DbT1001HihokenshaDaichoEntity> dbT1001Entity転出List = searchHihodaicho(entity, 転出);
+        DbT1001HihokenshaDaichoEntity dbT1001Entity転出 = new DbT1001HihokenshaDaichoEntity();
+        if (dbT1001Entity転出List != null && !dbT1001Entity転出List.isEmpty()) {
+            dbT1001Entity転出 = dbT1001Entity転出List.get(0);
         }
-        RString tmp処理要否 = 被保台帳転入通知受理処理_被保険者処理要否判定(dbT1001EntityCyokkin, dbT1001EntityTensyutsu, naiBushoRyouParamter,
+        RString tmp処理要否 = 被保台帳転入通知受理処理_被保険者処理要否判定(dbT1001Entity直近, dbT1001Entity転出, naiBushoRyouParamter,
                 住民異動情報);
         JuminIdoRendoShikakuTorokuEntity entityEntity = 被保台帳転入通知受理処理_被保台帳処理の振分け(tmp処理要否, entity,
-                dbT1001EntityTensyutsu, 住民異動情報, storeConfigParamter);
+                dbT1001Entity転出, 住民異動情報, storeConfigParamter);
         return entityEntity;
     }
 
@@ -780,23 +828,29 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
      * @param entity JuminIdoRendoShikakuTorokuEntity
      * @return JuminIdoRendoShikakuTorokuEntity
      */
+    @Transaction
     public JuminIdoRendoShikakuTorokuEntity tennyuTsuchiJuriHihodaichoTennyuJyuri(
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity) {
-        searchHihodaicho(entity, 転出);
-        DbT1001HihokenshaDaichoEntity dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳転出List = searchHihodaicho(entity, 転出);
+        DbT1001HihokenshaDaichoEntity dbT1001Entity = new DbT1001HihokenshaDaichoEntity();
+        if (被保険者台帳転出List != null && !被保険者台帳転出List.isEmpty()) {
+            dbT1001Entity = 被保険者台帳転出List.get(0);
+        }
         List<DbT1001HihokenshaDaichoEntity> listEntity = searchHihodaicho2(entity, dbT1001Entity, 住民異動情報);
         for (DbT1001HihokenshaDaichoEntity entity被保台帳 : listEntity) {
-            if (!entity被保台帳.getIdoJiyuCode().equals(ShikakuSoshitsuJiyu.転出.getコード())
-                    && entity被保台帳.getIdoYMD().isBefore(住民異動情報.getTenshutsuKakuteiIdoYMD())) {
+            if (!ShikakuSoshitsuJiyu.転出.getコード().equals(entity被保台帳.getIdoJiyuCode())
+                    && nullToMin(entity被保台帳.getIdoYMD()).isBefore(nullToMin(住民異動情報.getTenshutsuKakuteiIdoYMD()))) {
                 戻り値の編集(entity, JuminRendoFuseigo.被保険者台帳_更新不能_前後関係不整合.getコード(), RString.EMPTY);
                 entity.set被保険者台帳EntityList(listEntity);
                 return entity;
             }
+        }
+        for (DbT1001HihokenshaDaichoEntity entity被保台帳 : listEntity) {
             DbT1001HihokenshaDaichoEntity hihokenshaDaicho = 被保台帳転入通知受理通知受理処理_被保険者台帳_削除_転入受理(entity被保台帳);
-            hihokenshaDaicho.setState(EntityDataState.Deleted);
+            hihokenshaDaicho.setState(EntityDataState.Modified);
             dbT1001Dac.save(hihokenshaDaicho);
-            if (entity被保台帳.getIdoJiyuCode().equals(ShikakuSoshitsuJiyu.転出.getコード())) {
+            if (ShikakuSoshitsuJiyu.転出.getコード().equals(entity被保台帳.getIdoJiyuCode())) {
                 DbT1001HihokenshaDaichoEntity 転出_転入受理
                         = 被保台帳転入通知受理通知受理処理_被保険者台帳_転出_転入受理(entity被保台帳, 住民異動情報, entity);
                 hihokenshaDaicho.setState(EntityDataState.Added);
@@ -825,27 +879,29 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         builder.set異動事由コード(entity被保台帳.getIdoJiyuCode());
         builder.set市町村コード(entity被保台帳.getShichosonCode());
         builder.set識別コード(住民異動情報.getShikibetsuCode());
-        builder.set資格取得事由コード(entity被保台帳.getShikakuShutokuJiyuCode());
-        builder.set資格取得年月日(entity被保台帳.getShikakuShutokuYMD());
-        builder.set資格取得届出年月日(entity被保台帳.getShikakuShutokuTodokedeYMD());
-        builder.set第1号資格取得年月日(entity被保台帳.getIchigoShikakuShutokuYMD());
-        builder.set被保険者区分コード(entity被保台帳.getHihokennshaKubunCode());
-        builder.set資格喪失事由コード(entity被保台帳.getShikakuSoshitsuJiyuCode());
-        builder.set資格喪失年月日(entity被保台帳.getShikakuSoshitsuYMD());
-        builder.set資格喪失届出年月日(entity被保台帳.getShikakuSoshitsuTodokedeYMD());
-        builder.set資格変更事由コード(entity被保台帳.getShikakuHenkoJiyuCode());
-        builder.set資格変更年月日(entity被保台帳.getShikakuHenkoYMD());
-        builder.set資格変更届出年月日(entity被保台帳.getShikakuHenkoTodokedeYMD());
-        builder.set住所地特例適用事由コード(entity被保台帳.getJushochitokureiTekiyoJiyuCode());
-        builder.set適用年月日(entity被保台帳.getJushochitokureiTekiyoYMD());
-        builder.set適用届出年月日(entity被保台帳.getJushochitokureiTekiyoTodokedeYMD());
-        builder.set住所地特例解除事由コード(entity被保台帳.getJushochitokureiKaijoJiyuCode());
-        builder.set解除年月日(entity被保台帳.getJushochitokureiKaijoYMD());
-        builder.set解除届出年月日(entity被保台帳.getJushochitokureiKaijoTodokedeYMD());
+        builder.set資格取得事由コード(nullToEmpty(entity被保台帳.getShikakuShutokuJiyuCode()));
+        builder.set資格取得年月日(nullToEmpty(entity被保台帳.getShikakuShutokuYMD()));
+        builder.set資格取得届出年月日(nullToEmpty(entity被保台帳.getShikakuShutokuTodokedeYMD()));
+        builder.set第1号資格取得年月日(nullToEmpty(entity被保台帳.getIchigoShikakuShutokuYMD()));
+        builder.set被保険者区分コード(nullToEmpty(entity被保台帳.getHihokennshaKubunCode()));
+        builder.set資格喪失事由コード(nullToEmpty(entity被保台帳.getShikakuSoshitsuJiyuCode()));
+        builder.set資格喪失年月日(nullToEmpty(entity被保台帳.getShikakuSoshitsuYMD()));
+        builder.set資格喪失届出年月日(nullToEmpty(entity被保台帳.getShikakuSoshitsuTodokedeYMD()));
+        builder.set資格変更事由コード(nullToEmpty(entity被保台帳.getShikakuHenkoJiyuCode()));
+        builder.set資格変更年月日(nullToEmpty(entity被保台帳.getShikakuHenkoYMD()));
+        builder.set資格変更届出年月日(nullToEmpty(entity被保台帳.getShikakuHenkoTodokedeYMD()));
+        builder.set住所地特例適用事由コード(nullToEmpty(entity被保台帳.getJushochitokureiTekiyoJiyuCode()));
+        builder.set適用年月日(nullToEmpty(entity被保台帳.getJushochitokureiTekiyoYMD()));
+        builder.set適用届出年月日(nullToEmpty(entity被保台帳.getJushochitokureiTekiyoTodokedeYMD()));
+        builder.set住所地特例解除事由コード(nullToEmpty(entity被保台帳.getJushochitokureiKaijoJiyuCode()));
+        builder.set解除年月日(nullToEmpty(entity被保台帳.getJushochitokureiKaijoYMD()));
+        builder.set解除届出年月日(nullToEmpty(entity被保台帳.getJushochitokureiKaijoTodokedeYMD()));
         builder.set住所地特例フラグ(entity被保台帳.getJushochiTokureiFlag());
         builder.set広域内住所地特例フラグ(entity被保台帳.getKoikinaiJushochiTokureiFlag());
-        builder.set広住特措置元市町村コード(entity被保台帳.getKoikinaiTokureiSochimotoShichosonCode());
-        builder.set旧市町村コード(entity被保台帳.getKyuShichosonCode());
+        builder.set広住特措置元市町村コード(entity被保台帳.getKoikinaiTokureiSochimotoShichosonCode()
+                == null ? LasdecCode.EMPTY : entity被保台帳.getKoikinaiTokureiSochimotoShichosonCode());
+        builder.set旧市町村コード(entity被保台帳.getKyuShichosonCode() == null
+                ? LasdecCode.EMPTY : entity被保台帳.getKyuShichosonCode());
         builder.set論理削除フラグ(false);
         return builder.build().toEntity();
     }
@@ -862,36 +918,36 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         builder.set異動事由コード(ShikakuSoshitsuJiyu.転出.getコード());
         builder.set市町村コード(entity被保台帳.getShichosonCode());
         builder.set識別コード(住民異動情報.getShikibetsuCode());
-        builder.set資格取得事由コード(entity被保台帳.getShikakuShutokuJiyuCode());
-        builder.set資格取得年月日(entity被保台帳.getShikakuShutokuYMD());
-        builder.set資格取得届出年月日(entity被保台帳.getShikakuShutokuTodokedeYMD());
-        builder.set第1号資格取得年月日(entity被保台帳.getIchigoShikakuShutokuYMD());
-        builder.set被保険者区分コード(entity被保台帳.getHihokennshaKubunCode());
+        builder.set資格取得事由コード(nullToEmpty(entity被保台帳.getShikakuShutokuJiyuCode()));
+        builder.set資格取得年月日(nullToEmpty(entity被保台帳.getShikakuShutokuYMD()));
+        builder.set資格取得届出年月日(nullToEmpty(entity被保台帳.getShikakuShutokuTodokedeYMD()));
+        builder.set第1号資格取得年月日(nullToEmpty(entity被保台帳.getIchigoShikakuShutokuYMD()));
+        builder.set被保険者区分コード(nullToEmpty(entity被保台帳.getHihokennshaKubunCode()));
         builder.set資格喪失事由コード(ShikakuSoshitsuJiyu.転出.getコード());
-        builder.set資格喪失年月日(住民異動情報.getTenshutsuKakuteiIdoYMD());
-        builder.set資格喪失届出年月日(entity被保台帳.getShikakuSoshitsuTodokedeYMD());
-        builder.set資格変更事由コード(entity被保台帳.getShikakuHenkoJiyuCode());
-        builder.set資格変更年月日(entity被保台帳.getShikakuHenkoYMD());
-        builder.set資格変更届出年月日(entity被保台帳.getShikakuHenkoTodokedeYMD());
-        builder.set住所地特例適用事由コード(entity被保台帳.getJushochitokureiTekiyoJiyuCode());
-        builder.set適用年月日(entity被保台帳.getJushochitokureiTekiyoYMD());
-        builder.set適用届出年月日(entity被保台帳.getJushochitokureiTekiyoTodokedeYMD());
-        builder.set住所地特例解除事由コード(entity被保台帳.getJushochitokureiKaijoJiyuCode());
-        builder.set解除年月日(entity被保台帳.getJushochitokureiKaijoYMD());
-        builder.set解除届出年月日(entity被保台帳.getIchigoShikakuShutokuYMD());
+        builder.set資格喪失年月日(nullToEmpty(住民異動情報.getTenshutsuKakuteiIdoYMD()));
+        builder.set資格喪失届出年月日(nullToEmpty(entity被保台帳.getShikakuSoshitsuTodokedeYMD()));
+        builder.set資格変更事由コード(nullToEmpty(entity被保台帳.getShikakuHenkoJiyuCode()));
+        builder.set資格変更年月日(nullToEmpty(entity被保台帳.getShikakuHenkoYMD()));
+        builder.set資格変更届出年月日(nullToEmpty(entity被保台帳.getShikakuHenkoTodokedeYMD()));
+        builder.set住所地特例適用事由コード(nullToEmpty(entity被保台帳.getJushochitokureiTekiyoJiyuCode()));
+        builder.set適用年月日(nullToEmpty(entity被保台帳.getJushochitokureiTekiyoYMD()));
+        builder.set適用届出年月日(nullToEmpty(entity被保台帳.getJushochitokureiTekiyoTodokedeYMD()));
+        builder.set住所地特例解除事由コード(nullToEmpty(entity被保台帳.getJushochitokureiKaijoJiyuCode()));
+        builder.set解除年月日(nullToEmpty(entity被保台帳.getJushochitokureiKaijoYMD()));
+        builder.set解除届出年月日(nullToEmpty(entity被保台帳.getJushochitokureiKaijoTodokedeYMD()));
         builder.set住所地特例フラグ(entity被保台帳.getJushochiTokureiFlag());
         builder.set広域内住所地特例フラグ(entity被保台帳.getKoikinaiJushochiTokureiFlag());
-        builder.set広住特措置元市町村コード(entity被保台帳.getKoikinaiTokureiSochimotoShichosonCode());
-        builder.set旧市町村コード(entity被保台帳.getKyuShichosonCode());
+        builder.set広住特措置元市町村コード(entity被保台帳.getKoikinaiTokureiSochimotoShichosonCode() == null
+                ? LasdecCode.EMPTY : entity被保台帳.getKoikinaiTokureiSochimotoShichosonCode());
+        builder.set旧市町村コード(entity被保台帳.getKyuShichosonCode() == null
+                ? LasdecCode.EMPTY : entity被保台帳.getKyuShichosonCode());
         builder.set論理削除フラグ(false);
         return builder.build().toEntity();
     }
 
     private DbT1001HihokenshaDaichoEntity 被保台帳転入通知受理通知受理処理_被保険者台帳_削除_転入受理(
             DbT1001HihokenshaDaichoEntity entity被保台帳) {
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(entity被保台帳.getHihokenshaNo(),
-                entity被保台帳.getIdoYMD(),
-                entity被保台帳.getEdaNo());
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(entity被保台帳);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
         builder.set論理削除フラグ(true);
         return builder.build().toEntity();
@@ -909,14 +965,14 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                     && !被保険者台帳管理Entity.getLogicalDeletedFlag()) {
                 listEntity.add(被保険者台帳管理Entity);
             }
-            if (dbT1001Entity.getIdoYMD().isBefore(被保険者台帳管理Entity.getIdoYMD())
-                    && 被保険者台帳管理Entity.getIdoYMD().isBeforeOrEquals(住民異動情報.getTenshutsuKakuteiIdoYMD())
+            if (nullToMin(dbT1001Entity.getIdoYMD()).isBefore(nullToMin(被保険者台帳管理Entity.getIdoYMD()))
+                    && nullToMin(被保険者台帳管理Entity.getIdoYMD()).isBeforeOrEquals(nullToMin(住民異動情報.getTenshutsuKakuteiIdoYMD()))
                     && !被保険者台帳管理Entity.getLogicalDeletedFlag()) {
                 listEntity.add(被保険者台帳管理Entity);
             }
         }
-        Collections.sort(listEntity, new JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri.ComparatorsHihokenshaNo());
-        Collections.sort(listEntity, new JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri.ComparatorsIdoYMDAndEdaNo());
+//        Collections.sort(listEntity, new JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri.ComparatorsHihokenshaNo());
+//        Collections.sort(listEntity, new JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri.ComparatorsIdoYMDAndEdaNo());
         return listEntity;
     }
 
@@ -961,7 +1017,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         RString tmp処理要否;
         if (!nullToMin(dbT1001EntityTensyutsu.getShikakuSoshitsuTodokedeYMD()).equals(住民異動情報.getShojoTodokedeYMD())
                 || !nullToMin(dbT1001EntityTensyutsu.getShikakuSoshitsuYMD()).equals(naiBushoRyouParamter.get転出予定日翌日())) {
-            if (flag_ON.endsWith(dbT1001EntityCyokkin.getKoikinaiJushochiTokureiFlag())) {
+            if (flag_ON.endsWith(dbT1001EntityCyokkin.getJushochiTokureiFlag())) {
                 tmp処理要否 = ptn_2;
             } else {
                 tmp処理要否 = ptn_1;
@@ -1008,10 +1064,10 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         } else {
             補正後転出予定日翌日 = 転出予定日翌日;
         }
+        naiBushoRyouParamter.set転出予定日翌日(転出予定日翌日);
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().nenreiCalc(住民異動情報, naiBushoRyouParamter);
         naiBushoRyouParamter.set到達日_65歳(到達日_65);
         naiBushoRyouParamter.set補正後65歳到達日(補正後65歳到達日);
-        naiBushoRyouParamter.set転出予定日翌日(転出予定日翌日);
         naiBushoRyouParamter.set補正後転出予定日翌日(補正後転出予定日翌日);
         return naiBushoRyouParamter;
     }
@@ -1044,38 +1100,6 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         return false;
     }
 
-    /**
-     * 取得した被保険者台帳データから、異動日、枝番が最大のデータを取得する。
-     *
-     * @param entity JuminIdoRendoShikakuTorokuEntity
-     * @param データ抽出ＰＴＮ RString
-     */
-    public void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
-
-        List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
-        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
-        HihokenshaNo 被保険者 = HihokenshaNo.EMPTY;
-
-        if (直近.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (!被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        if (転出.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (!ShikakuSoshitsuJiyu.転出.getコード().equals(dbT1001Entity.getIdoJiyuCode())
-                        && !被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        entity.set被保険者台帳EntityList(list);
-    }
-
     private void 戻り値の編集(
             JuminIdoRendoShikakuTorokuEntity entity,
             RString 不整合コード, RString 転出保留作成事由コード) {
@@ -1097,19 +1121,21 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         RString 枝番;
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳管理EntityList = entity.get被保険者台帳EntityList();
         List<DbT1001HihokenshaDaichoEntity> listEntity = new ArrayList<>();
-        for (DbT1001HihokenshaDaichoEntity entity被保険者台帳管理 : 被保険者台帳管理EntityList) {
-            if (識別コード.equals(entity被保険者台帳管理.getShikibetsuCode())
-                    && 異動日.equals(entity被保険者台帳管理.getIdoYMD())) {
-                listEntity.add(entity被保険者台帳管理);
+        if (被保険者台帳管理EntityList != null) {
+            for (DbT1001HihokenshaDaichoEntity entity被保険者台帳管理 : 被保険者台帳管理EntityList) {
+                if (識別コード.equals(entity被保険者台帳管理.getShikibetsuCode())
+                        && 異動日.equals(entity被保険者台帳管理.getIdoYMD())) {
+                    listEntity.add(entity被保険者台帳管理);
+                }
             }
         }
         if (listEntity.isEmpty()) {
-            枝番 = new RString("1");
+            枝番 = new RString("0001");
         } else {
             Collections.sort(listEntity, new JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri.ComparatorsEdaNo());
             int edaBan = Integer.parseInt(listEntity.get(0).getEdaNo().toString());
             edaBan = edaBan + 1;
-            枝番 = new RString(String.valueOf(edaBan));
+            枝番 = new RString(String.valueOf(String.format("%04d", edaBan)));
         }
         return 枝番;
     }
@@ -1123,13 +1149,13 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         return date;
     }
 
-    private RString nullToEmpty(FlexibleDate date) {
+    private FlexibleDate nullToEmpty(FlexibleDate date) {
 
         if (date == null || date.isEmpty()) {
 
-            return RString.EMPTY;
+            return FlexibleDate.EMPTY;
         }
-        return new RString(date.toString());
+        return date;
     }
 
     private RString nullToEmpty(RString date) {
