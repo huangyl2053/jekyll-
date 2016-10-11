@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.futanwariaihanteiichiran;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.KonkaiFutanWariaiIchiranTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.MaeFutanWariaiHanteiIchiranTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.UnicodeSwitchProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011.FutanWariaiHanteiIchiranProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011.KonkaiFutanWariaiIchiranTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011.MaeFutanWariaiHanteiIchiranTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011.UnicodeSwitchProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180011.DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.FlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4980-031 yuanzhenxia
  */
-public class FutanWariaiIchiranFlow extends BatchFlowBase<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> {
+public class DBC180011_RiyoshaFutanwariaiHanteiIchiranSub extends BatchFlowBase<DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter> {
 
     private static final String 今回利用者負担割合判定TEMPへ登録する = "creatKonkaiFutanWariaiIchiranTemp";
     private static final String 前回利用者負担割合判定TEMPへ登録する = "creatMaeFutanWariaiIchiranTemp";

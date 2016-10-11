@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.HihokenshaDaichoIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.JukyushaDaichoIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.KaigoShotokuIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SeikatsuHogoJukyushaIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.ShikibetsuTaishoIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SogoJigyoTaishoshaIdoProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021.HihokenshaDaichoIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021.JukyushaDaichoIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021.KaigoShotokuIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021.SeikatsuHogoJukyushaIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021.ShikibetsuTaishoIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021.SogoJigyoTaishoshaIdoProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180021.DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.IdoDateTyuushutuKyoutsuuProcessParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -26,7 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @reamsid_L DBC-4950-033 pengxingyi
  */
-public class IdoDateTyuushutuKyoutsuu extends BatchFlowBase<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> {
+public class DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSub
+        extends BatchFlowBase<DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter> {
 
     private static final String 受給者台帳異動 = "JukyushaDaichoIdoProcess";
     private static final String 総合事業対象者異動 = "SogoJigyoTaishoshaIdoProcess";

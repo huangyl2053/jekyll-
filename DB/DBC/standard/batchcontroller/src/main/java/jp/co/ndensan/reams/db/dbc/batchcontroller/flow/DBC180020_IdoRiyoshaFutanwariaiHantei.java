@@ -21,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC180020_IdoRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> {
 
-    private static final RString 異動データ抽出_ID = new RString("IdoDateTyuushutuKyoutsuu");
+    private static final RString 異動データ抽出_ID = new RString("DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSub");
     private static final String 異動データ抽出 = "idodatetyuushutukyoutsuu";
-    private static final RString 利用者負担割合判定_ID = new RString("RiyoshaFutanwariaiHanteiCommonFlow");
+    private static final RString 利用者負担割合判定_ID = new RString("DBC180022_RiyoshaFutanwariaiHanteiSub");
     private static final String 利用者負担割合判定 = "riyoshafutanwariaihantei";
-    private static final RString 負担割合判定一覧出力_ID = new RString("FutanWariaiIchiranFlow");
+    private static final RString 負担割合判定一覧出力_ID = new RString("DBC180011_RiyoshaFutanwariaiHanteiIchiranSub");
     private static final String 負担割合判定一覧出力 = "futanwariaiichiran";
     private static final String DB_UPDATE = "db_update";
 
@@ -39,17 +39,17 @@ public class DBC180020_IdoRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC1800
 
     @Step(異動データ抽出)
     IBatchFlowCommand callIdoDateTyuushutuKyoutsu() {
-        return otherBatchFlow(異動データ抽出_ID, SubGyomuCode.DBC介護給付, getParameter()).define();
+        return otherBatchFlow(異動データ抽出_ID, SubGyomuCode.DBC介護給付, getParameter().toIdoDateTyuushutuKyoutsuuParameter()).define();
     }
 
     @Step(利用者負担割合判定)
     IBatchFlowCommand callRiyoshaFutanwariaiHantei() {
-        return otherBatchFlow(利用者負担割合判定_ID, SubGyomuCode.DBC介護給付, getParameter()).define();
+        return otherBatchFlow(利用者負担割合判定_ID, SubGyomuCode.DBC介護給付, getParameter().toRiyoshaFutanwariaiHanteiCommonFlowParameter()).define();
     }
 
     @Step(負担割合判定一覧出力)
     IBatchFlowCommand callFutanWariaiIchiranFlow() {
-        return otherBatchFlow(負担割合判定一覧出力_ID, SubGyomuCode.DBC介護給付, getParameter()).define();
+        return otherBatchFlow(負担割合判定一覧出力_ID, SubGyomuCode.DBC介護給付, getParameter().toFutanWariaiIchiranFlowParameter()).define();
     }
 
     @Step(DB_UPDATE)

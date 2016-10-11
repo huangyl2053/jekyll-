@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.HanteiTaishoshaTuikaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SeikatsuHogoGaitoJohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.FutanWariaiHanteiNenziProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180022.FutanWariaiHanteiNenziProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180022.HanteiTaishoshaTuikaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180022.SeikatsuHogoGaitoJohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class RiyoshaFutanwariaiHanteiCommonFlow extends BatchFlowBase<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> {
+public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBC180022_RiyoshaFutanwariaiHanteiSubParameter> {
 
     private static final int NUM12 = 12;
     private static final RString 年次 = new RString("1");

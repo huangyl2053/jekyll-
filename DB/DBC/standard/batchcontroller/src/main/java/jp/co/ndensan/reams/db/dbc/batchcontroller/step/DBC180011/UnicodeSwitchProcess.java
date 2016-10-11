@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.externalcharacter.reader.CsvListReaderParameter;

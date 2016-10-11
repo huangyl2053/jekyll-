@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021;
 
 import jp.co.ndensan.reams.db.dbc.business.core.idoriyoshafutanwariaihantei.HanteiTaishoshaTempEditor;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.IdoDateTyuushutuKyoutsuuProcessParameter;
@@ -18,16 +18,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 生活保護受給者異動データ抽出のprocessクラスです。
+ * 介護所得異動データ抽出のprocessクラスです。
  *
  * @reamsid_L DBC-4950-033 pengxingyi
  */
-public class SeikatsuHogoJukyushaIdoProcess extends BatchProcessBase<IdoRiyoshaDateEntity> {
+public class KaigoShotokuIdoProcess extends BatchProcessBase<IdoRiyoshaDateEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihantei."
-                    + "IIdoDateTyuushutuKyoutsuuMapper.select生活保護受給者異動");
-    private static final RString 異動種別_6 = new RString("6");
+                    + "IIdoDateTyuushutuKyoutsuuMapper.select介護所得異動");
+    private static final RString 異動種別_4 = new RString("4");
     private static final RString 出力条件_受給者台帳 = new RString("1");
     private static final RString 出力条件_総合事業対象者 = new RString("2");
     private static final RString 出力条件_なし = new RString("0");
@@ -58,7 +58,7 @@ public class SeikatsuHogoJukyushaIdoProcess extends BatchProcessBase<IdoRiyoshaD
         } else {
             出力条件 = 出力条件_なし;
         }
-        HanteiTaishoshaTempEditor edit = new HanteiTaishoshaTempEditor(entity, 異動種別_6, 出力条件, parameter);
+        HanteiTaishoshaTempEditor edit = new HanteiTaishoshaTempEditor(entity, 異動種別_4, 出力条件, parameter);
         tableWriter.insert(edit.get出力データ());
     }
 
