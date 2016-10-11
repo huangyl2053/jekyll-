@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dba.business.core.syoritaisyoshichoson;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba050010.JuminkirokuIdojohoTorokuKoikiProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -31,13 +34,15 @@ public class SyoriTaisyoShichoson {
     /**
      * 宛名識別対象異動分取得します。
      *
-     * @param entity DbT7022ShoriDateKanriEntity
+     * @param 抽出開始日時 RDateTime
+     * @param processParameter JuminkirokuIdojohoTorokuKoikiProcessParameter
      * @return keyBuilder
      */
-    public ShikibetsuTaishoIdoSearchKeyBuilder 宛名識別対象異動分取得PSM(DbT7022ShoriDateKanriEntity entity) {
+    public ShikibetsuTaishoIdoSearchKeyBuilder 宛名識別対象異動分取得PSM(RDateTime 抽出開始日時,
+            JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter) {
         ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoIdoSearchKeyBuilder(
                 ShikibetsuTaishoIdoChushutsuKubun.異動処理日時と異動事由で異動前後を抽出,
-                entity.getKijunTimestamp().getRDateTime(), RDate.getNowDateTime());
+                抽出開始日時, processParameter.getSyorinichiji().getRDateTime());
         List<JukiIdoJiyu> juminShubetsu = new ArrayList<>();
         juminShubetsu.add(JukiIdoJiyu.転入);
         juminShubetsu.add(JukiIdoJiyu.第30条の46届出);
@@ -89,22 +94,13 @@ public class SyoriTaisyoShichoson {
      * データ更新します。
      *
      * @param processParameter JuminkirokuIdojohoTorokuKoikiProcessParameter
-     * @param a int
-     * @param dbT7022List List<DbT7022ShoriDateKanriEntity>
      * @param entity DbT7022ShoriDateKanriEntity
-     * @return int
      */
-    public int データ更新(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, int a,
-            List<DbT7022ShoriDateKanriEntity> dbT7022List, DbT7022ShoriDateKanriEntity entity) {
+    public void データ更新(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, DbT7022ShoriDateKanriEntity entity) {
         entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
         entity.setShoriName(ShoriName.広域住基連動.get名称());
-        entity.setShoriEdaban(dbT7022List.get(a).getShoriEdaban());
-        entity.setNendoNaiRenban(dbT7022List.get(a).getNendoNaiRenban());
-        entity.setNendo(dbT7022List.get(a).getNendo());
         entity.setKijunTimestamp(processParameter.getSyorinichiji());
-        entity.setTaishoKaishiTimestamp(dbT7022List.get(a).getTaishoKaishiTimestamp());
         entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
-        return a;
     }
 
     /**
@@ -124,9 +120,8 @@ public class SyoriTaisyoShichoson {
         entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
         entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
 //            TODO 1826未回答ので、実装しない
-//            entity.setTaishoKaishiTimestamp(new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
-//                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
-        entity.setTaishoKaishiTimestamp(YMDHMS.now());
+        entity.setTaishoKaishiTimestamp(new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
         entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
     }
 }
