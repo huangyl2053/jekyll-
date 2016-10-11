@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishik
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceReportEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceUpdateTempEntity;
 
 /**
  * 高額サービス費支給（不支給）決定通知書作成する用マッパーインタフェースです。
@@ -21,10 +23,17 @@ public interface IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper {
     /**
      * 高額サービス費支給（不支給）決定通知書情報取得するメソッドです。
      *
-     * @param parameter InsertKetteiTsuchishoInfoTempMybatisParameter
+     * @param parameter KogakukaigoKetteiTsuchishoInfoTempParameter
      * @return KetteiTsuchishoInfoTempResultEntity 通知書情報エンティティ
      */
     KetteiTsuchishoInfoTempResultEntity select高額サービス情報(InsertKetteiTsuchishoInfoTempMybatisParameter parameter);
+
+    /**
+     * サービス種類名称情報を取得する。
+     *
+     * @return KogakuServiceUpdateTempEntity
+     */
+    KogakuServiceUpdateTempEntity selectサービス種類名称情報();
 
     /**
      * 高額介護サービス費支給判定結果の更新処理情報取得するメソッドです。
@@ -38,7 +47,7 @@ public interface IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper {
      * 高額サービス帳票出力データ取得するメソッドです。
      *
      * @param parameter JigyoKogakuKetteiTsuchishoReportParameter
-     * @return KetteiTsuchishoInfoTempResultEntity 通知書情報エンティティ
+     * @return KogakuServiceReportEntity 帳票出力情報エンティティ
      */
-    KetteiTsuchishoInfoTempResultEntity get高額サービス帳票出力データ(JigyoKogakuKetteiTsuchishoReportParameter parameter);
+    KogakuServiceReportEntity get高額サービス帳票出力データ(JigyoKogakuKetteiTsuchishoReportParameter parameter);
 }

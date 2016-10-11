@@ -5,11 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho;
 
-import java.util.List;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class InsertKetteiTsuchishoInfoTempMybatisParameter extends KozaSearchParameter implements IMyBatisParameter {
+public class InsertKetteiTsuchishoInfoTempMybatisParameter implements IMyBatisParameter {
 
     private RString 抽出モード;
     private FlexibleDate 抽出条件日付From;
@@ -43,18 +39,13 @@ public class InsertKetteiTsuchishoInfoTempMybatisParameter extends KozaSearchPar
      * @param 決定者受付年月 FlexibleYearMonth
      * @param 印書 RString
      * @param 高額自動償還 RString
-     * @param key 口座検索用の検索キークラス
-     * @param list 科目コードリスト
      */
     public InsertKetteiTsuchishoInfoTempMybatisParameter(RString 抽出モード,
             FlexibleDate 抽出条件日付From,
             FlexibleDate 抽出条件日付To,
             FlexibleYearMonth 決定者受付年月,
             RString 印書,
-            RString 高額自動償還,
-            IKozaSearchKey key,
-            List<KamokuCode> list) {
-        super(key, list);
+            RString 高額自動償還) {
         this.抽出モード = 抽出モード;
         this.抽出条件日付From = 抽出条件日付From;
         this.抽出条件日付To = 抽出条件日付To;
