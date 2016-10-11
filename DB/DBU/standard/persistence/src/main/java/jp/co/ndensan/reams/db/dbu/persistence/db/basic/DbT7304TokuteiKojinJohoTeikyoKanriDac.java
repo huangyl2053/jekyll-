@@ -9,10 +9,11 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7304TokuteiKojinJohoTeikyoKanri;
 import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7304TokuteiKojinJohoTeikyoKanri.dataSetRecordKey;
 import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7304TokuteiKojinJohoTeikyoKanri.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7304TokuteiKojinJohoTeikyoKanri.teikyoKubun;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7304TokuteiKojinJohoTeikyoKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -84,5 +85,18 @@ public class DbT7304TokuteiKojinJohoTeikyoKanriDac implements ISaveable<DbT7304T
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 特定個人情報提供管理の版番号カウントを取得します。
+     *
+     * @param 初回提供区分 初回提供区分
+     * @return 版番号カウント{@code list}
+     */
+    @Transaction
+    public int get版番号カウント(RString 初回提供区分) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT7304TokuteiKojinJohoTeikyoKanri.class).
+                where(eq(teikyoKubun, 初回提供区分)).getCount();
     }
 }
