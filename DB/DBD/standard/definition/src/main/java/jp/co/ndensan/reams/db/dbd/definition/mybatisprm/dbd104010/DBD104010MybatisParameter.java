@@ -26,7 +26,7 @@ import lombok.Setter;
 /**
  * 受給者減免実施状況のMybatisパラメータクラスです。
  *
- * @reamsid_L　DBD-3770-060 liuwei2
+ * @reamsid_L DBD-3770-060 liuwei2
  */
 @Getter
 @Setter

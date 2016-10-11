@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd104010.NinteijyotaiEntity;
 /**
  * 受給者減免実施状況の受給者減免月別申請・認定状況表のMapperです。
  *
- * @reamsid_L　DBD-3770-060 liuwei2
+ * @reamsid_L DBD-3770-060 liuwei2
  */
 public interface IJukyushagenmenshinseiMapper {
 
