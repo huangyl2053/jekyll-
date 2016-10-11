@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.definition.processprm.ippangenbutsu;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuMybatisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class JigyoHokokuGeppoIppanGenbutsuProcessParamter implements IBatchProce
     private final RString 集計年月;
     private final RString 報告年月;
     private final RString 作成日時;
-    private final RString 処理日時;
+    private final YMDHMS 処理日時;
     private final RString 給付集計区分;
     private final RString 旧市町村区分;
     private final RString 構成市町村区分;
@@ -66,7 +67,7 @@ public class JigyoHokokuGeppoIppanGenbutsuProcessParamter implements IBatchProce
             RString 集計年月,
             RString 報告年月,
             RString 作成日時,
-            RString 処理日時,
+            YMDHMS 処理日時,
             RString 給付集計区分,
             RString 旧市町村区分,
             RString 構成市町村区分,

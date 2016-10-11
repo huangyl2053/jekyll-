@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.Chohyokoyujoho;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
@@ -318,88 +319,58 @@ public class IryoHiKojoKakuninSinsei {
         List<RString> コンフィグ情報 = getコンフィグ情報(帳票制御共通);
         NinshoshaSource 認証者 = 認証者編集(地方公共団体, RDate.getNowDate(), 帳票制御共通);
         IKojin 宛名情報 = getAtena_Iryohikojyo(識別コード);
+        Chohyokoyujoho 帳票固有情報 = new Chohyokoyujoho();
         if (!JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(コンフィグ情報.get(INT_3))) {
             SofubutsuAtesakiSource 送付物宛先 = 窓空き住所編集(地方公共団体, 識別コード, コンフィグ情報);
-            主治医意見書確認書Entity.set宛名情報_送付先郵便番号(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先行政区名(送付物宛先.gyoseiku);
-            主治医意見書確認書Entity.set宛名情報_送付先住所3(送付物宛先.jusho3);
-            主治医意見書確認書Entity.set宛名情報_送付先住所1(送付物宛先.jusho1);
-            主治医意見書確認書Entity.set宛名情報_送付先住所2(送付物宛先.jusho2);
-            主治医意見書確認書Entity.set宛名情報_送付先方書2(送付物宛先.katagaki2);
-            主治医意見書確認書Entity.set宛名情報_送付先方書2小(送付物宛先.katagakiSmall2);
-            主治医意見書確認書Entity.set宛名情報_送付先方書1(送付物宛先.katagaki1);
-            主治医意見書確認書Entity.set宛名情報_送付先方書1小(送付物宛先.katagakiSmall1);
-            主治医意見書確認書Entity.set宛名情報_代納人区分(送付物宛先.dainoKubunMei);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名12(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名12小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与12(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名11(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名11小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与11(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_左括弧2(送付物宛先.kakkoLeft2);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名22(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名22小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与22(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_右括弧2(送付物宛先.kakkoRight2);
-            主治医意見書確認書Entity.set宛名情報_左括弧1(送付物宛先.kakkoLeft1);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名21(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名21小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与21(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_右括弧1(送付物宛先.kakkoRight1);
-            主治医意見書確認書Entity.setカスタマバーコード(送付物宛先.customerBarCode);
+            主治医意見書確認書Entity.set送付物宛先(送付物宛先);
             RString 編集後住所 = 住所編集(地方公共団体, 宛名情報, コンフィグ情報);
-            主治医意見書確認書Entity.set住所(編集後住所);
+            帳票固有情報.set住所(編集後住所);
             if (編集後住所.length() <= サーティ) {
-                主治医意見書確認書Entity.set住所１(RString.EMPTY);
-                主治医意見書確認書Entity.set住所２(RString.EMPTY);
+                帳票固有情報.set住所１(RString.EMPTY);
+                帳票固有情報.set住所２(RString.EMPTY);
             } else {
-                主治医意見書確認書Entity.set住所１(編集後住所.substring(0, サーティ));
-                主治医意見書確認書Entity.set住所２(編集後住所.substring(サーティ));
+                帳票固有情報.set住所１(編集後住所.substring(0, サーティ));
+                帳票固有情報.set住所２(編集後住所.substring(サーティ));
             }
-            主治医意見書確認書Entity.set文書番号(文書番号);
-            主治医意見書確認書Entity.set文書番号(文書番号);
+            帳票固有情報.set文書番号(文書番号);
+            帳票固有情報.set文書番号(文書番号);
         }
-        主治医意見書確認書Entity.set役職名(認証者.ninshoshaYakushokuMei);
-        主治医意見書確認書Entity.set役職名１(認証者.ninshoshaYakushokuMei1);
-        主治医意見書確認書Entity.set役職名２(認証者.ninshoshaYakushokuMei2);
-        主治医意見書確認書Entity.set認証者氏名(認証者.ninshoshaYakushokuMei);
-        主治医意見書確認書Entity.set電子公印(認証者.denshiKoin);
-        主治医意見書確認書Entity.set認証者氏名掛けない(認証者.ninshoshaShimeiKakenai);
-        主治医意見書確認書Entity.set認証者氏名掛ける(認証者.ninshoshaShimeiKakeru);
-        主治医意見書確認書Entity.set公印書略(認証者.koinShoryaku);
-        主治医意見書確認書Entity.set文書番号(文書番号);
-        主治医意見書確認書Entity.set発行日(作成日.toDateString());
-        主治医意見書確認書Entity.set申請日(申請日.toDateString());
+        主治医意見書確認書Entity.set認証者(認証者);
+        帳票固有情報.set文書番号(文書番号);
+        帳票固有情報.set発行日(作成日.toDateString());
+        帳票固有情報.set申請日(申請日.toDateString());
         RString 氏名 = RString.EMPTY;
         if (宛名情報 != null) {
             if (JuminShubetsu.日本人.getCode().equals(宛名情報.get住民種別().getCode())) {
                 氏名 = 宛名情報.get日本人氏名().getName().value();
-                主治医意見書確認書Entity.set氏名(氏名);
+                帳票固有情報.set氏名(氏名);
             } else if (JuminShubetsu.外国人.getCode().equals(宛名情報.get住民種別().getCode())) {
                 氏名 = 宛名情報.get外国人氏名().getName().value();
-                主治医意見書確認書Entity.set氏名(氏名);
+                帳票固有情報.set氏名(氏名);
             }
         }
         if (氏名.length() <= サーティ) {
-            主治医意見書確認書Entity.set氏名１(RString.EMPTY);
-            主治医意見書確認書Entity.set氏名２(RString.EMPTY);
+            帳票固有情報.set氏名１(RString.EMPTY);
+            帳票固有情報.set氏名２(RString.EMPTY);
         } else {
-            主治医意見書確認書Entity.set氏名１(氏名.substring(0, サーティ));
-            主治医意見書確認書Entity.set氏名２(氏名.substring(サーティ));
+            帳票固有情報.set氏名１(氏名.substring(0, サーティ));
+            帳票固有情報.set氏名２(氏名.substring(サーティ));
         }
-        主治医意見書確認書Entity.set被保険者番号(被保険者番号);
-        主治医意見書確認書Entity.set主治医意見書作成日(主治医意見書作成日.toDateString());
-        主治医意見書確認書Entity.set要介護認定の有効期間開始(認定期間開始日.toDateString());
-        主治医意見書確認書Entity.set要介護認定の有効期間終了(認定期間終了日.toDateString());
-        主治医意見書確認書Entity.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(日常生活自立度)
+        帳票固有情報.set被保険者番号(被保険者番号);
+        帳票固有情報.set主治医意見書作成日(主治医意見書作成日.toDateString());
+        帳票固有情報.set要介護認定の有効期間開始(認定期間開始日.toDateString());
+        帳票固有情報.set要介護認定の有効期間終了(認定期間終了日.toDateString());
+        帳票固有情報.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set尿失禁の発生可能性(new RString("はい").equals(尿失禁の有無) ? あり : なし);
+        帳票固有情報.set尿失禁の発生可能性(new RString("はい").equals(尿失禁の有無) ? あり : なし);
+        帳票固有情報.set年(対象年);
+        主治医意見書確認書Entity.set帳票固有情報(帳票固有情報);
         return 主治医意見書確認書Entity;
     }
 

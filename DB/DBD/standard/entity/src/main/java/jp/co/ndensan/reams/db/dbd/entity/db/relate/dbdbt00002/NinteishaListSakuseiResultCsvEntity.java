@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChohyoShutsuryokuJohoShutokuResultCsvEntity {
+public class NinteishaListSakuseiResultCsvEntity {
     @CsvField(order = 1, name = "連番")
     private RString 連番;
     @CsvField(order = 2, name = "被保険者番号")

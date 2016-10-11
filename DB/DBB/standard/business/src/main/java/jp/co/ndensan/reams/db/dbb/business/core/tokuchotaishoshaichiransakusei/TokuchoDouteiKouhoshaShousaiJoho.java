@@ -159,7 +159,7 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             }
             this.登録済年金情報_仮徴収基礎年金番号 = resultEntity.getDbt2001entity().getKariNenkinNo();
             this.登録済年金情報_仮徴収年金コード = resultEntity.getDbt2001entity().getKariNenkinCode();
-            this.登録済年金情報_捕捉月 = resultEntity.getDbt2001entity().getKariHosokuM();
+            this.登録済年金情報_仮徴収捕捉月 = resultEntity.getDbt2001entity().getKariHosokuM();
             this.登録済年金情報_本徴収基礎年金番号 = resultEntity.getDbt2001entity().getHonNenkinNo();
             this.登録済年金情報_本徴収年金コード = resultEntity.getDbt2001entity().getHonNenkinCode();
             this.登録済年金情報_本徴収捕捉月 = resultEntity.getDbt2001entity().getHonHosokuM();

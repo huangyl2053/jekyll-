@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoNewMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoNewEntity;
@@ -17,6 +18,14 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.ShoriDateKanriEntit
  * @reamsid_L DBD-1760-020 panxiaobo
  */
 public interface IJukyushaDaichoMainMapper {
+
+    /**
+     * 異動抽出台帳情報を取得。
+     *
+     * @param parameter IdoChushutsuDaishoParameter
+     * @return 異動抽出台帳リスト
+     */
+    List<IdoChushutsuDaichoEntity> get異動抽出台帳リスト(IdoChushutsuDaichoMybatisParameter parameter);
 
     /**
      * 新たな抽出対象リストを取得。

@@ -108,6 +108,7 @@
                 <if test="抽出期間To !=null and !抽出期間To.isEmpty()">
                 AND DbV2502."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間To}
                 </if>
+                ${出力順}
                 ) as D
     </sql>
     

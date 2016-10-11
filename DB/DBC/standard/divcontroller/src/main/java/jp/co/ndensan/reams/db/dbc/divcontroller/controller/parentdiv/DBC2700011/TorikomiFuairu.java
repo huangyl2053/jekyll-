@@ -58,6 +58,7 @@ public class TorikomiFuairu {
             FilesystemName filesystemName = new FilesystemName(共有ファイル名);
             SharedFileDescriptor sfd = SharedFile.defineSharedFile(filesystemName);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
+            SharedFile.deleteOldestEntry(sfd);
             SharedFile.copyToSharedFile(sfd, path, opts);
             SharedFile.copyToLocal(filesystemName, new FilesystemPath(Path.getTmpDirectoryPath()));
             filename = new RString(inFile.getName());

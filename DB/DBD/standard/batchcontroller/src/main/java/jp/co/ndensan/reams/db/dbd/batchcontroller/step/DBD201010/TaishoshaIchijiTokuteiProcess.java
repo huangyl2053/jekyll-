@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.HchiJinoSyouriCreateProcessParamter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.temptable.HchiJinoSyouriKeyTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.TaishoshaIchijiTokuteiProcessParamter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.temptable.TaishoshaIchijiTokuteiTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.temptable.TaisyoulyaYichiTetennTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -21,13 +21,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3980-030 x_youyj
  */
-public class HchiJinoSyouriCreateProcess extends BatchProcessBase<HchiJinoSyouriKeyTempTableEntity> {
+public class TaishoshaIchijiTokuteiProcess extends BatchProcessBase<TaishoshaIchijiTokuteiTempTableEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoulyagennmenn."
             + "IGennMennGennGakuTaiSyoulyaMapper.select減免減額対象者判定用ByKey");
 
-    HchiJinoSyouriCreateProcessParamter parameter;
+    TaishoshaIchijiTokuteiProcessParamter parameter;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
@@ -35,8 +35,7 @@ public class HchiJinoSyouriCreateProcess extends BatchProcessBase<HchiJinoSyouri
 
     @Override
     protected IBatchReader createReader() {
-        //SQLを使用、SQLの実行結果の類型はKyufuJisekiSanshoKeyTempTableEntityのリストです
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toHchiJinoSyouriCreateMybatisprmParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toTaishoshaIchijiTokuteiMybatisprmParamter());
     }
 
     @Override
@@ -46,8 +45,7 @@ public class HchiJinoSyouriCreateProcess extends BatchProcessBase<HchiJinoSyouri
     }
 
     @Override
-    protected void process(HchiJinoSyouriKeyTempTableEntity t) {
-        // 減免減額対象者判定用根拠作成対象者一時テーブル
+    protected void process(TaishoshaIchijiTokuteiTempTableEntity t) {
         TaisyoulyaYichiTetennTempTableEntity tempTableEntity = new TaisyoulyaYichiTetennTempTableEntity(t.get被保険者番号(), parameter.get基準日());
         tmpTableWriter.insert(tempTableEntity);
     }

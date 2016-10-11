@@ -391,12 +391,12 @@
      </select>
     
     <resultMap id="ResultMap_UpdTaishoSeitaiyinTemp4Entity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp4Entity" autoMapping="true">
-        <id column="T1.shotaiCode" />
-        <id column="T1.hihokenshaNo" />
-        <id column="T1.shikibetsuCode" />
-        <id column="TaishoSetaiin1.shotaiCode" />
-        <id column="TaishoSetaiin1.hihokenshaNo" />
-        <id column="TaishoSetaiin1.shikibetsuCode" />
+        <id column="shotaiCode" />
+        <id column="hihokenshaNo" />
+        <id column="shikibetsuCode" />
+        <id column="TaishoSetaiin1_shotaiCode" />
+        <id column="TaishoSetaiin1_hihokenshaNo" />
+        <id column="TaishoSetaiin1_shikibetsuCode" />
         <association property="対象世帯員1" resultMap="resultMap_TaishoSetaiinEntity"/>
         <association property="対象世帯員2" resultMap="resultMap_TaishoSetaiin2Entity"/>
     </resultMap>
@@ -546,8 +546,9 @@
      </select>
      
     <resultMap id="ResultMap_CreateTaishoSetaiyinEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.CreateTaishoSetaiyinEntity" autoMapping="true">
-        <id column="T2.shotaiCode" />
-        <id column="T2.shikibetsuCode" />
+        <id column="shotaiCode" />
+        <id column="hihokenshaNo" />
+        <id column="shikibetsuCode" />
         <association property="対象世帯員" resultMap="resultMap_TaishoSetaiinEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
@@ -631,5 +632,5 @@
         #{システム日付}
         )
     </insert>
-     
+    
 </mapper>

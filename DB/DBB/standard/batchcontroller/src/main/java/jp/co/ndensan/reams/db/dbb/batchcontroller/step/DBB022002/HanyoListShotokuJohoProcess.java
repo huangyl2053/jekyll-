@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistshotokujoho.HanyoListShotokuJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoEntity;
+import jp.co.ndensan.reams.db.dbb.service.core.hanyolistshotokujoho.DBB200034BreakerFieldsEnum;
 import jp.co.ndensan.reams.db.dbb.service.core.hanyolistshotokujoho.HanyoListShotokuJohoCsvEditor;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
@@ -23,8 +24,12 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -128,10 +133,19 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private FileSpoolManager manager;
     private YMDHMS システム日時;
     private RString eucFilePath;
+    private IOutputOrder 並び順;
     private Decimal 連番;
 
     @BatchWriter
     private CsvWriter<HanyoListShotokuJohoCsvEntity> eucCsvWriter;
+
+    @Override
+    protected void initialize() {
+        並び順 = get並び順(processParameter.get帳票ID(), new RString(processParameter.get出力順ID()));
+        RString 出力順 = MyBatisOrderByClauseCreator
+                .create(DBB200034BreakerFieldsEnum.class, 並び順);
+        processParameter.set出力順(出力順);
+    }
 
     @Override
     protected void beforeExecute() {
@@ -387,6 +401,15 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         } else {
             builder.append(課税取消FALSE);
         }
+    }
+
+    private IOutputOrder get並び順(ReportId 帳票ID, RString 出力順ID) {
+        if (RString.isNullOrEmpty(出力順ID)) {
+            return null;
+        }
+        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票ID, Long.parseLong(出力順ID.toString()));
+        return outputOrder;
     }
 
 }

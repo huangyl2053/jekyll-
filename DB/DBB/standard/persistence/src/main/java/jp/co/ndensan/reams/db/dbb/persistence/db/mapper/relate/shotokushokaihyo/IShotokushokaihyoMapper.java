@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokushokaihyo
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.JukyuusyaTyuushutuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.SaihaqkouTaishoupParameter;
-import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShikibetsuCodeListParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShotokuNendoParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.FukaKijunSetaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.HihokenshaDaichoEntity;
@@ -116,9 +115,16 @@ public interface IShotokushokaihyoMapper {
     /**
      * 所得照会候補者を削除します。
      *
-     * @param 識別コードparameter ShikibetsuCodeListParameter
+     * @param 処理年度 FlexibleYear
      */
-    void delete所得照会候補者(ShikibetsuCodeListParameter 識別コードparameter);
+    void delete所得照会候補者(FlexibleYear 処理年度);
+
+    /**
+     * 所得照会候補者を削除します。
+     *
+     * @param myBaticParameter ShotokuNendoParameter
+     */
+    void delete所得照会候補者1(ShotokuNendoParameter myBaticParameter);
 
     /**
      * 年度内有資格者抽出のメソッドです。

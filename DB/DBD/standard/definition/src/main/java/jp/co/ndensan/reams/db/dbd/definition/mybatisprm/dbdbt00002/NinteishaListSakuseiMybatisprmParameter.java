@@ -29,7 +29,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter implements IMyBatisParameter {
+public class NinteishaListSakuseiMybatisprmParameter implements IMyBatisParameter {
 
     private TargetList 対象リスト;
     private FlexibleDate 基準日;
@@ -70,7 +70,7 @@ public class ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter implements IMyBa
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param 出力順 出力順
      */
-    public ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter(
+    public NinteishaListSakuseiMybatisprmParameter(
             TargetList 対象リスト, FlexibleDate 基準日, SetaiHyoji 世帯表示,
             List<HihokenshaKeizaiJokyo> 世帯非課税等, RString psmShikibetsuTaisho, RString 出力順) {
         edit対象リスト(対象リスト);

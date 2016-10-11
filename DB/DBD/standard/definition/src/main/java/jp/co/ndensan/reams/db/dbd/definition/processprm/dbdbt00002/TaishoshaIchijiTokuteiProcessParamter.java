@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.HchiJinoSyouriCreateMybatisprmParamter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.TaishoshaIchijiTokuteiMybatisprmParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
@@ -22,15 +22,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HchiJinoSyouriCreateProcessParamter implements IBatchProcessParameter {
+public class TaishoshaIchijiTokuteiProcessParamter implements IBatchProcessParameter {
 
-    // 対象リスト
     private TargetList 対象リスト;
-    // 基準日
     private FlexibleDate 基準日;
-    // 旧措置区分
     private KyusochishaJukyushaKubun 旧措置区分;
-    // 受給者区分
     private JukyushaKubun2 受給者区分;
 
     /**
@@ -41,7 +37,7 @@ public class HchiJinoSyouriCreateProcessParamter implements IBatchProcessParamet
      * @param 旧措置区分 旧措置区分
      * @param 基準日 基準日
      */
-    public HchiJinoSyouriCreateProcessParamter(TargetList 対象リスト,
+    public TaishoshaIchijiTokuteiProcessParamter(TargetList 対象リスト,
             JukyushaKubun2 受給者区分, KyusochishaJukyushaKubun 旧措置区分, FlexibleDate 基準日) {
         this.対象リスト = 対象リスト;
         this.受給者区分 = 受給者区分;
@@ -52,10 +48,10 @@ public class HchiJinoSyouriCreateProcessParamter implements IBatchProcessParamet
     /**
      * 利用者負担額減免認定者リスト発行の引数を返します。
      *
-     * @return HchiJinoSyouriCreateMybatisprmParamter
+     * @return TaishoshaIchijiTokuteiMybatisprmParamter
      */
-    public HchiJinoSyouriCreateMybatisprmParamter toHchiJinoSyouriCreateMybatisprmParamter() {
-        return new HchiJinoSyouriCreateMybatisprmParamter(対象リスト, 受給者区分, 旧措置区分, 基準日);
+    public TaishoshaIchijiTokuteiMybatisprmParamter toTaishoshaIchijiTokuteiMybatisprmParamter() {
+        return new TaishoshaIchijiTokuteiMybatisprmParamter(対象リスト, 受給者区分, 旧措置区分, 基準日);
     }
 
 }

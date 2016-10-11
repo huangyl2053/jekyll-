@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChohyoShutsuryokuJohoShutokuResultEntity extends DbTableEntityBase<TaishoshaJohoTempTableEntity> implements IDbAccessable {
+public class NinteishaListSakuseiResultEntity extends DbTableEntityBase<TaishoshaJohoTempTableEntity> implements IDbAccessable {
     private HihokenshaNo 被保険者番号;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private RString 本人課税区分;
@@ -48,7 +48,6 @@ public class ChohyoShutsuryokuJohoShutokuResultEntity extends DbTableEntityBase<
     private FlexibleDate 認定情報の認定有効期間開始年月日;
     private FlexibleDate 認定情報の認定有効期間終了年月日;
     private FlexibleDate 帳票作成日時;
-    private RString 出力順;
     private RString 導入団体コード;
     private RString 導入団体名称;
     private RString 帳票ID;

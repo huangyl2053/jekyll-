@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter {
+public class TaishoshaIchijiTokuteiMybatisprmParamter implements IMyBatisParameter {
 
     private FlexibleDate 基準日;
     private boolean is認定者リスト = false;
@@ -45,7 +45,7 @@ public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter
      * @param 旧措置区分 旧措置区分
      * @param 基準日 基準日
      */
-    public HchiJinoSyouriCreateMybatisprmParamter(
+    public TaishoshaIchijiTokuteiMybatisprmParamter(
             TargetList 対象リスト, JukyushaKubun2 受給者区分,
             KyusochishaJukyushaKubun 旧措置区分, FlexibleDate 基準日) {
         this.基準日 = 基準日;
@@ -87,10 +87,10 @@ public class HchiJinoSyouriCreateMybatisprmParamter implements IMyBatisParameter
      * @param 受給者区分 受給者区分
      * @param 旧措置区分 旧措置区分
      * @param 基準日 基準日
-     * @return HchiJinoSyouriCreateMybatisprmParamter
+     * @return TaishoshaIchijiTokuteiMybatisprmParamter
      */
-    public HchiJinoSyouriCreateMybatisprmParamter ceactTestParmeter(
+    public TaishoshaIchijiTokuteiMybatisprmParamter ceactTestParmeter(
             TargetList 対象リスト, JukyushaKubun2 受給者区分, KyusochishaJukyushaKubun 旧措置区分, FlexibleDate 基準日) {
-        return new HchiJinoSyouriCreateMybatisprmParamter(対象リスト, 受給者区分, 旧措置区分, 基準日);
+        return new TaishoshaIchijiTokuteiMybatisprmParamter(対象リスト, 受給者区分, 旧措置区分, 基準日);
     }
 }

@@ -29,7 +29,6 @@ public class IkenshoKakuninshoHandler {
     private static final RString あり = new RString("あり");
     private static final RString なし = new RString("なし");
     private static final int NOM_0 = 0;
-    private static final int NOM_1 = 1;
 
     /**
      * コンストラクタです。
@@ -116,6 +115,7 @@ public class IkenshoKakuninshoHandler {
     }
 
     /**
+     * 主治医意見書確認書を設置する
      *
      * @param taishoshaKey TaishoshaKey
      * @return ShugiiIkenshoKakuninshoEntity

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -41,7 +42,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
     private final RString 処理枝番;
     private final RString 年度;
     private final RString 基準年月日;
-    private final RString 基準日時;
+    private final YMDHMS 基準日時;
     private static final int INDEX = 8;
     private static final RString 市町村区分_構成市町村 = new RString("1");
     private static final RString 市町村区分_旧市町村 = new RString("1");
@@ -61,7 +62,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
             RString 処理枝番,
             RString 年度,
             RString 基準年月日,
-            RString 基準日時) {
+            YMDHMS 基準日時) {
         this.集計番号 = 集計番号;
         this.決定年月 = 決定年月;
         this.プリントコントロール区分 = プリントコントロール区分;
@@ -98,7 +99,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
         return new JigyoHokokuGeppoIppanShokanMybatisParamter(集計番号,
                 決定年月, RString.EMPTY, 旧市町村コードリスト, null,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, null, null, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now());
     }
 
     /**
@@ -131,7 +132,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
         return new JigyoHokokuGeppoIppanShokanMybatisParamter(Code.EMPTY,
                 決定年月, RString.EMPTY, 旧市町村コードリスト, 市町村コードリスト,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, get集計番号List(), get表番号List(), RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now());
     }
 
     /**
@@ -164,7 +165,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
         return new JigyoHokokuGeppoIppanShokanMybatisParamter(Code.EMPTY,
                 決定年月, RString.EMPTY, 旧市町村コードリスト, 市町村コードリスト,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, null, null, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now());
     }
 
     /**
@@ -197,7 +198,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
         return new JigyoHokokuGeppoIppanShokanMybatisParamter(Code.EMPTY,
                 決定年月, RString.EMPTY, null, 市町村コードList,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, 集計番号List, 表番号List, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now());
     }
 
     /**
@@ -231,7 +232,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
         return new JigyoHokokuGeppoIppanShokanMybatisParamter(Code.EMPTY,
                 決定年月, RString.EMPTY, null, 市町村コードList,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, 集計番号List, 表番号List, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now());
     }
 
     /**
@@ -259,7 +260,7 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
             RString プリントコントロール区分,
             RString 年度,
             RString 作成日時,
-            RString 処理日時) {
+            YMDHMS 処理日時) {
         List<RString> 市町村コードリスト = new ArrayList<>();
         市町村コードリスト.add(市町村コード);
         if (市町村区分_構成市町村.equals(構成市町村区分)) {
@@ -269,16 +270,16 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
             市町村コードリスト.addAll(旧市町村コードリスト);
         }
         RString 基準年月日 = RString.EMPTY;
-        RString 基準日時 = RString.EMPTY;
+        YMDHMS 基準日時 = YMDHMS.now();
         if (PrintControlKubun.集計のみ.getコード().equals(プリントコントロール区分)
                 || PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
-            if (!RString.isNullOrEmpty(処理日時)) {
-                基準年月日 = 処理日時.substring(0, INDEX);
+            if (処理日時 != null) {
+                基準年月日 = 処理日時.getDate().toDateString();
                 基準日時 = 処理日時;
             }
         } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分) && !RString.isNullOrEmpty(作成日時)) {
             基準年月日 = 作成日時.substring(0, INDEX);
-            基準日時 = 作成日時;
+            基準日時 = new YMDHMS(作成日時);
         }
         RString 処理枝番 = RString.EMPTY;
         if (!RString.isNullOrEmpty(決定年月)) {

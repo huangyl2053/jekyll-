@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Hihoke
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.NinteishaListSakuseiMybatisprmParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -29,34 +29,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProcessParameter {
+public class NinteishaListSakuseiProcessParameter implements IBatchProcessParameter {
 
-    // 対象リスト
     private TargetList 対象リスト;
-    // 基準日
     private FlexibleDate 基準日;
-    // 所得年度
     private FlexibleYear 所得年度;
-    // 旧措置区分
     private KyusochishaJukyushaKubun 旧措置区分;
-    // 世帯表示
     private SetaiHyoji 世帯表示;
-    // 受給者区分
     private JukyushaKubun2 受給者区分;
-    // 世帯非課税等
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
-    // CSV出力設定
     private List<CSVSettings> csv出力設定;
-    // 改頁出力順ID
     private Long 改頁出力順ID;
-    // 帳票ID
     private RString 帳票ID;
-
-    private FlexibleDate 帳票作成日時;
-
     private boolean is認定者リスト = false;
     private boolean is該当者リスト = false;
-
     private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
 
@@ -74,7 +60,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
      * @param 改頁出力順ID 改頁出力順ID
      * @param 帳票ID 帳票ID
      */
-    public ChohyoShutsuryokuJohoShutokuProcessParameter(TargetList 対象リスト,
+    public NinteishaListSakuseiProcessParameter(TargetList 対象リスト,
             FlexibleDate 基準日, FlexibleYear 所得年度, KyusochishaJukyushaKubun 旧措置区分, SetaiHyoji 世帯表示,
             JukyushaKubun2 受給者区分, List<HihokenshaKeizaiJokyo> 世帯非課税等, List<CSVSettings> csv出力設定,
             Long 改頁出力順ID, RString 帳票ID) {
@@ -88,7 +74,6 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
         this.csv出力設定 = csv出力設定;
         this.改頁出力順ID = 改頁出力順ID;
         this.帳票ID = 帳票ID;
-        this.帳票作成日時 = FlexibleDate.getNowDate();
     }
 
     /**
@@ -96,7 +81,7 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
      *
      * @param 対象リスト 対象リスト
      */
-    public ChohyoShutsuryokuJohoShutokuProcessParameter(TargetList 対象リスト) {
+    public NinteishaListSakuseiProcessParameter(TargetList 対象リスト) {
 
         if (一.equals(対象リスト.getコード())) {
             is認定者リスト = true;
@@ -110,10 +95,10 @@ public class ChohyoShutsuryokuJohoShutokuProcessParameter implements IBatchProce
      *
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param 出力順 出力順
-     * @return ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter
+     * @return NinteishaListSakuseiMybatisprmParameter
      */
-    public ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter toChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter(
+    public NinteishaListSakuseiMybatisprmParameter toNinteishaListSakuseiMybatisprmParameter(
             RString psmShikibetsuTaisho, RString 出力順) {
-        return new ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter(対象リスト, 基準日, 世帯表示, 世帯非課税等, psmShikibetsuTaisho, 出力順);
+        return new NinteishaListSakuseiMybatisprmParameter(対象リスト, 基準日, 世帯表示, 世帯非課税等, psmShikibetsuTaisho, 出力順);
     }
 }

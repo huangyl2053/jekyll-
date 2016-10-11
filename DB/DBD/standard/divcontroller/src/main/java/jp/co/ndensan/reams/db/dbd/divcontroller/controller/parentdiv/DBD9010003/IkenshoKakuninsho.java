@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010003.Ike
 import jp.co.ndensan.reams.db.dbd.service.core.basic.IryohiKojoManager;
 import jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei.IryoHiKojoKakuninSinsei;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100030.ShujiiIkenshoKakuninshoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -32,15 +33,19 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -88,7 +93,7 @@ public class IkenshoKakuninsho {
             KeyValueDataSource data = new KeyValueDataSource();
             RYear 控除対象年 = new RYear(医療費控除.get控除対象年());
             data.setKey(控除対象年.toDateString());
-            data.setValue(控除対象年.wareki().toDateString());
+            data.setValue(控除対象年.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).toDateString());
             年度DDLデータ.add(data);
         }
         div.getPanelShosaiEria().getDdlTaishonen().setDataSource(年度DDLデータ);
@@ -129,12 +134,24 @@ public class IkenshoKakuninsho {
     }
 
     /**
+     * 主治医意見書確認書画面にて「終了するボタン押下時(onClick)のイベントハンドラです。
+     *
+     * @param div IkenshoKakuninshoDiv
+     * @return ResponseData<IkenshoKakuninshoDiv>
+     */
+    public ResponseData<IkenshoKakuninshoDiv> onClick_btnshuryo(IkenshoKakuninshoDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        RealInitialLocker.release(create排他キー(taishoshaKey));
+        return ResponseData.of(div).forwardWithEventName(DBD9010003TransitionEventName.終了).respond();
+    }
+
+    /**
      * 主治医意見書確認書画面にて発行するボタン押下時(onClick)のチェックです。
      *
      * @param div IkenshoKakuninshoDiv
      * @return ResponseData<IkenshoKakuninshoDiv>
      */
-    public ResponseData<IkenshoKakuninshoDiv> onCheck_btnReportPublishi(IkenshoKakuninshoDiv div) {
+    public ResponseData<IkenshoKakuninshoDiv> onCheck_btnReportPublish(IkenshoKakuninshoDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidateHandler(div).発行確認チェック(pairs);
         if (pairs.iterator().hasNext()) {
@@ -156,23 +173,37 @@ public class IkenshoKakuninsho {
     }
 
     /**
+     * 主治医意見書確認書画面にて発行するボタン押下時(onClick)のイベントハンドラです。
      *
      * @param div IkenshoKakuninshoDiv
      * @return ResponseData<IkenshoKakuninshoDiv>
      */
-    public ResponseData<IkenshoKakuninshoDiv> onClick_btnReportPublishi(IkenshoKakuninshoDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(IkenshoKakuninshoDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShujiiIkenshoKakuninshoPrintService service = new ShujiiIkenshoKakuninshoPrintService();
-        service.printSingle(getHandler(div).create主治医意見書確認書Entity(taishoshaKey));
+        SourceDataCollection source = service.printSingle(getHandler(div).create主治医意見書確認書Entity(taishoshaKey));
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
+        List<IryohiKojoEntityResult> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        IryohiKojoEntityResult entityresult = new IryohiKojoEntityResult();
+        for (IryohiKojoEntityResult result : 医療費控除情報リスト) {
+            if (div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey().equals(result.get控除対象年())) {
+                entityresult = result;
+            }
+        }
+        IryohiKojo 医療費控除 = new IryohiKojo(new HihokenshaNo(entityresult.get被保険者番号()), new FlexibleYear(entityresult.get控除対象年()),
+                entityresult.getデータ区分());
         IryohiKojoManager manager = new IryohiKojoManager();
-        IryohiKojo 医療費控除 = manager.get医療費控除(taishoshaKey.get被保険者番号(),
-                new FlexibleYear(div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey()),
-                div.getHdndatakubun());
         IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
         builder.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
-        manager.save医療費控除(builder.build());
-        return ResponseData.of(div).respond();
+        builder.set主治医意見書受領年月日(entityresult.get主治医意見書受領年月日());
+        builder.set尿失禁の発生(entityresult.is尿失禁の有無());
+        builder.set日常生活自立度(entityresult.get日常生活自立度());
+        builder.set申請年月日(entityresult.get申請年月日());
+        builder.set登録年月日(entityresult.get登録年月日());
+        builder.set認定有効期間終了年月日(entityresult.get認定有効期間終了年月日());
+        builder.set認定有効期間開始年月日(entityresult.get認定有効期間開始年月日());
+        manager.save医療費控除(builder.build().unChanged().modifiedModel());
+        return ResponseData.of(source).respond();
     }
 
     /**

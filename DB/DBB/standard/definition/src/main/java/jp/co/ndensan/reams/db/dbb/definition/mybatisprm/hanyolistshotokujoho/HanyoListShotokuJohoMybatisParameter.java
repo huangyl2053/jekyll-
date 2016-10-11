@@ -29,6 +29,7 @@ public class HanyoListShotokuJohoMybatisParameter extends UaFt200FindShikibetsuT
     private final ReportId 帳票ID;
     private final AtenaSelectBatchParameter 宛名抽出条件;
     private final long 出力順ID;
+    private final RString 出力順;
     private final RString 出力項目ID;
     private final boolean 項目名付加;
     private final boolean 連番付加;
@@ -56,11 +57,12 @@ public class HanyoListShotokuJohoMybatisParameter extends UaFt200FindShikibetsuT
      * @param 住民税減免前後表示区分 RString
      * @param 課税区分減免前s List<RString>
      * @param 課税区分減免後s List<RString>
+     * @param 出力順 RString
      * @param searchKey IShikibetsuTaishoPSMSearchKey
      */
     public HanyoListShotokuJohoMybatisParameter(ReportId 帳票ID, AtenaSelectBatchParameter 宛名抽出条件, long 出力順ID,
             RString 出力項目ID, boolean 項目名付加, boolean 連番付加, boolean 日付編集, FlexibleYear 賦課年度, YMDHMS 抽出期間From,
-            YMDHMS 抽出期間To, RString 住民税減免前後表示区分, List<RString> 課税区分減免前s, List<RString> 課税区分減免後s,
+            YMDHMS 抽出期間To, RString 住民税減免前後表示区分, List<RString> 課税区分減免前s, List<RString> 課税区分減免後s, RString 出力順,
             IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
         this.帳票ID = 帳票ID;
@@ -76,6 +78,7 @@ public class HanyoListShotokuJohoMybatisParameter extends UaFt200FindShikibetsuT
         this.住民税減免前後表示区分 = 住民税減免前後表示区分;
         this.課税区分減免前s = 課税区分減免前s;
         this.課税区分減免後s = 課税区分減免後s;
+        this.出力順 = 出力順;
     }
 
 }

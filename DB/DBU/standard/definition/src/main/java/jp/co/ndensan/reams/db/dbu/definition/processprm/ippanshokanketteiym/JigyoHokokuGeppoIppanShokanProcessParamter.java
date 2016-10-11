@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippanshokanketteiym.JigyoHokokuGeppoIppanShokanMybatisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
     private final RString 報告年月;
     private final RString 年度;
     private final RString 作成日時;
-    private final RString 処理日時;
+    private final YMDHMS 処理日時;
     private final RString 給付集計区分;
     private final RString 市町村コード;
     private final RString 構成市町村区分;
@@ -70,7 +71,7 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
             RString 報告年月,
             RString 年度,
             RString 作成日時,
-            RString 処理日時,
+            YMDHMS 処理日時,
             RString 給付集計区分,
             RString 市町村コード,
             RString 構成市町村区分,
@@ -152,7 +153,7 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
      */
     public JigyoHokokuGeppoIppanShokanMybatisParamter tocreate事業報告統計データ_12_13MybitisParamter() {
         return JigyoHokokuGeppoIppanShokanMybatisParamter.create事業報告統計データ_12_13Param(決定年月,
-                旧市町村コードList);
+                プリントコントロール区分, 市町村コード, 過去集計分市町村コードList);
     }
 
     /**
@@ -162,6 +163,6 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
      */
     public JigyoHokokuGeppoIppanShokanMybatisParamter tocreate事業報告統計データ_14MybitisParamter() {
         return JigyoHokokuGeppoIppanShokanMybatisParamter.create事業報告統計データ_14Param(決定年月,
-                旧市町村コードList);
+                プリントコントロール区分, 市町村コード, 過去集計分市町村コードList);
     }
 }
