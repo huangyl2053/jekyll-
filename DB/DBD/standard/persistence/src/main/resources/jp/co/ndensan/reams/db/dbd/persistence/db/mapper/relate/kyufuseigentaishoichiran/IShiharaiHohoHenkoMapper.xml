@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-4300-030 liuwei2 -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufuseigentaishoichiran.IShiharaiHohoHenkoMapper">
+    <select id="get支払方法管理情報"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd210010.DBD210010MybatisParameter"
+            resultMap="ResultMap_ShiharaiHohoHenkoEntity" fetchSize="500" resultOrdered="true">
+        select  temp.*,
+        (case when temp."torokuKubun" = #{支払方法変更登録区分_2号予告登録者} then '1'
+        when temp."torokuKubun" = #{支払方法変更登録区分_1号給付額減額登録} then '5'
+        when temp."torokuKubun" = #{支払方法変更登録区分_1号償還払い化登録}
+        AND NOT EXISTS(
+        SELECT *
+        from  rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS A
+        where A."shoKisaiHokenshaNo" = temp."shoKisaiHokenshaNo"
+        AND A."hihokenshaNo" = temp."hihokenshaNo"
+        AND A."kanriKubun" = temp."kanriKubun"
+        AND A."rirekiNo" = temp."rirekiNo"
+        )
+        then '2'
+        when temp."torokuKubun" = #{支払方法変更登録区分_1号償還払い化登録}
+        AND (
+        SELECT  count(*)
+        from  rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS A
+        where A."shoKisaiHokenshaNo" = temp."shoKisaiHokenshaNo"
+        AND A."hihokenshaNo" = temp."hihokenshaNo"
+        AND A."kanriKubun" = temp."kanriKubun"
+        AND A."rirekiNo" = temp."rirekiNo"
+        AND A."sashitomeKojoNo" = ''
+        ) <![CDATA[>=]]> 1
+        then '3'
+
+        when temp."torokuKubun" = #{支払方法変更登録区分_1号償還払い化登録}
+        AND (
+        SELECT  count(*)
+        from  rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS A
+        where A."shoKisaiHokenshaNo" = temp."shoKisaiHokenshaNo"
+        AND A."hihokenshaNo" = temp."hihokenshaNo"
+        AND A."kanriKubun" = temp."kanriKubun"
+        AND A."rirekiNo" = temp."rirekiNo"
+        AND A."sashitomeKojoNo" != ''
+        ) <![CDATA[>=]]> 1
+        then '4'
+
+        END)as flag,
+        (case WHEN (
+        SELECT  count(*)
+        from  rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS A
+        where A."shoKisaiHokenshaNo" = temp."shoKisaiHokenshaNo"
+        AND A."hihokenshaNo" = temp."hihokenshaNo"
+        AND A."kanriKubun" = temp."kanriKubun"
+        AND A."rirekiNo" = temp."rirekiNo"
+        ) <![CDATA[>=]]> 1
+        then '1'
+        ELSE '0' END)as flag1
+        from ( SELECT
+        T4021."hihokenshaNo",
+        T4021."kanriKubun",
+        T4021."rirekiNo",
+        T4021."torokuKubun",
+        T4021."tekiyoKaishiYMD",
+        T4021."tekiyoShuryoYMD",
+        T4021."shuryoKubun",
+        T4021."yokoku_TorokuYMD",
+        T4021."sashitome_IraiJuriYMD",
+        T4021."yokoku_TsuchiHakkoYMD",
+        T4021."bemmei_TeishutsuYMD",
+        T4021."bemmei_UketsukeYMD",
+        T4021."bemmei_RiyuCode",
+        T4021."bemmei_ShinsaKetteiYMD",
+        T4021."bemmei_ShinsaKekkaKubun",
+        T4021."shokan_KetteiYMD",
+        T4021."shokan_TsuchiHakkoYMD",
+        T4021."hihokenshaShoTeishutsuYMD",
+        T4021."gemmen_KetteiYMD",
+        T4021."gemmen_TsuchiHakkoYMD",
+        T4021."kyufuRitsu",
+        T4021."shuryoShinsei_UketsukeYMD",
+        T4021."shuryoShinsei_YMD",
+        T4021."shuryoShinsei_RiyuCode",
+        T4021."shuryoShinsei_ShinsaKetteiYMD",
+        T4021."shuryoShinsei_ShinsaKekkaKubun",
+        T4021."shoKisaiHokenshaNo",
+
+
+        T4024."sashitome_KetteiYMD",
+        T4024."sashitome_KaijoYMD",
+        T4024."kojo_KetteiYMD",
+
+        T4025."choshukenShometsuKikan",
+        T4025."nofusumiKikan",
+        T4025."nofusumiGengakuKikan",
+        T4025."kakutei_GengakuKaishiYMD",
+        T4025."kakutei_GengakuShuryoYMD",
+
+        V1001."shikibetsuCode",
+        V1001."shichosonCode",
+        V1001."shikakuShutokuYMD",
+        V1001."shikakuSoshitsuYMD",
+        V1001."koikinaiTokureiSochimotoShichosonCode",
+
+        V4001."ninteiYMD",
+        V4001."yokaigoJotaiKubunCode",
+
+
+
+        V4001."ninteiYukoKikanKaishiYMD",
+        V4001."ninteiYukoKikanShuryoYMD",
+        V4001."ninteiYMD",
+
+
+        PSM."meisho",
+        PSM."kanaMeisho",
+        PSM."seinengappiYMD",
+        PSM."seibetsuCode",
+        PSM."yubinNo",
+        PSM."zenkokuJushoCode",
+        PSM."gyoseikuCode",
+        PSM."setaiCode",
+        PSM."jusho",
+        PSM."banchi",
+        PSM."katagaki",
+        PSM."choikiCode"
+        FROM rgdb."DbT4021ShiharaiHohoHenko" AS T4021
+        LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS V4001
+        ON V4001."hihokenshaNo" = T4021."hihokenshaNo"
+        AND V4001."rirekiNo" = (
+        SELECT MAX("rirekiNo")
+        FROM rgdb."DbV4001JukyushaDaicho" AS V4001
+        WHERE V4001."hihokenshaNo" = T4021."hihokenshaNo"
+        )
+        LEFT JOIN
+        rgdb."DbT1001HihokenshaDaicho" AS V1001
+        ON V1001."hihokenshaNo" = T4021."hihokenshaNo"
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS PSM
+        ON PSM."shikibetsuCode" = V1001."shikibetsuCode"
+
+        LEFT JOIN
+        rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS T4024
+        ON T4024."shoKisaiHokenshaNo" = T4021."shoKisaiHokenshaNo"
+        AND T4024."hihokenshaNo" = T4021."hihokenshaNo"
+        AND T4024."kanriKubun" = T4021."kanriKubun"
+        AND T4024."rirekiNo" = T4021."rirekiNo"
+
+        LEFT JOIN
+        rgdb."DbT4025ShiharaiHohoHenkoGengaku" AS T4025
+        ON T4025."shoKisaiHokenshaNo" = T4021."shoKisaiHokenshaNo"
+        AND  T4025."hihokenshaNo" = T4021."hihokenshaNo"
+        AND  T4025."kanriKubun" = T4021."kanriKubun"
+        AND  T4025."rirekiNo" = T4021."rirekiNo"
+        AND  T4025."kanriKubun" = #{支払方法変更管理区分}
+
+        WHERE
+        1=1
+        <if test="is管理区分_1 || is管理区分_2 || is管理区分_3">
+            AND (
+            <if test="is管理区分_1">
+                T4021."kanriKubun" = '1'
+                <if test="is管理区分_2">
+                    OR T4021."kanriKubun" = '2'
+                </if>
+                <if test="is管理区分_3">
+                    OR T4021."kanriKubun" = '3'
+                </if>
+            </if>
+            <if test="!is管理区分_1 and is管理区分_2">
+                T4021."kanriKubun" = '2'
+                <if test="is管理区分_3">
+                    OR T4021."kanriKubun" = '3'
+                </if>
+            </if>
+            <if test="!is管理区分_1 and !is管理区分_2">
+                T4021."kanriKubun" = '3'
+            </if>
+            )
+        </if>
+        <if test="is登録区分_01 || is登録区分_02 || is登録区分_11 || is登録区分_12 || is登録区分_21">
+            AND (
+            <if test="is登録区分_01">
+                T4021."torokuKubun" = '01'
+                <if test="is登録区分_02">
+                    OR T4021."torokuKubun" = '02'
+                </if>
+                <if test="is登録区分_11">
+                    OR T4021."torokuKubun" = '11'
+                </if>
+                <if test="is登録区分_12">
+                    OR T4021."torokuKubun" = '12'
+                </if>
+                <if test="is登録区分_21">
+                    OR T4021."torokuKubun" = '21'
+                </if>
+            </if>
+            <if test="!is登録区分_01 and is登録区分_02 ">
+                T4021."torokuKubun" = '02'
+                <if test="is登録区分_11">
+                    OR T4021."torokuKubun" = '11'
+                </if>
+                <if test="is登録区分_12">
+                    OR T4021."torokuKubun" = '12'
+                </if>
+                <if test="is登録区分_21">
+                    OR T4021."torokuKubun" = '21'
+                </if>
+            </if>
+            <if test="!is登録区分_01 and !is登録区分_02  and is登録区分_11">
+                T4021."torokuKubun" = '11'
+                <if test="is登録区分_12">
+                    OR T4021."torokuKubun" = '12'
+                </if>
+                <if test="is登録区分_21">
+                    OR T4021."torokuKubun" = '21'
+                </if>
+            </if>
+            <if test="!is登録区分_01 and !is登録区分_02  and !is登録区分_11 and is登録区分_12">
+                T4021."torokuKubun" = '12'
+                <if test="is登録区分_21">
+                    OR T4021."torokuKubun" = '21'
+                </if>
+            </if>
+            <if test="!is登録区分_01 and !is登録区分_02  and !is登録区分_11 and !is登録区分_12">
+                T4021."torokuKubun" = '21'
+            </if>
+            )
+        </if>
+        <if test="is終了区分_無条件">
+            AND 1=1
+        </if>
+        <if test="is終了区分_空白">
+            AND  T4021."shuryoKubun" IS NULL
+        </if>
+        <if test="is終了区分_空白以外">
+            AND  T4021."shuryoKubun" IS  NOT NULL
+        </if>
+        <if test="is終了区分_二重">
+            AND ((  T4021."shuryoKubun" IS NULL AND (#{システム日付} <![CDATA[<]]> T4021."tekiyoKaishiYMD"
+            OR  T4021."tekiyoShuryoYMD"  <![CDATA[<]]> #{システム日付}))
+            OR ( T4021."shuryoKubun" IS  NOT NULL)
+            )
+        </if>
+
+        <if test="is他の条件_1">
+            AND NOT EXISTS(
+            SELECT *
+            FROM rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS T4024
+            WHERE
+            T4024."hihokenshaNo" = T4021."hihokenshaNo"
+            AND  T4024."rirekiNo" = T4021."rirekiNo"
+            AND  T4024."shoKisaiHokenshaNo" = T4021."shoKisaiHokenshaNo"
+            AND  T4024."kanriKubun" = T4021."kanriKubun"
+            )
+        </if>
+        <if test="is他の条件_2 and is終了区分_無条件">
+            AND EXISTS(
+            SELECT *
+            FROM rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS T4024
+            WHERE
+            T4024."hihokenshaNo" = T4021."hihokenshaNo"
+            AND  T4024."rirekiNo" = T4021."rirekiNo"
+            AND  T4024."shoKisaiHokenshaNo" = T4021."shoKisaiHokenshaNo"
+            AND  T4024."kanriKubun" = T4021."kanriKubun"
+            AND  T4024."johoBunruiKubun" = '1'
+            AND  T4024."sashitomeKojoNo" = ''
+            )
+        </if>
+        <if test="is他の条件_2_差止登録">
+            AND EXISTS(
+            SELECT *
+            FROM rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS T4024
+            WHERE
+            T4024."hihokenshaNo" = T4021."hihokenshaNo"
+            AND  T4024."rirekiNo" = T4021."rirekiNo"
+            AND  T4024."shoKisaiHokenshaNo" = T4021."shoKisaiHokenshaNo"
+            AND  T4024."kanriKubun" = T4021."kanriKubun"
+            AND  T4024."johoBunruiKubun" = '1'
+            AND  T4024."sashitomeKojoNo" = ''
+            AND  (select COUNT(*) from  rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS A
+            where A."shoKisaiHokenshaNo" = T4024."shoKisaiHokenshaNo"
+            AND A."hihokenshaNo" = T4024."hihokenshaNo"
+            AND A."kanriKubun" = T4024."kanriKubun"
+            AND A."rirekiNo" = T4024."rirekiNo"
+            AND A."johoBunruiKubun" = T4024."johoBunruiKubun"
+            AND A."renNo" = T4024."renNo"
+            AND A."johoBunruiKubun" = '1'
+            AND A."sashitomeKojoJotaiKubun" = '01') >= 1
+            )
+        </if>
+        <if test="is他の条件_2_差止解除">
+            AND EXISTS(
+            SELECT *
+            FROM rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS T4024
+            WHERE
+            T4024."hihokenshaNo" = T4021."hihokenshaNo"
+            AND  T4024."rirekiNo" = T4021."rirekiNo"
+            AND  T4024."shoKisaiHokenshaNo" = T4021."shoKisaiHokenshaNo"
+            AND  T4024."kanriKubun" = T4021."kanriKubun"
+            AND  T4024."johoBunruiKubun" = '1'
+            AND  T4024."sashitomeKojoNo" = ''
+            AND  T4024."sashitomeKojoJotaiKubun" = '99'
+            )
+
+        </if>
+
+        <if test="is他の条件_3">
+            AND EXISTS(
+            SELECT *
+            FROM rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS T4024
+            WHERE
+            T4024."hihokenshaNo" = T4021."hihokenshaNo"
+            AND  T4024."rirekiNo" = T4021."rirekiNo"
+            AND  T4024."shoKisaiHokenshaNo" = T4021."shoKisaiHokenshaNo"
+            AND  T4024."kanriKubun" = T4021."kanriKubun"
+            AND  T4024."johoBunruiKubun" = '1'
+            AND  (select COUNT(*) from  rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS A
+            where A."shoKisaiHokenshaNo" = T4024."shoKisaiHokenshaNo"
+            AND A."hihokenshaNo" = T4024."hihokenshaNo"
+            AND A."kanriKubun" = T4024."kanriKubun"
+            AND A."rirekiNo" = T4024."rirekiNo"
+            AND A."johoBunruiKubun" = T4024."johoBunruiKubun"
+            AND A."renNo" = T4024."renNo"
+            AND A."johoBunruiKubun" = '1'
+            AND  T4024."sashitomeKojoNo" = ''
+            ) >= 1
+            )
+        </if>
+        <if test="is他の条件_システム日付期間内">
+            AND T4021."tekiyoKaishiYMD" <![CDATA[<=]]> #{システム日付})
+            AND  #{システム日付} <![CDATA[<=]]> T4021."tekiyoShuryoYMD"
+        </if>)as temp
+
+
+    </select>
+
+    <resultMap id="ResultMap_ShiharaiHohoHenkoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd210010.ShiharaiHohoHenkoEntity" autoMapping="true">
+
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="管理区分" column="kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="履歴番号" column="rirekiNo"/>
+        <result property="登録区分" column="torokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用開始年月日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用終了年月日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了区分" column="shuryoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="予告登録年月日" column="yokoku_TorokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="差止依頼書受理年月日" column="sashitome_IraiJuriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="予告通知書発行年月日" column="yokoku_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明書提出期限" column="bemmei_TeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明書受付年月日" column="bemmei_UketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明理由コード" column="bemmei_RiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="弁明審査決定年月日" column="bemmei_ShinsaKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明審査結果区分" column="bemmei_ShinsaKekkaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="償還払化決定年月日" column="shokan_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="償還払化通知書発行年月日" column="shokan_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="被保険者証提出期限" column="hihokenshaShoTeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+        <result property="減額決定年月日" column="gemmen_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="減額通知書発行年月日" column="gemmen_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="給付率" column="kyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler" />
+        <result property="終了申請書受付年月日" column="shuryoShinsei_UketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了申請年月日" column="shuryoShinsei_YMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了申請理由コード" column="shuryoShinsei_RiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="終了申請審査決定年月日" column="shuryoShinsei_ShinsaKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了申請審査結果区分" column="shuryoShinsei_ShinsaKekkaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+
+        <result property="差止決定年月日" column="sashitome_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="差止解除年月日" column="sashitome_KaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="控除決定年月日" column="kojo_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="資格取得年月日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失年月日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+
+        <result property="認定年月日" column="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+
+
+
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+        <result property="徴収権消滅期間" column="choshukenShometsuKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="納付済期間" column="nofusumiKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="納付済減額期間" column="nofusumiGengakuKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="確定減額期間開始年月日" column="kakutei_GengakuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="確定減額期間終了年月日" column="kakutei_GengakuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+
+
+        <result property="名称" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="カナ名称" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="性別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="全国住所コード" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
+        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
+        <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="番地" column="banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="方書" column="katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="町域コード" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler" />
+        <result property="flag" column="flag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="flag1" column="flag1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+
+    </resultMap>
+
+    <select id="get滞納状況情報"
+            resultMap="ResultMap_TainouJokyoEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        T4022."hihokenshaNo",
+        T4022."kanriKubun",
+        T4022."rirekiNo",
+        T4022."tainoHanteiKubun",
+        T4022."tsuchishoNo",
+        SUM(T4022."tainoGaku") AS shukeiainougaku
+        FROM rgdb."DbT4022ShiharaiHohoHenkoTaino"  AS T4022
+
+        INNER JOIN "shiharaiHouhouKanriHitotokiTemp" AS C
+        ON T4022."kanriKubun" = C."kanriKubun"
+        AND T4022."hihokenshaNo" = C."hihokenshaNo"
+        AND T4022."rirekiNo" = C."rirekiNo"
+        AND T4022."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
+        AND T4022."tainoHanteiKubun" = C."flag"
+
+        WHERE T4022."kanno_MinoKubun" = '3'
+        AND (T4022."taishoKanriKubun" = '' OR T4022."taishoKanriKubun" IS NULL)
+        AND T4022."Tokucho_fuchoKubun" = '2'
+        GROUP BY
+        T4022."hihokenshaNo",
+        T4022."kanriKubun",
+        T4022."rirekiNo",
+        T4022."tsuchishoNo",
+        T4022."tainoHanteiKubun"
+    </select>
+    <resultMap id="ResultMap_TainouJokyoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd210010.TainouJokyoEntity" autoMapping="true">
+
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="管理区分" column="kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="履歴番号" column="rirekiNo"/>
+        <result property="滞納判定区分" column="tainoHanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="通知書番号" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="集計滞納額" column="shukeiainougaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    </resultMap>
+</mapper>
