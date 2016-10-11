@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaList
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.SeteiYouEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd00002.RiyoshaFutangakuGemmenGaitoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
@@ -198,10 +199,12 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             PersonalData personalData = PersonalData.of(kojin.get識別コード(), expandedInformations);
             personalDataList.add(personalData);
         } else {
-            if (t.get世帯員Entity().getPsmEntity() != null) {
-                IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員Entity().getPsmEntity());
-                PersonalData personalData = PersonalData.of(kojin.get識別コード());
-                personalDataList.add(personalData);
+            if (t.get世帯員リスト() != null) {
+                for (SeteiYouEntity entity : t.get世帯員リスト()) {
+                    IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+                    PersonalData personalData = PersonalData.of(kojin.get識別コード());
+                    personalDataList.add(personalData);
+                }
             }
         }
         NinteishaListSakuseiResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
@@ -370,14 +373,31 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 resultEntity.set減免給付率(new RString(str.toString()));
             }
         }
-        if (t.get世帯員Entity().getPsmEntity() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員Entity().getPsmEntity());
-            resultEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
-            resultEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
-        }
+        set世帯員リスト(resultEntity, t);
         setVoidEntity(resultEntity, t);
         setEntity(resultEntity, t);
         return resultEntity;
+    }
+
+    private void set世帯員リスト(NinteishaListSakuseiResultCsvEntity resultEntity,
+            NinteishaListSakuseiResultEntity t) {
+        if (t.get世帯員リスト() != null) {
+            for (SeteiYouEntity entity : t.get世帯員リスト()) {
+                IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+                resultEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
+                resultEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+                if (entity.get課税区分() != null && KazeiKubun.課税.getコード().equals(entity.get課税区分())) {
+                    resultEntity.set世帯員課税区分(課);
+                } else {
+                    resultEntity.set世帯員課税区分(空白);
+                }
+                if (entity.get課税所得額() != null && entity.get課税所得額().intValue() > 0) {
+                    resultEntity.set世帯員所得税課税区分(空白);
+                } else {
+                    resultEntity.set世帯員所得税課税区分(課);
+                }
+            }
+        }
     }
 
     private NinteishaListSakuseiResultCsvEntity setVoidEntity(NinteishaListSakuseiResultCsvEntity resultEntity,
@@ -415,7 +435,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         }
         resultEntity.set入所施設コード(t.get入所施設コード());
         resultEntity.set入所施設名称(t.get入所施設名称());
-
         return resultEntity;
     }
 
@@ -472,20 +491,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         } else {
             resultEntity.set所得税課税区分(空白);
         }
-        if (t.get世帯員Entity() != null && t.get世帯員Entity().get課税区分() != null) {
-            if (KazeiKubun.課税.getコード().equals(t.get世帯員Entity().get課税区分())) {
-                resultEntity.set世帯員課税区分(課);
-            } else {
-                resultEntity.set世帯員課税区分(空白);
-            }
-        }
-        if (t.get世帯員Entity() != null && t.get世帯員Entity().get課税所得額() != null) {
-            if (Decimal.ZERO.compareTo(t.get世帯員Entity().get課税所得額()) < 0) {
-                resultEntity.set世帯員所得税課税区分(空白);
-            } else {
-                resultEntity.set世帯員所得税課税区分(課);
-            }
-        }
+
         return resultEntity;
     }
 

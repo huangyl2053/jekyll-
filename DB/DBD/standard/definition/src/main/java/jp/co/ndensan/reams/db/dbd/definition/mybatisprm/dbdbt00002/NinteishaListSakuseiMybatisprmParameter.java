@@ -84,15 +84,18 @@ public class NinteishaListSakuseiMybatisprmParameter implements IMyBatisParamete
     }
 
     private void edit対象リスト(TargetList 対象リスト) {
-        if (一.equals(対象リスト.getコード())) {
-            is認定者リスト = true;
-        } else if (二.equals(対象リスト.getコード())) {
-            is該当者リスト = true;
+        if (対象リスト != null) {
+            if (一.equals(対象リスト.getコード())) {
+                is認定者リスト = true;
+            } else if (二.equals(対象リスト.getコード())) {
+                is該当者リスト = true;
+            }
         }
     }
 
     private void edit世帯表示(SetaiHyoji 世帯表示) {
-        if (二.equals(世帯表示.getコード())) {
+
+        if (世帯表示 != null && 二.equals(世帯表示.getコード())) {
             is世帯表示しない = true;
         }
     }
