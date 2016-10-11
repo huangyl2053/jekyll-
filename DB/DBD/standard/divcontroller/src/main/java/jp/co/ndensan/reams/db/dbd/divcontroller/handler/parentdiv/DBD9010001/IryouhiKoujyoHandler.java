@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojoBuilder;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.IryoHiKojoNaiyo;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
@@ -66,14 +65,14 @@ public class IryouhiKoujyoHandler {
      * @param 引き継ぎEntity 引き継ぎEntity
      * @return List<IryohiKojoEntity>
      */
-    public List<IryohiKojoEntityResult> onLoad(TaishoshaKey 引き継ぎEntity) {
+    public List<IryohiKojo> onLoad(TaishoshaKey 引き継ぎEntity) {
 
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
         if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号.value())) {
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
-        List<IryohiKojoEntityResult> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo(被保険者番号);
+        List<IryohiKojo> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo(被保険者番号);
         div.getIryohiKojyoToroku().getKaigoAtenaInfoChildDiv().initialize(引き継ぎEntity.get識別コード());
         div.getIryohiKojyoToroku().getKaigoShikakuKihonChildDiv().initialize(引き継ぎEntity.get被保険者番号());
         initGrid(医療費控除リスト);
@@ -173,9 +172,11 @@ public class IryouhiKoujyoHandler {
     /**
      * 確定操作
      *
+     * @param 被保険者番号 被保険者番号
      * @param 状態 状態
+     * @param 医療費控除リスト 医療費控除リスト
      */
-    public void onClick_KakuteButton(RString 状態) {
+    public void onClick_KakuteButton(HihokenshaNo 被保険者番号, RString 状態, List<IryohiKojo> 医療費控除リスト) {
         List<IryohiKojyoItiranDataGrid_Row> dataSource = div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getDataSource();
         if (状態.equals(追加)) {
             IryohiKojyoItiranDataGrid_Row row = new IryohiKojyoItiranDataGrid_Row();
@@ -185,8 +186,17 @@ public class IryouhiKoujyoHandler {
         } else if (状態.equals(修正)) {
             IryohiKojyoItiranDataGrid_Row row = dataSource.get(div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getActiveRowId());
             setGridRow(row);
-            if (!row.getJyoutai().equals(追加)) {
+            IryohiKojo 医療費控除 = getIryohiKojo(被保険者番号,
+                    new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString()),
+                    row.getHiddenCodeKubun(), 医療費控除リスト);
+            IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
+            builder.set登録年月日(new FlexibleDate(row.getHiddentorokuDD().getValue().toDateString()));
+            builder.set申請年月日(new FlexibleDate(row.getHiddensinseiDD().getValue().toDateString()));
+            set医療費控除画面項目(builder, row);
+            if (!row.getJyoutai().equals(追加) && builder.build().hasChanged()) {
                 row.setJyoutai(状態);
+            } else if (!row.getJyoutai().equals(追加) && !builder.build().hasChanged()) {
+                row.setJyoutai(RString.EMPTY);
             }
         } else if (状態.equals(削除)) {
             IryohiKojyoItiranDataGrid_Row row = dataSource.get(div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getActiveRowId());
@@ -225,8 +235,9 @@ public class IryouhiKoujyoHandler {
      * 「保存する」ボタンonClick
      *
      * @param 引き継ぎEntity 引き継ぎEntity
+     * @param 医療費控除リスト 医療費控除リスト
      */
-    public void save(TaishoshaKey 引き継ぎEntity) {
+    public void save(TaishoshaKey 引き継ぎEntity, List<IryohiKojo> 医療費控除リスト) {
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         IryohiKojoManager manager = new IryohiKojoManager();
         for (IryohiKojyoItiranDataGrid_Row row : div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getDataSource()) {
@@ -244,7 +255,7 @@ public class IryouhiKoujyoHandler {
                 manager.save医療費控除(builder.build().added());
             } else if (修正.equals(row.getJyoutai())) {
                 FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
-                IryohiKojo 医療費控除 = manager.get医療費控除(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
+                IryohiKojo 医療費控除 = getIryohiKojo(被保険者番号, 控除対象年, row.getHiddenCodeKubun(), 医療費控除リスト);
                 IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
                 builder.set登録年月日(new FlexibleDate(row.getHiddentorokuDD().getValue().toDateString()));
                 builder.set申請年月日(new FlexibleDate(row.getHiddensinseiDD().getValue().toDateString()));
@@ -252,7 +263,7 @@ public class IryouhiKoujyoHandler {
                 manager.save医療費控除(builder.build().modifiedModel());
             } else if (削除.equals(row.getJyoutai())) {
                 FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
-                IryohiKojo 医療費控除 = manager.get医療費控除(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
+                IryohiKojo 医療費控除 = getIryohiKojo(被保険者番号, 控除対象年, row.getHiddenCodeKubun(), 医療費控除リスト);
                 IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
                 manager.delete医療費控除(builder.build().deleted());
             }
@@ -267,18 +278,18 @@ public class IryouhiKoujyoHandler {
      *
      * @param 医療費控除リスト 医療費控除リスト
      */
-    public void onClick_ClearButton(List<IryohiKojoEntityResult> 医療費控除リスト) {
+    public void onClick_ClearButton(List<IryohiKojo> 医療費控除リスト) {
         initGrid(医療費控除リスト);
         init詳細エリア();
     }
 
-    private void initGrid(List<IryohiKojoEntityResult> 医療費控除リスト) {
+    private void initGrid(List<IryohiKojo> 医療費控除リスト) {
         List<IryohiKojyoItiranDataGrid_Row> dataSource = new ArrayList<>();
         if (医療費控除リスト != null) {
-            for (IryohiKojoEntityResult entity : 医療費控除リスト) {
+            for (IryohiKojo entity : 医療費控除リスト) {
                 IryohiKojyoItiranDataGrid_Row row = new IryohiKojyoItiranDataGrid_Row();
                 row.setNaiyou(IryoHiKojoNaiyo.toValue(entity.getデータ区分()).get名称());
-                RYear 控除対象年 = new RYear(entity.get控除対象年());
+                RYear 控除対象年 = new RYear(entity.get控除対象年().toDateString());
                 row.setTaisyouYY(控除対象年.wareki().toDateString());
                 row.setTorokuDD(entity.get登録年月日().wareki().toDateString());
                 row.setSinseiDD(entity.get申請年月日().wareki().toDateString());
@@ -357,5 +368,16 @@ public class IryouhiKoujyoHandler {
             builder.set日常生活自立度(row.getHiddennitijyoSekatuJiritudoCode());
             builder.set尿失禁の発生(row.getHiddennyosikinFlg().equals(キー0));
         }
+    }
+
+    private IryohiKojo getIryohiKojo(HihokenshaNo 被保険者番号, FlexibleYear 控除対象年, RString データ区分, List<IryohiKojo> 医療費控除リスト) {
+        for (IryohiKojo 医療費控除 : 医療費控除リスト) {
+            if (医療費控除.get被保険者番号().equals(被保険者番号)
+                    && 医療費控除.get控除対象年().equals(控除対象年)
+                    && 医療費控除.getデータ区分().equals(データ区分)) {
+                return 医療費控除;
+            }
+        }
+        return new IryohiKojo(被保険者番号, 控除対象年, データ区分);
     }
 }
