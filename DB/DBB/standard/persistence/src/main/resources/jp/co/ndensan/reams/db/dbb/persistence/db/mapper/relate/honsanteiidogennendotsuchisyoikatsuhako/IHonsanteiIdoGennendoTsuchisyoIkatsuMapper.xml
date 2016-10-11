@@ -4249,7 +4249,7 @@
         ${出力順}
     </select>
     
-    <resultMap id="ResultMap_DbT2015KeisangoJohoEntity_after" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2015KeisangoJohoEntity_after" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity" autoMapping="false">
         <id property="choteiNendo" column="dbT2015KeisangoJoho_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2015KeisangoJoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="dbT2015KeisangoJoho_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
