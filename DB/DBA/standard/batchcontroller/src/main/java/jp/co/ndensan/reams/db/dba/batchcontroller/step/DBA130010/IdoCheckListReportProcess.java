@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.idochecklist.IdoCheckListReportS
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -185,8 +186,21 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
                 }
 
                 識別コード = entity.get識別コード();
+
+                entity.set区分_前_資格(ShikakuKubun.toValue(entity.get区分_前_資格()).get略称());
+                entity.set区分_後_資格(ShikakuKubun.toValue(entity.get区分_後_資格()).get略称());
             }
         }
+
+        idoCheckListEntity.set抽出期間F(new FlexibleDate(
+                param.getKonkaiKaishi().getYear(),
+                param.getKonkaiKaishi().getMonthOfYear(),
+                param.getKonkaiKaishi().getDayOfMonth()));
+        idoCheckListEntity.set抽出期間T(new FlexibleDate(
+                param.getKonkaiShuryo().getYear(),
+                param.getKonkaiShuryo().getMonthOfYear(),
+                param.getKonkaiShuryo().getDayOfMonth()));
+
         idoCheckListEntity.setIdoInfoList(list);
         IdoCheckListBatch idoCheckbatch = new IdoCheckListBatch();
         IdoCheckListReport report = IdoCheckListReport.createFrom(idoCheckbatch.getIdoCheckChohyoData(idoCheckListEntity));
