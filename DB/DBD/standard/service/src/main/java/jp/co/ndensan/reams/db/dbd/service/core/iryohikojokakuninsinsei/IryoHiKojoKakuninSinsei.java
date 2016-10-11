@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoikiHenshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditorBuilder;
@@ -100,6 +102,7 @@ public class IryoHiKojoKakuninSinsei {
     private final MapperProvider mapperProvider;
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final DbT4401IryohiKojoDac dac;
+    private final DbV4001JukyushaDaichoAliveDac dbV4001JukyushaDaichoAliveDac;
 
     /**
      * コンストラクタです。
@@ -108,6 +111,7 @@ public class IryoHiKojoKakuninSinsei {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
         this.dac = InstanceProvider.create(DbT4401IryohiKojoDac.class);
+        this.dbV4001JukyushaDaichoAliveDac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class);
     }
 
     /**
@@ -122,12 +126,15 @@ public class IryoHiKojoKakuninSinsei {
     /**
      * 受給者判定
      *
-     * @param 被保険者番号 RString
+     * @param 被保険者番号 HihokenshaNo
      * @return boolean
      */
-    public boolean checkuJukyusha(RString 被保険者番号) {
-        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-        Integer レコード数 = mapper.受給者台帳抽出(被保険者番号);
+    public boolean checkuJukyusha(HihokenshaNo 被保険者番号) {
+        List<DbV4001JukyushaDaichoEntity> dbV4001JukyushaDaichoEntityList = dbV4001JukyushaDaichoAliveDac.selectBy被保険者番号AND有効無効区分(被保険者番号, new RString("1"));
+        Integer レコード数 = 0;
+        if (dbV4001JukyushaDaichoEntityList != null) {
+            レコード数 = dbV4001JukyushaDaichoEntityList.size();
+        }
         return レコード数 > 0;
     }
 
