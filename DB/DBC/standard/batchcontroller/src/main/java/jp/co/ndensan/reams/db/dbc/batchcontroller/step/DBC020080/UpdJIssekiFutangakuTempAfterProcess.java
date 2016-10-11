@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ビジネス設計_DBCMN62006_自己負担額計算（一括）のBatchStep2.6のプロセスクラスです。
+ * ビジネス設計_DBCMN62006_自己負担額計算（一括）のBatchStep2.7のプロセスクラスです。
  *
  * @reamsid_L DBC-2060-050 liuyang
  */

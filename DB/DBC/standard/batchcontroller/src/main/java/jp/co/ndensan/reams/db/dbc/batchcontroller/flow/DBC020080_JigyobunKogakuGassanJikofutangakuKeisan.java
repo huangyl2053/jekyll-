@@ -28,7 +28,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan
     private static final String PROCESS3 = "Process3";
     private static final String PROCESS4 = "Process4";
     private static final String BACKUP_TO_FILE = "BackupToFile";
-    private static RString importTableNamePermanent;
+    private RString importTableNamePermanent;
     private static final RString BACKUPTABLE1 = new RString("DbT3068KogakuGassanShinseisho");
     private static final RString BACKUPTABLE2 = new RString("DbT3070KogakuGassanJikoFutanGaku");
 

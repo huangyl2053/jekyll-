@@ -28,7 +28,7 @@ public class UpdshafukuKeigenTempProcess extends BatchKeyBreakBase<RiyoshaFutanM
 
     private static final RString TABLE_NAME2 = new RString("JissekiFutangakuDataTemp2");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
+            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTempHenko");
 //    private static final RString PATH1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
 //            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
 //    private static final RString PATH2 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
