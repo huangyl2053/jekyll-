@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080;
 
 import jp.co.ndensan.reams.db.dbc.business.core.dbc020080.DBC020080DataUtil;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.UpdJikofutangakuChukanTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -28,7 +28,7 @@ public class UpdJikofutangakuChukanTempProcess extends BatchProcessBase<JissekiF
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.get実績負担額データ");
     private DBC020080DataUtil util;
-    private DBC020080ProcessParameter parameter;
+    private UpdJikofutangakuChukanTempProcessParameter parameter;
 
     @BatchWriter
     private IBatchTableWriter 実績負担額Writer;
@@ -51,7 +51,7 @@ public class UpdJikofutangakuChukanTempProcess extends BatchProcessBase<JissekiF
     @Override
     protected void process(JissekiFutangakuDataTempEntity entity) {
         entity.setState(EntityDataState.Modified);
-        util.update受託なし処理時(entity, parameter);
+        util.update受託なし処理時(entity, parameter.get処理日時());
         実績負担額Writer.update(entity);
     }
 }
