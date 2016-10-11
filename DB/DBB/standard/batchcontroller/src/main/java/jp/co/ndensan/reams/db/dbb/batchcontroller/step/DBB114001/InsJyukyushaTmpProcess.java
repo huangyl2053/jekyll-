@@ -103,14 +103,17 @@ public class InsJyukyushaTmpProcess extends BatchProcessBase<JukyuusyaEntity> {
     }
 
     private List<FlexibleDate> set基準日時点(FlexibleDate 認定有効期間開始年月日, FlexibleDate 認定有効期間終了年月日) {
-        int 認定有効期間開始月 = 認定有効期間開始年月日.getMonthValue();
-        int 認定有効期間終了月 = 認定有効期間終了年月日.getMonthValue();
-        基準日時点.add(認定有効期間開始年月日);
-        for (int i = (認定有効期間開始月 + 1); i <= 認定有効期間終了月; i++) {
-            認定有効期間開始年月日 = new FlexibleDate(String.valueOf(認定有効期間開始年月日.getYearValue())
-                    .concat(new RString(String.format(FROMAT.toString(), i)).toString())
-                    .concat(NUM_01.toString()));
+        if (認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty()
+                && 認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty()) {
+            int 認定有効期間開始月 = 認定有効期間開始年月日.getMonthValue();
+            int 認定有効期間終了月 = 認定有効期間終了年月日.getMonthValue();
             基準日時点.add(認定有効期間開始年月日);
+            for (int i = (認定有効期間開始月 + 1); i <= 認定有効期間終了月; i++) {
+                認定有効期間開始年月日 = new FlexibleDate(String.valueOf(認定有効期間開始年月日.getYearValue())
+                        .concat(new RString(String.format(FROMAT.toString(), i)).toString())
+                        .concat(NUM_01.toString()));
+                基準日時点.add(認定有効期間開始年月日);
+            }
         }
         return 基準日時点;
     }

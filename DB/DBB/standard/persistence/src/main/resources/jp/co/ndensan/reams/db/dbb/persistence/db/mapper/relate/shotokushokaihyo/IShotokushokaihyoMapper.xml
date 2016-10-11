@@ -167,9 +167,32 @@
         "FindShikibetsuTaisho"."torokuJiyuCode")
     </select>
     
-    <!--入力.処理年度の1月1日時点の住民-->
-    <select resultOrdered="true" id="select除外の住民" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShotokuNendoParameter"
-            resultType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" fetchSize="500">
+    
+    <!--所得照会候補者を削除します。-->
+    <insert id="delete所得照会候補者" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYear">
+        DELETE FROM "ShotokuShoukaiKouhoshaTemp"
+        WHERE "shikibetsuCode" IN(
+        SELECT
+        DISTINCT "DbV2502KaigoShotoku"."shikibetsuCode"
+        FROM rgdb."DbV2502KaigoShotoku" AS "DbV2502KaigoShotoku"
+        LEFT JOIN(
+        SELECT
+        "shikibetsuCode",
+        MAX("rirekiNo") AS 履歴番号
+        FROM rgdb."DbV2502KaigoShotoku"
+        WHERE "shotokuNendo"=#{処理年度}
+        GROUP BY "shikibetsuCode", "shotokuNendo"
+        ORDER BY "shotokuNendo" ASC , "shikibetsuCode" ASC
+        ) AS 介護所得
+        ON "DbV2502KaigoShotoku"."shikibetsuCode"=介護所得."shikibetsuCode"
+        WHERE "DbV2502KaigoShotoku"."shotokuNendo"=#{処理年度}
+        )
+    </insert>
+    
+    <!--所得照会候補者を削除します。-->
+    <insert id="delete所得照会候補者1" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShotokuNendoParameter">
+        DELETE FROM "ShotokuShoukaiKouhoshaTemp"
+        WHERE "shikibetsuCode" IN(
         SELECT
         A."shikibetsuCode"
         FROM rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
@@ -178,35 +201,7 @@
         WHERE
         A."juminJotaiCode"='1'
         GROUP BY A."shikibetsuCode"
-    </select>
-    
-    
-    <!--入力．再発行対象リストがNULLではない場合、処理年度の所得情報-->
-    <select resultOrdered="true" id="select所得情報" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYear"
-            resultMap="ResultMap_ShotokuJouhouEntity" fetchSize="500">
-        SELECT
-        "shikibetsuCode",
-        "shotokuNendo",
-        MAX("rirekiNo") as 履歴番号
-        FROM
-        rgdb."DbV2502KaigoShotoku"
-        WHERE
-        "shotokuNendo"=#{処理年度}
-        GROUP BY "shotokuNendo","shikibetsuCode"
-        ORDER BY "shotokuNendo" ASC ,"shikibetsuCode" ASC
-    </select>
-
-    <resultMap id="ResultMap_ShotokuJouhouEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuJouhouEntity" autoMapping="true">
-        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="所得年度" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="履歴番号" column="履歴番号"/>
-    </resultMap>
-    
-    <!--所得照会候補者を削除します。-->
-    <insert id="delete所得照会候補者" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShikibetsuCodeListParameter">
-        DELETE FROM "ShotokuShoukaiKouhoshaTemp"
-        WHERE "shikibetsuCode" IN
-        <foreach collection="識別コードList" index="index" item="識別コード" open="(" separator="," close=")"> #{識別コード} </foreach>
+        )
     </insert>
     
     <resultMap id="resultMap_NendoNaiyuSikakuMonoTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.NendoNaiyuSikakuMonoTempEntity" autoMapping="true">
@@ -305,6 +300,7 @@
         WHERE
         "ShikibetsuTaisho"."juminJotaiCode"='1'
         AND "ShikibetsuTaisho"."seinengappiYMD"<![CDATA[<]]>#{処理年度_minus64_0401}
+        ORDER BY "shikibetsuCode"
     </select>
         
     <!--世帯員所得_年度内有資格者を取得します。-->
@@ -332,6 +328,8 @@
     </select>
     
     <resultMap id="ResultMap_SetaiShotokuTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SetaiShotokuTempEntity" autoMapping="true">
+        <id column="hihokenshaNo"/>
+        <id column="shikibetsuCode"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -467,8 +465,8 @@
     
         
     <!--所得照会票データfrom世帯員所得情報Temp1を取得します。-->
-    <select resultOrdered="true" id="select所得照会票データ1" resultMap="ResultMap_ShotokuShoukaiDataMapbEntity" 
-            fetchSize="500">
+    <select resultOrdered="true" id="select所得照会票データ" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.InsShotokushokaihyoTmpParameter"
+            resultMap="ResultMap_ShotokuShoukaiDataMapbEntity"  fetchSize="500">
         SELECT
         A."shikibetsuCode",
         C."genLasdecCode",
@@ -518,133 +516,16 @@
         C."juminJotaiCode",
         C."kannaiKangaiKubun",
         A."hihokennshaKubunCode"
-        FROM "TmpSetaiShotoku1" AS A
-        INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
-        ON A."shikibetsuCode"=B."shikibetsuCode"
-        INNER JOIN 
-        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
-        ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
-        ,'','','','','','','','','','','','','','','','','', '{  }' ) AS C
-        ON A."shikibetsuCode"=C."shikibetsuCode"
-        ORDER BY "zenkokuJushoCode" ASC, A."setaiCode" ASC, B."kouhoshakubun" ASC, C."choikiCode" ASC, A."honninKubun", A."shikibetsuCode" ASC
-     </select>
-     
-    <!--所得照会票データfrom世帯員所得情報Temp1を取得します。-->
-    <select resultOrdered="true" id="select所得照会票データ2" resultMap="ResultMap_ShotokuShoukaiDataMapbEntity" 
-            fetchSize="500">
-        SELECT
-        A."shikibetsuCode",
-        C."genLasdecCode",
-        CASE
-        WHEN B."kouhoshakubun"='1' THEN B."tenyuzenzenkokuJushoCode" 
-        WHEN B."kouhoshakubun"='2' THEN C."zenkokuJushoCode"
-        ELSE ''
-        END AS "zenkokuJushoCode",
-        B."setaiCode",
-        A."hihokenshaNo",
-        CASE
-        WHEN A."honninKubun"='1' THEN C."meisho"
-        ELSE ''
-        END AS "hihokenshaName",
-        CASE
-        WHEN A."honninKubun"='1' AND B."kouhoshakubun"='1' THEN B."tenyuzenjusho" || B."tenyuzenbanchi" || B."tenyuzenkatagaki"
-        WHEN A."honninKubun"='2' AND B."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
-        ELSE ''
-        END AS "hihokenshajusho",
-        CASE
-        WHEN B."kouhoshakubun"='1' THEN B."tenyuzenjusho" || B."tenyuzenbanchi" || B."tenyuzenkatagaki"
-        WHEN B."kouhoshakubun"='2' THEN ''
-        ELSE ''
-        END AS "zenjusho",
-        CASE WHEN B."kouhoshakubun"='1' THEN C."jusho" || C."banchi" || C."katagaki"
-        WHEN B."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
-        ELSE ''
-        END AS "genjusho",
-        C."kanaMeisho",
-        C."meisho",
-        C."seinengappiYMD",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."torokuIdoYMD"
-        WHEN B."kouhoshakubun"='2' THEN C."shojoIdoYMD"
-        ELSE ''
-        END AS "idoYMD",
-        B."kouhoshakubun",
-        A."honninKubun",
-        C."choikiCode",
-        C."gyoseikuCode",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."tenyuzenzenkokuJushoCode"
-        ELSE ''
-        END AS "zenjushoCode",
-        C."yubinNo",
-        C."chikuCode1",
-        C."chikuCode2",
-        C."chikuCode3",
-        C."juminJotaiCode",
-        C."kannaiKangaiKubun",
-        A."hihokennshaKubunCode"
-        FROM "TmpSetaiShotoku2" AS A
-        INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
-        ON A."shikibetsuCode"=B."shikibetsuCode"
-        INNER JOIN 
-        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
-        ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
-        ,'','','','','','','','','','','','','','','','','', '{  }' ) AS C
-        ON A."shikibetsuCode"=C."shikibetsuCode"
-        ORDER BY "zenkokuJushoCode" ASC, A."setaiCode" ASC, B."kouhoshakubun" ASC, C."choikiCode" ASC, A."honninKubun", A."shikibetsuCode" ASC
-     </select>
-     
-    <!--所得照会票データfrom世帯員所得情報Temp3を取得します。-->
-    <select resultOrdered="true" id="select所得照会票データ3" resultMap="ResultMap_ShotokuShoukaiDataMapbEntity" 
-            fetchSize="500">
-        SELECT
-        A."shikibetsuCode",
-        C."genLasdecCode",
-        CASE
-        WHEN B."kouhoshakubun"='1' THEN B."tenyuzenzenkokuJushoCode" 
-        WHEN B."kouhoshakubun"='2' THEN C."zenkokuJushoCode"
-        ELSE ''
-        END AS "zenkokuJushoCode",
-        B."setaiCode",
-        A."hihokenshaNo",
-        CASE
-        WHEN A."honninKubun"='1' THEN C."meisho"
-        ELSE ''
-        END AS "hihokenshaName",
-        CASE
-        WHEN A."honninKubun"='1' AND B."kouhoshakubun"='1' THEN B."tenyuzenjusho" || B."tenyuzenbanchi" || B."tenyuzenkatagaki"
-        WHEN A."honninKubun"='2' AND B."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
-        ELSE ''
-        END AS "hihokenshajusho",
-        CASE
-        WHEN B."kouhoshakubun"='1' THEN B."tenyuzenjusho" || B."tenyuzenbanchi" || B."tenyuzenkatagaki"
-        WHEN B."kouhoshakubun"='2' THEN ''
-        ELSE ''
-        END AS "zenjusho",
-        CASE WHEN B."kouhoshakubun"='1' THEN C."jusho" || C."banchi" || C."katagaki"
-        WHEN B."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
-        ELSE ''
-        END AS "genjusho",
-        C."kanaMeisho",
-        C."meisho",
-        C."seinengappiYMD",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."torokuIdoYMD"
-        WHEN B."kouhoshakubun"='2' THEN C."shojoIdoYMD"
-        ELSE ''
-        END AS "idoYMD",
-        B."kouhoshakubun",
-        A."honninKubun",
-        C."choikiCode",
-        C."gyoseikuCode",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."tenyuzenzenkokuJushoCode"
-        ELSE ''
-        END AS "zenjushoCode",
-        C."yubinNo",
-        C."chikuCode1",
-        C."chikuCode2",
-        C."chikuCode3",
-        C."juminJotaiCode",
-        C."kannaiKangaiKubun",
-        A."hihokennshaKubunCode"
-        FROM "TmpSetaiShotoku3" AS A
+        FROM 
+        <if test="出力対象 == 2">
+        "TmpSetaiShotoku1" AS A
+        </if>
+        <if test="出力対象 == 3">
+        "TmpSetaiShotoku2" AS A
+        </if>
+        <if test="出力対象 == 1">
+        "TmpSetaiShotoku3" AS A
+        </if>
         INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
         INNER JOIN 

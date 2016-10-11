@@ -83,7 +83,6 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
                 executeStep(世帯員把握TEMPテーブル2へ出力);
                 executeStep(世帯員所得情報TEMPテーブル2に登録);
                 executeStep(世帯員所得情報TEMPテーブル3に登録);
-                executeStep(所得照会票データTEMPテーブルに登録);
             } else if (出力対象_2.equals(出力対象)) {
                 executeStep(所得照会候補者TEMPテーブルに登録);
                 executeStep(対象外の住民情報を更新);
@@ -98,6 +97,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
                 executeStep(世帯員把握TEMPテーブル2へ出力);
                 executeStep(世帯員所得情報TEMPテーブル2に登録);
             }
+            executeStep(所得照会票データTEMPテーブルに登録);
             executeStep(所得照会票の出力);
             if (OUTPUTCOUNT_1.equals(getResult(RString.class, new RString(所得照会票の出力), PrtShotokushokaihyoProcess.PARAMETER_OUT_OUTPUTCOUNT))
                     && !processParameter.isテストプリント()) {
