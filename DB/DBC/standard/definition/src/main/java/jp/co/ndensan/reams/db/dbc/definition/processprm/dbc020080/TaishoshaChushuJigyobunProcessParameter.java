@@ -38,7 +38,6 @@ public class TaishoshaChushuJigyobunProcessParameter implements IBatchProcessPar
      * DBC020080ProcessParameterのコンストラクタです。
      *
      * @param 処理日時 RDateTime
-     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
      * @param 抽出期間開始年月 RString
      * @param 年度 RString
      * @param 被保険者番号 RString
@@ -46,13 +45,11 @@ public class TaishoshaChushuJigyobunProcessParameter implements IBatchProcessPar
      */
     public TaishoshaChushuJigyobunProcessParameter(
             RDateTime 処理日時,
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件,
             RString 抽出期間開始年月,
             RString 年度,
             RString 被保険者番号,
             RString 出力対象区分) {
         this.処理日時 = 処理日時;
-        this.宛名検索条件 = 宛名検索条件;
         this.抽出期間開始年月 = 抽出期間開始年月;
         this.年度 = 年度;
         this.被保険者番号 = 被保険者番号;
