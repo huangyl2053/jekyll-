@@ -60,7 +60,7 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
                 @Override
                 public boolean apply(JukyushaDaichoDiv div) {
                     if (SpecHelper.is年齢が選択されている(div)) {
-                        return SpecHelper.is年齢From入力(div) && SpecHelper.is年齢To入力(div);
+                        return SpecHelper.is年齢From入力(div) || SpecHelper.is年齢To入力(div);
                     }
                     return true;
                 }

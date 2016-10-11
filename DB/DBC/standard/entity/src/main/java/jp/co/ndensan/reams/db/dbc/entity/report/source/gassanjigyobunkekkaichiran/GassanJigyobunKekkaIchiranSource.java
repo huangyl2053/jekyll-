@@ -21,10 +21,10 @@ public class GassanJigyobunKekkaIchiranSource implements IReportSource {
 
     @ReportItem(name = "shori_ymd_hms", length = 34, order = 1)
     public RString shori_ymd_hms;
-    @ReportItem(name = "data1", length = 25, order = 2)
-    public RString data1;
-    @ReportItem(name = "data2", length = 25, order = 3)
-    public RString data2;
+    @ReportItem(name = "Data1", length = 25, order = 2)
+    public RString Data1;
+    @ReportItem(name = "Data2", length = 25, order = 3)
+    public RString Data2;
     @ReportItem(name = "city_cd", length = 6, order = 4)
     public RString city_cd;
     @ReportItem(name = "city_mei", length = 12, order = 5)
