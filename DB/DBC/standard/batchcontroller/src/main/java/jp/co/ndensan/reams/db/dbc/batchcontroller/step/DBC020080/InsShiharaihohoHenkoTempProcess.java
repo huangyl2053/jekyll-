@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080;
 
 import jp.co.ndensan.reams.db.dbc.business.core.dbc020080.DBC020080DataUtil;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3017MatchingEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
@@ -29,7 +28,6 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
     private static final RString TABLE_NAME2 = new RString("JissekiFutangakuDataTemp2");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShiharaihohoHenkoHosoku");
-    private DBC020080ProcessParameter parameter;
     private DBC020080DataUtil util;
     private JissekiFutangakuDataTempEntity insertEntity;
     private boolean isあり;
@@ -49,7 +47,7 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(PATH, parameter.toDBC020080MyBatisParameter());
+        return new BatchDbReader(PATH);
     }
 
     @Override

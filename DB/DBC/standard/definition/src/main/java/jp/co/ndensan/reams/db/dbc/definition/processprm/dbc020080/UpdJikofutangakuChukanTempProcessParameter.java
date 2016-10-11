@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * ビジネス設計_DBCMN62006_自己負担額計算（一括）のプロセスパラメタークラスです。
@@ -15,17 +16,22 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class InsShiharaihohoHenkoTempProcessParameter implements IBatchProcessParameter {
+public class UpdJikofutangakuChukanTempProcessParameter implements IBatchProcessParameter {
 
-    private boolean 事業分フラグ;
+    private RDateTime 処理日時;
 
     /**
-     * InsShiharaihohoHenkoTempProcessParameterのコンストラクタです。
-     *
-     * @param 事業分フラグ boolean
+     * DBC020080ProcessParameterのコンストラクタです。
      */
-    public InsShiharaihohoHenkoTempProcessParameter(boolean 事業分フラグ) {
-        this.事業分フラグ = 事業分フラグ;
+    public UpdJikofutangakuChukanTempProcessParameter() {
     }
 
+    /**
+     * DBC020080ProcessParameterのコンストラクタです。
+     *
+     * @param 処理日時 RDateTime
+     */
+    public UpdJikofutangakuChukanTempProcessParameter(RDateTime 処理日時) {
+        this.処理日時 = 処理日時;
+    }
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,20 +17,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class UpdJIssekiFutangakuTempProcessParameter implements IBatchProcessParameter {
+public class UpdJIssekiFutangakuTempAfterProcessParameter implements IBatchProcessParameter {
 
-    private boolean 事業分フラグ;
     private RString 処理区分;
+    private RDateTime 処理日時;
 
     /**
-     * UpdJIssekiFutangakuTempProcessParameterのコンストラクタです。
-     *
-     * @param 事業分フラグ boolean
-     * @param 処理区分 RString
+     * UpdJIssekiFutangakuTempAfterProcessParameterのコンストラクタです。
      */
-    public UpdJIssekiFutangakuTempProcessParameter(boolean 事業分フラグ, RString 処理区分) {
-        this.事業分フラグ = 事業分フラグ;
+    public UpdJIssekiFutangakuTempAfterProcessParameter() {
+    }
+
+    /**
+     * UpdJIssekiFutangakuTempAfterProcessParameterのコンストラクタです。
+     *
+     * @param 処理区分 RString
+     * @param 処理日時 RDateTime
+     */
+    public UpdJIssekiFutangakuTempAfterProcessParameter(RString 処理区分, RDateTime 処理日時) {
         this.処理区分 = 処理区分;
+        this.処理日時 = 処理日時;
     }
 
 }
