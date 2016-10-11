@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.InsertKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuKaigoServicehiDoChohyoHakkoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.UpdateKogakuShikyuHanteiKekkaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuShoriKekkaKakuninListSakuseiProcess;
@@ -32,7 +31,6 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     private static final String 高額サービス一時テーブルの設定 = "updateKogakuKaigoKetteiTsuchishoInfoTempProcess";
     private static final String 高額介護サービス費支給判定結果の更新 = "updateKogakuShikyuHanteiKekkaProcess";
     private static final String 帳票発行 = "doChohyoHakko";
-    private static final String 帳票発行_一覧表 = "doIchiranChohyoHakko";
     private static final String 処理結果確認リスト発行処理 = "doListSakuseiProcess";
     private static final int INDEX_0 = 0;
     private static final int INDEX_6 = 6;
@@ -46,7 +44,6 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
             executeStep(高額介護サービス費支給判定結果の更新);
         }
         executeStep(帳票発行);
-        executeStep(帳票発行_一覧表);
         executeStep(処理結果確認リスト発行処理);
     }
 
@@ -88,16 +85,6 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     @Step(帳票発行)
     protected IBatchFlowCommand doChohyoHakko() {
         return loopBatch(KogakuKaigoServicehiDoChohyoHakkoProcess.class).arguments(creatParameter()).define();
-    }
-
-    /**
-     * 帳票発行_一覧表です。
-     *
-     * @return KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess
-     */
-    @Step(帳票発行_一覧表)
-    protected IBatchFlowCommand doIchiranChohyoHakko() {
-        return loopBatch(KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess.class).arguments(creatParameter()).define();
     }
 
     /**
