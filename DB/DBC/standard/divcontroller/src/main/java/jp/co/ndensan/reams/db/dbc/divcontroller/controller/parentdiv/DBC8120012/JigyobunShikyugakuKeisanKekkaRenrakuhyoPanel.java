@@ -148,7 +148,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
         for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity : panelResultList) {
             int i = 0;
             for (JigyoKogakuGassanShikyuGakuKeisanKekka kekka : list) {
-                if (kekka.toEntity().equals(entity.getDbt3172Entity())) {
+                if (kekka.toEntity().equalsPrimaryKeys(entity.getDbt3172Entity())) {
                     i++;
                 }
             }

@@ -122,6 +122,7 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
             }
             editTwo(source);
             editThree(source);
+            editFour(source);
         }
         return source;
     }
@@ -166,6 +167,13 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         }
         source.list_13 = 高額合算自己負担額計算結果一覧表.get備考資格期間不正();
         source.list_15 = 高額合算自己負担額計算結果一覧表.get備考高額支給額確認データ();
+    }
+
+    private void editFour(GassanJikofutangakuKeisanKekkaIchiranSource source) {
+        source.yubinNo = 高額合算自己負担額計算結果一覧表.getYubinNo();
+        source.choikiCode = 高額合算自己負担額計算結果一覧表.getChoikiCode();
+        source.gyoseikuCode = 高額合算自己負担額計算結果一覧表.getGyoseikuCode();
+        source.hokenshaNo = 高額合算自己負担額計算結果一覧表.getHokenshaNo();
     }
 
 }

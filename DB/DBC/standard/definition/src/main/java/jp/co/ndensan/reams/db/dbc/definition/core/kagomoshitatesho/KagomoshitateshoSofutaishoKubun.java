@@ -16,20 +16,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KagomoshitateshoSofutaishoKubun {
 
     /**
-     * コード:1 名称:1:同月過誤分過誤申立書 略称:定義なし
+     * コード:1 名称:1:同月過誤分過誤申立書 略称:同月過誤分
      */
-    同月過誤分過誤申立書("1", "同月過誤分過誤申立書"),
+    同月過誤分過誤申立書("1", "同月過誤分過誤申立書", "同月過誤分"),
     /**
-     * コード:2 名称:2:通常分過誤申立書 略称:定義なし
+     * コード:2 名称:2:通常分過誤申立書 略称:通常分
      */
-    通常分過誤申立書("2", "通常分過誤申立書");
+    通常分過誤申立書("2", "通常分過誤申立書", "通常分");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KagomoshitateshoSofutaishoKubun(String code, String fullname) {
+    private KagomoshitateshoSofutaishoKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -48,6 +50,15 @@ public enum KagomoshitateshoSofutaishoKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 過誤申立書送付対象区分の略称を返します。
+     *
+     * @return 過誤申立書送付対象区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

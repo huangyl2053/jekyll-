@@ -16,28 +16,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KaigoGassan_ShinseiKeitai {
 
     /**
-     * コード:1 名称:期間中死亡・生保適用・海外移住者なし 略称:定義なし
+     * コード:1 名称:計算期間末日以降申請　（期間中死亡・生保適用・海外移住者なし） 略称:期間中死亡・生保適用・海外移住者なし
      */
-    計算期間末日以降申請期間中死亡生保適用海外移住者なし("1", "期間中死亡・生保適用・海外移住者なし"),
+    計算期間末日以降申請期間中死亡生保適用海外移住者なし("1", "計算期間末日以降申請　（期間中死亡・生保適用・海外移住者なし）", "期間中死亡・生保適用・海外移住者なし"),
     /**
-     * コード:2 名称:期間中死亡者あり 略称:定義なし
+     * コード:2 名称:計算期間末日以降申請　（期間中死亡者あり） 略称:期間中死亡者あり
      */
-    計算期間末日以降申請期間中死亡者あり("2", "期間中死亡者あり"),
+    計算期間末日以降申請期間中死亡者あり("2", "計算期間末日以降申請　（期間中死亡者あり）", "期間中死亡者あり"),
     /**
-     * コード:3 名称:期間中生保適用・海外移住者あり 略称:定義なし
+     * コード:3 名称:計算期間末日以降申請　（期間中生保適用・海外移住者あり） 略称:期間中生保適用・海外移住者あり
      */
-    計算期間末日以降申請期間中生保適用海外移住者あり("3", "期間中生保適用・海外移住者あり"),
+    計算期間末日以降申請期間中生保適用海外移住者あり("3", "計算期間末日以降申請　（期間中生保適用・海外移住者あり）", "期間中生保適用・海外移住者あり"),
     /**
-     * コード:4 名称:期間中生保適用・海外移住者あり 略称:定義なし
+     * コード:4 名称:期間中生保適用・海外移住者あり 略称:期間中生保適用・海外移住者あり
      */
-    期間中生保適用海外移住者あり("4", "期間中生保適用・海外移住者あり");
+    期間中生保適用海外移住者あり("4", "期間中生保適用・海外移住者あり", "期間中生保適用・海外移住者あり");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KaigoGassan_ShinseiKeitai(String code, String fullName) {
+    private KaigoGassan_ShinseiKeitai(String code, String fullname, String shortName) {
         this.code = new RString(code);
-        this.fullName = new RString(fullName);
+        this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -56,6 +58,15 @@ public enum KaigoGassan_ShinseiKeitai {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 介護合算_支給申請形態の略称を返します。
+     *
+     * @return 介護合算_支給申請形態の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

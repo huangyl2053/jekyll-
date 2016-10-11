@@ -83,7 +83,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
         }
         return new TokuchoSofuJohoRenkeiHeadEntity(ONESTRING, entity.get構成市町村コード(),
                 特別徴収義務者コード, entity.get通知内容コードDT(), entity.get媒体コードDT(), entity.get特別徴収制度コードDT(),
-                editパターン34(RDate.getNowDate()), スペース);
+                editパターン34(entity.get作成年月日DT()), スペース);
     }
 
     /**
@@ -99,7 +99,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
                 entity.get通知内容コードDT(),
                 スペース,
                 entity.get特別徴収制度コードDT(),
-                editパターン34(RDate.getNowDate()),
+                editパターン34(entity.get作成年月日DT()),
                 entity.get基礎年金番号DT(),
                 entity.get年金コードDT(),
                 スペース,
@@ -182,12 +182,12 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
     public TokuchoSofuJohoRenkeiTolelaEntity editトレイラ(Decimal 各種金額欄合計1, Decimal 各種金額欄合計2, int 格納件数) {
         return new TokuchoSofuJohoRenkeiTolelaEntity(
                 THREESTRING,
-                entity.get市町村コードDT(),
+                entity.get構成市町村コード(),
                 edit特別徴収義務者コード(entity.get特別徴収義務者コードDT()),
                 entity.get通知内容コードDT(),
                 RString.EMPTY,
                 entity.get特別徴収制度コードDT(),
-                editパターン34(RDate.getNowDate()),
+                editパターン34(entity.get作成年月日DT()),
                 new RString(格納件数),
                 new RString(各種金額欄合計1.toString()),
                 new RString(各種金額欄合計2.toString()),

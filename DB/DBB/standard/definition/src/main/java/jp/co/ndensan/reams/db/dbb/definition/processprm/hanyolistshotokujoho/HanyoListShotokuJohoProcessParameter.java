@@ -30,6 +30,7 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
     private ReportId 帳票ID;
     private AtenaSelectBatchParameter 宛名抽出条件;
     private long 出力順ID;
+    private RString 出力順;
     private RString 出力項目ID;
     private boolean 項目名付加;
     private boolean 連番付加;
@@ -93,6 +94,6 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
      */
     public HanyoListShotokuJohoMybatisParameter toMybatisParameter() {
         return new HanyoListShotokuJohoMybatisParameter(帳票ID, 宛名抽出条件, 出力順ID, 出力項目ID, 項目名付加, 連番付加, 日付編集,
-                賦課年度, 抽出期間From, 抽出期間To, 住民税減免前後表示区分, 課税区分減免前s, 課税区分減免後s, 宛名検索条件);
+                賦課年度, 抽出期間From, 抽出期間To, 住民税減免前後表示区分, 課税区分減免前s, 課税区分減免後s, 出力順, 宛名検索条件);
     }
 }

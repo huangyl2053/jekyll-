@@ -42,5 +42,8 @@ public class GassanJikofutangakuKeisanKekkaIchiranEntity {
     private RString 住民種別コード;
     private RString 一覧用確認区分;
     private RString 一覧用確認区分２;
-
+    private RString yubinNo;
+    private RString choikiCode;
+    private RString gyoseikuCode;
+    private RString hokenshaNo;
 }
