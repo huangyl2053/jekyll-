@@ -55,10 +55,10 @@ public class NinteiShinseiJohoMybatisParameter implements IMyBatisParameter {
         if (被保険者番号.isEmpty() || 被保険者番号 == null) {
             this.is被保険者番号非空 = false;
         }
-        if (今回開始期間FROM.isEqual(RDateTime.MIN)) {
+        if (今回開始期間FROM == null) {
             this.is今回開始期間FROM非空 = false;
         }
-        if (今回開始期間TO.isEqual(RDateTime.MIN)) {
+        if (今回開始期間TO == null) {
             this.is今回開始期間TO非空 = false;
         }
     }
