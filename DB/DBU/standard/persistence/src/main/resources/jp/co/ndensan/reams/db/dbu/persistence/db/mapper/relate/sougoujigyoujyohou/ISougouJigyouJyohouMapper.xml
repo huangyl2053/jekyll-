@@ -50,13 +50,13 @@
                             dbT7304."dataSetRecordKey",
                             dbT7304."hanNo",
                             dbT7304."teikyoNichiji"
-                        FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" as dbT7304
+                        FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
                         WHERE dbT7304."tokuteiKojinJohoMeiCode" = #{特定個人情報版管理番号04}
                             AND dbT7304."dataSetRecordKey" = #{住所地特例情報_0102}
                             AND dbT7304."hanNo" = #{版番号}
                             AND (dbT7304."teikyoKubun" = #{個人番号未設定により未提供} OR dbT7304."teikyoKubun" = #{その他エラーにより未提供})
                             AND NOT EXISTS(SELECT 1
-                                            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" as t7304
+                                            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS t7304
                                            WHERE t7304."hihokenshaNo" = dbT7304."hihokenshaNo"
                                                 AND t7304."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
                                                 AND t7304."dataSetRecordKey" = dbT7304."dataSetRecordKey"
@@ -67,57 +67,59 @@
     </select>
     
     <select resultOrdered="true" id="get提供対象者" resultMap="ResultMap_TeikyoKihonJohoEntity"
-            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter" fetchSize="500">
         SELECT 
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.allColumns_TeikyoKihonJoho" />
          FROM "TeikyoKihonJoho" AS teikyoKihonJoho
-        WHERE NOT EXISTS(SELECT 1
-                          FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
-                         WHERE teikyoKihonJoho."hihokenshaNo" = dbT7304."hihokenshaNo"
-                            AND teikyoKihonJoho."dataSetRecordKey" = dbT7304."dataSetRecordKey"
-                            AND teikyoKihonJoho."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
-                            AND teikyoKihonJoho."hanNo" = dbT7304."hanNo"
-                            AND teikyoKihonJoho."teikyoNaiyo01" = dbT7304."soshinNaiyo01"
-                            AND teikyoKihonJoho."teikyoNaiyo02" = dbT7304."soshinNaiyo02"
-                            AND teikyoKihonJoho."teikyoNaiyo03" = dbT7304."soshinNaiyo03"
-                            AND teikyoKihonJoho."teikyoNaiyo04" = dbT7304."soshinNaiyo04"
-                            AND teikyoKihonJoho."teikyoNaiyo05" = dbT7304."soshinNaiyo05"
-                            AND teikyoKihonJoho."teikyoNaiyo06" = dbT7304."soshinNaiyo06"
-                            AND teikyoKihonJoho."teikyoNaiyo07" = dbT7304."soshinNaiyo07"
-                            AND teikyoKihonJoho."teikyoNaiyo08" = dbT7304."soshinNaiyo08"
-                            AND teikyoKihonJoho."teikyoNaiyo09" = dbT7304."soshinNaiyo09"
-                            AND teikyoKihonJoho."teikyoNaiyo10" = dbT7304."soshinNaiyo10")
+        <if test = "is異動">
+        WHERE NOT EXISTS(  SELECT 1
+                            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
+                           WHERE teikyoKihonJoho."hihokenshaNo" = dbT7304."hihokenshaNo"
+                              AND teikyoKihonJoho."dataSetRecordKey" = dbT7304."dataSetRecordKey"
+                              AND teikyoKihonJoho."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
+                              AND teikyoKihonJoho."hanNo" = dbT7304."hanNo"
+                              AND teikyoKihonJoho."teikyoNaiyo01" = dbT7304."soshinNaiyo01"
+                              AND teikyoKihonJoho."teikyoNaiyo02" = dbT7304."soshinNaiyo02"
+                              AND teikyoKihonJoho."teikyoNaiyo03" = dbT7304."soshinNaiyo03"
+                              AND teikyoKihonJoho."teikyoNaiyo04" = dbT7304."soshinNaiyo04"
+                              AND teikyoKihonJoho."teikyoNaiyo05" = dbT7304."soshinNaiyo05"
+                              AND teikyoKihonJoho."teikyoNaiyo06" = dbT7304."soshinNaiyo06"
+                              AND teikyoKihonJoho."teikyoNaiyo07" = dbT7304."soshinNaiyo07"
+                              AND teikyoKihonJoho."teikyoNaiyo08" = dbT7304."soshinNaiyo08"
+                              AND teikyoKihonJoho."teikyoNaiyo09" = dbT7304."soshinNaiyo09"
+                              AND teikyoKihonJoho."teikyoNaiyo10" = dbT7304."soshinNaiyo10")
+        </if>
     </select>
     
     <sql id="allColumns_TeikyoKihonJoho">
-         teikyoKihonJoho."hiHokenshaNo" as "teikyoKihonJoho_hihokenshaNo",
-         teikyoKihonJoho."dataSetRecordKey" as "teikyoKihonJoho_dataSetRecordKey",
-         teikyoKihonJoho."teikyoKubun" as "teikyoKihonJoho_teikyoKubun",
-         teikyoKihonJoho."shikibetsuCode" as "teikyoKihonJoho_shikibetsuCode",
-         teikyoKihonJoho."kojinnNo" as "teikyoKihonJoho_kojinnNo",
-         teikyoKihonJoho."tokuteiKojinJohoMeiCode" as "teikyoKihonJoho_tokuteiKojinJohoMeiCode",
-         teikyoKihonJoho."hanNo" as "teikyoKihonJoho_hanNo",
-         teikyoKihonJoho."teikyoNaiyo01" as "teikyoKihonJoho_teikyoNaiyo01",
-         teikyoKihonJoho."misetteiJiyu01" as "teikyoKihonJoho_misetteiJiyu01",
-         teikyoKihonJoho."teikyoNaiyo02" as "teikyoKihonJoho_teikyoNaiyo02",
-         teikyoKihonJoho."misetteiJiyu02" as "teikyoKihonJoho_misetteiJiyu02",
-         teikyoKihonJoho."teikyoNaiyo03" as "teikyoKihonJoho_teikyoNaiyo03",
-         teikyoKihonJoho."misetteiJiyu03" as "teikyoKihonJoho_misetteiJiyu03",
-         teikyoKihonJoho."teikyoNaiyo04" as "teikyoKihonJoho_teikyoNaiyo04",
-         teikyoKihonJoho."misetteiJiyu04" as "teikyoKihonJoho_misetteiJiyu04",
-         teikyoKihonJoho."teikyoNaiyo05" as "teikyoKihonJoho_teikyoNaiyo05",
-         teikyoKihonJoho."misetteiJiyu05" as "teikyoKihonJoho_misetteiJiyu05",
-         teikyoKihonJoho."teikyoNaiyo06" as "teikyoKihonJoho_teikyoNaiyo06",
-         teikyoKihonJoho."misetteiJiyu06" as "teikyoKihonJoho_misetteiJiyu06",
-         teikyoKihonJoho."teikyoNaiyo07" as "teikyoKihonJoho_teikyoNaiyo07",
-         teikyoKihonJoho."misetteiJiyu07" as "teikyoKihonJoho_misetteiJiyu07",
-         teikyoKihonJoho."teikyoNaiyo08" as "teikyoKihonJoho_teikyoNaiyo08",
-         teikyoKihonJoho."misetteiJiyu08" as "teikyoKihonJoho_misetteiJiyu08",
-         teikyoKihonJoho."teikyoNaiyo09" as "teikyoKihonJoho_teikyoNaiyo09",
-         teikyoKihonJoho."misetteiJiyu09" as "teikyoKihonJoho_misetteiJiyu09",
-         teikyoKihonJoho."teikyoNaiyo10" as "teikyoKihonJoho_teikyoNaiyo10",
-         teikyoKihonJoho."misetteiJiyu10" as "teikyoKihonJoho_misetteiJiyu10",
-         teikyoKihonJoho."kokaiYMD" as "teikyoKihonJoho_kokaiYMD"
+         teikyoKihonJoho."hiHokenshaNo" AS "teikyoKihonJoho_hihokenshaNo",
+         teikyoKihonJoho."dataSetRecordKey" AS "teikyoKihonJoho_dataSetRecordKey",
+         teikyoKihonJoho."teikyoKubun" AS "teikyoKihonJoho_teikyoKubun",
+         teikyoKihonJoho."shikibetsuCode" AS "teikyoKihonJoho_shikibetsuCode",
+         teikyoKihonJoho."kojinnNo" AS "teikyoKihonJoho_kojinnNo",
+         teikyoKihonJoho."tokuteiKojinJohoMeiCode" AS "teikyoKihonJoho_tokuteiKojinJohoMeiCode",
+         teikyoKihonJoho."hanNo" AS "teikyoKihonJoho_hanNo",
+         teikyoKihonJoho."teikyoNaiyo01" AS "teikyoKihonJoho_teikyoNaiyo01",
+         teikyoKihonJoho."misetteiJiyu01" AS "teikyoKihonJoho_misetteiJiyu01",
+         teikyoKihonJoho."teikyoNaiyo02" AS "teikyoKihonJoho_teikyoNaiyo02",
+         teikyoKihonJoho."misetteiJiyu02" AS "teikyoKihonJoho_misetteiJiyu02",
+         teikyoKihonJoho."teikyoNaiyo03" AS "teikyoKihonJoho_teikyoNaiyo03",
+         teikyoKihonJoho."misetteiJiyu03" AS "teikyoKihonJoho_misetteiJiyu03",
+         teikyoKihonJoho."teikyoNaiyo04" AS "teikyoKihonJoho_teikyoNaiyo04",
+         teikyoKihonJoho."misetteiJiyu04" AS "teikyoKihonJoho_misetteiJiyu04",
+         teikyoKihonJoho."teikyoNaiyo05" AS "teikyoKihonJoho_teikyoNaiyo05",
+         teikyoKihonJoho."misetteiJiyu05" AS "teikyoKihonJoho_misetteiJiyu05",
+         teikyoKihonJoho."teikyoNaiyo06" AS "teikyoKihonJoho_teikyoNaiyo06",
+         teikyoKihonJoho."misetteiJiyu06" AS "teikyoKihonJoho_misetteiJiyu06",
+         teikyoKihonJoho."teikyoNaiyo07" AS "teikyoKihonJoho_teikyoNaiyo07",
+         teikyoKihonJoho."misetteiJiyu07" AS "teikyoKihonJoho_misetteiJiyu07",
+         teikyoKihonJoho."teikyoNaiyo08" AS "teikyoKihonJoho_teikyoNaiyo08",
+         teikyoKihonJoho."misetteiJiyu08" AS "teikyoKihonJoho_misetteiJiyu08",
+         teikyoKihonJoho."teikyoNaiyo09" AS "teikyoKihonJoho_teikyoNaiyo09",
+         teikyoKihonJoho."misetteiJiyu09" AS "teikyoKihonJoho_misetteiJiyu09",
+         teikyoKihonJoho."teikyoNaiyo10" AS "teikyoKihonJoho_teikyoNaiyo10",
+         teikyoKihonJoho."misetteiJiyu10" AS "teikyoKihonJoho_misetteiJiyu10",
+         teikyoKihonJoho."kokaiYMD" AS "teikyoKihonJoho_kokaiYMD"
     </sql>
 
 
