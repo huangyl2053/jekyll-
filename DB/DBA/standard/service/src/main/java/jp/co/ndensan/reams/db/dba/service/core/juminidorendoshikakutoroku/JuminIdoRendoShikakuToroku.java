@@ -907,9 +907,9 @@ public class JuminIdoRendoShikakuToroku {
      * 住民異動情報です。
      *
      * @param 宛名識別対象 ShikibetsuTaishoIdoJoho
-     * @return UaFt200FindShikibetsuTaishoEntity
+     * @param csvWriter CsvWriter<FuseigoListCsvEntity>
      */
-    public UaFt200FindShikibetsuTaishoEntity to住民異動情報(ShikibetsuTaishoIdoJoho 宛名識別対象) {
+    public void to住民異動情報(ShikibetsuTaishoIdoJoho 宛名識別対象, CsvWriter<FuseigoListCsvEntity> csvWriter) {
         UaFt200FindShikibetsuTaishoEntity 住民異動情報 = new UaFt200FindShikibetsuTaishoEntity();
         住民異動情報.setShikibetsuCode(宛名識別対象.get識別コード());
         住民異動情報.setGenLasdecCode(宛名識別対象.get現地方公共団体コード());
@@ -1048,6 +1048,6 @@ public class JuminIdoRendoShikakuToroku {
 //        住民異動情報.setKanaName(宛名識別対象.getカナ名());
 //        住民異動情報.setGaikokujinKanaName(宛名識別対象.get外国人カナ名());
 //        住民異動情報.setKanaTsushoName(宛名識別対象.getカナ通称名のみ());
-        return 住民異動情報;
+        juminIdoRendoKyotsu(住民異動情報, csvWriter);
     }
 }

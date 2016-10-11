@@ -87,7 +87,7 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
         JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
         for (ShikibetsuTaishoIdoJoho 宛名識別対象 : 宛名累積マスタデータリスト) {
             if (異動後.equals(宛名識別対象.get異動前後区分())) {
-                juminidorendoshikakutoroku.juminIdoRendoKyotsu((juminidorendoshikakutoroku.to住民異動情報(宛名識別対象)), csvWriter);
+                juminidorendoshikakutoroku.to住民異動情報((宛名識別対象), csvWriter);
             }
         }
     }
@@ -96,7 +96,7 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
     protected void afterExecute() {
         if (抽出開始日時 == null) {
             抽出開始日時 = new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)).getRDateTime();
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).concat(new RString("000000"))).getRDateTime();
         }
         宛名識別対象異動分取得PSM(抽出開始日時, processParameter);
         SyoriTaisyoShichoson syoritaisyoshichoson = new SyoriTaisyoShichoson();

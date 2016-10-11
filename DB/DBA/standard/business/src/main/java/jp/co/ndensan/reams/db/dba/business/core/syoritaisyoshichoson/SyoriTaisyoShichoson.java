@@ -119,9 +119,8 @@ public class SyoriTaisyoShichoson {
         entity.setKijunTimestamp(processParameter.getSyorinichiji());
         entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
         entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
-//            TODO 1826未回答ので、実装しない
         entity.setTaishoKaishiTimestamp(new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)));
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).concat(new RString("000000"))));
         entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
     }
 }
