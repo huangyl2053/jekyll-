@@ -28,17 +28,10 @@ public class InsKokuhoShikakuJyohoProcess extends BatchProcessBase<TorikomiKokiK
     private IBatchTableWriter<DbT7124KokiKoreishaInfoEntity> 現在後期高齢者情報Writer;
 
     @Override
-    protected void initialize() {
-        現在後期高齢者情報Writer = BatchWriters.batchPermanentTableWriter(DbT7124KokiKoreishaInfoEntity.class).build();
-    }
-
-    @Override
     protected void beforeExecute() {
         IKokikoreishaShikakuIdoInMapper mapper = getMapper(IKokikoreishaShikakuIdoInMapper.class);
-        if (!mapper.get取込後期高齢者情報インポート用Entityリスト().isEmpty()) {
-            for (DbT7124KokiKoreishaInfoEntity entity : mapper.get現在後期高齢者情報の全データ()) {
-                現在後期高齢者情報Writer.delete(entity);
-            }
+        if (mapper.get取込後期高齢者情報インポート用Entitｙ件数() > 0) {
+            mapper.delete取込後期高齢者情報();
         }
     }
 
@@ -49,6 +42,7 @@ public class InsKokuhoShikakuJyohoProcess extends BatchProcessBase<TorikomiKokiK
 
     @Override
     protected void createWriter() {
+        現在後期高齢者情報Writer = BatchWriters.batchPermanentTableWriter(DbT7124KokiKoreishaInfoEntity.class).build();
     }
 
     @Override

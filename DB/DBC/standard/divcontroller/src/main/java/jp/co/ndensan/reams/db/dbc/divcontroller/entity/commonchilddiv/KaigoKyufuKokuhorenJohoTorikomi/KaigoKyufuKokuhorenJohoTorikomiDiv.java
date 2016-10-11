@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoKyufuKokuhorenJohoTorikomiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,6 +48,10 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     private ShoriTaishoJohoDiv ShoriTaishoJoho;
     @JsonProperty("KakuninJikoMsg")
     private KakuninJikoMsgDiv KakuninJikoMsg;
+    @JsonProperty("txtShoriTaisho")
+    private TextBox txtShoriTaisho;
+    @JsonProperty("hdnShoriKubun")
+    private TextBox hdnShoriKubun;
     @JsonProperty("ShutsuRyokujun")
     private ShutsuRyokujunDiv ShutsuRyokujun;
 
@@ -145,6 +149,42 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     @JsonProperty("KakuninJikoMsg")
     public void setKakuninJikoMsg(KakuninJikoMsgDiv KakuninJikoMsg) {
         this.KakuninJikoMsg = KakuninJikoMsg;
+    }
+
+    /*
+     * gettxtShoriTaisho
+     * @return txtShoriTaisho
+     */
+    @JsonProperty("txtShoriTaisho")
+    public TextBox getTxtShoriTaisho() {
+        return txtShoriTaisho;
+    }
+
+    /*
+     * settxtShoriTaisho
+     * @param txtShoriTaisho txtShoriTaisho
+     */
+    @JsonProperty("txtShoriTaisho")
+    public void setTxtShoriTaisho(TextBox txtShoriTaisho) {
+        this.txtShoriTaisho = txtShoriTaisho;
+    }
+
+    /*
+     * gethdnShoriKubun
+     * @return hdnShoriKubun
+     */
+    @JsonProperty("hdnShoriKubun")
+    public TextBox getHdnShoriKubun() {
+        return hdnShoriKubun;
+    }
+
+    /*
+     * sethdnShoriKubun
+     * @param hdnShoriKubun hdnShoriKubun
+     */
+    @JsonProperty("hdnShoriKubun")
+    public void setHdnShoriKubun(TextBox hdnShoriKubun) {
+        this.hdnShoriKubun = hdnShoriKubun;
     }
 
     /*
@@ -313,5 +353,11 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     @Override
     public Long get出力順ID() {
         return this.getCcdChohyoShutsuryokujun().get出力順ID();
+    }
+
+    @JsonIgnore
+    @Override
+    public RString get処理区分() {
+        return this.getHdnShoriKubun().getValue();
     }
 }

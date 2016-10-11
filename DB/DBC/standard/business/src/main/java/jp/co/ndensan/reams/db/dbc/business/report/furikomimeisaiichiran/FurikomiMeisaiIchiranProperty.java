@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 帳票設計_DBC200003_事業合算・事業分振込明細書作成（一括） Propertyクラスです。
+ * 帳票設計_DBC200003_振込明細一覧表（高額合算） Propertyクラスです。
  *
  * @reamsid_L DBC-4870-060 lijian
  */

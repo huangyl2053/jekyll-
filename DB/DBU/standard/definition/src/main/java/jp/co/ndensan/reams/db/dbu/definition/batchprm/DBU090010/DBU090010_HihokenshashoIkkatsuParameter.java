@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU090010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
+public class DBU090010_HihokenshashoIkkatsuParameter extends BatchParameterBase {
 
     private static final String KEY_SHUTSURYOKUJOKEN_CODE = "shutsuryokuJokenCode";
     private static final String KEY_KONKAIFROM_YMD = "konkaiFromYMD";
@@ -70,7 +70,7 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public IkkatsuHakkoBatchParameter() {
+    public DBU090010_HihokenshashoIkkatsuParameter() {
 
     }
 
@@ -93,7 +93,7 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
      * @param shohyojiType 証表示タイプ
      *
      */
-    public IkkatsuHakkoBatchParameter(RString shutsuryokuJokenCode,
+    public DBU090010_HihokenshashoIkkatsuParameter(RString shutsuryokuJokenCode,
             FlexibleDate konkaiFromYMD,
             RTime konkaiFromHMS,
             FlexibleDate konkaiToYMD,

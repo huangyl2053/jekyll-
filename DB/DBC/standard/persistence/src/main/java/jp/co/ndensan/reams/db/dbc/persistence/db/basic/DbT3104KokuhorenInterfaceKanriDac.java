@@ -26,6 +26,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -404,5 +405,88 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                                 eq(kokanShikibetsuNo, 交換情報識別番号),
                                 eq(shoriJotaiKubun, 処理状態区分)))
                 .toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連インターフェース管理取得返します。
+     *
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 処理状態区分 処理状態区分
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> get処理年月1(RString 交換情報識別番号, RString 処理状態区分) {
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_交換情報識別番号.toString()));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_処理状態区分.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(shoriJotaiKubun, 処理状態区分)))
+                .toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連インターフェース管理取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> get処理年月2(
+            RString 交換情報識別番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(
+                        eq(kokanShikibetsuNo, 交換情報識別番号)).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連インターフェース管理取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @param 処理年月 RString FlexibleYearMonth
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> get国保連インターフェース管理1(
+            RString 交換情報識別番号,
+            FlexibleYearMonth 処理年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                not(eq(shoriYM, 処理年月)))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連インターフェース管理取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @param 処理年月 RString FlexibleYearMonth
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> get国保連インターフェース管理2(
+            RString 交換情報識別番号,
+            FlexibleYearMonth 処理年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(shoriYM, 処理年月))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 }

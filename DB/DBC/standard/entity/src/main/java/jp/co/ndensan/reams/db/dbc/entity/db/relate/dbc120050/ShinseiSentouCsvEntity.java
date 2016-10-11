@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Setter
-@lombok.Getter
 public class ShinseiSentouCsvEntity implements IShinseiJoho {
 
     @CsvField(order = 10, name = "レコード種別")
@@ -197,9 +196,11 @@ public class ShinseiSentouCsvEntity implements IShinseiJoho {
     private RString 後_公費３_特定入所者介護サービス費等請求額;
     @CsvField(order = 890, name = "警告区分コード_1")
     private RString 警告区分コード_1;
-    @CsvField(order = 900, name = "緊急時施設療養費請求額")
+    @CsvField(order = 900, name = "本人負担額")
+    private RString 本人負担額;
+    @CsvField(order = 910, name = "緊急時施設療養費請求額")
     private RString 緊急時施設療養費請求額;
-    @CsvField(order = 910, name = "特定診療費請求額")
+    @CsvField(order = 920, name = "特定診療費請求額")
     private RString 特定診療費請求額;
     @CsvField(order = 930, name = "特定入所者介護サービス費等請求額")
     private RString 特定入所者介護サービス費等請求額;

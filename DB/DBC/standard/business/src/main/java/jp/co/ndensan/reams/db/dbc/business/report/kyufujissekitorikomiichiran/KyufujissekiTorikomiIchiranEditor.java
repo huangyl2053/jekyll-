@@ -87,6 +87,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
      * @param 処理年月 FlexibleYearMonth
      * @param 作成日時 RDateTime
      * @param 連番 int
+     * @param 集計flag boolean
+     * @param 合計件数 int
      */
     public KyufujissekiTorikomiIchiranEditor(KyufujissekiTorikomiIchiranEntity entity, RString 並び順の１件目, RString 並び順の２件目,
             RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目,

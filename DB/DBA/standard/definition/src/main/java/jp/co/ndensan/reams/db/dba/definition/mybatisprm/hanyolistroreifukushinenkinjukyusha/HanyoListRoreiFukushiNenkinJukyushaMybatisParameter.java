@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolistroreifukushinenkinjukyusha;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.rorei.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;

@@ -43,7 +43,10 @@
                 AND "DbT2002Fuka"."choshuHohoRirekiNo" = "DbT2001ChoshuHoho"."rirekiNo"
             )
         ON 
-            "DbT2002Fuka"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"             
+            "DbT2002Fuka"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"    
+        ORDER BY
+            "DbT1001HihokenshaDaicho"."hihokenshaNo",
+            "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD"
     </select>
     
     <resultMap id="resultMap_FuchoKarisanteiFukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiFukaEntity" autoMapping="true">

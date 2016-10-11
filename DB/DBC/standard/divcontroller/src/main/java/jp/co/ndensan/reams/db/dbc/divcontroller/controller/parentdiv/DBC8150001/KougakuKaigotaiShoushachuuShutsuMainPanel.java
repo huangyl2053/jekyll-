@@ -62,7 +62,7 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
         List<KokuhorenInterfaceKanri> 国保連インターフェース管理 = DBC5100011MainPanelFinder.createInstance()
                 .get処理番号(交換情報識別番号, 処理状態区分).records();
         if (国保連インターフェース管理 == null || 国保連インターフェース管理.isEmpty()) {
-            ValidationMessageControlPairs validPairs = getValidatisonHandler(div).国保連インターフェース管理テーブルチェック();
+            ValidationMessageControlPairs validPairs = getValidatisonHandler().国保連インターフェース管理テーブルチェック();
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -81,24 +81,6 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
         IOutputOrder 出力順 = div.getCcdChohyoShutsuryokujun().getSelected出力順();
         manager.save前回出力順(出力順);
         return ResponseData.of(getHandler(div).onClick_実行ボタン()).respond();
-    }
-
-    /**
-     * 入力チェックです。
-     *
-     * @param div div
-     * @return ResponseData<KougakuKaigotaiShoushachuuShutsuMainPanelDiv>
-     */
-    public ResponseData<KougakuKaigotaiShoushachuuShutsuMainPanelDiv> onClick_btnBatchCheck(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
-        ValidationMessageControlPairs validPairs今回開始日時 = getValidatisonHandler(div).今回開始日時チェック();
-        ValidationMessageControlPairs validPairs今回終了日時 = getValidatisonHandler(div).今回終了日時チェック();
-        if (validPairs今回開始日時.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs今回開始日時).respond();
-        }
-        if (validPairs今回終了日時.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs今回終了日時).respond();
-        }
-        return ResponseData.of(div).respond();
     }
 
     private void set処理日付管理(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
@@ -139,7 +121,7 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
         return new KougakuKaigotaiShoushachuuShutsuMainPanelHandler(div);
     }
 
-    private KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler getValidatisonHandler(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
-        return new KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler(div);
+    private KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler getValidatisonHandler() {
+        return new KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler();
     }
 }

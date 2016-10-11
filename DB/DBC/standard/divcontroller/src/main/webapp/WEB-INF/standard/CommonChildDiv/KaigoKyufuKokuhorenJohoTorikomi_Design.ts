@@ -74,6 +74,14 @@ module DBC {
                 return new UZA.Label(this.convFiledName("lblNaiBaiMsg"));
             }
 
+            public txtShoriTaisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShoriTaisho"));
+            }
+
+            public hdnShoriKubun(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("hdnShoriKubun"));
+            }
+
             public ShutsuRyokujun(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ShutsuRyokujun"));
             }

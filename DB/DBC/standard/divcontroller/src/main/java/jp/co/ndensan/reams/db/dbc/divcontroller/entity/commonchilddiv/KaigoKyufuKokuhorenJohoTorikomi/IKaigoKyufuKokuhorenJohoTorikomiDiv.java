@@ -67,4 +67,11 @@ public interface IKaigoKyufuKokuhorenJohoTorikomiDiv extends ICommonChildDivBase
      * @return long
      */
     public Long get出力順ID();
+
+    /**
+     * get処理区分のメソッドます。
+     *
+     * @return RString
+     */
+    public RString get処理区分();
 }

@@ -450,7 +450,7 @@ public enum ReportIdDBC {
     /**
      * 振込明細一覧表帳票ＩＤです。
      */
-    DBC200003(new ReportId("DBC200003_FurikomiMeisaiIchiran"), new RString("振込明細一覧表")),
+    DBC200003(new ReportId("DBC200003_FurikomiMeisaiIchiranKogakuGassan"), new RString("振込明細一覧表")),
     /**
      * （高額合算支給（不支給）決定通知書）支払予定日あり帳票ＩＤです。
      */

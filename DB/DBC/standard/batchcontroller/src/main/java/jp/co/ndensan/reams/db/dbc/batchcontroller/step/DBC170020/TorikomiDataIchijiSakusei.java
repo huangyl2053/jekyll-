@@ -54,11 +54,6 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
     @Override
     protected void initialize() {
         csvFilePath = RString.EMPTY;
-        RString filename = new RString("KM999999_COMMON.csv");
-        RString localFilePath = new RString("D:\\KM999999_COMMON.csv");
-        FilesystemPath path = new FilesystemPath(localFilePath);
-        FilesystemName filesystemName = new FilesystemName(filename);
-        SharedFile.copyToSharedFile(path, filesystemName);
     }
 
     @Override
@@ -116,7 +111,7 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
     private CsvReader<KaigoServiceNaiyouCsvEntity> createCsvReader() {
         return new CsvReader.InstanceBuilder(csvFilePath, KaigoServiceNaiyouCsvEntity.class)
                 .setDelimiter(new RString(",")).setEnclosure(new RString("\""))
-                .hasHeader(false).setEncode(Encode.UTF_8withBOM).setNewLine(NewLine.CRLF).build();
+                .hasHeader(false).setEncode(Encode.JIS).setNewLine(NewLine.CRLF).build();
     }
 
     private void 取込データ一時作成(TorikomiDataTempEntity tblEntity, FlexibleYearMonth 適用開始年月日, KaigoServiceNaiyouCsvEntity csvEntity) {
