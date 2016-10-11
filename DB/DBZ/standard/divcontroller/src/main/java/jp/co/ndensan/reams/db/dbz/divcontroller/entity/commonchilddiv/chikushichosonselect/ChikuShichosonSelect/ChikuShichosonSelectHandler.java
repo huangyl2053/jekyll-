@@ -203,9 +203,9 @@ public class ChikuShichosonSelectHandler {
                 div.getBtnChikuNyuryokuGuide().setText(div.getDdlChiku().getSelectedValue().concat(文字_を選択する));
             }
             div.getDdlCodeList().getDataSource().clear();
-            div.setHdnTxtChikuShubetsu(div.getDdlChiku().getSelectedValue());
+            div.setHdnTxtChikuShubetsu(div.getDdlChiku().getSelectedKey());
             div.setHdnMapMultiSelect(RString.EMPTY);
-            div.setHdnTxtTitle(div.getDdlChiku().getSelectedValue());
+            div.setHdnTxtTitle(div.getDdlChiku().getSelectedKey());
         }
     }
 
