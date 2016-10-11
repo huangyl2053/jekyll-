@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -67,9 +68,9 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
     private final FlexibleYearMonth 処理年月;
-    private final RDateTime 作成日時;
+    private final YMDHMS 作成日時;
     private final int 連番;
-    private final int 集計flag;
+    private final boolean 集計flag;
     private final int 合計件数;
     private final KyufujissekiTorikomiIchiranEntity entity;
 
@@ -89,7 +90,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
      */
     public KyufujissekiTorikomiIchiranEditor(KyufujissekiTorikomiIchiranEntity entity, RString 並び順の１件目, RString 並び順の２件目,
             RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目,
-            List<RString> 改頁リスト, FlexibleYearMonth 処理年月, RDateTime 作成日時, int 連番, boolean 集計flag, int 合計件数) {
+            List<RString> 改頁リスト, FlexibleYearMonth 処理年月, YMDHMS 作成日時, int 連番, boolean 集計flag, int 合計件数) {
         this.entity = entity;
         this.並び順の１件目 = 並び順の１件目;
         this.並び順の２件目 = 並び順の２件目;
@@ -108,7 +109,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
     @Override
     public KyufujissekiTorikomiIchiranSource edit(KyufujissekiTorikomiIchiranSource source) {
 
-        source.printTimeStamp = getSakuseiYmhm(作成日時);
+        source.printTimeStamp = getSakuseiYmhm(作成日時.getRDateTime());
         source.torikomiYM = 処理年月.wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
@@ -202,7 +203,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
         if (集計flag) {
             source.gokeiKensuTitle = 合計件数タイトル;
             if (entity.get給付実績_出力データ件数() != null) {
-                source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(合計件数, 0).concat(件タイトル);
+                source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(entity.get給付実績_出力データ件数(), 0).concat(件タイトル);
             }
         }
 
