@@ -29,12 +29,12 @@ and open the template in the editor.
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" C
         ON C."shikibetsuCode" = B."shikibetsuCode"
         AND C."gyomuCode" = #{介護保険}
-        AND C."jukyuKaishiYMD" <![CDATA[!=]]> A."kijunYMD"
-        AND A."kijunYMD" <![CDATA[!=]]> C."jukyuHaishiYMD"
+        AND C."jukyuKaishiYMD" <![CDATA[<=]]> A."kijunYMD"
+        AND A."kijunYMD" <![CDATA[<=]]> C."jukyuHaishiYMD"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" D
         ON D."shikibetsuCode" = B."shikibetsuCode"
-        AND D."jukyuKaishiYMD" <![CDATA[!=]]> A."kijunYMD"
-        AND A."kijunYMD" <![CDATA[!=]]> D."jukyuHaishiYMD"
+        AND D."jukyuKaishiYMD" <![CDATA[<=]]> A."kijunYMD"
+        AND A."kijunYMD" <![CDATA[<=]]> D."jukyuHaishiYMD"
         LEFT JOIN
         (
         SELECT

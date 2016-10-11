@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
@@ -50,7 +51,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter extends BatchParam
     @BatchParameter(key = SAKUSEINITIZI, name = "作成日時")
     private RString 作成日時;
     @BatchParameter(key = SHORINITIZI, name = "処理日時")
-    private RString 処理日時;
+    private YMDHMS 処理日時;
     @BatchParameter(key = KYUHUSHUKEIKBN, name = "給付集計区分")
     private RString 給付集計区分;
     @BatchParameter(key = KYUSHICHOUSONKBN, name = "旧市町村区分")

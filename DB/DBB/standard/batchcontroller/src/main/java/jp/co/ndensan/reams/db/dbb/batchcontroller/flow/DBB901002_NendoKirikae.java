@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB901002.InsertUzT0002CustomConfigProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB901002.InsetDbT2001ChoshuHohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB901002.InsetDbT7022ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB901002.UpdateDbT7022ShoriDateKanriProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB901002.UpdateUzT0001StandardConfigProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB901002.DBB901002_NendoKirikaeParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.nendokirikae.NendoKirikaeProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -60,11 +60,11 @@ public class DBB901002_NendoKirikae extends BatchFlowBase<DBB901002_NendoKirikae
     /**
      * 業務コンフィグ年度切替
      *
-     * @return UpdateUzT0001StandardConfigProcess
+     * @return InsertUzT0002CustomConfigProcess
      */
     @Step(業務コンフィグ年度切替)
-    protected IBatchFlowCommand updateUzT0001StandardConfigProcess() {
-        return loopBatch(UpdateUzT0001StandardConfigProcess.class)
+    protected IBatchFlowCommand insertUzT0002CustomConfigProcess() {
+        return loopBatch(InsertUzT0002CustomConfigProcess.class)
                 .arguments(createProcessParameter()).define();
     }
 

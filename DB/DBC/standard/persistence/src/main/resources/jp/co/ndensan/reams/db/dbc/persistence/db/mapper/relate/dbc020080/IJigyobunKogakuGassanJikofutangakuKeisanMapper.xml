@@ -349,7 +349,8 @@
 
     <!--BatchStep2.3<変更>-->
     <select id="get給付実績基本一時" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
-            resultMap="ResultMap_DbT3017MatchingEntity" resultOrdered="true" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity"
+            resultOrdered="true" fetchSize="500">
         SELECT "A".*
         FROM rgdb."DbT3017KyufujissekiKihon" as "A"
         WHERE "A"."isDeleted"=False
@@ -366,7 +367,7 @@
     </select>
 
     <!--BatchStep2.3<変更>-->
-    <select id="getShiharaihohoHenkoHosoku" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
+    <select id="getShiharaihohoHenkoHosoku"
             resultMap="ResultMap_DbT3017MatchingEntity" resultOrdered="true" fetchSize="500">
         SELECT "temp".*
         ,"kihon".*
@@ -374,7 +375,7 @@
         FROM "JissekiFutangakuDataTemp" AS "temp"
         LEFT JOIN "KyufujissekiKihonTemp" as "kihon"
         ON "temp"."hihokenshaNo"＝"kihon"."hiHokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)<![CDATA[<=]]>"kihon"."serviceTeikyoYM"            
+        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)<![CDATA[<=]]>"kihon"."serviceTeikyoYM"
         AND "kihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
         LEFT JOIN (SELECT * FROM rgdb."DbT4021ShiharaiHohoHenko"  as "B"
         WHERE "B"."isDeleted"= False
@@ -465,7 +466,7 @@
     </select>
 
     <!--BatchStep2.4<変更>-->
-    <select id="getShafukuKeigenTempJigyobunHenko" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
+    <select id="getShafukuKeigenTempHenko" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
             resultMap="ResultMap_RiyoshaFutanMatchingEntity" resultOrdered="true" fetchSize="500">
         SELECT 
         <include refid="allColumns_JissekiFutangakuDataTempEntity" />
@@ -659,6 +660,13 @@
             resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
         SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
         FROM "JissekiFutangakuDataTemp"
+    </select>
+    
+    <select id="get帳票データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
+            resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
+        SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
+        FROM "JissekiFutangakuDataTemp"
+        <if test="出力順" >${出力順}</if>
     </select>
 
     <select id="get処理日付管理" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"

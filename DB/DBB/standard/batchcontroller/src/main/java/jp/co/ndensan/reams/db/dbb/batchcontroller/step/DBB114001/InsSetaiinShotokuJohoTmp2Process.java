@@ -39,6 +39,9 @@ public class InsSetaiinShotokuJohoTmp2Process extends BatchProcessBase<SetaiShot
 
     @Override
     protected void process(SetaiShotokuTempEntity t) {
+        if (t.getShikibetsuCode() == null) {
+            return;
+        }
         世帯員所得情報writer.insert(t);
     }
 }

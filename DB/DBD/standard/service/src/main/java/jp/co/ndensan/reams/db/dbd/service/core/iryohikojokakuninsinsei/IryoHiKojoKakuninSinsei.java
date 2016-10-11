@@ -7,19 +7,22 @@ package jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.Chohyokoyujoho;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100030.ShujiiIkenshoKakuninshoProperty;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.definition.core.meishofuyo.MeishoFuyoTypeEnum;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100030.ShujiiIkenshoKakuninshoReportSource;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4401IryohiKojoDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoikiHenshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -96,6 +99,7 @@ public class IryoHiKojoKakuninSinsei {
     private static final int INT_4 = 4;
     private final MapperProvider mapperProvider;
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
+    private final DbT4401IryohiKojoDac dac;
 
     /**
      * コンストラクタです。
@@ -103,6 +107,7 @@ public class IryoHiKojoKakuninSinsei {
     public IryoHiKojoKakuninSinsei() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
+        this.dac = InstanceProvider.create(DbT4401IryohiKojoDac.class);
     }
 
     /**
@@ -148,24 +153,12 @@ public class IryoHiKojoKakuninSinsei {
      * @param 被保険者番号 被保険者番号
      * @return 医療費控除情報
      */
-    public List<IryohiKojoEntityResult> getIryohikojyo(RString 被保険者番号) {
-        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-        List<IryohiKojoEntityResult> 医療費控除情報 = new ArrayList<>();
-        List<IryohiKojoEntity> result = mapper.select医療費控除情報(被保険者番号);
+    public List<IryohiKojo> getIryohikojyo(HihokenshaNo 被保険者番号) {
+        List<IryohiKojo> 医療費控除情報 = new ArrayList<>();
+        List<DbT4401IryohiKojoEntity> result = dac.select医療費控除(被保険者番号);
         if (result != null) {
-            for (IryohiKojoEntity entity : result) {
-                IryohiKojoEntityResult 医療費控除 = new IryohiKojoEntityResult();
-                医療費控除.setデータ区分(entity.getデータ区分());
-                医療費控除.set主治医意見書受領年月日(entity.get主治医意見書受領年月日());
-                医療費控除.set尿失禁の有無(entity.is尿失禁の有無());
-                医療費控除.set控除対象年(entity.get控除対象年());
-                医療費控除.set日常生活自立度(entity.get日常生活自立度());
-                医療費控除.set申請年月日(entity.get申請年月日());
-                医療費控除.set発行年月日(entity.get発行年月日());
-                医療費控除.set登録年月日(entity.get登録年月日());
-                医療費控除.set被保険者番号(entity.get被保険者番号());
-                医療費控除.set認定有効期間終了年月日(entity.get認定有効期間終了年月日());
-                医療費控除.set認定有効期間開始年月日(entity.get認定有効期間開始年月日());
+            for (DbT4401IryohiKojoEntity entity : result) {
+                IryohiKojo 医療費控除 = new IryohiKojo(entity);
                 医療費控除情報.add(医療費控除);
             }
         }
@@ -179,24 +172,12 @@ public class IryoHiKojoKakuninSinsei {
      * @param データ区分 データ区分
      * @return 医療費控除情報
      */
-    public List<IryohiKojoEntityResult> getIryohikojyo_Chohyo(RString 被保険者番号, RString データ区分) {
-        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-        List<IryohiKojoEntityResult> 単票用医療費控除 = new ArrayList<>();
-        List<IryohiKojoEntity> result = mapper.select単票用医療費控除(被保険者番号, データ区分);
+    public List<IryohiKojo> getIryohikojyo_Chohyo(HihokenshaNo 被保険者番号, RString データ区分) {
+        List<IryohiKojo> 単票用医療費控除 = new ArrayList<>();
+        List<DbT4401IryohiKojoEntity> result = dac.select単票用医療費控除(被保険者番号, データ区分);
         if (result != null) {
-            for (IryohiKojoEntity entity : result) {
-                IryohiKojoEntityResult 医療費控除 = new IryohiKojoEntityResult();
-                医療費控除.setデータ区分(entity.getデータ区分());
-                医療費控除.set主治医意見書受領年月日(entity.get主治医意見書受領年月日());
-                医療費控除.set尿失禁の有無(entity.is尿失禁の有無());
-                医療費控除.set控除対象年(entity.get控除対象年());
-                医療費控除.set日常生活自立度(entity.get日常生活自立度());
-                医療費控除.set申請年月日(entity.get申請年月日());
-                医療費控除.set発行年月日(entity.get発行年月日());
-                医療費控除.set登録年月日(entity.get登録年月日());
-                医療費控除.set被保険者番号(entity.get被保険者番号());
-                医療費控除.set認定有効期間終了年月日(entity.get認定有効期間終了年月日());
-                医療費控除.set認定有効期間開始年月日(entity.get認定有効期間開始年月日());
+            for (DbT4401IryohiKojoEntity entity : result) {
+                IryohiKojo 医療費控除 = new IryohiKojo(entity);
                 単票用医療費控除.add(医療費控除);
             }
         }
@@ -213,21 +194,26 @@ public class IryoHiKojoKakuninSinsei {
     public OmutsusiyoSyomeishoEntity editomutsusiyoSyomeisho(ShikibetsuCode 識別コード, RString 帳票分類ID) {
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBD介護受給, new ReportId(帳票分類ID));
-        RString 管内住所編集_都道府県名付与有無 = DbBusinessConfig.getConfigInfo(
+        RString 管内住所編集_都道府県名付与有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 管内住所編集_郡名付与有無 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 管内住所編集_郡名付与有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 管内住所編集_市町村名付与有無 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 管内住所編集_市町村名付与有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 管内住所編集_編集方法 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 管内住所編集_編集方法 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 住所編集_方書表示有無 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 住所編集_方書表示有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
         if (帳票制御共通 != null) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;
@@ -318,88 +304,58 @@ public class IryoHiKojoKakuninSinsei {
         List<RString> コンフィグ情報 = getコンフィグ情報(帳票制御共通);
         NinshoshaSource 認証者 = 認証者編集(地方公共団体, RDate.getNowDate(), 帳票制御共通);
         IKojin 宛名情報 = getAtena_Iryohikojyo(識別コード);
+        Chohyokoyujoho 帳票固有情報 = new Chohyokoyujoho();
         if (!JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(コンフィグ情報.get(INT_3))) {
             SofubutsuAtesakiSource 送付物宛先 = 窓空き住所編集(地方公共団体, 識別コード, コンフィグ情報);
-            主治医意見書確認書Entity.set宛名情報_送付先郵便番号(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先行政区名(送付物宛先.gyoseiku);
-            主治医意見書確認書Entity.set宛名情報_送付先住所3(送付物宛先.jusho3);
-            主治医意見書確認書Entity.set宛名情報_送付先住所1(送付物宛先.jusho1);
-            主治医意見書確認書Entity.set宛名情報_送付先住所2(送付物宛先.jusho2);
-            主治医意見書確認書Entity.set宛名情報_送付先方書2(送付物宛先.katagaki2);
-            主治医意見書確認書Entity.set宛名情報_送付先方書2小(送付物宛先.katagakiSmall2);
-            主治医意見書確認書Entity.set宛名情報_送付先方書1(送付物宛先.katagaki1);
-            主治医意見書確認書Entity.set宛名情報_送付先方書1小(送付物宛先.katagakiSmall1);
-            主治医意見書確認書Entity.set宛名情報_代納人区分(送付物宛先.dainoKubunMei);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名12(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名12小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与12(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名11(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名11小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与11(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_左括弧2(送付物宛先.kakkoLeft2);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名22(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名22小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与22(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_右括弧2(送付物宛先.kakkoRight2);
-            主治医意見書確認書Entity.set宛名情報_左括弧1(送付物宛先.kakkoLeft1);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名21(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_送付先氏名21小(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_敬称付与21(送付物宛先.yubinNo);
-            主治医意見書確認書Entity.set宛名情報_右括弧1(送付物宛先.kakkoRight1);
-            主治医意見書確認書Entity.setカスタマバーコード(送付物宛先.customerBarCode);
+            主治医意見書確認書Entity.set送付物宛先(送付物宛先);
             RString 編集後住所 = 住所編集(地方公共団体, 宛名情報, コンフィグ情報);
-            主治医意見書確認書Entity.set住所(編集後住所);
+            帳票固有情報.set住所(編集後住所);
             if (編集後住所.length() <= サーティ) {
-                主治医意見書確認書Entity.set住所１(RString.EMPTY);
-                主治医意見書確認書Entity.set住所２(RString.EMPTY);
+                帳票固有情報.set住所１(RString.EMPTY);
+                帳票固有情報.set住所２(RString.EMPTY);
             } else {
-                主治医意見書確認書Entity.set住所１(編集後住所.substring(0, サーティ));
-                主治医意見書確認書Entity.set住所２(編集後住所.substring(サーティ));
+                帳票固有情報.set住所１(編集後住所.substring(0, サーティ));
+                帳票固有情報.set住所２(編集後住所.substring(サーティ));
             }
-            主治医意見書確認書Entity.set文書番号(文書番号);
-            主治医意見書確認書Entity.set文書番号(文書番号);
+            帳票固有情報.set文書番号(文書番号);
+            帳票固有情報.set文書番号(文書番号);
         }
-        主治医意見書確認書Entity.set役職名(認証者.ninshoshaYakushokuMei);
-        主治医意見書確認書Entity.set役職名１(認証者.ninshoshaYakushokuMei1);
-        主治医意見書確認書Entity.set役職名２(認証者.ninshoshaYakushokuMei2);
-        主治医意見書確認書Entity.set認証者氏名(認証者.ninshoshaYakushokuMei);
-        主治医意見書確認書Entity.set電子公印(認証者.denshiKoin);
-        主治医意見書確認書Entity.set認証者氏名掛けない(認証者.ninshoshaShimeiKakenai);
-        主治医意見書確認書Entity.set認証者氏名掛ける(認証者.ninshoshaShimeiKakeru);
-        主治医意見書確認書Entity.set公印書略(認証者.koinShoryaku);
-        主治医意見書確認書Entity.set文書番号(文書番号);
-        主治医意見書確認書Entity.set発行日(作成日.toDateString());
-        主治医意見書確認書Entity.set申請日(申請日.toDateString());
+        主治医意見書確認書Entity.set認証者(認証者);
+        帳票固有情報.set文書番号(文書番号);
+        帳票固有情報.set発行日(作成日.toDateString());
+        帳票固有情報.set申請日(申請日.toDateString());
         RString 氏名 = RString.EMPTY;
         if (宛名情報 != null) {
             if (JuminShubetsu.日本人.getCode().equals(宛名情報.get住民種別().getCode())) {
                 氏名 = 宛名情報.get日本人氏名().getName().value();
-                主治医意見書確認書Entity.set氏名(氏名);
+                帳票固有情報.set氏名(氏名);
             } else if (JuminShubetsu.外国人.getCode().equals(宛名情報.get住民種別().getCode())) {
                 氏名 = 宛名情報.get外国人氏名().getName().value();
-                主治医意見書確認書Entity.set氏名(氏名);
+                帳票固有情報.set氏名(氏名);
             }
         }
         if (氏名.length() <= サーティ) {
-            主治医意見書確認書Entity.set氏名１(RString.EMPTY);
-            主治医意見書確認書Entity.set氏名２(RString.EMPTY);
+            帳票固有情報.set氏名１(RString.EMPTY);
+            帳票固有情報.set氏名２(RString.EMPTY);
         } else {
-            主治医意見書確認書Entity.set氏名１(氏名.substring(0, サーティ));
-            主治医意見書確認書Entity.set氏名２(氏名.substring(サーティ));
+            帳票固有情報.set氏名１(氏名.substring(0, サーティ));
+            帳票固有情報.set氏名２(氏名.substring(サーティ));
         }
-        主治医意見書確認書Entity.set被保険者番号(被保険者番号);
-        主治医意見書確認書Entity.set主治医意見書作成日(主治医意見書作成日.toDateString());
-        主治医意見書確認書Entity.set要介護認定の有効期間開始(認定期間開始日.toDateString());
-        主治医意見書確認書Entity.set要介護認定の有効期間終了(認定期間終了日.toDateString());
-        主治医意見書確認書Entity.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(日常生活自立度)
+        帳票固有情報.set被保険者番号(被保険者番号);
+        帳票固有情報.set主治医意見書作成日(主治医意見書作成日.toDateString());
+        帳票固有情報.set要介護認定の有効期間開始(認定期間開始日.toDateString());
+        帳票固有情報.set要介護認定の有効期間終了(認定期間終了日.toDateString());
+        帳票固有情報.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.getコード().equals(日常生活自立度)
                 ? 選択する : RString.EMPTY);
-        主治医意見書確認書Entity.set尿失禁の発生可能性(new RString("はい").equals(尿失禁の有無) ? あり : なし);
+        帳票固有情報.set尿失禁の発生可能性(new RString("はい").equals(尿失禁の有無) ? あり : なし);
+        帳票固有情報.set年(対象年);
+        主治医意見書確認書Entity.set帳票固有情報(帳票固有情報);
         return 主治医意見書確認書Entity;
     }
 
@@ -481,21 +437,26 @@ public class IryoHiKojoKakuninSinsei {
 
     private List<RString> getコンフィグ情報(DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通) {
         List<RString> コンフィグ情報 = new ArrayList<>();
-        RString 管内住所編集_都道府県名付与有無 = DbBusinessConfig.getConfigInfo(
+        RString 管内住所編集_都道府県名付与有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 管内住所編集_郡名付与有無 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 管内住所編集_郡名付与有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 管内住所編集_市町村名付与有無 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 管内住所編集_市町村名付与有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 管内住所編集_編集方法 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 管内住所編集_編集方法 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
-        RString 住所編集_方書表示有無 = DbBusinessConfig.getConfigInfo(
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
+        RString 住所編集_方書表示有無 = DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
-                SubGyomuCode.DBU介護統計報告).getConfigValue();
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
         if (帳票制御共通 != null) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;

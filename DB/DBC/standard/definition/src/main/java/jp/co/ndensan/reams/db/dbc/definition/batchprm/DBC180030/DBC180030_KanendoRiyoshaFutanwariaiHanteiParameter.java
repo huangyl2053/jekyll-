@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180030;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180011.DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180021.DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -61,10 +63,10 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180020_IdoRiyoshaFutanwariaiHanteiParameter
+     * @return parameter DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter
      */
-    public DBC180020_IdoRiyoshaFutanwariaiHanteiParameter toIdoDateTyuushutuKyoutsuuParameter() {
-        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+    public DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter toIdoDateTyuushutuKyoutsuuParameter() {
+        DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter parameter = new DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter();
         parameter.setTaishoNendo(対象年度.minusYear(抽出回数));
         if (抽出回数 == 1) {
             parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
@@ -86,10 +88,10 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180020_IdoRiyoshaFutanwariaiHanteiParameter
+     * @return parameter DBC180022_RiyoshaFutanwariaiHanteiSubParameter
      */
-    public DBC180020_IdoRiyoshaFutanwariaiHanteiParameter toRiyoshaFutanwariaiHanteiCommonFlowParameter() {
-        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+    public DBC180022_RiyoshaFutanwariaiHanteiSubParameter toRiyoshaFutanwariaiHanteiCommonFlowParameter() {
+        DBC180022_RiyoshaFutanwariaiHanteiSubParameter parameter = new DBC180022_RiyoshaFutanwariaiHanteiSubParameter();
         parameter.setTaishoNendo(対象年度.minusYear(抽出回数));
         if (抽出回数 == 1) {
             parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
@@ -106,10 +108,10 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180020_IdoRiyoshaFutanwariaiHanteiParameter
+     * @return parameter DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter
      */
-    public DBC180020_IdoRiyoshaFutanwariaiHanteiParameter toFutanWariaiIchiranFlowParameter() {
-        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+    public DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter toFutanWariaiIchiranFlowParameter() {
+        DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter parameter = new DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter();
         parameter.setTaishoNendo(対象年度);
         parameter.setShoriKubun(過年度);
         parameter.setNendoShuryoNengappi(年度終了年月日);

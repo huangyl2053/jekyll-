@@ -79,47 +79,6 @@
         <result property="発行年月日" column="hakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
-    <select resultOrdered="true" id="select医療費控除情報"
-            resultMap="resultmap_getIryohikojyoChohyo" fetchSize="500">
-        SELECT
-        "hihokenshaNo" ,
-        "kojoTaishoNen" ,
-        "dataKubun",
-        "torokuYMD" ,
-        "shinseiYMD" ,
-        "ninteiYukoKikanKaishiYMD" ,
-        "ninteiYukoKikanShuryoYMD" ,
-        "shujiiIkenshoJuryoYMD" ,
-        "nichijoSeikatsuJiritsudo" ,
-        "nyoshikkinHassei" ,
-        "hakkoYMD"
-        FROM        rgdb."DbT4401IryohiKojo"
-        WHERE   "hihokenshaNo" = #{被保険者番号}
-        AND     "logicalDeletedFlag" = FALSE
-        ORDER BY "dataKubun","kojoTaishoNen" DESC
-    </select>
-
-    <select resultOrdered="true" id="select単票用医療費控除"
-            resultMap="resultmap_getIryohikojyoChohyo" fetchSize="500">
-        SELECT
-        "hihokenshaNo" ,
-        "kojoTaishoNen" ,
-        "dataKubun",
-        "torokuYMD" ,
-        "shinseiYMD" ,
-        "ninteiYukoKikanKaishiYMD" ,
-        "ninteiYukoKikanShuryoYMD" ,
-        "shujiiIkenshoJuryoYMD" ,
-        "nichijoSeikatsuJiritsudo" ,
-        "nyoshikkinHassei" ,
-        "hakkoYMD"
-        FROM		rgdb."DbT4401IryohiKojo"
-        WHERE	"hihokenshaNo" = #{被保険者番号}
-        AND		"dataKubun" = #{データ区分}
-        AND		"logicalDeletedFlag" = FALSE
-        ORDER BY "kojoTaishoNen" DESC
-    </select>
-
     <select resultOrdered="true" id="select宛名情報"
             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter"

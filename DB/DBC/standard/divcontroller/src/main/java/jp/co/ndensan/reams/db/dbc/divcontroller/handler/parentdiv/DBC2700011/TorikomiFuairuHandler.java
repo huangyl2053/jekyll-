@@ -48,7 +48,6 @@ public class TorikomiFuairuHandler {
         SharedFileDescriptor sharedFileDescriptor
                 = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(共有ファイル名));
         sharedFileDescriptor = SharedFile.defineSharedFile(sharedFileDescriptor);
-        SharedFile.deleteOldestEntry(sharedFileDescriptor);
         SharedFile.defineSharedFile(sharedFileDescriptor, 1, Arrays.asList(HOSHI), null, false, null);
         RString text = RString.EMPTY;
         try (FileReader reader = new FileReader(csvFilePath, Encode.UTF_8withBOM)) {

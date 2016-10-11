@@ -101,5 +101,4 @@ public class KyoutsuIdoReanrakuhyoEraTeisei {
     private KyoutsuIdoReanrakuhyoEraTeiseiValidationHandler getValidationHandler() {
         return new KyoutsuIdoReanrakuhyoEraTeiseiValidationHandler();
     }
-
 }

@@ -33,6 +33,8 @@ public class TyukanTempBeforeInsertProcess extends BatchProcessBase<DbT2002FukaE
 
     private static final RString 更新前賦課情報 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
             + "IKeisangoJohoSakuseiMapper.get更新前賦課情報");
+    private static final RString 更新前賦課情報_処理３ = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
+            + "IKeisangoJohoSakuseiMapper.get計算中間Temp更新前情報処理３");
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
     private IKeisangoJohoSakuseiMapper iKeisangoJohoSakuseiMapper;
     private KeisangoJohoResult keisangoJohoResult;
@@ -50,7 +52,11 @@ public class TyukanTempBeforeInsertProcess extends BatchProcessBase<DbT2002FukaE
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(更新前賦課情報, setMybatisParamter());
+        if (processParamter.isSaishinFlag3()) {
+            return new BatchDbReader(更新前賦課情報_処理３);
+        } else {
+            return new BatchDbReader(更新前賦課情報, setMybatisParamter());
+        }
     }
 
     @Override

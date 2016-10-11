@@ -44,7 +44,6 @@ public class NofugakuJohoCreate {
     private static final int 期11 = 11;
     private static final int 期12 = 12;
     private static final int 期13 = 13;
-    private static final RString 数字_0 = new RString("0");
     private static final RString 数字_1 = new RString("1");
     private static final RString 数字_2 = new RString("2");
     private static final RString 数字_3 = new RString("3");
@@ -372,14 +371,12 @@ public class NofugakuJohoCreate {
             NofugakuDataProcessParameter processParameter,
             int 連番, KitsukiList 期月リスト_特徴, KitsukiList 期月リスト_普徴) {
         BbKakuteiShinkokuDataCsvEntity csvEntity = new BbKakuteiShinkokuDataCsvEntity();
-        //TODO
         csvEntity.set市町村コード１(getColumnValue(納付額情報.get賦課市町村コード()));
         csvEntity.set識別ＩＤ(識別ＩＤ);
         csvEntity.setタイムスタンプ(YMDHMS.now().toDateString());
         csvEntity.set最終レコード区分(RString.EMPTY);
         csvEntity.set連番(new RString(連番));
         csvEntity.setFiller(RString.HALF_SPACE);
-        //TODO
         csvEntity.set市町村コード２(getColumnValue(納付額情報.get賦課市町村コード()));
         csvEntity.set識別コード(getColumnValue(納付額情報.get識別コード()));
         csvEntity.set被保険者番号(getColumnValue(納付額情報.get被保険者番号()));
@@ -471,14 +468,12 @@ public class NofugakuJohoCreate {
             NofugakuDataProcessParameter processParameter,
             int 連番, KitsukiList 期月リスト_特徴, KitsukiList 期月リスト_普徴) {
         DE940110DatEntity dataEntity = new DE940110DatEntity();
-        //TODO
         dataEntity.set市町村コード１(getColumnValue(納付額情報.get賦課市町村コード()));
         dataEntity.set識別ＩＤ(識別ＩＤ);
         dataEntity.setタイムスタンプ(YMDHMS.now().toDateString());
         dataEntity.set最終レコード区分(RString.EMPTY);
         dataEntity.set連番(new RString(連番));
         dataEntity.setFiller(RString.HALF_SPACE);
-        //TODO
         dataEntity.set市町村コード２(getColumnValue(納付額情報.get賦課市町村コード()));
         dataEntity.set識別コード(getColumnValue(納付額情報.get識別コード()));
         dataEntity.set被保険者番号(getColumnValue(納付額情報.get被保険者番号()));
@@ -571,14 +566,12 @@ public class NofugakuJohoCreate {
             NofugakuDataProcessParameter processParameter,
             int 連番, KitsukiList 期月リスト_特徴, KitsukiList 期月リスト_普徴) {
         DE940200DatEntity dataEntity = new DE940200DatEntity();
-        //TODO
         dataEntity.set市町村コード１(getColumnValue(納付額情報.get賦課市町村コード()));
         dataEntity.set識別ＩＤ(識別ＩＤ);
         dataEntity.setタイムスタンプ(YMDHMS.now().toDateString());
         dataEntity.set最終レコード区分(RString.EMPTY);
         dataEntity.set連番(new RString(連番));
         dataEntity.setFiller(RString.HALF_SPACE);
-        //TODO
         dataEntity.set市町村コード２(getColumnValue(納付額情報.get賦課市町村コード()));
         dataEntity.set識別コード(getColumnValue(納付額情報.get識別コード()));
         dataEntity.set被保険者番号(getColumnValue(納付額情報.get被保険者番号()));

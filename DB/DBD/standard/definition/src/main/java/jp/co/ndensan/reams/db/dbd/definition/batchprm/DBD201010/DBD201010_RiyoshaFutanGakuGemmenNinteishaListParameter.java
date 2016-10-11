@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Hihoke
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.ChohyoShutsuryokuJohoShutokuProcessParameter;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.HchiJinoSyouriCreateProcessParamter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaListSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.TaishoshaIchijiTokuteiProcessParamter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,25 +31,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends BatchParameterBase {
 
-    // 対象リスト
     private TargetList 対象リスト;
-    // 基準日
     private FlexibleDate 基準日;
-    // 所得年度
     private FlexibleYear 所得年度;
-    // 旧措置区分
     private KyusochishaJukyushaKubun 旧措置区分;
-    // 世帯表示
     private SetaiHyoji 世帯表示;
-    // 受給者区分
     private JukyushaKubun2 受給者区分;
-    // 世帯非課税等
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
-    // CSV出力設定
     private List<CSVSettings> csv出力設定;
-    // 改頁出力順ID
     private Long 改頁出力順ID;
-    // 帳票ID
     private RString 帳票ID;
 
     /**
@@ -57,8 +47,8 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
      *
      * @return 対象者一次特定の引数
      */
-    public HchiJinoSyouriCreateProcessParamter toHchiJinoSyouriCreateProcessParamter() {
-        return new HchiJinoSyouriCreateProcessParamter(対象リスト, 受給者区分, 旧措置区分, 基準日);
+    public TaishoshaIchijiTokuteiProcessParamter toTaishoshaIchijiTokuteiProcessParamter() {
+        return new TaishoshaIchijiTokuteiProcessParamter(対象リスト, 受給者区分, 旧措置区分, 基準日);
     }
 
     /**
@@ -66,8 +56,8 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
      *
      * @return 利用者負担額減免認定者リスト発行の引数
      */
-    public ChohyoShutsuryokuJohoShutokuProcessParameter toChohyoShutsuryokuJohoShutokuProcessParameter() {
-        return new ChohyoShutsuryokuJohoShutokuProcessParameter(対象リスト, 基準日, 所得年度,
+    public NinteishaListSakuseiProcessParameter toNinteishaListSakuseiProcessParameter() {
+        return new NinteishaListSakuseiProcessParameter(対象リスト, 基準日, 所得年度,
                 旧措置区分, 世帯表示, 受給者区分, 世帯非課税等, csv出力設定, 改頁出力順ID, 帳票ID);
     }
 }

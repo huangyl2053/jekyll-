@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080;
 
 import jp.co.ndensan.reams.db.dbc.business.core.dbc020080.DBC020080DataUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorListType;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.TaishoshaChushuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
@@ -30,7 +30,7 @@ public class TaishoshaChushuProcess extends BatchProcessBase<DBC020080TaishoData
      * 出力パラメターデータがありの名称です。
      */
     public static final RString OUTPUTNAME;
-    private DBC020080ProcessParameter parameter;
+    private TaishoshaChushuProcessParameter parameter;
     private DBC020080DataUtil util;
     private RString beforeKey;
     private OutputParameter<Boolean> isデータがあり;
@@ -63,13 +63,13 @@ public class TaishoshaChushuProcess extends BatchProcessBase<DBC020080TaishoData
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(PATH, parameter.toDBC020080MyBatisParameter());
+        return new BatchDbReader(PATH, parameter.toTaishoshaChushuMyBatisParameter());
     }
 
     @Override
     protected void process(DBC020080TaishoDataEntity entity) {
         isデータがあり.setValue(Boolean.TRUE);
-        JissekiFutangakuDataTempEntity result = util.toJissekiTempEntityTaishoChuShu(entity, parameter, 市町村名);
+        JissekiFutangakuDataTempEntity result = util.toJissekiTempEntityTaishoChuShu(entity, parameter.get処理日時(), 市町村名);
         実績負担額データ.insert(result);
         if (entity.getDaichoHihokenshaNo() == null) {
             return;

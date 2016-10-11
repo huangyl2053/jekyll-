@@ -58,7 +58,12 @@
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{
+        SELECT
+        ARRAY_AGG(CAST (master."iN住民コード" AS TEXT))
+        FROM
+        master
+        }') AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = master."iN住民コード"
     </select>
     

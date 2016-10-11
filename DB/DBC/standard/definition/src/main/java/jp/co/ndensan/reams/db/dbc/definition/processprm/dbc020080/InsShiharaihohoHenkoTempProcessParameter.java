@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 
 /**
- * ビジネス設計_DBCMN62006_自己負担額計算（一括）<br/>
- * のInsShiharaihohoHenkoTempProcessのプロセスパラメタークラスです。
+ * ビジネス設計_DBCMN62006_自己負担額計算（一括）のプロセスパラメタークラスです。
  *
  * @reamsid_L DBC-2060-050 liuyang
  */

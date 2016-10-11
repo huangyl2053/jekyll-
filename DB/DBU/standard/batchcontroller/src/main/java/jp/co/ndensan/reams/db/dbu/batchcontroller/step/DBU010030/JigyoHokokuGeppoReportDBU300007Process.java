@@ -131,7 +131,7 @@ public class JigyoHokokuGeppoReportDBU300007Process extends BatchProcessBase<Jig
         JigyohokokuCompYoshiki153Variables reportData = new JigyohokokuCompYoshiki153Variables();
         // TODO  内部QA：1757 Redmine：#102256(保険者番号,保険者名の取得方式が知らない)
         reportData.set年報月報区分(年報月報区分);
-        reportData.set処理日時(processParameter.get処理日時());
+        reportData.set処理日時(processParameter.get処理日時().toDateString());
         reportData.set給付区分(processParameter.get給付集計区分());
         reportData.set集計期間FROM(null);
         reportData.set集計期間TO(null);

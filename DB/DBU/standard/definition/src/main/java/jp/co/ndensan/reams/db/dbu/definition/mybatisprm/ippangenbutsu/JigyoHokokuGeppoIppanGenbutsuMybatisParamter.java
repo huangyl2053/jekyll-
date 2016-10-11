@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -34,7 +35,7 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
     private final RString 処理枝番;
     private final RString 年度;
     private final RString 基準年月日;
-    private final RString 基準日時;
+    private final YMDHMS 基準日時;
     private final RString 構成市町村区分;
     private final List<RString> 構成市町村コードList;
     private final RString 集計年月;
@@ -61,7 +62,7 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
             RString 処理枝番,
             RString 年度,
             RString 基準年月日,
-            RString 基準日時,
+            YMDHMS 基準日時,
             RString 構成市町村区分,
             List<RString> 構成市町村コードList,
             RString 集計年月,
@@ -106,7 +107,7 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, 市町村コードList,
                 null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, null, 集計年月, 給付集計区分);
+                RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分);
     }
 
     /**
@@ -120,7 +121,7 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(集計番号,
                 一時テーブル名, RString.EMPTY, RString.EMPTY, null,
                 null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, null, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, RString.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -143,7 +144,7 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
             RString 集計年月,
             RString 給付集計区分,
             RString 作成日時,
-            RString 処理日時) {
+            YMDHMS 処理日時) {
         List<RString> 市町村コードリスト = new ArrayList<>();
         市町村コードリスト.add(市町村コード);
         RString 処理名 = RString.EMPTY;
@@ -158,8 +159,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
             処理枝番 = 集計年月.substring(INDEX_4, INDEX_6).concat(new RString("00"));
             年度 = 集計年月.substring(0, INDEX_4);
         }
-        RString 基準年月日 = 処理日時.substring(0, INDEX);
-        RString 基準日時 = 処理日時;
+        RString 基準年月日 = 処理日時.getDate().toDateString();
+        YMDHMS 基準日時 = 処理日時;
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, 市町村コード,
                 市町村コードリスト, null, null, new RString("DBU"), 処理名, 処理枝番, 年度,
                 基準年月日, 基準日時, RString.EMPTY, null, RString.EMPTY, RString.EMPTY);
@@ -201,7 +202,7 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         集計番号List.add(ShukeiNo.toValue(new RString("1400")).getコード());
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 市町村コードリスト, 集計番号List, 表番号List, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, null, 集計年月, 給付集計区分);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分);
     }
 
     /**
@@ -241,6 +242,6 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         集計番号List.add(ShukeiNo.toValue(new RString("1393")).getコード());
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 市町村コードリスト, 集計番号List, 表番号List, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, null, 集計年月, 給付集計区分);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分);
     }
 }
