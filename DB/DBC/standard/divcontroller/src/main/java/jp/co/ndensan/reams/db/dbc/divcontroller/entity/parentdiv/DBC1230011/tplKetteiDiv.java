@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -251,6 +252,16 @@ public class tplKetteiDiv extends TabPanel {
     }
 
     @JsonIgnore
+    public Label getLabel1() {
+        return this.getKogakuGassanShikyuKetteiHoseiDetail2().getLabel1();
+    }
+
+    @JsonIgnore
+    public void setLabel1(Label Label1) {
+        this.getKogakuGassanShikyuKetteiHoseiDetail2().setLabel1(Label1);
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtKyufuShurui() {
         return this.getKogakuGassanShikyuKetteiHoseiDetail2().getTxtKyufuShurui();
     }
@@ -258,6 +269,16 @@ public class tplKetteiDiv extends TabPanel {
     @JsonIgnore
     public void setTxtKyufuShurui(TextBoxMultiLine txtKyufuShurui) {
         this.getKogakuGassanShikyuKetteiHoseiDetail2().setTxtKyufuShurui(txtKyufuShurui);
+    }
+
+    @JsonIgnore
+    public Label getLabel2() {
+        return this.getKogakuGassanShikyuKetteiHoseiDetail2().getLabel2();
+    }
+
+    @JsonIgnore
+    public void setLabel2(Label Label2) {
+        this.getKogakuGassanShikyuKetteiHoseiDetail2().setLabel2(Label2);
     }
 
     @JsonIgnore

@@ -211,13 +211,13 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
 
         public static boolean is新規登録_対象年度入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             return !(div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() != null
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue().toDateString()));
         }
 
         public static boolean is新規登録_対象年度_未指定(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             if (div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() != null
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue().toDateString())) {
                 return true;
             }
@@ -229,7 +229,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         public static boolean is新規登録_証記載保険者番号が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             return !(div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue())
                     || div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
@@ -274,7 +274,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         public static boolean is新規登録_連絡票整理番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             return !(div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue())
                     || div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
@@ -284,7 +284,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         public static boolean is新規登録_連絡票整理番号不一致_先頭3桁(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             if (div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue())) {
                 return true;
             }
@@ -302,7 +302,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
                 KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             if (div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue())) {
                 return true;
             }
@@ -318,13 +318,13 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
 
         public static boolean is検索条件_対象年度入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             return !(div.getSearchPanel().getTxtKensakuTaishoNendo().getValue() != null
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getSearchPanel().getTxtKensakuTaishoNendo().getValue().toDateString()));
         }
 
         public static boolean is検索条件_対象年度_未指定(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             if (div.getSearchPanel().getTxtKensakuTaishoNendo().getValue() != null
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getSearchPanel().getTxtKensakuTaishoNendo().getValue().toDateString())) {
                 return true;
             }
@@ -335,7 +335,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         public static boolean is検索条件_証記載保険者番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             return !(div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue())
                     || div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
@@ -380,7 +380,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         public static boolean is検索条件_連絡票整理番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             return !(div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue())
                     || div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
@@ -390,7 +390,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         public static boolean is検索条件_連絡票整理番号不一致_先頭3桁(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             if (div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue())) {
                 return true;
             }
@@ -408,7 +408,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
                 KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             if (div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
-                    && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(
+                    && !RStringUtil.isHalfsizeNumberOnly(
                             div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue())) {
                 return true;
             }
@@ -417,7 +417,7 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
                     && div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().isEmpty()
                     && NUM_ELEVEN <= div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length()
-                    && !div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().
+                    && !div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().
                     substring(NUM_FIVE, NUM_ELEVEN).equals(div.getSearchPanel().
                             getTxtKensakuHihokenshaNo().getValue()));
         }
