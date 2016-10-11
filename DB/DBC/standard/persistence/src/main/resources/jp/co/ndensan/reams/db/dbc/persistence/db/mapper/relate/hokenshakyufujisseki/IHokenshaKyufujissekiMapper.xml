@@ -609,9 +609,10 @@
             ORDER BY "DbWT1111KyufuJissekiTemp"."inputShikibetsuNo",
                      "DbWT1111KyufuJissekiTemp"."hiHokenshaNo",
                      "DbWT1111KyufuJissekiTemp"."serviceTeikyoYM",
+                     "DbWT1111KyufuJissekiTemp"."jigyoshoNo",
                      "DbWT1111KyufuJissekiTemp"."toshiNo",
-                     "DbWT1111KyufuJissekiTemp"."renban1",
                      "DbWT1111KyufuJissekiTemp"."dataKunbun",
+                     "DbWT1111KyufuJissekiTemp"."renban1",
                      "DbWT1111KyufuJissekiTemp"."renban2") AS A
         UNION
         SELECT B.*
@@ -1303,7 +1304,7 @@
         "DbWT1131KyufujissekiKihon"."renban" as "dbWT1131KyufujissekiKihon_renban",
         "DbWT1131KyufujissekiKihon"."sofuJogaiFlag" as "dbWT1131KyufujissekiKihon_sofuJogaiFlag",
         "DbWT1131KyufujissekiKihon"."hokenshaNo" as "dbWT1131KyufujissekiKihon_hokenshaNo",
-        "DbWT1131KyufujissekiKihon"."hokenshaName" as "hokenshaName",
+        "DbWT1131KyufujissekiKihon"."hokenshaName" as "dbWT1131KyufujissekiKihon_hokenshaName",
         "DbWT1131KyufujissekiKihon"."sofuHihokenshaNo" as "dbWT1131KyufujissekiKihon_sofuHihokenshaNo",
         "DbWT1131KyufujissekiKihon"."meisaiSetteiKubun" as "dbWT1131KyufujissekiKihon_meisaiSetteiKubun",
         "DbWT1131KyufujissekiKihon"."kinkyuShisetsuRyoyoSetteiKubun" as "dbWT1131KyufujissekiKihon_kinkyuShisetsuRyoyoSetteiKubun",
@@ -1444,14 +1445,6 @@
     <resultMap id="ResultMap_DbWT1111KyufuJissekiTempTempEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujisseki.DbWT1111KyufuJissekiTempTempEntity"
                autoMapping="true">
-        <id property="inputShikibetsuNo" column="dbWT1131KyufujissekiKihon_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
-        <id property="hiHokenshaNo" column="dbWT1131KyufujissekiKihon_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="serviceTeikyoYM" column="dbWT1131KyufujissekiKihon_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="jigyoshoNo" column="dbWT1131KyufujissekiKihon_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <id property="toshiNo" column="dbWT1131KyufujissekiKihon_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="DbWT1111_dataKunbun"/>
-        <id property="renban1" column="dbWT1131KyufujissekiKihon_renban" />
-        <id column="DbWT1111_renban2" />
         <result property="dbWT1131_kokanShikibetsuNo" column="dbWT1131KyufujissekiKihon_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbWT1131_recodeShubetsuCode" column="dbWT1131KyufujissekiKihon_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbWT1131_shokisaiHokenshaNo" column="dbWT1131KyufujissekiKihon_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>

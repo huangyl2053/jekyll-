@@ -188,8 +188,8 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
             executeStep(事業者名称取得);
             executeStep(入力識別名称取得);
             executeStep(帳票出力);
-            executeStep(給付実績基本と各TBL更新);
             executeStep(給付実績基本と各TBL削除);
+            executeStep(給付実績基本と各TBL更新);
         }
         executeStep(国保連インタフェース管理更新);
         executeStep(処理結果リスト作成);
@@ -334,7 +334,7 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
     }
 
     /**
-     * 設定区分の取得操作です。
+     * 識別番号がない給付基本があれば_エラー操作です。
      *
      * @return IBatchFlowCommand
      */
