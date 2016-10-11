@@ -53,11 +53,9 @@ public class InsNenkinTokuchoKaifuJoho2Process extends BatchProcessBase<UeT0511N
         RString myBatisSelectId = 処理対象月が8月_9月_11月_1月_3月_ID;
         if (parameter.is処理対象月が5月()) {
             myBatisSelectId = 処理対象月が5月_ID;
-        }
-        if (parameter.is処理対象月が4月_6月()) {
+        } else if (parameter.is処理対象月が4月_6月()) {
             myBatisSelectId = 処理対象月が4月_6月_ID;
-        }
-        if (parameter.is処理対象月が10月_12月_2月()) {
+        } else if (parameter.is処理対象月が10月_12月_2月()) {
             myBatisSelectId = 処理対象月が10月_12月_2月_ID;
         }
         return new BatchDbReader(myBatisSelectId);
