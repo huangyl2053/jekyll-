@@ -60,7 +60,7 @@ public class DBC020080MyBatisParameter extends UaFt200FindShikibetsuTaishoParam 
         this.申請対象日開始 = 申請対象日開始;
         this.申請対象日終了 = 申請対象日終了;
         this.処理年月日 = 処理年月日;
-        this.出力順 = 出力順;
+        this.出力順 = RString.isNullOrEmpty(出力順) ? null : 出力順;
         this.市町村コード = 市町村コード;
         this.処理名 = 処理名;
         this.システム日付の年 = システム日付の年;

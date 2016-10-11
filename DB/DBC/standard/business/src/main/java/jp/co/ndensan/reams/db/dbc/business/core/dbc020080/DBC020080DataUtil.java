@@ -224,17 +224,17 @@ public class DBC020080DataUtil {
      * 対象者抽出　処理時
      *
      * @param entity DBC020080TaishoDataEntity
-     * @param parameter DBC020080ProcessParameter
+     * @param 処理日時 RDateTime
      * @param 市町村名 RString
      * @return JissekiFutangakuDataTempEntity
      */
     public JissekiFutangakuDataTempEntity toJissekiTempEntityTaishoChuShu(DBC020080TaishoDataEntity entity,
-            DBC020080ProcessParameter parameter, RString 市町村名) {
+            RDateTime 処理日時, RString 市町村名) {
         JissekiFutangakuDataTempEntity result = new JissekiFutangakuDataTempEntity();
         result.setShinseibiMikeisanKubun(ONE);
         result.setSeiriNo(entity.getSeiriNo());
         result.setRirekiNo(nonullRStr(entity.getRirekiNo()));
-        result.setJikoFutanKeisanYMD(nonullRStr(getRDate(parameter.get処理日時())));
+        result.setJikoFutanKeisanYMD(nonullRStr(getRDate(処理日時)));
         result.setHihokenshaNo(nonullRStr(entity.getTaishoHihokenshaNo()));
         result.setTaishoNendo(nonullRStr(entity.getTaishoNendo()));
         result.setHokenshaNo(nonullRStr(entity.getHokenshaNo()));
@@ -974,6 +974,10 @@ public class DBC020080DataUtil {
         result.set識別コード(entity.getIchiranShikibetsuCode());
         result.set一覧用確認区分(entity.getIchiranKakuninKubun());
         result.set一覧用確認区分２(entity.getIchiranKakuninKubun2());
+        result.setYubinNo(entity.getIchiranYubinNo());
+        result.setChoikiCode(entity.getIchiranChoikiCode());
+        result.setGyoseikuCode(entity.getIchiranGyoseikuCode());
+        result.setHokenshaNo(entity.getHokenshaNo());
         return result;
     }
 
