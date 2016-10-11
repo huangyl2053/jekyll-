@@ -97,7 +97,9 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
         TaishoSetaiinEntity taiShoEntity = new TaishoSetaiinEntity();
         SetaiShotokuEntity 世帯員所得情報一時 = entity.get世帯員所得情報一時();
         DbV1001HihokenshaDaichoEntity 被保険者台帳管理Newest = entity.get被保険者台帳管理Newest();
-
+        taiShoEntity.setShoriNendo(parameter.get処理年度());
+        taiShoEntity.setShotaikijunDay(parameter.get世帯員把握基準日());
+        taiShoEntity.setShotaikijunDay2(parameter.get世帯員把握基準日2());
         taiShoEntity.setShotaiCode(getColumnValue(世帯員所得情報一時.getSetaiCode()));
         if (null != 被保険者台帳管理Newest.getKyuShichosonCode()) {
             taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getKyuShichosonCode()));
@@ -112,13 +114,14 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
         taiShoEntity.setKazeiShotokuGaku(世帯員所得情報一時.getKazeiShotokuGaku());
 
         taiShoEntity.setNenkinShunyuGaku(世帯員所得情報一時.getNenkiniShotokuGaku());
-        if (null != 世帯員所得情報一時.getNenkiniShotokuGaku()) {
-            if (世帯員所得情報一時.getNenkiniShotokuGaku().compareTo(世帯員所得情報一時.getGokeiShotokuGaku()) <= 0) {
-                taiShoEntity.setSonotanoGoukeiShotokuKingakuGoukei(世帯員所得情報一時.getNenkiniShotokuGaku().divide(世帯員所得情報一時.getGokeiShotokuGaku()));
-            } else {
-                taiShoEntity.setSonotanoGoukeiShotokuKingakuGoukei(Decimal.ZERO);
-            }
+
+        if (getDecimal(世帯員所得情報一時.getNenkiniShotokuGaku()).compareTo(getDecimal(世帯員所得情報一時.getGokeiShotokuGaku())) <= 0) {
+            taiShoEntity.setSonotanoGoukeiShotokuKingakuGoukei(
+                    getDecimal(世帯員所得情報一時.getGokeiShotokuGaku()).subtract(getDecimal(世帯員所得情報一時.getNenkiniShotokuGaku())));
+        } else {
+            taiShoEntity.setSonotanoGoukeiShotokuKingakuGoukei(Decimal.ZERO);
         }
+
         taiShoEntity.setAtenaInnjiKubun(RSTRING_2);
         if (null != entity.get宛名情報()) {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名情報());
@@ -135,8 +138,8 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
     }
 
     private void editTaishoSetaiin(TaishoSetaiinEntity taiShoEntity, IKojin 宛名) {
-        taiShoEntity.setSeinengappiYMD(宛名.get生年月日().toFlexibleDate());
 
+        taiShoEntity.setSeinengappiYMD(宛名.get生年月日().toFlexibleDate());
         if (RSTRING_1.equals(parameter.get処理区分())) {
             taiShoEntity.setHihokenshaName(getColumnValue(宛名.get名称().getName()));
             taiShoEntity.setHihokenshaKana(getColumnValue(宛名.get名称().getKana()));
@@ -164,6 +167,13 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
             }
         }
 
+    }
+
+    private Decimal getDecimal(Decimal decimal) {
+        if (null != decimal) {
+            return decimal;
+        }
+        return Decimal.ZERO;
     }
 
 }
