@@ -144,7 +144,7 @@ public class DvKogakuServiceJuryoInin {
         if (DBC0330011StateName.発行.getName().equals(ResponseHolder.getState())) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(BUTTONID_発行する, 削除.equals(div.getOperateState()));
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).rootTitle(div.getRootTitle()).respond();
     }
 
     /**

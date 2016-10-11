@@ -44,6 +44,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class DvKogakuServiceJuryoIninHandler {
 
     private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
+    private static final RString ROOTTITLE_追加 = new RString("高額サービス費等受領委任払決定登録・追加");
+    private static final RString ROOTTITLE_修正 = new RString("高額サービス費等受領委任払決定登録・修正");
     private static final RString 空白 = RString.EMPTY;
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
@@ -82,9 +84,11 @@ public class DvKogakuServiceJuryoIninHandler {
         div.setOperateState(空白);
 
         if (DBC0330011StateName.修正 == 画面タイトル) {
+            div.setRootTitle(ROOTTITLE_修正);
             グリッドに高額受領委任契約事業者情報を表示する(resultList);
         }
         if (DBC0330011StateName.追加 == 画面タイトル) {
+            div.setRootTitle(ROOTTITLE_追加);
             div.setOperateState(追加);
             登録パネルに項目をクリアする();
         }

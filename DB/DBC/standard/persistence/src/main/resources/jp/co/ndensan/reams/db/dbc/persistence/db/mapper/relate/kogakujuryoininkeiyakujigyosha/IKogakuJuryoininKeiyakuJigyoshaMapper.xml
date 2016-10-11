@@ -5,7 +5,7 @@
     <select id="select高額受領委任契約事業者情報" resultOrdered="true" resultMap="allColumns_KogakuJuryoininKeiyakuJigyoshaEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaParameter"  fetchSize="500">
         SELECT 
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3076KogakuJuryoininKeiyakuJigyoshaMapper.allColumns_DbT3076KogakuJuryoininKeiyakuJigyosha" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakujuryoininkeiyakujigyosha.IKogakuJuryoininKeiyakuJigyoshaMapper.allColumns_DbT3076KogakuJuryoininKeiyakuJigyosha" />,
         "dbt7060"."jigyoshaNo" AS "jigyoshaNo",
         "dbt7060"."jigyoshaName" AS "jigyoshaName"
         FROM "rgdb"."DbT3076KogakuJuryoininKeiyakuJigyosha" AS "DbT3076KogakuJuryoininKeiyakuJigyosha"
@@ -21,6 +21,58 @@
         <id property="kogakuJuryoininKeiyakuJigyoshaEntity.rirekiNo" column="dbT3076KogakuJuryoininKeiyakuJigyosha_rirekiNo"/>
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="kogakuJuryoininKeiyakuJigyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3076KogakuJuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3076KogakuJuryoininKeiyakuJigyoshaEntity"/>
+        <association property="kogakuJuryoininKeiyakuJigyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakujuryoininkeiyakujigyosha.IKogakuJuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3076KogakuJuryoininKeiyakuJigyoshaEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbT3076KogakuJuryoininKeiyakuJigyosha">
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."hihokenshaNo" as "dbT3076KogakuJuryoininKeiyakuJigyosha_hihokenshaNo",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."rirekiNo" as "dbT3076KogakuJuryoininKeiyakuJigyosha_rirekiNo",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."insertDantaiCd" as "dbT3076KogakuJuryoininKeiyakuJigyosha_insertDantaiCd",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."insertTimestamp" as "dbT3076KogakuJuryoininKeiyakuJigyosha_insertTimestamp",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."insertReamsLoginId" as "dbT3076KogakuJuryoininKeiyakuJigyosha_insertReamsLoginId",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."insertContextId" as "dbT3076KogakuJuryoininKeiyakuJigyosha_insertContextId",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."isDeleted" as "dbT3076KogakuJuryoininKeiyakuJigyosha_isDeleted",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."updateCount" as "dbT3076KogakuJuryoininKeiyakuJigyosha_updateCount",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."lastUpdateTimestamp" as "dbT3076KogakuJuryoininKeiyakuJigyosha_lastUpdateTimestamp",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."lastUpdateReamsLoginId" as "dbT3076KogakuJuryoininKeiyakuJigyosha_lastUpdateReamsLoginId",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."shinseiYMD" as "dbT3076KogakuJuryoininKeiyakuJigyosha_shinseiYMD",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."uketsukeYMD" as "dbT3076KogakuJuryoininKeiyakuJigyosha_uketsukeYMD",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."jigyoshaNo" as "dbT3076KogakuJuryoininKeiyakuJigyosha_jigyoshaNo",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."ketteiYMD" as "dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."shoninKekkaKubun" as "dbT3076KogakuJuryoininKeiyakuJigyosha_shoninKekkaKubun",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."juryoininKaishiYMD" as "dbT3076KogakuJuryoininKeiyakuJigyosha_juryoininKaishiYMD",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."juryoininShuryoYMD" as "dbT3076KogakuJuryoininKeiyakuJigyosha_juryoininShuryoYMD",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."keiyakuNo" as "dbT3076KogakuJuryoininKeiyakuJigyosha_keiyakuNo",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."fuShoninRiyu" as "dbT3076KogakuJuryoininKeiyakuJigyosha_fuShoninRiyu",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."riyoshaFutanJogenGaku" as "dbT3076KogakuJuryoininKeiyakuJigyosha_riyoshaFutanJogenGaku",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."shoninKekkaTsuchiSakuseiYMD" as "dbT3076_shoninKekkaTsuchiSakuseiYMD",
+         "DbT3076KogakuJuryoininKeiyakuJigyosha"."shoninKekkaTsuchiSaiHakkoKubun" as "dbT3076_shoninKekkaTsuchiSaiHakkoKubun"
+    </sql>
+
+
+    <!--テーブルDbT3076KogakuJuryoininKeiyakuJigyoshaの項目をDbT3076KogakuJuryoininKeiyakuJigyoshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3076KogakuJuryoininKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyoshaEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3076KogakuJuryoininKeiyakuJigyosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT3076KogakuJuryoininKeiyakuJigyosha_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3076KogakuJuryoininKeiyakuJigyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3076KogakuJuryoininKeiyakuJigyosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3076KogakuJuryoininKeiyakuJigyosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3076KogakuJuryoininKeiyakuJigyosha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3076KogakuJuryoininKeiyakuJigyosha_isDeleted" />
+        <result property="updateCount" column="dbT3076KogakuJuryoininKeiyakuJigyosha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3076KogakuJuryoininKeiyakuJigyosha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3076KogakuJuryoininKeiyakuJigyosha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="dbT3076KogakuJuryoininKeiyakuJigyosha_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="uketsukeYMD" column="dbT3076KogakuJuryoininKeiyakuJigyosha_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jigyoshaNo" column="dbT3076KogakuJuryoininKeiyakuJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="ketteiYMD" column="dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoninKekkaKubun" column="dbT3076KogakuJuryoininKeiyakuJigyosha_shoninKekkaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juryoininKaishiYMD" column="dbT3076KogakuJuryoininKeiyakuJigyosha_juryoininKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="juryoininShuryoYMD" column="dbT3076KogakuJuryoininKeiyakuJigyosha_juryoininShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="keiyakuNo" column="dbT3076KogakuJuryoininKeiyakuJigyosha_keiyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fuShoninRiyu" column="dbT3076KogakuJuryoininKeiyakuJigyosha_fuShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanJogenGaku" column="dbT3076KogakuJuryoininKeiyakuJigyosha_riyoshaFutanJogenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shoninKekkaTsuchiSakuseiYMD" column="dbT3076_shoninKekkaTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoninKekkaTsuchiSaiHakkoKubun" column="dbT3076_shoninKekkaTsuchiSaiHakkoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 </mapper>
