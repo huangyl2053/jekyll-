@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.core.tokuteikojinjohoteikyo.TokuteiKojinHanKanriTokuteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
@@ -24,11 +24,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 総合事業情報のプロセスクラスです。
@@ -40,30 +39,40 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou."
             + "ISougouJigyouJyohouMapper.get当初_版改定_異動分データ");
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
-    private List<TokuteiKojinHanKanriTokuteiJohoBusiness> 特定個人版管理特定情報;
+    private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報List;
     private SougouJigyouJyohouProcessParameter processParameter;
     private SougouJigyouJyohouMybatisParameter mybatisParameter;
+    /**
+     * 版番号です。
+     */
+    public static final RString 版番号;
+
+    static {
+        版番号 = new RString("hanNo");
+    }
+    private OutputParameter<RString> hanNo;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
 
     @Override
     protected void initialize() {
-        特定個人版管理特定情報 = new ArrayList<>();
-        特定個人版管理特定情報 = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(processParameter.get新規異動区分(),
+        特定個人版管理特定情報List = new ArrayList<>();
+        特定個人版管理特定情報List = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(processParameter.get新規異動区分(),
                 RString.EMPTY, DataSetNo._0400総合事業.getコード(), FlexibleDate.getNowDate());
+        hanNo.setValue(特定個人版管理特定情報List.get(0).get版番号());
         if ((ShinkiIdoKubun.当初.getコード().equals(processParameter.get新規異動区分())
                 || ShinkiIdoKubun.版改定.getコード().equals(processParameter.get新規異動区分()))
-                && ShokaiTeikyoKubun.初回提供済み.getコード().equals(特定個人版管理特定情報.get(0).get初回提供区分())) {
+                && ShokaiTeikyoKubun.初回提供済み.getコード().equals(特定個人版管理特定情報List.get(0).get初回提供区分())) {
             throw new BatchInterruptedException("");
         }
         if ((ShinkiIdoKubun.再登録.getコード().equals(processParameter.get新規異動区分())
                 || ShinkiIdoKubun.異動.getコード().equals(processParameter.get新規異動区分()))
-                && ShokaiTeikyoKubun.未提供.getコード().equals(特定個人版管理特定情報.get(0).get初回提供区分())) {
+                && ShokaiTeikyoKubun.未提供.getコード().equals(特定個人版管理特定情報List.get(0).get初回提供区分())) {
             throw new BatchInterruptedException("");
         }
         mybatisParameter = SougouJigyouJyohouMybatisParameter.create_Parameter(processParameter.get新規異動区分(),
                 processParameter.get個人番号付替対象者被保険者番号(), processParameter.get対象開始日時(), processParameter.get対象終了日時(),
-                特定個人版管理特定情報.get(0).get版番号());
+                特定個人版管理特定情報List.get(0).get版番号());
     }
 
     @Override
@@ -90,16 +99,16 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         entity.setShikibetsuCode(relateEntity.getShikibetsuCode());
         entity.setKojinnNo(RString.EMPTY);
         entity.setTokuteiKojinJohoMeiCode(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
-        entity.setHanNo(特定個人版管理特定情報.get(0).get版番号());
+        entity.setHanNo(特定個人版管理特定情報List.get(0).get版番号());
         entity.setTeikyoNaiyo01(relateEntity.getTaishoNendo().toDateString());
         entity.setMisetteiJiyu01(RString.EMPTY);
-        entity.setTeikyoNaiyo02(getパターン34(relateEntity.getTaishoKeisanKaishiYMD()));
+        entity.setTeikyoNaiyo02(toRString(relateEntity.getTaishoKeisanKaishiYMD()));
         entity.setMisetteiJiyu02(RString.EMPTY);
-        entity.setTeikyoNaiyo03(getパターン34(relateEntity.getTaishoKeisanShuryoYMD()));
+        entity.setTeikyoNaiyo03(toRString(relateEntity.getTaishoKeisanShuryoYMD()));
         entity.setMisetteiJiyu03(RString.EMPTY);
-        entity.setTeikyoNaiyo04(getパターン34(relateEntity.getHihokenshaKaishiYMD()));
+        entity.setTeikyoNaiyo04(toRString(relateEntity.getHihokenshaKaishiYMD()));
         entity.setMisetteiJiyu04(RString.EMPTY);
-        entity.setTeikyoNaiyo05(getパターン34(relateEntity.getHihokenshaShuryoYMD()));
+        entity.setTeikyoNaiyo05(toRString(relateEntity.getHihokenshaShuryoYMD()));
         entity.setMisetteiJiyu05(RString.EMPTY);
         entity.setTeikyoNaiyo06(relateEntity.getSumi_Gokei_JikoFutanGaku());
         entity.setMisetteiJiyu06(RString.EMPTY);
@@ -111,6 +120,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         entity.setMisetteiJiyu09(RString.EMPTY);
         entity.setTeikyoNaiyo10(RString.EMPTY);
         entity.setMisetteiJiyu10(RString.EMPTY);
+        entity.setKokaiYMD(FlexibleDate.getNowDate());
         return entity;
     }
 
@@ -125,9 +135,9 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         return データセットキー.toRString();
     }
 
-    private RString getパターン34(FlexibleDate 年月日) {
+    private RString toRString(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(年月日.toString());
         }
         return RString.EMPTY;
     }
