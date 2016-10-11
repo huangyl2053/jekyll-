@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2700011;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC170020.DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter;
@@ -46,6 +45,7 @@ public class TorikomiFuairuHandler {
      *
      * @param csvFilePath RString
      * @param fileName RString
+     * @return size
      */
     public int upload(RString csvFilePath, RString fileName) {
         SharedFileDescriptor sharedFileDescriptor
@@ -53,7 +53,7 @@ public class TorikomiFuairuHandler {
         sharedFileDescriptor = SharedFile.defineSharedFile(sharedFileDescriptor);
         SharedFile.defineSharedFile(sharedFileDescriptor, 1, Arrays.asList(HOSHI), null, false, null);
         int size = 0;
-        List<RString> 項目数 = new ArrayList<>();
+        List<RString> 項目数;
         try (CsvListReader reader = new CsvListReader.InstanceBuilder(csvFilePath).
                 setDelimiter(new RString(",")).setEnclosure(new RString("\""))
                 .hasHeader(false).setEncode(Encode.JIS).setNewLine(NewLine.CRLF).build()) {
