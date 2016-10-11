@@ -74,13 +74,13 @@ public class DBD1080001Handler {
         div.getParameters().getRadShisetsuNyushoKubun1().setSelectedKey(new RString("key0"));
 
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key1"), new RString("利用者負担1段階"));
+                new RString("key1"), RiyoshaFutanDankaiHanni.利用者負担1段階.get名称());
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                KEYTWO, new RString("利用者負担2段階"));
+                KEYTWO, RiyoshaFutanDankaiHanni.利用者負担2段階.get名称());
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key3"), new RString("利用者負担3段階"));
+                new RString("key3"), RiyoshaFutanDankaiHanni.利用者負担3段階.get名称());
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key4"), new RString("利用者負担４段階（高齢者複数世帯） "));
+                new RString("key4"), RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.get名称());
         responseData.data = div;
         return responseData;
     }
@@ -118,7 +118,7 @@ public class DBD1080001Handler {
         boolean 老齢福祉年金受給者 = taishoshaHaakuMainDiv.getParameters().getChkIsRoreiJukyusha().getSelectedValues().contains(new RString("老齢福祉年金受給者"));
         boolean 生活保護受給者 = taishoshaHaakuMainDiv.getParameters().getChkIsSeihoJukyusha().getSelectedValues().contains(new RString("生活保護受給者"));
         RString 施設入所区分 = taishoshaHaakuMainDiv.getParameters().getDdlKyushochishaKubun1().getSelectedValue();
-        RString 利用者負担段階 = RiyoshaFutanDankaiHanni.valueOf(taishoshaHaakuMainDiv.getParameters().getDdlRiyoshaFutanDankai().getSelectedValue().toString()).getコード();
+        RString 利用者負担段階 = RiyoshaFutanDankaiHanni.nameToValue(taishoshaHaakuMainDiv.getParameters().getDdlRiyoshaFutanDankai().getSelectedValue()).getコード();
         FlexibleDate 基準日 = taishoshaHaakuMainDiv.getParameters().getTxtKijunYMD().getValue();
         FlexibleYear 所得年度 = taishoshaHaakuMainDiv.getParameters().getTxtShotokuNendo().getDomain();
 
