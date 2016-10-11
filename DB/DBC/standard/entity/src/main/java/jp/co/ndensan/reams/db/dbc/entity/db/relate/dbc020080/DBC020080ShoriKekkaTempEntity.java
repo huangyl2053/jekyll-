@@ -34,7 +34,7 @@ public class DBC020080ShoriKekkaTempEntity
     @PrimaryKey
     private RString errorKubun;
     @PrimaryKey
-    private RString shoHokanehshaNo;
+    private RString shoHokenshaNo;
     @PrimaryKey
     private RString hihokenshaNo;
     private RString hihokenshaKanaShimei;
@@ -51,4 +51,19 @@ public class DBC020080ShoriKekkaTempEntity
     private RString key5;
     private RString errorNaiyo;
     private RString biko;
+
+    /**
+     * DBC020080ShoriKekkaTempEntityのコンストラクタです。
+     */
+    public DBC020080ShoriKekkaTempEntity() {
+        errorKubun = RString.EMPTY;
+        shoHokenshaNo = RString.EMPTY;
+        hihokenshaNo = RString.EMPTY;
+        key1 = RString.EMPTY;
+        key2 = RString.EMPTY;
+        key3 = RString.EMPTY;
+        key4 = RString.EMPTY;
+        key5 = RString.EMPTY;
+    }
+
 }
