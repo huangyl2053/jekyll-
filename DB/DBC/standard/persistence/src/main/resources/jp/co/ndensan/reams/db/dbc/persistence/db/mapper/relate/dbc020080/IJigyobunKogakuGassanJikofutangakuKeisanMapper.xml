@@ -5,6 +5,7 @@
     <!--シート「対象者抽出」-->
     <select id="get対象者抽出データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity" resultOrdered="true" fetchSize="500">
+        WITH master as(
         SELECT
         "B"."hihokenshaNo" AS "taishoHihokenshaNo"
         ,"B"."seiriNo" AS "seiriNo"
@@ -19,17 +20,9 @@
         ,"B"."kanyuShuryoYMD" AS "kanyuShuryoYMD"
         ,"B"."shinseiYMD" AS "shinseiYMD"
         ,"B"."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
-        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
-        ,"ShikibetsuTaisho"."meisho" AS "meisho"
-        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
-        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
-        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
-        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
-        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
-        ,"ShikibetsuTaisho"."juminShubetsuCode" AS "juminShubetsuCode"
-        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
         ,"V1001"."hihokenshaNo" AS "daichoHihokenshaNo"
         ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode" ELSE "V1001"."shichosonCode") AS "shichosonCode"
+        ,"V1001"."shikibetsuCode" AS "shikibetsuCode"
         FROM
         (SELECT
         "dbt3068"."hihokenshaNo"
@@ -51,28 +44,59 @@
         AND  "K"."seiriNo" = "B"."seiriNo"
         AND  "K"."rirekiNo" = "B"."rirekiNo"
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
-        ON      "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
-        LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"="V1001"."shikibetsuCode"
+        ON "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
         WHERE "B"."isDeleted" ＝ False
         AND #{申請対象日開始} <![CDATA[<=]]> "B"."shinseiYMD"
         AND "B"."shinseiYMD"<![CDATA[<=]]>#{申請対象日終了}
         AND "B"."shinseiJokyoKubun" = '2'
         AND ("B"."shikyuShinseiKubun" ='1' or "B"."shikyuShinseiKubun"='2')
         AND (("B"."jikoFutan_KeisanYM"= '' )  OR ("B"."jikoFutan_KeisanYM" <![CDATA[<>]]>'' AND "B"."saiKeisanKubun" = '1'))
+        )
+        SELECT
+        master."taishoHihokenshaNo" AS "taishoHihokenshaNo"
+        ,master."seiriNo" AS "seiriNo"
+        ,master."rirekiNo" AS "rirekiNo"
+        ,master."jikoFutanKeisanYM" AS "jikoFutanKeisanYM"
+        ,master."taishoNendo" AS "taishoNendo"
+        ,master."hokenshaNo" AS "hokenshaNo"
+        ,master."shikyuShinseishoSeiriNo" AS "shikyuShinseishoSeiriNo"
+        ,master."taishoKeisanKaishiYMD" AS "taishoKeisanKaishiYMD"
+        ,master."taishoKeisanShuryoYMD" AS "taishoKeisanShuryoYMD"
+        ,master."kanyuKaishiYMD" AS "kanyuKaishiYMD"
+        ,master."kanyuShuryoYMD" AS "kanyuShuryoYMD"
+        ,master."shinseiYMD" AS "shinseiYMD"
+        ,master."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
+        ,master."daichoHihokenshaNo" AS "daichoHihokenshaNo"
+        ,master."shichosonCode" AS "shichosonCode"
+        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
+        ,"ShikibetsuTaisho"."meisho" AS "meisho"
+        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
+        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
+        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
+        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
+        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
+        ,"ShikibetsuTaisho"."juminShubetsuCode" AS "juminShubetsuCode"
+        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
+        FROM
+        master
+        LEFT JOIN
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_left" />
+        (SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT)) FROM master) 
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_right" />
+        AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"="V1001"."shikibetsuCode"
         ORDER BY
-        "K"."hihokenshaNo","K"."hokenshaNo","K"."taishoNendo","K"."seiriNo"
+        master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."seiriNo"
     </select>
 
     <!--シート「対象者抽出事業分」-->
     <select id="get対象者抽出事業分データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity" resultOrdered="true" fetchSize="500">
+        WITH master AS (
         SELECT
         "B"."hihokenshaNo" AS "taishoHihokenshaNo"
         ,"B"."rirekiNo" AS "rirekiNo"
-        ,"B"."jikoFutanKeisanYMD" AS "jikoFutanKeisanYM"
+        ,substring("B"."jikoFutanKeisanYMD" from 1 for 6) AS "jikoFutanKeisanYM"
         ,"B"."taishoNendo" AS "taishoNendo"
         ,"B"."hokenshaNo" AS "hokenshaNo"
         ,"B"."shikyuShinseishoSeiriNo" AS "shikyuShinseishoSeiriNo"
@@ -82,16 +106,9 @@
         ,"B"."hihokenshaShuryoYMD" AS "kanyuShuryoYMD"
         ,"B"."shinseiYMD" AS "shinseiYMD"
         ,"B"."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
-        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
-        ,"ShikibetsuTaisho"."meisho" AS "meisho"
-        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
-        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
-        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
-        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
-        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
-        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
         ,"V1001"."hihokenshaNo" AS "daichoHihokenshaNo"
         ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode" ELSE "V1001"."shichosonCode") AS "shichosonCode"
+        ,"V1001"."shikibetsuCode" AS "shikibetsuCode"
         FROM
         (SELECT
         "dbt3070"."hihokenshaNo"
@@ -114,10 +131,6 @@
         AND  "K"."rirekiNo" = "B"."rirekiNo"
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
         ON      "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
-        LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"="V1001"."shikibetsuCode"
         WHERE "B"."isDeleted" ＝ False
         AND     '2014'<![CDATA[<=]]>"B"."taishoNendo"
         AND "B"."dataSakuseiKubun"＝'1'
@@ -128,8 +141,40 @@
             AND "B"."taishoNendo" = #{年度}
             AND "B"."hihokenshaNo" =#{被保険者番号}
         </if>
+        )
+        SELECT
+        master."taishoHihokenshaNo" AS "taishoHihokenshaNo"
+        ,master."rirekiNo" AS "rirekiNo"
+        ,master."jikoFutanKeisanYM" AS "jikoFutanKeisanYM"
+        ,master."taishoNendo" AS "taishoNendo"
+        ,master."hokenshaNo" AS "hokenshaNo"
+        ,master."shikyuShinseishoSeiriNo" AS "shikyuShinseishoSeiriNo"
+        ,master."taishoKeisanKaishiYMD" AS "taishoKeisanKaishiYMD"
+        ,master."taishoKeisanShuryoYMD" AS "taishoKeisanShuryoYMD"
+        ,master."kanyuKaishiYMD" AS "kanyuKaishiYMD"
+        ,master."kanyuShuryoYMD" AS "kanyuShuryoYMD"
+        ,master."shinseiYMD" AS "shinseiYMD"
+        ,master."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
+        ,master."daichoHihokenshaNo" AS "daichoHihokenshaNo"
+        ,master."shichosonCode" AS "shichosonCode"
+        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
+        ,"ShikibetsuTaisho"."meisho" AS "meisho"
+        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
+        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
+        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
+        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
+        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
+        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
+        FROM
+        master
+        LEFT JOIN
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_left" />
+        (SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT)) FROM master)
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_right" />
+        AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
         ORDER BY
-        "B"."hihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."shikyuShinseishoSeiriNo"
+        master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."shikyuShinseishoSeiriNo"
     </select>
 
     <!--シート「SetFutangaku」-->
@@ -245,7 +290,6 @@
         AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3170B"."shikyuShinseishoSeiriNo"
         AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"="DbT3170B"."MAXRirekiNo"
         LEFT JOIN
-        <!--自我决定-->
         rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
         ON "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "temp"."hihokenshaNo"
         AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "temp"."taishoNendo"
@@ -285,70 +329,9 @@
         ,"DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo" ASC
         ,"DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoM" ASC
     </select>
-
-    <!--BatchStep2.3-->
-    <select id="getShiharaihohoHenko"
-            resultMap="ResultMap_DbT3017MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT  
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
-        FROM "JissekiFutangakuDataTemp" AS "temp"
-        INNER JOIN rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        ON "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
-        LEFT JOIN rgdb."DbT4021ShiharaiHohoHenko" AS "DbT4021ShiharaiHohoHenko"
-        ON "DbT4021ShiharaiHohoHenko"."isDeleted"= False
-        AND "DbT4021ShiharaiHohoHenko"."mukoKubun"<![CDATA[<>]]> '1'
-        AND "DbT4021ShiharaiHohoHenko"."kanriKubun" = '3'
-        AND "DbT4021ShiharaiHohoHenko"."hihokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND substring("DbT4021ShiharaiHohoHenko"."tekiyoKaishiYMD" from 1 for 6)<![CDATA[<=]]>"DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("DbT4021ShiharaiHohoHenko"."tekiyoShuryoYMD" from 1 for 6)
-        WHERE "DbT3017KyufujissekiKihon"."isDeleted"= False
-        AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]> '3'
-        AND substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1) <![CDATA[<>]]> 'H'
-        AND "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode"  IN ('1','2')
-        ORDER BY
-        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" ASC
-        ,"DbT3017KyufujissekiKihon"."jigyoshoNo" ASC
-        ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo" ASC
-        ,"DbT3017KyufujissekiKihon"."seiriNo" ASC
-    </select>
-
-    <!--BatchStep2.3事業分-->
-    <select id="getShiharaihohoHenkoJigyobun"
-            resultMap="ResultMap_DbT3017MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT  
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
-        FROM "JissekiFutangakuDataTemp" AS "temp"
-        INNER JOIN rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        ON "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
-        LEFT JOIN rgdb."DbT4021ShiharaiHohoHenko" AS "DbT4021ShiharaiHohoHenko"
-        ON "DbT4021ShiharaiHohoHenko"."isDeleted"= False
-        AND "DbT4021ShiharaiHohoHenko"."mukoKubun"<![CDATA[<>]]> '1'
-        AND "DbT4021ShiharaiHohoHenko"."kanriKubun" = '3'
-        AND "DbT4021ShiharaiHohoHenko"."hihokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND substring("DbT4021ShiharaiHohoHenko"."tekiyoKaishiYMD" from 1 for 6)<![CDATA[<=]]>"DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("DbT4021ShiharaiHohoHenko"."tekiyoShuryoYMD" from 1 for 6)
-        WHERE "DbT3017KyufujissekiKihon"."isDeleted"= False
-        AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]> '3'
-        AND     substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1) <![CDATA[<>]]> 'H'
-        AND     "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode"  IN ('1','2')
-        AND substring("DbT3017KyufujissekiKihon"."inputShikibetsuNo" from 1 for 3)= '71R'
-        ORDER BY
-        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" ASC
-        ,"DbT3017KyufujissekiKihon"."jigyoshoNo" ASC
-        ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo" ASC
-        ,"DbT3017KyufujissekiKihon"."seiriNo" ASC
-    </select>
-
+    
     <!--BatchStep2.3<変更>-->
-    <select id="get給付実績基本一時" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
+    <select id="get給付実績基本一時" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.InsShiharaihohoHenkoTempBeforeMyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity"
             resultOrdered="true" fetchSize="500">
         SELECT "A".*
@@ -385,88 +368,9 @@
         AND substring("henko"."tekiyoKaishiYMD" from 1 for 6)<![CDATA[<=]]>"kihon"."serviceTeikyoYM"
         AND "kihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("henko"."tekiyoShuryoYMD" from 1 for 6)
     </select>
-
-    <!--BatchStep2.4 TODO Parameter-->
-    <select id="getShafukuKeigenTemp"
-            resultMap="ResultMap_DbT3030MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
-        FROM "JissekiFutangakuDataTemp2" AS "temp"
-        INNER JOIN rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        ON "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
-        LEFT JOIN   rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"
-        ON  "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."isDeleted"= False
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceSyuruiCode" IN <include refid="WKサービス種類コード集計対象" />
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"= "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"= "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        LEFT JOIN   rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
-        ON      "DbT3033KyufujissekiShukei"."isDeleted"= False
-        AND "DbT3033KyufujissekiShukei"."serviceSyuruiCode" IN <include refid="WKサービス種類コード集計対象" />
-        AND "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3033KyufujissekiShukei"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3033KyufujissekiShukei"."serviceTeikyoYM" = "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3033KyufujissekiShukei"."jigyoshoNo" = "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3033KyufujissekiShukei"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        WHERE "DbT3017KyufujissekiKihon"."isDeleted"= False
-        AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]> '3'
-        AND     substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1) <![CDATA[<>]]> 'H'
-        AND     "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode"  IN ('1','2')
-        ORDER BY
-        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" ASC
-        ,"DbT3017KyufujissekiKihon"."jigyoshoNo" ASC
-        ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo" ASC
-        ,"DbT3017KyufujissekiKihon"."seiriNo" ASC
-    </select>
-    <!--BatchStep2.4事業分 TODO Parameter-->
-    <select id="getShafukuKeigenTempJigyobun"
-            resultMap="ResultMap_DbT3030MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
-        FROM "JissekiFutangakuDataTemp2" AS "temp"
-        INNER JOIN rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        ON "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
-        LEFT JOIN   rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"
-        ON  "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."isDeleted"= False
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceSyuruiCode" IN <include refid="WKサービス種類コード集計対象事業分" />
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"= "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"= "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        LEFT JOIN   rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
-        ON      "DbT3033KyufujissekiShukei"."isDeleted"= False
-        AND "DbT3033KyufujissekiShukei"."serviceSyuruiCode" IN <include refid="WKサービス種類コード集計対象事業分" />
-        AND "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3033KyufujissekiShukei"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3033KyufujissekiShukei"."serviceTeikyoYM" = "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3033KyufujissekiShukei"."jigyoshoNo" = "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3033KyufujissekiShukei"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        AND substring("DbT3033KyufujissekiShukei"."inputShikibetsuNo" from 1 for 3)= '71R'
-        WHERE "DbT3017KyufujissekiKihon"."isDeleted"= False
-        AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]> '3'
-        AND     substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1) <![CDATA[<>]]> 'H'
-        AND     "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode"  IN ('1','2')
-        AND     substring("DbT3017KyufujissekiKihon"."inputShikibetsuNo" from 1 for 3)= '71R'
-        ORDER BY
-        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" ASC
-        ,"DbT3017KyufujissekiKihon"."jigyoshoNo" ASC
-        ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo" ASC
-        ,"DbT3017KyufujissekiKihon"."seiriNo" ASC
-    </select>
-
+    
     <!--BatchStep2.4<変更>-->
-    <select id="getShafukuKeigenTempHenko" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
+    <select id="getShafukuKeigenTempHenko" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.UpdshafukuKeigenTempMyBatisParameter"
             resultMap="ResultMap_RiyoshaFutanMatchingEntity" resultOrdered="true" fetchSize="500">
         SELECT 
         <include refid="allColumns_JissekiFutangakuDataTempEntity" />
@@ -517,7 +421,6 @@
                 <include refid="WKサービス種類コード集計対象" />
             </otherwise>
         </choose>
-        <!--給付実績基本一時(＝サービス提供年月が対象計算期間内のデータ)とキー項目が一致するデータに絞る-->
         AND EXISTS(SELECT * FROM "KyufujissekiKihonTemp" AS "kihon"
         WHERE "kihon"."inputShikibetsuNo" = "A"."inputShikibetsuNo"
         AND "kihon"."hiHokenshaNo" = "A"."hiHokenshaNo"
@@ -532,71 +435,6 @@
         ON "temp"."hihokenshaNo"＝ "riyoshaFutan"."hiHokenshaNo"
     </select>
     
-    <!--BatchStep2.5 TODO Parameter-->
-    <select id="getKyufuJIssekiShukeiTemp"
-            resultMap="ResultMap_DbT3030MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
-        FROM "JissekiFutangakuDataTemp2" AS "temp"
-        INNER JOIN rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        ON "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
-        
-        LEFT JOIN   rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
-        ON      "DbT3033KyufujissekiShukei"."isDeleted"= False
-        AND "DbT3033KyufujissekiShukei"."serviceSyuruiCode" NOT IN <include refid="WKサービス種類コード集計対象外" />
-        AND "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3033KyufujissekiShukei"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3033KyufujissekiShukei"."serviceTeikyoYM" = "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3033KyufujissekiShukei"."jigyoshoNo" = "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3033KyufujissekiShukei"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        WHERE "DbT3017KyufujissekiKihon"."isDeleted"= False
-        AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]> '3'
-        AND     substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1) <![CDATA[<>]]> 'H'
-        AND     "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode"  IN ('1','2')
-        ORDER BY
-        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" ASC
-        ,"DbT3017KyufujissekiKihon"."jigyoshoNo" ASC
-        ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo" ASC
-        ,"DbT3017KyufujissekiKihon"."seiriNo" ASC
-    </select>
-    <!--BatchStep2.5 TODO Parameter-->
-    <select id="getKyufuJIssekiShukeiTempJigyobun"
-            resultMap="ResultMap_DbT3030MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
-        FROM "JissekiFutangakuDataTemp2" AS "temp"
-        INNER JOIN rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        ON "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
-        LEFT JOIN   rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
-        ON      "DbT3033KyufujissekiShukei"."isDeleted"= False
-        AND "DbT3033KyufujissekiShukei"."serviceSyuruiCode" NOT IN <include refid="WKサービス種類コード集計対象外事業分" />
-        AND "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo"
-        AND "DbT3033KyufujissekiShukei"."hiHokenshaNo" = "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND "DbT3033KyufujissekiShukei"."serviceTeikyoYM" = "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3033KyufujissekiShukei"."jigyoshoNo" = "DbT3017KyufujissekiKihon"."jigyoshoNo"
-        AND "DbT3033KyufujissekiShukei"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        AND "DbT3033KyufujissekiShukei"."seiriNo" = "DbT3017KyufujissekiKihon"."seiriNo"
-        AND substring("DbT3033KyufujissekiShukei"."inputShikibetsuNo" from 1 for 3)= '71R'
-        WHERE "DbT3017KyufujissekiKihon"."isDeleted"= False
-        AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]> '3'
-        AND     substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1) <![CDATA[<>]]> 'H'
-        AND     "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode"  IN ('1','2')
-        AND     substring("DbT3017KyufujissekiKihon"."inputShikibetsuNo" from 1 for 3)= '71R'
-        ORDER BY
-        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" ASC
-        ,"DbT3017KyufujissekiKihon"."jigyoshoNo" ASC
-        ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo" ASC
-        ,"DbT3017KyufujissekiKihon"."seiriNo" ASC
-    </select>
-
     <!--Batch: 高額支給額集計 TODO Parameter-->
     <select id="getCalcKogakuShikyugaku"
             resultMap="ResultMap_CalcKogakuShikyugakuEntity" resultOrdered="true" fetchSize="500">
@@ -645,16 +483,19 @@
         ,"DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"    ASC
         ,"DbT3056KogakuShikyuShinsei"."rirekiNo"    ASC
     </select>
+    
     <!--BatchStep 2.6-->
     <select id="get実績負担額データ2"
             resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
         SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
         FROM "JissekiFutangakuDataTemp2"
     </select>
+    
     <select id="get処理結果"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity" resultOrdered="true" fetchSize="500">
         SELECT * FROM "DBC020080ShoriKekkaListTemp"
     </select>
+    
     <!--BatchStep 2.2-->
     <select id="get実績負担額データ"
             resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
@@ -695,7 +536,6 @@
         <association property="支払方法変更" 
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity" />
     </resultMap>
-    
     <resultMap id="ResultMap_DbT3070MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3070MatchingEntity" autoMapping="true" >
         <id column="temp_hihokenshaNo" />
         <id column="temp_taishoNendo" />
@@ -717,17 +557,6 @@
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.ResultMap_DbT3170JigyoKogakuGassanJikoFutanGakuEntity" />
         <association property="高額合算自己負担額明細" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity" />
-    </resultMap>
-    <resultMap id="ResultMap_DbT3030MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3030MatchingEntity" autoMapping="true" >
-        <id column="temp_hihokenshaNo" />
-        <id column="temp_taishoNendo" />
-        <id column="temp_hokenshaNo" />
-        <id column="temp_shikyuShinseishoSeiriNo" />
-        <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
-        <association property="給付実績社会福祉法人軽減額"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.ResultMap_DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity" />
-        <association property="給付実績集計" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.ResultMap_DbT3033KyufujissekiShukeiEntity" />
     </resultMap>
     <resultMap id="ResultMap_RiyoshaFutanMatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.RiyoshaFutanMatchingEntity" autoMapping="true" >
         <id column="temp_hihokenshaNo" />
@@ -1056,7 +885,6 @@
         <result property="serviceTeikyoYMs" column="temp_serviceTeikyoYMs" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <!--TODO QA 審査支払区分-->
     <sql id="allColumns_KogakuShikyugakuEntity">
         "DbT3056KogakuShikyuShinsei"."hihokenshaNo"as "DbT3056KogakuShikyuShinsei_hihokenshaNo"
         ,"DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"as "DbT3056KogakuShikyuShinsei_serviceTeikyoYM"
@@ -1082,6 +910,7 @@
     <sql id="WKサービス種類コード集計対象外事業分" >
         ('41','42','43','44','45','46','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97')
     </sql>
+    
     <sql id="allColumns_JissekiFutangakuDataTempEntity" >
         "temp"."sortArea"as "temp_sortArea"
         ,"temp"."kaipageArea"as "temp_kaipageArea"
@@ -1372,5 +1201,92 @@
         ,"temp"."biko107"as "temp_biko107"
         ,"temp"."serviceTeikyoYMs"as "temp_serviceTeikyoYMs"
     </sql>
-
+    <sql id="tableName_PsmParamClassShikibetsuTaisho_left">
+        rgua."UaFt200FindShikibetsuTaisho"(
+        #{uaft200_dataShutokuKubun},
+        #{uaft200_kijunYMD},
+        #{uaft200_jutogaiYusenFlag},
+        #{uaft200_gyomuCode},
+        #{uaft200_setaiinShutoku},
+        <if test="uaft200_isUseTableColumn">
+            ${uaft200_shikibetsuCode},
+        </if>
+        <if test="!uaft200_isUseTableColumn">
+            #{uaft200_shikibetsuCode},
+        </if>
+        #{uaft200_setaiCode},
+        #{uaft200_kojinNo},
+        #{uaft200_hojinNo},
+        #{uaft200_juminhyoCode},
+        #{uaft200_zairyuCardtoNo},
+        #{uaft200_shimei},
+        #{uaft200_shimeiBunkatsu1},
+        #{uaft200_shimeiBunkatsu2},
+        #{uaft200_shimeiBunkatsu3},
+        #{uaft200_shimei_joken},
+        #{uaft200_shimei_rirekiumu},
+        #{uaft200_seinengappiYmd},
+        #{uaft200_seibetsuCode},
+        #{uaft200_choikiCode},
+        #{uaft200_choiki},
+        #{uaft200_zenkokuJushoCode},
+        #{uaft200_zenkokuJusho},
+        #{uaft200_jushoMeisho_Joken},
+        #{uaft200_jusho_rirekiumu},
+        #{uaft200_gyoseikuCode},
+        #{uaft200_chikuCode1},
+        #{uaft200_chikuCode2},
+        #{uaft200_chikuCode3},
+        #{uaft200_banchiCode1},
+        #{uaft200_banchiCode2},
+        #{uaft200_banchiCode3},
+        #{uaft200_banchiCode4},
+        #{uaft200_katagakiMeisho},
+        #{uaft200_katagaki_Joken},
+        #{uaft200_yubinNo},
+        #{uaft200_juminJutonaiNihonjin},
+        #{uaft200_juminJutonaiGaikokujin},
+        #{uaft200_juminJutogaiNihonjin},
+        #{uaft200_juminJutogaiGaikokujin},
+        #{uaft200_jumin_Hojin},
+        #{uaft200_jumin_Kyoyusha},
+        #{uaft200_juminJotaiJumin},
+        #{uaft200_juminJotaiJutogai},
+        #{uaft200_juminJotaiShojosha},
+        #{uaft200_juminJotaiTenshutsusha},
+        #{uaft200_juminJotaiShibosha},
+        #{uaft200_renrakusaki},
+        #{uaft200_hojinKeitaiCode},
+        #{uaft200_daihyoShikibetsuCode},
+        #{uaft200_daihyoShimei},
+        #{uaft200_daihyoShimeiBunkatsu1},
+        #{uaft200_daihyoShimeiBunkatsu2},
+        #{uaft200_daihyoShimeiBunkatsu3},
+        #{uaft200_daihyoShimei_joken},
+        #{uaft200_daihyoShimei_rirekiumu},
+        #{uaft200_kokusekiChiikiCode},
+        #{uaft200_lasdecCode},
+        #{uaft200_sakujoShutoku},
+        #{uaft200_doitsuninYusen},
+        #{uaft200_kosekiShutoku},
+        #{uaft200_choikiCode_ST},
+        #{uaft200_choikiCode_ED},
+        #{uaft200_zenkokuJushoCode_ST},
+        #{uaft200_zenkokuJushoCode_ED},
+        #{uaft200_gyoseikuCode_ST},
+        #{uaft200_gyoseikuCode_ED},
+        #{uaft200_chikuCode1_ST},
+        #{uaft200_chikuCode1_ED},
+        #{uaft200_chikuCode2_ST},
+        #{uaft200_chikuCode2_ED},
+        #{uaft200_chikuCode3_ST},
+        #{uaft200_chikuCode3_ED},
+        #{uaft200_shikibetsuCode_ST},
+        #{uaft200_shikibetsuCode_ED},
+        #{uaft200_setaiCode_ST},
+        #{uaft200_setaiCode_ED},
+        #{uaft200_yubinNo_ST},
+        #{uaft200_yubinNo_ED},
+    </sql>
+    <sql id="tableName_PsmParamClassShikibetsuTaisho_right">)</sql>
 </mapper>  

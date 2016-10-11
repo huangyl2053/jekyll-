@@ -68,25 +68,18 @@ public class DBC020080DataUtil {
 
     private static final int ERRORINDEX = -1;
     private static final int NUM_3 = 3;
-
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_8 = 8;
     private static final int NUM_15 = 15;
-
     private static final int NUM_70 = 70;
-
     private static final int NUM_75 = 75;
     private static final RString INITSERVICETEIKYOYMS = new RString("0000000000000000");
-    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
-
     private static final RString THREE = new RString("3");
     private static final RString LINE = new RString("|");
-    private static final RString 当年 = new RString("0");
-    private static final RString 翌年 = new RString("1");
     private static final RString SET = new RString("set");
     private static final RString JIKOFUTANGAKU = new RString("JikoFutanGaku");
     private static final RString UCHISU_70_74JIKOFUTANGAKU = new RString("Uchisu_70_74JikoFutanGaku");
@@ -130,7 +123,6 @@ public class DBC020080DataUtil {
     private static final FlexibleYear 新規年度 = new FlexibleYear("0000");
     private static final RString 新規処理枝番 = new RString("0000");
     private static final RString 新規年度内連番 = new RString("0001");
-//    private static final RString 連番フォーマット = new RString("0000");
     private static final RString 作成日時 = new RString("作成日時");
     private static final RString 処理名 = new RString("処理名");
     private static final RString 証記載保険者番号 = new RString("証記載保険者番号");
@@ -313,7 +305,6 @@ public class DBC020080DataUtil {
         result.setIchiranKakuninKubun(RString.EMPTY);
         result.setIchiranKakuninKubun2(RString.EMPTY);
         loopInitDecimal(result, JIKOFUTANGAKU);
-        loopInitDecimal(result, JIKOFUTANGAKU);
         loopInitDecimal(result, UCHISU_70_74JIKOFUTANGAKU);
         loopInitDecimal(result, UNDER_70KOGAKUSHIKYUGAKU);
         loopInitDecimal(result, OVER_70_74KOGAKUSHIKYUGAKU);
@@ -416,9 +407,8 @@ public class DBC020080DataUtil {
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return sum;
         }
+        return sum;
     }
 
     private void loopSetRString(JissekiFutangakuDataTempEntity 実績負担額Set, RString tokenSet,
@@ -447,7 +437,7 @@ public class DBC020080DataUtil {
             JissekiFutangakuDataTempEntity entity, KaigoGassan_ErrorListType errorType) {
         DBC020080ShoriKekkaTempEntity result = new DBC020080ShoriKekkaTempEntity();
         result.setErrorKubun(errorType.getコード());
-        result.setShoHokanehshaNo(nonullRStr(entity.getHokenshaNo()));
+        result.setShoHokenshaNo(nonullRStr(entity.getHokenshaNo()));
         result.setHihokenshaNo(nonullRStr(entity.getHihokenshaNo()));
         result.setHihokenshaKanaShimei(nonullRStr(entity.getHihokenshaShimeiKana()));
         result.setHihokenshaShimei(nonullRStr(entity.getHihokenshaShimei()));
@@ -482,7 +472,7 @@ public class DBC020080DataUtil {
     public RString getKeyOfShoriKekkaTemp(DBC020080ShoriKekkaTempEntity entity) {
         RStringBuilder key = new RStringBuilder(entity.getErrorKubun());
         key.append(LINE);
-        key.append(entity.getShoHokanehshaNo());
+        key.append(entity.getShoHokenshaNo());
         key.append(LINE);
         key.append(entity.getHihokenshaNo());
         key.append(LINE);
@@ -931,20 +921,6 @@ public class DBC020080DataUtil {
         return Decimal.ZERO.equals(sub);
     }
 
-    private boolean is翌年(RString 対象年度, int year) {
-        Decimal dec1 = nonullDecimal(対象年度);
-        Decimal dec2 = nonullDecimal(year);
-        Decimal sub = dec2.subtract(dec1);
-        return Decimal.ONE.equals(sub);
-    }
-
-    private boolean is当年(RString year1, int year2) {
-        Decimal dec1 = nonullDecimal(year1);
-        Decimal dec2 = nonullDecimal(year2);
-        Decimal sub = dec1.subtract(dec2);
-        return Decimal.ZERO.equals(sub);
-    }
-
     /**
      * 帳票明細データを取得のメソッドです。
      *
@@ -1041,7 +1017,7 @@ public class DBC020080DataUtil {
             result.set作成日時(DateConverter.getDate12Time142(parameter.get処理日時()));
         }
         result.set処理名(entity.getErrorKubun());
-        result.set証記載保険者番号(entity.getShoHokanehshaNo());
+        result.set証記載保険者番号(entity.getShoHokenshaNo());
         result.set被保険者番号(entity.getHihokenshaNo());
         result.set被保険者カナ氏名(entity.getHihokenshaKanaShimei());
         result.set被保険者氏名(entity.getHihokenshaShimei());

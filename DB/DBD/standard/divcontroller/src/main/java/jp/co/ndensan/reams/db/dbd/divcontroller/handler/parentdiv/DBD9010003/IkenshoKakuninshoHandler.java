@@ -53,7 +53,7 @@ public class IkenshoKakuninshoHandler {
         div.getPanelShosaiEria().getTxtCyouhyou().setValue(帳票);
         div.getPanelShosaiEria().getTxtSakuseiBi().setValue(new RDate(RDate.getNowDate().wareki().toDateString().toString()));
         if (医療費控除情報リスト.get(NOM_0).get控除対象年() != null) {
-            RYear 控除対象年 = new RYear(医療費控除情報リスト.get(NOM_0).get控除対象年().wareki().getYear());
+            RYear 控除対象年 = new RYear(医療費控除情報リスト.get(NOM_0).get控除対象年().toDateString());
             div.getPanelShosaiEria().getDdlTaishonen().setSelectedKey(控除対象年.toDateString());
         }
         if (医療費控除情報リスト.get(NOM_0).get発行年月日() != null) {
@@ -64,10 +64,10 @@ public class IkenshoKakuninshoHandler {
             div.getPanelShosaiEria().getTxtShinseiBi().setValue(new RDate(医療費控除情報リスト.get(NOM_0).get申請年月日().
                     wareki().toDateString().toString()));
         }
-//        if (医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日() != null) {
-//            div.getPanelShosaiEria().getTxtDateIkensyoSakuseiBi().setValue(new RDate(医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日().
-//                    wareki().toDateString().toString()));
-//        }
+        if (医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日() != null) {
+            div.getPanelShosaiEria().getTxtDateIkensyoSakuseiBi().setValue(new RDate(医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日()
+                    .wareki().toDateString().toString()));
+        }
         if (医療費控除情報リスト.get(NOM_0).get認定有効期間開始年月日() != null) {
             div.getPanelShosaiEria().getTxtNinteiKikan().setFromValue(new RDate(医療費控除情報リスト.get(NOM_0).get認定有効期間開始年月日().
                     wareki().toDateString().toString()));
@@ -76,11 +76,10 @@ public class IkenshoKakuninshoHandler {
             div.getPanelShosaiEria().getTxtNinteiKikan().setToValue(new RDate(医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日().
                     wareki().toDateString().toString()));
         }
-//        if (医療費控除情報リスト.get(NOM_0).get日常生活自立度() != null) {
-//            div.getPanelShosaiEria().getTxtZiritudo().setValue(get日常生活自立度(医療費控除情報リスト.get(NOM_0).get日常生活自立度()));
-//        }
-//        div.getPanelShosaiEria().getTxtNyoushikkin().setValue(医療費控除情報リスト.get(NOM_0).is尿失禁の有無() ? あり : なし);
-
+        if (医療費控除情報リスト.get(NOM_0).get日常生活自立度() != null) {
+            div.getPanelShosaiEria().getTxtZiritudo().setValue(get日常生活自立度(医療費控除情報リスト.get(NOM_0).get日常生活自立度()));
+        }
+        div.getPanelShosaiEria().getTxtNyoushikkin().setValue(医療費控除情報リスト.get(NOM_0).toEntity().getNyoshikkinHassei() ? あり : なし);
         div.setHdndatakubun(医療費控除情報リスト.get(NOM_0).getデータ区分());
     }
 

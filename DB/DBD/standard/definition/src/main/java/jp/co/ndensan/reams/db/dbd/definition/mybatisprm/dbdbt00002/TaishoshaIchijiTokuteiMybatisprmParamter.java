@@ -57,26 +57,32 @@ public class TaishoshaIchijiTokuteiMybatisprmParamter implements IMyBatisParamet
 
     private void edit対象リスト(TargetList 対象リスト) {
 
-        if (一.equals(対象リスト.getコード())) {
-            is認定者リスト = true;
-        } else if (二.equals(対象リスト.getコード())) {
-            is該当者リスト = true;
+        if (対象リスト != null) {
+            if (一.equals(対象リスト.getコード())) {
+                is認定者リスト = true;
+            } else if (二.equals(対象リスト.getコード())) {
+                is該当者リスト = true;
+            }
         }
     }
 
     private void edit受給者区分(JukyushaKubun2 受給者区分) {
-        if (二.equals(受給者区分.getコード())) {
-            is受給者 = true;
-        } else if (三.equals(受給者区分.getコード())) {
-            is事業対象者 = true;
+        if (受給者区分 != null) {
+            if (二.equals(受給者区分.getコード())) {
+                is受給者 = true;
+            } else if (三.equals(受給者区分.getコード())) {
+                is事業対象者 = true;
+            }
         }
     }
 
     private void edit旧措置区分(KyusochishaJukyushaKubun 旧措置区分) {
-        if (一.equals(旧措置区分.getコード())) {
-            is旧措置者以外 = true;
-        } else if (三.equals(旧措置区分.getコード())) {
-            is旧措置者 = true;
+        if (旧措置区分 != null) {
+            if (一.equals(旧措置区分.getコード())) {
+                is旧措置者以外 = true;
+            } else if (三.equals(旧措置区分.getコード())) {
+                is旧措置者 = true;
+            }
         }
     }
 

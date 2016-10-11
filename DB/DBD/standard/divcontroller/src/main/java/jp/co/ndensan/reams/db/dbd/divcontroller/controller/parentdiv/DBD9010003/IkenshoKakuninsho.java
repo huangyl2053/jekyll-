@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -92,13 +91,13 @@ public class IkenshoKakuninsho {
         List<KeyValueDataSource> 年度DDLデータ = new ArrayList<>();
         for (IryohiKojo 医療費控除 : 医療費控除情報リスト) {
             KeyValueDataSource data = new KeyValueDataSource();
-            RYear 控除対象年 = new RYear(医療費控除.get控除対象年().wareki().getYear());
+            RYear 控除対象年 = new RYear(医療費控除.get控除対象年().toDateString());
             data.setKey(控除対象年.toDateString());
             data.setValue(控除対象年.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).toDateString());
             年度DDLデータ.add(data);
         }
         div.getPanelShosaiEria().getDdlTaishonen().setDataSource(年度DDLデータ);
-//        getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
+        getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号).concat(new RString("IryohiKojyoSyomeisho")));
 //        if (!RealInitialLocker.tryGetLock(排他キー)) {
@@ -106,7 +105,6 @@ public class IkenshoKakuninsho {
 //        }
         RealInitialLocker.lock(排他キー);
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
-
         return ResponseData.of(div).respond();
     }
 
@@ -184,26 +182,22 @@ public class IkenshoKakuninsho {
         ShujiiIkenshoKakuninshoPrintService service = new ShujiiIkenshoKakuninshoPrintService();
         SourceDataCollection source = service.printSingle(getHandler(div).create主治医意見書確認書Entity(taishoshaKey));
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
-        List<IryohiKojoEntityResult> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
-        IryohiKojoEntityResult entityresult = new IryohiKojoEntityResult();
-        for (IryohiKojoEntityResult result : 医療費控除情報リスト) {
-            if (div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey().equals(result.get控除対象年())) {
-                entityresult = result;
+        List<IryohiKojo> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        for (IryohiKojo result : 医療費控除情報リスト) {
+            if (div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey().equals(result.get控除対象年().toDateString())) {
+                IryohiKojoManager manager = new IryohiKojoManager();
+                IryohiKojoBuilder builder = result.createBuilderForEdit();
+                builder.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
+                builder.set主治医意見書受領年月日(result.toEntity().getShujiiIkenshoJuryoYMD());
+                builder.set尿失禁の発生(result.toEntity().getNyoshikkinHassei());
+                builder.set日常生活自立度(result.toEntity().getNichijoSeikatsuJiritsudo());
+                builder.set申請年月日(result.get申請年月日());
+                builder.set登録年月日(result.toEntity().getTorokuYMD());
+                builder.set認定有効期間終了年月日(result.get認定有効期間終了年月日());
+                builder.set認定有効期間開始年月日(result.get認定有効期間開始年月日());
+                manager.save医療費控除(builder.build().unChanged().modifiedModel());
             }
         }
-        IryohiKojo 医療費控除 = new IryohiKojo(new HihokenshaNo(entityresult.get被保険者番号()), new FlexibleYear(entityresult.get控除対象年()),
-                entityresult.getデータ区分());
-        IryohiKojoManager manager = new IryohiKojoManager();
-        IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
-        builder.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
-        builder.set主治医意見書受領年月日(entityresult.get主治医意見書受領年月日());
-        builder.set尿失禁の発生(entityresult.is尿失禁の有無());
-        builder.set日常生活自立度(entityresult.get日常生活自立度());
-        builder.set申請年月日(entityresult.get申請年月日());
-        builder.set登録年月日(entityresult.get登録年月日());
-        builder.set認定有効期間終了年月日(entityresult.get認定有効期間終了年月日());
-        builder.set認定有効期間開始年月日(entityresult.get認定有効期間開始年月日());
-        //manager.save医療費控除(builder.build().unChanged().modifiedModel());
         return ResponseData.of(source).respond();
     }
 

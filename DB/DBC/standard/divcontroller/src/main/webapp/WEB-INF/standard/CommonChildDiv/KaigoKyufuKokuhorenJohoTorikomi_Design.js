@@ -68,6 +68,14 @@ var DBC;
                 return new UZA.Label(this.convFiledName("lblNaiBaiMsg"));
             };
 
+            Controls.prototype.txtShoriTaisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtShoriTaisho"));
+            };
+
+            Controls.prototype.hdnShoriKubun = function () {
+                return new UZA.TextBox(this.convFiledName("hdnShoriKubun"));
+            };
+
             Controls.prototype.ShutsuRyokujun = function () {
                 return new UZA.Panel(this.convFiledName("ShutsuRyokujun"));
             };

@@ -29,7 +29,7 @@ public enum HihokenshaNoFubanHoho {
     /**
      * コード:5 名称:自動連番_MCD10付番 略称:自動連番＋MCD10付番
      */
-    自動連番MCD10付番("5", "自動連番_MCD10付番", "自動連番＋MCD10付番");
+    自動連番_MCD10付番("5", "自動連番_MCD10付番", "自動連番＋MCD10付番");
 
     private final RString code;
     private final RString fullName;

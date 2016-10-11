@@ -15,11 +15,15 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitai
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp3Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp4Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.CreateShoriResultCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.CreateTaishoSetaiyinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp2Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdTaishoSeitaiyinTemp5Process;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_KijunsyunygetsujiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.CreateShoriResultCsvFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.UpdTaishoSeitaiyinTemp5ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -51,7 +55,9 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
     private static final String 対象世帯員クラスに削除 = "delTaishoSeitaiyinTemp";
     private static final String 対象世帯員クラスに登録2 = "insTaishoSeitaiyinTemp2";
     private static final String 対象世帯員クラスに更新4 = "updTaishoSeitaiyinTemp4";
+    private static final String 対象世帯員クラスに更新5 = "updTaishoSeitaiyinTemp5";
     private static final String 帳票出力_CSV作成 = "createTaishoSetaiyin";
+    private static final String 処理結果確認リストの発行 = "createShoriResultCsvFileProcess";
     private static final String 基準収入額管理マスタに登録 = "insDbT3116KijunShunyugakuTekiyoKanri";
     private static final String 処理日付管理マスタに更新 = "updShoriDateKanri";
 
@@ -77,9 +83,11 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
             executeStep(世帯員所得情報一時テーブルに重複削除);
             executeStep(対象世帯員クラスに登録2);
             executeStep(対象世帯員クラスに更新4);
-            //TODO BatchStep 13
+            executeStep(対象世帯員クラスに更新5);
             executeStep(帳票出力_CSV作成);
-            //TODO BatchStep 15
+            if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(getParameter().get抽出条件())) {
+                executeStep(処理結果確認リストの発行);
+            }
             executeStep(基準収入額管理マスタに登録);
             executeStep(処理日付管理マスタに更新);
         }
@@ -160,6 +168,15 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
         return loopBatch(UpdTaishoSeitaiyinTemp4Process.class).define();
     }
 
+    @Step(対象世帯員クラスに更新5)
+    IBatchFlowCommand callUpdTaishoSeitaiyinTemp5Process() {
+        UpdTaishoSeitaiyinTemp5ProcessParameter parameter
+                = new UpdTaishoSeitaiyinTemp5ProcessParameter(getParameter().get抽出条件(),
+                        getParameter().get抽出対象(),
+                        getParameter().get世帯員把握基準日());
+        return loopBatch(UpdTaishoSeitaiyinTemp5Process.class).arguments(parameter).define();
+    }
+
     @Step(帳票出力_CSV作成)
     IBatchFlowCommand callCreateTaishoSetaiyinProcess() {
         InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
@@ -176,6 +193,13 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
         parameter.set文書番号(getParameter().get文書番号());
         parameter.set処理年月日(FlexibleDate.getNowDate());
         return loopBatch(CreateTaishoSetaiyinProcess.class).arguments(parameter).define();
+    }
+
+    @Step(処理結果確認リストの発行)
+    IBatchFlowCommand callCreateShoriResultCsvFileProcess() {
+        CreateShoriResultCsvFileProcessParameter parameter
+                = new CreateShoriResultCsvFileProcessParameter(getParameter().get処理年度());
+        return loopBatch(CreateShoriResultCsvFileProcess.class).arguments(parameter).define();
     }
 
     @Step(基準収入額管理マスタに登録)

@@ -138,7 +138,7 @@
     <result property="介護小規模多機能型居宅介護" column="介護小規模多機能型居宅介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="介護認知症対応型共同生活介護グループホーム" column="介護認知症対応型共同生活介護グループホーム" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="介護地域密着型特定施設入居者生活介護" column="介護地域密着型特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="介護地域密着型介護老人福祉施設入所者生活介護" column="介護地域密着型介護老人福祉施設入所者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="老人福祉施設入所者生活介護" column="老人福祉施設入所者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="介護定期巡回随時対応型訪問介護看護" column="介護定期巡回随時対応型訪問介護看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="介護複合型サービス" column="介護複合型サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="麻痺左上肢" column="麻痺左上肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -293,15 +293,15 @@
     <result property="前回予防訪問リハビリテーション" column="前回予防訪問リハビリテーション" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防居宅療養管理指導" column="前回予防居宅療養管理指導" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防通所介護デイサービス" column="前回予防通所介護デイサービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回予防通所リハビリテーションデイケア" column="前回予防通所リハビリテーションデイケア" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回予防短期入所生活介護ショートステイ" column="前回予防短期入所生活介護ショートステイ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回予防通所リハビリ" column="前回予防通所リハビ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回予防短期入所生活介護" column="前回予防短期入所生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防短期入所療養介護" column="前回予防短期入所療養介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防特定施設入居者生活介護" column="前回予防特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防福祉用具貸与" column="前回予防福祉用具貸与" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防特定福祉用具販売" column="前回予防特定福祉用具販売" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防認知症対応型通所介護" column="前回予防認知症対応型通所介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回予防小規模多機能型居宅介護" column="前回予防小規模多機能型居宅介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回予防認知症対応型共同生活介護グループホーム" column="前回予防認知症対応型共同生活介護グループホーム" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回予防グループホーム" column="前回予防グループホーム" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回住宅改修予防給付" column="前回住宅改修予防給付" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護訪問介護ホームヘルプ" column="前回介護訪問介護ホームヘルプ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護訪問入浴介護" column="前回介護訪問入浴介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -309,8 +309,8 @@
     <result property="前回介護訪問リハビリテーション" column="前回介護訪問リハビリテーション" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護居宅療養管理指導" column="前回介護居宅療養管理指導" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護通所介護デイサービス" column="前回介護通所介護デイサービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回介護通所リハビリテーションデイケア" column="前回介護通所リハビリテーションデイケア" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回介護短期入所生活介護ショートステイ" column="前回介護短期入所生活介護ショートステイ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回介護通所リハビリ" column="前回介護通所リハビリ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回介護短期入所生活介護" column="前回介護短期入所生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護短期入所療養介護" column="前回介護短期入所療養介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護特定施設入居者生活介護" column="前回介護特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護福祉用具貸与" column="前回介護福祉用具貸与" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -318,10 +318,10 @@
     <result property="前回介護夜間対応型訪問介護" column="前回介護夜間対応型訪問介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護認知症対応型通所介護" column="前回介護認知症対応型通所介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護小規模多機能型居宅介護" column="前回介護小規模多機能型居宅介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回介護認知症対応型共同生活介護グループホーム" column="前回介護認知症対応型共同生活介護グループホーム" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回介護地域密着型特定施設入居者生活介護" column="前回介護地域密着型特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回介護地域密着型介護老人福祉施設入所者生活介護" column="前回介護地域密着型介護老人福祉施設入所者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="前回介護定期巡回随時対応型訪問介護看護" column="前回介護定期巡回随時対応型訪問介護看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回介護グループホーム" column="前回介護グループホーム" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回介護施設入居者生活介護" column="前回介護施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回老人福祉施設入所者生活介護" column="前回老人福祉施設入所者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回介護訪問介護看護" column="前回介護訪問介護看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回介護複合型サービス" column="前回介護複合型サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回住宅改修介護給付" column="前回住宅改修介護給付" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="前回識別コード" column="前回識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -436,7 +436,7 @@
                             Z."介護小規模多機能型居宅介護" AS "介護小規模多機能型居宅介護",
                             Z."介護認知症対応型共同生活介護グループホーム" AS "介護認知症対応型共同生活介護グループホーム",
                             Z."介護地域密着型特定施設入居者生活介護" AS "介護地域密着型特定施設入居者生活介護",
-                            Z."介護地域密着型介護老人福祉施設入所者生活介護" AS "介護地域密着型介護老人福祉施設入所者生活介護",
+                            Z."老人福祉施設入所者生活介護" AS "老人福祉施設入所者生活介護",
                             Z."介護定期巡回随時対応型訪問介護看護" AS "介護定期巡回随時対応型訪問介護看護",
                             Z."介護複合型サービス" AS "介護複合型サービス",
                             DbT5210.remban AS "施設利用",
@@ -625,23 +625,23 @@
                        S."前回予防訪問リハビリテーション" AS "前回予防訪問リハビリテーション",
                        S."前回予防居宅療養管理指導" AS "前回予防居宅療養管理指導",
                        S."前回予防通所介護デイサービス" AS "前回予防通所介護デイサービス",
-                       S."前回予防通所リハビリテーションデイケア" AS "前回予防通所リハビリテーションデイケア",
-                       S."前回予防短期入所生活介護ショートステイ" AS "前回予防短期入所生活介護ショートステイ",
+                       S."前回予防通所リハビリ" AS "前回予防通所リハビリ",
+                       S."前回予防短期入所生活介護" AS "前回予防短期入所生活介護",
                        S."前回予防短期入所療養介護" AS "前回予防短期入所療養介護",
                        S."前回予防特定施設入居者生活介護" AS "前回予防特定施設入居者生活介護",
                        S."前回予防福祉用具貸与" AS "前回予防福祉用具貸与",
                        S."前回予防特定福祉用具販売" AS "前回予防特定福祉用具販売",
                        S."前回予防認知症対応型通所介護" AS "前回予防認知症対応型通所介護",
                        S."前回予防小規模多機能型居宅介護" AS "前回予防小規模多機能型居宅介護",
-                       S."前回予防認知症対応型共同生活介護グループホーム" AS "前回予防認知症対応型共同生活介護グループホーム",
+                       S."前回予防グループホーム" AS "前回予防グループホーム",
                        S."前回介護訪問介護ホームヘルプ" AS "前回介護訪問介護ホームヘルプ",
                        S."前回介護訪問入浴介護" AS "前回介護訪問入浴介護",
                        S."前回介護訪問看護" AS "前回介護訪問看護",
                        S."前回介護訪問リハビリテーション" AS "前回介護訪問リハビリテーション",
                        S."前回介護居宅療養管理指導" AS "前回介護居宅療養管理指導",
                        S."前回介護通所介護デイサービス" AS "前回介護通所介護デイサービス",
-                       S."前回介護通所リハビリテーションデイケア" AS "前回介護通所リハビリテーションデイケア",
-                       S."前回介護短期入所生活介護ショートステイ" AS "前回介護短期入所生活介護ショートステイ",
+                       S."前回介護通所リハビリ" AS "前回介護通所リハビリ",
+                       S."前回介護短期入所生活介護" AS "前回介護短期入所生活介護",
                        S."前回介護短期入所療養介護" AS "前回介護短期入所療養介護",
                        S."前回介護特定施設入居者生活介護" AS "前回介護特定施設入居者生活介護",
                        S."前回介護福祉用具貸与" AS "前回介護福祉用具貸与",
@@ -649,10 +649,10 @@
                        S."前回介護夜間対応型訪問介護" AS "前回介護夜間対応型訪問介護",
                        S."前回介護認知症対応型通所介護" AS "前回介護認知症対応型通所介護",
                        S."前回介護小規模多機能型居宅介護" AS "前回介護小規模多機能型居宅介護",
-                       S."前回介護認知症対応型共同生活介護グループホーム" AS "前回介護認知症対応型共同生活介護グループホーム",
-                       S."前回介護地域密着型特定施設入居者生活介護" AS "前回介護地域密着型特定施設入居者生活介護",
-                       S."前回介護地域密着型介護老人福祉施設入所者生活介護" AS "前回介護地域密着型介護老人福祉施設入所者生活介護",
-                       S."前回介護定期巡回随時対応型訪問介護看護" AS "前回介護定期巡回随時対応型訪問介護看護",
+                       S."前回介護グループホーム" AS "前回介護グループホーム",
+                       S."前回介護施設入居者生活介護" AS "前回介護施設入居者生活介護",
+                       S."前回老人福祉施設入所者生活介護" AS "前回老人福祉施設入所者生活介護",
+                       S."前回介護訪問介護看護" AS "前回介護訪問介護看護",
                        S."前回介護複合型サービス"AS "前回介護複合型サービス",
                        zenkaiDbT5101."koroshoIfShikibetsuCode" AS "前回識別コード",
                        DbT5102."shinsakaiIken" AS "審査会意見",
@@ -1270,7 +1270,7 @@
                                 MAX(T.介護小規模多機能型居宅介護)AS "介護小規模多機能型居宅介護",
                                 MAX(T.介護認知症対応型共同生活介護グループホーム)AS "介護認知症対応型共同生活介護グループホーム",
                                 MAX(T.介護地域密着型特定施設入居者生活介護)AS "介護地域密着型特定施設入居者生活介護",
-                                MAX(T.介護地域密着型介護老人福祉施設入所者生活介護)AS "介護地域密着型介護老人福祉施設入所者生活介護",
+                                MAX(T.老人福祉施設入所者生活介護)AS "老人福祉施設入所者生活介護",
                                 MAX(T.介護定期巡回随時対応型訪問介護看護)AS "介護定期巡回随時対応型訪問介護看護",
                                 MAX(T.介護複合型サービス)AS "介護複合型サービス"
                               from
@@ -1441,7 +1441,7 @@
                                   WHEN  DbT5202."serviceKubunCode" = '2' 
                                   AND DbT5207."remban" = 18 
                                   THEN DbT5207."serviceJokyo" 
-                                  END AS 介護地域密着型介護老人福祉施設入所者生活介護
+                                  END AS 老人福祉施設入所者生活介護
                                 , CASE 
                                   WHEN DbT5202."serviceKubunCode" = '2'   
                                   AND DbT5207."remban" = 19 
@@ -1999,23 +1999,23 @@
                                         MAX(T.前回予防訪問リハビリテーション)AS "前回予防訪問リハビリテーション",
                                         MAX(T.前回予防居宅療養管理指導)AS "前回予防居宅療養管理指導",
                                         MAX(T.前回予防通所介護デイサービス)AS "前回予防通所介護デイサービス",
-                                        MAX(T.前回予防通所リハビリテーションデイケア)AS "前回予防通所リハビリテーションデイケア",
-                                        MAX(T.前回予防短期入所生活介護ショートステイ)AS "前回予防短期入所生活介護ショートステイ",
+                                        MAX(T.前回予防通所リハビリ)AS "前回予防通所リハビリ",
+                                        MAX(T.前回予防短期入所生活介護)AS "前回予防短期入所生活介護",
                                         MAX(T.前回予防短期入所療養介護)AS "前回予防短期入所療養介護",
                                         MAX(T.前回予防特定施設入居者生活介護)AS "前回予防特定施設入居者生活介護",
                                         MAX(T.前回予防福祉用具貸与)AS "前回予防福祉用具貸与",
                                         MAX(T.前回予防特定福祉用具販売)AS "前回予防特定福祉用具販売",
                                         MAX(T.前回予防認知症対応型通所介護)AS "前回予防認知症対応型通所介護",
                                         MAX(T.前回予防小規模多機能型居宅介護)AS "前回予防小規模多機能型居宅介護",
-                                        MAX(T.前回予防認知症対応型共同生活介護グループホーム)AS "前回予防認知症対応型共同生活介護グループホーム",
+                                        MAX(T.前回予防グループホーム)AS "前回予防グループホーム",
                                         MAX(T.前回介護訪問介護ホームヘルプ)AS "前回介護訪問介護ホームヘルプ",
                                         MAX(T.前回介護訪問入浴介護)AS "前回介護訪問入浴介護",
                                         MAX(T.前回介護訪問看護)AS "前回介護訪問看護",
                                         MAX(T.前回介護訪問リハビリテーション)AS "前回介護訪問リハビリテーション",
                                         MAX(T.前回介護居宅療養管理指導)AS "前回介護居宅療養管理指導",
                                         MAX(T.前回介護通所介護デイサービス)AS "前回介護通所介護デイサービス",
-                                        MAX(T.前回介護通所リハビリテーションデイケア)AS "前回介護通所リハビリテーションデイケア",
-                                        MAX(T.前回介護短期入所生活介護ショートステイ)AS "前回介護短期入所生活介護ショートステイ",
+                                        MAX(T.前回介護通所リハビリ)AS "前回介護通所リハビリ",
+                                        MAX(T.前回介護短期入所生活介護)AS "前回介護短期入所生活介護",
                                         MAX(T.前回介護短期入所療養介護)AS "前回介護短期入所療養介護",
                                         MAX(T.前回介護特定施設入居者生活介護)AS "前回介護特定施設入居者生活介護",
                                         MAX(T.前回介護福祉用具貸与)AS "前回介護福祉用具貸与",
@@ -2023,10 +2023,10 @@
                                         MAX(T.前回介護夜間対応型訪問介護)AS "前回介護夜間対応型訪問介護",
                                         MAX(T.前回介護認知症対応型通所介護)AS "前回介護認知症対応型通所介護",
                                         MAX(T.前回介護小規模多機能型居宅介護)AS "前回介護小規模多機能型居宅介護",
-                                        MAX(T.前回介護認知症対応型共同生活介護グループホーム)AS "前回介護認知症対応型共同生活介護グループホーム",
-                                        MAX(T.前回介護地域密着型特定施設入居者生活介護)AS "前回介護地域密着型特定施設入居者生活介護",
-                                        MAX(T.前回介護地域密着型介護老人福祉施設入所者生活介護)AS "前回介護地域密着型介護老人福祉施設入所者生活介護",
-                                        MAX(T.前回介護定期巡回随時対応型訪問介護看護)AS "前回介護定期巡回随時対応型訪問介護看護",
+                                        MAX(T.前回介護グループホーム)AS "前回介護グループホーム",
+                                        MAX(T.前回介護施設入居者生活介護)AS "前回介護施設入居者生活介護",
+                                        MAX(T.前回老人福祉施設入所者生活介護)AS "前回老人福祉施設入所者生活介護",
+                                        MAX(T.前回介護訪問介護看護)AS "前回介護訪問介護看護",
                                         MAX(T.前回介護複合型サービス)AS "前回介護複合型サービス"
                                       from
                                         (select 
@@ -2066,12 +2066,12 @@
                                           WHEN DbT5202."serviceKubunCode" = '1' 
                                           AND DbT5207."remban" = 7 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回予防通所リハビリテーションデイケア
+                                          END AS 前回予防通所リハビリ
                                         , CASE 
                                           WHEN DbT5202."serviceKubunCode" = '1' 
                                           AND DbT5207."remban" = 8 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回予防短期入所生活介護ショートステイ
+                                          END AS 前回予防短期入所生活介護
                                         , CASE 
                                           WHEN DbT5202."serviceKubunCode" = '1' 
                                           AND DbT5207."remban" = 9 
@@ -2106,7 +2106,7 @@
                                           WHEN  DbT5202."serviceKubunCode" = '1' 
                                           AND DbT5207."remban" = 16 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回予防認知症対応型共同生活介護グループホーム
+                                          END AS 前回予防グループホーム
                                         , CASE 
                                           WHEN DbT5202."serviceKubunCode" = '2'
                                           AND DbT5207."remban" = 1 
@@ -2141,12 +2141,12 @@
                                           WHEN  DbT5202."serviceKubunCode" = '2' 
                                           AND DbT5207."remban" = 7 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回介護通所リハビリテーションデイケア
+                                          END AS 前回介護通所リハビリ
                                         , CASE 
                                           WHEN DbT5202."serviceKubunCode" = '2' 
                                           AND DbT5207."remban" = 8 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回介護短期入所生活介護ショートステイ
+                                          END AS 前回介護短期入所生活介護
                                         , CASE 
                                           WHEN  DbT5202."serviceKubunCode" = '2' 
                                           AND DbT5207."remban" = 9 
@@ -2186,22 +2186,22 @@
                                           WHEN  DbT5202."serviceKubunCode" = '2' 
                                           AND DbT5207."remban" = 16 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回介護認知症対応型共同生活介護グループホーム
+                                          END AS 前回介護グループホーム
                                         , CASE 
                                           WHEN DbT5202."serviceKubunCode" = '2' 
                                           AND DbT5207."remban" = 17 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回介護地域密着型特定施設入居者生活介護
+                                          END AS 前回介護施設入居者生活介護
                                         , CASE 
                                           WHEN  DbT5202."serviceKubunCode" = '2' 
                                           AND DbT5207."remban" = 18 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回介護地域密着型介護老人福祉施設入所者生活介護
+                                          END AS 前回老人福祉施設入所者生活介護
                                         , CASE 
                                           WHEN DbT5202."serviceKubunCode" = '2'   
                                           AND DbT5207."remban" = 19 
                                           THEN DbT5207."serviceJokyo" 
-                                          END AS 前回介護定期巡回随時対応型訪問介護看護
+                                          END AS 前回介護訪問介護看護
                                         , CASE 
                                           WHEN DbT5202."serviceKubunCode" = '2' 
                                           AND DbT5207."remban" = 20 

@@ -171,9 +171,9 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
 
         int pageMax = Integer.MIN_VALUE;
         for (int i = 0; i < pageList.size(); i++) {
-            int pege = pageList.get(i);
-            if (pege > pageMax) {
-                pageMax = pege;
+            int page = pageList.get(i);
+            if (page > pageMax) {
+                pageMax = page;
             }
         }
         int page = 1;

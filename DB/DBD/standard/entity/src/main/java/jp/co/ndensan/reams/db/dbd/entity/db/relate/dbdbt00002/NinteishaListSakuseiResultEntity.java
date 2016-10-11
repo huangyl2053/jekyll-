@@ -6,6 +6,7 @@
 
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.TaishoshaJohoTempTableEntity;
@@ -37,7 +38,7 @@ public class NinteishaListSakuseiResultEntity extends DbTableEntityBase<Taishosh
     private DbT4010GemmenGengakuShinseiEntity 減免減額申請Entity;
     private RString 入所施設コード;
     private RString 入所施設名称;
-    private SeteiYouEntity 世帯員Entity;
+    private List<SeteiYouEntity> 世帯員リスト;
     private HihokenshaNo 総者の被保険者番号;
     private FlexibleDate 総者のチェックリスト実施日;
     private FlexibleDate 総者の適用開始年月日;

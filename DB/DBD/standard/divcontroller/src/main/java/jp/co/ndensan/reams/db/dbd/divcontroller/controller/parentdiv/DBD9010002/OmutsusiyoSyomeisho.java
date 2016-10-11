@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD9010002
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.DBD9010002StateName;
@@ -66,7 +65,7 @@ public class OmutsusiyoSyomeisho {
      * @return ResponseData<OmutsusiyoSyomeishoDiv>
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onChange_ddlTaishonen(OmutsusiyoSyomeishoDiv div) {
-        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        List<IryohiKojo> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         getHandler(div).onChange対象年(医療費控除リスト);
         return ResponseData.of(div).respond();
     }
@@ -102,7 +101,7 @@ public class OmutsusiyoSyomeisho {
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(OmutsusiyoSyomeishoDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
-        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        List<IryohiKojo> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         response.data = getHandler(div).publishReport(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), 医療費控除リスト);
         return response;
     }

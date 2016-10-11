@@ -83,10 +83,12 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
      */
     public NinteishaListSakuseiProcessParameter(TargetList 対象リスト) {
 
-        if (一.equals(対象リスト.getコード())) {
-            is認定者リスト = true;
-        } else if (二.equals(対象リスト.getコード())) {
-            is該当者リスト = true;
+        if (対象リスト != null) {
+            if (一.equals(対象リスト.getコード())) {
+                is認定者リスト = true;
+            } else if (二.equals(対象リスト.getコード())) {
+                is該当者リスト = true;
+            }
         }
     }
 

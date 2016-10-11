@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -204,9 +205,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
         }
         if (集計flag) {
             source.gokeiKensuTitle = 合計件数タイトル;
-            if (entity.get給付実績_出力データ件数() != null) {
-                source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(entity.get給付実績_出力データ件数(), 0).concat(件タイトル);
-            }
+            source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(new Decimal(合計件数), 0).concat(件タイトル);
         }
 
         source.shikibetsuCode = entity.get識別コード();
