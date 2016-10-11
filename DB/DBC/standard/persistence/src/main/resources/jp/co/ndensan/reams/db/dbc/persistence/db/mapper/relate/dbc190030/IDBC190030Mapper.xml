@@ -1,72 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBC-4640-030 liuyang -->
+<!-- @reamsid_L DBC-4640-030 jianglaisheng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc190030.IDBC190030Mapper">
     
+    <resultMap id="ResultMap_HihokenshaDaichoTempSixColumnEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="TEMP_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <result property="shikibetsuCode" column="TEMP_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+         <result property="jushochiTokureiFlag" column="TEMP_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <result property="shichosonCode" column="TEMP_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+         <result property="kyuShichosonCode" column="TEMP_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+         <result property="koikinaiTokureiSochimotoShichosonCode" column="TEMP_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+    </resultMap>
+    
     <select resultOrdered="true" id="get被保険者台帳1"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
-        SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-        FROM rgdb."DbV1001HihokenshaDaicho" AS　"DbT1001HihokenshaDaicho"
-        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
-        ON "DbT1001HihokenshaDaicho"."hihokenshaNo" ＝ "DbT4001JukyushaDaicho"."hihokenshaNo"
-        WHERE "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
-        AND #{世帯員把握基準日} <![CDATA[<]]> "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-        UNION																							
-        SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-        FROM rgdb."DbV1001HihokenshaDaicho" AS　"DbT1001HihokenshaDaicho"
-        INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS "DbT3100NijiYoboJigyoTaishosha"
-        ON "DbV1001HihokenshaDaicho"."hihokenshaNo" ＝"DbT3100NijiYoboJigyoTaishosha"."hihokenshaNo"
-        WHERE "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
-        AND #{世帯員把握基準日}<![CDATA[<]]>"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-        ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
-        <if test="出力順" >,${出力順}</if>
+        SELECT * 
+            FROM   
+                (SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT4001JukyushaDaicho" AS B
+                ON A."hihokenshaNo" = B."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
+                AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                UNION																							
+                SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS C
+                ON A."hihokenshaNo" = C."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
+                AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD") AS A
+            ORDER BY A.TEMP_hihokenshaNo
     </select>
     
     <select resultOrdered="true" id="get被保険者台帳2"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
-        SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-        FROM	rgdb."DbT1001HihokenshaDaicho" AS　"DbT1001HihokenshaDaicho"
-        WHERE "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
-        AND 	#{世帯員把握基準日} <![CDATA[<]]>"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-        ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+        FROM rgdb."DbT1001HihokenshaDaicho" AS A
+        WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
+        AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+        ORDER BY A."hihokenshaNo"
     </select>
-
-    <update id="update世帯員所得情報一時" >
-        UPDATE "TmpSetaiShotoku"
-        SET "setaiCode" = concat('90000',"hihokenshaNo")
-        WHERE "jushochiTokureiFlag"='1'
-    </update>
     
     <select resultOrdered="true" id="get被保険者台帳3"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
-        SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-        FROM rgdb."DbV1001HihokenshaDaicho" AS　"DbT1001HihokenshaDaicho"
-        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
-        ON "DbT1001HihokenshaDaicho"."hihokenshaNo" ＝ "DbT4001JukyushaDaicho"."hihokenshaNo"
-        WHERE "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
-        AND #{世帯員把握基準日2} <![CDATA[<]]> "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-        UNION																							
-        SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-        FROM rgdb."DbV1001HihokenshaDaicho" AS　"DbT1001HihokenshaDaicho"
-        INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS "DbT3100NijiYoboJigyoTaishosha"
-        ON "DbV1001HihokenshaDaicho"."hihokenshaNo" ＝"DbT3100NijiYoboJigyoTaishosha"."hihokenshaNo"
-        WHERE "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
-        AND #{世帯員把握基準日2}<![CDATA[<]]>"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-        ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
-        <if test="出力順" >,${出力順}</if>
+        SELECT * 
+            FROM   
+                (SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT4001JukyushaDaicho" AS B
+                ON A."hihokenshaNo" = B."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
+                AND #{世帯員把握基準日2} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                UNION																							
+                SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS C
+                ON A."hihokenshaNo" = C."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
+                AND #{世帯員把握基準日2}<![CDATA[<]]>A."shikakuSoshitsuYMD") AS A
+            ORDER BY A.TEMP_hihokenshaNo
     </select>
     
     <select resultOrdered="true" id="get被保険者台帳4"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
-        SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-        FROM	rgdb."DbT1001HihokenshaDaicho" AS　"DbT1001HihokenshaDaicho"
-        WHERE "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
-        AND 	#{世帯員把握基準日2} <![CDATA[<]]>"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-        ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+        FROM rgdb."DbT1001HihokenshaDaicho" AS A
+        WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
+        AND #{世帯員把握基準日2} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+        ORDER BY A."hihokenshaNo"
     </select>
 
 </mapper>

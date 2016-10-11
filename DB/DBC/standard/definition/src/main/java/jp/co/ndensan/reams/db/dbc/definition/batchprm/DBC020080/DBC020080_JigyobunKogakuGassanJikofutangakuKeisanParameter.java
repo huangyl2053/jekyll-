@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080Proce
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,9 +34,9 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends 
     @BatchParameter(key = KEY_SHORITIMESTAMP, name = "処理日時")
     private RDateTime shoriTimestamp;
     @BatchParameter(key = KEY_TAISHOKAISHIDAY, name = "申請対象開始日")
-    private RDate taishoKaishiDay;
+    private FlexibleDate taishoKaishiDay;
     @BatchParameter(key = KEY_TAISHOSHURYODAY, name = "申請対象日終了日")
-    private RDate taishoShuryoDay;
+    private FlexibleDate taishoShuryoDay;
     @BatchParameter(key = KEY_SHUTURYOKUFLG, name = "出力フラグ")
     private boolean shuturyokuFlg;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "帳票出力順ID")
@@ -52,6 +52,6 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends 
      */
     public DBC020080ProcessParameter toDBC020080ProcessParameter() {
         return new DBC020080ProcessParameter(
-                shoriTimestamp, taishoKaishiDay, taishoShuryoDay, shuturyokuFlg, shutsuryokujunId, dantaiCd, 事業分フラグ);
+                shoriTimestamp, null, null, shuturyokuFlg, shutsuryokujunId, dantaiCd, 事業分フラグ);
     }
 }

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.DBC190030ProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -23,9 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * バッチ設計_DBC110065_基準収入額適用申請書_異動分作成のプロセスクラスです。
  *
- * @reamsid_L DBC-4640-030 liuyang
+ * @reamsid_L DBC-4640-030 jianglaisheng
  */
-public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<DbT1001HihokenshaDaichoEntity> {
+public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<HihokenshaDaichoTempSixColumnEntity> {
 
     private static final ReportId 帳票ID = new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho");
     private static final RString TABLENAME = new RString("TmpSetaiHaaku");
@@ -70,7 +70,7 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<DbT100
     }
 
     @Override
-    protected void process(DbT1001HihokenshaDaichoEntity entity) {
+    protected void process(HihokenshaDaichoTempSixColumnEntity entity) {
         SetaiHaakuEntity 世帯員把握入力一時 = new SetaiHaakuEntity();
         世帯員把握入力一時.setHihokenshaNo(entity.getHihokenshaNo());
         世帯員把握入力一時.setShikibetsuCode(entity.getShikibetsuCode());

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekitorikomiichiran.K
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufujissekitorikomiichiran.KyufujissekiTorikomiIchiranSource;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -29,7 +28,7 @@ public class KyufujissekiTorikomiIchiranReport extends Report<KyufujissekiToriko
     private final RString 並び順の５件目;
     private final List<RString> 改頁リスト;
     private final FlexibleYearMonth 処理年月;
-    private final RDateTime 作成日時;
+    private final YMDHMS 作成日時;
     private final int 連番;
     private final boolean 集計flag;
     private final int 合計件数;

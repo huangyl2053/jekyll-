@@ -538,7 +538,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         if (月報報告_一般状況1_11 != null) {
             FlexibleDate 集計年月1テキストボックス = new FlexibleDate(月報報告_一般状況1_11.get年度().toDateString()
                     .concat(月報報告_一般状況1_11.get処理枝番().substring(2)));
-            if (div.getTxtShukeiYM1().getValue() != null && !div.getTxtShukeiYM1().getValue().isEmpty()) {
+            if (!集計年月1テキストボックス.isEmpty()) {
                 div.getTxtShukeiYM1().setReadOnly(false);
                 div.getTxtShukeiYM1().setValue(集計年月1テキストボックス);
             } else {
@@ -1031,7 +1031,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         param.setKaishiYm(div.getTxtShukeiYM4Bak());
         param.setShusyoYm(div.getTxtShukeiYM5Bak());
         param.setKetteiYm(get決定年月());
-        if (div.getTxtShukeiYM7().getValue() != null) {
+        if (div.getTxtShukeiYM7().getValue() != null && !div.getTxtShukeiYM7().getValue().isEmpty()) {
             param.setShukeiNendo(div.getTxtShukeiYM7().getValue().getYearMonth().toDateString());
         }
         return getバッチID(param);
@@ -1325,12 +1325,12 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
 
     private List<RString> get決定年月() {
         List<RString> 決定年月 = new ArrayList<>();
-        if (div.getTxtShukeiYM4().getValue() != null) {
+        if (div.getTxtShukeiYM4().getValue() != null && !div.getTxtShukeiYM4().getValue().isEmpty()) {
             決定年月.add(div.getTxtShukeiYM4().getValue().getYearMonth().toDateString());
         } else {
             決定年月.add(RString.EMPTY);
         }
-        if (div.getTxtShukeiYM7().getValue() != null) {
+        if (div.getTxtShukeiYM7().getValue() != null && !div.getTxtShukeiYM7().getValue().isEmpty()) {
             決定年月.add(div.getTxtShukeiYM7().getValue().getYearMonth().toDateString());
         } else {
             決定年月.add(RString.EMPTY);

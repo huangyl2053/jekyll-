@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.csv.kyodoshoriyojukyushaidorenrakuhyoerrorteisei;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +22,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeiseiCSVEntity {
     @CsvField(order = 1, name = "異動日")
     private FlexibleDate 異動日;
     @CsvField(order = 2, name = "被保番号")
-    private HihokenshaNo 被保番号;
+    private RString 被保番号;
     @CsvField(order = 3, name = "かな氏名")
     private RString かな氏名;
     @CsvField(order = 4, name = "項目")
