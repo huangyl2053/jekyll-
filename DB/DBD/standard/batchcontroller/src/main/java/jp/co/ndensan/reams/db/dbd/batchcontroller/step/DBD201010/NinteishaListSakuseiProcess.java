@@ -207,8 +207,26 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 }
             }
         }
-        NinteishaListSakuseiResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
-        eucCsvWriter.writeLine(resultEntity);
+        if (t.get世帯員リスト() != null) {
+            NinteishaListSakuseiResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
+            NinteishaListSakuseiResultCsvEntity csvEntity = resultEntity;
+            for (SeteiYouEntity entity : t.get世帯員リスト()) {
+                IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+                csvEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
+                csvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+                if (entity.get課税区分() != null && KazeiKubun.課税.getコード().equals(entity.get課税区分())) {
+                    csvEntity.set世帯員課税区分(課);
+                }
+                if (entity.get課税所得額() != null && entity.get課税所得額().intValue() > 0) {
+                    csvEntity.set世帯員所得税課税区分(課);
+                }
+                eucCsvWriter.writeLine(csvEntity);
+                csvEntity = new NinteishaListSakuseiResultCsvEntity();
+            }
+        } else {
+            NinteishaListSakuseiResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
+            eucCsvWriter.writeLine(resultEntity);
+        }
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, log);
@@ -373,31 +391,9 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 resultEntity.set減免給付率(new RString(str.toString()));
             }
         }
-        set世帯員リスト(resultEntity, t);
         setVoidEntity(resultEntity, t);
         setEntity(resultEntity, t);
         return resultEntity;
-    }
-
-    private void set世帯員リスト(NinteishaListSakuseiResultCsvEntity resultEntity,
-            NinteishaListSakuseiResultEntity t) {
-        if (t.get世帯員リスト() != null) {
-            for (SeteiYouEntity entity : t.get世帯員リスト()) {
-                IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
-                resultEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
-                resultEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
-                if (entity.get課税区分() != null && KazeiKubun.課税.getコード().equals(entity.get課税区分())) {
-                    resultEntity.set世帯員課税区分(課);
-                } else {
-                    resultEntity.set世帯員課税区分(空白);
-                }
-                if (entity.get課税所得額() != null && entity.get課税所得額().intValue() > 0) {
-                    resultEntity.set世帯員所得税課税区分(空白);
-                } else {
-                    resultEntity.set世帯員所得税課税区分(課);
-                }
-            }
-        }
     }
 
     private NinteishaListSakuseiResultCsvEntity setVoidEntity(NinteishaListSakuseiResultCsvEntity resultEntity,
