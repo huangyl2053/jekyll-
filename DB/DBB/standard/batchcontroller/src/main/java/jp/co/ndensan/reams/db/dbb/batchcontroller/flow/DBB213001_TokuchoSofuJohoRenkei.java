@@ -8,9 +8,12 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB213001.CreateCheckFileProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB213001.CreateRenkeiFileProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB213001.DBB213001_TokuchoSofuJohoRenkeiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiProcessParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.FlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特徴送付情報連携のフローです。
@@ -21,10 +24,17 @@ public class DBB213001_TokuchoSofuJohoRenkei extends BatchFlowBase<DBB213001_Tok
 
     private static final String 連携用出力ファイル作成 = "creatRenkeiFile";
     private static final String チェックファイル作成 = "creatCheckFile";
+    private TokuchoSofuJohoRenkeiProcessParameter processParameter;
+    private FlowEntity returnEntity;
 
     @Override
     protected void defineFlow() {
+        processParameter = new TokuchoSofuJohoRenkeiProcessParameter();
         executeStep(連携用出力ファイル作成);
+        returnEntity = getResult(FlowEntity.class, new RString(連携用出力ファイル作成),
+                CreateRenkeiFileProcess.PARAMETER_OUT_RETURNENTITY);
+        processParameter.setファイルOutputMap(returnEntity.getファイル());
+        processParameter.setレコード件数OutputMap(returnEntity.getレコード件数());
         executeStep(チェックファイル作成);
     }
 
@@ -35,7 +45,7 @@ public class DBB213001_TokuchoSofuJohoRenkei extends BatchFlowBase<DBB213001_Tok
 
     @Step(チェックファイル作成)
     IBatchFlowCommand creatCheckFile() {
-        return loopBatch(CreateCheckFileProcess.class).define();
+        return loopBatch(CreateCheckFileProcess.class).arguments(processParameter).define();
     }
 
 }
