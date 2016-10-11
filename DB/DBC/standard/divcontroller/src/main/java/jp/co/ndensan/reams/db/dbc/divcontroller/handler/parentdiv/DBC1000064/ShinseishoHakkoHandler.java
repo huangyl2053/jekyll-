@@ -142,12 +142,13 @@ public class ShinseishoHakkoHandler {
      */
     public boolean is異動処理が実施済みか判定() {
         if (ZERO == div.getRadChushutsuJoken().getSelectedKey()) {
-            TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtShoriNendo().getValue().getYear());
+            return TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtShoriNendo().getValue().getYear());
         }
         if (ONE == div.getRadChushutsuJoken().getSelectedKey()) {
-            TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtSetaiinHaakuKijunYMD().getValue().getYear());
+            return TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtSetaiinHaakuKijunYMD().getValue().getYear());
+        } else {
+            return false;
         }
-        return false;
 
     }
 }
