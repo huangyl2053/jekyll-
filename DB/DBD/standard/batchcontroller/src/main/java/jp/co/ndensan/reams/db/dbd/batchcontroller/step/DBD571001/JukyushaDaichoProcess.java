@@ -26,7 +26,7 @@ public class JukyushaDaichoProcess extends BatchProcessBase<IdoChushutsuDaichoEn
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho."
-            + "IJukyushaDaichoMapper.get異動抽出台帳リスト");
+            + "IJukyushaDaichoMainMapper.get異動抽出台帳リスト");
     /**
      * OutputParameter用キー outTemptable
      */
@@ -62,7 +62,8 @@ public class JukyushaDaichoProcess extends BatchProcessBase<IdoChushutsuDaichoEn
     @Override
     protected void process(IdoChushutsuDaichoEntity t) {
         KensakuJyoukenTempTableEntity tempTableEntity = create検索条件一時テーブル情報(t);
-        if (!tempTableEntity.getHihokenshaNo().isEmpty() && !tempTableEntity.getShikibetsuCode().isEmpty()) {
+        if (tempTableEntity.getHihokenshaNo() != null && !tempTableEntity.getHihokenshaNo().isEmpty()
+                && tempTableEntity.getShikibetsuCode() != null && !tempTableEntity.getShikibetsuCode().isEmpty()) {
             tmpTableWriter.insert(tempTableEntity);
             outtable = new RString("1");
         }
