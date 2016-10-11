@@ -100,6 +100,9 @@ public class DbT4020TokubetsuchiikiKasanGemmenDac implements ISaveable<DbT4020To
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("特別地域加算減免エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        if (entity.getLastUpdateTimestamp() != null && !EntityDataState.Deleted.equals(entity.getState())) {
+            entity.setState(EntityDataState.Modified);
+        }
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 

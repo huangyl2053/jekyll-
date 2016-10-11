@@ -138,11 +138,9 @@ public class TokubetsuChiikiKasanGemmenService {
         } else {
             年度終了日の前年 = new FlexibleDate(年度終了日.getYearValue() - 1, 1, 1);
         }
-        FlexibleDate 年度開始日;
-        if (年度終了日の前年.isEmpty()) {
-            年度開始日 = FlexibleDate.EMPTY;
-        } else {
-            年度開始日 = estimate有効期限(年度終了日の前年).plusDay(1);
+        FlexibleDate 年度開始日 = estimate有効期限(年度終了日の前年).plusDay(1);
+        if (年度開始日.isEmpty()) {
+            throw new ApplicationException("年度の取得に失敗しました。 年度終了日の設定を見直してください");
         }
         DbT4020TokubetsuchiikiKasanGemmenDac dac
                 = InstanceProvider.create(DbT4020TokubetsuchiikiKasanGemmenDac.class);
