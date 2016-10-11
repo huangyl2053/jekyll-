@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyuf
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_KokiKokuhoShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -29,6 +30,8 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
     private static final RString STR_1 = new RString("1");
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
 
     /**
      * コンストラクタです。
@@ -76,6 +79,18 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
             ReportId 帳票ID,
             KokuhorenDataTorikomiViewStateClass parmater) {
         onLoadMode1(parmater);
+        RString 交換情報識別番号 = parmater.get交換情報識別番号();
+        RString 処理区分 = RString.EMPTY;
+        RString 処理対象 = RString.EMPTY;
+        if (交換情報識別番号.length() == NUM_4) {
+            処理区分 = 交換情報識別番号.substring(NUM_3, NUM_4);
+            処理対象 = KaigoGassan_KokiKokuhoShoriKubun.toValue(処理区分).get名称();
+            div.getTxtShoriTaisho().setDisplayNone(false);
+        } else {
+            div.getTxtShoriTaisho().setDisplayNone(true);
+        }
+        div.getTxtShoriTaisho().setValue(処理対象);
+        div.getHdnShoriKubun().setValue(処理区分);
         div.getShutsuRyokujun().getCcdChohyoShutsuryokujun().load(サブ業務コード, 帳票ID);
     }
 
