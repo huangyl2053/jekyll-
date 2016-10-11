@@ -7,15 +7,19 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanlist.RiyoshaFutanGakuGemmenNinteishaListProperty;
 import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanlist.RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.RiyoshaFutangakuGemmenGaitoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.ChohyoShutsuryokuJohoShutokuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultCsvEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd00002.RiyoshaFutangakuGemmenGaitoshaIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
@@ -29,6 +33,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -64,6 +69,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -73,9 +79,9 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBD-3980-030 x_youyj
  */
-public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<ChohyoShutsuryokuJohoShutokuResultEntity> {
+public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListSakuseiResultEntity> {
 
-    private ChohyoShutsuryokuJohoShutokuProcessParameter parameter;
+    private NinteishaListSakuseiProcessParameter parameter;
     private IOutputOrder outputOrder;
     private RString 出力順;
     private RString reamsLoginID;
@@ -91,7 +97,6 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString THERE = new RString("3");
     private static final RString ZEROSIX = new RString("06");
@@ -109,24 +114,33 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private CsvWriter<ChohyoShutsuryokuJohoShutokuResultCsvEntity> eucCsvWriter;
+    private CsvWriter<NinteishaListSakuseiResultCsvEntity> eucCsvWriter;
     private EucEntityId eUC_ENTITY_ID;
     private RString ファイル名;
     private RString 帳票名称;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private boolean 項目名付加;
+    private RDate 帳票作成日時;
+    private FlexibleDate 帳票日時;
+    private static final int NUM5 = 5;
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
 
     @Override
     protected void initialize() {
         personalDataList = new ArrayList<>();
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-
+        帳票作成日時 = RDate.getNowDate();
+        帳票日時 = new FlexibleDate(帳票作成日時.toDateString());
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBD介護受給,
                 REPORT_DBD200002.getReportId(),
                 reamsLoginID,
                 parameter.get改頁出力順ID());
-        出力順 = MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder);
+        出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder), NUM5);
         導入団体 = AssociationFinderFactory.createInstance().getAssociation();
         帳票ID = parameter.get帳票ID();
         edit初期化();
@@ -144,15 +158,23 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         key.set基準日(parameter.get基準日());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter(psmShikibetsuTaisho, 出力順));
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinteishaListSakuseiMybatisprmParameter(psmShikibetsuTaisho, 出力順));
     }
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200002.getReportId().value(),
-                SubGyomuCode.DBD介護受給).create();
+        List<RString> pageBreakKeys = new ArrayList<>();
+        set改頁Key(outputOrder, pageBreakKeys);
+        if (!pageBreakKeys.isEmpty()) {
+            batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200002.getReportId().value(),
+                    SubGyomuCode.DBD介護受給).addBreak(
+                            new BreakerCatalog<RiyoshaFutangakuGemmenGaitoshaIchiranReportSource>()
+                            .simplePageBreaker(pageBreakKeys)).create();
+        } else {
+            batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200002.getReportId().value(),
+                    SubGyomuCode.DBD介護受給).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
-
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, eUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
@@ -164,9 +186,9 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     }
 
     @Override
-    protected void process(ChohyoShutsuryokuJohoShutokuResultEntity t) {
-        RiyoshaFutangakuGemmenGaitoshaIchiranReport reportSource = new RiyoshaFutangakuGemmenGaitoshaIchiranReport(t, parameter.get帳票作成日時(),
-                出力順, 導入団体.getLasdecCode_().getColumnValue(), 導入団体.getShichosonName_(), 帳票タイトル, 改ページ);
+    protected void process(NinteishaListSakuseiResultEntity t) {
+        RiyoshaFutangakuGemmenGaitoshaIchiranReport reportSource = new RiyoshaFutangakuGemmenGaitoshaIchiranReport(t, 帳票日時,
+                outputOrder, 導入団体.getLasdecCode_().getColumnValue(), 導入団体.getShichosonName_(), 帳票タイトル, 改ページ);
         reportSource.writeBy(reportSourceWriter);
 
         if (t.getPsmEntity() != null) {
@@ -182,7 +204,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
                 personalDataList.add(personalData);
             }
         }
-        ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
+        NinteishaListSakuseiResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
         eucCsvWriter.writeLine(resultEntity);
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
@@ -196,8 +218,8 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
     }
 
     private void edit初期化() {
-        ChohyoShutsuryokuJohoShutokuProcessParameter processParameter
-                = new ChohyoShutsuryokuJohoShutokuProcessParameter(parameter.get対象リスト());
+        NinteishaListSakuseiProcessParameter processParameter
+                = new NinteishaListSakuseiProcessParameter(parameter.get対象リスト());
         if (processParameter.is該当者リスト()) {
             帳票タイトル = 該当者リストタイトル;
             eUC_ENTITY_ID = new EucEntityId("DBD201010");
@@ -257,18 +279,15 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         } else {
             出力条件.add(new RString("【CSV出力設定】 指定なし"));
         }
-        RString 作成日時 = new RString("");
         RTime time = RDate.getNowTime();
         RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
         RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
         RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
         RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
-        if (parameter.get帳票作成日時() != null) {
-            作成日時 = parameter.get帳票作成日時().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
-        }
+        RString 作成日時 = 帳票作成日時.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
+
         出力条件.add(作成日時);
-//        RString 出力順 = 出力順;
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID,
                 導入団体コード,
@@ -295,8 +314,8 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         return 世帯非課税等;
     }
 
-    private ChohyoShutsuryokuJohoShutokuResultCsvEntity set利用者負担額減免認定者リストCSV(ChohyoShutsuryokuJohoShutokuResultEntity t) {
-        ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity = new ChohyoShutsuryokuJohoShutokuResultCsvEntity();
+    private NinteishaListSakuseiResultCsvEntity set利用者負担額減免認定者リストCSV(NinteishaListSakuseiResultEntity t) {
+        NinteishaListSakuseiResultCsvEntity resultEntity = new NinteishaListSakuseiResultCsvEntity();
         resultEntity.set連番(new RString(String.valueOf(++連番)));
         resultEntity.set被保険者番号(t.get被保険者番号().getColumnValue());
         if (t.getPsmEntity() != null) {
@@ -316,9 +335,9 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             resultEntity.set証保険者番号(t.get減免減額申請Entity().getShoKisaiHokenshaNo().getColumnValue());
         }
         if (t.get利用者負担額減額Entity() != null && t.get利用者負担額減額Entity().getKetteiKubun() != null) {
-            if (ZERO.equals(t.get利用者負担額減額Entity().getKetteiKubun())) {
+            if (KetteiKubun.承認しない.getコード().equals(t.get利用者負担額減額Entity().getKetteiKubun())) {
                 resultEntity.set決定区分(却下);
-            } else if (ONE.equals(t.get利用者負担額減額Entity().getKetteiKubun())) {
+            } else if (KetteiKubun.承認する.getコード().equals(t.get利用者負担額減額Entity().getKetteiKubun())) {
                 resultEntity.set決定区分(承認);
             } else {
                 resultEntity.set決定区分(空白);
@@ -336,7 +355,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             resultEntity.set生活保護受給区分(空白);
         }
         if (t.get本人課税区分() != null) {
-            if (ONE.equals(t.get本人課税区分())) {
+            if (KazeiKubun.課税.getコード().equals(t.get本人課税区分())) {
                 resultEntity.set課税区分(課);
             } else {
                 resultEntity.set課税区分(空白);
@@ -361,8 +380,8 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         return resultEntity;
     }
 
-    private ChohyoShutsuryokuJohoShutokuResultCsvEntity setVoidEntity(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity,
-            ChohyoShutsuryokuJohoShutokuResultEntity t) {
+    private NinteishaListSakuseiResultCsvEntity setVoidEntity(NinteishaListSakuseiResultCsvEntity resultEntity,
+            NinteishaListSakuseiResultEntity t) {
         if (t.get減免減額申請Entity() != null) {
             resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
         }
@@ -400,7 +419,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         return resultEntity;
     }
 
-    private void set減免申請日(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity, ChohyoShutsuryokuJohoShutokuResultEntity t) {
+    private void set減免申請日(NinteishaListSakuseiResultCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
         FlexibleDate shineiYMD = null;
         FlexibleDate ketteiYMD = null;
         FlexibleDate tekiyoKaishiYMD = null;
@@ -425,8 +444,8 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         }
     }
 
-    private ChohyoShutsuryokuJohoShutokuResultCsvEntity setEntity(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity,
-            ChohyoShutsuryokuJohoShutokuResultEntity t) {
+    private NinteishaListSakuseiResultCsvEntity setEntity(NinteishaListSakuseiResultCsvEntity resultEntity,
+            NinteishaListSakuseiResultEntity t) {
         if (t.get厚労省IF識別コード() != null && !t.get厚労省IF識別コード().isEmpty()) {
             if (t.get認定情報の要介護状態区分コード() == null || t.get認定情報の要介護状態区分コード().isEmpty()) {
                 resultEntity.set要介護度((YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get厚労省IF識別コード()),
@@ -454,14 +473,14 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             resultEntity.set所得税課税区分(空白);
         }
         if (t.get世帯員Entity() != null && t.get世帯員Entity().get課税区分() != null) {
-            if (ONE.equals(t.get世帯員Entity().get課税区分())) {
+            if (KazeiKubun.課税.getコード().equals(t.get世帯員Entity().get課税区分())) {
                 resultEntity.set世帯員課税区分(課);
             } else {
                 resultEntity.set世帯員課税区分(空白);
             }
         }
         if (t.get世帯員Entity() != null && t.get世帯員Entity().get課税所得額() != null) {
-            if (Decimal.ZERO.compareTo(t.get世帯員Entity().get課税所得額()) > 0) {
+            if (Decimal.ZERO.compareTo(t.get世帯員Entity().get課税所得額()) < 0) {
                 resultEntity.set世帯員所得税課税区分(空白);
             } else {
                 resultEntity.set世帯員所得税課税区分(課);
@@ -470,7 +489,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         return resultEntity;
     }
 
-    private void els認定日期(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity, ChohyoShutsuryokuJohoShutokuResultEntity t) {
+    private void els認定日期(NinteishaListSakuseiResultCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
         FlexibleDate 認定年月日 = t.get認定情報の認定年月日();
         if (認定年月日 != null && !認定年月日.isEmpty()) {
             resultEntity.set認定日(認定年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
@@ -500,7 +519,7 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         }
     }
 
-    private void 認定日期(ChohyoShutsuryokuJohoShutokuResultCsvEntity resultEntity, ChohyoShutsuryokuJohoShutokuResultEntity t) {
+    private void 認定日期(NinteishaListSakuseiResultCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
         FlexibleDate 認定年月日 = t.get認定情報の認定年月日();
         if (認定年月日 != null && !認定年月日.isEmpty()) {
             resultEntity.set認定日(認定年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
@@ -525,8 +544,67 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         } else {
             FlexibleDate 適用終了年月日 = t.get総者の適用終了年月日();
             if (適用終了年月日 != null && !適用終了年月日.isEmpty()) {
-                resultEntity.set認定終了日(認定有効期間終了年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+                resultEntity.set認定終了日(適用終了年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
             }
         }
+    }
+
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(NO_0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
+    private RString to帳票物理名(RString 項目ID) {
+        RString 帳票物理名 = RString.EMPTY;
+        if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listUpper_2");
+        } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.行政区コード.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listLower_1");
+        } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.被保険者番号.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listUpper_1");
+        }
+        return 帳票物理名;
     }
 }
