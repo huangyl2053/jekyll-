@@ -82,6 +82,11 @@
     </select>
     
     <resultMap id="ResultMap_NofugakuJohoReportEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.nofugakudatasakuseitandokushichoson.NofugakuJohoReportEntity" autoMapping="true">
+       <id column="dbT2016NofugakuJohoTemp_choteiNendo"/>
+       <id column="dbT2016NofugakuJohoTemp_fukaNendo"/>
+       <id column="dbT2016NofugakuJohoTemp_tsuchishoNo"/>
+       <id column="dbT2016NofugakuJohoTemp_shikibetsuCode"/>
+       <id column="dbT2016NofugakuJohoTemp_fukaShichosonCode"/>
        <association property="納付額情報" resultMap="ResultMap_DbT2016NofugakuJohoTemp"/>
        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/> 
     </resultMap>
