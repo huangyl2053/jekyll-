@@ -505,7 +505,7 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("地域密着型特定施設入居者生活介護"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get介護地域密着型介護老人福祉施設入所者生活介護())) {
+        if (RString.isNullOrEmpty(entity.get老人福祉施設入所者生活介護())) {
             builder.append(new RString("地域密着型介護老人福祉施設入所者生活介護"));
             builder.append(データ);
         }
@@ -596,7 +596,7 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("地域密着型特定施設入居者生活介護"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get介護地域密着型介護老人福祉施設入所者生活介護())) {
+        if (RString.isNullOrEmpty(entity.get老人福祉施設入所者生活介護())) {
             builder.append(new RString("地域密着型介護老人福祉施設入所者生活介護"));
             builder.append(データ);
         }
@@ -1009,11 +1009,11 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("前回結果通所介護（デイサービス）"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護通所リハビリテーションデイケア())) {
+        if (RString.isNullOrEmpty(entity.get前回介護通所リハビリ())) {
             builder.append(new RString("前回結果通所リハビリテーション"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護短期入所生活介護ショートステイ())) {
+        if (RString.isNullOrEmpty(entity.get前回介護短期入所生活介護())) {
             builder.append(new RString("前回結果短期入所生活介護（ショートステイ）"));
             builder.append(データ);
         }
@@ -1026,7 +1026,7 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(データ);
         }
 
-        if (RString.isNullOrEmpty(entity.get前回介護地域密着型介護老人福祉施設入所者生活介護())) {
+        if (RString.isNullOrEmpty(entity.get前回老人福祉施設入所者生活介護())) {
             builder.append(new RString("前回結果地域密着型介護老人福祉施設入所者生活介護"));
             builder.append(データ);
         }
@@ -1058,11 +1058,11 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("前回結果小規模多機能型居宅介護"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護認知症対応型共同生活介護グループホーム())) {
+        if (RString.isNullOrEmpty(entity.get前回介護グループホーム())) {
             builder.append(new RString("前回結果認知症対応型共同生活介護（グループホーム）"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護地域密着型特定施設入居者生活介護())) {
+        if (RString.isNullOrEmpty(entity.get前回介護施設入居者生活介護())) {
             builder.append(new RString("前回結果地域密着型特定施設入居者生活介護"));
             builder.append(データ);
         }
@@ -1093,11 +1093,11 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("前回結果通所介護（デイサービス）"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護通所リハビリテーションデイケア())) {
+        if (RString.isNullOrEmpty(entity.get前回介護通所リハビリ())) {
             builder.append(new RString("前回結果通所リハビリテーション"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護短期入所生活介護ショートステイ())) {
+        if (RString.isNullOrEmpty(entity.get前回介護短期入所生活介護())) {
             builder.append(new RString("前回結果短期入所生活介護（ショートステイ）"));
             builder.append(データ);
         }
@@ -1137,19 +1137,19 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("前回結果小規模多機能型居宅介護"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護認知症対応型共同生活介護グループホーム())) {
+        if (RString.isNullOrEmpty(entity.get前回介護グループホーム())) {
             builder.append(new RString("前回結果認知症対応型共同生活介護（グループホーム）"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護地域密着型特定施設入居者生活介護())) {
+        if (RString.isNullOrEmpty(entity.get前回介護施設入居者生活介護())) {
             builder.append(new RString("前回結果地域密着型特定施設入居者生活介護"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護地域密着型介護老人福祉施設入所者生活介護())) {
+        if (RString.isNullOrEmpty(entity.get前回老人福祉施設入所者生活介護())) {
             builder.append(new RString("前回結果地域密着型介護老人福祉施設入所者生活介護"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回介護定期巡回随時対応型訪問介護看護())) {
+        if (RString.isNullOrEmpty(entity.get前回介護訪問介護看護())) {
             builder.append(new RString("前回結果定期巡回・随時対応型訪問介護看護"));
             builder.append(データ);
         }
@@ -1184,11 +1184,11 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("前回結果介護予防通所介護（デイサービス）"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回予防通所リハビリテーションデイケア())) {
+        if (RString.isNullOrEmpty(entity.get前回予防通所リハビリ())) {
             builder.append(new RString("前回結果介護予防通所リハビリテーション"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回予防短期入所生活介護ショートステイ())) {
+        if (RString.isNullOrEmpty(entity.get前回予防短期入所生活介護())) {
             builder.append(new RString("前回結果介護予防短期入所生活介護（ショートステイ）"));
             builder.append(データ);
         }
@@ -1220,7 +1220,7 @@ public class IchijihanteiSumidataIferaBunisess {
             builder.append(new RString("前回結果介護予防小規模多機能型居宅介護"));
             builder.append(データ);
         }
-        if (RString.isNullOrEmpty(entity.get前回予防認知症対応型共同生活介護グループホーム())) {
+        if (RString.isNullOrEmpty(entity.get前回予防グループホーム())) {
             builder.append(new RString("前回結果介護予防認知症対応型共同生活介護（グループホーム）"));
             builder.append(データ);
         }

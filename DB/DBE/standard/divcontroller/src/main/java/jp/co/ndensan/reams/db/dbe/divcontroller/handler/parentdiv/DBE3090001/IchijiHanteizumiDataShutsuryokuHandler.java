@@ -533,7 +533,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set氏名(business.get一次判定結果情報().get被保険者氏名());
             a4Data.set被保険者番号(business.get一次判定結果情報().get被保険者番号());
             a4Data.set保険者番号(business.get一次判定結果情報().get証記載保険者番号());
-            a4Data.set所属(申請日);
+            a4Data.set所属(business.get一次判定結果情報().get所属());
             a4Data.set市町村名(business.get一次判定結果情報().get市町村名());
             a4Data.set事業者番号(business.get一次判定結果情報().get事業者番号());
             a4Data.set事業者名(business.get一次判定結果情報().get事業者名称());

@@ -53,7 +53,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     private IchijihanteiSumidataIfBunisess bunisess;
     private IchijihanteiSumidataIferaBunisess eraBunisess;
     private RString koroshoIfShikibetsuCode = RString.EMPTY;
-    private RString ファイル名;
+    private RString ファイル名 = RString.EMPTY;
     private final RString ファイル09B = new RString("09B");
     private final RString ファイル09AB = new RString("09A");
     private final RString ファイル09Bエラ = new RString("IchijiHanteiErr_09B.CSV");
@@ -167,7 +167,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         if (RString.isNullOrEmpty(koroshoIfShikibetsuCode)) {
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
-            if (ファイル名.equals(entity.get厚労省IF識別コード())) {
+            if (ファイル09B.equals(entity.get厚労省IF識別コード())) {
                 ファイル名 = ファイル09Bエラ;
             } else {
                 ファイル名 = ファイル09Aエラ;
@@ -177,7 +177,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         if (!koroshoIfShikibetsuCode.equals(entity.get厚労省IF識別コード())) {
             eucCsvWriterJunitoJugo.close();
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
-            if (ファイル名.equals(entity.get厚労省IF識別コード())) {
+            if (ファイル09B.equals(entity.get厚労省IF識別コード())) {
                 ファイル名 = ファイル09Bエラ;
             } else {
                 ファイル名 = ファイル09Aエラ;
