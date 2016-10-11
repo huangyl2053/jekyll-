@@ -23,5 +23,5 @@ public class KyufuJissekiChukanKogaku8Entity implements Serializable {
     private TempKyufujissekiTyukannEntity 給付実績中間高額一時;
     private DbT3116KijunShunyugakuTekiyoKanriEntity 基準収入額適用管理一時;
     private TempSetaiinShotokuHanteiEntity 世帯員所得判定明細高額一時１;
-    private TempSetaiinShotokuHanteiEntity 世帯員所得判定明細高額一時２;
+    private TempSetaiinShotokuHanteiEntity 世帯員所得判定明細高額一時３;
 }
