@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -69,4 +71,5 @@ public class ModifyNinteiShinseiJohoEntity {
     private TelNo 電話番号;
     private LasdecCode 市町村コード;
     private RString 一次判定内容;
+    private List<DbT4150RenrakusakiJohoEntity> 連絡先情報;
 }
