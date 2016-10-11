@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 住宅改修理由書作成手数料請求決定を管理するクラスです。
  */
 public class JutakuKaishuRiyushoTesuryoKettei
-       extends ModelBase<JutakuKaishuRiyushoTesuryoKetteiIdentifier, DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity, JutakuKaishuRiyushoTesuryoKettei>
-       implements Serializable {
+        extends ModelBase<JutakuKaishuRiyushoTesuryoKetteiIdentifier, DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity, JutakuKaishuRiyushoTesuryoKettei>
+        implements Serializable {
 
     private final DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity;
     private final JutakuKaishuRiyushoTesuryoKetteiIdentifier id;
@@ -165,8 +165,7 @@ public class JutakuKaishuRiyushoTesuryoKettei
     }
 
     /**
-     * 保持する住宅改修理由書作成手数料請求決定を削除対象とします。<br/>
-     * {@link DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する住宅改修理由書作成手数料請求決定を削除対象とします。<br/> {@link DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JutakuKaishuRiyushoTesuryoKettei}
      */
@@ -194,7 +193,7 @@ public class JutakuKaishuRiyushoTesuryoKettei
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -222,6 +221,20 @@ public class JutakuKaishuRiyushoTesuryoKettei
      */
     public JutakuKaishuRiyushoTesuryoKetteiBuilder createBuilderForEdit() {
         return new JutakuKaishuRiyushoTesuryoKetteiBuilder(entity, id);
+    }
+
+    /**
+     * 住宅改修理由書事業者情報を変更対象とします。<br/> {@link DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link JutakuKaishuRiyushoTesuryoKettei}
+     */
+    public JutakuKaishuRiyushoTesuryoKettei modifiedModel() {
+        DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new JutakuKaishuRiyushoTesuryoKettei(
+                modifiedEntity);
     }
 
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
