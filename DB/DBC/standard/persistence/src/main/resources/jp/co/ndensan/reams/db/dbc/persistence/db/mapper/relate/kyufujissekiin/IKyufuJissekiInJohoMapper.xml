@@ -72,37 +72,37 @@
 
     <!--テーブルDbWT0001HihokenshaとDbWT1111KyufuJissekiの項目をChohyoShutsuryokuTaishoDateEntityの項目にマッピングします。-->
     <resultMap id="resultMap_KyufujissekiTorikomiIchiranEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekitorikomiichiran.KyufujissekiTorikomiIchiranEntity" autoMapping="true">
-        <result property="被保険者_連番" column="dbWT0001_連番"/>
-        <result property="被保険者_登録被保険者番号" column="dbWT0001_登録被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="連番" column="dbWT0001_連番"/>
+        <result property="被保険者_登録被保険者番号" column="dbWT0001_登録被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="被保険者_宛名カナ名称" column="dbWT0001_宛名カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者_宛名名称" column="dbWT0001_宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者_識別コード" column="dbWT0001_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="dbWT0001_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="コントロール" column="dbWT0001_コントロール" />
-        <result property="給付実績_コントロールレコード保険者番号" column="dbWT1111_コントロールレコード保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <result property="給付実績_コントロールレコード保険者名" column="dbWT1111_コントロールレコード保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付実績_保険者番号" column="dbWT1111_コントロールレコード保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="給付実績_保険者名" column="dbWT1111_コントロールレコード保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_入力識別番号" column="dbWT1111_入力識別番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_入力識別名称" column="dbWT1111_入力識別名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_情報作成区分コード" column="dbWT1111_情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_サービス提供年月" column="dbWT1111_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="給付実績_給付実績区分" column="dbWT1111_給付実績区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="給付実績_事業所番号" column="dbWT1111_事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付実績_事業所番号" column="dbWT1111_事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="給付実績_整理番号" column="dbWT1111_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_レコード件数H1" column="dbWT1111_H1件数"/>
         <result property="給付実績_レコード件数D1" column="dbWT1111_D1件数"/>
-        <result property="給付実績_レコード件数DD" column="dbWT1111_DD件数"/>
         <result property="給付実績_レコード件数D2" column="dbWT1111_D2件数"/>
-        <result property="給付実績_レコード件数DC" column="dbWT1111_DC件数"/>
         <result property="給付実績_レコード件数D3" column="dbWT1111_D3件数"/>
         <result property="給付実績_レコード件数D4" column="dbWT1111_D4件数"/>
         <result property="給付実績_レコード件数D5" column="dbWT1111_D5件数"/>
         <result property="給付実績_レコード件数D6" column="dbWT1111_D6件数"/>
         <result property="給付実績_レコード件数D7" column="dbWT1111_D7件数"/>
         <result property="給付実績_レコード件数D8" column="dbWT1111_D8件数"/>
-        <result property="給付実績_レコード件数DE" column="dbWT1111_DE件数"/>
-        <result property="給付実績_レコード件数T1" column="dbWT1111_T1件数"/>
         <result property="給付実績_レコード件数D9" column="dbWT1111_D9件数"/>
         <result property="給付実績_レコード件数DA" column="dbWT1111_DA件数"/>
         <result property="給付実績_レコード件数DB" column="dbWT1111_DB件数"/>
+        <result property="給付実績_レコード件数DC" column="dbWT1111_DC件数"/>
+        <result property="給付実績_レコード件数DD" column="dbWT1111_DD件数"/>
+        <result property="給付実績_レコード件数DE" column="dbWT1111_DE件数"/>
+        <result property="給付実績_レコード件数T1" column="dbWT1111_T1件数"/>
         <result property="給付実績_警告区分コード" column="dbWT1111_警告区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_事業者名称" column="dbWT1111_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_出力データ件数" column="dbWT1111_出力データ件数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
