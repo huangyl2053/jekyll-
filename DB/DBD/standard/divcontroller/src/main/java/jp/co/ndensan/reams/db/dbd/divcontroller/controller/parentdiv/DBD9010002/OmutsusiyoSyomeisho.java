@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD9010002
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
@@ -51,7 +52,7 @@ public class OmutsusiyoSyomeisho {
             if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
                 return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
             }
-            List<IryohiKojoEntityResult> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
+            List<IryohiKojo> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
             ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList(医療費控除リスト));
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), false);
         }
