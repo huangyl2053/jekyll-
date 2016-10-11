@@ -52,9 +52,11 @@ public class ShinNendoKanriJohoSakuseiManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを 返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを
+     * 返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンス
      */
     public static ShinNendoKanriJohoSakuseiManager createInstance() {
         return InstanceProvider.create(ShinNendoKanriJohoSakuseiManager.class);
@@ -99,22 +101,25 @@ public class ShinNendoKanriJohoSakuseiManager {
         for (Noki item : list) {
             UrT0729NokiKanriEntity entity = item.toEntity();
             entity.setState(EntityDataState.Added);
-            //TODO QA.1341
-            entity.setTsuchishoHakkoYMD(new RDate(調定年度.toString()));
+            if (item.get通知書発行日() == null) {
+                entity.setTsuchishoHakkoYMD(new RDate(本年度.plusYear(1).toString()));
+            }
             納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list現年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
             entity.setState(EntityDataState.Added);
-            //TODO QA.1341
-            entity.setTsuchishoHakkoYMD(new RDate(調定年度.toString()));
+            if (item.get通知書発行日() == null) {
+                entity.setTsuchishoHakkoYMD(new RDate(本年度.plusYear(1).toString()));
+            }
             納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list過年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
             entity.setState(EntityDataState.Added);
-            //TODO QA.1341
-            entity.setTsuchishoHakkoYMD(new RDate(調定年度.toString()));
+            if (item.get通知書発行日() == null) {
+                entity.setTsuchishoHakkoYMD(new RDate(本年度.plusYear(1).toString()));
+            }
             納期管理.save納期(new Noki(entity));
         }
 
