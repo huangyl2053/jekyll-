@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolisttashichosonjushochitokureisha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tatoku.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tatoku.JiyuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tatoku.KijunbiKubun;

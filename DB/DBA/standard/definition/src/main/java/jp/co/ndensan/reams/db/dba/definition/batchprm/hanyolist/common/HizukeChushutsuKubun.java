@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho;
+package jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
