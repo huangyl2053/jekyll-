@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
@@ -23,8 +24,12 @@ public class KogakuGassanShikyuKetteiHoseiDetail2Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("Label1")
+    private Label Label1;
     @JsonProperty("txtKyufuShurui")
     private TextBoxMultiLine txtKyufuShurui;
+    @JsonProperty("Label2")
+    private Label Label2;
     @JsonProperty("txtBiko")
     private TextBoxMultiLine txtBiko;
 
@@ -34,6 +39,24 @@ public class KogakuGassanShikyuKetteiHoseiDetail2Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getLabel1
+     * @return Label1
+     */
+    @JsonProperty("Label1")
+    public Label getLabel1() {
+        return Label1;
+    }
+
+    /*
+     * setLabel1
+     * @param Label1 Label1
+     */
+    @JsonProperty("Label1")
+    public void setLabel1(Label Label1) {
+        this.Label1 = Label1;
+    }
+
     /*
      * gettxtKyufuShurui
      * @return txtKyufuShurui
@@ -50,6 +73,24 @@ public class KogakuGassanShikyuKetteiHoseiDetail2Div extends Panel {
     @JsonProperty("txtKyufuShurui")
     public void setTxtKyufuShurui(TextBoxMultiLine txtKyufuShurui) {
         this.txtKyufuShurui = txtKyufuShurui;
+    }
+
+    /*
+     * getLabel2
+     * @return Label2
+     */
+    @JsonProperty("Label2")
+    public Label getLabel2() {
+        return Label2;
+    }
+
+    /*
+     * setLabel2
+     * @param Label2 Label2
+     */
+    @JsonProperty("Label2")
+    public void setLabel2(Label Label2) {
+        this.Label2 = Label2;
     }
 
     /*

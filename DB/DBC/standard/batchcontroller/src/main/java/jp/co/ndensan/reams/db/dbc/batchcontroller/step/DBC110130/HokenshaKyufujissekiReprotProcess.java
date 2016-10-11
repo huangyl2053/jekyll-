@@ -144,7 +144,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
@@ -274,7 +274,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
                         new Code(給付実績区分), FlexibleDate.getNowDate());
         csvEntity.set給付実績区分名(給付実績区分名);
         csvEntity.set事業者番号(給付実績一時Entity.get事業所番号() == null ? RString.EMPTY : 給付実績一時Entity.get事業所番号().getColumnValue());
-        if ((給付実績一時Entity.get事業所番号() == null || 給付実績一時Entity.get事業所番号().isEmpty())
+        if (給付実績一時Entity.get事業所番号() != null && !給付実績一時Entity.get事業所番号().isEmpty()
                 && (給付実績一時Entity.get事業者名称() == null || 給付実績一時Entity.get事業者名称().isEmpty())) {
             csvEntity.set事業者名(事業者名不明R);
         } else {

@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 高額合算自己負担額情報補正（一括）のprocessクラスです。
  *
- * @author admin
+ * @reamsid_L DBC-2320-060 chenyadong
  */
 public class GetKogakugassanJikofutangakuInfoHoseiTempProcess extends BatchProcessBase<KogakugassanJikofutangakuInfoHoseiEntity> {
 
