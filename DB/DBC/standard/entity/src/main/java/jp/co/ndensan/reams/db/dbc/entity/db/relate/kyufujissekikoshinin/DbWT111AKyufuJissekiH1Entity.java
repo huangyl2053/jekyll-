@@ -33,6 +33,7 @@ public class DbWT111AKyufuJissekiH1Entity extends DbTableEntityBase<DbWT111AKyuf
     @PrimaryKey
     @TempTableColumnOrder(1)
     private int renban;
+    @PrimaryKey
     @TempTableColumnOrder(2)
     private RString recordNo;
     @TempTableColumnOrder(3)
