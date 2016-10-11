@@ -313,7 +313,6 @@ public class DBC020080DataUtil {
         result.setIchiranKakuninKubun(RString.EMPTY);
         result.setIchiranKakuninKubun2(RString.EMPTY);
         loopInitDecimal(result, JIKOFUTANGAKU);
-        loopInitDecimal(result, JIKOFUTANGAKU);
         loopInitDecimal(result, UCHISU_70_74JIKOFUTANGAKU);
         loopInitDecimal(result, UNDER_70KOGAKUSHIKYUGAKU);
         loopInitDecimal(result, OVER_70_74KOGAKUSHIKYUGAKU);
@@ -416,9 +415,8 @@ public class DBC020080DataUtil {
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return sum;
         }
+        return sum;
     }
 
     private void loopSetRString(JissekiFutangakuDataTempEntity 実績負担額Set, RString tokenSet,
@@ -447,7 +445,7 @@ public class DBC020080DataUtil {
             JissekiFutangakuDataTempEntity entity, KaigoGassan_ErrorListType errorType) {
         DBC020080ShoriKekkaTempEntity result = new DBC020080ShoriKekkaTempEntity();
         result.setErrorKubun(errorType.getコード());
-        result.setShoHokanehshaNo(nonullRStr(entity.getHokenshaNo()));
+        result.setShoHokenshaNo(nonullRStr(entity.getHokenshaNo()));
         result.setHihokenshaNo(nonullRStr(entity.getHihokenshaNo()));
         result.setHihokenshaKanaShimei(nonullRStr(entity.getHihokenshaShimeiKana()));
         result.setHihokenshaShimei(nonullRStr(entity.getHihokenshaShimei()));
@@ -482,7 +480,7 @@ public class DBC020080DataUtil {
     public RString getKeyOfShoriKekkaTemp(DBC020080ShoriKekkaTempEntity entity) {
         RStringBuilder key = new RStringBuilder(entity.getErrorKubun());
         key.append(LINE);
-        key.append(entity.getShoHokanehshaNo());
+        key.append(entity.getShoHokenshaNo());
         key.append(LINE);
         key.append(entity.getHihokenshaNo());
         key.append(LINE);
@@ -1041,7 +1039,7 @@ public class DBC020080DataUtil {
             result.set作成日時(DateConverter.getDate12Time142(parameter.get処理日時()));
         }
         result.set処理名(entity.getErrorKubun());
-        result.set証記載保険者番号(entity.getShoHokanehshaNo());
+        result.set証記載保険者番号(entity.getShoHokenshaNo());
         result.set被保険者番号(entity.getHihokenshaNo());
         result.set被保険者カナ氏名(entity.getHihokenshaKanaShimei());
         result.set被保険者氏名(entity.getHihokenshaShimei());
