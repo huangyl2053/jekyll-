@@ -263,7 +263,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         if (被保険者番号 == HihokenshaNo.EMPTY || 被保険者番号 == null) {
             被保険者番号 = t.get要介護認定情報().get受給者台帳_被保険者番号();
         } else if (!被保険者番号.equals(t.get要介護認定情報().get受給者台帳_被保険者番号())) {
-            JukyushaDaichoReport report = JukyushaDaichoReport.createReport(帳票出力用受給者台帳Entity);
+            JukyushaDaichoReport report = new JukyushaDaichoReport(帳票出力用受給者台帳Entity, processParamter.get出力オプション区分());
             report.writeBy(reportSourceWriter);
             被保険者番号 = t.get要介護認定情報().get受給者台帳_被保険者番号();
             帳票出力用受給者台帳Entity = new TyohyoShutuRyokuYoJukyushaDaichoEntity();
