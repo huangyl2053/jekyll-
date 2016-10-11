@@ -105,7 +105,10 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
     帳票出力項目チェック２ {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
-                    return !RString.isNullOrEmpty(new RString(div.getCcdShutsuryokujun().get出力順ID()));
+                    if (div.getCcdShutsuryokujun().get出力順ID() != null) {
+                        return !RString.isNullOrEmpty(new RString(div.getCcdShutsuryokujun().get出力順ID()));
+                    }
+                    return false;
                 }
             },
     /**
@@ -115,6 +118,7 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
                     return !RString.isNullOrEmpty(div.getCcdShutsuryokuKomoku().get出力項目ID());
+
                 }
             };
 

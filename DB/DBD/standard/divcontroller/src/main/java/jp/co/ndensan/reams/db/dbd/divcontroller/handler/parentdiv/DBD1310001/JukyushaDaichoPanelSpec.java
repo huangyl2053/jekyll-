@@ -96,7 +96,7 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
                 @Override
                 public boolean apply(JukyushaDaichoDiv div) {
                     if (SpecHelper.is生年月日が選択されている(div)) {
-                        return SpecHelper.is生年月日From_生年月日Toが共に入力(div);
+                        return div.getCcdAtenaJoken().get生年月日開始() != null || div.getCcdAtenaJoken().get生年月日終了() != null;
                     }
                     return true;
                 }
