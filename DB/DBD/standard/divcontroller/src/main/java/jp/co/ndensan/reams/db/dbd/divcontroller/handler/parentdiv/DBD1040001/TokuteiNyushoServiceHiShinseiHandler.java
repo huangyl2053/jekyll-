@@ -769,7 +769,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
     private void set情報エリア(dgShinseiList_Row row) {
         div.getShinsei().getShinseiDetail().getTxtShinseiYMD().setValue(row.getTxtShinseiYMD().getValue());
         div.getShinsei().getShinseiDetail().getTxtShinseiRiyu().setValue(row.getShinseiRiyu());
-        if (row.getKetteiKubun() != null) {
+        if (row.getKetteiKubun() != null && !row.getKetteiKubun().isEmpty()) {
             div.getShinsei().getShinseiDetail().getRadKettaiKubun().setSelectedKey(row.getKetteiKubun());
         }
         if (row.getTxtKetteiYMD() != null && row.getTxtKetteiYMD().getValue() != null) {
