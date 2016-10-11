@@ -55,8 +55,7 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
     @Override
     protected void process(KokuhoShikakuJyohoYoResultEntity entity) {
-        //TODO 疑問があります、正常データの時、「現在国保資格情報Entityリスト中にのみ存在した場合」を存在しない、QAを提出しました。QA番号は”102158”です。
-        if (エラー区分_正常データ.equals(entity.get取込国保情報Entity().getエラー区分())) {
+        if (entity.get取込国保情報Entity() == null || エラー区分_正常データ.equals(entity.get取込国保情報Entity().getエラー区分())) {
             国保資格情報インポート用Entityリストの編集_取込形式_全件(entity);
             国保資格情報インポート用Entityリストの編集_取込形式_差分(entity);
         }
