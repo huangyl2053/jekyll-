@@ -492,26 +492,6 @@ WITH master AS (
            X4120."shinseiTodokedeshaShimei" AS x4120_申請届出者氏名,
            X4120."jigyoshaName" AS x4120_事業者名称,
            X4001."dataKubun" AS x4001_データ区分の1桁目,
-           PSM."kanjiShimei" AS psm_名称,
-           PSM."kanaShimei" AS psm_カナ名称,
-           PSM."honsekiZenkokuJushoCode" AS psm_全国住所コード,
-           PSM."honsekiJusho" AS psm_住所,
-           PSM."seibetsuCode" AS psm_性別コード,
-           PSM."seinengappiYMD" AS psm_生年月日,
-           PSM."setaiCode" AS psm_世帯コード,
-           PSM."shikibetsuCode" AS psm_識別コード,
-           PSM."gyoseikuCode" AS psm_行政区コード,
-           PSM."gyoseikuName" AS psm_行政区名称,
-           PSM."renrakusaki1" AS psm_連絡先1,
-           PSM."renrakusaki2" AS psm_連絡先2,
-           PSM."chikuCode1" AS psm_地区コード1,
-           PSM."chikuName1" AS psm_地区名1,
-           PSM."chikuCode2" AS psm_地区コード2,
-           PSM."chikuName2" AS psm_地区名2,
-           PSM."chikuCode3" AS psm_地区コード3,
-           PSM."chikuName3" AS psm_地区名3,
-           PSM."choikiCode" AS psm_町域コード,
-           PSM."shoriYMD" AS psm_処理年月日,
            T7005."rojinHokenShichosonCode" AS t7005_老人保健市町村コード,
            T7005."rojinHokenJukyushaNo" AS t7005_老人保健受給者番号,
            T7051."shichosonMeisho" AS t7051_市町村名称,
@@ -795,11 +775,6 @@ WITH master AS (
                  ) AS X4001
               ON T4001."shichosonCode" = X4001."shichosonCode"
               AND T4001."hihokenshaNo" = X4001."hihokenshaNo"
-       INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,
-        '','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS PSM
-           ON PSM."shikibetsuCode" = T4001."shikibetsuCode"
        LEFT JOIN rgdb."DbT7005RojinHokenJukyushaJoho" AS T7005
              ON T4001."shikibetsuCode" = T7005."shikibetsuCode"
              AND T4001."shichosonCode" = T7005."shichosonCode"
@@ -965,8 +940,27 @@ WITH master AS (
       WHERE rank_number = 1
      )
       SELECT
-              master.*,
-              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+           master.*,
+           PSM."kanjiShimei" AS psm_名称,
+           PSM."kanaShimei" AS psm_カナ名称,
+           PSM."honsekiZenkokuJushoCode" AS psm_全国住所コード,
+           PSM."honsekiJusho" AS psm_住所,
+           PSM."seibetsuCode" AS psm_性別コード,
+           PSM."seinengappiYMD" AS psm_生年月日,
+           PSM."setaiCode" AS psm_世帯コード,
+           PSM."shikibetsuCode" AS psm_識別コード,
+           PSM."gyoseikuCode" AS psm_行政区コード,
+           PSM."gyoseikuName" AS psm_行政区名称,
+           PSM."renrakusaki1" AS psm_連絡先1,
+           PSM."renrakusaki2" AS psm_連絡先2,
+           PSM."chikuCode1" AS psm_地区コード1,
+           PSM."chikuName1" AS psm_地区名1,
+           PSM."chikuCode2" AS psm_地区コード2,
+           PSM."chikuName2" AS psm_地区名2,
+           PSM."chikuCode3" AS psm_地区コード3,
+           PSM."chikuName3" AS psm_地区名3,
+           PSM."choikiCode" AS psm_町域コード,
+           PSM."shoriYMD" AS psm_処理年月日,
               FROM master
               LEFT OUTER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
@@ -977,8 +971,8 @@ WITH master AS (
            FROM 
              master
            ) 
-         ) AS "ShikibetsuTaisho"							
-         ON "受給者台帳_識別コード" = "ShikibetsuTaisho"."shikibetsuCode"
+         ) AS PSM							
+         ON "受給者台帳_識別コード" = PSM."shikibetsuCode"
       order by 受給者台帳_被保険者番号
       ${出力順}
   </select>
