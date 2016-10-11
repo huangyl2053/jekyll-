@@ -21,6 +21,9 @@ public class TesuryoSeikyuKenShinseishoSakuseiMybatisParameter implements IMyBat
     private final RString 市町村コード;
     private final RString サブ業務コード = new RString("DBC");
     private final RString 処理名 = new RString("住宅改修理由書作成手数料請求書兼申請書作成");
+    private final RString 処理枝番 = new RString("0000");
+    private final RString 年度 = new RString("0000");
+    private final RString 年度内連番 = new RString("0001");
 
     /**
      * コンストラクタです。

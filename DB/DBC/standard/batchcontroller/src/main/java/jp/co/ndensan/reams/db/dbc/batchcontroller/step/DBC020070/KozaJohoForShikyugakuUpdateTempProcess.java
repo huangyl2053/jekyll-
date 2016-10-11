@@ -77,6 +77,6 @@ public class KozaJohoForShikyugakuUpdateTempProcess extends BatchProcessBase<Shi
         更新用一時.setKozaMeiginin(ikoza.get口座名義人());
 
         更新用一時.setState(EntityDataState.Modified);
-        tempDbWriter.update(entity);
+        tempDbWriter.update(更新用一時);
     }
 }

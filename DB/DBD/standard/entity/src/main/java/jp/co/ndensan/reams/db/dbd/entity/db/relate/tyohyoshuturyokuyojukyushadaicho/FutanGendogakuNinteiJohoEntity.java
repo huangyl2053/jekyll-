@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushada
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 負担限度額認定情報Entity
@@ -29,12 +28,12 @@ public class FutanGendogakuNinteiJohoEntity {
     private RString 負担段階;
     private RString 旧措置;
     private RString 居室種別;
-    private Decimal 食費;
-    private Decimal ユ個;
-    private Decimal ユ準;
-    private Decimal 従特養;
-    private Decimal 従老健;
-    private Decimal 多床;
+    private RString 食費;
+    private RString ユ個;
+    private RString ユ準;
+    private RString 従特養;
+    private RString 従老健;
+    private RString 多床;
     private RString 境界層;
     private RString 激変緩和;
 

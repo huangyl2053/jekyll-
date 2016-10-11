@@ -98,7 +98,7 @@ public class DBD205010_FutanGendoGakuNinteishaListParameter extends BatchParamet
     }
 
     /**
-     * 訪問介護利用者負担額減額認定者リス発行_process処理のパラメターを取得します。
+     * 負担限度額認定者リスト発行_process処理のパラメターを取得します。
      *
      * @param 帳票作成日時 帳票作成日時
      * @return NinteishaListSakuseiProcessParameter

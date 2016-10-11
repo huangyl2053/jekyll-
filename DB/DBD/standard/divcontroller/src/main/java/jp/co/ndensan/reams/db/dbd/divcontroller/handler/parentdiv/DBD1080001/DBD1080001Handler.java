@@ -66,6 +66,10 @@ public class DBD1080001Handler {
                 new RString("key1"), new RString("旧措置者以外"));
         setDataSource(div.getParameters().getDdlKyushochishaKubun1().getDataSource(),
                 KEYTWO, new RString("旧措置者"));
+        setDataSource(div.getParameters().getDdlKyushochishaKubun2().getDataSource(),
+                new RString("key1"), new RString("旧措置者以外"));
+        setDataSource(div.getParameters().getDdlKyushochishaKubun2().getDataSource(),
+                KEYTWO, new RString("旧措置者"));
 
         div.getParameters().getRadShisetsuNyushoKubun1().setSelectedKey(new RString("key0"));
 
@@ -76,7 +80,7 @@ public class DBD1080001Handler {
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
                 new RString("key3"), new RString("利用者負担3段階"));
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key4"), new RString("利用者負担4段階（高齢者複数世帯）"));
+                new RString("key4"), new RString("利用者負担４段階（高齢者複数世帯） "));
         responseData.data = div;
         return responseData;
     }

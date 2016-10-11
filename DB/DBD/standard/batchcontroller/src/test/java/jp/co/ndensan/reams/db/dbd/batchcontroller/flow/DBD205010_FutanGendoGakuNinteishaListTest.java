@@ -80,15 +80,20 @@ public class DBD205010_FutanGendoGakuNinteishaListTest {
         parameter.setCsv出力設定(null);
         parameter.set世帯表示(SetaiHyoji.表示する);
         parameter.set利用者負担段階(RiyoshaFutanDankaiHanni.利用者負担1段階);
-        parameter.set受給者区分(JukyushaKubun2.受給者);
+        parameter.set受給者区分(JukyushaKubun2.被保険者);
         parameter.set基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
-        parameter.set対象リスト(TargetList.認定者リスト);
-        parameter.set改頁出力順ID(Long.MIN_VALUE);
-        parameter.set帳票ID(new ReportId("DBD200001_FutanGendogakuNinteiGaitoshaIchiran"));
-        parameter.set所得年度(FlexibleYear.MAX);
-        parameter.set旧措置区分(KyusochishaJukyushaKubun.旧措置者のみ);
         parameter.set課税判定等基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
+        parameter.set対象リスト(TargetList.該当者リスト);
+        parameter.set帳票ID(new ReportId("DBD200001_FutanGendogakuNinteiGaitoshaIchiran"));
+        parameter.set所得年度(new FlexibleYear("2016"));
+        parameter.set対象年度の開始年月日(new FlexibleDate("20160801"));
+        parameter.set対象年度の終了年月日(new FlexibleDate("20170731"));
+//        parameter.set旧措置区分(KyusochishaJukyushaKubun.旧措置者以外);
+//        parameter.set課税判定等基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
+        parameter.set所得年度(new FlexibleYear("2016"));
         parameter.set対象期間指定(TaishoKikan.対象年度);
+        parameter.set改頁出力順ID(new Long(1));
+        parameter.set旧措置区分(KyusochishaJukyushaKubun.旧措置者以外);
         List<CSVSettings> list = new ArrayList<>();
         list.add(CSVSettings.連番付加);
         parameter.setCsv出力設定(list);
@@ -115,4 +120,5 @@ public class DBD205010_FutanGendoGakuNinteishaListTest {
         Mockito.when(flowContext.getFlowId()).thenReturn(new FlowId(flowId));
         return flowContext;
     }
+
 }

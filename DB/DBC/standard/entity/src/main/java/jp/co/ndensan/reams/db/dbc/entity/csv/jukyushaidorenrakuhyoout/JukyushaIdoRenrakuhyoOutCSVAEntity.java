@@ -5,10 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.csv.jukyushaidorenrakuhyoout;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;

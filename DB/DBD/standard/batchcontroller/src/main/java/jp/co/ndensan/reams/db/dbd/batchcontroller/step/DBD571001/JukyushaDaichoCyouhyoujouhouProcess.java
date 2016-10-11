@@ -102,6 +102,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -153,6 +154,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(JukyushaDaichoReportSource.ReportSourceFields.hokenshaNo.name())));
     private static final RString 改行 = new RString("\r\n");
+    private static final RString 円 = new RString("円");
+    private static final RString 率 = new RString("%");
     private static final RString なし = new RString("なし");
     private static final RString 有り = new RString("有り");
     private static final RString 区分_0 = new RString("0");
@@ -165,6 +168,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
     private static final RString 区分_06A = new RString("06A");
     private static final RString 区分_09A = new RString("09A");
     private static final RString 区分_09B = new RString("09B");
+    private static final RString 半角ハイフン = new RString("-");
 
     @Override
     protected void initialize() {
@@ -455,10 +459,16 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             set要介護度(要介護認定情報, t);
             要介護認定情報.set認定開始日(t.get要介護認定情報().get受給者台帳_認定有効期間開始年月日());
             要介護認定情報.set認定終了日(t.get要介護認定情報().get受給者台帳_認定有効期間終了年月日());
-            要介護認定情報.set訪問限度額(t.get要介護認定情報().get受給者台帳_支給限度単位数());
+            if (t.get要介護認定情報().get受給者台帳_支給限度単位数() != null) {
+                要介護認定情報.set訪問限度額(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().get受給者台帳_支給限度単位数(), 0)
+                        .concat(new RString("単位")));
+            }
             要介護認定情報.set訪問開始日(t.get要介護認定情報().get受給者台帳_支給限度有効開始年月日());
             要介護認定情報.set訪問終了日(t.get要介護認定情報().get受給者台帳_支給限度有効終了年月日());
-            要介護認定情報.set短期限度額(t.get要介護認定情報().get受給者台帳_短期入所支給限度日数());
+            if (t.get要介護認定情報().get受給者台帳_短期入所支給限度日数() != null) {
+                要介護認定情報.set短期限度額(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().get受給者台帳_短期入所支給限度日数(), 0)
+                        .concat(new RString("日")));
+            }
             要介護認定情報.set短期開始日(t.get要介護認定情報().get受給者台帳_短期入所支給限度開始年月日());
             要介護認定情報.set短期終了日(t.get要介護認定情報().get受給者台帳_短期入所支給限度終了年月日());
             if (導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)
@@ -475,7 +485,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             要介護認定情報.set資格取得前申請(t.get要介護認定情報().is受給者台帳_資格取得前申請フラグ() ? new RString("取得前申請") : RString.EMPTY);
             要介護認定情報.set延期通知書発行日(t.get要介護認定情報().getT4101_延期通知発行年月日());
             if (t.get要介護認定情報().getT4101_延期通知発行回数() != null) {
-                要介護認定情報.set延期通知書発行回数(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().getT4101_延期通知発行回数(), 0));
+                要介護認定情報.set延期通知書発行回数(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().getT4101_延期通知発行回数(), 0)
+                        .concat(new RString("回")));
             }
             要介護認定情報.set資格証明書発行日１(t.get要介護認定情報().get受給者台帳_受給資格証明書発行年月日１());
             要介護認定情報.set資格証明書発行日２(t.get要介護認定情報().get受給者台帳_受給資格証明書発行年月日２());
@@ -657,12 +668,18 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
                     && !t.get負担限度額認定情報List().get負担限度額_居室種別().isEmpty()) {
                 負担限度額認定情報.set居室種別(KyoshitsuShubetsu.toValue(t.get負担限度額認定情報List().get負担限度額_居室種別()).get名称());
             }
-            負担限度額認定情報.set食費(t.get負担限度額認定情報List().get負担限度額_食費負担限度額());
-            負担限度額認定情報.setユ個(t.get負担限度額認定情報List().get負担限度額_ユニット型個室());
-            負担限度額認定情報.setユ準(t.get負担限度額認定情報List().get負担限度額_ユニット型準個室());
-            負担限度額認定情報.set従特養(t.get負担限度額認定情報List().get負担限度額_従来型個室特養等());
-            負担限度額認定情報.set従老健(t.get負担限度額認定情報List().get負担限度額_従来型個室老健療養等());
-            負担限度額認定情報.set多床(t.get負担限度額認定情報List().get負担限度額_多床室());
+            負担限度額認定情報.set食費(t.get負担限度額認定情報List().get負担限度額_食費負担限度額() != null
+                    ? DecimalFormatter.toコンマ区切りRString(t.get負担限度額認定情報List().get負担限度額_食費負担限度額(), 0).concat(円) : RString.EMPTY);
+            負担限度額認定情報.setユ個(t.get負担限度額認定情報List().get負担限度額_ユニット型個室() != null
+                    ? DecimalFormatter.toコンマ区切りRString(t.get負担限度額認定情報List().get負担限度額_ユニット型個室(), 0).concat(円) : RString.EMPTY);
+            負担限度額認定情報.setユ準(t.get負担限度額認定情報List().get負担限度額_ユニット型準個室() != null
+                    ? DecimalFormatter.toコンマ区切りRString(t.get負担限度額認定情報List().get負担限度額_ユニット型準個室(), 0).concat(円) : RString.EMPTY);
+            負担限度額認定情報.set従特養(t.get負担限度額認定情報List().get負担限度額_従来型個室特養等() != null
+                    ? DecimalFormatter.toコンマ区切りRString(t.get負担限度額認定情報List().get負担限度額_従来型個室特養等(), 0).concat(円) : RString.EMPTY);
+            負担限度額認定情報.set従老健(t.get負担限度額認定情報List().get負担限度額_従来型個室老健療養等() != null
+                    ? DecimalFormatter.toコンマ区切りRString(t.get負担限度額認定情報List().get負担限度額_従来型個室老健療養等(), 0).concat(円) : RString.EMPTY);
+            負担限度額認定情報.set多床(t.get負担限度額認定情報List().get負担限度額_多床室() != null
+                    ? DecimalFormatter.toコンマ区切りRString(t.get負担限度額認定情報List().get負担限度額_多床室(), 0).concat(円) : RString.EMPTY);
             負担限度額認定情報.set境界層(t.get負担限度額認定情報List().is負担限度額_境界層該当者区分() ? new RString("境界層該当者") : RString.EMPTY);
             負担限度額認定情報.set激変緩和(t.get負担限度額認定情報List().is負担限度額_激変緩和措置対象者区分() ? new RString("激変緩和対象者") : RString.EMPTY);
             負担限度額認定情報EntityList.add(負担限度額認定情報);
@@ -679,7 +696,12 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             社福法人軽減情報.set減免開始日(t.get社福法人軽減List().get社福法人軽減_適用開始年月日());
             社福法人軽減情報.set減免終了日(t.get社福法人軽減List().get社福法人軽減_適用終了年月日());
             社福法人軽減情報.set確認番号(t.get社福法人軽減List().get社福法人軽減_確認番号());
-            社福法人軽減情報.set軽減率(new RString(String.valueOf(t.get社福法人軽減List().get社福法人軽減_軽減率_分子().divide(t.get社福法人軽減List().get社福法人軽減_軽減率_分母()))));
+            if (t.get社福法人軽減List().get社福法人軽減_軽減率_分子() != null
+                    && t.get社福法人軽減List().get社福法人軽減_軽減率_分母() != null
+                    && t.get社福法人軽減List().get社福法人軽減_軽減率_分母().equals(Decimal.ZERO)) {
+                社福法人軽減情報.set軽減率(new RString(String.valueOf(t.get社福法人軽減List().get社福法人軽減_軽減率_分子()
+                        .divide(t.get社福法人軽減List().get社福法人軽減_軽減率_分母()).multiply(100))));
+            }
             社福法人軽減情報.set居宅限定(t.get社福法人軽減List().is社福法人軽減_居宅サービス限定() ? 有り : RString.EMPTY);
             社福法人軽減情報.set居_食限定(t.get社福法人軽減List().is社福法人軽減_居住費食費のみ() ? 有り : RString.EMPTY);
             社福法人軽減情報.set旧措限定(t.get社福法人軽減List().is社福法人軽減_旧措置者ユニット型個室のみ() ? 有り : RString.EMPTY);
@@ -697,9 +719,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             利用者負担減免情報.set減免決定日(t.get利用者負担減免List().get利用者負担減免_決定年月日());
             利用者負担減免情報.set減免開始日(t.get利用者負担減免List().get利用者負担減免_適用開始年月日());
             利用者負担減免情報.set減免終了日(t.get利用者負担減免List().get利用者負担減免_適用終了年月日());
-            if (t.get利用者負担減免List().get利用者負担減免_給付率() != null) {
-                利用者負担減免情報.set給付率(new RString(String.valueOf(t.get利用者負担減免List().get利用者負担減免_給付率().value())));
-            }
+            利用者負担減免情報.set給付率(t.get利用者負担減免List().get利用者負担減免_給付率() != null
+                    ? new RString(String.valueOf(t.get利用者負担減免List().get利用者負担減免_給付率().value())).concat(率) : RString.EMPTY);
             利用者負担減免情報EntityList.add(利用者負担減免情報);
         }
     }
@@ -713,9 +734,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             訪問介護等減額情報.set減免決定日(t.get訪問介護等減額情報List().get訪問介護等減額_決定年月日());
             訪問介護等減額情報.set減免開始日(t.get訪問介護等減額情報List().get訪問介護等減額_適用開始年月日());
             訪問介護等減額情報.set減免終了日(t.get訪問介護等減額情報List().get訪問介護等減額_適用終了年月日());
-            if (t.get訪問介護等減額情報List().get訪問介護等減額_給付率() != null) {
-                訪問介護等減額情報.set給付率(new RString(String.valueOf(t.get訪問介護等減額情報List().get訪問介護等減額_給付率().value())));
-            }
+            訪問介護等減額情報.set給付率(t.get訪問介護等減額情報List().get訪問介護等減額_給付率() != null
+                    ? new RString(String.valueOf(t.get訪問介護等減額情報List().get訪問介護等減額_給付率().value())).concat(率) : RString.EMPTY);
             if (t.get訪問介護等減額情報List().get訪問介護等減額_法別区分() != null
                     && !t.get訪問介護等減額情報List().get訪問介護等減額_法別区分().isEmpty()) {
                 訪問介護等減額情報.set法別(HobetsuKubun.toValue(t.get訪問介護等減額情報List().get訪問介護等減額_法別区分()));
@@ -734,7 +754,9 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             標準負担減額情報.set減免決定日(t.get標準負担減額List().get標準負担減額_決定年月日());
             標準負担減額情報.set減免開始日(t.get標準負担減額List().get標準負担減額_適用開始年月日());
             標準負担減額情報.set減免終了日(t.get標準負担減額List().get標準負担減額_適用終了年月日());
-            標準負担減額情報.set負担額(new RString(String.valueOf(t.get標準負担減額List().get標準負担減額_減額後金額())));
+            if (t.get標準負担減額List().get標準負担減額_減額後金額() != null) {
+                標準負担減額情報.set負担額(new RString(String.valueOf(t.get標準負担減額List().get標準負担減額_減額後金額())));
+            }
             標準負担減額情報EntityList.add(標準負担減額情報);
         }
     }
@@ -748,7 +770,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             特別地域加算減免情報.set決定年月日(t.get特別地域加算List().get特別地域加算_決定年月日());
             特別地域加算減免情報.set適用年月日(t.get特別地域加算List().get特別地域加算_適用開始年月日());
             特別地域加算減免情報.set有効期限(t.get特別地域加算List().get特別地域加算_適用終了年月日());
-            特別地域加算減免情報.set減額率(new RString(String.valueOf(t.get特別地域加算List().get特別地域加算_減額率())));
+            特別地域加算減免情報.set減額率(t.get特別地域加算List().get特別地域加算_減額率() != null
+                    ? new RString(String.valueOf(t.get特別地域加算List().get特別地域加算_減額率())).concat(率) : RString.EMPTY);
             特別地域加算減免情報.set確認番号(t.get特別地域加算List().get特別地域加算_確認番号());
             特別地域加算減免情報EntityList.add(特別地域加算減免情報);
         }
@@ -763,7 +786,13 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             施設入退所情報.set施設退所日(t.get施設入退所List().get施設入退所_退所年月日());
             施設入退所情報.set施設コード(t.get施設入退所List().get施設入退所_入所施設コード());
             施設入退所情報.set入所施設名称(t.get施設入退所List().get施設入退所_事業者名称());
-            施設入退所情報.set電話番号(t.get施設入退所List().get施設入退所_電話番号());
+            if (t.get施設入退所List().get施設入退所_電話番号() != null
+                    && !t.get施設入退所List().get施設入退所_電話番号().isEmpty()
+                    && t.get施設入退所List().get施設入退所_電話番号().length() == 10) {
+                施設入退所情報.set電話番号(t.get施設入退所List().get施設入退所_電話番号().substring(0, 3).concat(半角ハイフン)
+                        .concat(t.get居宅計画届出List().get居宅計画届出_電話番号().substring(3, 6)).concat(半角ハイフン)
+                        .concat(t.get居宅計画届出List().get居宅計画届出_電話番号().substring(6)));
+            }
             施設入退所情報EntityList.add(施設入退所情報);
         }
     }
@@ -795,8 +824,11 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
                     ? t.get居宅計画届出List().get居宅計画届出_計画事業者番号() : RString.EMPTY);
             居宅計画届出情報.set事業所名称(t.get居宅計画届出List().get居宅計画届出_事業者名称() != null
                     ? t.get居宅計画届出List().get居宅計画届出_事業者名称() : RString.EMPTY);
-            居宅計画届出情報.set電話番号(t.get居宅計画届出List().get居宅計画届出_電話番号() != null
-                    ? t.get居宅計画届出List().get居宅計画届出_電話番号() : RString.EMPTY);
+            居宅計画届出情報.set電話番号((t.get居宅計画届出List().get居宅計画届出_電話番号() != null
+                    && t.get居宅計画届出List().get居宅計画届出_電話番号().length() == 10)
+                    ? t.get居宅計画届出List().get居宅計画届出_電話番号().substring(0, 3).concat(半角ハイフン)
+                    .concat(t.get居宅計画届出List().get居宅計画届出_電話番号().substring(3, 6)).concat(半角ハイフン)
+                    .concat(t.get居宅計画届出List().get居宅計画届出_電話番号().substring(6)) : RString.EMPTY);
             居宅計画届出情報EntityList.add(居宅計画届出情報);
         }
     }
@@ -810,7 +842,13 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             特例施設入退所情報.set退所日(t.get特例施設入退所List().get特例施設入退所_有効終了年月日());
             特例施設入退所情報.set事業所番号(t.get特例施設入退所List().get特例施設入退所_事業者番号());
             特例施設入退所情報.set事業所(t.get特例施設入退所List().get特例施設入退所_事業者名称());
-            特例施設入退所情報.set電話番号(t.get特例施設入退所List().get特例施設入退所_電話番号());
+            if (t.get特例施設入退所List().get特例施設入退所_電話番号() != null
+                    && !t.get特例施設入退所List().get特例施設入退所_電話番号().isEmpty()
+                    && t.get特例施設入退所List().get特例施設入退所_電話番号().length() == 10) {
+                特例施設入退所情報.set電話番号(t.get特例施設入退所List().get特例施設入退所_電話番号().substring(0, 3).concat(半角ハイフン)
+                        .concat(t.get特例施設入退所List().get特例施設入退所_電話番号().substring(3, 6)).concat(半角ハイフン)
+                        .concat(t.get特例施設入退所List().get特例施設入退所_電話番号().substring(6)));
+            }
             特例施設入退所情報EntityList.add(特例施設入退所情報);
         }
 
@@ -849,7 +887,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             給付額減額情報.set開始日(t.get給付額減額情報List().get給付額減額情報_適用開始年月日());
             給付額減額情報.set終了日(t.get給付額減額情報List().get給付額減額情報_適用終了年月日());
             給付額減額情報.set給付率(t.get給付額減額情報List().get給付額減額情報_給付率() == null
-                    ? RString.EMPTY : new RString(t.get給付額減額情報List().get給付額減額情報_給付率().toString()));
+                    ? RString.EMPTY : new RString(t.get給付額減額情報List().get給付額減額情報_給付率().toString()).concat(率));
             給付額減額情報.set徴収権消滅期間(t.get給付額減額情報List().get給付額減額情報_徴収権消滅期間() == null
                     ? RString.EMPTY : new RString(t.get給付額減額情報List().get給付額減額情報_徴収権消滅期間().toString()));
             給付額減額情報.set納付済期間(t.get給付額減額情報List().get給付額減額情報_納付済期間() == null
@@ -980,9 +1018,21 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         先頭Entity.set行政区コード(t.get要介護認定情報().getPsm_行政区コード());
         先頭Entity.set行政区名称(t.get要介護認定情報().getPsm_行政区名称());
         先頭Entity.set連絡先区分1(new RString("連絡先1"));
-        先頭Entity.set連絡先1(t.get要介護認定情報().getPsm_連絡先1());
+        if (t.get要介護認定情報().getPsm_連絡先1() != null
+                && !t.get要介護認定情報().getPsm_連絡先1().isEmpty()
+                && t.get要介護認定情報().getPsm_連絡先1().length() == 10) {
+            先頭Entity.set連絡先1(t.get要介護認定情報().getPsm_連絡先1().substring(0, 3).concat(半角ハイフン)
+                    .concat(t.get要介護認定情報().getPsm_連絡先1().substring(3, 6)).concat(半角ハイフン)
+                    .concat(t.get要介護認定情報().getPsm_連絡先1().substring(6)));
+        }
         先頭Entity.set連絡先区分2(new RString("連絡先2"));
-        先頭Entity.set連絡先2(t.get要介護認定情報().getPsm_連絡先2());
+        if (t.get要介護認定情報().getPsm_連絡先2() != null
+                && !t.get要介護認定情報().getPsm_連絡先2().isEmpty()
+                && t.get要介護認定情報().getPsm_連絡先2().length() == 10) {
+            先頭Entity.set連絡先2(t.get要介護認定情報().getPsm_連絡先2().substring(0, 3).concat(半角ハイフン)
+                    .concat(t.get要介護認定情報().getPsm_連絡先2().substring(3, 6)).concat(半角ハイフン)
+                    .concat(t.get要介護認定情報().getPsm_連絡先2().substring(6)));
+        }
         先頭Entity.set老健市町村コード(t.get要介護認定情報().getT7005_老人保健市町村コード());
         先頭Entity.set老健市町村名称(t.get要介護認定情報().getT7051_市町村名称());
         先頭Entity.set老健受給者番号(t.get要介護認定情報().getT7005_老人保健受給者番号());
@@ -993,7 +1043,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         先頭Entity.set地区コード2(t.get要介護認定情報().getPsm_地区コード2());
         先頭Entity.set地区コード3(t.get要介護認定情報().getPsm_地区コード3());
         if (t.get要介護認定情報().getX1008_医療保険種別コード() != null) {
-            先頭Entity.set医療種別(CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(t.get要介護認定情報().getX1008_医療保険種別コード()), FlexibleDate.getNowDate()));
+            先頭Entity.set医療種別(CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY,
+                    new Code(t.get要介護認定情報().getX1008_医療保険種別コード()), FlexibleDate.getNowDate()));
         }
         先頭Entity.set医療保険者番号(t.get要介護認定情報().getX1008_医療保険者番号());
         先頭Entity.set医療保険者名称(t.get要介護認定情報().getX1008_医療保険者名称());
@@ -1007,7 +1058,13 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         }
         先頭Entity.set調査先住所(t.get要介護認定情報().getT4101_訪問調査先郵便番号());
         先頭Entity.set調査先名称(t.get要介護認定情報().getT4101_訪問調査先名称());
-        先頭Entity.set調査先電話番号(t.get要介護認定情報().getT4101_訪問調査先電話番号());
+        if (t.get要介護認定情報().getT4101_訪問調査先電話番号() != null
+                && !t.get要介護認定情報().getT4101_訪問調査先電話番号().isEmpty()
+                && t.get要介護認定情報().getT4101_訪問調査先電話番号().length() == 10) {
+            先頭Entity.set調査先電話番号(t.get要介護認定情報().getT4101_訪問調査先電話番号().substring(0, 3).concat(半角ハイフン)
+                    .concat(t.get要介護認定情報().getT4101_訪問調査先電話番号().substring(3, 6)).concat(半角ハイフン)
+                    .concat(t.get要介護認定情報().getT4101_訪問調査先電話番号().substring(6)));
+        }
         先頭Entity.set備考(get通知文情報通知文(ReportIdDBD.DBD100026.getReportId(), 1, 1));
     }
 }

@@ -174,7 +174,8 @@ public class KogakuGassanShikyuKetteiHosei {
         if (被保険者台帳管理entity == null) {
             return null;
         }
-        if (被保険者台帳管理entity.getShikakuSoshitsuYMD() != null) {
+        if (被保険者台帳管理entity.getShikakuSoshitsuYMD() != null
+                && !被保険者台帳管理entity.getShikakuSoshitsuYMD().isEmpty()) {
             result.set資格喪失年月日(new RDate(被保険者台帳管理entity.getShikakuSoshitsuYMD().toString()));
         }
         result.set喪失事由コード(被保険者台帳管理entity.getShikakuSoshitsuJiyuCode());
@@ -524,12 +525,14 @@ public class KogakuGassanShikyuKetteiHosei {
     }
 
     private boolean is受取年月フラ(List<KogakuGassanShikyuFushikyuKettei> 高額合算決定情報) {
+        boolean flag = true;
         for (KogakuGassanShikyuFushikyuKettei entity : 高額合算決定情報) {
             if (entity.get受取年月() == null || entity.get受取年月().isEmpty()) {
-                return true;
+                flag = false;
+                break;
             }
         }
-        return false;
+        return flag;
     }
 
     private boolean get受取年月フラグ(

@@ -10,19 +10,20 @@
             高額介護サービス費支給申請."serviceTeikyoYM" as "dbT3035_serviceTeikyoYM",
             高額介護サービス費支給申請."shoKisaiHokenshaNo" as "dbT3035_shoKisaiHokenshaNo",
             高額介護サービス費支給申請."rirekiNo" as "dbT3035_rirekiNo",
-            高額介護サービス費給付対象者合計."kogakuShikyuGaku" as "dbT3055_kogakuShikyuGaku",
+            高額介護サービス費給付対象者合計."KogakuShikyuGaku" as "dbT3055_kogakuShikyuGaku",
             高額介護サービス費支給判定結果."shikyuKubunCode" as "dbT3057_shikyuKubunCode",
             高額介護サービス費支給判定結果."shikyuKingaku" as "dbT3057_shikyuKingaku",
             高額介護サービス費支給判定結果."shinsaHohoKubun" as "dbT3057_shinsaHohoKubun",
             高額介護サービス費支給審査決定."shikyuKubunCode" as "dbT3058_shikyuKubunCode",
             高額介護サービス費支給審査決定."kogakuShikyuGaku" as "dbT3058_kogakuShikyuGaku",
             "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo" as "hokenshaNo",
-            "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" as "taishoNendo",
+            "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" as "taishoNendo"
        FROM  
-            rgdb."DbT3056KogakuShikyuShinsei" AS 高額介護サービス費支給申請
-            rgdb."DbT3057KogakuShikyuHanteiKekka" AS 高額介護サービス費支給判定結果
-            rgdb."DbT3058KogakuShikyuShinsaKettei" AS 高額介護サービス費支給審査決定
-            rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS 高額介護サービス費給付対象者合計
+            rgdb."DbT3056KogakuShikyuShinsei" AS 高額介護サービス費支給申請,
+            rgdb."DbT3057KogakuShikyuHanteiKekka" AS 高額介護サービス費支給判定結果,
+            rgdb."DbT3058KogakuShikyuShinsaKettei" AS 高額介護サービス費支給審査決定,
+            rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS 高額介護サービス費給付対象者合計,
+            "KogakugassanJikofutangakuInfoHoseiTemp"
        WHERE 
                 高額介護サービス費支給申請."hihokenshaNo"  = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
             AND SUBSTRING("KogakugassanJikofutangakuInfoHoseiTemp"."taishoKeisanKaishiYMD",1,6) <![CDATA[<=]]> 高額介護サービス費支給申請."serviceTeikyoYM"

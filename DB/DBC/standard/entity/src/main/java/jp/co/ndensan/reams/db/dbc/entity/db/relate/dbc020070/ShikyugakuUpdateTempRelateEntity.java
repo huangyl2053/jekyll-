@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020070;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
@@ -25,5 +25,5 @@ public class ShikyugakuUpdateTempRelateEntity implements IDbAccessable {
     private DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity 事業高額合算支給不支給決定;
     private DbT3074KogakuGassanShikyuFushikyuKetteiEntity 高額合算支給不支給決定;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
-    private KozaRelateEntity 口座;
+    private TokuteiKozaRelateEntity 口座;
 }

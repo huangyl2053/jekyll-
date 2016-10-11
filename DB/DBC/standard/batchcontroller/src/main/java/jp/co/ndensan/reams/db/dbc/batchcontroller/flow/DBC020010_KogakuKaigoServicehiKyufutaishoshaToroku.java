@@ -231,19 +231,19 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             if (kogakuFlowReturnEntity != null
                     && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
                     && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最大続柄コード参照年())) {
-                int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString());
-                int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString());
+                int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString().trim());
+                int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString().trim());
                 for (int i = 最小続柄コード参照年; i <= 最大続柄コード参照年; i++) {
                     カウントアップ = i;
                     executeStep(世帯員所得判定明細高額一時の作成３);
                 }
             }
-            executeStep(給付実績中間高額一時の作成8);
-            executeStep(高額介護サービス費一時の作成);
+//            executeStep(給付実績中間高額一時の作成8);
+//            executeStep(高額介護サービス費一時の作成);
             executeStep(高額対象者一覧表発行処理);
             executeStep(高額エラーリストの発行);
-            executeStep(高額国保連ＩＦマスタ更新);
-            executeStep(高額介護サービス費追加);
+//            executeStep(高額国保連ＩＦマスタ更新);
+//            executeStep(高額介護サービス費追加);
         } else if (is事業高額介護サービス(getParameter().getMenuId())) {
             executeStep(事業高額介護サービス費支給申請のバックアップ);
             executeStep(事業高額介護サービス費支給判定のバックアップ);
@@ -288,19 +288,19 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
             executeStep(世帯員所得判定明細事業高額一時の作成２);
             if (kogakuFlowReturnEntity != null && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
                     && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最大続柄コード参照年())) {
-                int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString());
-                int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString());
+                int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString().trim());
+                int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString().trim());
                 for (int i = 最小続柄コード参照年; i <= 最大続柄コード参照年; i++) {
                     カウントアップ = i;
                     executeStep(世帯員所得判定明細事業高額一時の作成３);
                 }
             }
-            executeStep(給付実績中間事業高額一時の作成8);
-            executeStep(事業高額介護サービス費一時の作成);
+//            executeStep(給付実績中間事業高額一時の作成8);
+//            executeStep(事業高額介護サービス費一時の作成);
             executeStep(事業高額対象者一覧表発行処理);
             executeStep(事業高額エラーリストの発行);
-            executeStep(事業高額国保連ＩＦマスタ更新);
-            executeStep(事業高額介護サービス費追加);
+//            executeStep(事業高額国保連ＩＦマスタ更新);
+//            executeStep(事業高額介護サービス費追加);
         }
     }
 
@@ -888,7 +888,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step (高額対象者一覧表発行処理)
     protected IBatchFlowCommand callPrtTaishoshaIchiranKogakuProcess() {
-        return loopBatch(PrtTaishoshaIchiranKogakuProcess.class).define();
+        return loopBatch(PrtTaishoshaIchiranKogakuProcess.class).arguments(getReportParameter()).define();
     }
 
     /**
@@ -898,7 +898,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step (事業高額対象者一覧表発行処理)
     protected IBatchFlowCommand callPrtTaishoshaIchiranJigyoProcess() {
-        return loopBatch(PrtTaishoshaIchiranJigyoProcess.class).define();
+        return loopBatch(PrtTaishoshaIchiranJigyoProcess.class).arguments(getReportParameter()).define();
     }
 
     /**
@@ -908,7 +908,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step (高額エラーリストの発行)
     protected IBatchFlowCommand callPrtErrorListKogakuProcess() {
-        return loopBatch(PrtErrorListKogakuProcess.class).define();
+        return loopBatch(PrtErrorListKogakuProcess.class).arguments(getReportParameter()).define();
     }
 
     /**
@@ -918,7 +918,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step (事業高額エラーリストの発行)
     protected IBatchFlowCommand callPrtErrorListJigyoProcess() {
-        return loopBatch(PrtErrorListJigyoProcess.class).define();
+        return loopBatch(PrtErrorListJigyoProcess.class).arguments(getReportParameter()).define();
     }
 
     /**
@@ -1007,6 +1007,13 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
     private KyufuJissekiKihonKogakuProcessParameter getDelSaishoriKogakuTmpProcessParameter() {
         KyufuJissekiKihonKogakuProcessParameter parameter = new KyufuJissekiKihonKogakuProcessParameter();
         parameter.set処理年月(new FlexibleYearMonth(処理日時.getDate().getYearMonth().toDateString()));
+        return parameter;
+    }
+
+    private KyufuJissekiKihonKogakuProcessParameter getReportParameter() {
+        KyufuJissekiKihonKogakuProcessParameter parameter = new KyufuJissekiKihonKogakuProcessParameter();
+        parameter.set出力順ID(new RString(getParameter().getShuturyokuJunn()));
+        parameter.set処理年月(getParameter().getShoriYM());
         return parameter;
     }
 

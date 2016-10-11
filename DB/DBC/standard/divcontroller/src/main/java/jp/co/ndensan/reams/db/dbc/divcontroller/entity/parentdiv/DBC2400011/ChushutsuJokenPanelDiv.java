@@ -27,6 +27,8 @@ public class ChushutsuJokenPanelDiv extends Panel {
     private TextBoxDateRange txtZenkaiRiyushoSakuseiShinseiYMD;
     @JsonProperty("txtRiyushoSakuseiShinseiYMD")
     private TextBoxDateRange txtRiyushoSakuseiShinseiYMD;
+    @JsonProperty("chkShoriTaishoKubun")
+    private CheckBoxList chkShoriTaishoKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +88,24 @@ public class ChushutsuJokenPanelDiv extends Panel {
     @JsonProperty("txtRiyushoSakuseiShinseiYMD")
     public void setTxtRiyushoSakuseiShinseiYMD(TextBoxDateRange txtRiyushoSakuseiShinseiYMD) {
         this.txtRiyushoSakuseiShinseiYMD = txtRiyushoSakuseiShinseiYMD;
+    }
+
+    /*
+     * getchkShoriTaishoKubun
+     * @return chkShoriTaishoKubun
+     */
+    @JsonProperty("chkShoriTaishoKubun")
+    public CheckBoxList getChkShoriTaishoKubun() {
+        return chkShoriTaishoKubun;
+    }
+
+    /*
+     * setchkShoriTaishoKubun
+     * @param chkShoriTaishoKubun chkShoriTaishoKubun
+     */
+    @JsonProperty("chkShoriTaishoKubun")
+    public void setChkShoriTaishoKubun(CheckBoxList chkShoriTaishoKubun) {
+        this.chkShoriTaishoKubun = chkShoriTaishoKubun;
     }
 
     // </editor-fold>

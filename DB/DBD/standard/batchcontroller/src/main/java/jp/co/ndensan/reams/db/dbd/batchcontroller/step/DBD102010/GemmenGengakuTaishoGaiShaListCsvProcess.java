@@ -159,7 +159,7 @@ public class GemmenGengakuTaishoGaiShaListCsvProcess extends BatchProcessBase<Ge
         csvEntity.set減免有効期限(set年月日(list.get減免有効期限()));
         csvEntity.set老齢福祉年金受給区分(new RString(list.get老齢福祉年金受給区分().toString()));
         csvEntity.set生活保護受給区分(new RString(list.get生活保護受給区分().toString()));
-        if (0 < list.get課税所得額().longValue() && list.get課税区分().equals(KazeiKubun.課税.get名称())) {
+        if (list.get課税所得額() != null && 0 < list.get課税所得額().longValue() && KazeiKubun.課税.get名称().equals(list.get課税区分())) {
             csvEntity.set所得税区分(KazeiKubun.課税.get名称());
         } else {
             csvEntity.set所得税区分(KazeiKubun.非課税.get名称());

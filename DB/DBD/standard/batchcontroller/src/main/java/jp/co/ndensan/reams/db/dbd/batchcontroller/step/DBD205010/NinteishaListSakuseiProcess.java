@@ -131,6 +131,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
         key.set基準日(parameter.get課税判定等基準日());
+
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
 
