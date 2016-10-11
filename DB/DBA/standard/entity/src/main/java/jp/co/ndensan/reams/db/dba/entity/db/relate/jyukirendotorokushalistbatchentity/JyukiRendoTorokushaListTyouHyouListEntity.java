@@ -71,5 +71,7 @@ public class JyukiRendoTorokushaListTyouHyouListEntity {
     private RString リスト下_異動情報4;
     private RString リスト下_異動情報5;
     private RString リスト下_異動情報6;
+    private RString 抽出期間F;
+    private RString 抽出期間T;
 
 }

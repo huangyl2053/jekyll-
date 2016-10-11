@@ -71,6 +71,8 @@ public class JukiRendoTorokuListItem {
     private final RString listLower_12;
     private final RString listLower_13;
     private final RString listLower_14;
+    private final RString tyusyutsukikanF;
+    private final RString tyusyutsukikanT;
 
     /**
      *
@@ -128,6 +130,8 @@ public class JukiRendoTorokuListItem {
      * @param listLower_12 異動情報データ4
      * @param listLower_13 異動情報データ5
      * @param listLower_14 異動情報データ6
+     * @param tyusyutsukikanF 抽出期間F
+     * @param tyusyutsukikanT 抽出期間T
      */
     public JukiRendoTorokuListItem(
             RString printTimeStamp,
@@ -183,7 +187,9 @@ public class JukiRendoTorokuListItem {
             RString listLower_11,
             RString listLower_12,
             RString listLower_13,
-            RString listLower_14
+            RString listLower_14,
+            RString tyusyutsukikanF,
+            RString tyusyutsukikanT
     ) {
         this.printTimeStamp = printTimeStamp;
         this.taishoJohotitle = taishoJohotitle;
@@ -239,6 +245,8 @@ public class JukiRendoTorokuListItem {
         this.listLower_12 = listLower_12;
         this.listLower_13 = listLower_13;
         this.listLower_14 = listLower_14;
-
+        this.tyusyutsukikanF = tyusyutsukikanF;
+        this.tyusyutsukikanT = tyusyutsukikanT;
+        
     }
 }

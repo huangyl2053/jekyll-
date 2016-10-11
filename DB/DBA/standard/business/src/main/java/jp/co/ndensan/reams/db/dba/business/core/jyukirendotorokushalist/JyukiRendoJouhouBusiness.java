@@ -34,9 +34,9 @@ public class JyukiRendoJouhouBusiness {
     private static final int 対象情報_被保険者台帳 = 1;
     private static final int 対象情報_他市町村住所地特例者台帳 = 2;
     private static final int 対象情報_適用除外者台帳 = 3;
-    private static final RString データ種別_被保険者台帳 = new RString("データ種別：被保険者台帳");
-    private static final RString データ種別_他市町村住所地特例者台帳 = new RString("データ種別：他市町村住所地特例者台帳");
-    private static final RString データ種別_適用除外者台帳 = new RString("データ種別：適用除外者台帳");
+    private static final RString データ種別_被保険者台帳 = new RString("対象台帳：被保険者台帳");
+    private static final RString データ種別_他市町村住所地特例者台帳 = new RString("対象台帳：他市町村住所地特例者台帳");
+    private static final RString データ種別_適用除外者台帳 = new RString("対象台帳：適用除外者台帳");
     private static final RString 異動情報 = new RString("異動情報");
     private static final RString 取得情報 = new RString("取得情報");
     private static final RString 喪失情報 = new RString("喪失情報");

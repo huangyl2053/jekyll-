@@ -28,7 +28,9 @@ class JukiRendoTorokuListHeaderEditor implements IJukiRendoTorokuListEditor {
     private JukiRendoTorokuListReportSource editorHeader(JukiRendoTorokuListReportSource source) {
         source.printTimeStamp = item.getPrintTimeStamp();
         source.taishoJohotitle = item.getTaishoJohotitle();
-        return source;
+        source.tyusyutsukikanF = item.getTyusyutsukikanF();
+        source.tyusyutsukikanT = item.getTyusyutsukikanT();
+       return source;
     }
 
 }
