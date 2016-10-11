@@ -45,7 +45,7 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
     private boolean 宛名生年月日3;
     private boolean 宛名生年月日4;
     private boolean 直近被保;
-    private boolean is基準日;
+    private boolean 基準日flag;
     private FlexibleDate 年齢基準日from;
     private FlexibleDate 年齢基準日to;
     private FlexibleDate 生年月日from;
@@ -118,7 +118,7 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
         set年齢基準日の対応日(宛名抽出条件);
         set生年月日の対応日(宛名抽出条件);
         set基準日付(対象年度, 基準日);
-        setIs基準日flag(基準日区分);
+        this.基準日flag = 基準日区分_基準日.equals(基準日区分);
     }
 
     private void set宛名生年月日(AtenaSelectBatchParameter 宛名抽出条件) {
@@ -199,9 +199,5 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
             基準日付11 = new RString(date11.getYearMonth().getLastDay());
         }
 
-    }
-
-    private void setIs基準日flag(RString 基準日区分) {
-        is基準日 = 基準日区分_基準日.equals(基準日区分);
     }
 }
