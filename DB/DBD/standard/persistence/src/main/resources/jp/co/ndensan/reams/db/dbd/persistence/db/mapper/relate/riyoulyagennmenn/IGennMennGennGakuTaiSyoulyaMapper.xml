@@ -175,9 +175,9 @@
                          ON 世帯員所得情報一時."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
                 WHERE
                     世帯員所得情報一時."honninKubun" != '1'
-<!--                <if test="is世帯表示しない">
+                <if test="is世帯表示しない">
                     AND FALSE
-                </if>  //TODO QA-->
+                </if>
             ) AS 世帯員情報
                 ON 世帯員情報."世帯員の被保険者番号" = A."被保険者番号"
             LEFT JOIN (
@@ -246,7 +246,7 @@
         <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <collection property="利用者負担額減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
-        <collection property="世帯員Entity" resultMap="resultMap_世帯員"/>
+        <collection property="世帯員リスト" resultMap="resultMap_世帯員"/>
     </resultMap>
     <resultMap id="resultMap_世帯員" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.SeteiYouEntity" autoMapping="true">
         <id property="識別コード" column="世帯員の識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
