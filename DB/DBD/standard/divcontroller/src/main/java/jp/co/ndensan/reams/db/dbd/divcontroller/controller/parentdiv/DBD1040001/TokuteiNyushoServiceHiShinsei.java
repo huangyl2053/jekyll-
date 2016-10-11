@@ -225,13 +225,13 @@ public class TokuteiNyushoServiceHiShinsei {
         }
         if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             dgShinseiList_Row row = div.getShinsei().getShinseiList().getDgShinseiList().getActiveRow();
-            List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報List, ArrayList.class);
-            RString 元決定区分 = RString.EMPTY;
-            TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = getHandler(div).get特別地域加算減免申請の情報(row, 特別地域加算減免申請の情報List);
-            if (特別地域加算減免申請の情報 != null && 特別地域加算減免申請の情報.get決定区分() != null) {
-                元決定区分 = 特別地域加算減免申請の情報.get決定区分();
-            }
-            if (!ResponseHolder.isReRequest() && !追加.equals(row.getJotai()) && !元決定区分.isEmpty()) {
+//            List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報List, ArrayList.class);
+//            RString 元決定区分 = RString.EMPTY;
+//            TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = getHandler(div).get特別地域加算減免申請の情報(row, 特別地域加算減免申請の情報List);
+//            if (特別地域加算減免申請の情報 != null && 特別地域加算減免申請の情報.get決定区分() != null) {
+//                元決定区分 = 特別地域加算減免申請の情報.get決定区分();
+//            }
+            if (!ResponseHolder.isReRequest() && !追加.equals(row.getJotai()) && !row.getKetteiKubun().isEmpty() && row.getKetteiKubun() != null) {
                 InformationMessage message = new InformationMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode(),
                         DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
