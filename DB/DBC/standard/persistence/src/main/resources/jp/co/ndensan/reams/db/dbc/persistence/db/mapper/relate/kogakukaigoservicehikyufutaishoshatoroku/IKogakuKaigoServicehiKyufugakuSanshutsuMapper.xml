@@ -2403,7 +2403,6 @@
     
     <!--chenaoqi START-->
    <resultMap id="resultMap_SetaiHihokenshaResultEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity" autoMapping="true">
-        <id column="tmpSetaiShotoku_shikibetsuCode"/>
         <association property="世帯員所得情報Entity" resultMap="ResultMap_世帯員所得情報"/>
         <association property="被保険者情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
     </resultMap>
