@@ -60,6 +60,7 @@ public class TsuchishoJoho38P {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.set再処理区分(SaiShoriKubun.空白);
         }
+        parameter.set処理区分(div.getCcdKokurenJohoTorikomi().get処理区分());
         return ResponseData.of(parameter).respond();
     }
 

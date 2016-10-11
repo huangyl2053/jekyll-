@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD9010001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.IryoHiKojoNaiyo;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
@@ -60,7 +60,7 @@ public class IryouhiKoujyo {
             if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
                 return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
             }
-            List<IryohiKojoEntityResult> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
+            List<IryohiKojo> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
             ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList(医療費控除リスト));
             return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
         }
@@ -209,7 +209,7 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_ClearButton(IryouhiKoujyoDiv div) {
-        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        List<IryohiKojo> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         getHandler(div).onClick_ClearButton(医療費控除リスト);
         return ResponseData.of(div).setState(DBD9010001StateName.初期表示);
     }
@@ -247,7 +247,9 @@ public class IryouhiKoujyo {
         }
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.確定の確認.getMessage().getCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).onClick_KakuteButton(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
+            List<IryohiKojo> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
+            getHandler(div).onClick_KakuteButton(被保険者番号, ViewStateHolder.get(ViewStateKeys.状態, RString.class), 医療費控除リスト);
         }
         return ResponseData.of(div).respond();
     }
@@ -276,7 +278,8 @@ public class IryouhiKoujyo {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            getHandler(div).save(引き継ぎEntity);
+            List<IryohiKojo> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+            getHandler(div).save(引き継ぎEntity, 医療費控除リスト);
             div.getKaigoKanryoMessageChildDiv().setMessage(完了メッセージメイン,
                     ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号().value(),
                     div.getKaigoAtenaInfoChildDiv().get氏名漢字(), true);

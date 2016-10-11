@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 受給者減免実施状況のDataManagerクラスです。
  *
- * @reamsid_L　DBD-3770-060 liuwei2
+ * @reamsid_L DBD-3770-060 liuwei2
  */
 public class JukyushagenmenninteiDateManager {
 

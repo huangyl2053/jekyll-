@@ -118,7 +118,7 @@ public class ShinseishoHakko {
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
-        if (!getHandler(div).is異動処理が実施済みか判定()) {
+        if (getHandler(div).is異動処理が実施済みか判定()) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().
                     replace(異動処理が実施済みの.toString(), 実行.toString()));
         }

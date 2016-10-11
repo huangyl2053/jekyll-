@@ -32,6 +32,9 @@ public class KokuhorenTorikomiList {
 
     private static final RString 再処理可能 = new RString("再処理可能");
     private static final RString 再処理不可 = new RString("再処理不可");
+    private static final int NUM_0 = 0;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
 
     /**
      * 初期化のメソッドます。
@@ -82,11 +85,15 @@ public class KokuhorenTorikomiList {
         } else if (再処理不可.equals(row.getSaishoriFlag())) {
             再処理区分 = SaiShoriKubun.空白.getコード();
         }
+        RString 交換情報識別番号 = row.getKokanShikibetsuNo();
         KokuhorenDataTorikomiViewStateClass parmater = new KokuhorenDataTorikomiViewStateClass(
                 div.getTxtShoriYM().getValue().getYearMonth(), 再処理区分);
+        parmater.set交換情報識別番号(交換情報識別番号);
         ViewStateHolder.put(ViewStateHolderName.国保連取込情報, parmater);
-
-        RString paramete = getHandler(div).getParamter(row.getKokanShikibetsuNo());
+        if (交換情報識別番号.length() == NUM_4) {
+            交換情報識別番号 = 交換情報識別番号.substring(NUM_0, NUM_3);
+        }
+        RString paramete = getHandler(div).getParamter(交換情報識別番号);
         return ResponseData.of(div).forwardWithEventName(DBC0410011TransitionEventName.バッチ起動)
                 .parameter(paramete);
     }

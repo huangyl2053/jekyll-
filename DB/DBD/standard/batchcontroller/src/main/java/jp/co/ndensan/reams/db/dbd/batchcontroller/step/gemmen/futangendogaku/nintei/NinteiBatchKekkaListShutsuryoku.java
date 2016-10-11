@@ -107,9 +107,7 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
     private static final RString 確認リスト出力 = new RString("【確認リスト出力】");
     private static final RString 発行日 = new RString("【発行日】");
     private static final RString 改頁出力順ID = new RString("【改頁出力順ID】");
-    private static final RString 帳票分類ID = new RString("【帳票分類ID】");
     private static final RString 帳票ID = new RString("【帳票ID】");
-    private static final RString 帳票作成日時 = new RString("【帳票作成日時】");
     private static final RString 負担限度額認定申請承認一括 = new RString("【負担限度額認定申請承認一括】");
     private static final RString TRUE = new RString("TRUE");
     private static final RString FALSE = new RString("FALSE");

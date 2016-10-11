@@ -566,7 +566,7 @@ public class TokuteiNyushoServiceHiShinsei {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//            TaishoshaKey 資格対象者 = new TaishoshaKey(
+//            TaishoshaKey taishoshaKey = new TaishoshaKey(
 //                    new HihokenshaNo(new RString("2190000001")),
 //                    new ShikibetsuCode(new RString("000000000000010")),
 //                    new SetaiCode(new RString("000000000000100")));
@@ -598,7 +598,7 @@ public class TokuteiNyushoServiceHiShinsei {
 
     private void viewState破棄(TokuteiNyushoServiceHiShinseiDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        TaishoshaKey 資格対象者 = new TaishoshaKey(
+//        TaishoshaKey taishoshaKey = new TaishoshaKey(
 //                new HihokenshaNo(new RString("2190000001")),
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));

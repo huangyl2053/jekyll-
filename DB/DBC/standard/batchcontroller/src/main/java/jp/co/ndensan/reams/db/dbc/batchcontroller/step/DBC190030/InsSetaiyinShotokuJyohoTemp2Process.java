@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<HihokenshaDaichoTempSixColumnEntity> {
 
-    private static final ReportId 帳票ID = new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho");
     private static final RString TABLENAME = new RString("TmpSetaiHaaku");
     private static final RString PATH3 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc190030."
             + "IDBC190030Mapper.get被保険者台帳3");
@@ -65,8 +63,7 @@ public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<Hihoke
                 && ShinseishoTorokuChushutsuTaisho.無条件抽出.getコード().equals(抽出対象)) {
             path = PATH4;
         }
-        RString 出力順 = new DBC190030ProcessCore().init出力順(帳票ID, parameter.get帳票出力順ID());
-        return new BatchDbReader(path, parameter.toDBC190030MyBatisParameter(出力順));
+        return new BatchDbReader(path, parameter.toDBC190030MyBatisParameter());
     }
 
     @Override

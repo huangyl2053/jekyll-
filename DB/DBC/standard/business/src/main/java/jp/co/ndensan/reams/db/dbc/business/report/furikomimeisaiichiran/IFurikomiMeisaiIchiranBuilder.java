@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.furikomimeisaiichiran.FurikomiMe
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 帳票設計_DBC100060_事業合算・事業分振込明細書作成（一括） Builderクラスです。
+ * 帳票設計_DBC200003_振込明細一覧表（高額合算） Builderクラスです。
  *
  * @reamsid_L DBC-4870-050 lijian
  */

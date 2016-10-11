@@ -612,9 +612,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
 
     /**
      * 状態2の設定です。
+     *
+     * @param flag boolean
      */
-    public void set状態_Two() {
-        div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTplKettei().setDisabled(true);
+    public void set状態_Two(boolean flag) {
+        div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTplKettei().setDisabled(flag);
     }
 
     /**
@@ -622,6 +624,13 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      */
     public void set状態_Three() {
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTplKettei().setDisabled(true);
+    }
+
+    /**
+     * 状態5の設定です。
+     */
+    public void set状態_Five() {
+        div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().setFromDisabled(true);
     }
 
     /**
@@ -721,7 +730,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 || is比較変更年月日(parameter.get対象計算期間終了年月日(),
                         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue())
                 || is比較変更文字列(parameter.get自己負担額証明書整理番号(),
-                        div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getValue())
+                        div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getText())
                 || is比較変更年月日(parameter.get申請日(),
                         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShinseiYMD().getValue())
                 || is比較変更年月日(parameter.get決定日(),
@@ -833,6 +842,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 .set支給区分コード(ShikyuFushikyuKubun.valueOf(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                                 getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
                 .set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue())
+                .set自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                        getTxtJikoFutanSeiriNo().getText())
                 .build();
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue() != null) {
             entity = entity.createBuilderForEdit().set対象計算期間開始年月日(new FlexibleDate(

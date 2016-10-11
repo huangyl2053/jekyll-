@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 認定状況のentityです。
  *
- * @reamsid_L　DBD-3770-060 liuwei2
+ * @reamsid_L DBD-3770-060 liuwei2
  */
 @Getter
 @Setter

@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreishaInfoCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoRealEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -26,12 +28,12 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBC-3020-040 qinzhen
  */
-public class CreateCsvFileProcess extends BatchProcessBase<TorikomiKokiKoreshaJyohoEntity> {
+public class CreateCsvFileProcess extends BatchProcessBase<KokiKoreshaJyohoRealEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get取込国保情報Temp");
     private final RString csvファイル名 = new RString("torikomikakuninkekka.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC130020"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBZ000001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
@@ -59,13 +61,14 @@ public class CreateCsvFileProcess extends BatchProcessBase<TorikomiKokiKoreshaJy
     }
 
     @Override
-    protected void process(TorikomiKokiKoreshaJyohoEntity entity) {
-        csvWriter.writeLine(getCsvEntity(entity));
+    protected void process(KokiKoreshaJyohoRealEntity entity) {
+        csvWriter.writeLine(getCsvEntity(entity.get取込後期高齢者情報Entity()));
     }
 
     @Override
     protected void afterExecute() {
         csvWriter.close();
+        manager.spool(SubGyomuCode.DBZ介護共通, eucFilePath);
     }
 
     private KokiKoreishaInfoCsvEntity getCsvEntity(TorikomiKokiKoreshaJyohoEntity entity) {

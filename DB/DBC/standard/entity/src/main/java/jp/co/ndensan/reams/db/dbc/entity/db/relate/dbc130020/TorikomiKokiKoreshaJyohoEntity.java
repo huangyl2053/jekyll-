@@ -28,6 +28,7 @@ public class TorikomiKokiKoreshaJyohoEntity extends DbTableEntityBase<TorikomiKo
     @PrimaryKey
     private RString 住民コード;
     @CsvField(order = 30, name = "履歴番号")
+    @PrimaryKey
     private RString 履歴番号;
     @CsvField(order = 40, name = "後期高齢保険者番号（市町村）")
     private RString 後期高齢保険者番号_市町村;

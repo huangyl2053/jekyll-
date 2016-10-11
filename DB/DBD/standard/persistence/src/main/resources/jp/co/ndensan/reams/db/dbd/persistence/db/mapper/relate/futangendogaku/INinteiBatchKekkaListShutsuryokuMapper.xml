@@ -56,7 +56,7 @@
         <result property="今回認定結果.ninteiBatchExecutedTimestamp" column="一括認定バッチ処理日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
         <result property="今回認定結果.izokuNenkinJukyuFlag" column="遺族年金受給フラグ" />
         <result property="今回認定結果.shogaiNenkinJukyuFlag" column="障害年金受給フラグ" />
-        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="前回認定結果" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
         <collection property="利用軽減"  resultMap="Result_BooleanRiyoshaFutangakuGengaku" />
         <collection property="訪問減額"  resultMap="Result_BooleanHomonKaigoRiyoshaFutangakuGengaku" />
@@ -80,6 +80,7 @@
     <select id="get結果一覧データ"  fetchSize="500" resultOrdered="true"
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt22006.NinteiBatchKekkaListShutsuryokuMybatisParameter"
         resultMap="ResultMap_KekkaIchiranData">
+         WITH master AS(
         SELECT
             被保険者台帳."hihokenshaNo" AS 被保険者番号,
             被保険者台帳."shikakuShutokuYMD" AS 資格取得年月日,
@@ -90,7 +91,6 @@
             受給者台帳."yokaigoJotaiKubunCode" AS 要介護状態区分コード,
             受給者台帳.koroshoIfShikibetsuCode AS 厚労省IF識別コード,
             受給者台帳."kyuSochishaFlag" AS 旧措置者フラグ,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
             利用減額.is申請 AS 利用減額申請,
             訪問減額.is申請 AS 訪問減額申請,
             社福軽減.is申請 AS 社福軽減申請,
@@ -138,15 +138,12 @@
             今回認定結果."batchShoriNitiji" AS 一括認定バッチ処理日時,
             今回認定結果."izokuNenkinJukyuFlag" AS 遺族年金受給フラグ,
             今回認定結果."shogaiNenkinJukyuFlag" AS 障害年金受給フラグ,
-            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />,
+            被保険者台帳."shikibetsuCode" AS "dbV1001HihokenshaDaicho_shikibetsuCode"
         FROM
             "shoninKekkaTempEntity" AS 今回認定結果
         INNER JOIN  rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
             ON  今回認定結果."hihokenshaNo" = 被保険者台帳."hihokenshaNo" 
-        INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-      '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-            ON  被保険者台帳."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         LEFT JOIN(
             SELECT
                 V4001.*,
@@ -226,6 +223,24 @@
                 AND  temp特地."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
         ) AS 特地減免
             ON 今回認定結果."hihokenshaNo" = 特地減免.被保険者番号
+        )
+        
+        SELECT
+            master.*,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            master
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+          ( 
+           SELECT
+             ARRAY_AGG(CAST ("dbV1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+           FROM 
+             master
+           ) 
+         ) AS "ShikibetsuTaisho"							
+         ON master."dbV1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         ${出力順}
     </select>
 

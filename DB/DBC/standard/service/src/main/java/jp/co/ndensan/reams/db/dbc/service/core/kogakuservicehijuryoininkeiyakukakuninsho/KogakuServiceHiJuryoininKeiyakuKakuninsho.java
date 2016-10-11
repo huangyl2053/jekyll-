@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakuk
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.santeikijungaku.SanteiKijungaku;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
@@ -106,7 +105,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         result.set不承認の理由(param.get承認しない理由());
         result.set利用者負担上限額(RString.isNullOrEmpty(param.get利用者負担上限額()) ? RString.EMPTY
-                : SanteiKijungaku.toValue(param.get利用者負担上限額()).get略称().replace(円単位, RString.EMPTY));
+                : param.get利用者負担上限額().replace(円単位, RString.EMPTY));
 
         介護事業者情報を取得する(result, param.get事業者番号());
         介護事業者代表者情報を取得する(result, param.get事業者番号());

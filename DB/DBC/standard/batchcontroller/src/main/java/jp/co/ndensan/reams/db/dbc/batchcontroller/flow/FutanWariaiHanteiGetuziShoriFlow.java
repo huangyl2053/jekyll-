@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.FutanWariaiLogi
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuFutanWariaiGenTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuFutanWariaiNewTempProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
  * @reamsid_L DBC-4950-030 liuyang
  */
 public class FutanWariaiHanteiGetuziShoriFlow
-        extends BatchFlowBase<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> {
+        extends BatchFlowBase<DBC180022_RiyoshaFutanwariaiHanteiSubParameter> {
 
     private static final String CLEAR今回利用者負担割合情報 = "clearKonkaiRiyoshaFutanWariaiJohoTempProcess";
     private static final String 負担割合判定月次 = "futanWariaiHanteiGetuziProcess";

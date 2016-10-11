@@ -960,8 +960,8 @@ WITH master AS (
            PSM."chikuCode3" AS psm_地区コード3,
            PSM."chikuName3" AS psm_地区名3,
            PSM."choikiCode" AS psm_町域コード,
-           PSM."shoriYMD" AS psm_処理年月日,
-              FROM master
+           PSM."shoriYMD" AS psm_処理年月日
+           FROM master
               LEFT OUTER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
