@@ -37,6 +37,11 @@ public class FuchoKarisanteiFukaProcessParameter implements IBatchProcessParamet
     private static final int NUM_3 = 3;
     private static final int NUM_31 = 31;
 
+    /**
+     * Mybatisのパラメータを作成します。
+     *
+     * @return {@link FuchoKarisanteiFukaMybatisParameter}
+     */
     public FuchoKarisanteiFukaMybatisParameter toMybatisParameter() {
         FuchoKarisanteiFukaMybatisParameter param = new FuchoKarisanteiFukaMybatisParameter();
         param.set調定前年度(調定年度.minusYear(NUM_1));
