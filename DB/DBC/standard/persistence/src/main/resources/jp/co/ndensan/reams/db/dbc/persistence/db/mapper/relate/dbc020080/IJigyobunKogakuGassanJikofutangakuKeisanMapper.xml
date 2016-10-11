@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBC-2060-030 liuyang -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper">
     <!--シート「対象者抽出」-->
-    <select id="get対象者抽出データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
+    <select id="get対象者抽出データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.TaishoshaChushuMyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity" resultOrdered="true" fetchSize="500">
         WITH master as(
         SELECT
@@ -90,7 +90,7 @@
     </select>
 
     <!--シート「対象者抽出事業分」-->
-    <select id="get対象者抽出事業分データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
+    <select id="get対象者抽出事業分データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.TaishoshaChushuJigyobunMyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity" resultOrdered="true" fetchSize="500">
         WITH master AS (
         SELECT
@@ -368,7 +368,7 @@
         AND substring("henko"."tekiyoKaishiYMD" from 1 for 6)<![CDATA[<=]]>"kihon"."serviceTeikyoYM"
         AND "kihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("henko"."tekiyoShuryoYMD" from 1 for 6)
     </select>
-    
+
     <!--BatchStep2.4<変更>-->
     <select id="getShafukuKeigenTempHenko" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.UpdshafukuKeigenTempMyBatisParameter"
             resultMap="ResultMap_RiyoshaFutanMatchingEntity" resultOrdered="true" fetchSize="500">
@@ -434,7 +434,7 @@
         ) AS "riyoshaFutan"
         ON "temp"."hihokenshaNo"＝ "riyoshaFutan"."hiHokenshaNo"
     </select>
-    
+
     <!--Batch: 高額支給額集計 TODO Parameter-->
     <select id="getCalcKogakuShikyugaku"
             resultMap="ResultMap_CalcKogakuShikyugakuEntity" resultOrdered="true" fetchSize="500">

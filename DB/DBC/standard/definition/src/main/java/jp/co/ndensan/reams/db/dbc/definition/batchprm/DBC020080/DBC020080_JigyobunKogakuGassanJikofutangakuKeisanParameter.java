@@ -43,7 +43,6 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends 
     private Long shutsuryokujunId;
     @BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
     private LasdecCode dantaiCd;
-    private boolean 事業分フラグ;
 
     /**
      * toDBC020080ProcessParameter のメソッドです。
@@ -52,6 +51,6 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends 
      */
     public DBC020080ProcessParameter toDBC020080ProcessParameter() {
         return new DBC020080ProcessParameter(
-                shoriTimestamp, null, null, shuturyokuFlg, shutsuryokujunId, dantaiCd, 事業分フラグ);
+                shoriTimestamp, taishoKaishiDay, taishoShuryoDay, shuturyokuFlg, shutsuryokujunId, dantaiCd);
     }
 }
