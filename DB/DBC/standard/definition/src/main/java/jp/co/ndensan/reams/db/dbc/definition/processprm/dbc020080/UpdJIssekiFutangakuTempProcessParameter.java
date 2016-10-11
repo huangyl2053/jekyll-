@@ -9,8 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ビジネス設計_DBCMN62006_自己負担額計算（一括）<br/>
- * のUpdJIssekiFutangakuTempProcessのプロセスパラメタークラスです。
+ * ビジネス設計_DBCMN62006_自己負担額計算（一括）のプロセスパラメタークラスです。
  *
  * @reamsid_L DBC-2060-050 liuyang
  */

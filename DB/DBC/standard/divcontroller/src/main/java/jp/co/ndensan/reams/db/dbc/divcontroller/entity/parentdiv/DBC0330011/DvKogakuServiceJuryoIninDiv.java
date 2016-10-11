@@ -13,16 +13,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobang
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * DvKogakuServiceJuryoInin のクラスファイル
@@ -50,6 +42,8 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     private DvHakkoDiv DvHakko;
     @JsonProperty("operateState")
     private RString operateState;
+    @JsonProperty("rootTitle")
+    private RString rootTitle;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -166,6 +160,24 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     /*
+     * getrootTitle
+     * @return rootTitle
+     */
+    @JsonProperty("rootTitle")
+    public RString getRootTitle() {
+        return rootTitle;
+    }
+
+    /*
+     * setrootTitle
+     * @param rootTitle rootTitle
+     */
+    @JsonProperty("rootTitle")
+    public void setRootTitle(RString rootTitle) {
+        this.rootTitle = rootTitle;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -279,11 +291,6 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdJigyosha() {
-        return this.getDvHaraiKetteiShusei().getCcdJigyosha();
-    }
-
-    @JsonIgnore
     public RadioButton getRadKetteiKubun() {
         return this.getDvHaraiKetteiShusei().getRadKetteiKubun();
     }
@@ -331,6 +338,11 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     @JsonIgnore
     public void setLinLine6(HorizontalLine linLine6) {
         this.getDvHaraiKetteiShusei().setLinLine6(linLine6);
+    }
+
+    @JsonIgnore
+    public IShisetsuJohoCommonChildDiv getCcdJigyosha() {
+        return this.getDvHaraiKetteiShusei().getCcdJigyosha();
     }
 
     @JsonIgnore

@@ -109,6 +109,14 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_btnKensaku(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        ValidationMessageControlPairs 証記載保険者番号validPairs = getCheckHandler(div).validate検索条件証記載保険者番号();
+        if (証記載保険者番号validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(証記載保険者番号validPairs).respond();
+        }
+        ValidationMessageControlPairs 連絡票整理番号validPairs = getCheckHandler(div).validate検索条件連絡票整理番号();
+        if (連絡票整理番号validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(連絡票整理番号validPairs).respond();
+        }
         boolean 事業分フラグ = false;
         if (div.get事業分フラグ().equals(new RString(Boolean.TRUE.toString()))) {
             事業分フラグ = true;
@@ -247,7 +255,19 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      */
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_btnKetteiJohoAdd(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-        ValidationMessageControlPairs validPairs = getCheckHandler(div).check決定情報を追加する();
+        ValidationMessageControlPairs 対象年度validPairs = getCheckHandler(div).validate新規登録対象年度();
+        if (対象年度validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(対象年度validPairs).respond();
+        }
+        ValidationMessageControlPairs 証記載保険者番号validPairs = getCheckHandler(div).validate新規登録証記載保険者番号();
+        if (証記載保険者番号validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(証記載保険者番号validPairs).respond();
+        }
+        ValidationMessageControlPairs 連絡票整理番号validPairs = getCheckHandler(div).validate新規登録連絡票整理番号();
+        if (連絡票整理番号validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(連絡票整理番号validPairs).respond();
+        }
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).validate決定情報を追加する();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -258,6 +278,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             return ResponseData.of(div).respond();
         }
         getHandler(div).set新規決定情報初期値(被保険者番号, 識別コード);
+        getHandler(div).set状態_Five();
         ViewStateHolder.put(ViewStateKeys.画面モード, 新規);
         KogakuGassanShikyuKetteiHoseiDetailParameter parameter = getHandler(div).get決定情報タブ();
         ViewStateHolder.put(ViewStateKeys.詳細データ, parameter);
@@ -300,7 +321,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         getHandler(div).set新規以外の決定情報初期値(照会, 識別コード);
-        getHandler(div).set状態_Two();
+        getHandler(div).set状態_Two(true);
         ViewStateHolder.put(ViewStateKeys.画面モード, 照会);
         return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報補正);
     }
@@ -324,7 +345,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         } else {
             getHandler(div).set新規以外の決定情報初期値(削除, 識別コード);
         }
-        getHandler(div).set状態_Two();
+        getHandler(div).set状態_Two(true);
         ViewStateHolder.put(ViewStateKeys.画面モード, 削除);
         return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報補正);
     }
@@ -354,6 +375,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         boolean flag = false;
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))
                 || 照会.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
+            getHandler(div).set状態_Two(false);
             return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
         } else {
             flag = getHandler(div).is決定情報内容変更状態(para);

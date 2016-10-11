@@ -40,11 +40,15 @@ public class KyoutsuIdoReanrakuhyoEraTeiseiHandler {
         List<dgIdoReanrakuhyoEraTeisei_Row> rowList = new ArrayList<>();
         for (JukyusyaIdouJohoRirekEntity entity : entityList) {
             dgIdoReanrakuhyoEraTeisei_Row row = new dgIdoReanrakuhyoEraTeisei_Row();
-            row.getTxtIdobi().setValue(new RDate(
-                    entity.get異動日().getYearValue(),
-                    entity.get異動日().getMonthValue(),
-                    entity.get異動日().getDayValue()));
-            row.setTxtHihoBango(entity.get被保番号().value());
+            if (entity.get異動日() != null) {
+                row.getTxtIdobi().setValue(new RDate(
+                        entity.get異動日().getYearValue(),
+                        entity.get異動日().getMonthValue(),
+                        entity.get異動日().getDayValue()));
+            }
+            if (entity.get被保番号() != null) {
+                row.setTxtHihoBango(entity.get被保番号().value());
+            }
             row.setTxtHihokenshaShimei(entity.getかな氏名());
             // TODO QA104461により、エラー訂正処理全体の設計の見直しが必要なので、送付区分は実装できません。
 //            row.setTxtSofuKubun(entity.get送付区分());

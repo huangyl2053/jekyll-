@@ -145,9 +145,9 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private static final RString コード文言_性別コード = new RString("項目設定エラー：性別コード");
     private static final RString コード文言_住所 = new RString("項目設定エラー：住所");
     private static final RString コード文言_住所方書 = new RString("項目設定エラー：住所方書");
-    private static final RString 性別コード_1 = new RString("1");
-    private static final RString 性別コード_2 = new RString("2");
-    private static final RString 性別コード_3 = new RString("3");
+    private static final RString 性別コード_1 = new RString("0");
+    private static final RString 性別コード_2 = new RString("1");
+    private static final RString 性別コード_3 = new RString("2");
     private static final RString TEMP_TABLE = new RString("tempTorikomiKokuhoJyoho");
 
     @Override
@@ -169,7 +169,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(filePath);
+        return new BatchSimpleReader(filePath, Encode.UTF_8);
     }
 
     @Override

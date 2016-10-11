@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.definition.core.config.ConfigKeysHihokenshasho
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist.NenreiToutatuYoteishaCheckListManager;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashoikkatsuhakko.HihokenshashoIkkatsuHakkoModel;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho.IkkatsuHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU090010.DBU090010_HihokenshashoIkkatsuParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.HihokenshaShoBatchPrmDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.HihokenshaShoBatchPrmHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.ValidationHandler;
@@ -134,8 +134,8 @@ public class HihokenshaShoBatchPrm {
      * @param div 介護保険被保険者証一括作成Div
      * @return ResponseData<HihokenshaShoBatchPrmDiv>
      */
-    public ResponseData<IkkatsuHakkoBatchParameter> onClick_btnJikkou(HihokenshaShoBatchPrmDiv div) {
-        IkkatsuHakkoBatchParameter param = new IkkatsuHakkoBatchParameter(
+    public ResponseData<DBU090010_HihokenshashoIkkatsuParameter> onClick_btnJikkou(HihokenshaShoBatchPrmDiv div) {
+        DBU090010_HihokenshashoIkkatsuParameter param = new DBU090010_HihokenshashoIkkatsuParameter(
                 div.getRadShutsuryokuJoken().getSelectedKey(),
                 getFlexibleDate(div.getTxtKonkaiChushutsuFromYMD().getValue()),
                 div.getTxtKonkaiChushutsuFromTime().getValue(),
@@ -169,7 +169,7 @@ public class HihokenshaShoBatchPrm {
         RDate konkaiChushutsuToYMD = div.getTxtKonkaiChushutsuToYMD().getValue();
         RTime konkaiChushutsuToTime = div.getTxtKonkaiChushutsuToTime().getValue();
         if ((JYUKYUMONO_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())
-            && has開始日Changed(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, zenkaiShoriKijunYMD, zenkaiShoriKijunTime)) {
+                && has開始日Changed(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, zenkaiShoriKijunYMD, zenkaiShoriKijunTime)) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
@@ -180,7 +180,7 @@ public class HihokenshaShoBatchPrm {
                 validationMessages.add(getHandlerValidation(div).開始日変更のチェック());
             }
             if (isNoneAbsent(konkaiChushutsuToYMD, konkaiChushutsuToTime, konkaiShoriKijunYMD, konkaiShoriKijunTime)
-                && (konkaiChushutsuToYMD.isBefore(konkaiShoriKijunYMD)
+                    && (konkaiChushutsuToYMD.isBefore(konkaiShoriKijunYMD)
                     || (konkaiChushutsuToYMD.equals(konkaiShoriKijunYMD) && konkaiChushutsuToTime.isBefore(konkaiShoriKijunTime)))) {
                 validationMessages.add(getHandlerValidation(div).終了日変更のチェック());
             }
@@ -189,8 +189,8 @@ public class HihokenshaShoBatchPrm {
             }
         }
         if ((JNENNREI_RADIO_SENTAKU).equals(div.getRadShutsuryokuJoken().getSelectedKey())
-            && isNoneAbsent(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, konkaiChushutsuToYMD, konkaiChushutsuToTime)
-            && (konkaiChushutsuToYMD.isBefore(konkaiChushutsuFromYMD)
+                && isNoneAbsent(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, konkaiChushutsuToYMD, konkaiChushutsuToTime)
+                && (konkaiChushutsuToYMD.isBefore(konkaiChushutsuFromYMD)
                 || (konkaiChushutsuToYMD.equals(konkaiChushutsuFromYMD) && konkaiChushutsuToTime.isBefore(konkaiChushutsuFromTime)))) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getHandlerValidation(div).開始日と終了日の比較チェック());
@@ -201,8 +201,8 @@ public class HihokenshaShoBatchPrm {
 
     private boolean has開始日Changed(RDate konkaiChushutsuFromYMD, RTime konkaiChushutsuFromTime, RDate zenkaiShoriKijunYMD, RTime zenkaiShoriKijunTime) {
         return isNoneAbsent(konkaiChushutsuFromYMD, konkaiChushutsuFromTime, zenkaiShoriKijunYMD, zenkaiShoriKijunTime)
-               && (zenkaiShoriKijunYMD.isBefore(konkaiChushutsuFromYMD)
-                   || (konkaiChushutsuFromYMD.equals(zenkaiShoriKijunYMD) && zenkaiShoriKijunTime.isBefore(konkaiChushutsuFromTime)));
+                && (zenkaiShoriKijunYMD.isBefore(konkaiChushutsuFromYMD)
+                || (konkaiChushutsuFromYMD.equals(zenkaiShoriKijunYMD) && zenkaiShoriKijunTime.isBefore(konkaiChushutsuFromTime)));
     }
 
     private boolean isNoneAbsent(Object... values) {

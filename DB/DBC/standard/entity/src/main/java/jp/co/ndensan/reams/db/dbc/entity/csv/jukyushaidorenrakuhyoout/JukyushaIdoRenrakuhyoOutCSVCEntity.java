@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.csv.jukyushaidorenrakuhyoout;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -42,10 +40,10 @@ public class JukyushaIdoRenrakuhyoOutCSVCEntity {
     private final RString 異動事由;
 
     @CsvField(order = 7, name = "証記載保険者番号")
-    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final RString 証記載保険者番号;
 
     @CsvField(order = 8, name = "被保険者番号")
-    private final HihokenshaNo 被保険者番号;
+    private final RString 被保険者番号;
 
     @CsvField(order = 9, name = "開始年月日")
     private final RString 開始年月日;
@@ -86,8 +84,8 @@ public class JukyushaIdoRenrakuhyoOutCSVCEntity {
             RString 異動年月日,
             RString 異動区分コード,
             RString 異動事由,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            HihokenshaNo 被保険者番号,
+            RString 証記載保険者番号,
+            RString 被保険者番号,
             RString 開始年月日,
             RString 終了年月日,
             RString 一時差止区分コード,

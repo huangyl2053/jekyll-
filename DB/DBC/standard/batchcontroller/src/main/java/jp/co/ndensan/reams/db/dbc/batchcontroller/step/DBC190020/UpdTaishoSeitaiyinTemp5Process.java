@@ -165,7 +165,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
             }
             対象世帯員.setSoushuu(this.総収入額);
 
-            if (世帯出力flg) {
+            if (!世帯出力flg) {
                 対象世帯員.setMessage(MESSAGE_1);
                 対象世帯員.setShuturyokuUmu(RSTRING_2);
             } else if (RSTRING_2.equals(this.firstEntity.getKazeiKubun())) {
@@ -196,7 +196,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
 
     private void 被保険者番号世帯出力有無の判定() {
         for (TaishoSetaiinEntity 対象世帯員 : entityList) {
-            if (世帯出力flg) {
+            if (!世帯出力flg) {
                 対象世帯員.setMessage(MESSAGE_1);
                 対象世帯員.setShuturyokuUmu(RSTRING_2);
             } else if (RSTRING_2.equals(this.firstEntity.getKazeiKubun())) {

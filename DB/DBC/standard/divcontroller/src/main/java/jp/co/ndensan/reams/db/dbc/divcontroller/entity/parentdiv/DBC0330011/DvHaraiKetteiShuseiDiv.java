@@ -46,8 +46,6 @@ public class DvHaraiKetteiShuseiDiv extends Panel {
     private TextBoxDate btnKetteiDate;
     @JsonProperty("btnShoninDate")
     private TextBoxDateRange btnShoninDate;
-    @JsonProperty("ccdJigyosha")
-    private ShisetsuJohoCommonChildDivDiv ccdJigyosha;
     @JsonProperty("radKetteiKubun")
     private RadioButton radKetteiKubun;
     @JsonProperty("txtShoninShinaiRiyu")
@@ -58,6 +56,8 @@ public class DvHaraiKetteiShuseiDiv extends Panel {
     private DropDownList ddlRiyoshafutanJogenGaku;
     @JsonProperty("linLine6")
     private HorizontalLine linLine6;
+    @JsonProperty("ccdJigyosha")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyosha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -192,15 +192,6 @@ public class DvHaraiKetteiShuseiDiv extends Panel {
     }
 
     /*
-     * getccdJigyosha
-     * @return ccdJigyosha
-     */
-    @JsonProperty("ccdJigyosha")
-    public IShisetsuJohoCommonChildDiv getCcdJigyosha() {
-        return ccdJigyosha;
-    }
-
-    /*
      * getradKetteiKubun
      * @return radKetteiKubun
      */
@@ -288,6 +279,15 @@ public class DvHaraiKetteiShuseiDiv extends Panel {
     @JsonProperty("linLine6")
     public void setLinLine6(HorizontalLine linLine6) {
         this.linLine6 = linLine6;
+    }
+
+    /*
+     * getccdJigyosha
+     * @return ccdJigyosha
+     */
+    @JsonProperty("ccdJigyosha")
+    public IShisetsuJohoCommonChildDiv getCcdJigyosha() {
+        return ccdJigyosha;
     }
 
     // </editor-fold>

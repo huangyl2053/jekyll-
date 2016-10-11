@@ -14,7 +14,7 @@
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
         FROM
             (SELECT * FROM 
-            (SELECT *,Row_Number() OVER (partition by "hihokenshaNo" ORDER BY "idoYMD" desc ,"edaNo"  DESC) AS "rrkno" 
+            (SELECT *,Row_Number() OVER (partition by "hihokenshaNo","ichigoShikakuShutokuYMD","shikakuSoshitsuTodokedeYMD" ORDER BY "idoYMD" desc ,"edaNo"  DESC) AS "rrkno" 
             FROM rgdb."DbT1001HihokenshaDaicho" 
             WHERE "hihokennshaKubunCode" = '1'
             AND "logicalDeletedFlag" = false 
@@ -43,7 +43,10 @@
                 AND "DbT2002Fuka"."choshuHohoRirekiNo" = "DbT2001ChoshuHoho"."rirekiNo"
             )
         ON 
-            "DbT2002Fuka"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"             
+            "DbT2002Fuka"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"    
+        ORDER BY
+            "DbT1001HihokenshaDaicho"."hihokenshaNo",
+            "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD"
     </select>
     
     <resultMap id="resultMap_FuchoKarisanteiFukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiFukaEntity" autoMapping="true">

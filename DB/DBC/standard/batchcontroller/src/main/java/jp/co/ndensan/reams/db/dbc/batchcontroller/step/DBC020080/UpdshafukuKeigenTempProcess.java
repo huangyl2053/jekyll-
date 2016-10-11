@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080;
 
 import jp.co.ndensan.reams.db.dbc.business.core.dbc020080.DBC020080DataUtil;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.UpdshafukuKeigenTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.RiyoshaFutanMatchingEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.RiyoshaFutangakuEntity;
@@ -28,12 +28,8 @@ public class UpdshafukuKeigenTempProcess extends BatchKeyBreakBase<RiyoshaFutanM
 
     private static final RString TABLE_NAME2 = new RString("JissekiFutangakuDataTemp2");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
-//    private static final RString PATH1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-//            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTemp");
-//    private static final RString PATH2 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-//            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTempJigyobun");
-    private DBC020080ProcessParameter parameter;
+            + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.getShafukuKeigenTempHenko");
+    private UpdshafukuKeigenTempProcessParameter parameter;
     private DBC020080DataUtil util;
     private JissekiFutangakuDataTempEntity updEntity;
     private boolean isあり;
@@ -54,8 +50,7 @@ public class UpdshafukuKeigenTempProcess extends BatchKeyBreakBase<RiyoshaFutanM
 
     @Override
     protected IBatchReader createReader() {
-//        RString path = parameter.is事業分フラグ() ? PATH2 : PATH1;
-        return new BatchDbReader(PATH, parameter.toDBC020080MyBatisParameter());
+        return new BatchDbReader(PATH, parameter.toUpdshafukuKeigenTempMyBatisParameter());
     }
 
     @Override

@@ -73,7 +73,7 @@ public class JigyoHokokuGeppoIppanShokanDBU200002Process extends BatchProcessBas
     @Override
     protected void process(JigyouHoukokuTokeiThuRelateEntity entity) {
         ShoriKekkaKakuninListEntity eucEntity = new ShoriKekkaKakuninListEntity();
-        eucEntity.set作成日時(processParameter.get処理日時());
+        eucEntity.set作成日時(processParameter.get処理日時().getRDateTime());
         eucEntity.set保険者番号(保険者番号);
         eucEntity.set保険者名(保険者名);
         eucEntity.set項目コード1(entity.getKomokuNo1());

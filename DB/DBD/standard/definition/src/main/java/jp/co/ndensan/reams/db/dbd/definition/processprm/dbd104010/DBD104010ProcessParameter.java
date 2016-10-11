@@ -20,7 +20,7 @@ import lombok.Setter;
 /**
  * 受給者減免実施状況のProcessパラメータクラスです。
  *
- * @reamsid_L　DBD-3770-030 liuwei2
+ * @reamsid_L DBD-3770-030 liuwei2
  */
 @Getter
 @Setter

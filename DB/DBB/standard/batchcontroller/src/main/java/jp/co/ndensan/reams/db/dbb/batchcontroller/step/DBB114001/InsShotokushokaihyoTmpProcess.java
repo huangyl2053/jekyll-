@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001;
 
+import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.InsShotokushokaihyoTmpParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataMapbEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity;
@@ -34,8 +35,6 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
 
     private static final int INT_0 = 0;
     private static final int INT_2 = 2;
-    private static final RString INDEX_1 = new RString("1");
-    private static final RString INDEX_2 = new RString("2");
     private static final RString INDEX_112 = new RString("112");
     private static final RString INDEX_120 = new RString("120");
     private static final RString 管内_1 = new RString("1");
@@ -45,17 +44,14 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
     private static final RString 導入形態コード_120 = new RString("120");
     private static final RString 表示する = new RString("1");
     private static final RString 表示しない = new RString("0");
-    private static final RString SELECTPATH_1 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
-            + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.select所得照会票データ1");
-    private static final RString SELECTPATH_2 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
-            + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.select所得照会票データ2");
-    private static final RString SELECTPATH_3 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
-            + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.select所得照会票データ3");
+    private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
+            + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.select所得照会票データ");
     private static final RString 所得照会票データTEMP = new RString("ShotokuShoukaiDataTemp");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 所得照会票データwriter;
     private ShotokuShokaihyoHakkoProcessParameter processParameter;
+    private InsShotokushokaihyoTmpParameter myBatisParameter;
     private RString 都道府県名;
     private RString 市町村名;
     private RString 郡名;
@@ -83,17 +79,14 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
                 処理日付, SubGyomuCode.DBU介護統計報告);
         市町村名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
                 処理日付, SubGyomuCode.DBU介護統計報告);
+
     }
 
     @Override
     protected IBatchReader createReader() {
-        if (INDEX_1.equals(processParameter.get出力対象())) {
-            return new BatchDbReader(SELECTPATH_3);
-        } else if (INDEX_2.equals(processParameter.get出力対象())) {
-            return new BatchDbReader(SELECTPATH_1);
-        } else {
-            return new BatchDbReader(SELECTPATH_2);
-        }
+        myBatisParameter = new InsShotokushokaihyoTmpParameter();
+        myBatisParameter.set出力対象(processParameter.get出力対象());
+        return new BatchDbReader(SELECTPATH, myBatisParameter);
     }
 
     @Override

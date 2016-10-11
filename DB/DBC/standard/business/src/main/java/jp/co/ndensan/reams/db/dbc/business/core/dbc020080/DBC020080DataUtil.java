@@ -224,17 +224,17 @@ public class DBC020080DataUtil {
      * 対象者抽出　処理時
      *
      * @param entity DBC020080TaishoDataEntity
-     * @param parameter DBC020080ProcessParameter
+     * @param 処理日時 RDateTime
      * @param 市町村名 RString
      * @return JissekiFutangakuDataTempEntity
      */
     public JissekiFutangakuDataTempEntity toJissekiTempEntityTaishoChuShu(DBC020080TaishoDataEntity entity,
-            DBC020080ProcessParameter parameter, RString 市町村名) {
+            RDateTime 処理日時, RString 市町村名) {
         JissekiFutangakuDataTempEntity result = new JissekiFutangakuDataTempEntity();
         result.setShinseibiMikeisanKubun(ONE);
         result.setSeiriNo(entity.getSeiriNo());
         result.setRirekiNo(nonullRStr(entity.getRirekiNo()));
-        result.setJikoFutanKeisanYMD(nonullRStr(getRDate(parameter.get処理日時())));
+        result.setJikoFutanKeisanYMD(nonullRStr(getRDate(処理日時)));
         result.setHihokenshaNo(nonullRStr(entity.getTaishoHihokenshaNo()));
         result.setTaishoNendo(nonullRStr(entity.getTaishoNendo()));
         result.setHokenshaNo(nonullRStr(entity.getHokenshaNo()));
@@ -534,15 +534,15 @@ public class DBC020080DataUtil {
      * update受託なし処理時のメソッドです。
      *
      * @param 実績負担額 JissekiFutangakuDataTempEntity
-     * @param parameter DBC020080ProcessParameter
+     * @param 処理日時 RDateTime
      */
-    public void update受託なし処理時(JissekiFutangakuDataTempEntity 実績負担額, DBC020080ProcessParameter parameter) {
+    public void update受託なし処理時(JissekiFutangakuDataTempEntity 実績負担額, RDateTime 処理日時) {
         loopSetDecimal(実績負担額, SUMI_JIKOFUTANGAKU, JIKOFUTANGAKU);
         loopSetDecimal(実績負担額, SUMI_70_74KOGAKUSHIKYUGAKU, UCHISU_70_74JIKOFUTANGAKU);
         loopSetRString(実績負担額, SUMI_TEKIYO, TEKIYO);
         実績負担額.setSumi_Gokei_JikoFutanGaku(実績負担額.getGokei_JikoFutanGaku());
         実績負担額.setSumi_Gokei_70_74JikoFutanGaku(実績負担額.getGokei_70_74JikoFutanGaku());
-        RString 処理日 = getDate(parameter.get処理日時());
+        RString 処理日 = getDate(処理日時);
         実績負担額.setJikoFutanKeisanYMD2(処理日);
         実績負担額.setBatchHoseiJissiYMD(処理日);
     }
@@ -582,10 +582,10 @@ public class DBC020080DataUtil {
      *
      * @param 実績負担額Set JissekiFutangakuDataTempEntity
      * @param 実績負担額Get JissekiFutangakuDataTempEntity
-     * @param parameter DBC020080ProcessParameter
+     * @param 処理日時 RDateTime
      */
     public void updJIssekiFutangakuTemp償還受託あり(JissekiFutangakuDataTempEntity 実績負担額Set,
-            JissekiFutangakuDataTempEntity 実績負担額Get, DBC020080ProcessParameter parameter) {
+            JissekiFutangakuDataTempEntity 実績負担額Get, RDateTime 処理日時) {
         loopSetDecimal(実績負担額Set, JIKOFUTANGAKU, 実績負担額Get, JIKOFUTANGAKUWORK);
         loopSetDecimal(実績負担額Set, UCHISU_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
         loopSetRString(実績負担額Set, TEKIYO, 実績負担額Get, BIKO);
@@ -593,7 +593,7 @@ public class DBC020080DataUtil {
         実績負担額Set.setGokei_70_74KogakuShikyuGaku(loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU));
         実績負担額Set.setDataSakuseiKubun(TWO);
         実績負担額Set.setJikoFutanKeisanYMD2(TEKIYO);
-        実績負担額Set.setJikoFutanKeisanYMD(nonullRStr(getRDate(parameter.get処理日時())));
+        実績負担額Set.setJikoFutanKeisanYMD(nonullRStr(getRDate(処理日時)));
     }
 
     /**
@@ -601,10 +601,10 @@ public class DBC020080DataUtil {
      *
      * @param 実績負担額Set JissekiFutangakuDataTempEntity
      * @param 実績負担額Get JissekiFutangakuDataTempEntity
-     * @param parameter DBC020080ProcessParameter
+     * @param 処理日時 RDateTime
      */
     public void updJIssekiFutangakuTemp呼び出し元自己負担額計算(JissekiFutangakuDataTempEntity 実績負担額Set,
-            JissekiFutangakuDataTempEntity 実績負担額Get, DBC020080ProcessParameter parameter) {
+            JissekiFutangakuDataTempEntity 実績負担額Get, RDateTime 処理日時) {
         loopSetDecimal(実績負担額Set, JIKOFUTANGAKU, 実績負担額Get, JIKOFUTANGAKUWORK);
         loopSetDecimal(実績負担額Set, UCHISU_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
         loopSetRString(実績負担額Set, TEKIYO, 実績負担額Get, BIKO);
@@ -621,9 +621,9 @@ public class DBC020080DataUtil {
         loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU);
         実績負担額Set.setDataSakuseiKubun(TWO);
         実績負担額Set.setJikoFutanKeisanYMD2(TEKIYO);
-        RString 処理日時 = nonullRStr(getRDate(parameter.get処理日時()));
-        実績負担額Set.setJikoFutanKeisanYMD(処理日時);
-        実績負担額Set.setBatchHoseiJissiYMD(処理日時);
+        RString 処理日 = nonullRStr(getRDate(処理日時));
+        実績負担額Set.setJikoFutanKeisanYMD(処理日);
+        実績負担額Set.setBatchHoseiJissiYMD(処理日);
     }
 
     private FlexibleYearMonth getYMFromIndex(int index, FlexibleYear taishoNendo) {
@@ -974,6 +974,10 @@ public class DBC020080DataUtil {
         result.set識別コード(entity.getIchiranShikibetsuCode());
         result.set一覧用確認区分(entity.getIchiranKakuninKubun());
         result.set一覧用確認区分２(entity.getIchiranKakuninKubun2());
+        result.setYubinNo(entity.getIchiranYubinNo());
+        result.setChoikiCode(entity.getIchiranChoikiCode());
+        result.setGyoseikuCode(entity.getIchiranGyoseikuCode());
+        result.setHokenshaNo(entity.getHokenshaNo());
         return result;
     }
 

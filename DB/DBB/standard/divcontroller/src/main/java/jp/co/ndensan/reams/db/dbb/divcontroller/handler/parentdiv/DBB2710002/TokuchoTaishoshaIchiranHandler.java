@@ -758,7 +758,6 @@ public class TokuchoTaishoshaIchiranHandler {
         div.getCcdKaigoKanryoMessage()
                 .setSuccessMessage(new RString(処理状態Message.evaluate()), message_TOP, message_BOTTOM);
     }
-//private
 
     /**
      * 出力対象変化後の処理。<br/>

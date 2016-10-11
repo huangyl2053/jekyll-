@@ -8,14 +8,13 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.DBC190030ProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,11 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * バッチ設計_DBC110065_基準収入額適用申請書_異動分作成のプロセスクラスです。
  *
- * @reamsid_L DBC-4640-030 liuyang
+ * @reamsid_L DBC-4640-030 jianglaisheng
  */
-public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<DbT1001HihokenshaDaichoEntity> {
+public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<HihokenshaDaichoTempSixColumnEntity> {
 
-    private static final ReportId 帳票ID = new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho");
     private static final RString TABLENAME = new RString("TmpSetaiHaaku");
     private static final RString PATH3 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc190030."
             + "IDBC190030Mapper.get被保険者台帳3");
@@ -65,12 +63,11 @@ public class InsSetaiyinShotokuJyohoTemp2Process extends BatchProcessBase<DbT100
                 && ShinseishoTorokuChushutsuTaisho.無条件抽出.getコード().equals(抽出対象)) {
             path = PATH4;
         }
-        RString 出力順 = new DBC190030ProcessCore().init出力順(帳票ID, parameter.get帳票出力順ID());
-        return new BatchDbReader(path, parameter.toDBC190030MyBatisParameter(出力順));
+        return new BatchDbReader(path, parameter.toDBC190030MyBatisParameter());
     }
 
     @Override
-    protected void process(DbT1001HihokenshaDaichoEntity entity) {
+    protected void process(HihokenshaDaichoTempSixColumnEntity entity) {
         SetaiHaakuEntity 世帯員把握入力一時 = new SetaiHaakuEntity();
         世帯員把握入力一時.setHihokenshaNo(entity.getHihokenshaNo());
         世帯員把握入力一時.setShikibetsuCode(entity.getShikibetsuCode());

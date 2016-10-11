@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.TyohyoShutuRyokuYoJukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100026.JukyushaDaichoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -20,21 +21,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSource> {
 
     private final TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳;
+    private final RString 出力オプション;
     private static final int NOCOUNT_5 = 5;
     private static final int NOCOUNT_7 = 7;
+    private static final RString ZERO = new RString("0");
+    private static final RString ONE = new RString("1");
 
     /**
      * インスタンスを生成します。
      *
      * @param 帳票出力用受給者台帳 TyohyoShutuRyokuYoJukyushaDaichoEntity
-     * @return 受給者台帳
+     * @param 出力オプション RString
+     *
      */
-    public static JukyushaDaichoReport createReport(TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳) {
-        return new JukyushaDaichoReport(帳票出力用受給者台帳);
-    }
-
-    private JukyushaDaichoReport(TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳) {
+    public JukyushaDaichoReport(TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳, RString 出力オプション) {
         this.帳票出力用受給者台帳 = 帳票出力用受給者台帳;
+        this.出力オプション = 出力オプション;
 
     }
 
@@ -45,6 +47,20 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
      */
     @Override
     public void writeBy(ReportSourceWriter<JukyushaDaichoReportSource> writer) {
+        if (this.出力オプション.equals(ZERO)) {
+            get帳票出力用情報(writer);
+        } else if (this.出力オプション.equals(ONE)) {
+            int page = 1;
+            for (int index = 0; index < NOCOUNT_7; index++) {
+                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page);
+                IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
+                writer.writeLine(builder);
+            }
+        }
+
+    }
+
+    private void get帳票出力用情報(ReportSourceWriter<JukyushaDaichoReportSource> writer) {
         int page1 = 0;
         int page2 = 0;
         int page3 = 0;

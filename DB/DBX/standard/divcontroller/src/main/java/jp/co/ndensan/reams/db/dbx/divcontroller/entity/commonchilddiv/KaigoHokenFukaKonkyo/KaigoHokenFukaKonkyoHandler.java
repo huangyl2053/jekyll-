@@ -486,7 +486,7 @@ public class KaigoHokenFukaKonkyoHandler {
                 }
             }
             if (!resultList仮算定用.isEmpty()) {
-                FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1 - 1);
+                FukaJohoRelateSearchResult resultMax仮算定用 = resultList仮算定用.get(resultList仮算定用.size() - 1);
                 set仮算定状態(指定賦課情報, resultMax仮算定用);
             }
         }

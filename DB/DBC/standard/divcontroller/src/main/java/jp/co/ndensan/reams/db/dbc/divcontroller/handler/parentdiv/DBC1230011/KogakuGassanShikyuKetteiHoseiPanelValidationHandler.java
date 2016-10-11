@@ -137,6 +137,16 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
         return createDictionary検索条件連絡票整理番号().check(messages);
     }
 
+    /**
+     * 検索条件_連絡票整理番号入力値チェックです。
+     *
+     * @return IValidationMessages
+     */
+    public ValidationMessageControlPairs validate決定情報を追加する() {
+        IValidationMessages messages = new ControlValidator(div).valide決定情報を追加する();
+        return createDictionary決定情報を追加する().check(messages);
+    }
+
     private ValidationDictionary createDictionary新規登録対象年度() {
         return new ValidationDictionaryBuilder()
                 .add(ChoteiboSakuseiValidationMessages.新規登録_対象年度入力値が不正,
@@ -192,6 +202,17 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
                         div.getSearchPanel().getTxtKensakuShikyuSeiriNo())
                 .add(ChoteiboSakuseiValidationMessages.検索条件_連絡票整理番号不一致_先頭6桁目から11桁目,
                         div.getSearchPanel().getTxtKensakuShikyuSeiriNo())
+                .build();
+    }
+
+    private ValidationDictionary createDictionary決定情報を追加する() {
+        return new ValidationDictionaryBuilder()
+                .add(ChoteiboSakuseiValidationMessages.対象年度必須入力,
+                        div.getShinkiPanel().getTxtShinkiTaishoNendo())
+                .add(ChoteiboSakuseiValidationMessages.証記載保険者番号必須入力,
+                        div.getShinkiPanel().getTxtShinkiHihokenshaNo())
+                .add(ChoteiboSakuseiValidationMessages.支給申請書整理番号必須入力,
+                        div.getShinkiPanel().getTxtShinkiShikyuSeiriNo())
                 .build();
     }
 
@@ -296,10 +317,30 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
                     .thenAdd(ChoteiboSakuseiValidationMessages.検索条件_連絡票整理番号不一致_先頭6桁目から11桁目).messages());
             return messages;
         }
+
+        /**
+         * 決定情報を追加する入力値チェックです。
+         *
+         * @return IValidationMessages
+         */
+        public IValidationMessages valide決定情報を追加する() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(KogakuGassanShikyuKetteiHoseiPanelSpec.対象年度必須入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.対象年度必須入力)
+                    .ifNot(KogakuGassanShikyuKetteiHoseiPanelSpec.証記載保険者番号必須入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.証記載保険者番号必須入力)
+                    .ifNot(KogakuGassanShikyuKetteiHoseiPanelSpec.支給申請書整理番号必須入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.支給申請書整理番号必須入力).messages());
+            return messages;
+        }
     }
 
     private static enum ChoteiboSakuseiValidationMessages implements IValidationMessage {
 
+        対象年度必須入力(UrErrorMessages.必須, 対象年度.toString()),
+        証記載保険者番号必須入力(UrErrorMessages.必須, 証記載保険者番号.toString()),
+        支給申請書整理番号必須入力(UrErrorMessages.必須, 支給申請書整理番号.toString()),
         新規登録_対象年度入力値が不正(UrErrorMessages.入力値が不正_追加メッセージあり, 年度.toString()),
         新規登録_対象年度_未指定(UrErrorMessages.未指定, 平成20年度以降の年度.toString()),
         新規登録_証記載保険者番号入力値が不正(UrErrorMessages.入力値が不正_追加メッセージあり, 証記載保険者番号.toString()),
@@ -328,33 +369,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
         public Message getMessage() {
             return message;
         }
-    }
-
-    /**
-     * 決定情報を追加する入力値チェックです。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs check決定情報を追加する() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getShinkiPanel().getTxtShinkiTaishoNendo().getValue() == null) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
-                            UrErrorMessages.必須, 対象年度.toString())));
-        }
-        if (div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() == null
-                || div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
-                            UrErrorMessages.必須, 証記載保険者番号.toString())));
-        }
-        if (div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue() == null
-                || div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
-                            UrErrorMessages.必須, 支給申請書整理番号.toString())));
-        }
-        return validPairs;
     }
 
     /**
@@ -411,7 +425,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
         }
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getValue() != null
                 && !div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getValue().isEmpty()
-                && NUM_TWENTY != div.getSearchPanel().getTxtKensakuShikyuSeiriNo().getValue().length()) {
+                && NUM_TWENTY != div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                getTxtJikoFutanSeiriNo().getValue().length()) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.桁数が不正, 自己負担額証明書整理番号.toString(), TWENTY.toString())));

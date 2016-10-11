@@ -52,6 +52,11 @@ public class JukyushaIdoRenrakuhyoOutCSV {
     private static final RString 定数5D11 = new RString("5D11");
     private static final RString 定数5E11 = new RString("5E11");
     private static final int 定数_1 = 1;
+    private RString 証記載保険者番号 = RString.EMPTY;
+    private RString 被保険者番号 = RString.EMPTY;
+    private RString 郵便番号 = RString.EMPTY;
+    private RString 電話番号 = RString.EMPTY;
+    private RString 世帯集約番号 = RString.EMPTY;
     private CsvWriter csvWriter;
     private RString filePath;
 
@@ -109,29 +114,56 @@ public class JukyushaIdoRenrakuhyoOutCSV {
     }
 
     private JukyushaIdoRenrakuhyoOutCSVBEntity データレコード基本送付(KyodoShoriKihonSofuTempEntity entity) {
+        if (entity.get証記載保険者番号() != null) {
+            証記載保険者番号 = entity.get証記載保険者番号().getColumnValue();
+        }
+        if (entity.get被保険者番号() != null) {
+            被保険者番号 = entity.get被保険者番号().getColumnValue();
+        }
+        if (entity.get郵便番号() != null) {
+            郵便番号 = entity.get郵便番号().getYubinNo();
+        }
+        if (entity.get電話番号() != null) {
+            電話番号 = entity.get電話番号().getColumnValue();
+        }
         JukyushaIdoRenrakuhyoOutCSVBEntity csvEntity = new JukyushaIdoRenrakuhyoOutCSVBEntity(定数_TWO, 定数_TWO, 定数5C11,
                 set西暦(entity.get異動年月日()), entity.get異動区分コード(),
-                entity.get受給者異動事由(), entity.get証記載保険者番号(),
-                entity.get被保険者番号(), entity.get被保険者氏名(),
-                entity.get郵便番号(), entity.get住所カナ(), entity.get住所(),
-                entity.get電話番号(), entity.get帳票出力順序コード(), 改行);
+                entity.get受給者異動事由(), 証記載保険者番号,
+                被保険者番号, entity.get被保険者氏名(),
+                郵便番号, entity.get住所カナ(), entity.get住所(),
+                電話番号, entity.get帳票出力順序コード(), 改行);
         return csvEntity;
     }
 
     private JukyushaIdoRenrakuhyoOutCSVCEntity データレコード償還送付(KyodoShoriShouKannTempEntity entity) {
+        if (entity.get証記載保険者番号() != null) {
+            証記載保険者番号 = entity.get証記載保険者番号().getColumnValue();
+        }
+        if (entity.get被保険者番号() != null) {
+            被保険者番号 = entity.get被保険者番号().getColumnValue();
+        }
         JukyushaIdoRenrakuhyoOutCSVCEntity csvEntity = new JukyushaIdoRenrakuhyoOutCSVCEntity(定数_TWO, 定数_THREE, 定数5D11,
                 set西暦(entity.get異動年月日()), entity.get異動区分コード(), entity.get受給者異動事由(),
-                entity.get証記載保険者番号(), entity.get被保険者番号(),
+                証記載保険者番号, 被保険者番号,
                 set西暦(entity.get保険給付支払一時差止開始年月日()), set西暦(entity.get保険給付支払一時差止終了年月日()),
                 entity.get保険給付支払一時差止区分コード(), entity.get保険給付支払一時差止金額(), 改行);
         return csvEntity;
     }
 
     private JukyushaIdoRenrakuhyoOutCSVDEntity データレコード高額送付(KyodoShoriKooGakuTempEntity entity) {
+        if (entity.get証記載保険者番号() != null) {
+            証記載保険者番号 = entity.get証記載保険者番号().getColumnValue();
+        }
+        if (entity.get被保険者番号() != null) {
+            被保険者番号 = entity.get被保険者番号().getColumnValue();
+        }
+        if (entity.get世帯集約番号() != null) {
+            世帯集約番号 = entity.get世帯集約番号().getColumnValue();
+        }
         JukyushaIdoRenrakuhyoOutCSVDEntity csvEntity = new JukyushaIdoRenrakuhyoOutCSVDEntity(定数_TWO, 定数_FOUR, 定数5E11,
-                set西暦(entity.get異動年月日()), entity.get異動区分コード(), entity.get受給者異動事由(), entity.get証記載保険者番号(),
-                entity.get被保険者番号(), entity.get世帯集約番号(), entity.get世帯所得区分コード(),
-                entity.get世帯所得区分コード(), entity.is老齢福祉年金受給有フラグ(),
+                set西暦(entity.get異動年月日()), entity.get異動区分コード(), entity.get受給者異動事由(),
+                証記載保険者番号, 被保険者番号, 世帯集約番号, entity.get世帯所得区分コード(),
+                entity.get所得区分コード(), entity.is老齢福祉年金受給有フラグ(),
                 entity.is利用者負担第２段階有フラグ(), entity.is支給申請書出力有フラグ(), 改行);
         return csvEntity;
     }
