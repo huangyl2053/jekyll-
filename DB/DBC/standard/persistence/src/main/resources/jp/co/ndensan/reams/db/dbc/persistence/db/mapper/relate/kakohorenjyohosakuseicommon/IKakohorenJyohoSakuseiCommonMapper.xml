@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-2840-031 sunhaidi -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper">  
+    
+    <select id="select被保険者一時TBL情報" resultOrdered="true" resultMap="resultMap_HihokenshaTempEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonParameter"  fetchSize="500">
+        SELECT 
+          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+        FROM "DbWT1001Hihokensha"
+        <where>
+            <if test="usesサービス提供年月">
+                "exServiceTeikyoYm" <![CDATA[>=]]> #{サービス提供年月}
+            </if>
+        </where>
+    </select>
+     <select id="select新旧被保険者番号変換情報" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonParameter"  fetchSize="500">
+          SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+            ,DbT7026ShinKyuHihokenshaNoHenkan.*
+          FROM 
+            "DbWT1001Hihokensha"
+          INNER JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7026ShinKyuHihokenshaNoHenkanMapper.noDeleted_DbT7026ShinKyuHihokenshaNoHenkan" />) AS DbT7026ShinKyuHihokenshaNoHenkan
+            ON "DbWT1001Hihokensha"."exHihokenshaNo" = DbT7026ShinKyuHihokenshaNoHenkan."dbT7026ShinKyuHihokenshaNoHenkan_shinNo"
+         WHERE 
+            ("DbWT1001Hihokensha"."exShoHokenshaNo" = '' OR "DbWT1001Hihokensha"."exShoHokenshaNo" IS NULL)
+          AND "DbWT1001Hihokensha"."henkanFlag" = '1'
+     </select>
+     <select id="select合併市町村情報" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonParameter"  fetchSize="500">
+          SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+            ,DbT7056GappeiShichoson.*
+          FROM 
+            "DbWT1001Hihokensha"
+          INNER JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.noDeleted_DbT7056GappeiShichoson" />) AS DbT7056GappeiShichoson
+            ON "DbWT1001Hihokensha"."oldShichosonCode" = DbT7056GappeiShichoson."dbT7056GappeiShichoson_kyuShichosonCode"
+         WHERE 
+            "DbWT1001Hihokensha"."oldShichosonCode" <![CDATA[<>]]> ''
+          AND DbT7056GappeiShichoson."dbT7056GappeiShichoson_gappeiYMD" = #{合併年月日}
+          AND DbT7056GappeiShichoson."dbT7056GappeiShichoson_chiikiNo" = #{地域番号}
+      </select>
+     
+      <select id="select被保険者一時TBL情報By証記載保険者番号" resultOrdered="true" resultMap="resultMap_HihokenshaTempEntity" 
+           fetchSize="500">
+        SELECT 
+          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+        FROM "DbWT1001Hihokensha"
+       WHERE
+          "DbWT1001Hihokensha"."exShoHokenshaNo" = '' OR "DbWT1001Hihokensha"."exShoHokenshaNo" IS NULL
+     </select>
+    
+     <select id="select被保険者台帳" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" 
+             fetchSize="500">
+        SELECT 
+          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+           ,DbFt7802FindHihokenshaDaicho."kyuShichosonCode"
+           ,DbFt7802FindHihokenshaDaicho."koikinaiJushochiTokureiFlag"
+           ,DbFt7802FindHihokenshaDaicho."koikinaiTokureiSochimotoShichosonCode"
+           ,DbFt7802FindHihokenshaDaicho."shichosonCode" AS "hihokenshaDaichoShichosonCode"
+        FROM "DbWT1001Hihokensha",
+        rgdb."DbFt7802FindHihokenshaDaicho"(to_char(to_date("DbWT1001Hihokensha"."exServiceTeikyoYm",'YYYYMM') + interval '1 Month' - interval '1 Day','YYYYMMDD')  ,"DbWT1001Hihokensha"."exHihokenshaNo") AS DbFt7802FindHihokenshaDaicho
+    </select>
+    
+    
+    <select id="select合併なし市町村情報" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" 
+            fetchSize="500">
+          SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+            ,DbT7051KoseiShichosonMaster.*
+          FROM 
+            "DbWT1001Hihokensha"
+          INNER JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS DbT7051KoseiShichosonMaster
+            ON "DbWT1001Hihokensha"."oldShichosonCode" = DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode"
+         WHERE 
+             ("DbWT1001Hihokensha"."oldShichosonCode" = '' OR "DbWT1001Hihokensha"."oldShichosonCode" IS NULL)
+          AND DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_gappeiKyuShichosonKubun" = '0'
+      </select>
+      
+      <select id="select合併あり市町村情報" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" 
+            fetchSize="500">
+          SELECT 
+            被保険者.*
+            ,DbT7051KoseiShichosonMaster.*
+          FROM 
+            (SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" /> 
+              FROM "DbWT1001Hihokensha" 
+              WHERE "DbWT1001Hihokensha"."oldShichosonCode" <![CDATA[<>]]> '' 
+                 AND NOT EXISTS (
+                             SELECT 'X' FROM rgdb."DbT7055GappeiJoho"
+                              WHERE "DbWT1001Hihokensha"."shichosonCode" = "DbT7055GappeiJoho"."shichosonCode"
+                                AND "DbWT1001Hihokensha"."exServiceTeikyoYm" <![CDATA[<]]> SUBSTR("DbT7055GappeiJoho"."kokuhorenDataFromYMD",1,6)
+                          ) ) AS 被保険者
+          INNER JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS DbT7051KoseiShichosonMaster
+            ON 被保険者."shichosonCode" = DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode"
+         WHERE 
+            DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_gappeiKyuShichosonKubun" = '0'
+      </select>
+      
+      <select id="select合併あり被保険者一時TBL情報" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity"  fetchSize="500">
+          SELECT 
+             被保険者.*
+             ,合併.*
+          FROM 
+            (SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" /> 
+              FROM "DbWT1001Hihokensha"
+              WHERE "DbWT1001Hihokensha"."oldShichosonCode" <![CDATA[<>]]> '' 
+                 AND ("DbWT1001Hihokensha"."exShoHokenshaNo" = '' OR "DbWT1001Hihokensha"."exShoHokenshaNo" IS NULL)) AS 被保険者
+          INNER JOIN 
+            (
+              SELECT 
+                    合併前市町村."dbT7051KoseiShichosonMaster_shichosonCode" AS "合併前市町村_市町村コード"
+                   ,合併情報TBL.*
+                   ,合併後市町村.*
+                   ,row_number() over (partition by 合併前市町村."dbT7051KoseiShichosonMaster_shichosonCode" order by 合併前市町村."dbT7051KoseiShichosonMaster_kanyuYMD" asc) AS rowNum
+              FROM (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS 合併前市町村
+              INNER JOIN 
+                  (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.noDeleted_DbT7055GappeiJoho" />) AS 合併情報TBL
+                  ON  合併前市町村."dbT7051KoseiShichosonMaster_gappeiChiikiNo" = 合併情報TBL."dbT7055GappeiJoho_chiikiNo"
+              INNER JOIN 
+                  (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS 合併後市町村
+                 ON 合併情報TBL."dbT7055GappeiJoho_shichosonCode" = 合併後市町村."dbT7051KoseiShichosonMaster_shichosonCode"
+                 AND 合併情報TBL."dbT7055GappeiJoho_gappeiYMD" = 合併後市町村."dbT7051KoseiShichosonMaster_kanyuYMD"
+            ) AS 合併
+            ON 被保険者."shichosonCode" = 合併."合併前市町村_市町村コード"
+         WHERE 
+            合併.rowNum = 1
+       </select>
+      
+       <select id="select新旧被保険者番号変換情報2" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" 
+              fetchSize="500">
+          SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+            ,DbT7026ShinKyuHihokenshaNoHenkan.*
+          FROM 
+            "DbWT1001Hihokensha"
+          INNER JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7026ShinKyuHihokenshaNoHenkanMapper.noDeleted_DbT7026ShinKyuHihokenshaNoHenkan" />) AS DbT7026ShinKyuHihokenshaNoHenkan
+            ON "DbWT1001Hihokensha"."exHihokenshaNo" = DbT7026ShinKyuHihokenshaNoHenkan."dbT7026ShinKyuHihokenshaNoHenkan_shinNo"
+         WHERE 
+           "DbWT1001Hihokensha"."henkanFlag" = '1'
+     </select>
+     <select id="select保険者名" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" fetchSize="500">
+        SELECT 
+          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.allColumns_DbWT1001Hihokensha" />
+          ,UrT0507Hokenja.*
+        FROM "DbWT1001Hihokensha"
+          , (<include refid="jp.co.ndensan.reams.ur.urz.persistence.db.mapper.basic.IUrT0507HokenjaMapper.noDeleted_UrT0507Hokenja" />) AS UrT0507Hokenja
+       WHERE
+          UrT0507Hokenja."urT0507Hokenja_hokenjaNo" = "DbWT1001Hihokensha"."exHokenshaNo"
+         AND  UrT0507Hokenja."urT0507Hokenja_hokenjaShubetsu" = '08'
+     </select>
+     <resultMap id= "resultMap_KakohorenJyohoSakuseiCommonEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonEntity"
+                autoMapping="true">
+        <id property="dbT7026Entity.shichosonCode" column="dbT7026ShinKyuHihokenshaNoHenkan_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="dbT7026Entity.kyuNo" column="dbT7026ShinKyuHihokenshaNoHenkan_kyuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbT7056Entity.gappeiYMD" column="dbT7056GappeiShichoson_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="dbT7056Entity.chiikiNo" column="dbT7056GappeiShichoson_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbT7056Entity.kyuShichosonCode" column="dbT7056GappeiShichoson_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="dbT7051Entity.shichosonShokibetsuID" column="dbT7051KoseiShichosonMaster_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>       
+        <id property="dbT7055Entity.gappeiYMD" column="dbT7055GappeiJoho_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="dbT7055Entity.chiikiNo" column="dbT7055GappeiJoho_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="urT0507Entity.hokenjaShubetsu" column="urT0507Hokenja_hokenjaShubetsu" typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.HokenjaShubetsuTypeHandler"/>
+        <id property="urT0507Entity.hokenjaNo" column="urT0507Hokenja_hokenjaNo" typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.HokenjaNoTypeHandler"/>
+        <association property="hihokenshaTempEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.resultMap_HihokenshaTempEntity"/>
+        <association property="dbT7026Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7026ShinKyuHihokenshaNoHenkanMapper.ResultMap_DbT7026ShinKyuHihokenshaNoHenkanEntity"/>
+        <association property="dbT7056Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.ResultMap_DbT7056GappeiShichosonEntity"/>
+        <association property="hihokenshaDaichoEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper.resultMap_HihokenshaDaichoEntity"/>
+        <association property="dbT7051Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
+        <association property="dbT7055Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.ResultMap_DbT7055GappeiJohoEntity"/>
+        <association property="urT0507Entity" resultMap="jp.co.ndensan.reams.ur.urz.persistence.db.mapper.basic.IUrT0507HokenjaMapper.ResultMap_UrT0507HokenjaEntity"/>
+     </resultMap>
+    <resultMap id= "resultMap_HihokenshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.HihokenshaTempEntity"
+               autoMapping="true">
+        <result property="exRenbanexRenban" column="exRenbanexRenban"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exHokenshaNoexHokenshaNo" column="exHokenshaNoexHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exHokenshaNameexHokenshaName" column="exHokenshaNameexHokenshaName"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exShoHokenshaNoexShoHokenshaNo" column="exShoHokenshaNoexShoHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exHihokenshaNoexHihokenshaNo" column="exHihokenshaNoexHihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="exServiceTeikyoYm" column="exServiceTeikyoYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="henkanFlag" column="henkanFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="oldShichosonCode" column="oldShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuHihokenshaNo" column="sofuHihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gyoseikuMei" column="gyoseikuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="banchi" column="banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="katagaki" column="katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanaMeisho" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisho" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shimei50onKana" column="shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYmd" column="shikakuShutokuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYmd" column="shikakuSoshitsuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiShuyakuNo" column="setaiShuyakuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinenYmd" column="seinenYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonKanyuYmd" column="shichosonKanyuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonDattaiYmd" column="shichosonDattaiYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <resultMap id= "resultMap_HihokenshaDaichoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kakohorenjyohosakuseicommon.HihokenshaDaichoEntity"
+                  autoMapping="true">
+        <result property="kyuShichosonCode" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiJushochiTokureiFlag" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiShichosonCd" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="hihokenshaDaichoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <sql id="allColumns_DbWT1001Hihokensha">
+            "DbWT1001Hihokensha"."exRenban"
+            ,"DbWT1001Hihokensha"."exHokenshaNo"
+            ,"DbWT1001Hihokensha"."exHokenshaName"
+            ,"DbWT1001Hihokensha"."exShoHokenshaNo"
+            ,"DbWT1001Hihokensha"."exHihokenshaNo"
+            ,"DbWT1001Hihokensha"."exServiceTeikyoYm"
+            ,"DbWT1001Hihokensha"."henkanFlag"
+            ,"DbWT1001Hihokensha"."oldShichosonCode"
+            ,"DbWT1001Hihokensha"."sofuHihokenshaNo"
+            ,"DbWT1001Hihokensha"."shichosonCode"
+            ,"DbWT1001Hihokensha"."kannaiKangaiKubun"
+            ,"DbWT1001Hihokensha"."yubinNo"
+            ,"DbWT1001Hihokensha"."choikiCode"
+            ,"DbWT1001Hihokensha"."gyoseikuCode"
+            ,"DbWT1001Hihokensha"."gyoseikuMei"
+            ,"DbWT1001Hihokensha"."jusho"
+            ,"DbWT1001Hihokensha"."banchi"
+            ,"DbWT1001Hihokensha"."katagaki"
+            ,"DbWT1001Hihokensha"."kanaMeisho"
+            ,"DbWT1001Hihokensha"."meisho"
+            ,"DbWT1001Hihokensha"."shimei50onKana"
+            ,"DbWT1001Hihokensha"."shikibetsuCode"
+            ,"DbWT1001Hihokensha"."shikakuShutokuYmd"
+            ,"DbWT1001Hihokensha"."shikakuShutokuJiyuCode"
+            ,"DbWT1001Hihokensha"."shikakuSoshitsuYmd"
+            ,"DbWT1001Hihokensha"."shikakuSoshitsuJiyuCode"
+            ,"DbWT1001Hihokensha"."setaiShuyakuNo"
+            ,"DbWT1001Hihokensha"."seinenYmd"
+            ,"DbWT1001Hihokensha"."seibetsuCode"
+            ,"DbWT1001Hihokensha"."shichosonKanyuYmd"
+            ,"DbWT1001Hihokensha"."shichosonDattaiYmd"
+    </sql>
+</mapper>
