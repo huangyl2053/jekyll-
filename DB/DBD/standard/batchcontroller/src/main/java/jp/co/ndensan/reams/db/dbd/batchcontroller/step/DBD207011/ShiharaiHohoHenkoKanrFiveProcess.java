@@ -147,7 +147,7 @@ public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiH
         }
 
         reportData.set住特フラグ(new RString(t.get支払方法変更情報_住特フラグ().toString()));
-        reportData.set生保(t.get支払方法変更情報_生保());
+//        reportData.set生保(t.get支払方法変更情報_生保());
 
         reportData.set要介護度(t.get支払方法変更情報_要介護度().value());
         RStringBuilder builder = new RStringBuilder();

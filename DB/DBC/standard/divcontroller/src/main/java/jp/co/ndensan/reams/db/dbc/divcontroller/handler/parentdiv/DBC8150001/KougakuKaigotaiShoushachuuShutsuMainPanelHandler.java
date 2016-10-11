@@ -134,8 +134,8 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
         RString 処理日 = get処理年月日(div.getKogakuTaishoshaShoriPanel().getTxtShoriYMD().getValue());
         RString 処理時 = div.getKogakuTaishoshaShoriPanel().getTxtShoriHMD().getText();
         RString 処理日時 = 処理日.concat(処理時);
-        RString 抽出期間開始日時 = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
-        RString 抽出期間終了日時 = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getToValue());
+        RString 抽出期間開始日時 = get処理年月(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
+        RString 抽出期間終了日時 = get処理年月(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getToValue());
         RString 帳票ID = 帳票コード;
         Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
         RString 開始年月日１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
@@ -175,6 +175,14 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
             return RString.EMPTY;
         } else {
             return value.toDateString();
+        }
+    }
+
+    private RString get処理年月(RDate value) {
+        if (value == null) {
+            return RString.EMPTY;
+        } else {
+            return value.getYearMonth().toDateString();
         }
     }
 
