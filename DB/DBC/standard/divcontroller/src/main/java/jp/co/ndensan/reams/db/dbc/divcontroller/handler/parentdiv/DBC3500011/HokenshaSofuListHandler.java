@@ -50,7 +50,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class HokenshaSofuListHandler {
 
     private JyusinDataBaitaiTorikomuDiv div;
-    private final RString searchSharedFile = new RString("1\\_11%");
+    private final RString searchSharedFile = new RString("1\\_%");
     private static final int ゼロ = 0;
     private static final int 一1 = 1;
     private static final int 二2 = 2;
