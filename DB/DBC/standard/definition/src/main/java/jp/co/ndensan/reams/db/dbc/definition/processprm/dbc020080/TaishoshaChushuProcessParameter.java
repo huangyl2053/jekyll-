@@ -39,17 +39,14 @@ public class TaishoshaChushuProcessParameter implements IBatchProcessParameter {
      * @param 処理日時 RDateTime
      * @param 申請対象日開始 RDate
      * @param 申請対象日終了 RDate
-     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
      */
     public TaishoshaChushuProcessParameter(
             RDateTime 処理日時,
             RDate 申請対象日開始,
-            RDate 申請対象日終了,
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+            RDate 申請対象日終了) {
         this.処理日時 = 処理日時;
         this.申請対象日開始 = 申請対象日開始;
         this.申請対象日終了 = 申請対象日終了;
-        this.宛名検索条件 = 宛名検索条件;
     }
 
     /**
