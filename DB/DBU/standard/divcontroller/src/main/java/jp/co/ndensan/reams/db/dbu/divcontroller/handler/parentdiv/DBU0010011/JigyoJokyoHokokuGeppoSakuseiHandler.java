@@ -122,8 +122,21 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         set日付時刻();
         setすべて選択();
         setすべて選択チェックボックス();
+        set集計年月();
         div.getRadGappeiShichoson().setSelectedIndex(0);
         div.getRadKoikiRengo().setSelectedIndex(0);
+    }
+
+    private void set集計年月() {
+        div.getTxtShukeiYM1().clearValue();
+        div.getTxtShukeiYM2().clearValue();
+        div.getTxtShukeiYM3().clearValue();
+        div.getTxtShukeiYM4().clearValue();
+        div.getTxtShukeiYM5().clearValue();
+        div.getTxtShukeiYM6().clearValue();
+        div.getTxtShukeiYM7().clearValue();
+        div.getTxtHokokuYM().clearValue();
+        div.getDdlKakoHokokuYM().setSelectedIndex(0);
     }
 
     private void set合併市町村用保険者選択ラジオボタン() {
@@ -1005,6 +1018,13 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         if (div.getTxtHokokuYM().getValue() != null) {
             param.setHoukokuNengetu(div.getTxtHokokuYM().getValue().getYearMonth().toDateString());
             param.setHokokuNendo(div.getTxtHokokuYM().getValue().getYear().toDateString());
+        }
+        if (過去の集計結果を印刷.equals(div.getRadJikkoTaniKakoShukeiKekka().getSelectedKey())) {
+            if (!RString.isNullOrEmpty(div.getDdlKakoHokokuYM().getSelectedValue())) {
+                RDate 報告年月 = new RDate(div.getDdlKakoHokokuYM().getSelectedValue().toString());
+                param.setHoukokuNengetu(報告年月.getYearMonth().toDateString());
+                param.setHokokuNendo(報告年月.getYear().toDateString());
+            }
         }
         param.setNendo(get年度());
         param.setSakuseiNitizi(get作成日時());

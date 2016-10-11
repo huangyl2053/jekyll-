@@ -48,6 +48,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onLoad(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         div.setHdnJkkoutani(集計のみ);
+        setすべて選択チェックボックス(div);
         getHandler(div).onLoad(get過去集計情報の取得());
         return ResponseData.of(div).respond();
     }
@@ -168,6 +169,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
             getHandler(div).set月報報告_保険給付決定_高額分算分();
             getHandler(div).setチェックボックス設定();
         }
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
