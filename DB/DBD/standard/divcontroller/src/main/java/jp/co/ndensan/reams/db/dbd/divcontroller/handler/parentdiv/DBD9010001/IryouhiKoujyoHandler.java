@@ -68,9 +68,9 @@ public class IryouhiKoujyoHandler {
      */
     public List<IryohiKojoEntityResult> onLoad(TaishoshaKey 引き継ぎEntity) {
 
-        RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
+        HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
-        if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
+        if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号.value())) {
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
         List<IryohiKojoEntityResult> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo(被保険者番号);
@@ -78,7 +78,7 @@ public class IryouhiKoujyoHandler {
         div.getIryohiKojyoToroku().getKaigoShikakuKihonChildDiv().initialize(引き継ぎEntity.get被保険者番号());
         initGrid(医療費控除リスト);
 
-        RealInitialLocker.lock(new LockingKey(DB.concat(被保険者番号).concat(医療費控除登録)));
+        RealInitialLocker.lock(new LockingKey(DB.concat(被保険者番号.value()).concat(医療費控除登録)));
         AccessLogger.log(AccessLogType.照会, PersonalData.of(引き継ぎEntity.get識別コード(),
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号")).value(被保険者番号).build()));
         return 医療費控除リスト;

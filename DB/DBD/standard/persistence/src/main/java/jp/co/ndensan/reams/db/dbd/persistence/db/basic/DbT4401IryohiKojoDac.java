@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojo.dataKubun;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojo.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojo.kojoTaishoNen;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojo.logicalDeletedFlag;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -18,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -104,5 +107,55 @@ public class DbT4401IryohiKojoDac implements ISaveable<DbT4401IryohiKojoEntity> 
     ) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("医療費控除エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 主キーで医療費控除を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param データ区分 データ区分
+     * @return List<DbT4401IryohiKojoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4401IryohiKojoEntity> select単票用医療費控除(
+            HihokenshaNo 被保険者番号,
+            RString データ区分) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(データ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("データ区分"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4401IryohiKojo.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(dataKubun, データ区分),
+                                eq(logicalDeletedFlag, false))).
+                order(by(kojoTaishoNen, Order.DESC)).
+                toList(DbT4401IryohiKojoEntity.class);
+    }
+
+    /**
+     * 主キーで医療費控除を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return List<DbT4401IryohiKojoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4401IryohiKojoEntity> select医療費控除(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4401IryohiKojo.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).
+                order(by(dataKubun, Order.DESC),
+                        by(kojoTaishoNen, Order.DESC)).
+                toList(DbT4401IryohiKojoEntity.class);
     }
 }
