@@ -215,7 +215,7 @@
                 master.*
             FROM
                 master
-            LEFT OUTER JOIN
+            INNER JOIN
                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
             ( 
                 SELECT

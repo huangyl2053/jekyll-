@@ -17,7 +17,8 @@ public enum DBC1230011StateName implements IStateEnumerations {
     NoChange(""),
     Default("default"),
     支給決定情報一覧("支給決定情報一覧"),
-    支給決定情報補正("支給決定情報補正");
+    支給決定情報補正("支給決定情報補正"),
+    処理完了("処理完了");
 
     private final RString name;
 

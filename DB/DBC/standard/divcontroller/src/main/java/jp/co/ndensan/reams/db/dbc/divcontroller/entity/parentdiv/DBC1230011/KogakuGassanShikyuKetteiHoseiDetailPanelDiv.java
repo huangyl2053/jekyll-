@@ -8,8 +8,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * KogakuGassanShikyuKetteiHoseiDetailPanel のクラスファイル
@@ -37,8 +44,6 @@ public class KogakuGassanShikyuKetteiHoseiDetailPanelDiv extends Panel {
     private HorizontalLine lin2;
     @JsonProperty("tabKogakuGassanShikyuFushikyuKettei")
     private tabKogakuGassanShikyuFushikyuKetteiDiv tabKogakuGassanShikyuFushikyuKettei;
-    @JsonProperty("btnIchiramModoru")
-    private Button btnIchiramModoru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -155,24 +160,6 @@ public class KogakuGassanShikyuKetteiHoseiDetailPanelDiv extends Panel {
     }
 
     /*
-     * getbtnIchiramModoru
-     * @return btnIchiramModoru
-     */
-    @JsonProperty("btnIchiramModoru")
-    public Button getBtnIchiramModoru() {
-        return btnIchiramModoru;
-    }
-
-    /*
-     * setbtnIchiramModoru
-     * @param btnIchiramModoru btnIchiramModoru
-     */
-    @JsonProperty("btnIchiramModoru")
-    public void setBtnIchiramModoru(Button btnIchiramModoru) {
-        this.btnIchiramModoru = btnIchiramModoru;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -276,6 +263,16 @@ public class KogakuGassanShikyuKetteiHoseiDetailPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLabel1() {
+        return this.getTabKogakuGassanShikyuFushikyuKettei().getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getLabel1();
+    }
+
+    @JsonIgnore
+    public void setLabel1(Label Label1) {
+        this.getTabKogakuGassanShikyuFushikyuKettei().getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setLabel1(Label1);
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtKyufuShurui() {
         return this.getTabKogakuGassanShikyuFushikyuKettei().getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getTxtKyufuShurui();
     }
@@ -283,6 +280,16 @@ public class KogakuGassanShikyuKetteiHoseiDetailPanelDiv extends Panel {
     @JsonIgnore
     public void setTxtKyufuShurui(TextBoxMultiLine txtKyufuShurui) {
         this.getTabKogakuGassanShikyuFushikyuKettei().getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setTxtKyufuShurui(txtKyufuShurui);
+    }
+
+    @JsonIgnore
+    public Label getLabel2() {
+        return this.getTabKogakuGassanShikyuFushikyuKettei().getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getLabel2();
+    }
+
+    @JsonIgnore
+    public void setLabel2(Label Label2) {
+        this.getTabKogakuGassanShikyuFushikyuKettei().getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setLabel2(Label2);
     }
 
     @JsonIgnore

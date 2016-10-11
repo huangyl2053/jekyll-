@@ -41,6 +41,8 @@ public class IdouTempEntity {
     private HyojunFutanEntity 標準負担;
     private DbT3114RiyoshaFutanWariaiMeisaiEntity 二割負担;
     private KyotakuEntity 居宅計画;
+    private JushochitokureiInfoEntity 住所地特例;
+    private PSMInfoEntity 宛名情報;
     private DbT4001JukyushaDaichoEntity 受給者台帳;
     private DbT3100NijiYoboJigyoTaishoshaEntity 二次予防;
     private DbT3105SogoJigyoTaishoshaEntity 総合事業対象者;

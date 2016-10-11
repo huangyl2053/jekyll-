@@ -86,7 +86,6 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
         市町村IDMap = new HashMap<>();
         ファイル出力Z12Map = new HashMap<>();
         ファイル出力Z1AMap = new HashMap<>();
-        proParameter = new TokuchoSofuJohoRenkeiProcessParameter();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         List<KoseiShichoson> 広域市町村情報 = finder.getKoseiShichosonList().records();
         if (!広域市町村情報.isEmpty()) {
@@ -142,22 +141,22 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
     @Override
     protected void process(TokuchoSofuJohoRenkeiEntity entity) {
         ファイル出力Z12Map.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
-                RString.EMPTY,
+                proParameter.getファイルOutputMap().get(entity.get構成市町村コード()),
                 new RString(RDateTime.now().toString()),
                 Z12,
                 処理対象年月.toDateString(),
                 entity.get市町村コードDT(),
-                RDate.getNowDate().toDateString(),
-                RString.EMPTY
+                entity.get作成年月日DT(),
+                new RString(proParameter.getレコード件数OutputMap().get(entity.get構成市町村コード()))
         ));
         ファイル出力Z1AMap.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
-                RString.EMPTY,
+                proParameter.getファイルOutputMap().get(entity.get構成市町村コード()),
                 new RString(RDateTime.now().toString()),
                 Z1A,
                 処理対象年月.toDateString(),
                 entity.get市町村コードDT(),
-                RDate.getNowDate().toDateString(),
-                RString.EMPTY
+                entity.get作成年月日DT(),
+                new RString(proParameter.getレコード件数OutputMap().get(entity.get構成市町村コード()))
         ));
     }
 

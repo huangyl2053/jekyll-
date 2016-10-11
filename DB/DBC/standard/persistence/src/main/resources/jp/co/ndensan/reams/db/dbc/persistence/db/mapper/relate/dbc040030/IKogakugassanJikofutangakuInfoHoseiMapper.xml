@@ -3,73 +3,66 @@
 <!-- @reamsid_L DBC-2320-060 chenyadong -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030.IKogakugassanJikofutangakuInfoHoseiMapper">
-    <select id="get高額合算自己負担額データ" resultOrdered="true"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity" fetchSize="500">
-        SELECT  *
-        FROM 
-            rgdb."DbT3070KogakuGassanJikoFutanGaku" 
-        WHERE 
-            "kakunin_UketoriYM" = #{確認情報受取年月}
-            AND ("hoseiZumi_SofuYM" = ''
-                 OR "hoseiZumi_SofuYM" IS NULL
-                )
-            AND "realHoseiJissiYMD" = ''
-            AND "isDeleted" = false
-    </select>
-    
-    <select id="get被保険者情報と宛名情報付加" resultOrdered="true"
+    <select id="get高額合算自己負担額情報" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
             resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiEntity" fetchSize="500">
-        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
-               "DbV1001"."shichosonCode" AS "DbV1001_shichosonCode",
-               "DbV1001"."shikibetsuCode" AS "DbV1001_shikibetsuCode",
-               "DbV1001"."yubinNo" AS "DbV1001_yubinNo",
-               "DbV1001"."zenkokuJushoCode" AS "DbV1001_zenkokuJushoCode",
-               "DbV1001"."gyoseikuCode" AS "DbV1001_gyoseikuCode",
-               "DbV1001"."juminShubetsuCode" AS "DbV1001_juminShubetsuCode"
-        FROM "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
-        LEFT JOIN ( SELECT "DbV1001HihokenshaDaicho"."shichosonCode",
-                           "DbV1001HihokenshaDaicho"."hihokenshaNo",
-                           "DbV1001HihokenshaDaicho"."shikibetsuCode",
-                           "ShikibetsuTaisho"."yubinNo",
-                           "ShikibetsuTaisho"."zenkokuJushoCode",
-                           "ShikibetsuTaisho"."gyoseikuCode",
-                           "ShikibetsuTaisho"."juminShubetsuCode"
-                    FROM rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
-                    LEFT JOIN
-                    rgua."UaFt200FindShikibetsuTaisho"('2',#{基準年月日},true,'DB',FALSE,'','','','','','','','','','','',true,
-                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                    true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-                    ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
-                    WHERE "DbV1001HihokenshaDaicho"."logicalDeletedFlag" = false
-                    AND "DbV1001HihokenshaDaicho"."hihokenshaNo" IN(
-                        SELECT "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo" 
-                        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"  
-                        LEFT JOIN 
-                        rgdb."DbV1001HihokenshaDaicho" AS "HihokenshaDaicho" 
-                        ON "HihokenshaDaicho"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
-                        )
-                    ORDER BY
-                    "DbV1001HihokenshaDaicho"."idoYMD" DESC,
-                    "DbV1001HihokenshaDaicho"."edaNo" DESC
-                    LIMIT 1
-                   ) AS "DbV1001"
-        ON "DbV1001"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
+        SELECT
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />,
+               "DbV1001HihokenshaDaicho"."shichosonCode" AS "DbV1001_shichosonCode",
+               "DbV1001HihokenshaDaicho"."shikibetsuCode" AS "DbV1001_shikibetsuCode",
+               "ShikibetsuTaisho"."yubinNo" AS "DbV1001_yubinNo",
+               "ShikibetsuTaisho"."zenkokuJushoCode" AS "DbV1001_zenkokuJushoCode",
+               "ShikibetsuTaisho"."gyoseikuCode" AS "DbV1001_gyoseikuCode",
+               "ShikibetsuTaisho"."juminShubetsuCode" AS "DbV1001_juminShubetsuCode",
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        FROM 
+               rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
+        LEFT JOIN   rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
+        ON     "DbV1001HihokenshaDaicho"."hihokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"
+        LEFT JOIN
+               rgua."UaFt200FindShikibetsuTaisho"('2',#{基準年月日},true,'DB',FALSE,'','','','','','','','','','','',true,
+               '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+               true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+               ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
+        LEFT JOIN rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071KogakuGassanJikoFutanGakuMeisai"
+        ON     "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo" = "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+        WHERE 
+               "DbT3070KogakuGassanJikoFutanGaku"."kakunin_UketoriYM" = #{確認情報受取年月}
+               AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
+                    OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL
+                   )
+               AND ("DbT3070KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" = ''
+                    OR "DbT3070KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NULL
+                   )
+               AND "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
+        ORDER BY
+               "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo",
+               "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo",
+               "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo",
+               "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo",
+               "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo",
+               "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM"
     </select>
     
     <resultMap id="resultMap_KogakugassanJikofutangakuInfoHoseiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="taishoNendo" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <id property="shikyuShinseishoSeiriNo" column="shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="rirekiNo" column="rirekiNo2" />
+        <id property="hihokenshaNo" column="dbT3070KogakuGassanJikoFutanGaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="dbT3070KogakuGassanJikoFutanGaku_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokenshaNo" column="dbT3070KogakuGassanJikoFutanGaku_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="shikyuShinseishoSeiriNo" column="3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_rirekiNo" />
+        <id property="taishoM" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="juminShubetsuCode" column="DbV1001_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="DbV1001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="yubinNo" column="DbV1001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="zenkokuJushoCode" column="DbV1001_zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="gyoseikuCode" column="DbV1001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
-        <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+        <association property="dbt3070Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
+        <association property="dbt3071Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
     </resultMap>
      
     <resultMap id="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity" autoMapping="true">
@@ -445,6 +438,7 @@
         <result property="ichiranKakuninKubun" column="ichiranKakuninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ichiranKakuninKubun2" column="ichiranKakuninKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
     </resultMap>
+    
      <select id="select高額合算自己負担額データ" resultOrdered="true"
             resultMap="resultMap_高額合算自己負担額" fetchSize="500">
         SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
@@ -458,10 +452,12 @@
         AND    "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
         WHERE  "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
     </select>
+    
      <resultMap id="resultMap_高額合算自己負担額" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
         <association property="中間ＤＢ自己負担額データ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
         <association property="高額合算自己負担額" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
     </resultMap>
+    
   <select id="select高額合算自己負担額明細データ" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
             resultMap="resultMap_高額合算自己負担額明細" fetchSize="500">

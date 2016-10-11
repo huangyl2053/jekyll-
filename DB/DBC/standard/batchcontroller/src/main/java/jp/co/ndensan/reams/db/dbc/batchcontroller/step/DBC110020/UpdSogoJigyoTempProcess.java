@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -31,12 +32,12 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select総合事業対象者");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-    private static final RString SPLIT = new RString("|");
+    private static final RString SPLIT = new RString(",");
     private static final RString RST_TRUE = new RString("TRUE");
     private static final RString RST_FALSE = new RString("FALSE");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
-    private List<RString> 総合事業対象者List;
+    private List<RString> 総合事業対象者KeyList;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動一時tableWriter;
@@ -44,7 +45,7 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
     @Override
     protected void initialize() {
         連番Map = new HashMap<>();
-        総合事業対象者List = new ArrayList<>();
+        総合事業対象者KeyList = new ArrayList<>();
         super.initialize();
     }
 
@@ -61,11 +62,12 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-        RString 総合事業対象者 = 総合事業対象者全項目(entity.get総合事業対象者());
-        if (総合事業対象者List.contains(総合事業対象者)) {
+        RString 総合事業対象者Key = 総合事業対象者Key(entity.get総合事業対象者());
+        if (総合事業対象者KeyList.contains(総合事業対象者Key)) {
             return;
         }
-        総合事業対象者List.add(総合事業対象者);
+        総合事業対象者KeyList.add(総合事業対象者Key);
+        RString 総合事業対象者 = 総合事業対象者全項目(entity.get総合事業対象者());
         Decimal 連番 = 連番Map.get(entity.get総合事業対象者().getHihokenshaNo());
         if (連番 == null) {
             連番Map.put(entity.get総合事業対象者().getHihokenshaNo(), Decimal.ONE);
@@ -108,13 +110,20 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
         }
     }
 
-    private RString 総合事業対象者全項目(DbT3105SogoJigyoTaishoshaEntity 総合事業対象者) {
+    private RString 総合事業対象者Key(DbT3105SogoJigyoTaishoshaEntity 総合事業対象者) {
         RString 全項目 = RString.EMPTY;
-        //TODO
         全項目 = 全項目
                 .concat(総合事業対象者.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(総合事業対象者.getInsertDantaiCd()).concat(SPLIT);
+                .concat(new RString(総合事業対象者.getRirekiNo()));
         return 全項目;
+    }
+
+    private RString 総合事業対象者全項目(DbT3105SogoJigyoTaishoshaEntity 総合事業対象者) {
+        FlexibleDate 適用開始年月日 = 総合事業対象者.getTekiyoKaishiYMD();
+        if (適用開始年月日 != null) {
+            return new RString(適用開始年月日.toString());
+        }
+        return RString.EMPTY;
     }
 
 }

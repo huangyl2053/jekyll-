@@ -154,8 +154,8 @@ public class DbT4401IryohiKojoDac implements ISaveable<DbT4401IryohiKojoEntity> 
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(logicalDeletedFlag, false))).
-                order(by(dataKubun, Order.DESC),
-                        by(kojoTaishoNen, Order.DESC)).
+                order(by(kojoTaishoNen, Order.DESC),
+                        by(dataKubun, Order.DESC)).
                 toList(DbT4401IryohiKojoEntity.class);
     }
 }

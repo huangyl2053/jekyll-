@@ -71,7 +71,7 @@ public class IryouhiKoujyoHandler {
 
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
-        if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号.value())) {
+        if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
         List<IryohiKojo> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo(被保険者番号);
@@ -188,10 +188,10 @@ public class IryouhiKoujyoHandler {
             Collections.sort(dataSource, new Comparator<IryohiKojyoItiranDataGrid_Row>() {
                 @Override
                 public int compare(IryohiKojyoItiranDataGrid_Row row1, IryohiKojyoItiranDataGrid_Row row2) {
-                    if (row2.getHiddenCodeKubun().compareTo(row1.getHiddenCodeKubun()) == 0) {
-                        return row2.getHiddentaisyouYY().getValue().compareTo(row1.getHiddentaisyouYY().getValue());
+                    if (row2.getHiddentaisyouYY().getValue().compareTo(row1.getHiddentaisyouYY().getValue()) == 0) {
+                        return row2.getHiddenCodeKubun().compareTo(row1.getHiddenCodeKubun());
                     }
-                    return row2.getHiddenCodeKubun().compareTo(row1.getHiddenCodeKubun());
+                    return row2.getHiddentaisyouYY().getValue().compareTo(row1.getHiddentaisyouYY().getValue());
                 }
             });
         } else if (状態.equals(修正)) {

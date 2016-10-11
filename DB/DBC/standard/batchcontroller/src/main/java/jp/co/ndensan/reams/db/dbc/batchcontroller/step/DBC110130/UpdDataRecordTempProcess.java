@@ -26,9 +26,11 @@ public class UpdDataRecordTempProcess extends BatchProcessBase<DbWT1131Kyufujiss
 
     private HokenshaKyufujissekiProcessParameter processParameter;
     private HokenshaKyufujissekiMybatisParameter mybatisParam;
+    HokenshaKyufujissekiFinder finder;
 
     @Override
     protected void initialize() {
+        finder = HokenshaKyufujissekiFinder.createInstance();
         mybatisParam = processParameter.toHokenshaKyufujissekiMybatisParameter();
     }
 
@@ -45,7 +47,6 @@ public class UpdDataRecordTempProcess extends BatchProcessBase<DbWT1131Kyufujiss
         mybatisParam.setJigyoshoNo(entity.getJigyoshoNo());
         mybatisParam.setToshiNo(entity.getToshiNo());
         mybatisParam.setKyufuSakuseiKubunCode(entity.getKyufuSakuseiKubunCode());
-        HokenshaKyufujissekiFinder finder = HokenshaKyufujissekiFinder.createInstance();
         finder.update給付実績基本(mybatisParam);
         finder.update給付実績明細(mybatisParam);
         finder.update給付実績緊急時施設療養(mybatisParam);
@@ -64,7 +65,6 @@ public class UpdDataRecordTempProcess extends BatchProcessBase<DbWT1131Kyufujiss
 
     @Override
     protected void afterExecute() {
-        HokenshaKyufujissekiFinder finder = HokenshaKyufujissekiFinder.createInstance();
         finder.update給付実績高額介護サービス費(mybatisParam);
     }
 }

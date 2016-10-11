@@ -9,18 +9,22 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsIdoTempProce
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.SoufuErrorOutProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdAtenaTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdFutanWariaiTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdGengakuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdHihokenshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdHyojunFutanTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdJukyushaTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdJutokuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdKokuhoShikakuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdKoukiTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdKyotakuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdNijiYoboTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdRiyoshafutanGengakuTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSeihoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdShafukuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSogoJigyoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdTokuteNyushoTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110020.DBC110020_JukyushaIdoRenrakuhyoOutParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -38,8 +42,8 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 給付額減額の抽出 = "updGengakuTemp";
     private static final String 後期高齢者情報の抽出 = "updKoukiTemp";
     private static final String 国保資格情報の抽出 = "updKokuhoShikakuTemp";
-    private static final String 生活保護受給者の情報の抽出 = "updKokuhoShikakuTemp";
-    private static final String 特定入所者の情報の抽出 = "updKokuhoShikakuTemp";
+    private static final String 生活保護受給者の情報の抽出 = "updSeihoTemp";
+    private static final String 特定入所者の情報の抽出 = "updTokuteNyushoTemp";
     private static final String 社福減免の情報の抽出 = "updShafukuTemp";
     private static final String 利用者負担の情報の抽出 = "updRiyoshafutanGengakuTemp";
     private static final String 標準負担の情報の抽出 = "updHyojunFutanTemp";
@@ -51,7 +55,6 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 二次予防の情報の抽出 = "updNijiYoboTemp";
     private static final String 総合事業対象者の情報の抽出 = "updSogoJigyoTemp";
     private static final String 被保険者台帳の情報の抽出 = "updHihokenshaTemp";
-//    private static final String テースト抽出 = "jukyuTest";
     private static final String 異動一時１テーブルの作成 = "insShiharaihohoTemp1";
     private static final String 送付エラー一時出力 = "soufuErrorOut";
 
@@ -61,23 +64,20 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         executeStep(支払方法変更の抽出);
         executeStep(給付額減額の抽出);
         executeStep(後期高齢者情報の抽出);
-        //TODO QA1622
-//        executeStep(国保資格情報の抽出);
-//        executeStep(生活保護受給者の情報の抽出);
-//        executeStep(特定入所者の情報の抽出);
+        executeStep(国保資格情報の抽出);
+        executeStep(生活保護受給者の情報の抽出);
+        executeStep(特定入所者の情報の抽出);
         executeStep(社福減免の情報の抽出);
         executeStep(利用者負担の情報の抽出);
         executeStep(標準負担の情報の抽出);
         executeStep(二割負担の情報の抽出);
         executeStep(居宅計画の情報の抽出);
-        //TODO QA1622
-//        executeStep(住所地特例の情報の抽出);
-//        executeStep(宛名情報の情報の抽出);
+        executeStep(住所地特例の情報の抽出);
+        executeStep(宛名情報の情報の抽出);
         executeStep(受給者台帳の情報の抽出);
         executeStep(二次予防の情報の抽出);
         executeStep(総合事業対象者の情報の抽出);
         executeStep(被保険者台帳の情報の抽出);
-//        executeStep(テースト抽出);
         executeStep(異動一時１テーブルの作成);
         executeStep(送付エラー一時出力);
     }
@@ -117,6 +117,20 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
                 .define();
     }
 
+    @Step(生活保護受給者の情報の抽出)
+    IBatchFlowCommand updSeihoTemp() {
+        return loopBatch(UpdSeihoTempProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
+    @Step(特定入所者の情報の抽出)
+    IBatchFlowCommand updTokuteNyushoTemp() {
+        return loopBatch(UpdTokuteNyushoTempProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
     @Step(社福減免の情報の抽出)
     IBatchFlowCommand updShafukuTemp() {
         return loopBatch(UpdShafukuTempProcess.class).arguments(getParameter().
@@ -152,6 +166,20 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
                 .define();
     }
 
+    @Step(住所地特例の情報の抽出)
+    IBatchFlowCommand updJutokuTemp() {
+        return loopBatch(UpdJutokuTempProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
+    @Step(宛名情報の情報の抽出)
+    IBatchFlowCommand updAtenaTemp() {
+        return loopBatch(UpdAtenaTempProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
     @Step(受給者台帳の情報の抽出)
     IBatchFlowCommand updJukyushaTem() {
         return loopBatch(UpdJukyushaTempProcess.class).arguments(getParameter().
@@ -180,12 +208,6 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
                 .define();
     }
 
-//    @Step(テースト抽出)
-//    IBatchFlowCommand jukyuTest() {
-//        return loopBatch(JukyuTestProcess.class).arguments(getParameter().
-//                toProcessParameter())
-//                .define();
-//    }
     @Step(異動一時１テーブルの作成)
     IBatchFlowCommand insShiharaihohoTemp1() {
         return loopBatch(InsShiharaihohoTemp1Process.class).arguments(getParameter().

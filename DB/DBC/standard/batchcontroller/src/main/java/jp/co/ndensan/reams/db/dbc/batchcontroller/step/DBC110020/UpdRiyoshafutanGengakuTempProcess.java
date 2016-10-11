@@ -34,7 +34,7 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select利用者負担");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
 
-    private static final RString SPLIT = new RString("|");
+    private static final RString SPLIT = new RString(",");
     private static final RString RST_TRUE = new RString("TRUE");
     private static final RString RST_FALSE = new RString("FALSE");
 

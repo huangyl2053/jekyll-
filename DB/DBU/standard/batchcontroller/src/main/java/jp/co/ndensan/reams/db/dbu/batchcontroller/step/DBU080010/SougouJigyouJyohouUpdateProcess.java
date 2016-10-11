@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TeikyoYohi;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.sougoujigyoujyohou.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeikyoKihonJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,7 +30,8 @@ public class SougouJigyouJyohouUpdateProcess extends BatchProcessBase<TeikyoKiho
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou."
             + "ISougouJigyouJyohouMapper.get提供対象者");
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
-//    private SougouJigyouJyohouProcessParameter processParameter;
+    private SougouJigyouJyohouProcessParameter processParameter;
+    private SougouJigyouJyohouMybatisParameter mybatisParameter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
     @BatchWriter
@@ -35,7 +39,12 @@ public class SougouJigyouJyohouUpdateProcess extends BatchProcessBase<TeikyoKiho
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        mybatisParameter = SougouJigyouJyohouMybatisParameter.create_Parameter(
+                processParameter.get新規異動区分(),
+                RString.EMPTY,
+                RDateTime.MAX, RDateTime.MAX,
+                RString.EMPTY);
+        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParameter);
     }
 
     @Override
@@ -59,11 +68,11 @@ public class SougouJigyouJyohouUpdateProcess extends BatchProcessBase<TeikyoKiho
     protected void afterExecute() {
 //        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(TABLE_中間DB提供基本情報,
 //                processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
-//                DataSetNo._0400総合事業.getコード(), TABLE_中間DB提供基本情報);
-//        List<TokuteiKojinHanKanriTokuteiJohoBusiness> businessList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
+//                DataSetNo._0400総合事業.getコード(), processParameter.get版番号());
+//        List<TokuteiKojinJohoHanKanri> businessList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
 //                processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
 //                DataSetNo._0400総合事業.getコード(), FlexibleDate.EMPTY);
-//        for (TokuteiKojinHanKanriTokuteiJohoBusiness business : businessList) {
+//        for (TokuteiKojinJohoHanKanri business : businessList) {
 //
 //        }
         DbT7301TokuteiKojinJohoHanKanriEntity entity = new DbT7301TokuteiKojinJohoHanKanriEntity();

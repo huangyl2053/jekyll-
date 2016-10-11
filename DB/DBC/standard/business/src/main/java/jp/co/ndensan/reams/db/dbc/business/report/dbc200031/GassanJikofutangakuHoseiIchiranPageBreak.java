@@ -39,17 +39,17 @@ public class GassanJikofutangakuHoseiIchiranPageBreak extends PageBreaker<Gassan
     public boolean isBreak(ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> currentSource,
             ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.被保険者番号.get項目ID())
+        if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listList1_1.equals(nextSource.getSource().listList1_1)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.申請書整理番号.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.申請書整理番号.get項目ID())
                 && !currentSource.getSource().listList1_5.equals(nextSource.getSource().listList1_5)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.対象年度.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.対象年度.get項目ID())
                 && !currentSource.getSource().listList1_6.equals(nextSource.getSource().listList1_6)) {
             flag = true;
         } else {
-            flag = isFlag(currentSource, nextSource);
+            isFlag(currentSource, nextSource);
         }
         return flag;
     }
@@ -57,25 +57,25 @@ public class GassanJikofutangakuHoseiIchiranPageBreak extends PageBreaker<Gassan
     private boolean isFlag(ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> currentSource,
             ReportLineRecord<GassanJikofutangakuHoseiIchiranSource> nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.証記載保険者番号.get項目ID())
+        if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().add_hokenshaNo.equals(nextSource.getSource().add_hokenshaNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.申請年月日.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.申請年月日.get項目ID())
                 && !currentSource.getSource().add_shinnseiYMD.equals(nextSource.getSource().add_shinnseiYMD)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.市町村コード.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.市町村コード.get項目ID())
                 && !currentSource.getSource().add_shichosonCode.equals(nextSource.getSource().add_shichosonCode)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.氏名５０音カナ.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.氏名５０音カナ.get項目ID())
                 && !currentSource.getSource().add_kanaMeisho.equals(nextSource.getSource().add_kanaMeisho)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.町域コード.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.町域コード.get項目ID())
                 && !currentSource.getSource().add_choikiCode.equals(nextSource.getSource().add_choikiCode)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.行政区コード.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.行政区コード.get項目ID())
                 && !currentSource.getSource().add_gyoseikuCode.equals(nextSource.getSource().add_gyoseikuCode)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.郵便番号.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().add_yubinNo.equals(nextSource.getSource().add_yubinNo)) {
             flag = true;
         }
@@ -93,13 +93,13 @@ public class GassanJikofutangakuHoseiIchiranPageBreak extends PageBreaker<Gassan
     public boolean is改頁(GassanJikofutangakuHoseiIchiranEntity currentSource,
             GassanJikofutangakuHoseiIchiranEntity nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.申請書整理番号.get項目ID())
+        if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.申請書整理番号.get項目ID())
                 && !currentSource.get申請書整理番号().equals(nextSource.get申請書整理番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.被保険者番号.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.get被保険者番号().equals(nextSource.get被保険者番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiIchiranOutPutOrder.対象年度.get項目ID())
+        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.対象年度.get項目ID())
                 && !currentSource.get申請対象年度().equals(nextSource.get申請対象年度())) {
             flag = true;
         }

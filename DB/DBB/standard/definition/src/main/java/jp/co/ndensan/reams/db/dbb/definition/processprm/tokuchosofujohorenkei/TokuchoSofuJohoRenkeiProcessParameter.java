@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchosofujohorenkei;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiMybitisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -25,6 +26,9 @@ public class TokuchoSofuJohoRenkeiProcessParameter implements IBatchProcessParam
     private FlexibleYear 処理年度;
     private RYearMonth 処理対象年月;
     private List<RString> 市町村コードリスト;
+
+    private Map<RString, RString> ファイルOutputMap;
+    private Map<RString, Integer> レコード件数OutputMap;
 
     /**
      * 特徴送付情報連携のMybitisParameterを作成する。

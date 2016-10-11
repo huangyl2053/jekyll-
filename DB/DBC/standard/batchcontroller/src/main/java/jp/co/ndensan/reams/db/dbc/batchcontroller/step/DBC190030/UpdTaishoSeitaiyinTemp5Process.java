@@ -82,6 +82,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
     protected void initialize() {
         対象世帯員クラスlist = new ArrayList<>();
         temp_対象世帯員クラスlist = new ArrayList<>();
+        mapper = getMapper(ITaishoSetaiinIdoMapper.class);
         年金収入 = Decimal.ZERO;
         合計所得 = Decimal.ZERO;
         世帯課税設定flag = true;
@@ -249,12 +250,20 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
 
             TaishoSetaiinIdoEntity entity = mapper.select管理マスタ(mybatiParameter);
             if (entity == null) {
-                temp_対象世帯員クラス.setKoushinnNo(対象世帯員クラス.getKoushinnNo() + 1);
+                set更新時履歴番号(temp_対象世帯員クラス, 対象世帯員クラス.getKoushinnNo());
+            } else {
+                set対象世帯員(entity, 対象世帯員クラス,
+                        temp_対象世帯員クラス, 世帯員把握基準日);
             }
-            set対象世帯員(entity, 対象世帯員クラス,
-                    temp_対象世帯員クラス, 世帯員把握基準日);
 
         }
+    }
+
+    private void set更新時履歴番号(TaishoSetaiinEntity temp_対象世帯員クラス, Integer 更新履歴番号) {
+        if (更新履歴番号 != null) {
+            temp_対象世帯員クラス.setKoushinnNo(更新履歴番号 + 1);
+        }
+        temp_対象世帯員クラス.setKoushinnNo(0);
     }
 
     private void 世帯課税と課税所得の設定(TaishoSetaiinEntity 対象世帯員クラス, TaishoSetaiinEntity temp_対象世帯員クラス) {
@@ -284,7 +293,9 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
     private void set対象世帯員(TaishoSetaiinIdoEntity taishosetaiinidoentity,
             TaishoSetaiinEntity 対象世帯員クラス, TaishoSetaiinEntity temp_対象世帯員クラス,
             FlexibleDate 世帯員把握基準日) {
-        if (taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD()
+        if (taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD() != null
+                && !taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD().isEmpty()
+                && taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD()
                 .isBeforeOrEquals(世帯員把握基準日)) {
             if (set対象世帯員flag
                     && taishosetaiinidoentity.getHihokenshaNo().equals(対象世帯員クラス.getHihokenshaNo())) {

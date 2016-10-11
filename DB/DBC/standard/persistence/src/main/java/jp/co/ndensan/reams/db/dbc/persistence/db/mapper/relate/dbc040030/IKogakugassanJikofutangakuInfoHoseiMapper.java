@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.FutangakuTashoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
 
 /**
@@ -20,21 +20,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofut
 public interface IKogakugassanJikofutangakuInfoHoseiMapper {
 
     /**
-     * 高額合算自己負担額データを取得する。
+     * 高額合算自己負担額情報を取得する。
      *
      * @param parameter KogakugassanJikofutangakuMybatisParameter
      * @return DbT3070KogakuGassanJikoFutanGakuEntity
      */
-    List<DbT3070KogakuGassanJikoFutanGakuEntity> get高額合算自己負担額データ(
-            KogakugassanJikofutangakuMybatisParameter parameter);
-
-    /**
-     * 被保険者情報と宛名情報付加を取得する。
-     *
-     * @param parameter KogakugassanJikofutangakuMybatisParameter
-     * @return KogakugassanJikofutangakuInfoHoseiTempEntity
-     */
-    List<KogakugassanJikofutangakuInfoHoseiTempEntity> get被保険者情報と宛名情報付加(
+    List<KogakugassanJikofutangakuInfoHoseiEntity> get高額合算自己負担額情報(
             KogakugassanJikofutangakuMybatisParameter parameter);
 
     /**
@@ -50,13 +41,6 @@ public interface IKogakugassanJikofutangakuInfoHoseiMapper {
      * 中間DBをクリアする。
      */
     void delete中間DB();
-
-    /**
-     * 高額合算自己負担額明細データを取得する。
-     *
-     * @return KogakugassanJikofutangakuInfoHoseiTempEntity
-     */
-    List<KogakugassanJikofutangakuInfoHoseiTempEntity> get高額合算自己負担額明細データ();
 
     /**
      * 高額合算自己負担額データを取得する。

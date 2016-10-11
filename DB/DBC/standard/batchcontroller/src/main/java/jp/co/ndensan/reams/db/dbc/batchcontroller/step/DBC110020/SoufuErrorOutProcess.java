@@ -181,23 +181,25 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
         headerList.add(dateChangeToRString(entity.get要介護認定申請日()));
         headerList.add(entity.get居宅事業者番号().getColumnValue());
         headerList.add(dateChangeToRString(entity.get特定申請日()));
-//        headerList.add(dateChangeToRString(entity.get特定開始日()));
-//        headerList.add(dateChangeToRString(entity.get特定終了日()));
-//        headerList.add(dateChangeToRString(entity.get社福開始日()));
-//        headerList.add(dateChangeToRString(entity.get社福終了日()));
-//        headerList.add(dateChangeToRString(entity.get償還開始日()));
+        headerList.add(dateChangeToRString(entity.get特定適用開始日()));
+        headerList.add(dateChangeToRString(entity.get特定適用終了日()));
+        headerList.add(dateChangeToRString(entity.get社会福祉適用開始日()));
+        headerList.add(dateChangeToRString(entity.get社会福祉適用終了日()));
+        headerList.add(dateChangeToRString(entity.get償還払化開始日()));
         headerList.add(entity.getエラーコード());
         headerList.add(entity.getエラー内容());
         headerList.add(dateChangeToRString(entity.get資格喪失日()));
         headerList.add(dateChangeToRString(entity.get認定開始日()));
-//        headerList.add(dateChangeToRString(entity.get社福開始日()));
-//        headerList.add(dateChangeToRString(entity.get社福終了日()));
-//        headerList.add(dateChangeToRString(entity.get償還開始日()));
-//        headerList.add(dateChangeToRString(entity.get特定開始日()));
-//        headerList.add(dateChangeToRString(entity.get特定終了日()));
-//        headerList.add(dateChangeToRString(entity.get社福開始日()));
-//        headerList.add(dateChangeToRString(entity.get社福終了日()));
-//        headerList.add(dateChangeToRString(entity.get償還開始日()));
+        headerList.add(dateChangeToRString(entity.get認定終了日()));
+        headerList.add(dateChangeToRString(entity.get居宅適用開始日()));
+        headerList.add(dateChangeToRString(entity.get利用者負担申請日()));
+        headerList.add(dateChangeToRString(entity.get利用者負担適用開始日()));
+        headerList.add(dateChangeToRString(entity.get利用者負担適用終了日()));
+        headerList.add(dateChangeToRString(entity.get標準負担適用開始日()));
+        headerList.add(dateChangeToRString(entity.get標準負担適用終了日()));
+        headerList.add(dateChangeToRString(entity.get給付率引下げ開始日()));
+        headerList.add(dateChangeToRString(entity.get作成年月日()));
+        headerList.add(entity.get処理年月().toDateString());
         return headerList;
     }
 

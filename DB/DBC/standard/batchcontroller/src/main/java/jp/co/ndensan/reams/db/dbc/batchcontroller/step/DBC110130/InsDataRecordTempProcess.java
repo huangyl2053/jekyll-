@@ -176,7 +176,6 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
             csvFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
             csvListWriter = new CsvListWriter.InstanceBuilder(csvFilePath)
                     .setDelimiter(コンマ)
-                    .setEnclosure(ダブル引用符)
                     .setEncode(文字コード)
                     .setNewLine(NewLine.CRLF)
                     .hasHeader(false)
@@ -193,11 +192,9 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
         }
         出力件数 = 出力件数 + INT_1;
         総出力件数 = 総出力件数 + INT_1;
-        if (データ区分_00.equals(entity.getDataKunbun())) {
-            if (給付実績 != null) {
-                DbWT1111KyufuJissekiEntity 給付実績一時entity = get給付実績一時_基本entity(給付実績);
-                給付実績一時tableWriter.insert(給付実績一時entity);
-            }
+        if (データ区分_00.equals(entity.getDataKunbun()) && 給付実績 != null) {
+            DbWT1111KyufuJissekiEntity 給付実績一時entity = get給付実績一時_基本entity(給付実績);
+            給付実績一時tableWriter.insert(給付実績一時entity);
         } else if (データ区分_14.equals(entity.getDataKunbun()) && 給付実績 != null) {
             if (!データ区分_14.equals(給付実績.getDataKunbun())) {
                 DbWT1111KyufuJissekiEntity 給付実績一時entity = get給付実績一時_基本entity(給付実績);
@@ -436,7 +433,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
         list.add(trimRString(entity.getDbWT1132_serviceTeikyoYM() == null ? null : entity.getDbWT1132_serviceTeikyoYM().toDateString()));
         list.add(trimRString(entity.getDbWT1132_kyufuJissekiKubunCode()));
         list.add(trimRString(entity.getDbWT1132_uketsukeYMD() == null ? null : new RString(entity.getDbWT1132_uketsukeYMD().toString())));
-        list.add(trimRString(entity.getDbWT1132_ketteiYMD() == null ? null : new RString(entity.getDbWT1132_uketsukeYMD().toString())));
+        list.add(trimRString(entity.getDbWT1132_ketteiYMD() == null ? null : new RString(entity.getDbWT1132_ketteiYMD().toString())));
         list.add(trimRString(entity.getDbWT1132_kohi1FutanNo()));
         list.add(trimRString(entity.getDbWT1132_kohi2FutanNo()));
         list.add(trimRString(entity.getDbWT1132_kohi3FutanNo()));

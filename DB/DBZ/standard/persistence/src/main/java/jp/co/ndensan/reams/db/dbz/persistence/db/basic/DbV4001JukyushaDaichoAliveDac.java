@@ -13,9 +13,11 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.e
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.jukyuShinseiJiyu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.jukyuShinseiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaicho.yukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -200,5 +202,25 @@ public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaD
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(shikibetsuCode, 識別コード))).
                 toObject(DbV4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号と有効無効区分で受給者台帳Aliveを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 有効無効区分 RString
+     * @return DbV4001JukyushaDaichoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbV4001JukyushaDaichoEntity> selectBy被保険者番号AND有効無効区分(HihokenshaNo 被保険者番号, RString 有効無効区分) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(yukoMukoKubun, 有効無効区分),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbV4001JukyushaDaichoEntity.class);
     }
 }

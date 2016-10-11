@@ -969,8 +969,8 @@ public class DBC020080DataUtil {
         RDateTime システム日付 = parameter.get処理日時();
         FlexibleDate kijunYMD = new FlexibleDate(システム日付.getDate().toDateString());
         YMDHMS kijunTimestamp = new YMDHMS(システム日付);
-        FlexibleDate taishoKaishiYMD = new FlexibleDate(parameter.get申請対象開始日().toDateString());
-        FlexibleDate taishoShuryoYMD = new FlexibleDate(parameter.get申請対象終了日().toDateString());
+        FlexibleDate taishoKaishiYMD = parameter.get申請対象開始日();
+        FlexibleDate taishoShuryoYMD = parameter.get申請対象終了日();
         if (entity == null) {
             DbT7022ShoriDateKanriEntity result = new DbT7022ShoriDateKanriEntity();
             result.setSubGyomuCode(SubGyomuCode.DBC介護給付);

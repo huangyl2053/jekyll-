@@ -22,37 +22,37 @@
         FROM
         rgdb."DbT7022ShoriDateKanri" as DbT7022
         WHERE
-            DbT7022."subGyomuCode" = 'DBA' 
+            DbT7022."subGyomuCode" = #{サブ業務コード} 
         AND
-            DbT7022."shoriName" = '広域住基連動' 
+            DbT7022."shoriName" = #{処理名} 
         AND  
-            DbT7022.nendo = '0000'
-        AND  
-       <foreach  
-            collection="shichosonCode"
-            item="item"
-            open="("  
-            separator="OR"  
-            close=")">
-                DbT7022."shichosonCode" = #{item}
-        </foreach>
-        AND DbT7022."shoriEdaban" =
-        (SELECT
-            MAX(A."shoriEdaban")
-            FROM
-            rgdb."DbT7022ShoriDateKanri" as A
-          WHERE
-            A."shoriName" = DbT7022."shoriName"
-            AND
-             A.nendo = DbT7022.nendo)
-         AND DbT7022."nendoNaiRenban" =
-        (SELECT
-            MAX(B."nendoNaiRenban")
-            FROM
-            rgdb."DbT7022ShoriDateKanri" as B
-          WHERE
-            B."shoriName" = DbT7022."shoriName"
-            AND
-            B.nendo = DbT7022.nendo)
+            DbT7022.nendo = #{年度}
+        AND DbT7022."shichosonCode" = #{shichosonCode}
+        AND DbT7022."shoriEdaban" = ( 
+    SELECT
+      MAX(A."shoriEdaban") 
+    FROM
+      rgdb."DbT7022ShoriDateKanri" as A 
+    WHERE
+      A."shoriName" = DbT7022."shoriName" 
+	 AND A."subGyomuCode" = DbT7022."subGyomuCode"
+	AND  A."shichosonCode" = DbT7022."shichosonCode"
+	 AND A."nendo" = DbT7022."nendo"
+	 AND A."nendoNaiRenban" = DbT7022."nendoNaiRenban"
+ 
+  ) 
+  AND DbT7022."nendoNaiRenban" = ( 
+    SELECT
+      MAX(B."nendoNaiRenban") 
+    FROM
+      rgdb."DbT7022ShoriDateKanri" as B 
+    WHERE
+      B."shoriName" = DbT7022."shoriName" 
+      AND B."subGyomuCode" = DbT7022."subGyomuCode" 
+	  AND B."shichosonCode" = DbT7022."shichosonCode" 
+	  AND B."nendo" = DbT7022."nendo" 
+	  AND B."shoriEdaban" = DbT7022."shoriEdaban" 
+  ) 
+
     </select>
 </mapper>

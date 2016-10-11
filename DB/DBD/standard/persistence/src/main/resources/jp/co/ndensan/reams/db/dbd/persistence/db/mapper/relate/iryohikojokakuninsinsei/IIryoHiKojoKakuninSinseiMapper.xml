@@ -3,20 +3,6 @@
 <!--@reamsid_L DBD-5770-030 tz_chengpeng-->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper">
-    <select resultOrdered="true" id="受給者台帳抽出"
-            resultType="Integer" fetchSize="500">
-        SELECT
-        COUNT(DbV4001JukyushaDaicho."hihokenshaNo")
-        FROM
-        rgdb."DbV4001JukyushaDaicho" AS DbV4001JukyushaDaicho
-        WHERE
-        DbV4001JukyushaDaicho."hihokenshaNo" = #{被保険者番号}
-        AND
-        DbV4001JukyushaDaicho."yukoMukoKubun" = '1'
-        AND
-        DbV4001JukyushaDaicho."logicalDeletedFlag" = false
-    </select>
-
     <select resultOrdered="true" id="select受給者台帳情報"
             resultMap="resultmap_getSogoJigyouTaisyouSyaJyohoJoho" fetchSize="500">
         SELECT Jukyu."ninteiYukoKikanKaishiYMD", Jukyu."ninteiYukoKikanShuryoYMD", Jukyu."ikenshoJuryoYMD",
