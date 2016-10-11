@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBCMN62006_自己負担額計算（一括）のプロセスパラメタークラスです。
+ * ビジネス設計_DBCMN62006_自己負担額計算（一括）のプロセスパラメタークラスです。
  *
- * @reamsid_L DBC-2060-030 liuyang
+ * @reamsid_L DBC-2060-050 liuyang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
