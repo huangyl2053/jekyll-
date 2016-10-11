@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 受給者台帳画面のチェックです。
@@ -81,10 +80,10 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                  */
                 @Override
                 public boolean apply(JyukyushaDaichoDiv div) {
-                    Decimal hihokenshaBangoufrom = div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getFromValue();
-                    Decimal hihokenshaBangouto = div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getToValue();
-                    return (hihokenshaBangoufrom != null && !hihokenshaBangoufrom.toString().isEmpty())
-                    || (hihokenshaBangouto != null && !hihokenshaBangouto.toString().isEmpty());
+                    RString hihokenshaBangoufrom = div.getChushutsuJyouken().getTaishouSha().getHihokenshanoFrom().getValue();
+                    RString hihokenshaBangouto = div.getChushutsuJyouken().getTaishouSha().getHihokenshanoTo().getValue();
+                    return (hihokenshaBangoufrom != null && !hihokenshaBangoufrom.isEmpty())
+                    || (hihokenshaBangouto != null && !hihokenshaBangouto.isEmpty());
                 }
             },
     被保険者番号ToがFrom以前チェック {
@@ -97,12 +96,12 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                  */
                 @Override
                 public boolean apply(JyukyushaDaichoDiv div) {
-                    if (div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getFromValue() == null
-                    || div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getToValue() == null) {
+                    if (div.getChushutsuJyouken().getTaishouSha().getHihokenshanoFrom() == null
+                    || div.getChushutsuJyouken().getTaishouSha().getHihokenshanoTo() == null) {
                         return true;
                     }
-                    RString hihokenshaBangoufrom = new RString(div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString());
-                    RString hihokenshaBangouto = new RString(div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getToValue().toString());
+                    RString hihokenshaBangoufrom = div.getChushutsuJyouken().getTaishouSha().getHihokenshanoFrom().getValue();
+                    RString hihokenshaBangouto = div.getChushutsuJyouken().getTaishouSha().getHihokenshanoTo().getValue();
                     return hihokenshaBangoufrom.compareTo(hihokenshaBangouto) <= 0;
                 }
 
@@ -117,8 +116,8 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                  */
                 @Override
                 public boolean apply(JyukyushaDaichoDiv div) {
-                    RString 出力順 = ((ChohyoShutsuryokujunDiv) div.getShutsuryokuSort()).getTxtSort().getValue();
-                    return 出力順 != null && !出力順.isEmpty();
+                    RString 出力順 = new RString(((ChohyoShutsuryokujunDiv) div.getShutsuryokuSort()).getSelected出力順().get出力順ID().toString());
+                    return !出力順.isEmpty();
                 }
             }
 }
