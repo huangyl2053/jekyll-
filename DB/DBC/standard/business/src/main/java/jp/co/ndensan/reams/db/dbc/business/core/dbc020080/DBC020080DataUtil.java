@@ -68,25 +68,18 @@ public class DBC020080DataUtil {
 
     private static final int ERRORINDEX = -1;
     private static final int NUM_3 = 3;
-
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_8 = 8;
     private static final int NUM_15 = 15;
-
     private static final int NUM_70 = 70;
-
     private static final int NUM_75 = 75;
     private static final RString INITSERVICETEIKYOYMS = new RString("0000000000000000");
-    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
-
     private static final RString THREE = new RString("3");
     private static final RString LINE = new RString("|");
-    private static final RString 当年 = new RString("0");
-    private static final RString 翌年 = new RString("1");
     private static final RString SET = new RString("set");
     private static final RString JIKOFUTANGAKU = new RString("JikoFutanGaku");
     private static final RString UCHISU_70_74JIKOFUTANGAKU = new RString("Uchisu_70_74JikoFutanGaku");
@@ -130,7 +123,6 @@ public class DBC020080DataUtil {
     private static final FlexibleYear 新規年度 = new FlexibleYear("0000");
     private static final RString 新規処理枝番 = new RString("0000");
     private static final RString 新規年度内連番 = new RString("0001");
-//    private static final RString 連番フォーマット = new RString("0000");
     private static final RString 作成日時 = new RString("作成日時");
     private static final RString 処理名 = new RString("処理名");
     private static final RString 証記載保険者番号 = new RString("証記載保険者番号");
@@ -923,20 +915,6 @@ public class DBC020080DataUtil {
     }
 
     private boolean is当年(RString year1, RString year2) {
-        Decimal dec1 = nonullDecimal(year1);
-        Decimal dec2 = nonullDecimal(year2);
-        Decimal sub = dec1.subtract(dec2);
-        return Decimal.ZERO.equals(sub);
-    }
-
-    private boolean is翌年(RString 対象年度, int year) {
-        Decimal dec1 = nonullDecimal(対象年度);
-        Decimal dec2 = nonullDecimal(year);
-        Decimal sub = dec2.subtract(dec1);
-        return Decimal.ONE.equals(sub);
-    }
-
-    private boolean is当年(RString year1, int year2) {
         Decimal dec1 = nonullDecimal(year1);
         Decimal dec2 = nonullDecimal(year2);
         Decimal sub = dec1.subtract(dec2);
