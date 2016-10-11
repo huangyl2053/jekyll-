@@ -7,9 +7,11 @@ import jp.co.ndensan.reams.db.dbu.business.core.tokuteikojinjohoteikyo.TokuteiKo
 import jp.co.ndensan.reams.db.dbu.business.core.tokuteikojinjohoteikyo.TokuteiKojinJohoKoumokuHanKanriBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
+import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TokuteiKojinJohoKoumokuHanKanriRelateEntity;
+import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7304TokuteiKojinJohoTeikyoKanriDac;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoForServiceMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -26,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class TokuteiKojinJohoTeikyoManager {
 
     private final MapperProvider mapperProvider;
+    private final DbT7304TokuteiKojinJohoTeikyoKanriDac dbT7304Dac;
     private static final RString 文字列_異動区分 = new RString("異動区分");
     private static final RString 文字列_特定個人情報名コード = new RString("特定個人情報名コード");
     private static final RString 文字列_データセット番号 = new RString("データセット番号");
@@ -36,21 +39,26 @@ public class TokuteiKojinJohoTeikyoManager {
      */
     public TokuteiKojinJohoTeikyoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        dbT7304Dac = InstanceProvider.create(DbT7304TokuteiKojinJohoTeikyoKanriDac.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
      * @param mapperProvider mapperProvider
+     * @param dbT7304Dac DbT7304TokuteiKojinJohoTeikyoKanriDac
      */
-    TokuteiKojinJohoTeikyoManager(MapperProvider mapperProvider) {
+    TokuteiKojinJohoTeikyoManager(MapperProvider mapperProvider,
+            DbT7304TokuteiKojinJohoTeikyoKanriDac dbT7304Dac) {
         this.mapperProvider = mapperProvider;
+        this.dbT7304Dac = dbT7304Dac;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuteiKojinJohoTeikyoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuteiKojinJohoTeikyoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TokuteiKojinJohoTeikyoManager}のインスタンス
      */
     public static TokuteiKojinJohoTeikyoManager createInstance() {
         return InstanceProvider.create(TokuteiKojinJohoTeikyoManager.class);
@@ -155,5 +163,15 @@ public class TokuteiKojinJohoTeikyoManager {
             項目版管理情報リスト.add(項目版管理情報);
         }
         return 項目版管理情報リスト;
+    }
+
+    /**
+     * 特定個人情報提供管理の版番号カウントを取得します。
+     *
+     * @return 版番号カウント
+     */
+    public int get版番号カウント() {
+
+        return dbT7304Dac.get版番号カウント(TeikyoKubun.提供済み.getコード());
     }
 }
