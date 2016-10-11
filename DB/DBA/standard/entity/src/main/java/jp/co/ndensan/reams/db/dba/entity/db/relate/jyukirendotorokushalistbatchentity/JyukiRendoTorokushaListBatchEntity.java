@@ -27,4 +27,6 @@ public class JyukiRendoTorokushaListBatchEntity {
     private RString 並び順_4;
     private RString 並び順_5;
     private List<JyukiRendoJouhouEntity> 住基連動情報;
+    private RString 抽出期間F;
+    private RString 抽出期間T;
 }

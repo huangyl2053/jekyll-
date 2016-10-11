@@ -501,7 +501,7 @@ public class NinteiChosainMaster {
         }
 
         List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
-        if (!list.isEmpty()) {
+        if (list.isEmpty()) {
             div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
             return ResponseData.of(div).respond();
         }
