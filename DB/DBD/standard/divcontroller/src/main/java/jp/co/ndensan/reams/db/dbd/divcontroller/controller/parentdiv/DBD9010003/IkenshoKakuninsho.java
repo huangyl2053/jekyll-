@@ -83,21 +83,22 @@ public class IkenshoKakuninsho {
         if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
-        List<IryohiKojoEntityResult> 医療費控除情報リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(被保険者番号, IryoHiKojoNaiyo.主治医意見書確認書.getコード());
+        List<IryohiKojo> 医療費控除情報リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(new HihokenshaNo(被保険者番号),
+                IryoHiKojoNaiyo.主治医意見書確認書.getコード());
         if (医療費控除情報リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("主治医意見書確認書"));
         }
         ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList<>(医療費控除情報リスト));
         List<KeyValueDataSource> 年度DDLデータ = new ArrayList<>();
-        for (IryohiKojoEntityResult 医療費控除 : 医療費控除情報リスト) {
+        for (IryohiKojo 医療費控除 : 医療費控除情報リスト) {
             KeyValueDataSource data = new KeyValueDataSource();
-            RYear 控除対象年 = new RYear(医療費控除.get控除対象年());
+            RYear 控除対象年 = new RYear(医療費控除.get控除対象年().wareki().getYear());
             data.setKey(控除対象年.toDateString());
             data.setValue(控除対象年.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).toDateString());
             年度DDLデータ.add(data);
         }
         div.getPanelShosaiEria().getDdlTaishonen().setDataSource(年度DDLデータ);
-        getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
+//        getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号).concat(new RString("IryohiKojyoSyomeisho")));
 //        if (!RealInitialLocker.tryGetLock(排他キー)) {
@@ -202,7 +203,7 @@ public class IkenshoKakuninsho {
         builder.set登録年月日(entityresult.get登録年月日());
         builder.set認定有効期間終了年月日(entityresult.get認定有効期間終了年月日());
         builder.set認定有効期間開始年月日(entityresult.get認定有効期間開始年月日());
-        manager.save医療費控除(builder.build().unChanged().modifiedModel());
+        //manager.save医療費控除(builder.build().unChanged().modifiedModel());
         return ResponseData.of(source).respond();
     }
 

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.Chohyokoyujoho;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100030.ShujiiIkenshoKakuninshoProperty;
@@ -153,24 +153,12 @@ public class IryoHiKojoKakuninSinsei {
      * @param 被保険者番号 被保険者番号
      * @return 医療費控除情報
      */
-    public List<IryohiKojoEntityResult> getIryohikojyo(HihokenshaNo 被保険者番号) {
-        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-        List<IryohiKojoEntityResult> 医療費控除情報 = new ArrayList<>();
+    public List<IryohiKojo> getIryohikojyo(HihokenshaNo 被保険者番号) {
+        List<IryohiKojo> 医療費控除情報 = new ArrayList<>();
         List<DbT4401IryohiKojoEntity> result = dac.select医療費控除(被保険者番号);
         if (result != null) {
             for (DbT4401IryohiKojoEntity entity : result) {
-                IryohiKojoEntityResult 医療費控除 = new IryohiKojoEntityResult();
-                医療費控除.setデータ区分(entity.getDataKubun());
-                医療費控除.set主治医意見書受領年月日(entity.getShujiiIkenshoJuryoYMD());
-                医療費控除.set尿失禁の有無(entity.getNyoshikkinHassei());
-                医療費控除.set控除対象年(entity.getKojoTaishoNen().toDateString());
-                医療費控除.set日常生活自立度(entity.getNichijoSeikatsuJiritsudo());
-                医療費控除.set申請年月日(entity.getShinseiYMD());
-                医療費控除.set発行年月日(entity.getHakkoYMD());
-                医療費控除.set登録年月日(entity.getTorokuYMD());
-                医療費控除.set被保険者番号(entity.getHihokenshaNo().value());
-                医療費控除.set認定有効期間終了年月日(entity.getNinteiYukoKikanShuryoYMD());
-                医療費控除.set認定有効期間開始年月日(entity.getNinteiYukoKikanKaishiYMD());
+                IryohiKojo 医療費控除 = new IryohiKojo(entity);
                 医療費控除情報.add(医療費控除);
             }
         }
@@ -184,24 +172,12 @@ public class IryoHiKojoKakuninSinsei {
      * @param データ区分 データ区分
      * @return 医療費控除情報
      */
-    public List<IryohiKojoEntityResult> getIryohikojyo_Chohyo(HihokenshaNo 被保険者番号, RString データ区分) {
-        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-        List<IryohiKojoEntityResult> 単票用医療費控除 = new ArrayList<>();
+    public List<IryohiKojo> getIryohikojyo_Chohyo(HihokenshaNo 被保険者番号, RString データ区分) {
+        List<IryohiKojo> 単票用医療費控除 = new ArrayList<>();
         List<DbT4401IryohiKojoEntity> result = dac.select単票用医療費控除(被保険者番号, データ区分);
         if (result != null) {
             for (DbT4401IryohiKojoEntity entity : result) {
-                IryohiKojoEntityResult 医療費控除 = new IryohiKojoEntityResult();
-                医療費控除.setデータ区分(entity.getDataKubun());
-                医療費控除.set主治医意見書受領年月日(entity.getShujiiIkenshoJuryoYMD());
-                医療費控除.set尿失禁の有無(entity.getNyoshikkinHassei());
-                医療費控除.set控除対象年(entity.getKojoTaishoNen().toDateString());
-                医療費控除.set日常生活自立度(entity.getNichijoSeikatsuJiritsudo());
-                医療費控除.set申請年月日(entity.getShinseiYMD());
-                医療費控除.set発行年月日(entity.getHakkoYMD());
-                医療費控除.set登録年月日(entity.getTorokuYMD());
-                医療費控除.set被保険者番号(entity.getHihokenshaNo().value());
-                医療費控除.set認定有効期間終了年月日(entity.getNinteiYukoKikanShuryoYMD());
-                医療費控除.set認定有効期間開始年月日(entity.getNinteiYukoKikanKaishiYMD());
+                IryohiKojo 医療費控除 = new IryohiKojo(entity);
                 単票用医療費控除.add(医療費控除);
             }
         }
