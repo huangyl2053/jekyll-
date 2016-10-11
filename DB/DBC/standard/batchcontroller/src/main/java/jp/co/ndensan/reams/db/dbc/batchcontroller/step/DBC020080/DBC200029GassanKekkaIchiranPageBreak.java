@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 改頁クラスです。
  *
- * @reamsid_L DBC-1970-030 zhouchuanlin
+ * @reamsid_L DBC-2060-030 liuyang
  */
 public class DBC200029GassanKekkaIchiranPageBreak extends PageBreaker<GassanJikofutangakuKeisanKekkaIchiranSource> {
 

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * キーブレイク判定及び処理ロジッククラスです。
  *
- * @reamsid_L DBC-2060-050 liuyang
+ * @reamsid_L DBC-2060-030 liuyang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 帳票分類ID「DBC020080GassanKekkaIchiranOutputOrder」（高額合算自己負担額計算結果一覧表）出力順設定可能項目です。
  *
- * @reamsid_L DBC-2060-050 liuyang
+ * @reamsid_L DBC-2060-030 liuyang
  */
 public enum DBC200029GassanKekkaIchiranOutputOrder implements IReportItems {
 
