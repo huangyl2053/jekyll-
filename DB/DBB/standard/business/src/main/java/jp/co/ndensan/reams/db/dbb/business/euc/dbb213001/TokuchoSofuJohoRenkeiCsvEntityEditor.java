@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiHeadEntity;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiKanriEntity;
+import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiOrtherDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchoSofuJohoRenkeiTolelaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -130,28 +131,28 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
      *
      * @return DTAレコード
      */
-    public TokuchoSofuJohoRenkeiDataEntity editデータZ99_550_xx_DTAファイルのみ() {
-        return new TokuchoSofuJohoRenkeiDataEntity(
+    public TokuchoSofuJohoRenkeiOrtherDataEntity editデータZ99_550_xx_DTAファイルのみ() {
+        return new TokuchoSofuJohoRenkeiOrtherDataEntity(
                 TWOSTRING,
                 entity.get構成市町村コード(),
                 edit特別徴収義務者コード(entity.get特別徴収義務者コードDT()),
                 entity.get通知内容コードDT(),
-                entity.get予備1DT(),
+                スペース,
                 entity.get特別徴収制度コードDT(),
-                editパターン34(RDate.getNowDate()),
+                editパターン34(entity.get作成年月日DT()),
                 entity.get基礎年金番号DT(),
                 entity.get年金コードDT(),
-                entity.get予備2DT(),
+                スペース,
                 editパターン34(entity.get生年月日DT()),
                 entity.get性別DT(),
-                entity.getカナ氏名DT(),
+                RStringUtil.convert全角to半角(entity.getカナ氏名DT()),
                 entity.getシフトコード1DT(),
-                entity.get漢字氏名DT(),
+                RStringUtil.convert半角to全角(entity.get漢字氏名DT()),
                 entity.getシフトコード2DT(),
                 edit郵便番号(entity.get郵便番号DT()),
-                entity.getカナ住民DT(),
+                RStringUtil.convert全角to半角(entity.getカナ住民DT()),
                 entity.getシフトコード3DT(),
-                entity.get漢字住所DT(),
+                RStringUtil.convert半角to全角(entity.get漢字住所DT()),
                 entity.getシフトコード4DT(),
                 edit各種区分(entity.get各種区分DT()),
                 処理結果,

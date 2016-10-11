@@ -19,7 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class TokuchoSofuJohoRenkeiDataEntity {
+public class TokuchoSofuJohoRenkeiOrtherDataEntity {
 
     @FldField(order = 16, length = 1)
     private RString データレコード区分;
@@ -81,6 +81,20 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ予備3;
     @FldField(order = 45, length = 15)
     private RString データ共済年金証書記号番号;
+    @FldField(order = 46, length = 10)
+    private RString データ介護保険被保険者番号;
+    @FldField(order = 47, length = 1)
+    private RString データ個人コード区分;
+    @FldField(order = 48, length = 16)
+    private RString データ個人コード;
+    @FldField(order = 49, length = 1)
+    private RString データ介護保険住所地特例区分;
+    @FldField(order = 50, length = 8)
+    private RString データ捕捉年月日;
+    @FldField(order = 51, length = 1)
+    private RString データ待機フラグ;
+    @FldField(order = 52, length = 13)
+    private RString データ予備;
 
     /**
      * コンストラクタです。
@@ -113,16 +127,24 @@ public class TokuchoSofuJohoRenkeiDataEntity {
      * @param データ各種金額欄金額1 RString
      * @param データ各種金額欄金額2 RString
      * @param データ各種金額欄金額3 RString
-     * @param データ予備3 RString
      * @param データ共済年金証書記号番号 RString
+     * @param データ介護保険被保険者番号 RString
+     * @param データ個人コード区分 RString
+     * @param データ個人コード RString
+     * @param データ介護保険住所地特例区分 RString
+     * @param データ捕捉年月日 RString
+     * @param データ待機フラグ RString
+     * @param データ予備 RString
      */
-    public TokuchoSofuJohoRenkeiDataEntity(RString データレコード区分, RString データ市町村コード, RString データ特別徴収義務者コード,
-            RString データ通知内容コード, RString データ予備1, RString データ特別徴収制度コード, RString データ作成年月日, RString データ基礎年金番号,
-            RString データ年金コード, RString データ予備2, RString データ生年月日, RString データ性別, RString データ氏名カナ,
-            RString データ氏名シフトコード1, RString データ氏名漢字1, RString データ氏名シフトコード2, RString データ住所郵便番号, RString データ住所カナ,
-            RString データ住所シフトコード3, RString データ住所漢字2, RString データ住所シフトコード4, RString データ各種区分, RString データ処理結果,
-            RString データ後期移管コード, RString データ各種年月日, RString データ各種金額欄金額1, RString データ各種金額欄金額2,
-            RString データ各種金額欄金額3, RString データ予備3, RString データ共済年金証書記号番号) {
+    public TokuchoSofuJohoRenkeiOrtherDataEntity(RString データレコード区分, RString データ市町村コード, RString データ特別徴収義務者コード,
+            RString データ通知内容コード, RString データ予備1, RString データ特別徴収制度コード, RString データ作成年月日,
+            RString データ基礎年金番号, RString データ年金コード, RString データ予備2, RString データ生年月日, RString データ性別,
+            RString データ氏名カナ, RString データ氏名シフトコード1, RString データ氏名漢字1, RString データ氏名シフトコード2,
+            RString データ住所郵便番号, RString データ住所カナ, RString データ住所シフトコード3, RString データ住所漢字2,
+            RString データ住所シフトコード4, RString データ各種区分, RString データ処理結果, RString データ後期移管コード,
+            RString データ各種年月日, RString データ各種金額欄金額1, RString データ各種金額欄金額2, RString データ各種金額欄金額3,
+            RString データ共済年金証書記号番号, RString データ介護保険被保険者番号, RString データ個人コード区分,
+            RString データ個人コード, RString データ介護保険住所地特例区分, RString データ捕捉年月日, RString データ待機フラグ, RString データ予備) {
         this.データレコード区分 = データレコード区分;
         this.データ市町村コード = データ市町村コード;
         this.データ特別徴収義務者コード = データ特別徴収義務者コード;
@@ -151,8 +173,13 @@ public class TokuchoSofuJohoRenkeiDataEntity {
         this.データ各種金額欄金額1 = データ各種金額欄金額1;
         this.データ各種金額欄金額2 = データ各種金額欄金額2;
         this.データ各種金額欄金額3 = データ各種金額欄金額3;
-        this.データ予備3 = データ予備3;
         this.データ共済年金証書記号番号 = データ共済年金証書記号番号;
+        this.データ介護保険被保険者番号 = データ介護保険被保険者番号;
+        this.データ個人コード区分 = データ個人コード区分;
+        this.データ個人コード = データ個人コード;
+        this.データ介護保険住所地特例区分 = データ介護保険住所地特例区分;
+        this.データ捕捉年月日 = データ捕捉年月日;
+        this.データ待機フラグ = データ待機フラグ;
+        this.データ予備 = データ予備;
     }
-
 }
