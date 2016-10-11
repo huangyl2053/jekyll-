@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.UpdTorikomiKokuhoJyohoTempProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoRealEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoDataYoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoEntity;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-3020-040 qinzhen
  */
-public class UpdTorikomiKokiKoreshaJyohoTemp2Processs extends BatchProcessBase<KokiKoreshaJyohoRealEntity> {
+public class UpdTorikomiKokiKoreshaJyohoTemp2Processs extends BatchProcessBase<KokiKoreshaJyohoDataYoEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper.get後期高齢者情報作成用データ");
@@ -41,10 +41,6 @@ public class UpdTorikomiKokiKoreshaJyohoTemp2Processs extends BatchProcessBase<K
     private IBatchTableWriter<TorikomiKokiKoreshaJyohoEntity> torikomiKokuhoJyohoEntityWriter;
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID);
     }
@@ -56,7 +52,7 @@ public class UpdTorikomiKokiKoreshaJyohoTemp2Processs extends BatchProcessBase<K
     }
 
     @Override
-    protected void process(KokiKoreshaJyohoRealEntity entity) {
+    protected void process(KokiKoreshaJyohoDataYoEntity entity) {
         if (entity.getデータ件数() != null && entity.getデータ件数() > 1) {
             if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
                 entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_31);
