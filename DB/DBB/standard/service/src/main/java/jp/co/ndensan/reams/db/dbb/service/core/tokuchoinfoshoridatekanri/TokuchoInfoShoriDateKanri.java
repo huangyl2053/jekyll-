@@ -258,7 +258,7 @@ public class TokuchoInfoShoriDateKanri {
             List<UzT0885SharedFileEntryEntity> entityList) {
         List<TokuchoInfoFDownloadInfo> ファイル対象List = new ArrayList<>();
         for (UzT0885SharedFileEntryEntity ファイル対象 : entityList) {
-            RString ファイル名 = ファイル対象.getLocalFileName();
+            RString ファイル名 = ファイル対象.getSharedFileName();
             TokuchoInfoFDownloadInfo entity = new TokuchoInfoFDownloadInfo();
             entity.setファイル名(ファイル名);
             if (ファイル名.startsWith(Z1A)) {
