@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakuk
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.report.dbc100029.JyuryoItakuKeiyakuKakuninShoSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
@@ -160,7 +159,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
     private void 認証者情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result, FlexibleDate 通知日) {
         KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty property = new KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<JyuryoItakuKeiyakuKakuninShoSource> assembler
+            try (ReportAssembler<KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource> assembler
                     = createAssembler(reportManager, property)) {
                 reportSourceWriter = new ReportSourceWriter(assembler);
             }
