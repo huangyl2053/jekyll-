@@ -64,13 +64,15 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
 
     @Override
     protected void process(DbT5101RelateEntity entity) {
+
         if (entity.getDbT5101Entity() == null) {
             dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
         } else {
-            if (isnull(entity)) {
+            if (更新フラグ１(entity)) {
                 dbT5101Writer.update(business.setDbt5101Entity(entity, 更新1, processParamter));
                 updateDbT5123(entity, 更新1);
-            } else {
+            }
+            if (更新フラグ２(entity)) {
                 dbT5101Writer.update(business.setDbt5101Entity(entity, 更新2, processParamter));
                 updateDbT5123(entity, 更新2);
             }
@@ -84,13 +86,23 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
         }
     }
 
-    private boolean isnull(DbT5101RelateEntity entity) {
+    private boolean 更新フラグ１(DbT5101RelateEntity entity) {
         DbT5101NinteiShinseiJohoEntity dbt5101Entity = entity.getDbT5101Entity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         RString 認定申請日 = dbt5101tempEntity.get認定申請日();
         FlexibleDate 認定申請日TEMP = dbt5101Entity.getNinteiShinseiYMD();
         return 認定申請日TEMP != null && !認定申請日TEMP.isEmpty()
-                && !RString.isNullOrEmpty(認定申請日) && 認定申請日.equals(new RString(認定申請日TEMP.toString()));
+                && !RString.isNullOrEmpty(認定申請日) && 認定申請日.equals(new RString(認定申請日TEMP.toString()))
+                && isEquals(dbt5101Entity.getNinteiShinseiShinseijiKubunCode().value(), dbt5101tempEntity.get申請区分_申請時コード());
     }
 
+    private boolean 更新フラグ２(DbT5101RelateEntity entity) {
+        DbT5101NinteiShinseiJohoEntity dbt5101Entity = entity.getDbT5101Entity();
+        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        return isEquals(dbt5101Entity.getNinteiShinseiShinseijiKubunCode().value(), dbt5101tempEntity.get申請区分_申請時コード());
+    }
+
+    private boolean isEquals(RString value1, RString value2) {
+        return !RString.isNullOrEmpty(value1) && value1.equals(value2);
+    }
 }

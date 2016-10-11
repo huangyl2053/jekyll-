@@ -680,6 +680,7 @@
 
     <resultMap id="ResultMap_DbT5101NinteiShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity" autoMapping="true">
         <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbt5101TempEntity" resultMap="ResultMap_DbT5101TempEntity"/>
         <association property="dbT5101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
         <association property="dbt5123Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.ResultMap_DbT5123NinteiKeikakuJohoEntity"/>
