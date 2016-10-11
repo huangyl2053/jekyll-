@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import lombok.Getter;
@@ -48,6 +49,8 @@ public class SoufuErrorTblEntity extends DbTableEntityBase<SoufuErrorTblEntity> 
     private FlexibleDate 標準負担適用終了日;
     private FlexibleDate 償還払化開始日;
     private FlexibleDate 給付率引下げ開始日;
+    private FlexibleDate 作成年月日;
+    private RYearMonth 処理年月;
     private RString エラーコード;
     private RString エラー内容;
 }

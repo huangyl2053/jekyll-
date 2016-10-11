@@ -31,7 +31,7 @@ public class InsShiharaihohoTempProcess extends BatchProcessBase<IdouTempEntity>
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select支払方法変更_支払方法");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-    private static final RString SPLIT = new RString("|");
+    private static final RString SPLIT = new RString(",");
     private static final RString RST_TRUE = new RString("TRUE");
     private static final RString RST_FALSE = new RString("FALSE");
 
@@ -94,6 +94,8 @@ public class InsShiharaihohoTempProcess extends BatchProcessBase<IdouTempEntity>
 
     private RString 支払方法変更全項目(DbT4021ShiharaiHohoHenkoEntity 支払方法変更) {
         RString 全項目 = RString.EMPTY;
+        全項目 = cancatYMD(支払方法変更.getTekiyoKaishiYMD(), 全項目);
+        全項目 = cancatYMD(支払方法変更.getTekiyoShuryoYMD(), 全項目);
         全項目 = 全項目.concat(支払方法変更.getShoKisaiHokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(支払方法変更.getHihokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(支払方法変更.getKanriKubun()).concat(SPLIT)
@@ -101,8 +103,6 @@ public class InsShiharaihohoTempProcess extends BatchProcessBase<IdouTempEntity>
                 .concat(支払方法変更.getInsertDantaiCd()).concat(SPLIT)
                 .concat(支払方法変更.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT)
                 .concat(支払方法変更.getTorokuKubun()).concat(SPLIT);
-        全項目 = cancatYMD(支払方法変更.getTekiyoKaishiYMD(), 全項目);
-        全項目 = cancatYMD(支払方法変更.getTekiyoShuryoYMD(), 全項目);
         全項目 = cancatRString(支払方法変更.getShuryoKubun(), 全項目);
         全項目 = cancatYMD(支払方法変更.getYokoku_TorokuYMD(), 全項目);
         全項目 = cancatYMD(支払方法変更.getSashitome_IraiJuriYMD(), 全項目);

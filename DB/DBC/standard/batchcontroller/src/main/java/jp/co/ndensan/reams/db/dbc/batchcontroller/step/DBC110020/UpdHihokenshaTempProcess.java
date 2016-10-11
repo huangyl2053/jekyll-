@@ -31,7 +31,7 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select被保険者台帳");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-    private static final RString SPLIT = new RString("|");
+    private static final RString SPLIT = new RString(",");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
     private List<RString> 被保険者台帳List;

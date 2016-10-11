@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -31,10 +32,10 @@ public class UpdNijiYoboTempProcess extends BatchProcessBase<IdouTempEntity> {
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select二次予防");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-    private static final RString SPLIT = new RString("|");
+    private static final RString SPLIT = new RString(",");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
-    private List<RString> 二次予防List;
+    private List<RString> 二次予防KeyList;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動一時tableWriter;
@@ -42,7 +43,7 @@ public class UpdNijiYoboTempProcess extends BatchProcessBase<IdouTempEntity> {
     @Override
     protected void initialize() {
         連番Map = new HashMap<>();
-        二次予防List = new ArrayList<>();
+        二次予防KeyList = new ArrayList<>();
         super.initialize();
     }
 
@@ -59,11 +60,12 @@ public class UpdNijiYoboTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-        RString 二次予防 = 二次予防全項目(entity.get二次予防());
-        if (二次予防List.contains(二次予防)) {
+        RString 二次予防Key = 二次予防Key(entity.get二次予防());
+        if (二次予防KeyList.contains(二次予防Key)) {
             return;
         }
-        二次予防List.add(二次予防);
+        二次予防KeyList.add(二次予防Key);
+        RString 二次予防 = 二次予防全項目(entity.get二次予防());
         Decimal 連番 = 連番Map.get(entity.get二次予防().getHihokenshaNo());
         if (連番 == null) {
             連番Map.put(entity.get二次予防().getHihokenshaNo(), Decimal.ONE);
@@ -108,11 +110,24 @@ public class UpdNijiYoboTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     private RString 二次予防全項目(DbT3100NijiYoboJigyoTaishoshaEntity 二次予防) {
         RString 全項目 = RString.EMPTY;
-        //TODO
+        全項目 = cancatYMD(二次予防.getTekiyoKaishiYMD(), 全項目);
+        全項目 = cancatYMD(二次予防.getTekiyoShuryoYMD(), 全項目);
+        return 全項目;
+    }
+
+    private RString 二次予防Key(DbT3100NijiYoboJigyoTaishoshaEntity 二次予防) {
+        RString 全項目 = RString.EMPTY;
         全項目 = 全項目
                 .concat(二次予防.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(二次予防.getInsertDantaiCd()).concat(SPLIT);
+                .concat(new RString(二次予防.getRirekiNo()));
         return 全項目;
+    }
+
+    private RString cancatYMD(FlexibleDate date, RString 全項目) {
+        if (date != null) {
+            return 全項目.concat(new RString(date.toString())).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }
 
 }

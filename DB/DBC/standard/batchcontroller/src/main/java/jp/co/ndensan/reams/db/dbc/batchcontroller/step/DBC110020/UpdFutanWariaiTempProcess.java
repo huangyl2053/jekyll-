@@ -33,7 +33,7 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select二割負担");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-    private static final RString SPLIT = new RString("|");
+    private static final RString SPLIT = new RString(",");
     private static final RString RST_TRUE = new RString("TRUE");
     private static final RString RST_FALSE = new RString("FALSE");
 

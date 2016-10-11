@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -31,9 +33,7 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select受給者台帳");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-    private static final RString SPLIT = new RString("|");
-    private static final RString RST_TRUE = new RString("TRUE");
-    private static final RString RST_FALSE = new RString("FALSE");
+    private static final RString SPLIT = new RString(",");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
     private List<RString> 受給者台帳List;
@@ -112,9 +112,48 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
         RString 全項目 = RString.EMPTY;
         //TODO
         全項目 = 全項目
-                .concat(受給者台帳.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(受給者台帳.getInsertDantaiCd()).concat(SPLIT);
-        全項目 = 全項目.concat(受給者台帳.getLogicalDeletedFlag() ? RST_TRUE : RST_FALSE);
+                .concat(受給者台帳.getHihokenshaNo().getColumnValue()).concat(SPLIT);
+        全項目 = concatCode(全項目, 受給者台帳.getYokaigoJotaiKubunCode());
+        全項目 = concatDate(全項目, 受給者台帳.getJukyuShinseiYMD());
+        全項目 = concatDate(全項目, 受給者台帳.getNinteiYukoKikanKaishiYMD());
+        全項目 = concatDate(全項目, 受給者台帳.getNinteiYukoKikanShuryoYMD());
+        全項目 = concatCode(全項目, 受給者台帳.getMinashiCode());
+        全項目 = concatDecimal(全項目, 受給者台帳.getShikyuGendoTanisu());
+        全項目 = concatDate(全項目, 受給者台帳.getShikyuGendoKaishiYMD());
+        全項目 = concatDate(全項目, 受給者台帳.getShikyuGendoShuryoYMD());
+        全項目 = 全項目.concat(new RString(受給者台帳.getTankiSikyuGendoNissu())).concat(SPLIT);
+        全項目 = concatDate(全項目, 受給者台帳.getTankiShikyuGendoKaishiYMD());
+        全項目 = concatDate(全項目, 受給者台帳.getTankiShikyuGendoShuryoYMD());
+        全項目 = concatCode(全項目, 受給者台帳.getYukoMukoKubun());
+        全項目 = concatCode(全項目, 受給者台帳.getJukyuShinseiJiyu());
+        全項目 = concatDate(全項目, 受給者台帳.getJukyuShinseiYMD());
+        return 全項目;
+    }
+
+    private RString concatCode(RString 全項目, Code code) {
+        if (code == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(code.getColumnValue()).concat(SPLIT);
+        }
+        return 全項目;
+    }
+
+    private RString concatDate(RString 全項目, FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(date.toString()).concat(SPLIT);
+        }
+        return 全項目;
+    }
+
+    private RString concatDecimal(RString 全項目, Decimal decimal) {
+        if (decimal == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(decimal.toString()).concat(SPLIT);
+        }
         return 全項目;
     }
 
