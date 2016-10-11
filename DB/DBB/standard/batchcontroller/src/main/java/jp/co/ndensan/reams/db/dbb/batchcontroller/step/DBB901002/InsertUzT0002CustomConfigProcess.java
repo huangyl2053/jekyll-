@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
-import jp.co.ndensan.reams.uz.uza.util.config.entity.UzT0001StandardConfigEntity;
+import jp.co.ndensan.reams.uz.uza.util.config.entity.UzT0002CustomConfigEntity;
 
 /**
  * 業務コンフィグ年度切替processのクラスです。
  *
  * @reamsid_L DBB-5722-030 xuhao
  */
-public class UpdateUzT0001StandardConfigProcess extends BatchProcessBase<UzT0001StandardConfigEntity> {
+public class InsertUzT0002CustomConfigProcess extends BatchProcessBase<UzT0002CustomConfigEntity> {
 
     private NendoKirikaeProcessParameter processParameter;
     private static final int INT_1 = 1;
@@ -39,7 +39,7 @@ public class UpdateUzT0001StandardConfigProcess extends BatchProcessBase<UzT0001
     }
 
     @Override
-    protected void process(UzT0001StandardConfigEntity entity) {
+    protected void process(UzT0002CustomConfigEntity entity) {
         BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.日付関連_調定年度,
                 processParameter.get調定年度().plusYear(INT_1).toDateString(), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
     }

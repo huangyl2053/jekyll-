@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nendokirikae.NendoKirikaeMybatisParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.uz.uza.util.config.entity.UzT0001StandardConfigEntity;
+import jp.co.ndensan.reams.uz.uza.util.config.entity.UzT0002CustomConfigEntity;
 
 /**
  * 年度切替バッチのmapperのクラスです。
@@ -39,7 +39,7 @@ public interface INendoKirikaeMapper {
      *
      * @return 業務コンフィグList
      */
-    List<UzT0001StandardConfigEntity> select業務コンフィグ();
+    List<UzT0002CustomConfigEntity> select業務コンフィグ();
 
     /**
      * 処理日付管理マスタを取得
