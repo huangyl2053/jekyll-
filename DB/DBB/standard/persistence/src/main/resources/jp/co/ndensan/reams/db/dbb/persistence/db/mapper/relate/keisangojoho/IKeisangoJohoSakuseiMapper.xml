@@ -371,18 +371,21 @@
             "db2002Fuka"."tsuchishoNo"
     </select>
     
-   <select resultOrdered="true" id="get計算中間Temp更新前情報処理３" resultMap="ResultMap_FukaEntity" fetchSize="500">
+   <select resultOrdered="true" id="get計算中間Temp更新前情報処理３" resultMap="ResultMap_FukaEntity" 
+           parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
        SELECT 
             <include refid="allColumns_FukaJoho"/>
        FROM(
             SELECT
                 <include refid="allColumns_FukaJoho"/>,
                 row_number() OVER (
-                       PARTITION BY "db2002Fuka"."fukaNendo","db2002Fuka"."tsuchishoNo"
+                       PARTITION BY "db2002Fuka"."tsuchishoNo"
                        ORDER BY "db2002Fuka"."choteiNendo" DESC, "db2002Fuka"."rirekiNo" DESC
                     ) AS rrkno
             FROM
                 rgdb."DbT2002Fuka" AS "db2002Fuka"
+            WHERE    
+                "db2002Fuka"."fukaNendo" = #{fukaNendo}
             ) AS "db2002Fuka"
         WHERE 
             "db2002Fuka".rrkno = 2

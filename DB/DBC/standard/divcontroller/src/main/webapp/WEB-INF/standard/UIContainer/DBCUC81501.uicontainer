@@ -1,27 +1,27 @@
 ﻿{
- "uiContainerName": "DBCUC51000",
+ "uiContainerName": "DBCUC81501",
  "displayWizard": false,
  "subGyomuCode": "DBC",
  "steps": [
   {
    "id": 1,
-   "name": "利用状況統計表",
+   "name": "高額介護対象者抽出（遡及分）",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC5100011",
-     "toLayoutTitle": "利用状況統計表",
+     "toLayoutName": "DBC8150001",
+     "toLayoutTitle": "高額介護対象者抽出（遡及分）",
      "toState": "標準"
     },
     {
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC5100011",
-     "layoutTitle": "利用状況統計表",
+     "layoutName": "DBC8150001",
+     "layoutTitle": "高額介護対象者抽出（遡及分）",
      "eventName": "実行",
      "destroy": false,
      "condition": ""

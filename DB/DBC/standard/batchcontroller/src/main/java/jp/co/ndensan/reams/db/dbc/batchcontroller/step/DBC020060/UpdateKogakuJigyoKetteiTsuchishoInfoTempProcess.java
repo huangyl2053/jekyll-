@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.SelectShoriDateKanriMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceUpdateTempEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -27,11 +29,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2000-030 wangxue
  */
-public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProcessBase<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> {
+public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProcessBase<KogakuServiceUpdateTempEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.get更新の判定結果データ");
+            + "kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.select事業高額のサービス種類名称情報");
 
+    private static final RString 高額サービス決定通知書情報一時_TABLE_NAME = new RString("KetteiTsuchishoInfoTempEntity");
     private static final RString フラグ_FALSE = new RString("false");
     private static final RString 抽出モード_受付日 = new RString("1");
     private static final RString 抽出モード_決定日 = new RString("2");
@@ -40,34 +43,61 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
     private static final RString 処理枝番 = new RString("0000");
     private static final FlexibleYear 年度_固定 = new FlexibleYear("0000");
     private static final RString 年度内連番_01 = new RString("01");
+    private static final RString 読点 = new RString("、");
 
     private KogakuKaigoServiceProcessParameter parameter;
     private IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper mapper;
+    private RString サービス種類名称;
+    private KogakuServiceUpdateTempEntity beforeEntity;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 一時tableWriter;
     @BatchWriter
     BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> permanentTableWriter;
 
     @Override
     protected void initialize() {
+
+        サービス種類名称 = RString.EMPTY;
         mapper = getMapper(IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.class);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH, parameter.toパラメータ());
+        return new BatchDbReader(MAPPERPATH);
     }
 
     @Override
     protected void createWriter() {
+
         permanentTableWriter = new BatchPermanentTableWriter<>(DbT7022ShoriDateKanriEntity.class);
+        一時tableWriter = new BatchEntityCreatedTempTableWriter(高額サービス決定通知書情報一時_TABLE_NAME,
+                KetteiTsuchishoInfoTempEntity.class);
     }
 
     @Override
-    protected void process(DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity) {
-        // TODO QA1560
+    protected void process(KogakuServiceUpdateTempEntity entity) {
+
+        if (beforeEntity == null) {
+            サービス種類名称 = entity.get介護サービス種類Entity().getServiceShuruiMeisho();
+        } else if (beforeEntity.getHihokenshaNo().equals(entity.getHihokenshaNo())
+                && beforeEntity.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())) {
+            サービス種類名称 = サービス種類名称.concat(読点).concat(entity.get介護サービス種類Entity().getServiceShuruiMeisho());
+        } else {
+            KetteiTsuchishoInfoTempEntity 一時Entit = beforeEntity.get一時Entity();
+            一時Entit.setServiceShuruiName(サービス種類名称);
+            一時tableWriter.update(一時Entit);
+            サービス種類名称 = entity.get介護サービス種類Entity().getServiceShuruiMeisho();
+        }
     }
 
     @Override
     protected void afterExecute() {
+
+        if (beforeEntity != null) {
+            KetteiTsuchishoInfoTempEntity 一時Entit = beforeEntity.get一時Entity();
+            一時Entit.setServiceShuruiName(サービス種類名称);
+            一時tableWriter.update(一時Entit);
+        }
         if (フラグ_FALSE.equals(parameter.getテスト出力フラグ())) {
             SelectShoriDateKanriMybatisParameter mybatisParameter
                     = new SelectShoriDateKanriMybatisParameter(SubGyomuCode.DBC介護給付, 市町村コード,
@@ -78,6 +108,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
     }
 
     private DbT7022ShoriDateKanriEntity get処理日付管理マスタ(int 度内連番) {
+
         DbT7022ShoriDateKanriEntity tempEntity = new DbT7022ShoriDateKanriEntity();
         tempEntity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         tempEntity.setShichosonCode(市町村コード);

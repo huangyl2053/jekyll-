@@ -44,7 +44,7 @@ public class ShiharaiHohoHenkoEntity {
     private ShikakuSoshitsuJiyu 喪失事由;
     private ShikakuKubun 資格区分;
     private RString 住特フラグ;
-    private RString 生保;
+    private boolean 生保;
 
     private RString 要介護度;
     private RString 認定有効期間;

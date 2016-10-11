@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceshikyukettei.KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.InsertKetteiTsuchishoInfoTempMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
@@ -13,20 +12,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -44,7 +35,6 @@ public class InsertKogakuJigyoKetteiTsuchishoInfoTempProcess extends
 
     private KogakuKaigoServiceProcessParameter parameter;
     ServicehiShikyuKetteiTsuchisho manager;
-    private InsertKetteiTsuchishoInfoTempMybatisParameter mybatisParameter;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 事業高額決定通知書情報一時tableWriter;
@@ -69,25 +59,16 @@ public class InsertKogakuJigyoKetteiTsuchishoInfoTempProcess extends
     @Override
     protected IBatchReader createReader() {
 
-        IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
-                .set業務コード(GyomuCode.DB介護保険)
-                .setサブ業務コード(SubGyomuCode.DBC介護給付)
-                .set基準日(new FlexibleDate(RDate.getNowDate().toDateString())).build();
-        List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
-                get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
-        FlexibleDate 抽出条件日付From = new FlexibleDate(parameter.get抽出条件日付From().toDateString());
-        FlexibleDate 抽出条件日付To = new FlexibleDate(parameter.get抽出条件日付To().toDateString());
-        mybatisParameter = new InsertKetteiTsuchishoInfoTempMybatisParameter(parameter.get抽出モード(), 抽出条件日付From,
-                抽出条件日付To, parameter.get決定者受付年月(), parameter.get印書(), parameter.get高額自動償還(), searchKey, kamokuList);
-        return new BatchDbReader(MAPPERPATH, mybatisParameter);
+        return new BatchDbReader(MAPPERPATH, getMybatisParameter());
     }
 
     @Override
     protected void process(KetteiTsuchishoInfoTempResultEntity entity) {
 
-        事業高額決定通知書情報一時tableWriter.insert(manager.to決定通知書情報(entity));
         if (null == entity.get宛名()) {
             処理結果確認リスト一時tableWriter.insert(get処理結果確認リスト(entity));
+        } else {
+            事業高額決定通知書情報一時tableWriter.insert(manager.to事業高額の決定通知書情報(entity));
         }
     }
 
@@ -105,5 +86,14 @@ public class InsertKogakuJigyoKetteiTsuchishoInfoTempProcess extends
         returnEntity.setHihokenshaShimei(RString.EMPTY);
         returnEntity.setBiko(RString.EMPTY);
         return returnEntity;
+    }
+
+    private InsertKetteiTsuchishoInfoTempMybatisParameter getMybatisParameter() {
+        FlexibleDate 抽出条件日付From = parameter.get抽出条件日付From() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(parameter.get抽出条件日付From().toDateString());
+        FlexibleDate 抽出条件日付To = parameter.get抽出条件日付To() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(parameter.get抽出条件日付To().toDateString());
+        return new InsertKetteiTsuchishoInfoTempMybatisParameter(parameter.get抽出モード(), 抽出条件日付From, 抽出条件日付To,
+                parameter.get決定者受付年月(), parameter.get印書(), parameter.get高額自動償還());
     }
 }

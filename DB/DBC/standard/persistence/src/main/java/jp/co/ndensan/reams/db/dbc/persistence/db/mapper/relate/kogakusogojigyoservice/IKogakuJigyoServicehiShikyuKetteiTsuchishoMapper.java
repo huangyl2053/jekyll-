@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishik
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.DbWT0203ShoriKekkaKakuninListTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceUpdateTempEntity;
 
 /**
  * 高額総合事業サービス費支給（不支給）決定通知書作成する用マッパーインタフェースです。
@@ -23,10 +24,17 @@ public interface IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper {
     /**
      * 事業高額決定通知書情報取得するメソッドです。
      *
-     * @param parameter InsertKetteiTsuchishoInfoTempMybatisParameter
+     * @param parameter KogakukaigoKetteiTsuchishoInfoTempParameter
      * @return KetteiTsuchishoInfoTempResultEntity 通知書情報エンティティ
      */
     KetteiTsuchishoInfoTempResultEntity select事業高額決定通知書情報(InsertKetteiTsuchishoInfoTempMybatisParameter parameter);
+
+    /**
+     * 事業高額サービス種類名称情報を取得する。
+     *
+     * @return KogakuServiceUpdateTempEntity
+     */
+    KogakuServiceUpdateTempEntity select事業高額のサービス種類名称情報();
 
     /**
      * 高額介護サービス費支給判定結果データ取得するメソッドです。

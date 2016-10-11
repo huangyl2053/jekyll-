@@ -47,12 +47,13 @@ public class KyoutsuIdoReanrakuhyoEraTeisei {
      */
     public ResponseData<KyoutsuIdoReanrakuhyoEraTeiseiDiv> onLoad(KyoutsuIdoReanrakuhyoEraTeiseiDiv div) {
         List<JukyusyaIdouJohoRirekEntity> list = new ArrayList<>();
+        div.getDgIdoReanrakuhyoEraTeisei().setDataSource(new ArrayList());
         List<UzT0885SharedFileEntryEntity> 共有ファイル情報リスト = SharedFile.searchSharedFile(履歴訂正リストファイル名);
         if (共有ファイル情報リスト == null || 共有ファイル情報リスト.isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbzErrorMessages.理由付き登録不可.getMessage().replace(メッセージ引数.toString()).getCode(),
-                        DbzErrorMessages.理由付き登録不可.getMessage().evaluate());
+                        DbzErrorMessages.理由付き登録不可.getMessage().replace(メッセージ引数.toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
             return ResponseData.of(div).addValidationMessages(getValidationHandler().get対象データなしメッセージ()).respond();
@@ -70,6 +71,15 @@ public class KyoutsuIdoReanrakuhyoEraTeisei {
                     list = KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei.createInstance().getRirekiTeiseiJoho(file);
                 }
             }
+        }
+        if (list == null || list.isEmpty()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(
+                        DbzErrorMessages.理由付き登録不可.getMessage().replace(メッセージ引数.toString()).getCode(),
+                        DbzErrorMessages.理由付き登録不可.getMessage().replace(メッセージ引数.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            return ResponseData.of(div).addValidationMessages(getValidationHandler().get対象データなしメッセージ()).respond();
         }
         getHandler(div).onLoad(list);
         return ResponseData.of(div).respond();
