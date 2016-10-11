@@ -5,23 +5,35 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelSetaiyinShotokuJyohoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelTaishoSeitaiyinTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.InsDbT3116KijunShunyugakuTekiyoKanriProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.InsTaishoSeitaiyinTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdSetaiyinShotokuJyohoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp1Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp2Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp3Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp4Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.CreateTaishoSetaiyinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp2Process;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdSetaiyinShotokuJyohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_KijunsyunygetsujiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計_DBC110065_基準収入額適用申請書_異動分作成のフロークラスです。
  *
- * @reamsid_L DBC-4640-030 liuyang
+ * @reamsid_L DBC-4640-030 jianglaisheng
  */
 public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_KijunsyunygetsujiParameter> {
 
@@ -31,26 +43,63 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
     private static final String INS世帯員所得情報一時表1 = "insSetaiyinShotokuJyohoTemp1Process";
     private static final String INS世帯員所得情報一時表2 = "insSetaiyinShotokuJyohoTemp2Process";
     private static final String UPD世帯員所得情報一時表 = "updSetaiyinShotokuJyohoTempProcess";
+    private static final String 世帯員所得情報一時テーブルに重複削除 = "delSetaiyinShotokuJyohoTemp";
+    private static final String 対象世帯員クラスに登録 = "insTaishoSeitaiyinTemp";
+    private static final String 対象世帯員クラスに更新1 = "updTaishoSeitaiyinTemp1";
+    private static final String 対象世帯員クラスに更新2 = "updTaishoSeitaiyinTemp2";
+    private static final String 対象世帯員クラスに更新3 = "updTaishoSeitaiyinTemp3";
+    private static final String 対象世帯員クラスに削除 = "delTaishoSeitaiyinTemp";
+    private static final String 対象世帯員クラスに登録2 = "insTaishoSeitaiyinTemp2";
+    private static final String 対象世帯員クラスに更新4 = "updTaishoSeitaiyinTemp4";
+    private static final String 帳票出力_CSV作成 = "createTaishoSetaiyin";
+    private static final String 基準収入額管理マスタに登録 = "insDbT3116KijunShunyugakuTekiyoKanri";
+    private static final String 処理日付管理マスタに更新 = "updShoriDateKanri";
+
+    private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_2 = new RString("2");
 
     @Override
     protected void defineFlow() {
 //バッチパラメータ．抽出条件＝白紙印刷の場合、対象世帯員クラス①作成処理は行わない
-        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
-//BatchStep 1
-            executeStep(INS世帯員所得情報一時表1);
-//BatchStep 2
-            executeStep(世帯員把握バッチ);
-//BatchStep 3
-            executeStep(UPD世帯員所得情報一時表);
-//TODO BatchStep 4.1 4.2 BatchStep5~8
-
-//BatchStep9
+        if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
+            //BatchStep 1
+//            executeStep(INS世帯員所得情報一時表1);
+//            //BatchStep 2
+//            executeStep(世帯員把握バッチ);
+//            //BatchStep 3
+//            executeStep(UPD世帯員所得情報一時表);
+//            //BatchStep 4.1
+//            executeStep(世帯員所得情報一時テーブルに重複削除);
+//            //BatchStep 4.2
+//            executeStep(対象世帯員クラスに登録);
+//            //BatchStep 5
+//            executeStep(対象世帯員クラスに更新1);
+//            //BatchStep 6
+//            executeStep(対象世帯員クラスに更新2);
+//            //BatchStep 7
+//            executeStep(対象世帯員クラスに更新3);
+//            //BatchStep 8
+//            executeStep(対象世帯員クラスに削除);
+            //BatchStep9
             executeStep(INS世帯員所得情報一時表2);
-//BatchStep 10
+            //BatchStep 10
             executeStep(世帯員把握バッチ);
-//BatchStep 11
+            //BatchStep 11
             executeStep(UPD世帯員所得情報一時表);
-//TODO BatchStep 4.1 4.2 BatchStep12 13...
+            //BatchStep 4.1
+            executeStep(世帯員所得情報一時テーブルに重複削除);
+            //BatchStep 4.2
+            executeStep(対象世帯員クラスに登録2);
+            //BatchStep 12
+            executeStep(対象世帯員クラスに更新4);
+            //TODO BatchStep 13
+            //BatchStep 14
+            executeStep(帳票出力_CSV作成);
+            //TODO BatchStep 15
+            //BatchStep 16
+            executeStep(基準収入額管理マスタに登録);
+            //BatchStep 17
+            executeStep(処理日付管理マスタに更新);
         }
     }
 
@@ -62,7 +111,7 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
 
     @Step(世帯員把握バッチ)
     IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBZ介護共通,
+        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBB介護賦課,
                 new DBB002001_SetaiinHaakuParameter(管理識別区分)).define();
     }
 
@@ -77,4 +126,88 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
                 arguments(getParameter().toDBC190030ProcessParameter()).define();
     }
 
+    @Step(世帯員所得情報一時テーブルに重複削除)
+    IBatchFlowCommand callDelSetaiyinShotokuJyohoTempProcess() {
+        return loopBatch(DelSetaiyinShotokuJyohoTempProcess.class).define();
+    }
+
+    @Step(対象世帯員クラスに登録)
+    IBatchFlowCommand callInsTaishoSeitaiyinTempProcess() {
+        InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
+        parameter.set処理区分(RSTRING_1);
+        parameter.set処理年度(getParameter().get処理年度());
+        parameter.set世帯員把握基準日(getParameter().get世帯員把握基準日());
+        parameter.set世帯員把握基準日2(getParameter().get世帯員把握基準日2());
+        return loopBatch(InsTaishoSeitaiyinTempProcess.class).arguments(parameter).define();
+    }
+
+    @Step(対象世帯員クラスに更新1)
+    IBatchFlowCommand callUpdTaishoSeitaiyinTemp1Process() {
+        InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
+        parameter.set世帯員把握基準日(getParameter().get世帯員把握基準日());
+        return loopBatch(UpdTaishoSeitaiyinTemp1Process.class).arguments(parameter).define();
+    }
+
+    @Step(対象世帯員クラスに更新2)
+    IBatchFlowCommand callUpdTaishoSeitaiyinTemp2Process() {
+        return loopBatch(UpdTaishoSeitaiyinTemp2Process.class).define();
+    }
+
+    @Step(対象世帯員クラスに更新3)
+    IBatchFlowCommand callUpdTaishoSeitaiyinTemp3Process() {
+        return loopBatch(UpdTaishoSeitaiyinTemp3Process.class).define();
+    }
+
+    @Step(対象世帯員クラスに削除)
+    IBatchFlowCommand callDelTaishoSeitaiyinTempProcess() {
+        return simpleBatch(DelTaishoSeitaiyinTempProcess.class).define();
+    }
+
+    @Step(対象世帯員クラスに登録2)
+    IBatchFlowCommand callInsTaishoSeitaiyinTemp2Process() {
+        InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
+        parameter.set処理区分(RSTRING_2);
+        parameter.set処理年度(getParameter().get処理年度());
+        parameter.set世帯員把握基準日(getParameter().get世帯員把握基準日());
+        parameter.set世帯員把握基準日2(getParameter().get世帯員把握基準日2());
+        return loopBatch(InsTaishoSeitaiyinTempProcess.class).arguments(parameter).define();
+    }
+
+    @Step(対象世帯員クラスに更新4)
+    IBatchFlowCommand callUpdTaishoSeitaiyinTemp4Process() {
+        return loopBatch(UpdTaishoSeitaiyinTemp4Process.class).define();
+    }
+
+    @Step(帳票出力_CSV作成)
+    IBatchFlowCommand callCreateTaishoSetaiyinProcess() {
+        InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
+        parameter.set抽出条件(getParameter().get抽出条件());
+        parameter.set処理年度(getParameter().get処理年度());
+        parameter.setお知らせ通知書出力フラグ(getParameter().getお知らせ通知書出力フラグ());
+        parameter.set一覧表CSV出力フラグ(getParameter().get一覧表CSV出力フラグ());
+        parameter.set作成日(getParameter().get作成日());
+        parameter.set世帯員把握基準日(getParameter().get世帯員把握基準日());
+        parameter.set世帯員把握基準日2(getParameter().get世帯員把握基準日2());
+        parameter.set出力順ID(new RString(getParameter().get帳票出力順ID().toString()));
+        parameter.set市町村コード(getParameter().get市町村コード());
+        parameter.set市町村名(getParameter().get市町村名());
+        parameter.set文書番号(getParameter().get文書番号());
+        parameter.set処理年月日(FlexibleDate.getNowDate());
+        return loopBatch(CreateTaishoSetaiyinProcess.class).arguments(parameter).define();
+    }
+
+    @Step(基準収入額管理マスタに登録)
+    IBatchFlowCommand callInsDbT3116KijunShunyugakuTekiyoKanriProcess() {
+        InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
+        parameter.set処理年度(getParameter().get処理年度());
+        return loopBatch(InsDbT3116KijunShunyugakuTekiyoKanriProcess.class).arguments(parameter).define();
+    }
+
+    @Step(処理日付管理マスタに更新)
+    IBatchFlowCommand callUpdShoriDateKanriProcess() {
+        InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
+        parameter.set処理年度(getParameter().get処理年度());
+        parameter.set市町村コード(getParameter().get市町村コード());
+        return simpleBatch(UpdShoriDateKanriProcess.class).arguments(parameter).define();
+    }
 }
