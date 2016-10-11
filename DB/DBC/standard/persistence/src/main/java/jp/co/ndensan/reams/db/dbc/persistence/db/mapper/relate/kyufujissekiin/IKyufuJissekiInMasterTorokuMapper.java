@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3031KyufuJissekiCareManagem
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3106KyufujissekiMeisaiJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.KyufuJissekiInHenkyakuD8DataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.KyufuJissekiInHenkyakuH1DataEntity;
 
 /**
@@ -173,6 +174,35 @@ public interface IKyufuJissekiInMasterTorokuMapper {
      * @return int
      */
     int delete給付実績H1の新規修正関連データ(KyufuJissekiInMybatisParameter parameter);
+
+    /**
+     * 付実績H1の取消データを物理削除する。
+     *
+     * @return KyufuJissekiInHenkyakuH1DataEntity
+     */
+    KyufuJissekiInHenkyakuH1DataEntity select給付実績H1の取消データ();
+
+    /**
+     * 付実績H1の取消関連データを物理削除する。
+     *
+     * @param parameter KyufuJissekiInMybatisParameter
+     * @return int
+     */
+    int delete給付実績H1の取消関連データ(KyufuJissekiInMybatisParameter parameter);
+
+    /**
+     * 付実績D8の新規、修正データを物理削除する。
+     *
+     * @return KyufuJissekiInHenkyakuD8DataEntity
+     */
+    KyufuJissekiInHenkyakuD8DataEntity select給付実績D8の新規修正データ();
+
+    /**
+     * 付実績D8の取消データを物理削除する。
+     *
+     * @return KyufuJissekiInHenkyakuD8DataEntity
+     */
+    KyufuJissekiInHenkyakuD8DataEntity select給付実績D8の取消データ();
 
     /**
      * 給付実績一時TBLの最大連番を取ります。
