@@ -128,9 +128,9 @@ public class ChikuShichosonSelectHandler {
                 AuthorityItem 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(UserId).get(0);
                 List<ShichosonShikibetsuIDniYoruShichosonJoho> 構成市町村情報list = finder.
                         loginUserShichosonJoho(市町村識別ID.getItemId()).records();
-                if (!構成市町村情報list.isEmpty() && 構成市町村情報list.size() > 1) {
-                    RString 市町村Code = 構成市町村情報list.get(1).get市町村コード().value();
-                    RString 市町村名称 = 構成市町村情報list.get(1).get市町村名称();
+                if (!構成市町村情報list.isEmpty()) {
+                    RString 市町村Code = 構成市町村情報list.get(0).get市町村コード().value();
+                    RString 市町村名称 = 構成市町村情報list.get(0).get市町村名称();
                     dataSource.add(new KeyValueDataSource(市町村Code, 市町村Code.concat(全角空白).concat(市町村名称)));
                     div.getDdlShichoson().setDataSource(dataSource);
                     div.getDdlShichoson().setSelectedKey(市町村Code);
@@ -269,9 +269,7 @@ public class ChikuShichosonSelectHandler {
                                 item.get旧市町村名称()));
                     }
                     div.getDdlKyushichosonKoiki().setDataSource(setDdlDataSource昇順ByKey(dataSource));
-                    if (dataSource.size() > 1) {
-                        div.getDdlKyushichosonKoiki().setSelectedIndex(1);
-                    }
+                    div.getDdlKyushichosonKoiki().setSelectedIndex(0);
                 }
             } else {
                 div.getDdlKyushichosonKoiki().setDisplayNone(true);

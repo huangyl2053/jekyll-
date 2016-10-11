@@ -54,16 +54,19 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_4 = 4;
     private final IOutputOrder outputOrder;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param entity entity
      * @param outputOrder IOutputOrder
+     * @param index int
      */
-    protected RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(NinteishaListSakuseiResultEntity entity, IOutputOrder outputOrder) {
+    protected RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(NinteishaListSakuseiResultEntity entity, IOutputOrder outputOrder, int index) {
         this.entity = entity;
         this.outputOrder = outputOrder;
+        this.index = index;
     }
 
     /**
@@ -119,25 +122,15 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
         } else {
             source.listUpper_13 = editFormmatDate(entity.get総者のチェックリスト実施日());
         }
-        if (null != entity.get世帯員Entity().getPsmEntity()) {
-            source.listUpper_14 = edit世帯員宛名().get名称().getName().getColumnValue();
-            source.listUpper_15 = edit世帯員宛名().get住民状態().住民状態略称();
+        if (entity.get世帯員リスト().size() > index) {
+            setsource世帯員1(source, index);
         }
-        if (entity.get世帯員Entity() != null && entity.get世帯員Entity().get課税区分() != null) {
-            if (KazeiKubun.課税.getコード().equals(entity.get世帯員Entity().get課税区分())) {
-                source.listUpper_16 = 課;
-            } else {
-                source.listUpper_16 = 空白;
-            }
+        if (entity.get世帯員リスト().size() > index + LISTINDEX_1) {
+            setsource世帯員2(source, index + LISTINDEX_1);
         }
-        if (entity.get世帯員Entity() != null && entity.get世帯員Entity().get課税所得額() != null) {
-            if (Decimal.ZERO.compareTo(entity.get世帯員Entity().get課税所得額()) < 0) {
-                source.listUpper_17 = 空白;
-            } else {
-                source.listUpper_17 = 課;
-            }
+        if (entity.get世帯員リスト().size() > index + INDEX_2) {
+            setsource世帯員3(source, index + INDEX_2);
         }
-
         source.listUpper_18 = 空白;
         edit項目１(source);
         edit項目2(source);
@@ -207,23 +200,6 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
         source.listCenter_7 = entity.get入所施設コード();
         source.listCenter_8 = eidt空白と空白以外(entity.is旧措置者フラグ());
         source.listCenter_9 = editFormmatDate(entity.get認定情報の認定有効期間開始年月日());
-
-        if (null != entity.get世帯員Entity().getPsmEntity()) {
-            source.listCenter_10 = edit世帯員宛名().get名称().getName().getColumnValue();
-            source.listCenter_11 = edit世帯員宛名().get住民状態().住民状態略称();
-        }
-        if (KazeiKubun.課税.getコード().equals(entity.get世帯員Entity().get課税区分())) {
-            source.listCenter_12 = 課;
-        } else {
-            source.listCenter_12 = 空白;
-        }
-        if (entity.get世帯員Entity() != null && entity.get世帯員Entity().get課税所得額() != null) {
-            if (Decimal.ZERO.compareTo(entity.get世帯員Entity().get課税所得額()) < 0) {
-                source.listCenter_13 = 空白;
-            } else {
-                source.listCenter_13 = 課;
-            }
-        }
         source.listCenter_14 = 空白;
         return source;
     }
@@ -254,33 +230,8 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
         }
         source.listLower_5 = entity.get入所施設名称();
         source.listLower_6 = editFormmatDate(entity.get認定情報の認定有効期間終了年月日());
-        if (null != entity.get世帯員Entity().getPsmEntity()) {
-            source.listLower_7 = edit世帯員宛名().get名称().getName().getColumnValue();
-            source.listLower_8 = edit世帯員宛名().get住民状態().住民状態略称();
-        }
-        if (entity.get世帯員Entity() != null && entity.get世帯員Entity().get課税区分() != null) {
-            if (KazeiKubun.課税.getコード().equals(entity.get世帯員Entity().get課税区分())) {
-                source.listLower_9 = 課;
-            } else {
-                source.listLower_9 = 空白;
-            }
-        }
-        if (entity.get世帯員Entity() != null && entity.get世帯員Entity().get課税所得額() != null) {
-            if (Decimal.ZERO.compareTo(entity.get世帯員Entity().get課税所得額()) < 0) {
-                source.listLower_10 = 空白;
-            } else {
-                source.listLower_10 = 課;
-            }
-        }
         source.listLower_11 = 空白;
         return source;
-    }
-
-    private IKojin edit世帯員宛名() {
-        if (null != entity.get世帯員Entity().getPsmEntity()) {
-            return ShikibetsuTaishoFactory.createKojin(entity.get世帯員Entity().getPsmEntity());
-        }
-        return null;
     }
 
     private IYokaigoJotaiKubun get要介護度(KoroshoInterfaceShikibetsuCode 厚労省IF識別コード, RString 要介護状態区分コード) {
@@ -339,5 +290,65 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             naiYou = 空白;
         }
         return naiYou;
+    }
+
+    private void setsource世帯員1(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source, int listindex) {
+        if (entity.get世帯員リスト().get(listindex).getPsmEntity() != null) {
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get世帯員リスト().get(listindex).getPsmEntity());
+            if (kojin.get名称() != null) {
+                source.listUpper_14 = kojin.get名称().getName().value();
+            }
+            if (kojin.get住民状態() != null) {
+                source.listUpper_15 = kojin.get住民状態().住民状態略称();
+            }
+        }
+        if (entity.get世帯員リスト().get(listindex).get課税区分() != null
+                && KazeiKubun.課税.getコード().equals(entity.get世帯員リスト().get(listindex).get課税区分())) {
+            source.listUpper_16 = new RString("課");
+        }
+        if (entity.get世帯員リスト().get(listindex).get課税所得額() != null
+                && entity.get世帯員リスト().get(listindex).get課税所得額().intValue() > 0) {
+            source.listUpper_17 = new RString("課");
+        }
+    }
+
+    private void setsource世帯員2(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source, int listindex) {
+        if (entity.get世帯員リスト().get(listindex).getPsmEntity() != null) {
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get世帯員リスト().get(listindex).getPsmEntity());
+            if (kojin.get名称() != null) {
+                source.listCenter_10 = kojin.get名称().getName().value();
+            }
+            if (kojin.get住民状態() != null) {
+                source.listCenter_11 = kojin.get住民状態().住民状態略称();
+            }
+        }
+        if (entity.get世帯員リスト().get(listindex).get課税区分() != null
+                && KazeiKubun.課税.getコード().equals(entity.get世帯員リスト().get(listindex).get課税区分())) {
+            source.listCenter_12 = new RString("課");
+        }
+        if (entity.get世帯員リスト().get(listindex).get課税所得額() != null
+                && entity.get世帯員リスト().get(listindex).get課税所得額().intValue() > 0) {
+            source.listCenter_13 = new RString("課");
+        }
+    }
+
+    private void setsource世帯員3(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source, int listindex) {
+        if (entity.get世帯員リスト().get(listindex).getPsmEntity() != null) {
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get世帯員リスト().get(listindex).getPsmEntity());
+            if (kojin.get名称() != null) {
+                source.listLower_7 = kojin.get名称().getName().value();
+            }
+            if (kojin.get住民状態() != null) {
+                source.listLower_8 = kojin.get住民状態().住民状態略称();
+            }
+        }
+        if (entity.get世帯員リスト().get(listindex).get課税区分() != null
+                && KazeiKubun.課税.getコード().equals(entity.get世帯員リスト().get(listindex).get課税区分())) {
+            source.listLower_9 = new RString("課");
+        }
+        if (entity.get世帯員リスト().get(listindex).get課税所得額() != null
+                && entity.get世帯員リスト().get(listindex).get課税所得額().intValue() > 0) {
+            source.listLower_10 = new RString("課");
+        }
     }
 }

@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakukakuninsho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
+import jp.co.ndensan.reams.db.dbc.business.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuservicejyuryokakuninsho.KogakuServiceJyuryoKakuninShoSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
@@ -57,7 +58,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -70,7 +78,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
     private static final RString 円単位 = new RString("円");
     private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
     private static final RString 帳票制御共通_首長名印字位置_公印にかける = new RString("1");
-    private ReportSourceWriter<KogakuServiceJyuryoKakuninShoSource> reportSourceWriter;
+    private ReportSourceWriter<KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource> reportSourceWriter;
     private DbT7060KaigoJigyoshaDac 介護事業者情報DAC;
     private DbT7062KaigoJigyoshaDaihyoshaDac 介護事業者代表者情報DAC;
     private DbT7065ChohyoSeigyoKyotsuDac 帳票制御情報DAC;
@@ -149,6 +157,14 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
     }
 
     private void 認証者情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result, FlexibleDate 通知日) {
+        KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty property = new KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty();
+        try (ReportManager reportManager = new ReportManager()) {
+            try (ReportAssembler<KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource> assembler
+                    = createAssembler(reportManager, property)) {
+                reportSourceWriter = new ReportSourceWriter(assembler);
+            }
+        }
+
         this.帳票制御情報DAC = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御情報Entity = 帳票制御情報DAC.selectByKey(SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID));
 
@@ -178,6 +194,17 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
             result.set認証者氏名掛けない(null == source.ninshoshaShimeiKakenai ? RString.EMPTY : source.ninshoshaShimeiKakenai);
             result.set公印省略(null == source.koinShoryaku ? RString.EMPTY : source.koinShoryaku);
         }
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            ReportManager manager, IReportProperty<T> property) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
     }
 
     private void 通知書定型文情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result) {

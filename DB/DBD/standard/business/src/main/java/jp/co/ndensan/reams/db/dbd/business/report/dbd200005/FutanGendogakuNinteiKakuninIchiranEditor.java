@@ -202,8 +202,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             }
             RString 利用者負担段階今回 = 今回認定結果.getRiyoshaFutanDankai();
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 前回認定結果 = this.負担限度額認定確認リスト.get前回認定結果();
-            if (利用者負担段階今回 != null && 利用者負担段階今回 != 前回認定結果.getRiyoshaFutanDankai()
-                    && 前回認定結果.getRiyoshaFutanDankai() != null) {
+            if (利用者負担段階今回 != null
+                    && 前回認定結果.getRiyoshaFutanDankai() != null
+                    && 利用者負担段階今回 != 前回認定結果.getRiyoshaFutanDankai()) {
                 source.list1_8 = 星;
             }
         }

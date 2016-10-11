@@ -41,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class RenkeiDataSakuseiShinseiJohoHandler {
 
     private final RenkeiDataSakuseiShinseiJohoDiv div;
+    private static final RString 対象期間 = new RString("対象期間");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -130,9 +132,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      */
     public void checkRadioButton() {
         RString radChushutsu = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
-        RString 対象期間 = new RString("対象期間");
-        RString 被保険者番号 = new RString("被保険者番号");
-        if (radChushutsu.equals(対象期間)) {
+        if (対象期間.equals(radChushutsu)) {
             div.getTxtHihokenshaNo().clearValue();
             div.getTxtHihokenshaNo().setDisabled(true);
             div.getBtnhihokensha().setDisabled(true);
@@ -146,7 +146,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             div.getTxtKonkaiShuryoTime().setDisabled(false);
             div.getBtnhihokensha().setDisabled(true);
         }
-        if (radChushutsu.equals(被保険者番号)) {
+        if (被保険者番号.equals(radChushutsu)) {
             div.getTxtHihokenshaNo().clearValue();
             div.getTxtKonkaiKaishiDay().clearValue();
             div.getTxtKonkaiKaishiTime().clearValue();
@@ -169,31 +169,39 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      */
     public DBD519001_NinteishinseiInfoIfParameter batchParameterSave() {
         DBD519001_NinteishinseiInfoIfParameter parameter = new DBD519001_NinteishinseiInfoIfParameter();
-        RDate fromdate = RDate.getNowDate();
-        RDate todate = RDate.getNowDate().plusDay(1);
-        RTime fromtime = RTime.of(0, 0, 0);
-        RTime totime = RTime.of(0, 0, 0);
-        if (div.getTxtKonkaiKaishiDay().getValue() != null) {
-            fromdate = div.getTxtKonkaiKaishiDay().getValue();
+        RString radChushutsu = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
+        if (対象期間.equals(radChushutsu)) {
+            RDate fromdate = RDate.getNowDate();
+            RDate todate = RDate.getNowDate().plusDay(1);
+            RTime fromtime = RTime.of(0, 0, 0);
+            RTime totime = RTime.of(0, 0, 0);
+            if (div.getTxtKonkaiKaishiDay().getValue() != null) {
+                fromdate = div.getTxtKonkaiKaishiDay().getValue();
+            }
+            if (div.getTxtKonkaiShuryoDay().getValue() != null) {
+                todate = div.getTxtKonkaiShuryoDay().getValue();
+            }
+            if (div.getTxtKonkaiKaishiTime().getValue() != null) {
+                fromtime = div.getTxtKonkaiKaishiTime().getValue();
+            }
+            if (div.getTxtKonkaiShuryoTime().getValue() != null) {
+                totime = div.getTxtKonkaiShuryoTime().getValue();
+            }
+            RDateTime konkaikaishiFrom = RDateTime.of(fromdate.getYearValue(), fromdate.getMonthValue(), fromdate.getDayValue(),
+                    fromtime.getHour(), fromtime.getMinute(), fromtime.getSecond());
+            RDateTime konkaikaishiTo = RDateTime.of(todate.getYearValue(), todate.getMonthValue(), todate.getDayValue(),
+                    totime.getHour(), totime.getMinute(), totime.getSecond());
+            parameter.set今回開始期間FROM(konkaikaishiFrom);
+            parameter.set今回開始期間TO(konkaikaishiTo);
+            parameter.set被保険者番号(null);
         }
-        if (div.getTxtKonkaiShuryoDay().getValue() != null) {
-            todate = div.getTxtKonkaiShuryoDay().getValue();
+        if (被保険者番号.equals(radChushutsu)) {
+            parameter.set今回開始期間FROM(null);
+            parameter.set今回開始期間TO(null);
+            parameter.set被保険者番号(div.getTxtHihokenshaNo().getValue());
         }
-        if (div.getTxtKonkaiKaishiTime().getValue() != null) {
-            fromtime = div.getTxtKonkaiKaishiTime().getValue();
-        }
-        if (div.getTxtKonkaiShuryoTime().getValue() != null) {
-            totime = div.getTxtKonkaiShuryoTime().getValue();
-        }
-        RDateTime konkaikaishiFrom = RDateTime.of(fromdate.getYearValue(), fromdate.getMonthValue(), fromdate.getDayValue(),
-                fromtime.getHour(), fromtime.getMinute(), fromtime.getSecond());
-        RDateTime konkaikaishiTo = RDateTime.of(todate.getYearValue(), todate.getMonthValue(), todate.getDayValue(),
-                totime.getHour(), totime.getMinute(), totime.getSecond());
         parameter.set証記載保険者番号(div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value());
         parameter.set市町村コード(div.getCommonChildDiv1().getSelectedItem().get市町村コード());
-        parameter.set被保険者番号(div.getTxtHihokenshaNo().getValue());
-        parameter.set今回開始期間FROM(konkaikaishiFrom);
-        parameter.set今回開始期間TO(konkaikaishiTo);
         parameter.set新ファイル名(div.getTxtNewFileName().getValue());
         List<RString> hihokenshaNoList = getHihokenshaNoList(div);
         parameter.set対象外被保険者番号リスト(hihokenshaNoList);

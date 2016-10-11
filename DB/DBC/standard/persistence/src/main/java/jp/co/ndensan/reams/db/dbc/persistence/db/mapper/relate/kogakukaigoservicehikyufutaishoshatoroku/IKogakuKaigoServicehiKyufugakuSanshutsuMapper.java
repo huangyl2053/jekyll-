@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.InsSetaiinHaakuNyuryokuKogakuTmpEntity1;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KogakuFlowReturnEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiReportEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiChukanKogaku8Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufujissekiTyukannInsertEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannJigyoKogakuRelateEntity;
@@ -615,4 +616,11 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      * @param entity TempSetaiinShotokuHanteiEntity
      */
     void update世帯員所得判定明細一時(TempSetaiinShotokuHanteiEntity entity);
+
+    /**
+     * select給付実績中間高額一時の作成8メソッドです。
+     *
+     * @return List<KyufuJissekiChukanKogaku8Entity>
+     */
+    List<KyufuJissekiChukanKogaku8Entity> select給付実績中間高額一時の作成8();
 }

@@ -170,7 +170,8 @@ public class DvKogakuServiceJohoHandler {
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
      * @param 市町村判定 RString
-     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @return HanyoListKogakuKaigoBatchParameter
+     * 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
     public DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter getBatchParamter(RString 市町村判定) {
         DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter batchparam = new DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter();
@@ -178,7 +179,7 @@ public class DvKogakuServiceJohoHandler {
         if (div.getTxtShinsaNengetsu().getValue() == null) {
             batchparam.setShinsaYM(null);
         } else {
-            batchparam.setShinsaYM(new FlexibleYearMonth(div.getTxtShinsaNengetsu().getValue().toString()));
+            batchparam.setShinsaYM(new FlexibleYearMonth(div.getTxtShinsaNengetsu().getValue().getYearMonth().toDateString()));
         }
         if (事務広域.equals(市町村判定)) {
             HokenshaSummary 保険者DDLSelected = div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem();

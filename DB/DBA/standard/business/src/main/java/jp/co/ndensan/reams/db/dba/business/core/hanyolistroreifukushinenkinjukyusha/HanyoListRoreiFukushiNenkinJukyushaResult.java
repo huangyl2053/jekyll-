@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.business.core.hanyolistroreifukushinenkinjuky
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.rorei.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba740010.HanyoListRoreiFukushiNenkinJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaRelateEntity;

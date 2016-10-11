@@ -58,5 +58,6 @@ public class InsHihokenshaDaichoTmpProcess1 extends BatchProcessBase<DbT1001Hiho
 
     @Override
     protected void afterExecute() {
+        sakujyoKiWriter.getInsertCount();
     }
 }

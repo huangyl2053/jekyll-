@@ -854,7 +854,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 where(and(
                                 eq(shikibetsuCode, 識別コード),
                                 eq(logicalDeletedFlag, false))).
-                order(by(shikibetsuCode), by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                order(by(hihokenshaNo), by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
 }
