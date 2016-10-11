@@ -623,4 +623,11 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      * @return List<KyufuJissekiChukanKogaku8Entity>
      */
     List<KyufuJissekiChukanKogaku8Entity> select給付実績中間高額一時の作成8();
+
+    /**
+     * select給付実績中間事業高額一時の作成8メソッドです。
+     *
+     * @return List<KyufuJissekiChukanKogaku8Entity>
+     */
+    List<KyufuJissekiChukanKogaku8Entity> select給付実績中間事業高額一時の作成8();
 }
