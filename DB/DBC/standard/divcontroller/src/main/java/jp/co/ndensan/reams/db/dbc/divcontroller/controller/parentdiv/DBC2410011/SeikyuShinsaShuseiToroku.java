@@ -46,9 +46,9 @@ public class SeikyuShinsaShuseiToroku {
     private static final RString 保存 = new RString("保存は正常に終了しました。");
 
     /**
+     * 画面初期化処理です。
      *
-     *
-     * @param div 審査会一覧Div
+     * @param div SeikyuShinsaShuseiTorokuDiv
      * @return ResponseData<SeikyuShinsaShuseiTorokuDiv>
      */
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onLoad(SeikyuShinsaShuseiTorokuDiv div) {
@@ -170,7 +170,6 @@ public class SeikyuShinsaShuseiToroku {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
-
         }
 
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
@@ -191,7 +190,6 @@ public class SeikyuShinsaShuseiToroku {
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onBlur_hasChanged(SeikyuShinsaShuseiTorokuDiv div) {
         getHandler(div).get請求合計();
         return ResponseData.of(div).respond();
-
     }
 
     /**
@@ -223,7 +221,6 @@ public class SeikyuShinsaShuseiToroku {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                         UrQuestionMessages.削除の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
-
             }
 
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
