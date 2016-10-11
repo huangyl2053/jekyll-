@@ -110,20 +110,20 @@ public class NinteiBatchMain extends BatchProcessBase<ShoninShoriEntity> {
             }
         } else if (parameter.is預貯金等超過時_承認しないフラグ()
                 && YochokinShinkokuKubun.超過.getコード().equals(entity.get介護保険負担限度額認定Entity().getYochokinShinkokuKubun())) {
-            shoninKekkaTempEntity.setRiyoshaFutanDankai(KetteiKubun.承認しない.getコード());
-            shoninKekkaTempEntity.setKetteiKubun(parameter.get預貯金等超過時_理由());
-            shoninKekkaTempEntity.setHiShoninRiyu(RString.EMPTY);
+            shoninKekkaTempEntity.setKetteiKubun(KetteiKubun.承認しない.getコード());
+            shoninKekkaTempEntity.setHiShoninRiyu(parameter.get預貯金等超過時_理由());
+            shoninKekkaTempEntity.setRiyoshaFutanDankai(RString.EMPTY);
         } else if (!entity.get減免減額対象者判定用根拠一時Entity().get利用者負担段階().isEmpty()
                 && !entity.get減免減額対象者判定用根拠一時Entity().get利用者負担段階().equals(RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード())) {
-            shoninKekkaTempEntity.setRiyoshaFutanDankai(KetteiKubun.承認する.getコード());
-            shoninKekkaTempEntity.setKetteiKubun(RString.EMPTY);
-            shoninKekkaTempEntity.setHiShoninRiyu(entity.get減免減額対象者判定用根拠一時Entity().get利用者負担段階());
+            shoninKekkaTempEntity.setKetteiKubun(KetteiKubun.承認する.getコード());
+            shoninKekkaTempEntity.setHiShoninRiyu(RString.EMPTY);
+            shoninKekkaTempEntity.setRiyoshaFutanDankai(entity.get減免減額対象者判定用根拠一時Entity().get利用者負担段階());
         } else if (entity.get減免減額対象者判定用根拠一時Entity().get利用者負担段階().equals(RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード())) {
-            shoninKekkaTempEntity.setRiyoshaFutanDankai(KetteiKubun.承認する.getコード());
-            shoninKekkaTempEntity.setKetteiKubun(RString.EMPTY);
-            shoninKekkaTempEntity.setHiShoninRiyu(entity.get減免減額対象者判定用根拠一時Entity().get利用者負担段階());
+            shoninKekkaTempEntity.setKetteiKubun(KetteiKubun.承認しない.getコード());
+            shoninKekkaTempEntity.setHiShoninRiyu(RString.EMPTY);
+            shoninKekkaTempEntity.setRiyoshaFutanDankai(RString.EMPTY);
         } else if (entity.get減免減額対象者判定用根拠一時Entity().get利用者負担段階().isEmpty()) {
-            shoninKekkaTempEntity.setRiyoshaFutanDankai(KetteiKubun.承認する.getコード());
+            shoninKekkaTempEntity.setRiyoshaFutanDankai(RString.EMPTY);
             shoninKekkaTempEntity.setKetteiKubun(RString.EMPTY);
             shoninKekkaTempEntity.setHiShoninRiyu(RString.EMPTY);
         }
@@ -139,7 +139,7 @@ public class NinteiBatchMain extends BatchProcessBase<ShoninShoriEntity> {
     }
 
     private void 適用開始日と適用終了日の判定(ShoninKekkaTempEntity shoninKekkaTempEntity) {
-        if (shoninKekkaTempEntity.getKetteiKubun() != null && shoninKekkaTempEntity.getKetteiKubun().equals(KetteiKubun.承認する.get名称())) {
+        if (shoninKekkaTempEntity.getKetteiKubun() != null && shoninKekkaTempEntity.getKetteiKubun().equals(KetteiKubun.承認する.getコード())) {
             shoninKekkaTempEntity.setTekiyoKaishiYMD(parameter.get認定期間_開始日());
             shoninKekkaTempEntity.setTekiyoShuryoYMD(parameter.get認定期間_終了日());
         } else {
@@ -151,7 +151,7 @@ public class NinteiBatchMain extends BatchProcessBase<ShoninShoriEntity> {
 
     private void 負担限度額の判定(ShoninKekkaTempEntity shoninKekkaTempEntity,
             ShoninShoriEntity entity) {
-        if (shoninKekkaTempEntity.getKetteiKubun() != null && shoninKekkaTempEntity.getKetteiKubun().equals(KetteiKubun.承認する.get名称())) {
+        if (shoninKekkaTempEntity.getKetteiKubun() != null && shoninKekkaTempEntity.getKetteiKubun().equals(KetteiKubun.承認する.getコード())) {
             FutangendogakuNinteiService service = FutangendogakuNinteiService.createInstance();
             RString 旧措置者区分 = entity.get介護保険負担限度額認定Entity().getKyusochishaKubun();
             RString 利用者負担段階 = entity.get介護保険負担限度額認定Entity().getRiyoshaFutanDankai();
