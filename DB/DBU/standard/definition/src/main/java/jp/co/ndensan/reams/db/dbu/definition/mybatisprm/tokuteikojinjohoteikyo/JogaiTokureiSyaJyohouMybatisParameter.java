@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -41,6 +42,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
     private final RString 版番号;
     private final RString 提供区分_個人番号未設定;
     private final RString 提供区分_その他エラー;
+    private final RString 台帳種別;
     private final boolean is当初または版改定;
     private final boolean is再登録;
     private final boolean is異動;
@@ -59,6 +61,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
             RString 版番号,
             RString 提供区分_個人番号未設定,
             RString 提供区分_その他エラー,
+            RString 台帳種別,
             boolean is当初または版改定,
             boolean is再登録,
             boolean is異動) {
@@ -76,6 +79,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
         this.版番号 = 版番号;
         this.提供区分_個人番号未設定 = 提供区分_個人番号未設定;
         this.提供区分_その他エラー = 提供区分_その他エラー;
+        this.台帳種別 = 台帳種別;
         this.is当初または版改定 = is当初または版改定;
         this.is再登録 = is再登録;
         this.is異動 = is異動;
@@ -130,6 +134,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
                 版番号,
                 TeikyoKubun.個人番号未設定により未提供.getコード(),
                 TeikyoKubun.その他エラーにより未提供.getコード(),
+                DaichoType.被保険者.getコード(),
                 is当初または版改定,
                 is再登録,
                 is異動);
