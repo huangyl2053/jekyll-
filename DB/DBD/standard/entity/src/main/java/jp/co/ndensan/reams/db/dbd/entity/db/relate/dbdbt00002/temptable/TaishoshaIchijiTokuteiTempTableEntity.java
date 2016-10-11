@@ -16,6 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HchiJinoSyouriKeyTempTableEntity {
+public class TaishoshaIchijiTokuteiTempTableEntity {
     private RString 被保険者番号;
 }

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010.ChohyoShutsuryokuJohoShutokuProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010.HchiJinoSyouriCreateProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010.NinteishaListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD201010.TaishoshaIchijiTokuteiProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD201010.DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -47,8 +47,8 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaList extends BatchFlowBase
      */
     @Step(対象者一次特定)
     protected IBatchFlowCommand hchiJinoSyouriCreateProcess() {
-        return loopBatch(HchiJinoSyouriCreateProcess.class)
-                .arguments(getParameter().toHchiJinoSyouriCreateProcessParamter())
+        return loopBatch(TaishoshaIchijiTokuteiProcess.class)
+                .arguments(getParameter().toTaishoshaIchijiTokuteiProcessParamter())
                 .define();
     }
 
@@ -70,8 +70,8 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaList extends BatchFlowBase
      */
     @Step(利用者負担額減免認定者リスト発行)
     protected IBatchFlowCommand riyoushilyaHutannCsvProcess() {
-        return loopBatch(ChohyoShutsuryokuJohoShutokuProcess.class)
-                .arguments(getParameter().toChohyoShutsuryokuJohoShutokuProcessParameter())
+        return loopBatch(NinteishaListSakuseiProcess.class)
+                .arguments(getParameter().toNinteishaListSakuseiProcessParameter())
                 .define();
     }
 

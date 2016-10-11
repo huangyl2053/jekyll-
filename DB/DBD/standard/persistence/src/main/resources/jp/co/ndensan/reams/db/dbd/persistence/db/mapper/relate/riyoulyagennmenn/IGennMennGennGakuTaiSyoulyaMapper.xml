@@ -7,7 +7,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoulyagennmenn.IGennMennGennGakuTaiSyoulyaMapper">
 
    <select id="select減免減額対象者判定用ByKey" resultMap="resultMap_HchiJinoSyouriNo"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.HchiJinoSyouriCreateMybatisprmParamter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.TaishoshaIchijiTokuteiMybatisprmParamter"
             fetchSize="500" resultOrdered="true">
         SELECT
         A."hihokenshaNo" AS 被保険者番号
@@ -60,16 +60,16 @@
             AND (DbT4014RiyoshaFutangakuGengaku."ketteiKubun"='1'
                 AND DbT4014RiyoshaFutangakuGengaku."tekiyoKaishiYMD" &lt;= #{基準日}
                 AND DbT4014RiyoshaFutangakuGengaku."tekiyoShuryoYMD" &gt;= #{基準日})
-            OR (DbT4014RiyoshaFutangakuGengaku."ketteiKubun" is null
+            OR (DbT4014RiyoshaFutangakuGengaku."ketteiKubun" = ''
                 AND DbT4014RiyoshaFutangakuGengaku."shinseiYMD" &lt;= #{基準日})
         </if>
     </select>
-    <resultMap id="resultMap_HchiJinoSyouriNo" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.temptable.HchiJinoSyouriKeyTempTableEntity" autoMapping="true">
+    <resultMap id="resultMap_HchiJinoSyouriNo" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.temptable.TaishoshaIchijiTokuteiTempTableEntity" autoMapping="true">
         <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <select id="select利用者負担額減免認定者" resultMap="resultMap_ChohyoShutsuryokuJohoResultEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.ChohyoShutsuryokuJohoShutokuCsvMybatisprmParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.NinteishaListSakuseiMybatisprmParameter"
             fetchSize="500" resultOrdered="true">
             SELECT
 		A."被保険者番号" AS 被保険者番号,
@@ -96,10 +96,11 @@
                 世帯員情報.*
             FROM
                 "taishoShaHanteiYoukonkyoItokiTemp" AS A
-            INNER JOIN
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-                AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-                    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = A."本人識別コード"
+                
+            INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+                     ON  A."本人識別コード" = "ShikibetsuTaisho"."shikibetsuCode"
             LEFT JOIN
                 rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest
                 ON 受給者台帳Newest."hihokenshaNo" = A."被保険者番号"
@@ -168,9 +169,10 @@
                     <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
                 FROM
                     "TmpSetaiShotoku" AS 世帯員所得情報一時
-                INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-                            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-                    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 世帯員所得情報一時."shikibetsuCode"
+                INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                    true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+                         ON 世帯員所得情報一時."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
                 WHERE
                     世帯員所得情報一時."honninKubun" != '1'
 <!--                <if test="is世帯表示しない">
@@ -222,7 +224,7 @@
                 </if>
 	ORDER BY #{出力順}
     </select>
-    <resultMap id="resultMap_ChohyoShutsuryokuJohoResultEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultEntity" autoMapping="true">
+    <resultMap id="resultMap_ChohyoShutsuryokuJohoResultEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity" autoMapping="true">
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="本人課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
