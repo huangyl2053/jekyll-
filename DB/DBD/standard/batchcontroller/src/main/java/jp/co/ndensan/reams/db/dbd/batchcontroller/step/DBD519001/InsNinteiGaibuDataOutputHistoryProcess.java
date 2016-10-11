@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519001;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd519001.InsNinteiGaibuDataOutputHistoryManager;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001.InsNinteiGaibuDataOutputHistoryProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -13,13 +13,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定外部データ出力履歴登録_process処理クラスです。
  *
- * @reamsid_L DBD-1480-040 liuyl
+ * @reamsid_L DBD-1480-020 liuyl
  */
 public class InsNinteiGaibuDataOutputHistoryProcess extends BatchProcessBase<DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity> {
 
@@ -42,8 +41,8 @@ public class InsNinteiGaibuDataOutputHistoryProcess extends BatchProcessBase<DbT
 
     @Override
     protected void process(DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity entity) {
-        entity.setDataOutputKaishiYMDHMS(parameter.get開始日時());
-        entity.setDataOutputShuryoYMDHMS(parameter.get開始日時());
+        InsNinteiGaibuDataOutputHistoryManager manager = new InsNinteiGaibuDataOutputHistoryManager();
+        manager.set要介護認定外部データ出力履歴(entity, parameter);
         tableWriter.update(entity);
         isUpdate = true;
     }
@@ -51,9 +50,8 @@ public class InsNinteiGaibuDataOutputHistoryProcess extends BatchProcessBase<DbT
     @Override
     protected void afterExecute() {
         if (!isUpdate) {
-            DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity entity = new DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity();
-            entity.setDataKubun(new Code(Datakubun.申請情報.getコード()));
-            tableWriter.insert(entity);
+            InsNinteiGaibuDataOutputHistoryManager manager = new InsNinteiGaibuDataOutputHistoryManager();
+            tableWriter.insert(manager.get出力履歴(parameter));
         }
     }
 }

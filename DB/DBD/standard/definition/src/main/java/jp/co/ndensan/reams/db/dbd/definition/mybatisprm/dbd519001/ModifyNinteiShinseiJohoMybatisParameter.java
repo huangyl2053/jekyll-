@@ -25,6 +25,7 @@ public class ModifyNinteiShinseiJohoMybatisParameter extends UaFt200FindShikibet
 
     private final RString 認定申請IF種類;
     private final LasdecCode 市町村コード;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタ。
@@ -38,6 +39,7 @@ public class ModifyNinteiShinseiJohoMybatisParameter extends UaFt200FindShikibet
         super(searchKey);
         this.市町村コード = 市町村コード;
         this.認定申請IF種類 = 認定申請IF種類;
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 
 }

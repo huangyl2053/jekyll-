@@ -41,5 +41,18 @@
             ORDER BY
             A."hihokenshaNo"
         </select>
+        <select resultOrdered="true" id="select市町村名"  
+              resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"
+              parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.PntNinteiShinsaHanteiListMybatisParameter"
+              fetchSize="500">
+         SELECT 
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
+         FROM
+         rgdb."DbT7051KoseiShichosonMaster"
+         WHERE
+         rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" =#{市町村コード}
+         AND 
+         rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = #{証記載保険者番号}
+        </select>
 </mapper>
             
