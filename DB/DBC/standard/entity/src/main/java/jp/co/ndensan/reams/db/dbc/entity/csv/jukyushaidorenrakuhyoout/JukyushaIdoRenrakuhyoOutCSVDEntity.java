@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.csv.jukyushaidorenrakuhyoout;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -41,13 +39,13 @@ public class JukyushaIdoRenrakuhyoOutCSVDEntity {
     private final RString 異動事由;
 
     @CsvField(order = 7, name = "証記載保険者番号")
-    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final RString 証記載保険者番号;
 
     @CsvField(order = 8, name = "被保険者番号")
-    private final HihokenshaNo 被保険者番号;
+    private final RString 被保険者番号;
 
     @CsvField(order = 9, name = "世帯主被保険者番号")
-    private final HihokenshaNo 世帯主被保険者番号;
+    private final RString 世帯主被保険者番号;
 
     @CsvField(order = 10, name = "世帯所得区分コード")
     private final RString 世帯所得区分コード;
@@ -93,9 +91,9 @@ public class JukyushaIdoRenrakuhyoOutCSVDEntity {
             RString 異動年月日,
             RString 異動区分コード,
             RString 異動事由,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            HihokenshaNo 被保険者番号,
-            HihokenshaNo 世帯主被保険者番号,
+            RString 証記載保険者番号,
+            RString 被保険者番号,
+            RString 世帯主被保険者番号,
             RString 世帯所得区分コード,
             RString 所得区分コード,
             boolean 老齢福祉年金受給の有無,

@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei {
 
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString カンマ = new RString(",");
     private static final RString スラッシュ = new RString("／");
     private static final RString 読点 = new RString("、");
@@ -118,7 +117,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei {
         KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeiseiCSVEntity csvEntity = new KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeiseiCSVEntity();
         try (CsvWriter<KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeiseiCSVEntity> csvWriter = new CsvWriter.InstanceBuilder(
                 new RString(file.getAbsolutePath())).
-                setDelimiter(EUC_WRITER_DELIMITER).
+                setDelimiter(カンマ).
                 setEncode(Encode.UTF_8withBOM).
                 hasHeader(false).
                 build()) {
@@ -126,7 +125,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei {
                 if (!異動日.equals(entity.get異動日()) || !被保険者番号.equals(entity.get被保番号())) {
                     csvEntity.setかな氏名(entity.getかな氏名());
                     csvEntity.set異動日(entity.get異動日());
-                    csvEntity.set被保番号(entity.get被保番号());
+                    csvEntity.set被保番号(entity.get被保番号().getColumnValue());
                     csvEntity.set項目(entity.get項目());
                     csvWriter.writeLine(csvEntity);
                 }
