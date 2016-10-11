@@ -14,7 +14,7 @@
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
         FROM
             (SELECT * FROM 
-            (SELECT *,Row_Number() OVER (partition by "hihokenshaNo" ORDER BY "idoYMD" desc ,"edaNo"  DESC) AS "rrkno" 
+            (SELECT *,Row_Number() OVER (partition by "hihokenshaNo","ichigoShikakuShutokuYMD","shikakuSoshitsuTodokedeYMD" ORDER BY "idoYMD" desc ,"edaNo"  DESC) AS "rrkno" 
             FROM rgdb."DbT1001HihokenshaDaicho" 
             WHERE "hihokennshaKubunCode" = '1'
             AND "logicalDeletedFlag" = false 
