@@ -77,7 +77,7 @@ public class FutangendogakuShoninMain {
     public ResponseData<FutangendogakuShoninMainDiv> onBeforeCilck_btnBatchchek(FutangendogakuShoninMainDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateForの未入力チェック(pairs, div);
-        if (div.getShinseiPrint().disabledPublishCheckBox()) {
+        if (div.getShinseiPrint().isIsPublish()) {
             getValidationHandler().validateFor発行日の未入力チェック(pairs, div);
         }
         if (div.getTxtShinseibiJoken().getFromValue() != null && div.getTxtShinseibiJoken().getToValue() != null) {
