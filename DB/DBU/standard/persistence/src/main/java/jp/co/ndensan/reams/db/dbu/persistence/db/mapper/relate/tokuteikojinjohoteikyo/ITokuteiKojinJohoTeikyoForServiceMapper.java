@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjoho
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TokuteiKojinJohoKoumokuHanKanriRelateEntity;
 
 /**
@@ -48,5 +49,13 @@ public interface ITokuteiKojinJohoTeikyoForServiceMapper {
      * @return 特定個人情報項目版管理情報
      */
     List<TokuteiKojinJohoKoumokuHanKanriRelateEntity> get特定個人情報項目版管理(TokuteiKojinJohoTeikyoParamater paramater);
+
+    /**
+     * 中間DB提供基本情報を取得します。
+     *
+     * @param paramater パラメータ
+     * @return 中間DB提供基本情報
+     */
+    List<TeikyoKihonJohoNNTempEntity> get中間DB提供基本情報(TokuteiKojinJohoTeikyoParamater paramater);
 
 }

@@ -115,6 +115,44 @@
         ORBER BY TeikyoKomoku."tokuteiKojinJohoKomokuCode"
     </select>
     
+    <select id="get中間DB提供基本情報"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
+            fetchSize="500">
+        SELECT
+            hihokenshaNo,
+            dataSetNo,
+            teikyoKubun,
+            shikibetsuCode,
+            kojinNo,
+            tokuteiKojinJohoMeiCode,
+            hanNo,
+            teikyoNaiyo01,
+            misetteiJiyu01,
+            teikyoNaiyo02,
+            misetteiJiyu02,
+            teikyoNaiyo03,
+            misetteiJiyu03,
+            teikyoNaiyo04,
+            misetteiJiyu04,
+            teikyoNaiyo05,
+            misetteiJiyu05,
+            teikyoNaiyo06,
+            misetteiJiyu06,
+            teikyoNaiyo07,
+            misetteiJiyu07,
+            teikyoNaiyo08,
+            misetteiJiyu08,
+            teikyoNaiyo09,
+            misetteiJiyu09,
+            teikyoNaiyo10,
+            misetteiJiyu10,
+            kokaiYMD
+        FROM
+            #{中間DBのテーブル名}
+    </select>
+    
     <resultMap id="ResultMap_get特定個人情報項目版管理" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TokuteiKojinJohoKoumokuHanKanriRelateEntity" autoMapping="true">
         <result property="特定個人情報名コード" column="tokuteiKojinJohoMeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="特定個人情報項目コード" column="tokuteiKojinJohoKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

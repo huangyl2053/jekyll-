@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo;
 
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TokuteiKojinJohoTeikyoParamater {
+public final class TokuteiKojinJohoTeikyoParamater implements IMyBatisParameter {
 
     private final RString 特定個人情報名コード;
     private final RString データセット番号;
@@ -66,6 +67,18 @@ public final class TokuteiKojinJohoTeikyoParamater {
             RString データセット番号, RString 版番号, FlexibleDate 基準日) {
         return new TokuteiKojinJohoTeikyoParamater(特定個人情報名コード, データセット番号, 基準日, 版番号,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY);
+    }
+
+    /**
+     * 中間DB提供基本情報取得パラメータを生成します。
+     *
+     * @param 中間DBのテーブル名 中間DBのテーブル名
+     *
+     * @return 中間DB提供基本情報取得のParamter
+     */
+    public static TokuteiKojinJohoTeikyoParamater createParamter中間DB提供基本情報取得(RString 中間DBのテーブル名) {
+        return new TokuteiKojinJohoTeikyoParamater(RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY, RString.EMPTY,
+                RString.EMPTY, 中間DBのテーブル名, RString.EMPTY);
     }
 
 }
