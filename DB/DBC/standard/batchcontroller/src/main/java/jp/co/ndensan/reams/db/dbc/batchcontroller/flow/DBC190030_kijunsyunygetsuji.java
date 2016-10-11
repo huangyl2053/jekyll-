@@ -60,45 +60,27 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
 
     @Override
     protected void defineFlow() {
-//バッチパラメータ．抽出条件＝白紙印刷の場合、対象世帯員クラス①作成処理は行わない
         if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
-            //BatchStep 1
-//            executeStep(INS世帯員所得情報一時表1);
-//            //BatchStep 2
-//            executeStep(世帯員把握バッチ);
-//            //BatchStep 3
-//            executeStep(UPD世帯員所得情報一時表);
-//            //BatchStep 4.1
-//            executeStep(世帯員所得情報一時テーブルに重複削除);
-//            //BatchStep 4.2
-//            executeStep(対象世帯員クラスに登録);
-//            //BatchStep 5
-//            executeStep(対象世帯員クラスに更新1);
-//            //BatchStep 6
-//            executeStep(対象世帯員クラスに更新2);
-//            //BatchStep 7
-//            executeStep(対象世帯員クラスに更新3);
-//            //BatchStep 8
-//            executeStep(対象世帯員クラスに削除);
-            //BatchStep9
-            executeStep(INS世帯員所得情報一時表2);
-            //BatchStep 10
+            executeStep(INS世帯員所得情報一時表1);
             executeStep(世帯員把握バッチ);
-            //BatchStep 11
             executeStep(UPD世帯員所得情報一時表);
-            //BatchStep 4.1
             executeStep(世帯員所得情報一時テーブルに重複削除);
-            //BatchStep 4.2
+            executeStep(対象世帯員クラスに登録);
+            executeStep(対象世帯員クラスに更新1);
+            executeStep(対象世帯員クラスに更新2);
+            executeStep(対象世帯員クラスに更新3);
+            executeStep(対象世帯員クラスに削除);
+
+            executeStep(INS世帯員所得情報一時表2);
+            executeStep(世帯員把握バッチ);
+            executeStep(UPD世帯員所得情報一時表);
+            executeStep(世帯員所得情報一時テーブルに重複削除);
             executeStep(対象世帯員クラスに登録2);
-            //BatchStep 12
             executeStep(対象世帯員クラスに更新4);
             //TODO BatchStep 13
-            //BatchStep 14
             executeStep(帳票出力_CSV作成);
             //TODO BatchStep 15
-            //BatchStep 16
             executeStep(基準収入額管理マスタに登録);
-            //BatchStep 17
             executeStep(処理日付管理マスタに更新);
         }
     }

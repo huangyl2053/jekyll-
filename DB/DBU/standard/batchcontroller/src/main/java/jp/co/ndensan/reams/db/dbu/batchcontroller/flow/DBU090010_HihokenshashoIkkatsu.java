@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.hihokenshasho;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.HihokenshashoA4ReportProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.HihokenshashoB4ReportProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTableCreateProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTableUpdateProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchiranHyoReportProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IkkatsuHakkoDBInsertProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.TaishoShutokuProcess;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho.IkkatsuHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU090010.HihokenshashoA4ReportProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU090010.HihokenshashoB4ReportProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU090010.IchijiTableCreateProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU090010.IchijiTableUpdateProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU090010.IchiranHyoReportProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU090010.IkkatsuHakkoDBInsertProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU090010.TaishoShutokuProcess;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU090010.DBU090010_HihokenshashoIkkatsuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  * @reamsid_L DBU-0420-020 duanzhanli
  *
  */
-public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> {
+public class DBU090010_HihokenshashoIkkatsu extends BatchFlowBase<DBU090010_HihokenshashoIkkatsuParameter> {
 
     @Override
     protected void defineFlow() {
