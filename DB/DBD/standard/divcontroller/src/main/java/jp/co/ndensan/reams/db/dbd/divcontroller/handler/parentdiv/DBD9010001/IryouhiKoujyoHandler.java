@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojoBuilder;
@@ -183,6 +185,15 @@ public class IryouhiKoujyoHandler {
             setGridRow(row);
             row.setJyoutai(状態);
             dataSource.add(row);
+            Collections.sort(dataSource, new Comparator<IryohiKojyoItiranDataGrid_Row>() {
+                @Override
+                public int compare(IryohiKojyoItiranDataGrid_Row row1, IryohiKojyoItiranDataGrid_Row row2) {
+                    if (row2.getHiddenCodeKubun().compareTo(row1.getHiddenCodeKubun()) == 0) {
+                        return row2.getHiddentaisyouYY().getValue().compareTo(row1.getHiddentaisyouYY().getValue());
+                    }
+                    return row2.getHiddenCodeKubun().compareTo(row1.getHiddenCodeKubun());
+                }
+            });
         } else if (状態.equals(修正)) {
             IryohiKojyoItiranDataGrid_Row row = dataSource.get(div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getActiveRowId());
             setGridRow(row);

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojoBuilder;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.IryoHiKojoNaiyo;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
@@ -106,11 +105,11 @@ public class OmutsusiyoSyomeishoHandler {
      *
      * @param 医療費控除リスト 医療費控除リスト
      */
-    public void onChange対象年(List<IryohiKojoEntityResult> 医療費控除リスト) {
+    public void onChange対象年(List<IryohiKojo> 医療費控除リスト) {
         RString 控除対象年 = div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey();
-        IryohiKojoEntityResult 表示対象データ = null;
-        for (IryohiKojoEntityResult 医療費控除 : 医療費控除リスト) {
-            if (控除対象年.equals(医療費控除.get控除対象年())) {
+        IryohiKojo 表示対象データ = null;
+        for (IryohiKojo 医療費控除 : 医療費控除リスト) {
+            if (控除対象年.equals(医療費控除.get控除対象年().toDateString())) {
                 表示対象データ = 医療費控除;
                 break;
             }
@@ -132,7 +131,7 @@ public class OmutsusiyoSyomeishoHandler {
      * @param 医療費控除リスト 医療費控除リスト
      * @return SourceDataCollection
      */
-    public SourceDataCollection publishReport(TaishoshaKey 引き継ぎEntity, List<IryohiKojoEntityResult> 医療費控除リスト) {
+    public SourceDataCollection publishReport(TaishoshaKey 引き継ぎEntity, List<IryohiKojo> 医療費控除リスト) {
         ShikibetsuCode 識別コード = 引き継ぎEntity.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance()
@@ -143,10 +142,10 @@ public class OmutsusiyoSyomeishoHandler {
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号"))
                 .value(被保険者番号).build()));
         IryohiKojoManager manager = new IryohiKojoManager();
-        IryohiKojoEntityResult 表示対象データ = new IryohiKojoEntityResult();
         RString 控除対象年 = div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey();
-        for (IryohiKojoEntityResult 医療費控除 : 医療費控除リスト) {
-            if (控除対象年.equals(医療費控除.get控除対象年())) {
+        IryohiKojo 表示対象データ = new IryohiKojo(被保険者番号, new FlexibleYear(控除対象年), RString.EMPTY);
+        for (IryohiKojo 医療費控除 : 医療費控除リスト) {
+            if (控除対象年.equals(医療費控除.get控除対象年().toDateString())) {
                 表示対象データ = 医療費控除;
                 break;
             }
