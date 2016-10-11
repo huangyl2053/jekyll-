@@ -22,6 +22,8 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaF
 
     private final NinteishaListSakuseiResultEntity target;
     private final IOutputOrder outputOrder;
+    private static final int NUM_0 = 0;
+    private static final int NUM_4 = 3;
 
     /**
      * インスタンスを生成します。
@@ -47,9 +49,21 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaF
 
     @Override
     public void writeBy(ReportSourceWriter<RiyoshaFutangakuGemmenGaitoshaIchiranReportSource> writer) {
-        IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target, outputOrder);
-        IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
-        writer.writeLine(builder);
 
+        int index = 0;
+        if (target.get世帯員リスト().isEmpty()) {
+            IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target,
+                    outputOrder, index);
+            IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
+            writer.writeLine(builder);
+        } else {
+            for (int i = NUM_0; i < target.get世帯員リスト().size(); i += NUM_4) {
+                IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target,
+                        outputOrder, index);
+                IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
+                writer.writeLine(builder);
+                index += NUM_4;
+            }
+        }
     }
 }
