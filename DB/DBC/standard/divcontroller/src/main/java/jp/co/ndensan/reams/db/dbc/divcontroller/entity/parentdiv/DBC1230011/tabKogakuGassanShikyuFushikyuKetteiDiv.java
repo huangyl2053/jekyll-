@@ -8,8 +8,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * tabKogakuGassanShikyuFushikyuKettei のクラスファイル
@@ -166,6 +173,16 @@ public class tabKogakuGassanShikyuFushikyuKetteiDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public Label getLabel1() {
+        return this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getLabel1();
+    }
+
+    @JsonIgnore
+    public void setLabel1(Label Label1) {
+        this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setLabel1(Label1);
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtKyufuShurui() {
         return this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getTxtKyufuShurui();
     }
@@ -173,6 +190,16 @@ public class tabKogakuGassanShikyuFushikyuKetteiDiv extends TabContainer {
     @JsonIgnore
     public void setTxtKyufuShurui(TextBoxMultiLine txtKyufuShurui) {
         this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setTxtKyufuShurui(txtKyufuShurui);
+    }
+
+    @JsonIgnore
+    public Label getLabel2() {
+        return this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getLabel2();
+    }
+
+    @JsonIgnore
+    public void setLabel2(Label Label2) {
+        this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setLabel2(Label2);
     }
 
     @JsonIgnore

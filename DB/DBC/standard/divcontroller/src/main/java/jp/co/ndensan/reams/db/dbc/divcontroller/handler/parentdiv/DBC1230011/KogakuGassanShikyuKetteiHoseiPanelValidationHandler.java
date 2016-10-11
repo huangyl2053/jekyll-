@@ -47,7 +47,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
     private static final RString 不支給 = new RString("不支給");
     private static final RString 先頭6桁目から11桁目 = new RString("先頭6桁目から11桁目");
     private static final RString 証記載保険者番号 = new RString("証記載保険者番号");
-    private static final RString 不支給選択時_不支給理由は = new RString("不支給選択時、不支給理由は");
+    private static final RString 不支給選択時_不支給理由 = new RString("不支給選択時、不支給理由");
     private static final RString 連絡票整理番号 = new RString("連絡票整理番号");
     private static final RString 負担額証明書整理番号 = new RString("自己負担額証明書整理番号は数値のみです。");
     private static final RString 自己負担額証明書整理番号 = new RString("自己負担額証明書整理番号");
@@ -383,7 +383,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
                 || div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().getValue().isEmpty())) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
-                            UrErrorMessages.必須, 不支給選択時_不支給理由は.toString())));
+                            UrErrorMessages.必須, 不支給選択時_不支給理由.toString())));
         }
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtTaishoNendo().getValue() != null
                 && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue() != null
@@ -416,7 +416,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
     private ValidationMessageControlPairs check決定情報(ValidationMessageControlPairs validPairs) {
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getValue() != null
                 && !div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtJikoFutanSeiriNo().getValue().isEmpty()
-                && !RStringUtil.isAlphabetAndHalfsizeNumberOnly(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                && !RStringUtil.isHalfsizeNumberOnly(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSeiriNo().getValue())) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
