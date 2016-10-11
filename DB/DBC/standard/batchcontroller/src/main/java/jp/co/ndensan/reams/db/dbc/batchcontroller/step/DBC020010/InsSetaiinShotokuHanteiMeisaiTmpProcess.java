@@ -126,8 +126,8 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Te
                 FlexibleDate 資格取得日 = 被保険者情報.get資格取得年月日();
                 FlexibleDate 資格喪失年月日 = 被保険者情報.get資格喪失年月日();
                 FlexibleDate 基準年月日 = 判定明細Entity.getKijunYMD();
-                if (被保険者番号 != null && !被保険者番号.isEmpty() && 資格取得日 != null
-                        && 資格取得日.isBeforeOrEquals(基準年月日) && 基準年月日 != null && 基準年月日.isBefore(資格喪失年月日)) {
+                if (被保険者番号 != null && !被保険者番号.isEmpty() && 資格取得日 != null && 資格喪失年月日 != null
+                        && 基準年月日 != null && 資格取得日.isBeforeOrEquals(基準年月日) && 基準年月日.isBefore(資格喪失年月日)) {
                     判定明細Entity.setSetaiinHihokenshaNo(被保険者番号);
                     判定明細Entity.setSetaiinHihokenshakubun(被保険者情報.get被保険者区分コード());
                 }

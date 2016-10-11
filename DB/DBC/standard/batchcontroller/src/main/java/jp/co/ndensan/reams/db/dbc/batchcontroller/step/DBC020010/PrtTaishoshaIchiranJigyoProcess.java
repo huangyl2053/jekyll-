@@ -277,7 +277,7 @@ public class PrtTaishoshaIchiranJigyoProcess extends BatchProcessBase<KogakuKaig
 
     private void get出力順(RString 出力順ID) {
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, Long.valueOf(出力順ID.toString()));
+        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, Long.valueOf(出力順ID.toString()));
         if (outputOrder == null || outputOrder.get設定項目リスト() == null) {
             return;
         }
