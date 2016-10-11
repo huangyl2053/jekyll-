@@ -5,21 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.InsTorikomiKokuhoJyohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.TorikomiKokiKoreshaJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -38,8 +41,8 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private RString ファイル名称;
     private TorikomiKokiKoreshaJyohoTempProcessParameter processParameter;
     private TorikomiKokiKoreshaJyohoEntity 取込後期高齢者情報Entity;
-    private static final int 九十 = 90;
-    private static final int 三百四十一 = 341;
+    private List<LasdecCode> 市町村コードリスト;
+    private static final int INDEX_492 = 492;
     private static final int INDEX_1 = 1;
     private static final int INDEX_16 = 16;
     private static final int INDEX_17 = 17;
@@ -92,14 +95,10 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_05 = new RString("05");
     private static final RString エラーコード_06 = new RString("06");
     private static final RString エラーコード_07 = new RString("07");
-    private static final RString エラーコード_08 = new RString("08");
-    private static final RString エラーコード_09 = new RString("09");
-    private static final RString エラーコード_10 = new RString("10");
+
     private static final RString エラーコード_11 = new RString("11");
     private static final RString エラーコード_52 = new RString("52");
     private static final RString エラーコード_53 = new RString("53");
-    private static final RString エラーコード_54 = new RString("54");
-    private static final RString エラーコード_55 = new RString("55");
     private static final RString エラーコード_56 = new RString("56");
     private static final RString エラーコード_57 = new RString("57");
     private static final RString エラーコード_58 = new RString("58");
@@ -111,7 +110,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_64 = new RString("64");
     private static final RString エラーコード_65 = new RString("65");
     private static final RString エラーコード_66 = new RString("66");
-    private static final RString エラーコード_67 = new RString("67");
     private static final RString エラーコード_68 = new RString("68");
     private static final RString エラーコード_69 = new RString("69");
     private static final RString コード文言_フォーマットエラー = new RString("フォーマットエラー");
@@ -123,7 +121,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString コード文言_資格喪失日 = new RString("項目設定エラー：資格喪失日");
     private static final RString コード文言_保険者番号_市町村 = new RString("項目設定エラー：保険者番号（市町村）");
     private static final RString コード文言_保険者番号_広域 = new RString("項目設定エラー：保険者番号（広域）");
-    private static final RString コード文言_個人番号 = new RString("項目設定エラー：個人番号");
     private static final RString コード文言_資格取得事由 = new RString("項目設定エラー：資格取得事由");
     private static final RString コード文言_資格喪失事由 = new RString("項目設定エラー：資格喪失事由");
     private static final RString 文言_資格取得日資格喪失日 = new RString("項目設定エラー：資格取得日＞資格喪失日");
@@ -162,10 +159,11 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             ファイル名称 = processParameter.get表題().concat(アンダーバー).
                     concat(処理枝番_広域時).concat(processParameter.get市町村識別ID()).concat(ファイル名称の拡張子);
         }
-        // TODO フィイルの経路の取得方法は分かりません。ＱＡを提出しました。
+        new RString(SharedFile.getBasePath().concat(File.separator)).concat(ファイル名称);
         RString tmpPath = Path.getTmpDirectoryPath();
         FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
         filePath = new RString(filesystemPath.getCanonicalPath()).concat(ファイル名称);
+        市町村コードリスト = getMapper(IKokikoreishaShikakuIdoInMapper.class).get構成市町村マスタ();
     }
 
     @Override
@@ -183,10 +181,15 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     protected void process(RString result) {
         取込後期高齢者情報Entity = new TorikomiKokiKoreshaJyohoEntity();
         if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
-            int バイト数 = result.toString().getBytes().length;
-            RString 指定バイト数な文字列 = get指定バイト数な文字列(九十, result);
+            int バイト数 = 0;
+            try {
+                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            RString 指定バイト数な文字列 = get指定バイト数な文字列(INDEX_62, result);
             setEntity(指定バイト数な文字列);
-            if (九十 == バイト数) {
+            if (INDEX_62 == バイト数) {
                 取込後期高齢者情報Entity.setエラーコード(エラーコード_01);
                 取込後期高齢者情報Entity.setエラー文言(コード文言_フォーマットエラー);
                 取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
@@ -195,10 +198,15 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             エラーチェック処理_電算();
 
         } else if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
-            int バイト数 = result.toString().getBytes().length;
-            RString 指定バイト数な文字列 = get指定バイト数な文字列(三百四十一, result);
+            int バイト数 = 0;
+            try {
+                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            RString 指定バイト数な文字列 = get指定バイト数な文字列(INDEX_492, result);
             setEntityDensanNi(指定バイト数な文字列);
-            if (三百四十一 == バイト数) {
+            if (INDEX_492 == バイト数) {
                 取込後期高齢者情報Entity.setエラーコード(エラーコード_51);
                 取込後期高齢者情報Entity.setエラー文言(コード文言_フォーマットエラー);
                 取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
@@ -207,9 +215,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
 
             エラーチェック処理_電算2();
         }
-        if (取込後期高齢者情報Entity != null) {
-            一時tableWriter.insert(取込後期高齢者情報Entity);
-        }
+        一時tableWriter.insert(取込後期高齢者情報Entity);
     }
 
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {
@@ -217,7 +223,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         try {
             今バイト数 = 判断文字列.toString().getBytes(Encode.UTF_8.getName()).length;
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         RString 指定バイト数な文字列 = 判断文字列;
         if (今バイト数 < 指定バイト数) {
@@ -240,17 +246,16 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             return new RString(new String(指定な文字列.toString().
                     getBytes(Encode.UTF_8.getName()), 開始位置, 終了位置, Encode.UTF_8.getName()));
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     private void エラーチェック処理_電算() {
         RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
-        IKokuhoShikakuIdoInMapper mapper = getMapper(IKokuhoShikakuIdoInMapper.class);
         if (is空白(市町村コード) || !Pattern.compile(正則表現.toString()).matcher(市町村コード).matches()
                 || (市町村コード.length() != INDEX_5 && 市町村コード.length() != INDEX_6)
-                || (保険者区分_広域保険者.equals(processParameter.get保険者区分()))) {
+                || (保険者区分_広域保険者.equals(processParameter.get保険者区分())) && !is構成市町村マスタあり(市町村コード)) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_02);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
@@ -365,24 +370,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-//        RString 個人番号 = entity.get;
-//        if (個人番号.isEmpty() || !Pattern.compile(正則表現.toString()).matcher(個人番号).matches()) {
-//            取込後期高齢者情報Entity.setエラーコード(エラーコード_54);
-//            if (文言設定flag) {
-//                取込後期高齢者情報Entity.setエラー文言(コード文言_個人番号);
-//                文言設定flag = false;
-//            }
-//            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-//        }
-//        RString 被保険者番号 = entity.get;
-//        if (被保険者番号.isEmpty() || !Pattern.compile(正則表現.toString()).matcher(被保険者番号).matches()) {
-//            取込後期高齢者情報Entity.setエラーコード(エラーコード_55);
-//            if (文言設定flag) {
-//                取込後期高齢者情報Entity.setエラー文言(コード文言_被保険者番号);
-//                文言設定flag = false;
-//            }
-//            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-//        }
         RString 氏名カナ = 取込後期高齢者情報Entity.getカナ氏名();
         if (氏名カナ.trim().isEmpty()
                 || Pattern.compile(正則表現_全角空白.toString()).matcher(氏名カナ).matches()) {
@@ -432,16 +419,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-//        TODO
-//        RString 保険者番号 = entity.get;
-//        if (保険者番号.isEmpty() || !Pattern.compile(正則表現.toString()).matcher(保険者番号).matches()) {
-//            取込後期高齢者情報Entity.setエラーコード(エラーコード_67);
-//            if (文言設定flag) {
-//                取込後期高齢者情報Entity.setエラー文言(コード文言_被保険者番号);
-//                文言設定flag = false;
-//            }
-//            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-//        }
         if (!日付_99999999.equals(資格喪失日) && 資格喪失日 != null && new FlexibleDate(資格喪失日).isValid() && 資格取得日 != null
                 && new FlexibleDate(資格取得日).isValid() && new FlexibleDate(資格喪失日).isBefore(new FlexibleDate(資格喪失日))) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_68);
@@ -494,7 +471,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         }
         RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
         if (!Pattern.compile(正則表現_全角空白.toString()).matcher(市町村コード).matches()
-                && !Pattern.compile(正則表現_半角空白.toString()).matcher(市町村コード).matches()) {
+                && !Pattern.compile(正則表現_半角空白.toString()).matcher(市町村コード).matches() && !is構成市町村マスタあり(市町村コード)) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_66);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
@@ -576,5 +553,14 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             空白 = 空白.concat(RString.HALF_SPACE);
         }
         return 空白.equals(value);
+    }
+
+    private boolean is構成市町村マスタあり(RString 市町村コード) {
+        for (LasdecCode lasdecCode : 市町村コードリスト) {
+            if (市町村コード.equals(lasdecCode.value())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

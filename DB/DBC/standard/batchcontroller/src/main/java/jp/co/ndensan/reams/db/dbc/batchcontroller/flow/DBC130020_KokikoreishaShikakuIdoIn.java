@@ -12,10 +12,9 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020.InsKokuhoShikak
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020.InsTorikomiKokiKoreshaJyohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020.UpdTorikomiKokiKoreshaJyohoTemp1Processs;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020.UpdTorikomiKokiKoreshaJyohoTemp2Processs;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc130020.DBC130020_KokikoreishaShikakuIdoInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC130020.DBC130020_KokikoreishaShikakuIdoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.TorikomiKokiKoreshaJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.UpdTorikomiKokuhoJyohoTempProcessParameter;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -28,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_KokikoreishaShikakuIdoInParameter> {
 
-    private IKokikoreishaShikakuIdoInMapper mapper;
     private RString 市町村識別ID;
 
     private static final String 取込後期高齢者情報に登録 = "kokikoreishaShikakuIdoInOutputProcess";
@@ -41,8 +39,6 @@ public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_
 
     @Override
     protected void initialize() {
-        mapper = getMapper(IKokikoreishaShikakuIdoInMapper.class);
-        mapper.get宛名識別コードリスト();
         市町村識別ID = RString.EMPTY;
     }
 

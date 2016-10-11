@@ -6,13 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc130010.UpdShoriDateKanriMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoDataYoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoRealEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoImportEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7124KokiKoreishaInfoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 後期高齢者情報CSVデータのバッチのDB操作です。
@@ -22,41 +20,33 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IKokikoreishaShikakuIdoInMapper {
 
     /**
-     * 宛名識別コードリスト取得。
-     *
-     * @return List<ShikibetsuCode>
-     */
-    List<ShikibetsuCode> get宛名識別コードリスト();
-
-    /**
      * 後期高齢者情報データを取得する。
      *
      *
-     * @return {@link List<TorikomiKokiKoreshaJyohoEntity>}
+     * @return {@link List<KokiKoreshaJyohoRealEntity>}
      */
-    List<TorikomiKokiKoreshaJyohoEntity> get取込後期高齢者情報();
+    List<KokiKoreshaJyohoRealEntity> get取込後期高齢者情報();
 
     /**
      * 引数相同市町村コードなデータ件数を取得する。
      *
-     * @param 市町村コード RString
-     * @return Integer
+     * @return List<LasdecCode>
      */
-    Integer get構成市町村マスタ(RString 市町村コード);
+    List<LasdecCode> get構成市町村マスタ();
 
     /**
      * 後期高齢者情報作成用データを取得。
      *
-     * @return List<KokiKoreshaJyohoRealEntity>
+     * @return List<KokiKoreshaJyohoDataYoEntity>
      */
-    List<KokiKoreshaJyohoRealEntity> get後期高齢者情報作成用データ();
+    List<KokiKoreshaJyohoDataYoEntity> get後期高齢者情報作成用データ();
 
     /**
      * 後期高齢者情報インポート作成用データを取得。
      *
-     * @return List<KokiKoreshaJyohoRealEntity>
+     * @return List<KokiKoreshaJyohoResultEntity>
      */
-    List<KokiKoreshaJyohoRealEntity> get後期高齢者情報インポート用データ();
+    List<KokiKoreshaJyohoResultEntity> get後期高齢者情報インポート用データ();
 
     /**
      * 一時表取込後期高齢者情報インポート用Entitｙリストデータを取得。
@@ -66,16 +56,15 @@ public interface IKokikoreishaShikakuIdoInMapper {
     List<TorikomiKokiKoreshaJyohoImportEntity> get取込後期高齢者情報インポート用Entityリスト();
 
     /**
-     * 現在後期高齢者情報の全データを取得。
+     * 一時表取込後期高齢者情報インポート用Entitｙ件数を取得。
      *
-     * @return List<DbT7124KokiKoreishaInfoEntity>
+     * @return Integer
      */
-    List<DbT7124KokiKoreishaInfoEntity> get現在後期高齢者情報の全データ();
+    Integer get取込後期高齢者情報インポート用Entitｙ件数();
 
     /**
-     * 処理管理日付マスタデータを取得。
+     * 取込後期高齢者情報を削除する。
      *
-     * @param parameter UpdShoriDateKanriMybatisParameter
      */
-    void up処理管理日付マスタ(UpdShoriDateKanriMybatisParameter parameter);
+    void delete取込後期高齢者情報();
 }
