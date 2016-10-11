@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -43,17 +42,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  */
 public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase<FutangakuTashoshaEntity> {
 
-    /**
-     * 取得件数です。
-     */
-    public static final RString PARAMETER_OUT_OUTPUTSAKUSEIYMD;
-
-    static {
-        PARAMETER_OUT_OUTPUTSAKUSEIYMD = new RString("取得件数");
-
-    }
-    private OutputParameter<Integer> 取得件数;
-    private int 高額合算自己負担額件数;
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030."
             + "IKogakugassanJikofutangakuInfoHoseiMapper.get負担額補正対象者データ");
     private static final int INT_0 = 0;
@@ -82,9 +70,6 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
 
     @Override
     protected void initialize() {
-        取得件数 = new OutputParameter<>();
-        取得件数.setValue(INT_0);
-        高額合算自己負担額件数 = INT_0;
         改頁項目リスト = new ArrayList<>();
         並び順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBC介護給付, 出力順帳票分類ID, Long.parseLong(processParameter.get改頁出力順ID().toString()));
@@ -161,12 +146,10 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         param.set高額合算自己負担額補正一覧表(tmpEntity);
         GassanJikofutangakuHoseiIchiranReport report = new GassanJikofutangakuHoseiIchiranReport(param);
         report.writeBy(reportSourceWriter);
-        高額合算自己負担額件数 = 高額合算自己負担額件数 + INT_1;
     }
 
     @Override
     protected void afterExecute() {
-        取得件数.setValue(高額合算自己負担額件数);
         batchReportWriter.close();
     }
 
