@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -24,6 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBD-3680-010 miaojin
  */
 public class TokuteiNyushoServiceHiShinseiValidationHandler {
+
+    private final Decimal 給付率_81 = new Decimal(81);
+    private final Decimal 給付率_100 = new Decimal(100);
 
     /**
      * 申請日の必須入力チェックを行います。
@@ -207,13 +211,24 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor特別地域加算減免_軽減率範囲外(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-
+        Decimal 軽減率 = Decimal.ZERO;
+        if (div.getShinseiDetail().getTxtKeigenRitsu() != null && div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null) {
+            軽減率 = div.getShinseiDetail().getTxtKeigenRitsu().getValue();
+        }
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲外のチェック)
-                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲外).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
-        return pairs;
+        if (軽減率.compareTo(給付率_81) < 0 || 軽減率.compareTo(給付率_100) > 0) {
+            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲外のチェック)
+                    .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲81外).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲81外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
+            return pairs;
+        } else {
+            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲外のチェック)
+                    .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲91外).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲91外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
+            return pairs;
+        }
     }
 
     /**
@@ -260,7 +275,8 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
         適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "適用日"),
         有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "有効期限"),
         軽減率の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "給付率"),
-        特別地域加算減免_軽減率範囲外(DbdErrorMessages.特別地域加算減免_軽減率範囲外),
+        特別地域加算減免_軽減率範囲81外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "81"),
+        特別地域加算減免_軽減率範囲91外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "91"),
         減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
         減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
         減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),
