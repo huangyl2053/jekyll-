@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 特別徴収同定一覧情報のクラスです。
@@ -42,6 +43,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
     private static final RString 定数_0000 = new RString("0000");
     private static final RString 枝番号_01 = new RString("01");
     private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
     private static final int NUM_4 = 4;
     private static final int NUM_14 = 14;
     private FuchoKarisanteiFukaProcessParameter parameter;
@@ -102,12 +104,22 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
             } else {
                 item.setChoteiNendo(parameter.get調定年度());
                 item.setFukaNendo(parameter.get賦課年度());
-                item.setTsuchishoNo(new TsuchishoNo(entity.get賦課().getTsuchishoNo().getColumnValue().substring(0, NUM_14).
-                        concat(entity.get賦課().getTsuchishoNo().getColumnValue().substring(NUM_14))));
+                item.setTsuchishoNo(getNew通知書番号(entity.get賦課().getTsuchishoNo(), 資格件数));
             }
             item.setFukaYMD(get賦課期日(entity));
             tempTableWriter.insert(item);
         }
+    }
+
+    private TsuchishoNo getNew通知書番号(TsuchishoNo 通知書番号, int 資格件数) {
+        int 桁数 = 通知書番号.getColumnValue().length();
+        return new TsuchishoNo(通知書番号.getColumnValue().substring(0, 桁数 - NUM_2).
+                concat(getNew枝番号(通知書番号, 資格件数, 桁数)));
+    }
+
+    private RString getNew枝番号(TsuchishoNo 通知書番号, int 資格件数, int 桁数) {
+        Decimal 枝番号 = new Decimal(通知書番号.getColumnValue().substring(桁数 - NUM_2).toString());
+        return new RString(枝番号.add(資格件数).subtract(Decimal.ONE).toString()).padZeroToLeft(NUM_2);
     }
 
     @Override
