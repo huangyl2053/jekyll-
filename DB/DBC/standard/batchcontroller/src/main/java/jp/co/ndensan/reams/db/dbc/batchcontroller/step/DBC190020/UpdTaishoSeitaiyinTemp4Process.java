@@ -36,6 +36,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private static final Decimal DECIMAL_12 = new Decimal(120000);
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.対象世帯員クラスTempに更新4");
+    private static final RString コンマ = new RString(",");
     private UpdTaishoSeitaiyinTemp4Entity exEntity;
     private static final int INT_0 = 0;
     private int index = 0;
@@ -120,7 +121,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
 
     private void getAge(UpdTaishoSeitaiyinTemp4Entity entity) {
         TaishoSetaiinEntity 対象世帯員2 = entity.get対象世帯員2();
-        RString 対象世帯員重複 = 対象世帯員2.getShotaiCode().concat(対象世帯員2.getHihokenshaNo().getColumnValue())
+        RString 対象世帯員重複 = 対象世帯員2.getShotaiCode().concat(コンマ).concat(対象世帯員2.getHihokenshaNo().getColumnValue()).concat(コンマ)
                 .concat(対象世帯員2.getShikibetsuCode().getColumnValue());
         if (!対象世帯員重複Set.contains(対象世帯員重複)) {
             if ((null != 対象世帯員2.getAge() && 対象世帯員2.getAge().compareTo(RSTRING_16) < 0)
