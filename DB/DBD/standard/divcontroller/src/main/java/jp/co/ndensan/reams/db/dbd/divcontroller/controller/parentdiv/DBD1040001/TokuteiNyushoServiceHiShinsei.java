@@ -181,6 +181,8 @@ public class TokuteiNyushoServiceHiShinsei {
 //                new HihokenshaNo(new RString("2190000001")),
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));
+        ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.特別地域加算減免ViewState, null);
         RString menuID = ResponseHolder.getMenuID();
         getHandler(div).set追加するボタン押下(資格対象者, menuID);
         return ResponseData.of(div).setState(DBD1040001StateName.詳細);
