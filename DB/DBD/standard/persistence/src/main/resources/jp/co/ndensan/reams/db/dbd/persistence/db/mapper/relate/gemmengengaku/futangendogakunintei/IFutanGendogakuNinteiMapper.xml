@@ -107,7 +107,8 @@
         AND A."dbT4018KaigohFutanGengkNint_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
         AND B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
         WHERE A."dbT4018KaigohFutanGengkNint_hihokenshaNo" = #{被保険者番号}
-        ORDER BY A."dbT4018KaigohFutanGengkNint_shinseiYMD" DESC
+        ORDER BY CASE WHEN A."dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD" = '' or A."dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD" IS NULL THEN 0 ELSE 1 END,
+        A."dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD" DESC, A."dbT4018KaigohFutanGengkNint_ketteiKubun"
     </select>
 
     <select id="select負担限度額認定リストBy被保険者番号"

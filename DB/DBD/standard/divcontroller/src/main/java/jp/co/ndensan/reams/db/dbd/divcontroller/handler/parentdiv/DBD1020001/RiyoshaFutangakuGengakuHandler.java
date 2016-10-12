@@ -976,17 +976,6 @@ public class RiyoshaFutangakuGengakuHandler {
                 }
             }
 
-            /*int result = !s1.getRiyoshaFutangakuGengaku().get申請年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get申請年月日())
-             ? 1 : (s1.getRiyoshaFutangakuGengaku().get申請年月日().equals(s2.getRiyoshaFutangakuGengaku().get申請年月日()) ? 0 : -1);
-
-             if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
-             result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
-             }
-             if (result == 0 && EntityDataState.Added == s1.getState()) {
-             result = 1;
-             } else if (result == 0 && EntityDataState.Added == s2.getState()) {
-             result = -1;
-             }*/
             return result;
         }
 
@@ -1017,17 +1006,7 @@ public class RiyoshaFutangakuGengakuHandler {
                     result = -1;
                 }
             }
-//            int result = !row2.getTxtShinseiYMD().getValue().isBeforeOrEquals(row1.getTxtShinseiYMD().getValue())
-//                    ? 1 : (row2.getTxtShinseiYMD().getValue().equals(row1.getTxtShinseiYMD().getValue()) ? 0 : -1);
-//
-//            if (result == 0 && 追加.equals(row1.getJotai()) && 追加.equals(row2.getJotai())) {
-//                result = row2.getHiddenShinseiRirekiNo().compareTo(row1.getHiddenShinseiRirekiNo());
-//            }
-//            if (result == 0 && 追加.equals(row2.getJotai())) {
-//                result = 1;
-//            } else if (result == 0 && 追加.equals(row1.getJotai())) {
-//                result = -1;
-//            }
+
             return result;
         }
     }
