@@ -122,7 +122,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
             div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getTxtJigyoshaNo());
         }
         if (row.getTxtJigyoshaName().isEmpty()) {
-            div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(RString.EMPTY);
+            div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setShisetsuMeisho(RString.EMPTY);
         } else {
             div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setShisetsuMeisho(row.getTxtJigyoshaName());
         }

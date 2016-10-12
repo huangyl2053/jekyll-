@@ -111,6 +111,15 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonTuika(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_追加);
+        div.getTextBoxDateSaabisu().setDisabled(false);
+        div.getCcdHokenshaList().setDisabled(false);
+        div.getCcdJigyoshaInput().setDisabled(false);
+        div.getCcdServiceTypeInput().setDisabled(false);
+        div.getTextBoxFudangoukei().setDisabled(false);
+        div.getTextBoxNumHiyouGoukei().setDisabled(false);
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(RString.EMPTY);
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setShisetsuMeisho(RString.EMPTY);
+        div.getCcdServiceTypeInput().clear();
         getHandler(div).tuika();
         return ResponseData.of(div).respond();
     }
@@ -123,6 +132,12 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonModify(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_修正);
+        div.getTextBoxDateSaabisu().setDisabled(true);
+        div.getCcdHokenshaList().setDisabled(true);
+        div.getCcdJigyoshaInput().setDisabled(true);
+        div.getCcdServiceTypeInput().setDisabled(true);
+        div.getTextBoxFudangoukei().setDisabled(false);
+        div.getTextBoxNumHiyouGoukei().setDisabled(false);
         getHandler(div).modify();
         return ResponseData.of(div).respond();
     }
@@ -139,6 +154,12 @@ public class KyufuTsuchiGenmenHoseiToroku {
         Models<KyufuhiTuchiHoseiIdentifier, KyufuhiTuchiHosei> models
                 = ViewStateHolder.get(ViewStateKeys.給付費通知補正, Models.class);
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_削除);
+        div.getTextBoxDateSaabisu().setDisabled(true);
+        div.getCcdHokenshaList().setDisabled(true);
+        div.getCcdJigyoshaInput().setDisabled(true);
+        div.getCcdServiceTypeInput().setDisabled(true);
+        div.getTextBoxFudangoukei().setDisabled(true);
+        div.getTextBoxNumHiyouGoukei().setDisabled(true);
         DataGridItiran_Row row = div.getDataGridItiran().getActiveRow();
         row.setRowState(RowState.Deleted);
         KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(new HokenshaNo(row.getTxtShokisaiNo()),
