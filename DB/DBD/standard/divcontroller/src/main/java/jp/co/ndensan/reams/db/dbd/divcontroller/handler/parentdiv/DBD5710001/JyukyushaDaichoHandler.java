@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.JyukyushaDaichoOr
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001_JukyushaDaichoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.JyukyushaDaichoDiv;
-import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.ShoriDateKanriService;
+import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.JyukyushaDaichoshoridatekanriService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -67,7 +67,7 @@ public class JyukyushaDaichoHandler {
     private RString 出力順;
     private LasdecCode 市町村コード;
     private ShoriDateKanri shoriDateKanri;
-    private ShoriDateKanriService shoriDateKanriService;
+    private JyukyushaDaichoshoridatekanriService jyukyushoriDateKanriService;
 
     /**
      *
@@ -216,8 +216,8 @@ public class JyukyushaDaichoHandler {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (shichosonSecurityJoho != null) {
             市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
-            shoriDateKanriService = ShoriDateKanriService.createInstance();
-            shoriDateKanri = shoriDateKanriService.get一件取得(市町村コード);
+            jyukyushoriDateKanriService = JyukyushaDaichoshoridatekanriService.createInstance();
+            shoriDateKanri = jyukyushoriDateKanriService.get一件取得(市町村コード);
         }
         return shoriDateKanri;
     }
