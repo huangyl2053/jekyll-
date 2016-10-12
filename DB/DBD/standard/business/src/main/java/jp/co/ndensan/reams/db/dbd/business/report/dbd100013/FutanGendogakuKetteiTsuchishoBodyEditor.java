@@ -151,7 +151,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
             source.futanName2 = 負担名_居住費負担限度額ユニット型個室;
             source.futanName3 = 負担名_居住費負担限度額ユニット型準個室;
             if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())
-                || KyuSochishaKubun.旧措置者.getコード().equals(負担限度額認定.get旧措置者区分())) {
+                    || KyuSochishaKubun.旧措置者.getコード().equals(負担限度額認定.get旧措置者区分())) {
                 source.futanName4 = 負担名_居住費負担限度額従来型個室;
                 source.futanName5 = 負担名_居住費負担限度額多床室;
                 source.futanName6 = RString.EMPTY;
@@ -202,7 +202,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
 
     private void setTitle(FutanGendogakuKetteiTsuchishoReportSource source) {
         if (KyuSochishaKubun.旧措置者.getコード().equals(負担限度額認定.get旧措置者区分())
-            || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
+                || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : 帳票制御汎用List) {
                 if (new RString(ChohyoSeigyoHanyoKeysDBD100013.帳票タイトル_上段_旧措置者用.name()).equals(entity.getKomokuName())) {
                     source.title1 = entity.getKomokuValue();
@@ -381,7 +381,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         if (!Decimal.ZERO.equals(負担限度額認定.getユニット型個室()) && (負担限度額認定.getユニット型個室() != null)) {
             source.futanGaku2 = DecimalFormatter.toコンマ区切りRString(負担限度額認定.getユニット型個室(), 0);
         } else if (負担限度額認定.is境界層該当者区分()
-                   || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
+                || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
             source.futanGaku2 = ハイフン;
         } else {
             source.futanGaku2 = RString.EMPTY;
@@ -392,7 +392,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         if (!Decimal.ZERO.equals(負担限度額認定.getユニット型準個室()) && (負担限度額認定.getユニット型準個室() != null)) {
             source.futanGaku3 = DecimalFormatter.toコンマ区切りRString(負担限度額認定.getユニット型準個室(), 0);
         } else if (負担限度額認定.is境界層該当者区分()
-                   || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
+                || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
             source.futanGaku3 = ハイフン;
         } else {
             source.futanGaku3 = RString.EMPTY;
@@ -403,7 +403,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         if (!Decimal.ZERO.equals(負担限度額認定.get従来型個室_特養等()) && (負担限度額認定.get従来型個室_特養等() != null)) {
             source.futanGaku4 = DecimalFormatter.toコンマ区切りRString(負担限度額認定.get従来型個室_特養等(), 0);
         } else if (負担限度額認定.is境界層該当者区分()
-                   || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
+                || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
             source.futanGaku4 = ハイフン;
         } else {
             source.futanGaku4 = RString.EMPTY;
@@ -412,14 +412,14 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
 
     private void setFutanGaku5(FutanGendogakuKetteiTsuchishoReportSource source) {
         if ((KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())
-             || KyuSochishaKubun.旧措置者.getコード().equals(負担限度額認定.get旧措置者区分()))
-            && !Decimal.ZERO.equals(負担限度額認定.get多床室()) && (負担限度額認定.get多床室() != null)) {
+                || KyuSochishaKubun.旧措置者.getコード().equals(負担限度額認定.get旧措置者区分()))
+                && !Decimal.ZERO.equals(負担限度額認定.get多床室()) && (負担限度額認定.get多床室() != null)) {
             source.futanGaku5 = DecimalFormatter.toコンマ区切りRString(負担限度額認定.get多床室(), 0);
         } else if (!Decimal.ZERO.equals(負担限度額認定.get従来型個室_老健_療養等())
-                   && (負担限度額認定.get従来型個室_老健_療養等() != null)) {
+                && (負担限度額認定.get従来型個室_老健_療養等() != null)) {
             source.futanGaku5 = DecimalFormatter.toコンマ区切りRString(負担限度額認定.get従来型個室_老健_療養等(), 0);
         } else if (負担限度額認定.is境界層該当者区分()
-                   || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
+                || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())) {
             source.futanGaku5 = ハイフン;
         } else {
             source.futanGaku5 = RString.EMPTY;
@@ -428,7 +428,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
 
     private void setFutanGaku6(FutanGendogakuKetteiTsuchishoReportSource source) {
         if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(負担限度額認定.get旧措置者区分())
-            || KyuSochishaKubun.旧措置者.getコード().equals(負担限度額認定.get旧措置者区分())) {
+                || KyuSochishaKubun.旧措置者.getコード().equals(負担限度額認定.get旧措置者区分())) {
             source.futanGaku6 = RString.EMPTY;
         } else if (!Decimal.ZERO.equals(負担限度額認定.get多床室()) && (負担限度額認定.get多床室() != null)) {
             source.futanGaku6 = DecimalFormatter.toコンマ区切りRString(負担限度額認定.get多床室(), 0);
@@ -500,22 +500,22 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         }
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
-        // source.jusho4 = sofubutsuAtesakiSource.j;
+        source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
-        // source.jusho5 = RString.EMPTY;
-        // source.jusho6 = RString.EMPTY;
+        source.jusho5 = sofubutsuAtesakiSource.jusho2;
+        source.jusho6 = sofubutsuAtesakiSource.jusho3;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-        // source.katagaki3 = RString.EMPTY;
+        source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
         source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-        // source.katagaki4 = RString.EMPTY;
+        source.katagaki4 = sofubutsuAtesakiSource.katagaki2;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-        // source.shimei3 = RString.EMPTY;
+        source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
         source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
         source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-        // source.shimei4 = RString.EMPTY;
+        source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
