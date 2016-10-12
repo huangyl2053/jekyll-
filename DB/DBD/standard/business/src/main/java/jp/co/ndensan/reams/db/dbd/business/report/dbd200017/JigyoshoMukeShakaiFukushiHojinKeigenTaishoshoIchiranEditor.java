@@ -103,11 +103,11 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             if (JuminShubetsu.日本人.getCode().equals(社福減免対象者情報.get住民種別コード())
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(社福減免対象者情報.get住民種別コード())) {
                 source.listMeisai_3 = 社福減免対象者情報.get生年月日() == null ? RString.EMPTY : 社福減免対象者情報.get生年月日().
-                        wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).
                         fillType(FillType.BLANK).toDateString();
             } else {
                 source.listMeisai_3 = 社福減免対象者情報.get生年月日() == null ? RString.EMPTY : 社福減免対象者情報.get生年月日().
-                        seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                        seireki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (社福減免対象者情報.get性別コード() != null && !社福減免対象者情報.get性別コード().isEmpty()) {
                 source.listMeisai_4 = Seibetsu.toValue(社福減免対象者情報.get性別コード()).get名称();
@@ -117,11 +117,11 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             }
             source.listMeisai_6 = 社福減免対象者情報.get確認番号();
             source.listMeisai_7 = 社福減免対象者情報.get適用開始年月日() == null ? RString.EMPTY : 社福減免対象者情報.
-                    get適用開始年月日().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    get適用開始年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             source.listMeisai_8 = 社福減免対象者情報.get適用終了年月日() == null ? RString.EMPTY : 社福減免対象者情報.
-                    get適用終了年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    get適用終了年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             source.listMeisai_9 = getサービス限定();
 
             source.listShohokenshaNo_1 = 社福減免対象者情報.get証記載保険者番号() == null ? RString.EMPTY : 社福減免対象者情報.get証記載保険者番号().value();
