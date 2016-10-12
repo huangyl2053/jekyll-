@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
+import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -51,6 +52,7 @@ public class NinteichosaItakusakiMasterHandler {
 
     private final NinteichosaItakusakiMasterDiv div;
     private static final int DROPDOWNLIST_BLANK = 0;
+    private final ChosainJohoManager chosainJohoManager;
     private final NinteichosaItakusakiJohoManager johoManager;
     private static final RString 状況フラグ有効 = new RString("有効");
     private static final RString 状況フラグ無効 = new RString("無効");
@@ -83,6 +85,7 @@ public class NinteichosaItakusakiMasterHandler {
     public NinteichosaItakusakiMasterHandler(NinteichosaItakusakiMasterDiv div) {
         this.div = div;
         johoManager = NinteichosaItakusakiJohoManager.createInstance();
+        chosainJohoManager = ChosainJohoManager.createInstance();
     }
 
     /**
@@ -399,11 +402,10 @@ public class NinteichosaItakusakiMasterHandler {
      * @return 削除行データの整合性
      */
     public boolean 削除行データの整合性チェック(LasdecCode 市町村コード, RString 認定調査委託先コード) {
-        return false;
-//        int 件数 = chosainJohoManager.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
-//        return 件数 <= 0;
+        int 件数 = chosainJohoManager.countByKey(市町村コード, 認定調査委託先コード);
+        return 件数 <= 0;
     }
-
+  
     private void set明細照会状態() {
         div.set状態(その他状態コード);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
