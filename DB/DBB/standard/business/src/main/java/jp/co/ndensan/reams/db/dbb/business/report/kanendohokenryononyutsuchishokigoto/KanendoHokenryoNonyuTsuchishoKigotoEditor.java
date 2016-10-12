@@ -287,11 +287,11 @@ public class KanendoHokenryoNonyuTsuchishoKigotoEditor implements IKanendoHokenr
             } else {
                 一番目普徴納期情報 = new AfterEditInformation();
             }
-            if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する
+            if (NokigenShutsuryokuHoho.対象の期
                     .equals(本算定納入通知書制御情報.get納入通知書制御情報().get納期限出力方法())) {
                 source.ki1 = 納入通知書期情報.get期表記();
                 source.tsuki1 = 納入通知書期情報.get月表記();
-            } else if (NokigenShutsuryokuHoho.全ての期分を印字する
+            } else if (NokigenShutsuryokuHoho.全ての期
                     .equals(本算定納入通知書制御情報.get納入通知書制御情報().get納期限出力方法())) {
                 source.ki1 = null == 納入通知書期情報.get期表記() ? RString.EMPTY : 納入通知書期情報.get期表記().padLeft(RString.HALF_SPACE, 2);
                 source.tsuki1 = null == 納入通知書期情報.get月表記() ? RString.EMPTY : 納入通知書期情報.get月表記().padLeft(RString.HALF_SPACE, 2);

@@ -601,8 +601,8 @@ public final class TokubetsuChoshuTotalHandler {
         RDate nowDate = RDate.getNowDate();
         gatsu04List.add(new KeyValueDataSource(TokuchoKaishiTsuki4GatsuHosoku.特別徴収しない.getコード(),
                 TokuchoKaishiTsuki4GatsuHosoku.特別徴収しない.get略称()));
-        gatsu04List.add(new KeyValueDataSource(TokuchoKaishiTsuki4GatsuHosoku._10月.getコード(),
-                TokuchoKaishiTsuki4GatsuHosoku._10月.get略称()));
+        gatsu04List.add(new KeyValueDataSource(TokuchoKaishiTsuki4GatsuHosoku._10月開始.getコード(),
+                TokuchoKaishiTsuki4GatsuHosoku._10月開始.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl4GatsuHosoku().setDataSource(gatsu04List);
         RString key_04月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, nowDate,
@@ -613,10 +613,10 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu06List = new ArrayList<>();
         gatsu06List.add(new KeyValueDataSource(TokuchoKaishiTsuki6GatsuHosoku.特別徴収しない.getコード(),
                 TokuchoKaishiTsuki6GatsuHosoku.特別徴収しない.get略称()));
-        gatsu06List.add(new KeyValueDataSource(TokuchoKaishiTsuki6GatsuHosoku._12月.getコード(),
-                TokuchoKaishiTsuki6GatsuHosoku._12月.get略称()));
-        gatsu06List.add(new KeyValueDataSource(TokuchoKaishiTsuki6GatsuHosoku._04月.getコード(),
-                TokuchoKaishiTsuki6GatsuHosoku._04月.get略称()));
+        gatsu06List.add(new KeyValueDataSource(TokuchoKaishiTsuki6GatsuHosoku._12月開始.getコード(),
+                TokuchoKaishiTsuki6GatsuHosoku._12月開始.get略称()));
+        gatsu06List.add(new KeyValueDataSource(TokuchoKaishiTsuki6GatsuHosoku._4月開始_待機.getコード(),
+                TokuchoKaishiTsuki6GatsuHosoku._4月開始_待機.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl6GatsuHosoku().setDataSource(gatsu06List);
         RString key_06月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate,
@@ -627,10 +627,10 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu08List = new ArrayList<>();
         gatsu08List.add(new KeyValueDataSource(TokuchoKaishiTsuki8GatsuHosoku.特別徴収しない.getコード(),
                 TokuchoKaishiTsuki8GatsuHosoku.特別徴収しない.get略称()));
-        gatsu08List.add(new KeyValueDataSource(TokuchoKaishiTsuki8GatsuHosoku._02月.getコード(),
-                TokuchoKaishiTsuki8GatsuHosoku._02月.get略称()));
-        gatsu08List.add(new KeyValueDataSource(TokuchoKaishiTsuki8GatsuHosoku._04月.getコード(),
-                TokuchoKaishiTsuki8GatsuHosoku._04月.get略称()));
+        gatsu08List.add(new KeyValueDataSource(TokuchoKaishiTsuki8GatsuHosoku._2月開始.getコード(),
+                TokuchoKaishiTsuki8GatsuHosoku._2月開始.get略称()));
+        gatsu08List.add(new KeyValueDataSource(TokuchoKaishiTsuki8GatsuHosoku._4月開始_待機.getコード(),
+                TokuchoKaishiTsuki8GatsuHosoku._4月開始_待機.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl8GatsuHosoku().setDataSource(gatsu08List);
         RString key_08月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, nowDate,
@@ -641,8 +641,8 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu10List = new ArrayList<>();
         gatsu10List.add(new KeyValueDataSource(TokuchoKaishiTsuki10GatsuHosoku.特別徴収しない.getコード(),
                 TokuchoKaishiTsuki10GatsuHosoku.特別徴収しない.get略称()));
-        gatsu10List.add(new KeyValueDataSource(TokuchoKaishiTsuki10GatsuHosoku._04月.getコード(),
-                TokuchoKaishiTsuki10GatsuHosoku._04月.get略称()));
+        gatsu10List.add(new KeyValueDataSource(TokuchoKaishiTsuki10GatsuHosoku._4月開始.getコード(),
+                TokuchoKaishiTsuki10GatsuHosoku._4月開始.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl10GatsuHosoku().setDataSource(gatsu10List);
         RString key_10月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, nowDate,
@@ -653,8 +653,8 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu12List = new ArrayList<>();
         gatsu12List.add(new KeyValueDataSource(TokuchoKaishiTsuki12GatsuHosoku.特別徴収しない.getコード(),
                 TokuchoKaishiTsuki12GatsuHosoku.特別徴収しない.get略称()));
-        gatsu12List.add(new KeyValueDataSource(TokuchoKaishiTsuki12GatsuHosoku._06月.getコード(),
-                TokuchoKaishiTsuki12GatsuHosoku._06月.get略称()));
+        gatsu12List.add(new KeyValueDataSource(TokuchoKaishiTsuki12GatsuHosoku._6月開始.getコード(),
+                TokuchoKaishiTsuki12GatsuHosoku._6月開始.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl12GatsuHosoku().setDataSource(gatsu12List);
         RString key_12月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, nowDate,
@@ -665,8 +665,8 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu02List = new ArrayList<>();
         gatsu02List.add(new KeyValueDataSource(TokuchoKaishiTsuki2GatsuHosoku.特別徴収しない.getコード(),
                 TokuchoKaishiTsuki2GatsuHosoku.特別徴収しない.get略称()));
-        gatsu02List.add(new KeyValueDataSource(TokuchoKaishiTsuki2GatsuHosoku._08月.getコード(),
-                TokuchoKaishiTsuki2GatsuHosoku._08月.get略称()));
+        gatsu02List.add(new KeyValueDataSource(TokuchoKaishiTsuki2GatsuHosoku._8月開始.getコード(),
+                TokuchoKaishiTsuki2GatsuHosoku._8月開始.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl2GatsuHosoku().setDataSource(gatsu02List);
         RString key_02月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉, nowDate,
@@ -734,10 +734,10 @@ public final class TokubetsuChoshuTotalHandler {
         RDate nowDate = RDate.getNowDate();
         gatsu12List.add(new KeyValueDataSource(
                 TokuchoIraikingakuKeisanHoho12Gatsu.特徴開始月以降の普通徴収額.getコード(),
-                TokuchoIraikingakuKeisanHoho12Gatsu.特徴開始月以降の普通徴収額.get略称()));
+                TokuchoIraikingakuKeisanHoho12Gatsu.特徴開始月以降の普通徴収額.get名称()));
         gatsu12List.add(new KeyValueDataSource(
-                TokuchoIraikingakuKeisanHoho12Gatsu.年額除12乗本徴収月数除年金支給回数.getコード(),
-                TokuchoIraikingakuKeisanHoho12Gatsu.年額除12乗本徴収月数除年金支給回数.get略称()));
+                TokuchoIraikingakuKeisanHoho12Gatsu.法定計算方法_6で割る.getコード(),
+                TokuchoIraikingakuKeisanHoho12Gatsu.法定計算方法_6で割る.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl12GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu12List);
         RString key_12月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_12月開始, nowDate,
@@ -748,10 +748,10 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu02List = new ArrayList<>();
         gatsu02List.add(new KeyValueDataSource(
                 TokuchoIraikingakuKeisanHoho2Gatsu.特徴開始月以降の普通徴収額.getコード(),
-                TokuchoIraikingakuKeisanHoho2Gatsu.特徴開始月以降の普通徴収額.get略称()));
+                TokuchoIraikingakuKeisanHoho2Gatsu.特徴開始月以降の普通徴収額.get名称()));
         gatsu02List.add(new KeyValueDataSource(
-                TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数.getコード(),
-                TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数.get略称()));
+                TokuchoIraikingakuKeisanHoho2Gatsu.法定計算方法_6で割る.getコード(),
+                TokuchoIraikingakuKeisanHoho2Gatsu.法定計算方法_6で割る.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl2GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu02List);
         RString key_02月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_2月開始, nowDate,
@@ -761,8 +761,8 @@ public final class TokubetsuChoshuTotalHandler {
 
         List<KeyValueDataSource> gatsu04List = new ArrayList<>();
         gatsu04List.add(new KeyValueDataSource(
-                TokuchoIraikingakuKeisanHoho4Gatsu.年額除12乗仮徴収月数除年金支給回数.getコード(),
-                TokuchoIraikingakuKeisanHoho4Gatsu.年額除12乗仮徴収月数除年金支給回数.get略称()));
+                TokuchoIraikingakuKeisanHoho4Gatsu.法定計算方法_6で割る.getコード(),
+                TokuchoIraikingakuKeisanHoho4Gatsu.法定計算方法_6で割る.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl4GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu04List);
         RString key_04月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始, nowDate,
@@ -772,11 +772,11 @@ public final class TokubetsuChoshuTotalHandler {
 
         List<KeyValueDataSource> gatsu06List = new ArrayList<>();
         gatsu06List.add(new KeyValueDataSource(
-                TokuchoIraikingakuKeisanHoho6Gatsu.年額除12乗仮徴収月数除年金支給回数.getコード(),
-                TokuchoIraikingakuKeisanHoho6Gatsu.年額除12乗仮徴収月数除年金支給回数.get略称()));
+                TokuchoIraikingakuKeisanHoho6Gatsu.法定計算方法_6で割る.getコード(),
+                TokuchoIraikingakuKeisanHoho6Gatsu.法定計算方法_6で割る.get名称()));
         gatsu06List.add(new KeyValueDataSource(
                 TokuchoIraikingakuKeisanHoho6Gatsu.年額を納期数_5期_で割る.getコード(),
-                TokuchoIraikingakuKeisanHoho6Gatsu.年額を納期数_5期_で割る.get略称()));
+                TokuchoIraikingakuKeisanHoho6Gatsu.年額を納期数_5期_で割る.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl6GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu06List);
         RString key_06月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate,
@@ -786,11 +786,11 @@ public final class TokubetsuChoshuTotalHandler {
 
         List<KeyValueDataSource> gatsu08List = new ArrayList<>();
         gatsu08List.add(new KeyValueDataSource(
-                TokuchoIraikingakuKeisanHoho8Gatsu.年額除12乗仮徴収月数除年金支給回数.getコード(),
-                TokuchoIraikingakuKeisanHoho8Gatsu.年額除12乗仮徴収月数除年金支給回数.get略称()));
+                TokuchoIraikingakuKeisanHoho8Gatsu.法定計算方法_6で割る.getコード(),
+                TokuchoIraikingakuKeisanHoho8Gatsu.法定計算方法_6で割る.get名称()));
         gatsu08List.add(new KeyValueDataSource(
                 TokuchoIraikingakuKeisanHoho8Gatsu.年額を納期数_4期_で割る.getコード(),
-                TokuchoIraikingakuKeisanHoho8Gatsu.年額を納期数_4期_で割る.get略称()));
+                TokuchoIraikingakuKeisanHoho8Gatsu.年額を納期数_4期_で割る.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl8GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu08List);
         RString key_08月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始, nowDate,
@@ -803,11 +803,11 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu06List = new ArrayList<>();
         RDate nowDate = RDate.getNowDate();
         gatsu06List.add(new KeyValueDataSource(
-                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収しない.getコード(),
-                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収しない.get略称()));
+                TokuchoKaishiMaeFucho6Gatsu.なし.getコード(),
+                TokuchoKaishiMaeFucho6Gatsu.なし.get名称()));
         gatsu06List.add(new KeyValueDataSource(
-                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収する.getコード(),
-                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収する.get略称()));
+                TokuchoKaishiMaeFucho6Gatsu.あり.getコード(),
+                TokuchoKaishiMaeFucho6Gatsu.あり.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl6GatsuKaishiZenhan().setDataSource(gatsu06List);
         RString key_06月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, nowDate,
@@ -817,11 +817,11 @@ public final class TokubetsuChoshuTotalHandler {
 
         List<KeyValueDataSource> gatsu08List = new ArrayList<>();
         gatsu08List.add(new KeyValueDataSource(
-                TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収しない.getコード(),
-                TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収しない.get略称()));
+                TokuchoKaishiMaeFucho8Gatsu.なし.getコード(),
+                TokuchoKaishiMaeFucho8Gatsu.なし.get名称()));
         gatsu08List.add(new KeyValueDataSource(
-                TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収する.getコード(),
-                TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収する.get略称()));
+                TokuchoKaishiMaeFucho8Gatsu.あり.getコード(),
+                TokuchoKaishiMaeFucho8Gatsu.あり.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl8GatsuKaishiZenhan().setDataSource(gatsu08List);
         RString key_08月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, nowDate,
@@ -831,11 +831,11 @@ public final class TokubetsuChoshuTotalHandler {
 
         List<KeyValueDataSource> gatsu10List = new ArrayList<>();
         gatsu10List.add(new KeyValueDataSource(
-                TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収しない.getコード(),
-                TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収しない.get略称()));
+                TokuchoKaishiMaeFucho10Gatsu.なし.getコード(),
+                TokuchoKaishiMaeFucho10Gatsu.なし.get名称()));
         gatsu10List.add(new KeyValueDataSource(
-                TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収する.getコード(),
-                TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収する.get略称()));
+                TokuchoKaishiMaeFucho10Gatsu.あり.getコード(),
+                TokuchoKaishiMaeFucho10Gatsu.あり.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl10GatsuKaishiZenhan().setDataSource(gatsu10List);
         RString key_10月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, nowDate,
