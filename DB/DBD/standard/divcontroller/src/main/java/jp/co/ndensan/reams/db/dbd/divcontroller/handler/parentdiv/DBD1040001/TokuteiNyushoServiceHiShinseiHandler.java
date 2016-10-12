@@ -355,8 +355,8 @@ public class TokuteiNyushoServiceHiShinseiHandler {
 
         GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder
                 = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
-        RString 決定区分 = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
-        Decimal 軽減率 = div.getShinseiDetail().getTxtKeigenRitsu().getValue();
+        //RString 決定区分 = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
+        //Decimal 軽減率 = div.getShinseiDetail().getTxtKeigenRitsu().getValue();
         builder.set申請事由(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getShinseiDetail().getTxtShinseiYMD().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
@@ -385,10 +385,10 @@ public class TokuteiNyushoServiceHiShinseiHandler {
                 row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
                 row.setJotai(状態);
                 row.setShoninShinaiRiyu(div.getShinseiDetail().getTxtHiShoninRiyu().getText());
-                row.setKetteiKubun(決定区分);
-                if (軽減率 != null) {
-                    row.setKeigenritsu(new RString(軽減率.toString()));
-                }
+                //row.setKetteiKubun(決定区分);
+//                if (軽減率 != null) {
+//                    row.setKeigenritsu(new RString(軽減率.toString()));
+//                }
                 is新規 = false;
             }
         }
@@ -399,10 +399,10 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
             row.setJotai(追加);
             row.setShoninShinaiRiyu(div.getShinseiDetail().getTxtHiShoninRiyu().getText());
-            row.setKetteiKubun(決定区分);
-            if (軽減率 != null) {
-                row.setKeigenritsu(new RString(軽減率.toString()));
-            }
+//            row.setKetteiKubun(決定区分);
+//            if (軽減率 != null) {
+//                row.setKeigenritsu(new RString(軽減率.toString()));
+//            }
             row.setHiddenShoKisaiHokenshaNo(証記載保険者番号.value());
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
             newRowList.add(row);
@@ -669,20 +669,28 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinseiDetail().getTxtShinseiYMD().setDisabled(false);
         div.getShinseiDetail().getTxtShinseiRiyu().setDisabled(false);
         //div.getShinseiDetail().getCcdShinseiJoho().setDisabled(false);
-        div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
-        div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
-        div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
-        div.getShinseiDetail().getTxtYukoKigenYMD().setDisabled(true);
-        div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(true);
-        div.getShinseiDetail().getTxtKakuninNo().setDisabled(true);
-        div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(true);
-        div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
         div.getShinseiDetail().getBtnBackToShinseiList().setDisabled(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
         if (menuID.equals(申請メニュー)) {
+            div.getShinseiDetail().getRadKettaiKubun().setDisabled(true);
+            div.getShinseiDetail().getTxtKettaiYMD().setDisabled(true);
+            div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(true);
+            div.getShinseiDetail().getTxtYukoKigenYMD().setDisabled(true);
+            div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(true);
+            div.getShinseiDetail().getTxtKakuninNo().setDisabled(true);
+            div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(true);
+            div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(true);
             div.getShinseiDetail().getTxtDetermineShinsei().setDisplayNone(false);
             div.getShinseiDetail().getBtnConfirm().setDisplayNone(true);
         } else if (menuID.equals(承認メニュー)) {
+            div.getShinseiDetail().getRadKettaiKubun().setDisabled(false);
+            div.getShinseiDetail().getTxtKettaiYMD().setDisabled(false);
+            div.getShinseiDetail().getTxtTekiyoYMD().setDisabled(false);
+            div.getShinseiDetail().getTxtYukoKigenYMD().setDisabled(false);
+            div.getShinseiDetail().getTxtKeigenRitsu().setDisabled(false);
+            div.getShinseiDetail().getTxtKakuninNo().setDisabled(false);
+            div.getShinseiDetail().getBtnHiShoninRiyu().setDisabled(false);
+            div.getShinseiDetail().getTxtHiShoninRiyu().setDisabled(false);
             div.getShinseiDetail().getTxtDetermineShinsei().setDisplayNone(true);
             div.getShinseiDetail().getBtnConfirm().setDisplayNone(false);
         }
