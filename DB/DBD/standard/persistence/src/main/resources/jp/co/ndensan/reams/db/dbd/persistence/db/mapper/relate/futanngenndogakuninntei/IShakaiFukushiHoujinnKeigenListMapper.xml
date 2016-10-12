@@ -70,6 +70,7 @@ and open the template in the editor.
       "ShafukuKeigenKetteiTempTable"."kakuninNo"  AS 確認番号,
       C."shikakuSoshitsuYMD" AS 資格喪失年月日,
       C."shichosonCode" AS 市町村コード,
+      D."keikakuJigyoshaNo" AS 計画事業者番号,
       <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
     FROM
       "ShafukuKeigenKetteiTempTable"
@@ -81,8 +82,22 @@ and open the template in the editor.
       '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
       true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')AS "ShikibetsuTaisho" 
     ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"
+      LEFT JOIN 
+      (SELECT T3006."hihokenshaNo",
+              T3006."keikakuJigyoshaNo"
+      FROM (SELECT rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."hihokenshaNo",
+                   rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."keikakuJigyoshaNo",
+                   rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM",
+                   rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."rirekiNo",
+                   row_number() OVER(PARTITION BY rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."hihokenshaNo"
+                   ORDER BY rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM" DESC,
+                   rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."rirekiNo" DESC) AS rrkno
+             FROM  rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"
+      )AS T3006
+      WHERE rrkno=1
+      ) AS D
+      ON D."hihokenshaNo" ="ShafukuKeigenKetteiTempTable"."hihokenshaNo"
       ${出力順}
-
 </select>
 <select id="get社会福祉法人等軽減の通知書発行の一時テーブルEntity"
         resultMap="resultMap_IShafukuKeigenKetteiTempTableEntity"
