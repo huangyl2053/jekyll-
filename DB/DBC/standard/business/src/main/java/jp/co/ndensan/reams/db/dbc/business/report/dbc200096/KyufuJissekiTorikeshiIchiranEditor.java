@@ -103,7 +103,7 @@ public class KyufuJissekiTorikeshiIchiranEditor
         source.listKyufuJisseki_4 = getパターン308(entity.get年度());
         source.listKyufuJisseki_5 = getパターン254(entity.getサービス提供年月());
         source.listKyufuJisseki_6 = getColumnValue(entity.get入力識別番号());
-        source.listKyufuJisseki_7 = entity.get事業者番号();
+        source.listKyufuJisseki_7 = entity.get事業所番号();
         source.listKyufuJisseki_8 = entity.get整理番号();
         source.listKyufuJisseki_9 = entity.getサービス種類();
         source.listKyufuJisseki_10 = doカンマ編集(entity.getサービス費用額());
