@@ -115,6 +115,7 @@ public class KogakuServiceJyuryoKakuninShoPrintService {
         entity.set事業所郵便番号(result.get事業所郵便番号());
         entity.set事業所電話番号(result.get事業所電話番号());
         entity.set事業所所在地(result.get事業所所在地());
+        entity.set利用者負担上限額(result.get利用者負担上限額());
 
         return entity;
     }
