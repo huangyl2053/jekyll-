@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.ConvertGappeinaiJutokushaShinKyuNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.GetJuminShotokuJohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.GetSetaiinHaakuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.SetaiinHaakuNyuryokuTempCreatProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020090.DBC020090_KogakuKaigoServicehiSetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinhaakunyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class DBC020090_KogakuKaigoServicehiSetaiinHaaku extends BatchFlowBase<DBC020090_KogakuKaigoServicehiSetaiinHaakuParameter> {
 
-    private static final String CREAT_PROCESS = "creatTmpProcess";
     private static final String 世帯員住民の把握 = "getSetaiinHaaku";
     private static final String 合併内住特者番号変換処理 = "convertGappeinaiJutokushaShinKyuNo";
     private static final String 各住民の所得情報の取得 = "getJuminShotokuJoho";
@@ -36,20 +34,9 @@ public class DBC020090_KogakuKaigoServicehiSetaiinHaaku extends BatchFlowBase<DB
         if (parameter == null || parameter.get管理識別区分() == null) {
             return;
         }
-        executeStep(CREAT_PROCESS);
         executeStep(世帯員住民の把握);
         executeStep(合併内住特者番号変換処理);
         executeStep(各住民の所得情報の取得);
-    }
-
-    /**
-     * 世帯員把握入力一時テーブル作成するメソッドです。
-     *
-     * @return 帳票出力パラメータ
-     */
-    @Step(CREAT_PROCESS)
-    protected IBatchFlowCommand creatTmpProcess() {
-        return simpleBatch(SetaiinHaakuNyuryokuTempCreatProcess.class).define();
     }
 
     /**
