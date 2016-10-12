@@ -26,6 +26,7 @@ public class ModifyNinteiShinseiJohoMybatisParameter extends UaFt200FindShikibet
     private final RString 認定申請IF種類;
     private final LasdecCode 市町村コード;
     private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
+    private boolean is市町村コード非空 = true;
 
     /**
      * コンストラクタ。
@@ -40,6 +41,9 @@ public class ModifyNinteiShinseiJohoMybatisParameter extends UaFt200FindShikibet
         this.市町村コード = 市町村コード;
         this.認定申請IF種類 = 認定申請IF種類;
         this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
+        if (認定申請IF種類 == null || 認定申請IF種類.isEmpty()) {
+            this.is市町村コード非空 = false;
+        }
     }
 
 }

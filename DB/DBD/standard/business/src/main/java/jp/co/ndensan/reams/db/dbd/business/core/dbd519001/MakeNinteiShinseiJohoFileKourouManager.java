@@ -236,8 +236,16 @@ public class MakeNinteiShinseiJohoFileKourouManager {
         RString ァイル名 = parameter.get連携ファイル名();
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(連携データ種類.concat(parameter.get連携データ種類()));
-        出力条件.add(証記載保険者番号.concat(parameter.get証記載保険者番号()));
-        出力条件.add(市町村コード.concat(parameter.get市町村コード().value()));
+        if (parameter.get証記載保険者番号() != null) {
+            出力条件.add(証記載保険者番号.concat(parameter.get証記載保険者番号()));
+        } else {
+            出力条件.add(証記載保険者番号.concat(RString.HALF_SPACE));
+        }
+        if (parameter.get市町村コード() != null) {
+            出力条件.add(市町村コード.concat(parameter.get市町村コード().value()));
+        } else {
+            出力条件.add(市町村コード.concat(RString.HALF_SPACE));
+        }
         出力条件.add(被保険者番号.concat(parameter.get被保険者番号().value()));
         出力条件.add(抽出開始日時.concat(parameter.get抽出開始日時().toString()));
         出力条件.add(抽出終了日時.concat(parameter.get抽出終了日時().toString()));
