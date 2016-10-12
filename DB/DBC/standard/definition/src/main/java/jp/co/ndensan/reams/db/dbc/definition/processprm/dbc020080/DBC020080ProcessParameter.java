@@ -70,15 +70,6 @@ public class DBC020080ProcessParameter implements IBatchProcessParameter {
      * @return DBC020080MyBatisParameter
      */
     public DBC020080MyBatisParameter toDBC020080MyBatisParameter() {
-        return new DBC020080MyBatisParameter(
-                申請対象開始日 == null ? RString.EMPTY : new RString(申請対象開始日.toString()),
-                申請対象終了日 == null ? RString.EMPTY : new RString(申請対象終了日.toString()),
-                処理日時 == null ? RString.EMPTY : 処理日時.getDate().toDateString(),
-                出力順,
-                市町村コード.value(),
-                ShoriName.高額合算自己負担額計算登録.get名称(),
-                処理日時 == null ? RString.EMPTY : new RString(処理日時.getYear()),
-                宛名検索条件
-        );
+        return new DBC020080MyBatisParameter(出力順, ShoriName.高額合算自己負担額計算登録.get名称());
     }
 }

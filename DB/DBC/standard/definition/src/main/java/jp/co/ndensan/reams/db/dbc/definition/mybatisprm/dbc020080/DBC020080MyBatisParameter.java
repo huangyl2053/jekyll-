@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080;
 
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,19 +24,13 @@ public class DBC020080MyBatisParameter implements IMyBatisParameter {
     /**
      * DBC020080MyBatisParameterのコンストラクタです。
      *
-     * @param 出力順 出力順
-     * @param 処理名 処理名
+     * @param 出力順 RString
+     * @param 処理名 RString
      *
      */
-    public DBC020080MyBatisParameter(RString 申請対象日開始,
-            RString 申請対象日終了,
-            RString 処理年月日,
+    public DBC020080MyBatisParameter(
             RString 出力順,
-            RString 市町村コード,
-            RString 処理名,
-            RString システム日付の年,
-            boolean 事業者フラグ,
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+            RString 処理名) {
         this.出力順 = RString.isNullOrEmpty(出力順) ? null : 出力順;
         this.処理名 = 処理名;
     }
