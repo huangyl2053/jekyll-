@@ -158,10 +158,9 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
             if (控除後.compareTo(Decimal.ZERO) < 0) {
                 控除後 = Decimal.ZERO;
             }
-        } else {
-            控除後 = 対象世帯員1.getKazeiShotokuGaku();
+            対象世帯員1.setKazeiShotokuGakuAfter(控除後);
         }
-        対象世帯員1.setKazeiShotokuGakuAfter(控除後);
+
     }
 
     private Decimal getDecimal(Decimal decimal) {
