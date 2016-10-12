@@ -54,7 +54,7 @@ public class RiyojokyoTokeihyoHandler {
         DBC150020_NenreikaikyuRiyojokyoParameter batchParamter = new DBC150020_NenreikaikyuRiyojokyoParameter();
         FlexibleDate tmpFlexibleDate = FlexibleDate.EMPTY;
         if (null != div.getTasyoNengetu().getValue()) {
-            tmpFlexibleDate = new FlexibleDate(div.getTasyoNengetu().getValue().toDateString());
+            tmpFlexibleDate = new FlexibleDate(div.getTasyoNengetu().getValue().toDateString().substring(桁_0, 桁_6));
         }
         if (div.getRadTaishoYM().getSelectedKey().equals(SELECT_KEY0)) {
             batchParamter.setServiceTeikyoYM(tmpFlexibleDate);
