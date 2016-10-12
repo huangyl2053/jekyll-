@@ -80,5 +80,6 @@ public class KeisangoJohoInsertProcess extends BatchProcessBase<DbTKeisangoJohoT
         } else if (processParamter.isSaishinFlag3()) {
             dbT2015Writer.insert(new KeisangoJohoResult().getDbT2015Entity(entity));
         }
+        計算中間Temp.delete(entity);
     }
 }
