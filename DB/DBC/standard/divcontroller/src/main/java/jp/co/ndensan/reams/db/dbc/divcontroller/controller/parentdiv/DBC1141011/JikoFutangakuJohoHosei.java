@@ -147,6 +147,7 @@ public class JikoFutangakuJohoHosei {
                 SubGyomuCode.DBC介護給付);
         parameter.setTreatmentType(国保連共同処理受託区分);
         parameter.setHandleTimestamp(RDate.getNowDateTime());
+        parameter.set出力フラグが(div.getJikoFutangakuHoseiPrint().isIsPublish());
         return parameter;
     }
 
