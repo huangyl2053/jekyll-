@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -23,5 +23,5 @@ public class ShunyuJohoEntity {
     private RString 収入ID;
     private RString 収納ID;
     private Decimal 収入額;
-    private FlexibleDate 収入日;
+    private RDate 収入日;
 }

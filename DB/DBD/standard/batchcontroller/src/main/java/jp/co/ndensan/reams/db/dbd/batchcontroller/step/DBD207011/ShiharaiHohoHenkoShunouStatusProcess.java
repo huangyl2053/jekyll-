@@ -114,7 +114,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
                 data.setShunyuYMD(最大の収入年月日);
                 data.setShunyuGaku(収入額);
-                data.setDunningHakkoYMD(entity.get督促状発行履歴_督促状発行年月日());
+                data.setDunningHakkoYMD(edit日期(entity.get督促状発行履歴_督促状発行年月日()));
 
                 RString 完納_未納区分 = edit完納_未納区分(processParamter.get基準日(), edit日期(entity.get調定共通_介護継承_納期限()),
                         entity.get調定共通_介護継承_調定額(), data.getShunyuGaku());
@@ -149,7 +149,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     private FlexibleDate edit仮の時効起算日(ShunoJohoEntity 収納情報) {
 
         FlexibleDate 時効起算日 = 収納情報.get時効_時効起算年月日();
-        FlexibleDate 督促状発行年月日 = 収納情報.get督促状発行履歴_督促状発行年月日();
+        FlexibleDate 督促状発行年月日 = edit日期(収納情報.get督促状発行履歴_督促状発行年月日());
         FlexibleDate 納期限の翌日 = FlexibleDate.EMPTY;
 
         RDate 納期限 = 収納情報.get調定共通_介護継承_納期限();
@@ -183,11 +183,12 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                 if (収入情報.get収入額() != null) {
                     収入額 = 収入額.add(収入情報.get収入額());
                 }
-                最大の収入年月日 = 収入情報.get収入日();
-                if ((仮の時効起算日 == null || 仮の時効起算日.isEmpty()) || 仮の時効起算日.plusYear(2).isBeforeOrEquals(時効起算日)) {
+                最大の収入年月日 = edit日期(収入情報.get収入日());
+                if ((仮の時効起算日 == null || 仮の時効起算日.isEmpty())
+                        || 時効起算日 == null || 時効起算日.isEmpty() || 仮の時効起算日.plusYear(2).isBeforeOrEquals(時効起算日)) {
                     break;
                 } else {
-                    仮の時効起算日 = 収入情報.get収入日();
+                    仮の時効起算日 = edit日期(収入情報.get収入日());
                 }
             }
         }
