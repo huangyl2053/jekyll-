@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -435,6 +436,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
         return (MeisaiMode) _CommonChildDivModeUtil.getMode(this.modes, MeisaiMode.class);
     }
 
+    @Override
     public void setMode_MeisaiMode(MeisaiMode value) {
         _CommonChildDivModeUtil.setMode(this.modes, MeisaiMode.class, value);
     }
@@ -585,8 +587,8 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @Override
-    public void initialize(ShikibetsuCode 識別コード, List<dgHenko_Row> henkoData) {
-        getHandler().initialize(識別コード, henkoData);
+    public void initialize(ShikibetsuCode 識別コード, IItemList<HihokenshaDaicho> hihoData) {
+        getHandler().initialize(識別コード, hihoData);
     }
 
     private ShikakuHenkoRirekiHandler getHandler() {
@@ -619,6 +621,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result
                 = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
         List<HihokenshaDaicho> retList = new ArrayList<>();
+
         for (dgHenko_Row row : this.getDgHenko().getDataSource()) {
             retList.add(result.get(new HihokenshaDaichoIdentifier(new HihokenshaNo(row.getHihokenshaNo()),
                     row.getIdoYMD().getValue(), row.getEdaNo())));

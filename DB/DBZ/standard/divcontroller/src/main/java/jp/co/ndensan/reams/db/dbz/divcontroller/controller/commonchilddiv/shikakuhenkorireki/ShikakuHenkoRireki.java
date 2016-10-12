@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhen
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -203,24 +204,31 @@ public class ShikakuHenkoRireki {
         validationMessages.add(TextBoxFlexibleDateValidator.validate暦上日(henkoRirekiDiv.getHenkoInput().getTxtHenkoDate()));
         validationMessages.add(TextBoxFlexibleDateValidator.validate暦上日(henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate()));
 
-        HihokenshaDaicho hihokenshaDaicho;
-        if (henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Add.getValue())) {
-            hihokenshaDaicho = getHandler(henkoRirekiDiv).getTsuikaEntity(result);
-            validationMessages.add(getValidationHandler(henkoRirekiDiv).tsuikaShoriCheck(result.iterator().next()));
-        } else {
-            HihokenshaDaichoIdentifier hihokenshaDaichoIdentifier = new HihokenshaDaichoIdentifier(
-                    new HihokenshaNo(henkoRirekiDiv.getDgHenko().getClickedItem().getHihokenshaNo()),
-                    henkoRirekiDiv.getDgHenko().getClickedItem().getIdoYMD().getValue(),
-                    henkoRirekiDiv.getDgHenko().getClickedItem().getEdaNo());
-            hihokenshaDaicho = result.get(hihokenshaDaichoIdentifier);
+        FlexibleDate idoDate = FlexibleDate.MAX;
+        if (!henkoRirekiDiv.getTxtHenkoDate().getValue().isEmpty()) {
+            idoDate = henkoRirekiDiv.getTxtHenkoDate().getValue();
         }
-        validationMessages.add(getValidationHandler(henkoRirekiDiv).henkoJiyuCheck(hihokenshaDaicho));
-        if (validationMessages.iterator().hasNext()
-                && !henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Delete.getValue())) {
-            return ResponseData.of(henkoRirekiDiv).addValidationMessages(validationMessages).respond();
-        }
-        if (!ResponseHolder.isReRequest() && henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Delete.getValue())) {
-            return ResponseData.of(henkoRirekiDiv).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(HihokenshaNo.EMPTY, idoDate, new RString("0001"));
+        if (!result.values().isEmpty()) {
+            if (henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Add.getValue())) {
+                hihokenshaDaicho = getHandler(henkoRirekiDiv).getTsuikaEntity(result);
+                validationMessages.add(getValidationHandler(henkoRirekiDiv).tsuikaShoriCheck(result.iterator().next()));
+            } else {
+                HihokenshaDaichoIdentifier hihokenshaDaichoIdentifier = new HihokenshaDaichoIdentifier(
+                        new HihokenshaNo(henkoRirekiDiv.getDgHenko().getClickedItem().getHihokenshaNo()),
+                        henkoRirekiDiv.getDgHenko().getClickedItem().getIdoYMD().getValue(),
+                        henkoRirekiDiv.getDgHenko().getClickedItem().getEdaNo());
+                hihokenshaDaicho = result.get(hihokenshaDaichoIdentifier);
+            }
+
+            validationMessages.add(getValidationHandler(henkoRirekiDiv).henkoJiyuCheck(hihokenshaDaicho));
+            if (validationMessages.iterator().hasNext()
+                    && !henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Delete.getValue())) {
+                return ResponseData.of(henkoRirekiDiv).addValidationMessages(validationMessages).respond();
+            }
+            if (!ResponseHolder.isReRequest() && henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Delete.getValue())) {
+                return ResponseData.of(henkoRirekiDiv).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+            }
         }
 
         if (!henkoRirekiDiv.getInputMode()

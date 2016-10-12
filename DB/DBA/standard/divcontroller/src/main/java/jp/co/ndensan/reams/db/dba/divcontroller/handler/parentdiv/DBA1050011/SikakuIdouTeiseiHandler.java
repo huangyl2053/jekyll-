@@ -66,9 +66,7 @@ public class SikakuIdouTeiseiHandler {
         //新初期化
         HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
         List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(被保険者番号);
-        HihokenshaDaichoList sortedHihoDaichoList = new HihokenshaDaichoList(ItemList.of(hihoDaichoList));
-        IItemList<HihokenshaDaicho> tokusoList = sortedHihoDaichoList.to資格得喪List();
-        div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().initialize(tokusoList);
+        initialize資格得喪失履歴(hihoDaichoList);
 
         ArrayList<HihokenshaDaicho> serialHihoDaicho = new ArrayList<>();
         serialHihoDaicho.addAll(hihoDaichoList);
@@ -89,6 +87,17 @@ public class SikakuIdouTeiseiHandler {
         joho.setIryoHokenJohoList(set初期化時の医療保険情報());
         joho.setRoreiFukushiJohoList(set初期化時の老福年金情報());
         return joho;
+    }
+
+    /**
+     * 資格の取得・喪失履歴を初期化します。
+     *
+     * @param hihoDaichoList 初期化する際の元データとなるリスト
+     */
+    public void initialize資格得喪失履歴(List<HihokenshaDaicho> hihoDaichoList) {
+        HihokenshaDaichoList sortedHihoDaichoList = new HihokenshaDaichoList(ItemList.of(hihoDaichoList));
+        IItemList<HihokenshaDaicho> tokusoList = sortedHihoDaichoList.to資格得喪List();
+        div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().initialize(tokusoList);
     }
 
     /**
@@ -202,15 +211,9 @@ public class SikakuIdouTeiseiHandler {
      * @param 識別コード 識別コード
      * @param joho 初期化時の医療保険情報
      */
-    public void save(ShikibetsuCode 識別コード, SikakuIdouTeiseiJoho joho) {
-        //TODO 城間 ここでは資格の訂正情報が存在するかのチェックが本来必要。以下の情報はメインではない為、チェック不要で更新して良い
-//        HihokenshaShikakuTeiseiManager service = HihokenshaShikakuTeiseiManager.createInstance();
-//        if (チェックNG.equals(service.checkIryoHoken(joho.getIryoHokenJohoList(), set初期化時の医療保険情報()))
-//                && チェックNG.equals(service.checkRofukuNenkin(joho.getRoreiFukushiJohoList(), set初期化時の老福年金情報(識別コード)))) {
-//            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
-//        }
-        //div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().save();
-        //div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().click_Save();
+    public void save(ShikibetsuCode 識別コード, List<HihokenshaDaicho> joho) {
+        HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
+        manager.save被保険者台List(joho);
         div.getCcdIryoHokenDialogButton().save();
         div.getCcdRofukuNenkinDialogButton().save();
     }

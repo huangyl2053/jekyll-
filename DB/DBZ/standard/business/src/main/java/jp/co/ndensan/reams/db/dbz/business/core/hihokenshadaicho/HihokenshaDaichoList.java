@@ -37,6 +37,24 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaicho> {
     }
 
     /**
+     * 被保険者番号・異動日・枝番の降順でリストを取得します。
+     *
+     * @return 降順のList
+     */
+    public IItemList<HihokenshaDaicho> to降順List() {
+        return daichoList;
+    }
+
+    /**
+     * 被保険者番号・異動日・枝番の昇順でリストを取得します。
+     *
+     * @return 降順のList
+     */
+    public IItemList<HihokenshaDaicho> to昇順List() {
+        return daichoList.sorted(new HihokenshaDaichoAscComparators());
+    }
+
+    /**
      * 被保険者台帳Listから、資格を取得してから喪失するまでの、1期間分の履歴を抽出します。
      *
      * @param 資格取得日 資格取得日
@@ -99,7 +117,20 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaicho> {
     public IItemList<HihokenshaDaicho> to住所地特例List() {
         List<HihokenshaDaicho> list = new ArrayList<>();
         FlexibleDate tekiyoDate = null;
+        HihokenshaDaicho beforeJutoku = null;
         for (HihokenshaDaicho daicho : daichoList) {
+
+            if (beforeJutoku != null
+                    && daicho.get適用年月日() != null
+                    && beforeJutoku.get適用年月日() != null) {
+                if (daicho.get適用年月日().equals(beforeJutoku.get適用年月日())) {
+                    beforeJutoku = daicho;
+                } else {
+                    list.add(beforeJutoku);
+                    beforeJutoku = null;
+                }
+            }
+
             if (!nullOrEmpty(daicho.get解除年月日())) {
                 list.add(daicho);
                 continue;
@@ -110,9 +141,13 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaicho> {
             }
 
             if (!daicho.get適用年月日().equals(tekiyoDate)) {
-                list.add(daicho);
                 tekiyoDate = daicho.get適用年月日();
+                beforeJutoku = daicho;
             }
+        }
+
+        if (beforeJutoku != null) {
+            list.add(beforeJutoku);
         }
         return ItemList.of(list);
     }
@@ -164,6 +199,17 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaicho> {
 
             return -1 * o1.get枝番().compareTo(o2.get枝番());
 
+        }
+    }
+
+    /**
+     * 被保険者台帳を被保険者番号・異動日・枝番の昇順で並べ替えるためのクラスです。
+     */
+    private static class HihokenshaDaichoAscComparators implements Comparator<HihokenshaDaicho> {
+
+        @Override
+        public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
+            return new HihokenshaDaichoComparators().compare(o1, o2) * -1;
         }
     }
 

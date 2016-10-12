@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,9 +31,9 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * 資格変更履歴の初期化処理をします。資格変更情報Gridに設定する情報を外部から受け取ります。
      *
      * @param 識別コード 対象者の識別コード
-     * @param henkoData 被保険者台帳情報から資格変更情報を抽出したデータ
+     * @param hihoData 被保険者台帳情報から資格変更情報を抽出したデータ
      */
-    void initialize(ShikibetsuCode 識別コード, List<dgHenko_Row> henkoData);
+    void initialize(ShikibetsuCode 識別コード, IItemList<HihokenshaDaicho> hihoData);
 
     /**
      * 変更履歴グリッドのデータを取得します。
@@ -71,4 +72,11 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
     boolean is追加済み();
 
     DataGrid<dgHenko_Row> getDgHenko();
+
+    /**
+     * 明細の状態を設定します。
+     *
+     * @param value
+     */
+    void setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode value);
 }

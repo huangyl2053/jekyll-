@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -45,6 +46,8 @@ public class ShikakuHenkoRirekiDialogButtonDiv extends Panel implements IShikaku
     private RString shutokuDate;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -160,13 +163,32 @@ public class ShikakuHenkoRirekiDialogButtonDiv extends Panel implements IShikaku
         this.shikibetsuCode = shikibetsuCode;
     }
 
+    /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void initialize(IItemList<HihokenshaDaicho> hihoData, ShikibetsuCode shikibetsuCode,
+    public void initialize(IItemList<HihokenshaDaicho> hihoData, HihokenshaNo hihoNo, ShikibetsuCode shikibetsuCode,
             FlexibleDate shutokuDate, ShikakuHenkoState state) {
         this.setMode(state.getStateValue());
         this.setShikibetsuCode(shikibetsuCode.getColumnValue());
+        this.setHihokenshaNo(hihoNo.getColumnValue());
 
         FlexibleDate settingShutokuDate = FlexibleDate.EMPTY;
         if (shutokuDate != null) {

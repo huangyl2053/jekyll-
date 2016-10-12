@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuN
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -205,5 +206,15 @@ public class ShisetsuNyutaishoDialogButtonDiv extends Panel implements IShisetsu
         }
 
         return saveNum;
+    }
+
+    @Override
+    public Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> get施設入退所データ() {
+        if (this.getSaveData() == null || this.getSaveData().isEmpty()) {
+            return Models.create(new ArrayList<ShisetsuNyutaisho>());
+        }
+
+        Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model = DataPassingConverter.deserialize(this.getSaveData(), Models.class);
+        return 施設入退所情報Model;
     }
 }

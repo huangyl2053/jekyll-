@@ -602,14 +602,16 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             row.setDaNo(shikakuTokuso.get枝番());
             RDateTime 処理日時 = shikakuTokuso.get処理日時();
             RStringBuilder 処理日時表示 = new RStringBuilder();
-            処理日時表示.append(処理日時.getDate().wareki().toDateString());
-            処理日時表示.append(RString.HALF_SPACE);
-            処理日時表示.append(String.format("%02d", 処理日時.getHour()));
-            処理日時表示.append(":");
-            処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
-            処理日時表示.append(":");
-            処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
-            row.setShoriDateTime(処理日時表示.toRString());
+            if (処理日時 != null) {
+                処理日時表示.append(処理日時.getDate().wareki().toDateString());
+                処理日時表示.append(RString.HALF_SPACE);
+                処理日時表示.append(String.format("%02d", 処理日時.getHour()));
+                処理日時表示.append(":");
+                処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
+                処理日時表示.append(":");
+                処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
+                row.setShoriDateTime(処理日時表示.toRString());
+            }
             row.setDeleteButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
             dgShikakuShutokuRirekiList.add(row);

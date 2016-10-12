@@ -28,10 +28,10 @@ public class ShikakuShosaiDialogsDiv extends Panel {
      */
     @JsonProperty("ccdJutokuDialogButton")
     private JushochiTokureiDialogButtonDiv ccdJutokuDialogButton;
-    @JsonProperty("ccdShikakuHenkoDialogButton")
-    private ShikakuHenkoRirekiDialogButtonDiv ccdShikakuHenkoDialogButton;
     @JsonProperty("ccdShisetsuNyutaishoDialogButton")
     private ShisetsuNyutaishoDialogButtonDiv ccdShisetsuNyutaishoDialogButton;
+    @JsonProperty("ccdShikakuHenkoDialogButton")
+    private ShikakuHenkoRirekiDialogButtonDiv ccdShikakuHenkoDialogButton;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,21 +49,21 @@ public class ShikakuShosaiDialogsDiv extends Panel {
     }
 
     /*
-     * getccdShikakuHenkoDialogButton
-     * @return ccdShikakuHenkoDialogButton
-     */
-    @JsonProperty("ccdShikakuHenkoDialogButton")
-    public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
-        return ccdShikakuHenkoDialogButton;
-    }
-
-    /*
      * getccdShisetsuNyutaishoDialogButton
      * @return ccdShisetsuNyutaishoDialogButton
      */
     @JsonProperty("ccdShisetsuNyutaishoDialogButton")
     public IShisetsuNyutaishoDialogButtonDiv getCcdShisetsuNyutaishoDialogButton() {
         return ccdShisetsuNyutaishoDialogButton;
+    }
+
+    /*
+     * getccdShikakuHenkoDialogButton
+     * @return ccdShikakuHenkoDialogButton
+     */
+    @JsonProperty("ccdShikakuHenkoDialogButton")
+    public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
+        return ccdShikakuHenkoDialogButton;
     }
 
     // </editor-fold>

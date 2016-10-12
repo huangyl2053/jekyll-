@@ -204,8 +204,10 @@ public class JushochiTokureiRirekiListHandler {
     private dgJutoku_Row add住所地特例履歴() {
         TextBoxDate shoriDate = new TextBoxDate();
         shoriDate.setValue(RDate.getNowDate());
-        TextBoxDate idoYmd = new TextBoxDate();
-        idoYmd.setValue(RDate.getNowDate());
+        TextBoxFlexibleDate idoYmd = new TextBoxFlexibleDate();
+        idoYmd.setValue(FlexibleDate.getNowDate());
+        TextBoxFlexibleDate kaijoIdoYmd = new TextBoxFlexibleDate();
+        kaijoIdoYmd.setValue(FlexibleDate.getNowDate());
         TextBoxFlexibleDate tekiyoDate = new TextBoxFlexibleDate();
         tekiyoDate.setValue(jutokuRirekiDiv.getTxtTekiyoDate().getValue());
         TextBoxFlexibleDate tekiyoTodokedeDate = new TextBoxFlexibleDate();
@@ -231,7 +233,10 @@ public class JushochiTokureiRirekiListHandler {
                 RString.EMPTY,
                 shoriDate,
                 idoYmd,
-                RString.EMPTY);
+                RString.EMPTY,
+                kaijoIdoYmd,
+                RString.EMPTY
+        );
     }
 
     /**
@@ -281,8 +286,8 @@ public class JushochiTokureiRirekiListHandler {
                 row.setKaijoJiyuKey(jushotiTokureiBusiness.get解除事由コード());
                 //措置元保険者 旧保険者 処理日時
                 row.setEdaNo(jushotiTokureiBusiness.get枝番());
-                TextBoxDate idoYMD = new TextBoxDate();
-                idoYMD.setValue(new RDate(jushotiTokureiBusiness.get異動日().toString()));
+                TextBoxFlexibleDate idoYMD = new TextBoxFlexibleDate();
+                idoYMD.setValue(jushotiTokureiBusiness.get異動日());
                 row.setIdoYMD(idoYMD);
                 row.setSochimotoHokensha(ObjectUtil.defaultIfNull(jushotiTokureiBusiness.get措置元保険者(), LasdecCode.EMPTY).value());
                 row.setKyuHokensha(ObjectUtil.defaultIfNull(jushotiTokureiBusiness.get旧保険者(), LasdecCode.EMPTY).value());
@@ -353,6 +358,7 @@ public class JushochiTokureiRirekiListHandler {
     public void setupToAfterInput() {
         jutokuRirekiDiv.getBtnAdd().setDisabled(false);
         jutokuRirekiDiv.getDgJutoku().setReadOnly(false);
+        setMeisaiShokaiMode();
     }
 
     /**
@@ -401,21 +407,42 @@ public class JushochiTokureiRirekiListHandler {
 
             HihokenshaDaicho hihokenshaDaicho = manager.get被保険者台帳管理(
                     new HihokenshaNo(row.getHihokenshaNo()), new FlexibleDate(row.getIdoYMD().getText()), row.getEdaNo());
-
             if (hihokenshaDaicho == null) {
-                hihokenshaDaicho = new HihokenshaDaicho(HihokenshaNo.EMPTY, FlexibleDate.EMPTY, RString.EMPTY);
+                hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(row.getHihokenshaNo()),
+                        new FlexibleDate(row.getTekiyoDate().getText()), new RString("0001"));
             }
             HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
 
             builder.set適用年月日(row.getTekiyoDate().getValue());
             builder.set適用届出年月日(row.getTekiyoTodokedeDate().getValue());
             builder.set住所地特例適用事由コード(row.getTekiyoJiyuKey() == null ? RString.EMPTY : row.getTekiyoJiyuKey());
-            builder.set解除年月日(row.getKaijoDate().getValue());
-            builder.set解除届出年月日(row.getKaijoTodokedeDate().getValue());
-            builder.set住所地特例解除事由コード(row.getKaijoJiyuKey() == null ? RString.EMPTY : row.getKaijoJiyuKey());
-
+            builder.set異動事由コード(row.getTekiyoJiyuKey() == null ? RString.EMPTY : row.getTekiyoJiyuKey());
             returnList.add(builder.build());
 
+            FlexibleDate 解除年月日 = row.getKaijoDate().getValue();
+            RString 解除事由コード = row.getKaijoJiyuKey() == null ? RString.EMPTY : row.getKaijoJiyuKey();
+            FlexibleDate 解除異動日 = row.getKaijoIdoYMD() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getKaijoIdoYMD().getText());
+            RString 解除枝番 = row.getKaijoEdaNo();
+            if (!(解除年月日 == null || 解除年月日.isEmpty())) {
+                HihokenshaDaicho kaijoHihokenshaDaicho = manager.get被保険者台帳管理(new HihokenshaNo(row.getHihokenshaNo()), 解除異動日, 解除枝番);
+                if (kaijoHihokenshaDaicho == null) {
+                    HihokenshaDaicho kariDaicho = new HihokenshaDaicho(builder.build().toEntity());
+                    HihokenshaDaichoBuilder kariBuilder = kariDaicho.createBuilderForEdit();
+                    kariBuilder.set異動日(解除年月日);
+                    kaijoHihokenshaDaicho = kariBuilder.build().createNewCopyData();
+                }
+                HihokenshaDaichoBuilder kaijoBuilder = kaijoHihokenshaDaicho.createBuilderForEdit();
+
+                kaijoBuilder.set解除年月日(解除年月日);
+                kaijoBuilder.set解除届出年月日(row.getKaijoTodokedeDate().getValue());
+                kaijoBuilder.set住所地特例解除事由コード(解除事由コード);
+                kaijoBuilder.set異動事由コード(解除事由コード);
+                returnList.add(kaijoBuilder.build());
+            }
+
+        }
+        for (HihokenshaDaicho daicho : returnList) {
+            System.out.println("idoDate have return List is " + daicho.get異動日());
         }
         return returnList;
     }

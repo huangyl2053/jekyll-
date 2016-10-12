@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShikakuHenkoRirekiDialogButton;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiState;
@@ -17,11 +18,12 @@ public interface IShikakuHenkoRirekiDialogButtonDiv extends ICommonChildDivBaseP
      * 資格変更履歴ダイアログを開くための初期化処理を行います。
      *
      * @param hihoData 被保険者台帳
+     * @param hihoNo 被保険者番号
      * @param shikibetsuCode 識別コード
      * @param shutokuDate 資格取得日
      * @param state 状態
      */
-    void initialize(IItemList<HihokenshaDaicho> hihoData, ShikibetsuCode shikibetsuCode,
+    void initialize(IItemList<HihokenshaDaicho> hihoData, HihokenshaNo hihoNo, ShikibetsuCode shikibetsuCode,
             FlexibleDate shutokuDate, ShikakuHenkoState state);
 
     /**

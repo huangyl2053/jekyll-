@@ -115,133 +115,183 @@ public class HihokenshaShisakuPanalDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnTokusoShusei() {
+        return this.getShikakuShosai().getBtnTokusoShusei();
+    }
+
+    @JsonIgnore
+    public void  setBtnTokusoShusei(Button btnTokusoShusei) {
+        this.getShikakuShosai().setBtnTokusoShusei(btnTokusoShusei);
+    }
+
+    @JsonIgnore
+    public ShikakuTokusoDiv getShikakuTokuso() {
+        return this.getShikakuShosai().getShikakuTokuso();
+    }
+
+    @JsonIgnore
+    public void  setShikakuTokuso(ShikakuTokusoDiv ShikakuTokuso) {
+        this.getShikakuShosai().setShikakuTokuso(ShikakuTokuso);
+    }
+
+    @JsonIgnore
     public tblShikakuShosaiDiv getTblShikakuShosai() {
-        return this.getShikakuShosai().getTblShikakuShosai();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai();
     }
 
     @JsonIgnore
     public void  setTblShikakuShosai(tblShikakuShosaiDiv tblShikakuShosai) {
-        this.getShikakuShosai().setTblShikakuShosai(tblShikakuShosai);
+        this.getShikakuShosai().getShikakuTokuso().setTblShikakuShosai(tblShikakuShosai);
     }
 
     @JsonIgnore
     public Label getLblShutokuDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblShutokuDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblShutokuDate();
     }
 
     @JsonIgnore
     public TextBoxFlexibleDate getTxtShutokuDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getTxtShutokuDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getTxtShutokuDate();
     }
 
     @JsonIgnore
     public Label getLblShutokuTodokedeDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblShutokuTodokedeDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblShutokuTodokedeDate();
     }
 
     @JsonIgnore
     public TextBoxFlexibleDate getTxtShutokuTodokedeDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getTxtShutokuTodokedeDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getTxtShutokuTodokedeDate();
     }
 
     @JsonIgnore
     public Label getLblShutokuJiyu() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblShutokuJiyu();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblShutokuJiyu();
     }
 
     @JsonIgnore
     public DropDownList getDdlShutokuJiyu() {
-        return this.getShikakuShosai().getTblShikakuShosai().getDdlShutokuJiyu();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getDdlShutokuJiyu();
     }
 
     @JsonIgnore
     public Label getLblHihoKubun() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblHihoKubun();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblHihoKubun();
     }
 
     @JsonIgnore
     public DropDownList getDdlHihoKubun() {
-        return this.getShikakuShosai().getTblShikakuShosai().getDdlHihoKubun();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getDdlHihoKubun();
     }
 
     @JsonIgnore
     public Label getLblShutokuShozaiHokensha() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblShutokuShozaiHokensha();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblShutokuShozaiHokensha();
     }
 
     @JsonIgnore
     public DropDownList getDdlShutokuShozaiHokensha() {
-        return this.getShikakuShosai().getTblShikakuShosai().getDdlShutokuShozaiHokensha();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getDdlShutokuShozaiHokensha();
     }
 
     @JsonIgnore
     public Label getLblShutokuSochimotoHokensha() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblShutokuSochimotoHokensha();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblShutokuSochimotoHokensha();
     }
 
     @JsonIgnore
     public DropDownList getDdlShutokuSochimotoHokensha() {
-        return this.getShikakuShosai().getTblShikakuShosai().getDdlShutokuSochimotoHokensha();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getDdlShutokuSochimotoHokensha();
     }
 
     @JsonIgnore
     public Label getLblKyuHokensha() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblKyuHokensha();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblKyuHokensha();
     }
 
     @JsonIgnore
     public DropDownList getDdlShutokuKyuHokensha() {
-        return this.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getDdlShutokuKyuHokensha();
     }
 
     @JsonIgnore
     public Label getLblShutokuShoriDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblShutokuShoriDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblShutokuShoriDate();
     }
 
     @JsonIgnore
     public TextBoxFlexibleDate getTxtShutokuShoriDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getTxtShutokuShoriDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getTxtShutokuShoriDate();
     }
 
     @JsonIgnore
     public Label getLblSoshitsuDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblSoshitsuDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblSoshitsuDate();
     }
 
     @JsonIgnore
     public TextBoxFlexibleDate getTxtSoshitsuDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getTxtSoshitsuDate();
     }
 
     @JsonIgnore
     public Label getLblSoshitsuTodokedeDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblSoshitsuTodokedeDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblSoshitsuTodokedeDate();
     }
 
     @JsonIgnore
     public TextBoxFlexibleDate getTxtSoshitsuTodokedeDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuTodokedeDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getTxtSoshitsuTodokedeDate();
     }
 
     @JsonIgnore
     public Label getLblSoshitsuJiyu() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblSoshitsuJiyu();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblSoshitsuJiyu();
     }
 
     @JsonIgnore
     public DropDownList getDdlSoshitsuJiyu() {
-        return this.getShikakuShosai().getTblShikakuShosai().getDdlSoshitsuJiyu();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getDdlSoshitsuJiyu();
     }
 
     @JsonIgnore
     public Label getLblSoshitsuShoriDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getLblSoshitsuShoriDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getLblSoshitsuShoriDate();
     }
 
     @JsonIgnore
     public TextBoxFlexibleDate getTxtSoshitsuShoriDate() {
-        return this.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuShoriDate();
+        return this.getShikakuShosai().getShikakuTokuso().getTblShikakuShosai().getTxtSoshitsuShoriDate();
+    }
+
+    @JsonIgnore
+    public Button getBtnTokusoKakutei() {
+        return this.getShikakuShosai().getShikakuTokuso().getBtnTokusoKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnTokusoKakutei(Button btnTokusoKakutei) {
+        this.getShikakuShosai().getShikakuTokuso().setBtnTokusoKakutei(btnTokusoKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnTokusoTorikeshi() {
+        return this.getShikakuShosai().getShikakuTokuso().getBtnTokusoTorikeshi();
+    }
+
+    @JsonIgnore
+    public void  setBtnTokusoTorikeshi(Button btnTokusoTorikeshi) {
+        this.getShikakuShosai().getShikakuTokuso().setBtnTokusoTorikeshi(btnTokusoTorikeshi);
+    }
+
+    @JsonIgnore
+    public HorizontalLine getLinShikakuTokuso() {
+        return this.getShikakuShosai().getLinShikakuTokuso();
+    }
+
+    @JsonIgnore
+    public void  setLinShikakuTokuso(HorizontalLine linShikakuTokuso) {
+        this.getShikakuShosai().setLinShikakuTokuso(linShikakuTokuso);
     }
 
     @JsonIgnore
@@ -260,13 +310,13 @@ public class HihokenshaShisakuPanalDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
-        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdShikakuHenkoDialogButton();
+    public IShisetsuNyutaishoDialogButtonDiv getCcdShisetsuNyutaishoDialogButton() {
+        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdShisetsuNyutaishoDialogButton();
     }
 
     @JsonIgnore
-    public IShisetsuNyutaishoDialogButtonDiv getCcdShisetsuNyutaishoDialogButton() {
-        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdShisetsuNyutaishoDialogButton();
+    public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
+        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdShikakuHenkoDialogButton();
     }
 
     // </editor-fold>

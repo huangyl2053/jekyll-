@@ -1,9 +1,12 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialogButton;
 
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoState;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /*
  * このコードはツールによって生成されました。
@@ -25,4 +28,11 @@ public interface IShisetsuNyutaishoDialogButtonDiv extends ICommonChildDivBasePr
      * @return 保存した件数
      */
     int save();
+
+    /**
+     * ダイアログで設定したデータを取得します。
+     *
+     * @return 施設入退所データ
+     */
+    Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> get施設入退所データ();
 }

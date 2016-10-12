@@ -90,6 +90,7 @@ public class IryoHokenRirekiDialog {
      */
     public ResponseData<IryoHokenRirekiDialogDiv> onClick_btnClose(IryoHokenRirekiDialogDiv div) {
         ArrayList<IryohokenKanyuJokyo> saveDataList = div.getCcdIryoHokenRireki().getSaveData();
+        System.out.println("saveData is empty ? -> : " + saveDataList.isEmpty());
         if (!saveDataList.isEmpty()) {
             RString serialSaveDataList = DataPassingConverter.serialize(saveDataList);
             div.setSaveData(serialSaveDataList);

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1050011;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeiseiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011StateName;
@@ -13,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.Sika
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050011.SikakuIdouTeiseiHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -75,9 +78,9 @@ public class SikakuIdouTeisei {
      */
     public ResponseData<SikakuIdouTeiseiDiv> onActive(SikakuIdouTeiseiDiv div) {
         if (ResponseHolder.getBeforeEvent().equals(new RString("DBA1050021_資格異動の訂正を保存する"))) {
-            TaishoshaKey key = getKey();
-            div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki()
-                    .initialize(key.get被保険者番号(), key.get識別コード());
+            ArrayList<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報_修正後, ArrayList.class);
+            System.out.println("hihoDaichoSize is " + hihoDaicho.size());
+            getHandler(div).initialize資格得喪失履歴(hihoDaicho);
             getHandler(div).setButtonDisable();
         }
         return ResponseData.of(div).respond();
@@ -138,20 +141,41 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Save(SikakuIdouTeiseiDiv div) {
-        SikakuIdouTeiseiJoho joho = ViewStateHolder.get(ViewStateKeys.初期化時医療保険情報, SikakuIdouTeiseiJoho.class);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).save(getKey().get識別コード(), joho);
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+            List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報_修正後, ArrayList.class);
+            if (hihoDaicho == null) {
+                hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
+            }
+            isSaveDataExists(hihoDaicho);
+            getHandler(div).save(getKey().get識別コード(), hihoDaicho);
             RealInitialLocker.release(create排他キー());
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1050011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void isSaveDataExists(List<HihokenshaDaicho> hihoDaicho) throws ApplicationException {
+        if (hihoDaicho == null || hihoDaicho.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+        }
+        boolean isSaved = false;
+        for (HihokenshaDaicho daicho : hihoDaicho) {
+            isSaved = daicho.hasChanged();
+            if (isSaved) {
+                break;
+            }
+        }
+        if (!isSaved) {
+            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+        }
     }
 
     /**

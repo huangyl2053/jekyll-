@@ -325,4 +325,23 @@ public class HihokenshaDaichoManager {
         return 1 == dac.save(被保険者台帳管理.toEntity());
     }
 
+    /**
+     * 被保険者台帳管理{@link HihokenshaDaicho}を一括で保存します。
+     *
+     * @param 被保険者台帳管理 {@link HihokenshaDaicho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public int save被保険者台List(List<HihokenshaDaicho> 被保険者台帳管理) {
+        requireNonNull(被保険者台帳管理, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理"));
+        int saveNum = 0;
+        for (HihokenshaDaicho daicho : 被保険者台帳管理) {
+            boolean isSave = save被保険者台帳管理(daicho);
+            if (isSave) {
+                saveNum++;
+            }
+        }
+        return saveNum;
+    }
+
 }

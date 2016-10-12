@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JushochiTo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoList;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochito
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -44,43 +44,60 @@ public class JushochiTokureiDialog {
             div.getCcdJushochiTokureiRireki().initialize(HihokenshaNo.EMPTY, ShikibetsuCode.EMPTY, FlexibleDate.MIN);
         }
 
+        HihokenshaNo hihoNo = new HihokenshaNo(div.getHihokenshaNo());
         RString mode = div.getMode();
-        FlexibleDate shutokuDate = new FlexibleDate(div.getShutokuDate());
+        FlexibleDate shutokuDate = FlexibleDate.EMPTY;
+        if (!isShutokuDateEmpty(div)) {
+            shutokuDate = new FlexibleDate(div.getShutokuDate());
+        }
         setMode(div, mode);
 
-        if (isGridDataEmpty(div)) {
+        if (!isGridDataEmpty(div)) {
+            ArrayList<HihokenshaDaicho> serialHihoData = DataPassingConverter.deserialize(div.getGridData(), ArrayList.class);
+            IItemList<HihokenshaDaicho> hihoData = ItemList.of(serialHihoData);
+            hihoData = new HihokenshaDaichoList(hihoData).to住所地特例List();
+            initialize(hihoNo, hihoData, div);
+        } else if (!isHihoDataEmpty(div)) {
             ArrayList<HihokenshaDaicho> serialHihoData = DataPassingConverter.deserialize(div.getHihoData(), ArrayList.class);
             IItemList<HihokenshaDaicho> hihoData = ItemList.of(serialHihoData);
-            hihoData = new HihokenshaDaichoList(hihoData).toOneSeasonList(shutokuDate);
-            hihoData = new HihokenshaDaichoList(hihoData).to住所地特例List();
-
-            List<dgJutoku_Row> dataSource = new ArrayList<>();
-            for (HihokenshaDaicho hihoDaicho : hihoData) {
-                dgJutoku_Row row = toRow(hihoDaicho);
-                dataSource.add(row);
+            if (!shutokuDate.isEmpty()) {
+                hihoData = new HihokenshaDaichoList(hihoData).toOneSeasonList(shutokuDate);
+                hihoData = new HihokenshaDaichoList(hihoData).to住所地特例List();
+            } else {
+                hihoData = ItemList.empty();
             }
-            div.getCcdJushochiTokureiRireki().initialize(dataSource);
-            return ResponseData.of(div).respond();
-        } else {
-//            ArrayList<JushochiTokureiRowData> dataList = DataPassingConverter.deserialize(div.getGridData(), ArrayList.class);
-//            List<dgJutoku_Row> dataSource = new ArrayList<>();
-//            for (JushochiTokureiRowData rowData : dataList) {
-//                dgJutoku_Row row = JushochiTokureiRowData.toRow(rowData);
-//                dataSource.add(row);
-//            }
-//            div.getCcdJushochiTokureiRireki().initialize(dataSource);
-            return ResponseData.of(div).respond();
+            initialize(hihoNo, hihoData, div);
         }
+        return ResponseData.of(div).respond();
 
+    }
+
+    private void initialize(HihokenshaNo hihoNo, IItemList<HihokenshaDaicho> hihoData, JushochiTokureiDialogDiv div) {
+        List<dgJutoku_Row> dataSource = new ArrayList<>();
+        HihokenshaDaicho kaijoHihoData = null;
+        for (HihokenshaDaicho hihoDaicho : hihoData) {
+            if (hihoDaicho.get住所地特例解除事由コード() != null && !hihoDaicho.get住所地特例解除事由コード().isEmpty()) {
+                kaijoHihoData = hihoDaicho;
+                continue;
+            }
+            dgJutoku_Row row = toRow(hihoNo, hihoDaicho, kaijoHihoData);
+            dataSource.add(row);
+        }
+        div.getCcdJushochiTokureiRireki().initialize(dataSource);
     }
 
     private boolean isHiddenInputEmpty(JushochiTokureiDialogDiv div) {
         if (div.getMode() == null || div.getMode().isEmpty()) {
-            return true;
+            return false;
         }
-        if (div.getShutokuDate() == null || div.getShutokuDate().isEmpty()) {
-            return true;
-        }
+        return (div.getHihokenshaNo() == null || div.getHihokenshaNo().isEmpty());
+    }
+
+    private boolean isShutokuDateEmpty(JushochiTokureiDialogDiv div) {
+        return (div.getShutokuDate() == null || div.getShutokuDate().isEmpty());
+    }
+
+    private boolean isHihoDataEmpty(JushochiTokureiDialogDiv div) {
         return div.getHihoData() == null || div.getHihoData().isEmpty();
     }
 
@@ -94,7 +111,7 @@ public class JushochiTokureiDialog {
             div.getCcdJushochiTokureiRireki().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.shokai);
             div.getCcdJushochiTokureiRireki().setAddButtonDisplay(JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplayNone);
         } else if (JushochiTokureiState.登録.getStateValue().equals(mode)) {
-            div.getCcdJushochiTokureiRireki().setMeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.teiseiInput);
+            div.getCcdJushochiTokureiRireki().setMeisaiDisplayMode(JushochiTokureiRirekiListDiv.MeisaiDisplayMode.teiseiShokai);
             div.getCcdJushochiTokureiRireki().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.teiseitoroku);
             div.getCcdJushochiTokureiRireki().setAddButtonDisplay(JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplay);
         }
@@ -108,21 +125,35 @@ public class JushochiTokureiDialog {
      */
     public ResponseData<JushochiTokureiDialogDiv> onClick_btnClose(JushochiTokureiDialogDiv div) {
 
-//        ArrayList<JushochiTokureiRowData> dataList = new ArrayList<>();
-//        for (dgJutoku_Row row : div.getCcdJushochiTokureiRireki().getDgJutoku().getDataSource()) {
-//            dataList.add(new JushochiTokureiRowData(row));
-//        }
-//        RString serialDataList = DataPassingConverter.serialize(dataList);
-//        div.setGridData(serialDataList);
-//
-//        //ここで、hiddenInput. hihoData に対して、住所地特例の修正結果を反映したデータを設定してあげる。
-//        //反映は、修正・追加・削除があった場合のみ（state値に変更があったとき）
-//        ArrayList<HihokenshaDaicho> saveDataList = div.getCcdJushochiTokureiRireki().getDataList();
-//        if (!saveDataList.isEmpty()) {
-//            RString serialSaveDataList = DataPassingConverter.serialize(saveDataList);
-//            div.setSaveData(serialSaveDataList);
-//        }
+        HihokenshaNo hihoNo = new HihokenshaNo(div.getHihokenshaNo());
+        ArrayList<HihokenshaDaicho> gridDataList = new ArrayList<>();
+        gridDataList.addAll(div.getCcdJushochiTokureiRireki().getDataList());
+        if (!gridDataList.isEmpty()) {
+            gridDataList = setHihokenshaNoAsList(hihoNo, gridDataList);
+            RString serialSaveDataList = DataPassingConverter.serialize(gridDataList);
+            div.setGridData(serialSaveDataList);
+        }
+
+        ArrayList<HihokenshaDaicho> saveDataList = new ArrayList<>();
+        saveDataList.addAll(div.getCcdJushochiTokureiRireki().getDataList());
+        if (!saveDataList.isEmpty()) {
+            saveDataList = setHihokenshaNoAsList(hihoNo, saveDataList);
+            RString serialSaveDataList = DataPassingConverter.serialize(saveDataList);
+            div.setHihoData(serialSaveDataList);
+        }
         return ResponseData.of(div).respond();
+    }
+
+    private ArrayList<HihokenshaDaicho> setHihokenshaNoAsList(HihokenshaNo hihoNo, ArrayList<HihokenshaDaicho> daichoList) {
+        ArrayList<HihokenshaDaicho> retList = new ArrayList<>();
+        for (HihokenshaDaicho daicho : daichoList) {
+            if (daicho.get被保険者番号() == null || daicho.get被保険者番号().isEmpty()) {
+                retList.add(daicho.createBuilderForEdit().set被保険者番号(hihoNo).build());
+            } else {
+                retList.add(daicho);
+            }
+        }
+        return retList;
     }
 
     /**
@@ -131,30 +162,26 @@ public class JushochiTokureiDialog {
      * @param hihoDaicho グリッドの元になる、被保険者台帳情報
      * @return 住所地特例のグリッドに設定可能なデータ
      */
-    private static dgJutoku_Row toRow(HihokenshaDaicho hihoDaicho) {
+    private static dgJutoku_Row toRow(HihokenshaNo hihoNo, HihokenshaDaicho hihoDaicho, HihokenshaDaicho kaijoHihoData) {
         dgJutoku_Row row = new dgJutoku_Row();
-        row.setState(new RString(""));
+        row.setState(ViewExecutionStatus.toValue(new RString(hihoDaicho.toEntity().getState().name())).get名称());
         row.setShichosonCode(hihoDaicho.get市町村コード() == null
                 ? RString.EMPTY
                 : hihoDaicho.get市町村コード().getColumnValue());
         row.setHihokenshaNo(hihoDaicho.get被保険者番号() == null
-                ? RString.EMPTY
+                ? hihoNo.getColumnValue()
                 : hihoDaicho.get被保険者番号().getColumnValue());
         row.setShoriTimestamp(hihoDaicho.toEntity() == null || hihoDaicho.toEntity().getLastUpdateTimestamp() == null
                 ? RString.EMPTY
                 : hihoDaicho.toEntity().getLastUpdateTimestamp().format西暦("yyyy.MM.dd HH:mm:ss"));
+
         row.getTekiyoDate().setValue(hihoDaicho.get適用年月日());
         row.getTekiyoTodokedeDate().setValue(hihoDaicho.get適用届出年月日());
         row.setTekiyoJiyu(nullOrEmpty(hihoDaicho.get住所地特例適用事由コード())
                 ? RString.EMPTY
                 : ShikakuJutokuTekiyoJiyu.toValue(hihoDaicho.get住所地特例適用事由コード()).get名称());
         row.setTekiyoJiyuKey(hihoDaicho.get住所地特例適用事由コード());
-        row.getKaijoDate().setValue(hihoDaicho.get解除年月日());
-        row.getKaijoTodokedeDate().setValue(hihoDaicho.get解除届出年月日());
-        row.setKaijoJiyu(nullOrEmpty(hihoDaicho.get住所地特例解除事由コード())
-                ? RString.EMPTY
-                : ShikakuJutokuKaijoJiyu.toValue(hihoDaicho.get住所地特例解除事由コード()).get名称());
-        row.setKaijoJiyuKey(hihoDaicho.get住所地特例解除事由コード());
+
         row.setSochimotoHokensha(hihoDaicho.get広住特措置元市町村コード() == null
                 ? RString.EMPTY
                 : hihoDaicho.get広住特措置元市町村コード().getColumnValue());
@@ -166,12 +193,27 @@ public class JushochiTokureiDialog {
                 : hihoDaicho.toEntity().getLastUpdateTimestamp().getDate());
         row.getIdoYMD().setValue(hihoDaicho.get異動日() == null
                 ? null
-                : new RDate(hihoDaicho.get異動日().toString()));
+                : hihoDaicho.get異動日());
         row.setEdaNo(hihoDaicho.get枝番());
+
+        if (kaijoHihoData != null) {
+            row.getKaijoDate().setValue(kaijoHihoData.get解除年月日());
+            row.getKaijoTodokedeDate().setValue(kaijoHihoData.get解除届出年月日());
+            row.setKaijoJiyu(nullOrEmpty(kaijoHihoData.get住所地特例解除事由コード())
+                    ? RString.EMPTY
+                    : ShikakuJutokuKaijoJiyu.toValue(kaijoHihoData.get住所地特例解除事由コード()).get名称());
+            row.setKaijoJiyuKey(kaijoHihoData.get住所地特例解除事由コード());
+
+            row.getKaijoIdoYMD().setValue(kaijoHihoData.get異動日() == null
+                    ? null
+                    : kaijoHihoData.get異動日());
+            row.setKaijoEdaNo(kaijoHihoData.get枝番());
+        }
         return row;
     }
 
     private static boolean nullOrEmpty(RString r) {
         return r == null || r.isEmpty();
     }
+
 }

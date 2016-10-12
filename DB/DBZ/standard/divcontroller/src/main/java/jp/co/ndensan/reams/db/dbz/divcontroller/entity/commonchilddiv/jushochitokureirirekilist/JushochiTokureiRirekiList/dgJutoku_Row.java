@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochit
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Sep 26 18:27:19 JST 2016 
+ * Thu Oct 06 21:40:20 JST 2016 
  */
 
 
@@ -38,8 +38,10 @@ public class dgJutoku_Row extends DataRow {
     private RString sochimotoHokensha;
     private RString kyuHokensha;
     private TextBoxDate shoriDate;
-    private TextBoxDate idoYMD;
+    private TextBoxFlexibleDate idoYMD;
     private RString edaNo;
+    private TextBoxFlexibleDate kaijoIdoYMD;
+    private RString kaijoEdaNo;
 
     public dgJutoku_Row() {
         super();
@@ -58,8 +60,10 @@ public class dgJutoku_Row extends DataRow {
         this.sochimotoHokensha = RString.EMPTY;
         this.kyuHokensha = RString.EMPTY;
         this.shoriDate = new TextBoxDate();
-        this.idoYMD = new TextBoxDate();
+        this.idoYMD = new TextBoxFlexibleDate();
         this.edaNo = RString.EMPTY;
+        this.kaijoIdoYMD = new TextBoxFlexibleDate();
+        this.kaijoEdaNo = RString.EMPTY;
         this.setOriginalData("state", state);
         this.setOriginalData("shichosonCode", shichosonCode);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -77,9 +81,11 @@ public class dgJutoku_Row extends DataRow {
         this.setOriginalData("shoriDate", shoriDate);
         this.setOriginalData("idoYMD", idoYMD);
         this.setOriginalData("edaNo", edaNo);
+        this.setOriginalData("kaijoIdoYMD", kaijoIdoYMD);
+        this.setOriginalData("kaijoEdaNo", kaijoEdaNo);
     }
 
-    public dgJutoku_Row(RString state, RString shichosonCode, RString hihokenshaNo, RString shoriTimestamp, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate tekiyoTodokedeDate, RString tekiyoJiyu, RString tekiyoJiyuKey, TextBoxFlexibleDate kaijoDate, TextBoxFlexibleDate kaijoTodokedeDate, RString kaijoJiyu, RString kaijoJiyuKey, RString sochimotoHokensha, RString kyuHokensha, TextBoxDate shoriDate, TextBoxDate idoYMD, RString edaNo) {
+    public dgJutoku_Row(RString state, RString shichosonCode, RString hihokenshaNo, RString shoriTimestamp, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate tekiyoTodokedeDate, RString tekiyoJiyu, RString tekiyoJiyuKey, TextBoxFlexibleDate kaijoDate, TextBoxFlexibleDate kaijoTodokedeDate, RString kaijoJiyu, RString kaijoJiyuKey, RString sochimotoHokensha, RString kyuHokensha, TextBoxDate shoriDate, TextBoxFlexibleDate idoYMD, RString edaNo, TextBoxFlexibleDate kaijoIdoYMD, RString kaijoEdaNo) {
         super();
         this.setOriginalData("state", state);
         this.setOriginalData("shichosonCode", shichosonCode);
@@ -98,6 +104,8 @@ public class dgJutoku_Row extends DataRow {
         this.setOriginalData("shoriDate", shoriDate);
         this.setOriginalData("idoYMD", idoYMD);
         this.setOriginalData("edaNo", edaNo);
+        this.setOriginalData("kaijoIdoYMD", kaijoIdoYMD);
+        this.setOriginalData("kaijoEdaNo", kaijoEdaNo);
         this.state = state;
         this.shichosonCode = shichosonCode;
         this.hihokenshaNo = hihokenshaNo;
@@ -115,6 +123,8 @@ public class dgJutoku_Row extends DataRow {
         this.shoriDate = shoriDate;
         this.idoYMD = idoYMD;
         this.edaNo = edaNo;
+        this.kaijoIdoYMD = kaijoIdoYMD;
+        this.kaijoEdaNo = kaijoEdaNo;
     }
 
     public RString getState() {
@@ -177,12 +187,20 @@ public class dgJutoku_Row extends DataRow {
         return shoriDate;
     }
 
-    public TextBoxDate getIdoYMD() {
+    public TextBoxFlexibleDate getIdoYMD() {
         return idoYMD;
     }
 
     public RString getEdaNo() {
         return edaNo;
+    }
+
+    public TextBoxFlexibleDate getKaijoIdoYMD() {
+        return kaijoIdoYMD;
+    }
+
+    public RString getKaijoEdaNo() {
+        return kaijoEdaNo;
     }
 
     public void setState(RString state) {
@@ -260,7 +278,7 @@ public class dgJutoku_Row extends DataRow {
         this.shoriDate = shoriDate;
     }
 
-    public void setIdoYMD(TextBoxDate idoYMD) {
+    public void setIdoYMD(TextBoxFlexibleDate idoYMD) {
         this.setOriginalData("idoYMD", idoYMD);
         this.idoYMD = idoYMD;
     }
@@ -268,6 +286,16 @@ public class dgJutoku_Row extends DataRow {
     public void setEdaNo(RString edaNo) {
         this.setOriginalData("edaNo", edaNo);
         this.edaNo = edaNo;
+    }
+
+    public void setKaijoIdoYMD(TextBoxFlexibleDate kaijoIdoYMD) {
+        this.setOriginalData("kaijoIdoYMD", kaijoIdoYMD);
+        this.kaijoIdoYMD = kaijoIdoYMD;
+    }
+
+    public void setKaijoEdaNo(RString kaijoEdaNo) {
+        this.setOriginalData("kaijoEdaNo", kaijoEdaNo);
+        this.kaijoEdaNo = kaijoEdaNo;
     }
 
     // </editor-fold>

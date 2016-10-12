@@ -44,11 +44,14 @@ import jp.co.ndensan.reams.db.dbz.service.core.sikakuidocheck.SikakuIdoCheckMana
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
@@ -191,8 +194,9 @@ public class HihokenshaShikakuTeiseiManager {
                 dbT1001Entity2.setShikakuSoshitsuJiyuCode(資格詳細情報.getSoshitsuJiyuKey());
                 資格訂正情報List.add(dbT1001Entity2);
             }
+            FlexibleDate 適用日;
             for (HihokenshaDaicho 住所地特例 : 住所地特例List) {
-                FlexibleDate 適用日 = 住所地特例.get適用年月日();
+                適用日 = 住所地特例.get適用年月日();
                 if (適用日 != null && !適用日.isEmpty()) {
                     DbT1001HihokenshaDaichoEntity dbT1001Entity3 = new DbT1001HihokenshaDaichoEntity();
                     dbT1001Entity3.setState(住所地特例.toEntity().getState());
@@ -202,7 +206,7 @@ public class HihokenshaShikakuTeiseiManager {
                     dbT1001Entity3.setJushochitokureiTekiyoTodokedeYMD(住所地特例.get適用届出年月日());
                     dbT1001Entity3.setJushochitokureiTekiyoJiyuCode(住所地特例.get住所地特例適用事由コード());
                     資格訂正情報List.add(dbT1001Entity3);
-                    get住所地特例の解除情報(住所地特例, 資格訂正情報List);
+                    get住所地特例の解除情報(住所地特例, 資格訂正情報List, 適用日);
                 }
             }
             for (HihokenshaDaicho 資格関連異動 : 資格関連異動List) {
@@ -222,13 +226,17 @@ public class HihokenshaShikakuTeiseiManager {
         return SearchResult.of(資格訂正情報List, 0, false);
     }
 
-    private void get住所地特例の解除情報(HihokenshaDaicho 住所地特例, List<DbT1001HihokenshaDaichoEntity> 資格訂正情報List) {
+    private void get住所地特例の解除情報(HihokenshaDaicho 住所地特例, List<DbT1001HihokenshaDaichoEntity> 資格訂正情報List,
+            FlexibleDate 適用日) {
         FlexibleDate 解除日 = 住所地特例.get解除年月日();
         if (解除日 != null && !解除日.isEmpty()) {
             DbT1001HihokenshaDaichoEntity dbT1001Entity4 = new DbT1001HihokenshaDaichoEntity();
             dbT1001Entity4.setState(住所地特例.toEntity().getState());
             dbT1001Entity4.setIdoYMD(解除日);
             dbT1001Entity4.setIdoJiyuCode(住所地特例.get住所地特例解除事由コード());
+            dbT1001Entity4.setJushochitokureiTekiyoYMD(適用日);
+            dbT1001Entity4.setJushochitokureiTekiyoTodokedeYMD(住所地特例.get適用届出年月日());
+            dbT1001Entity4.setJushochitokureiTekiyoJiyuCode(住所地特例.get住所地特例適用事由コード());
             dbT1001Entity4.setJushochitokureiKaijoYMD(解除日);
             dbT1001Entity4.setJushochitokureiKaijoTodokedeYMD(住所地特例.get解除届出年月日());
             dbT1001Entity4.setJushochitokureiKaijoJiyuCode(住所地特例.get住所地特例解除事由コード());
@@ -277,7 +285,7 @@ public class HihokenshaShikakuTeiseiManager {
                     dbT1001Entity3.setJushochitokureiTekiyoTodokedeYMD(住所地特例.get適用届出年月日());
                     dbT1001Entity3.setJushochitokureiTekiyoJiyuCode(住所地特例.get住所地特例適用事由コード());
                     資格訂正情報List.add(dbT1001Entity3);
-                    get住所地特例の解除情報(住所地特例, 資格訂正情報List);
+                    get住所地特例の解除情報(住所地特例, 資格訂正情報List, 適用日);
                 }
             }
             for (HihokenshaDaicho 資格関連異動 : 資格関連異動List) {
@@ -383,7 +391,7 @@ public class HihokenshaShikakuTeiseiManager {
             旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
         }
         if (旧市町村 != null && !旧市町村.isEmpty() && 広住特措置元市町村コード == null
-            && 旧市町村コード != null && !旧市町村コード.isEmpty()) {
+                && 旧市町村コード != null && !旧市町村コード.isEmpty()) {
             kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(市町村コード, DonyuKeitaiCode.事務広域);
             旧市町村コード = this.get旧市町村コード(資格訂正情報Entity, 旧市町村コード);
         }
@@ -472,11 +480,11 @@ public class HihokenshaShikakuTeiseiManager {
             dbt1001Entity.setHihokennshaKubunCode(RSTRING_1);
         }
         if (ShikakuHenkoJiyu.一本化.getコード().equals(entity.getShikakuHenkoJiyuCode())
-            && ShikakuJutokuTekiyoJiyu.自特例適用.getコード().equals(dbt1001Entity.getJushochitokureiTekiyoJiyuCode())) {
+                && ShikakuJutokuTekiyoJiyu.自特例適用.getコード().equals(dbt1001Entity.getJushochitokureiTekiyoJiyuCode())) {
             資格訂正登録リスト.add(this.get資格訂正登録(dbt1001Entity, entity));
         }
         if (ShikakuHenkoJiyu.合併.getコード().equals(entity.getShikakuHenkoJiyuCode())
-            && ShikakuJutokuTekiyoJiyu.自特例適用.getコード().equals(dbt1001Entity.getJushochitokureiTekiyoJiyuCode())) {
+                && ShikakuJutokuTekiyoJiyu.自特例適用.getコード().equals(dbt1001Entity.getJushochitokureiTekiyoJiyuCode())) {
             資格訂正登録リスト.add(this.get資格訂正登録(dbt1001Entity, entity));
         }
         資格訂正登録リスト.add(new HihokenshaDaicho(dbt1001Entity));
@@ -538,10 +546,19 @@ public class HihokenshaShikakuTeiseiManager {
      * @param 当該識別対象の生年月日 当該識別対象の生年月日
      */
     public void checkShikakuTorukuList(List<HihokenshaDaicho> 資格訂正登録リスト, IDateOfBirth 当該識別対象の生年月日) {
-        DbT1001HihokenshaDaichoEntity 前の資格訂正登録Entity = new DbT1001HihokenshaDaichoEntity();
+        DbT1001HihokenshaDaichoEntity 前の資格訂正登録Entity = null;
         for (HihokenshaDaicho 資格訂正登録Entity : 資格訂正登録リスト) {
+            if (前の資格訂正登録Entity == null) {
+                前の資格訂正登録Entity = 資格訂正登録Entity.toEntity();
+                continue;
+            }
+            if (資格訂正登録Entity.is論理削除フラグ()) {
+                continue;
+            }
+
             if (資格訂正登録Entity.get資格取得事由コード() != null && !資格訂正登録Entity.get資格取得事由コード().isEmpty()) {
-                checkShikakuShutoku(資格訂正登録Entity.get資格取得年月日(), 資格訂正登録Entity.get資格取得事由コード(),
+                checkShikakuShutoku(資格訂正登録Entity.get異動日(), 資格訂正登録Entity.get資格取得事由コード(),
+                        //checkShikakuShutoku(資格訂正登録Entity.get資格取得年月日(), 資格訂正登録Entity.get資格取得事由コード(),
                         資格訂正登録Entity.get被保険者区分コード(), 資格訂正登録Entity.get第1号資格取得年月日(), 当該識別対象の生年月日);
             }
             if (資格訂正登録Entity.get資格喪失事由コード() != null && !資格訂正登録Entity.get資格喪失事由コード().isEmpty()) {
@@ -641,7 +658,7 @@ public class HihokenshaShikakuTeiseiManager {
         }
         if (被保区分コード.equals(RSTRING_1) && age < AGE_65) {
             throw new ApplicationException(DbaErrorMessages.資格取得日時点１号被保険者年齢でない.getMessage());
-        } else if (被保区分コード.equals(RSTRING_2) && age >= AGE_65) {
+        } else if (被保区分コード.equals(RSTRING_2) && age < AGE_40) {
             throw new ApplicationException(DbaErrorMessages.資格取得日時点２号被保険者年齢でない.getMessage());
         }
     }
@@ -695,9 +712,10 @@ public class HihokenshaShikakuTeiseiManager {
      */
     public void checkShikakuHenko(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 変更日, RString 変更事由コード,
             IDateOfBirth 当該識別対象の生年月日) {
-        if (変更日.isBefore(最新データ.getIdoYMD())) {
-            throw new ApplicationException(DbaErrorMessages.変更日移行新資格異動有り.getMessage());
-        }
+        //TODO 城間 この条件をチェックする理由が不明。場合によってはどんなデータでもエラーを返してしまう。
+//        if (変更日.isBefore(最新データ.getIdoYMD())) {
+//            throw new ApplicationException(DbaErrorMessages.変更日移行新資格異動有り.getMessage());
+//        }
         int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 変更日).toString());
         if (RSTRING_1.equals(最新データ.getHihokennshaKubunCode())) {
             if (age >= AGE_65 && ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)) {
@@ -716,21 +734,21 @@ public class HihokenshaShikakuTeiseiManager {
                 throw new ApplicationException(DbaErrorMessages.年齢到達変更異動未登録.getMessage());
             }
             if (ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)
-                && 変更日.isBefore(getAge.get年齢到達日(AGE_65)) || getAge.get年齢到達日(AGE_65).isBefore(変更日)) {
+                    && 変更日.isBefore(getAge.get年齢到達日(AGE_65)) || getAge.get年齢到達日(AGE_65).isBefore(変更日)) {
                 throw new ApplicationException(DbaErrorMessages.変更日１号年齢到達日不一致.getMessage());
             }
         }
         if (RSTRING_2.equals(最新データ.getHihokennshaKubunCode()) && age < AGE_65
-            && ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)) {
+                && ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)) {
             throw new ApplicationException(DbaErrorMessages.変更日１号年齢到達日不一致.getMessage());
         }
         if (ShikakuHenkoJiyu.広住特転入.getコード().equals(変更事由コード)
-            || ShikakuHenkoJiyu.広住特居住.getコード().equals(変更事由コード)
-               && RSTRING_1.equals(最新データ.getKoikinaiJushochiTokureiFlag())) {
+                || ShikakuHenkoJiyu.広住特居住.getコード().equals(変更事由コード)
+                && RSTRING_1.equals(最新データ.getKoikinaiJushochiTokureiFlag())) {
             throw new ApplicationException(DbaErrorMessages.広域内住所地特例者でない.getMessage());
         }
         if (RSTRING_1.equals(最新データ.getKoikinaiJushochiTokureiFlag())
-            && ShikakuHenkoJiyu.広住特適用.getコード().equals(変更事由コード)) {
+                && ShikakuHenkoJiyu.広住特適用.getコード().equals(変更事由コード)) {
             throw new ApplicationException(DbaErrorMessages.住特者のため広住特適用登録不可.getMessage());
         }
     }
@@ -738,19 +756,20 @@ public class HihokenshaShikakuTeiseiManager {
     /**
      * 住所地特例チェック処理です。
      *
-     * @param 最新データ 最新データ
+     * @param 前データ 最新データ
      * @param 適用事由コード 適用事由コード
      * @param 解除事由コード 解除事由コード
      */
-    public void checkJushochiTokurei(DbT1001HihokenshaDaichoEntity 最新データ, RString 適用事由コード, RString 解除事由コード) {
-        RString 住所地特例適用事由コード = 最新データ.getJushochitokureiTekiyoJiyuCode();
-        RString 住所地特例解除事由コード = 最新データ.getJushochitokureiKaijoJiyuCode();
-        if (!RString.isNullOrEmpty(住所地特例適用事由コード) && RString.isNullOrEmpty(住所地特例解除事由コード)
-            && !RString.isNullOrEmpty(適用事由コード) && RString.isNullOrEmpty(解除事由コード)) {
-            throw new ApplicationException(DbaErrorMessages.住所地特例適用異動が未登録.getMessage());
-        }
+    public void checkJushochiTokurei(DbT1001HihokenshaDaichoEntity 前データ, RString 適用事由コード, RString 解除事由コード) {
+        RString 前適用事由 = 前データ.getJushochitokureiTekiyoJiyuCode();
+        RString 前解除事由 = 前データ.getJushochitokureiKaijoJiyuCode();
+        //TODO 本来は住所地特例の入力時に行うチェックか？ ここでは不要
+//        if (!RString.isNullOrEmpty(前適用事由) && RString.isNullOrEmpty(前解除事由)
+//                && !RString.isNullOrEmpty(適用事由コード) && RString.isNullOrEmpty(解除事由コード)) {
+//            throw new ApplicationException(DbaErrorMessages.住所地特例適用異動が未登録.getMessage());
+//        }
         if (!RString.isNullOrEmpty(適用事由コード) && !RString.isNullOrEmpty(解除事由コード)
-            && !RString.isNullOrEmpty(住所地特例適用事由コード) && !RString.isNullOrEmpty(住所地特例解除事由コード)) {
+                && !RString.isNullOrEmpty(前適用事由) && !RString.isNullOrEmpty(前解除事由)) {
             throw new ApplicationException(DbaErrorMessages.住所地特例解除異動が未登録.getMessage());
         }
     }
@@ -831,11 +850,17 @@ public class HihokenshaShikakuTeiseiManager {
     /**
      * 被保険者資格詳細異動用の宛名情報の取得です。
      *
+     * @param 識別コード 識別コード
      * @return 宛名情報 List<HihokenshaShisaku>
      */
-    public List<HihokenshaShisaku> get宛名情報全て() {
+    public List<HihokenshaShisaku> get宛名情報全て(ShikibetsuCode 識別コード) {
         IUaFt200FindShikibetsuTaishoFunctionMapper mapper = mapperProvider.create(IUaFt200FindShikibetsuTaishoFunctionMapper.class);
-        List<UaFt200FindShikibetsuTaishoEntity> entityList = mapper.select();
+
+        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory
+                .createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        IShikibetsuTaishoSearchKey key = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
+        UaFt200FindShikibetsuTaishoParam param = new UaFt200FindShikibetsuTaishoParam(key.getPSMSearchKey());
+        List<UaFt200FindShikibetsuTaishoEntity> entityList = mapper.selectByParameterClass(param);
         List<HihokenshaShisaku> businessList = new ArrayList<>();
         for (UaFt200FindShikibetsuTaishoEntity entity : entityList) {
             HihokenshaShisakuRelateEntity relateEntity = new HihokenshaShisakuRelateEntity();
