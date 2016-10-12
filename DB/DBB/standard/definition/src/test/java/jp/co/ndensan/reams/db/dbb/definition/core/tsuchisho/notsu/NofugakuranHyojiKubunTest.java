@@ -25,17 +25,17 @@ public class NofugakuranHyojiKubunTest extends DbbTestBase {
 
     @Test
     public void 引数に1を指定した場合_toValueは_口座振替_を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun.toValue(new RString("1")), is(NofugakuranHyojiKubun._口座振替_を印字する));
+        assertThat(NofugakuranHyojiKubun.toValue(new RString("1")), is(NofugakuranHyojiKubun.口座振替を印字する));
     }
 
     @Test
     public void 引数に2を指定した場合_toValueは__を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun.toValue(new RString("2")), is(NofugakuranHyojiKubun.__を印字する));
+        assertThat(NofugakuranHyojiKubun.toValue(new RString("2")), is(NofugakuranHyojiKubun.空白を印字する));
     }
 
     @Test
     public void 引数に3を指定した場合_toValueは_星印_を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun.toValue(new RString("3")), is(NofugakuranHyojiKubun.星印を印字する
+        assertThat(NofugakuranHyojiKubun.toValue(new RString("3")), is(NofugakuranHyojiKubun.マスクを印字する
         ));
     }
 
@@ -46,17 +46,17 @@ public class NofugakuranHyojiKubunTest extends DbbTestBase {
 
     @Test
     public void _口座振替_を印字するを指定した場合_getコードは_1を返す() {
-        assertThat(NofugakuranHyojiKubun._口座振替_を印字する.getコード(), is(new RString("1")));
+        assertThat(NofugakuranHyojiKubun.口座振替を印字する.getコード(), is(new RString("1")));
     }
 
     @Test
     public void __を印字するを指定した場合_getコードは_2を返す() {
-        assertThat(NofugakuranHyojiKubun.__を印字する.getコード(), is(new RString("2")));
+        assertThat(NofugakuranHyojiKubun.空白を印字する.getコード(), is(new RString("2")));
     }
 
     @Test
     public void _星印_を印字するを指定した場合_getコードは_3を返す() {
-        assertThat(NofugakuranHyojiKubun.星印を印字する.getコード(), is(new RString("3"))
+        assertThat(NofugakuranHyojiKubun.マスクを印字する.getコード(), is(new RString("3"))
         );
     }
 
@@ -67,44 +67,23 @@ public class NofugakuranHyojiKubunTest extends DbbTestBase {
 
     @Test
     public void _口座振替_を印字するを指定した場合_get名称は_口座振替を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun._口座振替_を印字する.get名称(), is(new RString("口座振替を印字する")));
+        assertThat(NofugakuranHyojiKubun.口座振替を印字する.get名称(), is(new RString("「口座振替」を印字する")));
     }
 
     @Test
     public void __を印字するを指定した場合_get名称は_空白を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun.__を印字する.get名称(), is(new RString("空白を印字する")));
+        assertThat(NofugakuranHyojiKubun.空白を印字する.get名称(), is(new RString("「　　　　」を印字する")));
     }
 
     @Test
     public void _星印_を印字するを指定した場合_get名称は_マスクを印字するを返す() {
-        assertThat(NofugakuranHyojiKubun.星印を印字する.get名称(), is(new RString("マスクを印字する"))
+        assertThat(NofugakuranHyojiKubun.マスクを印字する.get名称(), is(new RString("「＊＊＊＊」を印字する"))
         );
     }
 
     @Test
     public void 金額出力を指定した場合_get名称は_金額出力を返す() {
         assertThat(NofugakuranHyojiKubun.金額出力.get名称(), is(new RString("金額出力")));
-    }
-
-    @Test
-    public void _口座振替_を印字するを指定した場合_get略称は__口座振替_を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun._口座振替_を印字する.get略称(), is(new RString("「口座振替」を印字する")));
-    }
-
-    @Test
-    public void __を印字するを指定した場合_get略称は___を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun.__を印字する.get略称(), is(new RString("「」を印字する")));
-    }
-
-    @Test
-    public void _星印_を印字するを指定した場合_get略称は__星印_を印字するを返す() {
-        assertThat(NofugakuranHyojiKubun.星印を印字する.get略称(), is(new RString("「星印」を印字する"))
-        );
-    }
-
-    @Test
-    public void 金額出力を指定した場合_get略称は_金額出力を返す() {
-        assertThat(NofugakuranHyojiKubun.金額出力.get略称(), is(new RString("金額出力")));
     }
 
 }

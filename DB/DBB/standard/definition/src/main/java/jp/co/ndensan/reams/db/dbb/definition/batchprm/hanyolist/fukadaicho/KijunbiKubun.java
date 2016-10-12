@@ -16,22 +16,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KijunbiKubun {
 
     /**
-     * コード:1 名称:賦課基準日で抽出 略称:賦課基準日で抽出
+     * コード:1 名称:賦課基準日で抽出 略称:定義なし
      */
-    賦課基準日で抽出("1", "賦課基準日で抽出", "賦課基準日で抽出"),
+    賦課基準日で抽出("1", "賦課基準日で抽出"),
     /**
-     * コード:2 名称:調定日で抽出 略称:調定日（処理日）で抽出
+     * コード:2 名称:調定日（処理日）で抽出 略称:定義なし
      */
-    調定日で抽出("2", "調定日で抽出", "調定日（処理日）で抽出");
+    調定日で抽出("2", "調定日（処理日）で抽出");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private KijunbiKubun(String code, String fullname, String shortName) {
+    private KijunbiKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -50,15 +48,6 @@ public enum KijunbiKubun {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 基準日区分の略称を返します。
-     *
-     * @return 基準日区分の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**
