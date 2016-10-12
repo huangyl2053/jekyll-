@@ -73,6 +73,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -352,7 +353,8 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         本算定通知書情報.set収入情報(tmpResult.get収入情報());
         本算定通知書情報.set帳票制御共通(帳票制御共通);
 
-        IName 代納人氏名 = tmpResult.get宛先代納() != null ? tmpResult.get宛先代納().get宛先名称() : null;
+        IName 代納人氏名 = tmpResult.get宛先情報() != null && AtesakiShubetsu.代納人.equals(tmpResult.get宛先情報().get宛先種別())
+                ? tmpResult.get宛先情報().get宛先名称() : null;
         HonSanteiNonyuTsuchiShoJoho 編集後本算定通知書共通情報
                 = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
 
