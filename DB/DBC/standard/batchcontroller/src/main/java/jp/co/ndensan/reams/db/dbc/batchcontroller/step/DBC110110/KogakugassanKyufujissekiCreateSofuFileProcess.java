@@ -156,10 +156,11 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
             csvWriter.writeLine(getEndEntity(INT_1));
             csvWriter.close();
             do外字類似変換();
-            SharedFileDescriptor sdf = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
+            SharedFileDescriptor sdf = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                    FilesystemName.fromString(csvFileName.replace(拡張子_TEMP, RString.EMPTY)));
             sdf = SharedFile.defineSharedFile(sdf, 1, SharedFile.GROUP_ALL, null, true, null);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sdf, FilesystemPath.fromString(csvFilePath), opts);
+            SharedFile.copyToSharedFile(sdf, FilesystemPath.fromString(csvFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
             returnEntity.set総出力件数(総出力件数);
             returnEntity.setエントリ情報(sdf);
             outReturnEntity.setValue(returnEntity);

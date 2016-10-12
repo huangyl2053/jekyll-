@@ -88,10 +88,16 @@ public class KoseiTaishoJissekiIchiranEditor implements
         }
 
         source.listKyufuJisseki_3 = entity.get氏名();
-        source.listKyufuJisseki_4 = entity.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                fillType(FillType.BLANK).toDateString();
-        source.listKyufuJisseki_5 = entity.getサービス提供年月().wareki().firstYear(FirstYear.ICHI_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        if (entity.get年度().wareki() != null) {
+            source.listKyufuJisseki_4 = entity.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                    fillType(FillType.BLANK).toDateString();
+        }
+
+        if (entity.getサービス提供年月() != null) {
+            source.listKyufuJisseki_5 = entity.getサービス提供年月().wareki().firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+
         source.listKyufuJisseki_6 = entity.get入力識別番号();
         source.listKyufuJisseki_7 = entity.get事業者番号();
         source.listKyufuJisseki_8 = entity.get整理番号();

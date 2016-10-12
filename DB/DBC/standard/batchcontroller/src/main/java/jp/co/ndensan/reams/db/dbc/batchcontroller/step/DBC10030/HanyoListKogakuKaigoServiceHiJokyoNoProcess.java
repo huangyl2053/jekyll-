@@ -408,7 +408,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
         }
         builder.append(parameter.getKiyuKikanCode() == null || parameter.getKiyuKikanCode().isEmpty()
                 ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
-                .concat(右記号).concat(parameter.getKiyuKikanCode()));
+                .concat(右記号).concat(parameter.getKiyuKikanName()));
         return builder;
     }
 
