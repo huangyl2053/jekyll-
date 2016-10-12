@@ -232,7 +232,7 @@
       </if>       
       <if test="抽出モード == 3">
         WHERE
-            "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteishaUketoriYM" = #{決定者受付年月}
+            "DbT3111JigyoKogakuShikyuHanteiKekka"."serviceTeikyoYM" = #{決定者受付年月}
       </if> 
     </select>
     

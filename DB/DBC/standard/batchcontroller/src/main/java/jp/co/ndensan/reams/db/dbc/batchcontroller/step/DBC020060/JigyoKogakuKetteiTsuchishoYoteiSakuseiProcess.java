@@ -235,7 +235,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             report2.writeBy(reportSourceWriter2);
         }
         dataFlag = false;
-        JigyoKogakuShikyuFushikyuKetteTsuchiEntity fushikyuReportEntity = getFushikyuReportEntity(entity.get一時Entity(), 宛名情報, 住所);
+        JigyoKogakuShikyuFushikyuKetteTsuchiEntity fushikyuReportEntity = getFushikyuReportEntity(entity, 宛名情報, 住所);
         JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(fushikyuReportEntity, 連番, false);
         report.writeBy(reportSourceWriter3);
         本人支給額合計 = 本人支給額合計.add(entity.get一時Entity().getRiyoshaFutanGaku());
@@ -362,46 +362,53 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         return lastEntity;
     }
 
-    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity getFushikyuReportEntity(KetteiTsuchishoInfoTempEntity entity,
+    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity getFushikyuReportEntity(KogakuServiceReportEntity entity,
             IShikibetsuTaisho 宛名情報, RString 住所) {
         JigyoKogakuShikyuFushikyuKetteTsuchiEntity returnEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
         set出力順と改頁(returnEntity);
+        KetteiTsuchishoInfoTempEntity 一時Entity = entity.get一時Entity();
         returnEntity.setテスト出力フラグ(parameter.getテスト出力フラグ());
-        returnEntity.set決定通知No(entity.getTsuchishoNo());
-        if (null != entity.getHihokenshaNo()) {
-            returnEntity.set被保険者番号(entity.getHihokenshaNo().getColumnValue());
+        returnEntity.set決定通知No(一時Entity.getTsuchishoNo());
+        if (null != 一時Entity.getHihokenshaNo()) {
+            returnEntity.set被保険者番号(一時Entity.getHihokenshaNo().getColumnValue());
         }
         returnEntity.set被保険者氏名(宛名情報.get名称().getName().getColumnValue());
         returnEntity.set住所(住所);
         returnEntity.set郵便番号(宛名情報.get住所().get郵便番号().getEditedYubinNo());
-        if (null != entity.getServiceTeikyoYM()) {
-            returnEntity.set提供年月(entity.getServiceTeikyoYM().wareki().eraType(EraType.KANJI_RYAKU).
+        if (null != 一時Entity.getServiceTeikyoYM()) {
+            returnEntity.set提供年月(一時Entity.getServiceTeikyoYM().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         }
-        if (null != entity.getServiceTeikyoYM() && null != entity.getYokaigoJotaiKubunCode()
-                && !entity.getYokaigoJotaiKubunCode().isEmpty()) {
-            IYokaigoJotaiKubun 要介護度 = YokaigoJotaiKubunSupport.toValue(entity.getServiceTeikyoYM(),
-                    entity.getYokaigoJotaiKubunCode().getColumnValue());
+        if (null != 一時Entity.getServiceTeikyoYM() && null != 一時Entity.getYokaigoJotaiKubunCode()
+                && !一時Entity.getYokaigoJotaiKubunCode().isEmpty()) {
+            IYokaigoJotaiKubun 要介護度 = YokaigoJotaiKubunSupport.toValue(一時Entity.getServiceTeikyoYM(),
+                    一時Entity.getYokaigoJotaiKubunCode().getColumnValue());
             returnEntity.set要介護度(要介護度.getName());
         }
 
-        returnEntity.set認定開始日(formatDate(entity.getNinteiYukoKikanKaishiYMD()));
-        returnEntity.set認定終了日(formatDate(entity.getNinteiYukoKikanShuryoYMD()));
-        returnEntity.set受付年月日(formatDate(entity.getUketsukeYMD()));
-        returnEntity.set決定年月日(formatDate(entity.getKetteiYMD()));
-        returnEntity.set本人支払額(doカンマ編集(entity.getRiyoshaFutanGaku()));
-        returnEntity.set支給額(doカンマ編集(entity.getKogakuShikyuGaku()));
-        ShikyuFushikyuKubun 支給不支給区分 = ShikyuFushikyuKubun.toValue(entity.getKetteiShikyuKubunCode());
+        returnEntity.set認定開始日(formatDate(一時Entity.getNinteiYukoKikanKaishiYMD()));
+        returnEntity.set認定終了日(formatDate(一時Entity.getNinteiYukoKikanShuryoYMD()));
+        returnEntity.set受付年月日(formatDate(一時Entity.getUketsukeYMD()));
+        returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
+        returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
+        returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
+        ShikyuFushikyuKubun 支給不支給区分 = ShikyuFushikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
         returnEntity.set支給_不支給_決定区分(支給不支給区分.get名称());
-        returnEntity.set資格喪失日(formatDate(entity.getShikakuSoshitsuYMD()));
+        returnEntity.set資格喪失日(formatDate(一時Entity.getShikakuSoshitsuYMD()));
         RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
-                new Code(entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
+                new Code(一時Entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
         returnEntity.set喪失事由(喪失事由);
-        if (entity.isJidoShokanTaishoFlag()) {
+        if (一時Entity.isJidoShokanTaishoFlag()) {
             returnEntity.set自動償還(自動償還フラグ_TRUE);
         } else {
             returnEntity.set自動償還(RString.HALF_SPACE);
         }
+        returnEntity.set町域コード(entity.get町域コード() == null ? RString.EMPTY : entity.get町域コード().getColumnValue());
+        returnEntity.set行政区コード(entity.get行政区コード() == null ? RString.EMPTY : entity.get行政区コード().getColumnValue());
+        returnEntity.set氏名５０音カナ(entity.getカナ名称() == null ? RString.EMPTY : entity.getカナ名称().getColumnValue());
+        returnEntity.set証記載保険者番号(一時Entity.getShoKisaiHokenshaNo() == null ? RString.EMPTY
+                : 一時Entity.getShoKisaiHokenshaNo().getColumnValue());
+        returnEntity.set資格状態区分(一時Entity.getShikakuJyotaiKubun());
         return returnEntity;
     }
 

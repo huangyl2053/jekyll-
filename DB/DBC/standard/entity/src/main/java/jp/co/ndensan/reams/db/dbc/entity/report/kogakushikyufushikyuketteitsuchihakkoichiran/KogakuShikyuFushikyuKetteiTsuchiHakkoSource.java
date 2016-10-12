@@ -80,6 +80,17 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSource implements IReportSourc
     @ReportItem(name = "listLower_7", length = 9, order = 33)
     public RString listLower_7;
 // </editor-fold>
+
+    @ReportItem(name = "choikiCode")
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode")
+    public RString gyoseikuCode;
+    @ReportItem(name = "kanaMeisho")
+    public RString kanaMeisho;
+    @ReportItem(name = "shoKisaiHokenshaNo")
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "shikakuJyotaiKubun")
+    public RString shikakuJyotaiKubun;
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。

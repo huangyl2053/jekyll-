@@ -43,7 +43,6 @@ public class UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
     private static final LasdecCode 市町村コード = new LasdecCode("000000");
     private static final RString 処理枝番 = new RString("0000");
     private static final FlexibleYear 年度_固定 = new FlexibleYear("0000");
-    private static final RString 年度内連番_01 = new RString("01");
     private static final RString 読点 = new RString("、");
 
     private RString サービス種類名称;
@@ -91,6 +90,7 @@ public class UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
             一時tableWriter.update(一時Entit);
             サービス種類名称 = entity.get介護サービス種類Entity().getServiceShuruiMeisho();
         }
+        beforeEntity = entity;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
         }
     }
 
-    private DbT7022ShoriDateKanriEntity get処理日付管理マスタ(int 度内連番) {
+    private DbT7022ShoriDateKanriEntity get処理日付管理マスタ(int 年度内連番) {
 
         DbT7022ShoriDateKanriEntity tempEntity = new DbT7022ShoriDateKanriEntity();
         tempEntity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
@@ -118,11 +118,7 @@ public class UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
         tempEntity.setShoriName(ShoriName.高額サービス等支給不支給決定通知書一括作成.get名称());
         tempEntity.setShoriEdaban(処理枝番);
         tempEntity.setNendo(年度_固定);
-        if (度内連番 == 0) {
-            tempEntity.setNendoNaiRenban(年度内連番_01);
-        } else {
-            tempEntity.setNendoNaiRenban(new RString(度内連番 + 1).padZeroToLeft(2));
-        }
+        tempEntity.setNendoNaiRenban(new RString(年度内連番 + 1).padZeroToLeft(2));
         if (抽出モード_受付日.equals(parameter.get抽出モード()) || 抽出モード_決定日.equals(parameter.get抽出モード())) {
             tempEntity.setTaishoKaishiYMD(new FlexibleDate(parameter.get抽出条件日付From().toDateString()));
             tempEntity.setTaishoShuryoYMD(new FlexibleDate(parameter.get抽出条件日付To().toDateString()));
