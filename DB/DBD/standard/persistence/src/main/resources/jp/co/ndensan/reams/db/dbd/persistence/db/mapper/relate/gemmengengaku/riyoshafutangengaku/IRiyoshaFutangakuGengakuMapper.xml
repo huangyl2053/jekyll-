@@ -57,7 +57,7 @@
         AND rgdb."DbT4010GemmenGengakuShinsei"."gemmenGengakuShurui" = #{減免減額種類}
         WHERE rgdb."DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = #{被保険者番号}
         ORDER BY
-        rgdb."DbT4014RiyoshaFutangakuGengaku"."shinseiYMD" DESC
+        rgdb."DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" DESC,rgdb."DbT4014RiyoshaFutangakuGengaku"."ketteiKubun"
     </select>
     <select id="selectBy被保険者番号And減免減額種類"
             resultMap="resultMap_RiyoshaFutangakuGengakuEntity"

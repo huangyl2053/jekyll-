@@ -78,6 +78,8 @@ public class RiyoshaFutangakuGengakuHandler {
     private static final RString 承認情報 = new RString("承認情報");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 承認しない_KEY = new RString("key1");
+    private static final RString 承認する = new RString("1");
+    private static final RString 承認しない = new RString("0");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -171,8 +173,8 @@ public class RiyoshaFutangakuGengakuHandler {
         RString 決定区分コード;
         RString 決定区分TXT;
         HokenKyufuRitsu 給付率;
-        FlexibleDate 適用開始年月日 = FlexibleDate.EMPTY;
-        FlexibleDate 適用終了年月日 = FlexibleDate.EMPTY;
+        FlexibleDate 適用開始年月日;
+        FlexibleDate 適用終了年月日;
         RString 非承認理由 = RString.EMPTY;
         if (承認する_KEY.equals(決定区分)) {
             給付率 = new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue());
@@ -182,6 +184,8 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分TXT = KetteiKubun.承認する.get名称();
         } else {
             給付率 = HokenKyufuRitsu.ZERO;
+            適用開始年月日 = div.getTxtTekiyoYmd().getValue();
+            適用終了年月日 = div.getTxtYukoKigenYmd().getValue();
             決定区分コード = KetteiKubun.承認しない.getコード();
             決定区分TXT = KetteiKubun.承認しない.get名称();
             非承認理由 = div.getTxtHiShoninRiyu().getText();
@@ -607,7 +611,7 @@ public class RiyoshaFutangakuGengakuHandler {
         ddlShinseiIchiran_Row row;
         List<ddlShinseiIchiran_Row> rowList = new ArrayList<>();
 
-        RString 決定区分TXT = RString.EMPTY;
+        RString 決定区分TXT;
         for (RiyoshaFutangakuGengaku joho : 利用者負担額減額の情報List) {
 
             決定区分TXT = RString.EMPTY;
@@ -954,17 +958,35 @@ public class RiyoshaFutangakuGengakuHandler {
         @Override
         public int compare(RiyoshaFutangakuGengakuViewState s1, RiyoshaFutangakuGengakuViewState s2) {
 
-            int result = !s1.getRiyoshaFutangakuGengaku().get申請年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get申請年月日())
-                    ? 1 : (s1.getRiyoshaFutangakuGengaku().get申請年月日().equals(s2.getRiyoshaFutangakuGengaku().get申請年月日()) ? 0 : -1);
-
-            if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
-                result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
-            }
-            if (result == 0 && EntityDataState.Added == s1.getState()) {
+            int result;
+            if (s1.getRiyoshaFutangakuGengaku().get適用開始年月日() == null) {
                 result = 1;
-            } else if (result == 0 && EntityDataState.Added == s2.getState()) {
+            } else if (s2.getRiyoshaFutangakuGengaku().get適用開始年月日() == null) {
                 result = -1;
+            } else {
+                result = !s1.getRiyoshaFutangakuGengaku().get適用開始年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get適用開始年月日())
+                        ? 1 : (s1.getRiyoshaFutangakuGengaku().get適用開始年月日().equals(s2.getRiyoshaFutangakuGengaku().get適用開始年月日()) ? 0 : -1);
             }
+
+            if (result == 0) {
+                if (s1.getRiyoshaFutangakuGengaku().get決定区分() == 承認する && s2.getRiyoshaFutangakuGengaku().get決定区分() == 承認しない) {
+                    result = -1;
+                } else if (s1.getRiyoshaFutangakuGengaku().get決定区分() == 承認しない && s2.getRiyoshaFutangakuGengaku().get決定区分() == 承認する) {
+                    result = 1;
+                }
+            }
+
+            /*int result = !s1.getRiyoshaFutangakuGengaku().get申請年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get申請年月日())
+             ? 1 : (s1.getRiyoshaFutangakuGengaku().get申請年月日().equals(s2.getRiyoshaFutangakuGengaku().get申請年月日()) ? 0 : -1);
+
+             if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
+             result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
+             }
+             if (result == 0 && EntityDataState.Added == s1.getState()) {
+             result = 1;
+             } else if (result == 0 && EntityDataState.Added == s2.getState()) {
+             result = -1;
+             }*/
             return result;
         }
 
@@ -978,17 +1000,34 @@ public class RiyoshaFutangakuGengakuHandler {
         @Override
         public int compare(ddlShinseiIchiran_Row row1, ddlShinseiIchiran_Row row2) {
 
-            int result = !row2.getTxtShinseiYMD().getValue().isBeforeOrEquals(row1.getTxtShinseiYMD().getValue())
-                    ? 1 : (row2.getTxtShinseiYMD().getValue().equals(row1.getTxtShinseiYMD().getValue()) ? 0 : -1);
-
-            if (result == 0 && 追加.equals(row1.getJotai()) && 追加.equals(row2.getJotai())) {
-                result = row2.getHiddenShinseiRirekiNo().compareTo(row1.getHiddenShinseiRirekiNo());
-            }
-            if (result == 0 && 追加.equals(row2.getJotai())) {
-                result = 1;
-            } else if (result == 0 && 追加.equals(row1.getJotai())) {
+            int result;
+            if (row1.getTxtTekiyoYMD().getValue() == null || row1.getTxtTekiyoYMD().getValue().isEmpty()) {
                 result = -1;
+            } else if (row2.getTxtTekiyoYMD().getValue() == null || row2.getTxtTekiyoYMD().getValue().isEmpty()) {
+                result = 1;
+            } else {
+                result = !row1.getTxtTekiyoYMD().getValue().isBeforeOrEquals(row2.getTxtTekiyoYMD().getValue())
+                        ? -1 : (row1.getTxtTekiyoYMD().getValue().equals(row2.getTxtTekiyoYMD().getValue()) ? 0 : 1);
             }
+
+            if (result == 0) {
+                if (row1.getKetteiKubun() == KetteiKubun.承認する.get名称() && row2.getKetteiKubun() == KetteiKubun.承認しない.get名称()) {
+                    result = 1;
+                } else if (row1.getKetteiKubun() == KetteiKubun.承認しない.get名称() && row2.getKetteiKubun() == KetteiKubun.承認する.get名称()) {
+                    result = -1;
+                }
+            }
+//            int result = !row2.getTxtShinseiYMD().getValue().isBeforeOrEquals(row1.getTxtShinseiYMD().getValue())
+//                    ? 1 : (row2.getTxtShinseiYMD().getValue().equals(row1.getTxtShinseiYMD().getValue()) ? 0 : -1);
+//
+//            if (result == 0 && 追加.equals(row1.getJotai()) && 追加.equals(row2.getJotai())) {
+//                result = row2.getHiddenShinseiRirekiNo().compareTo(row1.getHiddenShinseiRirekiNo());
+//            }
+//            if (result == 0 && 追加.equals(row2.getJotai())) {
+//                result = 1;
+//            } else if (result == 0 && 追加.equals(row1.getJotai())) {
+//                result = -1;
+//            }
             return result;
         }
     }
