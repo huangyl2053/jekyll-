@@ -96,7 +96,6 @@ public class GemmenJisshiJokyoMain {
      * @return ResponseData<DBD104010_JukyushaGemmenJisshiJokyoParameter>
      */
     public ResponseData<DBD104010_JukyushaGemmenJisshiJokyoParameter> onClickCheck_btnBatchRegister(GemmenJisshiJokyoMainDiv div) {
-        //TODO DBD104010_JukyushaGemmenJisshiJokyoParameter
         DBD104010_JukyushaGemmenJisshiJokyoParameter parameter = getHandler(div).onClick_btnBatchParameterSave();
         return ResponseData.of(parameter).respond();
     }

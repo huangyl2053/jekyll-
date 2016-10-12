@@ -7,18 +7,22 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1100001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect.HanyoListAtenaSelectDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect.IHanyoListAtenaSelectDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterRestore;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterSave;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYear;
 
 /**
- * GemmenJisshiJokyoMain のクラスファイル 
- * 
+ * GemmenJisshiJokyoMain のクラスファイル
+ *
  * @author 自動生成
  */
 public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -102,7 +106,7 @@ public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadShutsuryokuChohyo(RadioButton radShutsuryokuChohyo) {
+    public void setRadShutsuryokuChohyo(RadioButton radShutsuryokuChohyo) {
         this.getGemmenJisshiJokyoJoken().setRadShutsuryokuChohyo(radShutsuryokuChohyo);
     }
 
@@ -112,7 +116,7 @@ public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtTaishoNendo(TextBoxYear txtTaishoNendo) {
+    public void setTxtTaishoNendo(TextBoxYear txtTaishoNendo) {
         this.getGemmenJisshiJokyoJoken().setTxtTaishoNendo(txtTaishoNendo);
     }
 
@@ -122,7 +126,7 @@ public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setGemmenJisshiJokyoTaishoHizukeKubun(GemmenJisshiJokyoTaishoHizukeKubunDiv GemmenJisshiJokyoTaishoHizukeKubun) {
+    public void setGemmenJisshiJokyoTaishoHizukeKubun(GemmenJisshiJokyoTaishoHizukeKubunDiv GemmenJisshiJokyoTaishoHizukeKubun) {
         this.getGemmenJisshiJokyoJoken().setGemmenJisshiJokyoTaishoHizukeKubun(GemmenJisshiJokyoTaishoHizukeKubun);
     }
 
@@ -132,7 +136,7 @@ public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadKijunBi(RadioButton radKijunBi) {
+    public void setRadKijunBi(RadioButton radKijunBi) {
         this.getGemmenJisshiJokyoJoken().getGemmenJisshiJokyoTaishoHizukeKubun().setRadKijunBi(radKijunBi);
     }
 
@@ -142,7 +146,7 @@ public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKijunBi(TextBoxNum txtKijunBi) {
+    public void setTxtKijunBi(TextBoxNum txtKijunBi) {
         this.getGemmenJisshiJokyoJoken().getGemmenJisshiJokyoTaishoHizukeKubun().setTxtKijunBi(txtKijunBi);
     }
 
@@ -152,7 +156,7 @@ public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadKijunNengetsu(RadioButton radKijunNengetsu) {
+    public void setRadKijunNengetsu(RadioButton radKijunNengetsu) {
         this.getGemmenJisshiJokyoJoken().getGemmenJisshiJokyoTaishoHizukeKubun().setRadKijunNengetsu(radKijunNengetsu);
     }
 
@@ -162,7 +166,7 @@ public class GemmenJisshiJokyoMainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getGemmenJisshiJokyoJoken().setLin1(lin1);
     }
 
