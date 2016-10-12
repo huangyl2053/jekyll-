@@ -20,17 +20,13 @@ public enum GassanJikofutangakuHoseiIchiranOutPutOrder implements IReportItems {
      */
     被保険者番号("0104", "被保険者番号", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"hihokenshaNo\""),
     /**
-     * 申請年月日
-     */
-    申請年月日("0333", "申請年月日", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"shinseiYMD\""),
-    /**
      * 対象年度
      */
     対象年度("0334", "対象年度", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"taishoNendo\""),
     /**
      * 申請書整理番号
      */
-    申請書整理番号("0337", "申請書整理番号", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"shikyuSeiriNo\""),
+    申請書整理番号("0337", "申請書整理番号", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"shikyuShinseishoSeiriNo\""),
     /**
      * 証記載保険者番号
      */
@@ -39,14 +35,6 @@ public enum GassanJikofutangakuHoseiIchiranOutPutOrder implements IReportItems {
      * 市町村コード
      */
     市町村コード("0016", "市町村コード", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"shichosonCode\""),
-    /**
-     * 氏名５０音カナ
-     */
-    氏名５０音カナ("0010", "氏名５０音カナ", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"kanaMeisho\""),
-    /**
-     * 町域コード
-     */
-    町域コード("0002", "町域コード", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"choikiCode\""),
     /**
      * 行政区コード
      */
