@@ -145,9 +145,7 @@ public class HihokenshaShikakuShutokuManager {
     public RString getSaidaiEdaban(HihokenshaNo hihokenshaNo, FlexibleDate idoYMD) {
         requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
         requireNonNull(idoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
-        IHihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(IHihokenshaShikakuShutokuMapper.class);
-        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(hihokenshaNo, idoYMD);
-        DbT1001HihokenshaDaichoEntity entity = hokenshamapper.getSaidaiEdaban(parameter);
+        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.get最大枝番(hihokenshaNo, idoYMD);
         if (entity == null || entity.getEdaNo().isEmpty()) {
             return 枝番;
         } else {
