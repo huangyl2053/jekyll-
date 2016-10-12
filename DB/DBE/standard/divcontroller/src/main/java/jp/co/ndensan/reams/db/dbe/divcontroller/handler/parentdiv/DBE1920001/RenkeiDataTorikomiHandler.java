@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.FileReader;
+import jp.co.ndensan.reams.uz.uza.io.ITextReadable;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
@@ -69,6 +71,8 @@ public class RenkeiDataTorikomiHandler {
     private static final RString UTF8 = new RString("2");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString 共有ファイル名 = new RString("要介護認定申請連携データ取込");
+    private static final int 無 = 0;
+    private static final int タイトルINDEX = 1;
     private final RenkeiDataTorikomiDiv div;
     private final RDate 基準日;
 
@@ -126,14 +130,7 @@ public class RenkeiDataTorikomiHandler {
      */
     public void getFileData() {
         if (あり.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
-            RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援);
-            Encode コード = null;
-            if (SJIS.equals(文字コード)) {
-                コード = Encode.SJIS;
-            } else if (UTF8.equals(文字コード)) {
-                コード = Encode.UTF_8;
-            }
-            setRowFileData(コード);
+            setRowFileData(set文字コード());
         }
     }
 
@@ -316,7 +313,22 @@ public class RenkeiDataTorikomiHandler {
         builder.append(path).append(File.separator).append(ファイル);
         File file = new File(builder.toString());
         if (file.exists()) {
-            row.setTotal(あり);
+            List<RString> list = new ArrayList<>();
+            ITextReadable reader = new FileReader(builder.toRString(), set文字コード());
+            RString stemp;
+            while (true) {
+                stemp = reader.readLine();
+                if (!RString.isNullOrEmpty(stemp)) {
+                    list.add(stemp);
+                } else {
+                    break;
+                }
+            }
+            if (list.size() == 無) {
+                row.setTotal(new RString(list.size()));
+            } else {
+                row.setTotal(new RString(list.size() - タイトルINDEX));
+            }
         } else {
             row.setTotal(なし);
         }
@@ -330,5 +342,16 @@ public class RenkeiDataTorikomiHandler {
         row.setFileName(ファイル名);
         getFileCount(path, ファイル名, row);
         return row;
+    }
+
+    private Encode set文字コード() {
+        RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援);
+        Encode コード = null;
+        if (SJIS.equals(文字コード)) {
+            コード = Encode.SJIS;
+        } else if (UTF8.equals(文字コード)) {
+            コード = Encode.UTF_8;
+        }
+        return コード;
     }
 }
