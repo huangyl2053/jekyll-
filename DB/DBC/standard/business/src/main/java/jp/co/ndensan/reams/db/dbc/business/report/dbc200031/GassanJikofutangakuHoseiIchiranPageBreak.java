@@ -60,17 +60,8 @@ public class GassanJikofutangakuHoseiIchiranPageBreak extends PageBreaker<Gassan
         if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().add_hokenshaNo.equals(nextSource.getSource().add_hokenshaNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.申請年月日.get項目ID())
-                && !currentSource.getSource().add_shinnseiYMD.equals(nextSource.getSource().add_shinnseiYMD)) {
-            flag = true;
         } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.市町村コード.get項目ID())
                 && !currentSource.getSource().add_shichosonCode.equals(nextSource.getSource().add_shichosonCode)) {
-            flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.氏名５０音カナ.get項目ID())
-                && !currentSource.getSource().add_kanaMeisho.equals(nextSource.getSource().add_kanaMeisho)) {
-            flag = true;
-        } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.町域コード.get項目ID())
-                && !currentSource.getSource().add_choikiCode.equals(nextSource.getSource().add_choikiCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(GassanJikofutangakuHoseiOutPutOrder.行政区コード.get項目ID())
                 && !currentSource.getSource().add_gyoseikuCode.equals(nextSource.getSource().add_gyoseikuCode)) {

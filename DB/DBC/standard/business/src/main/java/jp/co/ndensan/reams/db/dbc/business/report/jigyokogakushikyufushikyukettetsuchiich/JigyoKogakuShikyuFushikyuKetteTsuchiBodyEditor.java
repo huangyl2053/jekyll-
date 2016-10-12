@@ -71,6 +71,11 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiBodyEditor
                 source.listUpper_9 = entity.get本人支給額合計();
                 source.listLower_5 = entity.get支給額給額合計();
             }
+            source.choikiCode = entity.get町域コード();
+            source.gyoseikuCode = entity.get行政区コード();
+            source.kanaMeisho = entity.get氏名５０音カナ();
+            source.shoKisaiHokenshaNo = entity.get証記載保険者番号();
+            source.shikakuJyotaiKubun = entity.get資格状態区分();
         }
         return source;
     }

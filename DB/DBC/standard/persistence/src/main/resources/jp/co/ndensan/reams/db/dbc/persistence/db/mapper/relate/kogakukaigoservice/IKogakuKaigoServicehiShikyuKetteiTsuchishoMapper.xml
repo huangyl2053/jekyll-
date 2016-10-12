@@ -99,7 +99,7 @@
                 </if>
                 <if test="抽出モード == 2">              
                     AND 支給判定結果."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
-                    AND 支給判定結果."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付From}
+                    AND 支給判定結果."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
                 </if>       
                 <if test="抽出モード == 3">              
                     AND 支給審査決定."ketteishaUketoriYM" = #{決定者受付年月}
@@ -239,7 +239,7 @@
         </if>       
         <if test="抽出モード == 3">
         WHERE             
-            "DbT3057KogakuShikyuHanteiKekka"."ketteishaUketoriYM" = #{決定者受付年月}
+            "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM" = #{決定者受付年月}
         </if> 
     </select>
     

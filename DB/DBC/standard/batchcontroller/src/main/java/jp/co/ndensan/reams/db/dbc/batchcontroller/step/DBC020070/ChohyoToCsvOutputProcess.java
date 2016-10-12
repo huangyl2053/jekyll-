@@ -51,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 /**
  * 事業分支給額計算結果の帳票・CSVを出力する処理クラスです。
  *
- * @reamsid_L DBC_4830_030 zhujun
+ * @reamsid_L DBC-4830-030 zhujun
  */
 public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdateTempEntity> {
 

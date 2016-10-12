@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011;
 
-import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenkohaakuichiran.ShiharaiHohoHenkoTempEditJoho;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuTwoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShokanUnpaidTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3650-050 x_lilh
  */
-public class ShiharaiHohoHenkoHaakuTwoProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuTwoEntity> {
+public class ShiharaiHohoHenkoHaakuShoukanProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuTwoEntity> {
 
     private static final RString 申請中 = new RString("申請中");
     private static final int 件数_0 = 0;
@@ -68,10 +67,9 @@ public class ShiharaiHohoHenkoHaakuTwoProcess extends BatchProcessBase<ShiharaiH
 
     private ShokanUnpaidTempTableEntity create償還未払い情報一時テーブル情報(ShiharaiHohoHenkoHaakuTwoEntity t) {
         ShokanUnpaidTempTableEntity result = new ShokanUnpaidTempTableEntity();
-        ShiharaiHohoHenkoTempEditJoho shiharaiHohoHenkoTempEditJoho = new ShiharaiHohoHenkoTempEditJoho();
         edit件数について(t.get償還払支給判定結果Entity().getKetteiTsuchishoSakuseiYMD(), t.get償還払支給判定結果Entity().getKetteiYMD());
         result.setHihokenshaNo(t.get償還払支給申請Entity().getHiHokenshaNo());
-        result.setShinseiProcess(shiharaiHohoHenkoTempEditJoho.edit申請中());
+        result.setShinseiProcess(edit申請中());
         result.setShinseiYMD(申請日);
         result.setShinseiProcessNumber(申請中件数);
         result.setSeiriNo(整理番号);

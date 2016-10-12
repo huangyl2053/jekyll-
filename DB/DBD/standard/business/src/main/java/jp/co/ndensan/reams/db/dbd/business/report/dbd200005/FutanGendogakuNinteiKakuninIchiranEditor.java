@@ -105,9 +105,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         source.printTimeStamp = new RStringBuilder()
                 .append(作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString())
-                .append(RString.HALF_SPACE)
                 .append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
-                .append(RString.HALF_SPACE)
+                .append(RString.FULL_SPACE)
                 .append(作成).toRString();
         source.title = 負担限度額認定一括確認リスト;
         if (null != this.導入団体) {

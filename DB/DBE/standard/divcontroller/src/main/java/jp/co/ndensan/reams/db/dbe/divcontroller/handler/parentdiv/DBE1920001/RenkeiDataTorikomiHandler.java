@@ -28,8 +28,10 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.ITextReadable;
@@ -128,11 +130,12 @@ public class RenkeiDataTorikomiHandler {
      * 取込みファイルデータを取得します。
      */
     public void getFileData() {
-        RString path = div.getPath();
-        RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                RDateTime.parse(div.getHiddenFileId().toString())), new FilesystemPath(Directory.createTmpDirectory()));
+        RString filePath = Path.combinePath(Directory.createTmpDirectory(), 要介護認定申請連携データ取込みファイル名);
         File file = new File(filePath.toString());
         if (file.exists() && !なし.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
-            setRowFileData(set文字コード(), path, filePath);
+            setRowFileData(set文字コード(), Directory.createTmpDirectory(), filePath);
         }
     }
 

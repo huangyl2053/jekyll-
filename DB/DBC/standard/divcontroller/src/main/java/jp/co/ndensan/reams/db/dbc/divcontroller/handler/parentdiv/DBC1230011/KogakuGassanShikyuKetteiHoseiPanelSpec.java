@@ -227,25 +227,24 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         }
 
         public static boolean is新規登録_証記載保険者番号が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-            return !(div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
+            return !((div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
                     && !RStringUtil.isHalfsizeNumberOnly(
-                            div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue())
-                    || div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
+                            div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue()))
+                    || (div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
                     && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()
-                    && NUM_SIX != div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().length());
+                    && RStringUtil.isHalfsizeNumberOnly(
+                            div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue())
+                    && NUM_SIX != div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().length()));
         }
 
         public static boolean is新規登録_証記載保険者番号存在しない(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             boolean flag = true;
-            RString wk保険者構成 = RString.EMPTY;
-            ShichosonSecurityJoho shseJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-            if (shseJoho != null && (定値導入形態コード2.equals(shseJoho.get導入形態コード().value())
-                    || 定値導入形態コード3.equals(shseJoho.get導入形態コード().value()))) {
-                wk保険者構成 = ONE;
-            } else if (shseJoho != null && 定値導入形態コード1.equals(shseJoho.get導入形態コード().value())) {
-                wk保険者構成 = TWO;
+            if (div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() == null
+                    || div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().isEmpty()) {
+                return true;
             }
+            RString wk保険者構成 = get保険者構成();
             RString ログインユーザID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
             AuthorityItemResult 市町村情報 = KogakuGassanShikyuKetteiHosei.createInstance().
                     get市町村セキュリティ情報(ログインユーザID, wk保険者構成);
@@ -333,25 +332,24 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
         }
 
         public static boolean is検索条件_証記載保険者番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
-            return !(div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
+            return !((div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
                     && !RStringUtil.isHalfsizeNumberOnly(
-                            div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue())
-                    || div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
+                            div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue()))
+                    || (div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() != null
                     && !div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()
-                    && NUM_SIX != div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().length());
+                    && RStringUtil.isHalfsizeNumberOnly(
+                            div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue())
+                    && NUM_SIX != div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().length()));
         }
 
         public static boolean is検索条件_証記載保険者番号存在しない(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
             boolean flag = true;
-            RString wk保険者構成 = RString.EMPTY;
-            ShichosonSecurityJoho shseJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-            if (shseJoho != null && (定値導入形態コード2.equals(shseJoho.get導入形態コード().value())
-                    || 定値導入形態コード3.equals(shseJoho.get導入形態コード().value()))) {
-                wk保険者構成 = ONE;
-            } else if (shseJoho != null && 定値導入形態コード1.equals(shseJoho.get導入形態コード().value())) {
-                wk保険者構成 = TWO;
+            if (div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue() == null
+                    || div.getSearchPanel().getTxtKensakuHihokenshaNo().getValue().isEmpty()) {
+                return true;
             }
+            RString wk保険者構成 = get保険者構成();
             RString ログインユーザID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
             AuthorityItemResult 市町村情報 = KogakuGassanShikyuKetteiHosei.createInstance().
                     get市町村セキュリティ情報(ログインユーザID, wk保険者構成);
@@ -375,6 +373,18 @@ public enum KogakuGassanShikyuKetteiHoseiPanelSpec implements IPredicate<KogakuG
                 }
             }
             return flag;
+        }
+
+        private static RString get保険者構成() {
+            RString wk保険者構成 = RString.EMPTY;
+            ShichosonSecurityJoho shseJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+            if (shseJoho != null && (定値導入形態コード2.equals(shseJoho.get導入形態コード().value())
+                    || 定値導入形態コード3.equals(shseJoho.get導入形態コード().value()))) {
+                wk保険者構成 = ONE;
+            } else if (shseJoho != null && 定値導入形態コード1.equals(shseJoho.get導入形態コード().value())) {
+                wk保険者構成 = TWO;
+            }
+            return wk保険者構成;
         }
 
         public static boolean is検索条件_連絡票整理番号入力値が不正(KogakuGassanShikyuKetteiHoseiPanelDiv div) {

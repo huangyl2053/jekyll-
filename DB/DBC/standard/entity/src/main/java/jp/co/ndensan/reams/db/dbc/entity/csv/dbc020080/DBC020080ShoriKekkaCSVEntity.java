@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * バッチ設計_DBCMN626_自己負担額計算（一括）の処理結果CSVのエンティティです。
  *
- * @reamsid_L DBC-26-3 liuyang
+ * @reamsid_L DBC-2060-030 liuyang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

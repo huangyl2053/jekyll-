@@ -471,7 +471,8 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     }
 
     private void set入力年月(FlexibleDate 入力決定年月, FlexibleDate 入力決定年月6, FlexibleDate 入力決定年月7) {
-        if (div.getTxtShukeiYM3().getValue().isEmpty() || div.getTxtShukeiYM3().getValue().isBefore(入力決定年月)) {
+        if (div.getTxtShukeiYM3().getValue().isEmpty() || div.getTxtShukeiYM3().getValue().isBefore(入力決定年月)
+                || !div.getCblOutputTaisho3().getSelectedKeys().contains(保険給付決定状況_現物分)) {
             div.getTxtShukeiYM3().setReadOnly(true);
             div.getTxtSakuseiYMD3().setReadOnly(true);
             div.getTxtSakuseiTime3().setReadOnly(true);
@@ -480,7 +481,8 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             div.getTxtSakuseiYMD3().setReadOnly(false);
             div.getTxtSakuseiTime3().setReadOnly(false);
         }
-        if (div.getTxtShukeiYM5().getValue().isEmpty() || div.getTxtShukeiYM5().getValue().isBefore(入力決定年月)) {
+        if (div.getTxtShukeiYM5().getValue().isEmpty() || div.getTxtShukeiYM5().getValue().isBefore(入力決定年月)
+                || !div.getCblOutputTaisho5().getSelectedKeys().contains(保険給付決定状況_償還分)) {
             div.getTxtShukeiYM5().setReadOnly(true);
             div.getTxtSakuseiYMD5().setReadOnly(true);
             div.getTxtSakuseiTime5().setReadOnly(true);
@@ -489,7 +491,8 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             div.getTxtSakuseiYMD5().setReadOnly(false);
             div.getTxtSakuseiTime5().setReadOnly(false);
         }
-        if (div.getTxtShukeiYM6().getValue().isEmpty() || div.getTxtShukeiYM6().getValue().isBefore(入力決定年月6)) {
+        if (div.getTxtShukeiYM6().getValue().isEmpty() || div.getTxtShukeiYM6().getValue().isBefore(入力決定年月6)
+                || !div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額分)) {
             div.getTxtShukeiYM6().setReadOnly(true);
             div.getTxtSakuseiYMD6().setReadOnly(true);
             div.getTxtSakuseiTime6().setReadOnly(true);
@@ -498,12 +501,13 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             div.getTxtSakuseiYMD6().setReadOnly(false);
             div.getTxtSakuseiTime6().setReadOnly(false);
         }
-        if (div.getTxtShukeiYM7().getValue().isEmpty() || div.getTxtShukeiYM7().getValue().isBefore(入力決定年月7)) {
-            div.getTxtShukeiYM6().setReadOnly(true);
+        if (div.getTxtShukeiYM7().getValue().isEmpty() || div.getTxtShukeiYM7().getValue().isBefore(入力決定年月7)
+                || !div.getCblOutputTaisho7().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
+            div.getTxtShukeiYM7().setReadOnly(true);
             div.getTxtSakuseiYMD7().setReadOnly(true);
             div.getTxtSakuseiTime7().setReadOnly(true);
         } else {
-            div.getTxtShukeiYM6().setReadOnly(false);
+            div.getTxtShukeiYM7().setReadOnly(false);
             div.getTxtSakuseiYMD7().setReadOnly(false);
             div.getTxtSakuseiTime7().setReadOnly(false);
         }
@@ -961,49 +965,49 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         FlexibleDate 入力決定年月 = new FlexibleDate("平成21年7月");
         FlexibleDate 入力決定年月6 = new FlexibleDate("平成18年6月");
         FlexibleDate 入力決定年月7 = new FlexibleDate("平成24年6月");
-        if (div.getCblOutputTaisho1().getSelectedKeys().contains(一般状況1_11)) {
+        set入力年月(入力決定年月, 入力決定年月6, 入力決定年月7);
+        if (!div.getTxtShukeiYM1().getValue().isEmpty() && div.getCblOutputTaisho1().getSelectedKeys().contains(一般状況1_11)) {
             div.getTxtSakuseiYMD1().setReadOnly(false);
             div.getTxtSakuseiTime1().setReadOnly(false);
         } else {
             div.getTxtSakuseiYMD1().setReadOnly(true);
             div.getTxtSakuseiTime1().setReadOnly(true);
         }
-        if (div.getCblOutputTaisho2().getSelectedKeys().contains(一般状況12_14_現物分)) {
+        if (!div.getTxtShukeiYM2().getValue().isEmpty() && div.getCblOutputTaisho2().getSelectedKeys().contains(一般状況12_14_現物分)) {
             div.getTxtSakuseiYMD2().setReadOnly(false);
             div.getTxtSakuseiTime2().setReadOnly(false);
         } else {
             div.getTxtSakuseiYMD2().setReadOnly(true);
             div.getTxtSakuseiTime2().setReadOnly(true);
         }
-        if (div.getCblOutputTaisho3().getSelectedKeys().contains(保険給付決定状況_現物分)) {
+        if (!div.getTxtShukeiYM3().getValue().isEmpty() && div.getCblOutputTaisho3().getSelectedKeys().contains(保険給付決定状況_現物分)) {
             div.getTxtSakuseiYMD3().setReadOnly(false);
             div.getTxtSakuseiTime3().setReadOnly(false);
         } else {
             div.getTxtSakuseiYMD3().setReadOnly(true);
             div.getTxtSakuseiTime3().setReadOnly(true);
         }
-        if (div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額分)) {
+        if (!div.getTxtShukeiYM6().getValue().isEmpty() && div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額分)) {
             div.getTxtSakuseiYMD6().setReadOnly(false);
             div.getTxtSakuseiTime6().setReadOnly(false);
         } else {
             div.getTxtSakuseiYMD6().setReadOnly(true);
             div.getTxtSakuseiTime6().setReadOnly(true);
         }
-        if (div.getCblOutputTaisho7().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
+        if (!div.getTxtShukeiYM7().getValue().isEmpty() && div.getCblOutputTaisho7().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
             div.getTxtSakuseiYMD7().setReadOnly(false);
             div.getTxtSakuseiTime7().setReadOnly(false);
         } else {
             div.getTxtSakuseiYMD7().setReadOnly(true);
             div.getTxtSakuseiTime7().setReadOnly(true);
         }
-        set入力年月(入力決定年月, 入力決定年月6, 入力決定年月7);
     }
 
     /**
      * 一般状況12～14【償還分】チェックボックス の　作成日時の設定 の処理の処理です。
      */
     public void set一般状況償還分() {
-        if (div.getCblOutputTaisho4().getSelectedKeys().contains(一般状況12_14_償還分)) {
+        if (!div.getTxtShukeiYM4().getValue().isEmpty() && div.getCblOutputTaisho4().getSelectedKeys().contains(一般状況12_14_償還分)) {
             div.getTxtSakuseiYMD4().setReadOnly(false);
             div.getTxtSakuseiTime4().setReadOnly(false);
             if (div.getTxtShukeiYM4().getValue() != null
@@ -1021,7 +1025,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
      * 一般状況12～14【償還分】チェックボックス の　作成日時の設定 の処理の処理です。
      */
     public void set保険給付償還分() {
-        if (div.getCblOutputTaisho5().getSelectedKeys().contains(保険給付決定状況_償還分)) {
+        if (!div.getTxtShukeiYM5().getValue().isEmpty() && div.getCblOutputTaisho5().getSelectedKeys().contains(保険給付決定状況_償還分)) {
             div.getTxtSakuseiYMD5().setReadOnly(false);
             div.getTxtSakuseiTime5().setReadOnly(false);
             if (div.getTxtShukeiYM5().getValue() != null
@@ -1112,33 +1116,29 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
-        if (div.getTxtShukeiYM3().getValue() != null
-                && !div.getTxtShukeiYM3().getValue().isEmpty()) {
-            shuukeiNengetu.add(div.getTxtShukeiYM3().getValue().getYearMonth().toDateString());
-        } else {
-            shuukeiNengetu.add(RString.EMPTY);
-        }
         if (div.getTxtShukeiYM4().getValue() != null
                 && !div.getTxtShukeiYM4().getValue().isEmpty()) {
             shuukeiNengetu.add(div.getTxtShukeiYM4().getValue().getYearMonth().toDateString());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }
+        if (div.getTxtShukeiYM3().getValue() != null
+                && !div.getTxtShukeiYM3().getValue().isEmpty()) {
+            shuukeiNengetu.add(div.getTxtShukeiYM3().getValue().getYearMonth().toDateString());
+        } else {
+            shuukeiNengetu.add(RString.EMPTY);
+        }
         if (div.getTxtShukeiYM5().getValue() != null
                 && !div.getTxtShukeiYM5().getValue().isEmpty()) {
             shuukeiNengetu.add(div.getTxtShukeiYM5().getValue().getYearMonth().toDateString());
+            shuukeiNengetu.add(div.getTxtShukeiYM5().getValue().getYearMonth().toDateString());
         } else {
+            shuukeiNengetu.add(RString.EMPTY);
             shuukeiNengetu.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM6().getValue() != null
                 && !div.getTxtShukeiYM6().getValue().isEmpty()) {
             shuukeiNengetu.add(div.getTxtShukeiYM6().getValue().getYearMonth().toDateString());
-        } else {
-            shuukeiNengetu.add(RString.EMPTY);
-        }
-        if (div.getTxtShukeiYM7().getValue() != null
-                && !div.getTxtShukeiYM7().getValue().isEmpty()) {
-            shuukeiNengetu.add(div.getTxtShukeiYM7().getValue().getYearMonth().toDateString());
         } else {
             shuukeiNengetu.add(RString.EMPTY);
         }

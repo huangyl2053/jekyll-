@@ -136,7 +136,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity) {
         if (編集後仮算定通知書共通情報entity.get編集後宛先() != null) {
             source.listUpper_2 = 編集後仮算定通知書共通情報entity.get編集後宛先().get郵便番号();
-            source.listUpper_3 = 編集後仮算定通知書共通情報entity.get編集後宛先().get町域();
+            source.listUpper_3 = 編集後仮算定通知書共通情報entity.get編集後宛先().get編集後住所();
             source.listUpper_4 = 編集後仮算定通知書共通情報entity.get編集後宛先().get宛先行政区();
         }
     }

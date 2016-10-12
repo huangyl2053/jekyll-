@@ -322,11 +322,13 @@ public class DBC8010001MainHandler {
         if (null != div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey() && new RString("1").equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey())) {
             div.getTxtFurikomiShiteiYMD().setDisabled(false);
             div.getChkSaisakusei().setDisabled(false);
-            div.getTxtWrongFurikomiShiteiYMD().clearValue();
+            div.getFurikomiDataModifyShiji().setDisabled(true);
             div.getTxtWrongFurikomiShiteiYMD().setDisabled(true);
-            div.getTxtCorrectFurikomiShiteiYMD().clearValue();
             div.getTxtCorrectFurikomiShiteiYMD().setDisabled(true);
+            div.getTxtWrongFurikomiShiteiYMD().clearValue();
+            div.getTxtCorrectFurikomiShiteiYMD().clearValue();
             div.getRadSiharaihohou().setSelectedKey(Furikomi_ShihraiHohoShitei.口座.getコード());
+            div.getIchiranhyoSakuseiShiji().setDisabled(true);
             div.getRadSiharaihohou().setDisabled(true);
             div.getTxtKonkaiTaishoYmdRange().setDisabled(false);
             div.getTxtKetteishaUketoriYmRange().setDisabled(false);
@@ -338,9 +340,11 @@ public class DBC8010001MainHandler {
             div.getTxtFurikomiShiteiYMD().setDisabled(true);
             div.getChkSaisakusei().setSelectedItems(new ArrayList<KeyValueDataSource>());
             div.getChkSaisakusei().setDisabled(true);
+            div.getFurikomiDataModifyShiji().setDisabled(false);
             div.getTxtWrongFurikomiShiteiYMD().setDisabled(false);
             div.getTxtCorrectFurikomiShiteiYMD().setDisabled(false);
             div.getRadSiharaihohou().setSelectedKey(Furikomi_ShihraiHohoShitei.口座.getコード());
+            div.getIchiranhyoSakuseiShiji().setDisabled(true);
             div.getRadSiharaihohou().setDisabled(true);
             div.getTxtKonkaiTaishoYmdRange().setDisabled(true);
             div.getTxtKetteishaUketoriYmRange().setDisabled(true);
@@ -352,10 +356,12 @@ public class DBC8010001MainHandler {
             div.getTxtFurikomiShiteiYMD().setDisabled(true);
             div.getChkSaisakusei().setSelectedItems(new ArrayList<KeyValueDataSource>());
             div.getChkSaisakusei().setDisabled(true);
+            div.getFurikomiDataModifyShiji().setDisabled(true);
+            div.getTxtWrongFurikomiShiteiYMD().setDisabled(false);
+            div.getTxtCorrectFurikomiShiteiYMD().setDisabled(false);
             div.getTxtWrongFurikomiShiteiYMD().clearValue();
-            div.getTxtWrongFurikomiShiteiYMD().setDisabled(true);
             div.getTxtCorrectFurikomiShiteiYMD().clearValue();
-            div.getTxtCorrectFurikomiShiteiYMD().setDisabled(true);
+            div.getIchiranhyoSakuseiShiji().setDisabled(false);
             div.getRadSiharaihohou().setDisabled(false);
             div.getTxtKonkaiTaishoYmdRange().setDisabled(false);
             div.getTxtKetteishaUketoriYmRange().setDisabled(false);

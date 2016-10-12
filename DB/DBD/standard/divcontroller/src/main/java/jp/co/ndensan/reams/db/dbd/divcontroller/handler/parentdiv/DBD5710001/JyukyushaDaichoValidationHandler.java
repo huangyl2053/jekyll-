@@ -113,13 +113,33 @@ public class JyukyushaDaichoValidationHandler {
         return pairs;
     }
 
+    /**
+     * 異動抽出対象一つでも選択していない場合チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div JyukyushaDaichoDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor異動抽出対象一つでも選択していない場合チェック(
+            ValidationMessageControlPairs pairs, JyukyushaDaichoDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(JyukyushaDaichoDivSpec.異動抽出対象一つでも選択していない場合チェック)
+                .thenAdd(NoInputMessages.異動抽出対象一つでも選択していない場合チェック).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.異動抽出対象一つでも選択していない場合チェック, div.getTaishouKikan().getChkIdouChushutsuTaishou())
+                .build().check(messages));
+        return pairs;
+    }
+
     private static enum NoInputMessages implements IValidationMessage {
 
         今回抽出対象期間今回の日付が非空必須チェック(UrErrorMessages.必須, "今回"),
         今回抽出対象終了日付が開始日付以前チェック(UrErrorMessages.終了日が開始日以前),
         被保険者番号非空チェック(UrErrorMessages.必須, "被保険者番号非空"),
         被保険者番号ToがFrom以前チェック(UrErrorMessages.大小関係が不正, "被保険者番号ToがFrom以前"),
-        出力順未指定チェック(UrErrorMessages.出力順序を指定);
+        出力順未指定チェック(UrErrorMessages.出力順序を指定),
+        異動抽出対象一つでも選択していない場合チェック(UrErrorMessages.選択されていない, "異動抽出対象");
 
         private final Message message;
 

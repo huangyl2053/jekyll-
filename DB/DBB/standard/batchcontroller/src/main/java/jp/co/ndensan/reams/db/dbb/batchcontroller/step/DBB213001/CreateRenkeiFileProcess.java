@@ -144,7 +144,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
         for (RString 市町村コード : 市町村コードリスト) {
             RString ファイル出力Z1A000 = Z1A000XXDTA.replace(XX, 市町村IDMap.get(市町村コード));
             RString z1a000FilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル出力Z1A000);
-            ファイル出力Z1A000List.add(z1a000FilePath);
+            ファイル出力Z1A000List.add(ファイル出力Z1A000);
             fldZ1A000Writer = new FldWriter.InstanceBuilder(z1a000FilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEncodeUtf8(true).
@@ -153,7 +153,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
             ファイル出力Z1A000Map.put(市町村コード, fldZ1A000Writer);
             RString ファイル出力Z99_550 = Z99_550_XXDTA.replace(XX, 市町村IDMap.get(市町村コード));
             RString z99_550FilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル出力Z99_550);
-            ファイル出力Z99_550List.add(z99_550FilePath);
+            ファイル出力Z99_550List.add(ファイル出力Z99_550);
             fldZ99_550Writer = new FldWriter.InstanceBuilder(z99_550FilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEncodeUtf8(true).
@@ -164,7 +164,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                 RString ファイル出力DE__Z12 = DEXXZ12YYYY01DTA.replace(XX, 市町村IDMap.get(市町村コード)).replace(YYYY,
                         処理年度.toDateString());
                 RString de__Z12FilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル出力DE__Z12);
-                ファイル出力DE__Z12List.add(de__Z12FilePath);
+                ファイル出力DE__Z12List.add(ファイル出力DE__Z12);
                 fldDE__Z12Writer = new FldWriter.InstanceBuilder(de__Z12FilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEncodeUtf8(true).
@@ -172,12 +172,12 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                         build();
                 ファイル出力DE__Z12Map.put(市町村コード, fldDE__Z12Writer);
                 ファイルOutputMap.put(市町村コード, ファイル出力DE__Z12);
-                レコード件数OutputMap.put(市町村コード, Integer.MIN_VALUE);
+                レコード件数OutputMap.put(市町村コード, INT_ZERO);
             } else {
                 RString ファイル出力DE__Z1A = DEXXZ1AYYYYZZDTA.replace(XX, 市町村IDMap.get(市町村コード)).replace(YYYY,
                         処理年度.toDateString()).replace(ZZ, new RString(number).padZeroToLeft(INT_TWO));
                 RString de__Z1AFilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル出力DE__Z1A);
-                ファイル出力DE__Z1AList.add(de__Z1AFilePath);
+                ファイル出力DE__Z1AList.add(ファイル出力DE__Z1A);
                 fldDE__Z1AWriter = new FldWriter.InstanceBuilder(de__Z1AFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEncodeUtf8(true).
@@ -185,7 +185,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                         build();
                 ファイル出力DE__Z1AMap.put(市町村コード, fldDE__Z1AWriter);
                 ファイルOutputMap.put(市町村コード, ファイル出力DE__Z1A);
-                レコード件数OutputMap.put(市町村コード, Integer.MIN_VALUE);
+                レコード件数OutputMap.put(市町村コード, INT_ZERO);
             }
             number++;
         }
@@ -315,7 +315,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                                 レコード件数 - INT_TWO));
             }
         }
-        レコード件数OutputMap.put(特徴送付情報連携情報.get構成市町村コード(), レコード件数 - 1);
+        レコード件数OutputMap.put(特徴送付情報連携情報.get構成市町村コード(), レコード件数 - INT_TWO);
         FlowEntity flowEntity = new FlowEntity();
         flowEntity.setレコード件数(レコード件数OutputMap);
         flowEntity.setファイル(ファイルOutputMap);

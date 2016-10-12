@@ -63,9 +63,11 @@ public class OutputJokenHyo {
         if (processParamter.get異動抽出対象リスト().isEmpty()) {
             出力条件.add(new RString("【異動抽出対象】　").concat(なし));
         } else {
-            RString 異動抽出対象 = set異動抽出対象(processParamter);
+            List<RString> 異動抽出対象 = set異動抽出対象(processParamter);
             if (異動抽出対象 != null) {
-                出力条件.add(異動抽出対象);
+                for (int i = 0; i < 異動抽出対象.size() - 1; i++) {
+                    出力条件.add(異動抽出対象.get(i));
+                }
             }
         }
         if (processParamter.get出力オプション区分() != null && !processParamter.get出力オプション区分().isEmpty()) {
@@ -109,7 +111,7 @@ public class OutputJokenHyo {
         }
     }
 
-    private RString set異動抽出対象(IdoChushutsuDaichoProcessParameter parameter) {
+    private List<RString> set異動抽出対象(IdoChushutsuDaichoProcessParameter parameter) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("【異動抽出対象】　"));
         for (RString 異動抽出対象 : parameter.get異動抽出対象リスト()) {
@@ -148,6 +150,7 @@ public class OutputJokenHyo {
                 builder.append(改行);
             }
         }
-        return builder.toRString();
+        List<RString> buildernew = builder.toRString().split("\r\n");
+        return buildernew;
     }
 }

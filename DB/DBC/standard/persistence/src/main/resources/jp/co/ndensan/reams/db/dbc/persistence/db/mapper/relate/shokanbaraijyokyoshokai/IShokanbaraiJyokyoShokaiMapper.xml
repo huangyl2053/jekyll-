@@ -164,6 +164,64 @@
         ORDER BY
         SHOKANMEISAI."dbT3039ShokanMeisai_renban" DESC
     </select>
+    
+    <select id="get償還払請求明細一覧_指定サービス種類以外"
+            resultMap="resultMap_ShokanMeisaiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        SHOKANMEISAI.*
+        ,KAIGOSERVICENAIYOUB."serviceName"
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3039ShokanMeisaiMapper.noDeleted_DbT3039ShokanMeisai" />) AS SHOKANMEISAI
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICENAIYOU."serviceShuruiCd",
+        KAIGOSERVICENAIYOU."serviceKoumokuCd",
+        KAIGOSERVICENAIYOU."serviceName"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
+        (SELECT
+        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
+        WHERE
+        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (NAIYOU."teikyoShuryoYM" IS NULL
+        OR
+        NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUA
+        WHERE
+        KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
+        AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
+        AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
+        AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUB
+        ON
+        SHOKANMEISAI."dbT3039ShokanMeisai_serviceShuruiCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_serviceKomokuCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        WHERE
+        SHOKANMEISAI."dbT3039ShokanMeisai_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_seiriNo" = #{seiriNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_jigyoshaNo" = #{jigyoshaNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_yoshikiNo" = #{yoshikiNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SHOKANMEISAI."dbT3039ShokanMeisai_renban" = #{renban}
+        </if>
+        <if test="serviceShuruiCode != null">
+            AND SHOKANMEISAI."dbT3039ShokanMeisai_serviceShuruiCode" <![CDATA[<>]]> #{serviceShuruiCode}
+        </if>
+        ORDER BY
+        SHOKANMEISAI."dbT3039ShokanMeisai_renban" DESC
+    </select>
 
     <resultMap id="resultMap_ShokanMeisaiJushochiTokureiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity"

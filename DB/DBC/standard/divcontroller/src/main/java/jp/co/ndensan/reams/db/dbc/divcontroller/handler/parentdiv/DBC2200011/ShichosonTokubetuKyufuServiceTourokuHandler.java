@@ -234,7 +234,7 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
             builder.set市町村特別給付用サービス名_正式名称(div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue());
             builder.set市町村特別給付用サービス名_略称(div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue());
             builder.set市町村特別給付用サービス有効期間終了年月日(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue() != null
-                    ? new FlexibleDate(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue().toDateString()) : null);
+                    ? new FlexibleDate(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue().toDateString()) : FlexibleDate.EMPTY);
             builder.set市町村特別給付用単位_日数(div.getKubunShikyuGendogakuShosai().getTxtTanni().getValue());
             builder.set市町村特別給付用支給限度基準額(div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().getValue());
             builder.set変更年月日(FlexibleDate.getNowDate());

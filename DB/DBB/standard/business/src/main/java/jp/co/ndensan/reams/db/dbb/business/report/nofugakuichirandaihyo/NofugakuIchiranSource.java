@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  * 帳票設計_DBBRP91003-1_納付額一覧表（確定申告用）のReportSourceクラスです。 帳票設計_DBBRP91003-2_納付額一覧表（識別コード不明分）のReportSourceクラスです。
  *
  * @reamsid_L DBB-1890-040 sunhui
- * @reamsid_L DBB-1890-050 sunhui
  */
 public class NofugakuIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

@@ -20,10 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TorikomiKokuhoJyohoEntity extends DbTableEntityBase<TorikomiKokuhoJyohoEntity> implements IDbAccessable {
 
+    @PrimaryKey
     private RString 市町村コード;
     @PrimaryKey
     private RString iN住民コード;
-    @PrimaryKey
     private RString 履歴番号;
     private RString 国保番号;
     private RString 国保資格取得年月日;

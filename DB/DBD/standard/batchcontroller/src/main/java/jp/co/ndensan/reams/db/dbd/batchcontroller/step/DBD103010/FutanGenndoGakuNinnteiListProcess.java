@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -69,6 +70,13 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
     private static final RString SHUTSURYOKUJUN = new RString("出力順");
     private static final RString カラ = new RString("～");
     private static final RString より = new RString("＞");
+
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
+
     private int i = 0;
     private static Association association;
     private static IKojin kojin;
@@ -94,7 +102,15 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        List<RString> pageBreakKeys = new ArrayList<>();
+        set改頁Key(order, pageBreakKeys);
+        if (!pageBreakKeys.isEmpty()) {
+            batchReportWrite = BatchReportFactory.createBatchReportWriter(ID.value()).addBreak(
+                    new BreakerCatalog<FutangakuNinteiHakkoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        } else {
+            batchReportWrite = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        }
+
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
@@ -216,5 +232,86 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(NO_0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
+    private RString to帳票物理名(RString 項目ID) {
+        RString 帳票物理名 = RString.EMPTY;
+        if (FutanGendogakuNinteishoOrderKey.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("yubinNo");
+        } else if (FutanGendogakuNinteishoOrderKey.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("choikiCode");
+        } else if (FutanGendogakuNinteishoOrderKey.番地コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("banchi");
+        } else if (FutanGendogakuNinteishoOrderKey.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("gyoseikuCode");
+        } else if (FutanGendogakuNinteishoOrderKey.地区１.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("chikuCode1");
+        } else if (FutanGendogakuNinteishoOrderKey.地区２.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("chikuCode2");
+        } else if (FutanGendogakuNinteishoOrderKey.世帯コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("setaiCode");
+        } else if (FutanGendogakuNinteishoOrderKey.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shikibetsuCode");
+        } else if (FutanGendogakuNinteishoOrderKey.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("kanaShimei");
+        } else if (FutanGendogakuNinteishoOrderKey.生年月日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("seinengappiYMD");
+        } else if (FutanGendogakuNinteishoOrderKey.性別.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("seibetsuCode");
+        } else if (FutanGendogakuNinteishoOrderKey.市町村コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shichosonCode");
+        } else if (FutanGendogakuNinteishoOrderKey.証記載保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shoKisaiHokenshaNo");
+        } else if (FutanGendogakuNinteishoOrderKey.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("list_3");
+        } else if (FutanGendogakuNinteishoOrderKey.入所施設コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("list_13");
+        }
+        return 帳票物理名;
     }
 }

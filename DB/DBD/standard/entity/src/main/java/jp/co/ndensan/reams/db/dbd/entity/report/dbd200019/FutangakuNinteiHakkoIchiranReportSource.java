@@ -47,6 +47,7 @@ public class FutangakuNinteiHakkoIchiranReportSource implements IReportSource {
     @ReportItem(name = "list_2", length = 1, order = 16)
     public RString list_2;
     @ReportItem(name = "list_3", length = 10, order = 17)
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
     public RString list_3;
     @ReportItem(name = "list_4", length = 8, order = 18)
     public RString list_4;
@@ -73,9 +74,33 @@ public class FutangakuNinteiHakkoIchiranReportSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
-    public RString hihokenshaNo;
     @ReportPerson(id = "001")
     public RString shikibetsuCode;
 // </editor-fold>
+
+    @ReportItem(name = "yubinNo", length = 10, order = 28)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 29)
+    public RString choikiCode;
+    @ReportItem(name = "banchi", length = 10, order = 30)
+    public RString banchi;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 31)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chikuCode1", length = 10, order = 32)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 10, order = 33)
+    public RString chikuCode2;
+    @ReportItem(name = "setaiCode", length = 10, order = 34)
+    public RString setaiCode;
+    @ReportItem(name = "kanaShimei", length = 10, order = 35)
+    public RString kanaShimei;
+    @ReportItem(name = "seinengappiYMD", length = 10, order = 36)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", length = 10, order = 37)
+    public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode", length = 10, order = 38)
+    public RString shichosonCode;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 10, order = 39)
+    public RString shoKisaiHokenshaNo;
+
 }
