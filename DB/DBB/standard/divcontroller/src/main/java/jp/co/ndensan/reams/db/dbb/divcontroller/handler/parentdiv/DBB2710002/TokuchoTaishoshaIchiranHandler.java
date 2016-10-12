@@ -304,7 +304,7 @@ public class TokuchoTaishoshaIchiranHandler {
                 newRow.setShimei(result.get(i).get漢字氏名());
             }
             if (!RString.isNullOrEmpty(result.get(i).get捕捉月())) {
-                RString 捕捉月 = result.get(i).get捕捉月().replace(KEY0, RString.EMPTY).concat(月);
+                RString 捕捉月 = new RString(Integer.valueOf(result.get(i).get捕捉月().toString())).concat(月);
                 newRow.setHosokuM(捕捉月);
             }
             RString 特別徴収義務者コード = result.get(i).get特徴義務者コード();
@@ -374,7 +374,7 @@ public class TokuchoTaishoshaIchiranHandler {
                 newRow.setTxtFuichiRiyu(DoteiFuitchiRiyu.toValue(result.get(i).get不一致理由()).get不一致理由名());
             }
             if (!RString.isNullOrEmpty(result.get(i).get捕捉月())) {
-                RString 捕捉月 = result.get(i).get捕捉月().concat(月);
+                RString 捕捉月 = new RString(Integer.valueOf(result.get(i).get捕捉月().toString())).concat(月);
                 newRow.getTxtHosokuM().setValue(捕捉月);
             }
             newRow.getTxtKisoNenkinNo().setValue(result.get(i).get年金番号());
@@ -551,7 +551,7 @@ public class TokuchoTaishoshaIchiranHandler {
         }
         if (RString.isNullOrEmpty(result.get登録済年金情報_基礎年金番号())) {
             div.getTxtTorokuZumiKisoNenkinNo().clearValue();
-            div.getTxtTorokuZumiKisoNenkinNo().clearValue();
+            div.getTxtTorokuZumiNenkinCode().clearValue();
             div.getTxtTorokuZumiTokuchoGimusha().clearValue();
         } else {
             div.getTxtTorokuZumiKisoNenkinNo().setValue(result.get登録済年金情報_基礎年金番号());
