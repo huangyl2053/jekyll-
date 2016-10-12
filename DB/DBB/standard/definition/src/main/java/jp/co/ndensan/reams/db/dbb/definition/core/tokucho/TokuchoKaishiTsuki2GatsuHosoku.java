@@ -17,7 +17,7 @@ public enum TokuchoKaishiTsuki2GatsuHosoku {
     /**
      * コード:08 名称:_8月開始 略称:08月
      */
-    _08月("08", "_8月開始", "08月");
+    _8月開始("08", "_8月開始", "08月");
 
     private final RString code;
     private final RString fullName;

@@ -30,7 +30,7 @@ public class TokuchoIraikingakuKeisanHoho2GatsuTest extends DbbTestBase {
 
     @Test
     public void 引数に3を指定した場合_toValueは_年額除12乗本徴収月数除年金支給回数を返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.toValue(new RString("3")), is(TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数
+        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.toValue(new RString("3")), is(TokuchoIraikingakuKeisanHoho2Gatsu.法定計算方法_6で割る
         ));
     }
 
@@ -41,7 +41,7 @@ public class TokuchoIraikingakuKeisanHoho2GatsuTest extends DbbTestBase {
 
     @Test
     public void 年額除12乗本徴収月数除年金支給回数を指定した場合_getコードは_3を返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数.getコード(), is(new RString("3"))
+        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.法定計算方法_6で割る.getコード(), is(new RString("3"))
         );
     }
 
@@ -52,18 +52,7 @@ public class TokuchoIraikingakuKeisanHoho2GatsuTest extends DbbTestBase {
 
     @Test
     public void 年額除12乗本徴収月数除年金支給回数を指定した場合_get名称は_法定計算方法_6で割るを返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数.get名称(), is(new RString("法定計算方法_6で割る"))
-        );
-    }
-
-    @Test
-    public void 特徴開始月以降の普通徴収額を指定した場合_get略称は_特徴開始月以降の普通徴収額を返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.特徴開始月以降の普通徴収額.get略称(), is(new RString("特徴開始月以降の普通徴収額")));
-    }
-
-    @Test
-    public void 年額除12乗本徴収月数除年金支給回数を指定した場合_get略称は_年額除12乗本徴収月数除年金支給回数を返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数.get略称(), is(new RString("年額除12乗本徴収月数除年金支給回数"))
+        assertThat(TokuchoIraikingakuKeisanHoho2Gatsu.法定計算方法_6で割る.get名称(), is(new RString("年額÷12Ｘ本徴収月数÷年金支給回数"))
         );
     }
 

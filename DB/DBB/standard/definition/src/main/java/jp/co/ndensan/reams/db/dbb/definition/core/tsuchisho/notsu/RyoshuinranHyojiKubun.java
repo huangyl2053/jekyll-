@@ -11,22 +11,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum RyoshuinranHyojiKubun {
 
     /**
-     * コード:1 名称:口座振替を印字する 略称:「口座振替」を印字する
+     * コード:1 名称:「口座振替」を印字する 略称:定義なし
      */
-    _口座振替_を印字する("1", "口座振替を印字する", "「口座振替」を印字する"),
+    口座振替を印字する("1", "「口座振替」を印字する"),
     /**
-     * コード:2 名称:空白を印字する 略称:「」を印字する
+     * コード:2 名称:「　」を印字する 略称:定義なし
      */
-    __を印字する("2", "空白を印字する", "「」を印字する");
+    空白を印字する("2", "「　　　　」を印字する");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private RyoshuinranHyojiKubun(String code, String fullname, String shortName) {
+    private RyoshuinranHyojiKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -45,15 +43,6 @@ public enum RyoshuinranHyojiKubun {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 領収印欄表示区分の略称を返します。
-     *
-     * @return 領収印欄表示区分の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

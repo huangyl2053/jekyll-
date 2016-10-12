@@ -30,7 +30,7 @@ public class TokuchoKaishiTsuki10GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void 引数に04を指定した場合_toValueは_04月を返す() {
-        assertThat(TokuchoKaishiTsuki10GatsuHosoku.toValue(new RString("04")), is(TokuchoKaishiTsuki10GatsuHosoku._04月));
+        assertThat(TokuchoKaishiTsuki10GatsuHosoku.toValue(new RString("04")), is(TokuchoKaishiTsuki10GatsuHosoku._4月開始));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TokuchoKaishiTsuki10GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void _04月を指定した場合_getコードは_04を返す() {
-        assertThat(TokuchoKaishiTsuki10GatsuHosoku._04月.getコード(), is(new RString("04")));
+        assertThat(TokuchoKaishiTsuki10GatsuHosoku._4月開始.getコード(), is(new RString("04")));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TokuchoKaishiTsuki10GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void _04月を指定した場合_get名称は__4月開始を返す() {
-        assertThat(TokuchoKaishiTsuki10GatsuHosoku._04月.get名称(), is(new RString("_4月開始")));
+        assertThat(TokuchoKaishiTsuki10GatsuHosoku._4月開始.get名称(), is(new RString("4月開始")));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class TokuchoKaishiTsuki10GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void _04月を指定した場合_get略称は_04月を返す() {
-        assertThat(TokuchoKaishiTsuki10GatsuHosoku._04月.get略称(), is(new RString("04月")));
+        assertThat(TokuchoKaishiTsuki10GatsuHosoku._4月開始.get略称(), is(new RString("04月")));
     }
 
 }

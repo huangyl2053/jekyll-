@@ -270,7 +270,7 @@ public class KarisanteiIdoFukaPanelHandler {
             RString 特徴開始計算方法 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始, 日時,
                     SubGyomuCode.DBB介護賦課);
             dgRow.setKomoku(特徴開始計算方法_項目);
-            dgRow.setNaiyo(TokuchoIraikingakuKeisanHoho8Gatsu.toValue(特徴開始計算方法).get略称());
+            dgRow.setNaiyo(TokuchoIraikingakuKeisanHoho8Gatsu.toValue(特徴開始計算方法).get名称());
             dgRowList.add(dgRow);
         }
         div.getShoriJokyo().getKanriJohoKakunin().getDgKomokuNaiyo().setDataSource(dgRowList);
@@ -314,9 +314,9 @@ public class KarisanteiIdoFukaPanelHandler {
             boolean flag = false;
             for (TyouhyouResult result : 帳票IDList) {
                 if (帳票ID_14.equals(result.getEntity().get帳票ID())
-                    || 帳票ID_15.equals(result.getEntity().get帳票ID())
-                    || 帳票ID_28.equals(result.getEntity().get帳票ID())
-                    || 帳票ID_29.equals(result.getEntity().get帳票ID())) {
+                        || 帳票ID_15.equals(result.getEntity().get帳票ID())
+                        || 帳票ID_28.equals(result.getEntity().get帳票ID())
+                        || 帳票ID_29.equals(result.getEntity().get帳票ID())) {
                     flag = true;
                 }
             }
@@ -351,7 +351,7 @@ public class KarisanteiIdoFukaPanelHandler {
                     帳票ID = idoFuka.getChohyoID(調定年度, 仮算定額変更通知書_帳票分類ＩＤ,
                             算定期, 通知書の帳票ID.get出力順ID());
                 } else if (納入通知書.equals(通知書の帳票ID.get帳票分類ID())
-                           || 納入通知書_DBB100014.equals(通知書の帳票ID.get帳票分類ID())) {
+                        || 納入通知書_DBB100014.equals(通知書の帳票ID.get帳票分類ID())) {
                     帳票ID = idoFuka.getChohyoID(調定年度, 保険料納入通知書_本算定_帳票分類ＩＤ,
                             算定期, 通知書の帳票ID.get出力順ID());
                 }
@@ -650,9 +650,9 @@ public class KarisanteiIdoFukaPanelHandler {
         for (Map.Entry<RString, RString> entry : set) {
             出力帳票一覧.add(new TyouhyouEntity(new ReportId(entry.getKey()), null, entry.getValue()));
             if (特徴開始通知書_仮算定.value().equals(entry.getKey())
-                || 仮算定額変更通知書.value().equals(entry.getKey())
-                || 納入通知書.value().equals(entry.getKey())
-                || 納入通知書_DBB100014.value().equals(entry.getKey())) {
+                    || 仮算定額変更通知書.value().equals(entry.getKey())
+                    || 納入通知書.value().equals(entry.getKey())
+                    || 納入通知書_DBB100014.value().equals(entry.getKey())) {
                 parameter.setバッチ起動フラグ(true);
             }
         }
