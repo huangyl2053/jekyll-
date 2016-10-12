@@ -61,4 +61,9 @@ public class TainoCountermeasureTempTableEntity extends DbTableEntityBase<Shokan
     private int koujoNumber;
     @TempTableColumnOrder(14)
     private FlexibleDate kojoShoTeishutsuYMD;
+    @TempTableColumnOrder(15)
+    private RString torokuKubun;
+    @TempTableColumnOrder(16)
+    private RString shuryoKubun;
+
 }

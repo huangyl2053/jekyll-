@@ -5,20 +5,23 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス3SQL検索結果クラスです．
+ * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス1SQL検索結果の収入情報クラスです．
  *
  * @reamsid_L DBD-3650-040 x_lilh
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiHohoHenkoHaakuThreeEntity {
+public class ShunyuJohoEntity {
 
-    private RString 証記載保険者番号;
-    private RString 被保険者番号;
-    private RString 管理区分;
-    private int 履歴番号;
+    //収入
+    private RString 収入ID;
+    private RString 収納ID;
+    private Decimal 収入額;
+    private FlexibleDate 収入日;
 }

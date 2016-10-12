@@ -5,20 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス3SQL検索結果クラスです．
+ * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス1SQL検索結果の督促状発行履歴情報クラスです．
  *
  * @reamsid_L DBD-3650-040 x_lilh
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiHohoHenkoHaakuThreeEntity {
+public class TokusokuHakkoRirekiEntity {
 
-    private RString 証記載保険者番号;
-    private RString 被保険者番号;
-    private RString 管理区分;
-    private int 履歴番号;
+    //督促状発行履歴
+    private RString 督促状発行履歴_収納ID;
+    private FlexibleDate 督促状発行履歴_督促状発行年月日;
+
 }
