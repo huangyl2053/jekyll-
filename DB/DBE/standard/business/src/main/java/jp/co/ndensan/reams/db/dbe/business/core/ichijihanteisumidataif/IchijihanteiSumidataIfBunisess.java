@@ -673,6 +673,7 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set介護予防訪問介護ホームヘルプサービス(項目);
             eucEntity.set介護予防訪問入浴介護(項目);
             eucEntity.set介護予防訪問看護(項目);
+            eucEntity.set介護予防訪問リハビリテーション(項目);
             eucEntity.set介護予防居宅療養管理指導(項目);
             eucEntity.set介護予防通所介護デイサービス(項目);
             eucEntity.set介護予防通所リハビリテーション(項目);
@@ -690,8 +691,8 @@ public class IchijihanteiSumidataIfBunisess {
 
     private void set前回09A介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        if (介護給付サービス.equals(entity.getサービス区分コード())) {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回介護訪問介護ホームヘルプ());
+        if (介護給付サービス.equals(entity.get前回結果サービス区分コード())) {
+            eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get介護訪問介護ホームヘルプ());
             eucEntity.set前回結果訪問入浴介護(entity.get前回介護訪問入浴介護());
             eucEntity.set前回結果訪問看護(entity.get前回介護訪問看護());
             eucEntity.set前回結果訪問リハビリテーション(entity.get前回介護訪問リハビリテーション());
@@ -711,31 +712,31 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果地域密着型特定施設入居者生活介護(entity.get前回介護施設入居者生活介護());
             eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(entity.get前回老人福祉施設入所者生活介護());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(項目);
-            eucEntity.set訪問入浴介護(項目);
-            eucEntity.set訪問看護(項目);
-            eucEntity.set訪問リハビリテーション(項目);
-            eucEntity.set居宅療養管理指導(項目);
-            eucEntity.set通所介護デイサービス(項目);
-            eucEntity.set通所リハビリテーション(項目);
-            eucEntity.set短期入所生活介護ショートステイ(項目);
-            eucEntity.set短期入所療養介護(項目);
-            eucEntity.set特定施設入居者生活介護(項目);
-            eucEntity.set福祉用具貸与(項目);
-            eucEntity.set特定福祉用具販売(項目);
-            eucEntity.set住宅改修介護給付(項目);
-            eucEntity.set夜間対応型訪問介護(項目);
-            eucEntity.set認知症対応型通所介護(項目);
-            eucEntity.set小規模多機能型居宅介護(項目);
-            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
-            eucEntity.set地域密着型特定施設入居者生活介護(項目);
-            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(項目);
+            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果訪問入浴介護(項目);
+            eucEntity.set前回結果訪問看護(項目);
+            eucEntity.set前回結果訪問リハビリテーション(項目);
+            eucEntity.set前回結果居宅療養管理指導(項目);
+            eucEntity.set前回結果通所介護デイサービス(項目);
+            eucEntity.set前回結果通所リハビリテーション(項目);
+            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果短期入所療養介護(項目);
+            eucEntity.set前回結果特定施設入居者生活介護(項目);
+            eucEntity.set前回結果福祉用具貸与(項目);
+            eucEntity.set前回結果特定福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修介護給付(項目);
+            eucEntity.set前回結果夜間対応型訪問介護(項目);
+            eucEntity.set前回結果認知症対応型通所介護(項目);
+            eucEntity.set前回結果小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set前回結果地域密着型特定施設入居者生活介護(項目);
+            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(項目);
         }
     }
 
     private void set前回09A予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        if (予防給付サービス.equals(entity.getサービス区分コード())) {
+        if (予防給付サービス.equals(entity.get前回結果サービス区分コード())) {
             eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
             eucEntity.set前回結果介護予防訪問入浴介護(entity.get前回予防訪問入浴介護());
             eucEntity.set前回結果介護予防訪問看護(entity.get前回予防訪問看護());
@@ -756,12 +757,13 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(項目);
             eucEntity.set前回結果介護予防訪問入浴介護(項目);
             eucEntity.set前回結果介護予防訪問看護(項目);
+            eucEntity.set前回結果介護予防訪問リハビリテーション(項目);
             eucEntity.set前回結果介護予防居宅療養管理指導(項目);
             eucEntity.set前回結果介護予防通所介護デイサービス(項目);
             eucEntity.set前回結果介護予防通所リハビリテーション(項目);
             eucEntity.set前回結果介護予防短期入所生活介護ショートステイ(項目);
             eucEntity.set前回結果介護予防短期入所療養介護(項目);
-            eucEntity.set前回結果介護予防特定施設入居者生活介護(項目);
+            eucEntity.set前回結果介護予防特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
             eucEntity.set前回結果介護予防福祉用具貸与(項目);
             eucEntity.set前回結果特定介護予防福祉用具販売(項目);
             eucEntity.set前回結果住宅改修予防給付(項目);
