@@ -53,7 +53,6 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
     private static final RString ファイル名_前 = new RString("10_113");
     private static final RString ファイル名_後 = new RString(".csv");
     private static final RString コンマ = new RString(",");
-    private static final RString ダブル引用符 = new RString("\"");
     private static final RString 囲みの文字 = new RString("\"");
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private static final RString 不正MESSAGE = new RString("【入力識別番号：被保険者番号：サービス提供年月：事業者番号：通し番号】");
@@ -176,6 +175,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
             csvFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
             csvListWriter = new CsvListWriter.InstanceBuilder(csvFilePath)
                     .setDelimiter(コンマ)
+                    .setEnclosure(RString.EMPTY)
                     .setEncode(文字コード)
                     .setNewLine(NewLine.CRLF)
                     .hasHeader(false)
@@ -251,67 +251,67 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
                 List<RString> csvList = get基本list(entity, INT_2);
                 csvListWriter.writeLine(csvList);
             }
-        } else if (データ区分_01.equals(entity.getDataKunbun())) {
+        } else if (データ区分_01.equals(entity.getDataKunbun()) && entity.getDbT3018_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_meisaiSetteiKubun());
             cnt02 = cnt02 + INT_1;
             List<RString> csvList = get明細list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_02.equals(entity.getDataKunbun())) {
+        } else if (データ区分_02.equals(entity.getDataKunbun()) && entity.getDbT3019_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_kinkyuShisetsuRyoyoSetteiKubun());
             cnt03 = cnt03 + INT_1;
             List<RString> csvList = get施設list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_03.equals(entity.getDataKunbun())) {
+        } else if (データ区分_03.equals(entity.getDataKunbun()) && entity.getDbT3032_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_kinkyuShisetsuRyoyoSetteiKubun());
             cnt13 = cnt13 + INT_1;
             List<RString> csvList = get所定list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_04.equals(entity.getDataKunbun())) {
+        } else if (データ区分_04.equals(entity.getDataKunbun()) && entity.getDbT3020_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_tokuteiShinryoSetteiKubun());
             cnt04 = cnt04 + INT_1;
             List<RString> csvList = get特定診療list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_05.equals(entity.getDataKunbun())) {
+        } else if (データ区分_05.equals(entity.getDataKunbun()) && entity.getDbT3021_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_tokuteishinryoTokubetsuryoyoSetteiKubun());
             cnt04 = cnt04 + INT_1;
             List<RString> csvList = get特別療養list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_06.equals(entity.getDataKunbun())) {
+        } else if (データ区分_06.equals(entity.getDataKunbun()) && entity.getDbT3022_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_shokujiHiyosetteiKubun());
             cnt05 = cnt05 + INT_1;
             List<RString> csvList = get食事list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_07.equals(entity.getDataKunbun())) {
+        } else if (データ区分_07.equals(entity.getDataKunbun()) && entity.getDbT3025_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_kyotakuKeikakuSetteiKubun());
             cnt06 = cnt06 + INT_1;
             List<RString> csvList = get居宅list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_08.equals(entity.getDataKunbun())) {
+        } else if (データ区分_08.equals(entity.getDataKunbun()) && entity.getDbT3026_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_fukushoyouguKonyuSetteiKubun());
             cnt07 = cnt07 + INT_1;
             List<RString> csvList = get福祉list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_09.equals(entity.getDataKunbun())) {
+        } else if (データ区分_09.equals(entity.getDataKunbun()) && entity.getDbT3027_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_jutakukaishuSetteiKubun());
             cnt08 = cnt08 + INT_1;
             List<RString> csvList = get住宅list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_10.equals(entity.getDataKunbun())) {
+        } else if (データ区分_10.equals(entity.getDataKunbun()) && entity.getDbT3033_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_shukeiSetteiKubun());
             cnt10 = cnt10 + INT_1;
             List<RString> csvList = get集計list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_11.equals(entity.getDataKunbun())) {
+        } else if (データ区分_11.equals(entity.getDataKunbun()) && entity.getDbT3029_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_tokuteinyushoshaSetteiKubun());
             cnt11 = cnt11 + INT_1;
             List<RString> csvList = get入所list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_12.equals(entity.getDataKunbun())) {
+        } else if (データ区分_12.equals(entity.getDataKunbun()) && entity.getDbT3030_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_shakaifukushiKeigenSetteiKubun());
             cnt12 = cnt12 + INT_1;
             List<RString> csvList = get社福list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_13.equals(entity.getDataKunbun())) {
+        } else if (データ区分_13.equals(entity.getDataKunbun()) && entity.getDbT3106_hiHokenshaNo() != null) {
             エラー処理(entity, entity.getDbWT1131_meisaiJushochitokureiSetteiKubun());
             cnt14 = cnt14 + INT_1;
             List<RString> csvList = get住特list(entity);

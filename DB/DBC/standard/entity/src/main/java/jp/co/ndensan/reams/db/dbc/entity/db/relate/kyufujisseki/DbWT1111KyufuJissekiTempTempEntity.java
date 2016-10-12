@@ -52,6 +52,20 @@ public class DbWT1111KyufuJissekiTempTempEntity extends DbTableEntityBase<DbWT11
     @PrimaryKey
     private int renban2;
 
+    private HihokenshaNo dbT3018_hiHokenshaNo;
+    private HihokenshaNo dbT3019_hiHokenshaNo;
+    private HihokenshaNo dbT3032_hiHokenshaNo;
+    private HihokenshaNo dbT3020_hiHokenshaNo;
+    private HihokenshaNo dbT3021_hiHokenshaNo;
+    private HihokenshaNo dbT3022_hiHokenshaNo;
+    private HihokenshaNo dbT3025_hiHokenshaNo;
+    private HihokenshaNo dbT3026_hiHokenshaNo;
+    private HihokenshaNo dbT3027_hiHokenshaNo;
+    private HihokenshaNo dbT3033_hiHokenshaNo;
+    private HihokenshaNo dbT3029_hiHokenshaNo;
+    private HihokenshaNo dbT3030_hiHokenshaNo;
+    private HihokenshaNo dbT3106_hiHokenshaNo;
+
     private KokanShikibetsuNo dbWT1131_kokanShikibetsuNo;
     private RString dbWT1131_recodeShubetsuCode;
     private HokenshaNo dbWT1131_shokisaiHokenshaNo;
