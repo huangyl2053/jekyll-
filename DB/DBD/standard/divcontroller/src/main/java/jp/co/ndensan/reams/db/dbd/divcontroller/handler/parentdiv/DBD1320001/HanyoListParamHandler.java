@@ -1065,7 +1065,10 @@ public class HanyoListParamHandler {
     }
 
     private RString get出力順() {
-        return new RString(div.getCcdShutsuryokujun().get出力順ID());
+        if (div.getCcdShutsuryokujun().get出力順ID() != null) {
+            return new RString(div.getCcdShutsuryokujun().get出力順ID());
+        }
+        return RString.EMPTY;
     }
 
     private RString get出力項目() {
@@ -1241,8 +1244,12 @@ public class HanyoListParamHandler {
         RString 出力順 = map.getParameterValue(RString.class, 出力順fieldName);
         RString 帳票ID = map.getParameterValue(RString.class, 帳票IDfieldName);
         RString 出力項目 = map.getParameterValue(RString.class, 出力項目fieldName);
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), Long.valueOf(出力順.toString()));
-        div.getCcdShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        if (!RString.isNullOrEmpty(出力項目)) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), Long.valueOf(出力順.toString()));
+        }
+        if (!RString.isNullOrEmpty(帳票ID)) {
+            div.getCcdShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        }
     }
 
     private void restore旧措置者ck(BatchParameterMap map, RString 旧措置者fieldName, RString 負担軽減者fieldName, RString その他fieldName) {
@@ -1568,10 +1575,10 @@ public class HanyoListParamHandler {
     private void set基準日範囲パネル(boolean 入所is非表示, boolean 取得喪失is非表示, boolean 申請日is非表示, boolean 適用開始日is非表示) {
         div.getRadHaniJoken1().setDisplayNone(入所is非表示);
         div.getRadHaniJoken1().setDisabled(入所is非表示);
-        div.getRadHaniJoken2().setDisplayNone(取得喪失is非表示);
-        div.getRadHaniJoken2().setDisabled(取得喪失is非表示);
-        div.getRadHaniJoken3().setDisplayNone(申請日is非表示);
-        div.getRadHaniJoken3().setDisabled(申請日is非表示);
+        div.getRadHaniJoken3().setDisplayNone(取得喪失is非表示);
+        div.getRadHaniJoken3().setDisabled(取得喪失is非表示);
+        div.getRadHaniJoken2().setDisplayNone(申請日is非表示);
+        div.getRadHaniJoken2().setDisabled(申請日is非表示);
         div.getRadHaniJoken4().setDisplayNone(適用開始日is非表示);
         div.getRadHaniJoken4().setDisabled(適用開始日is非表示);
     }
