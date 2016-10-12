@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiH
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00002.NinteishaListSakuseiMybatisprmParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,25 +47,27 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     private boolean is該当者リスト = false;
     private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
+    private RDate 帳票作成日時;
 
     /**
      * 対象者一次特定の引数を返します。
      *
-     * @param 対象リスト 対象リスト
-     * @param 基準日 基準日
-     * @param 所得年度 所得年度
-     * @param 旧措置区分 旧措置区分
-     * @param 世帯表示 世帯表示
-     * @param 受給者区分 受給者区分
-     * @param 世帯非課税等 世帯非課税等
-     * @param csv出力設定 csv出力設定
-     * @param 改頁出力順ID 改頁出力順ID
-     * @param 帳票ID 帳票ID
+     * @param 対象リスト TargetList
+     * @param 基準日 FlexibleDate
+     * @param 所得年度 FlexibleYear
+     * @param 旧措置区分 KyusochishaJukyushaKubun
+     * @param 世帯表示 SetaiHyoji
+     * @param 受給者区分 JukyushaKubun2
+     * @param 世帯非課税等 List<HihokenshaKeizaiJokyo>
+     * @param csv出力設定 List<CSVSettings>
+     * @param 改頁出力順ID Long
+     * @param 帳票ID RString
+     * @param 帳票作成日時 RDate
      */
     public NinteishaListSakuseiProcessParameter(TargetList 対象リスト,
             FlexibleDate 基準日, FlexibleYear 所得年度, KyusochishaJukyushaKubun 旧措置区分, SetaiHyoji 世帯表示,
             JukyushaKubun2 受給者区分, List<HihokenshaKeizaiJokyo> 世帯非課税等, List<CSVSettings> csv出力設定,
-            Long 改頁出力順ID, RString 帳票ID) {
+            Long 改頁出力順ID, RString 帳票ID, RDate 帳票作成日時) {
         this.対象リスト = 対象リスト;
         this.基準日 = 基準日;
         this.所得年度 = 所得年度;
@@ -74,6 +78,7 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
         this.csv出力設定 = csv出力設定;
         this.改頁出力順ID = 改頁出力順ID;
         this.帳票ID = 帳票ID;
+        this.帳票作成日時 = 帳票作成日時;
     }
 
     /**
@@ -95,12 +100,12 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     /**
      * 利用者負担額減免認定者リスト発行の引数を返します。
      *
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      * @param 出力順 出力順
      * @return NinteishaListSakuseiMybatisprmParameter
      */
     public NinteishaListSakuseiMybatisprmParameter toNinteishaListSakuseiMybatisprmParameter(
-            RString psmShikibetsuTaisho, RString 出力順) {
-        return new NinteishaListSakuseiMybatisprmParameter(対象リスト, 基準日, 世帯表示, 世帯非課税等, psmShikibetsuTaisho, 出力順);
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam, RString 出力順) {
+        return new NinteishaListSakuseiMybatisprmParameter(対象リスト, 基準日, 世帯表示, 世帯非課税等, shikibetsutaishoParam, 出力順);
     }
 }
