@@ -260,6 +260,14 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         KaigoHokenJigyoHokokuNenpo 画面入力データ = handler.get画面入力データ(get引き継ぎデータ(div));
         QuestionMessage message = new QuestionMessage(
                 UrQuestionMessages.処理実行の確認.getMessage().getCode(), UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+        if (!内部処理モード_削除.equals(div.getShoriMode())) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            合計値チェック_合計１(div, pairs);
+            合計値チェック_合計２(div, pairs);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
         if (内部処理モード_追加.equals(div.getShoriMode())) {
             return getResponseData_btnSave_追加(div, 画面入力データ, message);
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
@@ -279,12 +287,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         if (!handler.is画面詳細エリア入力有(画面入力データ)) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         } else {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            合計値チェック_合計１(div, pairs);
-            合計値チェック_合計２(div, pairs);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
             return ResponseData.of(div).addMessage(message).respond();
         }
     }
@@ -376,6 +378,17 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             }
         }
         return 引き継ぎデータ;
+    }
+
+    /**
+     * 歳入歳出差引残額自動計算する。<br/>
+     *
+     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div 介護保険特別会計経理状況登録_様式４情報Div}
+     * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
+     */
+    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onBlur_calculation(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
+        getHandler(div).歳入歳出差引残額自動計算();
+        return ResponseData.of(div).respond();
     }
 
     private KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler getHandler(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {

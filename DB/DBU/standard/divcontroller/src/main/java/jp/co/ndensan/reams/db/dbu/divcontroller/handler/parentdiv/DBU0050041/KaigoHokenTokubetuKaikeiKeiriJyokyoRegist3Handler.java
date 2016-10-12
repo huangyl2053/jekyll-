@@ -892,4 +892,38 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         return 額;
     }
 
+    /**
+     * 歳入歳出差引残額自動計算処理です。
+     *
+     */
+    public void 歳入歳出差引残額自動計算() {
+        Decimal 前年度以前_合計値1 = div.getYoshikiYonnosanMeisai().getTxtshiyohigokei().getValue();
+        Decimal 前年度以前_合計値2 = div.getYoshikiYonnosanMeisai().getTxtsaishutsugokei().getValue();
+        Decimal 今年度_合計値1 = div.getYoshikiYonnosanMeisai().getTxtkoshiyohigokei().getValue();
+        Decimal 今年度_合計値2 = div.getYoshikiYonnosanMeisai().getTxtkosaishutsugokei().getValue();
+        Decimal 歳入合計 = null;
+        Decimal 歳出合計 = null;
+        if (前年度以前_合計値1 != null || 今年度_合計値1 != null) {
+            歳入合計 = get額(前年度以前_合計値1).add(get額(今年度_合計値1));
+        }
+        if (前年度以前_合計値2 != null || 今年度_合計値2 != null) {
+            歳出合計 = get額(前年度以前_合計値2).add(get額(今年度_合計値2));
+        }
+        if (null == 歳入合計) {
+            div.getYoshikiYonnosanMeisai().getTxtshitsusainyugokei().clearValue();
+        } else {
+            div.getYoshikiYonnosanMeisai().getTxtshitsusainyugokei().setValue(歳入合計);
+        }
+        if (null == 歳出合計) {
+            div.getYoshikiYonnosanMeisai().getTxtshitsusaishutsugokei().clearValue();
+        } else {
+            div.getYoshikiYonnosanMeisai().getTxtshitsusaishutsugokei().setValue(歳出合計);
+        }
+        if (null == 歳入合計 && null == 歳出合計) {
+            div.getYoshikiYonnosanMeisai().getTxtshitsusainyusaishutsusa().clearValue();
+        } else {
+            div.getYoshikiYonnosanMeisai().getTxtshitsusainyusaishutsusa().setValue(get額(歳入合計).subtract(get額(歳出合計)));
+        }
+    }
+
 }
