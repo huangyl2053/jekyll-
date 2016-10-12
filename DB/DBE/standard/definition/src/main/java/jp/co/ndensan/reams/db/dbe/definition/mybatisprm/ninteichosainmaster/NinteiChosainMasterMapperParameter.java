@@ -37,6 +37,9 @@ public final class NinteiChosainMasterMapperParameter {
     private final RString 調査員カナ氏名;
     private final RString 地区コード;
     private final Decimal saidaiHyojiKensu;
+    private final RString 市町村識別ID;
+    private static final RString 構成市町村マスタ市町村コード重複 = new RString("1");
+    
     private final boolean uses市町村コード;
     private final boolean uses調査委託先コードFrom;
     private final boolean uses調査委託先コードTo;
@@ -64,6 +67,7 @@ public final class NinteiChosainMasterMapperParameter {
     private final boolean uses調査員カナ氏名後方一致;
     private final boolean uses調査員カナ氏名完全一致;
     private final boolean uses調査員カナ氏名部分一致;
+    private final boolean 市町村識別ID利用Flag;
 
     private NinteiChosainMasterMapperParameter(
             boolean 状況フラグ,
@@ -104,7 +108,9 @@ public final class NinteiChosainMasterMapperParameter {
             boolean uses調査員カナ氏名前方一致,
             boolean uses調査員カナ氏名後方一致,
             boolean uses調査員カナ氏名完全一致,
-            boolean uses調査員カナ氏名部分一致) {
+            boolean uses調査員カナ氏名部分一致,
+            RString 市町村識別ID,  
+            boolean 市町村識別ID利用Flag) {
 
         this.状況フラグ = 状況フラグ;
         this.市町村コード = 市町村コード;
@@ -145,6 +151,8 @@ public final class NinteiChosainMasterMapperParameter {
         this.uses調査員カナ氏名後方一致 = uses調査員カナ氏名後方一致;
         this.uses調査員カナ氏名完全一致 = uses調査員カナ氏名完全一致;
         this.uses調査員カナ氏名部分一致 = uses調査員カナ氏名部分一致;
+        this.市町村識別ID = 市町村識別ID;
+        this.市町村識別ID利用Flag = 市町村識別ID利用Flag;
     }
 
     /**
@@ -166,6 +174,8 @@ public final class NinteiChosainMasterMapperParameter {
      * @param 調査員カナ氏名キー 調査員カナ氏名キー
      * @param 地区コード 地区コード
      * @param 最大表示件数 最大表示件数
+     * @param 市町村識別ID 市町村識別ID
+     * @param 構成市町村マスタ市町村コード重複種別 構成市町村マスタ市町村コード重複種別
      *
      * @return 構成市町村マスタパラメータ
      */
@@ -185,7 +195,9 @@ public final class NinteiChosainMasterMapperParameter {
             RString 調査員カナ氏名,
             RString 調査員カナ氏名キー,
             RString 地区コード,
-            Decimal 最大表示件数
+            Decimal 最大表示件数,
+            RString 市町村識別ID, 
+            RString 構成市町村マスタ市町村コード重複種別
     ) {
         return new NinteiChosainMasterMapperParameter(
                 状況フラグ,
@@ -226,7 +238,9 @@ public final class NinteiChosainMasterMapperParameter {
                 KEY0.equals(調査員カナ氏名キー),
                 KEY1.equals(調査員カナ氏名キー),
                 KEY2.equals(調査員カナ氏名キー),
-                KEY3.equals(調査員カナ氏名キー)
+                KEY3.equals(調査員カナ氏名キー),
+                市町村識別ID,
+                構成市町村マスタ市町村コード重複.equals(構成市町村マスタ市町村コード重複種別)
         );
     }
 }

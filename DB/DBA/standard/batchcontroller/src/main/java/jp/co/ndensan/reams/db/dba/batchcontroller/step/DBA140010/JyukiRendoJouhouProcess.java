@@ -38,7 +38,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -128,6 +133,9 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         jyukiRendoTorokushaEntity.set並び順_4(RString.EMPTY);
         jyukiRendoTorokushaEntity.set並び順_5(RString.EMPTY);
         jyukiRendoTorokushaEntity.set住基連動情報(jyukiRendoJouhouList);
+        
+        jyukiRendoTorokushaEntity.set抽出期間F(toWarekiFormat(processParameter.getKonkaikaishiYMDHMS()));
+        jyukiRendoTorokushaEntity.set抽出期間T(toWarekiFormat(processParameter.getKonkaishuryoYMDHMS()));
         JyukiRendoTorokushaListBatch jyukiRendoTorokushaListBatch = new JyukiRendoTorokushaListBatch();
         List<JukiRendoTorokuListItem> item = jyukiRendoTorokushaListBatch.getIdoCheckChohyoData(jyukiRendoTorokushaEntity);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200007.getReportId().value())
@@ -136,6 +144,13 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         JukiRendoTorokuListReport report = JukiRendoTorokuListReport.createFrom(item);
         report.writeBy(reportSourceWriter);
         batchReportWriter.close();
+    }
+    
+    private RString toWarekiFormat(RString string) {
+        return new FlexibleDate(string).wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString();        
     }
 
     private void getPSM宛名情報(UaFt200FindShikibetsuTaishoEntity shikibetsuTaishoentity,

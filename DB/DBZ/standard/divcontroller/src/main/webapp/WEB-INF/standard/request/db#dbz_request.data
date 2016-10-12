@@ -62,9 +62,9 @@ dbz/db/dbz/Hihosyosai/onClick_Change
 dbz/db/dbz/HokenshaInputGuide/click_btnHokenshaSelect
 dbz/db/dbz/HokenshaInputGuide/click_btnSearchGaitoHokensha
 dbz/db/dbz/HokenshaInputGuide/click_btnSenTakuHokensha
-dbz/db/dbz/HokenshaInputGuide/onClick_btnSearchGaitoHokensha
-dbz/db/dbz/HokenshaInputGuide/onLoad
-dbz/db/dbz/HokenshaInputGuide/onSelectBySelectButton_dgSearchResultHokensha
+dbz/db/dbz/HokenshaInputGuide_False/onClick_btnSearchGaitoHokensha
+dbz/db/dbz/HokenshaInputGuide_False/onLoad
+dbz/db/dbz/HokenshaInputGuide_False/onSelectBySelectButton_dgSearchResultHokensha
 dbz/db/dbz/HokenshaJoho/lostfocus_txtHokenshaNo
 dbz/db/dbz/HokenshaJoho/onBeforeOpenDialog_btnSearch
 dbz/db/dbz/HokenshaJoho/onOkClose_btnSearch

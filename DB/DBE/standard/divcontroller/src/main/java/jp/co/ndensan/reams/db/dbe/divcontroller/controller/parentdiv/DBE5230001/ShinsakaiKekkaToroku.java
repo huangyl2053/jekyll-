@@ -405,7 +405,13 @@ public class ShinsakaiKekkaToroku {
             div.getTxtNinteiKikanFrom().setDisabled(false);
             div.getTxtNinteiKikanTo().setDisabled(false);
         }
-
+        
+        /** 二次判断が「要介護１」の場合のみ、状態像の入力が必須となるがを設定 */
+        if (div.getDdlNijiHantei().getSelectedKey().equals(要介護1)) {
+            div.getDdlJotaiZo().setRequired(true);
+        } else{
+            div.getDdlJotaiZo().setRequired(false);
+        }
         RString shinseiKubunShinseiji = div.getTxtShinseiKubunShinseiji().getText();
         RString zenkaiNijiHantei = div.getDgTaishoshaIchiran().getActiveRow().getZenkaiNijiHanteiCode();
         RString nijiHantei = div.getDdlNijiHantei().getSelectedKey();

@@ -102,6 +102,18 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
     }
 
     /**
+     * DbT4010GemmenGengakuShinseiEntityを登録します。insert処理を行います。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int insert(DbT4010GemmenGengakuShinseiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請エンティティ"));
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * DbT4010GemmenGengakuShinseiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

@@ -82,10 +82,10 @@ public class ShoKaishuKirokuKanriHandler {
                         dgJigyoshaItiran.getKoufuDate().setValue(new RDate(jigyoshaInput.get交付年月日().toString()));
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0002),
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0002),
                                 new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0004),
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0004),
                                 new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     }
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
@@ -93,10 +93,10 @@ public class ShoKaishuKirokuKanriHandler {
                         dgJigyoshaItiran.getKaishuDate().setValue(new RDate(jigyoshaInput.get回収年月日().toString()));
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0003),
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0003),
                                 new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0005),
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0005),
                                 new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     }
                     if (jigyoshaInput.get有効期限() != null && jigyoshaInput.get有効期限().isValid()) {
@@ -129,10 +129,10 @@ public class ShoKaishuKirokuKanriHandler {
                         dgJigyoshaItiran.getKoufuDate().setValue(new RDate(jigyoshaInput.get交付年月日().toString()));
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0002),
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0002),
                                 new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0004),
+                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0004),
                                 new Code(jigyoshaInput.get交付事由()), FlexibleDate.getNowDate()));
                     }
                     dgJigyoshaItiran.setKoufuJiyuNo(jigyoshaInput.get交付事由());
@@ -141,10 +141,10 @@ public class ShoKaishuKirokuKanriHandler {
                         dgJigyoshaItiran.getKaishuDate().setValue(new RDate(jigyoshaInput.get回収年月日().toString()));
                     }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0003),
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0003),
                                 new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     } else {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0005),
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_0005),
                                 new Code(jigyoshaInput.get回収事由()), FlexibleDate.getNowDate()));
                     }
                     dgJigyoshaItiran.setKaishuJiyuNo(jigyoshaInput.get回収事由());

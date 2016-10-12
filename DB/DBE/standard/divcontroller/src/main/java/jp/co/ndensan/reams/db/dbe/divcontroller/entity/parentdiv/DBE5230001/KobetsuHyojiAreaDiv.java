@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KobetsuHyojiAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,8 +48,8 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private TextBoxDate txtNinteiKikanFrom;
     @JsonProperty("txtNinteiKikanTo")
     private TextBoxDate txtNinteiKikanTo;
-    @JsonProperty("txtNinteiKikanMonth")
-    private TextBoxNum txtNinteiKikanMonth;
+    @JsonProperty("ddlNinteiKikanMonth")
+    private DropDownList ddlNinteiKikanMonth;
     @JsonProperty("linHorizon")
     private HorizontalLine linHorizon;
     @JsonProperty("lblShiinsakaiMemo")
@@ -322,21 +322,21 @@ public class KobetsuHyojiAreaDiv extends Panel {
     }
 
     /*
-     * gettxtNinteiKikanMonth
-     * @return txtNinteiKikanMonth
+     * getddlNinteiKikanMonth
+     * @return ddlNinteiKikanMonth
      */
-    @JsonProperty("txtNinteiKikanMonth")
-    public TextBoxNum getTxtNinteiKikanMonth() {
-        return txtNinteiKikanMonth;
+    @JsonProperty("ddlNinteiKikanMonth")
+    public DropDownList getDdlNinteiKikanMonth() {
+        return ddlNinteiKikanMonth;
     }
 
     /*
-     * settxtNinteiKikanMonth
-     * @param txtNinteiKikanMonth txtNinteiKikanMonth
+     * setddlNinteiKikanMonth
+     * @param ddlNinteiKikanMonth ddlNinteiKikanMonth
      */
-    @JsonProperty("txtNinteiKikanMonth")
-    public void setTxtNinteiKikanMonth(TextBoxNum txtNinteiKikanMonth) {
-        this.txtNinteiKikanMonth = txtNinteiKikanMonth;
+    @JsonProperty("ddlNinteiKikanMonth")
+    public void setDdlNinteiKikanMonth(DropDownList ddlNinteiKikanMonth) {
+        this.ddlNinteiKikanMonth = ddlNinteiKikanMonth;
     }
 
     /*

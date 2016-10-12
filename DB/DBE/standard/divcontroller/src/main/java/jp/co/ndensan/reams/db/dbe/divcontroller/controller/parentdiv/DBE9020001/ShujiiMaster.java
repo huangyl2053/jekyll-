@@ -99,6 +99,7 @@ public class ShujiiMaster {
         if (!RString.isNullOrEmpty(主治医医療機関コード)) {
             LasdecCode 市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeFrom().setValue(主治医医療機関コード);
+            div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeTo().setValue(主治医医療機関コード);
             div.getShujiiSearch().getCcdHokenshaList().setSelectedShichosonIfExist(市町村コード);
             searchChosainInfo(div);
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
@@ -230,7 +231,9 @@ public class ShujiiMaster {
                 div.getDdlShujiiMeisho().getSelectedKey(),
                 new AtenaKanaMeisho(div.getTxtSearchShujiiKanaShimei().getValue()),
                 div.getDdlShujiiKanaMeisho().getSelectedKey(),
-                div.getTxtSaidaiHyojiKensu().getValue());
+                div.getTxtSaidaiHyojiKensu().getValue(),
+                四マスタ優先表示市町村識別ID,
+                構成市町村マスタ市町村コード重複種別);
         ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
                 = shujiiMasterFinder.getShujiiIchiranList(

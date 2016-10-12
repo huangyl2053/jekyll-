@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  *
  * @author n8178 城間篤人
  */
-public class HokenshaInputGuide {
+public class HokenshaInputGuide_False {
 
     private static final RString DATA_SOURCE = new RString("hokenshaData/hokenshaData.yml");
 

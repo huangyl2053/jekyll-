@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoR
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 負担限度額認定更新のお知らせ通知書
@@ -35,7 +36,12 @@ public class NinteiKoshinTsuchishoCompSofubutsuAtesakiEditor implements INinteiK
         source.yubinNo = atesakiSource.yubinNo;
         source.gyoseiku1 = 空白;
         source.jusho4 = 空白;
-        source.jushoText = atesakiSource.jushoText;
+        if (atesakiSource.jushoText == null) {
+            RStringBuilder jusho1 = new RStringBuilder(atesakiSource.jusho1);
+            source.jushoText = jusho1.append(atesakiSource.jusho2).append(atesakiSource.jusho3).toRString();
+        } else {
+            source.jushoText = atesakiSource.jushoText;
+        }
         source.jusho5 = 空白;
         source.jusho6 = 空白;
         source.katagakiText = atesakiSource.katagakiText;

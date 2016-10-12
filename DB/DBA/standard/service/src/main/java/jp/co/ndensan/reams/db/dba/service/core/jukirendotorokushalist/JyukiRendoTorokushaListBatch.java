@@ -49,6 +49,8 @@ public class JyukiRendoTorokushaListBatch {
             tyouHyouListEntity.set並び順３(entity.get並び順_3());
             tyouHyouListEntity.set並び順４(entity.get並び順_4());
             tyouHyouListEntity.set並び順５(entity.get並び順_5());
+            tyouHyouListEntity.set抽出期間F(entity.get抽出期間F());
+            tyouHyouListEntity.set抽出期間T(entity.get抽出期間T());
             if (jyukiRendoJouhouEntity.get識別コード() == null) {
                 set帳票データ作成用Entityの部分項目(tyouHyouListEntity, jyukiRendoJouhouEntity);
                 tyouHyouListEntity.setリスト下_被保険者氏名(被保険者氏名);
@@ -94,7 +96,7 @@ public class JyukiRendoTorokushaListBatch {
                     tyouHyouListEntity.getリスト上_異動年月日_2(),
                     tyouHyouListEntity.getリスト上_届出年月日_2(),
                     tyouHyouListEntity.getリスト上_終了年月日(),
-                    tyouHyouListEntity.getリスト上_区分(),
+                    tyouHyouListEntity.getリスト上_区分().concat("号"),
                     tyouHyouListEntity.getリスト上_異動情報1(),
                     tyouHyouListEntity.getリスト上_異動情報2(),
                     tyouHyouListEntity.getリスト上_異動情報3(),
@@ -109,10 +111,13 @@ public class JyukiRendoTorokushaListBatch {
                     tyouHyouListEntity.getリスト下_異動年月日_2(),
                     tyouHyouListEntity.getリスト下_届出年月日_2(),
                     tyouHyouListEntity.getリスト下_終了年月日(),
-                    tyouHyouListEntity.getリスト下_区分(),
+                    tyouHyouListEntity.getリスト下_区分().concat("号"),
                     tyouHyouListEntity.getリスト下_異動情報4(),
                     tyouHyouListEntity.getリスト下_異動情報5(),
-                    tyouHyouListEntity.getリスト下_異動情報6());
+                    tyouHyouListEntity.getリスト下_異動情報6(),
+                    tyouHyouListEntity.get抽出期間F(),
+                    tyouHyouListEntity.get抽出期間T()
+            );
             list.add(jukiRendoTorokuListItem);
         }
         return list;

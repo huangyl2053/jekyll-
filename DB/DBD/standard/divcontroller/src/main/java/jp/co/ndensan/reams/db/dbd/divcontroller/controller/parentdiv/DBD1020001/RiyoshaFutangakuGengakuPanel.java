@@ -56,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class RiyoshaFutangakuGengakuPanel {
 
+    private static final RString 申請メニュー = new RString("DBDMN21002");
     private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 追加 = new RString("追加");
@@ -668,7 +669,11 @@ public class RiyoshaFutangakuGengakuPanel {
 
             if (i < size - 1) {
                 joho２ = not削除List.get(i + 1);
-                if (joho２.getShorigoRirekiNo() <= joho１.getShorigoRirekiNo()) {
+                if (ResponseHolder.getMenuID().equals(申請メニュー) && joho２.getRiyoshaFutangakuGengaku().get決定区分() == null) {
+                    tmpRirekiNo = 0;
+                    joho２ = joho２.createBuilderForEdit().setShorigoRirekiNo(tmpRirekiNo).build();
+                    not削除List.set(i + 1, joho２);
+                } else if (joho２.getShorigoRirekiNo() <= joho１.getShorigoRirekiNo()) {
                     tmpRirekiNo = tmpRirekiNo + 1;
                     joho２ = joho２.createBuilderForEdit().setShorigoRirekiNo(tmpRirekiNo).build();
                     not削除List.set(i + 1, joho２);

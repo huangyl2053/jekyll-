@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKekkaTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -454,13 +454,13 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtNinteiKikanMonth() {
-        return this.getKobetsuHyojiArea().getTxtNinteiKikanMonth();
+    public DropDownList getDdlNinteiKikanMonth() {
+        return this.getKobetsuHyojiArea().getDdlNinteiKikanMonth();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiKikanMonth(TextBoxNum txtNinteiKikanMonth) {
-        this.getKobetsuHyojiArea().setTxtNinteiKikanMonth(txtNinteiKikanMonth);
+    public void  setDdlNinteiKikanMonth(DropDownList ddlNinteiKikanMonth) {
+        this.getKobetsuHyojiArea().setDdlNinteiKikanMonth(ddlNinteiKikanMonth);
     }
 
     @JsonIgnore

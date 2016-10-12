@@ -181,6 +181,17 @@
              <if test="uses地区コード">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chikuCode" = #{地区コード}
             </if>
+            <if test="市町村識別ID利用Flag">
+                AND DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonShokibetsuID" NOT IN (
+                        SELECT "shichosonShokibetsuID"
+                        FROM rgdb."DbT7051KoseiShichosonMaster"
+                        WHERE  "shichosonCode"=(
+                                                SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
+                                                WHERE "shichosonShokibetsuID" = #{市町村識別ID}
+                                                )
+                        AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
+                        )
+            </if>
         </where>
         ORDER BY
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
@@ -288,6 +299,17 @@
             </if>
             <if test="uses地区コード">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chikuCode" = #{地区コード}
+            </if>
+            <if test="市町村識別ID利用Flag">
+                AND DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonShokibetsuID" NOT IN (
+                        SELECT "shichosonShokibetsuID"
+                        FROM rgdb."DbT7051KoseiShichosonMaster"
+                        WHERE  "shichosonCode"=(
+                                                SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
+                                                WHERE "shichosonShokibetsuID" = #{市町村識別ID}
+                                                )
+                        AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
+                        )
             </if>
         </where>
         ORDER BY
