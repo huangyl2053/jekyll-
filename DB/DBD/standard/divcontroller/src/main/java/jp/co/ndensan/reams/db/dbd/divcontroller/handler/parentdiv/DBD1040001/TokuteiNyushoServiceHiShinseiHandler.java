@@ -224,8 +224,9 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         if (joho != null) {
             div.getCcdShinseiJoho().set減免減額申請情報(get減免減額申請情報(joho), FlexibleDate.getNowDate());
         }
-        set情報エリア修正状態制御(menuID);
         set情報エリア(row);
+        set情報エリア修正状態制御(menuID);
+
     }
 
     /**
@@ -451,11 +452,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             適用日 = div.getShinseiDetail().getTxtTekiyoYMD().getValue();
             有効期限 = div.getShinseiDetail().getTxtYukoKigenYMD().getValue();
         } else {
-            軽減率 = new HokenKyufuRitsu(div.getShinseiDetail().getTxtKeigenRitsu().getValue());
-            確認番号 = div.getShinseiDetail().getKetteiJoho().getTxtKakuninNo().getText();
             決定日 = div.getShinseiDetail().getTxtKettaiYMD().getValue();
-            適用日 = div.getShinseiDetail().getTxtTekiyoYMD().getValue();
-            有効期限 = div.getShinseiDetail().getTxtYukoKigenYMD().getValue();
             非承認理由 = div.getShinseiDetail().getTxtHiShoninRiyu().getText();
         }
         builder.set減額率(軽減率);
