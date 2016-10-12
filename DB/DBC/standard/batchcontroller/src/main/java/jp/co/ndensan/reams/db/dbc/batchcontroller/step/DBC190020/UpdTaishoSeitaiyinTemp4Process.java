@@ -154,7 +154,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private void get課税所得_控除後(TaishoSetaiinEntity 対象世帯員1) {
         Decimal 控除後;
         if (識別コードFlgSet.contains(対象世帯員1.getShikibetsuCode().getColumnValue())) {
-            控除後 = 対象世帯員1.getKazeiShotokuGaku().divide(DECIMAL_38.multiply(this.ageLess16).add(DECIMAL_12.multiply(this.age16_18)));
+            控除後 = getDecimal(対象世帯員1.getKazeiShotokuGaku()).subtract(DECIMAL_38.multiply(this.ageLess16).add(DECIMAL_12.multiply(this.age16_18)));
             if (控除後.compareTo(Decimal.ZERO) < 0) {
                 控除後 = Decimal.ZERO;
             }
