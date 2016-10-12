@@ -97,6 +97,35 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac implements ISaveable<DbT
     }
 
     /**
+     * 主キーで共同処理用受給者異動基本送付を取得します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param 異動年月日 IdoYMD
+     * @param 履歴番号 RirekiNo
+     * @return DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity select基本送付ByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動年月日,
+            int 履歴番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動年月日.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_履歴番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3002KyodoShoriyoJukyushaIdoKihonSofu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動年月日),
+                                eq(rirekiNo, 履歴番号))).
+                toObject(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity.class);
+    }
+
+    /**
      * 共同処理用受給者異動基本送付を全件返します。
      *
      * @return List<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity>

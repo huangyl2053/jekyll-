@@ -83,6 +83,34 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManager {
     }
 
     /**
+     * 主キーに合致する共同処理用受給者異動基本送付を返します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param 異動年月日 IdoYMD
+     * @param 履歴番号 RirekiNo
+     * @return KyodoShoriyoJukyushaIdoKihonSofu
+     */
+    @Transaction
+    public KyodoShoriyoJukyushaIdoKihonSofu select基本送付ByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動年月日,
+            int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity entity = dac.select基本送付ByKey(
+                被保険者番号,
+                異動年月日,
+                履歴番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KyodoShoriyoJukyushaIdoKihonSofu(entity);
+    }
+
+    /**
      * 共同処理用受給者異動基本送付を全件返します。
      *
      * @return List<KyodoShoriyoJukyushaIdoKihonSofu>
