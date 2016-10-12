@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT7304TokuteiKojinJohoTeikyoKanriマスタとエンティティのマッピング用XMLです。 -->
-<!-- 作者： @reamsid_L DBU- 9999-021 sunhaidi -->
+<!-- 作者： @reamsid_L DBU-9999-021 sunhaidi -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7304TokuteiKojinJohoTeikyoKanriMapper">
