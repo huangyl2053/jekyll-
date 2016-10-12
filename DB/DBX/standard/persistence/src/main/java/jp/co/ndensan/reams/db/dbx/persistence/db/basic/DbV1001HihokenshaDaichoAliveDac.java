@@ -235,6 +235,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(logicalDeletedFlag, false))).
                 order(by(DbV1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbV1001HihokenshaDaicho.edaNo, Order.DESC)).
+                limit(1).
                 toObject(DbV1001HihokenshaDaichoEntity.class);
     }
 

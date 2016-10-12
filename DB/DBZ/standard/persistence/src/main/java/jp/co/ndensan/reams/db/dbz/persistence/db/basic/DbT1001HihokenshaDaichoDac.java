@@ -857,4 +857,30 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 order(by(hihokenshaNo), by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
+
+    /**
+     * Max異動日取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity get最大枝番(
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_異動日.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日)
+                        )).
+                order(by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
 }
