@@ -488,6 +488,50 @@ public class FutangendogakuShinsei {
         getHandler(div).onChange_radHaigushaUmu();
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 「申請理由」変更時の処理
+     * 
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onChange_ddlShinseiRiyu(FutangendogakuShinseiDiv div) {
+        getHandler(div).onChange_ddlShinseiRiyu();
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「旧措置」変更時の処理
+     * 
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onChange_ddlKyusochisha(FutangendogakuShinseiDiv div) {
+        getHandler(div).onChange_ddlKyusochisha();
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「居室種別」変更時の処理
+     * 
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onChange_ddlKyoshitsuShubetsu(FutangendogakuShinseiDiv div) {
+        getHandler(div).onChange_ddlKyoshitsuShubetsu();
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「境界層」クリック時の処理
+     * 
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onClick_chkKyokaiso(FutangendogakuShinseiDiv div) {
+        getHandler(div).onClick_chkKyokaiso();
+        return ResponseData.of(div).respond();
+    }
 
     private FutangendogakuNinteiShinseiHandler getHandler(FutangendogakuShinseiDiv div) {
         return new FutangendogakuNinteiShinseiHandler(div);

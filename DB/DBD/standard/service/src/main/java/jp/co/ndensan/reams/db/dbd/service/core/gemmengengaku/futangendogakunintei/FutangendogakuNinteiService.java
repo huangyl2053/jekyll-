@@ -62,6 +62,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class FutangendogakuNinteiService {
 
     private static final int INT_4 = 4;
+    private static final int 食費インクリメント単位 = 10;
+    private static final int 食費マックス単位 = 300;
     private static final long LONG_80000 = 800000L;
     private static final FlexibleDate 基準日_2015年4月1日 = new FlexibleDate("20150401");
     private static final FlexibleDate 基準日_2012年4月1日 = new FlexibleDate("20120401");
@@ -281,6 +283,78 @@ public class FutangendogakuNinteiService {
         }
         return new ArrayList<>();
     }
+    
+    /**
+     * 全ての食費負担限度額の取得します。
+     * 
+     * @param 旧措置者区分 RString
+     * @param 基準日 FlexibleDate
+     * @return List<RString>
+     */
+    public List<RString> load食費負担限度額候補境界層チェックオン(RString 旧措置者区分, FlexibleDate 基準日) {
+        if (旧措置者区分.isEmpty()) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(RString.EMPTY);
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_食費１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_食費２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_食費３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(RString.EMPTY);
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_食費１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_食費２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_食費３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(RString.EMPTY);
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_食費１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_食費２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_食費３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(RString.EMPTY);
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(RString.EMPTY);
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(RString.EMPTY);
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置食費１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置食費２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置食費３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        }
+        return new ArrayList<>();
+    }
+    
+    /**
+     * 0000 ～ 0300の10単位の食事負担限度額の取得をします。
+     * 
+     * @return List<RString>
+     */
+    public List<RString> load0000to0300食費負担限度額候補() {
+        List<RString> 金額リスト = new ArrayList<>();
+        for (int count = 0; count <= 食費マックス単位;) {
+            金額リスト.add(new RString(String.format("%04d", count)));
+            count = count + 食費インクリメント単位;
+        }
+        return 金額リスト;
+    }
 
     /**
      * ユニット型個室負担限度額の取得します。
@@ -369,6 +443,58 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室３, 基準日));
+            }
+        }
+        return new ArrayList<>();
+    }
+    
+    /**
+     * 全てのユニット型個室負担限度額の取得します。
+     * 
+     * @param 旧措置者区分 RString
+     * @param 基準日 FlexibleDate
+     * @return List<RString>
+     */
+    public List<RString> loadユニット型個室負担限度額候補境界層チェックオン(RString 旧措置者区分, FlexibleDate 基準日) {
+        if (旧措置者区分.isEmpty()) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室３, 基準日));
+                return 金額リスト作成(金額リスト);
             }
         }
         return new ArrayList<>();
@@ -465,6 +591,58 @@ public class FutangendogakuNinteiService {
         }
         return new ArrayList<>();
     }
+    
+    /**
+     * 全てのユニット型準個室負担限度額の取得します。
+     * 
+     * @param 旧措置者区分 RString
+     * @param 基準日 Flexible
+     * @return List<RString>
+     */
+    public List<RString> loadユニット型準個室負担限度額候補境界層チェックオン(RString 旧措置者区分, FlexibleDate 基準日) {
+        if (旧措置者区分.isEmpty()) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        }
+        return new ArrayList<>();
+    }
 
     /**
      * 従来型個室（特養等）負担限度額の取得します。
@@ -557,6 +735,58 @@ public class FutangendogakuNinteiService {
         }
         return new ArrayList<>();
     }
+    
+    /**
+     * 全ての従来型個室（特養等）負担限度額の取得します。
+     * 
+     * @param 旧措置者区分 RString
+     * @param 基準日 FlexibleDate
+     * @return List<RString>
+     */
+    public List<RString> load従来型個室特養等負担限度額候補境界層チェックオン(RString 旧措置者区分, FlexibleDate 基準日) {
+        if (旧措置者区分.isEmpty()) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個特養１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個特養２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個特養３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        }
+        return new ArrayList<>();
+    }
 
     /**
      * 従来型個室（老健・療養等）負担限度額の取得します。
@@ -592,6 +822,35 @@ public class FutangendogakuNinteiService {
                     RString.EMPTY,
                     RString.EMPTY,
                     getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個老健３, 基準日));
+        }
+    }
+    
+    /**
+     * 全ての従来型個室（老健・療養等）負担限度額の取得します。
+     * 
+     * @param 旧措置者区分 RString
+     * @param 基準日 FlexibleDate
+     * @return List<RString>
+     */
+    public List<RString> load従来型個室老健等負担限度額候補境界層チェックオン(RString 旧措置者区分, FlexibleDate 基準日) {
+        if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+            List<RString> 金額リスト = new ArrayList<>();
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健１, 基準日));
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健２, 基準日));
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健３, 基準日));
+            return 金額リスト作成(金額リスト);
+        } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+            List<RString> 金額リスト = new ArrayList<>();
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健１, 基準日));
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健２, 基準日));
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健３, 基準日));
+            return 金額リスト作成(金額リスト);
+        } else {
+            List<RString> 金額リスト = new ArrayList<>();
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個老健１, 基準日));
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個老健２, 基準日));
+            金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個老健３, 基準日));
+            return 金額リスト作成(金額リスト);
         }
     }
 
@@ -682,6 +941,58 @@ public class FutangendogakuNinteiService {
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の２, 基準日),
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の３, 基準日),
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養３, 基準日));
+            }
+        }
+        return new ArrayList<>();
+    }
+    
+    /**
+     * 全ての多床室負担限度額の取得します。
+     * 
+     * @param 旧措置者区分 RString
+     * @param 基準日 FlexibleDate
+     * @return List<RString>
+     */
+    public List<RString> load多床室負担限度額候補境界層チェックオン(RString 旧措置者区分, FlexibleDate 基準日) {
+        if (旧措置者区分.isEmpty()) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_多床室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_多床室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_多床室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            }
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室３, 基準日));
+                return 金額リスト作成(金額リスト);
+            } else {
+                List<RString> 金額リスト = new ArrayList<>();
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置多床室１, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置多床室２, 基準日));
+                金額リスト.add(getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置多床室３, 基準日));
+                return 金額リスト作成(金額リスト);
             }
         }
         return new ArrayList<>();
@@ -841,6 +1152,16 @@ public class FutangendogakuNinteiService {
         }
 
         return 金額リスト;
+    }
+    
+    private List<RString> 金額リスト作成(List<RString> 金額リスト) {
+        List<RString> all金額リスト = new ArrayList<>();
+        for (RString 金額 : 金額リスト) {
+            if (!all金額リスト.contains(金額)) {
+                all金額リスト.add(金額);
+            }
+        }
+        return all金額リスト;
     }
 
     private RString getBusinessConfig(ConfigNameDBD configName, FlexibleDate 適用日) {
