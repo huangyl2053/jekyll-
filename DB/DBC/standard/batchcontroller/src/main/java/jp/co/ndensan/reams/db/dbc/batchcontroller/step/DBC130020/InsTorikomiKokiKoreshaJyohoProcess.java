@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
 /**
@@ -140,9 +141,9 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString コード文言_生年月日 = new RString("項目設定エラー：生年月日");
     private static final RString コード文言_性別コード = new RString("項目設定エラー：性別コード");
     private static final RString コード文言_現住所 = new RString("項目設定エラー：現住所");
-    private static final RString 性別コード_1 = new RString("1");
-    private static final RString 性別コード_2 = new RString("2");
-    private static final RString 性別コード_3 = new RString("3");
+    private static final RString 性別コード_1 = new RString("0");
+    private static final RString 性別コード_2 = new RString("1");
+    private static final RString 性別コード_3 = new RString("2");
 
     FileSpoolManager spoolManager;
 
@@ -168,7 +169,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(filePath);
+        return new BatchSimpleReader(filePath, Encode.SJIS);
     }
 
     @Override
@@ -183,7 +184,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
             int バイト数 = 0;
             try {
-                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+                バイト数 = result.toString().getBytes(Encode.SJIS.getName()).length;
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -200,7 +201,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         } else if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
             int バイト数 = 0;
             try {
-                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+                バイト数 = result.toString().getBytes(Encode.SJIS.getName()).length;
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -221,7 +222,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {
         int 今バイト数 = 0;
         try {
-            今バイト数 = 判断文字列.toString().getBytes(Encode.UTF_8.getName()).length;
+            今バイト数 = 判断文字列.toString().getBytes(Encode.SJIS.getName()).length;
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -233,7 +234,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         } else {
             try {
                 return new RString(new String(指定バイト数な文字列.toString().
-                        getBytes(Encode.UTF_8.getName()), 0, 指定バイト数, Encode.UTF_8.getName()));
+                        getBytes(Encode.SJIS.getName()), 0, 指定バイト数, Encode.SJIS.getName()));
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -244,7 +245,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private RString get指定位置な文字列(RString 指定な文字列, int 開始位置, int 終了位置) {
         try {
             return new RString(new String(指定な文字列.toString().
-                    getBytes(Encode.UTF_8.getName()), 開始位置, 終了位置, Encode.UTF_8.getName()));
+                    getBytes(Encode.SJIS.getName()), 開始位置, 終了位置, Encode.SJIS.getName()));
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(InsTorikomiKokiKoreshaJyohoProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -371,7 +372,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
         RString 氏名カナ = 取込後期高齢者情報Entity.getカナ氏名();
-        if (氏名カナ.trim().isEmpty()
+        if (!RStringUtil.is全角Only(氏名カナ)
                 || Pattern.compile(正則表現_全角空白.toString()).matcher(氏名カナ).matches()) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_62);
             if (文言設定flag) {
