@@ -74,12 +74,12 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         source.listUpper_7 = get年月日(送付一覧表データ.getDbWT1731Entity().getMoshitateYMD());
         source.listUpper_8 = 送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode();
         RString 申立事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(),
+                DBCCodeShubetsu.総合事業過誤申立事由_様式.getコード(),
                 new Code(送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().substringEmptyOnError(0, 2)));
         source.listUpper_9 = 申立事由;
 
         申立事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
+                DBCCodeShubetsu.総合事業過誤申立事由_理由.getコード(),
                 new Code(送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().substringEmptyOnError(
                                 送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().length() - 2,
                                 送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().length())));
