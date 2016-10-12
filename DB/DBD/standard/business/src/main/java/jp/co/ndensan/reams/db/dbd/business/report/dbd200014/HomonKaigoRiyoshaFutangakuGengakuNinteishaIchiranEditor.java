@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200014;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntit
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -48,6 +50,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
     private static final RString 作成 = new RString("作成");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
@@ -118,7 +121,10 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (null != this.導入団体.getShichosonName_()) {
             source.hokenshaName = this.導入団体.getShichosonName_();
         }
-        set出力順改頁(source);
+        if (null != 出力順) {
+            setiOutputOrder(source);
+            setBreakIoutputOrder(source);
+        }
     }
 
     private void edit被保険者情報Upper1(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
@@ -343,43 +349,48 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         source.listLower_14 = RString.EMPTY;
     }
 
-    private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource
-            set出力順改頁(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
-        List<ISetSortItem> list = new ArrayList<>();
-        if (出力順 != null && 出力順.get設定項目リスト() != null && !出力順.get設定項目リスト().isEmpty()) {
-            list = 出力順.get設定項目リスト();
+    private void setiOutputOrder(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(出力順);
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
+
         }
-        if (list.size() > LISTINDEX_0) {
-            source.shutsuryokujun1 = list.get(LISTINDEX_0).get項目名();
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
         }
-        if (list.size() > LISTINDEX_1) {
-            source.shutsuryokujun2 = list.get(LISTINDEX_1).get項目名();
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
         }
-        if (list.size() > LISTINDEX_2) {
-            source.shutsuryokujun3 = list.get(LISTINDEX_2).get項目名();
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
         }
-        if (list.size() > LISTINDEX_3) {
-            source.shutsuryokujun4 = list.get(LISTINDEX_3).get項目名();
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
         }
-        if (list.size() > LISTINDEX_4) {
-            source.shutsuryokujun5 = list.get(LISTINDEX_4).get項目名();
+    }
+
+    private void setBreakIoutputOrder(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
+        int index1 = 0;
+        List<RString> 改頁list = new ArrayList<>();
+        List<ISetSortItem> list = 出力順.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
         }
-        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
-            source.kaiPege1 = list.get(0).get項目名();
+        for (int i = 0; i < LISTINDEX_5; i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                改頁list.add(list.get(i).get項目名());
+                index1++;
+            }
         }
-        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
-            source.kaiPege2 = list.get(LISTINDEX_1).get項目名();
+        for (int i = index1; i < LISTINDEX_5; i++) {
+            改頁list.add(RString.EMPTY);
         }
-        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
-            source.kaiPege3 = list.get(LISTINDEX_2).get項目名();
-        }
-        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
-            source.kaiPege4 = list.get(LISTINDEX_3).get項目名();
-        }
-        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
-            source.kaiPege5 = list.get(LISTINDEX_4).get項目名();
-        }
-        return source;
+        source.kaiPege1 = 改頁list.get(LISTINDEX_0);
+        source.kaiPege2 = 改頁list.get(LISTINDEX_1);
+        source.kaiPege3 = 改頁list.get(LISTINDEX_2);
+        source.kaiPege4 = 改頁list.get(LISTINDEX_3);
+        source.kaiPege5 = 改頁list.get(LISTINDEX_4);
     }
 
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get申請日(
