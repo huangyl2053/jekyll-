@@ -77,4 +77,30 @@ public class FutangakuNinteiHakkoIchiranReportSource implements IReportSource {
     @ReportPerson(id = "001")
     public RString shikibetsuCode;
 // </editor-fold>
+
+    @ReportItem(name = "yubinNo", length = 10, order = 28)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 29)
+    public RString choikiCode;
+    @ReportItem(name = "banchi", length = 10, order = 30)
+    public RString banchi;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 31)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chikuCode1", length = 10, order = 32)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 10, order = 33)
+    public RString chikuCode2;
+    @ReportItem(name = "setaiCode", length = 10, order = 34)
+    public RString setaiCode;
+    @ReportItem(name = "kanaShimei", length = 10, order = 35)
+    public RString kanaShimei;
+    @ReportItem(name = "seinengappiYMD", length = 10, order = 36)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", length = 10, order = 37)
+    public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode", length = 10, order = 38)
+    public RString shichosonCode;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 10, order = 39)
+    public RString shoKisaiHokenshaNo;
+
 }
