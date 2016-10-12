@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  * バッチ設計_DBC130010_国保資格異動情報取込（取込国保情報Tempに登録）
@@ -76,9 +77,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private static final int 三百四十一 = 341;
     private static final RString 正則表現_数値 = new RString("[0-9]*");
     private static final RString 正則表現_半角空白 = new RString("[ ]*");
-    private static final RString 正則表現_半角文字 = new RString("/[\\u0000-\\u00FF]/");
     private static final RString 正則表現_全角空白 = new RString("/[^uFF00-uFFFF]/g");
-    private static final RString 正則表現_全角文字 = new RString("/[\\uFF00-\\uFFFF]/");
     private static final RString 保険者区分_単独保険者 = new RString("1");
     private static final RString 保険者区分_広域保険者 = new RString("2");
     private static final RString アンダーバー = new RString("_");
@@ -169,7 +168,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(filePath, Encode.UTF_8);
+        return new BatchSimpleReader(filePath, Encode.SJIS);
     }
 
     @Override
@@ -184,7 +183,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
             int バイト数 = 0;
             try {
-                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+                バイト数 = result.toString().getBytes(Encode.SJIS.getName()).length;
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -201,7 +200,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         } else if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
             int バイト数 = 0;
             try {
-                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+                バイト数 = result.toString().getBytes(Encode.SJIS.getName()).length;
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -222,7 +221,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {
         int 今バイト数 = 0;
         try {
-            今バイト数 = 判断文字列.toString().getBytes(Encode.UTF_8.getName()).length;
+            今バイト数 = 判断文字列.toString().getBytes(Encode.SJIS.getName()).length;
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -234,7 +233,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         } else {
             try {
                 return new RString(new String(指定バイト数な文字列.toString().
-                        getBytes(Encode.UTF_8.getName()), 0, 指定バイト数, Encode.UTF_8.getName()));
+                        getBytes(Encode.SJIS.getName()), 0, 指定バイト数, Encode.SJIS.getName()));
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -245,7 +244,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private RString get指定位置な文字列(RString 指定な文字列, int 開始位置, int 終了位置) {
         try {
             return new RString(new String(指定な文字列.toString().
-                    getBytes(Encode.UTF_8.getName()), 開始位置, 終了位置, Encode.UTF_8.getName()));
+                    getBytes(Encode.SJIS.getName()), 開始位置, 終了位置, Encode.SJIS.getName()));
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -333,7 +332,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         }
 
         RString 国保保険証番号 = 取込国保情報Entity.get国保保険証番号();
-        if (!Pattern.compile(正則表現_半角文字.toString()).matcher(国保保険証番号).matches()) {
+        if (!RStringUtil.is半角カナOnly(国保保険証番号)) {
             取込国保情報Entity.setエラーコード(エラーコード_09);
             if (文言設定flag) {
                 取込国保情報Entity.setエラー文言(コード文言_国保保険証番号);
@@ -376,7 +375,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         }
 
         RString 国保保険証番号 = 取込国保情報Entity.get国保保険証番号();
-        if (is空白(国保保険証番号) || !Pattern.compile(正則表現_半角文字.toString()).matcher(国保保険証番号).matches()) {
+        if (is空白(国保保険証番号) || !RStringUtil.is半角カナOnly(国保保険証番号)) {
             取込国保情報Entity.setエラーコード(エラーコード_53);
             if (文言設定flag) {
                 取込国保情報Entity.setエラー文言(コード文言_国保被保険者証番号);
@@ -526,7 +525,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         }
 
         RString 住所 = 取込国保情報Entity.get住所();
-        if (!Pattern.compile(正則表現_全角文字.toString()).matcher(住所).matches()
+        if (!RStringUtil.is全角Only(住所)
                 && !Pattern.compile(正則表現_半角空白.toString()).matcher(住所).matches()) {
             取込国保情報Entity.setエラーコード(エラーコード_66);
             if (文言設定flag) {
@@ -537,7 +536,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         }
 
         RString 住所方書 = 取込国保情報Entity.get方書();
-        if (!Pattern.compile(正則表現_全角文字.toString()).matcher(住所方書).matches()
+        if (!RStringUtil.is全角Only(住所方書)
                 && !Pattern.compile(正則表現_半角空白.toString()).matcher(住所方書).matches()) {
             取込国保情報Entity.setエラーコード(エラーコード_67);
             if (文言設定flag) {
