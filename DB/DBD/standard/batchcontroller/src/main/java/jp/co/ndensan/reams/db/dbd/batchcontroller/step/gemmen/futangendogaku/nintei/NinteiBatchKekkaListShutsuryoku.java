@@ -156,7 +156,8 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         ShikibetsuTaishoPSMSearchKeyBuilder build
                 = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         build.setデータ取得区分(DataShutokuKubun.直近レコード);
-        //基準年月日 <-パラメータの基準日
+        //TODO 基準年月日 <-パラメータの基準日
+//        build.set基準日(parameter.get決定日());
         IShikibetsuTaishoPSMSearchKey key = build.build();
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinteiBatchKekkaListShutsuryokuMybatisParameter(key, 出力順));
     }
@@ -343,9 +344,9 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         if (entity.get今回認定結果().getKetteiYMD() != null && !entity.get今回認定結果().getKetteiYMD().isEmpty()) {
             csvEntity.set今回_決定年月日(entity.get今回認定結果().getKetteiYMD().seireki().toDateString());
         }
-        if (KetteiKubun.承認する.getコード().endsWith(entity.get今回認定結果().getKetteiKubun())) {
+        if (KetteiKubun.承認する.getコード().equals(entity.get今回認定結果().getKetteiKubun())) {
             csvEntity.set今回_決定区分(決定区分_承認);
-        } else if (KetteiKubun.承認しない.getコード().endsWith(entity.get今回認定結果().getKetteiKubun())) {
+        } else if (KetteiKubun.承認しない.getコード().equals(entity.get今回認定結果().getKetteiKubun())) {
             csvEntity.set今回_決定区分(決定区分_却下);
         } else {
             csvEntity.set今回_決定区分(RString.EMPTY);
