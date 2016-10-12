@@ -94,8 +94,8 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         if (this.帳票出力用受給者台帳.get要介護認定情報EntityList() != null
                 && !this.帳票出力用受給者台帳.get要介護認定情報EntityList().isEmpty()) {
             List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-            if (要介護認定情報EntityList.size() - 1 >= index && 要介護認定情報EntityList.get(index).get先頭Entity() != null) {
-                SentoEntity 先頭Entity = 要介護認定情報EntityList.get(index).get先頭Entity();
+            if (要介護認定情報EntityList.size() > 0 && 要介護認定情報EntityList.get(0).get先頭Entity() != null) {
+                SentoEntity 先頭Entity = 要介護認定情報EntityList.get(0).get先頭Entity();
                 get先頭1(source, 先頭Entity);
                 get先頭2(source, 先頭Entity);
             }
