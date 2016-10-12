@@ -59,10 +59,7 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
             RString txtrangeymto = div.getTxtRangeYM().getToValue().getYearMonth().toDateString();
             bparameter.set年月範囲の終了(new FlexibleYearMonth(txtrangeymto));
         }
-
-        if (!div.getTxtJigyoshaNo().getValue().isNullOrEmpty()) {
-            bparameter.set事業者番号(div.getTxtJigyoshaNo().getValue());
-        }
+        bparameter.set事業者番号(div.getCcdShisetsuJohoCommonChildDiv().getNyuryokuShisetsuKodo());
         set地区バッチパラメター(div);
         if (div.getShichosonPanel().isVisible() && div.getCcdHokenshaList().getSelectedItem() != null) {
             bparameter.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
@@ -87,16 +84,16 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
                 set地区(bparameter, TargetArea.全て, RString.EMPTY, RString.EMPTY);
             } else if (div.getDdlChiku().getSelectedKey().equals(KEY1)) {
                 set地区(bparameter, TargetArea.住所,
-                        div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
-                        div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
+                        div.getChushutsuJoken().getCcdJyuusyoStart().get町域コード().value(),
+                        div.getChushutsuJoken().getCcdJyuusyoEnd().get町域コード().value());
             } else if (div.getDdlChiku().getSelectedKey().equals(KEY2)) {
                 set地区(bparameter, TargetArea.行政区,
-                        div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
-                        div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
+                        div.getChushutsuJoken().getCcdGyouseiStart().get行政区コード().value(),
+                        div.getChushutsuJoken().getCcdGyouseiEnd().get行政区コード().value());
             } else {
                 set地区(bparameter, TargetArea.地区,
-                        div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
-                        div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
+                        div.getChushutsuJoken().getCcdChikuStart().get地区2コード().value(),
+                        div.getChushutsuJoken().getCcdChikuEnd().get地区2コード().value());
             }
         }
         return bparameter;
