@@ -33,6 +33,7 @@ public class DBC040030_KogakugassanJikofutangakuInfoHoseiParameter extends Batch
     private static final String KEY_TREATMENTTYPE = "treatmentType";
     //private static final String KEY_DANTAICD = "dantaiCd";
     private static final String KEY_HANDLETIMESTAMP = "handleTimestamp";
+    private static final String KEY_ISPUBLISH = "IsPublish";
 
     @BatchParameter(key = KEY_KAKUNIN_UKETORIYM, name = "確認情報受取年月")
     private RString kakunin_UketoriYM;
@@ -56,5 +57,7 @@ public class DBC040030_KogakugassanJikofutangakuInfoHoseiParameter extends Batch
     // private LasdecCode dantaiCd;
     @BatchParameter(key = KEY_HANDLETIMESTAMP, name = "処理日時")
     private RDateTime handleTimestamp;
+    @BatchParameter(key = KEY_ISPUBLISH, name = "出力フラグが")
+    private boolean 出力フラグが;
 
 }
