@@ -78,6 +78,7 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
         if (国保資格情報インポート用Entitｙ != null) {
             torikomiKokuhoJyohoEntityWriter.insert(国保資格情報インポート用Entitｙ);
+            国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
         }
     }
 
@@ -131,7 +132,6 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     }
 
     private void 取込国保情報より_項目設定(KokuhoShikakuJyohoYoResultEntity entity) {
-        国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
         国保資格情報インポート用Entitｙ.set個人区分コード(entity.get取込国保情報Entity().get個人区分コード());
         国保資格情報インポート用Entitｙ.set国保保険者番号(entity.get取込国保情報Entity().get国保保険者番号());
         国保資格情報インポート用Entitｙ.set国保保険証番号(entity.get取込国保情報Entity().get国保保険証番号());
@@ -147,7 +147,6 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     }
 
     private void 現在国保資格情報より_項目設定(KokuhoShikakuJyohoYoResultEntity entity) {
-        国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
         国保資格情報インポート用Entitｙ.set個人区分コード(entity.get現在国保資格情報Entity().getKojinKubunCode());
         国保資格情報インポート用Entitｙ.set国保保険者番号(entity.get現在国保資格情報Entity().getKokuhoHokenshaNo());
         国保資格情報インポート用Entitｙ.set国保保険証番号(entity.get現在国保資格情報Entity().getKokuhoHokenshoNo());
