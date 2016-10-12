@@ -66,21 +66,21 @@
             resultMap="後期高齢者情報インポート用データResultMap" fetchSize="500">
         (SELECT
         T1.*,
-        D1.*
+        DbT7124KokiKoreishaInfo.*
         FROM
         "tempTorikomiKokuhoJyoho" AS T1
         LEFT OUTER JOIN
-        rgdb."DbT7124KokiKoreishaInfo" AS D1
-        ON D1."shikibetsuCd" = T1."住民コード")
+        rgdb."DbT7124KokiKoreishaInfo" AS DbT7124KokiKoreishaInfo
+        ON DbT7124KokiKoreishaInfo."shikibetsuCd" = T1."住民コード")
         UNION
         (SELECT
         T1.*,
-        D1.*
+        DbT7124KokiKoreishaInfo.*
         FROM
-        rgdb."DbT7124KokiKoreishaInfo" AS D1
+        rgdb."DbT7124KokiKoreishaInfo" AS DbT7124KokiKoreishaInfo
         LEFT OUTER JOIN
         "tempTorikomiKokuhoJyoho" AS T1
-        ON D1."shikibetsuCd" = T1."住民コード")        
+        ON DbT7124KokiKoreishaInfo."shikibetsuCd" = T1."住民コード")        
     </select>
     
     <select resultOrdered="true" id = "get取込後期高齢者情報インポート用Entityリスト" 
@@ -104,36 +104,22 @@
     </delete>
         
     <resultMap  id="後期高齢者情報ResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoRealEntity" autoMapping="false">
-        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="件数" column="件数"/>
         <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
     </resultMap>
     
     <resultMap  id="後期高齢者情報作成用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoDataYoEntity" autoMapping="false">
-        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="データ件数" column="データ件数"/>
         <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
         <association property="宛名識別対象Entity"  resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     
     <resultMap  id="後期高齢者情報インポート用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoResultEntity" autoMapping="false">
-        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id column="dbT7124KokiKoreishaInfo_shikibetsuCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id column="dbT7124KokiKoreishaInfo_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
-        <association property="現在後期高齢者情報"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7124KokiKoreishaInfoMapper.ResultMap_DbT7124KokiKoreishaInfoEntity"/>
+        <association property="現在後期高齢者情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7124KokiKoreishaInfoMapper.ResultMap_DbT7124KokiKoreishaInfoEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_取込後期高齢者情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoEntity" autoMapping="true">
-        <id property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="住民コード" column="住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
-        <id property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="後期高齢保険者番号（市町村）" column="後期高齢保険者番号（市町村）" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="後期高齢保険者番号（広域）" column="後期高齢保険者番号（広域）" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="後期高齢被保険者番号" column="後期高齢被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

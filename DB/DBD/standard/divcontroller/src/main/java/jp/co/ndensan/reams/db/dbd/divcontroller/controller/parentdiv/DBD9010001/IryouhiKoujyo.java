@@ -92,6 +92,7 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_ModifyButton(IryouhiKoujyoDiv div) {
+        getHandler(div).init詳細エリア();
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
         RString 区分 = div.getIryohiKojyoItiranDataGrid().getActiveRow().getHiddenCodeKubun();
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setReadOnly(true);
@@ -113,8 +114,9 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_DeleteButton(IryouhiKoujyoDiv div) {
+        getHandler(div).init詳細エリア();
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
-        RString 区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
+        RString 区分 = div.getIryohiKojyoItiranDataGrid().getActiveRow().getHiddenCodeKubun();
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setReadOnly(true);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getSinseYYMMDD().setReadOnly(true);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().setReadOnly(true);
@@ -141,6 +143,7 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_AddButton(IryouhiKoujyoDiv div) {
+        getHandler(div).init詳細エリア();
         ViewStateHolder.put(ViewStateKeys.状態, 追加);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setSelectedKey(IryoHiKojoNaiyo.主治医意見書確認書.getコード());
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().setValue(RDate.getNowDate());

@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.FutangakuTashoshaInsertProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.GetAtenaJohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.GetGassanJikofutangakuHoseiIchiranProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.GetKogakuGassanJikoFutanGakuMeisaiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.GetKogakuGassanJikoFutanGakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.GetKogakugassanJikofutangakuInfoHoseiTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.KogakuGassanJikoFutanGakuMeiseiUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030.KogakuGassanJikoFutanGakuUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040030.DBC040030_KogakugassanJikofutangakuInfoHoseiParameter;
@@ -29,12 +27,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC040030_KogakugassanJikofutangakuInfoHosei extends BatchFlowBase<DBC040030_KogakugassanJikofutangakuInfoHoseiParameter> {
 
-    private static final int INT_0 = 0;
     private static final String BACKUP3070_TO_TEMPORARY_TABLE = "backupDbT3070KogakuGassanJikoFutanGaku";
     private static final String BACKUP3071_TO_TEMPORARY_TABLE = "backupDbT3071KogakuGassanJikoFutanGakuMeisai";
-    private static final String 高額合算自己負担額取得 = "getKogakuGassanJikoFutanGakuProcess";
-    private static final String 被保険者情報と宛名情報付加 = "getAtenaJohoProcess";
-    private static final String 高額合算自己負担額明細情報取得 = "getKogakuGassanJikoFutanGakuMeisaiProcess";
+    private static final String 中間DB自己負担額データを書き込む = "getKogakugassanJikofutangakuInfoHoseiTempProcess";
     private static final String バッチ高額合算自己負担額情報一括補正サブ処理を呼び出し = "doKogakugassanJikofutangakuInfoHoseiSub";
     private static final String 高額合算自己負担額明細情報更新 = "kogakuGassanJikoFutanGakuMeiseiUpdateProcess";
     private static final String 高額合算自己負担額情報更新 = "kogakuGassanJikoFutanGakuUpdateProcess";
@@ -50,18 +45,12 @@ public class DBC040030_KogakugassanJikofutangakuInfoHosei extends BatchFlowBase<
     protected void defineFlow() {
         executeStep(BACKUP3070_TO_TEMPORARY_TABLE);
         executeStep(BACKUP3071_TO_TEMPORARY_TABLE);
-        executeStep(高額合算自己負担額取得);
-        int 件数 = getResult(Integer.class, new RString(高額合算自己負担額取得),
-                GetKogakuGassanJikoFutanGakuProcess.PARAMETER_OUT_OUTPUTSAKUSEIYMD);
-        if (件数 > INT_0) {
-            executeStep(被保険者情報と宛名情報付加);
-            executeStep(高額合算自己負担額明細情報取得);
-            executeStep(バッチ高額合算自己負担額情報一括補正サブ処理を呼び出し);
-            executeStep(高額合算自己負担額情報更新);
-            executeStep(高額合算自己負担額明細情報更新);
-            executeStep(負担額補正対象者データ更新);
-            executeStep(帳票出力);
-        }
+        executeStep(中間DB自己負担額データを書き込む);
+        executeStep(バッチ高額合算自己負担額情報一括補正サブ処理を呼び出し);
+        executeStep(高額合算自己負担額情報更新);
+        executeStep(高額合算自己負担額明細情報更新);
+        executeStep(負担額補正対象者データ更新);
+        executeStep(帳票出力);
 
     }
 
@@ -88,33 +77,13 @@ public class DBC040030_KogakugassanJikofutangakuInfoHosei extends BatchFlowBase<
     }
 
     /**
-     * 高額合算自己負担額取得のメソッドです。
+     * 中間DB自己負担額データを書き込むのメソッドです。
      *
-     * @return 高額合算自己負担額取得Process
+     * @return 中間DB自己負担額データを書き込むProcess
      */
-    @Step(高額合算自己負担額取得)
-    protected IBatchFlowCommand getKogakuGassanJikoFutanGakuProcess() {
-        return loopBatch(GetKogakuGassanJikoFutanGakuProcess.class).arguments(setParameter()).define();
-    }
-
-    /**
-     * 被保険者情報と宛名情報付加のメソッドです。
-     *
-     * @return 被保険者情報と宛名情報付加Process
-     */
-    @Step(被保険者情報と宛名情報付加)
-    protected IBatchFlowCommand getAtenaJohoProcess() {
-        return loopBatch(GetAtenaJohoProcess.class).arguments(setParameter()).define();
-    }
-
-    /**
-     * 高額合算自己負担額明細情報取得のメソッドです。
-     *
-     * @return 高額合算自己負担額明細情報取得Process
-     */
-    @Step(高額合算自己負担額明細情報取得)
-    protected IBatchFlowCommand getKogakuGassanJikoFutanGakuMeisaiProcess() {
-        return loopBatch(GetKogakuGassanJikoFutanGakuMeisaiProcess.class).arguments(setParameter()).define();
+    @Step(中間DB自己負担額データを書き込む)
+    protected IBatchFlowCommand getKogakugassanJikofutangakuInfoHoseiTempProcess() {
+        return loopBatch(GetKogakugassanJikofutangakuInfoHoseiTempProcess.class).arguments(setParameter()).define();
     }
 
     /**

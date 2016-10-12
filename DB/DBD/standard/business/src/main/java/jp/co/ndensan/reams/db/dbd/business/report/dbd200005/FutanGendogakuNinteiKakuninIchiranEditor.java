@@ -101,9 +101,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         source.printTimeStamp = new RStringBuilder()
                 .append(作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString())
-                .append(RString.FULL_SPACE)
+                .append(RString.HALF_SPACE)
                 .append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
-                .append(RString.FULL_SPACE)
+                .append(RString.HALF_SPACE)
                 .append(作成).toRString();
         source.title = 負担限度額認定一括確認リスト;
         if (null != this.導入団体) {
@@ -132,19 +132,19 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             }
             if (null != this.負担限度額認定確認リスト.get資格取得日()) {
                 source.list2_1 = this.負担限度額認定確認リスト.get資格取得日().wareki().eraType(EraType.KANJI_RYAKU).
-                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (null != this.負担限度額認定確認リスト.get資格喪失日()) {
                 source.list2_2 = this.負担限度額認定確認リスト.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU).
-                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (null != this.負担限度額認定確認リスト.get認定開始日()) {
                 source.list2_3 = this.負担限度額認定確認リスト.get認定開始日().wareki().eraType(EraType.KANJI_RYAKU).
-                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (null != this.負担限度額認定確認リスト.get認定終了日()) {
                 source.list2_4 = this.負担限度額認定確認リスト.get認定終了日().wareki().eraType(EraType.KANJI_RYAKU).
-                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (null != this.負担限度額認定確認リスト.get要介護状態区分コード()
                     && null != this.負担限度額認定確認リスト.get厚労省IF識別コード()) {
@@ -176,11 +176,10 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         if (null != 今回認定結果) {
             FlexibleDate shinseiYMD = 今回認定結果.getShinseiYMD();
             source.list1_6 = (shinseiYMD == null || shinseiYMD.isEmpty()) ? RString.EMPTY : shinseiYMD.wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             FlexibleDate ketteiYMD = 今回認定結果.getKetteiYMD();
-            //ここで、QAがあります。list2_8とlist3_4の逆転。自分の理解で実装した。
             source.list2_8 = (ketteiYMD == null || ketteiYMD.isEmpty()) ? RString.EMPTY : ketteiYMD.wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             RString 決定区分 = 今回認定結果.getKetteiKubun();
             RString 承認 = KetteiKubun.承認する.getコード();
             RString 承認しない = KetteiKubun.承認しない.getコード();
@@ -191,19 +190,20 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             }
             FlexibleDate tekiyoKaishiYMD = 今回認定結果.getTekiyoKaishiYMD();
             source.list1_7 = (tekiyoKaishiYMD == null || tekiyoKaishiYMD.isEmpty()) ? RString.EMPTY : tekiyoKaishiYMD.
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString();
             FlexibleDate tekiyoShuryoYMD = 今回認定結果.getTekiyoShuryoYMD();
             source.list2_9 = (tekiyoShuryoYMD == null || tekiyoShuryoYMD.isEmpty()) ? RString.EMPTY : tekiyoShuryoYMD.
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString();
             if (null != 今回認定結果.getKyusochishaKubun()) {
                 source.list3_5 = 今回認定結果.getKyusochishaKubun();
             }
             RString 利用者負担段階今回 = 今回認定結果.getRiyoshaFutanDankai();
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 前回認定結果 = this.負担限度額認定確認リスト.get前回認定結果();
-            if (利用者負担段階今回 != null && 利用者負担段階今回 != 前回認定結果.getRiyoshaFutanDankai()
-                    && 前回認定結果.getRiyoshaFutanDankai() != null) {
+            if (利用者負担段階今回 != null
+                    && 前回認定結果.getRiyoshaFutanDankai() != null
+                    && 利用者負担段階今回 != 前回認定結果.getRiyoshaFutanDankai()) {
                 source.list1_8 = 星;
             }
         }
@@ -248,31 +248,31 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             FlexibleDate shinseiYMD = 前回認定結果.getShinseiYMD();
             source.list1_12 = (shinseiYMD == null || shinseiYMD.isEmpty()) ? RString.EMPTY : shinseiYMD.
                     wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
 
             FlexibleDate ketteiYMD = 前回認定結果.getKetteiYMD();
             source.list2_13 = (ketteiYMD == null || ketteiYMD.isEmpty()) ? RString.EMPTY : ketteiYMD.
                     wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             RString 決定区分 = 前回認定結果.getKetteiKubun();
             RString 承認 = KetteiKubun.承認する.getコード();
             RString 承認しない = KetteiKubun.承認しない.getコード();
             if (承認.equals(決定区分)) {
-                source.list2_13 = 承認1;
+                source.list3_8 = 承認1;
             } else if (承認しない.equals(決定区分)) {
-                source.list2_13 = 却下;
+                source.list3_8 = 却下;
             } else {
-                source.list2_13 = RString.EMPTY;
+                source.list3_8 = RString.EMPTY;
             }
             FlexibleDate tekiyoKaishiYMD = 前回認定結果.getTekiyoKaishiYMD();
             source.list1_13 = (tekiyoKaishiYMD == null || tekiyoKaishiYMD.isEmpty()) ? RString.EMPTY : tekiyoKaishiYMD.
                     wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
 
             FlexibleDate tekiyoShuryoYMD = 前回認定結果.getTekiyoShuryoYMD();
             source.list2_14 = (tekiyoShuryoYMD == null || tekiyoShuryoYMD.isEmpty()) ? RString.EMPTY : tekiyoShuryoYMD.
                     wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             get前回認定(source, 前回認定結果);
             if (null != 前回認定結果.getRiyoshaFutanDankai()
                     && (RiyoshaFutanDankai.課税層第三段階.getコード().equals(前回認定結果.getRiyoshaFutanDankai()))) {

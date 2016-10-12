@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,12 +25,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC020080ProcessParameter implements IBatchProcessParameter {
 
     private RDateTime 処理日時;
-    private RDate 申請対象開始日;
-    private RDate 申請対象終了日;
+    private FlexibleDate 申請対象開始日;
+    private FlexibleDate 申請対象終了日;
     private boolean 出力フラグ;
     private Long 帳票出力順ID;
     private LasdecCode 市町村コード;
-    private boolean 事業分フラグ;
     private RString 出力順;
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
     private RString 処理区分;
@@ -50,22 +49,19 @@ public class DBC020080ProcessParameter implements IBatchProcessParameter {
      * @param 出力フラグ 出力フラグ
      * @param 帳票出力順ID 帳票出力順ID
      * @param 市町村コード 市町村コード
-     * @param 事業分フラグ boolean
      */
     public DBC020080ProcessParameter(RDateTime 処理日時,
-            RDate 申請対象開始日,
-            RDate 申請対象終了日,
+            FlexibleDate 申請対象開始日,
+            FlexibleDate 申請対象終了日,
             boolean 出力フラグ,
             Long 帳票出力順ID,
-            LasdecCode 市町村コード,
-            boolean 事業分フラグ) {
+            LasdecCode 市町村コード) {
         this.処理日時 = 処理日時;
         this.申請対象開始日 = 申請対象開始日;
         this.申請対象終了日 = 申請対象終了日;
         this.出力フラグ = 出力フラグ;
         this.帳票出力順ID = 帳票出力順ID;
         this.市町村コード = 市町村コード;
-        this.事業分フラグ = 事業分フラグ;
     }
 
     /**
@@ -74,15 +70,6 @@ public class DBC020080ProcessParameter implements IBatchProcessParameter {
      * @return DBC020080MyBatisParameter
      */
     public DBC020080MyBatisParameter toDBC020080MyBatisParameter() {
-        return new DBC020080MyBatisParameter(
-                申請対象開始日 == null ? RString.EMPTY : 申請対象開始日.toDateString(),
-                申請対象終了日 == null ? RString.EMPTY : 申請対象終了日.toDateString(),
-                処理日時 == null ? RString.EMPTY : 処理日時.getDate().toDateString(),
-                出力順,
-                市町村コード.value(),
-                ShoriName.高額合算自己負担額計算登録.get名称(),
-                処理日時 == null ? RString.EMPTY : new RString(処理日時.getYear()),
-                事業分フラグ,
-                宛名検索条件);
+        return new DBC020080MyBatisParameter(出力順, ShoriName.高額合算自己負担額計算登録.get名称());
     }
 }

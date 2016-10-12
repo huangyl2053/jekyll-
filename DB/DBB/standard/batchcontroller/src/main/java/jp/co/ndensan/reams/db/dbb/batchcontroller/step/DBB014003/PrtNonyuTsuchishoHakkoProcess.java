@@ -93,7 +93,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
-import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -470,10 +469,10 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         保険料納入通知書仮算定情報.set口座情報(new Koza(entity.get特定口座()));
         保険料納入通知書仮算定情報.set徴収方法情報_更正前(get徴収方法情報(entity.get計算後情報_更正前()));
         保険料納入通知書仮算定情報.set徴収方法情報_更正後(get徴収方法情報(entity.get計算後情報_更正後()));
-        保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正前(new NenkinTokuchoKaifuJoho(
-                entity.get年金特徴回付情報_更正前()));
-        保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正後(new NenkinTokuchoKaifuJoho(
-                entity.get年金特徴回付情報_更正後()));
+//        保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正前(new NenkinTokuchoKaifuJoho(
+//                entity.get年金特徴回付情報_更正前()));
+//        保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正後(new NenkinTokuchoKaifuJoho(
+//                entity.get年金特徴回付情報_更正後()));
         保険料納入通知書仮算定情報.set収入情報(get収入情報(entity.get計算後情報_更正後()));
         保険料納入通知書仮算定情報.set帳票制御共通(帳票制御共通);
         NonyuTsuchiShoJohoFactory 納入通知書情報作成サービス = new NonyuTsuchiShoJohoFactory();

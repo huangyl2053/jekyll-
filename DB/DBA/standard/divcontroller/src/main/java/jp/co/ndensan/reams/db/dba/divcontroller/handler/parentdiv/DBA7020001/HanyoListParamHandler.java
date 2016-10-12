@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA740010.DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA760010.DBA760010_HanyoListSeikatsuHogoJukyushaParameter;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA720010.DBA720010_HanyoListTaShichosonJushochiTokureishaParameter;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA730010.DBA730010_HanyoListTekiyoJogaishaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA740010.DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA760010.DBA760010_HanyoListSeikatsuHogoJukyushaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
@@ -407,7 +407,7 @@ public class HanyoListParamHandler {
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-            && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
             市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
             市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
         }
@@ -448,7 +448,7 @@ public class HanyoListParamHandler {
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-            && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
             市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
             市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
         }
@@ -489,7 +489,7 @@ public class HanyoListParamHandler {
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-            && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
             市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
             市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
         }
@@ -530,7 +530,7 @@ public class HanyoListParamHandler {
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-            && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
             市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
             市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
         }

@@ -35,14 +35,6 @@ public interface ITaishoSetaiinIdoMapper {
     TaishoSetaiinIdoEntity select管理マスタ(TaishoSetaiinIdoMybatisParameter parameter);
 
     /**
-     * 基準収入額適用管理マスタを取得します。
-     *
-     * @param parameter TaishoSetaiinIdoMybatisParameter
-     * @return List<DbT3116KijunShunyugakuTekiyoKanriEntity>
-     */
-    List<DbT3116KijunShunyugakuTekiyoKanriEntity> select基準収入額適用管理情報(TaishoSetaiinIdoMybatisParameter parameter);
-
-    /**
      * 基準収入額適用管理マスタねんど年度 によっての抽出。
      *
      * @param parameter TaishoSetaiinIdoMybatisParameter

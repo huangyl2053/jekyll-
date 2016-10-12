@@ -89,12 +89,12 @@ public class DbT5913KoroshoErrorTempOutputProcess extends BatchProcessBase<DbT59
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                new RString("認定調査員情報エラーリストファイル.csv"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("認定調査員情報エラーリストファイル.CSV"),
                 new RString("ChosainJohoErrList.CSV"),
+                EUC_ENTITY_ID.toRString(),
                 new RenkeiDataTorikomiBusiness().get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new RenkeiDataTorikomiBusiness().get出力条件(processParamter));
         OutputJokenhyoFactory.createInstance(item).print();

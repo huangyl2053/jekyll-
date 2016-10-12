@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujisseki;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
-import jp.co.ndensan.reams.uz.uza.io.fld.FldField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,41 +20,41 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HokenshaKyufujissekiReprotCsvEntity {
 
-    @FldField(order = 10, length = 10)
+    @CsvField(order = 10, name = "送付年月")
     private RString 送付年月;
-    @FldField(order = 20, length = 31)
+    @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
-    @FldField(order = 30, length = 8)
+    @CsvField(order = 30, name = "保険者番号")
     private RString 保険者番号;
     @CsvField(order = 40, name = "保険者名")
     private RString 保険者名;
     @CsvField(order = 50, name = "№")
     private RString no;
-    @FldField(order = 60, length = 4)
+    @CsvField(order = 60, name = "入力識別番号")
     private RString 入力識別番号;
     @CsvField(order = 70, name = "入力識別名称")
     private RString 入力識別名称;
-    @FldField(order = 80, length = 1)
+    @CsvField(order = 80, name = "作成区分")
     private RString 作成区分;
     @CsvField(order = 90, name = "作成区分名")
     private RString 作成区分名;
-    @FldField(order = 100, length = 10)
+    @CsvField(order = 100, name = "被保険者番号")
     private RString 被保険者番号;
     @CsvField(order = 110, name = "被保険者カナ氏名")
     private RString 被保険者カナ氏名;
     @CsvField(order = 120, name = "被保険者氏名")
     private RString 被保険者氏名;
-    @FldField(order = 130, length = 6)
+    @CsvField(order = 130, name = "サービス提供年月")
     private RString サービス提供年月;
-    @FldField(order = 140, length = 4)
+    @CsvField(order = 140, name = "給付実績区分")
     private RString 給付実績区分;
     @CsvField(order = 150, name = "給付実績区分名")
     private RString 給付実績区分名;
-    @FldField(order = 160, length = 10)
+    @CsvField(order = 160, name = "事業者番号")
     private RString 事業者番号;
     @CsvField(order = 170, name = "事業者名")
     private RString 事業者名;
-    @FldField(order = 180, length = 10)
+    @CsvField(order = 180, name = "整理番号")
     private RString 整理番号;
     @CsvField(order = 190, name = "作成レコード種別・01基本")
     private RString 作成レコード種別_01基本;

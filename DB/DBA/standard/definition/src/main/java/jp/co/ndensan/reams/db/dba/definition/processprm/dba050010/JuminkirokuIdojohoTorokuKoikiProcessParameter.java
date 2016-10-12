@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.dba050010;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotorokukoiki.JuminkirokuIdojohoTorokuKoikiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -24,16 +23,19 @@ import lombok.Setter;
 public class JuminkirokuIdojohoTorokuKoikiProcessParameter implements IBatchProcessParameter {
 
     private YMDHMS syorinichiji;
-    private List<RString> shichosonCode;
+    private RString shichosonCode;
 
     /**
      * コンストラクタ。
      *
      * @param syorinichiji 処理日時
+     * @param shichosoncode 市町村コード
      */
     public JuminkirokuIdojohoTorokuKoikiProcessParameter(
-            YMDHMS syorinichiji) {
+            YMDHMS syorinichiji,
+            RString shichosoncode) {
         this.syorinichiji = syorinichiji;
+        this.shichosonCode = shichosonCode;
     }
 
     /**
@@ -42,8 +44,7 @@ public class JuminkirokuIdojohoTorokuKoikiProcessParameter implements IBatchProc
      * @return JuminkirokuIdojohoTorokuKoikiMybatisParameter
      */
     public JuminkirokuIdojohoTorokuKoikiMybatisParameter toJuminkirokuIdojohoTorokuKoikiMybatisParameter() {
-        return new JuminkirokuIdojohoTorokuKoikiMybatisParameter(
-                syorinichiji, shichosonCode);
+        return JuminkirokuIdojohoTorokuKoikiMybatisParameter.createMybatisParameter(syorinichiji, shichosonCode);
     }
 
 }

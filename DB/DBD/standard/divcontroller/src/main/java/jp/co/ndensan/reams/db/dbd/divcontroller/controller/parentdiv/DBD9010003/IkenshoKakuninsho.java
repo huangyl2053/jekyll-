@@ -79,7 +79,7 @@ public class IkenshoKakuninsho {
         RString メニューID = ResponseHolder.getMenuID();
         ViewStateHolder.put(ViewStateKeys.メニューID, メニューID);
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
-        if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
+        if (!iryoHiKojoKakuninSinsei.checkuJukyusha(taishoshaKey.get被保険者番号())) {
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
         List<IryohiKojo> 医療費控除情報リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(new HihokenshaNo(被保険者番号),

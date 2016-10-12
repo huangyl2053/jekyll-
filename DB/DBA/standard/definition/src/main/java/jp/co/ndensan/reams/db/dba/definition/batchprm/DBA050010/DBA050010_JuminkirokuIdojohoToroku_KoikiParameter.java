@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.dba050010.JuminkirokuIdo
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,9 +26,12 @@ public class DBA050010_JuminkirokuIdojohoToroku_KoikiParameter extends BatchPara
     private static final long serialVersionUID = 1L;
 
     private static final String SYORINICHIJI = "処理日時";
+    private static final String SHICHOSONCODE = "市町村コード";
 
     @BatchParameter(key = SYORINICHIJI, name = "処理日時")
     private YMDHMS syorinichiji;
+    @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
+    private RString shichosoncode;
 
     /**
      * バーチのパラメータを作成します。
@@ -36,6 +40,6 @@ public class DBA050010_JuminkirokuIdojohoToroku_KoikiParameter extends BatchPara
      */
     public JuminkirokuIdojohoTorokuKoikiProcessParameter toJuminkirokuIdojohoTorokuKoikiProcessParameter() {
         return new JuminkirokuIdojohoTorokuKoikiProcessParameter(
-                syorinichiji);
+                syorinichiji, shichosoncode);
     }
 }

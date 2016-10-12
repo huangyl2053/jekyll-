@@ -32,7 +32,7 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select標準負担");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
 
-    private static final RString SPLIT = new RString("|");
+    private static final RString SPLIT = new RString(",");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
     private List<RString> 標準負担KeyList;

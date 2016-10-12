@@ -51,7 +51,6 @@ public class KyufuJissekiInHenkyakuH1KousinProcess extends BatchProcessBase<Kyuf
     private static final RString 給付実績居宅サービス計画費TBL名 = new RString("DbT3025KyufujissekiKyotakuService");
     private static final RString 給付実績福祉用具販売費TBL名 = new RString("DbT3026KyufujissekiFukushiYoguHanbaihi");
     private static final RString 給付実績住宅改修費TBL名 = new RString("DbT3027KyufujissekiJutakuKaishuhi");
-    private static final RString 給付実績高額介護サービス費TBL名 = new RString("DbT3028KyufujissekiKogakuKaigoServicehi");
     private static final RString 給付実績特定入所者介護サービス費用TBL名 = new RString("DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo");
     private static final RString 給付実績社会福祉法人軽減額TBL名 = new RString("DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku");
     private static final RString 給付実績ケアマネジメント費TBL名 = new RString("DbT3031KyufuJissekiCareManagementHi");
@@ -116,8 +115,6 @@ public class KyufuJissekiInHenkyakuH1KousinProcess extends BatchProcessBase<Kyuf
         parameter.set表名(給付実績福祉用具販売費TBL名);
         mapper.delete給付実績H1の新規修正関連データ(parameter);
         parameter.set表名(給付実績住宅改修費TBL名);
-        mapper.delete給付実績H1の新規修正関連データ(parameter);
-        parameter.set表名(給付実績高額介護サービス費TBL名);
         mapper.delete給付実績H1の新規修正関連データ(parameter);
         parameter.set表名(給付実績特定入所者介護サービス費用TBL名);
         mapper.delete給付実績H1の新規修正関連データ(parameter);

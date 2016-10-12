@@ -108,12 +108,139 @@
                 WHERE "${表名}"."inputShikibetsuNo" = 削除対象."dbWT3017_inputShikibetsuNo"
                 AND "${表名}"."hiHokenshaNo" = 削除対象.dbWT0001HihokenshaTemp_hihokenshaNo
                 AND "${表名}"."serviceTeikyoYM" = 削除対象."dbWT3017_serviceTeikyoYM"
-                <if test="表名.toString()!='DbT3028KyufujissekiKogakuKaigoServicehi'">  
                 AND "${表名}"."jigyoshoNo" = 削除対象."dbWT3017_jigyoshoNo"
                 AND "${表名}"."toshiNo" = 削除対象."dbWT3017_toshiNo"	
-                </if>
         )
     </delete>
+    
+    <select id="select給付実績H1の取消データ" resultMap="resultMap_KyufuJissekiInHenkyakuH1DataEntity" fetchSize="500" resultOrdered="true">
+        SELECT H1.*, 基本.*
+        FROM (
+                SELECT <include refid="allColumns_DbWT111AKyufuJissekiH1Temp" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+                FROM "DbWT111AKyufuJissekiH1" INNER JOIN "DbWT0001Hihokensha" AS TEMP
+                ON "DbWT111AKyufuJissekiH1"."renban" = TEMP."meisaiRenban"
+                WHERE "DbWT111AKyufuJissekiH1"."kyufuJissekiKubunCode" = '2'
+                AND "DbWT111AKyufuJissekiH1"."kyufuSakuseiKubunCode" = '3'
+        ) AS H1
+        INNER JOIN 
+        (
+                SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
+                FROM rgdb."DbT3017KyufujissekiKihon"
+                WHERE "DbT3017KyufujissekiKihon"."kokanShikibetsuNo" LIKE '113%'
+                AND NOT EXISTS (
+                	SELECT 'X' FROM rgdb."DbT3017KyufujissekiKihon" AS 基本2
+                	WHERE "DbT3017KyufujissekiKihon"."kokanShikibetsuNo" = 基本2."kokanShikibetsuNo"
+                	AND "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = 基本2."inputShikibetsuNo"
+                	AND "DbT3017KyufujissekiKihon"."hiHokenshaNo" = 基本2."hiHokenshaNo"
+                	AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = 基本2."serviceTeikyoYM"
+                	AND "DbT3017KyufujissekiKihon"."jigyoshoNo" = 基本2."jigyoshoNo"
+                	AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" = 基本2."kyufuSakuseiKubunCode"
+                	AND "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" = 基本2."kyufuJissekiKubunCode"
+                	AND "DbT3017KyufujissekiKihon"."atoHokenSeikyugaku" = 基本2."atoHokenSeikyugaku"
+                	AND "DbT3017KyufujissekiKihon"."seiriNo" = 基本2."seiriNo"
+                	AND "DbT3017KyufujissekiKihon"."shinsaYM" <![CDATA[<]]> 基本2."shinsaYM"
+                )
+        ) AS 基本
+        ON H1."dbWT3017_inputShikibetsuNo" = 基本."dbT3017_inputShikibetsuNo"
+        AND H1.dbWT0001HihokenshaTemp_hihokenshaNo = 基本."dbT3017_hiHokenshaNo"
+        AND H1."dbWT3017_serviceTeikyoYM" = 基本."dbT3017_serviceTeikyoYM"
+        AND H1."dbWT3017_jigyoshoNo" = 基本."dbT3017_jigyoshoNo"
+        AND H1."dbWT3017_kyufuSakuseiKubunCode" = 基本."dbT3017_kyufuSakuseiKubunCode"
+        AND H1."dbWT3017_kyufuJissekiKubunCode" = 基本."dbT3017_kyufuJissekiKubunCode"
+        AND H1."dbWT3017_atoHokenSeikyugaku" = 基本."dbT3017_atoHokenSeikyugaku"
+        AND H1."dbWT3017_seiriNo" = 基本."dbT3017_seiriNo"
+    </select>
+    
+    <delete id="delete給付実績H1の取消関連データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120050.KyufuJissekiInMybatisParameter">
+        DELETE FROM rgdb."${表名}" 
+        WHERE EXISTS (
+                SELECT 'X' FROM (
+                        SELECT <include refid="allColumns_DbWT111AKyufuJissekiH1Temp" />,
+                        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+                        FROM "DbWT111AKyufuJissekiH1" INNER JOIN "DbWT0001Hihokensha" AS TEMP
+                        ON "DbWT111AKyufuJissekiH1"."renban" = TEMP."meisaiRenban"
+                        WHERE "DbWT111AKyufuJissekiH1"."kyufuJissekiKubunCode" = '2'
+                        AND "DbWT111AKyufuJissekiH1"."kyufuSakuseiKubunCode" = '3'
+                        AND "DbWT111AKyufuJissekiH1"."hokenshaHoyuKyufujissekiJohoSakujoFlag" = true
+                ) AS 削除対象
+                WHERE "${表名}"."inputShikibetsuNo" = 削除対象."dbWT3017_inputShikibetsuNo"
+                AND "${表名}"."hiHokenshaNo" = 削除対象.dbWT0001HihokenshaTemp_hihokenshaNo
+                AND "${表名}"."serviceTeikyoYM" = 削除対象."dbWT3017_serviceTeikyoYM"
+                AND "${表名}"."jigyoshoNo" = 削除対象."dbWT3017_jigyoshoNo"
+                AND "${表名}"."toshiNo" = 削除対象."dbWT3017_toshiNo"	
+        )
+    </delete>
+    
+    <select id="select給付実績D8の新規修正データ" resultMap="resultMap_KyufuJissekiInHenkyakuD8DataEntity" fetchSize="500" resultOrdered="true">
+        SELECT D8.*, 高額.*
+        FROM (
+                SELECT <include refid="allColumns_DbWT111JKyufuJissekiD8Temp" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+                FROM "DbWT111JKyufuJissekiD8" INNER JOIN "DbWT0001Hihokensha" AS TEMP
+                ON "DbWT111JKyufuJissekiD8"."renban" = TEMP."meisaiRenban"
+                WHERE "DbWT111JKyufuJissekiD8"."kyufuJissekiKubunCode" = '2'
+                AND "DbWT111JKyufuJissekiD8"."kyufuSakuseiKubunCode" in ('1','2')
+        ) AS D8
+        INNER JOIN 
+        (
+                SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3028KyufujissekiKogakuKaigoServicehiMapper.allColumns_DbT3028KyufujissekiKogakuKaigoServicehi" />
+                FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi"
+                WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '113%'
+                OR (
+                	"DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '111%'
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."sakuseiKubun" = '1'
+                )
+        ) AS 高額
+        ON D8."dbWT3028KyufujissekiKogakuKaigoServicehi_inputShikibetsuNo" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_inputShikibetsuNo"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_recodeShubetsuCode" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_recodeShubetsuCode"
+        AND D8.dbWT0001HihokenshaTemp_hihokenshaNo = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_hiHokenshaNo"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_serviceTeikyoYM" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_serviceTeikyoYM"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuSakuseiKubunCode" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_kyufuSakuseiKubunCode"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuJissekiKubunCode" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_kyufuJissekiKubunCode"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_shinsaYM" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_shinsaYM"
+    </select>
+    
+    <select id="select給付実績D8の取消データ" resultMap="resultMap_KyufuJissekiInHenkyakuD8DataEntity" fetchSize="500" resultOrdered="true">
+        SELECT D8.*, 高額.*
+        FROM (
+                SELECT <include refid="allColumns_DbWT111JKyufuJissekiD8Temp" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.allColumns_DbWT0001Hihokensha" />
+                FROM "DbWT111JKyufuJissekiD8" INNER JOIN "DbWT0001Hihokensha" AS TEMP
+                ON "DbWT111JKyufuJissekiD8"."renban" = TEMP."meisaiRenban"
+                WHERE "DbWT111JKyufuJissekiD8"."kyufuJissekiKubunCode" = '2'
+                AND "DbWT111JKyufuJissekiD8"."kyufuSakuseiKubunCode" = '3'
+        ) AS D8
+        INNER JOIN 
+        (
+                SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3028KyufujissekiKogakuKaigoServicehiMapper.allColumns_DbT3028KyufujissekiKogakuKaigoServicehi" />
+                FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi"
+                WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '113%'
+                OR (
+                	"DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '111%'
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."sakuseiKubun" = '1'
+                )
+                AND NOT EXISTS (
+                	SELECT 'X' FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS 高額2
+                	WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" = 高額2."kokanShikibetsuNo"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo" = 高額2."inputShikibetsuNo"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."recodeShubetsuCode" = 高額2."recodeShubetsuCode"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."hiHokenshaNo" = 高額2."hiHokenshaNo"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM" = 高額2."serviceTeikyoYM"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."kyufuSakuseiKubunCode" = 高額2."kyufuSakuseiKubunCode"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."kyufuJissekiKubunCode" = 高額2."kyufuJissekiKubunCode"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."shikyugaku" = 高額2."shikyugaku"
+                	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."shinsaYM" <![CDATA[<]]> 高額2."shinsaYM"
+                )
+        ) AS 高額
+        ON D8."dbWT3028KyufujissekiKogakuKaigoServicehi_inputShikibetsuNo" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_inputShikibetsuNo"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_recodeShubetsuCode" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_recodeShubetsuCode"
+        AND D8.dbWT0001HihokenshaTemp_hihokenshaNo = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_hiHokenshaNo"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_serviceTeikyoYM" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_serviceTeikyoYM"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuSakuseiKubunCode" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_kyufuSakuseiKubunCode"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuJissekiKubunCode" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_kyufuJissekiKubunCode"
+        AND D8."dbWT3028KyufujissekiKogakuKaigoServicehi_shikyugaku" = 高額."dbT3028KyufujissekiKogakuKaigoServicehi_shikyugaku"
+    </select>
     
     <select id="select給付実績一時の最大連番" resultType="java.lang.Integer" fetchSize="1" resultOrdered="true">
         SELECT 
@@ -827,6 +954,41 @@
          "DbWT111JKyufuJissekiD8"."kanriNo" as "dbT3028KyufujissekiKogakuKaigoServicehi_kanriNo",
          "DbWT111JKyufuJissekiD8"."hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" as "dbT3028KyufujissekiKogakuKaigoServicehi_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag"
     </sql>
+    
+    <!--D8-->
+    <sql id="allColumns_DbWT111JKyufuJissekiD8Temp">
+         "DbWT111JKyufuJissekiD8"."renban" as "dbWT3028KyufujissekiKogakuKaigoServicehi_renban",
+         "DbWT111JKyufuJissekiD8"."recordNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_recordNo",
+         "DbWT111JKyufuJissekiD8"."kokanJohoShikibetsuNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kokanJohoShikibetsuNo",
+         "DbWT111JKyufuJissekiD8"."inputShikibetsuNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_inputShikibetsuNo",
+         "DbWT111JKyufuJissekiD8"."recodeShubetsuCode" as "dbWT3028KyufujissekiKogakuKaigoServicehi_recodeShubetsuCode",
+         "DbWT111JKyufuJissekiD8"."shokisaiHokenshaNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_shokisaiHokenshaNo",
+         "DbWT111JKyufuJissekiD8"."hiHokenshaNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_hiHokenshaNo",
+         "DbWT111JKyufuJissekiD8"."serviceTeikyoYM" as "dbWT3028KyufujissekiKogakuKaigoServicehi_serviceTeikyoYM",
+         "DbWT111JKyufuJissekiD8"."kyufuSakuseiKubunCode" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuSakuseiKubunCode",
+         "DbWT111JKyufuJissekiD8"."kyufuJissekiKubunCode" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuJissekiKubunCode",
+         "DbWT111JKyufuJissekiD8"."renban" as "dbWT3028KyufujissekiKogakuKaigoServicehi_toshiNo",
+         "DbWT111JKyufuJissekiD8"."uketsukeYMD" as "dbWT3028KyufujissekiKogakuKaigoServicehi_uketsukeYMD",
+         "DbWT111JKyufuJissekiD8"."ketteiYMD" as "dbWT3028KyufujissekiKogakuKaigoServicehi_ketteiYMD",
+         "DbWT111JKyufuJissekiD8"."kohi1FutanNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi1FutanNo",
+         "DbWT111JKyufuJissekiD8"."kohi2FutanNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi2FutanNo",
+         "DbWT111JKyufuJissekiD8"."kohi3FutanNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi3FutanNo",
+         "DbWT111JKyufuJissekiD8"."riyoshaFutangaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_riyoshaFutangaku",
+         "DbWT111JKyufuJissekiD8"."kohi1Futangaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi1Futangaku",
+         "DbWT111JKyufuJissekiD8"."kohi2Futangaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi2Futangaku",
+         "DbWT111JKyufuJissekiD8"."kohi3Futangaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi3Futangaku",
+         "DbWT111JKyufuJissekiD8"."shikyugaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_shikyugaku",
+         "DbWT111JKyufuJissekiD8"."kohi1Shikyugaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi1Shikyugaku",
+         "DbWT111JKyufuJissekiD8"."kohi2Shikyugaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi2Shikyugaku",
+         "DbWT111JKyufuJissekiD8"."kohi3Shikyugaku" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kohi3Shikyugaku",
+         "DbWT111JKyufuJissekiD8"."shinsaYM" as "dbWT3028KyufujissekiKogakuKaigoServicehi_shinsaYM",
+         "DbWT111JKyufuJissekiD8"."seiriNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_seiriNo",
+         "DbWT111JKyufuJissekiD8"."sofuYM" as "dbWT3028KyufujissekiKogakuKaigoServicehi_sofuYM",
+         "DbWT111JKyufuJissekiD8"."torikomiYM" as "dbWT3028KyufujissekiKogakuKaigoServicehi_torikomiYM",
+         "DbWT111JKyufuJissekiD8"."sakuseiKubun" as "dbWT3028KyufujissekiKogakuKaigoServicehi_sakuseiKubun",
+         "DbWT111JKyufuJissekiD8"."kanriNo" as "dbWT3028KyufujissekiKogakuKaigoServicehi_kanriNo",
+         "DbWT111JKyufuJissekiD8"."hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" as "dbWT3028KyufujissekiKogakuKaigoServicehi_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag"
+    </sql>
 
     <!--D9-->
     <sql id="allColumns_DbWT111KKyufuJissekiD9">
@@ -1151,8 +1313,8 @@
     </resultMap>
 
     <resultMap id="ResultMap_DbWT111AKyufuJissekiH1Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111AKyufuJissekiH1TempEntity" autoMapping="true">
-        <result property="renban" column="dbWT3017_renban"/>
-        <result property="recordNo" column="dbWT3017_recordNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="dbWT3017_renban"/>
+        <id property="recordNo" column="dbWT3017_recordNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kokanShikibetsuNo" column="dbWT3017_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="inputShikibetsuNo" column="dbWT3017_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
         <result property="recodeShubetsuCode" column="dbWT3017_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1251,5 +1413,49 @@
         <result property="torikomiYM" column="dbWT3017_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dokujiSakuseiKubun" column="dbWT3017_dokujiSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaHoyuKyufujissekiJohoSakujoFlag" column="dbWT3017_hokenshaHoyuKyufujissekiJohoSakujoFlag" />
+    </resultMap>
+    
+    <resultMap id="resultMap_KyufuJissekiInHenkyakuD8DataEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.KyufuJissekiInHenkyakuD8DataEntity"
+               autoMapping="true">
+        <id column="dbWT3028KyufujissekiKogakuKaigoServicehi_renban" />
+        <id column="dbWT3028KyufujissekiKogakuKaigoServicehi_recordNo" />
+        <association property="給付実績D8" resultMap="ResultMap_DbWT111JKyufuJissekiD8Entity"/>
+        <association property="被保険者一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
+        <association property="給付実績高額介護サービス費" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3028KyufujissekiKogakuKaigoServicehiMapper.ResultMap_DbT3028KyufujissekiKogakuKaigoServicehiEntity"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_DbWT111JKyufuJissekiD8Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111JKyufuJissekiD8Entity" autoMapping="true">
+        <id property="renban" column="dbWT3028KyufujissekiKogakuKaigoServicehi_renban"/>
+        <id property="recordNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_recordNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokanJohoShikibetsuNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <result property="inputShikibetsuNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="recodeShubetsuCode" column="dbWT3028KyufujissekiKogakuKaigoServicehi_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokisaiHokenshaNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="hiHokenshaNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="serviceTeikyoYM" column="dbWT3028KyufujissekiKogakuKaigoServicehi_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kyufuSakuseiKubunCode" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuJissekiKubunCode" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="toshiNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="uketsukeYMD" column="dbWT3028KyufujissekiKogakuKaigoServicehi_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD" column="dbWT3028KyufujissekiKogakuKaigoServicehi_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kohi1FutanNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi1FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kohi2FutanNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi2FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kohi3FutanNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi3FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutangaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_riyoshaFutangaku" />
+        <result property="kohi1Futangaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi1Futangaku" />
+        <result property="kohi2Futangaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi2Futangaku" />
+        <result property="kohi3Futangaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi3Futangaku" />
+        <result property="shikyugaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_shikyugaku" />
+        <result property="kohi1Shikyugaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi1Shikyugaku" />
+        <result property="kohi2Shikyugaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi2Shikyugaku" />
+        <result property="kohi3Shikyugaku" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kohi3Shikyugaku" />
+        <result property="shinsaYM" column="dbWT3028KyufujissekiKogakuKaigoServicehi_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="seiriNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuYM" column="dbWT3028KyufujissekiKogakuKaigoServicehi_sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="torikomiYM" column="dbWT3028KyufujissekiKogakuKaigoServicehi_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="sakuseiKubun" column="dbWT3028KyufujissekiKogakuKaigoServicehi_sakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanriNo" column="dbWT3028KyufujissekiKogakuKaigoServicehi_kanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" column="dbWT3028clu_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" />
     </resultMap>
 </mapper>

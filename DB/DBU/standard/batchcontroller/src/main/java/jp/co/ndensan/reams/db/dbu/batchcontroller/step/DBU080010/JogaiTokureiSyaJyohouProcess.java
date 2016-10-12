@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.core.tokuteikojinjohoteikyo.TokuteiKojinHanKanriTokuteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
@@ -45,7 +45,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
     private JogaiTokureiSyaJyohouProcessParameter processParameter;
     private JogaiTokureiSyaJyohouMybatisParameter mybatisParameter;
-    private List<TokuteiKojinHanKanriTokuteiJohoBusiness> 特定個人版管理特定情報;
+    private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
 

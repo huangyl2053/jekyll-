@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.euc.dbb213001.TokuchoSofuJohoRenkeiCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiProcessParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.FlowEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -70,6 +72,8 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     private Map<RString, FldWriter> ファイル出力Z99_550Map;
     private Map<RString, FldWriter> ファイル出力DE__Z12Map;
     private Map<RString, FldWriter> ファイル出力DE__Z1AMap;
+    private Map<RString, RString> ファイルOutputMap;
+    private Map<RString, Integer> レコード件数OutputMap;
     private RString 市町村;
     private RString 通知内容コード;
     private RString 特別徴収義務者コード;
@@ -78,12 +82,21 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
     private int count = 0;
     private int レコード件数 = 2;
     private TokuchoSofuJohoRenkeiEntity 特徴送付情報連携情報;
+    /**
+     * returnEntity
+     */
+    public static final RString PARAMETER_OUT_RETURNENTITY;
+    private OutputParameter<FlowEntity> returnEntity;
 
     @BatchWriter
     private FldWriter fldZ1A000Writer;
     private FldWriter fldZ99_550Writer;
     private FldWriter fldDE__Z12Writer;
     private FldWriter fldDE__Z1AWriter;
+
+    static {
+        PARAMETER_OUT_RETURNENTITY = new RString("returnEntity");
+    }
 
     @Override
     protected void initialize() {
@@ -93,6 +106,9 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
         市町村 = RString.EMPTY;
         市町村コードリスト = new ArrayList<>();
         市町村IDMap = new HashMap<>();
+        returnEntity = new OutputParameter<>();
+        ファイルOutputMap = new HashMap<>();
+        レコード件数OutputMap = new HashMap<>();
         ファイル出力Z1A000Map = new HashMap<>();
         ファイル出力Z99_550Map = new HashMap<>();
         ファイル出力DE__Z12Map = new HashMap<>();
@@ -124,6 +140,7 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
 
     @Override
     protected void createWriter() {
+        int number = 0;
         for (RString 市町村コード : 市町村コードリスト) {
             RString ファイル出力Z1A000 = Z1A000XXDTA.replace(XX, 市町村IDMap.get(市町村コード));
             RString z1a000FilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル出力Z1A000);
@@ -154,9 +171,11 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                         setNewLine(NewLine.CRLF).
                         build();
                 ファイル出力DE__Z12Map.put(市町村コード, fldDE__Z12Writer);
+                ファイルOutputMap.put(市町村コード, ファイル出力DE__Z12);
+                レコード件数OutputMap.put(市町村コード, Integer.MIN_VALUE);
             } else {
                 RString ファイル出力DE__Z1A = DEXXZ1AYYYYZZDTA.replace(XX, 市町村IDMap.get(市町村コード)).replace(YYYY,
-                        処理年度.toDateString()).replace(ZZ, new RString(count).padZeroToLeft(INT_TWO));
+                        処理年度.toDateString()).replace(ZZ, new RString(number).padZeroToLeft(INT_TWO));
                 RString de__Z1AFilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル出力DE__Z1A);
                 ファイル出力DE__Z1AList.add(de__Z1AFilePath);
                 fldDE__Z1AWriter = new FldWriter.InstanceBuilder(de__Z1AFilePath).
@@ -165,7 +184,10 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                         setNewLine(NewLine.CRLF).
                         build();
                 ファイル出力DE__Z1AMap.put(市町村コード, fldDE__Z1AWriter);
+                ファイルOutputMap.put(市町村コード, ファイル出力DE__Z1A);
+                レコード件数OutputMap.put(市町村コード, Integer.MIN_VALUE);
             }
+            number++;
         }
     }
 
@@ -217,28 +239,11 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
             ファイル出力Z1A000Map.get(entity.get構成市町村コード()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
             ファイル出力Z99_550Map.get(entity.get構成市町村コード()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity)
                     .editデータZ99_550_xx_DTAファイルのみ());
+            writerMap.get(entity.get構成市町村コード()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editデータ());
         } else {
             各種金額欄合計1 = new Decimal(entity.get各種金額欄1DT().toString());
             各種金額欄合計2 = new Decimal(entity.get各種金額欄2DT().toString());
-            if (count != INT_ZERO) {
-                レコード件数++;
-                ファイル出力Z1A000Map.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
-                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
-                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
-                                各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
-                                レコード件数));
-                ファイル出力Z99_550Map.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
-                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
-                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
-                                各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
-                                レコード件数));
-                writerMap.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
-                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
-                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
-                                各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
-                                レコード件数));
-                レコード件数 = 2;
-            }
+            editトレイラ(entity, writerMap);
             レコード件数++;
             ファイル出力Z1A000Map.get(entity.get構成市町村コード()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
             ファイル出力Z99_550Map.get(entity.get構成市町村コード()).writeLine(new TokuchoSofuJohoRenkeiCsvEntityEditor(entity).editヘッダ());
@@ -256,6 +261,32 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
         各種金額欄合計二.put(entity.get構成市町村コード(), 各種金額欄合計2);
     }
 
+    private void editトレイラ(TokuchoSofuJohoRenkeiEntity entity, Map<RString, FldWriter> writerMap) {
+        if (count != INT_ZERO) {
+            レコード件数++;
+            ファイル出力Z1A000Map.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
+                    new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
+                    .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
+                            各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
+                            レコード件数));
+            ファイル出力Z99_550Map.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
+                    new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
+                    .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
+                            各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
+                            レコード件数));
+            writerMap.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
+                    new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
+                    .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
+                            各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
+                            レコード件数 - INT_TWO));
+
+            if (!市町村.equals(entity.get構成市町村コード())) {
+                レコード件数OutputMap.put(entity.get構成市町村コード(), レコード件数 - INT_TWO);
+                レコード件数 = INT_TWO;
+            }
+        }
+    }
+
     @Override
     protected void afterExecute() {
         if (特徴送付情報連携情報 != null) {
@@ -270,17 +301,25 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                     .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
                             各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
                             レコード件数));
-            ファイル出力DE__Z1AMap.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
-                    new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
-                    .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
-                            各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
-                            レコード件数));
-            ファイル出力DE__Z12Map.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
-                    new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
-                    .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
-                            各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
-                            レコード件数));
+            if (!七月.equals(new RString(処理対象年月.getMonthValue()))) {
+                ファイル出力DE__Z1AMap.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
+                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
+                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
+                                各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
+                                レコード件数 - INT_TWO));
+            } else {
+                ファイル出力DE__Z12Map.get(特徴送付情報連携情報.get構成市町村コード()).writeLine(
+                        new TokuchoSofuJohoRenkeiCsvEntityEditor(特徴送付情報連携情報)
+                        .editトレイラ(各種金額欄合偉一.get(特徴送付情報連携情報.get構成市町村コード()),
+                                各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
+                                レコード件数 - INT_TWO));
+            }
         }
+        レコード件数OutputMap.put(特徴送付情報連携情報.get構成市町村コード(), レコード件数 - 1);
+        FlowEntity flowEntity = new FlowEntity();
+        flowEntity.setレコード件数(レコード件数OutputMap);
+        flowEntity.setファイル(ファイルOutputMap);
+        returnEntity.setValue(flowEntity);
         for (RString fileName : ファイル出力Z1A000List) {
             FilesystemName sharedFileName = new FilesystemName(fileName);
             SharedFile.defineSharedFile(sharedFileName);

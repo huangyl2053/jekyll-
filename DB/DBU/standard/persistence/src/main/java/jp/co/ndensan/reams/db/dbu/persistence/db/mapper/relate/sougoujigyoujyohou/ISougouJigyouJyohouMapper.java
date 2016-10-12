@@ -28,7 +28,8 @@ public interface ISougouJigyouJyohouMapper {
     /**
      * 提供対象者の取得処理です。
      *
+     * @param parameter 総合事業情報のMybatisParameterクラス
      * @return List<TeikyoKihonJohoEntity>
      */
-    List<TeikyoKihonJohoEntity> get提供対象者();
+    List<TeikyoKihonJohoEntity> get提供対象者(SougouJigyouJyohouMybatisParameter parameter);
 }

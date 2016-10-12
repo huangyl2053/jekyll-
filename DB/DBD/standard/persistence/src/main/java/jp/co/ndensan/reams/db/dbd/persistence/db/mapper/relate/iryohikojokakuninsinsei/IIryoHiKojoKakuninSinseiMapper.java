@@ -21,14 +21,6 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * 受給者判定
      *
      * @param 被保険者番号 RString
-     * @return Integer
-     */
-    Integer 受給者台帳抽出(RString 被保険者番号);
-
-    /**
-     * 受給者判定
-     *
-     * @param 被保険者番号 RString
      * @param 対象年 RString
      * @return DbT4001JukyushaDaicho
      */

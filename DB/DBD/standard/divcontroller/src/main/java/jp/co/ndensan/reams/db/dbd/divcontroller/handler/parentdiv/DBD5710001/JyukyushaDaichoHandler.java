@@ -90,12 +90,15 @@ public class JyukyushaDaichoHandler {
             div.getTaishouKikan().getTxtZenkaiymdtime().setToTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
             if (対象期間.equals(div.getRadChushutsuJyouken().getSelectedKey())) {
                 set今回抽出日付();
-                div.getTaishouSha().getTxtHihokenshaBangou().clearFromValue();
-                div.getTaishouSha().getTxtHihokenshaBangou().clearToValue();
+                if (div.getTaishouSha().getHihokenshanoFrom() != null && div.getTaishouSha().getHihokenshanoTo() != null) {
+                    div.getTaishouSha().getHihokenshanoFrom().clearValue();
+                    div.getTaishouSha().getHihokenshanoTo().clearValue();
+                }
             } else {
                 div.getTaishouKikan().getTxtKonkaiymdtime().clearFromValue();
                 div.getTaishouKikan().getTxtKonkaiymdtime().clearToValue();
-                div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(false);
+                div.getTaishouSha().getHihokenshanoFrom().setDisabled(false);
+                div.getTaishouSha().getHihokenshanoTo().setDisabled(false);
                 div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(true);
             }
         }
@@ -160,15 +163,18 @@ public class JyukyushaDaichoHandler {
     public void radChushutsuJyouken_onChange() {
 
         if (対象者.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
-            div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(false);
+            div.getTaishouSha().getHihokenshanoFrom().setDisabled(false);
+            div.getTaishouSha().getHihokenshanoTo().setDisabled(false);
             div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(true);
             div.getTaishouKikan().getTxtKonkaiymdtime().clearFromValue();
             div.getTaishouKikan().getTxtKonkaiymdtime().clearToValue();
         } else if (対象期間.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
             get画面初期();
             set今回抽出日付();
-            div.getTaishouSha().getTxtHihokenshaBangou().clearFromValue();
-            div.getTaishouSha().getTxtHihokenshaBangou().clearToValue();
+            if (div.getTaishouSha().getHihokenshanoFrom() != null && div.getTaishouSha().getHihokenshanoTo() != null) {
+                div.getTaishouSha().getHihokenshanoFrom().clearValue();
+                div.getTaishouSha().getHihokenshanoTo().clearValue();
+            }
         }
     }
 
@@ -184,10 +190,10 @@ public class JyukyushaDaichoHandler {
         } else {
             parameter.set抽出条件設定区分(KEY1);
         }
-        if (div.getTaishouSha().getTxtHihokenshaBangou().getFromValue() != null
-                && div.getTaishouSha().getTxtHihokenshaBangou().getToValue() != null) {
-            parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
-            parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
+        if (div.getTaishouSha().getHihokenshanoFrom() != null
+                && div.getTaishouSha().getHihokenshanoTo() != null) {
+            parameter.set被保険者番号_From(div.getTaishouSha().getHihokenshanoFrom().getValue());
+            parameter.set被保険者番号_To(div.getTaishouSha().getHihokenshanoTo().getValue());
         }
         parameter.set今回抽出開始年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getFromDateValue());
         parameter.set今回抽出開始時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getFromTimeValue());
@@ -221,7 +227,8 @@ public class JyukyushaDaichoHandler {
         div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime().plusSeconds(1));
         div.getTaishouKikan().getTxtKonkaiymdtime().setToDateValue(RDate.getNowDate());
         div.getTaishouKikan().getTxtKonkaiymdtime().setToTimeValue(RDate.getNowDateTime().getTime());
-        div.getTaishouSha().getTxtHihokenshaBangou().setDisabled(true);
+        div.getTaishouSha().getHihokenshanoFrom().setDisabled(true);
+        div.getTaishouSha().getHihokenshanoTo().setDisabled(true);
         div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(false);
     }
 

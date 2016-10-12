@@ -56,8 +56,8 @@ public class FurikomiMeisaiIchiranHeaderEditor implements IFurikomiMeisaiIchiran
 
         source.printTimeStamp = get印刷日時(YMDHMS.now());
         source.title = 振込明細一覧Entity.get帳票タイトル();
-        source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        source.hokenshaName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        source.hokenshaName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
 
         RString 並び順１ = RString.EMPTY;
         RString 並び順２ = RString.EMPTY;

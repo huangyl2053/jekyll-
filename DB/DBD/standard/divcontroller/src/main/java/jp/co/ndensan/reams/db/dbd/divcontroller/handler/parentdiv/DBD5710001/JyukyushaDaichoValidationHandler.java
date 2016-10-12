@@ -73,7 +73,8 @@ public class JyukyushaDaichoValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(JyukyushaDaichoDivSpec.被保険者番号非空チェック)
                 .thenAdd(NoInputMessages.被保険者番号非空チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.被保険者番号非空チェック, div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou()).build().check(messages));
+                NoInputMessages.被保険者番号非空チェック, div.getChushutsuJyouken().getTaishouSha().getHihokenshanoFrom(),
+                div.getChushutsuJyouken().getTaishouSha().getHihokenshanoTo()).build().check(messages));
         return pairs;
     }
 
@@ -90,7 +91,8 @@ public class JyukyushaDaichoValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(JyukyushaDaichoDivSpec.被保険者番号ToがFrom以前チェック)
                 .thenAdd(NoInputMessages.被保険者番号ToがFrom以前チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.被保険者番号ToがFrom以前チェック, div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou()).build().check(messages));
+                NoInputMessages.被保険者番号ToがFrom以前チェック, div.getChushutsuJyouken().getTaishouSha().getHihokenshanoFrom(),
+                div.getChushutsuJyouken().getTaishouSha().getHihokenshanoTo()).build().check(messages));
         return pairs;
     }
 

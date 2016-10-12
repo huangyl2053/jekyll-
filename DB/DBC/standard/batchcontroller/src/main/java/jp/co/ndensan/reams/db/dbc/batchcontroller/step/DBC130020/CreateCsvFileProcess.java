@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class CreateCsvFileProcess extends BatchProcessBase<KokiKoreshaJyohoRealEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get取込国保情報Temp");
+            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper.get取込後期高齢者情報");
     private final RString csvファイル名 = new RString("torikomikakuninkekka.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBZ000001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -68,7 +68,7 @@ public class CreateCsvFileProcess extends BatchProcessBase<KokiKoreshaJyohoRealE
     @Override
     protected void afterExecute() {
         csvWriter.close();
-        manager.spool(SubGyomuCode.DBZ介護共通, eucFilePath);
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private KokiKoreishaInfoCsvEntity getCsvEntity(TorikomiKokiKoreshaJyohoEntity entity) {

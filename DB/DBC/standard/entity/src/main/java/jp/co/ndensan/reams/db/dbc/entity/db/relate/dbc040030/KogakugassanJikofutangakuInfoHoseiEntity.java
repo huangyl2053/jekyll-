@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -40,4 +41,5 @@ public class KogakugassanJikofutangakuInfoHoseiEntity implements IDbAccessable, 
     private int rirekiNo;
     private RString taishoM;
     private DbT3071KogakuGassanJikoFutanGakuMeisaiEntity dbt3071Entity;
+    private DbT3070KogakuGassanJikoFutanGakuEntity dbt3070Entity;
 }

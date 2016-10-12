@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1020021;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD201010.DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020021.DBD1020021StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020021.RiyoshaFutanGenmenListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020021.RiyoshaFutanGenmenListHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020021.RiyoshaFutanGenmenListValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 利用者負担額減免認定者リスト画面のDivControllerです。
@@ -40,6 +43,21 @@ public class RiyoshaFutanGenmenList {
     }
 
     /**
+     * 「リスト作成を実行する」ボタンを押下のチェック処理します。
+     *
+     * @param div RiyoshaFutanGenmenListDiv
+     * @return ResponseData<RiyoshaFutanGenmenListDiv>
+     */
+    public ResponseData<RiyoshaFutanGenmenListDiv> onBeforeCilck_batchcheck(RiyoshaFutanGenmenListDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor基準日と所得年度の未入力チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        return ResponseData.of(div).setState(DBD1020021StateName.バッチ実行);
+    }
+
+    /**
      * 「リスト作成を実行する」ボタンを押下のバッチパラメータ作成。
      *
      * @param div RiyoshaFutanGenmenListDiv
@@ -52,5 +70,9 @@ public class RiyoshaFutanGenmenList {
 
     private RiyoshaFutanGenmenListHandler createhandler(RiyoshaFutanGenmenListDiv div) {
         return new RiyoshaFutanGenmenListHandler(div);
+    }
+
+    private RiyoshaFutanGenmenListValidationHandler getValidationHandler() {
+        return new RiyoshaFutanGenmenListValidationHandler();
     }
 }

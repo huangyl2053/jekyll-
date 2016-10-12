@@ -73,7 +73,7 @@
          "DbT3118ShikibetsuNoKanri"."fukushoyouguKonyuSetteiKubun" as "dbT3118ShikibetsuNoKanri_fukushoyouguKonyuSetteiKubun",
          "DbT3118ShikibetsuNoKanri"."jutakukaishuSetteiKubun" as "dbT3118ShikibetsuNoKanri_jutakukaishuSetteiKubun",
          "DbT3118ShikibetsuNoKanri"."kogakuKaigoSetteiKubun" as "dbT3118ShikibetsuNoKanri_kogakuKaigoSetteiKubun",
-         "DbT3118ShikibetsuNoKanri"."tokuteishinryoTokubetsuryoyoSetteiKubun" as "dbT3118ShikibetsuNoKanri_tokuteishinryoTokubetsuryoyoSetteiKubun",
+         "DbT3118ShikibetsuNoKanri"."tokuteishinryoTokubetsuryoyoSetteiKubun" as "dbT3118_tokuteishinryoTokubetsuryoyoSetteiKubun",
          "DbT3118ShikibetsuNoKanri"."tokuteinyushoshaSetteiKubun" as "dbT3118ShikibetsuNoKanri_tokuteinyushoshaSetteiKubun",
          "DbT3118ShikibetsuNoKanri"."shakaifukushiKeigenSetteiKubun" as "dbT3118ShikibetsuNoKanri_shakaifukushiKeigenSetteiKubun",
          "DbT3118ShikibetsuNoKanri"."careManagementSetteiKubun" as "dbT3118ShikibetsuNoKanri_careManagementSetteiKubun",
@@ -143,7 +143,7 @@
         <result property="fukushoyouguKonyuSetteiKubun" column="dbT3118ShikibetsuNoKanri_fukushoyouguKonyuSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jutakukaishuSetteiKubun" column="dbT3118ShikibetsuNoKanri_jutakukaishuSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kogakuKaigoSetteiKubun" column="dbT3118ShikibetsuNoKanri_kogakuKaigoSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="tokuteishinryoTokubetsuryoyoSetteiKubun" column="dbT3118ShikibetsuNoKanri_tokuteishinryoTokubetsuryoyoSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteishinryoTokubetsuryoyoSetteiKubun" column="dbT3118_tokuteishinryoTokubetsuryoyoSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tokuteinyushoshaSetteiKubun" column="dbT3118ShikibetsuNoKanri_tokuteinyushoshaSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shakaifukushiKeigenSetteiKubun" column="dbT3118ShikibetsuNoKanri_shakaifukushiKeigenSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="careManagementSetteiKubun" column="dbT3118ShikibetsuNoKanri_careManagementSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001;
 
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.PntNinteiShinsaHanteiListMybatisParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -30,4 +32,13 @@ public class PntNinteiShinsaHanteiListProcessParameter implements IBatchProcessP
     private RDateTime 抽出開始日時;
     private RDateTime 抽出終了日時;
     private RString 編集状況フラグ;
+
+    /**
+     * Mybatisのパラメータを作成します。
+     *
+     * @return PntNinteiShinsaHanteiListMybatisParameter
+     */
+    public PntNinteiShinsaHanteiListMybatisParameter toMybatisParameter() {
+        return new PntNinteiShinsaHanteiListMybatisParameter(市町村コード, new ShoKisaiHokenshaNo(証記載保険者番号));
+    }
 }

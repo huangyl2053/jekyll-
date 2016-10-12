@@ -31,4 +31,6 @@ public class KyotakuEntity {
     private RString 居宅サービス計画作成区分コード;
     private RString 暫定区分;
     private FlexibleDate 届出年月日;
+    private RString サービス種類コード;
+    private FlexibleDate 有効終了日;
 }

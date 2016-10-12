@@ -244,7 +244,7 @@
                                                 rgdb."DbT1001HihokenshaDaicho" AS hihokenshaDaicho3
                                         WHERE
                                                 (
-                                                        hihokenshaDaicho3."shikakuShutokuYMD" <![CDATA[<>]]> hihokenshaDaicho2.shikakuSoshitsuYMD
+                                                        hihokenshaDaicho3."shikakuShutokuYMD" <![CDATA[<>]]> hihokenshaDaicho3.shikakuSoshitsuYMD
                                                 AND hihokenshaDaicho3."logicalDeletedFlag" = False
                                                 AND hihokenshaDaicho3."jushochitokureiTekiyoJiyuCode" =  #{自特例適用}
                                                 AND (hihokenshaDaicho3."jushochitokureiKaijoJiyuCode" IS NULL OR hihokenshaDaicho3."jushochitokureiKaijoJiyuCode" = '')
@@ -295,19 +295,18 @@
                 jogaiTokurei.jigyoshaNo = shisetsuNyutaisho."nyushoShisetsuCode"
         AND jogaiTokurei.yukoKaishiYMD <![CDATA[<=]]> #{システム日付}
         AND (#{システム日付} <![CDATA[<=]]> jogaiTokurei.yukoShuryoYMD OR (jogaiTokurei.yukoShuryoYMD IS NULL OR jogaiTokurei.yukoShuryoYMD = ''))
-        <!--TODO 凌護行 被保険者台帳(1)が不明です、QA回答まち、2016/10/15-->
-        <!--WHERE
-                shisetsuNyutaisho."daichoShubetsu" = #{被保険者台帳(1)}
+        WHERE
+                shisetsuNyutaisho."daichoShubetsu" = #{台帳種別}
         AND NOT EXISTS(
                         SELECT 1
                         FROM
                                 rgdb."DbT1004ShisetsuNyutaisho" AS nyutaisho
                         WHERE
-                                nyutaisho."daichoShubetsu" = #{被保険者台帳(1)}
+                                nyutaisho."daichoShubetsu" = #{台帳種別}
                         AND nyutaisho."shikibetsuCode" = shisetsuNyutaisho."shikibetsuCode"
                         AND nyutaisho."nyushoYMD" = shisetsuNyutaisho."nyushoYMD"
                         AND nyutaisho."rirekiNo" <![CDATA[>]]> shisetsuNyutaisho."rirekiNo"
-                        )-->
+                        )
         )
     </sql>
     <sql id="介護施設">

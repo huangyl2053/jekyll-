@@ -48,57 +48,48 @@
                T1."shotaiCode",T1."jukyuKubun",T1."hihokenshaNo"
 </select>
 
-<select resultOrdered="true" id="select基準収入額適用管理情報"
-         resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity"
-         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishosetaiinido.TaishoSetaiinIdoMybatisParameter">
-    SELECT 
-        T2."insertDantaiCd",
-        T2."insertTimestamp",
-        T2."insertReamsLoginId",
-        T2."insertContextId",
-        T2."isDeleted",
-        T2."updateCount",
-        T2."lastUpdateTimestamp",
-        T2."lastUpdateReamsLoginId",
-        T2."setaiCode",
-        T2."nendo",
-        T2."rirekiNo",
-        T2."hihokenshaNo",
-        T2."kotekiNenkinShunyugaku",
-        T2."kyuyoShunyugaku",
-        T2."sonotaShunyugaku",
-        T2."santeiKijungaku",
-        T2."tekiyoKaishiYMD",
-        T2."shinseiYMD",
-        T2."ketteiYMD",
-        T2."shinseishoSakuseiYMD",
-        T2."shinseishoSakuseiSetaiKijunYMD",
-        T2."ketteiTsuchishoHakkoYMD",
-        T2."atesakiInjiTaishoshaFlag",
-        T2."nenshoFuyokojoUnder16Ninzu",
-        T2."nenshoFuyokojoOver16Ninzu",
-        T2."setaiinSoShunyugaku",
-        T2."setainushiFlag",
-        T2."kazeiShotokugaku",
-        T2."kazeiShotokugakuKojogo"
-    FROM
-        (SELECT T.*,
-               T1."shotaiCode" AS 世帯コード
-        FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS T
-        LEFT OUTER JOIN "TaishoSetaiin"  AS T1
-            ON T1."shotaiCode" = T."setaiCode"
-        WHERE T."setaiCode" = #{世帯コード}
-            AND T."nendo" = #{処理年度}
-            AND T."isDeleted" = FALSE) AS T2
-    WHERE
-         T2."世帯コード" IS NULL
-</select>
 <select resultOrdered="true" id="select基準収入額適用管理マスタ"
          resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity"
          parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishosetaiinido.TaishoSetaiinIdoMybatisParameter">
-    SELECT *
-    FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS A
-    WHERE T."nendo" = #{処理年度}
+    SELECT 
+        C."insertDantaiCd",
+        C."insertTimestamp",
+        C."insertReamsLoginId",
+        C."insertContextId",
+        C."isDeleted",
+        C."updateCount",
+        C."lastUpdateTimestamp",
+        C."lastUpdateReamsLoginId",
+        C."setaiCode",
+        C."nendo",
+        C."rirekiNo",
+        C."hihokenshaNo",
+        C."kotekiNenkinShunyugaku",
+        C."kyuyoShunyugaku",
+        C."sonotaShunyugaku",
+        C."santeiKijungaku",
+        C."tekiyoKaishiYMD",
+        C."shinseiYMD",
+        C."ketteiYMD",
+        C."shinseishoSakuseiYMD",
+        C."shinseishoSakuseiSetaiKijunYMD",
+        C."ketteiTsuchishoHakkoYMD",
+        C."atesakiInjiTaishoshaFlag",
+        C."nenshoFuyokojoUnder16Ninzu",
+        C."nenshoFuyokojoOver16Ninzu",
+        C."setaiinSoShunyugaku",
+        C."setainushiFlag",
+        C."kazeiShotokugaku",
+        C."kazeiShotokugakuKojogo"
+    FROM
+        (SELECT A.*,
+               B."shotaiCode" AS 世帯コード
+        FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS A
+        LEFT OUTER JOIN "TaishoSetaiin"  AS B
+            ON B."shotaiCode" = A."setaiCode"
+        WHERE A."nendo" = #{処理年度}) AS C
+    WHERE
+         C."世帯コード" IS NULL
 </select>
 
 <resultMap id="resultMap_TaishoSetaiinEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.TaishoSetaiinEntity" autoMapping="true">

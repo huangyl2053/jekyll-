@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc200031.GassanJikofutangakuHoseiIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200031.GassanJikofutangakuHoseiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200031.GassanJikofutangakuHoseiIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200031.GassanJikofutangakuHoseiIchiranReport;
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200031.GassanJikofutangakuHoseiOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040030.KogakugassanJikofutangakuInfoHoseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -88,7 +88,7 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         KogakugassanJikofutangakuMybatisParameter parameter = new KogakugassanJikofutangakuMybatisParameter();
         if (並び順 != null) {
             parameter.set改頁出力順(MyBatisOrderByClauseCreator.create(
-                    GassanJikofutangakuHoseiIchiranOutPutOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY));
+                    GassanJikofutangakuHoseiOutPutOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY));
         } else {
             parameter.set改頁出力順(null);
         }

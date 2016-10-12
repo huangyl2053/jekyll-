@@ -43,7 +43,6 @@ public class SeikyuShinsaShuseiTorokuHandler {
 
     private static final RString TITLE_1004 = new RString("住宅改修理由書作成手数料　請求審査修正登録");
     private static final RString TITLE_1005 = new RString("住宅改修理由書作成手数料　請求審査結果登録");
-    private static final RString 保存する = new RString("btnShuseiUpdate");
     private static final RString DBCMNE_1004 = new RString("DBCMNE1004");
     private static final RString DBCMNE_1005 = new RString("DBCMNE1005");
     private static final RString 請求単位 = new RString("請求単位");
@@ -67,7 +66,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * makekeyandfront 画面初期化処理です。
+     * 画面初期化処理です。
      *
      * @param menuID menuID
      */
@@ -190,7 +189,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * get情報一覧
+     * 情報一覧です
      *
      */
     public void get情報一覧() {
@@ -210,11 +209,10 @@ public class SeikyuShinsaShuseiTorokuHandler {
         if (削除.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
             div.getDgSeikyuMeisai().getGridSetting().getColumns().get(1).setVisible(true);
         }
-
     }
 
     /**
-     * 審査画面一覧
+     * 審査画面一覧です
      *
      */
     private void 審査画面一覧(SeikyuShinsaShuseiTorokuBusiness 住宅改修理由書事業者情報) {
@@ -234,7 +232,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * set画面一覧
+     * 画面一覧です
      *
      */
     private void set画面一覧(dgSeikyu_Row row, SeikyuShinsaShuseiTorokuBusiness 住宅改修理由書事業者情報) {
@@ -278,11 +276,10 @@ public class SeikyuShinsaShuseiTorokuHandler {
         rowList.add(明細一覧);
         div.getJutakuTesuryoSeikyuShosaiPanel().getDgSeikyuMeisai().getDataSource().clear();
         div.getJutakuTesuryoSeikyuShosaiPanel().getDgSeikyuMeisai().setDataSource(rowList);
-
     }
 
     /**
-     * get明細照会一覧
+     * 明細照会一覧です
      *
      */
     public void get明細照会一覧() {
@@ -336,7 +333,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * get操作確認
+     * 操作確認です
      *
      */
     public void get操作確認() {
@@ -346,7 +343,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * 入力チェック
+     * 入力のチェックです
      *
      */
     public void 入力チェック() {
@@ -369,7 +366,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * 内容変更状態
+     * 内容の変更状態です
      *
      * @param business SeikyuShinsaShuseiTorokuBusiness business
      * @return boolean
@@ -393,7 +390,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * 修正更新状態
+     * 修正更新の状態です
      *
      * @param business SeikyuShinsaShuseiTorokuBusiness
      * @return SeikyuShinsaShuseiTorokuBusiness SeikyuShinsaShuseiTorokuBusiness
@@ -437,7 +434,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * 削除更新状態
+     * 削除更新の状態です
      *
      * @param business SeikyuShinsaShuseiTorokuBusiness business
      * @return SeikyuShinsaShuseiTorokuBusiness
@@ -464,7 +461,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     /**
-     * クリアデータ
+     * データのクリアです
      */
     public void クリアデータ() {
         div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().clearSelectedItem();
@@ -500,7 +497,5 @@ public class SeikyuShinsaShuseiTorokuHandler {
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(date, 0);
-
     }
-
 }

@@ -287,7 +287,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtTaishoNendo().getValue().getYear().equals(定値_年度年度.getYear())) {
             RString 開始計算対象期間 = div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtTaishoNendo().getValue().toDateString().concat(定値_日付1);
+                    getTxtTaishoNendo().getValue().getYear().toDateString().concat(定値_日付1);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtKeisanYMD().setFromValue(new RDate(開始計算対象期間.toString()));
         } else {
@@ -375,7 +375,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (row.getTxtShikyuKubun() != null && !row.getTxtShikyuKubun().isEmpty()
                 && ShikyuFushikyuKubun.不支給.getコード().equals(row.getTxtShikyuKubun())) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().setSelectedValue(不支給);
-            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setLabelLText(不支給の理由);
+            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getLabel2().setText(不支給の理由);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setValue(row.getFushikyuRiyu());
         }
         if (row.getTxtShikyugaku().getValue() != null) {
@@ -639,11 +639,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     public void set支給区分連動() {
         if (ShikyuFushikyuKubun.支給.get名称().equals(
                 div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().getSelectedValue())) {
-            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setLabelLText(備考);
+            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getLabel2().setText(備考);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setDisabled(false);
         } else if (ShikyuFushikyuKubun.不支給.get名称().equals(
                 div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().getSelectedValue())) {
-            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setLabelLText(不支給の理由);
+            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getLabel2().setText(不支給の理由);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setDisabled(true);
         }
     }

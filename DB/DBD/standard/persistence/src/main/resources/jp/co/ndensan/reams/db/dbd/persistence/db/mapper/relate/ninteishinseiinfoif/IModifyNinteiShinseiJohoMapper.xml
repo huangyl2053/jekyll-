@@ -44,11 +44,13 @@
         <result property="電話番号" column="電話番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="一次判定内容" column="一次判定内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <collection property="連絡先情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.ResultMap_DbT4150RenrakusakiJohoEntity"/> 
     </resultMap>
     <select resultOrdered="true" id="select申請情報IF電算標準版"  
               resultMap="ResultMap_ModifyNinteiShinseiJohoEntity" 
               parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.ModifyNinteiShinseiJohoMybatisParameter"
               fetchSize="500">
+        WITH master AS (
         SELECT 
         "NinteiShinseiJohoTemp"."shinseishoKanriNo" AS 申請書管理番号,
         "NinteiShinseiJohoTemp"."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
@@ -82,15 +84,15 @@
         rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeshaTelNo"  AS 申請届出者電話番号,
         rgdb."DbV4001JukyushaDaicho"."shinseishaKankeiCode" AS 申請者関係コード,
         rgdb."DbV4001JukyushaDaicho"."homninKankei"  AS 本人との関係,
-        "ShikibetsuTaisho"."renrakusaki1" AS 連絡先1,
-        "ShikibetsuTaisho"."renrakusaki2" AS 連絡先2,
         G."jigyoshaName"  AS 事業者名称,
         G."jigyoshaAddress" AS 事業者住所,
         G."jigyoshaNameKana" AS 事業者名称カナ,
         G."yubinNo"  AS dbT7060郵便番号,
         G."telNo"  AS 電話番号,
         rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" AS 市町村コード,
-        rgdb."DbT4003YokaigoNinteiInterface"."ichijiHanteiNaiyo"  AS  一次判定内容
+        rgdb."DbT4003YokaigoNinteiInterface"."ichijiHanteiNaiyo"  AS  一次判定内容,
+        rgdb."DbV4001JukyushaDaicho"."shikibetsuCode" AS "shikibetsuCode",
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.allColumns_DbT4150RenrakusakiJoho"/>
         FROM 
         "NinteiShinseiJohoTemp"
         LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho"
@@ -100,10 +102,6 @@
         LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
         ON "NinteiShinseiJohoTemp"."shoKisaiHokenshaNo" = rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
         AND rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" =#{市町村コード}
-        LEFT JOIN 
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
-        AS "ShikibetsuTaisho"
-        ON rgdb."DbV4001JukyushaDaicho"."shikibetsuCode" ="ShikibetsuTaisho"."shikibetsuCode"
         LEFT JOIN rgdb."DbT7060KaigoJigyosha"  AS G
         ON "NinteiShinseiJohoTemp"."nyushoShisetsuCode" = G."jigyoshaNo"
         AND NOT EXISTS (  SELECT 'X'
@@ -113,10 +111,31 @@
                           )
         LEFT JOIN rgdb."DbT4003YokaigoNinteiInterface"
         ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4150RenrakusakiJoho"
+        ON rgdb."DbT4150RenrakusakiJoho"."shinseishoKanriNo" = "NinteiShinseiJohoTemp"."shinseishoKanriNo"
+        )
+        SELECT 
+        master.*,
+        "ShikibetsuTaisho"."renrakusaki1" AS 連絡先1,
+        "ShikibetsuTaisho"."renrakusaki2" AS 連絡先2
+        FROM 
+        master
+         LEFT OUTER JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (SELECT
+        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS "ShikibetsuTaisho"
+        ON master."shikibetsuCode" ="ShikibetsuTaisho"."shikibetsuCode"
     </select>
-       <select resultOrdered="true" id="select申請情報IF厚労省版"  
+       <select resultOrdered="true" id="select申請情報IF厚労省版"
+              parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.ModifyNinteiShinseiJohoMybatisParameter"
               resultMap="ResultMap_ModifyNinteiShinseiJohoEntity" 
               fetchSize="500">
+         WITH master AS (
          SELECT
         "NinteiShinseiJohoTemp"."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
         "NinteiShinseiJohoTemp"."shoKisaiHokenshaNo" AS 証記載保険者番号,
@@ -124,7 +143,7 @@
         "NinteiShinseiJohoTemp"."ninteiShinseiYMD" AS 認定申請年月日,
         "NinteiShinseiJohoTemp"."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード,
         "NinteiShinseiJohoTemp"."torisageKubunCode" AS 取下区分コード,
-        "NinteiShinseiJohoTemp"."hihokenshaKubunCode" AS 被保険者区分コード
+        "NinteiShinseiJohoTemp"."hihokenshaKubunCode" AS 被保険者区分コード,
         "NinteiShinseiJohoTemp"."seinengappiYMD" AS 生年月日,
         "NinteiShinseiJohoTemp"."age" AS 年齢,
         "NinteiShinseiJohoTemp"."seibetsu" AS 性別,
@@ -138,18 +157,16 @@
         "NinteiShinseiJohoTemp"."shujiiIryokikanCode" AS 主治医医療機関コード,
         "NinteiShinseiJohoTemp"."shujiiCode" AS 主治医コード,
          rgdb."DbT4120ShinseitodokedeJoho"."shinseiTodokedeDaikoKubunCode" AS 申請届出代行区分コード,
-         "ShikibetsuTaisho"."renrakusaki1" AS 連絡先1,
          G."jigyoshaName"  AS 事業者名称,
          G."jigyoshaAddress" AS 事業者住所,
+         rgdb."DbV4001JukyushaDaicho"."shikibetsuCode" AS "shikibetsuCode",
          rgdb."DbT4003YokaigoNinteiInterface"."ichijiHanteiNaiyo"  AS  一次判定内容
          FROM 
         "NinteiShinseiJohoTemp"
         LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho"
-        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4120ShinseitodokedeJoho"."shinseishoKanriNo" 
-        LEFT JOIN 
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
-        AS "ShikibetsuTaisho"
-        ON rgdb."DbV4001JukyushaDaicho"."shikibetsuCode" ="ShikibetsuTaisho"."shikibetsuCode"
+        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4120ShinseitodokedeJoho"."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbV4001JukyushaDaicho"
+        ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbV4001JukyushaDaicho"."shinseishoKanriNo"      
         LEFT JOIN rgdb."DbT7060KaigoJigyosha"  AS G
         ON "NinteiShinseiJohoTemp"."nyushoShisetsuCode" = G."jigyoshaNo"
         AND NOT EXISTS (  SELECT 'X'
@@ -159,20 +176,23 @@
                           )
          LEFT JOIN rgdb."DbT4003YokaigoNinteiInterface"
         ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
-       </select>
-    <select id="select連絡先情報" resultOrdered="true" 
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.ResultMap_DbT4150RenrakusakiJohoEntity"
-            fetchSize="500">
+        )            
         SELECT 
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.allColumns_DbT4150RenrakusakiJoho" />
+        master.*,
+        "ShikibetsuTaisho"."renrakusaki1" AS 連絡先1
         FROM 
-        rgdb."DbT4150RenrakusakiJoho"
-        WHERE
-        rgdb."DbT4150RenrakusakiJoho"."shinseishoKanriNo" = #{申請書管理番号}
-        ORDER BY 
-        rgdb."DbT4150RenrakusakiJoho"."priority"
-        limit 2
-    </select>
+        master
+         LEFT OUTER JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (SELECT
+        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS "ShikibetsuTaisho"
+        ON master."shikibetsuCode" ="ShikibetsuTaisho"."shikibetsuCode"
+       </select>
 </mapper>
         
         
