@@ -79,6 +79,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getDdlKakoHokokuYM().setDisabled(true);
         div.getRadKoikiRengo().setDisabled(true);
         div.setHdnJkkoutani(集計のみ);
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -108,6 +109,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getDdlKakoHokokuYM().setDisabled(true);
         div.setHdnJkkoutani(集計後に印刷);
         div.getRadKoikiRengo().setDisabled(true);
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -129,6 +131,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getDdlKakoHokokuYM().setDisabled(false);
         div.getRadKoikiRengo().setDisabled(false);
         div.setHdnJkkoutani(過去の集計結果を印刷);
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -149,6 +152,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         }
         getHandler(div).set入力された報告年月より各集計年月の設定(報告年月);
         getHandler(div).setチェックボックス設定();
+        setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
 
@@ -159,6 +163,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).set集計年月();
+        getHandler(div).set日付時刻_ReadOnly();
         if (!RString.isNullOrEmpty(div.getDdlKakoHokokuYM().getSelectedValue())) {
             getHandler(div).set月報報告_一般状況1_11onClick();
             getHandler(div).set月報報告_一般状況12_14_現物分onClick();
@@ -214,8 +220,6 @@ public class JigyoJokyoHokokuGeppoSakusei {
         onChange_cblOutputTaisho1(div);
         onChange_cblOutputTaisho2(div);
         onChange_celOutputTaisho3(div);
-        onChange_cblOutputTaisho4(div);
-        onChange_cblOutputTaisho5(div);
         return ResponseData.of(div).respond();
     }
 
