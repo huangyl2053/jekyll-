@@ -15,6 +15,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -79,6 +83,8 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
 
     @Override
     protected void afterExecute() {
-        core.資格喪失帳票出力(batchReportWriter, para);
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        ReportOutputJokenhyoItem item = core.資格喪失帳票出力(batchReportWriter, para, association);
+        OutputJokenhyoFactory.createInstance(item).print();
     }
 }

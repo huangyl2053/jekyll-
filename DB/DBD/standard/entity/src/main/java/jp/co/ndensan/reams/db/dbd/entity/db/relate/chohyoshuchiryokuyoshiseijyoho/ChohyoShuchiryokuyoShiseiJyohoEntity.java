@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -43,4 +44,5 @@ public class ChohyoShuchiryokuyoShiseiJyohoEntity {
     private RString 出力CSV状況申請;
     private int index;
     private RString 枝番;
+    private ShinseishoKanriNo 申請書管理番号;
 }
