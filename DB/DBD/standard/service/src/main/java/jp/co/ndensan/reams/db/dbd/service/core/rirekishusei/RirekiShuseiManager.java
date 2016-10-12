@@ -72,6 +72,7 @@ public class RirekiShuseiManager {
     private static final RString KU_BUN_修 = new RString("修");
     private static final RString KU_BUN_削 = new RString("削");
     private static final RString KU_BUN_追 = new RString("追");
+    private static final RString KU_BUN_直 = new RString("直");
     private static final RString SAKUJO_KUBUN = new RString("0");
 
     /**
@@ -189,6 +190,9 @@ public class RirekiShuseiManager {
     @Transaction
     public void save受給履歴(List<RirekiShuseiUpdBusiness> updDataList, List<ShinseishoKanriNo> retList) {
         for (RirekiShuseiUpdBusiness data : updDataList) {
+            if (KU_BUN_直.equals(data.getKubun()) || data.getKubun().isEmpty()) {
+                continue;
+            }
             save受給者台帳(data.get受給者台帳());
             if (KU_BUN_追.equals(data.getKubun()) || data.isTsuikaKubun()) {
                 save要介護認定申請情報(data.get要介護認定申請情報());
