@@ -23,8 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 利用者負担額減額･免除認定決定通知書ボディEditorです。
@@ -368,27 +368,27 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         }
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
-        // source.jusho4 = sofubutsuAtesakiSource.j;
+        source.jusho4 = sofubutsuAtesakiSource.jusho1;
         if (sofubutsuAtesakiSource.jushoText == null) {
             RStringBuilder jusho1 = new RStringBuilder(sofubutsuAtesakiSource.jusho1);
             source.jushoText = jusho1.append(sofubutsuAtesakiSource.jusho2).append(sofubutsuAtesakiSource.jusho3).toRString();
         } else {
             source.jushoText = sofubutsuAtesakiSource.jushoText;
         }
-        // source.jusho5 = RString.EMPTY;
-        // source.jusho6 = RString.EMPTY;
+        source.jusho5 = sofubutsuAtesakiSource.jusho2;
+        source.jusho6 = sofubutsuAtesakiSource.jusho3;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-        // source.katagaki3 = RString.EMPTY;
+        source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
         source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-        // source.katagaki4 = RString.EMPTY;
+        source.katagaki4 = sofubutsuAtesakiSource.katagaki2;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-        // source.shimei3 = RString.EMPTY;
+        source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
         source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
         source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-        // source.shimei4 = RString.EMPTY;
+        source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;

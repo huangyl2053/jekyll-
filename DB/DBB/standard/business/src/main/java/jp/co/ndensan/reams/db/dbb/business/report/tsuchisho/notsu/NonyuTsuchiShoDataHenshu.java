@@ -480,8 +480,8 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.setバーコード情報下段(空白);
         }
         set納付額欄(is現金納付, is口座振替, 納入通知書期情報, 納付額, 納入通知書制御情報);
-        納入通知書期情報.set領収証書領収印欄(RyoshuinranHyojiKubun._口座振替_を印字する.equals(納入通知書制御情報.get領収証書領収印欄()) ? 口座振替 : 空白);
-        納入通知書期情報.set納付書領収印欄(RyoshuinranHyojiKubun._口座振替_を印字する.equals(納入通知書制御情報.get納付書領収印欄()) ? 口座振替 : 空白);
+        納入通知書期情報.set領収証書領収印欄(RyoshuinranHyojiKubun.口座振替を印字する.equals(納入通知書制御情報.get領収証書領収印欄()) ? 口座振替 : 空白);
+        納入通知書期情報.set納付書領収印欄(RyoshuinranHyojiKubun.口座振替を印字する.equals(納入通知書制御情報.get納付書領収印欄()) ? 口座振替 : 空白);
         set納入通知書期情報領収欄(納入通知書期情報, 納入通知書制御情報, 出力期);
         return 納入通知書期情報;
     }
@@ -523,13 +523,13 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
         } else if (is口座振替) {
             NofugakuranHyojiKubun 納付書納付額欄 = 納入通知書制御情報.get納付書納付額欄();
-            if (NofugakuranHyojiKubun._口座振替_を印字する.equals(納付書納付額欄)) {
+            if (NofugakuranHyojiKubun.口座振替を印字する.equals(納付書納付額欄)) {
                 納入通知書期情報.set領収証書納付額欄(口座振替);
                 納入通知書期情報.set納付書納付額欄(口座振替);
-            } else if (NofugakuranHyojiKubun.__を印字する.equals(納付書納付額欄)) {
+            } else if (NofugakuranHyojiKubun.空白を印字する.equals(納付書納付額欄)) {
                 納入通知書期情報.set領収証書納付額欄(空白);
                 納入通知書期情報.set納付書納付額欄(空白);
-            } else if (NofugakuranHyojiKubun.星印を印字する.equals(納付書納付額欄)) {
+            } else if (NofugakuranHyojiKubun.マスクを印字する.equals(納付書納付額欄)) {
                 納入通知書期情報.set領収証書納付額欄(星10);
                 納入通知書期情報.set納付書納付額欄(星10);
             } else if (NofugakuranHyojiKubun.金額出力.equals(納付書納付額欄)) {
@@ -540,11 +540,11 @@ public class NonyuTsuchiShoDataHenshu {
     }
 
     private Map<Integer, RString> getOCRBy口座振替のOCR出力方法(SeikyuForPrinting 請求情報, OCRShutsuryokuHoho 口座振替のOCR出力方法) {
-        if (OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.equals(口座振替のOCR出力方法)) {
+        if (OCRShutsuryokuHoho.マスクでつぶす.equals(口座振替のOCR出力方法)) {
             return getNewOCR(請求情報, new RString("＊"));
-        } else if (OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.equals(口座振替のOCR出力方法)) {
+        } else if (OCRShutsuryokuHoho.印字する.equals(口座振替のOCR出力方法)) {
             return 請求情報.getOcr().getOcr();
-        } else if (OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.equals(口座振替のOCR出力方法)) {
+        } else if (OCRShutsuryokuHoho.印字しない.equals(口座振替のOCR出力方法)) {
             return getNewOCR(請求情報, 空白);
         }
         return new HashMap<>();
@@ -929,7 +929,7 @@ public class NonyuTsuchiShoDataHenshu {
             納付書共通.set郵便番号(編集後宛先.get郵便番号());
             納付書共通.set行政区名(編集後宛先.get行政区名());
             納付書共通.set方書(編集後宛先.get方書());
-            
+
             納付書共通.set代納人氏名(null == 代納人氏名 ? AtenaMeisho.EMPTY : 代納人氏名.getName());
             納付書共通.set被保険者氏名(編集後宛先.get宛先名称().getName());
             if (AtesakiShubetsu.代納人送付先.equals(編集後宛先.get宛先種別()) || AtesakiShubetsu.代納人.equals(編集後宛先.get宛先種別())) {

@@ -13,32 +13,30 @@ public enum SanteiKiso {
     /**
      * コード:0 名称:空白 略称:定義なし
      */
-    空白("0", "空白", ""),
+    空白("0", "空白"),
     /**
-     * コード:1 名称:保険料率 略称:保険料率
+     * コード:1 名称:保険料率 略称:定義なし
      */
-    保険料率("1", "保険料率", "保険料率"),
+    保険料率("1", "保険料率"),
     /**
-     * コード:2 名称:年額保険料 略称:年額保険料
+     * コード:2 名称:年額保険料 略称:定義なし
      */
-    年額保険料("2", "年額保険料", "年額保険料"),
+    年額保険料("2", "年額保険料"),
     /**
-     * コード:3 名称:最終期保険料額 略称:最終期保険料額
+     * コード:3 名称:最終期保険料額 略称:定義なし
      */
-    最終期保険料額("3", "最終期保険料額", "最終期保険料額"),
+    最終期保険料額("3", "最終期保険料額"),
     /**
-     * コード:4 名称:保険料率_今年度 略称:保険料率（今年度）
+     * コード:4 名称:保険料率（今年度） 略称:定義なし
      */
-    保険料率_今年度("4", "保険料率_今年度", "保険料率（今年度）");
+    保険料率_今年度("4", "保険料率（今年度）");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private SanteiKiso(String code, String fullname, String shortName) {
+    private SanteiKiso(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -57,15 +55,6 @@ public enum SanteiKiso {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 算定の基礎の略称を返します。
-     *
-     * @return 算定の基礎の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

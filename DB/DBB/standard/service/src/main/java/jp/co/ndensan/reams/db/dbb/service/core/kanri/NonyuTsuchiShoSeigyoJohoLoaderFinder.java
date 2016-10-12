@@ -203,7 +203,7 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
         }
         if (当初出力_出力方法.equals(項目名)) {
             ToshoShutsuryokuHoho 当初出力_出力方法設定値 = RSTRING_0.equals(設定値)
-                    ? ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 : ToshoShutsuryokuHoho.前期_中期_後期を全件出力;
+                    ? ToshoShutsuryokuHoho.別々出力 : ToshoShutsuryokuHoho.全件出力;
             納入通知書制御情報.set当初出力_出力方法(当初出力_出力方法設定値);
         }
         if (期毎納入通知書タイプ.equals(項目名)) {
@@ -273,12 +273,12 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
         }
         if (領収証書領収印欄.equals(項目名)) {
             RyoshuinranHyojiKubun 領収証書領収印欄設定値
-                    = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun._口座振替_を印字する : RyoshuinranHyojiKubun.__を印字する;
+                    = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun.口座振替を印字する : RyoshuinranHyojiKubun.空白を印字する;
             納入通知書制御情報.set領収証書領収印欄(領収証書領収印欄設定値);
         }
         if (納付書領収印欄.equals(項目名)) {
             RyoshuinranHyojiKubun 納付書領収印欄設定値
-                    = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun._口座振替_を印字する : RyoshuinranHyojiKubun.__を印字する;
+                    = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun.口座振替を印字する : RyoshuinranHyojiKubun.空白を印字する;
             納入通知書制御情報.set納付書領収印欄(納付書領収印欄設定値);
         }
     }
@@ -287,11 +287,11 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
         if (口座振替のOCR出力方法.equals(項目名)) {
             OCRShutsuryokuHoho 口座振替のOCR出力方法設定値;
             if (RSTRING_1.equals(設定値)) {
-                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす;
+                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho.マスクでつぶす;
             } else if (RSTRING_2.equals(設定値)) {
-                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する;
+                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho.印字する;
             } else {
-                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない;
+                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho.印字しない;
             }
             納入通知書制御情報.set口座振替のOCR出力方法(口座振替のOCR出力方法設定値);
         }
@@ -320,9 +320,9 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
         if (納期限出力方法.equals(項目名)) {
             NokigenShutsuryokuHoho 納期限出力方法設定値;
             if (RSTRING_1.equals(設定値)) {
-                納期限出力方法設定値 = NokigenShutsuryokuHoho.全ての期分を印字する;
+                納期限出力方法設定値 = NokigenShutsuryokuHoho.全ての期;
             } else {
-                納期限出力方法設定値 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する;
+                納期限出力方法設定値 = NokigenShutsuryokuHoho.対象の期;
             }
             納入通知書制御情報.set納期限出力方法(納期限出力方法設定値);
         }
@@ -400,11 +400,11 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
     private NofugakuranHyojiKubun get付額欄(RString 設定値) {
         NofugakuranHyojiKubun 付額欄設定値;
         if (RSTRING_1.equals(設定値)) {
-            付額欄設定値 = NofugakuranHyojiKubun._口座振替_を印字する;
+            付額欄設定値 = NofugakuranHyojiKubun.口座振替を印字する;
         } else if (RSTRING_2.equals(設定値)) {
-            付額欄設定値 = NofugakuranHyojiKubun.__を印字する;
+            付額欄設定値 = NofugakuranHyojiKubun.空白を印字する;
         } else if (RSTRING_3.equals(設定値)) {
-            付額欄設定値 = NofugakuranHyojiKubun.星印を印字する;
+            付額欄設定値 = NofugakuranHyojiKubun.マスクを印字する;
         } else {
             付額欄設定値 = NofugakuranHyojiKubun.金額出力;
         }
