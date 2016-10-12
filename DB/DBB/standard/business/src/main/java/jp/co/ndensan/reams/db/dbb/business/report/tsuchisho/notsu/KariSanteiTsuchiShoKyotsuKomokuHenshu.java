@@ -275,14 +275,14 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set更正前特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null ? RString.EMPTY
                 : CodeMaster.getCodeMeisho(UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                        仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード(), FlexibleDate.getNowDate()));
+                        仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正前() == null
                 || 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード() == null ? RString.EMPTY
                 : CodeMaster.getCodeMeisho(UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                         new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収義務者コード(new NenkinCode((仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null) ? Code.EMPTY
-                : 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード()));
+                : 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value()));
         更正前.set更正前特別徴収対象年金コード(new TokubetsuChoshuGimushaCode(
                 仮算定通知書情報.get徴収方法情報_更正前() == null ? RString.EMPTY : 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()));
         更正前.set更正前徴収方法(get徴収方法(更正前普徴期別金額合計, 更正前特徴期別金額合計));
@@ -384,14 +384,14 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set更正後特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null ? RString.EMPTY
                 : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                        仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード(), FlexibleDate.getNowDate()));
+                        仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正後() == null
                 || 仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード() == null ? RString.EMPTY
                 : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                         new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収義務者コード((仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null) ? RString.EMPTY
-                : 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().value());
+                : 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().toRString());
         更正後.set更正後特別徴収対象年金コード(仮算定通知書情報.get徴収方法情報_更正後() == null ? RString.EMPTY
                 : 仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード());
         更正後.set更正後徴収方法(get徴収方法(更正後普徴期別金額合計, 更正後特徴期別金額合計));
