@@ -83,6 +83,17 @@ public class JukyushaDaichoCyouhyoujouhou {
     private static final RString 率 = new RString("%");
     private static final RString 有り = new RString("有り");
 
+    /**
+     * set要介護認定情報List
+     *
+     * @param t 受給者台帳
+     * @param 導入形態コード 導入形態コード
+     * @param 保険者番号の取得 保険者番号の取得
+     * @param 保険者名称の取得 保険者名称の取得
+     * @param listEntity 要介護認定情報List
+     * @param 通知文情報通知文 通知文情報通知文
+     * @return 要介護認定情報List
+     */
     public List<YokaigoNinteiJohoEntity> set要介護認定情報List(IdoChushutsuDaichoNewEntity t, DonyuKeitaiCode 導入形態コード,
             RString 保険者番号の取得, RString 保険者名称の取得, RString 通知文情報通知文, List<YokaigoNinteiJohoEntity> listEntity) {
         YokaigoNinteiJohoEntity 要介護認定情報 = new YokaigoNinteiJohoEntity();
@@ -155,6 +166,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set負担限度額認定情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 負担限度額認定情報EntityList
+     * @return 負担限度額認定情報EntityList
+     */
     public List<FutanGendogakuNinteiJohoEntity> set負担限度額認定情報EntityList(IdoChushutsuDaichoNewEntity t, List<FutanGendogakuNinteiJohoEntity> listEntity) {
         if (t.get負担限度額認定情報List() != null) {
             FutanGendogakuNinteiJohoEntity 負担限度額認定情報 = new FutanGendogakuNinteiJohoEntity();
@@ -195,6 +213,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set利用者負担減免情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 利用者負担減免情報EntityList
+     * @return 利用者負担減免情報EntityList
+     */
     public List<RiyoshaFutanGenmenJohoEntity> set利用者負担減免情報EntityList(IdoChushutsuDaichoNewEntity t, List<RiyoshaFutanGenmenJohoEntity> listEntity) {
         if (t.get利用者負担減免List() != null) {
             RiyoshaFutanGenmenJohoEntity 利用者負担減免情報 = new RiyoshaFutanGenmenJohoEntity();
@@ -210,6 +235,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set社福法人軽減情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 社福法人軽減情報EntityList
+     * @return 社福法人軽減情報EntityList
+     */
     public List<ShafuHojinKeigenJohoEntity> set社福法人軽減情報EntityList(IdoChushutsuDaichoNewEntity t, List<ShafuHojinKeigenJohoEntity> listEntity) {
         if (t.get社福法人軽減List() != null) {
             ShafuHojinKeigenJohoEntity 社福法人軽減情報 = new ShafuHojinKeigenJohoEntity();
@@ -233,6 +265,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set訪問介護等減額情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 訪問介護等減額情報EntityList
+     * @return 訪問介護等減額情報EntityList
+     */
     public List<HomonKaigoGenmenJohoEntity> set訪問介護等減額情報EntityList(IdoChushutsuDaichoNewEntity t, List<HomonKaigoGenmenJohoEntity> listEntity) {
         if (t.get訪問介護等減額情報List() != null) {
             HomonKaigoGenmenJohoEntity 訪問介護等減額情報 = new HomonKaigoGenmenJohoEntity();
@@ -253,6 +292,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set標準負担減額情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 標準負担減額情報EntityList
+     * @return 標準負担減額情報EntityList
+     */
     public List<HyojunFutanGengakuJohoEntity> set標準負担減額情報EntityList(IdoChushutsuDaichoNewEntity t, List<HyojunFutanGengakuJohoEntity> listEntity) {
         if (t.get標準負担減額List() != null) {
             HyojunFutanGengakuJohoEntity 標準負担減額情報 = new HyojunFutanGengakuJohoEntity();
@@ -269,6 +315,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set特別地域加算減免情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 特別地域加算減免情報EntityList
+     * @return 特別地域加算減免情報EntityList
+     */
     public List<TokubetsuChiikiKasanGenmenJohoEntity> set特別地域加算減免情報EntityList(IdoChushutsuDaichoNewEntity t,
             List<TokubetsuChiikiKasanGenmenJohoEntity> listEntity) {
         if (t.get特別地域加算List() != null) {
@@ -286,6 +339,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set施設入退所情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 施設入退所情報EntityList
+     * @return 施設入退所情報EntityList
+     */
     public List<ShisetsuNyutaishojohoEntity> set施設入退所情報EntityList(IdoChushutsuDaichoNewEntity t, List<ShisetsuNyutaishojohoEntity> listEntity) {
         if (t.get施設入退所List() != null) {
             ShisetsuNyutaishojohoEntity 施設入退所情報 = new ShisetsuNyutaishojohoEntity();
@@ -303,6 +363,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set居宅計画届出情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 居宅計画届出情報EntityList
+     * @return 居宅計画届出情報EntityList
+     */
     public List<ItakuKeikakuTodokedejohoEntity> set居宅計画届出情報EntityList(IdoChushutsuDaichoNewEntity t, List<ItakuKeikakuTodokedejohoEntity> listEntity) {
         if (t.get居宅計画届出List() != null) {
             ItakuKeikakuTodokedejohoEntity 居宅計画届出情報 = new ItakuKeikakuTodokedejohoEntity();
@@ -336,6 +403,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set特例施設入退所情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 特例施設入退所情報EntityList
+     * @return 特例施設入退所情報EntityList
+     */
     public List<TokureiShisetuNyutaishojohoEntity> set特例施設入退所情報EntityList(IdoChushutsuDaichoNewEntity t, List<TokureiShisetuNyutaishojohoEntity> listEntity) {
         if (t.get特例施設入退所List() != null) {
             TokureiShisetuNyutaishojohoEntity 特例施設入退所情報 = new TokureiShisetuNyutaishojohoEntity();
@@ -354,6 +428,13 @@ public class JukyushaDaichoCyouhyoujouhou {
 
     }
 
+    /**
+     * set支払方法変更情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 支払方法変更情報EntityList
+     * @return 支払方法変更情報EntityList
+     */
     public List<ShiharaHohoHenkojohoEntity> set支払方法変更情報EntityList(IdoChushutsuDaichoNewEntity t, List<ShiharaHohoHenkojohoEntity> listEntity) {
         if (t.get支払方法変更List() != null) {
             ShiharaHohoHenkojohoEntity 支払方法変更情報 = new ShiharaHohoHenkojohoEntity();
@@ -377,6 +458,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set給付額減額情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 給付額減額情報EntityList
+     * @return 給付額減額情報EntityList
+     */
     public List<KyufugakuGengakujohoEntity> set給付額減額情報EntityList(IdoChushutsuDaichoNewEntity t, List<KyufugakuGengakujohoEntity> listEntity) {
         if (t.get給付額減額情報List() != null) {
             KyufugakuGengakujohoEntity 給付額減額情報 = new KyufugakuGengakujohoEntity();
@@ -398,6 +486,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set資格情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 資格情報EntityList
+     * @return 資格情報EntityList
+     */
     public List<ShikakujohoEntity> set資格情報EntityList(IdoChushutsuDaichoNewEntity t, List<ShikakujohoEntity> listEntity) {
         if (t.get資格情報List() != null) {
             ShikakujohoEntity 資格情報 = new ShikakujohoEntity();
@@ -434,6 +529,13 @@ public class JukyushaDaichoCyouhyoujouhou {
 
     }
 
+    /**
+     * set老齢福祉年金情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 老齢福祉年金情報EntityList
+     * @return 老齢福祉年金情報EntityList
+     */
     public List<RoreiFukushiNenkinjohoEntity> set老齢福祉年金情報EntityList(IdoChushutsuDaichoNewEntity t, List<RoreiFukushiNenkinjohoEntity> listEntity) {
         if (t.get老齢福祉年金List() != null) {
             RoreiFukushiNenkinjohoEntity 老齢福祉年金情報 = new RoreiFukushiNenkinjohoEntity();
@@ -445,6 +547,13 @@ public class JukyushaDaichoCyouhyoujouhou {
         return listEntity;
     }
 
+    /**
+     * set生活保護情報EntityList
+     *
+     * @param t 受給者台帳
+     * @param listEntity 生活保護情報EntityList
+     * @return 生活保護情報EntityList
+     */
     public List<SeikatsuHogojohoEntity> set生活保護情報EntityList(IdoChushutsuDaichoNewEntity t, List<SeikatsuHogojohoEntity> listEntity) {
         if (t.get生活保護情報List() != null) {
             SeikatsuHogojohoEntity 生活保護情報 = new SeikatsuHogojohoEntity();
