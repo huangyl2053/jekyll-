@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomei
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.sougoujigyoujyohou.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.SougouJigyouJyohouRelateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeikyoKihonJohoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
@@ -38,7 +38,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou."
             + "ISougouJigyouJyohouMapper.get当初_版改定_異動分データ");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
+    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報List;
     private SougouJigyouJyohouProcessParameter processParameter;
     private SougouJigyouJyohouMybatisParameter mybatisParameter;
@@ -72,7 +72,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         }
         mybatisParameter = SougouJigyouJyohouMybatisParameter.create_Parameter(processParameter.get新規異動区分(),
                 processParameter.get個人番号付替対象者被保険者番号(), processParameter.get対象開始日時(), processParameter.get対象終了日時(),
-                特定個人版管理特定情報List.get(0).get版番号());
+                特定個人版管理特定情報List.get(0).get版番号(), RString.EMPTY);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
     @Override
     protected void createWriter() {
         中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
-                TeikyoKihonJohoEntity.class);
+                TeikyoKihonJohoNNTempEntity.class);
     }
 
     @Override
@@ -91,13 +91,13 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         中間DB提供基本情報.insert(getTeikyoKihonJohoEntity(entity));
     }
 
-    private TeikyoKihonJohoEntity getTeikyoKihonJohoEntity(SougouJigyouJyohouRelateEntity relateEntity) {
-        TeikyoKihonJohoEntity entity = new TeikyoKihonJohoEntity();
-        entity.setHiHokenshaNo(relateEntity.getHihokenshaNo());
-        entity.setDataSetRecordKey(getデータセットキー(relateEntity.getHihokenshaNo(), relateEntity.getShikyuShinseishoSeiriNo()));
+    private TeikyoKihonJohoNNTempEntity getTeikyoKihonJohoEntity(SougouJigyouJyohouRelateEntity relateEntity) {
+        TeikyoKihonJohoNNTempEntity entity = new TeikyoKihonJohoNNTempEntity();
+        entity.setHihokenshaNo(relateEntity.getHihokenshaNo());
+        entity.setDataSetKey(getデータセットキー(relateEntity.getHihokenshaNo(), relateEntity.getShikyuShinseishoSeiriNo()));
         entity.setTeikyoKubun(RString.EMPTY);
         entity.setShikibetsuCode(relateEntity.getShikibetsuCode());
-        entity.setKojinnNo(RString.EMPTY);
+        entity.setKojinNo(RString.EMPTY);
         entity.setTokuteiKojinJohoMeiCode(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
         entity.setHanNo(特定個人版管理特定情報List.get(0).get版番号());
         entity.setTeikyoNaiyo01(relateEntity.getTaishoNendo().toDateString());
