@@ -51,6 +51,7 @@ public class IryouhiKoujyoHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final int INT_3 = 3;
 
     /**
      * コンストラクタです。
@@ -185,6 +186,7 @@ public class IryouhiKoujyoHandler {
             setGridRow(row);
             row.setJyoutai(状態);
             dataSource.add(row);
+            removeEmptyRow(dataSource);
             Collections.sort(dataSource, new Comparator<IryohiKojyoItiranDataGrid_Row>() {
                 @Override
                 public int compare(IryohiKojyoItiranDataGrid_Row row1, IryohiKojyoItiranDataGrid_Row row2) {
@@ -215,6 +217,7 @@ public class IryouhiKoujyoHandler {
                 row.setJyoutai(状態);
             } else {
                 dataSource.remove(row);
+                addEmptyRow(dataSource);
             }
         }
         div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().setDataSource(dataSource);
@@ -296,7 +299,7 @@ public class IryouhiKoujyoHandler {
 
     private void initGrid(List<IryohiKojo> 医療費控除リスト) {
         List<IryohiKojyoItiranDataGrid_Row> dataSource = new ArrayList<>();
-        if (医療費控除リスト != null) {
+        if (医療費控除リスト != null && !医療費控除リスト.isEmpty()) {
             for (IryohiKojo entity : 医療費控除リスト) {
                 IryohiKojyoItiranDataGrid_Row row = new IryohiKojyoItiranDataGrid_Row();
                 row.setNaiyou(IryoHiKojoNaiyo.toValue(entity.getデータ区分()).get名称());
@@ -328,6 +331,7 @@ public class IryouhiKoujyoHandler {
                 dataSource.add(row);
             }
         }
+        addEmptyRow(dataSource);
         div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().setDataSource(dataSource);
     }
 
@@ -390,5 +394,21 @@ public class IryouhiKoujyoHandler {
             }
         }
         return new IryohiKojo(被保険者番号, 控除対象年, データ区分);
+    }
+
+    private void addEmptyRow(List<IryohiKojyoItiranDataGrid_Row> dataSource) {
+        int size = INT_3 - dataSource.size();
+        for (int i = 1; i <= size; i++) {
+            dataSource.add(new IryohiKojyoItiranDataGrid_Row());
+        }
+    }
+
+    private void removeEmptyRow(List<IryohiKojyoItiranDataGrid_Row> dataSource) {
+        for (IryohiKojyoItiranDataGrid_Row row : dataSource) {
+            if (row.getHiddensinseiDD().getValue() == null) {
+                dataSource.remove(row);
+                return;
+            }
+        }
     }
 }
