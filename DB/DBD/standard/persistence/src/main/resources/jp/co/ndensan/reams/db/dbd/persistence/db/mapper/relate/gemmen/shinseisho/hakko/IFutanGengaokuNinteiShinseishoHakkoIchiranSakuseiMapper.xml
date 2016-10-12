@@ -49,6 +49,7 @@
               resultMap="resultMap_get出力対象者情報Entity" 
               parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter"
               fetchSize="500">
+  WITH master AS(
   SELECT  
         E."hihokenshaNo" AS 被保険者番号,
         E."willBeRenewed"  AS  更新認定フラグ,
@@ -56,6 +57,7 @@
         E."isSeikatsuHogoJukyusha"  AS 生保,
         E."isRoreiFukushiNenkinJukyusha"  AS 老齢,
         E."gokeiShotokuKingaku"  AS 合計所得,
+        E."shikibetsuCode" AS "shikibetsuCode",
         C."ninteiYukoKikanKaishiYMD"  AS 認定開始日,
         C."ninteiYukoKikanShuryoYMD" AS 認定終了日,
         C."kyuSochishaFlag"  AS 旧措置フラグ,
@@ -82,29 +84,13 @@
         I."is自己作成"   AS  is自己作成,
         M."jushochiTokureiFlag"  AS 住所地特例フラグ,
         E."hikazeinenkinKananGaku"  AS  非課税年金勘案額,
-        E."nenkinShunyuGaku"  AS  年金収入額,
-        "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
-        "ShikibetsuTaisho"."choikiCode" AS 町域コード,
-        "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
-        "ShikibetsuTaisho"."kanaShimei" AS 氏名カナ,
-        "ShikibetsuTaisho"."seinengappiYMD" AS 生年月日,
-       <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        E."nenkinShunyuGaku"  AS  年金収入額
   FROM  rgdb."DbT4032ShinseishoIkkatsuHakkoBatch"  AS A
        INNER JOIN rgdb."DbT4033ShinseishoHakkoTaishoshas"  AS D
        ON D."hakkoShoriID"  = A."hakkoShoriID"
        INNER JOIN rgdb."DbT4031ShinseishoHakkoKohoshas"  AS E
        ON  E."haakuShoriID" =A."haakuShoriId"
        AND E."hihokenshaNo" = D."hihokenshaNo"
-       LEFT OUTER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
-        (SELECT 
-         ARRAY_AGG(CAST(rgdb."DbT4031ShinseishoHakkoKohoshas"."shikibetsuCode" AS TEXT))
-         FROM 
-         rgdb."DbT4031ShinseishoHakkoKohoshas"
-         )
-       ) AS "ShikibetsuTaisho"
-       ON "ShikibetsuTaisho"."shikibetsuCode" = E."shikibetsuCode"
        INNER JOIN rgdb."DbV4001JukyushaDaicho"   AS C
        ON C."hihokenshaNo" = E."hihokenshaNo"
        AND C."logicalDeletedFlag" IS FALSE 
@@ -200,11 +186,32 @@
                                                  ON M."hihokenshaNo" =D."hihokenshaNo"
                               WHERE  
                                         A."hakkoShoriID" =#{発行処理ID}
-                              <if test="出力フラグ" >
-                              ORDER BY 
-                                   E."willBeRenewed"
-                              </if>
-                                   ${出力順}                 
+                                        )
+                SELECT
+                master.*,
+                "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
+                "ShikibetsuTaisho"."choikiCode" AS 町域コード,
+                "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
+                "ShikibetsuTaisho"."kanaShimei" AS 氏名カナ,
+                "ShikibetsuTaisho"."seinengappiYMD" AS 生年月日,
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+                FROM
+                master
+                INNER JOIN   rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (SELECT 
+         ARRAY_AGG(CAST("shikibetsuCode" AS TEXT))
+         FROM 
+         master
+         )
+       ) AS "ShikibetsuTaisho"
+       ON "ShikibetsuTaisho"."shikibetsuCode" = master."shikibetsuCode"                       
+                <if test="出力フラグ" >
+                    ORDER BY 
+                      master.更新認定フラグ
+                 </if>
+                  ${出力順}                 
   </select>
 </mapper>                                                   
                                              
