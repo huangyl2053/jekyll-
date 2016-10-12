@@ -57,19 +57,19 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
         FlexibleDate newdate = new FlexibleDate(date.getYearValue(), date.getMonthValue(), 1);
         csvEntity.set認定申請日(newdate.wareki().toDateString());
         csvEntity.set枝番(entity.get枝番());
-        csvEntity.set申請区分法令コード(new RString(NinteiShinseiKubunShinsei.職権.toString()));
-        csvEntity.set申請区分申請時コード(new RString(NinteiShinseiKubunShinsei.資格喪失_死亡.toString()));
-        csvEntity.set取下区分コード(new RString(NinteiShinseiYukoKubunCode.有効.toString()));
-        csvEntity.set被保険者区分コード(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
-        csvEntity.set申請代行区分コード(ShinseiTodokedeDaikoKubunCode.toValue(entity.get申請届出代行区分コード().value()).get名称());
+        csvEntity.set申請区分法令コード(new RString(NinteiShinseiKubunShinsei.職権.コード()));
+        csvEntity.set申請区分申請時コード(new RString(NinteiShinseiKubunShinsei.資格喪失_死亡.コード()));
+        csvEntity.set取下区分コード(NinteiShinseiYukoKubunCode.有効.getコード());
+        csvEntity.set被保険者区分コード(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).getコード());
+        csvEntity.set申請代行区分コード(ShinseiTodokedeDaikoKubunCode.toValue(entity.get申請届出代行区分コード().value()).getCode());
         if (entity.get生年月日() != null) {
             csvEntity.set生年月日(entity.get生年月日().wareki().toDateString());
         }
         if (entity.get性別() != null) {
-            csvEntity.set性別コード(Seibetsu.toValue(entity.get性別()).get名称());
+            csvEntity.set性別コード(Seibetsu.toValue(entity.get性別()).getコード());
         }
         if (entity.get前回要介護状態区分コード() != null) {
-            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).get名称());
+            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).getコード());
         }
         return csvEntity;
     }
