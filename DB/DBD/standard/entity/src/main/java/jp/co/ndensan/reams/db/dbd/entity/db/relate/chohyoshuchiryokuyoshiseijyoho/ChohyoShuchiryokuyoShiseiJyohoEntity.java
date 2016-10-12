@@ -42,4 +42,5 @@ public class ChohyoShuchiryokuyoShiseiJyohoEntity {
     private Code 申請届出代行区分コード;
     private RString 出力CSV状況申請;
     private int index;
+    private RString 枝番;
 }
