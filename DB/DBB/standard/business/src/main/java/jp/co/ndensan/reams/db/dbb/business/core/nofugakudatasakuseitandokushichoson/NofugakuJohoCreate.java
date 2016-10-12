@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.nofugakudatasakuseitandokushi
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.nofugakudatasakuseitandokushichoson.NofugakuJohoTempEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -373,7 +373,7 @@ public class NofugakuJohoCreate {
         BbKakuteiShinkokuDataCsvEntity csvEntity = new BbKakuteiShinkokuDataCsvEntity();
         csvEntity.set市町村コード１(getColumnValue(納付額情報.get賦課市町村コード()));
         csvEntity.set識別ＩＤ(識別ＩＤ);
-        csvEntity.setタイムスタンプ(YMDHMS.now().toDateString());
+        csvEntity.setタイムスタンプ(new RString(RDateTime.now().toString()));
         csvEntity.set最終レコード区分(RString.EMPTY);
         csvEntity.set連番(new RString(連番));
         csvEntity.setFiller(RString.HALF_SPACE);
@@ -442,7 +442,7 @@ public class NofugakuJohoCreate {
         csvEntity.set普通徴収収入額_９月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._9月).get期AsInt(), 納付額情報));
         csvEntity.set普通徴収収入額_１０月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._10月).get期AsInt(), 納付額情報));
         csvEntity.set普通徴収収入額_１１月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._11月).get期AsInt(), 納付額情報));
-        csvEntity.set普通徴収収入額_１２月(set普徴調定額(期月リスト_普徴.get月の期(Tsuki._12月).get期AsInt(), 納付額情報));
+        csvEntity.set普通徴収収入額_１２月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._12月).get期AsInt(), 納付額情報));
         csvEntity.set普通徴収過年度分調定額(調定額);
         csvEntity.set普通徴収過年度分収入額(プラス符号(get普通徴収過年度分収入額(納付額情報, processParameter)));
         csvEntity.set徴収区分(get徴収区分(納付額情報));
@@ -450,7 +450,7 @@ public class NofugakuJohoCreate {
             csvEntity.set普通徴収集計日区分(processParameter.get抽出条件().get集計日区分());
         }
         csvEntity.set予備(RString.HALF_SPACE);
-        csvEntity.set作成日時(YMDHMS.now().toDateString());
+        csvEntity.set作成日時(new RString(RDateTime.now().toString()));
         return csvEntity;
     }
 
@@ -470,7 +470,7 @@ public class NofugakuJohoCreate {
         DE940110DatEntity dataEntity = new DE940110DatEntity();
         dataEntity.set市町村コード１(getColumnValue(納付額情報.get賦課市町村コード()));
         dataEntity.set識別ＩＤ(識別ＩＤ);
-        dataEntity.setタイムスタンプ(YMDHMS.now().toDateString());
+        dataEntity.setタイムスタンプ(new RString(RDateTime.now().toString()));
         dataEntity.set最終レコード区分(RString.EMPTY);
         dataEntity.set連番(new RString(連番));
         dataEntity.setFiller(RString.HALF_SPACE);
@@ -539,7 +539,7 @@ public class NofugakuJohoCreate {
         dataEntity.set普通徴収収入額_９月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._9月).get期AsInt(), 納付額情報));
         dataEntity.set普通徴収収入額_１０月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._10月).get期AsInt(), 納付額情報));
         dataEntity.set普通徴収収入額_１１月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._11月).get期AsInt(), 納付額情報));
-        dataEntity.set普通徴収収入額_１２月(set普徴調定額(期月リスト_普徴.get月の期(Tsuki._12月).get期AsInt(), 納付額情報));
+        dataEntity.set普通徴収収入額_１２月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._12月).get期AsInt(), 納付額情報));
         dataEntity.set普通徴収過年度分調定額(調定額);
         dataEntity.set普通徴収過年度分収入額(プラス符号(get普通徴収過年度分収入額(納付額情報, processParameter)));
         dataEntity.set徴収区分(get徴収区分(納付額情報));
@@ -548,7 +548,7 @@ public class NofugakuJohoCreate {
         }
         dataEntity.set通知書番号(getColumnValue(納付額情報.get通知書番号()));
         dataEntity.set予備(RString.HALF_SPACE);
-        dataEntity.set作成日時(YMDHMS.now().toDateString());
+        dataEntity.set作成日時(new RString(RDateTime.now().toString()));
         return dataEntity;
     }
 
@@ -568,7 +568,7 @@ public class NofugakuJohoCreate {
         DE940200DatEntity dataEntity = new DE940200DatEntity();
         dataEntity.set市町村コード１(getColumnValue(納付額情報.get賦課市町村コード()));
         dataEntity.set識別ＩＤ(識別ＩＤ);
-        dataEntity.setタイムスタンプ(YMDHMS.now().toDateString());
+        dataEntity.setタイムスタンプ(new RString(RDateTime.now().toString()));
         dataEntity.set最終レコード区分(RString.EMPTY);
         dataEntity.set連番(new RString(連番));
         dataEntity.setFiller(RString.HALF_SPACE);
@@ -637,7 +637,7 @@ public class NofugakuJohoCreate {
         dataEntity.set普通徴収収入額_９月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._9月).get期AsInt(), 納付額情報));
         dataEntity.set普通徴収収入額_１０月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._10月).get期AsInt(), 納付額情報));
         dataEntity.set普通徴収収入額_１１月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._11月).get期AsInt(), 納付額情報));
-        dataEntity.set普通徴収収入額_１２月(set普徴調定額(期月リスト_普徴.get月の期(Tsuki._12月).get期AsInt(), 納付額情報));
+        dataEntity.set普通徴収収入額_１２月(set普徴収入額(期月リスト_普徴.get月の期(Tsuki._12月).get期AsInt(), 納付額情報));
         dataEntity.set普通徴収過年度分調定額(調定額);
         dataEntity.set普通徴収過年度分収入額(プラス符号(get普通徴収過年度分収入額(納付額情報, processParameter)));
         dataEntity.set徴収区分(get徴収区分(納付額情報));
@@ -646,7 +646,7 @@ public class NofugakuJohoCreate {
         }
         dataEntity.set通知書番号(getColumnValue(納付額情報.get通知書番号()));
         dataEntity.set予備(RString.HALF_SPACE);
-        dataEntity.set作成日時(YMDHMS.now().toDateString());
+        dataEntity.set作成日時(new RString(RDateTime.now().toString()));
         return dataEntity;
     }
 

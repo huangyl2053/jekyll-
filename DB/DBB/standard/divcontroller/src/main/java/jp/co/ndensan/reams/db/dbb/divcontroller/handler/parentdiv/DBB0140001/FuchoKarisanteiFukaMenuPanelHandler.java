@@ -186,7 +186,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         }
         row4.setTxtKoumoku(項目列_6月特徴開始者);
         RString 列_6月特徴開始者code = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, システム日と時, SubGyomuCode.DBB介護賦課);
-        row4.setTxtNaiyo(TokuchoKaishiMaeFucho6Gatsu.toValue(列_6月特徴開始者code).get略称());
+        row4.setTxtNaiyo(TokuchoKaishiMaeFucho6Gatsu.toValue(列_6月特徴開始者code).get名称());
         dataSource.add(row1);
         dataSource.add(row2);
         dataSource.add(row3);

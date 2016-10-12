@@ -466,7 +466,7 @@
         LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "DbT2015KeisangoJoho"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
         WHERE 
-        "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
+        1 = 1
         <if test="日付関連_年度サイクル == 1">
             AND "DbT2015KeisangoJoho"."fukaNendo"::int = #{調定年度}::int - 1
         </if>

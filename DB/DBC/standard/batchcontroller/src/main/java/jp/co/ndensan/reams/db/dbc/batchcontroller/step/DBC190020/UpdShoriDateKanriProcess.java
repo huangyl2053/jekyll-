@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTais
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 基準収入額適用申請書_年次分作成の処理日付管理マスタに更新 クラスです
@@ -26,6 +27,7 @@ public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
         UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para = new UpdTaishoSeitaiyinTemp5ProcessMybatisParameter();
         para.set処理年度(parameter.get処理年度());
         para.set市町村コード(parameter.get市町村コード());
+        para.setシステム日付(FlexibleDate.getNowDate());
         int 件数 = getMapper(IKijunsyunyunenjiMapper.class).select処理日付管理マスタ(para);
         if (INT_0 == 件数) {
             getMapper(IKijunsyunyunenjiMapper.class).insert処理日付管理マスタ(para);

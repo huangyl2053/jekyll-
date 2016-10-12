@@ -92,6 +92,10 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_ModifyButton(IryouhiKoujyoDiv div) {
+        IryohiKojyoItiranDataGrid_Row row = div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getActiveRow();
+        if (row.getHiddensinseiDD().getValue() == null) {
+            return ResponseData.of(div).respond();
+        }
         getHandler(div).init詳細エリア();
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
         RString 区分 = div.getIryohiKojyoItiranDataGrid().getActiveRow().getHiddenCodeKubun();
@@ -114,6 +118,10 @@ public class IryouhiKoujyo {
      * @return ResponseData<IryouhiKoujyoDiv>
      */
     public ResponseData<IryouhiKoujyoDiv> onClick_DeleteButton(IryouhiKoujyoDiv div) {
+        IryohiKojyoItiranDataGrid_Row row = div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getActiveRow();
+        if (row.getHiddensinseiDD().getValue() == null) {
+            return ResponseData.of(div).respond();
+        }
         getHandler(div).init詳細エリア();
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         RString 区分 = div.getIryohiKojyoItiranDataGrid().getActiveRow().getHiddenCodeKubun();

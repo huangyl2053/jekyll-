@@ -838,6 +838,7 @@ public class RenkeiDataTorikomiBusiness {
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("市町村コード"));
         jokenBuilder.append(processParamter.get市町村コード());
+        出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
     }
 

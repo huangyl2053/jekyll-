@@ -53,7 +53,7 @@ public class TyukanTempBeforeInsertProcess extends BatchProcessBase<DbT2002FukaE
     @Override
     protected IBatchReader createReader() {
         if (processParamter.isSaishinFlag3()) {
-            return new BatchDbReader(更新前賦課情報_処理３);
+            return new BatchDbReader(更新前賦課情報_処理３, setMybatisParamter());
         } else {
             return new BatchDbReader(更新前賦課情報, setMybatisParamter());
         }

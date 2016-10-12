@@ -51,8 +51,9 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
             get帳票出力用情報(writer);
         } else if (this.出力オプション.equals(ONE)) {
             int page = 1;
+            int pageMax = 1;
             for (int index = 0; index < NOCOUNT_7; index++) {
-                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page);
+                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax);
                 IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
                 writer.writeLine(builder);
             }
@@ -178,7 +179,7 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
         }
         int page = 1;
         for (int index = 0; index < NOCOUNT_7 * pageMax; index++) {
-            IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page);
+            IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax);
             IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
             writer.writeLine(builder);
             page++;

@@ -23,20 +23,17 @@
               resultMap="resultMap_get出力対象者情報Entity" 
               parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter"
               fetchSize="500">
+        WITH master AS(
         SELECT C."hihokenshaNo" AS  被保険者番号,
                C."shikibetsuCode" AS 識別コード,
+               C."willBeRenewed" AS "willBeRenewed",
                F."kyuSochishaFlag" AS 旧措置者フラグ,
                E."shichosonCode" AS 市町村コード,
                E."koikinaiTokureiSochimotoShichosonCode" AS 広住特措置元市町村コード,
                G."jigyoshaName" AS 事業者名称,
                G."yubinNo" AS 郵便番号,
                G."jigyoshaAddress" AS 事業者住所,
-               G."telNo" AS 電話番号,
-               "ShikibetsuTaisho"."choikiCode" AS 町域コード,
-               "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
-               "ShikibetsuTaisho"."kanaShimei" AS 氏名カナ,
-               "ShikibetsuTaisho"."seinengappiYMD" AS 生年月日,
-               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+               G."telNo" AS 電話番号
                FROM 
                     rgdb."DbT4032ShinseishoIkkatsuHakkoBatch" AS A 
                INNER JOIN rgdb."DbT4033ShinseishoHakkoTaishoshas"  AS B
@@ -44,16 +41,6 @@
                INNER JOIN rgdb."DbT4031ShinseishoHakkoKohoshas" AS C 
                ON C."haakuShoriID" =A."haakuShoriId" 
                AND C."hihokenshaNo" =B."hihokenshaNo" 
-               LEFT OUTER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
-               (SELECT 
-               ARRAY_AGG(CAST(rgdb."DbT4031ShinseishoHakkoKohoshas"."shikibetsuCode" AS TEXT))
-               FROM 
-               rgdb."DbT4031ShinseishoHakkoKohoshas"
-               )
-               ) AS "ShikibetsuTaisho"
-               ON "ShikibetsuTaisho"."shikibetsuCode" =C."shikibetsuCode"
                INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS E
                ON E."hihokenshaNo" = C."hihokenshaNo"
                LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS F
@@ -99,9 +86,29 @@
         ON G."shikibetsuCode" =C."shikibetsuCode" 
         WHERE 
             A."hakkoShoriID" = #{発行処理ID}
+            )
+         SELECT 
+         master.*,
+        "ShikibetsuTaisho"."choikiCode" AS 町域コード,
+        "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
+        "ShikibetsuTaisho"."kanaShimei" AS 氏名カナ,
+        "ShikibetsuTaisho"."seinengappiYMD" AS 生年月日,
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+          FROM 
+          master
+          INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+               (SELECT 
+               ARRAY_AGG(CAST(rgdb."DbT4031ShinseishoHakkoKohoshas"."shikibetsuCode" AS TEXT))
+               FROM 
+               rgdb."DbT4031ShinseishoHakkoKohoshas"
+               )
+               ) AS "ShikibetsuTaisho"
+               ON "ShikibetsuTaisho"."shikibetsuCode" =master.識別コード
         <if test="出力フラグ" >
         ORDER BY 
-            C."willBeRenewed"
+            master."willBeRenewed"
         </if>
             ${出力順}
     </select>

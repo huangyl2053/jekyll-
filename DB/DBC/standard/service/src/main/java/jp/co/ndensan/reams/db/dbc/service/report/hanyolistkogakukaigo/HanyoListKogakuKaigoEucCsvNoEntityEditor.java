@@ -199,11 +199,10 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
                 hokenshaSummary = hokenshaList.get(広住特措置元市町村コード);
                 証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
             } else if (null != 市町村コード && 市町村コード.isEmpty()) {
-                    hokenshaSummary = hokenshaList.get(市町村コード);
-                    証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
-                
-            }
+                hokenshaSummary = hokenshaList.get(市町村コード);
+                証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
 
+            }
 
             csvEntity.set資格証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
                     ? 証記載保険者番号.getColumnValue()
@@ -766,7 +765,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             return RString.EMPTY;
         }
         if (!parameter.isHizukeHeshu()) {
-            return 生年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(生年月日.toString());
         } else {
             return 生年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
@@ -798,10 +797,10 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         if (高額給付根拠 == null || 高額給付根拠.trim().isEmpty()) {
             return RString.EMPTY;
         } else {
-            List<RString> list = 高額給付根拠.toRStringList();
+            List<RString> list = 高額給付根拠.split("、");
 
             if (list.size() >= INDEX_1 && (list.get(INDEX_0).equals(RST_月)
-                    || list.get(INDEX_0).equals(RString.EMPTY))) {
+                    || list.get(INDEX_0).equals(RString.HALF_SPACE))) {
                 世帯の所得区分コード = list.size() >= INDEX_2
                         ? list.get(INDEX_1)
                         : RString.EMPTY;

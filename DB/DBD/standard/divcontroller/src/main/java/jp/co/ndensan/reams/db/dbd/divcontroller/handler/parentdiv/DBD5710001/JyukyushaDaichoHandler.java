@@ -223,8 +223,13 @@ public class JyukyushaDaichoHandler {
     }
 
     private void set今回抽出日付() {
-        div.getTaishouKikan().getTxtKonkaiymdtime().setFromDateValue(shoriDateKanri.get対象終了日時().getDate());
-        div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime().plusSeconds(1));
+        get画面初期();
+        if (shoriDateKanri != null) {
+            if (shoriDateKanri.get対象終了日時() != null) {
+                div.getTaishouKikan().getTxtKonkaiymdtime().setFromDateValue(shoriDateKanri.get対象終了日時().getDate());
+                div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime().plusSeconds(1));
+            }
+        }
         div.getTaishouKikan().getTxtKonkaiymdtime().setToDateValue(RDate.getNowDate());
         div.getTaishouKikan().getTxtKonkaiymdtime().setToTimeValue(RDate.getNowDateTime().getTime());
         div.getTaishouSha().getHihokenshanoFrom().setDisabled(true);

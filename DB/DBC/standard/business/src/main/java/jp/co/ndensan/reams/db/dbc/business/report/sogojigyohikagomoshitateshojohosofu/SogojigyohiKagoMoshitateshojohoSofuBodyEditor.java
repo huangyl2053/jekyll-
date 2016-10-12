@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMos
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -70,12 +69,21 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         }
         source.listUpper_5 = 送付一覧表データ.getDbWT1001Entity().getKanaMeisho();
         source.listLower_1 = 送付一覧表データ.getDbWT1001Entity().getMeisho();
-        source.listUpper_6 = 送付一覧表データ.getDbWT1731Entity().getServiceTeikyoYM().wareki().eraType(EraType.KANJI_RYAKU).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listUpper_6 = 送付一覧表データ.getDbWT1731Entity().getServiceTeikyoYM().wareki()
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         source.listUpper_7 = get年月日(送付一覧表データ.getDbWT1731Entity().getMoshitateYMD());
         source.listUpper_8 = 送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode();
-        source.listUpper_9 = get申立事由(DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード());
-        source.listLower_2 = get申立事由(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード());
+        RString 申立事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(),
+                new Code(送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().substringEmptyOnError(0, 2)));
+        source.listUpper_9 = 申立事由;
+
+        申立事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
+                new Code(送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().substringEmptyOnError(
+                                送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().length() - 2,
+                                送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode().length())));
+        source.listLower_2 = 申立事由;
         if (flag) {
             source.gokeiKensuTitle = 合計件数タイトル;
             source.gokeiKensu = doカンマ編集(new Decimal(合計)).concat(件);
@@ -92,14 +100,6 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         if (date != null) {
             return date.wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get申立事由(CodeShubetsu code) {
-        if (送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode() != null) {
-            return CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, code,
-                    new Code(送付一覧表データ.getDbWT1731Entity().getMoshitateJiyuCode()));
         }
         return RString.EMPTY;
     }

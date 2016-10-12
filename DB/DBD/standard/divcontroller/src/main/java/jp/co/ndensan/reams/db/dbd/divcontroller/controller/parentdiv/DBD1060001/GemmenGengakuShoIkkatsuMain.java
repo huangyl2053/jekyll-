@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 減免減額帳票一括のDivControllerです。
@@ -23,8 +25,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class GemmenGengakuShoIkkatsuMain {
 
-//    private final RString 負担帳票のID = new RString("DBD100013_FutanGendogakuKetteiTsuchisho");
-//    private final RString 社会福祉のBATCH_ID = new RString("DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko"); todo
+    private final RString FUTANBATCH_ID = new RString("DBD103010_FutanGendoGakuNinteiIkkatsuHakko");
+    private final RString SHAKAIBATCH_ID = new RString("DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko");
+    private final RString BATCH_ID = new RString("BatchID");
+
     /**
      * 画面の初期化。
      *
@@ -159,10 +163,8 @@ public class GemmenGengakuShoIkkatsuMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter> onClick_btnfutanKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
-//        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 負担帳票のID);
-//        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouFtanSave());
-//        manager.setParameterByBatch(data); //todo QA
-        //FutanGendogakuIkkatsuHakkoBatchParameter futanParameer = getHandler(div).onClick_btnJikkouFtanSave();
+        FlowParameters fp = FlowParameters.of(BATCH_ID, FUTANBATCH_ID);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(div).onClick_btnJikkouFtanSave()).respond();
     }
 
@@ -173,9 +175,8 @@ public class GemmenGengakuShoIkkatsuMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter> onClick_btnshakaiKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
-//        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 社会福祉のBATCH_ID);
-//        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouSkaiSave());
-//        manager.setParameterByBatch(data); //toda QA
+        FlowParameters fp = FlowParameters.of(BATCH_ID, SHAKAIBATCH_ID);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(div).onClick_btnJikkouSkaiSave()).respond();
     }
 

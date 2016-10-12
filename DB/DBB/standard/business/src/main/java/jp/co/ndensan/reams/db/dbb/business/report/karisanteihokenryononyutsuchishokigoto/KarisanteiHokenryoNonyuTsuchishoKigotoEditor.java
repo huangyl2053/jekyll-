@@ -160,7 +160,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.ki1 = 納入通知書期情報.get期表記();
             return;
         }
@@ -173,7 +173,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editTsuki1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.tsuki1 = 納入通知書期情報.get月表記();
             return;
         }
@@ -185,17 +185,17 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editNokiKaishi1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nokiKaishi1 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
+        source.nokiKaishi1 = NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())
                 ? 納入通知書期情報.get納期開始日表記() : get納期開始日(編集後仮算定通知書共通情報.get普徴納期情報リスト(), 1);
     }
 
     private void editNokiShuryo1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nokiShuryo1 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
+        source.nokiShuryo1 = NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())
                 ? 納入通知書期情報.get納期終了日表記() : get納期終了日(編集後仮算定通知書共通情報.get普徴納期情報リスト(), 1);
     }
 
     private void editKi2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.ki2 = RString.EMPTY;
             return;
         }
@@ -207,7 +207,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editTsuki2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.tsuki2 = RString.EMPTY;
             return;
         }
@@ -227,7 +227,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.ki3 = RString.EMPTY;
             return;
         }
@@ -239,7 +239,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editTsuki3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.tsuki3 = RString.EMPTY;
             return;
         }
@@ -259,7 +259,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi4(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.ki4 = RString.EMPTY;
             return;
         }
@@ -271,7 +271,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editTsuki4(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.tsuki4 = RString.EMPTY;
             return;
         }
@@ -291,7 +291,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi5(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.ki5 = RString.EMPTY;
             return;
         }
@@ -303,7 +303,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editTsuki5(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.tsuki5 = RString.EMPTY;
             return;
         }
@@ -323,7 +323,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi6(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.ki6 = RString.EMPTY;
             return;
         }
@@ -335,7 +335,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editTsuki6(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+        if (NokigenShutsuryokuHoho.対象の期.equals(納入通知書制御情報.get納期限出力方法())) {
             source.tsuki6 = RString.EMPTY;
             return;
         }

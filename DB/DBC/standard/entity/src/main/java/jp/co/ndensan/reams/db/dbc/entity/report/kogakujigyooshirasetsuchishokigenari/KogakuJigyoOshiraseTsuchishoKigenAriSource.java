@@ -29,7 +29,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriSource implements IReportSource
     public RString hihokenshaName;
     @ReportItem(name = "seibetsu", length = 1, order = 7)
     public RString seibetsu;
-    @ReportExpandedInfo(id = "X")
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 8)
     public RString hihokenshaNo;
     @ReportItem(name = "birthYMD", length = 11, order = 9)

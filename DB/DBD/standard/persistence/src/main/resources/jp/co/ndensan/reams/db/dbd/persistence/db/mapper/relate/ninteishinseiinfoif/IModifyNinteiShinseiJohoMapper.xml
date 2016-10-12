@@ -101,7 +101,9 @@
         ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbV4001JukyushaDaicho"."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
         ON "NinteiShinseiJohoTemp"."shoKisaiHokenshaNo" = rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        <if test="is市町村コード非空">
         AND rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" =#{市町村コード}
+        </if>
         LEFT JOIN rgdb."DbT7060KaigoJigyosha"  AS G
         ON "NinteiShinseiJohoTemp"."nyushoShisetsuCode" = G."jigyoshaNo"
         AND NOT EXISTS (  SELECT 'X'

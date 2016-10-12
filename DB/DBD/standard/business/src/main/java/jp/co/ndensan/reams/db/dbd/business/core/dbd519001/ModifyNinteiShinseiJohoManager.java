@@ -883,7 +883,11 @@ public class ModifyNinteiShinseiJohoManager {
 
     private void setTempEntity電算標準版(ModifyNinteiShinseiJohoEntity entity,
             KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity, LasdecCode 市町村コード) {
-        tempEntity.setShichousonCode(市町村コード.value());
+        if (市町村コード != null) {
+            tempEntity.setShichousonCode(市町村コード.value());
+        } else {
+            tempEntity.setShichousonCode(RString.EMPTY);
+        }
         if (entity.get連絡先2() != null) {
             tempEntity.setHonninRenrakusaki2(entity.get連絡先2().value());
         } else {

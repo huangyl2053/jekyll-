@@ -169,6 +169,13 @@ public class HonsanteiIdoKanendo {
                     resultList.add(result);
                 }
             }
+            if (ReportIdDBB.DBB200027.getReportId().equals(choParameter.get帳票分類ID())) {
+                ChohyoResult result = new ChohyoResult();
+                result.set帳票ID(ReportIdDBB.DBB200027.getReportId().value());
+                result.set帳票分類ID(choParameter.get帳票分類ID());
+                result.set出力順ID(choParameter.get出力順ID());
+                resultList.add(result);
+            }
         }
         return resultList;
     }

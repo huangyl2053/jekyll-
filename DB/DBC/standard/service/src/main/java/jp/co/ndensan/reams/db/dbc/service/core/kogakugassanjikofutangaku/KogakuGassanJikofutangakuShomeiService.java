@@ -86,7 +86,8 @@ public class KogakuGassanJikofutangakuShomeiService {
         resultEntity.setNo(new RString(連番));
         resultEntity.set証記載保険者番号(entity.get高額合算自己負担額_保険者番号());
         resultEntity.set証記載保険者名(entity.get高額合算自己負担額_保険者名());
-        resultEntity.set対象年度(entity.get高額合算自己負担額_対象年度());
+        resultEntity.set対象年度(entity.get高額合算自己負担額_対象年度().wareki().firstYear(FirstYear.ICHI_NEN)
+                .fillType(FillType.BLANK).toDateString());
         resultEntity.set被保険者番号(entity.get被保険者_登録被保険者番号());
         resultEntity.set被保険者氏名(entity.get被保険者_宛名名称());
         resultEntity.set支給申請書整理番号(entity.get高額合算自己負担額_支給申請書整理番号());
@@ -104,9 +105,10 @@ public class KogakuGassanJikofutangakuShomeiService {
         resultEntity.set対象計算期間_終了(entity.get高額合算自己負担額_対象計算期間終了年月日().wareki()
                 .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         resultEntity.set自己負担額証明書整理番号(entity.get高額合算自己負担額_自己負担額証明書整理番号());
-        resultEntity.set自己負担額(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get高額合算自己負担額_合計_自己負担額().toString()), 0));
-        resultEntity.set自己負担額_うち70_74歳(entity.get高額合算自己負担額_合計_70_74自己負担額_内訳());
-
+        resultEntity.set自己負担額(DecimalFormatter.toコンマ区切りRString(
+                new Decimal(entity.get高額合算自己負担額_合計_自己負担額().toString()), 0));
+        resultEntity.set自己負担額_うち70_74歳(DecimalFormatter.toコンマ区切りRString(
+                new Decimal(entity.get高額合算自己負担額_合計_70_74自己負担額_内訳().toString()), 0));
         if (entity.is高額合算自己負担額_自己負担額差異フラグ()) {
             resultEntity.set自己負担額の差異(差異有り);
         } else {

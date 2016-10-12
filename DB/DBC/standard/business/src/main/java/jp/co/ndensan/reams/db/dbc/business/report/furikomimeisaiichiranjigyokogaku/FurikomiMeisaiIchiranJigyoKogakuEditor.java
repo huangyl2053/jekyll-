@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -22,6 +23,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -41,6 +46,7 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
     private final RString 事業対象 = new RString("事業対象");
     private final RString 期間 = new RString("～");
     private final RString 数字 = new RString("1");
+    private static final RString 文_被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -63,12 +69,20 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
             editHead(source);
             edit振込データ(source);
             edit集計(source);
+            if (target.get振込明細一時() != null
+                    && target.get振込明細一時().getHihokenshaNo() != null
+                    && target.get振込明細一時().getShikibetsuCode() != null) {
+                PersonalData personalData = PersonalData.of(target.get振込明細一時().getShikibetsuCode(),
+                        new ExpandedInformation(new Code("003"), 文_被保険者番号, target.get振込明細一時().getHihokenshaNo().getColumnValue()));
+                AccessLogger.log(AccessLogType.照会, personalData);
+            }
         }
 
         return source;
     }
 
     private void edit集計(FurikomiMeisaiIchiranJigyoKogakuSource source) {
+
         if (is頁計) {
             if (target.getNinzu_shokei() != null) {
                 source.ninzu_shokei = DecimalFormatter.toコンマ区切りRString(target.getNinzu_shokei(), 0);

@@ -16,6 +16,7 @@
             高額介護サービス費支給判定結果."shinsaHohoKubun" as "dbT3057_shinsaHohoKubun",
             高額介護サービス費支給審査決定."shikyuKubunCode" as "dbT3058_shikyuKubunCode",
             高額介護サービス費支給審査決定."kogakuShikyuGaku" as "dbT3058_kogakuShikyuGaku",
+            "KogakugassanJikofutangakuInfoHoseiTemp".*
             "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo" as "hokenshaNo",
             "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" as "taishoNendo"
        FROM  
@@ -61,14 +62,8 @@
         <result property="決定高額支給額" column="dbT3058_kogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="中間DB証記載保険者番号" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="中間DB対象年度" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
     </resultMap>
-     <select id="select自己負担額データ" resultOrdered="true"
-            resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" fetchSize="500">
-        SELECT 
-               "KogakugassanJikofutangakuInfoHoseiTemp".*
-        FROM   
-               "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
-    </select>
     <resultMap id="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity" autoMapping="true">
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="taishoNendo" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>

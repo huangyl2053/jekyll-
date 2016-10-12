@@ -388,6 +388,8 @@
                 "TaishoSetaiin1"  AS "TaishoSetaiin1"
          ON    
                "TaishoSetaiin1"."shotaiCode"  =  T1."shotaiCode"  
+         ORDER BY
+               T1."shotaiCode"
      </select>
     
     <resultMap id="ResultMap_UpdTaishoSeitaiyinTemp4Entity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp4Entity" autoMapping="true">

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040031;
 
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -34,5 +35,6 @@ public class KogakugassanJikofutangakuInfoHoseiSubEntity {
     private Decimal 決定高額支給額;
     private HokenshaNo 中間DB証記載保険者番号;
     private FlexibleYear 中間DB対象年度;
+    private KogakugassanJikofutangakuInfoHoseiTempEntity 中間DBEntity;
 
 }

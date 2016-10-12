@@ -25,42 +25,32 @@ public class ToshoShutsuryokuHohoTest extends DbbTestBase {
 
     @Test
     public void 引数に0を指定した場合_toValueは_前期_中期_後期を別々に出力を返す() {
-        assertThat(ToshoShutsuryokuHoho.toValue(new RString("0")), is(ToshoShutsuryokuHoho.前期_中期_後期を別々に出力));
+        assertThat(ToshoShutsuryokuHoho.toValue(new RString("0")), is(ToshoShutsuryokuHoho.別々出力));
     }
 
     @Test
     public void 引数に1を指定した場合_toValueは_前期_中期_後期を全件出力を返す() {
-        assertThat(ToshoShutsuryokuHoho.toValue(new RString("1")), is(ToshoShutsuryokuHoho.前期_中期_後期を全件出力));
+        assertThat(ToshoShutsuryokuHoho.toValue(new RString("1")), is(ToshoShutsuryokuHoho.全件出力));
     }
 
     @Test
     public void 前期_中期_後期を別々に出力を指定した場合_getコードは_0を返す() {
-        assertThat(ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.getコード(), is(new RString("0")));
+        assertThat(ToshoShutsuryokuHoho.別々出力.getコード(), is(new RString("0")));
     }
 
     @Test
     public void 前期_中期_後期を全件出力を指定した場合_getコードは_1を返す() {
-        assertThat(ToshoShutsuryokuHoho.前期_中期_後期を全件出力.getコード(), is(new RString("1")));
+        assertThat(ToshoShutsuryokuHoho.全件出力.getコード(), is(new RString("1")));
     }
 
     @Test
     public void 前期_中期_後期を別々に出力を指定した場合_get名称は_別々出力を返す() {
-        assertThat(ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.get名称(), is(new RString("別々出力")));
+        assertThat(ToshoShutsuryokuHoho.別々出力.get名称(), is(new RString("前期・中期・後期を別々に出力")));
     }
 
     @Test
     public void 前期_中期_後期を全件出力を指定した場合_get名称は_全件出力を返す() {
-        assertThat(ToshoShutsuryokuHoho.前期_中期_後期を全件出力.get名称(), is(new RString("全件出力")));
-    }
-
-    @Test
-    public void 前期_中期_後期を別々に出力を指定した場合_get略称は_前期_中期_後期を別々に出力を返す() {
-        assertThat(ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.get略称(), is(new RString("前期・中期・後期を別々に出力")));
-    }
-
-    @Test
-    public void 前期_中期_後期を全件出力を指定した場合_get略称は_前期_中期_後期を全件出力を返す() {
-        assertThat(ToshoShutsuryokuHoho.前期_中期_後期を全件出力.get略称(), is(new RString("前期・中期・後期を全件出力")));
+        assertThat(ToshoShutsuryokuHoho.全件出力.get名称(), is(new RString("前期・中期・後期を全件出力")));
     }
 
 }

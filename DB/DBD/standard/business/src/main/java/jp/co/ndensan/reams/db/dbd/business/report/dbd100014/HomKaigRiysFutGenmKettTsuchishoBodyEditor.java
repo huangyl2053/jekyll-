@@ -18,7 +18,11 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 特別地域加算減免・訪問介護利用者負担減額決定通知書ボディEditorです。
@@ -117,13 +121,16 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         source.hihokenshaNo8 = 特別地域加算減免.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
         source.hihokenshaNo9 = 特別地域加算減免.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
         source.hihokenshaNo10 = 特別地域加算減免.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
-        source.ketteiYMD = 特別地域加算減免.get決定年月日().wareki().toDateString();
+        source.ketteiYMD = 特別地域加算減免.get決定年月日().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
         if (KetteiKubun.承認する.getコード().equals(特別地域加算減免.get決定区分())) {
-            source.tekiyoYMD = 特別地域加算減免.get適用開始年月日().wareki().toDateString();
+            source.tekiyoYMD = 特別地域加算減免.get適用開始年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.iken1 = new RString("（承認内容）");
             source.shoninSuru = マル;
-            source.yukoYMD = 特別地域加算減免.get適用終了年月日().wareki().toDateString();
+            source.yukoYMD = 特別地域加算減免.get適用終了年月日().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.kakuninNoTitle = new RString("確　認　番　号");
             source.kakuninNo1 = 特別地域加算減免.get確認番号().substring(INDEX_0, INDEX_1);
             source.kakuninNo2 = 特別地域加算減免.get確認番号().substring(INDEX_1, INDEX_2);
@@ -340,22 +347,22 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         }
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
-        // source.jusho4 = sofubutsuAtesakiSource.j;
+        source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
-        // source.jusho5 = RString.EMPTY;
-        // source.jusho6 = RString.EMPTY;
+        source.jusho5 = sofubutsuAtesakiSource.jusho2;
+        source.jusho6 = sofubutsuAtesakiSource.jusho3;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-        // source.katagaki3 = RString.EMPTY;
+        source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
         source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-        // source.katagaki4 = RString.EMPTY;
+        source.katagaki4 = sofubutsuAtesakiSource.katagaki2;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-        // source.shimei3 = RString.EMPTY;
+        source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
         source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
         source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-        // source.shimei4 = RString.EMPTY;
+        source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;

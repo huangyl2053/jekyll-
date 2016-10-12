@@ -760,7 +760,7 @@ WITH master AS (
               ON T4001."shinseishoKanriNo" = X4120."shinseishoKanriNo"
               AND T4001."ninteiYMD" <![CDATA[>=]]> X4120."yukoKaishiYMD"
               AND T4001."ninteiYMD" <![CDATA[<=]]> X4120."yukoShuryoYMD"
-       LEFT JOIN (
+       INNER JOIN (
            SELECT *
              FROM (
                   SELECT 
@@ -1247,8 +1247,8 @@ WITH master AS (
              <foreach collection="被保険者番号リスト" index="index" item="被保険者番号" open="(" separator="," close=")">
                 #{被保険者番号}
             </foreach>
-            AND T4021."kanriKubun"='1'
-              OR T4021."kanriKubun"='2'
+            AND (T4021."kanriKubun"='1'
+              OR T4021."kanriKubun"='2')
             AND T4021."logicalDeletedFlag"=FALSE
             <if test="抽出条件設定区分 == 0">
             AND T4021."lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}

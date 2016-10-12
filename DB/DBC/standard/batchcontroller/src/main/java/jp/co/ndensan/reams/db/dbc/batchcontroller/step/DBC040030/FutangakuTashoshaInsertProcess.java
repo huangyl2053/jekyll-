@@ -5,15 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040030;
 
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200031.GassanJikofutangakuHoseiIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040030.KogakugassanJikofutangakuInfoHoseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.FutangakuTashoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,7 +35,11 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030."
             + "IKogakugassanJikofutangakuInfoHoseiMapper.get中間DB");
     private static final RString 負担額補正対象者データTEMP = new RString("FutangakuTaishoshaTemp");
+    private static final ReportId 高額合算自己負担額補正結果一覧表帳票ID = ReportIdDBC.DBC200031.getReportId();
+    private static final RString ZERO = new RString("0");
+    private static final RString ORDERBY = new RString("order by");
     private KogakugassanJikofutangakuInfoHoseiProcessParameter processParameter;
+    private IOutputOrder 出力順;
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
 
@@ -38,6 +51,22 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID, processParameter.toKogakugassanJikofutangakuMybatisParameter());
+    }
+
+    @Override
+    protected void initialize() {
+        if (!RString.isNullOrEmpty(processParameter.get改頁出力順ID()) && !ZERO.equals(processParameter.get改頁出力順ID())) {
+            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
+                    高額合算自己負担額補正結果一覧表帳票ID, UrControlDataFactory.createInstance().getLoginInfo().getUserId(),
+                    Long.valueOf(processParameter.get改頁出力順ID().toString()));
+            if (出力順 != null) {
+                processParameter.set改頁出力順ID(MyBatisOrderByClauseCreator.create(
+                        GassanJikofutangakuHoseiIchiranOutPutOrder.class, 出力順).replace(ORDERBY, RString.EMPTY));
+            }
+        } else {
+            processParameter.set改頁出力順ID(null);
+        }
     }
 
     @Override

@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class JyusinDataBaitaiTorikomu {
 
+    private static final int ゼロ = 0;
+
     /**
      * 画面初期化のメソッドです。
      *
@@ -92,7 +94,7 @@ public class JyusinDataBaitaiTorikomu {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<JyusinDataBaitaiTorikomuDiv> onClick_btnUpload(JyusinDataBaitaiTorikomuDiv div, FileData[] files) {
-        getHandler(div).upLoadCsv(files);
+        getHandler(div).upLoadCsv(files[ゼロ]);
         return ResponseData.of(div).respond();
     }
 

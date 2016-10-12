@@ -14,8 +14,11 @@
         AND rgdb."DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         INNER JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" 
         ON rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo"=rgdb."DbT7211GaibuRenkeiDataoutputJoho"."shinseishoKanriNo"
-        WHERE 
-        rgdb."DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" =#{証記載保険者番号}
+        WHERE
+        rgdb."DbT4101NinteiShinseiJoho"."logicalDeletedFlag" IS FALSE
+        <if test="is証記載保険者番号非空">
+        AND rgdb."DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" =#{証記載保険者番号}
+        </if>
         <if test="is被保険者番号非空">
         AND rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo" =#{被保険者番号}
         </if>
@@ -31,7 +34,6 @@
         <if test="is今回開始期間TO非空">
         AND rgdb."DbT4101NinteiShinseiJoho"."insertTimestamp" <![CDATA[<=]]> #{今回開始期間TO}
         </if>
-        AND rgdb."DbT4101NinteiShinseiJoho"."logicalDeletedFlag" IS FALSE
         AND rgdb."DbT7211GaibuRenkeiDataoutputJoho"."ninteiShinseiJohoChushutsuYMD" IS NULL
         ORDER BY
         rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo" 

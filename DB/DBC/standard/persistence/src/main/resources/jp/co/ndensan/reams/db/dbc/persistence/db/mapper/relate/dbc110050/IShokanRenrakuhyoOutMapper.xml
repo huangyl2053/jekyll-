@@ -103,6 +103,15 @@
      
      <resultMap id="result_GetPanTeiToDaiSyouEntity" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.getpanteitodaisyou.GetPanTeiToDaiSyouEntity" autoMapping="true">
+        <id column="renban" />
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban" />
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
         <association property="償還払支給申請一時TBL" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>
         <association property="受給者台帳TBL" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
     </resultMap>
@@ -129,6 +138,9 @@
     <resultMap autoMapping="true" id="resultMap_HokenshaTorikomiEntity"
                 type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.HokenshaTorikomiEntity">
         <id column="renban" />
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
         <result property="保険者番号" column="exHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="保険者名" column="exHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="償還一時Entity" resultMap="resultMap_DbWT2111ShokanShinseiTempEntity"/>

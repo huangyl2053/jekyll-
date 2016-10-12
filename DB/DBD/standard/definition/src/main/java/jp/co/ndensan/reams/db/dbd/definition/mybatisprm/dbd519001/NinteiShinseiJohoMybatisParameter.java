@@ -32,6 +32,7 @@ public class NinteiShinseiJohoMybatisParameter implements IMyBatisParameter {
     private boolean is被保険者番号非空 = true;
     private boolean is今回開始期間FROM非空 = true;
     private boolean is今回開始期間TO非空 = true;
+    private boolean is証記載保険者番号非空 = true;
 
     /**
      * コンストラクタ。
@@ -49,10 +50,13 @@ public class NinteiShinseiJohoMybatisParameter implements IMyBatisParameter {
         this.今回開始期間FROM = 今回開始期間FROM;
         this.今回開始期間TO = 今回開始期間TO;
         this.対象外被保険者番号リスト = 対象外被保険者番号リスト;
+        if (証記載保険者番号 == null || 証記載保険者番号.isEmpty()) {
+            this.is証記載保険者番号非空 = false;
+        }
         if (対象外被保険者番号リスト.isEmpty()) {
             this.is対象外被保険者番号リスト非空 = false;
         }
-        if (被保険者番号.isEmpty() || 被保険者番号 == null) {
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             this.is被保険者番号非空 = false;
         }
         if (今回開始期間FROM == null) {

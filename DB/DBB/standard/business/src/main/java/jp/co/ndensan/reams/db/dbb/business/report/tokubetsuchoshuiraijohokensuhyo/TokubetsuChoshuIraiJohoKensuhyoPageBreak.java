@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 特徴依頼情報件数表のPageBreakクラスです。
  *
- * @reamsid_L @reamsid_L DBB-1840-040 xuzhao
+ * @reamsid_L DBB-1840-040 xuzhao
  */
 public class TokubetsuChoshuIraiJohoKensuhyoPageBreak extends PageBreaker<TokubetsuChoshuIraiJohoKensuhyoSource> {
 

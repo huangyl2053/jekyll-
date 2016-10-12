@@ -5,15 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040031;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorListType;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc040031.TyukonShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040031.KogakugassanJikofutangakuInfoHoseiSubEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040031.IKogakugassanJikofutangakuInfoHoseiSubMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -79,7 +76,6 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     private static final int INT_ZERO = 0;
     private Map<RString, Decimal> 高額支給額;
     private Map<RString, HihokenshaNo> 被保険者番号Map;
-    private Map<HihokenshaNo, Map> 被保険者番号_高額支給額;
     private KogakugassanJikofutangakuInfoHoseiSubEntity 高額支給額Entity;
     private Decimal 当年04月高額支給額;
     private Decimal 当年05月高額支給額;
@@ -97,7 +93,6 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     private Decimal 翌年05月高額支給額;
     private Decimal 翌年06月高額支給額;
     private Decimal 翌年07月高額支給額;
-    private List<HihokenshaNo> 被保険者番号List;
     private boolean 処理結果確認リスト中間ファイルFLAG;
     private int count = 0;
     private FileSpoolManager manager;
@@ -125,8 +120,6 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     protected void initialize() {
         高額支給額 = new HashMap<>();
         被保険者番号Map = new HashMap<>();
-        被保険者番号List = new ArrayList<>();
-        被保険者番号_高額支給額 = new HashMap<>();
         処理結果確認リスト中間ファイルFLAG = false;
         initialize月高額支給額();
     }
@@ -143,7 +136,6 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     @Override
     protected void usualProcess(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
         高額支給額Entity = entity;
-        被保険者番号List.add(entity.get被保険者番号());
         if (getBefore() != null) {
             if (getBefore().get被保険者番号().equals(entity.get被保険者番号())) {
                 当年04月高額支給額 = edit高額支給額(entity, 当年4月, 当年04月高額支給額);
@@ -199,7 +191,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
                 高額支給額.put(翌年6月, 翌年06月高額支給額);
                 高額支給額.put(翌年7月, 翌年07月高額支給額);
                 高額支給額.put(合計, 高額支給額合計);
-                被保険者番号_高額支給額.put(getBefore().get被保険者番号(), 高額支給額);
+                update中間DB(entity);
                 initialize月高額支給額();
                 当年04月高額支給額 = edit高額支給額(entity, 当年4月, 当年04月高額支給額);
                 当年05月高額支給額 = edit高額支給額(entity, 当年5月, 当年05月高額支給額);
@@ -277,33 +269,32 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
             高額支給額.put(翌年6月, 翌年06月高額支給額);
             高額支給額.put(翌年7月, 翌年07月高額支給額);
             高額支給額.put(合計, 高額支給額合計);
-            被保険者番号_高額支給額.put(高額支給額Entity.get被保険者番号(), 高額支給額);
+            update中間DB(高額支給額Entity);
         }
-        List<KogakugassanJikofutangakuInfoHoseiTempEntity> 自己負担額データList
-                = getMapper(IKogakugassanJikofutangakuInfoHoseiSubMapper.class).select自己負担額データ();
-        for (KogakugassanJikofutangakuInfoHoseiTempEntity entity : 自己負担額データList) {
-            Map<RString, Decimal> 支給額 = 被保険者番号_高額支給額.get(entity.getHihokenshaNo());
-            entity.setTounen_04_sumi_under_70KogakuShikyuGaku(支給額.get(当年4月));
-            entity.setTounen_05_sumi_under_70KogakuShikyuGaku(支給額.get(当年5月));
-            entity.setTounen_06_sumi_under_70KogakuShikyuGaku(支給額.get(当年6月));
-            entity.setTounen_07_sumi_under_70KogakuShikyuGaku(支給額.get(当年7月));
-            entity.setTounen_08_sumi_under_70KogakuShikyuGaku(支給額.get(当年8月));
-            entity.setTounen_09_sumi_under_70KogakuShikyuGaku(支給額.get(当年9月));
-            entity.setTounen_10_sumi_under_70KogakuShikyuGaku(支給額.get(当年10月));
-            entity.setTounen_11_sumi_under_70KogakuShikyuGaku(支給額.get(当年11月));
-            entity.setTounen_12_sumi_under_70KogakuShikyuGaku(支給額.get(当年12月));
-            entity.setYokunen_01_sumi_under_70KogakuShikyuGaku(支給額.get(翌年1月));
-            entity.setYokunen_02_sumi_under_70KogakuShikyuGaku(支給額.get(翌年2月));
-            entity.setYokunen_03_sumi_under_70KogakuShikyuGaku(支給額.get(翌年3月));
-            entity.setYokunen_04_sumi_under_70KogakuShikyuGaku(支給額.get(翌年4月));
-            entity.setYokunen_05_sumi_under_70KogakuShikyuGaku(支給額.get(翌年5月));
-            entity.setYokunen_06_sumi_under_70KogakuShikyuGaku(支給額.get(翌年6月));
-            entity.setYokunen_07_sumi_under_70KogakuShikyuGaku(支給額.get(翌年7月));
-            entity.setSumi_Gokei_Under70KogakuShikyuGaku(支給額.get(合計));
-            entity.setBatchHoseiJissiYMD(FlexibleDate.getNowDate());
-            // 一覧表用区分 一覧表用区分2 QA No.1700
-            tempDbWriter.update(entity);
-        }
+
+    }
+
+    private void update中間DB(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
+        entity.get中間DBEntity().setTounen_04_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年4月));
+        entity.get中間DBEntity().setTounen_05_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年5月));
+        entity.get中間DBEntity().setTounen_06_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年6月));
+        entity.get中間DBEntity().setTounen_07_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年7月));
+        entity.get中間DBEntity().setTounen_08_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年8月));
+        entity.get中間DBEntity().setTounen_09_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年9月));
+        entity.get中間DBEntity().setTounen_10_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年10月));
+        entity.get中間DBEntity().setTounen_11_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年11月));
+        entity.get中間DBEntity().setTounen_12_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年12月));
+        entity.get中間DBEntity().setYokunen_01_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年1月));
+        entity.get中間DBEntity().setYokunen_02_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年2月));
+        entity.get中間DBEntity().setYokunen_03_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年3月));
+        entity.get中間DBEntity().setYokunen_04_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年4月));
+        entity.get中間DBEntity().setYokunen_05_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年5月));
+        entity.get中間DBEntity().setYokunen_06_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年6月));
+        entity.get中間DBEntity().setYokunen_07_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年7月));
+        entity.get中間DBEntity().setSumi_Gokei_Under70KogakuShikyuGaku(高額支給額.get(合計));
+        entity.get中間DBEntity().setBatchHoseiJissiYMD(FlexibleDate.getNowDate());
+        // 一覧表用区分 一覧表用区分2 QA No.1700
+        tempDbWriter.update(entity.get中間DBEntity());
     }
 
     private void 処理結果確認リスト中間ファイルを出力(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {

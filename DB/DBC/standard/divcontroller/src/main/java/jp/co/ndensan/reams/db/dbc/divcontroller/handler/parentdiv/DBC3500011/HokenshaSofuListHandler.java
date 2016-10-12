@@ -35,10 +35,13 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -150,7 +153,10 @@ public class HokenshaSofuListHandler {
                 row.setTxtFile(entity.getファイル());
                 row.setTxtHokenshaNo(entity.get被保険者番号().getColumnValue());
                 row.setTxtShoriTaishoNengetsu(entity.get対象年月().toDateString());
-                row.setTxtKoshinNichiji(new RString(entity.get処理日時().toString()));
+                RString 作成日 = entity.get処理日時().getDate().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                RString 作成時 = entity.get処理日時().getTime()
+                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+                row.setTxtKoshinNichiji(作成日.concat(RString.HALF_SPACE).concat(作成時));
                 row.setTxtItiranHyoujiJyun(entity.getH一覧表示順());
                 rowList.add(row);
             }
@@ -211,11 +217,10 @@ public class HokenshaSofuListHandler {
     /**
      * 「アップロード」ボタンのメソッドです。
      *
-     * @param files FileData[]
+     * @param file FileData
      */
-    public void upLoadCsv(FileData[] files) {
+    public void upLoadCsv(FileData file) {
 
-        FileData file = files[ゼロ];
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(file.getFileName()));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
@@ -244,21 +249,19 @@ public class HokenshaSofuListHandler {
             for (UzT0885SharedFileEntryEntity entity : uzt0805EntityList) {
                 List<RString> コントロールレコード2 = csvReader.readLine();
                 RString データ種別2 = コントロールレコード2.get(四);
-                if (データ種別2 != null && !データ種別2.isEmpty()) {
-                    ConfigKeysKokuhorenTorikomi 国保連取込情報名称2 = ConfigKeysKokuhorenTorikomi.toValue(データ種別);
-                    if (!(国保連取込情報名称2 != null && 国保連取込情報名称2.isスケジュール設定有無())) {
-                        ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
-                                new FilesystemName(entity.getSharedFileName()), entity.getSharedFileId());
-                        SharedFile.deleteEntry(deleteEntity);
-                        throw new ApplicationException(DbcErrorMessages.国保連アップロード対象ファイル不正.getMessage());
-                    }
+                if (データ種別2 == null || データ種別2.isEmpty()) {
+                    ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
+                            new FilesystemName(entity.getSharedFileName()), entity.getSharedFileId());
+                    SharedFile.deleteEntry(deleteEntity);
+                    throw new ApplicationException(DbcErrorMessages.国保連アップロード対象ファイル不正.getMessage());
                 }
             }
             コントロールレコード配列内容チェック(コントロールレコード, file, データレコード, データ種別);
             処理年月取得(データ種別);
             二重取込チェック(データ種別, file, myBatisParameter, コントロールレコード);
             審査年月チェック(file, データ種別);
-            setDatasource(uzt0805EntityList);
+            List<UzT0885SharedFileEntryEntity> uzt0805EntityList2 = SharedFile.searchSharedFile(searchSharedFile);
+            setDatasource(uzt0805EntityList2);
         }
     }
 
@@ -330,8 +333,7 @@ public class HokenshaSofuListHandler {
         HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
         for (KokuhorenInterfaceKanri faceKanri : entity.getKokuhorenInterfaceKanriList()) {
             if (!myBatisParameter.get同月過誤取下分フラグ()
-                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))
-                    && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())) {
+                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (コントロールレコード.get(三) != null && !コントロールレコード.get(三).isEmpty()
                         && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
                         && !ResponseHolder.isReRequest()) {
@@ -344,8 +346,7 @@ public class HokenshaSofuListHandler {
                     return ResponseData.of(div).respond();
                 }
             } else if (myBatisParameter.get同月過誤取下分フラグ()
-                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))
-                    && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())) {
+                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (!コントロールレコード.get(三).isEmpty()
                         && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
                         && !ResponseHolder.isReRequest()) {
@@ -390,14 +391,15 @@ public class HokenshaSofuListHandler {
             throw new ApplicationException(DbcErrorMessages.国保連レコード種別不正.getMessage());
         }
 
-        if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).equals(ゼロゼロ)) {
+        RDate nowDate = RDate.getNowDate();
+        if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告).equals(ゼロゼロ)) {
             保険者番号 = コントロールレコード.get(六);
-        } else if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).equals(一)) {
+        } else if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告).equals(一)) {
             保険者番号取得(データレコード, データ種別, コントロールレコード);
         }
 
         if (保険者番号 != null && !保険者番号.equals(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+                nowDate, SubGyomuCode.DBU介護統計報告))) {
             if (!保険者番号.equals(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().getColumnValue())) {
                 deleteEntitys(file);
                 throw new ApplicationException(DbcErrorMessages.国保連保険者番号不正.getMessage());
@@ -429,7 +431,7 @@ public class HokenshaSofuListHandler {
                 保険者番号 = コントロールレコード.get(八);
             }
 
-            //todo QA1672
+            //TODO QA1672
         }
     }
 

@@ -1342,12 +1342,18 @@ public class SokujiFukaKouseiMainHandler {
         boolean is5期入力可 = Boolean.TRUE;
         boolean is6期入力可 = Boolean.TRUE;
         if (更正前後徴収方法.get更正後() != null) {
-            is2期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法6月());
-            is3期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法8月());
-            is4期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月())
-                    || is特徴開始者(更正前後徴収方法.get更正後().get徴収方法12月());
-            is5期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法12月());
-            is6期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法2月());
+            is2期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法4月(),
+                    更正前後徴収方法.get更正後().get徴収方法6月());
+            is3期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法6月(),
+                    更正前後徴収方法.get更正後().get徴収方法8月());
+            is4期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法8月(),
+                    更正前後徴収方法.get更正後().get徴収方法10月())
+                    || is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
+                            更正前後徴収方法.get更正後().get徴収方法12月());
+            is5期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
+                    更正前後徴収方法.get更正後().get徴収方法12月());
+            is6期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法12月(),
+                    更正前後徴収方法.get更正後().get徴収方法2月());
         }
         if (is本算定処理済フラグ) {
             boolean is両方とも未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴10月捕捉)
@@ -1378,9 +1384,10 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getTxtTokuchoKoseiGo02().setReadOnly(!is6期入力可 || tablePanel.getTxtTokuchoKoseiGo02().isReadOnly());
     }
 
-    private boolean is特徴開始者(RString 徴収方法) {
-        // TODO 特徴開始者の判定、QA#94818確認中
-        return ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法) || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法);
+    private boolean is特徴開始者(RString 徴収方法前月, RString 徴収方法) {
+        return ChoshuHoho.普通徴収.getコード().equals(徴収方法前月)
+                && (ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法)
+                || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法));
     }
 
     private boolean is特徴異動情報作成前であれば(TokuchoIraiJohoSakuseiJokyo 特徴依頼情報作成状況, TokuchoHosokuMonth month) {

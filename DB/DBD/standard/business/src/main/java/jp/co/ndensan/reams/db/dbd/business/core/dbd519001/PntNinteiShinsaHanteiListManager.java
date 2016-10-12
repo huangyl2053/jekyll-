@@ -8,9 +8,12 @@ package jp.co.ndensan.reams.db.dbd.business.core.dbd519001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001.PntNinteiShinsaHanteiListProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.PntNinteiShinsaHanteiListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -19,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -88,17 +93,25 @@ public class PntNinteiShinsaHanteiListManager {
         RString ファイル名 = RString.EMPTY;
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(認定申請IF種類.concat(parameter.get認定申請IF種類()));
-        出力条件.add(証記載保険者番号.concat(parameter.get証記載保険者番号()));
-        出力条件.add(市町村コード.concat(parameter.get市町村コード().value()));
+        if (parameter.get証記載保険者番号() != null) {
+            出力条件.add(証記載保険者番号.concat(parameter.get証記載保険者番号()));
+        } else {
+            出力条件.add(証記載保険者番号.concat(RString.HALF_SPACE));
+        }
+        if (parameter.get市町村コード() != null) {
+            出力条件.add(市町村コード.concat(parameter.get市町村コード().value()));
+        } else {
+            出力条件.add(市町村コード.concat(RString.HALF_SPACE));
+        }
         出力条件.add(被保険者番号.concat(parameter.get被保険者番号().value()));
         出力条件.add(抽出開始日時.concat(parameter.get抽出開始日時().toString()));
         出力条件.add(抽出終了日時.concat(parameter.get抽出終了日時().toString()));
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                市町村名,
+                ReportIdDBD.DBD503001.getReportName(),
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                市町村名,
+                DbBusinessConfig.get(ConfigNameDBE.要介護認定取消通知書, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 出力ページ数,
                 出力有無,
                 ファイル名,

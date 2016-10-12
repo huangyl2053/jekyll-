@@ -134,7 +134,7 @@ public final class TokutyoKariSanteiFukaHandler {
             dgKanrijoho2_Row 特徴開始計算方法6月row = new dgKanrijoho2_Row();
             特徴開始計算方法6月row.setTxtKoumoku(特徴開始計算方法6月);
             特徴開始計算方法6月row.setTxtNaiyo(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(DbBusinessConfig.get(
-                    ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate, SubGyomuCode.DBB介護賦課)).get略称());
+                    ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate, SubGyomuCode.DBB介護賦課)).get名称());
             dgKanrijoho2List.add(年額基準年度row);
             dgKanrijoho2List.add(特徴開始計算方法6月row);
             div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDataSource(dgKanrijoho2List);

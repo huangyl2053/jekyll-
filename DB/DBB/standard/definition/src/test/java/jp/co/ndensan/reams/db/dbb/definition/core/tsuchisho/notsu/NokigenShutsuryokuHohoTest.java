@@ -25,42 +25,32 @@ public class NokigenShutsuryokuHohoTest extends DbbTestBase {
 
     @Test
     public void 引数に0を指定した場合_toValueは_納付書の対象となっている期を全て印字するを返す() {
-        assertThat(NokigenShutsuryokuHoho.toValue(new RString("0")), is(NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する));
+        assertThat(NokigenShutsuryokuHoho.toValue(new RString("0")), is(NokigenShutsuryokuHoho.対象の期));
     }
 
     @Test
     public void 引数に1を指定した場合_toValueは_全ての期分を印字するを返す() {
-        assertThat(NokigenShutsuryokuHoho.toValue(new RString("1")), is(NokigenShutsuryokuHoho.全ての期分を印字する));
+        assertThat(NokigenShutsuryokuHoho.toValue(new RString("1")), is(NokigenShutsuryokuHoho.全ての期));
     }
 
     @Test
     public void 納付書の対象となっている期を全て印字するを指定した場合_getコードは_0を返す() {
-        assertThat(NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.getコード(), is(new RString("0")));
+        assertThat(NokigenShutsuryokuHoho.対象の期.getコード(), is(new RString("0")));
     }
 
     @Test
     public void 全ての期分を印字するを指定した場合_getコードは_1を返す() {
-        assertThat(NokigenShutsuryokuHoho.全ての期分を印字する.getコード(), is(new RString("1")));
+        assertThat(NokigenShutsuryokuHoho.全ての期.getコード(), is(new RString("1")));
     }
 
     @Test
     public void 納付書の対象となっている期を全て印字するを指定した場合_get名称は_対象の期を返す() {
-        assertThat(NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.get名称(), is(new RString("対象の期")));
+        assertThat(NokigenShutsuryokuHoho.対象の期.get名称(), is(new RString("納付書の対象となっている期を全て印字する")));
     }
 
     @Test
     public void 全ての期分を印字するを指定した場合_get名称は_全ての期を返す() {
-        assertThat(NokigenShutsuryokuHoho.全ての期分を印字する.get名称(), is(new RString("全ての期")));
-    }
-
-    @Test
-    public void 納付書の対象となっている期を全て印字するを指定した場合_get略称は_納付書の対象となっている期を全て印字するを返す() {
-        assertThat(NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.get略称(), is(new RString("納付書の対象となっている期を全て印字する")));
-    }
-
-    @Test
-    public void 全ての期分を印字するを指定した場合_get略称は_全ての期分を印字するを返す() {
-        assertThat(NokigenShutsuryokuHoho.全ての期分を印字する.get略称(), is(new RString("全ての期分を印字する")));
+        assertThat(NokigenShutsuryokuHoho.全ての期.get名称(), is(new RString("全ての期分を印字する")));
     }
 
 }

@@ -71,6 +71,7 @@ public class ShokanRenrakuhyoOutInsMeisaiJutokuTempProcess extends BatchProcessB
         tempEntity.setTanisu(entity.get明細_住所地特例Entity().getTanisu());
         tempEntity.setNissuKaisu(entity.get明細_住所地特例Entity().getNissuKaisu());
         tempEntity.setServiceTanisu(entity.get明細_住所地特例Entity().getServiceTanisu());
+        tempEntity.setShisetsuShozaiHokenshaNo(entity.get明細_住所地特例Entity().getShisetsuShozaiHokenshaNo());
         tempEntity.setTekiyo(entity.get明細_住所地特例Entity().getTekiyo());
         return tempEntity;
     }

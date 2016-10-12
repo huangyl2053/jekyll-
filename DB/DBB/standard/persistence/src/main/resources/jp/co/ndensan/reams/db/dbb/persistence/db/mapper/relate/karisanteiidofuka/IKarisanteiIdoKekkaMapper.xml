@@ -31,7 +31,7 @@
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
         '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
-        INNER JOIN
+        LEFT OUTER JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
              ON koza."uaT0310Koza_shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
         WHERE
@@ -39,7 +39,7 @@
                     AND "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
                     AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
                     AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '仮算定異動賦課'
-<!--                    AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
+                    AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
         ORDER BY 
                 "DbT2015KeisangoJoho"."choteiNendo",
                 "DbT2015KeisangoJoho"."fukaNendo",

@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeisho
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,7 +38,7 @@ public class KogakuGassanJikofutangakuCsvEntity {
     @CsvField(order = 80, name = "証記載保険者名")
     private RString 証記載保険者名;
     @CsvField(order = 90, name = "対象年度")
-    private FlexibleYear 対象年度;
+    private RString 対象年度;
     @CsvField(order = 100, name = "被保険者番号")
     private RString 被保険者番号;
     @CsvField(order = 110, name = "被保険者氏名")
@@ -68,7 +66,7 @@ public class KogakuGassanJikofutangakuCsvEntity {
     @CsvField(order = 220, name = "自己負担額")
     private RString 自己負担額;
     @CsvField(order = 230, name = "自己負担額_うち70_74歳")
-    private Decimal 自己負担額_うち70_74歳;
+    private RString 自己負担額_うち70_74歳;
     @CsvField(order = 240, name = "自己負担額の差異")
     private RString 自己負担額の差異;
 }

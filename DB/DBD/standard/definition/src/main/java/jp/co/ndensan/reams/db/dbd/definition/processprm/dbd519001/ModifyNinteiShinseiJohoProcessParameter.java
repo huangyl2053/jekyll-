@@ -46,7 +46,7 @@ public class ModifyNinteiShinseiJohoProcessParameter implements IBatchProcessPar
      */
     public ModifyNinteiShinseiJohoMybatisParameter toModifyNinteiShinseiJohoMybatisParameter() {
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+                GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
         return new ModifyNinteiShinseiJohoMybatisParameter(key.build(), 認定申請IF種類, 市町村コード);
     }
 }

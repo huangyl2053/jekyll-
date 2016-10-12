@@ -66,7 +66,6 @@ public class RenkeiDataTorikomiHandler {
     private static final RString フォーマット_主治医医療機関 = new RString("NCI121");
     private static final RString フォーマット_主治医 = new RString("NCI131");
     private static final RString なし = new RString("0");
-    private static final RString あり = new RString("1");
     private static final RString SJIS = new RString("1");
     private static final RString UTF8 = new RString("2");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -129,8 +128,11 @@ public class RenkeiDataTorikomiHandler {
      * 取込みファイルデータを取得します。
      */
     public void getFileData() {
-        if (あり.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
-            setRowFileData(set文字コード());
+        RString path = div.getPath();
+        RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
+        File file = new File(filePath.toString());
+        if (file.exists() && !なし.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
+            setRowFileData(set文字コード(), path, filePath);
         }
     }
 
@@ -183,10 +185,8 @@ public class RenkeiDataTorikomiHandler {
         return batchParameter;
     }
 
-    private void setRowFileData(Encode コード) {
+    private void setRowFileData(Encode コード, RString path, RString filePath) {
         List<dgtorikomidataichiran_Row> list = new ArrayList<>();
-        RString path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
         try (CsvListReader read = new CsvListReader.InstanceBuilder(Path.combinePath(path, 要介護認定申請連携データ取込みファイル名)).build()) {
             int size = read.readLine().size();
             if (電算標準版_197 == size) {
