@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuThreeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.TainoMaxRirekiNoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
@@ -22,14 +24,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3650-050 x_lilh
  */
-public class ShiharaiHohoHenkoHaakuThreeProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuThreeEntity> {
+public class ShiharaiHohoHenkoHaakuMaxTainouTaisakuProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuThreeEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran."
             + "IShiharaiHohoHenkoHakuListMainMapper.find最大履歴情報");
 
+    private Map<RString, List<ShiharaiHohoHenkoHaakuThreeEntity>> resultMap;
+
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
+
+    @Override
+    protected void initialize() {
+        resultMap = new HashMap<>();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -42,29 +51,13 @@ public class ShiharaiHohoHenkoHaakuThreeProcess extends BatchProcessBase<Shihara
                 .tempTableName(TainoMaxRirekiNoTempTableEntity.TABLE_NAME).build();
     }
 
-    private TainoMaxRirekiNoTempTableEntity create滞納者対策最大履歴番号一時テーブル情報(ShiharaiHohoHenkoHaakuThreeEntity t) {
+    @Override
+    protected void process(ShiharaiHohoHenkoHaakuThreeEntity t) {
         TainoMaxRirekiNoTempTableEntity result = new TainoMaxRirekiNoTempTableEntity();
         result.setShoKisaiHokenshaNo(t.get証記載保険者番号());
         result.setHihokenshaNo(new HihokenshaNo(t.get被保険者番号()));
         result.setKanriKubun(t.get管理区分());
-        result.setMaxRirekiNo(edit履歴番号(t));
-
-        return result;
-    }
-
-    @Override
-    protected void process(ShiharaiHohoHenkoHaakuThreeEntity t) {
-        TainoMaxRirekiNoTempTableEntity tempTableEntity = create滞納者対策最大履歴番号一時テーブル情報(t);
-        tmpTableWriter.insert(tempTableEntity);
-    }
-
-    private int edit履歴番号(ShiharaiHohoHenkoHaakuThreeEntity t) {
-        if (ShiharaiHenkoKanriKubun._２号差止.getコード().equals(t.get管理区分())) {
-            return Integer.parseInt(t.get履歴番号().toString());
-        } else if (ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(t.get管理区分())) {
-            return Integer.parseInt(t.get履歴番号().toString());
-        } else {
-            return 0;
-        }
+        result.setMaxRirekiNo(t.get履歴番号());
+        tmpTableWriter.insert(result);
     }
 }

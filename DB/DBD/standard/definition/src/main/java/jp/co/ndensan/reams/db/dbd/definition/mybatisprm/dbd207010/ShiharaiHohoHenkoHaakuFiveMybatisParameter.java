@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +26,16 @@ import lombok.Setter;
 @Setter
 public class ShiharaiHohoHenkoHaakuFiveMybatisParameter implements IMyBatisParameter {
 
+    private FlexibleDate 基準日;
     private FlexibleYear 業務コンフィグ_日付関連_調定年度;
 
     /**
      * コンストラクタです。
+     *
+     * @param 基準日 基準日
      */
-    public ShiharaiHohoHenkoHaakuFiveMybatisParameter() {
+    public ShiharaiHohoHenkoHaakuFiveMybatisParameter(FlexibleDate 基準日) {
+        this.基準日 = 基準日;
         set業務コンフィグ_日付関連_調定年度について();
     }
 
