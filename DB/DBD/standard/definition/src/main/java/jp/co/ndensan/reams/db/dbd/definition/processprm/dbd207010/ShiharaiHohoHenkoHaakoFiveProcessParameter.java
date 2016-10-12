@@ -120,6 +120,6 @@ public class ShiharaiHohoHenkoHaakoFiveProcessParameter implements IBatchProcess
      * @return DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス5
      */
     public ShiharaiHohoHenkoHaakuFiveMybatisParameter toShiharaiHohoHenkoHaakuFiveMybatisParameter() {
-        return new ShiharaiHohoHenkoHaakuFiveMybatisParameter();
+        return new ShiharaiHohoHenkoHaakuFiveMybatisParameter(基準日);
     }
 }
