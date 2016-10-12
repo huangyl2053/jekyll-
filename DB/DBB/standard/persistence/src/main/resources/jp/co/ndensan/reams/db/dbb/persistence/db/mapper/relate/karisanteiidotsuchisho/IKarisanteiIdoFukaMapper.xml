@@ -89,7 +89,7 @@
                         master
                    )) AS "ShikibetsuTaisho"
               ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
               ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
@@ -146,7 +146,7 @@
                         master
                    )) AS "ShikibetsuTaisho"
               ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
               ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
