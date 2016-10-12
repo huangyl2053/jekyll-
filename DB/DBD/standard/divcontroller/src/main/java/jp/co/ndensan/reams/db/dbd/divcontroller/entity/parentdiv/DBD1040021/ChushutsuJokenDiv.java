@@ -5,6 +5,12 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040021;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.Chiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.IChiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.GyoseikuInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -26,24 +32,26 @@ public class ChushutsuJokenDiv extends Panel {
     private Space ChikuSpace1;
     @JsonProperty("ddlChiku")
     private DropDownList ddlChiku;
-    @JsonProperty("txtChikuCodeFrom")
-    private TextBoxCode txtChikuCodeFrom;
-    @JsonProperty("btnChikuJushoCodeFrom")
-    private ButtonDialog btnChikuJushoCodeFrom;
-    @JsonProperty("btnChikuGyoseikuCodeFrom")
-    private ButtonDialog btnChikuGyoseikuCodeFrom;
-    @JsonProperty("txtChikuNameFrom")
-    private TextBox txtChikuNameFrom;
-    @JsonProperty("txtChikuCodeTo")
-    private TextBoxCode txtChikuCodeTo;
-    @JsonProperty("btnChikuJushoCodeTo")
-    private ButtonDialog btnChikuJushoCodeTo;
-    @JsonProperty("txtChikuNameTo")
-    private TextBox txtChikuNameTo;
+    @JsonProperty("lblJushoKara")
+    private Label lblJushoKara;
+    @JsonProperty("lblChiku2Kara")
+    private Label lblChiku2Kara;
+    @JsonProperty("lblGyoseikuKara")
+    private Label lblGyoseikuKara;
     @JsonProperty("ShichosonSpace1")
     private Space ShichosonSpace1;
-    @JsonProperty("btnChikuGyoseikuCodeTo")
-    private ButtonDialog btnChikuGyoseikuCodeTo;
+    @JsonProperty("ccdJyuusyoStart")
+    private ChoikiInputDiv ccdJyuusyoStart;
+    @JsonProperty("ccdChikuEnd")
+    private Chiku2InputDiv ccdChikuEnd;
+    @JsonProperty("ccdJyuusyoEnd")
+    private ChoikiInputDiv ccdJyuusyoEnd;
+    @JsonProperty("ccdChikuStart")
+    private Chiku2InputDiv ccdChikuStart;
+    @JsonProperty("ccdGyouseiEnd")
+    private GyoseikuInputDiv ccdGyouseiEnd;
+    @JsonProperty("ccdGyouseiStart")
+    private GyoseikuInputDiv ccdGyouseiStart;
     @JsonProperty("InputMode")
     private RString InputMode;
     @JsonProperty("SearchLevel")
@@ -92,129 +100,57 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * gettxtChikuCodeFrom
-     * @return txtChikuCodeFrom
+     * getlblJushoKara
+     * @return lblJushoKara
      */
-    @JsonProperty("txtChikuCodeFrom")
-    public TextBoxCode getTxtChikuCodeFrom() {
-        return txtChikuCodeFrom;
+    @JsonProperty("lblJushoKara")
+    public Label getLblJushoKara() {
+        return lblJushoKara;
     }
 
     /*
-     * settxtChikuCodeFrom
-     * @param txtChikuCodeFrom txtChikuCodeFrom
+     * setlblJushoKara
+     * @param lblJushoKara lblJushoKara
      */
-    @JsonProperty("txtChikuCodeFrom")
-    public void setTxtChikuCodeFrom(TextBoxCode txtChikuCodeFrom) {
-        this.txtChikuCodeFrom = txtChikuCodeFrom;
+    @JsonProperty("lblJushoKara")
+    public void setLblJushoKara(Label lblJushoKara) {
+        this.lblJushoKara = lblJushoKara;
     }
 
     /*
-     * getbtnChikuJushoCodeFrom
-     * @return btnChikuJushoCodeFrom
+     * getlblChiku2Kara
+     * @return lblChiku2Kara
      */
-    @JsonProperty("btnChikuJushoCodeFrom")
-    public ButtonDialog getBtnChikuJushoCodeFrom() {
-        return btnChikuJushoCodeFrom;
+    @JsonProperty("lblChiku2Kara")
+    public Label getLblChiku2Kara() {
+        return lblChiku2Kara;
     }
 
     /*
-     * setbtnChikuJushoCodeFrom
-     * @param btnChikuJushoCodeFrom btnChikuJushoCodeFrom
+     * setlblChiku2Kara
+     * @param lblChiku2Kara lblChiku2Kara
      */
-    @JsonProperty("btnChikuJushoCodeFrom")
-    public void setBtnChikuJushoCodeFrom(ButtonDialog btnChikuJushoCodeFrom) {
-        this.btnChikuJushoCodeFrom = btnChikuJushoCodeFrom;
+    @JsonProperty("lblChiku2Kara")
+    public void setLblChiku2Kara(Label lblChiku2Kara) {
+        this.lblChiku2Kara = lblChiku2Kara;
     }
 
     /*
-     * getbtnChikuGyoseikuCodeFrom
-     * @return btnChikuGyoseikuCodeFrom
+     * getlblGyoseikuKara
+     * @return lblGyoseikuKara
      */
-    @JsonProperty("btnChikuGyoseikuCodeFrom")
-    public ButtonDialog getBtnChikuGyoseikuCodeFrom() {
-        return btnChikuGyoseikuCodeFrom;
+    @JsonProperty("lblGyoseikuKara")
+    public Label getLblGyoseikuKara() {
+        return lblGyoseikuKara;
     }
 
     /*
-     * setbtnChikuGyoseikuCodeFrom
-     * @param btnChikuGyoseikuCodeFrom btnChikuGyoseikuCodeFrom
+     * setlblGyoseikuKara
+     * @param lblGyoseikuKara lblGyoseikuKara
      */
-    @JsonProperty("btnChikuGyoseikuCodeFrom")
-    public void setBtnChikuGyoseikuCodeFrom(ButtonDialog btnChikuGyoseikuCodeFrom) {
-        this.btnChikuGyoseikuCodeFrom = btnChikuGyoseikuCodeFrom;
-    }
-
-    /*
-     * gettxtChikuNameFrom
-     * @return txtChikuNameFrom
-     */
-    @JsonProperty("txtChikuNameFrom")
-    public TextBox getTxtChikuNameFrom() {
-        return txtChikuNameFrom;
-    }
-
-    /*
-     * settxtChikuNameFrom
-     * @param txtChikuNameFrom txtChikuNameFrom
-     */
-    @JsonProperty("txtChikuNameFrom")
-    public void setTxtChikuNameFrom(TextBox txtChikuNameFrom) {
-        this.txtChikuNameFrom = txtChikuNameFrom;
-    }
-
-    /*
-     * gettxtChikuCodeTo
-     * @return txtChikuCodeTo
-     */
-    @JsonProperty("txtChikuCodeTo")
-    public TextBoxCode getTxtChikuCodeTo() {
-        return txtChikuCodeTo;
-    }
-
-    /*
-     * settxtChikuCodeTo
-     * @param txtChikuCodeTo txtChikuCodeTo
-     */
-    @JsonProperty("txtChikuCodeTo")
-    public void setTxtChikuCodeTo(TextBoxCode txtChikuCodeTo) {
-        this.txtChikuCodeTo = txtChikuCodeTo;
-    }
-
-    /*
-     * getbtnChikuJushoCodeTo
-     * @return btnChikuJushoCodeTo
-     */
-    @JsonProperty("btnChikuJushoCodeTo")
-    public ButtonDialog getBtnChikuJushoCodeTo() {
-        return btnChikuJushoCodeTo;
-    }
-
-    /*
-     * setbtnChikuJushoCodeTo
-     * @param btnChikuJushoCodeTo btnChikuJushoCodeTo
-     */
-    @JsonProperty("btnChikuJushoCodeTo")
-    public void setBtnChikuJushoCodeTo(ButtonDialog btnChikuJushoCodeTo) {
-        this.btnChikuJushoCodeTo = btnChikuJushoCodeTo;
-    }
-
-    /*
-     * gettxtChikuNameTo
-     * @return txtChikuNameTo
-     */
-    @JsonProperty("txtChikuNameTo")
-    public TextBox getTxtChikuNameTo() {
-        return txtChikuNameTo;
-    }
-
-    /*
-     * settxtChikuNameTo
-     * @param txtChikuNameTo txtChikuNameTo
-     */
-    @JsonProperty("txtChikuNameTo")
-    public void setTxtChikuNameTo(TextBox txtChikuNameTo) {
-        this.txtChikuNameTo = txtChikuNameTo;
+    @JsonProperty("lblGyoseikuKara")
+    public void setLblGyoseikuKara(Label lblGyoseikuKara) {
+        this.lblGyoseikuKara = lblGyoseikuKara;
     }
 
     /*
@@ -236,21 +172,57 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getbtnChikuGyoseikuCodeTo
-     * @return btnChikuGyoseikuCodeTo
+     * getccdJyuusyoStart
+     * @return ccdJyuusyoStart
      */
-    @JsonProperty("btnChikuGyoseikuCodeTo")
-    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
-        return btnChikuGyoseikuCodeTo;
+    @JsonProperty("ccdJyuusyoStart")
+    public IChoikiInputDiv getCcdJyuusyoStart() {
+        return ccdJyuusyoStart;
     }
 
     /*
-     * setbtnChikuGyoseikuCodeTo
-     * @param btnChikuGyoseikuCodeTo btnChikuGyoseikuCodeTo
+     * getccdChikuEnd
+     * @return ccdChikuEnd
      */
-    @JsonProperty("btnChikuGyoseikuCodeTo")
-    public void setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
-        this.btnChikuGyoseikuCodeTo = btnChikuGyoseikuCodeTo;
+    @JsonProperty("ccdChikuEnd")
+    public IChiku2InputDiv getCcdChikuEnd() {
+        return ccdChikuEnd;
+    }
+
+    /*
+     * getccdJyuusyoEnd
+     * @return ccdJyuusyoEnd
+     */
+    @JsonProperty("ccdJyuusyoEnd")
+    public IChoikiInputDiv getCcdJyuusyoEnd() {
+        return ccdJyuusyoEnd;
+    }
+
+    /*
+     * getccdChikuStart
+     * @return ccdChikuStart
+     */
+    @JsonProperty("ccdChikuStart")
+    public IChiku2InputDiv getCcdChikuStart() {
+        return ccdChikuStart;
+    }
+
+    /*
+     * getccdGyouseiEnd
+     * @return ccdGyouseiEnd
+     */
+    @JsonProperty("ccdGyouseiEnd")
+    public IGyoseikuInputDiv getCcdGyouseiEnd() {
+        return ccdGyouseiEnd;
+    }
+
+    /*
+     * getccdGyouseiStart
+     * @return ccdGyouseiStart
+     */
+    @JsonProperty("ccdGyouseiStart")
+    public IGyoseikuInputDiv getCcdGyouseiStart() {
+        return ccdGyouseiStart;
     }
 
     /*

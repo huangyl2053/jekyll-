@@ -8,6 +8,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.Chiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.IChiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.GyoseikuInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -95,73 +101,33 @@ public class ChushutsuJoken4Div extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtChikuCodeFrom() {
-        return this.getChushutsuJoken().getTxtChikuCodeFrom();
+    public Label getLblJushoKara() {
+        return this.getChushutsuJoken().getLblJushoKara();
     }
 
     @JsonIgnore
-    public void  setTxtChikuCodeFrom(TextBoxCode txtChikuCodeFrom) {
-        this.getChushutsuJoken().setTxtChikuCodeFrom(txtChikuCodeFrom);
+    public void  setLblJushoKara(Label lblJushoKara) {
+        this.getChushutsuJoken().setLblJushoKara(lblJushoKara);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuJushoCodeFrom() {
-        return this.getChushutsuJoken().getBtnChikuJushoCodeFrom();
+    public Label getLblChiku2Kara() {
+        return this.getChushutsuJoken().getLblChiku2Kara();
     }
 
     @JsonIgnore
-    public void  setBtnChikuJushoCodeFrom(ButtonDialog btnChikuJushoCodeFrom) {
-        this.getChushutsuJoken().setBtnChikuJushoCodeFrom(btnChikuJushoCodeFrom);
+    public void  setLblChiku2Kara(Label lblChiku2Kara) {
+        this.getChushutsuJoken().setLblChiku2Kara(lblChiku2Kara);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuGyoseikuCodeFrom() {
-        return this.getChushutsuJoken().getBtnChikuGyoseikuCodeFrom();
+    public Label getLblGyoseikuKara() {
+        return this.getChushutsuJoken().getLblGyoseikuKara();
     }
 
     @JsonIgnore
-    public void  setBtnChikuGyoseikuCodeFrom(ButtonDialog btnChikuGyoseikuCodeFrom) {
-        this.getChushutsuJoken().setBtnChikuGyoseikuCodeFrom(btnChikuGyoseikuCodeFrom);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtChikuNameFrom() {
-        return this.getChushutsuJoken().getTxtChikuNameFrom();
-    }
-
-    @JsonIgnore
-    public void  setTxtChikuNameFrom(TextBox txtChikuNameFrom) {
-        this.getChushutsuJoken().setTxtChikuNameFrom(txtChikuNameFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtChikuCodeTo() {
-        return this.getChushutsuJoken().getTxtChikuCodeTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtChikuCodeTo(TextBoxCode txtChikuCodeTo) {
-        this.getChushutsuJoken().setTxtChikuCodeTo(txtChikuCodeTo);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnChikuJushoCodeTo() {
-        return this.getChushutsuJoken().getBtnChikuJushoCodeTo();
-    }
-
-    @JsonIgnore
-    public void  setBtnChikuJushoCodeTo(ButtonDialog btnChikuJushoCodeTo) {
-        this.getChushutsuJoken().setBtnChikuJushoCodeTo(btnChikuJushoCodeTo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtChikuNameTo() {
-        return this.getChushutsuJoken().getTxtChikuNameTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtChikuNameTo(TextBox txtChikuNameTo) {
-        this.getChushutsuJoken().setTxtChikuNameTo(txtChikuNameTo);
+    public void  setLblGyoseikuKara(Label lblGyoseikuKara) {
+        this.getChushutsuJoken().setLblGyoseikuKara(lblGyoseikuKara);
     }
 
     @JsonIgnore
@@ -175,13 +141,33 @@ public class ChushutsuJoken4Div extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
-        return this.getChushutsuJoken().getBtnChikuGyoseikuCodeTo();
+    public IChoikiInputDiv getCcdJyuusyoStart() {
+        return this.getChushutsuJoken().getCcdJyuusyoStart();
     }
 
     @JsonIgnore
-    public void  setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
-        this.getChushutsuJoken().setBtnChikuGyoseikuCodeTo(btnChikuGyoseikuCodeTo);
+    public IChiku2InputDiv getCcdChikuEnd() {
+        return this.getChushutsuJoken().getCcdChikuEnd();
+    }
+
+    @JsonIgnore
+    public IChoikiInputDiv getCcdJyuusyoEnd() {
+        return this.getChushutsuJoken().getCcdJyuusyoEnd();
+    }
+
+    @JsonIgnore
+    public IChiku2InputDiv getCcdChikuStart() {
+        return this.getChushutsuJoken().getCcdChikuStart();
+    }
+
+    @JsonIgnore
+    public IGyoseikuInputDiv getCcdGyouseiEnd() {
+        return this.getChushutsuJoken().getCcdGyouseiEnd();
+    }
+
+    @JsonIgnore
+    public IGyoseikuInputDiv getCcdGyouseiStart() {
+        return this.getChushutsuJoken().getCcdGyouseiStart();
     }
 
     @JsonIgnore
