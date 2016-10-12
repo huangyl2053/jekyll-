@@ -51,10 +51,7 @@ public class DvKogakuServiceJuryoIninHandler {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString KEY_決定区分_承認する = new RString("key0");
-    private static final RString CODE_決定区分_承認する = new RString("1");
-    private static final RString VALUE_決定区分_承認する = new RString("承認する");
     private static final RString KEY_決定区分_承認しない = new RString("key1");
-    private static final RString CODE_決定区分_承認しない = new RString("0");
     private static final int LENGTH_契約番号 = 8;
     private static final int LENGTH_契約番号西暦年度 = 4;
     private static final int LENGTH_契約番号下四桁 = 4;
@@ -216,7 +213,7 @@ public class DvKogakuServiceJuryoIninHandler {
             div.getBtnShoninDate().setToValue(new RDate(row.getShoninEndDate().getValue().toString()));
         }
         div.getCcdJigyosha().setNyuryokuShisetsuKodo(row.getJigyoshaNo());
-        div.getRadKetteiKubun().setSelectedKey(VALUE_決定区分_承認する.equals(row.getKetteiKubun())
+        div.getRadKetteiKubun().setSelectedKey(ShoninKubun.承認する.get名称().equals(row.getKetteiKubun())
                 ? KEY_決定区分_承認する : KEY_決定区分_承認しない);
         onChange_radKetteiKubun();
         div.getTxtShoninShinaiRiyu().setValue(RString.isNullOrEmpty(row.getRiyu()) ? 空白 : row.getRiyu());
@@ -397,7 +394,7 @@ public class DvKogakuServiceJuryoIninHandler {
                 .set事業者番号(RString.isNullOrEmpty(div.getDvHaraiKetteiShusei().getCcdJigyosha().getNyuryokuShisetsuKodo()) ? JigyoshaNo.EMPTY
                         : new JigyoshaNo(div.getDvHaraiKetteiShusei().getCcdJigyosha().getNyuryokuShisetsuKodo().toString()))
                 .set承認結果区分(KEY_決定区分_承認する.equals(div.getDvHaraiKetteiShusei().getRadKetteiKubun().getSelectedKey())
-                        ? CODE_決定区分_承認する : CODE_決定区分_承認しない)
+                        ? ShoninKubun.承認する.getコード() : ShoninKubun.承認しない.getコード())
                 .set不承認理由(div.getDvHaraiKetteiShusei().getTxtShoninShinaiRiyu().getValue())
                 .set利用者負担上限額(RString.isNullOrEmpty(div.getDvHaraiKetteiShusei().getDdlRiyoshafutanJogenGaku().getSelectedKey())
                         ? null : new Decimal(div.getDvHaraiKetteiShusei().getDdlRiyoshafutanJogenGaku().getSelectedKey().toString()))
@@ -431,7 +428,7 @@ public class DvKogakuServiceJuryoIninHandler {
                 .set事業者番号(RString.isNullOrEmpty(div.getDvHaraiKetteiShusei().getCcdJigyosha().getNyuryokuShisetsuKodo()) ? JigyoshaNo.EMPTY
                         : new JigyoshaNo(div.getDvHaraiKetteiShusei().getCcdJigyosha().getNyuryokuShisetsuKodo().toString()))
                 .set承認結果区分(KEY_決定区分_承認する.equals(div.getDvHaraiKetteiShusei().getRadKetteiKubun().getSelectedKey())
-                        ? CODE_決定区分_承認する : CODE_決定区分_承認しない)
+                        ? ShoninKubun.承認する.getコード() : ShoninKubun.承認しない.getコード())
                 .set利用者負担上限額(RString.isNullOrEmpty(div.getDvHaraiKetteiShusei().getDdlRiyoshafutanJogenGaku().getSelectedKey())
                         ? null : new Decimal(div.getDvHaraiKetteiShusei().getDdlRiyoshafutanJogenGaku().getSelectedKey().toString()))
                 .set不承認理由(div.getDvHaraiKetteiShusei().getTxtShoninShinaiRiyu().getValue())
