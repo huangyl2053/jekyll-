@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4401IryohiKojoDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoikiHenshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -130,7 +131,8 @@ public class IryoHiKojoKakuninSinsei {
      * @return boolean
      */
     public boolean checkuJukyusha(HihokenshaNo 被保険者番号) {
-        List<DbV4001JukyushaDaichoEntity> dbV4001JukyushaDaichoEntityList = dbV4001JukyushaDaichoAliveDac.selectBy被保険者番号AND有効無効区分(被保険者番号, new RString("1"));
+        List<DbV4001JukyushaDaichoEntity> dbV4001JukyushaDaichoEntityList = dbV4001JukyushaDaichoAliveDac.
+                selectBy被保険者番号AND有効無効区分(被保険者番号, YukoMukoKubun.有効.getコード());
         Integer レコード数 = 0;
         if (dbV4001JukyushaDaichoEntityList != null) {
             レコード数 = dbV4001JukyushaDaichoEntityList.size();

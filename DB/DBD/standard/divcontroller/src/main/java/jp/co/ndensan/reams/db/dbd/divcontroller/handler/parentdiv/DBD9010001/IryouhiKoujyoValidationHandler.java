@@ -62,7 +62,7 @@ public class IryouhiKoujyoValidationHandler {
         }
     }
 
-    public static enum IryouhiKoujyoSpec implements IPredicate<IryouhiKoujyoDiv> {
+    private static enum IryouhiKoujyoSpec implements IPredicate<IryouhiKoujyoDiv> {
 
         /**
          * 申請年月日の未入力チェック。
