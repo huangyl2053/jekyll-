@@ -41,12 +41,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private static final int NOCOUNT_5 = 5;
-    private static final RString 全角スペース = new RString("　");
+    private static final RString 半角スペース = new RString(" ");
     private static final RString 作成 = new RString("作成");
 
     private final TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳;
     private final int index;
     private final int page;
+    private final int pageMax;
 
     /**
      * インスタンスを生成します。
@@ -54,11 +55,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
      * @param 帳票出力用受給者台帳 JukyushaDaichoEntity
      * @param index int
      * @param page int
+     * @param pageMax int
      */
-    public JukyushaDaichoEditor(TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳, int index, int page) {
+    public JukyushaDaichoEditor(TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳, int index, int page, int pageMax) {
         this.帳票出力用受給者台帳 = 帳票出力用受給者台帳;
         this.index = index;
         this.page = page;
+        this.pageMax = pageMax;
 
     }
 
@@ -598,7 +601,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat(全角スペース).concat(時分秒).concat(全角スペース).concat(作成);
+        return 年月日.concat(半角スペース).concat(時分秒).concat(半角スペース).concat(作成);
     }
 
     private JukyushaDaichoReportSource get先頭1(JukyushaDaichoReportSource source, SentoEntity 先頭Entity) {
@@ -614,12 +617,8 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         if (先頭Entity.get証記載保険者名() != null) {
             source.shoHokenshaName = 先頭Entity.get証記載保険者名();
         }
-        if (先頭Entity.get被保険者に対するページ() != null) {
-            source.hihokenshaPage = 先頭Entity.get被保険者に対するページ();
-        }
-        if (先頭Entity.get総ページ() != null) {
-            source.totalPage = 先頭Entity.get総ページ();
-        }
+        source.hihokenshaPage = new RString(String.valueOf(this.page));
+        source.totalPage = new RString(String.valueOf(this.pageMax));
         if (先頭Entity.get被保険者番号() != null) {
             source.hihokenshaNo = 先頭Entity.get被保険者番号();
         }
