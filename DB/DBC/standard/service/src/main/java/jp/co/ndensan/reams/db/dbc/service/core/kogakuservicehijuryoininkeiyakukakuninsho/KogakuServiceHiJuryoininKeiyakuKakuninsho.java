@@ -76,9 +76,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
 
-    private static final RString CODE_決定区分_承認する = new RString("1");
-    private static final RString VALUE_決定区分_承認する = new RString("承認する");
-    private static final RString VALUE_決定区分_承認しない = new RString("承認しない");
+    private static final RString コンマ = new RString(",");
     private static final RString 円単位 = new RString("円");
     private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
     private static final RString 帳票制御共通_首長名印字位置_公印にかける = new RString("1");
@@ -112,13 +110,13 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         result.set被保険者氏名フリガナ(param.get被保険者氏名フリガナ());
         result.set受付年月日(param.get受付日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        result.set承認不承認(RString.isNullOrEmpty(param.get決定区分()) ? VALUE_決定区分_承認しない
+        result.set承認不承認(RString.isNullOrEmpty(param.get決定区分()) ? ShoninKubun.承認しない.get名称()
                 : ShoninKubun.toValue(param.get決定区分()).get名称());
         result.set承認年月日(param.get決定日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         result.set不承認の理由(param.get承認しない理由());
         result.set利用者負担上限額(RString.isNullOrEmpty(param.get利用者負担上限額()) ? RString.EMPTY
-                : param.get利用者負担上限額().replace(円単位, RString.EMPTY));
+                : param.get利用者負担上限額().replace(円単位, RString.EMPTY).replace(コンマ, RString.EMPTY));
 
         介護事業者情報を取得する(result, param.get事業者番号());
         介護事業者代表者情報を取得する(result, param.get事業者番号());

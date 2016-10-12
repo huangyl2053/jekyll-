@@ -7,8 +7,16 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040021;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.Chiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.IChiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.GyoseikuInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -380,33 +388,8 @@ public class TokubetsuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtJigyoshaNo() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getTxtJigyoshaNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtJigyoshaNo(TextBoxCode txtJigyoshaNo) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().setTxtJigyoshaNo(txtJigyoshaNo);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnJigyoshaNo() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getBtnJigyoshaNo();
-    }
-
-    @JsonIgnore
-    public void  setBtnJigyoshaNo(ButtonDialog btnJigyoshaNo) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().setBtnJigyoshaNo(btnJigyoshaNo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJigyoshaName() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getTxtJigyoshaName();
-    }
-
-    @JsonIgnore
-    public void  setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().setTxtJigyoshaName(txtJigyoshaName);
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJohoCommonChildDiv() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getCcdShisetsuJohoCommonChildDiv();
     }
 
     @JsonIgnore
@@ -450,73 +433,33 @@ public class TokubetsuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtChikuCodeFrom() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getTxtChikuCodeFrom();
+    public Label getLblJushoKara() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getLblJushoKara();
     }
 
     @JsonIgnore
-    public void  setTxtChikuCodeFrom(TextBoxCode txtChikuCodeFrom) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setTxtChikuCodeFrom(txtChikuCodeFrom);
+    public void  setLblJushoKara(Label lblJushoKara) {
+        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setLblJushoKara(lblJushoKara);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuJushoCodeFrom() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getBtnChikuJushoCodeFrom();
+    public Label getLblChiku2Kara() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getLblChiku2Kara();
     }
 
     @JsonIgnore
-    public void  setBtnChikuJushoCodeFrom(ButtonDialog btnChikuJushoCodeFrom) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setBtnChikuJushoCodeFrom(btnChikuJushoCodeFrom);
+    public void  setLblChiku2Kara(Label lblChiku2Kara) {
+        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setLblChiku2Kara(lblChiku2Kara);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuGyoseikuCodeFrom() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getBtnChikuGyoseikuCodeFrom();
+    public Label getLblGyoseikuKara() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getLblGyoseikuKara();
     }
 
     @JsonIgnore
-    public void  setBtnChikuGyoseikuCodeFrom(ButtonDialog btnChikuGyoseikuCodeFrom) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setBtnChikuGyoseikuCodeFrom(btnChikuGyoseikuCodeFrom);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtChikuNameFrom() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getTxtChikuNameFrom();
-    }
-
-    @JsonIgnore
-    public void  setTxtChikuNameFrom(TextBox txtChikuNameFrom) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setTxtChikuNameFrom(txtChikuNameFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtChikuCodeTo() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getTxtChikuCodeTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtChikuCodeTo(TextBoxCode txtChikuCodeTo) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setTxtChikuCodeTo(txtChikuCodeTo);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnChikuJushoCodeTo() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getBtnChikuJushoCodeTo();
-    }
-
-    @JsonIgnore
-    public void  setBtnChikuJushoCodeTo(ButtonDialog btnChikuJushoCodeTo) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setBtnChikuJushoCodeTo(btnChikuJushoCodeTo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtChikuNameTo() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getTxtChikuNameTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtChikuNameTo(TextBox txtChikuNameTo) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setTxtChikuNameTo(txtChikuNameTo);
+    public void  setLblGyoseikuKara(Label lblGyoseikuKara) {
+        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setLblGyoseikuKara(lblGyoseikuKara);
     }
 
     @JsonIgnore
@@ -530,13 +473,33 @@ public class TokubetsuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getBtnChikuGyoseikuCodeTo();
+    public IChoikiInputDiv getCcdJyuusyoStart() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdJyuusyoStart();
     }
 
     @JsonIgnore
-    public void  setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setBtnChikuGyoseikuCodeTo(btnChikuGyoseikuCodeTo);
+    public IChiku2InputDiv getCcdChikuEnd() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdChikuEnd();
+    }
+
+    @JsonIgnore
+    public IChoikiInputDiv getCcdJyuusyoEnd() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdJyuusyoEnd();
+    }
+
+    @JsonIgnore
+    public IChiku2InputDiv getCcdChikuStart() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdChikuStart();
+    }
+
+    @JsonIgnore
+    public IGyoseikuInputDiv getCcdGyouseiEnd() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdGyouseiEnd();
+    }
+
+    @JsonIgnore
+    public IGyoseikuInputDiv getCcdGyouseiStart() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdGyouseiStart();
     }
 
     @JsonIgnore

@@ -103,8 +103,10 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     private void 平準化入力設定(HokenryoDankaiManager 保険料段階取得, FlexibleYear 賦課年度,
             TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity, HeijunkaInput heijunkaInput,
             RString 平準化計算方法_増額, RString 平準化計算方法_減額) {
-        Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(賦課年度, entity.getHokenryoDankaiKarisanntei());
-        heijunkaInput.set年保険料額(今年度保険料率取得(保険料段階));
+        if (entity.getHokenryoDankaiKarisanntei() != null) {
+            Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(賦課年度, entity.getHokenryoDankaiKarisanntei());
+            heijunkaInput.set年保険料額(今年度保険料率取得(保険料段階));
+        }
         List<Decimal> 特徴期別額リスト = new ArrayList<>();
         特徴期別額リスト.add(entity.getTokubetsuChoteigaku01() == null ? Decimal.ZERO : entity.getTokubetsuChoteigaku01());
         特徴期別額リスト.add(entity.getTokubetsuChoteigaku02() == null ? Decimal.ZERO : entity.getTokubetsuChoteigaku02());

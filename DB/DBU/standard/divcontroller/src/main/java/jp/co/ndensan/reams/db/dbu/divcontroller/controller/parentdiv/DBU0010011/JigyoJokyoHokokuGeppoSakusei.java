@@ -230,8 +230,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho1(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).set作成日時の設定();
         setすべて選択チェックボックス(div);
+        getHandler(div).set作成日時の設定();
         return ResponseData.of(div).respond();
     }
 
@@ -242,8 +242,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho2(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).set一般状況償還分();
         setすべて選択チェックボックス(div);
+        getHandler(div).set一般状況償還分();
         return ResponseData.of(div).respond();
     }
 
