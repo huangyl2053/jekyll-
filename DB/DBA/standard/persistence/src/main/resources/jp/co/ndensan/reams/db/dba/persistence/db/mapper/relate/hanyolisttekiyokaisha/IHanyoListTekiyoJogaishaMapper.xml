@@ -259,5 +259,6 @@
                 )
             ) AS 医療保険加入状況
             ON    医療保険加入状況."shikibetsuCode" = 処理対象.処理対象_識別コード
+        WHERE  介護除外住所地特例対象施設."jigyoshaShubetsu" = '02'
     </select>
 </mapper>
