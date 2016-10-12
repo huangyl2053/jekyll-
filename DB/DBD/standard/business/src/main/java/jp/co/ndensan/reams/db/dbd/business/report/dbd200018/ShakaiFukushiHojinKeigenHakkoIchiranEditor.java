@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200018;
 
-import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -30,11 +31,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukushiHojinKeigenHakkoIchiranEditor {
 
-    private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
 
     private final ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報;
     private final Association association;
@@ -77,22 +78,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             source.hokenshaName = this.association.get市町村名();
         }
         if (null != iOutputOrder) {
-            List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-            if (設定項目リスト.size() > LISTINDEX_0) {
-                source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_1) {
-                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_2) {
-                source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_3) {
-                source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_4) {
-                source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
+            setiOutputOrder(source);
         }
         source.list_1 = new RString(String.valueOf(index + 1));
     }
@@ -214,5 +200,26 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
         }
         return 適用日.concat(new RString("~")).concat(有効期限);
+    }
+
+    private void setiOutputOrder(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(iOutputOrder);
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
+
+        }
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
+        }
     }
 }
