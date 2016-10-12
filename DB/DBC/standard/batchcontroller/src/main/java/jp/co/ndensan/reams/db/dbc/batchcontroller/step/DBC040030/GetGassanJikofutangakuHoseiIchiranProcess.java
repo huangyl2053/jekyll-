@@ -64,12 +64,16 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
     private static final ReportId 出力順帳票分類ID = new ReportId("DBC200031_GassanJikofutangakuHoseiIchiran");
     private KogakugassanJikofutangakuInfoHoseiProcessParameter processParameter;
     private static final RString ORDER_BY = new RString("order by");
+    private RString 市町村コード;
+    private RString 市町村名称;
 
     private BatchReportWriter<GassanJikofutangakuHoseiIchiranSource> batchReportWriter;
     private ReportSourceWriter<GassanJikofutangakuHoseiIchiranSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
+        市町村コード = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        市町村名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         改頁項目リスト = new ArrayList<>();
         並び順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBC介護給付, 出力順帳票分類ID, Long.parseLong(processParameter.get改頁出力順ID().toString()));
@@ -122,8 +126,8 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         param.set改頁3(改頁3);
         param.set改頁4(改頁4);
         param.set改頁5(改頁5);
-        param.set市町村コード(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
-        param.set市町村名称(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        param.set市町村コード(市町村コード);
+        param.set市町村名称(市町村名称);
         GassanJikofutangakuHoseiIchiranEntity tmpEntity = new GassanJikofutangakuHoseiIchiranEntity();
         tmpEntity.set被保険者番号(entity.getHokenshaNo());
         tmpEntity.set被保険者氏名(entity.getHokenshaMei());
