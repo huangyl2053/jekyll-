@@ -54,6 +54,7 @@ public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_
         executeStep(処理日付管理マスタ更新);
         executeStep(エラーチェックして取込後期高齢者情報に更新二);
         executeStep(後期高齢者情報に登録);
+        executeStep(取込確認CSVファイル出力);
     }
 
     /**

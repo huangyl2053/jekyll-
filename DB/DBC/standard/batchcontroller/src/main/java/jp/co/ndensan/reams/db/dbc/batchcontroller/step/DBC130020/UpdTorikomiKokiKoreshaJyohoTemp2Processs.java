@@ -67,7 +67,7 @@ public class UpdTorikomiKokiKoreshaJyohoTemp2Processs extends BatchProcessBase<K
             }
         }
 
-        if (entity.get取込後期高齢者情報Entity() == null) {
+        if (entity.get宛名識別対象Entity() == null) {
             if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
                 entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_12);
                 entity.get取込後期高齢者情報Entity().setエラー文言(コード文言_宛名なし);
