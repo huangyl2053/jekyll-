@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
@@ -17,10 +16,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
@@ -36,8 +33,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanSe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3041ShokanTokuteiShinryohiEntity;
@@ -49,7 +44,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
@@ -61,8 +55,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.Shoka
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3038ShokanKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3039ShokanMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3041ShokanTokuteiShinryohiDac;
@@ -70,9 +62,17 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3042ShokanTokuteiShinr
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3043ShokanShokujiHiyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanbaraijyokyoshokai.IShokanbaraiJyokyoShokaiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3038ShokanKihonDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -331,6 +331,55 @@ public class ShokanbaraiJyokyoShokai {
             return new ArrayList<>();
         }
         List<ShokanMeisaiResult> result = new ArrayList<>();
+        for (ShokanMeisaiEntity tmp : entityList) {
+            DbT3039ShokanMeisaiEntity dbT3039ShokanMeisaiEntity = tmp.getEntity().clone();
+            dbT3039ShokanMeisaiEntity.setState(EntityDataState.Unchanged);
+            ShokanMeisaiResult shokanMeisaiResult = new ShokanMeisaiResult(
+                    new ShokanMeisai(dbT3039ShokanMeisaiEntity), tmp.getServiceName());
+            result.add(shokanMeisaiResult);
+        }
+        return result;
+    }
+
+    /**
+     * 償還払請求明細一覧取得（指定サービス種類以外）
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @param サービス種類コード ServiceShuruiCode
+     * @return List<ShokanMeisaiResult> List
+     */
+    public List<ShokanMeisaiResult> getShokanbarayiSeikyuMeisayiShiteiIgaiList(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番,
+            ServiceShuruiCode サービス種類コード) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_様式番号.toString()));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_明細番号.toString()));
+
+        ShokanbaraiJyokyoShokaiParameter parameter = ShokanbaraiJyokyoShokaiParameter.createMybatisParam(
+                被保険者番号, サービス年月, 整理番号, 様式番号, 事業者番号, 明細番号, 連番, サービス種類コード, null);
+
+        IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
+        List<ShokanMeisaiEntity> entityList = mapper.get償還払請求明細一覧_指定サービス種類以外(parameter);
+        List<ShokanMeisaiResult> result = new ArrayList<>();
+        if (entityList == null || entityList.isEmpty()) {
+            return result;
+        }
         for (ShokanMeisaiEntity tmp : entityList) {
             DbT3039ShokanMeisaiEntity dbT3039ShokanMeisaiEntity = tmp.getEntity().clone();
             dbT3039ShokanMeisaiEntity.setState(EntityDataState.Unchanged);
