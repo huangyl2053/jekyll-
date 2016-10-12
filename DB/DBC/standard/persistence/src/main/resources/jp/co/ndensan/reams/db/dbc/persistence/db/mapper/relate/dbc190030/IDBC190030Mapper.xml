@@ -74,4 +74,22 @@
         ORDER BY A."hihokenshaNo"
     </select>
 
+    <select resultOrdered="true" id="select基準収入額管理マスタ" 
+              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.inssetaiyinshotokujyoho.InsSetaiyin3MybatisParameter"
+              resultType="java.lang.Integer"
+              fetchSize="500">
+         SELECT 
+            COUNT(*)
+         FROM
+          rgdb."DbT3116KijunShunyugakuTekiyoKanri"  AS "DbT3116KijunShunyugakuTekiyoKanri"
+         WHERE 
+               "DbT3116KijunShunyugakuTekiyoKanri"."setaiCode" = #{世帯コード}
+         AND
+               "DbT3116KijunShunyugakuTekiyoKanri"."nendo" = #{年度}
+         AND
+               "DbT3116KijunShunyugakuTekiyoKanri"."rirekiNo" = #{履歴番号}
+         AND
+               "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo" = #{被保険者番号}
+     </select>
+     
 </mapper>

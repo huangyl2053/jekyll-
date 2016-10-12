@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelSetaiyinShotokuJyohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelTaishoSeitaiyinTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.InsDbT3116KijunShunyugakuTekiyoKanriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.InsTaishoSeitaiyinTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdSetaiyinShotokuJyohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdShoriDateKanriProcess;
@@ -19,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.CreateShoriResu
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.CreateTaishoSetaiyinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp2Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp3Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdTaishoSeitaiyinTemp5Process;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_KijunsyunygetsujiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
@@ -206,7 +206,7 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
     IBatchFlowCommand callInsDbT3116KijunShunyugakuTekiyoKanriProcess() {
         InsTaishoSeitaiyinTempProcessParameter parameter = new InsTaishoSeitaiyinTempProcessParameter();
         parameter.set処理年度(getParameter().get処理年度());
-        return loopBatch(InsDbT3116KijunShunyugakuTekiyoKanriProcess.class).arguments(parameter).define();
+        return loopBatch(InsSetaiyinShotokuJyohoTemp3Process.class).arguments(parameter).define();
     }
 
     @Step(処理日付管理マスタに更新)

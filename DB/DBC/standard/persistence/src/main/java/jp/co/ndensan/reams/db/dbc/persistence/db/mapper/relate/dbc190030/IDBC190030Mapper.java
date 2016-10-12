@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc190030;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.inssetaiyinshotokujyoho.InsSetaiyin3MybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity;
 
 /**
@@ -47,5 +48,13 @@ public interface IDBC190030Mapper {
      * @return List<HihokenshaDaichoTempSixColumnEntity>
      */
     List<HihokenshaDaichoTempSixColumnEntity> get被保険者台帳4(DBC190030MyBatisParameter parameter);
+
+    /**
+     * 基準収入額管理マスタに取得する。
+     *
+     * @param para UpdTaishoSeitaiyinTemp5ProcessMybatisParameter
+     * @return 件数 int
+     */
+    int select基準収入額管理マスタ(InsSetaiyin3MybatisParameter para);
 
 }
