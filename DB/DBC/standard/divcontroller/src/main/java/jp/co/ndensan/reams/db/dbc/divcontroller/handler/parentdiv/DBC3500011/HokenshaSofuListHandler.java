@@ -332,8 +332,8 @@ public class HokenshaSofuListHandler {
             throws NumberFormatException, ApplicationException {
         HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
         for (KokuhorenInterfaceKanri faceKanri : entity.getKokuhorenInterfaceKanriList()) {
-            if (!myBatisParameter.get同月過誤取下分フラグ()
-                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
+            if (myBatisParameter.get同月過誤取下分フラグ() != null && !myBatisParameter.get同月過誤取下分フラグ()
+                    && faceKanri.getコントロール上処理年月() != null && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (コントロールレコード.get(三) != null && !コントロールレコード.get(三).isEmpty()
                         && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
                         && !ResponseHolder.isReRequest()) {
