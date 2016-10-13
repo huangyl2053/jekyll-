@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +27,7 @@ public class JushochitokureiInfoEntity {
     private FlexibleDate 入所年月日;
     private FlexibleDate 退所年月日;
     private HihokenshaNo 転出先保険者番号;
+    private ShikibetsuCode 識別コード;
+    private int 履歴番号;
 
 }

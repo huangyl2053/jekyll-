@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -115,11 +116,20 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
 
     private RString 標準負担全項目(HyojunFutanEntity 標準負担) {
         RString 全項目 = RString.EMPTY;
-        全項目.concat(標準負担.get減免_減額種類()).concat(SPLIT)
-                .concat(標準負担.get適用開始日().toString()).concat(SPLIT)
-                .concat(標準負担.get適用終了日().toString()).concat(SPLIT)
-                .concat(標準負担.get負担額().toString()).concat(SPLIT)
-                .concat(標準負担.get申請日().toString());
+        全項目.concat(標準負担.get減免_減額種類()).concat(SPLIT);
+        全項目 = concatDate(全項目, 標準負担.get適用開始日());
+        全項目 = concatDate(全項目, 標準負担.get適用終了日());
+        全項目 = concatDate(全項目, 標準負担.get申請日());
+        全項目 = concatDate(全項目, 標準負担.get決定年月日());
+        return 全項目;
+    }
+
+    private RString concatDate(RString 全項目, FlexibleDate date) {
+        if (date == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(date.toString()).concat(SPLIT);
+        }
         return 全項目;
     }
 

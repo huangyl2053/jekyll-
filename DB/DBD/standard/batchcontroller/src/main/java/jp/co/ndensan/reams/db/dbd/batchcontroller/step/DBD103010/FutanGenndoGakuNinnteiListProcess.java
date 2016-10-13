@@ -309,9 +309,10 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
             帳票物理名 = new RString("shoKisaiHokenshaNo");
         } else if (FutanGendogakuNinteishoOrderKey.被保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("list_3");
-        } else if (FutanGendogakuNinteishoOrderKey.入所施設コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("list_13");
         }
+//        } else if (FutanGendogakuNinteishoOrderKey.入所施設コード.get項目ID().equals(項目ID)) {
+//            帳票物理名 = new RString("list_13");
+//        }
         return 帳票物理名;
     }
 }

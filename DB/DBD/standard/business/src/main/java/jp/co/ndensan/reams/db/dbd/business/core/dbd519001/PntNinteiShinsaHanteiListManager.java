@@ -104,8 +104,16 @@ public class PntNinteiShinsaHanteiListManager {
             出力条件.add(市町村コード.concat(RString.HALF_SPACE));
         }
         出力条件.add(被保険者番号.concat(parameter.get被保険者番号().value()));
-        出力条件.add(抽出開始日時.concat(parameter.get抽出開始日時().toString()));
-        出力条件.add(抽出終了日時.concat(parameter.get抽出終了日時().toString()));
+        if (parameter.get抽出開始日時() != null) {
+            出力条件.add(抽出開始日時.concat(parameter.get抽出開始日時().toString()));
+        } else {
+            出力条件.add(抽出開始日時.concat(RString.HALF_SPACE));
+        }
+        if (parameter.get抽出終了日時() != null) {
+            出力条件.add(抽出終了日時.concat(parameter.get抽出終了日時().toString()));
+        } else {
+            出力条件.add(抽出終了日時.concat(RString.HALF_SPACE));
+        }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 ReportIdDBD.DBD503001.getReportName(),
                 導入団体コード,

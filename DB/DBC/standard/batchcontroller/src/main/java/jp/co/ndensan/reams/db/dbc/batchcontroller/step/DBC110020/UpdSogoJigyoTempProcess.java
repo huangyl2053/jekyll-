@@ -33,8 +33,6 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select総合事業対象者");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
     private static final RString SPLIT = new RString(",");
-    private static final RString RST_TRUE = new RString("TRUE");
-    private static final RString RST_FALSE = new RString("FALSE");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
     private List<RString> 総合事業対象者KeyList;
@@ -119,11 +117,12 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
     }
 
     private RString 総合事業対象者全項目(DbT3105SogoJigyoTaishoshaEntity 総合事業対象者) {
+        RString 全項目 = RString.EMPTY;
         FlexibleDate 適用開始年月日 = 総合事業対象者.getTekiyoKaishiYMD();
         if (適用開始年月日 != null) {
-            return new RString(適用開始年月日.toString());
+            全項目 = 全項目.concat(適用開始年月日.toString());
         }
-        return RString.EMPTY;
+        return 全項目.concat(SPLIT);
     }
 
 }

@@ -431,17 +431,35 @@ public class DBC8010001MainHandler {
         parameter.set処理対象(Furikomi_ShoriTaisho.toValue(div.getDdlShoriTaisho().getSelectedKey()));
         parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.set委託者コード(div.getTxtItakushaCode().getValue());
-        parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
+        if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
+            parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
+        }
+        if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
+            parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+        }
+        if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
+            parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
+        }
+        if (null != div.getTxtKonkaiTaishoYmdRange().getToValue()) {
+            parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
+        }
         parameter.set抽出対象(Furikomi_MeisaiIchiranChushutsuTaisho.toValue(div.getRadChushutsuTaisho().getSelectedKey()));
         parameter.set振込グループコード(振込グループコード);
-        parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+
         parameter.set支払方法(Furikomi_ShihraiHohoShitei.toValue(div.getRadSiharaihohou().getSelectedKey()));
-        parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
-        parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString()));
-        parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
-        parameter.set誤振込指定年月日(div.getTxtWrongFurikomiShiteiYMD().getValue());
-        parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString()));
-        parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));
+        if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
+            parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString().substring(0, 6)));
+        }
+        if (null != div.getTxtWrongFurikomiShiteiYMD().getValue()) {
+            parameter.set誤振込指定年月日(div.getTxtWrongFurikomiShiteiYMD().getValue());
+
+        }
+        if (null != div.getTxtKetteishaUketoriYmRange().getFromValue()) {
+            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString()));
+        }
+        if (null != div.getTxtKonkaiTaishoYmdRange().getFromValue()) {
+            parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));
+        }
         return parameter;
     }
 
