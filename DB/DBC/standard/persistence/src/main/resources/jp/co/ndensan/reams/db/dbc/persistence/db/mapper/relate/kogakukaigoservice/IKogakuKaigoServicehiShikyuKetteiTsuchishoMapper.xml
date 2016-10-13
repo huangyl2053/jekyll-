@@ -267,10 +267,10 @@
         FROM (
             SELECT master.*,
                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-                "ShikibetsuTaisho" . "yubinNo" AS yubinNo,
-                "ShikibetsuTaisho" . "choikiCode" AS choikiCode,
-                "ShikibetsuTaisho" . "gyoseikuCode" AS gyoseikuCode,
-                "ShikibetsuTaisho" . "kanaMeisho" AS kanaMeisho
+                "ShikibetsuTaisho" . "yubinNo" AS "yubinNo",
+                "ShikibetsuTaisho" . "choikiCode" AS "choikiCode",
+                "ShikibetsuTaisho" . "gyoseikuCode" AS "gyoseikuCode",
+                "ShikibetsuTaisho" . "kanaMeisho" AS "kanaMeisho"
             FROM master
             INNER JOIN 
                  rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',FALSE,'','','','','','','','','','','',true,
