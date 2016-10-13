@@ -8,116 +8,7 @@
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHakuListMainMybatisParameter" fetchSize="500">
         SELECT
         対象者情報一時テーブル."hihokenshaNo" AS 対象者情報_被保険者番号,
-        資格情報."hihokenshaNo" AS 資格情報_資格情報険者番号,
-        資格情報."idoYMD" AS 資格情報_異動日,
-        資格情報."edaNo" AS 資格情報_枝番,
-        資格情報."idoJiyuCode" AS 資格情報_異動事由コード,
-        資格情報."shichosonCode" AS 資格情報_市町村コード,
-        資格情報."shikibetsuCode" AS 資格情報_識別コード,
-        資格情報."shikakuShutokuJiyuCode" AS 資格情報_資格取得事由コード,
-        資格情報."shikakuShutokuYMD" AS 資格情報_資格取得年月日,
-        資格情報."shikakuShutokuTodokedeYMD" AS 資格情報_資格取得届出年月日,
-        資格情報."ichigoShikakuShutokuYMD" AS 資格情報_第1号資格取得年月日,
-        資格情報."hihokennshaKubunCode" AS 資格情報_資格情報険者区分コード,
-        資格情報."shikakuSoshitsuJiyuCode" AS 資格情報_資格喪失事由コード,
-        資格情報."shikakuSoshitsuYMD" AS 資格情報_資格喪失年月日,
-        資格情報."shikakuSoshitsuTodokedeYMD" AS 資格情報_資格喪失届出年月日,
-        資格情報."shikakuHenkoJiyuCode" AS 資格情報_資格変更事由コード,
-        資格情報."shikakuHenkoYMD" AS 資格情報_資格変更年月日,
-        資格情報."shikakuHenkoTodokedeYMD" AS 資格情報_資格変更届出年月日,
-        資格情報."jushochitokureiTekiyoJiyuCode" AS 資格情報_住所地特例適用事由コード,
-        資格情報."jushochitokureiTekiyoYMD" AS 資格情報_適用年月日,
-        資格情報."jushochitokureiTekiyoTodokedeYMD" AS 資格情報_適用届出年月日,
-        資格情報."jushochitokureiKaijoJiyuCode" AS 資格情報_住所地特例解除事由コード,
-        資格情報."jushochitokureiKaijoYMD" AS 資格情報_解除年月日,
-        資格情報."jushochitokureiKaijoTodokedeYMD" AS 資格情報_解除届出年月日,
-        資格情報."jushochiTokureiFlag" AS 資格情報_住所地特例フラグ,
-        資格情報."koikinaiJushochiTokureiFlag" AS 資格情報_広域内住所地特例フラグ,
-        資格情報."koikinaiTokureiSochimotoShichosonCode" AS 資格情報_広住特措置元市町村コード,
-        資格情報."kyuShichosonCode" AS 資格情報_旧市町村コード,
-        資格情報."logicalDeletedFlag" AS 資格情報_論理削除フラグ,
-
-        認定情報."shichosonCode" AS 認定情報_市町村コード,
-        認定情報."hihokenshaNo" AS 認定情報_被保険者番号,
-        認定情報."rirekiNo" AS 認定情報_履歴番号,
-        認定情報."edaban" AS 認定情報_枝番,
-        認定情報."shinseishoKanriNo" AS 認定情報_申請書管理番号,
-        認定情報."shinseiJokyoKubun" AS 認定情報_申請状況区分,
-        認定情報."shishoCode" AS 認定情報_支所コード,
-        認定情報."chokkinFlag" AS 認定情報_直近フラグ,
-        認定情報."shikibetsuCode" AS 認定情報_識別コード,
-        認定情報."jukyuShinseiJiyu" AS 認定情報_受給申請事由,
-        認定情報."shinseiRiyu" AS 認定情報_申請理由,
-        認定情報."shinseishaKankeiCode" AS 認定情報_届出者_申請者関係コード,
-        認定情報."homninKankei" AS 認定情報_届出者_本人との関係,
-        認定情報."jukyuShinseiYMD" AS 認定情報_受給申請年月日,
-        認定情報."nigoTokuteiShippeiCode" AS 認定情報_２号特定疾病コード,
-        認定情報."shinsakaiIraiYMD" AS 認定情報_審査会依頼年月日,
-        認定情報."yokaigoJotaiKubunCode" AS 認定情報_要介護認定状態区分コード,
-        認定情報."ninteiYukoKikanKaishiYMD" AS 認定情報_認定有効期間開始年月日,
-        認定情報."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日,
-        認定情報."ninteiYMD" AS 認定情報_認定年月日,
-        認定情報."shiteiServiceShurui01" AS 認定情報_指定サービス種類01,
-        認定情報."shiteiServiceShurui02" AS 認定情報_指定サービス種類02,
-        認定情報."shiteiServiceShurui03" AS 認定情報_指定サービス種類03,
-        認定情報."shiteiServiceShurui04" AS 認定情報_指定サービス種類04,
-        認定情報."shiteiServiceShurui05" AS 認定情報_指定サービス種類05,
-        認定情報."shiteiServiceShurui06" AS 認定情報_指定サービス種類06,
-        認定情報."shiteiServiceShurui07" AS 認定情報_指定サービス種類07,
-        認定情報."shiteiServiceShurui08" AS 認定情報_指定サービス種類08,
-        認定情報."shiteiServiceShurui09" AS 認定情報_指定サービス種類09,
-        認定情報."shiteiServiceShurui10" AS 認定情報_指定サービス種類10,
-        認定情報."shiteiServiceShurui11" AS 認定情報_指定サービス種類11,
-        認定情報."shiteiServiceShurui12" AS 認定情報_指定サービス種類12,
-        認定情報."shiteiServiceShurui13" AS 認定情報_指定サービス種類13,
-        認定情報."shiteiServiceShurui14" AS 認定情報_指定サービス種類14,
-        認定情報."shiteiServiceShurui15" AS 認定情報_指定サービス種類15,
-        認定情報."shiteiServiceShurui16" AS 認定情報_指定サービス種類16,
-        認定情報."shiteiServiceShurui17" AS 認定情報_指定サービス種類17,
-        認定情報."shiteiServiceShurui18" AS 認定情報_指定サービス種類18,
-        認定情報."shiteiServiceShurui19" AS 認定情報_指定サービス種類19,
-        認定情報."shiteiServiceShurui20" AS 認定情報_指定サービス種類20,
-        認定情報."shiteiServiceShurui21" AS 認定情報_指定サービス種類21,
-        認定情報."shiteiServiceShurui22" AS 認定情報_指定サービス種類22,
-        認定情報."shiteiServiceShurui23" AS 認定情報_指定サービス種類23,
-        認定情報."shiteiServiceShurui24" AS 認定情報_指定サービス種類24,
-        認定情報."shiteiServiceShurui25" AS 認定情報_指定サービス種類25,
-        認定情報."shiteiServiceShurui26" AS 認定情報_指定サービス種類26,
-        認定情報."shiteiServiceShurui27" AS 認定情報_指定サービス種類27,
-        認定情報."shiteiServiceShurui28" AS 認定情報_指定サービス種類28,
-        認定情報."shiteiServiceShurui29" AS 認定情報_指定サービス種類29,
-        認定情報."shiteiServiceShurui30" AS 認定情報_指定サービス種類30,
-        認定情報."soshitsuYMD" AS 認定情報_喪失年月日,
-        認定情報."chokkinIdoYMD" AS 認定情報_直近異動年月日,
-        認定情報."chokkinIdoJiyuCode" AS 認定情報_直近異動事由コード,
-        認定情報."yukoMukoKubun" AS 認定情報_有効無効区分,
-        認定情報."dataKubun" AS 認定情報_データ区分,
-        認定情報."remban" AS 認定情報_同一連番,
-        認定情報."idoRiyu" AS 認定情報_異動理由,
-        認定情報."shinseishoKubun" AS 認定情報_申請書区分,
-        認定情報."sakujoJiyuCode" AS 認定情報_削除事由コード,
-        認定情報."yoshienshaNinteiShinseiFlag" AS 認定情報_要支援者認定申請区分,
-        認定情報."shikyuGendoTanisu" AS 認定情報_支給限度単位数,
-        認定情報."shikyuGendoKaishiYMD" AS 認定情報_支給限度有効開始年月日,
-        認定情報."shikyuGendoShuryoYMD" AS 認定情報_支給限度有効終了年月日,
-        認定情報."tankiSikyuGendoNissu" AS 認定情報_短期入所支給限度日数,
-        認定情報."tankiShikyuGendoKaishiYMD" AS 認定情報_短期入所支給限度開始年月日,
-        認定情報."tankiShikyuGendoShuryoYMD" AS 認定情報_短期入所支給限度終了年月日,
-        認定情報."toshoNinteiYukoKaishiYMD" AS 認定情報_当初認定有効開始年月日,
-        認定情報."toshoNinteiYukoShuryoYMD" AS 認定情報_当初認定有効終了年月日,
-        認定情報."jukyuShikakuShomeishoHakkoYMD1" AS 認定情報_受給資格証明書発行年月日１,
-        認定情報."jukyuShikakuShomeishoHakkoYMD2" AS 認定情報_受給資格証明書発行年月日２,
-        認定情報."shindanMeireishoHakkoYMD" AS 認定情報_診断命令書発行年月日,
-        認定情報."nigoShinseiJuriTsuchishoHakkoYMD" AS 認定情報_２号申請受理通知書発行年月日,
-        認定情報."ninteiKekkaTsuchishoHakkoYMD" AS 認定情報_認定結果通知書発行年月日,
-        認定情報."kubunHenkoTsuchishoHakkoYMD" AS 認定情報_区分変更通知書発行年月日,
-        認定情報."serviceHenkoTsuchishoHakkoYMD" AS 認定情報_サービス変更通知書発行年月日,
-        認定情報."ninteiKyakkaTsuchishoHakkoYMD" AS 認定情報_認定却下通知書発行年月日,
-        認定情報."ninteiTorikeshiTsuchishoHakkoYMD" AS 認定情報_認定取消通知書発行年月日,
-        認定情報."shikakuShutokuMaeShinseiFlag" AS 認定情報_資格取得前申請フラグ,
-        認定情報."kyuSochishaFlag" AS 認定情報_旧措置者フラグ,
-        認定情報."logicalDeletedFlag" AS 認定情報_論理削除フラグ,
-
+     
         収納情報."choteiNendo" AS 賦課_調定年度,
         収納情報."fukaNendo" AS 賦課_賦課年度,
         収納情報."tsuchishoNo" AS 賦課_通知書番号,
@@ -199,13 +90,12 @@
         収納情報."j_jikoKisanYMD" AS 時効_時効起算年月日,
         収納情報."j_jikoKisanYMDKubun" AS 時効_時効起算日区分,
         収納情報."j_logicalDeletedFlag" AS 時効_論理削除フラグ,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
         収入."shunyuId" AS 収入_収入ID,
-        収入."shunoId" AS 収入_収納ID
-        <!-- 収入."shunyugaku" AS 収入_収入額,
+        収入."shunoId" AS 収入_収納ID,
+        収入."shunyugaku" AS 収入_収入額,
         収入."shunyuYMD" AS 収入_収入年月日,
         CaT1018_督促状発行履歴."shunoId" AS 督促状発行履歴_収納ID,
-        CaT1018_督促状発行履歴."tokusokujoHakkoYMD" AS 督促状発行履歴_督促状発行年月日-->
+        CaT1018_督促状発行履歴."tokusokujoHakkoYMD" AS 督促状発行履歴_督促状発行年月日
         FROM
         "ShiharaiHohoHenkoTainoTempTable" AS 対象者情報一時テーブル
         INNER JOIN (
@@ -429,9 +319,6 @@
         AND CaT0701_収入_明細."sokuhoKubun"  =  false
         ) AS 収入
         ON   収納情報."c_shunoId"  =  収入."shunoId"
-        INNER JOIN  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON   <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"  =  資格情報."shikibetsuCode"
          ORDER BY
         対象者情報一時テーブル."hihokenshaNo",
         収納情報.調定年度,
@@ -452,8 +339,8 @@
         ON 	償還払支給申請."hiHokenshaNo" = 償還払支給判定結果."hiHokenshaNo" AND
         償還払支給申請."serviceTeikyoYM" = 償還払支給判定結果."serviceTeikyoYM" AND
         償還払支給申請."seiriNo" = 償還払支給判定結果."seiriNo"
-        INNER JOIN  "ShiharaiHohoHenkoTainoTempTable" AS 支払方法変更滞納者把握情報一時テーブル
-        ON 	償還払支給申請."hiHokenshaNo" = 支払方法変更滞納者把握情報一時テーブル."hihokenshaNo"
+        INNER JOIN  "ShiharaiHohoHenkoTainoTempTable" AS 対象者情報一時テーブル
+        ON 	償還払支給申請."hiHokenshaNo" = 対象者情報一時テーブル."hihokenshaNo"
         ORDER BY
         償還払支給申請."shinseiYMD",
         償還払支給申請."serviceTeikyoYM",
@@ -481,151 +368,159 @@
         支払方法変更."hihokenshaNo",
         支払方法変更."kanriKubun"
     </select>
-
-    <!--4.1.4 最大の履歴番号レコードの情報を取得する-->
-    <select resultOrdered="true" id="find最大の履歴番号レコードの情報" resultMap="resultMap_find最大の履歴番号レコードの情報"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHakuListMainMybatisParameter" fetchSize="500">
-        SELECT
-        支払方法変更.*,
-        支払方法変更差止.*,
-        償還払支給申請.*,
-        償還払支給判定結果.*
-        FROM
-        rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
-        INNER JOIN rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS 支払方法変更差止
-        ON 	支払方法変更."shoKisaiHokenshaNo" = 支払方法変更差止."shoKisaiHokenshaNo" AND
-        支払方法変更."hihokenshaNo" = 支払方法変更差止."hihokenshaNo" AND
-        支払方法変更."kanriKubun" = 支払方法変更差止."kanriKubun" AND
-        支払方法変更."rirekiNo" = 支払方法変更差止."rirekiNo"
-        LEFT JOIN rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
-        ON 	支払方法変更."hihokenshaNo" = 償還払支給申請."hiHokenshaNo"
-        LEFT JOIN rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果
-        ON 	償還払支給申請."hiHokenshaNo" = 償還払支給判定結果."hiHokenshaNo" AND
-        償還払支給申請."serviceTeikyoYM" = 償還払支給判定結果."serviceTeikyoYM" AND
-        償還払支給申請."seiriNo" = 償還払支給判定結果."seiriNo"
-        INNER JOIN "ShiharaiHohoHenkoTainoTempTable" AS 支払方法変更滞納者把握情報一時テーブル
-        ON 	償還払支給申請."hiHokenshaNo" = 支払方法変更滞納者把握情報一時テーブル."hihokenshaNo"
-        INNER JOIN "TainoCountermeasureMaxRirekiNoTempTable" AS 滞納者対策最大履歴番号一時テーブル
-        ON 	支払方法変更."rirekiNo"  = 滞納者対策最大履歴番号一時テーブル."maxRirekiNo"
-        WHERE
-        支払方法変更."logicalDeletedFlag"  =  false AND
-        支払方法変更差止."logicalDeletedFlag"  =  false
-    </select>
-
-    <!--4.1.4 滞納者対策の情報を取得する-->
+    
+    <!--4.1.5 滞納者対策の情報を取得する-->
     <select resultOrdered="true" id="find滞納者対策情報" resultMap="resultMap_find滞納者対策情報"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHakuListMainMybatisParameter" fetchSize="500">
         SELECT
-        支払方法変更.*,
-        支払方法変更差止.*,
-        償還払支給申請.*,
-        償還払支給判定結果.*
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko" />,
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.allColumns_DbT4024ShiharaiHohoHenkoSashitome" />,
+            償還払支給.*
         FROM
-        rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
-        INNER JOIN rgdb."DbT4024ShiharaiHohoHenkoSashitome" AS 支払方法変更差止
-        ON 	支払方法変更."shoKisaiHokenshaNo" = 支払方法変更差止."shoKisaiHokenshaNo" AND
-        支払方法変更."hihokenshaNo" = 支払方法変更差止."hihokenshaNo" AND
-        支払方法変更."kanriKubun" = 支払方法変更差止."kanriKubun" AND
-        支払方法変更."rirekiNo" = 支払方法変更差止."rirekiNo"
-        LEFT JOIN rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
-        ON 	支払方法変更."hihokenshaNo" = 償還払支給申請."hiHokenshaNo"
-        LEFT JOIN rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果
-        ON 	償還払支給申請."hiHokenshaNo" = 償還払支給判定結果."hiHokenshaNo" AND
-        償還払支給申請."serviceTeikyoYM" = 償還払支給判定結果."serviceTeikyoYM" AND
-        償還払支給申請."seiriNo" = 償還払支給判定結果."seiriNo"
-        INNER JOIN "ShiharaiHohoHenkoTainoTempTable" AS 支払方法変更滞納者把握情報一時テーブル
-        ON 	償還払支給申請."hiHokenshaNo" = 支払方法変更滞納者把握情報一時テーブル."hihokenshaNo"
+            rgdb."DbT4021ShiharaiHohoHenko"
+        INNER JOIN rgdb."DbT4024ShiharaiHohoHenkoSashitome"
+            ON 	rgdb."DbT4021ShiharaiHohoHenko"."shoKisaiHokenshaNo" = rgdb."DbT4024ShiharaiHohoHenkoSashitome"."shoKisaiHokenshaNo" AND
+            rgdb."DbT4021ShiharaiHohoHenko"."hihokenshaNo" = rgdb."DbT4024ShiharaiHohoHenkoSashitome"."hihokenshaNo" AND
+            rgdb."DbT4021ShiharaiHohoHenko"."kanriKubun" = rgdb."DbT4024ShiharaiHohoHenkoSashitome"."kanriKubun" AND
+            rgdb."DbT4021ShiharaiHohoHenko"."rirekiNo" = rgdb."DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo"
+        LEFT JOIN (
+            SELECT
+                償還払支給申請."hiHokenshaNo" AS 償還払支給申請_被保険者番号,
+                償還払支給申請."serviceTeikyoYM" AS 償還払支給申請_サービス提供年月,
+                償還払支給申請."seiriNo" AS 償還払支給申請_整理番号,
+                償還払支給判定結果."shiharaiKingaku" AS 償還払支給判定結果_支払金額,
+                償還払支給判定結果."shiharaiKingaku" AS 償還払支給判定結果_支払金額
+            FROM rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
+            LEFT JOIN rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果
+            ON 	償還払支給申請."hiHokenshaNo" = 償還払支給判定結果."hiHokenshaNo"
+            AND 償還払支給申請."serviceTeikyoYM" = 償還払支給判定結果."serviceTeikyoYM"
+            AND 償還払支給申請."seiriNo" = 償還払支給判定結果."seiriNo"
+            ) AS 償還払支給
+            ON 償還払支給."償還払支給申請_被保険者番号" =  rgdb."DbT4021ShiharaiHohoHenko"."hihokenshaNo"
+        INNER JOIN "TainoCountermeasureMaxRirekiNoTempTable" AS 滞納者対策最大履歴番号一時テーブル
+            ON rgdb."DbT4021ShiharaiHohoHenko"."shoKisaiHokenshaNo" = 滞納者対策最大履歴番号一時テーブル."shoKisaiHokenshaNo"
+            AND rgdb."DbT4021ShiharaiHohoHenko"."hihokenshaNo" = 滞納者対策最大履歴番号一時テーブル."hihokenshaNo"
+            AND rgdb."DbT4021ShiharaiHohoHenko"."kanriKubun" = 滞納者対策最大履歴番号一時テーブル."kanriKubun"
+            AND rgdb."DbT4021ShiharaiHohoHenko"."rirekiNo" = 滞納者対策最大履歴番号一時テーブル."maxRirekiNo" 
         WHERE
-        支払方法変更."logicalDeletedFlag"  =  false AND
-        支払方法変更差止."logicalDeletedFlag"  =  false
+            rgdb."DbT4021ShiharaiHohoHenko"."logicalDeletedFlag"  =  false
+            AND rgdb."DbT4024ShiharaiHohoHenkoSashitome"."logicalDeletedFlag"  =  false
     </select>
-
 
     <!--5.帳票印字用データを取得して、支払方法変更リストEntityに設定する-->
     <select resultOrdered="true" id="find帳票印字用データ" resultMap="resultMap_find帳票印字用データ"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHaakuFiveMybatisParameter" fetchSize="500">
         SELECT
-        支払方法変更情報一時テーブル."uaFt200_shikibetsuCode" AS 支払方法変更情報_識別コード,
-        支払方法変更情報一時テーブル."uaFt200_kanaMeisho" AS 支払方法変更情報_被保険者氏名カナ,
-        支払方法変更情報一時テーブル."uaFt200_meisho" AS 支払方法変更情報_被保険者氏名,
-        支払方法変更情報一時テーブル."uaFt200_yubinNo" AS 支払方法変更情報_郵便番号,
-        支払方法変更情報一時テーブル."uaFt200_jusho" AS 支払方法変更情報_住所,
-        支払方法変更情報一時テーブル."uaFt200_zenkokujushocode" AS 支払方法変更情報_住所コード,
-        支払方法変更情報一時テーブル."dbT1001_shikakuShutokuYMD" AS 支払方法変更情報_資格取得日,
-        支払方法変更情報一時テーブル."dbT1001_shikakuSoshitsuYMD" AS 支払方法変更情報_資格喪失日,
-        支払方法変更情報一時テーブル."dbT1001_shikakuSoshitsuJiyuCode" AS 支払方法変更情報_喪失事由,
-        支払方法変更情報一時テーブル."reqProcess" AS 支払方法変更情報_申請中,
-        支払方法変更情報一時テーブル."uaFt200_setaiCode" AS 支払方法変更情報_世帯番号,
-        支払方法変更情報一時テーブル."uaFt200_gyoseikuCode" AS 支払方法変更情報_行政区コード,
-        支払方法変更情報一時テーブル."uaFt200_gyoseikuName" AS 支払方法変更情報_行政区,
-        支払方法変更情報一時テーブル."dbT1001_shikakuShutokuJiyuCode" AS 支払方法変更情報_資格区分,
-        支払方法変更情報一時テーブル."dbT1001_jushochiTokureiFlag" AS  支払方法変更情報_住特フラグ,
-        支払方法変更情報一時テーブル."seikatsuHogoJukyushaShikibetsuCode" AS 支払方法変更情報_生保,
-        支払方法変更情報一時テーブル."dbT4001_yokaigoJotaiKubunCode" AS 支払方法変更情報_要介護度,
-        支払方法変更情報一時テーブル."dbT4001_ninteiYukoKikanKaishiYMD" AS 支払方法変更情報_認定開始年月日,
-        支払方法変更情報一時テーブル."dbT4001_ninteiYukoKikanShuryoYMD" AS 支払方法変更情報_認定終了年月日,
-        支払方法変更情報一時テーブル."dbT4001_ninteiYMD" AS 支払方法変更情報_認定日,
-        支払方法変更情報一時テーブル."dbT4001_jukyuShinseiYMD" AS 支払方法変更情報_申請日,
-         収納状況一時テーブル."choteiNendo" AS 収納状況_調定年度,
-        収納状況一時テーブル."fukaNendo" AS 収納状況_賦課年度,
-        収納状況一時テーブル."tsuchishoNo" AS 収納状況_通知書番号,
-        収納状況一時テーブル."ki" AS 収納状況_期,
-        収納状況一時テーブル."hihokenshaNo" AS 収納状況_被保険者番号,
-        収納状況一時テーブル."shikibetsuCode" AS 収納状況_識別コード,
-        <!--収納状況一時テーブル."nokigenYMD" AS 収納状況_納期限,-->
-        収納状況一時テーブル."shunyuYMD" AS 収納状況_調定額,
-        <!--収納状況一時テーブル."shunyuGaku" AS 収納状況_収入日,-->
-        収納状況一時テーブル."shunyuGaku" AS 収納状況_収入額,
-        収納状況一時テーブル."jikoKisambiYMD" AS 収納状況_督促状発行日,
-        収納状況一時テーブル."jikoKubun" AS 収納状況_時効区分,
-        収納状況一時テーブル."miNoGaku" AS 収納状況_未納額,
-        収納状況一時テーブル."jikoKisambiJiyu" AS 収納状況_時効起算事由,
-        収納状況一時テーブル."tainoKubun" AS 収納状況_滞納区分,
-        収納状況一時テーブル."longestTainoPeriod" AS 収納状況_最長滞納期間,
-        収納状況一時テーブル."beforeTainoGaku" AS 収納状況_以前滞納額,
-        収納状況一時テーブル."beforeTainoKubun" AS 収納状況_以前滞納区分,
-        収納状況一時テーブル."pastYearflag" AS 収納状況_過年度フラグ,
-        償還未払い情報一時テーブル."hihokenshaNo" AS 償還未払い_被保険者番号,
-        償還未払い情報一時テーブル."shinseiProcess" AS 償還未払い_申請中,
-        償還未払い情報一時テーブル."shinseiYMD" AS 償還未払い_申請日,
-        償還未払い情報一時テーブル."shinseiProcessNumber" AS 償還未払い_申請中件数,
-        償還未払い情報一時テーブル."seiriNo" AS 償還未払い_整理番号,
-        償還未払い情報一時テーブル."teikyoYM" AS 償還未払い_提供年月,
-        償還未払い情報一時テーブル."miTsuchiNumber" AS 償還未払い_未通知件数,
-        滞納者対策情報一時テーブル."hihokenshaNo" AS 滞納者対策情報_被保険者番号,
-        滞納者対策情報一時テーブル."tekiyoKaishiYMD" AS 滞納者対策情報_適用開始日,
-        滞納者対策情報一時テーブル."tekiyoShuryoYMD" AS 滞納者対策情報_適用終了日,
-        滞納者対策情報一時テーブル."shuryoUketsukeYMD" AS 滞納者対策情報_終了受付日,
-        滞納者対策情報一時テーブル."yokokuHakkoYMD" AS 滞納者対策情報_予告発行日,
-        滞納者対策情報一時テーブル."bemmeiYMD" AS 滞納者対策情報_弁明期限,
-        滞納者対策情報一時テーブル."bemmeiUketsukeYMD" AS 滞納者対策情報_弁明受付日,
-        滞納者対策情報一時テーブル."shokanYMD" AS 滞納者対策情報_償還発行日,
-        滞納者対策情報一時テーブル."shokanHakkoYMD" AS 滞納者対策情報_償還証期限,
-        滞納者対策情報一時テーブル."sashitomeProcessNumber" AS 滞納者対策情報_差止中件数,
-        滞納者対策情報一時テーブル."sashitomeProcessKingaku" AS 滞納者対策情報_差止中金額,
-        滞納者対策情報一時テーブル."sashitomePaymentYMD" AS 滞納者対策情報_差止納付期日,
-        滞納者対策情報一時テーブル."koujoNumber" AS 滞納者対策情報_控除件数,
-        滞納者対策情報一時テーブル."kojoShoTeishutsuYMD" AS 滞納者対策情報_控除証期限
+            対象者情報一時テーブル."hihokenshaNo" AS 対象者情報_被保険者番号,
+        
+            収納状況一時テーブル."choteiNendo" AS 収納状況_調定年度,
+            収納状況一時テーブル."fukaNendo" AS 収納状況_賦課年度,
+            収納状況一時テーブル."tsuchishoNo" AS 収納状況_通知書番号,
+            収納状況一時テーブル."ki" AS 収納状況_期,
+            収納状況一時テーブル."hihokenshaNo" AS 収納状況_被保険者番号,
+            収納状況一時テーブル."shikibetsuCode" AS 収納状況_識別コード,
+            収納状況一時テーブル."nokigenYMD" AS 収納状況_納期限,
+            収納状況一時テーブル."choteigaku" AS 収納状況_調定額,
+            収納状況一時テーブル."shunyuYMD" AS 収納状況_収入日,
+            収納状況一時テーブル."shunyuGaku" AS 収納状況_収入額,
+            収納状況一時テーブル."dunningHakkoYMD" AS 収納状況_督促状発行日,
+            収納状況一時テーブル."jikoKisambiYMD" AS 収納状況_時効起算日,
+            収納状況一時テーブル."jikoKubun" AS 収納状況_時効区分,
+            収納状況一時テーブル."finshNoKubun" AS 収納状況_完納_未納区分,
+            収納状況一時テーブル."miNoGaku" AS 収納状況_未納額,
+            収納状況一時テーブル."jikoKisambiJiyu" AS 収納状況_時効起算事由,
+            収納状況一時テーブル."tainoKubun" AS 収納状況_滞納区分,
+            収納状況一時テーブル."longestTainoPeriod" AS 収納状況_最長滞納期間,
+            収納状況一時テーブル."beforeTainoGaku" AS 収納状況_以前滞納額,
+            収納状況一時テーブル."beforeTainoKubun" AS 収納状況_以前滞納区分,
+            収納状況一時テーブル."pastYearflag" AS 収納状況_過年度フラグ,
+            
+            償還未払い情報一時テーブル."hihokenshaNo" AS 償還未払い_被保険者番号,
+            償還未払い情報一時テーブル."shinseiProcess" AS 償還未払い_申請中,
+            償還未払い情報一時テーブル."shinseiYMD" AS 償還未払い_申請日,
+            償還未払い情報一時テーブル."shinseiProcessNumber" AS 償還未払い_申請中件数,
+            償還未払い情報一時テーブル."seiriNo" AS 償還未払い_整理番号,
+            償還未払い情報一時テーブル."teikyoYM" AS 償還未払い_提供年月,
+            償還未払い情報一時テーブル."miTsuchiNumber" AS 償還未払い_未通知件数,
+            滞納者対策情報一時テーブル."hihokenshaNo" AS 滞納者対策情報_被保険者番号,
+            滞納者対策情報一時テーブル."tekiyoKaishiYMD" AS 滞納者対策情報_適用開始日,
+            滞納者対策情報一時テーブル."tekiyoShuryoYMD" AS 滞納者対策情報_適用終了日,
+            滞納者対策情報一時テーブル."shuryoUketsukeYMD" AS 滞納者対策情報_終了受付日,
+            滞納者対策情報一時テーブル."yokokuHakkoYMD" AS 滞納者対策情報_予告発行日,
+            滞納者対策情報一時テーブル."bemmeiYMD" AS 滞納者対策情報_弁明期限,
+            滞納者対策情報一時テーブル."bemmeiUketsukeYMD" AS 滞納者対策情報_弁明受付日,
+            滞納者対策情報一時テーブル."shokanYMD" AS 滞納者対策情報_償還発行日,
+            滞納者対策情報一時テーブル."shokanHakkoYMD" AS 滞納者対策情報_償還証期限,
+            滞納者対策情報一時テーブル."sashitomeProcessNumber" AS 滞納者対策情報_差止中件数,
+            滞納者対策情報一時テーブル."sashitomeProcessKingaku" AS 滞納者対策情報_差止中金額,
+            滞納者対策情報一時テーブル."sashitomePaymentYMD" AS 滞納者対策情報_差止納付期日,
+            滞納者対策情報一時テーブル."koujoNumber" AS 滞納者対策情報_控除件数,
+            滞納者対策情報一時テーブル."kojoShoTeishutsuYMD" AS 滞納者対策情報_控除証期限,
+            滞納者対策情報一時テーブル."torokuKubun" AS 滞納者対策情報_登録区分,
+            滞納者対策情報一時テーブル."shuryoKubun" AS 滞納者対策情報_終了区分,
+            生活保護受給者.生活保護受給者_識別コード,
+            認定情報."yokaigoJotaiKubunCode" AS 認定情報_要介護認定状態区分コード,
+            認定情報."ninteiYukoKikanKaishiYMD" AS 認定情報_認定有効期間開始年月日,
+            認定情報."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日,
+            認定情報."ninteiYMD" AS 認定情報_認定年月日,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
+            資格情報.*,
+            申請中認定情報."受給者台帳_被保険者番号" AS 申請中認定情報_被保険者番号
         FROM
-        "ShiharaiHohoHenkoTempTable" 支払方法変更情報一時テーブル
+            "ShiharaiHohoHenkoTainoTempTable" AS 対象者情報一時テーブル
         LEFT JOIN "ShunoStatusTempTable" AS 収納状況一時テーブル
-        ON 	支払方法変更情報一時テーブル."taisyo_hihokenshaNo" = 収納状況一時テーブル."hihokenshaNo"
-        AND 支払方法変更情報一時テーブル."dbT4023_choteiNendo" = 収納状況一時テーブル."choteiNendo"
-        AND 支払方法変更情報一時テーブル."dbT4023_fukaNendo" = 収納状況一時テーブル."fukaNendo"
-        AND 支払方法変更情報一時テーブル."dbT4023_tsuchishoNo" = 収納状況一時テーブル."tsuchishoNo"
-        AND 支払方法変更情報一時テーブル."dbT2003_ki" = 収納状況一時テーブル."ki"
+             ON 対象者情報一時テーブル."hihokenshaNo" = 収納状況一時テーブル."hihokenshaNo"
         LEFT JOIN "ShokanUnpaidTempTable" AS 償還未払い情報一時テーブル
-        ON 	支払方法変更情報一時テーブル."taisyo_hihokenshaNo" = 償還未払い情報一時テーブル."hihokenshaNo"
+            ON 	対象者情報一時テーブル."hihokenshaNo" = 償還未払い情報一時テーブル."hihokenshaNo"
         LEFT JOIN "TainoCountermeasureTempTable" AS 滞納者対策情報一時テーブル
-        ON 	支払方法変更情報一時テーブル."taisyo_hihokenshaNo" = 滞納者対策情報一時テーブル."hihokenshaNo"
+            ON 	対象者情報一時テーブル."hihokenshaNo" = 滞納者対策情報一時テーブル."hihokenshaNo"
+        INNER JOIN (
+               SELECT
+                    rgdb."DbV1001HihokenshaDaicho"."hihokenshaNo" AS 資格情報_被保険者番号,
+                    rgdb."DbV1001HihokenshaDaicho"."shikibetsuCode" AS 資格情報_識別コード,
+                    rgdb."DbV1001HihokenshaDaicho"."shikakuShutokuYMD" AS 資格情報_資格取得年月日,
+                    rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" AS 資格情報_資格喪失年月日,
+                    rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" AS 資格情報_資格喪失事由コード,
+                    rgdb."DbV1001HihokenshaDaicho"."hihokennshaKubunCode" AS 資格情報_被保険者区分コード,
+                    rgdb."DbV1001HihokenshaDaicho"."jushochiTokureiFlag" AS 資格情報_住所地特例フラグ
+               FROM rgdb."DbV1001HihokenshaDaicho"
+               WHERE rgdb."DbV1001HihokenshaDaicho"."shikakuShutokuYMD"  <![CDATA[<=]]> #{基準日}
+               AND (rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NULL 
+                    OR #{基準日}  <![CDATA[<=]]> rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD")
+              ) AS 資格情報
+           ON 対象者情報一時テーブル."hihokenshaNo" = 資格情報."資格情報_被保険者番号"
+        LEFT JOIN (
+                    SELECT Distinct(rgur."UrT0508SeikatsuHogoJukyusha"."shikibetsuCode") AS  生活保護受給者_識別コード
+                        FROM rgur."UrT0508SeikatsuHogoJukyusha"
+                    WHERE 
+                        rgur."UrT0508SeikatsuHogoJukyusha"."gyomuCode" = 'DB'
+                        AND rgur."UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" <![CDATA[<=]]> #{基準日}
+                        AND #{基準日} <![CDATA[<=]]> rgur."UrT0508SeikatsuHogoJukyusha"."jukyuHaishiYMD"
+                  ) AS 生活保護受給者
+                  ON 資格情報."資格情報_識別コード" = 生活保護受給者.生活保護受給者_識別コード
+        INNER JOIN rgdb."DbV4001JukyushaDaicho" AS 認定情報
+            ON 対象者情報一時テーブル."hihokenshaNo" = 認定情報."hihokenshaNo"
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
+          ON "ShikibetsuTaisho"."shikibetsuCode" = 資格情報."資格情報_識別コード"
+      
+      LEFT JOIN (
+                SELECT Distinct(rgdb."DbT4001JukyushaDaicho"."hihokenshaNo") AS 受給者台帳_被保険者番号
+                FROM rgdb."DbT4001JukyushaDaicho"
+                WHERE 
+                rgdb."DbT4001JukyushaDaicho"."rirekiNo" = '0000'
+                AND rgdb."DbT4001JukyushaDaicho"."logicalDeletedFlag" = false
+                ) AS 申請中認定情報
+                ON 対象者情報一時テーブル."hihokenshaNo" = 申請中認定情報.受給者台帳_被保険者番号
         WHERE
-        支払方法変更情報一時テーブル."dbT2002_fukaNendo" <![CDATA[>=]]> #{業務コンフィグ_日付関連_調定年度}
+            収納状況一時テーブル."fukaNendo" <![CDATA[>=]]> #{業務コンフィグ_日付関連_調定年度}
         ORDER BY
-        支払方法変更情報一時テーブル."taisyo_hihokenshaNo",
-        収納状況一時テーブル."choteiNendo",
-        収納状況一時テーブル."fukaNendo",
-        収納状況一時テーブル."tsuchishoNo",
-        収納状況一時テーブル."ki" ASC
+            対象者情報一時テーブル."hihokenshaNo",
+            収納状況一時テーブル."choteiNendo",
+            収納状況一時テーブル."fukaNendo",
+            収納状況一時テーブル."tsuchishoNo",
+            収納状況一時テーブル."ki" ASC
     </select>
     <resultMap id="resultMap_find最大の履歴番号レコードの情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFourEntity" autoMapping="true">
         <collection property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
@@ -636,11 +531,15 @@
 
     <resultMap id="resultMap_find滞納者対策情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFourEntity" autoMapping="true">
         <collection property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
-        <collection property="支払方法変更差止Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity"/>
-        <collection property="償還払支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
-        <collection property="償還払支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
+        <collection property="支払方法変更差止リスト" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity"/>
+        <collection property="償還情報リスト" resultMap="resultMap_償還情報リスト"/>
     </resultMap>
-
+    <resultMap id="resultMap_償還情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShokanShinseiHanteiKekkaJohoEntity" autoMapping="true">
+        <result property="償還払支給申請_被保険者番号" column="償還払支給申請_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="償還払支給申請_サービス提供年月" column="償還払支給申請_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="償還払支給判定結果_支払金額" column="償還払支給判定結果_支払金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="償還払支給判定結果_差額金額合計" column="償還払支給判定結果_差額金額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
     <resultMap id="resultMap_find最大履歴情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuThreeEntity" autoMapping="true">
         <result property="証記載保険者番号" column="収入_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者番号" column="収入_SUM収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -657,49 +556,7 @@
     </resultMap>
 
     <resultMap id="resultMap_find帳票印字用データ" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFiveEntity" autoMapping="true">
-
-        <result property="支払方法変更情報_識別コード" column="支払方法変更情報_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="支払方法変更情報_被保険者氏名カナ" column="支払方法変更情報_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_被保険者氏名" column="支払方法変更情報_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
-        <result property="支払方法変更情報_郵便番号" column="支払方法変更情報_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="支払方法変更情報_住所" column="支払方法変更情報_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_住所コード" column="支払方法変更情報_住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-
-        <result property="支払方法変更情報_資格取得日" column="支払方法変更情報_資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="支払方法変更情報_資格喪失日" column="支払方法変更情報_資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="支払方法変更情報_喪失事由" column="支払方法変更情報_喪失事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_申請中" column="支払方法変更情報_申請中" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_世帯番号" column="支払方法変更情報_世帯番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="支払方法変更情報_行政区コード" column="支払方法変更情報_行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
-        <result property="支払方法変更情報_行政区" column="支払方法変更情報_行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_資格区分" column="支払方法変更情報_資格区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_住特フラグ" column="支払方法変更情報_住特フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_生保" column="支払方法変更情報_生保" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支払方法変更情報_要介護度" column="支払方法変更情報_要介護度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="支払方法変更情報_認定開始年月日" column="支払方法変更情報_認定開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="支払方法変更情報_認定終了年月日" column="支払方法変更情報_認定終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="支払方法変更情報_認定日" column="支払方法変更情報_認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="支払方法変更情報_申請日" column="支払方法変更情報_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-
-       <result property="収納状況_調定年度" column="収納状況_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="収納状況_賦課年度" column="収納状況_賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="収納状況_通知書番号" column="収納状況_通知書番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収納状況_期" column="収納状況_期" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-         <result property="収納状況_被保険者番号" column="収納状況_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="収納状況_識別コード" column="収納状況_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <!--<result property="収納状況_納期限" column="収納状況_納期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>-->
-        <result property="収納状況_調定額" column="収納状況_調定額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-       <!-- <result property="収納状況_収入日" column="収納状況_収入日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>-->
-        <result property="収納状況_収入額" column="収納状況_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="収納状況_督促状発行日" column="収納状況_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="収納状況_時効区分" column="収納状況_時効区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収納状況_未納額" column="収納状況_未納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="収納状況_時効起算事由" column="収納状況_時効起算事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収納状況_滞納区分" column="収納状況_滞納区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収納状況_最長滞納期間" column="収納状況_最長滞納期間" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="収納状況_以前滞納額" column="収納状況_以前滞納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="収納状況_以前滞納区分" column="収納状況_以前滞納区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収納状況_過年度フラグ" column="収納状況_過年度フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <id property="対象者情報_被保険者番号" column="対象者情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="償還未払い_被保険者番号" column="償還未払い_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="償還未払い_申請中" column="償還未払い_申請中" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="償還未払い_申請日" column="償還未払い_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -721,123 +578,54 @@
         <result property="滞納者対策情報_差止納付期日" column="滞納者対策情報_差止納付期日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_控除件数" column="滞納者対策情報_控除件数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="滞納者対策情報_控除証期限" column="滞納者対策情報_控除証期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
- </resultMap>
-    <resultMap id="resultMap_find支払方法変更情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuOneEntity">
-        <result property="対象者情報_被保険者番号" column="対象者情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="資格情報_資格情報険者番号" column="資格情報_資格情報険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="資格情報_異動日" column="資格情報_異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_枝番" column="資格情報_枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_異動事由コード" column="資格情報_異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_市町村コード" column="資格情報_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="資格情報_識別コード" column="資格情報_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="資格情報_資格取得事由コード" column="資格情報_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_資格取得年月日" column="資格情報_資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_資格取得届出年月日" column="資格情報_資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_第1号資格取得年月日" column="資格情報_第1号資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_資格情報険者区分コード" column="資格情報_資格情報険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_資格喪失事由コード" column="資格情報_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_資格喪失年月日" column="資格情報_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_資格喪失届出年月日" column="資格情報_資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_資格変更事由コード" column="資格情報_資格変更事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_資格変更年月日" column="資格情報_資格変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_資格変更届出年月日" column="資格情報_資格変更届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_住所地特例適用事由コード" column="資格情報_住所地特例適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_適用年月日" column="資格情報_適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_適用届出年月日" column="資格情報_適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_住所地特例解除事由コード" column="資格情報_住所地特例解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_解除年月日" column="資格情報_解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_解除届出年月日" column="資格情報_解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格情報_住所地特例フラグ" column="資格情報_住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_広域内住所地特例フラグ" column="資格情報_広域内住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_広住特措置元市町村コード" column="資格情報_広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="資格情報_旧市町村コード" column="資格情報_旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="資格情報_論理削除フラグ" column="資格情報_論理削除フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <result property="認定情報_市町村コード" column="認定情報_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="認定情報_被保険者番号" column="認定情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="認定情報_履歴番号" column="認定情報_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_枝番" column="認定情報_枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_申請書管理番号" column="認定情報_申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <result property="認定情報_申請状況区分" column="認定情報_申請状況区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_支所コード" column="認定情報_支所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_直近フラグ" column="認定情報_直近フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <result property="認定情報_識別コード" column="認定情報_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="認定情報_受給申請事由" column="認定情報_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_申請理由" column="認定情報_申請理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_届出者_申請者関係コード" column="認定情報_届出者_申請者関係コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_届出者_本人との関係" column="認定情報_届出者_本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_受給申請年月日" column="認定情報_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_２号特定疾病コード" column="認定情報_２号特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_審査会依頼年月日" column="認定情報_審査会依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="滞納者対策情報_登録区分" column="滞納者対策情報_登録区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="滞納者対策情報_終了区分" column="滞納者対策情報_終了区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定情報_要介護認定状態区分コード" column="認定情報_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="認定情報_認定有効期間開始年月日" column="認定情報_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定情報_認定有効期間終了年月日" column="認定情報_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定情報_認定年月日" column="認定情報_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_指定サービス種類01" column="認定情報_指定サービス種類01" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類02" column="認定情報_指定サービス種類02" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類03" column="認定情報_指定サービス種類03" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類04" column="認定情報_指定サービス種類04" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類05" column="認定情報_指定サービス種類05" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類06" column="認定情報_指定サービス種類06" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類07" column="認定情報_指定サービス種類07" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類08" column="認定情報_指定サービス種類08" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類09" column="認定情報_指定サービス種類09" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類10" column="認定情報_指定サービス種類10" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類11" column="認定情報_指定サービス種類11" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類12" column="認定情報_指定サービス種類12" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類13" column="認定情報_指定サービス種類13" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類14" column="認定情報_指定サービス種類14" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類15" column="認定情報_指定サービス種類15" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類16" column="認定情報_指定サービス種類16" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類17" column="認定情報_指定サービス種類17" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類18" column="認定情報_指定サービス種類18" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類19" column="認定情報_指定サービス種類19" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類20" column="認定情報_指定サービス種類20" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類21" column="認定情報_指定サービス種類21" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類22" column="認定情報_指定サービス種類22" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類23" column="認定情報_指定サービス種類23" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類24" column="認定情報_指定サービス種類24" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類25" column="認定情報_指定サービス種類25" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類26" column="認定情報_指定サービス種類26" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類27" column="認定情報_指定サービス種類27" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類28" column="認定情報_指定サービス種類28" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類29" column="認定情報_指定サービス種類29" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_指定サービス種類30" column="認定情報_指定サービス種類30" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <result property="認定情報_喪失年月日" column="認定情報_喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_直近異動年月日" column="認定情報_直近異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_直近異動事由コード" column="認定情報_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_有効無効区分" column="認定情報_有効無効区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_データ区分" column="認定情報_データ区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_同一連番" column="認定情報_同一連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_異動理由" column="認定情報_異動理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定情報_申請書区分" column="認定情報_申請書区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_削除事由コード" column="認定情報_削除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定情報_要支援者認定申請区分" column="認定情報_要支援者認定申請区分" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <result property="認定情報_支給限度単位数" column="認定情報_支給限度単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="認定情報_支給限度有効開始年月日" column="認定情報_支給限度有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_支給限度有効終了年月日" column="認定情報_支給限度有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_短期入所支給限度日数" column="認定情報_短期入所支給限度日数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="認定情報_短期入所支給限度開始年月日" column="認定情報_短期入所支給限度開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_短期入所支給限度終了年月日" column="認定情報_短期入所支給限度終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_当初認定有効開始年月日" column="認定情報_当初認定有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_当初認定有効終了年月日" column="認定情報_当初認定有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_受給資格証明書発行年月日１" column="認定情報_受給資格証明書発行年月日１" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_受給資格証明書発行年月日２" column="認定情報_受給資格証明書発行年月日２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_診断命令書発行年月日" column="認定情報_診断命令書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_２号申請受理通知書発行年月日" column="認定情報_２号申請受理通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_認定結果通知書発行年月日" column="認定情報_認定結果通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_区分変更通知書発行年月日" column="認定情報_区分変更通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_サービス変更通知書発行年月日" column="認定情報_サービス変更通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_認定却下通知書発行年月日" column="認定情報_認定却下通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_認定取消通知書発行年月日" column="認定情報_認定取消通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定情報_資格取得前申請フラグ" column="認定情報_資格取得前申請フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <result property="認定情報_旧措置者フラグ" column="認定情報_旧措置者フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <result property="認定情報_論理削除フラグ" column="認定情報_論理削除フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-
+       
+        <result property="資格情報_被保険者番号" column="資格情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="資格情報_識別コード" column="資格情報_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="資格情報_資格取得年月日" column="資格情報_資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格情報_資格喪失年月日" column="資格情報_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格情報_資格喪失事由コード" column="資格情報_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格情報_被保険者区分コード" column="資格情報_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格情報_住所地特例フラグ" column="資格情報_住所地特例フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="申請中認定情報_被保険者番号" column="申請中認定情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <collection property="収納状況情報リスト" resultMap="resultMap_収納状況情報リスト"/>
+    </resultMap>
+    <resultMap id="resultMap_収納状況情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunoStatusJohoEntity" >
+        <result property="収納状況_調定年度" column="収納状況_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="収納状況_賦課年度" column="収納状況_賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="収納状況_通知書番号" column="収納状況_通知書番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収納状況_期" column="収納状況_期" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="収納状況_被保険者番号" column="収納状況_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="収納状況_識別コード" column="収納状況_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="収納状況_納期限" column="収納状況_納期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
+        <result property="収納状況_調定額" column="収納状況_調定額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="収納状況_収入日" column="収納状況_収入日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="収納状況_収入額" column="収納状況_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="収納状況_督促状発行日" column="収納状況_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="収納状況_時効区分" column="収納状況_時効区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収納状況_未納額" column="収納状況_未納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="収納状況_時効起算事由" column="収納状況_時効起算事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収納状況_滞納区分" column="収納状況_滞納区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収納状況_最長滞納期間" column="収納状況_最長滞納期間" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="収納状況_以前滞納額" column="収納状況_以前滞納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="収納状況_以前滞納区分" column="収納状況_以前滞納区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収納状況_過年度フラグ" column="収納状況_過年度フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+    </resultMap>
+    <resultMap id="resultMap_find支払方法変更情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuOneEntity" autoMapping="true">
+        <id property="対象者情報_被保険者番号" column="対象者情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <collection property="収納情報リスト" resultMap="resultMap_収納情報リスト"/>
+    </resultMap>
+    <resultMap id="resultMap_収納情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunoJohoEntity">
+        <result property="賦課_被保険者番号" column="賦課_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="賦課_調定年度" column="賦課_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="賦課_賦課年度" column="賦課_賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="賦課_通知書番号" column="賦課_通知書番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <result property="賦課_履歴番号" column="賦課_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="賦課_被保険者番号" column="賦課_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="賦課_識別コード" column="賦課_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="賦課_世帯コード" column="賦課_世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="賦課_世帯員数" column="賦課_世帯員数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
@@ -890,10 +678,10 @@
         <result property="介護期別_徴収方法" column="介護期別_徴収方法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護期別_期" column="介護期別_期" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="介護期別_調定ID" column="介護期別_調定ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-
-        <!--            <result property="調定共通_介護継承_調定ID" column="調定共通_介護継承_調定ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="調定共通_介護継承_履歴番号" column="調定共通_介護継承_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="調定共通_介護継承_収納ID" column="調定共通_介護継承_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
+        
+        <result property="調定共通_介護継承_調定ID" column="調定共通_介護継承_調定ID"/>
+        <result property="調定共通_介護継承_履歴番号" column="調定共通_介護継承_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="調定共通_介護継承_収納ID" column="調定共通_介護継承_収納ID"/>
         <result property="調定共通_介護継承_会計年度" column="調定共通_介護継承_会計年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
         <result property="調定共通_介護継承_処理年度" column="調定共通_介護継承_処理年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
         <result property="調定共通_介護継承_処理番号" column="調定共通_介護継承_処理番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
@@ -917,13 +705,16 @@
         <result property="時効_時効起算年月日" column="時効_時効起算年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="時効_時効起算日区分" column="時効_時効起算日区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="時効_論理削除フラグ" column="時効_論理削除フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-
+        <result property="督促状発行履歴_収納ID" column="督促状発行履歴_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="督促状発行履歴_督促状発行年月日" column="督促状発行履歴_督促状発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
+        <collection property="収入情報リスト" resultMap="resultMap_収入情報リスト"/>
+    </resultMap>
+ 
+     <resultMap id="resultMap_収入情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunyuJohoEntity" autoMapping="true">
+        <id property="収納ID" column="収入_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="収入ID" column="収入_収入ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="収納ID" column="収入_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<result property="収入額" column="収入_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収入日" column="収入_収入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
-        <result property="督促状発行履歴_収納ID" column="督促状発行履歴_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="督促状発行履歴_督促状発行年月日" column="督促状発行履歴_督促状発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-    </resultMap>
+        <result property="収入額" column="収入_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="収入日" column="収入_収入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
+     </resultMap>
 </mapper>

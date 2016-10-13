@@ -134,13 +134,17 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         if (RString.isNullOrEmpty(koroshoIfShikibetsuCode)) {
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
-            ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会資料作成用データ送信ファイル名09B, RDate.getNowDate());
+            if (new RString("09A").equals(entity.get厚労省IF識別コード())) {
+                ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会資料作成用データ送信ファイル名09A, RDate.getNowDate());
+            } else {
+                ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会資料作成用データ送信ファイル名09B, RDate.getNowDate());
+            }
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         }
         if (!koroshoIfShikibetsuCode.equals(entity.get厚労省IF識別コード())) {
             eucCsvWriterJunitoJugo.close();
             koroshoIfShikibetsuCode = entity.get厚労省IF識別コード();
-            ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会資料作成用データ送信ファイル名09A, RDate.getNowDate());
+            ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会資料作成用データ送信ファイル名09B, RDate.getNowDate());
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         }
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());

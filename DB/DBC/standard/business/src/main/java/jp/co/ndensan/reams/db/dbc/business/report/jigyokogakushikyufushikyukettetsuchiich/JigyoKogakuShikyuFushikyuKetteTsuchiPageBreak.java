@@ -42,14 +42,29 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiPageBreak extends PageBreaker<J
         if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
             flg = true;
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().kanaMeisho.equals(nextSource.getSource().kanaMeisho)) {
+            flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.市町村コード.get項目ID())
                 && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.証記載保険者番号.get項目ID())
+                && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.決定通知番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.資格状態区分.get項目ID())
+                && !currentSource.getSource().shikakuJyotaiKubun.equals(nextSource.getSource().shikakuJyotaiKubun)) {
             flg = true;
         }
         return flg;

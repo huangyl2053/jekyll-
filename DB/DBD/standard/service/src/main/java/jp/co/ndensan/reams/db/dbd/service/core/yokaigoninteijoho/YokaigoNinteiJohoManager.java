@@ -196,20 +196,14 @@ public class YokaigoNinteiJohoManager {
      * 介護認定申請情報を保存する。
      *
      * @param 認定情報 YokaigoNinteiJoho
-     * @param is受給 boolean
      *
      */
     @Transaction
-    public void save介護認定申請情報(YokaigoNinteiJoho 認定情報, boolean is受給) {
-        if (is受給) {
-            if (認定情報.hasChanged受給認定情報()) {
-                受給者台帳Dac.save(認定情報.get受給者台帳Entity());
-                要介護認定申請情報受給Dac.save(認定情報.get要介護認定申請情報受給Entity());
-            }
-        } else {
-            if (認定情報.hasChanged認定認定情報()) {
-                要介護認定申請情報認定Dac.save(認定情報.get要介護認定申請情報認定Entity());
-            }
+    public void save介護認定申請情報(YokaigoNinteiJoho 認定情報) {
+
+        if (認定情報.hasChanged受給認定情報()) {
+            受給者台帳Dac.save(認定情報.get受給者台帳Entity());
+            要介護認定申請情報受給Dac.save(認定情報.get要介護認定申請情報受給Entity());
         }
     }
 

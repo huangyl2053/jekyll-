@@ -50,8 +50,8 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaF
     @Override
     public void writeBy(ReportSourceWriter<RiyoshaFutangakuGemmenGaitoshaIchiranReportSource> writer) {
 
-        int index = 0;
-        if (target.get世帯員リスト().isEmpty()) {
+        int index = 1;
+        if (target.get世帯員リスト() == null || target.get世帯員リスト().isEmpty()) {
             IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target,
                     outputOrder, index);
             IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);

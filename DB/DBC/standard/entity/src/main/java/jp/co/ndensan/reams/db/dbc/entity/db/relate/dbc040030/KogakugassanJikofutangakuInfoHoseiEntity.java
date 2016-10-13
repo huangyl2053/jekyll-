@@ -10,10 +10,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGa
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -31,6 +34,10 @@ public class KogakugassanJikofutangakuInfoHoseiEntity implements IDbAccessable, 
     private KogakugassanJikofutangakuInfoHoseiTempEntity 中間DBEntity;
     private RString juminShubetsuCode;
     private LasdecCode shichosonCode;
+    private FlexibleDate seinengappiYMD;
+    private RString seibetsuCode;
+    private AtenaMeisho kanjiShimei;
+    private AtenaKanaMeisho kanaShimei;
     private YubinNo yubinNo;
     private ZenkokuJushoCode zenkokuJushoCode;
     private GyoseikuCode gyoseikuCode;

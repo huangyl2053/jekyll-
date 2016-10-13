@@ -59,6 +59,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
     private final boolean hizukeHeshu;
     private final RString 国保連IFなし区分;
     private final RString 事業高額分;
+    private RString 出力順;
     private final List<KamokuCode> kamokuCodelist;
 
     /**
@@ -97,6 +98,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
      * @param hizukeHeshu hizukeHeshu
      * @param 国保連IFなし区分 RString
      * @param 事業高額分 RString
+     * @param 出力順 RString
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param kamokuCodelist List<KamokuCode>
@@ -135,6 +137,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
             boolean hizukeHeshu,
             RString 国保連IFなし区分,
             RString 事業高額分,
+            RString 出力順,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
             List<KamokuCode> kamokuCodelist
@@ -173,6 +176,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
         this.hizukeHeshu = hizukeHeshu;
         this.国保連IFなし区分 = 国保連IFなし区分;
         this.事業高額分 = 事業高額分;
+        this.出力順 = 出力順;
         this.kamokuCodelist = kamokuCodelist;
     }
 

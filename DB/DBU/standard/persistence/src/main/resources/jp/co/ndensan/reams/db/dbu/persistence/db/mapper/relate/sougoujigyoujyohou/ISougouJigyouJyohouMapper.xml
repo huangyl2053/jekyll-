@@ -66,16 +66,19 @@
         </if>
     </select>
     
-    <select resultOrdered="true" id="get提供対象者" resultMap="ResultMap_TeikyoKihonJohoEntity"
+    <select resultOrdered="true" id="get提供対象者" resultMap="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter" fetchSize="500">
         SELECT 
+            psm."kojinNo",
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.allColumns_TeikyoKihonJoho" />
-         FROM "TeikyoKihonJoho" AS teikyoKihonJoho
+         FROM "TeikyoKihonJohoNNTemp" AS teikyoKihonJoho
+        INNER JOIN rgua.${psmShikibetsuTaisho} AS psm
+            ON psm."shikibetsuCode" = teikyoKihonJoho."shikibetsuCode"
         <if test = "is異動">
         WHERE NOT EXISTS(  SELECT 1
                             FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
                            WHERE teikyoKihonJoho."hihokenshaNo" = dbT7304."hihokenshaNo"
-                              AND teikyoKihonJoho."dataSetRecordKey" = dbT7304."dataSetRecordKey"
+                              AND teikyoKihonJoho."dataSetKey" = dbT7304."dataSetKey"
                               AND teikyoKihonJoho."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
                               AND teikyoKihonJoho."hanNo" = dbT7304."hanNo"
                               AND teikyoKihonJoho."teikyoNaiyo01" = dbT7304."soshinNaiyo01"
@@ -92,11 +95,11 @@
     </select>
     
     <sql id="allColumns_TeikyoKihonJoho">
-         teikyoKihonJoho."hiHokenshaNo" AS "teikyoKihonJoho_hihokenshaNo",
-         teikyoKihonJoho."dataSetRecordKey" AS "teikyoKihonJoho_dataSetRecordKey",
+         teikyoKihonJoho."hihokenshaNo" AS "teikyoKihonJoho_hihokenshaNo",
+         teikyoKihonJoho."dataSetKey" AS "teikyoKihonJoho_dataSetKey",
          teikyoKihonJoho."teikyoKubun" AS "teikyoKihonJoho_teikyoKubun",
          teikyoKihonJoho."shikibetsuCode" AS "teikyoKihonJoho_shikibetsuCode",
-         teikyoKihonJoho."kojinnNo" AS "teikyoKihonJoho_kojinnNo",
+         teikyoKihonJoho."kojinNo" AS "teikyoKihonJoho_kojinNo",
          teikyoKihonJoho."tokuteiKojinJohoMeiCode" AS "teikyoKihonJoho_tokuteiKojinJohoMeiCode",
          teikyoKihonJoho."hanNo" AS "teikyoKihonJoho_hanNo",
          teikyoKihonJoho."teikyoNaiyo01" AS "teikyoKihonJoho_teikyoNaiyo01",
@@ -123,17 +126,23 @@
     </sql>
 
 
-    <!--テーブルTeikyoKihonJohoの項目をTeikyoKihonJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_TeikyoKihonJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeikyoKihonJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeyikyouTayisyousyaJyohouRelateEntity" autoMapping="true">
+        <id property="teikyoKihonJohoNNTempEntity.hihokenshaNo" column="teikyoKihonJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="teikyoKihonJohoNNTempEntity.inputShikibetsuNo" column="teikyoKihonJoho_dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kojinNo" column="kojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KojinNoTypeHandler"/>
+        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.ResultMap_TeikyoKihonJohoNNTempEntity"/>
+    </resultMap>
+
+    <!--テーブルTeikyoKihonJohoNNTempの項目をTeikyoKihonJohoNNTempEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_TeikyoKihonJohoNNTempEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity" autoMapping="true">
         <id property="hihokenshaNo" column="teikyoKihonJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="dataSetRecordKey" column="teikyoKihonJoho_dataSetRecordKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dataSetKey" column="teikyoKihonJoho_dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="teikyoKubun" column="teikyoKihonJoho_teikyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikibetsuCode" column="teikyoKihonJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="kojinnNo" column="teikyoKihonJoho_kojinnNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kojinNo" column="teikyoKihonJoho_kojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tokuteiKojinJohoMeiCode" column="teikyoKihonJoho_tokuteiKojinJohoMeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hanNo" column="teikyoKihonJoho_hanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dataSetNo" column="teikyoKihonJoho_dataSetNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kokaiYMD" column="teikyoKihonJoho_kokaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tateNo" column="teikyoKihonJoho_tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="teikyoNaiyo01" column="teikyoKihonJoho_teikyoNaiyo01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="misetteiJiyu01" column="teikyoKihonJoho_misetteiJiyu01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

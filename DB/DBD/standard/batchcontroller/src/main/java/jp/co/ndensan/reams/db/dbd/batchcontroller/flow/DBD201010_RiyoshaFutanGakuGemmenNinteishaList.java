@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBD-3980-030 x_youyj
  */
 public class DBD201010_RiyoshaFutanGakuGemmenNinteishaList extends BatchFlowBase<DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter> {
-    
+
     /**
      * 非課税年金対象者同定フロー
      */
@@ -32,9 +33,16 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaList extends BatchFlowBase
     private static final String 減免減額対象者判定用根拠作成 = "減免減額対象者判定用根拠作成";
 
     private static final String 利用者負担額減免認定者リスト発行 = "利用者負担額減免認定者リスト発行";
+    private RDate システム日時;
+
+    @Override
+    protected void initialize() {
+        システム日時 = RDate.getNowDate();
+    }
 
     @Override
     protected void defineFlow() {
+
         executeStep(対象者一次特定);
         executeStep(減免減額対象者判定用根拠作成);
         executeStep(利用者負担額減免認定者リスト発行);
@@ -59,8 +67,8 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaList extends BatchFlowBase
      */
     @Step(減免減額対象者判定用根拠作成)
     protected IBatchFlowCommand gennmennTaisyouSkuse() {
-       return otherBatchFlow(HIKAIFLOW, SubGyomuCode.DBD介護受給,
-               new DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(getParameter().get所得年度())).define();
+        return otherBatchFlow(HIKAIFLOW, SubGyomuCode.DBD介護受給,
+                new DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(getParameter().get所得年度())).define();
     }
 
     /**
@@ -71,7 +79,7 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaList extends BatchFlowBase
     @Step(利用者負担額減免認定者リスト発行)
     protected IBatchFlowCommand riyoushilyaHutannCsvProcess() {
         return loopBatch(NinteishaListSakuseiProcess.class)
-                .arguments(getParameter().toNinteishaListSakuseiProcessParameter())
+                .arguments(getParameter().toNinteishaListSakuseiProcessParameter(システム日時))
                 .define();
     }
 

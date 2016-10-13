@@ -35,12 +35,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class PntNinteiShinsaHanteiListProcess extends BatchProcessBase<PntNinteiShinsaHanteiListEntity> {
 
-    private static final RString 認定申請IF種類 = new RString("【認定申請IF種類】");
-    private static final RString 証記載保険者番号 = new RString("【証記載保険者番号】");
-    private static final RString 市町村コード = new RString("【市町村コード】");
-    private static final RString 被保険者番号 = new RString("【被保険者番号】");
-    private static final RString 抽出開始日時 = new RString("【抽出開始日時】");
-    private static final RString 抽出終了日時 = new RString("【抽出終了日時】: ");
     private static final RString MYBATIS_MAPPER_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."
             + "relate.ninteishinseiinfoif.IPntNinteiShinsaHanteiListMapper.select介護認定審査判定データ");
     private PntNinteiShinsaHanteiListProcessParameter parameter;

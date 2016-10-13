@@ -36,6 +36,9 @@
     </select>
     
     <resultMap id="ResultMap_ShoninShori" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.ShoninShoriEntity">
+        <id column="dbT4018KaigohFutanGengkNint_shoKisaiHokenshaNo" />
+        <id column="dbT4018KaigohFutanGengkNint_hihokenshaNo" />
+        <id column="dbT4018KaigohFutanGengkNint_rirekiNo" />
         <result property="減免減額対象者判定用根拠一時Entity.被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="減免減額対象者判定用根拠一時Entity.本人識別コード" column="本人識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="減免減額対象者判定用根拠一時Entity.本人課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakuk
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
@@ -75,6 +76,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
 
+    private static final RString コンマ = new RString(",");
     private static final RString 円単位 = new RString("円");
     private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
     private static final RString 帳票制御共通_首長名印字位置_公印にかける = new RString("1");
@@ -108,12 +110,13 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         result.set被保険者氏名フリガナ(param.get被保険者氏名フリガナ());
         result.set受付年月日(param.get受付日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        result.set承認不承認(param.get決定区分());
+        result.set承認不承認(RString.isNullOrEmpty(param.get決定区分()) ? ShoninKubun.承認しない.get名称()
+                : ShoninKubun.toValue(param.get決定区分()).get名称());
         result.set承認年月日(param.get決定日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         result.set不承認の理由(param.get承認しない理由());
         result.set利用者負担上限額(RString.isNullOrEmpty(param.get利用者負担上限額()) ? RString.EMPTY
-                : param.get利用者負担上限額().replace(円単位, RString.EMPTY));
+                : param.get利用者負担上限額().replace(円単位, RString.EMPTY).replace(コンマ, RString.EMPTY));
 
         介護事業者情報を取得する(result, param.get事業者番号());
         介護事業者代表者情報を取得する(result, param.get事業者番号());
@@ -183,8 +186,7 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
                     !帳票制御情報Entity.getDenshiKoinInjiUmu(), KenmeiFuyoKubunType.付与なし);
             NinshoshaSource source = builder.buildSource();
 
-            result.set発行日(null == source.hakkoYMD ? RString.EMPTY : new FlexibleDate(source.hakkoYMD).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            result.set発行日(null == source.hakkoYMD ? RString.EMPTY : source.hakkoYMD);
             result.set認証者役職名(null == source.ninshoshaYakushokuMei ? RString.EMPTY : source.ninshoshaYakushokuMei);
             result.set認証者役職名1(null == source.ninshoshaYakushokuMei1 ? RString.EMPTY : source.ninshoshaYakushokuMei1);
             result.set認証者役職名2(null == source.ninshoshaYakushokuMei2 ? RString.EMPTY : source.ninshoshaYakushokuMei2);

@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity
 public class ShiharaiHohoHenkoHaakuFourEntity {
 
     private DbT4021ShiharaiHohoHenkoEntity 支払方法変更Entity;
-    private DbT4024ShiharaiHohoHenkoSashitomeEntity 支払方法変更差止Entity;
-    private DbT3034ShokanShinseiEntity 償還払支給申請Entity;
-    private DbT3036ShokanHanteiKekkaEntity 償還払支給判定結果Entity;
+    private List<DbT4024ShiharaiHohoHenkoSashitomeEntity> 支払方法変更差止リスト;
+    private List<ShokanShinseiHanteiKekkaJohoEntity> 償還情報リスト;
 }

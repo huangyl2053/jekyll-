@@ -63,6 +63,7 @@ public class JyukyushaDaicho {
             getValidationHandler().validateFor被保険者番号非空チェック(pairs, div);
             getValidationHandler().validateFor被保険者番号ToがFrom以前チェック(pairs, div);
         }
+        getValidationHandler().validateFor異動抽出対象一つでも選択していない場合チェック(pairs, div);
         getValidationHandler().validateFor出力順未指定チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();

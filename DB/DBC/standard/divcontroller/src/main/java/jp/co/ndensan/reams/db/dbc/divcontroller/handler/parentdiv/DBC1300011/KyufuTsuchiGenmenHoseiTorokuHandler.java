@@ -67,6 +67,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setVisible(false);
         div.getTextBoxDateService().clearFromValue();
         div.getTextBoxDateService().clearToValue();
+        div.getDataGridItiran().getGridSetting();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HOZON, true);
     }
 

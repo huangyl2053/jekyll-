@@ -39,6 +39,7 @@ public final class SougouJigyouJyohouMybatisParameter implements IMyBatisParamet
     private final RString 仮データ;
     private final RString 国保連;
     private final RString 自己負担額確認情報_括;
+    private final RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -69,7 +70,8 @@ public final class SougouJigyouJyohouMybatisParameter implements IMyBatisParamet
             RString その他エラーにより未提供,
             RString 仮データ,
             RString 国保連,
-            RString 自己負担額確認情報_括) {
+            RString 自己負担額確認情報_括,
+            RString psmShikibetsuTaisho) {
         this.is当初または版改定 = is当初または版改定;
         this.is再登録 = is再登録;
         this.is異動 = is異動;
@@ -84,6 +86,7 @@ public final class SougouJigyouJyohouMybatisParameter implements IMyBatisParamet
         this.仮データ = 仮データ;
         this.国保連 = 国保連;
         this.自己負担額確認情報_括 = 自己負担額確認情報_括;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -94,6 +97,7 @@ public final class SougouJigyouJyohouMybatisParameter implements IMyBatisParamet
      * @param 対象開始日時 対象開始日時
      * @param 対象終了日時 対象終了日時
      * @param 版番号 版番号
+     * @param psmShikibetsuTaisho PSM
      * @return 総合事業情報のMybatisParameterクラス
      */
     public static SougouJigyouJyohouMybatisParameter create_Parameter(
@@ -101,7 +105,8 @@ public final class SougouJigyouJyohouMybatisParameter implements IMyBatisParamet
             RString 個人番号付替対象者被保険者番号,
             RDateTime 対象開始日時,
             RDateTime 対象終了日時,
-            RString 版番号) {
+            RString 版番号,
+            RString psmShikibetsuTaisho) {
         boolean 当初または版改定 = false;
         boolean 再登録 = false;
         boolean 異動 = false;
@@ -128,6 +133,7 @@ public final class SougouJigyouJyohouMybatisParameter implements IMyBatisParamet
                 TeikyoKubun.その他エラーにより未提供.getコード(),
                 KaigoGassan_Idokubun.仮データ.getCode(),
                 KaigoGassan_DataSakuseiKubun.自己負担額確認情報括.getコード(),
-                KaigoGassan_DataSakuseiKubun.国保連.getコード());
+                KaigoGassan_DataSakuseiKubun.国保連.getコード(),
+                psmShikibetsuTaisho);
     }
 }

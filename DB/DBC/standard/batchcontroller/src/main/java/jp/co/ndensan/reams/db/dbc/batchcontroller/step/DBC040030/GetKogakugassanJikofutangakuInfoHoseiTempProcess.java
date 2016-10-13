@@ -85,6 +85,7 @@ public class GetKogakugassanJikofutangakuInfoHoseiTempProcess extends BatchProce
 
     private void set高額合算自己負担額情報(KogakugassanJikofutangakuInfoHoseiTempEntity tmpEntity,
             DbT3070KogakuGassanJikoFutanGakuEntity entity) {
+        tmpEntity.setJikoFutan_KeisanYM(FlexibleDate.getNowDate().getYearMonth());
         tmpEntity.setHihokenshaNo(entity.getHihokenshaNo());
         tmpEntity.setTaishoNendo(entity.getTaishoNendo());
         tmpEntity.setHokenshaNo(entity.getHokenshaNo());
@@ -112,10 +113,6 @@ public class GetKogakugassanJikofutangakuInfoHoseiTempProcess extends BatchProce
         tmpEntity.setHihokenshaKaishiYMD(entity.getHihokenshaKaishiYMD());
         tmpEntity.setHihokenshaShuryoYMD(entity.getHihokenshaShuryoYMD());
         tmpEntity.setShinseiYMD(entity.getShinseiYMD());
-        tmpEntity.setGokei_JikoFutanGaku(entity.getGokei_JikoFutanGaku());
-        tmpEntity.setGokei_70_74JikoFutanGaku(entity.getGokei_70_74JikoFutanGaku());
-        tmpEntity.setGokei_Under70KogakuShikyuGaku(entity.getGokei_Under70KogakuShikyuGaku());
-        tmpEntity.setGokei_70_74KogakuShikyuGaku(entity.getGokei_70_74KogakuShikyuGaku());
         tmpEntity.setSumi_Gokei_JikoFutanGaku(entity.getSumi_Gokei_JikoFutanGaku());
         tmpEntity.setSumi_Gokei_70_74JikoFutanGaku(entity.getSumi_Gokei_70_74JikoFutanGaku());
         tmpEntity.setSumi_Gokei_Under70KogakuShikyuGaku(entity.getSumi_Gokei_Under70KogakuShikyuGaku());

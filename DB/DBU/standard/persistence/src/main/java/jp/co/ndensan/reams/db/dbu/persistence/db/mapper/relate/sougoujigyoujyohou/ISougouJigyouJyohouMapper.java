@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyoh
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.SougouJigyouJyohouRelateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeikyoKihonJohoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 
 /**
  * 総合事業情報のMapperクラスです。
@@ -29,7 +29,7 @@ public interface ISougouJigyouJyohouMapper {
      * 提供対象者の取得処理です。
      *
      * @param parameter 総合事業情報のMybatisParameterクラス
-     * @return List<TeikyoKihonJohoEntity>
+     * @return List<TeikyoKihonJohoNNTempEntity>
      */
-    List<TeikyoKihonJohoEntity> get提供対象者(SougouJigyouJyohouMybatisParameter parameter);
+    List<TeikyoKihonJohoNNTempEntity> get提供対象者(SougouJigyouJyohouMybatisParameter parameter);
 }

@@ -65,6 +65,7 @@ public class TokuteiNyushoServiceHiShinsei {
     //private final RString 承認メニュー = new RString("menu1");
     private final RString 保存する = new RString("btnUpdate");
     private final RString 追加 = new RString("追加");
+    private final RString 削除 = new RString("削除");
     private final RString 申請メニュー_タイトル = new RString("特別地域加算減免申請");
     private final RString 承認メニュー_タイトル = new RString("特別地域加算減免申請承認");
     private static final RString 承認する_KEY = new RString("1");
@@ -180,6 +181,8 @@ public class TokuteiNyushoServiceHiShinsei {
 //                new HihokenshaNo(new RString("2190000001")),
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));
+        ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.特別地域加算減免ViewState, null);
         RString menuID = ResponseHolder.getMenuID();
         getHandler(div).set追加するボタン押下(資格対象者, menuID);
         return ResponseData.of(div).setState(DBD1040001StateName.詳細);
@@ -192,6 +195,8 @@ public class TokuteiNyushoServiceHiShinsei {
      * @return 引数のDivを持つResponseData型
      */
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onClick_btnModify(TokuteiNyushoServiceHiShinseiDiv div) {
+        ViewStateHolder.put(ViewStateKeys.特別地域加算減免申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.特別地域加算減免ViewState, null);
         dgShinseiList_Row row = div.getShinsei().getShinseiList().getDgShinseiList().getActiveRow();
         List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報List, ArrayList.class);
         TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = getHandler(div).get特別地域加算減免申請の情報(row, 特別地域加算減免申請の情報List);
@@ -209,7 +214,8 @@ public class TokuteiNyushoServiceHiShinsei {
 //                new ShikibetsuCode(new RString("000000000000010")),
 //                new SetaiCode(new RString("000000000000100")));
         RString menuID = ResponseHolder.getMenuID();
-        getHandler(div).set申請一覧の修正ボタンをクリック(row, 資格対象者, 特別地域加算減免ViewState, menuID);
+        TokubetsuChiikiKasanGemmenViewState joho = ViewStateHolder.get(ViewStateKeys.特別地域加算減免ViewState, TokubetsuChiikiKasanGemmenViewState.class);
+        getHandler(div).set申請一覧の修正ボタンをクリック(row, 資格対象者, joho, menuID);
         return ResponseData.of(div).setState(DBD1040001StateName.詳細);
     }
 
@@ -225,13 +231,13 @@ public class TokuteiNyushoServiceHiShinsei {
         }
         if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             dgShinseiList_Row row = div.getShinsei().getShinseiList().getDgShinseiList().getActiveRow();
-//            List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報List, ArrayList.class);
-//            RString 元決定区分 = RString.EMPTY;
-//            TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = getHandler(div).get特別地域加算減免申請の情報(row, 特別地域加算減免申請の情報List);
-//            if (特別地域加算減免申請の情報 != null && 特別地域加算減免申請の情報.get決定区分() != null) {
-//                元決定区分 = 特別地域加算減免申請の情報.get決定区分();
-//            }
-            if (!ResponseHolder.isReRequest() && !追加.equals(row.getJotai()) && !row.getKetteiKubun().isEmpty() && row.getKetteiKubun() != null) {
+            List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報List, ArrayList.class);
+            RString 元決定区分 = RString.EMPTY;
+            TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = getHandler(div).get特別地域加算減免申請の情報(row, 特別地域加算減免申請の情報List);
+            if (特別地域加算減免申請の情報 != null && 特別地域加算減免申請の情報.get決定区分() != null) {
+                元決定区分 = 特別地域加算減免申請の情報.get決定区分();
+            }
+            if (!ResponseHolder.isReRequest() && !追加.equals(row.getJotai()) && !元決定区分.isEmpty()) {
                 InformationMessage message = new InformationMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode(),
                         DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
@@ -416,21 +422,7 @@ public class TokuteiNyushoServiceHiShinsei {
             getValidationHandler().validateFor決定日の必須入力(pairs, div);
             getValidationHandler().validateFor適用日の必須入力(pairs, div);
             getValidationHandler().validateFor有効期限の必須入力(pairs, div);
-            RString selectKey = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
-            if (承認する_KEY.equals(selectKey)) {
-                getValidationHandler().validateFor軽減率の必須入力(pairs, div);
-                getValidationHandler().validateFor特別地域加算減免_適用開始日が法施行以前(pairs, div);
-                getValidationHandler().validateFor特別地域加算減免_適用終了日が年度外(pairs, div);
-                getValidationHandler().validateFor特別地域加算減免_適用終了日が開始日以前(pairs, div);
-                getValidationHandler().validateFor特別地域加算減免_減免減額_確認番号が重複(pairs, div);
-                getValidationHandler().validateFor特別地域加算減免_軽減率範囲外(pairs, div);
-                getValidationHandler().validateFor受給共通_受給者登録なし(pairs, div);
-            } else if (承認しない_KEY.equals(selectKey)) {
-                getValidationHandler().validateFor特別地域加算減免_適用開始日が法施行以前(pairs, div);
-                getValidationHandler().validateFor特別地域加算減免_適用終了日が年度外(pairs, div);
-                getValidationHandler().validateFor特別地域加算減免_適用終了日が開始日以前(pairs, div);
-                getValidationHandler().validateFor受給共通_受給者登録なし(pairs, div);
-            }
+            setCheck(div, pairs);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
@@ -438,6 +430,48 @@ public class TokuteiNyushoServiceHiShinsei {
             return ResponseData.of(div).setState(DBD1040001StateName.一覧);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setCheck(TokuteiNyushoServiceHiShinseiDiv div, ValidationMessageControlPairs pairs) {
+        RString selectKey = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
+        if (承認する_KEY.equals(selectKey)) {
+            set承認check(div, pairs);
+        } else if (承認しない_KEY.equals(selectKey)) {
+            set承認しないcheck(div, pairs);
+        }
+    }
+
+    private void set承認check(TokuteiNyushoServiceHiShinseiDiv div, ValidationMessageControlPairs pairs) {
+        getValidationHandler().validateFor軽減率の必須入力(pairs, div);
+        if (div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()) {
+            getValidationHandler().validateFor特別地域加算減免_適用開始日が法施行以前(pairs, div);
+            getValidationHandler().validateFor受給共通_受給者登録なし(pairs, div);
+            getValidationHandler().validateFor特別地域加算減免_減免減額_確認番号が重複(pairs, div);
+        }
+        if (div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()) {
+            getValidationHandler().validateFor特別地域加算減免_適用終了日が年度外(pairs, div);
+        }
+        if (div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()
+                && div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()) {
+            getValidationHandler().validateFor特別地域加算減免_適用終了日が開始日以前(pairs, div);
+        }
+        if (div.getShinseiDetail().getTxtShinseiYMD().getValue() != null && !div.getShinseiDetail().getTxtShinseiYMD().getValue().isEmpty()) {
+            getValidationHandler().validateFor特別地域加算減免_軽減率範囲外(pairs, div);
+        }
+    }
+
+    private void set承認しないcheck(TokuteiNyushoServiceHiShinseiDiv div, ValidationMessageControlPairs pairs) {
+        if (div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()) {
+            getValidationHandler().validateFor特別地域加算減免_適用開始日が法施行以前(pairs, div);
+            getValidationHandler().validateFor受給共通_受給者登録なし(pairs, div);
+        }
+        if (div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()) {
+            getValidationHandler().validateFor特別地域加算減免_適用終了日が年度外(pairs, div);
+        }
+        if (div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()
+                && div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()) {
+            getValidationHandler().validateFor特別地域加算減免_適用終了日が開始日以前(pairs, div);
+        }
     }
 
     private void set承認情報を確定する処理(TokuteiNyushoServiceHiShinseiDiv div) {

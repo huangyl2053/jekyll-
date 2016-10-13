@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Target
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShuru;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -43,7 +44,7 @@ public class NinteishaListSakuseiMybatisprmParameter implements IMyBatisParamete
     private RString 帳票ID;
     private RDateTime 帳票作成日時;
     private RString 出力順;
-    private RString psmShikibetsuTaisho;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
     private boolean is認定者リスト = false;
     private boolean is該当者リスト = false;
     private boolean is世帯表示しない = false;
@@ -67,18 +68,18 @@ public class NinteishaListSakuseiMybatisprmParameter implements IMyBatisParamete
      * @param 基準日 基準日
      * @param 世帯表示 世帯表示
      * @param 世帯非課税等 世帯非課税等
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      * @param 出力順 出力順
      */
     public NinteishaListSakuseiMybatisprmParameter(
             TargetList 対象リスト, FlexibleDate 基準日, SetaiHyoji 世帯表示,
-            List<HihokenshaKeizaiJokyo> 世帯非課税等, RString psmShikibetsuTaisho, RString 出力順) {
+            List<HihokenshaKeizaiJokyo> 世帯非課税等, UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam, RString 出力順) {
         edit対象リスト(対象リスト);
         edit世帯表示(世帯表示);
         edit世帯非課税等(世帯非課税等);
         this.出力順 = 出力順;
         this.基準日 = 基準日;
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.shikibetsutaishoParam = shikibetsutaishoParam;
         this.利用者負担額減額 = GemmenGengakuShuru.利用者負担額減額.getコード();
         this.承認する = KetteiKubun.承認する.getコード();
     }

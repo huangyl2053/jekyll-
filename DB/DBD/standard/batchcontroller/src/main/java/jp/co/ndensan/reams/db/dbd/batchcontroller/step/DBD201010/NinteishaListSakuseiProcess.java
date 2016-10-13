@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanlist.RiyoshaFutanGakuGemmenNinteishaListProperty;
 import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanlist.RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.NinteishaListSakuseiBusiness;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.RiyoshaFutangakuGemmenGaitoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultCsvEntity;
@@ -19,18 +19,15 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakus
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.SeteiYouEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd00002.RiyoshaFutangakuGemmenGaitoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
-import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -69,7 +66,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -99,19 +95,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
     private static final RString ONE = new RString("1");
-    private static final RString THERE = new RString("3");
-    private static final RString ZEROSIX = new RString("06");
-    private static final RString 却下 = new RString("却下");
-    private static final RString 承認 = new RString("承認");
-    private static final RString 空白 = new RString("");
-    private static final RString ASTERISK = new RString("*");
     private static final RString 課 = new RString("課");
-    private static final RString 旧措置者 = new RString("旧措置者");
     private static final ReportIdDBD REPORT_DBD200002 = ReportIdDBD.DBD200002;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoulyagennmenn."
             + "IGennMennGennGakuTaiSyoulyaMapper.select利用者負担額減免認定者");
-    private int 連番 = 0;
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -129,6 +117,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private static final int NO_2 = 2;
     private static final int NO_3 = 3;
     private static final int NO_4 = 4;
+    private NinteishaListSakuseiBusiness business;
 
     @Override
     protected void initialize() {
@@ -145,6 +134,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         導入団体 = AssociationFinderFactory.createInstance().getAssociation();
         帳票ID = parameter.get帳票ID();
         edit初期化();
+        business = new NinteishaListSakuseiBusiness();
     }
 
     @BatchWriter
@@ -153,13 +143,12 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        key.set基準日(parameter.get基準日());
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinteishaListSakuseiMybatisprmParameter(psmShikibetsuTaisho, 出力順));
+        ShikibetsuTaishoPSMSearchKeyBuilder shikibetsuTaishoPSMKey
+                = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        shikibetsuTaishoPSMKey.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
+        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = shikibetsuTaishoPSMKey.build();
+        UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(shikibetsuTaishoPSMSearchKey);
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinteishaListSakuseiMybatisprmParameter(shikibetsutaishoParam, 出力順));
     }
 
     @Override
@@ -208,7 +197,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             }
         }
         if (t.get世帯員リスト() != null) {
-            NinteishaListSakuseiResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
+            NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
             NinteishaListSakuseiResultCsvEntity csvEntity = resultEntity;
             for (SeteiYouEntity entity : t.get世帯員リスト()) {
                 IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
@@ -224,17 +213,16 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 csvEntity = new NinteishaListSakuseiResultCsvEntity();
             }
         } else {
-            NinteishaListSakuseiResultCsvEntity resultEntity = set利用者負担額減免認定者リストCSV(t);
+            NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
             eucCsvWriter.writeLine(resultEntity);
         }
-        eucCsvWriter.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(eucFilePath, log);
-
     }
 
     @Override
     protected void afterExecute() {
+        eucCsvWriter.close();
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, log);
         バッチ出力条件リストの出力();
     }
 
@@ -335,222 +323,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         return 世帯非課税等;
     }
 
-    private NinteishaListSakuseiResultCsvEntity set利用者負担額減免認定者リストCSV(NinteishaListSakuseiResultEntity t) {
-        NinteishaListSakuseiResultCsvEntity resultEntity = new NinteishaListSakuseiResultCsvEntity();
-        resultEntity.set連番(new RString(String.valueOf(++連番)));
-        resultEntity.set被保険者番号(t.get被保険者番号().getColumnValue());
-        if (t.getPsmEntity() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
-            resultEntity.set識別コード(kojin.get識別コード().getColumnValue());
-            resultEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
-            resultEntity.set氏名(kojin.get名称().getName().getColumnValue());
-            resultEntity.setカナ氏名(kojin.get名称().getKana().getColumnValue());
-            resultEntity.set年齢(kojin.get年齢算出().get年齢());
-            resultEntity.set住民種別(kojin.get住民状態().住民状態略称());
-            resultEntity.set郵便番号(kojin.get住所().get郵便番号().getColumnValue());
-            resultEntity.set住所(kojin.get住所().get住所());
-            resultEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().getColumnValue());
-            resultEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-        }
-        if (t.get減免減額申請Entity() != null && t.get減免減額申請Entity().getShoKisaiHokenshaNo() != null) {
-            resultEntity.set証保険者番号(t.get減免減額申請Entity().getShoKisaiHokenshaNo().getColumnValue());
-        }
-        if (t.get利用者負担額減額Entity() != null && t.get利用者負担額減額Entity().getKetteiKubun() != null) {
-            if (KetteiKubun.承認しない.getコード().equals(t.get利用者負担額減額Entity().getKetteiKubun())) {
-                resultEntity.set決定区分(却下);
-            } else if (KetteiKubun.承認する.getコード().equals(t.get利用者負担額減額Entity().getKetteiKubun())) {
-                resultEntity.set決定区分(承認);
-            } else {
-                resultEntity.set決定区分(空白);
-            }
-        }
-        if (t.is老齢福祉年金受給者()) {
-            resultEntity.set老齢福祉年金受給(ASTERISK);
-        } else {
-            resultEntity.set老齢福祉年金受給(空白);
-        }
-
-        if (t.is生活保護受給者()) {
-            resultEntity.set生活保護受給区分(ASTERISK);
-        } else {
-            resultEntity.set生活保護受給区分(空白);
-        }
-        if (t.get本人課税区分() != null) {
-            if (KazeiKubun.課税.getコード().equals(t.get本人課税区分())) {
-                resultEntity.set課税区分(課);
-            } else {
-                resultEntity.set課税区分(空白);
-            }
-        }
-        if (t.get利用者負担額減額Entity() == null || t.get利用者負担額減額Entity().getKyuhuritsu() == null) {
-            resultEntity.set減免給付率(空白);
-        } else {
-            HokenKyufuRitsu kyuhuritsu = t.get利用者負担額減額Entity().getKyuhuritsu();
-            if (kyuhuritsu != null) {
-                Decimal str = kyuhuritsu.getColumnValue();
-                resultEntity.set減免給付率(new RString(str.toString()));
-            }
-        }
-        setVoidEntity(resultEntity, t);
-        setEntity(resultEntity, t);
-        return resultEntity;
-    }
-
-    private NinteishaListSakuseiResultCsvEntity setVoidEntity(NinteishaListSakuseiResultCsvEntity resultEntity,
-            NinteishaListSakuseiResultEntity t) {
-        if (t.get減免減額申請Entity() != null) {
-            resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
-        }
-        for (CSVSettings csvsetings : parameter.getCsv出力設定()) {
-            if (THERE.equals(csvsetings.getコード())) {
-                set減免申請日(resultEntity, t);
-            } else {
-                FlexibleDate shineiYMD = null;
-                FlexibleDate ketteiYMD = null;
-                FlexibleDate tekiyoKaishiYMD = null;
-                FlexibleDate tekiyoShuryoYMD = null;
-                if (t.get利用者負担額減額Entity() != null) {
-                    shineiYMD = t.get利用者負担額減額Entity().getShinseiYMD();
-                    ketteiYMD = t.get利用者負担額減額Entity().getKetteiYMD();
-                    tekiyoKaishiYMD = t.get利用者負担額減額Entity().getTekiyoKaishiYMD();
-                    tekiyoShuryoYMD = t.get利用者負担額減額Entity().getTekiyoShuryoYMD();
-                }
-                if (shineiYMD != null && !shineiYMD.isEmpty()) {
-                    resultEntity.set減免申請日(shineiYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-                }
-                if (ketteiYMD != null && !ketteiYMD.isEmpty()) {
-                    resultEntity.set減免決定日(ketteiYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-                }
-                if (tekiyoKaishiYMD != null && !tekiyoKaishiYMD.isEmpty()) {
-                    resultEntity.set減免適用日(tekiyoKaishiYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-                }
-                if (tekiyoShuryoYMD != null && !tekiyoShuryoYMD.isEmpty()) {
-                    resultEntity.set減免有効期限(tekiyoShuryoYMD.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-                }
-            }
-        }
-        resultEntity.set入所施設コード(t.get入所施設コード());
-        resultEntity.set入所施設名称(t.get入所施設名称());
-        return resultEntity;
-    }
-
-    private void set減免申請日(NinteishaListSakuseiResultCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
-        FlexibleDate shineiYMD = null;
-        FlexibleDate ketteiYMD = null;
-        FlexibleDate tekiyoKaishiYMD = null;
-        FlexibleDate tekiyoShuryoYMD = null;
-        if (t.get利用者負担額減額Entity() != null) {
-            shineiYMD = t.get利用者負担額減額Entity().getShinseiYMD();
-            ketteiYMD = t.get利用者負担額減額Entity().getKetteiYMD();
-            tekiyoKaishiYMD = t.get利用者負担額減額Entity().getTekiyoKaishiYMD();
-            tekiyoShuryoYMD = t.get利用者負担額減額Entity().getTekiyoShuryoYMD();
-        }
-        if (shineiYMD != null && !shineiYMD.isEmpty()) {
-            resultEntity.set減免申請日(shineiYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        }
-        if (ketteiYMD != null && !ketteiYMD.isEmpty()) {
-            resultEntity.set減免決定日(ketteiYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        }
-        if (tekiyoKaishiYMD != null && !tekiyoKaishiYMD.isEmpty()) {
-            resultEntity.set減免適用日(tekiyoKaishiYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        }
-        if (tekiyoShuryoYMD != null && !tekiyoShuryoYMD.isEmpty()) {
-            resultEntity.set減免有効期限(tekiyoShuryoYMD.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        }
-    }
-
-    private NinteishaListSakuseiResultCsvEntity setEntity(NinteishaListSakuseiResultCsvEntity resultEntity,
-            NinteishaListSakuseiResultEntity t) {
-        if (t.get厚労省IF識別コード() != null && !t.get厚労省IF識別コード().isEmpty()) {
-            if (t.get認定情報の要介護状態区分コード() == null || t.get認定情報の要介護状態区分コード().isEmpty()) {
-                resultEntity.set要介護度((YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get厚労省IF識別コード()),
-                        ZEROSIX)).getName());
-            } else {
-                resultEntity.set要介護度((YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get厚労省IF識別コード()),
-                        t.get認定情報の要介護状態区分コード())).getName());
-            }
-        }
-        for (CSVSettings csvsetings : parameter.getCsv出力設定()) {
-            if (THERE.equals(csvsetings.getコード())) {
-                認定日期(resultEntity, t);
-            } else {
-                els認定日期(resultEntity, t);
-            }
-        }
-        if (t.is旧措置者フラグ()) {
-            resultEntity.set旧措置(旧措置者);
-        } else {
-            resultEntity.set旧措置(空白);
-        }
-        if (t.is所得税課税者()) {
-            resultEntity.set所得税課税区分(課);
-        } else {
-            resultEntity.set所得税課税区分(空白);
-        }
-
-        return resultEntity;
-    }
-
-    private void els認定日期(NinteishaListSakuseiResultCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
-        FlexibleDate 認定年月日 = t.get認定情報の認定年月日();
-        if (認定年月日 != null && !認定年月日.isEmpty()) {
-            resultEntity.set認定日(認定年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-        } else {
-            FlexibleDate クリスト実施日 = t.get総者のチェックリスト実施日();
-            if (クリスト実施日 != null && !クリスト実施日.isEmpty()) {
-                resultEntity.set認定日(クリスト実施日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-            }
-        }
-        FlexibleDate 認定有効期間開始年月日 = t.get認定情報の認定有効期間開始年月日();
-        if (認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty()) {
-            resultEntity.set認定開始日(認定有効期間開始年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-        } else {
-            FlexibleDate 適用開始年月日 = t.get総者の適用開始年月日();
-            if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
-                resultEntity.set認定開始日(適用開始年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-            }
-        }
-        FlexibleDate 認定有効期間終了年月日 = t.get認定情報の認定有効期間終了年月日();
-        if (認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty()) {
-            resultEntity.set認定終了日(認定有効期間終了年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-        } else {
-            FlexibleDate 適用終了年月日 = t.get総者の適用終了年月日();
-            if (適用終了年月日 != null && !適用終了年月日.isEmpty()) {
-                resultEntity.set認定終了日(適用終了年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-            }
-        }
-    }
-
-    private void 認定日期(NinteishaListSakuseiResultCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
-        FlexibleDate 認定年月日 = t.get認定情報の認定年月日();
-        if (認定年月日 != null && !認定年月日.isEmpty()) {
-            resultEntity.set認定日(認定年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        } else {
-            FlexibleDate クリスト実施日 = t.get総者のチェックリスト実施日();
-            if (クリスト実施日 != null && !クリスト実施日.isEmpty()) {
-                resultEntity.set認定日(クリスト実施日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-            }
-        }
-        FlexibleDate 認定有効期間開始年月日 = t.get認定情報の認定有効期間開始年月日();
-        if (認定有効期間開始年月日 != null && !認定有効期間開始年月日.isEmpty()) {
-            resultEntity.set認定開始日(認定有効期間開始年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        } else {
-            FlexibleDate 適用開始年月日 = t.get総者の適用開始年月日();
-            if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
-                resultEntity.set認定開始日(適用開始年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-            }
-        }
-        FlexibleDate 認定有効期間終了年月日 = t.get認定情報の認定有効期間終了年月日();
-        if (認定有効期間終了年月日 != null && !認定有効期間終了年月日.isEmpty()) {
-            resultEntity.set認定終了日(認定有効期間終了年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        } else {
-            FlexibleDate 適用終了年月日 = t.get総者の適用終了年月日();
-            if (適用終了年月日 != null && !適用終了年月日.isEmpty()) {
-                resultEntity.set認定終了日(適用終了年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-            }
-        }
-    }
-
     private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
         RString 改頁１ = RString.EMPTY;
         RString 改頁２ = RString.EMPTY;
@@ -606,6 +378,21 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.被保険者番号.
                 get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("listUpper_1");
+        } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.町域コード.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("choikiCode");
+        } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.世帯コード.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("setaiCode");
+        } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.識別コード.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shikibetsuCode");
+        } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.氏名５０音カナ.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("kanaShimei");
+        } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.市町村コード.
+                get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shichosonCode");
         }
         return 帳票物理名;
     }

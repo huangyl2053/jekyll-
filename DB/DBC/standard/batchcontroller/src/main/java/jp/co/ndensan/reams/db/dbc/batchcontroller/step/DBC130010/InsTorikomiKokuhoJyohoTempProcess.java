@@ -597,11 +597,22 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     }
 
     private boolean is構成市町村マスタあり(RString 市町村コード) {
-        for (LasdecCode lasdecCode : 市町村コードリスト) {
-            if (市町村コード.equals(lasdecCode.value())) {
-                return true;
+        if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
+            for (LasdecCode lasdecCode : 市町村コードリスト) {
+                if (市町村コード.equals(lasdecCode.value().substring(0, 四))) {
+                    return true;
+                }
             }
         }
+
+        if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
+            for (LasdecCode lasdecCode : 市町村コードリスト) {
+                if (市町村コード.equals(lasdecCode.value())) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 }

@@ -152,7 +152,7 @@ public final class JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter implements IM
         }
         return new JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter(
                 市町村コードリスト, RString.EMPTY, get集計番号List(), get表番号List(),
-                new RString("1"), 集計開始年月, 集計終了年月, RString.EMPTY, RString.EMPTY,
+                new RString("2"), 集計開始年月, 集計終了年月, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 

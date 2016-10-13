@@ -16,7 +16,7 @@
             高額介護サービス費支給判定結果."shinsaHohoKubun" as "dbT3057_shinsaHohoKubun",
             高額介護サービス費支給審査決定."shikyuKubunCode" as "dbT3058_shikyuKubunCode",
             高額介護サービス費支給審査決定."kogakuShikyuGaku" as "dbT3058_kogakuShikyuGaku",
-            "KogakugassanJikofutangakuInfoHoseiTemp".*
+            "KogakugassanJikofutangakuInfoHoseiTemp".*,
             "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo" as "hokenshaNo",
             "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" as "taishoNendo"
        FROM  

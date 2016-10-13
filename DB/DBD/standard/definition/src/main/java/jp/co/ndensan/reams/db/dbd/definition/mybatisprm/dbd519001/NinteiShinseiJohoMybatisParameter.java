@@ -53,7 +53,7 @@ public class NinteiShinseiJohoMybatisParameter implements IMyBatisParameter {
         if (証記載保険者番号 == null || 証記載保険者番号.isEmpty()) {
             this.is証記載保険者番号非空 = false;
         }
-        if (対象外被保険者番号リスト.isEmpty()) {
+        if (対象外被保険者番号リスト == null || 対象外被保険者番号リスト.isEmpty()) {
             this.is対象外被保険者番号リスト非空 = false;
         }
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {

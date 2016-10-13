@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchiranhyoEditor {
 
     private static final RString 帳票ID = new RString("DBD503001");
+    private static final RString 作成 = new RString("作成");
 
     private final ChohyoShuchiryokuyoShiseiJyohoEntity 帳票出力用申請情報Entityリスト;
 
@@ -84,7 +85,7 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat(時分秒);
+        return 年月日.concat(時分秒).concat(RString.FULL_SPACE).concat(作成);
     }
 
     private void get帳票出力用申請情報Entity(ShinsaHanteiIraiIchiranhyoReportSource source) {

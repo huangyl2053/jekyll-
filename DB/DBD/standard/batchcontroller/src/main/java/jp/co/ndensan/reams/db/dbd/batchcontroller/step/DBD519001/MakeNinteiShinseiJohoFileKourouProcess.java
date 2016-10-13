@@ -39,12 +39,6 @@ public class MakeNinteiShinseiJohoFileKourouProcess extends BatchProcessBase<Kou
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."
             + "relate.ninteishinseiinfoif.IMakeNinteiShinseiJohoFileMapper.select要介護認定申請連携データ");
-    private static final RString 連携データ種類 = new RString("【連携データ種類】");
-    private static final RString 証記載保険者番号 = new RString("【証記載保険者番号】");
-    private static final RString 市町村コード = new RString("【市町村コード】");
-    private static final RString 被保険者番号 = new RString("【被保険者番号】");
-    private static final RString 抽出開始日時 = new RString("【抽出開始日時】");
-    private static final RString 抽出終了日時 = new RString("【抽出終了日時】");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private MakeNinteiShinseiJohoFileProcessParameter parameter;
     private RString eucFilePath;

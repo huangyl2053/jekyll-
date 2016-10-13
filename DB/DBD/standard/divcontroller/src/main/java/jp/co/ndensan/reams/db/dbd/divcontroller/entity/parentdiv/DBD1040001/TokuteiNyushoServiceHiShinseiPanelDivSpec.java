@@ -33,8 +33,7 @@ public enum TokuteiNyushoServiceHiShinseiPanelDivSpec implements IPredicate<Toku
          */
         @Override
         public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-            return div.getShinseiDetail().getTxtShinseiYMD().getValue() != null && !div.getShinseiDetail().getTxtShinseiYMD().getValue().isEmpty()
-                    && div.getShinseiDetail().getTxtShinseiYMD().getValue().isValid();
+            return div.getShinseiDetail().getTxtShinseiYMD().getText() != null && !div.getShinseiDetail().getTxtShinseiYMD().getText().isEmpty();
         }
     },
     決定区分の非空チェック {

@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd200014;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -41,6 +42,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource imple
     @ReportItem(name = "kaiPege5", length = 20, order = 14)
     public RString kaiPege5;
     @ReportItem(name = "listUpper_1", length = 10, order = 15)
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
     public RString listUpper_1;
     @ReportItem(name = "listUpper_2", length = 8, order = 16)
     public RString listUpper_2;

@@ -391,7 +391,7 @@
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
         </if>
-        
+        ${出力順}
         ) as A
     </sql>
 
@@ -1049,8 +1049,8 @@
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
         </if>
-        
-        ) as A
+        ${出力順}
+        ) as A 
     </sql>
 
     <sql id="kozaSearchModeResult">

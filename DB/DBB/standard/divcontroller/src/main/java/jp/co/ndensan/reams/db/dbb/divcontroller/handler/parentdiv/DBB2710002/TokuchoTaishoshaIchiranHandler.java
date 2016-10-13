@@ -565,6 +565,7 @@ public class TokuchoTaishoshaIchiranHandler {
     }
 
     private void set特別徴収同定候補者詳細情報1(TokuchoDouteiKouhoshaShousaiJoho result) throws IllegalArgumentException, NullPointerException {
+        div.setHiddenFukaNendo(RString.EMPTY);
         if (result.get登録済年金情報_賦課年度() != null) {
             div.setHiddenFukaNendo(result.get登録済年金情報_賦課年度());
         }
@@ -874,7 +875,7 @@ public class TokuchoTaishoshaIchiranHandler {
             }
         }
         RString fukaNendo = div.getHiddenFukaNendo();
-        if (fukaNendo == null) {
+        if (fukaNendo == null || fukaNendo.isEmpty()) {
             div.getTorokuZumiNenkinInfo().setDisplayNone(true);
         } else {
             div.getTorokuZumiNenkinInfo().setDisplayNone(false);

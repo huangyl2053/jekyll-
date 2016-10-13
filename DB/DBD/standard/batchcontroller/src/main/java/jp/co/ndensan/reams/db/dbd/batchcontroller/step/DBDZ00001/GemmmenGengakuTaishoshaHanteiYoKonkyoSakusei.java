@@ -88,7 +88,9 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             get合計金額(list);
         } else {
             TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
-            youkonkyoItokiTemp.insert(tempTable);
+            if (tempTable.get被保険者番号() != null) {
+                youkonkyoItokiTemp.insert(tempTable);
+            }
             被保険者番号list.clear();
             課税区分list.clear();
             金額list.clear();
@@ -193,7 +195,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         }
 
         if (item.get識別コード_生活保護受給者() != null && !item.get識別コード_生活保護受給者().isEmpty()) {
-            entity.set生活保護受給者(Boolean.FALSE);
+            entity.set生活保護受給者(Boolean.TRUE);
         } else {
             entity.set生活保護受給者(Boolean.FALSE);
         }
