@@ -38,6 +38,7 @@ public class GemmenJisshiJokyoMain {
         for (int i = 1; i < LENGTH; i++) {
             list.add(new RString(i));
         }
+        div.getTxtKijunBi().setReadOnly(true);
         div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setSuggest(list);
         return ResponseData.of(div).respond();
     }
@@ -71,7 +72,6 @@ public class GemmenJisshiJokyoMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(GemmenJisshiJokyoMainDiv div) {
-        //TODO
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
         responseData.data = new BatchParameterMap(getHandler(div).onClick_btnBatchParameterSave());
         return responseData;
@@ -84,7 +84,6 @@ public class GemmenJisshiJokyoMain {
      * @return ResponseData<GemmenJisshiJokyoMainDiv>
      */
     public ResponseData<GemmenJisshiJokyoMainDiv> onClick_btnBatchParameterRestore(GemmenJisshiJokyoMainDiv div) {
-        //TODO
         getHandler(div).onClick_btnBatchParameterRestore();
         return ResponseData.of(div).respond();
     }
