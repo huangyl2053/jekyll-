@@ -139,15 +139,15 @@ public class TokuteiPanel {
     }
 
     private void setボタンの制御(TokuteiPanelDiv div) {
-        boolean isボタンの制御 = false;
+        boolean isボタン活性 = false;
         List<grdTokuteiJoho_Row> listRow = div.getGrdTokuteiJoho().getDataSource();
         for (grdTokuteiJoho_Row row : listRow) {
             if (!row.getChkSeiGyo().isDisabled()) {
-                isボタンの制御 = true;
+                isボタン活性 = true;
                 break;
             }
         }
-        if (isボタンの制御) {
+        if (isボタン活性) {
             set活性();
         } else {
             ErrorMessage message = new ErrorMessage(DbuErrorMessages.特定個人情報保存エラー.getMessage().getCode(),
