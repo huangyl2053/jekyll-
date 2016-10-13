@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2200011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Sep 22 14:14:50 CST 2016 
+ * Thu Oct 13 09:07:55 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
@@ -27,8 +28,8 @@ public class dgServiceNaiyo_Row extends DataRow {
     private RString serviceYukoKikanShuryoYMD;
     private RString serviceSeishikiName;
     private RString serviceKubun;
-    private RString tanisuNissu;
-    private RString shikyuGendogaku;
+    private TextBoxNum tanisuNissu;
+    private TextBoxNum shikyuGendogaku;
     private RString rirekiNo;
     private RString serviceRyakushoName;
     private RString chokkinFlag;
@@ -42,8 +43,8 @@ public class dgServiceNaiyo_Row extends DataRow {
         this.serviceYukoKikanShuryoYMD = RString.EMPTY;
         this.serviceSeishikiName = RString.EMPTY;
         this.serviceKubun = RString.EMPTY;
-        this.tanisuNissu = RString.EMPTY;
-        this.shikyuGendogaku = RString.EMPTY;
+        this.tanisuNissu = new TextBoxNum();
+        this.shikyuGendogaku = new TextBoxNum();
         this.rirekiNo = RString.EMPTY;
         this.serviceRyakushoName = RString.EMPTY;
         this.chokkinFlag = RString.EMPTY;
@@ -63,7 +64,7 @@ public class dgServiceNaiyo_Row extends DataRow {
         this.setOriginalData("serviceYukoKikanShuryoYMDSeireki", serviceYukoKikanShuryoYMDSeireki);
     }
 
-    public dgServiceNaiyo_Row(RString serviceCode, RString serviceYukoKikanKaishiYMD, RString serviceYukoKikanShuryoYMD, RString serviceSeishikiName, RString serviceKubun, RString tanisuNissu, RString shikyuGendogaku, RString rirekiNo, RString serviceRyakushoName, RString chokkinFlag, TextBoxDate serviceYukoKikanKaishiYMDSeireki, TextBoxDate serviceYukoKikanShuryoYMDSeireki) {
+    public dgServiceNaiyo_Row(RString serviceCode, RString serviceYukoKikanKaishiYMD, RString serviceYukoKikanShuryoYMD, RString serviceSeishikiName, RString serviceKubun, TextBoxNum tanisuNissu, TextBoxNum shikyuGendogaku, RString rirekiNo, RString serviceRyakushoName, RString chokkinFlag, TextBoxDate serviceYukoKikanKaishiYMDSeireki, TextBoxDate serviceYukoKikanShuryoYMDSeireki) {
         super();
         this.setOriginalData("serviceCode", serviceCode);
         this.setOriginalData("serviceYukoKikanKaishiYMD", serviceYukoKikanKaishiYMD);
@@ -111,11 +112,11 @@ public class dgServiceNaiyo_Row extends DataRow {
         return serviceKubun;
     }
 
-    public RString getTanisuNissu() {
+    public TextBoxNum getTanisuNissu() {
         return tanisuNissu;
     }
 
-    public RString getShikyuGendogaku() {
+    public TextBoxNum getShikyuGendogaku() {
         return shikyuGendogaku;
     }
 
@@ -164,12 +165,12 @@ public class dgServiceNaiyo_Row extends DataRow {
         this.serviceKubun = serviceKubun;
     }
 
-    public void setTanisuNissu(RString tanisuNissu) {
+    public void setTanisuNissu(TextBoxNum tanisuNissu) {
         this.setOriginalData("tanisuNissu", tanisuNissu);
         this.tanisuNissu = tanisuNissu;
     }
 
-    public void setShikyuGendogaku(RString shikyuGendogaku) {
+    public void setShikyuGendogaku(TextBoxNum shikyuGendogaku) {
         this.setOriginalData("shikyuGendogaku", shikyuGendogaku);
         this.shikyuGendogaku = shikyuGendogaku;
     }

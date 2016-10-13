@@ -377,9 +377,12 @@ public class IryouhiKoujyoHandler {
             builder.set日常生活自立度(RString.EMPTY);
             builder.set尿失禁の発生(false);
         } else {
-            builder.set認定有効期間開始年月日(new FlexibleDate(row.getHiddenninteFromDD().getValue().toDateString()));
-            builder.set認定有効期間終了年月日(new FlexibleDate(row.getHiddenninteEndDD().getValue().toDateString()));
-            builder.set主治医意見書受領年月日(new FlexibleDate(row.getHiddenikensyoSakuseDD().getValue().toDateString()));
+            builder.set認定有効期間開始年月日(row.getHiddenninteFromDD().getValue() != null
+                    ? new FlexibleDate(row.getHiddenninteFromDD().getValue().toDateString()) : FlexibleDate.EMPTY);
+            builder.set認定有効期間終了年月日(row.getHiddenninteEndDD().getValue() != null
+                    ? new FlexibleDate(row.getHiddenninteEndDD().getValue().toDateString()) : FlexibleDate.EMPTY);
+            builder.set主治医意見書受領年月日(row.getHiddenikensyoSakuseDD().getValue() != null
+                    ? new FlexibleDate(row.getHiddenikensyoSakuseDD().getValue().toDateString()) : FlexibleDate.EMPTY);
             builder.set日常生活自立度(row.getHiddennitijyoSekatuJiritudoCode());
             builder.set尿失禁の発生(row.getHiddennyosikinFlg().equals(キー0));
         }
