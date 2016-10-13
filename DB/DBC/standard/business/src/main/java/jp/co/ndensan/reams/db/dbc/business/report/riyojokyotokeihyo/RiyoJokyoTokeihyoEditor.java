@@ -123,7 +123,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
             source.list3_11 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_8());
             source.list3_12 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_9());
             source.list3_13 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_10());
-            source.list3_2 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(2).getサービス種類コード()).get略称();
+            source.list3_2 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(2).getサービス種類コード()).get名称();
             source.list3_3 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(2).getサービス種類コード()).get名称();
             source.list3_4 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_1());
             source.list3_5 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_2());
@@ -133,7 +133,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
             source.list3_9 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_6());
         }
         if (サイズ_3 < 集計項目せーズ && item.getリスト_サービス種類集計().get(サイズ_3) != null) {
-            source.list4_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_3).getサービス種類コード()).get略称();
+            source.list4_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_3).getサービス種類コード()).get名称();
             source.list4_2 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(サイズ_3).
                     getサービス種類コード()).get名称();
             source.list4_3 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_3).get集計項目4_1());
@@ -148,7 +148,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
             source.list4_12 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_3).get集計項目4_10());
         }
         if (サイズ_4 < 集計項目せーズ && item.getリスト_サービス種類集計().get(サイズ_4) != null) {
-            source.list5_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_4).getサービス種類コード()).get略称();
+            source.list5_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_4).getサービス種類コード()).get名称();
             source.list5_2 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(サイズ_4).
                     getサービス種類コード()).get名称();
             source.list5_3 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_4).get集計項目5_1());
@@ -223,7 +223,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
     }
 
     private RString 集計項目(Decimal 金額) {
-        RString 表示名称 = TokeiServiceShurui.施設サービス計_15_17の合計.get略称();
+        RString 表示名称 = TokeiServiceShurui.施設サービス計_15_17の合計.get名称();
         if (RString.EMPTY.equals(表示名称)) {
             return new RString(Decimal.ZERO.intValue());
         } else {

@@ -33,18 +33,18 @@ public enum KaigoGassan_JikoFutanKofuUmu {
     }
 
     /**
-     * 介護合算_異動区分のコードを返します。
+     * 介護合算_自己負担額証明書交付申請の有無のコードを返します。
      *
-     * @return 介護合算_異動区分のコード
+     * @return 介護合算_自己負担額証明書交付申請の有無のコード
      */
     public RString getCode() {
         return code;
     }
 
     /**
-     * 介護合算_異動区分の名称を返します。
+     * 介護合算_自己負担額証明書交付申請の有無を返します。
      *
-     * @return 介護合算_異動区分の名称
+     * @return 介護合算_自己負担額証明書交付申請の有無の名称
      */
     public RString get名称() {
         return fullName;
@@ -53,8 +53,8 @@ public enum KaigoGassan_JikoFutanKofuUmu {
     /**
      * 介護合算_自己負担額証明書交付申請の有無のコードと一致する内容を探します。
      *
-     * @param code 介護合算_異動区分のコード
-     * @return {@code code} に対応する介護合算_異動区分
+     * @param code 介護合算_自己負担額証明書交付申請の有無のコード
+     * @return {@code code} に対応する介護合算_自己負担額証明書交付申請の有無
      */
     public static KaigoGassan_JikoFutanKofuUmu toValue(RString code) {
         for (KaigoGassan_JikoFutanKofuUmu jikoFutanKofuUmu : KaigoGassan_JikoFutanKofuUmu.values()) {

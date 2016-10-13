@@ -78,7 +78,7 @@ public class HanyoListParamHandler {
             if (!value.getコード().equals(保険者区分_経過措置_総合事業費)) {
                 KeyValueDataSource dataSource = new KeyValueDataSource();
                 dataSource.setKey(value.getコード());
-                dataSource.setValue(value.get略称());
+                dataSource.setValue(value.get名称());
                 list保険者区分.add(dataSource);
             }
         }
