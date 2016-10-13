@@ -110,6 +110,7 @@ public class SokujiFukaKouseiMain {
     private static final RString FLAG_CHANGE = new RString("1");
     private static final RString TEXT_期 = new RString("期");
     private static final RString 調定事由コード_更正 = new RString("04");
+    private static final RString 戻るフラグ = new RString("ViaSokujiKosei");
 
     /**
      * 画面の初期化メソッドです。
@@ -299,6 +300,7 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_Kobetsutsuchi(SokujiFukaKouseiMainDiv div) {
+        ViewStateHolder.put(ViewStateKeys.各種通知書作成戻るフラグ, 戻るフラグ);
         return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.通知書作成).respond();
     }
 

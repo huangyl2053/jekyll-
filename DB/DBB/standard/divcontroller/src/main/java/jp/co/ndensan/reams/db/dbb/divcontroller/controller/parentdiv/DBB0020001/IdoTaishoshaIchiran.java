@@ -56,6 +56,7 @@ public class IdoTaishoshaIchiran {
     private static final RString 即時賦課更生へ = new RString("btnToSokujiKosei");
     private static final RString 各種通知書発行へ = new RString("btnToKakushuTsuchishoHakko");
     private static final int 整数_ZERO = 0;
+    private static final RString 戻るフラグ = new RString("Direct");
 
     /**
      * onLoad
@@ -155,6 +156,7 @@ public class IdoTaishoshaIchiran {
      */
     public ResponseData<IdoTaishoshaIchiranDiv> onClick_btnToKakushu(IdoTaishoshaIchiranDiv div) {
         putViewState(div);
+        ViewStateHolder.put(ViewStateKeys.各種通知書作成戻るフラグ, 戻るフラグ);
         return ResponseData.of(div).forwardWithEventName(DBB0020001TransitionEventName.各種通知書作成へ).respond();
     }
 
