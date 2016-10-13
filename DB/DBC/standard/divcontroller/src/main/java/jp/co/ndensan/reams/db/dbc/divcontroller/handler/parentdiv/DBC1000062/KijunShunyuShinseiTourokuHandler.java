@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KijunShunyugakuTekiyoKanri
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KijunShunyugakuTekiyoKanriBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugaku.KijunShunyuShinseiDate;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugaku.KijunShunyugakuDate;
-import jp.co.ndensan.reams.db.dbc.definition.core.santeikijungaku.SanteiKijungaku;
+import jp.co.ndensan.reams.db.dbc.definition.core.juryoininbarai.SanteiKijungaku;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.DBC1000062TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.KijunShunyuShinseiTourokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.dgIchiran_Row;
