@@ -17,14 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -49,46 +41,6 @@ public class ShunoJokyoHaakuBusiness {
         List<ShunoJokyoTempTableEntity> insertEnList = new ArrayList<>();
 
         HihokenshaNo 被保険者番号 = shunoJokyoEntity.get資格情報Entity().getHihokenshaNo();
-        RString 被保険者区分コード = shunoJokyoEntity.get資格情報Entity().getHihokennshaKubunCode();
-        ShikibetsuCode 識別コード = shunoJokyoEntity.get宛名Entity().getShikibetsuCode();
-        RString 被保険者氏名カナ = shunoJokyoEntity.get宛名Entity().getKanaName();
-        AtenaMeisho 被保険者氏名 = shunoJokyoEntity.get宛名Entity().getKanjiShimei();
-        SetaiCode 世帯番号 = shunoJokyoEntity.get宛名Entity().getSetaiCode();
-        GyoseikuCode 行政区ｺｰﾄﾞ = shunoJokyoEntity.get宛名Entity().getGyoseikuCode();
-        RString 行政区 = shunoJokyoEntity.get宛名Entity().getGyoseikuName();
-        ZenkokuJushoCode 住所コード = shunoJokyoEntity.get宛名Entity().getZenkokuJushoCode();
-        YubinNo 郵便番号 = shunoJokyoEntity.get宛名Entity().getYubinNo();
-        AtenaJusho 住所 = shunoJokyoEntity.get宛名Entity().getJusho();
-        FlexibleDate 資格取得日 = shunoJokyoEntity.get資格情報Entity().getShikakuShutokuYMD();
-        FlexibleDate 資格喪失日 = shunoJokyoEntity.get資格情報Entity().getShikakuSoshitsuYMD();
-        RString 喪失事由 = shunoJokyoEntity.get資格情報Entity().getShikakuSoshitsuJiyuCode();
-        RString 住所地特例フラグ = shunoJokyoEntity.get資格情報Entity().getJushochiTokureiFlag();
-
-        Code 厚労省IF識別コード = Code.EMPTY;
-        Code 要介護状態区分コード = Code.EMPTY;
-        FlexibleDate 認定有効期間開始年月日 = FlexibleDate.EMPTY;
-        FlexibleDate 認定有効期間終了年月日 = FlexibleDate.EMPTY;
-        FlexibleDate 認定日 = FlexibleDate.EMPTY;
-        FlexibleDate 申請日 = FlexibleDate.EMPTY;
-        if (shunoJokyoEntity.get認定情報() != null) {
-            厚労省IF識別コード = shunoJokyoEntity.get認定情報().get要介護認定申請Entity().getKoroshoIfShikibetsuCode();
-            要介護状態区分コード = shunoJokyoEntity.get認定情報().get受給者Entity().getYokaigoJotaiKubunCode();
-            認定有効期間開始年月日 = shunoJokyoEntity.get認定情報().get要介護認定申請Entity().getZenkaiYukoKikanStart();
-            認定有効期間終了年月日 = shunoJokyoEntity.get認定情報().get要介護認定申請Entity().getZenkaiYukoKikanEnd();
-            認定日 = shunoJokyoEntity.get認定情報().get受給者Entity().getNinteiYMD();
-            申請日 = shunoJokyoEntity.get認定情報().get要介護認定申請Entity().getNinteiShinseiYMD();
-        }
-
-        boolean 申請中フラグ = false;
-        if (shunoJokyoEntity.get申請中被保険者() != null) {
-            申請中フラグ = true;
-        }
-        boolean 生保フラグ = false;
-        if (shunoJokyoEntity.get生保情報Entity().getJukyuKaishiYMD() != null
-                && !shunoJokyoEntity.get生保情報Entity().getJukyuKaishiYMD().isEmpty()) {
-            生保フラグ = true;
-        }
-
         FlexibleYear 賦課年度 = shunoJokyoEntity.get収納情報().get賦課Entity().getFukaNendo();
         FlexibleYear 調定年度 = shunoJokyoEntity.get収納情報().get賦課Entity().getChoteiNendo();
 
@@ -98,28 +50,6 @@ public class ShunoJokyoHaakuBusiness {
         }
         ShunoJokyoTempTableEntity tmpTblEntity = new ShunoJokyoTempTableEntity();
         tmpTblEntity.setTmp_hihokenshaNo(被保険者番号);
-        tmpTblEntity.setTmp_shikakuKubunCode(被保険者区分コード);
-        tmpTblEntity.setTmp_shikibetsuCode(識別コード);
-        tmpTblEntity.setTmp_hihokenshaShimeiKana(被保険者氏名カナ);
-        tmpTblEntity.setTmp_hihokenshaShimei(被保険者氏名);
-        tmpTblEntity.setTmp_setaiCode(世帯番号);
-        tmpTblEntity.setTmp_gyoseikuCode(行政区ｺｰﾄﾞ);
-        tmpTblEntity.setTmp_gyoseikuName(行政区);
-        tmpTblEntity.setTmp_jushoCode(住所コード);
-        tmpTblEntity.setTmp_yubinNo(郵便番号);
-        tmpTblEntity.setTmp_jusho(住所);
-        tmpTblEntity.setTmp_shikakuShutokuYMD(資格取得日);
-        tmpTblEntity.setTmp_shikakuSoshitsuYMD(資格喪失日);
-        tmpTblEntity.setTmp_shikakuSoshitsuJiyuCode(喪失事由);
-        tmpTblEntity.setTmp_koikinaiJushochiTokureiFlag(住所地特例フラグ);
-        tmpTblEntity.setTmp_seihoFlag(生保フラグ);
-        tmpTblEntity.setTmp_koroshoIfShikibetsuCode(厚労省IF識別コード);
-        tmpTblEntity.setTmp_yokaigoJotaiKubunCode(要介護状態区分コード);
-        tmpTblEntity.setTmp_ninteiYukoKikanKaishiYMD(認定有効期間開始年月日);
-        tmpTblEntity.setTmp_ninteiYukoKikanShuryoYMD(認定有効期間終了年月日);
-        tmpTblEntity.setTmp_ninteiYMD(認定日);
-        tmpTblEntity.setTmp_shiseityuFlag(申請中フラグ);
-        tmpTblEntity.setTmp_jukyuShinseiYMD(申請日);
         tmpTblEntity.setTmp_choteiNendo(調定年度);
         tmpTblEntity.setTmp_fukaNendo(賦課年度);
 
@@ -177,7 +107,8 @@ public class ShunoJokyoHaakuBusiness {
         for (CaT0701ShunyuEntity caT0701 : 収入List) {
             if (仮の時効起算日.plusYear(2).isBeforeOrEquals(new FlexibleDate(caT0701.getShunyuYMD().toDateString()))) {
                 break;
-            } else if (new FlexibleDate(caT0701.getShunyuYMD().toDateString()).isBefore(時効起算年月日)
+            } else if (時効起算年月日 != null && !時効起算年月日.isEmpty() && !仮の時効起算日.isEmpty()
+                    && new FlexibleDate(caT0701.getShunyuYMD().toDateString()).isBefore(時効起算年月日)
                     && 仮の時効起算日.isBeforeOrEquals(new FlexibleDate(caT0701.getShunyuYMD().toDateString()))) {
                 仮の時効起算日 = new FlexibleDate(caT0701.getShunyuYMD().toDateString());
             }
@@ -216,28 +147,6 @@ public class ShunoJokyoHaakuBusiness {
         TsuchishoNo 通知書番号 = 期別.get期別Entity().getTsuchishoNo();
 
         insertEntity.setTmp_hihokenshaNo(tmpTblEntity.getTmp_hihokenshaNo());
-        insertEntity.setTmp_shikibetsuCode(tmpTblEntity.getTmp_shikibetsuCode());
-        insertEntity.setTmp_hihokenshaShimeiKana(tmpTblEntity.getTmp_hihokenshaShimeiKana());
-        insertEntity.setTmp_hihokenshaShimei(tmpTblEntity.getTmp_hihokenshaShimei());
-        insertEntity.setTmp_setaiCode(tmpTblEntity.getTmp_setaiCode());
-        insertEntity.setTmp_gyoseikuCode(tmpTblEntity.getTmp_gyoseikuCode());
-        insertEntity.setTmp_gyoseikuName(tmpTblEntity.getTmp_gyoseikuName());
-        insertEntity.setTmp_jushoCode(tmpTblEntity.getTmp_jushoCode());
-        insertEntity.setTmp_yubinNo(tmpTblEntity.getTmp_yubinNo());
-        insertEntity.setTmp_jusho(tmpTblEntity.getTmp_jusho());
-        insertEntity.setTmp_shikakuShutokuYMD(tmpTblEntity.getTmp_shikakuShutokuYMD());
-        insertEntity.setTmp_shikakuSoshitsuYMD(tmpTblEntity.getTmp_shikakuSoshitsuYMD());
-        insertEntity.setTmp_shikakuSoshitsuJiyuCode(tmpTblEntity.getTmp_shikakuSoshitsuJiyuCode());
-        insertEntity.setTmp_shikakuKubunCode(tmpTblEntity.getTmp_shikakuKubunCode());
-        insertEntity.setTmp_koikinaiJushochiTokureiFlag(tmpTblEntity.getTmp_koikinaiJushochiTokureiFlag());
-        insertEntity.setTmp_seihoFlag(tmpTblEntity.isTmp_seihoFlag());
-        insertEntity.setTmp_koroshoIfShikibetsuCode(tmpTblEntity.getTmp_koroshoIfShikibetsuCode());
-        insertEntity.setTmp_yokaigoJotaiKubunCode(tmpTblEntity.getTmp_yokaigoJotaiKubunCode());
-        insertEntity.setTmp_ninteiYukoKikanKaishiYMD(tmpTblEntity.getTmp_ninteiYukoKikanKaishiYMD());
-        insertEntity.setTmp_ninteiYukoKikanShuryoYMD(tmpTblEntity.getTmp_ninteiYukoKikanShuryoYMD());
-        insertEntity.setTmp_ninteiYMD(tmpTblEntity.getTmp_ninteiYMD());
-        insertEntity.setTmp_shiseityuFlag(tmpTblEntity.isTmp_shiseityuFlag());
-        insertEntity.setTmp_jukyuShinseiYMD(tmpTblEntity.getTmp_jukyuShinseiYMD());
         insertEntity.setTmp_choteiNendo(tmpTblEntity.getTmp_choteiNendo());
         insertEntity.setTmp_fukaNendo(tmpTblEntity.getTmp_fukaNendo());
 
