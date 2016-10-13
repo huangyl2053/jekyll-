@@ -366,7 +366,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RString.EMPTY);
         tempList.add(RString.EMPTY);
         tempList.add(trimRString(entity.getKyuSochiNyushoshaTokureiCode()));
-        tempList.add(entity.getKyotakuServiceSakuseiKubunCode());
+        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
         tempList.add(entity.getKyotakuserviceJigyoshaNo() == null || entity.getKyotakuserviceJigyoshaNo().isEmpty()
                 ? RString.EMPTY : entity.getKyotakuserviceJigyoshaNo().getColumnValue().trim());
         tempList.add(trimDate(entity.getKaishiYMD()));
@@ -850,7 +850,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(entity.getSofuHihokenshaNo().getColumnValue().trim());
         tempList.add(trimRString(entity.getSeiriNo()));
         tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
-        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
+        tempList.add(trimDate(entity.getKyotakuServiceSakuseiIraiYMD()));
         tempList.add(entity.getServiceCode() == null || entity.getServiceCode().isEmpty()
                 ? RString.EMPTY : entity.getServiceCode().getColumnValue().trim());
         tempList.add(new RString(entity.getTanisu()));
@@ -879,7 +879,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(entity.getSofuHihokenshaNo().getColumnValue().trim());
         tempList.add(trimRString(entity.getSeiriNo()));
         tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
-        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
+        tempList.add(trimDate(entity.getKyotakuServiceSakuseiIraiYMD()));
         tempList.add(entity.getServiceCode() == null || entity.getServiceCode().isEmpty()
                 ? RString.EMPTY : entity.getServiceCode().getColumnValue().trim());
         tempList.add(new RString(entity.getTanisu()));
@@ -909,13 +909,13 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(entity.getShoKisaiHokenshaNo().getColumnValue().trim());
         tempList.add(entity.getSofuHihokenshaNo().getColumnValue().trim());
         tempList.add(trimRString(entity.getSeiriNo()));
+        tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
+        tempList.add(trimDate(entity.getKyotakuServiceSakuseiIraiYMD()));
         if (lastFlag) {
             tempList.add(レコード順次番号_99);
         } else {
             tempList.add(new RString(レコード順次番号).padZeroToLeft(INT_2));
         }
-        tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
-        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
         tempList.add(entity.getServiceCode() == null || entity.getServiceCode().isEmpty()
                 ? RString.EMPTY : entity.getServiceCode().getColumnValue().trim());
         tempList.add(new RString(entity.getTanisu()));
