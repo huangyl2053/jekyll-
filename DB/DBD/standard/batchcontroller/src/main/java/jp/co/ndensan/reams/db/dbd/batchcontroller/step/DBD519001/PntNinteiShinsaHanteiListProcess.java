@@ -50,11 +50,16 @@ public class PntNinteiShinsaHanteiListProcess extends BatchProcessBase<PntNintei
     protected void initialize() {
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         mapper = getMapper(IPntNinteiShinsaHanteiListMapper.class);
-        List<DbT7051KoseiShichosonMasterEntity> 構成市町村マスタ = mapper.select市町村名(parameter.toMybatisParameter());
-        if (!構成市町村マスタ.isEmpty()) {
-            市町村名 = 構成市町村マスタ.get(0).getShichosonMeisho();
+        if (parameter.get市町村コード() == null || parameter.get市町村コード().isEmpty()
+                || parameter.get証記載保険者番号() == null || parameter.get証記載保険者番号().isEmpty()) {
+            市町村名 = new RString("全市町村");
         } else {
-            市町村名 = RString.EMPTY;
+            List<DbT7051KoseiShichosonMasterEntity> 構成市町村マスタ = mapper.select市町村名(parameter.toMybatisParameter());
+            if (!構成市町村マスタ.isEmpty()) {
+                市町村名 = 構成市町村マスタ.get(0).getShichosonMeisho();
+            } else {
+                市町村名 = RString.EMPTY;
+            }
         }
     }
 
