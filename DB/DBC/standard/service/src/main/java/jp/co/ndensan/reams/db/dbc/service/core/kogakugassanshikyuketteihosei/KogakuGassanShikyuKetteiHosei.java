@@ -298,6 +298,20 @@ public class KogakuGassanShikyuKetteiHosei {
     }
 
     /**
+     * 更新高額合算給付実績
+     *
+     * @param 処理モード 処理モード
+     * @param 画面DIV KoshinShoriResult
+     */
+    public void get更新高額合算給付実績(RString 処理モード, KoshinShoriResult 画面DIV) {
+        IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(IKogakuGassanShikyuKetteiHoseiMapper.class);
+        if (THREE.equals(処理モード)) {
+            mapper.logicalDelete高額合算給付実績();
+            return;
+        }
+    }
+
+    /**
      * 画面のデータをＤＢに追加する。　（事業高額合算支給不支給決定TBL）
      *
      * @param 画面DIV KoshinShoriResult
@@ -312,7 +326,7 @@ public class KogakuGassanShikyuKetteiHosei {
             事業高額合算支給不支給決定dac.save(画面DIV.toEntity());
         } else if (画面DIV != null && THREE.equals(処理モード)
                 && EntityDataState.Deleted.equals(画面DIV.toEntity().getState())) {
-            事業高額合算支給不支給決定dac.delete(画面DIV.toEntity());
+            事業高額合算支給不支給決定dac.save(画面DIV.toEntity());
         }
         return true;
     }
@@ -434,7 +448,7 @@ public class KogakuGassanShikyuKetteiHosei {
             高額合算支給不支給決定dac.save(高額合算Entity.toEntity());
         } else if (高額合算Entity != null && THREE.equals(処理モード)
                 && EntityDataState.Deleted.equals(高額合算Entity.toEntity().getState())) {
-            高額合算支給不支給決定dac.delete(高額合算Entity.toEntity());
+            高額合算支給不支給決定dac.save(高額合算Entity.toEntity());
         }
     }
 
