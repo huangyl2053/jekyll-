@@ -329,8 +329,8 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         } else if (日数.equals(row.getServiceKubun())) {
             entity.setサービス区分(日数コード);
         }
-        entity.set単位(new Decimal(row.getTanisuNissu().toString()));
-        entity.set支給限度基準額(new Decimal(row.getShikyuGendogaku().toString()));
+        entity.set単位(row.getTanisuNissu().getValue());
+        entity.set支給限度基準額(row.getShikyuGendogaku().getValue());
         entity.set略称(row.getServiceRyakushoName());
         entity.set履歴番号(Integer.parseInt(row.getRirekiNo().toString()));
         entity.set直近フラグ(row.getChokkinFlag());
@@ -357,8 +357,8 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         } else if (日数.equals(row.getServiceKubun())) {
             entity.setサービス区分(日数コード);
         }
-        entity.set単位(new Decimal(row.getTanisuNissu().toString()));
-        entity.set支給限度基準額(new Decimal(row.getShikyuGendogaku().toString()));
+        entity.set単位(row.getTanisuNissu().getValue());
+        entity.set支給限度基準額(row.getShikyuGendogaku().getValue());
         entity.set略称(row.getServiceRyakushoName());
         entity.set履歴番号(Integer.parseInt(row.getRirekiNo().toString()));
         entity.set直近フラグ(row.getChokkinFlag());
@@ -401,8 +401,8 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
             } else if (日数コード.equals(entity.getサービス区分())) {
                 row.setServiceKubun(日数);
             }
-            row.setTanisuNissu(new RString(entity.get単位().toString()));
-            row.setShikyuGendogaku(new RString(entity.get支給限度基準額().toString()));
+            row.getTanisuNissu().setValue(entity.get単位());
+            row.getShikyuGendogaku().setValue(entity.get支給限度基準額());
             row.setServiceRyakushoName(entity.get略称());
             row.setRirekiNo(new RString(entity.get履歴番号()));
             row.setChokkinFlag(entity.get直近フラグ());

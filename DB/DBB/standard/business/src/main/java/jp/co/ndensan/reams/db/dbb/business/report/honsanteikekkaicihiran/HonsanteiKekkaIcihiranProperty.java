@@ -98,23 +98,6 @@ public class HonsanteiKekkaIcihiranProperty extends ReportPropertyBase<Honsantei
             Breakers<HonsanteiKekkaIcihiranReportSource> breakers,
             BreakerCatalog<HonsanteiKekkaIcihiranReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<HonsanteiKekkaIcihiranReportSource> occuredBreak(
